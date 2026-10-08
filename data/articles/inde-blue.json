@@ -1,0 +1,102 @@
+{
+ "slug": "inde-blue",
+ "name": "Inde Blue",
+ "hex": "#463D54",
+ "names": [
+  "Inde Blue"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Inde blue is an old dictionary color name for a dark, greyish purple, despite the word blue in it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name means",
+   "body": "Paterson's dictionary defines *inde blue* as a greyish purple and a dye [1]. The name says blue but the color is purple, and the dictionary also files it among the purples [1]. It sits beside [[indigo]], the great blue dye, [[violet]] and [[purple]], its family [2].\n\nThe books say little more about it, and the origin of the name is undocumented here [1]. The Maerz and Paul dictionary of 1930 lists it, and the 1955 ISCC-NBS system, which cites that dictionary, gives the swatch the plain name dark grayish purple [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 79 of them, 0.33 per cent, as photographed [3]. That is rarer than about half of the named colors [3]. It peaks in paintings of the 1900s, at 2.2 times the rate expected from the museums those works come from [3]. Inside a painting it most often plays a hidden color, a quiet shadow tone and rarely the subject [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "Maerz & Paul 1930 (dictionary entry)",
+   "source": "Paterson, A Dictionary of Colour, \"inde blue\""
+  },
+  "aka": [
+   "inde"
+  ],
+  "siblings": [
+   "indigo",
+   "violet",
+   "mauve"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 79,
+  "pct": 0.33,
+  "role": "hidden color, 52% of 46 paintings"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"inde blue\" (p. 217, colour lists pp. 474, 504)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 nearest names, Ridgway 1912 and Maerz & Paul 1930 entries, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Paterson's dictionary defines inde blue as which color?",
+   "choices": [
+    "A greyish purple",
+    "A bright sky blue",
+    "A dark green"
+   ],
+   "answer": "A greyish purple",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inde blue is a blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Inde blue is not a blue: the dictionary calls it a greyish purple."
+ ],
+ "words": 177,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

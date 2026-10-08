@@ -1,0 +1,144 @@
+{
+ "slug": "dull-brown",
+ "name": "Dull Brown",
+ "hex": "#876E4B",
+ "names": [
+  "Dull Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dull Brown is a descriptive name, not a pigment or a place: a brown with the brightness taken out, which the color books mention only in passing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson's dictionary uses the phrase to define another word: *drab* is a dull brown or grey colour, or a dull light-brown or yellowish-brown, or simply lacking in colour [1]. In the same book *dull* itself means lacking in brightness or vividness [1]. So the name says two things at once: a brown hue, and a low, muted chroma. Close relatives in our list are [[brown]], [[french-beige]] and [[beige]], which Paterson defines as a light brown or yellowish grey [2]."
+  },
+  {
+   "id": "mixing",
+   "title": "Where dull browns come from",
+   "body": "Gurney notes that red and green light add up to yellow, while the same two hues as pigments would mix to a dull brown or gray [3]. So mixing pigments of such hues is one route to a dull brown [3]."
+  },
+  {
+   "id": "myths",
+   "title": "A false reading",
+   "body": "Birren quotes the occultist C. W. Leadbeater, who claimed that a dull brown in a person's aura means avarice [4]. This is a claim of aura theory, not evidence; colors do not carry one fixed meaning, so the idea is only worth mentioning to set it aside [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a screen swatch, #876E4B measures about lightness 48.0, chroma 23.7 and hue angle 78 degrees in CIE LCH, so treat it as an approximation, not a pigment [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plain description: a brown that is dull",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson, Dictionary of Colour, \"drab\""
+  },
+  "aka": [
+   "drab (in Paterson's wording)"
+  ],
+  "siblings": [
+   "brown",
+   "french-beige",
+   "tan",
+   "beige"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name list and color math",
+  "hex": "#876E4B",
+  "measured": {
+   "lch": [
+    48.0,
+    23.7,
+    78
+   ]
+  },
+  "source": "Paterson, Dictionary of Colour"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"drab\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"beige\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, p. 116",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 4 (\"The Aural Healers\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color math (CIE LCH from the sRGB hex)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson's dictionary describe a drab color?",
+   "choices": [
+    "A dull brown or grey",
+    "A bright yellow",
+    "A glossy black"
+   ],
+   "answer": "A dull brown or grey",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Gurney, what do red and green pigments mix to?",
+   "choices": [
+    "A dull brown or gray",
+    "Bright yellow",
+    "Pure white"
+   ],
+   "answer": "A dull brown or gray",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a dull brown in the aura reliably shows avarice.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A dull brown is what you get when red and green pigments cancel each other out."
+ ],
+ "words": 219,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed inference beyond Gurney (hues that cancel each other); other claims traced to Paterson, Gurney, Birren."
+  ]
+ }
+}

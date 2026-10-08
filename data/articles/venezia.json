@@ -1,0 +1,124 @@
+{
+ "slug": "venezia",
+ "name": "Venezia",
+ "hex": "#2A6D83",
+ "names": [
+  "Venezia"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Venezia is the Italian name of Venice, used for a deep greenish blue in a 1930 American color dictionary; the books say nothing about it as a color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no recorded story",
+   "body": "The color comes from Maerz and Paul's 1930 *Dictionary of Color*, which places it on plate 36, block K6, and gives 1927 as its first recorded use [1]. Who named it, and why, is undocumented. The books in our collection only match the word in bibliography titles about Italian dyeing, and none describes this color [2]. It was listed under fashion and textiles in our data, which fits a 1920s name [1].\n\nOn screen it is close to [[petrol]], 7.9 units away, and to [[teal-blue]] [1]. A cleaner relative is [[teal]], and a deeper one [[blue]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, 36 contain a color within six units of this one over at least five per cent of the canvas [3]. Most are 1800s works, 14 of the 36, and seven are American [3]. The set includes Van Gogh's 1889 *Self-Portrait* and, fittingly, Monet's *Palazzo da Mula, Venice* of 1908 [3]. The photographs show aged, varnished paintings, so this is a color match, not a claim about pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Venice (Italian Venezia); origin of the color name undocumented",
+   "first_recorded": "1927 (Maerz & Paul)",
+   "source": "Maerz & Paul via library"
+  },
+  "aka": [],
+  "siblings": [
+   "petrol",
+   "teal-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "Venezia (Venice)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#2A6D83",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 36,
+  "n_archive": 23781,
+  "measured": {
+   "lch": [
+    43,
+    23,
+    233
+   ],
+   "nearest": [
+    [
+     "Petrol",
+     7.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 36 K 6, first recorded 1927; nearest Petrol 7.9, near Teal Blue",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 12 and ch. 13 (bibliography on Venetian dyers)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Venezia mean?",
+   "choices": [
+    "Venice in Italian",
+    "Green in Italian",
+    "Glass in Venetian",
+    "A dye"
+   ],
+   "answer": "Venice in Italian",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books document who named the color Venezia.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Venezia is a color name with no recorded inventor, but Monet's Venice scene matches it."
+ ],
+ "words": 194,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Overstated 'dyers' guilds' to bibliography titles about Italian dyeing."
+  ]
+ }
+}

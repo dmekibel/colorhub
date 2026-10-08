@@ -1,0 +1,111 @@
+{
+ "slug": "windows-blue",
+ "name": "Windows Blue",
+ "hex": "#3778BF",
+ "names": [
+  "Windows Blue"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Windows Blue is the mid blue of Microsoft's Windows desktop, a commercial name that entered color lists only in the 2010s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A desktop blue",
+   "body": "The name is a software one: our library files it as the default desktop blue of Microsoft Windows, and it reaches color lists through the xkcd survey of 2010 [1]. The swatch is a vivid blue, about 4.7 units from the ISCC-NBS name vivid blue [1].\n\nThe color books we searched say nothing about it. The one hit in the concordance is a passage about stained-glass windows in Thuringia, where madder merchants are said to have persuaded glaziers to make church-window devils blue to discredit woad, which only shares the word *windows* [2]. It is not about this color."
+  },
+  {
+   "id": "archive",
+   "title": "What the archive shows",
+   "body": "A blue this clear appears in 27 of 23,781 paintings, as photographed, mostly as an accent: 77% of the 13 paintings where it is measured within the painting [3]. The earliest match is a 1426 Fra Angelico, a look-alike hue and not a Microsoft connection [3]. With so little sourced history, the honest summary is a brand-era name for an ordinary vivid blue next to [[azure]] and [[cobalt-blue]] [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Microsoft Windows default desktop background",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "azure",
+   "cobalt-blue",
+   "royal-blue",
+   "steel-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 27,
+  "iscc": {
+   "name": "vivid blue",
+   "de": 4.7
+  },
+  "first_record": {
+   "year": 2010,
+   "source": "xkcd"
+  },
+  "role": "accent, 77% of 13 paintings"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: xkcd 2010, ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Blue\" (concordance hit on the word windows)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does Windows Blue first appear in our color sources?",
+   "choices": [
+    "The xkcd survey, 2010",
+    "Ridgway, 1912",
+    "Newton's Opticks",
+    "Maerz and Paul, 1930"
+   ],
+   "answer": "The xkcd survey, 2010",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color books we searched tell a history of Windows Blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Windows Blue enters color lists in 2010, not in any pigment book."
+ ],
+ "words": 186,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded St Clair stained-glass anecdote to match source (madder merchants persuaded glaziers to make devils blue)"
+  ]
+ }
+}

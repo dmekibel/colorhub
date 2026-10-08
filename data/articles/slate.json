@@ -1,0 +1,272 @@
+{
+ "slug": "slate",
+ "name": "Slate",
+ "hex": "#708090",
+ "names": [
+  "Slate"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Slate is the blue-tinted grey of the roofing stone, a color word that books define as dark, mid or bluish and that has spread into a family of twenty-one names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A rock, then a shade",
+   "body": "Slate is a rock before it is a color: a fine-grained metamorphosed mudstone or shale that splits into thin sheets, and the Pigment Compendium stresses that the word does not name any one mineral [1]. The stone and its uses have their own page at [[slate-grey]]. This page follows the word as it spreads through the color system.\n\nBooks disagree about what the color is. Paterson defines slate as a dark bluish grey but slate grey as simply a dark grey [6]. St Clair's glossary calls it a mid-azure grey [7]. Eckstut groups slate with sky blue as a shade rather than a hue: it tells you how dark and dull a blue is, not which hue it is [8].\n\nThe web swatch, #708090, is the X11 color SlateGray [6]. Other picks for slate run darker. The xkcd survey's two slates and the paint standard RAL 7015 sit at a lightness of 36 to 42 on the CIELAB scale, against 53 for the web swatch [12]."
+  },
+  {
+   "id": "family",
+   "title": "A family of slates",
+   "body": "Our library holds 21 names with slate in them, most from Ridgway's plates of 1912 [12]. They drift away from grey in every direction: [[slate-purple]], Slate-Olive, [[slate-green]], Violet-Slate, Heliotrope-Slate and Vinaceous-Slate among them [12]. The X11 SlateBlue, #6A5ACD, is a violet-blue and not grey at all [6]. [[medium-slate-blue]] is its lighter cousin on the web [12].\n\nSyme's table shows the same looseness in the rock itself [9]. His mineral example for Greenish Grey is clay slate, together with wacke, a sandstone [9]. In his table, then, the rock sits with the greenish greys rather than the blue ones."
+  },
+  {
+   "id": "paint",
+   "title": "In the paint box",
+   "body": "Slate has been ground for paint, though never as a prized pigment. In 1896 Winsor & Newton listed Davy's grey, a new color prepared from a special variety of slate and suggested by a Mr. Henry Davy [2]. By 1928 Heaton recorded the name as a variety of slate powder [2]. The same ground rock lies behind the old name mineral grey, but books disagree: Field and later editors called it an inferior ultramarine ash, while Martel in 1860 identified it as finely levigated slate [3].\n\nSlate black was made by calcining a bituminous shale, which gave a black with about 15 per cent carbon, and the same source says Spanish black could mean slate black as well as the usual cork char [1][5]. Prince's metallic brown is a grey rock turned brown by fire: its ore was bluish grey when mined, and roasting converted it to an oxide [4]. Its original maker, Robert Prince of New York, came to it through a slate quarry in Carbon County, Pennsylvania [4].\n\nSlate has also been a surface. Anish Kapoor's *A Wing at the Heart of Things*, from 1990, is slate coated in [[prussian-blue]] [11]. Birren, collecting notes from older medical literature, lists slate as a skin color in argyria and in Addison's disease [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of #708090 covers at least five per cent of the canvas in 331 works, 1.4 per cent [13]. It leans modern. The 1900s carry it at 3.5 per cent, 2.5 times the archive rate, and the 1920s peak at 11 of 237 paintings, 4.6 per cent [13]. None of the 443 works from before 1400 has it, and the first dated example is Spinello Aretino's *Virgin and Child with Angels* of about 1405 [13].\n\n[[painter:claude-monet|Monet]] has it in 6 of his 50 paintings here, about 9 times the archive rate, and Philips Wouwerman in 5 of 36 [13]. [[look:impressionism|Impressionism]] carries it 5.1 times as often as the archive average [13]. The largest areas are storm water and an Indian court scene [13]. [[painting:smk-KMS3767|Eckersberg's privateer outsailing a frigate]] from 1845 is 50 per cent this color, [[painting:cma-170085|a portrait of Shamsher Sen of Mandi]] from about 1760 is 50 per cent, and [[painting:smk-KMS405|Melbye's Shetland fishing boat in a storm]] from 1842 is 49 per cent [13].\n\nIn half of the paintings that carry it, it sits in the mid-tones [13]. It most often shares a canvas with [[denim]], 5 times the usual rate, then grey and [[charcoal]] [13]. In Google Books the word *slate* peaks around 1841 and falls to about 30 per cent of that level by 2000, though the count includes every sense of the word, from roofs to writing boards [14]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "slate, the metamorphic roofing rock",
+   "first_recorded": "origin of the color word undocumented in our sources",
+   "source": "Pigment Compendium, p. 357; ColorHub library"
+  },
+  "aka": [
+   "Slate Grey",
+   "SlateGray"
+  ],
+  "siblings": [
+   "slate-grey",
+   "payne-s-grey",
+   "davy-s-grey",
+   "light-slate-grey"
+  ],
+  "parent": "grey",
+  "children": [
+   "slate-green",
+   "slate-purple",
+   "slate-color"
+  ],
+  "disambiguation": [
+   {
+    "slug": "medium-slate-blue",
+    "gloss": "the web's slate blue is a violet-blue, not a grey"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#708090",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 331,
+  "top_paintings": [
+   "cma-170085",
+   "smk-KMS3767",
+   "smk-KMS405"
+  ],
+  "painters": [
+   {
+    "name": "Claude Monet",
+    "n": 50,
+    "hits": 6
+   },
+   {
+    "name": "Philips Wouwerman",
+    "n": 36,
+    "hits": 5
+   }
+  ],
+  "peak_decade": {
+   "decade": 1920,
+   "n": 237,
+   "hits": 11,
+   "lift": 3.33
+  },
+  "role": {
+   "highlight": 0.43,
+   "mid": 0.5,
+   "shadow": 0.07
+  },
+  "company": [
+   "Denim",
+   "Grey",
+   "Charcoal"
+  ],
+  "ngram": {
+   "peak": 1841,
+   "rel_2000": 0.3
+  },
+  "measured": {
+   "lch": [
+    53,
+    11,
+    259
+   ],
+   "lightness_alternates": {
+    "xkcd #516572": 42,
+    "xkcd #59656D": 42,
+    "RAL 7015 #51565C": 36
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Slate\", \"Slate black\", \"Slate white\", p. 357",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Davy's grey\", p. 152",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Mineral grey\", p. 276",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Prince's metallic brown\", p. 321",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Spanish black\", p. 362",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries slate, slate grey, slate-coloured, SlateBlue, SlateGray, schistaceous, schistous",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary of color names (\"Slate\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Eckstut and Eckstut, What Is Color?, ch. 43",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 51, 58",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 18 (\"Diagnosis through Color\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Prussian Blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Slate, xkcd and RAL alternates, Ridgway 1912 slate names), CIELAB lightness",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was the paint Winsor & Newton listed in 1896 as Davy's grey made from?",
+   "choices": [
+    "A special variety of slate",
+    "Lamp black and chalk",
+    "Ground lapis lazuli",
+    "Burnt umber"
+   ],
+   "answer": "A special variety of slate",
+   "kind": "pick"
+  },
+  {
+   "q": "Why do books describe slate as such different greys, from mid to dark and from azure to plain?",
+   "choices": [
+    "Slate names a rock type, not one mineral, so its color varies",
+    "Slate was only named in the twentieth century",
+    "Slate is always black when freshly cut",
+    "A single standard fixes its color"
+   ],
+   "answer": "Slate names a rock type, not one mineral, so its color varies",
+   "kind": "pick"
+  },
+  {
+   "q": "The X11 color SlateBlue is a grey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Winsor & Newton sold a grey ground from slate in 1896 and called it Davy's grey.",
+  "The web's SlateBlue is a violet-blue, nothing like the grey of a roof.",
+  "Prince's metallic brown began as a bluish-grey rock that turned brown in the kiln."
+ ],
+ "words": 747,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Books disagree on slate's lightness and blueness (Paterson, St Clair): stated.",
+   "Mineral grey: Field vs Martel: stated as disagreement.",
+   "Maerz & Paul dates for Slate are merged with near-identical names in the library: not quoted.",
+   "Prince's brown: slate quarry link is the maker's background, not the ore: worded accordingly.",
+   "Overlaps lightly with the checked article slate-grey (stone, filler, Ladakh): this page covers the word's family."
+  ]
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "slug": "warm-grey",
+ "name": "Warm Grey",
+ "hex": "#978A84",
+ "names": [
+  "Warm Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Warm grey is a grey with a trace of red-brown in it, the color painters call a tinted neutral, and the one the books use mostly as a tool.",
+ "sections": [
+  {
+   "id": "meaning",
+   "title": "What the word means",
+   "body": "A warm grey is a neutral that leans toward red, orange or yellow, in contrast to a cool grey that leans blue [1]. Its swatch here is the xkcd survey color, and the ISCC-NBS system of 1955 gives the same area as block 63 under names such as Ashes, Grey Black and Deep Twilight [2]. The nearest named color in our library is [[taupe]], about 5.6 CIEDE2000 units away [2]; the cooler [[grey]] is its plain parent."
+  },
+  {
+   "id": "painters",
+   "title": "The painter's grey",
+   "body": "James Gurney describes a warm grey as what you get from blending three colors, the \"mud\" painters scrape up and keep as a stock mixture [1]. He recommends keeping strings of values on the palette, with one for a warm grey beside dull yellow and a few blues [3]. In his treatment of skies, the colour near the horizon can run from pale cerulean to warm grey to dull orange [4]. He also sets out the view, held by one school of painters, that drabness comes from poor value organization more than from the mixture itself [1]."
+  },
+  {
+   "id": "bridge",
+   "title": "The Golden Gate",
+   "body": "St Clair records that when the Golden Gate Bridge was being colored, black, battleship grey and warm grey were all considered, and warm grey was the second choice [5]. International orange won [5]. The code for the winning color is cited as 0 per cent cyan, 69 magenta, 100 yellow and 6 black [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This grey is one of the most common colors in the archive: it fills at least five per cent of the canvas in 1,116 of 23,781 museum paintings, within six units of CIEDE2000 [6]. It is about twice as common in the 1900s as in the whole archive, and the painters who use it most, relative to their output, include Xugu and Shen Zhou, each more than ten times above average [6]. The oldest match is an Egyptian ostracon of about 1295 BC [6]. These are photographs of aged, varnished paintings; a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: warm and grey",
+   "first_recorded": "undocumented",
+   "source": "ColorHub library (xkcd, ISCC-NBS)"
+  },
+  "aka": [
+   "Warm gray (US)"
+  ],
+  "siblings": [
+   "taupe",
+   "grey",
+   "khaki",
+   "beige"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "match": {
+   "hex": "#978A84",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1116,
+  "painters": [
+   {
+    "name": "Xugu",
+    "hits": 8,
+    "lift": 10.65
+   },
+   {
+    "name": "Shen Zhou",
+    "hits": 6,
+    "lift": 10.65
+   }
+  ],
+  "first": "Ostracon with a Drawing of a King"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 108",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): xkcd; ISCC-NBS 1955 block 63; nearest name by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 125",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 177",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, notes to the chapter on International Orange",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings; tools/article_field.py, CIEDE2000, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the Golden Gate Bridge's colorists rank second to international orange?",
+   "choices": [
+    "Warm grey",
+    "Black",
+    "Battleship grey",
+    "Silver"
+   ],
+   "answer": "Warm grey",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Gurney, drabness in a painting comes mostly from...",
+   "choices": [
+    "Poor value organization",
+    "Using grey paint",
+    "Too much blue",
+    "Cheap pigment"
+   ],
+   "answer": "Poor value organization",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Warm grey was the runner-up color for the Golden Gate Bridge."
+ ],
+ "words": 346,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Attributed 'drabness from value organization' to the school of painters Gurney describes, not to Gurney himself"
+  ]
+ }
+}

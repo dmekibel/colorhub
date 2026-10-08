@@ -1,0 +1,127 @@
+{
+ "name": "Chinese Red",
+ "hex": "#AA381E",
+ "names": [
+  "Chinese Red"
+ ],
+ "tier": "pigment",
+ "lede": "Chinese red is an old trade name that has pointed at two different pigments: cinnabar from China, and a lead-chromate red made in Europe.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which red",
+   "body": "Paterson defines Chinese red as a chrome red pigment, and also as an obsolete name for cinnabar [1]. He adds that Chinese vermilion is a vivid yellow-red pigment [1]. The two meanings are a classic case where books disagree about one name [1][2].\n\nThe cinnabar meaning is the older. Cinnabar was widely used by the Chinese from the third millennium BC and was formerly called Chinese red [3]. It is a vermilion color, close to [[vermilion]] and the redder end of [[scarlet]].\n\nThe chrome meaning came later. The Pigment Compendium records Heaton (1928) listing Chinese red as a synonym of chrome red, while Kuhn and Curran (1986) call it an older term for basic lead chromate and Schiek (1973) an older name for a chrome [[orange]] [2]. A long list of synonyms for chrome orange and red, among them American vermilion, Derby red, Victoria red and Vienna red, includes it too [2]."
+  },
+  {
+   "id": "china",
+   "title": "China in a trade name",
+   "body": "The word China in a pigment name does not always mean the pigment came from there [1]. Paterson notes that Chinese blue is another name for Prussian blue, discovered in Berlin, and that Chinese white is zinc oxide, possibly named for fine porcelain [1]. Partridge, cited by Paterson, holds that Chinese white, orange and yellow all originated in China [1]. For the chrome meaning, the adjective looks like a trade label rather than a place of origin [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This red appears within six units of 410 of 23,781 paintings at five per cent of the canvas or more, about 1.7 per cent [4]. It was far more common in the 1400s, at 4.3 times the overall rate, with 70 of 945 paintings [4]. Albrecht Durer shows it in 7 of 47 works [4]. The strongest match is a 1440 Sienese panel of the Night Watchmen's salaries, at 52 per cent of its surface [4][[painting:rijks-20026322|Payment of Salaries to the Night Watchmen]]. These are photographs of aged, varnished paintings, so a match is a color on a screen, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "China (cinnabar) or trade usage for chrome red",
+   "first_recorded": "undocumented",
+   "source": "Paterson, A Dictionary of Colour, \"Chinese red\""
+  },
+  "aka": [
+   "chrome red (old synonym)",
+   "cinnabar"
+  ],
+  "siblings": [
+   "vermilion",
+   "scarlet"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "vermilion",
+    "gloss": "the cinnabar-based red Chinese red once named"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5 per cent of the canvas)",
+  "n_present": 410,
+  "rate": 0.0172,
+  "century_lift": {
+   "1400": 4.3
+  },
+  "top_paintings": [
+   "rijks-20026322"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Chinese red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Chinese red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cinnabar\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5 per cent of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What two pigments has the name Chinese red been used for?",
+   "choices": [
+    "Cinnabar and chrome red",
+    "Madder and indigo",
+    "Ochre and umber",
+    "Carmine and cochineal"
+   ],
+   "answer": "Cinnabar and chrome red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Chinese blue is another name for a pigment first made in China.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Chinese red was a name for cinnabar and, centuries later, for a European lead-chromate red."
+ ],
+ "slug": "chinese-red",
+ "words": 346,
+ "status": "checked",
+ "depth": "medium",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened overstated 'rarely' and the blanket trade-label advice."
+  ]
+ }
+}

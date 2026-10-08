@@ -1,0 +1,120 @@
+{
+ "slug": "irresistible",
+ "name": "Irresistible",
+ "hex": "#B3446C",
+ "names": [
+  "Irresistible"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Irresistible is a deep rose-crimson with a name that reads like a sales pitch; no book read uses it as a color, and its history is that of the shades around it.",
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 53 (\"Mauve-Plates\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): ISCC-NBS 1955 blocks 255 and 258, Maerz & Paul 1930 dates, Werner no. 92 (Lake Red, near-duplicate dE 1.8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Irresistible (n=6), 23,781 museum paintings as photographed; data/graph/fieldnotes/i.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a story",
+   "body": "In the books read the word appears only as an ordinary adjective, as when Garfield says Perkin's new colors proved irresistible to fashionable Paris and London [1]. None of them uses it as a color name, and the origin of the name is undocumented [1]."
+  },
+  {
+   "id": "neighbors",
+   "title": "The shades around it",
+   "body": "The library places the swatch in ISCC-NBS blocks 255 and 258 with a long list of older names [2]. Those include Madder, first recorded around 1804 by Maerz and Paul, China Rose in 1925 and Casino Pink in 1928 [2]. It also sits within two units of Werner's Lake Red, a color Werner matched to the red tulip and to spinel [2]. The nearest everyday name is [[mulberry]], and the family cousins are [[madder]] and [[crimson]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 6 of 23,781 museum paintings contain the swatch color, about 0.03 per cent, rarer than 77 per cent of our named colors [3]. In printed English the adjective peaks in the 1820s, which is the word, not the color [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "not recorded in the books read",
+   "source": "data/library.json; Garfield, Mauve"
+  },
+  "aka": [
+   "Casino Pink",
+   "China Rose",
+   "Madder Pink"
+  ],
+  "siblings": [
+   "madder",
+   "crimson",
+   "magenta"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#B3446C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 6,
+  "nearest": [
+   "Mulberry",
+   7.5
+  ],
+  "rank_rarer_than_pct": 77
+ },
+ "questions": [
+  {
+   "q": "True or false: the books read explain where the color name Irresistible comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which older name did Maerz and Paul first record around 1804?",
+   "choices": [
+    "Madder",
+    "Casino Pink",
+    "China Rose",
+    "Mulberry"
+   ],
+   "answer": "Madder",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Irresistible is a color name with no documented origin, shared by older shades like Madder and China Rose."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Spot-checked 8 claims against books and library; all supported"
+  ]
+ },
+ "status": "checked",
+ "words": 189
+}

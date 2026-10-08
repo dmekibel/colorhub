@@ -1,0 +1,108 @@
+{
+ "slug": "harvest-gold",
+ "name": "Harvest Gold",
+ "hex": "#DA9100",
+ "names": [
+  "Harvest Gold"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Harvest Gold is a deep, saturated orange-yellow, the color of ripe grain and, to a generation, of 1970s kitchens.",
+ "sections": [
+  {
+   "id": "era",
+   "title": "A 1970s kitchen",
+   "body": "St Clair places the name in a back-to-nature palette of the 1970s, alongside burnt orange and avocado, when concern for the environment spread into clothing, appliances, baths and cars [1]. The books read give no earlier use of the name. Our library lists the swatch in the 1955 ISCC-NBS system as a deep orange yellow, and the name is also on Wikipedia's lists [2].\n\nThe nearest relatives are [[goldenrod]], [[amber]] and [[avocado-green]], the last the era's other signature shade [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In print, the phrase peaks in the 1970s, right on cue [3]. In paintings it is moderately rare: 189 of 23,781 contain it, 0.8 per cent [3]. It is almost always an accent, and it is most over-represented in Indian painting, at 3.6 times the expected rate [3]. George Dawe uses it in 17 of 50 works here, 15 times the baseline of his museums [3]. It often sits with [[caramel]] [3]. These are photographs of aged, varnished works [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "ripe grain at harvest; popular in 1970s home goods",
+   "first_recorded": "1955, ISCC-NBS (as a swatch); 1970s as a fashion name",
+   "source": "St Clair; data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "caramel",
+   "amber"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/h.json",
+  "n_present": 189,
+  "pct": 0.79,
+  "peak": "1400s, 1.3% of 945 paintings",
+  "painters": [
+   [
+    "George Dawe",
+    17,
+    50
+   ]
+  ],
+  "ngram": "peaks 1970s"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. \"Avocado\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): ISCC-NBS 1955 block 86; Wikipedia list; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/h.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which decade made Harvest Gold fashionable?",
+   "choices": [
+    "The 1970s",
+    "The 1920s",
+    "The 1950s",
+    "The 1990s"
+   ],
+   "answer": "The 1970s",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Harvest Gold appeared beside avocado in the era's palette.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Harvest Gold belongs to the 1970s palette of burnt orange, harvest gold and avocado."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "status": "checked",
+ "words": 174
+}

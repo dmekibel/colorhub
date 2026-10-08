@@ -1,0 +1,137 @@
+{
+ "slug": "pastel-blue",
+ "name": "Pastel Blue",
+ "hex": "#AEC6CF",
+ "names": [
+  "Pastel Blue"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Pastel Blue is a pale, greyed blue; the word pastel names the softness, but it had an older life in French as the name of a blue dye paste made from woad.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Pastel",
+   "body": "Paterson defines pastel as a pale shade or tint of a color, and says that pastel colours such as pastel blue and pastel pink are ones to which grey has sometimes been added [1]. That fits this swatch, a soft grey-blue [2]. The library's older Pastel Blue is darker: a steel-blue from RAL 5024, ISCC-NBS block 186 and Maerz and Paul, which dates the name to 1789 [2]. It sits nearest [[steel-blue]], at 7.9 units [2]. Compare [[powder-blue]] and [[sky-blue]]."
+  },
+  {
+   "id": "woad",
+   "title": "The older pastel",
+   "body": "In early French literature, the Pigment Compendium says, *pastel* meant the best kind of woad dye paste, and the word later came to mean the plant itself [3]. That blue is the cousin of [[indigo]]. The crayon, also called a pastel, is a separate sense, named from the paste of ground pigment bound with gum or clay [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units that covers at least five per cent of the canvas appears in 231 of 23,781 paintings, about 1 per cent [4]. It peaks in the 1870s, at nearly three times the archive's rate, and in Impressionism, where 10 of 140 works match [4]. Sisley has 8 of his 50, and Van Gogh's 1887 [[painting:aic-27954|Terrace and Observation Deck at the Moulin de Blute-Fin]] carries it over 40 per cent of the picture [4]. As photographed: museum photographs of aged, varnished paintings; a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pastel (pale tint); French pastel, woad paste",
+   "first_recorded": "Maerz & Paul give 1789 for the older steel-blue Pastel Blue",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "Pastel woad (old French sense)"
+  ],
+  "siblings": [
+   "powder-blue",
+   "sky-blue",
+   "steel-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "steel-blue",
+    "gloss": "the library's darker Pastel Blue (RAL 5024) is close to this"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AEC6CF",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 231,
+  "top_paintings": [
+   "aic-27954",
+   "commons-Q17492170"
+  ],
+  "measured": {
+   "contrast_white": 1.78,
+   "nearest": [
+    [
+     "Steel blue",
+     7.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 299 (\"pastel\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; RAL 5024, ISCC-NBS 1955 block 186, Maerz & Paul 1930); CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Pastel blue\", p. 306",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did pastel mean in early French writing?",
+   "choices": [
+    "Woad dye paste",
+    "A kind of crayon only",
+    "Sky",
+    "Silk"
+   ],
+   "answer": "Woad dye paste",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: pastel colours are said to have had grey added.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pastel was once a French word for woad paste, long before it meant a pale shade.",
+  "Pale grey-blues like this fill the skies of Sisley and Pissarro."
+ ],
+ "words": 259,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

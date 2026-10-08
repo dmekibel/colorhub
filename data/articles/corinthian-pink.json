@@ -1,0 +1,123 @@
+{
+ "slug": "corinthian-pink",
+ "name": "Corinthian Pink",
+ "hex": "#CB9C9D",
+ "names": [
+  "Corinthian Pink"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Corinthian pink is a dusty, purplish pink that appears in color lists from 1912, long before it was a fashion word.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A purplish pink",
+   "body": "Paterson defines *Corinthian pink* as a purplish pink, and lists it among the pinks [1]. The earliest record in our sources is Ridgway's color atlas of 1912, and the name later turns up in the ISCC-NBS system of 1955 and in Maerz and Paul [2]. Its closest named neighbor is [[puce]], at a CIEDE2000 distance of 7.9, and a Ridgway name, Pinkish Vinaceous, is a near-duplicate at 2.2 [2].\n\nNo book we hold says why Corinthian, so the origin of the name is undocumented [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Corinthian pink is rare but widespread. It appears in 76 of 23,781 paintings in our archive, and it is rarer than 52% of the named colors [3]. Inside a painting it most often plays a hidden color (69% of 42 paintings) [3]. It is over-represented in India, at 3.9 times the expected rate (22 of 721 paintings), and most of all in Rajput painting, at 8.1 times (10 of 97) [3]. These are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "library; Paterson, p. 130"
+  },
+  "aka": [],
+  "siblings": [
+   "pink",
+   "puce",
+   "dark-orchid",
+   "lilac"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 76,
+  "top_country": [
+   "India",
+   3.9
+  ],
+  "top_movement": [
+   "Rajput",
+   8.1
+  ],
+  "measured": {
+   "lch": [
+    69,
+    19,
+    19
+   ],
+   "nearest": [
+    [
+     "Puce",
+     7.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 130 and word list p. 503",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Ridgway 1912 plate XXVII; ISCC-NBS 1955; Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define Corinthian pink?",
+   "choices": [
+    "A purplish pink",
+    "A yellowish pink",
+    "A greyish green",
+    "A deep red"
+   ],
+   "answer": "A purplish pink",
+   "kind": "pick"
+  },
+  {
+   "q": "In which tradition is this pink most over-represented in our archive?",
+   "choices": [
+    "Rajput painting",
+    "Dutch Golden Age",
+    "Impressionism",
+    "Pop art"
+   ],
+   "answer": "Rajput painting",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In our archive Corinthian pink is 8.1 times more common in Rajput painting than expected."
+ ],
+ "words": 187,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "slug": "flirt",
+ "name": "Flirt",
+ "hex": "#A2006D",
+ "names": [
+  "Flirt"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Flirt is a deep purplish red, a name our library traces to the early twentieth-century color dictionaries rather than to any dye or flower.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a color dictionary",
+   "body": "Our library files Flirt under the Maerz and Paul dictionary of 1930, as cited in the ISCC-NBS circular of 1955 [1]. Who chose the word, and why, is undocumented. The ISCC-NBS system calls the nearest block deep purplish red, about 7.2 units away on the CIEDE2000 scale [1].\n\nNo book in our collection treats the color [2][3]. The only hits are about the verb: one book notes that the English verb *to flirt* dates to the Middle English period and later passed into French as *flirter* [2], and another mentions a Goya sketch of a woman stopping to flirt [3]. Neither tells us anything about the shade, so the name's connection to the verb is a guess we do not make."
+  },
+  {
+   "id": "look",
+   "title": "How it sits among reds",
+   "body": "On screen the swatch reads as a dark, slightly blue red, close to [[magenta]] in direction but much deeper, and clearly further toward purple than [[crimson]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color this close appears in only 2 works, which makes it rarer than 82 per cent of the named colors [4]. These are photographs of aged, varnished paintings, so a match is not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "Maerz and Paul, 1930 (via NBS Circular 553, 1955)",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "deep purplish red"
+  ],
+  "siblings": [
+   "dark-magenta",
+   "deep-magenta"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed",
+  "n_present": 2,
+  "match": {
+   "hex": "#A2006D",
+   "de2000": 4
+  },
+  "measured": {
+   "iscc": "deep purplish red",
+   "de2000": 7.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912, CSS, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green, notes (on the verb 'to flirt')",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 11 (on Goya's ink sketches)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; dE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do the books in our collection say about Flirt as a color?",
+   "choices": [
+    "Nothing; the hits concern the verb",
+    "It was a famous dye",
+    "It came from a flower",
+    "It was a Renaissance pigment"
+   ],
+   "answer": "Nothing; the hits concern the verb",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the name Flirt has a documented origin as a dye.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Flirt appears in only 2 of our 23,781 paintings, so spotting it is rare."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All key claims verified against fact cards and book text; no changes"
+  ]
+ }
+}

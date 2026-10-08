@@ -1,0 +1,112 @@
+{
+ "slug": "swamp-green",
+ "name": "Swamp Green",
+ "hex": "#748500",
+ "names": [
+  "Swamp Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Swamp Green is a plain descriptive name for a murky, yellowish olive green; as a listed color it is recent, and the books treat it only as a dictionary entry.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A descriptive name",
+   "body": "Paterson's dictionary defines swamp green simply as a dark, murky green, and lists it among the greens in its color index [1]. It has no pigment or dye behind it and no known coiner. The books name no maker, date or story for it, so its origin is undocumented.\n\nIn our library the name comes from the xkcd color survey of 2010, which is the earliest record we hold [2]. The swatch here is a fairly saturated olive; its nearest named neighbor is [[olive]], 4.6 units away on the CIEDE2000 scale [2]. That is brighter and yellower than Paterson's word \"murky\" suggests [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive, a color near Swamp Green appears in 18 of 23,781 paintings, or 0.08 per cent, and it is rarer than 68 per cent of the named colors [3]. Where it does appear it is usually an accent, in 9 of the 10 paintings that give a within-painting reading, and it peaks in the 1800s [3]. The earliest match is dated 1801, 209 years before the name's first record, so it is a look-alike hue in an aged photograph and not evidence of any pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "swamp vegetation (descriptive; origin undocumented)",
+   "first_recorded": "2010 (xkcd color survey, in our library)",
+   "source": "Paterson, A Dictionary of Colour, \"swamp green\""
+  },
+  "aka": [],
+  "siblings": [
+   "olive",
+   "moss-green"
+  ],
+  "parent": null,
+  "children": [
+   "olive-green",
+   "sap-green"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 18,
+  "pct": 0.08,
+  "measured": {
+   "nearest": [
+    [
+     "Olive",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"swamp green\" and green index, pp. 384 and 499",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): xkcd 2010, nearest named color Olive, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); dE2000 <= 4 and at least 1% of canvas, 2% for first-seen",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson's dictionary say swamp green is?",
+   "choices": [
+    "A dark, murky green",
+    "A bright yellow-green",
+    "A pale grey-blue",
+    "A reddish brown"
+   ],
+   "answer": "A dark, murky green",
+   "kind": "pick"
+  },
+  {
+   "q": "Swamp Green is a historic pigment with a documented maker.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Swamp Green is a dictionary word with no known coiner; its earliest record in our library is the 2010 xkcd color survey."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that Paterson files it beside olive, moss and sap green."
+  ]
+ }
+}

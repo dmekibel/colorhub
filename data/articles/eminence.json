@@ -1,0 +1,150 @@
+{
+ "slug": "eminence",
+ "name": "Eminence",
+ "hex": "#6C3082",
+ "names": [
+  "Eminence"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Eminence is a deep purple, a dictionary name from the Maerz and Paul era whose meaning of rank and distinction is the only story our books support.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A deep purple with a title",
+   "body": "Eminence appears in Maerz and Paul's *Dictionary of Color* of 1930 and in the 1955 ISCC-NBS system, where it falls in block 224 and sits about 3.2 units from the block called deep purple [1]. The books in our collection do not explain the choice of name, so the origin is undocumented [1][2].\n\nThe word itself is about rank. Pre-eminence marks distinction in the books, and the color scarlet is described as an indication of royalty or pre-eminence [3]. No source here says the color was named with that sense in mind [3]."
+  },
+  {
+   "id": "grey",
+   "title": "Eminence grise",
+   "body": "The most famous eminence in color is the grey one. Paterson's dictionary explains *éminence grise* as the power behind the throne, a name that began with Cardinal Richelieu's secretary, Père Joseph, who stayed in the background [4]. Jarman's *Chroma* repeats the phrase when writing about grey clothing [5]. Gérôme painted *L'Éminence grise* in 1873, now in the Museum of Fine Arts, Boston [6].\n\nSo in color history Eminence is a word for hidden power, and the grey sense belongs to that phrase, not to this purple [4][5][6]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Where it sits",
+   "body": "Eminence is darker and bluer than [[purple]], and richer than [[orchid]], near [[heliotrope]] on the violet side [1]. Its Munsell notation is about 4.9P 3.1/11.0, a dark, strongly chromatic purple [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our painting archive is very thin here: within the strict match, only one of 23,781 paintings carries this color (0.00 per cent), as photographed [7]. The books we have do not date a single pigment to this exact swatch, so we do not guess [7][1].\n\nIn printed English, the word eminence peaks in the 1800s in Google Books [7]. That curve shows the vocabulary in general, not this color or the paint."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in our sources",
+   "first_recorded": "Maerz and Paul, 1930; ISCC-NBS 1955 block 224",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "purple",
+   "heliotrope",
+   "orchid",
+   "lilac"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+  "match": {
+   "hex": "#6C3082",
+   "de2000": 4
+  },
+  "n_present": 1,
+  "pct_archive": 0.0,
+  "measured": {
+   "iscc": "deep purple",
+   "munsell": "4.9P 3.1/11.0",
+   "de2000": 3.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour (no color entry for this name)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 357",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 158",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 32",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 17",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py); Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who was the original eminence grise?",
+   "choices": [
+    "Père Joseph, Richelieu's secretary",
+    "Napoleon",
+    "Queen Victoria",
+    "William Perkin"
+   ],
+   "answer": "Père Joseph, Richelieu's secretary",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain why this deep purple was called Eminence.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The grey eminence was a person: Père Joseph, who worked behind Richelieu."
+ ],
+ "words": 304,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced claim that stable purple pigments were few",
+   "Ngram claim reworded: it counts the word, not a color adjective"
+  ]
+ }
+}

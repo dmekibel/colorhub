@@ -1,0 +1,276 @@
+{
+ "slug": "leek-green",
+ "name": "Leek Green",
+ "hex": "#979C84",
+ "names": [
+  "Leek Green"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Leek green is the greyed, yellowish green of the leek's leaf; the Greeks built a word for green on it, Davy named chlorine for it, and Werner's mineral chart made it number 48.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A vegetable's name",
+   "body": "*Leek green* is the color of the leek, *Allium porrum*, and the idea is ancient: the Greek word *prasinos* means literally \"leek-colored\" [1]. It was a minor word at first. From the third and second centuries BCE it spread until it covered all the pronounced greens, especially the dark ones, and it came to rival the older Greek words *chloros* and *glaukos* [1]. Latin had its own leek words, *prasinus* and *porraceus*, and Pastoureau reads them as a loud, garish green, linked to the emperor Nero, who liked green clothes, emeralds and leeks and was nicknamed for eating them [2].\n\nThe books do not agree on how light or dark leek green is. Pastoureau stresses strong, dark greens [1][2]. Paterson calls it the green of the vegetable, sometimes an olive green, and defines the related English word *porret* as a yellowish green, after a baby leek [3]. Ball describes Davy's \"pale leek-green\" [4], and St Clair uses \"dusky leek green\" to gloss viridian [5]."
+  },
+  {
+   "id": "greeks",
+   "title": "Mixing leek green in Athens",
+   "body": "Greek writers argued about how leek green is made, and they were wrong in instructive ways. Plato said it comes from \"flame color\", probably an orange, mixed with black, and added that anyone who tried to verify this by experiment would forget the difference between human and divine nature [4]. Democritus, in the account Gage follows, mixed leek green from crimson and indigo, or from a pale green and a purplish pigment [6]. Gage reads his remark that sulphur is a brighter variety of the same mixture as the earliest recorded proposal that yellow and green belong to one hue family [6].\n\nAristotle listed leek green among five unmixed intermediate colors: crimson, violet, leek green, deep blue and either grey or yellow [6]. He also used a leek as evidence. A leek blanched white by lack of sun, in Jarman's summary of his argument, showed that sunlight creates color [7]. Ball notes that Greek had no obvious basic green word: depending on the context, green could be *chloros*, *prasinos* or *poodes* [4]."
+  },
+  {
+   "id": "chlorine",
+   "title": "Davy's pale green",
+   "body": "The Greek colour words turned up again in chemistry [4]. When Gay-Lussac concluded, tentatively, that the gas then called oxymuriatic acid might be an element, Humphry Davy argued the point more strongly and named it for its pale leek-green color, from *chloros* [4]. The element is chlorine. For Davy's readers, then, leek green meant a pale green, unlike the dark greens Pastoureau finds in Hellenistic Greek [4][1]."
+  },
+  {
+   "id": "werner",
+   "title": "Number 48 on a mineralogist's chart",
+   "body": "Werner's mineral colors gave leek green its modern standing as a named swatch. In Patrick Syme's 1814 chart, derived from Werner and Jameson, Leek Green is no. 48 among the greens, placed between Mountain Green and Blackish Green [8]. Syme's note describes it as emerald green with a little brown and bluish grey, which makes it a quiet, greyed green rather than a bright one [8].\n\nThe chart gives examples from three kingdoms of nature. For the vegetable it points to the leaves of leeks in winter and to sea kale; for the mineral kingdom, to actinolite and to prase, a silica mineral [8][9]. For animals it points to the underwings of the green-veined white butterfly [8]. Botanists later borrowed Syme's names to describe flowers, and Baty's index of botanical colour references lists the plant *Paliavana prasinata* under Leek Green [8].\n\nOur library's Leek Green swatch (#979C84) is drawn from this chart as an aged, approximate swatch, and also appears in the ISCC-NBS system as block 125 and in Maerz and Paul, who date the name to about 1850 [10]. On screen it sits close to [[celadon-green]] (4.2 units apart), [[eucalyptus]] (5.6), [[sage-green]] (7.0) and [[sage]] (8.0) [10]."
+  },
+  {
+   "id": "pigment",
+   "title": "A pigment synonym",
+   "body": "In the pigment trade, leek green was a minor name. The *Pigment Compendium* lists it, after Mayer (1991), as a synonym of chrome green, the chromium oxide pigment family, and nothing more [11]. The name is far older than the pigment, so the pigment borrowed it rather than the other way round."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of Leek Green covers at least five per cent of the canvas in 1,235 works, or 5.2 per cent of the archive [12]. That is a common color, and it lives mostly in pale, light areas: in 69 per cent of the matches it belongs to the highlight tier of the painting's lightness order [12]. The earliest dated match is a tenth-century Buddhist painting of 916, *Mahamayuri Vidyaraja* [12].\n\nIt is strongly regional. Tibet carries it 3.7 times as often as the archive, with 9 of 47 paintings, and Nepal 4 of 25 [12]. Among Western movements, 25 of the archive's 140 Impressionist works carry it, 3.4 times the archive rate, as do 7 of 45 Post-Impressionist works [12]. The color name it keeps closest company with is Sage, found alongside it in 601 paintings at 11 times the chance rate [12]. These are photographs of aged, varnished paintings, so read the numbers as screen colors, not pigment tests [12].\n\nThe word itself peaked early. In Google Books, *leek green* reaches its highest level around 1809, holds about 76 per cent of that in 1820, and drops to about 12 per cent by 1840, a fall that may track the fading of Werner-style vocabularies, though the data cannot say [13]. By 2000 it is at about 1 per cent of its peak [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the leek (Allium porrum); Greek prasinos, Latin porraceus",
+   "first_recorded": "Greek prasinos by the 3rd-2nd centuries BCE; Werner and Syme chart no. 48 (1814)",
+   "source": "Pastoureau, Green, ch. 9; Baty, Nature's Palette"
+  },
+  "aka": [
+   "porraceous",
+   "prasinous",
+   "porret (a young leek's green)"
+  ],
+  "siblings": [
+   "sage-green",
+   "celadon-green",
+   "eucalyptus"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sage",
+    "gloss": "Sage is a brighter, more saturated green-grey"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "grc",
+    "name": "prasinos (leek-colored)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#979C84",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1235,
+  "top_paintings": [
+   "nga-133512",
+   "cma-155868",
+   "cma-97501",
+   "cma-162466",
+   "rijks-20027558"
+  ],
+  "role": {
+   "highlight": 0.69,
+   "mid": 0.29,
+   "shadow": 0.02
+  },
+  "company": [
+   {
+    "word": "Sage",
+    "hits": 601,
+    "lift": 11.15
+   }
+  ],
+  "ngram": {
+   "rel_1820": 0.756,
+   "rel_1840": 0.115,
+   "rel_2000": 0.012,
+   "peak": 1809
+  },
+  "measured": {
+   "lch": [
+    63,
+    13,
+    117
+   ],
+   "nearest": [
+    [
+     "Celadon Green",
+     4.2
+    ],
+    [
+     "Eucalyptus",
+     5.6
+    ],
+    [
+     "Sage Green",
+     7.0
+    ],
+    [
+     "Sage",
+     8.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"leek-green\", \"porraceous\", \"porret\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, chs. 11 and 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Viridian\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 16",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 18",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"Greens\" (Syme no. 48) and botanical index, pp. 145-153, 177-180",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"Greens\", plate captions for prase and chrysoprase, pp. 148-153",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub library: Leek Green #979C84 (Werner no. 48, ISCC-NBS 1955 block 125, Maerz & Paul c. 1850); CIEDE2000 distances computed with tools/colormath.js",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Leek green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; match within CIEDE2000 6, at least 5% of the canvas (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Aristotle's leek, blanched white by lack of sun, show him?",
+   "choices": [
+    "That sunlight creates color",
+    "That leeks are naturally white",
+    "That green is a mixture of black and white",
+    "That leeks cannot be dyed"
+   ],
+   "answer": "That sunlight creates color",
+   "kind": "pick"
+  },
+  {
+   "q": "Which element was named by Davy for its pale leek-green color?",
+   "choices": [
+    "Chlorine",
+    "Chromium",
+    "Copper",
+    "Cobalt"
+   ],
+   "answer": "Chlorine",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: books agree that leek green is a pale color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The Greek word for green, prasinos, literally means leek-colored.",
+  "Humphry Davy named chlorine for a pale leek-green color.",
+  "Look at a leek in winter: the grey-green of its leaves is Werner's number 48."
+ ],
+ "words": 898,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Books disagree on lightness: Pastoureau dark/strong, Ball/Davy pale, Paterson olive/yellowish; stated in text.",
+   "Davy's naming date not given by Ball; left undated in the text.",
+   "Paliavana prasinata assignment parsed from Baty's botanical index layout; moderately confident.",
+   "Prase described as a silica mineral from Baty's caption ('Silica'); etymology not claimed."
+  ]
+ }
+}

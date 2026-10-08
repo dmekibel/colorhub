@@ -1,0 +1,122 @@
+{
+ "slug": "windsor-blue",
+ "name": "Windsor Blue",
+ "hex": "#575E83",
+ "names": [
+  "Windsor Blue"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Windsor blue is a muted purplish blue; the name is best known as an artists' paint trade name, but the swatch here comes from an older color chart.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two things called Windsor blue",
+   "body": "Paterson's dictionary lists \"Windsor blue\" and \"Winsor blue\" as other names for Monastral blue, a very durable synthetic blue pigment first identified by ICI in 1928 by accident, now better known as phthalocyanine blue [1]. Winsor is also the name of the paint maker Winsor & Newton, and the dictionary says the spelling is a trade name of that company [1].\n\nOur swatch is a different thing. It is a moderate purplish blue from the Maerz and Paul dictionary of 1930, plate 44, with a first record of 1912 [2]. It is much duller and greyer than a phthalocyanine blue, so do not assume the two match [2]."
+  },
+  {
+   "id": "archive",
+   "title": "In paintings",
+   "body": "A color near this swatch appears in 100 of 23,781 paintings, as photographed, and it peaks in the 1900s at 3.3 times the museums' baseline [3]. Matisse is the most devoted painter, in 4 of 50 works [3]. It is a plain purplish blue, a near neighbor of [[indigo]] in hue and much lighter [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a spelling of Winsor, the trade name of Winsor & Newton, for phthalocyanine blue; undocumented for the chart color",
+   "first_recorded": "1912 per Maerz & Paul",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "Winsor blue",
+   "Monastral blue",
+   "phthalocyanine blue"
+  ],
+  "siblings": [
+   "indigo",
+   "prussian-blue",
+   "steel-blue",
+   "cobalt-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "indigo",
+    "gloss": "a dye blue, not the synthetic pigment blue called Windsor"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 100,
+  "iscc": {
+   "name": "moderate purplish blue",
+   "de": 5.9
+  },
+  "first_record": {
+   "year": 1930,
+   "source": "maerz-paul"
+  },
+  "century": "1900s, 3.3x baseline"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 267 (\"Monastral blue\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz & Paul 1930, ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which pigment does Paterson say Windsor blue is another name for?",
+   "choices": [
+    "Monastral blue",
+    "Prussian blue",
+    "Ultramarine",
+    "Indigo"
+   ],
+   "answer": "Monastral blue",
+   "kind": "pick"
+  },
+  {
+   "q": "In what year was Monastral blue first identified by ICI, by accident?",
+   "choices": [
+    "1928",
+    "1856",
+    "1704",
+    "1950"
+   ],
+   "answer": "1928",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Monastral blue was found by accident at ICI in 1928, and Windsor blue is one of its trade names."
+ ],
+ "words": 185,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'town of Windsor' guess from aside"
+  ]
+ }
+}

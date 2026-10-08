@@ -1,0 +1,139 @@
+{
+ "slug": "adelaide",
+ "name": "Adelaide",
+ "hex": "#3C285F",
+ "names": [
+  "Adelaide"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Adelaide is a very dark violet from Maerz and Paul's 1930 dictionary; the name is also a city and a woman's given name, and the books we hold do not say which, if either, it honors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name nobody explains",
+   "body": "Maerz and Paul's *Dictionary of Color* (1930) dates Adelaide to about 1850 and places it on plate 44, row K, column 11 [1]. Its neighbors on the same plate include Prelate (about 1895, plate 44 J 11) and Roman Purple (1924, plate 44 K 10) [1]. Whom or what the name honors is undocumented in the sources we hold [2].\n\nThe color books mention Adelaide only in other roles [2]. Finlay mentions the South Australian city as the seat of the administrators in the 1860s ochre wars, and as the home base of an opal dealer [3]. His notes also record that jewelers once sold garnets as \"Adelaide\" rubies [4]. Neither is a color name, and no book connects either to this violet [2][3][4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is very dark and muted: lightness 21, chroma 37, hue angle 308 [5]. Its nearest plain name is [[navy]], 8.4 units away, so it sits between that and [[royal-purple]], a darker, bluer cousin of [[purple]] [5]. Next to [[indigo]] it would read as the violet one [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a rare painted color in our archive: three of 23,781 paintings, rarer than 79 per cent of the named colors [6]. Photographs of varnished, darkened paintings make very dark violets hard to tell from black, so treat even this count as soft [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "c. 1850, Maerz & Paul 1930",
+   "source": "Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "royal-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "measured": {
+   "lch": [
+    21,
+    37,
+    308
+   ],
+   "nearest": [
+    [
+     "Navy",
+     8.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz & Paul, A Dictionary of Color, plate 44 K 11 (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name (a handful of hits, checked one by one)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 10 and Finlay, Brilliant, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Brilliant, ch. 21, notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; color within the archive's match threshold, at least 2% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which source records Adelaide as a color name?",
+   "choices": [
+    "Maerz and Paul's Dictionary of Color (1930)",
+    "A Crayola box",
+    "Newton's Opticks",
+    "A Pantone guide"
+   ],
+   "answer": "Maerz and Paul's Dictionary of Color (1930)",
+   "kind": "pick"
+  },
+  {
+   "q": "The books we hold document which person or place the color Adelaide honors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Adelaide is a very dark violet whose name nobody has explained.",
+  "Finlay records that \"Adelaide\" rubies were garnets, a trade label unrelated to this violet."
+ ],
+ "words": 245,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Overstated Finlay: Adelaide was not \"the center\" of the ochre wars or opal trade; reworded to what the text says."
+  ]
+ }
+}

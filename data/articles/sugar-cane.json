@@ -1,0 +1,147 @@
+{
+ "slug": "sugar-cane",
+ "name": "Sugar Cane",
+ "hex": "#E9BB8C",
+ "names": [
+  "Sugar Cane"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Sugar Cane is a pale, warm sand-pink named for the plant; it is a name from Maerz and Paul's 1930 dictionary, and the color books we hold say almost nothing about it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plant's name, little else",
+   "body": "The name is recorded in Maerz and Paul's *Dictionary of Color* (1930), which dates it to 1926 and places it on plate 10, row B, column 6 [1]. Who coined it, and which stalk or syrup it was meant to match, is undocumented in the sources we hold [2].\n\nThe color books mention sugarcane only as a crop. In Greenfield's history of cochineal, the sugarcane estate is one of the European enterprises that earned a Spanish gentleman respect in colonial Mexico, while growing a native dye insect did not [3]. That is a fact about the plant and its prestige, not about the shade [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is light and soft: lightness 79, chroma 32, hue angle 71, an orange-tan with little punch [1][4]. Its nearest named color in our library is [[flesh-red]], and its plain-word family is [[tan]], at a distance of 5.2 units [4]. [[brown-sugar]] is a different, darker and redder name, not a variant of this one [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color far more often than its name would suggest. It appears in 932 of 23,781 paintings (3.92 per cent), more often than 83 per cent of the named colors, and in a painting it most often plays a light [5].\n\nIt peaks in the 1900s, in 57 of 1,674 paintings, which is 1.5 times the rate expected from the same museums [5]. The painter most devoted to it is [[painter:pierre-puvis-de-chavannes|Puvis de Chavannes]], in 6 of his 25 works here, 5.3 times the baseline [5]. It shares canvases with [[antique-brass]] and [[marguerite-yellow]] more than chance [5]. It is also over-represented in Indian painting, 3.1 times the expected rate, with 16 Rajput and 16 Mughal works standing out [5].\n\nThe earliest match is dated 1000, 926 years before the name's first record in Maerz and Paul (1926) [1][5]. That is a look-alike hue in an aged photograph, not proof of any pigment or dye; the archive's early centuries are thin and the paintings are varnished [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sugarcane plant (origin of the color use undocumented)",
+   "first_recorded": "1926, Maerz & Paul 1930",
+   "source": "Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "flesh-red",
+   "tan",
+   "brown-sugar"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "brown-sugar",
+    "gloss": "a darker, redder name from the food, not a variant"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 932,
+  "role": "light",
+  "painters": [
+   "pierre-puvis-de-chavannes"
+  ],
+  "measured": {
+   "lch": [
+    79,
+    32,
+    71
+   ],
+   "nearest": [
+    [
+     "Flesh Red",
+     null
+    ],
+    [
+     "Tan",
+     5.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz & Paul, A Dictionary of Color, plate 10 B 6 (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Color-kb concordance of the 29 color books for this name (a handful of hits, checked one by one)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; color within the archive's match threshold, at least 2% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 dictionary is the earliest source for the name Sugar Cane?",
+   "choices": [
+    "Maerz and Paul's Dictionary of Color",
+    "Ridgway's Color Standards",
+    "The CSS color list",
+    "A Crayola box"
+   ],
+   "answer": "Maerz and Paul's Dictionary of Color",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, Sugar Cane is over-represented in Indian painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sugar Cane turns up in 932 of 23,781 paintings, and Indian court painting uses it 3.1 times more than expected.",
+  "Look for it as the light, warm ground in a Puvis de Chavannes fresco."
+ ],
+ "words": 358,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Checked: Maerz & Paul entry and Greenfield sugarcane passage supported."
+  ]
+ }
+}

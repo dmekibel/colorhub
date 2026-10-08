@@ -1,0 +1,103 @@
+{
+ "slug": "burnt-red",
+ "name": "Burnt Red",
+ "hex": "#9F2305",
+ "names": [
+  "Burnt Red"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Burnt Red is a deep, brownish red, named for the way heat turns earth pigments redder and darker.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name appears in several systems: Ridgway's atlas of 1912, ISCC-NBS block 26 and Maerz and Paul, who date it to 1782 [1]. The swatch sits near brick and [[sienna]] [1].\n\nThe heat in the name is real. The Pigment Compendium notes that the Romans knew how to burn yellow ochre into red ochre, and Pliny's sandyx was a burnt red ochre adulterated with white lead [3]. Red ochres of this kind turn up in Roman art and in Byzantine icons and frescoes [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Burnt Red appears in 1.46% of the 23,781 paintings in our archive, as photographed [2]. It peaks in the 1400s at 5.3% of that century's paintings, 3.1 times the baseline [2]. Inside a painting it is nearly always an accent, in 92% of cases [2]. The painter who uses it most is Raphael, in 4 of 36 works here, though none stands out against the baseline [2]. It often shares canvases with Seal Brown [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "burning earth pigments; origin of the exact name undocumented",
+   "first_recorded": "1782 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "sienna",
+   "vermilion",
+   "umber"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 348,
+  "pct_paintings": 1.46,
+  "peak_century": 1400,
+  "role": "accent 92%",
+  "library_first": 1782
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"red ochre\" (p. 334)",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the Romans burn to make red ochre?",
+   "choices": [
+    "Yellow ochre",
+    "Cochineal",
+    "Lapis lazuli"
+   ],
+   "answer": "Yellow ochre",
+   "kind": "pick"
+  },
+  {
+   "q": "In which century does Burnt Red peak in our painting archive?",
+   "choices": [
+    "1400s",
+    "1900s",
+    "1100s"
+   ],
+   "answer": "1400s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The Romans made red ochre by burning yellow ochre."
+ ],
+ "words": 172,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

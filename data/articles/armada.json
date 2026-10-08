@@ -1,0 +1,114 @@
+{
+ "slug": "armada",
+ "name": "Armada",
+ "hex": "#3F2921",
+ "names": [
+  "Armada"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Armada is a very dark, warm brown, a textile color of the 1920s whose name recalls a fleet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The color is in Maerz and Paul's dictionary, first recorded in 1922, on plate 8 H 6; the neighbor Granada was recorded in 1924 on the same plate [1]. The name is Spanish for a fleet, and the best-known fleet is the Spanish Armada of 1588 [2][3].\n\nNo book we hold connects the color to that fleet [2][3]. Finlay mentions the Armada only in passing, noting that the English law banning logwood dyeing was passed in 1581 and the sea battle came in 1588 [3]. Greenfield places Philip II's Armada in the politics of the age of cochineal [2]. The color name's origin is undocumented. It is a close cousin of [[bistre]] and [[chestnut]] among dark browns [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Armada is one of the most common dark browns in our archive of 23,781 paintings, appearing in 15.05% of them, as photographed [4]. It is more common than 98% of the named colors, and peaks in the 1500s, in 15.6% of that century's paintings [4]. Inside a painting it most often plays a hidden color, in 39% of cases [4]. Its most devoted painter is Jacopo Bassano, in 7 of 14 works here [4]. Dark varnish deepens browns, so these numbers describe photographs of old canvases [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; Spanish armada means fleet",
+   "first_recorded": "1922 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "bistre",
+   "chestnut",
+   "umber"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3579,
+  "pct_paintings": 15.05,
+  "peak_century": 1500,
+  "library_first": 1922,
+  "nearest": [
+   [
+    "Bistre",
+    null
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which century does Armada peak in our painting archive?",
+   "choices": [
+    "1500s",
+    "1900s",
+    "1200s"
+   ],
+   "answer": "1500s",
+   "kind": "pick"
+  },
+  {
+   "q": "The books we hold say the color Armada is named for the Spanish fleet of 1588.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Armada appears in about one painting in seven in our archive, as photographed."
+ ],
+ "words": 215,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

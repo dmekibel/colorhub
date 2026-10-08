@@ -1,0 +1,131 @@
+{
+ "slug": "deep-olive",
+ "name": "Deep Olive",
+ "hex": "#726A51",
+ "names": [
+  "Deep Olive"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Deep Olive is a dark, yellow-brown green, a mixed color with a long record as a pigment and a dye; in our archive it is one of the commonest named colors on canvas.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "Olive as a mixed color",
+   "body": "Salter, in 1869, called olive green an arbitrary compound or mixed green of a fine deep olive color and sober richness, and gave Dewint's green as a synonym [1]. A British committee recorded the color in 1886 [1]. Olive lake had a shifting recipe: Field said in 1835 that it was prepared from ebony, added in 1841 that it came from laburnum, and by the later part of the century it was a compounded color, no longer an organic lake [1]."
+  },
+  {
+   "id": "dye",
+   "title": "Olive from a dye pot",
+   "body": "Finlay describes a weaving couple who found a set of natural dyes in pomegranate, using its fruit, rind and bark fermented and stewed, running from deep olives to burned oranges to gold [2]. The same book reports their salmon pinks from lichens and browns from wild walnuts [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch comes from Ridgway's 1912 plate XL and the ISCC-NBS 1955 list, block 107; the nearest ISCC-NBS name is \"grayish yellowish brown\", 6.9 units away, so many people would call it brown [3]. Neighbors are [[olive]], [[olive-green]], [[moss-green]] and [[umber]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "It appears in 3,791 of 23,781 archive paintings, 15.94 per cent, commoner than 96 per cent of named colors [4]. Inside a painting it is most often a hidden color, in 39 per cent of the 2,275 paintings where it counts [4]. It peaks in the 1700s, at 10.8 per cent of 3,449 paintings, 1.1 times the museums' baseline [4]. Jan van Kessel the Elder is the most devoted painter, with it in 6 of 13 works here [4]. Aged varnish pushes many greens toward olive, so this is a photograph effect as much as a paint one [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the olive (fruit and foliage)",
+   "first_recorded": "Salter 1869 (olive green); Ridgway 1912",
+   "source": "Pigment Compendium"
+  },
+  "aka": [
+   "Dewint's green (related)"
+  ],
+  "siblings": [
+   "olive",
+   "olive-green"
+  ],
+  "parent": "olive",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 3791,
+  "measured": {
+   "lch": [
+    44.9,
+    15.2,
+    94.4
+   ],
+   "nearest_iscc": [
+    "grayish yellowish brown",
+    6.9
+   ]
+  },
+  "role": "hidden 39%"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 295 (\"olive green\", \"olive lake\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Salter say olive green was?",
+   "choices": [
+    "An arbitrary mixed green",
+    "A single mineral",
+    "A bark dye only",
+    "A modern pigment"
+   ],
+   "answer": "An arbitrary mixed green",
+   "kind": "pick"
+  },
+  {
+   "q": "What dye source did Finlay's weavers use for deep olives to gold?",
+   "choices": [
+    "Pomegranate",
+    "Walnut",
+    "Lichen",
+    "Mimosa"
+   ],
+   "answer": "Pomegranate",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pomegranate bark and rind can dye wool from deep olive through orange to gold."
+ ],
+ "words": 301,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,110 @@
+{
+ "slug": "pale-peach",
+ "name": "Pale Peach",
+ "hex": "#FFE5AD",
+ "names": [
+  "Pale Peach"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Peach is a light, creamy pink-orange, the color of a peach's skin faded almost to cream.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Moonlight, in an old list",
+   "body": "The name is a lightened [[peach]], the fruit color [3]. It is listed in the ISCC-NBS system of 1955 and in Ridgway's 1912 color book [3].\n\nSt Clair's glossary of color words uses it to define another name: moonlight is a very pale peach [1]. It is a fact about how the word is defined, not a claim about real moonlight [1]. Nearby names include [[apricot]] and [[cream]] [3].\n\nThe swatch on this page is #FFE5AD, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pale Peach is common among pale colors in our archive: 457 of 23,781 paintings, about 1.92 percent, as photographed [2]. It is commoner than 71 percent of the named colors, and peaks in the 1800s, found in 102 of the 8,345 paintings from that century, about 1.3 times the museums' baseline rate [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a lightened peach",
+   "first_recorded": "Ridgway 1912",
+   "source": "ColorHub library; St Clair, The Secret Lives of Color, glossary"
+  },
+  "aka": [],
+  "siblings": [
+   "apricot",
+   "cream",
+   "peach",
+   "white"
+  ],
+  "parent": "peach",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 457,
+  "pct_of_paintings": 1.92,
+  "library_sources": [
+   "ISCC-NBS 1955",
+   "Ridgway 1912",
+   "Wikipedia list",
+   "xkcd 2010",
+   "Crayola"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary (\"Moonlight\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955, Ridgway 1912, Wikipedia list, xkcd 2010, Crayola",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does St Clair's glossary say moonlight is?",
+   "choices": [
+    "A very pale peach",
+    "A pale grey-blue",
+    "A bright white",
+    "A silver"
+   ],
+   "answer": "A very pale peach",
+   "kind": "pick"
+  },
+  {
+   "q": "Pale Peach is listed in Ridgway's 1912 color book.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "One glossary defines the color moonlight as a very pale peach."
+ ],
+ "words": 189,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed interpretive claim not in source"
+  ]
+ }
+}

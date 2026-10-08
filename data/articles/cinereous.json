@@ -1,0 +1,123 @@
+{
+ "slug": "cinereous",
+ "name": "Cinereous",
+ "hex": "#98817B",
+ "names": [
+  "Cinereous"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Cinereous is an old word for ashen grey, used above all of birds, and Ridgway's own swatch for it is a plain grey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Ashen, especially of birds",
+   "body": "Paterson defines cinereous as grey and ashen, ash grey, especially of birds, and lists related words: cinerescent for becoming ashen, and cineritious for ashy-grey as applied to nerve matter [1]. The color name entered our sources through Ridgway's 1886 nomenclature, and the ISCC-NBS system of 1955 carried it over [2]. Compare [[ash]], [[grey]] and [[mouse-grey]]."
+  },
+  {
+   "id": "swatch",
+   "title": "Two swatches",
+   "body": "The swatch here is a warm, brownish grey, nearest ISCC-NBS name \"light grayish reddish brown\" at a distance of 2.8 [2]. Ridgway's 1912 plate LII shows his own cinereous as #AAACAB, a neutral grey [2]. The sources disagree on screen color, so read the name as ashen and not as a precise tint. See also [[taupe]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch appears in 305 of our 23,781 paintings, 1.28 percent, as photographed [3]. It peaks in the 1900s, found in 39 of the 1,674 paintings from that century, 2.7 times the expected rate [3]. Inside a painting it most often plays a hidden color [3]. The most devoted painter is Maurice Denis, with 6 of his 43 works here, 7.4 times the baseline of the museums those works come from [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "ash, in the sense of ashen grey (the dictionary gloss)",
+   "first_recorded": "1886 (Ridgway's Nomenclature of Colors)",
+   "source": "Paterson; ColorHub name graph"
+  },
+  "aka": [
+   "ashen",
+   "ash grey"
+  ],
+  "siblings": [
+   "ash",
+   "mouse-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 305,
+  "nearest_iscc": [
+   "light grayish reddish brown",
+   2.8
+  ],
+  "ridgway_1912": "#AAACAB",
+  "painter": {
+   "maurice-denis": {
+    "n": 6,
+    "of": 43,
+    "lift": 7.4
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cinereous\", p. 105",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub name graph and library: ISCC-NBS 1955 nearest name, sources and dates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (as photographed), data/graph/fieldnotes",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does cinereous mean, according to Paterson?",
+   "choices": [
+    "Grey, ashen, especially of birds",
+    "Bright red",
+    "Pale yellow",
+    "Deep blue"
+   ],
+   "answer": "Grey, ashen, especially of birds",
+   "kind": "pick"
+  },
+  {
+   "q": "Whose 1886 nomenclature do our sources trace this name to?",
+   "choices": [
+    "Ridgway",
+    "Munsell",
+    "Newton",
+    "Chevreul"
+   ],
+   "answer": "Ridgway",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Cinereous is the word for ashen grey, mostly used of birds."
+ ],
+ "words": 205,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Swatch conflict (ISCC vs Ridgway) noted in text.",
+   "Re-verified key claims against fact cards and book text; no changes needed."
+  ]
+ }
+}

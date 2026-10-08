@@ -1,0 +1,193 @@
+{
+ "slug": "ether",
+ "name": "Ether",
+ "hex": "#5F99AB",
+ "names": [
+  "Ether"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Ether is a medium, slightly greenish blue recorded in the Maerz and Paul color dictionary of 1930; no book we hold says who chose the name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Where the name is recorded",
+   "body": "The earliest source for Ether in our data is Maerz and Paul's *A Dictionary of Color* of 1930, plate 35, position K2, with a first record dated 1919 [1]. The nearest ISCC-NBS block is \"light greenish blue\", 5.8 units away, and the Munsell notation is 5.9B 5.9/4.8 [2].\n\nNeither source explains the choice of name. In the books we searched, the word *ether* turns up for other things, and nothing connects those uses to this color [3][4][5]."
+  },
+  {
+   "id": "ethers",
+   "title": "The other ethers",
+   "body": "In physics, the ether was the all-pervading medium through which light was supposed to travel. Christiaan Huygens argued in 1678 that light is made of waves moving through it, and Thomas Young found compelling evidence for the wave view early in the nineteenth century [3]. Birren, writing on color therapy, points out that scientists had failed to detect the substance, and quotes the physicist James Jeans calling the ethers probably fictitious [4]. Birren also mocks a fad theory of \"color ethers\", in which gold looks yellow because it repels a yellow-forming ether [4].\n\nIn the laboratory, ether is a solvent. The collodion photographic process introduced by Frederick Scott Archer in 1851 dissolved nitrocellulose in ether [5], and Garfield's modern recipe for making mauve warns that the petroleum ether it uses is extremely flammable [6]. Paterson records a yellow pigment, lipochrin, obtained from frogs' eyes by treating them with ether [7]. None of these is a color; they only show how common the word was in the sciences of light and dye."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The color is a mid-light blue with a trace of green: lightness 60 and little chroma, with a contrast of about 3.2 to 1 against white and 6.6 to 1 against black [2]. Its nearest named neighbors are [[greenish-blue]], [[grey-blue]], [[sky-steel]] and [[bluish-steel-blue]], all within about five units [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 71 works [8]. The strongest is [[painter:odilon-redon|Redon]]'s [[painting:nga-89684|Breton Village]] of about 1890, about a third of it, and the 1870s are the peak decade, with 12 matching paintings, 3.8 times the expected rate [8]. In France the rate is 2.7 times higher [8].\n\nThe earliest match is a 1500 landscape by Herri met de Bles, 419 years before the name's first record, so it is a look-alike hue in an aged photograph, not evidence of any pigment [8]. These are photographs of varnished paintings, so read them as screen colors. The word itself is too crowded with other senses for a useful Ngram count [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books we hold",
+   "first_recorded": "Maerz and Paul, first recorded 1919, plate 35 K2",
+   "source": "ColorHub library (Maerz and Paul 1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "ethereal-blue",
+   "celestial-blue",
+   "grey-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "ethereal-blue",
+    "gloss": "a paler blue with a similar airy name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#5F99AB",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 71,
+  "top_paintings": [
+   "nga-157928",
+   "cma-115405",
+   "nga-199285",
+   "nga-89684"
+  ],
+  "peak_decade": {
+   "decade": 1870,
+   "hits": 12,
+   "lift": 3.77
+  },
+  "measured": {
+   "lch": [
+    60.0,
+    20.8,
+    227.5
+   ],
+   "contrast_white": 3.17,
+   "contrast_black": 6.63,
+   "nearest": [
+    [
+     "Greenish Blue",
+     4.6
+    ],
+    [
+     "Grey Blue",
+     5.0
+    ],
+    [
+     "Sky Steel",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (Maerz and Paul, A Dictionary of Color, 1930, plate 35 K2)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (ISCC-NBS 1955 block, Munsell notation, contrast ratios), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, chs. 11-14 (\"Phlogiston and Ether\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 13 (\"How to Make Mauve\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lipochrin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which scientist argued in 1678 that light travels as waves through an all-pervading ether?",
+   "choices": [
+    "Christiaan Huygens",
+    "Isaac Newton",
+    "Thomas Young",
+    "James Jeans"
+   ],
+   "answer": "Christiaan Huygens",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books we searched explain how the color Ether got its name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ether the color is recorded in 1930; ether the substance was proposed for light in 1678 and never found.",
+  "Look for it in the mid-tones of French landscapes of the 1870s, the peak decade in our archive."
+ ],
+ "words": 451,
+ "status": "checked",
+ "checked": {
+  "by": "batch-53 self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Name origin undocumented; stated as such.",
+   "Birren quote paraphrased; one-word quote only.",
+   "Ngram skipped (word is a common physics term)."
+  ]
+ }
+}

@@ -1,0 +1,103 @@
+{
+ "slug": "black-olive",
+ "name": "Black Olive",
+ "hex": "#3B3C36",
+ "names": [
+  "Black Olive"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Black Olive is a very dark, slightly green-grey neutral, the color of a ripe olive that has almost lost its green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name is a plain description, and the swatch sits at ISCC-NBS block 108, a very dark olive-grey, with the RAL paint code 6015 as a close commercial match [1]. It is near [[olive]] in hue but far darker, and close to [[black]] in lightness [1].\n\nThe books we hold mention black olives only as food. Livingstone describes a patient who lost all color vision after a brain injury and ate only achromatic foods, black olives among them, because they looked normal to him [3]. That says something about how dark and unsaturated the fruit is, but nothing about the color name's history [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Black Olive appears in 8.21% of the 23,781 paintings in our archive, as photographed [2]. It is more common than 93% of the named colors, and it peaks in the 1900s at 8.1% of that century's paintings [2]. Inside a painting it most often plays a mid-tone, in 48% of cases [2]. The painter who leans on it most is Arnoud van Halen, in 16 of 50 works here [2]. Dark varnish and aged canvases push many browns toward this swatch, so these numbers describe photographs [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a ripe olive; origin of the name undocumented",
+   "first_recorded": "ISCC-NBS 1955, block 108",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "olive",
+   "umber",
+   "black",
+   "indigo",
+   "ochre"
+  ],
+  "parent": "black",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1952,
+  "pct_paintings": 8.21,
+  "peak_century": 1900,
+  "role": "mid-tone 48%"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where do the books we hold mention black olives?",
+   "choices": [
+    "As food a patient with lost color vision could still eat",
+    "As a dye source",
+    "As a medieval pigment"
+   ],
+   "answer": "As food a patient with lost color vision could still eat",
+   "kind": "pick"
+  },
+  {
+   "q": "Black Olive is more common in our painting archive than most named colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Black Olive turns up in about one painting in twelve in our archive, as photographed."
+ ],
+ "words": 206,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

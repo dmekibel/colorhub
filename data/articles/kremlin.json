@@ -1,0 +1,122 @@
+{
+ "slug": "kremlin",
+ "name": "Kremlin",
+ "hex": "#0A5553",
+ "names": [
+  "Kremlin"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Kremlin is a deep blue-green from the Maerz and Paul dictionary of color, a name that has nothing to do with the walls it recalls.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary name",
+   "body": "Our library finds Kremlin in Maerz and Paul's 1930 dictionary, plate 29, and the ISCC-NBS system calls the nearest block dark bluish green, 3.5 units away on the CIEDE2000 scale [1]. Why the compilers chose the word is undocumented [1]."
+  },
+  {
+   "id": "books",
+   "title": "What the books say",
+   "body": "The two book hits in our collection are about the place, not the shade. Jarman describes a red flag flying high above Lenin's tomb at the Kremlin [2], and Finlay mentions a vodka brand that supplies the Kremlin [3]. Neither describes a dark teal. Anyone looking for the connection should be careful, because red is the color the books pair with the Kremlin [2], while this swatch is a blue-green close to [[teal]] and [[bottle-green]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color this close appears in 53 works, or 0.22 per cent, rarer than 58 per cent of the named colors [4]. It peaks in the 1900s, with 9 of 1,674 paintings, about 3.8 times the expected rate for the same museums [4]. These numbers are small, and they are photographs of varnished paintings, so they hint at a modern taste for dark teals without proving it [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "Maerz and Paul, 1930, plate 29",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "dark bluish green"
+  ],
+  "siblings": [
+   "teal",
+   "bottle-green",
+   "greyish-green",
+   "green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed",
+  "n_present": 53,
+  "pct_archive": 0.22,
+  "measured": {
+   "iscc": "dark bluish green",
+   "de2000": 3.5
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912, CSS, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 25",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History (amber chapter)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; dE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color do the books in our collection pair with the Kremlin?",
+   "choices": [
+    "Red",
+    "Teal",
+    "Gold",
+    "Violet"
+   ],
+   "answer": "Red",
+   "kind": "pick"
+  },
+  {
+   "q": "Which dictionary of color does our library cite for Kremlin?",
+   "choices": [
+    "Maerz and Paul, 1930",
+    "Pantone",
+    "Crayola",
+    "Newton's Opticks"
+   ],
+   "answer": "Maerz and Paul, 1930",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Kremlin the color is a deep teal, while the books keep pairing the Kremlin with red."
+ ],
+ "words": 212,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Corrected Finlay citation: vodka remark is in Jewels, not Colour"
+  ]
+ }
+}

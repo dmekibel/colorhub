@@ -1,0 +1,124 @@
+{
+ "slug": "seaweed-green",
+ "name": "Seaweed Green",
+ "hex": "#524B2A",
+ "names": [
+  "Seaweed Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Seaweed Green is a dark, brownish olive, named for the color of the weed on the shore.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A yellowish green from the tide line",
+   "body": "Paterson defines seaweed green as a yellowish green [1]. His index of greens lists it among the greens, with [[sea-green]] among its neighbors [2]. The swatch here is far darker and browner than that definition suggests, so the modern swatch and the old wording do not match exactly [1][3].\n\nThe books attach no dye or pigment to the name, and give no date [1]. A close relative in sound is [[seaweed]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 3,470 hold this color at 5% of the canvas or more, as photographed, a large share of the archive, probably because dark olive browns are common in old paintings [3]. The earliest strong sample is a portrait of the artist's infant son by Christen Købke, 1845 [3]. Printed use of *seaweed green* peaked in 2013 [4]. The match counts any painting with this color covering at least a twentieth of the canvas, so it shows where the color appears in photographs of paintings, not that the painters ever called it by this name."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "seaweed, by color (the books do not say; origin undocumented)",
+   "first_recorded": "undated",
+   "source": "Paterson, A Dictionary of Colour, p. 360"
+  },
+  "aka": [
+   "seaweed"
+  ],
+  "siblings": [
+   "seaweed",
+   "sea-green"
+  ],
+  "parent": "olive-green",
+  "children": [
+   "sap-green"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (color match within 6 DeltaE2000, at least 5% of the canvas)",
+  "match": {
+   "hex": "#524B2A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3470,
+  "ngram": {
+   "peak": 2013,
+   "rel_1860": 0.15,
+   "rel_2000": 0.541
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 360",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 499 (color index, greens)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'seaweed green', 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define seaweed green?",
+   "choices": [
+    "A yellowish green",
+    "A pale blue",
+    "A dark red",
+    "A bluish grey"
+   ],
+   "answer": "A yellowish green",
+   "kind": "pick"
+  },
+  {
+   "q": "When did printed use of 'seaweed green' peak?",
+   "choices": [
+    "2013",
+    "1891",
+    "1700",
+    "1856"
+   ],
+   "answer": "2013",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Seaweed green is defined as a yellowish green, but this swatch is dark and brownish.",
+  "3,470 paintings in our archive hold this color, as photographed."
+ ],
+ "words": 183,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed false Pannetier/Paris adjacency and sap-green neighbor; hedged archive-count explanation."
+  ]
+ }
+}

@@ -1,0 +1,250 @@
+{
+ "slug": "plum",
+ "name": "Plum",
+ "hex": "#8E4585",
+ "names": [
+  "Plum"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Plum is the reddish purple of a ripe plum's skin, a color word that naturalists were using by the early 1800s and that the web now uses for two quite different colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two plums on the web",
+   "body": "*Plum* names the purple of the fruit, with a lean toward red; Paterson's dictionary glosses it as a reddish purple [1]. The same entry points out that the X11 color list, the source of the web's named colors, also has a Plum, hex #DDA0DD [1]. That one is a pale pink-violet, far lighter than the fruit.\n\nOur swatch is the deeper color, #8E4585, and it sits within a CIEDE2000 distance of 5.2 of the ISCC-NBS 1955 block called strong reddish purple [2]. The 2010 xkcd color survey has its own Plum at #580F41, much darker, while its Light Eggplant lies within a distance of 1.2 of ours [2]. Of the colors with articles here, [[purple]] is the parent, and [[eggplant]], [[mauve]] and [[orchid]] are the nearest named relatives in hue.\n\nThe record of the word is short. Maerz and Paul's 1930 dictionary lists plum as a color from 1805 [2], and the German RAL system carried a matching Signal Violet, number 4008, by 1927 [2]."
+  },
+  {
+   "id": "werner",
+   "title": "From plum blue to plum purple",
+   "body": "Plum entered the naturalists' colour lists through mineralogy. In 1774 the German geologist Abraham Gottlob Werner devised a vocabulary of 54 colors for identifying minerals, and he and his students kept revising it for roughly forty years [3]. Werner's list and the one by his Scottish follower Robert Jameson called this color *plum blue* [3].\n\nIn 1814 the Scottish painter Patrick Syme expanded the list to 108 names, and to 110 in 1821 [3]. He made purple and orange principal colors, so Werner's plum blue became *plum purple* [3]. Syme gave it the number 42, and for his examples he named the skin of a plum and the mineral fluor spar [4].\n\nSyme also gave a recipe, marked as Werner's: mostly Berlin blue and carmine red, with a trace of brown and the faintest touch of black [4]. Berlin blue is the older name of [[prussian-blue]], and the red is [[carmine]], so the naturalists' plum was blue first and red second. A modern edition adds the wing feathers of the spectacled cormorant as an animal example [4]. It also warns that Syme's swatches have grown more muted with age, so the printed plum is a pale ghost of what he painted [3]. The nearby slug [[plum-purple]] is the dark successor name in our library."
+  },
+  {
+   "id": "bloom",
+   "title": "The bloom on the skin",
+   "body": "A plum is not one flat purple. Samuel Johnson's dictionary defined *bloom* as the blue colour upon plums and grapes newly gathered, and Paterson records the definition [5]. The same book defines *glaucous* partly as covered with a bloom in the way a plum is [5]. That waxy film cools the skin and lightens it, and wiping it off with a thumb shows the redder, darker color beneath.\n\nMedieval writers noticed the fruit's change too. Pastoureau notes that fruit was thought of as green first, then red (cherries, strawberries), then blue or black (plums, blackberries, blueberries), a ripening that stood for freshness [6]."
+  },
+  {
+   "id": "dyes",
+   "title": "What the plum tree dyed",
+   "body": "The plum tree did not give the Romans purple [7]. Pastoureau lists black plum and plum leaves among the plant materials that dyers tried for green in the first century CE, alongside ferns and leek juice [7]. He adds that plant greens of this kind held up badly, so medieval painters and dyers were wary of them [7]. For the color we call plum, they used other sources, among them the shellfish purple of [[tyrian-purple]]."
+  },
+  {
+   "id": "paint",
+   "title": "In paint, skin and speech",
+   "body": "Painters built plum colors in layers. Ball describes a cloak of plum red that Jan Gossaert, a Flemish painter of the 1500s, built from red lake laid over dark grey, as microscope sections show [8]. The color is made in the eye, from a transparent red over a dark underlayer, and not by mixing a purple pigment.\n\nThe word also turns up where nobody expects it. A traveller's account quoted by Balfour-Paul describes skin worked on by indigo, sun and oil as taking a bloom of deep plum, between brown and blue [9]. In 1827 the Nuremberg dermatologist Heinrich Eichhorn listed a plum shade of purple among the colors he wanted doctors to name in skin disease [10], and Birren's survey of old diagnostic tables still includes a face gone brick red or plum color in warm weather [11].\n\nPaterson passes on a tentative suggestion that the English *livid*, once black-and-blue like a bruise, may be linked to the Old Slavonic *sliva*, a plum [12]. The same entry gives the Latin *lividus* as the source, so treat the plum link as a guess [12]. The last colored surname in the board game Cluedo is Professor Plum, according to Paterson [13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, this plum, within CIEDE2000 4, covers 1% of the canvas in none, and appears at all in 1 painting, as photographed [14]. That describes our archive, not painting as a whole, and the photographs are of aged, varnished pictures. A saturated reddish purple is a rare thing in old paint, and Gossaert's cloak shows one reason: a painter's plum was usually a dark glaze, which a camera records as dark red or brown [8][14].\n\nIn printed English, the adjective use of *plum*, which is the color sense, peaks in the 1860s and rose fastest in the 1820s, and the word in all senses peaks in the 1890s [15]. The 1820s rise matches the years when Syme's color lists were in the hands of naturalists [3][15]. That timing may be coincidence, and the data cannot test it."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plum fruit (Prunus)",
+   "first_recorded": "as a color: Maerz and Paul 1930 cite 1805; as plum blue and plum purple in Werner, Jameson and Syme, 1814-1821",
+   "source": "Paterson, Dictionary of Colour; Baty, Nature's Palette"
+  },
+  "aka": [
+   "plum blue (Werner, Jameson)",
+   "plum purple (Syme)",
+   "reddish purple"
+  ],
+  "siblings": [
+   "plum-purple",
+   "eggplant",
+   "mauve"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "orchid",
+    "gloss": "the web's X11 Plum (#DDA0DD) is a pale pink-violet, close to Orchid and nothing like the fruit"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8E4585",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 1,
+  "role": "absent (no painting has it as at least 1% of the canvas)",
+  "measured": {
+   "lch": [
+    40.7,
+    45.7,
+    331.0
+   ],
+   "iscc": "strong reddish purple, block 224, dE 5.2",
+   "nearest_other_system": "xkcd Light Eggplant, dE 1.2"
+  },
+  "ngram": {
+   "adjective_peak": 1860,
+   "adjective_rise": 1820,
+   "all_senses_peak": 1890
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"plum\", p. 316",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 224, Maerz & Paul 1930, RAL 4008, X11/CSS and xkcd values, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 7-8 and 81-82",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 104 and 111-112 (Syme's no. 42, Plum Purple)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bloom\" p. 64 and \"glaucous\" p. 185",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 10 and ch. 33",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 234",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 220 (Eichhorn, 1827)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"livid\", p. 247",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Professor Plum\", p. 321",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes/p.json, CIEDE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram, adjective and all-senses series, 5-year smoothing (data/graph/fieldnotes/p.json)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Patrick Syme's color system, what natural example did he give for Plum Purple?",
+   "choices": [
+    "The skin of a plum",
+    "A plum leaf",
+    "A plum blossom",
+    "Plum wood"
+   ],
+   "answer": "The skin of a plum",
+   "kind": "pick"
+  },
+  {
+   "q": "Which colour did dyers of the first century CE get from black plum and plum leaves, according to Pastoureau?",
+   "choices": [
+    "Green",
+    "Purple",
+    "Yellow",
+    "Brown"
+   ],
+   "answer": "Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the web's X11 Plum (#DDA0DD) is the same deep color as the fruit.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look for the pale bloom on a plum's skin: Samuel Johnson called it the blue upon the fruit, and it is why a plum looks cooler than it is.",
+  "Naturalists called this color plum blue before Patrick Syme renamed it plum purple, in 1814.",
+  "The plum tree supplied Roman dyers with green, not purple."
+ ],
+ "words": 907,
+ "status": "checked",
+ "checked": {
+  "by": "batch-41 writer self-check (sentence-to-source trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "books say little about plum as a color; article is deliberately short",
+   "livid/sliva link is single-source and tentative (Paterson), hedged",
+   "web-color Plum #DDA0DD vs our #8E4585 explained in the name section",
+   "Syme's date for plum purple: Baty says Syme added the purple principal color; 1814 edition numbering vs 1821 number 42 both given as Syme's"
+  ]
+ }
+}

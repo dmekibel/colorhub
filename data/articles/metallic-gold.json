@@ -1,0 +1,147 @@
+{
+ "slug": "metallic-gold",
+ "name": "Metallic Gold",
+ "hex": "#D3AF37",
+ "names": [
+  "Metallic Gold"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Metallic Gold is a warm yellow, a flat screen stand-in for the look of the metal itself.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A swatch for a metal",
+   "body": "Metallic Gold in our library comes from a single source, a web list of color names, and is nearly identical to a second listing, *Gold (Metallic)*, 0.3 CIEDE2000 units away [1]. The ISCC-NBS system of 1955 would call its position a \"strong yellow\" (block 84), only 1.0 away, which shows how ordinary the swatch is as a yellow [1]. The same block carries older names, Chrome Yellow (first recorded in 1818) and Paris Yellow (about 1850) [1]. A real gold surface changes color with the light it reflects, which no single swatch can show [2].\n\nFor related shades see [[gold]] and [[old-gold]]; the nearest named neighbor of the learning set is [[mustard]], at 3.5 units [1]."
+  },
+  {
+   "id": "glass",
+   "title": "Gold that makes red",
+   "body": "Gold has a stranger color history than its swatch suggests. Medieval recipes describe making a red or purple from gold, a subject the *Pigment Compendium* treats under Purple of Cassius [3]. Tiny metallic gold droplets in glass give the ruby color, and the shade depends on the droplets' size, which in turn depends on how the glass is heated [4]. The glassmaker Kunckel made gold-ruby glass in 1689 following earlier recipes of Agricola (1556) and Neri (1612) [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a color near this one appears in 213 paintings, 0.9% of the total, as photographed [5]. In 82% of the 225 paintings where it is found it plays an accent, a small bright note and not a field [5]. It is most devoted to Luis Egidio Meléndez, in 9 of his 39 works here, and over-represented in paintings from India, 4.3 times the expected rate [5]. It often shares a canvas with [[mustard-brown]] [5]. Gold leaf and plain yellow paint cannot be told apart in a photograph, so the match is a screen color only [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the metal gold; the swatch is a modern screen approximation",
+   "first_recorded": "web color-name list (library source: wiki)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Gold (Metallic)"
+  ],
+  "siblings": [
+   "gold",
+   "old-gold"
+  ],
+  "parent": "gold",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "gold",
+    "gloss": "gold names the metal and its many shades; this is one yellow swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D3AF37",
+   "min_cover": 0.01
+  },
+  "n_present": 213,
+  "role": "accent in 82% of 225 paintings",
+  "measured": {
+   "lch": [
+    73,
+    63,
+    89
+   ],
+   "iscc": "strong yellow, block 84, dE 1.0",
+   "nearest": [
+    [
+     "Mustard",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json and data/graph nodes: ISCC-NBS 1955, Munsell conversion), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"metallic\" and \"gold\" entries",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, \"Gold red\", p. 184",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, entry on gold-ruby glass and Purple of Cassius, p. 325",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What gives gold-ruby glass its red color?",
+   "choices": [
+    "Tiny metallic gold droplets",
+    "Copper rust",
+    "Cinnabar",
+    "Iron filings"
+   ],
+   "answer": "Tiny metallic gold droplets",
+   "kind": "pick"
+  },
+  {
+   "q": "In paintings in our archive, Metallic Gold most often plays what role?",
+   "choices": [
+    "An accent",
+    "A shadow",
+    "A large background",
+    "A highlight"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Gold can make red: tiny droplets of the metal in glass give ruby color."
+ ],
+ "words": 306,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede 'slightly greenish' unsupported (hue 89 is yellow); gold-red recipes verified as mediaeval in Pigment Compendium p.184."
+  ]
+ }
+}

@@ -1,0 +1,108 @@
+{
+ "slug": "mantis",
+ "name": "Mantis",
+ "hex": "#74C365",
+ "names": [
+  "Mantis"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Mantis is a fresh, light leaf green; the books say nothing about it as a color, but they have a lot to say about the animals that share the name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A green with no history",
+   "body": "No color book in our set defines mantis as a color. Its name appears in our records through Wikipedia's list of colors, and the origin is undocumented [1]. The obvious reading is the praying mantis, a green insect, but that is a guess.\n\nWhat the books do discuss is the mantis shrimp, a different animal. St Clair writes that this crustacean carries 16 kinds of cone cell, twice as many as any other animal he knows of, so it may perceive colors we cannot name [2]. Coles lists mantis shrimp among animals that show biofluorescence, a glow under ultraviolet light that stops when the light does [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Mantis is almost absent from painting. One painting in our 23,781 reaches 5% coverage: *Portrait of Emperor Jahangir* (1795), where it covers about half the canvas, as photographed [4]. Its nearest standard name is Pistachio, 4.5 ΔE away [1]. Related names: [[pistachio]], [[lime-green]], [[lime]], [[green]] and [[mint-cream]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (probably the insect)",
+   "first_recorded": "not recorded",
+   "source": "ColorHub name records"
+  },
+  "aka": [],
+  "siblings": [
+   "pistachio",
+   "lime-green",
+   "green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+  "n_present": 1,
+  "nearest": "Pistachio",
+  "hex": "#74C365"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name records (library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, CSS, Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 126 (notes)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 173",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to St Clair, how many types of cone cells does the mantis shrimp have?",
+   "choices": [
+    "16",
+    "3",
+    "4",
+    "8"
+   ],
+   "answer": "16",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books in our set trace the color Mantis to a documented source.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The mantis shrimp has 16 types of cone cells, according to St Clair."
+ ],
+ "words": 183,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

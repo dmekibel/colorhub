@@ -1,0 +1,103 @@
+{
+ "slug": "bronze-green",
+ "name": "Bronze Green",
+ "hex": "#495746",
+ "names": [
+  "Bronze Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Bronze green is a dark grey-green, and in old paint catalogs it was the trade name of cheap mixed greens rather than of one pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A trade name",
+   "body": "The Pigment Compendium traces the name through several sources that do not agree [1]. Salter, in 1869, called bronze a species of Prussian green, a dull blue-black that looks greenish black with a coppery cast in deep washes [1]. Linke and Adam, in 1913, list it as a trade name for cinnabar green or chrome green [1].\n\nRose, in 1916, uses it for various cheap greens made with ochre, coal, Berlin blue or ultramarine, and for a blend of chrome yellow with a blue and black [1]. Heaton, in 1928, calls it a current synonym for a variety of [[brunswick-green]], and Winsor and Newton used it in 1938 as a watercolor name for a mixed chrome green [1]."
+  },
+  {
+   "id": "recipe",
+   "title": "A recipe, and industrial paint",
+   "body": "Mierzinski, in 1881, gives a recipe: 100 parts of chrome yellow, 100 of zinc white, 6 of Berlin blue and 6 of black [1]. Rivington, in 1901, lists bronze-green as one of three colors, with chocolate and black, of an enamel paint for industrial surfaces [1]. So the color was as much a workshop and railing color as an artist's one.\n\nThe swatch is a dark, muted green close to [[bronze]], [[moss-green]] and [[olive]], and far greener than the blue of [[prussian-blue]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds it in 758 of 23,781 paintings, 3.19 percent, as photographed [2]. Inside a painting it most often plays a hidden color, in 40 percent of the 431 paintings where the within-painting lens finds it [2]. It peaks in the 1900s, in 77 of 1,674 paintings, about 2.4 times the baseline [2]. The most devoted painter is Harald Giersing, in 6 of 23 works here [2]. Photographs of aged, varnished paintings cannot tell a pigment from a dark green mixture [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "trade name; no single origin",
+   "first_recorded": "undocumented in our sources",
+   "source": "Pigment Compendium, \"Bronze green\""
+  },
+  "aka": [
+   "bronze (green)"
+  ],
+  "siblings": [
+   "brunswick-green",
+   "bronze"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 758,
+  "pct": 3.19,
+  "peak_century": 1900,
+  "painter": "Harald Giersing"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Bronze green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, field notes for Bronze Green",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In old catalogs, bronze green usually meant...",
+   "choices": [
+    "Cheap mixed greens",
+    "A single mineral",
+    "A copper ore"
+   ],
+   "answer": "Cheap mixed greens",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Heaton (1928), bronze green was a synonym for a variety of which green?",
+   "choices": [
+    "Brunswick green",
+    "Emerald green",
+    "Sap green"
+   ],
+   "answer": "Brunswick green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bronze green was a trade name for cheap mixed greens, not one pigment."
+ ],
+ "words": 303,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against sources; no changes"
+  ]
+ }
+}

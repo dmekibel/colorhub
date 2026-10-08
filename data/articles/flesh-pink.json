@@ -1,0 +1,114 @@
+{
+ "slug": "flesh-pink",
+ "name": "Flesh Pink",
+ "hex": "#F0C2B8",
+ "names": [
+  "Flesh Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Flesh Pink is a pale pinkish beige, a name from the old habit of describing colors by skin.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From skin to stockings",
+   "body": "Paterson traces flesh-colour to the 1920s, when pink silk stockings were given the name; hence flesh-tint and flesh-toned, which describes pinkish shades like the human complexion [1]. Flesh-red, a related term, is used for minerals and crystals [1].\n\nGage reproduces a Renaissance list of pleasing color combinations that includes green with red or flesh-pink [2]. He also notes the composer Scriabin gave some musical keys a flesh-pink with a glint of steel in his colored-light scheme [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "#F0C2B8 sits near [[peach]] and [[salmon]] in the screen data [9]. Paterson's dictionary also lists plain flesh as a moderate pink, which fits a pale, warm swatch like this one [1]. These are as-seen screen colors, not skin measurements [1]. The concordance of 29 color books finds only four strong mentions of this name, so the article stays short rather than pad the record [9]. Screen colors are approximate, and the swatch is a reference value, not a measured pigment [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "not dated in the books",
+   "source": "Paterson, A Dictionary of Colour, p. 173"
+  },
+  "aka": [
+   "flesh tint"
+  ],
+  "siblings": [
+   "peach",
+   "salmon",
+   "pink",
+   "rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names, concordance of 29 color books",
+  "hex": "#F0C2B8",
+  "book_mentions": 4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 173",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 124",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 247",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub name data and the color-book concordance (4 strong mentions)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "When did Paterson say pink silk stockings gave flesh-colour its name?",
+   "choices": [
+    "The 1920s",
+    "The 1720s",
+    "The 1850s",
+    "The 1990s"
+   ],
+   "answer": "The 1920s",
+   "kind": "pick"
+  },
+  {
+   "q": "Who gave some musical keys a flesh-pink with a glint of steel?",
+   "choices": [
+    "Scriabin",
+    "Mozart",
+    "Liszt",
+    "Satie"
+   ],
+   "answer": "Scriabin",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Flesh-colour was once the name given to pink stockings."
+ ],
+ "words": 167,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede: removed unsourced 'skin tones of European painting' claim; removed unsourced usage claim; Gage period corrected to Renaissance"
+  ]
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "slug": "genoa-blue",
+ "name": "Genoa Blue",
+ "hex": "#487981",
+ "names": [
+  "Genoa Blue"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Genoa Blue is a muted greenish blue in Maerz and Paul's 1930 dictionary; the name points to Genoa, the port whose cloth gave the world the word jeans.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Genoa, cloth and dye",
+   "body": "Pastoureau traces the word *jean* to the Italo-English *genoese*, meaning from Genoa [1]. Cloths of the Genoa family, first wool and linen and later linen and cotton, were used from the sixteenth century for boat sails and sailors' trousers [1]. Levi Strauss's trousers were called jeans by the years 1853 to 1855, and when denim replaced the canvas about ten years later the name stayed [1].\n\nSt Clair offers a different route: the word is believed to come from *bleu de Gênes*, or Genoa blue, which she describes as a cheap indigo dye favored for sailors' uniforms [2]. Books disagree on emphasis: Pastoureau gives a cloth, St Clair a dye, and only St Clair uses the color name [1][2]."
+  },
+  {
+   "id": "swatch",
+   "title": "Swatch and cloth",
+   "body": "The swatch here comes from Maerz and Paul's dictionary of 1930, as cited by the ISCC-NBS in 1955 [3]. It is a greenish blue, nearest to moderate greenish blue by 4.6 units of ΔE2000, and lighter and greener than dark work cloth such as [[denim]] [3]. See also [[indigo]] and [[teal]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This tone appears in 66 paintings in our archive, 0.28 per cent, as photographed [4]. Paul Cézanne has it in 5 of 50 paintings [4]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the port of Genoa",
+   "first_recorded": "1930 (Maerz and Paul) as a swatch; bleu de Gênes as a dye per St Clair, undated",
+   "source": "St Clair; Pastoureau; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "denim",
+   "indigo",
+   "teal",
+   "indigo-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bleu de Gênes"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
+  "n_present": 66,
+  "pct": 0.28,
+  "top_painter": {
+   "name": "Paul Cezanne",
+   "hits": 5,
+   "of": 50
+  },
+  "measured": {
+   "nearest": [
+    [
+     "moderate greenish blue",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, section on denim and jeans",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Indigo\", note 15",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): name sources and dates (Maerz and Paul 1930)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the word jean come from, per Pastoureau?",
+   "choices": [
+    "Genoa",
+    "Paris",
+    "Jeanne",
+    "Java"
+   ],
+   "answer": "Genoa",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Levi Strauss's first trousers were made of denim.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does this swatch look unlike indigo work cloth?",
+   "choices": [
+    "It is a lighter, greener dictionary swatch",
+    "It is the same dye",
+    "It is fluorescent",
+    "It is black"
+   ],
+   "answer": "It is a lighter, greener dictionary swatch",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pastoureau traces the word jean to Genoa's cloth, while St Clair says it is believed to come from a Genoa blue dye."
+ ],
+ "words": 232,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded sail-cloth sentence closer to own prose.",
+   "Opener stated the cloth origin as settled; now shows both books, matching the disagreement in the body."
+  ]
+ }
+}

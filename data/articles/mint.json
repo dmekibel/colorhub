@@ -1,0 +1,158 @@
+{
+ "slug": "mint",
+ "name": "Mint",
+ "hex": "#A8EBC4",
+ "names": [
+  "Mint"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Mint is the pale, cool green of the herb's leaves, a pastel that has come to mean freshness and cleanliness.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The leaf and the pastel",
+   "body": "Paterson defines mint-green as the green of the leaves of the aromatic plant, a pastel green [1]. The X11 set has MintCream, a near-white with a green breath, with the hex code #F5FFFA [2]. See [[mint-cream]] for that one. The same dictionary calls Kelly green a strong mint green, which shows how far the word stretches [3].\n\nMint was among the leading plants in the medieval pharmacopoeia, according to Pastoureau, so the plant was long tied to medicine before it named a color [4]."
+  },
+  {
+   "id": "fresh",
+   "title": "Why mint reads as clean",
+   "body": "Pastoureau argues that green now cleans, refreshes and purifies, in the image of mint and menthol products, and links this to hygiene, health and sport [5]. Batchelor, describing American suburbs, lists frosted mint among the house colors, beside petal pink, buttercup and lilac [6]. A grower of naturally colored cotton, in Finlay's account, found a boll of aqua green that mixed sea turquoise with moss and mint [7].\n\nOn a screen, mint sits between [[pastel-green]] and [[light-green]], and is bluer and softer than [[green]] [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The name is recorded in Maerz and Paul (1930), the ISCC-NBS system (1955) and the xkcd survey (2010) [8]. Our archive holds 1 painting that matches, dated 1825, as photographed, so mint is almost absent from painting [9]. The printed word peaks in the 1810s, but that counts every sense, including the herb and the coin-making place, so it is a weak guide to the color [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mint herb",
+   "first_recorded": "Maerz and Paul, 1930 (earliest in our sources)",
+   "source": "Paterson; ColorHub name records"
+  },
+  "aka": [
+   "mint green"
+  ],
+  "siblings": [
+   "mint-cream",
+   "pastel-green"
+  ],
+  "parent": "green",
+  "children": [
+   "mint-cream"
+  ],
+  "disambiguation": [
+   {
+    "slug": "mint-cream",
+    "gloss": "Near-white X11 color, not a pastel green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 1,
+  "first_dated": 1825,
+  "ngram": {
+   "peak": "1810s all senses"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mint-green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"MintCream\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Kelly green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green, p. 15",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Green, p. 45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 1",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 148",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub color library and name records (data/library.json, data/graph)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes); Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say mint-green is?",
+   "choices": [
+    "The pastel green of mint leaves",
+    "A dark forest green",
+    "A grey-blue",
+    "A yellow-green"
+   ],
+   "answer": "The pastel green of mint leaves",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: mint appears often in the paintings of our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mint is almost missing from painting: one painting in our archive matches it."
+ ],
+ "words": 248,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

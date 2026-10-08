@@ -1,0 +1,131 @@
+{
+ "slug": "nasty-green",
+ "name": "Nasty Green",
+ "hex": "#70B23F",
+ "names": [
+  "Nasty Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Nasty Green is a hard, slightly acid yellow-green, named by an online color survey with a word of dislike, and a reminder that painters were once scolded for the same color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A verdict as a name",
+   "body": "The library records Nasty Green only from a 2010 crowd-sourced survey, and the nearest ISCC-NBS category is strong yellow green, about 8.3 units away [1]. Its nearest named relatives are [[grass]], [[kelly-green]] and [[apple-green]] [2].\n\nThe word has one earlier echo in the books. Ball reports that a Royal Academy member is said to have called one of Constable's landscapes a \"nasty green thing\", because Constable kept his greens fresher than the dark conventions of the day allowed [3]. Ball tells it as a reported remark, and nothing connects it to this swatch [3][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Nasty Green appears in 3 of the 23,781 paintings in our archive, about 0.01%, as photographed, which is rarer than 79% of the named colors [5]. That describes this archive, not painting as a whole, and these are photographs of varnished paintings, so a match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive name",
+   "first_recorded": "2010 (xkcd color survey)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "grass",
+   "kelly-green",
+   "apple-green",
+   "leaf-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 3,
+  "pct": 0.01,
+  "peak_period": "none",
+  "measured": {
+   "lch": [
+    66.2,
+    64.9,
+    128.8
+   ],
+   "nearest": [
+    [
+     "Kelly Green",
+     5.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): xkcd 2010 survey; ISCC-NBS strong yellow green",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14 (\"Bright Earth\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Concordance search of ../color-kb/concordance/by-color/nasty-green.jsonl",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Whose landscape was a Royal Academy member said to call a nasty green thing?",
+   "choices": [
+    "Constable's",
+    "Vermeer's",
+    "Poussin's",
+    "Turner's"
+   ],
+   "answer": "Constable's",
+   "kind": "pick"
+  },
+  {
+   "q": "How many paintings in our archive match Nasty Green?",
+   "choices": [
+    "3",
+    "300",
+    "3,000",
+    "None"
+   ],
+   "answer": "3",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A fresh green that a Royal Academician is said to have scorned in Constable's work."
+ ],
+ "words": 175,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "slug": "puke",
+ "name": "Puke",
+ "hex": "#A5A502",
+ "names": [
+  "Puke"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Puke is an old English name for a dark, woolen-cloth color, not the olive yellow its modern swatch suggests.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark wool",
+   "body": "Paterson gives puke as a blackish color once used in relation to wool [1]. St Clair, in her glossary of color names, calls it dark brown and says it was named after a woolen fabric [2]. Books disagree on whether it was black or brown, though both place it at the dark end and both tie it to cloth [1][2]. Paterson lists it among the blacks in its index [1].\n\nNeither book says when the word began or where the fabric came from, so its origin is undocumented here [1][2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The library value is a vivid olive yellow, nothing like the dark color the two books describe [3]. The modern slang sense of the word explains the swatch, not the history, and no book here discusses it [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Seven paintings of 23,781 in our archive carry a close match covering at least 5% of the canvas [4]. The strongest is a Basohli folio of about 1760, at roughly 60% of the page [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a woolen fabric (St Clair); origin otherwise undocumented",
+   "first_recorded": "not recorded in our sources",
+   "source": "St Clair, The Secret Lives of Colour, glossary"
+  },
+  "aka": [],
+  "siblings": [
+   "puce",
+   "russet",
+   "brown",
+   "drab"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "puce",
+    "gloss": "a different old dark color, from the Latin word for flea"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A5A502",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 7,
+  "top_paintings": [
+   "cma-146203"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 323, 489",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), screen approximation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub painting archive, CIEDE2000 match within 6, at least 5% of the canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do Paterson and St Clair agree puke was tied to?",
+   "choices": [
+    "Woolen cloth",
+    "A mineral",
+    "A flower"
+   ],
+   "answer": "Woolen cloth",
+   "kind": "pick"
+  },
+  {
+   "q": "The modern swatch for puke is a dark brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Puke was once a dark color tied to woolen cloth."
+ ],
+ "words": 174,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Books disagree: blackish vs dark brown"
+  ]
+ }
+}

@@ -1,0 +1,246 @@
+{
+ "slug": "bronze",
+ "name": "Bronze",
+ "hex": "#756033",
+ "names": [
+  "Bronze"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Bronze is the brown of the metal alloy of copper and tin: darker and duller than gold, and the name of an age.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A metal's name, a brown's swatch",
+   "body": "*Bronze* names an alloy of copper first, and a color second. Paterson's dictionary defines the color as the brilliant brown of the metal, and traces the word to Brindisi, the Italian town [1]. Clair's list of color names gives a plainer gloss: the color of the metal, darker and duller than gold [2].\n\nThe swatch on this page is not shiny. #756033 is a dark olive-brown, filed by the ISCC-NBS names of 1955 as a moderate yellowish brown, and it traces back to Ridgway's atlas of 1912 and the Maerz and Paul dictionary of 1930 [6]. A screen cannot show the gleam that makes metal read as metal. What remains is the flat brown a bronze has when the highlights are taken away.\n\nThat gap between a metal and its flat swatch matters for the name's use in fashion too. In the 1880s Clair notes \"art bronze\" among the combinations offered with heliotrope, alongside canary yellow, eucalyptus green and peacock blue [3]. The word then meant a dull, antique finish, much like the \"antique bronze\" Paterson defines: a color imitating very old objects [1]."
+  },
+  {
+   "id": "material",
+   "title": "From alloy to paint",
+   "body": "Bronze reached the painter's shop as a metal powder. The Pigment Compendium records that metallic bronze of a grey color was found on three paintings by Perugino, with an alloy of tin to copper in the ratio 1:2, which appears grey when ground dry [14]. The same entry notes brass powders as metallic pigments on Japanese artifacts [14].\n\n\"Bronzing\" became a trade term: in Paterson's definition it is a pigment added in manufacturing paint to give a metallic lustre, and also also the process of dusting or leafing a surface with imitation gold [1]. The word then spread to other metals: the Compendium observes that \"aluminium bronze powder\" took its name by association with powders made from copper alloys, even though aluminium powder was probably available only from the mid-nineteenth century [15].\n\nThere was also a paint called bronze green, and the books disagree about what it was. Salter in 1869 described it as a kind of Prussian green, a dull blue-black that looks like greenish-black with a coppery cast in deep washes [16]. Linke and Adam in 1913 treat it as a trade name for cinnabar green or chrome green, and Heaton in 1928 as a variety of Brunswick green [16]. Winsor and Newton's 1938 water-color of the name was a mixed chrome green [16]. The name stayed the same while the recipe changed; the modern color is [[bronze-green]].\n\nA sheen can be called bronze without any metal in it. Coles notes that Prussian blue, as a concentrated pigment, has a bronze sheen [4]. That sheen belongs to the surface of the dense pigment, not to its hue [4]."
+  },
+  {
+   "id": "age",
+   "title": "The Bronze Age and its colors",
+   "body": "The metal gave a whole era its name, and color was entangled with it. Ball suggests that a love of color ushered in the Bronze Age: the kilns built to fire blue-glazed faience may have led the way to copper smelting [5]. He presents this as a plausible inference, not a documented chain of events. What is firmer is that [[egyptian-blue]], which he calls the oldest synthetic pigment, is a Bronze Age blue [5].\n\nGage notes that blues of this kind appear in the Bronze Age wall paintings of Thera, Knossos and Mycenae [7]. A passage from the *Odyssey* that Gage quotes pictures a palace whose walls are bronze, topped with blue enamel tiles [7]. In the ancient imagination, the metal and the blue went together.\n\nBronze does not stay brown. Paterson notes that bronze sculpture left to the weather oxidizes, develops a patina of verdigris and turns green [1]. Pastoureau shows a Roman imperial bronze coin whose green patina comes from the same oxidation [8]. The green of an old statue is time's work, not the founder's.\n\nA myth lives in this neighborhood. In the nineteenth century Gladstone argued that Greek poetry's color words, which describe the sea as bronze-colored rather than blue or green, showed that the Greeks could hardly see blue [9]. That is a myth. Pastoureau reports the argument and sets it aside: what the poems show is how the Greeks used color words, not what their eyes could do [9]."
+  },
+  {
+   "id": "culture",
+   "title": "Gold's duller cousin",
+   "body": "For centuries bronze has stood in for gold where gold was too costly or too showy. Pastoureau describes a period in which yellow lost its prestige, and in the furnishings of wealthy homes burnished bronzes replaced the gold and gilding of earlier times [10]. Bronze offered the warmth of a metal with less of its claim to rank.\n\nPearls come in bronze as well. Finlay lists bronze among the colors of pearls, between apricot and pink [11]. In a quite different meaning, to *bronze* is to tan, a verb Paterson defines for skin that is browned by the sun or by cosmetics [1]. Pastoureau notes that the fashion for a bronzed tan flipped: it became vulgar once everyone could have it, and fear of cancer finished the job [12]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Bronze is among the most common named colors in our painting archive. It appears in 4,535 of 23,781 paintings, 19.07 per cent, which is more common than 96 per cent of the named colors; the within-painting lens finds it in 2,407 [13]. Inside a painting it most often plays a light, in 35 per cent of those 2,407 [13].\n\nIt peaks in the 1600s: it is found in 706 of the 6,394 paintings we have from that century, 11.0 per cent, or 1.1 times the rate of the same museums' baseline [13]. The most devoted painter is Fritz Thomsen, in 8 of his 18 works here, 4.8 times the baseline; Salomon van Ruysdael, Paulus Potter, George Catlin and Juan Carreño de Miranda follow [13]. These are the browns of dark, varnished landscapes and animal pictures, not of metal.\n\nThe first dated match is a painting from the year 799, but the archive's early centuries are thin, so this is a floor and not a first [13]. The name's earliest record in our sources is 1912, so the match is a look-alike brown in an aged photograph, not proof of the pigment or dye [13]. In printed English the color word peaks in the 1930s, and rose fastest in the 1920s (Google Books, adjective use only) [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the alloy bronze; Paterson traces the word to Brindisi",
+   "first_recorded": "Ridgway 1912 in our library",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "metallic brown",
+   "antique bronze"
+  ],
+  "siblings": [
+   "antique-bronze",
+   "copper",
+   "gold"
+  ],
+  "parent": "brown",
+  "children": [
+   "bronze-green"
+  ],
+  "disambiguation": [
+   {
+    "slug": "bronze-green",
+    "gloss": "a green pigment name whose recipe changed across the 1800s and 1900s"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4535,
+  "pct": 19.07,
+  "n_within": 2407,
+  "commoner_than_pct": 96,
+  "peak_century": 1600,
+  "peak_pct": 11.0,
+  "role": "light",
+  "devoted_painter": "Fritz Thomsen",
+  "measured": {
+   "hex": "#756033",
+   "iscc": "moderate yellowish brown",
+   "iscc_de": 6.2
+  },
+  "ngram": {
+   "peak": 1930,
+   "rise": 1920
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bronze\", \"bronzing\", \"antique bronze\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Clair, The Secret Lives of Colour, list of color names",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Clair, The Secret Lives of Colour, ch. \"Heliotrope\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Prussian blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, on Bronze Age wall paintings and the Odyssey",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 33",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Le petit livre des couleurs, ch. 7",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed) and Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Metal pigments\" and \"Bronze\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Aluminium bronze powder\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Bronze green\"",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does a bronze statue left outdoors turn green?",
+   "choices": [
+    "Oxidation forms a verdigris patina",
+    "The tin washes out in rain",
+    "Paint fades from it",
+    "Sunlight bleaches it"
+   ],
+   "answer": "Oxidation forms a verdigris patina",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Gladstone's argument that the Greeks could not see blue is a myth.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "What does the swatch #756033 look like once the metal's gleam is removed?",
+   "choices": [
+    "A dark olive-brown",
+    "A bright gold",
+    "A grey-blue",
+    "A pale cream"
+   ],
+   "answer": "A dark olive-brown",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In bronze green, the name stayed the same while the recipe changed three times in a hundred years.",
+  "A screen cannot show the gleam of bronze; the swatch is just the flat brown beneath it."
+ ],
+ "checked": {
+  "by": "batch-21 writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Books say little about bronze as a pure color; sources are entries and passing mentions. Honest medium article.",
+   "Gladstone/Greek-blue myth corrected, not asserted. Ball's copper smelting link hedged as inference."
+  ]
+ },
+ "status": "checked",
+ "words": 1046
+}

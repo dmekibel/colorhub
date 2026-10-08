@@ -1,0 +1,117 @@
+{
+ "slug": "pale-violet-red",
+ "name": "Pale Violet Red",
+ "hex": "#DB7093",
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Violet Red is a mid pink-red named in the X11 and CSS color lists, where it is written as one word, `palevioletred`.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A list name",
+   "body": "Paterson's dictionary files PaleVioletRed as one of the colors in the X11 Color Set and gives its hex code as #DB7093 [1]. The same book lists it among the reds, with the asterisk it uses for X11 names [2]. It is a computer-era name, written in the CSS style without spaces or hyphens [1].\n\nThe books say nothing more about it: no dye, flower or maker is tied to this name [1][2]. The words in it are ordinary color words, though. Our library puts the swatch closest to a deep purplish pink in the ISCC-NBS naming of 1955 [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is #DB7093, a medium-light pink-red with a hint of blue [3]. In our archive of 23,781 paintings, only one has this color covering at least 5% of the canvas: Kirchner's *Two Girls under an Umbrella*, painted in 1910 [4]. That makes it rarer than 86% of named colors, as photographed [4]. A single painting is a thin base, so read it as a note about the archive, not about painters [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plain words pale, violet and red",
+   "first_recorded": "X11/CSS color list",
+   "source": "Paterson, p. 295"
+  },
+  "aka": [
+   "palevioletred (CSS)"
+  ],
+  "siblings": [
+   "rose-pink",
+   "cerise",
+   "thistle",
+   "carmine"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#DB7093",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "iscc_nbs": "deep purplish pink"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"PaleVioletRed\", p. 295",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, the reds list, pp. 473 and 499",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color list is Pale Violet Red named in?",
+   "choices": [
+    "X11 / CSS",
+    "RAL",
+    "Pantone",
+    "Munsell"
+   ],
+   "answer": "X11 / CSS",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books tie Pale Violet Red to a particular dye.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Violet Red is a computer-list name, not a dye: the books say only that it belongs to the X11 set."
+ ],
+ "names": [
+  "Pale Violet Red"
+ ],
+ "status": "checked",
+ "words": 187,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against fact card and book text; no changes."
+  ]
+ }
+}

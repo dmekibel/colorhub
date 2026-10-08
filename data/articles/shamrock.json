@@ -1,0 +1,105 @@
+{
+ "slug": "shamrock",
+ "name": "Shamrock",
+ "hex": "#01B44C",
+ "names": [
+  "Shamrock"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Shamrock is the bright green of Ireland's clover-like emblem, and the story of how green replaced blue as the Irish color is more tangled than it looks.",
+ "sections": [
+  {
+   "id": "patrick",
+   "title": "Before green, a blue",
+   "body": "St Clair tells the tale this way: St Patrick, a Briton captured and brought to Ireland as a slave, escaped, returned as a missionary and is most famously said to have used a shamrock to explain the Trinity [1]. By the seventh century he was celebrated as a saint, having died late in the fifth [1]. Yet until the middle of the eighteenth century the color most associated with him was a shade of blue [1].\n\nThe shift from St Patrick's blue to green was convoluted [1]. St Clair says Irish Catholics, reacting to the hostility they saw in William of Orange and his orange-wearing Protestant supporters, wanted a symbolic color of their own [1]. The shamrock had by then become central to Irish Catholic identity, and green had become associated with revolution after Camille Desmoulins stuck a linden leaf in his hat on 12 July 1789 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is a vivid screen green, much more saturated than a real clover leaf [2]. In our archive of 23,781 paintings, no work holds a color within six units of it across five per cent of the canvas [2]. Paintings do not use this green at that scale, so it is not a museum-canvas color [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the shamrock plant, an Irish clover (seamróg)",
+   "first_recorded": "origin undocumented in the sources",
+   "source": "St Clair, The Secret Lives of Colour, ch. 98"
+  },
+  "aka": [
+   "Irish green"
+  ],
+  "siblings": [
+   "green",
+   "kelly-green",
+   "emerald-green",
+   "lime-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#01B44C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 98",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color was most associated with St Patrick until the mid-eighteenth century?",
+   "choices": [
+    "Blue",
+    "Green",
+    "Orange",
+    "White"
+   ],
+   "answer": "Blue",
+   "kind": "pick"
+  },
+  {
+   "q": "What did Camille Desmoulins put in his hat in July 1789?",
+   "choices": [
+    "A linden leaf",
+    "A shamrock",
+    "An orange",
+    "A blue ribbon"
+   ],
+   "answer": "A linden leaf",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Until the mid-eighteenth century, the color linked to St Patrick was blue, not green."
+ ],
+ "words": 224,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded St Clair passage (copied phrasing)",
+   "Removed unsupported \"flags and print\" claim"
+  ]
+ }
+}

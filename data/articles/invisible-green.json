@@ -1,0 +1,114 @@
+{
+ "slug": "invisible-green",
+ "name": "Invisible Green",
+ "hex": "#39615C",
+ "names": [
+  "Invisible Green"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Invisible green is a very dark green, named for how close it sits to black.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A green you nearly cannot see",
+   "body": "Paterson defines invisible green as a very dark green, called that because it verges on black [1].\n\nPaterson's index files it among the greens, near names like [[ivy-green]] and [[malachite-green]] [2]. It also appears as one entry in a chart of named paint shades that Baty reproduces, alongside names such as Cassel Earth and Mars Black [3]. In that company it sits among the near-blacks [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here, #39615C, is a deep teal-leaning green that is lighter than the dictionary description suggests [4]. Treat it as one screen reading of the name; the books give no hex, and the dictionary's own wording points to something darker still [1][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The books say little more. We found no usable archive measurements for this name, so there are no painting statistics to quote [4]. Compare it with [[black-green]] and [[dark-green]], which sit in the same neighborhood [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented beyond the description of a green verging on black",
+   "first_recorded": "listed in Paterson's dictionary (2003)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "near-black green"
+  ],
+  "siblings": [
+   "black-green",
+   "bottle-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name library; no archive field notes for this name",
+  "swatch": "#39615C",
+  "books": 2
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 221, \"invisible green\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 498 (index of greens)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 267",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/names.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is invisible green called that?",
+   "choices": [
+    "It nearly looks black",
+    "It glows in the dark",
+    "It blends into grass",
+    "It is transparent"
+   ],
+   "answer": "It nearly looks black",
+   "kind": "pick"
+  },
+  {
+   "q": "Paterson classes invisible green among the greens.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Invisible green is named for how close it sits to black."
+ ],
+ "words": 156,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claims (old 'black-green' idea, 'only shows against a lighter ground', 'long place in the vocabulary', bottle-green index neighbor); hedged Baty chart reading"
+  ]
+ }
+}

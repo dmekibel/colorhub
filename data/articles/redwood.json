@@ -1,0 +1,115 @@
+{
+ "slug": "redwood",
+ "name": "Redwood",
+ "hex": "#A45A52",
+ "names": [
+  "Redwood"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Redwood is a muted brownish red in the ISCC-NBS dictionary; it is also the name of a dyewood family, and the books tie the word to the dye more than to the tree.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two meanings",
+   "body": "As a swatch, Redwood is the ISCC-NBS 1955 dictionary name for a grayish red, and Maerz and Paul had recorded it in 1917 [2]. It sits close to [[red]], with a brown cast like [[brown]] and [[rust]] [2]. Separately, redwood is a dye term: a conservation paper of 1986, cited in the Pigment Compendium bibliography, covers tests for quinone, lichen and redwood dyestuffs [1]."
+  },
+  {
+   "id": "dyes",
+   "title": "What the dye name tells us",
+   "body": "That citation shows only that conservators treat redwood dyes as a recognised group [1]. Our books do not say which woods are meant, so this article does not claim more [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Redwood is a fairly common muted red in painting: it appears in 1.09% of the archive (259 paintings), more common than 67% of the named colors, as photographed [3]. It peaks in the 1400s at 2.3 times the expected rate, and most often plays an accent [3]. It is notably over-represented in Indian paintings, at 2.5 times [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in our sources (a tree and a dye group share the word)",
+   "first_recorded": "Maerz & Paul, first recorded 1917",
+   "source": "ColorHub library; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "rust",
+   "sienna"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 259,
+  "measured": {
+   "lch": [
+    46.7,
+    34.5,
+    31.5
+   ],
+   "iscc": "grayish red"
+  },
+  "first_record": {
+   "year": 1917,
+   "source": "Maerz & Paul"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, bibliography, p. 509 (Wallert 1986)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, Redwood: ISCC-NBS 1955 block 15; Maerz & Paul 1917",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Redwood",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which decade does Redwood peak in the painting archive?",
+   "choices": [
+    "The 1400s",
+    "The 1800s",
+    "The 1900s",
+    "The 1100s"
+   ],
+   "answer": "The 1400s",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: redwood is only a tree name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Redwood is both a swatch name and a dye term in conservation science."
+ ],
+ "words": 181,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

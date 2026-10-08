@@ -1,0 +1,113 @@
+{
+ "slug": "khaki-brown",
+ "name": "Khaki Brown",
+ "hex": "#7D7103",
+ "names": [
+  "Khaki Brown"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Khaki Brown is a dark olive-brown, named from the dust-colored cloth of army uniforms.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Dust-colored cloth",
+   "body": "Khaki is a Hindi word meaning dust-colored, and Paterson says it was the term for the fabric of British army field uniforms [1]. During the First World War the British dye industry, then small, scrambled to supply it: one firm, Read Holliday, sold both a khaki yellow and a khaki brown [2]. Garfield's source says the shortage was so great that dyers could earn more selling dye than using it [2].\n\nThe swatch here is from the xkcd color survey of 2010, and ISCC-NBS would call it light olive [3]. It sits near [[khaki]], [[olive]] and [[drab]] [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Khaki Brown is uncommon in paintings: 89 of 23,781, 0.4 per cent [4]. It is mostly an accent and peaks in the 1900s, at 1.6 times the expected rate [4]. Its first match in the archive is a painting of 1505, 505 years before the swatch's record: a look-alike hue in an aged photograph [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "khaki, Hindi for dust-colored",
+   "first_recorded": "WWI-era dyes (Garfield); 2010 (xkcd swatch)",
+   "source": "Paterson; Garfield; data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "khaki",
+   "olive",
+   "drab"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "hi",
+    "name": "khaki (dust-colored)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/k.json",
+  "n_present": 89,
+  "pct": 0.37,
+  "peak": "1900s, 1.6x expected"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"khaki\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 21 (\"Self-destruction\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): xkcd 2010; ISCC-NBS block 106; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/k.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does khaki mean in Hindi?",
+   "choices": [
+    "Dust-colored",
+    "Sand-colored",
+    "Grass-colored",
+    "Earth-colored"
+   ],
+   "answer": "Dust-colored",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a British firm sold khaki brown dye during the First World War.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Khaki means dust-colored in Hindi, and WWI dyers sold both khaki yellow and khaki brown."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "status": "checked",
+ "words": 162
+}

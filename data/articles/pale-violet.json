@@ -1,0 +1,112 @@
+{
+ "slug": "pale-violet",
+ "name": "Pale Violet",
+ "hex": "#CEAEFA",
+ "names": [
+  "Pale Violet"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Violet is a light, clear violet, a descriptive phrase that old books apply to flowers and dyes and that our painting archive does not find at all.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Pale violet is [[violet]] lightened, and as a phrase it is older than any one swatch. Paterson uses it to define anemone, which he calls a pale violet, and Persian blue, which he calls a strong blue and a pale violet in the same line [1]. Even the dictionary treats the phrase loosely [1].\n\nFinlay uses it for the edge of the spectrum: Newton could have added a seventh color by splitting pale violet from deep purple, he notes, and chose indigo instead [2]. The library's swatch is ISCC-NBS block 199, a \"very light violet\", and also appears in the xkcd survey [3]. It is related to [[lavender]], [[lilac]], [[lavender-blue]] and [[anemone]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this color covering at least one per cent of its canvas, as photographed [4]. That describes our archive, not painting as a whole [4]. A light violet this clear is a color of screens and flowers more than of oil paint [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier phrase: pale + violet",
+   "first_recorded": "ISCC-NBS, 1955 (as a color term in our library)",
+   "source": "Paterson, pp. 19, 305"
+  },
+  "aka": [],
+  "siblings": [
+   "lavender",
+   "lilac",
+   "lavender-blue"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "pale-violet-red",
+    "gloss": "the X11 web color PaleVioletRed, a pink-red, not a violet"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "iscc_nbs": "block 199, very light violet",
+  "xkcd": 2010
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 19, 305, \"anemone\", \"Persian blue\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 18 (\"Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which flower does Paterson define as a pale violet?",
+   "choices": [
+    "Anemone",
+    "Sunflower",
+    "Marigold"
+   ],
+   "answer": "Anemone",
+   "kind": "pick"
+  },
+  {
+   "q": "Our painting archive contains a painting where pale violet covers at least 1% of the canvas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "No painting in our archive of 23,781 holds Pale Violet at 1 per cent or more of its canvas."
+ ],
+ "words": 185,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

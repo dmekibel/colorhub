@@ -1,0 +1,113 @@
+{
+ "slug": "medium-orchid",
+ "name": "Medium Orchid",
+ "hex": "#BA55D3",
+ "names": [
+  "Medium Orchid"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Medium Orchid is a bright, blue-leaning violet-pink, one of the named colors of the web.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color",
+   "body": "Paterson lists MediumOrchid as one of the colours in the X11 Color Set, with the hex code #BA55D3 [1]. In his colour index it is filed among the violets, next to DarkOrchid, DarkViolet and MediumVioletRed [2]. The flower gave the family its name, but the value is a screen color, not a petal measurement.\n\nIt is one of a run of \"Medium\" names in the set, and in painting the word medium means something else: the liquid or binder that carries pigment [1][3]. The two senses share a spelling and nothing else.\n\nThe set also contains DarkOrchid, which sits in the same index run of violets, so a reader choosing between them is choosing a shade on a screen [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a strongly chromatic purple, with a chroma of 76 [4]. Our records list its sources as the CSS color set and Wikipedia [4]. Its nearest standard name is [[amethyst]], 6.9 ΔE away [4]. Related names: [[orchid]], [[dark-orchid]], [[violet]] and [[medium-purple]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name, X11 color set",
+   "first_recorded": "CSS / X11 (Paterson)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "MediumOrchid"
+  ],
+  "siblings": [
+   "orchid",
+   "medium-purple"
+  ],
+  "parent": "orchid",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub name records",
+  "hex_css": "#BA55D3",
+  "lch": [
+   54,
+   76,
+   321
+  ],
+  "nearest": "Amethyst"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"MediumOrchid\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, violets index, p. 509",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"medium\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub name records (library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, CSS, Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What hex code does Paterson give for MediumOrchid?",
+   "choices": [
+    "#BA55D3",
+    "#66CDAA",
+    "#9370DB",
+    "#0000CD"
+   ],
+   "answer": "#BA55D3",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson files MediumOrchid among the violets in his index.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson files MediumOrchid among the violets, with hex code #BA55D3."
+ ],
+ "words": 173,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

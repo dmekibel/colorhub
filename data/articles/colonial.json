@@ -1,0 +1,173 @@
+{
+ "slug": "colonial",
+ "name": "Colonial",
+ "hex": "#333B5F",
+ "names": [
+  "Colonial"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Colonial is a dark, grayish navy that Maerz and Paul's 1930 dictionary filed under fashion and textiles; the books say nothing about the color itself, though a good deal about the blue dye trade its name recalls.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a 1930 dictionary",
+   "body": "Colonial is a name from Maerz and Paul's *Dictionary of Color*, which lists it on plate 39, position C 12, with a first recorded use of 1921 [1]. Our library classes it under fashion and textiles, and no other source in it carries the name [1]. The swatch is measured from a scan of the 1930 plate, so it is approximate [1].\n\nThe nearest named colors are [[navy]], 6.0 units away, and [[dusky-blue]] [1]. Who coined the name, and what it was meant to evoke, is undocumented in our sources [1]."
+  },
+  {
+   "id": "books",
+   "title": "What the books do say",
+   "body": "We found no passage in the 29 books that describes a color called Colonial [2]. In the roughly forty passages we read, the word is an adjective for a period or an empire, as in colonial roads, colonial plantations and colonial rule [2].\n\nThe blue connection is real but indirect. Ball notes that in the 1880s a major dyestuff of the world, indigo, still came from India under British colonial rule, and it was the most profitable of the empire's activities in Asia [3]. In 1870 India had 2,800 indigo factories, and the dye went into mass-produced goods such as military uniforms [3]. Balfour-Paul describes the trade as tied to colonial farming based on slavery, and notes that when Britain cut off tropical indigo, Napoleon offered rewards for a local substitute for his army's uniforms [4]. Nothing in our sources links Maerz and Paul's name to that trade, so read the link as context, not as origin [1][3][4]. The deep blues it points toward are [[indigo]] and [[prussian-blue]].\n\nOne dictionary entry does tie a blue to the period. Paterson's *Jersey blue* names the blue worn by soldiers from New Jersey in the colonial period [5]. At Colonial Williamsburg in Virginia, which Finlay calls a center for eighteenth-century paint technology, historical houses are painted to match their period [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 92 works, 0.39 per cent of the archive [7]. As always these are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [7].\n\nIt has two homes. The first dated match is Taddeo Gaddi's [[painting:commons-Q3842751|Madonna and Child Enthroned with Angels and Saints]] (1355), and the 1300s and 1400s run at about twice the archive rate [7]. Then the 1900s run at 5.25 times it, with 34 of 1,674 paintings, and the 1920s are the peak decade with 5 of 237 [7]. The painters who use it most include Vilhelm Lundstrøm (4 of 17 paintings), [[painter:henri-matisse|Matisse]] (5 of 50) and [[painter:pierre-auguste-renoir|Renoir]] (3 of 50) [7].\n\nThe largest patches are in Bronzino's [[painting:commons-Q48814933|Portrait of a girl]] (1545, 40 per cent of the canvas) and Jawlensky's [[painting:nga-54131|Murnau]] (1910, 38 per cent) [7]. Inside a painting it is a shadow in 75 per cent of cases and a mid-tone in the other 25 per cent [7]. It keeps company with navy, charcoal and gunmetal [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (a fashion and textile name)",
+   "first_recorded": "1921 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul, A Dictionary of Color, plate 39 C 12, via data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "navy",
+   "dusky-blue",
+   "midnight-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "colonial-buff",
+    "gloss": "another Maerz and Paul name, a pale yellow-tan, related only by the word"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#333B5F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 92,
+  "top_paintings": [
+   "commons-Q48814933",
+   "nga-54131",
+   "commons-Q3842751"
+  ],
+  "role": {
+   "shadow": 0.75,
+   "mid": 0.25
+  },
+  "peak_decade": {
+   "decade": 1920,
+   "hits": 5,
+   "n": 237,
+   "lift": 5.45
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Maerz and Paul 1930, plate 39 C 12, first recorded 1921, field fashion and textiles; plate-scan swatch, approximate; nearest named colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Concordance of the 29 color books for \"colonial\" (116 passages; about 40 read across books)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 52, 68",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 227 (\"Jersey blue\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (tools/article_field.py, CIEDE2000 within 6, at least 5% of canvas), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does our library record for the color name Colonial?",
+   "choices": [
+    "It comes from Maerz and Paul's 1930 dictionary, first recorded in 1921",
+    "It is a CSS keyword",
+    "It was a Crayola crayon",
+    "It is a pigment from Pennsylvania"
+   ],
+   "answer": "It comes from Maerz and Paul's 1930 dictionary, first recorded in 1921",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the 29 color books describe a color called Colonial.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In a painting that contains a patch of this dark blue, what role does it usually play?",
+   "choices": [
+    "A shadow",
+    "A highlight",
+    "The brightest accent",
+    "A white ground"
+   ],
+   "answer": "A shadow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Colonial is a navy with a thin paper trail: one 1930 dictionary, a first use in 1921, and no book that describes it.",
+  "This dark blue lives in two eras of our paintings, the 1300s and 1400s and then the 1900s, where it runs at 5 times the archive rate."
+ ],
+ "words": 526,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch 22 writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Honest short article: the books use 'colonial' as an adjective; no source describes the color. Indigo/uniform material given as context, flagged as not an origin.",
+   "About 40 of 116 concordance passages read, sampled across books.",
+   "Alias file points colonial to yale-blue; not used."
+  ]
+ }
+}

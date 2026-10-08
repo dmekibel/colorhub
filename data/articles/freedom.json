@@ -1,0 +1,193 @@
+{
+ "slug": "freedom",
+ "name": "Freedom",
+ "hex": "#2A3C60",
+ "names": [
+  "Freedom"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Freedom is a deep blue with a slight violet lean, a color name from Maerz and Paul's 1930 dictionary that no book in our shelf discusses as a color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary name",
+   "body": "Freedom comes from Maerz and Paul's *A Dictionary of Color* (1930), which records the name as first used in 1919 and shows the color on plate 46, block A 12 [1]. The 1955 NBS Circular 553 cites it, and the ISCC-NBS system files this swatch under its block 179, called deep blue, about 5.6 units of color difference away [2]. Who coined the name, and for a dye, a fabric or a uniform, is undocumented in our sources, and our library lists it under fashion and textiles [1]."
+  },
+  {
+   "id": "books",
+   "title": "What the books say about freedom",
+   "body": "None of the 29 books treats Freedom as a color [3][4]. They do tie the idea to two other colors, and neither is blue [3][4]. Pastoureau calls green the color of freedom in the modern West, and says national flags use it for liberty won from a ruling power, in Mexico, Bolivia, Bulgaria and Portugal [3]. He adds that green came close to being the color of the French Revolution in 1789 [3]. For red, he writes that the red cap was the sign of the freedom that people wanted when they refused to remain subjects and became citizens [4]. A deep blue called Freedom has borrowed a big word, and whether anyone meant it to carry that weight is undocumented in our sources [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is a dark blue in LCh terms: lightness 25.5, chroma 24 and hue angle 281, which puts it slightly toward violet [5]. Against white its contrast ratio is about 11 to 1 [5]. Its nearest named colors are [[dusky-blue]] and [[colonial]], both within about three units of color difference, then [[atlantis]] and [[liberty-blue]] a little further off [6]. The closest cut stone in our gem data is [[gem:lapis-lazuli|lapis lazuli]], a deep and less-flecked blue, at 3.8 units, with [[gem:spinel|blue spinel]] at 4.0 [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Freedom appears in 182 of 23,781 paintings in our archive, 0.77 per cent, and is more common than 56 per cent of the named colors [7]. Counted by lightness rank inside each painting, which varnish cannot fake, it shows up in 82 works, most often as an accent (37 per cent of them) [7]. It peaks in the 1900s, in 1.6 per cent of the 1,674 paintings from that century, 3.4 times the baseline of the same museums [7].\n\nThe earliest match is a work of about 1350 by the Master of San Lucchese, 580 years before the name's first record [7]. That shows only that a dark blue in an aged photograph looks like this swatch. These are photographs of varnished paintings, so a match is a look-alike hue, not a pigment test [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1919, as cited by Maerz and Paul (1930)",
+   "source": "Maerz and Paul, A Dictionary of Color, plate 46 A 12"
+  },
+  "aka": [],
+  "siblings": [
+   "dusky-blue",
+   "colonial",
+   "liberty-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "liberty-blue",
+    "gloss": "a similar-sounding name for a brighter blue; the words liberty and freedom are not linked in the data"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 182,
+  "n_within_painting": 82,
+  "century_peak": {
+   "century": 1900,
+   "pct": 1.6,
+   "lift": 3.4
+  },
+  "first_seen": {
+   "year": 1350,
+   "id": "cma-143768"
+  },
+  "measured": {
+   "lch": [
+    25.5,
+    24.0,
+    280.9
+   ],
+   "contrast_white": 10.97,
+   "nearest": [
+    [
+     "Dusky Blue",
+     2.9
+    ],
+    [
+     "Colonial",
+     3.1
+    ],
+    [
+     "Atlantis",
+     4.4
+    ],
+    [
+     "Liberty Blue",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz and Paul, A Dictionary of Color (1930), plate 46 A 12, first recorded 1919",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph node: ISCC-NBS block 179 (deep blue), Maerz and Paul entry cited by NBS Circular 553 (1955)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, chapters on flags and the Revolution (epub ch. 38)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, chapter on the Revolution (epub ch. 35)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub measured color data (LCh, contrast with white)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alikes and nearest gems (data/graph, edges-f)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the books on our shelf, which colors are linked with the idea of freedom?",
+   "choices": [
+    "Green and red",
+    "Blue and violet",
+    "Yellow and white",
+    "Black and brown"
+   ],
+   "answer": "Green and red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color name Freedom comes from Maerz and Paul's 1930 dictionary.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why is a match with a 1350 painting not evidence of the name's age?",
+   "choices": [
+    "It only shows a look-alike hue in an aged photograph",
+    "The painting is a forgery",
+    "The name was coined in 1350",
+    "Freedom was a pigment then"
+   ],
+   "answer": "It only shows a look-alike hue in an aged photograph",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The color name Freedom is a 1919 dictionary entry for a deep blue, while the books link freedom with green and red.",
+  "A dark blue like this turns up in a work of about 1350, 580 years before the name existed."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-50 writer self-check (sentence-to-card trace, myth list)",
+  "date": "2026-10-08",
+  "issues": [
+   "Books say nothing about Freedom as a color; article is short by design.",
+   "Coinage of the name undocumented. Book mentions of freedom (Pastoureau) are about green and red, not this color."
+  ]
+ },
+ "words": 455
+}

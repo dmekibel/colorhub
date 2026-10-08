@@ -1,0 +1,173 @@
+{
+ "slug": "pale-pink",
+ "name": "Pale Pink",
+ "hex": "#FADADD",
+ "names": [
+  "Pale Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Pale pink is a very light pink, a rosy tint with much white in it; in painting it can be what is left when a red lake has faded.",
+ "sections": [
+  {
+   "id": "descriptive",
+   "title": "A tint, not a material",
+   "body": "Like many pale shades, pale pink is a description. The dictionary defines blancmange pink as a pale pink [1], and St Clair's glossary defines shell as pale pink and magnolia as a pale pink-beige [2]. On screen the swatch is a light, low-chroma tint close to [[misty-rose]], [[light-pink]] and [[baby-pink]] [6]."
+  },
+  {
+   "id": "fading",
+   "title": "What fading leaves behind",
+   "body": "Ball asks how we can know that a patch of pale pink in an old painting once left the brush as rosy carmine lake [3]. In several paintings of one era the red lake has faded entirely, so that robes now look pale pink in the highlights and midtones, which hold a lot of white lead [3]. In the shadows and folds, darkened with ultramarine, the same robes read as deep bluish purple [3]. The pale pink is what remains of a deeper red, and the pigment is not always at fault: the red lake faded [3].\n\nThe same process shows how dyes behave. Cochineal dye can be shifted anywhere from pale pink to a nearly black red by the additives used, such as acids or metals like tin [4]. Tens of thousands of dried insects went into a pound of the raw dye [4]. Compare [[carmine]] and [[blush]] [6]."
+  },
+  {
+   "id": "culture",
+   "title": "Pale pink in other places",
+   "body": "In Charlotte Brontë's *Villette*, Lucy Snowe insists that a dress described as scarlet was really pink, and pale pink at that, and subdued with black lace [5]. The other character's alarm shows how a faint hint of red could carry weight [5]. A cardinals' consistory miniature in the Pierpont Morgan Library, according to Gage, shows cardinals in grey, pale blue and pale pink, all hatted in vermilion [7]. Finlay met a cotton breeder who found red and pale pink bolls in the genes of naturally brown cotton [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch measures a lightness of 90 and a chroma of about 12, with a hue angle of 13 degrees [6]. Its contrast ratio against white is only 1.3 to 1, so it barely separates from a white page [6]. The nearest named colors are Misty Rose at about 5 units and Mimi Pink at about 6 [6].\n\nWe have not computed an archive count. Faded lakes mean that painted pale pinks should be read with care, and screen colors are approximate [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive (a light shade of pink)",
+   "first_recorded": "undocumented",
+   "source": "no single source"
+  },
+  "aka": [
+   "light pink"
+  ],
+  "siblings": [
+   "light-pink",
+   "misty-rose"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "light-pink",
+    "gloss": "a slightly stronger, more saturated pale pink"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names data, CIELAB, screen swatch",
+  "measured": {
+   "lch": [
+    89.7,
+    11.8,
+    13
+   ],
+   "contrast_white": 1.3,
+   "nearest": [
+    [
+     "Misty Rose",
+     4.6
+    ],
+    [
+     "Mimi Pink",
+     6.4
+    ]
+   ]
+  },
+  "archive": "not computed"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"blancmange-pink\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Shell\", \"Magnolia\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Cochineal\" (ch. 66)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Greenfield, The Perfect Red, ch. 21",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub names data (data/graph/names.json); CIELAB values computed from the swatch hexes",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, notes on Venetian pigment trade",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Fabric, naturally coloured cotton",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why can pale pink in an old painting be misleading?",
+   "choices": [
+    "A red lake may have faded to leave it",
+    "Pink pigment turns blue",
+    "Pink was banned",
+    "Pale pink was only used for skin"
+   ],
+   "answer": "A red lake may have faded to leave it",
+   "kind": "pick"
+  },
+  {
+   "q": "What does the mordant do to cochineal?",
+   "choices": [
+    "Shifts it from pale pink to very dark red",
+    "Turns it green",
+    "Makes it fluorescent",
+    "Nothing"
+   ],
+   "answer": "Shifts it from pale pink to very dark red",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Some pale pink robes in old paintings were once deep red lake."
+ ],
+ "words": 387,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede softened from 'often' to 'can be'.",
+   "Cochineal sentence reworded to match St Clair (additives, not mordant)."
+  ]
+ }
+}

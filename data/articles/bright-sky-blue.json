@@ -1,0 +1,113 @@
+{
+ "slug": "bright-sky-blue",
+ "name": "Bright Sky Blue",
+ "hex": "#02CCFE",
+ "names": [
+  "Bright Sky Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Bright Sky Blue is a vivid, slightly greenish cyan blue, a descriptive name more than a historical one.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A descriptive name",
+   "body": "The name is a plain description: bright, plus [[sky-blue]]. Our sources list it in the 2010 xkcd color survey [1]. The swatch is far more saturated than a real sky, and the nearest ISCC-NBS name is \"brilliant greenish blue\" at a distance of 7.1 [1].\n\nThe words do turn up in the books. Finlay saw bright sky blues from [[indigo]] in the early Indian painted and printed cottons at the Victoria and Albert Museum's 2015 exhibition [2]. St Clair's glossary defines [[azure]] as a bright sky blue, used in heraldry [3]. Neither passage describes this exact swatch."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering at least 1 percent of its canvas, as photographed [4]. That describes our archive, not painting as a whole. For a bright blue that does appear, see [[deep-sky-blue]] and [[cerulean]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: bright plus sky blue",
+   "first_recorded": "2010 (xkcd survey)",
+   "source": "ColorHub name graph"
+  },
+  "aka": [],
+  "siblings": [
+   "sky-blue",
+   "deep-sky-blue"
+  ],
+  "parent": "sky-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "nearest_iscc": [
+   "brilliant greenish blue",
+   7.1
+  ],
+  "min_cover": 0.01
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name graph and library: ISCC-NBS 1955 nearest name, sources and dates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 101",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary, \"Azure\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (as photographed), data/graph/fieldnotes",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does St Clair's glossary say azure is?",
+   "choices": [
+    "A bright sky blue",
+    "A pale grey-green",
+    "A dark navy",
+    "A violet"
+   ],
+   "answer": "A bright sky blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: any painting in our archive covers at least 1 percent of its canvas with this swatch.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Finlay found bright sky blues from indigo in early Indian cottons."
+ ],
+ "words": 155,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Descriptive modifier name; books mention the words only in passing.",
+   "Re-verified key claims against fact cards and book text; no changes needed."
+  ]
+ }
+}

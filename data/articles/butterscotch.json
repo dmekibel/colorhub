@@ -1,0 +1,116 @@
+{
+ "slug": "butterscotch",
+ "name": "Butterscotch",
+ "hex": "#FDB147",
+ "names": [
+  "Butterscotch"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Butterscotch is a warm golden orange named, it seems, for the candy; Paterson defines it as a yellowish brown and also indexes it among the yellows.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A candy that became a color",
+   "body": "Paterson's color indexes list butterscotch among the yellows, next to butter yellow and buttercup yellow [1]. Paterson gives it its own entry, a yellowish brown, and does not mention the sweet, so the candy origin is an inference from the word itself [1]. The library finds the name in many systems, including RAL and Ridgway [2].\n\nThe swatch, #FDB147, is a saturated orange-yellow, whose nearest name is Marigold [2]. Compare [[apricot]], [[amber]] and [[orange]] [2]. Compare also [[caramel]] [2].\n\nThe name works as an everyday descriptor rather than a pigment, and the books consulted give it no history [1][2]. In LCH terms the swatch measures lightness 78, chroma 65 and hue 74 degrees [2]. The books consulted give no pigment behind the name [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 103 of 23,531 paintings, as photographed [3]. George Dawe has it in 9 [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the candy, by inference",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "Paterson, A Dictionary of Colour (index)"
+  },
+  "aka": [],
+  "siblings": [
+   "amber",
+   "apricot"
+  ],
+  "parent": null,
+  "children": [
+   "caramel"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 103,
+  "measured": {
+   "lch": [
+    78,
+    65,
+    74
+   ],
+   "nearest": [
+    [
+     "Marigold",
+     5.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index, yellows",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL, Ridgway and ISCC-NBS entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,531 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Under which color group does Paterson's index file butterscotch?",
+   "choices": [
+    "Yellows",
+    "Blues",
+    "Purples",
+    "Greys"
+   ],
+   "answer": "Yellows",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson defines butterscotch as a yellowish brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson defines butterscotch as a yellowish brown."
+ ],
+ "words": 160,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Article wrongly said Paterson gives no definition; he defines it as a yellowish brown. Fixed text, lede, quiz.",
+   "Removed gilding/glaze and lightness claims."
+  ]
+ }
+}

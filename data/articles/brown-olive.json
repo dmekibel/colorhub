@@ -1,0 +1,133 @@
+{
+ "slug": "brown-olive",
+ "name": "Brown Olive",
+ "hex": "#3E3C32",
+ "names": [
+  "Brown Olive"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Brown Olive is a very dark, almost black olive-brown; as a name it echoes the old naturalists' olive brown, and as a color it is the dark ground of a great many paintings.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Olive and brown together",
+   "body": "Brown Olive is a descriptive pairing of two basic color words, not a traditional name [1]. The older compound in the books runs the other way round: *olive brown* is listed in the nomenclature of colors that Syme prepared from Werner's mineral scheme, and it recurs in the index of Baty's study of that system [1][2]. The same list names an olive or clove brown among its browns [2]. Compare the greener [[olive-green]] and the yellower [[khaki]]."
+  },
+  {
+   "id": "dyes",
+   "title": "Dye shades",
+   "body": "The Pigment Compendium notes that the extract catechu dyes cloth a fast color that varies between brown, olive and khaki [3]. Catechu is a tannin-rich extract from a southern Asian tree [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is one of the commonest colors in the ColorHub archive: 5,787 of 23,781 paintings, about 24 percent, contain it within our match threshold, as photographed [4]. In the lightness order of those paintings it is a shadow color about 71 percent of the time and a midtone about 28 percent [4]. The painter who relies on it most in our data is Erik Pauelsen, with 12 of his 15 paintings, and Johan Heinrich Neuman has it in 10 of 12 [4]. These are photographs of aged, varnished paintings, so the dark olive is partly the varnish [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (a descriptive name)",
+   "first_recorded": "undocumented",
+   "source": "descriptive name"
+  },
+  "aka": [
+   "Dark olive brown"
+  ],
+  "siblings": [
+   "olive-green",
+   "olive",
+   "brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5787,
+  "rate": 0.2433,
+  "role": {
+   "shadow": 0.71,
+   "mid": 0.28,
+   "highlight": 0.01
+  },
+  "painters": [
+   {
+    "name": "Erik Pauelsen",
+    "hits": 12,
+    "n": 15
+   },
+   {
+    "name": "Johan Heinrich Neuman",
+    "hits": 10,
+    "n": 12
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, index (olive brown)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, list of browns",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Dyestuffs entry \"catechu\", in Eastaugh et al., Pigment Compendium",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive match for #3E3C32 (tools/article_field.py), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In ColorHub's archive, which lightness role does this dark olive-brown most often play?",
+   "choices": [
+    "Shadow",
+    "Highlight",
+    "Midtone only",
+    "It never appears"
+   ],
+   "answer": "Shadow",
+   "kind": "pick"
+  },
+  {
+   "q": "Catechu dye shades run between brown, olive and khaki.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "About a quarter of the paintings in our archive contain this dark olive-brown."
+ ],
+ "words": 234,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported gloss of the dye shade"
+  ]
+ }
+}

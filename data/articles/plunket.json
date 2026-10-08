@@ -1,0 +1,104 @@
+{
+ "slug": "plunket",
+ "name": "Plunket",
+ "hex": "#C0DEDC",
+ "names": [
+  "Plunket"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Plunket is an old English word for a greyish blue, once used for common pale blue cloth and now mostly a curiosity.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A common pale blue",
+   "body": "Paterson defines plunket as a greyish blue [1]. Its earliest use in our books is medieval: Balfour-Paul reports that late fourteenth-century records at York show blues predominating from September to December, and that *plunkets*, described as common pale blue cloth, were still worn alongside blues and greens in spring [2]. So the word named a common pale blue cloth rather than a pigment [2].\n\nIn the dictionary's blue list it sits with [[periwinkle]] and [[sky-blue]] [1]. The related poilu-blue is the greyish blue of French infantrymen in World War I [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of museum paintings, a color near this swatch is present in 40 works, 0.17 per cent of the archive [3]. The earliest is a work of 1445, and the latest dates from 1914 [3]. These are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a medieval word for pale blue cloth",
+   "first_recorded": "late 14th century (York records)",
+   "source": "Balfour-Paul, Indigo, p. 205"
+  },
+  "aka": [],
+  "siblings": [
+   "periwinkle",
+   "sky-blue",
+   "cambridge-blue",
+   "royal-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, paintings as photographed",
+  "n_present": 40,
+  "pct_of_archive": 0.17,
+  "first_dated": 1445
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"plunket\", \"poilu-blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 205",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), paintings as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did plunkets mean in late medieval York?",
+   "choices": [
+    "Common pale blue cloth",
+    "Red wool",
+    "Gold thread",
+    "A dye bath"
+   ],
+   "answer": "Common pale blue cloth",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson defines plunket as a greyish blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Plunket was a medieval word for common pale blue cloth, recorded at York."
+ ],
+ "words": 157,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'cheap' and 'woolen'."
+  ]
+ }
+}

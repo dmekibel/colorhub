@@ -1,0 +1,117 @@
+{
+ "slug": "dark-olive",
+ "name": "Dark Olive",
+ "hex": "#565544",
+ "names": [
+  "Dark Olive"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Olive is a dim, grey-brown olive that sits between green and brown, and it is one of the most common dark colors in the paintings of our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The swatch carries a Ridgway plate number from 1912 and a block in the ISCC-NBS system of 1955, and it matches the German standard color RAL 7013, which is sold as brown grey [1]. Its older shades include names such as Pullman Green and Crystal Palace Green, the latter recorded by about 1904 [1]. The xkcd survey of 2010 added the plain phrase Dark Olive [1].\n\nBooks use the words as a plain description, not a pigment name. Paterson's dictionary defines ivy green simply as a dark olive green [2]. St Clair's color glossary defines olive drab as green with plenty of gray and brown, a dull olive, which is close to this swatch [4]. Its nearest named neighbors are [[umber]] and [[olive]], and it sits near [[moss]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive a color near this swatch appears in 2,656 of 23,781 paintings, or 11.2 per cent, which is more common than 94 per cent of the named colors [3]. It peaks in the 1800s, at 8.3 per cent of that century's paintings, and in a painting it most often plays a hidden color [3]. Willem Roelofs has it in 6 of his 12 works here, 4.1 times the baseline of the museums those works come from [3]. These are photographs of aged, varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name, origin undocumented",
+   "first_recorded": "Ridgway 1912; ISCC-NBS 1955",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "olive drab (near)",
+   "brown grey"
+  ],
+  "siblings": [
+   "olive",
+   "umber",
+   "moss",
+   "ivy-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2656,
+  "pct_archive": 11.17,
+  "match": {
+   "hex": "#565544",
+   "de2000": 6
+  },
+  "role": "hidden",
+  "peak_century": 1800
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 225",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson's dictionary say ivy green is?",
+   "choices": [
+    "A dark olive green",
+    "A pale blue-green",
+    "A bright yellow-green"
+   ],
+   "answer": "A dark olive green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our archive, Dark Olive is rarer than most named colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark olive is more common in our archive of paintings than 94 per cent of the named colors."
+ ],
+ "words": 246,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported claim that dark olives began as brighter greens"
+  ]
+ }
+}

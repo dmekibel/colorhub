@@ -1,0 +1,131 @@
+{
+ "slug": "barney",
+ "name": "Barney",
+ "hex": "#AC1DB8",
+ "names": [
+  "Barney"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Barney is a vivid purple from the 2010 xkcd color survey; what the name refers to is undocumented in the sources we hold.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A survey name",
+   "body": "The library files Barney as a name taken from a person and lists the xkcd survey of 2010 as its only source [1]. A television dinosaur of the same name is the obvious guess, but the survey does not say [1]. The same hex is listed under Iris Purple, at zero distance, and Barney Purple sits 5.8 units away [2]. Other neighbors are [[purple-munsell]], [[dark-orchid]] and [[vibrant-purple]] [2]. The swatch is a vivid purple, with a lightness of 43 on a 100 scale [1]. Its closest standard category is vivid purple, about 5.6 units away [4]. Nothing in the books we hold treats it as a color name, so this entry is short by design [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this color covering at least 1% of its canvas, within a distance of 4 units, as photographed [3]. That describes our archive, not painting as a whole, and photographs of varnished paintings are not pigment tests."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "xkcd survey, 2010 (library source)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "purple-munsell",
+   "dark-orchid",
+   "iris-purple"
+  ],
+  "parent": null,
+  "children": [
+   "barney-purple"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    42.9,
+    86.3,
+    325.4
+   ],
+   "nearest": [
+    [
+     "Purple (Munsell)",
+     4.3
+    ],
+    [
+     "Dark Orchid",
+     5.3
+    ],
+    [
+     "Vibrant Purple",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): xkcd 2010; tier person (named for a person)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes and duplicates (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes) (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS nearest vivid purple (dE 5.6), Lab L 42.9",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the only source for this color name in our library?",
+   "choices": [
+    "The xkcd survey, 2010",
+    "Maerz and Paul, 1930",
+    "A Crayola box",
+    "ISCC-NBS, 1955"
+   ],
+   "answer": "The xkcd survey, 2010",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the sources document who Barney is named after.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A saturated magenta-purple with a mystery name."
+ ],
+ "words": 181,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported 'darker child' and 'blue-leaning magenta'"
+  ]
+ }
+}

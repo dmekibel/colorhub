@@ -1,0 +1,115 @@
+{
+ "slug": "deep-malachite-green",
+ "name": "Deep Malachite Green",
+ "hex": "#73A182",
+ "names": [
+  "Deep Malachite Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Deep Malachite Green is a muted mid green with a name borrowed from the copper mineral, found in Ridgway's 1912 color atlas and in a modern table of nature's colors.",
+ "sections": [
+  {
+   "id": "atlas",
+   "title": "A name from the atlases",
+   "body": "The swatch derives from Ridgway's *Color Standards and Color Nomenclature* of 1912, plate XXXII, hue 35'', and from ISCC-NBS block 136, whose modern name is \"light green\", 5.0 units away [1]. It is a soft, grey-leaning green, lightness 62 and chroma 25, far from the intensity the word *malachite* suggests [1].\n\nThe name also appears in a long table of color names in Baty's *Nature's Palette*, pp. 267 and 268 [2]. The mineral itself has its own page: [[malachite]]. For the pigment cousins, compare [[green-earth]] and [[viridian]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "It appears in 63 of 23,781 archive paintings, 0.26 per cent, rarer than 56 per cent of named colors [3]. It peaks in the 1900s, at 0.5 per cent of 1,674 paintings, 3.3 times the museums' baseline [3]. Gustav Klimt is the most devoted painter, with it in 4 of his 50 works here, 7.3 times the baseline [3]. These are photographs of varnished paintings, so a match is a screen color, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mineral malachite plus a depth modifier",
+   "first_recorded": "Ridgway, 1912",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "malachite",
+   "viridian"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "malachite",
+    "gloss": "the mineral's own color is far more saturated than this swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 63,
+  "measured": {
+   "lch": [
+    62.3,
+    24.8,
+    153.1
+   ],
+   "nearest_iscc": [
+    "light green",
+    5.0
+   ]
+  },
+  "peak": "1900s"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 267-268",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which atlas gives this color its name?",
+   "choices": [
+    "Ridgway's 1912 atlas",
+    "The Pantone guide",
+    "The xkcd survey",
+    "Newton's Opticks"
+   ],
+   "answer": "Ridgway's 1912 atlas",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this swatch is as saturated as the mineral malachite.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The swatch is a grey-leaning green, not the intensity the mineral name suggests."
+ ],
+ "words": 195,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

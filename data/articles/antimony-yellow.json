@@ -1,0 +1,117 @@
+{
+ "slug": "antimony-yellow",
+ "name": "Antimony Yellow",
+ "hex": "#F9B867",
+ "names": [
+  "Antimony Yellow"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Antimony yellow is a light orange-yellow named for a pigment made from antimony, usually the same lead antimonate that painters knew as Naples yellow.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "Naples yellow or its cousin",
+   "body": "The Pigment Compendium says antimony yellow, or yellow of antimony, was typically a synonym for lead antimony oxide, which is Naples yellow [1]. Nineteenth-century authors disagree: Osborn in 1845 and Salter in 1869 treat it as a different preparation of the same metal, deeper in color than Naples yellow, used mainly in enamel and porcelain painting [1]. A French manual of the time reportedly preferred it to Naples yellow as equally permanent [1].\n\nPaterson says Naples yellow was used from the seventeenth century, possibly long before, in place of lead-tin oxide, and was later replaced by cadmium colors [2]. Paterson also says the name now refers to the hue, not the pigment [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our swatch comes from Ridgway's 1912 plate XV, and it is also in ISCC-NBS and Maerz and Paul, who date the name to 1839 [3]. It reads as a warm light orange-yellow, near [[apricot]] [3]. As ever with aged plates, the swatch is approximate [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color is moderately common in paintings, in 208 of 23,781, more than 67 per cent of named colors [4]. In 72 per cent of the 156 paintings where it is measurable it plays an accent role [4]. It peaks in the 1900s at 1.1 per cent of paintings, 1.4 times the museums' baseline [4]. The earliest match is Bernardo Daddi's work of 1333, centuries before the name, so that is a look-alike hue and not evidence of the pigment [4]. These are photographs of aged, varnished paintings, so a color match is a look-alike hue, not a pigment test. [4]"
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the element antimony",
+   "first_recorded": "1839 (Maerz and Paul)",
+   "source": "Pigment Compendium; Paterson"
+  },
+  "aka": [
+   "yellow of antimony",
+   "Naples yellow"
+  ],
+  "siblings": [
+   "apricot",
+   "amber",
+   "tawny-orange"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 208,
+  "rank_pct": 67,
+  "peak_century": 1900,
+  "library_first_recorded": 1839
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"antimony yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Naples yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Ridgway (1912) plate XV, ISCC-NBS 1955 block 71 and Maerz and Paul (1930), via data/library.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within-painting lens, lightness rank per painting)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is antimony yellow usually a synonym for?",
+   "choices": [
+    "Naples yellow",
+    "Cadmium yellow",
+    "Gamboge",
+    "Chrome yellow"
+   ],
+   "answer": "Naples yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the old authors all agreed that antimony yellow equals Naples yellow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Antimony yellow is usually Naples yellow under another name, though some 19th-century writers called it deeper."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 273
+}

@@ -1,0 +1,130 @@
+{
+ "slug": "persian-green",
+ "name": "Persian Green",
+ "hex": "#00A693",
+ "names": [
+  "Persian Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Persian Green is a strong blue-green; the name is older than the screen color, since an 1906 formula already used it for a mixed pigment of greens.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "A mixed pigment",
+   "body": "The Pigment Compendium records two Persian pigments side by side [1]. Persian black was reported by an artist in 1886 to the Russell and Abney committee, and its composition is unknown [1]. Persian green, according to Zerr and Rübencamp in 1906, was mixed from emerald green, imperial green, baryte and pale chrome yellow, in proportions of 75, 45, 20 to 30 and 10 to 20 parts [1]. It is a trade color, not a historic Persian mineral, and the book gives no reason for the name [1]."
+  },
+  {
+   "id": "name",
+   "title": "The color name",
+   "body": "Maerz and Paul recorded Persian Green in 1892, and the ISCC-NBS system of 1955 files it in block 151 [2]. The library's nearest named color is [[jade]], 11.6 units off [2]. For close greens see [[teal]] and [[turquoise]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is rare in paintings: only 2 of 23,781 match, Matisse's 1906 [[painting:smk-KMSr77|Street in Biskra, Algeria]], where it covers 12 per cent, and Patrick Henry Bruce's *Peinture/Nature Morte* of 1924 [3]. Both date from the 1900s [3]. As photographed: museum photographs of aged, varnished paintings; a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Persia (reason undocumented)",
+   "first_recorded": "Maerz & Paul give 1892; Zerr & Rübencamp describe the pigment in 1906",
+   "source": "Pigment Compendium p. 309; ColorHub library"
+  },
+  "aka": [
+   "Persian green pigment (emerald, imperial green, baryte, chrome yellow)"
+  ],
+  "siblings": [
+   "jade",
+   "teal",
+   "turquoise"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#00A693",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "top_paintings": [
+   "smk-KMSr77",
+   "nga-166434"
+  ],
+  "measured": {
+   "lch": [
+    61,
+    41,
+    181
+   ],
+   "contrast_white": 3.05,
+   "nearest": [
+    [
+     "Jade",
+     11.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Persian green\", p. 309",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz & Paul 1930, first recorded 1892, ISCC-NBS 1955 block 151); CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Zerr and Rübencamp (1906), Persian green was...",
+   "choices": [
+    "A mixture of green and yellow pigments with baryte",
+    "A pure mineral",
+    "A dye from a plant",
+    "A kind of woad"
+   ],
+   "answer": "A mixture of green and yellow pigments with baryte",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Pigment Compendium explains why the pigment was named Persian.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Persian green was once a recipe, not a place: emerald green, imperial green, baryte and chrome yellow.",
+  "Matisse's 1906 Biskra street is one of only two paintings in our archive with this blue-green."
+ ],
+ "words": 201,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,177 @@
+{
+ "slug": "deep-purple",
+ "name": "Deep Purple",
+ "hex": "#36013F",
+ "names": [
+  "Deep Purple"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Deep purple is a very dark, saturated violet-purple, a name from the xkcd survey for a color the books mostly call by other names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Deep as a color word",
+   "body": "The library takes this swatch from a single source, the xkcd survey, and lists *Deep Purple* beside *Very Dark Purple* as alternate names of Midnight Purple, a near twin [1]. The nearest named color is [[aubergine]], 5.4 apart in ΔE [1]. Paterson glosses *deep* applied to a color as intense in hue, and points out that in the deep blue sea the depth belongs to the sea [2]."
+  },
+  {
+   "id": "dyes",
+   "title": "Deep purples in the dictionary",
+   "body": "Paterson names several deep purples with histories. The damson plum gives its name to a deep purple [3]. Modena, an artificial dye from the Italian city, gave a crimson or deep purple for church and academic robes [4]. The purple of Cassius is a deep purple named after a seventeenth-century physician [5].\n\nThe oldest deep purple is the shellfish dye. Pliny described the blackness of the dye as achieved by dyers with two kinds of shellfish [6]. In Japan, according to St Clair, a deep purple called *murasaki* was a forbidden color for ordinary people, and in the 1980s Mexico allowed a Japanese company to collect sea snails for kimono dyeing [7]."
+  },
+  {
+   "id": "culture",
+   "title": "Opinion about the color",
+   "body": "Birren relays a passage on Confucius, who in the *Heang Tang* did not use a deep purple or a puce for the ornaments of his dress [8]. Birren's older claims are marked contested in our notes, so read this as tradition, not evidence. In alchemy, Ball says, a bright red or a deep purple in the retort was read as a sign of success [9]. Jarman lists the rock band Deep Purple among the associations of the color, along with Hendrix and Purple Haze [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is almost black on screen, with lightness 10, chroma 42 and hue 323 in LCH [1]. Beside [[aubergine]], the closest names are [[dark-purple]] and [[purple]], though a near twin carries the extra alternate names noted above [1]. Screen colors are approximate."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive phrase (deep + purple)",
+   "first_recorded": "origin undocumented; xkcd survey in the library",
+   "source": "ColorHub library; Paterson"
+  },
+  "aka": [
+   "Midnight Purple (near twin)",
+   "Very Dark Purple"
+  ],
+  "siblings": [
+   "aubergine",
+   "dark-purple",
+   "purple",
+   "violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub library (xkcd)",
+  "measured": {
+   "lch": [
+    10,
+    42,
+    323
+   ],
+   "nearest": [
+    [
+     "Aubergine",
+     5.4
+    ]
+   ]
+  },
+  "source_count": 1
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), \"Deep Purple\" and \"Midnight Purple\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"deep\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"damson\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"modena\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"purple of cassius\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21 (\"Purple\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Purple\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Jarman, Chroma, \"Purple\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say \"deep\" means for a color?",
+   "choices": [
+    "An intense hue",
+    "A very dark shade only",
+    "A pale tint",
+    "A glossy finish"
+   ],
+   "answer": "An intense hue",
+   "kind": "pick"
+  },
+  {
+   "q": "In Japan, what was the deep purple murasaki, according to St Clair?",
+   "choices": [
+    "A forbidden color for ordinary people",
+    "The color of mourning",
+    "A sailor's color",
+    "A color for children"
+   ],
+   "answer": "A forbidden color for ordinary people",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In Japan a deep purple, murasaki, was a forbidden color for ordinary people."
+ ],
+ "words": 321,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

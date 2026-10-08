@@ -1,0 +1,110 @@
+{
+ "slug": "pale-cerulean",
+ "name": "Pale Cerulean",
+ "hex": "#9BC4E2",
+ "names": [
+  "Pale Cerulean"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Cerulean is a light, soft sky blue, a lightened step of [[cerulean]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name is a plain modifier on [[cerulean]], the sky-blue name, so it makes no claim to a history of its own [3]. It is listed in the ISCC-NBS system of 1955 and in Ridgway's 1912 color book [3]. Its closest relatives are other pale blues such as [[sky-blue]] and [[light-blue]] [3].\n\nColor writers do use the phrase for the real sky. Gurney notes that low sky color can run from pale cerulean through warm gray to dull orange, depending on hour and viewing direction [1]. The sky near the horizon is usually lighter than the regions above it [1].\n\nThe swatch on this page is #9BC4E2, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pale Cerulean turns up in 68 of the 23,781 paintings in our archive, about 0.29 percent, as photographed [2]. It is commoner than half of the named colors, and peaks in the 1900s, found in 10 of the 1,674 paintings from that century, about 2.2 times the museums' baseline rate [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a lightened cerulean (Latin caeruleus, sky-colored)",
+   "first_recorded": "Ridgway 1912",
+   "source": "ColorHub library; Gurney, Color and Light, p. 177"
+  },
+  "aka": [
+   "pale sky blue"
+  ],
+  "siblings": [
+   "sky-blue",
+   "light-blue",
+   "cerulean",
+   "white"
+  ],
+  "parent": "cerulean",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 68,
+  "pct_of_paintings": 0.29,
+  "library_sources": [
+   "ISCC-NBS 1955",
+   "Ridgway 1912",
+   "Wikipedia list"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 177",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955, Ridgway 1912, Wikipedia list",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does Gurney say pale cerulean can be seen?",
+   "choices": [
+    "Near the horizon of the sky",
+    "In a deep forest",
+    "On wet pavement",
+    "In candlelight"
+   ],
+   "answer": "Near the horizon of the sky",
+   "kind": "pick"
+  },
+  {
+   "q": "The sky usually looks lighter near the horizon.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Near the horizon the sky is usually lighter than overhead, and pale cerulean is one of the colors it can be."
+ ],
+ "words": 216,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported causal clause about atmosphere"
+  ]
+ }
+}

@@ -1,0 +1,219 @@
+{
+ "slug": "serpent",
+ "name": "Serpent",
+ "hex": "#647E74",
+ "names": [
+  "Serpent"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Serpent is a grayish green listed in Maerz and Paul's 1930 dictionary; nobody records who named it, but green has been the color of serpents in European imagery for centuries.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "A green with a snake's name",
+   "body": "Serpent is a grayish green with a snake's name, and the name is nearly all the sources tell us. Our swatch, #647E74, comes from Maerz and Paul's 1930 dictionary, plate 29 D 5, which gives 1892 as its first recorded use [1]. The closest ISCC-NBS block is grayish green, 5.1 units away on the CIEDE2000 scale, and its Munsell notation is 8.4G 5.0/2.2 [1]. Who first used the word for a color, and why, is undocumented in the sources we hold [1].\n\nIts nearest named colors are [[deep-bluish-grey-green]], [[deep-greyish-blue-green]], [[hydro]] and [[xanadu]] [1]. The nearest cut stone in our data is [[gem:turquoise|turquoise]], 6.8 units away, a greener and more iron-rich variety [1]. A livelier cousin is [[sage]], and the plant-green family is described under [[moss]]."
+  },
+  {
+   "id": "bestiary",
+   "title": "The green of serpents",
+   "body": "The color word is recent, but the pairing is old. Pastoureau writes that in the medieval bestiaries most serpents were green, and that the color marked an evil and dangerous nature, as with the asp, the viper and the dragon [2]. Satan's retinue divided into dark animals and green ones, and the green list ran from the dragon and serpent to the crocodile, hydra, basilisk, frog, siren and locust [2]. In miniatures, dragons are usually green and yellow, spotted and scaled to suggest a slimy, pustular body [2].\n\nGreen eyes belonged to the basilisk and to all serpents in the bestiaries [3]. The French saying that sets green eyes beside viper eyes is later: Pastoureau dates it only to the nineteenth century [3]. In his short book on color he adds that artists made demons, dragons and serpents greenish because green sat uneasily between this world and the next [5].\n\nJarman imagines the serpent of Eden camouflaged in green, khaki as the dust, and calls it the green devil [6]. Finlay's serpent is a different animal: the Rainbow Serpent of Aboriginal Australian stories, which in one tale swallows the Wawilak sisters, and is named for a rainbow rather than a single green [9]."
+  },
+  {
+   "id": "dull",
+   "title": "Why a duller green",
+   "body": "The swatch is dull for a green: its chroma is 11.8, in the 15th percentile among the named colors in our data [1]. Pastoureau says medieval artists drew the viscous bodies of dragons and serpents with wavy lines, scaly partitions and desaturated greens [4]. In their eyes wetness meant lack of density, so draining the saturation from green or black made it look wetter [4]. Serpent sits at that dull end of the green range.\n\nPastoureau adds that recipe collections recommended sandragon, a red pigment named for dragon's blood, for painting the Devil's face and the flames of hell [2]. St Clair explains what it really was [10]. No animal is harmed in its making, because dragon's blood is a red resin drawn from wounded trees, often of the genus Dracaena [10]."
+  },
+  {
+   "id": "myths",
+   "title": "Legends with serpents in them",
+   "body": "Two stories tie serpents to the history of color, and both are legends. The first is that murexide, a purple dye, came from the excrement of serpents. Garfield records that this was said, but its true source was bird droppings [7]. The second is that the German chemist Kekulé saw the ring of the benzene molecule in a dream of a serpent devouring its tail [8]. Ball calls the tale the stuff of legend and asks how much Kekulé embroidered it in his later accounts, noting that all we can be sure of is the published record [8].\n\nA third, from Essex, is the pamphlet *The Flying Serpent* of 1669, which reported a winged dragon seen near Saffron Walden on 27 May 1668 [10]. It is a report of a sighting, not a color source, and St Clair offers it only as a sign of the last years in which dragons, and their blood, were widely believed in [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 268 hold this green: within six units of CIEDE2000 and covering at least five per cent of the canvas, about 1.1 per cent of the archive [11]. These are museum photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [11].\n\nImpressionism is where it concentrates: 10 of 140 Impressionist paintings in our data, and 4 of 45 Post-Impressionist ones [11]. [[painter:paul-cezanne|Cézanne]] has it in 9 of his 50 works here [11]. The canvases that hold the most are Caillebotte's [[painting:nga-66404|Skiffs]] of 1877, at 57 per cent, Klimt's [[painting:commons-Q28015487|Sunflower]] of 1907, at 53 per cent, and the Dutch seascape [[painting:smk-KMSsp537|Dutch Roadstead]] of 1638, at 47 per cent [11].\n\nIts closest company in the data is [[viridian]], and the 1900s hold it at 2.4 times the archive rate, with 46 of 1,674 paintings [11]. Within a painting it is usually a mid-tone, in 47 per cent of cases, and a highlight in 37 per cent [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the snake (undocumented why)",
+   "first_recorded": "1892 (Maerz and Paul, 1930, plate 29 D 5)",
+   "source": "ColorHub library; Maerz and Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "xanadu",
+   "hydro",
+   "slate-olive"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#647E74",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 268,
+  "top_paintings": [
+   "nga-66404",
+   "commons-Q28015487",
+   "smk-KMSsp537"
+  ],
+  "ngram": {},
+  "measured": {
+   "iscc": "grayish green",
+   "de2000": 5.1,
+   "munsell": "8.4G 5.0/2.2",
+   "chroma": 11.8,
+   "nearest": [
+    [
+     "Deep Bluish Grey Green",
+     3.0
+    ],
+    [
+     "Deep Greyish Blue Green",
+     4.1
+    ],
+    [
+     "Hydro",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930), CIEDE2000 distances; look-alikes and twins from data/graph",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 24 (\"Satan's green bestiary\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 25 (\"From green to greenish\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black, on the viscous, scaled and spotted in medieval images",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Le petit livre des couleurs, ch. 8 (\"Le vert\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Jarman, Chroma, the green chapter",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 4 (\"The Recipe\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Dragon's blood\" and its notes",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was dragon's blood, the pigment recommended for painting the Devil's face?",
+   "choices": [
+    "A red resin from wounded trees",
+    "The blood of large reptiles",
+    "A mineral red from Spain",
+    "A dye made from elephants"
+   ],
+   "answer": "A red resin from wounded trees",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the purple dye murexide really came from the excrement of serpents.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why did medieval artists use dull, desaturated greens for dragons and serpents?",
+   "choices": [
+    "Desaturating a color made it look wetter and more viscous",
+    "Bright greens were too costly",
+    "Dull greens resisted fading",
+    "The Church banned bright greens"
+   ],
+   "answer": "Desaturating a color made it look wetter and more viscous",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In medieval bestiaries most serpents were green, and the color signaled an evil nature.",
+  "A dull, desaturated green was how medieval artists made dragons and serpents look wet and viscous."
+ ],
+ "words": 802,
+ "status": "checked",
+ "checked": {
+  "by": "L7 article engine (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "The color name's origin is undocumented in all sources; article is honest and short, built on the green-serpent tradition.",
+   "Desaturated greens for viscosity is Pastoureau's claim about medieval art, linked to the swatch by interpretation.",
+   "Murexide and Kekule serpent stories are corrected/hedged as legends.",
+   "The Flying Serpent date: 1668 sighting, 1669 pamphlet per St Clair notes.",
+   "Archive matches are look-alike colors on aged photographs."
+  ]
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "slug": "naiad",
+ "name": "Naiad",
+ "hex": "#7EAF8C",
+ "names": [
+  "Naiad"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Naiad is a soft, light green from Maerz and Paul's 1930 dictionary, named for the water nymphs of Greek myth.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A water nymph",
+   "body": "Maerz and Paul's *Dictionary of Color* (1930) lists Naiad at plate 27, position B 7, with 1920 as its earliest use, and the NBS Circular 553 of 1955 cites it [1]. The nearest ISCC-NBS category is light green, 4.0 units away [1]. A naiad is a nymph of springs and streams, and the choice of name suggests water-green, though the dictionary does not say why it was chosen [1][2].\n\nThe idea is old. Pastoureau quotes a classical passage on dyed dresses that calls a water-colored green the dress of the naiads, which shows the association is no twentieth-century invention [3]. Its neighbors are [[sage]], [[sea-green]] and [[light-green]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Naiad appears in 36 of the 23,781 paintings in our archive, about 0.15%, as photographed [5]. It peaks in paintings of the 1900s, in 6 of 1,674 (0.4%), 3.7 times the rate expected from the same museums [5]. Inside a painting it most often plays a light [5]. The earliest match is a painting by Georg Gsell of 1729, 191 years before the name's earliest record, so it is a look-alike hue and not evidence of a dye [5]. These are photographs of varnished paintings, so a match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the naiads, nymphs of springs and streams",
+   "first_recorded": "1920 (Maerz & Paul 1930)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "sage",
+   "sea-green",
+   "light-green",
+   "apple-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 36,
+  "pct": 0.15,
+  "peak_period": "1900s",
+  "measured": {
+   "lch": [
+    67.3,
+    26.8,
+    151.5
+   ],
+   "nearest": [
+    [
+     "Sage",
+     7.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 27 B 7, first recorded 1920; NBS Circular 553 (1955), ISCC-NBS light green",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Concordance search of ../color-kb/concordance/by-color/naiad.jsonl",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 14 (\"Dressing in Yellow\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is a naiad?",
+   "choices": [
+    "A nymph of springs and streams",
+    "A kind of sea shell",
+    "A Roman dye",
+    "A pigment from copper"
+   ],
+   "answer": "A nymph of springs and streams",
+   "kind": "pick"
+  },
+  {
+   "q": "In which Maerz and Paul plate is Naiad listed?",
+   "choices": [
+    "Plate 27",
+    "Plate 2",
+    "Plate 14",
+    "Plate 39"
+   ],
+   "answer": "Plate 27",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A pale water green named for nymphs of springs and streams."
+ ],
+ "words": 220,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Corrected year gap (1729 to 1920 is 191 years)"
+  ]
+ }
+}

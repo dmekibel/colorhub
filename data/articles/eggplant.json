@@ -1,0 +1,133 @@
+{
+ "slug": "eggplant",
+ "name": "Eggplant",
+ "hex": "#614051",
+ "names": [
+  "Eggplant"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Eggplant is a dark greyish purple named for the fruit of *Solanum melongena*, which British English calls the aubergine.",
+ "sections": [
+  {
+   "id": "fruit",
+   "title": "A fruit's name",
+   "body": "The Pigment Compendium notes that the aubergine (eggplant), *Solanum melongena*, is one of about 1,700 species in the genus *Solanum*, which also includes the potato [1]. A relative, black nightshade, has berries that are green, turning purplish to black when ripe, and an old recipe uses its juice to make a green writing ink [1]. The immature berries and foliage are toxic [1]."
+  },
+  {
+   "id": "china",
+   "title": "Aubergine in China",
+   "body": "Paterson records that Ming-era porcelain called *wu t'sai*, Five Colours, was decorated in apple green, aubergine, iron red, violet and yellow [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch derives from ISCC-NBS block 230 (1955), the Maerz and Paul dictionary, the xkcd survey and the Crayola list [3]. The nearest ISCC-NBS name is \"dark grayish purple\", 5.7 units away [3]. It sits near [[plum]], [[puce]] and [[mauve]], and darker than all three."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "It appears in 40 of 23,781 archive paintings, 0.17 per cent, rarer than 60 per cent of named colors [4]. Inside a painting it is most often a hidden color, in 52 per cent of the 23 paintings where it counts [4]. It peaks in the 1900s, at 0.4 per cent of 1,674 paintings, 2.8 times the museums' baseline [4]. The earliest dated example is Ambrogio Lorenzetti's, from 1337, though the early archive is thin and that is a floor [4]. These are photographs of varnished paintings [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fruit of Solanum melongena",
+   "first_recorded": "Maerz and Paul, 1930",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "aubergine"
+  ],
+  "siblings": [
+   "aubergine",
+   "plum"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 40,
+  "measured": {
+   "lch": [
+    31.4,
+    17.8,
+    345.8
+   ],
+   "nearest_iscc": [
+    "dark grayish purple",
+    5.7
+   ]
+  },
+  "role": "hidden 52%"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 290, 361 (\"nightshade\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 168 (\"Five Colours\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the aubergine's botanical genus?",
+   "choices": [
+    "Solanum",
+    "Rubus",
+    "Malva",
+    "Prunus"
+   ],
+   "answer": "Solanum",
+   "kind": "pick"
+  },
+  {
+   "q": "Which Ming porcelain palette included aubergine?",
+   "choices": [
+    "Wu t'sai, Five Colours",
+    "Blue and white",
+    "Celadon",
+    "Ru ware"
+   ],
+   "answer": "Wu t'sai, Five Colours",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Eggplant and potato are cousins: both are Solanum."
+ ],
+ "words": 233,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that aubergine names came via ceramic catalogs."
+  ]
+ }
+}

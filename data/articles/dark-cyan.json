@@ -1,0 +1,116 @@
+{
+ "slug": "dark-cyan",
+ "name": "Dark Cyan",
+ "hex": "#008B8B",
+ "names": [
+  "Dark Cyan"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark cyan is a web color: a deep blue-green defined in the X11 set and carried into CSS.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color",
+   "body": "Paterson lists *DarkCyan* as one of the colors of the X11 set, with the hex code #008B8B [1]. The dictionary defines cyan itself as a greenish blue and one of the three subtractive primary colours [1]. The prefix *cyano-* comes from the Greek for blue [1]. The color is also in the xkcd survey of 2010 [2].\n\nIts closest named neighbor is [[teal]], at a CIEDE2000 distance of 4.0 [2]. The books say nothing more about this exact shade, so its history is the history of the web list: origin undocumented."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dark cyan is almost absent from museum paint. In our archive of 23,781 paintings it appears in five, and only one by the stricter test of covering at least 1% of the canvas [3]. It is rarer than 86% of the named colors [3]. These are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "cyan (Greek kyanos, blue), darkened",
+   "first_recorded": "X11 web colors; xkcd 2010",
+   "source": "Paterson, pp. 136, 140"
+  },
+  "aka": [],
+  "siblings": [
+   "teal",
+   "dark-turquoise",
+   "turquoise",
+   "aqua"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 5,
+  "rank_rarer_than_pct": 86,
+  "measured": {
+   "lch": [
+    52,
+    32,
+    196
+   ],
+   "nearest": [
+    [
+     "Teal",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 136, 140",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; CSS/X11; xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What hex code does DarkCyan have in the X11 set?",
+   "choices": [
+    "#008B8B",
+    "#8B008B",
+    "#B8860B",
+    "#FFF8DC"
+   ],
+   "answer": "#008B8B",
+   "kind": "pick"
+  },
+  {
+   "q": "How does Paterson define cyan?",
+   "choices": [
+    "Greenish blue",
+    "Yellowish green",
+    "Purplish red",
+    "Pale grey"
+   ],
+   "answer": "Greenish blue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark cyan is nearly absent from museum paintings: our archive has five."
+ ],
+ "words": 160,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

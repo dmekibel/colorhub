@@ -1,0 +1,106 @@
+{
+ "slug": "mustard-yellow",
+ "name": "Mustard Yellow",
+ "hex": "#F4C863",
+ "names": [
+  "Mustard Yellow"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Mustard yellow is the deep, slightly warm yellow of the table condiment, a name that grew out of the shorter word mustard.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A condiment's color",
+   "body": "Dictionaries gloss plain *mustard* as a reddish-yellow and *mustard brown* as a deep brownish-yellow [1]. *Mustard yellow* itself is described as a deep yellow that was popular in the 1930s [1]. The same dictionary's list of yellows includes [[saffron]], nankeen, tarragon and wheat [1].\n\nThe name was not always a compliment. In a history of white, Pastoureau lists it with purple as a color a mother would not want on a baby's nurse, calling mustard yellow a dirty color in a discussion of hospital white [2]. That is a European attitude about hygiene, not a fact about the color [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of museum paintings, a color near this swatch turns up in 295 works, 1.24 per cent of the archive [3]. The earliest is a 1326 panel by Simone Martini and the latest a work from 1940, so the tone runs across six centuries of paint [3]. Among painters, Pierre Bonnard stands out with 5 of his works carrying it [3]. These are photographs of varnished paintings, so read the numbers as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the table condiment mustard",
+   "first_recorded": "a 1930s fashion term per Paterson",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "mustard"
+  ],
+  "siblings": [
+   "mustard",
+   "mustard-brown",
+   "old-gold"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, paintings as photographed",
+  "n_present": 295,
+  "pct_of_archive": 1.24,
+  "first_dated": 1326,
+  "top_painter": "Pierre Bonnard"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mustard\", \"mustard brown\", \"mustard yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 196",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), paintings as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which decade does Paterson say made mustard yellow popular?",
+   "choices": [
+    "1930s",
+    "1880s",
+    "1960s",
+    "1990s"
+   ],
+   "answer": "1930s",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: mustard yellow is a reddish-yellow, according to Paterson.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mustard yellow was a 1930s fashion name, per one standard dictionary."
+ ],
+ "words": 191,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'drab vs cheerful' inference and 'less prestige than neighbors'; tightened list wording."
+  ]
+ }
+}

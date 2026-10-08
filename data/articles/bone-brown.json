@@ -1,0 +1,100 @@
+{
+ "slug": "bone-brown",
+ "name": "Bone Brown",
+ "hex": "#594E45",
+ "names": [
+  "Bone Brown"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Bone brown is a dull dark brown pigment made from partly burned bone, now obsolete, which also left its name on a modern greyish-brown.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "A partly charred bone",
+   "body": "Paterson defines bone brown as charred bone dust, set next to the better-known bone black, an ancient pigment from carbonized bones that is still used [1]. The pigment compendium describes bone brown as derived from partially charred bones, black-brown in tone [2]. It adds that Heaton in 1928 listed it as obsolete or of little importance [2].\n\n\n\nIn the nineteenth century it served as a modifier in compounded colors [2]. Winsor and Newton's 1896 catalogue gave sap green in oil as quercitron lake, ultramarine and bone brown [2]. Olive lake was likewise a blend of quercitron lake and bone brown with ultramarine [2]. The same compendium gives the fuller history of [[sap-green]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The name is first recorded in our sources in 1912, in Ridgway, and again in Maerz and Paul and ISCC-NBS [3]. The swatch #594E45 is a dark, slightly grey brown [3]. It appears in 2,174 of 23,781 paintings, 9.14%, more common than 93% of named colors, as photographed [3]. Vilhelm Hammershøi uses it most, in 21 of 50 works here [3]. The earliest archive match is far older than the name, so that is a look-alike hue in an aged photograph, not proof of the pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the material: partly charred bone",
+   "first_recorded": "1912 (Ridgway), as a color name",
+   "source": "Paterson, A Dictionary of Colour; Pigment Compendium"
+  },
+  "aka": [],
+  "siblings": [
+   "umber",
+   "bistre"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2174,
+  "pct_present": 9.14,
+  "top_painter": "Vilhelm Hammershøi, 21 of 50 works"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bone black\" and \"bone brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Bone brown\", \"Olive lake\", \"Sap green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library and archive field notes for Bone Brown (n=2,174)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is bone brown made from?",
+   "choices": [
+    "Partly charred bone",
+    "Burnt walnut shells",
+    "Roasted coffee"
+   ],
+   "answer": "Partly charred bone",
+   "kind": "pick"
+  },
+  {
+   "q": "What did Heaton say of bone brown in 1928?",
+   "choices": [
+    "It was obsolete or of little importance",
+    "It was the finest brown",
+    "It was poisonous"
+   ],
+   "answer": "It was obsolete or of little importance",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bone brown is partly charred bone, and went into Victorian sap green."
+ ],
+ "words": 216,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

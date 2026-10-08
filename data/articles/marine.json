@@ -1,0 +1,190 @@
+{
+ "slug": "marine",
+ "name": "Marine",
+ "hex": "#042E60",
+ "names": [
+  "Marine"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Marine is a very dark blue, close to navy, whose name is the French bleu marine in English clothes; its best-documented career is as the color that replaced black in uniforms.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A sea word for a dark blue",
+   "body": "*Marine* here is the word in the French *bleu marine*, which is the French name for what English calls [[navy]] blue [3]. Paterson lists *marine blue* in English as a dark blue and glosses it as the color of the Royal Marines' uniform [1]. None of the books we read says who first used the word for a color, or when, so its origin as a color name is undocumented.\n\nThe swatch fits the description. In our library its nearest familiar name is Navy, a little under four units away on the CIEDE2000 scale (3.9), and its lightness is 19 on a scale of 100 [5]. Its closest named neighbors are [[marine-blue]], [[navy]] and [[midnight-blue]], all very dark blues [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "Where the name is recorded",
+   "body": "The dating depends on the source. Maerz and Paul's dictionary, as our library records it, gives about 1850 as the first record of a color of this name, on plate 46 G 12 [5]. We have not found that date confirmed in the books. The ISCC-NBS system lists Marine in its block 183 [5].\n\nThe other standard that carries the name is RAL, the German paint system, where it sits as RAL 5026 and is counted as a near duplicate of a color called Pearl Night Blue, 2.3 units from our swatch [5]. RAL's earliest year in our data is 1927 [5]. As always, a screen value for a printed standard is an approximation [5]."
+  },
+  {
+   "id": "uniforms",
+   "title": "From black to blue uniforms",
+   "body": "Pastoureau writes that across Europe the professions that required a regulation uniform, such as police, firemen, customs officers, postmen and sailors, adopted black and kept it until the first decades of the twentieth century [2]. Navy blue then gradually replaced it, because it was thought less severe or less easily soiled [2]. His shorter French book describes the same shift, with the uniforms of those who hold authority, from customs officers to magistrates and clergy, passing progressively to *bleu marine* [3].\n\nA dark blue was not new to dyers by then. Finlay lists the official shades of [[indigo]] that English dyers recognized in the eighteenth century, running from milk blue and pearl blue at the pale end, through sky blue, queen's blue and garter blue, to deep blue and navy blue [4]. Navy blue is the last and darkest rung [4]. Paterson dates the Royal Air Force's dark Air Force blue to 1919 [1].\n\nStories that tie a uniform blue to one king's favorite are legend, not record; the book evidence is of a slow, practical change from black [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 30 of them [6]. The dark blue is a feature of the 1400s: 8 of 945 paintings from that century, about 6.7 times the rate the museums' own mix predicts [6]. Three of the largest patches are in [[painter:filippino-lippi|Filippino Lippi]]'s *The Meeting of Joachim and Anne* of 1497, at 32 per cent of the canvas [6]. Next come [[painter:fra-angelico|Fra Angelico]]'s *Madonna of the Pomegranate* of 1426 and [[painter:henri-matisse|Matisse]]'s *Still Life with Blue Tablecloth* of 1909, each at 21 per cent [6]. See [[painting:smk-KMSsp40|The Meeting of Joachim and Anne]] and [[painting:commons-Q2179157|Still Life with Blue Tablecloth]].\n\nThese paintings predate any dating we have for the name by centuries, so what they show is a look-alike dark blue in an aged photograph, not a navy dye [6]. They are photographs of aged, varnished paintings, and a color match is not a pigment test [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the French bleu marine (navy blue); the sea-word origin of the color name is undocumented in our books",
+   "first_recorded": "about 1850 (Maerz & Paul, as recorded in our library); RAL 1927",
+   "source": "Paterson, A Dictionary of Colour; Pastoureau, Black"
+  },
+  "aka": [
+   "marine blue",
+   "bleu marine",
+   "navy blue"
+  ],
+  "siblings": [
+   "navy",
+   "marine-blue",
+   "midnight-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bleu marine (navy blue)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#042E60",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 30,
+  "top_paintings": [
+   "smk-KMSsp40",
+   "commons-Q2179157",
+   "commons-Q22082602",
+   "nga-42481"
+  ],
+  "century_1400s": {
+   "hits": 8,
+   "n": 945,
+   "lift": 6.71
+  },
+  "measured": {
+   "lch": [
+    19,
+    34,
+    284
+   ],
+   "nearest": [
+    [
+     "Navy",
+     3.9
+    ],
+    [
+     "Pearl Night Blue",
+     2.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"marine blue\" and \"Air Force blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 89",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Le petit livre des couleurs, ch. 6 (\"Le noir\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Marine, with ISCC-NBS 1955, Maerz & Paul 1930 and RAL sources; screen values are approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Pastoureau, why did navy blue gradually replace black in many uniforms?",
+   "choices": [
+    "It was thought less severe or less easily soiled",
+    "It was cheaper to dye",
+    "A king ordered it",
+    "It showed up better at night"
+   ],
+   "answer": "It was thought less severe or less easily soiled",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: navy blue uniforms were chosen to please a king's favorite.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive of paintings, which century is this deep blue most over-represented in?",
+   "choices": [
+    "The 1400s",
+    "The 1700s",
+    "The 1800s",
+    "The 1900s"
+   ],
+   "answer": "The 1400s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Until the early twentieth century, the uniforms of police, firemen and sailors were mostly black; navy blue slowly took over.",
+  "English dyers of the 1700s graded indigo from milk blue to navy blue, and navy was the darkest.",
+  "The darkest blues in our archive of paintings cluster in the 1400s, in Italian altarpieces."
+ ],
+ "words": 595,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch-34 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Origin of marine as a color name undocumented in the books; Paterson's Royal Marines gloss is a single-source dictionary entry.",
+   "c. 1850 date is Maerz & Paul via our library only; not confirmed in books.",
+   "Navy-blue/king's-favorite legend corrected in one sentence, no source book names it for this color.",
+   "'Passing progressively' paraphrases Pastoureau (Petit livre): French original is future tense."
+  ]
+ }
+}

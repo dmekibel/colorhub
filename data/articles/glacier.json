@@ -1,0 +1,126 @@
+{
+ "slug": "glacier",
+ "name": "Glacier",
+ "hex": "#374A63",
+ "names": [
+  "Glacier"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Glacier is a dark, greyish blue-violet that appears in Maerz and Paul's 1930 dictionary, whose origin the sources do not explain.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from ice",
+   "body": "Our only record of the name as a color is Maerz and Paul's 1930 dictionary, plate 39 [1]. The swatch reads as a greyish purplish blue in ISCC-NBS terms [1], much darker than ice looks in sunlight. Garfield, counting the sources of color names, lists glacier blue among 121 names taken from geographical elements [2].\n\nThat is all the books give. They mention glaciers as places, as the source of meltwater that greens the Himalayan valleys [3], and as the blue-drawn glaciers on the white of snow on maps [4]. None of them says what glacier-the-color was supposed to look like. Close relatives in the graph include [[steel-blue]], [[slate-grey]], [[navy]] and [[indigo]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color is present in 275 of 23,781 archive paintings and plays a hidden color in 52 percent of the 139 where our within-painting lens finds it [5]. Henri Matisse is its most devoted painter, in 4 of 50 works, 4.5 times the baseline [5]. The earliest match is 1301, which is 629 years before the name's first record in our sources, 1930 [5]. As photographed, a match is a look-alike hue, not evidence about pigments or glaciers."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "glacial ice (origin of the color usage undocumented)",
+   "first_recorded": "Maerz and Paul, 1930",
+   "source": "ColorHub library; Garfield, Mauve"
+  },
+  "aka": [],
+  "siblings": [
+   "steel-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "slate-grey",
+    "gloss": "similar dark cool tone, different name and source"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 275,
+  "role": "hidden (52% of 139)",
+  "record": {
+   "first": 1930,
+   "first_src": "maerz-paul"
+  },
+  "measured": {
+   "iscc": "grayish purplish blue"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz and Paul 1930, plate 39 I8",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 214",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Petit livre des couleurs, ch. 7 (Le blanc)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; fieldnotes/g.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the earliest source for Glacier as a color name in our records?",
+   "choices": [
+    "Maerz and Paul, 1930",
+    "Newton, 1704",
+    "Ridgway, 1886"
+   ],
+   "answer": "Maerz and Paul, 1930",
+   "kind": "pick"
+  },
+  {
+   "q": "The books explain exactly what shade glacier was meant to be.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Glacier appears as a color name in Maerz and Paul's 1930 dictionary."
+ ],
+ "words": 207,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Pastoureau: glaciers drawn blue on white map background (was reversed)",
+   "Removed unsupported 'named for the ice' claim"
+  ]
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "slug": "light-slate-grey",
+ "name": "Light Slate Grey",
+ "hex": "#778899",
+ "names": [
+  "Light Slate Grey"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Light Slate Grey is a cool, bluish grey that is a named color in CSS, with the spelling gray or grey both accepted in the web names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color",
+   "body": "Our library lists Light Slate Grey as the CSS color `lightslategray`, with a blue-grey tone that matches the ISCC-NBS block called bluish gray, 6.0 units away on the CIEDE2000 scale [1]. Its hex value, #778899, is the same in every browser, so it is a fixed screen color rather than a painted one, and CSS accepts both the gray and grey spellings [1]. Paterson's dictionary lists LightSlateGray among its entries for web colors, in both the index and the grey table [2][3].\n\nSee [[slate-grey]] for the darker relative and [[grey]] for the family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color this close appears in 408 works, or 1.7 per cent, more than 70 per cent of the named colors [4]. It peaks in the 1900s, at 29 of 1,674 paintings, 1.6 times the expected rate for the same museums [4]. These are photographs of aged, varnished paintings [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "light plus slate grey",
+   "first_recorded": "CSS (web color names)",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "LightSlateGray",
+   "bluish gray"
+  ],
+  "siblings": [
+   "slate-grey",
+   "grey",
+   "dark-slate-grey",
+   "steel-blue"
+  ],
+  "parent": "slate-grey",
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed",
+  "n_present": 408,
+  "pct_archive": 1.72,
+  "measured": {
+   "iscc": "bluish gray",
+   "de2000": 6.0
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912, CSS, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 476 (index of web colors)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 501 (greys)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; dE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the CSS name for Light Slate Grey?",
+   "choices": [
+    "lightslategray",
+    "bluegrey",
+    "slateblue",
+    "lightsteel"
+   ],
+   "answer": "lightslategray",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch is a warm brownish grey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Slate Grey is a CSS color, and it matches 1.7 per cent of the paintings in our archive."
+ ],
+ "words": 176,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All key claims verified against fact cards and book text; no changes"
+  ]
+ }
+}

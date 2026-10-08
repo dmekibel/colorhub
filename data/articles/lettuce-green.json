@@ -1,0 +1,106 @@
+{
+ "slug": "lettuce-green",
+ "name": "Lettuce Green",
+ "hex": "#92984F",
+ "names": [
+  "Lettuce Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Lettuce green is a soft yellowish green named for lettuce leaves, with a long record in color dictionaries.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name means",
+   "body": "Paterson's dictionary defines *lettuce green* as the yellowish green of lettuce leaves [1]. The swatch is a moderate yellow green in ISCC-NBS terms [2]. The name has a long paper trail: Werner's *Nomenclature of Colours* of 1821 lists a lettuce green as number 57 among the greens, and Ridgway's 1912 atlas and the Maerz and Paul dictionary of 1930 carry it too, though old plates are approximate [2]. Close neighbors are [[moss-green]], [[leaf-green]] and [[lime-green]], all in the family of [[green]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 235, 0.99 per cent, as photographed [3]. Inside a painting it most often plays an accent, as in 55 per cent of 141 paintings [3]. It peaks in the 1900s at 2.8 times the expected rate [3]. Its most devoted painter is Georges Seurat, who uses it in 10 of the 41 works we hold, 12.3 times the baseline, with Camille Pissarro next [3]. Among countries it is most over-represented in India, at 2.5 times expected [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the leaves of lettuce",
+   "first_recorded": "Werner 1821 (no. 57, Greens)",
+   "source": "Paterson, A Dictionary of Colour, \"lettuce green\""
+  },
+  "aka": [
+   "lettuce"
+  ],
+  "siblings": [
+   "moss-green",
+   "leaf-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 235,
+  "pct": 0.99,
+  "role": "accent, 55% of 141 paintings",
+  "painters": [
+   "georges-seurat",
+   "camille-pissarro"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lettuce green\" (p. 240, colour lists pp. 476, 498)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 nearest names, Ridgway 1912 and Maerz & Paul 1930 entries, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter in our archive uses lettuce green about twelve times his baseline?",
+   "choices": [
+    "Georges Seurat",
+    "Edvard Weie",
+    "Alfred Sisley"
+   ],
+   "answer": "Georges Seurat",
+   "kind": "pick"
+  },
+  {
+   "q": "In a painting, lettuce green most often plays which role?",
+   "choices": [
+    "An accent",
+    "A deep shadow",
+    "The background wash"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Seurat's canvases hold lettuce green twelve times more often than the baseline."
+ ],
+ "words": 189,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

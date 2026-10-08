@@ -1,0 +1,295 @@
+{
+ "slug": "straw",
+ "name": "Straw",
+ "hex": "#E4D96F",
+ "names": [
+  "Straw"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Straw is the pale yellow of dried grain stalks, named for the stalks themselves and listed in chart after chart of color names since the sixteenth century.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color named for the stalk",
+   "body": "Paterson's dictionary glosses *straw* as yellow and *straw-coloured* as the pale yellow of straw [1]. It also keeps two older adjectives: *stramineous*, simply straw-coloured, and *festucine*, a greeny-yellow straw [1]. *Light straw* is the color of white wine [1]. The Maerz and Paul dictionary of 1930 dates the English color name to 1589 [14].\n\nIn printed English the adjective *straw* rose fastest in the 1840s and peaks in the 1870s [16]. The two-word phrase *straw yellow* peaks much later, around the 1920s, at a far smaller frequency [16].\n\nThe swatch here, #E4D96F, is a clear greenish yellow, which ISCC-NBS calls light greenish yellow, with CIELAB chroma 54 [14]. That is stronger than the word suggests. The xkcd survey's straw is a paler #FCF679, and the nearest names to our swatch are [[dull-yellow]], [[sandy]] and [[khaki]] [14]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner's straw yellow",
+   "body": "In the Werner and Syme nomenclature, Straw Yellow is no. 71, between Honey Yellow and Wine Yellow [2]. Its recipe is sulphur yellow, a large share of greyish white and a touch of ochre yellow [2]. That recipe describes a pale, greyish yellow, where our swatch is a saturated greenish one [2][14]. The examples were oat straw among plants, the fur of the polar bear among animals and calamine among minerals [2].\n\nThe recipe starts from [[sulphur-yellow]], which makes straw a diluted yellow, not a separate hue. In the lab, a precipitate of antimony sulphide passes from straw-yellow through lemon-yellow and orange-red to deep crimson as the conditions change [13]."
+  },
+  {
+   "id": "cloth",
+   "title": "Straw in cloth, hats and steel",
+   "body": "[[leghorn]] is the yellow of straw, named for Livorno, whose wheat gave the straw for Leghorn hats; the straw was harvested green and bleached before it was used [1]. *Tuscan-coloured* also meant straw-coloured [1].\n\nDyers and drapers used the word plainly. The V&A describes one Kashmir shawl fragment as straw, saxe blue, green muscat, claret and mole on a saffron ground [10]. Furetière's French dictionary distinguished five shades of yellow, putting straw (*paillé*) between lemon and golden [7]. French fabrics sold as Nankin yellow, fashionable from the 1740s to the 1770s, ran from light yellow nearly to orange and took in blond, straw, buff and beige tones; the name was a marketing device [8].\n\nStraw is also a heat color. Straw-coloured is one of the colors steel takes on when heated, and it marks the stage where the steel has been annealed and is less brittle [1]. Farrow and Ball's off-white String was first named Straw Left out in the Rain by the paint designer John Fowler in the 1930s [11].\n\nOne old misreading is worth correcting. In old novels, *tow-headed* does not mean hair that sticks up like straw. Tow is the lower-quality flax used for rope and coarse cloth, and tow-headed hair has its dirtier goldish color [10]."
+  },
+  {
+   "id": "painting",
+   "title": "In painting",
+   "body": "The yellows on Paleolithic cave walls leaned toward orange, beige and brown, and never toward green or lemon [3]. Pastoureau lists them from the lightest, straw, through chamois, apricot and honey, down to russet, tawny, bister and bronze [3]. Our swatch leans green, which none of them did.\n\nMedieval heraldry treated shade as unimportant. A yellow could be lemon, straw, honey or mustard, and what counted was the idea of yellow [4]. Straw could still decide an argument: the straw-yellow dress of a young woman in a Florentine portrait, painted with massicot and [[flower:weld|weld]] lake, led to the picture being given to Alessio Baldovinetti and taken from Piero della Francesca [5].\n\nFrom the 1560s until the Impressionists, true yellow grew scarce in painting and drifted toward browns, greens, greys, ochres, pinks, and straw or ivory tones [6]. In Italy, ivory, beige, straw, russet and light brown replaced yellow and allowed stronger contrasts, which Caravaggio used in Rome [6].\n\nStraw also works as a foil. Nelson describes the male satin bowerbird dancing on a stage of shiny yellow grass, where the contrast between the yellow straw and his blue objects helps decide whether females visit [12]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 31 works [15]. They cluster in the late 1800s: 20 of 8,345 paintings from that century, and 9 of 1,173 from the 1890s, 5.9 times the archive's rate [15]. The strongest case is Indian painting: 11 of 721 Indian works match, and 7 of 96 Kalighat pictures from Calcutta [15].\n\nThe largest areas are Kalighat paintings of about 1890: the snake goddess Manasa, where the color fills 69 per cent of the canvas, and Hanuman attacking Indrajit, at 49 per cent [15]. In Europe the best case is [[painter:emile-bernard|Émile Bernard]]'s *La Moisson* of 1888, at 44 per cent [[painting:commons-Q17492114|The Harvest]] [15].\n\nWith the finer lens, the color first appears in 1434, in a work by [[painter:fra-angelico|Fra Angelico]], 478 years before the name's first record in our sources [15]. That is a look-alike hue in an aged photograph, not proof of a dye. Inside a painting it most often plays an accent, in 68 per cent of 69 paintings, and [[khaki]] turns up on the same canvases about 20 times more often than chance [15]. As always these are photographs of varnished paintings, so read them as screen colors.\n\nWhere to look: ripe grain, a woven hat or dry grass in low light, and compare it with the swatch. Real straw is usually paler and greyer."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dried stalks of wheat and other grains",
+   "first_recorded": "Maerz and Paul 1930 date the English color name to 1589",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "straw yellow",
+   "stramineous",
+   "festucine"
+  ],
+  "siblings": [
+   "wheat",
+   "maize",
+   "sandy",
+   "sulphur-yellow"
+  ],
+  "parent": null,
+  "children": [
+   "leghorn"
+  ],
+  "disambiguation": [
+   {
+    "slug": "wheat",
+    "gloss": "Wheat is a paler, tan-leaning cream-yellow, not this saturated greenish yellow"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "paille, paillé"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E4D96F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 31,
+  "top_paintings": [
+   "cma-162430",
+   "cma-162507",
+   "commons-Q17492114",
+   "aic-30419"
+  ],
+  "by_century": {
+   "1800s": [
+    20,
+    8345
+   ]
+  },
+  "peak_decade": {
+   "1890s": [
+    9,
+    1173
+   ]
+  },
+  "first_seen": {
+   "id": "commons-Q3797771",
+   "year": 1434
+  },
+  "company": [
+   [
+    "Khaki",
+    19.9
+   ]
+  ],
+  "ngram": {
+   "adjective_peak": "1870s",
+   "fastest_rise": "1840s",
+   "phrase_straw_yellow_peak": "1920s"
+  },
+  "measured": {
+   "lch": [
+    85.6,
+    53.9,
+    100.6
+   ],
+   "nearest": [
+    [
+     "Dull Yellow",
+     3.5
+    ],
+    [
+     "Sandy",
+     3.7
+    ],
+    [
+     "Maize",
+     6.0
+    ],
+    [
+     "Sulphur Yellow",
+     6.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"straw\", \"stramineous\", \"festucine\", \"straw-coloured\", \"light straw\", \"leghorn\", \"Tuscan-coloured\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"Straw Yellow\" (Werner no. 71), pp. 199-200",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 9 (\"The Ochers of the Paleolithic Period\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 20 (\"Yellow in Heraldry\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 25 (\"The Robes of Jan Hus and of Judas\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 28 (\"The Yellow of Painters\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 31 (\"Dictionaries and Encyclopedias\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 32 (\"The East Comes into Fashion\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Fabric, pp. 240 and 293",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 12 (\"White\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Nelson, Bluets, propositions 67-68",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Antimony(III) sulfide\", p. 31",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930 plate 10 F 2, ISCC-NBS 1955, Ridgway 1912, xkcd 2010; CIELAB and CIEDE2000 computed by ColorHub",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas; within-painting lens in data/graph/fieldnotes/s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, adjective use of straw (data/graph/fieldnotes/s.json) and the phrase straw yellow (research/_raw/ngrams)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does the Werner and Syme nomenclature define straw yellow?",
+   "choices": [
+    "Sulphur yellow with a large share of greyish white and a touch of ochre yellow",
+    "Lemon yellow mixed with green",
+    "Gamboge yellow with much brown",
+    "Saffron yellow with black"
+   ],
+   "answer": "Sulphur yellow with a large share of greyish white and a touch of ochre yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "Why were Leghorn straw hats bleached?",
+   "choices": [
+    "The straw was harvested green",
+    "The straw was grey with age",
+    "The hats were dyed black afterwards",
+    "Bleaching made the straw waterproof"
+   ],
+   "answer": "The straw was harvested green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: tow-headed means hair that sticks up like straw.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Werner's straw yellow was sulphur yellow mixed with much greyish white: a washed-out yellow, not a bright one.",
+  "Old novels' 'tow-headed' children are not straw-haired: tow is the coarse flax used for rope.",
+  "Paleolithic cave yellows ran from straw to bronze, and none of them leaned toward green."
+ ],
+ "words": 889,
+ "status": "checked",
+ "checked": {
+  "by": "batch-35 writer (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Ngram: adjective data from the graph fieldnote; 'straw yellow' phrase peak read from the raw cache and smoothing is unknown, hedged as around the 1920s.",
+   "Furetiere's five shades quoted from Pastoureau; no date given for the dictionary.",
+   "Straw swatch is a saturated greenish yellow, unlike Werner's greyish recipe; stated."
+  ]
+ }
+}

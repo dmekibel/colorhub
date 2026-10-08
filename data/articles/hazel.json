@@ -1,0 +1,173 @@
+{
+ "slug": "hazel",
+ "name": "Hazel",
+ "hex": "#8E7618",
+ "names": [
+  "Hazel"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Hazel is named for the hazelnut and the shrub it grows on; Paterson files it among the browns, while this screen swatch is a darker, greener gold.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The nut behind the name",
+   "body": "Paterson's dictionary gives two old words for the same nut. *Avellaneous* is the light brown of the hazelnut or filbert, and *nut-brown* is often the reddish brown of the hazelnut, though strictly it covers all nut colors [1][2]. The English name hazel is listed in Paterson's index among the browns [3].\n\nMaerz and Paul record hazel as a color name from 1592, and the ISCC-NBS system of 1955 files this swatch in its block 57 [4]. On a screen, the swatch is a dark olive-gold, with more green in it than the nut has [4]. In the Werner and Syme tradition, hazel nuts appear among the example objects in the reds and browns [5]."
+  },
+  {
+   "id": "nut",
+   "title": "A tree with a reputation",
+   "body": "Before it was a color, hazel was a tree with meanings. In the medieval tree symbolism Pastoureau describes, the hazel and the hornbeam were linked with magic, and the hazel was one of a few trees thought ambivalent, together with the poplar and the cypress [6]. Fairies, who were associated with green, were said to guard the plants they drew power from, among them hawthorn, service tree and hazel [7]. The color carries none of this meaning; the name does.\n\nHazel also served as an observation word. A medical color table of the early nineteenth century that borrowed Syme's names lists hazel and [[chestnut|lighter chestnut]] among the browns, beside wood brown and [[tawny]] orange [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Hazel is a middling-common color in our painting archive: 339 of 23,781 paintings, 1.43 per cent, and more common than 72 per cent of the named colors [8]. The within-painting count is 217 paintings, in which it most often plays an accent, as it does in 60 per cent of them [8]. It peaks in the 1800s, in 1.2 per cent of the 8,345 paintings from then, 1.3 times the museums' baseline [8].\n\nThe painters who use it most are [[painter:paulus-potter|Paulus Potter]], in 7 of the 28 works we have, 9.4 times the baseline, and [[painter:luis-egidio-melendez|Luis Egidio Meléndez]], in 6 of 39 [8]. India is the most over-represented country, with 12 of 721 paintings [8]. Our earliest match is a work of 1330 by Pietro Lorenzetti, a floor set by a thin early archive, not a first [8].\n\nAs ever, these are photographs of aged, varnished paintings, so a match is a look-alike hue and not a pigment test, and this swatch is darker and greener than the hazelnut brown a reader might expect [8]. The word itself, counted as a color adjective in Google Books, peaks in the 2010s [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the hazel shrub and its nut",
+   "first_recorded": "1592 as a color name, per Maerz and Paul",
+   "source": "ColorHub library (Maerz & Paul 1930; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Avellaneous (the Latinate word for the nut color)"
+  ],
+  "siblings": [
+   "nut-brown",
+   "olive-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "nut-brown",
+    "gloss": "the reddish nut brown, a warmer color than this swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 339,
+  "within_painting": 217,
+  "pct": 1.43,
+  "rank_pct": 72,
+  "peak_century": {
+   "century": 1800,
+   "rate": 1.2,
+   "n": 8345
+  },
+  "top_painters": [
+   "paulus-potter",
+   "luis-egidio-melendez"
+  ],
+  "top_country": {
+   "name": "India",
+   "hits": 12,
+   "n": 721
+  },
+  "first_seen": {
+   "id": "commons-Q3889230",
+   "painter": "Pietro Lorenzetti",
+   "year": 1330
+  },
+  "role_most_common": "accent (60%)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"avellaneous\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"nut-brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index of browns",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz & Paul 1930 (first recorded 1592, plate 13 J 9); ISCC-NBS 1955 block 57; swatch #8E7618 read as RGB (142, 118, 24)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 220-221 and 254-259",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 36",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Hazel (23,781 paintings, as photographed; Google Books Ngram, adjective use)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say avellaneous means?",
+   "choices": [
+    "The light brown of the hazelnut or filbert",
+    "A grey-green",
+    "A dark red",
+    "The color of a mole"
+   ],
+   "answer": "The light brown of the hazelnut or filbert",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does this hazel swatch not look like a hazelnut?",
+   "choices": [
+    "It is a darker, greener olive-gold than the nut",
+    "It is bright blue",
+    "It is nearly white",
+    "It is the same color as a pecan"
+   ],
+   "answer": "It is a darker, greener olive-gold than the nut",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Hazel on screen is an olive-gold; the nut it is named for is a lighter, redder brown.",
+  "In tree lore, the hazel was a magical tree, one of a few thought ambivalent."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'for centuries' claim about the word's meaning."
+  ]
+ },
+ "words": 437
+}

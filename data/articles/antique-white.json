@@ -1,0 +1,127 @@
+{
+ "slug": "antique-white",
+ "name": "Antique White",
+ "hex": "#FAEBD7",
+ "names": [
+  "Antique White"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Antique White is a pale, warm, yellowish white, now best known as one of the named colors of the web.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines Antique White as a yellowish white adopted as a color name by web page creators [1]. It comes from the X11 and CSS color list, where it sits among the whites [1][3]. The word *antique* in color names, Paterson adds, describes things that look very old, as in antique ivory, the yellowish white of old ivory [2].\n\nThe library records Maerz and Paul using the name by 1915, on plate 11 B 3 of their 1930 dictionary, and lists it in ISCC-NBS block 73 [3]. So the name predates the web by decades; the web only made it famous [1][3]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Neighbors",
+   "body": "The nearest named color in the library is [[ecru]], at a CIEDE2000 distance of 2.7, and [[champagne]] is a near duplicate at 2.0 [3]. It is warmer than plain [[white]] and lighter than [[beige]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, the color appears in 2.31% of them, as photographed [4]. It is more common than 79% of the named colors and peaks in the 1200s, where it appears in 4.2% of the paintings we hold from that century, though that century is thinly covered [4]. John Singer Sargent is its most devoted painter here, with 17 of 287 works [4]. Because these are photographs of aged, varnished canvases, a match shows a look-alike hue, not proof of a pigment [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the look of antiques; origin of the exact name undocumented",
+   "first_recorded": "1915 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "AntiqueWhite (CSS keyword)"
+  ],
+  "siblings": [
+   "ecru",
+   "champagne",
+   "blanched-almond"
+  ],
+  "parent": null,
+  "children": [
+   "linen"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 549,
+  "pct_paintings": 2.31,
+  "peak_century": 1200,
+  "library_first": 1915,
+  "nearest": [
+   [
+    "Ecru",
+    2.7
+   ],
+   [
+    "Champagne",
+    2.0
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 30, \"Antique White\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 30, \"antique ivory\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Antique White was first used as a color name by web designers.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which of these is the closest named color to Antique White in the library?",
+   "choices": [
+    "Ecru",
+    "Navy",
+    "Crimson"
+   ],
+   "answer": "Ecru",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Antique White was in print as a color name by 1915, decades before the web adopted it."
+ ],
+ "words": 237,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

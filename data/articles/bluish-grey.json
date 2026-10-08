@@ -1,0 +1,263 @@
+{
+ "slug": "bluish-grey",
+ "name": "Bluish Grey",
+ "hex": "#9C9D9A",
+ "names": [
+  "Bluish Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "long",
+ "lede": "Bluish Grey is a grey with a cast of blue, a name that has been in colour vocabularies since the first mineralogists' charts of the 1700s and that, on screen, is barely blue at all.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "A grey that hardly shows its blue",
+   "body": "The swatch here is #9C9D9A, a medium grey whose chroma is only 1.7, so it is almost neutral [1]. It lies within a CIEDE2000 distance of 7.8 of the ISCC-NBS 1955 color called medium gray, and the nearest other systems give it close neighbors such as RAL's Signal Grey, 2.4 away, and Ridgway's Pale Purplish Grey, 2.3 away [1]. The 2010 xkcd survey's own bluish grey is #748B97, a clearly bluer and darker color [1].\n\nThe swatch is therefore a safe middle of the group, and not the best picture of the name. The historical bluish grey was a grey you could see the blue in, and the aged swatches that survive have muted anyway [2]. Compare it with [[grey]], which leans slightly blue as well, and with the warmer [[taupe]] and [[nickel]]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner, Kirwan and Syme",
+   "body": "The phrase is a product of the mineral trade. In 1774 the German geologist Abraham Gottlob Werner built a list of colors to identify minerals, and later naturalists extended it up to 1821 [2]. Kirwan's 1794 list, with 83 colors, already has the name in the grey group, between lead grey and pearl grey [3].\n\nIn 1814 the Scottish painter Patrick Syme gave each term a painted swatch and an example from the animal, vegetable and mineral worlds, and in 1821 the list grew to 110 colors [2]. His Bluish Grey is number 14 among the whites, greys and blacks [4]. His example is the back and tail coverts of the wood pigeon, with limestone as the mineral, and it is defined as ash grey mixed with a little blue [4]. A modern edition adds the leaves of sea kale [4].\n\nThe name worked as an ingredient in other recipes. Syme's Pearl Grey is bluish grey with a little red, his Leek Green uses a little brown and bluish grey, and his Cochineal Red is lake red mixed with bluish grey [4][5]. Sowerby, whose separate system dates from 1809, also used compound names such as yellowish green and bluish grey, but naturalists found his terms too abstract [6]."
+  },
+  {
+   "id": "words",
+   "title": "Older words for the same grey",
+   "body": "English has many one-word names for a blue-tinted grey, and Paterson's dictionary lists a good number of them [7]. Latin *caesius* gives *caesious*, a bluey-grey bloom, and *griseous* means bluish-grey [7]. *Dove-grey* is the plumage of the dove, *Maltese* is simply given as a bluish grey, and *merle* is the grey-blue of a collie coat with black streaks [7]. *Mode* was a pale bluish grey that was a fashionable genre of light colors in the nineteenth century [7].\n\nOthers come from materials: *pewter*, *slate* and *battleship grey*, the last of which is how warships are painted [7]. [[slate-grey]] and [[battleship-grey]] are both articles here. *Berettino* is the bluish grey of the glaze used on Italian maiolica, and *mineral grey* is a bluish-grey pigment made from lapis lazuli [7]. *French grey* is a plain bluish grey in the dictionary's account [7]."
+  },
+  {
+   "id": "paint",
+   "title": "Mixing it",
+   "body": "A painter makes bluish grey by cooling black with white and a touch of blue. Ball observes that Greek painters often used blue to darken, and that charcoal black stirred into white yields a clear bluish grey [8]. Rubens, he adds, was still making blues by this route two thousand years later [8].\n\nThe pigment trade has its own bluish grey. Blue lead, according to Toch as quoted in the Pigment Compendium, is not strictly blue but bluish grey, a condensed sulphate of lead tinted with carbon smoke [9]. Byzantine mosaic gives a different use: in one church dome the Pentecost scene shows red flames framed by white rays, and the rays are edged in a dark bluish grey [10]."
+  },
+  {
+   "id": "body",
+   "title": "The grey of health and illness",
+   "body": "Doctors and mystics have used the name too. Birren reports that the visionary Kilner took a bluish grey, tinged with yellow and red, as the color of a healthy aura [11]. In the same book's table of skin changes in illness, argyria, a staining by silver, leaves the skin bluish grey or slate colored [12]. In 1827 the Nuremberg dermatologist Heinrich Eichhorn proposed a bluish grey with yellow markings as one entry in his skin-color table [13].\n\nThese are not color names a modern clinic would use, and the aura claim is a belief and not a measurement. They do show how ordinary the phrase was as a descriptive tool."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, this bluish grey appears in 690, or 2.9 per cent, as photographed, and it covers enough of a canvas to count in 437 of them [14]. It is more common than 81 per cent of the named colors [14]. Inside a painting it is most often a light: 54 per cent of those 437 pictures use it that way, by lightness rank within each painting [14].\n\nIt peaks in the 1900s, when 54 of our 1,674 paintings, or 3.2 per cent, have it, 1.6 times the expected rate [14]. Its most devoted painter is Eugène Boudin, with it in 4 of 33 works here, 4.7 times the baseline of the museums those works come from [14]. [[painter:eugene-boudin|Boudin]] painted the skies and shores of Normandy, and the other devoted painter on the list is [[painter:gustave-caillebotte|Caillebotte]], with 4 of 22 works [14]. Norway stands out among countries, at 3.1 times the expected rate [14]. These are photographs of aged, varnished paintings, and a color match is not a pigment test.\n\nThe earliest hit is a painting of 1164, 657 years before the name's first record in our sources, Syme's 1821 list [14]. The archive's early centuries are thin, so that is a look-alike hue in an old photograph, and no evidence that the pigment existed. In printed English, *bluish grey*, in all its senses, peaks in the 1900s [15]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: grey with a cast of blue; a Wernerian mineral and natural-history colour",
+   "first_recorded": "Werner-school lists, 1700s; Kirwan 1794; Syme no. 14, 1814/1821",
+   "source": "Baty, Nature's Palette"
+  },
+  "aka": [
+   "blue-grey",
+   "griseous (Latin-derived)",
+   "caesious"
+  ],
+  "siblings": [
+   "grey",
+   "slate-grey",
+   "battleship-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "blue-grey",
+    "gloss": "the web's Blue Grey (#6699CC) is a distinctly blue sky-blue, not a grey"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#9C9D9A",
+   "de2000": null,
+   "min_cover": 0.02
+  },
+  "n_present": 690,
+  "n_within_painting": 437,
+  "role": "light (54 per cent)",
+  "peak_century": {
+   "century": 1900,
+   "rate": 3.2,
+   "n": 1674,
+   "obs": 54,
+   "lift": 1.6
+  },
+  "painters": [
+   "eugene-boudin",
+   "gustave-caillebotte"
+  ],
+  "countries": [
+   "Norway 3.1x"
+  ],
+  "measured": {
+   "lch": [
+    64.6,
+    1.7,
+    123.0
+   ],
+   "iscc": "medium gray, dE 7.8",
+   "nearest_other_system": "RAL Signal Grey dE 2.4; Pale Purplish Grey dE 2.3"
+  },
+  "ngram": {
+   "all_senses_peak": 1900
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 190, Ridgway 1912, RAL 7004, xkcd, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 7-8",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-35 (nomenclature lists, Werner to Syme)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 52-57 (Syme's no. 14, Bluish Grey)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 54-55, 144-145 and 248-249",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 165-166 (Sowerby, 1809)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries caesi-, dove-grey, French grey, griseous, Maltese, merle, mineral grey, mode, pewter, slate, battleship grey, berettino",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"blue lead\", p. 68",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 62",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 220 (Eichhorn, 1827)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes/b.json, at least 2% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram, all senses, 5-year smoothing (data/graph/fieldnotes/b.json)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Patrick Syme define Bluish Grey?",
+   "choices": [
+    "Ash grey mixed with a little blue",
+    "Black mixed with indigo",
+    "Lead white mixed with Prussian blue",
+    "Slate dust in water"
+   ],
+   "answer": "Ash grey mixed with a little blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is this page's Bluish Grey swatch a poor picture of the name?",
+   "choices": [
+    "It is almost neutral, with very little blue in it",
+    "It is too dark",
+    "It is a pure blue",
+    "It is the color of lead"
+   ],
+   "answer": "It is almost neutral, with very little blue in it",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Syme's Bluish Grey had a bird as its animal example.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme's example of bluish grey was the back of a wood pigeon, with limestone as its mineral twin.",
+  "Look at the grey of a dove or of battleship paint: both are bluish greys, though few people would call them blue.",
+  "Bluish grey was already an ingredient: Syme used it in his recipes for cochineal red and leek green."
+ ],
+ "words": 958,
+ "status": "checked",
+ "checked": {
+  "by": "batch-41 writer self-check (sentence-to-source trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Kirwan 1794 list placement of bluish-grey taken from Baty p.32 list headed Kirwan 1794 (83 colours); parsing of OCR list is inferred",
+   "Kilner aura claim is single-source (Birren), hedged as belief",
+   "Byzantine mosaic example from Gage p.62 only",
+   "field.match.de2000 not computed (article_field.py fails on this machine)"
+  ]
+ }
+}

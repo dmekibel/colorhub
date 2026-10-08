@@ -1,0 +1,125 @@
+{
+ "slug": "yale-blue",
+ "name": "Yale Blue",
+ "hex": "#00356B",
+ "names": [
+  "Yale Blue"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Yale Blue is the deep blue of Yale University, which a dictionary of colour calls reddish-blue, and it shares a place on the color charts with a crowd of older blue names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A university's blue",
+   "body": "Paterson's dictionary defines Yale blue as a reddish-blue used as the distinctive color of Yale University [1]. Maerz and Paul's 1930 dictionary dates the name to about 1850 [2]. Our library also lists a Ridgway 1912 plate under the name, but that one is a much lighter blue, so the old chart color and the university swatch differ [2].\n\nThe swatch is a very dark blue, about six units from [[navy]], and near [[marine]] [2]. Paterson's word reddish fits it, as the hue sits slightly toward violet [1][2]."
+  },
+  {
+   "id": "crowd",
+   "title": "A crowd of older blues",
+   "body": "The ISCC-NBS block that holds this swatch gathers dozens of names, many old [2]. Zaffre Blue and Enamel Blue are dated to about 1554 by Maerz and Paul, Smaltino to about 1550, Eschel Blue to 1726 and Dutch Azure to 1751 [2]. Several are names of smalt and cobalt glass blues, so the swatch sits in a family with a long ancestry [2]. The Japanese name listed for the swatch, Konjō-iro, means Prussian blue color [2]. Compare [[prussian-blue]] and [[cobalt-blue]], two relatives of a dark blue like this [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this one covers at least five per cent of the canvas in 28, led by Filippino Lippi's 1497 Joachim and Anne, at about a third of the picture [3]. It is far more common in the 1400s, six paintings at five times the archive average, than in later centuries [3]. The earliest match is Taddeo Gaddi's Madonna enthroned, about 1355 [3]. These are photographs of aged, varnished paintings, so a match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Yale University's color",
+   "first_recorded": "c. 1850 (Maerz & Paul, 1930)",
+   "source": "Paterson, A Dictionary of Colour; Maerz & Paul 1930"
+  },
+  "aka": [
+   "Konjō-iro (Prussian blue color)"
+  ],
+  "siblings": [
+   "navy",
+   "marine"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 28,
+  "match": {
+   "hex": "#00356B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    22,
+    37,
+    282
+   ],
+   "nearest": [
+    [
+     "Navy",
+     6.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 432",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and Color Graph look-alikes, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson describe Yale blue?",
+   "choices": [
+    "A reddish-blue",
+    "A greenish-blue",
+    "A pale sky blue",
+    "A grey-blue"
+   ],
+   "answer": "A reddish-blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the 1400s hold far more matches for this color than the 1700s in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look for it in 1400s Madonnas, five times as common as in the archive overall."
+ ],
+ "words": 287,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All key claims verified against fact cards and book text; no changes."
+  ]
+ }
+}

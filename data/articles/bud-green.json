@@ -1,0 +1,122 @@
+{
+ "slug": "bud-green",
+ "name": "Bud Green",
+ "hex": "#3D9B41",
+ "names": [
+  "Bud Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Bud green is a fresh leaf green named for the unfolding buds of spring.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A yellowish green",
+   "body": "Paterson defines bud green as a yellowish-green [1]. His indexes place it with the greens, among avocado, bottle green and chartreuse [2]. The name is in the Maerz and Paul color dictionary [3].\n\nThe swatch, #3D9B41, is a clean mid green rather than the yellowish one the word suggests, and its nearest named color is plain [[green]] [3]. Related names include [[chartreuse]], [[avocado]] and [[emerald-green]] [2][3]. The word *bud* in the name points at young growth, though the dictionary says no more [1].\n\nThe dictionary treats the word as plain description, with no history attached [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green in only 2 of 23,531 paintings, as photographed [4]. This saturated green is rare in the archive [4]. Compare [[celadon]] and [[malachite]] for calmer greens [4]. Screen values for these swatches are approximate [4]. In LCH terms the swatch measures lightness 57, chroma 60 and hue 140 degrees [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the buds of plants",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "Paterson, A Dictionary of Colour; Maerz and Paul"
+  },
+  "aka": [],
+  "siblings": [
+   "chartreuse",
+   "avocado"
+  ],
+  "parent": null,
+  "children": [
+   "green"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 2,
+  "measured": {
+   "lch": [
+    57,
+    60,
+    140
+   ],
+   "nearest": [
+    [
+     "Green",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bud green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index, greens",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul entry, measured swatch",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,531 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson describe bud green?",
+   "choices": [
+    "Yellowish-green",
+    "Bluish grey",
+    "Reddish brown",
+    "Pale pink"
+   ],
+   "answer": "Yellowish-green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds this green in hundreds of paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bud green is rare in painting: only 2 paintings in 23,531."
+ ],
+ "words": 154,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed speculative reason for rarity and unverified comparative claim."
+  ]
+ }
+}

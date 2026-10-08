@@ -1,0 +1,123 @@
+{
+ "slug": "rose-color",
+ "name": "Rose Color",
+ "hex": "#EA598F",
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Rose color is a saturated pink-red, and before it was a swatch the phrase described the soft red of madder and safflower preparations.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of a rose, in the trade",
+   "body": "The *Pigment Compendium* shows how painters' suppliers used the phrase [1][2]. Field (1835) sold a concentrated tincture of madder of a perfect \"rose colour\" and transparency, under the names liquid rubiate and liquid madder lake, and Salter (1869) adds rose rubiate [1]. Alston, writing about 1804, says safflower prepared in saucers gave a rose color [2]. The compendium notes that safflower and saffron were often confused in this period [2].\n\nSo rose color was a description of tone before it was a fixed name: a transparent pinkish red from a dyestuff [1][2]. See [[madder]] for the dye plant behind most of it."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch #EA598F comes from Ridgway's *Color Standards* of 1912, plate XII, hue 71, and the ISCC-NBS dictionary of 1955, which sets it in the deep purplish pink block [3]. It is a bluer, more saturated pink than the madder rose of the paint trade [1][3]. Close names are [[rose]], [[rose-pink]] and [[cerise]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this color covering even 1% of its canvas, as photographed [4]. A bright pink like this is mostly a flower or fabric color, and a rare one on varnished panels and canvases [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the rose",
+   "first_recorded": "Ridgway 1912 (swatch); trade use by 1835",
+   "source": "Pigment Compendium, pp. 254 and 347"
+  },
+  "aka": [
+   "rose rubiate (the madder preparation)"
+  ],
+  "siblings": [
+   "rose",
+   "rose-pink",
+   "cerise"
+  ],
+  "parent": "rose",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#EA598F",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "iscc_nbs": "deep purplish pink"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, \"liquid rubiate\", p. 254",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, \"safflower colour\", p. 347",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Field (1835) call his madder tincture of perfect rose colour?",
+   "choices": [
+    "Liquid rubiate",
+    "Turkey red",
+    "Mauveine",
+    "Kermes"
+   ],
+   "answer": "Liquid rubiate",
+   "kind": "pick"
+  },
+  {
+   "q": "Which plant did Alston say gave a rose color in saucers?",
+   "choices": [
+    "Safflower",
+    "Woad",
+    "Weld",
+    "Walnut"
+   ],
+   "answer": "Safflower",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In the 1800s, rose colour was something you could buy in a bottle: a madder tincture."
+ ],
+ "names": [
+  "Rose Color"
+ ],
+ "status": "checked",
+ "words": 212,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against fact card and book text; no changes."
+  ]
+ }
+}

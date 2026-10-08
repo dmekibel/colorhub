@@ -1,0 +1,120 @@
+{
+ "slug": "xander",
+ "name": "Xander",
+ "hex": "#44500C",
+ "names": [
+  "Xander"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Xander is a dark olive green that appears in a Wikipedia-sourced color list, and where its name comes from is undocumented in our sources.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no recorded story",
+   "body": "Our color library lists Xander once, from a Wikipedia color list, as a dark yellow-green, and gives no date or reason for the name [1]. The books in our collection do not discuss it: the only matches for the word are scans of the name Alexander, in Gage's history of color and culture, and they have nothing to do with a color [2]. We treat the origin as undocumented rather than guess.\n\nThe swatch is a deep olive, nearest to [[hunter-green]], at a distance that is large enough to count as a different color [1]. Close neighbors by eye are [[bottle-green]], [[forest-green]] and [[olive]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This swatch covers at least five per cent of the canvas, within six color-distance units, in 110 of the 23,781 paintings in our archive [3]. It is most over-represented in the 1500s, at about 2.2 times its overall rate, and the top matches include two landscapes by George Inness from 1892 and 1894 and Dürer's portrait of Emperor Maximilian I (1519) [3]. Because these are photographs of aged, varnished paintings, the dark greens are partly the effect of time and varnish [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "undocumented",
+   "source": "ColorHub library (Wikipedia list)"
+  },
+  "aka": [],
+  "siblings": [
+   "hunter-green",
+   "olive"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+  "n_present": 110,
+  "match": {
+   "hex": "#44500C",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    32,
+    38,
+    113
+   ],
+   "nearest": [
+    [
+     "Hunter green",
+     12.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Wikipedia color list; CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture (concordance matches are scans of \"Alexander\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Xander come from?",
+   "choices": [
+    "It is undocumented in our sources",
+    "A Greek dye",
+    "A Roman mineral",
+    "A Japanese plant"
+   ],
+   "answer": "It is undocumented in our sources",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named green is nearest to this swatch?",
+   "choices": [
+    "Hunter green",
+    "Lime",
+    "Mint",
+    "Chartreuse"
+   ],
+   "answer": "Hunter green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Not every color name has a story: where Xander comes from is undocumented."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No factual fixes needed; claims verified against cited books and library."
+  ]
+ },
+ "words": 209,
+ "status": "checked"
+}

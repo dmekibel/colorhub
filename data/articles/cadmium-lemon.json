@@ -1,0 +1,141 @@
+{
+ "slug": "cadmium-lemon",
+ "name": "Cadmium Lemon",
+ "hex": "#C1B331",
+ "names": [
+  "Cadmium Lemon"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Cadmium Lemon is a bright greenish yellow sold in artists' tubes; it belongs to the cadmium family first made in 1820.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "A cadmium yellow",
+   "body": "Paterson dates cadmium yellow to 1820, made from cadmium sulphide, and says artists used it extensively in the nineteenth century [1]. He lists *cadmium lemon* separately among yellows and defines it as a bright greenish yellow, yet his entry for cadmium yellow says a cadmium lemon yellow has a more orangey hue [1]. The entries pull in different directions, which shows how little a shade name fixes [1][2]. Paterson also notes that cadmium pigments first came into use in the 1820s, with Monet among their fans [1]."
+  },
+  {
+   "id": "in-use",
+   "title": "In the painter's kit",
+   "body": "A modern color-mixing text by Gurney lists cadmium lemon among the few tube colors for a gamut map: pyrrole red, cadmium yellow, cadmium lemon, ultramarine blue and titanium white [3]. Compare [[cadmium-orange]], [[lemon-yellow]] and [[canary]]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The color shown, #C1B331, is a dull olive-leaning yellow, darker than a tube of cadmium lemon would look [4]. It is the library's average for the name, and screen colors are approximate [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 41 of 23,781 archive paintings contain this exact swatch, as photographed [5]. It is a highlight color 95 percent of the time, and it peaks in the 1890s, with Pierre Bonnard using it in 3 of his 45 paintings [5]. Matches are colors, not pigment identifications [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the element cadmium plus lemon",
+   "first_recorded": "cadmium yellow, 1820",
+   "source": "Paterson"
+  },
+  "aka": [
+   "Cadmium lemon yellow"
+  ],
+  "siblings": [
+   "cadmium-orange",
+   "lemon-yellow",
+   "canary"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 41,
+  "role": {
+   "highlight": 0.95,
+   "mid": 0.05
+  },
+  "peak_decade": {
+   "decade": 1890,
+   "lift": 3.96
+  },
+  "top_painter": {
+   "name": "Pierre Bonnard",
+   "hits": 3,
+   "n": 45
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"cadmium yellow\" and \"cadmium\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, table of yellows",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, section on gamut mapping",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library, swatch #C1B331",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive match for #C1B331, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say about cadmium lemon yellow compared with cadmium yellow?",
+   "choices": [
+    "It has a more orangey hue",
+    "It is a deep red",
+    "It is blue-green",
+    "It is identical"
+   ],
+   "answer": "It has a more orangey hue",
+   "kind": "pick"
+  },
+  {
+   "q": "Cadmium yellow was first made in 1820 from cadmium sulphide.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson says cadmium lemon yellow is more orangey than plain cadmium yellow, despite its name."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Paterson defines cadmium lemon as bright greenish yellow; lede/section fixed",
+   "removed 3 unsupported claims (cool-end use, glaze vs mass tone, darkening)"
+  ]
+ }
+}

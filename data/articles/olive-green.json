@@ -1,0 +1,277 @@
+{
+ "slug": "olive-green",
+ "name": "Olive Green",
+ "hex": "#B5B35C",
+ "names": [
+  "Olive Green"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Olive green is the dull yellow-green of unripe olives. On today's screens it is a light yellow-green, but in old charts, paint boxes and uniforms it meant something darker and browner.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fruit's color on a chart",
+   "body": "*Olive green* is the color of unripe olives, or a color similar to *olive* [3]. British writers prefer the longer form where Americans say simply olive [3]. The earliest chart in our sources to list it is Syme's 1821 edition of Werner's nomenclature, which gives Olive Green the number 59 among the greens and defines it as grass green mixed with much brown [1][11].\n\nSyme did not take the name from Werner [2]. Of the second chart's greens only grass green is Werner's own, and Picardet supplied pistachio, asparagus and olive [2]. The examples printed beside it were the foliage of the lignum vitae tree and two minerals, epidote and olivine ore [1]. Mineralogy borrowed the same fruit: olivine, the mineral form of [[gem:peridot|peridot]], is named for its olive-green color [9].\n\nPaterson's dictionary shows how loosely the neighbors are used. Holly green and parsley green are each glossed as an olive green, spinach green as olive or a yellowish green, and forest green as an olive green slightly darker than Lincoln green [4]. [[khaki]] is a related drab, from a Hindi word for dust-coloured [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which olive green?",
+   "body": "No two charts agree on this color. The swatch on this page, #B5B35C, is a moderate greenish yellow in ISCC-NBS terms [11]. Other systems put olive green much deeper: Werner's aged swatch reads #67765B, Ridgway's 1912 plate #6D6D3F, the RAL 6003 standard (dated to 1927 in our data) #4B573E, and the 2010 xkcd survey #677A04 [11]. Our swatch has CIELAB lightness 71 against 35 to 48 for those four, and it lies 21 to 38 CIEDE2000 units from each [11].\n\nThat gap is the real content here. Birren, writing in 1950, classed olive as a deep shade of yellow, in the way brown is a deep shade of orange [10]. It is an old way of seeing the color, not a measurement, but it explains how a yellow-green at lightness 71 and a dark brownish green at 35 can share one name [10][11]. Olive sits where dark yellow and green meet, and the word stretches across both.\n\nThe web colors choose differently again. CSS `olive` is #808000 and `olivedrab` is #6B8E23 [3]. Both are darker than the swatch here, at lightness 52 and 55 [11]."
+  },
+  {
+   "id": "paint",
+   "title": "In the paint box",
+   "body": "In nineteenth-century artists' colour lists, olive green was a mixture rather than a single pigment. Salter called it in 1869 a made-up mixture, deep olive in hue and soberly rich, and gave Dewint's green as a synonym [5]. The Russell and Abney committee recorded the color in 1886 [5].\n\nOlive lake followed a similar path. Field wrote in 1835 that it was prepared from ebony, and added laburnum in 1841 [5]. By the later nineteenth century it was no longer an organic lake at all but a blend: quercitron lake and bone brown with ultramarine, quercitron lake with [[prussian-blue]], or Indian yellow, umber and [[indigo]] [5]. A Reeves catalogue of about 1898 gave both olive green and olive lake as made from an alizarin compound [5].\n\nSome materials are olive without any mixing. Chromium oxide is an opaque, dull olive green [6]. A calcined form of Schweinfurt green, made by mixing boiling solutions of verdigris and arsenious acid, comes out olive [6]. Egyptian green, made by varying the recipe for Egyptian blue, runs from olive to blue-green depending on the method [6].\n\nThe oldest olive paint in the Pigment Compendium is on a Graeco-Roman cartonnage fragment, where Scott and colleagues in 2003 found what appears to be verdigris dissolved in a protein-based glue [7]. They could not say whether the mixture was deliberate [7]. In dyeing, the bark dye quercitron gives bright yellow with aluminium or tin, tan with chromium and an olive green with iron [7]."
+  },
+  {
+   "id": "mi-se",
+   "title": "The olive green of a secret",
+   "body": "Finlay's green chapter begins with a Chinese porcelain called *mi se*, \"mysterious color\", made in the ninth and tenth centuries and said to be reserved for royalty [8]. For centuries nobody could say which green bowls were the real thing. Genuine pieces were identified only in 1987, when a hidden chamber beneath a collapsed tower at Famen temple came to light together with a stone-carved inventory [8]. The emperor Xizong had given the treasure in 874 [8].\n\nFinlay had pictured sea-mist or emerald, and then saw a museum photograph that looked olive brown [8]. He came to read the glaze as an olive green, a [[celadon]] whose color comes entirely from the mountains: the glaze is wood ash and kaolin, fired with wood from the same hills [8]. He suggests that a Tang court surrounded by gold and silk may have prized its plainness [8].\n\nCeladon later gathered a reputation as a poison detector, which was a myth [8]. The Ottoman court collected hundreds of pieces after taking Constantinople in 1453, and the Islamic art specialist Michael Rogers told Finlay the likeliest reason was a belief that the bowls neutralised poison [8]. In the one test Finlay reports, the Mughal emperor Jahangir fed poisoned food to two condemned prisoners, one on celadon and one on another dish, and both died [8]."
+  },
+  {
+   "id": "uniform",
+   "title": "Olive drab and khaki",
+   "body": "Paterson defines olive drab as the olive green of US army uniforms [3]. *Drab* alone is a dull light brown or grey, also given as olive drab [4]. [[khaki]] names the cloth of British army field uniforms [4]. None of our sources says when either uniform color was fixed, so we give no date."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 136 works [12]. The archive's earliest match is a 1285 panel attributed to Duccio, 536 years before the name's first record in our sources, so that match is a look-alike hue in an aged photograph and not evidence of the dye or pigment [12].\n\nThe match is mostly a modern one. It appears in 74 of 8,345 paintings from the 1800s and 32 of 1,674 from the 1900s, with a peak in the 1910s of 13 of 523 [12]. Four painters stand out: Bonnard in 4 of 45 works, and Émile Bernard, Niels Larsen Stevns and Harald Giersing in 3 of 22 or 23 each [12]. With a finer lens, [[painter:georges-seurat|Seurat]] is the most devoted painter, in 4 of his 41 works in the archive, at 5.7 times the baseline of the museums they come from [12]. [[khaki]] turns up on the same canvases 24 times more often than chance, and moss and sage follow [12].\n\nTwo non-European groups lead the rest. Kalighat pictures from Calcutta match in 8 of 96 works, and Rajput pictures in 3 of 97 [12]. The largest single area is a Basohli manuscript page of 1760, where the color covers 60 per cent of the picture [[painting:cma-146203|a Basohli manuscript page]], and the largest among European works is Beelt's [[painting:rijks-20026582|picture of Charles II leaving Scheveningen]] in 1660 at 46 per cent [12]. Inside a painting the color most often plays an accent, in 59 per cent of the paintings the finer lens finds [12]. As always these are photographs of aged, varnished paintings, so read them as screen colors.\n\nWhere to look in the world: the unripe olive itself, the leaves of the [[flower:olive|olive tree]], and the army-surplus jacket, which will be much darker than the swatch above."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the unripe olive fruit",
+   "first_recorded": "Syme's 1821 edition of Werner's nomenclature, no. 59 (name supplied by Picardet)",
+   "source": "Baty, Nature's Palette, pp. 157-160"
+  },
+  "aka": [
+   "olive",
+   "Dewint's green (a paint synonym)"
+  ],
+  "siblings": [
+   "olive",
+   "khaki",
+   "moss-green",
+   "sage-green"
+  ],
+  "parent": null,
+  "children": [
+   "pale-olive-green",
+   "light-olive",
+   "dark-olive"
+  ],
+  "disambiguation": [
+   {
+    "slug": "olive",
+    "gloss": "CSS Olive (#808000) is a much darker yellow-green than this swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B5B35C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 136,
+  "top_paintings": [
+   "cma-146203",
+   "cma-314243",
+   "rijks-20026582",
+   "commons-Q27968193"
+  ],
+  "by_century": {
+   "1800s": [
+    74,
+    8345
+   ],
+   "1900s": [
+    32,
+    1674
+   ]
+  },
+  "peak_decade": {
+   "1910s": [
+    13,
+    523
+   ]
+  },
+  "company": [
+   [
+    "Khaki",
+    24.1
+   ]
+  ],
+  "first_seen": {
+   "id": "commons-Q948745",
+   "year": 1285
+  },
+  "alts": {
+   "werner": "#67765B",
+   "ridgway": "#6D6D3F",
+   "ral": "#4B573E",
+   "xkcd": "#677A04"
+  },
+  "measured": {
+   "lch": [
+    71.4,
+    45.7,
+    104.5
+   ],
+   "nearest": [
+    [
+     "Khaki",
+     2.6
+    ],
+    [
+     "Light Olive",
+     6.0
+    ],
+    [
+     "Pale Olive Green",
+     10.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"Olive Green\" (Werner no. 59), pp. 157-158",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 160 (Syme's 1821 greens)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"olive\", \"olive green\", \"olive drab\", \"OliveDrab\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"khaki\", \"drab\", \"forest-green\", \"holly green\", \"parsley green\", \"spinach green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Olive green\" and \"Olive lake\", p. 295",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Chromium oxide\" p. 114, \"Schweinfurt green\" p. 136, \"Egyptian green\" p. 161",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Copper resinate\" p. 297 and \"Quercitron\" p. 329",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 16 (\"Green\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 14 (peridot and olivine)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy (1950), ch. 14 (\"The Anatomy of Beauty\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Werner 1821, Ridgway 1886 and 1912, RAL 1927, xkcd 2010, ISCC-NBS 1955; CIELAB and CIEDE2000 computed by ColorHub; historical swatches are aged scans or approximate screen values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas; within-painting lens in data/graph/fieldnotes/o.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Syme's 1821 edition of Werner's chart, how is olive green defined?",
+   "choices": [
+    "Grass green mixed with much brown",
+    "Sulphur yellow mixed with grey",
+    "Emerald green mixed with black",
+    "Pistachio green mixed with white"
+   ],
+   "answer": "Grass green mixed with much brown",
+   "kind": "pick"
+  },
+  {
+   "q": "Why can a yellow-green at lightness 71 and a dark green at lightness 35 both be called olive green?",
+   "choices": [
+    "The word covers the whole range where dark yellow meets green, and charts and dyes disagree",
+    "The lighter one is a printing error",
+    "One of them is a pigment and the other a dye, so they cannot be compared",
+    "Olive green was only ever defined by the RAL standard"
+   ],
+   "answer": "The word covers the whole range where dark yellow meets green, and charts and dyes disagree",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: celadon bowls reliably reveal poisoned food.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our olive green swatch is nearly twice as light as the olive greens of the old charts and the RAL paint standard: lightness 71 against 35 to 48.",
+  "Syme's 1821 chart defined olive green as grass green mixed with much brown, and borrowed the name from Picardet.",
+  "The 'mysterious color' porcelain of the Tang court was identified for certain only in 1987, in a chamber under a collapsed tower."
+ ],
+ "words": 1196,
+ "status": "checked",
+ "checked": {
+  "by": "batch-35 writer (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Celadon-detects-poison myth corrected from Finlay's Jahangir test; Finlay dates the test to the early 1700s, which cannot be right for Jahangir, so no date is given.",
+   "No historical date for olive drab or khaki found in the books; none given.",
+   "Birren (1950) olive-as-deep-yellow is an old framing, hedged in prose.",
+   "Ngram not used: cached olive green series has no verified start year."
+  ]
+ }
+}

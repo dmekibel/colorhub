@@ -1,0 +1,133 @@
+{
+ "slug": "maple",
+ "name": "Maple",
+ "hex": "#DEC084",
+ "names": [
+  "Maple"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Maple is an orangey-yellow, and the tree behind the name gives painters, violin makers and dyers three very different stories.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An orangey-yellow",
+   "body": "Paterson defines maple simply as an orangey-yellow [1]. It is listed with the yellows, near [[marigold]], [[maize]] and [[straw]] [2]. The swatch is a pale, warm gold, much lighter than the autumn leaves most people picture [3].\n\nThat is a reminder that a color named for a tree can mean wood, sap or leaf, and each is a different color [1][4]."
+  },
+  {
+   "id": "wood",
+   "title": "Maple wood and violins",
+   "body": "In Cremona, maple and spruce are the woods of the violin, and Finlay describes seeing a violin back cut from a single piece of maple, patterned like a tiger's coat [4]. A varnish is what lets the wood show its beauty and also shapes the tone [4]."
+  },
+  {
+   "id": "leaves",
+   "title": "Autumn maples",
+   "body": "Gurney uses maples to teach how color works in leaves. Light passing through a leaf is a strongly chromatic yellow-green, the shaded underside differs from the shaded upper side, and direct sun on the top surface gives the highest value [5]. He also notes that Vermont draws millions of visitors each fall to see the foliage, with maples among the favorite trees [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No usable archive measurements exist for this name, so there is no painting data to quote [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the maple tree",
+   "first_recorded": "listed in Paterson's dictionary (2003)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "marigold",
+   "maize",
+   "straw",
+   "golden-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name library; no archive field notes for this name",
+  "swatch": "#DEC084",
+  "books": 4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 256, \"maple\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 512 (index of yellows)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/names.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, chapter on Cremona and violin varnish",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 154",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 138",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define maple?",
+   "choices": [
+    "An orangey-yellow",
+    "A deep green",
+    "A pale blue",
+    "A dark brown"
+   ],
+   "answer": "An orangey-yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "Gurney says light through a leaf is a strongly chromatic yellow-green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Maple is an orangey-yellow in the color dictionaries."
+ ],
+ "words": 199,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No changes; Paterson p.256, Finlay and Gurney pp.138, 154 match"
+  ]
+ }
+}

@@ -1,0 +1,113 @@
+{
+ "slug": "fir-green",
+ "name": "Fir Green",
+ "hex": "#26392F",
+ "names": [
+  "Fir Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Fir Green is a dark, muted green whose name points to the fir tree, a descriptive name with no recorded inventor.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson's dictionary defines fir green, also spelled with a hyphen, as a dark muted green [1]. It appears in his index of green names among the greens, near bottle green, Brunswick green and forest-green [2]. Who first used it, and when, is undocumented in the books we hold.\n\nThe same dictionary lists fire-red and fire-orange on the neighboring lines, which are unrelated: fir and fire are only alphabet neighbors [1]. Nearby in our names are [[forest-green]], [[hunter-green]] and [[pine-green]]."
+  },
+  {
+   "id": "swatch",
+   "title": "What the swatch shows",
+   "body": "The swatch is a very dark, slightly blue green, close to black on many phone screens. As with any tree name, one swatch cannot hold a tree that changes with season and light."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch matches 451 of 23,781 archive paintings (1.9%, as photographed), more common than 75% of the named colors [3]. It peaks in the 1900s, in 3.5% of 1,674 paintings, 2.7 times the rate expected from the same museums [3]. Inside a painting it most often plays a shadow, in 40% of the 272 paintings that hold it [3]. The most devoted painter is Harald Giersing, in 6 of 23 works here [3]. These are photographs of varnished paintings, so dark greens may be darkened by age."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fir tree (presumed; the dictionary only defines the color)",
+   "first_recorded": "undocumented",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "fir-green"
+  ],
+  "siblings": [
+   "forest-green",
+   "hunter-green",
+   "pine-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (graph fieldnotes)",
+  "n_present": 451,
+  "pct": 1.9,
+  "peak": "1900s",
+  "role": "shadow (40% of 272)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"fir green\", p. 168",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index of greens, p. 497",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (graph fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does the color dictionary describe fir green?",
+   "choices": [
+    "A dark muted green",
+    "A bright yellow-green",
+    "A pale blue"
+   ],
+   "answer": "A dark muted green",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, which role does Fir Green most often play inside a painting?",
+   "choices": [
+    "Shadow",
+    "Highlight",
+    "Sky"
+   ],
+   "answer": "Shadow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Fir green most often plays the shadow in paintings: 40% of the 272 paintings that hold it use it that way."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim about conifer needles being bluish",
+   "Hedged fir-tree derivation (Paterson only defines the color)",
+   "Corrected index neighbor list"
+  ]
+ },
+ "words": 221
+}

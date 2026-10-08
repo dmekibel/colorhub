@@ -1,0 +1,124 @@
+{
+ "slug": "light-maroon",
+ "name": "Light Maroon",
+ "hex": "#A24857",
+ "names": [
+  "Light Maroon"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Maroon is a muted raspberry-wine red, a lightened maroon, and the books use the same phrase for a different color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Maroon, lightened",
+   "body": "Maroon began as a brown. St Clair gives the French *marron*, chestnut, as its root, with the color originally nut brown and now a brownish dark red [1]. This swatch is a lighter, pinker step along from that dark red, drawn in our library from the xkcd color survey [2]. Its nearest named neighbor is [[light-burgundy]], and [[raspberry]] is close too [2].\n\nPaterson uses the phrase another way, describing FireBrick, one of the 140 colors in the X11 set, as a light maroon [3]. The two are different swatches: FireBrick is #B22222 and this is #A24857 [2][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Light Maroon is uncommon in painting [4]. In our archive of 23,781 paintings, 27 (0.11 per cent) hold a color within six units of it over at least five per cent of the canvas [4]. Ten of the 27 date from the 1900s, 5.3 times the archive rate for that century [4]. They are photographs of aged, varnished paintings, so a match is not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: a lighter maroon (maroon from French marron, chestnut)",
+   "first_recorded": "modern (xkcd survey)",
+   "source": "St Clair, The Secret Lives of Colour; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "maroon",
+   "burgundy",
+   "light-burgundy",
+   "raspberry"
+  ],
+  "parent": "maroon",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "maroon",
+    "gloss": "the darker parent color; Paterson's 'light maroon' FireBrick is a separate X11 swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A24857",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 27,
+  "top_paintings": [
+   "cma-164457",
+   "commons-Q123985850"
+  ],
+  "rate": 0.0011
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Maroon\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 168 (\"FireBrick\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the French word marron, the root of maroon, mean?",
+   "choices": [
+    "Chestnut",
+    "Wine",
+    "Brick",
+    "Rose"
+   ],
+   "answer": "Chestnut",
+   "kind": "pick"
+  },
+  {
+   "q": "Which X11 color does Paterson call a light maroon?",
+   "choices": [
+    "FireBrick",
+    "Tomato",
+    "Salmon",
+    "Navy"
+   ],
+   "answer": "FireBrick",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Maroon started as the color of a chestnut."
+ ],
+ "words": 181,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

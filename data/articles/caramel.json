@@ -1,0 +1,123 @@
+{
+ "slug": "caramel",
+ "name": "Caramel",
+ "hex": "#AF6F09",
+ "names": [
+  "Caramel"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Caramel is a warm golden brown named for toasted sugar, and the same word also names a food coloring.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Toasted sugar",
+   "body": "Paterson defines caramel as a pale brown, the color of toasted sugar [1]. The same dictionary has a separate entry for burnt sugar caramel as a deep yellowy brown [1]. So the word covers a range, from pale to deep, and the swatch here is a deep golden brown near [[toffee]], [[butterscotch]] and [[cinnamon]].\n\nCaramel is also a food coloring, E150, and Paterson notes that one US company makes 62 types of caramel color for convenience foods [1]."
+  },
+  {
+   "id": "seen",
+   "title": "Seen in other words",
+   "body": "Finlay describes the walls of the Chauvet cave as having a swirling caramel effect from natural yellow stain [2]. She also reports natural-colored cotton in shades like caramel or café au lait, which grew stronger with washing [3]. Pastoureau lists chocolate caramel creams among the dishes of an all-black banquet menu he describes [4]. In each case the word is a description, not a pigment name; for a pigment-based neighbor see [[coffee]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds the color in 553 of 23,781 paintings, 2.33 percent, as photographed [5]. It peaks in the 1400s, in 29 of 945 paintings, about 1.9 times the baseline [5]. Inside a painting it is mostly an accent, in 74 percent of 350 paintings [5]. The most devoted painter is George Dawe, in 13 of 50 works here [5]. It shares canvases with Warm Brown and Harvest Gold [5]. Aged varnish yellows paint, which pushes many browns toward caramel [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "toasted sugar",
+   "first_recorded": "undocumented in our sources",
+   "source": "Paterson, A Dictionary of Colour, \"caramel\" and \"burnt sugar caramel\""
+  },
+  "aka": [
+   "burnt sugar"
+  ],
+  "siblings": [
+   "toffee",
+   "butterscotch"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 553,
+  "pct": 2.33,
+  "peak_century": 1400,
+  "painter": "George Dawe"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"caramel\" and \"burnt sugar caramel\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Fabric",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, field notes for Caramel",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is caramel the color of, according to Paterson?",
+   "choices": [
+    "Toasted sugar",
+    "Roasted coffee",
+    "Wet clay"
+   ],
+   "answer": "Toasted sugar",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: E150 is a food coloring called caramel.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Caramel the color and caramel the food coloring (E150) share a name and a source."
+ ],
+ "words": 241,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against sources; no changes"
+  ]
+ }
+}

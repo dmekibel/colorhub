@@ -1,0 +1,153 @@
+{
+ "slug": "solferino",
+ "name": "Solferino",
+ "hex": "#A44F66",
+ "names": [
+  "Solferino"
+ ],
+ "tier": "person",
+ "depth": "short",
+ "lede": "Solferino is a bluish crimson-red named after an 1859 battle in northern Italy, first used for the new coal-tar fuchsine dye that was also called magenta.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A battle turned into a dye",
+   "body": "Solferino was the name of a bright bluish-red or crimson dye, taken from the 1859 battle of Solferino in Italy [1][2]. Books disagree on who made the dye. Greenfield credits French chemists with fuchsine in 1859, which some christened solferino or magenta [3]. Finlay says English chemists invented both colors that year [4]. Garfield places production in Lyon and says Britain used solferino first and magenta later [5]. All agree on the names: they commemorate Austrian defeats in Italy in 1859 [3][4][5].\n\nIn the Pigment Compendium, solferino is a red-mauve lake based on magenta, and the entry sends the reader there [6]. The same dye family was behind [[mauve]], the first aniline dye, which is why the three colors turn up together in books about the 1850s and 1860s, alongside [[crimson]] [3][5]."
+  },
+  {
+   "id": "fashion",
+   "title": "A fashionable red",
+   "body": "Fuchsine was made in far greater quantities than mauve, and was used first for military uniforms and then for the latest fashion [5]. Greenfield adds that Empress Eugénie wore it, as she had worn mauve, in a solferino cashmere petticoat and a matching \"Garibaldi\" blouse [3]. Finlay notes that the painter J. M. W. Turner just missed these colors, dying before they appeared [4].\n\nThe screen swatch here is the Maerz and Paul color of 1930, which they record as first used in 1865 [7]. That is a muted rose-red, nearest in our data to [[mulberry]], not the vivid dye of 1859 [7]. Treat it as the name's dictionary color, not a dye sample."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Solferino is rare in paintings. It appears in 16 of 23,781 paintings in our archive, rarer than 72 per cent of named colors [8]. The earliest dated match is a Chinese painting of 1700, 159 years before the dye existed, and the others are from 1900 and 1903 [8]. That tells us it is a look-alike hue, not the dye. These are photographs of aged, varnished paintings, so a color match is a look-alike hue, not a pigment test. [8]"
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the battle of Solferino, 1859",
+   "first_recorded": "1859 as a dye; Maerz and Paul date the swatch 1865",
+   "source": "Greenfield; Finlay; Garfield; Paterson"
+  },
+  "aka": [
+   "fuchsine red"
+  ],
+  "siblings": [
+   "magenta",
+   "mauve",
+   "mulberry",
+   "crimson"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "magenta",
+    "gloss": "the same dye family; magenta is the name that survived in English"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 16,
+  "rank_pct": 72,
+  "earliest_dated": 1700,
+  "library_first_recorded": 1865
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"solferino\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"solferino\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 22",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"solferino\" and \"magenta\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), via data/library.json; nearest named color by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within-painting lens, lightness rank per painting)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is solferino named after?",
+   "choices": [
+    "A battle of 1859 in Italy",
+    "A Spanish flower",
+    "A dye merchant",
+    "A painting by Titian"
+   ],
+   "answer": "A battle of 1859 in Italy",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: books agree on which country's chemists first made fuchsine in 1859.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Solferino and magenta are the same new red, both named for Italian battles of 1859.",
+  "The color of a battle: books disagree on who made the dye, but agree on the name."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed claim that Garibaldi led French and Italian forces (sources differ; not all say so)"
+  ]
+ },
+ "words": 338
+}

@@ -1,0 +1,163 @@
+{
+ "slug": "coeruleum",
+ "name": "Coeruleum",
+ "hex": "#427FC5",
+ "names": [
+  "Coeruleum"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Coeruleum is the older spelling of cerulean, the cobalt-tin blue that painters took up in the 1860s, though its story starts with an obscure German recipe from 1789.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Cerulean and ceruleum",
+   "body": "Paterson sends *coeruleum* to *cerulean blue*, which he describes as a bright, light greenish-blue pigment from chromium, cobalt and tin oxides and discovered in 1860 by George Rowney and Son [1]. The Pigment Compendium cautions that the literature mixes the spellings *cerulean* and *ceruleum*, with *coelin* and *caeruleum* as relatives [2]. Church in 1901 used *cœruleum* as his main heading, and by 1935 Doerner made cerulean the main term and coeruleum a synonym [2].\n\nThe root is Latin *caeruleus*, which meant dark blue or dark green, and the English word is recorded as early as the seventeenth century [2]. The French trade used *bleu cœruleum* and *bleu céleste*, the celestial blue [2]."
+  },
+  {
+   "id": "history",
+   "title": "Who made it first",
+   "body": "The books disagree on the date. Paterson gives 1860 and Rowney [1]. Coffignier put it about 1850, but Carlyle's research, reported in the Compendium, shows it unlikely before 1862 or 1863 [2]. Just before that, the London firm Roberson was buying a *Blue 58 (Cerulium)* from the German firm of Frauenknecht and Stotz [2]. That fits Salter's note of 1869 that a cobalt-tin blue called coelin had lately been imported from Germany [2].\n\nThere were precursors. Höpfner described a cobalt-tin blue in 1789, and Schreger listed it as a beautiful painter's color in 1805 [2]. It then seems to have been largely forgotten until the 1850s and 1860s [2].\n\nThe recipe also varied. Ure's mid-century text gives stannate of cobalt with stannic acid and sulphate of lime, while Paterson names chromium instead of lime [2][1]. One analysis found chromium cobalt aluminium oxide in some acrylics sold as cerulean, though that appears rare [2]."
+  },
+  {
+   "id": "ancient",
+   "title": "Not the Roman caeruleum",
+   "body": "The Compendium files the Latin *caeruleum* with Egyptian blue, a copper-calcium silicate, and cites Pliny and Vitruvius for it [2]. Paterson, too, lists coeruleum among the \"colores floridi\", the costly ancient pigments, with cinnabar and indigo [1]. So the old name belonged to another blue, and the nineteenth-century paint inherited the word rather than the recipe [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "This swatch comes from Maerz and Paul in 1930 [3]. It is a medium, fairly saturated blue, called vivid blue by the ISCC-NBS system and 7.3 CIEDE2000 units from that region [3]. Paterson's cerulean is a light greenish blue, so the chart color is deeper and bluer than his description [1][3]. Related names are [[cerulean-blue]], [[cobalt-blue]] and [[celestial-blue]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color is uncommon in paint. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 27 works [4]. Seven in ten of those appearances are mid-tones [4]. The earliest dated painting in the wider match is Fra Angelico's of 1426, which long predates the pigment, so it shows how much a screen color proves [4]. These are photographs of varnished paintings, not pigment tests [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin caeruleus, dark blue",
+   "first_recorded": "English cerulean in the 17th century; the pigment 1860s",
+   "source": "Pigment Compendium, \"cerulean blue\"; Paterson, \"coeruleum\""
+  },
+  "aka": [
+   "cerulean blue",
+   "coelin",
+   "caeruleum",
+   "bleu céleste"
+  ],
+  "siblings": [
+   "cerulean-blue",
+   "cobalt-blue"
+  ],
+  "parent": null,
+  "children": [
+   "celestial-blue",
+   "celeste"
+  ],
+  "disambiguation": [
+   {
+    "slug": "cerulean",
+    "gloss": "the general sky-blue word, not the pigment"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bleu cœruleum, bleu céleste"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#427FC5",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 27,
+  "role": {
+   "highlight": 0.15,
+   "mid": 0.7,
+   "shadow": 0.15
+  },
+  "first": {
+   "id": "commons-Q22082602",
+   "year": 1426
+  },
+  "measured": {
+   "iscc": "vivid blue",
+   "de2000": 7.3
+  },
+  "ngram": {
+   "word": "cerulean",
+   "peak": 1800
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 94, 109, 110",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"cerulean blue\", \"coeruleum\", \"caeruleum\", pp. 87, 103-104, 132",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930, ISCC-NBS 1955; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); ColorHub graph field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why do dates for cerulean blue vary between books?",
+   "choices": [
+    "Its origin is unclear and earlier cobalt-tin blues existed",
+    "Nobody has analysed it",
+    "It was only invented in the 1900s",
+    "It was banned until 1860"
+   ],
+   "answer": "Its origin is unclear and earlier cobalt-tin blues existed",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Roman caeruleum was the same pigment as nineteenth-century cerulean.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A cobalt-tin blue was described in 1789 and then forgotten for decades before cerulean took off.",
+  "Cerulean's first maker is disputed: Rowney 1860, or Germans selling to London around 1862."
+ ],
+ "words": 470,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded close Paterson phrasing."
+  ]
+ }
+}

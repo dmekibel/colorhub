@@ -1,0 +1,128 @@
+{
+ "slug": "imperial-red",
+ "name": "Imperial Red",
+ "hex": "#ED2939",
+ "names": [
+  "Imperial Red"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Imperial red is a strong, slightly bluish red whose name has pointed at an old court color, a pigment lake and the modern screen swatch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three meanings",
+   "body": "Paterson defines imperial red as a deep bluish red, among colour names that borrow the word imperial for majesty, like imperial yellow, originally a Chinese porcelain color reserved for the court [1]. In pigment lists, Heaton (1928) records imperial red as a then-current synonym for an eosin lake [2]. Eosin is a bright pink-red dye, struck onto a base to make paint [2].\n\nPastoureau mentions an older imperial red as well: Charlemagne's traditional mantle, which late medieval artists replaced with blue [3]. These are three different uses, and the sources do not link them. The swatch here is ISCC-NBS strong red, from the 1955 system, nine units from the nearest block center [4]. Neighbors include [[red]], [[scarlet]], [[crimson]], [[carmine]] and [[vermilion]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 4 of 23,781 archive paintings contain this color, rarer than 77 percent of named colors [5]. That is too few for painter or period patterns. As photographed, a bright red in aged paintings has usually shifted, so the match counts a screen look-alike, not a dye."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "imperial court or empire (several uses; link undocumented)",
+   "first_recorded": "Heaton, 1928 as a pigment synonym; ISCC-NBS 1955 as a swatch",
+   "source": "Pigment Compendium; Paterson"
+  },
+  "aka": [
+   "eosin lake (pigment synonym)"
+  ],
+  "siblings": [
+   "scarlet",
+   "crimson"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "imperial-blue",
+    "gloss": "another imperial color name, a deep blue dye"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "record": {
+   "first": 1955,
+   "first_src": "iscc-nbs"
+  },
+  "measured": {
+   "iscc": "strong red",
+   "de": 9.6
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"imperial\" entries",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Hunt (ed.), Pigment Compendium, pp. 164, 205 (Heaton 1928)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; fieldnotes/i.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Heaton (1928) lists imperial red as a synonym for what?",
+   "choices": [
+    "An eosin lake",
+    "Vermilion",
+    "Madder lake"
+   ],
+   "answer": "An eosin lake",
+   "kind": "pick"
+  },
+  {
+   "q": "Imperial yellow, in Paterson, originated with Chinese porcelain.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In 1928 Heaton listed imperial red as another name for an eosin lake."
+ ],
+ "words": 188,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Dye lake dated 1928 in source, not Victorian"
+  ]
+ }
+}

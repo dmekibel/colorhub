@@ -1,0 +1,129 @@
+{
+ "slug": "blush-pink",
+ "name": "Blush Pink",
+ "hex": "#FE828C",
+ "names": [
+  "Blush Pink"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Blush pink is a warm coral-leaning pink named for the color that rises in the cheeks when someone blushes.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of a flush",
+   "body": "Paterson defines the verb *blush* as to change one's complexion when embarrassed, stressed or angry, and the color *blush* as red-colored [1]. He calls blush pink a delicate pink, and blush rose a delicate pink that may also be a dark shade of rose [1]. His indexes file blush pink under the pinks [2].\n\nThe dictionary's \"delicate\" is paler than this swatch, which is a stronger coral-leaning pink [3]. Paterson's wording is only \"delicate,\" so the exact paleness is left open [1]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Neighbors",
+   "body": "Close relatives are [[pink]], [[rose]] and the deeper reds [[red]] [3]. The library's nearest name is Pink at 8.6 units of color difference [3]. In LCH terms the swatch measures lightness 67, chroma 54 and hue 13 degrees, a fairly saturated pink [3]. A screen shows it only approximately [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this exact pink in no painting, as photographed [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the flush of embarrassment or heat",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "blush"
+  ],
+  "siblings": [
+   "pink",
+   "rose"
+  ],
+  "parent": null,
+  "children": [
+   "salmon"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    67,
+    54,
+    13
+   ],
+   "nearest": [
+    [
+     "Pink",
+     8.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"blush\", \"blush pink\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index, pinks",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: measured swatch, ISCC-NBS neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,531 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say blush pink is?",
+   "choices": [
+    "A delicate pink",
+    "A dark brown",
+    "A shade of green",
+    "A pigment made from lead"
+   ],
+   "answer": "A delicate pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson files blush pink among the pinks.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Blush pink is named for a body reaction, not a flower."
+ ],
+ "words": 154,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported fashion and cosmetics claims."
+  ]
+ }
+}

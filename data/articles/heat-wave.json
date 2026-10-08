@@ -1,0 +1,102 @@
+{
+ "slug": "heat-wave",
+ "name": "Heat Wave",
+ "hex": "#FF7A00",
+ "names": [
+  "Heat Wave"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Heat Wave is a vivid, fully saturated orange, a name from the modern lists of fashion and crayon shades, with no recorded author or date.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no recorded origin",
+   "body": "Our sources record the name only on Wikipedia's lists of colors, and ISCC-NBS would call the swatch vivid orange [1]. None of the books read mention it as a color, so who named it, and when, is undocumented [1]. One book does mention a heatwave, but only as a danger to cochineal insects, which die in frost or sustained heat, and that has nothing to do with this orange [2].\n\nIts plain-word relatives are [[orange]], [[safety-orange]] and [[tangerine]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only one painting in our archive of 23,781 holds this color, and it is rarer than 86 per cent of named colors [3]. A screen-bright orange like this is far from the muted colors of aged, varnished paint, and these archive numbers are photographs of such works, so they describe museums, not painting as a whole [3]. The archive counts a painting only when the color covers a measurable share of its canvas, within a small color distance of the swatch [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the weather; origin undocumented",
+   "first_recorded": "undocumented",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "orange",
+   "safety-orange",
+   "tangerine",
+   "vermilion"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/h.json",
+  "n_present": 1,
+  "pct": 0.0,
+  "rarer_than": "86% of named colors"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Wikipedia color list; ISCC-NBS block 48 vivid orange; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 8 (\"A Perfect Red\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/h.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many paintings in our archive hold Heat Wave?",
+   "choices": [
+    "One",
+    "About 400",
+    "About 2,000",
+    "None"
+   ],
+   "answer": "One",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books read give an origin for the name Heat Wave.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Only one of 23,781 museum paintings holds a Heat Wave orange."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "status": "checked",
+ "words": 181
+}

@@ -1,0 +1,122 @@
+{
+ "slug": "aster",
+ "name": "Aster",
+ "hex": "#736186",
+ "names": [
+  "Aster"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Aster is a muted violet named for the star-shaped flower, recorded in Maerz and Paul's 1930 dictionary of color and dated there to 1916.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The flower",
+   "body": "Aster is the name of a family of daisy-like garden flowers. Baty's color catalogue pairs the shade Purple Aster with amethyst as its mineral match in the violet-purple series [1]. Its list of purples also names the pansy and the sweet-scented violet among flower colors [1]. A short-day plant, the aster blooms as autumn days shorten, a fact Birren cites from a 1938 article [2].\n\nThe color itself is a greyed violet, nearest to [[plum]] among everyday names, 12.1 units away [3]. Related colors are [[amethyst]], [[lilac]] and [[violet]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The library has one source for Aster, Maerz & Paul 1930, which dates it to 1916 and files it under fashion and textiles [3]. In the archive, 14 of 23,781 paintings carry it [4]. That is too few to say anything, so we do not claim a trend, and no painter or school stands out in so small a sample [4]. These are photographs of aged, varnished works [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the aster flower",
+   "first_recorded": "1916 (Maerz & Paul)",
+   "source": "Maerz & Paul 1930"
+  },
+  "aka": [
+   "Purple Aster"
+  ],
+  "siblings": [
+   "amethyst",
+   "lilac"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+  "n_present": 14,
+  "measured": {
+   "lch": [
+    44,
+    23,
+    310
+   ],
+   "nearest": [
+    [
+     "Plum",
+     12.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 104-108 (series 38-39)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Birren, Psychology of Color, ch. 1, citing Greulach (Science Digest, 1938)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json); Maerz & Paul 1930; CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which mineral does Baty's catalogue pair with Purple Aster?",
+   "choices": [
+    "Amethyst",
+    "Ruby",
+    "Jade",
+    "Turquoise"
+   ],
+   "answer": "Amethyst",
+   "kind": "pick"
+  },
+  {
+   "q": "What does the 1916 date for Aster refer to?",
+   "choices": [
+    "Its first record in Maerz and Paul",
+    "The year the flower was found",
+    "The year a dye was patented",
+    "A painting"
+   ],
+   "answer": "Its first record in Maerz and Paul",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The aster takes its name from the Greek for star."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 175
+}

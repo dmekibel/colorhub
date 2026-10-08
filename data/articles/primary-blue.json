@@ -1,0 +1,126 @@
+{
+ "slug": "primary-blue",
+ "name": "Primary Blue",
+ "hex": "#0804F9",
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Primary Blue is a vivid, nearly pure screen blue, and a name that points to an old argument about which three colors can make all the rest.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which blue is primary?",
+   "body": "Ball traces the idea of blue, red and yellow as primaries through the history of painters' and printers' colors [1][2]. Owen Jones, who decorated the Exhibition building, argued that early architecture used mostly the primaries blue, red and yellow [1]. Ball judges this largely true: Pompeii's walls blazed with vermilion, and the Greeks painted much of their stonework, which is why the old picture of plain white temples is a myth [1].\n\nWhen Jacob Le Blon tried three-color printing, he needed a primary blue, and the best he had was the new Prussian blue, which Ball calls a shade too green for the job [2][3]. He also tried indigo [2]. That is the heart of the problem: no single blue works as a primary for every mixture, and no three primaries make every color, so \"primary blue\" names a role in a system, not one fixed color [2][3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here, #0804F9, is a saturated screen blue from the ISCC-NBS and xkcd lists, close to the pure blue of a monitor's blue light [4]. It falls in the vivid purplish blue block of the 1955 dictionary [4]. It is far more saturated than most paints, so treat it as a screen color [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this color covering even 1% of its canvas, as photographed [5]. Closest named neighbors are [[royal-blue]], [[cobalt-blue]] and [[prussian-blue]] [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the idea of a primary color",
+   "first_recorded": "ISCC-NBS 1955 in our sources",
+   "source": "Ball, Bright Earth, chs. 11 and 20"
+  },
+  "aka": [],
+  "siblings": [
+   "royal-blue",
+   "cobalt-blue",
+   "prussian-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#0804F9",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "iscc_nbs": "vivid purplish blue"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Le Blon use for his primary blue?",
+   "choices": [
+    "Prussian blue",
+    "Lapis lazuli",
+    "Cobalt blue",
+    "Woad"
+   ],
+   "answer": "Prussian blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Greek temples and statues were painted in the ancient world.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Le Blon's first primary blue, Prussian blue, was a shade too green for the job."
+ ],
+ "names": [
+  "Primary Blue"
+ ],
+ "status": "checked",
+ "words": 251,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened 'pigments cannot reach this saturation' (overstated)."
+  ]
+ }
+}

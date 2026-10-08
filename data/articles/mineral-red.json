@@ -1,0 +1,138 @@
+{
+ "slug": "mineral-red",
+ "name": "Mineral Red",
+ "hex": "#895351",
+ "names": [
+  "Mineral Red"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Mineral Red is a muted brownish red from Ridgway's 1912 color nomenclature, a descriptive name rather than the record of a single pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A descriptive name",
+   "body": "Ridgway printed Mineral Red as a plate color in 1912 [1]. The ISCC-NBS system of 1955 later placed it in the grayish red block, and Maerz and Paul list it too [1]. Our books do not explain why Ridgway chose the name, and searching them for the phrase also turns up chance word-pairs, such as \"mineral\" at the end of one sentence and \"red\" at the start of the next [2].\n\nIn pigment history, though, \"mineral red\" is an old trade name: the Pigment Compendium lists it as a synonym for red lead (lead tetroxide), and notes that \"orange mineral\" had largely overlapping meaning and use [3][4]. Red lead was also the base for some heavy eosin lake pigments [5]. We do not claim the Ridgway swatch was drawn from red lead [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is scanned from an aged Ridgway plate, so it is approximate [1]. Its neighbors include [[venetian-red]], [[indian-red]] and [[rosewood]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color matches 85 paintings in the ColorHub archive, about 0.36%, as photographed [6]. It appears more often than expected in works from around 1910 and 1900 [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (a descriptive Ridgway name; 'mineral red' is also a pigment-book name for red lead)",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway 1912; ISCC-NBS 1955; Pigment Compendium"
+  },
+  "aka": [],
+  "siblings": [
+   "venetian-red",
+   "indian-red",
+   "rosewood",
+   "maroon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "indian-lake",
+    "gloss": "a similar greyish red, but named for an insect lake"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 85,
+  "pct": 0.36,
+  "ridgway": "plate XXVII",
+  "iscc_block": 19
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Ridgway 1912 plate XXVII; ISCC-NBS 1955 block 19; Maerz & Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Concordance check: Ball, Bright Earth; Baty, Nature's Palette (chance matches)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Mineral red\", p. 276",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Orange lead\" / red lead, pp. 242, 295",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"American vermilion\", p. 24",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Pigment Compendium list \"mineral red\" as a name for?",
+   "choices": [
+    "Red lead (lead tetroxide)",
+    "Cinnabar",
+    "Red ochre",
+    "Madder lake"
+   ],
+   "answer": "Red lead (lead tetroxide)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch is scanned from a Ridgway plate and is approximate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mineral Red is a Ridgway name from 1912; in pigment books the same words are an old name for red lead."
+ ],
+ "words": 199,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Pigment Compendium p.276 lists mineral red as red lead: article had said books do not tell its story; rewritten with new notes.",
+   "'Maerz and Paul had it by 1912' was a date error (their dictionary is 1930): reworded.",
+   "Question and opener updated."
+  ]
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "slug": "mossy-green",
+ "name": "Mossy Green",
+ "hex": "#638B27",
+ "names": [
+  "Mossy Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Mossy Green is a medium, yellowish green that names the color of moss, and the same words turn up in recipes for making a dark green out of old verdigris.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Where the name sits",
+   "body": "In our library Mossy Green is a modern everyday name, listed with the X11/CSS, Wikipedia and xkcd sets and with the ISCC-NBS system of 1955, where it falls in block 110 [1]. Its closest relatives are yellow-greens: the library records Olive Drab and Maximum Green as near-duplicates, each about 2.1 units away, while [[forest-green]] is farther off at 8.5 [1]. The Japanese color Mo'egi (萌黄) is filed beside it [1]. Our sources do not document who first used the English name as a color [1]."
+  },
+  {
+   "id": "verdigris",
+   "title": "Mossy green in the studio",
+   "body": "The books use the words in a more specific way. The Pigment Compendium notes that late medieval manuscripts, among them a fifteenth-century Italian one cited from Merrifield's 1849 work, suggest grinding verdigris with the juice of rue leaves [2]. Modern experiments by Woudhuysen-Keller and Woudhuysen in 1998 found that this turned the blue-green of neutral verdigris into a dark mossy green [2]. The same authors found neutral, recrystallized verdigris more stable in oil than the basic kind [3]. A darker relative is [[sap-green]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of this swatch covers at least five per cent of the canvas in 14 of 23,781 paintings [4]. Eight are French, and five come from the 1890s, which has about seven times the archive's rate [4]. The largest share is in Degas's *Racehorses in a Landscape* of 1894, at about 25 per cent, and Pissarro's 1898 [[painting:commons-Q12857030|Place du Theatre-Francais in Spring]] also matches [4]. As photographed: museum photographs of aged, varnished paintings; a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "moss (descriptive)",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library; ISCC-NBS 1955 block 110"
+  },
+  "aka": [
+   "Moss-like green"
+  ],
+  "siblings": [
+   "moss-green",
+   "forest-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Mo'egi (萌黄)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#638B27",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 14,
+  "top_paintings": [
+   "commons-Q21712332",
+   "commons-Q21727830",
+   "commons-Q12857030"
+  ],
+  "measured": {
+   "lch": [
+    53,
+    55,
+    123
+   ],
+   "contrast_white": 4.0,
+   "nearest": [
+    [
+     "Olive Drab",
+     2.1
+    ],
+    [
+     "Maximum Green",
+     2.1
+    ],
+    [
+     "Forest green",
+     8.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; xkcd, CSS, Wikipedia, ISCC-NBS 1955 block 110); CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, verdigris and rue entries, p. 341",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Verdigris\", p. 398",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did rue juice do to neutral verdigris in the experiments reported by the Pigment Compendium?",
+   "choices": [
+    "Turned it into a dark mossy green",
+    "Made it bright red",
+    "Made it white",
+    "Had no effect"
+   ],
+   "answer": "Turned it into a dark mossy green",
+   "kind": "pick"
+  },
+  {
+   "q": "Which verdigris was found more stable in oil?",
+   "choices": [
+    "Neutral (recrystallized)",
+    "Basic",
+    "Both the same"
+   ],
+   "answer": "Neutral (recrystallized)",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Mossy greens in old books can be verdigris dulled with rue juice, not moss.",
+  "Look for this green in 1890s French landscapes."
+ ],
+ "words": 279,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

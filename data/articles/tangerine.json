@@ -1,0 +1,139 @@
+{
+ "slug": "tangerine",
+ "name": "Tangerine",
+ "hex": "#F28500",
+ "names": [
+  "Tangerine"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Tangerine is the strong orange of the fruit's skin, a color that is rare as a large area in old paintings but turns up as the spark in many.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The fruit's orange",
+   "body": "Saint Clair's glossary describes tangerine simply as a yellowy orange, named from the skin of the fruit [1]. Paterson lists it in his table of orange names, and Maerz and Paul recorded it in 1930, giving 1899 for the first use of the color name in their sources [2][3]. The books read say nothing further on where the name began.\n\nThe swatch matches the ISCC-NBS block for a strong orange almost exactly, about 2.4 units away [3]. The xkcd survey of 2010 gives a slightly brighter orange for the same word [3]. Close neighbors are [[orange]], [[mandarin]] and [[persian-orange]]."
+  },
+  {
+   "id": "eye",
+   "title": "A color that vibrates",
+   "body": "Livingstone, a vision scientist, quotes David Sedaris on a house painted hot pink with tangerine trim, whose doors and windows seemed to tremble [4]. She uses it to illustrate equiluminant colors, hues of similar brightness that can seem to jitter when placed together [4]. In the Netherlands, many people dress in luminous tangerine for the King's Day holiday each April [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch appears in 29 of 23,781 paintings, about 0.12 per cent, in at least five per cent of the canvas [5]. In 94 per cent of the 36 paintings where the within-painting search finds it, it is an accent, not a ground [5]. It peaks in the 1800s, 24 paintings, at 1.8 times the expected rate [5]. The widest example is an 1830 Kota painting from India, where it covers about 31 per cent [5]. Bonnard's [[painting:commons-Q17491092|Corner of a table]] of 1935 and Gauguin's [[painting:commons-Q17493569|Les Alyscamps]] of 1888 also carry it [5]. This is photographed color from aged, varnished surfaces, not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the skin of the tangerine fruit",
+   "first_recorded": "1899 in Maerz and Paul (1930)",
+   "source": "St Clair, Secret Lives of Color; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "orange",
+   "mandarin",
+   "persian-orange",
+   "burnt-orange"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 29,
+  "pct": 0.12,
+  "role": {
+   "accent": 94
+  },
+  "peak_century": {
+   "1800s": {
+    "hits": 24,
+    "lift": 1.8
+   }
+  },
+  "nearest_iscc": [
+   "strong orange",
+   2.4
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary and Netherlands entry",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, table of orange names, p. 503",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library and graph nodes (Maerz and Paul 1930; ISCC-NBS 1955; xkcd 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, on equiluminant colors",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In how many of our archive paintings is tangerine mostly an accent rather than a ground?",
+   "choices": [
+    "Almost all of them",
+    "About half",
+    "Almost none",
+    "Only in Dutch work"
+   ],
+   "answer": "Almost all of them",
+   "kind": "pick"
+  },
+  {
+   "q": "What does Livingstone use the tangerine-trim house to show?",
+   "choices": [
+    "Equiluminant colors that seem to shimmer",
+    "Why orange fruit fades",
+    "How dyes were fixed",
+    "The origin of the word tangerine"
+   ],
+   "answer": "Equiluminant colors that seem to shimmer",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Look for tangerine as a small accent: it is an accent in 94 per cent of the paintings where our data finds it."
+ ],
+ "words": 287,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'shimmering edge' changed to Livingstone's jitter effect",
+   "removed interpretive closing line",
+   "Dutch King's Day wording matched St Clair"
+  ]
+ }
+}

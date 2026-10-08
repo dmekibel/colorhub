@@ -1,0 +1,154 @@
+{
+ "slug": "brownish-yellow",
+ "name": "Brownish Yellow",
+ "hex": "#C9B003",
+ "names": [
+  "Brownish Yellow"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Brownish yellow is the old descriptive term for a dull, deep yellow, the family of ochre and mustard, and in 1751 one fashionable shade of it was called caca dauphin.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description, not a pigment",
+   "body": "Brownish yellow is how the books describe a yellow pulled toward brown, from mustard to ochre to an unglazed clay tile [1][2]. Paterson glosses *mustard brown* as a deep brownish-yellow and also uses the phrase for brick or flowerpot clay [1]. Pastoureau notes that the yellow earth pigments, the ochers, ran from bright yellow to light brownish yellow [3]. Compare [[mustard]], [[ochre]], [[gold]] and [[yellow]]."
+  },
+  {
+   "id": "dauphin",
+   "title": "Caca dauphin",
+   "body": "Pastoureau reports that in the last weeks of 1751 a brownish yellow was the court's fashion to celebrate the birth of the Duke of Burgundy, grandson of Louis XV, and was called caca dauphin, \"dauphin dung\" [4]. The shade spread from court to town, and today we would call it mustard, or in French caca d'oie [4]. He uses it as an example of how quickly new dyeing shades came and went in the eighteenth century [4]."
+  },
+  {
+   "id": "materials",
+   "title": "Where it turns up in materials",
+   "body": "The Pigment Compendium lists brownish yellow as the color of catechu brown mordanted with tin [5]. It also gives it for the impure lead mineral phosgenite, and for one stage of the heat tarnish on a metal powder [5][6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is rare in the archive: 27 of 23,781 paintings contain it, as photographed [7]. Almost all of it is highlight, 93 percent, which fits a yellow [7]. Among the paintings that hold it are Cornelis van Assendelft's *Shepherd with Sheep* of 1900 and Paul Sérusier's *Le Talisman* of 1888 [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (a descriptive name)",
+   "first_recorded": "undocumented",
+   "source": "descriptive name"
+  },
+  "aka": [
+   "Mustard brown"
+  ],
+  "siblings": [
+   "mustard",
+   "ochre",
+   "gold"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "caca d'oie (historical)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 27,
+  "role": {
+   "highlight": 0.93,
+   "mid": 0.07
+  },
+  "top_paintings": [
+   "Shepherd with Sheep (Assendelft, 1900)",
+   "Le Talisman (Sérusier, 1888)"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"mustard brown\" and \"terra cotta\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entry \"mustard\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 12 (\"Sun Worship\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black, chapter on fashion and dyes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entry \"Catechu brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entry \"Phosgenite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive match for #C9B003, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did a fashionable brownish yellow of 1751 celebrate?",
+   "choices": [
+    "The birth of a grandson of Louis XV",
+    "The end of a war",
+    "A royal wedding",
+    "A new dye factory"
+   ],
+   "answer": "The birth of a grandson of Louis XV",
+   "kind": "pick"
+  },
+  {
+   "q": "Today we would call that 1751 shade mustard.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In late 1751 a brownish yellow was the court's fashion, under a name meaning dauphin dung."
+ ],
+ "words": 253,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed embellishment about label"
+  ]
+ }
+}

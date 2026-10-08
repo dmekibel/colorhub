@@ -1,0 +1,119 @@
+{
+ "slug": "light-tan",
+ "name": "Light Tan",
+ "hex": "#FBEEAC",
+ "names": [
+  "Light Tan"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Tan is a pale cream-yellow on screens, much lighter than the leather tan its name suggests, and it has a family of older names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A tan that is not tan",
+   "body": "Our library's Light Tan swatch is a pale yellow, #FBEEAC [1]. Older charts file almost identical colors under other names: Vanilla, Martius Yellow, Pale Green-Yellow and Naphthalene Yellow, all within 2.5 units [1]. Their dates run from 1912 to 1925 in Maerz and Paul's dictionary [1]. For the darker, leathery color, see [[tan]].\n\nThe light tans of history were uniform colors. In St Clair's account, cavalry wore buff leather coats in the 1500s and 1600s, and by the mid-1700s buff breeches were standard for a well-dressed European gentleman [2]. Light tans stayed in military uniform through the nineteenth century, usually as a facing beside bolder colors such as emerald green and Prussian blue [2]. Compare [[buff]], [[khaki]] and [[cream]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 64 (0.27 per cent) hold a color within six units of this pale yellow over at least five per cent of the canvas [3]. The 1800s hold 38 of them, out of 8,345 works [3]. These are photographs of aged, varnished paintings, so a match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: a lighter tan",
+   "first_recorded": "1912 to 1925 (Maerz & Paul 1930, near-duplicate names)",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "Vanilla",
+   "Martius Yellow",
+   "Naphthalene Yellow"
+  ],
+  "siblings": [
+   "tan",
+   "buff",
+   "khaki",
+   "cream"
+  ],
+  "parent": "tan",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "tan",
+    "gloss": "the darker leather-brown tan, not this pale yellow"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FBEEAC",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 64,
+  "top_paintings": [
+   "nga-59926",
+   "nga-53122"
+  ],
+  "rate": 0.0027
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Buff\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In nineteenth-century military dress, how were light tans mostly used?",
+   "choices": [
+    "As a facing beside bolder colors",
+    "As the main coat color",
+    "Only for hats",
+    "Only for horses"
+   ],
+   "answer": "As a facing beside bolder colors",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Light Tan swatch is a brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "On screen, Light Tan is a pale yellow; the leather-colored tans of old uniforms were far darker."
+ ],
+ "words": 197,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

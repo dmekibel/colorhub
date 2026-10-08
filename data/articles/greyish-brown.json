@@ -1,0 +1,150 @@
+{
+ "slug": "greyish-brown",
+ "name": "Greyish Brown",
+ "hex": "#7A6A4F",
+ "names": [
+  "Greyish Brown"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Greyish brown is a plain descriptive name for a muted, earthy brown, and it is one of the most common colors in the paintings we have measured.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain description",
+   "body": "Greyish brown is a description rather than a named thing: a brown with grey in it, a dull, low-chroma tone [1]. It first shows up in our sources in the 1955 ISCC-NBS list and later in the xkcd survey of 2010 [2]. Older dictionaries use the same two words to define other names instead. A dun is greyish-brown and dingy, beaver is the greyish brown of beaver fur, a deer-coloured thing has a tawny-red or greyish-brown hide, and clove brown is a greyish brown [1].\n\nSo the phrase works as a bridge between a [[brown]] and a [[grey]], and the books reach for it whenever they need to describe a natural, undyed color."
+  },
+  {
+   "id": "natural",
+   "title": "The color of undyed things",
+   "body": "Paterson lists greyish browns among the colors of undyed cloth, earth, stone and wood, together with light browns, off-whites and greys [1]. Medieval linen shows the same drift: laundry-bleached white was hard to keep white, and the cloth turned grayish brown, yellow or ecru as time passed [3][4]. A grayish brown ground was also found on an Egyptian mummy case lid, a layer containing lime spar and quartz [5].\n\nBirren repeats an old claim that a grayish brown means selfishness [6]. That is a historic opinion and not modern evidence; colors do not carry fixed meanings [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Greyish brown appears in 22.25% of the 23,781 paintings in our archive, 5,291 paintings, as photographed, which makes it more common than 99% of the named colors [7]. Inside a painting it most often plays a hidden color, in 29% of the 3,269 paintings where we measure roles [7].\n\nIt peaks in the 1100s, where 23 of the 50 paintings we hold from then contain it, 2.1x the baseline of the same museums [7]. That century is thin in the archive, and aged paint and varnish darken toward this tone, so the match is a look-alike hue in an old photograph, not a pigment [7]. The painter most devoted to it is Kano Tan'yū, who has it in 12 of 14 works here [7]. Its closest company in the archive is [[taupe]], [[fawn]] and [[khaki]] territory, and it shares canvases more than chance with Jacaranda Brown and Flint Grey [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: brown with grey",
+   "first_recorded": "1955 (ISCC-NBS list in our data)",
+   "source": "ColorHub name data"
+  },
+  "aka": [
+   "grayish brown",
+   "grey-brown"
+  ],
+  "siblings": [
+   "taupe",
+   "fawn"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "taupe",
+    "gloss": "A named grey-brown, from the French word for a mole"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#7A6A4F",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 5291,
+  "rank_pct": 99,
+  "role": "hidden color 29%",
+  "painter": "Kano Tan'yu, 12 of 14"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"dun\", \"beaver\", \"deer-coloured\", \"clove brown\", \"neutral\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub name data (ISCC-NBS 1955, xkcd 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, medieval bleaching",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, medieval whites",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entry on quartz (Havrevold 1985 cited)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub painting archive, field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does a dictionary call the greyish-brown, dingy colour of a mouse?",
+   "choices": [
+    "Dun",
+    "Fawn",
+    "Sienna",
+    "Ecru"
+   ],
+   "answer": "Dun",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: books show that grayish brown signals selfishness.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Greyish brown is more common in our paintings than 99% of named colors.",
+  "Medieval white cloth did not stay white; it turned grayish brown."
+ ],
+ "words": 378,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No fixes needed; Birren selfishness reported as old opinion."
+  ]
+ }
+}

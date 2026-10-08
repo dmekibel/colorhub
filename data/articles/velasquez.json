@@ -1,0 +1,111 @@
+{
+ "slug": "velasquez",
+ "name": "Velasquez",
+ "hex": "#7B304F",
+ "names": [
+  "Velasquez"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Velasquez is a deep, wine-colored plum in a 1930 color atlas, spelled without the accent of the Spanish painter it presumably honors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name in an atlas",
+   "body": "Our library takes the color from the Maerz and Paul dictionary of 1930, which dates the name to 1925 and places it on plate 54 [1]. No book we hold says who coined it or why [1]. The name presumably recalls Diego Velázquez, but that is our inference and the origin is undocumented [1]. The spelling follows the atlas.\n\nThe painter is a poor guide to the color. Ball writes that Velázquez may have used Vandyke brown, a brown quite unlike this plum [2]. The swatch is a dark red-purple; its nearest named neighbors are [[byzantium]] at 8.8 units and [[dahlia-purple]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color near this swatch appears in 8 of 23,781 paintings in our archive, 0.03 per cent, rarer than 70 per cent of named colors [3]. The earliest dated match is 1850, in a painting by Nicaise de Keyser, 80 years before the atlas [3]. With 8 cases, in photographs of aged paintings, this tells us only that the color is scarce [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "presumably the painter Diego Velázquez (origin undocumented)",
+   "first_recorded": "1925 (Maerz and Paul 1930, plate 54 K 10)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "byzantium",
+   "dahlia-purple"
+  ],
+  "parent": null,
+  "children": [
+   "purple",
+   "purple",
+   "oxblood"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 8,
+  "pct": 0.03,
+  "measured": {
+   "nearest": [
+    [
+     "Byzantium",
+     8.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930, first recorded 1925, plate 54 K 10; nearest named Byzantium",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 6, p. 152",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which atlas gives Velasquez in our library?",
+   "choices": [
+    "Maerz and Paul, 1930",
+    "Ridgway, 1912",
+    "Werner, 1814",
+    "The 2010 xkcd survey"
+   ],
+   "answer": "Maerz and Paul, 1930",
+   "kind": "pick"
+  },
+  {
+   "q": "The books record why the color was named Velasquez.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Velasquez is a plum from a 1930 atlas; the books say nothing of why it carries a painter's name."
+ ],
+ "words": 183,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

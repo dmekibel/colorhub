@@ -1,0 +1,137 @@
+{
+ "slug": "independence",
+ "name": "Independence",
+ "hex": "#4C516D",
+ "names": [
+  "Independence"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Independence is a dark, dusty blue-violet whose name no color book explains.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name no book explains",
+   "body": "Independence is a dark, dusty blue with a hint of violet. Its origin is undocumented. Maerz and Paul's 1930 dictionary is the earliest source we can point to, and the library records it there as first recorded in 1927, on plate 47 H 12 [1]. The 1955 ISCC-NBS system places it in block 212 [1]. No color book we read explains the name.\n\nThe books do use the word, but in its political sense. Greenfield's history of cochineal talks about Tlaxcalan independence under Spain, the Dutch fight for independence and the Latin American wars of independence [2]. These passages are about the red dye trade, not about a blue, so they are not evidence for the color's name."
+  },
+  {
+   "id": "swatch",
+   "title": "Where it sits",
+   "body": "The swatch is a grey-violet blue, and the nearest everyday name is [[denim]], at a color distance of 11.8 [1]. The ISCC-NBS block next to it, 204, collects names such as Duck-Wing, Garter Blue and Dusky Violet-Blue, which show the region the old systems filed together [1]. It sits between [[navy]] and [[slate]], and is lighter than the near-black blues."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this color covers at least five per cent of the canvas, within six units of color distance, in 135 paintings [3]. The rate is rare in older art and climbs in the twentieth century: 37 of 1,674 paintings from the 1900s, about four times the archive's average [3]. The 1920s peak at 8 of 237 paintings [3].\n\nIt is a painter's blue more than a place's. Henri-Edmond Cross has it in 4 of his 12 paintings [3]. Among the pictures it fills most is Pissarro's *Still Life with a Coffeepot* from 1900, at 31 per cent [3]. The names that travel with it are [[denim]], [[navy]] and [[charcoal]] [3]. These are photographs of aged, varnished paintings, so a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1927 (Maerz & Paul 1930)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "denim",
+   "navy",
+   "slate"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#4C516D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 135,
+  "top_paintings": [
+   "commons-Q27977829",
+   "nga-56109",
+   "cma-143768"
+  ],
+  "peak_decade": {
+   "decade": 1920,
+   "hits": 8,
+   "n": 237,
+   "lift": 5.95
+  },
+  "measured": {
+   "lch": [
+    35,
+    18,
+    287
+   ],
+   "nearest": [
+    [
+     "Denim",
+     11.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library, Independence (ISCC-NBS 1955 blocks 212 and 204; Maerz & Paul 1930, plate 47 H 12)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, chs. 12, 14 and 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do the books say about the name Independence as a color?",
+   "choices": [
+    "They do not explain it",
+    "It is named for a ship",
+    "It commemorates a battle",
+    "It comes from a dye"
+   ],
+   "answer": "They do not explain it",
+   "kind": "pick"
+  },
+  {
+   "q": "Which everyday color name is nearest to Independence in our library?",
+   "choices": [
+    "Denim",
+    "Lemon",
+    "Khaki",
+    "Mauve"
+   ],
+   "answer": "Denim",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Independence is a color with a politician's name and no recorded story: no book says where it came from."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-51 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Origin undocumented; short by design. Greenfield passages concern the political word only."
+  ]
+ },
+ "words": 313
+}

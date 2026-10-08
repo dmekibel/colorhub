@@ -1,0 +1,213 @@
+{
+ "slug": "carmine-red",
+ "name": "Carmine Red",
+ "hex": "#CE536B",
+ "names": [
+  "Carmine Red"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Carmine Red is the rosy red that Werner's color list gave as its characteristic red, named for the pigment carmine and handed down through Syme's English edition of 1821.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from Werner's list",
+   "body": "Carmine Red is a name from the age of mineral and flower catalogues [1]. Abraham Werner built his color vocabulary from pigments, such as ochre-yellow and carmine-red, and from familiar objects, such as sky-blue [1]. Patrick Syme published the list in English, and his 1814 edition of 108 colors includes Carmine-red [1].\n\nIn Syme's 1821 edition it is no. 91 among the reds, and Baty calls it the characteristic color of Werner [2]. Werner described it as lake red lightly mixed with arterial blood red [2]. His examples were the [[flower:raspberry|raspberry]], the cockscomb and the [[carnation]] among plants, and the oriental [[gem:ruby|ruby]] among minerals [2]. Syme's illustrations add the feathers of the red myzomela, a New Guinea honeyeater, the petals of a cockscomb drawn in 1737, and rubies photographed for a mineral atlas in 1912 [2]."
+  },
+  {
+   "id": "mixing",
+   "title": "A red used to build other colors",
+   "body": "In these lists carmine red is also an ingredient. Werner described his [[crimson]] red as carmine red nudged toward blue with a dash of indigo [3]. His purplish red, which he called columbine red, takes a touch of Berlin blue and a smaller share of indigo on the same base [3]. Veinous blood red darkens the base with brownish black [3].\n\nBlue and purple recipes borrow it too. Azure blue is Berlin blue warmed by a little carmine red, and Scotch blue carries only a slight tinge of it [3]. For Syme a bluish purple needs roughly as much carmine as Berlin blue, and a campanula purple pairs ultramarine and carmine in equal measure [4]. The red works as a base in the system, not as one shade among many."
+  },
+  {
+   "id": "which-carmine",
+   "title": "Which carmine?",
+   "body": "The pigment word behind the name is slippery. The Pigment Compendium says carmine was first applied to scale-insect lakes in general, and that by the seventeenth century it was understood to mean a lake made from cochineal [5]. The insect story is told in the article on [[carmine]].\n\nBut carmine was not always an insect. Field's carmine, also called madder carmine, is the richest and deepest kind of madder lake, in the writings of Field and of Salter [6]. A modern tube of permanent carmine may be a naphthol AS-D azo pigment, according to Mayer [7]. Gurney's list of historic or not recommended pigments names carmine red [8]. The color name outlived the recipe several times over."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here, #CE536B, is our library's approximation of Werner's aged swatch for no. 91 [9]. It is a rosy red, lighter and pinker than the deep red of [[carmine]] itself [9]. The paint standard RAL 3002 is a good deal deeper, at about #A1232B on screen [9].\n\nTwo later systems agree with the rosy reading: Ridgway's 1912 plate XXVI has a near-duplicate called Spinel Red, at 0.6 CIEDE2000 units, and Maerz and Paul recorded the name Carmine Red in 1912 [9]. Its nearest named neighbor is [[cerise]], 5.0 units away, and Maerz and Paul's Mayflower is close behind [9]. The match to [[gem:spinel|spinel]] is more than a pun, since Syme's plate shows this red on a spinel as well as on a ruby [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a rare color in painting. In our archive of 23,781 paintings, a screen color within six units of the swatch covers at least five per cent of the canvas in only three works [10]. They are an Indian *Ganesha* of about 1890 at 20 per cent, Jawlensky's [[painting:nga-130842|Red Path, St. Prex]] of 1915 at 15 per cent, and Patrick Henry Bruce's *Peinture/Nature Morte* of 1924 at 12 per cent [10]. All three date from 1890 to 1924 [10].\n\nThat puts it among the rarer named colors, rarer than 75 per cent of them [10]. As always these are photographs of varnished paintings, and a color match is not a pigment test [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "carmine, the red lake pigment",
+   "first_recorded": "Syme's English editions of Werner's list, 1814 and 1821 (Werner no. 91)",
+   "source": "Baty, Nature's Palette, pp. 18, 244-245"
+  },
+  "aka": [
+   "Werner's no. 91"
+  ],
+  "siblings": [
+   "carmine",
+   "crimson",
+   "cerise"
+  ],
+  "parent": "carmine",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "carmine",
+    "gloss": "the deeper red of the insect dye, #960018 in our library"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CE536B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "cma-162529",
+   "nga-130842",
+   "nga-166434"
+  ],
+  "rarity": "rarer than 75% of named colors",
+  "measured": {
+   "werner_no": 91,
+   "ral": "RAL 3002 about #A1232B",
+   "nearest": [
+    [
+     "Spinel Red",
+     0.6
+    ],
+    [
+     "Cerise",
+     5.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 18, 32-34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 244-245 (no. 91, Carmine Red)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 91, 96, 246, 248",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 108",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 98 (\"Carmine\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 169, 258 (\"Field's carmine\", \"Madder carmine\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 308 (\"Permanent carmine\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 221",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph: Werner, RAL, Ridgway, Maerz & Paul), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings, as photographed (tools/article_field.py, ΔE 6, at least 5% of canvas; Color Graph field notes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Werner define Carmine Red?",
+   "choices": [
+    "Lake red with a little arterial blood red",
+    "Vermilion with a little white",
+    "Crimson with indigo",
+    "Cochineal with brown"
+   ],
+   "answer": "Lake red with a little arterial blood red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: carmine has always meant a dye made from insects.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which mineral did Werner give as the stone example of Carmine Red?",
+   "choices": [
+    "Oriental ruby",
+    "Lapis lazuli",
+    "Malachite",
+    "Amber"
+   ],
+   "answer": "Oriental ruby",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Werner's carmine red was a recipe: lake red with a little arterial blood red.",
+  "In Syme's color lists carmine red is a building block: it goes into crimson, purplish red and even blues and purples.",
+  "Carmine was not always an insect: Field's carmine was madder, and permanent carmine can be an azo pigment."
+ ],
+ "words": 628,
+ "status": "checked",
+ "checked": {
+  "by": "Sonnet 5.5 batch writer (self-check: sentence-to-note trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Short article on purpose: the books give Carmine Red only through Werner/Syme (Baty) and pigment dictionaries; the insect history lives in carmine.json.",
+   "Werner swatch is an aged, approximated swatch; the library hex is not a measured pigment.",
+   "Permanent carmine azo identification is single-source (Mayer via Pigment Compendium); Gurney table layout ambiguous so only the listing is stated.",
+   "Syme 1814 vs 1821 editions both listed; the exact first English use of the phrase is not documented in our books."
+  ]
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "slug": "van-dyke-brown",
+ "name": "Van Dyke Brown",
+ "hex": "#664228",
+ "names": [
+  "Van Dyke Brown"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Van Dyke Brown is a deep, warm brown named for the painter Anthony van Dyck, though the pigment behind it is a peat-based earth that took his name long after his death.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "Cassel earth",
+   "body": "The pigment is not a true mineral earth. Ball describes it as an organic material derived from peat or lignite, first found near the German cities of Cologne and Cassel, which is why it was also called Cassel earth and Cologne earth [1]. It reached English use under the name Vandyke brown from around 1790, well over a century after Van Dyck died in 1641 [1].\n\nThe name honors the painter, who by Ball's account used it as a sobering, transparent glaze for shadows [1]. In nineteenth-century Belgium the same brown was called Rubens brown, as Van Dyck learned the habit from Rubens [1]. Ball adds that it is hard to identify with certainty, but has been reported for Rubens, Rembrandt and possibly Velázquez [1]."
+  },
+  {
+   "id": "after",
+   "title": "After the master",
+   "body": "Gage notes that Delacroix, given a palette said to be Van Dyck's, used its colors, including Vandyke brown, to plan his murals in the 1840s [2]. Jarman lists the name among colors honoring old masters [3]. Gurney, writing for modern painters, puts it in his list of historic pigments not recommended [4]. The Pigment Compendium treats Campania earth as a synonym of it [5]. Look-alike browns are [[umber]], [[burnt-umber]] and [[sepia]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color near Van Dyke Brown is among the commonest colors in our archive: it appears in 5,186 of 23,781 paintings, 21.81 per cent, more common than 97 per cent of named colors [6]. It peaks in the 1400s, in 143 of 945 paintings, 1.5 times the expected rate, and plays a mid-tone in 39 per cent of the 2,617 paintings with a within-painting reading [6]. These are photographs of aged, darkened paintings, so many of these browns are varnish and age and not the pigment itself."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Anthony van Dyck, painter (1599-1641)",
+   "first_recorded": "c. 1790 as an English pigment name (Ball); library dates the color name 1850-1886",
+   "source": "Ball, Bright Earth"
+  },
+  "aka": [
+   "Cassel earth",
+   "Cologne earth",
+   "Rubens brown"
+  ],
+  "siblings": [
+   "umber",
+   "burnt-umber"
+  ],
+  "parent": "brown",
+  "children": [
+   "sepia"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 5186,
+  "pct": 21.81,
+  "century": "1400s, 143 paintings, 1.5x",
+  "role": "mid-tone, 39%"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 6 (Van Dyck), p. 152",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 147",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 5",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, p. 221",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Campania earth\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Van Dyke brown made from?",
+   "choices": [
+    "Peat or lignite",
+    "Ground lapis",
+    "A mineral clay",
+    "Burnt bone"
+   ],
+   "answer": "Peat or lignite",
+   "kind": "pick"
+  },
+  {
+   "q": "The pigment took the name Vandyke brown in English around 1790.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look for Van Dyke brown in old shadows and glazes: it is a peat-based brown, named for Van Dyck about 150 years after he died."
+ ],
+ "words": 310,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

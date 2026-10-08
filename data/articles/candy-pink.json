@@ -1,0 +1,118 @@
+{
+ "slug": "candy-pink",
+ "name": "Candy Pink",
+ "hex": "#E4717A",
+ "names": [
+  "Candy Pink"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Candy Pink is a warm, strong pink listed in the 1955 ISCC-NBS system, and a name whose old and modern swatches differ a good deal.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name that moved",
+   "body": "Candy Pink appears in the ISCC-NBS system of 1955, in the 1930 Maerz and Paul dictionary it cites, and in the 2010 xkcd survey [1]. The swatch here is a warm coral-leaning pink, nearest ISCC-NBS name \"deep pink\" at a distance of 1.1 [1]. The xkcd list uses the same words for a much more purple pink, #FF63E9, so the name does not fix one color [1]. Compare [[deep-pink]] and [[cotton-candy]].\n\nPaterson glosses candy-coloured as having a shade of pink, also \"candy pink\", and candy-striped as pink and white stripes [2]. Finlay finds candy pink hiding inside the wool of a Harris tweed, beside heather purple and sun yellow [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch appears in 7 of our 23,781 paintings, 0.03 percent, as photographed [4]. That is rarer than 86 percent of named colors [4]. Look to [[pink]] and [[rose-pink]] for the wider family."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "candy, the sweet",
+   "first_recorded": "1930 (Maerz and Paul), via ISCC-NBS 1955",
+   "source": "ColorHub name graph; Paterson"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-pink",
+   "cotton-candy"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cotton-candy",
+    "gloss": "a lighter sweet-shop pink"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "nearest_iscc": [
+   "deep pink",
+   1.1
+  ],
+  "xkcd_alt": "#FF63E9"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name graph and library: ISCC-NBS 1955 nearest name, sources and dates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"candy-coloured\", p. 88",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 192",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (as photographed), data/graph/fieldnotes",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does Finlay find candy pink in the book?",
+   "choices": [
+    "Inside Harris tweed wool",
+    "On a porcelain glaze",
+    "In a Renaissance fresco",
+    "In a gemstone"
+   ],
+   "answer": "Inside Harris tweed wool",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: every source gives Candy Pink the same color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "xkcd's Candy Pink is a far more purple pink than the ISCC-NBS one."
+ ],
+ "words": 167,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Name's early history not found in books; data plus dictionary glosses only.",
+   "Re-verified key claims against fact cards and book text; no changes needed."
+  ]
+ }
+}

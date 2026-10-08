@@ -1,0 +1,201 @@
+{
+ "slug": "midnight-blue",
+ "name": "Midnight blue",
+ "hex": "#191970",
+ "names": [
+  "Midnight blue",
+  "Midnight Blue"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Midnight blue is the blue of the sky at its darkest, a deep violet-leaning navy that Paterson's dictionary says was apparently the correct shade for men's evening dress, before it became a crayon, a screen color and a name for oxidized indigo.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A time of day",
+   "body": "The dictionary gloss is short: an intense blue, apparently the correct shade for men's evening dress [1]. In the books the word shows up in just that setting, as a midnight-blue silk dress laid out beside black lace in a museum case of mourning clothes [2]. Garfield counts 55 color names in one tally that were taken from the time of day, and gives midnight blue as his example [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is the CSS and X11 color `MidnightBlue`, hex #191970, one of 140 named colors in the X11 set [1]. Measured, it is very dark and quite saturated: lightness 16, chroma 59 and a hue angle of 303, which is closer to violet than the pure blue its name suggests [4]. ISCC-NBS 1955 calls the region \"deep purplish blue\" and lists Bellflower, Glory, Monet Blue, Napoleon and Roslyn as names for the neighboring block 197 [4]. The xkcd color survey's own midnight blue, #020035, is far darker still [4]. Its relatives are [[blue]], [[prussian-blue]] and [[indigo]]."
+  },
+  {
+   "id": "indigo",
+   "title": "Out of the indigo vat",
+   "body": "The best-sourced midnight blue is a dye result. White cloth pulled from an indigo vat changes in the air from yellow through turquoise to midnight blue as the dye oxidizes [5]. Balfour-Paul notes that Islamic courts favored crimson from insect dyes together with midnight blues [6]. In China and elsewhere, indigo-colored paper for Buddhist manuscripts was glazed with rice powder or gypsum, which gave it a lustrous midnight blue [7]."
+  },
+  {
+   "id": "crayon",
+   "title": "A crayon renamed",
+   "body": "In 1958 the American company Binney & Smith renamed its Prussian blue crayon Midnight Blue, because teachers reported that schoolchildren could not relate to Prussian history [8]. Finlay treats the change as the symbolic end of the Prussian blue era [8]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Ball describes the figures of Picasso's *The Absinthe Drinker* and *Old Woman*, both from 1901, as clothed in midnight blues, within the blue world of his early work [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Very dark blues are rare in painting as photographed: only 5 of the 23,531 paintings in the ColorHub archive carry a color this close to midnight blue, 0.02 percent [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sky at midnight; also men's evening dress",
+   "first_recorded": "not documented in our books; a CSS and X11 name",
+   "source": "Paterson, A Dictionary of Colour, p. 264"
+  },
+  "aka": [
+   "MidnightBlue (CSS, X11)"
+  ],
+  "siblings": [
+   "prussian-blue",
+   "indigo",
+   "navy"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "prussian-blue",
+    "gloss": "the older crayon name that Midnight Blue replaced in 1958"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub painting archive, 23,531 paintings, as photographed",
+  "n_present": 5,
+  "pct": 0.02,
+  "measured": {
+   "lch": [
+    15.9,
+    58.9,
+    302.6
+   ],
+   "iscc": "deep purplish blue (block 197)",
+   "xkcd_alt": "#020035"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 264",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 332",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), entry Midnight Blue (ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 9",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 201",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 224",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,531 paintings, as photographed, field notes for #191970",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color name did the crayon Midnight Blue replace in 1958?",
+   "choices": [
+    "Prussian blue",
+    "Navy",
+    "Indigo",
+    "Cobalt"
+   ],
+   "answer": "Prussian blue",
+   "kind": "pick"
+  },
+  {
+   "q": "In the indigo vat, what is the last color the cloth passes through as it oxidizes in the air?",
+   "choices": [
+    "Midnight blue",
+    "Yellow",
+    "Turquoise",
+    "Violet"
+   ],
+   "answer": "Midnight blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch #191970 is a pure blue with no violet in it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pull white cloth out of an indigo vat and it goes yellow, then turquoise, then midnight blue as the air reaches it.",
+  "In 1958 a crayon called Prussian blue became Midnight Blue because children could not relate to Prussian history."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede hedged: evening-dress claim is Paterson's 'apparently'.",
+   "Crayon story is Finlay's account; checked against book text."
+  ]
+ },
+ "words": 367
+}

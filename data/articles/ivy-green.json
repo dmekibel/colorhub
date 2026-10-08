@@ -1,0 +1,115 @@
+{
+ "slug": "ivy-green",
+ "name": "Ivy Green",
+ "hex": "#5D6346",
+ "names": [
+  "Ivy Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Ivy green is a dark, muted olive green named for the leaves of ivy, and it is a surprisingly common color in painting.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name means",
+   "body": "Paterson's dictionary defines *ivy green* as a dark olive green [1]. The swatch here is a dull, greyish olive, and the nearest ISCC-NBS name is grayish olive green [2]. Ridgway's 1912 color atlas, an aged plate and so approximate, carries the same name [2]. Close neighbors are [[olive-green]], [[hunter-green]] and [[moss-green]], and it belongs to the family of [[green]] [2].\n\nThe books add no history of the name, so none is claimed here [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a common painted color. It appears in 1,147 of the 23,781 paintings in our archive, 4.82 per cent, more often than 86 per cent of named colors, as photographed [3]. It peaks in the 1900s, at 5.5 per cent of paintings from then, 1.8 times the expected rate [3]. Inside a painting it is most often a hidden color, as in 45 per cent of 683 paintings, judged by lightness rank so varnish cannot fake it [3].\n\nThe most devoted painter is Edvard Weie, who uses it in 10 of the 33 works we hold, 5.1 times the baseline [3]. Paul Sérusier and Alfred Sisley also lean on it [3]. In Google Books the word peaks in the 1880s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the leaves of ivy",
+   "first_recorded": "Ridgway 1912 (plate XXXI)",
+   "source": "Paterson, A Dictionary of Colour, \"ivy green\""
+  },
+  "aka": [
+   "ivy"
+  ],
+  "siblings": [
+   "olive-green",
+   "moss-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1147,
+  "pct": 4.82,
+  "peak_decade": 1900,
+  "ngram_peak": 1880,
+  "painters": [
+   "edvard-weie",
+   "paul-serusier",
+   "alfred-sisley"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"ivy green\" (p. 225, colour list p. 498)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 nearest names, Ridgway 1912 and Maerz & Paul 1930 entries, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, relative to peak (data/graph)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Paterson's dictionary describes ivy green as which kind of green?",
+   "choices": [
+    "A dark olive green",
+    "A bright lime",
+    "A pale mint"
+   ],
+   "answer": "A dark olive green",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, which painter leans on ivy green far more than his museums' baseline?",
+   "choices": [
+    "Edvard Weie",
+    "Claude Monet",
+    "Georges Seurat"
+   ],
+   "answer": "Edvard Weie",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Ivy green turns up in about one painting in twenty in our archive, more often than most named colors."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

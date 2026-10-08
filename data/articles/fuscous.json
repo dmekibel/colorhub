@@ -1,0 +1,122 @@
+{
+ "slug": "fuscous",
+ "name": "Fuscous",
+ "hex": "#5C584A",
+ "names": [
+  "Fuscous"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Fuscous is a dark, dull, greenish-brown grey, from a Latin root for brown and dusky, kept alive in Ridgway's color nomenclature.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dusky word",
+   "body": "The Latin root *fusc-* means brown, tawny or dark, and Paterson's dictionary defines fuscous as brown, dingy, dark or sombre, and also as a brownish grey [1]. The same root gives *fuscescent* (dark brownish) and *fusco-ferruginous* (rust-colored) [1]. It was a descriptive word before it was a swatch, and Paterson's lists place it among the browns [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "Ridgway's swatch",
+   "body": "Our library traces the color to Ridgway's plate XLVI of 1912, and the ISCC-NBS system files the nearest block as olive gray, only 2.2 units away on the CIEDE2000 scale [3]. That is a very close fit, so the swatch here is near the standard one [3]. It is a warm dark neutral that sits between [[olive-grey]] and [[brown-grey]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color this close appears in 2,887 works, or 12.1 per cent, which makes it more common than 94 per cent of the named colors [4]. Aged varnish dulls and darkens colors, so some of these matches may once have been browns or greens [4]. The 1100s show a peak, but there are only 50 paintings from that century in the archive, so that figure is weak [4]. Read all of this as screen color, not pigment evidence [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin fusc-, brown or dark",
+   "first_recorded": "Ridgway, 1912",
+   "source": "Paterson, A Dictionary of Colour; Ridgway 1912"
+  },
+  "aka": [
+   "olive gray"
+  ],
+  "siblings": [
+   "olive-grey",
+   "brown-grey",
+   "grey",
+   "olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed",
+  "n_present": 2887,
+  "pct_archive": 12.14,
+  "measured": {
+   "iscc": "olive gray",
+   "de2000": 2.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 180 (\"fuscous\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 519 (index by color family)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912, CSS, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; dE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Latin root fusc- mean?",
+   "choices": [
+    "Brown, tawny or dark",
+    "Green",
+    "Bright red",
+    "White"
+   ],
+   "answer": "Brown, tawny or dark",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is the 1100s peak in our archive weak evidence?",
+   "choices": [
+    "Only 50 paintings from then",
+    "The color did not exist",
+    "The paintings are all black",
+    "It was measured by hand"
+   ],
+   "answer": "Only 50 paintings from then",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Fuscous is Latin for dusky, and it matches 12 per cent of the paintings in our archive."
+ ],
+ "words": 219,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All key claims verified against fact cards and book text; no changes"
+  ]
+ }
+}

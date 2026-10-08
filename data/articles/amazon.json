@@ -1,0 +1,116 @@
+{
+ "name": "Amazon",
+ "hex": "#3B7A57",
+ "names": [
+  "Amazon"
+ ],
+ "tier": "nature",
+ "lede": "Amazon is a deep forest green; in the jeweller's books the word names Amazon stone, a green feldspar.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A stone's name",
+   "body": "Finlay's survey of gems lists Amazon stone, a green microcline feldspar, among the green stones, near [[emerald]] and [[jade]] [1]. Finlay also notes that translators of the Bible's list of breastplate stones render two of them, leshem and shoham, as Amazon stone in one reading [1]. Other readings give yellow jasper or green turquoise instead, so the identification is uncertain [1].\n\nThe books give no link between this color and the river or the warriors. Pastoureau's green book mentions the Amazons only in passing, in a medieval bestiary where a three-headed dragon comes from their country [2]. That adds nothing to the color's history."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is a dark, slightly bluish green, darker than [[emerald]] and cooler than [[jade]]. Amazon stone in nature runs from blue-green to a minty green, so this swatch is a name label, not a measurement of the gem. The origin of the color name is undocumented in our books."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This green is rare in painting: 38 of 23,781 paintings in our archive hold it, about 0.16 per cent [3]. Its use rises sharply in the 1900s, at 6.4 times the overall rate, and the strongest match is Franz Marc's *Weasels at Play* from 1911, at 36 per cent of the canvas [3][[painting:nga-121096|Weasels at Play]]. Renoir's *A Girl with a Watering Can*, 1876, holds it at 32 per cent [3][[painting:nga-46681|A Girl with a Watering Can]]. These are photographs of aged, varnished paintings, so a match is a color on a screen, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Amazon stone, a green feldspar (origin of the gem's name undocumented here)",
+   "first_recorded": "undocumented",
+   "source": "Finlay, Jewels, ch. 20"
+  },
+  "aka": [
+   "Amazon stone"
+  ],
+  "siblings": [
+   "emerald",
+   "jade",
+   "sea-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5 per cent of the canvas)",
+  "n_present": 38,
+  "rate": 0.0016,
+  "ngram_peak": "1900s",
+  "top_paintings": [
+   "nga-121096",
+   "nga-46681"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 24",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5 per cent of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Amazon stone?",
+   "choices": [
+    "A green microcline feldspar",
+    "A blue sapphire",
+    "A kind of jade",
+    "A river pearl"
+   ],
+   "answer": "A green microcline feldspar",
+   "kind": "pick"
+  },
+  {
+   "q": "In which century does this green rise most in our painting archive?",
+   "choices": [
+    "1900s",
+    "1400s",
+    "1600s",
+    "1100s"
+   ],
+   "answer": "1900s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Franz Marc's weasels, 1911, are painted in the closest green to Amazon in our archive."
+ ],
+ "slug": "amazon",
+ "words": 265,
+ "status": "checked",
+ "depth": "short",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'same table' and 'dragon green because dragons were' claims."
+  ]
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "slug": "cool-grey",
+ "name": "Cool Grey",
+ "hex": "#A9A9A9",
+ "names": [
+  "Cool grey"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Cool grey is a grey that leans toward blue, a distinction painters use constantly even though the swatch here is a pure neutral.",
+ "sections": [
+  {
+   "id": "painters",
+   "title": "How painters use it",
+   "body": "A painter's text on color and light treats cool and warm greys as working tools. For distant haze it suggests a light cool grey blended with a yellowish white at the same value [1]. In a large dark building the colors can move from a dark, cool grey at one end to a lighter, warmer grey at the other, and grey is called the \"sauce\" of a color scheme [2]. Transparent-media painters can also run a cool grey wash across a whole shadow area to key it down [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is #A9A9A9, equal in red, green and blue, which has no hue and so is neither cool nor warm [4]. Coolness is relative: a grey looks cool next to a warmer one [4]. The same value is the web color `darkgrey`, and it also appears in the German RAL system from 1927 [4]. The ISCC-NBS system calls it \"light gray\", 5 units away [4]. Compare [[grey]] and [[white]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The ColorHub archive records chroma 0 and lightness near 69 out of 100 [4]. Contrast against white is 2.35 to 1 [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (a descriptive phrase)",
+   "first_recorded": "RAL list from 1927 contains the swatch",
+   "source": "ColorHub name archive"
+  },
+  "aka": [
+   "dark grey (CSS)"
+  ],
+  "siblings": [
+   "grey",
+   "taupe",
+   "white"
+  ],
+  "parent": "grey",
+  "children": [
+   "brownish-grey"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub name archive",
+  "family": "Neutrals",
+  "lightness": 69.2,
+  "chroma": 0.0,
+  "contrast_white": 2.35,
+  "iscc_nearest": "light gray, dE 5.0",
+  "sources": [
+   "CSS",
+   "RAL 1927",
+   "xkcd 2010"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 64",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 83",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 196",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub name archive, data/graph nodes (css, RAL 1927, xkcd 2010, ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is this swatch neither warm nor cool?",
+   "choices": [
+    "Its red, green and blue are equal",
+    "It is too dark",
+    "It is a pigment",
+    "It has too much blue"
+   ],
+   "answer": "Its red, green and blue are equal",
+   "kind": "pick"
+  },
+  {
+   "q": "How does Gurney describe grey in a color scheme?",
+   "choices": [
+    "As the sauce",
+    "As a mistake",
+    "As only a shadow",
+    "As a primary"
+   ],
+   "answer": "As the sauce",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A pure neutral grey is neither cool nor warm: coolness only shows next to another grey."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against Paterson, Baty, Gurney, Albers, Birren, Westland, Livingstone, Pigment Compendium; no changes."
+  ]
+ },
+ "words": 197
+}

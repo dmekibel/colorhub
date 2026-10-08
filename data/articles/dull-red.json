@@ -1,0 +1,124 @@
+{
+ "slug": "dull-red",
+ "name": "Dull Red",
+ "hex": "#BB3F3F",
+ "names": [
+  "Dull Red"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dull Red is a descriptive name, a red with the shine taken out, and the books use it as a plain adjective phrase more than as the name of any one dye or pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A phrase, not a pigment",
+   "body": "The books use \"dull red\" as everyday description. A painter's guide describes sunset skies as running from blue overhead to soft yellows and dull reds at the horizon [1]. Gage notes that Schoenberg's stage piece Die glückliche Hand calls for lights changing from dull red to yellow, through dirty green, violet, blue-grey and blood red [2]. No book treats it as a defined color with a recipe, so what it names is a loose range of reds rather than one shade.\n\nThe swatch here is a single screen sample of that range, not a reconstruction of anything historical."
+  },
+  {
+   "id": "heat",
+   "title": "Hematite and dull-red heat",
+   "body": "Two technical uses are more exact. The pigment reference describes the common iron ore hematite as often a dull red, usually found as a crust in a rounded, kidney-like form [3]. The same source gives a recipe for a purple pigment, mineral lake, in which tin and chromium oxides are heated to \"dull-red heat\", a furnace temperature judged by the glow [4]. In both, the phrase is a working description rather than a name [3][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive the swatch matches 152 paintings out of 23,781 (0.64%, as photographed), more common than 66% of the named colors [5]. It peaks in the 1400s, in 1.8% of the 945 paintings from that century, about twice the rate expected from the same museums [5]. Inside a painting it most often plays an accent, in 90% of the 153 paintings that hold it [5]. These are photographs of aged, varnished paintings, so a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a plain descriptive phrase",
+   "first_recorded": "undocumented",
+   "source": "concordance of the color books"
+  },
+  "aka": [],
+  "siblings": [
+   "indian-red",
+   "venetian-red",
+   "brick-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (graph fieldnotes)",
+  "n_present": 152,
+  "pct": 0.64,
+  "peak": "1400s",
+  "role": "accent (90% of 153)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 182",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 248",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"hematite\", p. 196",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"mineral lake\", p. 276",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (graph fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the pigment reference, what is hematite often described as?",
+   "choices": [
+    "A dull red",
+    "A bright yellow",
+    "A pale green"
+   ],
+   "answer": "A dull red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books treat Dull Red as one specific historical pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dull red was also a furnace temperature: potters judged heat by glow, and one pigment recipe calls for dull-red heat."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed sunset-horizon misreading (not night sky)",
+   "Completed Schoenberg light cue (blue-grey was missing)",
+   "Removed unsupported 'greyed/low chroma' definition"
+  ]
+ },
+ "words": 284
+}

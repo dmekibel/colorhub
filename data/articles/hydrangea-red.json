@@ -1,0 +1,107 @@
+{
+ "slug": "hydrangea-red",
+ "name": "Hydrangea Red",
+ "hex": "#9C6159",
+ "names": [
+  "Hydrangea Red"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Hydrangea Red is a muted, greyed red, the color of the flower heads when they take on a reddish tone.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a changeable flower",
+   "body": "Paterson lists hydrangea pink as a yellowy pink, with hydrangea blue and hydrangea red as variants [1]. The names recognise that the same bush can flower in different colors. The books read give no more than that, so the name's first coiner is undocumented [1].\n\nThe swatch enters the atlases early: Ridgway's 1912 atlas (plate XXVII), the 1930 Maerz and Paul dictionary and the 1955 ISCC-NBS system, which calls it grayish red [2]. Japanese traditional color lists give a near twin, *ume-nezumi*, the grey of plum [2]. Neighbors are [[red]], [[rose]] and [[old-rose]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color is moderately common in paintings: 243 of 23,781, about 1.0 per cent [3]. It is mostly an accent, and it peaks in the 1900s at 2.1 times the expected rate [3]. A match from the year 1000 is a look-alike hue in an aged photograph, not proof of a dye [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the hydrangea flower",
+   "first_recorded": "1912, Ridgway",
+   "source": "data/library.json; Paterson"
+  },
+  "aka": [],
+  "siblings": [
+   "red",
+   "rose",
+   "old-rose",
+   "dusty-rose"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "ume-nezumi (梅鼠)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/h.json",
+  "n_present": 243,
+  "pct": 1.02,
+  "peak": "1900s, 2.1x expected"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 212, \"hydrangea pink\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Ridgway 1912 plate XXVII; ISCC-NBS block 19 grayish red; Maerz & Paul 1930; Japanese traditional list (ume-nezumi); CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/h.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say hydrangea pink is?",
+   "choices": [
+    "A yellowy pink",
+    "A bluish grey",
+    "A bright red",
+    "A pale green"
+   ],
+   "answer": "A yellowy pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Hydrangea Red appears in no painting of our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hydrangea Red appears in about 1 per cent of museum paintings in our archive."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "status": "checked",
+ "words": 163
+}

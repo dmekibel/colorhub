@@ -1,0 +1,115 @@
+{
+ "slug": "banana",
+ "name": "Banana",
+ "hex": "#FFFF7E",
+ "names": [
+  "Banana"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Banana is a pale lemon yellow named for the fruit, and the books we hold say very little about it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fruit name",
+   "body": "Banana belongs to a large class of color names taken from fruit. Garfield counts 254 fruit names in a catalog of color names, with apricot and banana as examples [1]. Paterson lists banana among its yellows, and records the slang \"mellow yellow\" for a banana skin smoked as an intoxicant [2]. The swatch is a bright pale yellow, near [[canary]] and [[lemon-yellow]], and paler than [[butterscotch]].\n\nWho first used the name for a color is undocumented in our sources. It sits in the [[yellow]] family."
+  },
+  {
+   "id": "see",
+   "title": "Seeing it",
+   "body": "Eckstut and Siegel use a blue banana to make a point about value: a picture can use an \"inaccurate\" hue and still read correctly if the lightness is right [3]. That is a useful reminder that a picture of a banana can lean on lightness as much as on hue, and that this pale tone sits at the light end of the yellows beside [[canary]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Banana is almost absent from our paintings. Only one painting in 23,781 holds it, as photographed [4]. A pale screen yellow like this is rare in aged, varnished oils, where varnish pushes yellows darker, so the figure says more about varnish than about painters [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fruit; first use as a color undocumented",
+   "first_recorded": "undocumented in our sources",
+   "source": "Garfield, Mauve, ch. 23"
+  },
+  "aka": [],
+  "siblings": [
+   "canary",
+   "lemon-yellow"
+  ],
+  "parent": null,
+  "children": [
+   "butterscotch"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "pct": 0.0,
+  "role": "none"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"banana\" and \"mellow yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eckstut and Siegel, What Is Color?, ch. 44",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, field notes for Banana",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Banana belongs to which class of color names?",
+   "choices": [
+    "Names taken from fruit",
+    "Names of pigments",
+    "Names of painters"
+   ],
+   "answer": "Names taken from fruit",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive holds many paintings in this exact pale yellow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Almost no painting in our archive of 23,781 holds this pale banana yellow, as photographed."
+ ],
+ "words": 212,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed claim about shape that the source does not make"
+  ]
+ }
+}

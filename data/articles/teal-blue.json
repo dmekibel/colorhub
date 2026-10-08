@@ -1,0 +1,123 @@
+{
+ "slug": "teal-blue",
+ "name": "Teal Blue",
+ "hex": "#367588",
+ "names": [
+  "Teal Blue"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Teal Blue is a moderate greenish blue named for the dark patch on the wings of the teal duck; it is a softer, greyer color than the web-standard teal.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A duck's wing",
+   "body": "Paterson defines teal as the dark greenish-blue color found on the wings of the teal, a small duck, and notes that it is also called teal blue [1].\n\nOnline, teal means something sharper. The X11 color set defines Teal as #008080, a saturated cyan-green, and this swatch is a different color, a duller, greyer blue [1][2]. The 2010 xkcd survey gave another teal-like color, #01889F, so even the crowd did not agree [2]. The 1955 ISCC-NBS system files this swatch under \"moderate greenish blue\", only 1.7 CIEDE2000 units away, a close fit [2].\n\nThe record for teal blue in the Maerz and Paul dictionary is at plate 39, block L 6, with a first recorded use of 1927 [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Teal Blue is uncommon in painting [3]. It appears in 100 of 23,781 paintings in our archive, 0.42 per cent, rarer than 56 per cent of the named colors [3]. Inside a painting it most often plays a hidden color, in 45 per cent of the 33 paintings where the within-painting lens finds it [3]. It peaks in the 1700s, at 0.2 per cent of the 3,449 paintings from that century, 1.5 times the museums' baseline [3].\n\nThe earliest dated match is 1433, a Robert Campin, 497 years before the name's first record in our sources, and the archive's early centuries are thin [3]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not proof of a pigment [3]. In printed English the words peak in the 2010s and rose fastest in the 1980s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the teal, a small duck",
+   "first_recorded": "1927 (Maerz and Paul)",
+   "source": "Paterson, A Dictionary of Colour, \"teal\""
+  },
+  "aka": [
+   "teal"
+  ],
+  "siblings": [
+   "teal",
+   "dark-teal",
+   "peacock-blue",
+   "bluish-green"
+  ],
+  "parent": "teal",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "teal",
+    "gloss": "the X11 Teal is #008080, a brighter, more saturated cyan-green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 100,
+  "pct": 0.42,
+  "peak": "1700s",
+  "iscc": {
+   "name": "moderate greenish blue",
+   "de": 1.7
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"teal\" and \"Teal\", p. 389",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances to ISCC-NBS names; Maerz & Paul 1930, plate 39 L 6; xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); at least 2% of the canvas",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, all senses of the term, 5-year smoothing",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Teal as a color name comes from...",
+   "choices": [
+    "A small duck",
+    "A tea leaf",
+    "A river",
+    "A dye plant"
+   ],
+   "answer": "A small duck",
+   "kind": "pick"
+  },
+  {
+   "q": "What hex code does Paterson give for X11 Teal?",
+   "choices": [
+    "#008080",
+    "#367588",
+    "#01889F",
+    "#FF6FFF"
+   ],
+   "answer": "#008080",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Teal is a duck: the color is the dark greenish blue on its wings.",
+  "The web's Teal (#008080) is brighter and more saturated than this teal blue."
+ ],
+ "words": 283,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

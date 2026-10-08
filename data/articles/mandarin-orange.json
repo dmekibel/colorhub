@@ -1,0 +1,127 @@
+{
+ "slug": "mandarin-orange",
+ "name": "Mandarin Orange",
+ "hex": "#D96F3A",
+ "names": [
+  "Mandarin Orange"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Mandarin Orange is a deep, reddish orange named for the fruit; a dictionary calls the name a reddish yellow, and the exact tone has drifted.",
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Mandarin orange\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Maerz & Paul 1930 pl. 11 B 12 (first recorded 1883); CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 20 (\"Garnet\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Mandarin Orange (n=137), 23,781 museum paintings as photographed; data/graph/fieldnotes/m.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fruit and a dye name",
+   "body": "Paterson defines Mandarin as a strong yellow and Mandarin orange as a reddish yellow, adding Mandarin red as a variant [1]. The swatch here is darker and redder than that, a burnt orange, so the dictionary's tone is lighter than this page's [2]. The books read do not trace the name's origin beyond the fruit [1]. Finlay lists a mandarin garnet, an orange stone from Namibia and Pakistan, so the word also names a gem [3]."
+  },
+  {
+   "id": "standards",
+   "title": "On the old charts",
+   "body": "The library finds the color only in Maerz and Paul's 1930 dictionary, which first records the name in 1883 on plate 11 B 12, and files it under fashion and textiles [2]. The nearest everyday name is [[orange]], about eight units away; close neighbors are [[tangerine]] and [[burnt-orange]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is fairly common in museum paintings: 137 of 23,781 contain it, about 0.58 per cent, more common than 62 per cent of our named colors [4]. It peaks in the 1700s at 0.8 per cent of paintings, 1.4 times the expected rate [4]. Inside a painting it is an accent in 90 per cent of the 121 paintings measured [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mandarin fruit",
+   "first_recorded": "1883 in Maerz and Paul",
+   "source": "data/library.json; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Mandarin red"
+  ],
+  "siblings": [
+   "tangerine",
+   "burnt-orange",
+   "terracotta"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#D96F3A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 137,
+  "nearest": [
+   "Orange",
+   8.1
+  ],
+  "role": "accent, 90% of 121 paintings"
+ },
+ "questions": [
+  {
+   "q": "When does Maerz and Paul first record the name?",
+   "choices": [
+    "1883",
+    "1924",
+    "1657",
+    "1990"
+   ],
+   "answer": "1883",
+   "kind": "pick"
+  },
+  {
+   "q": "In paintings, this color most often plays...",
+   "choices": [
+    "An accent",
+    "A shadow",
+    "The background sky",
+    "A light"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Mandarin Orange is an accent in 90 per cent of the paintings where our archive finds it."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Spot-checked 8 claims against books and library; all supported"
+  ]
+ },
+ "status": "checked",
+ "words": 208
+}

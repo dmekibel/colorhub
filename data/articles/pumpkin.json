@@ -1,0 +1,146 @@
+{
+ "slug": "pumpkin",
+ "name": "Pumpkin",
+ "hex": "#FF7518",
+ "names": [
+  "Pumpkin"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pumpkin is the saturated orange of the squash, a name that works as a plain, learnable shade of orange and carries two small stories: Cinderella's coach and a Dutch king's cloak.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The orange of a squash",
+   "body": "Paterson glosses *pumpkin* as the orange-yellow of the pumpkin [1]. Pastoureau lists it with *apricot*, *saffron* and *tan* as alternatives for the word *orange*, and warns that swapping them in would change the connotations of the color [2]. Pastoureau notes the words have no true synonyms, so each opens a wider field of connotation [2]. Pumpkin sits beside [[apricot]] and [[tangerine]] as a way to name a shade of [[orange]]."
+  },
+  {
+   "id": "cinderella",
+   "title": "Cinderella's coach",
+   "body": "Pastoureau notes that in Perrault's version of Cinderella a pumpkin becomes a carriage, rats become coachmen and lizards become valets [3]. Finlay describes a squat carriage in Cremona, made in 1663, as the kind of little pumpkin Cinderella could have fled the ball in, and says it is the same reddish orange [4]."
+  },
+  {
+   "id": "orange",
+   "title": "A cloak for the House of Orange",
+   "body": "St Clair describes a portrait of William III, attributed to Thomas Murray, in which he wears a voluminous flame-colored velvet cloak trimmed with ermine, with two large silk tassels, in an eye-catching shade of pumpkin [5]. She adds that the Dutch embraced the color enthusiastically out of gratitude to William I, and that the exact shade they favored has shifted over the years [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is #FF7518, the web's \"pumpkin\" orange, fully saturated and fairly bright [6]. Dictionary values are screen approximations, and a real pumpkin ranges from yellow-orange to a dull brownish orange [1][6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The match is almost absent from the painted record: only 1 of 23,781 canvases in the ColorHub archive holds this color across at least 5% of the picture, a Pahari painting from India dated 1810, as photographed [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pumpkin",
+   "first_recorded": "origin undocumented in the books",
+   "source": "Paterson, A Dictionary of Colour, \"pumpkin\""
+  },
+  "aka": [],
+  "siblings": [
+   "orange",
+   "apricot",
+   "tangerine",
+   "marigold"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FF7518",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "first_year": 1810
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"pumpkin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 37",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 36",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 14",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 46 (\"Orange\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive and color library (tools/article_field.py), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Perrault's Cinderella, what does the pumpkin become?",
+   "choices": [
+    "A carriage",
+    "A slipper",
+    "A palace"
+   ],
+   "answer": "A carriage",
+   "kind": "pick"
+  },
+  {
+   "q": "St Clair says the Dutch took to which shade after William I?",
+   "choices": [
+    "Pumpkin-like orange",
+    "Royal blue",
+    "Lincoln green"
+   ],
+   "answer": "Pumpkin-like orange",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In Perrault's Cinderella, a pumpkin becomes a carriage [3]."
+ ],
+ "status": "checked",
+ "words": 279,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Cloak was William III (portrait attributed to Murray), not William I; Dutch gratitude was to William I",
+   "Pastoureau's word list is about the French orangé; reworded",
+   "Finlay carriage description corrected"
+  ]
+ }
+}

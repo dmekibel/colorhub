@@ -1,0 +1,108 @@
+{
+ "slug": "lint",
+ "name": "Lint",
+ "hex": "#9E855F",
+ "names": [
+  "Lint"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Lint is a muted, yellowish tan from the fashion color cards of the early twentieth century.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from the color cards",
+   "body": "Lint comes to us from the Maerz and Paul dictionary of 1930, which records it as first used in 1918 (plate 13, B 3) [1]. Other names on the same plate arrived later: Beach in 1923, Biarritz in 1925, Chip and Elmwood in 1928 [1]. In our records its field is fashion and textiles [1].\n\nNo color book in our set describes lint as a color. When the books mention lint at all, it means the fluff itself. Finlay notes that amber, once rubbed, attracts lint and dried grass, and that William Gilbert named electricity in 1600 after the Greek word for amber [2]. She adds that warmed jet does the same [3]. The origin of the color name is therefore undocumented, though the fabric fluff is the obvious guess."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a common tone in the archive: 5,075 of 23,781 paintings, about 21%, have at least 5% of their canvas within ΔE 6 of it, as photographed [4]. The top matches are East Asian ink and silk paintings, such as *Hotei* (1475), where the aged ground is almost entirely this color [4]. That says more about aged paper and silk than about a pigment. Its nearest standard name is [[taupe]], 8.7 ΔE away [1]. Related names: [[beige]], [[khaki]] and [[amber]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (probably the fabric fluff)",
+   "first_recorded": "1918 (Maerz & Paul 1930)",
+   "source": "Maerz & Paul, Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "taupe",
+   "beige"
+  ],
+  "parent": "beige",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+  "n_present": 5075,
+  "rate": 0.2134,
+  "nearest": "Taupe",
+  "hex": "#9E855F"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name records (library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, CSS, Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which year does Maerz and Paul's dictionary record Lint as a color name?",
+   "choices": [
+    "1918",
+    "1856",
+    "1945",
+    "1790"
+   ],
+   "answer": "1918",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color books in our set describe lint as a color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Gilbert named electricity in 1600 after the Greek word for amber, which attracts lint when rubbed."
+ ],
+ "words": 222,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

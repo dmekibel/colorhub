@@ -1,0 +1,111 @@
+{
+ "slug": "light-salmon",
+ "name": "Light Salmon",
+ "hex": "#FFA07A",
+ "names": [
+  "Light Salmon"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Light salmon is a web color, a soft pinkish orange from the X11 set named as a lighter salmon.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name means",
+   "body": "Paterson lists *LightSalmon* as one of the colors in the X11 Color Set, with the hex code #FFA07A [1]. It is a web color first, named as a lighter version of [[salmon]] [1]. The nearest ISCC-NBS name for the swatch is strong yellowish pink [2]. Neighbors are [[light-coral]], [[coral]] and [[peach]] [2]. Like every web color it is defined by a hex code, so the swatch is a screen approximation and not a dye or a paint [2]. Nothing in our books ties it to a pigment or a historical source [1].\n\nThe books give no history for the name beyond the color list, so none is claimed [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 18, 0.08 per cent, rarer than 65 per cent of named colors, as photographed [3]. Inside a painting it is most often an accent, as in 62 per cent of 13 paintings [3]. In Google Books the word peaks in the 1920s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "salmon, lightened",
+   "first_recorded": "X11 color set (web color)",
+   "source": "Paterson, A Dictionary of Colour, \"LightSalmon\""
+  },
+  "aka": [
+   "LightSalmon",
+   "lightsalmon"
+  ],
+  "siblings": [
+   "light-coral",
+   "peach"
+  ],
+  "parent": "salmon",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 18,
+  "pct": 0.08,
+  "hex_code": "#FFA07A"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"LightSalmon\" (p. 243, colour list p. 503)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 nearest names, Ridgway 1912 and Maerz & Paul 1930 entries, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, relative to peak (data/graph)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What hex code does Paterson give for LightSalmon?",
+   "choices": [
+    "#FFA07A",
+    "#F08080",
+    "#20B2AA"
+   ],
+   "answer": "#FFA07A",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: light salmon is a common color in museum paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light salmon began as a line in a computer color list, with the hex code #FFA07A."
+ ],
+ "words": 177,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed fish-flesh gloss not in the cited Paterson entry."
+  ]
+ }
+}

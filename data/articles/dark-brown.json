@@ -1,0 +1,316 @@
+{
+ "slug": "dark-brown",
+ "name": "Dark Brown",
+ "hex": "#654321",
+ "names": [
+  "Dark Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "long",
+ "lede": "Dark Brown is the deep brown of bistre ink, umber earth and old varnished shadow, a color that history kept mistaking for black, and that fills a quarter of the paintings in our archive.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Which dark brown",
+   "body": "The swatch is #654321, the web's Dark Brown, and the ISCC-NBS 1955 system would call it a deep yellowish brown at a CIEDE2000 distance of 5.2 [1]. The 2010 xkcd survey's dark brown, #341C02, is far darker and nearer to black [1]. The closest named neighbors of ours are the Japanese Kobicha, within 2.0, and Pullman Brown, within 2.3 [1].\n\nThe words *dark brown* are simply a modifier and a color, and our sources record the pairing in the ISCC-NBS lists of 1955 [1]. The phrase is certainly much older in ordinary speech, and the books use it freely for pigments, hair, eyes and wood. Related articles here are [[brown]], [[umber]] and [[van-dyke-brown]]."
+  },
+  {
+   "id": "bistre",
+   "title": "Soot and sepia",
+   "body": "Bistre is a classic dark brown ink and wash. It is made from the soot of burnt beechwood, a mixture of flame carbon, charred wood and tarry material that had not fully carbonized [2]. Artists used it in manuscript illumination from the fourteenth century and in wash drawings and watercolors in the seventeenth and eighteenth [2]. Being organic, bistre fades, and the nineteenth century replaced it with more lightfast pigments [2].\n\nSepia, made from cuttlefish ink, took over as the replacement from the eighteenth century, and Paterson calls it a reddish dark brown [3]. The article [[bistre-brown]] follows the pigment's name; [[bone-brown]] and [[mocha]] belong to the same family of browns."
+  },
+  {
+   "id": "earths",
+   "title": "Earths, bitumen and mummy",
+   "body": "Most historic dark browns were dug, not cooked. The pigment compendium puts the iron oxide in umber at between 45 and 70 per cent and the manganese oxide at between 5 and 20 per cent, a mix that gives a warm, rich brown [6]. Vandyke brown is more disputed: a source quoted there lists three kinds, one from roasted iron earth, one a dark brown form of colcothar, and one a brown earth rich in humus or bituminous matter [7]. Asphalts, which run from black to dark brown, are another source of tar-like brown, softening at about 20 degrees Celsius [8].\n\nThe grimmest dark brown is mummy brown. Coles says it was made from the flesh, bones and wrappings of mummified Egyptians and animals, and that medieval Europe first used it as medicine [4]. Paterson is vaguer, describing a bituminous brown *said* to come from the asphalt of mummies [5]. Books disagree on the exact stuff, then [4][5]. The claim that bone black came from human corpses is a myth, and mummy brown is the pigment that really did use human remains [4]. Paterson adds that *atramentum*, described by Pliny, was a very dark brown pigment from calcined bones [9].\n\nNot every dark brown is made on purpose. Verdigris, the copper green, turns dark brown when it meets sulphur-containing pigments such as ultramarine or orpiment, and Persian miniaturists added saffron to slow the change [10]."
+  },
+  {
+   "id": "shadow",
+   "title": "In shadow",
+   "body": "Dark brown is the color of painted shadow. Ball takes apart the wall in Rembrandt's portrait of Margaretha de Geer, painted around 1661 [11]. Its lighter part sits on a brown ground of red, orange and yellow earths, bone black and a little lead white, glazed with smalt, red ochre and probably a yellow lake [11]. [[painter:rembrandt-van-rijn|Rembrandt]]'s deepest shadow there is a glaze of bone black, red lake and red ochre, yet it is barely distinguishable from black [11].\n\nTo see it for yourself, look into the darkest part of an old oil painting at an angle. The black often turns out to be a brown, because the underlayers show through the glaze."
+  },
+  {
+   "id": "almost-black",
+   "title": "The color that stood in for black",
+   "body": "For much of history dark brown was what black looked like. Pastoureau writes that the monks of Cluny and Cîteaux, said to wear black or white, in fact dressed in near-black shades such as grey, bluish and dark brown, because a true black or white dye was hard to get until the eighteenth century [12]. Early photography did the same: nineteenth-century photographs were less black and white than a mix of dark browns and creams, depending on paper and chemicals [13].\n\nWork clothes followed the pattern. In the mid-1800s, Levi Strauss's overalls and trousers came in canvas in shades from off-white to dark brown [14]. Between 1860 and 1865 he began replacing the canvas with denim dyed in [[indigo]], and blue jeans were born [14]. The first workwear color, in other words, was a brown that [[denim]] then displaced."
+  },
+  {
+   "id": "myth",
+   "title": "A myth about brown and blue",
+   "body": "In the nineteenth century Nietzsche argued that the Greeks saw a dark brown where we see blue and a pale yellow where we see green [15]. This is a version of the old myth that the Greeks could not see blue [15]. The evidence is against it: in many surviving fragments of Greek painting, blue was put to work as a darkener, and a clear bluish grey could be mixed from charcoal black and white [16]. The ancient vocabulary for color is different from ours, but the eye was the same."
+  },
+  {
+   "id": "names",
+   "title": "A lot of names for dark brown",
+   "body": "English is rich in names for this one color. Paterson lists *bark*, *brunneous* (from Latin *brunneus*), *seal*, *mud brown*, *inca brown*, *Mars brown* (from the iron-oxide earths), *terreau* (the color of earth), *tabac* (tobacco), *sabelline* (sable fur), and *musk-coloured* among them [17]. St Clair adds ebony, for the very dark tropical hardwood, walnut and puke, a dark brown named after a woolen fabric [18]. Mocha is the dark brown of that coffee, and tea dust is a ceramic glaze [17].\n\nIn Japan, the library lists Kobicha, written 媚茶 and glossed as Kobi tea, as a near-duplicate of this swatch [1]. Why it has that name is undocumented in our books."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is the most widespread color in our archive. Of 23,781 museum paintings, 5,877 (24.71 per cent) hold the swatch, as photographed, and it counts inside 3,180 of them by the within-painting test [19]. It is more common than 99 per cent of the named colors [19]. In a given painting it most often plays the middle of the lightness range: that is 42 per cent of the 3,180 [19].\n\nThe share is highest in the 1400s, with 18.3 per cent of the 945 paintings we have from then, or 173, 1.6 times the expected rate [19]. It falls to 5.6 per cent in the 1900s [19]. Old varnish yellows and darkens, so some of that fall is the aged surface, and the numbers are photographs and no pigment test.\n\nFritz Thomsen is the most devoted painter, with it in 11 of 18 works here, 5.7 times the baseline [19]. Close behind are [[painter:jan-havicksz-steen|Steen]], at 15 of 22 works, [[painter:david-teniers-the-younger|Teniers]], at 20 of 50, and [[painter:peter-paul-rubens|Rubens]], at 16 of 46 [19]. The color shares canvases with Ochre Brown and Dark Chocolate Brown more than chance [19]. In printed English, *dark brown*, in all senses, peaks in the 1920s [20]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: dark + brown",
+   "first_recorded": "ISCC-NBS 1955 in our sources; the phrase is far older in speech",
+   "source": "ColorHub library; Coles, Chromatopia"
+  },
+  "aka": [
+   "deep yellowish brown (ISCC-NBS)",
+   "Kobicha (Japanese near-duplicate)"
+  ],
+  "siblings": [
+   "umber",
+   "bistre-brown",
+   "van-dyke-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "umber",
+    "gloss": "a pigment name; its raw earth is browner and lighter than this swatch"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kobicha (媚茶)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#654321",
+   "de2000": null,
+   "min_cover": 0.02
+  },
+  "n_present": 5877,
+  "n_within_painting": 3180,
+  "role": "mid-tone (42 per cent)",
+  "peak_century": {
+   "century": 1400,
+   "rate": 18.3,
+   "n": 945,
+   "obs": 173,
+   "lift": 1.6
+  },
+  "painters": [
+   "fritz-thomsen",
+   "jan-havicksz-steen",
+   "david-teniers-the-younger",
+   "peter-paul-rubens"
+  ],
+  "measured": {
+   "lch": [
+    31.6,
+    28.4,
+    67.4
+   ],
+   "iscc": "deep yellowish brown, block 20, dE 5.2",
+   "nearest": [
+    "Kobicha 2.0",
+    "Pullman Brown 2.3"
+   ]
+  },
+  "ngram": {
+   "all_senses_peak": 1920
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 20, X11/web, xkcd, jp (Kobicha), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Bistre\", p. 105",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bistre\" p. 51 and \"sepia\" p. 362",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Mummy brown\", p. 135",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mummy\", p. 272",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"umber\", p. 159",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"Vandyke brown\", p. 395",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"bitumen\", p. 63",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"atramentum\", p. 35",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Verdigris\", p. 71",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 74",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 166",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries bark, brunneous, seal, mud brown, Inca brown, Mars brown, terreau, tabac, sabelline, musk, mocha, tea dust",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, p. 125 (\"Ebony\", \"Puke\", \"Walnut\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes/d.json, at least 2% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "data",
+   "cite": "Google Books Ngram, all senses, 5-year smoothing (data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is bistre made from?",
+   "choices": [
+    "The soot of burnt beechwood",
+    "Cuttlefish ink",
+    "Roasted umber",
+    "Crushed walnut shells"
+   ],
+   "answer": "The soot of burnt beechwood",
+   "kind": "pick"
+  },
+  {
+   "q": "Before blue jeans, what colors did Levi Strauss's canvas workwear come in?",
+   "choices": [
+    "Off-white to dark brown",
+    "Only black",
+    "Bright red and yellow",
+    "Only indigo"
+   ],
+   "answer": "Off-white to dark brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Nietzsche's claim that the Greeks saw dark brown instead of blue is a myth.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look into the blackest shadow of an old oil painting: it is often a dark brown glaze over brown earths.",
+  "Before blue jeans, work clothes came in canvas in shades from off-white to dark brown.",
+  "In our archive, dark brown holds in 24.71 per cent of paintings, more than 99 per cent of the named colors."
+ ],
+ "words": 1121,
+ "status": "checked",
+ "checked": {
+  "by": "batch-41 writer self-check (sentence-to-source trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "mummy brown: Coles and Paterson differ in detail, shown as 'books disagree'",
+   "Vandyke brown variety list is quoted by the Compendium from an older source; hedged",
+   "Rembrandt attribution from Ball ch. 14 paragraph on Rembrandt",
+   "St Clair note locator is the glossary page per concordance",
+   "Kobicha name origin undocumented",
+   "article_field.py fails here; de2000 match not computed"
+  ]
+ }
+}

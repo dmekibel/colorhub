@@ -1,0 +1,121 @@
+{
+ "slug": "pink-coral",
+ "name": "Pink Coral",
+ "hex": "#E18488",
+ "names": [
+  "Pink Coral"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Pink Coral is a warm, soft pink named for the sea animal's skeleton; as a color name it is a twentieth-century dictionary entry, and the books mention it only in passing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from the sea",
+   "body": "The name pairs [[pink]] with [[coral]], the material that gives the color its picture [2]. Maerz and Paul's dictionary of 1930 records it as first used in 1926, and it enters the ISCC-NBS system as a form of deep pink [2]. Nothing in our sources says who coined it [2]."
+  },
+  {
+   "id": "tapa",
+   "title": "Pink coral in the books",
+   "body": "The only book mention in our collection is incidental. In her fabric book, Finlay describes a woman making bark cloth who wears a shell headband hung with small sections of pink coral that sway as she moves [1]. It is a scene about tapa, not about a color name, and it shows pink coral as a worked material for adornment [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive it appears in 0.05% of paintings (13), rarer than 79% of the named colors, as photographed [3]. The earliest match is a painting of 1650, some 280 years before the name's 1926 record, so it is a look-alike hue in an aged photograph [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "coral, the marine skeleton",
+   "first_recorded": "Maerz & Paul, first recorded 1926",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "coral",
+   "salmon",
+   "peach"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "coral",
+    "gloss": "a stronger orange-pink, the standard CSS coral"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 13,
+  "measured": {
+   "lch": [
+    65.2,
+    38.5,
+    20.4
+   ],
+   "iscc": "deep pink"
+  },
+  "first_record": {
+   "year": 1926,
+   "source": "Maerz & Paul"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 57",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, Pink Coral: Maerz & Paul 1930, plate 1 H 9; ISCC-NBS",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Pink Coral",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "When does Maerz and Paul record the name Pink Coral as first used?",
+   "choices": [
+    "1926",
+    "1856",
+    "1786",
+    "1955"
+   ],
+   "answer": "1926",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books give a history of the color Pink Coral.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pink Coral's name is only a century old, though coral jewelry is far older."
+ ],
+ "words": 183,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

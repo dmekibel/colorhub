@@ -1,0 +1,294 @@
+{
+ "slug": "azure-blue",
+ "name": "Azure Blue",
+ "hex": "#5C6B8F",
+ "names": [
+  "Azure Blue"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Azure blue is a word that began as the name of a stone, the Persian for lapis lazuli, and ended as a name for the sky; the swatch on this page is neither, but a muted blue from Werner's 1821 color chart.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word for a stone",
+   "body": "Azure began as the name of a rock. The Pigment Compendium traces it through Old French azur and asur of the eleventh century, cognate with Spanish azul and Italian azzurro, and back to the medieval Latin azura and azzurum [1]. Those words adapt the Arabic lazward and the older Persian lajward, which mean lapis lazuli or simply blue stone [1][2]. The initial l was lost in the Romance languages, apparently mistaken for the Arabic article al, though it survives in the medieval Greek lazourion, in the Latin lazurius and lazulus, and in German [1].\n\nThe word filled a gap. Pastoureau notes that classical Latin had many terms for blue, such as caeruleus, glaucus and cyaneus, but all were imprecise, and medieval Europe later borrowed two foreign words to replace them: the Germanic blavus, which became blue, and the Arabic azureus, which became azure [3]. The old idea that the Romans were blind to blue is a myth [3]. They could see it; they were indifferent to it, and some regarded it as the color of barbarians [3].\n\nPaterson defines azure as a bright blue, used above all for the blue of a cloudless sky, and calls it a literary word [2]. The same dictionary lists azurine as the color blue or a greyish blue and also as a blue-black dye, and azulin as a greyish blue [2]."
+  },
+  {
+   "id": "azures",
+   "title": "Many azures",
+   "body": "For a medieval or Renaissance painter, azure did not name one material [1][4]. The Pigment Compendium says that azure simply means blue and is not tied to any single pigment, and Merrifield in 1849 sorted the term by place: German, Lombardy, Spanish and Teutonic azure were [[gem:azurite|azurite]], while Indian and Persian azure meant natural ultramarine [1]. Harley found English sixteenth-century sources using azure for natural ultramarine, and seventeenth-century recipes for synthetic copper blues also carry the heading azure [1]. Another historical term, azur a poudrer, is associated with smalt, and Merrifield mentions a zaffre form and a Vestorian azure described by Vitruvius [1].\n\nBall puts the ambiguity plainly. In the Middle Ages the word could mean azurite or any blue, and the two minerals that bore it were nominally distinguished as citramarine azure and ultramarine azure, one from this side of the sea and one from beyond it [4][13]. Azurite was dug in eastern France, Hungary, Germany and Spain, and in medieval England it was called azure of Almayne, while Germans called it Bergblau, mountain blue [4]. A careful apothecary could tell it from [[gem:lapis-lazuli|lapis lazuli]] by heating a fragment red-hot, since azurite turns black on cooling and lapis does not [4].\n\nBurmester and Krekel, summarized in the Compendium, argue that in German price lists of Dürer's day azure, written lazur, usually meant azurite, and that for international trade the name was qualified, as in azur bonum de allemagna, good blue from Germany [1]. Dürer took his best blues from local azurite, and a poem of 1552 praises the blue mountain that supplied it [4]."
+  },
+  {
+   "id": "cost",
+   "title": "What azure cost",
+   "body": "Azurite was the cheaper of the two great blues, but it was by no means cheap. Neri di Bicci's Florentine prices of 1471 show ultramarine costing ten times as much as azurite, and good azurite two and a half times as much as a green or red lake [5]. Contracts show painters being told which blue to use. In 1434 a Ghent painter was obliged to paint the Virgin's robe with azure lined and glazed with crimson [5]. Bouts's Last Supper of the 1460s contains azurite but no ultramarine, possibly because no contract demanded it [5].\n\nAn English account book gives a feel for the market [15]. The Exeter cathedral fabric accounts of 1320 and 1321 list a pound of azure bought in London at 3s 6d, against 18d for a pound of Baghdad indigo [15]. Rosetti's Plictho of 1548 uses the word azure for a leather color as well, giving tanners a recipe in which indigo is ground with whiting and blended with honey or vinegar [15].\n\nBelow both stones sat a manufactured copper blue. Coles describes blue verditer as a synthetic azure blue made from copper salts and chalk, and argues that in medieval painting it likely outweighed every other blue combined, with many tonnes used for each kilo of ultramarine [6]. That is Coles's estimate [6] and not a measured figure, but it fits the picture of a trade in which the cheapest azure did most of the work."
+  },
+  {
+   "id": "heraldry",
+   "title": "Azure in heraldry",
+   "body": "Blue was a minor color until the twelfth century, and heraldry records its rise unusually well. Pastoureau counts blue on about 5 per cent of European coats of arms around 1200, 15 per cent in 1250, 25 per cent around 1300 and 30 per cent in 1400 [14]. St Clair gives the same sequence and ends it at just under a third [14][16].\n\nThe French royal arms were the leading example, a gold fleur-de-lis scattered on an azure field, adopted at the end of the twelfth century, probably in homage to the Virgin [16][14]. A later legend, repeated in a late fourteenth-century English treatise, had an angel send Charlemagne a shield of three gold flowers on azure [7]. That is a medieval story and not history, since coats of arms only appeared in Europe in the twelfth century [14].\n\nHeraldic azure is a word, not a swatch. Pastoureau stresses that the arms of France, azure strewn with gold lilies, could be painted as a bright blue, a teal or a dark shade without changing their meaning, since heraldic colors denote abstract categories [14]. Gage adds that the meanings were never fixed: one French treatise gave azure to the sapphire, the sanguine temperament, Venus and Friday, while the mid-fifteenth-century herald Sicily gave it loyalty, justice, Jupiter and Tuesday [7]. Rabelais mocked such schemes by blazoning Gargantua's device argent and azure, white and blue [7]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner's Azure Blue",
+   "body": "The swatch on this page comes from a different tradition, the mineralogist Abraham Werner's color nomenclature, as set out in Patrick Syme's 1821 edition [8][10]. Our library lists the name as Werner number 28 among the blues [10]. Werner's own examples for azure blue are an animal, the breast of the emerald-crested manakin, a vegetable, grape hyacinth and gentian, and a mineral, blue copper ore, which Baty glosses as azurite [8].\n\nSyme also gave a recipe in the manner of a paint box. Azure Blue, he wrote, is Berlin blue mixed with a little carmine red, and he called it a burning color [8]. Ultramarine Blue in the same chart is equal parts Berlin and azure blue, and China Blue is azure with a little Prussian blue in it [8]. So Werner's azure was a [[berlin-blue]] pushed slightly toward violet by [[carmine]], quite unlike the pale azure of the paint trade [8].\n\nThe swatch itself is cautious. Our library marks it as an aged and approximate Werner swatch, and its #5C6B8F reads as a muted grey-blue, the sort of color that ages a century in a chart [10]. The ISCC-NBS system places it in a block called strong purplish blue, 8.5 units away, and the nearest name in our app is [[denim]], at 7.8 [10]. The library also records RAL 5009 under the same name, with a deeper #2E5978 [10]."
+  },
+  {
+   "id": "sky",
+   "title": "Azure in the sky",
+   "body": "Most readers now meet azure as a sky word. Paterson's summer-sky blue is the azure blue color of the sky on a bright day [2], and his entry for azure sends the reader to sky blue [2]. Mallarmé, according to Nelson, began replacing the French word for sky with l'Azur in his poems after a spiritual crisis in 1867, a way of rinsing the sky of religious connotations [9].\n\nThe screen has made the word trickier still. The X11 color set defines Azure as #F0FFFF, a near-white cyan, which Paterson records [2], while our library carries a vivid #007FFF as the standard azure and the xkcd survey a bright #069AF3 [10]. Three very different swatches share one word, and none of them is Werner's [10].\n\nChemists made a pigment of the name too. Manganese blue, discovered in 1907 and put into commercial production in the mid-1930s, is described by Coles as a clear azure blue, a weak tint that never became important and went out of production in the 1990s [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, 104 contain a color within 6 units of this grey-blue over at least 5 per cent of the canvas [11]. It is a modern color in the archive: the 1900s hold 33 of 1,674 paintings, 4.5 times the expected rate, and the earliest dated match is a Virgin and Child with Angels by Spinello Aretino, from 1405 [11]. The largest areas are in Cézanne's [[painting:commons-Q64211180|Harlequin]], at 35 per cent of the canvas, and Matisse's [[painting:commons-Q1853880|Blue Nude IV]], at 33 per cent [11].\n\nPainters concentrate it. Of 50 paintings by [[painter:henri-matisse|Matisse]] in the archive, 5 contain it, which is 22.9 times the expected rate, and 4 of 50 by [[painter:edvard-munch|Munch]] do, at 18.3 times [11]. Among countries, Iran and Sweden stand out, though with 2 of 29 and 4 of 120 paintings the samples are small [11]. In a painting it most often plays a middle value, in 63 per cent of the pictures that contain it, and it keeps company with Denim, Slate and Grey [11].\n\nA match is a color, not a pigment test. These are photographs of aged, varnished paintings, and a greyed blue in a museum photograph tells nothing about whether the maker used azurite, ultramarine, indigo or a mixture. The printed phrase azure blue peaks in the 1830s in Google Books counts[11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Persian lajward and Arabic lazward, blue stone (lapis lazuli)",
+   "first_recorded": "Old French azur, eleventh century; Werner's Azure Blue is number 28 in his blues",
+   "source": "Pigment Compendium, 'Azure'; Baty, Nature's Palette"
+  },
+  "aka": [
+   "azure",
+   "azur",
+   "lazur (German trade name)"
+  ],
+  "siblings": [
+   "azure",
+   "berlin-blue",
+   "sky-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "azure",
+    "gloss": "the standard azure on screens is a vivid #007FFF; the web's Azure keyword is a near-white cyan"
+   },
+   {
+    "slug": "denim",
+    "gloss": "the nearest name to Werner's greyed swatch"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ar",
+    "name": "lazward (blue stone)"
+   },
+   {
+    "lang": "fa",
+    "name": "lajward"
+   },
+   {
+    "lang": "fr",
+    "name": "azur"
+   },
+   {
+    "lang": "de",
+    "name": "Lazur; azurite as Bergblau"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#5C6B8F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 104,
+  "top_paintings": [
+   "commons-Q64211180",
+   "commons-Q1853880",
+   "commons-Q59716319",
+   "smk-KMS3401"
+  ],
+  "first_dated": {
+   "id": "cma-148990",
+   "year": 1405
+  },
+  "role": {
+   "mid": 0.63,
+   "shadow": 0.24,
+   "highlight": 0.12
+  },
+  "ngram": {
+   "term": "azure blue",
+   "peak": 1830
+  },
+  "measured": {
+   "lch": [
+    45.3,
+    21.9,
+    279.6
+   ],
+   "nearest": [
+    [
+     "Denim",
+     7.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), entries 'Azure', 'Azur a poudrer', 'Azul baxo'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries 'azure', 'azurine', 'azulin', 'summer-sky blue', 'Azure' (X11)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 6",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 4",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 5",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, pp. 95, 155",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 85-87, 93",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 95-97 and the colour index",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Nelson, Bluets, proposition 5",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Werner no. 28, RAL, ISCC-NBS 1955, X11, xkcd; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive and graph (tools/article_field.py; data/graph/fieldnotes/a.json): 23,781 paintings, as photographed, 5 per cent canvas, dE 6; Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 210, 212",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Blue\"",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the word azure originally mean?",
+   "choices": [
+    "Blue stone, from the Persian name of lapis lazuli",
+    "Sky water, from Latin",
+    "Royal dye, from Greek",
+    "Mountain flower, from German"
+   ],
+   "answer": "Blue stone, from the Persian name of lapis lazuli",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Romans were physically unable to see blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why can a medieval text calling for azure be hard to interpret?",
+   "choices": [
+    "The word could mean azurite, natural ultramarine, smalt or any blue",
+    "It always meant gold",
+    "It named only a dye",
+    "It was banned from recipes"
+   ],
+   "answer": "The word could mean azurite, natural ultramarine, smalt or any blue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Azure is Persian for a stone: the word for lapis lazuli that ended up meaning the sky.",
+  "In 1200 blue was on about 1 in 20 European coats of arms; by 1400 it was on nearly 1 in 3.",
+  "Werner's azure was Berlin blue with a touch of carmine: a blue leaning toward violet, quite unlike today's cloudless sky."
+ ],
+ "words": 1587,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch 46 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Heraldic blue share: Pastoureau 30 per cent in 1400, St Clair just under a third: stated together.",
+   "French arms adoption: St Clair says end of 12th century; Pastoureau hedges motive (homage to the Virgin).",
+   "Coles's blue verditer claim hedged as an estimate.",
+   "Charlemagne azure arms is a medieval legend, labelled as such.",
+   "Werner swatch is aged and approximate; mapping to RAL 5009 is the library's."
+  ]
+ }
+}

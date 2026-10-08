@@ -1,0 +1,138 @@
+{
+ "slug": "cosmic-latte",
+ "name": "Cosmic Latte",
+ "hex": "#FFF8E7",
+ "names": [
+  "Cosmic Latte"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Cosmic latte is a warm off-white, the name two astronomers gave to the average color of the light of the universe.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of the universe",
+   "body": "In a survey of the light from over 200,000 galaxies, two scientists worked out what the universe would look like if all its light could be seen at once [1][2]. The answer was beige [2]. They tried names such as \"big bang buff\" and \"skyvory\", then settled on *cosmic latte* [2].\n\nThe first announcement, in January 2002, said the universe was turquoise [1]. Three months later Johns Hopkins University corrected it: the turquoise was a computer bug, and the true color is off-white, like house paint [1]. The co-author Karl Glazebrook said the result was meant as an amusing footnote to the survey, and that it was his favorite tag [1]. The turquoise universe is a myth to unlearn.\n\nThe swatch here, #FFF8E7, is the one cited by Wikipedia from Glazebrook and Baldry [3]. Its closest named neighbor is [[ivory]], at a CIEDE2000 distance of 3.4 [3]. St Clair uses the story to illustrate beige's image problem, as a color chiefly used as a foil [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a painted color, cosmic latte is common: it appears in 385 of 23,781 paintings in our archive and is more common than 72% of the named colors [4]. It most often plays a light (62% of 224 paintings) [4]. It is over-represented in Chinese painting, at 3.9 times the expected rate (40 of 635 paintings) [4]. These are photographs of varnished paintings, so read them as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the average light of the universe, as calculated by Karl Glazebrook and Ivan Baldry",
+   "first_recorded": "2002",
+   "source": "Finlay, Colour, ch. 21; St Clair, Secret Lives of Colour"
+  },
+  "aka": [
+   "III E Gamma (formal name)"
+  ],
+  "siblings": [
+   "ivory",
+   "beige",
+   "cream",
+   "wheat"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 385,
+  "role_light_pct": 62,
+  "top_country": [
+   "China",
+   3.9
+  ],
+  "measured": {
+   "lch": [
+    98,
+    9,
+    93
+   ],
+   "nearest": [
+    [
+     "Ivory",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Beige\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Wikipedia cites Glazebrook and Baldry), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was the first, mistaken color announced for the universe?",
+   "choices": [
+    "Turquoise",
+    "Beige",
+    "Violet",
+    "Black"
+   ],
+   "answer": "Turquoise",
+   "kind": "pick"
+  },
+  {
+   "q": "What was the true result of the survey?",
+   "choices": [
+    "Beige or off-white",
+    "Turquoise",
+    "Pure white",
+    "Pink"
+   ],
+   "answer": "Beige or off-white",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the first turquoise announcement turned out to be right.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The universe was announced as turquoise in 2002; a computer bug, and three months later it was corrected to beige."
+ ],
+ "words": 248,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

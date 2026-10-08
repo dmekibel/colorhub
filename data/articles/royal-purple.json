@@ -1,0 +1,161 @@
+{
+ "slug": "royal-purple",
+ "name": "Royal purple",
+ "hex": "#7851A9",
+ "names": [
+  "Royal purple"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Royal purple is a medium-dark blue-violet named for the dye that Roman custom reserved for the emperor, though the name has outlived any single recipe.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color kept for rulers",
+   "body": "Roman custom kept purple for the highest offices. A general wore a purple and gold robe at his triumph, senators wore broad purple stripes on their tunics, and knights narrow ones [1]. Cicero and other writers of the first century BC and AD already spoke of *royal purple*, and by the time of Diocletian, in the early fourth century, it was tied to the emperor alone [1]. The physicist Livingstone adds a reason that has nothing to do with law: a purple object must absorb a narrow band of light, so purple objects are uncommon, and purple dyes were historically rare and costly [2].\n\nBy the fifteenth century the meaning had loosened. An early fifteenth-century French heraldic treatise called purple a mixture of all the other tinctures, and painters of the period disagreed on what to use for it, among mauve, wine color and mulberry [3]."
+  },
+  {
+   "id": "new-world",
+   "title": "A name for new dyes",
+   "body": "The title was used again in 1522, when the Spanish emissary Gil Gonzales de Davila found pearls and a purple dye in the Nicoya area of Central America (today's Costa Rica) [4]. Finlay reports that the Spanish king called it New World Royal Purple and, perhaps remembering Rome, demanded exclusive use of it [4]. When de Menonville crushed a powdery insect on paper during his search for the cochineal insect, his account describes the result as a royal purple hue [5]. In both cases the phrase is used for a hue, not a single material."
+  },
+  {
+   "id": "swatch",
+   "title": "Which royal purple?",
+   "body": "Paterson defines the term as simply a dark purple [6]. Our swatch, #7851A9, is a mid-tone blue-violet [7]. Ridgway's 1912 plate, as scanned, is a little duller at #69519A, and the xkcd survey's \"royal purple\" is a much darker #4B006E, about 19 units from ours [7]. Maerz and Paul recorded the name in English in 1661, and ISCC-NBS block 207 covers it [7].\n\nSimilar colors are [[purple]], [[violet]], [[imperial-purple]] and [[tyrian-purple]]. The last two carry the same ancient associations but are separate names in our data."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The name is better documented in texts than in paint. Our archive tool could not produce a stable count for this color, so no painting count is given here [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the purple dye reserved for Roman emperors and, later, kings",
+   "first_recorded": "1661 as a color name in English (Maerz & Paul); Roman phrase by the first century",
+   "source": "Gage, Colour and Culture, p. 29; Maerz & Paul via library"
+  },
+  "aka": [],
+  "siblings": [
+   "imperial-purple",
+   "tyrian-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "imperial-purple",
+    "gloss": "the same ancient idea under another name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub library; archive count not computed",
+  "measured": {
+   "lch": [
+    42,
+    54,
+    310
+   ],
+   "nearest": [
+    [
+     "Purple",
+     5.1
+    ]
+   ]
+  },
+  "alts": {
+   "ridgway": "#69519A",
+   "xkcd": "#4B006E"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 29",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 86",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"royal purple\", p. 347",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912 plate X (scan, approximate), xkcd, ISCC-NBS block 207, Maerz & Paul first recorded 1661",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who wore purple exclusively by the early fourth century?",
+   "choices": [
+    "The emperor",
+    "Every senator",
+    "Any soldier",
+    "Knights"
+   ],
+   "answer": "The emperor",
+   "kind": "pick"
+  },
+  {
+   "q": "Why were purple dyes historically costly?",
+   "choices": [
+    "Purple objects must absorb a narrow band of light, so they are uncommon",
+    "Purple pigments were banned",
+    "Purple needs gold to make",
+    "Purple only exists at night"
+   ],
+   "answer": "Purple objects must absorb a narrow band of light, so they are uncommon",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Cicero already wrote of royal purple; by Diocletian it belonged to the emperor alone."
+ ],
+ "words": 372,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed location: Finlay places the 1522 find at Nicoya, Costa Rica, not Mexico."
+  ]
+ }
+}

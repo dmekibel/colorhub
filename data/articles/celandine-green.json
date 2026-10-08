@@ -1,0 +1,161 @@
+{
+ "slug": "celandine-green",
+ "name": "Celandine Green",
+ "hex": "#B8BFAF",
+ "names": [
+  "Celandine Green"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Celandine Green is a pale grey-green from Werner's system of colors for naturalists, where it stood at number 46 and was illustrated with a moth, a leaf and a gemstone.",
+ "sections": [
+  {
+   "id": "werner",
+   "title": "Werner's number 46",
+   "body": "In Werner's system, as Syme published it, Celandine Green is color 46 among the greens [1][2]. Every color in the system was tied to three examples, one from animals, one from plants and one from minerals [2][3]. For Celandine Green they were the wings of the moth *Phalaena margaritaria* (now *Glyphodes margaritaria*), the back of coltsfoot leaves (*Tussilago farfara*), and beryl [1][3].\n\nThe mineral example in Baty's plate is a beryl set within white topaz in an 1898 illustration [3]. The recipe the system gave was verdigris green mixed with ash grey [3]. Its neighbor, Mountain Green, was mostly emerald green, with a good deal of blue and a touch of grey-yellow [3]. See also [[mountain-green]] and [[verdigris-green]]."
+  },
+  {
+   "id": "name",
+   "title": "Which celandine?",
+   "body": "The name points at a plant, but the sources we hold do not say which celandine Werner meant, so we do not guess [3]. What the system does show is where to look: turn over a coltsfoot leaf and its reverse is where Baty shows the color [3]."
+  },
+  {
+   "id": "later",
+   "title": "Later charts",
+   "body": "Other charts kept the name. Ridgway's 1912 atlas has Celandine Green on plate 47, and his version is darker and greener, near #8AA18C [4]. The ISCC-NBS system puts it in block 150, and Maerz and Paul, whom our library follows, date the name to 1807 and place it on plate 29, block B 4 [4]. Our swatch is an approximation of Werner's aged print, not a measurement of the paint he saw [4]. Its nearest named color in the library is Ash, at a distance of 3.4 [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 1,118 (4.7%) hold this swatch within six units of ΔE2000 over at least five per cent of the canvas, as photographed [5]. In 94% of them it plays the highlight role, the lightest part of the palette [5]. It is a color of pale grounds and skies more than of subjects, though the archive cannot say what each match depicts.\n\nIt peaks in Impressionism, where 26 of 140 paintings match (18.6%, about 4 times the average) [5]. Britain leads the countries with 84 of 593 (14.2%) [5]. Of the six strongest matches, three are beach and coast scenes by Boudin, such as [[painting:nga-61362|Figures on the Beach]], and the best is Ito Jakuchu's *Kanzan and Jittoku*, 74% of the canvas [5]. These are photographs of aged, varnished paintings, so a match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a celandine plant (which one is not stated in our sources)",
+   "first_recorded": "Werner's nomenclature as published by Syme; Maerz & Paul date it 1807",
+   "source": "Baty, Nature's Palette; Maerz & Paul"
+  },
+  "aka": [
+   "Celandine green (Werner no. 46)"
+  ],
+  "siblings": [
+   "mountain-green",
+   "celadon"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "celadon",
+    "gloss": "a similar pale grey-green, but a different name and tradition"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B8BFAF",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1118,
+  "top_movement": {
+   "name": "Impressionism",
+   "hits": 26,
+   "n": 140,
+   "lift": 3.95
+  },
+  "top_country": {
+   "name": "United Kingdom",
+   "hits": 84,
+   "n": 593,
+   "lift": 3.01
+  },
+  "top_paintings": [
+   "aic-28210",
+   "nga-46580",
+   "nga-61362"
+  ],
+  "role": {
+   "highlight": 0.94,
+   "mid": 0.06,
+   "shadow": 0
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library, \"Celandine Green\": Werner no. 46, animal Phalaena margaritaria, vegetable back of Tussilago leaves, mineral beryl",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34-35 and Davidson's essay on Werner and Syme, p. 36",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 142-143",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: Ridgway 1912 plate XLVII (#8AA18C), ISCC-NBS block 150, Maerz & Paul 1930 first recorded 1807 plate 29 B 4; nearest Ash dE 3.4",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, DE2000 6, min cover 5%, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which gemstone illustrated Celandine Green in Werner's system?",
+   "choices": [
+    "Beryl",
+    "Jade",
+    "Turquoise",
+    "Opal"
+   ],
+   "answer": "Beryl",
+   "kind": "pick"
+  },
+  {
+   "q": "Werner tied each color to three kinds of example. Which set is right?",
+   "choices": [
+    "Animal, plant and mineral",
+    "Metal, wood and cloth",
+    "Bird, flower and pigment"
+   ],
+   "answer": "Animal, plant and mineral",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Turn over a coltsfoot leaf: its reverse was Werner's plant example of Celandine Green [3].",
+  "Celandine Green was mixed, on paper, from verdigris green and ash grey [3]."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'pale underside' of coltsfoot leaf changed to 'reverse' (Baty says reverse of leaves; 'pale' was inference)",
+   "Other claims verified vs Baty pp.142-143"
+  ]
+ },
+ "words": 416
+}

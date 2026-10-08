@@ -1,0 +1,185 @@
+{
+ "slug": "mars-orange",
+ "name": "Mars Orange",
+ "hex": "#C05528",
+ "names": [
+  "Mars Orange"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Mars orange is a reddish orange paint made synthetically from iron oxide, one of a family of eighteenth-century pigments named for the alchemists' planet-metal Mars.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Why Mars",
+   "body": "Mars orange belongs to the Mars pigments, a group of synthetic iron oxide colors with Mars black, brown, red, violet and yellow beside it [1][2]. The word Mars is alchemical: to alchemists Mars stood for iron, and Mars yellow, and the Mars colors derived from it, took the name in the eighteenth century by translating the Latin *crocus martius*, saffron of Mars [2]. Dictionaries define the color itself simply as a reddish orange [1].\n\nThe pigments were developed in the eighteenth century [2]."
+  },
+  {
+   "id": "making",
+   "title": "How it was made",
+   "body": "Makers precipitated iron salts (sulfates, chlorides, nitrates or acetates) with an alkali such as lime, caustic soda or potash [2]. That gave a yellow or yellow-brown paste, Mars yellow, which was washed free of acid [2]. Roasting the yellow oxidised it to iron(III) oxide and produced a range from oranges to reds, so the roast decided the shade [2].\n\nOne name is unsettled. Spanish ochre was sometimes a synonym for Mars orange, but Salter in 1869 tied it to a burnt yellow or Roman ochre instead [3]. French *laque minéral* was also used for orange oxide of iron, by Salter's account, and for a chromate-of-lead orange [4]."
+  },
+  {
+   "id": "art",
+   "title": "In the paint box",
+   "body": "Mars orange was a relatively new pure orange when William Holman Hunt used it in *The Awakening Conscience* in 1853, alongside chrome and strontium yellows, cobalt blue and emerald green [5]. Analysts have tentatively identified it in a paint box owned by Winslow Homer, labeled \"rust orange\" and mixed with calcite [2]. The Amsterdam firm Claus & Fritz (1841-1931) sold a version cut with a large amount of chalk, and the Belgian firm Blockx supplied one in which analysis found hematite, goethite and chrome orange [2]. Commercial Mars orange was therefore not a single fixed recipe [2].\n\nTo see it, look for a flat, slightly brick-leaning orange in nineteenth-century oils, closer to [[rust]] and [[burnt-orange]] than to [[vermilion]], which is brighter and redder, and nearer [[orange]] in family."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our library files Mars Orange with the painter's pigments [6]. It appears in Ridgway's 1912 color atlas, in ISCC-NBS block 37, and in Maerz & Paul's 1930 dictionary, which dates the name to 1835 [6]. Its nearest named neighbor is Rust, 5.5 units away on the CIEDE2000 scale [6].\n\nIn the archive, 189 of 23,781 paintings carry this orange [7]. The strongest concentration is Indian: 40 of 721 Indian works show it, and 15 of 118 in the Pahari school [7]. The match is to the look, not to the Mars recipe [7]. The photographs are of aged paintings, so treat each match as approximate [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Mars, the alchemists' name for iron",
+   "first_recorded": "1835 (Maerz & Paul); developed in the eighteenth century",
+   "source": "Pigment Compendium, Mars pigments; Maerz & Paul"
+  },
+  "aka": [
+   "rust orange (a Homer paint-box label)",
+   "orange oxide of iron"
+  ],
+  "siblings": [
+   "rust",
+   "burnt-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+  "n_present": 189,
+  "match": {
+   "hex": "#C05528",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "countries": [
+   {
+    "key": "India",
+    "hits": 40,
+    "n": 721
+   }
+  ],
+  "movements": [
+   {
+    "key": "Pahari",
+    "hits": 15,
+    "n": 118
+   }
+  ],
+  "measured": {
+   "lch": [
+    49,
+    61,
+    48
+   ],
+   "nearest": [
+    [
+     "Rust",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 257 (\"Mars\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 267-268 (\"Mars orange\", \"Mars pigments\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 363 (\"Spanish ochre\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 231 (\"Laque mineral\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json); Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930; CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Mars stand for in the name Mars orange?",
+   "choices": [
+    "Iron, in alchemy",
+    "The painter's birthplace",
+    "A red planet pigment from space",
+    "A French dye works"
+   ],
+   "answer": "Iron, in alchemy",
+   "kind": "pick"
+  },
+  {
+   "q": "How did makers turn Mars yellow into orange and red?",
+   "choices": [
+    "By roasting it",
+    "By adding indigo",
+    "By soaking it in vinegar",
+    "By grinding it finer"
+   ],
+   "answer": "By roasting it",
+   "kind": "pick"
+  },
+  {
+   "q": "Mars orange was a single fixed recipe.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The Mars in Mars orange is the alchemists' name for iron, and roasting a yellow iron paste produced the orange.",
+  "Of 721 Indian works in our archive, 40 carry this orange."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Crocus martius etymology tied to Mars yellow as the source states"
+  ]
+ },
+ "words": 431
+}

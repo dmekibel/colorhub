@@ -1,0 +1,110 @@
+{
+ "slug": "deep-orange-coloured-brown",
+ "name": "Deep Orange-Coloured Brown",
+ "hex": "#864735",
+ "names": [
+  "Deep Orange-Coloured Brown"
+ ],
+ "tier": "traditional",
+ "depth": "medium",
+ "lede": "Deep Orange-Coloured Brown is one of the descriptive color names used in the early nineteenth century to catalogue minerals, plants and animals, and it matches the red-brown of hematite and the cattail's spike.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a naturalist's chart",
+   "body": "This name belongs to Patrick Syme's color chart for natural history, which Baty traces in her book on nature's palette [1]. Syme took five new terms from Sowerby's *A New Elucidation of Colours* of 1809, and this name is one of the five, together with two oranges and two purples [1]. Our library dates its earliest record to 1821, from the Werner nomenclature, while Baty places Syme's terminology earlier in the century, so the exact year is uncertain [1][3].\n\nThe name is plain on purpose. It reads like a recipe: take a deep brown, lean it toward orange. A naturalist could use it to compare a mineral, a feather and a leaf by one shared scale."
+  },
+  {
+   "id": "examples",
+   "title": "What it was matched to",
+   "body": "Baty's plates show the chart in use. The plates pair it with the spike of a cattail reed, drawn in Palmstruch's *Svensk Botanik* of 1807, and on specimens of hematite from Sowerby's *British Mineralogy* [1]. The same chart section groups it with the reds and browns, next to Deep Reddish Brown [1].\n\nSee [[deep-reddish-brown]], [[reddish-brown]], [[brownish-orange]] and [[chestnut]] for the nearby names, and [[reddish-orange]] for the chart's own neighbor above it [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings this color appears in 1,137, or 4.78%, as photographed, and it is more common than 87% of the named colors [3]. Inside a painting it most often plays an accent, in 71% of the 764 paintings measured by lightness rank [3]. It peaks in the 1200s, at 10.6% of the 142 paintings from that period, 2.4 times the expected rate [3].\n\nIt is most over-represented in Tibet, at 7.4 times expected, 17 of 47 paintings [3]. John Singer Sargent uses it most often, in 10 of 287 works here, though no painter stands out against the museum baseline [3]. It shares canvases with Ferruginous and Mahogany Brown more than chance (lift 5.1 and 2.9) [3].\n\nThe earliest match is dated 1000, 821 years before the name's earliest record, so it is a look-alike hue in an aged photograph, not proof of the dye or pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name from Syme's color chart",
+   "first_recorded": "Werner nomenclature, 1821 in our library",
+   "source": "Baty, Nature's Palette"
+  },
+  "aka": [],
+  "siblings": [
+   "deep-reddish-brown",
+   "reddish-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "23,781 paintings",
+  "n_present": 1137,
+  "pct": 4.78,
+  "peak": "1200s 10.6%",
+  "region": "Tibet 7.4x"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 173-174, 255-256, 268-270",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Colorhub data, library.json: Werner 1821, archive fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Whose 1809 book did Syme draw on for deep orange-coloured brown?",
+   "choices": [
+    "Sowerby's A New Elucidation of Colours",
+    "Newton's Opticks",
+    "Ridgway's Color Standards"
+   ],
+   "answer": "Sowerby's A New Elucidation of Colours",
+   "kind": "pick"
+  },
+  {
+   "q": "On which mineral does Baty's plate show this color?",
+   "choices": [
+    "Hematite",
+    "Lapis lazuli",
+    "Malachite"
+   ],
+   "answer": "Hematite",
+   "kind": "pick"
+  },
+  {
+   "q": "This color name was chosen from a pigment recipe.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme's chart named this red-brown after the spike of the cattail and hematite."
+ ],
+ "words": 373,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed incorrect gloss equating Deep Reddish Brown with chestnut brown (Baty lists them as separate terms)."
+  ]
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "slug": "lilac-grey",
+ "name": "Lilac-Grey",
+ "hex": "#BEBBB7",
+ "names": [
+  "Lilac-Grey"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Lilac-Grey is a pale, warm-leaning light grey with only a whisper of violet, a name carried over from Ridgway's color nomenclature.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey with a flower's hint",
+   "body": "Our library traces Lilac-Grey to Ridgway's Nomenclature of Colors of 1886, carried over to his plate LII of 1912 [1]. The ISCC-NBS system places it at light gray, only 1.9 units away on the CIEDE2000 scale [1]. At that distance the swatch is almost the standard grey, and the lilac is mostly in the name [1]. For the flower color itself, see [[lilac]]."
+  },
+  {
+   "id": "clouds",
+   "title": "Lilac greys in painting",
+   "body": "The Pigment Compendium quotes Church (1901) recommending artificial Indian red, mixed with ultramarine, Prussian blue, indigo, or indigo and yellow ochre, for the lilac greys of stormy clouds in the English watercolor school [2]. The recipe shows how painters made such a grey: a small red-brown pulled against a blue [2]. St Clair's glossary uses the same idea for pearl, a very pale lilac-gray [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color this close appears in 697 works, or 2.9 per cent, more than 83 per cent of the named colors [4]. It peaks in the 1900s, at 4.8 per cent of 1,674 paintings, twice the expected rate for the same museums [4]. These are photographs of aged, varnished paintings, so a match is not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lilac flower",
+   "first_recorded": "Ridgway, 1886",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "light gray"
+  ],
+  "siblings": [
+   "lilac",
+   "grey",
+   "light-grey",
+   "warm-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed",
+  "n_present": 697,
+  "pct_archive": 2.93,
+  "measured": {
+   "iscc": "light gray",
+   "de2000": 1.9
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912, CSS, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 215 (Indian red, citing Church 1901)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Pearl\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; dE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Church's 1901 recipe, which pigment makes the lilac greys of stormy clouds?",
+   "choices": [
+    "Artificial Indian red with a blue",
+    "Cinnabar alone",
+    "Verdigris",
+    "Gold leaf"
+   ],
+   "answer": "Artificial Indian red with a blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our library traces Lilac-Grey to Ridgway.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look at a stormy watercolor sky: the lilac grey is red-brown pulled against blue."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All key claims verified against fact cards and book text; no changes"
+  ]
+ }
+}

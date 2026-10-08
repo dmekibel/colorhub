@@ -1,0 +1,263 @@
+{
+ "slug": "hyacinth-red",
+ "name": "Hyacinth Red",
+ "hex": "#A75536",
+ "names": [
+  "Hyacinth Red"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Hyacinth Red is the orange-red of the gem once called hyacinth, set down as number 83 in the English version of Werner's nomenclature of colors and used by Darwin on the Beagle.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which hyacinth",
+   "body": "The hyacinth in Hyacinth Red is a stone [3]. In Syme's table the color's mineral example is hyacinth, which Baty glosses as jacinth, a silicate mineral [3]. Its other two examples are the red spots of a black-and-red bug and the red patch on the skin of a golden reinette apple [3]. Paterson defines hyacinth red as a reddish orange, and jacinth as a reddish orange that is sometimes yellow [8].\n\nThe word has pointed at very different colors. Paterson defines hyacinth blue as a purplish blue popular in the 1930s, and hyacinthine as the purplish blue of the flower, or blue-red, violet or pink [8]. Gage reports that a physician to Emperor Rudolph II, in a book of 1601 on colors, put blue into a five-color scheme under the Latin name *hyacinthinus* [9].\n\nThe stone itself is just as unstable. Finlay glosses the jacinth in the biblical list of the heavenly city's foundation stones as sapphire, and the \"true hyacinths\" in a Roman bride's list of jewels as zircons [10]. In some old texts, then, hyacinth names a blue stone or thread, and in others an orange-red one [8][9][10]. Today the library also holds [[hyacinth-blue]] and [[hyacinth-violet]], both from Ridgway's plates, and Maerz and Paul record the violet from 1388 [11]."
+  },
+  {
+   "id": "werner",
+   "title": "In Werner's list",
+   "body": "Werner devised a list of 54 colors in 1774 so that minerals could be identified by sight, and he kept revising it for some forty years [1]. Hyacinth-red appears in Jameson's English list of 84 colors in 1805 and in both of Syme's editions, of 1814 and 1821 [2]. In the 1821 numbering it is number 83, between Tile Red and [[scarlet]] [3].\n\nSyme built it from scarlet, tinted with lemon yellow and a trace of brown [3]. He then used it as an ingredient in neighbors. Tile Red is hyacinth red dulled with a lot of grey-white and a little scarlet [3]. Brownish Red starts from chocolate red, adds hyacinth red and a touch of chestnut brown, and Brownish Orange is orpiment orange warmed with some hyacinth red and light chestnut [4].\n\nThe term also reached the gem trade. By 1813 the English mineralogist John Mawe listed hyacinth red among the tints of [[gem:tourmaline|tourmaline]] in his gem treatise, and used a run of reds, from blood to cherry, crimson and fire, for [[gem:garnet|garnet]] and [[gem:opal|opal]] [5]."
+  },
+  {
+   "id": "darwin",
+   "title": "Darwin's octopus",
+   "body": "On 28 January 1832, at the Cape Verde Islands, Darwin described a sea animal that changed color, which he called an octopus [6]. Clouds passed over its body, he wrote, varying from \"hyacinth red\" to \"chesnut brown\" [6]. Baty shows that the terms came from Syme's 1821 edition, a copy of which was in the Beagle's library [6].\n\nSyme's colors were meant to be applied to anything in nature. Baty pairs number 83 with a shell from Joseph Banks's *Endeavour* collection and with a protea from a botanical work [7]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "On screen, the library's Hyacinth Red is #A75536, a rust-orange brown, 2.7 units from [[sienna]] and filed with the browns [11]. It is an approximate reading of an aged swatch of Syme's printed color, and Maerz and Paul record the name from 1704 [11]. It is duller and darker than the plain words \"reddish orange\" suggest [8][11].\n\nIts neighbors in this family are [[brick-red]], [[rust]] and [[terracotta]], and the library's nearest named relative is Sienna [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 618 works, 2.6 per cent [12]. The surprise is the date. It peaks in the 1440s, when 13 of 58 paintings carry it, 22 per cent and 8.6 times the archive rate [12]. [[painter:filippo-lippi|Filippo Lippi]] carries it in 6 of his 13 paintings here, [[painter:pontormo|Pontormo]] in 5 of 13 and [[painter:fra-angelico|Fra Angelico]] in 4 of 16 [12]. [[painting:commons-Q3937495|Mantegna's portrait of Carlo de' Medici]], from 1466, is 40 per cent this color [12].\n\nThe largest areas are in Indian and Himalayan work [12]. [[painting:cma-314141|A Ragamala page]] from about 1680 is 71 per cent this color [12]. Tibet has it in 13 of 47 works, Nepal in 5 of 25, India in 83 of 721 [12]. Pahari painting carries it 5.5 times as often as the archive average, and Kalighat painting 5.2 times [12].\n\nIt most often shares a canvas with rust, 13 times the usual rate, and sienna, 12 times [12]. In the lightness order of a painting it usually sits in the mid-tones, in 65 per cent of cases [12]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [12]. To see the color, look at the red patch on a golden reinette apple, Syme's own example [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "hyacinth (jacinth), a red-orange silicate mineral; Syme's mineral example",
+   "first_recorded": "Jameson's list of 1805; Maerz & Paul record 1704",
+   "source": "Baty, Nature's Palette, pp. 32-35, 231-232; ColorHub library"
+  },
+  "aka": [
+   "Hyacinth-red (Syme)"
+  ],
+  "siblings": [
+   "brick-red",
+   "scarlet",
+   "copper-red",
+   "blood-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "hyacinth-blue",
+    "gloss": "a purplish blue, the flower's color, not this orange-red"
+   },
+   {
+    "slug": "hyacinth-violet",
+    "gloss": "Ridgway's purple, a different use of the same word"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A75536",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 618,
+  "top_paintings": [
+   "cma-314141",
+   "commons-Q3937495"
+  ],
+  "painters": [
+   {
+    "name": "Filippo Lippi",
+    "n": 13,
+    "hits": 6
+   },
+   {
+    "name": "Pontormo",
+    "n": 13,
+    "hits": 5
+   },
+   {
+    "name": "Fra Angelico",
+    "n": 16,
+    "hits": 4
+   }
+  ],
+  "peak_decade": {
+   "decade": 1440,
+   "n": 58,
+   "hits": 13,
+   "lift": 8.62
+  },
+  "role": {
+   "highlight": 0.19,
+   "mid": 0.65,
+   "shadow": 0.16
+  },
+  "company": [
+   "Rust",
+   "Sienna",
+   "Marigold",
+   "Brick"
+  ],
+  "measured": {
+   "lch": [
+    46,
+    45,
+    47
+   ],
+   "nearest": [
+    [
+     "Sienna",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 7-8",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-35 (tables of Jameson 1805, Syme 1814 and 1821)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 231-232",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 208, 252",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 24",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 121-122",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 133-134, 171",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries hyacinth blue, hyacinth red, hyacinthine, jacinth",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 157, 234",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 14 and ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Werner/Syme no. 83, Maerz & Paul 1930, Ridgway 1912), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the mineral example Syme gave for Hyacinth Red?",
+   "choices": [
+    "Hyacinth (jacinth)",
+    "Cinnabar",
+    "Ruby",
+    "Realgar"
+   ],
+   "answer": "Hyacinth (jacinth)",
+   "kind": "pick"
+  },
+  {
+   "q": "Where did Darwin get the term \"hyacinth red\" for his notes on the Beagle?",
+   "choices": [
+    "Syme's Werner's Nomenclature of Colours, 1821",
+    "A paint maker's chart",
+    "The ship's surgeon",
+    "A Dutch flower book"
+   ],
+   "answer": "Syme's Werner's Nomenclature of Colours, 1821",
+   "kind": "pick"
+  },
+  {
+   "q": "In older texts the word hyacinth named only orange-red colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hyacinth Red is named for a gem, not a flower, and the same word once meant blue.",
+  "Darwin wrote that a color-changing sea animal passed from hyacinth red to chestnut brown, using terms from a book on the Beagle's shelf.",
+  "Look at the red patch on a golden reinette apple: it was Syme's example of number 83."
+ ],
+ "words": 789,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Hyacinth/jacinth gem identity shifts between texts: stated via Finlay's bracketed glosses (sapphire vs zircon), not asserted for Werner's mineral.",
+   "Gage's 1601 physician unnamed (OCR garbled in source).",
+   "Swatch is an aged-swatch approximation; Paterson's reddish orange is brighter: said in text.",
+   "Archive matches are colors, not pigment identifications (said in text)."
+  ]
+ }
+}

@@ -1,0 +1,100 @@
+{
+ "slug": "tomato-red",
+ "name": "Tomato Red",
+ "hex": "#EC2D01",
+ "names": [
+  "Tomato Red"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Tomato Red is the orange-red of the ripe fruit; as a web color name it is a modern adoption, and its swatch changes from list to list.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The fruit, and the web",
+   "body": "Paterson defines tomato red as the rich red of the fruit, and notes that it was adopted as an orange-red color name by compilers of web color lists [1]. The X11 set's \"Tomato\" is #FF6347, a lighter, paler orange-red than this swatch [1]. Our library's own entry, which merges RAL 3013, ISCC-NBS 1955 blocks 11 and 43, Ridgway 1912 and Maerz and Paul 1930, reads darker at #9C322E, close to [[brick]] [2].\n\nThe name's age is therefore a matter of which list one trusts. Our library dates it to 1912 via Ridgway's atlas and notes Maerz and Paul's first-recorded year of 1289, a date for a color word that we cannot confirm and treat as unreliable [2]. See also [[tomato]], [[vermilion]] and [[scarlet]] for the same family."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color near the library's Tomato Red appears in 12 of 23,781 paintings in our archive, 0.05 per cent, and in 15 by the within-painting reading [3]. In all 15 it plays an accent [3]. The earliest dated match is 1450, 462 years before the name's first record, so it is a look-alike hue in an aged photograph and not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the tomato fruit",
+   "first_recorded": "1912 (Ridgway; library)",
+   "source": "Paterson; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "tomato",
+   "brick"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 12,
+  "pct": 0.05,
+  "role": "accent, 15 of 15 paintings"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"tomato red\" and \"Tomato\", p. 396",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): RAL 3013, ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which hex does the X11 color Tomato have?",
+   "choices": [
+    "#FF6347",
+    "#9C322E",
+    "#0A437A",
+    "#D0F0C0"
+   ],
+   "answer": "#FF6347",
+   "kind": "pick"
+  },
+  {
+   "q": "Our library's date of 1289 for Tomato Red is confirmed by the books.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Tomato Red has no fixed swatch: X11 Tomato is #FF6347, our library's merged entry is the darker #9C322E."
+ ],
+ "words": 213,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

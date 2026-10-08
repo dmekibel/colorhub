@@ -1,0 +1,112 @@
+{
+ "slug": "sweet-pea",
+ "name": "Sweet Pea",
+ "hex": "#C2A99E",
+ "names": [
+  "Sweet Pea"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Sweet Pea is a soft pinkish tan named for the flower; the books record the name only in a 1930 color atlas, and say nothing about the swatch's history.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower with no single color",
+   "body": "The name is the garden flower, which comes in many colors, so a single swatch can only be one choice among them. Our library takes this one from the Maerz and Paul color dictionary of 1930, which dates the name to 1921 and places it on plate 51 [1]. The books give no further account of who first used it for this color, so beyond that its history is undocumented.\n\nThe flower does appear in the color literature in one place. Patrick Syme, whose 1814 edition of Werner's color chart served naturalists, painted a watercolor of sweet peas, now undated, which Baty reproduces in her study of his chart [2]. The swatch here is a pale pink-beige; its nearest named color is [[tan]], 11.1 units away, not close, with [[dusty-pink]] a nearby alternative in feel [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color near Sweet Pea appears in 392 of 23,781 paintings in our archive, or 1.65 per cent, which is more common than 75 per cent of the named colors [3]. It peaks in the 1900s, in 61 paintings, 2.7 times the expected rate, and plays a light in 41 per cent of the 261 paintings that give a within-painting reading [3]. Seurat has it in 4 of his 41 works here [3]. These are photographs of aged, varnished paintings, so the match says nothing about the flower."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sweet pea flower",
+   "first_recorded": "1921 (Maerz and Paul, 1930, plate 51 C 2)",
+   "source": "ColorHub library; Maerz and Paul"
+  },
+  "aka": [],
+  "siblings": [
+   "tan",
+   "dusty-pink"
+  ],
+  "parent": null,
+  "children": [
+   "pink",
+   "pink",
+   "cinereous"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 392,
+  "pct": 1.65,
+  "measured": {
+   "nearest": [
+    [
+     "Tan",
+     11.1
+    ]
+   ]
+  },
+  "century": "1900s, 61 paintings, 2.7x"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930, first recorded 1921, plate 51 C 2; nearest named Tan, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, ch. 3 (Syme's color chart in botany), pp. 163-164",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which source gives our library's date for Sweet Pea?",
+   "choices": [
+    "Maerz and Paul, 1930",
+    "Newton, 1704",
+    "The 2010 xkcd survey",
+    "Pliny"
+   ],
+   "answer": "Maerz and Paul, 1930",
+   "kind": "pick"
+  },
+  {
+   "q": "The books document who first named this color Sweet Pea.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sweet Pea is a flower name dated to 1921 by a 1930 color atlas; nothing is documented about who first used it for this tan."
+ ],
+ "words": 252,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

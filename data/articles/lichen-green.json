@@ -1,0 +1,112 @@
+{
+ "slug": "lichen-green",
+ "name": "Lichen Green",
+ "hex": "#C2D8C9",
+ "names": [
+  "Lichen Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Lichen green is a very pale, cool green, named for the whitish green of lichen.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name means",
+   "body": "Paterson's dictionary defines *lichen-green* as the whitish green of the lichen plant [1]. The swatch is a very pale green, matching the ISCC-NBS name very pale green [2]. Ridgway's 1912 atlas carries the name on an aged plate, approximate, and the Maerz and Paul dictionary of 1930 dates it to 1898 [2]. It is a quiet cousin of [[light-green]], [[lettuce-green]] and [[moss-green]], in the family of [[green]] [2].\n\nThe books add no history of the name, so none is claimed [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 99, 0.42 per cent, as photographed [3]. It peaks in the 1800s, at 1.4 times the expected rate [3]. Inside a painting it is usually a light, as in 68 per cent of 80 paintings [3]. Alfred Sisley uses it in 4 of the 50 works we hold, 5.5 times the baseline [3]. In Google Books the word peaks in the 1920s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lichen plant",
+   "first_recorded": "Ridgway 1912; Maerz & Paul 1930 (first recorded 1898)",
+   "source": "Paterson, A Dictionary of Colour, \"lichen-green\""
+  },
+  "aka": [
+   "lichen"
+  ],
+  "siblings": [
+   "moss-green",
+   "lettuce-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 99,
+  "pct": 0.42,
+  "role": "light, 68% of 80 paintings",
+  "painters": [
+   "alfred-sisley"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lichen-green\" (p. 241, colour list p. 476)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 nearest names, Ridgway 1912 and Maerz & Paul 1930 entries, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, relative to peak (data/graph)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Paterson describes lichen-green as which kind of green?",
+   "choices": [
+    "Whitish",
+    "Blackish",
+    "Yellow-orange"
+   ],
+   "answer": "Whitish",
+   "kind": "pick"
+  },
+  {
+   "q": "In a painting, lichen green most often plays which role?",
+   "choices": [
+    "A light",
+    "A deep dark",
+    "The focal accent"
+   ],
+   "answer": "A light",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Lichen green is usually the lightest note in the paintings that use it."
+ ],
+ "words": 169,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

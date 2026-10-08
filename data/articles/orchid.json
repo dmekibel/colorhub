@@ -1,0 +1,129 @@
+{
+ "slug": "orchid",
+ "name": "Orchid",
+ "hex": "#DA70D6",
+ "names": [
+  "Orchid"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Orchid is a light, slightly pink violet, best known today as one of the 140 named colors of the web, and its title comes from the flower rather than from any pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color and a flower",
+   "body": "Paterson's dictionary records Orchid as one of the 140 colors of the X11 set, with the hex code #DA70D6, the swatch used here [1]. He also lists a separate orchid pink, a lightish pink that is sometimes a deep pink or purplish pink [1]. The same set has MediumOrchid, a darker neighbor [1]. The family of named neighbors includes [[purple]] and [[violet]] on one side and [[pink]] on the other.\n\nOrchids are not one color. Syme's colour chart in botany, as reproduced in *Nature's Palette*, cites a small purple fringed orchid as an example of its Crimson Red (number 93), and an Italian orchid under Arterial Blood Red (87), while another plant called orchid rockrose stands for Siskin Green (61) [2]."
+  },
+  {
+   "id": "dyes",
+   "title": "Dyes and binders",
+   "body": "Paterson defines orcein as a red coloring matter occurring in orchids, and lists it beside orchil, a lichen-derived red or violet dye, made by fermentation, that is the source of litmus [1]. Take care with the similar names: Paterson places orchil in lichens, not orchids [1].\n\nIn Australia's Northern Territory, Finlay reports, the black, white, red and yellow earths used in Aboriginal paintings are now more often bound with synthetic glues, which are easier to obtain and last longer than orchid juice or seagull egg [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Orchid's value is mainly as a screen color: the web set gives it a fixed hex, and no archive count is computed here. A better-documented neighbor is [[mauve]]: Garfield describes a wedding party dressed in mauve ribbon and carrying mauve Alexandra orchids [4]. Hex values for named screen colors are approximations, and what any viewer sees depends on the display."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the orchid flower",
+   "first_recorded": "origin undocumented; fixed as an X11 color in the 1980s-90s web era (not in the books read)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "orchid pink",
+   "MediumOrchid (darker)"
+  ],
+  "siblings": [
+   "violet",
+   "purple",
+   "mauve"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mauve",
+    "gloss": "a greyer, softer pink-purple with a famous dye history"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#DA70D6",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "set": "X11 / CSS named colors, 140",
+  "hex_code": "#DA70D6",
+  "companion": "MediumOrchid"
+ },
+ "questions": [
+  {
+   "q": "Which hex code does Paterson give for the web color Orchid?",
+   "choices": [
+    "#DA70D6",
+    "#8A2BE2",
+    "#FF69B4",
+    "#E6E6FA"
+   ],
+   "answer": "#DA70D6",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: orchil, the dye behind litmus, comes from orchids.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Orchil, the dye behind litmus, is made from lichens, not from orchids."
+ ],
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 280, 289, 471, 479, 503, 509",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Nature's Palette, Syme's colour chart in botany, pp. 171-172",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Orcein/orchil paragraph reworded to Paterson's own definitions; removed 'dyes only indirectly'.",
+   "Finlay binder sentence corrected: Northern Territory, not Arnhem Land bark; orchid juice and seagull egg were the older binders."
+  ]
+ },
+ "words": 291
+}

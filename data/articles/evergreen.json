@@ -1,0 +1,159 @@
+{
+ "slug": "evergreen",
+ "name": "Evergreen",
+ "hex": "#05472A",
+ "names": [
+  "Evergreen"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Evergreen is a dark forest green named for trees that keep their leaves, recorded in color dictionaries since 1915.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A tree word",
+   "body": "As a plain word, *evergreen* describes shrubs and trees whose foliage stays green through the year [1]. As a color, Paterson defines it as a yellowish green, and notes that Washington is called the Evergreen State [1]. The swatch is darker and bluer than that definition: the library reads it at lightness 26, chroma 30 and hue 156 in LCH, a dark green, not a yellowish one [2]. Books disagree with the swatch, then, about the hue."
+  },
+  {
+   "id": "record",
+   "title": "The record in the color lists",
+   "body": "Evergreen is in the xkcd survey, the 1955 ISCC-NBS system (block 137), and the Maerz & Paul dictionary, which gives first use as 1915 on plate 24 E 12 [2]. The ISCC-NBS lists give the same block the names Amarna (first use 1923), Dark Emerald Green, Deep Emerald Green and Service Corps [2]. British Racing Green and UP Forest Green are near-duplicates, about 2 in ΔE away [2]. St Clair describes racing green as a dark evergreen associated with early British car racing [3]. The nearest named color is [[hunter-green]], 8.8 apart [2]; [[forest-green]] and [[racing-green]] are close company."
+  },
+  {
+   "id": "plants",
+   "title": "Evergreens in the books",
+   "body": "The books know evergreens mostly as plants. Finlay notes that the pine, being evergreen, often symbolizes eternal life, and links it with the goddess Cybele [4]. Linnaeus urged Swedes to drink a tea of *Linnaea borealis*, an evergreen shrub, though his own son admitted it could be rather repulsive [5]. Two more colorants come from evergreens: the yellow resin gamboge from Southeast Asian trees, and annatto, a yellow to red-orange dye from the seeds of the shrub *Bixa orellana* [6][7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The xkcd list gives a second hex for the name, #05480D, which is a little more yellow-green and agrees better with Paterson's wording [2]. Screen colors are approximate."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "evergreen trees and shrubs",
+   "first_recorded": "1915 (Maerz & Paul 1930)",
+   "source": "ColorHub library; Paterson"
+  },
+  "aka": [
+   "Amarna",
+   "Dark Emerald Green",
+   "Service Corps"
+  ],
+  "siblings": [
+   "hunter-green",
+   "forest-green",
+   "racing-green",
+   "emerald"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub library (xkcd, ISCC-NBS block 137, Maerz & Paul plate 24 E 12)",
+  "measured": {
+   "lch": [
+    26,
+    30,
+    156
+   ],
+   "nearest": [
+    [
+     "Hunter green",
+     8.8
+    ]
+   ]
+  },
+  "first_recorded": 1915
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"evergreen\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), \"Evergreen\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Racing green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"gamboge\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"bixa\"",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say evergreen means as a color?",
+   "choices": [
+    "A yellowish green",
+    "A bluish grey",
+    "A dark brown",
+    "A pale mint"
+   ],
+   "answer": "A yellowish green",
+   "kind": "pick"
+  },
+  {
+   "q": "Which dye comes from the resin of Southeast Asian evergreen trees?",
+   "choices": [
+    "Gamboge",
+    "Madder",
+    "Indigo",
+    "Cochineal"
+   ],
+   "answer": "Gamboge",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Linnaeus urged Swedes to drink evergreen-shrub tea; his own son found it rather repulsive."
+ ],
+ "words": 294,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Annatto is yellow-to-red-orange per source, not simply yellow"
+  ]
+ }
+}

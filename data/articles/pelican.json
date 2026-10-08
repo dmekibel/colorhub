@@ -1,0 +1,139 @@
+{
+ "slug": "pelican",
+ "name": "Pelican",
+ "hex": "#595A55",
+ "names": [
+  "Pelican"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Pelican is a dark, nearly neutral grey from Maerz and Paul's 1930 dictionary of color, and no book we hold says why it carries a bird's name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a story",
+   "body": "Pelican comes from Maerz and Paul's *A Dictionary of Color* of 1930, where it sits on plate 47 and was first recorded in 1925 [1]. The ISCC-NBS system later filed it as \"dark gray\", 3.8 units away on the CIEDE2000 scale, and its chroma is only about 3, so it is close to a true neutral with a faint yellow-green cast [1]. Why the authors chose the bird's name is undocumented [1].\n\nThe books in our collection use \"pelican\" for other things entirely. The ship in which Francis Drake sailed around the world in 1577, later renamed the Golden Hind, was the *Pelican*, and Drake carried hopes of cochineal on board [2]. Alchemists used a glass retort called a pelican [3][4]. Ball mentions monastral blue, familiar from the covers of old Pelican books, a synthetic blue with a copper ion at its center, which is not this grey [5]."
+  },
+  {
+   "id": "company",
+   "title": "Neighbors",
+   "body": "The swatch is a near neighbor of [[battleship-grey]] and [[bluish-grey]], and in our archive it appears on the same canvases as those two more often than chance [6]. It also sits close to [[grey]] itself, but darker and slightly greener than a mid-grey. None of this makes it a plumage color: no book describes a pelican's feathers in these terms."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a common color on canvas. In our archive of 23,781 paintings, a color near this swatch appears in 905 works, or 3.81 per cent, which is more common than 83 per cent of the named colors [6]. It peaks in the 1900s, at 4.1 per cent of the 1,674 paintings from then (68 paintings) [6]. Inside a painting it most often plays a mid-tone [6]. The most devoted painter is Arnoud van Halen, with it in 10 of 50 works [6].\n\nIt shares canvases with Battleship Grey (lift 9.7, n=63) and Bluish Grey (lift 5.5, n=51) [6]. These are photographs of aged, varnished paintings, where whites and blacks both drift toward grey, so many of these matches are a color the painter did not choose [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "Maerz and Paul, first recorded 1925 (dictionary of 1930)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "battleship-grey",
+   "bluish-grey",
+   "grey"
+  ],
+  "parent": "grey",
+  "children": [
+   "slate-grey"
+  ],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes)",
+  "match": {
+   "hex": "#595A55"
+  },
+  "n_present": 905,
+  "peak_century": 1900,
+  "measured": {
+   "iscc": "dark gray",
+   "de2000": 3.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (Maerz and Paul 1930, plate 47 A 2; ISCC-NBS 1955), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 14",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 43",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Pelican swatch look like?",
+   "choices": [
+    "A dark, nearly neutral grey",
+    "A bright pink",
+    "A vivid turquoise",
+    "A pale yellow"
+   ],
+   "answer": "A dark, nearly neutral grey",
+   "kind": "pick"
+  },
+  {
+   "q": "What was Drake's ship, before it was renamed Golden Hind?",
+   "choices": [
+    "The Pelican",
+    "The Penguin",
+    "The Cormorant",
+    "The Mayflower"
+   ],
+   "answer": "The Pelican",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pelican is a dark grey from a 1930 dictionary of color; why it has a bird's name is undocumented.",
+  "Drake's ship was called the Pelican before it became the Golden Hind."
+ ],
+ "words": 362,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No fixes needed; Drake, alchemy, monastral blue claims verified"
+  ]
+ }
+}

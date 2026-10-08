@@ -1,0 +1,165 @@
+{
+ "slug": "antique",
+ "name": "Antique",
+ "hex": "#856525",
+ "names": [
+  "Antique"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Antique is a dark brown-gold from Maerz and Paul's 1930 dictionary; the word began as a trade modifier meaning made to look old.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch, #856525, is a dark yellow-brown with an olive-gold cast [1]. Maerz and Paul's *Dictionary of Color* of 1930 files it as Antique, plate 14, cell L 8, and our library dates the name to 1892 [1]. The same plate carries Syrup, recorded from 1917, and Fox, recorded from 1796 in the neighboring cell K 8 [1]. The nearest of our app colors is [[sepia]], 10.3 units away [1]."
+  },
+  {
+   "id": "word",
+   "title": "A modifier turned into a name",
+   "body": "In practice *antique* was a modifier before it was a color. Paterson defines it as a way of coloring that gives an object the look of an antique, used for brass, bronze and gold, and lists antique bronze, antique gold, antique green and antique red alongside antique ivory, the yellowish white of old ivory [2]. [[antique-white]] is the same word on the web: a yellowish white adopted as a color name by web page creators, with the hex code #FAEBD7 [2]. Related pages in our library include [[antique-brass]], [[antique-bronze]] and [[antique-fuchsia]].\n\nFabric and house paint used the word too. Paterson notes that fashion items given an \"antique look\" are made by acid-washing, bleaching or similar processes [2]. Batchelor quotes a 1960s list of paint names in New Jersey suburbs, among them petal-pink, buttercup, Cape Cod brown and antique green [3]. Garfield, citing a survey of 7,500 English color names by Judd, counts sixty names that came from old things, among them antique brown [4]."
+  },
+  {
+   "id": "antiquity",
+   "title": "Antique, as in antiquity",
+   "body": "The word has an older meaning that has nothing to do with brown. For Ball, the antique palette that Owen Jones chose for the ancient world was the palette of Greek and Roman antiquity, a palette in which blue was formally absent from Pliny's list of colors [5]. Mentions of antique in color books, in other words, usually point at ancient things and not at the swatch on this page."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Antique is common in our painting archive. It appears in 2,225 of 23,781 paintings, or 9.36 per cent, and it is more common than 92 per cent of the named colors [6]. Inside a painting it most often plays an accent, in 45 per cent of 1,233 paintings by lightness rank [6]. It peaks in the 1400s, found in 57 of 945 paintings from that century, 6.0 per cent and 1.4 times the baseline of the same museums [6]. Its first appearance is 1125 [6].\n\nThe most devoted painter is Fritz Thomsen, who uses it in 9 of the 18 works we have, 8.5 times the baseline [6]. Its company in paintings is mustard, chocolate and sepia [6]. These numbers are as photographed: aged, varnished paintings, so a color match is not a pigment test. A yellowed varnish pushes many canvases toward this brown-gold, which is one likely reason the color is so common."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the adjective antique, 'made to look old'",
+   "first_recorded": "1892 (Maerz & Paul 1930)",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Syrup",
+   "Fox"
+  ],
+  "siblings": [
+   "antique-brass",
+   "antique-bronze",
+   "antique-white"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "antique-white",
+    "gloss": "Antique White (#FAEBD7) is a pale yellowish white, not a brown"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2225,
+  "pct": 9.36,
+  "century": {
+   "1400s": {
+    "hits": 57,
+    "of": 945,
+    "lift": 1.4
+   }
+  },
+  "role": {
+   "accent": 0.45
+  },
+  "first_seen": 1125,
+  "measured": {
+   "lch": [
+    45,
+    40,
+    82
+   ],
+   "nearest": [
+    "Sepia",
+    10.3
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Antique (Maerz & Paul 1930, plate 14 L 8; first recorded 1892)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"antique\", \"antique bronze\", \"antique ivory\", \"Antique White\", \"acid-washed\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did 'antique' first describe in the paint and metal trades?",
+   "choices": [
+    "A finish made to look old",
+    "A color from Roman ruins",
+    "A pigment from antimony",
+    "A shade of ivory only"
+   ],
+   "answer": "A finish made to look old",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Antique White is a brown like the Antique swatch.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Antique in the color books mostly means made to look old, not brown.",
+  "In our archive Antique brown-gold sits in 9 of every 100 paintings, often as the accent."
+ ],
+ "words": 478,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch 26 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Name origin as a swatch is Maerz and Paul 1892; thin book evidence, so article is short.",
+   "Archive numbers use the fieldnotes lens."
+  ]
+ }
+}

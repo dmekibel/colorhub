@@ -1,0 +1,235 @@
+{
+ "slug": "iris",
+ "name": "Iris",
+ "hex": "#6258C4",
+ "names": [
+  "Iris"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Iris is the blue-violet of the flower named for the Greek rainbow goddess; in the Middle Ages the same plant also gave painters a green, which is stranger than it sounds.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A rainbow, a flower and an eye",
+   "body": "*Iris* was the Greek messenger of the gods, and the word came to mean the rainbow as well [1]. Paterson's dictionary of color gives the color word as the reddish-blue of the iris flower, with the rainbow as a second sense, and records an old name for the same dark blue, *flag* [1]. The yellow iris has a color word of its own, *flambé*, which Paterson glosses simply as the yellow of that flower [1]. Ovid pictures the goddess putting on a robe of a thousand colors and drawing an arc across the sky, and Jarman quotes the passage [6].\n\nThe eye's iris is a separate use of the word. It is the ring in front of the lens that forms the pupil and widens or narrows it with the light [8]. Its color comes from the pigment melanin [1]. Birren points out something that surprises many readers: practically all mammals, humans included, are born with blue eyes, and the blue is scattered light in an unpigmented iris, not a blue pigment [8].\n\nIn the flower's own world, medieval flower symbolism read the iris as protection and prosperity, according to Pastoureau [5]. In his garden poem, Jarman lists a purple iris among the colors present there [6]."
+  },
+  {
+   "id": "werner",
+   "title": "The flower as a color standard",
+   "body": "Naturalists used the petal as a measuring stick. In Baty's account of Werner's nomenclature, as expanded by Syme in 1821, the standard called Pale Blackish Purple is shown beside the inner petals of an iris, drawn in a Dutch plant book of 1865 [11]. The pairing is a reminder that a flower can be a reference color as well as a decoration."
+  },
+  {
+   "id": "iris-green",
+   "title": "Iris green",
+   "body": "By the fourteenth century painters were looking for alternatives to verdigris, a copper green that was popular but unpredictable and that could eat through the parchment it was painted on [3]. Two plant colors filled the gap, sap green and iris green [3]. Ball describes iris green as the juice of iris flowers mixed with water, possibly with alum as a thickener, and used for manuscript illumination [3].\n\nThe Pigment Compendium adds detail [2]. Medieval manuscripts name flower juices as a source of green, sometimes confusingly called sap green [2]. Iris green could be made up as a *pezzetta*, a piece of linen dipped in the juice and dried, or by squeezing the flowers and mixing the juice with an alum base [2]. A specific source named in the literature is *Iris germanica*, whose leaves contain the yellow compound mangiferin [2]. Thompson speculated in 1956 that the main coloring matter of iris green is probably chlorophyll [2]. Italian recipes also call it lily green, or *verde giglio*; the recipes describe the flowers as purple, which suggests that the lilies in question were irises [2].\n\nBooks disagree on the source. Paterson defines iris green as a medieval dye made from the leaves of buckthorn, or possibly from iris flowers, while Ball and the Compendium name the iris flower first [1][3][2]. The Compendium notes a related blending of names: a nineteenth-century edition of Field's *Chromatography* mentions blue iris flowers being added to sap green, and malachite itself has been called iris green [2]. Ball is blunt about the limits: these meadow juices were good enough for a monk's page, but not robust enough for an altarpiece [3]."
+  },
+  {
+   "id": "iris-blue",
+   "title": "Iris blue",
+   "body": "The blue is harder to pin down. The Compendium finds iris blue in three medieval manuscripts, but Thompson wrote in 1935 that a way of making it may have been known without being generally practiced [2]. One Florentine manuscript says the secret is to take the yellow parts out of the flowers, which probably means the pollen [2]. A compendium of recipes of 1808 also lists it [2].\n\nBy the nineteenth century the term had drifted. Field in 1835 used *iris blue* as a synonym for blue bice, a name applied mainly to azurite but also to blue verditer [2]. St Clair writes of the \"iris-blue\" glass of Chartres and Saint-Denis, tying it to cobalt, so the name was still serving as a color description for something that no flower made [9]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is a modern blue-violet",
+   "body": "The swatch on this page, #6258C4, comes from three modern lists [7]. The 1955 ISCC-NBS system places it in block 185 as a strong purplish blue [7]. The Maerz and Paul dictionary of 1930 has it too, and our library dates that entry to 1916; the xkcd color survey of 2010 adds it as well [7]. Its Munsell value, computed by our library, is 9.0PB 4.3/14.6, a mid-dark blue-violet with strong chroma [7].\n\nA different color shares the first word. xkcd's \"Iris purple\" is #AC1DB8, a hot magenta-leaning purple, and our core list files it under its own name, [[iris-purple]] [7]. The nearest neighbors of the swatch are [[dark-periwinkle]] and [[abbey]], with [[royal-blue]] about nine units away [7]. Paterson gives the flower both a blue-violet and a yellow, so no single swatch can stand for it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color is rare in paint. In our archive of 23,781 museum paintings, a color within ten CIEDE2000 units of this swatch covers at least 2 per cent of the canvas in 14 works, as photographed [10]. Six of the 14 are from the 1900s, a rate about six times the archive's average, and two are Norwegian, in a country that makes up only 120 paintings of the archive [10].\n\nThe largest area is Matisse's [[painting:commons-Q1853880|Blue Nude IV]] of 1952, where the color covers about a quarter of the canvas, followed by Jawlensky's *Red Path, St. Prex* of 1915 and Munch's [[painting:commons-Q18889878|Forest on the Way to Borre]] of 1901 [10]. The earliest match is Bronzino's portrait of Bia de' Medici, from 1543, where the color covers about 8 per cent [10]. These are photographs of varnished paintings, so read them as screen colors, not as pigment tests [10].\n\nThe word itself is old and steady in print. In Google Books the adjective use, which is the color sense, peaks in the 1870s [12]. Among the named colors in our archive count, it is rarer than 86 per cent of them [12]. To see the color's source, look at the inner petals of a bearded iris, where the plate of 1865 placed its darkest standard [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Greek rainbow goddess Iris, via the flower",
+   "first_recorded": "Maerz and Paul 1930 as a color name (first recorded 1916 in our library); flower-color use is older",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "flag (an old name for the dark blue of the flower)",
+   "iris blue (medieval pigment term)"
+  ],
+  "siblings": [
+   "dark-periwinkle",
+   "abbey"
+  ],
+  "parent": "blue-violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "iris-purple",
+    "gloss": "xkcd's Iris purple is a hot magenta-leaning purple, a different color"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "grc",
+    "name": "iris (rainbow; the goddess)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6258C4",
+   "de2000": 10,
+   "min_cover": 0.02
+  },
+  "n_present": 14,
+  "top_paintings": [
+   "commons-Q1853880",
+   "nga-130842",
+   "commons-Q18889878",
+   "commons-Q47467128",
+   "commons-Q131754092"
+  ],
+  "ngram": {
+   "term": "iris",
+   "adjective_peak": "1870s"
+  },
+  "measured": {
+   "munsell": "9.0PB 4.3/14.6",
+   "lch": [
+    43.6,
+    64.4,
+    300.6
+   ],
+   "contrast_white": 5.66,
+   "nearest": [
+    [
+     "Dark Periwinkle",
+     null
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"iris\", \"iris green\", \"flag\", \"flambé\", \"melanin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Iris green\", \"Iris blue\", \"Mangiferin\", \"Lily green\", \"Malachite\" (pp. 211-212, 252, 261, 265)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, pp. 18 and 33",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 21, 39 and 74",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and Color Graph: ISCC-NBS 1955, Maerz & Paul 1930, xkcd 2010; Munsell and CIEDE2000 computed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. on the eye",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Cobalt blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 10, >= 2% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 115-116 (Syme's Werner, Pale Blackish Purple)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "Google Books Ngram (adjective use, 5-year smoothing); ColorHub Color Graph field notes (iris)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: a newborn's blue eyes come from a blue pigment in the iris.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why did medieval painters turn to plant greens such as sap green and iris green?",
+   "choices": [
+    "Verdigris was popular but unpredictable and could damage parchment",
+    "Verdigris was illegal",
+    "Plant greens were more lightfast than any mineral",
+    "Copper was unavailable"
+   ],
+   "answer": "Verdigris was popular but unpredictable and could damage parchment",
+   "kind": "pick"
+  },
+  {
+   "q": "What does the name Iris mean in Greek mythology?",
+   "choices": [
+    "The rainbow goddess and messenger of the gods",
+    "The goddess of the night sky",
+    "A pigment from cobalt",
+    "A type of silk"
+   ],
+   "answer": "The rainbow goddess and messenger of the gods",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A flower once gave painters a green: iris green, made from the juice of iris flowers.",
+  "Babies' blue eyes contain no blue pigment; the color of a newborn's iris is scattered light.",
+  "Syme's Werner nomenclature pairs the standard Pale Blackish Purple with the inner petals of an iris."
+ ],
+ "words": 1025,
+ "status": "checked",
+ "checked": {
+  "by": "batch30 writer + gate",
+  "date": "2026-10-08",
+  "issues": [
+   "Iris green source disagreement noted (Paterson buckthorn leaves vs Ball/Compendium flowers).",
+   "Lily-green inference (Compendium) hedged.",
+   "No myth in list touches iris; Chartres glass mentioned only as colour description."
+  ]
+ }
+}

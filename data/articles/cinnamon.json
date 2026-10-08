@@ -1,0 +1,201 @@
+{
+ "slug": "cinnamon",
+ "name": "Cinnamon",
+ "hex": "#CC925F",
+ "names": [
+  "Cinnamon"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Cinnamon is the warm yellowish brown of the spice's bark, a color name that jewelers and pigment makers borrowed as well.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The spice's color",
+   "body": "Paterson defines cinnamon as the yellowish brown of the spice, sometimes reddish or greyish and tinged with red [1]. As a color word it also grades diamonds: deep brown diamonds of little value are called cinnamon [1]. Our swatch is the Ridgway 1912 color (plate XXIX), also listed in ISCC-NBS (block 57) and in Maerz and Paul, who date the name to 1679 [2]. The xkcd survey's cinnamon is a much deeper burnt orange-brown, #AC4F06 [2]. Compare [[tawny]], [[adobe]], [[raw-umber]] and [[brown]]."
+  },
+  {
+   "id": "stone",
+   "title": "Cinnamon stone",
+   "body": "Jewelers use the name for essonite, also called hessonite, a reddish-yellow garnet that comes mostly from Sri Lanka [3]. It is sometimes confused with zircon [3]. The stone borrows its color word from the spice; see [[gem:garnet|garnet]]."
+  },
+  {
+   "id": "pigment",
+   "title": "In the paint box and the vat",
+   "body": "Salter's 1869 account of cadmium brown describes a cinnamon-brown oxide, made by heating white cadmium carbonate [4]. It was unstable and said to revert quickly to white cadmium oxide [4]. Catechu, a dye extract sold in small cubes, is dark red-brown outside and a pale cinnamon-brown inside [5]."
+  },
+  {
+   "id": "cloth",
+   "title": "On cloth",
+   "body": "In a spinning lesson Finlay watched, one basket held cinnamon-coloured cotton and another white, both bursting from brown husks [6]. A V&A monograph lists cinnamon among the colors of a textile fragment with yellow tulips, alongside peony red and verdigris [7]. The spice itself came with a price: medieval merchants from Venice held the spice monopoly and could inflate prices, even as cooks used cloves, nutmeg and cinnamon from the Indies in large quantities [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 1,070 (4.5%) hold this swatch within six units of ΔE2000 over at least five per cent of the canvas, as photographed [9]. India leads: 107 of 721 paintings (14.8%, 3.3 times the average) [9]. Among movements, Mughal paintings match in 34 of 168 (20.2%, 4.5 times) and Rajput paintings in 16 of 97 (16.5%) [9].\n\nIn time it is strongest in the 1300s, at 2.3 times the average, and weakest in the 1600s, at 0.76 [9]. In 82% of its paintings it is a highlight, the lightest part of the palette [9]. The strongest match is Hua Ziyou's *Bathing of the Buddha Festival*, 1833, where it covers 66% of the picture [9]. We have not checked whether such matches are a pigment, a paper or a silk ground, and these are photographs of aged, varnished paintings: a color match, not a pigment test. See [[painting:aic-80720|Bathing of the Buddha Festival]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the spice cinnamon (the bark of Cinnamomum trees)",
+   "first_recorded": "1679 (Maerz & Paul)",
+   "source": "ColorHub library; Paterson"
+  },
+  "aka": [
+   "Cinnamon stone (essonite, the gem)"
+  ],
+  "siblings": [
+   "tawny",
+   "adobe"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "tawny",
+    "gloss": "a nearby yellow-brown with its own history"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CC925F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1070,
+  "top_country": {
+   "name": "India",
+   "hits": 107,
+   "n": 721,
+   "lift": 3.3
+  },
+  "top_movement": {
+   "name": "Mughal",
+   "hits": 34,
+   "n": 168,
+   "lift": 4.5
+  },
+  "top_paintings": [
+   "aic-80720"
+  ],
+  "role": {
+   "highlight": 0.82,
+   "mid": 0.17,
+   "shadow": 0.01
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cinnamon\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, \"Cinnamon\": Ridgway 1912 plate XXIX hue 15, ISCC-NBS block 57, Maerz & Paul first recorded 1679 plate 12 E 7, xkcd #AC4F06",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, glossary and ch. 19 notes",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"cadmium brown\", p. 81",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"catechu\", p. 218",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 84",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 240",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, DE2000 6, min cover 5%, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the gem called cinnamon stone?",
+   "choices": [
+    "A reddish-yellow garnet (essonite)",
+    "A brown zircon",
+    "A green beryl"
+   ],
+   "answer": "A reddish-yellow garnet (essonite)",
+   "kind": "pick"
+  },
+  {
+   "q": "What happened to the cinnamon-brown cadmium oxide Salter described?",
+   "choices": [
+    "It reverted quickly to white cadmium oxide",
+    "It turned bright red",
+    "It was permanent and widely used"
+   ],
+   "answer": "It reverted quickly to white cadmium oxide",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, which painting tradition matches the cinnamon swatch most often, relative to its size?",
+   "choices": [
+    "Mughal",
+    "Impressionism",
+    "Dutch Golden Age"
+   ],
+   "answer": "Mughal",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The gem called cinnamon stone is a reddish-yellow garnet, mostly from Sri Lanka [3].",
+  "Look for cinnamon in Mughal miniatures: about one in five matches this swatch [9]."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'Like garnet in general, the stone borrows its color word from the kitchen' (kept only the cinnamon-stone point)",
+   "Other claims verified vs Paterson, Finlay, Pigment Compendium"
+  ]
+ },
+ "words": 412
+}

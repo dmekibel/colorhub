@@ -1,0 +1,134 @@
+{
+ "name": "Swedish Green",
+ "hex": "#6D983A",
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Swedish green is an old trade name for Scheele's green, the copper arsenite pigment invented in Sweden in the 1770s, though one source links the name to a cobalt green instead.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two readings of one name",
+   "body": "Swedish green is, in the Pigment Compendium's main entry, another name for [[scheele-s-green|Scheele's green]], a copper arsenite pigment [1][2]. The Swedish chemist Carl Wilhelm Scheele (1742 to 1786) discovered it, and because it was first made in Sweden the color was tied to that country [1].\n\nThe sources do not fully agree. Fiedler and Bayard link Swedish green to Scheele's green, while Mayer connects it with the term [[cobalt-green|cobalt green]] [1]. The Pigment Compendium also lists Swedish green among names for cobalt-zinc compounds, so the name can point at two different materials [3]. We follow the compendium's main reading."
+  },
+  {
+   "id": "making",
+   "title": "How it was made",
+   "body": "Scheele's results were published in 1778, but the exact method was kept secret so that he could profit [2]. The basic procedure mixed solutions of copper sulfate and arsenic oxide dissolved with potassium carbonate [2]. Later production in Germany used a slightly different process [2].\n\nThe compendium notes that the pigment gathered a great many names, possibly to hide its association with known toxicity, and lists mineral green and Swedish green among them [2]. That is a suggestion, not a documented fact. Scheele's green is poisonous because it holds arsenic, and later [[emerald-green|emerald green]] was often confused with it [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is a mid yellow-green. In our archive of 23,781 paintings, 10 hold it as a large enough patch, as photographed, and all fall in the 1800s and 1900s [4]. The first three are Matisse (1908), Gauguin (1886) and Pissarro (1898), the generation that took up bright greens [4]. A color match is not a pigment test [4]. We cannot tell from a photograph whether any of these painters used Scheele's green [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Sweden, where Scheele's green was first made",
+   "first_recorded": "not recorded",
+   "source": "Pigment Compendium, p. 370"
+  },
+  "aka": [
+   "Scheele's green",
+   "mineral green"
+  ],
+  "siblings": [
+   "scheele-s-green",
+   "emerald-green",
+   "cobalt-green",
+   "mineral-green"
+  ],
+  "parent": "scheele-s-green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cobalt-green",
+    "gloss": "Mayer links the name Swedish green to cobalt green, not Scheele's arsenic green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6D983A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 10,
+  "top_paintings": [
+   "commons-Q21723020",
+   "commons-Q79790701",
+   "commons-Q12857030"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 370 (\"Swedish green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 348 (\"Scheele's green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 127 (cobalt zinc oxide group)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, color match within delta-E 6, 5 per cent cover, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is the pigment called Swedish green?",
+   "choices": [
+    "It was first manufactured in Sweden by Scheele",
+    "It was dyed with Swedish birch bark",
+    "A king of Sweden chose it"
+   ],
+   "answer": "It was first manufactured in Sweden by Scheele",
+   "kind": "pick"
+  },
+  {
+   "q": "Do all books agree Swedish green is Scheele's green?",
+   "choices": [
+    "Yes",
+    "No, one source links it to cobalt green"
+   ],
+   "answer": "No, one source links it to cobalt green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Swedish green is Scheele's arsenic green by another name, though one source ties the name to cobalt green."
+ ],
+ "slug": "swedish-green",
+ "names": [
+  "Swedish Green"
+ ],
+ "status": "checked",
+ "words": 292,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'most sources' -> compendium's main entry",
+   "'books disagree' -> sources",
+   "reframed toxicity-names sentence to match source",
+   "removed unsupported first_recorded date"
+  ]
+ }
+}

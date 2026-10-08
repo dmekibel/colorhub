@@ -1,0 +1,219 @@
+{
+ "slug": "reddish-brown",
+ "name": "Reddish Brown",
+ "hex": "#7F2B0A",
+ "names": [
+  "Reddish Brown"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Reddish brown is a description that became a color name: a dark, strong brown tilted toward red, found in mineral lists, pigment catalogues and painters' grounds long before it was a swatch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description before a name",
+   "body": "*Reddish brown* is a phrase before it is a color name. The color lists in the Werner tradition, from the 1790s, already carry *reddish-brown* beside clove brown, liver brown and tombac brown [1]. An English treatise on diamonds and precious stones used the term in 1813, for tourmalines [1].\n\nOur swatch, a dark and strongly colored reddish brown, comes from ISCC-NBS block 46 and the xkcd color survey [2]. Its nearest named neighbor on our chart is [[mahogany]], 6.8 units away [2]. No single material makes this color, which is why dictionaries lean on the phrase to define so many others."
+  },
+  {
+   "id": "words",
+   "title": "The word dictionaries lean on",
+   "body": "Paterson's dictionary uses *reddish-brown* to pin down whole families of older names. Acajou is the reddish-brown of mahogany, argil is the reddish-brown of potter's clay, and bay is the reddish brown of a horse's coat [3]. [[bole]] is an orange-red or reddish-brown earth pigment, and amadou brown and autumn brown are darker and warmer versions [3].\n\n[[burnt-umber]] is the standard pigment case. Roasting raw [[umber]] in air dehydrates its iron hydroxides into iron oxides, and the result is a warm reddish brown that keeps raw umber's power as a drier [3][4].\n\nThe phrase also covers organic colorants. Annatto and cochineal were common reddish-brown colorants in Mexican manuscript painting in the sixteenth century and before [4]. The ink of the cuttlefish owes its color to two melanins, the black eumelanins and the reddish-brown pheomelanins [4]. That is the chemistry behind [[sepia]]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Ball reports that Tintoretto sought tonal unity with dark reddish-brown grounds, deeper than the ones under Leonardo's sfumato [5]. Caravaggio used the same technique to wrap his scenes in shadow [5]. Rembrandt used bitumen, a tarry brown, in reddish-brown glazes without mishap, but it never dries properly, and in Reynolds's hands it was a disaster [5].\n\nA varnish can also make a painting reddish brown. Until the 1970s, [[painter:peter-paul-rubens|Rubens]]'s *Gerbier Family* in Washington lay under a toned nineteenth-century varnish, and the critic Roger Fry saw in it a harmony of coppery reds and reddish browns with a nearly neutral grey [6]. Removing the varnish changed the greys to blues and the reds to greens [6].\n\nOutside studios the term turns up at turning points. Perkin's first try at synthetic quinine in 1856 left a reddish-brown sludge, and the next experiment gave [[mauve]] [7]. Le Corbusier's account of the Parthenon went muted and ochre, the marble seeming as reddish-brown as terra-cotta before a storm whitened the hill [8]."
+  },
+  {
+   "id": "skin",
+   "title": "On skin and cloth",
+   "body": "Egyptian funerary painting gave men red or reddish-brown complexions, and women lighter beige or yellowish ones [9]. Henna, a bush of warm regions, gives a dye of red or reddish brown when its leaves are dried and powdered, used on cloth, leather, wood, hair, nails and skin [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a common painted color. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 683 works, 2.9 per cent of the archive [10]. As always these are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [10].\n\nIts peak is early: 68 of 945 paintings from the 1400s carry it (7.2 per cent, 2.5 times the archive rate), and the single best decade is the 1430s, with 6 of 51 [10]. It falls away to 14 of 1,674 paintings from the 1900s [10]. The painters who use it most, among those with enough dated works, include Batoni (4 of 13 paintings), Modigliani (4 of 18) and [[painter:peter-paul-rubens|Rubens]] (7 of 46) [10]. Inside a painting it is a mid-tone in 81 per cent of cases [10].\n\nThe largest patches are in a [[painting:commons-Q21723078|portrait of Otto Buchholtz]] (1830, 40 per cent of the canvas), van de Venne's [[painting:rijks-200108366|Prince Maurits on his deathbed]] (1625, 40 per cent) and Titian's [[painting:nga-41638|Cardinal Pietro Bembo]] (1539, 34 per cent) [10]. The earliest dated match is a [[painting:aic-14968|mural fragment]] of a maguey bloodletting ritual, about 500, at 12 per cent [10]. The color keeps company with [[maroon]], [[rust]], [[brick]] and [[chocolate]] [10]. In Google Books the phrase *reddish brown* peaks around 1925 [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description, a brown tilted toward red",
+   "first_recorded": "in the color-name lists of the 1790s (Werner tradition) and an 1813 mineral treatise",
+   "source": "Baty, Nature's Palette, pp. 24-33; data/library.json"
+  },
+  "aka": [
+   "red-brown"
+  ],
+  "siblings": [
+   "mahogany",
+   "russet",
+   "chestnut"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "bole",
+    "gloss": "bole is an earth pigment, a material rather than a description"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#7F2B0A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 683,
+  "top_paintings": [
+   "commons-Q21723078",
+   "rijks-200108366",
+   "met-38344",
+   "nga-41638"
+  ],
+  "role": {
+   "mid": 0.81,
+   "shadow": 0.1,
+   "highlight": 0.09
+  },
+  "peak_decade": {
+   "decade": 1430,
+   "hits": 6,
+   "n": 51,
+   "lift": 4.1
+  },
+  "ngram": {
+   "peak": 1925
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 24-25, 32-33",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): ISCC-NBS 1955 block 46 and the xkcd survey; nearest named color Mahogany",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"acajou\", \"argil\", \"bay\", \"bole\", \"amadou brown\", \"autumn brown\", \"burnt umber\" (pp. 17-83)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 63, 79, 350",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 300 (notes, citing Buck 1973)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Red, chs. 9 and 12; Yellow, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (tools/article_field.py, CIEDE2000 within 6, at least 5% of canvas), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"reddish brown\" (case-insensitive, 5-year smoothing), via the ColorHub cache",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did removing the toned varnish from Rubens's Gerbier Family change?",
+   "choices": [
+    "Greys turned to blues and reds to greens",
+    "The whole picture grew darker",
+    "Blues turned to greys",
+    "Nothing changed"
+   ],
+   "answer": "Greys turned to blues and reds to greens",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: bitumen, which Rembrandt used in reddish-brown glazes, dries well in thick films.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In which century is this reddish brown most over-represented in our painting archive?",
+   "choices": [
+    "The 1400s",
+    "The 1700s",
+    "The 1800s",
+    "The 1900s"
+   ],
+   "answer": "The 1400s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Old varnish can turn a picture into a harmony of reddish browns: when Rubens's Gerbier Family was cleaned, greys became blues and reds became greens.",
+  "Look for this color in the 1400s: it is 2.5 times as common there as in the archive as a whole."
+ ],
+ "words": 697,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch 22 writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Descriptive compound with no single history; short article by design.",
+   "Baty cited at pdf pages from the concordance; the 1813 treatise is unnamed in the notes.",
+   "Bitumen identified from the Ball passage ('it' = asphaltum/bitumen).",
+   "Archive match is the screen color, not a pigment test."
+  ]
+ }
+}

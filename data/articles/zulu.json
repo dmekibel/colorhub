@@ -1,0 +1,103 @@
+{
+ "slug": "zulu",
+ "name": "Zulu",
+ "hex": "#392A2A",
+ "names": [
+  "Zulu"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Zulu is a very dark brown, listed in Paterson's dictionary as Zulu brown, with no documented origin for the name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name in the browns",
+   "body": "Paterson lists Zulu brown among the browns [1]. The books do not say who coined the name or what it was meant to match, so its origin is undocumented [1].\n\nThe Zulu language enters the color record elsewhere [2]. In Swaziland, Bomvu Ridge takes its name from the Zulu word for red, and archaeologists found mines there at least forty thousand years old, used to dig red and yellow pigment for body painting [2]. That is a fact about ochre, not about this swatch [2]. So the only Zulu connection to this swatch is the name itself, whose origin the books leave undocumented [1][2]. Paterson shows it only as a list entry, with no description attached, so this page cannot say more about the shade than the swatch itself [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #392A2A is nearly black, with a faint warm brown cast [3]. It is close to [[espresso]], [[dark-brown]] and [[chocolate]] [3]. Screen colors are approximate [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Zulu people (origin of the color name undocumented)",
+   "first_recorded": "undocumented",
+   "source": "Paterson"
+  },
+  "aka": [],
+  "siblings": [
+   "espresso",
+   "dark-brown",
+   "chocolate",
+   "black"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "concordance of 29 color books",
+  "book_mentions": 4,
+  "swatch": "#392A2A (screen approximation)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, brown list, pp. 487, 496",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Bomvu mean in Zulu?",
+   "choices": [
+    "Red",
+    "Blue",
+    "Black"
+   ],
+   "answer": "Red",
+   "kind": "pick"
+  },
+  {
+   "q": "What were the Bomvu Ridge mines used for?",
+   "choices": [
+    "Red and yellow pigments",
+    "Gold",
+    "Salt"
+   ],
+   "answer": "Red and yellow pigments",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bomvu Ridge means red in Zulu, and its pigment mines are 40,000 years old."
+ ],
+ "words": 168,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede: removed unsupported claim that it is named for the Zulu people"
+  ]
+ }
+}

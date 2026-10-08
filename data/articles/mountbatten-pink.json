@@ -1,0 +1,146 @@
+{
+ "slug": "mountbatten-pink",
+ "name": "Mountbatten Pink",
+ "hex": "#997A8D",
+ "names": [
+  "Mountbatten Pink"
+ ],
+ "tier": "person",
+ "depth": "medium",
+ "lede": "Mountbatten pink is a dull, greyed mauve-pink that a British naval officer adopted as ship camouflage in the early Second World War; its fame rests on one tale of a lucky cruiser.",
+ "sections": [
+  {
+   "id": "story",
+   "title": "A pink for dawn and dusk",
+   "body": "The color is named for Lord Louis Mountbatten, the naval officer and later Earl Mountbatten of Burma [1]. St Clair tells it this way: he noticed a requisitioned Union-Castle liner, still in its civilian paint, fade from view well ahead of the rest of the convoy [2]. He grew convinced that its dull hull color vanished at dawn and dusk, two of the most dangerous times for attacks on ships [2]. The destroyers of his flotilla were painted medium grey with a dash of Venetian red, and the tone soon took his name [2]. Other captains copied him [2].\n\nThe pink was not invented from nothing. That liner color was the model: for the first six decades of the twentieth century the Union-Castle liners sailing from Southampton to Cape Town had hulls of a dull lavender-grey-pink, a look their poster advertisements played up [2]. Mountbatten's version belongs to the same family of muted, greyed pinks."
+  },
+  {
+   "id": "pink-lady",
+   "title": "The Pink Lady, and what the story proves",
+   "body": "The Admiralty's own camouflage section kept testing other paints and patterns, and Mountbatten pink might have spread across the whole navy otherwise [2]. St Clair says it is not known whether the section ever tested the pink itself, and that no record exists of how sailors felt about their ever-changing ships [2]. The pink was being phased out in 1942 [2].\n\nStill, some people had become convinced it worked. The best-known case is HMS Kenya, nicknamed the Pink Lady after her paint, which came under heavy fire off Vaagso Island in the final months of 1941 and escaped with only cosmetic damage and no casualties [2]. One surviving ship is an anecdote, not a trial, and nothing in the books settles whether the color helped [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "On screen, Mountbatten pink is a greyish pink-purple, close to [[mauve]] and [[puce]] and not far from [[eupatorium-purple]] and [[opera-mauve]] [3]. The ISCC-NBS system would call it a pale reddish purple, about 5.6 units from the swatch by CIEDE2000 [3]. It reads as a pink only because it is so grey; on a grey sea at dusk that restraint was the point."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color is rare in paint. In our archive of 23,781 paintings it appears in 24 works, 0.1 per cent, and it is rarer than 66 per cent of the named colors [4]. It peaks in the 1900s, in 0.5 per cent of the 1,674 paintings from that century, about 6.7 times the rate the same museums would predict [4]. Inside a painting it most often plays a hidden color, one of the muted tones between the main notes (33 per cent of the 12 works measured) [4]. As always these are photographs of aged, varnished paintings, so a match is not a pigment test [4].\n\nThe name itself is recent. In Google Books the phrase is almost absent before the 1940s and climbs to a peak around 2010 [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Lord Louis Mountbatten, said to have used the tone on destroyers",
+   "first_recorded": "1930s-1940s naval camouflage; the books give no exact year of origin",
+   "source": "St Clair, The Secret Lives of Colour, \"Mountbatten pink\""
+  },
+  "aka": [
+   "Mountbatten's pink",
+   "the Pink Lady paint (HMS Kenya)"
+  ],
+  "siblings": [
+   "puce",
+   "antique-pink",
+   "eupatorium-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "antique-pink",
+    "gloss": "another greyed pink; not a naval color"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+  "n_present": 24,
+  "measured": {
+   "lch": [
+    54.7,
+    16.4,
+    339.6
+   ],
+   "iscc": "pale reddish purple, dE 5.6"
+  },
+  "ngram": {
+   "first": 1940,
+   "peak": 2010
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Mountbatten pink\", notes (Zuckerman, Royal Society memoir of Mountbatten, 1981)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Mountbatten pink\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why was a dull pink thought to work as ship camouflage?",
+   "choices": [
+    "It seemed to vanish at dawn and dusk",
+    "It matched the color of the sea at noon",
+    "It reflected radar",
+    "It was cheaper than grey"
+   ],
+   "answer": "It seemed to vanish at dawn and dusk",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books prove Mountbatten pink protected HMS Kenya.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mountbatten pink was a grey with a dash of Venetian red, painted on destroyers to disappear at dusk.",
+  "The Pink Lady, HMS Kenya, survived heavy fire in 1941, though one ship is an anecdote and not a test."
+ ],
+ "words": 495,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede/story said Mountbatten mixed the color; book says he noticed it on a Union-Castle liner and had his flotilla painted gray with Venetian red. Fixed."
+  ]
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "name": "Sunburn",
+ "hex": "#9E6D4A",
+ "names": [
+  "Sunburn"
+ ],
+ "tier": "traditional",
+ "lede": "Sunburn is an old English color word for the brown of sun-tanned skin, listed among the browns of the textile trade.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old color word",
+   "body": "Sunburn is a color term recorded as early as 1590 [1]. A 1932 Barker's catalogue still sold tennis shirts in self colours called sunburn, so the word was alive in the shops four centuries after it first appeared [1]. Paterson files it among the browns, beside [[tan]], [[tawny]] and [[russet]] [2].\n\nThe swatch here is a warm, medium brown with a reddish cast, lighter than [[brown]] and less orange than [[copper]]. The books give no pigment or dye behind the name; it is a skin-tone word, not a material word, and who first used it is undocumented."
+  },
+  {
+   "id": "sun",
+   "title": "The burn itself",
+   "body": "The color word borrows from a physical event, and the books treat the event, not the shade. Birren notes that Downs and Blunt of England showed in 1877 that ultraviolet radiation kills bacteria, which proved that sunburn was not caused by heat rays alone [3]. He places ultraviolet among waves of higher frequency than visible light [3]. Birren also reports that certain dyes and cosmetic substances make skin light-sensitive and aggravate the burn [4].\n\nBirren adds that red light was once prescribed to treat sunburn, among other complaints [5]. That is old opinion, marked contested in his own survey, and not modern evidence [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive this brown sits within six units of 1,960 of 23,781 paintings, at least five per cent of the canvas in each, about 8 per cent [6]. It is much more common before 1600 than after: 1100s to 1500s paintings show it at roughly twice the overall rate, and the 1270s peak at 29 per cent of paintings from those years [6].\n\nThe leading painters are Maarten van Heemskerck and Jean-Baptiste Greuze, each with 5 of 12 paintings [6]. These are photographs of aged, varnished paintings, so a match is a color on a screen, not a pigment test [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of sun-tanned skin",
+   "first_recorded": "1590 (as a color term)",
+   "source": "Paterson, A Dictionary of Colour, \"sunburn\""
+  },
+  "aka": [],
+  "siblings": [
+   "tan",
+   "tawny",
+   "russet"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5 per cent of the canvas)",
+  "n_present": 1960,
+  "rate": 0.0824,
+  "peak_decade": {
+   "decade": 1270,
+   "rate": 0.292
+  },
+  "top_painters": [
+   "Maarten van Heemskerck",
+   "Jean-Baptiste Greuze"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sunburn\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, brown colour index",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 29",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5 per cent of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "When is the color word sunburn first recorded?",
+   "choices": [
+    "1590",
+    "1790",
+    "1877",
+    "1932"
+   ],
+   "answer": "1590",
+   "kind": "pick"
+  },
+  {
+   "q": "What did Downs and Blunt show in 1877?",
+   "choices": [
+    "Ultraviolet radiation kills bacteria, so sunburn is not caused by heat alone",
+    "Red light cures sunburn",
+    "Sunburn is caused by infrared",
+    "Tanning dyes were harmless"
+   ],
+   "answer": "Ultraviolet radiation kills bacteria, so sunburn is not caused by heat alone",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sunburn was a shop color word from 1590 to at least 1932.",
+  "The 1270s paintings in our archive are the most sunburn-brown of any decade."
+ ],
+ "slug": "sunburn",
+ "words": 314,
+ "status": "checked",
+ "depth": "medium",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Birren does not say UV 'does the damage'; reworded to what he says."
+  ]
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "slug": "oxblood",
+ "name": "Oxblood",
+ "hex": "#4A0000",
+ "names": [
+  "Oxblood"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Oxblood is a very dark, slightly brownish red, named for the color of ox blood.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark red named for blood",
+   "body": "Paterson's dictionary defines oxblood plainly as a dark red [1]. St Clair's list of color terms is more particular, calling it a dark rust-red [2]. Both are broad descriptions, and neither gives a date or a dyestuff, so the name is best treated as a plain comparison to the animal's blood rather than a pigment with a recorded history.\n\nThe swatch here is a much deeper, nearly black red than most people picture, which is common for names of this kind: the word covers a range, and the swatch is one pick from it [3]."
+  },
+  {
+   "id": "sang-de-boeuf",
+   "title": "The porcelain glaze",
+   "body": "The French name *sang-de-boeuf* is literally \"oxblood\", and Paterson's dictionary uses it for a deep red glaze on old Chinese porcelain [4]. Separately, our name records show the English word oxblood first recorded in 1705, as Maerz and Paul's dictionary dates it; that source does not say the word was first used for the glaze [3]. The glaze is a ceramic effect, so its color depends on the clay, the firing and the light, and no single swatch can stand for it."
+  },
+  {
+   "id": "art",
+   "title": "Red as drama",
+   "body": "According to St Clair, painters have long used reds from oxblood up to persimmon for drama and eroticism [2]. In our archive, a dark red close to this swatch turns up in 378 paintings, as photographed [3]. It is most often a shadow tone, which is what you would expect of a color this dark: in 43% of the 123 paintings where it covers enough canvas, it sits among the darkest values [3]. It peaks in the 1400s, at 2.5 times the museums' baseline rate [3]. Dark reds of this kind appear on canvas centuries before the word is recorded, so the match is a look-alike in aged photographs, not proof of a particular pigment [3].\n\nWords like [[maroon]], [[burgundy]] and [[mahogany]] cover similar ground, as does [[wine-red]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive the color appears in 378 paintings, more common than 62% of the named colors [3]. It keeps company with very dark browns and blacks, which fits its role as a shadow [3]. These are photographs of varnished paintings, so the colors are as photographed."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of ox blood",
+   "first_recorded": "English color word; first recorded 1705 in our name records",
+   "source": "Paterson, A Dictionary of Colour; ColorHub name library"
+  },
+  "aka": [
+   "sang-de-boeuf (the glaze)"
+  ],
+  "siblings": [
+   "maroon",
+   "burgundy"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "sang-de-boeuf (the glaze)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 378,
+  "peak_century": {
+   "century": 1400,
+   "lift": 2.5
+  },
+  "role": {
+   "shadow_pct": 43,
+   "of": 123
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"oxblood\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Red\" and the glossary",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive and name records (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sang-de-boeuf\"",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the French name sang-de-boeuf mean?",
+   "choices": [
+    "Oxblood",
+    "Dragon's blood",
+    "Red wine",
+    "Bull's heart"
+   ],
+   "answer": "Oxblood",
+   "kind": "pick"
+  },
+  {
+   "q": "In which kind of old object does Paterson place the oxblood-red glaze?",
+   "choices": [
+    "Chinese porcelain",
+    "Venetian glass",
+    "Roman mosaics",
+    "Gothic windows"
+   ],
+   "answer": "Chinese porcelain",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Oxblood is also a pottery color: the French name for it, sang-de-boeuf, is the old porcelain glaze."
+ ],
+ "words": 359,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "1705 is the first record of the word oxblood, not a glaze date; rewrote the claim and the aside"
+  ]
+ }
+}

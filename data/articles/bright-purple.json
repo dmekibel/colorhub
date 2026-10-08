@@ -1,0 +1,155 @@
+{
+ "slug": "bright-purple",
+ "name": "Bright Purple",
+ "hex": "#BE03FD",
+ "names": [
+  "Bright Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Bright purple is a plain descriptive name for a vivid, saturated purple; it is a color of the synthetic age, because Ball reports that painters still had no pure, bright purple in the eighteenth century.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A descriptive name",
+   "body": "Bright Purple is not a historical color name with a traditional story [1]. It is a modifier plus a basic color word, so the books use the phrase in its ordinary sense and never define it as a named shade [1][2]. The swatch here is a very saturated blue-leaning purple, close to [[violet]] and [[indigo]] in hue and far more intense than the dusty [[mauve]]. It is a screen color, and no pigment or dye is claimed to match it [3]."
+  },
+  {
+   "id": "before-dyes",
+   "title": "Before synthetic dyes",
+   "body": "Ball notes that, as of the eighteenth century, there were still no pure and bright purples on the painter's palette, and greens were a particular problem too [1]. Ball counts greens among the other persistent problems of the palette [1].\n\nThe change came with coal-tar chemistry. Perkin's 1856 experiment gave, in St Clair's telling, a bright purple liquid that dyed silk and held its color in light [4]. Ball sums up the new industry as one that turned out bright purples, lustrous reds, shocking pinks and brilliant yellows [5]. Greenfield adds a social reaction: in 1860s London the critic Hippolyte Taine, seeing women in bright purple gloves, took the loud colors as a sign of a parvenue or worse, though the women were respectable [6]."
+  },
+  {
+   "id": "mixing",
+   "title": "Two older appearances",
+   "body": "Newton is reported by Ball to have blended dry pigments, among them orpiment, a bright purple, a light green and a blue, and seen an impression of brilliant whiteness from a few paces away [7]. Gage describes a painting in which bright purples and greens in the draperies were mixed with black, in the near absence of blue [8]. In both cases the words are the authors' description of a color, not the name of a pigment [7][8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive tools could not compute a reliable match count for this swatch, so no painting statistics are quoted here [3]. It sits at the loud end of the purple family, which is why it reads on screens as an electric purple rather than a natural one [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (a plain descriptive name)",
+   "first_recorded": "undocumented",
+   "source": "descriptive name"
+  },
+  "aka": [
+   "Vivid purple"
+  ],
+  "siblings": [
+   "purple",
+   "violet"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "swatch": "#BE03FD",
+  "kind": "descriptive name, no historical pigment",
+  "archive_count": "not computed",
+  "related": [
+   "purple",
+   "violet",
+   "mauve",
+   "magenta"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entry search (no defined \"bright purple\" entry)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library and graph, swatch #BE03FD",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. \"Mauve\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, chapter on color mixture",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why were pure bright purples scarce in painting before the 1850s?",
+   "choices": [
+    "Painters had to mix them from red and blue, which dulls them",
+    "Purple was forbidden to painters",
+    "Purple pigments were poisonous to use",
+    "The word purple did not exist"
+   ],
+   "answer": "Painters had to mix them from red and blue, which dulls them",
+   "kind": "pick"
+  },
+  {
+   "q": "Bright Purple is the name of a historic dye with a recorded origin story.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Painters had no pure bright purple until coal-tar dyes arrived in the 1850s."
+ ],
+ "words": 354,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lede overstated 'dyers' and 1850s; limited to Ball's eighteenth-century painters' palette",
+   "removed unsupported claim that purples were mixed and costly dyes"
+  ]
+ }
+}

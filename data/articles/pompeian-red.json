@@ -1,0 +1,168 @@
+{
+ "slug": "pompeian-red",
+ "name": "Pompeian Red",
+ "hex": "#AC524C",
+ "names": [
+  "Pompeian Red"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Pompeian red is a muted brick red named for the walls of Pompeii, and in the pigment trade it was a name for a natural iron-oxide red also sold as Venetian or Indian red.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name for the walls of Pompeii",
+   "body": "St Clair's glossary of color names lists Pompeian red as a dark brick red, taking its name from houses that archaeologists dug out at Pompeii [1]. Paterson's dictionary defines it as the red found in the frescoes of Pompeii and sends the reader to Venetian red [2].\n\nIn the pigment trade the name drifted onto a plain oxide red. Venetian red is an orange-red or reddish-brown natural iron oxide, sold under many regional names, including Venice, Indian, Spanish, Pompeian and Persian red [3][4]. Heaton in 1928 listed Pompeian red as a current name for a light Indian red, which he defined as a highly calcined iron oxide [5]. The books therefore disagree on how dark it is: a dark brick red in one, a light red in another [1][5]."
+  },
+  {
+   "id": "empire",
+   "title": "With dark greens, in the Empire",
+   "body": "In France in the First Empire, greens were still dark and were set beside Pompeian reds or crimsons and bright gold [6]. Pastoureau adds that it is a myth that Napoleon started this \"Empire green\" fashion [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our swatch is a library color with three early sources: the ISCC-NBS system of 1955, Ridgway's *Color Standards* of 1912 and Maerz and Paul of 1930 [7]. It is a moderate red, 3.9 units from the ISCC-NBS center [7]. Its closest relatives in the earth reds are [[venetian-red]], [[indian-red]], [[brick-red]] and [[terracotta]] [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, Pompeian red appears in 248, 1.04 per cent, and is more common than 70 per cent of the named colors [8]. It peaks in the 1400s, in 2.3 per cent of 945 paintings, about 2.2 times what the same museums would predict [8]. It most often plays an accent (81 per cent of 196 works measured) [8]. These are photographs of aged, varnished paintings, so a match is not a pigment test [8]. The term itself appears in Google Books from about 1860 and peaks around 1920 [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Pompeii, from the red walls found there",
+   "first_recorded": "in colormen's lists by 1928 (Heaton); undocumented earlier in the books",
+   "source": "Paterson, A Dictionary of Colour; Pigment Compendium"
+  },
+  "aka": [
+   "Venetian red (trade equivalent)",
+   "Indian red (variant)"
+  ],
+  "siblings": [
+   "venetian-red",
+   "indian-red",
+   "brick-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+  "n_present": 248,
+  "measured": {
+   "lch": [
+    46.1,
+    41.9,
+    30.0
+   ],
+   "iscc": "moderate red, dE 3.9"
+  },
+  "ngram": {
+   "first": 1860,
+   "peak": 1920
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary of color names",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 318",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 410",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 159",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Pompeian red\", p. 318 (citing Heaton, 1928)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green, chapter on the nineteenth century",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the pigment trade, Pompeian red was a name for what?",
+   "choices": [
+    "A natural iron-oxide red",
+    "A mercury sulfide",
+    "A lake from madder",
+    "A plant dye"
+   ],
+   "answer": "A natural iron-oxide red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Napoleon invented Empire green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In the paint trade, Pompeian red could mean the same oxide red as Venetian red or Indian red."
+ ],
+ "words": 340,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded a 10-word run shared with Paterson. All claims traced to Paterson, St Clair, Pigment Compendium, Pastoureau."
+  ]
+ }
+}

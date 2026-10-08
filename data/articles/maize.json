@@ -1,0 +1,162 @@
+{
+ "slug": "maize",
+ "name": "Maize",
+ "hex": "#FBEC5D",
+ "names": [
+  "Maize"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Maize is a bright, warm yellow named for the ripe kernels of the American grain that English calls corn.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grain's name",
+   "body": "*Maize* is the plant's name in the English-speaking world outside North America, where the same crop is called corn [1]. As a color word the Paterson dictionary gives two senses: sometimes a bright yellow, and also a pale yellow used for dress fabric, with sun yellow as another name for it [1]. A neighboring entry, *maise*, is described as an orangey yellow [1].\n\nOur library lists Maize in the ISCC-NBS system of 1955 and in the web color lists [2]. Another name, Corn, sits at a color difference of 0.0 from our swatch, so it is the same color under the American name [2]. Close cousins are [[maize-yellow]], [[canary]] and [[lemon-yellow]] [2]."
+  },
+  {
+   "id": "crop",
+   "title": "The crop behind the word",
+   "body": "Archaeologists have found evidence in Oaxaca of maize and squash domestication that dates back thousands of years, to between 4000 and 8000 BC [3]. In the highlands of Oaxaca, farmers grew maize, beans and squash, and some also tended cochineal insects for dye [3]. They sold the dye in the markets, exchanging it for fish, maize, chile peppers and salt [3].\n\nAmong the Aztecs the crop was a goddess [4]. Before the yearly festival, Birren reports, a young woman who played the goddess of young maize had the upper part of her face painted red and the lower part yellow, and her arms and legs were covered with red feathers [4]. Yellow and red together were part of a ritual palette long before maize was a name on a swatch [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The name and the swatch",
+   "body": "The color is far younger than the grain. The earliest record of the name in our sources is the ISCC-NBS list of 1955 [2]. Wikipedia credits an earlier appearance in Maerz and Paul's dictionary of 1930, but we have not confirmed this in the book itself [2].\n\nThe screen value is a convention, so a ripe ear of maize in real light will usually be less saturated and a little duller than this swatch [2]. If you want to practice seeing it, look at the cut end of a corn kernel or a field of ripe grain: the highlights are pale yellow and the shadows slide toward ochre."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this yellow covers a meaningful part of the canvas in 10 paintings, 0.04 per cent, as photographed [5]. It is rarer than 67 per cent of the named colors [5]. Where it appears, it most often plays an accent in the painting, the case in 82 per cent of 11 paintings, judged by lightness within each painting [5]. The earliest match is from 1506, a painting by Giovanni di Niccolò Mansueti, which is 449 years before the name's first record in our sources; it is a look-alike hue in an aged photograph, not evidence of a pigment [5]. In printed English, the word as an adjective peaks in the 1920s [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the maize plant, whose ripe kernels are yellow",
+   "first_recorded": "ISCC-NBS 1955 in our sources; Wikipedia cites Maerz and Paul 1930 (unconfirmed)",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "Corn (American name)",
+   "Sun yellow (Paterson)"
+  ],
+  "siblings": [
+   "maize-yellow",
+   "canary"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "canary",
+    "gloss": "a slightly greener, brighter yellow"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 10,
+  "within_painting": 11,
+  "pct": 0.04,
+  "rank_pct": 67,
+  "role_most_common": "accent (82%)",
+  "first_seen": {
+   "id": "commons-Q21715557",
+   "painter": "Giovanni di Niccolò Mansueti",
+   "year": 1506
+  },
+  "ngram": {
+   "peak": "1920s",
+   "sense": "adjective"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"maize\", \"maise\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Maize (ISCC-NBS 1955, Wikipedia, xkcd); Corn near-duplicate, dE 0.0",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 8 and footnote on maize domestication",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Maize: 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub Ngram field notes, term \"maize\" (Google Books, adjective use)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the American English word corn mean in British usage?",
+   "choices": [
+    "Grain in general; maize is the specific crop",
+    "A kind of flower",
+    "A paint pigment"
+   ],
+   "answer": "Grain in general; maize is the specific crop",
+   "kind": "pick"
+  },
+  {
+   "q": "Highland Mexican farmers who raised cochineal sold the dye for which of these?",
+   "choices": [
+    "Maize, fish, chile peppers and salt",
+    "Gold and silver only",
+    "Silk and tea"
+   ],
+   "answer": "Maize, fish, chile peppers and salt",
+   "kind": "pick"
+  },
+  {
+   "q": "The Maize swatch has been in use since antiquity.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Highland farmers once swapped cochineal dye for maize, fish, chile peppers and salt.",
+  "Where to look: ripe grain in a field, where the highlights are pale yellow."
+ ],
+ "status": "checked",
+ "words": 472,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed claim linking the goddess's yellow to ripe grain; Birren only gives red and yellow face paint."
+  ]
+ }
+}

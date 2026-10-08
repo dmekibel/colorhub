@@ -1,0 +1,101 @@
+{
+ "slug": "racing-green",
+ "name": "Racing Green",
+ "hex": "#014600",
+ "names": [
+  "Racing Green"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Racing green is a very dark green tied in popular memory to British racing cars.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A car color",
+   "body": "Paterson's dictionary defines racing green as the dark green of the British racing car of the 1920s [1]. St Clair gives a similar gloss, a dark evergreen associated with early British car racing [2]. Paterson also files it in its list of greens [1].\n\nThat is about all the books say, and it is enough to place the name: it is a twentieth-century, motor-sport name rather than a pigment or dye name [1][2]. Neither book explains why green became the national racing color, so this page does not either [1][2]. Like many names in this dictionary, it records a use more than a recipe, so it has no single pigment behind it [1]. What the books agree on is the era and the country, the 1920s and Britain [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #014600 is almost a pure, very dark green with little else in it [3]. It sits close to [[dark-green]], [[hunter-green]] and [[forest-green]] [3]. Screen colors are approximate, and real car paint varied with the maker and the year [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "British racing cars of the 1920s",
+   "first_recorded": "1920s usage per Paterson",
+   "source": "Paterson, p. 330; St Clair"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-green",
+   "hunter-green",
+   "forest-green",
+   "bottle-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "concordance of 29 color books",
+  "book_mentions": 4,
+  "swatch": "#014600 (screen approximation)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"racing green\", pp. 330, 499",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Racing green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is racing green associated with?",
+   "choices": [
+    "British racing cars",
+    "Irish linen",
+    "Alpine meadows"
+   ],
+   "answer": "British racing cars",
+   "kind": "pick"
+  },
+  {
+   "q": "Which decade does Paterson name?",
+   "choices": [
+    "1920s",
+    "1880s",
+    "1960s"
+   ],
+   "answer": "1920s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Racing green is the dark green of 1920s British racing cars."
+ ],
+ "words": 178,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

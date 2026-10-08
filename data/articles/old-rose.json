@@ -1,0 +1,106 @@
+{
+ "slug": "old-rose",
+ "name": "Old Rose",
+ "hex": "#C08081",
+ "names": [
+  "Old Rose"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Old rose is a muted, dusty pink, the color of a faded rose rather than a fresh one.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A faded pink",
+   "body": "Paterson defines old rose simply as a deep pink [1]. St Clair, in her list of color names, is more particular: a dusty pink with blue undertones [2]. The two definitions agree on pink and disagree on depth, which is typical for a name built on the idea of age rather than a measured shade.\n\nThe word *old* works as a modifier in several color names. Paterson notes that *old* is used with names such as gold to give the look of age, and lists old coral, old gold and old rose together [1]. Old gold, for example, is first recorded as a color term in 1879 [1]. The same dictionary lists old rose with the pinks next to peach bloom, nude and [[pink]]-family names such as damask and magnolia [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of museum paintings, a color within range of this swatch appears in 23 works, 0.1 per cent of the archive [3]. The earliest is a 1398 work in the Cleveland Museum of Art, and the latest a 1922 painting in Copenhagen [3]. No single painter dominates it [3]. These are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the look of an aged or faded rose",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson; St Clair"
+  },
+  "aka": [
+   "dusty rose"
+  ],
+  "siblings": [
+   "pink",
+   "old-gold",
+   "mauve",
+   "rose"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, paintings as photographed",
+  "n_present": 23,
+  "pct_of_archive": 0.1,
+  "first_dated": 1398
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"old rose\", \"old\", \"old gold\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Old rose\" (list of color names)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), paintings as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does St Clair describe old rose?",
+   "choices": [
+    "Dusty pink with blue undertones",
+    "Bright orange-pink",
+    "Pale yellow-pink",
+    "Brownish red"
+   ],
+   "answer": "Dusty pink with blue undertones",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: old gold is first recorded as a color term in 1879.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The 'old' in old rose borrows the look of age, like old gold, first recorded in 1879."
+ ],
+ "words": 205,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against Paterson (deep pink; old gold 1879) and St Clair (dusty pink, blue undertones); no changes."
+  ]
+ }
+}

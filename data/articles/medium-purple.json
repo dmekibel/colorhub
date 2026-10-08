@@ -1,0 +1,106 @@
+{
+ "slug": "medium-purple",
+ "name": "Medium Purple",
+ "hex": "#9370DB",
+ "names": [
+  "Medium Purple"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Medium Purple is a soft, blue-leaning purple from the named colors of the web.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color",
+   "body": "Paterson lists MediumPurple as one of the colours in the X11 Color Set, with the hex code #9370DB [1]. In his index he files it among the pinkish purples, not the violets [2]. That placement differs from our own records, which put it closer to amethyst than to pink [3].\n\nIt is one of the \"Medium\" names that fill the middle of the X11 list: MediumSeaGreen, MediumSlateBlue, MediumSpringGreen, MediumTurquoise and MediumVioletRed come right after it [1]. The xkcd color survey uses the same words for a very different color, #9E43A2 [3]. Two lists, one name, two colors: a good reason to quote the hex code when it matters [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Its chroma is 62 and its lightness 55, so it reads as a clear mid-tone purple [3]. The nearest standard name is [[amethyst]], 4.3 ΔE away [3]. Related names: [[purple]], [[medium-orchid]], [[medium-slate-blue]] and [[violet]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name, X11 color set",
+   "first_recorded": "CSS / X11 (Paterson)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "MediumPurple"
+  ],
+  "siblings": [
+   "medium-orchid",
+   "medium-slate-blue"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub name records",
+  "hex_css": "#9370DB",
+  "lch": [
+   55,
+   62,
+   306
+  ],
+  "nearest": "Amethyst"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"MediumPurple\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, purples index, p. 504",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub name records (library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, CSS, Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What hex code does Paterson give for MediumPurple?",
+   "choices": [
+    "#9370DB",
+    "#BA55D3",
+    "#66CDAA",
+    "#7B68EE"
+   ],
+   "answer": "#9370DB",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: xkcd's \"medium purple\" is the same color as the web color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson files MediumPurple among the pinkish purples, with hex code #9370DB."
+ ],
+ "words": 153,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

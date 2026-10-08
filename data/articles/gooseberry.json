@@ -1,0 +1,117 @@
+{
+ "slug": "gooseberry",
+ "name": "Gooseberry",
+ "hex": "#5A2F45",
+ "names": [
+  "Gooseberry"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Gooseberry is a dark reddish purple from Maerz and Paul's 1930 dictionary; the name is stranger than the fruit, since the common gooseberry colour name is a green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Not the green one",
+   "body": "Paterson records gooseberry green as the yellowish green of the fruit, a colour name of the 1920s, also shortened to gooseberry [1]. The swatch here is far from that: it is a dark reddish purple, from Maerz and Paul's plate 55 [2]. The sources do not say which fruit Maerz and Paul had in mind, or whether they meant the fruit at all [2]. The ISCC-NBS system, in its 1955 terms, calls this swatch a dark reddish purple, a little under 4 units from its block center [2]. Compare [[plum]], [[mulberry]], [[aubergine]] and [[burgundy]].\n\nOne cochineal story belongs here. Greenfield reports that early-nineteenth-century English bakers used the dye to make apples and gooseberries blush as red as cherries and plums [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 24 of 23,781 archive paintings hold this color, rarer than 66 percent of named colors, and it most often plays a shadow in 50 percent of the 12 found by our inside-painting lens [4]. The earliest match is 1500, by Francisco de Osona, 430 years before the name's first record in our sources, 1930 [4]. As photographed, a dark purple match in a painting can be aged shadow glaze, not a pigment."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gooseberry fruit (variety undocumented)",
+   "first_recorded": "Maerz and Paul, 1930",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "plum",
+   "mulberry"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "olive-green",
+    "gloss": "Paterson's gooseberry green is a yellowish green, unlike this purple"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 24,
+  "role": "shadow (50% of 12)",
+  "record": {
+   "first": 1930,
+   "first_src": "maerz-paul"
+  },
+  "measured": {
+   "iscc": "dark reddish purple"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"gooseberry green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz and Paul 1930, plate 55 G9",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; fieldnotes/g.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Paterson, gooseberry green is:",
+   "choices": [
+    "The yellowish green of the fruit",
+    "A dark purple",
+    "A bright blue"
+   ],
+   "answer": "The yellowish green of the fruit",
+   "kind": "pick"
+  },
+  {
+   "q": "This article's swatch comes from Maerz and Paul, 1930.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Gooseberry the swatch is a dark reddish purple, not the fruit's green."
+ ],
+ "words": 216,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

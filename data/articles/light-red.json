@@ -1,0 +1,312 @@
+{
+ "slug": "light-red",
+ "name": "Light Red",
+ "hex": "#FF474C",
+ "names": [
+  "Light Red"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Light Red is a painter's name for the brownish red made by burning yellow ochre, and also a plain description of a bright red; the screen swatch here is the second, not the first.",
+ "sections": [
+  {
+   "id": "two",
+   "title": "Two light reds",
+   "body": "Today the name stands for two different things [1][11]. One is a bright, slightly warm red, the swatch on this page, which the xkcd color survey and a 1930 color atlas both list under that name [11]. The other is a painter's pigment, a dull orange-brown red made by burning an earth, which has been sold under the same two words since the eighteenth century [1].\n\nThe two have almost nothing in common on screen. The pigment is a russet; the swatch is a strawberry. Our library's nearest-name tests put the swatch within 1.4 units of Strawberry and 7.2 units of [[vermilion]], and the 1955 ISCC-NBS system calls its region a deep yellowish pink [11]. The history below is mostly the pigment's, because that is where the name has a documented life."
+  },
+  {
+   "id": "material",
+   "title": "Burnt ochre",
+   "body": "Light red is [[ochre]] that has been roasted. Yellow ochre owes its color to a hydrated iron oxide, and heating it drives off the water and leaves red iron oxide, the same compound that colors hematite and rust [2][15]. Finlay notes the same transformation behind the pairing of raw and burnt sienna [3].\n\nThe trick is very old. Pastoureau reports that many of the reds on Palaeolithic cave walls were made by heating yellow ochre in stone crucibles, and traces of the crucibles survive [4]. The Pigment Compendium cites a suggestion that this was the earliest pyrotechnology, though the claim rests on a single French site and is offered as a suggestion [1].\n\nRoman writers knew the process too. Pliny mentions burnt ochres, in particular a mixture of burnt ochre and red lead that he calls sandyx [1]. Medieval and Renaissance red terms are a notorious tangle, and the same Latin or Italian word could mean cinnabar, red lead or red ochre depending on the author [6]."
+  },
+  {
+   "id": "name",
+   "title": "How the name arose",
+   "body": "As a color name for a pigment, light red belongs to the eighteenth century. Harley's study of British documentary sources, summarized in the Pigment Compendium, finds it in current use then for a brownish red prepared by burning yellow ochre [1]. By 1803 the painter Ibbetson could say that light red was either calcined green vitriol, sold as Venetian red, or calcined yellow ochre, which he preferred [1].\n\nLater manuals fix the picture. Field in 1835 and Heaton in 1928 describe it as an ochre of orange-russet hue made by calcining Oxford ochre, and Salter in 1869 repeats the description and adds that volcanic Terra Puzzoli and the Italian carnagione belong to the same species [1]. Weber in 1923 gives the French and Italian equivalents as brun rouge and bruno rosso, and lists burnt ochre and burnt Roman ochre as synonyms [1].\n\nLight red kept company with several related names whose exact makeup the sources cannot settle. Brown red and [[english-red]] are used for the same or near-identical materials in British records, and Antwerp red appears to be a relative [1]. Finlay adds that eighteenth-century Dutch makers bought French yellow ochre, heated it and sold the result as English red [3]. Paterson, the dictionary of color, defines light red simply as a brownish red made by calcining yellow ochre [5]."
+  },
+  {
+   "id": "iron-reds",
+   "title": "The family of iron reds",
+   "body": "Light red sits inside a larger family of iron-oxide reds with a confusing vocabulary. Field listed Indian red, light red, Terra Puzzoli, carnagione, [[venetian-red]], scarlet ochre and Spanish red as names for red ochre, and Salter later added English red [1]. The Compendium notes that this whole series of names, including Pompeiian red and caput mortuum, is used loosely for related iron oxides [1].\n\nThe family changed in the early modern period when makers learned to manufacture the pigment instead of digging it. Mayerne gave an artist's recipe for a synthetic iron oxide, which he called crocus martis, in the early seventeenth century, and the trade boomed in the eighteenth once sulphuric acid became cheap [8]. The Compendium dates Venetian red to the eighteenth century and calls it the first synthetic iron oxide made by a method other than roasting [1]. Jarman describes Venetian red as a natural iron oxide, used as a warm ground in Venetian paintings [14].\n\nBall quotes advice attributed to Titian, to use Venetian red and make it look like vermilion [17]. It is a secondhand saying, but it shows the place of these earths: cheap, dependable, and the working red under the expensive one."
+  },
+  {
+   "id": "ancient",
+   "title": "Sinope and the four colors",
+   "body": "The best ancient red earth came from Sinope on the Black Sea, where it was stamped with a seal before sale, and the word sinopia and the medieval sinoper became general words for red ochre [3][5]. Paterson glosses sinoper as an ancient light red ochre [5], which is as near as the dictionary comes to treating light red as a classical term.\n\nPliny's list of the colors used by the great Greek painters gives white from Melos, yellow from Attica, red from Sinope and a black called atramentum [7]. That four-color palette has fed a long-lived myth that ancient painters used only four colors. Gage points out that Pliny uses the list to argue that painting was better when its means were austere [7]. The same writer says earlier painters gave up cinnabar and minium as too vivid, yet credits Apelles with a dark varnish that toned down florid colors, so his own account is inconsistent [7]. Renaissance scholars also could not agree what the Attic sil of the list was, yellow ochre, violet, purple or blue [7].\n\nHematite, the mineral form of the same red oxide, lost favor once brighter reds such as vermilion were available [15]."
+  },
+  {
+   "id": "pink",
+   "title": "Why light reds got a name",
+   "body": "English has a word for a pale red that it lacks for pale green or pale yellow. St Clair calls it an odd quirk that light reds acquired a name of their own while pale greens and yellows mostly did not [9].\n\nThe name is pink, and its story belongs to the pigment trade. Ball explains that in the seventeenth century pink was a kind of pigment, a dye fixed on chalk or another inert white, most often yellow but also green or brown [8]. Over time rose pink, made from brazilwood, became the commonest of them, and pink drifted from the method to the shade, until by the nineteenth century it was a synonym for a light red [8]. St Clair describes the same pigment family, including yellow, green, rose and brown pinks [9]. The color word [[pink]] and the pigment name light red therefore share a root in how paint was made, and [[rose-pink]] preserves the hinge between them."
+  },
+  {
+   "id": "in-use",
+   "title": "In the paint box and in the lab",
+   "body": "Gauguin, short of supplies in Tahiti, relied on burnt ochre for skin, according to Ball [17]. That is a typical use of the family: a warm, quiet red that belongs to flesh and earth, not to flags.\n\nThe modern industrial reds went another way. Cadmium reds, which replace some of the sulphur in cadmium sulphide with selenium, were introduced in 1910 by Coles's dating and quickly replaced the toxic pigment vermilion in many uses [10]. The Compendium notes that a cerium-sulfide pigment developed for industry since 1997 can be tuned from deep red to a light red or orange by adding an alkali metal [16]. Neither of those is the old light red, but both are a reminder that the words describe a position on a chart as much as a material.\n\nLight red is also a lesson in perception. Albers shows that a student's laying of light red bricks in white mortar looks far lighter than the same bricks in black mortar, a case of the Bezold effect [13]. A light red is never one color; it depends on what it sits beside."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and the records",
+   "body": "Our library carries the name from three sources: the 1955 ISCC-NBS system, Maerz and Paul's 1930 Dictionary of Color, and the xkcd survey of 2010 [11]. Maerz and Paul put the first recorded use of the term at 1675 and place its sample on plate 5, row H, column 5, according to the library note [11]. The swatch here, #FF474C, is the xkcd value, and a second xkcd value in the library is a deeper #FB2943 [11].\n\nNone of those values is the pigment. The burnt ochre of the manuals would sit far lower in lightness and chroma than a screen red this saturated, which is why the page opens with the warning about two light reds [1][11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, only 3 contain this exact red over at least 5 per cent of the canvas, within 6 units of color distance [12]. The strongest is a portrait of Prince Sur Singh Rathor of Bikaner, dated 1611, where the red covers about 40 per cent of the picture [[painting:cma-314494|a Rajput portrait of Prince Sur Singh Rathor]] [12]. The next is a 1899 picture by Eleanor Fortescue-Brickdale, at 18 per cent, and the third is a 1601 portrait of Benito Arias Montano at 6 per cent [12]. Rajput painting is the over-represented movement, at 1 of 97 canvases [12].\n\nA looser lens, which finds a color anywhere inside a painting, finds it in 5 pictures, 0.02 per cent of the archive, so rarer than 75 per cent of the named colors [12]. The three dated examples run from 1529, with a [[painter:bronzino|Bronzino]] as the earliest, to 1858 [12]. The sample is tiny, and these are photographs of aged, varnished paintings, so a color match is not a pigment test.\n\nThe printed phrase is far more common than the paint. Google Books counts for light red, which include every sense of the words, peak around 1890 and 1900 [12]. The rarity in pictures and the commonness in books fit the story told here: light red is mostly a working term for a cheap earth and a descriptive phrase for any pale red."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive pair of words; as a pigment, the red made by calcining yellow ochre",
+   "first_recorded": "18th century as a pigment name (Harley, per the Pigment Compendium); Maerz and Paul 1930 give 1675 for the color term",
+   "source": "Pigment Compendium, 'Light red'; Maerz and Paul 1930 via our library"
+  },
+  "aka": [
+   "burnt ochre (the pigment)",
+   "brown red",
+   "English red (a related name)"
+  ],
+  "siblings": [
+   "venetian-red",
+   "english-red",
+   "indian-red",
+   "sinopia"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "venetian-red",
+    "gloss": "a related iron-oxide red, once made from calcined green vitriol"
+   },
+   {
+    "slug": "rose-pink",
+    "gloss": "the pigment that gave pink its modern meaning of a light red"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "brun rouge (Weber's equivalent)"
+   },
+   {
+    "lang": "it",
+    "name": "bruno rosso (Weber's equivalent)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FF474C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "cma-314494",
+   "commons-Q19968967",
+   "commons-Q59825442"
+  ],
+  "first_dated": {
+   "id": "commons-Q59825442",
+   "year": 1601
+  },
+  "role": {
+   "shadow": 0.33,
+   "highlight": 0.67
+  },
+  "ngram": {
+   "term": "light red",
+   "peak": 1890
+  },
+  "measured": {
+   "lch": [
+    58.3,
+    79.2,
+    29.7
+   ],
+   "nearest": [
+    [
+     "Strawberry",
+     1.4
+    ],
+    [
+     "Vermilion",
+     7.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), entries 'Light red', 'Brown red', 'English red', 'Venetian red', 'Burnt ochre'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries 'Ochre' and 'Iron(III) oxide, hematite type'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 10 (\"Ochre\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries 'light red', 'sinoper', 'terra rosa'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 4",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 33-34, 39",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 6",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 54",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 151",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz and Paul 1930, xkcd 2010; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive and graph (data/graph/fieldnotes/l.json; tools/article_field.py): 23,781 paintings, as photographed, 5 per cent canvas, ΔE 6; Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 124",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 23",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Hematite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry on cerium sulfide pigments",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 5 (plates) and ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How was the pigment called Light Red traditionally made?",
+   "choices": [
+    "By roasting yellow ochre",
+    "By grinding a red flower",
+    "By mixing vermilion with white",
+    "By dyeing chalk with cochineal"
+   ],
+   "answer": "By roasting yellow ochre",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does English have the word pink for a light red but no matching one-word names for pale green or pale yellow?",
+   "choices": [
+    "Pink began as a pigment type, a dye on chalk, and rose pink drifted into meaning a light red",
+    "Pink was borrowed from Latin for blood",
+    "A royal decree fixed the word",
+    "Pale greens and yellows were banned in painting"
+   ],
+   "answer": "Pink began as a pigment type, a dye on chalk, and rose pink drifted into meaning a light red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pliny's four-color palette proves that ancient painters used only four colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light red was the cheapest red in the paint box: yellow ochre, roasted until it turned the color of a flowerpot.",
+  "The word pink began as a kind of pigment, and drifted into meaning a light red.",
+  "Look for burnt-ochre reds in flesh and earth in old paintings, in the quiet red under the bright one."
+ ],
+ "words": 1608,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch 46 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Palaeolithic crucible claim is Pastoureau's; the earliest-pyrotechnology idea is hedged as a Compendium suggestion.",
+   "Titian quotation is secondhand (Ball), hedged.",
+   "Cadmium red date (1910) is Coles only; other books give earlier cadmium dates, so it is attributed to Coles.",
+   "Archive numbers are colors in aged photographs, not pigment identifications."
+  ]
+ }
+}

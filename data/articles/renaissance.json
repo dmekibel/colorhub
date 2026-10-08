@@ -1,0 +1,225 @@
+{
+ "slug": "renaissance",
+ "name": "Renaissance",
+ "hex": "#912D4C",
+ "names": [
+  "Renaissance"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Renaissance is a deep raspberry crimson, a shade name from an early twentieth-century color dictionary; it is not the name of any documented dye or painter's pigment of the period it recalls.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary shade",
+   "body": "The name comes from Maerz and Paul's *A Dictionary of Color* (1930), which places Renaissance on plate 52, square L 9, and dates its first record to 1924 [1]. The dictionary files it under fashion and textiles [1]. Who coined it, and what it was first used on, is undocumented in the sources we checked [1][2].\n\nThe swatch is dark and strongly colored, lightness 35 and chroma 45, and its nearest named neighbor in our library is [[raspberry]], six units away [1]. By eye it sits in the family of [[crimson]] and [[burgundy]] [1]."
+  },
+  {
+   "id": "wear",
+   "title": "What Renaissance Europe wore",
+   "body": "Greenfield describes a world in which grey and beige were the colors of poverty, worn by the poorest people and by lowly priests, monks and nuns [3]. Red was the opposite: kermes dye cost nearly twice as much as green at one Florentine dyeshop, and at another it cost ten times as much to dye cloth [[scarlet]] as to dye it sky blue [3]. Scarlet caps and turbans were a fashion for upwardly mobile men, and Jan van Eyck painted a man in one [3].\n\nWhat exactly scarlet and crimson meant in this period is, by Greenfield's account, a matter of debate [3]. A rich household could be hung with crimson as well: Sir William Cecil, Queen Elizabeth's secretary of state, slept in a bed hung with crimson velvet [4]. A color like this swatch is in the neighborhood of that crimson, though no source ties the dictionary name to any of these dyes [1][3][4]."
+  },
+  {
+   "id": "painters",
+   "title": "What painters had to work with",
+   "body": "Ball makes the surprising point that the Renaissance painter's palette was scarcely broader than the medieval one, since mixing pigments was taboo until oil painting made it acceptable [5]. [[vermilion|Vermilion]], scarce and costly in medieval manuscripts, was ubiquitous in Renaissance painting [6]. Titian used orpiment and realgar, the only true orange of the period, which was available in Venice from around 1490 [5]. Alberti wrote his *Della Pittura* in 1435 and advised on placing light colors beside dark ones [5][7].\n\nThe period also thought about color differently. Leonardo ranked six colors, each tied to an element: white to light, yellow to earth, green to water, blue to air, red to fire and black to darkness [8][9]. Pastoureau notes that six basic colors, not three, were the rule in the Middle Ages and the Renaissance, and that blue was then often counted a warm color [10][11]. The long argument over *disegno* against *colore*, drawing against color, ran through the Renaissance and treated color as the lesser art [12]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, only 8 contain this color: within six units (ΔE 2000) of #912D4C and covering at least five per cent of the canvas [13]. None of the 3,619 works made before 1600 do, and the archive's 25 paintings tagged Renaissance include none [13]. The earliest match is Jusepe de Ribera's *Saint John the Baptist in the Desert*, about 1650, at 10 per cent of the canvas [[painter:jusepe-de-ribera|Ribera]] [13].\n\nSix of the eight come from India, which is about 3 per cent of the archive (721 works), and two of those are Mughal [13]. The largest field is in Paul Sérusier's *Les trois fileuses* of 1915, at 25 per cent [[painting:commons-Q17493804|Les trois fileuses]] [13]. So the color named for the Renaissance is, in our data, a color of the 1900s and of India [13].\n\nThese are photographs of aged, varnished paintings, so a match is a color match and not a pigment test [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a shade name in a 1930 color dictionary",
+   "first_recorded": "1924 (Maerz & Paul 1930, plate 52 L 9)",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "raspberry",
+   "crimson"
+  ],
+  "parent": "crimson",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#912D4C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 8,
+  "top_paintings": [
+   "cma-164457",
+   "commons-Q17493804",
+   "commons-Q27701715"
+  ],
+  "by_country": {
+   "India": {
+    "hits": 6,
+    "of": 721
+   }
+  },
+  "measured": {
+   "lch": [
+    35,
+    45,
+    6
+   ],
+   "contrast_white": 7.83,
+   "nearest": [
+    [
+     "Raspberry",
+     6.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Renaissance (Maerz & Paul 1930, first recorded 1924, plate 52 L 9; field: fashion and textiles; nearest Raspberry)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour (no entry for the shade name found)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, chs. 6 and 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 156 (\"elementary colours\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 2",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Black, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 17; Westland, Principles of Color, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, tools/article_field.py: #912D4C, 23,781 paintings, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Renaissance Europe, which colors were the colors of poverty?",
+   "choices": [
+    "Grey and beige",
+    "Scarlet and crimson",
+    "Blue and green",
+    "Black and white"
+   ],
+   "answer": "Grey and beige",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the shade name Renaissance is documented as the name of a period dye.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why did Renaissance painters have a palette scarcely broader than medieval ones?",
+   "choices": [
+    "Mixing pigments was taboo until oil painting made it acceptable",
+    "Their eyes saw fewer colors",
+    "They had no red pigments",
+    "The Church banned blue"
+   ],
+   "answer": "Mixing pigments was taboo until oil painting made it acceptable",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The color named Renaissance is not the name of any documented Renaissance dye.",
+  "In Renaissance Florence it cost ten times more to dye cloth scarlet than sky blue, at one dyeshop.",
+  "Our 25 paintings tagged Renaissance hold none of this color; it shows up in India and in 1915."
+ ],
+ "words": 583,
+ "status": "checked",
+ "checked": {
+  "by": "batch13 writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No source documents the coinage of the name Renaissance; stated as undocumented.",
+   "Birren/Paterson both give Leonardo's six colors; Paterson p.156 pdf-page.",
+   "Pastoureau Blue ch.9 says six basic colors; 'blue warm' is Black ch.9."
+  ]
+ }
+}

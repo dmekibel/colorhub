@@ -1,0 +1,109 @@
+{
+ "slug": "leghorn",
+ "name": "Leghorn",
+ "hex": "#E9CA99",
+ "names": [
+  "Leghorn"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Leghorn is the pale yellow of bleached straw, named for the Italian port that gave its name to a famous straw hat.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A hat and a port",
+   "body": "Paterson gives leghorn as the yellow of straw, from Leghorn, the old English name of the Italian city now called Livorno [1]. The city produced a particular kind of wheat, and its straw was made into Leghorn hats and bonnets [1]. The swatch is a soft, warm cream-yellow, the kind of tone straw takes once it is bleached [3]. Paterson files the name among the yellows rather than the browns [2].\n\nThe straw itself was green when harvested, and it was bleached before use, so the color is a made color, not the raw plant's [1]."
+  },
+  {
+   "id": "family",
+   "title": "Among the straws",
+   "body": "Paterson indexes leghorn with the yellows, beside [[straw]], [[maize]] and [[wheat]] [2]. The library ranks the same family close to this swatch [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No usable archive measurements exist for this name, so there is no painting data to quote [3]. The swatch is one screen reading of the name [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Leghorn (Livorno), Italy, and its straw hats",
+   "first_recorded": "listed in Paterson's dictionary (2003)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "straw yellow"
+  ],
+  "siblings": [
+   "straw",
+   "maize",
+   "wheat",
+   "buff"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name library; no archive field notes for this name",
+  "swatch": "#E9CA99",
+  "books": 2
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 239, \"leghorn\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 511 (index of yellows)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/names.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was leghorn named for?",
+   "choices": [
+    "An Italian port famous for straw hats",
+    "A breed of horse",
+    "A kind of pigment",
+    "A Scottish loch"
+   ],
+   "answer": "An Italian port famous for straw hats",
+   "kind": "pick"
+  },
+  {
+   "q": "The straw was bleached before being used for Leghorn hats.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Leghorn is named for the Italian port, now Livorno, that gave its name to straw hats."
+ ],
+ "words": 159,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No changes; claims match Paterson p.239 and index"
+  ]
+ }
+}

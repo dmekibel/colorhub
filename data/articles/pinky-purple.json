@@ -1,0 +1,120 @@
+{
+ "slug": "pinky-purple",
+ "name": "Pinky Purple",
+ "hex": "#C94CBE",
+ "names": [
+  "Pinky Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pinky Purple is a casual modifier name for a vivid magenta-leaning purple; the only book note is that the word heather now means exactly this.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier name",
+   "body": "The name is plain grammar, pinky plus purple [2]. It enters our sources with the xkcd survey of 2010, and Wikipedia lists it among Crayola names [2]. ISCC-NBS would call the swatch a strong reddish purple, though the match is loose [2]. Its parent is [[purple]], and it is a neighbor of [[rose-purple]] and [[magenta]] [2]. Wikipedia ties the name to a Crayola color, so it may be a crayon name before it was a survey answer, though our sources give no date for that [2]."
+  },
+  {
+   "id": "heather",
+   "title": "Heather, pinky purple",
+   "body": "St Clair's glossary of color words defines [[heather]] as a pre-twentieth-century synonym for mottled that now means pinky purple [1]. So the plant name has become a color word that books gloss with this exact phrase [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive has this color covering at least 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pinky + purple",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "heather",
+   "rose-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "heather",
+    "gloss": "a greyer, softer purple-pink, named for the plant"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    53.3,
+    72.5,
+    330.4
+   ],
+   "iscc": "strong reddish purple"
+  },
+  "first_record": {
+   "year": 2010,
+   "source": "xkcd"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary (\"Heather\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, Pinky Purple: xkcd 2010; Crayola list (Wikipedia)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Pinky Purple",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did heather mean before the twentieth century, per St Clair?",
+   "choices": [
+    "Mottled",
+    "Bright red",
+    "Dark green",
+    "Golden"
+   ],
+   "answer": "Mottled",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pinky Purple appears as a major color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Before the twentieth century, heather meant mottled, not purple."
+ ],
+ "words": 168,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

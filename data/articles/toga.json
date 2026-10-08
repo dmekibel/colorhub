@@ -1,0 +1,278 @@
+{
+ "slug": "toga",
+ "name": "Toga",
+ "hex": "#4D3563",
+ "names": [
+  "Toga"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Toga is a dark bluish purple named for the Roman garment, which citizens wore white, magistrates wore edged in purple, mourners wore dark, and only a few men wore purple from edge to edge.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a color dictionary",
+   "body": "*Toga* is a color name from the Maerz and Paul *Dictionary of Color* of 1930, where it sits on plate 45, block K 11, beside a second name, Prunella [13]. The dictionary dates Toga to 1924 and Prunella to 1922 [13]. Why a bluish purple was named for Roman dress is undocumented in the books and data we have [13].\n\nThe 1955 ISCC-NBS system calls the swatch plain \"dark purple\", block 224, 3.7 units from it [13]. In Munsell terms it is 2.8P 2.7/6.2 [13]. Its nearest named neighbors in our library are [[imperial-purple]], 7.5 units away, and [[dark-purple]], 11.1 away [13]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the cloth",
+   "body": "No Roman toga looked like this swatch [1][3]. Citizens wore white, magistrates added a purple border, and the purple of the elite was a different color from this bluish one [1][3]. Pliny's ideal Tyrian purple was the color of clotted blood, and the best was so deep it was tinged with black [8]. Ball quotes Pliny on the same black-tinged, crimson sheen [6].\n\nOur [[tyrian-purple]] swatch, a dark crimson, is 16 units from Toga, and [[royal-purple]] is 15 units away [13]. The name borrows the garment's prestige; it does not match the dye."
+  },
+  {
+   "id": "white",
+   "title": "The white toga",
+   "body": "Free men who were Roman citizens wore the toga, and it had to be as white as possible [1]. The wool was not dyed but bleached with potash or with plants rich in saponin, and because repeated washing damaged it, wearers dusted it with chalk before civic ceremonies to hide the wear [1]. The garment was large, heavy and circular in cut. A senator's, in thick natural wool, needed slaves to arrange the folds, and wearing it forced a slow, majestic gait [1].\n\nAt home a man could wear cloaks and shawls of other colors, but the toga could only be white [1]. Latin had two whites: *albus*, a neutral physical white, and *candidus*, a bright, favorable, symbolic one [2]. Candidates for office wore a white toga, the *toga candida*, and the English words candid and candidate descend from the same root [3].\n\nColored togas came late. Yellow, red and brown togas, and patterned ones, appear only in the third century, when they stopped being thought gaudy [1]. By then many men under the empire avoided the toga whenever they could [1]."
+  },
+  {
+   "id": "purple",
+   "title": "Purple at the edge",
+   "body": "Rank showed at the border. The *toga praetexta*, worn by magistrates, had a broad purple edge [3]. Senators, consuls and praetors wore broad purple bands on their togas and knights narrower ones [6]. Pastoureau gives the name *clavus* to the band on the white togas of patricians, long reserved for noble youths, and says its width and shade told rank, age and fortune [5].\n\nAt the top, a triumphant general could wear a purple-and-gold robe, and a general in the field plain purple [6]. The *trabea*, a purple toga or one with horizontal purple stripes, was a sacred or royal garment, and the togas of emperors were purple throughout [3]. By the fourth century only the emperor might wear the true purple, and under Valentinian II, Theodosius and Arcadius making Tyrian purple outside the imperial works was punishable by death [6]. Pastoureau reports Suetonius's story of a king's son who appeared in Rome in purple from head to toe under Caligula and was arrested and put to death [5].\n\nThe dye explains the severity. In second-century Rome, wool dyed in true Tyrian purple sold for fifteen or twenty times the price of undyed wool [5]. Each shellfish gives a single drop of the dye, and St Clair counts about 250,000 of them to the ounce [8]. Finlay says that every toga cost the lives of some ten thousand murex shells [7]."
+  },
+  {
+   "id": "caesar",
+   "title": "Caesar's toga",
+   "body": "Two books tell of a toga made for one man. Finlay says that on returning to Rome, Caesar introduced a full-length toga dyed entirely purple with sea-snail dye, and that only he could wear it [7]. St Clair places the new toga after Cleopatra bore Caesarion, in what she calls Cleopatra's favorite color, Tyrian purple [8]. In another book Finlay adds that Caesar's sumptuary laws limited purple togas, and certain gems, to himself [9]. How far these accounts rest on the ancient sources is something these books do not settle."
+  },
+  {
+   "id": "mourning",
+   "title": "Dark for the dead",
+   "body": "A Roman funeral called for the opposite of white [4]. From the second century BC, magistrates at funerals wore a dark *toga praetexta*, and Pastoureau calls this the beginning of mourning dress in Europe [4]. The Latin word for it, *pullus*, means dark, drab wool somewhere between grey and brown, and the funeral toga was probably nearer ash grey than true black [4]. Private mourners wore the black *toga pulla* [3].\n\nUnder the empire high society copied the magistrates, and relatives dressed in dark clothes for a time after the funeral [4]. The mourning ended with a banquet at which the guests wore white again [4]."
+  },
+  {
+   "id": "words",
+   "title": "Colors tied to things",
+   "body": "Romans, Pastoureau notes, tied color to the object [12]. A Roman could say he liked red togas and disliked blue flowers, but would find it hard to say he liked red [12]. That helps explain why a color name here begins with a garment.\n\nThe palette of dress widened in the empire. By the end of the first century, Roman matrons wore blue, violet and green, colors men had avoided [11]. Juvenal sneers at a reveler in a sky-blue toga, which he reads as a sign of effeminacy and hypocrisy [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Toga is rare in paint. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only five works, rarer than 82 per cent of the named colors [14]. The largest is [[painter:bronzino|Bronzino]]'s [[painting:commons-Q48814933|Portrait of a Girl]] of 1545, where it covers 40 per cent of the canvas [14]. The others are [[painter:gustav-klimt|Klimt]]'s *Irrlichter* of 1903, an Indian painting of about 1890, [[painter:alfred-sisley|Sisley]]'s *The Forge at Marly-le-Roi* of 1875 and Mary Susan Collins's *Primrose* of 1929 [14].\n\nInside a painting, the color mostly plays a shadow: 80 per cent of its appearances are among the darkest tones on the canvas [14]. As always, these are photographs of aged, varnished paintings, and a color match is not a pigment test [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Roman garment (Latin toga)",
+   "first_recorded": "Maerz & Paul, A Dictionary of Color, 1930 (name dated 1924)",
+   "source": "ColorHub library; Pastoureau, White, pp. 45-46"
+  },
+  "aka": [
+   "Prunella"
+  ],
+  "siblings": [
+   "tyrian-purple",
+   "royal-purple",
+   "imperial-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "tyrian-purple",
+    "gloss": "the dye the Romans prized: a dark crimson-purple, not a bluish one"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "toga (praetexta, candida, pulla, trabea)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#4D3563",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5,
+  "top_paintings": [
+   "commons-Q48814933",
+   "commons-Q140248069",
+   "cma-162491",
+   "commons-Q17491997",
+   "cma-147828"
+  ],
+  "role": {
+   "shadow": 0.8,
+   "mid": 0.2
+  },
+  "measured": {
+   "lch": [
+    26.8,
+    31.2,
+    311.9
+   ],
+   "contrast_white": 10.47,
+   "munsell": "2.8P 2.7/6.2",
+   "compared": [
+    [
+     "Imperial Purple",
+     7.5
+    ],
+    [
+     "Dark Purple",
+     11.1
+    ],
+    [
+     "Royal Purple",
+     15.1
+    ],
+    [
+     "Tyrian Purple",
+     16.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 45-46 (\"The Toga of the Senators\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, p. 48 (\"The Lessons of the Lexicon\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 88, 396 (\"candid-\", \"toga praetexta\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 19",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 13 (\"Roman Purple\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Tyrian purple\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, chs. 12, 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 15 (\"The Clodius Affair\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 14 (\"Red in Everyday Life\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 16 (\"The Favorite Color\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Maerz & Paul 1930, ISCC-NBS 1955), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color did the toga of an ordinary Roman citizen have to be?",
+   "choices": [
+    "As white as possible",
+    "Tyrian purple",
+    "Natural brown",
+    "Pale yellow"
+   ],
+   "answer": "As white as possible",
+   "kind": "pick"
+  },
+  {
+   "q": "The dark toga worn in mourning was probably closer to ash grey than to true black.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does this swatch not match the purple Romans prized?",
+   "choices": [
+    "Pliny's ideal purple was dark crimson, tinged with black, not bluish",
+    "Roman purple was a pale lilac",
+    "Roman purple was bright blue",
+    "The Romans never dyed anything purple"
+   ],
+   "answer": "Pliny's ideal purple was dark crimson, tinged with black, not bluish",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Roman citizens wore white togas; purple was a border, and an all-purple toga was for emperors.",
+  "In a painting of a Roman senate, look at the toga's edge: a broad purple band marked a senator."
+ ],
+ "words": 1028,
+ "status": "checked",
+ "checked": {
+  "by": "claude (batch 45)",
+  "date": "2026-10-08",
+  "issues": [
+   "Pastoureau (Red, ch. 13) calls Caligula's victim the son of King Juba II 'of Macedonia' (Juba II ruled Mauretania); the article says only 'a king's son'.",
+   "Caesar's purple toga rests on Finlay and St Clair only; neither cites ancient sources in the passages read. Hedged.",
+   "Maerz & Paul dates (1924 Toga, 1922 Prunella) come from ColorHub library, not independently checked.",
+   "Pastoureau's 'clavus' band described on patricians' togas; named only as his usage."
+  ]
+ }
+}

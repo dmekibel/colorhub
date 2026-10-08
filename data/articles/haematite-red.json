@@ -1,0 +1,120 @@
+{
+ "slug": "haematite-red",
+ "name": "Haematite Red",
+ "hex": "#70524C",
+ "names": [
+  "Haematite Red"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Haematite Red is a dark, greyed brownish red, the color of iron ore and of the oldest red earth pigment.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "The ore",
+   "body": "Haematite is the commonest iron ore, a dull red mineral that has been used as a pigment since prehistory [1][2]. Paterson lists *red haematite* as an ancient iron oxide pigment, and notes that Stone Age cave paintings used yellow goethite and red haematite, and that French researchers believe the cave painters fired these earths to shift their shades toward red, orange and violet [2]. The Pigment Compendium lists many synonyms in the red ochre family, among them ruddle, bole, sinopia and Indian red [1].\n\nThe color name is a pale echo of that long history. It enters the color atlases as a dark reddish brown: Ridgway's 1912 atlas, the 1955 ISCC-NBS system and the 1930 Maerz and Paul dictionary all carry it [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is common in paintings: 415 of 23,781 contain it, about 1.8 per cent [4]. It most often plays a hidden color, and it peaks in the 1900s, at twice the expected rate [4]. [[painter:john-singer-sargent|Sargent]] uses it most often, in 6 of his 287 works here, though no painter stands out against the museums' baseline [4]. It tends to share canvases with [[poppy-purple]] [4]. A color match is not a pigment test, and these are photographs of aged, varnished paintings [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "haematite, the iron ore",
+   "first_recorded": "1912, Ridgway",
+   "source": "data/library.json"
+  },
+  "aka": [
+   "red haematite"
+  ],
+  "siblings": [
+   "poppy-purple",
+   "brownish",
+   "red-ochre"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [],
+  "source": null
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/h.json",
+  "n_present": 415,
+  "pct": 1.75,
+  "peak": "1900s, 2.2x expected",
+  "painters": [
+   [
+    "John Singer Sargent",
+    6,
+    287
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 334, \"Red ochre\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"red haematite\" and \"pigment\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Ridgway 1912 plate XXVII; ISCC-NBS block 16; Maerz & Paul 1930; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/h.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is haematite?",
+   "choices": [
+    "The commonest iron ore",
+    "A copper green",
+    "A plant dye",
+    "A kind of lapis"
+   ],
+   "answer": "The commonest iron ore",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: red haematite is a modern synthetic pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Haematite, the ore behind this color, was heated to make different colours, French researchers believe, in Stone Age cave painting."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed 'red chalk' (not in the cited entry); restated the Paterson cave-pigment belief without claiming goethite was turned red."
+  ]
+ },
+ "status": "checked",
+ "words": 219
+}

@@ -1,0 +1,119 @@
+{
+ "slug": "wedgewood-blue",
+ "name": "Wedgewood Blue",
+ "hex": "#C0CBF4",
+ "names": [
+  "Wedgewood Blue"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Wedgewood Blue is named for the blue of Wedgwood pottery, but the swatch listed under that name is a pale periwinkle that is much lighter than the famous ware.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Pottery blue, light or dark",
+   "body": "One dictionary defines the name as the blue, light or dark, characteristic of Wedgewood pottery, and it spells the maker with the extra e [1]. Because the pottery comes in both shades, the name never fixed on one color [1]. Our library carries a Wedgewood Blue from Ridgway's 1912 plates, in two places: plate 21 (hue 51', tone f) and plate 9 (hue 53, tone f) [2].\n\nThe swatch is a very pale violet-blue, within about ten units of [[periwinkle]] and close to [[pale-violet]] and [[powder-blue]] [2]. The more usual spelling has its own entry, [[wedgwood-blue]], with the same swatch [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch fills at least five per cent of the canvas in 16, from Piero della Francesca's Battista Sforza (1474) to Sonne's cattle and battle scenes of the 1840s and 1870s, where it covers about a third of the picture [3]. Photographs of aged, varnished paintings can only suggest the original color [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the blue of Wedgwood pottery",
+   "first_recorded": "origin of the color name undocumented in our books",
+   "source": "Paterson, A Dictionary of Colour; Ridgway 1912"
+  },
+  "aka": [
+   "Wedgwood blue"
+  ],
+  "siblings": [
+   "wedgwood-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 16,
+  "match": {
+   "hex": "#C0CBF4",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    82,
+    22,
+    283
+   ],
+   "nearest": [
+    [
+     "Periwinkle",
+     9.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 418",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and Color Graph look-alikes, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the dictionary say Wedgewood blue refers to?",
+   "choices": [
+    "The blue, light or dark, of Wedgwood pottery",
+    "A blue from lapis",
+    "A sky blue named for a painter",
+    "A dye from a plant"
+   ],
+   "answer": "The blue, light or dark, of Wedgwood pottery",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch listed under this name is a dark blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The pottery blue comes light or dark; this swatch is the pale end."
+ ],
+ "words": 192,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All key claims verified against fact cards and book text; no changes."
+  ]
+ }
+}

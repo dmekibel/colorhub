@@ -1,0 +1,173 @@
+{
+ "slug": "zaffre",
+ "name": "Zaffre",
+ "hex": "#0014A8",
+ "names": [
+  "Zaffre",
+  "Zaffre Blue"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Zaffre is the name of an impure cobalt oxide that glassmakers and smalt-makers fused with sand and potash; as a color word it names a raw material, and on screens it is a deep, saturated blue.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "What zaffre was",
+   "body": "Zaffre was a precursor to smalt, the cobalt-blue glass pigment: an impure cobalt oxide mixed with silica and potash and fused (Tingry, 1804) [1]. It was also written saffer, saffre and zaffera [1][2]. Cobalt ore was roasted to an oxide, mixed with quartz sand and sold under these names to glassmakers [2].\n\nThe main historical source of the cobalt was the mineral skutterudite, named for Skutterud in Norway and also called smaltite for its use in making smalt, and Saxony supplied the ore for centuries [2]. Smalt itself belongs to the family of cobalt blues, of which [[cobalt]] and [[cobalt-blue]] are the modern members."
+  },
+  {
+   "id": "disagree",
+   "title": "Books disagree on what it was",
+   "body": "Heaton (1928) lists saffer as an obsolete word for an impure smalt, which makes zaffre a poor version of the finished pigment [3]. The compendium instead calls it the precursor from which smalt was made [1]. Merrifield (1849) goes further: the Venetian *smalto di Flandra* was zaffre and very close to what is now called smalt, and he separates two pigments both named *azur à poudrer*, the first being a zaffre [1][4]. The compendium adds that fifteenth-century mentions of smalto and smaltino probably did not mean smalt at all [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is a saturated deep blue (lightness 21, chroma 92, hue 304), listed in ISCC-NBS 1955 as block 179 under the name Zaffre Blue [5]. The library gives Maerz and Paul's first record as about 1554 [5]. Its nearest plain name is [[royal]], and it reads as a cousin of [[indigo]] [5].\n\nThe books we hold describe zaffre by function, as a raw material, not by how it looked, so the screen color follows naming convention more than any measured pigment [1][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The archive finds the swatch in one of 23,781 paintings, and a close look inside paintings finds it in two; it is rarer than 82 per cent of the named colors [6]. In printed English, the word as an adjective, which is the color sense, peaks in the 1860s [7]. All senses of the word, mainly the glassmakers' material, peak earlier, around 1810 [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "zaffera, a variant name for the cobalt oxide preparation",
+   "first_recorded": "c. 1554 as Zaffre Blue, Maerz & Paul 1930",
+   "source": "Pigment Compendium; ColorHub library"
+  },
+  "aka": [
+   "saffer",
+   "saffre",
+   "zaffera",
+   "Zaffre Blue"
+  ],
+  "siblings": [
+   "cobalt-blue",
+   "cobalt"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "ngram": {
+   "peak_all": 1810,
+   "peak_adjective": 1860
+  },
+  "measured": {
+   "lch": [
+    21,
+    92,
+    304
+   ],
+   "nearest": [
+    [
+     "Royal",
+     null
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, Pigment Compendium, \"zaffre\", p. 416",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"cobalt\" and \"saffer\", pp. 343 and 358",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"saffer\" (citing Heaton 1928), p. 343",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"azur a poudrer\" (citing Merrifield 1849), p. 45",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; color within the archive's match threshold, at least 2% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "Google Books Ngram, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was fused with zaffre to make smalt?",
+   "choices": [
+    "Silica and potash",
+    "Lead and vinegar",
+    "Madder and alum",
+    "Copper and wine"
+   ],
+   "answer": "Silica and potash",
+   "kind": "pick"
+  },
+  {
+   "q": "Which metal is zaffre's essential ingredient?",
+   "choices": [
+    "Cobalt",
+    "Copper",
+    "Iron",
+    "Zinc"
+   ],
+   "answer": "Cobalt",
+   "kind": "pick"
+  },
+  {
+   "q": "Zaffre is common in the painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Zaffre is not a finished blue but the raw cobalt oxide that glassmakers fused into smalt.",
+  "Look at old blue glass: its color came from cobalt ore traded under the name zaffre."
+ ],
+ "words": 364,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Aside origin \"Italian zaffera\" was unsupported; the compendium only lists zaffera as a variant name."
+  ]
+ }
+}

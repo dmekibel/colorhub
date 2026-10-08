@@ -1,0 +1,131 @@
+{
+ "slug": "brownish-green",
+ "name": "Brownish Green",
+ "hex": "#6A6E09",
+ "names": [
+  "Brownish Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Brownish green is a plain description rather than a traditional name: an olive-leaning green with brown in it, which the books mention mostly in passing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description, not a dye",
+   "body": "Brownish green is built from two ordinary words, a modifier plus a base color, and our library traces it only to the 2010 xkcd color survey [1]. No book treats it as a named pigment or dye. What the books do offer is how people use the phrase, and three of those uses are worth keeping [2][3][4].\n\nThe swatch here is a dark olive-yellow green. The nearest ISCC-NBS name is \"deep yellow green\", about 7.6 units of color difference away, so the English phrase and the standard name do not quite agree [1]."
+  },
+  {
+   "id": "language",
+   "title": "Where the books use the phrase",
+   "body": "Ball uses it to make a point about language: the Celtic word *glas* covers mountain-lake colors from a brownish green to blue, and the Japanese word *awo* spans green, blue and dark, as Ball tells it [2]. His conclusion is that there is no culture-independent set of basic colors [2]. Brownish green here is the edge of a word, not a color with a name of its own.\n\nPastoureau, writing on military dress, groups the khaki of uniforms under \"Brownish Green\" and says such shades seem dirty, deathly and sad and are often unpleasant to look at [3]. He adds that some designers made brownish-green shades fashionable in the 1970s, but calls those styles short-lived [3]. For the same period St Clair describes a back-to-nature palette of burnt orange, harvest gold and, above all, avocado [5]. Both belong to the same earthy decade, and [[avocado]] sits close to this swatch in color [[look:seventies-earth|the seventies earth palette]] [3][5].\n\nAlbers uses a brownish green stripe over a thin ochre-yellow one in a plate on subtraction of color, where unlike colors are made to look alike [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 66 paintings, and in 42 by the stricter within-painting measure [6]. It is rarer than about half of the named colors [6]. Inside a painting it most often plays an accent, in 64 per cent of those 42 works [6].\n\nIt peaks in the 1900s, found in 0.4 per cent of the 1,674 paintings from that century, about 1.7 times the expected rate [6]. The earliest match is a work of 1500, but that is 510 years before the name's earliest record, so it is a look-alike hue in an aged, varnished photograph, not evidence of a pigment [6]. The archive is thin before 1600, so read dates as a floor [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "plain description: brownish + green",
+   "first_recorded": "xkcd color survey, 2010 (in our sources)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "avocado",
+   "olive",
+   "khaki"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 66,
+  "n_within": 42,
+  "century_peak": "1900s",
+  "role": "accent 64%"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS, Maerz and Paul and other name sources (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9 (\"Bright Earth\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green, section \"Brownish Green: Khaki\" (modern greens)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 111",
+   "loc_kind": "book-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"The Secret Lives of Color\" (ch. on the 1970s)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Celtic word glas cover, according to Ball?",
+   "choices": [
+    "Brownish green to blue",
+    "Only red",
+    "Only gold",
+    "Only white"
+   ],
+   "answer": "Brownish green to blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: brownish green is a traditional pigment name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Brownish green is a description, not a dye: its first record in our sources is a 2010 survey."
+ ],
+ "words": 416,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Corrected Pastoureau paraphrase and note location (khaki section, not Romans chapter)",
+   "Corrected Albers plate description"
+  ]
+ }
+}

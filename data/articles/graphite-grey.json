@@ -1,0 +1,149 @@
+{
+ "slug": "graphite-grey",
+ "name": "Graphite Grey",
+ "hex": "#474A50",
+ "names": [
+  "Graphite Grey"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Graphite Grey is a dark, slightly blue-tinged grey named for the soft carbon of pencils, a mineral that contains no lead.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The mineral",
+   "body": "Paterson defines graphite as a dark metallic grey, also called graphite grey, made from crystallised carbon [1]. A flat swatch cannot show that sheen, which in life is part of the color [1][2]."
+  },
+  {
+   "id": "pencil",
+   "title": "Pencil lead without lead",
+   "body": "Pencil lead contains no lead. Since the mid-sixteenth century it has been graphite, first found at Borrowdale in England's Lake District, with a legend dating the find to 1565 [3]. Before that European artists drew in silverpoint, and Cortés recorded in 1519 that the Aztecs used crayons of a grey mineral [3].\n\nBorrowdale graphite was so valuable that the mine opened only about seven weeks a year, workers were searched, and an act of 1752 threatened smugglers [3]. In 1794 Nicolas Conté showed that low-grade French graphite, powdered and mixed with clay, would make pencils; more clay gives a harder pencil and less a softer, blacker one [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "Swatch and shine",
+   "body": "Finlay describes the hair shirt of St Thomas More at Buckfast Abbey as a slippery silvery grey like graphite that shines in the light [2]. Our library carries the color in Ridgway's standards of 1912, a RAL list of 1927 and the ISCC-NBS of 1955, nearest to dark bluish gray by 4.5 units of ΔE2000 [4]. See also [[charcoal-grey]], [[gunmetal]] and [[payne-s-grey]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This tone appears in 273 paintings in our archive, 1.15 per cent, as photographed [5]. Norway stands out, with it in 9 of 120 paintings [5]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mineral graphite",
+   "first_recorded": "Borrowdale graphite, mid-sixteenth century (legend: 1565)",
+   "source": "Finlay; Paterson"
+  },
+  "aka": [],
+  "siblings": [
+   "graphite",
+   "charcoal-grey",
+   "gunmetal",
+   "payne-s-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
+  "n_present": 273,
+  "pct": 1.15,
+  "top_country": {
+   "name": "Norway",
+   "hits": 9,
+   "of": 120
+  },
+  "measured": {
+   "nearest": [
+    [
+     "dark bluish gray",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"graphite\", p. 193",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 260",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 11 (\"Black and Brown\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): name sources and dates (Ridgway 1912, RAL 1927, ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: a pencil's \"lead\" is made of lead.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In Conté's 1794 method, what did more clay do?",
+   "choices": [
+    "Made a harder pencil",
+    "Made a softer pencil",
+    "Made it redder",
+    "Made it dissolve"
+   ],
+   "answer": "Made a harder pencil",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is a flat graphite grey swatch incomplete?",
+   "choices": [
+    "Real graphite has a metallic sheen",
+    "Graphite is blue",
+    "Graphite is liquid",
+    "Graphite is white"
+   ],
+   "answer": "Real graphite has a metallic sheen",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pencil lead is graphite and has never been lead, and Borrowdale's mine opened only about seven weeks a year."
+ ],
+ "words": 261,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

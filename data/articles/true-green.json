@@ -1,0 +1,155 @@
+{
+ "name": "True Green",
+ "hex": "#089404",
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "True green is the phrase books use for plain, unqualified green, and one book notes that for centuries such a green was hard to dye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What true means",
+   "body": "The books use *true green* as an ordinary phrase, never as one named pigment [1]. Pastoureau uses it for the green of fields, woods and pasture, as opposed to the rare green gem such as the emerald that scripture mentions [2]. Coles writes that the early greens came only from copper ores such as malachite and chrysocolla, and that green and blue were often blurred [3].\n\nJarman uses it more narrowly. For him a true green flower is the tobacco plant's, since hellebore and hydrangea petals are not true petals [4]. The phrase is used loosely, but in these books it points to green in its plainest sense [3][4]."
+  },
+  {
+   "id": "dyeing",
+   "title": "A hard color to dye",
+   "body": "Pastoureau stresses that dyeing in a true green was difficult for a long time [5][6]. One liturgical writer, Lothar, allowed yellow to stand in for green in exceptional cases for that reason [6]. He also notes that Judas was traditionally dressed in green, yellow or both, and floats the idea that a stage legend about actors dying in the role may trace back to a dye problem [5].\n\nPainters and dyers often made green by mixing blue and yellow [7], and verdigris, the copper green, tended to darken with time [3]. A later change in thinking removed green from the primaries altogether [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is a saturated, medium-dark green. In our archive of 23,781 paintings no painting holds it as a large enough patch, as photographed (n = 0) [8]. A missing match proves nothing about any single painting [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "plain description (true + green)",
+   "first_recorded": "not recorded",
+   "source": "descriptive use only"
+  },
+  "aka": [],
+  "siblings": [
+   "kelly-green",
+   "grass-green",
+   "shamrock-green",
+   "green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#089404",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "measured": {
+   "note": "no archive painting holds this color as a large patch"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Concordance search of 29 color books for \"true green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 33",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 39",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 36",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, notes to ch. 29",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 34",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, color match within delta-E 6, 5 per cent cover, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which materials gave the only true green pigments for centuries?",
+   "choices": [
+    "Copper minerals such as malachite",
+    "Indigo and woad",
+    "Cochineal"
+   ],
+   "answer": "Copper minerals such as malachite",
+   "kind": "pick"
+  },
+  {
+   "q": "What did the new classifications described by Pastoureau remove from the primaries?",
+   "choices": [
+    "Green",
+    "Red",
+    "Blue"
+   ],
+   "answer": "Green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Early green pigments came only from copper ores, and dyeing a true green was hard."
+ ],
+ "slug": "true-green",
+ "names": [
+  "True Green"
+ ],
+ "status": "checked",
+ "words": 262,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lede no longer claims blue/yellow-green contrast",
+   "softened 'always means'",
+   "Lothar attributed",
+   "painter-mixing claim re-sourced to Pastoureau and Coles",
+   "removed speculative 'fits the history'",
+   "question wording"
+  ]
+ }
+}

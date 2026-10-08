@@ -1,0 +1,98 @@
+{
+ "slug": "empire-green",
+ "name": "Empire Green",
+ "hex": "#4E644D",
+ "names": [
+  "Empire Green"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Empire Green is a dark, grey-leaning green tied to Napoleonic France, though Napoleon did not start the fashion.",
+ "sections": [
+  {
+   "id": "history",
+   "title": "Green at the First Empire",
+   "body": "Pastoureau writes that during the First Empire green was as fashionable for clothing as for furniture and decoration in France [1]. The Sèvres porcelain factory, famous for its blues under Louis XV, had to widen its palette and offer new greens [1]. Greens of that period were still fairly dark and paired with Pompeian reds and bright gold [1]. Military uniforms gave green a place it had never had before, and influenced the uniforms of neighboring and allied countries [1].\n\nA persistent myth, which Pastoureau corrects, credits Napoleon with starting the style because green was his favorite color [1]. Pastoureau grants that Bonaparte liked green throughout his life, but says he did not cause its popularity across Europe [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #4E644D is a dark, muted grey-green, near [[dark-green]] and [[sap-green]] in the data [9]. The books describe the Empire palette in words, not hex values [1]. The concordance of 29 color books finds only four strong mentions of this name, so the article stays short rather than pad the record [9]. Screen colors are approximate, and the swatch is a reference value, not a measured pigment [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "not dated in the books",
+   "source": "Pastoureau, Green, p. 40"
+  },
+  "aka": [
+   "Napoleonic green"
+  ],
+  "siblings": [
+   "dark-green",
+   "sap-green",
+   "olive",
+   "green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names, concordance of 29 color books",
+  "hex": "#4E644D",
+  "book_mentions": 4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Green, p. 40",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub name data and the color-book concordance (4 strong mentions)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Napoleon started the Empire green fashion.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which porcelain factory had to add new greens under the Empire?",
+   "choices": [
+    "Sèvres",
+    "Meissen",
+    "Delft",
+    "Wedgwood"
+   ],
+   "answer": "Sèvres",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Napoleon loved green but did not start the fashion."
+ ],
+ "words": 198,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded close paraphrase of Pastoureau"
+  ]
+ }
+}

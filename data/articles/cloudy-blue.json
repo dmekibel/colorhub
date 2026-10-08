@@ -1,0 +1,107 @@
+{
+ "slug": "cloudy-blue",
+ "name": "Cloudy Blue",
+ "hex": "#ACC2D9",
+ "names": [
+  "Cloudy Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Cloudy blue is a descriptive color name, a soft grey-blue, and our books use it as a plain phrase rather than a named pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An everyday phrase",
+   "body": "The books give no pigment, dye or maker behind the name. In Bluets, Nelson uses the phrase for the water at the bottom of a swimming pool, lit by white winter light, in a passage of ordinary things that are blue [1]. Cloudy blue is a description of what the eye sees, with no history behind it.\n\nAs a swatch it is a pale, greyed blue, next to [[light-grey-blue]], [[sky-blue]] and [[light-blue]], all of them paler and softer than plain [[blue]]. Our library traces the name to ISCC-NBS (1955) and to the xkcd color survey of 2010 [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color appears in 163 of 23,781 archive paintings, 0.69 per cent, more common than 62 per cent of named colors [2]. It peaks in the 1800s, in 67 of 8,345 paintings, 1.5 times the museums' baseline [2]. In 45 per cent of the 119 paintings where it shows up inside the picture, it is a hidden color [2]. All of this is as photographed."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "cloudy water or sky; descriptive",
+   "first_recorded": "ISCC-NBS (1955) and xkcd (2010) lists in our library",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "light-grey-blue",
+   "sky-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#ACC2D9",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 146
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Nelson, Bluets, section 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for cloudy-blue (L6 graph)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: name sources (ISCC-NBS 1955, xkcd 2010)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Nelson use the phrase cloudy blue in Bluets?",
+   "choices": [
+    "For pool water in winter light",
+    "For a pigment",
+    "For a dye recipe",
+    "For a flag"
+   ],
+   "answer": "For pool water in winter light",
+   "kind": "pick"
+  },
+  {
+   "q": "Where would you notice a cloudy blue in the real world?",
+   "choices": [
+    "A pale, greyed sky or water",
+    "A fresh blue paint chip",
+    "A cobalt vase",
+    "A traffic light"
+   ],
+   "answer": "A pale, greyed sky or water",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A greyed blue turns up as a hidden color in 45 per cent of the paintings that hold it."
+ ],
+ "words": 190,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified Nelson passage and library source listing; no changes."
+  ]
+ }
+}

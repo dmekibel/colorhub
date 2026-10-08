@@ -1,0 +1,121 @@
+{
+ "slug": "dull-orange",
+ "name": "Dull Orange",
+ "hex": "#D8863B",
+ "names": [
+  "Dull Orange"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dull Orange is a muted, earthy orange, a descriptive name more than a historical one.",
+ "sections": [
+  {
+   "id": "use",
+   "title": "How the books use it",
+   "body": "Delacroix wrote in 1856 of the dull orange in the lights of a boy climbing a fountain in sunshine, set against very lively violet in the shadows, a remark Ball quotes while discussing colored shadows [1]. Gurney lists dull orange among the colors a sky can show near the horizon, between pale cerulean and warm gray [2].\n\nSt Clair's glossary of old color words defines [[fulvous]] as a dull orange, usually of animal plumage [3]. Birren reports an occult scheme in which the aura of a so-called \"savage\" shows dull orange among its colors, which is not evidence of anything [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "#D8863B sits between [[orange]] and [[tan]] in the screen data, lower in saturation than a pure orange [1][2]. The concordance of 29 color books finds only four strong mentions of this name, so the article stays short rather than pad the record [9]. Screen colors are approximate, and the swatch is a reference value, not a measured pigment [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "not dated in the books",
+   "source": "Ball, Bright Earth, ch. 16"
+  },
+  "aka": [
+   "muted orange"
+  ],
+  "siblings": [
+   "orange",
+   "fulvous",
+   "tan",
+   "amber"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names, concordance of 29 color books",
+  "hex": "#D8863B",
+  "book_mentions": 4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 177",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 125",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, p. 13",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub name data and the color-book concordance (4 strong mentions)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter wrote of a dull orange in the lights and violet in the shadows in 1856?",
+   "choices": [
+    "Delacroix",
+    "Monet",
+    "Seurat",
+    "Turner"
+   ],
+   "answer": "Delacroix",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Gurney, where can a sky look dull orange?",
+   "choices": [
+    "Near the horizon",
+    "Straight overhead",
+    "Only at noon",
+    "Only in winter"
+   ],
+   "answer": "Near the horizon",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Delacroix paired dull orange lights with violet shadows."
+ ],
+ "words": 168,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Aura claim overstated (dull orange is one of several aura colors, not the marker); Ball framing softened"
+  ]
+ }
+}

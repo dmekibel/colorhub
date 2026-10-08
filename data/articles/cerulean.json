@@ -1,0 +1,270 @@
+{
+ "slug": "cerulean",
+ "name": "Cerulean",
+ "hex": "#007BA7",
+ "names": [
+  "Cerulean"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Cerulean is a strong, slightly greenish sky blue, named for the Latin word for the heavens and made as a paint of cobalt and tin from 1860.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A sky word, twice",
+   "body": "Cerulean comes from the Latin *caeruleus*, \"dark blue\", a word related to *caelum*, the vault of heaven [1]. In France the paint is called *bleu céleste*, heavenly blue [1][2]. The English word was a literary name for sky blue before it was a paint: Paterson lists *caerulean* as a variant of sky blue [3], and our Ngram data show the adjective peaking in the 1820s, decades before the pigment [12].\n\nThe Roman word *caeruleum* did not mean this paint [4]. Vitruvius says it first came from Alexandria and that a certain Vestorius set up a factory at Puteoli to make it, and Pliny describes three kinds, Egyptian, Scythian and Cyprian [4]. The Pigment Compendium says that from his descriptions all of these are forms of Egyptian blue, a calcium copper silicate [4]. Coles agrees that Pliny's caeruleum was Egyptian blue and that the name later wandered onto other blues, including [[gem:azurite|azurite]] and smalt [1][5].\n\nThe compendium also warns that the literature confuses *cerulean* and *ceruleum* (also spelled *coeruleum*, *coelin* and *Cölinblau*) until the word settles on the modern spelling [4]. When you read an old text, check which blue its author means."
+  },
+  {
+   "id": "discovery",
+   "title": "Höpfner, Rowney and a forgotten recipe",
+   "body": "Cerulean blue is cobalt stannate, a compound of cobalt and tin oxides [1][4]. Books disagree on who found it first. Coles credits the Swiss chemist Albrecht Höpfner in the late eighteenth century, with the recipe forgotten and rediscovered in the 1860s [1]. The Pigment Compendium dates Höpfner's preparation to 1789 and says Schreger described it in 1805 as a beautiful blue painter's color [4]. Rose, cited there, says only that Höpfner made it before 1805 [4].\n\nThe commercial date is firmer. Paterson says the pigment was discovered in 1860 by the firm of George Rowney and Son [3]. Ball adds that Rowney sold it as a watercolor in the 1860s, and that by the 1870s it was an oil color, *cerulean blue* in England and *bleu céleste* in France [6]. Our library records Rowney selling it as *coeruleum* in 1860 [12]. The compendium suggests the 1860s version differed from Höpfner's: it adds calcium sulfate and silica to the cobalt and tin oxides [4].\n\nThe older process mixed a solution of cobalt in aqua regia with tin, then precipitated it with potash, washed, dried and calcined it [4]. Nineteenth-century recipes calcined tin oxide and cobalt nitrate, or precipitated potassium stannate with cobalt chloride and then fired it with silica [4]. A 1913 handbook recipe gives 50 per cent tin oxide, 20 per cent cobalt oxide and 30 per cent silica, and its authors judged the result stable but not very colorful [4]."
+  },
+  {
+   "id": "greener",
+   "title": "The greener cousin",
+   "body": "The paint has a slight green cast, which Coles notes makes it a foil for the redder tone of [[cobalt-blue]] [1]. A second version replaces the tin with chromium and gives a greener color, often sold as cobalt turquoise [1]. The compendium adds that analysis has found chromium cobalt aluminium oxide in modern acrylics labeled cerulean [4]. So the tube name today may cover more than one compound.\n\nIn our library, the two common spellings sit far apart. [[cerulean]] here is a strong greenish blue, ISCC-NBS block 181, within three ΔE units of that category's center [12]. The separate entry [[cerulean-blue]] is a strong purplish blue, `#2A52BE`, about as far from the paint as two blues can be [12]. If a source names \"cerulean blue\" and the swatch looks like deep ultramarine, the swatch is the problem, not the paint."
+  },
+  {
+   "id": "painters",
+   "title": "The Impressionists and their risk",
+   "body": "Ball counts twelve new synthetics among the twenty principal pigments found in Impressionist pictures, and cerulean blue is one of them, with cobalt blue, viridian and artificial ultramarine [6]. St Clair makes the same point from the artist's side: cheap compounds such as cerulean freed painters from grinding their own colors or trusting colormen with unstable mixes [7]. Monet's greys and blacks for his 1877 views of the Gare Saint-Lazare, Ball reports, come almost entirely from mixtures of such bright colors, with cerulean among them [6].\n\nThe pigment's reputation was uneven. Ball says it was considered impermanent by the 1890s, though [[painter:paul-signac|Signac]] liked it enough to take the risk [6]. Gage reports that in late nineteenth-century France it had a reputation for fading, as *bleu céleste*, yet he reads Signac's loyalty as a sign that painters were not simply fearful and that manufacture may have improved [8]. Coles, writing for a modern reader, calls it very stable and unreactive to light or chemicals [1]. These accounts do not contradict each other as much as they date the question: a trade reputation from the 1890s versus a modern assessment [1][8].\n\nIn the twentieth century Picasso, in a story told by Brassaï, wrote cerulean blue on his order of colors and greeted it among his old companions [9]. That is a hedged anecdote, but it shows how long the tube stayed on a working palette."
+  },
+  {
+   "id": "sky",
+   "title": "Where to look: the sky near the horizon",
+   "body": "Gurney notes that the sky generally gets lighter toward the horizon, because we look through more atmosphere, and that near the horizon it can range from pale cerulean to warm grey to dull orange [10]. Westland describes the same effect as aerial perspective: distant objects are veiled by scattered light and grow bluer, ending in a hazy cerulean horizon [11].\n\nThe swatch here is deeper than a pale horizon, closer to the sky overhead on a clear day. Finlay saw a light cerulean stain on the lip of an indigo pot in Lombok, as if the pot had been drinking the sky [13]. The color is easiest to notice in a clear sky at mid-morning, well above the pale band at the horizon."
+  },
+  {
+   "id": "meaning",
+   "title": "A color of peace",
+   "body": "St Clair writes that when the United Nations was formed after the Second World War, its emblem placed a map of the world on a slightly grayish cerulean ground [7]. The designer Oliver Lundquist is reported to have chosen the shade as the opposite of red, the color of war [7]. That is a single-source account of intent, and a cerulean ground does not make blue peaceful: color associations are cultural, and each color can carry more than one meaning."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Held to a ΔE of 6 and at least five per cent of the canvas, a color like this swatch appears in 11 of 23,781 paintings in our archive [14]. The largest share belongs to [[painting:cma-135310|Two Poplars in the Alpilles near Saint-Rémy]] by Van Gogh (1889), where it covers about a fifth of the canvas, followed by Bonnard's *Madame Émile Bernheim* (1916) [14]. The rest are older: a 1482 portrait by Piero di Cosimo, a 1607 river landscape by Jan Brueghel the Elder, a 1662 Brazilian view by Frans Post [14].\n\nThe old pictures matter for a different reason. Cerulean paint did not exist when they were made, so what we see is a sky blue in an aged, photographed painting, probably made with other blues [14]. These are look-alike hues, not pigment tests, and they say only that the color of the cerulean sky is much older than the paint [14]. By our broader threshold of one per cent of the canvas, cerulean is rarer than 73 per cent of named colors [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin caeruleus, dark blue, related to caelum, the vault of heaven",
+   "first_recorded": "paint sold by Rowney, 1860; the word is much older as a sky adjective",
+   "source": "Coles, Chromatopia; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "cerulean blue",
+   "coeruleum",
+   "bleu céleste",
+   "cobalt stannate"
+  ],
+  "siblings": [
+   "cerulean-blue",
+   "celeste",
+   "cobalt-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cerulean-blue",
+    "gloss": "our library's Cerulean Blue swatch is a purplish blue, far from this greenish one"
+   },
+   {
+    "slug": "egyptian-blue",
+    "gloss": "the Roman caeruleum was Egyptian blue, not this pigment"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bleu céleste (heavenly blue)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#007BA7",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 11,
+  "rarer_than_pct": 73,
+  "ngram": {
+   "peak": 1820,
+   "first": 1800
+  },
+  "measured": {
+   "lch": [
+    48.2,
+    33.8,
+    248.6
+   ],
+   "iscc": "block 181, strong greenish blue (dE 3.0)",
+   "contrast_white": 4.78,
+   "nearest": [
+    [
+     "Nice Blue",
+     3.2
+    ],
+    [
+     "Faience",
+     3.4
+    ],
+    [
+     "Ocean Blue",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Cerulean blue\" (p. 153) and \"Egyptian blue\" (p. 49)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Bleu celeste\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cerulean blue\", \"caerulean\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Caeruleum\", \"Cerulean blue\", \"Cobalt tin oxide\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 153",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, chs. 9, 15 and 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Blue\" and introduction",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 228 and 300 (note)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9, quoting Brassaï, Conversations avec Picasso",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 177",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, \"Aerial Perspective\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/fieldnotes): ISCC-NBS 1955 block 181, Rowney 1860, Ngram adjective",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), tools/article_field.py, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "The Roman word caeruleum, in Pliny and Vitruvius, named the same pigment as modern cerulean blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which two metals make up cerulean blue in its usual form?",
+   "choices": [
+    "Cobalt and tin",
+    "Copper and lead",
+    "Iron and potassium",
+    "Cadmium and zinc"
+   ],
+   "answer": "Cobalt and tin",
+   "kind": "pick"
+  },
+  {
+   "q": "Why can a pre-1860 painting still contain a cerulean-colored sky?",
+   "choices": [
+    "Other blues, such as azurite, could give a similar color",
+    "Rowney sold the paint secretly in earlier centuries",
+    "Photographs add blue to varnished paintings",
+    "Egyptian blue is the same compound as cerulean"
+   ],
+   "answer": "Other blues, such as azurite, could give a similar color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The Roman caeruleum was Egyptian blue, not cerulean: the modern paint dates from 1860.",
+  "Look for cerulean overhead on a clear day, above the pale band at the horizon."
+ ],
+ "words": 1169,
+ "status": "checked",
+ "checked": {
+  "by": "claude-sonnet",
+  "date": "2026-10-08",
+  "issues": [
+   "Books disagree on Hopfner dates and on permanence",
+   "Picasso order is an anecdote via Brassai quoted in Ball",
+   "UN emblem intent is St Clair single-source",
+   "Archive matches before 1860 are look-alike hues"
+  ]
+ }
+}

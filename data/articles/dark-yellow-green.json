@@ -1,0 +1,113 @@
+{
+ "slug": "dark-yellow-green",
+ "name": "Dark Yellow Green",
+ "hex": "#728F02",
+ "names": [
+  "Dark Yellow Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Yellow Green is a saturated olive-leaning green, a descriptive survey name with no history of its own.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name comes from the xkcd color survey of 2010, where volunteers typed their own names for screen colors, and no earlier record exists in our sources [1]. Its nearest named neighbors are [[olive]], about 8 units away, and Ugly Green [1]. It is a plain description: a green pulled toward yellow and darkened.\n\nThe one place a book puts these words together is a false lead. Gage quotes Newton's 1669 to 1670 Cambridge lectures, which list eleven steps of the spectrum, among them dark yellow and then green as separate steps [2]. Newton later reduced the list to seven [2]. So the books say nothing about this as a color name."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive only 7 of 23,781 paintings, or 0.03 per cent, hold a color near this swatch, which makes it rarer than 77 per cent of the named colors [3]. Read this as a screen color, not a pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name, origin undocumented",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "yellow-green (dark)"
+  ],
+  "siblings": [
+   "olive",
+   "olive-green",
+   "moss",
+   "green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "pct_archive": 0.03,
+  "match": {
+   "hex": "#728F02",
+   "de2000": 4
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Olive",
+     8.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 172",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Dark Yellow Green come from in our sources?",
+   "choices": [
+    "The 2010 xkcd survey",
+    "A medieval dye",
+    "A 1912 plate"
+   ],
+   "answer": "The 2010 xkcd survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Newton listed dark yellow and green as separate steps in his early lectures.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Newton once counted eleven steps in the spectrum, with dark yellow and green as separate ones, before settling on seven."
+ ],
+ "words": 167,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

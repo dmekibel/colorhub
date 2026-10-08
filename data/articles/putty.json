@@ -1,0 +1,170 @@
+{
+ "slug": "putty",
+ "name": "Putty",
+ "hex": "#BEAE8A",
+ "names": [
+  "Putty"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Putty is the muddy grey-beige of window glazing compound, a color word that was in print by 1889 and that sits, by our count, on about one painting in nine.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of the material",
+   "body": "Paterson defines putty as the muddy grey or brownish-beige of the material, and notes that it is one of the colors in Winifred Nicholson's 1944 *Chart of Colours* [1]. His systematic list files it with the browns [2]. The material itself is old and simple: whiting, pulverized white chalk, is used to make whitewash and putty [3], and slaked lime mixed with water gives lime putty [4]."
+  },
+  {
+   "id": "lapis",
+   "title": "A different putty",
+   "body": "Coles describes a recipe for making ultramarine in which crushed lapis lazuli is worked into a paste, also called putty, with resin and wax. The paste is kneaded in lye baths, and the blue passes into the water while the impurities stay behind [5]. The best-quality blue leaches out in the first two hours of kneading [5]. The word is the same, but that putty is a blue-making tool, and the color [[putty]] is not related to it."
+  },
+  {
+   "id": "systems",
+   "title": "In color systems",
+   "body": "Maerz and Paul's 1930 dictionary records putty as first used in 1889, on plate 11 B 2 [6]. ISCC-NBS 1955 places it in blocks 89 and 90, and Ridgway's 1912 *Color Standards* has a near-duplicate called Deep Olive-Buff, a color distance (ΔE) of 2.2 away [6]. Its nearest everyday name is [[tan]], at 5.6 [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Putty is one of the most common colors in the archive: 2,572 of the 23,531 paintings carry a color this close, 10.8 percent, as photographed [7]. It is a color of old varnish and weathered ground more than of any one pigment."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the material, putty",
+   "first_recorded": "1889 (Maerz and Paul, 1930)",
+   "source": "Paterson, A Dictionary of Colour, p. 326"
+  },
+  "aka": [],
+  "siblings": [
+   "tan",
+   "beige-grey",
+   "khaki"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "tan",
+    "gloss": "nearest everyday name, a little more orange"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub painting archive, 23,531 paintings, as photographed",
+  "n_present": 2572,
+  "pct": 10.8,
+  "measured": {
+   "lch": [
+    72,
+    21,
+    90
+   ],
+   "nearest": [
+    [
+     "Tan",
+     5.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 326, \"putty\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 495",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 425, \"whiting\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 252 (slaked lime)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, pp. 200-201 (ultramarine from lapis)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), entry Putty (ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,531 paintings, as photographed, field notes for #BEAE8A",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "When does Maerz and Paul record the color putty as first used?",
+   "choices": [
+    "1889",
+    "1556",
+    "1740",
+    "1944"
+   ],
+   "answer": "1889",
+   "kind": "pick"
+  },
+  {
+   "q": "In Coles's ultramarine recipe, what leaves the putty in the lye bath?",
+   "choices": [
+    "The blue pigment",
+    "The impurities",
+    "The resin",
+    "The wax"
+   ],
+   "answer": "The blue pigment",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Winifred Nicholson's 1944 chart of colours includes putty.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Roughly one painting in nine in the archive holds a putty-like color, as photographed.",
+  "Making ultramarine from lapis once meant kneading a paste called putty underwater."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No changes; Paterson and Coles claims verified in book text."
+  ]
+ },
+ "words": 267
+}

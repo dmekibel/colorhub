@@ -1,0 +1,103 @@
+{
+ "slug": "pale-blue-green",
+ "name": "Pale Blue-Green",
+ "hex": "#D5EFD1",
+ "names": [
+  "Pale Blue-Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Blue-Green is a descriptive phrase more than a name, a very light green that the books use for pigments and the standards use for a swatch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description, not a name",
+   "body": "Pale blue-green is a modifier plus a hue, built from [[blue-green]] and a lightening word [1]. The library finds it in Ridgway's 1912 atlas, plate VII, and in ISCC-NBS block 148, which calls the swatch a \"very pale green\" [1]. Despite the name, it reads as a green, with little blue in it [1].\n\nThe phrase does have a real use in the books. Coles describes chrysocolla, a copper mineral found beside malachite and azurite, as a delicate pale blue-green pigment [2]. Traces of it turn up in Twelfth Dynasty Egyptian tombs and in the Kizil wall paintings of Turkistan, and because it is so translucent in oil it works best in watercolor and egg tempera [2]. This swatch is closer to a washed-out [[sea-green]] or [[pale-turquoise]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 21 carry this color over at least five per cent of the canvas, as photographed [3]. In 88 per cent of the 16 paintings where we measured its rank, it plays a light [3]. Six of the matches date from the 1800s, and the earliest is a painting by Bartolomeo di Giovanni of about 1488, a floor not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier phrase: pale + blue-green",
+   "first_recorded": "Ridgway, 1912 (as a color term in our library)",
+   "source": "Coles, Chromatopia, p. 73"
+  },
+  "aka": [],
+  "siblings": [
+   "sea-green",
+   "pale-turquoise",
+   "seaweed-green"
+  ],
+  "parent": "blue-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 21,
+  "iscc_nbs": "block 148, very pale green",
+  "role": "light (88% of 16)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 73",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which pigment does Coles call a delicate pale blue-green?",
+   "choices": [
+    "Chrysocolla",
+    "Vermilion",
+    "Lead white"
+   ],
+   "answer": "Chrysocolla",
+   "kind": "pick"
+  },
+  {
+   "q": "Where has chrysocolla been found, according to Coles?",
+   "choices": [
+    "Wall paintings at Kizil",
+    "Dutch still lifes",
+    "Byzantine mosaics"
+   ],
+   "answer": "Wall paintings at Kizil",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Chrysocolla, a copper mineral, makes a pale blue-green pigment that works best in watercolor and egg tempera."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced claim that the pigment is deeper than the swatch."
+  ]
+ }
+}

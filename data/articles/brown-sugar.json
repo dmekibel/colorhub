@@ -1,0 +1,119 @@
+{
+ "slug": "brown-sugar",
+ "name": "Brown Sugar",
+ "hex": "#AF6E4D",
+ "names": [
+  "Brown Sugar"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Brown Sugar is a warm reddish-orange brown named from a kitchen staple, one of hundreds of color names borrowed from food.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from the kitchen",
+   "body": "Brown Sugar is on the Wikipedia list of Crayola colors and in the 1930 Maerz and Paul dictionary, as cited in NBS Circular 553 of 1955 [1]. The swatch is a warm, muted reddish orange, nearest ISCC-NBS name \"grayish reddish orange\" at a distance of 5.0 [1]. Close neighbors include [[caramel]], [[tan]] and [[copper]].\n\nGarfield reports Deane Judd's count of 7,500 color names, of which 239 came from foods, with brown sugar given as an example [2]. Jarman lists brown sugar among the homely brown things, with bread and eggs [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch appears in 882 of our 23,781 paintings, 3.71 percent, as photographed [4]. That is more common than 83 percent of named colors [4]. It peaks in the 1500s, found in 90 of the 2,231 paintings from that century, at 1.9 times the expected rate [4]. See [[brown]] and [[chocolate]] for the wider family."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "brown sugar, the food",
+   "first_recorded": "1930 (Maerz and Paul)",
+   "source": "ColorHub name graph; Garfield, Mauve"
+  },
+  "aka": [],
+  "siblings": [
+   "caramel",
+   "tan"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 882,
+  "nearest_iscc": [
+   "grayish reddish orange",
+   5.0
+  ],
+  "peak_century": {
+   "1500s": {
+    "n": 90,
+    "of": 2231,
+    "lift": 1.9
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name graph and library: ISCC-NBS 1955 nearest name, sources and dates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (as photographed), data/graph/fieldnotes",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many of the 7,500 color names Judd counted came from foods, per Garfield?",
+   "choices": [
+    "239",
+    "24",
+    "528",
+    "1,000"
+   ],
+   "answer": "239",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Brown Sugar appears in the 1930 Maerz and Paul dictionary, as our sources record.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "239 of 7,500 color names counted by Deane Judd came from foods, brown sugar among them."
+ ],
+ "words": 166,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Judd count via Garfield, who gives it as a survey figure; exact survey date not stated in passage.",
+   "Re-verified key claims against fact cards and book text; no changes needed."
+  ]
+ }
+}

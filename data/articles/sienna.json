@@ -1,0 +1,265 @@
+{
+ "slug": "sienna",
+ "name": "Sienna",
+ "hex": "#A0522D",
+ "names": [
+  "Sienna"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Sienna is a brown earth pigment named for the Tuscan city of Siena, and the name now covers a warm reddish brown, deeper and redder than ochre and paler than the umbers.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A city's name",
+   "body": "*Sienna* is the English spelling of the Tuscan city's name, and the pigment's older Italian name was *terra di Siena*, earth of Siena [1][3]. Paterson notes that every sienna color is named after the city but that English adds the extra *n* [3]. As a color word in English, the name goes back to 1760 in our sources [14].\n\nThe word names two things at once, and they are easy to mix up. The raw earth is a yellowish brown, and the same earth roasted is a warm reddish brown that carries the name *burnt sienna* [3][4]. The swatch on this page is the second one: the CSS and X11 color, which Paterson lists with the hex value #A0522D [3]. It reads as dark reddish orange in the ISCC-NBS system, about six units away from the nearest block there [14]. Two other well-known screen values for the name are redder (#882D17, from a web reference) or more orange (#A9561E, from the xkcd survey), so the swatch is one convention among several [14].\n\nClose neighbors are [[raw-sienna]] and [[umber]] in the earth family, [[ochre]] on the yellow side, and [[venetian-red]] on the red side. The mid-brown [[brown]] is the family these all belong to."
+  },
+  {
+   "id": "material",
+   "title": "What the earth is",
+   "body": "Sienna is generally described as a variety of yellow ochre, but it differs in having a small share of manganese oxide, under ten per cent, beside the iron oxide hydroxide goethite that does most of the coloring [1]. It may also hold a few per cent of peaty or organic matter, which puts it between the ochres and the umbers in composition [1]. The Pigment Compendium adds that, although the pigment is well known and widely used, little detailed information about it has been published [1].\n\nThe original source was Siena in Tuscany [1]. The most informative nineteenth-century writer, Terry in 1893, places the deposits on the western slopes of Monte Amiata, in lake-bed layers among volcanic rock and under a cover of vegetable soil [1]. The Tuscan earth was graded by quality, and the price rose as the tint deepened; Terry lists four grades, boletta, fascia, cerchione and terra guilla [1]. The best-colored, chestnut-brown grade was called bole [1].\n\nSienna was never a purely Italian product [1]. Deposits are known in the United States, where they were called paint-beds, and good siennas are found at Lehigh Gap, Pennsylvania [1]. Church lists the Harz Mountains of Germany as another source [1]. Books disagree about whether the name still tells the truth: Finlay observes that today's sienna probably no longer comes from Siena at all, just as lamp black no longer comes from lamps [7].\n\nLike the ochres, siennas make very stable pigments that do not fade [1]. The raw earth is washed, finely ground and levigated, which is a slurrying that separates coarse grit, before use [1]."
+  },
+  {
+   "id": "burnt",
+   "title": "Raw and burnt",
+   "body": "Roasting an earth is one of the oldest ways to change a color. A moderate heat turns yellow ochre orange, and a stronger heat turns it red [6]. Coles explains that roasted red ochres are often called *burnt*, and gives burnt sienna as the example [6]. The same logic gives burnt umber from umber, and Jarman lists all of them together as earths cooked red hot, a family in which, he suggests, cooking is present in every brown [8][2].\n\nBurnt sienna is the calcined, oxidized form of raw sienna [2]. Church called it a pigment with a beautiful, warm reddish hue, and Heaton added that it is very transparent with excellent color [2]. Not everyone agreed. Payne thought sienna a greasy color, inferior to gallstone [1].\n\nThe two names are younger than the pigment. Harley reports that *terra di Siena* named the earth burnt or unburnt right up to the nineteenth century, when the English forms raw sienna and burnt sienna came into routine use [1][2]. Church lists the literal translations of the older term in other languages: *Terre de Sienne* in French and *Siena-erde* in German [1].\n\nPaterson defines the burnt form as a dark reddish-brown pigment, also referred to as burnt terra di Sienna [3]. He also records the other color sense of the word: a reddish or yellowish brown that is orange-red or reddish brown once burnt [3]."
+  },
+  {
+   "id": "history",
+   "title": "A very old pigment, a late name",
+   "body": "Siennas turn up early and everywhere in the technical studies of paintings, though their exact chemistry has seldom been measured [1]. The earliest identifications cited are in the Palaeolithic rock paintings of Altamira in northern Spain, in the frescoes of Ajanta in India from 200 BC to 600 AD, and on Coptic canvas paintings [1]. Siennas have also been reported on Irish medieval wall paintings and in the Aqsa Mosque in Jerusalem [1]. Other finds are on panel paintings by the Master of St Giles and on an eighteenth-century portrait by Charles Willson Peale, restored in the nineteenth century [1]. Later identifications include Joseph Dufour's early nineteenth-century printed wall hanging, Chinese textiles, Greek Byzantine wall paintings and drawings by Turner [1][2].\n\nThe medieval record is hazier, and the word itself is not yet attached to the city. Brunello, discussing the medieval Latin word *brunus*, concluded that the medieval texts usually mean an iron-rich brown ochre with manganese, the kind now sold as umber or sienna [11]. That suggests a medieval use under another name, but it is a scholar's inference rather than a labeled pigment [11].\n\nBy the Renaissance the ochres of the Tuscan city were prized, in Ball's account, and sienna became part of the standard painter's range [4]. The name appears among the earth colors of the early nineteenth century too: Cleaveland's 1816 chart of eighty colors lists a *Sienna Yellow* among its yellows [12]. A manual of the same year recommended indigo mixed with burnt sienna and gamboge for the green of trees, and Payne's grey, long loved by landscape painters, was made from lake, raw sienna and indigo [9]. The earth palette stayed alive after modern chemistry arrived: in 1897 Matisse swapped his sombre palette for bright new pigments yet kept yellow ochre and the sienna pigments [4]."
+  },
+  {
+   "id": "practice",
+   "title": "In the studio and in the street",
+   "body": "Painters use burnt sienna as a warm transparent base. Gurney recommends toning a panel with a transparent undertone of Venetian red or burnt sienna, because an insistent warm underpainting forces the painter to cover the background with opaque mixtures and makes skies and foliage easier to judge [5]. The practice is called an *imprimatura* [5]. A painter who starts from a warm ground, he adds, has to decide on every mixture rather than leaving bare canvas to do the work [5].\n\nThe earths also reach the street. Batchelor notes that Le Corbusier's Pavillon de l'Esprit Nouveau of 1925 was painted in ten colors, among them burnt sienna and a darker burnt sienna, which is one fact that undercuts the idea of the architect as a builder of white boxes [10]. Gurney also points out that the brownish reds and oranges of iron oxides have been dug from open pits since prehistory, and that Siena gave its name to those ore-based pigments, used burnt or raw [5].\n\nWhere to look: in an old landscape, find the warm transparent brown under the greens of the trees or in a figure's shadows, and ask whether a sienna-type earth could be doing the work."
+  },
+  {
+   "id": "japan",
+   "title": "In Japan: Taisha-iro",
+   "body": "Our color library lists a Japanese traditional name for this swatch, *taisha-iro* (代赭色), which the library glosses as the red ochre color [14]. It is a secondary name here. The Japanese word names a red ochre rather than the Tuscan earth, so the two are neighbors in hue, not translations of each other [14]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, 723 hold colors within six units of this swatch over at least five per cent of the canvas, about 3 per cent of the archive [13]. These are photographs of aged, varnished paintings, so a match is a hue, not a pigment test [13].\n\nThe strongest surprise is in time. Paintings from the 1400s carry the color 3.2 times as often as the archive average: 92 of the 945 paintings from that century [13]. The peak is the 1440s, where 13 of 58 paintings hold it, 7.4 times the archive rate [13]. In the 1600s it falls to about 2 per cent of paintings [13]. The painters most associated with it are early Italians: Fra Angelico in 6 of his 16 works, Filippo Lippi in 4 of 13, and Pontormo in 3 of 13, far above the archive rate [13]. The leading countries are Nepal and Tibet, where 9 of 47 Tibetan paintings hold it, 6.3 times the expected rate, and Italy, with 125 of 1,986 [13]. [[painter:fra-angelico|Fra Angelico]] and [[painter:filippo-lippi|Filippo Lippi]] lead the list [13].\n\nThe color most often shares a canvas with rust, marigold and ochre [13]. Inside a painting it mostly sits in the middle values: 66 per cent of the matched area is mid-toned, 23 per cent highlight and 11 per cent shadow [13]. In printed English the adjective use of *sienna* peaks in the 1840s [15].\n\nThe first match in the archive is a thousand-year-old Tibetan votive card, long before the name appears in English in 1760 [13][14]. That gap is a warning: the match is a look-alike hue in an aged photograph, and says nothing about the pigment used [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Siena, the Tuscan city, whose nearby earth was the original source",
+   "first_recorded": "as an English color name 1760 (library); terra di Siena as a pigment name is older",
+   "source": "Pigment Compendium; Paterson"
+  },
+  "aka": [
+   "Terra di Siena",
+   "Siena earth",
+   "Burnt sienna (roasted)",
+   "Raw sienna (unroasted)"
+  ],
+  "siblings": [
+   "umber",
+   "ochre",
+   "venetian-red"
+  ],
+  "parent": "earth",
+  "children": [
+   "raw-sienna"
+  ],
+  "disambiguation": [
+   {
+    "slug": "burnt-umber",
+    "gloss": "a darker, manganese-rich earth, roasted the same way"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Taisha-iro (代赭色), red ochre color"
+   },
+   {
+    "lang": "it",
+    "name": "terra di Siena"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "23,781 museum paintings, as photographed",
+  "match": {
+   "hex": "#A0522D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 723,
+  "peak_century": "1400s: 92 of 945 (3.2x)",
+  "peak_decade": "1440s: 13 of 58",
+  "painters": "Fra Angelico 6 of 16; Filippo Lippi 4 of 13",
+  "countries": "Tibet 9 of 47; Italy 125 of 1,986",
+  "role": {
+   "highlight": 0.23,
+   "mid": 0.66,
+   "shadow": 0.11
+  },
+  "company": [
+   "rust",
+   "marigold",
+   "ochre"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"sienna\" (entry, PDF pp. 352-353)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"burnt sienna\" (entry, PDF p. 79)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"sienna, siena\", \"Sienna\", \"sienna\" and \"burnt sienna\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14 and ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, pp. 92 and 98",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, pp. 37 and 155",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 44",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 220",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 78 (entry on medieval brown, brunum), citing Brunello (1973)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 34 (Cleaveland's 1816 chart)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 58, X11/CSS, first English use 1760, Japanese name taisha-iro",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, adjective use, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does roasting raw sienna produce?",
+   "choices": [
+    "A warmer, redder brown called burnt sienna",
+    "A pale yellow",
+    "A cool grey",
+    "A green earth"
+   ],
+   "answer": "A warmer, redder brown called burnt sienna",
+   "kind": "pick"
+  },
+  {
+   "q": "What small ingredient separates sienna from ordinary yellow ochre?",
+   "choices": [
+    "A little manganese oxide",
+    "Copper",
+    "Lead",
+    "Cochineal"
+   ],
+   "answer": "A little manganese oxide",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: today's sienna pigment is still dug only near Siena.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sienna is the same earth twice: raw it is yellow-brown, and fire turns it red-brown.",
+  "In the 1440s, 13 of 58 paintings in our archive hold this brown, 7 times the usual rate.",
+  "Look for burnt sienna as the warm brown under skin and trees in landscape paintings."
+ ],
+ "words": 1518,
+ "status": "checked",
+ "checked": {
+  "by": "article engine batch 10",
+  "date": "2026-10-08",
+  "issues": [
+   "Pigment Compendium page numbers are PDF pages; 'brunum' entry name inferred.",
+   "Finlay's claim that sienna no longer comes from Siena is single-source and hedged.",
+   "Siena the city generates many false hits in the concordance; only pigment passages used."
+  ]
+ }
+}

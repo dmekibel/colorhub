@@ -1,0 +1,131 @@
+{
+ "slug": "saddle-brown",
+ "name": "Saddle Brown",
+ "hex": "#8B4513",
+ "names": [
+  "Saddle Brown"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Saddle Brown is a dark, warm leather brown, one of the 140 named colors in the X11 set for websites.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A leather brown, set as a web color",
+   "body": "Paterson calls SaddleBrown a dark brown from the X11 web set of 140 named colours, hex code #8B4513 [1]. The index lists it among the browns with an asterisk for X11 [2][3]. The books give no earlier history for the name; it reads as the color of saddle leather and is documented only as a standard [1].\n\nOther browns in the index include [[russet]] and [[sandalwood]] [3]. A lighter relative in the same X11 set is [[sandy-brown]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 746 hold this color at 5% of the canvas or more, as photographed [4]. The oldest sample is a narrative scroll from Andhra Pradesh, 1870 [4]. Printed use of *saddle brown* peaked around 1942 [5]. The match counts any painting with this color covering at least a twentieth of the canvas, so it shows where the color appears in photographs of paintings, not that the painters ever called it by this name."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "saddle leather (the books do not say; origin undocumented)",
+   "first_recorded": "X11 set, undated in the books",
+   "source": "Paterson, A Dictionary of Colour, p. 353"
+  },
+  "aka": [
+   "SaddleBrown"
+  ],
+  "siblings": [
+   "sandy-brown",
+   "russet"
+  ],
+  "parent": "brown",
+  "children": [
+   "seal-brown"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (color match within 6 DeltaE2000, at least 5% of the canvas)",
+  "match": {
+   "hex": "#8B4513",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 746,
+  "ngram": {
+   "peak": 1942,
+   "rel_1940": 0.709,
+   "rel_2000": 0.166
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 353",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 483 (color index)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 495 (color index, browns)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'saddle brown', 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many named colors are in the X11 set that Paterson mentions?",
+   "choices": [
+    "140",
+    "16",
+    "216",
+    "1,000"
+   ],
+   "answer": "140",
+   "kind": "pick"
+  },
+  {
+   "q": "When did printed use of 'saddle brown' peak?",
+   "choices": [
+    "1942",
+    "1780",
+    "1997",
+    "1856"
+   ],
+   "answer": "1942",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Saddle Brown is one of 140 X11 colors, and printed use of the name peaked around 1942.",
+  "746 paintings in our archive hold this brown, as photographed."
+ ],
+ "words": 170,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced 'darkest/most reddish X11 brown' and harness-leather claims and sienna neighbor."
+  ]
+ }
+}

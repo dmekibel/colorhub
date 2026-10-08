@@ -1,0 +1,112 @@
+{
+ "slug": "quartz-grey",
+ "name": "Quartz Grey",
+ "hex": "#6B695F",
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Quartz grey is a warm, dark grey with a trace of olive, named in the RAL system for the common mineral.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineral and a code",
+   "body": "Our library carries the name from RAL, the German color-standard system, as RAL 7039 with a first record of 1927, and gives its swatch only as an approximate screen value [1]. The name borrows quartz, the silica mineral [2].\n\nThe *Pigment Compendium* notes that quartz is found close to colorless or white, and impurities give the colored varieties: rose quartz is pink, citrine yellow, amethyst purple, and smoky quartz a grey-brown that may contain aluminium [2]. The books do not say that RAL named its grey after smoky quartz, so treat the link as a likely hint, not a fact [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a very common painted color: our archive of 23,781 paintings has it in 1,596 (6.71%), as photographed [3]. Inside a painting it most often plays a mid-tone, and Ruisdael, with it in 7 of 18 works, is its most devoted painter [3]. The earliest match is from the 1100s, 800 years before the name existed, so these are look-alike greys in aged paint, not proof of any pigment [3]. Neighbors are [[slate-grey]], [[taupe]] and [[grey]] [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mineral quartz",
+   "first_recorded": "1927 (RAL)",
+   "source": "ColorHub library; Pigment Compendium, \"quartz\""
+  },
+  "aka": [
+   "RAL 7039"
+  ],
+  "siblings": [
+   "slate-grey",
+   "taupe",
+   "olive"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6B695F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2553,
+  "role": "mid-tone",
+  "iscc_nbs": "olive gray"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, \"quartz\", p. 328",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which system gives Quartz Grey its code, RAL 7039?",
+   "choices": [
+    "RAL",
+    "Pantone",
+    "NCS",
+    "Crayola"
+   ],
+   "answer": "RAL",
+   "kind": "pick"
+  },
+  {
+   "q": "What color is smoky quartz, per the Pigment Compendium?",
+   "choices": [
+    "Grey-brown",
+    "Bright pink",
+    "Yellow",
+    "Purple"
+   ],
+   "answer": "Grey-brown",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Smoky quartz is a grey-brown, but the books do not say RAL named Quartz Grey after it."
+ ],
+ "names": [
+  "Quartz Grey"
+ ],
+ "status": "checked",
+ "words": 196,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against fact card and book text; no changes."
+  ]
+ }
+}

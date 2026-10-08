@@ -1,0 +1,129 @@
+{
+ "slug": "pavonine",
+ "name": "Pavonine",
+ "hex": "#3B657F",
+ "names": [
+  "Pavonine"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Pavonine is an old word for the colors of a peacock: iridescent greenish blue; the Maerz and Paul color dictionary used it for a dull blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The peacock's word",
+   "body": "Paterson's dictionary defines pavonine as iridescent, of the peacock in color or character, and greenish blue, and lists pavonazzo with the meaning peacock-coloured, greenish blue [1]. Maerz and Paul recorded Pavonine as a color name in 1930, with a first record in 1688 [2].\n\nThe swatch is not what the dictionary describes. It is a dull denim blue, with hue near 250 on the CIELAB wheel, well away from a greenish blue [2]. Its nearest named color is [[dark-orient-blue]], and [[denim]] is only 5.4 units away [2]. For the real peacock color, see [[peacock-blue]] and [[teal]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of the swatch covers at least five per cent of the canvas in 114 [3]. It is often a mid-tone, and it is about 3.2 times as common in the 1900s as across the archive [3]. Monet's [[painting:aic-16568|Water Lilies]] of 1906 carries it over about 41 per cent of the picture [3]. Another near match is Van Gogh's 1889 self-portrait [3]. The most common company in these paintings is the word denim [3]. As photographed: museum photographs of aged, varnished paintings; a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the peacock (Latin pavo)",
+   "first_recorded": "Maerz & Paul 1930 give 1688",
+   "source": "Paterson, A Dictionary of Colour; Maerz & Paul"
+  },
+  "aka": [
+   "Peacock-coloured"
+  ],
+  "siblings": [
+   "peacock-blue",
+   "denim"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "peacock-blue",
+    "gloss": "the greenish blue the word describes"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3B657F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 114,
+  "top_paintings": [
+   "aic-16568",
+   "nga-106382"
+  ],
+  "measured": {
+   "lch": [
+    41,
+    20,
+    250
+   ],
+   "contrast_white": 6.26,
+   "nearest": [
+    [
+     "Denim",
+     5.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 300",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz & Paul 1930, first recorded 1688, plate 37 L 6); CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does pavonine mean?",
+   "choices": [
+    "Iridescent, peacock-like, greenish blue",
+    "Dark red",
+    "Bright yellow",
+    "Pale grey"
+   ],
+   "answer": "Iridescent, peacock-like, greenish blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Pavonine swatch is a bright greenish blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pavonine is a peacock word, though the swatch is a plain denim blue.",
+  "Tilt a peacock feather: the iridescence the word means changes with the angle."
+ ],
+ "words": 219,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

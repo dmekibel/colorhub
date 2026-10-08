@@ -1,0 +1,104 @@
+{
+ "slug": "tyrian-blue",
+ "name": "Tyrian Blue",
+ "hex": "#647B96",
+ "names": [
+  "Tyrian Blue"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Tyrian blue is the blue sibling of Tyrian purple, the shellfish dye, and its best-known story is a religious one.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Blue from shellfish",
+   "body": "Finlay calls Tyrian blue one of the least kosher of colors [1]. Tekhelet, the blue thread of Jewish tradition, is made from a shellfish, though shellfish are forbidden food, which is why the dye sits on the fringe of what is permitted [1].\n\nPaterson lists Tyrian blue among its blue names, in its list of blue names [2]. For the purple itself, see [[tyrian-purple]] [2]. Finlay sets the dye in a conference discussion of tekhelet, the modern effort to recover the ancient blue [1]. Because the dye comes from a living animal, it is a natural product that no pigment recipe in the books reproduces, and the page keeps to what Finlay and Paterson actually say [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #647B96 is a grey, dusty blue, far less saturated than the dye's reputation [3]. Neighbors are [[steel-blue]] and [[powder-blue]] [3]. Screen colors are approximate, and real dyed cloth varied [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Tyre, source of the shellfish dye",
+   "first_recorded": "undocumented",
+   "source": "Finlay, Color, ch. 19"
+  },
+  "aka": [],
+  "siblings": [
+   "tyrian-purple",
+   "steel-blue",
+   "powder-blue",
+   "cobalt-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "concordance of 29 color books",
+  "book_mentions": 4,
+  "swatch": "#647B96 (screen approximation)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, blue list, pp. 486, 493",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is tekhelet made from?",
+   "choices": [
+    "A shellfish",
+    "A plant root",
+    "A mineral"
+   ],
+   "answer": "A shellfish",
+   "kind": "pick"
+  },
+  {
+   "q": "Which purple is Tyrian blue related to?",
+   "choices": [
+    "Tyrian purple",
+    "Mauve",
+    "Puce"
+   ],
+   "answer": "Tyrian purple",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Tekhelet blue comes from a shellfish, an odd fit for Jewish law."
+ ],
+ "words": 163,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unverified list neighbors",
+   "Removed duplicate cross-ref"
+  ]
+ }
+}

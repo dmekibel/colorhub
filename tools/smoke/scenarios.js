@@ -1406,6 +1406,45 @@ scenario("mapstudy", "Name it, Neighborhood and Wander all play; Choose shows bo
   await t.click('[data-dm="you"]', { wait: 300 });
 });
 
+// ================================================================== LANE F: the lit set is the map's subject (js/honey.js honeyLitBar)
+scenario("map-subject", "a painting on the map: the bar's Learn these, Find them, ‹ back with the scroll kept, ✕", async t => {
+  await TRL.open(t, "#/painting/milkmaid");
+  const b = await t.waitFor("[data-cs=map]", 15000, "the On the map button on The Milkmaid");
+  t.w.scrollTo(0, 400); await t.sleep(200);
+  const y0 = Math.round(t.w.scrollY);
+  await t.click(b, { force: true, wait: 900 });
+  await t.waitFor(() => /The Milkmaid/.test(t.text(".cs-hl-bar")) && /as photographed/.test(t.text(".cs-hl-bar")), 15000, "the Milkmaid bar on the map");
+  t.expect(t.$(".cs-hl-bar .cs-hl-back"), "the bar has no ‹ back to the painting");
+  // Learn these: the Learn sheet on exactly the lit set, with its source
+  await t.click("[data-hl-learn]", { wait: 700 });
+  await t.waitFor(".ls-sheet", 6000, "the Learn sheet from the bar");
+  t.expect(/Milkmaid/.test(t.text("[data-qtitle]")), `the sheet is about ${t.text("[data-qtitle]")}`);
+  await H.keys(t, "Escape"); await t.sleep(500);
+  // Find them: Study the map's Find it on that set, straight into round 1
+  await t.click("[data-hl-find]", { wait: 900 });
+  await t.waitFor(() => t.ev("MS_DEBUG.P && MS_DEBUG.P.kind"), 8000, "a Find it round from the bar");
+  t.expect(t.ev("S.mapstudy.spec.set") === "custom" && t.ev("MS_DEBUG.P.kind") === "find", "Find them didn't study the lit set");
+  await t.click(".ms-x", { wait: 900 });
+  // back on the map, still lit, and ‹ still lands on the painting with its scroll
+  const back = await t.waitFor(".cs-hl-bar .cs-hl-back", 12000, "the bar and its ‹ after Find them");
+  await t.click(back, { wait: 900 });
+  await t.waitFor(() => /^#\/painting\/milkmaid/.test(TRL.hash(t)) && !t.$(".screen.waiting"), 12000, `back on the painting (on ${TRL.hash(t)})`);
+  await t.waitFor(() => Math.abs(t.w.scrollY - y0) < 40, 4000, `the scroll came back (${Math.round(t.w.scrollY)}, was ${y0})`);
+  // ✕ clears the set: your own view comes back
+  t.ev("csOnMap(hmPaintingSet(graph().nodes.get('painting-milkmaid')))");
+  await t.waitFor(".cs-hl-bar .cs-hl-x", 12000, "the bar again");
+  await t.click(".cs-hl-bar .cs-hl-x", { wait: 900 });
+  t.expect(!t.$(".cs-hl-bar") && !t.ev("HONEY_HL"), "✕ left the set lit");
+});
+scenario("map-subject", "the Study corner on a fresh map never studies Grey", async t => {
+  await TRL.open(t, "#/home");
+  await t.waitFor(() => /\d/.test(t.text(".hm-title small")) && !/Loading/.test(t.text(".hm-title small")), 12000, "the map to fill");
+  await t.click("[data-pr-study]", { wait: 700 });
+  await t.waitFor(".ls-sheet", 6000, "the Learn sheet from the Study corner");
+  const names = t.text("[data-names]");
+  t.expect(names && !/\bgr[ae]y\b/i.test(names.split(",")[0]) && !/^Learn Grey/.test(t.text("[data-qtitle]")), `the corner studied grey: ${t.text("[data-qtitle]")} | ${names}`);
+});
+
 // ================================================================== THE LEARN ROOM, DECLUTTERED (PLAN.md lane C)
 scenario("learnroom", "placement lands on the map with a one-line hint that leaves at the first touch", async t => {
   await t.open("#shot=place:result", { settle: 600 });
@@ -1444,7 +1483,7 @@ scenario("learnroom", "the Today card shows the painting and opens both of its p
   await t.open("#shot=learn", { settle: 600 });
   await t.waitFor(".lr-today #dlPaintArt img", 8000, "Today's painting in the card");
   await t.waitFor(() => t.$("#lrTcSw.on"), 8000, "today's color swatch");
-  t.expect(/,/.test(t.text("#lrTcTitle")) && t.text("#lrTcSub").length > 3, `the card's title ("${t.text("#lrTcTitle")}")`);
+  t.expect(/,|hides in/.test(t.text("#lrTcTitle")) && t.text("#lrTcSub").length > 3, `the card's title ("${t.text("#lrTcTitle")}")`);
   if (t.ev("typeof todayPick") !== "function") t.expect(!t.$(".lr-tc-chip.on"), "a color chip sits on a painting it isn't linked to");
   await t.click(".lr-tc-act[data-daily]", { wait: 600 });
   await t.waitFor(".dn-in", 10000, "Name it in six from the card");
@@ -1499,4 +1538,48 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   await t.click(".tq-learn", { wait: 700 });
   await t.waitFor(".ls-sheet", 5000, "the Learn sheet from the quiz");
   t.expect(/Helena/.test(t.text(".ls-sheet")), "the Learn sheet doesn't name the painting");
+});
+// Lane H (design/IMPROVE-2026-10-08/PLAN.md): Across the line clicks. The anchor chip shows the word's own color,
+// a right answer offers the neighbor word, adding it makes a review card due tomorrow, a miss says "In ColorHub's
+// map", and each answer is logged to the Learner Model with names.
+scenario("train", "Across the line: anchor, add the neighbor word, honest miss, answers logged with names", async t => {
+  await t.open("#/train", { settle: 600 });
+  t.ev("S.scr = { ok: true, t: today() }; ooAcross()");   // past the one-time screen check
+  await t.click(await t.waitFor("[data-go]", 8000, "Play eight rounds"), { wait: 600 });
+  await t.waitFor(".oo-line .oo-board .oo-t", 10000, "the first board");
+  const anc = t.ev("(() => { const a = document.querySelector('#ooq .oo-lanchor'); return a ? getComputedStyle(a).backgroundColor + ' ' + a.getBoundingClientRect().width : null; })()");
+  t.expect(anc && /rgb/.test(anc) && parseFloat(anc.split(" ").pop()) >= 16, `no anchor swatch beside the word (${anc})`);
+  const ev0 = t.ev("S.learn && S.learn.ev ? S.learn.ev.length : 0");
+  await t.click(t.$$(".oo-line .oo-board .oo-t")[t.ev("OO_LAST.ans[0]")], { force: true, wait: 700 });
+  await t.waitFor(".oo-lstrip", 4000, "the reveal strip");
+  const add = t.$("[data-ladd]");
+  if (add) {
+    const n0 = t.ev("Object.keys(S.cards).length");
+    await t.click(add, { wait: 400 });
+    t.expect(t.ev("Object.keys(S.cards).length") === n0 + 1, "Add to your words made no review card");
+    t.expect(t.$(".oo-ladded"), "the add row didn't settle");
+  } else t.notes.push("the neighbor word was already yours");
+  const ev1 = t.ev("S.learn.ev.slice(-3).map(r => r.e + ':' + (r.c || '') + ':' + (r.by || '')).join('|')");
+  t.expect(t.ev("S.learn.ev.length") > ev0 && /answer:[^:]+:game/.test(ev1), `the answer wasn't logged with a name (${ev1})`);
+  await t.click("[data-next]", { wait: 700 });
+  await t.waitFor(".oo-line .oo-board .oo-t:not(:disabled)", 10000, "the second board");
+  await t.click(t.$$(".oo-line .oo-board .oo-t")[(t.ev("OO_LAST.ans[0]") + 1) % t.$$(".oo-line .oo-board .oo-t").length], { force: true, wait: 700 });
+  t.expect(/In ColorHub's map/.test(t.text("#oofoot")), `the miss line isn't honest: "${t.text("#oofoot")}"`);
+  t.expect(t.ev("S.learn.ev.some(r => r.e === 'confuse' && r.src === 'across' && r.c && r.b)"), "the miss wasn't logged as a named mix-up");
+});
+
+// ================================================================== ONE TODAY (PLAN.md lane B)
+scenario("one-today", "todayPick names a color and the painting that holds it; the Museum Art cover, Today's painting and the Learn card all quote it", async t => {
+  await t.open("#/explore", { settle: 600 });
+  t.expect(t.ev("typeof todayPick") === "function", "todayPick isn't loaded");
+  const pk = t.ev(`(() => { const p = todayPick(); return p && { c: p.color.n, h: p.color.h, id: p.painting.id, s: p.painting.share, bs: p.board.seed, bp: p.board.painting, dc: dailyColor().n, same: JSON.stringify(todayPick()) === JSON.stringify(todayPick(today())) }; })()`);
+  t.expect(pk && pk.c && pk.id && pk.s >= 2 && pk.bs === pk.h && pk.bp === pk.id && pk.same, "todayPick isn't {color, painting at 2%+, board}: " + JSON.stringify(pk));
+  t.expect(pk.dc.toLowerCase() === pk.c.toLowerCase(), `dailyColor is ${pk.dc}, not ${pk.c}`);
+  const note = () => t.text('.xp-cover[data-part="art"] .xp-note');
+  await t.waitFor(() => new RegExp(pk.c, "i").test(note()) && / in /.test(note()), 8000, "the Art cover to name today's color and painting");
+  const e = await t.ev(`dpLoad().then(e => ({ id: e.id, t: e.t }))`);
+  t.expect(e && e.id === pk.id, `Today's painting is ${e && e.id}, not ${pk.id}`);
+  t.expect(note().includes(e.t), "the Art cover doesn't name today's painting");
+  await t.open("#shot=learn", { settle: 600 });
+  await t.waitFor(".lr-tc-chip.on", 8000, "the Learn card's color chip on the painting");
 });

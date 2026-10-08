@@ -1,0 +1,267 @@
+{
+ "slug": "pistachio",
+ "name": "Pistachio",
+ "hex": "#93C572",
+ "names": [
+  "Pistachio"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Pistachio is the pale yellowish green of the nut kernel; it entered the standard color charts of the early 1800s as number 57 of Werner and Syme's greens.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The nut and its green",
+   "body": "Pistachio is the green of the kernel inside the nut. Paterson defines it as a yellowish green and notes the French-looking variant *pistache* [4]. St Clair describes the color as a waxy green, the green of the nut kernel [5]. It sits between [[apple-green]] and [[olive-green]] in the vocabulary of pale, yellowed greens.\n\nThe swatch here is a light yellowish green, within a CIEDE2000 distance of 6.9 of ISCC-NBS block 135 [11]. Our library dates the name only to the xkcd color survey of 2010, whose own pistachio is much lighter, but the word is far older: it is already a standard in the nineteenth-century charts below [11][1]."
+  },
+  {
+   "id": "werner",
+   "title": "Syme's number 57",
+   "body": "Patrick Syme's expansion of Werner's color chart, which Baty reproduces, lists pistachio green as number 57 among the greens, with the [W] mark that shows the name was in Werner's own lists or those of his followers [1]. Syme defined it by recipe: emerald green with a touch of lemon yellow and a little brown added [1]. His examples are the neck of the eider drake, a ripe pound pear, a moss-like rockfoil and the mineral chrysolite [1]. [[asparagus-green]], the next number, is pistachio mixed with much greyish white [1].\n\nNot everyone found the names helpful. An early botanical user of the chart, quoted in Baty's essay on botany, complained that without pictures Werner's names such as pistachio green and siskin green were hard to recognize [3]. Baty also cautions that the paint on Syme's swatches and plates has muted with time, so the chart's pistachio was probably livelier than it looks now [2].\n\nMineralogists had a pistachio green mineral of their own: the *Pigment Compendium* notes that pistacite is the pistachio-green variety of epidote [6]."
+  },
+  {
+   "id": "washington",
+   "title": "A dining room at Mount Vernon",
+   "body": "By Finlay's account, George Washington chose a pistachio green for the large dining room at Mount Vernon, which was ready to be painted in 1787 [7]. He found the bright green pleasing to the eye and less likely to fade [7]. In September of that year he wrote that the green paint for a second coat had turned out badly, and Finlay calls the paint *verdegrease* [7].\n\nFinlay adds that the verdigris reacted with lead white in the finishes and darkened over time [7]. Books disagree about the cause: Ball reports modern tests that show no harm from mixing verdigris with white lead, so the darkening may have had another source [14]. Nearly two centuries later, Finlay says, the room's bright colors were restored with hand-ground paints and changed how historians pictured eighteenth-century American interiors [7]. The pigment behind such greens is [[verdigris-green]]."
+  },
+  {
+   "id": "persia",
+   "title": "Pistachio, saffron and the burned page",
+   "body": "Finlay ties the color to a Persian puzzle [8]. The conservator Mandana Barkeshli noticed that sixteenth-century Mughal miniatures were burned through where a certain pistachio-shade green appeared, while Persian paintings of the same shade were intact [8]. After three years she found the answer in a sixteenth-century love poem by Ali Seirafi, which compares a smiling green pistachio to a lover's lips and advises mixing saffron with *zangar*, the Persian name for verdigris [8]. Saffron, in this account, was the missing ingredient that stopped the copper green from eating the paper [8].\n\nThe *Pigment Compendium* agrees that verdigris was adulterated with saffron to retard corrosion, and that Barkeshli and Ataie recognized the practice on Persian and Indian miniatures from the sixteenth to nineteenth centuries, but it adds a conflicting study by Lee and colleagues from 1997 [9]. Finlay presents the saffron as a recipe lost until recently; the Compendium treats it as a documented practice that not every analysis confirms [8][9]."
+  },
+  {
+   "id": "gems",
+   "title": "Pale stones",
+   "body": "A dealer who met Finlay in a Sudanese cafe showed her fragments from what he called the mines of Cleopatra: tiny pieces of pale green stone, like pistachio, and full of imperfections [10]. Finlay notes that flaws are so common in [[gem:emerald|emeralds]] that almost no stone lacks them [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "These are our own measurements, from photographs of aged, varnished paintings; a color match is not a pigment test [12]. Within a CIEDE2000 distance of 6, and covering at least 5 percent of the canvas, this green appears in only 3 of 23,781 paintings [12].\n\nAll three are striking. The *Portrait of Emperor Jahangir*, dated 1795 in the museum record, carries it over about 51 percent of the canvas [12]. The *Portrait of Asaf Khan* of 1653 carries it over about 35 percent, and [[painter:maurice-denis|Maurice Denis]] gives it 8 percent of *Le Christ vert* of 1890 [12]. Two of the three are Indian court paintings: of the 168 Mughal paintings in the archive, two match, which is nearly a hundred times the expected rate [12].\n\nThree paintings are too few to prove anything, and the match is a look-alike hue in a photograph, not evidence for verdigris or saffron [12]. In printed English the adjective *pistachio* peaks in the 1830s and rose fastest in the 1810s, a decade or two after Washington's dining room and in the years of Syme's chart [13][1][7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the kernel of the pistachio nut",
+   "first_recorded": "in Werner-descended color lists by 1814 at the latest (Syme)",
+   "source": "Baty, Nature's Palette, Greens no. 57"
+  },
+  "aka": [
+   "pistachio green",
+   "pistache"
+  ],
+  "siblings": [
+   "asparagus-green",
+   "olive-green",
+   "apple-green"
+  ],
+  "parent": "yellowish-green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "asparagus-green",
+    "gloss": "Syme's pistachio mixed with much greyish white: paler and greyer"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "pistache"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#93C572",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "aic-62243",
+   "cma-124164",
+   "commons-Q133572560"
+  ],
+  "top_movement": {
+   "Mughal": [
+    2,
+    168
+   ]
+  },
+  "top_country": {
+   "India": [
+    2,
+    721
+   ]
+  },
+  "ngram": {
+   "adjective_peak": 1830,
+   "fastest_rise": 1810
+  },
+  "measured": {
+   "lch": [
+    74.4,
+    48.0,
+    130.6
+   ],
+   "contrast_white": 2.01,
+   "nearest": [
+    [
+     "light yellowish green (ISCC-NBS 135)",
+     6.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Greens, no. 57 (\"Pistachio Green\") and no. 58 (\"Asparagus Green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction and notes on the swatches",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, essay on Syme's chart in botany (Simonini)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"pistachio green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Pistachio\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Epidote\", p. 165",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 16 (\"The lost greens\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Verdigris\", pp. 398-399",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 135; xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings (tools/article_field.py), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"pistachio\" (adjective use), via ColorHub data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Syme define pistachio green?",
+   "choices": [
+    "Emerald green with a touch of lemon yellow and a little brown",
+    "Verdigris with saffron",
+    "Olive green with much greyish white",
+    "Apple green with blue"
+   ],
+   "answer": "Emerald green with a touch of lemon yellow and a little brown",
+   "kind": "pick"
+  },
+  {
+   "q": "By Finlay's account, why were some Mughal miniatures burned through where a pistachio-shade green was used?",
+   "choices": [
+    "The copper green lacked saffron, which slowed its corrosion in Persian recipes",
+    "The painters used gold leaf",
+    "The paper had been soaked in vinegar",
+    "Lead white reacted with the paper"
+   ],
+   "answer": "The copper green lacked saffron, which slowed its corrosion in Persian recipes",
+   "kind": "pick"
+  },
+  {
+   "q": "Asparagus green, in Syme's chart, is pistachio green mixed with much greyish white.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In 1787 Washington complained that the green paint for his pistachio dining room had turned out badly.",
+  "Syme's chart made pistachio green number 57 and defined it as emerald green tinted with lemon yellow and brown.",
+  "Look for pistachio in Mughal court portraits: in our archive it covers about half the canvas of one of them."
+ ],
+ "words": 821,
+ "status": "checked",
+ "checked": {
+  "by": "batch-58 writer self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Washington's paint: Finlay says verdigris plus lead white darkened it; Ball reports modern tests show no harm from that mixture (stated as books disagree).",
+   "Saffron-with-verdigris: Finlay presents it as a lost recipe; the Compendium records conflicting analysis (Lee et al. 1997).",
+   "Cleopatra-mine stones are a dealer's report to Finlay, hedged.",
+   "Archive matches (3 paintings) are look-alike hues, not pigment identifications."
+  ]
+ }
+}

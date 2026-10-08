@@ -1,0 +1,108 @@
+{
+ "slug": "rubellite",
+ "name": "Rubellite",
+ "hex": "#BC0061",
+ "names": [
+  "Rubellite"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Rubellite is the pink to red variety of tourmaline, a gem name that gives its color to a vivid raspberry-magenta.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Pink tourmaline",
+   "body": "A jeweler's glossary defines rubellite as pink tourmaline, with the finest found in Siberia and Burma [1]. Another entry calls it a pinkish or reddish form of tourmaline [2].\n\nA California mine opened in 1903 sent most of its rubellite to Chinese dealers; it was the favorite stone of the Dowager Empress Cixi [1]. Victorians used it in acrostic jewelry: a necklace of fire-opal, opal, ruby, emerald, vermeil, essonite and rubellite spelled out the word forever [2][3]. Like the ruby in the same necklace, it was read in the Victorian sentiment trade as a letter, not as a color [2]. The books give no price or grading details for it, only the places and the people who prized it [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #BC0061 is a saturated crimson-pink [4]. It sits near [[raspberry]], [[magenta]] and [[crimson]] [4]. Real stones vary from pale pink to deep red, so this is one screen approximation [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "undocumented",
+   "source": "Finlay, Jewels"
+  },
+  "aka": [],
+  "siblings": [
+   "raspberry",
+   "magenta",
+   "crimson",
+   "rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "concordance of 29 color books",
+  "book_mentions": 3,
+  "swatch": "#BC0061 (screen approximation)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Jewels, glossary, \"Rubellite\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 11 and notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 21 notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Rubellite is a form of which gem?",
+   "choices": [
+    "Tourmaline",
+    "Garnet",
+    "Spinel"
+   ],
+   "answer": "Tourmaline",
+   "kind": "pick"
+  },
+  {
+   "q": "Whose favorite stone was it?",
+   "choices": [
+    "Dowager Empress Cixi",
+    "Queen Victoria",
+    "Catherine the Great"
+   ],
+   "answer": "Dowager Empress Cixi",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Rubellite, pink tourmaline, was the Dowager Empress Cixi's favorite stone."
+ ],
+ "words": 163,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

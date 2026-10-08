@@ -1,0 +1,270 @@
+{
+ "slug": "denim",
+ "name": "Denim",
+ "hex": "#3B638C",
+ "names": [
+  "Denim"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Denim is the mid-blue of indigo-dyed cotton twill, the cloth of blue jeans; its name probably comes from a French town, though the books agree on little else about where the word began.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Which denim",
+   "body": "Denim names a cloth first and a color second. The color is the blue of indigo-dyed cotton twill, the kind that wears pale where it rubs [4][5]. Our swatch, #3B638C, sits 2.9 units from the ISCC-NBS block called moderate blue on the CIEDE2000 scale, and its Munsell notation is 3.5PB 4.0/6.5 [12].\n\nA brighter web swatch, #1560BD, also circulates under the name in lists drawn from Wikipedia [12]. Our page uses the darker one, which matches the screen value we hold for RAL 5007 [12]. Neither is the dye itself: the chart color [[indigo]] is a violet-blue far from a faded pair of jeans, and the real dye is the subject of [[indigo-dye]] and the [[flower:indigo-woad|indigo plant]] [4][12].\n\nThe nearest named stone is [[gem:lapis-lazuli|lapis lazuli]], 2.9 units away in our data, while the nearest named colors are [[queen-blue]], [[newport]] and [[light-navy-blue]] [12]."
+  },
+  {
+   "id": "word",
+   "title": "The word",
+   "body": "Books disagree on where the word denim comes from. Pastoureau calls its origin much debated: it may be a contraction of *serge de Nîmes*, a wool and silk fabric woven near Nîmes from the 1600s [1]. By the 1700s' end, however, the term described a linen and cotton cloth made across lower Languedoc and shipped to England [1]. He adds that a fine wool cloth from the Mediterranean coast was called *nim* in Occitan, and that all of this is conjecture [1].\n\nFinlay states the Nîmes origin as fact [3]. Balfour-Paul offers it as one of two clues, the other leading to Genoa [2]. The Genoese clue belongs to the word *jeans*: a tough cotton or linen cloth called fustian was exported from Egypt to Italy, the Genoese made their own version, and the name Gene fustian is thought to have been shortened to Gene, hence jeans [2]. Pastoureau agrees that the canvas Levi Strauss first used belonged to a family of cloths made in Genoa, and that the trousers kept the name *jeans* after the material changed [1].\n\nWooden dye vats dated to about 1700 were found beside the Nîmes canal with traces of blue still in them, and Balfour-Paul suggests the ancestors of modern jeans could have been dyed there [2]. In the eighteenth century imported West Indian indigo let Nîmes dyers color cotton and trade it overseas, often through Genoese merchants [2]. St Clair's notes add that Genoa blue was a cheap indigo dye popular for sailors' uniforms [8]."
+  },
+  {
+   "id": "levi",
+   "title": "Levi Strauss, Jacob Davis and 1873",
+   "body": "The American story is told differently in each book [1][2]. Pastoureau writes that the archives of Levi Strauss & Co. burned in the fire after the 1906 San Francisco earthquake, so the early record is thin [1]. In his version a 24-year-old Strauss reached San Francisco in the spring of 1853 with canvas for tents, made it into trousers for miners, and between 1860 and 1865 began replacing the canvas with indigo-dyed denim imported from Europe [1].\n\nBalfour-Paul gives Strauss as an 18-year-old Bavarian who emigrated to New York in 1847 and moved to San Francisco six years later [2]. She has him selling cloth to a Latvian tailor, Jacob Davis, who strengthened pocket corners with copper rivets, and says the pair opened a factory in 1873 using indigo-dyed twill from an American mill [2]. Pastoureau instead calls Davis a Jewish tailor from Reno who began riveting lumberjacks' trousers in 1870 and joined Strauss in 1872 [1]. Finlay says Strauss imported his blue cloth from Nîmes, which conflicts with Balfour-Paul's American mill [2][3].\n\nOur library uses 1873, the year riveted jeans were patented in the United States [12]. The phrase *blue jeans* did not appear commercially until the 1920s, although Pastoureau says the trousers were blue by the 1870s [1]. A red tab sewn on the back pocket in 1936 is, in his account, the first brand name displayed on the outside of a garment [1]."
+  },
+  {
+   "id": "dye",
+   "title": "How the blue is made",
+   "body": "In denim, by Balfour-Paul's account, only the warp threads are dyed [2]. Indigo sits in layers on the yarn, so it can be rubbed away but never changes hue, however old and faded [4]. Dyeing warp yarn for denim is a far more serious industrial matter than craft dyeing: continuous ranges pass the warps in and out of dye tanks, leaving time for the air to oxidize the dye between dips [6].\n\nThe process is still hard to hold steady. A BASF note quoted by Balfour-Paul recommends a bath pH of 11.5, because below that the shade turns duller and greener, while too little reduction gives a reddish dullness and poor penetration [4]. In a note, Finlay says denim took aniline dyes from about 1900, without naming which [3].\n\nSynthetic indigo was close to being phased out when the jeans boom of the postwar years rescued it [5]. In jeans the dye's weaknesses become strengths, demand soared in the mid-1960s, and a century after its commercial launch it dyed enough yarn for more than a billion pairs a year [5]."
+  },
+  {
+   "id": "fading",
+   "title": "Why it fades",
+   "body": "Fading is the product. Pastoureau notes that the dense cloth could not take up all the dye, so the color was never sure to last, and that this instability helped make it a success because the cloth seemed alive and changed along with its wearer [1]. When chemistry later let any fabric be dyed deeply and evenly, producers had to whiten new pairs artificially to recapture the washed-out look [1].\n\nBalfour-Paul names the factory methods, abrasion with pumice and enzyme washing, and argues that the fading is what kept indigo alive in mass production while other synthetic blues took the rest of the market [2]. Because only the warp is dyed and indigo tends to rub off, the cloth wears first on the most exposed parts [2].\n\nThis is something to look for. The pale thread at a knee is the cloth showing through where blue has rubbed off the surface of the yarn, and the blue that remains has not changed hue [2][4]."
+  },
+  {
+   "id": "myths",
+   "title": "Rebel clothing?",
+   "body": "A popular claim holds that jeans were always the clothing of rebellious youth. Pastoureau calls that idea inaccurate, if not wholly false: for most of their history jeans were sensible, utilitarian, even conformist, worn by ordinary and often not young people, and only in the late 1960s in Europe did they become a symbol [1]. Vogue accepted its first jeans advertisement in 1935, when rich tourists from the eastern United States wore them on holidays in the West [1].\n\nBalfour-Paul stresses the postwar rebellion, yet her own dates agree: American soldiers gave Europeans their first sight of blue jeans during the Second World War, and film stars and pop musicians adopted them afterward [2]. Pastoureau places the emblem of youthful dissent between 1950 and 1975 and adds that in communist and developing countries jeans did become a garment of openness to the West [1]."
+  },
+  {
+   "id": "after",
+   "title": "After the pair",
+   "body": "Old denim is itself a raw material. Balfour-Paul notes that denim offcuts are still pulped for rag paper and used in banknotes, continuing a trade in which Dutch papermakers once made blue paper from recycled indigo-dyed clothing [9].\n\nBiotechnology may one day remove the dye. A 1996 US patent for color-altered cotton led Balfour-Paul to ask whether blue cotton could give denim-like yarn without dyeing, noting that the gene concerned came from a blue flower and not from an indigo plant [10]. Paterson records a 1998 BBC radio mention of growing blue cotton to avoid dyeing jeans [11]. St Clair cites a market review that put the global denim industry at 54 billion US dollars in 2011, and writes that it peaked around 2006 [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 93 hold this blue: within six units of CIEDE2000 and covering at least five per cent of the canvas, about 0.4 per cent of the archive [13]. These are museum photographs of aged, varnished paintings, so a match is a look-alike hue, not a dye test [13].\n\nThe rate is not flat. It reaches 4.4 times the archive average in the 1900s, with 29 of 1,674 paintings, and 5.4 times in the 1920s, with 5 of 237 [13]. [[painter:vilhelm-lundstr-m|Vilhelm Lundstrøm]] has it in 4 of his 17 works here [13]. The paintings that hold the most of it are [[painting:cma-172828|Holiday on the Hudson]] by George Luks, 1912, at 40 per cent of the canvas, and [[painting:commons-Q26220263|Three White Cottages in Saintes-Maries]] by Vincent van Gogh, 1888, at 29 per cent [13].\n\nThe earliest match is [[painting:commons-Q22082602|Madonna of the Pomegranate]] from 1426, at 13 per cent of the canvas, 447 years before the 1873 date we hold for the name [12][13]. That is a coincidence of hue, not proof of a dye [13]. In printed English the word reaches 5 per cent of its peak use by 1897 and peaks around 2013 [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the cloth, probably French serge de Nîmes (much debated)",
+   "first_recorded": "undocumented here; our library dates the blue jeans story to 1873, the riveted-jeans patent",
+   "source": "Pastoureau, Blue, ch. 10; Balfour-Paul, Indigo, pp. 203-205"
+  },
+  "aka": [
+   "blue denim"
+  ],
+  "siblings": [
+   "indigo-dye",
+   "navy",
+   "steel-blue"
+  ],
+  "parent": "indigo",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "indigo",
+    "gloss": "the dye behind denim, but the chart Indigo is a violet-blue far from faded jeans"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "serge de Nîmes (a possible source of the word)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3B638C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 93,
+  "top_paintings": [
+   "cma-172828",
+   "commons-Q26220263",
+   "commons-Q22082602"
+  ],
+  "ngram": {
+   "first_5pct": 1897,
+   "peak": 2013
+  },
+  "measured": {
+   "iscc": "moderate blue",
+   "de2000": 2.9,
+   "munsell": "3.5PB 4.0/6.5",
+   "nearest": [
+    [
+     "Queen Blue",
+     3.0
+    ],
+    [
+     "Newport",
+     3.0
+    ],
+    [
+     "Light Navy Blue",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 10 (\"The Favorite Color: The Eighteenth to the Twentieth Century\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 203-205",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Color, notes to the indigo chapter (Levi Strauss)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 117-118",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 87",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 131",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Indigo\" and its notes",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, notes to \"Indigo\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 215",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, ch. 10 (\"Into the Future\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"blue jeans\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, RAL, Wikipedia swatches), CIEDE2000 distances; riveted jeans patent date from our curriculum",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, via data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why do blue jeans fade to a pale blue without changing hue?",
+   "choices": [
+    "Indigo sits in layers on the yarn and rubs off, but what is left keeps its hue",
+    "The dye turns grey in sunlight",
+    "Cotton slowly absorbs the blue",
+    "Washing bleaches the dye to pale violet"
+   ],
+   "answer": "Indigo sits in layers on the yarn and rubs off, but what is left keeps its hue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: jeans were the clothing of rebellious youth for most of their history.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which year do Balfour-Paul and our library give for the riveted indigo work trousers of Levi Strauss and Jacob Davis?",
+   "choices": [
+    "1853",
+    "1873",
+    "1847",
+    "1936"
+   ],
+   "answer": "1873",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In denim only the warp threads are dyed, so worn jeans go pale where the blue rubs off but the blue left behind keeps its hue.",
+  "Dye vats dated to about 1700, still stained blue, were dug up beside the canal at Nîmes."
+ ],
+ "words": 1434,
+ "status": "checked",
+ "checked": {
+  "by": "L7 article engine (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Word origin: Pastoureau calls serge de Nîmes only possible; Finlay and Balfour-Paul state it more firmly. Stated as disputed.",
+   "Strauss/Davis dates differ (Pastoureau 1853, 1860-65, 1870, 1872; Balfour-Paul 1847, 1853, 1873). Presented as disagreement; 1873 per CONFLICTS.md.",
+   "Finlay says Nîmes cloth, Balfour-Paul an American mill. Both reported.",
+   "Finlay's aniline since about 1900 is a single note; hedged.",
+   "Rebel-jeans myth corrected per Pastoureau.",
+   "Archive matches are look-alike colors on aged photographs."
+  ]
+ }
+}

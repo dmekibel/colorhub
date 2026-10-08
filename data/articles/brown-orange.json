@@ -1,0 +1,123 @@
+{
+ "slug": "brown-orange",
+ "name": "Brown Orange",
+ "hex": "#B96902",
+ "names": [
+  "Brown Orange"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Brown Orange is a deep orange-brown, a descriptive name that shares its tone with iron oxide pigments and one rare brown-orange mineral.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Between brown and orange",
+   "body": "The name sets [[brown]] against [[orange]], and the swatch sits between them: nearest ISCC-NBS name \"deep orange\" at a distance of 4.1 [1]. Our sources list it in the 1955 ISCC-NBS system and the 2010 xkcd survey [1]. Nearby named colors include [[dark-orange]], [[rust]] and [[ochre]]."
+  },
+  {
+   "id": "material",
+   "title": "Iron oxides and akaganeite",
+   "body": "Iron oxide pigments include the ochres, siennas and umbers, and the synthetic Mars colors come in orange as well as black, brown and yellow [2]. The pigment books describe akaganeite, an iron hydroxide mineral, as brown, brown-orange or bright yellow; it is rare and forms from the weathering of iron-rich minerals [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch appears in 266 of our 23,781 paintings, 1.12 percent, as photographed [4]. It peaks in the 1400s, found in 9 of the 945 paintings from that century, at 1.2 times the expected rate [4]. Inside a painting it most often plays an accent, in 78 percent of the 166 paintings that hold it [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: brown plus orange",
+   "first_recorded": "1955 (ISCC-NBS) and 2010 (xkcd)",
+   "source": "ColorHub name graph"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-orange",
+   "rust",
+   "ochre"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 266,
+  "nearest_iscc": [
+   "deep orange",
+   4.1
+  ],
+  "role": {
+   "accent_pct": 78
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name graph and library: ISCC-NBS 1955 nearest name, sources and dates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"iron oxide\", p. 223",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), entry \"Akaganeite\", p. 15",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (as photographed), data/graph/fieldnotes",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which of these is an iron oxide pigment group named by Paterson?",
+   "choices": [
+    "Ochres, siennas and umbers",
+    "Smalt and azurite",
+    "Lakes and dyes",
+    "Lead whites"
+   ],
+   "answer": "Ochres, siennas and umbers",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, what role does this swatch most often play inside a painting?",
+   "choices": [
+    "Accent",
+    "Background",
+    "Highlight",
+    "Shadow"
+   ],
+   "answer": "Accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Akaganeite is a rare iron mineral that can be brown, brown-orange or bright yellow."
+ ],
+ "words": 174,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Descriptive modifier; link to iron oxides is a shared tone, not a name history.",
+   "Re-verified key claims against fact cards and book text; no changes needed."
+  ]
+ }
+}

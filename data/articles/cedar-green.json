@@ -1,0 +1,116 @@
+{
+ "slug": "cedar-green",
+ "name": "Cedar Green",
+ "hex": "#636F4C",
+ "names": [
+  "Cedar Green"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Cedar green is a sixteenth-century painter's name for a copper-mineral green, and today a dull, deep green on color charts.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A green with a tree's name",
+   "body": "Coles reports that chrysocolla, a copper mineral, has been used as a green pigment since antiquity; it turns up at Kizil in Turkistan and in Egyptian tombs of the Twelfth Dynasty [1]. In oil it turns very translucent because its tinting strength is low [1]. It worked best in egg tempera and especially watercolor, and in the 16th century that use was called cedar green [1].\n\nOur books say nothing more about the name, and who coined it is undocumented. The dull green on this page comes from later color lists: ISCC-NBS (1955), Ridgway (1912) and Maerz & Paul (1930) all carry the name [3]. We cannot show that this swatch matches the sixteenth-century pigment, so treat it as a modern reading of the word. Its neighbors are [[olive-green]], [[sage-green]] and [[dark-green]] and, among pigment greens, [[hooker-s-green]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Cedar green is common in our archive: it appears in 645 of 23,781 paintings, more than 78 per cent of the named colors manage [2]. It peaks in the 1900s, at 73 of 1,674 paintings, 2.8 times the museums' baseline [2]. Inside a painting it most often plays a mid-tone [2]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "not documented in our books (Coles gives the name only for the chrysocolla pigment)",
+   "first_recorded": "16th century, as a watercolor and tempera pigment name",
+   "source": "Coles, Chromatopia, p. 73"
+  },
+  "aka": [],
+  "siblings": [
+   "olive-green",
+   "sage-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#636F4C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 585,
+  "measured": {
+   "nearest": [
+    [
+     "Olive Green",
+     null
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 73",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for cedar-green (L6 graph)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS (1955), Ridgway (1912), Maerz & Paul (1930) name lists",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which kind of paint did cedar green work best, according to Coles?",
+   "choices": [
+    "Egg tempera and watercolor",
+    "Thick oil impasto",
+    "Fresco on lime plaster",
+    "Enamel"
+   ],
+   "answer": "Egg tempera and watercolor",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is chrysocolla translucent in oil?",
+   "choices": [
+    "Its tinting strength is low",
+    "It is too coarsely ground",
+    "It dissolves in the oil",
+    "It is mixed with lead"
+   ],
+   "answer": "Its tinting strength is low",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In oil, a copper-mineral green can turn glass-clear; painters kept it for watercolor and tempera."
+ ],
+ "words": 226,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'cedar tree foliage' origin claim from aside.",
+   "Reworded sentence close to book phrasing."
+  ]
+ }
+}

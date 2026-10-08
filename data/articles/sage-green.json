@@ -1,0 +1,131 @@
+{
+ "slug": "sage-green",
+ "name": "Sage Green",
+ "hex": "#80967B",
+ "names": [
+  "Sage Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Sage Green is the soft grey-green of the leaves of the sage plant.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The leaf of a herb",
+   "body": "Paterson defines sage-green as the greyish or yellowish green of the leaves of the sage plant [1]. It appears in his index of greens, with [[sap-green]] close by [2][3]. The books give no date for the name or story beyond that definition [1].\n\nThe swatch is a muted green. Paterson lists sage-green and [[sage-grey]] as separate, consecutive entries [1][2]; see also [[sage]] and [[olive-green]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 278 hold this color at 5% of the canvas or more, as photographed [4]. The earliest strong sample is a portrait of Prince Murad Baksh from 1655 [4]. Printed use of *sage green* peaked in 1951 and stayed fairly high through the century [5]. The match counts any painting with this color covering at least a twentieth of the canvas, so it shows where the color appears in photographs of paintings, not that the painters ever called it by this name."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sage plant (Salvia officinalis), by leaf color",
+   "first_recorded": "undated",
+   "source": "Paterson, A Dictionary of Colour, p. 353"
+  },
+  "aka": [
+   "sage"
+  ],
+  "siblings": [
+   "sage",
+   "sage-grey"
+  ],
+  "parent": "olive-green",
+  "children": [
+   "reseda"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (color match within 6 DeltaE2000, at least 5% of the canvas)",
+  "match": {
+   "hex": "#80967B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 278,
+  "ngram": {
+   "peak": 1951,
+   "rel_1880": 0.698,
+   "rel_2000": 0.469
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 353",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 483 (color index)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 499 (color index, greens)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'sage green', 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What gives sage green its name?",
+   "choices": [
+    "The leaves of the sage plant",
+    "A Persian dye",
+    "A sea herb",
+    "A mineral pigment"
+   ],
+   "answer": "The leaves of the sage plant",
+   "kind": "pick"
+  },
+  {
+   "q": "When did printed use of 'sage green' peak?",
+   "choices": [
+    "1951",
+    "1997",
+    "1642",
+    "1832"
+   ],
+   "answer": "1951",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sage green is named for the leaf of the sage plant, a greyish or yellowish green.",
+  "Printed use of 'sage green' peaked in 1951."
+ ],
+ "words": 161,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed index-adjacency claims (two-column index misread) and unsourced swatch comparisons."
+  ]
+ }
+}

@@ -1,0 +1,285 @@
+{
+ "slug": "sea",
+ "name": "Sea",
+ "hex": "#3C9992",
+ "names": [
+  "Sea"
+ ],
+ "tier": "nature",
+ "depth": "epic",
+ "lede": "Sea is a teal-leaning blue-green, the color we reach for when we paint water; for centuries Europeans drew the sea as green as often as blue, and \"sea green\" also named a stage in a dye vat, a gem color and half of a pair of opposites.",
+ "sections": [
+  {
+   "id": "which",
+   "title": "Which sea",
+   "body": "The swatch here, `#3C9992`, is the color of the xkcd color survey's \"sea\" from 2010, a teal-leaning blue-green [1]. It is not the old color called sea green. The CSS and X11 list uses `seagreen` for `#2E8B57`, a darker, plainer green that sits about 28 CIELAB units away from our swatch [2][3]. Ridgway's *Nomenclature of Colors* of 1886, carried into his 1912 plates, has a sea green of `#388783` in our scan, which is much closer to this swatch, about 7 units away [3].\n\nSo the name carries three jobs. It is a historical color word that goes back at least to 1598, the first record Maerz and Paul give for Sea Green [3]. It is a modern web color. And it is a common poetic label for whatever color the water happens to be, which is why the books that mention the sea are mostly describing something else [1][2]."
+  },
+  {
+   "id": "painted",
+   "title": "The painted sea",
+   "body": "Pastoureau, writing the history of blue, says that in ancient and medieval societies water was rarely thought of as blue [4][5]. Pictures could give it any color, and in symbolism it was tied mainly to green [5]. Medieval artists usually drew water as undulating lines of light green, blue, or those two mixed with white [4]. From the thirteenth century, European maps of every kind used green more often than blue for sea, lakes and rivers, while the opposite was true in the East [4].\n\nWhen blue took over is a matter on which Pastoureau gives two dates [4][5]. In one passage he says blue did not become the definitive pictorial and symbolic color for water until the seventeenth century, and in another that on the oldest maps green began to give way to blue in the late fifteenth century [4][5]. Both can be true if the second is the start and the first is the end of a long change. In his book on green he adds that medieval illuminators and Renaissance painters gave the sea a very broad palette, and only in the modern period did painters reduce it to three dominant colors: green, grey and blue [6].\n\nMonet's early *The Green Wave* of 1866 to 1867 is one of Pastoureau's examples: a dark, saturated green makes the sea look violent, very unlike the sea that his Impressionist friends would paint [6]. Gage notes that Titian's sea was blue-green [7]. Byzantine writers went the other way, comparing the marble floor of Sta Sophia to the sea, with blue waves raised up against the stone, as the twelfth-century writer Michael of Thessaloniki described it [7]."
+  },
+  {
+   "id": "greeks",
+   "title": "The Greek question",
+   "body": "A claim is sometimes made that the ancient Greeks could not see blue, and the sea is used as the proof, since Greek authors seldom call it blue [5]. Pastoureau rejects this. In his account the Greeks dyed and painted with blue pigments and distinguished its shades, though blue held little place in their daily life or symbolism [5]. He separates vision, which is biology, from naming, which is culture, and holds that ancient eyes worked exactly like ours [5]. Greek authors could call the sea or the sky any shade of any color, and they described naturally blue things such as the iris with words for red, green or black [5].\n\nThe Latin vocabulary for blue was also imprecise, and its most common word, *caeruleus*, was tied to the color of wax and covered some greens and blacks before settling on blue [5]. What the sea shows is a history of words and habits, not of eyes."
+  },
+  {
+   "id": "dye",
+   "title": "A green on the way to blue",
+   "body": "A second sea green turns up in the dye vat. Woad and indigo are both prepared in a vat where the liquid is a yellowish green, and cloth lifted out of the vat is first that color, then turns sea green, and then deepens into blue as the dye takes up oxygen from the air [8][9]. St Clair describes a visitor's trick at Merton Abbey in which skeins of wool came out of the woad vat almost grassy, then deep sea green, then a resonant blue [8]. Finlay gives an older account, from an observer named Grant writing about Bengal, of an indigo liquor passing through a run of greens before it reaches blue [9].\n\nThe sea green stage is a clue that the blue is real chemistry and not paint: a color that changes in front of you is a color made in the air. The same sequence has been told of the shellfish purple, whose liquid in sunlight turns pale yellow, then sea green, then blue and finally a dark purple-red [8]."
+  },
+  {
+   "id": "stone",
+   "title": "In stone and metal",
+   "body": "Ball explains that metals and their salts give colors a family resemblance: nickel salts take a sea green, copper a turquoise, cobalt a rich deep blue [10]. The same chromium that makes a ruby deep red makes an emerald sea green, because the crystal field around the chromium is stronger in the emerald [10]. Pliny, writing about opals, described them as showing the fire of rubies, the purple of amethysts and the sea green of emeralds all at once [11]. Paterson defines beryl as pale sea green or greenish blue, and *glaucous* as a light greenish blue or sea green, the dull greenish blue often used of the sea [2].\n\nFor a cut stone in these colors, look at [[gem:aquamarine|aquamarine]] for the blue-green end and [[gem:emerald|emerald]] for the green end [2][10]."
+  },
+  {
+   "id": "celadon",
+   "title": "Celadon, the sea-green pottery",
+   "body": "The most famous sea-green object is a ceramic. Finlay quotes a book of 1896 that called a cup at New College, Oxford, once owned by Archbishop Warham, who held the see of Canterbury from 1504 to 1532, \"the sea green or celadon kind\" [12]. St Clair says that seventeenth-century Europeans, who could not read the patterns and colors that marked a Chinese celadon's place and date of origin, saw only the sea-mist ceramics, which recalled for them a hapless character called Céladon in a shabby green coat [13].\n\nThe mineral celadonite was named by Glocker in 1847 from the French *céladon*, \"sea-green\", and it is a main ingredient of green earth, a pigment used widely by painters [14]. So the word travelled from a shepherd's coat to a glaze to a mineral to a pigment, with sea green as the thread [13][14]. See [[celadon]] and [[sea-green]] for the nearby named colors."
+  },
+  {
+   "id": "theory",
+   "title": "Sea green in color theory",
+   "body": "Sea green held a slot in the early color circles. Newton's lectures of 1669 to 1670, Gage reports, named eleven steps of the spectrum, among them green, grass-green, sea-green and blue, before he cut them to seven [7]. In the 1780s the Berlin painter Johann Christoph Frisch proposed an eight-part circle with sea-green and leaf-green as two steps between blue and yellow [7]. Gage also describes an early circle that placed complementary colors opposite one another, with red opposite sea green [7].\n\nThe pairing comes from the eye. Goethe described seeing, after looking at a girl in a red dress, a dark-faced figure in a dress of beautiful sea green; Ball, Livingstone and Gage all repeat the story [10][7][15]. It is the afterimage that makes sea green the \"called-for\" partner of red [10]. Which color counts as red's opposite depends on whether you reckon by paint, light or perception, so no single answer is the true complement [7][15].\n\nThis is the sort of color you can test: stare at a red patch for half a minute, then look at a white wall, and a blue-green afterimage of the kind Goethe described should appear [10]."
+  },
+  {
+   "id": "names",
+   "title": "Names beside it",
+   "body": "Baty reproduces Werner and Syme's nomenclature, which lists sea green among a long run of greens, beside verdigris green, emerald green and apple green [16]. Its neighbors in modern lists are [[teal]], [[turquoise]], [[aquamarine]] and [[seafoam]], and the cooler greener neighbor is [[sea-green]] [2][3]. Paterson also lists a sea-green as a color in the Ostwald circle [2]. The Buddhist fable of the boy who is told to close his eyes and not think of sea green is told by both Finlay and St Clair [12][13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This swatch is rare in painted pictures. In our archive of 23,781 paintings a color within six units covers at least five per cent of the canvas in only 8 works [17]. The best cover is in Berthe Morisot's *Young Woman with a Straw Hat* (1884, about a quarter of the canvas), then in a portrait of Catherine Brower from 1791, and in Ferdinand Hodler's *Lake* (1911, about 10 per cent) [17]. A 1698 view of fleet manoeuvres for Peter the Great in the Usselmeer is also on the list [17]. Photographs of aged, varnished paintings are not colorimeters, so these are screen matches [17].\n\nIn the paintings that do have it, the color is mostly a mid-tone, with about a quarter of cases in the highlights [17]. In printed English the word *sea* itself is a poor guide, since Google Books counts every use, and its share of its own peak slides from nearly 100 per cent in 1800 to about 44 per cent in 2000 [18]. The color terms are better: *sea green* peaks around 1800, and *sea* as an adjective peaks in the 1880s [18][17]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sea; as a color word, the older sea green",
+   "first_recorded": "Sea Green 1598 (Maerz and Paul); Sea as an xkcd swatch 2010",
+   "source": "Library notes; Pastoureau, Green and Blue"
+  },
+  "aka": [
+   "sea green",
+   "sea water"
+  ],
+  "siblings": [
+   "sea-green",
+   "teal",
+   "celadon"
+  ],
+  "parent": "blue-green",
+  "children": [
+   "seafoam"
+  ],
+  "disambiguation": [
+   {
+    "slug": "sea-green",
+    "gloss": "the CSS/X11 color #2E8B57 is a much darker, plainer green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3C9992",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 8,
+  "top_paintings": [
+   "nga-52193",
+   "nga-43633",
+   "commons-Q27970670"
+  ],
+  "ngram": {
+   "peak": 1811,
+   "rel_2000": 0.44
+  },
+  "measured": {
+   "iscc": "vivid bluish green, block 158, dE 3.7",
+   "nearest_sea_green_css": "#2E8B57, 28 CIELAB units"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub graph (xkcd 2010 survey swatch, ISCC-NBS 1955 block 158); library",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sea-green\", \"SeaGreen\", \"beryl\", \"glaucous\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph (Sea Green: Maerz and Paul 1930 first recorded 1598; Ridgway 1886 and 1912 plate XIX; CSS/X11)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 7 (\"An Uncommon Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, chs. 7 and 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 41 (\"Sea Green\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, on Newton, Frisch, Titian, Byzantine pavements, and early color circles",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Indigo\", \"Woad\", \"Tyrian purple\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21 (indigo)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 16 (\"The Secrets of Celadon\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Celadon\", \"Green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Celadonite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, on Werner and Syme's nomenclature",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"sea\" and \"sea green\", all senses, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In medieval European maps, what color was used most often for the sea from the thirteenth century?",
+   "choices": [
+    "Green",
+    "Blue",
+    "Red",
+    "Grey"
+   ],
+   "answer": "Green",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does cloth from a woad or indigo vat pass through sea green on its way to blue?",
+   "choices": [
+    "The dye takes up oxygen from the air as it dries",
+    "It is coated with copper",
+    "It is dipped twice",
+    "Sunlight bleaches it"
+   ],
+   "answer": "The dye takes up oxygen from the air as it dries",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: ancient Greeks could not see the color blue, which is why they seldom call the sea blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "For centuries European maps drew the sea green and not blue.",
+  "A fresh indigo-dyed cloth turns sea green before it turns blue.",
+  "Stare at red, look at a white wall, and the afterimage you see is a sea green."
+ ],
+ "words": 1506,
+ "status": "checked",
+ "checked": {
+  "by": "batch-9 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Pastoureau gives two dates for blue overtaking green for water; stated both.",
+   "The sea color term has thin book history; concordance hits for plain 'sea' are mostly literal.",
+   "Which Gage circle pairs red with sea green is not identified in the concordance.",
+   "Ngram for sea green peak is from the all-senses term."
+  ]
+ }
+}

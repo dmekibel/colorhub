@@ -1,0 +1,123 @@
+{
+ "slug": "brownish-pink",
+ "name": "Brownish Pink",
+ "hex": "#C27E79",
+ "names": [
+  "Brownish Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Brownish Pink is a dusty pink, close to what dictionaries call nude, and its name is plain description.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Pink, with brown in it",
+   "body": "The name qualifies [[pink]] with brown, and our sources list it in the 2010 xkcd survey [1]. The nearest ISCC-NBS name is \"dark yellowish pink\" at a distance of 2.4 [1]. Compare [[rose-pink]], [[dusty-rose]] and [[rosy-brown]].\n\nPaterson defines nude as a brownish pink and cites The Times of 1 March 2000 on Dior's nude-coloured chiffon dresses [2]. The same dictionary says tea rose is a yellowish pink, sometimes a brownish pink, and notes that Maerz and Paul advised against using the term [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch appears in 119 of our 23,781 paintings, 0.5 percent, as photographed [4]. It peaks in the 1900s, found in 11 of the 1,674 paintings from that century, 3.2 times the expected rate [4]. The most devoted painter is Henri Matisse, with 4 of his 50 works here, 6.8 times the baseline of the museums those works come from [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: brownish plus pink",
+   "first_recorded": "2010 (xkcd survey)",
+   "source": "ColorHub name graph; Paterson"
+  },
+  "aka": [
+   "nude (Paterson's gloss)"
+  ],
+  "siblings": [
+   "rose-pink",
+   "dusty-rose"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 119,
+  "nearest_iscc": [
+   "dark yellowish pink",
+   2.4
+  ],
+  "painter": {
+   "henri-matisse": {
+    "n": 4,
+    "of": 50,
+    "lift": 6.8
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name graph and library: ISCC-NBS 1955 nearest name, sources and dates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"nude\", p. 280",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"tea rose\", p. 389",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (as photographed), data/graph/fieldnotes",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson define nude as?",
+   "choices": [
+    "A brownish pink",
+    "A pale blue",
+    "A greyish green",
+    "A deep red"
+   ],
+   "answer": "A brownish pink",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter is most devoted to this swatch in our archive?",
+   "choices": [
+    "Henri Matisse",
+    "Johan Thomas Lundbye",
+    "Maurice Denis",
+    "Gilbert Stuart"
+   ],
+   "answer": "Henri Matisse",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Paterson calls nude a brownish pink and cites Dior's nude-coloured chiffon."
+ ],
+ "words": 164,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Tea rose gloss is hedged in Paterson (sometimes brownish).",
+   "Re-verified key claims against fact cards and book text; no changes needed."
+  ]
+ }
+}

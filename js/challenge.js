@@ -45,7 +45,9 @@ const dpGet = f => fetch(f + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=
 // today's painting (or any day's): the day number picks a place in the fixed schedule, which wraps around
 function dpLoad(k = today()) {
   return (DP_META ? Promise.resolve(DP_META) : dpGet("data/daily-paint.json").then(m => (DP_META = m))).then(m => {
-    const i = (((chNumber(k) - 1) % m.n) + m.n) % m.n, s = Math.floor(i / m.per);
+    // the day's slot is todayPick()'s painting (js/today.js), the same schedule, so the color and the painting agree
+    const tp = typeof todayPick === "function" ? todayPick(k) : null;
+    const i = tp && tp.painting && tp.painting.slot < m.n ? tp.painting.slot : (((chNumber(k) - 1) % m.n) + m.n) % m.n, s = Math.floor(i / m.per);
     let p = DP_SHARDS.get(s);
     if (!p) { p = dpGet(`data/daily-paint/${s}.json`).catch(e => { DP_SHARDS.delete(s); throw e; }); DP_SHARDS.set(s, p); }
     return p.then(rows => rows[i % m.per]);

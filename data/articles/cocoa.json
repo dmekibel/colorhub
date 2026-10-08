@@ -1,0 +1,163 @@
+{
+ "slug": "cocoa",
+ "name": "Cocoa",
+ "hex": "#875F42",
+ "names": [
+  "Cocoa"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Cocoa is the brown of cocoa powder, a color name recorded by 1887, for a drink that began in the Americas and was once used as money.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The brown of the powder",
+   "body": "Paterson's dictionary defines cocoa as the brown of cocoa powder and sends the reader on to cacao, the brown of the bean used for making cocoa and chocolate [1]. Cocoa brown, it adds, was a particularly popular color in the 1930s [1]. The same dictionary calls a sienna brown \"cocoa colour\" [1]. Maerz and Paul (1930) record cocoa as a color name from 1887 [2]."
+  },
+  {
+   "id": "bean",
+   "title": "A bean before a color",
+   "body": "Cocoa beans are native to the Americas [3]. After the Spanish conquest of Mexico, some Spanish settlers took over the local habit of paying with the beans, yet few at first would drink the Aztec chocolate itself [3]. A taste for it grew, helped by sugar, and by the late sixteenth century Spanish owners ran many cocoa plantations in Mexico and Guatemala [3].\n\nGreenfield sets this beside cochineal: cocoa trees fitted a plantation system run on cheap indigenous labor or on enslaved Africans, which the delicate cochineal insect did not [3]. French planters grew cocoa in their Caribbean colonies as well [4]. A colonial council once complained that cochineal-growing commoners were dressing above their station and buying goods once reserved for nobles, the best chocolate among them [3]."
+  },
+  {
+   "id": "tin",
+   "title": "A cocoa tin",
+   "body": "The word turns up in a workshop story too. Finlay reports that Redvers-Jones, in a discarded workshop where jet had been worked, found a rusty Cadbury's cocoa tin full of streaks of rouge polish, his clue to the trade name \"red devils\" [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is a moderate yellowish brown, 5 units from ISCC-NBS block 77, and it lies close to [[sandalwood]], [[coffee]] and [[mocha]] [2]. Paterson keeps cocoa, the powder, and cacao, the bean, as separate entries [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Cocoa is a common color in painting. Colors close to it appear in 3,053 of our 23,781 paintings, 12.8 per cent, more than for 94 per cent of the named colors [6]. Inside a painting it most often plays an accent, in 34 per cent of the 1,679 paintings where the palette lens finds it [6]. It peaks in the 1200s, in 29 of 142 paintings from then, 2.6 times the museums' baseline [6].\n\nThe painter most devoted to it is Hans Smidth, who has it in 8 of his 23 works here, and Tibet is its most over-represented country, in 16 of 47 paintings [6]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not proof of any pigment [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "cocoa powder, from the cacao bean",
+   "first_recorded": "Maerz & Paul record cocoa as a color name from 1887",
+   "source": "Paterson, A Dictionary of Colour; Maerz & Paul via ColorHub library"
+  },
+  "aka": [
+   "cocoa brown",
+   "cacao brown"
+  ],
+  "siblings": [
+   "coffee",
+   "mocha",
+   "sandalwood"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cacao-brown",
+    "gloss": "the brown of the bean, listed apart from cocoa by Paterson"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#875F42"
+  },
+  "n_present": 3053,
+  "role": {
+   "accent": 34
+  },
+  "top_painters": [
+   "Hans Smidth"
+  ],
+  "measured": {
+   "lch": [
+    43.8,
+    26.3,
+    61.2
+   ],
+   "contrast_white": 5.61,
+   "iscc": "moderate yellowish brown (block 77, 5.4)"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cocoa\", \"cocoa brown\", \"cacao brown\", \"sienna brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings and data/graph field notes, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which decade did Paterson say cocoa brown was particularly popular?",
+   "choices": [
+    "The 1930s",
+    "The 1890s",
+    "The 1970s"
+   ],
+   "answer": "The 1930s",
+   "kind": "pick"
+  },
+  {
+   "q": "Some Spanish settlers first used cocoa beans as:",
+   "choices": [
+    "Money",
+    "Dye",
+    "Paint"
+   ],
+   "answer": "Money",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Spanish settlers in sixteenth-century Mexico used cocoa beans as money before they learned to drink the chocolate."
+ ],
+ "words": 413,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lede said twentieth-century color word, contradicting Maerz & Paul 1887; reworded oddly framed 'names a container' line"
+  ]
+ }
+}

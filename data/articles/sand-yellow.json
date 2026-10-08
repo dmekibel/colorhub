@@ -1,0 +1,111 @@
+{
+ "slug": "sand-yellow",
+ "name": "Sand Yellow",
+ "hex": "#D2AA6D",
+ "names": [
+  "Sand Yellow"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Sand Yellow is a warm, muted tan-gold, the color of dry beach sand; for books it is a loose family word, and its sturdiest record is an industrial paint standard.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A family word",
+   "body": "*Yellow sands* turns up in one of our books, but only in a list of yellow things in an artist's meditation on the color, so it tells us the phrase is natural English and nothing about a particular paint or dye [1]. No book we hold describes a pigment or dye called sand yellow.\n\nThe fixed name comes from industry. Our library carries it from the RAL paint standard, which lists it as RAL 1002, dated 1927, and it reappears in the 2010 xkcd color survey [2]. That survey's entry is a different color, a bright pale yellow (#FCE166), so two sources share the words and not the swatch [2]. In the ISCC-NBS system this swatch sits nearest to \"light yellowish brown\", at a CIEDE2000 distance of 5.1 [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Sand yellow is common as a painted color. It appears in 2,254 of 23,781 paintings in our archive, 9.48 per cent, more often than 94 per cent of the named colors [3]. Inside a painting it most often plays an accent, in 46 per cent of the 1,587 paintings where the within-painting lens finds it [3].\n\nIt peaks in the 1300s, in 18.3 per cent of the 251 paintings from that century, 2.5 times the museums' baseline [3]. The earliest match is dated 1100 [3]. The archive's early centuries are thin, so that is a floor, not a first, and it predates the 1927 name by 827 years: a look-alike hue in an aged photograph, not proof of any pigment [3]. It is most over-represented in Indian paintings, at 2.2 times the expected rate [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; plain description of dry sand",
+   "first_recorded": "RAL 1002, 1927",
+   "source": "ColorHub library (RAL)"
+  },
+  "aka": [
+   "RAL 1002"
+  ],
+  "siblings": [
+   "sand",
+   "sandy",
+   "maize-yellow",
+   "sandy-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 2254,
+  "pct": 9.48,
+  "peak": "1300s",
+  "iscc": {
+   "name": "light yellowish brown",
+   "de": 5.1
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 51 (\"The Perils of Yellow\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances to ISCC-NBS names; RAL 1927; xkcd 2010 survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); at least 2% of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which standard gives Sand Yellow its earliest record in our library?",
+   "choices": [
+    "RAL, 1927",
+    "Crayola, 1990",
+    "Pantone, 1963",
+    "Ridgway, 1912"
+   ],
+   "answer": "RAL, 1927",
+   "kind": "pick"
+  },
+  {
+   "q": "In our painting archive, where does Sand Yellow most often play a part?",
+   "choices": [
+    "An accent",
+    "The background wash",
+    "The darkest shadow",
+    "The sky"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sand Yellow shows up in 9.5 per cent of the paintings in our archive, more than 94 per cent of named colors.",
+  "The name goes back only to a 1927 paint standard, though the color is in paintings from 1100 onward."
+ ],
+ "words": 292,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

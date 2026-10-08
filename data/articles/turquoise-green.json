@@ -1,0 +1,162 @@
+{
+ "slug": "turquoise-green",
+ "name": "Turquoise Green",
+ "hex": "#A0D6B4",
+ "names": [
+  "Turquoise Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Turquoise green is a pale, cool mint green, and also the trade name of a chromium, aluminium and cobalt oxide pigment that is a good deal bluer than the swatch.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "The pigment",
+   "body": "*Turquoise green* is a modern synthetic pigment, a chromium-aluminium-cobalt oxide [1][2]. The Colour Index (1971) lists it as CI 77343 and describes a recipe: a mixture of aluminium hydroxide, chromium oxide and cobalt carbonate, ignited at white heat [1].\n\nThe Pigment Compendium treats it as a synonym of Turkish green, because in German *türkis* and *türkisch* are the same word and English translators rendered it both ways [2][3]. German sources also call it *chromblaugrün*, chrome blue-green [2]. Its nearest relative in the paint box is [[cerulean-blue]], and a deeper blue-green neighbor is [[viridian]]. The Compendium notes that some modern acrylic paints labelled cerulean blue contain the same chromium-cobalt-aluminium oxide [1][2]."
+  },
+  {
+   "id": "history",
+   "title": "Where it appears",
+   "body": "The pigment was in use by the mid nineteenth century. Recipes by Salvétat (1859) and Mierzinski (1881) are cited for it, and Zerr and Rübencamp's handbook of 1906 gave a mixture of 30 parts cobalt carbonate, 60 of aluminium hydrate and 30 of chromium oxide hydrate [2]. Schleich the Elder's Munich painting of 1862 is cited as a find of the same oxide mixture [2]. The oxide is otherwise rare, even in modern acrylics labelled cerulean blue [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the pigment",
+   "body": "The color on this page is a pale mint, a name taken from the Maerz and Paul dictionary of 1930, which dates a *turquoise green* to 1845, and from ISCC-NBS block 163 [4]. A pigment of this name is deeper and bluer, and RAL 6016 *Turquoise green*, a paint standard, is a dark teal that sits about as far from the swatch as a green can [4]. Treat the name as a family of blue-greens, not a single formula."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Within six units of CIEDE2000 and at least five per cent of the canvas, this mint green turns up in 12 of 23,781 museum paintings [5]. Three of the largest matches are by [[painter:vincent-van-gogh|Van Gogh]], including [[painting:nga-72328|Roses]], where it covers about 44 per cent of the picture [5]. These are photographs of aged, varnished paintings; a color match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gemstone turquoise; the pigment name is a translation of German türkis",
+   "first_recorded": "Maerz and Paul date a swatch to 1845; the pigment is documented by the 1850s",
+   "source": "Pigment Compendium; Maerz and Paul via ColorHub library"
+  },
+  "aka": [
+   "Turkish green",
+   "chromblaugrün",
+   "Variscite Green (near-duplicate swatch)"
+  ],
+  "siblings": [
+   "cerulean-blue",
+   "viridian",
+   "pale-turquoise",
+   "celadon",
+   "aquamarine"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "turquoise",
+    "gloss": "the saturated cyan-green of the stone, much stronger than this mint"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Türkisgrün, chromblaugrün"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "match": {
+   "hex": "#A0D6B4",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 12,
+  "ngram": null,
+  "top_paintings": [
+   "nga-72328",
+   "aic-76877",
+   "nga-46626"
+  ],
+  "painters": {
+   "name": "Vincent van Gogh",
+   "hits": 3,
+   "lift": 121.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"chromium aluminium cobalt oxide\" and \"cerulean blue\", p. 113",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Turkish green\", p. 384, and \"turquoise green\", p. 385",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"turquoise green\", p. 385",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz and Paul 1930, RAL",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings; tools/article_field.py, CIEDE2000, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why do English books call the same pigment both Turkish green and turquoise green?",
+   "choices": [
+    "German uses one word for both Turkish and turquoise",
+    "It was made in Turkey from turquoise stone",
+    "Two different pigments share the name",
+    "It was named after a Turkish painter"
+   ],
+   "answer": "German uses one word for both Turkish and turquoise",
+   "kind": "pick"
+  },
+  {
+   "q": "Which three oxides are fired together to make turquoise green pigment?",
+   "choices": [
+    "Aluminium, chromium and cobalt",
+    "Copper, tin and lead",
+    "Iron, manganese and zinc",
+    "Titanium, calcium and silica"
+   ],
+   "answer": "Aluminium, chromium and cobalt",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Turquoise green the pigment is a chromium-cobalt-aluminium oxide fired at white heat; the mint swatch is only the name's pale cousin.",
+  "Look for the pale mint in Van Gogh's Roses, where it covers about 44 per cent of the canvas."
+ ],
+ "words": 350,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'chromium gives green, cobalt blue, spinel host' sentence",
+   "Removed 'intimate' mixture",
+   "Reworded cerulean note to match Compendium (modern acrylics labelled cerulean)"
+  ]
+ }
+}

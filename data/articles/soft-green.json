@@ -1,0 +1,133 @@
+{
+ "name": "Soft Green",
+ "hex": "#6FC276",
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Soft green is a descriptive phrase, not a fixed color: a light, gentle green, here a mid-bright leaf tone.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A phrase, not a pigment",
+   "body": "Books use *soft green* as plain description rather than as a name for one pigment or dye [1][2]. Paterson-style dictionaries do not list it, and the art books that use the phrase mean whatever mild green suits the sentence [1].\n\nThree uses show the range. Gage writes of the soft greens and salmon pinks in a Hiroshige print that van Gogh heightened into bright complementary greens and reds [3]. A textile writer describes the soft green leaves on a silk shirt [4]. And the Pigment Compendium repeatedly calls minerals soft green, such as gerhardite and mitscherlichite, to describe their crystals [5]. In each case the phrase is loose description, not a defined hue [3][4][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is a clear mid-light green. In our archive of 23,781 paintings only 2 hold it as a large enough patch, as photographed: an Indian portrait of the Emperor Jahangir (dated 1795) and a Robert Delaunay of 1914 [6]. Painters in this archive rarely used a green this fresh and light at full strength, so a match is rare indeed. Photographed paintings are aged and varnished, so the absence is partly the camera."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description (soft + green)",
+   "first_recorded": "not recorded",
+   "source": "descriptive use only"
+  },
+  "aka": [],
+  "siblings": [
+   "light-green",
+   "pastel-green",
+   "mint"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6FC276",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "top_paintings": [
+   "aic-62243",
+   "nga-52397"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Concordance search of 29 color books for \"soft green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour (no entry for the phrase)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 210",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 393",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 180, 277 and 290 (gerhardite, mitscherlichite, nontronite)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, color match within delta-E 6, 5 per cent cover, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the books' phrase soft green name?",
+   "choices": [
+    "A single historical pigment",
+    "A gentle description of a light green",
+    "A Japanese dye"
+   ],
+   "answer": "A gentle description of a light green",
+   "kind": "pick"
+  },
+  {
+   "q": "How many archive paintings hold this exact swatch as a large patch?",
+   "choices": [
+    "2",
+    "200",
+    "2,000"
+   ],
+   "answer": "2",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Soft green is a description, not a recipe: the books use it for print greens, silk leaves and mineral crystals alike."
+ ],
+ "slug": "soft-green",
+ "names": [
+  "Soft Green"
+ ],
+ "status": "checked",
+ "words": 201,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "fashion historian -> textile writer",
+   "softened 'low in contrast' claim",
+   "removed unsupported 'screen color' claim"
+  ]
+ }
+}

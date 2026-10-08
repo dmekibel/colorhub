@@ -1,0 +1,145 @@
+{
+ "name": "Purple Madder",
+ "hex": "#A03A41",
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Purple madder was a deep, purple-leaning madder lake sold by the English colourman George Field in the early nineteenth century.",
+ "sections": [
+  {
+   "id": "field-s",
+   "title": "Field's purple",
+   "body": "The Pigment Compendium says Purple madder is another name for Field's purple, a madder lake made by the English colourman Field, who called it purple leading to marrone [1]. Osborn, in 1845, gives madder purple, purple rubiate and Field's purple as terms for madder lakes of this kind [2]. Salter, in 1869, describes purple madder as a transparent, dark crimson-leaning lake [3]."
+  },
+  {
+   "id": "praise",
+   "title": "Why painters wanted it",
+   "body": "Field wrote in 1835 that it was a very rich, deep carmine made from madder, not a brilliant purple, and preferred it to the purple of gold and to burnt carmine for its richness, durability and transparency [4]. Salter agreed in 1869, calling it the only durable organic purple on the palette [4]. Salter's caveat was that it was available only in small quantities [4]. For the dye plant behind it, see [[madder]]."
+  },
+  {
+   "id": "today",
+   "title": "On a modern shelf",
+   "body": "A modern table of artists' paint names in Baty's book lists a Purple Madder in a table that also includes Winsor Violet and Permanent Mauve [5]. The swatch here is a muted red [3][5]. Its place beside [[purple]], [[mauve]] and [[tuscan-red]] shows how far the screen swatch sits from the old lake's name [3][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our name graph records purple madder from Maerz and Paul in 1930 [6]. In our archive of 23,781 paintings it appears in 119 paintings, 0.5 per cent, and in 106 by the within-painting measure [7]. It is more common than 59 per cent of the named colors and peaks in the 1400s, in 16 of 945 paintings, 1.7 per cent, or 2.8 times the expected rate [7]. In 86 per cent of those 106 paintings it plays an accent [7]. These are photographs of aged, varnished paintings, so a match is not a pigment test, and the 1400s peak predates Field by centuries [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the madder plant, with a purple cast",
+   "first_recorded": "Field, 1835",
+   "source": "Pigment Compendium, \"Field's purple\""
+  },
+  "aka": [
+   "Field's purple",
+   "madder purple",
+   "purple rubiate"
+  ],
+  "siblings": [
+   "tuscan-red"
+  ],
+  "parent": "madder",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 119,
+  "rank": "more common than 59% of named colors",
+  "peak": "1400s: 16 of 945 paintings, 2.8x expected",
+  "source": "Maerz and Paul 1930"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Field's purple\", p. 170 (citing Field 1835)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"madder\", p. 258 (citing Osborn 1845)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"purple madder\", p. 325 (citing Salter 1869)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"madder purple\", p. 258 (citing Field 1835; Salter 1869)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 267",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub name graph, source dates",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who made the lake that purple madder names?",
+   "choices": [
+    "George Field",
+    "Perkin",
+    "Newton"
+   ],
+   "answer": "George Field",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did painters value it over other purples?",
+   "choices": [
+    "It was durable",
+    "It was cheap",
+    "It was a brilliant purple"
+   ],
+   "answer": "It was durable",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In 1869 Salter called it the only durable organic purple on the palette."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'most purples faded' claim, replaced with Salter's supply caveat",
+   "Hedged Baty table wording"
+  ]
+ },
+ "slug": "purple-madder",
+ "names": [
+  "Purple Madder"
+ ],
+ "status": "checked",
+ "words": 304
+}

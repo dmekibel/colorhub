@@ -1,0 +1,211 @@
+{
+ "slug": "viridian-green",
+ "name": "Viridian Green",
+ "hex": "#009698",
+ "names": [
+  "Viridian Green"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Viridian is a deep, cool, slightly transparent green made from hydrated chromium oxide, the pigment that replaced a poisonous arsenic green on nineteenth-century palettes and became Cézanne's definitive green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name and the swatch",
+   "body": "The name comes from the Latin root *virid-*, meaning green [2]. In France the pigment was sold as *vert émeraude*, emerald green, while English makers called it viridian [1]. It should not be mixed up with the English pigment called [[emerald-green|emerald green]], which is copper aceto-arsenite and poisonous [1].\n\nThe swatch on this page, a teal-leaning blue-green, is a modern screen value, and its nearest named neighbor is [[teal]] [7]. Ridgway's 1912 plate, which is a scan of aged paper, gives a greener sample, about #0C8970 [7]. Both are screen approximations, and neither is a paint test. Paint colorists often use the shorter name [[viridian]] for the tube color."
+  },
+  {
+   "id": "chemistry",
+   "title": "Hydrated chromium oxide",
+   "body": "Viridian is hydrated chromium oxide, a chromium(III) oxide with water built into its crystal [3]. Ball puts the effect plainly: the water molecules tune the chromium ions to a far more attractive hue than the plain oxide has [1]. The result is transparent, unlike the opaque anhydrous chromium oxide green sold as a separate pigment, which the French painter Jean-Georges Vibert, in 1891, listed among his recommended pigments as a separate one from viridian [1].\n\nRiffault, writing in 1874, singled out its ability to keep its brightness and purity under artificial light [3]. Ball lists printing, domestic and industrial uses as its early markets [1]."
+  },
+  {
+   "id": "discovery",
+   "title": "A secret recipe",
+   "body": "The French maker Pannetier developed the pigment about 1838 and shared the secret with only one man, Binet, who also manufactured it [3]. By Ball's account, Pannetier kept the method secret and priced the paint high [1]. In 1859 the French chemist C. E. Guignet found another route and patented it, and the paint found a wide market [1][2][3]. The Compendium cites Salter, in 1869, as the first to describe it in England [3].\n\nBooks disagree on where the story starts. Paterson says the green was discovered in 1797 by the chemist Vauquelin, though he too goes on to name Pannetier in 1838 and Guignet in 1859, while Ball and the Compendium begin the pigment's history with Pannetier around 1838 [2][1][3]. The 1797 date may refer to the chemistry rather than the paint, but the books do not say [2][1][3].\n\nOnce Guignet's cheaper method was out, viridian pushed poisonous emerald green aside for printing, domestic and industrial uses almost immediately [1]."
+  },
+  {
+   "id": "chrome-green",
+   "title": "Chrome green is something else",
+   "body": "Nineteenth-century catalogues also sold a \"chrome green\", and the name still misleads. It was a cheap mixture of Prussian blue and chrome yellow, ranging from a strident green to an olive, and it was sometimes called cinnabar green or zinnober green [1]. As an artist's pigment it had significant drawbacks, and it is a different material from viridian [1]. When a book says an Impressionist used \"chromium green\", check whether it means the hydrated viridian, the opaque oxide, or the mixture [1]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Turner took up the new pigments almost as fast as chemists could supply them, and viridian was among them, alongside cobalt blue and emerald green [4]. Of twenty principal pigments identified in Impressionist pictures, twelve were new synthetics, and viridian was one of them [6]. Renoir's *Boating on the Seine* (1879-80) uses seven pigments besides lead white, and viridian is one, set against pure cobalt blue [6]. In a Monet winter landscape, the olives, khakis and red-browns are not earths but mixtures of cobalt blue, viridian, cadmium yellow and vermilion [6].\n\nCézanne was more cautious. Of the newest pigments, only viridian features prominently in his work, and in *Hillside in Provence* (about 1885) both emerald green and viridian appear among subdued earths [5]. Ball calls it Cézanne's definitive green [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive contains two paintings out of 23,781 where this swatch covers at least five per cent of the canvas, within six color-distance units: an 1858 portrait by Raimundo de Madrazo and a 1924 still life by Patrick Henry Bruce [8]. That is the color as photographed in varnished, aged museum pictures, not a pigment test, and viridian is more often used mixed or in small touches [8][6]. In Google Books, the word *viridian* reaches five per cent of its peak frequency around 1867 and keeps rising to a peak around 2010 [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin *virid-*, green",
+   "first_recorded": "Pigment developed by Pannetier about 1838; patented by Guignet in 1859",
+   "source": "Ball; Pigment Compendium; Paterson"
+  },
+  "aka": [
+   "Vert émeraude (French trade name)",
+   "Hydrated chromium oxide green"
+  ],
+  "siblings": [
+   "viridian",
+   "emerald-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "emerald-green",
+    "gloss": "copper aceto-arsenite, poisonous, a different pigment"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "vert émeraude"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+  "n_present": 2,
+  "match": {
+   "hex": "#009698",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "ngram": {
+   "first_5pct": 1867,
+   "peak": 2010,
+   "source": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak"
+  },
+  "measured": {
+   "lch": [
+    56,
+    33,
+    198
+   ],
+   "nearest": [
+    [
+     "Teal",
+     8.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"viridian green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Viridian\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15 (Turner)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16 (Cézanne)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, chs. 15-16 (Impressionist palettes)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912 plate VII, ISCC-NBS 1955 block 140; CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the water in viridian's crystal do?",
+   "choices": [
+    "Tunes the chromium ions to a more attractive green",
+    "Makes the pigment poisonous",
+    "Makes it opaque",
+    "Makes it dissolve in oil"
+   ],
+   "answer": "Tunes the chromium ions to a more attractive green",
+   "kind": "pick"
+  },
+  {
+   "q": "Viridian and the English emerald green are the same pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter used viridian prominently while avoiding most other new pigments?",
+   "choices": [
+    "Cézanne",
+    "Turner",
+    "Renoir",
+    "Seurat"
+   ],
+   "answer": "Cézanne",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Viridian is hydrated chromium oxide: the water in the crystal is what makes the green.",
+  "Nineteenth-century chrome green was a mixture of Prussian blue and chrome yellow, not viridian."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Vibert is Jean-Georges Vibert, 1891, from Ball (not the Compendium); citation narrowed to [1].",
+   "Paterson's 1797 Vauquelin line clarified: he also names Pannetier 1838 and Guignet 1859."
+  ]
+ },
+ "words": 682,
+ "status": "checked"
+}

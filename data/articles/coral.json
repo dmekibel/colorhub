@@ -1,0 +1,289 @@
+{
+ "slug": "coral",
+ "name": "Coral",
+ "hex": "#FF7F50",
+ "names": [
+  "Coral"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Coral is the name of a sea animal's skeleton and of a warm orange-pink, once a red, borrowed from the precious coral that jewelers prized and that people wore as a charm.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Reef, skeleton and swatch",
+   "body": "*Coral* is the name of the hard skeleton that colonies of small sea animals leave behind, and the color is borrowed from the red form that jewelers prized [1][3]. Paterson defines it as a deep pink or reddish orange [1]. He lists the family around it: coral pink, a deep orange-pink that is sometimes a medium pink; *corabell*, a light orange coral tinted with crimson; *old coral*, a red-orange; and *coralline*, simply the color of red coral [1][2]. St. Clair describes it as a soft pinky orange, then adds that the most desired shade of coral was traditionally red [3].\n\nSo the word covers a range that runs from near-red to peach, and the books do not pin it down. The swatch here is the CSS and X11 coral, `#FF7F50`, a bright orange-pink [1]. Our library, following Maerz and Paul's 1930 dictionary, dates the color word in English to 1513, and the ISCC-NBS system of 1955 files the swatch as a vivid yellowish pink [15]. In our library its nearest names include [[mandarin]] and [[pinkish-orange]] [15].\n\nColor names built on \"average coral\" did not last. Merriam-Webster's Third (1961) defined begonia as a deep pink bluer, lighter and stronger than average coral, and St. Clair points out that average coral has since lost its cultural currency, so the definition no longer helps a reader picture anything [4]."
+  },
+  {
+   "id": "material",
+   "title": "What coral is",
+   "body": "Each coral polyp sits in a cup of aragonite, a form of calcium carbonate, and the cups add up to the skeleton [5]. Reef-building corals need warm, shallow, clear water that does not fall below 18 degrees Celsius, which confines the big reefs to the Caribbean, the Indo-Pacific and the Pacific east of Australia [5]. In the Pigment Compendium's grouping, coral is one of the biogenic carbonates, alongside cuttlefish bone, eggshell and oyster shell [6].\n\nThe warm pink tones associated with coral as a material come from slow-growing red precious corals of the western Pacific, *Corallium japonicum* and *C. secundum* [5]. Do not expect the swatch from them: a ground precious coral is a pink powder, and the saturated orange-pink of the screen color belongs to the word, not the material [5]. White coral, by contrast, was cheap and widely available as a pigment [5]. The chemistry is a surprise in one case. Japanese art-supply dealers sold ground coral as *sango matsu*, \"coral powder\", valued for decorative effects, but a coarse pink sample labeled *sango* turned out on analysis to be calcite rather than the aragonite expected [5]. A powdered coral called dragon's blood has also been recorded in Yemen, and in Papua New Guinea coral was burned and slaked into lime for painting [5][6]."
+  },
+  {
+   "id": "amulet",
+   "title": "A red stone against harm",
+   "body": "For centuries the point of red coral was protection. Greenfield reports that wealthy children were given red coral necklaces to guard against illness, and puts such customs down to local traditions and Druid belief rather than to Roman notions of red [8]. Birren collects a list of folk uses: in Italy a bit of coral was worn for its power, in England red coral was thought to keep teeth from loosening, and in Portugal it was believed to relieve head troubles [7]. He also says that Roman coral and red carnelian were believed to drive off disease [7]. These are beliefs, not medicine.\n\nPastoureau adds a sailor's version. Coral was supposed to protect against many dangers, lightning above all, and many sailors fixed a coral \"stone\" at the top of the mast, the Romans having counted coral as a mineral [9]. Gage points to a blood-red coral bracelet on Christ's wrist in a painting he discusses, as part of the long tradition of coral as an amulet against illness [10]. In other words the color was valued twice over, as a pretty red and as a charm, and the charm needed the red to be intense [9]. The same logic put [[gem:coral|precious coral]] beside [[carnelian]] in a jewel box [9][7]."
+  },
+  {
+   "id": "trade",
+   "title": "Coral on the move",
+   "body": "Coral traveled long distances. Finlay notes that when Pliny complained in about 70 AD that the Roman craze for silk was draining bullion, the goods heading the other way included silver, Baltic [[gem:amber|amber]] and coral [11]. Even now in Tibet, Ladakh and Mongolia, coral is prized and handed down from mother to daughter as wealth [11]. In Ladakh the *perak* headdress, set with turquoise, coral and silver, was until recently among a woman's most valuable possessions [11].\n\nThat is a different coral from the swatch. The coral of a Ladakhi headdress is a deep red bead, and the long chain from Mediterranean divers to Himalayan bridal chests is a trade in red [11]. The books do not say when the name drifted from red toward orange-pink; the earliest recorded use as a color word in our library, 1513, long predates any swatch [15]."
+  },
+  {
+   "id": "werner",
+   "title": "Coral as vermilion",
+   "body": "Early naturalists matched coral to a harder red than ours. In the Werner-and-Syme color system used by naturalists in the early 1800s, Red Coral appears among the examples for number 85, Vermilion Red, next to cinnabar and the tomato [12]. A plate from Georg Knorr's 1766 natural-history book is cited there as showing vermilion red on a coral, and a plate of 1754 by Elizabeth Blackwell is cited for the same red on the skin of a tomato [12].\n\nThis is a useful correction for a modern eye. A naturalist of 1800 who called a thing coral-colored was thinking of [[vermilion]] and [[scarlet]], not of a peach [12]. The pink-orange reading is the later one [12][1]."
+  },
+  {
+   "id": "painters",
+   "title": "Turner's coral clouds",
+   "body": "Finlay's story of coral in painting is about loss. For the sunset in *The Fighting Téméraire*, painted in 1838, Turner passed over vermilion, madder and carmine and took up a new paint, iodine scarlet, which is mercury iodide [13]. Bernard Courtois had made it just before Waterloo, and Humphry Davy developed it a few years later, although Davy himself warned in 1815 that it changed in light [13]. George Field's verdict was that nothing matched it for scarlet geraniums, but its beauty was almost as fleeting as the flowers [13].\n\nAccording to Finlay, Turner painted clouds of coral in just the color he thought right, and visitors to the National Gallery today can only imagine it [13]. Curators already noted pigment change around the sun in 1859, three years after the picture arrived [13]. The coral of those clouds survives, in Finlay's telling, only in the imagination [13]."
+  },
+  {
+   "id": "names",
+   "title": "How many names come from the sea",
+   "body": "Coral belongs to a small group. In an analysis at the US National Bureau of Standards, Deane Judd found about 7,500 English color names, of which 50 came from marine life, with coral as the example Garfield picks [14]. The sea gave fewer names than flowers (528) or fruits (254), but more than the 20 that came from human skin [14]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our painting archive barely holds coral. A color within six units of the swatch appears in 7 of 23,781 paintings, 0.03 per cent, and is rarer than 68 per cent of the named colors [16]. Counted inside the painting instead, it turns up in 10, and in 90 per cent of those it plays an accent [16]. The earliest dated hit is [[painting:cma-161772|a Ragamala page from India]] of about 1600, and the latest is [[painting:smk-KMS6397|Karl Isakson's portrait of the painter Edvard Weie]], dated 1893 in the archive's record [16]. Only five paintings have dates, the early centuries are thin, and these are photographs of aged, varnished paintings, so read the result as a floor and a screen match, not a pigment test [16].\n\nThe printed word is easier to trace. In Google Books the adjective *coral* rose fastest in the 1840s and peaks in the 1850s, a curve that belongs to the color word and says nothing about the material [17]. To train the eye, set the swatch beside [[salmon]] and [[light-coral]] and notice which way each leans, toward pink or toward orange."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the skeleton of marine polyps (precious red coral)",
+   "first_recorded": "English color word 1513 (Maerz and Paul, per our library)",
+   "source": "Paterson, Dictionary of Colour; St. Clair, Secret Lives of Color"
+  },
+  "aka": [
+   "coral pink",
+   "corabell",
+   "old coral",
+   "coralline"
+  ],
+  "siblings": [
+   "coral-red",
+   "light-coral",
+   "salmon"
+  ],
+  "parent": null,
+  "children": [
+   "black-coral",
+   "dusty-coral"
+  ],
+  "disambiguation": [
+   {
+    "slug": "coral-red",
+    "gloss": "closer to the red coral of jewelry than the orange-pink swatch"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Araishu (洗朱), \"rinsed-out red\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FF7F50",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 7,
+  "n_within_painting": 10,
+  "role": {
+   "accent": 0.9
+  },
+  "rarer_than_pct": 68,
+  "first_dated": {
+   "id": "cma-161772",
+   "year": 1600
+  },
+  "latest_dated": {
+   "id": "smk-KMS6397",
+   "year": 1893
+  },
+  "ngram": {
+   "adj_rise": 1840,
+   "adj_peak": 1850
+  },
+  "measured": {
+   "munsell": "9.9R 6.6/12.2",
+   "iscc": "vivid yellowish pink (block 15)"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 129 (\"coral\", \"Coral\", \"corabell\", \"coralline\", \"coral pink\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 285 (\"old coral\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St. Clair, The Secret Lives of Color, glossary entry \"Coral\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St. Clair, The Secret Lives of Color, section on Merriam-Webster's color definitions (epub section 15)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entry \"coral\" (pp. 144-145)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"calcium carbonates\" (pp. 87-91) and \"shell white\" (p. 351)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 3 (\"The Amulet Wearers\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 14 (\"Red in Everyday Life\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 154",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 347",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 229-236 (Werner-Syme number 85, Vermilion Red)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23 (the passage on Judd's survey of color names)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, data/graph nodes): Maerz & Paul 1930 date, ISCC-NBS 1955 block 15, nearest names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, dE2000 <= 6, >= 5% of canvas); photographs of aged, varnished paintings, a color match not a pigment test",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "Google Books Ngram, adjective use of \"coral\", 5-year smoothing",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why were red coral necklaces put on children?",
+   "choices": [
+    "As a charm against illness",
+    "To show noble rank",
+    "To dye the skin",
+    "As a medicine swallowed in powder"
+   ],
+   "answer": "As a charm against illness",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color word coral originally meant a soft peach.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Early naturalists matched red coral to which color?",
+   "choices": [
+    "Vermilion red",
+    "Sea green",
+    "Pale yellow",
+    "Lilac"
+   ],
+   "answer": "Vermilion red",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Early naturalists listed red coral beside cinnabar as an example of vermilion red, a harder red than today's coral swatch.",
+  "Sailors fixed a coral stone to the top of the mast against lightning.",
+  "In our archive coral is rare in paintings, and nearly always an accent."
+ ],
+ "words": 1294,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Short for an epic slot: books say little about the color itself; written long, not padded.",
+   "1513 date is Maerz & Paul via Wikipedia/our library; hedged.",
+   "Karl Isakson dating (1893) comes from archive record and looks wrong for the painter; flagged as the archive's date.",
+   "Gage coral bracelet painting not identified (OCR jumble); hedged."
+  ]
+ }
+}

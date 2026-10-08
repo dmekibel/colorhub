@@ -1,0 +1,135 @@
+{
+ "slug": "light-cadmium",
+ "name": "Light Cadmium",
+ "hex": "#CDAA47",
+ "names": [
+  "Light Cadmium"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Light Cadmium is a warm, slightly dull gold, named after cadmium yellow light, the pale end of the cadmium sulfide pigments.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "The pigment",
+   "body": "Cadmium yellow is a sulfide of the metal cadmium, and Ball credits the chemist Stromeyer with early work on it [1]. Altering how the compound is made gives orange instead of yellow, since the hue depends on the grain size [1]. Ball says it was a rich, opaque yellow that does not fade in sunlight, but the supply from zinc smelting was too small for it to matter until the 1840s [1]. Some oil painting in France and Germany used it from about 1829 [1]. Jarman instead gives the start of modern production as the First World War, so the books disagree on the early history [1][2]."
+  },
+  {
+   "id": "light",
+   "title": "Light, in the tube",
+   "body": "In a modern paint chart, *cadmium yellow light* is the pigment PY 35 [3]. Gurney uses it as a pigment that comes close to a yellow primary for subtractive mixing [3]. The Pigment Compendium records that early light cadmium sulfide pigments contained up to 30 per cent cadmium oxalate, which made them unstable, fading in air and light [4].\n\nThe swatch here is duller than the paint: the ISCC-NBS block is dark yellow, 3.1 units away on the CIEDE2000 scale, and our library traces the name to Ridgway's plate IV of 1912 [5]. Compare [[cadmium-lemon]], the paler member of the family [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color this close appears in 523 works, or 2.2 per cent [6]. It peaks in the 1400s, at 3.4 per cent of 945 paintings, which is long before cadmium existed, so the match is gold or ochre, not the pigment [6]. These are photographs of aged, varnished paintings [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the metal cadmium",
+   "first_recorded": "early nineteenth century (Stromeyer)",
+   "source": "Ball, Bright Earth, ch. 15"
+  },
+  "aka": [
+   "cadmium yellow light"
+  ],
+  "siblings": [
+   "cadmium-lemon",
+   "cadmium-green",
+   "yellow",
+   "ochre"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed",
+  "n_present": 523,
+  "pct_archive": 2.03,
+  "peak_century": 1400,
+  "measured": {
+   "iscc": "dark yellow",
+   "de2000": 3.1
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 51",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 77",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 82 (cadmium oxalate)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912, CSS, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; dE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did cadmium yellow have little impact until the 1840s?",
+   "choices": [
+    "Zinc smelting did not yet supply enough cadmium",
+    "It was banned",
+    "It faded in sunlight",
+    "Nobody liked yellow"
+   ],
+   "answer": "Zinc smelting did not yet supply enough cadmium",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Light Cadmium pigment appears in 1400s paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cadmium yellow was tried in oil by about 1829 but waited until the 1840s to become a paint."
+ ],
+ "words": 278,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All key claims verified against fact cards and book text; no changes"
+  ]
+ }
+}

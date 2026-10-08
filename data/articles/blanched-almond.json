@@ -1,0 +1,105 @@
+{
+ "slug": "blanched-almond",
+ "name": "Blanched Almond",
+ "hex": "#FFEBCD",
+ "names": [
+  "Blanched Almond"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Blanched Almond is a pale, warm cream, one of the named colors of the web.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Blanched Almond comes from the X11 and CSS color list, where it is among the pale yellows [1]. The library also finds a Ridgway match, in the 1912 standard on plate XXX, and an ISCC-NBS match in block 89, under the name Ivory Yellow [1]. The name itself, a peeled almond, has no recorded history in the books we hold.\n\nIts closest neighbors are Papaya Whip, a near duplicate at 1.8, and [[bisque]] [1]. Next to [[ecru]] it is a little lighter and yellower, at a distance of 4.6 [1]. Compare it with [[cornsilk]] and [[linen]] among the pale creams [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Blanched Almond appears in 1.74% of the 23,781 paintings in our archive, as photographed [2]. It is more common than 74% of the named colors and peaks in the 1900s, at 1.8 times the expected rate [2]. Inside a painting it most often plays a light, in 54% of cases [2]. John Singer Sargent is its most devoted painter here, with 14 of 287 works [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a blanched (peeled) almond",
+   "first_recorded": "origin undocumented; X11/CSS list",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "BlanchedAlmond (CSS keyword)"
+  ],
+  "siblings": [
+   "papaya-whip",
+   "bisque",
+   "ecru"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 413,
+  "pct_paintings": 1.74,
+  "peak_century": 1900,
+  "nearest": [
+   [
+    "Papaya Whip",
+    1.8
+   ],
+   [
+    "Ecru",
+    4.6
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color is a near duplicate of Blanched Almond?",
+   "choices": [
+    "Papaya Whip",
+    "Crimson",
+    "Teal"
+   ],
+   "answer": "Papaya Whip",
+   "kind": "pick"
+  },
+  {
+   "q": "In painting, Blanched Almond most often plays a light.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Blanched Almond appears in 413 of the paintings in our archive, as photographed."
+ ],
+ "words": 178,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

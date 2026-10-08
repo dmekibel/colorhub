@@ -1,0 +1,128 @@
+{
+ "slug": "cadet-blue",
+ "name": "Cadet Blue",
+ "hex": "#5F9EA0",
+ "names": [
+  "Cadet Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Cadet Blue is a muted greenish blue named for the grey-blue of cadet uniforms; it entered web color lists as one of the 140 X11 names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A uniform color",
+   "body": "St Clair glosses cadet blue as a grey-greenish blue taken from military uniforms [1]. Paterson defines it as a bluish grey or a strong blue, and notes the variant *cadet grey* [2]. The books therefore disagree on how blue it is: one says grey, another says a strong blue [1][2]. The swatch is a greyed teal, between [[steel-blue]] and [[teal]], and close in family to [[cadet-grey]] [3]."
+  },
+  {
+   "id": "x11",
+   "title": "The web name",
+   "body": "Paterson lists `CadetBlue` as one of the 140 colors of the X11 color set, with the hex code #5F9EA0 [2]. That is the swatch shown here, which is why the word is better known on screens than in dye or paint catalogues [2][3]. The same dictionary files it in its table of blues [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Cadet Blue is a rare color in painting: 36 of 23,781 paintings in the ColorHub archive contain it, as photographed [3]. It is most common in the 1500s, and Juan de Flandes has it in 3 of his 13 paintings, far above the rate for the archive [3]. Among the larger patches is Odilon Redon's *Village by the Sea in Brittany* of 1880 [3]. A search of printed books shows the phrase *cadet blue* rising from the 1880s and peaking around 1921 [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the grey-blue uniforms of military cadets",
+   "first_recorded": "peaks in print around 1921; web name from X11",
+   "source": "St Clair; Paterson"
+  },
+  "aka": [
+   "CadetBlue (X11)",
+   "Cadet grey"
+  ],
+  "siblings": [
+   "cadet-grey",
+   "steel-blue",
+   "teal"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cadet-grey",
+    "gloss": "a related grey-blue under a near-identical name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 36,
+  "top_painter": {
+   "name": "Juan de Flandes",
+   "hits": 3,
+   "n": 13
+  },
+  "ngram_peak": 1921,
+  "hex": "#5F9EA0"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary of color names",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"cadet blue\" and \"CadetBlue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive match for #5F9EA0, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, phrase cadet blue, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Cadet Blue come from?",
+   "choices": [
+    "Military uniforms",
+    "A pigment mine",
+    "A flower",
+    "A city"
+   ],
+   "answer": "Military uniforms",
+   "kind": "pick"
+  },
+  {
+   "q": "Cadet Blue is one of the 140 X11 color names.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cadet Blue's name comes from military uniforms; its hex code comes from the X11 web list."
+ ],
+ "words": 222,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported inference on ngram peak"
+  ]
+ }
+}

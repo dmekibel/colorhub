@@ -1,0 +1,115 @@
+{
+ "slug": "jade-green",
+ "name": "Jade Green",
+ "hex": "#2BAF6A",
+ "names": [
+  "Jade Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Jade green is a green named for the stone, and Paterson's definition spans blue-green to yellowish green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with a range",
+   "body": "Paterson defines plain jade as a green in various shades, mainly yellowish-green, and jade green as a blue-green or a yellowy green [1]. Those two definitions point in opposite directions, so the name is not tied to one spot on the wheel [1]. Paterson's index lists both jade and jade green among the greens [2]. In the dictionary, then, jade green is a color word first and a stone's name second, and its range stays wide [1][2].\n\nThe nearest named neighbors are [[jade]], [[sea-green]] and [[emerald-green]], which the library places close by [3]. The stone is itself a named gem in ColorHub [3]."
+  },
+  {
+   "id": "dye",
+   "title": "Caledon Jade Green",
+   "body": "One precise use is in dyes. Paterson records Caledon Jade Green as a synthetic green dye discovered in 1920 [4]. \"Caledon\" is a dye brand name in that entry [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The books give little beyond this. We found no usable archive measurements for the name, so there is no painting data to quote [3]. The swatch is one screen reading of the name [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gemstone jade",
+   "first_recorded": "listed in Paterson's dictionary (2003); Caledon Jade Green dye 1920",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Caledon Jade Green (the dye)"
+  ],
+  "siblings": [
+   "jade",
+   "sea-green",
+   "emerald-green",
+   "malachite-green"
+  ],
+  "parent": null,
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name library; no archive field notes for this name",
+  "swatch": "#2BAF6A",
+  "books": 3
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 226, \"jade\" and \"jade green\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 475 (index of greens)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and name graph (data/library.json, data/graph/names.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 86, \"Caledon Jade Green\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define jade green?",
+   "choices": [
+    "Blue-green or yellowy green",
+    "A pale grey",
+    "A deep red-brown",
+    "A bright yellow"
+   ],
+   "answer": "Blue-green or yellowy green",
+   "kind": "pick"
+  },
+  {
+   "q": "Caledon Jade Green is a synthetic dye discovered in 1920.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Jade green can mean blue-green or yellowish green, depending on the definition."
+ ],
+ "words": 176,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede 'has always covered' overstated; dropped inferred claim that the dye label is not about the stone; trimmed dye trade-name inference"
+  ]
+ }
+}

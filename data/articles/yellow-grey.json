@@ -1,0 +1,137 @@
+{
+ "slug": "yellow-grey",
+ "name": "Yellow Grey",
+ "hex": "#939176",
+ "names": [
+  "Yellow Grey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Yellow grey is a descriptive name for a dull, drab green-yellow-grey, the color of string, and in paintings often a hidden color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A drab with a name hunt",
+   "body": "Yellow grey is a description: a grey tinted with yellow [1]. Paterson uses the words to define two older names. String is a light beige-brown or yellow-grey, and isabel or isabella is a dingy yellow grey [1]. The story often told for isabella, that it recalls an archduchess who wore the same underclothes for years, is a legend, and Paterson notes more than one candidate for the lady [1].\n\nSt Clair observes that a shopper looking for pale yellow-grays will not find one actually called beige, a word she suggests marketers shy away from for its sound [2]. A close cousin is [[khaki]]: the word does not come from the French name for the persimmon, *kaki*, but from a Hindustani word meaning earth or dust colour [3]. [[taupe]] and [[olive-green]] sit nearby."
+  },
+  {
+   "id": "damage",
+   "title": "The yellow-grey of age",
+   "body": "The color is also a sign of change. Ball describes a rare fault in ultramarine paint, the so-called sickness, where blue turns patchy and greyish or yellow-grey, for reasons still not fully understood [4]. Yellowing varnish, soiled ground and dulled paint all push painted surfaces toward this tone, which may be one reason it is so common in our measurements [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Yellow grey appears in 8.69% of the 23,781 paintings in our archive, 2,067 paintings, as photographed, which makes it more common than 93% of the named colors [5]. Inside a painting it most often plays a hidden color, in 44% of the 1,312 paintings where we measure roles [5].\n\nIt peaks in the 1900s, at 7.5% of the 1,674 paintings from then, 1.5x the baseline of the same museums [5]. Johannes Lingelbach is the painter most devoted to it, with the color in 7 of 16 works here [5]. The earliest match, 916, is a look-alike hue in an aged photograph, 1,011 years before the name's earliest record in our sources, the 1927 RAL list [5]. It shares canvases more than chance with Yellowish Glaucous and Old bamboo [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: grey with yellow",
+   "first_recorded": "1927 (RAL) in our name data",
+   "source": "Paterson, Dictionary of Colour; ColorHub name data"
+  },
+  "aka": [
+   "yellowish grey"
+  ],
+  "siblings": [
+   "khaki",
+   "taupe"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "khaki",
+    "gloss": "A named earth colour from Hindustani, not from the French fruit"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#939176",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 2067,
+  "rank_pct": 93,
+  "role": "hidden color 44%",
+  "painter": "Lingelbach, 7 of 16"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"string\" and \"isabel, isabella\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 29 (\"Beige\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 44 (khaki)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub painting archive, field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the word khaki come from?",
+   "choices": [
+    "A Hindustani word for earth or dust colour",
+    "The French word for persimmon",
+    "A Persian dye merchant",
+    "Latin for grey"
+   ],
+   "answer": "A Hindustani word for earth or dust colour",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: ultramarine sickness is a mottled greyish or yellow-grey discoloration of blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Khaki comes from a Hindustani word for dust colour, not from the French word for persimmon.",
+  "Yellow grey is more common in our paintings than 93% of named colors."
+ ],
+ "words": 340,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede: removed unsourced 'old paper'/'background passages'.",
+   "Softened aging-causes claim to 'may'.",
+   "Isabella story kept as legend."
+  ]
+ }
+}

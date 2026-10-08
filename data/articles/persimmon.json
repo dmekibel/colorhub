@@ -1,0 +1,160 @@
+{
+ "name": "Persimmon",
+ "hex": "#EC5800",
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Persimmon is the reddish orange of the ripe persimmon fruit, and a color name that books also stretch to the red-brown of the tree's wood.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The fruit and the wood",
+   "body": "Paterson's dictionary defines persimmon as a reddish orange, the color of the fruit of that name [1]. The same entry adds a second sense, the red-brown of persimmon wood [1].\n\nThe name is easy to confuse with another fruit word. Pastoureau notes that *khaki* does not come from the French name of the exotic persimmon fruit, *kaki*; it comes from a Hindustani word meaning earth or dust color [2]. The two words only sound alike. For the dull military shade, see [[khaki]]."
+  },
+  {
+   "id": "juice",
+   "title": "The juice that waterproofs",
+   "body": "Persimmon is also a material. In China and Japan, stencils for resist-dyed indigo cloth were cut from mulberry paper made waterproof with tung oil or persimmon juice [3]. Balfour-Paul adds that persimmon juice, with its natural tannin, was one ingredient of the pastes used in resists on indigo-dyed cloth, alongside bean starch, red peppers and egg white [4].\n\nSo the fruit appears in the story of blue before it appears in the story of orange. The juice protected the stencil that kept the dye off the cloth [3][4]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "St Clair observes that artists have relied on reds from oxblood up to persimmon for drama and depth, and she links the Pre-Raphaelites to such reds [5]. Persimmon sits near [[orange]], [[orange-red]] and [[khaki]] in the name graph."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our name graph first records persimmon in a RAL list of 1927, then in Maerz and Paul in 1930 and ISCC-NBS in 1955 [6]. That is a date for the standard, not for the word.\n\nIn our archive of 23,781 paintings, a color within the match threshold of persimmon appears in 25 paintings, 0.11 per cent, and in 29 by the within-painting measure [7]. It is rarer than 57 per cent of the named colors [7]. It peaks in the 1700s, in 10 of 3,449 paintings, 0.3 per cent, or 1.9 times what those museums' holdings would predict [7]. In every one of the 29 paintings it plays an accent, as a small lit patch [7]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fruit of the persimmon tree",
+   "first_recorded": "RAL 1927 in our name graph (the word itself is older)",
+   "source": "Paterson, A Dictionary of Colour, \"persimmon\""
+  },
+  "aka": [
+   "kaki (fruit name in French)"
+  ],
+  "siblings": [
+   "orange",
+   "orange-red",
+   "khaki",
+   "spanish-orange"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "khaki",
+    "gloss": "sounds like the French word for persimmon but comes from a Hindustani word for dust"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 25,
+  "rank": "rarer than 57% of named colors",
+  "peak": "1700s: 10 of 3,449 paintings, 1.9x expected",
+  "role": "accent in 29 of 29"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"persimmon\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 44 (\"Green among the Romans\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 163",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 147",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 64 (\"Red\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub name graph, source dates (RAL 1927, Maerz and Paul 1930, ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Pastoureau say the word khaki does not come from?",
+   "choices": [
+    "The French name of the persimmon fruit",
+    "A Persian word for rust",
+    "Latin for yellow"
+   ],
+   "answer": "The French name of the persimmon fruit",
+   "kind": "pick"
+  },
+  {
+   "q": "What was persimmon juice used for in Asian indigo work?",
+   "choices": [
+    "Waterproofing stencil paper for resists",
+    "Fixing red dye",
+    "Bleaching cloth"
+   ],
+   "answer": "Waterproofing stencil paper for resists",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: persimmon can also name a red-brown wood color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The juice of a persimmon once waterproofed the paper stencils used to make blue-and-white cloth.",
+  "Khaki sounds like the French word for persimmon, but it means dust."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unverifiable claim that a Paterson list files persimmon among reds and oranges"
+  ]
+ },
+ "slug": "persimmon",
+ "names": [
+  "Persimmon"
+ ],
+ "status": "checked",
+ "words": 359
+}

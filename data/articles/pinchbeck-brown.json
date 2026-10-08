@@ -1,0 +1,101 @@
+{
+ "slug": "pinchbeck-brown",
+ "name": "Pinchbeck Brown",
+ "hex": "#B78D44",
+ "names": [
+  "Pinchbeck Brown"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Pinchbeck brown is a brown named for a metal, listed in early nineteenth-century color nomenclatures.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A metal's brown",
+   "body": "The name appears in Baty's survey of historic color nomenclatures [1]. In Syme's 1821 edition of Werner's scheme, which lists 110 colors, *Pinchbeck-brown* sits between yellowish-brown and wood-brown, glossed in brackets as tombac [1]. The earlier 1814 version, with 108 colors, lists that slot as Tombac-brown [1]. Syme's lists tie each color to examples from minerals, animals and plants [1].\n\nWerner's scheme began as a way to identify minerals, and Syme added animal and plant examples [1]. Pinchbeck brown stood among the browns beside hair-brown, clove-brown and liver-brown, and the list was meant to be checked against painted swatches [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a very common tone in painting. In our archive of museum paintings, a color near this swatch is present in 1,528 works, 6.43 per cent of the archive [2]. The earliest is a work of about 1200 and the latest dates from 1934 [2]. Among painters, John Singer Sargent has 15 works with it [2]. These are photographs of varnished paintings, so read them as screen colors [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a metal name (glossed tombac in the lists)",
+   "first_recorded": "1814 and 1821 nomenclature lists",
+   "source": "Baty, Nature's Palette"
+  },
+  "aka": [
+   "tombac"
+  ],
+  "siblings": [
+   "bronze",
+   "brown",
+   "old-gold",
+   "copper",
+   "tan"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, paintings as photographed",
+  "n_present": 1528,
+  "pct_of_archive": 6.43,
+  "first_dated": 1200,
+  "top_painter": "John Singer Sargent"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34-35",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), paintings as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What bracketed alternative name does Baty's list give for pinchbeck-brown?",
+   "choices": [
+    "Tombac",
+    "Sepia",
+    "Umber",
+    "Bistre"
+   ],
+   "answer": "Tombac",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the name refers to a metal-like golden brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pinchbeck brown was a color in an 1821 nomenclature for naturalists, glossed as tombac."
+ ],
+ "words": 177,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "1814 list has Tombac-brown, not Pinchbeck-brown: fixed false 'already has it'. Removed unsupported 'no everyday use today' and 'golden' in lede; naturalist scope corrected to minerals plus animal/plant examples."
+  ]
+ }
+}

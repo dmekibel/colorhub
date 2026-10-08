@@ -1,0 +1,264 @@
+{
+ "slug": "bright-yellow",
+ "name": "Bright Yellow",
+ "hex": "#FFFD01",
+ "names": [
+  "Bright Yellow"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Bright Yellow is a plain description, bright plus yellow, attached to a very pure, light yellow, and the phrase recurs in the books for gamboge, orpiment and the first coal-tar dyes.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "The swatch and its names",
+   "body": "The swatch is `#FFFD01`, a pure, saturated yellow with the red and green channels at nearly full strength [13]. Bright yellow is not a single traditional color. It is the plain description *bright* attached to *yellow*, and our library traces its swatch through the ISCC-NBS system of 1955, which calls it brilliant greenish yellow (block 82), a 1927 German RAL standard, and the XKCD color survey of 2010 [13]. The library also records Maerz and Paul's 1930 dictionary dating the phrase to 1598 [13].\n\nIts nearest named colors in our library are [[canary]], [[titanium-yellow]] and [[banana-yellow]], with [[lemon-yellow]] and [[golden-yellow]] a little further off [13]. This swatch is very light, which has a practical effect on a screen: it has a contrast ratio of only about 1.1 against white and about 19 against black, so yellow text on a white page is nearly invisible [13]."
+  },
+  {
+   "id": "natural",
+   "title": "Bright yellows from the ground and the tree",
+   "body": "Historical painters had real bright yellows, and most were mineral or resin. Egyptian painters used ochers, which are hydrated iron oxides, in shades from bright yellow to light brownish yellow, and orpiment, arsenic trisulfide, whose shades ran from bright yellow to deep orange [7]. Orpiment is poisonous, as Jarman's sketch of the pigment reminds us [8]. See [[orpiment]] for its full story.\n\nGamboge is the solidified sap of *Garcinia* trees from Cambodia, whose old name, Camboja, gave it its own [5][9]. The hardened resin is brownish red and turns bright yellow when ground [10]. It was used in water-based inks in Japan, China and Thailand from the eighth century, and reached Europe at the start of the seventeenth, where artists took it up [5]. St. Clair places its arrival in 1603 on a Dutch trading ship and says Rembrandt favored it in oils, which are single-source details [9]. Ball adds that it fades rapidly in bright light and works best as a watercolor, though early Flemish painters used it in oil [14].\n\nAmong dyes, the oak-bark extract known as quercitron gave a bright yellow with aluminium or tin, a tan with chromium and an olive green with iron [11]. The same dye, in other words, changes color with the metal that fixes it."
+  },
+  {
+   "id": "synthetic",
+   "title": "Bright yellows from coal tar",
+   "body": "An early synthetic bright yellow was picric acid. Greenfield dates its synthesis from indigo and nitric acid to 1771, with a bright yellow result on silk [2]. Ball writes that its bright yellow crystals were the first sign that coal tar held raw materials for strongly colored compounds [1]. Lyon silk dyers Guinon, Marnas and Company began using it in 1845, were making it industrially four years later, and showed their yellow silk at the Great Exhibition of 1851 [1]. The dye had drawbacks, notably that it did not fix well to cotton, and had a short career [1].\n\nThe next landmark was the first azo dye, a bright yellow called aniline yellow, made from aniline and nitrous acid; Simpson, Maule and Nicholson commercialized it and other azo dyes in 1863 [3]. The arylide yellows, from the same chemical family, ranged from clean bright yellow through lemon to warm orange [4]. They were on sale from 1925 and widely used after the First World War as a replacement for cadmium yellow [4]."
+  },
+  {
+   "id": "seeing",
+   "title": "Loved, hated and copied",
+   "body": "Bright yellow divides opinion. Kandinsky, before the First World War, wrote that it wounds the eyes and that the eye cannot bear it, comparing it to a trumpet blast [6]. For Rubens, by contrast, it was a Venetian primary: bright yellow in the heavenly light and draperies of both his *Judgement of Paris* pictures, set against strong blues and brilliant reds [14].\n\nIt can also be a borrowed color. Finlay reports that American mass-produced pencils began to be painted bright yellow, copying the color of Manchu imperial robes to suggest the romance of the Orient and, perhaps, a famous Siberian graphite mine [12]."
+  },
+  {
+   "id": "myths",
+   "title": "The Indian yellow story",
+   "body": "Bright yellow gets caught up in one famous legend. Jarman repeats that Indian yellow was banned and that cows were poisoned with mango leaves to make it [8]. The ban is a myth, because no record of one has been found, and the cow story itself is unverified [8]. When Finlay went to the Indian villages associated with the story, the people she asked had not heard of any link between cows and yellow [15]. Treat it as a tale about [[indian-yellow]], not as established history."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Bright yellow is almost absent from the museum archive. A color within six units of the swatch covers at least five per cent of the canvas in just 1 of 23,781 paintings, and it is rarer than 86 per cent of the named colors [16]. That painting is [[painting:commons-Q17491107|Mondrian's *Composition in Red, Yellow and Blue*]] of 1922, where the color fills about 10 per cent of the canvas and acts as a highlight [16]. It is the work of [[painter:piet-mondrian|Mondrian]], and as always this is a photograph of a painting, not a pigment test [16].\n\nIn Google Books the phrase *bright yellow* rose fastest in the 1860s and peaks in the 1880s, the decade of aniline yellow's launch [17]. The phrase covers every object that happens to be bright yellow, so read the curve as a mood, not a color history [17]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: bright + yellow",
+   "first_recorded": "1598 (Maerz and Paul, per our library); RAL 1927; XKCD 2010",
+   "source": "ColorHub library; Ball, Bright Earth, ch. 17"
+  },
+  "aka": [
+   "brilliant greenish yellow (ISCC-NBS)"
+  ],
+  "siblings": [
+   "canary",
+   "titanium-yellow",
+   "banana-yellow"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "lemon-yellow",
+    "gloss": "a slightly duller, cooler yellow"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FFFD01",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "rarer_than_pct": 86,
+  "first_dated": {
+   "id": "commons-Q17491107",
+   "year": 1922
+  },
+  "role": {
+   "highlight": 1.0
+  },
+  "ngram": {
+   "rise": 1860,
+   "peak": 1880
+  },
+  "measured": {
+   "iscc": "brilliant greenish yellow (block 82)",
+   "contrast_white": 1.09,
+   "contrast_black": 19.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17 (aniline yellow and the first azo dye)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 165",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 133",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 33",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 12 (\"Yellow Pigments in Egypt\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 51",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St. Clair, The Secret Lives of Color, \"Gamboge\" (epub section 39)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"gamboge\" (p. 177)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 329 (oak-bark dye, quercetin)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, data/graph nodes): ISCC-NBS 1955 block 82, RAL 1927, XKCD 2010, Maerz & Paul 1930, CIEDE2000 and WCAG contrast",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, dE2000 <= 6, >= 5% of canvas); photographs of aged, varnished paintings, a color match not a pigment test",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"bright yellow\", all senses, 5-year smoothing",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which was the first synthetic bright yellow dye used on silk in Lyon from 1845?",
+   "choices": [
+    "Picric acid",
+    "Aniline yellow",
+    "Cadmium yellow",
+    "Gamboge"
+   ],
+   "answer": "Picric acid",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Indian yellow was banned because of cruelty to cows.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why is yellow text on a white page hard to read?",
+   "choices": [
+    "Yellow is so light that contrast with white is very low",
+    "Yellow is a warm color",
+    "Screens cannot show yellow",
+    "White absorbs yellow"
+   ],
+   "answer": "Yellow is so light that contrast with white is very low",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bright yellow has a contrast ratio of only about 1.1 against white, which is why yellow text vanishes on a white page.",
+  "Picric acid, a coal-tar yellow, was dyeing Lyon silk in 1845, more than a decade before Perkin's mauve.",
+  "In our archive of 23,781 paintings, one Mondrian holds this pure yellow."
+ ],
+ "words": 868,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Descriptive tier: written medium; the phrase is not a historic color name.",
+   "Indian yellow ban and cow-urine story: unverified (CONFLICTS); stated as myth and unverified.",
+   "St. Clair 1603 Dutch ship is single-source; hedged.",
+   "Maerz & Paul 1598 and RAL values come from our library; approximate."
+  ]
+ }
+}

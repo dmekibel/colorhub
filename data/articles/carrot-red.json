@@ -1,0 +1,95 @@
+{
+ "slug": "carrot-red",
+ "name": "Carrot Red",
+ "hex": "#E18674",
+ "names": [
+  "Carrot Red"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Carrot red is a muted salmon-red; the name dates from the days when red carrots were grown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Carrots were not always orange",
+   "body": "Paterson notes that carrots were not always orange: the Egyptians grew purple carrots from 2000 BC, the Romans ate purple and white ones, and red, black, green and yellow carrots also existed [1]. Dutch growers favored orange, which became the standard from around the sixteenth century [1]. The orange comes from beta-carotene [1].\n\nThe old name belongs to that earlier world: Paterson says carrot red dates from before the seventeenth century, when red carrots were grown, and the color now called carrot orange was formerly carrot red [1]. Compare [[orange]], [[coral]] and [[carmine]]. The dictionary also lists the adjective *carroty*, for anything reddish orange like the root [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch appears in 0.23% of the 23,781 paintings in our archive (55 paintings, as photographed) [2]. It peaks in the 1900s, at 3.0 times the rate expected from the museums' baseline [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the red carrot",
+   "first_recorded": "before the 17th century",
+   "source": "Paterson, A Dictionary of Colour, \"carrot red\", \"carrot orange\""
+  },
+  "aka": [],
+  "siblings": [
+   "coral",
+   "orange"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 55,
+  "peak_decade": "1900s",
+  "baseline_lift": 3.0
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"carrot orange\", \"carrot red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color were the carrots the Egyptians grew from 2000 BC?",
+   "choices": [
+    "Purple",
+    "Orange",
+    "Blue"
+   ],
+   "answer": "Purple",
+   "kind": "pick"
+  },
+  {
+   "q": "What gives modern carrots their orange?",
+   "choices": [
+    "Beta-carotene",
+    "Madder",
+    "Cochineal"
+   ],
+   "answer": "Beta-carotene",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Carrots were purple in ancient Egypt, and carrot red names the red ones."
+ ],
+ "words": 154,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede claimed name older than the orange carrot; sources only say red before 17th century when red carrots grown; reworded"
+  ]
+ }
+}

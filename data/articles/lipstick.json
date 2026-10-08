@@ -1,0 +1,169 @@
+{
+ "slug": "lipstick",
+ "name": "Lipstick",
+ "hex": "#D5174E",
+ "names": [
+  "Lipstick",
+  "Lipstick Red"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Lipstick is a deep pink-red named for a cosmetic, and the cosmetic's own reds have come from cinnabar, from cochineal insects and from the laboratory.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name that points at a product",
+   "body": "The swatch is a vivid, slightly bluish crimson, a near twin of Spanish Carmine at ΔE 1.9 and nearest the name [[cerise]] [1]. The library also holds a darker Lipstick Red, which is a different color [1]. Finlay quotes one voice asking what lipstick red even means, since the name points to a product that comes in every shade [2]. By contrast with [[crimson]] and [[carmine]], which name materials, this is a name for an object."
+  },
+  {
+   "id": "history",
+   "title": "What lips were painted with",
+   "body": "Pastoureau says women have painted their lips red in every period from antiquity to the present, with the fashion changing across cultures and centuries [3]. Finlay reports that rich Roman women used a cinnabar lipstick, at the cost of their health [4]. Touching up makeup in public was already common in the eighteenth century, and a woman who says she will put on a bit of red still means her lipstick [3].\n\nCochineal was still a kitchen standby for red coloring in 1930 [5]. Noël Coward's *Private Lives* of 1930 has a husband tell his wife, who has lost her lipstick, to send to the kitchen for cochineal [5]. Greenfield and Gurney both note that the red in many modern lipsticks still comes from cochineal, sold as carmine or additive E120 [5][6]. Kupka's *The Red Lipstick* of 1908 is in the Musée National d'Art Moderne in Paris [3].\n\nBlue lipstick, Jarman recalls, was a 1960s shock from Mary Quant [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "At the default threshold the archive gives no usable match for this swatch, so we loosened it to ten units. At that setting 33 of 23,781 paintings carry it over at least five per cent of the canvas [8]. India has the highest lift, 14 of 721 paintings, 14 times the archive rate, and the Kalighat school alone has 7 of 96 [8]. The painting [[painting:cma-113026|of a heroine waiting for her absent lover]], dated 1800, holds it across 38 per cent [8].\n\nThe color peaks in the decade from 1800, 9 hits among 552 paintings [8]. These are photographs of aged, varnished paintings, so the match is a screen color, not a dye [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the cosmetic",
+   "first_recorded": "origin undocumented",
+   "source": "ColorHub library (xkcd color survey, Wikipedia)"
+  },
+  "aka": [
+   "Lipstick red"
+  ],
+  "siblings": [
+   "cerise",
+   "crimson",
+   "carmine"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "scarlet",
+    "gloss": "a brighter orange-leaning red"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D5174E",
+   "de2000": 10,
+   "min_cover": 0.05
+  },
+  "n_present": 33,
+  "top_paintings": [
+   "cma-113026",
+   "cma-314481",
+   "cma-164465"
+  ],
+  "top_country": {
+   "name": "India",
+   "hits": 14,
+   "lift": 14.0
+  },
+  "peak_decade": {
+   "decade": 1800,
+   "hits": 9,
+   "n": 552
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Lipstick and Lipstick Red; nearest names Cerise, Spanish Carmine",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colors: Natural Histories of the Palette, on color names (pp. 13-20)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Red, p. 34 (Red Lipstick)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colors: Natural Histories of the Palette, on cinnabar (p. 13)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, chs. 22-23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 92",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 22",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, matched at 10 delta-E units and 5% canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What red dye does Greenfield say is still in many lipsticks?",
+   "choices": [
+    "Cochineal",
+    "Madder",
+    "Indigo",
+    "Prussian blue"
+   ],
+   "answer": "Cochineal",
+   "kind": "pick"
+  },
+  {
+   "q": "The name Lipstick belongs to one fixed red.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A joke in a 1930 play had cochineal as the cure for a lost lipstick."
+ ],
+ "words": 361,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Replaced the overstated 'by the twentieth century the dye was cochineal' with what Greenfield's Coward example supports."
+  ]
+ }
+}

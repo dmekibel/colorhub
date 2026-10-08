@@ -1,0 +1,162 @@
+{
+ "slug": "dandelion",
+ "name": "Dandelion",
+ "hex": "#FED85D",
+ "names": [
+  "Dandelion"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Dandelion is the vivid yellow of the flower's petals, named from the French for lion's tooth.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A lion's tooth",
+   "body": "Paterson defines dandelion as the vivid yellow of the petals, and traces the word to the French *dent de lion*, lion's tooth [1]. He ties the toothed look to the plant's roots, which is a description rather than a sourced etymology [1]. Paterson ranks it among the yellows with daffodil, cowslip and jonquil [2].\n\nThe color has more than one reading. Our library holds this swatch (#FED85D) from Wikipedia and ISCC-NBS block 83, while Ridgway's 1912 plate shows a paler tone (#ECCE88) and the xkcd survey a harder one (#FEDF08) [3]. The Ridgway scan is an aged plate and only approximate [3]."
+  },
+  {
+   "id": "company",
+   "title": "The same block as old pigments",
+   "body": "ISCC-NBS block 83 gathers a crowd of historical names: auripigmentum, Cassel yellow, Dutch pink and [[maize]] are filed there, and so is the pigment name Chinese yellow [3]. The flower's petal color was grouped with pigments whose makers had no connection to it [3].\n\nNearby named yellows in our library include [[marigold]] and [[mustard]] [3]."
+  },
+  {
+   "id": "people",
+   "title": "What the books say about the plant",
+   "body": "Finlay describes a Harris Tweed mill where, in the old days, dyers used natural materials, and in his list magenta came from dandelion, not yellow [4]. The book gives no further detail, so this is one mill's recipe, not a general fact [4].\n\nThe artist Derek Jarman remembered a childhood horror of dandelions, with the yellow flowers turning brown in death [5]. It is a darker side of a bright yellow flower [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 26 works [6]. George Dawe's portraits account for three of his 50 works, a rate 55 times the archive's [6]. They include [[painting:commons-Q21722763|Portrait of Ivan Vadbolsky]] and the portrait of Ivan Roeren, both of 1823, and the 1820s are the peak decade [6]. India supplies five hits and the Kalighat school three [6].\n\nThe earliest hit is a *Saint Peter* of 1445 [6]. These are photographs of aged, varnished paintings, and a match is a screen color [6]. In Google Books the word *dandelion* is present from 1800 and peaks about 2016 [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "French dent de lion, lion's tooth",
+   "first_recorded": "undocumented in the books",
+   "source": "Paterson, p. 139"
+  },
+  "aka": [],
+  "siblings": [
+   "maize",
+   "marigold",
+   "mustard"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "dent de lion (lion's tooth)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#FED85D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 26,
+  "top_paintings": [
+   "commons-Q21722763",
+   "commons-Q27977046",
+   "cma-162507"
+  ],
+  "ngram": {
+   "peak": 2016,
+   "first_5pct": 1800
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 139",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 511",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, xkcd), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 207",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 49",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the French source of dandelion mean?",
+   "choices": [
+    "Lion's tooth",
+    "Golden sun",
+    "Yellow star",
+    "Lion's mane"
+   ],
+   "answer": "Lion's tooth",
+   "kind": "pick"
+  },
+  {
+   "q": "Which portraitist's work is unusually rich in this yellow in our archive?",
+   "choices": [
+    "George Dawe",
+    "Rembrandt",
+    "Monet",
+    "Hokusai"
+   ],
+   "answer": "George Dawe",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dandelion comes from the French for lion's tooth.",
+  "In a Scottish mill's recipe list, dandelion gave magenta, not yellow."
+ ],
+ "words": 345,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'weed people were taught to dislike'",
+   "Clarified Finlay's mill dye list is historical (old days)"
+  ]
+ }
+}

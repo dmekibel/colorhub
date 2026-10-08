@@ -1,0 +1,137 @@
+{
+ "slug": "myrtle-green",
+ "name": "Myrtle Green",
+ "hex": "#317873",
+ "names": [
+  "Myrtle Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Myrtle Green is a dark bluish green named for the leaf of the myrtle shrub, recorded in color charts since Ridgway's 1886 nomenclature.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A leaf's name",
+   "body": "Paterson's dictionary glosses myrtle green as a green resembling the green of the myrtle leaf, and notes that it is sometimes shortened to plain \"myrtle\", a word that has also been seen as a purple [1][2]. The dictionary files it among the greens, beside such neighbors as [[moss-green]] and [[light-green]] [2].\n\nThe Pigment Compendium has a separate, trade-side entry [3]. It lists \"myrtle green\" as a synonym or variant name for chrome green, on the authority of Mayer (1991) [3]. That is a pigment-maker's label, and nothing in the book says the paint matched the swatch shown here."
+  },
+  {
+   "id": "charts",
+   "title": "On the charts",
+   "body": "The name is older than the screen color. Ridgway carried it into his 1886 nomenclature, and our library traces its earliest record there [4]. In Ridgway's 1912 plates it is plate VII, hue 41, and the scanned plate reads as a darker, deeper green than the swatch on this page [4]. The ISCC-NBS system of 1955 places the swatch in block 151, \"moderate bluish green\", only 1.1 units away on the CIEDE2000 scale [4].\n\nSo the name has always meant a blue-leaning dark green, but the exact depth moves from chart to chart. Treat it as a family name for [[bluish-green]] darks rather than one fixed shade."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 46 works, or 0.19 per cent, which is rarer than 61 per cent of the named colors [5]. It peaks in the 1900s, at 0.3 per cent of the 1,674 paintings from that century (5 paintings) [5]. It is most over-represented in French paintings, at 3.0 times the expected rate (12 of 3,443) [5]. Where it appears it usually plays a mid-tone [5].\n\nThe earliest match is a Bellini of about 1490 [5]. That is 396 years before the name's first record, so it shows a look-alike hue in an aged photograph, not a pigment or a dye [5]. These are photographs of varnished paintings, and a color match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the leaf of the myrtle shrub",
+   "first_recorded": "Ridgway, 1886",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "myrtle"
+  ],
+  "siblings": [
+   "moss-green",
+   "bluish-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "chartreuse",
+    "gloss": "a yellower, brighter green with its own documented story"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes)",
+  "match": {
+   "hex": "#317873"
+  },
+  "n_present": 46,
+  "peak_century": 1900,
+  "measured": {
+   "iscc": "moderate bluish green",
+   "de2000": 1.1
+  },
+  "first_dated": 1490
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"myrtle green\", p. 273",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, green index, p. 498",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"myrtle green\", p. 284 (citing Mayer 1991)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Pigment Compendium say \"myrtle green\" can also mean?",
+   "choices": [
+    "A synonym for chrome green",
+    "A synonym for Prussian blue",
+    "A synonym for madder",
+    "A synonym for ultramarine"
+   ],
+   "answer": "A synonym for chrome green",
+   "kind": "pick"
+  },
+  {
+   "q": "What is myrtle green named after?",
+   "choices": [
+    "The leaf of the myrtle shrub",
+    "A Greek town",
+    "A mineral mine",
+    "A dye vat"
+   ],
+   "answer": "The leaf of the myrtle shrub",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Myrtle green is named for a leaf, and on Ridgway's 1912 plate it reads darker than today's screen swatch.",
+  "Look for it in French paintings: the archive finds it there at three times the expected rate."
+ ],
+ "words": 352,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No fixes needed; Paterson, Pigment Compendium and library claims verified"
+  ]
+ }
+}

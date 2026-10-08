@@ -1,0 +1,243 @@
+{
+ "slug": "dawn",
+ "name": "Dawn",
+ "hex": "#D2A7B0",
+ "names": [
+  "Dawn"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Dawn is a pale, dusty pink named for the first light of day, a color word that has more history in poetry and in the sky than in any dye pot.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A time, not a material",
+   "body": "Dawn is a color named for a time of day, so it has no pigment or dye behind it. The swatch is listed in the Maerz and Paul color dictionary of 1930 as plate 42 D 1, with a first record of 1920, and its nearest widely used name is [[baby-pink]] [1]. It is a soft pink with some grey in it, close to [[pastel-pink]] and [[blush]] [1].\n\nNone of the books in our collection treats it as a color of its own [1]. What they do offer is a long record of how people described the colors of first light, and that is what this article follows."
+  },
+  {
+   "id": "words",
+   "title": "Words for first light",
+   "body": "Paterson's dictionary collects the vocabulary. *Aurora* is the deep orange of sunrise, *auroral* means resembling the dawn in color, *aurorean* means having its brilliant colors, and *aurose* means golden [2]. *Eosin*, a red coal-tar dye used for silk, cosmetics and as a biological stain, takes its name from the Greek *eos*, the dawn [3].\n\nThe most famous phrase is Homer's \"rosy-fingered\" dawn [4]. Pastoureau argues it does not mean our pink: the Latin *roseus* meant a bright red, and Homer is describing the reddish reflections that the rising sun sometimes casts [5]. The ancient world had no word of its own for pink, and Pastoureau says the shades we call pink were never given a name strictly theirs [5]."
+  },
+  {
+   "id": "dye",
+   "title": "A dye called the color of dawn",
+   "body": "Dyers did borrow the name. Safflower, a thistle-like plant around the Mediterranean, gave reds and also yellows that tended toward orange or pink, and for that second shade dyers used the phrase \"the color of dawn\" [6]. Pastoureau notes the dye was beautiful but did not resist light well, and the powder was sometimes sold fraudulently as saffron [6]. See [[flower:safflower|safflower]] in our plant data.\n\nThe lesson is that a dawn color was not one fixed pink. It could lean orange, rose or yellow, and it faded [6]."
+  },
+  {
+   "id": "sky",
+   "title": "What the sky actually does",
+   "body": "The sky at dawn is not a single color either. Birren notes that natural daylight changes considerably from dawn to dusk in both intensity and hue: dawn may be yellowish, the sky bluish, and sunset a rich pink [7]. Gurney explains that at dawn and dusk the remaining sunlight is weaker and more orange or red, and that shadows turn bluer than usual [8]. Photographers call the hour the golden hour or magic hour [8].\n\nPainters used it as a symbol. Gage describes Early Christian apse mosaics in which Christ appears among the rosy clouds of dawn, such as the sixth-century mosaic in Rome's SS Cosmas and Damian [9]. In Runge's *Times of Day* series, red is the dominant color for the dawn of life [10]. Compare [[dusk]] and [[twilight]] for the other end of the day."
+  },
+  {
+   "id": "eye",
+   "title": "Why dawn colors look different",
+   "body": "Your eye changes with the light. In 1819 Jan Evangelista Purkinje noticed that his geraniums looked red on a sunny afternoon but a darker bluish red at dawn [11]. The reason is that in dim light the rods take over, which shifts sensitivity toward shorter wavelengths, so reds look darker and blues lighter [11].\n\nTo notice this yourself, look at a red object at night-fall or just before sunrise, then in noon light, and compare how its brightness changes [11]."
+  },
+  {
+   "id": "traditions",
+   "title": "Dawn in other traditions",
+   "body": "Some traditions give dawn a color of its own, and it is not pink. A Navaho legend retold by Birren has the blue southern mountains causing the dawn [12]. Among the Ashante, according to Balfour-Paul, indigo blue is linked to the early dawn along with love and the crescent moon [13]. Neither cultural fact depends on the Maerz and Paul swatch [12][13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 30 works, or 0.13 per cent, which makes it rarer than 62 per cent of the named colors [14]. Within a painting, it is most often a hidden color, in 89 per cent of the 18 works where we measure it by lightness rank [14]. It peaks in the 1700s, in 7 of 3,449 paintings, 2.0 times what the museums' baseline predicts [14].\n\nIt is over-represented in Indian painting, at 3.4 times the expected rate in 7 of 721 paintings [14]. The earliest match is dated 1680, 250 years before the name's earliest record in our sources, so it shows a look-alike hue in an aged photograph, not a named dawn color [14]. These are photographs of varnished paintings, so read them as screen colors, not pigment tests [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the first light of day",
+   "first_recorded": "1920, per Maerz & Paul 1930",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "aurora (the sunrise orange)",
+   "eosin (the dye)"
+  ],
+  "siblings": [
+   "baby-pink",
+   "pastel-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "dusk",
+    "gloss": "the evening counterpart, a different color"
+   },
+   {
+    "slug": "dawn-grey",
+    "gloss": "a library name that opens a grey, not this pink"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 30,
+  "peak_century": {
+   "century": 1700,
+   "lift": 2.0
+  },
+  "role": {
+   "hidden_pct": 89,
+   "of": 18
+  },
+  "country": {
+   "India": 3.4
+  },
+  "nearest": {
+   "name": "Baby pink",
+   "de2000": 8.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name library, \"Dawn\" (Maerz & Paul 1930, plate 42 D 1)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"aurora\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"eosin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"rosy-fingered\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Red, p. 33",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, p. 13",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, p. 24",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 182",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 56",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 198",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, p. 57",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, p. 10",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 199",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Pastoureau say Homer's \"rosy\" dawn describes?",
+   "choices": [
+    "Reddish reflections of the rising sun",
+    "The pink of rose petals",
+    "A purple dye",
+    "A pale blue sky"
+   ],
+   "answer": "Reddish reflections of the rising sun",
+   "kind": "pick"
+  },
+  {
+   "q": "Why can a red flower look darker and bluer at dawn than at noon?",
+   "choices": [
+    "Rods take over in dim light, favoring shorter wavelengths",
+    "The flower changes pigment overnight",
+    "Dew filters the red",
+    "The sun is hotter"
+   ],
+   "answer": "Rods take over in dim light, favoring shorter wavelengths",
+   "kind": "pick"
+  },
+  {
+   "q": "The dye \"the color of dawn\" came from safflower and resisted light very well.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look at a red flower at first light, then at noon: Purkinje noticed it turns a darker, bluer red.",
+  "Dyers once called a safflower yellow-pink \"the color of dawn\", though it faded in light."
+ ],
+ "words": 746,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "No book treats Dawn as a named color; article is about the word and the light.",
+   "Navaho and Ashante items are single-source, hedged.",
+   "Archive match predates the name; stated."
+  ]
+ }
+}

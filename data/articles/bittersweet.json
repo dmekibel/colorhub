@@ -1,0 +1,101 @@
+{
+ "slug": "bittersweet",
+ "name": "Bittersweet",
+ "hex": "#FE6F5E",
+ "names": [
+  "Bittersweet"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Bittersweet is a hot coral-orange red, named for the plant whose berries ripen red and whose English name means a taste that is both sharp and sweet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Name and plant",
+   "body": "The books we have read say very little about this color as a color [1][2]. The one botanical link is bittersweet nightshade, *Solanum dulcamara*, whose leaves appear in a plate illustrating sap green in Baty's study of natural color charts [1]. Finlay uses the word only for taste, describing a sand palm heart as succulent and bittersweet [2].\n\nSo the books support a plant and a flavor but not a dye, a pigment or a date for the color name [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The name is first recorded in our sources in 1912, in Ridgway's standards, and later in Maerz and Paul and in ISCC-NBS [3]. The swatch #FE6F5E is a bright, warm coral [3]. It is rare in our archive of 23,781 paintings, with only 7 matches, as photographed, rarer than 72% of named colors [3]. In printed English the adjective peaks in the 2010s [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the bittersweet plant (origin of the color name undocumented in the books read)",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "coral",
+   "salmon",
+   "red-orange"
+  ],
+  "parent": "orange-red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "rarer_than_pct": 72,
+  "ngram_peak": "2010s"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, plate on sap green, p. 155",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library and archive field notes for Bittersweet (n=7)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the books read, what does the plant bittersweet appear as?",
+   "choices": [
+    "A nightshade whose leaves illustrate a green",
+    "A source of a red dye",
+    "A pigment mineral"
+   ],
+   "answer": "A nightshade whose leaves illustrate a green",
+   "kind": "pick"
+  },
+  {
+   "q": "When is the color name first recorded in our sources?",
+   "choices": [
+    "1912",
+    "1612",
+    "1990"
+   ],
+   "answer": "1912",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The color name Bittersweet is first recorded in 1912."
+ ],
+ "words": 165,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

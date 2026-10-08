@@ -1,0 +1,135 @@
+{
+ "slug": "dull-purple",
+ "name": "Dull Purple",
+ "hex": "#84597E",
+ "names": [
+  "Dull Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dull Purple is a muted reddish purple; the name is a plain modifier, and the books use the phrase for puce and for what happens when painters mix red, yellow and blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One swatch, many standards",
+   "body": "The swatch appears in the ISCC-NBS list of 1955, the RAL chart of 1927 and the xkcd survey of 2010, and the nearest ISCC-NBS name is \"moderate reddish purple\", 3.8 units away [1]. It is a darker, redder cousin of [[mauve]] and sits near [[eggplant]]."
+  },
+  {
+   "id": "puce",
+   "title": "Puce, a dull purple",
+   "body": "Paterson lists four senses for puce: dull purple, brownish purple, pinkish blue and dark red [2]. The word comes from the Latin *pulex*, flea, whose underside is puce in color [2]. The disagreement shows how loose dull purples are as names, which is why [[puce]] is hard to pin to one swatch."
+  },
+  {
+   "id": "mixing",
+   "title": "The mixing problem",
+   "body": "Westland points to Moses Harris's hue circle of 1776, in his book on English insects, and says a spot color in one segment suggests Harris knew that mixing red, yellow and blue primaries produced dull purples [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 4 of 23,781 archive paintings contain it, rarer than 79 per cent of named colors, and the earliest dated one is by Paul Gauguin, from 1903 [4]. These are photographs of varnished paintings, so the count says little about how often painters used muted purples [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive modifier (dull + purple)",
+   "first_recorded": "RAL, 1927",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "puce",
+   "mauve",
+   "eggplant"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 4,
+  "measured": {
+   "lch": [
+    43.6,
+    27.7,
+    330.4
+   ],
+   "nearest_iscc": [
+    "moderate reddish purple",
+    3.8
+   ]
+  },
+  "first_dated": {
+   "id": "nga-56109",
+   "year": 1903
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 323 (\"puce\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, \"Hue Circle\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the word puce come from?",
+   "choices": [
+    "The Latin for flea",
+    "The French for plum",
+    "A Greek dye",
+    "An Italian city"
+   ],
+   "answer": "The Latin for flea",
+   "kind": "pick"
+  },
+  {
+   "q": "What did Moses Harris's circle of 1776 hint at?",
+   "choices": [
+    "Mixing red, yellow and blue gives dull purples",
+    "Purple is a primary",
+    "Violet is a metal",
+    "Blue cannot be mixed"
+   ],
+   "answer": "Mixing red, yellow and blue gives dull purples",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Mix painter's red, yellow and blue and the purple comes out dull: a lesson from 1776."
+ ],
+ "words": 209,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that a clean purple needs its own pigment."
+  ]
+ }
+}

@@ -1,0 +1,266 @@
+{
+ "slug": "grass",
+ "name": "Grass",
+ "hex": "#5CAC2D",
+ "names": [
+  "Grass"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Grass is the green of a lawn in the sun, but the older color books meant a quieter green by the name, and painters struggled for centuries to make it at all.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color named for a plant",
+   "body": "*Grass* is a color word taken straight from the plant, and its older, fuller form is *grass green* [3]. Latin had a dedicated word for it, *herbeus*, 'green like grass', but it was rare beside the all-purpose *viridis*, from which the Romance words for green descend [4]. Pastoureau points out that *viridis* belongs to a family of words for vigor, growth and life, and that the Roman scholar Varro proposed that green was the color of what has strength [4].\n\nIn English, Paterson's dictionary defines grass-green as a yellowish green, the color of grass, and cites Shakespeare's *Hamlet* for 'grass-green turf' [3]. Our library records the compound *grass green* from 1821, from Werner's list, and as a modern name from the ISCC-NBS system of 1955 and RAL of 1927 [7]. The bare name *Grass*, the swatch above, is different: the library's only source for it is the color-name survey run by the xkcd web comic in 2010, recorded there as a vivid green [7]."
+  },
+  {
+   "id": "swatch",
+   "title": "Four grasses on a chart",
+   "body": "The swatch above, #5CAC2D, is a bright, fully saturated green, the green of a lawn in direct sun [7]. It is not what the older color books mean by grass green, and the difference is the most useful thing to know about this name [7].\n\nWerner's nomenclature, the mineralogist's color chart of the late eighteenth century, gives grass green its number, 54, and defines it as emerald green mixed with a little lemon yellow [1]. His examples are the general appearance of grass fields, the noble chafer beetle, the sweet sugar pear and the mineral uran mica (torbernite) [1]. The aged swatch from the 1821 edition, which our library reads as #7D8C55, is a muted leaf green, about 14.7 CIEDE2000 units from the xkcd Grass [7].\n\nOther standards disagree again. Ridgway's 1912 grass green is a dull olive-leaning green, #737F52 [7]. The RAL swatch is a deeper #3E753B, about 20.7 units from our swatch [7]. The xkcd survey's separate 'Grass Green', #3F9B0B, is much closer to this page's color, at 6.0 units [7]. A person who says 'grass green' may therefore mean anything from a muted field to a lawn in full sun. A real lawn varies even within one view, with the sky, the shadows and the dryness of the leaves."
+  },
+  {
+   "id": "werner",
+   "title": "How mineralogists named it",
+   "body": "The grass-green of the older charts came into English largely through mineralogy [1]. Werner's list was translated into French in 1790 by Madame Picardet, who added 17 colors to it [1]. In 1794 the chemist Richard Kirwan listed 52 colors in the second edition of his *Elements of Mineralogy*, evidently using Picardet's translation, though ten years earlier he had doubted that color shades could be described at all [1].\n\nKirwan's list adds two new names, sparrow-grass green and copper yellow [1]. Baty notes that it is debatable whether 'sparrow-grass green' (sparrow-grass is an old word for asparagus) meant the same as grass green or whether Kirwan intended meadow green by it [1]. Confusion deepened when Kirwan used the term grass green in his description of the mineral chlorite [1]. Lenz, a professor of mineralogy at Jena, used Werner's names in his own works, and his lists include grass green with apple green, leek green, olive green and pistachio green [1].\n\nFor a modern reader the lesson is that these names were used as a lookup table. A mineral labelled grass green was meant to be matched against a numbered swatch, not recalled from memory."
+  },
+  {
+   "id": "pigment",
+   "title": "The difficulty of painting it",
+   "body": "Grass is the most common green in the world, but for painters it has long been a hard one to make [5]. Finlay observes that this most organic of colors has traditionally been made from metal, or rather from metal's corrosion [5]. Cennino Cennini's handbook gave four recipes for a lively green for Tuscan light, and Finlay says all of them contained copper [5].\n\nOne recipe was verdigris with a little saffron, one part in three, which Cennini promises will give the most perfect grass green imaginable [5]. Finlay adds that he did not seem to know that the saffron could also protect the green from eating into the parchment [5]. Finlay saw Mughal hunting scenes at Lahore where the green fields were fringed with brown marks of corrosion [5].\n\nPlant greens did not help: Coles says greens derived from plants are not lightfast, so artists mixed blues and yellows for foliage and grass [2]. The failures reached famous paintings. St Clair reports that the grass in the foreground of Seurat's *A Sunday on La Grande Jatte* appears withered in patches because of misbehaving pigments [9]. The painting dates from the mid-1880s, and St Clair uses it to show how recently painters were still struggling with green [9]."
+  },
+  {
+   "id": "nature",
+   "title": "Why grass is green",
+   "body": "Ball takes up John Donne's line asking why grass is green and notes that the answer is now known [8]. Nature's verdancy comes from chlorophyll, which absorbs the red and blue of sunlight and uses the energy in the cell [8]. At the center of the chlorophyll molecule sits a magnesium ion, in a structure similar to the iron-bearing core of the haemoglobin molecule in blood [8].\n\nLight does the rest. Gurney notes that in a room lit by a north-facing window the ceiling often takes a green or orange cast from light reflected off grass or dirt outside [10]. Albers makes the same point about the white ceilings of houses surrounded by lawns, which appear bright green with the light thrown back from the grass [11]. Learn to see the reflected green on a white wall near a lawn and you will see it often.\n\nGrass is also a classic case in the biology of seeing. Livingstone observes that in Monet's *Poppy Field near Argenteuil* the red poppies and the green grass are approximately equal in luminance [12]. She argues that the part of vision that places things in space cannot pin down such flowers, so that their position seems uncertain [12]. In a black-and-white photograph of the picture, the two would come out close to the same grey."
+  },
+  {
+   "id": "culture",
+   "title": "Grass in clothing and in words",
+   "body": "Pastoureau's medieval orchard is a place where green dominates: the green of trees and plants, of grass and of water, and of the clothes and fabrics brought there [4]. Genesis supplied the justification, linking green to the third day of Creation [4].\n\nIn the 1860s the French philosopher Hippolyte Taine took a Sunday stroll in Hyde Park and was startled to see women in grass-green dresses, among other violent colors, in the new craze for color [6]. His shock at middle-class women dressed that way marks how new bright greens were [6].\n\nGrass does not always mean green. Gage notes that the Greek word *xanthos* could be used of fair hair, honey, wine or the whitish yellow of parched grass [13]. And Birren, writing in 1950, claims that grass greens have an invigorating effect on the nervous system and the blood, an opinion the book itself describes as a psychic one that skeptical minds will not defend [14]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our swatch is rare in paintings. Only 2 of 23,781 paintings in our archive hold a color within six CIEDE2000 units of it that fills at least five per cent of the canvas [15]. They are Gauguin's *Mother and Child under a Tree at Pont-Aven* of 1886, where it covers about 31 per cent, and van Gogh's [[painting:nga-163323|Green Wheat Fields, Auvers]] of 1890, about 16 per cent [15]. In our data it is rarer than 86 per cent of the named colors [15].\n\nWerner's muted grass green is far more at home on canvas. It passes the same test in 262 paintings, 1.1 per cent, and the rate rises across the 1800s, reaching 3.5 per cent in the 1900s, 3.1 times the archive's average [15]. Among painters, Seurat's hits are 10 of 41 paintings (24 per cent), Pissarro's 9 of 50 (18 per cent) and Weie's 6 of 33 (18 per cent) [15]. The peak decade is the 1910s, with 22 of 523 paintings [15].\n\nThese are photographs of aged, varnished paintings, so a match is a color match and not a pigment test. They show that painters' grasses are mostly the muted, yellowed green of the old charts, and the vivid green of the web swatch is closer to a screen's idea of a lawn than to a painter's [15]. The printed phrase *grass green* peaks around 1820 in Google Books [16]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plant, as a color word (grass green, from Werner's list)",
+   "first_recorded": "Werner no. 54, 1821 edition (library); Grass swatch from the xkcd survey, 2010",
+   "source": "Baty, Nature's Palette; library"
+  },
+  "aka": [
+   "grass green"
+  ],
+  "siblings": [
+   "grass-green",
+   "sap-green",
+   "kelly-green"
+  ],
+  "parent": "green",
+  "children": [
+   "grassy-green"
+  ],
+  "disambiguation": [
+   {
+    "slug": "grass-green",
+    "gloss": "Werner's and Ridgway's grass green is a muted leaf green, far from this bright swatch"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "herbeus"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#5CAC2D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "top_paintings": [
+   "commons-Q79790701",
+   "nga-163323"
+  ],
+  "role": {
+   "mid": 0.5,
+   "highlight": 0.5
+  },
+  "ngram": {
+   "peak_grass_green": 1820
+  },
+  "compare": {
+   "werner_grass_green_hex": "#7D8C55",
+   "n_present": 262
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 20-21, 160 (Werner's nomenclature, Picardet, Kirwan, Lenz)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 32",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 193 (\"grass-green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, chs. on Latin color words and the medieval orchard",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. \"Green\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, on Taine in Hyde Park",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Grass, Grass Green, Grassy Green; first-recorded dates and CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 1 (chlorophyll)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. \"Green\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 60",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 84",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, on color and the body",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, match within 6 CIEDE2000 units, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'grass green', case-insensitive, 5-year smoothing",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Werner's nomenclature, how is grass green made?",
+   "choices": [
+    "Emerald green mixed with a little lemon yellow",
+    "Verdigris and saffron",
+    "Blue verditer and white",
+    "Green earth and ochre"
+   ],
+   "answer": "Emerald green mixed with a little lemon yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did painters find a grass green hard to make?",
+   "choices": [
+    "Plant greens fade and copper greens corrode or darken",
+    "There was no yellow pigment",
+    "Green could not be mixed from other colors",
+    "Chlorophyll is poisonous"
+   ],
+   "answer": "Plant greens fade and copper greens corrode or darken",
+   "kind": "pick"
+  },
+  {
+   "q": "The bright web swatch for Grass is the same color that Werner and Ridgway called grass green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Grass green on old mineral charts was a muted leaf green, not the lawn green of a screen.",
+  "Seurat's 'withered' grass in La Grande Jatte is a pigment problem, not a design choice."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "claude",
+  "date": "2026-10-08",
+  "issues": [
+   "Birren claim marked contested old opinion",
+   "Kirwan's sparrow-grass green identity is unsettled (Baty)",
+   "Swatch Grass comes only from xkcd survey",
+   "Greek xanthos/grass: single book (Gage)"
+  ]
+ },
+ "words": 1377
+}

@@ -1,0 +1,296 @@
+{
+ "slug": "smoke",
+ "name": "Smoke",
+ "hex": "#655E60",
+ "names": [
+  "Smoke"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Smoke is the grey of what rises from a fire: a soft bluish grey in the dictionaries, a darker and warmer one on this swatch, and a word that began in mineral cabinets before it reached the paint box.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey named for a fire",
+   "body": "Dictionaries define smoke as a bluey-grey, and the adjective *smoky* as the grey colour of smoke [1]. St Clair's glossary of color names agrees, calling it a soft bluish gray [2]. The neighbours on a modern grey chart are [[grey]], [[slate]], [[dove-grey]] and [[bluish-grey]], and the paler [[silver-grey]] sits above it in lightness [1][2].\n\nThe swatch here is not bluish. It is a dark, faintly purplish grey, filed by ISCC-NBS in 1955 as block 185 and named \"dark purplish gray\" at a distance of 5.4 units [16]. The name first appears in our sources in Ridgway's 1912 color standards, and Maerz and Paul had it by 1930 [16]. So the word describes a bluish grey, while the swatch shows a darker, warmer one: read the color as the grey of heavy, sooty smoke rather than of a thin blue haze [1][16]."
+  },
+  {
+   "id": "mineralogists",
+   "title": "Smoke-grey in the mineralogist's list",
+   "body": "The name is older than Ridgway [3]. Abraham Werner's mineral color list, taught in the late eighteenth century, already had smoke-grey among its greys, between bluish-grey and yellowish-grey [3]. Later versions of the list, down to Syme's of 1821, kept it and added pearl-grey, greenish-grey and steel-grey around it [3].\n\nBy 1815 the English chemist Arthur Aikin was using it in his *Manual of Mineralogy* to describe flinty chert, alongside wax yellow, honey yellow and blood red [3]. A color name that identifies a stone has to be exact enough for a second person to recognize it, which is why a hobby of naming greys after fire, metal and pearl grew up in mineral cabinets before it reached fashion [3]."
+  },
+  {
+   "id": "soot",
+   "title": "Soot: smoke as a pigment",
+   "body": "Lamp black is smoke made into paint. It is soot collected on a cooler surface from burning oils, resins, rosin or pitch, and it is counted among the most ancient pigments [4]. It has been identified on Roman wall paintings of the first century BC in Brescia, on Japanese lacquerware of the early Heian period (eighth to twelfth century), and on fourteenth-century Nasrid wall paintings in Granada [4].\n\nThe recipes are short. Peacham in 1612 told painters to hold a torch under a metal basin, strike off the soot, and grind it with gum water [4]. Watin in 1785 gave a grander method: burn pitch in an iron pot in a closed room hung with sheepskin or cloth, and collect the soot from the hangings [4]. French sources separated *noir de fumée*, literally smoke black, made from pitch and tar, from *noir de bougie*, made from candles [4][5]. Terry in 1893 described candle black as candle smoke condensed on a cold plate [5].\n\nMérimée in 1830 noted a black made from coal soot that was heavier and coarser than the rest [4]. Schweppe reports that the Maya and the Aztecs made a black called *tliliocatl* that appears to be a lamp black [4]. A pale cousin is the pigment known as blue lead, which Toch in 1931 called not strictly blue but bluish grey, a lead sulphate tinted with carbon smoke as it condensed [6]. The grey of that pigment was, quite literally, smoke."
+  },
+  {
+   "id": "white-smoke",
+   "title": "A smoke that is white",
+   "body": "Smoke can be white too. Alchemists called zinc oxide *tutty*, from the Persian word *dud*, smoke, and also zinc flowers and philosopher's wool, because it formed as fluff in the flues of brass furnaces [7]. Jarman likewise describes Chinese white, zinc oxide, as originating from a cold white smoke, and dates its use as a pigment from the mid-nineteenth century [14]. The family of [[white]], [[black]] and the greys between them is, in this sense, a family of smokes."
+  },
+  {
+   "id": "signals",
+   "title": "Smoke as a signal",
+   "body": "The best-known smoke color code is the papal conclave. White smoke rising from the Sistine Chapel means a new pope has been elected, black smoke means the vote was not decisive and must be repeated, and a grey smoke has caused confusion, so the ringing of bells is what finally confirms an election [8].\n\nAn older code lived in the alchemist's workshop. A recipe for vermilion tells the maker to heat mercury and sulphur in a clay-covered glass bottle and to close the mouth when yellow smoke gives way to a red one; the resulting lump is black and turns fiery red only when ground [13]. The books disagree on the author: Finlay credits a fifteenth-century illuminator's manual, Simone de Monte Dante dela Zazera, while Coles attributes the same recipe to Cennino Cennini [13]."
+  },
+  {
+   "id": "seeing",
+   "title": "Seeing through smoke",
+   "body": "Aristotle noted that the sun, which looks white, takes a crimson hue when seen through fog or a cloud of smoke [18]. Painters have been working with that effect ever since. Gurney observes that in firelit rooms smoke scatters the light, so there are no deep darks near the flame, and that photographs of night scenes miss this by making the darks look profoundly black [10]. In fog, mist and smoke he finds that contrast falls off fast as forms recede, and the light seems to come from all directions [10].\n\nMonet's four versions of the Gare Saint-Lazare, painted in 1877, look out through the station canopy into billows of locomotive smoke and steam [11]. Ball points out that even the darkest of the series, its greys, browns and blacks, are built almost entirely from mixtures of the new bright artificial pigments, such as cobalt blue, cerulean blue and synthetic ultramarine, and not from earth pigments [11]. The smoke grey in that series is a mixed color, not a tube color."
+  },
+  {
+   "id": "industrial",
+   "title": "The smoke of the cities",
+   "body": "In the nineteenth century smoke became a condition of urban life. World coal production grew from 172 million tons in 1858 to 928 million in 1905, and with it came soot, grime and pollution [9]. Dickens in 1860 called the London streets the darkest and dirtiest the world had seen, with a smoky suit of mourning always draped over them [9]. Pastoureau adds that in every industrial city smoke coated buildings, objects and people with layers of soot [9].\n\nPastoureau also suggests that the smoke, grime and fog of big cities explain why taxis and other urban vehicles are often yellow, a color that stays visible through it [19]. The color word seems to have followed the chimneys: in Google Books the adjective *smoke*, the color sense, rose fastest in the 1850s and peaked in the 1880s, which fits the coal figures, though a printed word is only a loose mirror of the street [20]. In India, by contrast, St Clair describes the god Krishna as having smoke-blue skin, a use with no soot in it at all [12]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units (ΔE2000) of this swatch covers at least five per cent of the canvas in 650 of them, or 2.7 per cent [17]. The rate climbs over time: 3.4 per cent of the nineteenth-century paintings and 7.6 per cent of the twentieth-century ones, about 2.8 times the museums' baseline for the 1900s [17]. The peak decade is the 1910s, with 41 of 523 paintings [17].\n\nThe painters who return to it most are [[painter:vilhelm-hammersh-i|Hammershøi]], with 11 of 50 works in the archive, Caillebotte with 5 of 22, Marquet with 4 of 16 and Modigliani with 4 of 18 [17]. By country, Norway (13 of 120 paintings) and Sweden (12 of 120) lead among the groups with enough works to compare [17]. The largest areas of it are in Eckersberg's [[painting:smk-KMS7284|Langebro, Copenhagen, in the Moonlight with Running Figures]], where it covers 58 per cent of the canvas, and in Vallotton's [[painting:commons-Q27978836|Portrait of Mme Haasen]], at 55 per cent [17].\n\nInside a single painting it most often does the work of a shadow or a mid-tone: 35 per cent of the time it is among the darker tones of its picture, and only 9 per cent of the time among the lights [17]. These are photographs of aged, varnished paintings, so a color match is not a pigment test, and a grey that looks like smoke may be a ground, a varnish or a lead white gone dull [17]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the smoke of a fire",
+   "first_recorded": "smoke-grey in mineralogical lists by 1815; color-chart entry in Ridgway 1912",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "smoke grey",
+   "smoky"
+  ],
+  "siblings": [
+   "vienna-smoke",
+   "bluish-grey",
+   "dove-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "vienna-smoke",
+    "gloss": "a separately named grey that often shares paintings with it"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#655E60",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 650,
+  "top_paintings": [
+   "smk-KMS7284",
+   "commons-Q27978836",
+   "smk-KMS4326",
+   "commons-Q3859805"
+  ],
+  "peak_decade": {
+   "1910s": "41 of 523"
+  },
+  "painters": [
+   "Hammershøi 11/50",
+   "Caillebotte 5/22",
+   "Marquet 4/16",
+   "Modigliani 4/18"
+  ],
+  "role": {
+   "shadow": 0.35,
+   "mid": 0.56,
+   "highlight": 0.09
+  },
+  "measured": {
+   "iscc": "dark purplish gray",
+   "de": 5.4
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"smoke\", \"smoky\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary of color names",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Werner and Syme tables (figure 32) and Aikin's Manual of Mineralogy",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"lamp black\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"candle black\" and \"noir de fumée\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"blue lead\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 12 (\"White\"), on zinc oxide",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, \"White Smoke\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, chapter on the industrial age, pp. 87-88",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, \"Fog, Mist, Smoke, Dust\" and the firelit scene",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Yellow\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 13 (vermilion), and Coles, Chromatopia, \"Vermilion\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Jarman, Chroma, section on white",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955 block 185, Ridgway 1912, Maerz and Paul 1930 (data/library.json, data/graph)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (tools/article_field.py, dE2000 <= 6, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 19 (Aristotle, On Sense and Sensible Objects 440a)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, \"Yellow for the Present Day\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "data",
+   "cite": "Google Books Ngram via data/graph fieldnotes, adjective use only",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is lamp black made from?",
+   "choices": [
+    "Soot collected from burning oils, resins or pitch",
+    "Ground charcoal and lead",
+    "Burnt bone",
+    "Crushed coal"
+   ],
+   "answer": "Soot collected from burning oils, resins or pitch",
+   "kind": "pick"
+  },
+  {
+   "q": "In a papal conclave, what does black smoke from the Sistine Chapel mean?",
+   "choices": [
+    "The vote was not decisive and must be repeated",
+    "A pope has been elected",
+    "The conclave has ended without result for good",
+    "The bells are about to ring"
+   ],
+   "answer": "The vote was not decisive and must be repeated",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the name smoke-grey was in use for minerals before Ridgway's 1912 color standards.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "White smoke from the Sistine Chapel means a pope has been chosen; black means vote again.",
+  "Lamp black, soot from a flame, was on Roman walls in the first century BC.",
+  "In a firelit room, look for the missing darks: smoke scatters the light."
+ ],
+ "words": 1319,
+ "status": "checked",
+ "checked": {
+  "by": "article engine batch 28",
+  "date": "2026-10-08",
+  "issues": [
+   "Swatch (dark purplish grey, ISCC-NBS) differs from dictionary 'bluish grey': stated in text.",
+   "Finlay vs Coles attribute the vermilion recipe differently: stated.",
+   "Pastoureau yellow-taxi claim hedged with 'suggests'.",
+   "Baty table column order not verified per version; stated loosely."
+  ]
+ }
+}

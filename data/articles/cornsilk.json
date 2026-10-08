@@ -1,0 +1,125 @@
+{
+ "slug": "cornsilk",
+ "name": "Cornsilk",
+ "hex": "#FFF8DC",
+ "names": [
+  "Cornsilk"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Cornsilk is a very pale warm cream, best known as one of the named colors of the web's X11 set.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color with older roots",
+   "body": "Paterson defines *Cornsilk* as a beige colour and records it as one of the X11 colors, with the hex code #FFF8DC [1]. The name is older than the web list: Maerz and Paul's *Dictionary of Color* records it from 1927, and the ISCC-NBS system has a block for it (block 86) [2]. Its closest named neighbors in our library are [[ecru]], at a CIEDE2000 distance of 5.0, and [[light-yellow]] [2].\n\nThe books give no story for the name beyond the plain word, so its origin is undocumented."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Cornsilk is common as a painted color, thanks to its paleness. It appears in 326 of 23,781 paintings in our archive and is more common than 71% of the named colors [3]. Inside a painting it most often plays a light (52% of 198 paintings), and often a hidden color (42%) [3]. It is over-represented in Chinese painting, at 3.7 times the expected rate (20 of 635 paintings) [3]. As a printed word, the adjective *cornsilk* peaks in the 2010s [4]. These are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (plain English words)",
+   "first_recorded": "1927 (Maerz & Paul); X11 web set",
+   "source": "Paterson, p. 130"
+  },
+  "aka": [],
+  "siblings": [
+   "ivory",
+   "cream"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 326,
+  "role_light_pct": 52,
+  "top_country": [
+   "China",
+   3.7
+  ],
+  "measured": {
+   "lch": [
+    97,
+    14,
+    99
+   ],
+   "nearest": [
+    [
+     "Ecru",
+     5.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 130",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 86; Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, adjective use, 5-year smoothing",
+   "loc_kind": "",
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is cornsilk's hex code in the X11 set?",
+   "choices": [
+    "#FFF8DC",
+    "#6495ED",
+    "#B8860B",
+    "#8B008B"
+   ],
+   "answer": "#FFF8DC",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, what role does cornsilk most often play inside a painting?",
+   "choices": [
+    "A light",
+    "A shadow",
+    "An accent",
+    "A hidden color"
+   ],
+   "answer": "A light",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Cornsilk is an X11 web color, but Maerz and Paul's dictionary had it from 1927."
+ ],
+ "words": 197,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

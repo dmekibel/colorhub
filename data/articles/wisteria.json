@@ -1,0 +1,141 @@
+{
+ "slug": "wisteria",
+ "name": "Wisteria",
+ "hex": "#C9A0DC",
+ "names": [
+  "Wisteria"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Wisteria is a pale lilac purple named for the climbing vine whose hanging flower clusters fill spring gardens, and in the books it is the color of the gardens more than of any dye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The flower and the word",
+   "body": "Garfield counts wisteria among 528 flower names in a survey of some 7,500 color names [1]. He calls the garden version the most common mauve today, quoting a novel in which wisteria bunches deepen from a washed mauve-pink to purple [2]. His point is that horticulturists are as subjective as novelists: mauve, and so wisteria, has never been one fixed color [2]. The swatch here, with ISCC-NBS block 210, sits closest to [[lavender]] and [[lilac]], within about 4 CIEDE2000 units [3]."
+  },
+  {
+   "id": "other",
+   "title": "Other wisterias",
+   "body": "The Pigment Compendium has an entry for *wisteria yellow*, which sends the reader to gamboge, the yellow resin pigment [4]. The Compendium gives it as the translation of the Japanese *to-o*, which is the Japanese reading of the same characters as the Chinese name for gamboge, *teng huang*, literally rattan yellow [4]. It has nothing to do with the purple flower. St Clair mentions wisteria only as the brocade pattern on Empress Cixi's imperial yellow gown, a decoration and not a color [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive count for this exact swatch is not yet computed, so no figure is given. The library shows its nearest named colors: [[lavender]] at about 4 units, with [[lilac]] and [[periwinkle]] also near [3]. Any archive match would be photographs of aged, varnished paintings; a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the wisteria vine (genus Wisteria)",
+   "first_recorded": "undocumented in the books",
+   "source": "ColorHub library (ISCC-NBS, xkcd, Wikipedia)"
+  },
+  "aka": [],
+  "siblings": [
+   "lavender",
+   "lilac",
+   "mauve"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "lavender",
+    "gloss": "nearly the same pale violet, named for a different flower"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "match": {
+   "hex": "#C9A0DC",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": null,
+  "measured": {
+   "nearest": [
+    [
+     "Lavender",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, author's note",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 210; nearest name by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"gamboge\" and \"wisteria yellow\", pp. 178 and 409",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Imperial Yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Pigment Compendium's \"wisteria yellow\" refer to?",
+   "choices": [
+    "Gamboge",
+    "A purple dye",
+    "The flower's pollen",
+    "Orpiment only"
+   ],
+   "answer": "Gamboge",
+   "kind": "pick"
+  },
+  {
+   "q": "Which flower-named purple is closest to wisteria in our library?",
+   "choices": [
+    "Lavender",
+    "Madder",
+    "Indigo",
+    "Black"
+   ],
+   "answer": "Lavender",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In the Japanese pigment trade, wisteria yellow meant gamboge, not purple."
+ ],
+ "words": 244,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported dating of the 7,500-name count",
+   "Reworded wisteria yellow / to-o note to match the Compendium"
+  ]
+ }
+}

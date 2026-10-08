@@ -1,0 +1,111 @@
+{
+ "slug": "sea-blue",
+ "name": "Sea Blue",
+ "hex": "#047495",
+ "names": [
+  "Sea Blue"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Sea blue is a medium blue with a green cast, the color of open water as a plain-language name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain description",
+   "body": "The books use sea blue as an ordinary description rather than a defined term. Finlay lists it among the bales and samples of cloth in a weaving loom shed, next to coral and mist [1].\n\nBirren reports that ancient astrologers gave each zodiac sign a color, with sea-blue for Pisces [2]. Birren's 1950 book is old opinion rather than modern evidence, so read the list as a historical curiosity [2]. A study of early abstract painting also has a numbered color list that includes a sea-blue [3]. The phrase works as a plain-language name: it points at no dye, mineral or maker, only at the sea [1][2]. None of the three sources gives it a recipe or a fixed shade, so the swatch below is a modern reading of the name, not a historical match [1][2][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #047495 is a clear blue-teal, less green than [[teal]] and darker than [[azure]] [4]. It is close to [[marine-blue]] and [[steel-blue]] [4]. Screen colors are approximate [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sea",
+   "first_recorded": "undocumented",
+   "source": "Finlay; Birren"
+  },
+  "aka": [],
+  "siblings": [
+   "teal",
+   "marine-blue",
+   "steel-blue",
+   "sky-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "concordance of 29 color books",
+  "book_mentions": 4,
+  "swatch": "#047495 (screen approximation)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 201",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Birren, Psychology of Color, ch. 10 (contested)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 268",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which zodiac sign did the old color list pair with sea-blue?",
+   "choices": [
+    "Pisces",
+    "Leo",
+    "Taurus"
+   ],
+   "answer": "Pisces",
+   "kind": "pick"
+  },
+  {
+   "q": "How should Birren's 1950 claims be read?",
+   "choices": [
+    "As old opinion",
+    "As modern proof",
+    "As laboratory data"
+   ],
+   "answer": "As old opinion",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "An old astrological list pairs sea-blue with Pisces."
+ ],
+ "words": 177,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported Kupka attribution and \"pale to deep\" claim",
+   "Removed unverified Yorkshire detail"
+  ]
+ }
+}

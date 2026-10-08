@@ -1,0 +1,124 @@
+{
+ "slug": "slate-color",
+ "name": "Slate Color",
+ "hex": "#4F5B5D",
+ "names": [
+  "Slate Color"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Slate Color is the dark blue-grey of roofing slate, a name that turns up in medicine and paint chemistry as well.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey that doctors and chemists used",
+   "body": "The color of slate was a working word for physicians. Birren, quoting medical literature, notes that in argyria the skin turns bluish grey or slate colored, and that in Addison's disease it can run from light yellow to deep brown or slate [1]. Slate, in that sense, was a diagnostic color, not a decorative one [1].\n\nChemists used it as a verdict. The Pigment Compendium cites an 1869 report on a cobalt analog of Prussian blue, whose product Salter reported as a dingy slate colour, noting the pigment was not in ordinary use [2]. Related names include [[slate]], [[slate-grey]] and [[steel-blue]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 610 hold this color at 5% of the canvas or more, as photographed [3]. The earliest sample is a drawing of a dog with pups, about 1780 [3]. Printed use of *slate color* peaked in 1909 and by 2000 had fallen to under 2% of that peak [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "roofing slate, by color",
+   "first_recorded": "undated",
+   "source": "Birren, Color Psychology and Color Therapy, ch. 9; Pigment Compendium, p. 127"
+  },
+  "aka": [
+   "slate colour"
+  ],
+  "siblings": [
+   "slate",
+   "slate-grey"
+  ],
+  "parent": "grey",
+  "children": [
+   "steel-blue"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (color match within 6 DeltaE2000, at least 5% of the canvas)",
+  "match": {
+   "hex": "#4F5B5D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 610,
+  "ngram": {
+   "peak": 1909,
+   "rel_1900": 0.755,
+   "rel_2000": 0.018
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 9 (\"Diagnosis through Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 127, on cobalt iron cyanide (Salter, 1869)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'slate color', 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which condition does Birren say skin may turn bluish grey or slate colored?",
+   "choices": [
+    "Argyria",
+    "Scurvy",
+    "Frostbite",
+    "Measles"
+   ],
+   "answer": "Argyria",
+   "kind": "pick"
+  },
+  {
+   "q": "When did printed use of 'slate color' peak?",
+   "choices": [
+    "1909",
+    "1997",
+    "1642",
+    "2013"
+   ],
+   "answer": "1909",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Doctors used slate color as a skin sign: argyria turns skin bluish grey or slate.",
+  "Use of the phrase 'slate color' has fallen to under 2% of its 1909 peak."
+ ],
+ "words": 173,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed overstated causal claim that slate colour kept the pigment out of use."
+  ]
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "name": "Dark Orange",
+ "hex": "#FF8C00",
+ "names": [
+  "Dark Orange"
+ ],
+ "tier": "standard",
+ "lede": "Dark Orange is a web color, `darkorange`, a saturated amber orange defined by the hex code FF8C00 in the X11 color set.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color",
+   "body": "Paterson lists DarkOrange among the colors of the X11 color set, with the hex code FF8C00 [1]. The name is a standard label, not a historic one: it is a place on a computer color chart [1].\n\nThe swatch is a pure, bright orange, deeper than [[orange]] and more yellow than [[vermilion]]. The phrase dark orange is also used loosely in the books as a plain description, and it names real things in other places."
+  },
+  {
+   "id": "descriptions",
+   "title": "Dark orange in plain words",
+   "body": "Paterson defines beeswax as a dark orange, and skyrin as a natural dark orange pigment [2][3]. Pastoureau uses the phrase for russet, the medieval color that fell in status from the twelfth century and became the color of Judas [4]. A reader of the medieval sources should expect that russet leaned toward dark orange and was an insult, not a compliment [4].\n\nFinlay's account of the indigo vat in Bengal records the planter Grant puzzling over the liquid, which was dark orange at first, then light green, then darker green [5]. Fresh indigo liquor looks nothing like its final blue [5]. See [[indigo]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "At FF8C00 almost no painting qualifies: 6 of 23,781 paintings in our archive hold it, about 0.03 per cent [6]. In those it is a highlight color, 83 per cent of its use, as in Cranach's *Adam* of 1528 [6][[painting:commons-Q113465655|Adam]]. The strongest match is an 1830 Kota painting of Maharao Ram Singh II, at 31 per cent of the canvas [6][[painting:cma-314487|Maharao Ram Singh II of Kota]]. These are photographs of aged, varnished paintings, so a match is a color on a screen, not a pigment test [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "X11 color set (a standard)",
+   "first_recorded": "undocumented in our books",
+   "source": "Paterson, A Dictionary of Colour, \"DarkOrange\""
+  },
+  "aka": [
+   "darkorange"
+  ],
+  "siblings": [
+   "orange",
+   "amber"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5 per cent of the canvas)",
+  "n_present": 6,
+  "rate": 0.0003,
+  "role": "highlight",
+  "top_paintings": [
+   "cma-314487",
+   "commons-Q113465655"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"DarkOrange\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"beeswax\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"skyrin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 26 (\"Judas, the Redhead\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5 per cent of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What hex code defines DarkOrange in the X11 color set?",
+   "choices": [
+    "FF8C00",
+    "FF4500",
+    "8B0000",
+    "FFA500"
+   ],
+   "answer": "FF8C00",
+   "kind": "pick"
+  },
+  {
+   "q": "Which medieval figure became the picture of a russet, near dark-orange hair?",
+   "choices": [
+    "Judas",
+    "Saint Peter",
+    "Herod",
+    "Caesar"
+   ],
+   "answer": "Judas",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Fresh indigo liquor in Bengal was dark orange before it turned green and then blue."
+ ],
+ "slug": "dark-orange",
+ "words": 280,
+ "status": "checked",
+ "depth": "short",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All claims checked against Paterson, Pastoureau, Finlay; no changes."
+  ]
+ }
+}

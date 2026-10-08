@@ -1,0 +1,247 @@
+{
+ "slug": "mountain-green",
+ "name": "Mountain Green",
+ "hex": "#B2B599",
+ "names": [
+  "Mountain Green"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Mountain green is a pale grey-green from Syme's 1821 color nomenclature, which shares its name with an older pigment word for green copper minerals such as malachite.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three colors under one name",
+   "body": "*Mountain green* is a name with three lives. It is a numbered color in Patrick Syme's 1821 nomenclature, a pigment word for green copper minerals, and a soft grey-green swatch in modern color dictionaries [1][6][9]. They share a word, and the books do not show that they share a color.\n\nThe swatch here comes from the third life. In the ISCC-NBS system of 1955 it sits in block 151, which the library classes as a yellowish grey, and its nearest named neighbor is [[sage]], at a CIEDE2000 distance of 7.0 [9]. Its lightness is high and its chroma low, a pale, dusty olive [9]."
+  },
+  {
+   "id": "syme",
+   "title": "Werner and Syme",
+   "body": "The color name belongs to a lineage that begins in mineralogy. Abraham Gottlob Werner published his color vocabulary in 1774, with 54 terms grouped under eight principal colors, to help identify minerals by their outward appearance [2]. His book contained no samples, so readers had to guess what the names meant [2]. Patrick Syme, an Edinburgh flower painter, expanded the list to 108 terms in 1814 and 110 in 1821, and gave each a painted swatch plus animal, vegetable and mineral examples [2].\n\nMountain green appears in the comparison charts Baty prints for the successive lists of this lineage [3]. In Syme's plate it is number 47, in the greens, a mix of emerald green, a good deal of blue and a touch of yellowish grey [1]. His examples were a moth, *Phalaena viridaria*, the leaves of the thick-leaved cudweed and the silver-leaved almond, and the minerals actinolite and beryl [1][9]. Syme marked the color as Werner's own, though Baty points out that these marks are inconsistent [1][3].\n\nThe recipe and the modern swatch disagree. A bluish green with a little grey, as Syme's recipe describes, is not the yellowish grey shown here [1][9]. Baty warns that Syme's swatches have muted with age, and Ridgway complained as early as 1886 that they no longer matched their intended tints, so the swatch is a record of an old plate, not of the 1821 paint [5]."
+  },
+  {
+   "id": "pigment",
+   "title": "Berggrun, the pigment",
+   "body": "As a pigment word, *mountain green* is a literal translation of the German *Berggrün* [6]. Its meaning shifted with time. Sixteenth- to eighteenth-century writers used it for chrysocolla, but early literature often confused chrysocolla with malachite, two copper minerals that come from related sources, and from the second half of the eighteenth century it most commonly meant malachite [6]. Lemery (1721) says it was variously synonymous with malachite, chrysocolla, Veronese green or green earth [6].\n\nWatin (1785) describes the material, under the name Hungarian green, as a greenish mineral, or more likely a chalk of green copper, occurring as sandy grains in the Kernhausen mountains of Hungary [6]. Malachite itself is a basic copper carbonate, named from the Greek for mallow after its leaf-green color, that forms in the weathered upper zones of copper deposits, often beside azurite [7]. The blue counterpart has its own mountain name: *mountain blue*, from the German *Bergblau*, is a synonym for azurite [6][8].\n\nTwo further meanings are on record. The compendium notes that terms usually given to malachite could also be applied to green verditer, a manufactured copper carbonate, with mountain green as an example [7]. And in the nineteenth century, Mierzinski (1881) describes it as either malachite or, with Braunschweig, Neuwied and Kaiser green, a copper acetate arsenite, which is to say an [[emerald-green]] type of pigment extended with calcium or barium sulfate [6]. The word covered natural and manufactured greens, and the compendium says all these terms seem to have the same multiple meanings [6]."
+  },
+  {
+   "id": "link",
+   "title": "Is there a link?",
+   "body": "Werner argued that a mineral's color could hint at its chemistry, and he noted that copper minerals are largely green or blue [4]. That might suggest his mountain green was a copper green, but the books here do not say so. Syme's mineral examples for the color were actinolite and beryl, which are silicates, not copper minerals [1][9]. Whether Werner's color term and the pigment word *Berggrün* have a common origin is not discussed in the books we hold [1][6], so treat the shared name as a coincidence of vocabulary until a source says otherwise."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, a color within six units of this swatch covers at least five per cent of the canvas in 1,308 works, about 5.5 per cent of the archive [10]. It peaks in the 1770s, when 46 of 416 works match, twice the archive rate [10]. It is a quiet, light color: in the lightness order of the matching paintings, 89 per cent of its areas fall in the highlight band, 11 per cent in the mid-tones and none in the shadows [10].\n\nThe painters who use it most are landscapists. Half of the 16 works by [[painter:meindert-hobbema|Hobbema]] in the archive match, as do 15 of 33 by [[painter:eugene-boudin|Boudin]] [10]. A clear case is Boudin's [[painting:nga-61365|Washerwoman near Trouville]], where the color fills about two thirds of the canvas [10]. In the United Kingdom 85 of 593 works match, 14 per cent, more than twice the archive rate [10]. Among named colors it keeps company with [[sage]], in 438 works [10]. These are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books; the pigment word is a translation of German Berggrün",
+   "first_recorded": "Werner/Syme nomenclature (Syme 1821, no. 47); Maerz & Paul date the dictionary color to 1927",
+   "source": "Baty, Nature's Palette; Pigment Compendium, \"Mountain green\""
+  },
+  "aka": [
+   "Berg green",
+   "Berggrün (pigment word)"
+  ],
+  "siblings": [
+   "celadon-green",
+   "leek-green",
+   "grass-green",
+   "apple-green",
+   "sage-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "malachite",
+    "gloss": "the copper mineral that the pigment word mountain green most often means"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Berggrün (pigment name)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B2B599",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1308,
+  "top_paintings": [
+   "cma-162466",
+   "smk-KMS6769",
+   "nga-61365"
+  ],
+  "painters": [
+   {
+    "key": "Meindert Hobbema",
+    "n": 16,
+    "hits": 8
+   },
+   {
+    "key": "Eugène Boudin",
+    "n": 33,
+    "hits": 15
+   }
+  ],
+  "role": {
+   "highlight": 0.89,
+   "mid": 0.11,
+   "shadow": 0.0
+  },
+  "company": [
+   {
+    "word": "Sage",
+    "hits": 438,
+    "lift": 7.67
+   },
+   {
+    "word": "Ash",
+    "hits": 719,
+    "lift": 6.8
+   }
+  ],
+  "measured": {
+   "lch": [
+    72.8,
+    15.2,
+    113.2
+   ],
+   "nearest": [
+    [
+     "Sage",
+     7.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Syme no. 47 \"Mountain Green\" (printed pp. 146-151)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 7, 16, 18, 26",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 28, 32-35",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 80",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 7, 136",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Mountain green\", \"Berggrün\" and \"Berg green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Malachite\" and \"Green verditer\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mountain blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Werner no. 47, ISCC-NBS 1955 block 151, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the pigment word 'mountain green' (Berggrün) most commonly mean from the late 1700s?",
+   "choices": [
+    "Malachite",
+    "Vermilion",
+    "Green earth only",
+    "Indigo"
+   ],
+   "answer": "Malachite",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books show that Werner's color mountain green was named after the copper pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why is the modern mountain green swatch not a good copy of Syme's 1821 color?",
+   "choices": [
+    "His recipe describes a bluish green, and his swatches have muted with age",
+    "He used no green at all",
+    "The color was invented in 1927",
+    "It was a poisonous dye"
+   ],
+   "answer": "His recipe describes a bluish green, and his swatches have muted with age",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Mountain green is a literal translation of the German pigment word Berggrün, usually malachite.",
+  "Syme described his mountain green as emerald green with much blue and a little grey; the modern swatch is a dusty yellow-grey.",
+  "Where to look: pale grey-greens like this one cover the foliage of Dutch and French landscapes, mostly as highlights."
+ ],
+ "words": 871,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Link between Werner's color and the pigment word Berggrun is not established; stated as undiscussed.",
+   "Baty page numbers are the notes' page labels, not verified against printed pages; plate 47 cited by plate.",
+   "Swatch vs recipe discrepancy stated."
+  ]
+ }
+}

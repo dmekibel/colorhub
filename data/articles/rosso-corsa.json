@@ -1,0 +1,112 @@
+{
+ "slug": "rosso-corsa",
+ "name": "Rosso Corsa",
+ "hex": "#D40000",
+ "names": [
+  "Rosso Corsa"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Rosso corsa is Italian for racing red: the bright red of Italian racing cars.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Racing red",
+   "body": "*Rosso corsa* means \"racing red\" [1]. St Clair traces it to the 1907 Peking to Paris motor race, in which Prince Scipione Borghese drove an Itala painted a strident poppy red [1]. The victory made that first paint Italy's racing color, which Enzo Ferrari later took for his own cars [1]. This is a single-source account, and we have not found a second book that tells the story, so treat the exact chain of events with care."
+  },
+  {
+   "id": "race",
+   "title": "The race and the paint",
+   "body": "Le Matin posed the challenge on 31 January 1907, and the car's journey was about 12,000 miles across the Gobi and the Urals [1]. Along the way the red faded: by Moscow the car had turned, in a companion's words, the color of the earth [1]. The fame of the red came from the finish, not from the paint as it looked on the road.\n\nThe swatch here is a plain, saturated red; real racing paints varied, and screens shift the color [2]. For its relatives see [[red]], [[vermilion]], [[scarlet]] and [[crimson]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive the swatch appears in 19 paintings, as photographed, rarer than 60% of the named colors [2]. In 95% of the 22 paintings where it covers enough canvas, it is an accent [2]. The earliest is from 1450, long before any car, so these paintings show a look-alike red, not the racing color [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Italian for racing red",
+   "first_recorded": "1907 race, per St Clair",
+   "source": "St Clair, The Secret Lives of Colour"
+  },
+  "aka": [
+   "racing red"
+  ],
+  "siblings": [
+   "red",
+   "vermilion"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "rosso corsa"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 19,
+  "role": {
+   "accent_pct": 95,
+   "of": 22
+  },
+  "first_painting": 1450
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Rosso corsa\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive and name records (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does rosso corsa mean?",
+   "choices": [
+    "Racing red",
+    "Roman red",
+    "Rose red",
+    "Rust red"
+   ],
+   "answer": "Racing red",
+   "kind": "pick"
+  },
+  {
+   "q": "Which 1907 contest does St Clair link to the color?",
+   "choices": [
+    "Peking to Paris",
+    "Monte Carlo rally",
+    "Mille Miglia",
+    "Le Mans"
+   ],
+   "answer": "Peking to Paris",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Ferrari's red may trace to a 1907 race from Peking to Paris, in St Clair's account."
+ ],
+ "words": 231,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All claims match St Clair; single-source caveat already present"
+  ]
+ }
+}

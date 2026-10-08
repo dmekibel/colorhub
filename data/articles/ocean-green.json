@@ -1,0 +1,102 @@
+{
+ "slug": "ocean-green",
+ "name": "Ocean Green",
+ "hex": "#3D9973",
+ "names": [
+  "Ocean Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Ocean Green is a clear, medium sea-green, and one of the few color names whose dictionary definition does not match its own standard swatch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines ocean green as a yellowy green and lists it among the greens in his colour tables [1]. The swatch here leans the other way: the swatch itself looks bluer, and ISCC-NBS block 135 calls it \"vivid green\" [2]. Books and standards disagree about its hue, and the dictionary's one-line gloss is the outlier [1][2].\n\nThe library traces the term to Maerz and Paul's 1930 dictionary, plate 18, which gives 1915 as its first recorded use, and the xkcd color survey of 2010 added it again [2]. It sits between [[sea-green]] and [[seaweed-green]], with [[blue-green]] and [[green]] as its wider relatives [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Ocean green is rare in paint. Only 21 of the 23,781 paintings in our archive carry it, as photographed, which is rarer than 70 per cent of the named colors [3]. Five of them date from the 1800s [3]. The earliest dated match is a Metropolitan Museum painting of 1644, and the archive's early centuries are thin, so that is a floor, not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sea (origin undocumented in our sources)",
+   "first_recorded": "Maerz & Paul, 1930 (first recorded 1915)",
+   "source": "Paterson, p. 283"
+  },
+  "aka": [],
+  "siblings": [
+   "sea-green",
+   "seaweed-green",
+   "blue-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 21,
+  "iscc_nbs": "block 135, vivid green",
+  "first_recorded": 1915
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 283, 499, \"ocean green\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define ocean green?",
+   "choices": [
+    "A yellowy green",
+    "A deep navy",
+    "A pale pink"
+   ],
+   "answer": "A yellowy green",
+   "kind": "pick"
+  },
+  {
+   "q": "Our painting archive holds hundreds of paintings with ocean green over 5 per cent of the canvas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson's dictionary calls ocean green yellowy; the standard swatch is a bluish sea-green."
+ ],
+ "words": 189,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced 'library measures bluish green'; reworded as the swatch looking bluer."
+  ]
+ }
+}

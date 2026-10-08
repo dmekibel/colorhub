@@ -1,0 +1,118 @@
+{
+ "slug": "burlywood",
+ "name": "Burlywood",
+ "hex": "#DEB887",
+ "names": [
+  "Burlywood"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Burlywood is a pale tan from the X11 and CSS color lists, found in about one painting in twenty in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A tan in the web list",
+   "body": "Paterson calls BurlyWood a tan colour and one of the colours in the X11 Color Set, with hex code #DEB887 [1]. It is also a CSS keyword [3]. The dictionary does not explain the name, and its origin is undocumented here [1].\n\nThe library finds the same name in the Maerz and Paul dictionary, first recorded in 1912, and in the ISCC-NBS lists of 1955 [3]. Nearby names are [[tan]], [[wheat]], [[khaki]] and [[sandy-brown]] [3]. The hex value is a screen approximation of a tan, not a measured pigment [1][3]. In LCH terms it measures lightness 77, chroma 31 and hue 77 degrees, and its nearest library name is Tan [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this tan in 1,154 of 23,531 paintings, about 4.9 percent, as photographed [2]. John Singer Sargent has it in 27 paintings and Mughal paintings in 56 [2]. Measured values are screen approximations of varnished canvases [2]. The count is a computed color match, not an identification of any pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "BurlyWood"
+  ],
+  "siblings": [
+   "tan",
+   "wheat"
+  ],
+  "parent": null,
+  "children": [
+   "khaki"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 1154,
+  "measured": {
+   "lch": [
+    77,
+    31,
+    77
+   ],
+   "nearest": [
+    [
+     "Tan",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"BurlyWood\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,531 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: CSS, Maerz and Paul, ISCC-NBS entries",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which hex code does Paterson give for BurlyWood?",
+   "choices": [
+    "#DEB887",
+    "#19382F",
+    "#FE828C",
+    "#3D9B41"
+   ],
+   "answer": "#DEB887",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson explains where the name Burlywood comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Burlywood turns up in about one painting in twenty."
+ ],
+ "words": 179,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Opener said 'more than one in twenty' but 4.9% is under; fixed.",
+   "Removed 'older word' and varnish-drift claims; lede 'most common' softened."
+  ]
+ }
+}

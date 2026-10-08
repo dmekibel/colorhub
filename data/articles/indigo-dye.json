@@ -1,0 +1,356 @@
+{
+ "slug": "indigo-dye",
+ "name": "Indigo Dye",
+ "hex": "#00416A",
+ "names": [
+  "Indigo Dye"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Indigo dye is the deep, greyed blue made from the leaves of many plants, and the only major natural dye that works by being dissolved colorless and then turning blue in the air.",
+ "sections": [
+  {
+   "id": "which",
+   "title": "The dye, not the rainbow",
+   "body": "The swatch on this page is the color of the dye itself: a deep, slightly greyed blue, Munsell 2.7PB 2.6/6.4, which the 1955 ISCC-NBS system calls a deep greenish blue, 3.0 units away [18]. Its nearest named neighbors are [[prussian-blue]], 5.4 units away, and [[navy]], 10.6 [18]. The violet-blue swatch of color charts and the rainbow is 15.1 units away and has its own page [18]. For the name, the long history and the Japanese tradition, see [[indigo]]. This page follows the substance and how people make it.\n\nThe word covers a wide range. Even one dyer's indigo could land on any of dozens of shades, set by how long the cloth soaked, how alkaline the bath was and whether the day was sunny [15]."
+  },
+  {
+   "id": "plants",
+   "title": "Many plants, one blue",
+   "body": "The blue comes from a colorless precursor, indican, that many plants carry: European woad, tropical *Indigofera*, Japanese *Polygonum* and others [1]. Whichever plant supplied it, the blue is indistinguishable, even to specialists [1]. What differs is the yield and the kind of vat each plant suits [1][2].\n\n*Indigofera tinctoria* was first cultivated in the Indus Valley more than 5,000 years ago, and the plant was called *nilah*, dark blue [14]. The tropical and subtropical species gave far more indigo than [[flower:indigo-woad|woad]]. Their concentrated dyestuff was dissolved in strongly alkaline vats that suit cotton and flax, while woad dyestuff worked well only on wool [2].\n\nOther plants matter locally. *Polygonum tinctorium*, \"dyer's knotweed\", grows about half a metre high and, processed by the old woad methods, yields far more dye than the same weight of woad [2]. In China it is *liao-lan*, *Indigofera* is *mu-lan*, and the Chinese character for blue is the same as the one for indigo plants [2]. *Strobilanthes flaccidifolius*, Assam indigo, supplies dye across mountain regions from south-west China to Thailand, Burma, Bhutan, Laos and Vietnam, and is often the only natural dye that remote minority communities still use [2]. A small Indian tree, *Wrightia tinctoria*, is known as dyer's oleander or Manila indigo [2]. Some Turkish woad holds mostly indirubin, the reddish part of indigo that normally forms a small share, and can give colors other than blue [2].\n\nThe plants also shaped the land. Woad and *Strobilanthes* are greedy for nitrogen, while *Indigofera* fixes its own, so woad could exhaust fields, and \"woad sickness\" may have helped end woad growing in the late Middle Ages [6]."
+  },
+  {
+   "id": "making",
+   "title": "From leaf to paste",
+   "body": "Extracting the dye is the first half of what Balfour-Paul calls indigo's conjuring trick, and the dyer's vat is the second [3]. Leaves of *Indigofera*, Assam indigo and Chinese indigo are steeped in water until fermentation reaches a critical stage [3]. The liquid is then drained off, slaked lime is added (shell lime in Sumatra and Thailand), and the whole is stirred hard until enough oxygen has been taken in for the indigo to form [3]. It sinks as a blue precipitate that is scooped out as paste, and damp paste keeps for about a year [3]. In early seventeenth-century India the best dyestuff was made in sets of cisterns, skimmed in stages, then moulded into balls or flat cakes and baked hard on the sand [3].\n\nStrength varied enormously. Village paste thick with mud, lime and plant matter could hold as little as 2 per cent indigo, while the best Bengali dyestuff was over 70 per cent, the remainder mostly indirubin and other organic matter [3].\n\nWhat happened in the cistern stayed a puzzle for centuries. As late as 1705 a patent was granted for extracting indigo, \"a blue stone\", from German mines [3]. Edward Schunk isolated the colorless precursor in woad leaves in 1855 and named it indican [3]. Only in 1898 did chemists show that soaking converts indican, by an enzyme, into indoxyl and glucose, and that whisking in oxygen turns indoxyl into indigo [3]."
+  },
+  {
+   "id": "vat",
+   "title": "The vat",
+   "body": "Indigo is unlike almost every other natural dye, because it needs no mordant [4]. Most natural dyes must be tied to the fiber by a metal salt, but indigo is insoluble and is deposited on the fiber as microscopic particles, without any thorough chemical bond [4]. So the dyer first reduces it. In a warm alkaline bath, about 50 degrees Celsius, it turns into a soluble form called indigo white, though the liquid actually looks yellowish-green [4]. Cloth lifted from the vat is yellowish-green too, and turns blue over several minutes as oxygen converts the dye back [4]. The word *vat* comes from the deep wooden barrels of medieval woad dyers [4].\n\nThat chemistry makes indigo the most versatile of the natural dyes. The strongly alkaline vat suits cotton, hemp, flax and ramie, fibers that take most dyes poorly, and indigo dyes all of them, which is why it is the earliest dye found on archaeological linen [5]. Wool, which prefers a gentler vat of about pH 8, suited the milder woad vat [5].\n\nThe deepest shades come only from many dips, each building a layer and leaving the core of the fiber undyed [5]. The layered molecules explain why indigo is fast to light but rubs off, and why worn indigo cloth fades without ever changing hue [5]. The deep blue field of the sixteenth-century Ardabil carpet in London is cited as proof of how long it lasts [5].\n\nVats were improvised from what a region had. The oldest complete medieval recipe, from an Italian wool guild text of 1418, needs only couched woad and wood-ash lye [4]. A vat made from hard indigo pigment can take up to two weeks to prepare, against days for woad [4]. In the Scottish Highlands and Islands, housewives kept a urine-based pot warming among the peat ashes to dye yarn for Harris tweed and fishermen's jerseys [9]. In seventeenth-century Aleppo, de Thevenot reports, dyers used a solution of dog droppings, which they said made the indigo stick better [6].\n\nEven now, with stable synthetic indigo, success depends on balancing a long list: fiber pretreatment, dye concentration, water temperature, alkalinity, the degree of reduction, speed of oxidation, immersion time and the number of dips [4]."
+  },
+  {
+   "id": "temper",
+   "title": "A vat with moods",
+   "body": "Because the organic vat is alive with microbes and can turn temperamental, dyers described it as a living thing, most often a woman [6]. Early American and European manuals advise not hurrying the vat and letting it rest for hours [6]. A Frenchman recorded the need to calm an angry vat in Tunisia, and in Java a vat sulks after a marital quarrel until offerings coax it round [6]. In Indonesia the vat was likened to a womb, so preparing the dye was often left to women past childbearing age [6].\n\nWhen things went wrong, someone was blamed. In Egypt a failed crop could be put down to a menstruating woman passing the field; in a Chinese province, women wearing flowers were barred from the jars; on Flores, coarse language while harvesting offends the soul of the plant [6]. Diderot reports a West Indian belief that seeds must be planted in odd numbers per hole [6].\n\nBalfour-Paul's verdict is that many such practices sound quirky but prove, on inspection, to have a sound chemical function, and that the dyers' reluctance to share their secrets is easy to understand [4]."
+  },
+  {
+   "id": "trade",
+   "title": "Indigo from the Americas",
+   "body": "The Aztecs and Maya already dyed with native *Indigofera* species [7]. The Spanish, keen to bypass Portuguese supplies, brought Asian *Indigofera tinctoria* across to Central America in the later 1500s [7]. Guatemala had no minerals to offer the conquistadors, so they turned to crops, and hundreds of indigo works rose along the Pacific plain, now El Salvador and Nicaragua, on land taken from Indian communities [7]. By 1600 indigo, called *xiquilite* or *piedra de anil*, was the mainstay of the Central American economy [7].\n\nThe eighteenth century was the boom: in the best years Spain received more than a million pounds of dyestuff, with more going to Peru and Mexico [7]. Guatemalan indigo was rated best, and prices for its three grades, *corte*, *sobresaliente* and the finest, *flor*, were in theory fixed each year at a fair [7]. Growers faced locusts, earthquakes and a saying that a planter went to bed rich and woke ruined [7]. A Portuguese ship wrecked in 1621 was found with twenty mahogany boxes of indigo still intact [7]. African slave labor was supplemented with Indian labor, whose use the crown eased in 1738 [7].\n\nPastoureau notes that in the Americas the work was done at low cost by a labor force largely of enslaved Black people, so that American indigo undercut European woad [8]. From about 1750, imports from the Americas and Asia made indigo dyeing common across Europe [8]."
+  },
+  {
+   "id": "africa",
+   "title": "Blue as wealth in West Africa",
+   "body": "In West Africa the amount of indigo was the measure of a garment [11]. A chief's wide narrow-strip robe might have been dipped up to forty times [11]. In middle Niger in 1865 a dark indigo robe might be priced at up to 10,000 cowries, roughly ninety days of what a man and his horse needed to live on [11]. Those who could not afford one beat indigo paste, *shuni*, into white cloth, or rubbed indigo on the skin to tint a gown [11]. Until the 1960s the great Yoruba cloth market of Oje was a sea of blue *adire*, the resist-dyed cloth, and the dyer Nike Olaniyi-Davis says plainly, \"Real indigo is the colour of love\" [11].\n\nThe Yoruba also added leftover dye to house plaster around doors and windows, and the blue tint was said to deter insects [12]."
+  },
+  {
+   "id": "paint",
+   "title": "Indigo as a paint",
+   "body": "Medieval painters used the scum, the \"flower\", that floated on a fresh woad or indigo vat as a pigment [12]. Imported indigo pigment, usually called Baghdad indigo in painters' manuals, was costly and often taken for a mineral, though less luxurious than [[gem:lapis-lazuli|lapis lazuli]] or [[gem:azurite|azurite]] [12]. Cennino Cennini advised painting a fresco drapery to look like ultramarine by stepping up indigo with lime white and touching in true ultramarine at the accents [12]. Medieval artists used indigo for shadows and relief or as a base color, and the Exeter cathedral accounts of 1320-21 record a pound of Baghdad indigo at eighteen pence [12].\n\nAfter 1600 ultramarine and azurite grew so expensive that cheaper indigo often stood in for them, and artists such as [[painter:peter-paul-rubens|Rubens]] and [[painter:frans-hals|Frans Hals]] used it to stretch their more expensive blues [12]. It faded in oil, though, and early in the eighteenth century [[prussian-blue]] replaced it for oil painting [12]. Watercolorists kept it: a chart of permanent colors in 1816 lists indigo beside Prussian blue and cobalt, and [[payne-s-grey]] was made from lake, raw sienna and indigo [12]. In 1997 the painted heavens of the rebuilt Globe theatre in London were covered with coarsely ground natural Indian indigo [12].\n\nIn the 1870s and 1880s William Morris spent eight years mastering indigo discharge printing, dyed his arms blue and earned the nickname Blue Topsy among friends [10]. He used the process for nearly all the popular patterns his firm registered between May 1882 and September 1885, and his indigo vats ran until the firm closed in 1940 [10]. St Clair's notes say the word jean is thought to derive from Genoa blue, *bleu de Gênes*, a cheap indigo dye popular for sailors' uniforms [17]."
+  },
+  {
+   "id": "myths",
+   "title": "Natural against synthetic",
+   "body": "A persistent claim says natural indigo is a different, better blue than synthetic. Chemically it is not: the two are the same molecule and give the same blue [13]. The argument that remains is about impurities. Fans of the natural dye say indirubin, which tints reddish, and flavonoids, which tint greenish, give extra body, like the uneven *abrash* in oriental rugs, though Balfour-Paul marks the point as contested [13]. The *Pigment Compendium* confirms that indirubin is redder than indigotin and that its share can signal how the dye was prepared [13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The dye's color is a painter's shadow. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 38 works, and in 71 per cent of the paintings where it appears it is among the darkest tones [19]. The earliest is Duccio's [[painting:nga-10|Nativity with the Prophets Isaiah and Ezekiel]] of 1308 [19]. The color is about five times as common in the 1300s and 1400s as in the archive as a whole, and it covers about a third of [[painter:filippino-lippi|Filippino Lippi]]'s *Meeting of Joachim and Anne* of 1497 and 29 per cent of [[painter:hans-memling|Memling]]'s *Saint Veronica* [19]. As always these are photographs of aged, varnished paintings, and a dark blue in a fifteenth-century panel may be azurite or ultramarine rather than indigo, so a color match is not a pigment test [19].\n\nIn Google Books, *indigo dye* passes five per cent of its eventual peak around 1804, reaches about three quarters of it by 1860, and peaks near 1995 [20]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "India (Greek indikon); the swatch names the dye as distinct from the rainbow's indigo",
+   "first_recorded": "cultivated in the Indus Valley more than 5,000 years ago",
+   "source": "Coles, Chromatopia, p. 63; Balfour-Paul, Indigo, p. 21"
+  },
+  "aka": [
+   "indigo",
+   "indigotin (the molecule)",
+   "natural indigo"
+  ],
+  "siblings": [
+   "indigo",
+   "indigo-blue",
+   "prussian-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "indigo",
+    "gloss": "the violet-blue of color charts and the rainbow, 15 units away; its page tells the name and Japanese history"
+   },
+   {
+    "slug": "indigo-blue",
+    "gloss": "Werner and Ridgway's mid greyish blue from old color plates"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "sa",
+    "name": "nila (dark blue)"
+   },
+   {
+    "lang": "es",
+    "name": "anil"
+   },
+   {
+    "lang": "ja",
+    "name": "ai (see Indigo)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#00416A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 38,
+  "top_paintings": [
+   "smk-KMSsp40",
+   "nga-41659",
+   "rijks-200388715",
+   "aic-111617",
+   "commons-Q5967674"
+  ],
+  "first_seen": {
+   "id": "nga-10",
+   "year": 1308
+  },
+  "role": {
+   "shadow": 0.71,
+   "mid": 0.26,
+   "highlight": 0.03
+  },
+  "century_lift": {
+   "1300": 5.0,
+   "1400": 5.3
+  },
+  "ngram": {
+   "term": "indigo dye",
+   "first_5pct": 1804,
+   "rel_1860": 0.734,
+   "peak": 1995
+  },
+  "measured": {
+   "lch": [
+    26.2,
+    29.0,
+    267.6
+   ],
+   "munsell": "2.7PB 2.6/6.4",
+   "contrast_white": 10.69,
+   "nearest": [
+    [
+     "Prussian Blue",
+     5.4
+    ],
+    [
+     "Navy",
+     10.6
+    ],
+    [
+     "Denim",
+     11.8
+    ],
+    [
+     "Indigo Blue",
+     14.1
+    ],
+    [
+     "Indigo",
+     15.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 12, 99",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 103-106",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 110, 117-119",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 125-129",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 127",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 109, 136-137",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 73-74",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 135",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 173",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 210",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 219-221",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 142; Eastaugh et al., Pigment Compendium, p. 209",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 63 (\"Indigo\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 20 (Epilogue)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, notes to the indigo chapter",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"indigo dye\", case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does cloth lifted from an indigo vat start out yellowish-green and then turn blue?",
+   "choices": [
+    "The dye is dissolved in a reduced, colorless-looking form, and oxygen in the air converts it back to blue",
+    "The cloth is bleached by the lime",
+    "A mordant changes color when it dries",
+    "Sunlight breaks the dye into two colors"
+   ],
+   "answer": "The dye is dissolved in a reduced, colorless-looking form, and oxygen in the air converts it back to blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Natural indigo is a different molecule from synthetic indigo, and that is why the two blues differ.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does worn indigo cloth fade without changing hue?",
+   "choices": [
+    "Each dip adds a layer and leaves the fiber core undyed, so rubbing wears away blue layers rather than altering them",
+    "Indigo is bleached by sunlight into grey",
+    "The mordant wears off first",
+    "Indigo only dyes the surface of wool"
+   ],
+   "answer": "Each dip adds a layer and leaves the fiber core undyed, so rubbing wears away blue layers rather than altering them",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Indigo needs no mordant: cloth leaves the vat yellowish-green and turns blue in the air.",
+  "In West Africa a chief's robe might be dipped in the indigo vat up to forty times; the deeper the blue, the richer the wearer."
+ ],
+ "words": 2089,
+ "status": "checked",
+ "checked": {
+  "by": "claude (batch 45)",
+  "date": "2026-10-08",
+  "issues": [
+   "Archive count here (38 works, 23,781 paintings) differs from data/articles/indigo.json (34 works, 23,531 paintings): the archive has grown; indigo.json is out of date.",
+   "bleu de Gênes / jean: St Clair's note says 'is believed'; hedged; CONFLICTS has Pastoureau's separate hedge on denim.",
+   "Pastoureau's passage on American indigo labor read via concordance context only.",
+   "Eastaugh Pigment Compendium p. 209 read from concordance snippet only (indirubin redder than indigotin)."
+  ]
+ }
+}

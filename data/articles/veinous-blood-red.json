@@ -1,0 +1,141 @@
+{
+ "slug": "veinous-blood-red",
+ "name": "Veinous Blood Red",
+ "hex": "#3F3033",
+ "names": [
+  "Veinous Blood Red"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Veinous Blood Red is a dark, brown-black red from Werner's nomenclature of colors as Syme renamed it, named for the blood of the veins and set beside the brighter red of the arteries.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color named for a body fluid",
+   "body": "Veinous Blood Red is number 96 in the chart of reds in Syme's edition of Werner's nomenclature, which Baty reproduces in *Nature's Palette*; Baty notes it is Syme's name for Werner's Blood Red [1][2]. The definition given is carmine red mixed with brownish black [1]. In the same run of reds it follows Cochineal Red and comes before Brownish Purple Red and Chocolate Red [1].\n\nEach Werner color is tied to three examples, one from each kingdom of nature [1]. For this one the animal example is veinous blood, the vegetable one is the dark purple scabious (the \"musk flower\"), and the mineral one is the garnet called pyrope [1]. Earlier in the series sits Arterial Blood Red, so the list holds both blood colors, bright and dark [1].\n\nChocolate Red, two steps on, is defined as veinous blood red mixed with a little brownish red [1]. Baty illustrates the color with a watercolor of blood from a leukaemia case by Thomas Godart, made about 1852-61, and with scabious petals from a botanical plate of 1812 [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is taken from an aged chart, and our library marks it as approximate [3]. It reads as a very dark, purplish brown, nearly black, which fits the recipe of carmine toned down with brownish black [1][3]. It is not the bright red many people picture for blood."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this color covers at least five per cent of the canvas, within six units of color distance, in 987 paintings, or 4.2 per cent [4]. It is almost always a shadow color: 89 per cent of its appearances are in the darkest band of the picture [4]. These are photographs of aged, varnished paintings, so a match is not a pigment test [4].\n\nThe peak decade is the 1490s, in 20 of 215 paintings [4]. Painters who lean on it include Pontormo, in 5 of 13 works, about nine times the archive rate [4]. The strongest single match is Bartholomeus van der Helst's self-portrait of 1667, where it fills 92 per cent of the canvas [4]. Its company is [[aubergine]] and [[navy]], the other very dark colors that are not quite black [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dark blood of the veins, as against arterial blood",
+   "first_recorded": "Werner, 1814 nomenclature (as reproduced by Baty)",
+   "source": "Baty, Nature's Palette, pp. 256-7, 263"
+  },
+  "aka": [
+   "venous blood red"
+  ],
+  "siblings": [
+   "blood-red",
+   "carmine",
+   "crimson"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "blood-red",
+    "gloss": "a brighter, plainer red than Werner's dark vein color"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (CIEDE2000 within 6, at least 5% of the canvas), tools/article_field.py",
+  "n_present": 987,
+  "rate": 0.0415,
+  "top_paintings": [
+   "commons-Q30222055",
+   "commons-Q61744158"
+  ],
+  "role": {
+   "shadow": 0.89,
+   "mid": 0.11
+  },
+  "peak_decade": "1490s: 20 of 215",
+  "company": [
+   "Aubergine",
+   "Navy",
+   "Terracotta"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 256-7, 263 (Werner no. 96, \"Reds and Browns\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, index, \"veinous blood red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Werner no. 96 (Reds), aged swatch, approximate; ColorHub color library (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (CIEDE2000 within 6, at least 5% of the canvas), tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Werner define Veinous Blood Red?",
+   "choices": [
+    "Carmine red mixed with brownish black",
+    "Pure vermilion",
+    "Cochineal mixed with white",
+    "Madder with a trace of blue"
+   ],
+   "answer": "Carmine red mixed with brownish black",
+   "kind": "pick"
+  },
+  {
+   "q": "In paintings, where does this color mostly appear?",
+   "choices": [
+    "In the shadows",
+    "In the highlights",
+    "In skies",
+    "In the mid-tones only"
+   ],
+   "answer": "In the shadows",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Werner gave blood two reds: a bright arterial one and a dark Veinous Blood Red [1].",
+  "In our archive Veinous Blood Red is a shadow color: 89 per cent of its appearances are in the darkest band [4]."
+ ],
+ "words": 383,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Baty says Veinous Blood Red is Syme's name for Werner's Blood Red; wording corrected",
+   "Removed unsupported 'velvet, old wine, thick garnet' sentence",
+   "Godart watercolor dated c. 1852-61 as in Baty",
+   "Chocolate Red 'next step' corrected (Brownish Purple Red sits between)"
+  ]
+ }
+}

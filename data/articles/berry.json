@@ -1,0 +1,274 @@
+{
+ "slug": "berry",
+ "name": "Berry",
+ "hex": "#990F4B",
+ "names": [
+  "Berry"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Berry is the name of a dark purplish red, but the word has lived many lives: it was a Greek name for an insect dye, and in the paint shop it meant a yellow-green buckthorn fruit.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word for many fruits",
+   "body": "*Berry* names no single color, because berries come in nearly every one. A red berry sends back red light and swallows green and blue, Ball explains [20]. Holly berries are red, yew berries scarlet and poisonous, ripe grapes dark, and a deadly nightshade berry turns from green to purplish black [13][14]. A poet's remark in *Bluets* is that blue is so rare in food that it often warns of mold or poisonous berries [15].\n\nThe color on this page is the deep purplish red of dark fruit, closest to [[raspberry]] and [[mulberry]] on the red side and to [[cranberry]] when it is lighter and brighter. ISCC-NBS 1955 names the nearest block \"deep purplish red\", and the name Berry appears in Maerz and Paul's dictionary of 1930 [18]. In an older sense it was just the color of ordinary fruit: Greenfield mentions \"berry-colored\" cloth worn by craftsmen and peasants in the early Middle Ages, which could be hard to tell from the cheaper purples that monarchs sometimes used [3]."
+  },
+  {
+   "id": "kermes",
+   "title": "The berry that was an insect",
+   "body": "For about two thousand years the most prized red dye was called a berry. Kermes, made from a scale insect that lives on the kermes oak, was *kokkos*, \"berry\", to the Greek writer Theophrastus around 300 BC, and *coccus* to the Latin writers who followed [1]. Pliny also calls it *granum*, \"grain\", which again suggests a seed, though he elsewhere calls it a little worm [1][2]. In the fourth century Saint Jerome used *baca*, \"berry\", for the dye, while knowing the source was an animal, and he added *vermiculum*, \"little worm\", from which comes the English word vermilion [1][4].\n\nWhy a berry? A cluster of dried scale insects on a twig does look like berries [1][5]. Finlay argues that the word was an old metaphor, which everyone knew was one, and not an error by Dioscorides, who described harvesting kermes with the fingernails from the oak and still called it *coccus* [2]. By the Renaissance, Greenfield notes, Europeans used *grain* and *vermilion* for all the insect reds, since the dyes looked so alike, and the classical idea that the tiny insects were berries lingered [3]. The word *kermes* itself came into European use by the fourteenth century from an Arabic word meaning worm, and it is the root of [[crimson]] and [[carmine]] [3][1].\n\nThe same confusion was useful to merchants. After the Spanish conquest of Mexico, the Spanish guarded their cochineal monopoly by spreading the story that it was a pea-like vegetable, a story that worked because the dried insects look like shrivelled berries [5]. Other Europeans hoped to break the monopoly: Sir Walter Raleigh claimed in the 1590s to have found berries in Guiana that dyed a perfect crimson [6]."
+  },
+  {
+   "id": "buckthorn",
+   "title": "The berries of the paint shop",
+   "body": "In an artist's color shop, \"berries\" meant something quite different: they were yellow and green. The trade used the unripe berries of buckthorn, species of *Rhamnus*, under names such as yellow berries, French berries and Avignon berries [7]. Tingry wrote in 1804 that the shrub grew in abundance near Avignon [7]. Turkey berries came from Izmir or Aleppo and Persian berries from the east, and the firm of Berger used them to make Dutch pink and brown pink [8].\n\nThe ripe berries gave sap green, a pigment whose juice is thick enough to use without a binder and which painters adopted by the fourteenth century as an alternative to verdigris [8][9]. From the same plant, Coles notes, colormakers drew a surprising range of colors: a lemon-yellow lake at about 50 degrees Celsius, an orange at 100, with the harvest time and the metal salts added also steering the result [10]. Stil de grain, a yellow lake made this way, was used extensively as an oil color in France and England in the eighteenth century [10]. A related green, Chinese green or lokao, was made in China from buckthorn bark [12].\n\nThe old word \"pink\" belongs to this world too. In seventeenth-century painting a pink was a yellow pigment extracted from weld, broom or unripe buckthorn berries, and there were also green pinks and brown pinks, so the word named a source and a type, not a color [11]. In 1664 Robert Boyle listed extracts of berries, fruits and flowers that change color with acid, and was the first to suggest that such changes might measure acidity [9]."
+  },
+  {
+   "id": "province",
+   "title": "Not the fruit: Berry the province",
+   "body": "Some of the hits for the word in the books are not fruit at all. Berry is also a region of France [17]. According to de Massoul, its yellow ochre was shipped to Holland, where it was calcined and sold as English red [17]. Its duke, Jean de France, is named by Pastoureau as one of the princes who made grey part of his livery, and combined it with red [16]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 2 of the 23,781 paintings in our archive hold this color, within six units of the swatch and covering at least five per cent of the canvas, as photographed [19]. At a looser threshold it turns up in 3 paintings, rarer than 77 per cent of named colors [19]. These are look-alikes in museum photographs of aged, varnished paintings, not proof of a berry dye [19].\n\nBoth paintings are from India, from about 1900 [19]. One is a [[painting:cma-164458|devotional painting of a female figure]], where it covers 22 per cent of the canvas, and the other shows [[painting:cma-164467|Shiva and Nandi]], with 12 per cent [19]. Two of our 721 Indian paintings hold it, about 33 times the expected rate, though with so few the figure says little [19]. In printed English the word berry rose fastest in the 1880s and peaked in the 1890s, but this counts the fruit in all its senses, so it says little about the color [19].\n\nTo see this color, hold a ripe raspberry against a sheet of white paper and compare it with the swatch."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fruit; no single berry",
+   "first_recorded": "Maerz and Paul, 1930 (in our sources)",
+   "source": "ColorHub library; Ball, Bright Earth, ch. 11"
+  },
+  "aka": [],
+  "siblings": [
+   "raspberry",
+   "mulberry",
+   "cranberry"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mulberry",
+    "gloss": "a dye fruit with its own color, lighter and pinker"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#990F4B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "top_paintings": [
+   "cma-164458",
+   "cma-164467"
+  ],
+  "measured": {
+   "lch": [
+    33.2,
+    55.7,
+    3.4
+   ],
+   "iscc": "deep purplish red",
+   "iscc_de": 6.2,
+   "first_name_record": "Maerz and Paul 1930"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11 (kermes: kokkos, coccus, granum, baca, vermiculum)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 81 (kermes)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 123 (cochineal)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, 'Avignon berries', p. 42",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, 'Rhamnus', 'sap green', pp. 336, 345",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12 (sap green; Boyle, 1664)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 119 (stil de grain)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14 ('pink')",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pigment Compendium, 'lokao', p. 255",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pigment Compendium, 'nightshade', p. 290",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 17, 23",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Nelson, Bluets, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 56",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Pigment Compendium, 'English red', p. 163",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955 block 235; Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "data",
+   "cite": "ColorHub archive: 23,781 paintings, as photographed (tools/article_field.py, #990F4B, within 6, 5 per cent cover); Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the old paint trade, what color were the 'Avignon berries' and 'French berries'?",
+   "choices": [
+    "Yellow (from unripe buckthorn berries)",
+    "Red",
+    "Blue",
+    "Purple"
+   ],
+   "answer": "Yellow (from unripe buckthorn berries)",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did ancient writers call the kermes dye 'kokkos', a berry?",
+   "choices": [
+    "Dried scale insects on a twig look like berries",
+    "It was squeezed from red berries",
+    "Berries were the first dye plant",
+    "The word means 'red'"
+   ],
+   "answer": "Dried scale insects on a twig look like berries",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Spanish kept cochineal's origin secret by calling it a vegetable.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The ancient Greek word for a red insect dye meant 'berry'.",
+  "Painters' 'French berries' were yellow, not red.",
+  "Kermes, the berry that was an insect, gave us the words crimson and carmine."
+ ],
+ "words": 973,
+ "status": "checked",
+ "checked": {
+  "by": "batch-14 writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Few books treat 'berry' as a color; article is built on the word's trade history. Shorter than the epic range; honest, not padded.",
+   "Nelson (poet) remark is hedged as a remark.",
+   "Archive hits very low (n=2-3); stated."
+  ]
+ }
+}

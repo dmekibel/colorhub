@@ -1,0 +1,131 @@
+{
+ "slug": "viola",
+ "name": "Viola",
+ "hex": "#8F699F",
+ "names": [
+  "Viola"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Viola is a muted violet-purple from a 1930 American color dictionary, named with the Italian word for the violet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Name and sources",
+   "body": "Maerz and Paul's 1930 dictionary gives viola plate 42, block H7, and first records it in 1923 [1]. Who first used it as a color is undocumented. The word also names the plant genus *Viola*, and Baty's nineteenth-century palette lists the sweet-scented violet, *Viola odorata*, among its blues and purples [2]. A flower named viola also appears in Jarman's book, but it is not about this color [3].\n\nOn screen it is close to [[faded-purple]] and [[amethyst]], 9.4 units apart, and a little duller than [[violet]] [1]. A paler relative is [[lilac]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, only 2 contain this color over at least five per cent of the canvas, Signac's *Woman with a Parasol* of 1893 and Dupuis's Le Havre embankment of 1908 [4]. Both are French, and both read as a shadow color [4]. Two paintings is too few to say more. These are photographs of varnished paintings, so a match is not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Italian word for the violet; origin as a color name undocumented",
+   "first_recorded": "1923 (Maerz & Paul)",
+   "source": "Maerz & Paul via library"
+  },
+  "aka": [],
+  "siblings": [
+   "faded-purple",
+   "amethyst"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "viola (violet)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#8F699F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "n_archive": 23781,
+  "measured": {
+   "lch": [
+    50,
+    34,
+    317
+   ],
+   "nearest": [
+    [
+     "Amethyst",
+     9.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 42 H 7, first recorded 1923; near Faded Purple, Amethyst 9.4",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 107",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 75 (a flower named viola)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the plant genus Viola include?",
+   "choices": [
+    "The sweet violet",
+    "The mallow",
+    "The rose",
+    "The lily"
+   ],
+   "answer": "The sweet violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books give an origin story for the color viola.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Viola is a quiet color: only two paintings in our archive hold it."
+ ],
+ "words": 177,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed uncited instrument claim."
+  ]
+ }
+}

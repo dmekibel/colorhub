@@ -1,0 +1,100 @@
+{
+ "slug": "mauvette",
+ "name": "Mauvette",
+ "hex": "#E0CAE2",
+ "names": [
+  "Mauvette"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Mauvette is a very pale, pinkish lilac, a diminutive cousin of mauve.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Little mauve",
+   "body": "Paterson defines mauvette as a violet, purple or purplish pink [1]. In the entry just before it, mauve is traced to William Perkin's dye of 1856, first sold as aniline purple, and its French name to the streaks on the mallow flower [1]. The ending looks like a diminutive that would make mauvette a little mauve, though no book in our set says so.\n\nThe name sits in three historic systems in our records: Ridgway 1912 (plate XXV), ISCC-NBS 1955 (block 210), and Maerz and Paul 1930, which gives 1912 as its first record [2]. The scan of an aged Ridgway plate is approximate [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is very light, with a lightness of 84 and low chroma [2]. Only 3 of 23,781 paintings cover 5% of their canvas with it, as photographed [3]. They include Bouguereau's *The Birth of Venus* (1879), about 26%, and Niels Larsen Stevns's view of Cagnes (1923), about 26% [3]. Its nearest standard name is [[thistle]], 2.7 ΔE away [2]. Related names: [[mauve]], [[mauvelous]], [[lilac]] and [[lavender]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "probably a diminutive of mauve",
+   "first_recorded": "1912 (Ridgway; Maerz & Paul 1930)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "mauve",
+   "thistle"
+  ],
+  "parent": "mauve",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+  "n_present": 3,
+  "nearest": "Thistle",
+  "hex": "#E0CAE2"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mauve\", \"mauvette\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub name records (library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, CSS, Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "When does Paterson say Perkin discovered the dye that became mauve?",
+   "choices": [
+    "1856",
+    "1812",
+    "1900",
+    "1773"
+   ],
+   "answer": "1856",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson defines mauvette as a violet, purple or purplish pink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson traces mauve to the mallow flower's purple streaks and to Perkin's 1856 dye."
+ ],
+ "words": 178,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

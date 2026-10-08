@@ -1,0 +1,122 @@
+{
+ "slug": "tiffany-blue",
+ "name": "Tiffany Blue",
+ "hex": "#0ABAB5",
+ "names": [
+  "Tiffany Blue"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Tiffany Blue is a trademarked light turquoise tied to one jeweller; the name is a brand's, so the swatch on a screen is only an approximation.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A jeweller's color",
+   "body": "Paterson defines Tiffany blue as the turquoise-blue colour adopted by Tiffany, the jewellers [1]. Westland writes that it was first used on the cover of the firm's Blue Book in 1837, and that a custom Pantone shade for global use followed in 2001, made with the color company [2]. Eckstut gives a nearby but different account: the firm trademarked its signature color in 1998, and the custom Pantone number, 1837, honors the year the company was founded [3].\n\nThe two accounts overlap rather than clash: both tie the color to 1837 and to Pantone, while Westland dates the standardized color to 2001 and Eckstut dates the trademark to 1998, so they describe different events [2][3]. Westland says 1837 marks the Blue Book cover; Eckstut says it marks the founding year [2][3]. Eckstut uses the case to show how a name makes a color easier to remember [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the box",
+   "body": "Our swatch is a bright turquoise-green and is only an approximation of a trademarked color [4]. The ISCC-NBS system of 1955 would call it a brilliant bluish green, about six units away, and the xkcd survey of 2010 gives a much paler aqua [4]. Printed boxes, lit rooms and screens each shift the color, so treat any hex as a pointer. Related names are [[turquoise]], [[robin-s-egg-blue]] and [[aqua]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 holds this color across even one per cent of the canvas, as photographed [4]. That describes our archive, not painting as a whole, and it fits a color tied to a modern brand [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Tiffany and Co., the jewellers",
+   "first_recorded": "1837 (Westland); trademarked 1998 (Eckstut)",
+   "source": "Westland, Principles of Color; Eckstut, What Is Color?"
+  },
+  "aka": [],
+  "siblings": [
+   "turquoise",
+   "robin-s-egg-blue",
+   "aqua",
+   "blue-green"
+  ],
+  "parent": "turquoise",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "nearest_iscc": [
+   "brilliant bluish green",
+   6.0
+  ],
+  "dates": {
+   "westland": "2001 Pantone standard",
+   "eckstut": "1998 trademark; Pantone 1837"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Tiffany blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Westland, Principles of Color Design, on brand colors",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eckstut and Eckstut, What Is Color?, opening chapter",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library and graph nodes (ISCC-NBS 1955; xkcd 2010; archive)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Pantone number 1837 mark, by Eckstut's account?",
+   "choices": [
+    "The year the company was founded",
+    "The year of the trademark",
+    "The Blue Book's page count",
+    "The 1955 ISCC-NBS block"
+   ],
+   "answer": "The year the company was founded",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books read agree on one year of standardization.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Compare Tiffany blue to a robin's egg: both are turquoise, but only one has a trademark."
+ ],
+ "words": 276,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'books disagree' reframed: 2001 standardization and 1998 trademark are different events, not a contradiction"
+  ]
+ }
+}

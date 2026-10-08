@@ -1,0 +1,107 @@
+{
+ "slug": "dirty-pink",
+ "name": "Dirty Pink",
+ "hex": "#CA7B80",
+ "names": [
+  "Dirty Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dirty Pink is a greyed, dull rose, a survey name for a pink with some brown or grey in it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name comes from the xkcd survey of 2010, and no earlier record exists in our sources [1]. Its nearest named neighbor is [[puce]], about 6 units away [1].\n\nThe words have a long life in writing, though. Derek Jarman uses them in *Chroma* to describe what the common garden geranium brings to mind, which is why he prefers the plant's botanical name pelargonium, with its scarlet [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive a color near this swatch appears in 46 of 23,781 paintings, or 0.19 per cent, which is rarer than 64 per cent of the named colors [3]. It peaks in the 1900s, at 4.2 times the expected rate, and in a painting it most often plays a light [3]. As always these are photographs of aged, varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive survey name",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "muddy pink"
+  ],
+  "siblings": [
+   "pink",
+   "puce",
+   "dusky-pink",
+   "dusky-rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 46,
+  "pct_archive": 0.19,
+  "match": {
+   "hex": "#CA7B80",
+   "de2000": 4
+  },
+  "role": "light",
+  "peak_century": 1900
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 21",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What plant name did Jarman say conjures a dirty pink?",
+   "choices": [
+    "Geranium",
+    "Rose",
+    "Peony"
+   ],
+   "answer": "Geranium",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the name Dirty Pink is recorded in our sources before 1900.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Derek Jarman preferred to say pelargonium, since geranium conjured a dirty pink for him."
+ ],
+ "words": 153,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

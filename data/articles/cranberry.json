@@ -1,0 +1,141 @@
+{
+ "slug": "cranberry",
+ "name": "Cranberry",
+ "hex": "#9E003A",
+ "names": [
+  "Cranberry"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Cranberry is a deep crimson-red named for the fruit.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The fruit's name",
+   "body": "Paterson lists cranberry red as the dark red of the cranberry, and gives it a place in his red column beside cramoisy, crimson and damson [1][2]. St Clair, describing pomegranate, reaches for the same fruit and calls it cranberry-pink, which shows how loosely the word is used [3]. Where the word was first coined as a color is undocumented in the books here [1][3].\n\nThe swatch is #9E003A, ISCC-NBS block 13 and also a survey name from the xkcd color list [4]. A second swatch called Cranberry, #9C2542, cites Crayola and sits within 2.3 units of a red-violet on a color wheel [4]. So the name points at a band of deep reds with a violet cast, not one fixed color [4]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Where it sits",
+   "body": "The nearest named color is [[raspberry]], 4.3 units away [4]. Other deep reds in our library include [[cherry]], [[burgundy]] and [[blood-red]] [4].\n\nThe swatch on a screen is a saturated crimson, and the fruit itself is likely duller [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a rare color in painting. In our archive of 23,781 paintings, only one work has a color within six units of this swatch covering at least five per cent of the canvas [5]. It is Kirchner's *Two Girls under an Umbrella* of 1910, at 13 per cent [[painting:nga-76206|Two Girls under an Umbrella]] [5]. The one hit is German and dated 1910 [5].\n\nThe same sample returns zero hits from the Impressionists and the Realists [5]. In Google Books, the word *cranberry* is present from 1800 and peaks about 1925, but that count is mostly about the fruit [6]. These are photographs of aged, varnished paintings, so read the match as a screen color [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the cranberry fruit",
+   "first_recorded": "undocumented in the books; listed by Paterson",
+   "source": "Paterson, pp. 131, 469"
+  },
+  "aka": [
+   "cranberry red"
+  ],
+  "siblings": [
+   "raspberry",
+   "burgundy"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#9E003A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "top_paintings": [
+   "nga-76206"
+  ],
+  "ngram": {
+   "peak": 1925,
+   "first_5pct": 1800
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 131",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 469, 506",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Pomegranate\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd, Wikipedia/Crayola), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which fruit gives cranberry its name?",
+   "choices": [
+    "The cranberry",
+    "The pomegranate",
+    "The cherry",
+    "The plum"
+   ],
+   "answer": "The cranberry",
+   "kind": "pick"
+  },
+  {
+   "q": "How many paintings in our archive hold this color across at least 5% of the canvas?",
+   "choices": [
+    "Just one",
+    "About a hundred",
+    "Over a thousand",
+    "None"
+   ],
+   "answer": "Just one",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Cranberry is almost absent from old paint: our archive has just one work in which it covers a twentieth of the canvas.",
+  "Paterson files cranberry red with the dark reds, next to crimson and damson."
+ ],
+ "words": 275,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

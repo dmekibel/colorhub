@@ -1,0 +1,147 @@
+{
+ "slug": "near-black",
+ "name": "Near black",
+ "hex": "#070D0D",
+ "names": [
+  "Near black"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Near black is a black with a trace of color in it, which is how some painters, from Gauguin on, made their darkest darks.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Mixed blacks",
+   "body": "The word has a history in painting. Pastoureau notes that from Gauguin onward some painters gave up the standard blacks (carbon, lamp, bone and ivory black, even the new aniline black) [1]. Instead they combined blue, red and green pigments, such as ultramarine, Prussian blue, cochineal, madder lake, emerald green and malachite, to get near-blacks with many shades in them [1]. See [[prussian-blue]] and [[madder]] for two of those ingredients, and [[black]] and [[jet]] for the flat extremes.\n\nAs a swatch, #070D0D is a name from the xkcd color survey of 2010 [2]. The ISCC-NBS system of 1955 would call the position \"brownish black\" (block 65), 3.8 CIEDE2000 units away [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Near black is the most common dark in the archive. A color near it appears in 3,604 of our 23,781 paintings, 15.15%, more often than 99% of the named colors, as photographed [3]. In 77% of the 3,192 paintings where the within-painting lens finds it, it plays a shadow [3]. Among the painters, 24 of Rembrandt's 50 works here carry it, and 6 of Robert Henri's 12 [3]. In printed English the phrase peaks in the 1900s [4]. Aged varnish darkens shadows, so read these as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive name: a black that is not quite black",
+   "first_recorded": "xkcd color survey, 2010 (as a named swatch)",
+   "source": "ColorHub color library; Pastoureau, Black"
+  },
+  "aka": [
+   "almost black"
+  ],
+  "siblings": [
+   "black",
+   "jet"
+  ],
+  "parent": "black",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "jet",
+    "gloss": "a glossy deep black named for the mineral"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#070D0D",
+   "min_cover": 0.01
+  },
+  "n_present": 3604,
+  "role": "shadow in 77% of 3,192 paintings",
+  "measured": {
+   "lch": [
+    2,
+    2,
+    180
+   ],
+   "iscc": "brownish black, block 65, dE 3.8",
+   "nearest": [
+    [
+     "Black",
+     1.0
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 1900
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 90 (near the end of the chapter on the nineteenth century)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json and data/graph nodes: ISCC-NBS 1955, Munsell conversion), CIEDE2000 distances; xkcd color survey 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, all senses of the phrase (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which pigments did Gauguin and others mix to make near-blacks, according to Pastoureau?",
+   "choices": [
+    "Blues, reds and greens",
+    "Only lampblack",
+    "Gold and silver",
+    "White and ochre"
+   ],
+   "answer": "Blues, reds and greens",
+   "kind": "pick"
+  },
+  {
+   "q": "In paintings in our archive, what role does near black most often play?",
+   "choices": [
+    "A shadow",
+    "A light",
+    "An accent",
+    "A mid-tone"
+   ],
+   "answer": "A shadow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: near black is rare in paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Some painters avoided black pigments and mixed blues, reds and greens into near-blacks."
+ ],
+ "words": 221,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede overstated 'often since the 1880s'; Pastoureau says 'a certain number of painters' beginning with Gauguin."
+  ]
+ }
+}

@@ -32,6 +32,8 @@ function dnOrder(list) {
 // the day's word: day No. n takes the n-th name of the fixed order (the whole list passes before any repeats)
 function dnTarget(k = today(), list = CORE_NAMES) {
   if (!list || !list.length) return null;
+  // One Today (js/today.js): the app's color of the day, when it's one of this list's names
+  try { if (typeof todayPick === "function") { const t = todayPick(k), c = t && t.color && list.find(x => x.n.toLowerCase() === t.color.n.toLowerCase()); if (c) return c; } } catch (e) {}
   const o = dnOrder(list), n = chNumber(k) - 1;
   return o[((n % o.length) + o.length) % o.length];
 }

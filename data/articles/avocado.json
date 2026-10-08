@@ -1,0 +1,141 @@
+{
+ "slug": "avocado",
+ "name": "Avocado",
+ "hex": "#7A9703",
+ "names": [
+  "Avocado"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Avocado is the smoky yellow-green of the fruit's flesh, and for most people alive it means the kitchens and carpets of the 1970s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which part of the fruit?",
+   "body": "Paterson defines avocado as the fruit's green, meaning mostly the flesh and not the peel [1]. St Clair points out how much that leaves open: the dark skin, the clay-green flesh near the skin and the butter tint near the stone are all \"avocado\" [2]. Someone reading the word a century from now could be puzzled, she writes, though it still means something today [2]. Our library shows the same drift: it holds a lighter, yellower avocado from an online color survey, quite far from this swatch [3]."
+  },
+  {
+   "id": "seventies",
+   "title": "The 1970s palette",
+   "body": "St Clair ties the color to an event [2]. In January 1969 an oil well off Santa Barbara, California, ruptured; an estimated 200,000 gallons of crude escaped over 11 days and coated 35 miles of coastline [2]. She presents the spill as a turning point in how the world, and especially the United States, saw the fragility of the planet [2].\n\nWorry for nature turned into earthy fashion: burnt orange, harvest gold and, above all, avocado [2]. Through the decade it spread from clothes to household goods, and today it reads as dated [2]. It sits close to [[olive]] and [[khaki]] on the one side and [[harvest-gold]] and [[burnt-orange]] on the other.\n\nAn anecdote in Garfield's *Mauve* shows how such colors were pushed [4]. A color forecaster known as the dean of American color experts would announce that avocado would be next year's hot color, and it was, because she said it; the automotive makers planned five years ahead and told the apparel trade [4]. The story is an interviewee's recollection, so read it as color-trade folklore."
+  },
+  {
+   "id": "return",
+   "title": "Back again",
+   "body": "St Clair argues that avocado has returned since the millennium, now through the fruit itself as a symbol of healthy living [2]. She cites US avocado consumption of four billion in 2014, around four times the number 15 years before, and sales of $2.9 billion in 2011, up 11 per cent on the year before [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this color covers at least five per cent of the canvas, within six units of color distance, in just 3 paintings [5]. The strongest is Henri Moret's *The Island of Raguenez, Brittany*, of 1890, where it fills 14 per cent of the canvas [5]. All three are from the 1800s and 1900s, and none is older, as photographed [5].\n\nThe word is newer than the color. In Google Books *avocado* is near zero before 1900, jumps by 1920 and peaks around 2019, but it counts the fruit, not the color, so treat the curve as the fruit's story [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fruit of Persea americana (the flesh)",
+   "first_recorded": "1970s mass-market use, per St Clair (earlier use undocumented here)",
+   "source": "St Clair, The Secret Lives of Colour, \"Avocado\""
+  },
+  "aka": [
+   "avocado green"
+  ],
+  "siblings": [
+   "olive",
+   "khaki",
+   "celadon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "olive",
+    "gloss": "a darker, browner green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (CIEDE2000 within 6, at least 5% of the canvas), tools/article_field.py",
+  "n_present": 3,
+  "rate": 0.0001,
+  "top_paintings": [
+   "nga-52190",
+   "commons-Q60629195",
+   "commons-Q17494988"
+  ],
+  "ngram": {
+   "peak": 2019,
+   "note": "counts the fruit"
+  },
+  "library_hex": "#90B134"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"avocado\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Avocado\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), avocado #90B134 (xkcd survey)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 6 (\"Mauve Measles\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings, as photographed) and Google Books Ngram, tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which event does St Clair link to the 1970s back-to-nature palette?",
+   "choices": [
+    "The 1969 Santa Barbara oil spill",
+    "The first Earth photo from space",
+    "Invention of synthetic dyes",
+    "The 1970 oil embargo"
+   ],
+   "answer": "The 1969 Santa Barbara oil spill",
+   "kind": "pick"
+  },
+  {
+   "q": "Does \"avocado\" in color names refer mainly to the fruit's skin?",
+   "choices": [
+    "No, usually the pulp",
+    "Yes, always the skin"
+   ],
+   "answer": "No, usually the pulp",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Avocado green was one of the three leading colors of the 1970s back-to-nature palette [2]."
+ ],
+ "words": 437,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

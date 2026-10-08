@@ -1,0 +1,147 @@
+{
+ "slug": "grey-pink",
+ "name": "Grey Pink",
+ "hex": "#C3909B",
+ "names": [
+  "Grey Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Grey pink is a descriptive color name, a pink greyed down until it is dusty, and it has more to say about how we name colors than about any one history.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name built from two mixtures",
+   "body": "Grey pink is not a pigment or a place; it is plain grammar, a modifier set before a base word. Batchelor points out that grey and pink are both colors you can describe as mixtures, pink being a pale or whitish red and grey likewise a mixture of other colors, which makes this name a mixture of mixtures [1]. Its first appearances in our sources are charts, not stories: Ridgway's 1912 plate XXVII and the ISCC-NBS dictionary of 1955, which calls the swatch a light grayish purplish red, 4.5 units away [2].\n\nThe taste for such dusty tones is older than the name. Pastoureau describes an eighteenth-century dyeing manual of 632 pages, of which about 60 cover mordants and blends for purples, oranges, greys, pinks and browns, and he reads it as the sign of a growing taste for pastel shades [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "Near neighbors",
+   "body": "The closest named color is [[puce]], 3.8 units away, and the library files Light Mauve and Vinaceous as alternatives for the same swatch [2]. On the warm side it also sits close to [[mountbatten-pink]]; St Clair describes the hulls of a passenger-ship line as an indeterminate dull lavender-gray-pink, in the pages that lead into that color's story [4]. Where [[pink]] is clear, this is [[grey]] with a flush of rose in it."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Grey pink is rare in paint: 38 of 23,781 paintings in our archive (0.16 per cent), 20 by the stricter within-painting lens, rarer than 61 per cent of named colors [5]. Its most frequent role is a hidden color, in 60 per cent of those 20, one that reads as a quiet note beneath louder ones [5].\n\nIt peaks in the 1600s, in 6 of 6,394 paintings, 1.2 times the baseline [5]. The earliest match is a work of 1520, a look-alike hue 392 years before the name's earliest record in our sources, 1912 [5]. These are photographs of aged, varnished paintings, so a color match is a look-alike hue and not a pigment test. [5]"
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier plus a base color (grey + pink)",
+   "first_recorded": "Ridgway 1912 in our sources",
+   "source": "ColorHub library; Ridgway 1912, plate XXVII"
+  },
+  "aka": [
+   "Light Mauve",
+   "Vinaceous"
+  ],
+  "siblings": [
+   "puce",
+   "mountbatten-pink"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mountbatten-pink",
+    "gloss": "a named dusty pink with a story of its own"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 38,
+  "n_within_painting": 20,
+  "century_peak": {
+   "century": 1600,
+   "paintings": 6,
+   "lift": 1.2
+  },
+  "role": "hidden color 60%",
+  "measured": {
+   "iscc": "light grayish purplish red",
+   "de": 4.5,
+   "nearest": [
+    [
+     "Puce",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and graph nodes: ISCC-NBS 1955, Ridgway, Maerz & Paul, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 30 (\"Yellow in Daily Life\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Mountbatten pink\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; at least 2% of the canvas for dated firsts)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of name is grey pink?",
+   "choices": [
+    "A descriptive modifier plus a base color",
+    "A pigment name",
+    "A place name",
+    "A person's name"
+   ],
+   "answer": "A descriptive modifier plus a base color",
+   "kind": "pick"
+  },
+  {
+   "q": "In paintings where grey pink appears, which role does it most often play?",
+   "choices": [
+    "A hidden color",
+    "The brightest highlight",
+    "The dominant background",
+    "A signature red"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Grey pink is a name made of two mixtures: pink is already a pale red, and grey a mixture of other colors.",
+  "Look for it as a hidden color: in 60 per cent of the paintings where it appears, it plays a quiet supporting role."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Batchelor says grey is describable as a mixture, not 'no hue'; fixed text and opener"
+  ]
+ },
+ "words": 358
+}

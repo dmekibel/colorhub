@@ -1,0 +1,164 @@
+{
+ "slug": "powder-blue",
+ "name": "Powder blue",
+ "hex": "#B0E0E6",
+ "names": [
+  "Powder blue"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Powder blue is a pale, slightly greenish sky blue, and the name is older than the color: it began as a term for powdered smalt, a ground blue glass.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Powdered glass",
+   "body": "The Oxford English Dictionary, as quoted in the Pigment Compendium, defines *powder blue* as powdered smalt, especially for use in the laundry, with examples running from the mid-seventeenth to the early nineteenth century, some of them evidently as a pigment [1]. Smalt is glass colored with cobalt, ground to a powder, and the compendium lists powder blue among its many trade names, beside Saxon blue, Dutch ultramarine and royal blue [2].\n\nThe name came from the grading of the product. Smalt was packed in barrels marked by color grade, the best a deep violet-blue and the cheapest a pale powder blue [3]. The pale grade is the one the color word kept."
+  },
+  {
+   "id": "swatch",
+   "title": "Light or deep?",
+   "body": "Paterson's dictionary notes that the term has been used for both a light blue and a deep blue [4]. That is the same split the smalt trade had, deep for the best grade and pale for the cheapest [3]. The swatch here, `powderblue` in CSS, is the pale reading, #B0E0E6 [5]. The xkcd color survey's own \"powder blue\" is a different, more violet pale blue, #B1D1FC [5].\n\nMaerz and Paul's 1930 dictionary dates the name in English to 1707, and the ISCC-NBS system of 1955 has two blocks that this color falls into, 185 and 172 [5]. Its nearest neighbors are [[pale-turquoise]], [[light-blue]] and [[sky-blue]]; deeper relatives of the glass itself are [[cobalt-blue]] and [[royal-blue]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, the color covers at least five per cent of the canvas in 11, within six units of color distance [6]. None are from before 1700 [6]. The earliest is Canaletto's *Warwick Castle* from 1748, where it covers about 28 per cent [6]. The largest share, about 40 per cent, is in Sisley's 1873 *Le chemin de la Machine, Louveciennes* [6]. Six of the 11 are French [6].\n\nThese are photographs of aged, varnished paintings, so this is a color match and not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "powdered smalt, the cheapest, palest grade of ground cobalt glass",
+   "first_recorded": "1707 (Maerz & Paul)",
+   "source": "Pigment Compendium, 'powder blue' and 'smalt'; Maerz & Paul via library"
+  },
+  "aka": [
+   "smalt blue (the pigment grade)"
+  ],
+  "siblings": [
+   "pale-turquoise",
+   "light-blue",
+   "sky-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "royal-blue",
+    "gloss": "also a trade name of smalt, but the deep grade"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#B0E0E6",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 11,
+  "n_archive": 23781,
+  "first": {
+   "id": "met-438106",
+   "year": 1748
+  },
+  "measured": {
+   "lch": [
+    86,
+    16,
+    210
+   ],
+   "nearest": [
+    [
+     "Beryl Blue",
+     1.2
+    ],
+    [
+     "Blizzard Blue",
+     2.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"powder blue\", p. 320",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"smalt\", p. 359",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"smalt\", p. 358",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"powder blue\", p. 319",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CSS, xkcd, ISCC-NBS 1955 blocks 185 and 172, Maerz & Paul 1930 (first recorded 1707)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was the original powder blue?",
+   "choices": [
+    "Powdered smalt, ground cobalt glass",
+    "A powdered cake of washing soda",
+    "Ground lapis lazuli",
+    "A French face powder"
+   ],
+   "answer": "Powdered smalt, ground cobalt glass",
+   "kind": "pick"
+  },
+  {
+   "q": "Which smalt grade gave the pale blue its name?",
+   "choices": [
+    "The cheapest, palest grade",
+    "The best, deepest grade",
+    "A grade made only in Saxony",
+    "Smalt mixed with chalk"
+   ],
+   "answer": "The cheapest, palest grade",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Powder blue began as the cheapest grade of ground blue glass, packed in barrels by color.",
+  "Powder blue has meant both a pale and a deep blue."
+ ],
+ "words": 341,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that ground glass gets paler as finer."
+  ]
+ }
+}

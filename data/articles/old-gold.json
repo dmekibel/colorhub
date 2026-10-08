@@ -1,0 +1,138 @@
+{
+ "slug": "old-gold",
+ "name": "Old Gold",
+ "hex": "#CFB53B",
+ "names": [
+  "Old Gold"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Old gold is a glossy yellow, named by comparison with the metal; Paterson dates it as a color term to 1879.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from the metal",
+   "body": "Paterson's dictionary describes *old gold* as a glossy yellow and dates its first record as a color term to 1879 [1]. The name reads as a comparison with real [[gold]], with the first shine taken down; it sits in the same neighborhood as a glossy [[yellow]], [[mustard]] and [[goldenrod]] [1][2]."
+  },
+  {
+   "id": "other",
+   "title": "Two other uses of the phrase",
+   "body": "Philip Ball titles a chapter of *Bright Earth* \"Old Gold\", about the revival of an austere painter's palette [3]. The chapter opens with an epigraph credited to Rubens, advising painters to keep shadows light and warm and to keep white out of them [3]. That is a figure of speech about painting, not a pigment called old gold [3].\n\nThe name also turns up in modern art history. Gage reports that Mondrian, in the 1920s, described a hot orange in his scheme as \"old gold\" [4]. So the label has meant a muted yellow in the dictionary and a strong orange in one painter's studio talk, and a reader should check which one is meant [1][4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is #CFB53B, a yellow of medium lightness and moderate saturation [5]. Screen values for named colors like this are approximations, and the dictionary gives no formula or pigment for the name [1][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub archive, 118 of 23,781 paintings hold this color across at least 5% of the canvas, as photographed [5]. It peaks in the 1890s, at about 5.5 times the archive's average rate, and the 26 Kalighat pictures from India that match are the strongest single group [5]. Bonnard has the most matching canvases among Western painters, 6 [5]. Almost every match is a highlight, not a shadow color [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "gold that has aged or tarnished",
+   "first_recorded": "1879 as a color term (Paterson)",
+   "source": "Paterson, A Dictionary of Colour, \"old gold\""
+  },
+  "aka": [],
+  "siblings": [
+   "gold",
+   "mustard",
+   "goldenrod"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CFB53B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 118,
+  "peak_decade": 1890,
+  "role": {
+   "highlight": 0.93,
+   "mid": 0.07
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"old gold\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"gold\" and \"yellow\" entries",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 6 (\"Old Gold\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, chapter on Mondrian and de Stijl",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive and color library (tools/article_field.py), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "When does Paterson date old gold as a color term?",
+   "choices": [
+    "1679",
+    "1779",
+    "1879",
+    "1979"
+   ],
+   "answer": "1879",
+   "kind": "pick"
+  },
+  {
+   "q": "What does Ball's chapter \"Old Gold\" describe?",
+   "choices": [
+    "A pigment made from gold leaf",
+    "A revival of an austere, warm-shadowed painter's palette",
+    "A dye from tarnished metal"
+   ],
+   "answer": "A revival of an austere, warm-shadowed painter's palette",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Old gold was first recorded as a color term in 1879 [1]."
+ ],
+ "status": "checked",
+ "words": 282,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported description of gold's aged look",
+   "Reworded Rubens epigraph to match Ball",
+   "Lede trimmed to sourced claims"
+  ]
+ }
+}

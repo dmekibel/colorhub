@@ -1,0 +1,116 @@
+{
+ "slug": "mallow-red",
+ "name": "Mallow Red",
+ "hex": "#B86686",
+ "names": [
+  "Mallow Red"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Mallow Red is a muted, purplish crimson named for the mallow flower, close kin to mauve.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower's red",
+   "body": "Paterson defines mallows (mallow) red as a deep crimson or purplish red, and mallow alone as reddish-purple [1][2]. The flower is the same one behind mauve: Paterson notes that mauve took its name in France from the purple streaks in the mallow flower [3]. So mallow red and [[mauve]] are two ends of one source, a flower seen as red and a flower seen as purple.\n\nMaerz and Paul record mallow red as first used in 1862, on plate 51 [4]. That date falls just after Perkin's aniline purple turned flower-purples into fashion [3][4]. The books do not say whether the two events are connected."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Mallow Red is rare in painting [5]. Only 3 of 23,781 paintings in our archive cover at least 5% of their canvas with it, as photographed [5]. Two are early modern: Matisse's *Woman on a Terrace* (1907), where it covers about 18%, and Kirchner's *Two Girls under an Umbrella* (1910), about 15% [5]. Its nearest standard name is [[mauve]], 6.7 ΔE away, and the nearest listed pink is France Rose [4]. Related names: [[mauvette]], [[crimson]] and [[magenta]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mallow flower",
+   "first_recorded": "1862 (Maerz & Paul 1930)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Mallows red"
+  ],
+  "siblings": [
+   "mauve",
+   "mauvette"
+  ],
+  "parent": "crimson",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+  "n_present": 3,
+  "nearest": "Mauve",
+  "hex": "#B86686"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mallows (mallow) red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mallow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mauve\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub name records (library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, CSS, Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say gave mauve its name in France?",
+   "choices": [
+    "Purple streaks in the mallow flower",
+    "A lichen dye",
+    "A shellfish",
+    "A mineral"
+   ],
+   "answer": "Purple streaks in the mallow flower",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson defines mallows red as a deep crimson or purplish red.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mauve and mallow red share one flower: the French name mauve comes from the mallow's purple streaks."
+ ],
+ "words": 192,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

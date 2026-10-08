@@ -1,0 +1,141 @@
+{
+ "slug": "mint-cream",
+ "name": "Mint Cream",
+ "hex": "#F5FFFA",
+ "names": [
+  "Mint Cream"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Mint Cream is a near-white with the faintest green tint, a screen color from the X11 and CSS lists.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A list name",
+   "body": "Mint Cream is one of the 140 colors in the X11 Color Set, with the hex code #F5FFFA [1]. Paterson files it separately from mint-green, which he describes as the green of the aromatic plant's leaves, a pastel green [1]. It is also a CSS keyword, `mintcream` [2]. The origin of this name is undocumented in our books [1].\n\nThe ISCC-NBS system of 1955 would call the swatch a \"greenish white\" (block 153), 4.2 CIEDE2000 units away, and the nearest name in our learning set is plain white, 5.2 away [3]. Its neighbors in the same list include [[honeydew]], [[lavender-blush]] and [[linen]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive a color near this one appears in 68 paintings, 0.29% of the total, as photographed [4]. In 75% of the 40 paintings where the within-painting lens finds it, it plays a light, the pale end of the canvas [4]. The earliest dated match is a painting by Filippo Lippi of 1452, and it is most over-represented in paintings from China, 5.3 times the expected rate [4]. The name itself peaks in printed English in the 2010s [5]. Varnish and photography shift whites, so read these as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; an entry in the X11 color list",
+   "first_recorded": "X11 color set; CSS keyword",
+   "source": "Paterson, A Dictionary of Colour, p. 266"
+  },
+  "aka": [
+   "mintcream",
+   "MintCream"
+  ],
+  "siblings": [
+   "honeydew",
+   "lavender-blush",
+   "linen",
+   "misty-rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F5FFFA",
+   "min_cover": 0.01
+  },
+  "n_present": 68,
+  "role": "light in 75% of 40 paintings",
+  "measured": {
+   "lch": [
+    99,
+    4,
+    163
+   ],
+   "iscc": "greenish white, block 153, dE 4.2",
+   "nearest": [
+    [
+     "White",
+     5.2
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 2010
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"MintCream\" and \"mint-green\", p. 266",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "W3C, CSS Color Module Level 3, section 4.3",
+   "loc_kind": null,
+   "url": "https://www.w3.org/TR/css-color-3/"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json and data/graph nodes: ISCC-NBS 1955, Munsell conversion), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, all senses of the phrase (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color list contains Mint Cream with the hex code #F5FFFA?",
+   "choices": [
+    "X11",
+    "Pantone",
+    "Crayola",
+    "RAL"
+   ],
+   "answer": "X11",
+   "kind": "pick"
+  },
+  {
+   "q": "In paintings in our archive, what role does Mint Cream most often play?",
+   "choices": [
+    "A light",
+    "A shadow",
+    "An accent",
+    "A mid-tone"
+   ],
+   "answer": "A light",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Mint Cream is a screen color for white: its closest name in our learning set is plain white."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

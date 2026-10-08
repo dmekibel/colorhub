@@ -1,0 +1,174 @@
+{
+ "slug": "light-pink",
+ "name": "Light Pink",
+ "hex": "#FFB6C1",
+ "names": [
+  "Light Pink"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Light Pink is the web's name for a pale, slightly warm pink, one of the 140 colors in the X11 set and later in CSS, with the hex code #FFB6C1.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain name in a long list",
+   "body": "Light Pink is one of the 140 colors in the X11 Color Set, and its hex code is #FFB6C1 [1]. It entered the CSS color list, which is why every browser knows it by name [2]. The word *light* here is only a descriptor: dictionaries of color have long used \"a light pink\" as the plain gloss for older words such as *incarnate*, meaning flesh-colored, and *rosebud* [1].\n\nThe screen value is a convention, not a measured sample. The German RAL system has a pink of its own, RAL 3015, first issued in 1927, and its screen approximation is a deeper, duller pink than the web's [3]. Our library also lists Soft Pink and Cherry Blossom Pink within about two units of color difference of this swatch, so the three names can be used almost interchangeably [3]. Its nearest neighbors in the app are [[baby-pink]] and [[pink]], and the loud opposite is [[hot-pink]]."
+  },
+  {
+   "id": "pink-history",
+   "title": "How pink got its meaning",
+   "body": "Light pinks are a modern idea. Pastoureau places the rise of the pink we know in the middle of the eighteenth century, when it was finally understood as a mixture of red and white rather than a kind of yellow [4]. Madame de Pompadour made it fashionable for rooms and furnishings, often paired with sky blue [4]. In French, *rose* as a color adjective did not appear in dictionaries before the mid-eighteenth century, and the Académie Française's dictionary did not include it until 1835 [4].\n\nThe English word *pink* is also relatively young, St Clair notes [5]. In the Enlightenment pink was not reserved for girls, and many boys wore it until the end of the nineteenth century [4].\n\nA common belief says that pink has always belonged to girls and blue to boys. That is a myth. A New York Times article of 1893 stated the rule the other way round, and a trade publication in 1918 still called pink the stronger color and blue the more delicate [5]. The reversal settled only in the mid-twentieth century [4][5]."
+  },
+  {
+   "id": "elsewhere",
+   "title": "Where the plain words appear",
+   "body": "Because *light pink* is descriptive, it turns up wherever a writer needs a quick label. Finlay reports that Aboriginal artists of Arnhem Land, in a list recorded by the researcher George Chaloupka, name a light pink among eight main paint colors, beside black, yellows, a red made by burning yellow, and a shiny hematite red [6]. In the Paterson dictionary the same two words gloss several older terms, but no single pigment or dye carries the name [1].\n\nThat is why the honest history of this swatch is short. Its date is the date of the X11 and CSS lists, and the pale pink in a rose petal, a ballet shoe or a baby blanket is a different thing under the same word [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this exact pink covers a meaningful share of the canvas in 2 paintings, which is 0.01 per cent, rarer than 86 per cent of the named colors, as photographed [7]. That is thin evidence for the family of pale pinks, because this count is only for a close match to one swatch [7]. In printed English the phrase peaks in the 1930s, and it rose fastest in the 1880s [8]. The Google Books count includes every sense of the words, so it is a rough guide [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name: a pale pink",
+   "first_recorded": "X11 and CSS color lists; RAL 3015 from 1927",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "LightPink (X11 and CSS spelling)"
+  ],
+  "siblings": [
+   "baby-pink",
+   "rose"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "hot-pink",
+    "gloss": "a loud, saturated pink, not a pale one"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "within_painting": 1,
+  "pct": 0.01,
+  "rank_pct": 86,
+  "role_most_common": "lightest tone (100% of 1 painting)",
+  "first_recorded": {
+   "source": "RAL",
+   "year": 1927
+  },
+  "ngram": {
+   "peak": "1930s",
+   "rise": "1880s"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"LightPink\", \"incarnate\", \"rosebud\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Light Pink, #FFB6C1, sources CSS, Wikipedia, RAL, xkcd",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: Light Pink alternates (RAL 3015, 1927; Soft Pink and Cherry Blossom Pink near-duplicates, dE 2.0 and 1.1)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. \"Pink\" (Masculine Pink)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Baby Pink\"",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Light Pink: 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub Ngram field notes, term \"light pink\" (Google Books, all senses)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In 1918 a trade publication called pink the stronger color. Which color did it call more delicate?",
+   "choices": [
+    "Blue",
+    "Yellow",
+    "Green"
+   ],
+   "answer": "Blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Pink has always been a color for girls.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In the web's color list, what does the hex code #FFB6C1 stand for?",
+   "choices": [
+    "Light Pink",
+    "Hot Pink",
+    "Rosy Brown"
+   ],
+   "answer": "Light Pink",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In 1893 the New York Times said to give pink to a boy and blue to a girl.",
+  "Where to look: pale pinks in old pastels, where they were treated as a strong color for boys."
+ ],
+ "status": "checked",
+ "words": 564,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded 'born' and the French rose sentence to match Pastoureau's dictionary dates."
+  ]
+ }
+}

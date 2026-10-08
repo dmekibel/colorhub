@@ -1,0 +1,114 @@
+{
+ "slug": "rust-brown",
+ "name": "Rust Brown",
+ "hex": "#8B3103",
+ "names": [
+  "Rust Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Rust brown is a reddish brown named for the corrosion on iron, and the books treat it as a plain descriptive name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A reddish brown",
+   "body": "Paterson defines rust brown as reddish-brown, the same gloss it gives plain rust [1]. In its index rust brown sits in the brown group beside russet, rusty and Sahara [1]. Paterson also defines [[russet]] as a reddish brown, though it traces that word to a coarse cloth [1].\n\nOne chemistry passage uses the phrase literally: the Pigment Compendium says vanadium(V) oxide forms crystals that range from yellow to rust brown [2]. That is a description of a look, not a pigment [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The library value is a deep reddish brown, a screen approximation [3]. In our archive 385 of 23,781 paintings, about 1.6%, carry a close match covering at least 5% of the canvas [4]. The earliest is *Hunt of the Hare*, about 1150, where it covers about 57% [4]. Titian's *Cardinal Pietro Bembo* of 1539 covers about 34% [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "rust, the corrosion of iron",
+   "first_recorded": "not recorded in our sources",
+   "source": "Paterson, A Dictionary of Colour, p. 350"
+  },
+  "aka": [],
+  "siblings": [
+   "rust",
+   "russet",
+   "sienna"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8B3103",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 385,
+  "top_paintings": [
+   "commons-Q118436253",
+   "nga-41638"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 350, 483, 495",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Vanadium\", p. 395",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), screen approximation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub painting archive, CIEDE2000 match within 6, at least 5% of the canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define rust brown?",
+   "choices": [
+    "Reddish-brown",
+    "Blackish",
+    "Pale violet"
+   ],
+   "answer": "Reddish-brown",
+   "kind": "pick"
+  },
+  {
+   "q": "Paterson traces russet to a coarse cloth.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rust brown covers about 57% of a twelfth-century painting in our archive."
+ ],
+ "words": 156,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

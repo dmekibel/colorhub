@@ -1,0 +1,116 @@
+{
+ "slug": "frostbite",
+ "name": "Frostbite",
+ "hex": "#E936A7",
+ "names": [
+  "Frostbite"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Frostbite is a hot, bluish pink, a Crayola-list name whose swatch has little to do with the medical condition it is named for.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crayon name",
+   "body": "Our library lists Frostbite among the Crayola names and finds no earlier origin [1]. The date and the person who chose it are undocumented in our data. The nearest ISCC-NBS block is deep purplish pink, about 9.3 units away on the CIEDE2000 scale, so the swatch is a loose fit even to that standard name [1]."
+  },
+  {
+   "id": "skin",
+   "title": "What frostbite looks like",
+   "body": "The name suggests cold, but the skin has other colors. A medical list in Birren's survey of color in diagnosis describes frostbite as skin that turns whiter than normal, then passes to dark red, reddish or reddish-black [2]. The pink here is nothing like that sequence, and it sits closer to [[hot-pink]] and [[magenta]] than to anything a clinic would record [1][2]. Treat the name as branding, not description."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this color covering even 1 per cent of its canvas, as photographed [3]. That describes our archive, not painting as a whole [3]. The hex is also a screen approximation of a printed crayon wax, not a measured pigment [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented beyond the Crayola list",
+   "first_recorded": "Crayola list (date undocumented in our data)",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "deep purplish pink"
+  ],
+  "siblings": [
+   "magenta",
+   "hot-pink",
+   "pink",
+   "dark-magenta"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#E936A7",
+   "de2000": 4
+  },
+  "measured": {
+   "iscc": "deep purplish pink",
+   "de2000": 9.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912, CSS, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Birren, The Psychology of Color and Design, ch. 9 (Diagnosis through Color)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; dE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Birren's list, how does frostbitten skin change color?",
+   "choices": [
+    "Whiter than normal, then dark red or reddish-black",
+    "Bright pink throughout",
+    "Blue then green",
+    "Yellow then brown"
+   ],
+   "answer": "Whiter than normal, then dark red or reddish-black",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Frostbite swatch is the color of frostbitten skin.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Real frostbite goes white, then dark red; the Frostbite swatch is a hot pink."
+ ],
+ "words": 192,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unverifiable Wikipedia-list sourcing detail"
+  ]
+ }
+}

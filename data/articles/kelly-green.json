@@ -1,0 +1,140 @@
+{
+ "slug": "kelly-green",
+ "name": "Kelly green",
+ "hex": "#4CBB17",
+ "names": [
+  "Kelly green"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Kelly green is the bright spring-grass green worn on St. Patrick's Day, a color named for an Irish surname and, by one account, only a century old.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A recent name",
+   "body": "St Clair writes that Kelly green emerged only at the beginning of the twentieth century [1]. Kelly is a common Irish surname whose origin is much disputed, with some scholars reading it as a warrior and others as a religious person [1]. Paterson gives the color a one-line entry, a strong mint green, and keeps it apart from the old English *Kendal green* [2]. Who first used the name is undocumented in our sources.\n\nThe early-twentieth-century date rests on St Clair alone [1]."
+  },
+  {
+   "id": "blue-to-green",
+   "title": "How Ireland turned green",
+   "body": "The color's cultural weight is older than the name. Until the middle of the eighteenth century St Patrick was associated mainly with a shade of blue [1]. Irish Catholics then wanted a color of their own against the orange of William of Orange's Protestants, and the saint's shamrock, a trinity lesson, became central to Irish Catholic identity [1].\n\nGreen also had a French Revolution echo [1]. On 12 July 1789 Camille Desmoulins stuck a linden leaf in his hat, and the green cockade followed, until it was remembered that green was the livery of the Count of Artois, and the tricolor replaced it [1]. A green flag, sometimes with a golden harp, became the symbol of Irish Home Rule, and one flew beside the Union Jack at the Prince of Wales's visit in spring 1885 [1]. The Irish flag's green stands for Catholic nationalists, orange for Protestants, and white for hoped-for peace [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our swatch comes from web color lists and the ColorHub curriculum, not from a historical chart, so it fixes no 1900 color [3]. It is a vivid yellowish green, 5.5 CIEDE2000 units from the ISCC-NBS region of that name [3]. Paterson's mint is paler and cooler [2][3]. Neighbors are [[grass-green]], [[lime-green]] and [[shamrock-green]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color is almost absent from museum paint. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only one work, Gauguin's *Mother and Child under a Tree at Pont-Aven* of 1886, at 5.2 per cent [4]. It is rarer than 86 per cent of our named colors [4]. These are photographs of varnished paintings, so read them as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Irish surname Kelly",
+   "first_recorded": "early 20th century (St Clair); first user undocumented",
+   "source": "St Clair, \"Kelly green\""
+  },
+  "aka": [],
+  "siblings": [
+   "grass-green",
+   "lime-green",
+   "shamrock-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "irish-green",
+    "gloss": "the broader national color, not this particular name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#4CBB17",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "first": {
+   "id": "commons-Q79790701",
+   "year": 1886
+  },
+  "measured": {
+   "iscc": "vivid yellowish green",
+   "de2000": 5.5
+  },
+  "rarer_than_pct": 86
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Kelly green\" (and note 1)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 230, 475",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ColorHub curriculum, web lists, xkcd 2010; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); ColorHub graph field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color was St Patrick mostly linked with until the mid-1700s?",
+   "choices": [
+    "A shade of blue",
+    "Orange",
+    "White",
+    "Red"
+   ],
+   "answer": "A shade of blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: St Clair dates the name Kelly green to the early twentieth century.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Until the mid-1700s St Patrick's color was a shade of blue, not green.",
+  "The name Kelly green is only about a century old, by one author's account."
+ ],
+ "words": 382,
+ "status": "checked",
+ "checked": {
+  "by": "batch-128 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Name date single-source (St Clair); hedged.",
+   "Field-notes sentence on why it is rare (arsenical or fugitive greens) is an inference with no book note; remove if unsupported.",
+   "No origin for first use; stated undocumented."
+  ]
+ }
+}

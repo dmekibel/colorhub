@@ -1,0 +1,236 @@
+{
+ "slug": "purplish-red",
+ "name": "Purplish Red",
+ "hex": "#612741",
+ "names": [
+  "Purplish Red"
+ ],
+ "tier": "descriptive",
+ "depth": "long",
+ "lede": "Purplish red is a plain description that became a name: a dark wine red entered the mineralogists' color charts in the 1790s and 1820s with a garnet, a garden rose and a bird's quills as its examples.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description turned into a name",
+   "body": "Purplish red is one of the modifier names, built from a base color and a leaning, like *greenish blue*. Its earliest use in our sources is scientific rather than artistic [1][2]. Baty reports that the name was already used by Richard Kirwan in a book of 1794, and that Patrick Syme added it as a new red to the second edition of his color chart in 1821 [1].\n\nIt came from the school of Abraham Werner, whose color system leaned on loose compounds: reddish, yellowish and greyish white, then newer ones such as purplish red and reddish purple [1]. Werner's students and followers kept adding to his list, which is why the names of the period do not match one author's [1]. The old chart calls it the columbine red of Werner [1]."
+  },
+  {
+   "id": "chart",
+   "title": "The chart color: garnet, rose and turaco",
+   "body": "In Syme's chart purplish red is number 94 among the reds, and the recipe mixes carmine red with a touch of Berlin blue and a smaller amount of indigo [1]. The examples given for it are an animal, a plant and a mineral: the outside of the quills of the turaco, the dark crimson officinal garden rose, and the precious garnet [1][2].\n\nThe modern edition of the chart illustrates them. A turaco appears in a watercolor by Edward Lear of about 1835, the rose as the petals of the French rose, *Rosa gallica*, and the garnet in specimens from a book of 1890 [1]. Our own library puts the chart's dark crimson rose at distance zero from this swatch, and the [[gem:garnet|garnet]] is the stone the chart pairs with it [2]. Syme's swatches have grown more muted with age, so the chart color is a faded witness [1]."
+  },
+  {
+   "id": "paint",
+   "title": "In paint: a mixture more than a pigment",
+   "body": "Painters rarely had a tube called purplish red. Ball writes that most purples in medieval panel painting were mixed from a blue such as azurite with a red lake, and that crimson lake, with its purplish reds, appealed to painters more than the pale violets of organic extracts [3]. A cross-section of a purplish-red drapery by Gerard David, from the early sixteenth century, reveals a mixture of azurite and red lake laid over a red underlayer [4].\n\nDark tones of red came in and out of fashion. Pastoureau says Rubens excelled in the dark tonalities of red, which were very much in favor in the early seventeenth century [5]. The same author mentions guilds of Roman dyers, among them the *purpurarii*, who made vivid and purplish reds from the murex snail [5], and says that the blackish and purplish reds used to excess by Roman women of the late empire were thought vulgar [5]. See [[crimson]] and [[carmine]] for the dyes that sat beneath most purplish reds."
+  },
+  {
+   "id": "words",
+   "title": "Other places the words turn up",
+   "body": "The purplish red of the Inca textiles was, Finlay writes, the color that stood for the Incas themselves, their armies and their emperor [6]. In color theory, Gage describes the nineteenth-century idea that a bright purplish red is the complement of a dark green, a view he associates with Helmholtz and Rood [7].\n\nThe dictionary uses the phrase as a gloss for others. Paterson defines rose bengal and rose madder as purplish reds, calls fuchsia a purplish red after the flower, and gives the same description for Persian red, a pigment, and for spinel red when it leans purple [8]. The phrase is more often a way of locating a color than a name of its own."
+  },
+  {
+   "id": "swatch",
+   "title": "One name, two colors",
+   "body": "This swatch, #612741, is a dark wine red, 1.9 units from the ISCC-NBS block \"dark purplish red\" (block 259) [2]. The same block holds names such as Columbine Red, Raisin, Redgrape and Wineberry, and Maerz and Paul record Claret Lees and Chardon in 1892 [2].\n\nThe web color survey xkcd uses the name for a much brighter pink-red, #B0054B, and the two readings of the same two words are 16.1 units apart [2]. Neither is wrong; the name is a description, and descriptions stretch. Look-alikes of this swatch include [[old-mauve]], [[bokhara]], [[gooseberry]] and [[dahlia-purple]], all within four units [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a painted color this is very rare. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 5 works [9]. The strongest is [[painter:kristian-zahrtmann|Zahrtmann]]'s *Self-portrait by Lamplight* of 1914, where it fills about a third of the canvas, and the earliest is Cesare Dandini's *Woman Portrayed as the Goddess Diana* of 1639 [9]. Matching areas sit in a painting's shadows in 60 per cent of cases and in its mid-tones in 40 per cent [9].\n\nThe 1639 painting is 155 years before Kirwan's use of the name, so the match is a look-alike hue in an aged photograph, not evidence of a pigment [9]. As always these are photographs of varnished paintings, so read them as screen colors.\n\nIn Google Books the phrase *purplish red* is most common at the start of the data's range, around 1800, and falls to about half that by 1900 and under a fifth by 2000 [10]. That fits the origin in the scientific prose of the early nineteenth century."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier description: a red leaning purple; in Werner's school the columbine red",
+   "first_recorded": "Kirwan, 1794; Syme's second edition, 1821",
+   "source": "Baty, Nature's Palette, introduction"
+  },
+  "aka": [
+   "columbine red (Werner)",
+   "dark purplish red (ISCC-NBS)"
+  ],
+  "siblings": [
+   "old-mauve",
+   "bokhara",
+   "claret-violet"
+  ],
+  "parent": "red",
+  "children": [
+   "brownish-purple-red"
+  ],
+  "disambiguation": [
+   {
+    "slug": "purple-red",
+    "gloss": "the reverse order, a red-leaning purple"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#612741",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5,
+  "top_paintings": [
+   "smk-KMS7474",
+   "smk-KMSsp47",
+   "commons-Q27974063"
+  ],
+  "role": {
+   "shadow": 0.6,
+   "mid": 0.4
+  },
+  "ngram": {
+   "peak": 1800,
+   "rel_1900": 0.521,
+   "rel_2000": 0.177
+  },
+  "measured": {
+   "lch": [
+    24.9,
+    29.6,
+    353.3
+   ],
+   "contrast_white": 11.2,
+   "nearest": [
+    [
+     "Old Mauve",
+     2.8
+    ],
+    [
+     "Bokhara",
+     3.4
+    ],
+    [
+     "Gooseberry",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (pp. 20-29) and chart entries 93-94 (pp. 246-247, 256-261)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json; ISCC-NBS 1955; Werner/Syme 1821; Maerz and Paul 1930; xkcd color survey), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Red, sections on dyers and \"A Fashionable Color: Purplish Red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 13 (\"Red\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 179, 201",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"rose bengal\", \"rose madder\", \"fuchsia\", \"Persian red\", \"spinel red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who first used the name purplish red, in a book of 1794?",
+   "choices": [
+    "Richard Kirwan",
+    "Patrick Syme",
+    "Isaac Newton",
+    "William Perkin"
+   ],
+   "answer": "Richard Kirwan",
+   "kind": "pick"
+  },
+  {
+   "q": "How did medieval panel painters usually make a purplish red?",
+   "choices": [
+    "By mixing a blue such as azurite with a red lake",
+    "By buying a ready-made purple pigment from lichen",
+    "By grinding amethyst",
+    "By dyeing the panel with indigo and madder"
+   ],
+   "answer": "By mixing a blue such as azurite with a red lake",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in Syme's color chart the mineral example for purplish red is the precious garnet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Purplish red has a recipe from 1821: carmine red, a little Berlin blue and a touch of indigo.",
+  "Medieval painters mixed their purplish reds from azurite and red lake rather than buying them.",
+  "Look for it in the shadows of old portraits: three paintings in five show it there or in the mid-tones."
+ ],
+ "words": 860,
+ "status": "checked",
+ "checked": {
+  "by": "batch-53 self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Pastoureau passages read via concordance context only (Rubens, purpurarii, Roman women).",
+   "Gage Helmholtz/Rood attribution is the book's phrasing in a damaged OCR passage.",
+   "Finlay Inca line cited to ch. 13 from concordance."
+  ]
+ }
+}

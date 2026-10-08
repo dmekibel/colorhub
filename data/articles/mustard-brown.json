@@ -1,0 +1,126 @@
+{
+ "slug": "mustard-brown",
+ "name": "Mustard Brown",
+ "hex": "#AC7E04",
+ "names": [
+  "Mustard Brown"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Mustard Brown is a deep, brownish yellow named for prepared mustard, recorded in color charts by the 1920s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From mustard to brown",
+   "body": "Paterson defines mustard as a reddish-yellow and mustard brown as a deep brownish-yellow, and adds that a related name, mustard yellow, was popular in the 1930s [1]. Mustard Brown appears in the Maerz and Paul dictionary of 1930, which gives 1926 as its first recorded use, in the ISCC-NBS lists of 1955 (block 58), and in the RAL system [2]. The ISCC-NBS name nearest the swatch is \"light olive brown\", 4.7 CIEDE2000 units away [2]. The RAL screen value is approximate [2].\n\nNearby names include [[mustard]], [[mustard-yellow]] and [[ochre]], and the library lists Curry as a near-duplicate, 1.7 units away [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive a color near this one appears in 317 paintings, 1.33% of the total, as photographed [3]. In 72% of the 249 paintings where the within-painting lens finds it, it plays an accent [3]. It is most devoted to George Dawe, in 7 of his 50 works here, and over-represented in paintings from India, 2.8 times the expected rate [3]. It shares canvases with [[mustard]] and with [[metallic-gold]] [3]. A match shows a screen color near this one in an aged photograph, not a pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "mustard, the condiment",
+   "first_recorded": "Maerz and Paul, first recorded 1926",
+   "source": "ColorHub color library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "RAL 1027 (near-duplicate: Curry)"
+  ],
+  "siblings": [
+   "mustard",
+   "mustard-yellow"
+  ],
+  "parent": "mustard",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mustard-yellow",
+    "gloss": "a deep yellow, brighter and less brown"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AC7E04",
+   "min_cover": 0.01
+  },
+  "n_present": 317,
+  "role": "accent in 72% of 249 paintings",
+  "measured": {
+   "lch": [
+    56,
+    61,
+    82
+   ],
+   "iscc": "light olive brown, block 58, dE 4.7",
+   "nearest": [
+    [
+     "Mustard",
+     12.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mustard\", \"mustard brown\" and \"mustard yellow\", p. 273",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json and data/graph nodes: ISCC-NBS 1955, Munsell conversion), CIEDE2000 distances; Maerz and Paul 1930 (first recorded 1926, plate 14 D 10); RAL 1027",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "When does the Maerz and Paul dictionary record Mustard Brown as first used?",
+   "choices": [
+    "1926",
+    "1818",
+    "1955",
+    "2010"
+   ],
+   "answer": "1926",
+   "kind": "pick"
+  },
+  {
+   "q": "In paintings in our archive, Mustard Brown most often plays what role?",
+   "choices": [
+    "An accent",
+    "A shadow",
+    "A background light",
+    "A mid-tone"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Paterson says mustard yellow was a popular color in the 1930s."
+ ],
+ "words": 205,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

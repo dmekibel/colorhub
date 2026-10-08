@@ -1,0 +1,146 @@
+{
+ "slug": "blue-bell",
+ "name": "Blue Bell",
+ "hex": "#A2A2D0",
+ "names": [
+  "Blue Bell"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Blue Bell is a pale, dusty violet-blue; its name could point to the flower, to a famous jeans maker or to a crayon, and no book we hold says which.",
+ "sections": [
+  {
+   "id": "names",
+   "title": "Three Blue Bells",
+   "body": "The flower comes first. Paterson defines bluebell as the blue of the plant with blue bell-shaped flowers, also called wood hyacinth [1]. Baty's table of Werner's colors lists a Spanish bluebell among its flowers, so the plant appears in the old color-naming tradition [2].\n\nThe second is a company. Pastoureau notes that Blue Bell, which became Wrangler in 1947, offered Levi's the stiffest competition in jeans from 1919 [3]. The third is a crayon: the library records that Wikipedia attributes the name to Crayola [4]. The swatch itself is recorded in Maerz and Paul (1930) as first used in 1920, plate 37 J 10, and in ISCC-NBS block 182 [4]. None of the books connects the swatch to any of the three, so the origin is undocumented [1][2][3][4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is pale and greyed: lightness 68, chroma 25, hue angle 293 [4]. Its nearest plain name is [[periwinkle]], 6.0 units away, and [[lavender-blue]], [[lavender]] and [[wisteria]] stand beside it [4]. Next to a real flower it will look duller, since a page of aged paint is not a petal [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The hue is present in 28 of 23,781 paintings (0.12 per cent), rarer than 63 per cent of the named colors, and in a painting it is most often an accent [5]. It peaks in the 1800s, in 10 of 8,345 paintings, 1.6 times the baseline [5]. The painter most devoted to it is [[painter:john-singer-sargent|Sargent]], in 5 of 287 works here, 5.9 times the baseline, and it is over-represented in American paintings, 4.1 times, with 8 of 1,729 [5].\n\nThe earliest match dates to 1425, a Botticelli, 505 years before the name's record in 1930 [4][5]. That is a look-alike hue in an aged photograph, not a bluebell test [5]. In Google Books the words *blue bell* peak in the 1980s, but they count every sense, including brands and places, so the curve does not describe the color [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; the bluebell flower is the likeliest sense",
+   "first_recorded": "1920, Maerz & Paul 1930",
+   "source": "Maerz & Paul; ColorHub library"
+  },
+  "aka": [
+   "bluebell"
+  ],
+  "siblings": [
+   "periwinkle",
+   "lavender-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 28,
+  "role": "accent",
+  "painters": [
+   "john-singer-sargent"
+  ],
+  "measured": {
+   "lch": [
+    68,
+    25,
+    293
+   ],
+   "nearest": [
+    [
+     "Periwinkle",
+     6.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bluebell\", p. 66",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 171-172",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; color within the archive's match threshold, at least 2% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "Google Books Ngram, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the Blue Bell jeans company become in 1947?",
+   "choices": [
+    "Wrangler",
+    "Lee",
+    "Levi's",
+    "Calvin"
+   ],
+   "answer": "Wrangler",
+   "kind": "pick"
+  },
+  {
+   "q": "The books we hold document the origin of the color name Blue Bell.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Blue Bell can mean a flower, a jeans maker or a crayon, and no book picks one.",
+  "Sargent uses this dusty violet-blue 5.9 times more than expected."
+ ],
+ "words": 343,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Baty pairing of Spanish bluebell with Indigo Blue was not clearly supported by the garbled table; reduced to a listing."
+  ]
+ }
+}

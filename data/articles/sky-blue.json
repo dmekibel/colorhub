@@ -1,0 +1,329 @@
+{
+ "slug": "sky-blue",
+ "name": "Sky blue",
+ "hex": "#87CEEB",
+ "names": [
+  "Sky blue",
+  "Sky Blue"
+ ],
+ "tier": "nature",
+ "depth": "epic",
+ "lede": "Sky blue is the pale, slightly greenish blue of a clear daytime sky; for most of Western history it was the blue of peasants' woad-dyed clothes, and it became a color of fashion only when indigo made it cheap and bright.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Which sky blue?",
+   "body": "Sky blue is a name for a shade, not a hue. Eckstut points out that a hue is a position on the color wheel, while answers such as \"sky blue\" or \"slate\" describe how light, dull or saturated a blue is [1]. The swatch on this page is the CSS value `skyblue`, #87CEEB, a light, slightly greenish blue [2]. Seven of our sources carry the name, and Maerz and Paul's *Dictionary of Color* of 1930 records it from 1892 [2].\n\nThe sources do not agree on one color. The German RAL set files a \"sky blue\", RAL 5015, whose approximate screen value is a much deeper #2874B2, and the 2010 xkcd survey gave two crowd answers, #75BBFD and #A2CFFE [2]. Its near-duplicate in our library is Baby Blue, 1.4 units away in CIEDE2000 [2]. Near neighbors with their own pages include [[light-blue]], [[powder-blue]], [[celeste]], [[cerulean]] and the far stronger [[deep-sky-blue]]."
+  },
+  {
+   "id": "sky",
+   "title": "The sky itself",
+   "body": "The sky is blue because small air molecules scatter short wavelengths more strongly than long ones, an effect called Rayleigh scattering [3]. Gurney, a working painter, adds what a painter needs to know: the sky is not one flat blue [3]. Two overlapping gradations cross it, a \"solar glare\" that depends on the distance from the sun and a \"horizon glow\" that depends on the height above the horizon [3].\n\nNear the sun the sky grows lighter and warmer, and a region of warm glare turns the blue a duller grey-green [3]. Looking away from the sun, the blue is more saturated and leans slightly toward violet [3]. Toward the horizon the sky usually gets lighter, because the line of sight passes through more air, and depending on time and direction it can range from pale cerulean to warm grey to dull orange [3].\n\nGurney suggests a cheap instrument, a cyanometer made from blue paint swatches held up against the sky [3]. In his trial no swatch matched the sky exactly in hue and chroma, though a couple matched in value [3]. A camera is no better judge, since photographs tend to weaken chroma and flatten the small shifts between neighboring warm and cool colors [4]. A screen's sky blue is therefore a convention for the middle of that range, not a measurement of any actual sky."
+  },
+  {
+   "id": "word",
+   "title": "The word",
+   "body": "Latin never settled on a single word for blue. The commonest, *caeruleus*, probably evokes the color of wax, and it also covered some greens and blacks [5]. The gap was later filled by two foreign words, Germanic *blavus* and Arabic-derived *azureus*, which is why English *blue* and *azure* are not inherited from Latin [5]. Nineteenth-century scholars read the gap as Roman blindness to blue, but Pastoureau finds the Romans indifferent to it and often hostile, not unable to see it [5].\n\n*Azure* comes from a Persian word for the blue stone, and Paterson describes it as a literary word for the blue of a cloudless sky [6]. The same dictionary defines *cerulean* as the deep blue of a cloudless sky and lists *celestine* simply as sky blue [6]. Cerulean blue the pigment, a light greenish blue made from oxides of chromium, cobalt and tin, was introduced in 1860 by the firm George Rowney and Son, according to Paterson [6]. In the satires of Juvenal, as Pastoureau reports them, a reveler who wears a sky-blue toga one day and pale yellow silk the next is marked out as a hypocrite and an effeminate man [7]."
+  },
+  {
+   "id": "painting",
+   "title": "Painting the sky",
+   "body": "Medieval painters did not always paint skies blue. Pastoureau notes that around the time Abbot Suger paid dearly for blue glass at Saint-Denis, and the same blue reappeared at Chartres, illuminators began to paint the sky blue as a rule, which they had not always done before [8].\n\nThe pigment behind a pale painted sky was often azurite. Very finely ground, azurite is a pale sky blue with a hint of green, well suited to skies though inferior to the purple richness of ultramarine, while coarser grinding gives a darker but gritty blue [9][10]. Cennino Cennini described a sky blue resembling azurite, prepared from Baghdad indigo and a white, either lead or lime [9]. In the seventeenth century, Pastoureau reports, Vermeer's underpainting used azurite, smalt (especially for skies) or occasionally indigo, and the costly lapis was kept for the surface [11]. The nearest cut stone to the pigment is [[gem:azurite|azurite]] itself.\n\nGage reads the fifteenth-century theorist Alberti's sky-blue as the middle of the scale of blues, named with two Latin terms because blue was usually thought of as a dark color [12]. The name also lived on as a trade label. The *Pigment Compendium* lists Goeree's \"Himmel-blau\" of 1670, a cheaper alternative to ultramarine and probably azurite [13]. It also records an English sky blue made from indigo reduced with sulfuric acid, potash and lime [13], and Terry's remark in 1893 that blue verditer was sky blue and not very durable [13]."
+  },
+  {
+   "id": "dyers",
+   "title": "The price of pale blue",
+   "body": "Pale blue was cheap. In Renaissance Florence two dyers' price lists show it: at one shop kermes dye cost close to double the price of green and more than triple that of yellow or light blue [14]. At the other, dyeing cloth an intense scarlet cost ten times as much as dyeing it sky blue [14]. Dyed with [[flower:indigo-woad|woad]], light blues also faded. Pastoureau explains that until the eighteenth century sky blue or light blue was rarely worn in the upper levels of society, because it belonged to peasant clothes dyed with mediocre woad that took poorly to the cloth and faded in sun and soap [15]. Those pale blues were greyish and bland, while the nobles who did wear blue, as they had since the thirteenth century, chose denser, more somber shades [15].\n\nThat changed in the first half of the eighteenth century, when a fashion for light blue took hold at court, first among women and then men, and spread after mid-century to the nobility and the wealthy bourgeoisie [15]. Part of the cause was that dyers were newly allowed to use [[indigo]], and the fashion lasted in Germany and Sweden into the early nineteenth century [15]. The vocabulary grew with it: around 1765 French had twenty-four common terms for dyers' blues against thirteen a century earlier, and sixteen of the twenty-four were light blues [15].\n\nEnglish dyers kept a ladder of their own. Balfour-Paul lists thirteen eighteenth-century indigo shades, from milk-blue, pearl-blue and pale-blue up through middling-blue, sky-blue, queen's-blue and watchet-blue to deep-blue and navy [16]. Sky-blue was the sixth rung from the lightest, produced by fewer dips than the darker shades [16]. Under Louis XV, Madame de Pompadour made pink fashionable for furnishings and decor in France, often combined with sky blue, and the pairing spread across Europe [17]."
+  },
+  {
+   "id": "worn",
+   "title": "Horizon blue, shirts and mourning",
+   "body": "Do not confuse sky blue with horizon blue. In August 1914 French soldiers marched to war in red trousers, and that December the army chose a dull, unobtrusive greyish blue to replace them [18]. The supply of synthetic indigo needed to dye cloth for every soldier took until spring 1915, and the new color took the name horizon blue from the hazy tone of the line where sky meets earth or sea [18]. After the 1919 elections, journalists mocked a Chamber full of former soldiers as the \"horizon blue Chamber\" [18].\n\nPastoureau credits uniforms, business suits, sky blue shirts, blazers and sweaters, along with jeans, for blue's place as the most commonly worn color in the West [18]. Other traditions read pale blue differently. Finlay reports that Armenian mourners wore sky blue, as a sign of hope that the dead had reached heaven [19]. Pastoureau adds that the white clothing of health professionals has only recently met competition from sky blue and pale green [20]."
+  },
+  {
+   "id": "lists",
+   "title": "Sky blue in the naturalists' lists",
+   "body": "Sky blue was already a reference color in the naturalists' lists [21]. The mineralogist Abraham Werner's colour nomenclature, extended in English by Patrick Syme in 1814 and 1821, defined colors by reference to pigments or familiar things, giving sky-blue, apple-green and milk-white as examples [21]. In each version of the list that Baty reproduces, sky-blue closes the run of blues at the light end, after indigo-blue, Berlin-blue, azure-blue, smalt-blue and violet-blue [21]. Mawe's 1813 treatise on diamonds and precious stones already uses sky blue as an ordinary descriptive term, for example under tourmaline [21]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Sky blue is rare in our painting archive. About 0.04 per cent of the 23,781 paintings, ten in all, carry it over at least two per cent of the canvas, and it is rarer there than 68 per cent of the named colors [22]. All of this is as photographed: museum photographs of aged, varnished paintings, so a color match is not a pigment test [22].\n\nInside a painting it most often plays a light, in half of those ten pictures, judged by lightness rank within each painting so that varnish cannot fake it [22]. The earliest match is from 1617, a painting by Guercino [[painting:commons-Q4231874|Guercino's painting]], and the third-earliest is from 1743 [22]. Six of the ten date from the 1800s, 1.4 times the rate expected from the same museums' holdings [22]. Early centuries are thin in the archive, so 1617 is a floor, not a first [22]. It also predates the earliest record of the name in our sources, 1927 by RAL, by three centuries, so the match is a look-alike hue and not evidence of the name [22].\n\nBy area, the strongest single match is Bellotto's 1743 view of a Venetian square, where the swatch color covers 30 per cent of the canvas [[painting:nga-1144|Bellotto's Venetian square]] [22]. In printed English the phrase \"sky blue\" peaks in the 2010s, and it rose fastest in the 2000s (Google Books, all senses of the words) [22]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the daytime sky",
+   "first_recorded": "Maerz & Paul record the name from 1892; Werner-Syme nomenclature uses sky-blue by 1814",
+   "source": "ColorHub library; Baty, Nature's Palette"
+  },
+  "aka": [
+   "Sky Blue (CSS skyblue)",
+   "celeste",
+   "azure (in the poetic sense)"
+  ],
+  "siblings": [
+   "light-blue",
+   "powder-blue",
+   "celeste"
+  ],
+  "parent": "blue",
+  "children": [
+   "deep-sky-blue"
+  ],
+  "disambiguation": [
+   {
+    "slug": "deep-sky-blue",
+    "gloss": "CSS deep sky blue is a much more saturated, mid-light blue"
+   },
+   {
+    "slug": "cerulean",
+    "gloss": "cerulean is a greener, stronger blue named for a pigment introduced in 1860"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bleu ciel"
+   },
+   {
+    "lang": "es",
+    "name": "azul cielo"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#87CEEB",
+   "min_cover": 0.02
+  },
+  "n_present": 10,
+  "first_seen": {
+   "year": 1617,
+   "id": "commons-Q4231874"
+  },
+  "century": {
+   "1800s": 6
+  },
+  "role": {
+   "light": 0.5
+  },
+  "ngram": {
+   "peak": 2010,
+   "term": "sky blue"
+  },
+  "measured": {
+   "lch": [
+    79.2,
+    25.9,
+    235.1
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eckstut, What Is Color?, section on hue and shade",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library and graph: Sky blue (CSS, RAL 5015, xkcd 2010, ISCC-NBS 1955, Maerz & Paul 1930)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, pp. 176-177 (\"Sky Blue\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 172 (photos vs observation)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, early chapter on antiquity and the Latin color words",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"azure\", \"celestine\", \"cerulean\", \"cerulean blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, chapter on Rome (Juvenal)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 22 (\"Blue versus Red\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, entry on azurite",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, chapter on the seventeenth century (Vermeer)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, discussion of Alberti",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Kirby et al., Pigment Compendium, \"sky blue\", \"English sky blue\", \"blue verditer\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, \"The Favorite Color: The Eighteenth to the Twentieth Century\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, chapter on dyeing and shades",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 33 (\"On the Margins of Red: Pink\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, \"The Favorite Color: The Eighteenth to the Twentieth Century\" (horizon blue; uniforms and jeans)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, chapter on modern white",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, chapters on Werner's nomenclature and Syme",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed; Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does a clear sky look blue?",
+   "choices": [
+    "Small air molecules scatter short wavelengths more than long ones",
+    "The sky reflects the color of the sea",
+    "Ozone absorbs the red light",
+    "Dust turns white sunlight blue"
+   ],
+   "answer": "Small air molecules scatter short wavelengths more than long ones",
+   "kind": "pick"
+  },
+  {
+   "q": "Before the 1700s, light blue clothing was mostly associated with whom?",
+   "choices": [
+    "Peasants wearing woad-dyed cloth",
+    "The royal court",
+    "Soldiers",
+    "Clergy"
+   ],
+   "answer": "Peasants wearing woad-dyed cloth",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Latin lacking a clear word for blue shows the Romans could not see it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look away from the sun and the sky is a more saturated blue that leans slightly toward violet; look toward it and the blue goes warm, pale and greyish.",
+  "Until the 1700s, a pale blue coat meant a peasant's faded woad; then indigo made it a court fashion.",
+  "In 1915 the French army swapped red trousers for a greyish \"horizon blue\", the color of the line where sky meets earth."
+ ],
+ "words": 1602,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch 26 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Roman 'blind to blue' idea corrected, not asserted.",
+   "Pastoureau chapter locators approximate (epub chapter indexes); verify page numbers if printed edition cited.",
+   "Archive numbers from the fieldnotes lens (2% canvas); article_field's stricter 5% lens finds 8, not 10."
+  ]
+ }
+}

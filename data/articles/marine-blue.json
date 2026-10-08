@@ -1,0 +1,118 @@
+{
+ "slug": "marine-blue",
+ "name": "Marine Blue",
+ "hex": "#1F5B7E",
+ "names": [
+  "Marine Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Marine Blue is a dark, slightly greenish blue of the sea; the one dictionary that defines it ties it to a military uniform.",
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"marine blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Ridgway 1912 pl. VIII and XX; ISCC-NBS 1955 blocks 173 and 179; xkcd alt #01386A; Maerz & Paul Peacock 1598; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Marine Blue (n=110), 23,781 museum paintings as photographed; data/graph/fieldnotes/m.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "sections": [
+  {
+   "id": "name",
+   "title": "A uniform and the sea",
+   "body": "For Paterson, marine blue is a dark blue worn by the Royal Marines on their uniform [1]. That is a naval-and-military sense more than a color of the water, though the two meanings overlap, and the books read do not settle which came first [1]."
+  },
+  {
+   "id": "standards",
+   "title": "On the charts",
+   "body": "The library finds the color in Ridgway's 1912 atlas (plates VIII and XX), the 1955 ISCC-NBS blocks 173 and 179, and the xkcd survey, whose own marine blue is a much darker #01386A [2]. A near-duplicate is Dusky Greenish Blue, and Maerz and Paul's Peacock, first recorded in 1598, sits close by [2]. The nearest everyday name is [[denim]]; family names are [[navy]] and [[prussian-blue]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is in 110 of 23,781 museum paintings, about 0.46 per cent [3]. It peaks in the 1900s at 0.9 per cent of paintings, 3.7 times the expected rate for the same museums [3]. Inside a painting it is most often an accent, in 31 per cent of the 52 paintings measured [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Royal Marines' uniform",
+   "first_recorded": "1912 in Ridgway's atlas",
+   "source": "data/library.json; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Dusky Greenish Blue"
+  ],
+  "siblings": [
+   "denim",
+   "navy",
+   "prussian-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#1F5B7E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 110,
+  "nearest": [
+   "Denim",
+   5.6
+  ],
+  "peak_decade": "1900s, 3.7x expected"
+ },
+ "questions": [
+  {
+   "q": "What does Paterson tie marine blue to?",
+   "choices": [
+    "The Royal Marines' uniform",
+    "A Japanese dye",
+    "A mineral from Chile",
+    "A painter's pigment"
+   ],
+   "answer": "The Royal Marines' uniform",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the xkcd survey's marine blue is much darker than this swatch.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Marine Blue is 3.7 times more common in 1900s paintings than the museums' baseline."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Spot-checked 8 claims against books and library; all supported"
+  ]
+ },
+ "status": "checked",
+ "words": 185
+}

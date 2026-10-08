@@ -1,0 +1,186 @@
+{
+ "slug": "black-brown",
+ "name": "Black brown",
+ "hex": "#1D0200",
+ "names": [
+  "Black brown"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Black brown is a brown so dark it is nearly black, a descriptive name that no color book treats as a color of its own.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name made of two words",
+   "body": "Black brown is a compound of two basic words, and none of the color books we read treats it as a named color of its own. The hits in the concordance are the two words side by side in lists, such as the dull dress codes of a school in Larsen's fiction as Greenfield retells them, or the dark foods of a famous Paris dinner of mourning [3][4]. Our swatch, #1D0200, is carried in our library as a very dark brown, and falls in ISCC-NBS block 59 [1]. The honest description is a brown so deep that it is almost [[black]]."
+  },
+  {
+   "id": "pigments",
+   "title": "A category for dark pigments",
+   "body": "One book does use the pair as a label. The Pigment Compendium files a run of materials under the color class Black-Brown, among them [[bistre]] (listed under its old names fuligo and fuligino), cutch, coal, ebony black, humic earth, lignite and the manganese oxides [2]. Cutch is a tannin and dye from the heartwood of an Indian acacia, and lignite, when ground, gives a warm brown pigment [2]. Hausmannite is a manganese oxide mineral that forms brown-black crystals [2].\n\nSt Clair describes bistre as dark but not particularly colorfast, made from the tarry remains of burned beech wood and used for underdrawings and sketches [5]. So the class is real, but it is a pigment-catalog heading, not a color name in use."
+  },
+  {
+   "id": "history",
+   "title": "The oldest dark pair",
+   "body": "Dark browns and blacks are among the first colors people painted with. Pastoureau notes that Paleolithic cave painting uses reds, blacks, browns and ochres, with no blue or green and hardly any white [6][7]. He adds that the blacks came from plant carbon or manganese oxide, the reds from hematite, and the yellows from ochre-rich clay [8]. A color near [[dark-brown]] or [[umber]] is therefore the same range as the earliest pictures."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this color covers at least five per cent of the canvas, within six units of color distance, in 654 paintings, or 2.75 per cent [9]. It is most common in the 1500s (88 of 2,231 paintings) and falls to 21 of 1,674 in the 1900s [9]. Its peak decade is the 1560s, with 9 of 159 paintings [9]. Switzerland has it in 9 of 126 paintings [9].\n\nThe pictures where it fills the most canvas are portraits and night scenes, such as [[painting:aic-15486|Sir Andrew Fountaine]] from 1705, where it covers 80 per cent, and Manfredi's [[painting:commons-Q18683395|Tribute to Caesar]], at 78 per cent [9]. The earliest case is a cross with the crucified Christ by Ugolino di Tedice, around 1270, at 11 per cent [9]. These are photographs of aged, varnished paintings, so the archive reads darkened varnish as well as paint."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a plain compound of black and brown",
+   "first_recorded": "undocumented",
+   "source": "concordance of 29 color books; ColorHub library"
+  },
+  "aka": [
+   "very dark brown"
+  ],
+  "siblings": [
+   "dark-brown",
+   "bistre"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#1D0200",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 654,
+  "top_paintings": [
+   "commons-Q19857366",
+   "aic-15486",
+   "commons-Q18683395"
+  ],
+  "peak_decade": {
+   "decade": 1560,
+   "hits": 9,
+   "n": 159
+  },
+  "measured": {
+   "lch": [
+    3,
+    11,
+    24
+   ],
+   "nearest": [
+    [
+     "Black",
+     12.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library, Very Dark Brown (xkcd; ISCC-NBS 1955 block 59)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries Black-Brown (pp. 123, 150, 159, 175, 195, 252, 262)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 86",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 105",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, p. 7",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Green, p. 8",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, p. 9",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does the Pigment Compendium use the term Black-Brown?",
+   "choices": [
+    "As a color-class heading for dark pigments",
+    "As the name of one pigment",
+    "As a trade name for ink",
+    "As a Japanese dye term"
+   ],
+   "answer": "As a color-class heading for dark pigments",
+   "kind": "pick"
+  },
+  {
+   "q": "Which colors does Pastoureau say Paleolithic cave painters used?",
+   "choices": [
+    "Reds, blacks, browns and ochres",
+    "Blues, greens and whites",
+    "Purples and pinks",
+    "Only black and white"
+   ],
+   "answer": "Reds, blacks, browns and ochres",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Black brown is not in the books as a color: it is two words in a list, and a heading in a pigment catalog.",
+  "The first pictures people painted already used this range: blacks, browns, reds and ochres."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-51 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "No book defines the name; article is deliberately short.",
+   "Larsen/Greenfield and Huysmans/Pastoureau hits are only the words side by side."
+  ]
+ },
+ "words": 458
+}

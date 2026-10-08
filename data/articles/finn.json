@@ -1,0 +1,118 @@
+{
+ "slug": "finn",
+ "name": "Finn",
+ "hex": "#683068",
+ "names": [
+  "Finn"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Finn is a deep purple whose name has no documented origin in our sources; it is a color we can measure but cannot yet explain.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "No story found",
+   "body": "The 29 books we searched do not discuss this name as a color [1]. The one match is an author's name in a bibliography, which is a person, not a color [1]. Our library traces the name only to a Wikipedia list, with no date [2]. Without a documented story, we describe the swatch and nothing more: its hex value is #683068, a deep purple with a slightly reddish cast [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "What can be measured",
+   "body": "Measured against the ISCC-NBS categories, the swatch is nearest to deep purple, 4.4 units of ΔE2000 away [2]. Its closest relatives by name are [[purple]], [[plum]] and [[dark-purple]], and the pale end of the family is [[dusty-purple]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of about 23,800 matches this color within the threshold, as photographed [3]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "undocumented",
+   "source": "ColorHub library (a Wikipedia list)"
+  },
+  "aka": [],
+  "siblings": [
+   "purple",
+   "plum",
+   "dark-purple",
+   "dusty-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
+  "n_present": 0,
+  "pct": 0.0,
+  "measured": {
+   "nearest": [
+    [
+     "deep purple",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, bibliography, p. 327",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): name sources and dates (Wikipedia list only)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the nearest ISCC-NBS category to this swatch?",
+   "choices": [
+    "Deep purple",
+    "Light blue",
+    "Olive green",
+    "Pale pink"
+   ],
+   "answer": "Deep purple",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does this article not tell the name's story?",
+   "choices": [
+    "Our sources document none, and we do not guess",
+    "The color is a myth",
+    "The name is banned",
+    "It is the same as Finnish blue"
+   ],
+   "answer": "Our sources document none, and we do not guess",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Some names have no documented origin, and Finn is one of them."
+ ],
+ "words": 164,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported guess that deep purples are more likely printed than painted."
+  ]
+ }
+}

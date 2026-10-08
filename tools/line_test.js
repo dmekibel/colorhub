@@ -2,7 +2,9 @@
 // Over 500 seeded rounds against the real ~1,000 core names (nearest name by CIEDE2000, as nameOf does):
 // every in tile names the category and the odd tile names the neighbor; odd vs trap is visible as drawn
 // (>= 0.3, accuracy.js SHOWN_MIN); the trap condition (some in-name pair further apart than odd vs trap) holds
-// in at least 80% of rounds; a seed always gives the same round; no round needs more than 30 tries.
+// in at least 80% of rounds; a seed always gives the same round; no round needs more than 30 tries. Confident edges
+// (design/IMPROVE-2026-10-08/train.md §5): the odd tile's own name beats the category word by at least 30%, every
+// in tile other than the trap is confidently in the word, and the trap is still clearly on the word's side.
 const fs = require("fs"), path = require("path");
 const core = fs.readFileSync(path.join(__dirname, "../js/core.js"), "utf8");
 const math = core.slice(core.indexOf("// ---------- color math"), core.indexOf("// ---------- percent display"));
@@ -35,6 +37,10 @@ for (let s = 0; s < 500; s++) {
   ok(r.nb !== r.cat, `round ${s}: the odd tile's name differs`);
   ok(de2000(r.colors[r.at], r.colors[r.trap]) >= .3, `round ${s}: odd vs trap is visible as drawn`);
   ok(Math.abs(r.act - p) <= p * .2 + .1, `round ${s}: odd vs trap is about p (${r.act.toFixed(2)} vs ${p})`);
+  const mOdd = 1 - namer(r.odd).de / de2000(r.odd, (names.find(x => x.n === r.cat) || {}).h);
+  ok(mOdd >= E.OO_LINE_MARGIN - 1e-9, `round ${s}: the odd tile's name wins by ${(mOdd * 100).toFixed(0)}% (needs 30%)`);
+  r.colors.forEach((h, i) => { if (i === r.at) return; const nm = namer(h), m = E.ooNameMargin(h, nm); ok(m >= (i === r.trap ? .12 : .25) - 1e-9, `round ${s}: in tile ${i} sits ${(m * 100).toFixed(0)}% inside ${r.cat}`); });
+  ok(r.nbHex && namer(r.nbHex).n === r.nb, `round ${s}: the neighbor's swatch is the neighbor's own color`);
   if (r.trapOk) trapOk++;
 }
 console.log(`Across the line: ${made} of 500 rounds drawn in ${((Date.now() - t0) / 1000).toFixed(1)} s; trap condition in ${(trapOk / made * 100).toFixed(0)}%; most tries ${maxTries}; rejections ${JSON.stringify(stats)}`);

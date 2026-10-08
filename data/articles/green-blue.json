@@ -1,0 +1,228 @@
+{
+ "slug": "green-blue",
+ "name": "Green-Blue",
+ "hex": "#1164B4",
+ "names": [
+  "Green-Blue"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Green-Blue is a descriptive name, not a story: the slot between green and blue on a painter's color wheel, a standard color name, and a label that three sources attach to three different colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name that points between two",
+   "body": "Green-blue is a plain compound with no known coiner, and the books do not credit it to a person or a place [1]. Its oldest home is the painter's color wheel. Paterson describes a twelve-color wheel for mixing paints, going around from yellow through yellow-green, green, green-blue, blue, blue-purple and on to purple, red, orange and back [1].\n\nOn a wheel the order of the words matters, since green-blue sits nearer green and [[blue-green]] nearer blue. In practice the two are used interchangeably, and our data shows how many near-synonyms crowd the area, among them [[greenish-blue]] and [[bluish-green]] [2]. A color that is truly halfway can be described either way, which is a large part of why the name works as a label for a slot, not for one specific color [1][2]."
+  },
+  {
+   "id": "swatch",
+   "title": "Three green-blues",
+   "body": "The swatch here is #1164B4, a clear mid blue of lightness 42 and chroma 49, and the library's nearest app color is plain [[blue]] [2]. It comes from a Wikipedia color list that our library records as its source [2]. The earliest record of the name in our sources is RAL 5001, from 1927, whose approximate screen value is a much darker steel blue, #1F4764 [2]. The web survey xkcd uses the same words for a sea green, #06B48B, which is nearer [[teal]], [[sea-green]] and [[turquoise]] than to any blue [2].\n\nThat makes three colors under one name, from blue-leaning to green-leaning. Nothing in the books fixes which is right, and the point of the name is that it is flexible [1][2].\n\nThe swatch has a group of older names. The ISCC-NBS block of 1955 that holds it includes [[alexandria-blue]], [[armenian-blue]], [[cleopatra]], Hathor and [[bonnie-blue]], which Maerz and Paul first record between 1791 and 1924 [2]. Alexandria Blue dates from 1791 and Armenian Blue from about 1804 [2]."
+  },
+  {
+   "id": "pigments",
+   "title": "Green-blue in the studio",
+   "body": "Pigment names show how often painters and chemists needed a word for this middle. The Pigment Compendium sorts its entries into color classes and keeps 'Blue-Green' as one of them, next to Blue and Green [3]. In that class sit cobalt green, Casselmann's green, an artificial copy of the mineral brochantite, and Turkish green, a color Salvétat discussed in 1859 in connection with porcelain painting [3].\n\nMinerals are just as hard to classify. The zinc-copper carbonate aurichalcite ranges from a pale green through to a bright blue, with green-blue in between [3]. Trippkeite forms green-blue crystals in arsenic-bearing copper deposits in the Atacama desert, first reported by vom Rath in 1880 [3]. Ultramarine green, an early stage of artificial ultramarine, was described in 1869 as a bright bluish green that becomes a dull greenish blue on exposure [3].\n\nThe most telling case is [[gem:malachite|malachite]]. It grows alongside the blue mineral [[gem:azurite|azurite]], the two being almost identical in composition, and in the Middle Ages malachite was called *verde azzurro*, literally green-blue, according to Coles [4]."
+  },
+  {
+   "id": "language",
+   "title": "Where green meets blue",
+   "body": "Languages handle this middle in different ways. Ball points out that the Celtic word *glas* covers the range from a brownish green to blue, while the Japanese *awo* may stand for green, blue or darkness, as the setting requires [5]. Vietnamese and Korean do not clearly separate green from blue, and literary Welsh has no word that corresponds exactly to English green, blue, grey or brown [5][6]. Russian goes the other way, with two different words for what English calls blue [6].\n\nThe anthropologists Berlin and Kay proposed in 1969 that languages add basic color terms in a fixed order, with green and yellow ahead of blue, and Westland notes the theory is still debated [7]. Gurney adds the example of the New Guinean language Dani, with two basic terms, one for black, green, blue and other cool colors, the other for white, red, yellow and other warm ones [8].\n\nEurope's own old order also kept them side by side. Medieval scholars lined up the colors as white, yellow, red, green, blue and black, and around 1600 green was still not thought of as the middle step between yellow and blue [9]. In the ancient color system Pastoureau describes, green, blue and violet all clustered with black as one pole [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A clear mid-blue like #1164B4 is rare in our painting archive: only 22 of 23,781 museum paintings, under 0.1 per cent, have a color within CIEDE2000 distance 6 of it covering at least 5 per cent of the canvas [11]. The most is in Van Gogh's [[painting:commons-Q26220263|Three White Cottages in Saintes-Maries]] of 1888, at 29 per cent [11]. [[painter:paul-signac|Signac]]'s [[painting:commons-Q17492804|The Château des Papes in Avignon]] of 1909 has 22 per cent [11]. The earliest match in this lens is Fra Angelico's [[painting:commons-Q22082602|Madonna of the Pomegranate]], from 1426, at about 13 per cent [11].\n\nBy century, the 1400s and 1900s both run about three to four times the baseline, though from three and six paintings, which is too few to call a trend [11]. The match is a look-alike hue in aged, varnished photographs, so it says nothing about which pigment was used [11]. The name itself is first recorded in our sources in 1927 [2].\n\nIts company in the archive is the color name [[denim]], which co-occurs at 63 times the baseline across 20 hits [11]. In printed English the phrase peaks in the 1940s, having risen fastest in the 1920s, though Google Books counts all senses of the words [11]. To train the eye, hold a swatch of this blue beside a sea green and ask which way each leans: the name was made for that middle."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Plain compound; the slot between green and blue on a color wheel",
+   "first_recorded": "RAL 5001, 1927 (our library's earliest record)",
+   "source": "ColorHub names library; Paterson"
+  },
+  "aka": [
+   "Green blue"
+  ],
+  "siblings": [
+   "blue-green",
+   "greenish-blue",
+   "bluish-green",
+   "teal"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "blue-green",
+    "gloss": "the same slot named from the other side, a darker green-leaning color"
+   },
+   {
+    "slug": "sea-green",
+    "gloss": "the xkcd 'green blue', a distinctly green color"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "cy",
+    "name": "glas (Celtic, covers green to blue)"
+   },
+   {
+    "lang": "ja",
+    "name": "awo (green or blue)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "23,781 museum paintings, as photographed",
+  "match": {
+   "hex": "#1164B4",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 22,
+  "top": {
+   "id": "commons-Q26220263",
+   "year": 1888,
+   "cover": 0.292
+  },
+  "first": {
+   "id": "commons-Q22082602",
+   "year": 1426,
+   "cover": 0.128
+  },
+  "company": [
+   {
+    "word": "Denim",
+    "hits": 20,
+    "lift": 63.03
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"colour wheel\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub names library: Green-Blue (sources wiki, RAL 5001, xkcd; ISCC-NBS block 176 names)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, colour classes and entries on aurichalcite, trippkeite, Casselmann's green, Turkish green and ultramarine green",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 65 (malachite)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, ch. 13 (\"Basic Color Terms\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, p. 114",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Black, ch. 72",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 8 (\"A New Color\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub painting archive field notes, 23,781 paintings, as photographed; Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did medieval Europeans call malachite, according to Coles?",
+   "choices": [
+    "Verde azzurro, green-blue",
+    "Terra verde",
+    "Verdigris",
+    "Blue verditer"
+   ],
+   "answer": "Verde azzurro, green-blue",
+   "kind": "pick"
+  },
+  {
+   "q": "All three sources that use the name 'green blue' show the same color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which languages does Batchelor say make no clear distinction between green and blue?",
+   "choices": [
+    "Vietnamese and Korean",
+    "English and French",
+    "German and Dutch",
+    "Italian and Spanish"
+   ],
+   "answer": "Vietnamese and Korean",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Medieval Italians called malachite 'green-blue' because it grows beside azurite.",
+  "Three sources use the name Green-Blue for a blue, a steel blue and a sea green."
+ ],
+ "words": 923,
+ "status": "checked",
+ "checked": {
+  "by": "batch-18 writer (Sonnet 5.5)",
+  "date": "2026-10-08",
+  "issues": [
+   "Concordance 'green-blue' hits are mostly noise (spectral lists); article built on compounds, pigment classes and language material",
+   "Pigment Compendium page numbers not given; Pastoureau chapter numbers are epub indices"
+  ]
+ }
+}

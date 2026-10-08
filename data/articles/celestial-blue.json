@@ -1,0 +1,153 @@
+{
+ "slug": "celestial-blue",
+ "name": "Celestial Blue",
+ "hex": "#7E9499",
+ "names": [
+  "Celestial Blue"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Celestial blue was a name in the paint shop before it was a color on a chart: a pale, reduced tint of Prussian blue, also used in French for cerulean.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "A pale Prussian blue",
+   "body": "In the Pigment Compendium, celestial blue is Prussian blue struck onto a base such as baryte (barium sulfate), as a pale tint of 5 to 10 percent [1]. It is similar to Brunswick blue and, by the account of Heaton (1928), the same as daylight blue [1]. A Victorian manual quoted there, Davidson (1880), gives the recipe: alumina precipitated from alum, mixed with baryta, iron sulfate, yellow prussiate of potash and some bichromate [2]. Dried, it is Brunswick or celestial blue; without the baryta, and kept wet, it is *damp blue* [2]. [[prussian-blue]] was the colorant, and the base made it pale and cheap."
+  },
+  {
+   "id": "cerulean",
+   "title": "A second meaning",
+   "body": "The same words name a different paint in French [3]. Coffignier (1924) gives *bleu céleste*, celestial blue, as the common French term for cœruleum, the pigment now called [[cerulean]] [3]. So in a nineteenth-century catalog the name could mean either a reduced iron blue or a cobalt-tin sky blue, depending on the maker and language."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and the word list",
+   "body": "Paterson defines the color simply as a greenish blue [4]. The swatch here comes from Maerz & Paul's dictionary, which gives first use as 1535, plate 35 D 3, and files it under fashion and textiles [5]. It is nearly a grey, with chroma 8, so the page shows a tinted grey, not a saturated sky [5]. The Maerz & Paul entry is a different lineage from the paint: the library also lists Celestial Blue as an alternate name for Cadet Grey [5]. Books disagree, then, on whether *celestial blue* means a greenish blue, a grey, or a reduced Prussian blue [1][4][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The library reads the swatch at lightness 60, chroma 8 and hue 218 in LCH; its nearest named color is a plain grey, 7.7 apart in ΔE, with [[cadet-blue]] and [[sky-blue]] as the nearest blue names [5]. Screen colors are approximate."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the heavens (celestial); origin undocumented",
+   "first_recorded": "1535 (Maerz & Paul 1930); paint name by 1880 (Davidson)",
+   "source": "Pigment Compendium; ColorHub library"
+  },
+  "aka": [
+   "bleu céleste (French)",
+   "Brunswick blue (paint relative)",
+   "daylight blue"
+  ],
+  "siblings": [
+   "cerulean",
+   "cadet-blue",
+   "sky-blue",
+   "prussian-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cerulean",
+    "gloss": "French bleu céleste can mean cerulean, a different pigment"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bleu céleste"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub library (Maerz & Paul 1930, plate 35 D 3)",
+  "measured": {
+   "lch": [
+    60,
+    8,
+    218
+   ],
+   "nearest": [
+    [
+     "Grey",
+     7.7
+    ]
+   ]
+  },
+  "first_recorded": 1535
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"celestial blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Brunswick blue\" and \"damp blue\" (quoting Davidson 1880)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"cerulean blue\" (citing Coffignier 1924)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"celestial blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), \"Celestial Blue\" and \"Cadet Grey\"",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the Pigment Compendium, what is celestial blue?",
+   "choices": [
+    "Prussian blue struck onto a pale base such as baryte",
+    "Ground lapis lazuli",
+    "Indigo mixed with chalk",
+    "A cobalt glass"
+   ],
+   "answer": "Prussian blue struck onto a pale base such as baryte",
+   "kind": "pick"
+  },
+  {
+   "q": "What does the French bleu céleste name, according to Coffignier (1924)?",
+   "choices": [
+    "Cerulean (cœruleum)",
+    "Ultramarine",
+    "Madder",
+    "Smalt"
+   ],
+   "answer": "Cerulean (cœruleum)",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Celestial blue was a cheap, pale Prussian blue: the base, baryte, did the diluting."
+ ],
+ "words": 322,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

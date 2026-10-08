@@ -1,0 +1,156 @@
+{
+ "slug": "pure-blue",
+ "name": "Pure Blue",
+ "hex": "#0203E2",
+ "names": [
+  "Pure Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Pure Blue is an intense, slightly violet blue named in the xkcd color survey of 2010, and the phrase itself has a longer life as a description of blue pigments.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A survey's idea of pure",
+   "body": "Our library records this exact swatch from one source, the xkcd color survey of 2010, in which respondents named colors shown on screen [1]. It is a deep, saturated blue, leaning a little toward violet, with Medium Blue as its nearest standard name [1].\n\nIn plain speech *pure* means unmixed. The phrase also turns up as a pigment grade."
+  },
+  {
+   "id": "pigment",
+   "title": "Pure blue as a grade of azurite",
+   "body": "The Pigment Compendium records that Chinese sources, following Yü, used \"Flat blue\" or \"Pure blue\" for the highest quality of azurite, the copper blue mineral [2]. It was sold under other names, Yunnan blue and Burmese blue, depending on where it was dug, and lower grades were Layered blue, Light blue and Granulated blue [2]. The same book says that Chinese barium copper silicate pigments sometimes formed pure blue or pure purple masses, though it is impossible to say whether this was intended [3].\n\nAn 1869 edition of Field's chromatography also mentions a cotton-seed blue, produced by a long chemical process until a very intense pure blue appeared, but Field adds that it was never introduced as a pigment [4]."
+  },
+  {
+   "id": "seeing",
+   "title": "What the eye calls pure",
+   "body": "Vision has its own meaning. Livingstone explains that the eye registers a hue only when an opponent channel, red against green or blue against yellow, gives an unbalanced signal [5]. Ultramarine and cobalt blue both look like pure blues, even though cobalt reflects some green and some red light as well; the red cancels the cyan and leaves only the blue perception [5]. So a color can look pure while its spectrum is mixed. Related colors in the app are [[blue]], [[cobalt-blue]] and [[royal-blue]] and [[indigo]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this color covering at least 1 per cent of its canvas, within a color difference of 4, as photographed [6]. A paintings archive is a poor place to look for it, since this is a screen color [6]. In printed English the phrase peaks in the 1870s, and it rose in the 1850s [7]. The Google Books count includes every sense of the words, so it is a rough guide [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name; 'pure' means unmixed",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "blue",
+   "cobalt-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "royal-blue",
+    "gloss": "a lighter, less violet blue with a long history"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "first_recorded": {
+   "source": "xkcd",
+   "year": 2010
+  },
+  "ngram": {
+   "peak": "1870s",
+   "rise": "1850s"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Pure Blue (xkcd, 2010), nearest name Medium Blue",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry \"AZURITE\" (citing Yu 1955)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry on Chinese barium copper silicate pigments (citing FitzHugh and Zycherman)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry on cotton seed blue (citing Field 1869 edition)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 2",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Pure Blue: 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub Ngram field notes, term \"pure blue\" (Google Books, all senses)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Chinese sources, what did Pure blue name?",
+   "choices": [
+    "The highest grade of azurite",
+    "A synthetic dye",
+    "A kind of glass"
+   ],
+   "answer": "The highest grade of azurite",
+   "kind": "pick"
+  },
+  {
+   "q": "A color that looks pure blue must have a spectrum of only blue light.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cobalt blue looks pure even though it reflects green and red light as well.",
+  "In Chinese sources, Pure blue was the top grade of azurite."
+ ],
+ "status": "checked",
+ "words": 365,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed 'Han dynasty' dating of pure blue/purple masses (source gives Warring States for the sticks).",
+   "Removed claim about what survey respondents meant by 'pure'."
+  ]
+ }
+}

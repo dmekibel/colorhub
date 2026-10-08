@@ -1,0 +1,112 @@
+{
+ "slug": "deep-chestnut",
+ "name": "Deep Chestnut",
+ "hex": "#B94E48",
+ "names": [
+  "Deep Chestnut"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Deep Chestnut is a muted brick red, named for the chestnut.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "This swatch has more records than most descriptive names: it matches the German standard color RAL 3033, sits in the ISCC-NBS system of 1955, and is listed as a Crayola color name, per a Wikipedia list [1]. In the older Maerz and Paul dictionary its block holds the names Brazil, first recorded in 1386, and Portable Red, from 1806 [1].\n\nThe swatch is redder than the name suggests. Finlay describes an Australian painter's deep chestnut brown, made with natural pigments, which is a brown where this swatch is a red [2]. Its nearest named neighbor is [[red]], about 7 units away [1]. See also [[chestnut]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive a color near this swatch appears in 209 of 23,781 paintings, or 0.88 per cent, and it is most over-represented in India, at 3.2 times the expected rate [3]. The Kalighat painters have it in 20 of their 96 works, 4.8 times the baseline, and in a painting it is an accent 86 per cent of the time [3]. These are photographs of aged paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the horse chestnut; also a Crayola name",
+   "first_recorded": "RAL 1927; ISCC-NBS 1955",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "Pearl Pink (near-duplicate)",
+   "Brazil"
+  ],
+  "siblings": [
+   "chestnut",
+   "red",
+   "brick-red",
+   "indian-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 209,
+  "pct_archive": 0.88,
+  "match": {
+   "hex": "#B94E48",
+   "de2000": 4
+  },
+  "role": "accent",
+  "top_country": "India"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 10 (\"Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In our archive, where is Deep Chestnut most over-represented?",
+   "choices": [
+    "India",
+    "Norway",
+    "Denmark"
+   ],
+   "answer": "India",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch is browner than a plain chestnut brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Chestnut shares its block in an old color dictionary with Brazil, recorded in 1386."
+ ],
+ "words": 188,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "softened Crayola claim to attributed",
+   "removed unsupported shikancha sentence",
+   "lede no longer asserts horse-chestnut/Crayola origin"
+  ]
+ }
+}

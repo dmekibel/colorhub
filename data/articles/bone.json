@@ -1,0 +1,265 @@
+{
+ "slug": "bone",
+ "name": "Bone",
+ "hex": "#E3DAC9",
+ "names": [
+  "Bone"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Bone is a pale, warm off-white named for the bleached look of bone, and the same word names two old pigments, a gritty white and a brown-black, made by burning it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two bones, two colors",
+   "body": "Bone is a color that comes from two opposite pigments. Burn bone in the open air and what is left is a gritty whitish-grey powder, used as a white; roast it with the air shut out and the same material turns into a blue-black or brown char, used as a black [1][2][4]. The pale warm off-white that screens call Bone is the first of these, or simply the look of bleached bone itself [13]. Neither the books nor our own sources say who first used the word for a swatch, so the origin of the color name is undocumented beyond the pigments.\n\nThe pigment names are old and plain. Paterson's dictionary defines bone black as an ancient pigment made from carbonised bones and still in use, bone brown as charred bone dust, and bone white as a pigment used since the Middle Ages that is mainly calcium phosphate [3]. Coles puts bone white's use further back, to Neolithic times, which makes it one of the earliest pigments made by transforming a material rather than digging it up [1]."
+  },
+  {
+   "id": "bone-white",
+   "title": "Bone white",
+   "body": "Bone white is made by burning bone until it is whiter than ash. Cennino Cennini's handbook of the fifteenth century tells the painter to take bone from the second joints, calcine it in a fire, and grind it well on porphyry once it has turned whiter than ashes [1]. Almost any bone will do, but recipes were fussy; the antlers of the male red deer, called harts, gave a variant known as hartshorn white [1][4]. Chemically it is mainly a mixture of calcium phosphate and calcium carbonate, and what remains when the organic collagen has burned away is a form of the mineral apatite [1][4].\n\nIt was never a first-rate white. Finlay says painters found it gritty and grey [5], and Ball notes that chalk and ground bone could not give the opaque, ivory-like body that lead white gave, which is why the history of Western painting leans so heavily on lead [6]. The grit had a use of its own: bone white was often mixed into the ground that prepared paper for silverpoint drawing, because its slightly abrasive surface holds the fine metal line [1]. A fifteenth-century German manuscript, the Strasburg manuscript, also adds calcined bone dust and powdered pumice to boiled oil in a recipe for preparing oil for colors [4]. Bone ash has been identified as a white on an Armenian gospel book as well [4]."
+  },
+  {
+   "id": "bone-black",
+   "title": "Bone black",
+   "body": "Bone black is the other half. The bones are packed into a covered crucible and surrounded with coals, and the lid keeps air out so that the bone chars instead of burning to ash [2]. The char is cooled, pounded in a mortar and, in the better medieval workshops, washed, filtered and ground finer on a stone slab, which strengthens the color [2]. Depending on the bone and the preparation it can run from a blue-black to a brown [2]. The Pigment Compendium treats the brown version as its own listing: bone brown, from partly charred bones [4].\n\nIt is found in prehistoric, Egyptian, Greek and Roman art and throughout the Middle Ages and Renaissance [2]. Pastoureau notes that Paleolithic painters learned to burn bone, ivory and deer antler in the same way they burned wood, to get blacks of different depth [7]. Coles adds that bone black was probably less used than charcoal black before the Middle Ages, because the raw material is hard and difficult to grind fine [2]. The sixteenth-century Dutch used its dense body to paint the black cloth of garments [2].\n\nRembrandt is the classic user. Ball lists charcoal and bone black among the few pigments of his restricted late palette, and his dark browns are built up from lakes, earths and bone black, sometimes glazed over a brown underpaint that holds a little lead white [8][9]. Gauguin and other painters of the late nineteenth century turned against the traditional blacks, bone and ivory among them, and mixed their near-blacks from blues, reds and greens instead [10]."
+  },
+  {
+   "id": "myths",
+   "title": "Ivory black and the corpse story",
+   "body": "Two stories cling to bone black. The first is a naming problem, not a myth. Genuine ivory black was made by charring waste ivory, but the supply was always limited, and with the ivory trade outlawed, the pigment now sold under that name is bone black with extra carbon added to deepen it [2]. Even so, bone black is still often sold under the name ivory black [2].\n\nThe second is a legend. In the seventeenth century some people said bone black was made from human corpses, and Finlay thinks the apprentices in artists' studios probably enjoyed the ghost stories [6]. It was not true. The pigment came from the thighs of cattle and the limbs of lambs, scraps from the slaughterhouse [6]. The brown that really did come from human remains was mummy brown, a different pigment altogether [6]."
+  },
+  {
+   "id": "old-whites",
+   "title": "The color of old ruins",
+   "body": "The bleached-bone look has a place in architectural taste, and a mistake sits under it. St Clair points out that for centuries the weathered, bone-pale color of Greek and Roman ruins set the standard for Western ideas of classical beauty [11]. Only in the middle of the nineteenth century did researchers establish that classical statues and buildings were usually brightly painted [11]. The idea of a white antiquity is a myth; the whiteness is what time left behind.\n\nBone also names the color of dryness and exposure. The filmmaker Derek Jarman, writing about the shingle at Dungeness, described it as bone-bleached [12]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our Bone is #E3DAC9, a warm, light off-white [13]. The library files it under ISCC-NBS block 121, whose descriptive name is yellowish white, with the swatch sitting about 3.3 units from the center of that block, and the name appears in the RAL color collection from 1927 [13]. Wikipedia's entry for the color cites a paint company, Kelly-Moore, and we treat the hex as an approximate screen value [13].\n\nIt sits among [[ivory]], [[cream]] and [[ecru]] in the pale-neutral range, and in our archive the colors that most often share a canvas with it are Ecru and Beige [14]. The pigment-named [[bone-brown]] is a much darker, browner color that shares only the word [13]. Real bone white powder is greyer and grittier than any of them [1][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 1,531 carry a color within six CIEDE2000 units of this swatch over at least five per cent of the canvas, which is 6.4 per cent [14]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not a pigment test, and old white grounds and yellowed varnish both land here [14].\n\nThe geography is the surprise. In our archive 217 of 635 Chinese works carry it, 5.3 times the archive rate, and the pages with the most of it are Bian Shoumin's calligraphy and painting albums, where it covers up to 99 per cent of the leaf [14]. That fits Finlay's remark that East Asian painters often considered the best white to be the unpainted paper [5]. Among Western painters Willem van de Velde the Elder is the most devoted, with 7 of 14 works [14]. The word itself is much newer than the pigments: in printed English, adjective uses of bone rose from the 1840s and peak around 2013 [15]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "bone, burned for the pigments bone white and bone black",
+   "first_recorded": "RAL collection 1927 (the swatch); the pigments are far older",
+   "source": "Coles, Chromatopia, pp. 43-46; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "bone white",
+   "bone ash",
+   "hartshorn white (from antler)",
+   "bone black",
+   "ivory black (the trade name)"
+  ],
+  "siblings": [
+   "bone-brown",
+   "ivory",
+   "ecru"
+  ],
+  "parent": null,
+  "children": [
+   "bone-brown"
+  ],
+  "disambiguation": [
+   {
+    "slug": "bone-brown",
+    "gloss": "the pigment name is a dark brown from partly charred bone, not a pale color"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E3DAC9",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1531,
+  "top_paintings": [
+   "cma-161020",
+   "cma-161025",
+   "cma-161023",
+   "cma-161016"
+  ],
+  "painters": [
+   "Xugu",
+   "Willem van de Velde (I)",
+   "Shen Zhou"
+  ],
+  "company": [
+   "Ecru",
+   "Beige",
+   "Silver"
+  ],
+  "ngram": {
+   "peak": 2013,
+   "first_5pct": 1800
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Bone white\", p. 43",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Bone black\", pp. 45-46",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bone black\", \"bone brown\", \"bone white\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ward, The Pigment Compendium, \"Bone ash\", \"Bone brown\", \"Bone, calcined\", pp. 57-58",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 12 (\"White\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 11 (\"Black and Brown\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Black, pp. 24-25",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 3 (\"The Forge of Vulcan\") and ch. 6 (\"Old Gold\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 6 (\"Old Gold\"), the Rembrandt passages",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Black, pp. 176-177",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"White\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 39",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub color library: Bone (ISCC-NBS 1955 block 121, RAL 1927, Wikipedia note)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, CIEDE2000 6, at least 5% of canvas)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram, adjective use of \"bone\", 5-year smoothed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do you get if you burn bone in the open air, and what if you heat it with the air shut out?",
+   "choices": [
+    "A grey-white powder in air, a blue-black or brown char without air",
+    "A black powder in air, a white powder without air",
+    "A red powder either way",
+    "Nothing usable either way"
+   ],
+   "answer": "A grey-white powder in air, a blue-black or brown char without air",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: bone black was made from human corpses.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why did painters find bone white a poor substitute for lead white?",
+   "choices": [
+    "It was gritty and grey and lacked opacity",
+    "It was too expensive",
+    "It turned black in light",
+    "It was poisonous"
+   ],
+   "answer": "It was gritty and grey and lacked opacity",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bone is two colors in one word: burn it in air for a gritty white, burn it without air for a blue-black.",
+  "The corpse story about bone black is a legend: the bones came from cattle and lambs.",
+  "Look at East Asian paintings: in our archive a third of Chinese works carry this off-white, often as bare paper."
+ ],
+ "words": 1205,
+ "status": "checked",
+ "checked": {
+  "by": "Sonnet 5.5 batch 12 (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Origin of the color name as a swatch is undocumented; the article says so.",
+   "Coles pages cited are PDF pages; Pastoureau pp. 24-25 and 176-177 likewise.",
+   "Ball ch. numbers taken from the book's own chapter headings (ch. 3 and ch. 6); Pigment Compendium pages are PDF pages 71-72.",
+   "Corpse myth corrected (Finlay); Greek-white-statues myth corrected (St Clair).",
+   "Field numbers use article_field.py (6 units, 5% canvas): 1,531 of 23,781; the graph fieldnotes use a different lens and give 1,870."
+  ]
+ }
+}

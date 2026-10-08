@@ -1,0 +1,264 @@
+{
+ "slug": "byzantine",
+ "name": "Byzantine",
+ "hex": "#BD33A4",
+ "names": [
+  "Byzantine"
+ ],
+ "tier": "place",
+ "depth": "long",
+ "lede": "Byzantine is a vivid reddish purple named for the Eastern Roman empire, whose emperors guarded the real imperial purple: a dark, almost crimson dye that bears little resemblance to the bright swatch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name and the swatch",
+   "body": "Byzantine, as a color name, is a twentieth-century entry: the Maerz and Paul dictionary of 1930 files it as first recorded in 1924, on plate 51 K 8 [11]. Who coined it, and why a bright magenta-violet was chosen to stand for a medieval empire, is undocumented. Our library lists it with the other names ISCC-NBS gives to the same patch: Bright Red Violet, Orchid Purple, Caprice and Roseine Purple [11].\n\nThe swatch is not what the empire wore. It sits at lightness 47 with high chroma, close to [[orchid-magenta]] and [[fandango]] [11][13], and its nearest well-known neighbors are [[mulberry]], [[magenta]] and [[orchid]] [11]. The dye that gave Byzantine purple its prestige was dark [1]. Finlay describes Theodora's robe in the Ravenna mosaic as a deep, almost crimson purple [1], and the vellum of the great purple manuscripts as a soft crimson, like a stain of blackberries [1]."
+  },
+  {
+   "id": "purple",
+   "title": "Born in the purple",
+   "body": "The Byzantine emperors inherited the Roman habit of treating purple as a monopoly [1]. In Finlay's account the purple workshops drifted north over time, to Rhodes and Thebes [1]. The cloth was expensive enough that only a few people were important enough to wear it, and the color marked who they were [1][9]. The Roman and then Byzantine adoption of the dye, Finlay argues, is where purple earned its real reputation, as emperor after emperor had their clothes made from it [1].\n\nThe phrase *porphyrogenitus*, \"born in the purple\", was a title of the imperial family. St Clair says the custom was to fit out the royal birthing chamber with porphyry and Tyrian cloth, so that the first thing a newborn prince saw was purple [5]. Finlay is more careful: Constantine VII, in the tenth century, was known as Porphyrogenitus, a name that signaled immense privilege and perhaps alluded to the purple walls of the birth chamber [10]. Coles also records that Byzantine empresses gave birth in a Purple Chamber [12].\n\nThe color extended past clothes. The Ecumenical Patriarch in Constantinople is said to have signed formal documents in purple ink, and lavish books from the 500s and 600s were written on purple-dyed vellum, their silver lettering now tarnished black [1]. The dye itself came from the shellfish *Murex*, the same source as [[tyrian-purple]] [6][5]. Balfour-Paul records the epithets Royal, Imperial and Tyrian for it, and says it reached its peak as a status symbol under the Roman and Byzantine empires [6]. Compare [[imperial-purple]] and [[royal-purple]]."
+  },
+  {
+   "id": "mosaics",
+   "title": "Purple in mosaic and icon",
+   "body": "The best surviving picture of the empire's purple is in the church of San Vitale at Ravenna [2]. Ball reports that the robes of Justinian I are made of mosaic stones of an inorganic purple material, while Theodora's purple is edged with gold [2]. Justinian had also, in 529, issued a code reserving emeralds, pearls and sapphires for the aristocracy, so that no newly rich family could look as splendid as the imperial one [7].\n\nBall adds that, since Byzantine emperors were regarded as Christ's representatives on Earth, it was natural to transfer the royal color to Christ himself, and the San Vitale mosaics show him in a purple gown [2]. The Virgin was dressed the same way [9]. Finlay says Byzantine artists in about the seventh century usually showed her in purple, where Russian icons favor red [9]. Later, in Italy, she took [[ultramarine]] blue [9]. His explanation is cost: the choice was made to honor her with the most valuable dye, and only later did ultramarine take that role [9].\n\nGage adds a relic. In the seventh century the Virgin's mantle was moved from the church at Blachernae to Hagia Sophia, where it was found to be of a miraculously imperishable purple wool [8].\n\nNot every purple was a dye. The Pigment Compendium notes that hematite-rich earths, heated, give a violet color found in Roman, Byzantine and post-Byzantine art, the pigment later called caput mortuum [14]. A mineral violet like this is the opposite of the glowing shellfish dye: dull, cheap and stable."
+  },
+  {
+   "id": "end",
+   "title": "The end of the purple",
+   "body": "Several books tie the end of Byzantine purple to the fall of Constantinople to the Turks in 1453 [3][5][6]. Greenfield and St Clair say the secret of making the finest purple was lost then [3][5]. Balfour-Paul says the knowledge of production vanished after the Turkish conquest [6]. Gage describes it differently, as the closing of the Byzantine purple trade [4]. The books therefore disagree about what ended in 1453: the craft itself, or only the supply [3][4][5][6].\n\nWhat followed is told differently too. Greenfield says the pope decreed in 1295 that cardinals would wear \"red\", really a reddish imperial purple bought from Constantinople, and that the Church switched to a red from European sources after 1453 [3]. Gage dates the change to 1464, when Paul II allowed cardinals to dress in scarlet, which he links to the end of the Byzantine purple trade and to the discovery in 1462 of alum in papal territory [4]. On the dates the books disagree, but the cardinals' [[scarlet]] arrived in the 1460s at the latest, once Byzantine purple had run out [3][4]. The shellfish were spared for a while. According to St Clair, a French marine biologist, Lacaze-Duthiers, stumbled on the murex and its purple in 1856, four centuries later [5]. That was the same year William Perkin's mauve went into production [5].\n\nPurple then returned from the laboratory, and the bright swatch belongs to that return, not to the empire."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, as photographed, none has this color covering even one per cent of its canvas within a CIEDE2000 distance of 4 [16]. Photographs of aged, varnished paintings are not pigment tests, so this describes the archive, not painting as a whole.\n\nThe nearest thing in our fashion data is the aniline craze of the 1850s and 1860s, whose fuchsine magenta is 8.3 units away [13]. That puts the swatch much closer to a nineteenth-century coal-tar dye than to anything the Byzantine court wore [13]. In printed English the word *Byzantine* rose steadily after 1850 and peaked around 2000, mostly as an adjective for the empire and for tangled bureaucracy, not for a color [15]. To see the real imperial purple, look at Theodora's robe in a good photograph of the San Vitale mosaic, which Finlay describes as deep and almost crimson, and compare it with the bright swatch above [1][2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Byzantine (Eastern Roman) empire",
+   "first_recorded": "1924 (Maerz and Paul 1930, plate 51 K 8); coiner undocumented",
+   "source": "Maerz and Paul, A Dictionary of Color (1930), via our library"
+  },
+  "aka": [
+   "Bright Red Violet",
+   "Orchid Purple",
+   "Caprice",
+   "Roseine Purple"
+  ],
+  "siblings": [
+   "byzantium",
+   "imperial-purple",
+   "tyrian-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "byzantium",
+    "gloss": "a darker, duller purple; the dyes of the real empire were dark, not this magenta"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#BD33A4",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    46.8,
+    72.3,
+    334.7
+   ],
+   "iscc": {
+    "block": 236,
+    "name": "vivid reddish purple",
+    "de": 4.8
+   },
+   "nearest": [
+    [
+     "Mulberry",
+     8.6
+    ]
+   ]
+  },
+  "twin": {
+   "fashion": "The aniline craze: Fuchsine magenta",
+   "de2000": 8.3
+  },
+  "ngram": {
+   "term": "byzantine",
+   "peak": 2000,
+   "rise": 1850
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 19 (Tyrian purple)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 135",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, pp. 74-75",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 24",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 134",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 17",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21, notes (Constantine Porphyrogenitus)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub library: Byzantine, Maerz and Paul 1930 plate 51 K 8; ISCC-NBS 1955 block 236",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 24",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alikes and twins for Byzantine",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"caput mortuum\", p. 94",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"byzantine\", 1800-2019",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the dye of real Byzantine imperial purple look like?",
+   "choices": [
+    "A deep, almost crimson purple",
+    "A bright magenta like the swatch",
+    "A pale lilac",
+    "A blue-violet like ultramarine"
+   ],
+   "answer": "A deep, almost crimson purple",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did Byzantine artists dress the Virgin in purple?",
+   "choices": [
+    "Purple was the most valuable dye, so it honored her",
+    "Because she was a queen of the Romans",
+    "Because purple was cheap",
+    "Because blue pigment was unknown"
+   ],
+   "answer": "Purple was the most valuable dye, so it honored her",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: books agree that the secret of imperial purple dye was lost in 1453.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The Byzantine on your screen is a magenta from the age of coal-tar dyes; the empire wore a dark, almost crimson purple.",
+  "Look at Theodora in the San Vitale mosaic: the purple there is closer to wine than to violet."
+ ],
+ "words": 1049,
+ "status": "checked",
+ "checked": {
+  "by": "epic batch 16 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Book reports of 1453 differ (craft lost vs trade closed); both given.",
+   "Cardinals: Greenfield 1295 vs Gage 1464; safe wording used.",
+   "Porphyrogenitus origin hedged (Finlay vs St Clair).",
+   "Swatch is a 20th-century magenta, not the historical dye; stated."
+  ]
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "slug": "dusky-rose",
+ "name": "Dusky Rose",
+ "hex": "#BA6873",
+ "names": [
+  "Dusky Rose"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dusky Rose is a muted, dusty rose-red, a name for a pink with some brown or mauve in it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name comes from the xkcd survey of 2010, and our sources record nothing earlier under these words [1]. Its nearest named neighbor is [[mauve]], about 10 units away, and it is also near [[old-rose]] [1].\n\nBooks use the phrase for clothing. In *Fabric*, Finlay recalls a christening photograph in which her mother wears a blue suit of the 1960s and a dusky rose hat [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive a color near this swatch appears in 34 of 23,781 paintings, or 0.14 per cent, which is rarer than 67 per cent of the named colors [3]. In a painting it most often plays an accent [3]. The earliest match dates from the year 1000, a thousand years before the name was first recorded, so it is a look-alike hue in an aged photograph, not proof of a pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive survey name",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "dusty rose"
+  ],
+  "siblings": [
+   "old-rose",
+   "mauve",
+   "dusky-pink",
+   "rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 34,
+  "pct_archive": 0.14,
+  "match": {
+   "hex": "#BA6873",
+   "de2000": 4
+  },
+  "role": "accent",
+  "measured": {
+   "nearest": [
+    [
+     "Mauve",
+     9.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 300",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Finlay's mother wear in the christening photograph?",
+   "choices": [
+    "A dusky rose hat",
+    "A red scarf",
+    "A green coat"
+   ],
+   "answer": "A dusky rose hat",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusky Rose is rarer in our archive than most named colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The name Dusky Rose is recorded only from the 2010 xkcd survey in our sources."
+ ],
+ "words": 155,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

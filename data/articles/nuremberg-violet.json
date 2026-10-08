@@ -1,0 +1,130 @@
+{
+ "slug": "nuremberg-violet",
+ "name": "Nuremberg Violet",
+ "hex": "#874C93",
+ "names": [
+  "Nuremberg Violet"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Nuremberg violet is an old trade name for manganese violet, a purple pigment made from manganese phosphates and introduced in 1868.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Manganese violet by another name",
+   "body": "Nuremberg violet is a synonym for manganese violet, which the Dictionary of Colour says was brought in during 1868 to offer a safer substitute for the toxic cobalt violet [1]. The Pigment Compendium lists it, also spelled Nürnberg violet, among synonyms for a manganese ammonium phosphate pigment [2]. In practice, it adds, the name was probably used for one of several manganese phosphates [2]. See [[manganese-violet]]; the swatch is a mid purple close to [[violet]] and [[purple]] [3].\n\nThe name points to the German city of Nuremberg (Nürnberg), but the books consulted do not explain the choice, so its origin is undocumented here [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The name is recorded as a color in the 1930 Maerz and Paul dictionary [3]. The color library files it as a purple, near [[plum]] and [[mauve]] [3]. In our archive it is found in 1 painting out of 23,781, as photographed, so the screen color is nearly absent from paint on canvas [3]. A modern violet pigment is no guarantee of the same hue in a varnished picture [3]."
+  },
+  {
+   "id": "pigment",
+   "title": "Manganese violet and its rivals",
+   "body": "Manganese violet came late to the palette. By 1868, when it was introduced, artists already had cobalt violet and the new aniline purples such as [[mauve]], which had been on sale since 1856 [1][4]. Its appeal was safety: cobalt violet is toxic, and the manganese phosphate pigments were seen as the milder choice [1]. The Compendium says the name was probably used for one of several manganese phosphates, so the exact composition behind it is uncertain [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the German city of Nuremberg (reason undocumented)",
+   "first_recorded": "Maerz and Paul, 1930; pigment introduced 1868",
+   "source": "Paterson, A Dictionary of Colour; Pigment Compendium"
+  },
+  "aka": [
+   "Nürnberg violet",
+   "manganese violet"
+  ],
+  "siblings": [
+   "manganese-violet",
+   "violet",
+   "purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "manganese-violet",
+    "gloss": "the standard name for the same pigment"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Nürnberger Violett"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 1,
+  "first_record": 1930,
+  "pigment_introduced": 1868
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"manganese violet\" and \"Nuremberg violet\", p. 255, 280",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Nuremberg violet\", p. 291",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes); ColorHub color library (Maerz and Paul 1930)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 6",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Nuremberg violet is another name for which pigment?",
+   "choices": [
+    "Manganese violet",
+    "Cobalt violet",
+    "Mauveine",
+    "Ultramarine"
+   ],
+   "answer": "Manganese violet",
+   "kind": "pick"
+  },
+  {
+   "q": "When was manganese violet introduced, as a less toxic alternative to cobalt violet?",
+   "choices": [
+    "1868",
+    "1704",
+    "1935",
+    "1450"
+   ],
+   "answer": "1868",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Manganese violet, introduced in 1868, was pitched as a less toxic stand-in for cobalt violet."
+ ],
+ "words": 262,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that Nuremberg was a pigment/metal trade center; softened 'tint varied maker to maker' to the source's hedge; retitled section"
+  ]
+ }
+}

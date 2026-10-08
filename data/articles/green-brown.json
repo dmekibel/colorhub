@@ -1,0 +1,121 @@
+{
+ "slug": "green-brown",
+ "name": "Green Brown",
+ "hex": "#887142",
+ "names": [
+  "Green Brown"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Green Brown is a plain descriptive name for a dull olive-khaki; as a swatch it is RAL 8000, a paint standard, and the books say little about it as a color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name that describes itself",
+   "body": "Green Brown is the name of RAL 8000, one of the colors in the German RAL paint standard, and this screen value is approximate [1]. A second well-known list, the xkcd color survey, uses the same two words for a much darker, olive-green value, so the name alone does not fix the color [1].\n\nNo book in our shelf traces the name to a person, a pigment or a place. Its origin is undocumented, and it is a compound of two basic words, [[green]] and [[brown]] [1]."
+  },
+  {
+   "id": "material",
+   "title": "Where the books say green-brown",
+   "body": "Books do use the words, mostly for materials. The Pigment Compendium describes several minerals as green-brown, among them diopside, which is typically green but may also be green-brown, and amphiboles such as actinolite [2]. Alkali feldspars can be green-brown in some metamorphic rocks, and the lead tungstate stolzite forms crystals in a range that includes green-brown [2].\n\nIn Finlay's *Colour*, the words describe something less pleasant: the dark, crumbly, impure gamboge that a Hong Kong dealer kept from the war years, nothing like the clean pigment [3]. In every case the term is plain description, with no history of its own."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch has a lightness of about 49 and a chroma of about 29, which makes it a muted mid-tone [1]. The nearest named color in the archive is [[sepia]], 8.5 units away, a loose match [1]. We found no archive count for this exact swatch, so none is claimed."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a descriptive compound",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub library (RAL 8000, xkcd)"
+  },
+  "aka": [
+   "RAL 8000"
+  ],
+  "siblings": [
+   "olive-brown",
+   "khaki"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "olive",
+    "gloss": "a green-yellow olive; Green Brown is browner and duller"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub library: RAL 8000, xkcd",
+  "lch": [
+   49,
+   29,
+   85
+  ],
+  "nearest": [
+   [
+    "Sepia",
+    8.5
+   ]
+  ],
+  "alt_xkcd": "#544E03"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library entry for Green Brown (RAL 8000; xkcd) and graph measurements",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries for diopside, feldspar, actinolite and stolzite",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, chapter on yellow (gamboge)",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which paint standard supplies this swatch?",
+   "choices": [
+    "RAL",
+    "Pantone",
+    "NCS",
+    "Munsell"
+   ],
+   "answer": "RAL",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books give Green Brown a documented history.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Green Brown has no documented origin; in the books it is just a description, from minerals to bad gamboge."
+ ],
+ "words": 262,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,285 @@
+{
+ "slug": "green-earth",
+ "name": "Green Earth",
+ "hex": "#DADD98",
+ "names": [
+  "Green Earth"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Green earth is a pale, greyish green clay pigment, a mixture of celadonite or glauconite, that painters dug from Cyprus to Verona and laid under flesh for two thousand years.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name covers",
+   "body": "*Green earth* is not one mineral but a family of pale, greyish green clay pigments dug from the ground, and the French name for it, *terre verte*, is used just as often [1][4]. The Pigment Compendium defines the term broadly: any of numerous deposits that are mixtures of minerals containing celadonite or glauconite, with or without the green mineral chlorite and a long list of other minerals [1]. St Clair calls it a mongrel collection of earths of varying hue and mineral makeup [4].\n\nThe two coloring minerals have similar chemistry and different homes. Celadonite has a bluish green tinge and forms in cavities and cracks in volcanic basalt, in thin crusts a few millimetres thick [1]. Glauconite is the grass-green one and forms only in marine settings, scattered through sandstones and clays [1]. Once ground, the two are very hard to tell apart; both give a pale, slightly greyish green [1]. Mineralogists later borrowed the pigment's own color word: celadonite was named by Glocker in 1847 from the French *céladon*, 'sea-green' [2].\n\nThe related names are many: Verona earth, Veronese green, Bohemian earth, Belgian earth, Hessian, Rhenish and Saxon earth, *terra di Verona* and *Grünerde* [1][2]. [[celadon]] is its near neighbor among the learnable color names."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is paler than the pigment",
+   "body": "Our swatch, #DADD98, is a light yellowish green that the library takes from the Wikipedia color box for the pigment [12]. The nearest named colors in the library are two Ridgway and ISCC-NBS shades, Light Lumiere Green and Light Dull Green-Yellow [12]. It is a lighter, yellower color than most green earth that a painter would actually grind, and the library's nearest common color word to it is [[cream]], about 9 units away in CIEDE2000 [12].\n\nReal green earths run wider. St Clair describes them as ranging from deep forest green, through an almost crocodile shade, to a pale sea-mist green [4]. Ridgway's plates have a separate *Terre Verte* swatch, close to [[jasper-green]], which is a much darker and bluer green than ours [12]. Take the swatch here as the light end of the family, the tint it makes when mixed with white."
+  },
+  {
+   "id": "pliny",
+   "title": "From Vitruvius to Cennini",
+   "body": "The Roman writer Vitruvius mentions a green chalk, *creta viridis*, and the Compendium reports that the best of it came from Smyrna, where it was called Theodoteion after the owner of the land where it was first found [1]. Pliny describes a cheap green called *appianum* that imitated malachite, sold at a sesterce a pound, and warns that it was unsuitable for fresco [3]. The translator Rackham suggested the word might be a miscopy of *apianum*, parsley, which would make it a color name rather than a source; Grissom proposed instead that it was a green earth adulterated with a plant green [1][3].\n\nGreen earth appears on many Roman wall paintings, and Odin and Delamare identified celadonite with glauconite on Roman paintings in Gaul [1][14]. St Clair mentions a naturalistic mural of a tree at Stabiae, buried by the same eruption of Vesuvius that destroyed Pompeii in AD 79 [4]. Cypriot celadonite has been identified in western European Roman art, and the Cypriot deposits are still worked on a small scale [1].\n\nFor the Middle Ages the essential witness is Cennino Cennini, who wrote around 1400 [1]. He recommends green earth for underpainting flesh, particularly the pallor of corpses, and also for foliage in the foreground, for draperies, for painting water and as a base for gilding in place of red bole [1]. He tells how his father Andrea took him to see the deposits at Colle di Val d'Elsa [1][4]. Another early writer, Jehan le Begue in 1431, calls the best green earth by a name that links it to Theodote [1]."
+  },
+  {
+   "id": "flesh",
+   "title": "Under the skin",
+   "body": "The use that made green earth famous was beneath flesh paint. St Clair says it was ideal for shading the pale pinkish red of European skin [4]. Cennini built his flesh in tempera with two coats of green earth mixed with lead white over faces, hands, feet and nudes before adding pink on top [4]. In some European manuscripts where the upper layers have faded, the green underlayer shows through and gives the saints a slightly demonic look, according to St Clair [4].\n\nWhere the upper layers have worn thin, the green below can come through, which is the place to look for it."
+  },
+  {
+   "id": "properties",
+   "title": "A good pigment nobody praised",
+   "body": "Green earths are permanent, stable and unreactive and suit painting in every medium [1]. They are prepared by washing, grinding and picking out impurities, and refined by chemical leaching and levigation [1]. St Clair names the drawback as low tinting strength, and the virtues as permanence, transparency, use in every medium and a buttery texture in oil [4]. Field in 1835 judged it very durable, unaffected by strong light and impure air, of little body, semi-transparent and a good dryer in oil [4].\n\nThe paradox is that a pigment so cheap, plentiful and permanent was rarely praised. St Clair observes that artists wrote about it in the tone of a school report on a pupil who means well [4]. The reason was not the pigment but the demand: painters wanted a vivid foliage green and green earth could not give it [8][10].\n\nThe Dutch painter Samuel van Hoogstraten wrote in the 1670s that he wished for a green as good as a red or yellow, finding green earth too weak, Spanish green (verdigris) too crude and verditer insufficiently durable [8]. Ball adds that Velázquez never used a pure green pigment, mixing his from azurite and yellow ochre or lead-tin yellow [8]. Claude Lorrain and Poussin used complex mixtures that included a green earth, a blue, a yellow, and perhaps white and black, though such combinations had no pedigree and often changed over time [9]. Bardwell's manual of 1756 puts green earth among the ingredients for landscape greens, alongside yellow ochre, brown pink, Prussian blue, orpiment and white [9]."
+  },
+  {
+   "id": "burnt",
+   "title": "Burnt green earth and Verona brown",
+   "body": "Calcining green earth turns it brown, and the Compendium says burnt green earth has been noted since classical antiquity, with Vitruvius in the first century BC [15]. The result is sometimes called Verona brown [1]. Darrah's study of burnt green earth included two bladders in a paint box said to have belonged to J. M. W. Turner, now at the Victoria and Albert Museum in London; they were labelled in German and Italian as burnt green earth [15].\n\nPaterson's dictionary lists green earth as another name for glauconite and, oddly, as a brown pigment, which seems to refer to this burnt form [11]. In practice the two are different colors from one earth."
+  },
+  {
+   "id": "trade",
+   "title": "Where it came from and where it traveled",
+   "body": "Deposits with the better, celadonite-based pigment come from Cyprus, Verona, the Tyrol (the Zillertal) and Brazil, and the Compendium notes that the green earths of superior quality were celadonite-based, purer and needing less preparation [1]. Glauconite-based earths came from Russia, the Baltic states, Bohemia, the Cretaceous greensands of southern England and the Missouri River Basin, where Native Americans used them [1]. Verona was widely regarded as the best source of all [1].\n\nIdentifications are worldwide. The Compendium lists first-century AD frescoes at Ajanta in India and a Tsimshian stone mask from the Pacific coast of Canada [1]. It adds rock paintings in Argentina, early Japanese wall paintings and stone buddhas, and Coptic art [1]. Irish medieval wall painting, a fourteenth-century Icelandic manuscript and early colonial Mexican maps complete the list [1]. It was especially popular in Byzantine and Orthodox Greek and Russian art, and its use in Western art was routine [1]. Analyses have found it in works by Michelangelo, Ruysdael, Vermeer and Turner [1]. Titian's *Bacchus and Ariadne* uses malachite, green earth, verdigris and a copper resinate for its greens [7].\n\nA confusion lurks in the name. The Compendium notes that chrysocolla was often called *terra viridis*, so a Latin recipe for green earth may mean a copper mineral [16]."
+  },
+  {
+   "id": "origins",
+   "title": "Cave greens, and a disagreement",
+   "body": "Books disagree about the oldest uses. Ball lists green earths from celadonite and glauconite among the prehistoric cave palette, along with red and yellow earths, charcoal black and chalk white [5]. St Clair finds it odd that green earth is nearly absent from the caves at Lascaux and Altamira, where red and yellow ochers, manganese blacks and calcite white dominate, although it was widely available and easy to use [4]. The Compendium says only that clay minerals have been identified in prehistoric art [14].\n\nThey also differ on supply. Coles says the first natural green pigments were green earths but that the deposits were not widespread, which limited their use [10]. St Clair calls the same earths plentiful throughout Europe [4]. Both can be true: the pale clays are common as a category and good deposits are local.\n\nOne more word hides in it. The Compendium suggests the pigment name *verditer* may be a corruption of *verde terra*, and Ball infers from the old French *verd de terre* that the first verditer made was probably green and the blue variety came later [1][6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 80 contain a color within six CIEDE2000 units of this swatch that fills at least five per cent of the canvas, about 0.3 per cent [13]. These are museum photographs of aged, varnished paintings, so a match is a color match and not a pigment test, and because the swatch is paler than most real green earth, it is far from a detector for the pigment [13].\n\nThe matches cluster in landscapes and in the nineteenth century: the 1800s hold 47 of 8,345 paintings (0.6 per cent, about 1.7 times the archive's rate) and the peak decade is 1840, with 8 of 699 [13]. The earliest match is a Japanese *Landscape* by Oguri Sotan, dated 1413, in which the color fills about a quarter of the picture [13]. The largest cover is 55 per cent, in Luo Mu's *A Thatched Pavilion at the Foot of Two Old Cedar Trees* from 1693 [13].\n\nIn the paintings that have it, this color is almost always a highlight, the lightest zone (96 per cent) [13]. Its closest company in the archive is [[khaki]], [[beige]] and [[olive]] [13]. The eye lesson: a pale grey-green in the shadow of a pale cheek, or in a sky near the horizon, is the family this swatch belongs to."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the earth it is dug from (French terre verte)",
+   "first_recorded": "as creta viridis in Vitruvius, first century BC; the term green earth is much later",
+   "source": "Pigment Compendium, \"Green earth\""
+  },
+  "aka": [
+   "terre verte",
+   "Verona green",
+   "Verona earth",
+   "Veronese green",
+   "Bohemian earth"
+  ],
+  "siblings": [
+   "celadon",
+   "celadon-green",
+   "jasper-green"
+  ],
+  "parent": "green",
+  "children": [
+   "sap-green"
+  ],
+  "disambiguation": [
+   {
+    "slug": "celadon",
+    "gloss": "named for the same family of minerals but a bluer, lighter pale green"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "terre verte"
+   },
+   {
+    "lang": "it",
+    "name": "terra verde"
+   },
+   {
+    "lang": "de",
+    "name": "Gruenerde"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#DADD98",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 80,
+  "top_paintings": [
+   "aic-13451",
+   "rijks-20026179",
+   "aic-60239"
+  ],
+  "role": {
+   "highlight": 0.96
+  },
+  "company": [
+   "Khaki",
+   "Beige",
+   "Olive"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh et al., The Pigment Compendium, \"Green earth\" (pp. 187-188)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., The Pigment Compendium, \"Celadonite\" and \"Glauconite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., The Pigment Compendium, \"Appian green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 100 (\"Terre verte\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, on prehistoric pigments",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, on blue verditer and blue bice",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, on Titian's Bacchus and Ariadne",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, on van Hoogstraten and Velazquez; St Clair, The Secret Lives of Colour, \"Green\"",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, on landscape greens (Bardwell 1756, Claude and Poussin)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, pp. 32, 37",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 194 (\"green earth\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Green Earth, Terre Verte, Celadon Green; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, match within 6 CIEDE2000 units, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Eastaugh et al., The Pigment Compendium, \"Clay minerals group\" and \"Chlorite group\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Eastaugh et al., The Pigment Compendium, \"Green earth, burnt\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Eastaugh et al., The Pigment Compendium, \"Chrysocolla\"",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why was green earth used under flesh in early painting?",
+   "choices": [
+    "Its cool, transparent green under a pink tone reads as shadow",
+    "It was the cheapest pink",
+    "It dried faster than other paints",
+    "It protected lead white from darkening"
+   ],
+   "answer": "Its cool, transparent green under a pink tone reads as shadow",
+   "kind": "pick"
+  },
+  {
+   "q": "Green earth is a single pure mineral.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which two minerals are the usual coloring agents of green earth?",
+   "choices": [
+    "Celadonite and glauconite",
+    "Malachite and azurite",
+    "Chrysocolla and verdigris",
+    "Chlorophyll and serpentine"
+   ],
+   "answer": "Celadonite and glauconite",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Green earth is a family of clays, not one mineral: celadonite from basalt and glauconite from the sea floor.",
+  "Cennini used green earth under faces; where the pink has faded, the saints turn faintly demonic."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "claude",
+  "date": "2026-10-08",
+  "issues": [
+   "Swatch is paler than typical terre verte (library hex from Wikipedia)",
+   "Books disagree on cave-art use (Ball vs St Clair) and deposit supply (Coles vs St Clair)",
+   "Appian green meaning disputed (Pliny, Rackham, Grissom)"
+  ]
+ },
+ "words": 1672
+}

@@ -1,0 +1,133 @@
+{
+ "slug": "copper-brown",
+ "name": "Copper Brown",
+ "hex": "#773C27",
+ "names": [
+  "Copper Brown"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Copper Brown is a dark reddish brown, a name that in nineteenth-century pigment lists meant a brown made from copper compounds, not the color of the metal.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "A pigment name",
+   "body": "The Pigment Compendium records copper brown as a name listed by the color-maker Salter in 1869 and says it apparently refers to copper hexacyanoferrate(II) and other unspecified copper compounds [1]. The Colour Index gives a second recipe, numbered CI 77403, that starts from copper sulfate and magnesium sulfate [1]. The first compound belongs to the hexacyanoferrate group, the same group as [[prussian-blue]] [2].\n\nThe same family of copper compounds collected other names over time: Hatchett's brown, copper brown and Vandyke red [2]. Historically, then, the word named a family of obscure laboratory browns, and the entry gives no sign that painters relied on it."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is a system color",
+   "body": "The swatch is not a recreation of that pigment. It comes from the ISCC-NBS 1955 list, block 55, and from the RAL (1927) and Maerz and Paul charts, and the nearest ISCC-NBS name is \"moderate reddish brown\", 4.4 units away [3]. It sits between [[russet]] and [[umber]] in warmth."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive it appears in 1,922 of 23,781 paintings, 8.08 per cent, and is commoner than 91 per cent of named colors [4]. Inside a painting it is most often an accent, in 63 per cent of the 1,108 paintings where it counts [4]. It peaks in the 1300s, at 7.6 per cent of 251 paintings, 1.9 times the museums' baseline [4]. Cornelius Norbertus Gijsbrechts is the most devoted painter, with it in 5 of his 19 works here [4]. These are photographs of aged, varnished paintings, so a match is a color, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "copper compounds (copper hexacyanoferrate and others)",
+   "first_recorded": "Salter, 1869",
+   "source": "Pigment Compendium"
+  },
+  "aka": [
+   "Hatchett's brown (related)"
+  ],
+  "siblings": [
+   "russet",
+   "umber"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "copper",
+    "gloss": "the metal's color, a different thing from the pigment name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 1922,
+  "measured": {
+   "lch": [
+    32.5,
+    34.1,
+    45.7
+   ],
+   "nearest_iscc": [
+    "moderate reddish brown",
+    4.4
+   ]
+  },
+  "role": "accent 63%"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 136, 138 (\"copper brown\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 138 (copper hexacyanoferrate group)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In old pigment lists, what did copper brown refer to?",
+   "choices": [
+    "Copper compounds such as copper hexacyanoferrate",
+    "Burnt copper metal",
+    "A tree bark dye",
+    "A clay"
+   ],
+   "answer": "Copper compounds such as copper hexacyanoferrate",
+   "kind": "pick"
+  },
+  {
+   "q": "Which famous blue shares the structure of copper hexacyanoferrate?",
+   "choices": [
+    "Prussian blue",
+    "Ultramarine",
+    "Cobalt blue",
+    "Indigo"
+   ],
+   "answer": "Prussian blue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Copper brown the pigment was a lab brown built on a Prussian-blue structure."
+ ],
+ "words": 278,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'same structure as Prussian blue, copper for iron'; hedged painters' use."
+  ]
+ }
+}

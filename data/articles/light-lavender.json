@@ -1,0 +1,106 @@
+{
+ "slug": "light-lavender",
+ "name": "Light Lavender",
+ "hex": "#DFC5FE",
+ "names": [
+  "Light Lavender"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Lavender is a very pale violet, a lightened lavender, and as a painted color it is almost absent from the museum record.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Lavender, lightened",
+   "body": "Lavender is itself a pale color. Paterson's dictionary defines it as violet mixed with white, and uses it, with pink, as an example of a color of low saturation [1]. Light Lavender goes one step further in the same direction [1]. Our library draws it from the xkcd color survey and from the ISCC-NBS system of 1955, block 222 [2].\n\nIts nearest learnable neighbor is [[lavender]], about nine units away, and it sits near [[lilac]] and [[violet]] [2]. Compare [[light-grey-green]] for another lightened name [2]. The name is descriptive, so the coiner is undocumented [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Painting almost never uses it. At a looser test, a color within four units covering even one per cent of a canvas, no painting among 23,781 in our archive qualifies [3]. Pale violets are mostly tints inside skies, skin and drapery rather than flat areas [3]. These are photographs of aged, varnished paintings, so the result describes our archive, not painting as a whole [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: a lighter lavender",
+   "first_recorded": "ISCC-NBS 1955 (block 222)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "lavender",
+   "lilac",
+   "violet"
+  ],
+  "parent": "lavender",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#DFC5FE",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "top_paintings": [],
+  "note": "no painting with dE<=4 covering >=1% (graph fieldnote)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 356 (\"saturated\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph fieldnotes, CIEDE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Paterson, lavender is a mixture of which two colors?",
+   "choices": [
+    "Violet and white",
+    "Blue and pink",
+    "Purple and grey",
+    "Red and green"
+   ],
+   "answer": "Violet and white",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive holds many paintings in which Light Lavender covers 1 per cent of the canvas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Lavender is violet plus white, and Light Lavender adds still more white."
+ ],
+ "words": 177,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

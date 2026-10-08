@@ -1,0 +1,235 @@
+{
+ "slug": "apple",
+ "name": "Apple",
+ "hex": "#6ECB3C",
+ "names": [
+  "Apple"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Apple is a bright, fresh green named for a fruit that most often is not that color; behind the name lies an older color word, apple green, which began as a pale gray-green in natural-history charts.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color named for the wrong fruit",
+   "body": "The swatch on this page comes from a 2010 survey of color names, not from a dictionary or a paint chart [11]. It is a vivid yellowish green, closest to the ISCC-NBS block called vivid yellowish green, 5.7 units away [11]. Its nearest named neighbors are [[apple-green]], [[fresh-green]] and [[lime-green]], all within about four and a half units [11].\n\nThe name suggests a green apple, the kind sold as [[granny-smith-apple]]. Apples in the books, though, stand for other colors: red for temptation and poison, gold for the fruit of the Hesperides [1][2]. A green apple, Pastoureau stresses, was in the Middle Ages simply a sour apple, and not a poisoned one [1]. In the fairy tale the poisoned apple is red, because feudal poisons were red or black, and green poison came into fashion only in the late Middle Ages [1]. The tree of knowledge became an apple tree in the temperate West chiefly because the Latin word for apple, *malum*, sounds exactly like the word for evil [1]."
+  },
+  {
+   "id": "werner",
+   "title": "Apple green in the old charts",
+   "body": "The name apple green is a color term of natural history. In Werner's scheme of colors, as published in Syme's edition of 1821, Apple Green is number 52 among the greens [3]. It was defined as emerald green mixed with a little greyish white [3]. For examples Werner and Syme gave the underside of the wings of the green broom moth, and the mineral chrysoprase [3]. Our library keeps that swatch: a quiet gray-green near [[sage]], 74 in lightness but only 19 in chroma [11].\n\nThe same name was already in circulation among flower painters. The manual of George Brookshaw used apple green, sap green and grass green among 20 color names that Syme later took over [3]. Syme's chart builds indigo blue from Berlin blue, a touch of black and a measure of apple green [3].\n\nNot everyone liked the name. A nineteenth-century medical author quoted by Baty complained that apple green resembles the bark of the tree, not the fruit, and called it a name apt to mislead [3]. Paterson's dictionary of colour describes chrysoprase as a bright golden green or an apple green [4], and gives [[chartreuse]] as a pale apple green with a yellow tinge, though the web color of that name, #7FFF00, is far brighter [4]. Today's apple greens therefore run from the quiet Werner gray-green to this vivid survey green [4][11]. Our library dates the first record of apple green to 1648, in the Maerz and Paul dictionary [11]."
+  },
+  {
+   "id": "cezanne",
+   "title": "Cézanne and the polychromatic green",
+   "body": "Pastoureau calls Cézanne the painter of apples par excellence [1]. In *Green Apples*, painted around 1873 and now in the Musée d'Orsay, the fruit holds white, blue, yellow, brown, gray, red and black, with a trace of purple besides [1]. The lesson is the reverse of the swatch: a green apple is not one green, but a field of related colors, from [[yellow]]-green highlights to red-brown shadows. In the paintings of [[painter:paul-cezanne|Cézanne]], the apples can assume any color, as Pastoureau puts it, and still read as green [1]."
+  },
+  {
+   "id": "modern",
+   "title": "Mondrian and the logo",
+   "body": "Gage observes that Mondrian, who disliked green for its association with nature, turned in several paintings of about 1920 to a greenish yellow, at times an apple green, to serve as his third primary [5]. That puts apple green in an odd position, as a bridge between the yellow and the green of Ostwald's primaries [5].\n\nBatchelor mentions the Apple Computer logo, a partially eaten apple striped in spectrum colors that begin with green at the top and end with blue [6]. The designer, he notes, used six colors where Newton divided the spectrum into seven to match the musical scale [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, the swatch fills five per cent of the canvas or more, within six units, in one painting only: Gauguin's [[painting:commons-Q79790701|Mother and Child under a Tree at Pont-Aven]], from 1886 [12]. That is rarer than 86 per cent of named colors [12]. Photographs of aged, varnished paintings are not pigment tests, so the count describes the archive, not every apple painted.\n\nOutside paintings, the closest twins are the green gem [[gem:peridot|peridot]] and the arsenic-green dresses of the Victorian fashion data, each 6.7 units away [13]. In printed English, *apple* as a color adjective peaks in the 1910s [14]. To see the difference between the two apples, set a Granny Smith beside a greyed Werner swatch of apple green: the fruit is far more saturated, which is what the survey swatch records [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the apple fruit; Apple Green is an older natural-history color term",
+   "first_recorded": "apple green 1648 (Maerz and Paul); Apple as a swatch name 2010 (xkcd survey)",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "Apple Green",
+   "Green Apple"
+  ],
+  "siblings": [
+   "apple-green",
+   "green-apple",
+   "granny-smith-apple"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "apple-green",
+    "gloss": "the old Werner color, a pale gray-green, not this bright survey green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6ECB3C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "top_paintings": [
+   "commons-Q79790701"
+  ],
+  "measured": {
+   "lch": [
+    73.8,
+    79.1,
+    131.0
+   ],
+   "iscc": {
+    "block": 129,
+    "name": "vivid yellowish green",
+    "de": 5.7
+   },
+   "nearest": [
+    [
+     "Apple Green",
+     2.5
+    ],
+    [
+     "Fresh Green",
+     3.6
+    ],
+    [
+     "Lime Green",
+     4.4
+    ]
+   ]
+  },
+  "twin": {
+   "gems": [
+    "Peridot",
+    6.7
+   ],
+   "fashion": [
+    "Arsenic green dresses",
+    6.7
+   ]
+  },
+  "ngram": {
+   "term": "apple",
+   "adj_peak": 1910
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Green, epub sections 18, 25 and 41",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, epub section 11 (golden apples of the Hesperides)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 18-34, 148, 159, 165, 220 (Werner, Syme and Brookshaw charts)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"chrysoprase\" and \"chartreuse\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 262",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub library and color graph: Apple (xkcd 2010), Apple Green (Werner 52; Maerz and Paul)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub color graph twins for Apple",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"apple\", adjective use",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Werner's scheme, how was Apple Green described?",
+   "choices": [
+    "Emerald green mixed with a little greyish white",
+    "A vivid lime",
+    "Pure chlorophyll green",
+    "A pale yellow-green"
+   ],
+   "answer": "Emerald green mixed with a little greyish white",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in medieval stories a green apple was a poisoned apple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does a Cézanne green apple look like many colors up close?",
+   "choices": [
+    "It holds white, blue, yellow, brown, gray, red, black and a little purple",
+    "The varnish has changed it",
+    "Apples are really red",
+    "He used only one green"
+   ],
+   "answer": "It holds white, blue, yellow, brown, gray, red, black and a little purple",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Apple green began as a gray-green in a natural-history chart; the bright swatch is a 2010 survey color.",
+  "A green apple in a medieval tale is merely sour; the poisoned apple is red."
+ ],
+ "words": 757,
+ "status": "checked",
+ "checked": {
+  "by": "epic batch 16 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Baty critique of apple green attributed to an unnamed 19th-century medical author (context uncertain).",
+   "Maerz and Paul 1648 date comes from our library note, not read in the book.",
+   "Swatch (xkcd 2010) differs from the Werner color; stated."
+  ]
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "slug": "periwinkle-blue",
+ "name": "Periwinkle Blue",
+ "hex": "#8F99FB",
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Periwinkle blue is a light purplish blue, the shade named after the periwinkle flower.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower's blue",
+   "body": "Paterson defines periwinkle as a purplish blue and periwinkle blue as a light purplish blue [1]. St Clair's glossary agrees on the flower: periwinkle there is a lilac-blue, named for the plant [2]. Paterson also lists *pervenche blue* beside it among the blues, a neighboring name for the same idea [3].\n\nThe books give no maker, pigment or date for the compound name [1][2][3]. In our library the earliest source that carries it is the ISCC-NBS dictionary of 1955, which places the swatch in the brilliant purplish blue block [4]. The word periwinkle itself peaks in printed English in the 2010s [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #8F99FB sits between [[periwinkle]] and [[lavender]] in feel, bluer than the second and lighter than a true [[royal-blue]] [4]. In our archive of 23,781 paintings, 4 have it covering at least 5% of the canvas, among them Bonnard's *Vue panoramique, Le Cannet* of 1924 and Piero della Francesca's portrait of Battista Sforza [6]. Those are photographs of varnished paintings, so the colors are as photographed [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the periwinkle flower",
+   "first_recorded": "ISCC-NBS 1955 in our sources",
+   "source": "Paterson, p. 304; St Clair, glossary"
+  },
+  "aka": [
+   "pervenche blue (a neighboring name)"
+  ],
+  "siblings": [
+   "periwinkle",
+   "lavender",
+   "royal-blue",
+   "lilac"
+  ],
+  "parent": "periwinkle",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8F99FB",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 4,
+  "iscc_nbs": "brilliant purplish blue"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"periwinkle\", \"periwinkle blue\", p. 304",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Periwinkle\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, the blues list, p. 481",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What flower gives periwinkle its name?",
+   "choices": [
+    "The periwinkle",
+    "The violet",
+    "The bluebell",
+    "The iris"
+   ],
+   "answer": "The periwinkle",
+   "kind": "pick"
+  },
+  {
+   "q": "How does Paterson describe periwinkle blue?",
+   "choices": [
+    "A light purplish blue",
+    "A dark greenish blue",
+    "A pale yellow",
+    "A grey-brown"
+   ],
+   "answer": "A light purplish blue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Periwinkle blue is a flower's name for a light purplish blue."
+ ],
+ "names": [
+  "Periwinkle Blue"
+ ],
+ "status": "checked",
+ "words": 177,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against fact card and book text; no changes."
+  ]
+ }
+}

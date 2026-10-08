@@ -1,0 +1,139 @@
+{
+ "name": "Verdure",
+ "hex": "#235F41",
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Verdure is an old word for the greenness of growing plants, and the swatch is a deep, shaded forest green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The greenness of plants",
+   "body": "A dictionary of colour defines verdure as greenness of vegetation, or the color of vegetation, with *verdurous* meaning rich in green [1]. It belongs with French *verdeur* and *vert*, which descend from Latin *viridis* [2].\n\nThe word has always carried praise. A medieval writer quoted by Pastoureau calls the verdure of blossoming fields and leafy trees the most pleasant thing in the world [3]. He separates that pure natural green from the less noble green of dyers and painters [3]. Jean Robertet's poem, in the same book, has Green speak as a color that delights in perfect verdure and belongs only to joyful people [2]. Birren uses the word plainly, for the overhanging plant cover that a turtle is said to avoid [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is a dark blue-green. In our archive of 23,781 paintings, 31 hold it as a large enough patch (0.13 per cent), as photographed [5]. Most of its weight sits in shadows, 55 per cent against 13 per cent in highlights [5]. It is rare overall but strongly tied to one painter: Paul Gauguin has it in 3 of his 50 paintings here, about 46 times the archive's rate, and Post-Impressionism as a movement shows it about 34 times more often than average [5]. Aged varnish darkens greens, so part of that depth is the photograph."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "not recorded here",
+   "source": "Paterson, A Dictionary of Colour, \"verdure\""
+  },
+  "aka": [],
+  "siblings": [
+   "forest-green",
+   "pine-green",
+   "bottle-green",
+   "dark-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "verdeur, verdure"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#235F41",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 31,
+  "rate": 0.0013,
+  "role": {
+   "shadow": 0.55,
+   "mid": 0.32,
+   "highlight": 0.13
+  },
+  "top_paintings": [
+   "commons-Q76627696",
+   "cma-149410",
+   "cma-124801"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"verdure\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 30 (\"The colors of the poet\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 29 (\"Heraldic green\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, color match within delta-E 6, 5 per cent cover, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does verdure mean in the color dictionary?",
+   "choices": [
+    "The greenness of vegetation",
+    "A copper green pigment",
+    "A shade of dark blue"
+   ],
+   "answer": "The greenness of vegetation",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter holds this swatch about 46 times more often than the archive average?",
+   "choices": [
+    "Gauguin",
+    "Vermeer",
+    "Monet"
+   ],
+   "answer": "Gauguin",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Verdure meant the greenness of fields and trees long before anyone named a paint after it."
+ ],
+ "slug": "verdure",
+ "names": [
+  "Verdure"
+ ],
+ "status": "checked",
+ "words": 233,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Robertet cite corrected to [2]",
+   "etymology reworded to match Pastoureau",
+   "removed unsupported Old French origin"
+  ]
+ }
+}

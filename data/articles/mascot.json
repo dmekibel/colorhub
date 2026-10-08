@@ -1,0 +1,118 @@
+{
+ "slug": "mascot",
+ "name": "Mascot",
+ "hex": "#202D47",
+ "names": [
+  "Mascot"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Mascot is a very dark navy blue from Maerz and Paul's 1930 dictionary, and the reason for its name is undocumented.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a color dictionary",
+   "body": "Mascot appears in our library from one source only, Maerz and Paul's *Dictionary of Color*, which gives 1892 as its first recorded year and places it on plate 40 [1]. Neighbors on the same plate include Musketeer, dated 1920, and Romany, dated 1928 [1]. Mascot and Romany carry the same plate address, 40 E 12, in our data, which we cannot explain [1].\n\nWhy the color is called Mascot is unrecorded in the books we hold [2]. The word appears once in their text, in a passage about the acid-yellow smiley, called an informal mascot of rave culture [2]. It has nothing to do with this color."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The nearest named colors are [[navy]], [[midnight-blue]] and [[indigo]], and [[slate]] is also close [1]. In our archive of 23,781 paintings, 133 (0.56 per cent) hold a color within six units over at least five per cent of the canvas [3]. The 1900s hold 27 of them, 2.9 times the archive rate [3]. These are photographs of aged, varnished paintings, so a match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1892 (Maerz & Paul 1930)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "navy",
+   "midnight-blue",
+   "slate"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#202D47",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 133,
+  "top_paintings": [
+   "commons-Q59710243",
+   "commons-Q21727934",
+   "smk-KMS3427"
+  ],
+  "rate": 0.0056,
+  "peak_century": {
+   "key": 1900,
+   "hits": 27,
+   "n": 1674,
+   "lift": 2.88
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Acid yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dictionary is the only source for Mascot in our library?",
+   "choices": [
+    "Maerz and Paul's",
+    "Ridgway's",
+    "Paterson's",
+    "Munsell's"
+   ],
+   "answer": "Maerz and Paul's",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books explain that Mascot was named for a team mascot.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mascot the color has no recorded origin; the one book mention of the word is about a smiley face."
+ ],
+ "words": 192,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported 'probably misfiled' guess about plate address"
+  ]
+ }
+}

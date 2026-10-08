@@ -1,0 +1,111 @@
+{
+ "slug": "dull-lavender",
+ "name": "Dull Lavender",
+ "hex": "#C5B3BD",
+ "names": [
+  "Dull Lavender"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dull Lavender is a pale, greyed pinkish lilac, the sort of color that sits on the edge between a purple and a neutral.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name goes back to Ridgway's color atlas of 1912, where a plate shows it, and it was carried into the ISCC-NBS system of 1955 [1]. It belongs to the neutrals in our library, a lilac with most of its chroma taken out [1]. Its nearest named neighbor is [[thistle]], about 7 units away, and it is also close to [[old-lavender]] and [[mountbatten-pink]] [1].\n\nSt Clair describes the paint of ships on the Cape Town run, whose hulls were an indeterminate dull lavender-gray-pink, set against scarlet funnels and white decks [2]. The same passage then turns to Lord Mountbatten aboard HMS Kelly [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive a color near this swatch appears in 55 of 23,781 paintings, or 0.23 per cent, and it most often plays the lightest tone in a painting [3]. [[painter:john-singer-sargent|Sargent]] has it in 5 of his 287 works here, 4.5 times the baseline of the museums those works come from [3]. It is most over-represented in the United States, at 3.6 times [3]. These are photographs of aged paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "lavender flower, dulled; Ridgway's atlas",
+   "first_recorded": "Ridgway 1912; ISCC-NBS 1955",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "greyed lavender"
+  ],
+  "siblings": [
+   "thistle",
+   "lavender",
+   "old-lavender",
+   "mountbatten-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 55,
+  "pct_archive": 0.23,
+  "match": {
+   "hex": "#C5B3BD",
+   "de2000": 4
+  },
+  "role": "light",
+  "top_painter": "John Singer Sargent"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. \"Mountbatten Pink\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color were the hulls of the ships St Clair describes?",
+   "choices": [
+    "An indeterminate dull lavender-gray-pink",
+    "Black",
+    "Bright green"
+   ],
+   "answer": "An indeterminate dull lavender-gray-pink",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter is most devoted to this color in our archive?",
+   "choices": [
+    "Sargent",
+    "Monet",
+    "Vermeer"
+   ],
+   "answer": "Sargent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Some ship hulls were painted an indeterminate lavender-gray-pink long before it was a naval camouflage shade."
+ ],
+ "words": 200,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'nearly identical' overstated",
+   "removed unverified Mountbatten-pink naming claim"
+  ]
+ }
+}

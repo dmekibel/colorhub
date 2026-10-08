@@ -1,0 +1,145 @@
+{
+  "slug": "azul",
+  "name": "Azul",
+  "hex": "#1D5DEC",
+  "names": [
+    "Azul"
+  ],
+  "tier": "commercial",
+  "depth": "medium",
+  "lede": "Azul is simply the Spanish and Portuguese word for blue, used here as the name of a saturated medium blue from a 2010 online color survey.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A word for blue",
+      "body": "*Azul* is the Spanish and Portuguese word for blue [1]. As a color name in our library it comes from the xkcd color survey of 2010, where it labels a strong, slightly violet blue close to [[royal-blue]] [3]. Our measured nearest named color is Royal Blue, 4.2 units away on the CIEDE2000 scale [3].\n\nThe Pigment Compendium follows the family of words (Old French *azur*, Old Spanish *azur*, Spanish and Portuguese *azul*, Italian *azzurro*) back to Arabic and Persian words that are taken to mean lapis lazuli, the blue stone [2]. The initial *l* was dropped in the Romance languages, apparently along with the Arabic article, and that is the conventional view rather than a proven one [2]. It is also the route by which [[azure]] and [[lapis-lazuli]] share a root with *azul* [2]."
+    },
+    {
+      "id": "pigments",
+      "title": "Azul in the pigment trade",
+      "body": "Old pigment names show that *azul* was never one material. *Azul baxo* is cited, on the authority of Veliz, as a low grade of azurite, and it appears in the Spanish treatise of Carducho from 1633 [2]. *Cenizas de azul*, \"blue ashes\", is among the names for blue copper carbonate pigment, the verditer family [2]. *Azorium romanum* is listed as a historical term for [[indigo]] [2].\n\nAcross these entries the word names a blue, not one mineral or dye, so a buyer needed the grade and source to know what was in the pot [2]."
+    },
+    {
+      "id": "blood",
+      "title": "Blue blood",
+      "body": "Paterson explains the Spanish phrase *sangre azul* as pure Spanish ancestry with no Moorish blood [1]. Pastoureau, writing on whiteness, ties French blue blood to aristocrats keeping their skin pale to stand apart from sun-browned peasants [4]. The books give different stories, so treat each as a proposal rather than a settled origin."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Azul is a survey name, not a historic one, and our data reflects that. No painting among the 23,781 in our archive has this color across at least 1% of its canvas, as photographed [3]. That describes our archive of museum paintings, not painting as a whole.\n\nIts nearest named neighbors are royal blue and [[cobalt-blue]], with [[cerulean]] on the lighter side [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the Spanish and Portuguese word for blue",
+      "first_recorded": "xkcd color survey, 2010 (as a color name in our library)",
+      "source": "xkcd"
+    },
+    "aka": [
+      "Spanish blue word"
+    ],
+    "siblings": [
+      "azure",
+      "royal-blue"
+    ],
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "azure",
+        "gloss": "same word family, but a lighter sky blue"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "es",
+        "name": "azul (blue)"
+      }
+    ]
+  },
+  "field": {
+    "dataset": "23,781 paintings",
+    "n_present": 0,
+    "match": {
+      "hex": "#1D5DEC",
+      "min_cover": "1% of canvas"
+    },
+    "nearest": "Royal Blue",
+    "de2000": 4.2
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 66 (\"blue-bloodied\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, pp. 45-46 and p. 399 (azul, azure, azul baxo, azorium romanum)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "Colorhub data, library.json: xkcd list (2010), nearest-name and archive presence",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pastoureau, Le petit livre des couleurs, ch. 7 (Le blanc)",
+      "loc_kind": "book-chapter",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Where does the word azul trace back to?",
+      "choices": [
+        "Words for lapis lazuli, the blue stone",
+        "The Latin word for sea",
+        "A Greek word for sky"
+      ],
+      "answer": "Words for lapis lazuli, the blue stone",
+      "kind": "pick"
+    },
+    {
+      "q": "Azul baxo was a pigment name for a low grade of what?",
+      "choices": [
+        "Azurite",
+        "Lapis lazuli",
+        "Smalt"
+      ],
+      "answer": "Azurite",
+      "kind": "pick"
+    },
+    {
+      "q": "Azul in a 1600s Spanish workshop named one exact mineral.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Azul, azure and lapis lazuli share one ancient root: the word for a blue stone.",
+    "In 1633 a Spanish treatise listed azul baxo, a low grade of azurite."
+  ],
+  "words": 362,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Fixed stray punctuation; claims verified against Pigment Compendium pp.45-46, Paterson p.66 and Pastoureau Le petit livre."
+    ]
+  }
+}

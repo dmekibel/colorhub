@@ -1,0 +1,103 @@
+{
+ "slug": "oatmeal",
+ "name": "Oatmeal",
+ "hex": "#D1C2B3",
+ "names": [
+  "Oatmeal"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Oatmeal is a pale, warm grey-beige named for the food, and a color that old dictionaries and modern standards describe from opposite sides.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines oatmeal as a greyish-yellow colour [1]. His colour tables file it among the yellows [1]. The name is that of the ground oat cereal, and our sources do not say when it became a color word; the earliest dated entry in the library is Ridgway's 1912 color atlas [2].\n\nThe library's standard, ISCC-NBS block 57, calls this swatch a \"yellowish gray\" [2]. So one source reads it as a grey-ish yellow and the other as a yellow-ish grey, which tells you how little separates the two: it is a quiet warm neutral, in the same family as [[beige]] and [[buff]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 1,420 carry a color within six units of this swatch over at least five per cent of the canvas, as photographed [3]. That is more common than 90 per cent of the named colors [3]. Inside a painting it most often plays a light, in 53 per cent of the 1,031 paintings where we measured its rank [3].\n\nThe paintings where it covers most of the canvas include Ike Taiga's *Group Pilgrimage to the Jizo Nun* and Wu Bin's *The Five Hundred Arhats*, both works on paper or silk [3]. Much of this color is likely the tone of the aged support, not a paint [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the ground oat cereal",
+   "first_recorded": "Ridgway, 1912 (as a color term in our library)",
+   "source": "Paterson, p. 282"
+  },
+  "aka": [
+   "oat color"
+  ],
+  "siblings": [
+   "beige",
+   "buff",
+   "linen",
+   "wheat"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1420,
+  "iscc_nbs": "block 57, yellowish gray",
+  "role": "light (53% of 1,031)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 282, 504, \"oatmeal\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson describe oatmeal?",
+   "choices": [
+    "A greyish-yellow colour",
+    "A dark reddish brown",
+    "A bluish green"
+   ],
+   "answer": "A greyish-yellow colour",
+   "kind": "pick"
+  },
+  {
+   "q": "In our painting archive, oatmeal is more common than 90 per cent of named colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Oatmeal turns up in 1,420 of the 23,781 paintings in our archive, more often than 90 per cent of named colors."
+ ],
+ "words": 231,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

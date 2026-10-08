@@ -1,0 +1,109 @@
+{
+ "slug": "saratoga",
+ "name": "Saratoga",
+ "hex": "#E0A25B",
+ "names": [
+  "Saratoga"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Saratoga is a warm orange-yellow listed in the Maerz and Paul dictionary of 1930; the books say nothing about where the name came from.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a story",
+   "body": "The word Saratoga appears in one of our books only as part of a painting's title, *Crew Race, Saratoga, 2005*, so it tells us about a place and nothing about a color [1]. No book we hold explains the color name.\n\nWhat the record shows is narrower. The Maerz and Paul dictionary lists Saratoga at plate 11, block J 8, and the library gives 1922 as its first recorded use [2]. The 1955 ISCC-NBS system, which cited the Maerz and Paul names, files this swatch under \"moderate orange yellow\", only 2.8 CIEDE2000 units away [2]. The word may be a place name, but our sources do not say so, and we do not claim it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Saratoga is fairly common as a painted color [3]. It appears in 680 of 23,781 paintings in our archive, 2.86 per cent, more often than 83 per cent of the named colors [3]. In 71 per cent of the 519 paintings where the within-painting lens finds it, it plays an accent [3].\n\nIt peaks in the 1300s, at 5.2 per cent of the 251 paintings from that century, 2.6 times the museums' baseline [3]. It is most over-represented in Indian paintings, at 3.0 times the expected rate, and it shares canvases with [[copper]] and [[ochre-yellow]] more than chance would predict [3]. Its most devoted painter is Pietro Perugino, in 5 of his 16 works here [3]. These are photographs of aged, varnished paintings, so the match shows a look-alike hue and not a pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1922 (Maerz and Paul)",
+   "source": "Maerz & Paul 1930, plate 11 J 8"
+  },
+  "aka": [],
+  "siblings": [
+   "copper",
+   "ochre-yellow",
+   "sand-yellow",
+   "amber"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 680,
+  "pct": 2.86,
+  "peak": "1300s",
+  "iscc": {
+   "name": "moderate orange yellow",
+   "de": 2.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 74 (a painting caption)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances to ISCC-NBS names; Maerz & Paul 1930, plate 11 J 8",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); at least 2% of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does our book evidence say about the origin of the color name Saratoga?",
+   "choices": [
+    "Nothing; it is undocumented",
+    "It names a Persian dye",
+    "It honors a painter",
+    "It came from a pigment maker"
+   ],
+   "answer": "Nothing; it is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "Which role does Saratoga most often play inside a painting in our archive?",
+   "choices": [
+    "An accent",
+    "The sky",
+    "The deepest shadow",
+    "The ground"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Saratoga is in 680 museum paintings in our archive, mostly as an accent.",
+  "The name is first recorded in 1922, but no book says where it came from."
+ ],
+ "words": 271,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

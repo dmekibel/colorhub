@@ -1,0 +1,115 @@
+{
+ "slug": "samara",
+ "name": "Samara",
+ "hex": "#285352",
+ "names": [
+  "Samara"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Samara is a dark bluish green from Maerz and Paul's color dictionary; our books say nothing about it, and the one book hit is an artist's first name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary name",
+   "body": "Maerz and Paul recorded Samara in 1922 and published it in their 1930 dictionary, and ISCC-NBS later filed it as a dark bluish green [2]. The origin of the word is undocumented in our sources, so we give none [2]. Related colors are [[green]], [[teal]], [[pine-green]] and [[hooker-s-green]] [2]."
+  },
+  {
+   "id": "books",
+   "title": "What the books say",
+   "body": "Nothing about the color. The only book hit is a caption naming the Australian artist Samara Adamson-Pinczweski, quoted on iridescent paint [1]. That is a person's name, not the color, so we leave it out of the history [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the archive it appears in 0.75% of paintings (179), as photographed [3]. Most often it is a hidden color in the painting, and it peaks in the 1900s at 2.7 times the expected rate [3]. Renoir is its most devoted painter here, in 5 of 50 works [3]. It is most over-represented in French paintings [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "Maerz & Paul, first recorded 1922",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "teal",
+   "pine-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 179,
+  "measured": {
+   "lch": [
+    32.4,
+    15.7,
+    194.9
+   ],
+   "iscc": "dark bluish green"
+  },
+  "first_record": {
+   "year": 1922,
+   "source": "Maerz & Paul"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 223",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, Samara: Maerz & Paul 1930, plate 30 L 5; ISCC-NBS",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Samara",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter is most devoted to Samara in our archive?",
+   "choices": [
+    "Renoir",
+    "Monet",
+    "Rembrandt",
+    "Vermeer"
+   ],
+   "answer": "Renoir",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our books explain where the color name Samara comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Renoir uses Samara in 5 of 50 works in our archive, as photographed."
+ ],
+ "words": 169,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

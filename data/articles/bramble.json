@@ -1,0 +1,118 @@
+{
+ "slug": "bramble",
+ "name": "Bramble",
+ "hex": "#39344C",
+ "names": [
+  "Bramble"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Bramble is a dark, purple-tinged near-black named for the blackberry bush; the books know the plant far better than the color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A thorny plant",
+   "body": "Brambles, the thorny blackberry thickets, turn up in the color books only as plants. Medieval Marian writers used the Song of Solomon image of a lily among brambles to picture the Virgin among maidens [1]. The poet and gardener Derek Jarman lists brambles in autumn among the colors of his garden year [2]. Finlay notes that stylish women had their diamonds reset in platinum, with bramble patterns among the natural motifs [3].\n\nNone of these sources describes a bramble color, so the origin of this name as a swatch is undocumented. The dark purple here is a modern name, near [[black]] and [[indigo]], and close to [[cannon]] in darkness."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a painted color, bramble is moderately common. It appears in 0.38% of the 23,781 paintings in our archive (90 paintings, as photographed), more often than 52% of the named colors [4]. It peaks in the 1900s, at 2.6 times the rate expected from the museums' own baseline [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the blackberry bush",
+   "first_recorded": "origin undocumented",
+   "source": "Pastoureau, White, p. 88; Jarman, Chroma, p. 39"
+  },
+  "aka": [],
+  "siblings": [
+   "black",
+   "indigo",
+   "midnight-blue"
+  ],
+  "parent": "black",
+  "children": [
+   "cannon"
+  ],
+  "disambiguation": [
+   {
+    "slug": "cannon",
+    "gloss": "another near-black, unrelated name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 90,
+  "peak_decade": "1900s",
+  "baseline_lift": 2.6
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 88",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 39",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the books, brambles appear mainly as what?",
+   "choices": [
+    "Plants and images",
+    "A named pigment",
+    "A dye bath"
+   ],
+   "answer": "Plants and images",
+   "kind": "pick"
+  },
+  {
+   "q": "In which decade does bramble peak in our painting archive?",
+   "choices": [
+    "The 1900s",
+    "The 1500s",
+    "The 1700s"
+   ],
+   "answer": "The 1900s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Brambles are a medieval image of the Virgin among maidens, though no one painted that in this color."
+ ],
+ "words": 177,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Dropped 1910s jeweler attribution (Finlay says stylish women ordered resettings)",
+   "Softened unsourced neighbor/value comparison"
+  ]
+ }
+}

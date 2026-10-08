@@ -1,0 +1,130 @@
+{
+ "slug": "auburn",
+ "name": "Auburn",
+ "hex": "#80543C",
+ "names": [
+  "Auburn"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Auburn is a reddish brown used above all for hair, and it began as a word for something paler: a yellowish or brownish white.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word that changed color",
+   "body": "The word comes from the Latin *albus*, white, and first described a yellowish or brownish white [1]. Its meaning moved in the sixteenth century, perhaps helped by a spelling in *abrun*, which looks like \"brown\" [1]. St Clair agrees on the shift from a pale off-white to a deeper ruddy brown across the sixteenth and seventeenth centuries [2].\n\nThe modern word is used mostly of hair: a brownish red, sometimes golden brown [1]. The swatch here is a mid reddish brown, close to [[russet]] and [[chestnut]] and lighter than [[mahogany]]."
+  },
+  {
+   "id": "hair",
+   "title": "Hair, and the trouble with shades",
+   "body": "Redheads are often described by a vocabulary of near-synonyms, and St Clair notes how elusive the exact shade of a famous redhead's hair is, called strawberry blonde in one portrait, red-gold in another and coppery auburn in a third [2]. Auburn is one point on that scale, not a fixed color.\n\nOne medieval note is worth knowing: Pastoureau's discussion of knights' epithets glosses a *roux* knight, translated there as auburn, as treacherous and hypocritical [3]. That is a literary stereotype of red hair, not a description of a dye."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Ball describes the young Turner's early *Fisherman at Sea* as dominated by light seeping through auburn and violet storm clouds [4]. The word is the author's description of the colors, so it names an impression, not a pigment. For a pigment-based neighbor look at [[sienna]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds the color in 2,200 of 23,781 paintings, about 9 percent [5]. It is most over-represented in the 1200s, where it is found in 22 of 142 paintings, about 3 times the museums' baseline [5]. The most devoted painter is George Catlin, in 9 of 50 works here [5]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin albus (white); sense shifted in the 1500s",
+   "first_recorded": "undocumented in our sources",
+   "source": "Paterson, A Dictionary of Colour, \"auburn\""
+  },
+  "aka": [
+   "reddish brown hair color"
+  ],
+  "siblings": [
+   "russet",
+   "chestnut"
+  ],
+  "parent": null,
+  "children": [
+   "mahogany"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2200,
+  "pct": 9.25,
+  "peak_century": 1200,
+  "painter": "George Catlin"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"auburn\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 49",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, notes on heraldic epithets",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, field notes for Auburn",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the word auburn come from?",
+   "choices": [
+    "Latin for white",
+    "A French town",
+    "Arabic for brown"
+   ],
+   "answer": "Latin for white",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: auburn originally meant a reddish brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Auburn began as a word for a yellowish white and ended up meaning reddish brown."
+ ],
+ "words": 307,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against sources; no changes"
+  ]
+ }
+}

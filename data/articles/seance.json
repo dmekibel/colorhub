@@ -1,0 +1,112 @@
+{
+ "name": "Seance",
+ "hex": "#612086",
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Seance is a deep violet whose name is a word for a sitting, usually a spirit-medium's.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no recorded story",
+   "body": "None of the 29 books in our reference set uses it as a color name; the hits are the French word *séances* inside journal citations [1]. Who first applied the word to this violet is undocumented in our sources. Rather than guess at a story, we leave it blank [1]. The word itself is French for a sitting, and its use for a spirit-medium's meeting is a separate matter from the color [1]. Any link between the two would be our inference, not a recorded fact [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is #612086, a dark, saturated violet [2]. It sits near [[purple]] and [[violet]], darker and bluer than [[wisteria]] and [[mauve]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our name graph records Seance with ISCC-NBS 1955 as the earliest source date, plus a wiki list entry [2]. No painting in our archive of 23,781 has this color covering at least 1 per cent of its canvas, within a CIEDE2000 distance of 4, as photographed [3]. That describes this archive, not painting as a whole [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "ISCC-NBS 1955 in our name graph",
+   "source": "ColorHub name graph"
+  },
+  "aka": [],
+  "siblings": [
+   "purple",
+   "violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "séance (a sitting)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "sources": "ISCC-NBS 1955, wiki"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Concordance check of 29 color books: only \"séances\" in citations (Pastoureau, Green, ch. 48; Pigment Compendium, p. 492)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub name graph, source dates",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Do our reference books say who named this color?",
+   "choices": [
+    "No, the origin is undocumented",
+    "Yes, a Victorian dyer",
+    "Yes, Newton"
+   ],
+   "answer": "No, the origin is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Seance is darker than Wisteria.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Not every color name has a story, and this one has none on record."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "slug": "seance",
+ "names": [
+  "Seance"
+ ],
+ "status": "checked",
+ "words": 175
+}

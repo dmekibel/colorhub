@@ -1,0 +1,169 @@
+{
+ "slug": "baryta-yellow",
+ "name": "Baryta Yellow",
+ "hex": "#E2CF8F",
+ "names": [
+  "Baryta Yellow"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Baryta yellow is barium chromate, a dull greenish yellow pigment with a heap of trade names; the swatch in our library is a pale straw that stands for it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One compound, many names",
+   "body": "The Pigment Compendium says baryta yellow is Heaton's 1928 synonym for barium chromate [1]. The same pigment was sold as barium yellow, lemon yellow, permanent yellow, Steinbuhl yellow, ultramarine yellow and yellow ultramarine [2].\n\nBooks disagree over some of those names. Rose (1916) gives Steinbuhl yellow as a synonym for baryta yellow, but Kuhn and Curran add that in Germany the name was also applied to calcium chromate [3]. Jannicke (1893), Linke and Adam (1913) and Rose all say it is wrong to call barium chromate ultramarine yellow [4]."
+  },
+  {
+   "id": "material",
+   "title": "Not the baryta white",
+   "body": "Barium chromate is a different material from baryte, the barium sulfate used as a white filler [5]. In the 1940s the National Lead Company developed a barium potassium chromate for anti-corrosion paint [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The library records the color from Ridgway's 1912 atlas, the 1955 ISCC-NBS system and Maerz and Paul's 1930 dictionary, and its near-twin there is Chartreuse Yellow, about one unit away [7]. The swatch is a pale straw, nearest to [[beige]] among everyday names [7]. A flat swatch cannot show the greenish cast the Colour Index gives the pigment ('dull, greenish yellow'), and the sources give no color values for it [2][7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This pale yellow is common in museum paintings: 665 of 23,781, or 2.8 per cent, hold it over at least five per cent of the canvas [8]. It peaks in the 1840s, in 44 of 699 paintings, and Turner carries it in 4 of 14 [8]. Because it is a pale straw that also describes aged varnish, the match is not evidence of the pigment, and these are photographs, not tests [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "baryta, the old name for barium oxide and its compounds",
+   "first_recorded": "undocumented in the sources read",
+   "source": "Pigment Compendium, 'baryta yellow'"
+  },
+  "aka": [
+   "barium yellow",
+   "permanent yellow",
+   "Steinbuhl yellow",
+   "lemon yellow"
+  ],
+  "siblings": [
+   "barium-yellow",
+   "lemon-yellow"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#E2CF8F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 665,
+  "painters": [
+   [
+    "Joseph Mallord William Turner",
+    4,
+    14,
+    10.22
+   ]
+  ],
+  "nearest": [
+   "Beige",
+   6.7
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 53, 'baryta yellow'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 49, 'barium chromate'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 365, 'Steinbuhl yellow'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 390, 'ultramarine yellow'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 53, 'baryte'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 49, 'barium potassium chromate'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Ridgway 1912 pl. IV, ISCC-NBS 1955 block 86, Maerz & Paul 1930; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); data/graph/fieldnotes/b.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which compound is baryta yellow?",
+   "choices": [
+    "Barium chromate",
+    "Barium sulfate",
+    "Lead white",
+    "Cadmium sulfide"
+   ],
+   "answer": "Barium chromate",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: sources agree that barium chromate should be called ultramarine yellow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "One pale yellow pigment, barium chromate, was sold under at least seven trade names."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede said pale lemon; Compendium (via Colour Index) says dull greenish yellow; fixed",
+   "Removed vague 'close cousins' lead chromate line",
+   "Swatch caveat re-cited to p.49"
+  ]
+ },
+ "status": "checked",
+ "words": 284
+}

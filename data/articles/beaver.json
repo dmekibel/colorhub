@@ -1,0 +1,146 @@
+{
+ "slug": "beaver",
+ "name": "Beaver",
+ "hex": "#9F8170",
+ "names": [
+  "Beaver"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Beaver is a light, greyish reddish brown named for the animal's fur, a color tied to the fur trade, when Europeans coveted beaver pelts for their hat industry.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the animal",
+   "body": "Beaver is a plain animal name: the color of beaver fur [1]. Paterson's dictionary lists it among the browns, and in the same book the adjective beaver-hued means colored like the animal [1]. The color also appears under that name in the Crayola list and in the ISCC-NBS system of 1955, where this swatch sits in the block called light grayish reddish brown, about 2.3 units away [2].\n\nThe neighbors are quiet and earthy: [[taupe]], [[fawn]], [[mushroom]] and [[beige]] all sit near it in lightness and chroma [2]."
+  },
+  {
+   "id": "pelts",
+   "title": "Beaver, the hat and the trade",
+   "body": "Europeans coveted beaver pelts for their hat industry, and Native North Americans bartered for them with English woolens dyed with tin and cochineal scarlet [3]. So a scarlet cloth of the fur trade was exchanged for the fur behind this brown [3].\n\nBeaver is also used in a related word. Paterson's entry for the color castor describes a dark brownish grey or light brown beaver color, and notes that the name was hoped to come from the star Castor and not from the animal's scent gland [1]. Paterson does not say how the two names are linked, and our sources leave it unresolved [1]."
+  },
+  {
+   "id": "memory",
+   "title": "Beaver as a soft brown",
+   "body": "Derek Jarman's *Chroma* finds nostalgia in brown and remembers his mother's soft beaver lamb coat, in which the family buried their tears [4]. That use is personal rather than historical [4].\n\nThe swatch is a light brown with a pink-orange cast, between [[brown]] and [[taupe]] in feel [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 748 works, or 3.2 per cent, more common than 82 per cent of the named colors [5]. It peaks in the 1900s, at 4.5 per cent of the paintings from that century [5]. It is far more common in South Asian painting than in Europe: the Nepal lift is 6.5 times the baseline, India 2.5 and Japan 1.9, with Pahari and Mughal painting leading [6].\n\nThe likely explanation is the ground of the paper, silk and cloth, not a deliberate beaver color [6]. As always these are photographs of aged paintings, so the colors are as photographed [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fur of the beaver",
+   "first_recorded": "Maerz and Paul 1930; ISCC-NBS 1955",
+   "source": "ColorHub library; Paterson, Dictionary of Colour"
+  },
+  "aka": [
+   "beaver-hued"
+  ],
+  "siblings": [
+   "taupe",
+   "fawn",
+   "mushroom",
+   "beige"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+  "match": {
+   "hex": "#9F8170",
+   "de2000": 6
+  },
+  "n_present": 748,
+  "pct_archive": 3.15,
+  "peak_century": 1900,
+  "measured": {
+   "iscc": "light grayish reddish brown",
+   "de2000": 2.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 45, 92, 465",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, countries and movements for a color within 6 units of this swatch, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did beaver fur matter to the cochineal scarlet cloth trade?",
+   "choices": [
+    "Native North Americans bartered pelts for scarlet woolens",
+    "Beaver fur was used to make cochineal",
+    "Scarlet dye came from beavers",
+    "Beaver hats were always red"
+   ],
+   "answer": "Native North Americans bartered pelts for scarlet woolens",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color is Beaver closest to in feel?",
+   "choices": [
+    "Taupe",
+    "Cobalt",
+    "Magenta"
+   ],
+   "answer": "Taupe",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Europeans coveted beaver pelts for hats, and traders paid in scarlet woolens."
+ ],
+ "words": 370,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported editorial claims (fashion, Jarman paraphrase)",
+   "Softened 'books disagree' on castor to what Paterson says"
+  ]
+ }
+}

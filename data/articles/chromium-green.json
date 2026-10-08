@@ -1,0 +1,137 @@
+{
+ "slug": "chromium-green",
+ "name": "Chromium Green",
+ "hex": "#839261",
+ "names": [
+  "Chromium Green"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Chromium green is the name of green pigments made from chromium oxide, and old catalogs also use chromium-oxide names for viridian.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two pigments, one name",
+   "body": "The Pigment Compendium treats *oxide of chromium* as a synonym for chromium oxide, an opaque green [1]. It lists *emerald oxide of chromium* and *transparent oxide of chromium* as synonyms for [[viridian]] [2][3]. So the same word can mean the opaque oxide or the transparent viridian [1][2][3].\n\nThe swatch here is a gray-olive green, #839261, from Ridgway's color book of 1912, plate XXXII [4]. Its nearest name is Moss; compare [[cadmium-green]] and [[emerald-green]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this olive green in 157 of 23,531 paintings, as photographed [5]. Alfred Sisley has it in 5, and so do Claude Monet and Georges Seurat [5]. Our archive counts color matches, not pigments, so a match here does not prove a chromium pigment was used [5]. Compare [[bottle-green]] for another deep green [5]. The swatch is a screen approximation [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "chromium, the element",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "Pigment Compendium, synonyms"
+  },
+  "aka": [
+   "oxide of chromium green"
+  ],
+  "siblings": [
+   "viridian",
+   "emerald-green"
+  ],
+  "parent": null,
+  "children": [
+   "cadmium-green",
+   "green"
+  ],
+  "disambiguation": [
+   {
+    "slug": "viridian",
+    "gloss": "the transparent hydrated chromium green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 157,
+  "measured": {
+   "lch": [
+    58,
+    28,
+    120
+   ],
+   "nearest": [
+    [
+     "Moss",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 300",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 163",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 380",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XXXII",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (23,531 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which pigment is 'transparent oxide of chromium'?",
+   "choices": [
+    "Viridian",
+    "Verdigris",
+    "Malachite",
+    "Green earth"
+   ],
+   "answer": "Viridian",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch is a clear, bluish emerald.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Chromium green can mean opaque oxide or transparent viridian."
+ ],
+ "words": 152,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed 'dull', 'bluer', 'glassy' and foliage claims not in cards."
+  ]
+ }
+}

@@ -1,0 +1,175 @@
+{
+ "slug": "sage",
+ "name": "Sage",
+ "hex": "#9CAF88",
+ "names": [
+  "Sage"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Sage is the soft, greyish green of the leaves of the sage plant; most of the times books say \"sage\" they mean a wise person, which makes the color's own record unusually thin.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The leaf",
+   "body": "Paterson defines sage-green as the greyish or yellowish green of the leaves of the sage plant, and sage-grey as a greyish olive [1][2]. Jarman's garden verse in *Chroma* lists sage among the healing herbs he planted, and adds that the plant's flowers are blue, so the color is the leaf's and not the flower's [3]."
+  },
+  {
+   "id": "two-senses",
+   "title": "Two meanings in the books",
+   "body": "Many mentions of sage in the color books are about people, not plants. Finlay quotes the twelfth-century sage Maimonides on the blue of the sea, sky and throne of God [4]. In French, *sage* means well-behaved, and Pastoureau calls blue a very *sage* color for that reason [5]. Neither has anything to do with the color; a search for the word finds mostly these [4][5]."
+  },
+  {
+   "id": "systems",
+   "title": "In color systems",
+   "body": "The library files Sage under ISCC-NBS 1955 block 120, with Ridgway's 1912 near-duplicate Mytho Green, plate XLI, a color distance (ΔE) of 1.5 away [6]. It lists two Maerz and Paul entries for the name, first recorded 1596 and 1912 [6]. Sources disagree on the swatch itself: the Wikipedia list gives #BCB88A, a yellower olive, and xkcd gives #87AE73, a brighter green, against our #9CAF88 [6]. See also [[sage-green]], [[olive-green]] and [[tea-green]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Sage is uncommon in painting as photographed: 134 of the 23,531 paintings in the archive carry a color this close, 0.56 percent [7]. Its measured lightness is 69, chroma 23 and hue 128 [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sage plant (Salvia officinalis), by its leaves",
+   "first_recorded": "1596 or 1912, depending on the Maerz and Paul entry",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour, p. 353"
+  },
+  "aka": [
+   "sage green"
+  ],
+  "siblings": [
+   "sage-green",
+   "olive-green",
+   "tea-green",
+   "greyish-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sage-green",
+    "gloss": "the dictionary's name for the same leaf color"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "sauge (the plant); sage means well-behaved"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub painting archive, 23,531 paintings, as photographed",
+  "n_present": 134,
+  "pct": 0.56,
+  "measured": {
+   "lch": [
+    69,
+    23,
+    128
+   ],
+   "alts": {
+    "wiki": "#BCB88A",
+    "xkcd": "#87AE73"
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 353, \"sage-green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 354, \"sage-grey\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 39",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Le petit livre des couleurs, ch. 5 (\"Le bleu\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), entry Sage (ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,531 paintings, as photographed, field notes for #9CAF88",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Paterson's dictionary, which leaf is sage-green the color of?",
+   "choices": [
+    "The sage plant",
+    "Olive",
+    "Bay laurel",
+    "Mint"
+   ],
+   "answer": "The sage plant",
+   "kind": "pick"
+  },
+  {
+   "q": "What does the French word sage mean?",
+   "choices": [
+    "Well-behaved",
+    "Green",
+    "Herb",
+    "Ancient"
+   ],
+   "answer": "Well-behaved",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the sage plant's flowers are the source of the color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Most times a color book says sage, it means a wise person, not the green."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No changes; Paterson sage-green/sage-grey verified."
+  ]
+ },
+ "words": 255
+}

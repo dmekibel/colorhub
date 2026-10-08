@@ -1,0 +1,119 @@
+{
+ "slug": "dusty-green",
+ "name": "Dusty Green",
+ "hex": "#76A973",
+ "names": [
+  "Dusty Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dusty Green is a mid green softened with grey, a plain descriptive name that appears in several color standards without a story of its own.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A descriptive name",
+   "body": "*Dusty green* is a description rather than an invention: a green with a little grey in it. Our library finds the name in the ISCC-NBS dictionary of 1955, in Ridgway's standards of 1912, in Maerz and Paul's dictionary of 1930 and in the xkcd color survey of 2010 [1]. No coiner is documented in our sources [1].\n\nMeasured against the ISCC-NBS categories, the swatch lands nearest to moderate yellowish green, 7.5 units of ΔE2000 away [1]. Its closest relatives by name are [[sage-green]], [[moss-green]] and [[dusty-sage]]."
+  },
+  {
+   "id": "books",
+   "title": "In the books",
+   "body": "The books use the words as plain description, not as a color name. St Clair describes the small leaves of the indigo shrub *Indigofera tinctoria* as slightly dusty green [2]. The dye plant is green and its prized colorant is blue, which is a useful reminder that a dye is made, not seen, in the leaf [2]. See [[indigo]] for the blue."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive this green appears in 15 paintings, 0.06 per cent of the total, as photographed [3]. Gustav Klimt accounts for 4 of the 15, from 50 of his paintings in the archive [3]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive phrase (dust-softened green)",
+   "first_recorded": "undocumented; in Ridgway 1912 and Maerz and Paul 1930 per our library",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "sage-green",
+   "moss-green",
+   "dusty-sage",
+   "dusty-moss"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
+  "n_present": 15,
+  "pct": 0.06,
+  "top_painter": {
+   "name": "Gustav Klimt",
+   "hits": 4,
+   "of": 50
+  },
+  "measured": {
+   "nearest": [
+    [
+     "moderate yellowish green",
+     7.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): name sources and dates (ISCC-NBS block 109, Ridgway 1912, Maerz and Paul 1930, xkcd 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Indigo\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which does the word \"dusty\" tell you about this green?",
+   "choices": [
+    "It has grey mixed in",
+    "It is fluorescent",
+    "It was made from dust",
+    "It is darker than black"
+   ],
+   "answer": "It has grey mixed in",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the indigo plant's leaves are blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A green with some grey in it is called dusty, and the leaves of the indigo plant are exactly that, not blue."
+ ],
+ "words": 222,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

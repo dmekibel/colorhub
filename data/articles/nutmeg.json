@@ -1,0 +1,175 @@
+{
+ "slug": "nutmeg",
+ "name": "Nutmeg",
+ "hex": "#674E3D",
+ "names": [
+  "Nutmeg"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Nutmeg is a medium-dark brown named for the spice, a color Shakespeare already used in a line of Henry V.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A spice's name",
+   "body": "Paterson gives nutmeg a loose range: light brown, dark brown, or at times a brown with some grey in it [1]. His example is a line from Shakespeare's *Henry V*, in which a French nobleman describes his horse as the color of the nutmeg [1]. Nutmeg sits in his list of browns beside nut-brown, which he glosses as the reddish brown of the hazelnut or, more loosely, the many browns of nuts [1]. The swatch here is a dark, slightly greyish brown, with its nearest named neighbors [[coffee]], [[umber]] and [[nut-brown]] [2].\n\nIn Maerz and Paul's dictionary of 1930 the name is recorded with a first use in 1610, which would place it very close to Shakespeare's time [2]. The same plate, number 15, holds a family of nut and leaf browns, among them Praline, Cashew Nut and English Oak, so the name belongs to a whole group of food and tree browns [2]."
+  },
+  {
+   "id": "spice",
+   "title": "The spice behind the color",
+   "body": "For Europeans the spice was a luxury from far away [3]. Finlay says that medieval cooks in great houses used cloves, nutmeg and cinnamon in enormous quantities, even though Venetian merchants held the trade and kept prices very high [3]. When the Portuguese reached Goa in the early 1500s they loaded nutmeg, camphor and Indian indigo together in their ships [4].\n\nThe Levant merchants of London watched the Dutch for the same reason [5]. In 1599, Balfour-Paul reports, they relaxed when they learned that the Dutch ships from the East Indies carried mostly pepper and cloves, because the Levant trade would be little harmed as long as Dutch cargoes did not include much indigo, nutmeg or silk [5]. In the late 1700s, Joseph Banks also hoped to introduce nutmegs, cloves and opium to India [6]. Most of these plans failed [6]."
+  },
+  {
+   "id": "seeing",
+   "title": "How to see it",
+   "body": "A broken nutmeg shows what the color is. The outside is a grey-brown, and the inside is marbled with a darker, redder brown. In the app its nearest neighbors include [[umber]] [2].\n\nIt belongs to a family of soft, earthy browns on one plate of Maerz and Paul's 1930 dictionary, whose names include Praline, Cashew Nut and English Oak [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Nutmeg is one of the commonest colors in our archive of 23,781 paintings [7]. It appears in 2,866 of them, 12.05 per cent, and the stricter within-painting lens finds it in 1,917; it is more common than 95 per cent of named colors, as photographed [7]. Inside a painting it most often plays a hidden color, in 44 per cent of those 1,917 paintings, judged by lightness so that varnish cannot fake it [7]. It peaks in the 1200s, found in 29.6 per cent of 142 paintings, 3.2 times the expected rate, and the painter most devoted to it is Edgar Degas, in 10 of 50 works [7]. Since aged varnish turns many darks to brown, this is a look-alike hue and not a pigment test [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the nutmeg spice",
+   "first_recorded": "Maerz and Paul 1930 give a first use of 1610; Shakespeare's Henry V uses the word for a horse's color",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "nut-brown",
+   "coffee"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "hazel",
+    "gloss": "the brown of the hazelnut, lighter and greener"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2866,
+  "within_painting": 1917,
+  "pct": 12.05,
+  "rank_pct": 95,
+  "role_most_common": "hidden color (44%)",
+  "peak_century": {
+   "century": 1200,
+   "rate": 29.6,
+   "n": 142,
+   "lift": 3.2
+  },
+  "painters": [
+   {
+    "slug": "edgar-degas",
+    "n": 10,
+    "of": 50,
+    "lift": 2.6
+   }
+  ],
+  "first_recorded": {
+   "source": "maerz-paul",
+   "year": 1930
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"nutmeg\" and \"nut-brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Nutmeg (Maerz and Paul 1930, first recorded 1610, plate 15 A 9) and the plate's related names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 61",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 2",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Nutmeg: 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which writer used the color of the nutmeg in a play about a king named Henry?",
+   "choices": [
+    "Shakespeare",
+    "Chaucer",
+    "Milton"
+   ],
+   "answer": "Shakespeare",
+   "kind": "pick"
+  },
+  {
+   "q": "Why do Levant merchants in 1599 relax when they hear what the Dutch carried?",
+   "choices": [
+    "The Dutch were bringing pepper and cloves, not much indigo, nutmeg or silk",
+    "The Dutch ships were lost",
+    "Nutmeg had become cheap"
+   ],
+   "answer": "The Dutch were bringing pepper and cloves, not much indigo, nutmeg or silk",
+   "kind": "pick"
+  },
+  {
+   "q": "A nutmeg-brown match in a medieval painting shows nutmeg pigment was used.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Shakespeare put nutmeg in a line of Henry V, and Maerz and Paul date the name to 1610.",
+  "Where to look: a broken nutmeg, grey-brown outside and marbled red-brown inside."
+ ],
+ "status": "checked",
+ "words": 490,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'warm umber' painter term and invented 1920s fashion claim."
+  ]
+ }
+}

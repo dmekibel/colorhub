@@ -1,0 +1,118 @@
+{
+ "slug": "persian-blue",
+ "name": "Persian Blue",
+ "hex": "#1C39BB",
+ "names": [
+  "Persian Blue"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Persian blue is a name two dictionaries use for two different things: a strong blue, and an old trade name for Prussian blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One name, two meanings",
+   "body": "Paterson defines Persian blue as a strong blue and, in a second sense, a pale violet [1]. The Pigment Compendium instead lists it among the many names for [[prussian-blue]], beside Paris blue, Saxon blue and Haarlem blue [2].\n\nBooks disagree, then, on whether it is a hue or a pigment. The Compendium adds a warning that applies to the whole list: place names do not necessarily imply a place of origin, and it chooses Persian blue as its example [2]. Neither book ties the name to Persia itself [1][2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is the library value for the name, a strong saturated blue [3]. Paterson files Persian blue in its blue group, next to Paris blue, Prussian blue and Sevres blue [1]. Screen colors are approximate [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The books say little more. Five passages mention the name in the concordance, three of them index lists in Paterson and two in the Compendium [1][2]. Treat it as a historical label more than a stable color."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; the Compendium warns place names need not mark a place of origin",
+   "first_recorded": "not recorded in our sources",
+   "source": "Pigment Compendium, p. 322"
+  },
+  "aka": [
+   "Persian blue (Prussian blue synonym)"
+  ],
+  "siblings": [
+   "prussian-blue",
+   "persian-orange",
+   "royal-blue",
+   "cobalt-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "prussian-blue",
+    "gloss": "the pigment the Compendium says this name was also used for"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#1C39BB",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "concordance_hits": 5
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 305, 481, 492",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gettens and Stout / Pigment Compendium, \"Prussian blue\", p. 322",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), screen approximation",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Pigment Compendium say place names such as Persian blue do not necessarily imply?",
+   "choices": [
+    "A place of origin",
+    "A mineral source",
+    "A particular price"
+   ],
+   "answer": "A place of origin",
+   "kind": "pick"
+  },
+  {
+   "q": "Paterson gives Persian blue two senses: a strong blue and a pale violet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Persian blue is, in one dictionary, just another name for Prussian blue."
+ ],
+ "words": 179,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Books disagree: hue vs Prussian blue synonym"
+  ]
+ }
+}

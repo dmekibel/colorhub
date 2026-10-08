@@ -1,0 +1,102 @@
+{
+ "slug": "medium-aquamarine",
+ "name": "Medium Aquamarine",
+ "hex": "#66CDAA",
+ "names": [
+  "Medium Aquamarine"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Medium Aquamarine is a soft sea-green from the named colors of the web.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color",
+   "body": "Paterson gives MediumAquamarine as an entry of the X11 Color Set (140 colours in all), hex code #66CDAA [1]. It belongs to a run of \"Medium\" names there: MediumBlue, MediumOrchid, MediumPurple, MediumSeaGreen, MediumSlateBlue, MediumSpringGreen, MediumTurquoise and MediumVioletRed [1]. The word has an unrelated meaning in painting, where Paterson defines a medium as the liquid or binder that carries pigment [1].\n\nThe gem aquamarine gave the family its first name, but the web color is a screen value, not a stone. Wikipedia lists an alternate hex, #66DDAA, for the name [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 2 of 23,781 paintings in our archive cover at least 5% of their canvas with this color, as photographed [3]. One is an anonymous *Aurora* (about 1825), about 10%, and the other a Degas backstage scene (1879), about 8% [3]. Its nearest standard name is [[turquoise]], 8.8 ΔE away [2]. Related names: [[aquamarine]], [[medium-turquoise]] and [[medium-blue]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name, X11 color set",
+   "first_recorded": "CSS / X11 (Paterson)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "MediumAquamarine"
+  ],
+  "siblings": [
+   "aquamarine",
+   "medium-turquoise"
+  ],
+  "parent": "aquamarine",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+  "n_present": 2,
+  "hex_css": "#66CDAA",
+  "nearest": "Turquoise"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"MediumAquamarine\", \"medium\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub name records (library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, CSS, Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What hex code does Paterson give for MediumAquamarine?",
+   "choices": [
+    "#66CDAA",
+    "#0000CD",
+    "#BA55D3",
+    "#9370DB"
+   ],
+   "answer": "#66CDAA",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in painting, Paterson defines a medium as the liquid or binder carrying the pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The web color Medium Aquamarine is one of the 140 colours in the X11 set."
+ ],
+ "words": 157,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

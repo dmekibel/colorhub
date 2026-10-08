@@ -1,0 +1,129 @@
+{
+ "slug": "claret",
+ "name": "Claret",
+ "hex": "#7F1734",
+ "names": [
+  "Claret"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Claret is a deep reddish purple named after red Bordeaux wine.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A wine's name",
+   "body": "Paterson describes claret as reddish-violet, the color of claret wine, and as a red with the same hue as [[bordeaux]] wine [1]. It gives the wine word a Latin source, *clarus*, \"clear\", the root of clarity, clarinet and clarion [1]. That is the dictionary's etymology, offered without further evidence [1].\n\nThe dictionary's two descriptions, reddish-violet and a red of bordeaux hue, differ a little [1]. In our measure the nearest wine name is [[burgundy]], 5.9 units away [3]."
+  },
+  {
+   "id": "fabric",
+   "title": "In cloth and fashion",
+   "body": "The word has long served in textile description. A V&A monograph on Kashmir shawl fragments describes one pattern, with white roses, in a list of colors that runs straw, saxe blue, green muscat, claret and mole [2]. A newspaper account of the Milan collections in February 2000 lists a claret velvet tailored jacket in a season that also brought mauve back, alongside a purple trouser suit and a streamlined camel car coat [4]. In that company claret reads as a deep, fashionable wine tone worn in fabric, not a pigment from a painter's box.\n\nOur library gives claret an entry in the ISCC-NBS lists of 1955 and the Maerz and Paul dictionary [3]. It also sits near [[wine-red]], [[maroon]] and [[oxblood]], which name similar dark reds [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Claret is rare in our archive of 23,781 paintings: it appears in 11, about 0.05%, as photographed, and it is rarer than 65% of the named colors [3]. Inside a painting it is mostly an accent, in 86% of the 14 paintings measured by lightness rank [3]. The earliest match is a work of 1518 by Bartolomeo di Zanobi di Benedetto Ghetti, a floor in a thin early archive [3].\n\nThat is 437 years before the name's earliest record in our sources, 1955, so the match is a look-alike hue in an aged photograph, not proof of a wine-dark pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "claret wine, from Latin clarus per Paterson",
+   "first_recorded": "ISCC-NBS 1955 in our library",
+   "source": "Paterson"
+  },
+  "aka": [],
+  "siblings": [
+   "burgundy",
+   "wine-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "burgundy",
+    "gloss": "another wine name, a little redder"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "23,781 paintings",
+  "n_present": 11,
+  "role": "accent 86%",
+  "nearest": "Burgundy",
+  "de2000": 5.9
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 106 (\"claret\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 240",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Colorhub data, library.json: ISCC-NBS 1955, Maerz and Paul, archive fieldnotes",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Garfield, Mauve, chapter 20 (Independent, Feb. 2000)",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What Latin word does Paterson give as the source of claret?",
+   "choices": [
+    "clarus",
+    "rubeus",
+    "vinum"
+   ],
+   "answer": "clarus",
+   "kind": "pick"
+  },
+  {
+   "q": "In Finlay's Kashmir shawl list, claret appears alongside which color?",
+   "choices": [
+    "Saxe blue",
+    "Neon pink",
+    "Silver"
+   ],
+   "answer": "Saxe blue",
+   "kind": "pick"
+  },
+  {
+   "q": "In paintings, claret is usually a large background area.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Claret shares a Latin root with clarity: the word once meant clear wine."
+ ],
+ "words": 309,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported \"oldest wine word\" lede claim; removed unsupported claim about how other systems draw claret."
+  ]
+ }
+}

@@ -1,0 +1,252 @@
+{
+ "slug": "yellowish-brown",
+ "name": "Yellowish Brown",
+ "hex": "#946943",
+ "names": [
+  "Yellowish Brown"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Yellowish Brown is a plain two-word name for a warm, mid-toned brown, and one of the descriptive colors that mineralogists wrote into a standard in the 1770s. Its swatch is number 104 in Patrick Syme's color chart, where it was matched to a hoopoe's breast and a guinea pig's spots.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mixture, not an object",
+   "body": "Most color names point at a thing: a plum, a chestnut, a brick. *Yellowish brown* points at a recipe. In 1774 the German mineralogist Abraham Gottlob Werner listed 54 colors under eight principal headings, and he modified each principal color with a descriptive word that was usually a mixture, as in reddish-white [1]. Yellowish brown was one of the seven browns in that first list [2].\n\nWerner wanted mineralogy to have a stable vocabulary. Before the late eighteenth century the same substance often carried several names and different substances shared one, and the descriptive language was arbitrary and ambiguous [1]. A fixed set of color terms was meant to make identification and communication easier [1].\n\nThe modern standards kept the grammar. ISCC-NBS, the American color-naming system of 1955, files this swatch as a *moderate yellowish brown*, block 74 [7]."
+  },
+  {
+   "id": "werner",
+   "title": "Number 104",
+   "body": "Patrick Syme, a flower painter in Edinburgh, turned Werner's list into a pocket reference in 1814, with painted swatches, a recipe for each color and examples from the animal, vegetable and mineral kingdoms [1][4]. His second edition of 1821 has 110 colors [2][4]. Yellowish brown is number 104, among the browns [3].\n\nSyme's recipe takes chesnut brown and adds a good deal of lemon yellow, and he marks it with a W as one of Werner's own colors [3]. Baty notes that Syme's W marks are not always right, so the label is a guide and not proof [4]. His examples were the light brown spots on a guinea pig, the breast of a hoopoe, and among minerals iron flint and common jasper [3][7]. Baty's plate adds the flower of the lakeshore bulrush [3].\n\nThe color also served as an ingredient. Syme made wood brown from yellowish brown mixed with ash grey [3]. He described chesnut brown, the characteristic color of the browns in Werner's series, as a deep reddish brown and yellowish brown [3]."
+  },
+  {
+   "id": "spread",
+   "title": "A naturalist's color",
+   "body": "Werner's terms traveled. In 1791 Johann Georg Lenz applied them to minerals, describing common flint as sometimes brownish red, ochre yellow, reddish brown or yellowish brown [1]. Zoologists took up Syme's names as well [5]. For a female Lapland finch the naturalist John Richardson used blackish brown, yellowish brown and clove brown, all for one bird [5].\n\nRichardson's *Fauna boreali-americana* of 1829 was in the library of HMS Beagle, and Darwin listed it among books to be read in 1838 [5]. Robert Ridgway's *Nomenclature of Colors for Naturalists* of 1886 named Syme among its sources, and at least 25 of its color names can be traced to Syme's book [4]."
+  },
+  {
+   "id": "dictionary",
+   "title": "The word that defines other browns",
+   "body": "Dictionaries lean on this color. Paterson's *Dictionary of Colour* uses *yellowish brown* in the definitions of about thirty other color words [6]. They include [[cinnamon]], *cuir* (the French word for leather), butterscotch, tobacco, teak, rhubarb, shammy and the Algerian [6].\n\nSeveral are close cousins with pages of their own. Paterson calls [[buff]] a pale yellowish brown, [[fawn]] a light yellowish brown and [[khaki]] a drab yellowish brown dust color, sometimes with a greenish tinge [6]. He also glosses [[ochre-yellow]] as a yellowish brown, and the earth [[raw-sienna]], used untreated, as a pigment a little darker than yellow ochre [6].\n\nDamp does the same job on paper. Paterson notes that foxing, the discoloration of books and paper by damp, often turns pages a yellowish brown [6]. A foxed page is the easiest place in a house to find the color. A mid-nineteenth-century pigment, nickel brown, was described by Salter in 1869 as a very pleasing yellowish brown, bright in pale washes and of some richness in oil [10]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which yellowish brown?",
+   "body": "The swatch on this page is Syme's number 104, sampled from a scan of an aged chart, so it is approximate [7]. The nearest named color in our library is [[sepia]], only 4.1 CIEDE2000 units away [7]. The crowd-sourced xkcd color survey of 2010 uses the same name for #9B7A01, a darker mustard-olive that sits 15.4 units from Syme's swatch [7].\n\nSo the name has two readings: a warm brown in the nineteenth-century chart and an olive gold when people choose it themselves [7]. A two-word description leaves room for both."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six CIEDE2000 units of this swatch covers at least five per cent of the canvas in 3,292 works, about 14 per cent [8]. It is more common in old pictures. In the 1300s, 90 of 251 paintings carry it, about 36 per cent, and by the 1600s the rate has fallen to 12 per cent (782 of 6,394) [8]. The highest decade is the 1430s, with 22 of 51 [8].\n\nThe painters who carry it most often include [[painter:maarten-van-heemskerck|Heemskerck]], in 8 of 12 works, and [[painter:peter-paul-rubens|Rubens]], in 22 of 46, which is 3.4 times the archive rate [8]. Inside a picture it most often plays an accent, in 44 per cent of the 1,966 paintings where we ranked it by lightness [8].\n\nThe earliest match by date is a funerary papyrus of about 1069 BC, [[painting:aic-805|Funerary Papyrus of Tayuhenutmut]], with three-quarters of its surface inside the threshold [8]. There the color is most likely the aged papyrus itself. All of these are photographs of aged, varnished paintings and supports, so a match is not a pigment test and cannot separate original paint from age [8].\n\nIn Google Books the phrase *yellowish brown* peaks around 1980, and in 1800 it stood at about 36 per cent of that peak [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Werner's mixture grammar: yellowish + brown",
+   "first_recorded": "Werner's 54-colour list, 1774; Syme no. 104, 1814 and 1821",
+   "source": "Baty, Nature's Palette, introduction and no. 104"
+  },
+  "aka": [
+   "Werner no. 104 (Syme)",
+   "moderate yellowish brown (ISCC-NBS)"
+  ],
+  "siblings": [
+   "reddish-brown",
+   "hair-brown",
+   "liver-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "ochre-yellow",
+    "gloss": "Paterson defines it as a yellowish brown, but Werner's swatch is a pale gold"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "gelblichbraun (as in Lenz, 1796)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#946943",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3292,
+  "rate": 0.1384,
+  "by_century": {
+   "1300": {
+    "n": 251,
+    "hits": 90
+   },
+   "1600": {
+    "n": 6394,
+    "hits": 782
+   }
+  },
+  "peak_decade": {
+   "decade": 1430,
+   "n": 51,
+   "hits": 22
+  },
+  "top_paintings": [
+   "cma-161013",
+   "met-51649",
+   "cma-79567",
+   "cma-147927",
+   "aic-805"
+  ],
+  "painters": [
+   "maarten-van-heemskerck",
+   "peter-paul-rubens"
+  ],
+  "role": {
+   "accent_pct": 44,
+   "n": 1966
+  },
+  "ngram": {
+   "peak": 1980,
+   "rel_1800": 0.361
+  },
+  "measured": {
+   "lch": [
+    48.0,
+    30.8,
+    65.7
+   ],
+   "nearest": [
+    [
+     "Sepia",
+     4.1
+    ]
+   ],
+   "werner_no": 104
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Introduction (Werner's nomenclature), pp. 16-21",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, chart of nomenclatures from Werner to Syme, pp. 32-35",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, colour no. 104 \"Yellowish Brown\" and the browns, pp. 254-260",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Introduction (Syme, Ridgway), pp. 26-30",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, ch. 2 \"Colours in zoology\", pp. 127-131",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"buff\", \"cinnamon\", \"cuir\", \"fawn\", \"foxing\", \"khaki\", \"ochre yellow\", \"raw sienna\" and others",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Werner 1821, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas) and Color Graph field notes",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Nickel brown\"",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Syme's recipe, yellowish brown is chesnut brown mixed with a considerable portion of what?",
+   "choices": [
+    "Lemon yellow",
+    "Ash grey",
+    "Lamp black",
+    "Vermilion"
+   ],
+   "answer": "Lemon yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: yellowish brown was a new color that Syme added in 1821.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Where did Syme tell naturalists to look for yellowish brown?",
+   "choices": [
+    "The breast of a hoopoe",
+    "The breast of a robin",
+    "The crest of a goldcrest",
+    "The wing of a kingfisher"
+   ],
+   "answer": "The breast of a hoopoe",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Yellowish brown was one of Werner's 54 colors in 1774, and Syme later told naturalists to look for it on a hoopoe's breast.",
+  "A foxed book page is the easiest yellowish brown in the house: damp does it to old paper.",
+  "The earliest yellowish-brown match in our painting archive is not paint but a funerary papyrus of about 1069 BC."
+ ],
+ "words": 922,
+ "status": "checked",
+ "checked": {
+  "by": "batch 33 writer (sentence-to-card trace, myth list)",
+  "date": "2026-10-08",
+  "issues": [
+   "Source base is thin outside Baty and Paterson; no history of the pigment-like use beyond Werner/Syme is claimed.",
+   "Werner 1774 list identified in Baty's chart by its 54-colour count; Syme's W marks flagged by Baty as inconsistent.",
+   "Archive matches are look-alike hues in aged photographs; the papyrus match is hedged as the support."
+  ]
+ }
+}

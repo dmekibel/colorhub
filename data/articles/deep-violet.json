@@ -1,0 +1,171 @@
+{
+ "slug": "deep-violet",
+ "name": "Deep Violet",
+ "hex": "#490648",
+ "names": [
+  "Deep Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Deep violet is a descriptive name used loosely for dark purples, and the books show it covers a wide stretch from blue-violet to red-purple.",
+ "sections": [
+  {
+   "id": "names",
+   "title": "A loose phrase",
+   "body": "The books use \"deep violet\" for quite different things. A dictionary of colour defines the pansy as a deep violet or purple, and crème de violette as a deep violet [1][2]. In smalt, the blue glass pigment, the best grade was a deep violet-blue and the cheapest a pale powder blue [3]. Cobalt phosphate in its tetrahydrate form is listed as a deep violet pigment [4]. Painters see it outdoors too: on a very clear day, cloud shadows on hills three miles off can be a deep violet [5]."
+  },
+  {
+   "id": "seeing",
+   "title": "In color theory and light",
+   "body": "Albers points out that bricks range from pale beige through orange and ochre to brown and even a deep violet, so one named object holds many colors [6]. Birren says a pale orange buff looks better with a deep violet than a lavender looks with brown [7]. A CD in daylight shows a spectrum that begins at deep violet and passes through blues and greens to the deepest red [8]. A conductor once told an orchestra to play bluer, or in a deep violet, as an example of synesthesia [9]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch comes from the xkcd color survey of 2010 [10]. It is a very dark, reddish purple: the ISCC-NBS 1955 system calls it \"very deep reddish purple\", under 1 unit away [10]. That is redder and darker than the blue-violet end of the spectrum the books describe [8][10]. Neighbors are [[violet]], [[purple]], [[plum]] and [[indigo]] [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The ColorHub archive gives a lightness of about 16 out of 100 and a chroma of 44 [10]. Contrast against white is 14.97 to 1, so white text on this color is easy to read [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (a descriptive phrase)",
+   "first_recorded": "xkcd survey 2010 for this swatch",
+   "source": "ColorHub name archive"
+  },
+  "aka": [],
+  "siblings": [
+   "violet",
+   "purple",
+   "plum"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "violet",
+    "gloss": "the spectral violet is bluer and brighter than this swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub name archive",
+  "family": "Purples",
+  "lightness": 15.6,
+  "chroma": 44.1,
+  "contrast_white": 14.97,
+  "iscc_nearest": "very deep reddish purple (block 239), dE 0.9"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 296 (\"pansy\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 132 (\"creme de violette\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 358 (\"smalt\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 128 (cobalt phosphates)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 179",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 60",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Birren, Color Psychology, p. 23",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, p. 15",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Westland, Principles of Color, p. 94",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub name archive, data/graph nodes (xkcd 2010; ISCC-NBS 1955 block 239)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which pigment was the best grade a deep violet-blue?",
+   "choices": [
+    "Smalt",
+    "Vermilion",
+    "Gamboge",
+    "Lead white"
+   ],
+   "answer": "Smalt",
+   "kind": "pick"
+  },
+  {
+   "q": "Is this swatch bluer or redder than spectral violet?",
+   "choices": [
+    "Redder",
+    "Bluer",
+    "Identical",
+    "Greener"
+   ],
+   "answer": "Redder",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Smalt's best grade was a deep violet-blue, its cheapest a pale powder."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against Paterson, Baty, Gurney, Albers, Birren, Westland, Livingstone, Pigment Compendium; no changes."
+  ]
+ },
+ "words": 283
+}

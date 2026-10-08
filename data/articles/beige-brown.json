@@ -1,0 +1,107 @@
+{
+ "slug": "beige-brown",
+ "name": "Beige Brown",
+ "hex": "#79553C",
+ "names": [
+  "Beige Brown"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Beige Brown is a mid, warm brown with a hint of sand, a name used in several color standards.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The library lists Beige Brown in four systems: Ridgway's 1912 standard (plate XV), ISCC-NBS blocks 58 and 80, a RAL value of 8024 (a screen approximation), and Maerz and Paul, which first recorded it in 1835 on plate 7 A 12 [1]. The nearest near-duplicate is Mars Brown, at a distance of 1.8 [1].\n\nPastoureau notes that in the eighteenth century the half-tones, including beiges, browns, pinks and grays, multiplied as dyeing advanced and the vocabulary grew to name them [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Beige Brown appears in 13.83% of the 23,781 paintings in our archive, as photographed [3]. It is more common than 94% of the named colors and peaks in the 1300s, in 17.9% of that century's 251 paintings [3]. Inside a painting it most often plays a mid-tone, in 28% of cases [3]. Maarten van Heemskerck is its most devoted painter here, with 7 of 12 works [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "beige (undyed wool) and brown",
+   "first_recorded": "1835 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "auburn",
+   "beige",
+   "umber"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3289,
+  "pct_paintings": 13.83,
+  "peak_century": 1300,
+  "library_first": 1835,
+  "nearest": [
+   [
+    "Mars Brown",
+    1.8
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 37",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which century does Beige Brown peak in our archive?",
+   "choices": [
+    "1300s",
+    "1900s",
+    "1700s"
+   ],
+   "answer": "1300s",
+   "kind": "pick"
+  },
+  {
+   "q": "Beige Brown appears in more than 10% of the paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Beige Brown is found in about one painting in seven in our archive, as photographed."
+ ],
+ "words": 164,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

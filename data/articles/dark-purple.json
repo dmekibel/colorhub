@@ -1,0 +1,174 @@
+{
+ "slug": "dark-purple",
+ "name": "Dark Purple",
+ "hex": "#301934",
+ "names": [
+  "Dark Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dark Purple is the purple that nearly passes for black, the color Roman writers prized in the best shellfish dye and medieval dyers rebuilt with madder over blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Plain words for a deep color",
+   "body": "The name is descriptive, not traditional. Our library takes the swatch from the xkcd survey and Wikipedia, and lists Deep Purple Wine, ISCC-NBS block 225, as a related name [1]. Paterson's dictionary has several single words for the idea: petunia is a dark purple, prune is the very dark purple of the plum and was popular in the 1930s, and damascene is the dark purple of the damson [2]. Compare [[purple]], [[petunia]] and [[plum]]."
+  },
+  {
+   "id": "ancient",
+   "title": "A purple that looked black",
+   "body": "Greenfield reports that Pliny described a blend of scarlet and purple-black dyes as the color of clotted blood, blackish at first glance but gleaming in the light [3]. Dark purples were in the ascendant, yet scarlet and crimson stayed prestigious in Rome [3]. St Clair describes how the shellfish liquid turned in sunlight from pale yellow to sea green, then blue, then a dark purple-red, and the best color, tinged with blackness, came from mixing the fluids of two kinds of shellfish [4]. See [[tyrian-purple]]."
+  },
+  {
+   "id": "medieval",
+   "title": "Purple from blue and red",
+   "body": "Medieval dyers, Pastoureau explains, gave undyed cloth a solid blue foot, then dipped it in a vat of red, madder or orchil, to get dark purples [5]. These purples were more red than blue and recalled the ancient ones [5]. The red was [[madder]]."
+  },
+  {
+   "id": "minerals",
+   "title": "Minerals and pigments",
+   "body": "Antozonite is a dark purple to purple-black fluorite, found in Bavaria, in France and at Joachimsthal in the Czech lands [6]. In 1794 a British patent by Atkinson covered synthetic iron-oxide pigments that included a dark purple-brown [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, only 24 (0.1%) hold this swatch within six units of ΔE2000 over at least five per cent of the canvas, as photographed [8]. In all of them it plays the shadow role, the darkest part of the palette [8]. Four of the six strongest matches are portraits, led by Paggi's *Portrait of Piero di Lorenzo de' Medici*, 1586, where it covers 69% of the picture [8].\n\nThe earliest match is Ambrogio Lorenzetti's *Presentation at the Temple*, 1342 [8]. Italy has 6 matches in 1,986 paintings and France 6 in 3,443 [8]. These are photographs of aged, varnished paintings, so a match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description: a dark purple",
+   "first_recorded": "undocumented",
+   "source": "ColorHub library (xkcd, Wikipedia)"
+  },
+  "aka": [
+   "Deep Purple Wine (ISCC-NBS)"
+  ],
+  "siblings": [
+   "aubergine",
+   "petunia"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "aubergine",
+    "gloss": "a dark purple named for the fruit, close in swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#301934",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 24,
+  "first_dated": {
+   "id": "commons-Q3910903",
+   "painter": "Ambrogio Lorenzetti",
+   "year": 1342
+  },
+  "top_paintings": [
+   "commons-Q120379763"
+  ],
+  "role": {
+   "shadow": 1.0
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library, \"Dark Purple\": src wiki, xkcd; ISCC-NBS block 225 Deep Purple Wine",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"petunia\", \"prune\", \"damascene\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Tyrian purple\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 55",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"antozonite\", p. 33",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"mars violet\", p. 324",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, DE2000 6, min cover 5%, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did medieval dyers make dark purples, according to Pastoureau?",
+   "choices": [
+    "A blue base cloth dipped in a red vat of madder or orchil",
+    "Boiling purple flowers in alum",
+    "Grinding amethyst into dye"
+   ],
+   "answer": "A blue base cloth dipped in a red vat of madder or orchil",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, what role does the Dark Purple swatch play in the paintings that contain it?",
+   "choices": [
+    "Shadow, the darkest part",
+    "Highlight",
+    "Mid-tone"
+   ],
+   "answer": "Shadow, the darkest part",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pliny's best purple looked nearly black until held to the light [3].",
+  "Dark Purple is rare in museum paintings: 24 of 23,781, and always in the shadows [8]."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All 8 claims verified vs Greenfield, St Clair, Pastoureau, Paterson, Pigment Compendium; no changes"
+  ]
+ },
+ "words": 372
+}

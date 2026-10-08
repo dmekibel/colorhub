@@ -1,0 +1,248 @@
+{
+ "slug": "velvet",
+ "name": "Velvet",
+ "hex": "#750851",
+ "names": [
+  "Velvet"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Velvet is a deep plum-magenta named for the cloth, and the cloth is the better story: for centuries velvet was where Europe's costliest dyes were shown off.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "The swatch is a crowd name",
+   "body": "The swatch, #750851, comes from the 2010 xkcd color survey, in which respondents typed their own names for colors on screen [1]. The name is a crowd label, and the survey gave no history for it, so the origin of the word as a color name is undocumented [1]. The color is a dark, strongly saturated purplish red. Its nearest named neighbors are [[byzantium]] and [[rich-purple]], and the ISCC-NBS system of 1955 would call it a deep purplish red [1].\n\nNo book on our shelf defines velvet as a color. The one velvet entry we found in Paterson's dictionary is \"black velvet\", a drink of champagne mixed with stout [2]. So this page is about the cloth, and about the places where velvet left a mark on the vocabulary of color."
+  },
+  {
+   "id": "cloth",
+   "title": "What makes the cloth",
+   "body": "Velvet is woven with two kinds of warp thread, a foundation warp that holds the cloth in shape and a much longer velvet warp that loops back to form the pile [3]. That pile is why a dark velvet looks deep: Finlay, looking at a black barkcloth from Rarotonga, says the black seemed rich like velvet from a distance [3]. The same book records that Genoa specialised in black silk velvet, and that the weavers made special selvedges to show the cloth off, since buyers judged the quality of the weave by them [3].\n\nVelvet was also a badge of rank. Lucca and Venice wove satins, brocades and velvets in many deep colors, and rich buyers elsewhere in Europe paid enormous sums for them [4]. Sumptuary laws followed the money: in Nuremberg ordinary men were forbidden to wear gold lace, velvet, pearls, ermine and weasel fur [4]. Henry VIII prided himself on a wardrobe that included a green velvet gown [4]."
+  },
+  {
+   "id": "crimson",
+   "title": "Crimson velvet",
+   "body": "The velvet that people remembered was red. In Florence, Alessandra Macinghi Strozzi was delighted that her daughter had been given a waistcoat of crimson velvet for an engagement present, which she called the most beautiful cloth in Florence [5]. In 1548 Titian asked Aretino for lake so fiery in its madder color that, set beside it, the crimson of velvet and silk would look less beautiful, as Gage reports [5].\n\nDyes drove the price. St Clair credits cochineal with dyeing the celebrated velvets of Venice from the middle of the sixteenth century [6]. St Clair also quotes the eyewitness Captain Baltasar de Ocampo, who described the last Inca king, executed in 1572, in a mantle and doublet of crimson velvet [6]. Painters took notice of how the cloth looks. Cennino advised painting a velvet gown in two layers, the drapery in pigment mixed with egg yolk and then the cut threads of the pile in oil with a fine brush [7]. In Caravaggio's *Calling of St Matthew*, the rich red velvet of the sleeves glows all the more against the sober earthy hues around them, Ball observes [8]."
+  },
+  {
+   "id": "black",
+   "title": "Velvet black and velvet brown",
+   "body": "Velvet also lent its name to darks. Werner's color nomenclature, as extended by Syme in 1821, lists velvet-black in its series of blacks, between iron-black and pitch-black [9]. The *Pigment Compendium* records a pigment called velvet black, which Beguin's dictionary took to be a bone black made, it was said, from the feet of sheep [10]. Velvet brown, by Mayer's account, was a mixture of raw or burnt umber with a dark ochre [10]. The same compendium quotes Church's remark that coconut char gives the densest, most velvet-like black [10].\n\nA velvet black is not a flat black. Gurney asks painters to hold a piece of black velvet beside a distant open window: even a black that looks profound across the street is infused with a soft blue or violet, the same scattering that colors the sky [11]. Jarman, writing as a filmmaker, describes black velvet on film as a black without end [12]."
+  },
+  {
+   "id": "mauve",
+   "title": "Victoria's velvet",
+   "body": "For her daughter's wedding in January 1858 Queen Victoria wore a gown whose train and bodice were rich mauve (lilac) velvet with lace trim, according to a contemporary newspaper account [13][14]. The paper added that the color was in the Queen's especial favor and that her train at a later levee was also mauve velvet [13]. Garfield uses the report as a marker of the craze for [[mauve]], and a claret velvet jacket turns up in a February 2000 newspaper report on Italian fashion that he quotes [13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering at least one per cent of its canvas within four units of CIEDE2000 [15]. That describes this archive, not painting as a whole, and a color this dark and saturated is easily lost in photographs of aged, varnished paintings [15].\n\nThe word fares better in print. In Google Books the word *velvet*, in all of its senses, peaks around 1850, falls to roughly a quarter of that level by the 1970s, and has recovered to about three quarters by 2010 [15]. The related colors have their own pages: [[plum]], [[aubergine]], [[claret]], [[crimson]] and [[black]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the cloth (velvet)",
+   "first_recorded": "as a swatch name: xkcd survey, 2010; origin as a color name undocumented",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "velvet red",
+   "deep plum"
+  ],
+  "siblings": [
+   "rich-purple",
+   "byzantium"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "velvet-green",
+    "gloss": "Velvet Green is a mid-tone olive green, unrelated to this plum-magenta"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "velours"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#750851",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "ngram": {
+   "peak": 1850,
+   "term": "velvet"
+  },
+  "measured": {
+   "lch": [
+    25.4,
+    50.3,
+    345.0
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library and graph: Velvet (xkcd 2010; ISCC-NBS 1955 nearest block; Byzantium dE 5.8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"black velvet\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Fabric, chapters on Rarotonga barkcloth and on Italian silk weaving",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 6",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, chapters on Renaissance Italy and Venetian color",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, chapters on cochineal and on orange",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 9 and ch. 21 notes (Cennino on painting velvet)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, chapter on Werner's nomenclature and Syme (1821 list)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Kirby et al., Pigment Compendium, \"velvet black\", \"velvet brown\", \"charcoal black\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, chapter on atmospheric perspective",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Jarman, Chroma, chapter on black",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 15 and ch. 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, chapter on mauve",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed; Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What forms the pile of velvet?",
+   "choices": [
+    "A second, much longer warp thread that loops back",
+    "A coating of dyed wool dust",
+    "Weft threads cut after dyeing",
+    "A glued layer of silk"
+   ],
+   "answer": "A second, much longer warp thread that loops back",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did Genoa's weavers give black silk velvet special selvedges?",
+   "choices": [
+    "Buyers judged the quality of the weave by them",
+    "To hide the dye vat marks",
+    "Because law required them",
+    "To mark the guild"
+   ],
+   "answer": "Buyers judged the quality of the weave by them",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Titian wanted a lake so fiery that velvet's crimson would look less beautiful beside it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hold black velvet up against a distant window: even that deep black picks up a soft blue or violet from the air between you.",
+  "Genoa's weavers added special selvedges to black silk velvet because that was where buyers checked the weave.",
+  "The swatch name velvet comes from a 2010 online survey, but the cloth it names carried Europe's most expensive reds."
+ ],
+ "words": 827,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch 26 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Swatch is an xkcd crowd name; origin as a color word is undocumented, stated plainly.",
+   "No painting meets the 1% canvas threshold: reported as an archive limit, not as a claim about painting.",
+   "Jarman and Gurney statements paraphrased, hedged by author."
+  ]
+ }
+}

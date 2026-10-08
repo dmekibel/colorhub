@@ -1,0 +1,119 @@
+{
+ "slug": "coral-red",
+ "name": "Coral Red",
+ "hex": "#DC5C4B",
+ "names": [
+  "Coral Red"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Coral red is a warm orange-red named for the skeleton of a reef animal, a hue the books treat mostly as a color word rather than a material.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name means",
+   "body": "Paterson's dictionary glosses coral red as a bright red or a deep pink, and old coral as red-orange, so the books themselves disagree on where coral sits between red and pink [1]. This swatch is a moderate reddish orange, about 5.4 units from the ISCC-NBS block of that name, and it carries older names too: Ridgway's 1886 *Nomenclature of Colors* and the RAL system of 1927 both list a coral red [2]. The Google Books record shows the phrase peaking in the 1940s and rising fastest in the 1870s [2]."
+  },
+  {
+   "id": "material",
+   "title": "The animal behind the color",
+   "body": "The *Pigment Compendium* has an entry for coral, a generic red variety: stony corals are reef builders, made of polyps that each sit in a cup of aragonite, a form of calcium carbonate that the animal secretes as a skeleton [3]. The compendium links the warm pink tones of coral pigments to the red precious corals of the western Pacific, but it found no European sources that use coral as a pigment [3]. Color-name lists use \"coral red\" only as a hue [1].\n\nThe nearest relatives in our name list are [[coral]], [[salmon]], [[vermilion]] and [[orange-red]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 100 paintings, and in 96 by the stricter within-painting measure [4]. Inside a painting it is an accent in 86 per cent of those works [4].\n\nIt peaks in the 1400s, in 1.0 per cent of the 945 paintings from that century, about 1.7 times the expected rate [4]. By country it is most over-represented in India, at 3.7 times expected, in 36 of 721 paintings [4]. The earliest match is Bernardo Daddi's [[painting:nga-1|panel of 1333]], which is 553 years before the name's first record in our sources, so it is a look-alike hue in an aged photograph and not proof of coral or any pigment [4]. Look for it as the small red-orange accent in a robe or a lip, not as a background."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "coral, the skeletons of reef-building polyps",
+   "first_recorded": "Ridgway 1886 (in our sources)",
+   "source": "Paterson, Dictionary of Colour; Pigment Compendium; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "coral",
+   "salmon",
+   "vermilion"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 100,
+  "n_within": 96,
+  "century_peak": "1400s",
+  "role": "accent 86%",
+  "country": "India 3.7x"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 130, 285",
+   "loc_kind": "book-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS, Maerz and Paul and other name sources (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"Coral\", pp. 144-145",
+   "loc_kind": "book-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is coral's skeleton made of, according to the Pigment Compendium?",
+   "choices": [
+    "Aragonite (calcium carbonate)",
+    "Iron oxide",
+    "Cinnabar",
+    "Cobalt"
+   ],
+   "answer": "Aragonite (calcium carbonate)",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, where does coral red most often appear inside a painting?",
+   "choices": [
+    "As an accent",
+    "As the background",
+    "As the sky",
+    "As the frame"
+   ],
+   "answer": "As an accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Coral's red-orange comes from a calcium carbonate skeleton secreted by reef polyps."
+ ],
+ "words": 347,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Pigment Compendium entry is 'Coral', not 'Coral Red'; removed claims about gem/pigment history and ground or carved coral not in source"
+  ]
+ }
+}

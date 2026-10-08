@@ -1,0 +1,104 @@
+{
+ "slug": "ultra-red",
+ "name": "Ultra Red",
+ "hex": "#FC6C85",
+ "names": [
+  "Ultra Red"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Ultra red is an obsolete name for infrared, so the pink swatch here shows only a screen stand-in, not the thing named.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Beyond the red",
+   "body": "Paterson's dictionary records ultra red as an obsolete term for infrared [1]. Its entry for the prefix says *ultra*, as regards any particular colour, means on the deep side of that colour [1]. The prefix could therefore mean either more of a color or beyond it, which may be why the term faded [1].\n\nThe next entry shows the prefix at work. Ultramarine is a brilliant blue from lapis lazuli, used widely from the thirteenth century despite its high cost [1]. Its name means from overseas, since the main supply of lapis lazuli lay in Afghanistan, and Paterson credits Guimet with first synthesising it in 1828, in response to a prize of 6,000 francs, though other books record a rival claim [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is a bright pink with no historical standing as the thing named [2]. In our archive of 23,781 paintings, no work holds a color within six units of it across five per cent of the canvas [2]. Because infrared is not visible, no painting could show it directly [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin ultra, beyond; later replaced by infrared",
+   "first_recorded": "origin undocumented in the sources",
+   "source": "Paterson, A Dictionary of Colour, p. 404"
+  },
+  "aka": [
+   "infrared (modern name)"
+  ],
+  "siblings": [
+   "red",
+   "crimson",
+   "rose",
+   "magenta"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FC6C85",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 404",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say ultra red is an obsolete term for?",
+   "choices": [
+    "Infrared",
+    "Ultraviolet",
+    "Crimson",
+    "Magenta"
+   ],
+   "answer": "Infrared",
+   "kind": "pick"
+  },
+  {
+   "q": "Who first synthesised ultramarine in 1828, per Paterson?",
+   "choices": [
+    "Jean-Baptiste Guimet",
+    "William Perkin",
+    "Isaac Newton",
+    "Marcel Proust"
+   ],
+   "answer": "Jean-Baptiste Guimet",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Ultra red is an old name for infrared, a kind of light we cannot see."
+ ],
+ "words": 189,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Guimet 1828 attributed to Paterson, rival claim (Gmelin) noted"
+  ]
+ }
+}

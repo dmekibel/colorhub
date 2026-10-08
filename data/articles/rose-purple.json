@@ -1,0 +1,117 @@
+{
+ "slug": "rose-purple",
+ "name": "Rose-Purple",
+ "hex": "#E09DDF",
+ "names": [
+  "Rose-Purple"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Rose-Purple is a light, bright purple-pink from Ridgway's 1886 color book; the books we hold are silent about it, so this is a short article about where the name comes from.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Ridgway name",
+   "body": "Rose-Purple was in Ridgway's Nomenclature of Colors of 1886 and reappears on plate XXVI of his 1912 Color Standards [2]. The ISCC-NBS dictionary of 1955 carried it over and files it under brilliant purple [2]. The name joins [[rose]] and [[purple]] [2]. Close neighbors in hue are [[rosy-pink]] and [[pinky-purple]], both also in our library [2]."
+  },
+  {
+   "id": "books",
+   "title": "What the books say",
+   "body": "Nothing. The only hit in our books is a shirt printed with crimson roses and purple poppies, which is a pattern, not a color term [1]. We found no passage on the color itself, so we say no more about its history [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive has this color covering at least 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "rose and purple (plant word plus color word)",
+   "first_recorded": "Ridgway, 1886",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "rosy-pink",
+   "pinky-purple"
+  ],
+  "parent": "rose",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    73.1,
+    42.6,
+    326.5
+   ],
+   "iscc": "brilliant purple"
+  },
+  "first_record": {
+   "year": 1886,
+   "source": "Ridgway"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 393",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, Rose-Purple: Ridgway 1886 and 1912 plate XXVI; ISCC-NBS 1955 block 222",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Rose-Purple",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Whose color book first carries the name Rose-Purple in our sources?",
+   "choices": [
+    "Ridgway",
+    "Munsell",
+    "Pantone",
+    "Crayola"
+   ],
+   "answer": "Ridgway",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: painters in our archive use this color widely.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rose-Purple has been a named color since at least 1886."
+ ],
+ "words": 152,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim about a nineteenth-century naming habit."
+  ]
+ }
+}

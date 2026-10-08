@@ -1,0 +1,129 @@
+{
+ "slug": "mud-brown",
+ "name": "Mud Brown",
+ "hex": "#60460F",
+ "names": [
+  "Mud Brown"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Mud Brown is a dark, olive-leaning brown, a descriptive everyday name that entered color lists only recently.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of wet soil",
+   "body": "Paterson defines mud as the color of wet soil and notes that it appears in Winifred Nicholson's *Chart of Colours* of 1944; mud brown he simply calls a dark brown [1]. Our library traces the specific name to a 2010 online color survey, the xkcd list, and to no earlier chart [2]. The ISCC-NBS system of 1955 would file this swatch as a \"moderate olive brown\" (block 95) at 3.9 CIEDE2000 units away, and the nearest name in our learning set is plain [[brown]], 9.8 away [2].\n\nThe darker end of the same family includes [[umber]] and [[mud]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color near it appears in 1,521 of the 23,781 paintings in our archive, 6.4%, more often than 88% of the named colors, as photographed [3]. It most often plays a mid-tone, and it is most devoted to Paulus Potter, in 8 of his 28 works here [3]. It shares canvases with Muddy Brown and [[mustard-brown]] more than chance [3]. The hue of old varnish also browns paintings, so a match is a screen color and not a pigment [3]. In printed English the name peaks in the 2010s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "wet soil",
+   "first_recorded": "xkcd color survey, 2010 (as a named swatch)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "mud"
+  ],
+  "siblings": [
+   "umber",
+   "mustard-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#60460F",
+   "min_cover": 0.01
+  },
+  "n_present": 1521,
+  "role": "mid-tone in 39% of 795 paintings",
+  "measured": {
+   "lch": [
+    32,
+    35,
+    81
+   ],
+   "iscc": "moderate olive brown, block 95, dE 3.9",
+   "nearest": [
+    [
+     "Brown",
+     9.8
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 2010
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mud\" and \"mud brown\", p. 271",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json and data/graph nodes: ISCC-NBS 1955, Munsell conversion), CIEDE2000 distances; xkcd color survey 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, all senses of the phrase (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define mud?",
+   "choices": [
+    "The color of wet soil",
+    "A bright yellow",
+    "A pale blue",
+    "A kind of pigment"
+   ],
+   "answer": "The color of wet soil",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mud Brown is rare in the paintings of our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mud Brown shows up in 6.4% of the paintings in our archive, more often than 88% of named colors."
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

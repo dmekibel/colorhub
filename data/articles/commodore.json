@@ -1,0 +1,114 @@
+{
+ "slug": "commodore",
+ "name": "Commodore",
+ "hex": "#253B8A",
+ "names": [
+  "Commodore"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Commodore is a deep blue recorded in Maerz and Paul's 1930 color dictionary, with a name that is a naval rank.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from the navy",
+   "body": "The swatch comes from Maerz and Paul's *Dictionary of Color* (1930), which records the name from 1921, on plate 43 [1]. It is a dark, saturated blue with a lightness of 28 on the LCH scale, closest to [[cobalt]] at a CIEDE2000 distance of 6.1 [1].\n\nThe color books never discuss the color. Their only appearances of the word are the rank, such as Commodore Arthur Phillip, who in 1787 was told to call at Brazil for cochineal on the way to Botany Bay [2]. No source here says the color was named for a rank, so its origin is undocumented."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Commodore is rare in painting. In our archive of 23,781 paintings it appears in 27, and it is rarer than 58% of the named colors [3]. Where it appears it most often plays an accent (92% of 26 paintings) [3]. It peaks in the 1900s, in 0.7% of the 1,674 paintings from then, about 4.6 times the museums' baseline [3]. As photographed, these are varnished surfaces, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a naval rank (origin of the color name undocumented)",
+   "first_recorded": "1921 (Maerz & Paul)",
+   "source": "library; Greenfield, A Perfect Red, ch. 19"
+  },
+  "aka": [],
+  "siblings": [
+   "cobalt-blue",
+   "navy",
+   "blue",
+   "indigo"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 27,
+  "role_accent_pct": 92,
+  "measured": {
+   "lch": [
+    28,
+    51,
+    293
+   ],
+   "nearest": [
+    [
+     "Cobalt",
+     6.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz & Paul 1930, plate 43 F 12), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In our archive, which role does commodore most often play inside a painting?",
+   "choices": [
+    "Accent",
+    "Shadow",
+    "Light",
+    "Hidden color"
+   ],
+   "answer": "Accent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color books explain how the color got its name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In our archive commodore blue is mostly an accent: 92% of the paintings that hold it use it that way."
+ ],
+ "words": 193,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

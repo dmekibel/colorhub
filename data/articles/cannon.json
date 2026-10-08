@@ -1,0 +1,113 @@
+{
+ "slug": "cannon",
+ "name": "Cannon",
+ "hex": "#343835",
+ "names": [
+  "Cannon"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Cannon is a very dark, slightly green-tinted grey, near gunmetal; its name is undocumented in the books.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the books say",
+   "body": "No color book here describes a cannon color. Cannon appear only in passing: Spanish ships were stripped of timber, iron and cannon once they reached the New World [1], and Perkin's madder works dropped cannon balls into a rotating cylinder to help mix the dye bath [2].\n\nOne pigment trace is real: terra di campana was said to be earth from the crust that formed on the moulds used to cast bells and cannon [3]. The origin of this swatch name is undocumented, and it sits nearest to [[gunmetal]], [[charcoal]] and [[black]], with [[bramble]] close by in darkness."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dark greys are everywhere in paint. Cannon appears in 5.78% of the 23,781 paintings in our archive (1,374 paintings, as photographed), more often than 91% of named colors [4]. It peaks in the 1700s, at 1.5 times the rate expected from the baseline [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "origin undocumented",
+   "source": "none documented"
+  },
+  "aka": [],
+  "siblings": [
+   "gunmetal",
+   "charcoal"
+  ],
+  "parent": "black",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "bramble",
+    "gloss": "another dark near-black, unrelated name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1374,
+  "peak_decade": "1700s",
+  "baseline_lift": 1.5
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 17 (\"Madder\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"terra di campana\", p. 93",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which decade does cannon peak in our painting archive?",
+   "choices": [
+    "The 1700s",
+    "The 1900s",
+    "The 1300s"
+   ],
+   "answer": "The 1700s",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books document where this color name comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark grey is common in museum paintings: cannon appears in nearly 6% of them."
+ ],
+ "words": 158,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Awkward unsourced comparison reworded"
+  ]
+ }
+}

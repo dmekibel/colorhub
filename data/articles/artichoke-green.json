@@ -1,0 +1,107 @@
+{
+ "slug": "artichoke-green",
+ "name": "Artichoke Green",
+ "hex": "#999F7D",
+ "names": [
+  "Artichoke Green"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Artichoke Green is a soft, greyed yellow-green, named for the vegetable.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines artichoke green as the yellowish-green color of the artichoke [1]. The library records the name in Maerz and Paul's dictionary, first recorded in 1905, on plate 20 B 2 [2]. It is a textile and fashion color, grey enough to feel calm and natural [2].\n\nIts nearest standard color is [[sage]], at a distance of 5.9, and its nearest named neighbor is Vetiver Green [2]. It belongs with the muted greens such as [[moss-green]] and [[olive]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings the color appears in 3.29% of the paintings, as photographed [3]. It is more common than 82% of the named colors and peaks in the 1900s, at 2.0 times the rate expected from the museums' baselines [3]. Inside a painting it most often plays a hidden color, in 39% of cases [3]. Zacarías González Velázquez is its most devoted painter here, with 6 of 29 works [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the artichoke",
+   "first_recorded": "1905 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "sage",
+   "olive",
+   "moss-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 783,
+  "pct_paintings": 3.29,
+  "peak_century": 1900,
+  "library_first": 1905,
+  "nearest": [
+   [
+    "Sage",
+    5.9
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 33, \"artichoke green\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Artichoke Green is named for what?",
+   "choices": [
+    "The artichoke vegetable",
+    "A dye made from thistles",
+    "A place in Italy"
+   ],
+   "answer": "The artichoke vegetable",
+   "kind": "pick"
+  },
+  {
+   "q": "Paterson describes artichoke green as yellowish green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Artichoke Green was recorded as a color name by 1905."
+ ],
+ "words": 159,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

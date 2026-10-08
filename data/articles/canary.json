@@ -1,0 +1,272 @@
+{
+ "slug": "canary",
+ "name": "Canary",
+ "hex": "#FFEF00",
+ "names": [
+  "Canary"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Canary is the bright, slightly greenish yellow of the songbird, a color that spent the nineteenth century moving from bird plumage to chrome-yellow paint on carriages and cabs.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bird's color",
+   "body": "Paterson defines *canary* as a bright yellow like the plumage of the bird, and *canary yellow* as the bright yellow of the canary [1]. The swatch here, #FFEF00, is the vivid screen version: in the ISCC-NBS system of 1955 its nearest block is a brilliant greenish yellow, and the name also appears in the Crayola list [3].\n\nThe word has drifted. Werner's table of 1774 used descriptive names such as milk white, canary green and sky blue [4]. When the mineralogist Jameson revised the list, he changed canary green to siskin green [5]. Paterson now glosses canary green as a dark yellow [1]. A name that began as a green ended as a yellow.\n\nIn the books, the word \"Canary\" more often means the islands, where cochineal farming grew sixfold between 1855 and the early 1870s [16]. The books we read do not say how the bird or the color got its name."
+  },
+  {
+   "id": "table",
+   "title": "A bird in the table",
+   "body": "Syme's edition of Werner, in 1821, uses the canary twice [6]. Number 63, [[primrose-yellow]], is shown by a pale canary, and number 66, [[gamboge-yellow]], by the wings of the goldfinch and the canary [6]. Both entries came from Syme's own 1814 edition [6]. His 1823 treatise on British song-birds shows primrose yellow on a canary's feathers [7].\n\nSyme mixes primrose yellow from gamboge yellow, a little sulphur yellow and much white [7]. So one bird covers a pale yellow and a deep one, and the single bright swatch is only one point on that range [6][7]."
+  },
+  {
+   "id": "chrome",
+   "title": "Chrome yellow and the cab",
+   "body": "The canary of the street was a mineral. In 1797 the chemist Vauquelin found a new metal in crocoite, a red lead ore from Siberia, and named it chrome from the Greek word for color [8]. Lead chromate, made synthetically, proved a rich yellow, and in 1804 Vauquelin and Berthollet suggested it as a pigment [8]. By 1809 chrome yellow was on the painter's palette, and Thomas Lawrence used it in a portrait of 1810 [8].\n\nThe hue could be tuned. Mixed half and half with lead sulphate it gave a primrose yellow, 65 per cent chromate gave a lemon yellow, and more chromate deepened it [8]. Its strong tinting power meant extenders such as barium sulphate could stretch it, and so it reached commercial paint and the coaches of Europe, ahead of the canary-yellow taxis of the United States [8]. The Pigment Compendium cautions that \"canary yellow\" was one of several shade terms for chrome yellow that never reliably named a composition [10]. It adds that chrome yellow tends to darken in light [10].\n\nThe tale is told that Delacroix, wanting to emphasize a yellow drapery, looked at a Paris cab painted canary yellow and saw it cast a violet shadow in the sun [9]. Ball gives it only as a tale, and we could not verify it, but the optics hold: look at the shadow beside any bright yellow object and it leans violet [9]. Ball treats the episode as a hinge to Impressionism [9]."
+  },
+  {
+   "id": "street",
+   "title": "Canary in the street and the mine",
+   "body": "Pastoureau warns against reading earlier centuries through their paintings. In interiors of the late 1600s and early 1700s, yellows look dull, and lemon or canary yellows appear only in still lifes of fruit, though varnish and age have altered the pictures [11]. By 1827 a Montpellier doctor proposed that registered prostitutes wear a canary yellow hat and belt, and after 1850 officials more often asked for plain dress without garish yellow [12].\n\nBy the 1880s the color was one of the partners recommended for [[heliotrope]], with eucalyptus green and peacock blue, in what one commentator called startling combinations [13]. St Clair calls the mineral [[orpiment]] a canary-yellow arsenic sulfide, about 60 per cent arsenic [14]. In gem grading a [[gem:diamond|diamond]] with a deep yellow tinge is a canary diamond, set apart from the paler cape stones [2][15]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Canary is extremely rare in painting. In our archive of 23,781 paintings, a color within ten units of this swatch covers at least five per cent of the canvas in only three [17]. They are a Kalighat album page of about 1890 (39 per cent of its area), [[painter:emile-bernard|Émile Bernard]]'s *La Moisson* of 1888 and [[painter:piet-mondrian|Mondrian]]'s *[[painting:commons-Q17491107|Composition in Red, Yellow and Blue]]* of 1922 [17]. Tighten the match to six units and only the Mondrian remains [17]. These are photographs of aged, varnished paintings, so read the matches as screen colors [17].\n\nIn printed English, the adjective use of *canary* peaks in the 1890s [18]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the canary (the songbird)",
+   "first_recorded": "Werner's table used canary green by 1774; Syme's 1814 and 1821 editions use the canary bird as an example",
+   "source": "Baty, Nature's Palette; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "canary yellow"
+  ],
+  "siblings": [
+   "primrose-yellow",
+   "lemon-yellow",
+   "sulphur-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "siskin-green",
+    "gloss": "Jameson's renaming of Werner's canary green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FFEF00",
+   "de2000": 10,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "cma-162443",
+   "commons-Q17492114",
+   "commons-Q17491107"
+  ],
+  "tight_match": {
+   "de2000": 6,
+   "n_present": 1
+  },
+  "ngram": {
+   "term": "canary",
+   "adjective_peak": 1890
+  },
+  "measured": {
+   "lch": [
+    93.0,
+    92.5,
+    98.6
+   ],
+   "contrast_white": 1.19
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"canary\", \"canary green\", \"canary yellow\", p. 87",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"diamond\", p. 145",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, nodes-c.json): ISCC-NBS 1955 block 98 (brilliant greenish yellow), Crayola list via Wikipedia",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 77",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 26",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 186 (Syme's yellows, nos. 62-68)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 188",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Kirby et al., Pigment Compendium, \"chrome yellow\", p. 113",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 30",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 33",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 79 (\"Heliotrope\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 40 (\"Orpiment\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 20 (diamond color terms)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 21-22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 painting photographs, as photographed), swatch #FFEF00, CIEDE2000 within 10 (and within 6), at least 5% of canvas; tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "data",
+   "cite": "Google Books Ngram, adjective use of 'canary' (data/graph/fieldnotes/c.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Jameson do to Werner's color called canary green?",
+   "choices": [
+    "Renamed it siskin green",
+    "Moved it into the yellows",
+    "Deleted it",
+    "Mixed it with grass green"
+   ],
+   "answer": "Renamed it siskin green",
+   "kind": "pick"
+  },
+  {
+   "q": "Which pigment gave the bright canary yellow of nineteenth-century coaches and cabs?",
+   "choices": [
+    "Chrome yellow, a lead chromate",
+    "Saffron",
+    "Indian yellow",
+    "Weld"
+   ],
+   "answer": "Chrome yellow, a lead chromate",
+   "kind": "pick"
+  },
+  {
+   "q": "What color is the shadow beside a bright canary-yellow object in sunlight, as in the Delacroix tale?",
+   "choices": [
+    "Violet",
+    "Green",
+    "Brown",
+    "Orange"
+   ],
+   "answer": "Violet",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A cab painted canary yellow is said to have taught Delacroix to paint yellow's violet shadow.",
+  "Werner's table once had canary green; Jameson changed it to siskin green.",
+  "Only 3 of our 23,781 paintings carry this bright canary over five per cent of the canvas."
+ ],
+ "words": 737,
+ "status": "checked",
+ "checked": {
+  "by": "article writer, sentence-to-card trace",
+  "date": "2026-10-08",
+  "issues": [
+   "Books say nothing on origin of the bird's name; stated as such.",
+   "Delacroix cab episode is a told tale in Ball; marked as such. Optics sentence is interpretive and cited to Ball.",
+   "Library note merges several Maerz & Paul first-use dates (1789, 1868) across names; not used.",
+   "Paterson 'canary green' = dark yellow vs Werner green: drift noted, not resolved."
+  ]
+ }
+}

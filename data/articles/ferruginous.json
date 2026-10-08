@@ -1,0 +1,156 @@
+{
+ "slug": "ferruginous",
+ "name": "Ferruginous",
+ "hex": "#B36149",
+ "names": [
+  "Ferruginous"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Ferruginous means rust-colored, from the Latin for rust, and describes the reddish brown of iron-bearing earths and stones.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of rust",
+   "body": "Paterson defines ferruginous as the color of iron rust, a reddish brown, and gives the Latin root *ferrugin-* for rusty [1]. He lists a related compound, fusco-ferruginous, for a dark rust [2], and sends the plain color word iron back to ferruginous [3]. It is mainly a describer's word, used for rocks, plants, feathers and soils.\n\nIn pigment books the word keeps turning up as a plain adjective for iron-rich earth. Church wrote in 1901 that one kind of Vandyke brown was made by calcining ferruginous earths or brown ochres [4]. Salter (1869) called Verona brown a native ferruginous earth, while Toch (1916) called the name a fancy label for a mix of burnt umber with burnt or raw sienna [5]. Books disagree here, and by 1928 Heaton thought the name obsolete [5]."
+  },
+  {
+   "id": "place-names",
+   "title": "A word hidden in a place name",
+   "body": "The Pigment Compendium records a guess that the French ochre name *ocre de rue* meant ochre from brooks of ferruginous waters, which Mérimée proposed in 1830 [6]. It is one proposed origin, not a settled one [6]. For the family see [[ochre]], [[sienna]], [[umber]] and [[rust]]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The earliest record of the name in our sources is Ridgway's color book of 1886, with later entries in Maerz and Paul (1930) and the ISCC-NBS system (1955) [7]. The swatch is a warm brick brown, near [[terracotta]] and [[reddish-brown]] [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color appears in 433 of 23,781 paintings in our archive, 1.82%, as photographed [8]. In 82% of the 321 paintings where it is measured within the painting, it plays an accent [8]. It peaks in the 1300s, at 4.4% of 251 paintings, or 2.0 times the expected rate [8]. Amedeo Modigliani has it in 4 of 18 works, and Nepal is the most over-represented country at 5.3 times, from 6 of 25 paintings [8]. In printed English the adjective peaks in the 1850s [8]. A match in an aged photograph is a look-alike hue, not a pigment test [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin ferrugo, rust",
+   "first_recorded": "Ridgway, 1886 (earliest in our sources)",
+   "source": "Paterson; ColorHub name records"
+  },
+  "aka": [
+   "rust-colored"
+  ],
+  "siblings": [
+   "rust",
+   "terracotta"
+  ],
+  "parent": "reddish-brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 433,
+  "role": "accent 82%",
+  "peak": "1300s 4.4% of 251",
+  "painters": [
+   {
+    "name": "Amedeo Modigliani",
+    "hits": 4,
+    "n": 18
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"ferruginous\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"fusco-ferruginous\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"iron\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Vandyke brown\", p. 395",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Verona brown\", p. 400",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"ochre\" entry, p. 294",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library and name records (data/library.json, data/graph)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes); Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does ferruginous mean?",
+   "choices": [
+    "Rust-colored",
+    "Silver-grey",
+    "Blood red",
+    "Olive"
+   ],
+   "answer": "Rust-colored",
+   "kind": "pick"
+  },
+  {
+   "q": "In most paintings that contain it, what role does this color play?",
+   "choices": [
+    "An accent",
+    "The sky",
+    "The shadows",
+    "The background"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Ferruginous is Latin for rusty, and in paintings it is mostly a small accent, not the main color."
+ ],
+ "words": 328,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

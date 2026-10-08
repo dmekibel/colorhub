@@ -1,0 +1,109 @@
+{
+ "slug": "light-coral",
+ "name": "Light Coral",
+ "hex": "#F08080",
+ "names": [
+  "Light Coral"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Light coral is a web color, a soft pinkish red from the X11 set, defined by its hex code rather than a long history.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name means",
+   "body": "Paterson's dictionary lists *LightCoral* as a pinkish red, one of the 140 colors in the X11 Color Set, with the hex code #F08080 [1]. It is a web color first: the name comes from computer color lists, not from a pigment or a dye [1]. The base word [[coral]] is defined in the same book as a deep pink or reddish orange [1]. Neighbors are [[salmon]], [[light-salmon]] and [[pink]] [2]. The nearest ISCC-NBS name for the swatch is vivid pink [2]. Like every web color it is defined by a hex code, so the swatch is a screen approximation and not a dye or a paint [2]. Nothing in our books ties it to a pigment or a historical source [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Light coral is rare in painting. It appears in 5 of the 23,781 paintings in our archive, 0.02 per cent, rarer than 79 per cent of named colors, as photographed [3]. In Google Books the word peaks in the 1930s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of coral, lightened",
+   "first_recorded": "X11 color set (web color)",
+   "source": "Paterson, A Dictionary of Colour, \"LightCoral\""
+  },
+  "aka": [
+   "LightCoral",
+   "lightcoral"
+  ],
+  "siblings": [
+   "salmon",
+   "light-salmon"
+  ],
+  "parent": "coral",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5,
+  "pct": 0.02,
+  "hex_code": "#F08080"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"LightCoral\" (p. 242), \"coral\" (p. 129)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 nearest names, Ridgway 1912 and Maerz & Paul 1930 entries, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, relative to peak (data/graph)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many colors does the X11 Color Set hold, according to Paterson?",
+   "choices": [
+    "140",
+    "16",
+    "1,000"
+   ],
+   "answer": "140",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: light coral is a common color in museum paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light coral began as a line in a computer color list, with the hex code #F08080."
+ ],
+ "words": 180,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

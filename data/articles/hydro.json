@@ -1,0 +1,116 @@
+{
+ "slug": "hydro",
+ "name": "Hydro",
+ "hex": "#6E897D",
+ "names": [
+  "Hydro"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Hydro is a muted grey-green from the 1930 Maerz and Paul dictionary, first recorded in 1920, and none of the color books we hold explains the name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no recorded story",
+   "body": "Maerz and Paul's *Dictionary of Color* lists Hydro on plate 37 and records its first use in 1920, in the fashion and textile trade [1]. The swatch is a quiet green with a hint of blue, close to [[sea-green]] in feeling and far duller than [[viridian]] [1]. The origin of the name is undocumented. It may suggest water, but no source says so, so we leave it as a guess nobody can check."
+  },
+  {
+   "id": "books",
+   "title": "What the search turns up",
+   "body": "Searching 29 color books for the word finds only the prefix *hydro-* in chemistry [2][3]. The Pigment Compendium uses it for hydrated and hydrocarbon materials, among them hydrocerussite, a lead carbonate [2]. Balfour-Paul's *Indigo* uses it in two places: chemists in 1898 showed that the plant's indican is hydrolysed to indoxyl, and a stable sodium hydrosulphite (dithionite) vat reducer arrived by 1904 [3].\n\nThese facts concern pigments and dyes, not the color Hydro, and no source connects them to the name [2][3]. We report them only to show the search was done and found nothing more."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch has a lightness of about 55 and a very low chroma of about 13, which is why it reads as a grey-green [1]. Its nearest archive color is Viridian, 10.0 units away, too far to count as a match [1]. We found no archive count for this swatch."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1920 (Maerz & Paul 1930)",
+   "source": "Maerz & Paul 1930, plate 37 G 3"
+  },
+  "aka": [],
+  "siblings": [
+   "sea-green",
+   "celadon"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub library, Maerz & Paul 1930, plate 37 G 3",
+  "first_recorded": 1920,
+  "lch": [
+   55,
+   13,
+   165
+  ],
+  "nearest": [
+   [
+    "Viridian",
+    10.0
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Maerz & Paul, A Dictionary of Color (1930), plate 37, via ColorHub library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries for hydrocerussite and related hydrated compounds",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 110 and 140",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the research say about the name Hydro?",
+   "choices": [
+    "Its origin is undocumented",
+    "It comes from hydrangeas",
+    "It comes from hydroelectric dams",
+    "It was coined by Perkin"
+   ],
+   "answer": "Its origin is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch is a vivid, saturated green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hydro is dated to 1920 but nobody wrote down where the name came from."
+ ],
+ "words": 240,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Dropped unverifiable \"twice\" count"
+  ]
+ }
+}

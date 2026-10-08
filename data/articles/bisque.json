@@ -1,0 +1,113 @@
+{
+  "slug": "bisque",
+  "name": "Bisque",
+  "hex": "#FFE4C4",
+  "names": [
+    "Bisque"
+  ],
+  "tier": "standard",
+  "depth": "medium",
+  "lede": "Bisque is a pale pinkish or yellowish brown, a peach-tinted cream that became one of the standard named colors of web design.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A pale pink-brown",
+      "body": "Paterson defines bisque as a pale pinkish or yellowish brown, and says it was first recorded as a color term in 1922 [1]. The same dictionary lists it as an X11 color with the hex code #FFE4C4, the value our swatch uses [1]. The books we read do not explain where the word comes from, so the origin is undocumented here.\n\nThe date needs care. Our library finds the name already in Ridgway's color standards of 1912, and later in Maerz and Paul's dictionary of 1930 and the ISCC-NBS lists of 1955 [3]. Paterson's 1922 and Ridgway's 1912 cannot both be the first use, so treat 1922 as one dictionary's record rather than the beginning [1][3]."
+    },
+    {
+      "id": "neighbors",
+      "title": "Close relatives",
+      "body": "Bisque sits among the warm off-whites. Its nearest everyday word is [[beige]], at 6.3 units on the CIEDE2000 scale [3]. [[blanched-almond]] is a little paler and yellower, and [[biscuit]] and [[almond]] are neighboring names for similar tints [3].\n\nOlder color standards file a near-twin under a different name: Ridgway, ISCC-NBS and Maerz and Paul together give Cartridge Buff as a near-duplicate of bisque [3]. Two names for one swatch is common among the web colors, and it is a reminder that these names label regions of color space, not distinct materials."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, bisque appears in 310, or 1.3%, as photographed [3]. Inside a painting it most often plays a light, in 53% of the 178 paintings where we measured it by lightness rank [3]. It peaks in the 1900s, at 1.5% of the 1,674 paintings from that decade range, about 1.8 times the expected rate against the same museums [3].\n\nThe most devoted painter is Xugu, who uses it in 4 of 16 works in the archive, 6.4 times the baseline [3]. By country it is most over-represented in China, at 2.8 times expected [3]. It shares canvases with Pastel Parchment and Linen Grey more than chance would give [3].\n\nThese are photographs of aged, varnished paintings and silks, so a match is a look-alike, not a pigment test. The earliest match is from the year 1000 in a thin early archive, which makes it a floor, not a first use [3]. The word itself peaks in printed English in the 1980s [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "origin undocumented in the books read",
+      "first_recorded": "1922 per Paterson; Ridgway (1912) in our library",
+      "source": "Paterson; Ridgway"
+    },
+    "aka": [
+      "Cartridge Buff"
+    ],
+    "siblings": [
+      "blanched-almond",
+      "biscuit"
+    ],
+    "parent": "beige",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "23,781 paintings",
+    "n_present": 310,
+    "pct": 1.3,
+    "peak": "1900s",
+    "painter": "Xugu 4 of 16",
+    "country": "China 2.8x"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 51 (\"bisque\")",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "Colorhub data, library.json: ridgway 1912, maerz-paul 1930, iscc-nbs 1955, archive and Ngram fieldnotes",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "How does Paterson describe bisque?",
+      "choices": [
+        "Pale pinkish or yellowish brown",
+        "Deep grey-green",
+        "Bright orange-red"
+      ],
+      "answer": "Pale pinkish or yellowish brown",
+      "kind": "pick"
+    },
+    {
+      "q": "Which country is bisque most over-represented in, in our paintings archive?",
+      "choices": [
+        "China",
+        "Italy",
+        "Netherlands"
+      ],
+      "answer": "China",
+      "kind": "pick"
+    },
+    {
+      "q": "Paterson's 1922 date proves bisque was not used before 1922.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Bisque was already in Ridgway's 1912 color standards, ten years before Paterson's first recorded date."
+  ],
+  "words": 390,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed Paterson citation from neighbor-names claim (not in Paterson entry)."
+    ]
+  }
+}

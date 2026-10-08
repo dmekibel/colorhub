@@ -1,0 +1,114 @@
+{
+ "slug": "quinacridone-magenta",
+ "name": "Quinacridone Magenta",
+ "hex": "#8E3A59",
+ "names": [
+  "Quinacridone Magenta"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Quinacridone magenta is a modern artists' pigment, a deep red-violet that painters use as the magenta primary in color mixing.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "A modern magenta primary",
+   "body": "Gurney lists quinacridone magenta, pigment code PR 122, among the few pigments that come close to the cyan, magenta and yellow primaries, alongside cadmium yellow light (PY 35) and phthalo cyan (PB 17) [1]. He cautions that the magenta and the cyan are unsatisfactory if you want opacity, and that no pigment has every property an artist wants [1].\n\nWestland uses it as one of three oil paints in a mixing test, with lemon yellow and phthalocyanine blue, photographed and plotted in L*a*b* space [2]. Each pair mixes along a line that bulges outward, so the mixtures stay high in chroma [2]. The same chapter notes Mondrian's traditional red, yellow and blue primaries [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The pigment is far newer than the paintings in our archive, so this swatch is a screen color only [3]. In 23,781 paintings, a color within six units of it covers at least five per cent of the canvas in 8 works, the earliest an Indian devotional painting of about 1900 [3]. Paul Sérusier's *Les trois fileuses* of 1915 is another [3]. As always these are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the quinacridone chemical family",
+   "first_recorded": "origin undocumented in the sources",
+   "source": "Gurney, Color and Light, p. 77"
+  },
+  "aka": [
+   "PR 122",
+   "magenta (artists' primary)"
+  ],
+  "siblings": [
+   "magenta",
+   "mulberry",
+   "plum",
+   "crimson"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8E3A59",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 8,
+  "top_paintings": [
+   "cma-164457",
+   "Sérusier, 1915"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 77",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Westland, Principles of Color Design, ch. 77 (\"Primary Colors\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which pigment code does Gurney give for quinacridone magenta?",
+   "choices": [
+    "PR 122",
+    "PY 35",
+    "PB 17",
+    "PV 16"
+   ],
+   "answer": "PR 122",
+   "kind": "pick"
+  },
+  {
+   "q": "What do Gurney's magenta and cyan pigments lack, if opacity matters?",
+   "choices": [
+    "Opacity",
+    "Chroma",
+    "Lightfastness",
+    "Brightness"
+   ],
+   "answer": "Opacity",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Quinacridone magenta is one of the few pigments that nearly reaches the printers' magenta primary."
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,178 @@
+{
+ "slug": "fern",
+ "name": "Fern",
+ "hex": "#63A950",
+ "names": [
+  "Fern"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Fern is a clear mid-bright leaf green, and an irony of dye history: ferns were among the plants northern Europeans used to dye green, yet gave weak, unstable results.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The swatch",
+   "body": "Our library takes Fern from the xkcd survey, from ISCC-NBS (block 120) and from Maerz and Paul, who date the name to 1924 and place it on plate 21, block I 7 [1]. Its nearest named color is Asparagus [1]. It is lighter and livelier than [[fern-green]], the deeper #4F7942 [2]. Compare [[leaf-green]] and [[apple-green]]."
+  },
+  {
+   "id": "dye",
+   "title": "Ferns in the dye vat",
+   "body": "In northern Europe, Pastoureau notes, green dyeing was relatively easy: nettle, fern, plantain, oak leaves and birch bark gave a wide range of shades [3]. But the dyes hardly penetrated the fibers, and most greens were neither vivid nor solid [3]. For a long time Europeans could not get a pure, rich and stable green from such plants [4].\n\nThe same lack of an effective mordant, Pastoureau argues, made the yellows of the so-called barbarian dyers dull and washed out, and fern was one of their sources there too [5]."
+  },
+  {
+   "id": "may",
+   "title": "Wearing the May",
+   "body": "Green was also worn raw. To wear the May meant attaching an element of greenery to oneself, a crown, a necklace or a hat of plants, ferns or branches [6]. Someone seen with no green at all was said to be *pris sans verd* [6]."
+  },
+  {
+   "id": "ash",
+   "title": "Ash",
+   "body": "Fern's other contribution was ash. Native American tribesmen mixed burned fern ash into tattoo pigments [7]. Three hundred years ago, Finlay writes, linen workers near Glasgow bleached cloth with sour milk and fern ashes, laying it out in lines for many days [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, only 6 (0.03%) hold this swatch within six units of ΔE2000 over at least five per cent of the canvas, as photographed [9]. The strongest is a *Portrait of Emperor Jahangir*, 1795, where it covers 32% of the picture [9]. Next come Matisse's *Nymph and Satyr*, 1908, Gauguin's *Mother and Child under a Tree at Pont-Aven*, 1886, and Van Gogh's [[painting:nga-163323|Green Wheat Fields, Auvers]], 1890, at 16% [9].\n\nFive of the six date from 1886 or later [9]. The clear mid-green that fern could not give a dyer is rare in old painting, and these few matches are mostly from the modern era. These are photographs of aged, varnished paintings, so a match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fern plant",
+   "first_recorded": "1924 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "fern-green",
+   "leaf-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "fern-green",
+    "gloss": "a deeper, greyer green (#4F7942), the better-known fern color"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#63A950",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 6,
+  "top_paintings": [
+   "aic-62243",
+   "commons-Q21723020",
+   "commons-Q79790701",
+   "nga-163323"
+  ],
+  "first_dated": {
+   "id": "aic-62243",
+   "painter": null,
+   "year": 1795
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library, \"Fern\": ISCC-NBS block 120, Maerz & Paul first recorded 1924 plate 21 I 7, nearest Asparagus",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, \"Fern Green\" #4F7942",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 27",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 298",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, DE2000 6, min cover 5%, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did northern European fern and nettle greens disappoint?",
+   "choices": [
+    "The dyes hardly penetrated the fibers, so greens were not vivid or solid",
+    "Ferns only grow in summer",
+    "The dyes were poisonous"
+   ],
+   "answer": "The dyes hardly penetrated the fibers, so greens were not vivid or solid",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, most paintings matching the Fern swatch date from before 1800.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ferns were a dye plant for green in northern Europe, but never a good one [3].",
+  "Only 6 of 23,781 museum paintings hold this clear mid-green, and five of them date from 1886 or later [9]."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All 8 claims verified vs Pastoureau (Green, Yellow), Finlay; no changes"
+  ]
+ },
+ "words": 376
+}

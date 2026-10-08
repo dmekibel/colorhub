@@ -1,0 +1,120 @@
+{
+ "slug": "pale-lilac",
+ "name": "Pale Lilac",
+ "hex": "#D8C5D0",
+ "names": [
+  "Pale Lilac"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Lilac is a faint, greyed pink-purple, a color Ball uses to show how Rembrandt could make a violet tint without any blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Pale lilac is [[lilac]] with the strength turned down. Paterson uses the words to define lavender, \"pale lilac\" being his shorthand for the flower's color [1], and St Clair's glossary describes pearl as a very pale lilac-gray [2]. The swatch is a greyish one: ISCC-NBS block 252 calls it a \"pale purplish pink\", and Ridgway's 1912 atlas carries it [3]. The xkcd survey's version is more purple, #E4CBFF [3].\n\nIt sits with [[lavender]] and [[pale-purple]], and shades into the greys [1][3]."
+  },
+  {
+   "id": "rembrandt",
+   "title": "Rembrandt's lilac",
+   "body": "Ball offers the best use of the phrase. Hendrickje Stoffels's dress in Rembrandt's portrait of about 1654 to 1656 might be called pale lilac, he says, yet it contains no blue pigment [4]. The violet tint comes from the faint blueness of lead white mixed with charcoal black, warmed with a little red lake [4]. It is a useful lesson: a color we name from a mix can come from pigments that contain none of its named hues [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 41 carry this color over at least five per cent of the canvas, as photographed [5]. In 81 per cent of the 26 paintings where we measured its rank, it plays a light [5]. Sixteen of the matches are from the 1800s, and the earliest dated match is a painting by Bartolomeo Caporali of about 1452, a floor not a first [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lilac flower, pale",
+   "first_recorded": "Ridgway, 1912 (as a color term in our library)",
+   "source": "Ball, Bright Earth, ch. 14"
+  },
+  "aka": [],
+  "siblings": [
+   "lilac",
+   "lavender",
+   "pale-purple",
+   "mauve"
+  ],
+  "parent": "lilac",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 41,
+  "iscc_nbs": "block 252, pale purplish pink",
+  "role": "light (81% of 26)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 237, \"lavender\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Pearl\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Ball explain the pale lilac of Hendrickje's dress?",
+   "choices": [
+    "Lead white and charcoal black, tinted with a little red lake",
+    "A layer of ultramarine",
+    "Powdered amethyst"
+   ],
+   "answer": "Lead white and charcoal black, tinted with a little red lake",
+   "kind": "pick"
+  },
+  {
+   "q": "Does Ball say Hendrickje's dress contains blue pigment?",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rembrandt's pale lilac dress has no blue in it: lead white, charcoal black and a little red lake do the work."
+ ],
+ "words": 242,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

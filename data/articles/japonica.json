@@ -1,0 +1,125 @@
+{
+ "slug": "japonica",
+ "name": "Japonica",
+ "hex": "#A26A73",
+ "names": [
+  "Japonica"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Japonica is a dusty rose-mauve from the Maerz and Paul color dictionary of 1930, named with the Latin word for 'of Japan'.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a recorded story",
+   "body": "Maerz and Paul list Japonica on plate 4, where they date the name to 1926 [1]. The color books we have read say nothing about it as a color. Where \"japonica\" appears in them, it is a plant species word inside dye lists: *Caesalpinia japonica*, one of the sappan-type dyewoods, and *Sophora japonica*, the source of a yellow [2][3].\n\nThe origin of the color name is therefore undocumented here. That the dictionary borrowed it from a flower or shrub called japonica is plausible, but no source we hold says so, and we do not claim it."
+  },
+  {
+   "id": "dye",
+   "title": "Japonica in the dye books",
+   "body": "The sappan group of red dyewoods is a tangle of names, and the Pigment Compendium notes that species names for these plants are often applied wrongly [2]. *Sophora japonica* yields a yellow from the pistils and stamens of its flowers [3]. Neither is a rose-mauve, so the dye plants cannot be taken as the origin of this color."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is Maerz and Paul plate 4, J 2, matched by the ISCC-NBS system to a greyish purplish red [1]. It is quite close to [[mineral-red]] and [[indian-lake]] in the same neighborhood, though lighter, and to [[mulberry]] and [[rosewood]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color matches 16 paintings in the ColorHub archive, about 0.07% of it, as photographed [4]. Eight of them are Indian [4], a small sample but a striking lean toward one country."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (Latin japonica, 'of Japan', is the plant species epithet in the dye lists)",
+   "first_recorded": "1926 (Maerz & Paul)",
+   "source": "Maerz & Paul 1930; Pigment Compendium"
+  },
+  "aka": [],
+  "siblings": [
+   "mineral-red",
+   "indian-lake",
+   "mulberry",
+   "rosewood"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "rosewood",
+    "gloss": "another muted rose-brown, unrelated name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 16,
+  "pct": 0.07,
+  "india_paintings": 8,
+  "maerz_paul": "plate 4 J 2"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz & Paul 1930, plate 4 J 2; ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Brazilwood\", p. 73",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Sophora yellow\", p. 361",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the books' use of 'japonica' come from?",
+   "choices": [
+    "A plant species name in dye lists",
+    "A Japanese pigment",
+    "A royal court",
+    "A paint brand"
+   ],
+   "answer": "A plant species name in dye lists",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources document where the color name came from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Japonica appears in the dye books only as a plant's species name, never as a color."
+ ],
+ "words": 244,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

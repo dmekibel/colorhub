@@ -1,0 +1,137 @@
+{
+ "slug": "pale-turquoise",
+ "name": "Pale Turquoise",
+ "hex": "#AFEEEE",
+ "names": [
+  "Pale Turquoise"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pale Turquoise is a light, greenish-blue tint of turquoise, best known as a web color and as the wrong answer to the question of what color the universe is.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color",
+   "body": "PaleTurquoise is one of the named colors in the X11 set, with the hex code #AFEEEE, and it passed into CSS from there [1]. Our library also holds a second reading from the 2010 xkcd survey, #A5FBD5, a greener and brighter mint than the web color [2]. The ISCC-NBS system calls the web swatch a very light bluish green, 7.2 units away on the CIEDE2000 scale [2].\n\nThe name is simply \"pale\" added to [[turquoise]], so it carries the stone's history only at one remove. Its neighbors are [[aqua]], [[celeste]] and [[mint]] [2]."
+  },
+  {
+   "id": "universe",
+   "title": "The color of the universe",
+   "body": "In the early 2000s astronomers at Johns Hopkins University announced a color for the light of the whole universe, and the press reported it as pale turquoise [3][4]. Maggie Nelson's *Bluets* recalls reading that news and taking it as proof that the world's heart is blue [4]. The announcement was wrong. A computer error had skewed the calculation, and the true figure was closer to beige, the co-author Karl Glazebrook admitted [3][5].\n\nThe calculation asked what you would see if you could gather all the light from some 200,000 galaxies into a box [3]. The story is a good myth to know about: the universe is not turquoise, and a pale turquoise claim should be treated as a corrected error [3][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 5 works, or 0.02 per cent, which is rarer than 77 per cent of the named colors [6]. The earliest match is a view by Canaletto from 1748, and the latest is from 1904 [6]. That is 262 years before the name's first record in our sources, so these are look-alike hues in aged photographs, not evidence of a pigment [6]. In printed English the word peaks in the 2010s [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pale + turquoise (modifier grammar)",
+   "first_recorded": "X11 / CSS; xkcd survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "PaleTurquoise"
+  ],
+  "siblings": [
+   "aqua",
+   "celeste",
+   "mint"
+  ],
+  "parent": "turquoise",
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes)",
+  "match": {
+   "hex": "#AFEEEE"
+  },
+  "n_present": 5,
+  "first_dated": 1748,
+  "measured": {
+   "iscc": "very light bluish green",
+   "de2000": 7.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"PaleTurquoise\", p. 295",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway), CIEDE2000 distances; xkcd color survey 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Nelson, Bluets, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 125 (color of the universe)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was the corrected color of the universe, after the pale turquoise claim?",
+   "choices": [
+    "Beige",
+    "Deep blue",
+    "Black",
+    "Green"
+   ],
+   "answer": "Beige",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the universe is pale turquoise.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The universe was once reported to be pale turquoise; the number was a computer error and the corrected color was beige.",
+  "Pale Turquoise is #AFEEEE, a named color in the X11 set that CSS inherited."
+ ],
+ "words": 318,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No fixes needed; Finlay, Nelson, Glazebrook details verified"
+  ]
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "slug": "bruise",
+ "name": "Bruise",
+ "hex": "#7E4071",
+ "names": [
+  "Bruise"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Bruise is the color of a bruise: a dull, reddish purple that is named for the injury, not for any dye or pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for an injury",
+   "body": "The word names the injury, and the color it names is a muted purple that sits between [[plum]] and [[eggplant]] [1]. Our library finds it in the color lists of Ridgway (1912), Maerz and Paul (1930), ISCC-NBS (1955) and the xkcd survey (2010), and its nearest named color is Plum, 4.7 units away [1]. Two near-duplicates, Secret and Pansy Violet, appear in the same lists [1].\n\nThe swatch is a still image, but the books use the bruise for a color in motion."
+  },
+  {
+   "id": "changing",
+   "title": "Colors that change like a bruise",
+   "body": "Two writers use the bruise as a picture of a dye in the act of developing. Finlay describes a purple dye, painted onto cloth, as a stain that is lime green, then yellow, then purple, like a bruise [2]. The effect comes from a light-sensitive compound in the dye, which turns purple on exposure to sunshine and otherwise stays green [2]. Finlay adds that this is strictly painting, not dyeing, and that if anyone had found a way to fix the compound it could have made the world's first photographs [2].\n\nIn a second book Finlay recalls pulling dye from sea snails onto cotton thread with a Mexican guide, and watching the yarn change color like a bruise: yellow, then green, then lavender [3]. Compare [[tyrian-purple]], the purple of the ancient dye trade. The bruise comparison is a modern writer's image, not an ancient name for the color [2][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Bruise is almost absent from our paintings archive: one painting out of 23,781 holds it, a work dated 1900, and the color is rarer there than 86% of the named colors, as photographed [1].\n\nThe word peaks in the 2010s and rose fastest in the 1950s, in adjective use only [1]. The match is a look-alike hue in a photograph of a varnished painting, not evidence of a bruise-colored pigment."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the discoloration of skin after injury",
+   "first_recorded": "Ridgway 1912 in our library",
+   "source": "Ridgway; ISCC-NBS"
+  },
+  "aka": [],
+  "siblings": [
+   "plum",
+   "eggplant"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "23,781 paintings",
+  "n_present": 1,
+  "nearest": "Plum",
+  "de2000": 4.7,
+  "ngram_peak": "2010s"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Colorhub data, library.json: ridgway, iscc-nbs, maerz-paul, xkcd lists; archive and Ngram fieldnotes",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colour, chapter 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 89",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the purple in Finlay's shellfish stain need in order to appear?",
+   "choices": [
+    "Sunlight",
+    "Salt water",
+    "Heat"
+   ],
+   "answer": "Sunlight",
+   "kind": "pick"
+  },
+  {
+   "q": "Which sequence of colors does Finlay describe for the sea-snail yarn?",
+   "choices": [
+    "Yellow, green, lavender",
+    "Red, blue, black",
+    "White, pink, brown"
+   ],
+   "answer": "Yellow, green, lavender",
+   "kind": "pick"
+  },
+  {
+   "q": "The bruise comparison is an ancient name for the dye.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A purple dye can change color in minutes, from lime green to yellow to purple, like a bruise."
+ ],
+ "words": 318,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Corrected who handled the snails (Finlay and guide, not weavers); removed unsupported speculation about shadow/damaged paint."
+  ]
+ }
+}

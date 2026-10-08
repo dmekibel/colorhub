@@ -1,0 +1,200 @@
+{
+ "slug": "sinopia",
+ "name": "Sinopia",
+ "hex": "#CB410B",
+ "names": [
+  "Sinopia"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Sinopia is the red earth pigment of the Black Sea port of Sinope; painters later gave its name to the red underdrawing beneath a fresco, and heralds let it drift to green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The port and the name",
+   "body": "*Sinopia* comes from Sinope, now Sinop on the Black Sea coast of Turkey, the port from which red ochre reached the Roman world [1][2][3]. Pastoureau says the Latin terms derived from its name all evoke the color red [2]. Finlay reports that the best of it was stamped with a seal and sold as \"sealed Sinope\" [1].\n\nAncient writers agree on its quality but not on where the best came from. Theophrastus says the pigment was named for the port it shipped from [4]. Strabo, in the first century BC, says the finest ruddle came from Cappadocia and was called Sinopean because merchants carried it down to Sinope, and he ranks it with the Iberian vermilion [4]. Vitruvius lists Sinope, Egypt, the Balearic Islands and Lemnos as sources of red earth [4]. Pliny implies that *rubrica* was a second-rate sinoper [4]. Pastoureau adds that the long sea voyage to the western ports made it expensive [5]."
+  },
+  {
+   "id": "material",
+   "title": "What it was",
+   "body": "Sinopia was a relatively pure, earthy iron oxide, the same family as hematite and [[ochre]] [4]. Dioscorides, the Greek physician of the first century, called it heavy and dense and likened it to the color of liver [6]. Paterson says the Greeks painted ships in sinopic red [3].\n\nThe swatch here is a hot red-orange [7]. That is brighter than a liver-brown earth, so treat it as a screen stand-in for the word, not a measurement of the ancient pigment [6][7].\n\nBooks disagree on what the names covered. Paterson says sinopia is sometimes called cinnabar [3], and the Pigment Compendium cites a medieval recipe filed under *synoper* that is clearly cinnabar, the mercury sulphide behind [[vermilion]] [4]. Church (1901) lists sinopia as another word for red ochre [4]. Paterson also lists it among the names of oxide reds sold by place, such as [[venetian-red]] and [[indian-red]] [3]. For *cinabrese*, Montagna (1993) is cited for a mixture of two parts sinopia to one of bianco sangiovanni used in fresco and tempera, while the Compendium elsewhere calls it sinoper mixed with calcium carbonate [4]."
+  },
+  {
+   "id": "fresco",
+   "title": "The fresco drawing",
+   "body": "In wall painting the word turned from a material into a drawing. A sinopia is the preliminary sketch in red on the first coat of plaster, and the Latin word survived into French and English with that meaning [5][2][3]. Pastoureau notes that the red ochre chalk gives effects like blood [2].\n\nSt Clair relates that in July 1944 a bullet set fire to a building beside the leaning tower in Pisa and damaged its Renaissance frescoes [6]. When the remains were taken off the walls for repair, many preparatory sinopia drawings were revealed beneath, and they can still be seen [6]."
+  },
+  {
+   "id": "heraldry",
+   "title": "From red to green in heraldry",
+   "body": "In heraldry the word *sinople* meant red until the fifteenth century and then green [3][8]. Pastoureau says it comes from the Latin *sinopia*, the red clay of the Sinop region, and long signified red before taking the sense of green [8]. His book on green takes up why [2]. Where a medieval source says *sinople*, check which color is meant before picturing red."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this color covers at least five per cent of the canvas, within six units of color distance, in 60 paintings [9]. That is about a quarter of one per cent, and the match is as photographed: museum photographs of aged, varnished works, not a pigment test [9].\n\nThe best matches are Indian: the strongest is a page from a Basohli *Bhagavata Purana* of about 1760, where it fills 56 per cent of the picture [9]. Pahari painting carries it in 3 of 118 works, about ten times the archive rate [9]. By century the 1400s stand out at 8 of 945 paintings, about three times the archive rate [9]. The color most often seen beside it is [[rust]] [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Black Sea port of Sinope (modern Sinop, Turkey)",
+   "first_recorded": "Classical antiquity (Theophrastus, Strabo, Vitruvius, Pliny)",
+   "source": "Pigment Compendium, \"cinnabar\", \"ochre\", \"sinoper\"; Finlay, Colour, ch. 10"
+  },
+  "aka": [
+   "sinoper",
+   "sinopis",
+   "sinopite",
+   "sinople (heraldic green, later)"
+  ],
+  "siblings": [
+   "venetian-red",
+   "indian-red",
+   "ochre"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "vermilion",
+    "gloss": "cinnabar-based red, sometimes confused with sinopia in old recipes"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "el",
+    "name": "miltos (red ochre)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (CIEDE2000 within 6, at least 5% of the canvas), tools/article_field.py",
+  "n_present": 60,
+  "rate": 0.0025,
+  "top_paintings": [
+   "cma-136298",
+   "aic-88582",
+   "aic-129863"
+  ],
+  "movements": {
+   "Pahari": [
+    3,
+    118
+   ]
+  },
+  "century_1400": [
+   8,
+   945
+  ],
+  "company": [
+   "Rust",
+   "Mahogany",
+   "Camel"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. \"Heraldic green\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sinoper\", \"sinople\", \"Venice red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium entries, \"sinoper\", \"cinnabar\", \"red ochre\", \"cinabrese\" (citing Theophrastus, Strabo, Vitruvius, Pliny, Church 1901, Montagna 1993)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. \"With Pliny among the Painters\" and note 36",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "Swatch #CB410B, ColorHub color library (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Red, notes on heraldic tinctures (note 39)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (CIEDE2000 within 6, at least 5% of the canvas), tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In fresco painting, what is a sinopia?",
+   "choices": [
+    "A red preliminary drawing on the first coat of plaster",
+    "A green glaze laid over a finished wall",
+    "A kind of lime used to bind pigment",
+    "A final varnish"
+   ],
+   "answer": "A red preliminary drawing on the first coat of plaster",
+   "kind": "pick"
+  },
+  {
+   "q": "In heraldry, the word sinople, from a Latin word for a red clay, came to mean which color?",
+   "choices": [
+    "Green",
+    "Blue",
+    "Black",
+    "Purple"
+   ],
+   "answer": "Green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sinopia is both an ancient red earth from the port of Sinope and the red sketch hidden under a fresco [1][5].",
+  "In heraldry the word sinople came to mean green, though it long signified red; the reasons for the change are unknown [2][8]."
+ ],
+ "words": 631,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Heraldry: removed unsupported 'red until the fifteenth century' dating; Pastoureau says green from about 1350, Paterson differs; hedged",
+   "'His book on green takes up why' replaced: Pastoureau says the reasons are unknown",
+   "'Latin words for red derive from its name' corrected to Pastoureau's 'terms derived from its name evoke red'",
+   "Quiz question on dates rewritten"
+  ]
+ }
+}

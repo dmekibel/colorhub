@@ -1,0 +1,134 @@
+{
+ "slug": "vestal",
+ "name": "Vestal",
+ "hex": "#9F8196",
+ "names": [
+  "Vestal"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Vestal is a dusty grey-mauve from a 1930 American color dictionary, and its name points to the Roman priestesses of Vesta, who were dressed in white.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name and the color",
+   "body": "Maerz and Paul's 1930 dictionary lists Vestal as a fashion-and-textile name, first recorded in 1916 [1]. The books we hold give no definition of the color itself, so what the name was meant to suggest is undocumented [1]. The obvious reading is the Vestal Virgins of Rome, young women devoted to the goddess Vesta, who Pastoureau says dressed entirely in white [2][3]. That would make the name a hint of purity rather than a purple, which fits a muted shade this far from true white [1][2].\n\nOn screen the swatch is a grey-pink mauve, within about six units of [[mauve]] and [[mountbatten-pink]] [1]. The one other place our books use the word is a Roman story in which a Vestal is the mother of Romulus and Remus, with no mention of color [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive, a color within six units of this one covers at least five per cent of the canvas in 14 of 23,781 paintings, led by Sartorio's 1915 self-portrait at about a quarter of the picture [5]. The earliest match is a 1600 Madonna and Child [5]. These are photographs of aged, varnished paintings, so a match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "probably the Vestal Virgins of Rome (not documented for the color)",
+   "first_recorded": "1916 (Maerz & Paul, 1930)",
+   "source": "Maerz & Paul 1930; Pastoureau, White"
+  },
+  "aka": [],
+  "siblings": [
+   "opera-mauve",
+   "mountbatten-pink",
+   "thistle",
+   "lavender"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 14,
+  "match": {
+   "hex": "#9F8196",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    57,
+    17,
+    336
+   ],
+   "nearest": [
+    [
+     "Mauve",
+     5.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and Color Graph look-alikes, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 11",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 28",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 25 (\"The Robes of Jan Hus and of Judas\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do the books say Vestals wore?",
+   "choices": [
+    "Entirely white",
+    "Purple",
+    "Yellow",
+    "Red"
+   ],
+   "answer": "Entirely white",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books we hold define the color Vestal.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A 1916 fashion name with a 1600 Madonna as its earliest match in our archive."
+ ],
+ "words": 216,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All key claims verified against fact cards and book text; no changes."
+  ]
+ }
+}

@@ -1,0 +1,156 @@
+{
+ "slug": "hot-pink",
+ "name": "Hot pink",
+ "hex": "#FF69B4",
+ "names": [
+  "Hot pink",
+  "HotPink"
+ ],
+ "tier": "standard",
+ "lede": "Hot pink is an intensely saturated pink; a color Paterson calls particularly popular in the 1950s, close kin to Schiaparelli's shocking pink of 1937, and fixed on screens as one of the 140 X11 colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What hot means",
+   "body": "In color language *hot* means vivid or intense. Paterson's dictionary lists hot pink, hot orange and even hot pink-orange, and calls hot pink a color particularly popular in the 1950s [1]. It is also one of the 140 colors in the X11 set with the hex code #FF69B4, which is the swatch here [1]. The nearest named colors in our library are [[deep-pink]], [[cyclamen]] and Persian Rose [2]."
+  },
+  {
+   "id": "schiaparelli",
+   "title": "Shocking pink",
+   "body": "The designer Elsa Schiaparelli turned the idea into a signature [3]. She described her pink as foreign to the West, belonging to China and Peru, and shocking in its purity [3]. She used it for the packaging of her first perfume, released in 1937, whose bottle was designed by the painter Leonor Fini on the torso of Mae West and which came in a hot-pink case [3]. The perfume was named Shocking [3].\n\nThe color recurred in her collections and even her home, where her granddaughter remembers heart-shaped shocking pink pillows on the bed [3]. Strictly, shocking pink is her name for a magenta-leaning pink, and hot pink is the later, more general term, so the two overlap rather than match."
+  },
+  {
+   "id": "eye",
+   "title": "Why it vibrates",
+   "body": "A hot pink next to a strong complement tires the eye. Livingstone quotes David Sedaris describing a house painted hot pink with tangerine trim: the combination gave it a raw, jittery feeling, and the doors and windows seemed to tremble [4]. Livingstone explains this through equiluminant colors, which differ in hue but not in lightness, so the brain's \"where\" system cannot fix their edges [4].\n\nThe color is not only modern. Finlay describes the war coat of Tipu Sultan of Mysore, captured in 1799: hot pink and lime green with bright orange pompoms, which she calls dazzling and supremely impractical [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this exact color covering at least 1 per cent of its canvas, as photographed [6]. That describes the archive, not painting as a whole: hot pink is a screen and print color more than a pigment one. The word, by contrast, rose in printed English from 2000 and peaked in 2010 in the Google Books data [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "hot = vivid; kin to Schiaparelli's shocking pink (1937)",
+   "first_recorded": "X11 color set; Paterson dates its popularity to the 1950s",
+   "source": "Paterson, Dictionary of Colour p. 211; St Clair, Secret Lives of Color ch. 59"
+  },
+  "aka": [
+   "HotPink",
+   "shocking pink (related)"
+  ],
+  "siblings": [
+   "deep-pink",
+   "cyclamen",
+   "magenta"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FF69B4",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "ngram": {
+   "peak": 2010,
+   "rise": 2000
+  },
+  "x11": "HotPink #FF69B4"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 211",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930, Ridgway), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 59 (\"Shocking Pink\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 19",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, The Fabric of Civilization, p. 239",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 within 4, at least 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which designer's 1937 perfume 'Shocking' came in a hot-pink case?",
+   "choices": [
+    "Elsa Schiaparelli",
+    "Coco Chanel",
+    "Christian Dior",
+    "Mary Quant"
+   ],
+   "answer": "Elsa Schiaparelli",
+   "kind": "pick"
+  },
+  {
+   "q": "In color language, what does 'hot' mean?",
+   "choices": [
+    "Vivid or intense",
+    "Warm in hue",
+    "Very light",
+    "Metallic"
+   ],
+   "answer": "Vivid or intense",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Schiaparelli called her pink a color of China and Peru but not of the West."
+ ],
+ "depth": "medium",
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lede and aside: removed unsupported claim that Schiaparelli popularized the name 'hot pink'",
+   "war coat detail made specific (Tipu Sultan, 1799)"
+  ]
+ },
+ "words": 379
+}

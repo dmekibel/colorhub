@@ -1,0 +1,133 @@
+{
+ "slug": "flax-flower-blue",
+ "name": "Flax-Flower Blue",
+ "hex": "#6F88AF",
+ "names": [
+  "Flax-Flower Blue"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Flax-flower blue is a soft, slightly purplish blue, number 30 among the blues of Werner's nomenclature of colors, where it is tied to a butterfly, the flax flower and a blue copper ore.",
+ "sections": [
+  {
+   "id": "werner",
+   "title": "A number in Werner's blues",
+   "body": "The name belongs to the color standard of the German mineralogist Abraham Werner, which Patrick Syme turned into a standard for naturalists in his own editions [1]. Our library files it as Werner no. 30 among the blues [2]. Baty's *Nature's Palette* pairs most standards with an animal, a vegetable and a mineral example, and for this one it gives the light parts of the wing margin of a butterfly called the Devil's butterfly, the flax flower, and blue copper ore [1]. Its neighbors show the method: no. 29, ultramarine blue, is the small blue Heath butterfly, borage, and lapis lazuli, and no. 31, Berlin blue, is the jay's wing feather, hepatica and blue sapphire [1]."
+  },
+  {
+   "id": "plates",
+   "title": "The plates",
+   "body": "Baty illustrates names with period plates [1]. Flax-flower blue is shown at the edges of the wings of a small tortoiseshell in Knorr's *Deliciae naturae selectae* (1766), on the petals of a perennial flax in an 1863 watercolor of *Linum perenne*, and on azurite in Schubert's natural history (1886) [1]. Baty cautions that the swatches and plates have grown more muted with time [1]. The swatch on this page is therefore an aged, approximate scan of Werner no. 30, and not a measurement of a living flax petal [2][1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "This swatch is a light purplish blue, 6 units from ISCC-NBS block 195, and Maerz and Paul (1930) record the name from 1814 [2]. Its nearest named neighbors include [[cornflower]], [[dusty-blue]] and [[denim]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Colors close to it appear in 193 of our 23,781 paintings, 0.8 per cent, more than for 61 per cent of the named colors [3]. Inside a painting it most often plays an accent, in 38 per cent of the 111 paintings where the palette lens finds it [3]. It is most common in the 1900s, in 17 of 1,674 paintings from then, 1.4 times the museums' baseline [3].\n\nThe painter most devoted to it is Claude Monet, who has it in 4 of 50 works here, 6.5 times the baseline of the museums those works come from [3]. The earliest match in the archive is by Rogier van der Weyden, about 1440, and the early centuries are thin, so that is a floor [3]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the blue of the flax flower (Linum), one of Werner's color standards",
+   "first_recorded": "Werner no. 30 (Syme's edition, 1821); Maerz & Paul record the name from 1814",
+   "source": "Baty, Nature's Palette; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "berlin-blue",
+   "china-blue",
+   "azure-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cornflower",
+    "gloss": "a different flower blue, brighter and more purple"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6F88AF"
+  },
+  "n_present": 193,
+  "role": {
+   "accent": 38
+  },
+  "top_painters": [
+   "Claude Monet"
+  ],
+  "measured": {
+   "lch": [
+    56.2,
+    23.4,
+    272.3
+   ],
+   "contrast_white": 3.61,
+   "iscc": "light purplish blue (block 195, 6.3)"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, nos. 29-31 (Blues), plates and Davidson's essay on Werner and Syme",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Werner 1821 no. 30, ISCC-NBS 1955, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings and data/graph field notes, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Werner's nomenclature illustrate each color?",
+   "choices": [
+    "With an animal, a vegetable and a mineral",
+    "With a painting and a poem",
+    "With a dye recipe"
+   ],
+   "answer": "With an animal, a vegetable and a mineral",
+   "kind": "pick"
+  },
+  {
+   "q": "Flax-flower blue is Werner's no. 30 among the blues.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Werner's no. 30 blue was shown by a butterfly's wing edge, a flax flower and a blue copper ore."
+ ],
+ "words": 407,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'every'/'each' overstated; nos. 32-34 lack the trio in Baty's list"
+  ]
+ }
+}

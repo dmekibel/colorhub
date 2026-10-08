@@ -1,0 +1,104 @@
+{
+ "slug": "cambridge-blue",
+ "name": "Cambridge Blue",
+ "hex": "#A3C1AD",
+ "names": [
+  "Cambridge Blue"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Cambridge blue is a pale, soft blue-green tied to the university and its boat-race colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An Eton color on loan",
+   "body": "Paterson calls Cambridge blue the light blue of Eton, adopted in the sixteenth century by Cambridge University [1][2]. A story says the shade was adopted in haste for the 1836 boat race, when the Cambridge cox had forgotten his crew's own colors [1]. Treat that as a story: Paterson himself says it is only \"said\" to be so [1].\n\nThe swatch here is greener than the sky blues around it, and its neighbors include [[eton-blue]], [[light-blue]] and [[oxford-blue]]. Eton blue and Cambridge blue are the same light blue in Paterson's account, so the college name rides on a school's older color [1][2]. Paterson's color index lists it among the blues, alongside Coventry blue and Devonshire blue [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color turns up in 0.53% of the 23,781 paintings in our archive (127 paintings, as photographed) [3]. It peaks in the 1900s, at 3.0 times the rate expected from the museums' baseline [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the University of Cambridge",
+   "first_recorded": "said to be 1836 (boat race); Eton blue from the 16th century",
+   "source": "Paterson, A Dictionary of Colour, \"Cambridge blue\""
+  },
+  "aka": [],
+  "siblings": [
+   "eton-blue",
+   "oxford-blue"
+  ],
+  "parent": "blue",
+  "children": [
+   "light-blue"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 127,
+  "peak_decade": "1900s",
+  "baseline_lift": 3.0
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Cambridge blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Eton blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Cambridge blue borrows the color of which school?",
+   "choices": [
+    "Eton",
+    "Harrow",
+    "Winchester"
+   ],
+   "answer": "Eton",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the 1836 boat-race forgotten-colors story is firmly documented.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cambridge's blue was an Eton blue first."
+ ],
+ "words": 165,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed loose citation on neighbor links",
+   "Index wording tightened; anecdote already hedged"
+  ]
+ }
+}

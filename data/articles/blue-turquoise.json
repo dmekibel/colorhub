@@ -1,0 +1,109 @@
+{
+ "slug": "blue-turquoise",
+ "name": "Blue Turquoise",
+ "hex": "#65B2AB",
+ "names": [
+  "Blue Turquoise"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Blue Turquoise is a light bluish green that the 1955 ISCC-NBS system traces to an older dictionary, and its archive matches are look-alikes rather than evidence of a pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A turquoise leaning blue",
+   "body": "The name joins [[blue-green]] ground to the gemstone color [[turquoise]]. Our sources record it in the 1930 Maerz and Paul dictionary, as cited in NBS Circular 553 of 1955 [1]. The swatch is a light bluish green, nearest ISCC-NBS name \"light bluish green\" at a distance of 1.7 [1]. Paterson also lists Venetian blue as a turquoise [2], so the idea of a turquoise on the blue side is an old one, but the books we read say nothing of this exact name."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch appears in 16 of our 23,781 paintings, 0.07 percent, as photographed [3]. The earliest match is dated 1508, a painting by Juan de Flandes, 422 years before the name's earliest record in our sources [3]. That is a look-alike hue in an aged photograph and not proof of any pigment or dye, and the archive's early centuries are thin [3]. Compare [[aqua]] and [[teal]] for neighbors."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gemstone turquoise, with blue as a modifier",
+   "first_recorded": "1930 (Maerz and Paul)",
+   "source": "ColorHub name graph; Maerz and Paul via NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "aqua",
+   "teal"
+  ],
+  "parent": "turquoise",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 16,
+  "nearest_iscc": [
+   "light bluish green",
+   1.7
+  ],
+  "first_match": {
+   "year": 1508,
+   "id": "nga-46122"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name graph and library: ISCC-NBS 1955 nearest name, sources and dates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Venetian blue\", p. 410",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (as photographed), data/graph/fieldnotes",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: a 1508 archive match proves Blue Turquoise was used as a pigment then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which dictionary of 1930 records this name in our sources?",
+   "choices": [
+    "Maerz and Paul",
+    "Ridgway",
+    "Munsell",
+    "Crayola"
+   ],
+   "answer": "Maerz and Paul",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A 1508 painting shares this hue, but the name is first recorded 422 years later."
+ ],
+ "words": 178,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Maerz and Paul record via NBS Circular 553; no book history of the name.",
+   "Re-verified key claims against fact cards and book text; no changes needed."
+  ]
+ }
+}

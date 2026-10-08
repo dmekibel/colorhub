@@ -1,0 +1,118 @@
+{
+ "slug": "popcorn",
+ "name": "Popcorn",
+ "hex": "#D3B767",
+ "names": [
+  "Popcorn"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Popcorn is a warm, pale gold named for the snack, and the color books say almost nothing about it as a color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name the books do not use",
+   "body": "Searching our twenty-nine color books turns up the word *popcorn* only twice as a plain word, and in neither case does it name a color [1][2]. Birren uses popcorn as an example of a food that tastes of less on a roller coaster, in a passage on senses influencing each other [1]. St Clair uses it for a shape: in 1925 Joan Miró left a large canvas almost blank, with a popcorn-shaped daub of forget-me-not blue-colored paint [2]. So the name here is a modern descriptive one, a shade a little deeper than [[cream]] and warmer than [[beige]], and its origin as a color name is undocumented."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 826 works, about 3.5 per cent [3]. It is common in Asian paper-and-silk painting: 37 of the 96 Kalighat works and 73 of the 721 Indian works carry it [3]. The oldest strong cases include Kanô Tsunenobu's album of fan-shaped paintings of 1636 and Suzuki Kiitsu's flower paintings of 1801 [3]. As always these are photographs of aged paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "popcorn, the snack",
+   "first_recorded": "origin undocumented",
+   "source": "descriptive name"
+  },
+  "aka": [
+   "buttered popcorn"
+  ],
+  "siblings": [
+   "cream",
+   "beige",
+   "tan",
+   "straw",
+   "maize"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D3B767",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 826,
+  "top_paintings": [
+   "Kanô Tsunenobu, 1636",
+   "Suzuki Kiitsu, 1801"
+  ],
+  "movements": {
+   "Kalighat": [
+    37,
+    96
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 83",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which kind of painting is this golden color common in our archive?",
+   "choices": [
+    "Kalighat paintings of India",
+    "Dutch interiors",
+    "Cubist still lifes",
+    "Pointillist seascapes"
+   ],
+   "answer": "Kalighat paintings of India",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color books treat popcorn as an established color name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The color books never use popcorn as a color: Miró's popcorn-shaped daub is the closest they come."
+ ],
+ "words": 214,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

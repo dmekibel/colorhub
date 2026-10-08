@@ -1,0 +1,159 @@
+{
+ "slug": "bottle-green",
+ "name": "Bottle green",
+ "hex": "#006A4E",
+ "names": [
+  "Bottle green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Bottle green is the dark green of glass bottles, a name in use by the 1820s and later fixed on colour charts as a blue-leaning green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A glass color",
+   "body": "Paterson defines *bottle green* as the dark green of some wine bottles, and also as a dark yellowish green [1]. He keeps it apart from *Coke bottle green*, the distinctive green of Coca-Cola bottles, which has its own entry [1]. The name is an object word, so it never meant one exact color: bottles vary with the glass.\n\nIn printed English the phrase peaks in the 1820s, though the count includes any use of the words, not only the color [2]."
+  },
+  {
+   "id": "dye",
+   "title": "A stage in the dye vat",
+   "body": "Dyers knew the color as a sign. In a dyeing recipe from William Partridge's 1823 treatise, as Garfield reports it, a woad-and-indigo vat set in the afternoon should be bottle-green by that evening, after which the dyer lightens it with lime or more indigo [3]. The color served as a check that the vat was working, long before the cloth came out blue.\n\nThe word also turns up in painting. St Clair describes the gown in the Arnolfini Portrait, dated 1434, as bottle-green [4]. By her account a deep, even green was costly, because it needed two dye baths, first woad and then weld [4]. Her description, not a measurement, is the source for the word here."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is bluer than the bottle",
+   "body": "The swatch comes from color charts, not from glass. Our library traces it to Ridgway's 1886 *Nomenclature of Colors*, carried over to his 1912 plate XIX, and to Maerz and Paul in 1930 [5]. The ISCC-NBS system of 1955 files it under block 138 and calls the nearest named region a moderate green, 6.6 CIEDE2000 units away [5]. The chart color is a clear blue-green, while Paterson's second sense is yellowish [1][5]. Compare [[emerald-green]].\n\nSo the name fits two greens."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color is rare in paint. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 6 works [6]. The earliest is Davies's *Ship in Full Sail* of 1827, and the others run to 1929 [6]. Half of those appearances are the darkest tones of their pictures [6]. These are photographs of varnished paintings, so read them as screen colors, not pigments [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the green glass of bottles",
+   "first_recorded": "printed English, peak in the 1820s; Ridgway 1886",
+   "source": "Paterson, A Dictionary of Colour, p. 75; ColorHub library"
+  },
+  "aka": [
+   "Coke bottle green (a distinct entry)"
+  ],
+  "siblings": [
+   "dark-green",
+   "forest-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#006A4E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 6,
+  "top_paintings": [
+   "cma-147828",
+   "nga-103247",
+   "smk-kms4937"
+  ],
+  "first": {
+   "id": "nga-59894",
+   "year": 1827
+  },
+  "role": {
+   "shadow": 0.5,
+   "mid": 0.33,
+   "highlight": 0.17
+  },
+  "measured": {
+   "iscc": "moderate green",
+   "de2000": 6.6
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 75, 109",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph field notes for bottle-green (Google Books phrase counts, all senses)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 4 (\"The Recipe\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Verdigris\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1886 and 1912, Maerz and Paul 1930, ISCC-NBS 1955, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did a dyer read from a bottle-green indigo vat?",
+   "choices": [
+    "That the fermentation was working",
+    "That the cloth was ruined",
+    "That the vat was too hot",
+    "That it was ready to drain"
+   ],
+   "answer": "That the fermentation was working",
+   "kind": "pick"
+  },
+  {
+   "q": "Which two dyes made a deep green in a two-bath process?",
+   "choices": [
+    "Woad then weld",
+    "Madder then indigo",
+    "Weld then madder",
+    "Woad then cochineal"
+   ],
+   "answer": "Woad then weld",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dyers once watched a woad-and-indigo vat turn bottle-green to know it was working.",
+  "The Arnolfini gown is called bottle-green by one author, and it needed two dye baths."
+ ],
+ "words": 372,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Recipe was Partridge 1823 (Garfield), not eighteenth century; vat was woad-and-indigo, timing 'that evening'."
+  ]
+ }
+}

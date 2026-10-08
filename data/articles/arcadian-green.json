@@ -1,0 +1,106 @@
+{
+ "slug": "arcadian-green",
+ "name": "Arcadian Green",
+ "hex": "#83BB7C",
+ "names": [
+  "Arcadian Green"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Arcadian Green is a pale, soft green from the color card of the 1920s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines arcadian green as a pale yellow-tinged green [1]. The library records it in Maerz and Paul's dictionary, first recorded in 1928, on plate 17 G 8 [2]. That is a fashion and textile source, and the name belongs to that world [2].\n\nThe books we hold define the color but never say why it was called Arcadian [1]. Its nearest named color is [[pistachio]], at a distance of 5.2 [2]. It sits in the family of pale greens that includes [[apple-green]] and [[celadon]] [2]. Paterson's index files it with the greens [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings it appears in 0.05% of the paintings, 11 of them, as photographed [3]. The earliest match is dated 1795, which is 133 years before the name's first record, so the match is a look-alike hue in an aged photograph, not proof of the pigment or dye [2][3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1928 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "pistachio",
+   "apple-green",
+   "celadon"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 11,
+  "pct_paintings": 0.05,
+  "library_first": 1928,
+  "nearest": [
+   [
+    "Pistachio",
+    5.2
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 32, \"arcadian green\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "A painting from 1795 that matches Arcadian Green proves the pigment existed then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Where did Arcadian Green first appear in our library records?",
+   "choices": [
+    "Maerz & Paul's color dictionary",
+    "The CSS color list",
+    "A Crayola box"
+   ],
+   "answer": "Maerz & Paul's color dictionary",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Arcadian Green was first recorded in 1928, in a color dictionary used by textile trades."
+ ],
+ "words": 156,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}
