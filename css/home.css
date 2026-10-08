@@ -264,3 +264,51 @@
 .hm-ax{position:absolute;top:50%;padding:5px 10px;border-radius:var(--r-pill);background:rgba(14,13,11,.72);font:italic 400 14px/1 var(--serif);color:var(--soft)}
 .hm-ax-l{left:8px;transform:translateY(-50%)}
 .hm-ax-r{right:8px;transform:translateY(-50%)}
+
+/* ---------- Arrange sheet, iconic (David, 2026-10-08: "previews need to be simple icon versions, or themselves more
+   beautiful and clean"). Flat diagrams (js/home.js hmArrIcon) on one tile size, one-line labels, the shared selected
+   state (tint + ring, css/menus2.css component tokens). The Look is a three-way picker in the same family; the
+   sliders are quiet tracks with a white thumb and the filled part in ink. ---------- */
+.hm-arr{gap:8px;padding:4px 16px 6px}
+.hm-arr-b{width:80px;gap:8px;min-height:var(--tap)}
+.hm-arr-pic{width:72px;height:72px;border-radius:var(--r-tile);background:var(--surface-2);box-shadow:none;display:grid;place-items:center;
+  transition:box-shadow var(--dur-1),background var(--dur-1)}
+.hm-arr-pic svg{width:56px;height:56px;display:block}
+.hm-arr-b b{font:400 var(--type-cap)/1.15 var(--sans);min-height:0;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:unset}
+.hm-arr-b.on .hm-arr-pic{background:var(--sel-fill);box-shadow:var(--sel-ring)}
+.hm-arr-b.on b{color:var(--sel-ink);font-weight:500}
+.hm-sheet-arrange .hm-arr-sub{margin:10px 0 4px;font:400 15px/1.35 var(--sans);font-style:normal;color:var(--soft);white-space:normal}
+.hm-sheet-arrange .hm-arr-sub b{font-weight:500;color:var(--ink)}
+/* section headers: quiet sentence-case captions, no rule */
+.hm-ch-scroll .cx-sec{border-bottom:0;margin:22px 0 0;padding:0}
+.hm-ch-scroll .cx-sec b{font:500 var(--type-cap)/1 var(--sans);letter-spacing:.01em;text-transform:none;color:var(--soft)}
+.hm-ch-scroll .cx-sec span{font:400 var(--type-cap)/1 var(--sans);letter-spacing:0;color:var(--faint)}
+/* the Look: three equal tiles, icon over label */
+.hm-sheet-panel .hm-look-row{gap:8px;padding-top:10px}
+.hm-sheet-panel .hm-look-chip{min-height:84px;gap:8px;border-radius:var(--r-tile);background:var(--surface-2);transition:background var(--dur-1),box-shadow var(--dur-1)}
+.hm-sheet-panel .hm-look-chip .hm-look-ic{width:40px;height:40px;box-shadow:none;background:none;clip-path:none;border-radius:0}
+.hm-look-ic svg{width:40px;height:40px;display:block}
+.hm-sheet-panel .hm-look-chip b{font:400 15px/1.1 var(--sans);color:var(--soft)}
+.hm-sheet-panel .hm-look-chip.on{background:var(--sel-fill);box-shadow:var(--sel-ring)}
+.hm-sheet-panel .hm-look-chip.on b{color:var(--sel-ink);font-weight:500}
+.hm-sheet-panel .hm-look-chip:active{transform:scale(.97)}
+/* the feel: label on its own line, the track full width between its two ends */
+.hm-feel{margin-top:14px;gap:6px}
+.hm-feel-row{display:flex;flex-direction:column;align-items:stretch;gap:2px;min-height:0}
+.hm-feel-l{font:400 18px/1.2 var(--serif)}
+.hm-feel-r{gap:12px;min-height:var(--tap)}
+.hm-feel-r i,.hm-feel-r i:last-child{width:auto;font:400 var(--type-cap)/1 var(--sans);color:var(--faint);text-align:left}
+.hm-feel-r input{-webkit-appearance:none;appearance:none;height:var(--tap);background:none;margin:0}
+.hm-feel-r input::-webkit-slider-runnable-track{height:4px;border-radius:2px;
+  background:linear-gradient(90deg,var(--ink) calc(var(--p,.5) * 100%),var(--surface-3) 0)}
+.hm-feel-r input::-moz-range-track{height:4px;border-radius:2px;background:var(--surface-3)}
+.hm-feel-r input::-moz-range-progress{height:4px;border-radius:2px;background:var(--ink)}
+.hm-feel-r input::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-12px;border-radius:50%;background:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.4),0 0 0 .5px rgba(0,0,0,.2)}
+.hm-feel-r input::-moz-range-thumb{width:28px;height:28px;border:0;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.hm-feel-reset{min-height:var(--tap);border-radius:var(--r-ctl);margin-top:8px}
+.hm-feel-r i{flex:none;width:52px!important}.hm-feel-r i:last-child{width:60px!important;text-align:right!important}
+/* segmented pairs in the Home sheets: filled, no outline; the chosen one ringed */
+.hm-seg{gap:8px}
+.hm-seg button{border:0;background:var(--ctl-fill);font:400 15px/1 var(--sans);color:var(--soft)}
+.hm-seg button.on{font-weight:500}
