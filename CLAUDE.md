@@ -29,6 +29,7 @@ Nothing ships that feels basic, thin or unthought. Every game, screen and featur
 - **Every game offers two ways in (David, 2026-10-08):** "For you" (adaptive, the default) and "Choose" (pick any difficulty or jump to any level, with a quick "test out"). In-game text is never smaller than body size.
 - **Details:** real copy (no placeholders, no emoji squares, no shouting mono labels); numbers formatted; spacing and type from DESIGN-SYSTEM; works at 320 px and with very light or very dark colors.
 - **Benchmark:** would this hold up next to Duolingo, I Love Hue, Wordle, Monument Valley and Apple Fitness? If a screen feels like a prototype, it isn't done.
+- **Before any UI work, load design/DESIGN-CANON.md §5 (the doctrine: ten laws, banned list, checklist) and design/DAVID-MODEL.md (David's principles and critic rubric).** Screenshot at 440x956 (David's iPhone 16 Pro Max) and 375x812.
 - **Process:** lanes with UI get a fresh-context craft critique (design/CRAFT-RUBRIC.md) before merge, and they fix what it finds.
 
 ## The four goals
