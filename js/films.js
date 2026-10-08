@@ -57,11 +57,19 @@ function filmPage(f) {
 }
 
 // ---------- "In films" on a color page ----------
-function inFilmsRow(c) {
-  const hits = (window.FILMS || []).filter(f => f.colors.some(x => x.app === c.n) || (f.palette || []).some(x => x.app === c.n && x.share > .12)).slice(0, 4);
+// Film colors are chosen by name against one of the app's own taught colors (`app`), so an untaught library
+// name (the usual case for a random one of the ~2,700/~1,000) never matches directly -- fall back to its
+// family head (David, 2026-10-08: no almost-empty pages) and say so plainly.
+function inFilmsRow(c, famC) {
+  let hits = (window.FILMS || []).filter(f => f.colors.some(x => x.app === c.n) || (f.palette || []).some(x => x.app === c.n && x.share > .12)).slice(0, 4);
+  let matchName = c.n, note = "";
+  if (!hits.length && famC && famC.n.toLowerCase() !== c.n.toLowerCase()) {
+    const famHits = (window.FILMS || []).filter(f => f.colors.some(x => x.app === famC.n) || (f.palette || []).some(x => x.app === famC.n && x.share > .12)).slice(0, 4);
+    if (famHits.length) { hits = famHits; matchName = famC.n; note = `<p class="fine">Nothing of ${esc(c.n.toLowerCase())}'s own; its nearest well-covered match, ${esc(famC.n)}, does.</p>`; }
+  }
   if (!hits.length) return "";
-  return `<section class="arch-row"><h3>In films</h3>${hits.map(f => {
-    const x = f.colors.find(k => k.app === c.n);
+  return `<section class="arch-row"><h3>In films</h3>${note}${hits.map(f => {
+    const x = f.colors.find(k => k.app === matchName);
     return `<button class="film-row" data-arch="film:${esc(f.id)}">${filmStrip(f, "film-strip film-strip-s")}<span><b>${esc(f.title)}</b><small>${esc(f.director)} · ${filmYear(f)}</small>${x && x.note ? `<em>${esc(x.note)}</em>` : ""}</span></button>`;
   }).join("")}</section>`;
 }

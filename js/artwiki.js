@@ -204,11 +204,12 @@ function awPainter(slug, push = true) {
 
   // findings, in words, always with n
   const finds = awPainterFindings(A, P, n);
+  const bcYears = A.barcode.map(b => b[1]).filter(y => awYearOk(slug, y)).sort((a, b) => a - b);
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="glass-pill" data-awvs="${esc(slug)}">${ICON.search}<span>Compare</span></button></header>
     <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(A.name)}</h1><p class="p-dek">${dek}</p></div>${fileUrl ? `<img class="aw-portrait" src="${esc(fileUrl)}" alt="" loading="lazy" onerror="this.remove()">` : ""}</div>
     ${A.barcode.length ? `<div class="aw-bcwrap"><div class="aw-bc ${A.barcode.length > 90 ? "tight" : ""}" role="img" aria-label="Every painting, oldest to newest, three main colors each">${A.barcode.map((b, k) => `<button data-gi="${P.ix.length === A.barcode.length ? P.ix[k] : -1}" title="${esc(b[1])}">${b[2].map(nm => `<i style="--c:${awHex(nm)}"></i>`).join("")}</button>`).join("")}</div>
-      <div class="aw-bcax"><span>${A.barcode[0][1]}</span><em>${n} paintings · as photographed</em><span>${A.barcode[A.barcode.length - 1][1]}</span></div>
+      <div class="aw-bcax"><span>${bcYears.length ? bcYears[0] : ""}</span><em>${n} paintings · as photographed</em><span>${bcYears.length ? bcYears[bcYears.length - 1] : ""}</span></div>
       ${clusters.length > 1 ? `<div class="aw-rooms">${clusters.map((c, k) => `<a class="aw-room" href="#aw-pal">${awStrip(c.colors.slice(0, 3).map(awHex), 8)}<b data-glroom="${P.ctyp[k]}">Room ${k + 1}</b><em>${awPct(c.pct / 100)}%</em></a>`).join("")}</div>` : ""}</div>` : ""}
     ${finds}
     <div data-awbio></div>
@@ -223,6 +224,7 @@ function awPainter(slug, push = true) {
       ${m.q ? `<li>Dates, nationality, movement, teachers and portrait: <a href="https://www.wikidata.org/wiki/${m.q}" target="_blank" rel="noopener">Wikidata</a> (CC0)${m.wp ? ` · <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(m.wp)}" target="_blank" rel="noopener">Wikipedia</a>` : ""}${m.img ? ` · portrait: <a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(m.img)}" target="_blank" rel="noopener">Wikimedia Commons</a>` : ""}</li>` : `<li>No Wikidata match was found for this name, so dates come from the paintings themselves.</li>`}
     </ul></section>`, "article aw-page");
   awWire(el);
+  if (typeof ptPainterColors === "function") ptPainterColors(el, A.name);   // js/paintingsof.js (L26): colors used in a quarter of the works
   // titles and images of the clusters' typical paintings
   el.querySelectorAll("[data-gltitle]").forEach(t => { const i = +t.dataset.gltitle; if (i >= 0) glDetail(i).then(d => { if (t.isConnected) t.textContent = "The " + d.t.replace(/^(the|a|an)\s+/i, "") + " palette"; const im = el.querySelector(`[data-glimg="${i}"]`); if (im) { im.src = d.img; } }).catch(() => {}); });
   el.querySelectorAll("[data-glroom]").forEach(t => { const i = +t.dataset.glroom; if (i >= 0) glDetail(i).then(d => { if (t.isConnected) t.textContent = d.t.length > 26 ? d.t.slice(0, 25) + "…" : d.t; }).catch(() => {}); });
@@ -237,7 +239,7 @@ function awPainter(slug, push = true) {
       const names = [...new Set([...(A.clusters || []).flatMap(c => c.colors), ...(P.sig || []).map(r => awCol(r[0])[0])].map(awCanon))];
       const hexes = names.map(k => { const e = (CORE_NAMES || []).find(x => awCanon(x.n) === k); return e && e.h; }).filter(Boolean);
       const st = hexes.map(h => knowState(h)), yours = st.filter(x => x === "yours").length, met = st.filter(x => x !== "none").length;
-      if (hexes.length >= 4) you.innerHTML = `<p class="aw-find">${yours ? `${yours} of the ${hexes.length} colors in these palettes are Yours` : met ? `You've met ${met} of the ${hexes.length} colors in these palettes` : `None of the ${hexes.length} colors in these palettes are Yours yet`}${met > yours ? `, ${met - yours} more met.` : "."}</p>`;
+      if (hexes.length >= 4) you.innerHTML = `<p class="aw-find">${yours ? `${yours} of the ${hexes.length} colors in these palettes ${yours === 1 ? "is" : "are"} yours` : met ? `You've met ${met} of the ${hexes.length} colors in these palettes` : `None of the ${hexes.length} colors in these palettes are yours yet`}${met > yours ? `, ${met - yours} more met.` : "."}</p>`;
     }
   } catch (e) {}
   const acts = el.querySelector("[data-aw-acts]");
@@ -263,22 +265,32 @@ function awChords(pairs) {
   }).join("");
 }
 
+// A painting's year counts on the timeline only inside the painter's working life: museum records carry
+// placeholder years (1500 for "16th century") and blanks, which drew a "1500 … null" axis and a false trend.
+function awYearOk(slug, y) {
+  if (y == null || !isFinite(y)) return false;
+  const m = (AW.meta && AW.meta.a[slug]) || {};
+  return (m.b ? y >= m.b + 8 : y >= 1200) && (m.d ? y <= m.d + 2 : true);
+}
+// a decade counts when any year in it is a trusted year
+const awDecOk = (slug, d) => awYearOk(slug, d + 9) || awYearOk(slug, d);
 function awTimeSection(A, P) {
-  const bc = A.barcode;
+  const bc = A.barcode.filter(b => awYearOk(A.slug, b[1]));
   if (bc.length < 6) return "";
   const byDec = new Map();
   bc.forEach(b => { const d = Math.floor(b[1] / 10) * 10; if (!byDec.has(d)) byDec.set(d, new Map()); const mp = byDec.get(d); b[2].forEach(nm => mp.set(awCanon(nm), [(mp.get(awCanon(nm)) || [nm, 0])[0], (mp.get(awCanon(nm)) || [nm, 0])[1] + 1])); });
-  const decs = (A.byDecade || []).filter(d => d.n >= 1);
+  const decs = (A.byDecade || []).filter(d => d.n >= 1 && awDecOk(A.slug, d.decade));
   if (decs.length < 2) return "";
   const cols = [...byDec.entries()].sort((a, b) => a[0] - b[0]).map(([d, mp]) => {
     const tops = [...mp.values()].sort((a, b) => b[1] - a[1]).slice(0, 4), tot = tops.reduce((s, t) => s + t[1], 0) || 1, n = (decs.find(x => x.decade === d) || {}).n || 0;
-    return `<div class="aw-dcol${n < 3 ? " thin" : ""}"><span class="aw-dstack">${tops.map(t => `<i style="--c:${awHex(t[0])};flex:${t[1]}" data-swatch="${awHex(t[0])}" title="${esc(t[0])}"></i>`).join("")}</span><em>${String(d).slice(2)}s</em><u>${n}</u></div>`;
+    return `<div class="aw-dcol${n < 3 ? " thin" : ""}"><span class="aw-dstack">${tops.map(t => `<i style="--c:${awHex(t[0])};flex:${t[1]}" data-swatch="${awHex(t[0])}" title="${esc(t[0])}"></i>`).join("")}</span><em>${awDec(d)}</em><u>${n}</u></div>`;
   }).join("");
   const cp = A.changePoint, dn = d => (decs.find(x => x.decade === d) || {}).n || 0;
   let cpText = "";
-  if (cp) {
+  // a change point that leans on undated or out-of-life decades is not a finding
+  if (cp && !(A.byDecade || []).some(d => d.decade < cp.decade && !awDecOk(A.slug, d.decade))) {
     const lighter = cp.after > cp.before, prev = decs.filter(x => x.decade < cp.decade).pop(), pn = prev ? prev.n : 0, nn = dn(cp.decade);
-    cpText = `<p class="aw-find">The palette ${lighter ? "lightens" : "darkens"} around the ${awDec(cp.decade)}: mean lightness ${cp.before} before, ${cp.after} after (${pn} and ${nn} paintings${Math.min(pn, nn) < 5 ? "; small groups, so a hint rather than a finding" : ""}).</p>`;
+    cpText = `<p class="aw-find">The palette ${lighter ? "lightens" : "darkens"} around the ${awDec(cp.decade)}: mean lightness ${Math.round(cp.before)} before, ${Math.round(cp.after)} after (${pn} and ${nn} paintings${Math.min(pn, nn) < 5 ? "; small groups, so a hint rather than a finding" : ""}).</p>`;
   }
   return `<div class="sec-head"><b>Over time</b><span>${decs.length} decades</span></div>
     <p class="aw-sub">The three biggest colors of every painting, grouped by decade. Taller means more paintings; the faint number is how many paintings the decade has.</p>
@@ -351,7 +363,9 @@ function awAnalysis(host, el, i, d, r, ctx) {
   const pf = r.pct || {}, fin = awGateFinds(r.find, 3);
   const warm = st.wf / 1000, ch = st.ch.map(v => v / 1000);
   const pc = (v, base, lo, hi, nTxt) => v == null || (v > 35 && v < 65) ? "" : `${v >= 50 ? hi : lo} than ${v >= 50 ? Math.round(v) : Math.round(100 - v)}% of ${nTxt}`;
-  const lightTxt = [pc(pf.a, 0, "Darker", "Lighter", "the 23,531 paintings here"), pf.p != null && pf.pn ? pc(pf.p, 0, "darker", "lighter", `this painter's other ${pf.pn - 1}`) : ""].filter(Boolean).join(" · ");
+  // one sentence, and no hard-coded archive size (it said 23,531 while the findings below said n=23,781)
+  const lightParts = [pc(pf.a, 0, "Darker", "Lighter", "the paintings in this archive"), pf.p != null && pf.pn ? pc(pf.p, 0, "darker", "lighter", `this painter's other ${pf.pn - 1}`) : ""].filter(Boolean);
+  const lightTxt = lightParts.length ? lightParts.map((t, k) => k ? t.charAt(0).toLowerCase() + t.slice(1) : t).join(", and ") : "";
   const roles = ["foc", "hid", "glu"];
   const poolOK = pool.length >= 6;
   host.innerHTML = `
@@ -493,11 +507,11 @@ function awGroup(kind, key, push = true) {
   if (kind === "movement") {
     const t = g.tiers || [n, 0, 0];
     dek = `${n.toLocaleString()} paintings tagged ${title}`;
-    note = `<p class="aw-note">How these were tagged: ${t[0]} by the museum, ${t[1]} by Wikidata for the painting itself, ${t[2]} only because their painter is recorded with this movement (a looser link). Only ${Object.keys(AW.grp.byMovement).length} movements reach 20 paintings here; most paintings in the archive carry no movement at all, so this is a sample of ${title}, not the whole of it.</p>`;
+    note = `<details class="aw-note"><summary>A sample of ${esc(title)}, not the whole of it</summary><p>How these were tagged: ${t[0]} by the museum, ${t[1]} by Wikidata for the painting itself, ${t[2]} only because their painter is recorded with this movement (a looser link). Only ${Object.keys(AW.grp.byMovement).length} movements reach 20 paintings here; most paintings in the archive carry no movement at all.</p></details>`;
   } else if (kind === "country") note = `<p class="aw-note">Country is often the painter's nationality, not where the painting was made.</p>`;
   else note = `<p class="aw-note">Dated ${key}–${key + 9}. Undated and approximately dated works are left out.</p>`;
   const top = g.top.slice(0, 8), dist = (g.distinctive || []).slice(0, 6), base = AW.ge.archive.hh;
-  const timeCols = (x.time || []).map(t => { const tops = t[3]; return `<div class="aw-dcol${t[1] < 10 ? " thin" : ""}"><span class="aw-dstack">${tops.map((c, k) => `<i style="--c:${awCol(c)[1]};flex:${3 - k}" data-swatch="${awCol(c)[1]}" title="${esc(awCol(c)[0])}"></i>`).join("")}</span><em>${String(t[0]).slice(2)}s</em><u>${t[1]}</u></div>`; }).join("");
+  const timeCols = (x.time || []).map(t => { const tops = t[3]; return `<div class="aw-dcol${t[1] < 10 ? " thin" : ""}"><span class="aw-dstack">${tops.map((c, k) => `<i style="--c:${awCol(c)[1]};flex:${3 - k}" data-swatch="${awCol(c)[1]}" title="${esc(awCol(c)[0])}"></i>`).join("")}</span><em>${awDec(t[0])}</em><u>${t[1]}</u></div>`; }).join("");
   const sig = (x.sig || []).map(([c, lift, own, sup]) => { const [nm, hx] = awCol(c); return `<button class="aw-sig" data-swatch="${hx}"><i style="--c:${hx}" data-ink="${ink(hx)}"></i><b>${esc(nm)}</b><span>×${lift.toFixed(1)}</span><em>in ${sup} of ${n} paintings · ${awPct(own)}% of the canvas</em></button>`; }).join("");
   const arts = (x.art || []).map(([s, k]) => AW.meta.a[s] ? `<button class="aw-tie" data-awpainter="${s}"><b>${esc(AW.meta.a[s].n)}</b><span>${k} paintings here</span></button>` : "").join("");
   const decs = awGroupKeys("decade").map(Number).sort((a, b) => a - b), di = decs.indexOf(+key);
@@ -534,7 +548,7 @@ function awIndex(push = true) {
   const decs = awGroupKeys("decade").map(Number).sort((a, b) => a - b).filter(d => d >= 1250);
   const rows = decs.map((d, k) => {
     const g = AW.grp.byDecade[d], x = AW.ge.byDecade[d], tot = x.hh.reduce((s, v) => s + v, 0) || 1, Lg = Math.round(x.L * 2.55), cen = d % 100 === 0 || k === 0;
-    return `${cen ? `<p class="aw-century">${Math.floor(d / 100) * 100}s</p>` : ""}<button class="aw-trow" data-awgroup="decade|${d}"><span class="aw-td">${awDec(d)}</span><i class="aw-tl" style="background:rgb(${Lg},${Lg},${Lg})" title="mean lightness ${x.L}"></i><span class="aw-tbar" title="${awBand(x.hh.map((v, b) => v / Math.max(base[b], .004)))} stands out">${x.hh.map((v, b) => `<u style="flex:${Math.min(4, Math.max(.12, v / Math.max(base[b], .004))).toFixed(2)};--c:${AW_BAND_HEX[b]}"></u>`).join("")}</span><em>${g.n}</em></button>`;
+    return `${cen ? `<p class="aw-century">${Math.floor(d / 100) * 100}s</p>` : ""}<button class="aw-trow" data-awgroup="decade|${d}"><span class="aw-td">${awDec(d)}</span><i class="aw-tl" style="background:rgb(${Lg},${Lg},${Lg})" title="mean lightness ${x.L}"></i><span class="aw-tbar" title="${awBand(x.hh.map((v, b) => v / Math.max(base[b], .004)))} stands out">${x.hh.map((v, b) => `<u style="flex:${Math.min(4, Math.max(.12, v / Math.max(base[b], .004))).toFixed(2)};--c:${AW_BAND_HEX[b]}"></u>`).join("")}</span><em>${g.n.toLocaleString("en-US")}</em></button>`;
   }).join("");
   const mvs = Object.keys(AW.grp.byMovement).sort((a, b) => AW.grp.byMovement[b].n - AW.grp.byMovement[a].n);
   const tile = (kind, k, g) => `<button class="aw-tile" data-awgroup="${kind}|${esc(k)}"><span class="aw-tp">${g.top.slice(0, 5).map(t => `<i style="--c:${awHex(t.name)}"></i>`).join("")}</span><b>${esc(k)}</b><em>${g.n.toLocaleString()} paintings</em></button>`;
@@ -660,5 +674,8 @@ function awOpenRoute(kind, id, more) {
   waitScreen(); ROUTE_REPLACE = true;
   awLoad().then(run).catch(() => go(S.tab || "learn"));
 }
+// A painting photo that fails to load (offline, a museum link gone) leaves its quiet frame, never the browser's
+// broken-image icon.
+document.addEventListener("error", e => { const t = e.target; if (t && t.tagName === "IMG" && t.closest && t.closest(".aw-page")) t.style.visibility = "hidden"; }, true);
 // titles for the router (js/router.js): the name once the list is here
 const awTitle = (kind, key) => { try { return kind === "painter" ? AW.meta.a[key].n : kind === "decade" ? awDec(key) : String(key); } catch (e) { return String(key); } };

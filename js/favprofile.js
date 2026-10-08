@@ -130,7 +130,7 @@ function favTaste() {
       <div class="sec-head"><b>Your painter</b><span>closest palette</span></div>
       <section class="fp-painter">
         <h2 class="title-2">${esc(best.a.n)}</h2>
-        <div class="fp-pair"><div>${fpStrip(r.loves.slice(0, 8))}<span>You</span></div><div>${fpStrip(best.a.cols.slice(0, 8).map(c => c[0]))}<span>${esc(best.a.n.split(" ").slice(-1)[0])}</span></div></div>
+        <div class="fp-pair"><div>${fpStrip(r.loves.slice(0, 8))}<span>You</span></div><div>${fpStrip(best.a.cols.slice(0, 8).map(c => c[0]))}<span>${esc(best.a.n.replace(/\s*\([^)]*\)\s*$/, "").split(" ").slice(-1)[0])}</span></div></div>
         <p>${best.twins} of your top ${best.K} have a near twin in this palette, measured over ${best.a.k} paintings. ${match.length > 1 ? `Also near: ${match.slice(1, 4).map(m => esc(m.a.n)).join(", ")}.` : ""}</p>
         ${best.a.typ ? `<button class="fp-ptg" data-gi="${best.a.typ.gi}"><img src="${esc(best.a.typ.img)}" alt="" loading="lazy"><span><b>${esc(best.a.typ.t)}</b><small>Their most typical painting</small></span>${ICON.chev}</button>` : ""}
       </section>` : "";
@@ -140,7 +140,7 @@ function favTaste() {
       <p class="lead fp-lead">${esc(fpHeadline())}</p>
       <p class="note fp-n">From ${esc(fpWhy())}.${small ? " A small sample, so read it as a sketch. It firms up as you rank." : ""}</p>
       <div class="fv-top5 fp-top5" style="--n:${Math.max(1, top5.length - 1)}">${top5.map((k, i) => `<button class="fv-plate" data-swatch="${k}" data-ink="${ink(k)}" style="--c:${k}"><em>${i + 1}</em><b>${esc(fvStore()[k].n)}</b></button>`).join("")}</div>
-      <button class="btn fp-pal" data-pal>Make a palette from your top ${top5.length} ${ICON.arrow}</button>
+      <button class="btn fp-pal" data-pal>Make a palette <small>your top ${top5.length}</small>${ICON.arrow}</button>
       ${finds.map(f => `<section class="fp-find"><h3 class="title-3">${esc(f.t)}</h3><p>${esc(f.p)}</p>${f.v}</section>`).join("")}
       ${ctxHTML}
       ${painter}

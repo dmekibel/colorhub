@@ -1,0 +1,149 @@
+/* Where a color lives in paintings (js/paintingsof.js, js/colorindex.js): the two sliders, the "In paintings"
+   section, the #/paintings-of screen and the pinned color on a painting. Same museum-editorial language as
+   gallery.css: serif for the findings, sans for the controls, hairlines, color as the only decoration. */
+
+/* ---------- controls ---------- */
+.pt-seg{display:inline-flex;max-width:100%;border:1px solid var(--rule);border-radius:var(--r-pill);padding:3px;gap:2px;overflow-x:auto;scrollbar-width:none}
+.pt-seg::-webkit-scrollbar{display:none}
+.pt-seg button{flex:none;height:34px;padding:0 14px;border-radius:var(--r-pill);font:500 13px/1 var(--sans);color:var(--soft);white-space:nowrap;transition:background .2s,color .2s}
+.pt-seg button.on{background:var(--paper);color:var(--paper-ink)}
+.pt-seg-row{margin:14px 0 0}
+.pt-seg-row[hidden],.pt-sortrow[hidden]{display:none}
+
+.pt-sl{margin:6px 0 0}
+.pt-ctl{padding:12px 0 8px;border-top:1px solid var(--rule)}
+.pt-ctl-h{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.pt-ctl-h b{font:400 21px/1.2 var(--serif);letter-spacing:-.005em}
+.pt-ctl-h span{font:500 13px/1.3 var(--sans);color:var(--soft);text-align:right}
+.pt-range{-webkit-appearance:none;appearance:none;display:block;width:100%;height:40px;margin:0;padding:0;background:transparent;--p:0%;cursor:pointer}
+.pt-range::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--ink) var(--p),rgba(236,232,223,.16) var(--p))}
+.pt-range::-moz-range-track{height:6px;border-radius:3px;background:rgba(236,232,223,.16)}
+.pt-range::-moz-range-progress{height:6px;border-radius:3px;background:var(--ink)}
+.pt-range::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-11px;border-radius:50%;background:var(--ink);border:0;box-shadow:0 0 0 4px var(--ground),0 2px 10px rgba(0,0,0,.6)}
+.pt-range::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--ink);border:0;box-shadow:0 0 0 4px var(--ground),0 2px 10px rgba(0,0,0,.6)}
+.pt-range:focus-visible{outline:none}
+.pt-range:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px var(--ground),0 0 0 6px var(--ink)}
+.pt-ticks{position:relative;height:16px;margin:-4px 14px 6px;font:500 11px/16px var(--sans);color:var(--faint)}
+.pt-ticks span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.pt-ticks span:first-child{transform:none}
+.pt-ticks span:last-child{transform:translateX(-100%)}
+.pt-chips{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 4px}
+.pt-chips button{height:34px;padding:0 14px;border:1px solid var(--rule);border-radius:var(--r-pill);font:500 13px/1 var(--sans);color:var(--soft);transition:background .2s,color .2s,border-color .2s}
+.pt-chips button.on{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
+.pt-count{margin:10px 0 0;padding-top:12px;border-top:1px solid var(--rule);font:400 18px/1.35 var(--serif);color:var(--soft);min-height:26px}
+.pt-count b{color:var(--ink);font-weight:400;font-size:24px}
+.pt-count:empty{display:none}
+
+/* what the range means: the colors at its edge */
+.pt-fan{display:flex;align-items:center;gap:14px;margin:0 0 6px;min-height:44px}
+.pt-fan .ring{display:flex;align-items:center;gap:5px;flex:none}
+.pt-fan i{width:20px;height:20px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.18);flex:none}
+.pt-fan i.c{width:34px;height:34px}
+.pt-fan span{font:400 12.5px/1.35 var(--sans);color:var(--soft);min-width:0}
+
+/* ---------- the section on a color page ---------- */
+.pt-wait{font:400 13px/1.4 var(--sans);color:var(--faint);padding:8px 0}
+.pt-quick{margin:2px 0 12px}
+.pt-foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pt-foot .gl-all{width:auto;flex:1;min-width:0}
+.pt-foot .gl-all[hidden]{display:none}
+.pt-tune{flex:none;min-height:44px;padding:0 2px 0 12px;font:italic 400 17px/1 var(--serif);color:var(--soft);text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:4px}
+.pt-tuner{margin:6px 0 4px}
+.pt-tuner[hidden]{display:none}
+.pt-pairs-host h3{margin-top:26px}
+.pt-pairs{display:flex;gap:12px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;margin:0 calc(-1 * var(--g));padding:4px var(--g) 10px;scrollbar-width:none;scroll-snap-type:x proximity}
+.pt-pairs::-webkit-scrollbar{display:none}
+.pt-pair{flex:none;width:150px;display:flex;flex-direction:column;align-items:flex-start;text-align:left;scroll-snap-align:start}
+.pt-pair i{display:block;width:100%;height:58px;border-radius:var(--r-1);background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.1)}
+.pt-pair b{display:block;width:100%;margin-top:9px;font:400 18px/1.2 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pt-pair span{margin-top:3px;font:400 12px/1.3 var(--sans);color:var(--soft)}
+.pt-pair:active i{opacity:.8}
+
+/* ---------- the full screen ---------- */
+.pt-chipsrow{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+.pt-chip{display:inline-flex;align-items:center;height:44px;border:1px solid var(--rule);border-radius:var(--r-pill);padding-right:2px}
+.pt-chip-c{display:inline-flex;align-items:center;gap:10px;height:100%;padding:0 6px 0 8px}
+.pt-chip-c i{width:26px;height:26px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.2)}
+.pt-chip-c b{font:400 18px/1 var(--serif)}
+.pt-chip-x{width:40px;height:40px;display:grid;place-items:center;color:var(--faint)}
+.pt-chip-x svg{width:14px;height:14px}
+.pt-add{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 12px;border:1px dashed rgba(236,232,223,.3);border-radius:var(--r-pill);font:500 13px/1.2 var(--sans);color:var(--soft);text-align:left}
+.pt-add svg{width:16px;height:16px;flex:none}
+.pt-page [data-sliders]{margin-top:10px}
+.pt-finding{margin:22px 0 10px;font:400 23px/1.3 var(--serif);letter-spacing:-.005em;min-height:60px}
+.pt-acts{margin:10px 0 6px}
+.pt-acts:empty{display:none}
+.pt-stats{margin:6px 0 4px;border-top:1px solid var(--rule)}
+.pt-stats summary{list-style:none;min-height:48px;display:flex;align-items:center;font:italic 400 17px/1 var(--serif);color:var(--soft);cursor:pointer}
+.pt-stats summary::-webkit-details-marker{display:none}
+.pt-stats summary::after{content:"+";margin-left:auto;font:400 20px/1 var(--sans);color:var(--faint)}
+.pt-stats[open] summary::after{content:"–"}
+.pt-stats[hidden]{display:none}
+.pt-st-lead{margin:0 0 12px;font:400 15px/1.5 var(--sans);color:var(--ink)}
+.pt-st{display:grid;grid-template-columns:84px minmax(0,1fr);gap:10px;padding:10px 0;border-top:1px solid var(--rule)}
+.pt-st>span{font:500 12px/1.5 var(--sans);color:var(--faint)}
+.pt-st p{margin:0 0 5px;font:400 14px/1.45 var(--sans);color:var(--soft)}
+.pt-st p b{font:400 17px/1.3 var(--serif);color:var(--ink);margin-right:6px}
+.pt-early{text-align:left;font:400 14px/1.45 var(--sans);color:var(--soft)}
+.pt-early b{font:400 17px/1.3 var(--serif);color:var(--ink);margin-right:6px}
+.pt-sortrow{margin:22px 0 16px}
+.pt-results .gl-all{margin-top:18px}
+.pt-masonry{margin-top:2px}
+.pt-tile{display:grid;place-items:center;aspect-ratio:1;background:var(--lift);border-radius:var(--r-1);font:400 16px/1.2 var(--serif);color:var(--soft)}
+
+/* the add-a-color sheet */
+.pt-add-sw{display:flex;flex-wrap:wrap;gap:7px;padding:6px 0 14px}
+.pt-add-sw button{width:30px;height:30px;border-radius:2px;background:var(--c)}
+
+/* ---------- the pinned color on a painting ---------- */
+.pt-arrive{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;margin:22px 0 4px;padding:16px 0;border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule)}
+.pt-arrive[hidden]{display:none}
+.pt-ar-sw{display:block;width:44px;height:44px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.22),0 0 0 3px var(--ground),0 0 0 4px rgba(236,232,223,.5)}
+.pt-ar-line{display:block;font:400 22px/1.3 var(--serif);letter-spacing:-.005em}
+.pt-ar-line b{font-weight:400}
+.pt-ar-body small{display:block;margin-top:6px;font:400 12.5px/1.45 var(--sans);color:var(--soft)}
+.pt-ar-tools{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+.pt-ar-map{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 16px 0 12px;border:1px solid var(--rule);border-radius:var(--r-pill);font:500 13px/1 var(--sans);color:var(--ink);transition:background .2s,color .2s}
+.pt-ar-map.on{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
+.pt-ar-all{min-height:40px;padding:0 2px;font:italic 400 16px/1 var(--serif);color:var(--soft);text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:4px}
+.pt-ar-reg{display:flex;align-items:center;gap:10px;margin-top:12px}
+.pt-ar-reg span{flex:1;min-width:0;text-align:center;font:400 13px/1.35 var(--sans);color:var(--soft)}
+.pt-ar-reg button{width:44px;height:44px;border:1px solid var(--rule);border-radius:50%;font:400 22px/1 var(--sans);color:var(--ink)}
+.pt-ar-why{color:var(--faint)}
+.pt-mask{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity .35s var(--ease);filter:blur(.7px)}
+
+@media (max-width:374px){
+  .pt-ticks{margin:-4px 10px 6px}
+  .pt-finding{font-size:21px}
+  .pt-chip-c b{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){ .pt-mask,.pt-seg button,.pt-chips button{transition:none} }
+
+/* ---------- the pair takeaway and the masters' chords ---------- */
+.pt-take{margin:0 0 14px;padding:14px 0 14px 16px;border-left:2px solid var(--ink);font:400 15px/1.5 var(--sans);color:var(--soft)}
+.pt-take[hidden]{display:none}
+.chd-eras{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;margin:20px calc(-1 * var(--g)) 0;padding:2px var(--g) 8px;scrollbar-width:none}
+.chd-eras::-webkit-scrollbar{display:none}
+.chd-eras button{flex:none;height:36px;padding:0 14px;border:1px solid var(--rule);border-radius:var(--r-pill);font:500 13px/1 var(--sans);color:var(--soft);white-space:nowrap;transition:background .2s,color .2s}
+.chd-eras button.on{background:var(--paper);border-color:var(--paper);color:var(--paper-ink)}
+.chd-sub{margin:18px 0 6px;font:400 19px/1.35 var(--serif);color:var(--soft)}
+.chd-list{border-top:1px solid var(--rule)}
+.chd-row{display:flex;align-items:center;gap:14px;width:100%;min-height:72px;padding:12px 0;border-bottom:1px solid var(--rule);text-align:left}
+.chd-sw{display:flex;flex:none;border-radius:var(--r-1);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(236,232,223,.12)}
+.chd-sw i{display:block;width:26px;height:48px;background:var(--c)}
+.chd-t{flex:1;min-width:0}
+.chd-t b{display:block;font:400 20px/1.2 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chd-t small{display:block;margin-top:4px;font:400 12.5px/1.35 var(--sans);color:var(--soft)}
+.chd-row svg{width:16px;height:16px;flex:none;color:var(--faint)}
+.chd-row:active .chd-sw{opacity:.8}
+.chd-theory{margin-top:30px}
+.chd-theory p{font:400 15px/1.55 var(--sans);color:var(--soft);margin:0 0 12px}
+.chd-theory[hidden]{display:none}
+
+/* a design piece in the results (palette-only: its six colors stand in for a picture) */
+.pt-tile.pt-design{display:flex;flex-direction:column;align-items:stretch;place-items:initial;aspect-ratio:auto;background:none;gap:0;color:var(--ink);text-align:left}
+.pt-design .pt-dstrip{display:flex;height:104px;border-radius:var(--r-1);overflow:hidden}
+.pt-design .pt-dstrip i{flex:1;background:var(--c)}
+.pt-design em{font:italic 400 13px/1.3 var(--serif);color:var(--soft);margin-top:8px}
+.pt-design b{font:400 17px/1.2 var(--serif);margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pt-design small{font:400 12.5px/1.35 var(--sans);color:var(--faint);margin-top:3px}
