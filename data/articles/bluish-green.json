@@ -1,0 +1,231 @@
+{
+ "slug": "bluish-green",
+ "name": "Bluish Green",
+ "hex": "#A4B6A7",
+ "names": [
+  "Bluish Green"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Bluish Green is a pale, greyed green that earns its place from an 1821 naturalists' chart, where it was swatch number 51, matched to a thrush's egg.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A naturalist's term",
+   "body": "Bluish green is one of Werner's colors as Patrick Syme set them out for naturalists, number 51 in the greens [1]. Syme matched it to the egg of a thrush, to the underside of wild rose leaves and to beryl [1]. He took the term itself, with saffron yellow, lilac and blackish grey, from the English edition of Willdenow's botany textbook of 1805 [2].\n\nSyme's chart, first published in 1814 and revised in 1821, was perhaps the only one English-speaking botanists used until 1886 [2]. That made its vocabulary durable, and bluish green stayed in field guides long after the chart did. The older Latin vocabulary had a word for the same zone: *glaucus*, which could mean grey-green, greenish or bluish green [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which swatch",
+   "body": "The swatch here is the pale, greyed one: Werner's aged paper and the ISCC-NBS block 159, called pale green, which dates from 1955 [1]. It is mild, about 72 in lightness and only 11 in chroma [1]. Nearby names are [[celandine-green]], [[ash]] and [[cambridge-blue]] [1].\n\nOther sources use the words for something far more vivid. The 2010 xkcd survey's bluish green is a saturated sea green, nothing like Syme's [1]. Treat the name as a direction, from [[green]] toward [[blue-green]], and not as one color."
+  },
+  {
+   "id": "dictionary",
+   "title": "In the dictionary",
+   "body": "Paterson's dictionary reaches for the phrase constantly. A pale bluish green is aquamarine and a light one is spray, while colibri is a bluish-green also called humming-bird [4]. Tourmaline is a bluish green in his entry, and verde azzurro is a bluish-green pigment possibly made from malachite [4]. [[verdigris-green]] belongs here too, the film that forms on copper and bronze [4].\n\nBall gives the chemistry. Copper ions absorb in the red end of the spectrum, so copper salts look bluish-green, though how blue or how green depends on the neighbouring ions [5]. Green ultramarine, the intermediate stage of the artificial pigment, was described by Salter in 1869 as a bright bluish-green that dulls to greenish-blue on exposure [6]. Guignet's green, patented in 1859, is a bright bluish green too [4]."
+  },
+  {
+   "id": "painting",
+   "title": "In painting",
+   "body": "Gage ties the hue to Gauguin, who came to prefer subtle close tones such as bluish-greens, purplish-reds and orange-yellows over Van Gogh's sharp contrasts [7]. [[painter:paul-gauguin|Gauguin]] does indeed lead our archive here, with [[painter:georges-seurat|Seurat]] and [[painter:claude-monet|Monet]] [10].\n\nSymbolism is thinner. In Mondrian's triptych *Evolution* of 1910 to 1911 the woman at left is bluish green, which a Theosophical chart reads as religious feeling tinged with fear [8]. That is one chart's code and not a general meaning. Birren claimed in 1950 that bluish greens are livable and flatter a complexion because they oppose it [9]. Birren's color opinions are contested, so take that as taste and not evidence."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Bluish Green appears in 421 of 23,781 paintings, 1.77 per cent, more common than 76 per cent of our named colors [10]. It peaks in the 1800s, in 1.8 per cent of 8,345 paintings, 1.5 times the museums' baseline [10]. Inside a painting it most often plays a light, in 51 per cent of 283 paintings [10].\n\nSeurat uses it in 5 of 41 works here, 4.0 times the baseline, and Gauguin and Monet follow [10]. The earliest match is from 1340, 481 years before the name was written down, which says only that the hue exists in old, aged paint [10]. These are photographs of varnished paintings, so a match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: bluish + green",
+   "first_recorded": "Syme's Werner, 1821, no. 51 (English term from Willdenow, 1805)",
+   "source": "Baty, Nature's Palette, p. 173"
+  },
+  "aka": [
+   "Werner's Bluish Green",
+   "glaucous (Latin glaucus)"
+  ],
+  "siblings": [
+   "celandine-green",
+   "gnaphalium-green",
+   "ash"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "blue-green",
+    "gloss": "a stronger, bluer green, often called teal or turquoise"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "glaucus (grey-green to bluish green)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (within-painting lens, at least 2% of the canvas; a color match is not a pigment test)",
+  "n_present": 421,
+  "pct_present": 1.77,
+  "rank_pct": 76,
+  "century": {
+   "peak": "1800s",
+   "rate": 1.8,
+   "n": 8345,
+   "lift": 1.5
+  },
+  "role": {
+   "light": 0.51
+  },
+  "painters": [
+   {
+    "name": "Georges Seurat",
+    "hits": 5,
+    "n": 41,
+    "lift": 4.0
+   },
+   {
+    "name": "Paul Gauguin",
+    "hits": 5,
+    "n": 50,
+    "lift": 3.8
+   },
+   {
+    "name": "Claude Monet",
+    "hits": 6,
+    "n": 50,
+    "lift": 3.5
+   }
+  ],
+  "measured": {
+   "lch": [
+    72.3,
+    10.6,
+    148.8
+   ],
+   "iscc": "pale green"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library and Color Graph: Werner/Syme no. 51 (Greens), ISCC-NBS 1955 block 159, xkcd survey 2010; measured LCH; look-alikes",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 172-173",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green, p. 10",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"aquamarine\", \"colibri\", \"tourmaline\", \"spray\", \"verde azzurro\", \"verdigris\", \"Guignet's green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"green ultramarine\", p. 389",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 201",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 252",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, p. 29 (1950 opinion, contested)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (Color Graph field notes, 'b')",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Patrick Syme match to Bluish Green, number 51?",
+   "choices": [
+    "A thrush's egg",
+    "A robin's breast",
+    "A sapphire",
+    "A fern frond"
+   ],
+   "answer": "A thrush's egg",
+   "kind": "pick"
+  },
+  {
+   "q": "Why do copper salts look bluish-green?",
+   "choices": [
+    "Copper ions absorb red light",
+    "Copper emits green light",
+    "Copper reflects only blue",
+    "Copper is always oxidised"
+   ],
+   "answer": "Copper ions absorb red light",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the xkcd survey's bluish green is a pale grey-green like Syme's.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme's bluish green was matched to a thrush's egg in 1821.",
+  "Copper salts look bluish-green because copper absorbs red light."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Syme 1814 first / 1821 second edition: Baty, no book disagreement.",
+   "Gauguin attribution from Gage p. 201 only; Theosophical chart is one symbolic code.",
+   "Birren opinion flagged contested."
+  ]
+ },
+ "words": 575
+}

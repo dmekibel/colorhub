@@ -1,0 +1,144 @@
+{
+ "slug": "campanula-purple",
+ "name": "Campanula Purple",
+ "hex": "#6C6D94",
+ "names": [
+  "Campanula Purple"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Campanula Purple is a greyish blue-violet named for the bellflowers, one of the 110 colors in the nomenclature Abraham Werner built for minerals and Patrick Syme adapted for naturalists.",
+ "sections": [
+  {
+   "id": "werner",
+   "title": "A mineralogist's purple",
+   "body": "In Syme's Werner-based chart the color is number 39 in the purples, flanked by Pansy Purple and Imperial Purple [1][2]. The chart's examples are a vegetable one, the Canterbury bell, *Campanula persicifolia*, and a mineral one, the fluorite called fluor spar [1][2]. Each color in the chart is paired with an animal, a vegetable and a mineral example, so one name could be checked against living and mineral specimens [3].\n\nSeveral neighboring purple names are renamed blues from older authors: Violet Purple was Werner's Violet Blue, Lavender Purple was Werner's Lavender Blue, and Plum Purple was the Plum Blue of Werner and Jameson, renamed when Syme added purple as a principal color [4]."
+  },
+  {
+   "id": "nature",
+   "title": "Where it was seen",
+   "body": "The modern edition shows the color on a butterfly's wings, in the Camberwell Beauty of Duncan's *British Butterflies* of 1840 [2]. It also names the petals of the peach-leaved bellflower from Loudon's flower book of 1849, and the fluorite plate in Kurr's *The Mineral Kingdom* of 1859 [2]. A bellflower, a butterfly and a crystal share one patch of grey-violet.\n\nThe swatch here is an aged scan, approximate, and it matches ISCC-NBS block 245 [1]. The nearest everyday name on screen is [[slate]], ΔE 12.9 away [1]. Compared with [[purple]] or [[violet]], it is much greyer, closer to the shadow side of a [[periwinkle]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of this swatch fills at least five per cent of the canvas in 37 of 23,781 archive paintings [5]. Henri Matisse carries it in 4 of his 50 works, a rate 51 times the archive's [5]. Munch has it in 3 of 50 [5]. Cézanne's [[painting:commons-Q64211180|Harlequin]] of 1888 holds it across 35 per cent, and Eugen's [[painting:smk-KMS3401|Ships at Anchor, Winter]] of 1908 across 29 per cent [5].\n\nThe match rate climbs in the 1900s, 15 hits among 1,674 paintings [5]. Norway has the highest lift of any country, at 16 times, from 3 of 120 paintings [5]. These are photographs of aged, varnished paintings, so this is a color match and not a pigment test [5]. The word *campanula* itself peaked in printed English in 1823 [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the bellflower genus Campanula",
+   "first_recorded": "Syme's Werner-based nomenclature, early 1800s",
+   "source": "Baty, Nature's Palette"
+  },
+  "aka": [],
+  "siblings": [
+   "imperial-purple",
+   "periwinkle",
+   "slate"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6C6D94",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 37,
+  "top_paintings": [
+   "commons-Q64211180",
+   "smk-KMS3401",
+   "smk-KMS8273"
+  ],
+  "painters": "Matisse 4 of 50, Munch 3 of 50",
+  "ngram": {
+   "campanula_peak": 1823
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Campanula Purple, Werner no. 39 (Purples), aged swatch, ISCC-NBS 1955 block 245; nearest name Slate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, nos. 37-41 (Blues and Purples), p. 109-110",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Introduction",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 104",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, matched at 6 delta-E units and 5% canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'campanula', case-insensitive, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was Werner's mineral example of Campanula Purple?",
+   "choices": [
+    "Fluor spar",
+    "Lapis lazuli",
+    "Amethyst",
+    "Azurite"
+   ],
+   "answer": "Fluor spar",
+   "kind": "pick"
+  },
+  {
+   "q": "Campanula Purple on screen is a bright, saturated violet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "One grey-violet named for a bellflower was used to describe a butterfly, a flower and a crystal."
+ ],
+ "words": 365,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed Picardet attribution for Lavender Blue (Baty says Werner) and Jameson-only for Plum Blue.",
+   "Removed unsupported claim that Campanula Purple was not a borrowed name.",
+   "'Werner's own examples' changed to the chart's examples (they are Syme's).",
+   "Replaced unsupported 'botanist, miner and painter' purpose line with what the chart actually pairs."
+  ]
+ }
+}

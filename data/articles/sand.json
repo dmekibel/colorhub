@@ -1,0 +1,275 @@
+{
+ "slug": "sand",
+ "name": "Sand",
+ "hex": "#C2B280",
+ "names": [
+  "Sand"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Sand is the pale, greyish yellow of dry beach and desert ground, a color that painters have long shown as a yellow even though real sand rarely is one.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "A yellowy grey",
+   "body": "Paterson defines *sand* as a light yellowy-grey, and his color index files it with the greys, not the yellows [1][2]. The swatch here, #C2B280, agrees: the ISCC-NBS system of 1955 calls the block it sits in grayish yellow, and the swatch lands within a unit of that block's center [3]. Our sources first record the name in Maerz and Paul's dictionary of 1930 [3]. Shakespeare already used it as an adjective: Paterson cites a line in *A Midsummer Night's Dream* about hounds that are \"sanded\", meaning the color of sand [1].\n\nThat ISCC-NBS block also holds names with longer histories, among them Flaxen, first recorded in 1602 according to Maerz and Paul, and Chamois, in 1766, as well as Pebble and Sheepskin [3]. Sand is a recent label for an old family of pale buff-greys."
+  },
+  {
+   "id": "beach",
+   "title": "The painter's beach",
+   "body": "Pastoureau notes that beach sand is never really yellow, yet since the late eighteenth century painters have conventionally rendered beaches in yellows leaning toward ochre, tan or grey, depending on the period and the artist [4]. In the twentieth century those tones became brighter and clearer, as in Félix Vallotton's *The Bay of Trégastel*, painted in 1917 [4].\n\nPastoureau also reminds readers that paintings change. In Vermeer's *View of Delft*, the \"little patch of yellow wall\" that Proust's character Bergotte adores looks more or less white and pink today, and Bergotte also notes that the sand in the picture is pink [5]. The sand-colored quality of a painting is partly the work of time and varnish."
+  },
+  {
+   "id": "light",
+   "title": "Sand under changing light",
+   "body": "A pale, neutral ground is a screen for the light that falls on it. Westland's example of color constancy is sand on the beach, which looks a little redder at sunset than at noon, though we notice far less of the change than the light would predict [6]. So the sand you remember is its daylight self.\n\nMatisse told of seeing, at his chapel at Vence, a red of astonishing substance resting on a small pile of sand on the floor [7]. When he scooped the sand it was grey [7]. Gage observes that the windows were glazed in yellow, green and blue only, and reads the red as an after-image [7]. Either way, a neutral sand shows you what is around it."
+  },
+  {
+   "id": "names",
+   "title": "Sand among the neutrals",
+   "body": "Fashion has used the word as a polite substitute. Paterson says beige was popular for fabrics but was renamed camel, taupe, stone or sand to avoid looking dated [8]. St Clair lists sand with champagne, biscuit, peach and beige as alternatives to the \"nude\" and \"flesh\" terms, which presuppose pale skin [9]. Those names became common for underthings in the 1920s and 1930s [9].\n\nNearby on the swatch chart are [[khaki]], [[beige]], [[tan]] and [[stone]] [3]."
+  },
+  {
+   "id": "ingredient",
+   "title": "Sand in the paint",
+   "body": "Sand is a quiet ingredient in color. Egyptian blue was made by firing quartz sand with lime, a copper compound and natron as a flux [10]. Ball suggests that sand mingling with ashes in the firing of faience may have given early craftsmen their first lumps of glass, and the earliest pottery glazes were thin coats of colored glass made from soda and sand [11]. Green ultramarine, the first step to the synthetic blue, called for china clay, soda, charcoal, sulphur and quartz or sand [12]. One old name for the blue pigment smalt was *blue sand* [13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 2,604, about 11 per cent [14]. The rate is highest in the 1700s, 13.2 per cent of 3,449 paintings, against 8.5 per cent for the 1500s [14]. Two Dutch painters stand out: [[painter:arnoud-van-halen|Arnoud van Halen]] carries it in 27 of 50 works and [[painter:paulus-potter|Paulus Potter]] in 14 of 28 [14].\n\nSome non-European groups run higher still [14]. Japanese works show it in 17.8 per cent of 698 paintings, Mughal works in 21.4 per cent of 168, and the Kalighat school in 40 of 96 [14]. A tone like this is also the color of aged paper and bare grounds, so these counts may reflect supports as much as painted sand, and our data cannot separate the two [14]. The match is to screen colors in photographs of aged, varnished paintings, not to a pigment [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "sand (beach and desert ground)",
+   "first_recorded": "Maerz & Paul 1930 in our sources; 'sanded' in Shakespeare's A Midsummer Night's Dream, Act 4 scene 1",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "sandy (as an adjective)"
+  ],
+  "siblings": [
+   "desert-sand",
+   "sandstone",
+   "sandy-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sandy",
+    "gloss": "a brighter, yellower color in the library, not a lighter Sand"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#C2B280",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2604,
+  "top_paintings": [
+   "aic-149075",
+   "cma-152432",
+   "nga-52200",
+   "aic-35427",
+   "aic-110305",
+   "nga-50347"
+  ],
+  "by_century": {
+   "1500": 0.085,
+   "1700": 0.132,
+   "1800": 0.121
+  },
+  "painters": {
+   "arnoud-van-halen": [
+    27,
+    50
+   ],
+   "paulus-potter": [
+    14,
+    28
+   ]
+  },
+  "groups": {
+   "Japan": [
+    124,
+    698
+   ],
+   "Mughal": [
+    36,
+    168
+   ],
+   "Kalighat": [
+    40,
+    96
+   ]
+  },
+  "measured": {
+   "lch": [
+    72.8,
+    27.7,
+    93.6
+   ],
+   "iscc": {
+    "block": 90,
+    "name": "grayish yellow",
+    "de": 0.7
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sand\", \"sanded\", p. 354",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index of greys, p. 501",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, nodes-s.json): ISCC-NBS 1955 block 90 (grayish yellow, 0.7 units), Maerz & Paul 1930, with first-recorded years of neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 36 (\"The Color of the Beach\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 28 (on Vermeer's View of Delft and Proust)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, \"Color Constancy\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 212",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"beige\", p. 45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 51 (\"Nude\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Kirby et al., Pigment Compendium, \"Egyptian blue\", p. 161",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"smalt\", p. 358",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 painting photographs, as photographed), swatch #C2B280, CIEDE2000 within 6, at least 5% of canvas; tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does Paterson's dictionary file sand in its color index?",
+   "choices": [
+    "With the greys",
+    "With the yellows",
+    "With the browns",
+    "With the whites"
+   ],
+   "answer": "With the greys",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does beach sand look only a little redder at sunset than at noon?",
+   "choices": [
+    "Color constancy keeps familiar objects close to their daylight color",
+    "Sand reflects only red light",
+    "The sun gives off no blue at sunset",
+    "Our eyes are tired by evening"
+   ],
+   "answer": "Color constancy keeps familiar objects close to their daylight color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: since the late eighteenth century painters have usually shown beach sand in grey-blue tones.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Beach sand is never really yellow, but painters have shown it that way since the late 1700s.",
+  "Matisse scooped up the sand that looked red and found it was grey.",
+  "Beige was once renamed sand to avoid looking dated."
+ ],
+ "words": 716,
+ "status": "checked",
+ "checked": {
+  "by": "article writer, sentence-to-card trace",
+  "date": "2026-10-08",
+  "issues": [
+   "Origin of the English word is undocumented in the books; not stated.",
+   "Gage's after-image reading of Matisse is Gage's, hedged.",
+   "Archive counts blend support color (paper, grounds) with painted sand; stated.",
+   "Ngram not used: 'sand' is mostly a noun."
+  ]
+ }
+}

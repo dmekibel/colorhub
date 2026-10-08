@@ -1,0 +1,146 @@
+{
+ "name": "Prussian Red",
+ "hex": "#895B51",
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Prussian red was an old trade name for a brownish iron-oxide red, and it has nothing to do with Prussian blue except the country.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a single recipe",
+   "body": "The Pigment Compendium calls Prussian red a widely used term in the eighteenth and nineteenth centuries for a modified earth or a synthetic iron oxide [1]. Watin, in 1785, treats it as either a calcined earth or, more likely, caput mortuum or colcothar, and links it to Nürnberg red [1][2]. As late as 1874, Riffault still gives Nürnberg red as another name for Prussian red [2]. Books disagree on what exactly it was, because the label named a look, not a method [1][2]."
+  },
+  {
+   "id": "family",
+   "title": "Where it sits among the iron reds",
+   "body": "Salter, in 1869, lists Prussian red among the many synonyms of red ochre, along with English red, Persian red, Spanish brown and others [3]. Colcothar, the iron oxide left after distilling sulfuric acid from iron sulfate, was equated by Watin with caput mortuum and, through it, with Prussian red [4]. For the family, see [[venetian-red]], [[indian-red]], [[english-red]] and [[tuscan-red]].\n\nOne trap: the name does not mean a red made from [[prussian-blue]]. That pigment has its own relatives, such as a brown made by roasting it, which the same compendium lists under Prussian brown, a separate entry [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here, #895B51, is a muted, brownish red from Ridgway's 1912 color atlas, later sets echoing it [6]. It is a modern standard color, and the old pigment varied by maker [1][2]. Treat it as one point in a range."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our name graph records Prussian red from Ridgway in 1912, with Maerz and Paul in 1930 and ISCC-NBS in 1955 [6].\n\nIn our archive of 23,781 paintings, this color appears in 410 paintings, 1.72 per cent, and by the within-painting measure in 172 [7]. It is more common than 68 per cent of the named colors [7]. It peaks in the 1900s, in 33 of 1,674 paintings, 2.0 per cent, or 2.4 times the expected rate [7]. In 34 per cent of the 172 paintings it plays an accent [7]. These are photographs of aged, varnished paintings, so a match is not a pigment test [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Prussia, as a trade label (origin undocumented in our books)",
+   "first_recorded": "Watin, 1773 (edition of 1785)",
+   "source": "Pigment Compendium, \"Prussian red\""
+  },
+  "aka": [
+   "Nürnberg red (per Watin and Riffault)"
+  ],
+  "siblings": [
+   "venetian-red",
+   "indian-red",
+   "english-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "prussian-blue",
+    "gloss": "an unrelated iron-cyanide blue; only the name is shared"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 410,
+  "rank": "more common than 68% of named colors",
+  "peak": "1900s: 33 of 1,674 paintings, 2.4x expected",
+  "sources": "Ridgway 1912, Maerz and Paul 1930, ISCC-NBS 1955"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Prussian red\", p. 323 (citing Watin 1773/1785)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Nürnberg red\", p. 291 (citing Watin 1785; Riffault 1874)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"red ochre\", p. 334 (citing Salter 1869)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"colcothar\", p. 132",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Prussian brown\" (adjacent entry), p. 323",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub name graph, source dates",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Watin say Prussian red most likely was?",
+   "choices": [
+    "Caput mortuum or colcothar",
+    "A red made from Prussian blue",
+    "A lead red"
+   ],
+   "answer": "Caput mortuum or colcothar",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Prussian red was made from Prussian blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Prussian red and Nürnberg red were treated as the same old iron-oxide red."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "slug": "prussian-red",
+ "names": [
+  "Prussian Red"
+ ],
+ "status": "checked",
+ "words": 346
+}

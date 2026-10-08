@@ -1,0 +1,143 @@
+{
+ "slug": "deep-green",
+ "name": "Deep Green",
+ "hex": "#02590F",
+ "names": [
+  "Deep Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Deep green is a plain descriptive name for a dark, saturated green, and the books mostly use the phrase to describe other, better documented colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A phrase, not a named color",
+   "body": "Deep green is built from two ordinary words, so no one coined it. The books use it as description. Paterson defines viridian green as a brilliant deep green made from chromium oxide, which Vauquelin discovered in 1797, Pannetier made in 1838 and Guignet patented in 1859 [1]. For him billiard green is the deep green of baize on billiard and snooker tables [1].\n\nOther books reach for it too. Pastoureau notes that the Latin *prasinus*, green like a leek, sometimes meant a deep green [2]. Coles says Hooker's green, an eighteenth-century watercolor for foliage, was a deep green made by mixing gamboge with Prussian blue or indigo [3]. Fuchsite, a chromium-rich mica, is a deep green mineral [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our swatch is a strongly saturated, dark green, listed in the ISCC-NBS system of 1955 in block 150 as a deep yellowish green, 4.7 CIEDE2000 units away [5]. Ridgway's 1912 plates and the xkcd survey of 2010 also hold it [5]. It lies close to [[dark-green]], [[forest-green]] and [[hooker-s-green]], and darker and clearer than [[bottle-green]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a rare painted color. In our archive of 23,781 paintings, a color within six units of the swatch covers at least five per cent of the canvas in only 6 works [6]. The earliest is an *Annunciation* of 1490, and the rest date from the 1500s and the 1800s [6]. Half of those appearances are shadows and half are mid-tones [6]. In printed English the phrase *green* itself peaks around 1890 [6]. These are photographs of varnished paintings, so read them as screen colors [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented: descriptive modifier",
+   "first_recorded": "ISCC-NBS 1955; Ridgway 1912",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-green",
+   "forest-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#02590F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 6,
+  "top_paintings": [
+   "nga-52960",
+   "nga-50263"
+  ],
+  "role": {
+   "mid": 0.5,
+   "shadow": 0.5
+  },
+  "measured": {
+   "iscc": "deep yellowish green",
+   "de2000": 4.7
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 49, 414",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 1 (Latin color words)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Gamboge\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"muscovite\", p. 283",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 150, Ridgway 1912, xkcd 2010; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); Google Books Ngram (https://books.google.com/ngrams)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two colors does Hooker's green mix with gamboge?",
+   "choices": [
+    "Prussian blue or indigo",
+    "Cobalt or ultramarine",
+    "Madder or carmine",
+    "Lead white or ochre"
+   ],
+   "answer": "Prussian blue or indigo",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: deep green was the name of a single historic pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep green is a description, not a pigment: books use it for viridian, billiard baize and Hooker's green."
+ ],
+ "words": 280,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded close Paterson phrasing."
+  ]
+ }
+}

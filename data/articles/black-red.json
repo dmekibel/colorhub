@@ -1,0 +1,155 @@
+{
+ "slug": "black-red",
+ "name": "Black Red",
+ "hex": "#402225",
+ "names": [
+  "Black Red"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Black Red is a very dark red, so dark that it is close to black, listed as RAL 3007 in the German paint standard.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A descriptive name",
+   "body": "Black Red is a plain description, a red darkened until it nearly reads as black [1]. In our library it is the paint-chart color RAL 3007, and the screen value is approximate [1]. The earliest record of the name in our sources is 1927 [1]. Its nearest widely used name is [[oxblood]], about 12 units away on the CIEDE2000 scale [1].\n\nOur library also pairs the swatch with the Japanese traditional name *nisemurasaki*, \"fake purple\" [1]. No book in our collection explains that pairing, so treat it as a library entry only [1]."
+  },
+  {
+   "id": "pair",
+   "title": "The pair, not the color",
+   "body": "Books that mention [[black]] and [[red]] together are almost always talking about two colors side by side. Pastoureau tells how chess began with black and red pieces in India and in Islamic lands, a pair of opposites in Asia from time immemorial [2]. When the game reached Europe around the year 1000, the opposition changed to white against red, and from the mid-thirteenth century to the white against black we know now [2].\n\nIn Gothic art, black and red together stood for the devil: black body, red flames of hell and the blood of the damned, as in Fra Angelico's *Last Judgment* of about 1431 to 1432 [3]. Medieval discriminatory marks drew on five colors, and red and black were among the most frequent combinations [4]. None of these is the single dark red of the swatch."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 525 works, or 2.21 per cent, which makes it more common than 80 per cent of the named colors [5]. It peaks in the 1500s, in 59 of 2,231 paintings, 1.5 times the museums' baseline [5]. Inside a painting it is most often a hidden color, in 59 per cent of the 384 works where we measure it by lightness rank [5].\n\nIt travels with [[brown-red]] and [[black-blue]] on the same canvases, at 9.0 and 4.2 times chance [5]. The earliest match is dated 1270, long before the name existed, so it is a look-alike hue in an aged photograph, not a record of the paint [5]. The Google Books curve for the words also peaks in the 1870s, but it counts every use of the two words and says little about the color [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a red darkened toward black",
+   "first_recorded": "1927, in our sources (RAL)",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "RAL 3007",
+   "nisemurasaki (library pairing)"
+  ],
+  "siblings": [
+   "oxblood",
+   "brown-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "black-blue",
+    "gloss": "the cool dark counterpart of the same family of darks"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Nisemurasaki (似せ紫), library pairing"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 525,
+  "peak_century": {
+   "century": 1500,
+   "lift": 1.5
+  },
+  "role": {
+   "hidden_pct": 59,
+   "of": 384
+  },
+  "nearest": {
+   "name": "Oxblood",
+   "de2000": 11.9
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name library, \"Black Red\" (RAL 3007; approximate screen value)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 23",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 27",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 51",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "Google Books Ngram via ColorHub field notes (all senses)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the original Indian and Islamic chess, which two colors faced each other?",
+   "choices": [
+    "Black and red",
+    "White and black",
+    "White and red",
+    "Red and green"
+   ],
+   "answer": "Black and red",
+   "kind": "pick"
+  },
+  {
+   "q": "When chess spread to Europe around the year 1000, what did the opposition become?",
+   "choices": [
+    "White against red",
+    "Black against green",
+    "Blue against yellow",
+    "Black against white at once"
+   ],
+   "answer": "White against red",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Chess pieces were black and red in India; Europe made them white and red, then white and black."
+ ],
+ "words": 394,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "No book treats Black Red as a single color; mentions are of the pair.",
+   "Nisemurasaki pairing is library-only.",
+   "Short by design."
+  ]
+ }
+}

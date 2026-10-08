@@ -1,0 +1,131 @@
+{
+ "slug": "vomit",
+ "name": "Vomit",
+ "hex": "#A2A415",
+ "names": [
+  "Vomit"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Vomit is a crude name for a sour, olive-leaning yellow-green, in the lists of joke and survey color names rather than any paint, dye or standard.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no history",
+   "body": "The swatch comes from the xkcd color survey, a crowdsourced list of names, and no pigment, dye or dictionary entry of the name is documented in the books [1]. The name is descriptive and rude by design, a way of calling a color unpleasant. Its nearest named neighbor in our library is [[khaki]], at a distance of about 10 CIEDE2000 units, and it sits between [[olive]] and [[chartreuse]] [1]."
+  },
+  {
+   "id": "books",
+   "title": "What the books do say",
+   "body": "The painter and filmmaker Derek Jarman lists *vomit* among the cheap paints he mixed himself in the 1960s, naming it beside \"goose turd green\" [2]. He also uses it to describe the sickly green of 1950s science fiction, a color of pus and rotting flesh [2]. Elsewhere the word turns up only in the literal sense, as in Finlay's account of poisoning and in descriptions of how shellfish were milked for dye [3][4]. It is not a color name there."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This yellow-green is rare in painting: it fills at least five per cent of the canvas in 12 of 23,781 museum paintings, within six units of CIEDE2000 [5]. The largest share is a Basohli manuscript page of 1760, where it covers about 60 per cent [5]. Seven of the twelve are from the 1900s, a rate more than eight times the archive average [5]. These are photographs of aged, varnished paintings; a color match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the bodily fluid; a descriptive crowd name",
+   "first_recorded": "undocumented in the books; xkcd color survey",
+   "source": "ColorHub library (xkcd)"
+  },
+  "aka": [
+   "Goose turd green (Jarman's term for a similar paint)"
+  ],
+  "siblings": [
+   "khaki",
+   "olive",
+   "chartreuse",
+   "mustard"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "match": {
+   "hex": "#A2A415",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 12,
+  "top_paintings": [
+   "wisteria-basohli"
+  ],
+  "peak_century": 1900,
+  "lift": 8.3
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): xkcd color survey; nearest name by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 6 and 40",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings; tools/article_field.py, CIEDE2000, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does this color's name come from?",
+   "choices": [
+    "A crowd-sourced survey of color names",
+    "A named pigment",
+    "A Victorian dye",
+    "A paint company"
+   ],
+   "answer": "A crowd-sourced survey of color names",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books document a pigment called vomit.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The name Vomit has no pigment behind it; the film-maker Derek Jarman used it for a paint he mixed himself."
+ ],
+ "words": 247,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

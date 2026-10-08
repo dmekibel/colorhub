@@ -1,0 +1,289 @@
+{
+ "slug": "sap-green",
+ "name": "Sap Green",
+ "hex": "#507D2A",
+ "names": [
+  "Sap Green"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Sap green is a warm, yellowish, transparent green, named for a paint made from the juice of buckthorn berries and stored in pig bladders, which survives mostly as a name.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "A berry, not a sap",
+   "body": "The name suggests tree sap, but the material was the juice of buckthorn berries [1][2]. Pigment Compendium traces sap green to the ripe berries of common buckthorn, *Rhamnus cathartica*, and other *Rhamnus* species, whose color comes from a flavonoid dye [1]. The Chinese greens known as lokao were made from related species growing in China [1]. Finlay adds that buckthorn had been stripped of its leaves for yellow dyes and paints for thousands of years before the berries were boiled with alum, from the seventeenth century, to make a watercolor [2].\n\nThe thick juice needed a container, and pig or beef bladders were the usual one. A Paduan recipe collection of the late sixteenth or early seventeenth century has the berries boiled and mixed with alum and lime water [3]. The liquid is brought to the thickness of honey and hung in a chimney in a bladder until it hardens [3]. This gave the pigment its other names, *bladder green*, *verde vessie*, *verde vejiga* and German *Saftgrün*, and the name has nothing to do with its yellowy color, as Finlay takes care to say [1][2][3]."
+  },
+  {
+   "id": "recipe",
+   "title": "No single recipe",
+   "body": "Sources disagree about how to pick the berries. Tingry in 1804 wanted them black and very ripe, and Boltz in 1549 said to gather them fourteen days before Michaelmas [1]. Riffault in 1874 held that ripe berries give a dirty, greyish yellow and unripe ones an unwelcome yellow-green, so they should be taken just short of full maturity [1]. Coles notes in turn that a dyer could steer the berry's final color by the harvest time, metal salts and temperature, and that genuine sap green can be made from unripe berries [4].\n\nEven the green is arguable. Mierzinski in 1881 said indigo was added because the berries alone gave a yellow mass; others add woad or the blue of iris, and Terry in 1893 held that alum alone should be the substrate, because other substrates change the transparency [1]. Mills and White in 1994 attribute the color almost wholly to chlorophyll, so that other plant sources could have stood in for the berries; a seventeenth-century Portuguese treatise by Nunes names asparagus seeds [1]. The name was also borrowed for the juice of iris petals, which medieval writers sometimes call sap green, though *iris green* is the proper name [1][5]."
+  },
+  {
+   "id": "manuscripts",
+   "title": "Why painters wanted it",
+   "body": "Verdigris was the painter's usual green, and it had faults. It could eat holes in parchment and spoil pigments set next to it, and these faults, Ball says, led to alternatives by the fourteenth century, chief among them sap green and iris green [6]. He calls them colors of the meadow, not the mine [6]. Pigment Compendium finds sap green much mentioned in early manuscripts, with Clarke listing nine treatises from before 1500 that give recipes [1]. The fifteenth-century Strasburg manuscript recommends adding it to azurite ash to make a good green for drapery [1]. In 1670 Goeree described a malachite green deepened with sap green and lightened with massicot [7].\n\nIn water, Ball says, with a little gum it makes an excellent watercolor, and it is still used that way [6]. Finlay is less kind: since the seventeenth century, he writes, it was regarded as a bad pigment [2]. The slide continued, and by the early twentieth century Zerr and Rübencamp said it had very little practical value, while Heaton in 1928 listed it only as obsolete or rarely used [1]."
+  },
+  {
+   "id": "name-outlived",
+   "title": "The name outlived the berry",
+   "body": "Because the name was good, it got attached to mixtures. Fishwick, writing between 1795 and 1816, describes a sap green compounded of Dutch pink, gamboge and Spanish indigo [1]. Linke and Adam in 1913 gave the name *Saftgrün* to a mixture of Prussian blue and gamboge, and Winsor and Newton's catalogue of 1896 gave an oil version of quercitron lake, ultramarine and bone brown [1]. Pigment Compendium reports that [[hooker-s-green]], another named green of the period, consisted mainly of Paris blue and gamboge or a yellow lake [8].\n\nBy the early twentieth century, Ball adds, the sap green sold as an oil color was in fact a synthetic lake compound, and Paterson says modern oil sap green is usually a coal-tar lake [6][9]. A tube of sap green today is therefore usually a deliberately made color, not the old berry paste. What survives is a recognisable hue: a warm, yellowish, transparent mid-green."
+  },
+  {
+   "id": "cloth",
+   "title": "A rich man's green",
+   "body": "St Clair uses the name sap green for the deep, even green of the gown in van Eyck's Arnolfini portrait of 1434, which he reads as a sign of wealth [10]. His point is about dyeing. Such a green generally took two dye baths, first woad and then weld, and for much of the period the practice was against the rules, since medieval custom frowned on mixing colors [10]. A Nuremberg dyer named Hans Töllner was denounced for exactly this in January 1386, and was fined, barred from dyeing and sent into exile in Augsburg [10].\n\nPastoureau reaches a similar conclusion from the recipes: he reports no collection before the fifteenth century that makes green by mixing blue and yellow, with greens instead coming from green materials such as malachite, verdigris or buckthorn [11]. He is cautious about the claim, and the Nuremberg case shows that dyers did sometimes do it [10][11]. The two accounts fit together: the mix existed, but it was not respectable."
+  },
+  {
+   "id": "syme",
+   "title": "Sap green as a nature color",
+   "body": "In the early nineteenth century the pigment's name moved into natural history. George Brookshaw's flower-painting manual of 1797 laid out 59 swatches with pigment names, and 20 of them were later reused by Patrick Syme, sap green among them [12]. Syme's 1821 revision of Werner's color nomenclature added sap green and duck green himself [12]. He defined it as emerald green with much saffron yellow and a little chestnut brown [12]. It was number 56 in the scheme, with the under side of the lower wings of the orange-tip butterfly and the upper surface of woody nightshade leaves as its examples [13]. Sowerby's *Exotic Mineralogy* of 1811 shows it on augite [13].\n\nNaturalists used it, and Baty's survey of zoology charts matches the beetle *Eupholus chevrolati* to the same number [12]. The swatch in our library from this source is an aged, duller olive, #7C8635, quite unlike the cleaner modern one [13]. A color name that once described a pigment became, for a while, a way to describe beetles, birds and rocks."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch on this page is the value Wikipedia lists for the paint, a mid-tone green with plenty of yellow [13]. The ISCC-NBS system of 1955 places the name in block 106, and the Maerz and Paul dictionary of 1930 dates it to 1578 [13]. The surveyed xkcd version is a brighter #5C8B15 [13]. On our chart the nearest named color is [[forest-green]], at a ΔE of 7.3, with [[olive-green]], [[moss-green]], [[leaf-green]] and [[hooker-s-green]] close by [13]. It is not the same as Hooker's green, which is bluer and darker on our chart [13].\n\nTo see it, look for a green with more yellow in it than a forest green and less blue than a bottle green: young leaves in spring are a good place to start."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Sap green is rare as a painted color. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 21, or 0.09 per cent [14]. None of those fall before the 1500s, and 14 of the 21 are from the 1800s [14]. The strongest decade is the 1890s, where 5 of 1,173 paintings qualify, almost five times the archive rate [14].\n\nThe largest share belongs to a 1522 portrait of a woman by Lucas Cranach the Elder, in which the color covers 40 per cent of the picture [14]. After it come a Seurat study for the *Bathers at Asnières* from 1883, covering 29 per cent, and Sérusier's *La Barrière* of 1890, covering 27 per cent [14]. The earliest qualifying painting is Andrea del Sarto's *Archangel Raphael with Tobias* of 1512, which reaches 10 per cent [14]. These are photographs of varnished paintings, so a match is a screen color, not a pigment test [14].\n\nThe name's life in print is clearer than the paint's. In Google Books, *sap green* stands under a tenth of its peak in 1800, peaks in 1819 and falls back to under a tenth by the 1920s [15]. That is the shape of the watercolor boom and its fade."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the juice of buckthorn berries (Rhamnus)",
+   "first_recorded": "recipes in nine treatises before 1500 (Clarke, via Pigment Compendium); Maerz and Paul date the name to 1578",
+   "source": "Pigment Compendium, \"Sap green\", \"Rhamnus\"; Ball, Bright Earth"
+  },
+  "aka": [
+   "bladder green",
+   "verde vessie",
+   "verde vejiga",
+   "vert de vessie",
+   "Saftgrün",
+   "paste green"
+  ],
+  "siblings": [
+   "hooker-s-green",
+   "olive-green",
+   "forest-green",
+   "moss-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "hooker-s-green",
+    "gloss": "a bluer, darker mixed green from the same makers"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Saftgrün (also the name of a Prussian-blue and gamboge mixture)"
+   },
+   {
+    "lang": "it",
+    "name": "verde vessie, verde di veschia (bladder green)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#507D2A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 21,
+  "top_paintings": [
+   "nga-45887",
+   "nga-164966",
+   "commons-Q17491851",
+   "commons-Q27978347"
+  ],
+  "peak_decade": {
+   "decade": 1890,
+   "n": 1173,
+   "hits": 5,
+   "lift": 4.83
+  },
+  "ngram": {
+   "peak": 1819,
+   "rel_1820": 0.859,
+   "rel_1920": 0.093,
+   "rel_2000": 0.207
+  },
+  "measured": {
+   "lch": [
+    48,
+    50,
+    128
+   ],
+   "nearest": [
+    [
+     "Forest green",
+     7.3
+    ]
+   ],
+   "werner_swatch": "#7C8635"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Sap green\", pp. 345-346 (also \"Rhamnus\", \"Iris green\", \"Verde vessie\", \"Venetian green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Color, \"Green\" (epub ch. 16)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Paste green\", \"Verde vessie\", pp. 305, 397",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 119 (\"Stil de grain\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Iris green\", pp. 211-212",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 4 (verdigris and its alternatives)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"English ochre\", p. 163 (Goeree, 1670)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Emerald green\" entry, p. 187 (Riffault list of greens)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sap green\", p. 356",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Verdigris\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 160-165, 173",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 152-156; ColorHub library (Werner no. 56, Maerz and Paul 1930, ISCC-NBS 1955 block 106, xkcd)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram (case-insensitive, 5-year smoothed, relative to peak)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was the original raw material of sap green?",
+   "choices": [
+    "Juice of buckthorn berries",
+    "Tree sap from a green-barked tree",
+    "Crushed malachite",
+    "Boiled fern fronds"
+   ],
+   "answer": "Juice of buckthorn berries",
+   "kind": "pick"
+  },
+  {
+   "q": "Sap green was also called bladder green because it was stored in pig bladders, not because of its yellowy color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why did medieval painters look for greens other than verdigris?",
+   "choices": [
+    "Verdigris could attack parchment and spoil neighbouring pigments",
+    "Verdigris was too expensive to import",
+    "The church forbade copper pigments",
+    "Verdigris turned black in ink"
+   ],
+   "answer": "Verdigris could attack parchment and spoil neighbouring pigments",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The old sap green was berry juice dried hard in a pig's bladder, which is why it was also called bladder green.",
+  "Look at a leaf with light behind it: sap green is that warm, yellower, transparent leaf-green."
+ ],
+ "checked": {
+  "by": "claude-sonnet-5-5 batch 32",
+  "date": "2026-10-08",
+  "issues": [
+   "Recipe ripeness disputed across sources (shown)",
+   "Nunes asparagus seeds is Mills and White speculation via Pigment Compendium",
+   "St Clair uses 'sap green' loosely for the Arnolfini gown; Ball ch. number from fact card, differs from concordance numbering",
+   "Cranach background claim hedged; not verified"
+  ]
+ },
+ "status": "checked",
+ "words": 1392
+}

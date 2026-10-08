@@ -1,0 +1,152 @@
+{
+ "slug": "montpellier-green",
+ "name": "Montpellier Green",
+ "hex": "#649688",
+ "names": [
+  "Montpellier Green"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Montpellier green is a name for verdigris, the green made from copper, taken from the French city that was an important verdigris-making center for several centuries.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Verdigris by another name",
+   "body": "Montpellier green is a name for verdigris, the copper acetate pigment [1][2]. The Dictionary of Colour tells the reader to look under verdigris, and lists it with other copper greens such as Scheele's green, chrysocolla, mineral green and verditer [1][3]. Verdigris itself, the blue-green that forms on copper, brass and ancient bronze, is said to come from the French for 'green of Greece' [1].\n\nThe swatch, #649688, is a muted blue-green [4]. Close relatives in our names are [[viridian]], [[emerald-green]] and [[bronze-green]] [4]."
+  },
+  {
+   "id": "city",
+   "title": "A city and its wine",
+   "body": "Montpellier was an important center of verdigris manufacture from the twelfth to the eighteenth centuries [2]. The trade was a by-product of the wine industry; the process used wine lees with plates of copper [2]. Pomet, writing in 1694, held that the bulk of French verdigris, and some used abroad, came from Montpellier and its surroundings [2]. Sixteenth-century literature mentions Montpellier verdigris being imported to Amsterdam [2].\n\nThe books add a caution. Kühn points out that Montpellier green or Montpellier verdigris was used as a generic term and did not always mean verdigris made in the Montpellier region [2]. South-east France, especially the Rhone Valley, was known for verdigris as a wine by-product [5]."
+  },
+  {
+   "id": "copper",
+   "title": "A copper green and its family",
+   "body": "In the Dictionary's own words, copper green is a generic name for green pigments made from copper [3]. Copper resinate, introduced in the fifteenth century, was made from verdigris [3]. Compare [[malachite]], the mineral form of copper green.\n\nWhat the books do not give is a single fixed hue. The sources give no fixed hue for the name, so the swatch is a modern approximation [2][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Ridgway listed Montpellier green in 1912, the earliest color record in our sources [4]. In our archive the match is present in 91 paintings, 0.38 percent of 23,781, as photographed [4]. It peaks in the 1900s, in 14 of 1,674 paintings, about 4.3 times the expected rate [4]. The earliest match is a 1475 Botticelli, but the archive's early centuries are thin [4]. It is most over-represented in France, at 2.1 times expected [4]. Inside a painting it most often plays a hidden color [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the French city of Montpellier, a verdigris-making center",
+   "first_recorded": "Ridgway, 1912 (color name); Pomet 1694 (trade)",
+   "source": "Pigment Compendium; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Montpellier verdigris",
+   "verdigris"
+  ],
+  "siblings": [
+   "viridian",
+   "emerald-green",
+   "malachite"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "vert de Montpellier"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 91,
+  "pct": 0.38,
+  "peak_century": 1900,
+  "lift": 4.3,
+  "first_seen": {
+   "year": 1475,
+   "by": "Sandro Botticelli"
+  },
+  "role": "hidden"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"verdigris\" and \"Montpellier green\", pp. 260, 402",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Montpellier green\", p. 280",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"copper-green\", p. 129",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes); ColorHub color library (Ridgway 1912), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Grenoble verdigris\", p. 190",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Montpellier green is a name for which pigment?",
+   "choices": [
+    "Verdigris",
+    "Viridian",
+    "Chrome green",
+    "Green earth"
+   ],
+   "answer": "Verdigris",
+   "kind": "pick"
+  },
+  {
+   "q": "What industry's by-products did Montpellier's verdigris trade rely on?",
+   "choices": [
+    "Wine",
+    "Wool",
+    "Tanning",
+    "Salt"
+   ],
+   "answer": "Wine",
+   "kind": "pick"
+  },
+  {
+   "q": "Did 'Montpellier green' always mean verdigris made in Montpellier?",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In 1694 Pomet wrote that most French verdigris was made in and around Montpellier."
+ ],
+ "words": 361,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede overstated 'much of Europe's supply'; 'sour wine and grape residue' corrected to wine lees; removed unsupported 'one of the first, from antiquity' and 'blue-greens to deeper greens'; fixed note 5 locator; opener attributed to Pomet"
+  ]
+ }
+}

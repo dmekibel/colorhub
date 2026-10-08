@@ -1,0 +1,113 @@
+{
+ "slug": "signal-green",
+ "name": "Signal Green",
+ "hex": "#0F8558",
+ "names": [
+  "Signal Green"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Signal green is a deep, cool green named for the go-ahead light of traffic signals, and also the name of a fluorescent Day-Glo pigment.",
+ "sections": [
+  {
+   "id": "signal",
+   "title": "Go",
+   "body": "Paterson defines the green light as a signal, green in color, that it is in order to proceed, as on traffic lights, and as a sign to go ahead with any course of action [1]. The same dictionary notes that the Green Line dividing Nicosia since December 1963 was so called because British authorities used green ink on the map [1].\n\nLivingstone names Signal Green as one of six Day-Glo pigments, the others being Saturn Green, Arc Yellow, Blaze Orange, Rocket Red and Neon Red [2]. Such a pigment reflects more light in some wavebands than white paper does, and relatively less in the shorter wavebands, which supply the energy it converts into its own glow [2]. The Day-Glo pigment is a bright fluorescent green, so the screen swatch here, a calmer deep green, stands for the signal use rather than the pigment [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 8 works [3]. Two are Félix Vallotton's *Corn Fields* of 1900 and Franz Marc's *Weasels at Play* of 1911 [3]. As always these are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "traffic and railway signals",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson, A Dictionary of Colour, p. 197; Livingstone, Vision and Art, ch. 10"
+  },
+  "aka": [
+   "traffic green"
+  ],
+  "siblings": [
+   "green",
+   "kelly-green",
+   "emerald-green",
+   "viridian"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#0F8558",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 8,
+  "top_paintings": [
+   "Vallotton, 1900",
+   "Marc, 1911"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 197",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does a green light signal, according to Paterson?",
+   "choices": [
+    "It is in order to proceed",
+    "Danger ahead",
+    "Stop",
+    "Wait"
+   ],
+   "answer": "It is in order to proceed",
+   "kind": "pick"
+  },
+  {
+   "q": "Which of these is another Day-Glo pigment in Livingstone's list?",
+   "choices": [
+    "Blaze Orange",
+    "Prussian Blue",
+    "Burnt Umber",
+    "Lapis Blue"
+   ],
+   "answer": "Blaze Orange",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The Green Line through Nicosia is named for the green ink British authorities used on a map in 1963."
+ ],
+ "words": 220,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

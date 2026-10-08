@@ -1,0 +1,116 @@
+{
+ "slug": "floral-white",
+ "name": "Floral White",
+ "hex": "#FFFAF0",
+ "names": [
+  "Floral White"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Floral White is a computer color name: one of the 140 colors in the X11 set, a white with a faint warm tint.",
+ "sections": [
+  {
+   "id": "standard",
+   "title": "One of 140",
+   "body": "Paterson's dictionary counts Floral White among the 140 colours of the X11 set and gives its hex code as #FFFAF0 [1]. In his color-by-hue index it appears in the whites, next to Ghost White, Ivory and Antique White [2]. The name belongs to a naming convention, not to a pigment or a flower with a documented history [1][2]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Close neighbors",
+   "body": "Its near relatives are [[ghost-white]], which leans cool, and [[ivory]], [[linen]] and [[white]] itself [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The hex #FFFAF0 measures lightness 98.4, chroma 5.4 and hue angle 90 degrees, so it is a yellowish white, warmer than pure white [3]. On a phone screen the tint is hard to see unless the swatch sits next to true white [3]. In plain numbers, the hex #FFFAF0 sets red at 255, green at 250 and blue at 240, so the tint comes from blue sitting a little lower than the other two channels [3]. Paterson lists other pale X11 names too, such as Beige (#F5F5DC), which is a deeper step in the same warm direction [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (a flower-tinted white)",
+   "first_recorded": "X11 color set (date not given in the books)",
+   "source": "Paterson, Dictionary of Colour, \"Floral White\""
+  },
+  "aka": [
+   "floralwhite (CSS keyword)"
+  ],
+  "siblings": [
+   "ghost-white",
+   "ivory",
+   "linen",
+   "white"
+  ],
+  "parent": "white",
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name list and color math",
+  "hex": "#FFFAF0",
+  "measured": {
+   "lch": [
+    98.4,
+    5.4,
+    90
+   ]
+  },
+  "source": "Paterson, Dictionary of Colour"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Floral White\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"colour index, whites\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color math (CIE LCH from the sRGB hex)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many colours are in the X11 Color Set, per Paterson?",
+   "choices": [
+    "140",
+    "16",
+    "4,300"
+   ],
+   "answer": "140",
+   "kind": "pick"
+  },
+  {
+   "q": "Is Floral White warmer or cooler than pure white?",
+   "choices": [
+    "Warmer, slightly yellowish",
+    "Cooler, slightly bluish",
+    "Identical"
+   ],
+   "answer": "Warmer, slightly yellowish",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Floral White is one of 140 colors in the X11 set."
+ ],
+ "words": 189,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported inference about programmers and why the name exists."
+  ]
+ }
+}

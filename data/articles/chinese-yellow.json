@@ -1,0 +1,177 @@
+{
+ "slug": "chinese-yellow",
+ "name": "Chinese Yellow",
+ "hex": "#FFB200",
+ "names": [
+  "Chinese Yellow"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Chinese Yellow is a strong golden yellow, and an old trade name for the arsenic mineral orpiment, which China exported to the West.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A trade name",
+   "body": "Chinese yellow was the name artists' suppliers used for orpiment, the arsenic sulphide pigment [1][2]. Paterson's dictionary defines it as a vivid yellow pigment made from arsenic [3]. The Pigment Compendium treats it as a synonym of [[orpiment]] and ties the name to the nineteenth century, when China was an important exporter of the mineral to the West [1][2].\n\nThe prefix is part of a family of trade names: Chinese blue, Chinese red, Chinese vermilion and Chinese white all appear in Paterson, and he notes that the \"Chinese\" blue was a name for Prussian blue, discovered in Berlin [3]. The label tells you the route of the goods, not always their origin."
+  },
+  {
+   "id": "material",
+   "title": "What it was made of",
+   "body": "Natural orpiment forms near hot springs, and Chinese deposits were well known [2]. The Compendium reports Harley's suggestion that synthetic orpiment was more widely used than the mineral, and that the Chinese yellow imported from Hunan Province was of this made kind [2]. The pigment was used pure in most cases, though adulterated examples are recorded [2].\n\nIts reputation was poor. Orpiment fumes are poisonous and it smells foul, and the danger was known as early as Hilliard's treatise of 1624 [2]. Both counted against its popularity among painters [2].\n\nThe same name turns up for something else. Paterson says the red powder in the pods of Chinese Yellow was used to dye the robes of Chinese mandarins, and names the powder crocin [4]. The books here give no more, so treat the link between that plant dye and the arsenic pigment as unsettled [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and the name",
+   "body": "The swatch is #FFB200, a saturated golden amber [5]. It comes from Wikipedia's list, which cites ISCC-NBS, and it has entries in Maerz and Paul's 1930 dictionary, one first recorded about 1854 [5]. Its nearest named color in our library is [[yellowish-orange]], and it sits only 1.2 units from a cadmium yellow [5].\n\nIn our Japanese list the same swatch carries the name Tō'ō, which that list glosses as gamboge, a resin yellow [5]. That is a different material from orpiment, so the swatch covers more than one historical thing. Orpiment itself is paler and greener, as our [[orpiment]] page shows [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 27 works [6]. Twelve are from India, which is 17 in a thousand of its 721 paintings against about 1 in a thousand overall [6]. The Rajput school accounts for four of 97 and the Pahari school for three of 118 [6]. The earliest hit is Basawan's Akbar manuscript page of about 1585 [6]. The top two are a Danish portrait of the Russian tsar Mikhail Fyodorovich and a Krishna manuscript page [6].\n\nThe 1820s are the peak decade, with 6 of 731 works [6]. These are photographs of aged, varnished paintings, so a match shows a screen color and is not a pigment test [6]. In Google Books, *Chinese yellow* is present from 1800 and peaks about 1933 [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "China, as the source of imported orpiment (Harley's account in the Pigment Compendium)",
+   "first_recorded": "Maerz and Paul entry c. 1854; Hilliard's warning on orpiment 1624",
+   "source": "Pigment Compendium, p. 298; Paterson, p. 98"
+  },
+  "aka": [
+   "orpiment (the mineral)",
+   "Tō'ō (gamboge, in our Japanese list)"
+  ],
+  "siblings": [
+   "orpiment",
+   "yellowish-orange",
+   "amber",
+   "indian-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "orpiment",
+    "gloss": "the pigment the name usually meant; paler and greener than this swatch"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Tō'ō (藤黄), glossed gamboge"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas) and ColorHub color library",
+  "match": {
+   "hex": "#FFB200",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 27,
+  "top_paintings": [
+   "smk-KMS1401",
+   "cma-314429",
+   "commons-Q21727681"
+  ],
+  "ngram": {
+   "peak": 1933,
+   "first_5pct": 1800
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 108 (\"Chinese yellow\": see orpiment)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 298 (\"Orpiment\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 98",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 134 (\"crocin\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Wikipedia, ISCC-NBS 1955, Maerz & Paul 1930, jp list), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What material did the name Chinese yellow usually stand for?",
+   "choices": [
+    "Orpiment, an arsenic mineral",
+    "Gamboge resin only",
+    "Saffron",
+    "Chrome yellow"
+   ],
+   "answer": "Orpiment, an arsenic mineral",
+   "kind": "pick"
+  },
+  {
+   "q": "Why was the pigment unpopular with painters?",
+   "choices": [
+    "It was poisonous and foul-smelling",
+    "It faded to white",
+    "It was too expensive to ship",
+    "It turned blue in oil"
+   ],
+   "answer": "It was poisonous and foul-smelling",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds this golden yellow most often in Indian miniature painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Chinese yellow was a trade name for poisonous arsenic orpiment, named for the country that exported it.",
+  "In our archive, this golden yellow fills 17 of every thousand Indian paintings and about 1 in a thousand overall."
+ ],
+ "words": 505,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

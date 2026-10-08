@@ -1,0 +1,271 @@
+{
+ "slug": "lilac",
+ "name": "Lilac",
+ "hex": "#C8A2C8",
+ "names": [
+  "Lilac"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Lilac is the pale, slightly pinkish purple of the lilac blossom, a word with a dark blue ancestor that was the common-speech name for the first mass-market purple dye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The flower and the word",
+   "body": "The color is named for the common lilac, a shrub whose flower clusters run from near-white through pale purple to a pinkish mauve [1]. Paterson defines the word as the pale purple of lilac blossom, and traces it through *anil*, the old name for indigo-yielding plants, to the Sanskrit *nila*, dark blue [1]. So a pale purple word has a dark blue ancestor.\n\nAs an English color word, lilac is recorded from 1775 in the sources behind our library [15]. It then climbed steadily in print: Google Books counts for the adjective rose fastest in the 1840s and peaked in the 1890s [14]. The timing matters, because those are the decades in which a synthetic purple dye made pale purples fashionable.\n\nOur swatch is a light, slightly pink purple, `#C8A2C8` [15]. ISCC-NBS files lilac in its block 222, \"light purple\", about five ΔE units from this swatch [15]. Our nearest named neighbors are [[pink-lavender]], [[hay-s-lilac]] and [[wisteria]] [15]."
+  },
+  {
+   "id": "dye",
+   "title": "A dye before it was a craze",
+   "body": "Lilac was the plain-English word for the first result of Perkin's coal-tar experiment [6]. Greenfield reports that on silk the black residue gave a shimmering lilac, which Perkin called Tyrian purple and which became known as Perkin's mauve [6]. The chemistry is told in the [[mauve]] article; what matters here is that lilac was the plain-English description of the result.\n\nThe word appears in the dye trade before the craze had a name. A dye-trade correspondent wrote to Perkin that that the best lilac then available on cotton came from one house in the United Kingdom, Andrews of Manchester, who could charge any price because even theirs was not quite fast [5]. Perkin's dye, which stood up to the tests, filled exactly that gap [5].\n\nWhen the fashion arrived, the two words traveled together. The *Illustrated London News* described a royal dress as mauve, adding \"lilac\" in brackets, as though readers needed the older word to understand the new one [3]. A later report on the craze called mauve an exquisite shade of lilac [3]. Garfield counts seven fashionable shades in the dye's wake, including one sold as \"purple lilac\" [4]. Garfield also notes that mauve itself runs from lilac to lush purple depending on the speaker, which is why the two names are so often swapped [18]."
+  },
+  {
+   "id": "which",
+   "title": "Which lilac",
+   "body": "Lilac has never been one fixed color, and the references show it. Ridgway's 1912 plate gives a lilac a little bluer and lighter than ours, `#CEACDA` [15], while the xkcd color survey (2010) settled on a much bluer, more saturated `#CEA2FD` [15]. The same name covers a pinkish wash and a bluish lavender.\n\nOther dictionaries stretch it further. St Clair's glossary lists *periwinkle* as a lilac-blue, *mallow* as a pinky lilac, and *pearl* as a very pale lilac-gray [10]. Paterson also records the adjectives *lilaceous* and *lilacky* [1]. Each of these uses lilac as the anchor and shifts it a little toward blue, pink or grey.\n\nThe pale-purple family is crowded. Compared with [[lavender]], lilac in the ISCC-NBS system is a lighter, pinker purple [15], and [[wisteria]] and [[thistle]] sit close by on screen [15]. The helpful habit for the eye is to ask which way the purple leans, toward pink or toward blue, and to name it with the matching neighbor: [[blue-lilac]] for the cooler side, [[pale-lilac]] for the paler and greyer."
+  },
+  {
+   "id": "language",
+   "title": "A basic color word in waiting",
+   "body": "Berlin and Kay's scheme of basic color terms includes purple and pink [9]. A 2015 online naming experiment by Dimitris Mylonas and Lindsay MacDonald argued for adding two more: turquoise and lilac [9]. That is a proposal from one study, not an accepted change, and Westland reports it as a claim that makes a case rather than as settled fact [9].\n\nThe interest of the result is practical. The study's claim, in effect, is that English speakers keep a separate category for a pale, cool purple, one that does not collapse into [[pink]] or into [[purple]] [9]. The word that fills it is a flower name [1]."
+  },
+  {
+   "id": "nature",
+   "title": "Lilac in nature's charts",
+   "body": "Syme's revision of Werner's color chart, which Baty reproduces, uses the word twice [7]. Syme's \"Bluish Lilac Purple\" (number 35) is described as bluish purple and white, and is matched to a dragonfly, the lilac shrub's blue form and the mineral lepidolite [7]. His \"Red Lilac Purple\" (number 43) is matched to light spots on a peacock butterfly's wings, a pale purple primrose and lepidolite again [7].\n\nThe pairings show what the word meant to a naturalist of that period [7]: a pale purple, tinted by white, that the eye would find in a flower, an insect and a mineral alike."
+  },
+  {
+   "id": "painting",
+   "title": "Lilac in painting",
+   "body": "Painters rarely mix lilac from a single violet pigment. Ball points out that Rembrandt's portrait of Hendrickje Stoffels (about 1654 to 1656) can look like a pale lilac dress [8]. Yet there is no blue in it [8]. The violet tint comes from lead white and charcoal black, which together read slightly blue, warmed by a little red lake [8]. The lilac is a product of the surrounding colors, not a pigment.\n\nA French critic quoted by Gage, writing about a painter's work, mentions some lilac on a cushion and a lilac of exquisite freshness in a fabric, using the word for a bright decorative accent [12]. Gage also quotes Bracquemond on the fashionable color names of his day, including one that could mean anything from pink to lilac or even yellow, and which has left no trace [12]. Color names of this kind show how loose the lilac region of language is."
+  },
+  {
+   "id": "ancient",
+   "title": "Lilac before lilac",
+   "body": "Long before the word, a few craftspeople made pale purple materials. The Pigment Compendium records that Spurrell, excavating Egyptian blue workshops at Tell el-Amarna in 1895, reported \"lilac\" traces among the debris, and that modern experiments suggest the pigment could be produced by varying the firing temperature [11]. The compendium notes the chemistry is unclear and that no such pigment has been identified in Mediterranean art [11].\n\nA better-documented purple is Han purple, a barium copper silicate found on Chinese artifacts of the Han dynasty and the Warring States period [11]. The compendium calls it almost unique as a pre-industrial, inorganic, true purple pigment [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, a lilac like this swatch covers at least one per cent of the canvas in only four paintings, and in only two when the match is held to the stricter within-painting lens [13]. That makes it rarer than 82 per cent of our named colors [13]. These are photographs of aged, varnished paintings, so the numbers describe the archive, not painting as a whole.\n\nAmong the dated matches, the earliest is a work by [[painter:paul-serusier|Sérusier]] from 1894, and the latest is from 1914 [13]. That fits a color word that only became common in print in the later nineteenth century [14]. With four paintings the pattern is thin, and a match is a look-alike hue, not a pigment test [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lilac shrub (Syringa); the word traces back to Sanskrit nila, dark blue, through anil",
+   "first_recorded": "English color word, 1775",
+   "source": "Paterson, A Dictionary of Colour; Maerz and Paul 1930"
+  },
+  "aka": [
+   "Liliac"
+  ],
+  "siblings": [
+   "lavender",
+   "wisteria",
+   "thistle"
+  ],
+  "parent": null,
+  "children": [
+   "blue-lilac",
+   "pale-lilac",
+   "pink-lavender"
+  ],
+  "disambiguation": [
+   {
+    "slug": "lilac-grey",
+    "gloss": "Lilac-Grey is a pale warm grey, far from this purple"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "n_within_painting": 2,
+  "rarer_than_pct": 82,
+  "ngram": {
+   "peak": 1890,
+   "rise": 1840,
+   "first": 1775
+  },
+  "measured": {
+   "lch": [
+    71.1,
+    24.9,
+    325.5
+   ],
+   "iscc": "block 222, light purple (dE 5.3)",
+   "contrast_white": 2.22,
+   "nearest": [
+    [
+     "Pink Lavender",
+     4.7
+    ],
+    [
+     "Hay's Lilac",
+     4.9
+    ],
+    [
+     "Wisteria",
+     5.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lilac\" and \"anil\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 6 (\"Mauve Measles\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 13 (\"Physical Acts\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 4 (\"The Recipe\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Syme's chart, numbers 35 and 43 (\"Blues and Purples\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, \"Basic Color Terms\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary of other interesting colors",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Han purple\" and Egyptian-blue entries",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 205, 210",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), data/graph/fieldnotes, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "Google Books Ngram, adjective use (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 222, Ridgway 1912, xkcd 2010, Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Garfield, Mauve, author's note",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color word is lilac's distant ancestor, through the old name for indigo plants?",
+   "choices": [
+    "Sanskrit nila, dark blue",
+    "Greek porphyra, purple",
+    "Latin viola, violet",
+    "Arabic zafaran, saffron"
+   ],
+   "answer": "Sanskrit nila, dark blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Why can Rembrandt's portrait of Hendrickje Stoffels look lilac even though it contains no blue pigment?",
+   "choices": [
+    "Lead white and charcoal black together read slightly blue, warmed by a little red lake",
+    "Because the painting has faded from violet",
+    "Because lilac is a primary pigment of the Dutch Golden Age",
+    "Because Rembrandt used mauveine"
+   ],
+   "answer": "Lead white and charcoal black together read slightly blue, warmed by a little red lake",
+   "kind": "pick"
+  },
+  {
+   "q": "A 2015 naming experiment proposed lilac as a candidate basic color term; this is an accepted part of the Berlin and Kay scheme.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Lilac's family tree runs back to the Sanskrit word for dark blue, through the name for indigo plants.",
+  "Look at a pale violet dress in a Rembrandt: it may contain no blue at all."
+ ],
+ "words": 1133,
+ "status": "checked",
+ "checked": {
+  "by": "claude-sonnet",
+  "date": "2026-10-08",
+  "issues": [
+   "Etymology rests on Paterson alone",
+   "Rembrandt lilac is Ball's reading, not a pigment analysis",
+   "Mylonas and MacDonald proposal reported via Westland only",
+   "Impressionist lilac sentence is uncounted in our books"
+  ]
+ }
+}

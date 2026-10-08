@@ -1,0 +1,102 @@
+{
+ "slug": "dark-grey-blue",
+ "name": "Dark Grey Blue",
+ "hex": "#29465B",
+ "names": [
+  "Dark Grey Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark grey blue is a descriptive name for a deep, slate-leaning blue, and one dictionary uses the phrase to define Flemish blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A shade, described",
+   "body": "Paterson's dictionary of colour defines Flemish blue as a rich or dark grey-blue [1]. Flemish blue is therefore an older name for the territory this swatch covers, and the plain words dark grey blue are a modern descriptive label for it. The dictionary entry gives no date for the name, and its origin in our books is undocumented.\n\nOn screen the swatch is a dark, cool blue with a touch of green and grey, sitting near [[slate-grey]], [[steel-blue]], [[navy]] and [[midnight-blue]]. The color is also an easy one to mistake for black in dim light, and seeing the blue in it is the useful skill."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This swatch appears in 242 of 23,781 paintings, 1.02 per cent [2]. It peaks in the 1400s, in 10 of 945 paintings, 1.6 times the museums' baseline [2]. In 54 per cent of the 125 paintings where it is measured inside the picture, it is a hidden color [2]. The numbers are as photographed, and the dark of an aged varnish can turn many dark blues into this one."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive",
+   "first_recorded": "ISCC-NBS (1955) and xkcd (2010) lists in our library; Flemish blue in Paterson",
+   "source": "Paterson, A Dictionary of Colour, p. 172"
+  },
+  "aka": [
+   "Flemish blue (per Paterson)"
+  ],
+  "siblings": [
+   "slate-grey",
+   "midnight-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#29465B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 164
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Flemish blue\", p. 172",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for dark-grey-blue (L6 graph)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define Flemish blue?",
+   "choices": [
+    "A rich or dark grey-blue",
+    "A pale sky blue",
+    "A bright cobalt",
+    "A violet-blue"
+   ],
+   "answer": "A rich or dark grey-blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Where in a painting does this color most often hide?",
+   "choices": [
+    "As a hidden color in the shadows",
+    "As the sky",
+    "As the focal accent",
+    "As the frame"
+   ],
+   "answer": "As a hidden color in the shadows",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Flemish blue, in one dictionary, was a dark grey-blue."
+ ],
+ "words": 198,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported comparison with Prussian blue."
+  ]
+ }
+}

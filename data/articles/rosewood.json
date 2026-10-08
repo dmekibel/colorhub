@@ -1,0 +1,130 @@
+{
+ "slug": "rosewood",
+ "name": "Rosewood",
+ "hex": "#65000B",
+ "names": [
+  "Rosewood"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Rosewood is a dark brownish red, named for the wood of the rosewood tree.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of a timber",
+   "body": "Paterson defines the French *bois de rose* as the dark, rich brown color of rosewood [1]. His dictionary's color index files rosewood among the reds, not the browns, which shows how the word floats between the two [2]. Our own records first list it in the Maerz and Paul dictionary of 1930 [3]. The swatch here is a deep red-brown, darker and redder than a lot of polished rosewood.\n\nThe name is the wood's, and the wood's dark red-brown grain is the sample."
+  },
+  {
+   "id": "lac",
+   "title": "A dyer's rosewood",
+   "body": "A sixteenth- or seventeenth-century recipe, as the Pigment Compendium quotes it, tells the maker to pulverise gum lac and soak it in a lye of rosewood or vinewood to draw out its color [4]. Here the rosewood supplies an alkaline solution, not a color of its own, but it shows the word was in use in the workshop by then."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive the swatch appears in 411 paintings, as photographed, more common than 71% of the named colors [3]. It peaks in the 1400s at 3.5 times the baseline rate, and in 62% of 203 paintings it plays an accent [3]. It travels with reddish brick and black-brown [3]. Similar names include [[mahogany]], [[maroon]] and [[chestnut]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the rosewood tree, bois de rose",
+   "first_recorded": "Maerz and Paul, 1930, in our records",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "bois de rose"
+  ],
+  "siblings": [
+   "mahogany",
+   "maroon"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bois de rose"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 411,
+  "peak_century": {
+   "century": 1400,
+   "lift": 3.5
+  },
+  "role": {
+   "accent_pct": 62,
+   "of": 203
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bois de rose\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, color index (red)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive and name records (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 227 (a recipe quoting Ricette per Far Ogni Sorte di Colore)",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does bois de rose describe, according to Paterson?",
+   "choices": [
+    "The dark rich brown of rosewood",
+    "A pink rose dye",
+    "A pale wood stain",
+    "A garden red"
+   ],
+   "answer": "The dark rich brown of rosewood",
+   "kind": "pick"
+  },
+  {
+   "q": "In the old lac recipe, what is the rosewood used for?",
+   "choices": [
+    "Its alkaline lye",
+    "Its scent",
+    "Its red sap as the main dye",
+    "Its bark as a mordant"
+   ],
+   "answer": "Its alkaline lye",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Paterson's color index files rosewood under red, not brown."
+ ],
+ "words": 208,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that the name has nothing to do with roses",
+   "Softened lye/ash inference in the lac recipe"
+  ]
+ }
+}

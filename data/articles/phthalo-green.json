@@ -1,0 +1,133 @@
+{
+ "slug": "phthalo-green",
+ "name": "Phthalo Green",
+ "hex": "#123524",
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Phthalo green is a modern synthetic green pigment, deep, cool and intense, first made in the 20th century.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "A twentieth-century pigment",
+   "body": "Coles dates the phthalo pigments to the early 20th century, the first organic colorants to be called true pigments [1]. Until then, organic pigments such as madder and cochineal had started life as dyes or lakes and were converted afterward [1]. The phthalos have enormous tinting strength, lightfastness and chemical resistance, and they quickly came to dominate the blue and green pigment markets [1].\n\nColes describes phthalo green as a deep, cool, emerald green, and phthalo blue as almost pure chromatic blue with no lean toward red or green [1]. In his history of green, the 20th century brought phthalo green, whose gem-like intensity restored green's link to life and vitality [2]. The same chapter notes that copper-and-arsenic greens of the late 18th century poisoned thousands [2]."
+  },
+  {
+   "id": "name",
+   "title": "On the shelf",
+   "body": "St Clair's glossary calls phthalo green a piney blue-green, after a synthetic pigment, and notes that the blue version is sometimes sold as Monastral [3]. Names like these are paint-tube names: the same chemistry yields a range from blue-green to yellow-green, so the word fixes a family, not one shade [1][3]. The swatch here, #123524, is a very dark green; the pure pigment, thinned out, is far brighter [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings has colors near this swatch in 98, or 0.41%, as photographed [5]. The earliest is dated 1460 and the group peaks in the 1900s, at 3.5 times the baseline [5]. Gauguin is the most devoted painter, in 5 of his 50 works here [5]. The pre-1900 matches cannot be phthalo: the pigment did not exist, so the match is a look-alike hue in aged paint and varnish, never a pigment test [1][5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "phthalocyanine, the chemical family (phthalo-)",
+   "first_recorded": "early 20th century",
+   "source": "Coles, Chromatopia, p. 165"
+  },
+  "aka": [
+   "Monastral green (a brand name for the family)"
+  ],
+  "siblings": [
+   "viridian",
+   "emerald-green",
+   "dark-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#123524",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 45,
+  "painters": [
+   "Paul Gauguin"
+  ],
+  "peak_century": 1900
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 165",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 33",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Phthalo green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "When were the phthalo pigments introduced?",
+   "choices": [
+    "The early 20th century",
+    "Ancient Egypt",
+    "The Renaissance",
+    "The 1990s"
+   ],
+   "answer": "The early 20th century",
+   "kind": "pick"
+  },
+  {
+   "q": "Why can pre-1900 paintings not contain phthalo green?",
+   "choices": [
+    "The pigment did not exist yet",
+    "It faded away",
+    "It was banned",
+    "Painters disliked it"
+   ],
+   "answer": "The pigment did not exist yet",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Phthalo green is a 20th-century invention, so any older painting that matches it is only a look-alike."
+ ],
+ "names": [
+  "Phthalo Green"
+ ],
+ "status": "checked",
+ "words": 281,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed claim that phthalo green came 'after' the arsenic greens as a causal sequence; Coles gives two separate statements."
+  ]
+ }
+}

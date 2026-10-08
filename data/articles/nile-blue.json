@@ -1,0 +1,138 @@
+{
+ "slug": "nile-blue",
+ "name": "Nile Blue",
+ "hex": "#8CCAC4",
+ "names": [
+  "Nile Blue"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Nile Blue is a pale, soft blue-green with a name taken from the river, recorded in color charts since the 1880s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A river's color",
+   "body": "Paterson gives Nile blue as a greenish-blue and adds that the name is also a chemical blue stain used on fatty acids; Nile green, he says, is the pale green of the river Nile, also called *eau de nil* [1]. The swatch here is documented in Ridgway's color nomenclature (the 1886 edition and the plate of 1912), in the ISCC-NBS lists of 1955 (block 163), and in the Maerz and Paul dictionary of 1930, which gives 1884 for its first recorded use [2]. Ridgway's plates are aged scans, so the swatch is approximate [2].\n\nThe ISCC-NBS name is \"very light bluish green\", 7.2 CIEDE2000 units away, and the nearest name in our learning set is powder blue, 8.7 away [2]. For related colors see [[aquamarine]], [[sea-green]] and [[turquoise]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 22 of the 23,781 paintings in our archive carry a color near it, 0.09%, as photographed [3]. In 46% of the 13 paintings where the within-painting lens finds it, it plays a light [3]. The earliest dated match is a painting by Mathieu Dubus of 1639, which comes 247 years before the name's earliest record in our sources, so it is a look-alike hue and not proof of a dye [3]. In printed English the phrase peaks in the 1940s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the river Nile",
+   "first_recorded": "Maerz and Paul: 1884; Ridgway's Nomenclature of Colors, 1886",
+   "source": "Paterson, A Dictionary of Colour, p. 278"
+  },
+  "aka": [
+   "eau de nil (Nile green)"
+  ],
+  "siblings": [
+   "aquamarine",
+   "sea-green",
+   "peacock-blue",
+   "pale-turquoise"
+  ],
+  "parent": "turquoise",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "peacock-blue",
+    "gloss": "a deeper, more saturated blue-green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8CCAC4",
+   "min_cover": 0.01
+  },
+  "n_present": 22,
+  "role": "light in 46% of 13 paintings",
+  "measured": {
+   "lch": [
+    77,
+    21,
+    189
+   ],
+   "iscc": "very light bluish green, block 163, dE 7.2",
+   "nearest": [
+    [
+     "Powder blue",
+     8.7
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 1940
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Nile blue\" and \"Nile green\", p. 278",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json and data/graph nodes: ISCC-NBS 1955, Munsell conversion), CIEDE2000 distances; Ridgway 1886 and 1912 (plate XIX); Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, all senses of the phrase (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What else does Paterson say Nile blue names besides a color?",
+   "choices": [
+    "A chemical blue stain",
+    "A kind of paper",
+    "A river bird",
+    "A pigment from lapis"
+   ],
+   "answer": "A chemical blue stain",
+   "kind": "pick"
+  },
+  {
+   "q": "Which Maerz and Paul date is given for Nile Blue's first recorded use?",
+   "choices": [
+    "1884",
+    "1456",
+    "1955",
+    "2010"
+   ],
+   "answer": "1884",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Nile blue is also the name of a chemical stain, as well as a pale blue-green."
+ ],
+ "words": 228,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

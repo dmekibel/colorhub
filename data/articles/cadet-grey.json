@@ -1,0 +1,114 @@
+{
+ "slug": "cadet-grey",
+ "name": "Cadet Grey",
+ "hex": "#91A3B0",
+ "names": [
+  "Cadet Grey"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Cadet Grey is a soft, bluish grey, listed by one dictionary as a variant name for cadet blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines cadet blue as a bluish grey or strong blue, sometimes called cadet grey [3]. St Clair ties cadet blue to military uniforms, as a grey-greenish blue [4]. The record is thin, and no book we hold explains why cadets wore the color [3][4].\n\nIn the library the swatch is dated to 1912 in Maerz and Paul and sits in ISCC-NBS block 185, a family of dusty, greyish blues with many names [1]. It is close to [[grey]] and [[cadet-blue]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Cadet Grey appears in 1.94% of the 23,781 paintings in our archive, as photographed [2]. It peaks in the 1900s at 1.6% of that century's paintings [2]. Inside a painting it most often plays a light, in 46% of cases [2]. Its most devoted painter is Alfred Sisley, in 8 of 50 works here, 7.6 times the baseline [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "military cadet uniforms (cadet blue); the grey variant undocumented",
+   "first_recorded": "1912 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "cadet-blue",
+   "grey",
+   "sky-blue",
+   "blue",
+   "indigo"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 461,
+  "pct_paintings": 1.94,
+  "peak_century": 1900,
+  "role": "light 46%",
+  "library_first": 1912
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cadet blue\" (p. 84)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does St Clair say cadet blue comes from?",
+   "choices": [
+    "Military uniforms",
+    "Wedgwood porcelain",
+    "A mineral"
+   ],
+   "answer": "Military uniforms",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter leans on Cadet Grey most in our archive?",
+   "choices": [
+    "Alfred Sisley",
+    "Caravaggio",
+    "Raphael"
+   ],
+   "answer": "Alfred Sisley",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Cadet Grey is a quiet bluish grey, and Sisley uses it 7.6 times more than the museums' baseline, as photographed."
+ ],
+ "words": 155,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'pale cousin' unsupported; Paterson only gives it as an alias of cadet blue."
+  ]
+ }
+}

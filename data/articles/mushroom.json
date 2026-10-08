@@ -1,0 +1,120 @@
+{
+ "slug": "mushroom",
+ "name": "Mushroom",
+ "hex": "#BA9E88",
+ "names": [
+  "Mushroom"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Mushroom is a pale greyish brown with a warm pink cast, named plainly for the vegetable.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A colour named for a vegetable",
+   "body": "Paterson's dictionary defines *mushroom* as a pale shade of brown like the vegetable [1]. Maerz and Paul dated the name to 1892 [2], and the ISCC-NBS system of 1955 files the swatch as a light grayish yellowish brown [2]. It is also in the xkcd color survey of 2010 [2].\n\nBaty notes that colour scales are tuned to their subject: the tones called for in describing butterflies differ from those needed for plants, mushrooms or minerals [3]. The name here is much looser, a common comparison, not a scientific term."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch sits close to [[taupe]], [[beige]], [[fawn]] and [[ecru]], and it is a little pinker than [[manila]] [2]. Like all of these, it is a quiet neutral that depends on its surroundings."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color matches 1,036 paintings in the ColorHub archive, about 4.4%, as photographed [4]. Xugu and Maurice Denis use it at several times the usual rate, and it is notable in Nepali paintings [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the edible mushroom",
+   "first_recorded": "1892 (Maerz & Paul)",
+   "source": "Paterson, A Dictionary of Colour; Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "taupe",
+   "beige"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "manila",
+    "gloss": "a nearby pale brown, yellower"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 1036,
+  "pct": 4.36,
+  "first_recorded": 1892,
+  "iscc_block": 64
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mushroom\", p. 273",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz & Paul 1930, plate 15 A 6; ISCC-NBS 1955 block 64; xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, p. 214",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson's dictionary define mushroom?",
+   "choices": [
+    "A pale shade of brown like the vegetable",
+    "A dark green",
+    "A reddish orange",
+    "A grey blue"
+   ],
+   "answer": "A pale shade of brown like the vegetable",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maerz and Paul dated the name mushroom to 1892.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mushroom is just what it sounds like: a pale brown named for the vegetable, in print by 1892."
+ ],
+ "words": 167,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Overstated 'mushrooms are hard for color science' reworded to what Baty says."
+  ]
+ }
+}

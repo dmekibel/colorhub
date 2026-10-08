@@ -1,0 +1,110 @@
+{
+ "slug": "orange-peel",
+ "name": "Orange Peel",
+ "hex": "#FF9F00",
+ "names": [
+  "Orange Peel"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Orange Peel is a vivid, warm orange-yellow named for the fruit's skin, a color of signs and screens more than of paint.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "None of the color books we hold treats orange peel as a color. Gurney uses the fruit's skin only as an image: a low sunset ray meets the earth, he says, like a needle entering orange peel at a shallow angle, so the light crosses far more air [1]. Garfield's *Mauve* meets candied orange peel only in a pudding recipe [2].\n\nThe color itself is documented by standards. The library's ISCC-NBS block 50 calls it a \"vivid orange yellow\", and it is close to several RAL paint colors, approximate on screen [3]. The library notes Maerz and Paul's dictionary of 1930 gives 1773 as the first recorded use of the name [3]. It sits near [[orange]], [[amber]] and [[marigold]], with [[tangerine]] a little redder [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 27 carry this color over at least five per cent of the canvas, as photographed [4]. In 41 paintings where we measured its rank, it is an accent in 98 per cent [4]. That fits a color this saturated: a spot of orange against calmer tones [4]. Twenty-three of the matches are from the 1800s, and the earliest dated match is a painting by Filippo Lippi of 1438, a floor not a first [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the rind of the orange fruit",
+   "first_recorded": "Maerz & Paul, 1930 (cites 1773)",
+   "source": "ColorHub library; Gurney, p. 182 (image only)"
+  },
+  "aka": [
+   "orange rind"
+  ],
+  "siblings": [
+   "orange",
+   "amber",
+   "marigold",
+   "tangerine"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 27,
+  "iscc_nbs": "block 50, vivid orange yellow",
+  "role": "accent (98% of 41)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 182",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 13 (\"The Recipe\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Gurney use the phrase orange peel?",
+   "choices": [
+    "As an image for sunset light crossing the atmosphere",
+    "As a name for a pigment",
+    "As a rival to yellow ochre"
+   ],
+   "answer": "As an image for sunset light crossing the atmosphere",
+   "kind": "pick"
+  },
+  {
+   "q": "In paintings where it appears, orange peel most often plays a light.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In 98 per cent of the paintings where our archive finds Orange Peel, it is an accent, not a field."
+ ],
+ "words": 219,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

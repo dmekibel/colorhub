@@ -1,0 +1,155 @@
+{
+ "slug": "marie-antoinette",
+ "name": "Marie Antoinette",
+ "hex": "#9B7B7D",
+ "names": [
+  "Marie Antoinette"
+ ],
+ "tier": "person",
+ "depth": "medium",
+ "lede": "Marie Antoinette is a dusty pink-brown named for the last queen of the old French monarchy; the name entered the Maerz and Paul dictionary in 1926, long after her death.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A queen on a color card",
+   "body": "Maerz and Paul's 1930 *Dictionary of Color* lists Marie Antoinette on plate 4 and gives 1926 as the first recorded use, in fashion and textiles [1]. That is well over a century after her death, so the name honors her rather than recording a color she is documented to have worn [1]. The swatch is a muted rose-brown, closest to [[mauve]] and in the family of [[dusty-rose]] and [[rose]] [1]."
+  },
+  {
+   "id": "puce",
+   "title": "The color she was said to like",
+   "body": "The color most tied to her in the books is [[puce]]. In the summer of 1775, the queen was 20 and a year into her reign, and the grain riots known as the Flour Wars had already turned public feeling against her [2]. Her husband Louis XVI found her trying on a glossy silk gown in a shade between brown, pink and grey [2]. He said it was the color of fleas, *couleur de puce*, and the remark made the shade the fashion [2]. Finlay likewise calls puce a favorite of hers [3].\n\nThe Maerz and Paul swatch is a similar family: brownish, pinkish and greyed [1]. The dictionary does not say it copies the 1775 gown, and we do not claim it does [1]."
+  },
+  {
+   "id": "court",
+   "title": "Colors around her",
+   "body": "Pastoureau notes that she came from the plain Viennese court and was disconcerted, even frightened, by the heavily painted faces she met at Versailles in 1770, though rouge was already in decline there [4]. Cockade colors tracked allegiance in her period: white was the king's color and black belonged to the house of Austria, which she came from [5]. Finlay's jewel history adds that Louis XVI and Marie Antoinette were both guillotined [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch has a lightness of about 55 and a low chroma of about 13 [1]. Its nearest archive color is Mauve, 9.0 units away, a loose neighbor and not a match [1]. We found no archive count for this exact swatch."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Marie Antoinette, queen of France (1755-1793)",
+   "first_recorded": "1926 (Maerz & Paul 1930)",
+   "source": "Maerz & Paul 1930, plate 4 I 7"
+  },
+  "aka": [],
+  "siblings": [
+   "puce",
+   "dusty-rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "puce",
+    "gloss": "the brown-pink-grey shade linked to her in 1775"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub library, Maerz & Paul 1930, plate 4 I 7",
+  "first_recorded": 1926,
+  "lch": [
+   55,
+   13,
+   16
+  ],
+  "nearest": [
+   [
+    "Mauve",
+    9.0
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Maerz & Paul, A Dictionary of Color (1930), plate 4, via ColorHub library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, chapter on puce",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, chapter on color names",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, chapter on makeup and the court",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, passage on cockades",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, chapter on the blue diamond",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In 1775 what did Louis XVI compare the queen's gown color to?",
+   "choices": [
+    "Fleas",
+    "Roses",
+    "Wine",
+    "Mud"
+   ],
+   "answer": "Fleas",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the dictionary records the name Marie Antoinette in her own lifetime.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which year is the first recorded use of the color name?",
+   "choices": [
+    "1926",
+    "1775",
+    "1845"
+   ],
+   "answer": "1926",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The queen's favorite shade was named for fleas: puce, said by her husband in 1775."
+ ],
+ "words": 328,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

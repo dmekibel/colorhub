@@ -1,0 +1,144 @@
+{
+ "slug": "beige-grey",
+ "name": "Beige Grey",
+ "hex": "#756F61",
+ "names": [
+  "Beige Grey"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Beige Grey is a mid-dark warm neutral, standardized as RAL 7006 in the 1927 color register and filed by ISCC-NBS as a grayish yellowish brown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A register color",
+   "body": "The library traces the swatch to RAL 7006, first listed in 1927, and to ISCC-NBS block 93 of 1955, whose name for the area is grayish yellowish brown [1]. It is darker than the word suggests, at a lightness of 47 on a 100 scale [1]. Close neighbors are [[quartz-grey]], [[deep-olive]] and [[mouse-grey]] [2]."
+  },
+  {
+   "id": "painting",
+   "title": "The palette of quiet rooms",
+   "body": "Pastoureau notes that the barn interiors of Frans Rijckhals (1609 to 1647) work with a palette reduced to browns, beiges, grays and whites, the light doing the work [3]. The same family of dull, warm neutrals fills a great deal of painting, as the numbers below show."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Beige Grey appears in 2,441 of the 23,781 paintings in our archive (10.3%), as photographed, more common than 93% of named colors [4]. It peaks in the 1900s at 7.2% of 1,674 paintings, 1.2 times the museums' baseline [4]. Inside a painting it most often plays a light, in 29% of the 1,346 paintings where it counts [4]. Its most devoted painter is Willem van de Velde the Elder, in 6 of 14 works here, 5.2 times the baseline of his museums but only 1.7 times when read as photographed [4]. The word peaks in printed English in the 1990s [5]. These are photographs of aged, varnished paintings, so a match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "beige + grey",
+   "first_recorded": "RAL 7006, 1927",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "quartz-grey",
+   "deep-olive",
+   "mouse-grey"
+  ],
+  "parent": "beige",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 2441,
+  "pct": 10.26,
+  "more_common_than_pct": 93,
+  "peak_period": "1900s",
+  "measured": {
+   "lch": [
+    47.0,
+    8.6,
+    91.7
+   ],
+   "nearest": [
+    [
+     "Quartz Grey",
+     3.6
+    ],
+    [
+     "Deep Olive",
+     4.8
+    ],
+    [
+     "Mouse Grey",
+     5.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): RAL 7006 (1927); ISCC-NBS 1955 block 93",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 30 (\"Yellow in Daily Life\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes) (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache (Google Books)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which standard register first listed this color in 1927?",
+   "choices": [
+    "RAL",
+    "Pantone",
+    "Munsell",
+    "NCS"
+   ],
+   "answer": "RAL",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Beige Grey is rarer than most named colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "One painting in ten in our archive holds this quiet neutral."
+ ],
+ "words": 245,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "verified Pastoureau Rijckhals passage; removed unsourced wool etymology from aside"
+  ]
+ }
+}

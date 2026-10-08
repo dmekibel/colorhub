@@ -1,0 +1,146 @@
+{
+ "slug": "barium-yellow",
+ "name": "Barium Yellow",
+ "hex": "#F9E38C",
+ "names": [
+  "Barium Yellow"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Barium yellow is the old pigment name for barium chromate, a light, greenish yellow that went by half a dozen trade names.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "The pigment",
+   "body": "Barium yellow is barium chromate, a light yellow pigment [1][2]. The Pigment Compendium gives its chemical formula as BaCrO4 and lists it among the barium compounds that make colors [3].\n\nTrade catalogs sold it, pure or mixed, under a crowd of aliases, among them baryta yellow, Steinbühl yellow and the misleading \"ultramarine yellow\", as well as lemon yellow and permanent yellow [2][4]. The name \"yellow ultramarine\" is a trade label only; the compound is a chromate, not the blue mineral pigment [2][3]. The shared names matter when you read old paint catalogs: [[lemon-yellow]] on a label may mean this pigment, and \"permanent yellow\" was used for it too [4]."
+  },
+  {
+   "id": "history",
+   "title": "A modern yellow",
+   "body": "One book on color and memory groups barium yellow with lemon yellow among the modern yellows that resist light, and dates them to the early nineteenth century [5]. That is a loose, literary source, so treat the date as approximate. A later chemical note records that a paint based on barium potassium chromate, made to resist corrosion, was developed in the 1940s [4]. An artists' reference of 1928 is cited for the shorter name \"barium chrome\" [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch comes from Ridgway's 1912 color atlas, plate XVI, and the 1955 ISCC-NBS system calls the nearest block \"moderate yellow\", only 2.2 units of color difference away [6]. Ridgway's plates are aged scans, so the hex is approximate [6]. This is a pale, soft yellow, much lighter and less saturated than a full [[yellow]] [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The ColorHub name archive files barium yellow under the yellows, with a lightness of 90 out of 100, so it sits near the top of the lightness scale among named colors [6]. Contrast against white is only 1.28 to 1, so text in this color on white is unreadable [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "barium chromate, the compound",
+   "first_recorded": "Ridgway, 1912 (as a color name); pigment c. early 19th century, loosely dated",
+   "source": "Pigment Compendium, \"barium yellow\"; Ridgway 1912"
+  },
+  "aka": [
+   "baryta yellow",
+   "permanent yellow",
+   "yellow ultramarine",
+   "Steinbühl yellow",
+   "barium chrome"
+  ],
+  "siblings": [
+   "lemon-yellow",
+   "banana"
+  ],
+  "parent": "yellow",
+  "children": [
+   "cream"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub name archive",
+  "family": "Yellows",
+  "lightness": 90.3,
+  "contrast_white": 1.28,
+  "iscc_nearest": "moderate yellow (block 83), dE 2.2",
+  "sources": [
+   "ISCC-NBS 1955",
+   "Ridgway 1912"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 43 (\"barium chromate\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"barium chromate\", p. 49",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 51",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 49 (barium chromate; Heaton 1928 cited there)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 51",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub name archive, data/graph nodes (Ridgway 1912 plate XVI; ISCC-NBS 1955 block 83)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is barium yellow chemically?",
+   "choices": [
+    "Barium chromate",
+    "A mix of cadmium and sulfur",
+    "Lead antimonate",
+    "A coal-tar dye"
+   ],
+   "answer": "Barium chromate",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: \"yellow ultramarine\" is a blue pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Barium yellow also sold as lemon yellow, permanent yellow and yellow ultramarine, all names for one chromate."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede called it a pale, cool lemon yellow; the sources say light yellow (Colour Index: dull, greenish yellow). Reworded."
+  ]
+ },
+ "words": 304
+}

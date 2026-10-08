@@ -1,0 +1,103 @@
+{
+ "slug": "pale-goldenrod",
+ "name": "Pale Goldenrod",
+ "hex": "#EEE8AA",
+ "names": [
+  "Pale Goldenrod"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Goldenrod is the web color #EEE8AA, a pale, slightly greenish yellow named for a washed-out version of the goldenrod flower.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson lists PaleGoldenrod as one of the 140 colors in the X11 color set, with the hex code #EEE8AA [1]. Oddly, his colour tables file it among the browns, although the swatch is a pale yellow [1]. The library also finds the swatch in the CSS list and in Ridgway's 1912 atlas, and ISCC-NBS block 104 names the nearest standard color \"pale greenish yellow\", only 1.3 units away [2].\n\nIt is a lightened [[goldenrod]]. Its nearest relatives are [[dark-goldenrod]], [[khaki]] and [[cream]], and it is far paler than the flower it is named for [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 267 carry this color over at least five per cent of the canvas, as photographed, more often than 65 per cent of the named colors [3]. It peaks in the 1800s: 77 of 8,345 paintings, 1.7 times the usual rate [3]. In 68 per cent of the 145 paintings where we measured its rank, it plays a light [3]. The earliest dated match is a painting of about 1415, a floor not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the goldenrod flower, pale",
+   "first_recorded": "CSS / X11 color list; Ridgway, 1912",
+   "source": "Paterson, p. 295"
+  },
+  "aka": [
+   "PaleGoldenrod"
+  ],
+  "siblings": [
+   "goldenrod",
+   "dark-goldenrod",
+   "khaki"
+  ],
+  "parent": "goldenrod",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 267,
+  "iscc_nbs": "block 104, pale greenish yellow (1.3)",
+  "role": "light (68% of 145)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 295, 487, \"PaleGoldenrod\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the hex code of PaleGoldenrod in the X11 set, according to Paterson?",
+   "choices": [
+    "#EEE8AA",
+    "#98FB98",
+    "#CD853F"
+   ],
+   "answer": "#EEE8AA",
+   "kind": "pick"
+  },
+  {
+   "q": "In which century does pale goldenrod peak in our painting archive?",
+   "choices": [
+    "The 1800s",
+    "The 1400s",
+    "The 1100s"
+   ],
+   "answer": "The 1800s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pale Goldenrod is a web color, and Paterson's dictionary files it with the browns."
+ ],
+ "words": 194,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

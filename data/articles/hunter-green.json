@@ -1,0 +1,134 @@
+{
+ "slug": "hunter-green",
+ "name": "Hunter Green",
+ "hex": "#355E3B",
+ "names": [
+  "Hunter green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Hunter green is a dark, slightly yellowish green, the kind of color a dictionary file puts near Hooker's and Lincoln green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the dictionary says",
+   "body": "Paterson defines Hunter's green simply as a dark yellowish-green [1]. He lists it in the greens near Hooker's green and Lincoln green [2]. Hooker's green is documented more fully: a yellowy green first prepared from Prussian blue and gamboge, and now more often from cadmium yellow and phthalo blue [3]. No source in our books says who the hunter was, or when the name began [1][2]."
+  },
+  {
+   "id": "not-pink",
+   "title": "Not hunting pink",
+   "body": "Hunting pink, a few entries on in the same dictionary, names the coats of foxhunters, a different color and not a relative of this green [4]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Neighbors",
+   "body": "In our list the close neighbors are [[forest-green]], [[dark-green]], [[kelly-green]] and [[emerald-green]] [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #355E3B measures lightness 36.1, chroma 27.7 and hue angle 145 degrees, which fits Paterson's wording of a dark green with a touch of yellow [1][5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson, Dictionary of Colour, \"Hunter's green\""
+  },
+  "aka": [
+   "Hunter's green"
+  ],
+  "siblings": [
+   "forest-green",
+   "dark-green",
+   "kelly-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name list and color math",
+  "hex": "#355E3B",
+  "measured": {
+   "lch": [
+    36.1,
+    27.7,
+    145
+   ]
+  },
+  "source": "Paterson, Dictionary of Colour"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Hunter's green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"colour index, greens\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Hooker's green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"hunting pink\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color math (CIE LCH from the sRGB hex)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson describe Hunter's green?",
+   "choices": [
+    "A dark yellowish-green",
+    "A bright bluish green",
+    "A pale mint"
+   ],
+   "answer": "A dark yellowish-green",
+   "kind": "pick"
+  },
+  {
+   "q": "What was Hooker's green first prepared from?",
+   "choices": [
+    "Prussian blue and gamboge",
+    "Cobalt and white",
+    "Copper and vinegar"
+   ],
+   "answer": "Prussian blue and gamboge",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Hunter's green is just a dark green with a little yellow in it."
+ ],
+ "words": 152,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported \"forest green\" shelving; softened index adjacency."
+  ]
+ }
+}

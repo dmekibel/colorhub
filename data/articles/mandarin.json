@@ -1,0 +1,169 @@
+{
+ "slug": "mandarin",
+ "name": "Mandarin",
+ "hex": "#F37A48",
+ "names": [
+  "Mandarin"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Mandarin is a vivid reddish orange named for the mandarin fruit, a word that also names Chinese officials, a garnet and a style of robe, and the books do not agree on which exact orange it is.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Yellow, red-yellow or true orange",
+   "body": "Paterson's dictionary lists Mandarin as a strong yellow and Mandarin orange, also called Mandarin red, as a reddish yellow [1]. St Clair's glossary instead calls Mandarin a true orange, after the fruit [2]. Books disagree, then, and the swatch here sits at the red end, nearer a vivid [[orange]] than any yellow.\n\nSt Clair uses the word for the shade that stands for the Dutch royal house today: she says the orange of the House of Orange was once almost a burnt amber in paintings, and the one favoured now is a sunny mandarin [3]."
+  },
+  {
+   "id": "officials",
+   "title": "The officials and their squares",
+   "body": "The word also means a Chinese official, and the books use it in several unrelated places [4][5][6]. Finlay explains that the Qing inherited the Ming practice of ranking officials with an embroidered silk badge, the mandarin square, showing a bird for a civil servant and an animal for a soldier [4]. In the same trade world, Finlay says Burmese sapphires became blue buttons for mandarin officials and rubies went to imperial headdresses [5]. Paterson notes that crocin, the red powder of Chinese yellow pods, dyed the vestments of mandarins [6].\n\nNone of these is the orange of the fruit; they share the word and little else."
+  },
+  {
+   "id": "garnet",
+   "title": "A garnet called mandarin",
+   "body": "Finlay lists mandarin among the red garnets: an orange variety from Namibia and Pakistan, alongside brownish almandine, cherry-red pyrope, red-orange spessartine and pinkish rhodolite [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #F37A48 falls within a color distance of 6 of only 11 paintings in our archive of 23,781, as photographed [8]. It covers at most 45 percent of an Indian court painting from about 1710, and the earliest match is a work attributed to Dürer of 1526 [8]. Orange this saturated is uncommon in these photographs of aged, varnished paintings."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mandarin fruit (English use also for Chinese officials)",
+   "first_recorded": "origin undocumented in the books",
+   "source": "Paterson, A Dictionary of Colour; St Clair, The Secret Lives of Colour"
+  },
+  "aka": [
+   "mandarin orange",
+   "mandarin red"
+  ],
+  "siblings": [
+   "orange",
+   "tangerine",
+   "pumpkin",
+   "coral"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "orange",
+    "gloss": "the basic color word; mandarin names a more saturated red-orange"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F37A48",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 11,
+  "top_paintings": [
+   "cma-314242",
+   "commons-Q20169820"
+  ],
+  "first": {
+   "id": "commons-Q124455029",
+   "year": 1526
+  }
+ },
+ "questions": [
+  {
+   "q": "What did a mandarin square on an official's chest show for a civil servant?",
+   "choices": [
+    "A bird",
+    "An animal",
+    "A dragon",
+    "A sun disc"
+   ],
+   "answer": "A bird",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books agree on exactly which orange Mandarin is.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mandarin is a yellow in one dictionary and a true orange in another."
+ ],
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 255",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Mandarin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Orange\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Fabric, section on the Qing court (\"mandarin square\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 134, \"crocin\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 20 (gem glossary, \"Garnet\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive (data), match at ΔE2000 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified Paterson, St Clair, Finlay (square, sapphires, garnet) and crocin lines against the text; no changes to those.",
+   "Field-note generalization about rarity hedged to the photographed archive."
+  ]
+ },
+ "words": 315
+}

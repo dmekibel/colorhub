@@ -1,0 +1,242 @@
+{
+ "slug": "liver",
+ "name": "Liver",
+ "hex": "#674C47",
+ "names": [
+  "Liver"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Liver is a dark, greyed reddish brown named for the organ, a color that ancient doctors used to describe a red earth and eighteenth-century naturalists used to rank browns.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of the organ",
+   "body": "Paterson's dictionary defines *liver-colour* as the reddish brown of the liver, and notes that the adjective *hepatic* means the same [1]. A real liver owes some of its tint to haemosiderin, an ochre-yellow pigment, which Paterson names as responsible for the organ's color [1].\n\nThe swatch here, #674C47, is a dark, greyed red-brown [2]. Its nearest ISCC-NBS name, grayish reddish brown, is only 0.9 units away, and our library traces the name to Ridgway's color atlas of 1912 and the ISCC-NBS and Maerz and Paul charts [2]. Several other names sit in the same ISCC-NBS block: Dark Red Brown, Hampstead Brown, Kaffa, Liver Maroon, Mince Meat and Tobacco Brown [2]. The neighbors in our collection are [[hay-s-maroon]], [[haematite-red]] and a darker [[liver-brown]] [2]."
+  },
+  {
+   "id": "antiquity",
+   "title": "A body color in antiquity",
+   "body": "The physician Dioscorides, who lived around AD 40 to 90, described the blood-brown earth called [[sinopia]], after the port it came from, as heavy and dense and the color of liver [3]. Our own swatch for sinopia is a brighter orange-red, a reminder that a color word on a screen is not the earth in the pit [2][3].\n\nThe liver also appears at the origin of purple. Pastoureau notes that antiquity took the small gland from which murex shellfish yield their dye to be the animal's liver [4]. In Aristotle's account, as Ball quotes it, the \"bloom\" of the animal lies between the quasi-liver and the neck [5]. The ancients named the organ before they understood the dye.\n\nLanguage kept the organ's moods. The old theory of the four humours held that a timid person's liver was short of bile or blood and so looked pale, hence the insult lily-livered [1]. Bile itself, produced by the liver, was thought yellowish, thick and bitter, and linked with the choleric temper [6]."
+  },
+  {
+   "id": "naturalists",
+   "title": "A rung on the naturalists' ladder",
+   "body": "In 1774 the German geologist Abraham Gottlob Werner devised a system for describing minerals by their outward properties, and its color vocabulary spread through natural history [7]. Liver brown was one of Werner's original colors [7]. Later lists by Picardet in 1790, Widenmann and Kirwan in 1794 and others kept it, usually among the darker browns not far from blackish brown [7].\n\nSyme's pocket edition of Werner, published in Edinburgh in 1814 and revised in 1821, gave liver brown number 106 [7][8]. His recipe was chestnut brown mixed with a little black and olive green [8]. He illustrated it with the middle feathers of a hen pheasant, the wing coverts of a grosbeak and a semi opal, and a plate from 1737 shows the shade on the seedpod of a cashew [8]. The title page of the 1814 book promised its colors would be useful to zoology, botany, chemistry, mineralogy and morbid anatomy, so the book was meant for anatomists as well as mineralogists [7]. A slip in the book is worth noticing: Syme forgot to mark liver brown with the [W] that flagged Werner's own colors, though it was one of them [7]. For the gem, see [[gem:opal|opal]]."
+  },
+  {
+   "id": "medicine",
+   "title": "Liver color and medicine",
+   "body": "Doctors have long read the liver through color. Avicenna took a patient's yellow skin as a sign of liver disorder, and Paracelsus assigned the liver to Jupiter [9]. Nineteenth-century color therapists went further: Babbitt prescribed ruby or yellow light for a sluggish liver, and folklore gave peridot and yellowish beryl to liver sufferers [9]. These were theories, not medicine, and color cures have no support [9].\n\nA modern use is stricter. Finlay was told by a representative of Pantone, the color-matching company, that it had developed cards for judging the fat content of a liver by color before a transplant, and that they had cut rejection rates [10]. That is one company's account, and the book gives no study behind it [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Liver brown is one of the commonest dark neutrals in painting. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 680 works, nearly three per cent of the collection [11]. In them it is as often a middle tone as a shadow [11]. It appears early: the first dated match is a Jain manuscript cover of about 1100, where it covers 15 per cent [11]. Three of the largest patches are [[painting:nga-161|Christ on the Cross (reverse)]] of 1380, the back of a panel, at 64 per cent, [[painter:mattia-preti|Preti]]'s *Self-portrait* of 1695 at 63 per cent, and [[painter:eugene-carriere|Carrière]]'s [[painting:commons-Q27119753|Woman Leaning on a Table]] of 1890 at 60 per cent [11].\n\nIt has a modern high: 108 of 1,674 paintings from the 1900s, 2.3 times the baseline, and 21 of 237 from the 1920s, three times [11]. Painters with a strong lean toward it include [[painter:andre-derain|Derain]], with 5 of 22 works in the archive [11]. Tibetan works also stand out, with 7 of 47 [11]. The colors it keeps company with are [[sienna]] and [[umber]] [11]. These are photographs of aged, varnished paintings, and varnish browns, so a match is a screen color, not a pigment test [11].\n\nThe name itself has faded. In Google Books *liver brown* peaks around 1809, in the age of Werner's lists, and by 2000 it sits near two per cent of that peak [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of the organ",
+   "first_recorded": "as liver-brown in Werner's color nomenclature of the late 1700s",
+   "source": "Baty, Nature's Palette; Paterson, Dictionary of Colour"
+  },
+  "aka": [
+   "liver-colour",
+   "liver-coloured",
+   "hepatic"
+  ],
+  "siblings": [
+   "liver-brown",
+   "hay-s-maroon",
+   "haematite-red"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "liver-brown",
+    "gloss": "our Liver Brown is a darker brown than this swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#674C47",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 680,
+  "first_dated": {
+   "id": "met-37835",
+   "painter": null,
+   "year": 1100
+  },
+  "top_paintings": [
+   "nga-161",
+   "commons-Q52154856",
+   "commons-Q27119753",
+   "commons-Q59827339"
+  ],
+  "role": {
+   "shadow": 0.44,
+   "highlight": 0.06,
+   "mid": 0.49
+  },
+  "ngram": {
+   "liver_brown_peak": 1809,
+   "rel_2000": 0.02
+  },
+  "measured": {
+   "lch": [
+    35.0,
+    13.0,
+    34.9
+   ],
+   "nearest_iscc": [
+    "grayish reddish brown",
+    0.9
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, Dictionary of Colour, entries \"liver-colour\", \"hepatic\", \"haemosiderin\" and \"lily-livered\", pp. 196, 200, 247 and 457",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 46, Ridgway 1912, Maerz and Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. \"Brown\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. on purple dye (murex gland)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17 (Aristotle on purple)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, p. 23 (bile and the humours)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction and colour lists, pp. 28-34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Syme's chart of reds and browns, pp. 254 and 261",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, chs. 11, 12 and 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 20 (epilogue)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "Google Books Ngram, phrase \"liver brown\", case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which ancient physician compared the red earth sinopia to liver?",
+   "choices": [
+    "Dioscorides",
+    "Galen",
+    "Hippocrates",
+    "Avicenna"
+   ],
+   "answer": "Dioscorides",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is a cowardly person called lily-livered?",
+   "choices": [
+    "An old theory said the coward's liver lacked blood or bile and was pale",
+    "Lilies were once a symbol of surrender",
+    "The liver is the colour of lilies",
+    "Soldiers wore lily-white uniforms"
+   ],
+   "answer": "An old theory said the coward's liver lacked blood or bile and was pale",
+   "kind": "pick"
+  },
+  {
+   "q": "What did Syme mix to make liver brown in 1821?",
+   "choices": [
+    "Chestnut brown with a little black and olive green",
+    "Red and blue",
+    "Umber and white",
+    "Sienna and gamboge"
+   ],
+   "answer": "Chestnut brown with a little black and olive green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dioscorides compared a red earth to liver in the first century; the color word is that old.",
+  "Syme gave liver brown a recipe in 1821: chestnut brown, a little black and a little olive green.",
+  "Look at the back of an old panel painting: that aged-wood red-brown is the liver color."
+ ],
+ "words": 859,
+ "status": "checked",
+ "checked": {
+  "by": "self-check against fact cards (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Pantone liver card claim is a single company anecdote in Finlay; hedged.",
+   "Chromotherapy corrected as theory not medicine.",
+   "Baty's Werner date (1774) refers to his mineral classification; liver brown placement in lists stated generally.",
+   "'Eighteenth-century' lists dated 1790/1794 from Baty's captions."
+  ]
+ }
+}

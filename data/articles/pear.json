@@ -1,0 +1,123 @@
+{
+ "slug": "pear",
+ "name": "Pear",
+ "hex": "#D1E231",
+ "names": [
+  "Pear"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pear is a bright yellow-green named for the fruit; it is a young color name, and the books have almost nothing to say about it as a color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fruit and a young name",
+   "body": "Our sources record Pear only as a modern web and crowd-survey color: it appears in Wikipedia's color lists and in the 2010 xkcd survey, and nowhere in the older sources we hold [1]. Three other names sit within a few units of it on screen: Sickly Yellow, Bitter Lemon and Maximum Green Yellow [1]. The swatch is a vivid, screen-bright yellow-green, so it names a hue, and not a measurement of a pear [1].\n\nThe fruit itself enters the old color books as a reference object. In Patrick Syme's 1821 chart, a ripe pound pear is one of the examples for pistachio green, and a ripe coalmar pear is an example for [[siskin-green]], which suggests a ripe pear skin was read as a yellowish green by 1821 [2]. Pastoureau notes that lemon and canary yellows appear in eighteenth-century still lifes only for a few fruits, among them quinces, apples and pears [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this color covering at least 1 per cent of its canvas, within a CIEDE2000 distance of 4 [4]. That describes the archive, as photographed, and not painting as a whole [4].\n\nThe nearest well-used names are [[lime]] and [[chartreuse]], and the yellow side of the color is [[lemon-yellow]] [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pear fruit",
+   "first_recorded": "2010 in the xkcd color survey; earlier use as a color name undocumented in our sources",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "lime",
+   "chartreuse"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "pearl",
+    "gloss": "a different word, from the jewel, with a pale lustrous swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#D1E231",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "nearest_names": [
+   "Sickly Yellow",
+   "Bitter Lemon",
+   "Maximum Green Yellow"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Pear (Wikipedia citing Xona.com; xkcd 2010); near-duplicates at dE 0.8 to 2.3",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 152-155",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 30",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Pear (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Syme's chart, what does a ripe pear stand for?",
+   "choices": [
+    "A yellowish green",
+    "A deep red",
+    "A blue-grey",
+    "A pale purple"
+   ],
+   "answer": "A yellowish green",
+   "kind": "pick"
+  },
+  {
+   "q": "Pastoureau says lemon yellow appeared in eighteenth-century still lifes mostly for a few fruits.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In 1821 a ripe pear was a reference object for green, not for yellow.",
+  "Pear the color is a web-era name with no painting in our archive covering it by 1 per cent."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened inference about 1821 pear skin color."
+  ]
+ },
+ "words": 232
+}

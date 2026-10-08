@@ -1,0 +1,131 @@
+{
+ "slug": "dark-goldenrod",
+ "name": "Dark Goldenrod",
+ "hex": "#B8860B",
+ "names": [
+  "Dark Goldenrod"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark goldenrod is an X11 web color: a deep, brownish gold that Paterson files among the browns.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web gold",
+   "body": "Paterson defines *DarkGoldenrod* as a light brown colour and one of the X11 set, with the hex code #B8860B [1]. In its word lists it sits among the browns [1]. The color is also found in CSS [2]. Its closest named neighbors in our library are [[mustard]] (a CIEDE2000 distance of 9.4) and [[golden-brown]] [2]. It is the darker sibling of [[goldenrod]] [2].\n\nThe books say nothing more about this exact shade. The printed phrase is a late arrival: *dark goldenrod* first appears in Google Books around 1960 and peaks in the 1990s [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dark goldenrod is common as a painted color. It appears in 307 of 23,781 paintings in our archive and is more common than 73% of the named colors [4]. It is mostly an accent (71% of 245 paintings) [4]. It is over-represented in Indian painting, at 3.2 times the expected rate (27 of 721 paintings), and in the Rajput and Pahari schools [4]. George Dawe is its most devoted painter, with 6 of his 50 works here, 5.2 times the baseline [4]. These are photographs of varnished paintings, so read them as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "goldenrod, darkened (origin undocumented)",
+   "first_recorded": "X11 web colors",
+   "source": "Paterson, p. 140"
+  },
+  "aka": [],
+  "siblings": [
+   "goldenrod",
+   "mustard",
+   "golden-brown",
+   "gold"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 307,
+  "role_accent_pct": 71,
+  "top_country": [
+   "India",
+   3.2
+  ],
+  "ngram": {
+   "first": 1960,
+   "peak": 1990
+  },
+  "measured": {
+   "lch": [
+    59,
+    64,
+    81
+   ],
+   "nearest": [
+    [
+     "Mustard",
+     9.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 140, 494",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; CSS/X11), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "Google Books Ngram, 5-year smoothing",
+   "loc_kind": "",
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson describe DarkGoldenrod?",
+   "choices": [
+    "A light brown colour",
+    "A dark green",
+    "A pale pink",
+    "A bluish violet"
+   ],
+   "answer": "A light brown colour",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter is most devoted to dark goldenrod in our archive?",
+   "choices": [
+    "George Dawe",
+    "Claude Monet",
+    "Johannes Vermeer",
+    "Mark Rothko"
+   ],
+   "answer": "George Dawe",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark goldenrod turns up 3.2 times more often than expected in Indian painting in our archive."
+ ],
+ "words": 200,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

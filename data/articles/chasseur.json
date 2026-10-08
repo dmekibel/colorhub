@@ -1,0 +1,129 @@
+{
+ "slug": "chasseur",
+ "name": "Chasseur",
+ "hex": "#2A4D37",
+ "names": [
+  "Chasseur"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Chasseur is a dark forest green from the French word for hunter, recorded in the 1930 Maerz and Paul color dictionary.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The hunter's green",
+   "body": "*Chasseur* is French for hunter [1]. The books are thin on the green: Paterson's dictionary lists only a related \"chasseur-blue\", the dark blue of the jacket of the French Chasseur soldier, so the word may also have been a uniform color [1]. Do not assume the two are one color. Our swatch is green, from the 1930 Maerz and Paul plate set, and the nearest ISCC-NBS name is \"dark green\", about 5.1 units away [2].\n\nThe hunting link is older and better attested than the name. Pastoureau notes that in the feudal world jugglers, jesters and hunters dressed in green, as did the young and the lovers, because green stood for what moves, changes and varies [3]. He treats green as the color of chance, play and fate [3]. That is the cultural background; it is not a record of who first called a shade chasseur."
+  },
+  {
+   "id": "siblings",
+   "title": "Look-alikes",
+   "body": "Close neighbors in our name list include [[hunter-green]], [[forest-green]], [[bottle-green]] and [[brunswick-green]] [2]. For the blue sense of the word see [[navy]] and [[midnight-blue]], the dark blues in the same family of uniform names [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Chasseur is one of the more present dark greens in our archive of 23,781 paintings: it appears in 182 paintings, and in 97 by the stricter within-painting measure [4]. Inside a painting it most often plays a shadow, in 52 per cent of those works [4].\n\nIt peaks in the 1900s, in 1.7 per cent of the 1,674 paintings from that century, about 3.8 times the expected rate [4]. The most devoted painter is [[painter:edvard-munch|Munch]], with this green in 4 of his 50 works here, 6.3 times the baseline of the museums those works come from [4]. By country it is most over-represented in France, at 2.1 times expected, which fits the French name [4]. The earliest match is a work of about 1390, [[painting:aic-90071|a panel in Chicago]], but it is 540 years before the name's first record, so it is a look-alike hue in an aged, varnished photograph, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "French chasseur, hunter (also a light-infantry type)",
+   "first_recorded": "1930, Maerz and Paul",
+   "source": "ColorHub library; Paterson, Dictionary of Colour (chasseur-blue)"
+  },
+  "aka": [],
+  "siblings": [
+   "hunter-green",
+   "forest-green",
+   "bottle-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "navy",
+    "gloss": "Paterson's chasseur-blue is a dark blue, not this green"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "chasseur (hunter)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 182,
+  "n_within": 97,
+  "century_peak": "1900s",
+  "role": "shadow 52%",
+  "painter": "edvard-munch"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 96",
+   "loc_kind": "book-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS, Maerz and Paul and other name sources (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Petit livre des couleurs, ch. 8 (\"Le vert\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does chasseur mean in French?",
+   "choices": [
+    "Hunter",
+    "Forest",
+    "Shadow",
+    "Soldier's coat"
+   ],
+   "answer": "Hunter",
+   "kind": "pick"
+  },
+  {
+   "q": "In Paterson's dictionary, what color is 'chasseur-blue'?",
+   "choices": [
+    "The dark blue of a Chasseur soldier's jacket",
+    "A pale sky blue",
+    "A green",
+    "A grey"
+   ],
+   "answer": "The dark blue of a Chasseur soldier's jacket",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Hunters, jesters and lovers dressed in green in the feudal world, because green meant change."
+ ],
+ "words": 355,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened speculation about uniform-color origin"
+  ]
+ }
+}

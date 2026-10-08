@@ -1,0 +1,127 @@
+{
+ "slug": "pompeian-blue",
+ "name": "Pompeian Blue",
+ "hex": "#6A7B87",
+ "names": [
+  "Pompeian Blue"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Pompeian blue is an old name for Egyptian blue, the ancient copper-calcium silicate pigment, and was also borrowed for some weak synthetic lakes.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A synonym for Egyptian blue",
+   "body": "Paterson describes [[egyptian-blue]] as an ancient rich purplish blue or turquoise made by heating copper, lime and quartz, and says it is sometimes called Pompeian blue [1]. It adds that this may have been the first synthetic pigment, a claim it makes with a \"perhaps\" [1]. Its own entry for Pompeian blue simply sends the reader to Egyptian blue [1].\n\nThe Pigment Compendium agrees: it calls Pompeian blue a synonym for the synthetic calcium copper silicate listed by Mayer in 1991 [2]. It also notes that the term was used for certain impermanent synthetic lakes that resemble Egyptian blue in hue [2]. So the name could mean the durable ancient pigment or a fugitive modern imitation."
+  },
+  {
+   "id": "pompeii",
+   "title": "Not to be confused with Pompeian red",
+   "body": "Paterson also records Pompeian red, a red tied to Pompeii's wall paintings, and sends that entry to [[venetian-red]] [1]. The two names share a place but not a material."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is a grey-blue, not the vivid blue of Egyptian blue, since the library value is a screen approximation [3]. In our archive 374 of 23,781 paintings, about 1.6%, carry a color within a close match of it covering at least 5% of the canvas [4]. Friedrich's *Northern Landscape, Spring* of 1825 is the strongest, at about 61% of the canvas [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a synonym for Egyptian blue",
+   "first_recorded": "listed by Mayer (1991) as a synonym",
+   "source": "Pigment Compendium, p. 318"
+  },
+  "aka": [
+   "Egyptian blue (synonym)"
+  ],
+  "siblings": [
+   "egyptian-blue",
+   "pompeian-red",
+   "cobalt-blue"
+  ],
+  "parent": "egyptian-blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "pompeian-red",
+    "gloss": "the red of the frescos of Pompeii"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6A7B87",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 374,
+  "top_paintings": [
+   "nga-130555"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 156, 318",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Pompeian blue\", p. 318",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), screen approximation",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub painting archive, CIEDE2000 match within 6, at least 5% of the canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Pompeian blue a synonym for, according to Paterson and the Pigment Compendium?",
+   "choices": [
+    "Egyptian blue",
+    "Prussian blue",
+    "Ultramarine"
+   ],
+   "answer": "Egyptian blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Paterson says Egyptian blue is made by heating copper, lime and quartz.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pompeian blue is Egyptian blue under another name, but the name was also used for some fading synthetic lakes."
+ ],
+ "words": 226,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Paterson hedges first synthetic pigment with perhaps"
+  ]
+ }
+}

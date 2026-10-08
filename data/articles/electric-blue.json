@@ -1,0 +1,146 @@
+{
+ "slug": "electric-blue",
+ "name": "Electric Blue",
+ "hex": "#0652FF",
+ "names": [
+  "Electric Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Electric blue is a bright, saturated blue tied to the glow of electrical discharge; the name was in fashion shops by the 1870s, as a dusty periwinkle, long before it became the color of the future.",
+ "sections": [
+  {
+   "id": "glow",
+   "title": "The color of discharge",
+   "body": "St Clair opens her chapter with the night of 26 April 1986 [1]. Sasha Yuvchenko, a 24-year-old engineer, came out of the wrecked Chernobyl reactor building and saw a beam of light rising from it, which he later described as bluish and beautiful [1]. The glow comes from ionized air: nitrogen and oxygen molecules are violently excited and release visible photons [1]. Sparks, lightning and St Elmo's fire, the light that dances on ships' masts, are bright blue for the same reason, sometimes tinted violet [1].\n\nThe name is also used for noctilucent clouds, which Paterson describes as electric blue cloud at high altitude that reflects sunlight at dawn or dusk [2]."
+  },
+  {
+   "id": "fashion",
+   "title": "A Victorian fashion shade",
+   "body": "The name is older than the film images. St Clair dates a dusty periwinkle shade named electric blue to the late 1800s, when Swan and Edison were working toward electric light [1]. A British drapers' trade paper mentions dark electric blue faille and velvet in January 1874, and the *Young Ladies' Journal* notes a walking dress of electric blue nun's cloth in November 1883 [1]. St Clair calls it a periwinkle, while Paterson's dictionary says a brilliant light blue [1][2]. The books disagree on how bright it was, and the vivid swatch on this page is the modern idea, not the Victorian one [1][2]."
+  },
+  {
+   "id": "future",
+   "title": "The color of the future",
+   "body": "St Clair argues that electric blue has always stood for modernity [1]. The technology in *Minority Report* (2002) is powered by it, as is the light in *Tron* (1982 and 2010), the publicity for *Inception* (2010) and the dystopian future of *WALL-E* (2008) [1]. *The Matrix* (1999) is the exception: its screens glow green, like the monochrome computer monitors it imitated, which were mostly gone by the 1980s [1]. The same chapter notes an unease in the picture, since we are drawn to this blue and a little afraid of it [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "This swatch is #0652FF, a name from the xkcd color survey (2010) that our library also files under the ISCC-NBS 1955 dictionary as a strong purplish blue, 10.7 units from its block 186 [3]. It is far more saturated than a periwinkle, and it sits beside [[royal-blue]], [[dodger-blue]] and [[azure]] [3]. "
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Painters in our archive almost never show this blue. No painting in our archive of 23,781 has a color within 4 units of it covering at least 1 per cent of the canvas, as photographed [4]. That describes this archive and not painting as a whole, but it fits a color that is closer to a lamp than to a pigment [4].\n\nThe word is a modern one. In printed English the phrase is first traced around 1890, begins to climb about 2000 and peaks near 2010 [4]. The 1874 trade journal shows that print can be older than the trace [1][4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the blue glow of electrical discharge and ionized air",
+   "first_recorded": "dark electric blue faille and velvet, a British drapers' trade paper, January 1874",
+   "source": "St Clair, The Secret Lives of Colour, \"Electric blue\""
+  },
+  "aka": [],
+  "siblings": [
+   "royal-blue",
+   "dodger-blue",
+   "azure"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "periwinkle",
+    "gloss": "the dusty shade the Victorian name referred to, per St Clair"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#0652FF",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "ngram": {
+   "first": 1890,
+   "rise": 2000,
+   "peak": 2010
+  },
+  "measured": {
+   "lch": [
+    43.2,
+    101.7,
+    298.0
+   ],
+   "contrast_white": 5.74,
+   "iscc": "strong purplish blue (block 186, 10.7)"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Electric blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"electric blue\", \"noctilucent\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings; Google Books Ngram (adjective use), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What produces the electric blue glow that Yuvchenko saw?",
+   "choices": [
+    "Ionized air",
+    "Burning graphite",
+    "The moon"
+   ],
+   "answer": "Ionized air",
+   "kind": "pick"
+  },
+  {
+   "q": "The 1870s shade called electric blue was a dusty periwinkle.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The first electric blue was a Victorian fashion shade: dark electric blue velvet appears in a trade paper of January 1874."
+ ],
+ "words": 482,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "softened 'named for' (source ties, not derives); softened painters-never claim to archive finding"
+  ]
+ }
+}

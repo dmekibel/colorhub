@@ -1,0 +1,191 @@
+{
+ "slug": "baltic",
+ "name": "Baltic",
+ "hex": "#25403B",
+ "names": [
+  "Baltic"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Baltic is a very dark grey-green from a 1930 color dictionary, and its name carries no documented story.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a documented origin",
+   "body": "Baltic is a dark, grey-green color listed in Maerz and Paul's 1930 *Dictionary of Color*, which dates its first recorded use to 1918 and shows it on plate 31, block L 1 [1]. No source we hold says who coined it or why. The obvious guess is the Baltic Sea, but that is a guess, not a record [1].\n\nThe 29 color books in our corpus mention the word Baltic in 46 passages, and none of them is about a color called Baltic [2]. They concern amber, trade routes, ports and politics, which is itself a reason to say little here rather than invent a history [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch (#25403B) is very dark, with a lightness of 25 and a chroma of only 12, at a hue between green and blue-green [1]. Its nearest named neighbors on screen are [[dark-slate-grey]] (5.6 units away), [[dark-teal]] (7.6) and [[gunmetal]] (10.4), and a little further off lie [[charcoal]] and [[petrol]] [1]. The screen value is an approximation of a printed sample [1]."
+  },
+  {
+   "id": "amber",
+   "title": "What the Baltic does give color",
+   "body": "The region's best-known color export is amber, once sold as \"Baltic gold\" and mined from a layer of grey clay called blue earth, which lies about 50 feet down on the Samland peninsula [3]. Baltic amber runs from ivory to near-black. Most pieces are yellow, orange, red or brown, rare ones show a bluish sheen over a darker body, and green amber in jewelry usually means the stone was heated in an oven [3]. The resin is fossilized, about 40 million years old on Finlay's average of a 30 to 50 million range [3]. See [[gem:amber|amber]] for the stone itself.\n\nThe Baltic's ports also gave color a job [4]. Pastoureau traces the red-stop, green-go signal to the two-color beacons of North Sea and Baltic ports, where a green light let a ship in and a red one kept it out [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 215 works, or 0.9 per cent [5]. In 69 per cent of the matches it belongs to the shadow tier of the painting's lightness order, which fits so dark a green [5]. The largest cover is 49 per cent, in Ghirlandaio's portrait of *Lucrezia Tornabuoni* (1475), and the earliest dated match is Giotto's *Madonna and Child* of about 1310 [5].\n\nIt clusters with one painter. Seven of Gauguin's 50 paintings in the archive carry it, about 15 times the archive rate, and Post-Impressionism as a whole carries it twelve times as often, five of 45 works [5]. Both counts are small, so they hint rather than prove. They are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (probably the Baltic Sea, unconfirmed)",
+   "first_recorded": "1918 (Maerz & Paul, 1930, plate 31 L 1)",
+   "source": "Maerz & Paul, A Dictionary of Color, via ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-slate-grey",
+   "dark-teal",
+   "gunmetal"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "amber",
+    "gloss": "Baltic amber is a yellow-to-brown stone, unrelated to this dark green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#25403B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 215,
+  "top_paintings": [
+   "nga-41677",
+   "nga-41587",
+   "smk-KMS7146",
+   "smk-KMS3419",
+   "nga-46120"
+  ],
+  "painters": [
+   {
+    "key": "Paul Gauguin",
+    "n": 50,
+    "hits": 7,
+    "lift": 15.49
+   }
+  ],
+  "role": {
+   "shadow": 0.69,
+   "mid": 0.28,
+   "highlight": 0.02
+  },
+  "company": [
+   {
+    "word": "Petrol",
+    "hits": 26,
+    "lift": 10.77
+   },
+   {
+    "word": "Viridian",
+    "hits": 35,
+    "lift": 7.67
+   }
+  ],
+  "measured": {
+   "lch": [
+    25,
+    12,
+    181
+   ],
+   "nearest": [
+    [
+     "Dark Slate Grey",
+     5.6
+    ],
+    [
+     "Dark Teal",
+     7.6
+    ],
+    [
+     "Gunmetal",
+     10.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Baltic #25403B (Maerz & Paul 1930, first recorded 1918, plate 31 L 1); CIEDE2000 distances computed with tools/colormath.js",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub concordance of the 29 color books for \"Baltic\" (46 passages; reviewed for color use)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 10 (\"Amber\") and notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 38",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; match within CIEDE2000 6, at least 5% of the canvas (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do our color books say about a color called Baltic?",
+   "choices": [
+    "Nothing: their Baltic passages are about amber, trade and politics",
+    "It was named by Perkin",
+    "It is the color of Baltic amber",
+    "It was the first synthetic dye"
+   ],
+   "answer": "Nothing: their Baltic passages are about amber, trade and politics",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: most Baltic amber is blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Baltic first appears in print as a color in 1918, but nobody recorded why it was given the name.",
+  "Most Baltic amber is yellow, orange, red or brown; blue amber is rare."
+ ],
+ "words": 470,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Origin of the color name undocumented; Baltic Sea only a guess, flagged as such.",
+   "Amber facts are from Finlay only (single source); amber is a different thing from the swatch.",
+   "Archive color match not a pigment test."
+  ]
+ }
+}

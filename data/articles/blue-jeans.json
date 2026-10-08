@@ -1,0 +1,239 @@
+{
+ "slug": "blue-jeans",
+ "name": "Blue Jeans",
+ "hex": "#5DADEC",
+ "names": [
+  "Blue Jeans"
+ ],
+ "tier": "commercial",
+ "depth": "long",
+ "lede": "Blue Jeans is a bright mid blue named for the washed look of indigo-dyed denim, a cloth whose fading made indigo a mass-market dye.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "The swatch is not the denim",
+   "body": "This swatch, a bright mid blue, is the Crayola-style color called Blue Jeans, and it is lighter and clearer than most denim [12]. Our library lists the name among Crayola colors via Wikipedia's list, and the year it entered the box is not established in our sources [12]. Its closest older color name is Ridgway's Light Cerulean Blue of 1912, within two units on the CIEDE2000 scale, and ISCC-NBS files it as a brilliant blue [12]. The color named [[denim]] in our list is a far darker #3B638C [12].\n\nSo the name suggests a worn, washed jean more than a new one, whose dyed blue is built from [[indigo]]. Of its neighbors, [[cornflower]], [[carolina-blue]] and [[sky-blue]] are the closest in feel [12]."
+  },
+  {
+   "id": "name",
+   "title": "Two cloths and a city",
+   "body": "The words behind blue jeans are about places. Balfour-Paul gives two clues: Genoa, whose tough cotton or linen *Gene fustian* was usually dyed indigo and is thought to have been shortened to *jeans*, and Nîmes, whose cloth *serge de Nîmes* gives denim [1]. Pastoureau agrees that jean comes from the Italo-English *genoese* but calls the Nîmes origin of denim conjecture [6]. A competing guess in his account is Occitan *nim*, a fine wool cloth of the Mediterranean coast [6]. Archaeologists beside the Nîmes canal found wooden dye vats from about 1700 that still held traces of blue [1].\n\nThe pair *blue jeans* is younger than the trousers. By Pastoureau's account the phrase did not appear commercially until the 1920s, although the pants had been blue since the 1870s [6]. In 1998 a BBC Radio 4 item mentioned growing naturally blue cotton to avoid dyeing jeans at all [11]."
+  },
+  {
+   "id": "strauss",
+   "title": "Strauss, Davis and the indigo twill",
+   "body": "Levi Strauss, a Bavarian-born merchant, reached San Francisco in 1853, and Pastoureau notes that the company archives burned in the fire after the 1906 earthquake, which is why so much of the early story is uncertain [6]. His first pants were of canvas, in shades from off-white to brown, and not blue [6]. Pastoureau has him switching to indigo-dyed denim between 1860 and 1865, while Balfour-Paul dates the riveted indigo-twill overalls to a factory opened with the tailor Jacob Davis in 1873 [6][1]. Books disagree on the partnership year, Pastoureau giving 1872 and Balfour-Paul 1873, and on Davis himself, whom Pastoureau places in Reno and Balfour-Paul calls an immigrant Latvian tailor [6][1]. Finlay says instead that the first jeans were dyed in France with West Indian indigo, a claim without detail that no other book repeats [15].\n\nThe famous marks came later. The patent ran out in 1890, and in 1936 a small red tab on the back pocket became the first brand label to show openly on the outside of a garment [6]. Balfour-Paul adds the stitched arc on the back pocket, the longest-running trademark in the United States [2]."
+  },
+  {
+   "id": "fading",
+   "title": "Why the blue fades well",
+   "body": "Jeans owe their look to how indigo behaves. Only the warp threads of denim are dyed, and indigo sits on the yarn surface and rubs off, so cloth fades on the parts that wear [4]. Deep indigo is built by repeated dips, leaving the core of each fiber undyed, and the dye fades without changing hue [4]. Pastoureau adds that the denim was too dense to take up the dye fully, and that when chemistry later allowed an even, deep dyeing, makers had to bleach jeans artificially to bring back the washed look [6].\n\nThis fault became the product. Synthetic indigo was declining by the middle of the twentieth century, outclassed by blues such as Indanthren with better fastness, and the postwar jeans boom saved it, with demand soaring in the mid-1960s [3]. Balfour-Paul reports that more than a billion pairs of jeans a year were made when she wrote [3]. St Clair puts the global denim industry at $54 billion in 2011, after a peak around 2006 [7]. Blue jeans are the reason a dye that was supposed to be obsolete is still made at scale, and the plant it came from is [[flower:indigo-woad|woad and the indigo plants]]."
+  },
+  {
+   "id": "myths",
+   "title": "What jeans were, and were not",
+   "body": "The idea that jeans were always rebel clothing is inaccurate: Pastoureau says that for most of their history they were sensible, utilitarian trousers for ordinary people, and only in the late 1960s in Europe did they become symbolic [6]. Vogue took its first jeans advertisement in 1935 [6]. Balfour-Paul gives the 1930s as the date Vogue brought jeans to the East Coast, and the GIs of the Second World War as the way Europe saw them, with film stars and pop musicians doing the rest [2].\n\nA popular figure says nearly half the world wears jeans on any given day. Balfour-Paul presents it as an estimate with a footnote, and it is not a measured count, so it is better treated as a guess than as a statistic [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A blue this bright is rare in old paintings. In our archive of 23,781 works, a color within six units of this swatch covers at least five per cent of the canvas in only five of them [13]. Horace Vernet's *Wounded Zouave* (1858) has 26 per cent and Alfredo Souto's *Paisaje de Granada* (1891) 24 per cent [13]. The oldest match is Ludolf Bakhuysen's seascape of 1667, at 14 per cent, and Turner's *Venice: The Dogana and San Giorgio Maggiore* (1834) has 9 per cent [13]. Where it appears it plays a highlight 60 per cent of the time and a midtone 40 per cent [13]. As always these are photographs of aged, varnished paintings, not pigment tests [13].\n\nThe word has a sharper history than the paint. In Google Books, *blue jeans* first reaches 5 per cent of its eventual peak around 1938, 16 per cent by 1960, 29 per cent by 1980 and 57 per cent by 2000, and peaks around 2013 [14]. A trick for the eye: a shirt and a pair of jeans can match in daylight and part company under an incandescent bulb, because daylight carries more blue and the bulb more red [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "blue jeans, the indigo-dyed denim trousers",
+   "first_recorded": "the phrase appears commercially in the 1920s (Pastoureau); the color name's date is undocumented in our sources",
+   "source": "Pastoureau, Blue, ch. 10; ColorHub library"
+  },
+  "aka": [
+   "Crayola Blue Jeans"
+  ],
+  "siblings": [
+   "denim",
+   "cornflower",
+   "carolina-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "denim",
+    "gloss": "the color of dyed denim cloth, much darker than this swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#5DADEC",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5,
+  "role": {
+   "mid": 0.4,
+   "highlight": 0.6
+  },
+  "ngram": {
+   "first_5pct": 1938,
+   "peak": 2013,
+   "rel": {
+    "1960": 0.159,
+    "1980": 0.294,
+    "2000": 0.568
+   }
+  },
+  "measured": {
+   "lch": [
+    68.2,
+    39.4,
+    261.2
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 213",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 214",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 97",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 127 and 215",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 239",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 86 (\"Indigo\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Eckstut and Eckstut, What Is Color?, ch. 26 (\"What Is Metamerism?\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"blue jeans\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub library: Crayola name (per Wikipedia list), Ridgway 1912 plate VIII hue 45, ISCC-NBS 1955 block 181; core name Denim (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why do jeans fade where they wear, without changing hue?",
+   "choices": [
+    "Only the warp threads are dyed and indigo sits on the yarn surface and rubs off",
+    "The cloth is bleached at the factory",
+    "Cotton turns blue in sunlight",
+    "The dye is an oil paint"
+   ],
+   "answer": "Only the warp threads are dyed and indigo sits on the yarn surface and rubs off",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: jeans were always rebel clothing.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Is the Blue Jeans swatch darker or lighter than the color named Denim in our list?",
+   "choices": [
+    "Lighter and brighter",
+    "Darker",
+    "Exactly the same",
+    "Greener"
+   ],
+   "answer": "Lighter and brighter",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The Blue Jeans swatch is much lighter than the Denim in our list: a washed jean, not a new one.",
+  "Indigo was nearly obsolete by 1950 until postwar jeans saved it."
+ ],
+ "words": 980,
+ "status": "checked",
+ "checked": {
+  "by": "batch-61 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Books disagree: Strauss/Davis partnership 1872 (Pastoureau) vs 1873 (Balfour-Paul); Davis described differently; Finlay's French-dyed claim single-source and hedged.",
+   "Half the world wears jeans: unsourced estimate, corrected.",
+   "Jeans-as-rebel myth corrected (Pastoureau).",
+   "Crayola date undocumented in our sources.",
+   "Ngram numbers from the article_field output."
+  ]
+ }
+}

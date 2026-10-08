@@ -1,0 +1,113 @@
+{
+ "slug": "purple-grey",
+ "name": "Purple Grey",
+ "hex": "#866F85",
+ "names": [
+  "Purple Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Purple grey is a descriptive name for a dull violet that has almost lost its hue, a color the books touch only in passing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two old opinions",
+   "body": "Birren held in 1950 that purple, a blend of red and blue, is more or less neutral biologically, a poor choice for broad surfaces because it upsets the eye's focus, and the hue with the most purely aesthetic appeal [1]. That is old opinion rather than modern evidence, and the classification of purple as neutral in this sense has not been confirmed by later books.\n\nA text on color manners quoted by Pastoureau advised older women against white, the color of youth, and toward tan, purple, gray or black [2]. Grey and purple appear there as sober colors, not as one color."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 21 works [3]. Two early examples are Frederik Rohde's *Vinterlandskab* of 1848 and J. L. Camradt's *Blomster i en skål* of 1830, both Danish [3]. As always these are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: purple plus grey",
+   "first_recorded": "origin undocumented",
+   "source": "descriptive name"
+  },
+  "aka": [
+   "grey violet"
+  ],
+  "siblings": [
+   "grey-purple",
+   "dull-purple",
+   "lilac",
+   "warm-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#866F85",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 21,
+  "top_paintings": [
+   "Frederik Rohde, 1848",
+   "J.L. Camradt, 1830"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 20 (\"The Prescription of Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, p. 115",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Birren describe purple's effect on the eye?",
+   "choices": [
+    "It disturbs the focus of the eye in large areas",
+    "It sharpens focus",
+    "It has no effect",
+    "It tires only the rods"
+   ],
+   "answer": "It disturbs the focus of the eye in large areas",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this swatch covers a large share of many museum paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Purple grey is rare in paint: only 21 of 23,781 museum paintings in our archive hold it across a twentieth of the canvas."
+ ],
+ "words": 187,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "\"medieval-minded\" dating unsupported, removed"
+  ]
+ }
+}

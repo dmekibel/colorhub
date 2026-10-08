@@ -1,0 +1,134 @@
+{
+ "slug": "dark-sea-green",
+ "name": "Dark Sea Green",
+ "hex": "#8FBC8F",
+ "names": [
+  "Dark Sea Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark Sea Green is a soft, grayed green, listed in the X11 set.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A listed color",
+   "body": "Paterson's dictionary lists DarkSeaGreen as an entry in the X11 Color Set, with hex code 8FBC8F [1]. It also appears in his list of greens, beside Dark Green and Dark Olive Green [2]. The name has a longer paper trail than most of the set: our records list Ridgway (1912) and the ISCC-NBS system (1955) alongside CSS and the xkcd list [3].\n\nIts nearest neighbors among our names, by CIELAB distance, are [[malachite-green|Malachite Green]], [[eton-blue|Eton Blue]] and [[naiad|Naiad]] [5]. On a white page it reaches a contrast ratio of 2.15:1 [5]."
+  },
+  {
+   "id": "art",
+   "title": "In paintings",
+   "body": "In our archive Dark Sea Green appears in 42 of 23,781 paintings, 0.18%, as photographed [4]. It is a mid-tone more often than anything else, in 35% of the 20 paintings where the within-painting reading finds it [4]. It peaks in the 1900s at 3.7 times the expected rate, but that rests on only 7 paintings, so treat it as a hint [4]. The earliest match is a work by Hans von Kulmbach from 1514; the early centuries are thin, so that is a floor and not a first [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "Ridgway, 1912 (per our name records)",
+   "source": "ColorHub name records; Paterson p. 141"
+  },
+  "aka": [
+   "DarkSeaGreen"
+  ],
+  "siblings": [
+   "sea-green",
+   "light-sea-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "contrast_white": 2.15,
+  "nearest": [
+   [
+    "Malachite Green",
+    5.8
+   ],
+   [
+    "Eton Blue",
+    6.0
+   ],
+   [
+    "Naiad",
+    7.1
+   ]
+  ],
+  "n_present": 42,
+  "pct": 0.18,
+  "role_mid_pct": 35,
+  "peak_decade": "1900s"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 141",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 500",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub name records (data/graph/names.json and per-name source lists)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Computed from the hex value: WCAG relative luminance and contrast ratio; CIELAB distance to the other names in data/graph/names.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which year does ISCC-NBS appear among the sources for this name in our records?",
+   "choices": [
+    "1955",
+    "1856",
+    "1990",
+    "1725"
+   ],
+   "answer": "1955",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the 3.7x peak in the 1900s rests on a large number of paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dark Sea Green has paper records back to Ridgway in 1912, long before it was a web color."
+ ],
+ "words": 190,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Garbled 'greens and greys' index claim replaced with the p. 500 greens list; note 2 repointed."
+  ]
+ }
+}

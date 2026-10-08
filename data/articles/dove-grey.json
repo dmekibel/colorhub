@@ -1,0 +1,129 @@
+{
+ "slug": "dove-grey",
+ "name": "Dove Grey",
+ "hex": "#9B848B",
+ "names": [
+  "Dove Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Dove grey is the soft plumage color of the dove, and the books disagree on whether it leans blue, pink or purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One bird, three greys",
+   "body": "Paterson defines dove-grey as the bluish grey of the dove's plumage, but his entry for the shorter *dove* describes a pinkish or purplish shade of grey, so one dictionary holds two readings [1]. St Clair's glossary offers a third, a soft, cool-toned mid-grey [2]. Our swatch is the warm reading: ISCC-NBS calls it a \"light grayish purplish red\", about 5.9 units away, and our earliest record is Maerz and Paul in 1930 [3]. A dove-grey that reads bluer is closer to [[blue-grey]], and a pinker one to [[old-rose]] and [[dusty-rose]] [3].\n\nPaterson also places dove-grey in a long run of animal and weather greys, with oyster, mole, smoke and pearl [1]. Compare [[pearl-grey]] and [[mouse-grey]] [3]."
+  },
+  {
+   "id": "painting",
+   "title": "In descriptions of paint",
+   "body": "Ball quotes the art critic Lorenz Dittmann on Millet's *The Gleaners* of 1857, in which the standing figure carries \"colourful greys\": a silvery blue-grey, dove-grey, and blue and turquoise greys [4]. Ball's point is that words only begin to paint a picture, and dove-grey appears there as one of several grey nuances [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 89 paintings, and in 44 by the stricter within-painting measure [5]. Inside a painting it most often plays a hidden color, in 36 per cent of those works [5].\n\nIt peaks in the 1900s, in 1.2 per cent of the 1,674 paintings from that century, about 4.4 times the expected rate, and it is most over-represented in France, at 2.1 times expected [5]. The earliest match is Giorgione's [[painting:commons-Q3937389|panel of about 1503]], which is 427 years before the name's first record, so it is a look-alike hue in an aged photograph, not a pigment test [5]. Look for it in the grey-mauve of a dove's neck, or in shadowed cloth."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plumage of the dove",
+   "first_recorded": "1930, Maerz and Paul plate 45 B1 (in our sources)",
+   "source": "Paterson, Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "dove gray",
+   "dove-coloured"
+  ],
+  "siblings": [
+   "pearl-grey",
+   "mouse-grey",
+   "light-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 89,
+  "n_within": 44,
+  "century_peak": "1900s",
+  "role": "hidden 36%",
+  "country": "France 2.1x"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 149",
+   "loc_kind": "book-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Dove gray\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS, Maerz and Paul and other name sources (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, Preface",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define dove-grey?",
+   "choices": [
+    "The bluish grey of dove plumage",
+    "A bright red",
+    "A dark green",
+    "A yellow-brown"
+   ],
+   "answer": "The bluish grey of dove plumage",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painting does Ball quote a critic describing with dove-grey?",
+   "choices": [
+    "Millet's The Gleaners",
+    "Monet's Water Lilies",
+    "Vermeer's Milkmaid",
+    "Van Gogh's Roses"
+   ],
+   "answer": "Millet's The Gleaners",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "One dictionary calls dove-grey bluish and, a few lines up, pinkish."
+ ],
+ "words": 313,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed over-reading of Dittmann quote"
+  ]
+ }
+}

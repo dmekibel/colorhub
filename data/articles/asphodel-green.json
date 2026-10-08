@@ -1,0 +1,109 @@
+{
+ "slug": "asphodel-green",
+ "name": "Asphodel Green",
+ "hex": "#90A16F",
+ "names": [
+  "Asphodel Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Asphodel Green is a muted, yellowish green named for a flower of Greek legend.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines asphodel as the rich yellow of the daffodil, and asphodel green as a yellowish green [1]. The color is in the library from three sources: Ridgway's 1912 *Color Standards and Color Nomenclature* (plate XLI), ISCC-NBS block 120, and Maerz and Paul, which first recorded it in 1912 [2].\n\nMaerz and Paul also list a near neighbor, Nile, first recorded in 1888 [2]. The nearest standard color is [[moss]], at a distance of 4.0 [2]. It sits among the greens near [[olive]] and [[celadon]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, the color appears in 1.07% of them, as photographed [3]. It is more common than 63% of the named colors and peaks in the 1900s, at 2.9 times the expected rate [3]. Inside a painting it most often plays a light, in 36% of cases [3]. Harald Giersing is its most devoted painter here, with 4 of 23 works [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the asphodel, a flowering plant of Mediterranean meadows",
+   "first_recorded": "1912 (Ridgway; Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "Nile (Maerz & Paul neighbor)"
+  ],
+  "siblings": [
+   "moss",
+   "olive",
+   "celadon"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 255,
+  "pct_paintings": 1.07,
+  "peak_century": 1900,
+  "library_first": 1912,
+  "nearest": [
+   [
+    "Moss",
+    4.0
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 34, \"asphodel\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which century does Asphodel Green peak in our archive?",
+   "choices": [
+    "1900s",
+    "1500s",
+    "1300s"
+   ],
+   "answer": "1900s",
+   "kind": "pick"
+  },
+  {
+   "q": "Paterson describes asphodel green as a yellowish green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Asphodel Green appears in Ridgway's 1912 color standard."
+ ],
+ "words": 161,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

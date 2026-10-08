@@ -1,0 +1,155 @@
+{
+ "slug": "titanium-yellow",
+ "name": "Titanium Yellow",
+ "hex": "#EEE600",
+ "names": [
+  "Titanium Yellow"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Titanium yellow is a pigment name that books use for more than one thing: a light lemon yellow built from nickel, antimony and titanium oxides, or, in older sources, a yellow made from a titanium ore.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two meanings",
+   "body": "The Pigment Compendium records the disagreement: de Keijzer (1990) says titanium yellow was derived from the titanium ore ilmenite, while Hackman (1973) lists it as a synonym for nickel titanate yellow [1]. Mayer (1991) lists nickel titanate yellow and nickel titanium yellow as different things, without saying how they differ [2].\n\nBooks disagree, then, on what the name covers. The nickel reading is the one that modern pigment references describe in detail."
+  },
+  {
+   "id": "material",
+   "title": "The nickel rutile yellow",
+   "body": "Buxbaum (1998) describes it as a light lemon yellow, a mixed oxide of titanium, antimony and nickel with an approximate formula of (Ti0.85Sb0.10Ni0.05)O2 [2]. He calls it nickel rutile yellow, a name that points to rutile, one of the mineral forms of titanium oxide [2]. Other trade names are sun yellow and titan yellow [2][3].\n\nIt is a different compound from the white of the same element, which has its own tangle of names, permanent white among them [4]. In modern paints, chromium and nickel titanium yellows also stand in for the lead antimony oxide of Naples yellow [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is a library entry taken from Wikipedia's color lists, a vivid greenish lemon yellow, and its nearest named neighbor is [[canary]], about three CIEDE2000 units away [6]. A screen cannot show the soft, light lemon that the pigment sources describe, so treat the swatch as a label, not a match [2][6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Within six units of this yellow, covering at least five per cent of the canvas, our archive finds exactly one painting in 23,781: Mondrian's *Composition in Red, Yellow and Blue* (1922), where it takes about ten per cent [7]. One painting is an anecdote, not a pattern, and these are photographs of varnished paint, not pigment tests [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the element titanium",
+   "first_recorded": "undocumented in the sources read",
+   "source": "Pigment Compendium, 'titanium yellow'"
+  },
+  "aka": [
+   "nickel titanium yellow",
+   "nickel rutile yellow",
+   "sun yellow",
+   "titan yellow"
+  ],
+  "siblings": [
+   "canary",
+   "lemon-yellow",
+   "barium-yellow"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#EEE600",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "top_painting": "commons-Q17491107",
+  "nearest": [
+   "Canary",
+   2.9
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 379, 'titanium yellow'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 289, 'nickel titanate yellow'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 377, 'titan yellow'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 379, 'titanium dioxide white'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 286, 'Naples yellow'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), Wikipedia color list; CIEDE2000 to Canary 2.9",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which element's oxides, with nickel and antimony, make the light lemon yellow sold as titanium yellow?",
+   "choices": [
+    "Titanium",
+    "Cadmium",
+    "Barium",
+    "Copper"
+   ],
+   "answer": "Titanium",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: all sources agree on what 'titanium yellow' means.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The name titanium yellow means an ilmenite-derived color to some authors and a nickel oxide mix to others."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'heating at high temperature' and 'atoms sit in rutile structure'; reworded to mixed oxide, rutile named",
+   "Softened 'reading that fits modern paint' editorial claim"
+  ]
+ },
+ "status": "checked",
+ "words": 312
+}

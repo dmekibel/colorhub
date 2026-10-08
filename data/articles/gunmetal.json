@@ -1,0 +1,125 @@
+{
+ "slug": "gunmetal",
+ "name": "Gunmetal",
+ "hex": "#2A3439",
+ "names": [
+  "Gunmetal"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Gunmetal is the dark blue-grey of the alloy once used for cannon and gun parts, and it is now a standard word for a cool, dark grey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The metal and the color",
+   "body": "Paterson defines gunmetal as the dull blue-grey of the metal, a dark grey, and notes the variant gunmetal blue [1]. St Clair's glossary of color words gives it a similar gloss, mid-blue-grey [2]. The two differ in lightness, with one calling it dark and the other mid, which suggests a loose word rather than a fixed standard [1][2].\n\nIn Paterson's index it sits among the greys with granite, graphite, iron grey and slate [3]. Close neighbors in our names are [[slate-grey]], [[charcoal]] and [[dark-slate-grey]]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is a very dark, cool grey with a slight blue-green cast. Real gunmetal varies by alloy and finish, so a screen sample is a convention only [1]. Our own library also lists Japanese traditional colors whose nearest match is this name, such as the iron-color tetsu-iro, which is a separate tradition and not a translation [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch matches 762 of 23,781 archive paintings (3.2%, as photographed), more common than 82% of the named colors [5]. It peaks in the 1200s, in 4.2% of the 142 paintings from then, about 1.9 times the expected rate, but that is only 6 paintings [5]. Inside a painting it most often plays a mid-tone, in 48% of the 467 paintings that hold it, and the most devoted painter is Fra Angelico, in 5 of 16 works here [5]. These are photographs of varnished paintings, so a match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the alloy used for guns",
+   "first_recorded": "undocumented in our books",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "gunmetal blue"
+  ],
+  "siblings": [
+   "slate-grey",
+   "charcoal",
+   "dark-slate-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (graph fieldnotes)",
+  "n_present": 762,
+  "pct": 3.2,
+  "peak": "1200s (6 paintings)",
+  "role": "mid-tone (48% of 467)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"gunmetal\", p. 203",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Gunmetal\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index of greys, p. 501",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library (jp names matched to Gunmetal)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (graph fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Gunmetal is named for what?",
+   "choices": [
+    "An alloy used for guns",
+    "A volcanic rock",
+    "A dye from galls"
+   ],
+   "answer": "An alloy used for guns",
+   "kind": "pick"
+  },
+  {
+   "q": "How does Paterson describe gunmetal?",
+   "choices": [
+    "Dull blue-grey, a dark grey",
+    "Bright silver",
+    "Warm brown"
+   ],
+   "answer": "Dull blue-grey, a dark grey",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Two dictionaries disagree on how dark gunmetal is: one says dark grey, the other mid blue-grey."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Checked against Paterson p203 and St Clair; no changes needed"
+  ]
+ },
+ "words": 260
+}

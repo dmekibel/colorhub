@@ -1,0 +1,117 @@
+{
+ "slug": "honeydew",
+ "name": "Honeydew",
+ "hex": "#F0FFF0",
+ "names": [
+  "Honeydew"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Honeydew is a very pale green, a web-standard color name that shares a word with the melon, the sweet insect secretion, and an older pinkish tint.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two colors, one word",
+   "body": "Paterson lists two entries. Lower-case honeydew is a yellowy pink or orangey pink, while capitalized Honeydew is a pale green, one of the colors in the X11 set, with the hex code #F0FFF0 [1]. The index files honeydew under pinks and Honeydew under greens, with the asterisk Paterson uses for X11 names [2][3][4]. So the same word names two different colors, which is why a digital swatch here should not be read as an older color name.\n\nThe X11 value #F0FFF0 is nearly white with a green tint [1]. Nearby names are [[mint-cream]], [[pistachio]] and [[celadon]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch matches 15 of 23,781 archive paintings (0.06%, as photographed), rarer than 69% of the named colors [5]. The earliest dated match is a painting by Piero della Francesca from 1470, and the latest is 1891, among 11 dated paintings; the early centuries are thin, so this is a floor and not a first [5]. In printed English the word, in its adjective use, peaks in the 1980s and rose fastest in the 1930s [5]. These are photographs of varnished paintings, so the match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "honeydew melon or the sweet secretion; origin of the X11 name undocumented here",
+   "first_recorded": "undocumented",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "mint-cream",
+   "pistachio",
+   "celadon"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (graph fieldnotes)",
+  "n_present": 15,
+  "pct": 0.06,
+  "earliest": "1470 (Piero della Francesca)",
+  "ngram_peak": "1980s"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"honeydew\", p. 210",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index of pinks, p. 503",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index of greens, p. 497",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, general index, p. 473",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (graph fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which hex code does the X11 Honeydew carry?",
+   "choices": [
+    "#F0FFF0",
+    "#FA8072",
+    "#B22222"
+   ],
+   "answer": "#F0FFF0",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the lower-case dictionary entry honeydew names a pale green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Honeydew names two colors: a pale X11 green and an older orangey pink."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Checked against Paterson p210 and indexes; no changes needed"
+  ]
+ },
+ "words": 209
+}

@@ -1,0 +1,122 @@
+{
+ "slug": "fulvous",
+ "name": "Fulvous",
+ "hex": "#E48400",
+ "names": [
+  "Fulvous"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Fulvous is an old word for a dull orange or reddish-yellow, used above all for animal colors, especially bird plumage.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A tawny word",
+   "body": "Paterson defines fulvous as a variant of fulvid, a reddish-yellow, and lists it among the yellow words of the dictionary's color index [1][2]. St Clair's glossary puts it more simply: dull orange, like [[tawny]], often used for animal colors, usually birds' plumage [3].\n\nBall uses the word for painting. In his account of Baroque chiaroscuro, he describes an era of deep shadows and brooding blacks set against fulvous highlights, the golden glow of Correggio, Caravaggio and Rembrandt [4]. He suggests it is no coincidence that several new yellow, ochre and brown pigments appeared in the same period [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #E48400 is a saturated amber orange, brighter than the dictionary's \"dull\" suggests, near [[amber]] and [[ochre]] [3]. The concordance of 29 color books finds only four strong mentions of this name, so the article stays short rather than pad the record [9]. Screen colors are approximate, and the swatch is a reference value, not a measured pigment [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "not dated in the books",
+   "source": "Paterson, A Dictionary of Colour, p. 180"
+  },
+  "aka": [
+   "tawny",
+   "fulvid"
+  ],
+  "siblings": [
+   "tawny",
+   "amber",
+   "ochre",
+   "orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names, concordance of 29 color books",
+  "hex": "#E48400",
+  "book_mentions": 4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 180",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 518",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 125",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub name data and the color-book concordance (4 strong mentions)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does St Clair say fulvous is used to describe?",
+   "choices": [
+    "Animal colors, usually birds' plumage",
+    "Sea water",
+    "Metals",
+    "Stained glass"
+   ],
+   "answer": "Animal colors, usually birds' plumage",
+   "kind": "pick"
+  },
+  {
+   "q": "Which tradition does Ball link with fulvous highlights?",
+   "choices": [
+    "Baroque chiaroscuro",
+    "Medieval illumination",
+    "Pop art",
+    "Cubism"
+   ],
+   "answer": "Baroque chiaroscuro",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Fulvous means tawny: the color of birds' feathers."
+ ],
+ "words": 171,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede: 'orange-brown' and 'fur' unsupported; now dull orange / reddish-yellow, animal colors especially plumage"
+  ]
+ }
+}

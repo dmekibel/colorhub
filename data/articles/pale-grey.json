@@ -1,0 +1,136 @@
+{
+ "slug": "pale-grey",
+ "name": "Pale Grey",
+ "hex": "#FDFDFE",
+ "names": [
+  "Pale Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pale grey is a descriptive phrase for a grey close to white, and the swatch here is nearly paper white; the interest is in how books use the words.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "White that is really grey",
+   "body": "St Clair points out that products we call white are often technically very pale gray: Apple's \"Moon Gray\" headphones and keyboard plastic is her example [1]. The same glossary uses pale gray for other named shades, such as *French gray*, a very pale gray-green, and *glaucous*, a pale gray blue-green [2]. Neighbors on the page are [[light-grey]], [[dove-grey]] and [[pearl-grey]] [2]."
+  },
+  {
+   "id": "material",
+   "title": "In the studio",
+   "body": "Pigment makers use the phrase for materials. Pumice is usually white, yellowish, pale grey or grey brown, and very low in density [3]. Coles notes that a lower-grade lapis lazuli ore gives a pale grey-blue pigment, which is why artists prized the purest stones [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is #FDFDFE, only a hair off pure white, so on a screen it reads as white [5]. A reader should treat the name as a range, from near-white to a soft mid grey, not as this single value [1][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub archive, 342 of 23,781 paintings, about 1.4%, hold this near-white across at least 5% of the canvas, as photographed [5]. Every match is a highlight color [5]. Vincenzo Carducci stands out with 34 canvases, about 47 times the archive's average rate, and the rate is also high for Italy and Russia [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: pale plus grey",
+   "first_recorded": "origin undocumented in the books",
+   "source": "St Clair, The Secret Lives of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "light-grey",
+   "dove-grey",
+   "pearl-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FDFDFE",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 342,
+  "painters": [
+   "Vincenzo Carducci",
+   "Franz Xaver Winterhalter",
+   "Annibale Carracci"
+  ],
+  "role": {
+   "highlight": 1.0
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 22 (\"White\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Hopkins/Eastaugh, Pigment Compendium, \"pumice\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, lapis lazuli recipe",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive and color library (tools/article_field.py), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to St Clair, Apple's white plastic is technically what?",
+   "choices": [
+    "Very pale gray",
+    "Cream",
+    "Light blue"
+   ],
+   "answer": "Very pale gray",
+   "kind": "pick"
+  },
+  {
+   "q": "What does low-quality lapis lazuli ore produce?",
+   "choices": [
+    "A pale grey-blue pigment",
+    "A bright red",
+    "A black"
+   ],
+   "answer": "A pale grey-blue pigment",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Many things we call white are technically very pale gray [1]."
+ ],
+ "status": "checked",
+ "words": 226,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

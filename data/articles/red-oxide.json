@@ -1,0 +1,143 @@
+{
+ "name": "Red Oxide",
+ "hex": "#8C3E21",
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Red oxide is a generic name for red iron-oxide earths, the red iron-oxide earths, and the books also use it for several other red minerals.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which oxide",
+   "body": "Paterson says jeweller's rouge is a powdered red oxide used to polish gold and silver, also called crocus Martis, colcothar and [[venetian-red]] [1]. Older writers used the phrase for other metals: cuprite is sometimes called red oxide of copper [2], and Gage notes that the Italian word *minio* referred to red oxide of lead [3]. The phrase on its own is a family name, not a single pigment [1][2][3]."
+  },
+  {
+   "id": "earths",
+   "title": "Earth reds",
+   "body": "The Pigment Compendium quotes a 1626 patent covering the burnt ochre dug in the Forest of Dean, called Spanish brown [4]. In New Mexico, the santeros collected a red oxide known as almagre from a cave above Questa, and the author who examined the mine says it was worked in prehistoric times [4]. Related names include [[indian-red]], [[english-red]] and [[tuscan-red]]."
+  },
+  {
+   "id": "myth",
+   "title": "A word of caution",
+   "body": "Because the label spans iron, copper and lead, never assume a red oxide is iron. Red oxide of lead is a different material from the iron earths: it is minium [3]. Red oxide of copper is cuprite, a mineral that also colored ancient glass [2]. When a recipe or label says red oxide, check the date and the metal before comparing it with a swatch [1][2][3]. The color name here follows the iron sense, since iron oxide is what the swatch resembles [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our name graph records this swatch from Maerz and Paul in 1930 [5]. In our archive of 23,781 paintings it appears in 1,187 paintings, 4.99 per cent, or 996 by the within-painting measure [6]. It is more common than 90 per cent of the named colors and peaks in the 1400s, in 78 of 945 paintings, 8.3 per cent, or 2.2 times the expected rate [6]. In 83 per cent of the 996 paintings it plays an accent [6]. These are photographs of aged, varnished paintings, so a match is not a pigment test [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the chemical class of red oxides",
+   "first_recorded": "Maerz and Paul 1930 in our name graph",
+   "source": "Paterson, A Dictionary of Colour; Pigment Compendium"
+  },
+  "aka": [
+   "iron oxide red"
+  ],
+  "siblings": [
+   "venetian-red",
+   "indian-red",
+   "english-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "vermilion",
+    "gloss": "a mercury sulfide, not an oxide"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1187,
+  "rank": "more common than 90% of named colors",
+  "peak": "1400s: 78 of 945 paintings, 2.2x expected",
+  "source": "Maerz and Paul 1930"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"jeweller's rouge\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"cuprite\", p. 149",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 81",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"alkanet\" (Harley 1982, on the 1626 patent; Carrillo 1998 on Questa)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub name graph, source dates",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is jeweller's rouge?",
+   "choices": [
+    "A powdered red oxide used to polish gold and silver",
+    "A red lake from madder",
+    "A mercury red"
+   ],
+   "answer": "A powdered red oxide used to polish gold and silver",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: red oxide always means iron oxide in old texts.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Red oxide of copper is cuprite; red oxide of lead is minium: the name hides several different materials."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed 'oldest and most widespread' superlative",
+   "Corrected Spanish brown/Forest of Dean claim to the 1626 patent",
+   "Removed unsupported ancient-and-modern palette claim"
+  ]
+ },
+ "slug": "red-oxide",
+ "names": [
+  "Red Oxide"
+ ],
+ "status": "checked",
+ "words": 326
+}

@@ -1,0 +1,159 @@
+{
+ "slug": "eucalyptus",
+ "name": "Eucalyptus",
+ "hex": "#A4A07B",
+ "names": [
+  "Eucalyptus"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Eucalyptus is a muted grey-green, named in a 1930 color dictionary for the tree.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1905 fashion name",
+   "body": "The swatch is #A4A07B from Maerz and Paul's *Dictionary of Color* of 1930, which dates the name to 1905, plate 20 C 1 [1]. It is a greyed green, with chroma near 20, nearest to [[sage]] at 8.6 units and to [[light-grape-green]] in the library [1]. Neighbors on a calmer palette are [[sage-green]], [[olive-green]] and [[khaki]] [1].\n\nSt Clair records that after 1880 the fashionable partners for heliotrope included canary yellow, eucalyptus green, art bronze and peacock blue [2]. So \"eucalyptus green\" was already a fashionable shade a generation before Maerz and Paul dated it [1][2]."
+  },
+  {
+   "id": "tree",
+   "title": "The tree",
+   "body": "Authors who mention eucalyptus mostly use it for atmosphere. Finlay notes the smell of the trees in Chile and the pastel green of a clump on pink Australian ground [3][4]. The Pigment Compendium lists two Australian species, *Eucalyptus resinifera* and *E. terminalis*, whose ant-gall residue is red and was traded under the same name as dragon's blood [5]. The artist Concetta Antico, a tetrachromat, painted *Rainbow Eucalyptus* in 2016 [6].\n\nApart from Finlay's passing 'pastel green' clump, the books say nothing about the color of the leaf, so the link between the swatch and the tree is mostly by name [1][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This muted tone is very common in painting. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 1,950 works, about 8 per cent [7]. The peak decade is the 1770s, and Impressionism has 21 hits and Post-Impressionism seven, rates only about 1.8 to 1.9 times the archive's [7].\n\nBy painter the pattern is sharper: nine of 16 works by Lancret, seven of 13 by Childe Hassam and six of 12 by Willem Roelofs [7]. The strongest single example is *Weizheng Riding on an Ox* by Yamaguchi Sekkei, which has the tone across 87 per cent of the canvas [7]. These are photographs of aged, varnished paintings, so a match shows a screen color [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the eucalyptus tree",
+   "first_recorded": "1905 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul, plate 20 C 1, via ColorHub library"
+  },
+  "aka": [
+   "eucalyptus green"
+  ],
+  "siblings": [
+   "sage-green",
+   "olive-green",
+   "khaki"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#A4A07B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1950,
+  "top_paintings": [],
+  "ngram": {
+   "peak": null,
+   "first_5pct": null
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz & Paul 1930, plate 20 C 1), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Heliotrope\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 2",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Jewels (the pink desert chapter)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 156 (\"Dragon's blood\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Westland and Cheung, Principles of Colour, caption to Rainbow Eucalyptus",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who dated the color name eucalyptus to 1905?",
+   "choices": [
+    "Maerz and Paul",
+    "Ridgway",
+    "Newton",
+    "Perkin"
+   ],
+   "answer": "Maerz and Paul",
+   "kind": "pick"
+  },
+  {
+   "q": "How common is this tone in our painting archive?",
+   "choices": [
+    "About 1 in 12 paintings",
+    "Almost never",
+    "Exactly one painting",
+    "Only in Impressionism"
+   ],
+   "answer": "About 1 in 12 paintings",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books describe the actual leaf color of the tree.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Eucalyptus green was already fashionable in the 1880s, partnered with heliotrope and peacock blue.",
+  "This muted grey-green fills a twentieth of the canvas in about 1 painting in 12."
+ ],
+ "words": 335,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Dated heliotrope pairings 'after 1880' (St Clair: 1880 then 'later')",
+   "Corrected negative claim: Finlay does give a pastel green for a clump"
+  ]
+ }
+}

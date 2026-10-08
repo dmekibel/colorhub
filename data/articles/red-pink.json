@@ -1,0 +1,133 @@
+{
+ "slug": "red-pink",
+ "name": "Red pink",
+ "hex": "#FA2A55",
+ "names": [
+  "Red pink"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Red pink is a vivid, slightly bluish pink-red, a name that comes from a color survey rather than from any tradition.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A survey name",
+   "body": "The name appears in the xkcd color survey and in no other source in our library [1]. The books do not discuss it, so its coiner is undocumented. Our data pairs it with a near-duplicate, \"reddish pink\", about 1.1 units away, and with [[pink-red]] as its closest named neighbor; its closest match among the established names is [[cerise]], 7.7 units off [1].\n\nIt sits at the border between two words with a long history. In Pliny's day, Pastoureau notes, Romans already told some fifteen reds apart in porphyry and purple cloth, while naming only two or three greens [2]. Pink, later, became one of the shades on the margins of red, and from the later Middle Ages fashion favored darker reds and shades bordering on red, such as pink and purple [3]."
+  },
+  {
+   "id": "seeing",
+   "title": "Why pink is a red",
+   "body": "Eckstut and Eckstut explain pink in light terms: most of the light reaching the eye is red, and the rest is white [4]. Red pink is the saturated end of that, close to [[red]] and far from [[pink]] in the pale sense."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a screen color at #FA2A55 with a lightness of about 55 and a chroma of 81 [1]. We did not compute a painting count for it; the color is more saturated than almost any varnished museum paint, so a close match is rare."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a survey name from xkcd",
+   "first_recorded": "undocumented",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "Reddish pink"
+  ],
+  "siblings": [
+   "pink-red",
+   "cerise"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub library; archive count not computed",
+  "measured": {
+   "lch": [
+    55,
+    81,
+    21
+   ],
+   "nearest": [
+    [
+     "Cerise",
+     7.7
+    ],
+    [
+     "Pink Red",
+     null
+    ]
+   ]
+  },
+  "alts": [
+   "Reddish Pink"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): xkcd survey; near-duplicate Reddish Pink dE 1.1; nearest established name Cerise 7.7",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 33 (\"On the Margins of Red: Pink\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 24",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eckstut and Eckstut, What Is Color?, ch. 35",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Red pink come from in our data?",
+   "choices": [
+    "The xkcd color survey",
+    "Roman dye makers",
+    "A paint brand",
+    "Pantone"
+   ],
+   "answer": "The xkcd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books document who coined Red pink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Red pink is a survey name with no traced inventor."
+ ],
+ "words": 237,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All claims verified against Pastoureau Red and Eckstut; no change."
+  ]
+ }
+}

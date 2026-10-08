@@ -1,0 +1,139 @@
+{
+ "slug": "thistle",
+ "name": "Thistle",
+ "hex": "#D8BFD8",
+ "names": [
+  "Thistle"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Thistle is a very pale, soft purple, one of the 140 named colors of the X11 set; the books say little about it, and what they say is mostly about the plant.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plant name, a screen color",
+   "body": "Paterson defines thistle as a purple colour, and gives the X11 Thistle as a very pale purple with the hex code #D8BFD8, a member of the 140-name X11 set [1]. In the dictionary's index it sits among the purples and pinks beside [[lilac]]-like names [1]. Our name data traces the swatch to the 1930 Maerz and Paul list and the 1955 ISCC-NBS system [2]. No book in our set explains why a thistle was chosen; the name simply points to the purple bloom of the plant, and the swatch is a pale tint of it."
+  },
+  {
+   "id": "plant",
+   "title": "The plant in the dye vat",
+   "body": "Thistles turn up in the dyer's story more than in the painter's. Safflower, a hardy thorned plant resembling a thistle, gave dyers reds and yellows that leaned toward orange or pink, and the pigment literature lists thistle saffron among the alternate names of the dye plant, a sign of historical confusion with true saffron [3][4]. For cheap local dyeing, Pastoureau notes, the leaves of thistle or parsley were among the ingredients used for yellows [3]. Balfour-Paul adds that woad farmers sometimes bulked their woad balls with thistles and other weeds [5].\n\nNone of these makes a purple. The color named thistle comes from the flower, not from the dye vat."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Thistle is rare in paintings: it appears in 0.03% of the 23,781 paintings in our archive, 8 paintings, as photographed, rarer than 73% of the named colors [6]. The earliest match is 1641, in a work by Alonso Cano, 289 years before the name's earliest record in our sources, so it is a look-alike hue and not proof of a pigment [6]. In printed English the adjective *thistle* peaks in the 1870s, and rose fastest in the 1820s [6]. For neighbors in the same quiet family, see [[mauve]], [[orchid]] and [[wisteria]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the thistle flower",
+   "first_recorded": "1930 (Maerz and Paul) in our name data",
+   "source": "Paterson, Dictionary of Colour; ColorHub name data"
+  },
+  "aka": [
+   "X11 Thistle"
+  ],
+  "siblings": [
+   "lilac",
+   "wisteria"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D8BFD8",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 8,
+  "rank_pct": 27,
+  "ngram": {
+   "peak": 1870,
+   "rise": 1820
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entry \"Thistle\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub name data (Maerz and Paul 1930; ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entry \"safflower\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, on adulteration of woad and indigo",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub painting archive, field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the hex code of the X11 color Thistle?",
+   "choices": [
+    "#D8BFD8",
+    "#8B0000",
+    "#40E0D0",
+    "#F5DEB3"
+   ],
+   "answer": "#D8BFD8",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: dyers used a thistle-like plant, safflower, for reds and yellows.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Thistle is one of the 140 X11 colors, a very pale purple.",
+  "Safflower, a thistle-like plant, gave dyers reds and yellows."
+ ],
+ "words": 321,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No fixes needed; all claims trace to Paterson, Pastoureau Yellow, Pigment Compendium, Balfour-Paul."
+  ]
+ }
+}

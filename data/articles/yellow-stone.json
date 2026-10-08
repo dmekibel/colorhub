@@ -1,0 +1,132 @@
+{
+ "slug": "yellow-stone",
+ "name": "Yellow Stone",
+ "hex": "#C8C281",
+ "names": [
+  "Yellow Stone"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Yellow Stone is a muted greenish yellow-khaki recorded by Maerz and Paul in 1930, which put its first use around 1874.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from the dictionary of color",
+   "body": "Our library takes this color from the Maerz and Paul *Dictionary of Color* of 1930, plate 12, position G2, with a first recorded use of about 1874 and a field of fashion and textiles [1]. Its neighbor on the same plate is Hay, first recorded in 1902 [1]. Why it was called a stone is not documented in our sources. The swatch is closest to [[khaki]], and near [[sand]] and [[olive-green]] [1].\n\nThe library files it in the greens, which is how the screen color reads: a pale, dusty yellow-green, not a bright yellow [1]."
+  },
+  {
+   "id": "stones",
+   "title": "Which yellow stone?",
+   "body": "Books mention yellow stones in several senses. Finlay notes that the island of Zabargad, once called Topaz Island, was never the home of the yellow stones we call topaz but of a green volcanic crystal known as the evening emerald, now usually called peridot [2]. Jarman lists a yellow stone among yellow things in a poetic catalogue, with butterflies and daffodils [3]. None of these ties the color name to any one mineral."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This swatch covers at least five per cent of the canvas, within six color-distance units, in 512 of the 23,781 paintings in our archive, one of the more common matches [4]. It is most over-represented in the 1800s and 1900s, at about 1.3 and 1.4 times its overall rate, and under-represented before 1700 [4]. The earliest strong match is an 1785 Japanese print by Kitao Masanobu, *Two Beauties on a Veranda*, and Aivazovsky's *Seascape* (1885) is among the top matches [4]. These are photographs of aged, varnished works, and the paper of old prints yellows, so the color is as photographed [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "c. 1874 (Maerz and Paul 1930)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "khaki",
+   "sand"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+  "n_present": 512,
+  "match": {
+   "hex": "#C8C281",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    78,
+    34,
+    103
+   ],
+   "nearest": [
+    [
+     "Khaki",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930, plate 12 G2; CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 14",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 52",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the green crystal from Topaz Island now usually called?",
+   "choices": [
+    "Peridot",
+    "Jade",
+    "Beryl",
+    "Malachite"
+   ],
+   "answer": "Peridot",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color is nearest to this swatch?",
+   "choices": [
+    "Khaki",
+    "Crimson",
+    "Cobalt",
+    "Plum"
+   ],
+   "answer": "Khaki",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Topaz Island never produced topaz: its stones were green peridot, once called the evening emerald."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No factual fixes needed; claims verified against cited books and library."
+  ]
+ },
+ "words": 285,
+ "status": "checked"
+}

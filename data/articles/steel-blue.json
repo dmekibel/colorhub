@@ -1,0 +1,163 @@
+{
+ "slug": "steel-blue",
+ "name": "Steel Blue",
+ "hex": "#4682B4",
+ "names": [
+  "Steel blue",
+  "Steel Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Steel blue is a mid, slightly greyed blue named for the cold sheen of the metal; on screens it is a CSS color, and in the paint trade it was a term for certain paler grades of Prussian blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two meanings",
+   "body": "As a pigment term, steel blue was used for certain paler grades of [[prussian-blue]] [1]. Zerr and Rübencamp's early twentieth-century handbook suggests a trade split: iron blues with a metallic cast on the surface are bronze blue, and those without it are steel blue [2]. That cast, called bronzing, shows on particularly pure and densely applied Prussian blue [2].\n\nSteel blue also appears in long lists of Prussian blue synonyms beside Paris blue, Milori blue and Chinese blue [1][3]. Paterson's dictionary describes the color as a greenish or greyish blue like steel, and notes it as another name for Prussian blue [4]."
+  },
+  {
+   "id": "standard",
+   "title": "The screen color",
+   "body": "The swatch here is the web color `steelblue`, one of the 140 colors in the X11 set [4]. It is lighter and greyer than classic Prussian blue, which is a deep near-black blue [5]. Our library files it as an everyday color, and also lists it in ISCC-NBS block 172 and in Maerz & Paul, which dates the name to 1817 [5]. RAL 5011, a different industrial standard with the same name, is a far darker blue, so a swatch under this name can mean very different things [5].\n\nNeighbors in the same family are [[cadet-blue]], [[sky-blue]] and [[cobalt-blue]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive, 41 of 23,781 paintings hold this blue [6]. John Singer Sargent shows it in 3 of his 287 works, about six times the archive rate [6]. Printed use of the words peaks around 1903 in Google Books [7]. These are photographs of aged, varnished paintings, so a match is approximate and says nothing about which pigment was used [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the blue sheen of steel",
+   "first_recorded": "1817 (Maerz & Paul)",
+   "source": "Maerz & Paul 1930; Paterson, Dictionary of Colour"
+  },
+  "aka": [
+   "Prussian blue (trade synonym)"
+  ],
+  "siblings": [
+   "cadet-blue",
+   "sky-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "prussian-blue",
+    "gloss": "steel blue was a trade name for its paler grades"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+  "n_present": 41,
+  "painters": [
+   {
+    "key": "John Singer Sargent",
+    "hits": 3,
+    "n": 287
+   }
+  ],
+  "ngram": {
+   "peak": 1903,
+   "source": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak"
+  },
+  "measured": {
+   "lch": [
+    52,
+    32,
+    263
+   ],
+   "alts": {
+    "ral": "#232C3F",
+    "xkcd": "#5A7D9A"
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 365 (\"Steel blue\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 75 (\"Bronze blue\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 322 (\"Prussian blue\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 322, 377",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json); ISCC-NBS 1955, Maerz & Paul 1930, RAL",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the paint trade, what was steel blue?",
+   "choices": [
+    "A paler grade of Prussian blue",
+    "A mix of ultramarine and steel dust",
+    "A blue from steel mills' smoke",
+    "Another name for indigo"
+   ],
+   "answer": "A paler grade of Prussian blue",
+   "kind": "pick"
+  },
+  {
+   "q": "RAL 5011, also called steel blue, is the same pale blue as the web color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Steel blue was once a term for certain paler grades of Prussian blue."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede and opener hedged to 'certain paler grades' as the source says"
+  ]
+ },
+ "words": 293
+}

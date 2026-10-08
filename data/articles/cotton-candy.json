@@ -1,0 +1,113 @@
+{
+ "slug": "cotton-candy",
+ "name": "Cotton Candy",
+ "hex": "#FFBCD9",
+ "names": [
+  "Cotton Candy"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Cotton candy is the pale sugar pink of the fairground sweet, and a crayon name that has become a color word.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pink named for a sweet",
+   "body": "St. Clair's glossary of color names defines sugar as a sweetish pink, the color of cotton candy [1]. The name works as a plain comparison: the color is what the confection looks like. Our library also lists it as a Crayola color, though the year is not in our data [2].\n\nOn screen it is a light, bright pink close to [[baby-pink]], with [[carnation]] as a deeper neighbor. Compared with plain [[pink]], it leans slightly toward violet, the direction of [[mauve]]. The word itself has a modern curve: in printed English it peaks in the 2010s and rose fastest in the 2000s, though the phrase also names the sweet, so the curve is not the color alone [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only one painting in our archive of 23,781 holds this color, as photographed [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the spun-sugar fairground sweet",
+   "first_recorded": "Crayola color name; year undocumented in our data",
+   "source": "ColorHub library; St. Clair, The Secret Lives of Color"
+  },
+  "aka": [
+   "sugar pink"
+  ],
+  "siblings": [
+   "baby-pink",
+   "carnation"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FFBCD9",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "ngram": {
+   "peak": "2010s",
+   "rose_fastest": "2000s"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St. Clair, The Secret Lives of Color, glossary entry \"Sugar\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Crayola name list",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for cotton-candy (L6 graph); Google Books Ngram, all senses",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does St. Clair compare sugar pink to?",
+   "choices": [
+    "Cotton candy",
+    "Rose petals",
+    "Seashells",
+    "Coral"
+   ],
+   "answer": "Cotton candy",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is the word's printed history not the color alone?",
+   "choices": [
+    "It also names the sweet",
+    "It is a Latin word",
+    "It is a dye",
+    "It is a surname"
+   ],
+   "answer": "It also names the sweet",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Cotton candy is almost absent from old paintings: one in our archive of 23,781."
+ ],
+ "words": 151,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported generalization about old paintings from a single-painting count."
+  ]
+ }
+}

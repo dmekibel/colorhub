@@ -1,0 +1,206 @@
+{
+ "slug": "graphite",
+ "name": "Graphite",
+ "hex": "#37333A",
+ "names": [
+  "Graphite"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Graphite is the dark metallic grey of the soft carbon mineral inside a pencil, long mistaken for lead and named for writing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineral that writes",
+   "body": "*Graphite* is a dark grey with a faint metallic shine, the color of the mineral that fills a pencil. Paterson's dictionary defines it as a dark metallic grey, made from crystallised carbon, and records the older name \"black lead\" [1]. The word comes from the Greek for *to write* [2][3].\n\nThe name is the youngest part of the story. Coles reports that until 1789 the mineral was called blacklead or plumbago, after the Latin for lead, because it was long confused with that metal [2]. Finlay gives the same period slightly differently, saying it was renamed at the end of the eighteenth century for its use in making marks on paper [4]. The \"lead\" in a lead pencil has never been lead [2].\n\nThe swatch, #37333A, is a very dark grey with a trace of purple [5]. The ISCC-NBS names of 1955 file it as purplish black, and our earliest record is the Maerz and Paul dictionary of 1930 [5]. It is darker and cooler than the sheen of a real pencil line, which catches light and turns silvery."
+  },
+  {
+   "id": "material",
+   "title": "What graphite is",
+   "body": "Graphite is a crystalline form of carbon, as [[black]] pigments from soot and charcoal also are, but its layers slide over each other, which is why it is soft and leaves a mark [2][3]. The Pigment Compendium calls it soft, grey and metallic, occurring as flexible flakes or columnar masses [3]. Finlay adds the family connection: diamond is carbon too, and the fact that diamond and coal share an element had to be proved in the laboratory [6].\n\nNatural graphite occurs in localities such as Borrowdale in England's Lake District, the Tyrol, Alsace and Sri Lanka [3]. Synthetic graphite has been available since about 1897, and the Compendium traces a commercial form, sold as Acheson graphite, to the electrochemical industry at Niagara Falls [3]. Toch wrote in 1916 that graphite was by then widely used as a pigment, mostly in its mineral form [3].\n\nIt overlaps with other dark pigments. Black chalk, the Compendium says, is made of graphite or a defective graphite mixed with quartz and other minerals, and its composition varies from deposit to deposit [3]. Colors named [[charcoal]], [[gunmetal]] and [[payne-s-grey]] occupy the same dark-grey neighborhood, but they are different materials: wood char, metal and a mixed paint."
+  },
+  {
+   "id": "history",
+   "title": "Borrowdale and the pencil",
+   "body": "Graphite was used for decoration long before pencils. The Compendium cites a study of pottery from Xishan in China, dated to roughly 4300-2800 BC, that found it in the decoration [3]. Books disagree about its drawing use in Europe [2][7]. Coles says that until the mid-sixteenth century graphite was seldom used for drawing or writing because it was so scarce [2]. Yet a caption in Pastoureau's *Green* describes a drawing by Albrecht Dürer of 1508 as chalk and graphite on green paper [7]. A museum caption may use the word loosely, and the two sources cannot both be right about practice.\n\nThe decisive deposit was at Seathwaite in Borrowdale [4]. Finlay writes that from the middle of the sixteenth century \"lead\" drawing materials were made of this mineral, and that its first big money was in ammunition: a thin coat of graphite on the inside of a mould made cannonballs come out cleanly [4]. A legend says the deposit was uncovered in 1565 when a traveler noticed what looked like silver in the roots of a storm-felled tree [4]. Finlay reports that Elizabeth I took an interest and a Company of Mines Royal was set up at Keswick, using German miners accustomed to Bavarian graphite workings [4].\n\nFinlay is skeptical of another Borrowdale tale, that graphite was first used to mark sheep [4]. Local Herdwick sheep are naturally grey, and daubing them with a heavy mineral would have been harder than using a dye [4]. He calls it likely a joke told to credulous visitors. The mine has been worked out for a century or more, leaving a hole in the ground and a pencil museum in Keswick [4]."
+  },
+  {
+   "id": "seeing",
+   "title": "Seeing it",
+   "body": "The color of graphite is a lesson in how a grey can shine. Finlay, describing a medieval hair shirt, calls its color a soft, slippery, silvery grey, like graphite, and says it shone in the flickering light [8]. That is the hard part to put on a swatch: graphite is not one grey but a grey that moves between dark and silver as you tilt the surface.\n\nNext time you shade a drawing, look at the strokes from an angle. A heavy graphite line turns almost metallic when it catches a window, while from straight on it reads as plain dark grey. A graphite study, like the drapery studies Gurney shows on board, can carry a whole value structure with no hue at all [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Graphite is a fairly common named color in our painting archive: it appears in 569 of 23,781 paintings, 2.39 per cent, more common than 80 per cent of the named colors, and the within-painting lens finds it in 377 [10]. Inside a painting it most often plays a shadow, in 39 per cent of those 377 [10].\n\nIt peaks in the 1900s: it is found in 65 of the 1,674 paintings we have from then, 3.9 per cent, or 1.9 times the same museums' baseline [10]. It shares canvases with [[zinc-grey]] and Benzo Brown more than chance, with lifts of 4.0 and 2.5 [10].\n\nThe first dated match is a painting from 1099, but the early centuries are thin and the name's earliest record in our sources is 1930, so this is a look-alike dark grey in an aged photograph, not proof of the mineral [10]. In printed English, the color word peaks in the 1960s and rose fastest in the 1950s (Google Books, adjective use only) [10]. The photographs are of varnished, darkened paintings, and a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Greek word for 'to write', via the mineral used in pencils",
+   "first_recorded": "Maerz and Paul 1930 in our library; the mineral was renamed from plumbago in the late 1700s",
+   "source": "Coles, Chromatopia; Finlay, Color; ColorHub library"
+  },
+  "aka": [
+   "black lead",
+   "plumbago",
+   "graphite grey"
+  ],
+  "siblings": [
+   "charcoal",
+   "gunmetal",
+   "payne-s-grey"
+  ],
+  "parent": "black",
+  "children": [
+   "charcoal-grey"
+  ],
+  "disambiguation": [
+   {
+    "slug": "charcoal",
+    "gloss": "a dark grey from wood char, a different material"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 569,
+  "pct": 2.39,
+  "n_within": 377,
+  "commoner_than_pct": 80,
+  "peak_century": 1900,
+  "peak_pct": 3.9,
+  "role": "shadow",
+  "measured": {
+   "hex": "#37333A",
+   "iscc": "purplish black",
+   "iscc_de": 7.7,
+   "contrast_white": 12.37
+  },
+  "ngram": {
+   "peak": 1960,
+   "rise": 1950
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"graphite\", \"black lead\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Graphite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Graphite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955 and Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 31 (plate caption)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Fabric, on a medieval hair shirt",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, plate captions",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed) and Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was graphite called until 1789?",
+   "choices": [
+    "Blacklead or plumbago",
+    "Lampblack",
+    "Ivory black",
+    "Mars black"
+   ],
+   "answer": "Blacklead or plumbago",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a lead pencil contains lead.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What was the first big commercial use of Borrowdale graphite in the 1500s?",
+   "choices": [
+    "Lining cannonball moulds",
+    "Writing ink",
+    "Pottery paint",
+    "Dyeing wool"
+   ],
+   "answer": "Lining cannonball moulds",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The 'lead' in a pencil is graphite, and the Borrowdale mine's first big customer was the artillery.",
+  "Tilt a heavy pencil line toward a window and it turns silver."
+ ],
+ "checked": {
+  "by": "batch-21 writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Books disagree on early graphite drawing: Coles (scarce before mid-1500s) vs Pastoureau caption (Durer 1508).",
+   "1565 tree-root story and sheep-marking story reported as legend, per Finlay.",
+   "Thin pure-color coverage; honest medium article."
+  ]
+ },
+ "status": "checked",
+ "words": 967
+}

@@ -1,0 +1,103 @@
+{
+ "slug": "brownish-olive",
+ "name": "Brownish Olive",
+ "hex": "#685C40",
+ "names": [
+  "Brownish Olive"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Brownish Olive is a dull, dark olive that leans to brown, among the most common muted colors in old paintings.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name is descriptive, from Ridgway's 1912 atlas and the later ISCC-NBS system, block 94, and it sits near [[umber]] [1]. Nothing in the books points to a single pigment behind it.\n\nPaterson does note that litharge, a by-product of melting white lead also called massicot, was described as a yellow or brownish olive color [3]. That is a dictionary gloss on one material, and it does not make the swatch a litharge color [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Brownish Olive appears in 22.43% of the 23,781 paintings in our archive, as photographed [2]. It is more common than 99% of the named colors, and it peaks in the 1100s at 24.0% of that century's paintings [2]. Inside a painting it most often plays a hidden color, in 32% of cases [2]. Its most devoted painter is Jean-Charles Cazin, in 8 of 16 works here [2]. Aged varnish pushes many greens and yellows toward this swatch, so treat it as how paintings photograph [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive; origin of the name undocumented",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "olive",
+   "umber",
+   "ochre",
+   "sienna"
+  ],
+  "parent": "olive",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5333,
+  "pct_paintings": 22.43,
+  "peak_century": 1100,
+  "role": "hidden color 32%",
+  "library_first": 1912
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"litharge\" (p. 246)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which material does Paterson describe as a yellow or brownish olive color?",
+   "choices": [
+    "Litharge",
+    "Cochineal",
+    "Lapis lazuli"
+   ],
+   "answer": "Litharge",
+   "kind": "pick"
+  },
+  {
+   "q": "Brownish Olive is among the most common named colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Brownish Olive turns up in more than one painting in five in our archive, as photographed."
+ ],
+ "words": 175,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

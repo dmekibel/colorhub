@@ -1,0 +1,143 @@
+{
+ "slug": "nut-brown",
+ "name": "Nut Brown",
+ "hex": "#5A3A29",
+ "names": [
+  "Nut Brown"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Nut brown is the brown of nuts, in practice a warm reddish brown; it is among the most common browns in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A hazelnut's brown",
+   "body": "The Dictionary of Colour says nut brown is often the reddish brown of the hazelnut but, strictly, a general brown used for the many shades of nuts [1]. It is also one of the names in a brown series in the introduction to Baty's study of naturalists' color lists, between tombac brown and liver brown [2]. The swatch here is a dark, warm brown. Close neighbors are [[chestnut]], [[cocoa]] and [[hazel]], and the lighter [[russet]] [6].\n\nAnother nut gave brown its darker cousin. The English word maroon was originally nut brown, from the French *marron*, chestnut, and now means a brownish dark red [3]. See [[chestnut]]."
+  },
+  {
+   "id": "dye",
+   "title": "Kola nut and indigo",
+   "body": "Nuts are also real dye sources. A classic West African color combination pairs indigo with kola nut brown, and Balfour-Paul writes that it is sadly dying out [4]. Compare [[sepia]] and [[umber]], browns that come from other sources."
+  },
+  {
+   "id": "memory",
+   "title": "A color of weather and wood",
+   "body": "The artist Derek Jarman remembers old women with weather-beaten nut-brown faces, in a passage about the nostalgia of brown [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is one of the most common colors in our archive: it appears in 3,889 of 23,781 paintings, 16.35 percent, more common than 96 percent of named colors, as photographed [6]. Inside a painting it most often plays a mid-tone, in 32 percent of the 2,249 paintings where it is measured [6]. It peaks in the 1500s, in 301 of 2,231 paintings (13.5 percent), about 1.5 times the expected rate [6]. The earliest matches are medieval, but the archive's early centuries are thin, so this is a floor, not a first [6].\n\nThe most devoted painter is Maarten van Heemskerck, who uses it in 7 of his 12 works here, about 4.5 times the baseline [6]. It is most over-represented in Tibetan paintings, 3.4 times expected (10 of 47) [6]. It shares canvases with [[cocoa]] more than chance (lift 3.0) [6]. In printed English the word peaks in the 1800s [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of nuts, especially the hazelnut",
+   "first_recorded": "in naturalists' color lists reproduced by Baty; RAL 1927",
+   "source": "Paterson, A Dictionary of Colour; Baty, Nature's Palette"
+  },
+  "aka": [
+   "hazel brown"
+  ],
+  "siblings": [
+   "chestnut",
+   "hazel",
+   "cocoa"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 3889,
+  "pct": 16.35,
+  "rarer_than_pct": 4,
+  "peak_century": 1500,
+  "lift": 1.5,
+  "role": "mid",
+  "top_painter": "Maarten van Heemskerck",
+  "top_country": "Tibet"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"nut-brown\", p. 272",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, introduction, p. 32",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 125 (glossary entry \"Maroon\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 178",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes); Google Books Ngram; ColorHub color library, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to the Dictionary of Colour, nut brown is often the color of which nut?",
+   "choices": [
+    "Hazelnut",
+    "Walnut",
+    "Coconut",
+    "Peanut"
+   ],
+   "answer": "Hazelnut",
+   "kind": "pick"
+  },
+  {
+   "q": "What is the French source of the word maroon, originally nut brown?",
+   "choices": [
+    "Marron, chestnut",
+    "Moron, mulberry",
+    "Marin, sea",
+    "Marais, marsh"
+   ],
+   "answer": "Marron, chestnut",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Nut brown is found in about one painting in six in our archive, as photographed."
+ ],
+ "words": 335,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'oldest brown names' and 'European paintings'; Baty series 'opens' corrected; dropped overgeneralization from a single Jarman passage"
+  ]
+ }
+}

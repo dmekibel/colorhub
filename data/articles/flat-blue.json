@@ -1,0 +1,123 @@
+{
+ "slug": "flat-blue",
+ "name": "Flat Blue",
+ "hex": "#3C73A8",
+ "names": [
+  "Flat Blue"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Flat Blue is an old dyer's grade of indigo, a middle-light blue on a ladder that ran from milk blue to navy, and also a Chinese name for the best azurite.",
+ "sections": [
+  {
+   "id": "dyers",
+   "title": "A rung on the indigo ladder",
+   "body": "Finlay reports that eighteenth-century English dyers sorted indigo into many official shades, from light to dark, with flat blue after milk blue, pearl blue and pale blue, and before middling blue, sky blue, queen's blue and others, ending in navy blue [1]. Counting from the light end, flat blue was fourth, between pale and middling [1]. Balfour-Paul gives a similar ladder of thirteen, adding a turkish-blue after queen's blue [2]. Books disagree slightly on the list, though not on flat blue's place in it [1][2]."
+  },
+  {
+   "id": "azurite",
+   "title": "Flat blue in China",
+   "body": "The Pigment Compendium, citing Yu (1955), records \"Flat blue\" or \"Pure blue\" as the highest quality of Chinese azurite, ahead of layered blue, light blue and granulated blue [3]. It was also sold under the names Yunnan blue and Burmese blue, according to where it was dug [3]. This is a separate use of the words, unrelated to the dyers' scale [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #3C73A8 measures lightness 47.0, chroma 33.8 and hue angle 268 degrees, a mid-dark [[blue]] [4]. Its neighbors in our list include [[mazarine-blue]], [[deep-blue]] and [[sky-blue]] [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dyer's grade: a flat, unbright indigo blue; also a Chinese azurite grade",
+   "first_recorded": "18th-century English dyers' lists",
+   "source": "Finlay, Color; Balfour-Paul, Indigo"
+  },
+  "aka": [
+   "Pure blue (Chinese azurite grade)"
+  ],
+  "siblings": [
+   "mazarine-blue",
+   "deep-blue",
+   "sky-blue",
+   "indigo"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name list and color math",
+  "hex": "#3C73A8",
+  "measured": {
+   "lch": [
+    47.0,
+    33.8,
+    268
+   ]
+  },
+  "source": "Paterson, Dictionary of Colour"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 188",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"azurite\", p. 46",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color math (CIE LCH from the sRGB hex)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the eighteenth-century indigo ladder, flat blue came between:",
+   "choices": [
+    "Pale blue and middling blue",
+    "Milk blue and pearl blue",
+    "Deep blue and navy blue"
+   ],
+   "answer": "Pale blue and middling blue",
+   "kind": "pick"
+  },
+  {
+   "q": "In Chinese azurite grading, what was flat blue?",
+   "choices": [
+    "The highest quality",
+    "The lowest quality",
+    "A fake"
+   ],
+   "answer": "The highest quality",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dyers once graded indigo from milk blue to navy, and flat blue was one rung."
+ ],
+ "words": 202,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded shared 10-word run with Finlay list."
+  ]
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "slug": "artificial-vermilion",
+ "name": "Artificial Vermilion",
+ "hex": "#986D77",
+ "names": [
+  "Artificial Vermilion"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Artificial vermilion is the same red mercury sulphide as natural cinnabar, made by combining mercury and sulphur, and for centuries it cost far less than the mineral.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "One compound, two sources",
+   "body": "Vermilion is mercuric sulphide, found as the mineral cinnabar and also made by hand [1]. The artist and writer Jarman says the artificial kind is identical to the natural one, though not in price [1]. He gives 250 grams of the artificial at £10 against £250 for the natural [1].\n\nThe pigment compendium notes that English used cinnabar and vermilion interchangeably for either form for a long time [2]. By the seventeenth century vermilion was the more common word, and Browne in 1669 spoke of artificial vermilion and native cinnabar [2]. Only from the second half of the eighteenth century was cinnabar reserved for the unground native mineral [2]."
+  },
+  {
+   "id": "history",
+   "title": "In the workshop and the alchemist's lab",
+   "body": "Gage lists artificial vermilion, made from sulphur and mercury, among the oldest manufactured pigments [3]. He links it to alchemy, where the two ingredients were thought to be the basic components of metals [3]. He also suggests that this helps explain why red and gold were equated in alchemical work [3].\n\nCennini, Gage notes, skipped the complicated recipes, telling the painter to make friends with someone who knew them, perhaps the Florentine Jesuati [3]. Leonardo da Vinci's notebooks show he was curious about how painting materials work [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch on this page, #986D77, is a muted rose-brown and not the bright red most people picture as vermilion [4]. In our archive of 23,781 paintings, 42 contain it, as photographed [4]. It is most often a hidden color inside a painting, and the name is first recorded in the 1930 Maerz and Paul dictionary [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books read",
+   "first_recorded": "1930 (Maerz & Paul, as a color name)",
+   "source": "Jarman, Chroma; Gage, Colour and Culture"
+  },
+  "aka": [
+   "manufactured cinnabar"
+  ],
+  "siblings": [
+   "vermilion",
+   "red-orange",
+   "indian-red",
+   "umber"
+  ],
+  "parent": "vermilion",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "vermilion",
+    "gloss": "the standard bright orange-red; this page's swatch is a muted rose-brown"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 42,
+  "swatch_note": "muted rose-brown, not bright vermilion",
+  "first_name_record": {
+   "maerz-paul": 1930
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Jarman, Chroma, \"Vermilion\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Vermilion\" (quoting Harley 1982)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 135, 143",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Artificial Vermilion (n=42)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does artificial vermilion differ chemically from natural cinnabar?",
+   "choices": [
+    "It does not; it is the same compound",
+    "It is a different, weaker mercury salt",
+    "It contains lead instead of mercury"
+   ],
+   "answer": "It does not; it is the same compound",
+   "kind": "pick"
+  },
+  {
+   "q": "By when did English reserve the word cinnabar for the native mineral?",
+   "choices": [
+    "The later eighteenth century",
+    "The twelfth century",
+    "The twentieth century"
+   ],
+   "answer": "The later eighteenth century",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Artificial and natural vermilion are the same compound; the natural cost far more."
+ ],
+ "words": 268,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Hedged Cennini/Jesuati (Gage says \"may well have meant\"); reworded Leonardo sentence to avoid close paraphrase"
+  ]
+ }
+}

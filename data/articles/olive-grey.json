@@ -1,0 +1,131 @@
+{
+ "slug": "olive-grey",
+ "name": "Olive-Grey",
+ "hex": "#939485",
+ "names": [
+  "Olive-Grey"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Olive-grey is a green shade of grey, also called Scotch grey, and named for the olive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name covers",
+   "body": "Paterson defines *olive grey* as a green shade of grey and says it is also called *Scotch grey* [1]. His entry for *greystone* is the same: an olive grey [1]. The word *olive* itself points to the tree's leaves and fruit [2]. The same dictionary also glosses *nutria* as an olive grey [1]. Several names share one plain description [1]."
+  },
+  {
+   "id": "family",
+   "title": "Between grey and green",
+   "body": "Paterson defines it as a shade of grey, with green as the modifier [1]. It sits near [[olive]], [[olive-green]] and [[sage]] on the green side, and near [[grey]] and [[taupe]] on the neutral side [1][3]. Paterson also defines *grège* as an olive grey [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is #939485, a mid-light neutral with a slight green-yellow cast [3]. Screen colors for historical names are approximate, and the books give no pigment recipe for this name [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is one of the most common colors in the ColorHub archive: 2,130 of 23,781 paintings, about 9%, hold it across at least 5% of the canvas, as photographed [3]. The strongest Western matches are Salomon van Ruysdael and Meindert Hobbema, each with 10 canvases, and the Chinese painter Shen Zhou has 8 [3]. Two-thirds of matches are highlight colors, a third mid-tones [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the olive (leaf and fruit)",
+   "first_recorded": "origin undocumented in the books",
+   "source": "Paterson, A Dictionary of Colour, \"olive grey\""
+  },
+  "aka": [
+   "Scotch grey",
+   "greystone"
+  ],
+  "siblings": [
+   "olive",
+   "olive-green",
+   "grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#939485",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2130,
+  "painters": [
+   "Salomon van Ruysdael",
+   "Meindert Hobbema",
+   "Shen Zhou"
+  ],
+  "role": {
+   "highlight": 0.65,
+   "mid": 0.31,
+   "shadow": 0.04
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"olive grey\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"olive green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive and color library (tools/article_field.py), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which other name does Paterson give for olive grey?",
+   "choices": [
+    "Scotch grey",
+    "Dutch grey",
+    "Paris grey"
+   ],
+   "answer": "Scotch grey",
+   "kind": "pick"
+  },
+  {
+   "q": "Dictionaries file olive grey under which family?",
+   "choices": [
+    "Green",
+    "Grey",
+    "Brown"
+   ],
+   "answer": "Grey",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Olive grey is also called Scotch grey [1]."
+ ],
+ "status": "checked",
+ "words": 206,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim about dictionaries filing it under grey for low saturation",
+   "Removed unsupported British/American olive green usage claim",
+   "Lede: removed dried leaves/weathered stone and British trade claims"
+  ]
+ }
+}

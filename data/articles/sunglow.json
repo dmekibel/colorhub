@@ -1,0 +1,118 @@
+{
+ "slug": "sunglow",
+ "name": "Sunglow",
+ "hex": "#FFCC33",
+ "names": [
+  "Sunglow"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Sunglow is a bright, golden yellow named for the glow of the sun, and a name found in color charts more than in older books.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The pink or yellow glow of the sun",
+   "body": "In Paterson's dictionary, sun-glow names the light of a sunrise or an afterglow, which may be pink or yellowish [1]. He lists it among the yellows near *sunflower* and *sun yellow* [2][3]. The books record no date and no pigment, and nothing ties the name to a specific maker [1].\n\nThe swatch here is a saturated golden yellow; Paterson points his sun yellow entry to [[maize]] [3]. In Paterson's own sense the word could just as well mean a pink dawn, a reminder that a name can outlast its color [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 18 hold this color at 5% of the canvas or more, as photographed [4]. The earliest sample is a portrait of Ivan Vadbolsky from 1823 [4]. The match counts any painting with this color covering at least a twentieth of the canvas, so it shows where the color appears in photographs of paintings, not that the painters ever called it by this name."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the glow of the sun at sunrise or after sunlight",
+   "first_recorded": "undated",
+   "source": "Paterson, A Dictionary of Colour, p. 383"
+  },
+  "aka": [
+   "sun-glow"
+  ],
+  "siblings": [
+   "maize",
+   "goldenrod"
+  ],
+  "parent": "yellow",
+  "children": [
+   "marigold"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (color match within 6 DeltaE2000, at least 5% of the canvas)",
+  "match": {
+   "hex": "#FFCC33",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 18,
+  "first": "1823"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 383",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 485 (color index, yellows)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 512 (color index, yellows)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Paterson defines sun-glow as the glow of the sun when?",
+   "choices": [
+    "At sunrise or after sunlight",
+    "At noon",
+    "In winter",
+    "Under clouds"
+   ],
+   "answer": "At sunrise or after sunlight",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson says sun-glow can be pink or yellowish.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sunglow can mean a pink dawn or a yellow glow in Paterson's dictionary.",
+  "Only 18 paintings in our archive hold this bright yellow, as photographed."
+ ],
+ "words": 179,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed straw neighbor, uncited goldenrod/marigold closeness, duplicate count sentence."
+  ]
+ }
+}

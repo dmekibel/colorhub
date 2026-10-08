@@ -1,0 +1,122 @@
+{
+ "slug": "cacao-brown",
+ "name": "Cacao Brown",
+ "hex": "#AF755E",
+ "names": [
+  "Cacao Brown"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Cacao brown is the reddish brown of the cacao bean, the seed behind cocoa and chocolate.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The bean's brown",
+   "body": "Paterson defines cacao brown by the cacao bean, the seed from which cocoa and chocolate are made [1]. The bean is the whole of the definition, with no pigment or date attached [1]. His indexes place it with the browns, near caramel, chocolate and chestnut [2]. Our related names are [[cocoa]], [[chocolate]] and [[caramel]] [3].\n\nThe swatch, #AF755E, is a lighter, rosier brown than a roasted bean [3]. Its nearest named color is Terracotta [3].\n\nThe dictionary offers no date or origin story for the color name itself [1]. In LCH terms the swatch measures lightness 54, chroma 30 and hue 41 degrees, a moderate chroma for a brown [3]. A screen shows these values only approximately [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brown in 326 of 23,531 paintings, as photographed [4]. Gilbert Stuart has it in 7 and Pierre-Auguste Renoir in 5 [4]. The count is a computed color match, not an identification of any pigment [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the cacao bean",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "cocoa",
+   "chocolate"
+  ],
+  "parent": null,
+  "children": [
+   "golden-brown"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 326,
+  "measured": {
+   "lch": [
+    54,
+    30,
+    41
+   ],
+   "nearest": [
+    [
+     "Terracotta",
+     10.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cacao brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index, browns",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: measured swatch",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,531 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say cacao brown is the color of?",
+   "choices": [
+    "The cacao bean",
+    "A walnut shell",
+    "Roasted coffee",
+    "Tree bark"
+   ],
+   "answer": "The cacao bean",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch is darker than a roasted bean.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cacao brown is the color of the bean behind chocolate."
+ ],
+ "words": 162,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed skin-tone and cacao/cocoa/chocolate distinction (not in cited source)."
+  ]
+ }
+}

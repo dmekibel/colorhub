@@ -1,0 +1,195 @@
+{
+ "slug": "celadon-green",
+ "name": "Celadon Green",
+ "hex": "#8E9775",
+ "names": [
+  "Celadon Green"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Celadon green is a soft gray-green named, by the better-supported account, for a shepherd in a French novel of 1607, and later given to Chinese porcelain whose glaze takes its color from iron.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A shepherd's name",
+   "body": "Honoré d'Urfé's pastoral novel *L'Astrée*, published between 1607 and 1627, follows a lovelorn shepherd called Céladon, and it spawned a stage play and a fashion for dressing in his woodland green [1]. Finlay describes him in a pale green suit with green ribbons [2]. The word was soon used for a similar fog-like green, and later for the green-glazed ware from China [1][2].\n\nBooks give a second origin. Finlay also reports that the name came from Saladin, who was said to have sent forty pieces of green ware to Sultan Nureddin in 1117, but he prefers the novel [2]. Paterson's dictionary, citing Partridge, likewise ties the word to a rustic lover in French pastoral poetry [3]."
+  },
+  {
+   "id": "ware",
+   "title": "Green from iron",
+   "body": "Celadon is the generic name for Chinese gray-green porcelain [2]. Its color comes from a small amount of iron in the glaze: the more iron, the greener, with most celadons carrying about 2 per cent and the court ware called *mi se*, \"secret color\", about 3 per cent [2]. A glaze with more than 6 per cent iron fires black [2]. Finlay's notes add that celadon properly means greens owed to iron oxide in a reduced kiln, not the much brighter greens owed to copper [2].\n\nThe best-known piece of the story is Famen temple, near Xi'an, where the emperor donated a treasure in 874 that included mi se ware [2]. The true color of mi se was only rediscovered by archaeologists in the late 1980s, after contemporaries outside the court had never seen it [1]. Korea's Goryeo potters made their own celadon between 918 and 1392 [1]. Finlay reports that for four hundred years China swapped green celadon with Persia for the cobalt blue called \"Mohammedan blue\" [2].\n\nOne persistent belief is that celadon detects or neutralizes poison, and that is a myth. Turkish rulers collected it for that reason, and Finlay relays a story of the Mughal emperor Jahangir feeding poisoned food to two condemned men, one on celadon and one on other ware; both died [1][2]."
+  },
+  {
+   "id": "werner",
+   "title": "Celadon-green in Werner's nomenclature",
+   "body": "Baty's *Nature's Palette* prints the lists of Abraham Werner's color standard side by side, and several early lists carry Celadon-green among the greens: those of Widenmann (1794), Jameson (1805) and Syme (1814) [4]. A longer list in the same tables spells it Celandine Green, with Celadon added in square brackets [4]. The books do not say why. The color is shown on the underside of coltsfoot leaves (*Tussilago farfara*) and on the wings of a moth, *Glyphodes margaritaria*, from Esper's 1786 work [4]."
+  },
+  {
+   "id": "green-earth",
+   "title": "Two other celadon greens",
+   "body": "As a pigment name, celadon green is a synonym of [[green-earth]] in the Pigment Compendium [5]. That fits the mineral: celadonite is another name for terre verte, a pigment St Clair says usually owes its color to glauconite and celadonite [3][6]. Paterson, however, lists celadon green among the many names of a different pigment: the chromium green made by Pannetier in 1838 and patented by Guignet in 1859, now called viridian [3]. Books disagree, and the word has been used for more than one green."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "This swatch is a grayish yellow green, within 2 units of ISCC-NBS block 122 [7]. Maerz and Paul (1930) give about 1650 as the first record of the name [7]. Finlay calls the ware gray-green and the court ware's color olive, and a screen swatch can only approximate either [2][7]. Its neighbors include [[sage]], [[sage-green]] and [[celadon]], which has its own article [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Colors close to this swatch appear in 636 of our 23,781 paintings, 2.7 per cent, more than for 79 per cent of the named colors [8]. Inside a painting it most often plays a hidden color, in 36 per cent of the 358 paintings where the palette lens finds it [8]. It peaks in the 1900s, in 52 of 1,674 paintings from then, 2 times the museums' baseline [8].\n\nThe painter most devoted to it is Edvard Munch, who has it in 8 of 50 works here, 7.2 times the baseline of the museums those works come from [8]. Norway is the most over-represented country, in 10 of 120 paintings [8]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not a glaze test [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Céladon, a shepherd in d'Urfé's L'Astrée (1607); Saladin theory also reported",
+   "first_recorded": "Maerz & Paul give c. 1650; Werner-tradition lists carry Celadon-green by 1794",
+   "source": "Finlay, Color; St Clair, Secret Lives of Colour; Baty, Nature's Palette"
+  },
+  "aka": [
+   "Celandine Green (Werner tradition, bracketed Celadon)",
+   "celadon (the ware)"
+  ],
+  "siblings": [
+   "celadon",
+   "green-earth",
+   "sage-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "celadon",
+    "gloss": "the paler pastel green of the ware itself, with its own article"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "zh",
+    "name": "mi se (the court ware, 'secret color')"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8E9775"
+  },
+  "n_present": 636,
+  "role": {
+   "hidden": 36
+  },
+  "top_painters": [
+   "Edvard Munch"
+  ],
+  "measured": {
+   "lch": [
+    60.9,
+    19.3,
+    119.1
+   ],
+   "contrast_white": 3.07,
+   "iscc": "grayish yellow green (block 122, 2.0)"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Celadon\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 8 (\"Green\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"celadon\", \"viridian green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette: A Color Reference System from the Natural World, comparison tables and plates (Werner's nomenclature)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Celadon green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Terre verte\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings and data/graph field notes, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What gives celadon ware its green?",
+   "choices": [
+    "A little iron in the glaze",
+    "Copper salts",
+    "Crushed jade"
+   ],
+   "answer": "A little iron in the glaze",
+   "kind": "pick"
+  },
+  {
+   "q": "Celadon was proved to detect poison.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In Werner's tradition, what is celadon-green's later spelling?",
+   "choices": [
+    "Celandine Green",
+    "Celestial Green",
+    "Cedar Green"
+   ],
+   "answer": "Celandine Green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Celadon was named, by the better-supported story, for a shepherd in a 1607 French novel.",
+  "Celadon ware gets its green from iron: about 2 per cent of the glaze, and about 3 per cent for the court ware mi se."
+ ],
+ "words": 706,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

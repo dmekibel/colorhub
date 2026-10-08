@@ -1,0 +1,109 @@
+{
+ "slug": "scarab",
+ "name": "Scarab",
+ "hex": "#3E8B69",
+ "names": [
+  "Scarab"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Scarab is a strong, slightly bluish green listed in the Maerz and Paul dictionary of 1930; the books do not say where the name came from, but the green-stone scarab of ancient Egypt is a natural association.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The beetle and its stone",
+   "body": "The Maerz and Paul dictionary lists Scarab at plate 28, block K 9, and the library dates its first recorded use to 1920 [1]. The ISCC-NBS system files this swatch under \"strong green\", 6.2 CIEDE2000 units away [1]. We do not have a source that says which beetle the compilers had in mind, though the sacred scarab is the obvious candidate.\n\nOne book gives the green stone its context. Birren quotes the Egyptian Book of the Dead, which instructs that a scarab of green stone be placed on the breast of a dead man, to perform \"the opening of the mouth\" and restore his speech [2]. Birren's 1950 account is old opinion rather than modern scholarship, so read it as the story told then [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Scarab green is rare in painting. It appears in 26 of 23,781 paintings in our archive, 0.11 per cent, rarer than 73 per cent of the named colors, and the within-painting lens finds it in only 6 [3]. The earliest dated match is 1783, 147 years before the name's first record in our sources [3]. These are photographs of aged, varnished paintings, so the match is a look-alike hue and not proof of any pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the scarab beetle (not documented in our sources)",
+   "first_recorded": "1920 (Maerz and Paul)",
+   "source": "Maerz & Paul 1930, plate 28 K 9"
+  },
+  "aka": [],
+  "siblings": [
+   "jade-green",
+   "emerald-green",
+   "sea-green",
+   "shamrock-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 26,
+  "pct": 0.11,
+  "first_seen": 1783,
+  "iscc": {
+   "name": "strong green",
+   "de": 6.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances to ISCC-NBS names; Maerz & Paul 1930, plate 28 K 9",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Birren, The Psychology of Color, ch. 2 (\"The Bewildered Philosophers\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); at least 2% of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the Egyptian text Birren quotes, what is the green stone scarab placed on?",
+   "choices": [
+    "The breast of a dead man",
+    "The door of a tomb",
+    "A king's crown",
+    "A boat"
+   ],
+   "answer": "The breast of a dead man",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Scarab is a common painted color in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Egyptian funeral text, as Birren quotes it, called for a scarab of green stone on a dead man's breast.",
+  "Scarab green appears in only 26 of 23,781 museum paintings."
+ ],
+ "words": 234,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede asserted the beetle as the name's source; reworded as an unsourced association."
+  ]
+ }
+}

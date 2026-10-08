@@ -1,0 +1,154 @@
+{
+ "slug": "wine-red",
+ "name": "Wine Red",
+ "hex": "#B11226",
+ "names": [
+  "Wine Red"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Wine Red is a dark, slightly bluish red named for the drink, and it has been in color charts for centuries, from Maerz and Paul to RAL.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from the glass",
+   "body": "Paterson's dictionary defines wine red simply as a dark red, and lists a family of cousins: wine-colour, wine-dark, wine-gum red and wine yellow, which is a light reddish-yellow [1]. The point is darkness more than hue, as the article on [[red-wine]] explains. Neighbors on screen include [[burgundy]], [[claret]], [[carmine]] and [[oxblood]] [2]."
+  },
+  {
+   "id": "records",
+   "title": "In the standards",
+   "body": "Maerz and Paul's 1930 dictionary has the color, and gives the first record as about 1750 [2]. The ISCC-NBS system of 1955 files it in block 13, and RAL has a wine red, RAL 3005, with an approximate screen value of #5E2028, much darker than this swatch [2]. The xkcd color survey has yet another wine red, #7B0323 [2]. So the phrase covers a family of dark reds, not one color [2]."
+  },
+  {
+   "id": "stones",
+   "title": "Red stones and red gowns",
+   "body": "The phrase also turns up in writing about materials. St Clair calls cinnabar, the principal ore of mercury, a wine-red stone, and the Romans prized its ground pigment, [[vermilion]] [3]. In the nineteenth-century handbook by Salter, quoted in the Compendium, a wine-red liquid appears in the preparation of a speculative pigment [4]. Gage points to a rich wine-red gown in Sassetta's panels about a saint's renunciation of his father, a color whose damage conservators studied [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "There are 55 paintings in our archive of 23,781 where this swatch covers at least five per cent of the canvas, within six color-distance units, among them Bronzino's portrait of Giovanni de' Medici (1545) [6]. The color is most over-represented in the 1300s through 1500s, at between 2.7 and 5.2 times its overall rate, and under-represented after 1600 [6]. These are photographs of aged, varnished paintings, so reds in particular are as photographed [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "The color of red wine",
+   "first_recorded": "Maerz and Paul 1930 give c. 1750",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "red-wine",
+   "burgundy"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "red-wine",
+    "gloss": "a nearby wine-named red, with its own article"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+  "n_present": 55,
+  "match": {
+   "hex": "#B11226",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    38,
+    68,
+    30
+   ],
+   "nearest": [
+    [
+     "Carmine",
+     5.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"wine red\" and neighbors, p. 426",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930; ISCC-NBS 1955 block 13; RAL 3005; xkcd; CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 67",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Rufigallic red\", p. 341",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 133",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson's dictionary say wine red is?",
+   "choices": [
+    "A dark red",
+    "A pale pink",
+    "A purple",
+    "An orange"
+   ],
+   "answer": "A dark red",
+   "kind": "pick"
+  },
+  {
+   "q": "RAL 3005 wine red is lighter than this swatch.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cinnabar, the ore behind vermilion, is described as a wine-red stone."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No factual fixes needed; claims verified against cited books and library."
+  ]
+ },
+ "words": 293,
+ "status": "checked"
+}

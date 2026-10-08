@@ -1,0 +1,143 @@
+{
+ "slug": "cement",
+ "name": "Cement",
+ "hex": "#A5A391",
+ "names": [
+  "Cement"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Cement is a muted grey with a trace of green, the color of dried mortar; the books say more about the blue once sold for coloring cement than about the grey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey with a few sources",
+   "body": "Cement is filed in the ISCC-NBS system of 1955 (block 265), in Maerz and Paul (1930), where it is first recorded in 1922, and in Ridgway (1912), whose near twin is called Light Olive-Grey [1]. None of the books we hold defines the grey itself. They use the word *cement* for the building material [2][3]."
+  },
+  {
+   "id": "blue",
+   "title": "Cement blue",
+   "body": "The color connection in the books runs the other way: a blue was named after the material. The Pigment Compendium records *cement blue* as a name for manganese blue, a barium manganate sold as a pigment because it colored Portland cement [4]. Ball says it was patented in 1935 by the German color cartel IG Farben and first used to color cement [2]. Coles says it was discovered in 1907, reached commercial production in the mid-1930s, and was dropped in the 1990s [3]. The Compendium gives its production as lasting to the early 1990s [4].\n\nLime, the base of cement, is made by heating limestone to about 900 degrees C, and slaked lime hardens as it takes up carbon dioxide [4]. A soft white mineral first described in 1934 is named for its occurrence in Portland cement [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this color covers at least five per cent of the canvas, within six units of color distance, in 2,812 paintings, or 12 per cent [5]. It is nearly always a light color: 80 per cent of its appearances are in the highlights [5]. It is a photograph-of-varnish match, not a pigment test [5].\n\nImpressionism carries it in 38 of 140 works, more than twice the archive rate [5]. Eugène Boudin has it in 22 of 33 paintings, about five and a half times the rate [5]. The strongest single match is Ikkyū Sōjun's ink painting *Listening to the Wind in the Pines*, of about 1400, where it fills 86 per cent of the work [5]. Its company is [[ash]], [[sage]] and [[taupe]], the greys that lean green or brown [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the building material",
+   "first_recorded": "1922 (Maerz and Paul, 1930)",
+   "source": "ColorHub library: ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912"
+  },
+  "aka": [
+   "Light Olive-Grey (Ridgway near twin)"
+  ],
+  "siblings": [
+   "stone",
+   "taupe",
+   "grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "stone",
+    "gloss": "a warmer, lighter grey-beige"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (CIEDE2000 within 6, at least 5% of the canvas), tools/article_field.py",
+  "n_present": 2812,
+  "rate": 0.1182,
+  "role": {
+   "highlight": 0.8,
+   "mid": 0.19,
+   "shadow": 0.01
+  },
+  "movements": {
+   "Impressionism": [
+    38,
+    140
+   ]
+  },
+  "company": [
+   "Ash",
+   "Sage",
+   "Grey"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 265; Maerz and Paul 1930; Ridgway 1912, plate LI (aged plate scan, approximate)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, on manganese blue",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"manganese blue\", \"barium manganate\", \"lime\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (CIEDE2000 within 6, at least 5% of the canvas), tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why was manganese blue also called cement blue?",
+   "choices": [
+    "It was used to color Portland cement",
+    "It looks like wet cement",
+    "It was invented by a cement maker",
+    "It sets hard in water"
+   ],
+   "answer": "It was used to color Portland cement",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, Cement mostly appears in the...",
+   "choices": [
+    "highlights",
+    "shadows",
+    "red areas"
+   ],
+   "answer": "highlights",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Manganese blue was once sold as \"cement blue\" for coloring cement [4]."
+ ],
+ "words": 347,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

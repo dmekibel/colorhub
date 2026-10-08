@@ -1,0 +1,352 @@
+{
+ "slug": "leather",
+ "name": "Leather",
+ "hex": "#AC7434",
+ "names": [
+  "Leather"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Leather is the color of tanned hide, a mid orange-brown named for a material that has been dyed nearly every other color, from Egyptian blue canopies to Charlemagne's scarlet shoes.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A material's name, a tan color",
+   "body": "The color word means the brown of tanned hide, not the hide as it comes off the animal. Paterson lists *leather brown* as the brown tan color of shoe leather, and *cuir*, the French word, as a yellowish brown, the color of leather [2]. His *alutaceous* means the color of white leather, which he describes as leather prepared to keep its natural color [2]. Related words lean paler: *chamois* is a yellowish tan, *suede-colored* a light brown and *buff* a pale yellowish brown [2].\n\nTo tan is, in Paterson's definition, to turn skins or hides into leather with a tanning agent such as tannin [2]. Paterson also notes that chrome-tanned leather passes through a light blue stage, called *wet blue*, before it is finished [2].\n\nThe swatch on this page, #AC7434, is a mid brownish orange: ISCC-NBS 1955 (block 54) names it that way, and Maerz and Paul's 1930 dictionary is cited for it, first recorded in 1892 [9]. Its nearest names in our library are [[copper]], India Spice, Ochre Brown, [[caramel]] and Cork, all within five units [9]."
+  },
+  {
+   "id": "tanning",
+   "title": "Tanning: bark, manure and a blue stage",
+   "body": "Tanning has always been a messy craft, and the books record it mostly in passing. Rosetti's Plictho, a sixteenth-century Italian dyers' manual, recommends horse manure, still warm in its fermentation, for tanning leather [3]. Balfour-Paul adds that British tanners were still using dogs' droppings in the 1930s, as some who worked in the trade remember [3].\n\nCraft workers who handled such materials sometimes held an ambiguous place. Among the Dogon of Mali, leather-workers belong to the same caste of artisans as the indigo dyers, a group whose work is both ritually impure and technically skilful [3]. Finlay notes that the Jain traders, now among the most powerful in the gem market, avoid any trade that involves killing, which rules out leather as well as farming [8].\n\nLeather scraps also became materials. Terry in 1893 described a tannin black made by extracting the tannin from refuse leather and tanning agents, then adding alum and iron sulphate, and judged it a weak and unstable blue-black [4]. A medieval German manuscript of 1460 gives a recipe for a black made by burning old leather with dog dung [4]. The Latin *atramentum sutorium*, or shoemaker's black, was a dye for leather made by boiling oil with iron scales [4]."
+  },
+  {
+   "id": "dyed",
+   "title": "Leather in every other color",
+   "body": "Because leather takes dye, the brown of the hide is only its default color. The ancient Egyptians colored leather for hangings and canopies, and one decorated funeral canopy of the 21st Dynasty has a background stained blue from an unknown source [3]. The Greeks stained belts and straps with costly shellfish purple, and Byzantine codices and their bindings were stained purple and inscribed in gold or silver [3]. In the Islamic book tradition, blue suited religious texts because it stood for the infinite [3].\n\nRosetti's Plictho of 1548 gathers tanning and coloring methods from places as far apart as Damascus and Venice [3]. Its recipe for azure leather has the tanner dress the hide with alum and eggs, then color it with [[flower:indigo-woad|indigo]] ground with whiting and blended with honey, vinegar, wine or lye and gum arabic [3]. The same manual tells the dyer to mix woad with water from drains, meaning human urine, and with chicken droppings [3]. Much earlier, in the Merovingian centuries, a Celtic and Germanic habit of dyeing clothing, leather and animal skins with woad survived, and it died out under the Carolingians [5].\n\nRed was the prestige color. European dyers found the gummy insect dye lac hard to work on cloth and used it chiefly for leather [6]. Charlemagne is said to have worn scarlet leather shoes at his coronation in Rome, and books for wealthy owners were bound in red leather [6][7]. [[flower:henna|Henna]] gave a red to reddish brown on fabric and leather alike, and *Morocco*, a brick red, was originally a color of painted leather [10][11]. The Navajo painted leather with a pigment from a lichen [4].\n\nModern dyes changed the trade. Perkin's grandfather Thomas, a Yorkshire leather worker, had a small chemical laboratory in his cellar, which his grandson found on a visit [12]. Perkin was given one of the chemist Adolf von Baeyer's lectures in a binding of leather dyed mauve, and by the 1906 jubilee of mauve, leather was one of the materials artificial colors were used on [12]. Paterson now defines *aniline leather* as hide dyed with aniline dyestuff rather than pigment, which brings out its natural grain [2]. Black leather arrived late as a symbol: in the 1960s the black leather jacket reached Europe as the mark of juvenile delinquency and gangs [13]."
+  },
+  {
+   "id": "buff",
+   "title": "Buff, the soldier's coat",
+   "body": "*Buff* is short for buffalo, and in the sixteenth and early seventeenth centuries it meant a buttery tanned ox leather, thicker and tougher than the chamois now sold under that name [14]. It was mostly associated with fighting: long, heavy buff coats were standard kit for soldiers, and cavalry wore them in the sixteenth and seventeenth centuries [14]. By the mid-1700s buff breeches had become an essential part of a well-dressed European gentleman's wardrobe [14]. Paterson says the phrase *in the buff* comes from the leather's closeness to human skin color [2].\n\nSt Clair adds that Washington wore buff and blue in 1775, the colors of the Fairfax Independent Company [14]. In the same book, one paint maker's range of pale yellow-greys includes a shade called Leather Satchel [14]."
+  },
+  {
+   "id": "names",
+   "title": "A name that did not stick: Bismarck",
+   "body": "Not every leather name survived. The etcher Bracquemond worried that fashion and synthetic dyes were making color names run wild, and he named *Bismarck*, a leather brown, among those he thought ephemeral [15]. Gage reports that it has left no trace, yet Paterson still lists Bismarck as a leather-brown color [2][15]. The name lives on in a dye, Bismarck brown, which Paterson says is also used as a histological stain [2].\n\nAnother leather word, *conker-coloured*, a reddish brown, was used by the Evening Standard on 12 August 1999 to describe leather boots [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Held to a ΔE of 6 and at least five per cent of the canvas, a color like this swatch appears in 1,420 of 23,781 paintings in our archive, about 6 per cent [16]. It is much commoner in early paintings: 47 of 251 works from the 1300s carry it (19 per cent, 3.1 times the archive's rate) and 125 of 945 from the 1400s, falling to 65 of 1,674 in the 1900s [16]. The peak decade is the 1390s, with 9 of 25 paintings [16].\n\nThe works where it covers the most canvas are Kano Tan'yū's [[painting:cma-161447|Eight Views of Xiao-Xiang]] (1615), at 56 per cent, an unsigned set of flower arrangements from about 1595 at 56 per cent, and Toulouse-Lautrec's [[painting:commons-Q64491272|La danse mauresque]] (1895) at 50 per cent [16]. Then come Lorenzo Monaco's processional cross of 1392 and [[painter:fra-angelico|Fra Angelico]]'s [[painting:nga-5|Madonna of Humility]], both at 43 per cent or more [16]. Several of the top early works are panel pictures of a kind usually painted on gold grounds, and gold leaf can photograph as a brown-gold near this swatch [16]. That is our reading, not a measurement of the gold, and it may be why the 1300s stand out [16].\n\nBy painter, George Dawe leads, with 20 of 50 paintings, 6.7 times the archive's rate, followed by Fritz Thomsen (6 of 18), Greuze (4 of 12) and [[painter:filippo-lippi|Filippo Lippi]] (4 of 13) [16]. It keeps company with ochre, which co-occurs with it 8.7 times chance, then marigold and chocolate [16]. In 68 per cent of the paintings that carry it, the color sits among the lightest colors [16]. As always, these are photographs of aged, varnished paintings, so a color match is not a pigment test [16].\n\nThe word is far older than the color. In Google Books, *leather* rises to a peak around 1920, counting every sense of the word, the material above all [17]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "tanned animal hide; the color word is the hide's finished brown",
+   "first_recorded": "Maerz & Paul 1930 records the color name as first recorded in 1892",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "leather brown",
+   "cuir"
+  ],
+  "siblings": [
+   "saddle-brown",
+   "russet",
+   "tan"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "buff",
+    "gloss": "named for buff leather but a much paler yellowish brown"
+   },
+   {
+    "slug": "bismarck-brown",
+    "gloss": "a dye also glossed as a leather-brown, now mostly a stain"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "cuir (yellowish brown, the color of leather)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AC7434",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1420,
+  "top_paintings": [
+   "cma-161447",
+   "aic-158483",
+   "commons-Q64491272",
+   "aic-16231",
+   "nga-5",
+   "aic-12683"
+  ],
+  "century": {
+   "1300s": {
+    "hits": 47,
+    "n": 251,
+    "lift": 3.14
+   },
+   "1400s": {
+    "hits": 125,
+    "n": 945,
+    "lift": 2.22
+   },
+   "1900s": {
+    "hits": 65,
+    "n": 1674,
+    "lift": 0.65
+   }
+  },
+  "peak_decade": {
+   "decade": 1390,
+   "hits": 9,
+   "n": 25
+  },
+  "painters": [
+   [
+    "George Dawe",
+    20,
+    50
+   ],
+   [
+    "Fritz Thomsen",
+    6,
+    18
+   ],
+   [
+    "Jean-Baptiste Greuze",
+    4,
+    12
+   ],
+   [
+    "Filippo Lippi",
+    4,
+    13
+   ]
+  ],
+  "company": [
+   [
+    "Ochre",
+    8.67
+   ],
+   [
+    "Marigold",
+    3.86
+   ],
+   [
+    "Chocolate",
+    3.47
+   ]
+  ],
+  "role": {
+   "highlight": 0.68,
+   "mid": 0.3,
+   "shadow": 0.02
+  },
+  "ngram": {
+   "word": "leather",
+   "peak": 1920,
+   "note": "all senses"
+  },
+  "measured": {
+   "lch": [
+    53.5,
+    46.0,
+    69.7
+   ],
+   "iscc": "block 54, brownish orange (dE 6.3)",
+   "nearest": [
+    [
+     "Copper",
+     3.6
+    ],
+    [
+     "India Spice",
+     4.3
+    ],
+    [
+     "Ochre Brown",
+     4.5
+    ],
+    [
+     "Caramel",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"leather brown\", \"cuir\", \"alutaceous\", \"white leather\", \"chamois\", \"suede-coloured\", \"buff\", \"tan\", \"blue, in the\", \"aniline leather\", \"Bismarck\", \"Bismarck brown\", \"conker-coloured\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 136, 152 and 222 (\"Colouring leather, parchment and paper\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Atramentum\" (p. 41), \"Tannin black\" (p. 371) and \"Lichens\" (p. 251)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 7",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 65 (scarlet)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Leather, ISCC-NBS 1955 block 54, Maerz & Paul 1930; nearest names by CIEDE2000 from data/graph/names.json",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (p. 125)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Garfield, Mauve, chs. 10, 11 and 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 98",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 107 (\"Buff\"), ch. 105 and p. 29",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 210",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), tools/article_field.py, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "Google Books Ngram for \"leather\" via tools/article_field.py (all senses, 5-year smoothed, relative to peak)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the origin of the phrase in the buff, according to the books?",
+   "choices": [
+    "Buff leather's closeness to human skin color",
+    "The pale color of unbleached wool",
+    "A soldier's buff-colored shirt left behind",
+    "The color of the buffalo's coat"
+   ],
+   "answer": "Buff leather's closeness to human skin color",
+   "kind": "pick"
+  },
+  {
+   "q": "Chrome-tanned leather passes through a light blue stage before it is finished.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why should the archive's top early matches for this color be read with care?",
+   "choices": [
+    "Gilded grounds can photograph as a brown-gold near this swatch",
+    "Leather was never used in paintings",
+    "Museums only photograph brown paintings",
+    "The swatch matches only varnish"
+   ],
+   "answer": "Gilded grounds can photograph as a brown-gold near this swatch",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The brown of leather is partly chemistry: tannins turn raw hide into leather, and chrome-tanned hide passes through a light blue stage called wet blue.",
+  "Charlemagne is said to have worn scarlet leather shoes at his coronation; red was the prestige color for leather."
+ ],
+ "words": 1293,
+ "status": "checked",
+ "checked": {
+  "by": "claude-sonnet-5-5 (batch 37)",
+  "date": "2026-10-08",
+  "issues": [
+   "Concordance hits for 'leather' are almost all incidental; no book treats the color. The article assembles the material's color history from Paterson, Balfour-Paul, Greenfield, Pastoureau, St Clair, Garfield and the Pigment Compendium.",
+   "Charlemagne's scarlet shoes is hedged ('said to') as in Greenfield and St Clair.",
+   "Gilded-ground explanation of the 1300s lift is our reading from the top works, not a test; hedged in text.",
+   "Library 'first recorded 1892' (Maerz & Paul) is a library note, not verified against the dictionary.",
+   "Ngram for 'leather' is all senses and says nothing about the color."
+  ]
+ }
+}

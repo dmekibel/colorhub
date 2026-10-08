@@ -1,0 +1,105 @@
+{
+ "slug": "pale-greyish-blue",
+ "name": "Pale Greyish Blue",
+ "hex": "#C5D8F6",
+ "names": [
+  "Pale Greyish Blue"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Greyish Blue is a light blue with a touch of grey, the kind of color dictionaries describe rather than name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Where the words appear",
+   "body": "The name is descriptive: a pale blue, dulled with grey [3]. It is listed in the ISCC-NBS system of 1955 and in Ridgway's 1912 color book [3].\n\nPaterson's dictionary uses the very same words to define another name, Botticelli blue, as a pale greyish-blue [1]. So the phrase is a description first, and the dictionary's own example shows how such descriptions get attached to a painter's name rather than a pigment [1]. Nearby colors in our data include [[powder-blue]] and [[light-blue]] [3].\n\nThe swatch on this page is #C5D8F6, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pale Greyish Blue appears in 42 of the 23,781 paintings in our archive, about 0.18 percent, as photographed [2]. It is rarer than 56 percent of the named colors, and peaks in the 1800s, found in 16 of the 8,345 paintings from that century [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a description: pale, greyed blue",
+   "first_recorded": "Ridgway 1912",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour, p. 74"
+  },
+  "aka": [],
+  "siblings": [
+   "powder-blue",
+   "light-blue",
+   "blue",
+   "white"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 42,
+  "pct_of_paintings": 0.18,
+  "library_sources": [
+   "ISCC-NBS 1955",
+   "Ridgway 1912"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 74",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955, Ridgway 1912",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say Botticelli blue is?",
+   "choices": [
+    "A pale greyish-blue",
+    "A deep violet",
+    "A bright turquoise",
+    "A dark navy"
+   ],
+   "answer": "A pale greyish-blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Pale Greyish Blue is listed in the ISCC-NBS system of 1955.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A dictionary defines Botticelli blue with the very words pale greyish-blue."
+ ],
+ "words": 199,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,297 @@
+{
+ "slug": "imperial",
+ "name": "Imperial",
+ "hex": "#56245B",
+ "names": [
+  "Imperial",
+  "Imperial Purple"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Imperial is a deep plum-violet named for imperial purple, the shellfish dye that Roman and Byzantine emperors kept for themselves; the word was later lent to blues, reds, yellows and greens that wanted the same majesty.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which imperial?",
+   "body": "Our library holds several colors that carry the word. This swatch, Imperial, is a dark plum-violet that Maerz and Paul's 1930 dictionary first records in 1926 and files under fashion and textiles [1]. Its nearest named neighbor is [[byzantium]], about six units away [1].\n\nThe related [[imperial-purple]] is a greyer, lighter violet [1]. It is Werner's number 40, whose examples are the deep parts of the saffron crocus flower and fluor spar, and Maerz and Paul date it to 1814 [1][2]. [[imperial-blue]] (a deep blue, c. 1824) and [[imperial-red]] (first recorded 1914) come from the same dictionary [1]. None of these is a copy of the ancient dye, which no one can now match by eye [3][4]."
+  },
+  {
+   "id": "dye",
+   "title": "The dye",
+   "body": "The Pigment Compendium lists its names as Tyrian, royal or imperial purple, shellfish purple, Byzantium purple and Purple of the Ancients, and calls it arguably one of the oldest known pigments [3]. It comes only from marine snails of the Muricidae and Thaisidae families [3]. Tyre, on the Lebanese coast, was said to make the best, hence the epithet *Tyrian* [5].\n\nIt was never one color. Greenfield says imperial purple took in deep scarlets and crimsons as well as amethyst and violet shades, and that buyers in classical times valued intensity and luster at least as much as hue [6]. Vitruvius reported that shades ran from bluish to reddish according to where the shellfish were gathered [3]. Gage adds that the finest cloth was probably the deepest, double-dyed kind, as in Empress Theodora's robe at Ravenna, and that its prized quality was brilliance [7]. The books do not settle on one hue, only on a range [3][6][7].\n\nThe cost came from the animals. A single garment took thousands of crushed snails [6]. Greenfield gives the fourth-century prices under Diocletian: 50,000 denarii for a pound of the best cloth, which she equates with its weight in gold, and 16,000 for a cheaper grade [6]. A stoneworker then earned 50 denarii a day [6]. Its price meant painters rarely used it, though Vitruvius advised mixing it with honey so it would not dry too quickly [3]."
+  },
+  {
+   "id": "law",
+   "title": "Purple by law",
+   "body": "Rome ranked people by purple. Senators, consuls and praetors had broad purple borders, knights narrower ones, and from the fourth century only the emperor could wear the true purple [8]. Ball reports a later rule, from the reigns of Valentinian II, Theodosius and Arcadius: the dye could be made only in the emperor's own works, on pain of death [8]. Coles adds that anyone not sanctioned to own purple garments risked losing property, title or life [9].\n\nBy the late empire, most big workshops were state-run, each holding a regional monopoly over gathering the shellfish and making and selling the dye [10]. To \"take the purple\" meant to rise to the highest office, and wearing a wholly purple cloth was an imperial privilege, with infringement treated as high treason [10]. Cheaper imitations were everywhere: the Stockholm papyrus contains three recipes for imitation purple dyes [8].\n\nThe color outlived the dye. In the church of San Vitale at Ravenna, Justinian I's robes are made of mosaic stones of an inorganic purple material [8]. Identifying true purple in the face of imitations mattered in Byzantium, and Gage notes that Pliny's rough test for the best purple was in demand [7]."
+  },
+  {
+   "id": "red",
+   "title": "The imperial red",
+   "body": "Because the old purple could be so red, the color passed into red. Carolingian emperors adopted red as their color in memory of Rome and Byzantium, and the Ottonians continued it [11]. In Pastoureau's reading, the red of the Liuthar Gospels is antique purple's descendant [12]. Even as blue won over kings and nobles near the end of the Middle Ages, red stayed the sign of the empire and the papacy [13].\n\nThe poet Derek Jarman asked whether the imperial purple was really red [14]. Greenfield's answer is that it included reds, so the question has no single answer [6]."
+  },
+  {
+   "id": "other",
+   "title": "Imperial yellow, green and the borrowed word",
+   "body": "Paterson's *Dictionary of Colour* says the word *imperial* was first used for imperial yellow and then borrowed by other colors with pretensions of majesty [15]. Imperial yellow is a deep yellow from the yellow porcelain of China, reserved for the imperial court [15]. In China yellow gradually became the emperor's color; his robes and carriage were called yellow, and even his path [16]. When the court's yellow silk grew less exclusive, it was granted first to household bodyguards and in a few cases to commoners as an honor [17]. American pencils were later painted yellow in imitation of the robes of the Manchu court, a marketing move [18].\n\nImperial green is a name for emerald green, the arsenic pigment also called Schweinfurt, Paris, Vienna and Brunswick green, which was considered in the 1860s to have caused a number of deaths through fumes from arsenic wallpaper [15]. Paterson defines imperial blue as a deep blue dye and imperial red as a deep bluish red [15]."
+  },
+  {
+   "id": "japan",
+   "title": "Purple under protection",
+   "body": "The idea of a ruler's purple is not only Western [19]. In Japan, deep purple, *murasaki*, was a forbidden color, off limits to ordinary people [19]. Our library files the Japanese safflower color *Benikakehana-iro* (紅掛花色) with Imperial Purple, because Werner's own example is a flower: the saffron crocus [1][2].\n\nThe sea snails have paid for all of it. In the 1980s Mexico let a Japanese firm, Purpura Imperial, collect the caracol sea snail for kimono dyeing [19]. The local Mixtec had long milked the snails and left them alive, but the firm's method killed them [19]. The population fell steeply, and the contract was revoked after years of lobbying [19]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, none contain this color: no painting has a field within six units (ΔE 2000) of #56245B covering at least five per cent of the canvas [20]. That is true of every century and every country in the archive, including the 25 works tagged Renaissance [20].\n\nThe zero is a measurement, not an error. At lightness 24 and chroma 39, this plum is very dark, with a contrast ratio of 11.7 against white [20]. A color that dark needs a large, undarkened field in a photograph to register, and aged varnish works against it [20].\n\nThese are photographs of aged, varnished paintings, so a match is a color match and not a pigment test [20]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "imperial purple, the Tyrian dye reserved for emperors",
+   "first_recorded": "1926 for this shade (Maerz & Paul 1930); imperial purple, 1814",
+   "source": "data/library.json; Pigment Compendium, \"Tyrian purple\""
+  },
+  "aka": [
+   "Tyrian purple (the dye)",
+   "royal purple",
+   "Byzantium purple",
+   "Purple of the Ancients"
+  ],
+  "siblings": [
+   "imperial-purple",
+   "imperial-blue",
+   "imperial-red"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "tyrian-purple",
+    "gloss": "The Tyrian-purple swatch is a deep red-violet; the dye was a range from crimson to violet"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "murasaki (purple, once forbidden to commoners)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#56245B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "top_paintings": [],
+  "measured": {
+   "lch": [
+    24,
+    39,
+    324
+   ],
+   "contrast_white": 11.67,
+   "nearest": [
+    [
+     "Byzantium",
+     5.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Imperial, Imperial Purple, Imperial Blue, Imperial Red (Maerz & Paul 1930; Werner no. 40; ISCC-NBS 1955)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Werner no. 40 \"Imperial Purple\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Tyrian purple\" and \"ostrum\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, ch. 1",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, chapter on Byzantium (\"Light from the East\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, purple entry",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Jarman, Chroma, \"Purple Passage\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"imperial\" entries",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 32",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Yellow\" (imperial yellow)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Purple\"",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "data",
+   "cite": "ColorHub archive, tools/article_field.py: #56245B, 23,781 paintings, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was the imperial purple of Rome made from?",
+   "choices": [
+    "Sea snails of the Muricidae family",
+    "Madder root",
+    "Crushed amethyst",
+    "Cochineal insects"
+   ],
+   "answer": "Sea snails of the Muricidae family",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does the books' picture of imperial purple not match one hue?",
+   "choices": [
+    "The dye covered a range from crimson to violet",
+    "It faded to grey",
+    "It was invented in the 1800s",
+    "Only one shell was used"
+   ],
+   "answer": "The dye covered a range from crimson to violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in the fourth century only the emperor could wear the true purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Imperial purple ran from scarlet to violet; luster mattered more than hue.",
+  "Under Diocletian, a pound of the best purple cloth was worth 50,000 denarii, about its weight in gold.",
+  "None of the 23,781 paintings in our archive holds this imperial plum on a large field."
+ ],
+ "words": 1038,
+ "status": "checked",
+ "checked": {
+  "by": "batch13 writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Diocletian prices from Greenfield only; single source, hedged by attribution.",
+   "Gage reference to Pliny's test and Theodora robe from concordance excerpts; page locators approximate.",
+   "Imperial yellow bodyguard/commoner honor from St Clair ch.41, wording kept general.",
+   "Pastoureau chapter numbers are concordance chapter indices."
+  ]
+ }
+}

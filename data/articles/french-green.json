@@ -1,0 +1,143 @@
+{
+ "slug": "french-green",
+ "name": "French Green",
+ "hex": "#5B8E71",
+ "names": [
+  "French Green"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "French green is a muted, slightly yellowish green that the dictionaries file under a country adjective, and that the paint trade used for an altogether different thing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two uses of the name",
+   "body": "Paterson's dictionary lists French green among a run of colors prefixed with French, and describes it as a yellowy green [1]. The pigment trade used the name differently: the Pigment Compendium records it as one of the less common names for [[emerald-green]], citing Fiedler and Bayard [2]. Emerald green is a harsher, bluer and far more poisonous color than this swatch, so the two should not be confused.\n\nThe books say nothing further about where the name came from, and who first called a green French is undocumented in our sources [1][2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The color on this page comes from the systematic charts, not from a pigment. It carries over from Ridgway's 1886 *Nomenclature of Colors*, reappears in his 1912 *Color Standards*, and sits in ISCC-NBS block 136, where the 1955 dictionary calls it a moderate yellowish green, 5.3 units away [3]. Maerz and Paul's dictionary gives dates of 1618 for one nearby plate and about 1794 for another, which hints at an old name but pins nothing down [3].\n\nIts nearest named neighbors are [[slate-green]] and [[viridian]], 6.4 units from the latter, and the library lists Zinc Green as a near-duplicate, 1.0 apart [3]. Next to [[green]] in a swatch row it reads as a grey-leaning, slightly warm leaf green."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a rare color in paint. It appears in 66 of 23,781 paintings in our archive (0.28 per cent), and in 20 when counted by the stricter within-painting lens [4]. It is rarer than 61 per cent of named colors, and when it does appear it is most often a mid-tone, in 55 per cent of those 20 [4].\n\nIt peaks in the 1900s, found in 8 of 1,674 paintings from those years, about four times the rate the same museums would predict [4]. The earliest match is a work of 1480, but that is a look-alike hue 406 years older than the name's earliest record in our sources, 1886 [4]. These are photographs of aged, varnished paintings, so a color match is a look-alike hue and not a pigment test. [4]"
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (a 'French' adjective color)",
+   "first_recorded": "Ridgway 1886 in our sources",
+   "source": "Paterson, A Dictionary of Colour, p. 177; Pigment Compendium, p. 174"
+  },
+  "aka": [
+   "emerald green (as a pigment-trade synonym)"
+  ],
+  "siblings": [
+   "slate-green",
+   "viridian"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "emerald-green",
+    "gloss": "the pigment trade sometimes used French green as another name for it; the swatch here is far duller"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 66,
+  "n_within_painting": 20,
+  "century_peak": {
+   "century": 1900,
+   "paintings": 8,
+   "lift": 4.0
+  },
+  "role": "mid-tone 55%",
+  "measured": {
+   "iscc": "moderate yellowish green",
+   "de": 5.3,
+   "nearest": [
+    [
+     "Slate Green",
+     null
+    ],
+    [
+     "Viridian",
+     6.4
+    ],
+    [
+     "Zinc Green",
+     1.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 177 (\"French green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 174 (\"French green\", citing Fiedler and Bayard 1997)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and graph nodes: ISCC-NBS 1955, Ridgway, Maerz & Paul, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; at least 2% of the canvas for dated firsts)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the pigment trade, French green was sometimes another name for which paint?",
+   "choices": [
+    "Emerald green",
+    "Prussian blue",
+    "Madder lake",
+    "Ultramarine"
+   ],
+   "answer": "Emerald green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch on this page was taken from a pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "French green was sometimes just another name for emerald green in the paint trade, a far harsher color than the swatch.",
+  "Look for it as a mid-tone: when it appears in a painting it is usually the color in the middle of the range."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 367
+}

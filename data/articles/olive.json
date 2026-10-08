@@ -1,0 +1,265 @@
+{
+ "slug": "olive",
+ "name": "Olive",
+ "hex": "#808000",
+ "names": [
+  "Olive"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Olive is a dull, brownish green named for the olive tree and its fruit; on screens it is a bright yellow-green, while the charts of the past kept it far browner and greyer.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fruit's name",
+   "body": "*Olive* names the tree and its fruit, and the color word follows the fruit [4][15]. Mineralogy kept the link: olivine, the most abundant material in the earth's mantle, is named for the color of pale green olives [4]. The gem [[gem:peridot|peridot]] is gem-quality olivine, and about ninety per cent of known peridots come from one Native American reservation in the United States [4].\n\nMaerz and Paul's 1930 dictionary dates the English color word to 1613 [10]. The word was always loose at the edges: Paterson's entry for *bracken* describes an olive-brown, and his entry for *chloroxanthous* gives a green or olive and yellow [15]."
+  },
+  {
+   "id": "werner",
+   "title": "Grass green with brown",
+   "body": "The most exact old definition is Werner's, as Patrick Syme presented it in his *Nomenclature of Colours* [1]. Number 59 of the greens, olive green, is grass green mixed with much brown [1]. Syme's examples are the foliage of lignum vitae and two minerals, epidote and olivine ore [1].\n\nThe same system has an olive brown, number 109, which Syme also called clove brown and used for the head and neck of a male kestrel [2]. His hair brown is olive brown mixed with ash grey [2]. Other lists of the period kept olive green: Cleaveland's 1816 list of 80 colors places it between asparagus green and oil green [3].\n\nSo the color was a family of dulled, browned greens before it was a single swatch [1][2]. The nearest related names in our library are [[olive-green]], [[olive-brown]] and [[olive-grey]] [10]."
+  },
+  {
+   "id": "drab",
+   "title": "Drab and olive drab",
+   "body": "*Drab* was once the technical term for a hue on the middle line between olive and puce, and only later came to mean dullness itself [5]. St Clair's glossary defines olive drab as green with plenty of grey and brown [9]. That is close to Werner's brown-green, and it is the olive that dyers and tailors meant, more than the yellower swatch on a screen [1][9].\n\nA 1529 inventory of Hernán Cortés's goods lists a coverlet of scarlet and olive-colored cloth, which shows the word in use for cloth early in the sixteenth century [13]. The colormaker and theorist George Field counted olive among his tertiary pigments, alongside citrine and russet [14]."
+  },
+  {
+   "id": "paint",
+   "title": "In paint and pigment",
+   "body": "Olive turns up in painting mostly as a mixed or accidental color. Ball describes chrome green as a cheap mixture of Prussian blue and chrome yellow, with results from a harsh green down to olive [6]. The Pigment Compendium calls chromium oxide an opaque, dull olive green [8].\n\nBurnt verdigris is described by the chemist Salter in 1869 as an olive-coloured oxide of copper, and the calcined form of Schweinfurt green is also olive [8]. Gauguin, in Tahiti, found burnt ochre indispensable for painting the olive skin of the people he met [7]. Where to look: olive is what a green becomes when brown is mixed into it, by hand or by age [1][8]."
+  },
+  {
+   "id": "peace",
+   "title": "The tree of peace",
+   "body": "In medieval symbolism the olive was a tree of peace, one of many trees given a meaning in orchard imagery [11]. The flag of the United Nations shows the world between two olive branches, and Pastoureau reads this as part of blue's calm, peaceful symbolism [11]. These meanings belong to the tree and the branch rather than to the color olive, which carries none of them in the books we checked [11]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which olive is the swatch?",
+   "body": "The swatch here is CSS `olive`, #808000, which is bright and yellow: lightness 52, chroma 58 [10]. The old charts disagree with it, and with each other [10]. Ridgway's 1912 olive is a dark, greyish #645F46, lightness 40 and chroma 15, and his olive green is a more yellow-brown #6D6D3F [10]. Werner's aged swatch for olive green reads as a cool #67765B, while the Wikipedia olive green is a light #B5B35C, lightness 71 [10].\n\nFive sources give five olives, and the CSS one is the second brightest, after Wikipedia's [10]. When a painter or a tailor says olive, the Ridgway and Werner end of that range is the safer guess [1][10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 18 contain this exact olive: a color within six units of #808000 (ΔE 2000) covering at least five per cent of the canvas [12]. None of the 3,619 works made before 1600 do [12]. The earliest match is Frans Snijders's *Larder with Game, Fruit, Vegetables and a Servant* from 1616, where it covers 9 per cent [[painting:smk-KMSsp208|the larder]] [12].\n\nThe surprise is geography. Five of the 18 are Indian paintings, although India is about 3 per cent of the archive (721 works), and one is Tibetan [12]. The largest field is in a Tibetan-style *God Shiva in His Ferocious Aspect as Mahakala Dancing* from about 1700, where olive covers 47 per cent of the canvas [[painting:cma-132820|Mahakala]] [12]. In European painting the match is rare: Canaletto's *English Landscape Capriccio with a Palace* of 1754 holds it on 22 per cent [[painter:canaletto|Canaletto]] [12].\n\nThese are photographs of aged, varnished paintings, so a match is a color match and not a pigment test [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the olive tree and its fruit",
+   "first_recorded": "English color word, 1613 (Maerz & Paul 1930)",
+   "source": "Maerz & Paul via data/library.json; Finlay, Jewels, ch. 14"
+  },
+  "aka": [
+   "olive green (older charts)",
+   "olive drab (the duller military shade)"
+  ],
+  "siblings": [
+   "olive-green",
+   "olive-brown",
+   "olive-grey"
+  ],
+  "parent": "green",
+  "children": [
+   "olive-buff",
+   "olive-ocher",
+   "olive-drab-7"
+  ],
+  "disambiguation": [
+   {
+    "slug": "olive-green",
+    "gloss": "Wikipedia's Olive Green is a light yellowish #B5B35C, nothing like CSS olive"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#808000",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 18,
+  "top_paintings": [
+   "cma-132820",
+   "nga-47180",
+   "smk-KMSsp208"
+  ],
+  "by_country": {
+   "India": {
+    "hits": 5,
+    "of": 721
+   },
+   "Tibet": {
+    "hits": 1,
+    "of": 47
+   }
+  },
+  "measured": {
+   "lch": [
+    52,
+    58,
+    103
+   ],
+   "contrast_white": 4.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Werner's Nomenclature (Syme), no. 59 \"Olive Green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Syme nos. 107 and 109 (\"Hair Brown\", \"Olive Brown\") and editorial note",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, colour lists (Lenz; Cleaveland, 1816)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 14 (\"Peridot\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 11 (\"Brown\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16 (Gauguin)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"chromium oxide\" p. 114, \"burnt verdigris\" p. 79, \"Schweinfurt green\" p. 136",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary \"Olive drab\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub library: Olive, Olive Green, Olive-Brown, Olive-Grey (Maerz & Paul 1930; Ridgway 1912; Werner; CSS)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 18; Pastoureau, Blue, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, tools/article_field.py: #808000, 23,781 paintings, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 220",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 75, 100",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which gem-making mineral is named for the color of pale green olives?",
+   "choices": [
+    "Olivine",
+    "Epidote",
+    "Fluorite",
+    "Beryl"
+   ],
+   "answer": "Olivine",
+   "kind": "pick"
+  },
+  {
+   "q": "In Werner's system as Syme presented it, olive green is grass green mixed with what?",
+   "choices": [
+    "Much brown",
+    "A little blue",
+    "Black and white",
+    "Yellow ochre only"
+   ],
+   "answer": "Much brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the bright CSS olive is the same color the old color charts called olive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Werner's old recipe for olive green: grass green mixed with much brown.",
+  "Peridot and olivine are both named for the color of pale green olives.",
+  "Of 18 paintings in our archive with a large olive field, 5 are from India."
+ ],
+ "words": 819,
+ "status": "checked",
+ "checked": {
+  "by": "batch13 writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Evidence for olive as a color is thin in the 29 books; article is short and leans on Baty/Werner and the library.",
+   "Gage p.220 is a pdf-page from concordance (Field's tertiaries); not re-read in full text.",
+   "Kestrel head and neck example is Syme no. 109 per Baty."
+  ]
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "slug": "french-beige",
+ "name": "French Beige",
+ "hex": "#A67B5B",
+ "names": [
+  "French Beige"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "French Beige is a light-brown shade-name, one of a long run of \"French\" colors in the dictionaries, with no recorded story of its own.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson calls French beige a light brown, and beige itself a light brown or yellowish grey that sold well in fashion cloth [1][2]. He lists it with the browns, between Florentine brown and French yellow [3]. The book gives no origin for the \"French\" in this name [1]."
+  },
+  {
+   "id": "family",
+   "title": "The French family",
+   "body": "The dictionary carries a whole row of French colors with very different meanings: French blue is a greeny-blue or sometimes a purplish blue, French grey a bluish grey, French green a yellowy green, and French pink a pale yellow [4]. French purple was a lichen dye of the 1850s that helped turn the word [[mauve]] from a dye into a color [4]. Beige, [[french-blue]] and [[french-grey]] are in our list [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #A67B5B measures lightness 55.1, chroma 27.1 and hue angle 62 degrees, a medium, warm brown more saturated than most beiges [5]. It sits close to [[tan]] and [[brown]] [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson, Dictionary of Colour, \"French beige\""
+  },
+  "aka": [],
+  "siblings": [
+   "beige",
+   "french-blue",
+   "french-grey",
+   "tan"
+  ],
+  "parent": "beige",
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name list and color math",
+  "hex": "#A67B5B",
+  "measured": {
+   "lch": [
+    55.1,
+    27.1,
+    62
+   ]
+  },
+  "source": "Paterson, Dictionary of Colour"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"French beige\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"beige\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"colour index, browns\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"French blue, French grey, French green, French pink, French purple\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color math (CIE LCH from the sRGB hex)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define French beige?",
+   "choices": [
+    "A light brown",
+    "A bluish grey",
+    "A pale yellow"
+   ],
+   "answer": "A light brown",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Paterson, what is French pink?",
+   "choices": [
+    "A pale yellow",
+    "A bright rose",
+    "A light brown"
+   ],
+   "answer": "A pale yellow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In the dictionaries, French pink is a pale yellow."
+ ],
+ "words": 170,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim about what \"French\" usually marks."
+  ]
+ }
+}

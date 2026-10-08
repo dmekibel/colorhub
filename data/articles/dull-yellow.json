@@ -1,0 +1,166 @@
+{
+ "slug": "dull-yellow",
+ "name": "Dull Yellow",
+ "hex": "#EEDC5B",
+ "names": [
+  "Dull Yellow"
+ ],
+ "tier": "descriptive",
+ "lede": "Dull yellow is a plain description rather than a historic name: a yellow with its brightness turned down, the kind of yellow that weld, buckthorn lake and ochre gave painters.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description, not a name",
+   "body": "Dull yellow does not belong to one pigment or one dye. Writers on color use the phrase for any yellow held back from brilliance, and our library records the swatch from ISCC-NBS 1955 and from the xkcd survey of 2010 [1]. That makes it a useful teaching color: it is what a yellow looks like once you stop expecting it to glow.\n\nPastoureau shows that the Romans already had separate words for the yellows they knew [2]. He lists *croceus* for the orange-leaning yellow of saffron, *luteus* for a dull yellow from weld and broom, *flavus* for the gold of ripening grain, and further terms [2]. The dull one was the plant dye."
+  },
+  {
+   "id": "material",
+   "title": "Where dull yellows came from",
+   "body": "Painters had few cheap, steady yellows. Pastoureau describes lake pigments made from weld, with a faint green cast, and stil de grain, a lake from buckthorn berries or chestnut leaves, a sturdy and slightly greenish dull yellow [3]. Shadows and glazes were their main use [3]. Earth pigments did the same job: yellow ochre was known to Vitruvius and Pliny, the most famous from silver mines near Athens, and it turns up on palettes from Byzantine icons to Vermeer and Turner [4].\n\nAn ochre is a good example of why a dull yellow is not a failure. The forger Hebborn is quoted by Finlay observing that a broad field of muted ochre turns luminous once a small accent of brighter yellow sits in it [5]. The dullness is what lets the bright touch work."
+  },
+  {
+   "id": "print",
+   "title": "Cheap paper and wild claims",
+   "body": "The same quiet yellow turns up in print. The paper of the newspaper *L'Auto* was one of the pale, dull yellows then used for newsprint meant for large, short-lived runs, and the Tour de France leader's jersey was colored to match, so that he would be visible in the pack [6].\n\nBirren, in a section on auras, repeats an old occultist claim that the aura of the \"savage\" is dull yellow, grey-blue, dull orange and brownish red [7]. The claim is opinion with no evidence behind it, and it is worth recognizing only as an example of how colors were once loaded with character."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings the swatch appears in 42 paintings, 0.18 per cent, as photographed [8]. It peaks in the 1900s, when it is found in 14 of 1,674 paintings, 3.3 times the rate expected from the same museums [8]. Inside a painting it most often plays an accent, in 62 per cent of the 48 paintings that hold it [8]. The earliest match is by Fra Angelico in 1434, but the archive's early centuries are thin and this is a look-alike hue in an aged photograph, not proof of a pigment [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description (a yellow of low chroma)",
+   "first_recorded": "ISCC-NBS 1955 in our library; the phrase itself is far older",
+   "source": "ColorHub library; Pastoureau, Yellow, ch. 1 and 3"
+  },
+  "aka": [
+   "dull yellow",
+   "muted yellow"
+  ],
+  "siblings": [
+   "straw",
+   "maize",
+   "mustard"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "luteus (the dull yellow of weld)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#EEDC5B",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 42,
+  "pct": 0.18,
+  "peak": "1900s, 3.3x baseline",
+  "role": "accent in 62% of 48"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930, Ridgway), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 1 (\"Beneficial Color\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 3",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"Yellow ochre\", p. 414",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21 (quoting Hebborn)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 5",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 13",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 within 4, at least 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the Latin word luteus name?",
+   "choices": [
+    "A dull yellow from weld and broom",
+    "Saffron orange",
+    "Egg-yolk yellow",
+    "The gold of ripe grain"
+   ],
+   "answer": "A dull yellow from weld and broom",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does a dull yellow ochre help a painting, according to Hebborn?",
+   "choices": [
+    "A touch of brighter yellow looks brilliant against it",
+    "It dries faster",
+    "It is poisonous to insects",
+    "It never fades"
+   ],
+   "answer": "A touch of brighter yellow looks brilliant against it",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The Tour de France leader's yellow jersey copied a dull yellow newsprint."
+ ],
+ "depth": "medium",
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lede: removed unsupported 'old books keep using'",
+   "removed unsupported claim that bare 'ochre' means yellow and Cyprus naming; replaced with Pigment Compendium yellow ochre facts",
+   "dropped honey/egg-yolk Latin terms not in source list"
+  ]
+ },
+ "words": 467
+}

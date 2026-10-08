@@ -1,0 +1,115 @@
+{
+ "slug": "jungle-green",
+ "name": "Jungle Green",
+ "hex": "#29AB87",
+ "names": [
+  "Jungle Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Jungle green is a modern name for a cool green; the name's definition and this swatch do not quite agree.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name means",
+   "body": "Paterson's dictionary defines *jungle green* as a deep yellowy green, a dark or blackish green [1]. The swatch shown here is far lighter and bluer, a bright sea-like green whose nearest ISCC-NBS name is simply light green [2]. A competing swatch in our library, from the xkcd color survey, is a darker green, #048243 [2]. So the name covers a range of colors [1][2].\n\nThe Maerz and Paul dictionary of 1930 dates the name to 1926 [2]. The books say nothing more, and no history is claimed [1]. Neighbors include [[sea-green]], [[kelly-green]] and [[forest-green]], all in the family of [[green]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Jungle green is almost absent from painting. Only 1 of the 23,781 paintings in our archive holds a color near this swatch, as photographed [3]. In printed English the word peaks in the 1950s and rose fastest in the 1940s, though it also names the landscape, so the curve can mislead [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the green of jungle foliage",
+   "first_recorded": "Maerz & Paul 1930 (first recorded 1926)",
+   "source": "Paterson, A Dictionary of Colour, \"jungle green\""
+  },
+  "aka": [
+   "jungle"
+  ],
+  "siblings": [
+   "sea-green",
+   "kelly-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "forest-green",
+    "gloss": "a darker green with a similar nature name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "ngram_peak": 1950,
+  "alt": "xkcd #048243"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"jungle green\" (p. 228, colour lists pp. 475, 498)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 nearest names, Ridgway 1912 and Maerz & Paul 1930 entries, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, relative to peak (data/graph)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson's dictionary describe jungle green?",
+   "choices": [
+    "A deep yellowy green, dark or blackish",
+    "A bright sea green",
+    "A pale pink-green"
+   ],
+   "answer": "A deep yellowy green, dark or blackish",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: jungle green appears in many paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The dictionary's jungle green is dark; this screen swatch is bright. Names drift."
+ ],
+ "words": 168,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that the dark reading is the older one."
+  ]
+ }
+}

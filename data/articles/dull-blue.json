@@ -1,0 +1,139 @@
+{
+ "slug": "dull-blue",
+ "name": "Dull Blue",
+ "hex": "#49759C",
+ "names": [
+  "Dull Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dull Blue is a muted, mid-dark blue, an everyday descriptive name for a blue with little vividness.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain description",
+   "body": "Our earliest record of Dull Blue as a color name is the xkcd list of 2010 [3]. The words are older. Ruskin remarked of a Rubens landscape that the rainbow was a dull blue, darker than the sky [1]. Gurney says the white letters of an old neon sign, where they fall in shadow, are really a dull blue-gray [2]. Paterson defines gunmetal as the dull blue-grey colour of the metal, a dark grey, and records the variant name gunmetal blue [4]. That makes dull blue a long-standing way to describe a muted, greyed blue, even though the name as a swatch is recent [3][4].\n\nIts nearest neighbors among our names, by CIELAB distance, are [[stardew|Stardew]], [[stormy-blue|Stormy Blue]] and [[queen-blue|Queen Blue]] [5]. On a white page it reaches a contrast ratio of 4.87:1 [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dull Blue appears in 139 of 23,781 paintings, 0.58%, as photographed [6]. It most often plays an accent, in 52% of the 64 paintings where the within-painting reading finds it [6]. It peaks in the 1900s at 2.3 times the expected rate (13 paintings) [6]. The earliest match is a work by Colart de Laon from 1405; the early centuries are thin, so that is a floor and not a first [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive phrase",
+   "first_recorded": "xkcd list, 2010 (name)",
+   "source": "Gage p. 99; Gurney p. 54"
+  },
+  "aka": [],
+  "siblings": [
+   "steel-blue",
+   "cadet-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "contrast_white": 4.87,
+  "nearest": [
+   [
+    "Stardew",
+    4.2
+   ],
+   [
+    "Stormy Blue",
+    4.4
+   ],
+   [
+    "Queen Blue",
+    4.6
+   ]
+  ],
+  "n_present": 139,
+  "pct": 0.58,
+  "role_accent_pct": 52,
+  "peak_decade": "1900s"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 99",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 54",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub name records (data/graph/names.json and per-name source lists)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 203",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Computed from the hex value: WCAG relative luminance and contrast ratio; CIELAB distance to the other names in data/graph/names.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Gurney say the white neon letters look like in shadow?",
+   "choices": [
+    "A dull blue-grey",
+    "Bright yellow",
+    "Pure black",
+    "Warm orange"
+   ],
+   "answer": "A dull blue-grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson defines gunmetal as a dull blue-grey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Shadow makes white letters a dull blue-grey, as Gurney painted from life."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported interpretive glosses on Gage and Gurney passages."
+  ]
+ }
+}

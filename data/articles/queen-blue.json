@@ -1,0 +1,136 @@
+{
+ "slug": "queen-blue",
+ "name": "Queen Blue",
+ "hex": "#436B95",
+ "names": [
+  "Queen Blue"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Queen's blue was one of the named shades of indigo that eighteenth-century English dyers sorted from light to dark, and the books say it was also called royal blue.",
+ "sections": [
+  {
+   "id": "dyers",
+   "title": "One step on the indigo ladder",
+   "body": "English dyers of the eighteenth century classified official shades of indigo-dyed cloth from light to dark [1][2]. Finlay's list reads milk blue, pearl blue, pale blue, flat blue, middling blue, sky blue, queen's blue, watchet blue, garter blue, mazareen blue, deep blue and navy blue [1]. Balfour-Paul gives thirteen shades, adding a Turkish blue between queen's blue and watchet blue [2]. Books disagree on the count, twelve against thirteen [1][2].\n\nBalfour-Paul adds that queen's blue, also called king's blue, was also known as royal blue, a name that like navy blue has left its indigo roots behind and passed into common color vocabulary [2]. Finlay uses the list to make a different point: indigo gives very different results, so we cannot know what shade Newton had in mind for his rainbow band [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is a mid-dark steel blue, a modern screen color [3]. In our archive of 23,781 paintings, a color within six units of it covers at least five per cent of the canvas in 86 works [3]. It is most common in French painting, 25 of the 3,443 French works [3]. The strongest cases include Van Gogh's *Three White Cottages in Saintes-Maries* of 1888 and Heinrich Hansen's Copenhagen view of 1836 [3]. As always these are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a royal title; the queen or king",
+   "first_recorded": "eighteenth-century English dyers' lists",
+   "source": "Finlay, Colour, ch. 18; Balfour-Paul, Indigo, p. 188"
+  },
+  "aka": [
+   "king's blue",
+   "royal blue (as an old synonym)"
+  ],
+  "siblings": [
+   "royal-blue",
+   "indigo",
+   "french-blue",
+   "pastel-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "royal-blue",
+    "gloss": "today's royal blue is brighter than the indigo shade that once carried the name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#436B95",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 86,
+  "top_paintings": [
+   "Van Gogh, 1888",
+   "Heinrich Hansen, 1836"
+  ],
+  "countries": {
+   "France": [
+    25,
+    3443
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 188",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dye gave the graded eighteenth-century shades that included queen's blue?",
+   "choices": [
+    "Indigo",
+    "Madder",
+    "Cochineal",
+    "Weld"
+   ],
+   "answer": "Indigo",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: queen's blue was also called royal blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "What do Finlay and Balfour-Paul disagree on?",
+   "choices": [
+    "How many indigo shades the dyers listed",
+    "The date of the list",
+    "The color of Newton's indigo",
+    "Who wore queen's blue"
+   ],
+   "answer": "How many indigo shades the dyers listed",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Royal blue began as one rung on the eighteenth-century indigo ladder, under the name queen's blue."
+ ],
+ "words": 241,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "\"ancestor of royal blue\" overstated; now \"also called royal blue\""
+  ]
+ }
+}

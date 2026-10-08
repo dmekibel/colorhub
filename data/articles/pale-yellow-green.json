@@ -1,0 +1,135 @@
+{
+ "slug": "pale-yellow-green",
+ "name": "Pale Yellow-Green",
+ "hex": "#DAE7AD",
+ "names": [
+  "Pale Yellow-Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Pale Yellow-Green is a light, soft green leaning to yellow, a systematic name from Ridgway's color plates rather than a pigment or a plant.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A systematic name",
+   "body": "The phrase belongs to the descriptive tradition of naming colors by hue, lightness and strength. Ridgway's 1912 nomenclature has the swatch as plate VI, hue 31, in a light tone, and the ISCC-NBS system of 1955 places it in block 119, \"light yellow green\", 4.5 units away on the CIEDE2000 scale [1]. Our library finds no earlier record than 1912 [1].\n\nBooks use the words loosely. St Clair glosses [[chartreuse]] as a pale yellow-green, taking the name from the liqueur of the Carthusian monks [2]. The Pigment Compendium gives the same description to anhydrous nickel phosphate, a pale yellow-green pigment that needs heating to red heat to make [3]."
+  },
+  {
+   "id": "air",
+   "title": "The color of distance",
+   "body": "Gage records a seventeenth-century scheme of aerial perspective by the painter Zaccolini [4]. Colors fade toward the blue of the atmosphere in a set order, which he gave as black, green, \"pale\" (a yellow-green), purple, tan, red, yellow and white [4].\n\nIt sits beside [[light-green]] and [[moss-green]] in any palette of spring foliage."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 25 works, or 0.11 per cent, which is rarer than 64 per cent of the named colors [5]. It peaks in the 1800s, at 0.1 per cent of the 8,345 paintings from that century (9 paintings), 1.5 times the expected rate [5]. Inside a painting it most often plays a light [5]. The earliest match is a Carracci of about 1590 [5].\n\nThese are photographs of aged, varnished paintings, so these matches are look-alike hues, not proof of any pigment [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pale + yellow-green (systematic naming)",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "light-green",
+   "moss-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "chartreuse",
+    "gloss": "a brighter named green, also called a pale yellow-green"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes)",
+  "match": {
+   "hex": "#DAE7AD"
+  },
+  "n_present": 25,
+  "peak_century": 1800,
+  "measured": {
+   "iscc": "light yellow green",
+   "de2000": 4.5
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 125 (chartreuse)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"nickel phosphate hydrate\", p. 289",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 171",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which system first records Pale Yellow-Green in our library?",
+   "choices": [
+    "Ridgway, 1912",
+    "xkcd, 2010",
+    "CSS",
+    "Pantone"
+   ],
+   "answer": "Ridgway, 1912",
+   "kind": "pick"
+  },
+  {
+   "q": "What does St Clair say chartreuse is?",
+   "choices": [
+    "A pale yellow-green",
+    "A dark red",
+    "A brown",
+    "A sky blue"
+   ],
+   "answer": "A pale yellow-green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pale Yellow-Green is a Ridgway 1912 plate name, with no pigment story attached.",
+  "Zaccolini's perspective scale put a pale yellow-green third in the order of colors fading into haze."
+ ],
+ "words": 277,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed invented inference about Zaccolini ordering",
+   "Removed lanarkite claim (Compendium describes it as white, only pale yellow/green with impurities)"
+  ]
+ }
+}

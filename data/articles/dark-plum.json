@@ -1,0 +1,119 @@
+{
+ "slug": "dark-plum",
+ "name": "Dark Plum",
+ "hex": "#3F012C",
+ "names": [
+  "Dark Plum"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Plum is a very deep, reddish purple that is nearly black, named after the skin of the ripe fruit.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Dark Plum is a descriptive name: the ISCC-NBS system of 1955 files this swatch in a block of its own, and the xkcd survey of 2010 gave it the same words [1]. Its nearest named neighbor is [[aubergine]], about 2.9 units away on the CIEDE2000 scale, and the same ISCC-NBS system lists Port as a name for a related dark red-purple [1]. See also [[plum]] for the lighter fruit color.\n\nOne book use is worth keeping. Balfour-Paul quotes a traveller in southern Arabia who found that skin stained by indigo, sun and oil took on a bloom neither brown nor blue, something like a dark plum [2]. It is a reminder that indigo, usually thought of as blue, can go very dark and purple on the body [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a very rare color in painting. Only 1 of the 23,781 paintings in our archive has it covering at least 1 per cent of its canvas, as photographed [3]. That says more about this archive than about painting: this swatch is almost [[black]], with a lightness of about 11 out of 100 [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dark skin of a plum; descriptive name",
+   "first_recorded": "ISCC-NBS 1955",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "port (ISCC-NBS)"
+  ],
+  "siblings": [
+   "aubergine",
+   "plum",
+   "black",
+   "burgundy"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "pct_archive": 0.0,
+  "match": {
+   "hex": "#3F012C",
+   "de2000": 4
+  },
+  "measured": {
+   "lch": [
+    11,
+    34,
+    343
+   ],
+   "nearest": [
+    [
+     "Aubergine",
+     2.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 234",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Balfour-Paul say indigo-stained skin looked like?",
+   "choices": [
+    "Something like a dark plum",
+    "Bright sky blue",
+    "Pale grey"
+   ],
+   "answer": "Something like a dark plum",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color is closest to Dark Plum?",
+   "choices": [
+    "Aubergine",
+    "Lilac",
+    "Sage"
+   ],
+   "answer": "Aubergine",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Indigo-stained skin was once described as neither brown nor blue, but something like a dark plum."
+ ],
+ "words": 199,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

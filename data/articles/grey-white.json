@@ -1,0 +1,126 @@
+{
+ "slug": "grey-white",
+ "name": "Grey White",
+ "hex": "#DDDED4",
+ "names": [
+  "Grey White"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Grey white is a pale warm off-white, and in our data a paint-industry name from the RAL system.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What it names",
+   "body": "Our library takes this swatch from RAL 9002, an industrial color standard, so it is an approximate screen value for a paint [1]. Paterson defines grey white only in passing, as chalk's color [2]. Its nearest everyday name is [[ecru]], 6.1 units away, and it sits beside [[ivory]], [[silver]] and [[white]] [1].\n\nThe books mostly use the phrase for something else, a moral palette. Pastoureau notes that Protestant reformers' dress codes leaned on dark colors, blacks, greys and browns, with white for children, and that the Reformation favored a split between black, grey and white and the \"true\" colors [3][4]. He also wonders whether this moral outlook narrowed the colors of early manufactured goods [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the archive, 994 of 23,781 paintings carry this tone, almost all as highlights: 99 per cent of the matched area sits in the lightest zone [5]. China stands out, with 105 of 635 works, about four times the archive rate, [5]. The data are photographs of aged, varnished works, so a match is approximate [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive, RAL 9002",
+   "first_recorded": "undocumented",
+   "source": "RAL (library)"
+  },
+  "aka": [],
+  "siblings": [
+   "ecru",
+   "ivory"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+  "n_present": 994,
+  "role": {
+   "highlight": 0.99
+  },
+  "countries": [
+   {
+    "key": "China",
+    "hits": 105,
+    "n": 635
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json); RAL 9002 (approximate screen value)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 94 (\"chalk\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Black, pp. 64, 89",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 10 (\"The Favorite Color\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which system does the Grey White swatch come from?",
+   "choices": [
+    "RAL",
+    "Pantone",
+    "Crayola",
+    "Munsell"
+   ],
+   "answer": "RAL",
+   "kind": "pick"
+  },
+  {
+   "q": "Where does grey white sit in paintings that carry it?",
+   "choices": [
+    "In highlights",
+    "In shadows",
+    "In outlines",
+    "In frames"
+   ],
+   "answer": "In highlights",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pastoureau says the Reformation favored a split between black, grey and white and the true colors."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Pastoureau claim narrowed to what the text says; removed unsupported 'shaped business through the nineteenth century'"
+  ]
+ },
+ "words": 183
+}

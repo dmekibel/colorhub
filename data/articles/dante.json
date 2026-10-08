@@ -1,0 +1,195 @@
+{
+ "slug": "dante",
+ "name": "Dante",
+ "hex": "#3E2C3A",
+ "names": [
+  "Dante"
+ ],
+ "tier": "person",
+ "depth": "medium",
+ "lede": "Dante is a near-black purple recorded in a 1930 color dictionary, with no documented origin for its name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no recorded origin",
+   "body": "Dante is a very dark purple-black, #3E2C3A, that appears in our sources only in Maerz and Paul's 1930 *Dictionary of Color*, which dates the name to 1922 and files it on plate 47 [1]. Who first used it, and for what, is undocumented. None of the color books we checked defines it, and none says the shade was named for the poet Dante Alighieri [2]. A link to the poet's dark wood and underworld would be a guess, and no source we have makes it [2].\n\nOur library files it under fashion and textiles, the field in which Maerz and Paul recorded it [1]."
+  },
+  {
+   "id": "poet",
+   "title": "What the poet did say about color",
+   "body": "The books do record real connections between Dante and color, though not to this swatch [3][4]. Gage reports that Dante revived a seven-colour theory of the rainbow in the *Divine Comedy*, and even treated the fainter second bow as a reflection, and so an inversion, of the first [3]. Gage also notes that Dante mentions two miniaturists whose works are not known today [4]. Both are about light and color in the poem, not about a dark purple.\n\nA painter later took the subject back. Delacroix's *Barque of Dante* of 1822 is said to have been the first major painting in which he applied the idea of rainbow colors held in drops of water, here the drops on a torso [5]. The source is Andrieu's account, which may have come from Delacroix himself [5]. Dante Gabriel Rossetti belonged to the Pre-Raphaelites, whose demand for vibrant color caused an uproar in the British art world of the 1850s [6]. These are the poet's color connections, and they do not decide what the dark swatch is named for."
+  },
+  {
+   "id": "swatch",
+   "title": "What the swatch is",
+   "body": "On a screen Dante reads as a blackish aubergine: lightness 21, little chroma, and a hue at the purple end [1]. Its nearest named colors are [[poppy-purple]] and [[windsor]], both within about four units, then [[romanesque]] and [[dusty-aubergine]] at 4.5 [7]. [[aubergine]] itself is a lighter, more saturated cousin, 12.7 units away [1]. A true [[dark-purple]] is bluer, and [[raisin-black]] is browner. The color closest to a pure black in this group is [[pale-black-shade]], at 6.0 units [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dante is an uncommon color in the archive. It appears in 178 of 23,781 paintings, 0.75 percent, above 61 percent of the named colors, as photographed [8]. Within a painting it most often plays a shadow, in 34 percent of the 116 paintings where our within-painting lens finds it [8]. That fits its value: it is a dark that sits in the deepest parts of a picture.\n\nIt peaks in the 1900s, in 14 of 1,674 paintings, 0.8 percent and 1.4 times the baseline of the same museums [8]. The first match is a painting by Gentile da Fabriano of 1423, 507 years before the name appears in Maerz and Paul, so it is a look-alike hue in an aged photograph, not proof of a pigment or dye [8]. The plant sources in Werner's 1821 nomenclature that sit nearest are a dark purple scabious, known as Musk Flower, at 5.8 units, and the sweet-scented violet at 6.7 [7]. Look for the color in the shadow of a dark velvet, or in an old varnished portrait where black has aged toward purple."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; the name suggests the poet Dante Alighieri but no source says so",
+   "first_recorded": "1922 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "aubergine",
+   "dusty-aubergine",
+   "poppy-purple"
+  ],
+  "parent": "dark-purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "windsor",
+    "gloss": "a nearby dark purple with a different name and lineage"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 178,
+  "rate_pct": 0.75,
+  "role": {
+   "shadow_pct": 34,
+   "n": 116
+  },
+  "first_seen": {
+   "y": 1423,
+   "id": "commons-Q111821582"
+  },
+  "measured": {
+   "lch": [
+    21,
+    12,
+    333
+   ],
+   "nearest": [
+    [
+     "Poppy Purple",
+     3.2
+    ],
+    [
+     "Windsor",
+     4.1
+    ],
+    [
+     "Romanesque",
+     4.5
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "What do the color books say about where the color Dante got its name?",
+   "choices": [
+    "Nothing: its origin is undocumented",
+    "It was named for the Inferno",
+    "It was named for a dye from Florence",
+    "It was named for Dante Gabriel Rossetti"
+   ],
+   "answer": "Nothing: its origin is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "What role does Dante most often play inside a painting in our archive?",
+   "choices": [
+    "Shadow",
+    "Highlight",
+    "Accent",
+    "Background sky"
+   ],
+   "answer": "Shadow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Gage reports that Dante revived a seven-colour theory of the rainbow in the Divine Comedy.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The color Dante has no recorded origin: nobody says whether the poet had anything to do with it.",
+  "In our archive Dante is mostly a shadow color: 34 percent of the paintings that hold it use it in the deepest part."
+ ],
+ "words": 554,
+ "status": "checked",
+ "checked": {
+  "by": "batch-64 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Name origin undocumented; poet link explicitly not claimed.",
+   "Removed an unsourced claim about early-1900s naming fashions.",
+   "Delacroix anecdote single-source (Gage), hedged."
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Dante, Maerz and Paul 1930, first recorded 1922, plate 47 L 10; LCH 21, 12, 333; nearest Aubergine 12.7",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Concordance of 29 color books for \"dante\": no entry for the color; hits are the poet and Dante Gabriel Rossetti",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 98",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 13 (preface)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 114",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, section on the Pre-Raphaelites",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alikes and botany twins for dante (CIEDE2000; Werner 1821)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (L6 field notes, dante)",
+   "loc_kind": null,
+   "url": null
+  }
+ ]
+}

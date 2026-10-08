@@ -1,0 +1,97 @@
+{
+ "slug": "cyclamen",
+ "name": "Cyclamen",
+ "hex": "#F56FA1",
+ "names": [
+  "Cyclamen"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Cyclamen is a bright pink named for the flowering plant; Paterson calls the flower's color red, pink or reddish-purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower name in the red list",
+   "body": "Paterson defines cyclamen as the red or pink or reddish-purple color of the cyclamen flower, and his color index lists it under the reds, near [[crimson]] [1]. That is nearly all the books record; they give no date for the color.\n\nThe name is the plant's, but the origin of this swatch is undocumented [1]. We prefer to say so rather than invent a history. What can be said is that the name is a flower's, as with [[orchid]] and [[carnation]], and that Paterson's range runs from pink and red to reddish-purple [1]. Check the swatch against the real flower, since screen pinks are approximate [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this color covering at least 1% of its canvas, as photographed [2]. That describes this archive, not painting as a whole [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the cyclamen plant",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson, A Dictionary of Colour, p. 470"
+  },
+  "aka": [],
+  "siblings": [
+   "magenta",
+   "orchid"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#F56FA1",
+   "min_cover": 0.01
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index of reds, \"cyclamen\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Under which color group does Paterson list cyclamen?",
+   "choices": [
+    "Reds",
+    "Greens",
+    "Browns"
+   ],
+   "answer": "Reds",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color covers at least 1% of any painting in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cyclamen is filed among the reds in a major colour dictionary."
+ ],
+ "words": 150,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed false 'between crimson and cypress' and 'no description' claims; Paterson does define it",
+   "Removed unsupported fuchsia/magenta adjacency"
+  ]
+ }
+}

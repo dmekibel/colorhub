@@ -1,0 +1,189 @@
+{
+ "slug": "vandyke-red",
+ "name": "Vandyke Red",
+ "hex": "#814042",
+ "names": [
+  "Vandyke Red"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Vandyke Red is a dark brownish red; as a pigment name it is an old synonym for copper ferrocyanide, a chemical cousin of Prussian blue, and as a swatch it comes from Ridgway's 1912 color atlas.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "The pigment behind the name",
+   "body": "The *Pigment Compendium* lists Vandyke red as a common name for copper ferrocyanide, also written copper hexacyanoferrate(II), and classes it as a red-brown [1][2]. The same compound travelled under many names: Hatchett's brown, Florence brown, prussiate of copper and Prussian brown [3][4][5]. Doerner (1935) treats Roman brown as another name for Florence brown [3].\n\nBooks and sources disagree on the exact formula. The compendium gives both Cu2Fe(CN)6 and CuK2Fe(CN)6, and adds that such hexacyanoferrates form a loose family in which other metals can substitute for the iron or copper [2][5]. Bersch (1901) gave a recipe for Hatchett's brown, the same material [4]."
+  },
+  {
+   "id": "family",
+   "title": "Cousin of Prussian blue",
+   "body": "The compendium files copper hexacyanoferrate under the same hexacyanoferrate group as [[prussian-blue]], with a cross-reference between them [2][5]. The name is not the same as Vandyke brown, a separate [[brown]] pigment with its own entry, including a calcined form [6]. Who the Vandyke was and why the name was chosen is undocumented in the books we hold [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is an atlas color",
+   "body": "The swatch comes from Ridgway's 1912 atlas, plate XIII, hue 1', tone k; ISCC-NBS block 19 and Maerz and Paul plate 6 K 4 (first recorded 1912) agree on the name [7]. Ridgway's plates are scans of aged paper, so the color is approximate, and no book links the swatch to the pigment's actual look [7]. The nearest names are [[tuscan-red]] and, in plain words, [[mahogany]], at 9.9 units [7]. The library also pairs it with the Japanese *kokiake*, a deep scarlet [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The hue is present in 207 of 23,781 paintings (0.87 per cent), more than 61 per cent of the named colors [8]. It peaks in the 1400s, in 14 of 945 paintings, 2.5 times the museums' baseline, and in a painting it is most often an accent (66 of 117) [8].\n\nThe earliest match dates to 1301, 611 years before the name's first record (Ridgway, 1912) [7][8]. That is a look-alike hue in an aged, varnished photograph, not proof that copper ferrocyanide was in use [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented in the books we hold; echoes Vandyke brown",
+   "first_recorded": "1912, Ridgway",
+   "source": "Mayer (1991) via Pigment Compendium; Ridgway 1912"
+  },
+  "aka": [
+   "copper ferrocyanide",
+   "Hatchett's brown",
+   "Florence brown",
+   "Prussian brown"
+  ],
+  "siblings": [
+   "tuscan-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "brown",
+    "gloss": "Vandyke brown is a different pigment with its own entry"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "kokiake (deep scarlet, 深緋), a library pairing"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 207,
+  "measured": {
+   "lch": [
+    35,
+    30,
+    23
+   ],
+   "nearest": [
+    [
+     "Tuscan Red",
+     null
+    ],
+    [
+     "Mahogany",
+     9.9
+    ]
+   ]
+  },
+  "peak": "1400s"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, Pigment Compendium, \"Vandyke red\", p. 395",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"copper hexacyanoferrate(II)\", pp. 138-140",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Florence brown\", p. 171",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Hatchett's brown\", p. 195",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"hexacyanoferrate group\", p. 197",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Vandyke brown, calcined\", p. 395",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; color within the archive's match threshold, at least 2% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the chemistry behind the pigment name Vandyke red?",
+   "choices": [
+    "Copper ferrocyanide",
+    "Mercury sulphide",
+    "Iron-oxide earth",
+    "A madder lake"
+   ],
+   "answer": "Copper ferrocyanide",
+   "kind": "pick"
+  },
+  {
+   "q": "Hatchett's brown and Florence brown are other names for the same kind of pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which famous blue shares its hexacyanoferrate group with Vandyke red?",
+   "choices": [
+    "Prussian blue",
+    "Ultramarine",
+    "Azurite",
+    "Indigo"
+   ],
+   "answer": "Prussian blue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Vandyke red is a copper cousin of Prussian blue: the same cyanide-iron chemistry, a brown-red result.",
+  "The earliest archive match (1301) predates the name by 611 years, a look-alike, not a pigment."
+ ],
+ "words": 360,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Checked: all pigment-compendium claims verified."
+  ]
+ }
+}

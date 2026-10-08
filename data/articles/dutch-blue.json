@@ -1,0 +1,115 @@
+{
+ "slug": "dutch-blue",
+ "name": "Dutch Blue",
+ "hex": "#8D99AB",
+ "names": [
+  "Dutch Blue"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Dutch Blue is a soft grey-blue, a name that has meant different things to dictionaries and to pigment makers.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A blue-grey and a mixture",
+   "body": "Paterson's dictionary defines Dutch blue simply as a blue-grey [1]. Garfield counts it among 221 color names drawn from peoples, along with [[tyrian-purple]] [2]. In pigment lists the term is a trade name: the Pigment Compendium notes that Fishwick (recipes of 1795-1816) gives formulations for Dutch blue that mix lead white, Paris white (fine chalk) and [[prussian-blue]] [3].\n\nCutting Prussian blue with white would give a pale, greyed blue, so the recipe and the dictionary's blue-grey may describe similar colors, but the books do not say so [1][3]. The swatch sits close to [[delft-blue]] in the data."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "#8D99AB is a light, low-chroma blue [9]. The books give no firm date or inventor for the name [1][3]. The concordance of 29 color books finds only four strong mentions of this name, so the article stays short rather than pad the record [9]. Screen colors are approximate, and the swatch is a reference value, not a measured pigment [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "not dated in the books",
+   "source": "Paterson, A Dictionary of Colour, p. 152"
+  },
+  "aka": [
+   "blue-grey",
+   "Dutch-blue pigment"
+  ],
+  "siblings": [
+   "delft-blue",
+   "prussian-blue",
+   "blue",
+   "grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names, concordance of 29 color books",
+  "hex": "#8D99AB",
+  "book_mentions": 4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 152",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, p. 23",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 157",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub name data and the color-book concordance (4 strong mentions)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Paterson, what is Dutch blue?",
+   "choices": [
+    "A blue-grey",
+    "A bright yellow",
+    "A dark red",
+    "A green"
+   ],
+   "answer": "A blue-grey",
+   "kind": "pick"
+  },
+  {
+   "q": "Which pigment was mixed with white lead in old Dutch blue recipes?",
+   "choices": [
+    "Prussian blue",
+    "Madder",
+    "Vermilion",
+    "Realgar"
+   ],
+   "answer": "Prussian blue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dutch blue was a Prussian blue cut with white."
+ ],
+ "words": 171,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed 'explains' inference; recipe source attributed to Fishwick 1795-1816; 'Dutch tradition' claim removed"
+  ]
+ }
+}

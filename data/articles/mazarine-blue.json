@@ -1,0 +1,103 @@
+{
+ "slug": "mazarine-blue",
+ "name": "Mazarine Blue",
+ "hex": "#8EB5F2",
+ "names": [
+  "Mazarine Blue"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Mazarine Blue is an old name for a rich blue, possibly honoring a French cardinal; the modern swatch is much lighter than the word suggests.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A cardinal's blue?",
+   "body": "Paterson defines mazarine blue as a dark, rich blue, and passes on Partridge's suggestion that the name comes from Cardinal Mazarin (1602-1661), Richelieu's successor as France's chief minister [1]. That is a hedged derivation and the other books do not confirm it. Maerz and Paul record the name from 1686, on plate 44 [2].\n\nThe swatch tells a different story from the words. Ridgway 1912 (plate IX) and ISCC-NBS 1955 (block 197) gave a light, soft blue, here with a lightness of 73 [2]. So the dictionary's \"dark rich\" and the standard samples disagree [1][2]. The books do not say which of them the name first meant."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Mazarine Blue is rare in painting: 19 of 23,781 paintings, 0.08%, cover at least 5% of their canvas with it, as photographed [3]. The top match is Jongkind's view of Paris (1853), about 30% [3]. Its nearest standard name is [[periwinkle]], 8.5 ΔE away [2]. Related names: [[sky-blue]], [[light-blue]], [[royal-blue]] and [[midnight-blue]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "possibly Cardinal Mazarin (per Partridge); unproven",
+   "first_recorded": "1686 (Maerz & Paul 1930)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Mazarin blue"
+  ],
+  "siblings": [
+   "periwinkle",
+   "royal-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+  "n_present": 19,
+  "rate": 0.0008,
+  "nearest": "Periwinkle",
+  "hex": "#8EB5F2"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mazarine blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub name records (library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, CSS, Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson describe mazarine blue?",
+   "choices": [
+    "A dark rich blue",
+    "A pale grey",
+    "A bright green",
+    "A yellowish white"
+   ],
+   "answer": "A dark rich blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson says the Mazarin derivation is certain.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mazarine blue may honor Cardinal Mazarin (1602-1661), though Paterson only says possibly."
+ ],
+ "words": 184,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

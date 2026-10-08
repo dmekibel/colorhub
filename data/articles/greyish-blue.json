@@ -1,0 +1,295 @@
+{
+ "slug": "greyish-blue",
+ "name": "Greyish Blue",
+ "hex": "#8AA1A6",
+ "names": [
+  "Greyish Blue"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Greyish blue is a blue dulled with grey: the name Patrick Syme gave in 1821 to a mineralogist's smalt blue, later the color French soldiers wore into 1915, and the quiet blue of harbor skies.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A blue with grey in it",
+   "body": "Greyish blue is a plain compound, and plain compounds are loose by nature. Pastoureau separates the basic color words from a third group of shades made by joining two terms, such as grey-blue, and notes that these carry no symbolism, only an aesthetic meaning, and that their identity is vaguer [10]. Paterson's dictionary shows the looseness at work: a dozen older color names, from azulin and blunket to lead-blue, saxe blue and Payne's grey, are each defined as a greyish blue [9].\n\nThe swatch is #8AA1A6, a pale blue with almost no chroma: 9 on the CIELCH scale, so low that the nearest learnable name in our set is [[grey]], 9 units away [12]. Our library carries the name from Werner, ISCC-NBS 1955, Maerz and Paul, Ridgway, Wikipedia's color lists and the xkcd color survey [12]. The survey's own greyish blue, #5E819D, is a darker and bluer color [12]. The nearest names to our swatch are Tourmaline and Ridgway's Clear Green-Blue Grey, both about 1.5 units away [12]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner's smalt blue",
+   "body": "The name comes from mineralogy. In 1774 the German geologist Abraham Gottlob Werner devised a list of 54 colors for identifying minerals and assembled a specimen for each [1]. He revised and expanded the list over the next forty years or so [1].\n\nPatrick Syme (1774-1845), a flower painter in Edinburgh, published *Werner's Nomenclature of Colours* in 1814 and a second edition in 1821, with examples from animals, plants and minerals [2]. Darwin took the 1821 edition on the Beagle, and the color terms in his animal notes come from it [11].\n\nIn the 1821 edition Syme renamed two of Werner's blues [3]. His Sky Blue became Greenish Blue, number 33, and Smalt Blue became Greyish Blue, number 34 [3]. For number 34 he gave three examples: the back feathers of the blue tit, the small fennel flower, and an iron ore called iron earth [4]. His description of the color is [[berlin-blue]] with white, a little grey and a hardly noticeable trace of red [4]."
+  },
+  {
+   "id": "smalt",
+   "title": "The pigment behind the name",
+   "body": "Smalt is blue glass colored with cobalt. The hot glass is plunged into water, where it cracks into fragments that can be ground into pigment [5]. Its origin is obscure: tradition credits a Bohemian glassmaker, Christoph Schürer, between 1540 and 1560, but smalt already appears in Dieric Bouts's *Entombment* of about 1455 [5]. The invention has been credited instead to Italian glassmakers of the fourteenth century, and Ball also raises a Near Eastern origin [5].\n\nSmalt had to be left coarse to keep its deep color, which made it gritty to paint with, and its luster fades in oil [5]. [[painter:titian|Titian]], Tintoretto, Veronese, [[painter:el-greco|El Greco]] and [[painter:anthony-van-dyck|van Dyck]] all used it [5]. Ball describes the sky above van Dyck's portrait of Charles I as mostly greyish-blue smalt and white, and adds that the smalt is probably discolored [6]. A greyish blue in an old painting may therefore be a plain tint or a blue that has changed.\n\nThe same grey-blue turns up at the expensive end of the market. Simple grinding of ordinary [[gem:lapis-lazuli|lapis lazuli]] gives only a greyish blue powder, and a better extraction method that freed the pure blue mineral lazurite appeared soon after 1200 [7]."
+  },
+  {
+   "id": "uniform",
+   "title": "Horizon blue",
+   "body": "In August 1914 French soldiers went to war in red trousers dyed with madder, and Pastoureau judges it likely that so bright a color cost tens of thousands of lives [8]. That December the army decided to replace the red with a dull, unobtrusive greyish blue [8]. The synthetic indigo needed to dye so much cloth took months to find, and only in spring 1915 were all French troops dressed in the new color, called horizon blue [8].\n\nOther armies had already moved on. Pastoureau lists khaki for the British, greyish green for Germans, Italians and Russians, and greyish blue for the Austro-Hungarians [8]. As late as 1911 a former French war minister, Étienne, argued that dull, faded shades went against French taste and that the red trousers were France [8].\n\nBooks disagree on what the color was. Paterson lists poilu-blue as the shade of greyish blue worn by French infantrymen in the First World War, but defines horizon blue as a light greenish blue [9]. Pastoureau calls it the indefinable color of the line between sky and earth or sea [8]. He adds an older echo: peasants of the feudal period wore a dull greyish blue, and country people in England, Germany and northern Italy took to blue clothes again in the later eighteenth century [8]."
+  },
+  {
+   "id": "words",
+   "title": "Older names for the same grey",
+   "body": "Paterson defines a dozen older color names as a greyish blue: azulin, blunket, plunket, gobelin blue, lead-blue, saxe blue, Tyrian blue, a pale Botticelli blue and [[payne-s-grey]], among others [9]. Grulla is the grey-blue of some horses [9]. Venet, short for the Latin for Venice blue, is turquoise and sometimes greyish blue, and Paterson passes on a report from Maerz and Paul that spy ships used it on their sails in the fifteenth century as camouflage [9]. His [[steel-blue]] is a greenish or greyish blue, and also another name for Prussian blue [9].\n\nThe list shows what the phrase is for. Each older name pins the same region of color to a material, a place or a person, and greyish blue is the label that covers them all [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 416 works, 1.75 per cent [13]. It belongs to harbors and skies. [[painter:eugene-boudin|Boudin]] carries it in 9 of his 33 paintings here, about 16 times the archive rate, [[painter:alfred-sisley|Sisley]] in 7 of 50, and [[painter:childe-hassam|Hassam]] in 3 of 13 [13]. [[look:impressionism|Impressionism]] has it 6.5 times as often as the archive average, 16 of 140 paintings [13].\n\nThe canvases where it covers the most are [[painting:cma-163797|an Indian court painting of an elephant]] from 1761 at 56 per cent, [[painting:rijks-200742047|a seascape by Bakhuysen]] from 1667 and [[painting:smk-KMS3630|Guardi's *Bucintoro Festival*]], both at 52 per cent, and Boudin's [[painting:commons-Q17496120|*Voiliers*]] at 46 per cent [13]. The peak decade is the 1870s, with 43 of 1,065 paintings, 2.3 times the archive rate [13]. The first dated example is Petrus Christus's *Nativity* of 1450, and none of the 443 works from before 1400 carries it [13]. Where it appears it is usually among the lightest colors of the painting, in 69 per cent of cases [13]. It most often shares a canvas with sky blue, 13 times the usual rate, and then grey [13].\n\nThese are photographs of aged, varnished paintings, so a color match is not a pigment test, and a smalt sky that has discolored will read differently from the day it was painted [13][6]. In Google Books the phrase *greyish blue* stands highest in the earliest decades measured, around 1800, and has fallen to about 13 per cent of that level by 2000 [14]. To see it, look at the sky and water of a Boudin harbor: the grey in the blue is the point [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Werner's Smalt Blue, renamed Greyish Blue in Syme's 1821 edition (no. 34)",
+   "first_recorded": "Syme, Werner's Nomenclature of Colours, 1821; Maerz & Paul record 1927",
+   "source": "Baty, Nature's Palette, p. 89; ColorHub library"
+  },
+  "aka": [
+   "Smalt Blue (Werner)",
+   "grey-blue",
+   "azulin"
+  ],
+  "siblings": [
+   "blue-grey",
+   "bluish-grey",
+   "steel-blue",
+   "payne-s-grey"
+  ],
+  "parent": "blue",
+  "children": [
+   "pale-greyish-blue"
+  ],
+  "disambiguation": [
+   {
+    "slug": "pale-greyish-blue",
+    "gloss": "Ridgway's much lighter, bluer Pale Greyish Blue"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8AA1A6",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 416,
+  "top_paintings": [
+   "cma-163797",
+   "smk-KMS3630",
+   "rijks-200742047",
+   "commons-Q17496120"
+  ],
+  "painters": [
+   {
+    "name": "Eugene Boudin",
+    "n": 33,
+    "hits": 9
+   },
+   {
+    "name": "Alfred Sisley",
+    "n": 50,
+    "hits": 7
+   },
+   {
+    "name": "Childe Hassam",
+    "n": 13,
+    "hits": 3
+   }
+  ],
+  "peak_decade": {
+   "decade": 1870,
+   "n": 1065,
+   "hits": 43,
+   "lift": 2.31
+  },
+  "role": {
+   "highlight": 0.69,
+   "mid": 0.29,
+   "shadow": 0.02
+  },
+  "company": [
+   "Sky blue",
+   "Grey",
+   "Ash"
+  ],
+  "ngram": {
+   "peak": 1800,
+   "rel_2000": 0.13
+  },
+  "measured": {
+   "lch": [
+    65,
+    9,
+    217
+   ],
+   "nearest": [
+    [
+     "Clear Green-Blue Grey",
+     1.4
+    ],
+    [
+     "Tourmaline",
+     1.5
+    ],
+    [
+     "Grey",
+     9.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 7-8",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 26-27, 34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 89",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 102-103",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Lazurite\", p. 232",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 10 (\"The Birth of Political and Military Blue\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries azulin, azurine, blunket, plunket, Botticelli blue, gobelin blue, grulla, lead-blue, Payne's grey, poilu-blue, saxe blue, steel blue, Tyrian blue, venet, horizon blue",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Le petit livre des couleurs (on the third group of color terms, the shades)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 121",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Werner no. 34, ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, xkcd survey), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Syme's 1821 edition do to Werner's Smalt Blue?",
+   "choices": [
+    "Renamed it Greyish Blue, number 34",
+    "Dropped it from the list",
+    "Renamed it Sky Blue",
+    "Merged it with Prussian blue"
+   ],
+   "answer": "Renamed it Greyish Blue, number 34",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did the French army replace its red trousers with a dull greyish blue in 1914-15?",
+   "choices": [
+    "The bright red was too easy to see on the battlefield",
+    "Red dye had run out",
+    "Blue was the color of the Republic's flag only",
+    "Greyish blue was cheaper than madder"
+   ],
+   "answer": "The bright red was too easy to see on the battlefield",
+   "kind": "pick"
+  },
+  {
+   "q": "Ordinary lapis lazuli, ground and washed, gives a brilliant blue powder.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme's 1821 list renamed Werner's smalt blue as Greyish Blue, number 34, and matched it to a blue tit's back.",
+  "In spring 1915 the whole French army changed from red trousers to a dull greyish blue called horizon blue.",
+  "Look for greyish blue in harbor skies: more than a quarter of Boudin's paintings in our archive carry it."
+ ],
+ "words": 1164,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Paterson's horizon blue (light greenish blue) vs Pastoureau's grayish-blue 1915 uniform: stated as books disagree.",
+   "Smalt origin: tradition (Schurer 1540-60) vs Bouts c. 1455: stated as disputed.",
+   "Venet camouflage anecdote is Paterson relaying Maerz & Paul: hedged.",
+   "Archive matches are colors, not pigment identifications (said in text)."
+  ]
+ }
+}

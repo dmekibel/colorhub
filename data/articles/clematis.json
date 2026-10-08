@@ -1,0 +1,118 @@
+{
+ "slug": "clematis",
+ "name": "Clematis",
+ "hex": "#4D3689",
+ "names": [
+  "Clematis"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Clematis is a bluish violet named for the flower, recorded in color dictionaries from 1899 on.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The flower's name",
+   "body": "*Clematis* is defined by Paterson as a bright bluish violet, like the flower of the same name [1]. The same dictionary files it among the blues, not the purples, which shows how loosely a bluish violet sits between the two families [1].\n\nThe swatch here is from Maerz and Paul's *Dictionary of Color* (1930), where the name is first recorded in 1899, on plate 42 [2]. It is dark and saturated, with a lightness of 29 on the LCH scale [2]. Its closest named neighbor in our library is [[indigo]], at a CIEDE2000 distance of 4.2 [2].\n\nThe color books say nothing more about a dye, a pigment or a fashion tied to this name, so an honest account stops here."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Clematis is very rare as a painted color. In our archive of 23,781 paintings, a close match covers at least 1% of the canvas in only one work [3]. It is rarer than 86% of the named colors in the archive [3]. These are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the clematis flower",
+   "first_recorded": "1899 (Maerz & Paul)",
+   "source": "Paterson, p. 106; library"
+  },
+  "aka": [],
+  "siblings": [
+   "violet",
+   "lilac",
+   "indigo",
+   "blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 1,
+  "rank_rarer_than_pct": 86,
+  "measured": {
+   "lch": [
+    29,
+    53,
+    306
+   ],
+   "nearest": [
+    [
+     "Indigo",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 106 and word lists pp. 469, 490",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz & Paul 1930, plate 42 K 11), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What flower gives clematis its name?",
+   "choices": [
+    "The clematis flower",
+    "The cornflower",
+    "The iris",
+    "The mallow"
+   ],
+   "answer": "The clematis flower",
+   "kind": "pick"
+  },
+  {
+   "q": "Which family does Paterson's word list file clematis under?",
+   "choices": [
+    "Blues",
+    "Greens",
+    "Reds",
+    "Browns"
+   ],
+   "answer": "Blues",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Paterson's dictionary lists clematis among the blues, though it defines it as a bluish violet."
+ ],
+ "words": 186,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede said 'early twentieth century' but first record is 1899; reworded, and dropped 'deep' since Paterson says bright."
+  ]
+ }
+}

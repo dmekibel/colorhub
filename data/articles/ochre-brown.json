@@ -1,0 +1,164 @@
+{
+ "slug": "ochre-brown",
+ "name": "Ochre Brown",
+ "hex": "#9C6B30",
+ "names": [
+  "Ochre Brown"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Ochre brown is the brown of iron-rich earth, a deep golden-brown named for ochre, the clay that iron oxide colors.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "Ochre, the earth itself",
+   "body": "Ochre is clay colored by iron oxide, and iron ranks third among the elements of the earth's crust, found in some form in most rocks [1]. That is why ochres turn up everywhere. Cave painters worked with a short list of mineral colors: red, ochre, brown, black and white [2].\n\nThe pigment trade also used a long run of other names. One historical dictionary of pigments records brown ochre as a name that Salter in 1869 said was known as spruce ochre and *ocre de rue* [3]. Chemists sometimes use \"ochre\" for other metal-rich earths, such as antimony or nickel ochres, which are not the iron kind artists mean [1]."
+  },
+  {
+   "id": "name",
+   "title": "The name as a color",
+   "body": "The swatch is the color called ochre brown in the German RAL system of 1927 [4]. In the ISCC-NBS system it falls near a strong yellowish brown, 5.2 units away by CIEDE2000 [4]. It sits beside [[ochre]], [[raw-sienna]], [[sienna]] and [[umber]] in the earth family, and is darker and browner than a yellow ochre [4]."
+  },
+  {
+   "id": "painting",
+   "title": "In painting",
+   "body": "Ochres were so ordinary that writers mention them in passing. Ball describes van Dyck's *Charles I* with foliage and foreground glazed with ochres, browns and black, a picture whose drabness he blames partly on darkened varnish and faded lakes [5]. Finlay describes a 1991 painting by Rover Thomas in ochre and gum, white dots falling across an ochre-brown canvas [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Ochre brown is one of the most common colors in the archive. It appears in 2,465 of 23,781 paintings, 10.4 per cent, and is more common than 94 per cent of the named colors [7]. It peaks early, in the 1300s, when it shows in 17.9 per cent of the 251 paintings we have, about three times the rate the same museums would predict [7]. Inside a painting it is most often an accent, a small warm note (57 per cent of 1,562 works measured) [7]. As photographed, these are aged, varnished paintings, so a match is not a pigment test [7]. The term ochre brown itself rises in Google Books from about 1860 and peaks around 1870 [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "ochre, the iron-oxide earth pigment",
+   "first_recorded": "RAL color list, 1927 (this swatch)",
+   "source": "ColorHub library; Pigment Compendium, \"brown ochre\""
+  },
+  "aka": [
+   "brown ochre",
+   "spruce ochre (historical)"
+  ],
+  "siblings": [
+   "ochre",
+   "raw-sienna",
+   "sienna"
+  ],
+  "parent": "ochre",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+  "n_present": 2465,
+  "measured": {
+   "lch": [
+    49.2,
+    42.2,
+    71.1
+   ],
+   "iscc": "strong yellowish brown, dE 5.2"
+  },
+  "ngram": {
+   "rise": 1860,
+   "peak": 1870
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"ochre\" (earth pigments), p. 292",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 14",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"brown ochre\", p. 76 (quoting Salter, 1869)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; RAL 1927, ISCC-NBS 1955), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, on van Dyck's Charles I",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Colour, chapter on Aboriginal art (Rover Thomas, 1991)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What makes ochre brown?",
+   "choices": [
+    "Iron oxide in clay",
+    "Copper salts",
+    "Burnt bone",
+    "Plant resin"
+   ],
+   "answer": "Iron oxide in clay",
+   "kind": "pick"
+  },
+  {
+   "q": "In painting, ochre brown most often plays which role?",
+   "choices": [
+    "An accent",
+    "The sky",
+    "A light",
+    "The ground"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Cave painters worked from a short list: red, ochre, brown, black and white.",
+  "Look for ochre brown as a small warm accent in old paintings: it is the commonest role it plays."
+ ],
+ "words": 357,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede claimed ochre is the oldest and most common artists' pigment; no source, removed."
+  ]
+ }
+}

@@ -1,0 +1,123 @@
+{
+ "slug": "brazil-red",
+ "name": "Brazil Red",
+ "hex": "#B5402D",
+ "names": [
+  "Brazil Red"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Brazil red is an old name for a red pigment, listed in an eighteenth-century scheme of red colorants.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A red on a pigment list",
+   "body": "In 1769 Jacob Christian Schäffer proposed a standard set of principal colors and gave the pigments for each [3]. For red his list read minium, cochineal, cinnabar, carmine, *kugellack*, Brazil red, Florentine lake and English red [3]. The books consulted say little more about it, so its chemistry is not stated here [3].\n\nThe name suggests a link to the dyewood of Brazil, but the sources read do not say so, and the article leaves that open [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is a brick-like red, #B5402D, from Ridgway's color book and ISCC-NBS lists [4]. Its nearest named neighbors are Brick and Medium Carmine [4]. Compare [[red]], [[carmine]] and [[vermilion]] [4]. In LCH terms it measures lightness 44, chroma 59 and hue 38 degrees [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this red in 543 of 23,531 paintings, as photographed [2]. India accounts for 67 of them, and Albrecht Dürer for 9 [2]. These are photographs of varnished and aged surfaces [2]. The numbers say little about the pigment of the same name [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented in the books consulted",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "Baty, Nature's Palette (quoting Schäffer 1769)"
+  },
+  "aka": [
+   "Brasil red"
+  ],
+  "siblings": [
+   "carmine",
+   "vermilion"
+  ],
+  "parent": null,
+  "children": [
+   "red",
+   "brick"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 543,
+  "measured": {
+   "lch": [
+    44,
+    59,
+    38
+   ],
+   "nearest": [
+    [
+     "Brick",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,531 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction, pp. 18-19",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway and ISCC-NBS entries",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Whose 1769 list of red pigments includes Brazil red?",
+   "choices": [
+    "Schäffer",
+    "Newton",
+    "Perkin",
+    "Goethe"
+   ],
+   "answer": "Schäffer",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books consulted prove Brazil red came from Brazilwood.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A 1769 chart lists Brazil red with cochineal and cinnabar."
+ ],
+ "words": 176,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'prints, manuscripts, brick' remark."
+  ]
+ }
+}

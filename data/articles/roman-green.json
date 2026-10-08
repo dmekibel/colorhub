@@ -1,0 +1,124 @@
+{
+ "slug": "roman-green",
+ "name": "Roman Green",
+ "hex": "#6F7044",
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Roman green is a muted olive. The name belongs to two things: a dull green swatch in the old color atlases, and a 19th-century artists' pigment.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "The artists' pigment",
+   "body": "The *Pigment Compendium* quotes Salter, writing in 1869, that a President of the Royal Academy had carried Roman green home from Rome, and that it looked like Prussian blue blended with Dutch or Italian pink [1]. Dutch and Italian pinks were yellow lake pigments, so this was a blue and yellow mixture [1]. The compendium gives it a short entry resting on that one source [1].\n\nThe name should not be read as Roman taste, since Pastoureau notes that for the Romans themselves, green, and blue even more, was a barbarian color [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch #6F7044 comes from the color atlases: Ridgway's 1912 plate XVI, Maerz and Paul's 1930 dictionary, and the ISCC-NBS dictionary of 1955, which calls it a light grayish olive [3]. It is a different thing from Salter's pigment, and the books do not connect them [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is common in painting: our archive of 23,781 has it in 1,101 works (4.63%), as photographed [4]. The earliest match is from the 900s, a thousand years before Ridgway's name, so these are look-alike hues in aged paint [4]. Peter Snayers is its most devoted painter, with it in 6 of 16 works [4]. Neighbors are [[olive-green]], [[olive]] and [[khaki]] [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Rome (the reason is undocumented for the swatch)",
+   "first_recorded": "Salter 1869 (pigment); Ridgway 1912 (swatch)",
+   "source": "Pigment Compendium, \"Roman green\", p. 337"
+  },
+  "aka": [],
+  "siblings": [
+   "olive-green",
+   "olive",
+   "khaki"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6F7044",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1034,
+  "painters": [
+   "Peter Snayers"
+  ],
+  "iscc_nbs": "light grayish olive"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, \"Roman green\", p. 337",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 10 (\"Green among the Romans\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Salter (1869), what was Roman green a mixture of?",
+   "choices": [
+    "Prussian blue and Dutch or Italian pink",
+    "Madder and white",
+    "Vermilion and ochre",
+    "Indigo and red"
+   ],
+   "answer": "Prussian blue and Dutch or Italian pink",
+   "kind": "pick"
+  },
+  {
+   "q": "How did Romans themselves regard green, per Pastoureau?",
+   "choices": [
+    "As a barbarian color",
+    "As the imperial color",
+    "As sacred",
+    "As unlucky only at sea"
+   ],
+   "answer": "As a barbarian color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Roman green, said Salter in 1869, was probably Prussian blue mixed with a yellow pink."
+ ],
+ "names": [
+  "Roman Green"
+ ],
+ "status": "checked",
+ "words": 223,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against fact card and book text; no changes."
+  ]
+ }
+}

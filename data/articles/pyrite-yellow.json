@@ -1,0 +1,110 @@
+{
+ "slug": "pyrite-yellow",
+ "name": "Pyrite Yellow",
+ "hex": "#BDA33F",
+ "names": [
+  "Pyrite Yellow"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Pyrite yellow is a dark, metallic-leaning yellow named for the mineral pyrite, the iron sulfide better known as fool's gold.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineral's name",
+   "body": "Paterson's dictionary glosses pyrite yellow simply as a dark yellow, and lists it among the yellows [1]. The mineral behind it is pyrite, which the same dictionary describes as an iron ore producing a dark brown pigment [1]. A jeweler's glossary calls pyrite a heavy, shiny, yellow mineral, also called fool's gold [2].\n\nThe Pigment Compendium treats pyrite, along with marcasite, as a naturally occurring metallic yellow iron sulfide with the formula FeS2 [3]. It also notes that an 1893 source mentions iron black as a ground iron sulfide, though it is unclear whether that came from the mineral [3]. In other words, the books give the color word and the mineral, and these sources record no tradition of painting with a pyrite-yellow paint [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a swatch, #BDA33F is a muted, slightly olive gold, the sort of tone that reads as metal rather than lemon or sunflower [4]. Nearby names include [[mustard]], [[olive]] and [[bronze]] [4]. The screen color is an approximation, not a measured mineral color [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mineral pyrite (iron sulfide)",
+   "first_recorded": "undocumented",
+   "source": "Paterson, p. 326"
+  },
+  "aka": [],
+  "siblings": [
+   "mustard",
+   "olive",
+   "bronze",
+   "gold"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "concordance of 29 color books",
+  "book_mentions": 4,
+  "swatch": "#BDA33F (screen approximation)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"pyrite\", \"pyrite yellow\", p. 326",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Jewels, glossary",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Pyrite\", p. 326",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is pyrite chemically?",
+   "choices": [
+    "An iron sulfide",
+    "A copper carbonate",
+    "A lead oxide"
+   ],
+   "answer": "An iron sulfide",
+   "kind": "pick"
+  },
+  {
+   "q": "What does Paterson say pyrite itself yields as a pigment?",
+   "choices": [
+    "A dark brown",
+    "A bright blue",
+    "A pale pink"
+   ],
+   "answer": "A dark brown",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pyrite yellow is named for fool's gold, an iron sulfide."
+ ],
+ "words": 180,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Hedged absence claim to what the cited sources record"
+  ]
+ }
+}

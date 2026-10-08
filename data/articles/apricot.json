@@ -1,0 +1,169 @@
+{
+ "slug": "apricot",
+ "name": "Apricot",
+ "hex": "#FFB16D",
+ "names": [
+  "Apricot"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Apricot is the soft orange-yellow of the fruit, a name that fashion and the pearl trade have used for a long time and that the old color books mention mostly in passing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The fruit's color",
+   "body": "Paterson defines apricot plainly as the orange-yellow of the fruit [1]. Our swatch is a light, warm orange, and its closest named neighbors are [[apricot-buff]], [[light-salmon-orange]] and [[mandarin]], the first two from Ridgway's 1912 atlas and the third a Japanese-derived name [2]. The ISCC-NBS system of 1955 files the color in blocks 52 and 53, and lists Golden Apricot and Talisman beside it [2].\n\nPastoureau makes a quieter point about vocabulary. Medieval yellows, he says, lean toward orange, beige and brown, and from lightest to darkest he would describe them as straw, chamois, apricot, honey, russet, tawny, bister and bronze [3]. Those are his descriptive terms, not a medieval list. He also argues that terms like apricot, pumpkin, saffron and tan cannot replace the word orange, because color words have no true synonyms and each shifts the connotation [4]."
+  },
+  {
+   "id": "uses",
+   "title": "Where the word turns up",
+   "body": "Apricot is a pearl color. Finlay lists the shades of pearls as running from pure white through champagne, apricot, bronze, pink, lavender and grey to black, and, very rarely, green [5]. The nearest gem entry in our data is [[gem:pearl|pearl]] [5].\n\nIt was also a fashion partner. In 1880, St Clair reports, the purple dye color heliotrope was paired with light green or apricot, and over the following decade with a run of louder partners, from canary yellow to peacock blue [6]. Finlay, travelling in a high valley beside Kashmir, notes apricot orchards among the few places where bright green fields interrupt the dry earth and glaciers, a reminder that the word started with a tree [7]. The tree is in our botany data as [[flower:apricot|apricot]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Apricot is moderately rare in our painting archive: 67 of 23,781 paintings, 0.28 per cent, and rarer than 53 per cent of the named colors [8]. In the within-painting count of 41 paintings it plays an accent in 63 per cent [8]. It peaks in the 1900s, in 0.4 per cent of the 1,674 paintings from then, 1.7 times the museums' baseline, and our earliest match is a work of 1300 by Giotto, a floor for a thin early archive and not a first [8].\n\nThese are photographs of aged, varnished paintings, which tend to yellow and warm every pale color, so an apricot match is a look-alike hue and not a pigment test [8]. In printed English the adjective peaks in the 2010s, after a first rise in the 1920s [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the apricot fruit",
+   "first_recorded": "as a color name, ISCC-NBS 1955 and Paterson; earlier use undocumented in our sources",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "Golden Apricot (ISCC-NBS)"
+  ],
+  "siblings": [
+   "apricot-buff",
+   "mandarin"
+  ],
+  "parent": "orange",
+  "children": [
+   "apricot-buff"
+  ],
+  "disambiguation": [
+   {
+    "slug": "peach",
+    "gloss": "a nearby pale orange from a different fruit, usually a little pinker"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 67,
+  "within_painting": 41,
+  "pct": 0.28,
+  "rank_pct": 53,
+  "peak_century": {
+   "century": 1900,
+   "rate": 0.4,
+   "n": 1674,
+   "lift": 1.7
+  },
+  "first_seen": {
+   "id": "commons-Q2016193",
+   "painter": "Giotto",
+   "year": 1300
+  },
+  "role_most_common": "accent (63%)",
+  "ngram": {
+   "peak": "2010s",
+   "rise": "1920s"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"apricot\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library and botany data: Apricot (ISCC-NBS 1955 blocks 52-53), Apricot Buff and Light Salmon-Orange (Ridgway 1912), Mandarin",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 37 (notes)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Brilliant: The Story of Jewels, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Heliotrope\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 214",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Apricot (23,781 paintings, as photographed; Google Books Ngram, adjective use)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which of these does Finlay list among the colors of pearls?",
+   "choices": [
+    "Apricot",
+    "Neon green",
+    "Bright red",
+    "Royal blue"
+   ],
+   "answer": "Apricot",
+   "kind": "pick"
+  },
+  {
+   "q": "In 1880, which two colors was the purple heliotrope paired with?",
+   "choices": [
+    "Light green or apricot",
+    "Black or white",
+    "Red or gold",
+    "Brown or grey"
+   ],
+   "answer": "Light green or apricot",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pearls come in apricot, among champagne, bronze, pink, lavender and grey.",
+  "In 1880, heliotrope was paired with light green or apricot."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 423
+}

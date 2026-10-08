@@ -1,0 +1,137 @@
+{
+ "slug": "sun-yellow",
+ "name": "Sun Yellow",
+ "hex": "#F09200",
+ "names": [
+  "Sun Yellow"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Sun yellow is a bright, warm yellow-orange named for the sun; it has also been a pigment synonym for a nickel titanium yellow and a dictionary word for maize.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three uses of one name",
+   "body": "As a plain color word, sun yellow is a bright yellow; Paterson sends the reader to *maize* [1]. Maize in turn is sometimes a bright yellow and also a pale yellow used for dress fabric, and Paterson says sun yellow is another name for it [1]. The swatch here is deeper and more orange than the word suggests, close to [[golden-yellow]] and [[mustard]] territory.\n\nIn the paint trade it meant something else. The pigment literature gives sun yellow as a synonym for a nickel titanium yellow, also called titan yellow, in Colour Index number 77788 [2]. That is a modern industrial pigment [2]. Related pages: [[maize]] and [[yellow]]."
+  },
+  {
+   "id": "sun",
+   "title": "Is the sun yellow?",
+   "body": "The name leans on a habit of seeing. Paterson points out that from space the sun appears white, and that it looks yellow from earth because the atmosphere filters the blue end of sunlight [1]. Birren's survey of color theory quotes Aristotle, who gave fire and the sun the color yellow [3]. Pastoureau quotes the French lexicographer Furetière, who wrote that yellow reflects the most light after white, which is why painters paint the sun's rays yellow [4]. It is a convention, a good one, but not a measurement."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Sun yellow appears in 0.3% of the 23,781 paintings in our archive, 71 paintings, as photographed, more common than 58% of the named colors [5]. It almost always plays an accent: 95% of the 92 paintings where we measure roles [5]. It peaks in the 1800s, at 0.7% of 8,345 paintings, 1.7x the baseline of the same museums [5].\n\nGeorge Dawe has it in 9 of 50 works here, 10.4x his museums' baseline, and the United Kingdom is the most over-represented country at 4.6x [5]. The earliest match, 1375, is a look-alike hue in an aged photograph, 552 years before the name's earliest record in our sources, the 1927 RAL list [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sun",
+   "first_recorded": "1927 (RAL) in our name data",
+   "source": "Paterson, Dictionary of Colour; Pigment Compendium"
+  },
+  "aka": [
+   "titan yellow (the pigment)",
+   "nickel titanium yellow"
+  ],
+  "siblings": [
+   "maize",
+   "golden-yellow"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "maize",
+    "gloss": "The dictionary word Paterson gives as the same colour as sun yellow"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F09200",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 71,
+  "role": "accent 95%",
+  "painter": "George Dawe, 9 of 50"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"sun yellow\" and \"maize\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entries \"sun yellow\" and \"nickel titanate yellow\" (Colour Index 77788)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 7",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub painting archive, field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the pigment name sun yellow refer to in the paint literature?",
+   "choices": [
+    "A nickel titanium yellow",
+    "Lead-tin yellow",
+    "Gamboge resin",
+    "Saffron"
+   ],
+   "answer": "A nickel titanium yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: from space the sun appears white.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "From space the sun looks white; the yellow is added by our atmosphere.",
+  "Sun yellow was also a name for a nickel titanium pigment."
+ ],
+ "words": 334,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Painters/sun's-rays line re-attributed to Furetière as quoted by Pastoureau.",
+   "Removed unsupported remark on why the pigment is named sun yellow.",
+   "Birren line attributed to Aristotle as quoted."
+  ]
+ }
+}

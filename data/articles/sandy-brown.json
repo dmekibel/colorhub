@@ -1,0 +1,111 @@
+{
+ "slug": "sandy-brown",
+ "name": "Sandy Brown",
+ "hex": "#F4A460",
+ "names": [
+  "Sandy Brown"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Sandy Brown is a warm light orange-brown, one of the 140 named colors in the X11 web set.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Sand, in a web palette",
+   "body": "Paterson lists SandyBrown as one of the 140 colours in the X11 set, hex code #F4A460 [1]. The index places it among browns with an asterisk for X11, as do Rosy Brown and Saddle Brown [2]. The plain word *sandy* is defined as having the colour of sand [1].\n\nThe books record no earlier history for the name, so it reads as a screen-era standard [1]. Related entries include [[sand]] and [[sandstone]] [1][2]. Paterson also notes that *sandstone* is a reddish brown and that *sand* is a light yellowy-grey, so even the sand family spreads across several hues [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 56 hold this color at 5% of the canvas or more, as photographed [3]. The earliest sample is an Indian miniature of Shiva and King Bana, 1840 [3]. The match counts any painting with this color covering at least a twentieth of the canvas, so it shows where the color appears in photographs of paintings, not that the painters ever called it by this name."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "sand (the books do not say; origin undocumented)",
+   "first_recorded": "X11 set, undated in the books",
+   "source": "Paterson, A Dictionary of Colour, p. 355"
+  },
+  "aka": [
+   "SandyBrown"
+  ],
+  "siblings": [
+   "sand",
+   "tan"
+  ],
+  "parent": "brown",
+  "children": [
+   "sandstone"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (color match within 6 DeltaE2000, at least 5% of the canvas)",
+  "match": {
+   "hex": "#F4A460",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 56,
+  "first": "1840"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 355",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 495 (color index, browns)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What hex code does Paterson give for SandyBrown?",
+   "choices": [
+    "#F4A460",
+    "#8B4513",
+    "#BC8F8F",
+    "#FFCC33"
+   ],
+   "answer": "#F4A460",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Sandy Brown is one of the 140 X11 colors.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sandy Brown is one of the 140 X11 colors, #F4A460.",
+  "Only 56 paintings in our archive hold this color, as photographed."
+ ],
+ "words": 181,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced 'warmest and brightest' claim and tan/salmon neighbors."
+  ]
+ }
+}

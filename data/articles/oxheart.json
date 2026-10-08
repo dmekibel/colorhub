@@ -1,0 +1,101 @@
+{
+ "slug": "oxheart",
+ "name": "Oxheart",
+ "hex": "#802922",
+ "names": [
+  "Oxheart"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Oxheart is a deep, brownish red named for the meat, a cousin of oxblood that the dictionaries file simply as deep red.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines oxheart as a deep red, listing it beside oxblood in his dictionary and among the reds in his colour tables [1]. The library's source for the name is Maerz and Paul's 1930 dictionary, plate 6, which gives 1922 as the first recorded use [2]. That is all the books we hold say.\n\nThe swatch here is darker and browner than \"deep red\" suggests. ISCC-NBS calls the nearest standard color a \"moderate reddish brown\" [2]. It is part of the dark-red family with [[oxblood]], [[maroon]] and [[burgundy]], and the wider family of [[red]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Oxheart is a common painted color. In our archive of 23,781 paintings, 1,013 carry it over at least five per cent of the canvas, as photographed, more often than 89 per cent of the named colors [3]. It peaks in the 1400s: 118 of the 945 paintings from that century, 3.2 times the archive's usual rate [3]. In 80 per cent of the 868 paintings where we measured its rank it is an accent [3]. Dark reds are also the colors that aged glazes and varnish push around, so read these as screen colors, not pigments [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "ox heart (the meat); origin undocumented beyond the name",
+   "first_recorded": "Maerz & Paul, 1930 (first recorded 1922)",
+   "source": "Paterson, p. 291"
+  },
+  "aka": [],
+  "siblings": [
+   "oxblood",
+   "maroon",
+   "burgundy"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1013,
+  "peak": "1400s (118 of 945)",
+  "role": "accent (80% of 868)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 291, \"oxheart\", \"oxblood\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson describe oxheart?",
+   "choices": [
+    "A deep red",
+    "A pale blue",
+    "A greenish yellow"
+   ],
+   "answer": "A deep red",
+   "kind": "pick"
+  },
+  {
+   "q": "In which century does oxheart peak in our painting archive?",
+   "choices": [
+    "The 1400s",
+    "The 1600s",
+    "The 1900s"
+   ],
+   "answer": "The 1400s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Oxheart is found in 1,013 paintings in our archive and peaks in the 1400s, at over three times the usual rate."
+ ],
+ "words": 209,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "slug": "fire-engine-red",
+ "name": "Fire Engine Red",
+ "hex": "#CE2029",
+ "names": [
+  "Fire Engine Red"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Fire Engine Red is a bright, vivid red, a descriptive name that points to the red of fire engines.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A vivid red",
+   "body": "Paterson's dictionary defines fire engine red as a bright vivid red, and lists it with a family of fire-named reds: fire-orange, a reddish orange, and fire-red, a color on Ignaz Schiffermüller's colour wheel, where it appears as *feueroth* beside fire-blue [1][2]. The same dictionary also lists FireBrick, a light maroon among the 140 X11 colors with the hex code #B22222 [1].\n\nSt Clair notes a different use: children who mix fire-engine red, sky blue and other favorite paints expecting something special instead get a murky dark grey [3]. The cause is that each added pigment subtracts more light."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "#CE2029 is close to [[bright-red]] and [[scarlet]] in the screen data [9]. The books give no date for the name [1][2]. The concordance of 29 color books finds only four strong mentions of this name, so the article stays short rather than pad the record [9]. Screen colors are approximate, and the swatch is a reference value, not a measured pigment [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "not dated in the books",
+   "source": "Paterson, A Dictionary of Colour, p. 168"
+  },
+  "aka": [
+   "fire truck red"
+  ],
+  "siblings": [
+   "bright-red",
+   "scarlet",
+   "red",
+   "vermilion"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names, concordance of 29 color books",
+  "hex": "#CE2029",
+  "book_mentions": 4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 168",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 506",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 22",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub name data and the color-book concordance (4 strong mentions)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do children typically get when they mix many bright paints together?",
+   "choices": [
+    "A murky dark grey",
+    "A brilliant violet",
+    "Pure black glass",
+    "A pale pink"
+   ],
+   "answer": "A murky dark grey",
+   "kind": "pick"
+  },
+  {
+   "q": "What is Fire-red in Paterson's dictionary?",
+   "choices": [
+    "A color on Schiffermuller's wheel",
+    "A coal-tar dye",
+    "A kind of brick",
+    "A mineral"
+   ],
+   "answer": "A color on Schiffermuller's wheel",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Mix all your paints and you get a murky grey, not a super color."
+ ],
+ "words": 173,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede: 'named for fire trucks' was unsourced; softened"
+  ]
+ }
+}

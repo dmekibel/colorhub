@@ -1,0 +1,314 @@
+{
+ "slug": "arsenate",
+ "name": "Arsenate",
+ "hex": "#1C8674",
+ "names": [
+  "Arsenate"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Arsenate is a deep blue-green that borrows the name of a chemical family, the salts of arsenic acid, whose members gave painters violets, blues, yellows and, by confusion, the famous poison greens.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A chemical word used as a color",
+   "body": "An arsenate is a salt built on the arsenic acid ion, written AsO4, where an arsenite is built on AsO3 [2]. It is easy to mix up with an arsenite, and the mix-up runs through the history of pigments [2][1]. The Pigment Compendium lists the arsenates and arsenites known as pigments or pigment relatives: erythrite, schultenite, mimetite, trippkeite and tyrolite [1]. The Compendium notes that arsenates and arsenites have variable colors, from white to green, yellow and violet [1][9].\n\nAs a color name, *arsenate* is recorded in the Maerz and Paul dictionary of 1930, which our library dates to 1917 and files under plate 25, block K 11 [15]. Who chose the name, and why, is undocumented. Nothing in the books says that it was meant for a particular pigment, though the best-known arsenic colors, the copper greens, sit close to it in hue [15][3]. This article follows the family: the greens that are often mislabeled arsenates, the arsenates that were real, and the pigments the family never made."
+  },
+  {
+   "id": "copper-greens",
+   "title": "The copper greens and a persistent mislabel",
+   "body": "The famous arsenic greens were the work of two steps. In 1775 the Swedish chemist Carl Wilhelm Scheele made a green copper arsenite, and in 1814 Wilhelm Sattler and Friedrich Russ of Schweinfurt found a brighter copper aceto-arsenite, later sold as emerald green [4]. Liebig published the composition in 1822 [4]. Our article on [[emerald-green]] tells that story in full, and [[scheele-s-green]] has its own page.\n\nThe point for this page is the name. Many historical sources describe these greens as copper arsenates, and the Compendium says plainly that they are in fact copper arsenites [2]. The entry for copper arsenate states that a number of sources erroneously report such compounds under the names Scheele's green and emerald green [2]. Pastoureau still calls the pigment known as Veronese green \"copper arsenate\", which shows how widespread the label became [6].\n\nThat name has its own muddle. Paterson's dictionary says the green was used extensively by Paolo Veronese, who died in 1588, and was therefore called *vert Paul Véronèse*, even though the pigment was not commercially produced until 1822 [5]. Pastoureau makes the same point from the other side: the pigment we usually call Veronese green is artificial and was only perfected in the nineteenth century [6]. Our color list keeps the painter's own green apart as [[paolo-veronese-green]], and the pigment's trade name as [[veronese-green]].\n\nThe greens were always more than a technical matter. A large order for paints that van Gogh sent his brother Theo from Arles in 1888 listed a dozen of the brightest pigments available [7]. Four were among the most fugitive on the market, and one of them, a malachite green, was probably copper aceto-arsenate in Gage's reading [7]. Gurney's guide for modern painters notes that the same chemical is so poisonous it was sold as an insecticide [8].\n\nThe shade could be steered. The Compendium notes that the color of these greens depended on the ratio of copper to arsenic and on the temperature of the reaction [2]. That variability helps explain why one chemical wore so many names, which the next section sets out."
+  },
+  {
+   "id": "names",
+   "title": "One chemical, many names",
+   "body": "Emerald green was never one tidy name. The Compendium lists Braunschweig, Kassel, Würzburg, Vienna, Mitis, Kirchberg, imperial and Paris green among its synonyms, though it notes that Zerr and Rübencamp in 1906 treated Paris green as a mixture of emerald and imperial green [3]. The same book credits a second maker, Ignaz von Mitis of Vienna, with producing the pigment in 1814 at his factory in Kirchberg, Austria, which explains several of the names [3].\n\nPaterson's dictionary lists Paris green, Vienna green, imperial green and Brunswick green as other names for Schweinfurt green [5]. The phrase *Veronese green* was used in turn for emerald green and for the chromium green viridian, so a label alone does not tell you which arsenic or chromium compound was meant [5][3]. Ball's account of the chromium green puts the confusion down to translation: French *vert émeraude* is English viridian, not emerald green [4]. Garfield adds that arsenic green was also a dye: Scheele's green, a pale green, caught on in fashion in the mid-1860s, and a surgeon at Guy's Hospital traced patients' sore eyelids and lips to it [20]."
+  },
+  {
+   "id": "poison",
+   "title": "Poison and a legend",
+   "body": "The danger is real and well recorded. Our [[emerald-green]] article gives the figures for wallpaper, dresses and artificial flowers, and the Victorian doctors who counted their patients [17]. A legend adds that the green wallpaper of Napoleon's house on St Helena killed him [17]. It is unproven: his hair holds arsenic, but hair tested from different periods of his life in 2008 showed levels that were roughly steady and ordinary for his era [18].\n\nWhat the legend gets right is the scale. Copper arsenic greens were manufactured on an industrial scale in the middle of the nineteenth century, and they were in thousands of ordinary rooms [4][17].\n\nIn 1862 William Cowper, a senior official at the Office of Works, asked the chemist August Hofmann to examine the green in a woman's ballroom head-dress [20]. Hofmann found it rich in arsenical Schweinfurt green, noted that the same substance colored many ball gowns and much wallpaper, and added that Bavaria had already forbidden such use [20]. He called the wearer an \"arsenic-crowned Queen of the Ball\" [20].\n\nBooks disagree about how far the law followed. Coles says suspicion fell on the color as early as 1815 and that production of the paint was not banned until the 1960s [21]. St Clair says that, even so, no law ever banned it in Britain [17]. Coles also counts more than eighty different names for the pigment, and suggests they may have helped to disguise its reputation [21]."
+  },
+  {
+   "id": "cobalt",
+   "title": "Cobalt arsenate: violet and a first blue",
+   "body": "The arsenates that painters really met were cobalt compounds. Cobalt violet was manufactured in France from 1859 [10]. Ball says it lacked good opacity and, like all cobalt pigments, stayed expensive, and Coles adds that its low tinting power limited its use [10]. Chemists often wrote its formula as cobalt arsenate, but the Compendium reports that a review of 2002 by Corbeil and colleagues found the more likely main compound to be magnesium cobalt arsenate, with cobalt phosphate as the other principal pigment sold under the name [9].\n\nThe mineral erythrite is hydrated cobalt arsenate, and its synthetic equivalent is a component of the pigment group known as cobalt violet [9]. The Compendium classes these cobalt compounds as blue-purple or purple, a long way from the green of this page [9].\n\nCobalt arsenate also has a place in the story of cobalt blue. Louis Jacques Thénard calcined a mixture of alumina and cobalt phosphate or cobalt arsenate to make a deep blue, and published the work in 1803 to 1804 [11]. His method with sodium arsenate gave the darker blue [11]. Books disagree on the date: St Clair gives 1802, the Compendium dates the paper 1803 to 1804 [11]. The Compendium adds a caution: it knows of no analysis of cobalt blue in a painting that found arsenate or phosphate, so these were fluxes in the making, not ingredients of the finished pigment [11]."
+  },
+  {
+   "id": "yellow",
+   "title": "Lead arsenate and the old yellows",
+   "body": "Arsenic also stands behind some yellows. Salter in 1869 described an arsenic yellow, called mineral yellow, that contained lead and was made by fluxing arsenic with litharge [12]. The Compendium lists several lead arsenates, among them the minerals schultenite and mimetite [12].\n\nMimetite has turned up in a pigment context on Greek gravestones [12]. Rouveret and Walter identified it on 22 Greek stelae in the Louvre [12]. Meggiolaro and colleagues reported a honey-yellow lead, iron and arsenic compound in a red underlayer of a Corinth fresco from the middle of the first century AD, and suggested it was an accidental by-product of making another pigment [12]. The Compendium offers another reading, that it is related to mimetite, and that iron from the surrounding hematite could have diffused into it [12].\n\nOther arsenate minerals appear on the margins. Tyrolite, a copper arsenate mineral, was identified in ancient Persian pigments from Persepolis and Pasargadae, where it appeared partly calcined, and it occurs in two mines near Anarak in central Iran [13]. Conichalcite, a calcium copper arsenate in the adelite group, is a green mineral found among near-surface alteration products of copper deposits [13]. Mierzinski in 1881 gave a recipe for a sky-blue pigment made of a copper arsenic compound from acetified potassium arsenate and copper sulfate [19]."
+  },
+  {
+   "id": "mineral-name",
+   "title": "Olivenite and the mineral names",
+   "body": "Naturalists had an arsenate mineral in their color books long before the pigment trade did. In Baty's reproduction of Werner's nomenclature, as expanded by Syme, the standard called Reddish Black is illustrated with several natural examples, among them *Oliven Ore*, which Baty glosses as olivenite, a copper arsenate mineral [14]. Arsenates were therefore color references for mineralogists first, and for painters second."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and what it matches",
+   "body": "The swatch on this page, #1C8674, is a dark teal-green, and our library puts it about four units from [[viridian]] and nearest to the name [[dark-viridian-green]] [15]. Our name list folds Arsenate in as an alias of [[generic-viridian]], an umbrella entry for the viridian family [15]. Viridian is a chromium oxide green, with no arsenic in it [4].\n\nSo this page's color matches neither of the arsenic pigments. Scheele's green was slightly dirty, a pea green, and emerald green was brilliant and cool, whereas the swatch is dark and deep [4]. Read the name as a label for a color, not as a recipe."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color is rare in paint. In our archive of 23,781 museum paintings, a color within six CIEDE2000 units of this swatch covers at least 5 per cent of the canvas in only four works, as photographed [16]. The largest area is in Signac's [[painting:commons-Q17491415|Woman with a Parasol]] of 1893, where it covers about 23 per cent of the canvas [16]. Clarence Holbrook Carter's *A Woman of the Sabines* of 1928 and Jawlensky's *Red Path, St. Prex* of 1915 each hold about 16 per cent [16]. T. Davies's *Ship in Full Sail* of 1827 holds about 12 per cent [16].\n\nThat is two works from the 1800s and two from the 1900s, a rate in the later century about seven times the archive's [16]. The earliest, the ship picture of 1827, falls five years after Liebig's recipe [16][4]. That is a look-alike hue in an aged photograph, not a test for arsenic pigments, and the same caveat applies to the other three [16]. The archive also cannot say whether a painter used a copper arsenic green, a viridian or a mixture to reach it."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the arsenate family of salts; reason for the color name undocumented",
+   "first_recorded": "Maerz and Paul 1930 (first recorded 1917 in our library)",
+   "source": "ColorHub library; Eastaugh et al., Pigment Compendium"
+  },
+  "aka": [
+   "arsenate (chemical family)",
+   "filed under Generic Viridian in the name lists"
+  ],
+  "siblings": [
+   "emerald-green",
+   "scheele-s-green"
+  ],
+  "parent": "generic-viridian",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "emerald-green",
+    "gloss": "the copper-arsenic pigment often mislabeled copper arsenate; actually a copper aceto-arsenite"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#1C8674",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 4,
+  "top_paintings": [
+   "commons-Q17491415",
+   "cma-148754",
+   "nga-130842",
+   "nga-59894"
+  ],
+  "measured": {
+   "lch": [
+    50,
+    33,
+    178
+   ],
+   "nearest": [
+    [
+     "Viridian",
+     4.0
+    ],
+    [
+     "Dark Viridian Green",
+     null
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Arsenic group\" (pp. 35-36)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Copper arsenate\" and \"Copper arsenite group\" (p. 135)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Emerald green\" (pp. 149 and 162)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"emerald green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, p. 33",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 228",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 221",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Cobalt arsenate\", \"Cobalt arsenic oxide hydrate\", \"Cobalt violet\" (pp. 125-129)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15; Coles, Chromatopia, p. 145",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Cobalt aluminium phosphate\", \"Cobalt blue\", \"Thénard's blue\" (pp. 125, 126, 374); St Clair, The Secret Lives of Colour, \"Cobalt blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Lead arsenate\" (p. 235) and \"Mimetite\" (p. 275)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Tyrolite\" (p. 387) and \"Conichalcite\" (p. 133)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 67-68 (Syme's Werner, \"Oliven Ore\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and aliases (data/aliases.json, core-names): Maerz & Paul 1930, plate 25 K 11; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Scheele's green\"; Finlay, Color, \"The Poisoner Returns\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Scheele's green\" (2008 Napoleon hair study)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Sky blue\" (p. 357)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 18 (arsenical greens; Hofmann 1862)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 143 (\"Emerald green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Scheele's green and emerald green are copper arsenates.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does the Pigment Compendium say no cobalt arsenate was found in analyses of cobalt blue paintings?",
+   "choices": [
+    "Arsenate or phosphate acted as a flux in making the blue, not as an ingredient of the finished pigment",
+    "The blue was always made without cobalt",
+    "Arsenate evaporates in oil paint",
+    "Nobody has tested the paintings"
+   ],
+   "answer": "Arsenate or phosphate acted as a flux in making the blue, not as an ingredient of the finished pigment",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter's name was attached to the emerald green pigment centuries after his death?",
+   "choices": [
+    "Paolo Veronese",
+    "Titian",
+    "Rubens",
+    "Vermeer"
+   ],
+   "answer": "Paolo Veronese",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Scheele's green and emerald green are often called copper arsenates; the Pigment Compendium says they are copper arsenites.",
+  "Cobalt violet is an arsenate: the most likely main compound is magnesium cobalt arsenate.",
+  "The word arsenate names a chemical family; as a color it is a deep teal filed under viridian."
+ ],
+ "words": 1724,
+ "status": "checked",
+ "checked": {
+  "by": "batch30 writer + gate",
+  "date": "2026-10-08",
+  "issues": [
+   "Reason for the color name Arsenate undocumented; stated as such.",
+   "Paragraph on poison/Napoleon relies on notes reused from the checked emerald-green article (St Clair, Finlay); 2008 hair study per St Clair.",
+   "Thenard date disagreement: St Clair 1802 vs Compendium 1803-4.",
+   "Pastoureau 'copper arsenate' vs Compendium 'arsenite' flagged.",
+   "Olivenite 'reddish black' pairing in Baty is a page-layout adjacency; wording may need a re-check against the plate."
+  ]
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "slug": "sulphur-yellow",
+ "name": "Sulphur Yellow",
+ "hex": "#CCC050",
+ "names": [
+  "Sulphur Yellow"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Sulphur yellow is the pale, slightly greenish yellow of the element sulphur, a number in Werner's list of nature's colors that survives today mostly as a shade word.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the element",
+   "body": "Sulphur yellow is the color of the element sulphur. In the Werner color list as Patrick Syme printed it, sulphur yellow is number 62 among the yellows, and the list pairs it with three things from nature: the yellow parts of a large dragonfly, a variously coloured snapdragon, and sulphur itself [1][3]. Paterson's dictionary defines the term as the pale yellow of sulphur, and adds that plain \"sulphur\" can mean a yellowy green [5].\n\nThat second meaning is a clue to where the color sits. Measured on our swatch it is a hue of about 100 degrees, at the border between yellow and yellow-green, and its nearest named neighbor is [[khaki]] [1]. The older lists agree: Syme's 1814 list puts it just after canary green, and Cleaveland's 1816 list puts it after siskin green and before [[primrose-yellow]] [2]."
+  },
+  {
+   "id": "recipes",
+   "title": "A mixed color, by recipe",
+   "body": "Syme's notes treat sulphur yellow as something to mix. His recipe is lemon yellow with emerald green and white [3]. The same notes then use it as a building block for other yellows: [[honey-yellow]] is sulphur yellow with chestnut brown, and straw yellow is sulphur yellow with a great deal of greyish white and a little ochre yellow [3].\n\nThe recipes run the other way too. Primrose yellow is described as gamboge yellow with a little sulphur yellow and much white [3]. Read together, they show that sulphur yellow was a fixed reference point in the early nineteenth-century system, a greenish middle yellow from which paler and browner yellows were measured [2][3]. A neighbor in the same list, [[lemon-yellow]], is the cleaner and warmer of the pair [2]."
+  },
+  {
+   "id": "language",
+   "title": "An old Greek echo",
+   "body": "Gage reports a passage, attributed to Democritus, in which sulphur is called a more brilliant variety of leek green [4]. The comparison makes sense of the greenish cast that Paterson's entry also records [4][5]. Gage reads it as an early case of yellow and green being treated as neighbors [4]. Read it as Gage's interpretation of one hard Greek text, not as settled [4]."
+  },
+  {
+   "id": "pigments",
+   "title": "Pigments and painters",
+   "body": "As a trade term, sulphur yellow names a look, not a recipe. The Pigment Compendium lists it among shade terms for chrome yellow, beside canary yellow and extra bright, and says such terms do not consistently designate composition [6]. The same book describes lead chloride oxide as varying from lemon to dull sulfur yellow depending on its lead oxide content [6]. The element itself occurs in several crystalline and non-crystalline forms [6].\n\nIn older texts the element was easy to confuse with arsenic. Ball notes that arsenic was not recognised as an element at the time and was often mistaken for sulphur, so that [[orpiment]], the yellow arsenic sulphide, was often regarded as a kind of sulphur [7].\n\nFor Van Gogh the word described light [7][8]. Ball says the sulphur yellow he perceived in Arles belonged with the citron yellow of his cafe lamps [7], and Pastoureau quotes a letter to his brother in which the Provencal sun is yellow, sulphur yellow, lemon yellow and golden yellow [8]. Where to look: a greenish yellow that glows against blue shadow, as in his late suns, is this region of the hue circle."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is only a guide",
+   "body": "The swatch here, #CCC050, comes from an aged Werner swatch and is approximate [1]. Ridgway's 1912 plate V for the same name shows a far paler, creamy yellow, close to #FAEDAD [1]. The color is also classed in ISCC-NBS block 101 [1]. So the screen shows one reading of a name that has drifted between a mid yellow-green and a pale cream."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this color covers at least five per cent of the canvas, within six units of color distance, in 73 paintings [9]. When it does appear it is almost always a light: 96 per cent of its area plays the highlight role [9]. These are photographs of aged, varnished paintings, so a color match is not a pigment test.\n\nThe pattern is more about place than period. It shows up in 27 of 721 Indian paintings, and in 25 of 96 Kalighat paintings, such as the snake goddess in [[painting:cma-162430|Manasa, the Snake Goddess]], where it covers about 69 per cent of the sheet [9]. The 1890s are its peak decade, with 29 of 1,173 paintings, about eight times the archive's average [9].\n\nThe earliest case is Fra Angelico's [[painting:commons-Q3797771|Coronation of the Virgin]] from 1434, at 24 per cent of the picture, perhaps a gilded or yellowed passage [9]. Pierre Bonnard has it in 4 of his 45 paintings [9]. The palette words that travel with it are [[khaki]] and tan [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the element sulphur (Werner's mineral reference)",
+   "first_recorded": "Werner no. 62 in Syme's 1814 edition",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "sulfur yellow"
+  ],
+  "siblings": [
+   "lemon-yellow",
+   "primrose-yellow",
+   "honey-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "orpiment",
+    "gloss": "yellow arsenic sulphide, often confused with sulphur in old texts"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CCC050",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 73,
+  "top_paintings": [
+   "cma-162430",
+   "cma-162507",
+   "cma-146203"
+  ],
+  "role": {
+   "highlight": 0.96,
+   "mid": 0.04
+  },
+  "peak_decade": {
+   "decade": 1890,
+   "hits": 29,
+   "n": 1173,
+   "lift": 8.05
+  },
+  "measured": {
+   "lch": [
+    77,
+    57,
+    100
+   ],
+   "nearest": [
+    [
+     "Khaki",
+     6.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library, Sulphur Yellow (Werner no. 62; Ridgway 1912 plate V; ISCC-NBS block 101)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-35",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 186-189 and 197-200",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 16",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sulphur\" and \"sulphur yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 113, 237 and 369",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12 and ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, p. 33",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which three natural things does Werner's list pair with sulphur yellow?",
+   "choices": [
+    "A dragonfly, a snapdragon and sulphur",
+    "A canary, a lemon and sulphur",
+    "A primrose, a bee and gold",
+    "A dragonfly, a wasp and amber"
+   ],
+   "answer": "A dragonfly, a snapdragon and sulphur",
+   "kind": "pick"
+  },
+  {
+   "q": "In Syme's notes, which recipe gives sulphur yellow?",
+   "choices": [
+    "Lemon yellow with emerald green and white",
+    "Gamboge with chestnut brown",
+    "Ochre with grey",
+    "Orpiment with white"
+   ],
+   "answer": "Lemon yellow with emerald green and white",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: sulphur yellow names one specific pigment recipe.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sulphur yellow was a reference color: honey, straw and wine yellows were all described as sulphur yellow plus something.",
+  "In our archive this color is mostly a highlight: 96 per cent of its area plays that role."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch-51 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Honest medium article: the books give lists, recipes and a few uses, not a long history.",
+   "Gage's Democritus passage is single-source and hedged.",
+   "Swatch drift between Werner and Ridgway stated."
+  ]
+ },
+ "words": 762
+}

@@ -1,0 +1,182 @@
+{
+ "slug": "moss-green",
+ "name": "Moss Green",
+ "hex": "#749551",
+ "names": [
+  "Moss green"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Moss green is a muted yellowish green named for the plant, and the name has also been used for a pigment whose identity the books cannot agree on.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the dictionaries say",
+   "body": "Paterson defines moss green as a yellowy green, an olivy green, and lists moss-grey as a greeny grey beside it [1]. The plant itself is listed only as a shade of green [1]. The swatch here is a medium, slightly yellowish green, and the nearest named neighbors in the app are [[moss]], [[moss-olive]] and [[olive-green]] [2], and the pigment name it is sometimes tied to is [[emerald-green]].\n\nIt appears in Maerz and Paul's color dictionary of 1930, the earliest record in our sources [2]. Moss is a good example of a color word that is easier to see than to define: the green of a damp wall is brighter than the green of dried moss in a wood, and both are called moss."
+  },
+  {
+   "id": "pigment",
+   "title": "A pigment name that points two ways",
+   "body": "In the Pigment Compendium, Moss green is a synonym of two different pigments, depending on who is asked [3]. Fiedler and Bayard list it, in 1997, as one of the less common names for emerald green, an arsenic-based green [3]. Mayer, in 1991, treats it as a name for chrome green instead [3]. The books disagree, and the compendium does not resolve it [3].\n\nA list of green pigment names in the same book includes moss green beside Brunswick green, leaf green and viridian [4]. Baty's reference chart of natural pigments also lists a Moss Green among its paint-maker colour names, in rows beside oxide of chromium and olive green [5]. In short, the name was never tied to one agreed substance."
+  },
+  {
+   "id": "fabric",
+   "title": "Seen in cloth",
+   "body": "Finlay, looking through tweed samples, records a pink-moss-green among the bright notes in a drawer of mostly browns and greys [6]. For a viewer, it is a reminder to look for this middle green in wool and lichen, not only in paint."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a moss green of this swatch appears in 84 paintings, 0.35 per cent, as photographed; the stricter within-painting count finds it in 36 [7]. It is rarer than 55 per cent of the named colors, and it plays an accent in 58 per cent of those 36 paintings [7]. It peaks in the 1900s, found in 0.7 per cent of 1,674 paintings from that decade, 3.9 times the rate expected from the same museums [7]. France is the country where it is over-represented, 2.4 times expected, in 17 of 3,443 paintings [7]. The earliest match, 1512, is a painting by Andrea del Sarto, well before the name's first record in 1930, so it is a look-alike hue and not a pigment test [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plant moss",
+   "first_recorded": "Maerz and Paul 1930, in our sources",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "Moss green (Pigment Compendium: a name for emerald green or chrome green)"
+  ],
+  "siblings": [
+   "moss",
+   "moss-olive"
+  ],
+  "parent": "olive-green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "emerald-green",
+    "gloss": "the pigment Moss green is sometimes said to mean; far brighter on screen"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 84,
+  "within_painting": 36,
+  "pct": 0.35,
+  "rank_pct": 55,
+  "role_most_common": "accent (58%)",
+  "peak_century": {
+   "century": 1900,
+   "rate": 0.7,
+   "n": 1674,
+   "lift": 3.9
+  },
+  "first_seen": {
+   "id": "commons-Q27978347",
+   "painter": "Andrea del Sarto",
+   "year": 1512
+  },
+  "countries": {
+   "France": {
+    "n": 17,
+    "of": 3443,
+    "lift": 2.4
+   }
+  },
+  "ngram": {
+   "peak": "2010s",
+   "rise": "1900s"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"moss\", \"moss green\", \"moss-grey\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Moss green (Maerz and Paul 1930); nearest names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entry \"MOSS GREEN\" (citing Fiedler and Bayard 1997 and Mayer 1991)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 111, list of green pigment names",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, reference chart, pp. 267-268",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Fabric: The Hidden History of the Material World, p. 192",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Moss green: 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is moss green hard to pin to one pigment?",
+   "choices": [
+    "Two sources equate it with different pigments, emerald green and chrome green",
+    "It was only ever a textile color",
+    "It was invented in 1930"
+   ],
+   "answer": "Two sources equate it with different pigments, emerald green and chrome green",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, moss green most often plays what role inside a painting?",
+   "choices": [
+    "An accent",
+    "The lightest area",
+    "A hidden color"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  },
+  {
+   "q": "A match in a 1512 painting proves moss green pigment was used then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Moss green has been called both a chromium green and an emerald green.",
+  "Where to look: tweed, where moss green sits beside browns and greys."
+ ],
+ "status": "checked",
+ "words": 438,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Dropped sap-green link and 'three British makers' (not supported by Baty chart).",
+   "Softened 'shop name for a dull green' to what the sources show."
+  ]
+ }
+}

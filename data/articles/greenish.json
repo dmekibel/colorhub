@@ -1,0 +1,264 @@
+{
+ "slug": "greenish",
+ "name": "Greenish",
+ "hex": "#40A368",
+ "names": [
+  "Greenish"
+ ],
+ "tier": "descriptive",
+ "depth": "long",
+ "lede": "Greenish is not a pigment or a place but a word: green with the ending -ish, meaning somewhat green, and a color word people have needed since Greek and Latin.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What -ish does",
+   "body": "*Greenish* is not a pigment or a place. It is a word built with a suffix, and the suffix is the point. Paterson's dictionary describes *-ish* as a very old ending, used first for origins and then to mean resembling, and now attached to color words to mean somewhat, nearly or slightly [1]. The dictionary lists the colors that take it comfortably, among them black, white, pink, red, brown, yellow, green, blue, grey and purple, and those that do not, such as orange, gold and silver [1].\n\nSo greenish names a direction, not a spot. A greenish thing is some other color pulled toward [[green]], or green held back from full strength. The color on this page, #40A368, is a mid green that our library traces only to the xkcd color list of 2010, so the swatch is a modern guess at what people mean by the word, not a historical standard [2]."
+  },
+  {
+   "id": "greeks",
+   "title": "Greek and Latin knew it well",
+   "body": "Pastoureau argues that ancient writers handled green by shade and strength, not as one fixed color. The Greek *chloros* wobbles between green and yellow and almost always means weak and washed out, which modern French renders with the ending *-âtre*, as in *verdâtre*, greenish [3]. The Romans had *viridis* for nearly every green, and Pastoureau lists *subviridis* as pale green or greenish, *glaucus* as grey-green or bluish green, and *galbinus* as a shade between yellow and green [4].\n\nThe Greek and Latin habit shows that greenish is an old need: a word for a color that is nearly green but not quite, and often a faint one [3][4]. Our own *greenish* does the same job."
+  },
+  {
+   "id": "negative",
+   "title": "The sick green of the Middle Ages",
+   "body": "In the Middle Ages the greenish was a warning [6]. Pastoureau separates true green, the color of fields, woods and pastures, from the color it becomes when it declines into greenish, which he says was associated with corpses and death [5]. In medieval imagery the greenish tint, called *subviridis* in Latin, was the color of mold, disease, putrefaction and decayed flesh [6].\n\nHe finds it also on creatures of the devil's bestiary. Painters showed dragons, crocodiles and sirens in desaturated greens and used the binder to make the surface look wet and slimy [6]. The same tonality passed to ghosts and spirits, which were more often greyish or greenish than white, and to the eyes of witches [6]."
+  },
+  {
+   "id": "werner",
+   "title": "In the old nomenclatures",
+   "body": "Naming colors with a modifier was routine in the natural-history systems. Werner's nomenclature, in Syme's 1821 edition, puts greenish blue at number 33 among its blues [7]. It also lists greenish white, greenish grey and other greenish shades, each defined from familiar things such as a feather, a flower or a mineral [7][8].\n\nBaty reproduces how these lists grew between Werner in 1774 and Syme in 1821, and the greenish names are part of that growth [8]. Our own color library still carries many of them, among them [[greenish-white]], [[greenish-grey]], [[greenish-blue]] and [[greenish-yellow]] [2]."
+  },
+  {
+   "id": "seeing",
+   "title": "Greenish in light and in the eye",
+   "body": "Some greenish colors are not pigments at all. Gurney explains that blue sky light can give the top of a yellow-clad shoulder a greenish quality in shadow, and that a weaker second source of greenish light can serve as the fill light on a face [9]. A green ball next to a yellow one pushes the shadow of the yellow toward a greenish yellow [9].\n\nThe eye has its own reason to care. Gurney notes that the rods of the eye, which cannot see color, are most sensitive to greenish wavelengths, which is why blue-green hues look lighter in dim light, the Purkinje shift [10]. Eckstut adds that a reddish blue or a greenish yellow is easy to picture while a red-green or a blue-yellow is not, which fits Hering's opponent-color theory, where red and green share one axis [11]. She also notes that our peak sensitivity is to yellow and greenish-yellow light [11].\n\nPainters have also had a reason to be careful. Gurney reports that gallery directors find clients put off by a strong greenish cast in a painting unless it is handled with care, and he quotes the painter Asher Brown Durand on \"the common prejudice against green\" [12]. Pastoureau adds that over time many nineteenth-century blue, yellow or white pigments, zinc white among them, turned greenish, so that in some paintings green became dominant with age [13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, only 2 contain a color within six CIEDE2000 units of this swatch covering at least 5 per cent of the canvas, as photographed: Van Gogh's [[painting:nga-163323|Green Wheat Fields, Auvers]] and his [[painting:nga-72328|Roses]], both of 1890 [14]. In the first it covers about 19 per cent of the canvas, in the second 10 per cent [14]. *Roses* is the painting whose pigments have faded so much that it reads as nearly all green today [14].\n\nBoth are by [[painter:vincent-van-gogh|Van Gogh]], so the whole signal here is one painter's single year [14]. With a looser count, 5 paintings hold the color, the earliest dated 1860, and that is 150 years before the name's earliest record in our sources, so the match is a look-alike hue in an aged photograph, not a pigment [14][2]. The word *greenish* itself peaked in printed English in the 1880s, and by 2000 it was at about a fifth of that peak [14].\n\nWhen you see greenish, ask what it is greenish compared with. Look at a grey stone, a shadow under a tree, an old bronze or a bowl of jade, and notice how the green rides on top of another color."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "green + the suffix -ish (somewhat, nearly)",
+   "first_recorded": "undocumented as a swatch; the word itself is old",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "somewhat green"
+  ],
+  "siblings": [
+   "green",
+   "greenish-blue",
+   "greenish-yellow"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "greenish-white",
+    "gloss": "Werner-style modifier names: the other color comes first in the sense"
+   },
+   {
+    "slug": "jade",
+    "gloss": "the nearest vivid named neighbor (3.2 CIEDE2000 away)"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "verdâtre"
+   },
+   {
+    "lang": "la",
+    "name": "subviridis"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#40A368",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "top_paintings": [
+   "nga-163323",
+   "nga-72328"
+  ],
+  "ngram": {
+   "peak": 1889,
+   "rel_2000": 0.22
+  },
+  "measured": {
+   "iscc": "vivid green",
+   "iscc_de": 3.4,
+   "nearest": [
+    [
+     "Jade",
+     3.2
+    ],
+    [
+     "Shamrock Green",
+     3.5
+    ],
+    [
+     "Algae",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"-ish\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph: xkcd), CIEDE2000 distances",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 9 (\"Did the Greeks see green?\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 10 (\"Green among the Romans\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 25 (\"From green to greenish\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Werner's nomenclature (Blues, Whites, Greys)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 32 (Werner to Syme, 1774-1821)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, pp. 30, 58, 68",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 140",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Eckstut and Eckstut, What Is Color?, pp. 20-21",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 84",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 41",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas) and Google Books Ngram",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the suffix -ish add to a color word?",
+   "choices": [
+    "Somewhat, nearly or slightly",
+    "Much darker",
+    "Much brighter",
+    "Opposite of"
+   ],
+   "answer": "Somewhat, nearly or slightly",
+   "kind": "pick"
+  },
+  {
+   "q": "In medieval imagery, what did a greenish tint often suggest?",
+   "choices": [
+    "Mold, disease and corpses",
+    "Royal rank",
+    "Spring and fertility only",
+    "Holiness"
+   ],
+   "answer": "Mold, disease and corpses",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: you can easily imagine a reddish green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Greenish is a color word that points rather than names: green with the ending -ish.",
+  "Medieval artists painted ghosts and dragons in greenish, not bright green.",
+  "You can imagine a greenish yellow, but not a red-green."
+ ],
+ "words": 919,
+ "status": "checked",
+ "checked": {
+  "by": "Sonnet 5.5 batch writer (self-check: sentence-to-note trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Swatch comes only from the 2010 xkcd survey; no historical standard exists.",
+   "Werner entries known from Baty's tables; exact examples not quoted.",
+   "Archive matches are colors, not pigment identifications; 2 paintings only."
+  ]
+ }
+}

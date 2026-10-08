@@ -1,0 +1,144 @@
+{
+ "slug": "dark-salmon",
+ "name": "Dark Salmon",
+ "hex": "#E9967A",
+ "names": [
+  "Dark Salmon"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark Salmon is a soft orange-pink from the X11 color list, built on the word salmon.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A listed color",
+   "body": "Paterson's dictionary lists DarkSalmon as an entry in the X11 Color Set, with hex code E9967A [1]. It is filed among the pinks in his index of colour names, and Dark Salmon also appears in his list of pinks [2][3]. Our name records list the CSS set, a web encyclopedia and the xkcd list of 2010 [4].\n\nIts nearest neighbors among our names, by CIELAB distance, are [[copper-crayola|Copper (Crayola)]], [[grenadine-pink|Grenadine Pink]] and [[onion-skin-pink|Onion-Skin Pink]] [5]. On a white page it reaches a contrast ratio of 2.31:1 [5]."
+  },
+  {
+   "id": "art",
+   "title": "In paintings",
+   "body": "Dark Salmon is a modest presence in our archive: 89 of 23,781 paintings, 0.37%, as photographed [6]. It most often plays an accent inside a painting, in 63% of the 54 paintings where the within-painting reading finds it [6]. It peaks in the 1900s at twice the expected rate, and it is most over-represented in Indian paintings, at 2.9 times what chance predicts (8 of 721) [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (salmon, the fish and its flesh color)",
+   "first_recorded": "X11 color set (CSS)",
+   "source": "Paterson, A Dictionary of Colour, p. 141"
+  },
+  "aka": [
+   "DarkSalmon"
+  ],
+  "siblings": [
+   "salmon",
+   "light-salmon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "contrast_white": 2.31,
+  "nearest": [
+   [
+    "Copper (Crayola)",
+    6.2
+   ],
+   [
+    "Grenadine Pink",
+    6.5
+   ],
+   [
+    "Onion-Skin Pink",
+    6.6
+   ]
+  ],
+  "n_present": 89,
+  "pct": 0.37,
+  "role_accent_pct": 63,
+  "top_country": "India"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 141",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 470",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 503",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub name records (data/graph/names.json and per-name source lists)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Computed from the hex value: WCAG relative luminance and contrast ratio; CIELAB distance to the other names in data/graph/names.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which role does Dark Salmon most often appear inside a painting in our archive?",
+   "choices": [
+    "An accent",
+    "The deepest shadow",
+    "The sky",
+    "The background"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  },
+  {
+   "q": "Which tradition is Dark Salmon most over-represented in, in our archive?",
+   "choices": [
+    "India",
+    "Norway",
+    "France",
+    "Japan"
+   ],
+   "answer": "India",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In our archive, Dark Salmon turns up in Indian paintings at nearly three times the expected rate."
+ ],
+ "words": 167,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Paterson index codes it pink, not orange: fixed; removed 'sits between' gloss.",
+   "Lede no longer asserts fish-flesh origin (undocumented)."
+  ]
+ }
+}

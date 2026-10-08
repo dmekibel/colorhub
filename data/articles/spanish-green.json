@@ -1,0 +1,162 @@
+{
+ "slug": "spanish-green",
+ "name": "Spanish Green",
+ "hex": "#009150",
+ "names": [
+  "Spanish Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Spanish green is an old name for verdigris, the copper green painters relied on for centuries; the bright green swatch on screens today has little in common with it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Verdigris by another name",
+   "body": "In English, verdigris takes its name from a French phrase meaning \"green of Greece\", while the Germans call it *Grünspan*, \"Spanish green\" [1][2]. The Pigment Compendium says the German word is believed to come from the Latin *viride hispanicum* [3]. Finlay suggests the pigment probably reached both places through the Arabs [2], and the scholar Agricola, in the 1500s, gave Spain as its source [4].\n\nThe Compendium cites Theophilus, writing around the twelfth century, who describes two preparations: *viride salsum* and *viride hispanicum*, the latter made by exposing copper to vinegar or urine [3]. Many writers did not distinguish the preparations [3]. A later study found that old recipes produced mixtures of copper salts, with copper acetates and some malachite and atacamite [3]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Until the 1800s no green on a painter's palette was livelier than verdigris, yet it was unstable, and it blackens or browns beside ultramarine, orpiment and other pigments that contain sulphur [5]. In the 1670s the Dutch painter Samuel van Hoogstraten complained that green earth was too weak, Spanish green too crude, and verditer not durable enough [6][4]. Ball reports that Velázquez never used a pure green pigment, mixing his greens instead [6].\n\nThe swatch here is not that pigment. It is a vivid, clean [[green]] that Maerz and Paul record as first used around 1450, and the ISCC-NBS system lists it as a block of its own [7]. Its nearest named neighbor is [[sea-green]], and it sits among greens such as [[emerald-green]] and [[hunter-green]] [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This green is rare in paintings: 3 of 23,781 in our archive, rarer than 77 per cent of named colors, led by Edvard Munch around 1903 [8]. Verdigris itself darkens and browns with age, so it would not match this swatch in old paintings. These are photographs of aged, varnished paintings, so a color match is a look-alike hue, not a pigment test. [8]"
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the German name Grünspan for verdigris, from viride hispanicum",
+   "first_recorded": "Theophilus, c. 12th century (viride hispanicum)",
+   "source": "Pigment Compendium; Finlay; St Clair"
+  },
+  "aka": [
+   "verdigris",
+   "Grünspan",
+   "viride hispanicum"
+  ],
+  "siblings": [
+   "sea-green",
+   "emerald-green",
+   "hunter-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "green",
+    "gloss": "the swatch is a clean modern green; the pigment named Spanish green is a copper acetate verdigris"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Grünspan"
+   },
+   {
+    "lang": "nl",
+    "name": "Spaans groen"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "rank_pct": 77,
+  "library_first_recorded": "c. 1450"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"verdigris\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"viride hispanicum\", \"Grünspan\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 94-95",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"verdigris\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ISCC-NBS 1955 block 120 and Maerz and Paul (1930), via data/library.json; nearest named color by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within-painting lens, lightness rank per painting)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the German word Grünspan name?",
+   "choices": [
+    "Verdigris",
+    "Malachite",
+    "Green earth",
+    "A green mineral from Spain only"
+   ],
+   "answer": "Verdigris",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did old verdigris greens darken next to some pigments?",
+   "choices": [
+    "They react with sulphur-containing pigments",
+    "They dissolve in water",
+    "Light bleaches them white",
+    "They never mix"
+   ],
+   "answer": "They react with sulphur-containing pigments",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Spanish green is the German name for verdigris, the green that darkened beside ultramarine.",
+  "Samuel van Hoogstraten in the 1670s found Spanish green too crude."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 332
+}

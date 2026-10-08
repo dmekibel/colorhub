@@ -1,0 +1,255 @@
+{
+ "slug": "french-grey",
+ "name": "French Grey",
+ "hex": "#BEBEB3",
+ "names": [
+  "French Grey"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "French grey is a pale, almost neutral grey that English first met as a naturalist's term: Patrick Syme put it on his 1814 color chart, and a young Charles Darwin used it for an octopus.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey that leans every way",
+   "body": "*French grey* is a pale, nearly neutral grey, and the books do not agree on which way it leans. Paterson's dictionary calls it a bluish grey [7], St Clair's glossary a very pale grey-green [8], and the chart that introduced the name describes it as a whitish grey touched faintly by black and by carmine [2]. The swatch here sits close to neutral, at a chroma of about 6 and a hue angle of 110 degrees, a hair toward yellow-green [9].\n\nModern systems keep it in nearly the same place. The ISCC-NBS system of 1955 files it in block 154, Ridgway's 1912 atlas gives it a plate with a slightly darker swatch, and the German RAL range has a near twin in 7044 Silk Grey, less than one unit away in CIEDE2000 [9]. Its closest relatives among the chart greys are [[pearl-grey]] and [[steel-grey]], and the color word it keeps company with most often in paintings is [[ash]] [9][10]."
+  },
+  {
+   "id": "syme",
+   "title": "Syme's chart",
+   "body": "The name entered English science through a book of color samples [3]. Patrick Syme, trained as a botanist and entomologist, took the small mineral vocabulary of Abraham Werner and widened it into a standard for animals, plants and rocks alike [3]. His first edition appeared in 1814 with 108 colors, and the second, in 1821, ran to 110 [3][12].\n\nSyme described French grey as Werner's steel grey with the metallic lustre taken away [2]. His natural example was the breast of the pied wagtail, and it is the only one he gave [1]. Compare [[pearl-grey]], which he illustrated with a gull's back, a flower petal and a stone [1].\n\nWhere the term came from is a small disagreement inside one book. Baty's chart pages list French grey as one of Syme's own additions among greys borrowed from Werner, Picardet and Lenz [1]. Her discussion of his vocabulary says instead that some terms, French grey among them, were already common English and that Syme only popularized them [3]. Why it is *French* is undocumented in the books we read [3][7]. Paterson lists a whole run of French colors: beige, berry, blue, green, grey, navy, ochre, pink, purple and ultramarine [7]. Only French purple has a known story, a lichen dye of the 1850s that helped turn [[mauve]] from a dye's name into a color's [7]."
+  },
+  {
+   "id": "darwin",
+   "title": "A grey on the Beagle",
+   "body": "Syme's chart traveled. In September 1831, while preparing for the *Beagle* voyage, Charles Darwin asked his mentor John Henslow to keep Syme's colors in mind, and a copy of the 1821 edition went into the ship's library [5]. On 28 January 1832, at the Cape Verde Islands, Darwin met an octopus and, as Baty tells it, was jolted into remembering that colors had to be recorded on the spot [5].\n\nHis note describes an animal whose general color was French grey with many spots of bright yellow, crossed by clouds that ran from hyacinth red to chestnut brown [5]. Baty observes that every one of those terms comes straight from Syme, and [[hyacinth-red]] is on the same chart [5]. Finlay quotes what appears to be the same episode and adds that the animal looked brownish purple in deep water and yellowish green in the shallows, \"or rather French gray\" [6].\n\nThe practical problem was spoilage. Sea animals lose their colors the moment they leave the water, so a naturalist on a rolling deck juggled the animal, the chart and the notebook before the color faded [5]."
+  },
+  {
+   "id": "botany",
+   "title": "From botany to birds",
+   "body": "Botanists took the term up quickly. Baty offers the *Botanical Register*, edited by Sydenham Edwards and John Lindley, as the example of English-speaking botanists adopting Syme's names, with French grey among them [4]. The American botanist William Barton, who wanted to print Syme's samples in his *Flora of North America*, could manage only a black-and-white copy in 1823 [4]. Baty reads his complaint as a sign that he missed the chart's point, which was standard names, not recipes for mixing paint [4].\n\nThe line ran on to ornithology. Robert Ridgway's *Nomenclature of Colors for Naturalists* of 1886 contained at least 19 of Syme's terms, and his *Color Standards and Color Nomenclature* of 1912 laid out 1,115 colors on 53 plates [13]. French grey appears in both Ridgway books in our library [9]. Maerz and Paul's dictionary of 1930 gives 1814 as the year it was first recorded, which matches Syme's first edition [9][12]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 2,120 works, about 9 per cent [10]. It is a pale color, and in 94 per cent of those paintings it is among the lightest colors on the canvas [10]. Five of the six paintings where it covers the most are Japanese or Indian, among them [[painting:cma-133000|Sesshu's splashed-ink landscape]] at 89 per cent, where a pale ground can carry the whole match [10]. The sixth is a frieze by Klimt, [[painting:commons-Q58427233|Yearning for happiness is assuaged in poetry]], at 87 per cent [10].\n\nThe rate rises over time, from 6.1 per cent of paintings in the 1600s to 14.3 per cent in the 1900s, and the 1930s peak at 13 of 69 paintings [10]. Impressionism carries it in 28 of 140 works, and [[painter:frederic-remington|Remington]] in 9 of 16 [10]. As always these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [10].\n\nThe word itself is easy to date. In Google Books, *French grey* rose fastest in the 1810s, the decade of Syme's first edition, and peaked in the 1920s, though the count covers every sense of the phrase [11]. Our archive finds this grey in a painting of 1164, 657 years before the name's earliest record in our sources, a reminder that a color can exist long before its name [10][9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin of 'French' undocumented; popularized as a scientific term by Patrick Syme",
+   "first_recorded": "1814 (Syme, Werner's Nomenclature of Colours; Maerz and Paul 1930)",
+   "source": "Baty, Nature's Palette, pp. 51, 173; Maerz and Paul via the ColorHub library"
+  },
+  "aka": [
+   "Silk Grey (RAL 7044, near twin)"
+  ],
+  "siblings": [
+   "pearl-grey",
+   "steel-grey",
+   "yellowish-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "bluish-grey",
+    "gloss": "Paterson defines French grey as a bluish grey; this swatch is nearly neutral"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kamenozoki (瓶覗), our library's Japanese pairing"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#BEBEB3",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2120,
+  "top_paintings": [
+   "cma-146715",
+   "cma-133000",
+   "commons-Q58427233",
+   "cma-147948",
+   "cma-156976",
+   "aic-28210"
+  ],
+  "role": {
+   "highlight": 0.94,
+   "mid": 0.06,
+   "shadow": 0.0
+  },
+  "company": [
+   "Ash",
+   "Silver",
+   "Ecru"
+  ],
+  "ngram": {
+   "rise": 1810,
+   "peak": 1920
+  },
+  "measured": {
+   "lch": [
+    77,
+    6,
+    110
+   ],
+   "nearest": [
+    [
+     "Agate Grey",
+     null
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 51 (Syme's greys)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 54-55 (Syme's entry for French grey)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 173 (Syme's terminology)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 177 (Syme in botany)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 126-127 (Darwin and the Nomenclature of Colours)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21, notes (Darwin, Beagle Diary)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 177",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary, p. 125",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub library: Werner/Syme 1821, Ridgway 1886 and 1912, ISCC-NBS 1955 block 154, Maerz and Paul 1930, RAL 7044; swatch measured in CIELCh",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'french grey', case-insensitive, all senses",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 34 (comparative lists of terms, Syme 1814 and 1821)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 31 (Ridgway's debt to Syme)",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Syme say French grey was?",
+   "choices": [
+    "Werner's steel grey without the lustre",
+    "Pearl grey with a little blue",
+    "Ash grey mixed with brown",
+    "The grey of wet slate"
+   ],
+   "answer": "Werner's steel grey without the lustre",
+   "kind": "pick"
+  },
+  {
+   "q": "Which natural object did Syme give as his only example of French grey?",
+   "choices": [
+    "The breast of a pied wagtail",
+    "The back of a kittiwake gull",
+    "A purple hepatica petal",
+    "A piece of flint"
+   ],
+   "answer": "The breast of a pied wagtail",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did Darwin carry a color chart on the Beagle?",
+   "choices": [
+    "Sea animals lose their colors quickly once lifted from the water",
+    "To match paint for the ship's cabins",
+    "Because the Admiralty required it",
+    "To test his own eyesight"
+   ],
+   "answer": "Sea animals lose their colors quickly once lifted from the water",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Darwin described an octopus as French grey in 1832, using a term from a naturalist's color chart.",
+  "Syme's only example of French grey was the breast of a pied wagtail."
+ ],
+ "words": 971,
+ "status": "checked",
+ "checked": {
+  "by": "Claude Sonnet 5.5 (batch 54)",
+  "date": "2026-10-08",
+  "issues": [
+   "Baty p.51 calls French grey Syme's own; p.173 says already common English (disagreement reported)",
+   "Origin of 'French' undocumented",
+   "Darwin episode: Baty and Finlay assumed to be the same passage (hedged)",
+   "Our rec table dates the name to 1821; Maerz and Paul and Syme's first edition give 1814"
+  ]
+ }
+}

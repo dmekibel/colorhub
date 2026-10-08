@@ -1,0 +1,191 @@
+{
+ "slug": "bruges",
+ "name": "Bruges",
+ "hex": "#3A5063",
+ "names": [
+  "Bruges"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Bruges is a dark, greyed blue named in the 1910s for the Flemish city, a town whose dyers, painters and jewelers each left a mark on the history of color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The swatch and its name",
+   "body": "Our swatch comes from Maerz and Paul's *Dictionary of Color*, which dates the name Bruges to 1919 and puts it on plate 39, block J 7 [1]. The same plate holds Glacier Blue, first recorded in 1926 [1]. Why the color took the city's name is undocumented in the books we hold, so what follows is about the city and not a proven origin."
+  },
+  {
+   "id": "dyers",
+   "title": "A town of specialist dyers",
+   "body": "In Bruges, Ghent, Ypres and the other Flemish towns, Pastoureau explains, dyers were strictly specialized [2]. A dyer licensed for red could not dye blue, and the reverse [2]. A manuscript made in Bruges in 1482 therefore shows an impossible scene: red and blue cloth in the same workshop [2].\n\nIndigo reached Bruges in the thirteenth century, as it did London, Marseilles and Genoa, and woad growers tried to slow its import [3]. Brazilwood came later: dyers in Venice, Florence, Bruges and Nuremberg learned to draw bright pinks from it with alkaline mordants, and oranges with acid ones [4]. The old blue of [[indigo]] and the pinks of [[pink]] thus met in the same trading city."
+  },
+  {
+   "id": "paint",
+   "title": "Painters and pigments",
+   "body": "Flemish painters traveled to Antwerp and Bruges to buy their pigments, as German and French painters went to Cologne [5]. Vasari credited the invention of oil painting to \"John of Bruges\", meaning Jan van Eyck, who lived from about 1390 to 1441 [5]. Ball points out that van Eyck was not the first to use oil as a binder [5].\n\nGiovanni Arnolfini, a merchant from Lucca who lived in Bruges, wore the scarlet fabrics and furs that his firm sold [6]. In van Eyck's double portrait of 1434, though, the bride's gown is green, which Finlay finds odd: newlyweds in fifteenth-century Bruges would more likely have shown their wealth in expensive kermes red [7]. Compare [[scarlet]]."
+  },
+  {
+   "id": "relics",
+   "title": "A relic and a diamond",
+   "body": "The Basilica of the Holy Blood in Bruges is one of the churches that claimed a relic of Christ's blood, and the relics seemed to multiply as churches competed [8]. Late in the fifteenth century a new way of faceting diamonds was invented in Bruges [9]. In 1477 Archduke Maximilian gave Mary of Burgundy the first recorded diamond engagement ring, which Finlay reads as a calculated gesture to impress more than a love token [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 234 (1.0%) hold this swatch within six units of ΔE2000 over at least five per cent of the canvas, as photographed [10]. The best match is Bronzino's portrait [[painting:commons-Q27697982|Garzia de' Medici]], 1550, where the color covers 34% of the picture [10].\n\nThe earliest match is Duccio's *Nativity with the Prophets Isaiah and Ezekiel*, 1308 [10]. The color is about 2.8 times as common as average in 1300s paintings and 2.7 times in the 1400s, falling to 0.4 in the 1600s [10]. In 55% of these paintings it plays the shadow role, the darkest part of the palette [10]. These are photographs of aged, varnished paintings, so a match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the city of Bruges, Flanders (the link to the color is undocumented)",
+   "first_recorded": "1919",
+   "source": "Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "midnight-blue",
+   "steel-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3A5063",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 234,
+  "first_dated": {
+   "id": "nga-10",
+   "painter": "Duccio di Buoninsegna",
+   "year": 1308
+  },
+  "top_paintings": [
+   "commons-Q27697982"
+  ],
+  "by_century_lift": {
+   "1300": 2.83,
+   "1400": 2.69,
+   "1600": 0.4
+  },
+  "role": {
+   "shadow": 0.55,
+   "mid": 0.42,
+   "highlight": 0.03
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Maerz & Paul, A Dictionary of Color (1930), \"Bruges\", plate 39 J 7, first recorded 1919 (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 34",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 28",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, DE2000 6, min cover 5%, as photographed (tools/article_field.py)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Flemish towns such as Bruges, what could a dyer licensed for red not do?",
+   "choices": [
+    "Dye blue",
+    "Dye yellow",
+    "Use alum",
+    "Dye silk"
+   ],
+   "answer": "Dye blue",
+   "kind": "pick"
+  },
+  {
+   "q": "What did Archduke Maximilian give Mary of Burgundy in 1477, the first recorded example of its kind?",
+   "choices": [
+    "A diamond engagement ring",
+    "A kermes-red gown",
+    "A set of oil paints",
+    "A relic of Christ's blood"
+   ],
+   "answer": "A diamond engagement ring",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A Bruges manuscript of 1482 shows red and blue cloth in one dye shop, something the city's guild rules forbade [2].",
+  "Look for this dark greyed blue in 1300s and 1400s paintings, where it is about 2.7 times as common as average [10]."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Maximilian ring: removed 'her father's court' (Mary's father Charles had died by 1477; source only says calculated to impress)",
+   "Other claims verified vs Pastoureau, Ball, Finlay"
+  ]
+ },
+ "words": 505
+}

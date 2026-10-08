@@ -1,0 +1,142 @@
+{
+ "slug": "sandstone",
+ "name": "Sandstone",
+ "hex": "#C9AE74",
+ "names": [
+  "Sandstone"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Sandstone is a muted yellow-tan named for the rock, and the books that define the word do not agree on its shade.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A rock's name",
+   "body": "*Sandstone* names the sedimentary rock, and the color word follows the rock [1]. ColorHub's library carries it from two color lists, the xkcd survey and the 1955 ISCC-NBS system, where it is block 42; the older Maerz & Paul dictionary of 1930 records it as first used in 1902 [2]. The same lists file the swatch under two other names, Light French Beige and Very Light Brown [2]."
+  },
+  {
+   "id": "disagree",
+   "title": "Books disagree on the shade",
+   "body": "Paterson's dictionary defines sandstone as a reddish brown [1]. The same dictionary defines *freestone-coloured*, a term Shakespeare used in *As You Like It*, as an orangey-yellow, the color of limestone or sandstone [1]. The swatch here sits nearer the second reading, a yellowish tan rather than a red brown [2].\n\nA rock name covers whatever the rock happens to be. The Pigment Compendium notes sandstones that carry grains of green glauconite [3] and others cemented with baryte [4], so the stone is not one color, and no single swatch can stand for all of it."
+  },
+  {
+   "id": "rock",
+   "title": "The rock in the books",
+   "body": "The color books mostly meet sandstone as a place. Finlay describes an underground home dug into it, its walls flecked with a natural pink pattern that looked like marbled paint [5]. In the same chapter an opal mine's walls carry the marks of a jackhammer used to test the sandstone for opal [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the library the swatch reads lightness 72, chroma 33 and hue 87 in LCH, and its nearest named neighbor is [[tan]], a distance of 5.5 in ΔE [2]. Nearby names are [[khaki]] and [[sand]], and Paterson separately defines *sandy* as the color of sand [1]. Screen colors are approximate."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the rock sandstone",
+   "first_recorded": "1902 (Maerz & Paul 1930)",
+   "source": "ColorHub library; Paterson"
+  },
+  "aka": [
+   "Light French Beige",
+   "Very Light Brown"
+  ],
+  "siblings": [
+   "tan",
+   "khaki",
+   "sand",
+   "buff"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub library (xkcd, ISCC-NBS 1955 block 42, Maerz & Paul 1930)",
+  "measured": {
+   "lch": [
+    72,
+    33,
+    87
+   ],
+   "nearest": [
+    [
+     "Tan",
+     5.5
+    ]
+   ]
+  },
+  "first_recorded": 1902
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sandstone\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), \"Sandstone\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"glauconite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"baryte\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson's dictionary define sandstone as a color?",
+   "choices": [
+    "A reddish brown",
+    "A pale grey",
+    "A bright yellow",
+    "A blue-green"
+   ],
+   "answer": "A reddish brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a rock name such as sandstone points to one exact shade.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Two books define sandstone two ways: one says reddish brown, the other treats it as an orangey-yellow stone color."
+ ],
+ "words": 276,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'listening and looking' detail from the opal-mine sentence"
+  ]
+ }
+}

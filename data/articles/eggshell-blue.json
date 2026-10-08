@@ -1,0 +1,117 @@
+{
+ "slug": "eggshell-blue",
+ "name": "Eggshell Blue",
+ "hex": "#C4FFF7",
+ "names": [
+  "Eggshell Blue"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Eggshell Blue is a very pale, cool blue-green named for a bird's eggshell; as a screen swatch it reads as a minty near-white.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dye name",
+   "body": "The name is old as a dye color. The Pigment Compendium notes a fifteenth-century manuscript, as read by Thompson in 1935, that lists a nightshade berry for dyeing *eggshell blue* [1]. The compendium only says the plant may be the one meant, so the identification is tentative [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "Blue or green?",
+   "body": "Our library finds the name in the ISCC-NBS dictionary of 1955, in the xkcd color survey of 2010 and in Maerz and Paul's 1930 dictionary, which the ISCC-NBS cites [2]. Measured against the ISCC-NBS categories, the swatch is nearest to very light bluish green, 8.0 units of ΔE2000 away, so in that system it is more green than the name suggests [2]. Compare [[robin-s-egg-blue]], [[powder-blue]], [[mint-cream]] and [[eggshell-green]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color is very rare in our archive: 2 paintings, 0.01 per cent of the total, as photographed [3]. The earlier of the two is by Vincent van Gogh, from 1888 [3]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the shell of a bird's egg",
+   "first_recorded": "as a dye name, a fifteenth-century manuscript (per Thompson 1935)",
+   "source": "Pigment Compendium"
+  },
+  "aka": [],
+  "siblings": [
+   "robin-s-egg-blue",
+   "powder-blue",
+   "eggshell-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
+  "n_present": 2,
+  "pct": 0.01,
+  "first_dated": {
+   "painter": "Vincent van Gogh",
+   "year": 1888
+  },
+  "measured": {
+   "nearest": [
+    [
+     "very light bluish green",
+     8.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Solanum\" entry, p. 290",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): name sources and dates (ISCC-NBS block 149, Maerz and Paul 1930, xkcd 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the ISCC-NBS category nearest to this swatch?",
+   "choices": [
+    "Very light bluish green",
+    "Deep blue",
+    "Dark brown",
+    "Strong red"
+   ],
+   "answer": "Very light bluish green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is common in painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A fifteenth-century manuscript already had a dye called eggshell blue, by Thompson's 1935 reading."
+ ],
+ "words": 189,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

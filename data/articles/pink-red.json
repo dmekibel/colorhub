@@ -1,0 +1,153 @@
+{
+ "slug": "pink-red",
+ "name": "Pink Red",
+ "hex": "#F5054F",
+ "names": [
+  "Pink Red"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Pink Red is a vivid, slightly bluish red-pink from web color lists; the name is a modern compound of two basic color words, and the books treat pink and red as separate colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two basic words side by side",
+   "body": "Pink Red is a name from modern web and design color lists, with the xkcd survey and Wikipedia's color tables among its sources, and a near-twin in Crayola's plain Red, just 1.4 units away [1]. Its origin is undocumented in the books [1].\n\nWhat the books do give is the weight of its two parts. Berlin and Kay's 1969 study of 98 languages found no language with more than 11 basic color terms, and pink and red are both among the 11 English has [2]. Red comes early in the order in which languages gain color words, right after black and white [2]."
+  },
+  {
+   "id": "tone",
+   "title": "Where pink ends and red begins",
+   "body": "The swatch has a lightness near 52 and a chroma near 84, a hue of about 20 degrees, which lies between [[red]] and [[hot-pink]], close to [[crimson]] [1]. English handles this by adding *-ish*, so that colors become *reddish* or *pinkish*, a suffix that can attach to pink and red alike [3]. Albers is cited as showing that the usual rule that blues are cool and reds warm can be reversed when cool pinks and reds sit beside warm blues [4]."
+  },
+  {
+   "id": "pigment",
+   "title": "Pinks in the paint box",
+   "body": "Pinks were seldom a pure pigment name. Tin pink was made, according to Salter (1869), by strongly igniting stannic oxide with chalk, potassium chromate, silica and alumina, which gave a dingy red mass that brightened on washing [5]. The Pigment Compendium links tin pink with potter's pink, a name used by the Society of Painters in Tempera for a potter's color first prepared in the early nineteenth century [6]. These are dull, chalky pinks, a long way from this screen color [6]."
+  },
+  {
+   "id": "babies",
+   "title": "A small study",
+   "body": "Birren reports an old experiment by C. W. Valentine, who showed colored skeins to babies a few months old and timed their attention [7]. The babies stared longest at yellow, then white, then pink, then red [7]. It is a single early study, and Birren's claims should be read as old opinion, not modern evidence [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The nearest archive color is Crimson, 6.1 units away [1]. A color this saturated is rare in old paintings, and we found no archive count for it, so none is claimed [1]. Screen values for pure web colors are approximate."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a compound of pink and red",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub library (xkcd; Wikipedia)"
+  },
+  "aka": [
+   "Red (Crayola), near-duplicate"
+  ],
+  "siblings": [
+   "rose-red",
+   "deep-pink"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub library: xkcd, Wikipedia",
+  "lch": [
+   52,
+   84,
+   20
+  ],
+  "nearest": [
+   [
+    "Crimson",
+    6.1
+   ]
+  ],
+  "crayola_red_de": 1.4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library entry for Pink Red (xkcd; Wikipedia) and graph measurements",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, 'basic colours', p. 43",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, '-ish', p. 224",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eckstut and Eckstut, What Is Color?, passage on color temperature",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, 'tin pink', p. 376 (quoting Salter 1869)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, 'potter's pink', p. 320",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, chapter on infants",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Berlin and Kay, how many basic color terms does the most colorful language have at most?",
+   "choices": [
+    "11",
+    "7",
+    "20"
+   ],
+   "answer": "11",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the babies in Valentine's study looked longest at red.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pink and red are both basic English color words; Pink Red is the border between them."
+ ],
+ "words": 383,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

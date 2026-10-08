@@ -1,0 +1,256 @@
+{
+ "slug": "dark-grey",
+ "name": "Dark Grey",
+ "hex": "#A9A9A9",
+ "names": [
+  "Dark Grey"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Dark grey is the web-color swatch #A9A9A9, a name that adds dark to grey and, oddly, points at a light silvery grey that is paler than the middle of the scale.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which dark grey",
+   "body": "*Dark grey* is the name of a swatch in the web color set, `darkgray`, whose value Paterson records as one of the X11 colors [1]. The surprise is the word *dark*. Its value, #A9A9A9, sits between `dimgray` at #696969 and light grey at #D3D3D3 in the same set, and in the ISCC-NBS system of 1955 its nearest block is a light gray, 5.0 units away [1][3]. Its Munsell value is about 6.8 out of 10, well above the middle of the scale [3].\n\nThe library knows nearly the same screen color under several other names: Quick Silver, Silver Chalice, and White Aluminium, which is RAL 9006 [3]. Other lists use the same two words for far darker colors. The xkcd color survey of 2010 has a Dark Grey at #363737, a very dark grey [3]. So the name works as a label that adds *dark* to *grey*, not as one fixed color [3]."
+  },
+  {
+   "id": "words",
+   "title": "Old names for a dark grey",
+   "body": "In Paterson's dictionary, a dozen older color names are glossed with the same plain phrase, a dark grey [2]. They include [[charcoal]], charcoal grey, goose grey, [[gunmetal]], iron grey, Oxford grey, Parson grey, [[slate-grey]] and [[steel-grey]], along with cypress, peat and asphalt [2]. Each points at a different object, from the metal of a gun to a peat bog, and the dictionary treats them all as one shade of grey [2].\n\nThe edges are fuzzy. Elephant grey is defined as a light grey, sometimes a dark one [2]. That is the problem with the word *dark* in a color name: it describes a place on a scale, and the scale moves from list to list [1][2][3]."
+  },
+  {
+   "id": "grey",
+   "title": "What a grey is",
+   "body": "Ball defines grey as the result of white light being partly absorbed, about equally, across all wavelengths: white with the volume turned down [4]. Westland calls white, black and the full range of light to dark greys achromatic colors, meaning colors with lightness but no chroma [5]. In the painter's vocabulary he records, mixing a hue with a light, medium or dark grey pigment makes a *tone*, while mixing with black makes a *shade* [5].\n\nPaint finds its way to dark grey without being asked. St Clair notes that children who stir all their favorite paints together get an irretrievably murky dark gray [7]. Albers explains why: the more pigment colors are mixed, the more the result approaches a dark grey leaning toward black, while mixtures of light on a spinning wheel approach a middle grey instead [6].\n\nThe eye does it too. In an experiment Livingstone describes, a red or green paper seen through a half ping-pong ball over one eye fades to dark gray after a few seconds, because vision needs contours to see color [8]. It is an easy way to watch color turn into grey."
+  },
+  {
+   "id": "art",
+   "title": "Under the paint",
+   "body": "Dark grey was often a hidden layer. Ball describes Jan Gossaert's plum-red cloak as red lake laid over dark grey, and notes that Anthony van Dyck sometimes applied double grounds, a brownish-orange one and a grey one [9]. In Rembrandt's portrait of Margaretha de Geer, painted about 1661, the background wall reads as a dark grey-green but is built over a dark brown layer of earth pigments in red, orange and yellow, mixed with bone black and some lead white [9].\n\nArchitects used it too. Le Corbusier's Pavillon de l'Esprit Nouveau, built in 1925, the year he wrote *The Decorative Arts of Today*, was painted in ten colors, among them white, black, light grey and dark grey [10]. Batchelor cites Mark Widgley for the point that it was far from the all-white building of legend [10].\n\nAs a material, the dark grey of graphite was long mistaken for lead. Coles says that until 1789 it was called blacklead or plumbago, and that the modern word comes from the Greek for I write [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, a color within six units of this swatch covers at least five per cent of the canvas in 1,289 works, about 5.4 per cent [12]. It rises through the centuries: 12.4 per cent of works from the 1900s match, against 3 to 4 per cent in the 1400s to 1700s [12]. It is strongest in [[painter:claude-monet|Monet]], with 18 of 50 works, and in [[painter:camille-pissarro|Pissarro]], with 17 of 50, and the Impressionist movement overall matches 26 of 140 works, 3.4 times the archive rate [12].\n\nIn the lightness order of the matching paintings, 84 per cent of its areas are highlights, which fits a swatch this light [12]. The largest areas are in Klimt's [[painting:commons-Q58427233|Beethoven Frieze, plate 7]], where it covers 87 per cent of the picture, and in Boudin's [[painting:cma-118042|The Dock of Deauville]] of 1891, at 70 per cent [12]. Among named colors it keeps company with silver, grey, slate and ash, with silver alone in 841 works [12]. These are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive modifier (dark + grey); origin of this swatch name undocumented in the books",
+   "first_recorded": "RAL 1927 (library source date); xkcd 2010 for a different, darker Dark Grey",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour, \"DarkGray\""
+  },
+  "aka": [
+   "DarkGray (CSS/X11)",
+   "White Aluminium (RAL 9006)"
+  ],
+  "siblings": [
+   "dim-grey",
+   "light-grey",
+   "silver",
+   "battleship-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "charcoal",
+    "gloss": "Paterson glosses charcoal as a dark grey too, and the modern swatch is much darker"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A9A9A9",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1289,
+  "top_paintings": [
+   "commons-Q58427233",
+   "aic-242449",
+   "cma-118042",
+   "smk-KMS9202"
+  ],
+  "painters": [
+   {
+    "key": "Claude Monet",
+    "n": 50,
+    "hits": 18
+   },
+   {
+    "key": "Camille Pissarro",
+    "n": 50,
+    "hits": 17
+   }
+  ],
+  "role": {
+   "highlight": 0.84,
+   "mid": 0.15,
+   "shadow": 0.01
+  },
+  "company": [
+   {
+    "word": "Silver",
+    "hits": 841,
+    "lift": 6.2
+   },
+   {
+    "word": "Grey",
+    "hits": 632,
+    "lift": 5.19
+   }
+  ],
+  "measured": {
+   "lch": [
+    69.2,
+    0.0,
+    296.8
+   ],
+   "nearest": [
+    [
+     "Silver",
+     6.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"DarkGray\", \"DimGray\", \"LightGrey\" (X11 Color Set)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries glossed \"a dark grey\" (charcoal, goose grey, gunmetal, iron grey, Oxford grey, Parson grey, slate grey, steel grey, cypress, peat, asphalt, elephant)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; CSS/X11, RAL 9006, xkcd 2010, ISCC-NBS 1955), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, \"Three Dimensions of Color\" and \"Tint, Shade, and Tone\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, pp. 42-43",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14 and ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Graphite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does the web swatch Dark Grey (#A9A9A9) compare with Dim Grey (#696969)?",
+   "choices": [
+    "It is lighter",
+    "It is darker",
+    "It is identical",
+    "It is bluer"
+   ],
+   "answer": "It is lighter",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Albers, what do pigment mixtures approach as more colors are mixed?",
+   "choices": [
+    "A dark grey leaning toward black",
+    "A pure white",
+    "A bright yellow",
+    "A middle blue"
+   ],
+   "answer": "A dark grey leaning toward black",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Coles says graphite was called blacklead or plumbago until 1789.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The web color Dark Grey is paler than Dim Grey, and ISCC-NBS would call it a light gray.",
+  "Cover one eye with half a ping-pong ball and a red paper fades to dark grey in seconds.",
+  "Where to look: a dark grey layer under a red glaze, the way Gossaert built a plum cloak."
+ ],
+ "words": 828,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Books say little about this specific swatch; article is about the label, the family of dark-grey names, and grey in painting. No claim that CSS Gray is #808080 (not in our books).",
+   "Rembrandt attribution of the de Geer portrait is from Ball's chapter context; page-level locator not verified.",
+   "Peat described by Paterson as a dark grey shade; peat described only as a dark grey shade."
+  ]
+ }
+}

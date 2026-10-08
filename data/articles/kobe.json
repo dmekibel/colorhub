@@ -1,0 +1,121 @@
+{
+ "slug": "kobe",
+ "name": "Kobe",
+ "hex": "#882D17",
+ "names": [
+  "Kobe"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Kobe is a deep brick-brown red from the color charts of the 1920s, and nothing in our books explains its name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a story",
+   "body": "Kobe is a deep red-brown. Our library lists it in the ISCC-NBS system as block 40 and in Maerz and Paul's 1930 *Dictionary of Color*, which gives 1924 as the year it was first recorded [1]. The obvious reading is the Japanese port city, but no source we hold says so, and who coined the color name is undocumented [1][2].\n\nThe word appears once in the 29 color books, and only as a place: in 1932 the pearl farmer Mikimoto burned 720,000 rival pearls in a bonfire outside the Kobe Chamber of Commerce [2][3]. That is a story about pearls, not about a color."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The nearest named colors in our library are [[brick]] and [[burnt-umber]] [1]. In our archive of 23,781 paintings, 869 (3.7 per cent) hold a color within six units of this swatch over at least five per cent of the canvas [4]. It peaks in the 1400s: 117 of 945 works, 3.4 times the archive rate [4]. Its company is the dark reds, [[maroon]] and [[mahogany]] among them [1][4]. These are photographs of aged, varnished paintings, so a match is not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (the Japanese port city is the obvious but unsourced guess)",
+   "first_recorded": "1924 (Maerz & Paul 1930)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "brick",
+   "burnt-umber"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#882D17",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 869,
+  "top_paintings": [
+   "commons-Q118436253",
+   "commons-Q27781195"
+  ],
+  "rate": 0.0365,
+  "peak_century": {
+   "key": 1400,
+   "hits": 117,
+   "n": 945,
+   "lift": 3.39
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "color-kb concordance of the 29 color books (search for the name, private)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which source dates Kobe's first recorded use to 1924?",
+   "choices": [
+    "Maerz and Paul's dictionary",
+    "Ridgway's atlas",
+    "The X11 color list",
+    "Newton's Opticks"
+   ],
+   "answer": "Maerz and Paul's dictionary",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color books explain that the color Kobe was named for the Japanese port.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Kobe the color has no documented story: the only book mention of the word is a pearl-burning bonfire in 1932."
+ ],
+ "words": 206,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

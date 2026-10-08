@@ -1,0 +1,104 @@
+{
+ "slug": "pale-salmon",
+ "name": "Pale Salmon",
+ "hex": "#FFB19A",
+ "names": [
+  "Pale Salmon"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Salmon is a light, pinkish orange, softer than the fish it is named after.",
+ "sections": [
+  {
+   "id": "morganite",
+   "title": "Morganite, before the fire",
+   "body": "The name is a lightened [[salmon]], the fish-flesh color [3]. It has few book mentions [3].\n\nFinlay uses the words for a gem. A new pink beryl found on Madagascar in 1911 was named morganite, in thanks to the collector J. P. Morgan [1]. Freshly mined it tends to look a dull pale salmon, yet heat can turn it vivid, in Finlay's phrase like a bowl of raspberries [1]. The color of the raw stone is therefore not the color a jeweler sells [1]. Similar tones in our data include [[peach]] and [[apricot]] [3].\n\nThe swatch on this page is #FFB19A, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pale Salmon appears in 20 of the 23,781 paintings in our archive, about 0.08 percent, as photographed [2]. The earliest dated one is from 1515, a work by Correggio, and the latest from 1923 [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a lightened salmon (the fish)",
+   "first_recorded": "origin undocumented",
+   "source": "ColorHub library; Finlay, Colour, ch. 15"
+  },
+  "aka": [],
+  "siblings": [
+   "peach",
+   "apricot",
+   "salmon",
+   "white"
+  ],
+  "parent": "salmon",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 20,
+  "pct_of_paintings": 0.08,
+  "library_sources": [
+   "xkcd 2010"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 15 (\"Jewels\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color is raw morganite usually, per Finlay?",
+   "choices": [
+    "Pale salmon",
+    "Deep blue",
+    "Green",
+    "Black"
+   ],
+   "answer": "Pale salmon",
+   "kind": "pick"
+  },
+  {
+   "q": "Morganite was named after a beryl discovery on Madagascar in 1911.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Morganite comes out of the ground pale salmon and can look vivid after heating."
+ ],
+ "words": 191,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

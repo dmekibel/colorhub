@@ -1,0 +1,103 @@
+{
+ "slug": "chessylite-blue",
+ "name": "Chessylite Blue",
+ "hex": "#417B96",
+ "names": [
+  "Chessylite Blue"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Chessylite blue is an old name for azurite, the blue copper mineral, taken from the place in France where it was found.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineral named for a mine",
+   "body": "The Pigment Compendium lists chessylite as an alternative mineral name for azurite, a copper carbonate hydroxide [1]. It takes its name from Chessy in France, one of the places where the mineral occurs [1]. Church (1901) states that chessylite is the same as azurite and as blue verditer [1].\n\nThe screen swatch is a greyed teal blue, a cooler and duller color than the deep blue of good azurite, so it should be read as a chart color, not as a sample of the mineral. Nearby named colors include [[steel-blue]], [[cadet-blue]] and plain [[blue]], with [[azure]] as the word that shares the mineral's family."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This swatch appears in 117 of our 23,781 paintings, 0.49 per cent [2]. It peaks in the 1900s, at 14 of 1,674 paintings, 3.3 times the museums' baseline [2]. Inside a painting it most often plays a hidden color, which is the color tucked in the shadows and transitions [2]. All numbers are as photographed, and a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Chessy, France, where the mineral occurs",
+   "first_recorded": "in use by Church (1901)",
+   "source": "Pigment Compendium, p. 107"
+  },
+  "aka": [
+   "azurite",
+   "blue verditer (per Church)"
+  ],
+  "siblings": [
+   "steel-blue",
+   "cadet-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#417B96",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 62
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Chessylite blue\" entry, p. 107",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for chessylite-blue (L6 graph)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which mineral is chessylite?",
+   "choices": [
+    "Azurite",
+    "Lapis lazuli",
+    "Malachite",
+    "Cobalt"
+   ],
+   "answer": "Azurite",
+   "kind": "pick"
+  },
+  {
+   "q": "Where does the name chessylite come from?",
+   "choices": [
+    "Chessy in France",
+    "A Chinese dynasty",
+    "A Dutch painter",
+    "The Latin for chess"
+   ],
+   "answer": "Chessy in France",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Chessylite is just another name for azurite, from the French locality Chessy."
+ ],
+ "words": 190,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified against Pigment Compendium p. 107; no changes."
+  ]
+ }
+}

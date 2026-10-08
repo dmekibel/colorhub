@@ -1,0 +1,164 @@
+{
+ "slug": "crocus-martis",
+ "name": "Crocus Martis",
+ "hex": "#917B78",
+ "names": [
+  "Crocus Martis"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Crocus martis is an old name for an artificial iron oxide, made by burning iron, that painters and polishers used as a red or, in some recipes, a yellow.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "What it was",
+   "body": "Pigment Compendium describes crocus martis as essentially a synthetic iron oxide, prepared by calcining iron sulfate [1]. Ball says medieval alchemists made an ochre-tinted product by oxidizing iron in air and called it crocus martis, a literal Latin rendering of Mars yellow [2].\n\nThe books disagree on the color. Ball notes that Sir Theodore de Mayerne, physician at the court of Charles I, gave the first artist's recipe he knows of, in an early seventeenth-century manuscript, and that de Mayerne's product is red [2]. De Mayerne gave three methods, among them calcining steel filings or iron chips in a furnace [1][2]. A later entry in the same compendium ties the crocus or saffron of Mars to a yellow, with patents of 1780 and 1794 marking the earliest period it was made [3]. So the name has covered both reds and yellows."
+  },
+  {
+   "id": "family",
+   "title": "Among the artificial reds",
+   "body": "The compendium groups it with Venetian red, Indian red, Tuscan red, light red, rouge, colcothar and caput mortuum, terms generally applied to synthetic iron reds [4]. Paterson lists crocus martis as another name for jeweller's rouge, a powdered red oxide used to polish gold and silver [5]. Paterson also says Mars colors are synthetic iron oxides, running through orange, black, brown and yellow [6]. Compare [[venetian-red]] and [[indian-red]]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch on this page is a muted greyish rose-brown, which comes from the Maerz and Paul dictionary of 1930, the earliest record of the name in our sources [7]. It is paler and greyer than a strong iron-oxide red, and nearer to [[rosy-brown]] or [[dusty-rose]] in feel [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color appears in 211 of 23,781 paintings in our archive, as photographed [8]. Its most devoted painter is Maurice Denis, with 4 of his 43 works here, 5.4 times the baseline [8]. It is most over-represented in France, at 2.4 times the expected rate [8]. The earliest match is dated 1340, 590 years before the name's first record [8]. That is a look-alike hue in an aged photograph, not proof of the pigment [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin crocus, saffron, and Mars, the old name for iron",
+   "first_recorded": "alchemical; as an artist's recipe, de Mayerne, early 17th century",
+   "source": "Ball; Pigment Compendium"
+  },
+  "aka": [
+   "saffron of Mars",
+   "crocus",
+   "colcothar (related)",
+   "jaune de Mars (yellow sense)"
+  ],
+  "siblings": [
+   "venetian-red",
+   "indian-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mauve",
+    "gloss": "Unrelated: crocus here means saffron-colored, not the flower"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 211,
+  "painters": [
+   {
+    "name": "Maurice Denis",
+    "hits": 4,
+    "n": 43
+   }
+  ],
+  "country": "France 2.4x",
+  "earliest_dated": 1340
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"crocus martis\", p. 148",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, p. 14",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Mars yellow\" entry, p. 268",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 215",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"jeweller's rouge\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"iron oxide\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library and name records (data/library.json, data/graph)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is crocus martis chemically?",
+   "choices": [
+    "A synthetic iron oxide",
+    "A copper green",
+    "A plant lake",
+    "A lead white"
+   ],
+   "answer": "A synthetic iron oxide",
+   "kind": "pick"
+  },
+  {
+   "q": "What color did de Mayerne make clear his crocus martis was?",
+   "choices": [
+    "Red",
+    "Yellow",
+    "Blue",
+    "Green"
+   ],
+   "answer": "Red",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Crocus martis meant a red to one 1600s physician and a yellow to later chemists: same name, same iron."
+ ],
+ "words": 354,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

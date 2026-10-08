@@ -1,0 +1,102 @@
+{
+ "slug": "venet",
+ "name": "Venet",
+ "hex": "#52A49B",
+ "names": [
+  "Venet"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Venet is an old word for a Venice blue, a turquoise-leaning blue that dictionaries link to the Latin for Venetian.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Venice blue, shortened",
+   "body": "In Paterson's entry, venet is a turquoise blue, sometimes greyish, a shortening of Latin *venetus*, \"of Venice\" [1]. He adds that Maerz and Paul report the term in use in the fifteenth century for the sails of spy ships, camouflaged to avoid detection [1]. That is a single dictionary's secondhand account, and we treat it as a report and not a fact. Our library dates the name to 1425 from the same atlas [2].\n\nThe swatch here is a greenish teal; its nearest named color is [[sulphate-green]], with [[teal]] and [[turquoise]] close in feel [2]. It is greener than Paterson's blue [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color near Venet appears in 18 of 23,781 paintings in our archive, 0.08 per cent, rarer than 73 per cent of named colors [3]. The earliest dated match is 1638, in a painting by Willem Ormea, in the 13 dated cases [3]. These are photographs of aged, varnished paintings, so a match shows a look-alike hue and not the Venetian color [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Venice, from Latin venetus",
+   "first_recorded": "1425 (Maerz and Paul, per our library)",
+   "source": "Paterson, A Dictionary of Colour, \"venet\""
+  },
+  "aka": [],
+  "siblings": [
+   "teal",
+   "turquoise"
+  ],
+  "parent": null,
+  "children": [
+   "blue-green"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 18,
+  "pct": 0.08,
+  "nearest": "Sulphate Green"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"venet\", p. 409",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930, first recorded 1425, plate 27 K 2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does venet come from?",
+   "choices": [
+    "Latin venetus, Venice blue",
+    "Greek ouranos",
+    "French vert",
+    "Dutch venster"
+   ],
+   "answer": "Latin venetus, Venice blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Paterson reports Maerz and Paul saying venet was used for spy-ship sails.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Venet is short for Venice blue; one dictionary reports it for fifteenth-century spy-ship sails."
+ ],
+ "words": 180,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

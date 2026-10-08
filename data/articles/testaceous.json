@@ -1,0 +1,104 @@
+{
+ "slug": "testaceous",
+ "name": "Testaceous",
+ "hex": "#CB8062",
+ "names": [
+  "Testaceous"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Testaceous is an old descriptive word for the reddish-brown of unglazed tiles and flowerpots, a color most people see every day without the word.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of tile",
+   "body": "Paterson defines testaceous as the reddish-brown colour of unglazed tiles or flowerpots, or brick-red or brownish-yellow [1]. A compound, fusco-testaceous, is listed with the meaning reddish brown [2].\n\nThe word is rare now, but it names a very common color [1]. Paterson's definition also allows brick-red or brownish-yellow, so the word covers a short range from reddish to yellowish, not one fixed shade, and the swatch here is just one point inside that range [1]. A flowerpot terracotta is the everyday version [1]. No book in the set tells a longer story about it, so this page stays short [1][2].  Because the color is that of fired clay, any terracotta pot in a garden is a ready sample of it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #CB8062 is a warm salmon-clay color [3]. It sits next to [[terracotta]], [[brick-red]] and [[tan]] [3]. Screen colors are approximate [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "unglazed tile and flowerpot clay",
+   "first_recorded": "undocumented",
+   "source": "Paterson, p. 392"
+  },
+  "aka": [],
+  "siblings": [
+   "terracotta",
+   "brick-red",
+   "tan",
+   "sienna"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "concordance of 29 color books",
+  "book_mentions": 4,
+  "swatch": "#CB8062 (screen approximation)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"testaceous\", p. 392",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"fusco-testaceous\", p. 180",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does testaceous describe?",
+   "choices": [
+    "Unglazed tile or flowerpot red-brown",
+    "Pale sea green",
+    "Silvery grey"
+   ],
+   "answer": "Unglazed tile or flowerpot red-brown",
+   "kind": "pick"
+  },
+  {
+   "q": "What does fusco-testaceous mean?",
+   "choices": [
+    "A reddish brown",
+    "A dark blue",
+    "A pale yellow"
+   ],
+   "answer": "A reddish brown",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Testaceous is the old word for flowerpot red-brown."
+ ],
+ "words": 159,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unverified neighbor-term list and Latin-family claims",
+   "Lede: unglazed tiles, not unfired clay"
+  ]
+ }
+}

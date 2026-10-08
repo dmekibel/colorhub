@@ -1,0 +1,149 @@
+{
+ "slug": "glaucous",
+ "name": "Glaucous",
+ "hex": "#6082B6",
+ "names": [
+  "Glaucous"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Glaucous is an old botanical and literary word for a dull, grey-tinged blue-green, which the charts and the web later pinned to a clearer, bluer swatch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the word meant",
+   "body": "The word builds on the prefix *glauc-*, which Paterson marks as Latin and glosses as grey or silvery, bluish-grey, and in Roman times possibly even yellow [1]. His entry for the English word reads: a light greenish blue, a dull greenish blue used of the sea, or covered with a bloom like the dusting on a plum [1]. St Clair's glossary of color words says only: pale grey blue-green [2].\n\nPaterson also links the word to the Indo-European root behind gold, glistening and yolk, which fits the Roman range from silvery to yellow [3]. The books agree on the family, a grey-leaning sea green, and disagree on how blue it should be.\n\nIn St Clair's account of green, a glaucous shade is called the darling of the Art Deco movement [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is bluer than the word",
+   "body": "The swatch here is a clear mid blue, which does not match the dictionary senses above [1][2]. It comes from Ridgway's 1912 plate XLI, and ISCC-NBS 1955 calls it a brilliant purplish blue, 8.3 units away; Maerz and Paul record the name from 1671 [5]. The nearest named color is [[steel-blue]], 5.5 units off [5].\n\nIf you want the grey-green of a cabbage leaf or a juniper berry, look toward [[sea-green]] and [[blue-green]] instead. The word has always been looser than its web swatch, and the gap is the main thing to remember about it."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Glaucous is a modest presence in paint: 122 of 23,781 paintings in our archive (0.51 per cent), 69 by the stricter within-painting lens, more common than 54 per cent of named colors [6]. Inside a painting it is usually an accent, in 59 per cent of those 69 [6].\n\nIt peaks in the 1900s, in 14 of 1,674 paintings, 1.9 times the museums' baseline [6]. The earliest match is a 1405 painting by Spinello Aretino, a look-alike hue 507 years before the name's first record in our sources, 1912 [6]. These are photographs of aged, varnished paintings, so a color match is a look-alike hue and not a pigment test. [6]"
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin glauc- (grey, silvery, bluish-grey)",
+   "first_recorded": "Ridgway 1912 in our sources; Maerz & Paul give 1671",
+   "source": "Paterson, A Dictionary of Colour, p. 185"
+  },
+  "aka": [],
+  "siblings": [
+   "steel-blue",
+   "sea-green"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sea-green",
+    "gloss": "closer to the dictionary senses of glaucous than this bluer swatch is"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 122,
+  "n_within_painting": 69,
+  "century_peak": {
+   "century": 1900,
+   "paintings": 14,
+   "lift": 1.9
+  },
+  "role": "accent 59%",
+  "measured": {
+   "iscc": "brilliant purplish blue",
+   "de": 8.3,
+   "nearest": [
+    [
+     "Steel Blue",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 185 (\"glauc-\", \"glaucous\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Glaucous\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 433 (\"yellow\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and graph nodes: ISCC-NBS 1955, Ridgway, Maerz & Paul, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; at least 2% of the canvas for dated firsts)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which description fits the dictionary sense of glaucous best?",
+   "choices": [
+    "A dull, grey-tinged blue-green",
+    "A hot orange",
+    "A deep violet",
+    "A bright lemon yellow"
+   ],
+   "answer": "A dull, grey-tinged blue-green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch on this page is a grey-green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Glaucous also names the pale bloom on a plum, and the Romans may have used its root for yellow as well.",
+  "Look for it as a small accent: in 59 per cent of the paintings where it shows up, it is the accent color."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'Greek-derived' claim; Paterson only marks the prefix Latin"
+  ]
+ },
+ "words": 359
+}

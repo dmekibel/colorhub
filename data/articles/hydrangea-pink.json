@@ -1,0 +1,129 @@
+{
+ "slug": "hydrangea-pink",
+ "name": "Hydrangea Pink",
+ "hex": "#E1C1BA",
+ "names": [
+  "Hydrangea Pink"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Hydrangea Pink is named for the flower, a soft pink with a hint of yellow, and for a plant whose color is famously unsteady.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines hydrangea pink as a yellowy pink, and notes the same flower also lends the names hydrangea blue and hydrangea red [1]. It is filed with the pinks, near azalea pink, baby pink and old rose [2]."
+  },
+  {
+   "id": "flower",
+   "title": "A flower that changes color",
+   "body": "Jarman remarks that the hydrangea can change its colour from pink to blue and back again [3]. That makes the name a snapshot: any one hydrangea pink is the flower on a particular plant at a particular time [3]. The books examined do not explain the cause, so this article does not either [1][3]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Neighbors",
+   "body": "Near relatives in our list are [[baby-pink]], [[blush-pink]] and [[pink]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #E1C1BA measures lightness 80.6, chroma 12.8 and hue angle 37 degrees: a pale, quiet pink leaning a little toward orange, which matches the dictionary's wording of yellowy pink [1][4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the hydrangea flower",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson, Dictionary of Colour, \"hydrangea pink\""
+  },
+  "aka": [
+   "hydrangea red",
+   "hydrangea blue (sister names)"
+  ],
+  "siblings": [
+   "pink",
+   "blush-pink",
+   "baby-pink",
+   "misty-rose"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name list and color math",
+  "hex": "#E1C1BA",
+  "measured": {
+   "lch": [
+    80.6,
+    12.8,
+    37
+   ]
+  },
+  "source": "Paterson, Dictionary of Colour"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"hydrangea pink\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"colour index, pinks\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Jarman, Chroma (the green flowers passage)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color math (CIE LCH from the sRGB hex)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson describe hydrangea pink?",
+   "choices": [
+    "A yellowy pink",
+    "A bluish lilac",
+    "A deep magenta"
+   ],
+   "answer": "A yellowy pink",
+   "kind": "pick"
+  },
+  {
+   "q": "What does Jarman say a hydrangea can do?",
+   "choices": [
+    "Change from pink to blue and back",
+    "Bloom only in winter",
+    "Smell of roses"
+   ],
+   "answer": "Change from pink to blue and back",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The same hydrangea can go from pink to blue and back."
+ ],
+ "words": 155,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All claims traced to Paterson and Jarman; no changes."
+  ]
+ }
+}

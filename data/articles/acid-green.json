@@ -1,0 +1,123 @@
+{
+ "slug": "acid-green",
+ "name": "Acid Green",
+ "hex": "#B0BF1A",
+ "names": [
+  "Acid Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Acid green is a sharp, yellowish green whose history is thin, and the books read record the word more than the story.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bright green, not yet traced",
+   "body": "Paterson defines acid green simply as a bright green, and he lists it among the green names [1]. The same dictionary uses the phrase for a dyestuff: acid colours include chromotrope, chrome brown, chromogen, acid green and alizarin yellow [1]. The books read do not connect the dye to the fashion color, so we do not claim the name comes from the dye [1].\n\nThe color word turns up in Jarman's book *Chroma*, in a scene where a woman wears acid green tights with a white lace miniskirt [2]. Our library's earliest source for the name is the xkcd survey of 2010, and the origin of the name is undocumented in our data [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is a yellow-green, closest to the ISCC-NBS vivid yellow green, about five units away [3]. The xkcd survey gives a far brighter lime for the same name [3]. Related names are [[chartreuse]], [[lime-green]] and [[green]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "One painting in our archive of 23,781 has this color over at least five per cent of the canvas, George Bellows's 1916 [[painting:nga-61353|My Family]], where it covers about 8 per cent, as photographed [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "chartreuse",
+   "lime-green",
+   "apple-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "nearest_iscc": [
+   "vivid yellow green",
+   5.4
+  ],
+  "first_source": [
+   "xkcd",
+   2010
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"acid colours\", \"acid green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 55",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library and graph nodes (xkcd 2010; ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define acid green as a color?",
+   "choices": [
+    "A bright green",
+    "A dark olive",
+    "A pale mint",
+    "A blue-green"
+   ],
+   "answer": "A bright green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books read prove the color name comes from acid dyes.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Acid green in a painting is rare: our data finds it in one museum canvas."
+ ],
+ "words": 201,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported 'named for how it bites'",
+   "removed unsupported claim about earlier painters' greens",
+   "Chroma described as a book not a memoir"
+  ]
+ }
+}

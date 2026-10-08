@@ -1,0 +1,105 @@
+{
+ "slug": "peony-red",
+ "name": "Peony Red",
+ "hex": "#863138",
+ "names": [
+  "Peony Red"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Peony red is a dark red, named for the flower, with a few appearances in textile description.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower's red",
+   "body": "Paterson defines peony red as a dark red, and lists it with the reds, among them [[maroon]] and mulberry [1]. Its sibling in the pinks is *peony pink*, the pink of the same flower [1]. Paterson also records *pæonin*, defined only as a red colour [1].\n\nA use in textile description comes from Finlay: a V&A monograph described a kani-woven pashmina fragment with yellow tulips in a color list that begins with peony red, verdigris and cinnamon [2]. The fragment is among the earliest known kani weaving and had been kept in the dark for nearly two centuries, so the colors survived [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of museum paintings, a color near this swatch is present in 135 works, 0.57 per cent of the archive [3]. The earliest is a work of 1368 and the latest dates from 1947 [3]. Within the archive it is about 3.4 times more common after 1490 than before, as photographed [3]. These are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the peony flower",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson; Finlay, Fabric"
+  },
+  "aka": [],
+  "siblings": [
+   "maroon",
+   "pink",
+   "mulberry",
+   "oxblood"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, paintings as photographed",
+  "n_present": 135,
+  "pct_of_archive": 0.57,
+  "first_dated": 1368,
+  "lift_after_1490": 3.4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"peony-red\", \"peony-pink\", \"pæonin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 240",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), paintings as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did a V&A monograph pair peony red with, per Finlay?",
+   "choices": [
+    "Verdigris and cinnamon",
+    "Indigo and saffron",
+    "Cochineal and ash",
+    "Ivory and jet"
+   ],
+   "answer": "Verdigris and cinnamon",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson calls peony red a dark red.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A V&A catalogue described an early kani shawl fragment as peony red, verdigris and cinnamon."
+ ],
+ "words": 181,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "pæonin was wrongly called dye-and-pigment name (Paterson: 'a red colour'); pomegranate neighbor not verified, removed."
+  ]
+ }
+}

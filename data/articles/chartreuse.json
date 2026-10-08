@@ -1,0 +1,124 @@
+{
+ "slug": "chartreuse",
+ "name": "Chartreuse",
+ "hex": "#7FFF00",
+ "names": [
+  "Chartreuse"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Chartreuse is a bright yellow-green named for the liqueur made by Carthusian monks, and on the web it is the full-strength green at hex 7FFF00.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A liqueur's name",
+   "body": "St Clair says chartreuse is named for a French liqueur, the one distilled by Carthusian monks at their monastery of La Grande Chartreuse, and describes it as a pale yellow-green [1]. Paterson also defines it as a pale apple-green with a yellow tinge [2]. Compare [[apple-green]], [[lime]] and [[bright-green]]."
+  },
+  {
+   "id": "web",
+   "title": "The web color",
+   "body": "Paterson notes that the name was adopted by web page creators, and gives the X11 code #7FFF00 [2]. That is a problem for the old word, because #7FFF00 is a fully saturated green-yellow, not a pale one [2][3]. So the books and the web disagree: the old sense is pale, the screen sense is vivid [1][2][3]."
+  },
+  {
+   "id": "indigo",
+   "title": "A vat the same color",
+   "body": "St Clair uses the word for indigo dyeing: fabric dipped into the chartreuse-hued vat turns from yellowish green to sea green on contact with air, then settles on a deep blue [4]. The word there names the cloth's first color out of the vat, a passing stage, since the finished cloth ends as [[indigo]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive tool could not compute a match count for this swatch, so no painting statistics are quoted [3]. The swatch is at the limit of what a screen can show [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Chartreuse liqueur of the Carthusian monks of La Grande Chartreuse",
+   "first_recorded": "undocumented in sampled books",
+   "source": "St Clair; Paterson"
+  },
+  "aka": [
+   "Chartreuse green",
+   "Chartreuse yellow"
+  ],
+  "siblings": [
+   "apple-green",
+   "lime",
+   "bright-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "swatch": "#7FFF00",
+  "web_set": "X11",
+  "old_sense": "pale yellow-green",
+  "archive_count": "not computed"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary of color names",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entry \"chartreuse\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library, swatch #7FFF00",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. \"Indigo\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name chartreuse come from?",
+   "choices": [
+    "A liqueur made by Carthusian monks",
+    "A mineral",
+    "A flower",
+    "A river"
+   ],
+   "answer": "A liqueur made by Carthusian monks",
+   "kind": "pick"
+  },
+  {
+   "q": "On the web, chartreuse (#7FFF00) is a pale green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The web's #7FFF00 chartreuse is fully saturated; the liqueur's color was described as pale."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported reason for rarity in paintings",
+   "tightened vat sentence to the source"
+  ]
+ }
+}

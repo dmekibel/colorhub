@@ -1,0 +1,143 @@
+{
+ "slug": "lily-green",
+ "name": "Lily Green",
+ "hex": "#9AA862",
+ "names": [
+  "Lily Green"
+ ],
+ "tier": "pigment",
+ "lede": "Lily green is a pale yellow-green with two lives: a rarely used name in color dictionaries, and a medieval flower pigment that probably came from iris, not lilies.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The dictionary color",
+   "body": "Paterson defines lily-green only as the green of the lily, rarely used, to be compared with lily-white [1]. Our swatch is the Maerz and Paul color of 1930 [2]. It is a soft, grey-leaning yellow-green, close to [[sage]] and [[olive]] in tone, and the sort of green a lily's stem shows."
+  },
+  {
+   "id": "pigment",
+   "title": "A pigment made from flowers",
+   "body": "The older meaning is a paint. The Pigment Compendium traces lily green, Italian *verde giglio*, to recipes for flower greens from the sixteenth and seventeenth centuries, and the term appears in an English miniature-painting book of 1730 [3]. A Paduan manuscript tells the maker to take the most strongly colored purple petals, let them ferment for a day, pound them, and stir the juice with quicklime and alum in a linen rag until the green develops [3].\n\nThe petals are purple, and that is the clue. The compendium argues that the lilies of these recipes are almost certainly irises, because irises were often called *Lillium*, and so it treats lily green as a synonym for iris green [3][4]. One dye table lists a lily green from the Liliaceae family but marks it as probably erroneous, for the same reason [5]. Thompson is cited for the view that the colouring matter of these flower greens is likely chlorophyll [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings this green appears in 159 paintings, 0.67 per cent, as photographed, more than 57 per cent of the named colors [6]. It peaks in the 1900s, at 3.2 times the expected rate [6]. Georges Seurat is the most devoted painter, using it in 5 of his 41 works here, 7.0 times the baseline of the museums those works come from [6]. [[painter:georges-seurat|Seurat]]'s pointillist greens are made of small touches, which may explain why the color reads in his work. It is most over-represented in France, 2.4 times expected [6]. Photographs of aged paintings do not show the flower pigment: a color match is not a pigment test [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lily (probably iris in the pigment sense)",
+   "first_recorded": "Maerz & Paul 1930; as a pigment name, 16th to 18th century recipes",
+   "source": "Pigment Compendium; Paterson, Dictionary of Colour"
+  },
+  "aka": [
+   "verde giglio",
+   "iris green"
+  ],
+  "siblings": [
+   "sage-green",
+   "olive"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "verde giglio"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#9AA862",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 159,
+  "pct": 0.67,
+  "top_painter": "georges-seurat (5 of 41, 7.0x)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 244",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930, Ridgway), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"Iris green\" and \"Iris blue\", pp. 101, 211-212",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Lily green\", p. 252",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, dye plant table, p. 467",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 within 4, at least 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What flower do historians think the 'lilies' of lily green really were?",
+   "choices": [
+    "Iris",
+    "Daffodil",
+    "Tulip",
+    "Lotus"
+   ],
+   "answer": "Iris",
+   "kind": "pick"
+  },
+  {
+   "q": "Which two materials were stirred into the fermented petal juice?",
+   "choices": [
+    "Quicklime and alum",
+    "Salt and vinegar",
+    "Gum and honey",
+    "Soda and ash"
+   ],
+   "answer": "Quicklime and alum",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Medieval lily green was probably made from purple iris petals."
+ ],
+ "depth": "medium",
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported claim that flower greens were weak and faded"
+  ]
+ },
+ "words": 344
+}

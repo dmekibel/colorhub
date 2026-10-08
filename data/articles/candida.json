@@ -1,0 +1,106 @@
+{
+ "slug": "candida",
+ "name": "Candida",
+ "hex": "#AB7D8C",
+ "names": [
+  "Candida"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Candida is a dusty rose-mauve, first recorded in 1925, with no documented link to its Latin namesake.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The library records the name in Maerz and Paul's dictionary, first recorded in 1925, on plate 51 C 5, and the swatch sits next to [[mauve]] [1]. Why it was called Candida is undocumented [1].\n\nThe Latin word *candida* means bright white, and Paterson notes that candidates for office in Rome wore bright white togas, the toga candida [3]. That is where the word candidate comes from, but the color Candida is not white, so the link is only a word [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Candida appears in 0.09% of the 23,781 paintings in our archive, as photographed [2]. It is rarer than 65% of the named colors, and it peaks in the 1900s at 0.4% of that century's paintings, 4.4 times the baseline [2]. Inside a painting it most often plays a hidden color, in 36% of cases [2]. With only 22 paintings, the numbers are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; Latin candida means bright white",
+   "first_recorded": "1925 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "mauve",
+   "burgundy",
+   "red",
+   "violet",
+   "white"
+  ],
+  "parent": "mauve",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 22,
+  "pct_paintings": 0.09,
+  "peak_century": 1900,
+  "role": "hidden color 36%",
+  "library_first": 1925
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"toga praetexta\" (p. 396)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Roman candidates for office wear?",
+   "choices": [
+    "Bright white togas",
+    "Purple togas",
+    "Black togas"
+   ],
+   "answer": "Bright white togas",
+   "kind": "pick"
+  },
+  {
+   "q": "The color Candida is white.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Candida is a dusty rose-mauve whose name looks like the Latin for bright white."
+ ],
+ "words": 159,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'fashion name' not sourced; now uses the 1925 first-record date."
+  ]
+ }
+}

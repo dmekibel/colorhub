@@ -1,0 +1,114 @@
+{
+ "slug": "sulphate-green",
+ "name": "Sulphate Green",
+ "hex": "#419F90",
+ "names": [
+  "Sulphate Green"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Sulphate Green is a vivid bluish green from Ridgway's 1912 atlas; the books mention sulphates, which gave dyers and pigment makers several green and blue colors, but not this name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A chemical's name on a color",
+   "body": "The record for the color is a list of atlases. Ridgway placed it on plate XIX, hue 39 prime, in 1912, and the ISCC-NBS system lists it at block 163 in 1955, where this swatch counts as \"vivid bluish green\", 3.2 CIEDE2000 units away [1]. Our sources do not say which sulphate the name refers to, and Ridgway's own scan is approximate [1].\n\nSulphate is a chemical word the dyer's trade knew well. Balfour-Paul's glossary defines copperas as hydrated ferrous sulphate, also called green vitriol, the iron salt used in the old \"copperas\" indigo vat [2]. The name may point to this family of salts, but that link is not documented [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Sulphate Green is rare in painting [3]. It appears in 13 of 23,781 paintings in our archive, 0.05 per cent, rarer than 79 per cent of the named colors, and the within-painting lens finds it in only 3 [3]. The earliest dated match is 1638 by Willem Ormea, 274 years before Ridgway's name, and the archive's early centuries are thin [3]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not proof of a pigment [3].\n\nIn printed English the words peak in the 1940s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a sulphate salt is likely but unproven",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway 1912, plate XIX, hue 39 prime"
+  },
+  "aka": [],
+  "siblings": [
+   "jade-green",
+   "sea-green",
+   "emerald-green",
+   "viridian"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 13,
+  "pct": 0.05,
+  "first_seen": 1638,
+  "iscc": {
+   "name": "vivid bluish green",
+   "de": 3.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances to ISCC-NBS names; Ridgway 1912 plate XIX hue 39 prime; ISCC-NBS block 163",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, glossary, p. 245",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); at least 2% of the canvas",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, all senses of the term, 5-year smoothing",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is copperas, according to Balfour-Paul's glossary?",
+   "choices": [
+    "Hydrated ferrous sulphate, green vitriol",
+    "A kind of cochineal",
+    "A tin-based yellow",
+    "A synthetic violet"
+   ],
+   "answer": "Hydrated ferrous sulphate, green vitriol",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our books say which sulphate gave Sulphate Green its name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Green vitriol, an iron sulphate, was used in the old copperas indigo vat.",
+  "Sulphate Green matches only 13 of 23,781 archive paintings."
+ ],
+ "words": 228,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "slug": "emeraude",
+ "name": "Emeraude",
+ "hex": "#44845A",
+ "names": [
+  "Emeraude"
+ ],
+ "tier": "standard",
+ "lede": "Emeraude is French for emerald, and as a color name it points less at the gem than at a green that French and English painters argued over.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two emerald greens",
+   "body": "The Paterson dictionary glosses *emeraude* as simply the French for emerald, then adds that according to Maerz and Paul it is not the same green as emerald green [1]. The word hides a real confusion. In France *vert émeraude* named a transparent chromium green, while in English *emerald green* named a very different, poisonous copper green [2][3].\n\nOur swatch is the Maerz and Paul color of 1930, which is the earliest record of the name in our sources [4]. It is a mid green, cooler and clearer than a leaf, and close to the cut stone it is named after, [[gem:emerald|emerald]]."
+  },
+  {
+   "id": "pigment",
+   "title": "The French pigment",
+   "body": "Pure chromium oxide had long been a dull pigment that painters did not much like [2]. In 1838 the Parisian colorman Pannetier developed a recipe that turned it into a deep, cool and slightly transparent green, sold in France as *vert émeraude* [2]. The chemist Guignet patented a process in 1859, and the dictionary adds that the pigment was discovered by Vauquelin in 1797 [3].\n\nIn England the pigment was called [[viridian]] [2][3]. The Impressionists adored it, and Ball calls it Cézanne's definitive green [2]. The Pigment Compendium warns that translators have often wrongly rendered *vert émeraude* as emerald green, a different pigment: copper aceto-arsenite, also sold as Paris or Vienna green, which was blamed in the 1860s for deaths from arsenic fumes in wallpaper [5][3]. The claim that arsenic wallpaper killed Napoleon is unproven, and not part of this story [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings this green appears in 36 paintings, 0.15 per cent, as photographed, rarer than 65 per cent of the named colors [6]. It peaks in the 1800s, at 2.0 times the rate expected from the same museums [6]. Its earliest strong match is in 1783, which is 147 years before the name's first record in our sources, so these are look-alike hues in aged photographs, not evidence of the French pigment [6]. Inside a painting it mostly plays an accent, in 57 per cent of 14 paintings [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "French émeraude, the emerald",
+   "first_recorded": "Maerz & Paul 1930 (in our sources)",
+   "source": "Paterson, Dictionary of Colour; Ball, Bright Earth ch. 15"
+  },
+  "aka": [
+   "vert émeraude"
+  ],
+  "siblings": [
+   "emerald",
+   "emerald-green",
+   "viridian"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "emerald-green",
+    "gloss": "the English pigment of that name is a copper-arsenic green, not the French chromium one"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "émeraude (emerald)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#44845A",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 36,
+  "pct": 0.15,
+  "peak": "1800s, 2.0x baseline",
+  "role": "accent in 57% of 14"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 158",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 158, 414",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930, Ridgway), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"Emerald green\", p. 162",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 within 4, at least 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the French call the pigment the English called viridian?",
+   "choices": [
+    "Vert émeraude",
+    "Vert de Paris",
+    "Terre verte",
+    "Vert antique"
+   ],
+   "answer": "Vert émeraude",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: French vert émeraude and English emerald green are the same pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Vert émeraude and emerald green sound alike and are different pigments."
+ ],
+ "depth": "medium",
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "all 8 claims verified (Paterson, Ball, Compendium); no changes needed"
+  ]
+ },
+ "words": 352
+}

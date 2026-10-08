@@ -1,0 +1,139 @@
+{
+ "slug": "watteau",
+ "name": "Watteau",
+ "hex": "#89ACC4",
+ "names": [
+  "Watteau"
+ ],
+ "tier": "person",
+ "depth": "medium",
+ "lede": "Watteau is a soft sky blue named for the French painter Antoine Watteau (1684-1721), and the pigment he is linked to in the books, Prussian blue, was brand new in his lifetime.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A painter's name on a fabric color",
+   "body": "The color is listed in the Maerz and Paul dictionary of 1930 as first recorded in 1925, in plate 34 J 5, in the field of fashion and textiles [1]. That is two centuries after the painter's death, so the name belongs to the twentieth-century habit of naming dress colors after painters and styles. The swatch is a greyish light blue, about 10 CIEDE2000 units from [[sky-blue]] and in the same family as [[powder-blue]] [1]. No book gives the reason for the choice."
+  },
+  {
+   "id": "prussian",
+   "title": "Watteau and Prussian blue",
+   "body": "The reason to place Watteau in a color history is Prussian blue, discovered in Berlin in the early 1700s (1704 is the often-quoted date, though the Compendium calls 1704 to 1707 more reasonable) [2][3]. Ball says it was widely known across Europe by 1750 and was used by Gainsborough and Watteau [2]. The Pigment Compendium's survey cites at least one painting by Watteau among the earliest analyses showing it, together with a work by Adriaen van der Werff from before 1722 and two paintings by Canaletto of 1719-23 [3]. That puts Watteau among the earliest painters to use [[prussian-blue]] [3]."
+  },
+  {
+   "id": "fade",
+   "title": "Washed-out skies",
+   "body": "Ball points out that Prussian blue fades when mixed with a lot of white, as it commonly was in painted skies of the 1700s [4]. He names Watteau's *Récréation italienne* (about 1715-16), along with works by Gainsborough and Canaletto, as skies now pearly and washed out where they were once a deeper blue [4]. The swatch above, a pale greyed blue, is close to what such a sky now looks like, though the books do not claim it as Watteau's color [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This blue appears over at least five per cent of the canvas in 166 of 23,781 museum paintings, within six units of CIEDE2000 [5]. Landscape painters dominate: Claude Lorrain, Philips Wouwerman and Renoir each have three, and Claude's rate is nearly fourteen times the archive average [5]. It is about 1.8 times as common in the 1900s as across the archive [5]. These are photographs of aged, varnished paintings; a color match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Antoine Watteau, French painter (1684-1721)",
+   "first_recorded": "Maerz and Paul 1930, first recorded 1925",
+   "source": "ColorHub library (Maerz and Paul)"
+  },
+  "aka": [],
+  "siblings": [
+   "sky-blue",
+   "powder-blue",
+   "periwinkle",
+   "cerulean"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "match": {
+   "hex": "#89ACC4",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 166,
+  "painters": [
+   {
+    "name": "Claude Lorrain",
+    "hits": 3,
+    "lift": 13.9
+   }
+  ],
+  "first": "Mary Magdalene predella"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930, plate 34 J 5",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Prussian blue\", p. 322",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings; tools/article_field.py, CIEDE2000, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why are some eighteenth-century skies by Watteau and Gainsborough now pale?",
+   "choices": [
+    "Prussian blue mixed with much white fades",
+    "They were painted grey",
+    "The painters ran out of blue",
+    "Varnish was never used"
+   ],
+   "answer": "Prussian blue mixed with much white fades",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Watteau used Prussian blue before it was widely known.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Watteau painted with Prussian blue within a few years of its invention, and his skies have since faded to pearl."
+ ],
+ "words": 367,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Hedged the 1704 date for Prussian blue"
+  ]
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "slug": "golden-brown",
+ "name": "Golden Brown",
+ "hex": "#996515",
+ "names": [
+  "Golden Brown"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Golden brown is a rich yellowy brown, a name Paterson links to hair and to the lichen called crottle.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain description",
+   "body": "Paterson defines golden brown as a rich yellowy-brown [1]. He also notes that auburn can mean a brownish red or sometimes golden-brown, especially for hair, and that the old word crottle named the golden-brown of lichen [1]. In his colour-name lists it sits among the browns beside [[caramel]], [[bistre]], [[chocolate]] and [[tawny]] [1].\n\nThe swatch here is ISCC-NBS block 57, a strong yellowish brown, cited from Maerz and Paul's 1930 dictionary [2]. It is also on the xkcd list from 2010 [2]."
+  },
+  {
+   "id": "dye",
+   "title": "Dye and paint",
+   "body": "Balfour-Paul's glossary notes that weld, the European yellow dye plant, gives a golden-brown textile dye, often combined with indigo resist [3]. Ball describes Morris Louis's veil paintings of the late 1950s, where repeated bright layers poured thin fused to a warm golden-brown [4]. In both cases the color is the result of layering, not a single pigment."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color appears in 1,054 of 23,781 archive paintings, more common than 85 percent of named colors, and inside a painting it most often plays an accent in 60 percent of 628 [5]. Fritz Thomsen is its most devoted painter, in 5 of 18 works [5]. It peaks in the 1300s at 6.4 percent of 251 paintings, 2.8 times the baseline [5]. The earliest match is 1230, about 700 years before the name's first record in our sources, 1930 [5]. As photographed, aged varnish can push many colors toward this look-alike hue."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "gold and brown combined (descriptive)",
+   "first_recorded": "Maerz and Paul, 1930",
+   "source": "Paterson; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "caramel",
+   "tawny"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1054,
+  "role": "accent (60% of 628)",
+  "painters": [
+   "fritz-thomsen"
+  ],
+  "measured": {
+   "iscc": "strong yellowish brown",
+   "block": 57
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"golden brown\", \"auburn\", \"crottle\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS block 57, Maerz and Paul 1930, xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 245 (glossary)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; fieldnotes/g.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Balfour-Paul, which dye plant gives a golden-brown textile dye with indigo resist?",
+   "choices": [
+    "Weld",
+    "Madder",
+    "Woad"
+   ],
+   "answer": "Weld",
+   "kind": "pick"
+  },
+  {
+   "q": "Morris Louis made his veil paintings by:",
+   "choices": [
+    "Pouring thinned paint down the canvas",
+    "Palette-knife impasto",
+    "Egg tempera"
+   ],
+   "answer": "Pouring thinned paint down the canvas",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Morris Louis's layered pours fused into a golden-brown, says Ball."
+ ],
+ "words": 243,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed uncited lede claims (baked crusts, old varnish)",
+   "Weld/indigo wording matched to Balfour-Paul",
+   "Softened uncited gold-leaf claim"
+  ]
+ }
+}

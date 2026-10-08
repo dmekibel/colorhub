@@ -1,0 +1,118 @@
+{
+ "slug": "burnt-orange",
+ "name": "Burnt orange",
+ "hex": "#CC5500",
+ "names": [
+  "Burnt orange"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Burnt orange is a deep, reddish orange named in the spirit of burnt sienna and burnt umber, earth pigments darkened by fire.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named after fire",
+   "body": "Paterson's dictionary defines burnt orange simply as a reddish orange [1]. The \"burnt\" in the name follows a pigment habit: burnt ochre is a light brown made by treating ochre with fire, burnt sienna a dark reddish brown, and burnt umber a reddish brown from roasting umber [1]. Those names describe a heated earth. Burnt orange borrows the word for the look of a scorched, reddened hue, not for any material roasted to make it.\n\nIn our library the name goes back to the 1930 Maerz and Paul dictionary and to the 1955 ISCC-NBS system, where this swatch sits about 5.5 units from the block called \"deep orange\" [2]. Our earliest dated record is 1915 [3]."
+  },
+  {
+   "id": "culture",
+   "title": "The color of the 1970s",
+   "body": "As environmental worry grew in the early 1970s, with Greenpeace taking that name in 1972, consumer goods were dressed in a back-to-nature palette of burnt orange, harvest gold and, above all, avocado [4]. Clothing, kitchen appliances, baths and even cars were colonized by these shades [4]. They now read as dated [4]. The look is in our own data as [[look:seventies-earth|the seventies earth palette]], and its neighbors include [[harvest-gold]], [[avocado]] and [[rust-orange]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 64 paintings, and in 63 by the stricter within-painting measure [3]. It almost always plays an accent: 97 per cent of those 63 works [3]. Think of the small orange of a robe, a flame or a fruit rather than a background.\n\nIt peaks in the 1400s, in 0.5 per cent of the 945 paintings we hold from that century, about 1.5 times the expected rate [3]. Our earliest match is a work of 1250, which is 665 years before the name's first record, so it is a look-alike hue in an aged photograph, not proof of a pigment [3]. For a modern comparison see [[painting:commons-Q16689630|the earliest match in the archive]], and [[sienna]] if you want the pigment itself [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the 'burnt' earth pigments (burnt sienna, burnt umber)",
+   "first_recorded": "1915 in our sources; ISCC-NBS block 37",
+   "source": "Paterson, Dictionary of Colour; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "rust-orange",
+   "pumpkin",
+   "cadmium-orange"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 64,
+  "n_within": 63,
+  "century_peak": "1400s",
+  "role": "accent 97%"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 83",
+   "loc_kind": "book-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS, Maerz and Paul and other name sources (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"The Secret Lives of Color\" (ch. on the 1970s)",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does 'burnt' mean in burnt sienna?",
+   "choices": [
+    "The earth pigment was heated",
+    "It was painted over a fire",
+    "It was named after a town",
+    "It is a mixture with black"
+   ],
+   "answer": "The earth pigment was heated",
+   "kind": "pick"
+  },
+  {
+   "q": "Which decade did St Clair link with burnt orange, harvest gold and avocado?",
+   "choices": [
+    "1970s",
+    "1920s",
+    "1890s",
+    "1990s"
+   ],
+   "answer": "1970s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Burnt orange, harvest gold and avocado: the back-to-nature palette of the 1970s."
+ ],
+ "words": 337,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Checked against Paterson and St Clair; no changes needed"
+  ]
+ }
+}

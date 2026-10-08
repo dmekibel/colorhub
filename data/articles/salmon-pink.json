@@ -1,0 +1,139 @@
+{
+ "slug": "salmon-pink",
+ "name": "Salmon Pink",
+ "hex": "#FF91A4",
+ "names": [
+  "Salmon Pink"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Salmon pink borrows the flesh of the fish for a warm pink, and the name has been used for a range of colors from rosy pink to orange-red.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which salmon pink",
+   "body": "The screen swatch here is a clear, light pink [1]. Older uses are often more orange: the library's earliest source is the German RAL list of 1927, whose matching swatch is a duller coral-orange, and the xkcd survey of 2010 gives yet another [1]. The ISCC-NBS system of 1955 files our swatch under strong pink, about four units away, and the Maerz and Paul dictionary of 1930 is among the sources [1]. In short, the name points at a family of salmon-flesh colors, not one fixed hue. For neighbors see [[salmon]], [[light-salmon]] and [[coral]]."
+  },
+  {
+   "id": "culture",
+   "title": "In print and in cloth",
+   "body": "The Financial Times has been printed on salmon-pink newsprint since January 1893 [2]. In 1990 the paper failed in an attempt to stop the Evening Standard from running its business pages in a similar shade, a case Paterson uses to show how hard it is to protect a color [2]. Paterson also notes that the pink of farmed salmon is produced by feeding the fish a dye, astaxanthin [3].\n\nOn the dye side, Finlay describes two weavers in the Oaxaca highlands who found salmon-pink in rock lichens, deep browns in walnuts and the gold of pomegranate [4]. Gage points out how Van Gogh, copying a Hiroshige print, pushed its soft greens and salmon-pinks into bright complementary greens and reds [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only one painting in our archive of 23,781 holds this swatch over a meaningful share of the canvas, as photographed [1]. In printed English the phrase peaks in the 1930s and rose fastest in the 1910s, by Google Books [1]. Photographs of aged, varnished paintings show how a picture looks now, not what the painter mixed [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the flesh of the salmon",
+   "first_recorded": "RAL 1927; Maerz and Paul 1930",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "salmon"
+  ],
+  "siblings": [
+   "salmon",
+   "light-salmon",
+   "coral"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "salmon",
+    "gloss": "the base color word, often more orange"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "ngram": {
+   "peak": "1930s",
+   "fastest_rise": "1910s"
+  },
+  "nearest_iscc": [
+   "strong pink",
+   4.0
+  ],
+  "earliest_source": [
+   "RAL",
+   1927
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library and graph nodes (RAL 1927; Maerz and Paul 1930; ISCC-NBS 1955; xkcd 2010; Ngram)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"colour as a trademark\" (Financial Times case)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"astaxanthin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. on Oaxaca weavers (lichen dyes)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 210 (Van Gogh after Hiroshige)",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Since when has the Financial Times been printed on salmon-pink paper?",
+   "choices": [
+    "1893",
+    "1927",
+    "1955",
+    "1990"
+   ],
+   "answer": "1893",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: every old source gives salmon pink as the same light pink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Hold a Financial Times against a modern pink swatch: its salmon sits nearer orange."
+ ],
+ "words": 290,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported claim that old paintings fade/yellow pinks"
+  ]
+ }
+}

@@ -1,0 +1,106 @@
+{
+ "slug": "blood-orange",
+ "name": "Blood Orange",
+ "hex": "#C63927",
+ "names": [
+  "Blood Orange"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Blood Orange is a deep, red-leaning orange named for the fruit with crimson flesh.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name is a fruit description, and the library records it in several systems: the RAL paint code 2002, and Maerz and Paul's dictionary, which dates the name to 1890 [1]. It sits between [[orange]] and [[red]], and its nearest neighbors in our data are reds [1].\n\nFinlay uses the fruit as a comparison: medieval artists infused saffron in egg-white glair as a cheap alternative to gold leaf, and when she tried it herself, it had become the color of blood oranges overnight [3]. On paper, she adds, the paint was luminous, though not really like gold [3]. The books we hold say little else about the color [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Blood Orange appears in 0.89% of the 23,781 paintings in our archive, as photographed [2]. It peaks in the 1400s at 4.0% of that century's paintings, 3.2 times the museums' baseline [2]. Inside a painting it is almost always an accent, in 96% of cases [2]. The painter who uses it most is Caravaggio, in 4 of 47 works here, though no painter stands out against the baseline [2]. It is most over-represented in Indian paintings, at 3.2 times expected [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fruit; RAL 2002 name",
+   "first_recorded": "1890 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "vermilion",
+   "orange",
+   "red",
+   "burgundy"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 211,
+  "pct_paintings": 0.89,
+  "peak_century": 1400,
+  "role": "accent 96%",
+  "library_first": 1890
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In a painting, what role does Blood Orange most often play?",
+   "choices": [
+    "An accent",
+    "A shadow",
+    "A hidden color"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  },
+  {
+   "q": "Which book comparison ties saffron glair to the color of blood oranges?",
+   "choices": [
+    "Finlay's Colour",
+    "Pastoureau's Yellow",
+    "Gage's Colour and Culture"
+   ],
+   "answer": "Finlay's Colour",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Blood Orange is almost always an accent in the paintings that hold it, as photographed."
+ ],
+ "words": 199,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Finlay's saffron-glair passage was her own experiment, and the paint was luminous but not gold-like; reworded."
+  ]
+ }
+}

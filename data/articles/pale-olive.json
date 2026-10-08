@@ -1,0 +1,112 @@
+{
+ "slug": "pale-olive",
+ "name": "Pale Olive",
+ "hex": "#B9CC81",
+ "names": [
+  "Pale Olive"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale olive is a light, yellowish green, the color name used for soft olive tones rather than the dark olive of the fruit.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on olive",
+   "body": "Pale olive is a descriptive name, a pale version of [[olive]], and the books use it as a plain description rather than a defined color. Paterson defines the related *mastic* as a pale olive brown, after the gum of the mastic tree [1]. The Pigment Compendium describes the copper mineral libethenite as occurring in pale olive green to dark green crystals, and notes it was described in 1823 [2].\n\nPale Olive Brown also appears as a paint name in a modern table that matches natural colors to pigments and paints [3]. So pale olive wording turns up in dictionaries, mineralogy and paint matching [1][2][3], though only the mineral entry uses the words pale olive green exactly."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of museum paintings, a color near this swatch is present in 20 works, 0.08 per cent of the archive [4]. The earliest is a 1506 work and the latest dates from 1941 [4]. As always, these are photographs of varnished paintings, so read them as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a pale version of olive green",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson; Pigment Compendium"
+  },
+  "aka": [],
+  "siblings": [
+   "olive",
+   "olive-green",
+   "celadon",
+   "pistachio",
+   "moss-green"
+  ],
+  "parent": "olive",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, paintings as photographed",
+  "n_present": 20,
+  "pct_of_archive": 0.08,
+  "first_dated": 1506
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mastic\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"libethenite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 267",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), paintings as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson call a pale olive brown named after a gum?",
+   "choices": [
+    "Mastic",
+    "Celadon",
+    "Sepia",
+    "Umber"
+   ],
+   "answer": "Mastic",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: libethenite is a copper mineral.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The copper mineral libethenite forms pale olive green crystals, described in 1823."
+ ],
+ "words": 184,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened 'phrase works in three trades' (only libethenite uses pale olive green; others are pale olive brown)."
+  ]
+ }
+}

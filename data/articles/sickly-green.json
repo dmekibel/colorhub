@@ -1,0 +1,113 @@
+{
+ "slug": "sickly-green",
+ "name": "Sickly Green",
+ "hex": "#94B21C",
+ "names": [
+  "Sickly Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Sickly green is a yellowish green with a bad reputation, the color of faded flesh paint in old pictures and of the alien and the ill in twentieth-century culture.",
+ "sections": [
+  {
+   "id": "art",
+   "title": "When the pink faded",
+   "body": "Finlay notes that when pinkish pigments fade from an old painting, the faces can be left a sickly green [1]. Roman and Byzantine artists liked the look, and their mosaic faces set green stones among pink ones to cool a ruddy complexion [1]. Terre verte underpainting of flesh, popularized by Giotto according to a source cited by Finlay, continued spasmodically until Tiepolo in the eighteenth century [1].\n\nJarman argues that the Cold War Fifties invented a different green, not of birth but alien, the color of pus and rotting flesh, which gave us phrases like green around the gills [2]. It is a personal essay's claim rather than a measured finding."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 3 works, including two by Niels Larsen Stevns, from 1908 and 1941 [3]. As always these are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: sickly plus green",
+   "first_recorded": "origin undocumented",
+   "source": "descriptive name"
+  },
+  "aka": [
+   "bilious green"
+  ],
+  "siblings": [
+   "green",
+   "olive-green",
+   "viridian",
+   "malachite"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#94B21C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "Niels Larsen Stevns, 1908",
+   "Niels Larsen Stevns, 1941"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 40",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Roman and Byzantine mosaicists mix with pink stones in faces?",
+   "choices": [
+    "Green stones",
+    "Blue stones",
+    "Gold leaf",
+    "Black stones"
+   ],
+   "answer": "Green stones",
+   "kind": "pick"
+  },
+  {
+   "q": "Which decade does Jarman say invented an alien, rotten green?",
+   "choices": [
+    "The Fifties",
+    "The Twenties",
+    "The Eighties",
+    "The Sixties"
+   ],
+   "answer": "The Fifties",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Some old faces are green because their pink flesh paint faded; Byzantine mosaicists used green stones on purpose."
+ ],
+ "words": 188,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

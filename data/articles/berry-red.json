@@ -1,0 +1,140 @@
+{
+ "slug": "berry-red",
+ "name": "Berry Red",
+ "hex": "#B03060",
+ "names": [
+  "Berry Red"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Berry Red is a deep purplish red; as a screen value it is identical to X11's maroon.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A berry word",
+   "body": "The library finds the color in Maerz and Paul's 1930 dictionary and in lists drawn from Wikipedia and a Japanese-name source [1]. The nearest ISCC-NBS category is strong purplish red, about 4 units away [1]. The same hex is listed as [[maroon-x11]], at zero distance [2]. Close neighbors are [[rubellite]], [[amaranth-purple]] and [[raspberry]] [2]. The swatch has a lightness of 41.5 on a 100 scale, so it is a mid-dark red with a purple lean [1]. Raspberry sits 5.8 units off [2]. The books we hold do not discuss the name itself, so its origin is generic: the red of berries [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 6 paintings in our archive of 23,781 hold this color, as photographed, which makes it rarer than 77% of named colors [3]. The earliest is dated to about 1900 [3]. The phrase peaks in printed English in the 1820s, and rose fastest in the 1920s, though it covers any berry-red thing [4]. These are photographs of varnished paintings, not pigment tests."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "red berries",
+   "first_recorded": "Maerz & Paul 1930 (library source)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "maroon-x11",
+   "rubellite",
+   "amaranth-purple"
+  ],
+  "parent": "berry",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "maroon-x11",
+    "gloss": "same screen color under the X11 name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 6,
+  "rarer_than_pct": 77,
+  "ngram": {
+   "peak": "1820s",
+   "fastest_rise": "1920s"
+  },
+  "measured": {
+   "lch": [
+    41.5,
+    54.8,
+    2.6
+   ],
+   "nearest": [
+    [
+     "Rubellite",
+     3.7
+    ],
+    [
+     "Amaranth Purple",
+     4.1
+    ],
+    [
+     "Raspberry",
+     5.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930; jp, wiki sources; ISCC-NBS nearest strong purplish red (dE 4.3)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes and duplicates (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes) (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache (Google Books)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color shares this exact hex in our library?",
+   "choices": [
+    "Maroon (X11)",
+    "Crimson",
+    "Burgundy",
+    "Raspberry"
+   ],
+   "answer": "Maroon (X11)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Berry red and X11 maroon are the same screen color."
+ ],
+ "words": 176,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed CSS-maroon contrast and white/black reading (unsourced)",
+   "raspberry description limited to the distance"
+  ]
+ }
+}

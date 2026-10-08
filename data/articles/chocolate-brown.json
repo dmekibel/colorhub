@@ -1,0 +1,170 @@
+{
+ "slug": "chocolate-brown",
+ "name": "Chocolate Brown",
+ "hex": "#44322D",
+ "names": [
+  "Chocolate Brown"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Chocolate Brown is a dark, grayish reddish brown named for the food, and also the color that red lead pigment turns when it decays.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A food name",
+   "body": "Paterson defines chocolate brown as a dark brown, and records it as a food additive that gives chocolate cake mixes their brown color, also called Brown HT [1]. The shorter color Chocolate is a separate entry, one of the X11 set with the hex code D2691E, which is a much lighter orange-brown than this swatch [1]. The name appears in the ISCC-NBS system of 1955, in block 61 (dark grayish reddish brown, about 3.3 units from the swatch), and in RAL 1927 [2].\n\nNeighbors are [[coffee]], [[cocoa]], [[umber]] and [[bistre]] [2]."
+  },
+  {
+   "id": "decay",
+   "title": "When red lead turns chocolate brown",
+   "body": "Chocolate brown is also what some pigments become. Red lead darkens to a chocolate brown on wall paintings in China, Turkestan and Afghanistan, and that darkening has been recorded in Indian miniatures, Japanese paintings and Swiss wall paintings [3][4]. Gettens describes the change as strongest when red lead is exposed to light, while outdoors it may turn pink or white through the formation of lead sulphate [4].\n\nSo a chocolate-brown area in an old painting may once have been a lively orange-red [3][4]. Copper chromates show a similar range, with one compound varying from yellow to copper-red to chocolate-brown [5]."
+  },
+  {
+   "id": "brown",
+   "title": "Brown as the color of earth and cloth",
+   "body": "In Derek Jarman's *Chroma*, brown is the color of corduroy worn by the ploughman and the rich man with acres, and of a chocolate-brown blanket kept from childhood [6]. The book treats brown with nostalgia, not chemistry, and the swatch here is the shade a corduroy or blanket suggests [6][2].\n\nHumic acids in soil are chocolate brown too, which links the name to earth as much as to cocoa [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 1,889 works, or 7.9 per cent, more common than 93 per cent of the named colors [8]. Its rate is highest in the 1500s and again in the 1900s, at 7.9 per cent of paintings from the latter [8]. It works as a shadow color: about 78 per cent of its coverage sits in the darkest part of a painting's lightness order [9]. Whistler's portrait of George W. Vanderbilt has it covering 95 per cent of the canvas [9].\n\nThese are photographs of aged, varnished paintings, so some of these browns were originally other colors, as the red lead cases show [8][3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "chocolate, the food",
+   "first_recorded": "ISCC-NBS 1955; RAL 1927",
+   "source": "ColorHub library; Paterson, Dictionary of Colour"
+  },
+  "aka": [
+   "Brown HT (food additive)"
+  ],
+  "siblings": [
+   "chocolate",
+   "coffee"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "chocolate",
+    "gloss": "the X11 color Chocolate is a lighter orange-brown"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+  "match": {
+   "hex": "#44322D",
+   "de2000": 6
+  },
+  "n_present": 1889,
+  "pct_archive": 7.94,
+  "role": {
+   "shadow": 0.78
+  },
+  "measured": {
+   "iscc": "dark grayish reddish brown",
+   "de2000": 3.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 100, 468",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21 (notes)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 137",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 45-46",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 200",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, role and top paintings for a color within 6 units of this swatch, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does red lead sometimes turn into on old wall paintings?",
+   "choices": [
+    "Chocolate brown",
+    "Bright blue",
+    "Clear white glass",
+    "Green"
+   ],
+   "answer": "Chocolate brown",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the X11 color Chocolate is as dark as Chocolate Brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Red lead can darken to chocolate brown on wall paintings from China to Switzerland."
+ ],
+ "words": 389,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified: Paterson, Ball, Finlay/Gettens, Jarman, Pigment Compendium; no changes needed"
+  ]
+ }
+}

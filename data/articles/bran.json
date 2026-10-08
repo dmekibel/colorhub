@@ -1,0 +1,145 @@
+{
+ "slug": "bran",
+ "name": "Bran",
+ "hex": "#B68B5C",
+ "names": [
+  "Bran"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Bran is a warm tan, the brown of wheat bran, and a name the books mention more as a dye-vat ingredient than as a color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color and the name",
+   "body": "Paterson defines bran simply as the brown color of bran, filed among the browns [1]. Maerz and Paul (1930) record the name from 1925, on plate 12 D 7 [2]. No book we hold says who first used it as a color word, which is undocumented here [1][2]."
+  },
+  {
+   "id": "vat",
+   "title": "Bran in the dye vat",
+   "body": "Where the books talk about bran, it is a dyer's material. In Balfour-Paul's account of medieval woad-vat recipes studied by Cardon, a vat on the verge of going off could be rescued with hot madder dye or bran [3]. For imported indigo, European dyers made a \"madder soup\" from bran, [[madder]] and burnt lees [3]. Japanese indigo dyers add rice bran, rice wine, honey or lime to speed a slow fermentation [3].\n\nOne English recipe for the fastest dark blue, quoted by Garfield, uses a peck of bran, the refuse of wheat, with woad, madder, copperas and lime [4]. Bran also served as a swindler's filler: in the mid-nineteenth century Salter recorded commercial madder root adulterated with brickdust, ochre, sand and bran [5]. None of this says the dye looked like bran. The shared word is a kitchen word."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, this color covers at least five per cent of the canvas, within six units of color distance, in 3,156 paintings, or 13 per cent, one of the most common colors in the archive [6]. As photographed, it often reflects aged paper and silk as much as paint [6].\n\nIt is strongest in the 1300s, at 85 of 251 paintings, two and a half times the archive rate [6]. Mughal painting carries it in 90 of 168 works, four times the rate [6]. The top match is the Chinese hanging scroll *White-Robed Guanyin* of about 1250, where it fills 92 per cent of the work [6]. Nearest company: [[camel]], [[sienna]] and [[ochre]] [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the husk of cereal grain",
+   "first_recorded": "1925 (Maerz and Paul, 1930)",
+   "source": "Paterson, \"bran\"; Maerz and Paul 1930, plate 12 D 7"
+  },
+  "aka": [],
+  "siblings": [
+   "wheat",
+   "buff",
+   "tan"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (CIEDE2000 within 6, at least 5% of the canvas), tools/article_field.py",
+  "n_present": 3156,
+  "rate": 0.1327,
+  "movements": {
+   "Mughal": [
+    90,
+    168
+   ]
+  },
+  "century_1300": [
+   85,
+   251
+  ],
+  "company": [
+   "Camel",
+   "Sienna",
+   "Ochre"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bran\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, on fermentation vats and recipes (citing Cardon)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 4",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"madder\" (citing Salter 1869)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (CIEDE2000 within 6, at least 5% of the canvas), tools/article_field.py",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In an indigo vat, what is bran used for?",
+   "choices": [
+    "To help the fermentation along",
+    "To turn the dye red",
+    "To bleach the cloth",
+    "To fix the color with acid"
+   ],
+   "answer": "To help the fermentation along",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painting tradition carries Bran far above the archive rate?",
+   "choices": [
+    "Mughal",
+    "Pointillism",
+    "Dutch still life",
+    "Pop art"
+   ],
+   "answer": "Mughal",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Japanese indigo dyers add rice bran to the vat [3]."
+ ],
+ "words": 318,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Woad-vat rescue sentence was garbled; reworded to 'hot madder dye or bran' as in Balfour-Paul"
+  ]
+ }
+}

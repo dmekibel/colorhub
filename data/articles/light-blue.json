@@ -1,0 +1,275 @@
+{
+ "slug": "light-blue",
+ "name": "Light Blue",
+ "hex": "#ADD8E6",
+ "names": [
+  "Light Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "long",
+ "lede": "Light blue is the plain name for a pale blue, and it points at a different swatch in almost every standard; its real history is in who could wear it, what it cost to dye, and how it behaves at dusk.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Four swatches under one name",
+   "body": "The swatch here is the web color LightBlue, hex ADD8E6, which comes from the CSS list [2]. Other standards that carry the same name disagree with it. RAL 5012, a German paint standard, is a mid blue near 3481B8 on screen, and the xkcd color survey's common answers are near 95D0FC and 7BC8F6 [2]. Across the four swatches the largest gap is about 28 units on the CIEDE2000 scale [2].\n\nThe web color's neighborhood is block 182 of the ISCC-NBS system of 1955, whose nearest category is very pale blue [2]. The earliest dated standard in our data to carry the name is RAL, in 1927 [2]. In the books we read, the name is tied to no single dye, pigment or date. It is a description first, a color second."
+  },
+  {
+   "id": "names",
+   "title": "Many names for the same pale blue",
+   "body": "Paterson glosses a crowd of older names simply as a light blue: *sky* and [[sky-blue]], *air-blue* (the color of a thrush's egg), *Russian blue*, *zircon blue*, *vessey*, and *fesse*, the heraldic term [1]. *Saxe blue* is a light blue from Saxon blue, a greyish indigo-based color, and *King's blue* is made by mixing ultramarine with Cremnitz white [1]. *Turnbull's blue* is also a light blue, sometimes taken as Prussian blue, though that is darker [1]. [[electric-blue]] is a brilliant light blue [1], and *Copenhagen blue* is a bright purplish blue that Paterson also calls a light blue [1].\n\nNames drift. Garter blue is a dark shade now, Paterson says, though it was light before [1]. [[powder-blue]] is used for both a light blue and a deep one, and the term also means powdered smalt, once added to the wash to keep linen white [1].\n\nIn the seventeenth century, Eastlake reports through the *Pigment Compendium*, the \"ashes\" that painters listed were light blues made from silver (the Indian bice), copper carbonates or smalt, not ultramarine [3]."
+  },
+  {
+   "id": "schools",
+   "title": "Cambridge, Eton and \"a blue\"",
+   "body": "Paterson explains that Cambridge blue is the light Eton color, adopted, it is said, in haste in the 1836 boat race against Oxford, when the Cambridge cox had forgotten the crew's own colors [1]. Eton's [[eton-blue]] was adopted in the sixteenth century and later appropriated by Cambridge University [1]. Oxford's is dark blue, and \"a blue\" is both the honor of representing either university and the person who gets it [1]. For the long version see [[cambridge-blue]]."
+  },
+  {
+   "id": "fashion",
+   "title": "From peasant cloth to court",
+   "body": "Pale blue was once the cheap end of the dye shop. In Renaissance Florence one dyer's kermes cost more than three times as much as light blue, and at another shop dyeing cloth scarlet cost ten times as much as dyeing it sky blue [5]. Pastoureau adds that until the eighteenth century the upper ranks of society rarely wore light blue, because it was the color of peasant cloth dyed with poor woad, which faded in sun and soap [4]. Those blues were light but also greyish and bland [4].\n\nA new taste for light blue took hold at court in the first half of the eighteenth century, first for women and then for men, spreading after 1750 to the nobility and the wealthy bourgeois [4]. In Germany and Sweden people wore it into the early nineteenth century [4]. The vocabulary followed: around 1765 French dyers had 24 common terms for the blues they produced, against 13 a century before, and 16 of the 24 were light [4].\n\nEnglish dyers had their own ladder of [[indigo]] grades. Finlay lists them from light to dark, running from milk blue and pearl blue through sky blue, queen's blue and watchet blue to deep blue and navy blue [6]. The full story of pale blue as a fashion belongs to [[sky-blue]]."
+  },
+  {
+   "id": "language",
+   "title": "Two blues in Russian",
+   "body": "Paterson notes that Russian has no single word for [[blue]] but two, one for dark blue and one for light, and Russians treat them as different colors [1]. Batchelor argues that pale and dark blue differ to the eye as much as pink and red do, and perhaps more, yet English gives the pale one no word of its own [7]. Pink, he adds, is the only basic English color term that also names part of another basic color [7]. He leaves open whether English speakers actually see anything different from Russian speakers [7]."
+  },
+  {
+   "id": "dusk",
+   "title": "The color that glows at dusk",
+   "body": "Light blues behave differently as the light fails. By the early nineteenth century twilight was called the painter's hour in England, and Reynolds's pupil James Northcote noted that at that hour reds look darker, almost black, while light blues turn white or nearly so [8]. Livingstone gives the biology. Rods are more sensitive to blue and less to red, so in dim light an equal amount of blue light seems roughly a hundredfold brighter than red light [9]. In her test, a blue bowl and cherries seem equally light by day, but after ten minutes in the dark the bowl looks the lighter of the two [9].\n\nWhere to look: at dusk, pale blue things stay luminous while reds sink."
+  },
+  {
+   "id": "fading",
+   "title": "When red turns light blue",
+   "body": "The strangest light blue in the books is an accident. Rothko gave his Harvard murals to the university in 1962 and they were meant to be dark pink and crimson, but they deteriorated within five years and were removed from view by 1979 [10]. Ball reports that they have turned light blue [10]. Rothko built his crimsons from synthetic ultramarine, cerulean blue and titanium white mixed with two modern organic reds, and one of the reds, Lithol Red, is dreadfully fugitive in light [10]. What remains is presumably the blue and white of the same mixtures [10].\n\nKandinsky, for his part, wrote in 1912 that light blue is like a flute, dark blue like a cello and darker still like a double bass [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 31 of them [12]. None of the 3,619 paintings dated before 1600 qualifies, though the archive's early centuries are thin [12]. The earliest is [[painter:jan-van-goyen|Jan van Goyen]]'s *Fishing Boats off an Estuary* of 1633, where it covers 16 per cent of the canvas [12].\n\nThe 1800s are the home of the color, with 21 of 8,345 paintings, about 1.9 times the rate the museums' own mix predicts [12]. The peak decade is the 1870s, with 6 of 1,065 [12]. The largest patch is in [[painter:alfred-sisley|Sisley]]'s *Le chemin de la Machine, Louveciennes* of 1873, at 40 per cent, followed by Chintreuil's *L'Espace* of 1869, at 31 per cent [12]. See [[painting:commons-Q3955422|Le chemin de la Machine, Louveciennes]]. In 90 per cent of the paintings where it appears it plays the highlight, one of the lightest colors in the picture, and the color it keeps company with is [[powder-blue]] [12].\n\nAs always these are photographs of aged, varnished paintings, and a color match is not a pigment test [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: light + blue; no single dye or pigment",
+   "first_recorded": "as a standard name: RAL, 1927 (earliest dated source in our data); as a court fashion: first half of the 18th century (Pastoureau)",
+   "source": "Paterson, A Dictionary of Colour; Pastoureau, Blue, ch. 10"
+  },
+  "aka": [
+   "pale blue",
+   "sky blue",
+   "light blue (RAL 5012)"
+  ],
+  "siblings": [
+   "sky-blue",
+   "powder-blue",
+   "cambridge-blue",
+   "eton-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "powder-blue",
+    "gloss": "Paterson: used for both a light blue and a deep blue"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#ADD8E6",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 31,
+  "top_paintings": [
+   "commons-Q3955422",
+   "commons-Q17493819",
+   "rijks-20027825"
+  ],
+  "century_1800s": {
+   "hits": 21,
+   "n": 8345,
+   "lift": 1.93
+  },
+  "role": {
+   "highlight": 0.9,
+   "mid": 0.1
+  },
+  "company": [
+   [
+    "Powder blue",
+    25
+   ]
+  ],
+  "measured": {
+   "lch": [
+    83.8,
+    15.8,
+    226.5
+   ],
+   "nearest": [
+    [
+     "very pale blue",
+     5.6
+    ]
+   ],
+   "alts": [
+    [
+     "ral",
+     "#3481B8"
+    ],
+    [
+     "xkcd",
+     "#95D0FC"
+    ],
+    [
+     "xkcd",
+     "#7BC8F6"
+    ]
+   ],
+   "spread": 28.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries for \"blue\", \"Cambridge blue\", \"Eton blue\", \"sky blue\", \"King's blue\", \"powder blue\", \"garter-blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json) and source-spread table (data/graph/disambig.json): Light Blue, with CSS, RAL 5012, xkcd and ISCC-NBS 1955 sources; screen values are approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Haarlem blue\" entry, p. 193",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 10 (\"The Favorite Color\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 196",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art: The Biology of Seeing, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 240",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why had the upper classes rarely worn light blue before the 1700s, according to Pastoureau?",
+   "choices": [
+    "It was the faded color of peasant cloth dyed with poor woad",
+    "It was reserved for the clergy",
+    "It could not be dyed on silk",
+    "A law forbade it"
+   ],
+   "answer": "It was the faded color of peasant cloth dyed with poor woad",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in dim light, light blues look darker and reds look lighter.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which statement about the name \"light blue\" is supported by our data?",
+   "choices": [
+    "RAL 5012 is a mid blue, much darker than the web color LightBlue",
+    "Every standard gives the same swatch for light blue",
+    "Light blue was first defined by the web in 1927",
+    "The name always means powder blue"
+   ],
+   "answer": "RAL 5012 is a mid blue, much darker than the web color LightBlue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "At dusk, reds turn almost black while light blues turn white: painters called twilight the painter's hour.",
+  "Rothko's Harvard murals were painted dark pink and crimson; they are now reported as light blue.",
+  "In 1765 French dyers had 24 common words for blues, and 16 of them were light blues."
+ ],
+ "words": 1139,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch-34 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Descriptive-tier name: no single history; article built from cross-book cluster facts (fashion, language, dusk, fading).",
+   "Cambridge blue boat-race story is Paterson's 'it is said' (hedged).",
+   "Rothko 'turned light blue' is Ball's description; inference about what remains marked 'presumably'.",
+   "Russian two-blues kept to Paterson/Batchelor; no claim about perception (Winawer effect not asserted).",
+   "Overlaps sky-blue article on Florence prices and the 18th-century fashion (cross-linked).",
+   "Haarlem 'ashes' via Eastlake 1847 quoted through the Pigment Compendium."
+  ]
+ }
+}

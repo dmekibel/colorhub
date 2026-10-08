@@ -1,0 +1,127 @@
+{
+ "slug": "antique-green",
+ "name": "Antique Green",
+ "hex": "#3F6352",
+ "names": [
+  "Antique Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Antique Green is a dark, grey-green that mimics old objects, and a name that turns up on house-paint charts as well as in Ridgway's 1912 color plates.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Colors that look old",
+   "body": "Paterson calls antique an adjective for colors that seem to belong to an old object, and says antique bronze, gold, green and red are all in use [1]. Antique green is therefore a deliberate look, the green of an old object, and not a single pigment [1]. Maerz and Paul's 1930 dictionary records it from 1912, the same year as Ridgway's plate 6 (hue 35), and the ISCC-NBS system placed it in block 151 [2].\n\nBatchelor lists it among the soft house-paint names of a suburban housing development in her chapter on color and modern building [3]. Next to [[antique-bronze]] it forms a family of old-metal names, and the swatch is close to [[hunter-green]], about seven units away [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this one covers at least five per cent of the canvas in 163, a rate of about 0.7 per cent [4]. The top matches are Klimt's The Park (1909), where it covers more than half the picture, Gauguin's Still Life (1899) and Morisot's Reading (1873) [4]. It is rare before 1800 and 3.2 times as common in paintings of the 1900s as in the archive overall [4]. These are photographs of aged, varnished paintings, so a match is not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the look of an aged object",
+   "first_recorded": "1912 (Maerz & Paul, 1930)",
+   "source": "Paterson, A Dictionary of Colour; Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "antique-bronze",
+   "hunter-green",
+   "teal",
+   "myrtle-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 163,
+  "match": {
+   "hex": "#3F6352",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    39,
+    18,
+    162
+   ],
+   "nearest": [
+    [
+     "Hunter green",
+     6.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 30",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and Color Graph look-alikes, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does 'antique' mean in a color name like antique green?",
+   "choices": [
+    "The look of an old object",
+    "A dye from antiquity",
+    "A Greek pigment",
+    "A shade of grey"
+   ],
+   "answer": "The look of an old object",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Antique Green matches more 1900s paintings than 1700s ones, proportionally.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The look of old metal, and more than half of Klimt's The Park."
+ ],
+ "words": 237,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened 'aged metal' to 'old object' (Paterson names no metal for green)."
+  ]
+ }
+}

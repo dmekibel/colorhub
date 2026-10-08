@@ -1,0 +1,102 @@
+{
+ "slug": "dark-navy",
+ "name": "Dark Navy",
+ "hex": "#000435",
+ "names": [
+  "Dark Navy"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark navy is a near-black blue, and one dictionary uses the phrase for a color it calls Nippon.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A blue so dark it reads as black",
+   "body": "Paterson's dictionary of colour lists Nippon as a dark navy blue colour [1]. The entry gives no more history, and the reason for the name is undocumented in our books. Otherwise dark navy is a descriptive label that sits on top of [[navy]], which is itself one of the darkest of the common blues.\n\nThe swatch here is almost black, with a faint blue cast: look for it in the deep corners of a coat, or a night sky, where a pure black would flatten the picture. Related colors are [[midnight-blue]], [[dark-brown]] and [[prussian-blue]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This swatch appears in 12 of 23,781 paintings, 0.05 per cent, rarer than 70 per cent of named colors [2]. The earliest is dated 1544, a painting by Bronzino, and the latest 1923, among 8 dated paintings [2]. The name's earliest record in our sources is 1955, so the match is a look-alike hue in an aged photograph, not proof of a particular pigment or dye [2]. The numbers are as photographed."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: navy, darkened",
+   "first_recorded": "ISCC-NBS (1955) in our library",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "Nippon (per Paterson)"
+  ],
+  "siblings": [
+   "navy",
+   "midnight-blue"
+  ],
+  "parent": "navy",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#000435",
+   "de2000": 6,
+   "min_cover": 0.02
+  },
+  "n_present": 10
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Nippon\", p. 278",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for dark-navy (L6 graph)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say the color Nippon is?",
+   "choices": [
+    "A dark navy blue",
+    "A bright red",
+    "A pale green",
+    "A gold"
+   ],
+   "answer": "A dark navy blue",
+   "kind": "pick"
+  },
+  {
+   "q": "What does an archive match to a 1544 painting prove about this color name?",
+   "choices": [
+    "Nothing; it is a look-alike hue",
+    "The pigment existed then",
+    "The name was used then",
+    "It was Bronzino's favorite"
+   ],
+   "answer": "Nothing; it is a look-alike hue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark navy reads as black until you hold it next to real black."
+ ],
+ "words": 185,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified Paterson p. 278 and field notes (Bronzino 1544); no changes."
+  ]
+ }
+}

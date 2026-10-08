@@ -1,0 +1,115 @@
+{
+ "slug": "zedoary-wash",
+ "name": "Zedoary Wash",
+ "hex": "#E8B353",
+ "names": [
+  "Zedoary Wash"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Zedoary wash is a warm, golden yellow named after a turmeric relative; the name goes back to Robert Dossie in 1764.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A yellow from a root",
+   "body": "The Pigment Compendium records \"zedoary wash\" as a name used by Robert Dossie in 1764 [1]. It would come from *Curcuma zedoaria*, a plant of north-east India related to turmeric [1]. The entry adds that Dossie may not have told zedoary from turmeric, so the source could really be turmeric [1]. The preparation was boiling the root in water [1].\n\nAs a color word the name is much newer, recorded by Maerz and Paul in 1930 as a plate 10 yellow, with a first record year of 1764 [2]. The swatch is a moderate orange yellow, about 4.4 units from the ISCC-NBS name [2]."
+  },
+  {
+   "id": "archive",
+   "title": "In paintings",
+   "body": "A yellow near this swatch is common in the archive: 528 of 23,781 paintings, as photographed [3]. It peaks in the 1300s, at 3.5 times the baseline, and the most devoted painter is George Dawe, in 13 of 50 works [3]. These are look-alike hues in photographs, not evidence of zedoary [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "zedoary (Curcuma zedoaria), a turmeric relative",
+   "first_recorded": "Dossie, 1764",
+   "source": "Pigment Compendium, \"Zedoary\"; Maerz & Paul"
+  },
+  "aka": [
+   "turmeric wash (possibly)"
+  ],
+  "siblings": [
+   "goldenrod",
+   "mustard",
+   "marigold",
+   "amber"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 528,
+  "iscc": {
+   "name": "moderate orange yellow",
+   "de": 4.4
+  },
+  "first_record": {
+   "year": 1764,
+   "source": "dossie via maerz-paul"
+  },
+  "century": "1300s, 3.5x baseline"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Zedoary\", p. 416",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz & Paul 1930, ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Zedoary is a relative of which plant?",
+   "choices": [
+    "Turmeric",
+    "Madder",
+    "Woad",
+    "Saffron"
+   ],
+   "answer": "Turmeric",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dossie certainly meant zedoary, not turmeric.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Zedoary wash dates to 1764, and it may secretly be turmeric."
+ ],
+ "words": 171,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced 'painter's handbook' and 'dye washes fade readily' claims",
+   "Dropped unclear '82% of named colors' phrase",
+   "Corrected note entry title"
+  ]
+ }
+}

@@ -1,0 +1,147 @@
+{
+ "slug": "heliotrope",
+ "name": "Heliotrope",
+ "hex": "#DF73FF",
+ "names": [
+  "Heliotrope"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Heliotrope is a purple named for a flowering shrub, famous in late Victorian fashion for its bright combinations, its place in mourning dress and its appearance on stage in Oscar Wilde.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plant that follows the sun",
+   "body": "The shrub's name joins two Greek words, *helios* for the sun and *tropaios* for turning, because the purple flowers were said to follow the sun across the sky [1]. St Clair notes that the shrub follows light no more than other plants do, and that what sets it apart is its sweet scent, which he likens to cherry pie [1]. A distant ancestor of the plant went into perfume in ancient Egypt and was traded with Greece and Rome [1].\n\nThe color is named for the blooms [1]. The dictionary files heliotrope with the purples, and lists several related shades, among them heliotrope grey [2]."
+  },
+  {
+   "id": "victorian",
+   "title": "The Victorian vogue",
+   "body": "The color's high point came late in the nineteenth century, a boom time for purples [1]. Part of the appeal was novelty: before Perkin's [[mauve]], purple had been hard to make, and it kept the glamour of ancient imperial status [1]. Fashion writers paired heliotrope in 1880 with light green or apricot, and later with shades as varied as canary yellow, eucalyptus green, bronze and peacock blue [1]. One commentator remarked that no colors seemed too bright and the combinations were sometimes startling [1].\n\nIn the Victorian language of flowers heliotrope often meant devotion [1]. That is partly why it was among the few colors women could wear after a bereavement [1]. Heliotrope and other soft purples belonged to half-mourning, which for a widow began only after two years of plain, matte black [1]. After a serious influenza outbreak in the winter of 1890, black, grey and heliotrope were worn in profusion the next year [1].\n\nOn the page, the color marks a character. Mrs Cheveley, the immoral heroine of Wilde's *An Ideal Husband*, enters wearing heliotrope and diamonds [1]. St Clair adds that allusions to it appear in the work of Rowling, D. H. Lawrence, Wodehouse, Joyce and Conrad [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and the shade",
+   "body": "The screen swatch is a vivid orchid-violet, far brighter than the softer purples that half-mourning allowed. The books do not give the Victorian shade as a numeric color, so the match is a matter of eye and not of data [3]. A grey-toned neighbor in the names data, Dark Heliotrope Grey, shows how muted some shades with the name were [3]. Look to [[lilac]], [[violet]] and [[orchid]] for related colors in this range [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch measures a lightness of 66 and a chroma of about 82, with a hue angle of 320 degrees, so it lies between violet and magenta [3]. Its contrast ratio against white is only 2.6 to 1 [3]. The nearest named colors in the data are Easter Purple at about 10 units and Ultra Pink at about 12 [3].\n\nWe have not computed how often this swatch occurs in paintings, so we make no claim about the archive. Screen colors are approximate [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the heliotrope plant (Greek helios + tropaios)",
+   "first_recorded": "undocumented in our sources",
+   "source": "St Clair, The Secret Lives of Colour, \"Heliotrope\""
+  },
+  "aka": [],
+  "siblings": [
+   "lilac",
+   "violet"
+  ],
+  "parent": "purple",
+  "children": [
+   "dark-heliotrope-grey"
+  ],
+  "disambiguation": [
+   {
+    "slug": "dark-heliotrope-grey",
+    "gloss": "a muted, grey member of the same name family"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names data, CIELAB, screen swatch",
+  "measured": {
+   "lch": [
+    65.9,
+    81.7,
+    320
+   ],
+   "contrast_white": 2.61,
+   "nearest": [
+    [
+     "Easter Purple",
+     10.1
+    ],
+    [
+     "Ultra Pink",
+     11.9
+    ]
+   ]
+  },
+  "archive": "not computed"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Heliotrope\" (pp. 172-3)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"heliotrope\" and the purple index",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub names data (data/graph/names.json); CIELAB values computed from the swatch hexes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name heliotrope literally describe?",
+   "choices": [
+    "Turning toward the sun",
+    "A violet dye from shellfish",
+    "A purple mineral",
+    "A scent of cherries"
+   ],
+   "answer": "Turning toward the sun",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the plant follows the sun much more than other shrubs do.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which dress rule used heliotrope in Victorian Britain?",
+   "choices": [
+    "Half-mourning",
+    "Wedding wear",
+    "Military uniform",
+    "School dress"
+   ],
+   "answer": "Half-mourning",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Heliotrope was one of the few colors a Victorian widow could wear in half-mourning."
+ ],
+ "words": 474,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded passages that tracked St Clair too closely.",
+   "Allusion claim softened to 'allusions to'."
+  ]
+ }
+}

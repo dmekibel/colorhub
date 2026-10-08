@@ -1,0 +1,120 @@
+{
+ "slug": "salmon-color",
+ "name": "Salmon Color",
+ "hex": "#F3AB89",
+ "names": [
+  "Salmon Color"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Salmon Color is a soft yellowish pink named after the fish; in the books it appears as the pale untreated look of morganite, a pink beryl.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fish's pink",
+   "body": "Ridgway listed Salmon Color in 1886 and on plate XIV of 1912, and the ISCC-NBS dictionary of 1955 calls it a moderate yellowish pink [2]. The name is a longer form of [[salmon]], and its neighbors include [[salmon-pink]], [[peach]] and [[coral]] [2]."
+  },
+  {
+   "id": "morganite",
+   "title": "Morganite",
+   "body": "Finlay writes that a new pink beryl found on Madagascar in 1911 was named morganite as thanks to Morgan, a great collector of gems [1]. Freshly mined, it tends to be a pale, plain salmon, and heating can make it look vivid [1]. So the pale color is how the stone arrives, and heat is what changes it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive it appears in 0.39% of paintings (93), more common than half the named colors, as photographed [3]. It is most often a light inside the painting, and peaks in the 1900s [3]. The earliest match is a painting of 1420 [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the salmon, a fish",
+   "first_recorded": "Ridgway, 1886",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "salmon",
+   "salmon-pink",
+   "peach"
+  ],
+  "parent": "salmon",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 93,
+  "measured": {
+   "lch": [
+    76.1,
+    35.9,
+    51.3
+   ],
+   "iscc": "moderate yellowish pink"
+  },
+  "first_record": {
+   "year": 1886,
+   "source": "Ridgway"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 15 (\"Jewels\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, Salmon Color: Ridgway 1886 and 1912 plate XIV; ISCC-NBS 1955 block 29",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Salmon Color",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What gem named in 1911 is usually a pale salmon color when mined?",
+   "choices": [
+    "Morganite",
+    "Emerald",
+    "Sapphire",
+    "Peridot"
+   ],
+   "answer": "Morganite",
+   "kind": "pick"
+  },
+  {
+   "q": "What can make morganite look more vivid?",
+   "choices": [
+    "Heating",
+    "Washing",
+    "Burying",
+    "Polishing with oil"
+   ],
+   "answer": "Heating",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Morganite, a pink beryl, is often pale salmon until it is heated."
+ ],
+ "words": 165,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim about dealers' practice."
+  ]
+ }
+}

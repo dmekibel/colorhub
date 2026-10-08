@@ -1,0 +1,151 @@
+{
+ "slug": "musk",
+ "name": "Musk",
+ "hex": "#584734",
+ "names": [
+  "Musk"
+ ],
+ "tier": "commercial",
+ "depth": "medium",
+ "lede": "Musk is a dark, warm brown named for the strong-smelling secretion of the male musk deer, and the dictionaries date the color name to 1654.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A scent turned into a color",
+   "body": "Paterson's *Dictionary of Colour* defines *musk-coloured* as the dark brown associated with musk, the strong-smelling substance of the male musk deer [1]. Maerz and Paul's 1930 dictionary lists Musk on plate 8 and gives 1654 as the first recorded use; the same plate carries a second name, Cattail, first recorded in 1920 [2]. The swatch is a dark brown with a yellowish cast, close to [[umber]] and a deeper cousin of [[dark-brown]] and [[brown]], far darker than [[fawn]] [2]. Why a color should be named for a smell is not explained in our sources."
+  },
+  {
+   "id": "ink",
+   "title": "Musk in the ink pot",
+   "body": "Musk shows up in the books as an ingredient, not a color. Old Chinese recipes perfumed ink with cloves, honey and musk, and Finlay says it was probably the most needed of the luxuries, since the glue that bound the ink, yak skin or fish intestines, smelled foul [3]. St Clair gives the same practical reading: scents helped cover the odor of the binders [4]. An early seventeenth-century treatise by Qadi Ahmad lists a 14-ingredient ink recipe that includes Tibetan musk alongside soot and gallnuts [4].\n\nThe link to brown is indirect, and no source says the ink or the deer gave the color its name [3][4]."
+  },
+  {
+   "id": "flower",
+   "title": "The musk flower",
+   "body": "Baty's *Nature's Palette* reproduces Syme's 1821 edition of Werner's nomenclature, where the musk flower (*Mimulus moschatus*) and the dark purple scabious appear as examples in the reds-and-browns chart [5]. That is a flower's petal color, not the animal's, and the books do not treat them as the same musk [5]."
+  },
+  {
+   "id": "synthetic",
+   "title": "A modern footnote",
+   "body": "Garfield reports an early speaker crediting Perkin with a route from coal-tar coumarin to artificial musk [6]. St Clair counts artificial musk among the commonplaces that coal-tar chemistry later gave us [4]. Neither says anything about the color [4][6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch has a lightness of about 31 and chroma of about 15, a dark brown with little saturation [2]. The nearest archive color is Umber, 6.1 units away [2]. We found no archive count for this exact swatch."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "musk, the secretion of the male musk deer",
+   "first_recorded": "1654 (Maerz & Paul 1930)",
+   "source": "Maerz & Paul 1930, plate 8 H 12; Paterson, 'musk-coloured'"
+  },
+  "aka": [
+   "Cattail (same plate, first recorded 1920)"
+  ],
+  "siblings": [
+   "umber",
+   "dark-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub library, Maerz & Paul 1930, plate 8 H 12",
+  "first_recorded": 1654,
+  "lch": [
+   31,
+   15,
+   74
+  ],
+  "nearest": [
+   [
+    "Umber",
+    6.1
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, 'musk-coloured', p. 273",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Maerz & Paul, A Dictionary of Color (1930), plate 8, via ColorHub library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, chapter on black (ink)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, chapters on ink and mauve",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 243-249",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Garfield, Mauve, closing chapters",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What animal does the color name Musk come from?",
+   "choices": [
+    "The male musk deer",
+    "The musk ox",
+    "The muskrat",
+    "A civet cat"
+   ],
+   "answer": "The male musk deer",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did Chinese ink makers add musk?",
+   "choices": [
+    "To cover the smell of the binders",
+    "To make the ink waterproof",
+    "To turn it brown",
+    "To make it glow"
+   ],
+   "answer": "To cover the smell of the binders",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Chinese ink was perfumed with musk partly to hide the smell of its glue."
+ ],
+ "words": 342,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Finlay/St Clair say Chinese ink, not specifically medieval; removed \"Medieval\""
+  ]
+ }
+}

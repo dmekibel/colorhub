@@ -1,0 +1,217 @@
+{
+ "slug": "greenish-white",
+ "name": "Greenish White",
+ "hex": "#F2EBCD",
+ "names": [
+  "Greenish White"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Greenish white is the sixth white in Werner's colour chart, a snow white with a trace of green, shown on a goldcrest's feathers, a narcissus petal and a lump of calc sinter.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Werner's sixth white",
+   "body": "Greenish white is number 6 among the whites in Werner's colour nomenclature, as Patrick Syme printed it in 1814 and 1821 [1][2]. The recipe beside it describes snow white tinted with a hint of emerald green and ash grey [2]. The three examples are the vent coverts of the golden-crested wren, now called the goldcrest, the polyanthus narcissus and the mineral calc sinter [2].\n\nSyme kept five of Werner's original whites in 1821, this one among them, and added two from his own 1814 edition and one from the system of Lenz [2]. The name also turns up in Baty's comparison charts of the nomenclatures that followed Werner, up to Syme's second edition [3]. Its neighbors in the chart are [[greyish-white]] at number 8 and the plain *snow white* that opens the series [2]."
+  },
+  {
+   "id": "minerals",
+   "title": "Greenish white in the ground",
+   "body": "Mineral descriptions are where the name started, and it still turns up there. Copperas, the iron sulfate mineral melanterite, is a greenish white that Rutley compared to furnace slag [4]. Phosgenite, a lead chloride carbonate, can be white, grey, brownish yellow, greenish white or pinkish white, depending on its impurities [5]. In mineral description, a tint like this is simply part of how a specimen is recognised [4][5]."
+  },
+  {
+   "id": "light",
+   "title": "Whites change with the light",
+   "body": "The tint in a white is often borrowed from its surroundings. In his *Science de la peinture*, Vibert wrote that a white wall in full sunlight is never simply white, and he named pinkish, yellowish and greenish whites as the tints it takes from nearby reflections, as Gage quotes him [6]. Livingstone makes the same point with flashlights: under green light a white table still looks white, but a greenish white, while a red tomato looks black because it reflects no green [7].\n\nPastoureau finds three whites in Rembrandt's *Anatomy Lesson of Doctor Tulp* of 1632: a brilliant white for the neckwear, a dull white for the cloth over the body, and a greenish white for the corpse of the executed man [8]. Hold a sheet of paper beside a green lawn or a wall of leaves and the same effect appears on the paper."
+  },
+  {
+   "id": "swatch",
+   "title": "On screen it is a cream",
+   "body": "The swatch, #F2EBCD, comes from a scan of an aged Werner chart and is approximate [9]. Its a* value is only -2.5, just on the green side of neutral, and ISCC-NBS reads it as yellowish white [9]. The nearest named color is [[ecru]], 4.2 CIEDE2000 units away [9].\n\nOn the aged paper, Werner's Snow White, Yellowish White and Orange-coloured White fall within 1.3 units of it, and Snow White is only 0.9 away [9]. The green that gave the color its name cannot be seen on screen, which is why the swatch is better read as a family of old whites than as a green."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch fills at least five per cent of the canvas in 399 works, or 1.7 per cent [10]. It is almost entirely a light: 100 per cent of its area counts as highlight [10]. It is 5.5 times as common in Chinese painting as in the archive as a whole, with 59 of 635 works, and the peak decade is the 1780s, with 18 of 430 paintings [10].\n\nAmong painters, [[painter:george-hendrik-breitner|Breitner]] carries it in 5 of his 50 works and [[painter:john-singer-sargent|Sargent]] in 14 of 287 [10]. The picture where it covers most canvas is an eighteenth-century [[painting:aic-142422|Purple Heron]] at 84 per cent, and a Hiroshige II print sketch, [[painting:aic-7688|Sketch for Autumn Moon at Ishiyama Temple]], follows at 77 per cent [10]. All of this is as photographed: aged, varnished paintings and paper, a color match and not a pigment test [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Werner's chart: snow white with a little green",
+   "first_recorded": "Werner's nomenclature; Syme's editions of 1814 and 1821",
+   "source": "Baty, Nature's Palette, pp. 42-47"
+  },
+  "aka": [
+   "Werner no. 6",
+   "greenish-white"
+  ],
+  "siblings": [
+   "greyish-white",
+   "ecru",
+   "beige"
+  ],
+  "parent": "white",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F2EBCD",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 399,
+  "top_paintings": [
+   "aic-142422",
+   "aic-7688",
+   "cma-142571"
+  ],
+  "painters": [
+   "George Hendrik Breitner",
+   "John Singer Sargent"
+  ],
+  "role": {
+   "highlight": 1.0
+  },
+  "measured": {
+   "lch": [
+    92.9,
+    15.6,
+    99.3
+   ],
+   "nearest": [
+    [
+     "Ecru",
+     4.2
+    ],
+    [
+     "Snow White",
+     0.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 17, 42",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 42-43, 47 (no. 6, Greenish White)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-35 (successive nomenclatures)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 144 (\"copperas\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 311 (\"phosgenite\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 227 (quoting Vibert)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, chapter on color (colored-light demonstration)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 147",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Werner no. 6 aged swatch, ISCC-NBS 1955 block 153, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which examples did Syme's chart give for greenish white?",
+   "choices": [
+    "A goldcrest's feathers, a polyanthus narcissus and calc sinter",
+    "A swan, a lily and marble",
+    "A pearl, a snowdrop and chalk",
+    "An egg, a daisy and quartz"
+   ],
+   "answer": "A goldcrest's feathers, a polyanthus narcissus and calc sinter",
+   "kind": "pick"
+  },
+  {
+   "q": "Under a green light, what does a red tomato look like, according to Livingstone's demonstration?",
+   "choices": [
+    "Black",
+    "Bright green",
+    "Pale pink",
+    "Unchanged"
+   ],
+   "answer": "Black",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: on our aged Werner scan, Greenish White is clearly distinguishable from Snow White.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Werner's greenish white was shown on a goldcrest's vent feathers, a polyanthus narcissus and calc sinter.",
+  "On our aged scan, Greenish White sits only 0.9 units from Snow White: the green has faded out.",
+  "Hold white paper beside a green lawn and watch it turn greenish white."
+ ],
+ "words": 624,
+ "status": "checked",
+ "checked": {
+  "by": "Claude (batch 63 self-check: sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Thin book coverage: Baty carries the chart facts; short honest article, not padded.",
+   "Gage quotation of Vibert is partly garbled in the OCR; paraphrased conservatively.",
+   "Livingstone locator is chapter-level only."
+  ]
+ }
+}

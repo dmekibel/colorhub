@@ -1,0 +1,151 @@
+{
+ "slug": "purple-brown",
+ "name": "Purple Brown",
+ "hex": "#673A3F",
+ "names": [
+  "Purple Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Purple brown is a dark, reddish brown with a violet cast; as a paint name it described the deepest shade of an artificial iron oxide.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from iron oxide",
+   "body": "Heaton's 1928 paint handbook uses purple brown for the deepest shade of artificial iron oxide [1]. The phrase is probably related to a purple brown calx of iron, a description of colcothar (roasted iron sulfate) in an English treatise of 1795 [2]. Harley notes that colcothar vitriol is listed as a color name in Atkinson in 1794, described there as a bright, light purple [2]. Terry in 1893 calls colcothar a fancy name for a kind of iron oxide pigment, and says it was synthetic [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our library gives this color three sources: the xkcd survey, ISCC-NBS block 43 and Ridgway's 1912 atlas, plate XII [3]. Ridgway's name for the same color is Violet Carmine, only 1.6 units away [3]. Its nearest everyday name is [[mahogany]], 10.8 units away, and close neighbors include [[maroon]], [[sepia]] and [[plum]] [3]. The phrase also turns up as a modern paint label: Baty's chart of paint ranges lists a Purple Brown among the decorator colors of one maker, Little Greene [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the archive, 162 of 23,781 paintings carry this brown, mostly in shadows: 57 per cent of the matched area sits in the darkest zone [5]. Albrecht Dürer and Henri Matisse each show it in 3 works, about nine times the archive rate [5]. The words *purple brown* peak in printed English around 1901 [6]. These are photographs of aged, varnished paintings, so treat the counts as approximate [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: a brown with a purple cast",
+   "first_recorded": "1795, as a description of colcothar (Practical Treatise)",
+   "source": "Pigment Compendium, \"Purple brown\" and \"Colcothar\""
+  },
+  "aka": [
+   "Violet Carmine (Ridgway)"
+  ],
+  "siblings": [
+   "mahogany",
+   "maroon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+  "n_present": 162,
+  "role": {
+   "shadow": 0.57,
+   "mid": 0.42
+  },
+  "ngram": {
+   "peak": 1901,
+   "source": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak"
+  },
+  "painters": [
+   {
+    "key": "Albrecht Dürer",
+    "hits": 3,
+    "n": 47
+   },
+   {
+    "key": "Henri Matisse",
+    "hits": 3,
+    "n": 50
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 324 (\"Purple brown\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 132 (\"Colcothar\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json); ISCC-NBS 1955, Ridgway 1912; CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 267-268 (paint chart)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Heaton use the name purple brown for?",
+   "choices": [
+    "The deepest shade of artificial iron oxide",
+    "A dye from plums",
+    "A brown made from mauve",
+    "Dried madder root"
+   ],
+   "answer": "The deepest shade of artificial iron oxide",
+   "kind": "pick"
+  },
+  {
+   "q": "Where does this color mostly sit in paintings that carry it?",
+   "choices": [
+    "In shadows",
+    "In skies",
+    "In highlights",
+    "In frames only"
+   ],
+   "answer": "In shadows",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Purple brown began as the trade name for the deepest synthetic iron oxide."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Hedged 'descends from' to 'probably related to'; 1794 vs 1795 date corrected",
+   "Modern paint label attributed to the right maker (decorator range), not a watercolor chart"
+  ]
+ },
+ "words": 252
+}

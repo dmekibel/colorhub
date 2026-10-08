@@ -1,0 +1,129 @@
+{
+ "slug": "creme",
+ "name": "Creme",
+ "hex": "#FFFFB6",
+ "names": [
+  "Creme"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Creme is a very pale lemon yellow, brighter than the cream of everyday speech, and it keeps a French spelling for a color the English call cream.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The French spelling",
+   "body": "In our library Creme is a name from the ISCC-NBS lists of 1955 and the xkcd survey of 2010, and its swatch is a pale lemon [3]. Its nearest everyday name is Cream, 6.0 units away, and it has a near-duplicate, Light Beige, that is only 0.3 units apart [3]. See [[cream]] for the plain English word.\n\nPaterson defines cream as yellowish-white [1]. The swatch here is clearly more yellow and brighter than that, so the screen color is lemon cream, closer to custard than to milk [1][3]. Light Beige, its near-twin, shows how little separates a yellow-tinged cream from a pale beige on a screen [3]."
+  },
+  {
+   "id": "violet",
+   "title": "A cream that is violet",
+   "body": "Paterson lists *crème de violette*, the violet liqueur, as a color term meaning a deep violet [1]. It sits in the violet group of his colour index [1]. See [[lavender]] and [[violet]] for the plain names.\n\nPastoureau's short book on color records another use [2]. In the courts of the 1600s and 1700s aristocrats smeared themselves with creams to make a white mask, and Pastoureau ties this to a wish to look unlike tanned peasants [2]. Those creams were cosmetics, not a color name, but they share the cream's association with pale skin [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Creme appears in 24 of our 23,781 paintings, about 0.1%, as photographed, and the within-painting lens finds it in 8 [3]. It is rarer than 70% of the named colors [3]. The earliest match is a work of 1599, and the 16 dated paintings at least 2% covered run to 1910 [3].\n\nThe name's earliest record in our sources is 1955, 356 years later, so a match is a look-alike hue in an aged photograph, not proof of a pigment [3]. In printed English the adjective peaks in the 2000s and rose fastest in the 1980s [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "French crème, cream",
+   "first_recorded": "ISCC-NBS 1955 in our library",
+   "source": "ISCC-NBS"
+  },
+  "aka": [
+   "Light Beige"
+  ],
+  "siblings": [
+   "cream",
+   "ivory"
+  ],
+  "parent": "cream",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cream",
+    "gloss": "the plain English word, a paler yellowish-white"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "crème"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "23,781 paintings",
+  "n_present": 24,
+  "first": "1599",
+  "nearest": "Cream",
+  "de2000": 6.0
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 124 and 509 (\"cream\", \"creme de violette\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Le petit livre des couleurs, ch. 7 (\"Le blanc\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Colorhub data, library.json: ISCC-NBS 1955, xkcd, archive and Ngram fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define cream?",
+   "choices": [
+    "Yellowish-white",
+    "Pale green",
+    "Light pink"
+   ],
+   "answer": "Yellowish-white",
+   "kind": "pick"
+  },
+  {
+   "q": "What does Paterson list crème de violette as?",
+   "choices": [
+    "A deep violet",
+    "A pale yellow",
+    "A dark brown"
+   ],
+   "answer": "A deep violet",
+   "kind": "pick"
+  },
+  {
+   "q": "The Creme swatch here is the same as the cream of milk.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson lists crème de violette as a deep violet, though cream is yellowish-white."
+ ],
+ "words": 314,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened unverified neighbor claim in Paterson violet group."
+  ]
+ }
+}

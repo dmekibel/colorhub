@@ -1,0 +1,108 @@
+{
+ "slug": "lime-yellow",
+ "name": "Lime Yellow",
+ "hex": "#D0FE1D",
+ "names": [
+  "Lime Yellow"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Lime Yellow is a vivid, green-leaning yellow, bright enough to sit on the border between yellow and green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary yellow",
+   "body": "Paterson's dictionary defines lime yellow as a medium yellow or greenish yellow [1]. It appears in his yellows list beside lime, lemon yellow and light straw [2]. The same dictionary keeps separate entries for lime white, the color of calcium oxide or lime, and for limestone, a brownish grey [1]. Those belong to the mineral, not to this color.\n\nThe swatch here is much stronger than a dictionary's \"medium\" yellow. Our records give it a chroma of 96, which is very intense for a screen color [3]. It also has an ISCC-NBS 1955 entry (block 87), and Wikipedia cites Crayola for the name [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The name has close twins in our records: Neon Yellow, Arctic Lime and Volt all sit within a ΔE of 1.5 of this swatch [3]. Its nearest standard neighbor is [[lime]], 2.5 ΔE away [3]. Related names: [[lime-green]], [[chartreuse]], [[green-yellow]] and [[lemon-yellow]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name (lime fruit)",
+   "first_recorded": "ISCC-NBS 1955 in our records",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Neon Yellow",
+   "Volt",
+   "Arctic Lime"
+  ],
+  "siblings": [
+   "lime",
+   "chartreuse"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub name records",
+  "hex": "#D0FE1D",
+  "lch": [
+   94,
+   96,
+   114
+  ],
+  "nearest": "Lime"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lime yellow\", \"lime white\", \"limestone\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, yellows index, p. 503",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub name records (library: ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930, CSS, Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define lime yellow?",
+   "choices": [
+    "A medium yellow or greenish yellow",
+    "A pale blue-green",
+    "A deep orange",
+    "A brownish grey"
+   ],
+   "answer": "A medium yellow or greenish yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson defines lime white as the color of calcium oxide, or lime.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson defines lime yellow as a medium yellow or greenish yellow."
+ ],
+ "words": 162,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

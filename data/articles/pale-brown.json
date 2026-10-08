@@ -1,0 +1,130 @@
+{
+ "slug": "pale-brown",
+ "name": "Pale Brown",
+ "hex": "#755C49",
+ "names": [
+  "Pale Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pale brown is a descriptive phrase more than a name: Paterson and St Clair use it to define caramel, cognac, dust and café au lait.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A phrase more than a name",
+   "body": "Paterson's dictionary uses *pale brown* to define other colors: *caramel* is a pale brown, the color of toasted sugar; *cognac* is a pale brown, like the brandy; and *dust-coloured* means the pale brown of dust [1]. St Clair's glossary does the same for *café au lait*, a pale brown like coffee mixed with milk [2]. So the phrase is a shared yardstick, and the named shades ([[caramel]], [[beige]], [[tan]]) are the specific things it points at [1][2]."
+  },
+  {
+   "id": "mourning",
+   "title": "The pale brown of mourning",
+   "body": "Finlay records a mourning custom in Persia: the color of grief there was the pale brown of withered leaves, while Armenians mourned in sky blue and many Asian cultures wore white [3]. The point in that passage is that mourning has no single color across the world [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is #755C49, which most people would call a medium brown on a screen, darker than the name suggests [4]. That gap is a reason to treat *pale* as relative: it means lighter than the brown a writer had in mind, not a fixed lightness [1][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub archive, 3,814 of 23,781 paintings, about 16%, hold this color across at least 5% of the canvas, as photographed [4]. The rate is highest for the 1270s, at roughly three times the archive's average, and it runs high in works from Nepal, Korea and Tibet [4]. Among European painters, Andre Derain has 12 matching canvases and Martinus Rorbye 11 [4]. Most matches are mid-tones, with about a fifth in shadows [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: pale plus brown",
+   "first_recorded": "origin undocumented in the books",
+   "source": "Paterson, A Dictionary of Colour; St Clair, The Secret Lives of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "caramel",
+   "beige",
+   "tan"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#755C49",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3814,
+  "peak_decade": 1270,
+  "role": {
+   "mid": 0.55,
+   "highlight": 0.23,
+   "shadow": 0.22
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"caramel, cognac, dust-coloured\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Cafe au lait\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive and color library (tools/article_field.py), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Finlay's account, what was the mourning color in Persia?",
+   "choices": [
+    "Sky blue",
+    "The pale brown of withered leaves",
+    "Yellow",
+    "White"
+   ],
+   "answer": "The pale brown of withered leaves",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color does Paterson call a pale brown, the color of toasted sugar?",
+   "choices": [
+    "Caramel",
+    "Cognac",
+    "Dust"
+   ],
+   "answer": "Caramel",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In Persia, the mourning color was the pale brown of withered leaves [3]."
+ ],
+ "status": "checked",
+ "words": 263,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede narrowed to what sources show"
+  ]
+ }
+}

@@ -1,0 +1,106 @@
+{
+ "slug": "grey-olive",
+ "name": "Grey Olive",
+ "hex": "#40433B",
+ "names": [
+  "Grey Olive"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Grey Olive is a very dark, greyed olive, a name our library files under a Japanese traditional color and an early German standard.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two lineages",
+   "body": "Our library gives this swatch two sources: a Japanese traditional color name and the RAL color register of 1927 [1]. The ISCC-NBS system places it at dark grayish green, about 5.8 units away on the CIEDE2000 scale, so the screen swatch is a rough fit to that standard name [1]. Which tradition named it first is undocumented, and we do not claim the two are the same color historically [1]."
+  },
+  {
+   "id": "paint",
+   "title": "A quiet dark neutral",
+   "body": "Our collection of color books has little to say about Grey Olive as a color in its own right [1]. For related ideas see [[olive]] and [[olive-grey]], of which this is a darker, quieter member [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color this close appears in 1,505 works, or 6.3 per cent, more than 90 per cent of the named colors [2]. It peaks in the 1900s, at 6.5 per cent of the 1,674 paintings from that century, 1.4 times the expected rate for the same museums [2]. These are photographs of aged, varnished paintings, so many of the matches began as browns or greens [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; Japanese traditional and RAL 1927 sources",
+   "first_recorded": "RAL, 1927",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "dark grayish green"
+  ],
+  "siblings": [
+   "olive",
+   "olive-grey",
+   "greyish-green",
+   "grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed",
+  "n_present": 1505,
+  "pct_archive": 6.33,
+  "measured": {
+   "iscc": "dark grayish green",
+   "de2000": 5.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912, CSS, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; dE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two sources does our library give for Grey Olive?",
+   "choices": [
+    "A Japanese traditional name and RAL 1927",
+    "Pliny and Vitruvius",
+    "Crayola and Pantone",
+    "Ridgway and Munsell only"
+   ],
+   "answer": "A Japanese traditional name and RAL 1927",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Grey Olive is a light color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Grey Olive matches 6 per cent of the paintings in our archive, and more of the 1900s."
+ ],
+ "words": 201,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported Baty \"gray olive\" table claim (hit is garbled neighbors); renumbered notes"
+  ]
+ }
+}

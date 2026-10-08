@@ -1,0 +1,129 @@
+{
+ "slug": "medium-turquoise",
+ "name": "Medium Turquoise",
+ "hex": "#48D1CC",
+ "names": [
+  "Medium Turquoise"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Medium Turquoise is a clear blue-green from the X11 and CSS color lists, a neighbor of turquoise.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A list name",
+   "body": "Medium Turquoise is one of the colors in the X11 Color Set, with the hex code #48D1CC [1]. It became a CSS keyword, `mediumturquoise`, in the W3C's CSS Color Module Level 3 [2]. Our books give it no history beyond that entry, so the name's origin is undocumented here [1].\n\nIt sits between [[pale-turquoise]] and [[dark-turquoise]] in the same list, around the family hue of [[turquoise]] [3]. The ISCC-NBS system of 1955 would call it a \"brilliant bluish green\" (block 159), 5.0 CIEDE2000 units away, and the nearest name from our learning set is *Turquoise* itself, at the same distance [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only one painting in our 23,781-painting archive carries it, a work dated 1783, as photographed [4]. These are photographs of aged, varnished paintings, so read the match as a screen color and not a pigment [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; an entry in the X11 color list",
+   "first_recorded": "X11 color set; CSS keyword",
+   "source": "Paterson, A Dictionary of Colour, p. 260"
+  },
+  "aka": [
+   "mediumturquoise",
+   "MediumTurquoise"
+  ],
+  "siblings": [
+   "pale-turquoise",
+   "dark-turquoise",
+   "medium-aquamarine"
+  ],
+  "parent": "turquoise",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#48D1CC",
+   "min_cover": 0.01
+  },
+  "n_present": 1,
+  "measured": {
+   "lch": [
+    77,
+    38,
+    193
+   ],
+   "iscc": "brilliant bluish green, block 159, dE 5.0",
+   "nearest": [
+    [
+     "Turquoise",
+     5.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"MediumTurquoise\", p. 260",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "W3C, CSS Color Module Level 3, section 4.3",
+   "loc_kind": null,
+   "url": "https://www.w3.org/TR/css-color-3/"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json and data/graph nodes: ISCC-NBS 1955, Munsell conversion), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color list gave Medium Turquoise its hex code #48D1CC?",
+   "choices": [
+    "X11",
+    "Ridgway",
+    "Crayola",
+    "Munsell"
+   ],
+   "answer": "X11",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Medium Turquoise is common in museum paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Only one painting in our 23,781-painting archive carries Medium Turquoise."
+ ],
+ "words": 151,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'lighter, softer cousin' in lede."
+  ]
+ }
+}

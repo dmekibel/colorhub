@@ -1,0 +1,106 @@
+{
+ "slug": "baby-pink",
+ "name": "Baby Pink",
+ "hex": "#F4C2C2",
+ "names": [
+  "Baby Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Baby Pink is a pale, soft pink, named for the nursery.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines baby pink simply as a pale pink [1]. The name is recorded in several systems: Ridgway's 1912 standard, ISCC-NBS blocks 4 and 28, and Maerz and Paul, whose merged entries carry first-recorded dates of 1884, 1912 and 1928 [2]. Wikipedia cites the ISCC-NBS system for its swatch [2].\n\nIts neighbors include Tea Rose, Chatenay Pink and Spanish Pink, all within a few units of distance [2]. The name does not record when pink became linked to babies [1]. Next to [[pink]] and [[rose-pink]], it is the palest of the family [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 15 paintings in our archive of 23,781 match this color, 0.06% of them, as photographed [3]. The earliest match is dated 1400, 484 years before the earliest record in our sources (1884), so it is a look-alike hue in an aged photograph and not proof of the pigment or dye [2][3]. In printed English the word peaks in the 2010s [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pale pink of infant clothing",
+   "first_recorded": "1884 (Maerz & Paul)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "pink",
+   "rose-pink",
+   "shell-pink",
+   "candy-pink"
+  ],
+  "parent": "pink",
+  "children": [
+   "pastel-pink"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 15,
+  "pct_paintings": 0.06,
+  "ngram_peak": 2010,
+  "library_first": 1884
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 42, \"baby pink\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Baby Pink is a deep, saturated pink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What does Paterson say baby pink is?",
+   "choices": [
+    "A pale pink",
+    "A hot pink",
+    "A brownish pink"
+   ],
+   "answer": "A pale pink",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Baby Pink is recorded in more than five color systems in our library."
+ ],
+ "words": 160,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Maerz & Paul dates reworded as merged entries; fixed 512-year gap to 484 (1884 is the earliest record)."
+  ]
+ }
+}

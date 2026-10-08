@@ -1,0 +1,135 @@
+{
+ "slug": "melon",
+ "name": "Melon",
+ "hex": "#FEBAAD",
+ "names": [
+  "Melon"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Melon is a pale, warm pink with a touch of orange, named for the flesh of a ripe fruit and recorded as a color name since at least 1892.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fruit's color",
+   "body": "Maerz and Paul's *Dictionary of Color* (1930) lists Melon at plate 2, position D 10, and gives 1892 as the earliest use the library finds [1]. The NBS Circular 553 of 1955 places it in ISCC-NBS block 26, with a nearest category of light yellowish pink about 6.3 units away [1]. The swatch here is the dictionary value; an online survey of 2010 used a stronger coral-orange for the same word, so the name covers a wide range [1].\n\nThe books tell little of the color itself. Paterson's *Dictionary of Colour* defines the neighboring cantaloupe as a light shade of yellow, after the melon of the same name, which shows that the fruit gives its name to more than one color, depending on the variety [2]. The other color books we hold mention melons only as produce, never as a color [3].\n\nIn Japan the library files this swatch's neighborhood with *arazome*, a washed-out crimson dye [1]. Its closest neighbors are [[salmon]], [[peach]] and [[pale-pink]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Melon appears in 12 of the 23,781 paintings in our archive, about 0.05%, as photographed [5]. It is rarer than 75% of the named colors [5]. The earliest match is a painting by Correggio of 1515, 377 years before the name's earliest record in our library, so this is a look-alike hue in an aged photograph and not proof of a pigment [5]. These are photographs of varnished paintings, so a match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the flesh of a ripe melon",
+   "first_recorded": "1892 (Maerz & Paul 1930)",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "Cupid Pink (Maerz & Paul)"
+  ],
+  "siblings": [
+   "salmon",
+   "peach",
+   "pale-pink",
+   "coral"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 12,
+  "pct": 0.05,
+  "peak_period": "none",
+  "measured": {
+   "lch": [
+    81.4,
+    28.1,
+    35.4
+   ],
+   "nearest": [
+    [
+     "Baby Pink",
+     6.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 2 D 10, first recorded 1892; NBS Circular 553 (1955), ISCC-NBS block 26",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cantaloupe\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Concordance search of ../color-kb/concordance/by-color/melon.jsonl",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which book defines cantaloupe as a light shade of yellow named for the fruit?",
+   "choices": [
+    "Paterson's Dictionary of Colour",
+    "Ball's Bright Earth",
+    "Finlay's Colour",
+    "Pastoureau's Green"
+   ],
+   "answer": "Paterson's Dictionary of Colour",
+   "kind": "pick"
+  },
+  {
+   "q": "What earliest use of Melon as a color does our library find?",
+   "choices": [
+    "1892",
+    "1556",
+    "1810",
+    "1955"
+   ],
+   "answer": "1892",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A dictionary pink that has been in use since at least 1892."
+ ],
+ "words": 266,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Corrected year gap to Correggio painting (1515 to 1892 is 377 years)"
+  ]
+ }
+}

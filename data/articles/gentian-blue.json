@@ -1,0 +1,129 @@
+{
+ "slug": "gentian-blue",
+ "name": "Gentian Blue",
+ "hex": "#616AB3",
+ "names": [
+  "Gentian Blue"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Gentian Blue is a strong purplish blue named for the gentian flower, listed by Ridgway in 1912 and the ISCC-NBS in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower and an old list",
+   "body": "In the Werner color nomenclature as Syme edited it, the gentian is an example under two blues: the back parts of the flower under China blue, and the flower itself under azure blue [1]. Baty reproduces the list with its animal, vegetable and mineral examples [1].\n\nOur library carries *gentian blue* in Ridgway's standards of 1912 (plate XXI), in a German RAL list of 1927, in Maerz and Paul's 1930 dictionary and in the ISCC-NBS of 1955 [2]. Measured against the ISCC-NBS categories, the swatch is nearest to strong purplish blue, 5.7 units of ΔE2000 away [2]. Nearby are [[periwinkle]], [[cornflower]] and [[pearl-gentian]]."
+  },
+  {
+   "id": "violet",
+   "title": "Not gentian violet",
+   "body": "Garfield lists gentian violet among dyes that became drugs, employed against bacteria and fungi [3]. It is a dye, not the flower, so do not confuse it with the blue of the petals."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This tone is rare in our archive: 9 paintings, 0.04 per cent, as photographed [4]. The earliest is by Cesare da Sesto, from 1517 [4]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gentian flower",
+   "first_recorded": "Werner and Syme nomenclature (undated here); Ridgway 1912",
+   "source": "Baty; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "periwinkle",
+   "cornflower",
+   "pearl-gentian",
+   "periwinkle-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
+  "n_present": 9,
+  "pct": 0.04,
+  "first_dated": {
+   "painter": "Cesare da Sesto",
+   "year": 1517
+  },
+  "measured": {
+   "nearest": [
+    [
+     "strong purplish blue",
+     5.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 89 and 94",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): name sources and dates (Ridgway 1912 plate XXI, RAL 1927, ISCC-NBS block 194)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 11 (\"dyes into drugs\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which part of the gentian flower is a China blue example in the Werner list Baty reproduces?",
+   "choices": [
+    "The back parts",
+    "The roots",
+    "The seeds",
+    "The petals"
+   ],
+   "answer": "The back parts",
+   "kind": "pick"
+  },
+  {
+   "q": "What does Garfield say gentian violet was employed for?",
+   "choices": [
+    "Antibacterial and antifungal purposes",
+    "Painting ships",
+    "Dyeing sails",
+    "Coloring wine"
+   ],
+   "answer": "Antibacterial and antifungal purposes",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Gentian was already a model blue in the Werner nomenclature as Syme edited it."
+ ],
+ "words": 195,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed claim that gentian violet is a different color from the flower; Garfield only lists it as an antibacterial and antifungal dye."
+  ]
+ }
+}

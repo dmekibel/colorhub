@@ -1,0 +1,122 @@
+{
+ "slug": "rosy-brown",
+ "name": "Rosy Brown",
+ "hex": "#BC8F8F",
+ "names": [
+  "Rosy Brown"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Rosy Brown is a dusty, pinkish brown, best known today as one of the 140 named colors of the X11 set used on websites.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color with an old-fashioned name",
+   "body": "Paterson's dictionary lists RosyBrown as one of the 140 colours in the X11 set used for website design, with the hex code #BC8F8F [1]. The dictionary marks the X11 names with an asterisk in its color index, and files this one among the browns [2].\n\nThe wording is plain description. Paterson defines *rosy* as the pinkish red of roses and *rose-wood brown* as a reddish brown [1], so Rosy Brown reads as a brown with some rose in it. The books give no older history for this exact name, and Paterson records it only as a screen-era standard [1]. Nearby entries include [[rosewood]], and in the swatch it sits between [[brown]] and [[pink]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 64 hold this color at 5% of the canvas or more, as photographed [3]. The strongest is Christen Købke's 1832 portrait of Ida Thiele as a child, where it covers about half of the picture [3]. The word *rosy brown* in printed books was most common around 1891, relative to its later use [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "X11 web color set (rose plus brown); origin of the name undocumented",
+   "first_recorded": "X11 set, undated in the books",
+   "source": "Paterson, A Dictionary of Colour, p. 346"
+  },
+  "aka": [
+   "RosyBrown"
+  ],
+  "siblings": [
+   "dusty-rose",
+   "rosewood"
+  ],
+  "parent": "brown",
+  "children": [
+   "old-rose"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (color match within 6 DeltaE2000, at least 5% of the canvas)",
+  "match": {
+   "hex": "#BC8F8F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 64,
+  "ngram": {
+   "peak": 1891,
+   "rel_1880": 0.929,
+   "rel_2000": 0.213
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 346",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 483 and p. 495 (color index)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'rosy brown', 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which set of web colors does Rosy Brown belong to?",
+   "choices": [
+    "X11",
+    "Crayola",
+    "Pantone",
+    "ISCC-NBS"
+   ],
+   "answer": "X11",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books record an old pigment history for the name Rosy Brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rosy Brown is a web-era color: one of the 140 X11 names, with no older story in the books.",
+  "Christen Købke's 1832 portrait of Ida Thiele is about half Rosy Brown, as photographed."
+ ],
+ "words": 191,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed Linen as neighbor and dusty-rose page-neighbor claim (not in index); unsourced between-brown-and-pink moved out of citation."
+  ]
+ }
+}

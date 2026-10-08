@@ -1,0 +1,148 @@
+{
+ "slug": "sandalwood",
+ "name": "Sandalwood",
+ "hex": "#866450",
+ "names": [
+  "Sandalwood"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Sandalwood is a medium reddish brown named for the red dyewood of the red sandalwood tree, whose dye, santalin, gave colormakers browns, purples and a lake pigment.",
+ "sections": [
+  {
+   "id": "wood",
+   "title": "A red in the wood",
+   "body": "Paterson's dictionary glosses sandalwood as a reddish brown [1]. It lists red-sanders as a red dye made from the Red Sandalwood tree, and santalin as the chemical that gives sandalwood its red [1]. The Pigment Compendium names the plant as *Pterocarpus santalinus*, one of several that yield the dyestuff santalin [2]."
+  },
+  {
+   "id": "lake",
+   "title": "From dye to pigment",
+   "body": "A lake is a dye fixed on a mineral base so that it can be used as paint. Riffault and his co-authors (1874) quote a Professor Dussauce, who in 1861 gave a recipe for a sandalwood lake that he judged close to carmine in beauty and brightness [3].\n\nThe metal that fixes the dye changes the result. By Schweppe's account (1992), aluminium gives an intense dark brown tending toward purple-red, magnesium a dark brown-violet, zinc a violet-brown, tin a lilac, lead an intense red-violet and copper a deep violet-brown [3]. One dyewood could therefore stand behind browns, lilacs and violets, and the swatch on this page is only the plainest of them.\n\nThe naming is untidy. Riffault gave the sandalwood lake the name [[indian-red]], which the compendium calls an unusual association [3]. Salter (1869) describes a sandal red from an unspecified dyewood; the compendium thinks it probably means the sandalwood lake, but mentions of roots as its source point instead to [[madder]] [2][3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The modern swatch is a moderate yellowish brown, 7 units from block 77 of the ISCC-NBS dictionary [4]. Maerz and Paul (1930) record the color name from 1923 [4]. It is a near neighbor of [[cocoa]] and [[coffee]], and it is much browner than the red-violet lakes the dyewood could produce [4][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Sandalwood is common in painting. Colors close to it appear in 1,501 of our 23,781 paintings, 6.3 per cent, more than for 89 per cent of the named colors [5]. Inside a painting it most often plays a hidden color, in 26 per cent of the 870 paintings where the palette lens finds it [5].\n\nThe painter most devoted to it is Henri de Toulouse-Lautrec, who has it in 6 of his 36 works here, 3.4 times the baseline of the museums those works come from [5]. The earliest match is a work of about 960 in the Metropolitan Museum, and the archive's early centuries are thin, so that is a floor and not a first [5]. A match is a look-alike hue in a photograph of an aged, varnished painting, not proof that anyone used the dye [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the red sandalwood tree (Pterocarpus santalinus) and its dye santalin",
+   "first_recorded": "Maerz & Paul 1930 record the color name from 1923",
+   "source": "Paterson, A Dictionary of Colour; Pigment Compendium"
+  },
+  "aka": [
+   "red-sanders (the dye)",
+   "sandal red (the lake, uncertain)"
+  ],
+  "siblings": [
+   "cocoa",
+   "coffee",
+   "mocha"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "indian-red",
+    "gloss": "Riffault's unusual name for the sandalwood lake; Indian red is normally an iron-oxide red"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#866450"
+  },
+  "n_present": 1501,
+  "role": {
+   "hidden": 26
+  },
+  "top_painters": [
+   "Henri de Toulouse-Lautrec"
+  ],
+  "measured": {
+   "lch": [
+    45.3,
+    19.9,
+    56.9
+   ],
+   "contrast_white": 5.31,
+   "iscc": "moderate yellowish brown (block 77, 7.0)"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sandalwood\", \"red-sanders\", \"santalin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Sandalwood\", \"Sandal red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Santalin\" (citing Riffault 1874, Schweppe 1992)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings and data/graph field notes, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What changes the color of a sandalwood lake?",
+   "choices": [
+    "The metal that fixes the dye",
+    "The age of the tree",
+    "The season of the harvest"
+   ],
+   "answer": "The metal that fixes the dye",
+   "kind": "pick"
+  },
+  {
+   "q": "Is the swatch a good guide to every pigment made from sandalwood?",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Tin turned the sandalwood dye lilac, copper made it a deep violet-brown: the metal chose the color."
+ ],
+ "words": 422,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,131 @@
+{
+ "slug": "fawn-color",
+ "name": "Fawn Color",
+ "hex": "#B08669",
+ "names": [
+  "Fawn Color"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Fawn is the light brown of a young deer's coat, a name that sits in Ridgway's 1886 nomenclature and in a 1535 list of pleasing color pairs.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color of the coat",
+   "body": "Paterson glosses the camel's coat as *the fawn colour*, equal to beige [1]. In 1535 Fulvio Pellegrini Morato named grey with fawn among the most beautiful combinations, by the account of Pastoureau [2][3].\n\nOur library carries the name in Ridgway's 1886 nomenclature, again in his 1912 standards (plate XL) and in the ISCC-NBS dictionary of 1955 [4]. Measured against the ISCC-NBS categories, the swatch is nearest to light brown, 3.1 units of ΔE2000 away [4]. Its neighbors are [[fawn]], [[camel]], [[beige]] and [[buff]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This tone appears in 968 paintings in our archive, 4.07 per cent, as photographed [5]. It is twice as common in Mughal paintings as elsewhere, in 17 of 168 [5]. Frans Hals has it in 7 of 23 [5]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the coat of a young deer",
+   "first_recorded": "1886 (Ridgway) in our library; 1535 (Morato) in a list of pairings",
+   "source": "Paterson; Pastoureau; ColorHub library"
+  },
+  "aka": [
+   "Fawn"
+  ],
+  "siblings": [
+   "fawn",
+   "camel",
+   "beige",
+   "buff"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
+  "n_present": 968,
+  "pct": 4.07,
+  "top_movement": {
+   "name": "Mughal",
+   "hits": 17,
+   "of": 168,
+   "lift": 2.0
+  },
+  "measured": {
+   "nearest": [
+    [
+     "light brown",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"camel\", p. 87",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 30",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 120",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): name sources and dates (Ridgway 1886 and 1912, ISCC-NBS block 45)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In 1535 which color did Morato pair with fawn?",
+   "choices": [
+    "Grey",
+    "Purple",
+    "Black",
+    "Scarlet"
+   ],
+   "answer": "Grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: fawn is more common in Mughal paintings than in the archive overall.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Fawn and grey were called a beautiful pair as early as 1535, long before photographs of paintings."
+ ],
+ "words": 160,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

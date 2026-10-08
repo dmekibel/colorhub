@@ -1,0 +1,104 @@
+{
+ "slug": "hyacinth-violet",
+ "name": "Hyacinth Violet",
+ "hex": "#7D368B",
+ "names": [
+  "Hyacinth Violet"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Hyacinth Violet is a deep, reddish purple, named for the color of the flower in its purple form.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The flower's name",
+   "body": "Paterson lists *hyacinthine* as the purplish-blue of the hyacinth, and gives hyacinth violet, or a pink, as a variant [1]. Related entries show how loose the word was: hyacinth blue is a purplish blue popular in the 1930s, and hyacinth red a reddish orange [1].\n\nAs a swatch the name is older than those entries. It appears in Ridgway's 1912 atlas on plate XI, again in the 1955 ISCC-NBS system as a deep purple, and in the 1930 Maerz and Paul dictionary [2]. Ngram data show the printed phrase peaking in the 1920s [3]. See also [[violet]], [[purple]] and [[amethyst]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Hyacinth Violet is nearly absent from painting: one painting in our archive of 23,781 holds it [3]. Dark, saturated purple of this kind is rare in aged pigments, and these are photographs of varnished works [3]. The color is easier to find in a garden than in a museum, a point the name itself makes [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the hyacinth flower",
+   "first_recorded": "1912, Ridgway",
+   "source": "data/library.json; Paterson"
+  },
+  "aka": [
+   "hyacinthine"
+  ],
+  "siblings": [
+   "violet",
+   "purple",
+   "amethyst",
+   "lavender"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/h.json",
+  "n_present": 1,
+  "pct": 0.0,
+  "ngram": "peaks 1920s"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 212, \"hyacinthine\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Ridgway 1912 plate XI hue 61; ISCC-NBS block 219; Maerz & Paul 1930; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/h.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Paterson, what is hyacinth red?",
+   "choices": [
+    "A reddish orange",
+    "A pale pink",
+    "A deep purple",
+    "A dull brown"
+   ],
+   "answer": "A reddish orange",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Hyacinth Violet appears in many paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Only one of 23,781 museum paintings holds Hyacinth Violet."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "status": "checked",
+ "words": 168
+}

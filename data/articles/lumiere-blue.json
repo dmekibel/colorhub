@@ -1,0 +1,118 @@
+{
+ "slug": "lumiere-blue",
+ "name": "Lumiere Blue",
+ "hex": "#99C1BC",
+ "names": [
+  "Lumiere Blue"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Lumiere Blue is a pale grey-green teal on screens, and its name echoes an obscure artificial pigment, bleu lumière, listed in 1901.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pigment name, maybe",
+   "body": "The *Pigment Compendium* [1] lists *bleu lumière* as a variant name for a blue. It says Church listed it in 1901 as a new addition, said to be an artificial copper hydrate whose precise composition is unknown [1]. Whether the color name comes from that pigment is undocumented.\n\nThe color itself is in the charts. Ridgway's 1912 atlas shows it at plate XX, hue 43', tone d, ISCC-NBS puts it in block 163, and Maerz and Paul's dictionary dates it to 1905 [2]. The dates sit close to the pigment listing, but nothing we hold links the two [1][2]. The swatch is a muted grey-green, nearest to [[ash]] among our learnable names, and not the clean blue the name promises [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 74 (0.31 per cent) hold a color within six units of this swatch over at least five per cent of the canvas [3]. The top three matches are two beach scenes and a view of sailboats, dated 1863 to 1888 [3]. These are photographs of aged, varnished paintings, so a match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "possibly the pigment bleu lumière; undocumented",
+   "first_recorded": "1905 (Maerz & Paul); pigment listed by Church, 1901",
+   "source": "Pigment Compendium; ColorHub library"
+  },
+  "aka": [
+   "bleu lumière (the pigment)"
+  ],
+  "siblings": [
+   "ash",
+   "teal",
+   "celadon",
+   "sage"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bleu lumière"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#99C1BC",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 74,
+  "top_paintings": [
+   "nga-52159",
+   "nga-61364",
+   "commons-Q17496121"
+  ],
+  "rate": 0.0031
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Bleu lumière\", p. 66",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did the Pigment Compendium describe bleu lumière, listed by Church in 1901?",
+   "choices": [
+    "An artificial copper hydrate",
+    "A natural ultramarine",
+    "A madder lake",
+    "A cobalt glass"
+   ],
+   "answer": "An artificial copper hydrate",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources show the color Lumiere Blue was named after the pigment bleu lumière.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The pigment bleu lumière was listed in 1901; the color name is not proven to come from it."
+ ],
+ "words": 200,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,145 @@
+{
+ "slug": "blue-grass",
+ "name": "Blue Grass",
+ "hex": "#19382F",
+ "names": [
+  "Blue Grass"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Blue Grass is a very dark green in the Maerz and Paul color dictionary, and its name points at a plant it hardly resembles.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no color entry",
+   "body": "The color books consulted give no definition of this color. Paterson's dictionary has entries only for the music, *bluegrass*, and for Kentucky's nickname, the Bluegrass State [1][4]. Neither describes a color, and the grass itself is green rather than blue, and the books consulted do not explain the name.\n\nOne psychology text mentions grass only as the example of a thing a color-blind person has learned to call green [5]. That is not a color of this name either, and it should not be read as one."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is #19382F, a dark green with a low chroma, close to the library's nearest named neighbor, Bottle Green [3]. A screen shows it only approximately [3]. Compare [[green]] and [[viridian]] for greens that do have documented histories [3]. In LCH terms it measures lightness 21, chroma 14 and hue 172 degrees [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this dark green in 117 of 23,531 paintings, as photographed [2]. Paul Cezanne is the painter who holds it most often, in 4 paintings [2]. Measured values are screen approximations of varnished canvases [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "ColorHub library (Maerz and Paul)"
+  },
+  "aka": [
+   "Bluegrass"
+  ],
+  "siblings": [
+   "bottle-green",
+   "patina-green"
+  ],
+  "parent": null,
+  "children": [
+   "green"
+  ],
+  "disambiguation": [
+   {
+    "slug": "bottle-green",
+    "gloss": "a similar dark green with a documented pigment-glass history"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 117,
+  "measured": {
+   "lch": [
+    21,
+    14,
+    172
+   ],
+   "nearest": [
+    [
+     "Gunmetal",
+     12.5
+    ],
+    [
+     "Bottle Green",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bluegrass\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,531 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul entry, dark green",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Golden\" entry, Bluegrass State",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Birren, Psychology of Color, ch. 17",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Paterson's dictionary, what does 'bluegrass' name?",
+   "choices": [
+    "A type of country music",
+    "A pigment",
+    "A dye plant",
+    "A shade of lavender"
+   ],
+   "answer": "A type of country music",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books consulted define Blue Grass as a color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The name says blue; the swatch is a very dark green."
+ ],
+ "words": 194,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'trade label' guess and 'darkest in batch' claim."
+  ]
+ }
+}

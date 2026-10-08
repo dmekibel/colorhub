@@ -1,0 +1,118 @@
+{
+ "slug": "windsor",
+ "name": "Windsor",
+ "hex": "#443349",
+ "names": [
+  "Windsor"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Windsor is a deep aubergine-purple in Maerz and Paul's 1930 color dictionary; the books read do not explain the name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a story",
+   "body": "Maerz and Paul record Windsor as a dark purple first used in 1924, but none of the books we hold says why it is called that [1]. The same dictionary has Windsor Tan, a brown, so the place name was used for more than one color [1]. Origin undocumented, and it is unrelated to [[romanesque]], its nearest dark purple [1].\n\nPaterson says phthalocyanine blue, first found at ICI in 1928 by accident, is also sold as Windsor or Winsor blue, the latter a Winsor and Newton trade name [2]. That is a [[windsor-blue]] pigment, not this purple."
+  },
+  {
+   "id": "castle",
+   "title": "Windsor and the aniline dyes",
+   "body": "Garfield reports that Hofmann lectured to the royal family at Windsor, and that a secretary wrote to thank him in 1865 and praised the aniline-dyed silks and wools shown there [3]. None of the books connect this to the name, so it is not an origin for this color [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This dark purple is uncommon in paintings: 75 of 23,781, rarer than 53 per cent of named colors [4]. It is most often a hidden color within the painting, in 59 per cent of the 41 paintings where it is measurable [4]. It peaks in the 1900s, in 8 paintings, 1.9 times the museums' baseline [4]. Its nearest named color is [[aubergine]], 12.9 units away, a loose match [1]. These are photographs of aged, varnished paintings, so a color match is a look-alike hue, not a pigment test. [4]"
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1924 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul"
+  },
+  "aka": [],
+  "siblings": [
+   "windsor-tan",
+   "aubergine",
+   "romanesque"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "windsor-blue",
+    "gloss": "a Winsor and Newton phthalocyanine blue, unrelated to this purple"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 75,
+  "rank_pct": 53,
+  "library_first_recorded": 1924
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), via data/library.json; nearest named color by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Monastral blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within-painting lens, lightness rank per painting)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which Windsor color is a Winsor and Newton blue?",
+   "choices": [
+    "Windsor blue",
+    "Windsor tan",
+    "Windsor purple",
+    "Windsor red"
+   ],
+   "answer": "Windsor blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books we read explain why this purple is called Windsor.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Windsor purple has no recorded origin; Windsor blue is a trade name for a different color."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 249
+}

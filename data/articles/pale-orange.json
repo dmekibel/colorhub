@@ -1,0 +1,105 @@
+{
+ "slug": "pale-orange",
+ "name": "Pale Orange",
+ "hex": "#FFA756",
+ "names": [
+  "Pale Orange"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Orange is a light, soft orange, closer to a sherbet than to a fruit.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Using it in color design",
+   "body": "The name is descriptive, a lightened [[orange]] [3]. It is not a pigment name and the books we hold give it no history [3].\n\nIt does turn up in working color advice. Gurney describes a film color script in which each story unit sits inside a limited range of colors, or gamut [1]. When the adventure moves above ground, the gamut shifts to pale orange, yellow, pink and red [1]. The gamut changes with the story, so the same pale colors read as a mood and not just a swatch [1]. Neighbors in our data include [[peach]] and [[apricot]] [3].\n\nThe swatch on this page is #FFA756, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pale Orange appears in 42 of the 23,781 paintings in our archive, about 0.18 percent, as photographed [2]. It peaks in the 1900s, found in 8 of the 1,674 paintings from that century, about 2.2 times the museums' baseline rate [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a lightened orange",
+   "first_recorded": "origin undocumented",
+   "source": "ColorHub library; Gurney, Color and Light, p. 134"
+  },
+  "aka": [],
+  "siblings": [
+   "peach",
+   "apricot",
+   "orange",
+   "white"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 42,
+  "pct_of_paintings": 0.18,
+  "library_sources": [
+   "Wikipedia list",
+   "xkcd 2010"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 134",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: Wikipedia list, xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Gurney's color-script example do with its gamut?",
+   "choices": [
+    "It shifts as the story moves",
+    "It never changes",
+    "It is always grey",
+    "It uses only blue"
+   ],
+   "answer": "It shifts as the story moves",
+   "kind": "pick"
+  },
+  {
+   "q": "The books we hold give Pale Orange a long pigment history.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A color script can move a story from cool magentas to pale orange, yellow, pink and red."
+ ],
+ "words": 205,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

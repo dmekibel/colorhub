@@ -1,0 +1,139 @@
+{
+ "slug": "lavender-blue",
+ "name": "Lavender Blue",
+ "hex": "#CCCCFF",
+ "names": [
+  "Lavender Blue"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Lavender Blue is a pale, slightly violet blue named for the flower, and an old entry in the systems naturalists used to describe butterflies, flowers and stones.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower and a dictionary entry",
+   "body": "Paterson defines lavender as a pale lilac and lists lavender grey and lavender blue as relatives [1]. He suggests the flower's name may come from the Latin *lavare*, to wash [1]. His entry for China blue is simply a lavender blue [1].\n\nThe pair of words is older than the paint chips. Baty prints a family of the older naturalists' color lists, and several of them already carry a Lavender-blue among the blues, next to Smalt-blue and Violet-blue [2]. In Werner's tradition the same hue sits under purple, where Baty explains that Lavender Purple is Werner's lavender blue, mixed from blue and red with a little brown and grey [3]. The examples are dried lavender flowers, the light spots of the peacock butterfly and a porcelain jasper [3]. See also [[flower:lavender|lavender]] itself, and [[lavender-grey]]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which lavender blue",
+   "body": "The library carries several, and they are not close. The swatch here, a pale violet-tinged blue, is listed with ISCC-NBS blocks 195 and 198, with Maerz and Paul's first recorded use in 1796 and with Ridgway's 1912 plate XXIII [4]. Ridgway's scanned plate is an aged, approximate swatch, ΔE 2.4 from the entry Pallid Soft Blue-Violet [4]. A separate, much stronger lavender blue also exists, #8B88F8, from an online survey [4]. The nearest everyday name is [[periwinkle]], 10.3 units away [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 3 of 23,781 archive paintings carry a color within six units of this swatch over at least five per cent of the canvas [5]. They are all light in tone, with two in three sitting in the highlight range [5]. Adam Pynacker's [[painting:commons-Q65972069|Tower on a Coast]] of 1660 holds it across 25 per cent, and the earliest, Claude Lorrain's [[painting:commons-Q114241452|landscape with dancing peasants]] of 1637, holds it across 11 per cent [5]. Both are probably sky. With only three paintings, none of this proves a pattern [5].\n\nThese are photographs of aged, varnished paintings, and a match is a screen color, not a pigment [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lavender flower",
+   "first_recorded": "Maerz & Paul record 1796",
+   "source": "ColorHub library; Baty"
+  },
+  "aka": [],
+  "siblings": [
+   "lavender",
+   "periwinkle",
+   "lavender-grey"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "periwinkle",
+    "gloss": "deeper and bluer, ten units away"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CCCCFF",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "commons-Q65972069",
+   "commons-Q114241452",
+   "rijks-20026302"
+  ],
+  "role": {
+   "mid": 0.33,
+   "highlight": 0.67
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lavender\", \"China blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 32-35",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 104 and p. 113-114",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: Lavender Blue, ISCC-NBS 195 and 198, Maerz & Paul 1930 first recorded 1796, Ridgway 1912 plate XXIII; nearest Periwinkle",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, matched at 6 delta-E units and 5% canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Baty's account, what is Lavender Purple?",
+   "choices": [
+    "Werner's lavender blue",
+    "A Prussian blue",
+    "A synthetic dye",
+    "A shade of mauve"
+   ],
+   "answer": "Werner's lavender blue",
+   "kind": "pick"
+  },
+  {
+   "q": "The swatch for Lavender Blue is a strong, dark violet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Three paintings in 23,781 reach this pale lavender over a twentieth of the canvas."
+ ],
+ "words": 337,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lenz-specific list placement was not clearly supported by the OCR; generalized to several of Baty's printed lists."
+  ]
+ }
+}

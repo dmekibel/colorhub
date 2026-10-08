@@ -1,0 +1,161 @@
+{
+ "slug": "silver-grey",
+ "name": "Silver Grey",
+ "hex": "#8F999F",
+ "names": [
+  "Silver Grey"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Silver grey is a cool, slightly bluish mid-grey, named for the metal and an old standard in grey vocabularies.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson's dictionary defines silver grey as a bluish grey [1]. The metal itself in the X11 color set, called silver, is a lighter, neutral grey with hex code #C0C0C0 [2]. The swatch here is a darker, cooler grey with a tint of blue [3]. In the ISCC-NBS system it falls near a pale blue, 5.3 units from the swatch [3]. It was already a standard name in Ridgway's color list of 1912 and the RAL list of 1927 [3].\n\nA pipe-marking code described in the same dictionary gives silver-grey to steam [4]. Its siblings in the neutrals are [[silver]], [[pearl-grey]], [[slate-grey]], [[steel-grey]] and [[gunmetal]] [3]."
+  },
+  {
+   "id": "averaging",
+   "title": "Averages are grey",
+   "body": "Ball tells of Sherrie Levine's *Melt-Down* paintings of 1990, monochromes made by averaging the colors of famous works by computer [5]. The average of a Monet comes out as a darkish silver-grey [5]. Ball reads that lack of any hue as a sign of how wide a spectrum Monet's work covers [5].\n\nEven a living thing can be this color. Greenfield notes that a wild cochineal insect ranges in color from silver-grey to red-black [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Silver grey is a common painted color. In our archive of 23,781 paintings it appears in 527, 2.22 per cent, and is more common than 74 per cent of the named colors [7]. It most often plays a light, the lit part of a scene (50 per cent of 257 works measured) [7]. Alfred Sisley uses it in 8 of his 50 archive paintings, about seven times the baseline rate, and Monet in 5 of 50, about four times [7]. It peaks in the 1900s with 1.7 per cent of 1,674 paintings, only 1.4 times the baseline [7]. These are photographs of aged, varnished paintings, so a match is not a pigment test [7]. In Google Books the term rises from about 1870 and peaks near 1920 [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the metal silver",
+   "first_recorded": "Ridgway 1912 and RAL 1927 (this swatch)",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "silver gray"
+  ],
+  "siblings": [
+   "silver",
+   "pearl-grey",
+   "steel-grey",
+   "slate-grey"
+  ],
+  "parent": "silver",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "silver",
+    "gloss": "the X11 silver, a lighter neutral grey"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+  "n_present": 527,
+  "measured": {
+   "lch": [
+    62.6,
+    5.0,
+    242.0
+   ],
+   "iscc": "pale blue, dE 5.3"
+  },
+  "ngram": {
+   "rise": 1870,
+   "peak": 1920
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 366",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 366 (X11 color set)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, RAL 1927)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 353",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, notes on Impressionism",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, on cochineal",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What role does silver grey most often play in a painting?",
+   "choices": [
+    "A light",
+    "An accent",
+    "A hidden dark",
+    "The ground"
+   ],
+   "answer": "A light",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Levine's Melt-Down average of a Monet came out bright.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look for silver grey in the lit passages of Sisley's river scenes."
+ ],
+ "words": 319,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Replaced an unsourced generalisation about averaging colors with Ball's actual point about Monet's spectral range. Paterson, Ball and Greenfield claims verified."
+  ]
+ }
+}

@@ -1,0 +1,200 @@
+{
+ "slug": "orange-brown",
+ "name": "Orange brown",
+ "hex": "#A65E2F",
+ "names": [
+  "Orange Brown",
+  "Orange brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Orange brown is a plain description for a mid-dark brown that leans toward orange, the hue of burnt iron earths, dead bracken and the tawny of a dry leaf.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description, not a coinage",
+   "body": "Orange brown is two color words joined, and the books use it as a gloss rather than a title [1]. Paterson defines bracken as the olive-brown or orange brown of the dead fern [2]. St Clair's glossary of color words defines tawny as tan-colored, orange-brown [3]. Werner's old nomenclature, as Baty prints it, describes a deep orange-coloured brown as chestnut brown tinged with reddish brown and a touch of orange brown [4]. The swatch sits close to [[sienna]], [[brown]] and [[orange]] in the data [5]."
+  },
+  {
+   "id": "iron",
+   "title": "Iron and madder",
+   "body": "The pigments that give this color are mostly iron. Martel wrote in 1860 that heating Mars yellow, a manufactured iron oxide, gives orange, brown, red and violet Mars pigments depending on the heat [6]. Salter in 1869 described Cory's yellow madder as an orange-brown of burnt sienna hue, prepared from [[madder]] [7]. Among minerals, pararealgar, the arsenic sulfide that realgar becomes in light, ranges from yellow through orange-yellow to orange-brown [8]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Ball finds a deep orange-brown in Rembrandt's *Portrait of Jacob Trip*, painted about 1661, mixed from red and yellow lake with smalt [9]."
+  },
+  {
+   "id": "systems",
+   "title": "In color systems",
+   "body": "The color appears in several systems. RAL lists it as 8023, ISCC-NBS 1955 files it under block 16, and Maerz and Paul's 1930 dictionary has a nearby plate named Spice, first recorded in 1922 [5]. The Japanese color biwacha, loquat-tree brown, and chōjizome, clove-dyed, are close matches [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Orange brown is common in painting as photographed: 589 of the 23,531 paintings in the ColorHub archive carry a color this close, 2.48 percent [10]. Its nearest named color is Sienna, at a color distance (ΔE) of 4.9 [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a description: orange plus brown",
+   "first_recorded": "not documented; a descriptive name",
+   "source": "Paterson, A Dictionary of Colour, p. 75"
+  },
+  "aka": [
+   "Spice (Maerz and Paul, 1922)",
+   "biwacha (Japanese)"
+  ],
+  "siblings": [
+   "sienna",
+   "earth",
+   "tan"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "biwacha (loquat tree-brown), chōjizome (clove-dyed)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub painting archive, 23,531 paintings, as photographed",
+  "n_present": 589,
+  "pct": 2.48,
+  "measured": {
+   "lch": [
+    47,
+    46,
+    57
+   ],
+   "nearest": [
+    [
+     "Sienna",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 75",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 75, \"bracken\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Tawny\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 255",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), entry Orange Brown (RAL 8023, ISCC-NBS 1955, Maerz and Paul 1930)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 214, 268 (Mars pigments)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 145 (Cory's yellow madder)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 304 (pararealgar)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,531 paintings, as photographed, field notes for #A65E2F",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Ball find mixed into the deep orange-brown of Rembrandt's Portrait of Jacob Trip?",
+   "choices": [
+    "Red and yellow lake with smalt",
+    "Burnt umber alone",
+    "Vermilion and lead white",
+    "Indigo and ochre"
+   ],
+   "answer": "Red and yellow lake with smalt",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Martel in 1860, what does heating Mars yellow give?",
+   "choices": [
+    "Orange, brown, red and violet Mars pigments",
+    "Only a black",
+    "Prussian blue",
+    "A pure white"
+   ],
+   "answer": "Orange, brown, red and violet Mars pigments",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: orange brown is an old pigment name with a documented origin.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Heat the iron pigment Mars yellow and, by the heat, you get orange, brown, red or violet.",
+  "About one painting in forty in the archive carries an orange brown like this one, as photographed."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded Werner/Baty sentence that echoed the book's phrasing."
+  ]
+ },
+ "words": 285
+}

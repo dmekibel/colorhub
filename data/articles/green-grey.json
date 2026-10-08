@@ -1,0 +1,164 @@
+{
+ "slug": "green-grey",
+ "name": "Green Grey",
+ "hex": "#77926F",
+ "names": [
+  "Green Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Green grey is a descriptive name for a muted green with a good deal of grey in it; it is not a pigment or a dye, and the books use the phrase for many different things.",
+ "sections": [
+  {
+   "id": "descriptive",
+   "title": "A description, not a material",
+   "body": "No book in our collection treats green grey as a color with its own history. It turns up as a pair of words in lists, and each author means a different shade [1][2]. The honest summary is that the name points to a region of the color space, where green is dulled by grey, and that real examples come from painting, uniforms, stones and rooms.\n\nOn screen, this swatch is close to [[grey-green]] and [[sage-green]], and the two orderings of the words are used for almost the same color [7]. In the same way [[khaki]] sits nearby, and [[olive-green]] is its more yellow cousin [7]."
+  },
+  {
+   "id": "uses",
+   "title": "Where books put it",
+   "body": "Pastoureau notes that artists in the modern period reduced the sea to three dominant colors: green, grey and blue. He points to the young Monet's Green Wave, painted in 1866-67 with a dark, saturated green, as a violent image of the sea unlike what his Impressionist friends later offered [2]. The khaki of military uniforms falls somewhere between green, grey, yellow and brown [3]. Pastoureau separately discusses the greenish grey of German uniforms, feldgrau, which he says recalled an everyday office green [3].\n\nThe dictionary lists green, grey or yellow-brown as the possible colors of an imprimatura, the thin primer laid on a gessoed canvas [4]. A diamond cutter quoted by Finlay lists the awkward stones he came to love as gray-green, brown, bottle-green, gray-yellow and yellow-khaki, so the pair of words also turns up in the trade's talk about stone color [5].\n\nBirren in 1950 recommended soft variations of green, grey and blue where critical seeing tasks are done, and cool tones for chronic hospital patients facing a long stay [6]. This is old opinion rather than modern evidence."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch measures a lightness of 58 and a chroma of about 23, with a hue angle near 137 degrees, which is a green well below the vividness of a hue name [7]. Its contrast ratio against white is 3.4 to 1 [7]. The nearest named colors are Grey Green and American Green at about 5 units, then Sage Green at about 5.5 [7].\n\nWe have no archive count for this swatch, so we make no claim about how often it appears in paintings. Screen colors are approximate [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive (green dulled with grey)",
+   "first_recorded": "undocumented",
+   "source": "no single source"
+  },
+  "aka": [
+   "greenish grey",
+   "grey-green"
+  ],
+  "siblings": [
+   "grey-green",
+   "sage-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "grey-green",
+    "gloss": "the same two words in the other order; a nearly identical swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names data, CIELAB, screen swatch",
+  "measured": {
+   "lch": [
+    57.7,
+    22.6,
+    137
+   ],
+   "contrast_white": 3.43,
+   "nearest": [
+    [
+     "Grey Green",
+     4.9
+    ],
+    [
+     "Sage Green",
+     5.5
+    ]
+   ]
+  },
+  "archive": "not computed"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"basic colours\" and web-color entries",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 41 (Monet, \"The Green Wave\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 44 (\"Khaki\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"imprimatura\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, chs. 28-29",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub names data (data/graph/names.json); CIELAB values computed from the swatch hexes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does this article not give green grey a history of its own?",
+   "choices": [
+    "It is a descriptive phrase, not a pigment or a dye",
+    "It was banned from art",
+    "It is the same as khaki",
+    "It only exists on screens"
+   ],
+   "answer": "It is a descriptive phrase, not a pigment or a dye",
+   "kind": "pick"
+  },
+  {
+   "q": "Which of these can an imprimatura be, according to the dictionary?",
+   "choices": [
+    "Green, grey or sometimes yellow or brown",
+    "Only white",
+    "Only red",
+    "Only black"
+   ],
+   "answer": "Green, grey or sometimes yellow or brown",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "An imprimatura, the thin tinted primer under a painting, is often green or grey."
+ ],
+ "words": 402,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Monet claim narrowed to what Pastoureau says.",
+   "Feldgrau no longer attributed to the khaki family.",
+   "Gem-cutter quote is about diamonds, not a dealer's description.",
+   "Birren reworded to match text."
+  ]
+ }
+}

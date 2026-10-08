@@ -1,0 +1,121 @@
+{
+ "slug": "foxglove",
+ "name": "Foxglove",
+ "hex": "#745AA2",
+ "names": [
+  "Foxglove"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Foxglove is a medium purple named for the flower, though the books say more about the plant's role in green dyeing.",
+ "sections": [
+  {
+   "id": "plant",
+   "title": "The flower and the dye",
+   "body": "The foxglove, *Digitalis purpurea*, was named \"purple fingers\" by the botanist Leonhard Fuchs, though St Clair says he never saw the plant that now bears his name [1]. The swatch here sits close to [[violet]] and [[lavender]] in the data.\n\nAs a dye plant it counts mostly for green. Pastoureau lists foxglove among the plant products used to dye cloth green in medieval Europe, and says none gave a pure, stable color [2]. St Clair also says foxglove and nettle can give green without mixing, though not the rich saturated green buyers wanted [3]. A different plant, Chinese foxglove (*Rehmannia glutinosa*), was the source of a reddish-yellow dye that Tang rules forbade common people and officials to wear [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "#745AA2 is a medium purple [9]. Field data for this swatch is as photographed on screens, not as seen in a garden [1][4]. The concordance of 29 color books finds only four strong mentions of this name, so the article stays short rather than pad the record [9]. Screen colors are approximate, and the swatch is a reference value, not a measured pigment [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "not dated in the books",
+   "source": "St Clair, The Secret Lives of Colour, p. 58"
+  },
+  "aka": [
+   "Digitalis purple"
+  ],
+  "siblings": [
+   "violet",
+   "lavender",
+   "purple",
+   "green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names, concordance of 29 color books",
+  "hex": "#745AA2",
+  "book_mentions": 4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 58",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green, p. 27",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 94",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 41",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub name data and the color-book concordance (4 strong mentions)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Digitalis purpurea mean?",
+   "choices": [
+    "Purple fingers",
+    "Fox glove",
+    "Poison bell",
+    "Royal flower"
+   ],
+   "answer": "Purple fingers",
+   "kind": "pick"
+  },
+  {
+   "q": "What color did foxglove dye give cloth, per Pastoureau?",
+   "choices": [
+    "An unstable green",
+    "A strong blue",
+    "A stable red",
+    "A bright black"
+   ],
+   "answer": "An unstable green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Foxglove dyes mostly gave a weak green, not purple."
+ ],
+ "words": 196,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced claim that the swatch is the flower's color"
+  ]
+ }
+}

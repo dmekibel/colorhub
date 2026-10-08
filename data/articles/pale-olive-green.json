@@ -1,0 +1,105 @@
+{
+ "slug": "pale-olive-green",
+ "name": "Pale Olive Green",
+ "hex": "#B1D27B",
+ "names": [
+  "Pale Olive Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Olive Green is a light, yellowish green, the color of young olive leaves and some copper minerals.",
+ "sections": [
+  {
+   "id": "mineral",
+   "title": "A mineral description",
+   "body": "The name is descriptive, a pale form of [[olive-green]] [3]. It appears in the ISCC-NBS system of 1955 [3].\n\nThe one book passage we hold uses the words for a mineral. The *Pigment Compendium* says libethenite, a copper phosphate hydroxide, occurs as pale olive green to dark green crystals [1]. It was described by Breithaupt in 1823 and named for its type locality, Lubietová, called Libethen in German [1]. It is a comparatively rare secondary copper mineral found where copper ore has weathered [1]. Greens near this one include [[pistachio]] and [[light-green]] [3].\n\nThe swatch on this page is #B1D27B, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pale Olive Green is rare in our archive: 4 of 23,781 paintings, about 0.02 percent, as photographed [2]. It is rarer than 82 percent of the named colors [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a pale olive green (the fruit and leaf)",
+   "first_recorded": "ISCC-NBS 1955",
+   "source": "ColorHub library; Pigment Compendium, \"libethenite\""
+  },
+  "aka": [],
+  "siblings": [
+   "pistachio",
+   "light-green",
+   "olive-green",
+   "white"
+  ],
+  "parent": "olive-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "pct_of_paintings": 0.02,
+  "library_sources": [
+   "ISCC-NBS 1955",
+   "xkcd 2010"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"libethenite\", p. 250",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955, xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is libethenite?",
+   "choices": [
+    "A copper phosphate hydroxide mineral",
+    "An iron oxide pigment",
+    "A plant dye",
+    "A lead white"
+   ],
+   "answer": "A copper phosphate hydroxide mineral",
+   "kind": "pick"
+  },
+  {
+   "q": "Libethenite was described by Breithaupt in 1823.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The copper mineral libethenite forms crystals described as pale olive green to dark green."
+ ],
+ "words": 189,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

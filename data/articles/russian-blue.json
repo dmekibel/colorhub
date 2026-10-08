@@ -1,0 +1,131 @@
+{
+ "slug": "russian-blue",
+ "name": "Russian Blue",
+ "hex": "#97B0B9",
+ "names": [
+  "Russian Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Russian Blue is a pale, greyed blue, a name the books record but barely explain.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale blue with a country on it",
+   "body": "Paterson's dictionary defines Russian blue in a single phrase: a light blue [1]. It appears again in his index of blues, with no further note on where the name came from [2][3]. The books in our collection give no dated origin, no pigment and no dye for it, so the geography is best read as a trade or fashion label rather than a recipe [1][2].\n\nThe swatch here is a cool, grey-tinted blue, close to [[light-blue]] and to [[powder-blue]] and [[sky-blue]] in lightness [4]. The name is also borne by a grey-blue cat breed, but the books do not discuss that link [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 332 hold this color at 5% of the canvas or more, as photographed [4]. Printed use of the phrase *russian blue* climbed late: it reached its peak in 1997, far above its showing in the 1800s [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "undated",
+   "source": "Paterson, A Dictionary of Colour, p. 350"
+  },
+  "aka": [
+   "Russian blue"
+  ],
+  "siblings": [
+   "light-blue",
+   "powder-blue"
+  ],
+  "parent": "blue",
+  "children": [
+   "sky-blue"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (color match within 6 DeltaE2000, at least 5% of the canvas)",
+  "match": {
+   "hex": "#97B0B9",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 332,
+  "ngram": {
+   "peak": 1997,
+   "rel_1980": 0.562,
+   "rel_2000": 0.832
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 350",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 483 (color index)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 492 (color index, blues)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'russian blue', 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define Russian blue?",
+   "choices": [
+    "A light blue",
+    "A dark navy",
+    "A greenish teal",
+    "A blue pigment from cobalt"
+   ],
+   "answer": "A light blue",
+   "kind": "pick"
+  },
+  {
+   "q": "When did printed use of 'russian blue' peak, per the Ngram data?",
+   "choices": [
+    "1997",
+    "1820",
+    "1891",
+    "1942"
+   ],
+   "answer": "1997",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Russian blue is defined in one phrase, a light blue, and its origin is undocumented in the books.",
+  "Printed use of 'Russian blue' peaked in 1997, long after the color word first appeared."
+ ],
+ "words": 158,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed index-neighbor claim (two-column index misread)."
+  ]
+ }
+}

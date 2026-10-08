@@ -1,0 +1,241 @@
+{
+ "slug": "ice",
+ "name": "Ice",
+ "hex": "#D6FFFA",
+ "names": [
+  "Ice"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Ice is a very pale cool tint, between blue and green: the color of light scattered inside snow and ice, and a name that painters, dyers and dictionaries have used in different ways.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One word, two pale colors",
+   "body": "Paterson's dictionary lists two ice colors. *Ice blue* is a greenish-blue or a pale blue, and *ice-green* is an extremely pale shade of green [1]. The swatch here is the second: ISCC-NBS filed it in 1955 as block 171, \"very pale green\", at a distance of 7.3 units, and it was later added to the xkcd color survey of 2010 [13].\n\nThe word is therefore used for a pale cool tint that leans either way. Close neighbours are [[pale-turquoise]], [[powder-blue]] and [[azure]] on the blue side, and [[mint]] on the green [1][13]. Gurney notes that blue, the color of winter, night, sky, shadow, sleep and ice, suggests quiet and calm [2]."
+  },
+  {
+   "id": "physics",
+   "title": "Why ice is blue-green",
+   "body": "Gurney explains the color in terms a painter can use. Snow and ice soak up red light as it passes through them, so light that bounces around inside comes back blue-green; hollows on grey days show it best [3]. Shadows lying on snow borrow the sky's color: blue under a blue sky, greyer under cloud [3].\n\nFresh powder scatters the most light internally; old snow darkens with dirt, and as its crystals coarsen it grows glossier [3]. The pale swatch above is therefore the color of ice at its cleanest, lit from inside, and not the color of an ice rink [3]."
+  },
+  {
+   "id": "words",
+   "title": "Ice in the dictionary",
+   "body": "A few ice words are not colors at all. *Iceblink* is the glow seen in the sky from light reflected off an expanse of snow or ice [1]. *Ice colour* is a dyer's term, for an azo dye produced directly on cotton by the interaction of two solutions cooled with ice [1]. In the other direction, Birren reports that a naturalist, Wagner, found lizards able to tell apart a series of colors that included ice blue and deep blue [4].\n\nIn older German pharmacy and art-trade language, the transparent gypsum known as *Marienglas* was among the stones also called *Fraueneis*, women's ice, a name that appears in lists of its synonyms since the sixteenth century [5]. Marienglas, Mary's glass, is said to have been used to cover small pictures of the Virgin Mary [5]."
+  },
+  {
+   "id": "ice-age",
+   "title": "Ice and the oldest colors",
+   "body": "Ball notes that cave walls were already being painted at least 30,000 years ago, well before the last Ice Age ended, using only dull earth pigments [6]. The ice that preserved things was just as important. The Pazyryk rug, found in the Altai Mountains in 1949, lay frozen from its burial in the fourth or third century BC [7]. It is the oldest and most impressive example of pile weaving, and its wide bands show the crimson of 'Polish' cochineal [7]. Frozen ground kept its reds for some two and a half thousand years [7]."
+  },
+  {
+   "id": "painting",
+   "title": "Painting ice and snow",
+   "body": "Europeans came late to the winter landscape. Pastoureau writes that winter scenes are rare in medieval and Renaissance painting, and that Hendrick Avercamp (1585-1634) was the first painter to make winter central to his work [8]. For Avercamp, winter was a chance to multiply shades of white according to the state of the snow, the look of the frozen canals, the time of day and the brightness of the light [8].\n\nPastoureau also argues that Europeans notice fewer whites than people of the Far North, who distinguish many whites in snow and ice [9]. The popular claim that the Inuit have dozens of snow words is a myth, so the safer reading is a difference of practised looking and not of vocabulary [9].\n\nMonet's *The Ice Floes* (*Les Glaçons*) of 1880 is Livingstone's example of a different kind: the repeated horizontal borders of the floes, high in luminance contrast, can make the vertical, equiluminant strokes of the water seem to move [10]. A contemporary critic said the ice looked really swept along by the water [10]."
+  },
+  {
+   "id": "warm-cool",
+   "title": "Fire and ice",
+   "body": "Eckstut writes that fire and ice are the classic pair behind the artists' idea of warm and cool colors [11]. The idea comes from emotional associations with nature and is not scientific; on the physicist's color-temperature scale the order is reversed, with red at the cool end and blue at the hot end [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Ice is a rare painted color. At the usual threshold, a match within six units covering at least five per cent of the canvas, our graph finds only two paintings out of 23,781 (0.01 per cent) [12]. Loosening it to ten units, the match is stronger and still finds only 25 paintings, 0.11 per cent, and in all of them it plays a highlight [12].\n\nThe largest areas are in *General Washington on a White Charger*, at 57 per cent of the canvas, in Canaletto's [[painting:met-438106|Warwick Castle]] (46 per cent) and in Sisley's [[painting:commons-Q3955422|Le chemin de la Machine, Louveciennes]] (40 per cent) [12]. Five of the 25 come from the 1900s, about six times the baseline for that century [12]. Read these as pale skies, whites and highlights photographed under a cool light: photographed varnished paintings cannot tell ice from a pale sky [12].\n\nIn printed English, the adjective *ice*, in the color sense, peaks in the 2010s and rose fastest in the 1870s [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "frozen water",
+   "first_recorded": "ISCC-NBS 1955 block 171; xkcd 2010",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "ice blue",
+   "ice-green"
+  ],
+  "siblings": [
+   "pale-turquoise",
+   "powder-blue",
+   "glacier"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "glacier",
+    "gloss": "another named ice color, from the same family of cold tints"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D6FFFA",
+   "de2000": 10,
+   "min_cover": 0.05
+  },
+  "n_present": 25,
+  "top_paintings": [
+   "nga-43453",
+   "met-438106",
+   "commons-Q3955422",
+   "commons-Q88393474"
+  ],
+  "peak_decade": {
+   "1900s": "5 of 809"
+  },
+  "role": {
+   "highlight": 1.0
+  },
+  "measured": {
+   "iscc": "very pale green",
+   "de": 7.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"ice blue\", \"ice-green\", \"ice colour\", \"iceblink\", pp. 214-215",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, \"How artists use the terms\" (warm and cool), p. 112",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, \"Snow and Ice\", pp. 198-199",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"gypsum\" (Marienglas synonyms)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, \"Central, southern and eastern Asia\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, \"The Whites of Winter\", p. 172",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, introduction",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 19",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Eckstut, What Is Color?, question on warm and cool colors",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (tools/article_field.py, dE2000 <= 10, at least 5% of the canvas; graph fieldnotes at dE <= 6); Google Books Ngram, adjective use",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955 block 171, xkcd 2010 (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does light scattered below the surface of snow look blue-green?",
+   "choices": [
+    "Red wavelengths are absorbed on the way",
+    "Snow contains blue dye",
+    "Ice reflects the sky",
+    "Green light is added by shadows"
+   ],
+   "answer": "Red wavelengths are absorbed on the way",
+   "kind": "pick"
+  },
+  {
+   "q": "Who was the first painter to make winter central to his work, according to Pastoureau?",
+   "choices": [
+    "Hendrick Avercamp",
+    "Claude Monet",
+    "Pieter Bruegel",
+    "Alfred Sisley"
+   ],
+   "answer": "Hendrick Avercamp",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: on the physicist's color-temperature scale, blue is at the cool end.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look into a hollow in the snow on an overcast day: that blue-green is light that has lost its red.",
+  "The Pazyryk rug lay in ice for some 2,500 years and still shows crimson.",
+  "Fire and ice gave artists warm and cool colors, and physics says it is backwards."
+ ],
+ "words": 846,
+ "status": "checked",
+ "checked": {
+  "by": "article engine batch 28",
+  "date": "2026-10-08",
+  "issues": [
+   "Graph fieldnote threshold (dE 6) gives 2 paintings; article_field crashes at dE 6, so dE 10 used and both stated.",
+   "Marienglas passage from the Pigment Compendium: wording 'since the sixteenth century' follows Funders and Moller as cited there.",
+   "Inuit snow words: myth corrected in text.",
+   "'Frozen ground kept its reds' is an inference from the rug being preserved in ice."
+  ]
+ }
+}

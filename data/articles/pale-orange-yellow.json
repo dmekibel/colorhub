@@ -1,0 +1,105 @@
+{
+ "slug": "pale-orange-yellow",
+ "name": "Pale Orange-Yellow",
+ "hex": "#FED590",
+ "names": [
+  "Pale Orange-Yellow"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Orange-Yellow is a light, warm yellow tipped with orange, a descriptive name more than a historical one.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description, not a history",
+   "body": "The name describes a position between [[yellow]] and [[orange]], lightened [3]. It is listed in the ISCC-NBS system of 1955 and in Ridgway's 1912 color book [3].\n\nThe books we hold have no passage about this color as a name. The only match, in Gurney, is a list of pale orange and yellow among the colors of a film's color script, which treats them as two separate colors [1]. We leave it there rather than invent a history [1]. Close neighbors include [[cream]] and [[light-yellow]] [3].\n\nThe swatch on this page is #FED590, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pale Orange-Yellow is one of the more common pale colors in our archive, found in 356 of 23,781 paintings, about 1.5 percent, as photographed [2]. It is commoner than 69 percent of the named colors, and peaks in the 1500s, found in 23 of the 2,231 paintings from that century [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a description: pale yellow tipped with orange",
+   "first_recorded": "Ridgway 1912",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "cream",
+   "light-yellow",
+   "yellow",
+   "white"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 356,
+  "pct_of_paintings": 1.5,
+  "library_sources": [
+   "ISCC-NBS 1955",
+   "Ridgway 1912"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 134",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955, Ridgway 1912",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which century does Pale Orange-Yellow peak in our archive?",
+   "choices": [
+    "The 1500s",
+    "The 1900s",
+    "The 1700s",
+    "The 2000s"
+   ],
+   "answer": "The 1500s",
+   "kind": "pick"
+  },
+  {
+   "q": "The books we hold give this color a detailed history.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Orange-Yellow shows up in 356 archive paintings and peaks in the 1500s."
+ ],
+ "words": 205,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

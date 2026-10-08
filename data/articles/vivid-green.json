@@ -1,0 +1,156 @@
+{
+ "slug": "vivid-green",
+ "name": "Vivid Green",
+ "hex": "#36A57B",
+ "names": [
+  "Vivid Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Vivid Green is a descriptive name for a saturated green with a blue lean, recorded in Ridgway's color atlas of 1912 and in the ISCC-NBS system of 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description, not a pigment",
+   "body": "Vivid green does not name a dye or a mineral. It is a plain description, used by the color systems and by the writers who needed a word for green at full strength [1][2]. Ridgway's 1912 atlas shows it on plate VII, hue 37, and the ISCC-NBS system of 1955 files this swatch in block 140 [1]. Both are modern scans or screen values, so the color on this page is approximate [1].\n\nThe swatch is a cool green, nearest to [[jade]] and leaning toward [[jungle-green]] [1]. A different source, the xkcd color survey, uses the same two words for a neon green near #2FEF10, which shows how loosely the phrase is used [1]."
+  },
+  {
+   "id": "language",
+   "title": "What writers meant by it",
+   "body": "In thirteenth-century miniatures, parrots were always green, and a French saying, \"greener than a parrot\", described a very vivid green [3]. Gage quotes an ancient description of a stone from Thessaly, in parts a vivid green not unlike emerald and in others darker, almost blue [4]. Finlay uses the same words for emeralds [5], and Jarman for malachite, which he sets among the brilliant colors of antiquity [6]. Compare [[emerald]] and [[malachite]].\n\nThese are descriptions of strong green in the eye of the writer. None of them points to a single pigment or a fixed hue."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only three paintings in our archive of 23,781 come within six color-distance units of this swatch over at least five per cent of the canvas: a landscape of green trees by Maurice Denis (1893), an 1860 Kota court painting of Maharaja Chattarsol, and Van Gogh's *Roses* (1890) [7]. The numbers are small and the images are photographs of aged, varnished surfaces, so they show where the color appears, not what pigment made it [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "A description of a saturated green",
+   "first_recorded": "Ridgway 1912; ISCC-NBS 1955",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "jade",
+   "jungle-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "emerald",
+    "gloss": "a gem name, often described as vivid green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+  "n_present": 3,
+  "match": {
+   "hex": "#36A57B",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    61,
+    43,
+    163
+   ],
+   "nearest": [
+    [
+     "Jade",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912 plate VII; ISCC-NBS 1955 block 140; xkcd survey; CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 20 (\"Youth, love, and hope\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 43",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 18",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (museum photographs of aged, varnished paintings; a color match, not a pigment test); matched within six units, at least five per cent of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the French saying about a parrot describe?",
+   "choices": [
+    "A very vivid green",
+    "A shade of blue",
+    "A dull olive",
+    "A loud voice"
+   ],
+   "answer": "A very vivid green",
+   "kind": "pick"
+  },
+  {
+   "q": "Vivid Green names a specific pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In thirteenth-century miniatures, parrots were always green, and French said \"greener than a parrot\" for a vivid green."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No factual fixes needed; claims verified against cited books and library."
+  ]
+ },
+ "words": 303,
+ "status": "checked"
+}

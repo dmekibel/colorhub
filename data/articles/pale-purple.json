@@ -1,0 +1,150 @@
+{
+ "name": "Pale Purple",
+ "hex": "#B790D4",
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Pale purple is a descriptive name: a light, soft purple that dictionaries use to define lilac, thistle and other named shades.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description more than a name",
+   "body": "The books use the phrase mostly to describe other colors. Paterson defines [[lilac]] as the pale purple of lilac blossom, and [[thistle]] as a very pale purple, one of the 140 X11 colors with hex code #D8BFD8 [1][2]. The same dictionary uses it for *vistal*, an old word for a pale purple [3]. The words are the same each time; the shade is not."
+  },
+  {
+   "id": "natural",
+   "title": "Pale purple in nature",
+   "body": "Baty's *Nature's Palette* [4] matches Werner's color names to flowers, butterflies and minerals. The pale purple primrose and the light spots on a peacock butterfly's wings sit under Werner's lavender purple, beside the mineral lepidolite [4]. Pigment sources use the phrase for a mineral too: the rare iron phosphate purpurite is described as ranging from pale purple to dark red [5]. See also [[lavender]] and [[wisteria]]."
+  },
+  {
+   "id": "mixing",
+   "title": "Mixing it",
+   "body": "St Clair uses pale purple as her example of why painters struggle with mixing: with impure pigments, a pale purple needs at least a red, a blue and a white, and the result can easily turn dull [6]. A pale purple is, in practice, a purple pushed toward white while keeping the red-blue balance. Compare [[purple]] and [[lavender-blue]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our name graph records this swatch in the ISCC-NBS descriptive scheme of 1955 and in the 2010 xkcd survey [7].\n\nNo painting in our archive of 23,781 has this color covering at least 1 per cent of its canvas, within a CIEDE2000 distance of 4, as photographed [8]. That describes this archive, not painting as a whole [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive phrase for a light purple",
+   "first_recorded": "ISCC-NBS 1955 in our name graph",
+   "source": "ColorHub name graph"
+  },
+  "aka": [
+   "light purple"
+  ],
+  "siblings": [
+   "lilac",
+   "thistle"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "sources": "ISCC-NBS 1955, xkcd 2010"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lilac\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Thistle\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"vistal\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 104",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"purpurite\", p. 326",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub name graph, source dates",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does a painter need to mix a pale purple from impure pigments?",
+   "choices": [
+    "A red, a blue and a white",
+    "Only red and white",
+    "Only blue and yellow"
+   ],
+   "answer": "A red, a blue and a white",
+   "kind": "pick"
+  },
+  {
+   "q": "Which X11 color does Paterson call a very pale purple?",
+   "choices": [
+    "Thistle",
+    "Peru",
+    "Khaki"
+   ],
+   "answer": "Thistle",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dictionaries define lilac and thistle by calling them pale purple."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "slug": "pale-purple",
+ "names": [
+  "Pale Purple"
+ ],
+ "status": "checked",
+ "words": 260
+}

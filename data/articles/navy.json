@@ -1,0 +1,310 @@
+{
+ "slug": "navy",
+ "name": "Navy",
+ "hex": "#1C2B5A",
+ "names": [
+  "Navy"
+ ],
+ "tier": "place",
+ "depth": "long",
+ "lede": "Navy is a dark, slightly greyed blue named for naval uniforms, which were dyed with indigo; in the twentieth century it replaced black as the color of work uniforms and men's suits.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A uniform's name",
+   "body": "*Navy* the color is named for the navy the institution: a dark blue with a little grey in it, as one color glossary puts it [5]. The name is shorthand for navy blue, and it belongs to the same family of dyers' names as [[royal-blue]]. The eighteenth-century scale of indigo shades ran from milk blue and pearl blue through sky blue and queen's blue to deep blue and, last and darkest, \"infernal\" or navy blue [2][13].\n\nBalfour-Paul notes that \"royal blue\" and \"navy blue\" have since left their indigo roots behind and become ordinary color words [2]. Nobody saying \"navy\" today is thinking about a vat. The word now means a shade, whatever it is dyed with, and its nearest neighbors in our data are [[cobalt-blue]], [[marine]] and [[napoleon-blue]] [15]."
+  },
+  {
+   "id": "uniform",
+   "title": "1745 and the Admiralty",
+   "body": "Indigo blue was already the usual color of many European naval uniforms before 1750 [1]. Britain came to it late. By Balfour-Paul's account, in 1745 some naval officers petitioned the Admiralty, each proposing a different color scheme, and an indigo blue uniform with white facings was the one chosen [1].\n\nSt Clair gives a second, plainer reason that does not contradict the first: navies needed a dye that would stand up to sun and sea, and the color's later reputation for brisk respectability began with the armed forces [5]. A blue that does not fade on a deck is a practical choice before it is a symbolic one.\n\nThe date and the reasons each rest on one book, so read 1745 as that book's account rather than a settled fact [1][5]. What the books agree on is the direction of the name: from the service, to the dye, to the shade [1][5]."
+  },
+  {
+   "id": "indigo",
+   "title": "The dye behind the word",
+   "body": "Navy cloth was indigo cloth. Balfour-Paul says woad kept a place in indigo vats into the twentieth century, mainly as a fermenting agent for dyeing \"navy blue\" worsted for government and service uniforms across Europe [3]. Garfield adds that by about 1870 India had 2,800 indigo factories, whose output went into sailors' uniforms, the Union flag and army greatcoats [11].\n\nUniform blue was a matter of state supply. In 1806 Napoleon's Continental System shut British ships out of European ports, Britain used its navy to keep colonial goods from reaching France, and France, deprived of tropical indigo for its army's uniforms, offered large rewards for a home-grown substitute [3].\n\nBritish service cloth was advertised in the early twentieth century as dyed with a guaranteed fast indigo that resisted sun, sea and air [4]. Even after 1945, railway and post office staff in Britain wore indigo-dyed woollens [4]. This is the world in which the color earned its quiet reputation: hard-wearing, fast, hard to stain.\n\nThe dye is the same family as that of [[indigo]] and of denim. For the plants behind it, see [[flower:indigo-woad|indigo and woad]]."
+  },
+  {
+   "id": "black",
+   "title": "From black to navy",
+   "body": "Before navy, dark clothing was black. Pastoureau describes how, after the Reformation, all good citizens, Protestant or Catholic, were expected to wear dark everyday clothes: blacks, greys, browns and, later, navy blue [8]. Black dominated, and trades that required a uniform adopted it and kept it for generations [9].\n\nThen it changed. By Pastoureau's account, navy blue gradually replaced black in uniforms during the first decades of the twentieth century, because it was thought less severe and less easily soiled [9]. In France navy began to replace black in certain uniforms in the second half of the nineteenth century, and the change grew greatly after the First World War, reaching policemen, mailmen, firemen and customs agents [6]. He illustrates the early stage with Degas's portrait of his brother as a naval ensign, painted around 1856 to 1857 [6].\n\nSuits followed. Men's suits changed color first in Britain and the United States in the 1930s and then across the rest of Europe, with navy displacing black [6]. Pastoureau ranks the switch among the major fashion events of its century, and says navy blue has taken on many of the values black once carried [6][7]. His claim that navy is the most common color in Western clothing today is a historian's estimate, not a count, so it is best read as a strong impression [7].\n\nThe blazer is the visible sign of the shift. After the First World War, Pastoureau writes, bright blazer colors and stripes were toned down in favor of somber tones, especially navy, and since the 1950s the borrowed word *blazer* has almost always meant a navy jacket [18].\n\nGreenfield adds the nineteenth-century groundwork. After the French Revolution blue gained popularity as a color of republicanism, melancholy, loyalty and respectability, and the quieter blues, among them sky blue, grey blues and navy, suited Victorian propriety because they did not attract attention [10]. A fashion-trade figure quoted by Garfield says 70 to 90 per cent of sales are always black, followed by grey and navy [12]. Navy is what many people choose when black feels too severe."
+  },
+  {
+   "id": "swatch",
+   "title": "Which navy is this?",
+   "body": "The swatch on this page is ColorHub's own navy, a dark, slightly violet blue [15]. It is not the web's `navy`. The CSS keyword is the pure, saturated #000080, and the gap between the two is a ΔE of 13.8, which is plain to see side by side [15]. A third value, the xkcd survey's navy, is much darker, at #01153E [15].\n\nWhy so many navies? Because the word was never a pigment. Paterson records it as a family name: *French navy* is simply \"a shade of navy\", and navy is also one of the sixteen VGA color names that early web standards inherited [14]. Our own source for the shade is the ISCC-NBS system of 1955, where this color falls in block 183 [15].\n\nMeasured, our navy has a lightness of about 19 out of 100, a chroma of about 32 and a hue angle of about 290 degrees, which is blue leaning slightly toward violet [15]. Against white it has a contrast ratio of about 13.6 to 1, so white text on it reads easily [15]. It is easy to confuse with [[indigo]], whose swatch here is a brighter violet-blue [15]."
+  },
+  {
+   "id": "myths",
+   "title": "The king and the duchess",
+   "body": "One story says the navy uniform color was chosen to please a king, because a woman in his circle wore it riding. Balfour-Paul gives a version of it, introduced with \"so the story goes\" and attached to George I and to the wife of the First Lord of the Admiralty [1]. Treat it as a legend. George I died in 1727, eighteen years before the 1745 decision the same page describes, so the king in the tale cannot have been the one who chose [1][17].\n\nNo other book in our set repeats the anecdote, so it rests on a single retelling. What survives checking is the petition by officers and the choice of indigo blue with white facings [1]. Nor was navy invented in 1745: indigo blue was already in use on European ships, and the dyers' scale of blues already had a name for its deepest shade [1][2]."
+  },
+  {
+   "id": "art",
+   "title": "Navy in paintings",
+   "body": "Navy is rare in old paintings and more common in recent ones. In our archive of 23,781 paintings, 39 contain a navy-like blue covering at least 5 per cent of the canvas, a rate of about one in 600 [16]. It rises over time: found in 12 of 1,674 paintings from the 1900s, which is 4.4 times the rate expected from the same museums [16].\n\nThe earliest dated match is a [[painting:commons-Q3842751|Madonna and Child Enthroned]] by Taddeo Gaddi from 1355, though the archive's early centuries are thin, so that date is a floor and not a first [16]. The painting with the largest share is *The Annunciation* by Maestro de la Sisla, around 1500, where the color covers a third of the canvas [16]. These are photographs of aged, varnished paintings, so a navy match is a look-alike hue and not a pigment test.\n\nIn the twentieth century the color becomes a choice. [[painter:vilhelm-lundstr-m|Lundstrøm]] shows it in three of his 17 works in the archive, the only painter the archive flags for it, and his [[painting:smk-KMS3969|Two Sisters]] is one of them [16]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 39 contain this navy (within ΔE 6 of the swatch, on at least 5 per cent of the canvas, as photographed), a rate of 0.16 per cent [16].\n\nBy century the pattern is lopsided: 12 of 1,674 paintings from the 1900s, 8 of 8,345 from the 1800s and 2 of 2,231 from the 1500s [16]. Vilhelm Lundstrøm accounts for 3 of his 17 works, over 100 times the baseline rate of his museums [16].\n\nThe word *navy* itself is hard to count in print because it also means the fleet, so we do not quote a frequency for it. These are photographs of paintings, not pigment tests, and screen colors are approximate."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dark indigo blue of naval uniforms",
+   "first_recorded": "1745 (the Royal Navy uniform decision, by Balfour-Paul's account); the dyers' scale of blues ended in 'navy-blue' in the eighteenth century",
+   "source": "Balfour-Paul, Indigo, pp. 188, 206; St Clair, Secret Lives of Colour, p. 83"
+  },
+  "aka": [
+   "navy blue",
+   "French navy"
+  ],
+  "siblings": [
+   "royal-blue",
+   "cobalt-blue",
+   "marine",
+   "napoleon-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "indigo",
+    "gloss": "the dye behind navy cloth; its swatch is a bright violet-blue"
+   },
+   {
+    "slug": "midnight-blue",
+    "gloss": "a different dark blue, the web's #191970"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#1C2B5A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 39,
+  "top_paintings": [
+   "commons-Q60048736",
+   "smk-KMSsp40",
+   "smk-KMS3969",
+   "smk-KMS3427"
+  ],
+  "first_dated": {
+   "id": "commons-Q3842751",
+   "painter": "Taddeo Gaddi",
+   "year": 1355
+  },
+  "top_painter": {
+   "name": "Vilhelm Lundstrøm",
+   "hits": 3,
+   "n": 17
+  },
+  "measured": {
+   "lch": [
+    18.9,
+    32.2,
+    290
+   ],
+   "contrast_white": 13.61,
+   "nearest": [
+    [
+     "Cobalt Blue",
+     2.5
+    ],
+    [
+     "Marine",
+     3.9
+    ],
+    [
+     "Napoleon Blue",
+     4.4
+    ]
+   ],
+   "css_navy_de": 13.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 206",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 188",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 68",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 205",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, pp. 83 and 125 (glossary)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 4 (\"The Favorite Color: The Eighteenth to the Twentieth Century\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 3 (\"A Moral Color: The Fifteenth to the Seventeenth Century\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 68",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 89",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Garfield, Mauve, p. 74",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 16 (\"The Terrible Glare\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"French navy\" and the VGA colors, p. 428",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub library and graph: ISCC-NBS 1955 block 183, CSS #000080, xkcd #01153E; nearest names and ΔE (CIEDE2000) computed by us",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py, ΔE 6, at least 5% cover)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "web",
+   "cite": "Encyclopaedia Britannica, George I (reigned 1714 to 1727)",
+   "loc_kind": "entry",
+   "url": "https://www.britannica.com/biography/George-I-king-of-Great-Britain-and-Ireland"
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 4 notes (on the blazer)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the color name navy come from?",
+   "choices": [
+    "Naval uniforms, dyed with indigo",
+    "A dye named after a French port",
+    "The color of deep ocean water",
+    "A pigment sold to painters"
+   ],
+   "answer": "Naval uniforms, dyed with indigo",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the British navy blue uniform was chosen in 1745 to please King George I.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What did navy blue gradually replace in police, postal and other uniforms?",
+   "choices": [
+    "Black",
+    "Brown",
+    "Grey",
+    "Green"
+   ],
+   "answer": "Black",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Navy blue replaced black in police, postal and fire uniforms, and then in men's suits, mostly between about 1910 and 1950.",
+  "The web's navy and the navy of dyers are different blues: ΔE 13.8 apart.",
+  "The story that a king chose the navy uniform color is a legend, and the king in it was already dead."
+ ],
+ "words": 1458,
+ "status": "checked",
+ "checked": {
+  "by": "L7 article writer (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "1745 and the petition rest on Balfour-Paul alone; stated as his account.",
+   "King/duchess anecdote corrected as a legend; George I death date from Britannica (web, unverified live).",
+   "Pastoureau's 'most common color in Western clothing' hedged as an estimate.",
+   "Tier place (institution: the navy); depth long.",
+   "Archive matches are look-alike hues, not pigment tests."
+  ]
+ }
+}

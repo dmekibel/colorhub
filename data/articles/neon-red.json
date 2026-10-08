@@ -1,0 +1,138 @@
+{
+ "slug": "neon-red",
+ "name": "Neon Red",
+ "hex": "#FF073A",
+ "names": [
+  "Neon Red"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Neon Red is an extremely saturated red, named for the glow of a neon tube, and a good example of a color no tube of paint and no flat screen swatch can fully reproduce.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A glow, not a pigment",
+   "body": "Neon Red appears in our library only through the xkcd color survey set, which gives no history for the name [1]. The swatch is very high in chroma, about 92 on the CIELAB scale, and its nearest named neighbor is [[vermilion]] at 6.5 units [1]. Who first used the name as a color is undocumented.\n\nTwo of the books use the idea in a useful way. Livingstone lists Neon Red among the Day-Glo paints, whose pigments absorb short-wavelength light and re-emit it at longer wavelengths, so they reflect more light in their band than white paper does [2]."
+  },
+  {
+   "id": "painting",
+   "title": "Painting a neon sign",
+   "body": "Gurney describes the problem of painting a red neon bulb on a rainy day [3]. The neon was among the lightest values in the scene and also extremely saturated [3]. White paint was light enough but had no hue, while a light tint of red looked weak, orange or pink, and red straight from the tube was too dark [3]. His compromise was to paint the bulb as a pure red-orange tint and surround it with a wash of midvalue red-orange [3]. A flat screen swatch has the same trouble: it shows the hue, not the light. Compare plain [[red]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings holds one work with a color within six units of this swatch covering at least five per cent of the canvas: Bronzino's [[painting:commons-Q83295755|Pietà with Saint Mary Magdalene]] of about 1529, where it covers 8 per cent [4]. As photographed: museum photographs of aged, varnished paintings; a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the glow of neon tubes",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library (xkcd set)"
+  },
+  "aka": [
+   "Neon tube red"
+  ],
+  "siblings": [
+   "vermilion",
+   "scarlet",
+   "crimson"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FF073A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "top_paintings": [
+   "commons-Q83295755"
+  ],
+  "measured": {
+   "lch": [
+    54,
+    92,
+    29
+   ],
+   "contrast_white": 3.93,
+   "nearest": [
+    [
+     "Vermilion",
+     6.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; xkcd set); CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 10 (Day-Glo spectra figure)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 78 (\"Red Neon\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why was a red neon bulb hard for Gurney to paint?",
+   "choices": [
+    "It was both very light and very saturated",
+    "It was too dark",
+    "It had no color",
+    "Paint cannot be red"
+   ],
+   "answer": "It was both very light and very saturated",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Day-Glo pigments re-emit absorbed short-wavelength light at longer wavelengths.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A neon red is a light, not a pigment: paint can only suggest it by value and surround.",
+  "Next time you see a red sign at night, notice the pale core and the red halo."
+ ],
+ "words": 284,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Gurney painted on a rainy day, not evening, per the text"
+  ]
+ }
+}

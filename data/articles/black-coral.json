@@ -1,0 +1,112 @@
+{
+ "slug": "black-coral",
+ "name": "Black Coral",
+ "hex": "#54626F",
+ "names": [
+  "Black Coral"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Black Coral is a Crayola-list name for a dark bluish grey; the swatch looks nothing like black, and the books say little about the name itself.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from the sea",
+   "body": "The name pairs [[black]] with [[coral]], and it appears in the Wikipedia list of Crayola colors [1]. The swatch is a dark, slightly blue grey, with the nearest ISCC-NBS name \"grayish blue\" at a distance of 3.2 [1]. It sits near [[slate-grey]] and [[charcoal]] more than anything pink or red.\n\nBlack coral itself is a real material. In Finlay's list of gem materials found naturally in each US state, Hawaii is paired with black coral [2]. The books we read give no history for the color name, so none is claimed here."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch appears in 425 of our 23,781 paintings, 1.79 percent, as photographed [3]. It peaks in the 1900s, found in 38 of the 1,674 paintings from that century, 2.7 times the expected rate against the same museums' baseline [3]. Inside a painting it most often plays a mid-tone [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "black coral, the material (origin of the color name undocumented)",
+   "first_recorded": "origin undocumented",
+   "source": "Wikipedia list of Crayola colors"
+  },
+  "aka": [],
+  "siblings": [
+   "slate-grey",
+   "charcoal"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 425,
+  "nearest_iscc": [
+   "grayish blue",
+   3.2
+  ],
+  "peak_century": {
+   "1900s": {
+    "n": 38,
+    "of": 1674,
+    "lift": 2.7
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name graph and library: ISCC-NBS 1955 nearest name, sources and dates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (as photographed), data/graph/fieldnotes",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which state does Finlay's list pair with black coral?",
+   "choices": [
+    "Hawaii",
+    "Alaska",
+    "Arizona",
+    "Nevada"
+   ],
+   "answer": "Hawaii",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Black Coral swatch is a near-black.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Black Coral is not black: it is a dark grey with a cool blue lean."
+ ],
+ "words": 168,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No color-name history found in books; article is data plus one gem-list mention.",
+   "Re-verified key claims against fact cards and book text; no changes needed."
+  ]
+ }
+}

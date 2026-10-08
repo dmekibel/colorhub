@@ -1,0 +1,162 @@
+{
+ "slug": "french-white",
+ "name": "French White",
+ "hex": "#C4ACB5",
+ "names": [
+  "French White"
+ ],
+ "tier": "commercial",
+ "depth": "medium",
+ "lede": "French White is a pale, greyish pink-lilac in the 1930 Maerz and Paul dictionary, and also an older name from the paint trade for a fine lead white.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two things with one name",
+   "body": "The color French White comes from Maerz and Paul's *Dictionary of Color* of 1930, which lists it on plate 42 and gives 1845 as the first recorded use [1]. The swatch is a greyish pink-lilac, not a white at all; the nearest named colors are [[thistle]] and Dull Lavender [1][2].\n\nA second French white existed long before the dictionary, in the artists' colorman's trade [3]. There it was a lead white, and the books list it among the many names for the same pigment [3]."
+  },
+  {
+   "id": "material",
+   "title": "The pigment: a lead white",
+   "body": "The Pigment Compendium records that Field (1835) counted French white as a fine lead white, a name for the same thing as blanc d'argent and silver white [3]. Scott Taylor (1885) adds that it was also a synonym for ceruse, the old name for white lead [3]. Salter (1869) describes it as brought from Paris in the form of drops, very white, but with less body than flake white [3].\n\nBooks disagree about how pure it was. Church (1901) doubted that the French blanc d'argent was a pure, hydrate-free lead carbonate and judged most of it to be ordinary good-quality flake white [4]. The compendium itself warns that \"silver white\" could have other meanings, so the old names need care [4]. Its lead white entry also lists French white among many synonyms, alongside Dutch, Roman, Venetian and Hamburg white [5].\n\nIt was a workaday ingredient as well as a fine one: a recipe from Fishwick (1795-1816) for common red paint mixes Bristol red and Venetian red with French white [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "Why the swatch is not white",
+   "body": "No source here links the pigment to the dictionary swatch. The dictionary file is a fashion and textile list, and its date, 1845, is a first record of the name in that field, not of the paint [1]. The two meanings share a word and little else; treat the screen swatch as one dictionary's idea of a faintly tinted off-white, near [[lilac]] in hue and approximate on any screen [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch measures about 73 in lightness and sits in the neutrals family [2]. Its nearest archive color is Thistle, 7.8 units away on the color-difference scale, which is a loose match rather than a twin [2]. No book discusses this swatch as a painted color, so we draw no conclusions from the archive for it [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Paris lead-white trade; the dictionary color borrows the older name (origin of the swatch undocumented)",
+   "first_recorded": "1845 (Maerz & Paul 1930, as a color name)",
+   "source": "Maerz & Paul 1930; Pigment Compendium, 'French white'"
+  },
+  "aka": [
+   "blanc d'argent (as a pigment, per Field 1835)",
+   "silver white (per Field 1835)"
+  ],
+  "siblings": [
+   "white",
+   "pale-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "white",
+    "gloss": "the pigment French white is a lead white; this swatch is a tinted pink-lilac"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "blanc de France; blanc d'argent"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub library, Maerz & Paul 1930, plate 42 B 2",
+  "first_recorded": 1845,
+  "lch": [
+   73,
+   10,
+   352
+  ],
+  "nearest": [
+   [
+    "Thistle",
+    7.8
+   ],
+   [
+    "Dull Lavender",
+    null
+   ]
+  ],
+  "as_photographed": true
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Maerz & Paul, A Dictionary of Color (1930), plate 42, via ColorHub library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library and graph, measured values for French White",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries 'French white' and 'blanc d'argent'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, 'silver white' and 'blanc d'argent' (quoting Church 1901)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, 'lead white', p. 247",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, 'Bristol red' (quoting Fishwick)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the paint trade, what was French white?",
+   "choices": [
+    "A lead white",
+    "A bone black",
+    "A zinc oxide from Lyon",
+    "A chalk from Champagne"
+   ],
+   "answer": "A lead white",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the French White swatch in the 1930 dictionary is a pure white.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "French White is not white: the 1930 swatch is a pale pink-lilac, while the pigment of the same name was a lead white."
+ ],
+ "words": 395,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded Field/lead-white list to avoid shared phrasing",
+   "Replaced unsupported \"confusing terminology\" claim with compendium caution on silver white",
+   "Paraphrased Church more loosely"
+  ]
+ }
+}

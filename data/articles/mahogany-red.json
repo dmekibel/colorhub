@@ -1,0 +1,128 @@
+{
+ "slug": "mahogany-red",
+ "name": "Mahogany Red",
+ "hex": "#814831",
+ "names": [
+  "Mahogany Red"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Mahogany Red is a warm red-brown named for the hardwood, and Maerz and Paul's dictionary dates it to 1843.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Another mahogany",
+   "body": "St Clair defines mahogany as a red brown, after the hardwood [1]. This swatch is Ridgway's, from plate II, hue 7, tone k of his 1912 atlas, and it is also in ISCC-NBS block 43 [2]. Maerz and Paul's dictionary records the name as first used in 1843, half a century earlier than the 1892 it gives for [[mahogany-brown]] [2]. The plain wood color is [[mahogany]].\n\nThe two mahoganies are separate swatches. Mahogany Red is the lighter and redder one, close to [[brick]] in family and only a little brighter than [[burnt-umber]] [2]. Our library also pairs it with the Japanese name Sencha-iro, \"green tea-colored\", as a secondary name [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 1,880 (7.9 per cent) hold a color within six units of this swatch over at least five per cent of the canvas [3]. It peaks in the 1400s, with 167 of 945 works, 2.2 times the archive rate [3]. These are photographs of aged, varnished paintings, so a match is not a pigment test [3]. Ridgway's plate is itself a scan of an aged page, so the swatch is approximate [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mahogany hardwood",
+   "first_recorded": "1843 (Maerz & Paul 1930)",
+   "source": "St Clair, The Secret Lives of Colour; ColorHub library"
+  },
+  "aka": [
+   "Sencha-iro (library pairing)"
+  ],
+  "siblings": [
+   "mahogany",
+   "mahogany-brown",
+   "brick",
+   "burnt-umber"
+  ],
+  "parent": "mahogany",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mahogany-brown",
+    "gloss": "a much darker mahogany"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Sencha-iro (煎茶色), green tea-colored, as paired in our library"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#814831",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1880,
+  "top_paintings": [
+   "rijks-20028271",
+   "smk-KMS4183"
+  ],
+  "rate": 0.0791,
+  "peak_century": {
+   "key": 1400,
+   "hits": 167,
+   "n": 945,
+   "lift": 2.24
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Mahogany\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Maerz and Paul's dictionary as recorded in our library, when was Mahogany Red first used?",
+   "choices": [
+    "1843",
+    "1892",
+    "1912",
+    "1930"
+   ],
+   "answer": "1843",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mahogany Red and Mahogany Brown are the same swatch.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mahogany Red is one of the older names in the charts, dated 1843."
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

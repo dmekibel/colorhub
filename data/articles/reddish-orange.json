@@ -1,0 +1,232 @@
+{
+ "slug": "reddish-orange",
+ "name": "Reddish Orange",
+ "hex": "#BE7249",
+ "names": [
+  "Reddish Orange"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Reddish orange is a descriptive color name from the age of naturalists' charts: number 80 in Patrick Syme's handbook of colors, with a tiger moth's lower wings as its example.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a chart",
+   "body": "Reddish orange is a descriptive name, not a pigment or a place. Its first home in our sources is Patrick Syme's Edinburgh handbook of 1814, an extension of Werner's mineralogists' list of colors, to which Syme added purple and orange as principal colors in their own right [1]. In his chart of oranges, reddish orange is number 80 [3].\n\nSyme did not invent the phrase. Baty traces it to Sowerby's *A New Elucidation of Colours* of 1809, one of five terms Syme borrowed from that book [2]. His recipe for it was to blend buff orange with a good deal of tile red [3]. The next step up, number 81 *deep reddish orange*, was Dutch orange mixed with much scarlet red [3].\n\nThe swatch here is the chart's aged, scanned sample, so it is a muted, brownish orange and not a bright one [7]. The ISCC-NBS system of 1955 files the color in block 35 [7]. Nearby names are [[adobe]], [[tawny]] and [[brown-sugar]] [7]."
+  },
+  {
+   "id": "examples",
+   "title": "What Syme pointed at",
+   "body": "Each color in Syme's chart came with examples from nature, and those examples show what he meant [3]. For reddish orange he gave the lower wings of the tiger moth, and the flowers hemimeris and buff hibiscus [3]. For the deeper shade he gave the lustre of a goldfish's scales and the skin of a Leadington apple [3].\n\nLater illustrators added their own: Baty's reproductions pair the color with a tiger moth drawn by Bertuch in 1802, with the mineral polyhalite from Sowerby's *Exotic Mineralogy* of 1811, and with the petals of a hibiscus in Lena Lowis's *Familiar Indian Flowers* of 1878 [3]. Its deeper cousin turns up on lead sulphide [3]."
+  },
+  {
+   "id": "words",
+   "title": "Where the other words land",
+   "body": "Paterson's dictionary uses \"reddish orange\" as the gloss for a surprising number of other names. They include *persimmon*, the color of the fruit, *tangerine*, *flamingo*, *carroty*, *paprika*, *mirador*, *Indian orange*, *Mars orange* and *burnt orange*, and the old stone names *jacinth* and *hyacinth red* [4]. *Amber* can be the clear yellow-brown or the reddish orange of the stone [4]. *Coral* is a deep pink or a reddish orange, and *alcanna* is a reddish orange body dye from an Oriental plant of the alkanet family [4]. The Greek prefix *pyrrho-* means reddish orange or flame-colored [4].\n\nAs a pigment, the same phrase describes real chemistry. Cobalt tungstate was prepared as a reddish orange pigment [5]. The Colour Index lists one chrome orange, Pigment Orange 45, as reddish orange and another, Pigment Orange 21, as yellowish orange [5], and Paterson notes that a reddish-orange chrome orange has been called Derby red, Victoria red and Persian red [4].\n\nA name this broad loses information. Ball points out that a spectrum measuring how much light a pigment absorbs at each wavelength is far more precise than a description such as \"reddish-orange\" or \"bright green\" [6]. Hex values for pigments, here as elsewhere, are screen approximations."
+  },
+  {
+   "id": "swatch",
+   "title": "Not the survey's reddish orange",
+   "body": "If you type \"reddish orange\" into a modern color survey you get something else. The xkcd survey's reddish orange is #F8481C, a vivid red-orange, and it sits at ΔE 13.2 from the swatch here [7]. The two share a name but not much else: one is a faded scientific specimen color, the other a screen color that people picked.\n\nOur swatch is the chart's sample as it survives, and its nearest named neighbor is [[adobe]], at ΔE 2.6 [7]."
+  },
+  {
+   "id": "art",
+   "title": "In paintings",
+   "body": "Reddish orange is one of the common named colors in our archive of 23,781 paintings: 385 of them carry it on at least 5 per cent of the canvas [8]. It peaks in the 1500s, with 70 of 2,231 paintings, 1.9 times the rate expected from the same museums [8].\n\nThe country that stands out is India: 75 of 721 works there carry it, 6.4 times the archive rate, and the Rajput, Pahari and Mughal schools lead, with 18 of 97, 12 of 118 and 17 of 168 [8]. Impressionism, by contrast, has none in 140 works [8]. Among painters, [[painter:amedeo-modigliani|Modigliani]] has it in 5 of his 18 works, and Filippo Lippi in 4 of 13 [8].\n\nThe largest single share is a portrait of a kneeling holy man from the Prince Salim Album, around 1556, where it covers about half the page [8]. These are photographs of aged paintings, so a match is a look-alike hue, not proof of a pigment."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 385 contain this color (within ΔE 6 of the swatch, on at least 5 per cent of the canvas, as photographed), a rate of 1.6 per cent [8]. By century: 70 of 2,231 in the 1500s, 67 of 6,394 in the 1600s and 90 of 8,345 in the 1800s [8].\n\nThe earliest dated match is a Buddha with a flaming mandorla, around 500, and the archive's early centuries are thin, so that is a floor, not a first [8]. It keeps company with burnt orange and terracotta in the same canvases [8]. These are photographs of paintings, not pigment tests, and screen colors are approximate."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a description: orange mixed with red",
+   "first_recorded": "Syme, Werner's Nomenclature of Colours (Edinburgh, 1814), phrase taken from Sowerby (1809); our library dates its Werner/Syme source 1821",
+   "source": "Baty, Nature's Palette, pp. 26, 173, 210"
+  },
+  "aka": [
+   "Werner no. 80",
+   "Syme's reddish orange"
+  ],
+  "siblings": [
+   "adobe",
+   "tawny",
+   "brown-sugar",
+   "burnt-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "orange-red",
+    "gloss": "a brighter, redder color; the xkcd survey's reddish orange (#F8481C) is closer to it"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#BE7249",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 385,
+  "top_paintings": [
+   "cma-170788",
+   "aic-144939",
+   "commons-Q61890653",
+   "nga-41630",
+   "nga-46521",
+   "commons-Q17490794"
+  ],
+  "century_1500s": {
+   "hits": 70,
+   "n": 2231,
+   "lift": 1.94
+  },
+  "top_country": {
+   "name": "India",
+   "hits": 75,
+   "n": 721,
+   "lift": 6.43
+  },
+  "first_dated": {
+   "id": "met-39995",
+   "year": 500
+  },
+  "measured": {
+   "lch": [
+    55.5,
+    43.8,
+    53
+   ],
+   "contrast_white": 3.69,
+   "nearest": [
+    [
+     "Adobe",
+     2.6
+    ],
+    [
+     "Tawny",
+     3.7
+    ],
+    [
+     "Brown Sugar",
+     3.7
+    ]
+   ],
+   "xkcd_de": 13.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 26 (Syme's 1814 book)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 173 to 174 (Syme's color terminology)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 210 to 211 (Syme's oranges, nos. 80 and 81)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries for persimmon, tangerine, flamingo, carroty, paprika, mirador, Indian orange, Mars orange, burnt orange, jacinth, hyacinth red, amber, coral, alcanna, pyrrho-, chrome orange",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "The Pigment Compendium, \"cobalt tungstate\" (p. 129) and \"chrome orange\" (pp. 111, 238)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library and graph (Werner no. 80, aged swatch; ISCC-NBS 1955 block 35; xkcd #F8481C; nearest names); ΔE (CIEDE2000) computed by us",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py, ΔE 6, at least 5% cover)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the color name reddish orange come from in our sources?",
+   "choices": [
+    "Syme's 1814 handbook of colors for naturalists, which took the phrase from Sowerby",
+    "A pigment sold by Winsor and Newton",
+    "A Crayola crayon of the 1950s",
+    "The dye of a Japanese plant"
+   ],
+   "answer": "Syme's 1814 handbook of colors for naturalists, which took the phrase from Sowerby",
+   "kind": "pick"
+  },
+  {
+   "q": "In Syme's chart, what did he give as an example of reddish orange in an animal?",
+   "choices": [
+    "The lower wings of the tiger moth",
+    "The breast of a robin",
+    "The belly of a newt",
+    "The crest of a wren"
+   ],
+   "answer": "The lower wings of the tiger moth",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch on this page is the same color as the xkcd survey's reddish orange.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reddish orange is number 80 in Syme's chart; his example for it was a tiger moth's lower wings.",
+  "The same words 'reddish orange' describe persimmon, tangerine, flamingo, jacinth and a chrome pigment.",
+  "A modern survey's reddish orange is a bright red-orange, not this faded chart sample (ΔE 13.2)."
+ ],
+ "words": 838,
+ "status": "checked",
+ "checked": {
+  "by": "L7 article writer (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Short honest article: the books say little beyond Syme's chart, Paterson's glosses and two pigment mentions.",
+   "Syme edition: Baty gives 1814; our library cites 1821 (a later edition).",
+   "Examples tied to number 80 versus 81 follow Baty's captions; page-level layout of the plates is ambiguous in the text extract.",
+   "Archive matches are look-alike hues, not pigment tests."
+  ]
+ }
+}

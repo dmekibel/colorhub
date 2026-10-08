@@ -1,0 +1,187 @@
+{
+ "slug": "violet-purple",
+ "name": "Violet Purple",
+ "hex": "#3A2F52",
+ "names": [
+  "Violet Purple"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Violet Purple is a dark blue-violet from the color list Patrick Syme published in 1814 for naturalists, named by pushing Werner's older violet blue toward purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a nomenclature",
+   "body": "Violet purple is not a flower's name or a dye's. It is a term from a color list made for naturalists, which makes it unusual among the names in our archive [1][2]. Abraham Gottlob Werner, the mineralogist at Freiberg, drew up a short list of colors for describing minerals; his student Robert Jameson published an English version in 1805 [1]. In 1814 the Scottish flower painter Patrick Syme expanded the list to 108 terms, added a painted swatch for each, and in 1821 raised it to 110 [1].\n\nSyme made purple and orange principal colors, which forced renaming. Werner's *violet blue* became violet purple, and *plum blue* became plum purple [1][2]. Syme's own contribution was to fill the group with flower names such as [[pansy-purple]] and [[auricula-purple]] [2]. Next to it in his list sat [[campanula-purple]], and the whole family reads as blues taken toward red [3][2]."
+  },
+  {
+   "id": "swatch",
+   "title": "What the swatch is",
+   "body": "The swatch here, a dark blue-violet, comes from Werner's list as printed in 1821, where violet purple is number 37 in the purples [4]. It is an aged plate, so treat the exact value as approximate [4]. Our library also places it in ISCC-NBS block 238, a dark purple, with a measured difference of about 6 on the CIEDE2000 scale [4].\n\nThe name has not stayed with one color. Ridgway's 1912 *Color Standards*, plate XI, uses the same words for a much brighter, magenta-leaning purple, far from Syme's dark one [4]. That is the usual trap with historical names: the words survive and the paint changes. If you meet \"violet purple\" in a text, check whose list it comes from before picturing a color. Plainer [[purple]] is the safe parent term."
+  },
+  {
+   "id": "specimens",
+   "title": "Syme's examples",
+   "body": "Syme anchored each color to things you could go and look at. For violet purple he named the purple aster among plants and [[gem:amethyst|amethyst]] among minerals [3]. The animal example was the wing feathers of the male steel-backed flycatcher, drawn by John Gould in his work on New Guinea (1875-88) [3]. For mixing, the recipe was Berlin blue with red and a little brown [3]. His nearby pansy purple was indigo with carmine and a touch of black, which shows how dark these purples were meant to be [3].\n\nThe name outlived him. A French catalogue of 1905, Dauthenay and Oberthür's *Répertoire de couleurs*, used violet purple, primrose yellow and China blue, though its authors do not seem to have consulted Syme [5]. Baty takes this as a sign of how deeply his names had entered botanical vocabulary [5]."
+  },
+  {
+   "id": "pliny",
+   "title": "Not Pliny's violet purple",
+   "body": "A different \"violet purple\" appears in translations of Pliny, who quotes an older writer on shellfish dyes [6]. In that passage the violet purple cost 100 denarii a pound, then came Tarentine red, and last the Tyrian dye at more than 1,000 denarii a pound [6]. That is a murex dye fashion from the speaker's youth, and it has no connection to Syme's aster-and-amethyst swatch [6]. The two share only an English phrase [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a painted color this deep violet is uncommon. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 30 of them [7]. Where it appears, it mostly plays the role of a shadow tone, 87 per cent of the time, rather than a midtone [7]. The largest share is in Bronzino's *Portrait of a girl* (about 1545), where it covers 40 per cent of the picture [7].\n\nThe color is far more common in the 1900s, with 10 of 1,674 paintings against 7 of 8,345 in the 1800s, a lift of about 4.7 [7]. The earliest match is Ambrogio Lorenzetti's *Presentation at the Temple* (1342), where it covers about six per cent [7]. As always these are photographs of aged, varnished paintings, and a color match is not a pigment test [7]. A museum visitor can use the idea anyway: look for the near-black purple in a velvet sleeve or a shadowed robe."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Patrick Syme's 1814 nomenclature, renaming Werner's violet blue",
+   "first_recorded": "Syme, Werner's Nomenclature of Colours, 1814",
+   "source": "Baty, Nature's Palette, p. 84"
+  },
+  "aka": [
+   "violet blue (Werner's earlier term)"
+  ],
+  "siblings": [
+   "pansy-purple",
+   "plum-purple",
+   "auricula-purple",
+   "campanula-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "purple",
+    "gloss": "Ridgway's Violet Purple (1912) is a bright magenta-leaning purple, not Syme's dark one"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3A2F52",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 30,
+  "role": {
+   "shadow": 0.87,
+   "mid": 0.13
+  },
+  "measured": {
+   "lch": [
+    22.1,
+    23.9,
+    305.0
+   ]
+  },
+  "century_1900": {
+   "hits": 10,
+   "n": 1674,
+   "lift": 4.74
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (Werner, Jameson, Syme)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 84",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 104-108 (plate 37, Violet Purple)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: Werner 1821 no. 37; ISCC-NBS 1955 block 238; Ridgway 1912 plate XI hue 63 (data/library.json, scans of aged plates, approximate)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 179",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 19 (Pliny on murex prices)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Whose color list did the name Violet Purple come from?",
+   "choices": [
+    "Patrick Syme's 1814 nomenclature for naturalists",
+    "A Victorian aniline dye catalog",
+    "Pliny's list of shellfish dyes",
+    "A paint maker's 1950s chart"
+   ],
+   "answer": "Patrick Syme's 1814 nomenclature for naturalists",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pliny's violet purple and Syme's Violet Purple were the same color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What happened to Werner's term violet blue when Syme made purple a principal color?",
+   "choices": [
+    "It became violet purple",
+    "It was dropped from the list",
+    "It was renamed lavender",
+    "It was replaced by a dye name"
+   ],
+   "answer": "It became violet purple",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Violet Purple was invented for describing minerals and flowers, not for dyers or painters.",
+  "The same two words name a dark violet in 1821 and a bright magenta-leaning purple in 1912."
+ ],
+ "words": 667,
+ "status": "checked",
+ "checked": {
+  "by": "batch-61 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Short honest article: books say little beyond Baty on Syme.",
+   "Pliny's violet purple (Finlay) kept separate.",
+   "Ridgway swatch from library data, approximate."
+  ]
+ }
+}

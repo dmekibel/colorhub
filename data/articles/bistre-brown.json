@@ -1,0 +1,142 @@
+{
+ "slug": "bistre-brown",
+ "name": "Bistre Brown",
+ "hex": "#967117",
+ "names": [
+  "Bistre Brown"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Bistre is a transparent brown made from wood soot, used for pen-and-ink washes and for glazing shadows in oil.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "Soot from a beech fire",
+   "body": "Bistre was made from the soot of burnt wood, preferably beechwood [1]. The soot was collected close to the flames and treated with hot or boiling water. Once the particles had settled, the liquid was decanted and the sediment dried [1]. Coles describes it as a dark, transparent brown, a mixture of flame carbon, charred wood and tarry material that had not fully burned [3]. Ball adds that birch bark could serve in place of beech [4].\n\nThe name \"bistre brown\" is a variant of the plain name, which Paterson defines as the brown wash used in pen and ink drawings [2]."
+  },
+  {
+   "id": "use",
+   "title": "Manuscripts, drawings and glazes",
+   "body": "Coles places its first use in 14th-century manuscript illumination, with wash drawings following in the 17th and 18th centuries [3]. Ball puts the earliest use at least as far back as the fourteenth century and notes that oil painters needed skill to get much from it [4]. Van Dyck glazed his shadows with it, as in his double portrait of the Stuart brothers of 1638-9 [4]. Paterson says it was later superseded by [[sepia]] [2]. For its neighbors in the earth browns, see [[umber]], [[raw-umber]] and [[brown]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is a dark olive brown, nearest the ISCC-NBS name \"light olive brown\" at a distance of 2.2 [5]. It appears in 627 of our 23,781 paintings, 2.64 percent, as photographed [6]. That makes it more common than 80 percent of named colors, and it peaks in the 1400s, found in 22 of the 945 paintings from that century [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pigment bistre, made from wood soot",
+   "first_recorded": "14th century (manuscript illumination)",
+   "source": "Coles, Chromatopia; Ball, Bright Earth"
+  },
+  "aka": [
+   "bistre",
+   "bister"
+  ],
+  "siblings": [
+   "sepia",
+   "umber"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 627,
+  "nearest_iscc": [
+   "light olive brown",
+   2.2
+  ],
+  "peak_century": {
+   "1400s": {
+    "n": 22,
+    "of": 945
+   }
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), entry \"Bistre\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bistre\", p. 51",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Bistre\", p. 105",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, chapter on dark glazes and bitumen (index: bistre, p. 153)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub name graph and library: ISCC-NBS 1955 nearest name, sources and dates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (as photographed), data/graph/fieldnotes",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was bistre made from?",
+   "choices": [
+    "Soot of burnt beechwood",
+    "Cuttlefish ink",
+    "Roasted umber",
+    "Ground walnut shells"
+   ],
+   "answer": "Soot of burnt beechwood",
+   "kind": "pick"
+  },
+  {
+   "q": "Which pigment did Paterson say superseded bistre?",
+   "choices": [
+    "Sepia",
+    "Prussian blue",
+    "Ochre",
+    "Vermilion"
+   ],
+   "answer": "Sepia",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bistre is wood soot, boiled, settled and dried: a brown made from a fire."
+ ],
+ "words": 261,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Swatch is the archive's screen color, not a measured sample of bistre.",
+   "Re-verified key claims against fact cards and book text; no changes needed."
+  ]
+ }
+}

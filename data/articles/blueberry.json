@@ -1,0 +1,113 @@
+{
+ "slug": "blueberry",
+ "name": "Blueberry",
+ "hex": "#464196",
+ "names": [
+  "Blueberry"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Blueberry is the color of the fruit, a deep violet-[[blue|blue]]; as a color word it is recent.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fruit and its color",
+   "body": "Pastoureau notes a plant model behind the medieval link between green and youth: fruit is green before it becomes red (cherries, strawberries, raspberries), then blue or black, blueberries among them [1]. The idea of freshness was central to the medieval sensibility, and it helped tie green to youth [1].\n\nThe books say almost nothing else about the color itself. The pigment literature mentions blueberry only in a reference on its anthocyanins, plant pigments [2]. As a color name, blueberry is modern: in Google Books the adjective peaks in the 2010s [3]. That makes it a young word for an old fruit, with no dye or pigment history we can source [2][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color is rare in paint. It appears in 0.01% of the 23,781 paintings in our archive (3 paintings, as photographed) [4]. It is rarer than 79% of the named colors we track [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the blueberry fruit",
+   "first_recorded": "modern color word",
+   "source": "Pastoureau, Green, ch. 20"
+  },
+  "aka": [],
+  "siblings": [
+   "indigo",
+   "violet"
+  ],
+  "parent": "blue",
+  "children": [
+   "midnight-blue"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "rarer_than_pct": 79,
+  "ngram_peak": "2010s"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 20 (\"Youth, love, and hope\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 503 (references on blueberry anthocyanins)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Google Books Ngram, adjective use, via ColorHub field notes",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the medieval fruit model, what comes after red?",
+   "choices": [
+    "Blue or black",
+    "Yellow",
+    "White"
+   ],
+   "answer": "Blue or black",
+   "kind": "pick"
+  },
+  {
+   "q": "When does the adjective blueberry peak in printed English?",
+   "choices": [
+    "The 2010s",
+    "The 1850s",
+    "The 1600s"
+   ],
+   "answer": "The 2010s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Medieval writers lined up the ages of life with the colors fruit passes through."
+ ],
+ "words": 157,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that blue-black fruit means age",
+   "Attributed plant model to Pastoureau rather than 'medieval writers'",
+   "Compendium hit is a bibliography reference; wording narrowed"
+  ]
+ }
+}

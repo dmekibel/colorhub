@@ -1,0 +1,150 @@
+{
+ "slug": "cerise",
+ "name": "Cerise",
+ "hex": "#DE3163",
+ "names": [
+  "Cerise"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Cerise is the French word for cherry, borrowed into English as the name of a strong pinkish red.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A cherry that is not a cherry",
+   "body": "*Cerise* is simply French for cherry [1]. Paterson's dictionary notes that the color word is not necessarily the color of the fruit, and that it usually means a bluish red or a purplish red [1]. The ordinary English word for the fruit's own color is `cherry`, and Paterson sends readers from [[cherry]] to cerise [2].\n\nThe first example in the Oxford English Dictionary, as recorded in our name data, is a Times report of 1858 [3]. No book we read says what the word first described, so we do not claim a dye or fashion link [3]."
+  },
+  {
+   "id": "in-use",
+   "title": "A word for lips and wine",
+   "body": "Pastoureau observes that modern lipstick shades are named after fruits, with cerise, redcurrant and raspberry among the French examples [4]. Paterson gives Chianti as a dark cerise [2].\n\nSt Clair's bibliography points to an essay by Kory Stamper on how Webster's Third defined colors, with cerise as its test case [5]. We have read only the citation, so we do not report her findings."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is a vivid pink-red, close to [[crimson]] and [[magenta]] in feel [3]. Nothing in the books fixes cerise at one exact color, so treat it as a region of the pink-red range, not a point [1]. It is brighter and pinker than [[red]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive has this color covering at least 1% of its canvas, as photographed [6]. That describes the archive, not painting as a whole [6]. In printed English the noun peaks in the 1920s and the adjective in the 1930s, in Google Books counts [6]. The color is also listed in Maerz and Paul (1930) and the ISCC-NBS system (1955) [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "French cerise, cherry",
+   "first_recorded": "1858, The Times, the OED's first example (per our name data)",
+   "source": "Paterson; ColorHub name records"
+  },
+  "aka": [
+   "cherry (the fruit's own color)"
+  ],
+  "siblings": [
+   "crimson",
+   "magenta"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cherry",
+    "gloss": "Cherry is the fruit's color; cerise leans bluer"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "cerise (cherry)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 0,
+  "min_cover": 0.01,
+  "ngram": {
+   "noun_peak": "1920s",
+   "adj_peak": "1930s"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cerise\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cherry\" and \"Chianti\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and name records (data/library.json, data/graph)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Petit livre des couleurs, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, notes and bibliography, pp. 126-127",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes); Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does cerise mean in French?",
+   "choices": [
+    "Cherry",
+    "Rose",
+    "Wine",
+    "Coral"
+   ],
+   "answer": "Cherry",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: cerise is exactly the color of a cherry.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cerise is French for cherry, yet dictionaries say the color usually runs bluer than the fruit."
+ ],
+ "words": 275,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported dye-fashion link",
+   "Removed unsupported inference about makers skipping the word red",
+   "Removed unsourced Tuscan wine aside"
+  ]
+ }
+}

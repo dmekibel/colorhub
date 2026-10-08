@@ -1,0 +1,129 @@
+{
+ "slug": "rubber",
+ "name": "Rubber",
+ "hex": "#725937",
+ "names": [
+  "Rubber"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Rubber is a plain mid-brown, and the color books say nothing about it as a color: they mention rubber only as a material.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a history",
+   "body": "No book in the library describes a color called rubber, and the origin of the name is undocumented. What the books do contain is rubber itself, and what it shows is that the natural material is not brown: a cut in a rubber tree bleeds white latex that is collected the next morning [1]. Finlay uses that fact to explain gamboge, whose yellow resin is tapped in a similar way, but by a deep cut in the trunk, with a hollowed bamboo tube set beneath it and a wait of about a year [1].\n\nIt was a Glasgow chemist, Charles Macintosh, who in the 1820s used coal tar to prepare a rubber solution, spread it between two layers of coat cloth and named the result a raincoat, which others soon called a macintosh [2]. Rubber has also been a filler: Balfour-Paul lists it among the substances manufacturers added to indigo for bulk and weight [3]. Pastoureau places the switch of the rubber tennis ball from white to yellow around the late 1970s, chosen so that umpires and television audiences could see it against the white court lines [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #725937 is a common brown: it matches about 6,587 of the 23,781 paintings in our archive, 28 percent, within a color distance of 6 and covering at least 5 percent, as photographed [5]. It matches roughly 40 to 45 percent of paintings in the 1100s to 1300s, against about 15 percent in the 1900s [5]. That probably says more about aged varnish and old supports than about any pigment called rubber."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the material (undocumented as a color name)",
+   "first_recorded": "origin undocumented",
+   "source": "no book source"
+  },
+  "aka": [],
+  "siblings": [
+   "brown",
+   "umber",
+   "sepia",
+   "raw-umber"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#725937",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 6587,
+  "rate": 0.277,
+  "century_rate": {
+   "1100": 0.44,
+   "1900": 0.151
+  }
+ },
+ "questions": [
+  {
+   "q": "What color is the sap of a rubber tree when it is first collected?",
+   "choices": [
+    "White latex",
+    "Brown",
+    "Yellow resin",
+    "Clear"
+   ],
+   "answer": "White latex",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books describe rubber as a named color with a history.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The sap that becomes rubber is white, not brown."
+ ],
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 15 (\"Yellow\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, chapter on synthetic indigo and adulteration",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 35",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (data), match at ΔE2000 6, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede: 'almost nothing true' reworded.",
+   "Gamboge tapping and Macintosh raincoat sentences corrected to Finlay and Garfield wording.",
+   "Indigo adulteration attributed to manufacturers; tennis ball date softened to 'toward the end of the 1970s'.",
+   "Varnish explanation hedged."
+  ]
+ },
+ "words": 279
+}

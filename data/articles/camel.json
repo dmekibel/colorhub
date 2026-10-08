@@ -1,0 +1,170 @@
+{
+ "slug": "camel",
+ "name": "Camel",
+ "hex": "#C19A6B",
+ "names": [
+  "Camel"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Camel is a light, warm tan named for the hair of the camel, a color with a long history as the shade of poor cloth, and a name that books mention more for a wrong guess about a yellow pigment than for the brown itself.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The animal's coat",
+   "body": "Paterson's dictionary indexes camel among its browns, with the other animal and food tones such as cognac, caramel and cedar [1]. It is the plain color of the animal's hair, and the books say little more about it as a color word."
+  },
+  {
+   "id": "cloth",
+   "title": "The color of poor cloth",
+   "body": "Pastoureau describes eleventh-century separatist monastic movements that refused black and white and took as a model John the Baptist, often shown as a wild man in a poor cloth of goat and camel hair [2]. The Cistercians, founded at the very end of that century, took the same direction, asking for common, inexpensive cloth of undyed wool, which tended toward gray [2]. Undyed, unbleached cloth was a deliberate choice, a way of wearing no color at all.\n\nThe animal turns up in other colors. The Kama Sutra, by Finlay's account, gives a recipe for a black cosmetic made by burning a camel bone dipped in the juice of the tattoo plant, with the pigment kept in a camel-bone box [3]."
+  },
+  {
+   "id": "indian-yellow",
+   "title": "A wrong guess about Indian yellow",
+   "body": "Most of the camel's appearances in color books belong to [[indian-yellow]]. Nineteenth-century writers could not agree what the yellow balls from India were made of [4][6]. George Field wrote that the pigment came from the urine of the camel, though he admitted it might come from the buffalo or the Indian cow [4][5]. Some French authors held it to be a shrub extract [6]. It was only in 1883 that the Indian T. N. Mukharji traced the balls to the village of Mirzapur [4]. The camel guess was wrong."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and its rivals",
+   "body": "This swatch matches the ISCC-NBS 1955 dictionary within 1 unit of the block named light yellowish brown (block 76) [7]. Other systems put the name elsewhere. Our library carries the color from Werner's nomenclature (1821, no. 105 among the browns), from Ridgway (1912, plate XL) and from Maerz and Paul (1930), who record the word in 1916 and 1920 [7]. Where the systems differ, they differ by a few units: xkcd's two survey colors are #C69F59 and #CCAD60, a little yellower, and Ridgway's scanned plate is #B2906E, a little pinker [7]. Old swatches have aged, so these are approximate [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Camel is one of the commonest colors in painting. Colors close to it appear in 3,445 of our 23,781 paintings, 14.5 per cent, more than for 96 per cent of the named colors [8]. Inside a painting it most often plays a light, in 41 per cent of the 2,238 paintings where the palette lens finds it [8].\n\nIt peaks in the 1300s, in 44 of 251 paintings from then, 1.4 times the museums' baseline [8]. The painter most devoted to it is Maarten van Heemskerck, who has it in 9 of 12 works here, and Korea is its most over-represented country, in 29 of 63 paintings [8]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not a pigment test [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the hair of the camel",
+   "first_recorded": "Werner's nomenclature (1821, no. 105); Maerz & Paul record the word in 1916 and 1920",
+   "source": "ColorHub color library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "camel hair"
+  ],
+  "siblings": [
+   "tan",
+   "fawn",
+   "mocha"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#C19A6B"
+  },
+  "n_present": 3445,
+  "role": {
+   "light": 41
+  },
+  "top_painters": [
+   "Maarten van Heemskerck"
+  ],
+  "measured": {
+   "lch": [
+    66.1,
+    31.3,
+    74.5
+   ],
+   "contrast_white": 2.59,
+   "iscc": "light yellowish brown (block 76, 1.0)"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, index of browns",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Black, ch. on the Middle Ages (monastic dress)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 11 (\"Black\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Indian yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Werner 1821, Ridgway 1912, Maerz & Paul 1930, xkcd 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings and data/graph field notes, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Mukharji find in 1883?",
+   "choices": [
+    "Where the yellow balls came from",
+    "A way to make Indian yellow from synthetic dyes",
+    "That Indian yellow was banned"
+   ],
+   "answer": "Where the yellow balls came from",
+   "kind": "pick"
+  },
+  {
+   "q": "The camel-urine theory of Indian yellow was correct.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Nineteenth-century writers named the camel as the source of Indian yellow; it was a wrong guess."
+ ],
+ "words": 513,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed overstated 'set the rumors straight' and 'other theories went the same way' (not supported; shrub/cow theories not settled by source cited)"
+  ]
+ }
+}

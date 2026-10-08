@@ -1,0 +1,133 @@
+{
+ "slug": "reddish-grey",
+ "name": "Reddish Grey",
+ "hex": "#997570",
+ "names": [
+  "Reddish Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Reddish grey is a grey with a warm red cast, a plain description that old color lists and painting manuals both rely on.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old entry in the grey list",
+   "body": "The phrase appears in Baty's color book in the introductory lists of named shades, where it sits among the greys with ash-grey, pearl-grey, lead-grey and steel-grey [1]. The same lists sort whites, blacks and blues by the same method: a base word plus a tint word [1]. Reddish-grey there names a neutral by its slight lean [1].\n\nOn the chart side, the modern swatch matches the ISCC-NBS block for a light reddish brown, a reminder of how close a warm grey sits to brown [2]. Its sibling neutrals are [[grey]], [[brownish-grey]] and [[pearl-grey]]."
+  },
+  {
+   "id": "painting",
+   "title": "A grey for the painter's palette",
+   "body": "Gurney, writing on color and light for painters, gives a practical use: mix up a supply of pink or reddish gray and weave it in among the greens of a landscape [3]. He credits the landscape painter Stapleton Kearns with the method, which Kearns calls smuggling reds [3]. A warm neutral helps a large green area avoid monotony [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "It appears in 169 of 23,781 paintings, about 0.71 per cent, holding at least five per cent of the canvas [4]. It peaks in the 1900s, found in 22 of 1,674 paintings, which is 2.9 times the rate those museums would predict [4]. Inside a painting it most often plays a hidden color, in 59 per cent of the 93 paintings found by the within-painting search [4]. Maurice Denis is the most devoted painter, with it in 4 of his 43 works here [4]. A top example is Degas's [[painting:commons-Q76424023|Dancers practicing in the Foyer]], where the color covers about 43 per cent of the canvas [4]. These are photographs of aged, varnished paintings, so they show how a picture looks now, not what the painter mixed [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive grammar: reddish + grey",
+   "first_recorded": "ISCC-NBS 1955 (library); older in descriptive color lists",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "brownish-grey",
+   "pearl-grey",
+   "taupe"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 169,
+  "pct": 0.71,
+  "peak_century": {
+   "1900s": {
+    "hits": 22,
+    "n": 1674,
+    "lift": 2.9
+   }
+  },
+  "role": {
+   "hidden": 59
+  },
+  "top_painter": [
+   "Maurice Denis",
+   4,
+   43
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (lists of named shades)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library and graph nodes (ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 85 (landscape greens)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Gurney suggest weaving through the greens of a landscape?",
+   "choices": [
+    "Pink or reddish grey",
+    "Pure blue",
+    "Black",
+    "Bright orange"
+   ],
+   "answer": "Pink or reddish grey",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside paintings, which role does this color most often play in our data?",
+   "choices": [
+    "A hidden color",
+    "A focal accent",
+    "The brightest light",
+    "A pure white"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A reddish grey is the quiet partner that stops a big green passage going dull."
+ ],
+ "words": 295,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported 'not a pigment' and 'red tint stays quiet' inferences",
+   "removed 'one of the more common' overstatement",
+   "fixed garbled swatch-coverage phrasing"
+  ]
+ }
+}

@@ -1,0 +1,107 @@
+{
+ "slug": "somalis",
+ "name": "Somalis",
+ "hex": "#947276",
+ "names": [
+  "Somalis"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Somalis is a dusty greyish rose-brown listed in the 1930 Maerz and Paul dictionary; nothing in our books explains the name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An unexplained name",
+   "body": "Our one book hit for the word has nothing to do with color. Finlay lists Somalis among the traders from across the Indian Ocean who crowded the port cities of the medieval spice and cloth routes, beside Arabs, Egyptians, Gujaratis and Armenians [1]. The color name may refer to the people, but no source we hold says so.\n\nThe record that exists is the dictionary's. Maerz and Paul list Somalis at plate 6, block I 1, and the library gives 1892 as its first recorded use [2]. In the ISCC-NBS system this swatch is nearest to \"grayish red\", 8.4 CIEDE2000 units away, which is a loose fit for a muted color like this one [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Somalis is uncommon in painting. It appears in 70 of 23,781 paintings in our archive, 0.29 per cent, rarer than 55 per cent of the named colors [3]. Inside a painting it most often plays a hidden color, in 64 per cent of the 36 paintings where the within-painting lens finds it, that is, a quiet tone under the dominant ones [3].\n\nIt peaks in the 1900s, in 0.5 per cent of the 1,674 paintings from those years, 2.3 times the museums' baseline, and it is most over-represented in French paintings, at 2.2 times the expected rate [3]. The earliest match is dated 1452 by Bartolomeo Caporali, 478 years before the name's first record in our sources, and the archive's early centuries are thin [3]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not proof of a pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1892 (Maerz and Paul)",
+   "source": "Maerz & Paul 1930, plate 6 I 1"
+  },
+  "aka": [],
+  "siblings": [
+   "rosy-brown",
+   "dusty-rose",
+   "rose-taupe",
+   "mauve-taupe"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 70,
+  "pct": 0.29,
+  "peak": "1900s",
+  "iscc": {
+   "name": "grayish red",
+   "de": 8.4
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 97",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances to ISCC-NBS names; Maerz & Paul 1930, plate 6 I 1",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); at least 2% of the canvas",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What role does Somalis most often play inside a painting in our archive?",
+   "choices": [
+    "A hidden color",
+    "The brightest highlight",
+    "The sky",
+    "The focal accent"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our books explain where the color name Somalis comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Somalis is first recorded in 1892, but no book we hold says where the name came from.",
+  "In paintings, this dusty rose-brown most often hides under the dominant colors."
+ ],
+ "words": 281,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

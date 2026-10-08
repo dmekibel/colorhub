@@ -1,0 +1,136 @@
+{
+ "slug": "leaf-green",
+ "name": "Leaf Green",
+ "hex": "#5CA904",
+ "names": [
+  "Leaf Green"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Leaf green is the yellowish green of young leaves, and also, in the pigment trade, an old name for a durable pale green made from chromium.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of young leaves",
+   "body": "The Dictionary of Colour defines leaf green as the color of leaves, sometimes the yellowy green of young leaves, and notes that it is one of the colors in the Ostwald circle [1]. The swatch here is a vivid yellow-green. Close neighbors are [[grass-green]], [[lime-green]] and [[moss-green]] [5]. Ridgway's 1912 nomenclature for naturalists has it, and so do the German RAL list (1927) and the ISCC-NBS system (1955) [5].\n\nThe name has a mineral echo. Malachite takes its name from the Greek word for mallow, referring to its leaf-green color [2]. See [[malachite]]."
+  },
+  {
+   "id": "pigment",
+   "title": "A chromium pigment",
+   "body": "As a pigment name, leaf green was described in 1874 by Riffault and colleagues as a durable pale green, made by heating chromic oxide with aluminium hydroxide [3]. Mayer's 1991 handbook simply treats it as a synonym of chrome green [3]. Another pigment reference lists it with a group of green and yellow pigments built on chromium, Prussian blue and related compounds [4]. Compare [[viridian]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive this exact green is nearly absent: 1 painting out of 23,781, rarer than 86 percent of named colors, as photographed [5]. These are photographs of varnished paintings, so a bright green may read differently from how it was painted [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of leaves",
+   "first_recorded": "Ridgway, 1912 (as a color name); Riffault, 1874 (as a pigment)",
+   "source": "Paterson, A Dictionary of Colour; Pigment Compendium"
+  },
+  "aka": [
+   "leaf-green pigment"
+  ],
+  "siblings": [
+   "grass-green",
+   "lime-green",
+   "moss-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "moss-green",
+    "gloss": "a darker, more yellowed green of mosses"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 1,
+  "rarer_than_pct": 86,
+  "first_record": 1912,
+  "sources": [
+   "ridgway 1912",
+   "ral 1927",
+   "iscc-nbs 1955"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"leaf-green\", p. 239",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"malachite\", p. 261",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"leaf green\", p. 248",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, chromates group listing, p. 111",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes); ColorHub color library and color-name sources (Ridgway 1912, RAL 1927, ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the nineteenth-century pigment leaf green contain?",
+   "choices": [
+    "Chromium oxide with aluminium hydroxide",
+    "Copper acetate",
+    "Arsenic",
+    "Indigo"
+   ],
+   "answer": "Chromium oxide with aluminium hydroxide",
+   "kind": "pick"
+  },
+  {
+   "q": "The mineral malachite's name comes from the Greek word for which plant?",
+   "choices": [
+    "Mallow",
+    "Olive",
+    "Fern",
+    "Laurel"
+   ],
+   "answer": "Mallow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Malachite is named from the Greek for mallow, because of its leaf-green color."
+ ],
+ "words": 222,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim about leaves in paintings being darker/browner; reworded Riffault description to avoid near-verbatim copy"
+  ]
+ }
+}

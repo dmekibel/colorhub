@@ -1,0 +1,117 @@
+{
+ "slug": "pine-green",
+ "name": "Pine Green",
+ "hex": "#01796F",
+ "names": [
+  "Pine Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Pine Green is a deep bluish green named after the conifer; the books say almost nothing about it as a color, but one jeweller's note shows where the word shows up in practice: amber.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name and the swatch",
+   "body": "Pine Green belongs to the plant-and-landscape names, and the swatch here matches RAL 6028, a screen approximation [2]. The ISCC-NBS dictionary of 1955 files this color under strong bluish green, and the word's earliest record in our sources is the RAL list of 1927 [2]. That makes it a twentieth-century paint-card name, not an old pigment name [2]. Its parent family is [[green]], and it sits next to [[teal]] in hue [2]."
+  },
+  {
+   "id": "amber",
+   "title": "Green amber",
+   "body": "In Finlay's chapter on jewels, pine-green amber is popular in jewelry yet usually signals that the piece has been baked in an oven, above all when it holds sparkles [1]. She adds that treatments of all kinds are a growing problem in the amber trade, so a green stone calls for caution [1]. Blue [[amber]] is rare, and black is rarer still, usually because it has been artificially colored [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pine Green is rare in painting: it appears in 0.03% of the archive (8 paintings), rarer than 79% of the named colors, as photographed [3]. Its first appearance is a painting of 1790, long before the name's 1927 record, so that match is a look-alike hue in an aged photograph, not proof of a pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pine tree (plant and landscape word)",
+   "first_recorded": "RAL list, 1927",
+   "source": "ColorHub library; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "teal",
+   "hooker-s-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 8,
+  "measured": {
+   "lch": [
+    45.4,
+    31.0,
+    184.9
+   ],
+   "iscc": "strong bluish green"
+  },
+  "first_record": {
+   "year": 1927,
+   "source": "RAL"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 10 (\"Jewels\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, Pine Green: RAL 6028, ISCC-NBS 1955 block 145",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Pine Green",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does pine-green amber usually indicate, according to Finlay?",
+   "choices": [
+    "It has been heat-treated in an oven",
+    "It is the oldest amber",
+    "It is fossilized pine bark",
+    "It comes from beaches"
+   ],
+   "answer": "It has been heat-treated in an oven",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pine Green is an ancient pigment name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Green amber is usually a sign the piece has been in an oven."
+ ],
+ "words": 224,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Rewrote close paraphrase of Finlay and tightened the blue/black amber claim to what the text says."
+  ]
+ }
+}

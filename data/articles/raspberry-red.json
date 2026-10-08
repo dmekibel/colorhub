@@ -1,0 +1,111 @@
+{
+ "slug": "raspberry-red",
+ "name": "Raspberry Red",
+ "hex": "#B42041",
+ "names": [
+  "Raspberry Red"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Raspberry red is the red or purplish red of the fruit, a dictionary color word that sits between plain red and crimson.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The fruit's color",
+   "body": "Paterson defines raspberry as the red or purplish red of the raspberry, and records raspberry-red and crushed raspberry as variants [1]. Pastoureau, discussing the colors of modern medicines, notes that a fruit-flavored red-pink can evoke strawberry, raspberry or red currant, which helps children take liquid medicine [2].\n\nThe books say little more, so the history of the name is undocumented here, and it sits close to [[crimson]] and [[red]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Raspberry red is rare in painting. In our archive of 23,781 paintings, a color within six units of this swatch covers a twentieth of the canvas in only 3 works, among them Matisse's *Nude with a White Scarf* of 1909 and Kirchner's *Two Girls under an Umbrella* of 1910 [3]. As always these are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the raspberry fruit",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson, A Dictionary of Colour, p. 332"
+  },
+  "aka": [
+   "crushed raspberry"
+  ],
+  "siblings": [
+   "raspberry",
+   "red",
+   "crimson",
+   "indian-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B42041",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "Matisse, 1909",
+   "Kirchner, 1910"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 332",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, p. 197",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define raspberry as a color?",
+   "choices": [
+    "Red or purplish red of the fruit",
+    "Pale pink",
+    "Orange-red",
+    "Dark brown"
+   ],
+   "answer": "Red or purplish red of the fruit",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this swatch is common in museum paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Only three of 23,781 museum paintings in our archive hold raspberry red across a twentieth of the canvas, among them a Matisse and a Kirchner."
+ ],
+ "words": 153,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,299 @@
+{
+ "slug": "blue-violet",
+ "name": "Blue Violet",
+ "hex": "#8A2BE2",
+ "names": [
+  "Blue Violet"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Blue Violet is the bright web color named for the stretch of the spectrum between blue and violet, a place where painters, physicists and critics have all looked hard.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A screen color",
+   "body": "Blue Violet is the web color `blueviolet`, hex #8A2BE2, one of the colors in the X11 set [1]. In our library it also meets the 1955 ISCC-NBS system, which would call the swatch a vivid purple, 9 units away [16]. The xkcd color survey of 2010 put a bluer, darker color under the same name, #5D06E9 [16]. Who chose the X11 value is undocumented in these sources [1][16].\n\nA screen builds the swatch from 138 parts red, 43 green and 226 blue, at CIELAB lightness 42 and chroma 102 [16]. Because it mixes red and blue light, a color scientist would call it a purple rather than a violet: violet is a short-wavelength color, and purples are mixtures of long and short wavelengths [3]. Its nearest names are [[dark-violet]], 4.0 units away, and [[violet]], 4.2 [16]. [[spectrum-violet]], the color of the rainbow's end, is 9.8 units away [16]."
+  },
+  {
+   "id": "spectrum",
+   "title": "Where the spectrum ends",
+   "body": "Violet is the last color of the rainbow, a narrow band of short wavelengths just within reach of the eye [3]. In Birren's 1950 figures the eye responds from about 700 to 400 millimicrons [15]. Violet, not purple, is what we see in a rainbow; purples are not in the spectrum at all [3].\n\nNewton named seven spectral colors, and what he called indigo and violet we would now describe as blue deepening to purple [5]. He chose seven to match the musical scale, not because the rainbow shows seven bands [5]. Dictionaries still gloss indigo as \"blue/violet\" [2].\n\nIn 1855 James Clerk Maxwell showed that three colored lights, orange-red, blue-violet and green, can make almost any color [4]. These are usually shortened to red, green and blue, which is why the third light is blue-violet in his own terms [4]. The eye's three cone types do not match that shorthand: Ball says they peak in yellow-green, green and violet [5]. Eckstut adds that the long-wavelength cones have a small second peak in the blue-violet, one reason violet seems to flow into red on color wheels [3]."
+  },
+  {
+   "id": "sky",
+   "title": "Sky, shade and the Impressionists",
+   "body": "Painters meet blue-violet in the sky. At altitude, or in unusually clear air, the sky shifts further toward blue-violet, and shadows deepen and cool against the sun [9]. Haze or smog moves the shadows closer in value to the sunlit areas, and more cloud turns them greyer [9].\n\nIn the 1870s critics fastened on the Impressionists' violet [8]. Duranty, an early admirer, wrote that their canvases almost always start from a violet and bluish range [8]. Others coined a mock disease, *violettomania*, and one joked that persuading Pissarro the trees were not violet would be as hard as persuading an asylum inmate he was not the pope [2][8]. Critics also suggested a permanent afterimage from looking at sunny yellow landscapes, or that Monet could see into the ultraviolet; those were jokes, not findings [8].\n\nThe painters' reasons were two theories: shadows are never truly black or grey but colored, and violet is the complement of yellow sunlight [8]. Goethe had noticed violet-tending shadows on yellowish snow, and in 1856 Delacroix described very lively violet tones where a boy emerged from shadow [7]. Someone then declared that fresh air itself is violet; St Clair gives the remark to Manet in 1881 and Ball gives it to Monet, so the books disagree on who said it [8][7].\n\nThe painters mostly mixed their violets, glazing cobalt blue or ultramarine with red lake [7]. Cobalt violet, made in France from 1859, and manganese violet, discovered in 1868, were on offer but had only modest tinting strength [6][7]. Monet favored the new violets more than most, while Renoir kept to the lake and blue mixture in *At the Theatre* and *The Umbrellas* [7]."
+  },
+  {
+   "id": "words",
+   "title": "Names before the swatch",
+   "body": "The Greek word *kyaneos* meant a dark color: deep blue, violet, brown or black, and it evoked the feeling of the color more than its hue [10]. In the Aristotelian sequence of white, yellow, orange, red, green, blue, violet and black, which dominated thinking from the fourth century BCE to the seventeenth century CE, violet sits next to black [11]. Under Rome, colors men had hardly worn, among them green, blue and violet, became popular with matrons by the end of the first century [12].\n\nThe medieval cloth word *pers* meant the darkest and costliest blue [14]. Modern scholars disagree on its origin: some point to the blue-violet cornflower, others to peach blossom, Persian lilac or Spanish words for black [14].\n\nSystematic lists used the compound too. Every version of the mineral-color nomenclature that Baty reproduces, from Werner in 1774 to Syme in 1821, includes *violet-blue*, and the later lists add *lavender-blue* and *plum-blue* [13]. Our [[violet-blue]], [[lavender]] and [[periwinkle]] carry that tradition."
+  },
+  {
+   "id": "plants",
+   "title": "An early light experiment",
+   "body": "Early studies of blue-violet light and plants disagreed. Schanz found in 1918 that his plants grew tallest when blue-violet energy was cut off, while Popp concluded in 1926 that plants need that short-wavelength end for healthy growth [15]. Birren notes that Schanz did little to equalize the intensities of his lights [15]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Blue Violet is almost absent from paint [17]. In our archive of 23,781 paintings, no work has a color within four units of this swatch covering even one per cent of the canvas, as photographed [17]. A looser setting finds more: within 14 units and at least two per cent of the canvas, 15 paintings qualify [17]. The largest are [[painter:henri-de-toulouse-lautrec|Toulouse-Lautrec]]'s [[painting:nga-46542|A Corner of the Moulin de la Galette]] of 1892, at 30 per cent; [[painter:henri-matisse|Matisse]]'s [[painting:aic-27984|Woman before an Aquarium]] of 1921, at 29; and [[painter:odilon-redon|Redon]]'s [[painting:commons-Q17494495|Nocturne]], at 28 [17]. These are photographs of aged, varnished paintings, so a match at that distance is a nearby color, not this one [17].\n\nThe phrase is easier to date than the paint. In Google Books, *blue violet* appears from about 1800, rises from the 1820s, and peaks around 1920 [18]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the spectral region between blue and violet; a modifier name in the X11 web color set",
+   "first_recorded": "X11/CSS web color; ISCC-NBS 1955 block 194; Ngram phrase from about 1800",
+   "source": "Paterson, A Dictionary of Colour, p. 72; ColorHub library"
+  },
+  "aka": [
+   "BlueViolet",
+   "blueviolet"
+  ],
+  "siblings": [
+   "violet",
+   "dark-violet",
+   "spectrum-violet"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "violet-blue",
+    "gloss": "a paler, softer color 16 units away; also the name in Werner's old mineral color lists"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8A2BE2",
+   "de2000": 14,
+   "min_cover": 0.02
+  },
+  "n_present": 15,
+  "strict_presence": {
+   "de2000": 4,
+   "min_cover": 0.01,
+   "n_present": 0
+  },
+  "top_paintings": [
+   "nga-46542",
+   "aic-27984",
+   "commons-Q17494495",
+   "commons-Q28126521",
+   "commons-Q3605559"
+  ],
+  "ngram": {
+   "term": "blue violet",
+   "first": 1800,
+   "rise": 1820,
+   "peak": 1920
+  },
+  "measured": {
+   "lch": [
+    42.2,
+    102.3,
+    313.1
+   ],
+   "rgb": [
+    138,
+    43,
+    226
+   ],
+   "contrast_white": 5.96,
+   "nearest": [
+    [
+     "Dark Violet",
+     4.0
+    ],
+    [
+     "Violet",
+     4.2
+    ],
+    [
+     "Spectrum Violet",
+     9.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 72 (\"BlueViolet\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 331, 413 (\"rainbow\", \"violettomania\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eckstut, What Is Color?, pp. 25, 32",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 2",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Violet\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 30",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 15 (\"The Clodius Affair\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 14 (\"Red in Everyday Life\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-35",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 84",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, pp. 16-17",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: CSS/X11, ISCC-NBS 1955 block 194, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py; graph fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"blue violet\", 10-year steps from 1800 (graph fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why would a color scientist call this screen swatch a purple rather than a violet?",
+   "choices": [
+    "A screen makes it by mixing red and blue light, and purples are mixtures of long and short wavelengths",
+    "It is too dark to be a spectral color",
+    "It was named after a purple flower",
+    "Violet only exists as a pigment"
+   ],
+   "answer": "A screen makes it by mixing red and blue light, and purples are mixtures of long and short wavelengths",
+   "kind": "pick"
+  },
+  {
+   "q": "The Impressionists painted violet shadows because they could see ultraviolet light.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which three colored lights did Maxwell show in 1855 can make almost any color?",
+   "choices": [
+    "Orange-red, blue-violet and green",
+    "Red, yellow and blue",
+    "Yellow, green and violet",
+    "Orange, indigo and blue"
+   ],
+   "answer": "Orange-red, blue-violet and green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A screen makes Blue Violet from red and blue light, so by the scientists' definition it is a purple.",
+  "On a clear day at altitude, look at the sky and the shadows: they run bluer, closer to blue-violet."
+ ],
+ "words": 959,
+ "status": "checked",
+ "checked": {
+  "by": "claude (batch 45)",
+  "date": "2026-10-08",
+  "issues": [
+   "Who said 'fresh air is violet' (Manet 1881 per St Clair, Monet per Ball): books disagree, stated as such.",
+   "X11 origin of the exact value is undocumented in our sources; no web source consulted.",
+   "Birren (1950) plant-light studies are old opinion; presented as early studies only.",
+   "Looser archive threshold (dE 14, 2%) is stated with its caveat; strict threshold gives zero."
+  ]
+ }
+}

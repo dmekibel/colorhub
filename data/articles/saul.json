@@ -1,0 +1,125 @@
+{
+ "name": "Saul",
+ "hex": "#566C65",
+ "tier": "person",
+ "depth": "medium",
+ "lede": "Saul is a dark, grey-green name whose origin the books do not record; the only Sauls they discuss are people, among them the Bible's first king of Israel.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no recorded color",
+   "body": "None of the color books we hold explains Saul as a color word [1][2]. Searching them turns up the name only as a person: an author's name in a bibliography, a novelist quoted in a dictionary of idioms, and the biblical king [1][2][3]. That is an honest gap, and we leave the origin undocumented rather than guess one.\n\nThe swatch is a deep grey-green, a little greyer than [[forest-green]] and darker than [[sage]]. Its name gives no hint of that, which is why the page below leans on measurement rather than history."
+  },
+  {
+   "id": "king",
+   "title": "The king in the books",
+   "body": "The one color link the books offer is old and indirect. A dictionary of colour explains that scarlet was the dress of people of importance in the Bible, and gives Saul's clothing in 2 Samuel as the example, so that scarlet came to signal rank [2]. Pastoureau mentions Saul in a different way, among biblical figures such as Esau and Caiaphas whom medieval imagery tied to red and to unhappy fates [3]. Both uses point to red, not to grey-green, so neither explains this swatch [2][3].\n\nIf a paint maker or a catalogue once chose the name for this color, no source here says so [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 399 contain this color as a large enough patch (about 1.7 per cent), as photographed [4]. It is about 5 times more common in Post-Impressionist paintings than in the archive as a whole, and about 10 times more common in the work of Paul Cezanne and Claude Monet than average [4]. Its share peaks in the 1440s and again in the 1900s [4]. These are photographs of varnished, aged paintings, so the color is as photographed, not as painted."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "not recorded",
+   "source": "no color-book entry"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-green",
+   "forest-green",
+   "pine-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#566C65",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 399,
+  "rate": 0.0168,
+  "peak_decade": 1440,
+  "top_paintings": [
+   "smk-KMSsp537",
+   "commons-Q17494664",
+   "commons-Q81333581"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Concordance search of 29 color books for \"Saul\" (no color entry found)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"scarlet\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 26 (\"Judas, the Redhead\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, color match within delta-E 6, 5 per cent cover, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do the color books say about where the color name Saul comes from?",
+   "choices": [
+    "It is named for the Bible's first king",
+    "Nothing: no source records its origin",
+    "It is a Victorian dye name"
+   ],
+   "answer": "Nothing: no source records its origin",
+   "kind": "pick"
+  },
+  {
+   "q": "Pastoureau's mentions of Saul tie him to which color?",
+   "choices": [
+    "Red",
+    "Grey-green",
+    "Purple"
+   ],
+   "answer": "Red",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Saul is a grey-green that the color books never explain; the only Sauls they know are people."
+ ],
+ "slug": "saul",
+ "names": [
+  "Saul"
+ ],
+ "status": "checked",
+ "words": 305,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported 'landscape and fabric' characterization"
+  ]
+ }
+}

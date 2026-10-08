@@ -1,0 +1,286 @@
+{
+ "slug": "beige",
+ "name": "Beige",
+ "hex": "#E6D5B0",
+ "names": [
+  "Beige"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Beige is the French name of undyed wool cloth, borrowed in the nineteenth century for the pale yellow-grey of anything left in its natural state; once a color of poverty, it is now the color of the inoffensive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A cloth before a color",
+   "body": "*Beige* is a French word, and in French it first described a fabric: cloth made from undyed sheep's wool [1]. English borrowed it in the mid-nineteenth century, and the color came with the cloth [1]. Paterson adds that *écru* and *grège* are two more French terms for wool or cloth in its unbleached state, and that beige originally designated a grey [2]. The color, in other words, is the color of material nobody has yet dyed.\n\nBooks and sources disagree on the date. St Clair gives only the mid-nineteenth century [1]. Paterson says it was first recorded as a color in 1879 [2]. Our library's earliest source, Maerz and Paul, dates it to 1887 [3]. One safe reading is that the word was in circulation by the 1880s, and a fashion magazine, *London Society*, was calling it in vogue in the late autumn of 1889, for the way it went with brown and gold [1]."
+  },
+  {
+   "id": "undyed",
+   "title": "The color of the undyed",
+   "body": "Beige is what the world looks like before anyone intervenes. Pastoureau notes that medieval manuscript parchment was more beige than white, and that early European paper verged on yellow, beige or ecru [4]. His Petit Livre makes the same point in French: the beige of parchment and the *écru* of natural cloth were the shades of the support before it was used [5].\n\nThe same pattern shows in textiles. Dyers in medieval Europe could not make a pure white, and the whites they produced, whether bleached in the fields by dew and sun or not, were near whites: drab, ecru, beige or greyish [6]. Wool left in its natural state ended up beige, which helps explain why church vestments of the high Middle Ages were seldom pure white [7].\n\nFinlay finds the same color in living silk. In Assam, he describes the thread of the wild *muga* moth as a plain brown-beige that cannot be dyed and must be left its own color, and the paler *tassar* silk as paler beige, more like hay [8]. A color we think of as bland is, in that cloth, the whole point."
+  },
+  {
+   "id": "status",
+   "title": "From poverty to taste",
+   "body": "The social meaning of beige has reversed. Greenfield reports that in Renaissance Europe grey and beige were the colors of poverty: only the poorest, and priests, monks and nuns, wore such undistinguished clothes [9]. Prosperous folk dressed in muted colors made with cheap domestic dyes [9]. Rich buyers wanted the dazzling dyes of the Italian silk-weavers [9].\n\nThe change came with the dye industry. Pastoureau notes that from the nineteenth century the chemistry of dyes pushed a wider range of half-tones, among them beiges, browns, pinks and greys, into ordinary dress [10]. Greenfield adds that, in the late nineteenth century, grey, white and pastels became fashionable, with beige following in the early twentieth, when bright colors had come to seem dangerous [11].\n\nSt Clair argues that beige now carries the opposite load from its Renaissance one: the interior designer Elsie de Wolfe adored it in the 1920s, but property-selling advice now warns against it as a default neutral that is hoped to offend no one [1]. Paterson makes a related point about the trade: beige is popular for fashion fabrics but is often renamed camel, taupe, stone or sand to avoid sounding like a color [2]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Beige and its neighbors",
+   "body": "Beige belongs to a crowded family. Paterson treats [[ecru]] as the beige of unbleached linen, defines *greige* as a mix of grey and beige, and files cork, cornsilk and flax among beige and yellowish-beige colors [2]. Lighter neighbors in our library are [[ivory]] and [[linen]]; darker or warmer ones are [[tan]], [[camel]] and [[taupe]].\n\nBeige is also an uncertain word in other languages. Ball observes that French *brun* is not an exact equivalent of English *brown*, and in some contexts French speakers use *marron* or *beige* instead [12]. Batchelor, discussing the Berlin and Kay list of basic color terms, places beige with mauve and scarlet as a specialized word that is easy to rephrase with other colors, which is why it is not on the list [13]. The Munsell system sidesteps the problem: Gurney notes that it replaces the word *beige* with a code such as YR 7/2 [14]."
+  },
+  {
+   "id": "universe",
+   "title": "The color of the universe",
+   "body": "In January 2002 astronomers announced that the average color of the universe was turquoise [15]. Three months later Johns Hopkins University announced a correction: because of a computer bug, the color was actually beige [15]. St Clair says the two scientists, who had surveyed more than 200,000 galaxies, immediately looked for a livelier name, and settled on *cosmic latte* after considering *big bang buff* and *skyvory* [1].\n\nTreat the episode as a lesson in how much a single color name can hide: the first announcement of turquoise was wrong, and the corrected one was beige [15]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which beige is this?",
+   "body": "Beige is not one color in our data. The swatch here, #E6D5B0, is the app's own choice, a pale yellow in ISCC-NBS terms and about 4.6 CIEDE2000 units from block 89 of that system [3]. The CSS and X11 beige is a much lighter #F5F5DC, which Paterson lists among the 140 colors in the X11 set [2][3]. RAL 1001 *Beige*, first issued in 1927, is a darker #D0B084, and the xkcd survey color is #E6DAA6 [3].\n\nSo the three standards differ by far more than the eye can forgive: a light biscuit, a yellow-grey and a sandy brown can all be called beige. Think of the word as a region of color, not a point [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "We looked for this swatch in 23,781 museum paintings [16]. It is present, within a CIEDE2000 distance of six, on at least five per cent of the canvas in 1,411 of them, about 5.9 per cent, as photographed [16]. Photographs of aged, varnished paintings are a poor test of what a painter mixed, and a color match is not a pigment test [16].\n\nThe pattern is mostly geographic. In Chinese works, 115 of 635 carry it, 3.1 times the archive rate; in Iranian works, 9 of 29; in Japanese works, 88 of 698 [16]. We have not checked how much of that is the paper or silk itself. Among Western painters, the French artist Jean-Jacques Henner carries it in 8 of 18 works [16]. One example is [[painting:nga-71394|Evening]], William Blake's work of about 1820, where the swatch covers 96 per cent of the image [16].\n\nInside a painting, beige most often plays the light: in 59 per cent of the 1,174 paintings where our within-painting lens finds it, it ranks among the lighter colors [17]. In print, the word was rare until the 1880s, reached about 16 per cent of its modern peak by 1900, 39 per cent by 1940 and 74 per cent by 2000 [18]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "French beige, a cloth of undyed wool",
+   "first_recorded": "mid-19th century (St Clair); 1879 (Paterson); 1887 (Maerz and Paul)",
+   "source": "St Clair, The Secret Lives of Colour, \"Beige\"; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "ecru",
+   "grège",
+   "greige"
+  ],
+  "siblings": [
+   "ecru",
+   "taupe",
+   "camel"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "ecru",
+    "gloss": "Paterson: the beige of unbleached linen"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "beige (undyed wool cloth)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E6D5B0",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1411,
+  "top_paintings": [
+   "cma-107358",
+   "nga-71394",
+   "cma-149627"
+  ],
+  "ngram": {
+   "term": "beige",
+   "first_5pct": 1857,
+   "rel_1900": 0.16,
+   "rel_1940": 0.39,
+   "rel_2000": 0.74
+  },
+  "measured": {
+   "iscc": "pale yellow",
+   "nearest": [
+    [
+     "ISCC-NBS block 89",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Beige\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"beige\", \"ecru\", \"greige\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 89; Maerz and Paul 1930; RAL 1927; CSS/X11), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black, chapter on printing and the black-and-white imagination",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Le petit livre des couleurs, ch. 7",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, White",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 7",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Fabric, on muga and tassar silk in Assam",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 6",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 37",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, on the Munsell system",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "ColorHub graph fieldnotes (within-painting lightness-rank lens; data/graph/fieldnotes/b.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the color word beige come from?",
+   "choices": [
+    "French, from cloth made of undyed sheep's wool",
+    "Latin, for a river-sand",
+    "Arabic, for desert",
+    "Greek, for ivory"
+   ],
+   "answer": "French, from cloth made of undyed sheep's wool",
+   "kind": "pick"
+  },
+  {
+   "q": "In Renaissance Europe, who mostly wore grey and beige?",
+   "choices": [
+    "The poorest people, and priests, monks and nuns",
+    "Only kings",
+    "Only soldiers",
+    "Wealthy silk merchants"
+   ],
+   "answer": "The poorest people, and priests, monks and nuns",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in 2002 the average color of the universe was first announced as turquoise and then corrected to beige.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Beige was a cloth before it was a color: the French name for wool nobody had dyed.",
+  "In the Renaissance, grey and beige were what the poor wore; rich buyers wanted dazzling silk.",
+  "Look at old parchment: it is beige, not white."
+ ],
+ "words": 1115,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch 23 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "First-use date disagrees: mid-19th c. (St Clair), 1879 (Paterson), 1887 (Maerz and Paul); stated as disagreement.",
+   "Universe color myth corrected (turquoise error, beige); 'cosmic latte' via St Clair.",
+   "Archive pattern is a look-alike hue in aged photographs, not a pigment claim."
+  ]
+ }
+}

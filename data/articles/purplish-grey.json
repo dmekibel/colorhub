@@ -1,0 +1,105 @@
+{
+ "slug": "purplish-grey",
+ "name": "Purplish Grey",
+ "hex": "#7A687F",
+ "names": [
+  "Purplish Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Purplish grey is a plain description: a grey with a tint of purple, with no history of its own.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey with purple",
+   "body": "Paterson uses the phrase in three entries. *Heather* is described as the speckled purplish-grey-blue of the plant [1], and *nugrey* is defined as a purplish-grey [1]. The same dictionary lists plumbago as the purplish grey of graphite [1]. Two of them tie the tone to a plant or a mineral, which is how the language often names such an in-between color [1].\n\nRelated names are [[heather]] and [[mauve]] [2]. The phrase itself is a description, not an established color name, so the books tell little else [1]. Paterson uses the phrase as ordinary description inside other entries, not as an entry of its own [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of museum paintings, a color near this swatch is present in 19 works, 0.08 per cent of the archive [3]. The earliest is a work of 1375 and the latest dates from 1924 [3]. These are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description of a purple-tinted grey",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson"
+  },
+  "aka": [],
+  "siblings": [
+   "heather",
+   "mauve",
+   "lilac",
+   "slate-grey",
+   "lavender-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, paintings as photographed",
+  "n_present": 19,
+  "pct_of_archive": 0.08,
+  "first_dated": 1375
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"heather\", \"nugrey\", \"plumbago\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), nearest names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), paintings as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plant does Paterson give as a speckled purplish-grey-blue?",
+   "choices": [
+    "Heather",
+    "Lavender",
+    "Mallow",
+    "Peony"
+   ],
+   "answer": "Heather",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson ties plumbago to the purplish grey of graphite.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Heather, nugrey and plumbago are all described as purplish greys."
+ ],
+ "words": 165,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'two entries' corrected to three; nugrey is not tied to a plant or mineral."
+  ]
+ }
+}

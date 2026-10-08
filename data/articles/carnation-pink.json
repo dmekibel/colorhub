@@ -1,0 +1,105 @@
+{
+ "slug": "carnation-pink",
+ "name": "Carnation Pink",
+ "hex": "#FFA6C9",
+ "names": [
+  "Carnation Pink"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Carnation pink is a soft, light pink named for the carnation flower; the related word carnation had an older sense in painters' flesh tints.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Flower and flesh",
+   "body": "In Baty's table of reds and browns, carnation pink (*Dianthus caryophyllus*) is listed as a plant example of carmine red, alongside the raspberry and the cockscomb, with oriental ruby as the mineral example [1].\n\nIn the pigment trade, *carnation* was also a loose term for mixtures of pigments used for flesh tints rather than any one pigment [2]. The Compendium quotes Harris (1704-10) using the word for the bare flesh of a painted figure, and calls a well-colored carnation a sign of a good painter [2]. So an old painter's carnation was skin, and a modern carnation pink is a flower. See also [[carnation]], [[flesh-pink]], [[raspberry]] and [[pink]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this color covering at least 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the carnation flower (Dianthus caryophyllus)",
+   "first_recorded": "Werner's nomenclature",
+   "source": "Baty, Nature's Palette, p. 243"
+  },
+  "aka": [],
+  "siblings": [
+   "carnation",
+   "flesh-pink"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#FFA6C9",
+   "min_cover": 0.01
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 243-244",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"carnation\", p. 99",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which flower is carnation pink named for?",
+   "choices": [
+    "Dianthus caryophyllus",
+    "Rosa gallica",
+    "Viola odorata"
+   ],
+   "answer": "Dianthus caryophyllus",
+   "kind": "pick"
+  },
+  {
+   "q": "What did painters' carnation mean in the pigment trade?",
+   "choices": [
+    "Mixtures for flesh tints",
+    "A single red mineral",
+    "A blue dye"
+   ],
+   "answer": "Mixtures for flesh tints",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "For painters, carnation once meant skin tones."
+ ],
+ "words": 159,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Table entry is a plant example of carmine red, not its own color; rewrote",
+   "Removed unverified petal claim"
+  ]
+ }
+}

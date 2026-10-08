@@ -1,0 +1,141 @@
+{
+ "slug": "pale-sky-blue",
+ "name": "Pale Sky Blue",
+ "hex": "#BDF6FE",
+ "names": [
+  "Pale Sky Blue"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Sky Blue is a very light, slightly greenish blue; on screens it reads almost cyan, while painters have used the phrase for what finely ground azurite looks like.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two meanings",
+   "body": "The library lists the name in the xkcd color survey and in the ISCC-NBS system of 1955, block 184, with [[powder-blue]] the nearest named color at 4.8 units [1]. The swatch is cool and airy, a lightness of 93 of 100 [1]. Compare the more everyday [[sky-blue]]."
+  },
+  {
+   "id": "azurite",
+   "title": "Sky blue from stone",
+   "body": "Painters used the same words for a mineral blue. Ball says that very finely ground azurite develops a pale sky-blue with a hint of green, good for skies but less rich than the purple depth of ultramarine [2]. Coles agrees and adds the practical cost: the stone had to be pounded, then washed several times with fish glue, and a coarser grind gave a deeper blue that was gritty and translucent [3]. Ball ties this to a fifteenth-century Bolognese manuscript of recipes called *Segreti per Colori*, which lists various natural azures without clearly separating their mineral sources [2]. The mineral itself is the [[gem:azurite|azurite]] of the gem trade.\n\nA painter's azurite sky is therefore greener and duller than this screen swatch, which is much closer to white."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch has a contrast of only 1.18 against white [1]. No painting in our archive of 23,781 has a color within six units of it covering at least five per cent of the canvas [4]. As photographed: museum photographs of aged, varnished paintings; a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a pale sky",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library; ISCC-NBS 1955 block 184"
+  },
+  "aka": [
+   "Light sky blue"
+  ],
+  "siblings": [
+   "sky-blue",
+   "powder-blue",
+   "celeste",
+   "light-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sky-blue",
+    "gloss": "the common mid-light sky color"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#BDF6FE",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    93,
+    19,
+    211
+   ],
+   "contrast_white": 1.18,
+   "nearest": [
+    [
+     "Powder blue",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; xkcd set, ISCC-NBS 1955 block 184); CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 67",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did fine grinding do to azurite, according to Ball and Coles?",
+   "choices": [
+    "Gave a pale sky-blue with a hint of green",
+    "Made it deep purple",
+    "Turned it red",
+    "Made it black"
+   ],
+   "answer": "Gave a pale sky-blue with a hint of green",
+   "kind": "pick"
+  },
+  {
+   "q": "Why was coarsely ground azurite hard to use?",
+   "choices": [
+    "Gritty and translucent",
+    "It was poisonous when wet",
+    "It dissolved in oil",
+    "It was too bright"
+   ],
+   "answer": "Gritty and translucent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Finely ground azurite is a pale sky blue with a green hint: the original paint skies.",
+  "A very pale blue like this looks nearly white on a page."
+ ],
+ "words": 253,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

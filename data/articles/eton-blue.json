@@ -1,0 +1,125 @@
+{
+ "slug": "eton-blue",
+ "name": "Eton Blue",
+ "hex": "#96C8A2",
+ "names": [
+  "Eton Blue"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Eton Blue is a school color: the light blue of Eton, a public school in England, whose name was later shared with a university.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson's dictionary says Eton blue is the school's light blue, taken up in the 16th century and later borrowed by Cambridge University [1]. The same dictionary says the light blue Eton color became Cambridge blue after, it is said, a rower's mistake in the 1836 boat race against Oxford: the Cambridge cox had forgotten his team's own colours [2]. That story is told as hearsay, and the book does not say who first told it [2]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Neighbors",
+   "body": "Paterson files Eton blue in his list of blues, alongside Cambridge blue, Delft blue and [[royal-blue]] [3]. In our own list the closest relatives are [[cambridge-blue]], [[sky-blue]] and [[french-blue]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch used on this page, #96C8A2, is not a light blue: it measures lightness 76.3, chroma 27.7 and hue angle 150 degrees, which is a pale blue-green [4]. The dictionary's description and this screen color do not match, so read the swatch as one modern rendering of the name, not a school's official shade [1][4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Eton College, the English public school",
+   "first_recorded": "school colour adopted in the 16th century, per Paterson",
+   "source": "Paterson, Dictionary of Colour, \"Eton blue\""
+  },
+  "aka": [
+   "Cambridge blue (the university's later use)"
+  ],
+  "siblings": [
+   "cambridge-blue",
+   "sky-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cambridge-blue",
+    "gloss": "the university's use of the same light school blue"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub name list and color math",
+  "hex": "#96C8A2",
+  "measured": {
+   "lch": [
+    76.3,
+    27.7,
+    150
+   ]
+  },
+  "source": "Paterson, Dictionary of Colour"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Eton blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Cambridge blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Eton blue (colour index, blues)\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color math (CIE LCH from the sRGB hex)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which university took over Eton's light blue?",
+   "choices": [
+    "Cambridge",
+    "Oxford",
+    "Harvard"
+   ],
+   "answer": "Cambridge",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch on this page is a light blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Eton's light blue ended up as Cambridge's, after a boat-race mix-up, the story goes."
+ ],
+ "words": 185,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All claims traced to Paterson; no changes."
+  ]
+ }
+}

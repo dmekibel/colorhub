@@ -1,0 +1,271 @@
+{
+ "slug": "greenish-blue",
+ "name": "Greenish Blue",
+ "hex": "#719BA2",
+ "names": [
+  "Greenish Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "long",
+ "lede": "Greenish blue is a blue leaning toward green: an old descriptive phrase that Abraham Werner's mineral colors turned into a fixed name, and that dictionaries still use for everything from peacock feathers to a pale winter horizon.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A direction, not a lightness",
+   "body": "*Greenish blue* names a direction, a blue pulled toward green, and says nothing on its own about how light or strong the color is. Paterson's dictionary uses the phrase for colors as different as the pale horizon blue and ice blue, the vivid grotto blue and cerulean blue, and the deep patent blue and Vienna blue [2]. It also gives it to [[turquoise]], [[peacock-blue]], Nile blue and the sea-colored glaucous [2].\n\nThe books do not always agree on the neighboring words. Paterson defines teal as a dark greenish-blue, taken from the wing of the duck, while St Clair calls it a strong green with a dash of blue [2][8]. Paterson also glosses Alice blue as a greenish-blue even though the hex code he prints for it, F0F8FF, is a blue so pale it is nearly white [2].\n\nPaterson makes one grammatical point that helps here. A form such as *greeny-blue* expresses hesitation over the exact shade, he says, while *greenish-blue* has more of the feel of a noun [2]. That is how it works as a color name: it points at a place on the blue-to-green border without claiming to name a thing."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch: a muted sea-glass blue",
+   "body": "The swatch on this page, #719BA2, is quieter than the phrase suggests [9]. Its lightness is about 61 and its chroma only 15, which makes it a soft, greyed teal-blue [9]. ISCC-NBS 1955 files it as a light greenish blue (block 168), and the library also traces it to Ridgway's 1912 plates and to Werner's nomenclature [9]. Its nearest names are Glaucous-Blue, Grey Teal, Ether, Cadet Blue and [[celestial-blue]], all within six units of CIEDE2000 [9].\n\nSo the screen color and the dictionary glosses part ways. A reader who pictures a vivid turquoise from Paterson's entries will find this swatch dull beside it [2][9]. The honest summary is that the phrase covers a family of colors and this swatch is one grey, mid-light member of it [9]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner's sky blue",
+   "body": "The phrase became a fixed color name in the mineral trade. Abraham Gottlob Werner devised his color nomenclature in 1774 to help identify minerals by their outward features, starting with 54 terms [3]. His book contained no actual color samples, so readers depended on how they read the names [3].\n\nThe Scottish artist Patrick Syme supplied the missing swatches [3]. He expanded Werner's list to 108 terms in 1814 and to 110 in 1821, adding a painted swatch for each and animal and vegetable examples beside the minerals [3]. In Syme's 1821 edition, Werner's original Sky Blue was renamed Greenish Blue and given number 33, and Werner's Smalt Blue became Greyish Blue, number 34 [4]. Syme's recipe for it was Berlin blue, white and a little emerald green [4].\n\nSyme's table pairs number 33 with the great fennel flower, also called love-in-a-mist, and with the minerals [[gem:turquoise|turquoise]] and fluorspar [4]. Baty's own illustrations add the caterpillar of the pale clouded yellow butterfly [4]. Our library holds the same entry as Werner 1821, number 33, in the blues, from an aged and approximate plate [9]. To train the eye, look for it in a love-in-a-mist petal or a piece of turquoise, as Syme did [4]."
+  },
+  {
+   "id": "pigments",
+   "title": "In paint and pigment",
+   "body": "Painters met greenish blues as shades of materials rather than as a named color. Bremen blue was a pale greenish-blue pigment made from copper hydroxide with a little carbonate, prepared by corroding copper with salt and copper sulfate [5]. Antwerp blue, a variety of Prussian blue, is greenish, according to Paterson [2].\n\nChemistry shifts a blue toward green in other ways. Early artificial ultramarine passes through a bright bluish-green stage before it is finished, and the final product ranges from pale greenish blue to violet depending on the ratio of silica to alumina [5]. Among the cobalt pigments, cobalt aluminium chromium oxide, Pigment Blue 36, is a greenish blue, where ordinary cobalt aluminate, Pigment Blue 28, is a reddish one [5]. Paterson calls Thénard's blue, a cobalt aluminate, a greenish-blue, so he and the compendium disagree on that pigment [2][5].\n\nLivingstone gives the optics. Cobalt blue reflects some green light, so by that alone it should look more greenish than ultramarine, yet it also has a peak at the red end of the spectrum [6]. Red and cyan, a greenish blue, are opponents, and when both reach the eye they cancel each other's hue, leaving cobalt blue to look like a pure blue [6]. Ball adds that by the 1940s phthalocyanine blue lake was thought a safe choice when a greenish blue was wanted [7].\n\nGreenish blues also turn up in altarpieces. Gage describes the Madonna in Fra Angelico's Linaiuoli Tabernacle as very pale, desaturated and now slightly greenish blue, while the smaller Madonna below her is saturated ultramarine [10]. Gage's notes read the larger figure's blue as pale [[gem:azurite|azurite]] [10]. Italian guild rules had forbidden painters from substituting azurite for ultramarine [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Held to a ΔE of 6 and at least five per cent of the canvas, a color like this swatch appears in 151 of 23,781 paintings in our archive [11]. The biggest shares belong to a Sargent watercolor of the Jungfrau, dated 1870 in the archive, where it covers about two thirds of the image, and to Krøyer's [[painting:smk-KMS1658|Boys Bathing at Skagen]] (1899), at about 63 per cent [11]. Among the others are Redon's [[painting:nga-157928|Village by the Sea in Brittany]] and Cézanne's [[painting:aic-14561|The Vase of Tulips]] [11].\n\nIt is mostly a light color in paintings. In 55 per cent of the paintings that carry it, it sits among the lightest colors, in 42 per cent in the middle and in only 3 per cent among the shadows [11]. [[look:impressionism|Impressionism]] holds it at 9 times the archive's rate: 8 of 140 paintings [11]. Within painters, it shows up in 4 of 50 Cézanne paintings, 3 of 33 by Boudin, 3 of 46 by Renoir and 3 of 50 by [[painter:claude-monet|Monet]] [11].\n\nIt keeps grey company. Viridian co-occurs with it at 7.2 times chance, and grey, ash and slate at 5.8 to 6.5 times [11]. The earliest dated match is a 1474 portrait of Giovanni II Bentivoglio by Ercole de' Roberti, where it covers about six per cent [11]. These are photographs of aged, varnished paintings, so read the matches as screen colors, not pigments [11].\n\nIn Google Books the phrase *greenish blue* peaks around 1903 and has since fallen to about a fifth of that level by 2000 [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive phrase: a blue modified by 'greenish'; fixed as no. 33 in Syme's 1821 edition of Werner's nomenclature",
+   "first_recorded": "Werner/Syme, 1821 (no. 33, Blues)",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "Werner's sky blue",
+   "greenish-blue",
+   "greeny-blue"
+  ],
+  "siblings": [
+   "teal-blue",
+   "celestial-blue",
+   "glaucous-blue"
+  ],
+  "parent": "blue",
+  "children": [
+   "light-greenish-blue"
+  ],
+  "disambiguation": [
+   {
+    "slug": "blue-green",
+    "gloss": "a green leaning toward blue; the reverse emphasis"
+   },
+   {
+    "slug": "turquoise",
+    "gloss": "a single-word name for a vivid greenish blue; the swatch here is far greyer"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#719BA2",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 151,
+  "top_paintings": [
+   "commons-Q20178957",
+   "smk-KMS1658",
+   "nga-157928",
+   "rijks-20026255",
+   "nga-228356",
+   "aic-14561"
+  ],
+  "role": {
+   "highlight": 0.55,
+   "mid": 0.42,
+   "shadow": 0.03
+  },
+  "company": [
+   [
+    "Viridian",
+    7.17
+   ],
+   [
+    "Grey",
+    6.45
+   ],
+   [
+    "Ash",
+    5.98
+   ],
+   [
+    "Slate",
+    5.79
+   ]
+  ],
+  "ngram": {
+   "phrase": "greenish blue",
+   "peak": 1903,
+   "rel_2000": 0.213
+  },
+  "measured": {
+   "lch": [
+    61.3,
+    15.0,
+    213.5
+   ],
+   "iscc": "block 168, light greenish blue (dE 6.4)",
+   "contrast_white": 3.04,
+   "nearest": [
+    [
+     "Glaucous-Blue",
+     4.0
+    ],
+    [
+     "Grey teal",
+     4.0
+    ],
+    [
+     "Ether",
+     4.6
+    ],
+    [
+     "Cadet Blue",
+     5.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"horizon blue\", \"ice blue\", \"grotto blue\", \"cerulean blue\", \"patent blue\", \"Vienna blue\", \"turquoise\", \"peacock blue\", \"Nile blue\", \"glaucous\", \"teal\", \"Alice blue\", \"Antwerp blue\", \"Thénard's blue\", \"-y\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (pp. 7-24)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"Blues and purples\" (pp. 100-105)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Bremen blue\" (p. 74), \"Chromium aluminium cobalt oxide\" (p. 124), \"Cobalt pigments\" (p. 364) and \"Ultramarine green\" (p. 389)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, chs. 13 and 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (p. 125)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Greenish Blue, ISCC-NBS 1955 block 168, Ridgway 1912, Werner 1821 no. 33; nearest names by CIEDE2000 from data/graph/names.json",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 133",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), tools/article_field.py, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "Google Books Ngram for \"greenish blue\" via tools/article_field.py (case-insensitive, 5-year smoothed, relative to peak)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the phrase greenish blue tell you about a color?",
+   "choices": [
+    "Only that it leans toward green, not how light or strong it is",
+    "That it is always pale",
+    "That it is always vivid",
+    "That it is a green with a trace of blue"
+   ],
+   "answer": "Only that it leans toward green, not how light or strong it is",
+   "kind": "pick"
+  },
+  {
+   "q": "Syme's 1821 edition of Werner's nomenclature numbers Greenish Blue as 33 and calls it Werner's sky blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does cobalt blue read as a nearly pure blue even though it reflects green light?",
+   "choices": [
+    "It also reflects red, which cancels the cyan's hue",
+    "It absorbs all the green wavelengths",
+    "Its tin content turns it purple",
+    "Varnish adds a yellow tint"
+   ],
+   "answer": "It also reflects red, which cancels the cyan's hue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Greenish blue was Werner's sky blue: in Syme's 1821 edition it is number 33, and turquoise, fluorspar and a fennel flower stand for it.",
+  "In our archive, about two thirds of one Sargent watercolor of the Jungfrau is this color, and Impressionist canvases carry it at nine times the usual rate."
+ ],
+ "words": 1066,
+ "status": "checked",
+ "checked": {
+  "by": "claude-sonnet-5-5 (batch 37)",
+  "date": "2026-10-08",
+  "issues": [
+   "Concordance for this phrase is mostly dictionary glosses (Paterson) and Werner/Baty; no book narrates a history of the phrase, so the article is short and says so.",
+   "Baty's captions give Syme 1821 no. 33 = 'the sky blue of Werner'; which edition first used the exact words Greenish Blue is not confirmed beyond that caption and the library's Werner 1821 record.",
+   "Paterson vs St Clair disagree on teal; Paterson vs Pigment Compendium disagree on Thénard's blue; both named in text.",
+   "Gage's notes name the larger Madonna's blue as azurite in the plate note; the sentence is attributed to Gage's notes.",
+   "Livingstone wording about cobalt blue is paraphrased from her pigment-spectra caption; red/cyan opponent cancellation is hers."
+  ]
+ }
+}

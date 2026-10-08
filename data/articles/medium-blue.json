@@ -1,0 +1,117 @@
+{
+ "slug": "medium-blue",
+ "name": "Medium Blue",
+ "hex": "#0000CD",
+ "names": [
+  "Medium Blue"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Medium Blue is a pure, saturated blue, one of the named colors of the web.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color",
+   "body": "Paterson's dictionary lists MediumBlue as one of the colours in the X11 color set, with the hex code #0000CD [1]. That is the whole of its pedigree: a label in a software list, placed between the darker blues and the lighter ones. Our records also list it in the 1955 ISCC-NBS system [2].\n\nThe phrase also has an older, plain meaning. Paterson uses it for stone blue [3], and Pastoureau notes that the azur of French royal arms could be sky blue, medium blue or ultramarine, with no difference of meaning, since artists were free to choose [4]. Gage quotes an old list of color terms that calls lapis lazuli a blue-black, adding that some say it is a medium blue [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering as much as 1% of its canvas, as photographed [2]. That describes the archive, not painting as a whole: this is a pure screen blue, much more intense than most painted blues. Related names: [[blue]], [[royal-blue]], [[cobalt-blue]] and [[azure]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive name, X11 color set",
+   "first_recorded": "ISCC-NBS 1955 in our records",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "MediumBlue"
+  ],
+  "siblings": [
+   "royal-blue",
+   "cobalt-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "hex_css": "#0000CD"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"MediumBlue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive and name records (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"stone blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 37 (on heraldry)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 170",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What hex code does Paterson give for MediumBlue?",
+   "choices": [
+    "#0000CD",
+    "#00FF00",
+    "#4169E1",
+    "#000080"
+   ],
+   "answer": "#0000CD",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pastoureau says it mattered which blue the azur of French arms was painted.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The azur of French royal arms could be sky blue, medium blue or ultramarine, per Pastoureau."
+ ],
+ "words": 183,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Hedged the lapis lazuli line to what Gage's quoted list actually says"
+  ]
+ }
+}

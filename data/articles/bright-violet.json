@@ -1,0 +1,127 @@
+{
+ "slug": "bright-violet",
+ "name": "Bright violet",
+ "hex": "#A55AF4",
+ "names": [
+  "Bright violet"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Bright violet is a descriptive name for a vivid purple, and the best history the books offer is a very old theory of how violet is made.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Bright plus violet",
+   "body": "The name joins bright to [[violet]]. Our sources list it in the 1955 ISCC-NBS system and in the 2010 xkcd survey [1]. The nearest ISCC-NBS name is \"brilliant violet\" at a distance of 11.9, and the xkcd list gives a different, more saturated purple, #AD0AFD, under the same words [1]. Compare [[vivid-violet]], [[royal-purple]] and [[purple]]."
+  },
+  {
+   "id": "history",
+   "title": "Ancient theories and a logwood lake",
+   "body": "Birren quotes Aristotle, who explained a vivid bright violet as weak sunlight mixed with a thin, dusky white [2]. That is an old theory of color, not modern evidence, and Birren's own history of such claims is treated as contested [2].\n\nIn the pigment books, Vegetable violet was a bright violet lake based on logwood, according to Mayer [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering at least 1 percent of its canvas, as photographed [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: bright plus violet",
+   "first_recorded": "1955 (ISCC-NBS) and 2010 (xkcd)",
+   "source": "ColorHub name graph"
+  },
+  "aka": [
+   "Bright Violet"
+  ],
+  "siblings": [
+   "vivid-violet",
+   "royal-purple"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "vivid-violet",
+    "gloss": "a nearby named violet"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "nearest_iscc": [
+   "brilliant violet",
+   11.9
+  ],
+  "xkcd_alt": "#AD0AFD"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub name graph and library: ISCC-NBS 1955 nearest name, sources and dates",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 2 (\"The Bewildered Philosophers\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), entry \"Vegetable violet\", p. 396",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (as photographed), data/graph/fieldnotes",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Birren, how did Aristotle say a vivid bright violet arises?",
+   "choices": [
+    "A blend of feeble sunlight with thin dusky white",
+    "Mixing red and blue paint",
+    "Burning amethyst",
+    "Boiling lichen"
+   ],
+   "answer": "A blend of feeble sunlight with thin dusky white",
+   "kind": "pick"
+  },
+  {
+   "q": "Vegetable violet was a lake pigment based on what?",
+   "choices": [
+    "Logwood",
+    "Madder",
+    "Indigo",
+    "Cochineal"
+   ],
+   "answer": "Logwood",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Aristotle's recipe for bright violet: weak sunlight over thin dusky white."
+ ],
+ "words": 159,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Aristotle theory given as old opinion; Birren marked contested.",
+   "Re-verified key claims against fact cards and book text; no changes needed."
+  ]
+ }
+}

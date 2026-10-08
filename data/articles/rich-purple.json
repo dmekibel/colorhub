@@ -1,0 +1,115 @@
+{
+ "slug": "rich-purple",
+ "name": "Rich Purple",
+ "hex": "#720058",
+ "names": [
+  "Rich Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Rich purple is a deep, reddish purple, and the phrase is older as a description than as a name: books use it for the purples that glazes and dyes could make.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A phrase before a name",
+   "body": "In the books this color shows up as description rather than a fixed term. Ball notes that a red lake glaze over a blue ground turns it to a rich purple, a trick of fifteenth-century oil painting [1]. The same book remarks that van Dyck did not seek the rich purple-red one might expect from Titian [2].\n\nIn dye history the phrase attaches to older purples. Murexide, made from guano, is called a rich purple by Garfield [3]. St Clair tells of a Florentine merchant who brought back lichen dyeing from the Levant and made a rich purple of the kind once reserved for costly murex [4]. His family's change of name to Ruccellis is told as a story, so treat it with care [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "At #720058 the swatch is dark and strongly red-leaning, closer to [[plum]] and [[mulberry]] than to [[violet]] [5]. Four book mentions use the words, none as a standard color name [1][2][3][4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive phrase",
+   "first_recorded": "undocumented",
+   "source": "Ball; Garfield"
+  },
+  "aka": [],
+  "siblings": [
+   "plum",
+   "mulberry",
+   "violet",
+   "byzantium"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "concordance of 29 color books",
+  "book_mentions": 4,
+  "swatch": "#720058 (screen approximation)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Orchil\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What glaze over a blue ground gives a rich purple?",
+   "choices": [
+    "A red lake",
+    "A white lead",
+    "A green earth"
+   ],
+   "answer": "A red lake",
+   "kind": "pick"
+  },
+  {
+   "q": "What was murexide made from?",
+   "choices": [
+    "Guano",
+    "Serpent excrement",
+    "Coal"
+   ],
+   "answer": "Guano",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A red lake glaze over blue gives a rich purple."
+ ],
+ "words": 180,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

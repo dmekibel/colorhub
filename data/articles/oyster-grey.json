@@ -1,0 +1,105 @@
+{
+ "slug": "oyster-grey",
+ "name": "Oyster Grey",
+ "hex": "#ABB087",
+ "names": [
+  "Oyster Grey"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Oyster Grey is a pale grey tinged with green and yellow, named for the mollusc, and again a name whose dictionary gloss runs brown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines oyster grey as a brownish shade of grey, and files it among the greys [1]. For the plain word he gives oyster as a greyish white, first used as a color description in 1922, on the authority of Fowler's English Usage [1]. Maerz and Paul's dictionary, though, records oyster grey from 1894 [2]. The two dates need not conflict, since one is for the bare word and the other for the compound, but the library's record is the earlier one [1][2].\n\nThe swatch is greener than either description. The library calls it a \"grayish greenish yellow\", ISCC-NBS block 105 [2]. Its neighbors are the soft green-greys, [[sage-green]], [[olive]] and [[pearl-grey]], with plain [[grey]] as the family [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 554 carry this color over at least five per cent of the canvas, as photographed, more often than 79 per cent of the named colors [3]. It peaks in the 1900s: 45 of 1,674 paintings, 1.8 times the usual rate [3]. In 44 per cent of the 360 paintings where we measured its rank, it plays a light [3]. The earliest dated match is a painting by the Master of the Osservanza of about 1430, a floor not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the oyster's shell and flesh tones",
+   "first_recorded": "Maerz & Paul, 1930 (cites 1894)",
+   "source": "Paterson, p. 292"
+  },
+  "aka": [
+   "oyster"
+  ],
+  "siblings": [
+   "sage-green",
+   "olive",
+   "pearl-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 554,
+  "iscc_nbs": "block 105, grayish greenish yellow",
+  "first_recorded": 1894
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 292, \"oyster\", \"oyster grey\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz & Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed; at least 5% of the canvas within CIEDE2000 6)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which source does Paterson cite for the first use of oyster as a color description in 1922?",
+   "choices": [
+    "Fowler's English Usage",
+    "A Victorian paint catalogue",
+    "The Oxford Atlas"
+   ],
+   "answer": "Fowler's English Usage",
+   "kind": "pick"
+  },
+  {
+   "q": "How does Paterson describe oyster grey?",
+   "choices": [
+    "A brownish shade of grey",
+    "A bright green",
+    "A deep violet"
+   ],
+   "answer": "A brownish shade of grey",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Oyster grey was in use by 1894, long before the plain word oyster was first noted as a color in 1922."
+ ],
+ "words": 225,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced 'shell's inner tones'; softened 'compound is older' inference."
+  ]
+ }
+}

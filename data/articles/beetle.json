@@ -1,0 +1,219 @@
+{
+ "slug": "beetle",
+ "name": "Beetle",
+ "hex": "#5B5940",
+ "names": [
+  "Beetle"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Beetle is a dark, greyed olive from a 1930 color dictionary, and the books have almost nothing to say about the name, but a great deal to say about beetles and color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An olive named for an insect",
+   "body": "Beetle is a grayish olive, close to [[dark-olive]], [[bronze-lustre]] and [[olive-green]] on screen [1]. The earliest record in our sources is the Maerz and Paul color dictionary of 1930, plate 16 [1]. Why the authors chose the name is undocumented, and none of the books we read explains it [1].\n\nThe swatch here sits about 2.3 units from the ISCC-NBS block called grayish olive [1]. It is dark enough to hold a white caption at a contrast of about 7 to 1 [1]. No living beetle is exactly this color; the name points at a family of dark, bronzy shells, not a single species."
+  },
+  {
+   "id": "false-friend",
+   "title": "The beetle that is not a beetle",
+   "body": "Beetles turn up constantly in books on dyes, and the usual reason is red. Finlay writes of cochineal as beetle blood and describes ground beetles mixed with vinegar as a medicine for Philip II [2]. Gurney's pigment list says carmine is made from beetles [3]. St Clair counts up to 80 female kermes insects for a single gram of dye [4].\n\nStrictly, this is loose usage. Greenfield places cochineal in the scale-insect family, and a wild one is about a third the size of a ladybug [5]. The older looseness was general: in the 1600s the word insect covered worms, slugs and frogs [6]. So the red dye that fills the books is a different animal from the one that gave this olive its name, and a different color."
+  },
+  {
+   "id": "shell",
+   "title": "Color made by a shell",
+   "body": "What beetles do make is structural color. Paterson notes that iridescence on beetles, butterflies and oil slicks comes from the structure of the surface and not from a dye [7]. Livingstone adds that beetle carapaces get some of their colors from thin transparent layers whose reflections interfere with one another [8]. Pigments absorb light; these shells instead shape it.\n\nPaterson also records the tansy beetle, whose blue-green wing cases decorated Victorian dresses, and calls it almost extinct [9]. Nature charts used beetles as swatches too: a violet oil beetle shows Blackish Green and a small bloody-nosed beetle shows Pansy Purple in Baty's plates, after drawings from an 1891 British beetle survey [10].\n\nTo see it, look for the olive-bronze of a dark shell under a lamp. Move your head and the hue slides toward green or gold, which no flat swatch can do. Birren reports, after Vosburg, that yellow traps catch more Japanese beetles than any other color [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Beetle is one of the commonest dark neutrals in painting. It appears in 2,704 of 23,781 paintings, 11.37 per cent, and is more common than 94 per cent of our named colors [12]. It peaks in the 1700s, in 9.4 per cent of 3,449 paintings, 1.3 times the museums' baseline [12].\n\nInside a painting it most often plays a hidden color, in 46 per cent of 1,763 paintings, meaning a dark accent that sits between shadow and light [12]. Our most devoted painter is Willem Roelofs, in 7 of 12 works [12]. [[painter:edgar-degas|Degas]] and [[painter:jan-brueghel-the-elder|Jan Brueghel the Elder]] use it above their peers too [12].\n\nThese are photographs of aged, varnished paintings, and varnish pushes pale colors toward olive, so a match is not proof of a pigment. The earliest match, from 1190, is 740 years older than the name itself [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (the insect, by implication)",
+   "first_recorded": "Maerz & Paul, A Dictionary of Color, 1930, plate 16",
+   "source": "ColorHub library; no book explains the name"
+  },
+  "aka": [
+   "grayish olive (ISCC-NBS)"
+  ],
+  "siblings": [
+   "dark-olive",
+   "bronze-lustre",
+   "bronzesheen"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "scarab",
+    "gloss": "another insect name, for a different dark tone"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (within-painting lens, at least 2% of the canvas; a color match is not a pigment test)",
+  "n_present": 2704,
+  "pct_present": 11.37,
+  "rank_pct": 94,
+  "century": {
+   "peak": "1700s",
+   "rate": 9.4,
+   "n": 3449,
+   "lift": 1.3
+  },
+  "role": {
+   "hidden": 0.46
+  },
+  "painters": [
+   {
+    "name": "Willem Roelofs (I)",
+    "hits": 7,
+    "n": 12,
+    "lift": 4.1
+   }
+  ],
+  "measured": {
+   "iscc": "grayish olive",
+   "de": 2.3,
+   "contrast_white": 7.12
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library and Color Graph: Maerz & Paul 1930, plate 16; ISCC-NBS nearest grayish olive; measured contrast",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, p. 221",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 65",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 3",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"iridescence\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 1",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entry on blue-green (Notting Hill and the tansy beetle)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 107-108 and 144-145",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 17",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (Color Graph field notes, 'b')",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of animal is the cochineal that gives carmine?",
+   "choices": [
+    "A scale insect",
+    "A beetle",
+    "A moth caterpillar",
+    "A shellfish"
+   ],
+   "answer": "A scale insect",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does a beetle's shell seem to change color as you move?",
+   "choices": [
+    "Thin layers in the surface interfere with light",
+    "It is coated in a dye that fades",
+    "It reflects the color of the room",
+    "The color is in the beetle's blood"
+   ],
+   "answer": "Thin layers in the surface interfere with light",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books explain why this olive was named Beetle.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Most beetles in color books are really cochineal, which is a scale insect.",
+  "A beetle's shell colors by structure, so the hue slides as you move your head."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Name origin undocumented in all sources; article is honest-short.",
+   "Books call cochineal and kermes 'beetles'; corrected in text.",
+   "Plate 16 position (I6 vs J6) differs in our data; plate given only."
+  ]
+ },
+ "words": 556
+}

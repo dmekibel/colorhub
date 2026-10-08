@@ -1,0 +1,126 @@
+{
+ "slug": "rosy-pink",
+ "name": "Rosy Pink",
+ "hex": "#F6688E",
+ "names": [
+  "Rosy Pink"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Rosy Pink is a vivid deep pink from the ISCC-NBS dictionary; the one useful book note is about a different rosy pink, the pale lake made from brazilwood.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary pink",
+   "body": "Rosy Pink is an ISCC-NBS 1955 dictionary name, and the swatch falls in the deep-pink block [2]. It is also listed in the xkcd survey of 2010 [2]. It is a lively cousin of [[pink]], [[rose]], [[salmon]] and [[coral]], more saturated than the pale pinks the phrase often suggests [2]."
+  },
+  {
+   "id": "brazil",
+   "title": "The rosy pink of a lake pigment",
+   "body": "In Ball's history of pigments, brazilwood red was made by boiling the wood in lye or alum, then precipitating a lake [1]. Adding chalk, white lead, marble dust or powdered eggshell gave a rosy pink pigment, which in England was called roset [1]. Ball adds that some historians think brazil was the foremost red lake of the Middle Ages, but he cautions that no medieval painting has been positively shown to contain it [1]. This is the sense of rosy pink that painters knew, a paler and chalkier color than our swatch [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive has this color covering at least 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: rose-like pink",
+   "first_recorded": "ISCC-NBS, 1955",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "roset (brazil lake, England)"
+  ],
+  "siblings": [
+   "rose",
+   "pink"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "rose",
+    "gloss": "a stronger, more magenta rose"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    62.9,
+    58.2,
+    7.0
+   ],
+   "iscc": "deep pink"
+  },
+  "first_record": {
+   "year": 1955,
+   "source": "ISCC-NBS"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, Rosy Pink: ISCC-NBS 1955 block 4; xkcd 2010",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Rosy Pink",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did English painters call brazil lake with white added?",
+   "choices": [
+    "Roset",
+    "Madder",
+    "Carmine",
+    "Mauve"
+   ],
+   "answer": "Roset",
+   "kind": "pick"
+  },
+  {
+   "q": "Which white substance is named by Ball as an additive to brazil lake?",
+   "choices": [
+    "Chalk",
+    "Sugar",
+    "Salt",
+    "Flour"
+   ],
+   "answer": "Chalk",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "In England, a pale brazil-wood lake was known as roset."
+ ],
+ "words": 190,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Added Ball's caveat on medieval brazil; removed speculative explanation of absence."
+  ]
+ }
+}

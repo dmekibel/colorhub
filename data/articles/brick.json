@@ -1,0 +1,332 @@
+{
+ "slug": "brick",
+ "name": "Brick",
+ "hex": "#A03623",
+ "names": [
+  "Brick"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Brick is the dark orange-red of fired clay, a color so tied to its material that cities, dye shops and dress manuals all used the word long before anyone fixed a swatch to it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of fired clay",
+   "body": "Brick is the deep orange-red of a baked clay brick, a color Paterson also files under the old adjective *lateritious* [1]. His entry for *brick-red* adds a regional note: in the United States the term means a brownish or yellowish red [1]. Related words from the same family are *testaceous*, for the reddish-brown of unglazed tiles and flowerpots, and *adobe*, a pinkish red probably named for the sun-dried bricks of Latin America [1].\n\nThe color is less fixed than the word suggests. Albers observes that real bricks run through beige, yellow and orange, and on through ochre and brown to a deep violet, so one wall can hold many \"brick\" colors [2]. The swatch here is a dark, orange-leaning red, near [[chinese-red]], [[sweet-brown]] and [[burnt-umber]] [12].\n\nOf the 7,500 color names that Deane Judd's survey at the National Bureau of Standards had identified, Garfield reports, 149 came from common things, and brick red is the example he gives [3]."
+  },
+  {
+   "id": "rome",
+   "title": "A city of red",
+   "body": "Pastoureau argues that ancient Rome was not the white marble city of films and postcards [4]. Houses and ordinary buildings were mostly baked brick in every shade of red, and brick and tile together made Rome a red city, as were the other major cities of the empire [4]. He calls the white image a false one [4].\n\nChina had a similar pairing of walls and roofs: palaces of red brick under glazed yellow tile were reserved for the emperor and his family, and Europeans came to link China with yellow [5].\n\nNot every \"red\" place is red because of brick. Pastoureau notes that Red Square in Moscow was called red in the time of the czars, before the Communist regime, and not for its brick buildings but because it was thought the city's most beautiful square [6]. A myth is easy to start from a coincidence of colors."
+  },
+  {
+   "id": "dye",
+   "title": "Brick as a dye and a dress code",
+   "body": "Brick-red was what a dyer got when madder went slightly wrong. Greenfield writes that madder reds usually leaned orange, so dyers often landed on corals, russets and brick reds, and only dyers in the Ottoman Empire, India and other Eastern countries could reliably get a rich red [7]. That is the dye behind [[flower:madder|madder]] at its most ordinary.\n\nIn the 1850s the same quiet reds had a social use [8]. English fashion manuals condemned scarlet and crimson as vulgar, yet judged dark reds, brick reds and maroon safe for a lady, above all a married one [8]. Brick red was the permitted red.\n\nOther names for the shade come from places and materials. St Clair's glossary gives *Pompeian red* as a dark brick red, from the houses uncovered at Pompeii, and *Morocco* as a brick red that began as the color of painted leather [9]. Our [[pompeian-red]] is a cousin at ΔE 9.7 [12]."
+  },
+  {
+   "id": "pigments",
+   "title": "Brick-red in the paint box",
+   "body": "As a mixed color, brick red goes back to the first systems of color names. In 1769 Schäffer's chart of reds gave compartment 76, brick red, as a mixture of minium, lead white, orpiment and English red [10]. In his Wernerian list Jameson changed the red section's *brick red* to *tile red*, and Syme's chart later carried *tile red* as number 82 [10][11]. The brick became a tile, and the name moved.\n\nChemists used the word as a description too. Mercuric oxide made by precipitation could be brick red or orange-yellow, according to Salter in 1869 [13]. A mercury chromate pigment came in a dark brick-red variety and a violet-tinged one, according to Riffault in 1874 [13]. Catechu extract could be turned brick-colored with lead salts [13].\n\nBricks were also a swindler's filler. St Clair reports that French madder was accused of being adulterated with everything from brick dust to oats [14]. Balfour-Paul lists brick dust among the substances used to add weight to indigo [15]."
+  },
+  {
+   "id": "eye",
+   "title": "Seeing brick",
+   "body": "Albers gives an exercise from his own class, after Bezold: the same light red bricks laid up with white mortar look much lighter than when laid up with black [2]. The brick's color depends on its neighbors, so a red wall seen at a distance is as much about the mortar as the clay.\n\nNeighbors can also clash. The dealer Vollard recalled the painter Sérusier telling him, in a Paris street, that when he saw him in a brick-colored overcoat beside a woman in a violet coat, the two colors \"screamed\", and he felt ill [16]. If you want to see why, stand a brick wall next to anything violet.\n\nAt the oddest end of perception, Galton recorded a subject who saw the numeral 3 as a pale brick red [17]."
+  },
+  {
+   "id": "swatch",
+   "title": "Brick and Brick Red",
+   "body": "Two entries in our data have nearly the same name and are not the same color. The swatch on this page is Brick, #A03623, a dark red-orange that comes from the xkcd color survey of 2010 and our own app, with no earlier record and an origin undocumented in our data [12]. [[brick-red]] is a different swatch, #CB4154, a brighter and pinker red that Wikipedia traces to Crayola; the two are ΔE 14.7 apart [12]. Ridgway's plate color for brick red, #915248, is greyer and browner again [12].\n\nThe Maerz and Paul dictionary of 1930 gives 1667 as the first recorded use of *brick red* [12]. Treat that as a cataloguer's date and not a measurement of when anyone first said it.\n\nIn Japanese the nearest traditional name is *edocha*, \"Edo brown\", a red-brown [12]."
+  },
+  {
+   "id": "art",
+   "title": "Brick in paintings",
+   "body": "Brick is one of the more common named colors in old paintings, and it peaks in the Quattrocento [18]. In our archive of 23,781 paintings, 569 contain it on at least 5 per cent of the canvas [18]. From the 1400s, 91 of 945 paintings contain it, which is 4 times the rate expected from the same museums [18]. The decade with the highest share is the 1390s, with 5 of 25 [18]. We cannot say from the data why, and photographs of aged paintings are not a pigment test.\n\nThe largest single share belongs to a Sienese work of 1440, *Payment of Salaries to the Night Watchmen in the Camera del Comune of Siena*, where it covers about half the surface [18]. The painting with the best-known name among the top six is Titian's [[painting:nga-41638|Cardinal Pietro Bembo]] from 1539, about a third brick-colored [18]. Among the painters who use it at the highest rates in the archive are [[painter:pontormo|Pontormo]], [[painter:albrecht-durer|Dürer]] and [[painter:sandro-botticelli|Botticelli]] [18].\n\nIn Nepal and Tibet it also stands out, in 3 of 25 and 4 of 47 works [18]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 569 contain this brick (within ΔE 6 of the swatch, on at least 5 per cent of the canvas, as photographed), a rate of 2.4 per cent [18].\n\nBy century: 91 of 945 paintings from the 1400s, 113 of 2,231 from the 1500s and 113 of 6,394 from the 1600s [18]. Pontormo has it in 3 of 13 works, Dürer in 6 of 47, Caravaggio in 5 of 47 and Botticelli in 4 of 48 [18]. \n\nThe word *brick* in printed English peaks in the 1910s, but it also means the object, so it is not a clean color count and we do not lean on it [19]. These are photographs of paintings, not pigment tests, and screen colors are approximate."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "fired clay bricks",
+   "first_recorded": "our swatch dates from the xkcd survey (2010); the word brick red appears in Schäffer's 1769 chart of reds; the 1930 Maerz and Paul dictionary gives 1667 for brick red",
+   "source": "Baty, Nature's Palette, p. 18; Paterson, Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "brick red",
+   "lateritious",
+   "brique"
+  ],
+  "siblings": [
+   "brick-red",
+   "pompeian-red",
+   "chinese-red",
+   "sweet-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "brick-red",
+    "gloss": "a brighter, pinker swatch (#CB4154) traced to Crayola, ΔE 14.7 away"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "edocha (江戸茶), Edo brown"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A03623",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 569,
+  "top_paintings": [
+   "rijks-20026322",
+   "commons-Q59827122",
+   "commons-Q130221017",
+   "cma-135486",
+   "commons-Q118436253",
+   "nga-41638"
+  ],
+  "century_1400s": {
+   "hits": 91,
+   "n": 945,
+   "lift": 4.02
+  },
+  "peak_decade": {
+   "decade": 1390,
+   "hits": 5,
+   "n": 25
+  },
+  "painters": [
+   {
+    "name": "Pontormo",
+    "hits": 3,
+    "n": 13
+   },
+   {
+    "name": "Albrecht Dürer",
+    "hits": 6,
+    "n": 47
+   }
+  ],
+  "measured": {
+   "lch": [
+    38.3,
+    55.4,
+    39
+   ],
+   "contrast_white": 6.89,
+   "nearest": [
+    [
+     "Chinese Red",
+     2.8
+    ],
+    [
+     "Reddish brick",
+     3.0
+    ],
+    [
+     "Sweet Brown",
+     4.3
+    ]
+   ],
+   "brick_red_de": 14.7
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"brick\", \"brick-red\", \"lateritious\", \"testaceous\", \"adobe\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, pp. 60 and 139",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 13 (\"Physical Acts\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 14 (\"Red in Everyday Life\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, p. 32",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Red, notes (on Red Square)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, p. 125",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 18 and 26 to 27",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 133 and 205 (Syme's chart)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub library and graph (Brick, Brick Red, nearest names, xkcd, Ridgway, Maerz & Paul, Japanese list); ΔE (CIEDE2000) computed by us",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"red precipitate\" (Salter, 1869), \"mercury chromate\" (Riffault, 1874), \"catechu\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 70 (madder)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 122",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 192",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "data",
+   "cite": "Google Books Ngram via the ColorHub graph fieldnotes (all senses of the word)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py, ΔE 6, at least 5% cover)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Pastoureau, what made ancient Rome a red city rather than a white marble one?",
+   "choices": [
+    "Baked brick and tile in every shade of red",
+    "Walls painted with cinnabar",
+    "Red marble from quarries",
+    "Red dyed awnings"
+   ],
+   "answer": "Baked brick and tile in every shade of red",
+   "kind": "pick"
+  },
+  {
+   "q": "Albers, following Bezold, showed that the same red bricks look lighter with which mortar?",
+   "choices": [
+    "White mortar",
+    "Black mortar",
+    "Grey mortar",
+    "Red mortar"
+   ],
+   "answer": "White mortar",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Brick and Brick Red are the same swatch in ColorHub.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rome was a city of red brick and tile; the white marble city is a false image, says Pastoureau.",
+  "The same red bricks look lighter with white mortar than with black, an old exercise from Bezold and Albers.",
+  "Brick dust was a swindler's filler for madder and indigo."
+ ],
+ "words": 1207,
+ "status": "checked",
+ "checked": {
+  "by": "L7 article writer (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Mercury-chromate and red-precipitate dates are the Pigment Compendium's attributions (Riffault 1874, Salter 1869).",
+   "Jameson/Syme tile red is from Baty; Syme's chart edition year is our library's 1821.",
+   "Archive matches are look-alike hues, not pigment tests.",
+   "Brick (xkcd) and Brick Red (Crayola/Wikipedia) kept apart on purpose."
+  ]
+ }
+}

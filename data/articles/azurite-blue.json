@@ -1,0 +1,170 @@
+{
+ "slug": "azurite-blue",
+ "name": "Azurite Blue",
+ "hex": "#434D7B",
+ "names": [
+  "Azurite Blue"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Azurite is a bright blue copper carbonate mineral that painters ground into one of Europe's main blues before ultramarine and Prussian blue; the color name now points at a darker, duller swatch than the stone.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "The mineral",
+   "body": "Azurite is a hydrated copper carbonate, Cu3(CO3)2(OH)2, the blue twin of the green mineral malachite [1]. Its synthetic counterpart was widely used as a pigment under the name blue verditer [1]. Synonyms from older sources include mountain blue, blue ashes, Italian blue and Bremen blue [2][3].\n\nEgyptians had already ground azurite and malachite among their natural pigments [4]."
+  },
+  {
+   "id": "trade",
+   "title": "Rival to lapis",
+   "body": "In Renaissance Florence the Jesuati of the convent of San Giusto alle Mura made a speciality of the best lapis lazuli and azurite blues, as Gage describes in his history of artists' suppliers [5]. From the seventeenth century, Balfour-Paul reports, the prices of ultramarine and azurite blues were often so high that artists turned to the cheaper indigo [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is darker than the stone",
+   "body": "The library entry combines Ridgway's 1912 plate IX, ISCC-NBS block 173 and the Maerz and Paul dictionary, which dates the name to 1816 [7]. All three show a dark, greyed blue, much duller than the bright mineral the Compendium describes [1][7]. Its nearest everyday name is [[dusk]], and [[cobalt]] is ten units away [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this swatch, covering five per cent of the canvas or more, in 67 of 23,781 paintings [8]. Henri Matisse carries it in 5 of his 50 paintings, about 35 times the average rate [8]. The decade of the 1910s peaks, in 11 of 523 paintings [8]. These are photographed paintings, not pigment tests, and a dark blue match says nothing about whether azurite was used [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mineral azurite",
+   "first_recorded": "1816 (Maerz and Paul, as a color name)",
+   "source": "Pigment Compendium; data/library.json"
+  },
+  "aka": [
+   "mountain blue",
+   "blue verditer (synthetic)"
+  ],
+  "siblings": [
+   "cobalt-blue",
+   "lapis-lazuli"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cobalt-blue",
+    "gloss": "a brighter, unrelated mineral-chemistry blue"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#434D7B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 67,
+  "painters": [
+   [
+    "Henri Matisse",
+    5,
+    50,
+    35.49
+   ]
+  ],
+  "nearest": [
+   "Dusk",
+   null
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 46, 'azurite'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 270, \"mountain blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 74, 'blue ashes' group",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 135",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 219",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Ridgway 1912 pl. IX, ISCC-NBS 1955 block 173, Maerz & Paul 1930 pl. 36 K 7",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did artists use indigo instead of azurite and ultramarine from the 1600s?",
+   "choices": [
+    "Those blues were very expensive",
+    "Indigo was a stronger blue",
+    "Azurite was banned",
+    "Indigo never faded"
+   ],
+   "answer": "Those blues were very expensive",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: azurite is the blue form of the same copper carbonate family as malachite.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Florence had a convent that specialized in the finest lapis and azurite blues."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims checked against Compendium, Ball, Gage, Balfour-Paul; no changes needed"
+  ]
+ },
+ "status": "checked",
+ "words": 267
+}

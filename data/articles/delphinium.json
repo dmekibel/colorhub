@@ -1,0 +1,147 @@
+{
+ "slug": "delphinium",
+ "name": "Delphinium",
+ "hex": "#597287",
+ "names": [
+  "Delphinium"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Delphinium is a color named for the tall blue garden flower, a name that the chart-makers kept even after the swatch grew greyer than the petals.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower's blue",
+   "body": "Paterson defines *delphinium blue* as a blue tinged with violet, and he adds that *delphinium* alone is also used [1]. He lists *delphine* as a shade possibly the same, and *Devonshire blue* as a paler delphinium blue [1]. All of these sit in his blue family [1].\n\nThe poet and filmmaker Derek Jarman used the flower in *Chroma*, his book on color, which has a blue poem with the line \"delphinium days\" and, in a later poem, a blue delphinium placed on a grave [2]. In Baty's survey of historical color charts, the petals of the plant also are the plate's example of pitch, or brownish black [3]. The flower, then, runs from violet-blue to near-black."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is greyer than the flower",
+   "body": "This swatch comes from Maerz and Paul's *Dictionary of Color* of 1930, as cited in the ISCC-NBS circular of 1955 [4]. The system calls the nearest region a grayish blue, 4.0 CIEDE2000 units away [4]. It is a muted slate blue, with a lightness of 47 and chroma of only 15 [4]. Its hue leans slightly toward violet, which matches Paterson's description, but Paterson's blue tinged with violet suggests a stronger color than this low-chroma swatch [1][4]. Close neighbors are [[steel-blue]], [[blue-grey]] and [[periwinkle]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is a common muted blue in paint. In our archive of 23,781 paintings, a color within six units covers at least five per cent of the canvas in 212 works [5]. It is most often a quiet mid-tone, and in 22 per cent of cases a highlight [5]. Claude Monet is its most devoted user in the within-painting lens, in 4 of 50 of his works here, about five times the baseline, though that is a small n [5]. The twentieth century shows 2.3 times the expected rate [5]. As always these are photographs of varnished paintings, not pigment tests [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the delphinium flower",
+   "first_recorded": "Maerz and Paul, 1930",
+   "source": "Paterson, \"delphinium blue\"; ColorHub library"
+  },
+  "aka": [
+   "delphinium blue",
+   "delphine"
+  ],
+  "siblings": [
+   "steel-blue",
+   "blue-grey"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "campanula",
+    "gloss": "another flower name in the same blue-violet range"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#597287",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 212,
+  "role": {
+   "mid": 0.58,
+   "shadow": 0.2,
+   "highlight": 0.22
+  },
+  "measured": {
+   "lch": [
+    46.9,
+    14.9,
+    255.7
+   ],
+   "iscc": "grayish blue",
+   "de2000": 4.0
+  },
+  "century_1900s_lift": 2.3
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 144-145, 470, 490",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 59, 67",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 65-66 (after Oudemans, 1865)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930 as cited by ISCC-NBS Circular 553 (1955); CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); ColorHub graph field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say delphinium blue is tinged with?",
+   "choices": [
+    "Violet",
+    "Green",
+    "Orange",
+    "Grey"
+   ],
+   "answer": "Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch here is more saturated than a garden delphinium.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Delphinium blue is a violet-tinged blue; the chart swatch is a greyed slate."
+ ],
+ "words": 320,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Jarman: grave is not a friend's and not the close of the blue poem; Baty example is pitch/brownish black."
+  ]
+ }
+}

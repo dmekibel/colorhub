@@ -1,0 +1,139 @@
+{
+ "slug": "moss-grey",
+ "name": "Moss Grey",
+ "hex": "#7A7B6D",
+ "names": [
+  "Moss Grey"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Moss Grey is a muted greenish grey, a color defined by the old RAL system and the ISCC-NBS names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A greeny-grey",
+   "body": "Paterson defines moss-grey simply as a greeny-grey [1]. The swatch here is documented twice: as RAL 7003 in the German RAL system, dated 1927 in our sources, and as a color in the 1955 ISCC-NBS lists, block 109, where the name is \"light olive gray\" at 5.3 CIEDE2000 units away [2]. The Maerz and Paul dictionary of 1930 is cited as a source by the ISCC-NBS circular [2]. RAL values on screen are approximate [2].\n\nIts neighbors are [[moss-green]], a more yellow-green color, and [[slate-grey]]; the nearest name in our learning set is taupe, 9.3 away [2][1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive a color near it appears in 1,516 paintings, 6.37% of the total, more often than 88% of the named colors, as photographed [3]. Among 795 paintings where the within-painting lens finds it, it most often plays a light [3]. It is most devoted to Jacob Isaacksz van Ruisdael, in 6 of his 18 works here [3]. As a printed phrase, *moss grey* peaks in the 1850s [4]. These are photographs of aged, varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "moss, the plant; the hue is a muted greenish grey",
+   "first_recorded": "RAL 7003 (1927 in our sources); ISCC-NBS 1955",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "RAL 7003"
+  ],
+  "siblings": [
+   "moss-green",
+   "slate-grey",
+   "olive"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "moss-green",
+    "gloss": "a more yellow green; Moss Grey is a muted grey"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#7A7B6D",
+   "min_cover": 0.01
+  },
+  "n_present": 1516,
+  "role": "light in 34% of 795 paintings",
+  "measured": {
+   "lch": [
+    51,
+    8,
+    112
+   ],
+   "iscc": "light olive gray, block 109, dE 5.3",
+   "nearest": [
+    [
+     "Taupe",
+     9.3
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 1850
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"moss-grey\", p. 270",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json and data/graph nodes: ISCC-NBS 1955, Munsell conversion), CIEDE2000 distances; RAL 7003",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, all senses of the phrase (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson define moss-grey?",
+   "choices": [
+    "A greeny-grey",
+    "A bluish white",
+    "A reddish brown",
+    "A pink"
+   ],
+   "answer": "A greeny-grey",
+   "kind": "pick"
+  },
+  {
+   "q": "Which RAL number matches Moss Grey?",
+   "choices": [
+    "RAL 7003",
+    "RAL 1027",
+    "RAL 9010",
+    "RAL 5002"
+   ],
+   "answer": "RAL 7003",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Moss Grey is common in painting: 1,516 of the 23,781 paintings in our archive hold a color near it."
+ ],
+ "words": 198,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'most common greys in painting' and Paterson 'named from plants' claim."
+  ]
+ }
+}

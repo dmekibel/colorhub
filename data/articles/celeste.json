@@ -1,0 +1,161 @@
+{
+ "slug": "celeste",
+ "name": "Celeste",
+ "hex": "#B2FFFF",
+ "names": [
+  "Celeste"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Celeste is a very pale, cool cyan whose name means heavenly or sky blue; as a word it is older than the swatch, and the books that mention it use it for sky-blue pigments and cloth.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A heavenly name",
+   "body": "*Celeste* means heavenly, and in French the same idea is *bleu céleste*, heavenly blue [2]. It belongs to the family of sky words for blue: cerulean comes from the Latin *caelum*, the vault of heaven [2].\n\nThe swatch here is a pale, almost icy cyan. Our data does not document where this exact color name entered a system, and the only source in our set is a wiki list [3]. So the swatch should be read as a modern definition of the word, not as a historic pigment."
+  },
+  {
+   "id": "florence",
+   "title": "Celeste in medieval Florence",
+   "body": "The word is old as a name for a blue cloth. In the second half of the thirteenth century, Florentine dyers and buyers saw the red *scarlatto* and *vermiglio* challenged by a run of blue tones, and *celeste* is one of seven named in a note by Pastoureau, beside *persio*, *celestino* and *azzurino* [4]. The note says patrician blue fashions seem to have reached Florence before Milan, Genoa or Venice [4]. Nothing in that list tells us how pale or green any of them was, so the medieval celeste cannot be matched to this swatch."
+  },
+  {
+   "id": "cerulean",
+   "title": "Bleu céleste, the pigment",
+   "body": "By the nineteenth century the French phrase was a trade name [1]. Cobalt stannate, a mixture of cobalt and tin oxides, became available as a watercolor in England in the 1860s from the firm Rowney, and by the 1870s as an oil color, sold as cerulean blue in England and *bleu céleste* in France [1]. Ball describes it as having a greenish tinge, a little like azurite [1]. The pigment dictionary files *bleu céleste* as a synonym for cerulean blue and for cobalt tin oxide [5].\n\nGage's notes point to a 1902 handbook (Vibert) on the reputation of *bleu celeste*, where it is grouped with Prussian blue, among others [6]. Signac was one of the Neo-Impressionists who liked cerulean enough to use it [1][6]. Ball's greenish tinge is not what this icy swatch shows, so treat the swatch as the word's modern color, not the pigment's."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive has this color covering at least 1% of its canvas, as photographed [7]. That describes the archive, not painting as a whole, and a pale cyan this bright is rare in aged, varnished pictures [7]. If you want the painted version of heavenly blue, look at [[cerulean-blue]], [[sky-blue]], [[powder-blue]] and [[light-blue]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "French bleu céleste, heavenly blue",
+   "first_recorded": "as a Florentine blue name by the later 1200s (Pastoureau); this swatch's source origin undocumented",
+   "source": "Pastoureau, Blue, ch. 12 notes; Ball, Bright Earth, ch. 15"
+  },
+  "aka": [
+   "bleu céleste",
+   "heavenly blue"
+  ],
+  "siblings": [
+   "cerulean-blue",
+   "sky-blue",
+   "powder-blue",
+   "light-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cerulean-blue",
+    "gloss": "The pigment sold as bleu céleste is a deeper, slightly greenish blue"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bleu céleste"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B2FFFF",
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "origin": "undocumented in our data"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15 (\"Bright Earth\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, entry \"cerulean blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub name data (Wikipedia color list), checked 2026-10-08",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 12, notes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entry \"bleu celeste\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, notes on cerulean and Signac",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub painting archive, field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the French trade name bleu céleste usually refer to in the 1800s?",
+   "choices": [
+    "Cerulean blue, a cobalt tin pigment",
+    "Ultramarine from lapis",
+    "Indigo dye",
+    "Egyptian blue"
+   ],
+   "answer": "Cerulean blue, a cobalt tin pigment",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the pigment sold as cerulean is as pale as the Celeste swatch.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Celeste means heavenly: a thirteenth-century Florentine blue and a nineteenth-century paint name.",
+  "In France, cerulean was sold as bleu céleste."
+ ],
+ "words": 412,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported Italian-etymology claim (Coles gives only Latin caelum and French bleu céleste).",
+   "Gage 1902 note reworded to what it says (reputation, grouped with Prussian blue).",
+   "Replaced unsourced 'much deeper' cerulean claim with Ball's greenish tinge."
+  ]
+ }
+}

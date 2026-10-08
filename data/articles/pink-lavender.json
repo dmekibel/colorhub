@@ -1,0 +1,125 @@
+{
+ "slug": "pink-lavender",
+ "name": "Pink Lavender",
+ "hex": "#D8B2D1",
+ "names": [
+  "Pink Lavender"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pink Lavender is a soft, dusty pink-violet, a descriptive name that the books we hold never discuss as a single color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color of two words",
+   "body": "The library finds Pink Lavender in Wikipedia's color lists and in the ISCC-NBS system of 1955, block 252, where it is classed as pale [1]. The nearest named color is [[thistle]], 4.5 units away [1]. The name simply combines [[pink]] and [[lavender]]. Who first used it as one name is undocumented.\n\nTwo books mention pink and lavender side by side, but as separate colors. Finlay lists them among the colors of pearls, which range from white through champagne, apricot, bronze, pink and lavender to gray, black and, very rarely, green [2]. Birren, in a list of well-smelling colors, puts pink, lavender, pale yellow and green first, and treats this as an opinion about associations rather than a measurement [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is light, with a contrast against white of 1.87 [1]. No painting in our archive of 23,781 has a color within six units of it covering at least five per cent of the canvas [4]. As photographed: museum photographs of aged, varnished paintings; a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pink and lavender, combined",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library; ISCC-NBS 1955 block 252"
+  },
+  "aka": [],
+  "siblings": [
+   "thistle",
+   "lilac"
+  ],
+  "parent": "lavender",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D8B2D1",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    77,
+    22,
+    331
+   ],
+   "contrast_white": 1.87,
+   "nearest": [
+    [
+     "Thistle",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Wikipedia list, ISCC-NBS 1955 block 252); CIEDE2000 distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Finlay's list, which of these is a pearl color?",
+   "choices": [
+    "Lavender",
+    "Crimson",
+    "Cobalt",
+    "Olive"
+   ],
+   "answer": "Lavender",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our books treat Pink Lavender as a historic dye or pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pearls can be pink or lavender: look for it in the overtone of a cultured pearl.",
+  "Pink Lavender is a name made of two colors."
+ ],
+ "words": 190,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

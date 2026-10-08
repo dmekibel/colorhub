@@ -1,0 +1,142 @@
+{
+ "slug": "banana-yellow",
+ "name": "Banana Yellow",
+ "hex": "#FAFE4B",
+ "names": [
+  "Banana Yellow"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Banana Yellow is the bright yellow of a banana skin, here as a vivid greenish yellow from the 2010 xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The skin of the fruit",
+   "body": "Paterson's dictionary defines banana as the yellow of the banana skin and notes the variant *banana-yellow* [1]. The swatch comes from the xkcd survey of 2010 [2]. The nearest ISCC-NBS category is brilliant greenish yellow, about 6 units away [2]. Close neighbors are [[bright-yellow]], [[lemon-yellow]] and [[banana]] [3]. Their distances are 3.4, 3.6 and 4.6 units, so the plain Banana name is the farthest of the three, and the two yellows that carry no fruit name sit closer to this swatch than the fruit does [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 3 paintings in our archive of 23,781 hold this color, as photographed, rarer than 79% of named colors [4]. The earliest is a Gauguin of 1893 [4]. The word peaks in printed English in the 2010s, after rising fastest in the 2000s, though it also names the fruit [5]. These are photographs of varnished paintings, not pigment tests."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the banana's skin",
+   "first_recorded": "xkcd survey, 2010 (library source)",
+   "source": "ColorHub library; Paterson"
+  },
+  "aka": [
+   "banana-yellow"
+  ],
+  "siblings": [
+   "bright-yellow",
+   "lemon-yellow",
+   "banana",
+   "canary"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 3,
+  "rarer_than_pct": 79,
+  "measured": {
+   "lch": [
+    96.7,
+    82.8,
+    105.0
+   ],
+   "nearest": [
+    [
+     "Bright Yellow",
+     3.4
+    ],
+    [
+     "Lemon Yellow",
+     3.6
+    ],
+    [
+     "Banana",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 43 (\"banana\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): xkcd 2010; ISCC-NBS nearest brilliant greenish yellow (dE 6.1)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes) (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache (Google Books)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say banana yellow is?",
+   "choices": [
+    "The yellow of the banana skin",
+    "The yellow of ripe flesh",
+    "A synthetic dye",
+    "A mineral pigment"
+   ],
+   "answer": "The yellow of the banana skin",
+   "kind": "pick"
+  },
+  {
+   "q": "Which ISCC-NBS name is nearest this swatch?",
+   "choices": [
+    "Brilliant greenish yellow",
+    "Deep orange",
+    "Dull olive",
+    "Pale pink"
+   ],
+   "answer": "Brilliant greenish yellow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Look at a banana's skin: this swatch is its greener, sharper cousin."
+ ],
+ "words": 165,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed unsupported canary/maize and plain-Banana comparisons and lemon-leaning inference"
+  ]
+ }
+}

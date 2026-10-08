@@ -1,0 +1,465 @@
+{
+ "slug": "orpiment",
+ "name": "Orpiment",
+ "hex": "#E2C247",
+ "names": [
+  "Orpiment",
+  "Orpiment Orange"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Orpiment is the bright, slightly lemony yellow of an arsenic mineral: its Latin name means gold paint, it gave the world the word arsenic, and for more than three thousand years painters used it as gold's stand-in while trying not to poison themselves.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name and the mineral",
+   "body": "Orpiment is a mineral before it is a color: a soft, yellow sulfide of arsenic, As2S3, that is about 60 per cent arsenic by weight [18][8]. Its name is a worn-down form of the Latin *auripigmentum*, \"gold paint\", a word already used by Vitruvius and Pliny [18][2]. Vitruvius says the Roman supply came from Pontus, on the Black Sea coast of northern Anatolia [18].\n\nThe mineral also named a poison. Theophrastus called it *arsenikon* in Greek, and Pliny's Latin form, *arrhenicum*, is the root of the English word arsenic [22][2]. Coles traces the Greek word one step further back, to a Persian word meaning gold-colored [12]. So the element took its name from the yellow paint, not the other way round.\n\nOrpiment rarely occurs alone. It forms crusts and grains alongside its orange-red cousin realgar, in arsenic veins, around hot springs and as a deposit from volcanic vents near Naples and in the Aeolian Islands [18]. The two convert into each other: Agricola, writing in 1556, made realgar by heating orpiment in a sealed crucible for five hours [21]. In China the pair were paired by name as well, with realgar the masculine yellow and orpiment the feminine one [13].\n\nThe color shifts with the chemistry. By Pastoureau's account the yellow is clearer when the mineral holds more sulfur and leans toward orange when it holds more arsenic [15]. The Pigment Compendium describes the range as yellow to greenish yellow [18], while Egyptian samples run from bright yellow to deep orange [16]."
+  },
+  {
+   "id": "history",
+   "title": "Gods, tombs and Roman mines",
+   "body": "Orpiment is among the oldest bright pigments. Egyptian painters ground it straight from the mineral, alongside realgar, malachite and azurite [1]. The Pigment Compendium dates its early use to the Middle and New Kingdoms, between the sixteenth and eleventh centuries BC, on painted coffins, on stelae and as a cosmetic [18][12]. It decorates the walls of Tutankhamun's tomb, and St Clair reports a small bag of it found on the tomb floor [8].\n\nThe yellow also had a job. In Egyptian funerary painting the bodies of gods and goddesses are often painted a vivid orpiment yellow, while men are red-brown and women yellow-beige [16][19]. Pastoureau links this to the Egyptian idea of gold as the flesh of the sun and the gods, and notes that orpiment sometimes stood in for gold itself [16]. Painters also cut it with cheaper yellow ochre, and on papyri it has often decayed to a white arsenic oxide [18].\n\nThe Etruscans used it more sparingly: the tomb paintings at Tarquinia are mostly ochre yellows, with only a few traces of orpiment [16]. Rome traded it widely. A first-century Greek merchant's guide, the *Periplus of the Erythraean Sea*, records orpiment and realgar shipped to Indian ports such as Barygaza [21]. Jarman names Smyrna as a source [29], and the Romans, aware of the danger, used slaves to mine it [2][12].\n\nRome also filed it oddly. Jarman's summary of the ancient scheme puts orpiment among the sombre colors, beside a red-brown earth and a chalk white, not among the brilliant ones [28]."
+  },
+  {
+   "id": "gold",
+   "title": "The color of gold",
+   "body": "The name was a promise, and some took it literally. Ancient writers fostered the alchemical idea that orpiment contained gold itself [2]. Pliny tells how the emperor Caligula had a great mass of it smelted in the hope of a profit [2][8]. St Clair notes that the attempt came to little, and the reason is simple: orpiment contains no gold at all [8].\n\nIlluminators used the resemblance honestly. Despite its price and its poison, medieval painters of manuscripts reached for orpiment as a stand-in for gold leaf [15]. Ball notes that mosaic gold, a tin sulfide also used as false gilding, was so little golden that it could be mistaken for orpiment or even ochre [2]. Cennino Cennini, writing around 1400, still judged orpiment the yellow closest to gold of any color [2][8].\n\nA Chinese proverb quoted in the Pigment Compendium makes the same point with arithmetic: a few taels of orpiment can stand in for a great weight of gold leaf [18]. Where to look today: in an illuminated page, the flat, slightly lemony yellow that sits where gold would be expected but does not shine is often a pigment imitation, and orpiment is one of the candidates."
+  },
+  {
+   "id": "art",
+   "title": "Manuscripts and painters",
+   "body": "Orpiment's bright, clean yellow made it a favorite of the book. It has been identified in the Book of Kells and on Elizabethan portrait miniatures [18]. Jarman lists it in Egyptian, Persian and Byzantine manuscripts [29], and St Clair adds the walls of the Taj Mahal [8]. The Pigment Compendium notes another use: the arsenic in it kept insects away from manuscripts [18].\n\nIt was also the yellow half of many medieval greens. Cennini gives recipes that mix it with indigo or ultramarine [34], and a recipe collection copied in 1431 records indigo with orpiment, usable on parchment, canvas, wood or leather [17]. Islamic manuscript painters mixed the same two for blue-greens [25], a safer route than verdigris, which tended to blacken.\n\nPanel and canvas painters were more cautious. In northern Europe patrons cared little about yellows, so painters chose cheaper lead-tin yellow over the more attractive and dearer orpiment [3]. By Ball's account Lucas Cranach is the only German painter of his time known to have used it, and he happened to own a pharmacy [3].\n\nVenice was different. The city was the best market for pigments in Europe, and Titian used an unusually wide range, orpiment and realgar among them; realgar was on sale there from about 1490 [3][31]. Paolo Veronese, working in Venice from 1555, used every color the city offered, orpiment included [4]. Van Dyck, by the art forger Eric Hebborn's account, used it with enthusiasm, but laid it in touches over areas already underpainted in duller yellows [10]. The Pigment Compendium's authors found it in Rubens's *Massacre of the Innocents* [18].\n\nUse rose again in the eighteenth century, mainly in greens mixed with the new [[prussian-blue]] [4][9]. Thomas Bardwell's 1756 manual lists orpiment among the pigments for landscape greens, and Jan van Huysum swapped indigo for Prussian blue in his flower-piece greens by 1736 [4]."
+  },
+  {
+   "id": "chemistry",
+   "title": "A bad neighbor",
+   "body": "Orpiment's real problem in the paintbox was chemistry. Its sulfur reacts with pigments containing copper or lead [18][8]. Mixed with verdigris in a watery binder such as egg or size, the copper and sulfur form black copper sulfide, which ruins what would otherwise be a bright grass-green [5]. Lead white suffers too: placed next to sulfur pigments like orpiment, it turns grey and then blackish [32].\n\nPainters were warned for centuries. The tenth-century writer Heraclius wrote that it did not agree with folium, a plant purple, nor with green or with minium (red lead), and in 1584 Giovanni Paolo Lomazzo called it an enemy of every pigment except a short list of earths, blues and lake [5]. Veronese obeyed: in his *Vision of Saint Helena*, of about 1570 to 1580, the orpiment is kept carefully apart from its neighbors [5][8]. Harley suggests this is why orpiment shows up so often in heraldry, where a field of yellow could be painted alone [18].\n\nIt failed in other ways as well. Roman authors and Cennini agreed that it could not be used in fresco, where it blackens [18][15]. In oil it dried badly; the physician Théodore de Mayerne recommended grinding it in oil first boiled with litharge, and others added powdered glass [18]. Its fumes were poisonous and smelled foul, which put many artists off it entirely [18].\n\nCennini's own warning is the line every pigment book repeats: orpiment is really poisonous, and the painter must not soil his mouth with it [2][8]. He thought it was made by alchemy and seems not to have known that the mineral occurs in nature [18][8]. Pastoureau adds that the artificial kind, made by fusing sulfur with realgar, darkened faster than the natural mineral [15]."
+  },
+  {
+   "id": "kings-yellow",
+   "title": "King's yellow and the end of orpiment",
+   "body": "By the seventeenth century much of the orpiment sold to painters was made, not mined. Coles dates the manufactured version, called King's yellow, to the seventeenth century [12]. The Pigment Compendium is more careful: the Dutch used synthetic orpiment in the 1600s, but the name King's yellow appears in English sources only in the eighteenth century [19][20]. Robert Dossie's 1764 handbook describes making it by subliming sulfur with arsenic [20].\n\nWhere the name came from is not certain. One suggestion, offered tentatively, is that it echoes Arabic alchemical texts that called orpiment and realgar the two kings [20][12]. A cheaper, safer substitute existed even then: a yellow lake from the weld plant, called arzica [2][14]. Books disagree about that word. Coles thinks *arzica* is probably a corruption of *arsenikon*, while the Pigment Compendium, following Merrifield, keeps the dye apart from an orpiment term, *arzicon*, and warns against confusing the two [14][19].\n\nNatural orpiment kept its trade routes. Terry, in 1893, named Hungary and the Harz Mountains as sources and said the finest golden orpiment came from Persia [19]. China exported the natural mineral to the West in the nineteenth century, which is why it was also sold as Chinese yellow [18]. The end came with chemistry: as cadmium yellow and other inert, less toxic yellows arrived in the nineteenth century, orpiment was largely phased out by about 1900 [12][18].\n\nColor theory kept a place for it on paper. In the later seventeenth century the English physician Francis Glisson proposed a color solid built from real pigments, with orpiment for its yellow scale [26]. Moses Harris later used King's yellow as one of his three primaries, beside vermilion and ultramarine [27]. Isaac Newton found that orpiment ground with purple, light green and blue looked white from several paces away [7]."
+  },
+  {
+   "id": "world",
+   "title": "Beyond the paintbox: Asia, medicine and indigo",
+   "body": "Elsewhere orpiment was handled with less fear. Finlay found lumps of it, and of realgar, for sale in a traditional pigment shop in Hong Kong [9]. The German naturalist Georg Eberhard Rumphius, whose *Ambonese Curiosity Cabinet* was published in 1705, found it sold in Java, Bali and China [9][8]. He reports it used on paper and on a gold, red and white linen called *krinsing*, which was smoked for days to fix the color [9].\n\nRumphius also saw it taken as medicine, in small doses, and in 1660 in Batavia he met a woman whom an overdose had driven mad [9][8]. Finlay adds that arsenic-eating persisted in the Tyrol into the late nineteenth century [9]. Coles notes that it had been worn as a cosmetic in ancient Egypt long before [12].\n\nOrpiment also helped make blue. European dyers in the sixteenth century tried an Indian method that used arsenic sulfide in the indigo vat, and the woad lobby seized on its dangers in their campaign against [[indigo]] [23]. In England in the 1730s, a technique called pencil blue added orpiment to an indigo vat so that the dye stayed unoxidized long enough to be brushed onto cloth [24]. Ball describes the same idea behind English blue printing, mechanized with wooden blocks from 1764 [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and its relatives",
+   "body": "The swatch on this page is the Orpiment of Maerz and Paul's 1930 *Dictionary of Color*, a strong yellow on plate 10 [36]. Their dictionary dates the English name to 1386 and *auripigmentum* to 1398 [36]. On screen it sits about four units from our plain [[yellow]], a shade warmer and duller than [[lemon-yellow]] [36].\n\nThe mineral itself can be paler and greener or deeper and more orange, so treat the chip as one reading of a range [18][16]. Werner's *Nomenclature of Colours*, in Syme's edition of 1821, has a separate [[orpiment-orange]], number 78, shown on the nasturtium flower and the neck ruff of the golden pheasant [36][33]. Around 1703 the chemist John Francis Vigani put a lump of orpiment in his Cambridge cabinet of drugs, and Baty matches it to Werner's King's Yellow [33].\n\nOrpiment's neighbors in the yellow box were all difficult. [[gamboge-yellow|Gamboge]] was poisonous too, and [[indian-yellow]] had an uncertain origin [8]. The safe yellow of the ancient world was [[ochre]], and that is the color orpiment was most often cut with [18]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six units of this swatch covers at least five per cent of the canvas in 98 works [35]. Inside a painting it is nearly always the lightest note: in 96 per cent of those works it ranks as a highlight [35]. The earliest dated example is Fra Angelico's *[[art:commons-Q3797771|Coronation of the Virgin]]* of 1434, where the match most likely falls on the gilded heaven, a reminder of how close this yellow is to [[gold]] [35].\n\nThe strongest signal comes from one place. Thirty of the 98 works are Indian, ten times the archive's rate, and Kalighat painting from nineteenth-century Calcutta carries it 53 times as often as the archive average, in 21 of 96 sheets [35]. The work where it covers most is the Kalighat *[[art:cma-162430|Manasa, the Snake Goddess]]* of about 1890, at 62 per cent of the image [35]. Pierre Bonnard is the painter who returns to it most, in 5 of his 45 works here [35].\n\nThese are photographs of aged, varnished paintings, and a color match is not a pigment test [35]. A Kalighat sheet's yellow may be paper, a later chrome yellow or a dye, and a European match is more often lead-tin yellow, ochre under yellowed varnish, or gilding [35]. The word has its own curve: in Google Books *orpiment* peaks around 1809, falls to about a fifth of that level by 1900, and to a tenth by 2000 [37]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin auripigmentum, 'gold paint'",
+   "first_recorded": "as a color name in English, 1386 (Maerz & Paul)",
+   "source": "Eastaugh et al., Pigment Compendium; Maerz & Paul 1930"
+  },
+  "aka": [
+   "auripigmentum",
+   "King's yellow (the synthetic pigment)",
+   "yellow arsenic",
+   "Chinese yellow"
+  ],
+  "siblings": [
+   "orpiment-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "orpiment-orange",
+    "gloss": "Werner's 1821 orange, named for the mineral but far more orange than most orpiment"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "auripigmentum"
+   },
+   {
+    "lang": "el",
+    "name": "arsenikon"
+   },
+   {
+    "lang": "es",
+    "name": "oropimente, jalde"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E2C247",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 98,
+  "top_country": {
+   "name": "India",
+   "hits": 30,
+   "n": 721,
+   "lift": 10.1
+  },
+  "top_movement": {
+   "name": "Kalighat",
+   "hits": 21,
+   "n": 96,
+   "lift": 53.1
+  },
+  "top_painter": {
+   "name": "Pierre Bonnard",
+   "hits": 5,
+   "n": 45
+  },
+  "first_dated": {
+   "id": "commons-Q3797771",
+   "painter": "Fra Angelico",
+   "year": 1434
+  },
+  "top_paintings": [
+   "cma-162430",
+   "commons-Q21722763",
+   "commons-Q21722490",
+   "commons-Q27977046",
+   "commons-Q61743109",
+   "cma-162507"
+  ],
+  "role": {
+   "highlight": 0.96,
+   "mid": 0.04
+  },
+  "ngram": {
+   "orpiment_peak": 1809,
+   "orpiment_rel_1900": 0.19,
+   "orpiment_rel_2000": 0.1
+  },
+  "measured": {
+   "lch": [
+    79.2,
+    63.4,
+    91.6
+   ],
+   "contrast_white": 1.74,
+   "contrast_black": 12.04,
+   "nearest": [
+    [
+     "Yellow",
+     4.4
+    ]
+   ]
+  },
+  "record": {
+   "maerz_paul_plate": "10 K 3",
+   "first_recorded": 1386
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Orpiment\" (with \"Yellow\" and \"Prussian blue\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 6 (\"Yellow\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Colour, notes to ch. 6",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 51 (\"Orpiment\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 53 (\"Realgar\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 113 (\"Arzica\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 28",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 10 and ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 33",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 298 (\"Orpiment\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 299 (\"Orpiment\", names)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 36, 225 (\"Arsenic group\", \"King's yellow\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 331-332 (\"Realgar\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 35 (\"Arsenic group\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 139",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 170",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 218",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 171",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 225",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 18",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 29,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 51",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 31,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Titian's colours\" and \"Venetian\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 32,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, p. 178",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 33,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 78, 208",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 34,
+   "kind": "book",
+   "cite": "Cennini, Il Libro dell'Arte (c. 1400), ch. 47-53 (Herringham trans., 1899; public domain)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 35,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 36,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Maerz & Paul 1930, Werner/Syme 1821), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 37,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did painters keep orpiment away from verdigris and lead white?",
+   "choices": [
+    "Its sulfur reacts with copper and lead and turns them dark",
+    "It made oil paint dry too fast",
+    "It bleached their colors white",
+    "It was too expensive to mix"
+   ],
+   "answer": "Its sulfur reacts with copper and lead and turns them dark",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: orpiment contains gold, which is why Roman emperors smelted it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In the eighteenth century, orpiment came back into use mainly as part of which mixture?",
+   "choices": [
+    "A green made with Prussian blue",
+    "A pink made with lead white",
+    "A black made with soot",
+    "An orange made with vermilion"
+   ],
+   "answer": "A green made with Prussian blue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The word arsenic comes from orpiment, the yellow paint whose Latin name means gold paint.",
+  "Egyptian painters gave their gods orpiment-yellow skin; men were painted red-brown.",
+  "In an old manuscript, look for the flat lemony yellow where gold should be: it may be orpiment, the poisonous stand-in for gold leaf."
+ ],
+ "words": 2194,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Caligula and gold: Pliny's story kept as his report; St Clair says it came to little; orpiment holds no gold.",
+   "King's yellow date: Coles 17th c. vs Compendium (18th c. in English sources, Dutch synthetic in 17th c.): stated as careful/hedged.",
+   "Origin of 'King's yellow' (two kings) hedged as tentative.",
+   "arzica vs arzicon: Coles vs Compendium/Merrifield stated as books disagree.",
+   "Taj Mahal use is St Clair only (single source).",
+   "Cennini's recipes cited from the public-domain translation via atoms (cennini-yellows-01, cennini-greens-01).",
+   "Kalighat/India archive signal may be paper tone or other yellows: caveat in text.",
+   "Fra Angelico match on gilding is an interpretation of the photograph, hedged 'most likely'."
+  ]
+ }
+}

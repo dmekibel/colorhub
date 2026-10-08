@@ -1,0 +1,141 @@
+{
+ "slug": "misty-rose",
+ "name": "Misty Rose",
+ "hex": "#FFE4E1",
+ "names": [
+  "Misty Rose"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Misty Rose is a very pale pink, a screen color from the X11 and CSS lists.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A list name",
+   "body": "Misty Rose is a color in the X11 Color Set and a CSS keyword, `mistyrose` [1][2]. Paterson's index files it among the pinks next to [[rose]] shades such as magnolia and old rose [1]. The origin of the name is undocumented in our books [1].\n\nThe ISCC-NBS system of 1955 lists this swatch's position as \"pale pink\" (block 31), 3.4 CIEDE2000 units away, and the nearest name in our learning set is baby pink, 9.4 away [3]. Other names near it in the library include Rose Pearl and Zephyr, which Maerz and Paul first recorded in 1920 [3]. The closest article-length neighbor is [[lavender-blush]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive a color near this one appears in 20 paintings, 0.08% of the total, as photographed [4]. In 70% of the 10 paintings where the within-painting lens finds it, it plays a light [4]. The earliest dated match is a Bronzino of 1551, which is far earlier than any record of the name, so this is a look-alike hue in an aged photograph and not proof of a pigment [4]. In printed English the phrase peaks in the 2010s [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; an entry in the X11 color list",
+   "first_recorded": "X11 color set; CSS keyword",
+   "source": "Paterson, A Dictionary of Colour, p. 266"
+  },
+  "aka": [
+   "mistyrose",
+   "MistyRose"
+  ],
+  "siblings": [
+   "lavender-blush",
+   "baby-pink",
+   "old-rose",
+   "dusty-rose"
+  ],
+  "parent": "rose",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FFE4E1",
+   "min_cover": 0.01
+  },
+  "n_present": 20,
+  "role": "light in 70% of 10 paintings",
+  "measured": {
+   "lch": [
+    93,
+    10,
+    29
+   ],
+   "iscc": "pale pink, block 31, dE 3.4",
+   "nearest": [
+    [
+     "Baby pink",
+     9.4
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 2010
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"MistyRose\" and index of pinks, pp. 266, 503",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "W3C, CSS Color Module Level 3, section 4.3",
+   "loc_kind": null,
+   "url": "https://www.w3.org/TR/css-color-3/"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json and data/graph nodes: ISCC-NBS 1955, Munsell conversion), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, all senses of the phrase (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which ISCC-NBS name sits closest to Misty Rose?",
+   "choices": [
+    "Pale pink",
+    "Strong yellow",
+    "Light olive gray",
+    "Brilliant violet"
+   ],
+   "answer": "Pale pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Bronzino match proves Misty Rose was a pigment in 1551.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A Bronzino of 1551 contains a color near Misty Rose, but that proves nothing about a pigment: it is a look-alike hue in a photograph."
+ ],
+ "words": 199,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed subjective 'nearest thing to a blush' claim."
+  ]
+ }
+}

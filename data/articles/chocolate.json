@@ -1,0 +1,292 @@
+{
+ "slug": "chocolate",
+ "name": "Chocolate",
+ "hex": "#7B3F00",
+ "names": [
+  "Chocolate",
+  "Chocolate (Traditional)",
+  "Milk Chocolate"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Chocolate is the deep brown of the food made from cocoa, a colour name whose swatches range from a bright web orange-brown to something nearly black.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Which chocolate",
+   "body": "The web has two chocolates, and they are not close. The CSS and X11 colour named `chocolate` is a bright orange-brown, #D2691E, a value Paterson prints in his dictionary [1]. The swatch on this page, #7B3F00, is a darker, deeper brown, about 30 units away on the CIE76 distance scale [13]. Our library calls that darker value \"Chocolate (Traditional)\" and finds it, to be the same colour as this swatch [13].\n\nThe other sources scatter further. Ridgway's 1912 plate gives a duller, greyer brown, #6D4E43, and the xkcd survey's chocolate is a near-black brown, #3D1C02 [13]. Milk chocolate, in the same survey, is a lighter #7F4E1E [13]. ISCC-NBS 1955 files the name in its block 62 and Maerz and Paul's dictionary dates the name to 1737 [13].\n\nPaterson's gloss explains the spread: the word names a deep brown, he says, but covers many shades [1]. The name points at a food, and a food comes in dark, milk and cocoa-heavy versions. Treat the swatch as one reasonable reading."
+  },
+  {
+   "id": "food",
+   "title": "A colour taken from a drink",
+   "body": "The colour is named for the food, and the food reached Europe after the conquest of the Americas [3]. Greenfield reports that in the decades after the Conquest some Spanish settlers took up the indigenous practice of paying with cocoa beans, though few at first were willing to drink the Aztec chocolate made from them [3]. A taste grew gradually, helped by sweetening the bitter, spicy brew with sugar [3]. By the late sixteenth century Spaniards owned cocoa plantations in Mexico and Guatemala [3].\n\nVoltaire made a joke of it. In *Candide*, Dr Pangloss defends even syphilis, since without America, he says, Europe would have no chocolate and no cochineal [3]. The pairing is not accidental. The dye behind [[carmine]] and the cocoa behind chocolate were both American crops, and the two travelled together: when colour-sellers appeared in the mid-seventeenth century, some of them were luxury grocers who sold chocolate and vanilla next to cochineal [4][3].\n\nThe English word itself is a question our books leave open: none of the books we hold traces where it came from, and Paterson does not either [1]. What Paterson does record is the neighbouring words that the cocoa tree gave to colour: cacao brown, the brown of the bean, and chocolate brown, a dark brown that is also the name of a food colouring, E155, sold as Brown HT [1]."
+  },
+  {
+   "id": "paintbox",
+   "title": "In the paint-box, and on the wall",
+   "body": "Chocolate is a colour that painters and makers used for a result, not a recipe. Mars violet, the iron-oxide pigment developed by Baroque colour-makers, was described by Ball as a kind of chocolate purple [5]. Salter's 1869 list includes chocolate lead, a chocolate maroon pigment made by calcining lead oxide with about a third as much copper oxide [10]. In 1901 Rivington listed a so-called indestructible paint for industrial surfaces in three colours: bronze-green, chocolate and black [10].\n\nSometimes the colour is a loss. Red lead darkens when it meets air and light, and on wall paintings in China, Turkestan and Afghanistan it has turned chocolate-brown [6]. Ball lists further casualties: Indian miniatures from the 1400s, Japanese paintings from the 1600s and 1700s, and Swiss murals made between the 1200s and the 1600s [6]. Finlay, discussing the Dunhuang caves, repeats a conservator's description of red lead turning chocolate brown, especially under light [6].\n\nThe lines between colours can matter in the lab too. A real piece of jet leaves a chocolate-coloured streak when scratched on rough porcelain, while coal leaves black and glass leaves white [7]. When forgers realised that, Finlay reports, makers of imitation jet dyed the plastic brown, so that the streak would pass [7]. [[gem:jet|Jet]] is a case where a colour test and a name for a colour share a word."
+  },
+  {
+   "id": "words",
+   "title": "Cloth, moths and a mill",
+   "body": "The colour had been a formal name since 1814, when Syme added Chocolate Red to Werner's list as his number 98, a veinous blood red mixed with a little [[brownish-red]], and matched it to the breast of a bird of paradise [2]. In the everyday world, Jarman links the [[brown]] family with the poor, since brown cloth always dressed them [9]. He notes that the names of brown dyes are sweet and edible, a list that runs from caramel, toffee and almond to coffee, chocolate and curry [9]. His own memory of the colour is a chocolate-brown blanket and the corduroy trousers of a ploughman [9].\n\nAt a Harris tweed mill, Finlay watched dyed wool being blended [11]. He imagines the recipe as something like 30 per cent dark chocolate, 30 black, 30 white and small amounts of orange and rye, and the spun yarn looked chocolate brown until a closer look showed flecks of white, black, orange and sand [11]. A cloth that reads as one brown from across a room is a set of several, and the eye does the mixing.\n\nSt Clair's glossary defines chocolate simply as a rich brown [8]. He also describes a dark form of the peppered moth, with an all-black body and bitter chocolate wings [8]. It became more common around northern English towns in the nineteenth century, and a study near Manchester in 1895 found 95 per cent of the moths dark [8]. Finlay, in a violin-maker's workshop, reports on a bow-maker, James Tubbs, known for his chocolate-coloured pernambuco wood, which some said he stained with stale urine [16].\n\nOne unlikely tool also bears the word. Coles tells of buying a fifty-year-old mill with granite rollers, built to process chocolate, and using it to make oil paint [12]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The archive is 23,781 paintings photographed in museums, so every number is as photographed, through varnish that has aged and darkened [14]. The chocolate swatch matches 636 of them, 2.67 per cent, more common than 75 per cent of the named colours [14]. It plays an accent in 49 per cent of the 270 paintings where we can rank it by lightness [14].\n\nThe pattern across time is nearly flat, with a small bump. It appears in about 2 per cent of paintings in most centuries from the 1400s to the 1800s, then drops to 0.4 per cent in the 1900s [14]. Counting only paintings where it covers at least five per cent of the canvas, the sharpest peak is the 1820s, where 55 of 731 paintings carry it, 3.9 times the baseline [14]. The painter who uses it most, [[painter:george-dawe|George Dawe]], has it in 8 of his 50 works in our archive, 7.1 times the museums' baseline [14]. The painting with the largest share, almost half the canvas, is a 1650 portrait of [[painting:rijks-20028706|Oliver Cromwell]] in a Rijksmuseum frame of allegorical figures [14].\n\nIt shares canvases most with [[caramel]] and Black Brown, at lifts of 9.8 and 3.9 [14]. The earliest match is a 1240 panel by the Master of the Cross 434, which is 646 years before the name's earliest record in the library, so this is a look-alike hue and not evidence of the food or a pigment [14].\n\nThe word itself has a different curve. In printed English it rises from the 1940s to a peak in the 2010s, mostly because of the food [15]. Where to look: the dark, warm background of a seventeenth-century portrait, where the brown is often a ground showing through the paint [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the food and drink made from cocoa; the English word's own etymology is undocumented in our books",
+   "first_recorded": "1737 in Maerz & Paul as a colour name",
+   "source": "Maerz & Paul via the ColorHub library"
+  },
+  "aka": [
+   "Chocolate (Traditional)",
+   "Cacao brown (related)"
+  ],
+  "siblings": [
+   "chocolate-brown",
+   "milk-chocolate",
+   "cocoa"
+  ],
+  "parent": "brown",
+  "children": [
+   "chocolate-brown",
+   "chocolate-red",
+   "milk-chocolate"
+  ],
+  "disambiguation": [
+   {
+    "slug": "chocolate-brown",
+    "gloss": "a much darker, greyer brown, the RAL 8017 family"
+   },
+   {
+    "slug": "milk-chocolate",
+    "gloss": "lighter and more orange than this swatch"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "chocolat"
+   },
+   {
+    "lang": "es",
+    "name": "chocolate"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#7B3F00",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 454,
+  "fieldnote_presence": {
+   "paintings": 636,
+   "pct": 2.67
+  },
+  "top_paintings": [
+   "rijks-20028706",
+   "rijks-20028705",
+   "aic-151114"
+  ],
+  "peak_decade": {
+   "decade": 1820,
+   "hits": 55,
+   "n": 731,
+   "lift": 3.9
+  },
+  "top_painter": {
+   "name": "George Dawe",
+   "hits": 8,
+   "n": 50,
+   "lift": 7.1
+  },
+  "first_dated": {
+   "id": "commons-Q3973585",
+   "painter": "Master of the Cross 434",
+   "year": 1240
+  },
+  "role": {
+   "accent_share_of_270": 0.49
+  },
+  "company": [
+   "Caramel",
+   "Black brown"
+  ],
+  "ngram": {
+   "term": "chocolate",
+   "peak": 2013
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"chocolate\", \"chocolate brown\", \"cacao brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"Chocolate Red\" (Syme no. 98), pp. 243 and 264",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, chs. 11-12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19; Finlay, Colour, ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, pp. 121 and 125 (peppered moth; glossary)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 44-45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"chocolate lead\" and \"bitumen\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Fabric, pp. 208-209",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 15",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub library: Chocolate, Chocolate (Traditional), Milk Chocolate and Chocolate Brown entries (CSS, Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930, xkcd)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (graph fieldnotes and tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"chocolate\", case-insensitive, 5-year smoothed (all senses of the word)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 14",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does the web's chocolate colour (#D2691E) look so different from a dark chocolate bar?",
+   "choices": [
+    "The name was fixed to one bright orange-brown value, while real chocolate comes in many deeper shades",
+    "CSS chocolate is made from a different pigment",
+    "The screen cannot show dark browns",
+    "It is a colour of milk chocolate with sugar added"
+   ],
+   "answer": "The name was fixed to one bright orange-brown value, while real chocolate comes in many deeper shades",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: red lead on a wall painting can turn chocolate-brown with time.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "According to Greenfield, what made Spanish settlers come to like the Aztec chocolate drink?",
+   "choices": [
+    "Sweetening it with sugar",
+    "Heating it in silver cups",
+    "Adding cochineal",
+    "Mixing it with wine"
+   ],
+   "answer": "Sweetening it with sugar",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Cocoa and cochineal were both American crops; the first colour-sellers in Europe sometimes sold chocolate next to cochineal.",
+  "Red lead in old wall paintings can darken to chocolate-brown.",
+  "The web's 'chocolate' is a bright orange-brown, about 30 units away from the traditional dark one."
+ ],
+ "words": 1196,
+ "status": "checked",
+ "checked": {
+  "by": "article engine (batch 40), sentence-to-card trace, myth list",
+  "date": "2026-10-08",
+  "issues": [
+   "Books say little about the colour name itself; word etymology left undocumented.",
+   "Harris tweed recipe is Finlay's imagined formula: hedged.",
+   "Tubbs staining story is hearsay in Finlay: hedged.",
+   "Archive match is a colour, not a pigment test: stated."
+  ]
+ }
+}

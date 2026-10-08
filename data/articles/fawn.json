@@ -1,0 +1,129 @@
+{
+ "slug": "fawn",
+ "name": "Fawn",
+ "hex": "#C09580",
+ "names": [
+  "Fawn"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Fawn is a light yellowish brown named for the coat of a young deer, and Renaissance color writers had a lot to say about it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A deer's coat",
+   "body": "Paterson defines fawn as a light yellowish brown, the coat color of a young deer [1]. The swatch here is a pinkish tan, near [[camel]], [[tan]] and [[beige]], and lighter than [[auburn]].\n\nIn hunting, the animals the court hunted were fawn-colored deer, red foxes and young boars, or black bears and old boars, in Pastoureau's account of hunt dress [2]."
+  },
+  {
+   "id": "renaissance",
+   "title": "Renaissance color advice",
+   "body": "One Renaissance writer on color combinations, as Pastoureau reports, counted grey with fawn, in Italian *leonato*, among the most beautiful pairs [3]. Pastoureau also reports that in the French color-ranking of Robertet, tanné, a fawn-colored or dark russet, came after purple, and an anonymous successor called it the ugliest of colors [4]. Robertet himself held it changeable and unreliable [4].\n\nAs a pigment name, Mayer describes fawn brown as a mixture of burnt or raw umber with dark ochre [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds fawn in 583 of 23,781 paintings, 2.45 percent, as photographed [6]. It peaks in the 1900s, in 39 of 1,674 paintings, about 1.6 times the baseline [6]. Inside a painting it most often plays a light [6]. The most devoted painter is Maurice Denis, in 5 of 43 works here [6]. It shares canvases with Cameo Brown and Desert Sand [6]. These are photographs of aged, varnished paintings, so this is a color match, not a pigment test [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the coat of a young deer",
+   "first_recorded": "undocumented in our sources",
+   "source": "Paterson, A Dictionary of Colour, \"fawn\""
+  },
+  "aka": [],
+  "siblings": [
+   "camel",
+   "tan"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 583,
+  "pct": 2.45,
+  "peak_century": 1900,
+  "painter": "Maurice Denis"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"fawn\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, White; Pastoureau, Green, ch. 30",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 30",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Fawn brown\" (after Mayer 1991)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, field notes for Fawn",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does fawn name?",
+   "choices": [
+    "The coat of a young deer",
+    "A river clay",
+    "A French town"
+   ],
+   "answer": "The coat of a young deer",
+   "kind": "pick"
+  },
+  {
+   "q": "Which color pairs with fawn in Renaissance advice?",
+   "choices": [
+    "Grey",
+    "Violet",
+    "Pink"
+   ],
+   "answer": "Grey",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Renaissance color writers listed grey with fawn among the beautiful pairs."
+ ],
+ "words": 239,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Treatises plural narrowed to one writer"
+  ]
+ }
+}

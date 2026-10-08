@@ -1,0 +1,160 @@
+{
+ "slug": "blue-ochre",
+ "name": "Blue Ochre",
+ "hex": "#495D63",
+ "names": [
+  "Blue Ochre"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Blue ochre is an old trade name, probably for the iron phosphate mineral vivianite, a rare blue earth that turns green with exposure.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An ochre that is not yellow",
+   "body": "Ochre normally means a yellow or red iron-oxide earth, so blue ochre is a puzzle in the name itself. The Pigment Compendium says the term probably denotes vivianite, a native hydrated iron phosphate found with iron pyrites in Cornwall and North America, according to Salter (1869) [1]. Field (1835) described the same earth as a sub-phosphate of iron, and his 1841 edition added the pyrites detail [2].\n\nBooks disagree about what the old term covered. The Compendium notes that vivianite was known as blue ochre but that the \"blew clay\" of earlier sources could have been any of several blue minerals, as Harley and Beal speculate [3]."
+  },
+  {
+   "id": "fading",
+   "title": "A blue that changes",
+   "body": "Jannicke (1893) describes the iron phosphate as a beautiful transparent color that tends to change quickly into green [1]. Salter writes that a related white powder becomes blue on exposure [4]. The pigment was also called native Prussian blue, a term Salter calls improperly used; the Compendium concludes it has no connection with [[prussian-blue]] itself [1][4]. Harley records the name in English sources of the late eighteenth and early nineteenth centuries [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The library entry comes only from Maerz and Paul's 1930 dictionary, which dates the name to about 1750 [5]. The swatch is a dark, nearly grey teal, with a nearest everyday name of charcoal about nine units away [5]. It is a grey with a blue lean, which suits a pigment noted for turning on itself [1][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this dark blue-grey in 380 of 23,781 paintings, or 1.6 per cent [6]. Paul Signac carries it in 4 of 18 paintings, about 14 times the average rate, and the 1900s are over-represented [6]. These are photographs of varnished paintings; a match for this color says nothing about whether vivianite was ever used [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the earthy blue mineral, probably vivianite",
+   "first_recorded": "about 1750 (Maerz and Paul, as a color name)",
+   "source": "Pigment Compendium; data/library.json"
+  },
+  "aka": [
+   "blue iron earth",
+   "native Prussian blue"
+  ],
+  "siblings": [
+   "prussian-blue",
+   "ochre",
+   "azurite-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "ochre",
+    "gloss": "normally a yellow or red iron oxide earth"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#495D63",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 380,
+  "painters": [
+   [
+    "Paul Signac",
+    4,
+    18,
+    13.91
+   ]
+  ],
+  "nearest": [
+   "Charcoal",
+   8.6
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 68, 'blue ochre'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 404, 'vivianite'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 193, 'blue ochre'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 287, 'native Prussian blue'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Maerz & Paul 1930 pl. 39 H 5, c. 1750; CIEDE2000 to Charcoal 8.6",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); data/graph/fieldnotes/b.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What mineral is blue ochre probably?",
+   "choices": [
+    "Vivianite",
+    "Azurite",
+    "Lapis lazuli",
+    "Hematite"
+   ],
+   "answer": "Vivianite",
+   "kind": "pick"
+  },
+  {
+   "q": "What does the transparent blue iron phosphate tend to do, per Jannicke?",
+   "choices": [
+    "Turn green",
+    "Turn red",
+    "Turn white",
+    "Stay unchanged"
+   ],
+   "answer": "Turn green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Blue ochre is probably vivianite, a blue earth that quickly turns green."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Salter's 'improperly used' belongs to native Prussian blue, not blue ochre; fixed",
+   "Removed current-supplier trivia"
+  ]
+ },
+ "status": "checked",
+ "words": 306
+}

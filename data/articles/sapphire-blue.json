@@ -1,0 +1,117 @@
+{
+ "slug": "sapphire-blue",
+ "name": "Sapphire Blue",
+ "hex": "#0067A5",
+ "names": [
+  "Sapphire Blue"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Sapphire Blue is a deep, saturated blue named for the gem, and the gem's own name once meant a different stone.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The stone with a shifting name",
+   "body": "The ancients' *sapphirus* was not today's blue corundum; it was lapis lazuli, and that lasted until well into the middle of the 13th century [1]. The adjective *saphirinus* described dark, opaque things, including Frisian felts, not clear light blue [1]. So \"sapphire blue\" has meant different blues at different times [1].\n\nEarly recipe texts use the phrase for dye colors too: a text quoted in the Pigment Compendium describes three kinds of *folium*, a plant dye, one purple, one red and one sapphire blue, and Theophilus, writing about the 12th century, also describes the three [2]. Paterson adds that Berlin blue is sometimes a lighter sapphire blue [3]. See [[lapis-lazuli]], [[royal-blue]] and [[prussian-blue]] for relatives [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 28 hold this color at 5% of the canvas or more, as photographed [4]. One is Van Gogh's 1888 *Three White Cottages in Saintes-Maries* [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gem sapphire, whose ancient name meant lapis lazuli",
+   "first_recorded": "folium kinds described in a medieval recipe text; Theophilus c. 12th century",
+   "source": "Gage, Colour and Culture, p. 77; Pigment Compendium, p. 172"
+  },
+  "aka": [
+   "sapphire"
+  ],
+  "siblings": [
+   "royal-blue",
+   "lapis-lazuli"
+  ],
+  "parent": "blue",
+  "children": [
+   "prussian-blue"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (color match within 6 DeltaE2000, at least 5% of the canvas)",
+  "match": {
+   "hex": "#0067A5",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 28
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 77",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 172, on folium and Theophilus",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 47 (\"Berlin blue\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the ancient word sapphirus usually mean?",
+   "choices": [
+    "Lapis lazuli",
+    "Blue corundum",
+    "Cobalt glass",
+    "Indigo"
+   ],
+   "answer": "Lapis lazuli",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the ancients' sapphire was today's blue corundum.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The ancients' sapphire was lapis lazuli, not the blue gem we call sapphire today.",
+  "Sapphire blue also named a plant dye, folium, in medieval recipes."
+ ],
+ "words": 164,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Tightened date wording to Gage's 'middle of the thirteenth century'; Theophilus described the three folium colors, not necessarily the phrase."
+  ]
+ }
+}

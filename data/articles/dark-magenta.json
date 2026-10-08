@@ -1,0 +1,124 @@
+{
+ "slug": "dark-magenta",
+ "name": "Dark Magenta",
+ "hex": "#8B008B",
+ "names": [
+  "Dark Magenta"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark magenta is an X11 web color, a deep purple-pink that the ISCC-NBS system had already indexed in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color, an older block",
+   "body": "Paterson lists *DarkMagenta* as one of the colors of the X11 set, with the hex code #8B008B [1]. The shade itself is older than the web: it matches ISCC-NBS block 219 (1955), and Maerz and Paul record a close name from 1925 [2]. Patriarch and Mardi Gras are near-duplicates, at CIEDE2000 distances of 2.4 and 1.1 [2]. The xkcd survey of 2010 uses a different dark magenta, #960056 [2].\n\nIts closest named neighbor is [[purple]] [2]. The books say nothing more, so the origin of the name is undocumented."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dark magenta is absent from museum paint. No painting in our archive of 23,781 covers at least 1% of its canvas with a close match [3]. That describes this archive, not painting as a whole [3]. As a printed phrase, *dark magenta* appears from the 1860s, and peaks in the 2010s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "magenta, darkened (origin undocumented)",
+   "first_recorded": "1955 (ISCC-NBS); X11 web colors",
+   "source": "Paterson, p. 140"
+  },
+  "aka": [],
+  "siblings": [
+   "magenta",
+   "purple",
+   "dark-orchid",
+   "violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 0,
+  "ngram": {
+   "first": 1860,
+   "peak": 2010
+  },
+  "measured": {
+   "lch": [
+    33,
+    74,
+    328
+   ],
+   "nearest": [
+    [
+     "Purple",
+     9.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 140, 506",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 219; Maerz & Paul 1930; xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "web",
+   "cite": "Google Books Ngram, 5-year smoothing",
+   "loc_kind": "",
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What hex code does DarkMagenta have in the X11 set?",
+   "choices": [
+    "#8B008B",
+    "#008B8B",
+    "#B8860B",
+    "#253B8A"
+   ],
+   "answer": "#8B008B",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our painting archive has many close matches for dark magenta.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "No painting in our 23,781-painting archive covers 1% of its canvas in dark magenta."
+ ],
+ "words": 155,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

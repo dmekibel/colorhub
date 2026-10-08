@@ -1,0 +1,146 @@
+{
+ "slug": "heather",
+ "name": "Heather",
+ "hex": "#A484AC",
+ "names": [
+  "Heather"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Heather is the dusty purple of the moorland shrub's flowers, a muted mauve-grey that is more a texture than a single hue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A speckled color",
+   "body": "Paterson defines heather as the speckled purplish-grey-blue of the plant [1], and the French *bruyère* as a greyish purple of heather [2]. St Clair adds that before the twentieth century the word was a synonym for mottled, and that it now means a pinkish purple [3]. The speckle is the point: a hillside of heather is many small flowers, not one flat color.\n\nThe same idea runs through wool. In a Scottish tweed maker's account, Finlay finds heather purple among the colors built into the body of a formal jacket, alongside candy pink and sun yellow [4]. For the fabric sense, see [[heather-grey]]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Neighbors",
+   "body": "Heather sits near [[lilac]], [[lavender]] and [[mauve]], but is greyer than each of them [5]. The swatch is dusty and slightly warm, a lilac that has been dulled [5]. Paterson's classified index places heather among the blues, which shows how loosely the word is pinned to one hue [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The name appears in Maerz and Paul (1930) and the ISCC-NBS system (1955) [5]. It is rare in painting: 4 of 23,781 paintings in our archive, as photographed, and only 1 within the painting measure [7]. In printed English the color adjective peaks in the 1890s, while the word in all senses peaks in 2010 [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the heather plant",
+   "first_recorded": "Maerz and Paul, 1930 (earliest in our sources)",
+   "source": "Paterson; St Clair; ColorHub name records"
+  },
+  "aka": [
+   "bruyère (French)"
+  ],
+  "siblings": [
+   "lilac",
+   "lavender"
+  ],
+  "parent": "purple",
+  "children": [
+   "heather-grey"
+  ],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bruyère"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 4,
+  "ngram": {
+   "adj_peak": "1890s",
+   "all_peak": "2010"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"heather\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bruyère\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, p. 125",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 192",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library and name records (data/library.json, data/graph)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, classified index of blues, p. 491",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes); Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did heather mean as a word before the twentieth century, according to St Clair?",
+   "choices": [
+    "Mottled",
+    "Bright red",
+    "Pale green",
+    "Black"
+   ],
+   "answer": "Mottled",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: heather is a bright, saturated purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Heather once meant mottled; the color is a speckle of small purple flowers, not a flat tone."
+ ],
+ "words": 222,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that mixed fibers explain the fabric sense"
+  ]
+ }
+}

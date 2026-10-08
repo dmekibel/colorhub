@@ -1,0 +1,302 @@
+{
+ "slug": "dark-blue",
+ "name": "Dark Blue",
+ "hex": "#00008B",
+ "names": [
+  "Dark Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "long",
+ "lede": "Dark blue is the dark end of blue, and for much of history it was not a separate color at all: the word that gave us indigo and lilac first meant dark blue, and the Greeks counted blue as a kind of darkness.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Which dark blue?",
+   "body": "Dark blue is a description, not a single color, and our library holds several of them. The swatch on this page, #00008B, is the CSS color `darkblue`: red and green at zero and blue at 139 out of 255 [1]. In ISCC-NBS terms it reads as a vivid purplish blue, 8.2 CIEDE2000 units from that block's center [1]. Our library files International Klein Blue, Ultramarine, Navy Blue and Duke Blue as near-duplicates of it, all within 2.3 units [1].\n\nOther sources use the same words for very different colors. Ridgway's *Dark Blue* (1912) is a greyed #51597B, a scan of an aged plate, and xkcd's survey gives #00035B and #030764, much blacker than the CSS value [1]. The CSS value is a pure screen primary, far more saturated than the grey-blue of Ridgway's plate [1]."
+  },
+  {
+   "id": "nila",
+   "title": "Nila: a word for dark blue",
+   "body": "Much of the world's blue vocabulary begins with a word that simply meant dark blue. Balfour-Paul reports that the Sanskrit *nila*, meaning dark blue, spread east into Southeast Asia and west through Persia and the Arab world, probably along pre-Islamic trade routes and then with the Islamic trade in the dye [3]. Finlay says indigo cultivation reached back more than five thousand years in the Indus Valley, where the plant was called by that word, and that a Babylonian tablet of dye recipes from the seventh century BC shows indigo used in Mesopotamia [4].\n\nThe Pigment Compendium traces the chain: *nilah* became Persian *nila*, then Arabic *al-nil*, and from the seventeenth century the Portuguese and French *anil* meant indigo [5]. Paterson notes that *anil* is also the root of the word *lilac* [6]. The Greek-derived name for the dye, *indikon*, meant a substance from India [3]. In other words [[indigo]] and [[lilac]] both come from a word that first meant simply dark blue, and the dye named itself after the color."
+  },
+  {
+   "id": "greeks",
+   "title": "Blue as a kind of dark",
+   "body": "Ancient writers often treated dark blue as a degree of darkness. Coles notes that the Greek word that took in blue was *melas*, which meant dark, and that blue was seen as a value of darkness [7]. Pastoureau adds that *kyaneos*, the root of modern *cyan*, almost always designated a dark color, but that it might as easily be dark blue as purple, black or brown [8]. Ball, summarizing the Greek view, says that blue was dark with a little light added [9].\n\nNone of this means the Greeks and Romans could not see blue; that is an old myth [10]. Pastoureau says the controversy rests only on vocabulary, and that scientific texts of antiquity show a good understanding of how color is perceived [10]. The Romans, he adds, were not blind to blue but indifferent or hostile to it: it was the color of barbarians who dyed their bodies with woad, and Pliny reports that Breton women painted themselves dark blue [10].\n\nBall offers a biological reason why the blue end of the spectrum may look dark. The cones that respond to blue light are the least sensitive of the three types, so fully saturated blue looks relatively dark [9]."
+  },
+  {
+   "id": "black",
+   "title": "Dark blue as a near black",
+   "body": "For centuries dark blue and black were hard to tell apart. Pastoureau reports that until the late Middle Ages the blacks produced by European dyers were rarely beautiful: often more brown than black, or grey, or dark blue, they covered cloth unevenly and gave clothes a soiled look [11]. Before blue gained prominence in the twelfth century, he adds, dark blue was often considered equivalent to black, a semi-black used for painting hell and demons [11].\n\nA Romanesque example is the painted ceiling of the church at Zillis in Switzerland, from about 1120-25, where the devil's fur is a dark blue that is almost black [11]. Pastoureau says Romanesque artists could make a devil any color as long as it was dark [11].\n\nDyers found the dark blues hard to manage. Garfield describes a woad vat that, skillfully run, could dye 220 pounds of wool a week, and yield four hundred pounds of dark blue wool in six weeks [12]. Even then, the quality of woad was uncertain, and the dark blues depended on it [12]. Painters had the same problem: Pastoureau says that neither [[gem:lapis-lazuli|lapis lazuli]], azurite nor smalt could make large areas of dense dark blue, and that a blue both dark and reflective was possible only for accents and details [13]."
+  },
+  {
+   "id": "uniforms",
+   "title": "Uniforms and political blue",
+   "body": "The great shift came with new dyes and new pigments. Pastoureau writes that in the seventeenth and eighteenth centuries painters came to value dark blue shades, helped by [[prussian-blue]], a dense dark blue tending toward blue-black with a bronze sheen at high concentration, in Coles's description [13][7]. Indigo, which could dye cloth in the dark blues, was strictly controlled in many countries at that time [13].\n\nArmies adopted the color. Prussian soldiers had worn dark blue since the late seventeenth century, Pastoureau notes, at a time when French and other regiments were multicolored [14]. In France, the blue of the Parisian National Guard was declared the national blue in June 1790, and decrees of late 1792 and early 1793 made it obligatory for the Republic's soldiers [14]. Balfour-Paul links the British naval uniform to indigo as well, saying that Britain adopted an indigo navy blue uniform with white facings in 1745 [15]. The 1745 date is the only precise one we found for [[navy]], so treat it as one author's account [15].\n\nPastoureau notes that blue is now the most popular dress color in Western Europe, ahead of white, black and beige [14]."
+  },
+  {
+   "id": "lore",
+   "title": "What the color was said to mean",
+   "body": "Because dark blue carried so much weight, writers have attached claims to it. Birren records an old occult belief that dark blue in a person's aura signals religious feeling, and a therapeutic one that clear dark blues soothe the blood and organs [16]. These are old beliefs, not modern evidence, and Birren presents them as such [16]. He also reports that two researchers found the European malaria mosquito alighted most on dark blue, red and brown, and least on yellow, orange and white [16].\n\nKandinsky, writing in 1912, compared dark blue to the cello and darker still to the double bass, a comparison Gage places in a long line of analogies between color and music [17].\n\nLanguage also divides the blues. Batchelor notes that Russian has two basic words, one for dark blue and one for light blue, which Russians regard as different colors [18]. Paterson says the same [6]. English has no equivalent basic word, and Batchelor points out that its language gives the parts of blue no such independence [18]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "We looked for this swatch in 23,781 museum paintings [19]. No painting carries it on at least five per cent of the canvas within a CIEDE2000 distance of six, as photographed [19]. On the looser lens of our graph, it appears in just 3 paintings, about 0.01 per cent, which makes it rarer than 79 per cent of the named colors [20]. The earliest is a work of 1775 by Richard Crosse [20]. Photographs of aged, varnished paintings are a poor test of a pigment, and a pure #00008B blue is very unlike any historical dye [19].\n\nThe phrase tells a different story. In Google Books, *dark blue* stood at about 31 per cent of its modern peak in 1800, 71 per cent in 1880, 63 per cent in 1920, 46 per cent in 1960 and 57 per cent in 2000, peaking in the 2010s [21]. The count covers every sense of the words, including the sky, the sea and uniforms [21]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description (dark + blue); the CSS color darkblue",
+   "first_recorded": "Ridgway 1912 in our library; Maerz and Paul list 1598",
+   "source": "ColorHub library; Balfour-Paul, Indigo"
+  },
+  "aka": [
+   "nila (Sanskrit: dark blue)"
+  ],
+  "siblings": [
+   "navy",
+   "midnight-blue",
+   "oxford-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "navy",
+    "gloss": "Our Navy is a greyer #1C2B5A; CSS navy is a purer #000080"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "sa",
+    "name": "nila (dark blue)"
+   },
+   {
+    "lang": "ru",
+    "name": "siniy (dark blue), distinct from goluboy (light blue)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#00008B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "ngram": {
+   "term": "dark blue",
+   "peak": 2013,
+   "rel_1800": 0.31,
+   "rel_1880": 0.71,
+   "rel_2000": 0.57
+  },
+  "measured": {
+   "iscc": "vivid purplish blue",
+   "nearest": [
+    [
+     "Navy Blue",
+     1.6
+    ],
+    [
+     "Ultramarine",
+     1.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; CSS, ISCC-NBS 1955 block 201, Ridgway 1912, xkcd 2010, Maerz and Paul), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, on the word nila and the trade in indigo",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Anil\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"anil\", \"blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, sections on blue and Prussian blue",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 7",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Black, chapters on dyes and the devil",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 10 (\"A New Pigment: Prussian Blue\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, chs. 10 and 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, on the Royal Navy uniform",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, chs. 13 and 17",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, on Kandinsky and color-music analogies",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "data",
+   "cite": "ColorHub graph fieldnotes (data/graph/fieldnotes/d.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the Sanskrit word nila, the root of anil and indigo, mean?",
+   "choices": [
+    "Dark blue",
+    "Purple",
+    "River",
+    "Ink"
+   ],
+   "answer": "Dark blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the ancient Greeks and Romans could not see the color blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Before the twelfth century, how was dark blue often treated in European art?",
+   "choices": [
+    "As a semi-black, used for hell and demons",
+    "As the color of kings",
+    "As a bright sky color",
+    "As a color for bridal clothes"
+   ],
+   "answer": "As a semi-black, used for hell and demons",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Indigo and lilac both come from a word that meant simply dark blue.",
+  "Before the twelfth century a dark blue devil was almost black: dark blue counted as a kind of black.",
+  "The CSS dark blue is the bluest a screen can make without any green or red, which no old dye ever managed."
+ ],
+ "words": 1251,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch 23 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Greeks-could-not-see-blue myth corrected via Pastoureau.",
+   "Royal Navy 1745 date single-source (Balfour-Paul), hedged.",
+   "Birren aura and therapy claims presented as old beliefs, not evidence.",
+   "Maerz and Paul 1598 date not used in prose; library only."
+  ]
+ }
+}

@@ -1,0 +1,101 @@
+{
+ "slug": "grebe",
+ "name": "Grebe",
+ "hex": "#5F5A57",
+ "names": [
+  "Grebe"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Grebe is a dark, warm grey with a brownish cast, named for the plumage of the diving water bird.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bird's back",
+   "body": "The color is listed in the 1930 Maerz and Paul dictionary, and the 1955 ISCC-NBS system files its swatch under brownish gray [1]. None of the books read here describes it, so how the compilers chose the bird, and which grebe, is undocumented [1].\n\nOn screens the swatch is a muted grey-brown, close in family to [[taupe]], [[battleship-grey]] and [[pale-quaker-drab]] [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Grebe is not rare in painting: 740 of 23,781 museum paintings contain it, about 3.1 per cent, more than four-fifths of our named colors [2]. It most often plays a mid-tone, and it peaks in the 1900s, at 3.8 per cent of the paintings from those years [2]. The painter who leans on it most is [[painter:shen-zhou|Shen Zhou]], in 4 of his 12 works here, where it is likely the grey of ink and aged silk [2]. These are photographs of aged paintings, so the match is a look-alike hue, not a pigment test [2]. Its first match in the archive is a painting from 1119, 811 years before the name's earliest record in our sources [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the grebe, a diving water bird (plumage)",
+   "first_recorded": "1930, Maerz and Paul",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "battleship-grey",
+   "pale-quaker-drab",
+   "taupe"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/g.json",
+  "n_present": 740,
+  "pct": 3.11,
+  "peak": "1900s, 3.8% of 1,674 paintings",
+  "painters": [
+   [
+    "Shen Zhou",
+    4,
+    12
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Maerz & Paul 1930 (as cited in NBS Circular 553, 1955); ISCC-NBS block 64 brownish gray; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/g.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which kind of grey family is Grebe filed under by ISCC-NBS?",
+   "choices": [
+    "Brownish gray",
+    "Bluish gray",
+    "Greenish gray",
+    "Pinkish gray"
+   ],
+   "answer": "Brownish gray",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books read here explain how the color Grebe was chosen.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Grebe appears in 3.1 per cent of the museum paintings in our archive, more than four-fifths of named colors."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "status": "checked",
+ "words": 195
+}

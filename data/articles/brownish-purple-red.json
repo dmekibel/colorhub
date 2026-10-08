@@ -1,0 +1,126 @@
+{
+ "slug": "brownish-purple-red",
+ "name": "Brownish Purple Red",
+ "hex": "#8D746F",
+ "names": [
+  "Brownish Purple Red"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Brownish Purple Red is entry 97 among the reds in Werner's nomenclature of colours, a dusty rose-brown that the book matched to a bat's wing.",
+ "sections": [
+  {
+   "id": "werner",
+   "title": "Entry 97",
+   "body": "Brownish Purple Red is number 97 in the red series of the colour nomenclature reproduced in Baty's book on nature's palette [1]. It sits between Veinous Blood Red (96) and Chocolate Red (98), after a run of crimson and cochineal reds [1][2].\n\nThe nomenclature describes each color by living examples. For this one the book shows the wings of a bat, drawn from a zoological voyage report of the 1840s [3]. Its neighbor Chocolate Red is matched to the breast feathers of a bird of paradise [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is sampled from an aged copy of Werner's chart, so it is approximate [4]. The ISCC-NBS 1955 system places it in \"light grayish reddish brown\", about 6 units of color difference away [4]. Neighbors on the screen are [[brownish-red]] and [[mauve]], which is pinker [4][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The ColorHub archive files this swatch with the neutrals: lightness about 51 out of 100 and a chroma of only 11 [4]. Contrast against white is 4.32 to 1 [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive phrase in Werner's nomenclature",
+   "first_recorded": "Werner's Nomenclature, no. 97 (Reds), 1821 edition as catalogued by ColorHub",
+   "source": "Baty, Nature's Palette, pp. 239-264"
+  },
+  "aka": [],
+  "siblings": [
+   "brownish-red",
+   "campanula-purple"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub name archive",
+  "family": "Neutrals",
+  "lightness": 51.0,
+  "chroma": 11.0,
+  "contrast_white": 4.32,
+  "iscc_nearest": "light grayish reddish brown (block 45), dE 5.9",
+  "source": "Werner no. 97"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34-35, 243",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 243",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 250",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub name archive, data/graph nodes (Werner no. 97, Reds; aged swatch)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub name archive, nearest named colors",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the nomenclature match to Brownish Purple Red?",
+   "choices": [
+    "A bat's wing",
+    "A ripe cherry in every case",
+    "Burnt clay",
+    "A violet petal"
+   ],
+   "answer": "A bat's wing",
+   "kind": "pick"
+  },
+  {
+   "q": "Which red follows it in the series?",
+   "choices": [
+    "Chocolate Red",
+    "Scarlet Red",
+    "Rose Red",
+    "Lake Red"
+   ],
+   "answer": "Chocolate Red",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Werner matched Brownish Purple Red to the wings of a bat."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified against Paterson, Baty, Gurney, Albers, Birren, Westland, Livingstone, Pigment Compendium; no changes."
+  ]
+ },
+ "words": 182
+}

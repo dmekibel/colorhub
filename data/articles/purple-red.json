@@ -1,0 +1,290 @@
+{
+ "slug": "purple-red",
+ "name": "Purple Red",
+ "hex": "#701F29",
+ "names": [
+  "Purple Red"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Purple Red is a descriptive name for a dark red with a violet cast, as ancient as the dye of the murex shellfish and as late as a short-lived nineteenth-century chromate pigment.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "A dark red with a purple cast",
+   "body": "The swatch on this page, #701F29, is a dark, slightly purple red in the family of wine and burgundy [11]. Our library files it under RAL 3004, the German industrial color standard, with a second RAL value close by, Pearl Ruby Red, which is a near-duplicate at 2.3 units [11]. The 1955 ISCC-NBS system classifies the swatch simply as dark red, 2.7 units away, and the nearest name in our app is [[burgundy]], at 4.8 [11].\n\nThe library credits the older name to Werner's color nomenclature of 1821 and to the xkcd survey of 2010, which uses a brighter #990147 for the same words [11]. Werner's chart in Syme's edition has no entry called purple red as such; it has a brownish purple red and a purplish red, described below [2]. The name is therefore best treated as a descriptive phrase that was never one fixed color.\n\nThe books use the words for three quite different things: the ancient purple of the shellfish dyers, a short-lived chromate pigment of the nineteenth century, and the simple color of anything between a dark red and a plum [1][3][11]."
+  },
+  {
+   "id": "ancient",
+   "title": "When purple was a red",
+   "body": "The first purple was closer to red than to violet. Gage observes that the ancient world classed purple with red, the chromatic representative of fire and light, and that red had heralded the divine from the earliest times in many cultures [14]. Ball adds that ancient purple, porphyra or purpura, ranged from bluish to deep red, and that the jurist Ulpian defined purpura as every red material not dyed with coccus or carmine [3].\n\nThe best shade was dark. According to Ball, Pliny said the finest Tyrian purple was the color of clotted blood, and Roman dyers got it by steeping wool first in the extract of one species of shellfish, then in the extract of another [3]. Balfour-Paul says the species differ: Murex brandaris and Purpura haemastoma give reddish tones, while Murex trunculus gives bluer ones [4]. The Biblical Hebrew argaman means reddish purple, against tekhelet for blue or blue-purple, though translations are imprecise [4].\n\nPastoureau, summarizing an inquiry into the colors of the Bible, reports that the sacred splendor of the nomadic temple makes the purple-red range the statistically most significant, with red dominating [8]. Paterson records the same inheritance in a different language: phoenix, he says, was a purple-red dye named by the Phoenicians, and Finlay adds that the name Phoenician comes from the Greek phoinis, meaning purple [10][5]. A Chinese saying quoted by Coles, that something is so red it is purple, shows the idea surviving in another tradition [9]."
+  },
+  {
+   "id": "shellfish",
+   "title": "How the dye was made",
+   "body": "The dye came from a gland of Mediterranean murex shellfish [3]. Ball describes the fluid as whitish at first and turning through yellow, green and blue to purple as sunlight and air act on it [3]. A seventeenth-century naturalist, William Cole, watched the sequence on the Bristol Channel and wrote that the final stage was a very deep purple red [5]. St Clair repeats the sequence of pale yellow, sea green, blue and finally a dark purple-red, and says the finest shade, almost black at its deepest, came from blending fluids of both kinds of shellfish [7].\n\nBooks disagree sharply on the yield. Balfour-Paul says about 10,000 shellfish give one gram of dye [4]. Ball gives about 250,000 for one ounce, which works out at a similar order of magnitude [3]. Finlay says a single toga took about ten thousand shellfish, a figure that cannot be reconciled with either [5].\n\nThe method was lost when Constantinople fell in 1453, and the chemistry was settled much later [3][4]. In 1856 a French zoologist, Lacaze-Duthiers, saw a Mediterranean fisherman mark a shirt with a design that turned from yellow to purple-red in the sun [3]. Friedlander worked out the molecule in 1909 and found it almost identical to indigo, with two bromine atoms in place of two hydrogens [3]. Balfour-Paul notes that the two colors, indigo and shellfish purple, form their own chemical class apart from other dyes [4]."
+  },
+  {
+   "id": "insect",
+   "title": "A red that is also a purple",
+   "body": "Insect dyes produce the same color in a smaller way. Greenfield tells how the Frenchman Thiery, in Oaxaca, crushed one of the white-powdered insects on paper and saw a purple-red stain, which convinced him that he had found cochineal [6]. St Clair describes cochineal itself as a purple-red, and tells the story of how Cornelis Drebbel supposedly turned the solution scarlet in 1606 with a spill of acid on a tin window frame, a story she calls likely apocryphal [7]. The tale is disputed [7].\n\nThe balance of colors on the wheel explains the confusion. Paterson's color wheel puts red-purple between purple and red, with blue-purple on the other side [10]. Where one ends and the next begins is not fixed in nature but in language."
+  },
+  {
+   "id": "werner",
+   "title": "Syme's reds",
+   "body": "Syme's 1821 edition of Werner's chart arranged its reds in two sets [2]. The second chart includes a Brownish Purple Red, which Syme describes as the cherry red of Werner, made of lake red with brownish black and a small portion of grey [2]. The Purplish Red in the same chart is a renaming of the Columbine Red of Lenz, made of carmine with some Berlin blue and a touch of indigo [2].\n\nSo in 1821 a purplish red was still a recipe, something a painter could make on a palette from a lake and two blues [2]. The same book places the examples among animals, plants and minerals: the garnet appears beside the purplish red, and the antimony ore beside the brownish ones [2]. Our library credits its 1821 date for the name to this tradition [11]."
+  },
+  {
+   "id": "pigments",
+   "title": "Purple red in the paint box",
+   "body": "As a pigment name, purple red is nineteenth-century and chemical. The Colour Index of 1971 lists purple red as a synonym of silver chromate, Ag2CrO4, precipitated from silver nitrate and potassium chromate and stated to have been used as an artists' color [1]. Riffault's 1874 manual calls it a purple-red pigment, and Salter in 1869 knew it as silver red, which he said gave a fine ochre-red [1].\n\nThe sources do not agree on the formula. Bouguereau's sketchbook of 1869 lists a purple red material and gives its composition as mercuric chromate, according to Walker, and Riffault describes two varieties of mercury chromate, one a dark brick red and the other with a violet tinge [1]. A Rowney catalogue of 1849 lists a purple scarlet whose composition is unknown [1]. The pigment never became standard, and the name dropped out of use.\n\nOther purple reds had other chemistry. Salter described salts of purpuric acid, made from murexide, which was itself made from bird guano, and found that silver gave a purple-red and mercury a purple-red to rose [1][3]. The Compendium notes that a 15th-century Bolognese manuscript gives three recipes for pavonazzo, a purple-red color that could come from distinct sources, two of them plant extracts [1]. Lakes made from sandalwood vary with the metal in the laking salt, and aluminium gives an intense dark brown going toward purple red [1]. In minerals, the cobalt mineral erythrite occurs as red to purple-red earthy masses [1]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Purple is the hardest of the secondary colors to make from the old pigments, so painters often built it from a red lake and something dark. Ball reports that the vivid purple of the child's dress in the Portrait of a Woman and Child, painted by [[painter:anthony-van-dyck|Van Dyck]] about 1620 to 1621, is made from red lake, charcoal and white [13]. In his Charity, painted about 1627 to 1628, Ball finds that Van Dyck did not aim for the rich purple-red one would expect from Titian, since a brown glaze of Cassel earth and an underlayer of vermilion and earth pigments tell a quieter story [13]. Ball adds that the lakes have partly discolored with age, so the intended effect is hard to judge [13].\n\nThe lesson applies across the archive: a purple red in a museum photograph may be a lake that has shifted, a glaze that has darkened, or a mixture that was always dark."
+  },
+  {
+   "id": "words",
+   "title": "Other uses of the words",
+   "body": "Paterson lists beet red as the food additive E162, the reddish purple colouring called betanin, and defines beet as a deep purple-red after the vegetable [10]. In heraldry murrey is a reddish purple, one of two tinctures alongside tenne, the orange [10]. St Clair notes that magenta, now thought of as a pink, was originally more purple-red, an example of how a name and its color drift apart [7].\n\nRelated names include [[oxblood]], [[wine-red]], [[claret]] and [[maroon]], which name the same region by an object. [[tyrian-purple]] and [[imperial-purple]] carry the ancient meaning, and [[crimson]] and [[carmine]] belong to the insect reds."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, 175 contain this dark red over at least 5 per cent of the canvas, within 6 units of color distance, or 0.74 per cent of the archive [12]. The largest areas are in an illustrated book of flowers and butterflies from 1800, at 64 per cent, Study of Lilia by [[painter:carolus-duran|Carolus-Duran]], from 1887, at 48 per cent, and a portrait of the Marquesa de Vistabella by Masriera, from 1889, at 45 per cent [12]. [[painting:nga-41671|Botticelli's portrait of Giuliano de' Medici]], from 1478, covers 32 per cent [12].\n\nPainters concentrate it unevenly. Carolus-Duran has it in 3 of 13 paintings, 31 times the expected rate, and Van Dyck in 5 of 47, 14.5 times [12]. The 1400s stand out too, with 24 of 945 paintings, 3.45 times the archive rate, and with a looser lens the red peaks in the 1500s, at 1.8 per cent of 2,231 paintings [12]. In a painting it most often plays a middle value, in 62 per cent of the pictures that contain it, and it keeps company with Burgundy, Oxblood and Mahogany [12].\n\nThe earliest dated match is a Madonna and Child with Donor by Lippo Memmi, from 1325, covering just over 5 per cent of the panel [12]. That is 496 years before the first record of the name in our sources [12], and it only shows a look-alike hue in an aged photograph, not the pigment. The early centuries of the archive are thin, so the date is a floor. These are photographs of varnished paintings, and a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive pair of words, purple and red; as a pigment, silver chromate (Colour Index 77825)",
+   "first_recorded": "Werner and Syme, 1821, for related names; RAL 1927 for the swatch",
+   "source": "Pigment Compendium, 'Purple red'; Baty, Nature's Palette; our library"
+  },
+  "aka": [
+   "red-purple",
+   "purplish red",
+   "silver red (the pigment)"
+  ],
+  "siblings": [
+   "burgundy",
+   "oxblood",
+   "wine-red",
+   "claret"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "tyrian-purple",
+    "gloss": "the ancient shellfish dye, often a dark red rather than a violet"
+   },
+   {
+    "slug": "magenta",
+    "gloss": "originally more purple-red, now usually read as a pink"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "grc",
+    "name": "phoinix, porphyra (ancient purple)"
+   },
+   {
+    "lang": "he",
+    "name": "argaman (reddish purple)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#701F29",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 175,
+  "top_paintings": [
+   "cma-103824",
+   "nga-108382",
+   "commons-Q59979602",
+   "nga-41671"
+  ],
+  "first_dated": {
+   "id": "nga-13",
+   "year": 1325
+  },
+  "role": {
+   "mid": 0.62,
+   "shadow": 0.36,
+   "highlight": 0.02
+  },
+  "ngram": {
+   "term": "purple red",
+   "peak": 1810
+  },
+  "measured": {
+   "lch": [
+    25.5,
+    38.8,
+    21.3
+   ],
+   "nearest": [
+    [
+     "Burgundy",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), entries 'Purple red', 'Silver chromate', 'Mercury chromate', 'Murexide', 'Pavonazzo', 'Sandalwood', 'Erythrite'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 242-251 (Syme's reds)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 12, 24-26",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 19 (\"Purple\") and ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, pp. 15, 65, 75",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, section on the Bible",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 24",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries 'phoenix', 'beet red', 'heraldic colours', 'colour wheel'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): RAL, Werner 1821, xkcd 2010, ISCC-NBS 1955; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive and graph (tools/article_field.py; data/graph/fieldnotes/p.json): 23,781 paintings, as photographed, 5 per cent canvas, dE 6",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 30",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why was ancient purple often closer to red than to violet?",
+   "choices": [
+    "The best shellfish dye was a dark red, and the world classed purple with red",
+    "Violet dyes were forbidden",
+    "Purple was made from cochineal alone",
+    "Only madder could be used"
+   ],
+   "answer": "The best shellfish dye was a dark red, and the world classed purple with red",
+   "kind": "pick"
+  },
+  {
+   "q": "In the modern pigment sense, what was purple red?",
+   "choices": [
+    "Silver chromate",
+    "A cochineal lake",
+    "Red ochre",
+    "A mixture of vermilion and ultramarine"
+   ],
+   "answer": "Silver chromate",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: books agree on how many shellfish were needed for one toga.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ancient purple was often closer to blood red than to violet; Pliny preferred it the color of clotted blood.",
+  "Purple red was once a chromate pigment, from silver nitrate and potassium chromate.",
+  "Look for the dark red-purple of lake glazes in old portraits, where a darkened lake leaves a deep wine tone."
+ ],
+ "words": 1692,
+ "status": "checked",
+ "checked": {
+  "by": "L7 batch 46 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Shellfish yields disagree across Balfour-Paul, Ball and Finlay: stated as a disagreement.",
+   "Drebbel scarlet story flagged as disputed.",
+   "Silver vs mercury chromate identity of purple red: sources disagree, stated.",
+   "Werner's chart has no entry titled purple red; the library's Werner date is approximate.",
+   "Archive first-seen 1325 is a floor and not a pigment test."
+  ]
+ }
+}

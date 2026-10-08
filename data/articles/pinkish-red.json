@@ -1,0 +1,206 @@
+{
+ "slug": "pinkish-red",
+ "name": "Pinkish red",
+ "hex": "#F10C45",
+ "names": [
+  "Pinkish Red",
+  "Pinkish red"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pinkish red is the dictionary's all-purpose gloss for a red with a pink cast, used to define lobster, rose, ruby and brick before it was ever a color name of its own.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A gloss, not a name",
+   "body": "Paterson uses the phrase to define a long list of colors: adobe, after the sun-dried bricks of Latin America [1]; the Burmese ruby [2]; the homard, or lobster [3]; permanent rose, pink carmine and the red of the rose itself [4]. Pomegranate is sometimes called pinkish red too, though its rind is golden-orange to red [5]. The web color `LightCoral`, #F08080, gets the same gloss [6]. See [[crimson]], [[rose]], [[adobe]] and [[coral]] for named relatives."
+  },
+  {
+   "id": "incarnadine",
+   "title": "Incarnadine and the earths",
+   "body": "St Clair's glossary defines incarnadine as a fierce, saturated pinkish red [7]. For earth pigments, Church in 1901 wrote that the terra rosa of Italy owes its pinkish-red hue to ferric oxide [8]. A synthetic dye shows up as well: erythrosine, a pinkish-red stain, is the food additive E127 used in glacé cherries [9]."
+  },
+  {
+   "id": "sky",
+   "title": "The color of a low sun",
+   "body": "Pastoureau notes that sunlight reads yellow or yellow-orange at midday, but yellowish red, pinkish red or even red when the sun is rising or setting [10]. He adds that these are modern scientific explanations unknown to ancient societies [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch here is the xkcd survey's Pinkish Red, #F10C45, a vivid, saturated color [11]. Its nearest named color is Crimson, at a color distance (ΔE) of 4.4, and the Wikipedia color list has a near-duplicate called Red (Munsell) at 2.1 [11]. No painting in the ColorHub archive of 23,531 carries it as photographed [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a description: pink plus red",
+   "first_recorded": "not documented; a descriptive name",
+   "source": "Paterson, A Dictionary of Colour, p. 20"
+  },
+  "aka": [
+   "pink red"
+  ],
+  "siblings": [
+   "pink-red",
+   "crimson",
+   "rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "coral",
+    "gloss": "also glossed pinkish red, but an orange-leaning pink, named for the sea organism"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub painting archive, 23,531 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    51,
+    84,
+    24
+   ],
+   "nearest": [
+    [
+     "Crimson",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 20, \"adobe\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 82, \"Burmese ruby\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 210, \"homard\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 304, 313, 345-346",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 317, \"pomegranate\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 242, \"LightCoral\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Incarnadine\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 373 (terra rosa, quoting Church 1901)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 161, \"erythrosin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 1",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), entry Pinkish Red (xkcd, Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,531 paintings, as photographed, field notes for #F10C45",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say the color adobe is named after?",
+   "choices": [
+    "Sun-dried bricks",
+    "A flower",
+    "A wine",
+    "A mineral"
+   ],
+   "answer": "Sun-dried bricks",
+   "kind": "pick"
+  },
+  {
+   "q": "According to Church in 1901, what gives the terra rosa of Italy its pinkish-red hue?",
+   "choices": [
+    "Ferric oxide",
+    "Cochineal",
+    "Madder root",
+    "Mercury"
+   ],
+   "answer": "Ferric oxide",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: pinkish red is an old documented pigment name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The phrase pinkish red is how the dictionary defines lobster, rose, adobe and Burmese ruby."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No changes; claims match fact cards."
+  ]
+ },
+ "words": 244
+}

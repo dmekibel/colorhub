@@ -1,0 +1,106 @@
+{
+ "slug": "purple-plum",
+ "name": "Purple Plum",
+ "hex": "#9C51B6",
+ "names": [
+  "Purple Plum"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Purple Plum is the library's form of Plum Purple, the colour of a ripe plum in one early list of nature's purples.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Plum Purple in a list of purples",
+   "body": "Baty's *Nature's Palette* lists Plum Purple as number 42 in a run of purples, between Auricula Purple and Red Lilac Purple [1]. The run also names Pansy Purple, Campanula Purple, Imperial Purple and Lavender Purple [1].\n\nEach entry cites living and mineral examples. For Plum Purple the book gives the plum itself and fluor spar [1]. The neighboring Auricula Purple is also illustrated with fluor spar, which shows how close the neighbors are [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The library value is a bright violet-purple, more saturated than most ripe plums [2]. The name order is reversed in the library, and we read it as the same name as Baty's Plum Purple, which is our inference [2]. Screen colors are approximate [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The books say little more. Five passages in the concordance mention the name, all from Baty's list of purples [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plum fruit",
+   "first_recorded": "Baty, Nature's Palette",
+   "source": "Baty, Nature's Palette, p. 104"
+  },
+  "aka": [
+   "Plum Purple"
+  ],
+  "siblings": [
+   "plum",
+   "campanula-purple",
+   "imperial-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#9C51B6",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "concordance_hits": 5
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34, 104",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), screen approximation",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which mineral does Baty pair with the plum for Plum Purple?",
+   "choices": [
+    "Fluor spar",
+    "Malachite",
+    "Cinnabar"
+   ],
+   "answer": "Fluor spar",
+   "kind": "pick"
+  },
+  {
+   "q": "Plum Purple is number 42 in Baty's run of purples.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In one early list of nature's purples, the plum shares its mineral example with two other purples."
+ ],
+ "words": 152,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "name order inferred",
+   "removed unverified claim that fluor spar also illustrates Imperial purple"
+  ]
+ }
+}

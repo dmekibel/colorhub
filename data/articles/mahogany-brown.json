@@ -1,0 +1,134 @@
+{
+ "slug": "mahogany-brown",
+ "name": "Mahogany Brown",
+ "hex": "#4C2F26",
+ "names": [
+  "Mahogany Brown"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Mahogany Brown is a very dark reddish brown named for polished mahogany wood, and it is also the paint standard RAL 8016.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of a wood",
+   "body": "St Clair defines mahogany as a red brown, after the hardwood [1]. Our library lists this darker swatch in three systems: RAL 8016, a paint standard whose screen value is approximate, ISCC-NBS block 43, and Maerz and Paul's dictionary, which records the name as early as 1892 [2]. A near-twin there is called Red Currant, dated 1899 [2]. Its lighter, redder sister is [[mahogany-red]], and the plain color is [[mahogany]].\n\nBrown can also be an end point. Daniel Thompson, a translator of Cennino, noted that the river landscapes of Baldovinetti and Domenico Veneziano must once have had green verdigris, which has since gone mahogany brown [3]. Some of the browns in old paintings were not painted brown."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dark red-browns are common in the museum record. In our archive of 23,781 paintings, 3,852 (16.2 per cent) hold a color within six units over at least five per cent of the canvas, peaking in the 1500s at 560 of 2,231 works [4]. Darkened varnish and dark grounds probably push those numbers up, and the archive cannot separate them from the painter's original color [4]. These are photographs of aged, varnished paintings, so a match is not a pigment test [4]. Compare [[brown]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the mahogany hardwood",
+   "first_recorded": "1892 (Maerz & Paul 1930)",
+   "source": "St Clair, The Secret Lives of Colour; ColorHub library"
+  },
+  "aka": [
+   "RAL 8016",
+   "Red Currant (near-twin)"
+  ],
+  "siblings": [
+   "mahogany",
+   "mahogany-red",
+   "brown",
+   "burnt-umber"
+  ],
+  "parent": "mahogany",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mahogany-red",
+    "gloss": "a lighter, redder mahogany"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#4C2F26",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3852,
+  "top_paintings": [
+   "cma-143238",
+   "cma-152821",
+   "nga-81871"
+  ],
+  "rate": 0.162,
+  "peak_century": {
+   "key": 1500,
+   "hits": 560,
+   "n": 2231,
+   "lift": 1.55
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Mahogany\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 21, notes (citing Thompson, The Materials of Medieval Painting)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What happened to the verdigris in the Baldovinetti and Veneziano landscapes, according to Thompson?",
+   "choices": [
+    "It turned from green to mahogany brown",
+    "It turned blue",
+    "It was painted over",
+    "It faded to white"
+   ],
+   "answer": "It turned from green to mahogany brown",
+   "kind": "pick"
+  },
+  {
+   "q": "Which paint standard lists Mahogany Brown as number 8016?",
+   "choices": [
+    "RAL",
+    "Pantone",
+    "NCS",
+    "Crayola"
+   ],
+   "answer": "RAL",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Some of the browns in old paintings were once green: verdigris can age to mahogany."
+ ],
+ "words": 220,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

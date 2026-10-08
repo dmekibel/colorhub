@@ -1,0 +1,134 @@
+{
+ "slug": "atlantis",
+ "name": "Atlantis",
+ "hex": "#2D435E",
+ "names": [
+  "Atlantis"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Atlantis is a dark, slightly greenish navy from Maerz and Paul's 1930 color dictionary; why it carries the lost island's name is undocumented.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary name",
+   "body": "Maerz and Paul's *Dictionary of Color* (1930) lists Atlantis at plate 39, position L 8, and the NBS Circular 553 of 1955 cites it [1]. The earliest recorded use the library finds is 1928, and the nearest ISCC-NBS category is deep greenish blue, about 6.6 units away [1]. Who chose the name, and why, is undocumented; the color books we hold mention the word only in a bibliography entry, not as a color [2]. Its twin is [[glacier]], 2.6 units away, followed by [[freedom]] and [[dark-grey-blue]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Atlantis appears in 238 of the 23,781 paintings in our archive, about 1.0%, as photographed [4]. It peaks in paintings of the 1900s, in 36 of 1,674 (2.2%), 3.3 times the rate expected from the same museums [4]. Inside a painting it most often plays a hidden color, in 48% of the 122 paintings where it counts, judged by lightness rank [4]. The earliest painting is from 1301, though the archive is thin in early centuries [4]. These are photographs of varnished paintings, so a match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1928 (Maerz & Paul 1930)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "glacier",
+   "dark-grey-blue",
+   "freedom",
+   "indigo-dye"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 238,
+  "pct": 1.0,
+  "peak_period": "1900s",
+  "measured": {
+   "lch": [
+    27.8,
+    18.6,
+    269.8
+   ],
+   "nearest": [
+    [
+     "Glacier",
+     2.6
+    ],
+    [
+     "Freedom",
+     4.4
+    ],
+    [
+     "Dark Grey-Blue",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 39 L 8, first recorded 1928; NBS Circular 553 (1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Concordance search of ../color-kb/concordance/by-color/atlantis.jsonl",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes) (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who chose the name Atlantis for this color?",
+   "choices": [
+    "It is undocumented",
+    "Maerz and Paul, after Plato",
+    "The NBS in 1955",
+    "The Royal Navy"
+   ],
+   "answer": "It is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "In which century do paintings in our archive hold this color most often?",
+   "choices": [
+    "The 1900s",
+    "The 1300s",
+    "The 1600s",
+    "The 1800s"
+   ],
+   "answer": "The 1900s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A deep navy that sits mostly as a hidden color inside paintings."
+ ],
+ "words": 202,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "neighbor order fixed to match distances"
+  ]
+ }
+}

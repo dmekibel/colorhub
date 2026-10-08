@@ -1,0 +1,131 @@
+{
+ "slug": "manila",
+ "name": "Manila",
+ "hex": "#BB9D75",
+ "names": [
+  "Manila"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Manila is a light yellowish brown, a color name Maerz and Paul date to 1892 and shared with the Philippine capital.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A port that moved goods",
+   "body": "Maerz and Paul record Manila as a color name from 1892 [1]. The color books we hold do not explain it; they use Manila only as a place, and the port matters because of what passed through it [2].\n\nFrom the 1570s Spanish galleons linked Acapulco and Manila, and that trade carried cochineal red to the Philippines and on to China, where it was called \"foreign red\" [2][3]. Manila also sits in the name of a dye: *Manila indigo* was the trade name for the dye of *Wrightia tinctoria*, a tree of India, Burma and Malaya [4]. One account ranks Manila indigo as the worst grade, used mainly for laundry blue [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is Maerz and Paul plate 12, C 5, which ISCC-NBS reads as a light yellowish brown [1]. It sits near [[buff]] and [[tan]] and is much paler and warmer than [[sepia]] [1]. One book mentions a manila envelope in passing, but none of ours explains the color's name, so any link to paper or rope is common usage, not something we can cite."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Manila is one of the most common colors in the ColorHub archive: it matches 2,619 paintings, about 11% of all of them, as photographed [5]. That fits a mid-tone neutral. Sargent and Catlin are among the painters who use it more than most [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Manila, the Philippine capital (origin of the color use undocumented)",
+   "first_recorded": "1892 (Maerz & Paul)",
+   "source": "Maerz & Paul 1930; Greenfield; Balfour-Paul"
+  },
+  "aka": [],
+  "siblings": [
+   "buff",
+   "tan",
+   "mushroom",
+   "beige"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mushroom",
+    "gloss": "a similar pale brown with a pinker cast"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 2619,
+  "pct": 11.01,
+  "first_recorded": 1892,
+  "plate": "12 C 5"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz & Paul 1930, plate 12 C 5; ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 106, 122",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the Acapulco-Manila galleons carry to the Philippines?",
+   "choices": [
+    "Cochineal red",
+    "Indigo",
+    "Silk",
+    "Sappanwood"
+   ],
+   "answer": "Cochineal red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our books document how the color manila was named.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Manila the color has no documented story in our books, but Manila the port helped send cochineal red to China."
+ ],
+ "words": 234,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede claimed paper and rope as the source, unsourced: reworded to the dated name.",
+   "Swatch sentence said no book mentions envelopes; one does in passing: corrected.",
+   "Removed unsourced varnish/canvas explanation."
+  ]
+ }
+}

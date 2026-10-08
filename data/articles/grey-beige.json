@@ -1,0 +1,107 @@
+{
+ "slug": "grey-beige",
+ "name": "Grey Beige",
+ "hex": "#A48F7A",
+ "names": [
+  "Grey Beige"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Grey Beige is a light, greyed tan, the color of undyed wool and dry dust, named by blending two neutral words.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two neutrals in one",
+   "body": "The earliest record in our sources is the German RAL system of 1927, and ISCC-NBS later places the swatch among light grayish yellowish browns [1]. The books read say nothing about the name itself, beyond one mention of gray, beige and brown tones in a discussion of Rembrandt's 1632 *Anatomy Lesson of Doctor Tulp*, where they accompany black and white [2]. That is a description of a painting, not of a named color.\n\nBeige is itself an old French word for undyed wool, so the name says, in effect, a greyer beige [1]. Its near neighbors are [[beige]] and [[grey]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is one of the commonest colors in paintings: 2,644 of 23,781 pieces contain it, 11.1 per cent, more than 95 per cent of named colors [3]. In most of those it is a hidden color, neither the lightest nor the darkest [3]. It peaks in the 1200s, at 20.4 per cent of 142 paintings, which is probably the tone of aged panels and silk [3]. Jan Wijnants leans on it most, in 5 of 13 works [3]. It often shares a canvas with [[dusty-sepia]] and [[sandust]] [3]. These are photographs of aged paintings, so the grey in it is partly time [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "beige, the old word for undyed wool, made greyer",
+   "first_recorded": "1927, RAL",
+   "source": "data/library.json"
+  },
+  "aka": [],
+  "siblings": [
+   "beige",
+   "dusty-sepia"
+  ],
+  "parent": "beige",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/g.json",
+  "n_present": 2644,
+  "pct": 11.12,
+  "peak": "1200s, 20.4% of 142 paintings",
+  "painters": [
+   [
+    "Jan Wijnants",
+    5,
+    13
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): RAL 1927; ISCC-NBS block 79 light grayish yellowish brown; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, p. 147",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/g.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Roughly how common is Grey Beige in our painting archive?",
+   "choices": [
+    "About 1 in 9 paintings",
+    "About 1 in 500",
+    "About 1 in 3",
+    "Under 1 in 1,000"
+   ],
+   "answer": "About 1 in 9 paintings",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books read here give a history of the name Grey Beige.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Grey Beige appears in 11 per cent of the paintings in our archive, more than 95 per cent of named colors."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "status": "checked",
+ "words": 220
+}

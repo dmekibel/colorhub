@@ -1,0 +1,115 @@
+{
+ "slug": "avocado-green",
+ "name": "Avocado Green",
+ "hex": "#87A922",
+ "names": [
+  "Avocado Green"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Avocado Green is a bright, yellow-green, and a color-name whose meaning shifts with whose avocado you picture.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines the avocado's green as the pulp rather than the skin, and traces the fruit's name to two possible roots, Spanish *abocado* or Aztec *ahuacatl* [1]. St Clair uses avocado green as an example of a name that may baffle readers a century on: skin, outer flesh or the butter tint near the seed [2].\n\nThe library carries the swatch from the xkcd survey and lists it in ISCC-NBS block 120 and Maerz and Paul [3]. Its nearest standard color is Kelly green, at a distance of 10.1 [3]. Close greens include [[apple-green]] and [[olive]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 6 paintings in our archive of 23,781 hold this color, 0.03% of them, as photographed [4]. In printed English the word peaks in the 2010s and rose fastest in the 2000s, but Google Books counts every sense of the word, including the fruit [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the avocado fruit; its name perhaps from Spanish abocado or Aztec ahuacatl",
+   "first_recorded": "origin of the color name undocumented",
+   "source": "Paterson, p. 39"
+  },
+  "aka": [
+   "avocado"
+  ],
+  "siblings": [
+   "avocado",
+   "apple-green",
+   "olive"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "pct_paintings": 0.03,
+  "ngram_peak": 2010,
+  "nearest": [
+   [
+    "Kelly green",
+    10.1
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 39, \"avocado\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Paterson, which part of the avocado does its green usually refer to?",
+   "choices": [
+    "The pulp",
+    "The skin",
+    "The seed"
+   ],
+   "answer": "The pulp",
+   "kind": "pick"
+  },
+  {
+   "q": "St Clair argues that names like avocado green will always stay clear to later readers.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson ties avocado green to the pulp, not the skin."
+ ],
+ "words": 156,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,148 @@
+{
+ "slug": "billiard",
+ "name": "Billiard",
+ "hex": "#225843",
+ "names": [
+  "Billiard"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Billiard is the deep green of the cloth on a billiard table, a color that arrived in the Maerz & Paul dictionary in 1930 and carries a surprisingly large share of the story of how people feel about green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The cloth",
+   "body": "Billiard, or billiard green, names the deep green of the baize on billiard and snooker tables [1]. Maerz and Paul's 1930 dictionary lists it on plate 29, with a first recorded use in 1920 [2]. The swatch here is a dark, muted green, close to [[hunter-green]], with [[racing-green]] and [[bottle-green]] among the same family of deep greens [2][1].\n\nPastoureau treats the table as one case of a wider rule: green is the color of games and gaming, and he points to billiards, played on green felt, as proof [3]. Cards and indoor sports follow the same habit [3]."
+  },
+  {
+   "id": "purple-tables",
+   "title": "The table that went purple",
+   "body": "In 1934 Faber Birren set up as a color consultant in Chicago, and his first real break came from a billiard-table maker, the Brunswick-Balke-Collender Company [4]. Home buyers were not buying tables for basement game rooms [4]. Birren found that American women disliked green tops because they linked the color with cheap pool halls and gambling dens [4]. He advised a soft purplish covering instead, the company went along, and sales of the purple-topped models for the home rose fast [4].\n\nThis is Birren's own account, in the introduction to his book, and no second source in the books confirms the sales figures [4]. It remains a neat case of a color's reputation outweighing its function."
+  },
+  {
+   "id": "night-cafe",
+   "title": "Van Gogh's table",
+   "body": "The most famous painted billiard table is in Van Gogh's *The Night Café*, which he described to his brother in 1888 [3][5]. He wrote that he had tried to express terrible human passions with red and green, setting a green table against a blood-red room [3][5]. Translators disagree on the table's color, rendering it as green or yellow-green, and the same letter calls the walls dull or dark yellow in different editions [3][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive, a color within six units of this swatch fills at least five per cent of the canvas in 39 of 23,781 paintings [6]. Dennis Miller Bunker's [[painting:nga-103247|Roadside Cottage]] of 1889 holds it across 46 per cent of the picture, and Klimt's [[painting:commons-Q19883563|The Park]] of 1909 across 42 per cent [6]. The match rate rises sharply in the 1900s, 14 hits among 1,674 paintings, against 19 among 8,345 in the 1800s [6].\n\nPaintings that carry billiard share their canvas most often with Hunter green, 37 of the 39 times [6]. The color sits in the shadow range of its paintings in about two cases in three [6]. These are photographs of aged, varnished paintings, so a match shows a screen color near this one, not a pigment [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the baize of a billiard table",
+   "first_recorded": "1920 (Maerz & Paul 1930)",
+   "source": "Maerz & Paul; Paterson"
+  },
+  "aka": [
+   "Billiard green"
+  ],
+  "siblings": [
+   "hunter-green",
+   "racing-green",
+   "bottle-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#225843",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 39,
+  "top_paintings": [
+   "nga-103247",
+   "commons-Q19883563",
+   "cma-149410"
+  ],
+  "role": {
+   "shadow": 0.67,
+   "mid": 0.26,
+   "highlight": 0.08
+  },
+  "company": "Hunter green, 37 of 39"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"billiard green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library: Billiard, Maerz & Paul 1930, plate 29 L 11, first recorded 1920; nearest name Hunter green",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green, pp. 42-45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, introduction to the revised edition",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 200 and p. 209",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, matched at 6 delta-E units and 5% canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did Birren advise a purplish billiard-table cover for homes?",
+   "choices": [
+    "Buyers linked green tops with pool halls and gambling dens",
+    "Purple dye was cheaper",
+    "Green felt faded faster",
+    "Purple was a royal color"
+   ],
+   "answer": "Buyers linked green tops with pool halls and gambling dens",
+   "kind": "pick"
+  },
+  {
+   "q": "Pastoureau calls green the color of games and gaming.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Billiard green went purple in the 1930s when American home buyers shunned the color of pool halls."
+ ],
+ "words": 442,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

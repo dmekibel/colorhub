@@ -1,0 +1,352 @@
+{
+ "slug": "bright-red",
+ "name": "Bright Red",
+ "hex": "#FF000D",
+ "names": [
+  "Bright Red"
+ ],
+ "tier": "descriptive",
+ "depth": "epic",
+ "lede": "Bright red is the plain description for a luminous red, and the colors it describes, from cinnabar and cochineal to the postbox, tell how hard a lasting bright red was to make.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description, not a title",
+   "body": "Bright red is a description rather than a title. In our library it is a plain modifier on red, with no known author or date for the phrase [23]. Dictionaries lean on it constantly: Paterson glosses *cherry*, *flame-red*, *Spanish red*, *vermilion* and *cadmium red* each as a bright red [1].\n\nThe idea is older than the English phrase [2]. Latin *roseus*, the root of the rose words, did not mean pink. It meant bright red or vermilion, and was used for makeup and for kermes-dyed cloth [2]. Gage shows the same drift in *scarlet*, which began as a fine wool of any color and, once the best of it was dyed with kermes, became the model of a bright red by the thirteenth century [3]. St Clair dates that shift a century later, in the fourteenth [5]. Books disagree on the date, and both are describing a cloth name turning into a color name.\n\nMedieval buyers may also have heard \"bright\" differently from us. Pastoureau argues that dyers and their clients prized intensity and luminosity over hue, so a luminous blue wool seemed closer to a bright red than to a pale blue [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here, #FF000D, comes from the xkcd color survey, and our library files the name under ISCC-NBS block 11 as well as under two RAL luminous reds that sit within about two CIEDE2000 units of it [23]. Its nearest named neighbor is [[scarlet]], 2.9 units off [23]. By distance, the ISCC-NBS name for the exact swatch is \"vivid reddish orange\" [23].\n\nIt is also a very loud screen color. The red channel is at its maximum and the green is at zero [23]. One bright red is an actual product: Livingstone measured the reflectance of a Winsor and Newton oil paint called Bright Red, alongside Cadmium Red [17]."
+  },
+  {
+   "id": "minerals",
+   "title": "Mineral reds",
+   "body": "For most of history the earth gave muddy reds. Greenfield says the best red artists knew was ochre, tinged with orange and brown, until painters in Asia, sometime before the fifth century BC, found that the mineral cinnabar made a far brighter one [6]. Cinnabar was costly, poisonous and prone to darken in light, yet it was used for more than a thousand years because nothing brighter was available [6]. Ball adds that the Chinese used it long before the West did, and that Greek evidence for it before Theophrastus is rare [7].\n\nThe Romans used cinnabar raw, while medieval artists made the same red by heating mercury with sulphur, and Finlay quotes a fifteenth-century recipe for it [9]. Coles says an Arabic alchemist brought the recipe to Europe around the eighth century [8]. Paterson says the word *vermilion* was first linked to the kermes dye, and only later to cinnabar [1].\n\nGlass offered another route in the ancient world: Gage notes that Roman mosaic makers turned to colored glass for bright reds, blues and greens from the second century BC, at Pergamon [3]. Nature occasionally supplied a stray example, such as crocoite, a bright red Siberian crystal first mentioned in the West in 1762 that turns deep orange when crushed and found no use as a pigment [7].\n\nIron gave a second route. The Pigment Compendium notes that hematite from the Florence mine in Cumbria was prized as a particularly bright red, and that the supplies of Crawshay Red were exhausted around 1900 [10]. Grain size matters as much as chemistry: the same hematite looks bright red at 0.1 to 0.2 micrometres and blue-red to purple at 1 to 5 micrometres [10]. In cadmium paints the recipe sets the hue, and a selenium-to-cadmium ratio of 20 to 80 gives a bright red, with 10 to 90 giving orange and 30 to 70 a dark maroon [10]. Paterson dates the first marketing of cadmium red to 1910 [1]."
+  },
+  {
+   "id": "dyes",
+   "title": "Dyed reds",
+   "body": "Cloth was harder. Neither ochre nor cinnabar gave a bright red on fabric, so dyers had to look to plants, insects and, in Greenfield's account, even dung [6]. The best-known madder red, Turkey red, took three weeks or more and used alum, tin, calcium, tannin, ox blood and sheep or cow dung on yarn first steeped in rancid castor oil [11]. In a bathhouse in Tabriz, a travel account quoted by Balfour-Paul says, [[flower:henna|henna]] paste turned a prince's beard bright red [13].\n\nCochineal gave the brightest reds of all once tin was added. St Clair says that crushed insects stain the fingers crimson, that alum fixes the dye, and that acids or tin can move the color from pale pink to nearly black [5]. A famous story credits Cornelis Drebbel with finding tin scarlet when cochineal and strong acid spilled on a pewter window frame; Finlay dates it to 1607 and says Cromwell's New Model Army wore the result by 1645 [9]. Greenfield disputes the accident and gives c. 1606 to 1607, and St Clair calls the tale likely apocryphal and prefers 1606 [12][5]. What is not disputed is the outcome: Finlay reports that British officers' scarlet was dyed with cochineal until 1952 [9]."
+  },
+  {
+   "id": "aniline",
+   "title": "Aniline reds",
+   "body": "Chemistry then made bright reds cheap, and sometimes harmful. Colin and Robiquet heated madder and got bright red needles of alizarin, a substance that makes up only about one per cent of the root [15]. Greenfield reports that from the 1860s people wearing the new synthetic dyes next to the skin complained of rashes, that accounts multiplied in the 1870s and 1880s, and that bright reds such as fuchsine were seen as the worst [14]. Investigators suspected the arsenic acid used in making fuchsine [14]."
+  },
+  {
+   "id": "fading",
+   "title": "Bright, but not for long",
+   "body": "A bright red has often been a fugitive one. Britain's pillar boxes, originally green, were repainted between 1874 and 1884 in a bright red silicate enamel [9]. A letter of 1887 reported boxes gone \"pinky white\", and one from 1919 compared the tops to snow [9]. In 1922 a former naval officer proposed duller paint, but it was better synthetic reds that finally solved the problem [9]. Vermilion in thick paint, Finlay notes, resists blackening unless it sits in bright sunlight [9]."
+  },
+  {
+   "id": "painting",
+   "title": "In painting",
+   "body": "Painters long disagreed about where bright red belongs. From the 1620s palettes were set out in tonal order along the edge, and Rembrandt put bright red next to white, while his pupil de Gelder placed it beyond yellow [3]. For Raphael the question was harmony: in the *Madonna del Granduca* of about 1505, Ball says, a bright red against aquamarine blue is calmed by deep shadow and golden flesh tones [16]."
+  },
+  {
+   "id": "seeing",
+   "title": "Seeing bright red",
+   "body": "Red is the color most dependent on its surroundings. Livingstone notes that through a red filter held close to the eye, red things look whitish and desaturated, because you need contrast to see red at all [17]. Water removes it early: red is mostly absorbed by ten feet down, and a bright red object seen at fifty feet through shallow water looks as dull as the same object seen close at that depth [18]. Some compact fluorescent and LED lamps render saturated reds poorly, which Eckstut shows by an apple that looks flat under a lamp rated at 70 against one rated at 97 [19].\n\nYou can see a bright red without any pigment. Hold a hand in front of a bright flashlight and the spaces between the fingers glow bright red, Gurney notes, as light travels through the skin [18]. Blood is the same: oxyhaemoglobin is a bright red pigment, in Paterson's phrase, and Birren describes a device that reads blood color, bright red when oxygen is plentiful and darker when it falls [1][20]."
+  },
+  {
+   "id": "meaning",
+   "title": "Taste and reputation",
+   "body": "Bright red has been loved, feared and policed. Greenfield notes that in Hebrew *Adam* means red, and that bright red was the color of blood sacrifice and of the sin it atoned for [21]. Pastoureau describes the medieval fashion for small, plump, bright red mouths, compared to rubies [22]. In the seventeenth century, by his account, the bright reds tending toward orange gave way to crimson and wine shades [22].\n\nSt Clair relates that Mary, Queen of Scots, removed her dark outer clothes at her execution to show a bright scarlet undergown: sympathetic onlookers read martyrdom in it, hostile ones the scarlet woman of Babylon [5]. By the nineteenth century, Greenfield says, an overly bright red could earn a wearer a charge of vulgarity, and the bright fire-engine kind still gets a bumpy reception in formal settings [21]."
+  },
+  {
+   "id": "myths",
+   "title": "Myths around bright red",
+   "body": "The belief that Greek statues were left white is a myth [7]. Ball says the Greeks painted stone, and that gods often had bright red faces [7].\n\nOld color-cure writing is not evidence either. Birren quotes the occultist Panchadasi on tired patients being flooded with bright reds, and presents it as old opinion, not modern science [20]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Bright red is rare in the old paintings we hold. In our archive of 23,781 paintings, a screen color within six units of this swatch covers at least five per cent of the canvas in only three works [24]. They are [[painter:pierre-bonnard|Bonnard]]'s [[painting:commons-Q17491092|Corner of a Table]] of 1935 at 16 per cent, [[painter:henri-matisse|Matisse]]'s [[painting:commons-Q27974912|Painter's Family]] of 1911 at 12 per cent, and Eduardo Cano's portrait of Alfonso IV of 1851 at 8 per cent [24].\n\nThat puts it among the rarer named colors, rarer than 77 per cent of them [24]. These are photographs of aged, varnished paintings, and a color match is not a pigment test [24]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive phrase: bright + red",
+   "first_recorded": "origin undocumented; in our library RAL 1927 and xkcd 2010",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Luminous Red and Luminous Bright Red (RAL 3024 and 3026)"
+  ],
+  "siblings": [
+   "scarlet",
+   "pure-red",
+   "fire-engine-red",
+   "cherry-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "scarlet",
+    "gloss": "the nearest named color, 2.9 units away; originally a cloth name"
+   },
+   {
+    "slug": "carmine-red",
+    "gloss": "a rosier red from Werner's list, not a bright red at all"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FF000D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "commons-Q17491092",
+   "commons-Q27974912",
+   "commons-Q125052651"
+  ],
+  "rarity": "rarer than 77% of named colors",
+  "measured": {
+   "iscc": "vivid reddish orange",
+   "iscc_de": 7.7,
+   "nearest": [
+    [
+     "Scarlet",
+     2.9
+    ],
+    [
+     "Luminous Bright Red",
+     1.2
+    ],
+    [
+     "Luminous Red",
+     2.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 85, 97, 170, 292, 373, 411 (\"cadmium red\", \"cherry\", \"flame-red\", \"oxyhaemoglobin\", \"Spanish red\", \"vermilion\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 33",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 20, 84, 182",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Scarlet\" (ch. 65) and \"Cochineal\" (ch. 66)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 5",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11 and ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 91",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 13 (\"Red\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 84, 196, 268",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 237",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 10 and ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, pp. 156, 206",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Eckstut and Eckstut, What Is Color?, ch. 50",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 13 and ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7 and ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 21 and ch. 30",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph: xkcd, ISCC-NBS, RAL), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings, as photographed (tools/article_field.py, ΔE 6, at least 5% of canvas; Color Graph field notes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the Latin word roseus mean?",
+   "choices": [
+    "Bright red or vermilion",
+    "Pink",
+    "Orange",
+    "Purple"
+   ],
+   "answer": "Bright red or vermilion",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Greek statues were left white.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why do red objects look dull underwater?",
+   "choices": [
+    "Water absorbs red light first, by about ten feet down",
+    "Water adds blue pigment",
+    "Red fades faster in water",
+    "Red cannot be seen in water"
+   ],
+   "answer": "Water absorbs red light first, by about ten feet down",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Hold a hand in front of a flashlight: the spaces between your fingers glow bright red, with no pigment involved.",
+  "The same hematite is bright red at 0.1 to 0.2 micrometres and purple at 1 to 5.",
+  "British officers' scarlet was dyed with cochineal until 1952."
+ ],
+ "words": 1530,
+ "status": "checked",
+ "checked": {
+  "by": "Sonnet 5.5 batch writer (self-check: sentence-to-note trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Descriptive modifier: no authored history; the article is about what bright reds were made of, from the books' passing mentions.",
+   "Drebbel tin-scarlet story: books disagree (Finlay 1607 fact; Greenfield disputes; St Clair 1606, apocryphal): stated as disputed.",
+   "Scarlet date: Gage 13th c. vs St Clair 14th c.: stated as books disagree.",
+   "Greek painted statues myth corrected; Birren/Panchadasi color-cure material marked old opinion.",
+   "Cadmium red 1910 is Paterson only; hematite grain sizes from Helwig via Pigment Compendium; Tabriz henna is one travel account.",
+   "Swatch is a screen value (xkcd), not a pigment; archive matches are photographs."
+  ]
+ }
+}

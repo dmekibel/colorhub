@@ -1,0 +1,122 @@
+{
+ "slug": "grapefruit",
+ "name": "Grapefruit",
+ "hex": "#FD5956",
+ "names": [
+  "Grapefruit"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Grapefruit is a bright coral red, named for the fruit's flush; the books read say little about it, so its history is mostly the library's record.",
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"strawberry\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 34",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): ISCC-NBS 1955 block 102, Maerz & Paul 1930 pl. 19 L 1 (first recorded 1924), xkcd; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Grapefruit (n=5), 23,781 museum paintings as photographed; data/graph/fieldnotes/g.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "sections": [
+  {
+   "id": "name",
+   "title": "A fruit's name",
+   "body": "The name is an everyday fruit word used as a color word. Paterson's dictionary has no color entry for it, and mentions the fruit only to explain that strawberries hold no straw, just as grapefruit holds no grapes [1]. One book does use it as a description: St Clair calls the hose in a Rubens double portrait of himself and his new wife \"grapefruit-colored\" [2]. That is the modern author's comparison, not a name Rubens or his time used [2]."
+  },
+  {
+   "id": "standards",
+   "title": "On the charts",
+   "body": "The library finds the color in three places: the xkcd color survey, the 1955 ISCC-NBS system (block 102), and Maerz and Paul's 1930 dictionary, which first records the name in 1924 on plate 19 L 1 [3]. On a screen the nearest everyday name is [[terracotta]], about seven units away, though the swatch is a good deal pinker and brighter than that [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch color is rare in museum paintings: 5 of 23,781 contain it, about 0.02 per cent, rarer than 73 per cent of our named colors [4]. These are photographs of varnished paintings, so the colors are as photographed [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fruit",
+   "first_recorded": "1924 in Maerz and Paul (as a color name)",
+   "source": "data/library.json; St Clair, The Secret Lives of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "salmon",
+   "coral"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#FD5956",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5,
+  "nearest": [
+   "Terracotta",
+   7.1
+  ],
+  "rank_rarer_than_pct": 73
+ },
+ "questions": [
+  {
+   "q": "True or false: Rubens named a color grapefruit.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "When does Maerz and Paul first record the name as a color?",
+   "choices": [
+    "1924",
+    "1883",
+    "1658",
+    "1990"
+   ],
+   "answer": "1924",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Grapefruit appears in only 5 of 23,781 museum paintings in our archive."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Spot-checked 8 claims against books and library; all supported"
+  ]
+ },
+ "status": "checked",
+ "words": 204
+}

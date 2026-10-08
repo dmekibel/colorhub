@@ -1,0 +1,267 @@
+{
+ "slug": "violet-blue",
+ "name": "Violet blue",
+ "hex": "#766EC8",
+ "names": [
+  "Violet blue",
+  "Violet-Blue"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Violet blue is a blue that leans toward purple, a name that Werner's school gave to a mineral color, trade gave to the best grade of cobalt glass, and a modern crayon list gave to the swatch on this page.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Which violet blue",
+   "body": "The swatch on this page, #766EC8, comes from the modern list of crayon-style colors: our library files it as the Crayola \"Violet-Blue\", from a Wikipedia list, and gives no date for it [1]. It is a medium blue pulled toward purple, closest on screen to [[medium-slate-blue]], [[iris]] and [[amethyst]], the last at a distance of 8.4 units on the CIEDE2000 scale [1].\n\nThe name has been used for other colors. Our library holds a second \"Violet-Blue\", a much deeper cobalt-like blue (#324AB2) that matches RAL 5000 and ISCC-NBS block 196, and it sits 15 units away from this one [1]. Before either of them, the words belonged to mineralogists and pigment makers, and that older history is the better story."
+  },
+  {
+   "id": "werner",
+   "title": "A mineralogist's blue",
+   "body": "Abraham Gottlob Werner (1749-1817) treated color as the first thing a mineral shows the senses, and in 1774 he published a vocabulary meant to let anyone describing a specimen be understood by others [2]. Violet blue was one of the names in that school's range of blues, and his Scottish follower Robert Jameson kept it, together with plum blue, in his own mineralogy [2][3].\n\nThe name did not survive the next step. In 1814 Patrick Syme, painter to the Wernerian Natural History Society, issued *Werner's Nomenclature of Colours*, which, unlike Werner's and Jameson's lists, carried color samples, and in it he made purple and orange principal colors [2]. Werner's violet blue and plum blue were therefore renamed violet purple and plum purple [2][3]. Syme's own entry says that the violet purple of his chart is the violet blue of Werner, made by mixing Berlin blue with red and a little brown, and it shows the amethyst and the purple aster as examples [3]. Syme grew the list to 108 colors in 1814 and 110 in the 1821 edition [2].\n\nSo violet blue never became a Syme color, but the idea lives on in [[amethyst]], the stone his chart used to show the shade [3]."
+  },
+  {
+   "id": "smalt",
+   "title": "Smalt and cobalt glass",
+   "body": "Before Syme's chart, violet blue was already a pigment word [5]. The French writer De Massoul discussed it in 1797 together with smalt, enamel blue and cobalt blue, all of them made from cobalt ore [4][5]. The *Pigment Compendium* lists violet blue, powder blue, royal blue, Saxon blue and a dozen other trade names as synonyms for smalt [5].\n\nSmalt was a glass, not a dye. Cobalt ore was roasted to drive off its arsenic, sieved and moistened, then fused with sand and potash, quenched in water, ground and washed [5]. The ground glass was packed in barrels by grade: the best was a deep violet-blue, the cheapest a pale powder blue [5]. That is the origin of [[powder-blue]] as a color name, a lighter grade of the same material, although the dictionary of color notes that the name has also been used for deep blues [6]. The use of potash as a flux made the glass less stable, which affected the stability of the pigment [5]."
+  },
+  {
+   "id": "lichen",
+   "title": "Lichen violets and turnsole",
+   "body": "Violet-blue was also a dye. A recipe printed in Henry Peacham's *The Gentlemans Exercise* of 1612 says to grind orchil, a dye from lichens, with unslaked lime and urine; the result is a pure violet, and more or less lime makes it lighter or deeper [7]. Orchil and its relative litmus came from the same families of lichens, and litmus was still being made by a firm at Hendon and Radlett in Britain into the 1960s [7].\n\nA medieval relative was turnsole, a blue or violet dye made from a plant whose Latin name means \"turning towards the sun\" and used to color manuscripts [6]. The botany page for [[flower:lichens-orchil|orchil]] has the plant side of the story."
+  },
+  {
+   "id": "light",
+   "title": "The blue of light",
+   "body": "Violet-blue has a second, quieter career in color theory. In additive color, the three primaries of light are red, green and blue, and the dictionary of color adds that this blue may be called violet-blue [8]. Gurney's corrected color wheel makes the same point from the other side: the halfway mixture of magenta and cyan, he says, is blue, and really a violet-blue [9]. By these accounts the blue of a screen is a violet-blue [8][9].\n\nThat is also why the traditional wheel of red, yellow and blue does not describe mixing of light. Gurney replaces it with one built on red, green and blue as the primaries of light and cyan, magenta and yellow as the secondaries [9]."
+  },
+  {
+   "id": "stone",
+   "title": "In stone and porcelain",
+   "body": "The words turn up wherever a dealer needs to name a blue that leans purple. Some sapphires are color-change stones, green by day and violet-blue at night, and when natural they are expensive [10]. [[gem:tanzanite|Tanzanite]], found near Kilimanjaro in 1967, is a violet-blue stone said to be the closest match to a Kashmir [[gem:sapphire|sapphire]], though Finlay marks the tale as contested [11].\n\nIn Chinese porcelain, the blue-and-white wares of the Zhengde (1506-21) and Jiajing (1522-66) reigns carry a rich violet blue that is unusual for its intensity, and only the Xuande period (1426-35) is rated better in the ranking Finlay reports from Boger [12]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only three works, about one in eight thousand [13]. They are Maurice Denis's *Le Taureau de Marathon* (1918), Matisse's *Game of Bowls* (1908) and the earliest, Poussin's *Holy Family with St Elizabeth and St John the Baptist* (1655), where it covers 7.6 per cent of the picture [13]. Two of the three are twentieth-century and French, which is a small, curious cluster [13].\n\nThree is too few for a trend, and these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [13]. The phrase itself has a longer record. In Google Books, *violet blue* reaches about 60 per cent of its peak by 1800, peaks around 1808, and is still near 74 per cent in 1820, in the decades when Werner's vocabulary was being copied [14]. It falls to about a third of the peak by 1940 and to roughly 17 per cent by 2000 [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: a blue with violet in it; no single coiner is documented",
+   "first_recorded": "as a pigment synonym by De Massoul, 1797; in Werner's school before Syme renamed it in 1814",
+   "source": "Baty, Nature's Palette; Pigment Compendium"
+  },
+  "aka": [
+   "violet-blue",
+   "smalt (in the pigment trade)",
+   "Violet-Blue (Crayola)"
+  ],
+  "siblings": [
+   "medium-slate-blue",
+   "iris",
+   "powder-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "blue-violet",
+    "gloss": "CSS Blue Violet is a saturated purple, not this softer blue"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#766EC8",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 3,
+  "top_paintings": [
+   "commons-Q17493075",
+   "commons-Q2049345",
+   "commons-Q21730872"
+  ],
+  "ngram": {
+   "rel_1800": 0.591,
+   "rel_1820": 0.738,
+   "rel_1940": 0.338,
+   "rel_2000": 0.165,
+   "peak": 1808
+  },
+  "measured": {
+   "lch": [
+    51,
+    53,
+    299
+   ],
+   "nearest": [
+    [
+     "Medium Slate Blue",
+     6.0
+    ],
+    [
+     "Iris",
+     7.8
+    ],
+    [
+     "Amethyst",
+     8.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Violet blue / Violet-Blue (Crayola) #766EC8 (source: Wikipedia list); Violet-Blue #324AB2 (RAL 5000, ISCC-NBS 1955 block 196); CIEDE2000 distances computed with tools/colormath.js",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, ch. 1 (\"Werner's mineralogical system\"), pp. 74-84",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"Blues and Purples\" (Syme's nos. 37-38) and the table of nomenclatures from Werner to Syme, 1774-1821, pp. 32, 112-113",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Violet blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Smalt\" (also \"Enamel blue\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"powder blue\" and \"turnsole\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Lichens\" and \"Litmus\" (quoting Peacham, The Gentlemans Exercise, 1612)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"primary colours\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, \"Red, green, and blue\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 16 (\"Sapphires are not always blue\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 16, tanzanite (marked contested in the notes)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 21, notes (after Boger, Dictionary of World Pottery and Porcelain)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; match within CIEDE2000 6, at least 5% of the canvas (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did Syme's 1814 chart drop Werner's name \"violet blue\"?",
+   "choices": [
+    "He made purple a principal color, so the shade became violet purple",
+    "The color could not be printed",
+    "Jameson had banned it",
+    "It was the same as Berlin blue"
+   ],
+   "answer": "He made purple a principal color, so the shade became violet purple",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: violet blue and powder blue were both once names for grades of smalt, a cobalt glass pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which grade of smalt was the best, according to the Pigment Compendium?",
+   "choices": [
+    "A deep violet-blue",
+    "A pale powder blue",
+    "A grey-green",
+    "A bright red"
+   ],
+   "answer": "A deep violet-blue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The best grade of smalt, a cobalt glass pigment, was a deep violet-blue; the cheapest was pale powder blue.",
+  "Syme's 1814 chart renamed Werner's violet blue as violet purple, and chose amethyst to show it.",
+  "Two books describe the blue of a screen, the primary of light, as a violet-blue."
+ ],
+ "words": 1022,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Swatch is the Wikipedia/Crayola list color; no date or coiner documented.",
+   "Which edition of Werner first listed 'violet blue' is not stated by Baty; stated only as Werner's school (Werner and Jameson) before Syme.",
+   "Tanzanite/Kashmir sapphire link is marked contested by Finlay's notes; stated as 'said to be'.",
+   "Archive count is only 3 paintings; no trend claimed."
+  ]
+ }
+}

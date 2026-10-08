@@ -1,0 +1,292 @@
+{
+ "slug": "ivory",
+ "name": "Ivory",
+ "hex": "#FFFFF0",
+ "names": [
+  "Ivory"
+ ],
+ "tier": "nature",
+ "depth": "epic",
+ "lede": "Ivory is the off-white of an elephant's tusk, a color named for a material so prized that it gave us chessmen, bridal satin, a black pigment and a long trade in white gold.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name and the stuff",
+   "body": "*Ivory* is the dentine of tusks, and the color name is the off-white of an elephant's tusk [7]. The word has a long tail of relatives in the dictionaries: ivory white, ivory yellow, antique ivory (the yellowish white of old ivory), and the rare adjective *eburnean* for anything ivory-colored [7]. The first of these is a plain descriptive phrase; *eburnean* comes from the Latin *eburneus*, the word Roman poets used when they compared a woman's skin to ivory [4][7].\n\nThe Maerz and Paul dictionary of 1930 records \"ivory\" as a color word from 1385, \"ivory white\" from 1595 and \"eburnean\" from 1656 [15]. Its nearest relatives in the record are [[cream]] and [[ecru]] [15]. The web color `ivory`, #FFFFF0, was added to the X11 set and so to every browser; Paterson counts it as one of the 140 colors in that set [7].\n\nIvory is a color that was named after a material, so the material comes first. It is worth keeping straight which ivory is meant, because the animal changes the shade."
+  },
+  {
+   "id": "swatch",
+   "title": "Which ivory is on your screen",
+   "body": "The swatch above is the screen value #FFFFF0, which our library files under Neutrals [15]. It is a white with the faintest cream cast, and it sits only 0.5 CIEDE2000 units from the library's titanium white, a distance nobody could see [15]. Against pure #FFFFFF it differs by about 6.9 units, a small but visible warmth [15].\n\nReal ivory is much darker and yellower than that. Pastoureau describes medieval ivory objects as running from the milkiest white to a fairly dark chestnut, through ecru, yellow and brown [2]. The shade depends on the animal, on how the piece was kept and on the effects of time and light [2]. Morse (walrus) ivory takes a patina that is generally yellower and darker than elephant ivory [2].\n\nThe standards disagree with the screen too. In the RAL system, color 1014 is called \"ivory\" and is a sandy tan, about 17 CIEDE2000 units from the X11 swatch, while RAL 9010, \"pure white\", sits only 2.4 units away [15]. A paint-chip ivory and a web ivory are not the same color, which is why the library keeps both."
+  },
+  {
+   "id": "lewis",
+   "title": "The Lewis Chessmen",
+   "body": "In 1831 a Hebridean farmer on Lewis unearthed a hoard that had sat in a little stone chamber for some seven hundred years [1]. The hoard comprised 78 chess pieces from several sets, 14 counters for a backgammon-like game and a belt buckle [1]. The makers, and the reason the pieces ended up buried on a remote island, are unknown [1].\n\nMost likely they were carved in Trondheim, Norway, between 1150 and 1200, from walrus ivory, a material the Icelandic sagas call fish teeth [1]. Traces of red paint survive on some of them, and where the paint wore away the natural color of the ivory shows [1]. Pastoureau notes that medieval chess was long played between white and red sides rather than white and black, and many pieces from Lewis and elsewhere still show red paint [3].\n\nThe pieces also teach something about ivory as a color. Compared with elephant ivory, walrus ivory is not quite as white, is lighter in weight and less uniform in texture [3]. The pieces in London have been cleaned many times and decolored, while those in Edinburgh kept a dark patina between yellow and brown [2]. Two sets of one hoard therefore show two different ivories, one of them mostly the work of conservators."
+  },
+  {
+   "id": "ancient",
+   "title": "White, but a particular white",
+   "body": "The ancients did not have one white. Pastoureau stresses that the white of ivory was not the white of chalk, milk, flour or snow, and that the vocabulary of white in old languages tracks material and the play of light more than color in our sense [4]. Latin poets used *eburneus* for the smooth, pleasant-to-the-touch white of skin, and *marmoreus* for the firm, polished white of marble [4].\n\nOvid's Pygmalion falls in love with a statue he has carved from ivory \"white as snow\", and Aphrodite brings it to life as Galatea [5]. The Greeks also made gods in gold and ivory, called chryselephantine, and Paterson records that word in his dictionary [7][18].\n\nA related notion does need correcting. It is a myth that Greek statuary was left plain white [18]. The Greek originals were painted, and the idea of colorless sculpture arose because the Roman copies, usually in white marble and without the original polychromy, were the ones that survived and were collected in Italy from the fifteenth century on [18]."
+  },
+  {
+   "id": "trade",
+   "title": "White gold, Arctic gold",
+   "body": "Ivory has been made into costly objects for thousands of years: chessmen, combs and brush handles, later piano keys, ornaments and billiard balls [1]. Chinese craftsmen cut it into elaborate scenes with trees, temples and figures [1]. St Clair reports that by 1913 the United States alone was using about 200 tons a year, and that elephant tusks were called \"white gold\" and walrus tusks \"Arctic gold\" [1].\n\nThe animals paid for the prestige of the color. St Clair gives estimated elephant numbers of 26 million in 1800, 10 million before 1914 and 1.3 million by 1979, falling to 600,000 a decade later when the Western trade was banned [1]. He adds that around 100,000 elephants were estimated killed for ivory in the three years to 2014 [1]. These are estimates of a trade conducted partly on the black market, and the numbers should be read as orders of magnitude [1].\n\nOne odd supplier is the woolly mammoth, extinct about nine thousand years before the Lewis pieces were carved [1]. Mammoth carcasses are emerging by the thousands from thawing Arctic ground, and St Clair reports an estimate that more than half of China's current ivory may be mammoth ivory [1]. The author cites a single 200-pound carved tusk sold in Hong Kong in 2015 for 3.5 million dollars [1]."
+  },
+  {
+   "id": "wedding",
+   "title": "Ivory at the wedding",
+   "body": "St Clair writes that Western wedding dresses were generally colorful until Queen Victoria wore ivory satin trimmed with British lace in 1840, and that many brides followed [1]. A report in Harper's Bazaar in September 1889 recommended ivory white satin for autumn weddings [1]. He adds that the Duchess of Cambridge's dress, designed by Sarah Burton, was ivory duchess satin [1].\n\nBooks disagree on how much of this Victoria began [1][6]. Pastoureau calls it a persistent legend that her marriage on 10 February 1840 started the white wedding fashion, and says women in France and Italy were already marrying in white, and by the 1830s on the Continent more widely [6]. In his account her real innovation was to wear a veil during the ceremony rather than only afterward [6]. Her own dress is not in dispute as a white or ivory satin; the claim that she invented the custom is [1][6].\n\nFor the eye, the lesson is that \"ivory\" in dress means white with warmth, the shade that flatters skin better than a blue-white. Hold a bridal satin beside a sheet of paper and the cream undertone appears at once."
+  },
+  {
+   "id": "ivory-black",
+   "title": "Ivory black",
+   "body": "Painters took the name for a pigment as well. Pliny, as the Pigment Compendium reports him, says that Apelles invented a method of making black from burnt ivory, called *elephantinon* in Greek [8]. Coles gives the same story but describes the product as a lamp black made from the soot of burnt tusks, called *atramentum elephantinum* [10]. The two books disagree on the process, soot or baked pieces, and the pigment's own history is murky for the same reason [8][10].\n\nGenuine ivory black was made by baking ivory pieces or shavings in a closed container in a potter's kiln [8]. The English limner Nicholas Hilliard in 1624 and Théodore de Mayerne gave recipes with salt added, and some sources soaked the pieces in linseed oil first [8]. In practice the real thing was often replaced or adulterated with bone black [8]. Toch in 1916 mentions a refined product, \"extract of ivory black\", made by digesting charred ivory chips in hydrochloric acid until nearly all the calcium phosphate dissolved [8].\n\nIvory itself is about 60 per cent inorganic material, mostly phosphates of calcium with some magnesium and carbonate, bound in a collagen matrix [8]. Studies from 1960 and 1965 found that the mineral is not simple hydroxylapatite, as often stated, but the carbonate-bearing mineral dahllite [8].\n\nCost shaped its use. Pastoureau says ivory black was judged even more beautiful than vine black, but its price restricted it [11]. Paleolithic painters already burned bone, ivory and antler to make blacks, and Pompeian wall painters used burnt plant material and animal bone, more rarely ivory [11]. Bone or ivory black has been reported in Bellini's *Blood of the Redeemer* and in paintings by Cima and Dieric Bouts, though analyses of \"ivory\" black often cannot tell it from bone black [9]."
+  },
+  {
+   "id": "painters",
+   "title": "In the painter's box",
+   "body": "Ivory black was still a standard tube color in the age of the Impressionists [12]. Finlay says it was Renoir's favorite when he used black at all [12]. Paterson adds that the Impressionists stopped using black because they considered that black does not occur in nature, which is how the books present it rather than a rule every one of them followed [7].\n\nAnders Zorn is the opposite case, a painter who restricted himself to a few pigments [13]. His 1892 portrait of the Daughters of Ramón Subercaseaux was painted with only vermilion, ivory black, flake white and yellow ochre [13]. Westland uses the picture as an example of a limited palette [13].\n\nIvory black also sits at the dark end of an old idea about value. Francis Glisson, an English physician of the seventeenth century, proposed a color solid whose grey scale had 23 steps between black and white, to be made with lead white and either black ink or ivory black [14]. Modern estimates of the steps the eye can tell apart on such a scale run to around two hundred [14]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 112 contain a color within six CIEDE2000 units of ivory that fills at least five per cent of the canvas, about 0.5 per cent [16]. The earliest in our data is a *Winter Scene* ([[painting:cma-173574|Winter Scene]]) dated about 960, where the ivory color covers roughly 8 per cent [16]. These are photographs of aged, varnished paintings and often silk or paper, so a match is a color match and not a pigment test [16].\n\nThe distribution is lopsided. Paintings from the 1300s match in 11 of 251 cases, 4.4 per cent, about nine times the archive's average rate, and works catalogued as Chinese match in 19 of 635, about three per cent and six times the archive's rate [16]. Nepalese works match in 3 of 25 [16]. None of the 140 Impressionist paintings in the archive matches, nor the 38 Realist ones [16].\n\nThe color most often in company with ivory is white, then ecru [16]. In the paintings that hold it, ivory plays the role of the highlight [16]. In Google Books the word *ivory* peaks around 1863 and has remained common ever since [17]. A good place to look for it is a snow scene on aged silk, or the keys of a piano that has seen a century of hands."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dentine of tusks (elephant, walrus, narwhal, mammoth)",
+   "first_recorded": "1385 (Maerz & Paul 1930)",
+   "source": "Paterson, A Dictionary of Colour; library"
+  },
+  "aka": [
+   "eburnean",
+   "ivory white",
+   "antique ivory (the aged shade)"
+  ],
+  "siblings": [
+   "cream",
+   "ecru",
+   "bone",
+   "antique-white"
+  ],
+  "parent": "white",
+  "children": [
+   "alabaster"
+  ],
+  "disambiguation": [
+   {
+    "slug": "bone",
+    "gloss": "bone white is greyer and duller; ivory black is made from burnt ivory, not from this color"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "eburneus"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FFFFF0",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 112,
+  "top_paintings": [
+   "rijks-200108311",
+   "cma-173574",
+   "aic-43158"
+  ],
+  "role": {
+   "highlight": 1.0
+  },
+  "company": [
+   "White",
+   "Ecru"
+  ],
+  "ngram": {
+   "peak": 1863
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 24 (\"Ivory\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, section \"Morse Ivory\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, captions \"The White of Ivory\" and \"White Side versus Red Side\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, \"The Lessons of the Lexicon\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, \"Pygmalion and Galatea\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, on the white wedding gown",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 30, 225 (ivory, ivory white, ivory yellow, antique ivory, ivory black, eburnean, chryselephantine)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Eastaugh et al., The Pigment Compendium, \"Ivory black\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Bone black\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 41",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, \"In the Beginning Was Black\", pp. 14-15",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Finlay, Colour, section on black paint",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, palette examples (Zorn)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 171",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): X11, RAL, Maerz & Paul 1930 first-recorded dates; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, match within 6 CIEDE2000 units, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'ivory', case-insensitive, 5-year smoothing",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, on the polychromy of Greek statuary",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Pastoureau find about the Victorian white wedding dress story?",
+   "choices": [
+    "Victoria started the white wedding fashion in 1840",
+    "Women in France and Italy were already marrying in white, and her innovation was the veil",
+    "White dresses were forbidden before 1840",
+    "Brides wore ivory only after 1889"
+   ],
+   "answer": "Women in France and Italy were already marrying in white, and her innovation was the veil",
+   "kind": "pick"
+  },
+  {
+   "q": "Why can the Lewis chessmen in London and Edinburgh look different?",
+   "choices": [
+    "They come from different hoards",
+    "The London ones have been cleaned and decolored, while Edinburgh kept a dark patina",
+    "One set is walrus, the other elephant ivory",
+    "Edinburgh repainted theirs"
+   ],
+   "answer": "The London ones have been cleaned and decolored, while Edinburgh kept a dark patina",
+   "kind": "pick"
+  },
+  {
+   "q": "Greek statues were originally left bare white marble.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look for ivory as the warm cast in a bridal satin held next to white paper.",
+  "The Lewis chessmen in London and Edinburgh show two ivories: one cleaned pale, one left a dark yellow-brown."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "claude",
+  "date": "2026-10-08",
+  "issues": [
+   "St Clair and Pastoureau disagree on Victoria and the white wedding gown (stated in text)",
+   "Elephant counts are St Clair estimates",
+   "Pliny/Apelles ivory black: Compendium says baked pieces, Coles says soot"
+  ]
+ },
+ "words": 1821
+}

@@ -1,0 +1,153 @@
+{
+ "slug": "cosmos",
+ "name": "Cosmos",
+ "hex": "#BF82A0",
+ "names": [
+  "Cosmos"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Cosmos is a light reddish purple from the Maerz and Paul dictionary of 1930, named for the garden flower, and rare in painting.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name in an old dictionary",
+   "body": "Cosmos appears as a color name in Maerz and Paul's *Dictionary of Color* of 1930, on plate 50, and the ISCC-NBS system of 1955 later folded the shade into its block called light reddish purple, about 2.8 units from this swatch [1]. The books in our collection do not say why the authors chose the name, so its origin is undocumented here [1][2].\n\nThe plain reading is the flower. Cosmos is a garden plant in the daisy family, and one species, *Cosmos sulphureus*, was the base of an organic colorant used to illuminate manuscripts in Mesoamerica [3]. That dye is yellow-orange, not this pink-mauve, so the flower and the swatch share a name more than a color [3][1]."
+  },
+  {
+   "id": "flower",
+   "title": "The plant and its light",
+   "body": "Cosmos is a short-day plant, meaning it flowers when the days shorten, and Birren cites it with salvia as one that red light hindered in experiments [4]. That is a fact about how plants read light, not about the color of the petals [4].\n\nThe word has other meanings in the books: the cosmos of the sun in late antique religion [5], and the early Christian preference for dark blue-violets to suggest the cosmos or divinity [6]. None of these concerns this swatch, so we do not link it to them [5][6]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Near neighbors",
+   "body": "This swatch sits among the pink-purples. It is lighter and warmer than [[orchid]] and less blue than [[lilac]], with [[mauve]] on the grey side [1]. The ISCC-NBS name for the block, light reddish purple, is the plain description [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 9 works, or 0.04 per cent, rarer than 86 per cent of the named colors [7]. Only five paintings hold it on at least 5 per cent of the canvas: Matisse's *The Roofs of Collioure* and *Portrait of Madame Matisse (The Green Line)*, Kirchner's *Two Girls under an Umbrella* of 1910, Gauguin's *Fatata te Miti* of 1892 and an Indian goddess painting of about 1900 [7]. All five date from 1892 to 1910 [7].\n\nSo in our archive cosmos pink turns up in early modern work, from 1892 to 1910 [7]. These are photographs of varnished paintings, so read them as screen colors [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in our sources; likely the flower",
+   "first_recorded": "Maerz and Paul, 1930, plate 50 D6",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "orchid",
+   "lilac",
+   "mauve",
+   "heliotrope"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+  "match": {
+   "hex": "#BF82A0",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 9,
+  "pct_archive": 0.04,
+  "first_painting": "nga-46624",
+  "measured": {
+   "iscc": "light reddish purple",
+   "de2000": 2.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour (no entry for this name)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 145 (Cosmos)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 30",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, p. 7",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does Cosmos first appear as a color name in our sources?",
+   "choices": [
+    "Maerz and Paul's dictionary, 1930",
+    "A Roman text",
+    "Perkin's dye works",
+    "A 1990s paint brand"
+   ],
+   "answer": "Maerz and Paul's dictionary, 1930",
+   "kind": "pick"
+  },
+  {
+   "q": "What color was the dye made from Cosmos sulphureus in Mesoamerica?",
+   "choices": [
+    "Yellow-orange",
+    "Pink",
+    "Blue",
+    "Black"
+   ],
+   "answer": "Yellow-orange",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Only five paintings in our archive of 23,781 hold this pink-mauve on 5 per cent of the canvas."
+ ],
+ "words": 376,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede 'one of the rarest' overstated (rarer than 86 per cent); softened",
+   "Removed unsourced claim about early moderns' intent"
+  ]
+ }
+}

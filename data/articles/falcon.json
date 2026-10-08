@@ -1,0 +1,149 @@
+{
+ "slug": "falcon",
+ "name": "Falcon",
+ "hex": "#4C3529",
+ "names": [
+  "Falcon"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Falcon is a dark brown, listed in a 1930 color dictionary under the name of the bird.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from the 1920s",
+   "body": "The swatch is #4C3529, from Maerz and Paul's 1930 dictionary, which dates the name to 1920 and files it as plate 8 J 10 [1]. Their near twin in the same plate is Muskrat, dated 1924 [1]. In our library its closest named neighbors are [[liver-brown]] and [[umber]] at 9.4 units [1].\n\nWhy a dark brown is named for a falcon is undocumented in the books here [1]."
+  },
+  {
+   "id": "bird",
+   "title": "The bird in the books",
+   "body": "The books here are about the bird, not the color. Pastoureau notes that, besides horses, falcons were the only animals dressed in the Middle Ages, and that in princely circles the bird hunt meant falconry, with the falcon the favorite animal of the medieval aristocracy [2][3]. White falcons and gyrfalcons were prized in princely circles [4].\n\nIn French the idiom of showing someone his yellow beak comes from falconry, because young falcons that cannot hunt yet have yellow beaks [5]. In Egypt the sun god Ra is drawn with a falcon's head and a disk, usually red and sometimes yellow [5]. None of the books ties these to a brown."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dark brown is the usual color of old painting. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 6,665 works, 28 per cent [6]. Italy contributes 769 of them and Belgium 346 [6]. The peak decade is the 1550s [6].\n\nThe most extreme painters here are Otto van Veen, with 14 of 15 works, Maarten van Heemskerck with 10 of 12 and Jan Steen with 17 of 22 [6]. The strongest single example is Nagasawa Rosetsu's *Snails*, which has the tone across 98 per cent of the canvas [6]. Photographs of aged, varnished paintings darken, so part of this is the varnish and not the painter [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the falcon (bird); reason undocumented",
+   "first_recorded": "1920 (Maerz and Paul, 1930)",
+   "source": "Maerz and Paul, plate 8 J 10, via ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "liver-brown",
+   "umber",
+   "dark-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#4C3529",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 6665,
+  "top_paintings": [],
+  "ngram": {
+   "peak": null,
+   "first_5pct": null
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz & Paul 1930, plate 8 J 10), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Green, \"Chivalric elegance\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green, \"The bird hunt\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 97",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow (Ra; falconry idiom)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does a yellow beak signal in the old French falconry idiom?",
+   "choices": [
+    "A young bird that cannot hunt yet",
+    "A sick bird",
+    "A rare breed",
+    "A royal bird"
+   ],
+   "answer": "A young bird that cannot hunt yet",
+   "kind": "pick"
+  },
+  {
+   "q": "How common is this dark brown in our painting archive?",
+   "choices": [
+    "About 28 per cent of paintings",
+    "Under 1 per cent",
+    "Only in Japan",
+    "Exactly 100 paintings"
+   ],
+   "answer": "About 28 per cent of paintings",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books here explain why this brown is named falcon.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Falcon is a 1920 dictionary name for a dark brown; why it was named for the bird is undocumented.",
+  "Dark brown like this fills a twentieth of the canvas in 28 per cent of the paintings in our archive."
+ ],
+ "words": 307,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed 'favorite pursuit' to 'favorite animal' per Pastoureau"
+  ]
+ }
+}

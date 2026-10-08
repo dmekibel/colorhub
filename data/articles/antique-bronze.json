@@ -1,0 +1,102 @@
+{
+ "slug": "antique-bronze",
+ "name": "Antique Bronze",
+ "hex": "#665D1E",
+ "names": [
+  "Antique Bronze"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Antique bronze is a dull, olive-leaning metallic brown meant to look like very old metal.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Imitating age",
+   "body": "Paterson defines antique bronze as a bronze colour imitating that of very old objects, and notes that antique gold, antique green and antique red are named the same way [1]. The word antique, in colouring, means the effect of making an object look antique, and is used for brass, bronze and gold [1].\n\nThe dictionary also files antique bronze with the metallic colors [2]. It is a finish name, not a pigment [1][2]. It belongs to a small set of finish names that borrow age as a look: new paint made to resemble worn metal [1][2]. Nothing in the books ties it to one pigment or one maker [1][2]. The word antique here describes an intended effect, so the color is defined by what it imitates, not by what it is made of [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #665D1E is a dark olive-gold [3]. Neighbors are [[bronze]], [[antique-brass]], [[olive]] and [[gold]] [3]. A flat screen color can only hint at the shimmer of real metal [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the patina of very old bronze objects",
+   "first_recorded": "undocumented",
+   "source": "Paterson, p. 30"
+  },
+  "aka": [],
+  "siblings": [
+   "bronze",
+   "antique-brass",
+   "olive",
+   "gold",
+   "mustard"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "concordance of 29 color books",
+  "book_mentions": 3,
+  "swatch": "#665D1E (screen approximation)"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"antique\", \"antique bronze\", p. 30",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, metallic list, p. 502",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does antique bronze imitate?",
+   "choices": [
+    "Very old bronze objects",
+    "New copper",
+    "Polished silver"
+   ],
+   "answer": "Very old bronze objects",
+   "kind": "pick"
+  },
+  {
+   "q": "Which similar names does Paterson give?",
+   "choices": [
+    "Antique gold, green and red",
+    "Antique blue only",
+    "Antique white only"
+   ],
+   "answer": "Antique gold, green and red",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Antique bronze imitates the look of very old objects."
+ ],
+ "words": 170,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "slug": "light-cyan",
+ "name": "Light Cyan",
+ "hex": "#E0FFFF",
+ "names": [
+  "Light Cyan"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Light Cyan is a very pale aqua tint, a CSS and X11 keyword whose parent word, cyan, is a primary of printing.",
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"LightCyan\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eckstut & Eckstut, What Is Color?, Q. 35 (What Is Subtractive Color?)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): sources CSS, Wikipedia, xkcd (alt #ACFFFC); CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Light Cyan (n=7), 23,781 museum paintings as photographed; data/graph/fieldnotes/l.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "sections": [
+  {
+   "id": "name",
+   "title": "A tint of a primary",
+   "body": "Paterson lists LightCyan as an X11 color with the hex code E0FFFF [1]. Cyan itself he defines as a greenish blue and one of the three subtractive primary colours [1]. Eckstut and Eckstut explain that cyan pigment takes red out of white light and sends back blue and green, which is why cyan, not blue, is a printer's primary [2]. Light Cyan is that hue thinned almost to white [3]."
+  },
+  {
+   "id": "standards",
+   "title": "On the list",
+   "body": "The library finds the swatch in CSS, Wikipedia and the xkcd survey, whose own light cyan is a stronger, greener #ACFFFC [3]. The nearest everyday name is [[powder-blue]], about eight units away; other close names are [[aqua]], [[azure]] and [[alice-blue]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is rare in museum paintings: 7 of 23,781 contain it, about 0.03 per cent [4]. The earliest dated painting is from 1872, by Ricardo Maria Navarrete Fos, and the latest from 1905 [4]. In printed English the phrase's word peaks in the 2000s, though that count covers every sense [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the hue cyan, lightened",
+   "first_recorded": "X11 color set (web, 1990s)",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "LightCyan"
+  ],
+  "siblings": [
+   "aqua",
+   "azure",
+   "powder-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#E0FFFF",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 7,
+  "nearest": [
+   "Powder blue",
+   8.4
+  ],
+  "first_year": 1872
+ },
+ "questions": [
+  {
+   "q": "What does cyan pigment do to red light?",
+   "choices": [
+    "Absorbs it",
+    "Reflects it",
+    "Turns it green",
+    "Nothing"
+   ],
+   "answer": "Absorbs it",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson calls cyan one of the three subtractive primary colours.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Cyan is cyan, one of the three subtractive primaries, thinned almost to white."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed Eckstut citation to the right question (Q. 35)"
+  ]
+ },
+ "status": "checked",
+ "words": 180
+}

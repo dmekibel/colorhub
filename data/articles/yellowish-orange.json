@@ -1,0 +1,141 @@
+{
+ "slug": "yellowish-orange",
+ "name": "Yellowish Orange",
+ "hex": "#FFAB0F",
+ "names": [
+  "Yellowish Orange"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Yellowish orange is a bright saffron yellow-orange, a descriptive name that the books use for dyes and pigments: the carrot, the crocus and a lead-chromate paint.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color description",
+   "body": "The phrase is a plain description, an orange turned toward yellow, and it appears in the ISCC-NBS system of 1955 and the Crayola lists as a near-duplicate of Signal Yellow and Bright Yellow [1]. The closest named color in our library is [[marigold]], about 4 CIEDE2000 units away [1]. The Japanese name Yamabuki-iro, for the Kerria flower, also sits at this spot [1]."
+  },
+  {
+   "id": "things",
+   "title": "What the books call yellowish-orange",
+   "body": "Paterson uses the words for the carrot, noting that carrots were purple and white in Roman times and that orange became the standard around the 16th century in the Netherlands [2]. He calls saffron a yellowish-orange colorant made from the crocus [3]. The pigment books use it for chrome orange, a lead-chromate paint that the Colour Index (1971) lists as Pigment Orange 21, while the reddish one is Pigment Orange 45 [4][5]. The shade is close to [[orange]] without being it, and it is the yellow-orange end of the [[amber]] range."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color fills at least five per cent of the canvas in 25 of 23,781 museum paintings, within six units of CIEDE2000 [6]. Most are Indian court paintings, from the Pahari and Rajput schools, such as a Krishna celebrating Holi, and 13 of the 25 date from the 1700s, about 3.6 times the archive rate [6]. These are photographs of aged, varnished paintings; a color match is not a pigment test [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive: orange tending to yellow",
+   "first_recorded": "undocumented",
+   "source": "ColorHub library (ISCC-NBS, xkcd, RAL)"
+  },
+  "aka": [
+   "Yamabuki-iro (Japanese, Kerria flower yellow)"
+  ],
+  "siblings": [
+   "marigold",
+   "amber",
+   "orange",
+   "gold",
+   "yellow"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Yamabuki-iro (山吹色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "match": {
+   "hex": "#FFAB0F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 25,
+  "peak_century": 1700,
+  "lift": 3.59
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS, xkcd, RAL; nearest name by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"carrot orange\", p. 91",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"saffron\", p. 353",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"chrome orange\", p. 111",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"lead chromate\", p. 238",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings; tools/article_field.py, CIEDE2000, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which pigment does the Colour Index list as a yellowish orange?",
+   "choices": [
+    "Chrome orange, Pigment Orange 21",
+    "Cobalt blue",
+    "Madder lake",
+    "Ultramarine"
+   ],
+   "answer": "Chrome orange, Pigment Orange 21",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: carrots have always been orange.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Carrots were purple and white in Roman times; orange became standard around the 16th century."
+ ],
+ "words": 245,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

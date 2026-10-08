@@ -1,0 +1,122 @@
+{
+ "slug": "blue-lilac",
+ "name": "Blue Lilac",
+ "hex": "#83639D",
+ "names": [
+  "Blue Lilac"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Blue Lilac is a muted violet that sits halfway between lilac and blue-violet, and Baty's color reference system pairs a similar shade with a flower, an insect and a stone.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A lilac that leans blue",
+   "body": "Lilac is a pale purple named for the flower, and Blue Lilac pushes it toward the blue side [3]. The name is listed in several systems, including RAL, Ridgway and ISCC-NBS, which is why the library holds it [3]. Nearby are [[lilac]], [[violet]] and [[blue-violet]] [3]."
+  },
+  {
+   "id": "baty",
+   "title": "Baty's chart of nature",
+   "body": "Baty's *Nature's Palette* is a color reference system with matching examples from the natural world [4]. Under his bluish lilac purple, the examples appear to be the male broad-bodied chaser dragonfly, blue lilac blossom (*Syringa*) and the mineral lepidolite [4]. The scanned page is hard to read, so the exact pairing is a cautious reading [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds no painting with this violet at the usual match threshold, as photographed [2]. A color this specific is easier to find on a petal or a mineral than on a canvas [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lilac flower, with a blue modifier",
+   "first_recorded": "undocumented in the books consulted",
+   "source": "Baty, Nature's Palette; ISCC-NBS and RAL lists"
+  },
+  "aka": [
+   "Bluish Lilac Purple"
+  ],
+  "siblings": [
+   "lilac",
+   "lavender"
+  ],
+  "parent": null,
+  "children": [
+   "heliotrope"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    47,
+    36,
+    313
+   ],
+   "nearest": [
+    [
+     "Amethyst",
+     9.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,531 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL, Ridgway and ISCC-NBS entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 104-106",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which mineral does Baty's chart pair with bluish lilac purple?",
+   "choices": [
+    "Lepidolite",
+    "Amber",
+    "Malachite",
+    "Jet"
+   ],
+   "answer": "Lepidolite",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds this color in many paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "An old chart matched this lilac to a dragonfly."
+ ],
+ "words": 160,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed 'early English chart' (unsupported) from lede."
+  ]
+ }
+}

@@ -1,0 +1,122 @@
+{
+ "slug": "desert-sand",
+ "name": "Desert Sand",
+ "hex": "#EDC9AF",
+ "names": [
+  "Desert Sand"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Desert Sand is a pale, warm, pinkish tan, the color of dry dunes in a crayon box and in the ISCC-NBS list; the books that mention desert sand more often call it red.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "On the lists",
+   "body": "The swatch matches ISCC-NBS block 76, a 1955 standard, whose own name for it is \"light yellowish pink\", 5.7 units away [1]. The name is also on the Crayola list [1]. It sits among [[sand]], [[sandstone]], [[buff]] and [[peach]]."
+  },
+  {
+   "id": "books",
+   "title": "Sand in the books",
+   "body": "In Pastoureau's account, Egyptian thought made the black of the Nile silt a fertile color and set against it the barren red of the sand [2]. The sand is red in that sentence because it stands for barren ground. Finlay's account of cochineal places the insect on prickly pear that grows in abundance on desert sands where land is cheap [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "It appears in 401 of 23,781 archive paintings, 1.69 per cent, commoner than 74 per cent of named colors [4]. It most often plays a light inside a painting, in 48 per cent of the 254 paintings where it counts [4]. It peaks in the 1900s, at 2.2 per cent of 1,674 paintings, 1.8 times the museums' baseline [4]. The most devoted painter is Xugu, with it in 5 of 16 works here [4]. These are photographs of aged paintings, so the color is as photographed [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sand of deserts",
+   "first_recorded": "ISCC-NBS 1955 (block 76)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "sand",
+   "sandstone"
+  ],
+  "parent": "sand",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 401,
+  "measured": {
+   "lch": [
+    83.4,
+    19.8,
+    63.4
+   ],
+   "nearest_iscc": [
+    "light yellowish pink",
+    5.7
+   ]
+  },
+  "role": "light 48%"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 12",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Egyptian thought, what was the opposite of fertile Nile black?",
+   "choices": [
+    "The sterile red of the desert",
+    "White linen",
+    "Blue sky",
+    "Green reeds"
+   ],
+   "answer": "The sterile red of the desert",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pastoureau calls desert sand pale tan in that passage.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Books sometimes call desert sand red: it is the color of barren ground, not a crayon tint."
+ ],
+ "words": 217,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

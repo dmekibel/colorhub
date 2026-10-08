@@ -1,0 +1,137 @@
+{
+ "slug": "parrot-green",
+ "name": "Parrot Green",
+ "hex": "#888C4D",
+ "names": [
+  "Parrot Green"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Parrot green names the vivid yellowish green of a parakeet's plumage, and it was also a nineteenth-century paint name for arsenic-copper greens; the names did not always mean the same compound.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bird's green",
+   "body": "Paterson glosses parrot green as the bright yellow-green of parakeet feathers [1]. The swatch here is far duller than a parrot, a muted olive of the kind that older color charts file under green, and it first appears in our data in Ridgway's 1886 list [2]. Its nearest named neighbors in our graph are [[olive-green]] and [[scheele-s-green]]."
+  },
+  {
+   "id": "pigment",
+   "title": "A paint-maker's name",
+   "body": "In the trade, parrot green was a pigment name. Zerr and Rübencamp (1906) describe parrot greens made during the manufacture of emerald green, copper acetate arsenite, by treating the washed emerald green in a cold sugar-of-lead solution [3]. Gentele's 1860 manual instead uses parrot green, together with Mitis green, for a mixture of copper arsenite and copper acetate arsenite [3].\n\nBooks disagree on what the name covered. A sample labelled *papegaaigroen*, Dutch for parrot green, in the nineteenth-century Hafkenscheid Collection was analysed by Pey in 1987 and found to be a copper-arsenic compound, tentatively a copper formate arsenite [3][4]. So the same name was applied to at least three compounds, all copper-arsenic greens, none identical [3][4]. Related names with their own pages are [[emerald-green]] and [[mineral-green]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Parrot green appears in 1.74% of the 23,781 paintings in our archive, 413 paintings, as photographed, more common than 73% of the named colors [5]. Inside a painting it is most often an accent, in 45% of the 235 paintings where we measure roles [5]. It peaks in the 1900s, at 2.2% of the 1,674 paintings from then, 2.0x the baseline of the same museums [5].\n\nThe painter most devoted to it is Georges Seurat, with it in 9 of 41 works here, 9.4x his museums' baseline [5]. Aged paint turns green toward this tone, and the earliest match, in 1235, is a look-alike hue in an old photograph, not proof of a pigment [5]. The country where it is most over-represented is India, at 2.5x [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plumage of parrots and parakeets",
+   "first_recorded": "1886 (Ridgway) in our name data; pigment sense in 1800s trade books",
+   "source": "Paterson, Dictionary of Colour; Pigment Compendium"
+  },
+  "aka": [
+   "papegaaigroen (Dutch label)",
+   "Mitis green (a trade synonym in Gentele)"
+  ],
+  "siblings": [
+   "emerald-green",
+   "scheele-s-green",
+   "mineral-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "emerald-green",
+    "gloss": "The copper acetate arsenite from whose manufacture parrot greens were made"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#888C4D",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 413,
+  "role": "accent 45%",
+  "painter": "Seurat, 9 of 41"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entry \"parrot green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub name data (Ridgway 1886; ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entries \"parrot green\" and \"emerald green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entry \"malachite\" (Hafkenscheid Collection, Pey 1987)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub painting archive, field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of compounds did the paint name parrot green cover?",
+   "choices": [
+    "Copper-arsenic greens",
+    "Chromium oxide greens",
+    "Plant-dye lakes only",
+    "Malachite ground fine"
+   ],
+   "answer": "Copper-arsenic greens",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Parrot Green swatch is as vivid as a parakeet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Parrot green was a paint made as a by-product of emerald green.",
+  "A Dutch sample labelled papegaaigroen turned out to be a copper-arsenic compound."
+ ],
+ "words": 341,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed neighbor-greens list not verified in Paterson entry.",
+   "Books disagree on composition, hedged."
+  ]
+ }
+}

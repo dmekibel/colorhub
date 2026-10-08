@@ -1,0 +1,105 @@
+{
+ "slug": "blue-violet-black",
+ "name": "Blue-Violet Black",
+ "hex": "#3D484B",
+ "names": [
+  "Blue-Violet Black"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Blue-Violet Black is a very dark, nearly neutral grey with a faint cool cast, a shade of black rather than of blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name comes from Ridgway's 1912 color atlas, where very dark blacks are tilted slightly toward a hue, and the later ISCC-NBS system kept it at block 187 [1]. The swatch is almost neutral and sits close to charcoal grey [1]. The name itself comes from the atlas's scheme, not from any pigment [1].\n\nThe books we hold have nothing on this exact color. They do show that black was long placed at the far end of the old order of colors, after violet, in the sequence white, yellow, orange, red, green, blue, violet, black [3]. That sequence dominated thinking from the fourth century BCE to the seventeenth century CE [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Blue-Violet Black appears in 2.22% of the 23,781 paintings in our archive, as photographed [2]. It peaks in the 1900s at 3.2% of that century's paintings, 2.6 times the baseline [2]. Inside a painting it most often plays a shadow, in 39% of cases [2]. Its most devoted painter is Henri Matisse, in 5 of 50 works here [2]. Dark pigments and varnish shift in photographs, so these are looks, not recipes [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ridgway's tilted blacks; origin undocumented beyond the atlas",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "black",
+   "indigo",
+   "violet",
+   "grey",
+   "umber"
+  ],
+  "parent": "black",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 527,
+  "pct_paintings": 2.22,
+  "peak_century": 1900,
+  "role": "shadow 39%",
+  "library_first": 1912
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 15 (\"The Clodius Affair\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the old order of colors, what came last?",
+   "choices": [
+    "Black",
+    "Violet",
+    "White"
+   ],
+   "answer": "Black",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter leans on Blue-Violet Black most in our archive?",
+   "choices": [
+    "Henri Matisse",
+    "Caravaggio",
+    "Raphael"
+   ],
+   "answer": "Henri Matisse",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Blue-Violet Black is one of the dark neutrals that shows up as shadow in our painting archive, as photographed."
+ ],
+ "words": 200,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

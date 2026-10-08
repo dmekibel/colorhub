@@ -1,0 +1,127 @@
+{
+ "slug": "dijon",
+ "name": "Dijon",
+ "hex": "#CDC50A",
+ "names": [
+  "Dijon"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Dijon is a mustard-toned yellow-green named for a Burgundy city; the color books are silent on it, but the city shows up in them for a different reason, as the place where zinc white was worked out.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A city's name",
+   "body": "Dijon is a city in Burgundy, and as a color name it points to the mustardy yellow-green of this swatch [4]. None of the color books consulted for this site discusses Dijon as a color [4]. The earliest record of the name in our sources is the 2010 xkcd color survey, so the link to the city's mustard is the likely origin, not a documented one [4]. In printed English the adjective peaks in the 1980s [4]. Its closest relatives among named colors are [[mustard]] and [[chartreuse]], with [[olive]] on the greener side [4].\n\nIn the archive it is rare: 5 paintings, 0.02 percent of 23,781, rarer than 73 percent of named colors [4]. These are photographs of varnished paintings, so the match is to a look, not a pigment [4]."
+  },
+  {
+   "id": "academy",
+   "title": "The Dijon Academy and zinc white",
+   "body": "The city appears in the books through its academy. Lead white was a poison and darkened in sulphurous air, so in the 1780s the French government asked the chemist Guyton de Morveau for a safer white [1]. His 1782 report named zinc oxide, as the best candidate, and credited its synthesis to Courtois, a laboratory demonstrator at the Dijon Academy [1][3]. Compare [[white]] and [[zinc-white]].\n\nZinc white was nontoxic and did not blacken [1]. It was also less opaque, slow to dry in oil and about four times the price of lead white [3]. The books are not sure who deserves the credit: one pigment reference says it is unclear whether the first production belongs to Courtois or to Guyton de Morveau [2]. Another describes Courtois as a science demonstrator at the Academy and Guyton as a magistrate who became one of France's most inventive chemists [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the city of Dijon (likely via its mustard; undocumented in the books)",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub library; Ball, Bright Earth, ch. 15"
+  },
+  "aka": [],
+  "siblings": [
+   "mustard",
+   "chartreuse",
+   "olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mustard",
+    "gloss": "the condiment color this name probably borrows from"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 5,
+  "rarer_than_pct": 73,
+  "ngram": {
+   "peak_decade": 1980
+  },
+  "match": {
+   "hex": "#CDC50A"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"zinc white\" entry, p. 419",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 22 (\"White\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes); ColorHub color library; Google Books Ngram (adjective use)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Guyton de Morveau report in 1782 about zinc oxide?",
+   "choices": [
+    "It was the best candidate to replace lead white",
+    "It was the best new red",
+    "It was a source of purple",
+    "It was a cheaper black"
+   ],
+   "answer": "It was the best candidate to replace lead white",
+   "kind": "pick"
+  },
+  {
+   "q": "Why was zinc white not an instant success, according to the books?",
+   "choices": [
+    "It was less opaque, slow to dry and costly",
+    "It was poisonous",
+    "It turned black in sulphurous air",
+    "It was only made in Italy"
+   ],
+   "answer": "It was less opaque, slow to dry and costly",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The Dijon Academy is where zinc white, the safer replacement for lead white, was worked out in the 1780s."
+ ],
+ "words": 305,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

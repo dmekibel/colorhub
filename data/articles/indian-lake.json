@@ -1,0 +1,136 @@
+{
+ "slug": "indian-lake",
+ "name": "Indian Lake",
+ "hex": "#8A4955",
+ "names": [
+  "Indian Lake"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Indian lake is an old name for a red lake pigment made from lac, the resin of an Asian scale insect; as a screen color it is a dull, greyish purplish red.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pigment named for its source",
+   "body": "Indian lake is a name for the red made from lac, the encrusted secretion of insects, and the \"Indian\" refers to where those insects lived [1][2]. Treating the word as one fixed recipe would be a mistake: the terms for insect-based reds were often applied indiscriminately, so lac, cochineal and kermes were muddled together [2].\n\nIn a lake pigment the dye is precipitated onto a mineral base, and with careful control of acidity a lac lake could be pushed from orange through red to violet [3]. A nineteenth-century writer quoted in the Pigment Compendium called Indian lake rich, transparent and deep [1]."
+  },
+  {
+   "id": "history",
+   "title": "Lac in Europe",
+   "body": "Lac reached Europe around 1220 and became the main red lake of the Renaissance; so much of it was used that the word \"lake\" came to cover red dye pigments in general [3]. It turns up in paintings by Lippi, Ghirlandaio, Michelangelo, Tintoretto, Holbein and de Champaigne, from about 1475 to 1637 [2].\n\nIts weakness was fading: lac is described as having poor lightfastness, though it survives as a food and cosmetic colorant [3]. Winsor & Newton still listed lac in 1896, but by about 1898 the maker Reeves said it used alizarin instead [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is the Ridgway 1912 and ISCC-NBS 1955 color of that name, a greyish purplish red, and the Maerz and Paul dictionary dates the name in English to about 1250 [4]. It is a standard-system color, not a measurement of any pigment, so a real lac lake could differ from it [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub archive this color matches 23 paintings, about 0.1% of the 23,531 we hold, as photographed [5]. A match is rare, which fits a color that sits between the brighter reds and the dark browns."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "lac, the resin of an Asian scale insect (\"Indian\" for the source)",
+   "first_recorded": "c. 1250 (Maerz & Paul)",
+   "source": "Pigment Compendium; Coles, Chromatopia"
+  },
+  "aka": [
+   "lac lake",
+   "lac"
+  ],
+  "siblings": [
+   "crimson",
+   "carmine",
+   "indian-red",
+   "mulberry"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "indian-red",
+    "gloss": "an iron-oxide red, not an insect lake"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 23,
+  "pct": 0.1,
+  "ridgway": "plate XXVI",
+  "iscc_block": 258
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Kirby & White via Dodd/Eastaugh et al., Pigment Compendium, \"Indian lake\", p. 205",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Insect-based reds group\", p. 227",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 77",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Indian lake made from?",
+   "choices": [
+    "Lac, the resin of an insect",
+    "A copper mineral",
+    "A plant root",
+    "Burnt bone"
+   ],
+   "answer": "Lac, the resin of an insect",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Reeves said by about 1898 that it used alizarin rather than lac.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Indian lake is a red made from insect resin, and the 'Indian' just says where the insects lived.",
+  "So much lac was used in the Renaissance that 'lake' became a word for red dye pigments in general."
+ ],
+ "words": 309,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

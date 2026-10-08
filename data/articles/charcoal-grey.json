@@ -1,0 +1,136 @@
+{
+ "slug": "charcoal-grey",
+ "name": "Charcoal Grey",
+ "hex": "#3C4142",
+ "names": [
+  "Charcoal Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Charcoal grey is the dark, slightly cool grey of burnt wood, and for a short stretch in the 1890s it was also a tube of artists' paint.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Burnt wood, then paint",
+   "body": "Paterson defines *charcoal grey* simply as a dark grey, and lists *charcoal brown* beside it as a dark brown [1]. The Pigment Compendium records a pigment sold under the name: British colourmen Winsor and Newton and Reeves supplied it in the 1890s, made from charcoal [2].\n\nThe pigment is a small footnote. Most of what the name means today comes from the material itself, charcoal, rather than from any one maker's tube."
+  },
+  {
+   "id": "swatch",
+   "title": "Where the swatch comes from",
+   "body": "Four sources in our library carry the name: RAL in 1927, Maerz and Paul in 1930, ISCC-NBS in 1955 (block 266), and the later xkcd color survey of 2010 [3]. This swatch sits in the ISCC-NBS region called dark grayish blue, 6.0 CIEDE2000 units away [3]. The color is nearly neutral, with a faint cool lean, and it is close to [[dark-slate-grey]] and [[slate-grey]].\n\nThe Compendium files the pigment under the chars sub-group of the carbon-based blacks [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dark greys of this kind are common in paint. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 1,432 works, about 6 per cent [4]. It is a shadow color in two-thirds of those pictures, and nearly never a highlight [4]. The share doubles in the twentieth century: 12.8 per cent of the 1,674 paintings dated 1900 to 1999, against 6.1 per cent in the 1800s, a lift of 2.1 over the archive as a whole [4].\n\nIn printed English the word *charcoal* peaks in 1808 and slowly falls [4]. As always these are photographs of varnished paintings, so the greys are as photographed [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "charcoal, burnt wood",
+   "first_recorded": "artists' pigment, 1890s (Winsor and Newton, Reeves)",
+   "source": "Pigment Compendium, \"charcoal grey\""
+  },
+  "aka": [],
+  "siblings": [
+   "charcoal",
+   "dark-slate-grey",
+   "slate-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3C4142",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1432,
+  "role": {
+   "shadow": 0.67,
+   "mid": 0.32,
+   "highlight": 0.01
+  },
+  "century_1900s": {
+   "hits": 215,
+   "n": 1674,
+   "rate": 0.128,
+   "lift": 2.13
+  },
+  "ngram": {
+   "word": "charcoal",
+   "peak": 1808
+  },
+  "measured": {
+   "iscc": "dark grayish blue",
+   "de2000": 6.0
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 96, 468",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"charcoal grey\" (citing Carlyle 2001), p. 106",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): RAL 1927, Maerz and Paul 1930, ISCC-NBS 1955, xkcd 2010; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas), plus Google Books Ngram (https://books.google.com/ngrams)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who sold charcoal grey as an artists' pigment in the 1890s?",
+   "choices": [
+    "Winsor and Newton and Reeves",
+    "Pantone",
+    "Crayola",
+    "Rowney alone"
+   ],
+   "answer": "Winsor and Newton and Reeves",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our paintings archive, this grey is rarely a shadow color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Charcoal grey was once a tube of paint: Winsor and Newton and Reeves sold it in the 1890s.",
+  "Look for this grey in the shadows: two-thirds of its appearances in our museum archive are the darkest tones."
+ ],
+ "words": 297,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

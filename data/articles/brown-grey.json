@@ -1,0 +1,128 @@
+{
+ "slug": "brown-grey",
+ "name": "Brown Grey",
+ "hex": "#8D8468",
+ "names": [
+  "Brown Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Brown grey is a descriptive name for a greyed brown, and its history is the history of dull cloth.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A descriptive name",
+   "body": "None of the books we hold defines brown grey as a named color. It is a compound of two plain words, and Batchelor notes that both grey and brown can be described as mixtures of other colors, brown as a darkish yellow and grey as a mix of black and white [1]. It sits between [[brown]] and [[grey]]. The swatch is close to [[taupe]], [[stone]] and [[russet]].\n\nMedieval writers did not treat these colors as striking. Pastoureau notes that browns and greys were rare in Florentine dress in the 1340s next to greens and blues [2]."
+  },
+  {
+   "id": "cloth",
+   "title": "Dull cloth",
+   "body": "St Clair says fourteenth-century sumptuary laws reserved russet, then a duller brown-grey shade, for people in the meanest occupations such as carters and oxherds [3]. Before true black dyeing came in about 1360, cloth intended as black often came out as dirty brown-greys [3].\n\nPastoureau notes that the Dutch painter Frans Rijckhals reduced his seventeenth-century barn interiors essentially to browns, beiges, greys and whites [4]. Rothko turned to blacks, browns, greys and deep maroons in later work, to keep viewers from admiring decorative color [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is one of the most common colors in our archive: 3,688 of 23,781 paintings, 15.51 percent, as photographed [6]. It peaks in the 1800s, in 860 of 8,345 paintings [6]. Inside a painting it most often plays a hidden color, in 40 percent of 2,309 paintings [6]. The most devoted painter is Giovanni di Paolo, in 7 of 12 works here [6]. Aged varnish browns many colors, so some of this is the varnish [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive compound; origin undocumented",
+   "first_recorded": "undocumented in our sources",
+   "source": "Batchelor, Chromophobia, ch. 9"
+  },
+  "aka": [],
+  "siblings": [
+   "taupe",
+   "stone"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3688,
+  "pct": 15.51,
+  "peak_century": 1800,
+  "painter": "Giovanni di Paolo"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 25",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, chs. 105 and 116",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 30",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, field notes for Brown Grey",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why was true black hard to get in medieval cloth before about 1360?",
+   "choices": [
+    "Dyes gave dirty brown-greys",
+    "Black was illegal",
+    "No one wanted it"
+   ],
+   "answer": "Dyes gave dirty brown-greys",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: brown grey is common in our paintings archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Before about 1360, cloth meant to be black often came out a dirty brown-grey."
+ ],
+ "words": 270,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Replaced unsupported inventory claim with what Pastoureau says about Rijckhals paintings"
+  ]
+ }
+}

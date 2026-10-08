@@ -1,0 +1,126 @@
+{
+ "slug": "petrol",
+ "name": "Petrol",
+ "hex": "#005F6A",
+ "names": [
+  "Petrol"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Petrol is a dark blue-green named for the iridescent sheen of petrol on water; petrol is the British word for the fuel.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color from a puddle",
+   "body": "The color is named for the iridescent sheen that a film of petrol makes on water, the snaky shimmer on a pool of water that the artist and filmmaker Derek Jarman describes in his book on color [1]. A British dictionary of color lists *petrol blue* as a metallic shade of blue, also called petroleum blue, and describes it as a dark bluish green [2]. Who first used the word for a color is undocumented in the books [2].\n\nThe swatch itself comes from a crowd survey: the xkcd color survey of 2010 and ColorHub's own curriculum [3]. By the ISCC-NBS system it is a moderate greenish blue, 9.1 units away [3]. Neighbors in our data are [[teal]] and [[dark-teal]], and [[peacock-blue]] has the same family of iridescent associations [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the sheen",
+   "body": "A flat swatch cannot show iridescence, which is a change of color with viewing angle. The screen color is only the darkest, steadiest part of what a petrol film does [1][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Petrol is rare in painting. In our archive of 23,781 paintings it appears in 47, 0.2 per cent, and is rarer than 59 per cent of the named colors [4]. It peaks in the 1900s, in 0.5 per cent of the 1,674 paintings from that century, about 4.1 times the rate the same museums would predict [4]. Inside a painting it is most often a hidden color, a dark note beneath the obvious ones (48 per cent of 25 works measured) [4]. These are photographs of aged, varnished paintings, not pigment tests [4].\n\nGoogle Books counts for the word *petrol* mostly measure the fuel, not the color, so we do not read a color history from them [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "petrol, the fuel, and its iridescent film on water",
+   "first_recorded": "undocumented in the books; the 2010 xkcd survey is the first source in our data",
+   "source": "Paterson, A Dictionary of Colour, \"petrol blue\""
+  },
+  "aka": [
+   "petrol blue",
+   "petroleum blue"
+  ],
+  "siblings": [
+   "teal",
+   "dark-teal",
+   "peacock-blue",
+   "prussian-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+  "n_present": 47,
+  "measured": {
+   "lch": [
+    36.4,
+    23.4,
+    213.9
+   ],
+   "iscc": "moderate greenish blue, dE 9.1"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 77-78",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 306",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and curriculum (data/library.json; xkcd 2010 survey; ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (fieldnotes; within six units, at least five per cent of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is petrol blue named for?",
+   "choices": [
+    "The sheen of petroleum on water",
+    "A dye from tar",
+    "A gemstone",
+    "A Greek island"
+   ],
+   "answer": "The sheen of petroleum on water",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a flat swatch can show a petrol film's iridescence.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Next time it rains, look at a petrol film on the road: the darkest part of it is the color called petrol."
+ ],
+ "words": 297,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Jarman describes shimmering petrol patterns on a puddle, not a blue-green flicker on a wet road; reworded.",
+   "Removed unsourced 'only second for the color' lede claim; Jarman called artist/filmmaker."
+  ]
+ }
+}

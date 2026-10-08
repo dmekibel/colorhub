@@ -1,0 +1,284 @@
+{
+ "slug": "coffee",
+ "name": "Coffee",
+ "hex": "#6F4E37",
+ "names": [
+  "Coffee"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Coffee is the dark, warm brown of the roasted bean, a color word taken from the drink; the books know it as a stain, a dye and a crop that took over from the dye plants.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "Which coffee",
+   "body": "Coffee is the brown of the roasted bean and its drink, and as a color word it is old enough to be listed in the standard dictionaries of the trade [1][15]. Paterson lists *coffee* plainly as having the color of coffee, and gives *café au lait* for coffee mixed with milk and *mocha* for the dark brown of mocha coffee [1]. Maerz and Paul's 1930 dictionary puts coffee on plate 15 A 11 and gives 1695 as its first recorded use [15].\n\nOur swatch, #6F4E37, is 1.6 units from the ISCC-NBS block called moderate brown on the CIEDE2000 scale, and its Munsell notation is 6.4YR 3.6/3.5 [15]. The nearest named colors are [[beige-brown]], [[nutmeg]] and [[bay]], with [[van-dyke-brown]] a shade darker; the neighbors on the same shelf are [[mocha]], [[espresso]] and [[cafe-noir]] [15]."
+  },
+  {
+   "id": "names",
+   "title": "Sweet names for brown",
+   "body": "Brown is an old color, and Jarman points out that the names of brown dyes are sweet and edible: a coat could be bought in caramel, toffee, almond, coffee, chocolate or curry [2]. The pigments behind those names are plainer. Jarman lists earth brown, burnt umber, burnt ochre and burnt sienna as earths cooked red hot, with [[sepia]] the odd one out, because it is the ink of the cuttlefish [2].\n\nSt Clair describes cuttlefish ink as a burnt coffee-brown liquid made almost entirely of melanin, with very strong tinting power [9]. In other words the comparison runs both ways: the ink is called coffee-colored, and the coffee is called sepia. The darker kin of this page are [[umber]], [[bistre]] and [[chocolate]] [15]."
+  },
+  {
+   "id": "eye",
+   "title": "One coffee, three browns",
+   "body": "Albers uses coffee to teach the difference between a surface color and a volume color. Albers asks the reader to compare one coffee seen in a cup, in the narrow stem of a percolator and in a glass brewer. The thin stem looks lightest, the cup darker and the brewer darkest, though the liquid is identical [3]. A spoonful of tea likewise looks paler than a cupful [3].\n\nThis is the quickest way to learn why a brown liquid has no single swatch. A thin layer lets the light through, a deeper one holds it back, and the color we call coffee is partly the depth of the cup [3].\n\nLivingstone tells of a painter who lost his color vision after an accident and found food repulsive, so that he came to eat only foods without hue, among them black olives, white rice and black coffee [4]. Hopper's *Automat* of 1927 shows a woman in a yellow hat with her cup of coffee in a deserted cafeteria, which Pastoureau offers as an example of yellow meaning abandonment [14]."
+  },
+  {
+   "id": "dye",
+   "title": "A dye from the kitchen",
+   "body": "Coffee has colored cloth. According to St Clair, the dust-colored army uniforms that spread from the Indian army to other forces between 1860 and 1870 were dyed with whatever was at hand: river mud where possible, otherwise coffee, tea, soil or curry powder [5]. The word *khaki* comes from Urdu, where it means dusty [5]. Credit for the idea goes, by tradition, to Sir Harry Lumsden, who in 1846 raised a Corps of Guides at Peshawar and had white cotton from a Lahore bazaar rubbed with mud [5]. See [[khaki]] for the rest of that story.\n\nFinlay watched a boy in a weaving village lift a lump of wool from a terracotta pot of mangrove dye, which he said would turn the wool the color of coffee [6]. The color was in the pot long before the drink was in the cup."
+  },
+  {
+   "id": "pigment",
+   "title": "Pigments called coffee",
+   "body": "The Pigment Compendium finds coffee in the paint trade under several names, and none is secure [7]. Osborn said in 1845 that coffee black was little known and not on sale, and De Montabert preferred to call it coffee brown; the formulation and composition remain obscure [7]. Field in 1835 and Salter in 1869 mention greens made from coffee berries and named Venetian green or emerald green, and the Compendium counts this as one of four distinct pigments that carried the name emerald green [7]. Rose lists in 1916 a blue pigment called blue coffee, made with yellow Java coffee and iron filings [7].\n\nCoffee also names a failure. St Clair writes that verdigris was fickle and discolored, so that the greenery in works from Raphael to Tintoretto has withered to a shade approaching coffee [8]. When a green turns the color of coffee in a Renaissance painting, the painter did not choose it, and the change is a known weakness of the pigment [8]."
+  },
+  {
+   "id": "trade",
+   "title": "The crop that outlasted the dyes",
+   "body": "For the colonies that grew dye crops, coffee was often the replacement. Early in the nineteenth century the Spanish government encouraged Guatemala to diversify into other crops, notably coffee, and Balfour-Paul says coffee became the main item of Central American trade, though Honduras, Nicaragua and El Salvador kept exporting indigo until synthetic indigo undermined the market [10]. Balfour-Paul adds that in the 1800s indigo mattered to El Salvador's economy nearly as much as coffee does now [10]. Planters in the West Indies, facing high export duties, gave up indigo for sugar and coffee [10].\n\nGreenfield gives the cochineal side of the same story. Guatemalan cochineal exports, above a million pounds a year in the early 1870s, dropped under 500,000 pounds by 1877 and under 1,000 pounds a year by 1884, as new red dyes arrived [11]. By 1890 growers had virtually stopped, and many became low-wage workers in the coffee industry, at the persuasion, sometimes the coercion, of state officials [11]. Earlier, French settlers in Saint-Domingue had planted sugar, coffee, indigo, cocoa and cotton on land worked by imported African slaves [12]."
+  },
+  {
+   "id": "dark",
+   "title": "The dark dinner",
+   "body": "Coffee turns up in the history of black, as part of a feast of mourning in Huysmans' novel *À rebours* (1884), which Pastoureau cites [13]. Over that meal only black, brown or purple foods and drinks were served, and the coffee came after the meal and before the kvass, porter and stout [13]. A color that belongs on a funeral table is a useful reminder that coffee brown is a dark brown, close to the edge of black [13][15]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 4,723 hold this brown: within six units of CIEDE2000 and covering at least five per cent of the canvas, about 20 per cent of the archive [16]. These are museum photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test, and browns are what aging and varnish make of many colors [16].\n\nThe rate falls with time. It is 35 per cent of paintings from the 1200s (50 of 142) and 13 per cent of those from the 1900s (216 of 1,674) [16]. Its peak decade is the 1390s, with 12 of 25 paintings [16]. [[painter:maarten-van-heemskerck|Maarten van Heemskerck]] has it in 10 of his 12 works here, and the canvases that hold most of it are [[painting:cma-95204|Bamboo in the Wind]] by Ma Yu, 1724, at 84 per cent, and a [[painting:commons-Q17495194|self-portrait by Jean-Louis Forain]] of 1906, at 81 per cent [16].\n\nIt keeps company with [[french-beige]] and [[chocolate]] more than chance would predict, and in printed English the word used as an adjective rose fastest in the 2000s [16][17]. The Ngram curve for plain *coffee* mostly counts the drink, so the adjective figure is the color's [17]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the roasted bean and its drink",
+   "first_recorded": "1695 (Maerz and Paul, 1930, plate 15 A 11)",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "coffee brown"
+  ],
+  "siblings": [
+   "mocha",
+   "espresso",
+   "cafe-noir"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mocha",
+    "gloss": "a lighter, warmer brown named for the coffee variety"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6F4E37",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 4723,
+  "top_paintings": [
+   "cma-95204",
+   "commons-Q17495194"
+  ],
+  "ngram": {
+   "adjective_rise": 2000,
+   "peak": 2016
+  },
+  "measured": {
+   "iscc": "moderate brown",
+   "de2000": 1.6,
+   "munsell": "6.4YR 3.6/3.5",
+   "nearest": [
+    [
+     "Beige Brown",
+     2.9
+    ],
+    [
+     "Nutmeg",
+     3.3
+    ],
+    [
+     "Bay",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"coffee\", \"café au lait\", \"mocha\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 79",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Khaki\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries \"coffee black\", \"blue coffee\", \"Venetian green\", \"sap green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Verdigris\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Sepia\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 65-66",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, Black, the Romantic black and the feast in Huysmans' A rebours",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 36",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, RAL), CIEDE2000 distances; look-alikes from data/graph",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, via data/graph/fieldnotes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Albers's coffee test, where does the same coffee look lightest?",
+   "choices": [
+    "In the glass stem of a percolator",
+    "In a cup",
+    "In a glass brewer",
+    "It looks the same in all three"
+   ],
+   "answer": "In the glass stem of a percolator",
+   "kind": "pick"
+  },
+  {
+   "q": "What happened to many Guatemalan cochineal farmers after new red dyes collapsed the market?",
+   "choices": [
+    "Many became low-wage workers in the coffee industry",
+    "They switched to growing indigo",
+    "They moved to the Canary Islands",
+    "They began to export synthetic dyes"
+   ],
+   "answer": "Many became low-wage workers in the coffee industry",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: dusty brown army uniforms in India were sometimes dyed with coffee and tea.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pour the same coffee into a cup and a glass tube and it shows two different browns, because liquid color depends on depth.",
+  "Dusty brown uniforms in the Indian army of the 1860s were dyed with coffee, tea, soil and curry powder."
+ ],
+ "words": 1212,
+ "status": "checked",
+ "checked": {
+  "by": "L7 article engine (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Books say little about coffee as a color; article draws on Albers, St Clair, Pigment Compendium and the dye-crop history.",
+   "Lumsden/khaki origin is hedged ('thought to'); khaki has its own article.",
+   "First recorded 1695 is Maerz and Paul via our library note; not independently checked.",
+   "Blue coffee (Rose 1916) is a single obscure entry; reported as listed.",
+   "Archive matches are look-alike colors on aged photographs."
+  ]
+ }
+}

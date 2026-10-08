@@ -1,0 +1,107 @@
+{
+ "slug": "patent-blue",
+ "name": "Patent Blue",
+ "hex": "#145A72",
+ "names": [
+  "Patent Blue"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Patent blue is a deep greenish blue, the name of a blue dye used as a food colouring and in medicine.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dye with a number",
+   "body": "Paterson defines patent blue as a deep greenish blue [1]. Patent blue V is the same blue, or bluish-violet, as a food colouring additive numbered E131, and it is also used for diagnostic purposes [1]. The same dictionary's patent yellow, a lead oxychloride pigment patented in 1781 by James Turner, shows the trade sense of *patent* [1]. That pigment was also called Turner's yellow and was a by-product of the soda industry [1].\n\nIt appears in the dictionary's list of blues, which also holds [[periwinkle]] and [[sky-blue]] [2]; for the older [[prussian-blue]], see its own page."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of museum paintings, a color near this swatch is present in 39 works, 0.16 per cent of the archive [3]. The earliest is a work from about 1387 and the latest dates from 1930 [3]. These are photographs of varnished paintings, so read them as screen colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dye patent blue V, sold under a patented process",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Patent blue V",
+   "E131"
+  ],
+  "siblings": [
+   "prussian-blue",
+   "periwinkle",
+   "sky-blue",
+   "royal-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, paintings as photographed",
+  "n_present": 39,
+  "pct_of_archive": 0.16,
+  "first_dated": 1387
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"patent blue\", \"patent yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, blue list",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), paintings as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What E-number does Paterson give for patent blue V?",
+   "choices": [
+    "E131",
+    "E100",
+    "E160",
+    "E171"
+   ],
+   "answer": "E131",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: patent blue is a deep greenish blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Patent blue V is a food-colouring blue numbered E131."
+ ],
+ "words": 163,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that patent blue's name is explained as a patented-process color (only patent yellow is explained); removed 'much greener and darker' comparison and false adjacency."
+  ]
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "slug": "michigan",
+ "name": "Michigan",
+ "hex": "#345F63",
+ "names": [
+  "Michigan"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Michigan is a deep teal green-blue from the Maerz and Paul dictionary; the books say nothing about why it carries a state's name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A state name with no recorded reason",
+   "body": "Maerz and Paul include Michigan on plate 30 and date the name to 1919 [1]. Why a U.S. state names a color is undocumented in our sources [1]. In the color books, Michigan turns up only in a few passing places: a university press, an author's biography and a publisher's city [2].\n\nOne mention is real color history, though a mineral's: calumetite, a soft blue copper chloride mineral, is named after the Centennial mine at Calumet in Michigan, where it was found [3]. The Pigment Compendium records it as identified on paintings, and it is not the origin of this swatch, which is a dark green-blue [1][3]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "ISCC-NBS reads the swatch as a dark bluish green [1]. It is close to [[teal-blue]] and [[petrol]], and darker than [[teal]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color matches 82 paintings in the ColorHub archive, about 0.34%, as photographed [4]. Gauguin supplies 5 of them, a stronger share than for most painters, and the match is most common in Impressionism [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1919 (Maerz & Paul)",
+   "source": "Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "teal-blue",
+   "petrol",
+   "teal",
+   "cadet-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 82,
+  "pct": 0.34,
+  "first_recorded": 1919,
+  "plate": "30 L 2"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz & Paul 1930, plate 30 L 2; ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Concordance: Greenfield, Nelson, Balfour-Paul (incidental mentions)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Calumetite\", p. 93",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the blue mineral calumetite have to do with Michigan?",
+   "choices": [
+    "It was found at a Michigan copper mine",
+    "It is a state symbol",
+    "It was named for a governor",
+    "It dyes Michigan cloth"
+   ],
+   "answer": "It was found at a Michigan copper mine",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain why the color is called Michigan.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Calumetite, a blue copper mineral, is named for a mine in Michigan, but that did not name this color."
+ ],
+ "words": 181,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded 'pigment candidate' to what the Compendium says (identified on paintings)."
+  ]
+ }
+}

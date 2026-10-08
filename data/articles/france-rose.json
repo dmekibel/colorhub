@@ -1,0 +1,118 @@
+{
+ "slug": "france-rose",
+ "name": "France Rose",
+ "hex": "#C25F80",
+ "names": [
+  "France Rose"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "France Rose is a medium rose pink with a purple cast, known from Maerz and Paul's 1930 dictionary, where it is printed on plate 1.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A printed dictionary name",
+   "body": "Our library finds the name only in Maerz and Paul's dictionary of 1930, on plate 1 at position F4 [1]. Why the authors called it *France rose* is undocumented in our sources [1].\n\nThe single book passage that matches the words is not about this color. It is Pastoureau's sentence on the French rising against the king, which has the words and the revolution of 1791 but no pink [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "What the swatch is",
+   "body": "Measured against the ISCC-NBS categories, the swatch is nearest to moderate purplish red, 7.4 units of ΔE2000 away [1]. Its neighbors by name are [[rose]], [[rose-pink]], [[old-rose]] and [[dusty-rose]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This tone is very rare in our archive: 2 paintings, 0.01 per cent, as photographed [3]. The earliest is by Henri Matisse, from 1905 [3]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented (a rose, or the country; unknown)",
+   "first_recorded": "1930 (Maerz and Paul), per our library",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "rose",
+   "rose-pink",
+   "old-rose",
+   "dusty-rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
+  "n_present": 2,
+  "pct": 0.01,
+  "first_dated": {
+   "painter": "Henri Matisse",
+   "year": 1905
+  },
+  "measured": {
+   "nearest": [
+    [
+     "moderate purplish red",
+     7.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): name sources and dates (Maerz and Paul 1930, plate 1 F4)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 35",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the book passage matching \"France rose\" describe?",
+   "choices": [
+    "The rising against the king",
+    "A pink dye",
+    "A flower",
+    "A paint brand"
+   ],
+   "answer": "The rising against the king",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the name's origin is documented in our sources.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The only book line with the words \"France rose\" in it is about a revolution, not a color."
+ ],
+ "words": 164,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

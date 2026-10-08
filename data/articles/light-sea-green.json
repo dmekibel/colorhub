@@ -1,0 +1,102 @@
+{
+ "slug": "light-sea-green",
+ "name": "Light Sea Green",
+ "hex": "#20B2AA",
+ "names": [
+  "Light Sea Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Light sea green is a web color, a cool teal-green from the X11 set, that is actually fairly dark for a name that says light.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name means",
+   "body": "Paterson lists *LightSeaGreen* as another color in the X11 Color Set, with the hex code #20B2AA [1]. It is a web color first, built from the base word [[sea-green]] [1]. The swatch is a medium teal, and the nearest ISCC-NBS name is light bluish green [2]. A competing swatch in our library, from the xkcd color survey, is a much paler mint, #98F6B0, so the name does not point to one color [2]. Neighbors are [[turquoise]], [[teal]] and [[aquamarine]] [2]. Like every web color it is defined by a hex code, so the swatch is a screen approximation and not a dye or a paint [2]. Nothing in our books ties it to a pigment or a historical source [1].\n\nThe books give no history for the name beyond the color list, so none is claimed [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Light sea green is almost absent from painting. Only 3 of the 23,781 paintings in our archive hold a color near this swatch, as photographed [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of the sea, lightened",
+   "first_recorded": "X11 color set (web color)",
+   "source": "Paterson, A Dictionary of Colour, \"LightSeaGreen\""
+  },
+  "aka": [
+   "LightSeaGreen",
+   "lightseagreen"
+  ],
+  "siblings": [
+   "sea-green",
+   "teal"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "hex_code": "#20B2AA",
+  "alt": "xkcd #98F6B0"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"LightSeaGreen\" (p. 243, colour list p. 498)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 nearest names, Ridgway 1912 and Maerz & Paul 1930 entries, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What hex code does Paterson give for LightSeaGreen?",
+   "choices": [
+    "#20B2AA",
+    "#FFA07A",
+    "#F08080"
+   ],
+   "answer": "#20B2AA",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: light sea green is common in museum paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light sea green is a computer color-list name, and the xkcd survey puts the same name on a much paler swatch."
+ ],
+ "words": 181,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

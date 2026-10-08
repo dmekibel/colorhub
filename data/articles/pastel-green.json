@@ -1,0 +1,117 @@
+{
+ "slug": "pastel-green",
+ "name": "Pastel Green",
+ "hex": "#B7D9B1",
+ "names": [
+  "Pastel Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pastel green is a soft, light green, named for its pale chalky look rather than for any one dye or pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A soft green",
+   "body": "The books use *pastel green* as a loose description, not a defined color. Paterson uses it to define two other names: celadon, a name used in glazing Chinese porcelain, and mint green, the green of mint leaves [1][2]. [[celadon]] is a green with a history, which pastel green lacks [1].\n\nIn writing it signals the mild and the fashionable. Greenfield sets it beside acid pink as the kind of trend a cautious dresser avoids when choosing black [3]. Finlay uses it for the soft green of eucalyptus clumps in the pink Australian desert where opal is mined [4]. In both cases it means a gentle green set against something stronger [3][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of museum paintings, a color near this swatch is present in only 9 works, 0.04 per cent of the archive [5]. The earliest is a work of 1488 and the latest dates from 1924 [5]. These are photographs of varnished paintings, so read the numbers as screen colors [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the soft look of pastel chalks",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson; Greenfield"
+  },
+  "aka": [],
+  "siblings": [
+   "celadon",
+   "mint-green",
+   "olive"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, paintings as photographed",
+  "n_present": 9,
+  "pct_of_archive": 0.04,
+  "first_dated": 1488
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"celadon\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"mint-green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), paintings as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which Chinese glaze color does Paterson call a pastel green?",
+   "choices": [
+    "Celadon",
+    "Oxblood",
+    "Sang de boeuf",
+    "Peachbloom"
+   ],
+   "answer": "Celadon",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Greenfield pairs pastel green with acid pink as passing trends.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Celadon and mint green are both defined by one dictionary as pastel greens."
+ ],
+ "words": 177,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Celadon gloss tied to Paterson's wording (used in glazing Chinese porcelain)."
+  ]
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "slug": "pinkish-orange",
+ "name": "Pinkish Orange",
+ "hex": "#FF724C",
+ "names": [
+  "Pinkish Orange"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pinkish Orange is a modifier name, an orange leaning pink; its one book appearance is a dictionary entry that links the phrase to the padparadscha sapphire.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain description",
+   "body": "The name is plain grammar, pink plus orange, and has no history of its own [2]. It first appears in our sources in the xkcd color survey of 2010, and the ISCC-NBS system calls the swatch a vivid yellowish pink [2]. Its parent family is [[orange]], and near neighbors include [[salmon]] and [[coral]] [2]."
+  },
+  {
+   "id": "lotus",
+   "title": "The lotus-colored sapphire",
+   "body": "Paterson's dictionary gives a useful anchor. Its entry for lotus-colour describes it as the pinkish-orange of padparadscha sapphires, padparadscha being the Sinhalese word for lotus-colour [1]. So the padparadscha sapphire is the one example of this hue that our books name [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive it appears in 0.04% of paintings (9), most often as an accent, as photographed [3]. It peaks in the 1500s, at 3.4 times the expected rate, and the earliest match is a painting of 1494 [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pinkish + orange",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "lotus-colour (padparadscha)"
+  ],
+  "siblings": [
+   "salmon",
+   "coral",
+   "peach"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "si",
+    "name": "padparadscha (lotus-colour)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 9,
+  "measured": {
+   "lch": [
+    64.8,
+    69.5,
+    42.3
+   ],
+   "iscc": "vivid yellowish pink"
+  },
+  "first_record": {
+   "year": 2010,
+   "source": "xkcd"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lotus-colour\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library, Pinkish Orange: xkcd 2010; ISCC-NBS",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, Pinkish Orange",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which gemstone does Paterson link to the pinkish-orange of lotus-colour?",
+   "choices": [
+    "Padparadscha sapphire",
+    "Ruby",
+    "Emerald",
+    "Amethyst"
+   ],
+   "answer": "Padparadscha sapphire",
+   "kind": "pick"
+  },
+  {
+   "q": "What does padparadscha mean in Sinhalese, per Paterson?",
+   "choices": [
+    "Lotus-colour",
+    "Sunset",
+    "Fire",
+    "Salmon"
+   ],
+   "answer": "Lotus-colour",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The Sinhalese word padparadscha simply means lotus-colour."
+ ],
+ "words": 156,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that dealers prize the stone."
+  ]
+ }
+}

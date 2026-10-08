@@ -1,0 +1,356 @@
+{
+ "slug": "emerald-green",
+ "name": "Emerald Green",
+ "hex": "#28713E",
+ "names": [
+  "Emerald Green"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Emerald green is a brilliant cool green that began as the color of a gem and, from 1814, became the name of a copper-and-arsenic paint that colored Victorian wallpaper, Impressionist canvases and a famous poisoning rumor.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two things with one name",
+   "body": "The name came first as a gem. Werner's nomenclature of 1821 lists emerald green as number 53 among the greens, with the emerald itself and the beauty spot on a teal drake's wing as its examples [19]. Medieval Latin already had a word for it, *smaragdinus*, the only color term it added to the classical Latin list of greens [23]. What makes the stone green is chromium, whose name means the color element [20].\n\nThen, in the nineteenth century, a paint took the name. This emerald green is a copper compound made with arsenic, and it contains no chromium at all [1][4]. The two were confused from the start, and the confusion has outlived the paint.\n\nThe word is also a mixed bag in the dictionaries. The Pigment Compendium finds it used for four different things: the copper-arsenic pigment, a green made from coffee berries, a copper carbonate with lime, and a hydrated chromium oxide [4]. The first is the primary meaning, and it settles only late in the nineteenth century [4]. Paterson's dictionary gives the same pigment a string of other names: Schweinfurt green, Paris green, Vienna green, imperial green and Brunswick green [7]."
+  },
+  {
+   "id": "discovery",
+   "title": "From Scheele's green to a better one",
+   "body": "The older relative came first. In 1775 the Swedish chemist Carl Wilhelm Scheele, studying arsenic, made a green copper arsenite [1][6]. He published in 1778 but kept the method secret, which let him profit from it [6]. Ball judges the color slightly dirty, a pea green, and notes that it reached few paintings: Turner used it around 1805, and it turns up in Manet's *Music in the Tuileries Gardens* of 1862 [1][8].\n\nEmerald green was the improvement. In 1814 the paint maker Wilhelm Sattler of Schweinfurt, working with the pharmacist Friedrich Russ, found a copper aceto-arsenite whose green crystals form when verdigris dissolved in vinegar meets white arsenic and sodium carbonate [1]. French makers called it after Schweinfurt, Vienna or Brunswick, while the English called it emerald green [1]. Ball writes that nobody had seen a green like it [1].\n\nIt was a trade secret until 1822, when the chemist Justus von Liebig published its composition and how to make it [1]. Paterson also says it was not commercially produced before 1822 [7]. Winsor and Newton began selling it as an oil color in 1832, and Turner used it from about the same time [1]. The Pigment Compendium adds that the shade of these greens depended on the ratio of copper to arsenic and on the temperature of the reaction [5]. A maker could therefore steer a batch toward a darker or a lighter green [5]."
+  },
+  {
+   "id": "veronese",
+   "title": "Not Veronese's green",
+   "body": "Paterson's dictionary says the color was used extensively by Paolo Veronese and that France named it *vert Paul Véronèse* for that reason [7]. Read literally, that cannot be right, because Veronese lived from 1528 to 1588 and the pigment was invented two centuries later [7][1]. Ball gives the better account: Veronese's trademark green was mixed from three pigments in two layers, and the French named the new synthetic after it [2]. The painter's green is still on our color map as [[paolo-veronese-green]]."
+  },
+  {
+   "id": "viridian",
+   "title": "Emerald green, viridian and vert émeraude",
+   "body": "A second green with a nearly identical name makes the history harder to read. In 1838 the Parisian color maker Pannetier worked out how to turn chromium oxide into a deep, cool, slightly transparent green, which the French called *vert émeraude* [1]. In English it became [[viridian]] [1]. Ball warns readers not to confuse it with the English emerald green, and the Pigment Compendium says the translation error is common and holds for the German *Smaragdgrün* as well [1][4].\n\nPannetier guarded his recipe and charged dearly for the pigment [1]. In 1859 C. E. Guignet found another way to make it, and viridian soon found a wide market [1]. Ball says it pushed the poisonous emerald green out of printing, domestic and industrial use almost at once [1]. A third green carried the same label: Pastoureau notes that cobalt green was sometimes called emerald green, and that it cost a fortune [15]."
+  },
+  {
+   "id": "wallpaper",
+   "title": "Wallpaper, dresses and arsine",
+   "body": "Emerald green was cheap to make, so it spread through interior decoration [1]. Together with Scheele's green it was manufactured on an industrial scale in the middle of the nineteenth century [1]. St Clair reports that copper arsenite greens colored fabrics, wallpapers, artificial flowers, paper and even confectionery [8]. By 1858 an estimated 100 square miles of such wallpaper covered walls across Britain, in houses, hotels, hospitals and station waiting rooms, and in 1863 *The Times* put British output at 500 to 700 tons a year [8]. Greenfield notes that fashionable women of the 1860s competed to be the most brilliant in the room, in crinolines of emerald green, bright blue or magenta [18].\n\nThe danger was known early. Scheele himself wrote in 1777 that his pigment was poisonous [8]. Ball explains the mechanism: wallpaper printed in thick relief gives off a toxic dust when it is brushed, and in damp conditions the pigments break down to release arsine, a deadly gas [1]. St Clair counts a nineteen-year-old artificial-flower maker, Matilda Scheurer, who died in 1861, and the *British Medical Journal* reported in 1871 that a six-inch square of green wallpaper held enough arsenic to poison two adults [8].\n\nEven so, no law ever banned it [8]. In 1880 a researcher named Henry Carr showed the Society of Arts a nursery wallpaper that had, he said, killed a young relative, and a colleague answered that he much preferred the bright arsenical paper to the grey and brown ones [9]. Gurney and Finlay both note that the pigment was sold as an insecticide as well [17][10]. Jarman writes that the dangerous emerald green is no longer manufactured [16]."
+  },
+  {
+   "id": "myths",
+   "title": "Did it kill Napoleon?",
+   "body": "A popular story says that Scheele's or emerald green on the walls of his damp house on St Helena killed Napoleon [1]. It is a legend, and it is unproven. A lock of his hair bought at auction in 1960 was found to hold a good deal of arsenic, and in 1980 a chemistry professor tested a scrap of Longwood wallpaper and found Scheele's arsenite in its green-and-gold pattern [9]. Ball only passes the tale on as legend [1].\n\nThe better evidence points the other way. In 2008 researchers at Italy's National Institute of Nuclear Physics tested hair from different stages of his life and found the arsenic levels roughly steady, high by modern standards but ordinary for his time [8]. His doctors had said stomach cancer, and Finlay allows that the wallpaper may not have killed him [8][9]. What is solid is the larger point: the same green was in thousands of ordinary rooms [8]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Painters who wanted strong color took to it. Turner seized new pigments as fast as chemists made them, and Ball reads emerald green as the natural choice for the Pre-Raphaelites and the Impressionists [1][3]. Monet's locomotives in *La Gare Saint-Lazare* look pitch dark yet are built from vivid vermilion, French ultramarine and emerald green, and conservators at the National Gallery in London found almost no black pigment in the painting [11]. Cézanne bought emerald green from a supplier named Édouard, and Ball includes it in his list of the modern colors Cézanne used [12][3].\n\nIt also caused trouble. Camille Pissarro told his son in 1887 that Seurat and Signac ought to know that mixing cadmium yellow with emerald green gave results even blacker than the chrome yellow mixture [13]. Pastoureau notes that painters also used emerald green and malachite, mixed with reds and blues, to build rich near-blacks [14]. Gurney's modern list of historic or not recommended pigments still carries it by name [17]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is a modern dark green",
+   "body": "The swatch on this page, #28713E, is the screen value we hold for RAL 6001, a German industrial standard dating to 1927 [21]. In ISCC-NBS terms it is a dark yellowish green, and Paterson's dictionary uses the same words for the pigment [21][7]. The historical paint was a brilliant, cool green, so the swatch is a darker and quieter relative of it.\n\nOur library shows how widely the name wanders. Ridgway's 1912 plate holds a much lighter fresh green under this name, and the other entries our library files under the name run lighter and greyer still [21]. Paterson's note that Maerz and Paul keep *émeraude* apart from emerald green shows that even the dictionaries could not agree on one hue [7]. If you hold a tube labelled emerald green today, expect a modern pigment, because the arsenic one is gone [16]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, 16 contain a color within six CIEDE2000 units of this swatch covering at least 5 per cent of the canvas, as photographed [22]. That is rare, but it is concentrated in time: 5 of the 523 paintings from the 1910s qualify, a rate about 14 times the archive's overall rate [22]. The largest areas are in Edvard Munch's [[painting:commons-Q18890792|Self-Portrait against a Green Background]] of 1905, where the color covers about a quarter of the canvas, and in Bonnard's *La Symphonie pastorale* of 1918 [22]. Van Gogh's *La Berceuse* of 1889 reaches 17 per cent [22].\n\nThe earliest match is the anonymous *Aurora* of 1825, three years after Liebig published the recipe [22][1]. That is a look-alike hue in an aged photograph, not a test for the arsenic pigment [22]. What the numbers do show is a color that belongs to the last years of the nineteenth century and the first of the twentieth, which is the period when the new greens arrived [22][3].\n\nTo see it in the world, look for a green that sits between a leaf and a gem: brighter and cooler than the olive greens of earlier centuries. Screen colors are approximate, and none of them can replace the pigment itself."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the emerald gemstone (the pigment borrowed the gem's name)",
+   "first_recorded": "Werner's nomenclature, 1821 (color); pigment first made 1814, sold from 1822",
+   "source": "Ball, Bright Earth, ch. 15; Baty, Nature's Palette"
+  },
+  "aka": [
+   "Schweinfurt green",
+   "Paris green",
+   "Vienna green",
+   "Brunswick green",
+   "imperial green",
+   "vert Paul Véronèse (French)"
+  ],
+  "siblings": [
+   "viridian",
+   "paolo-veronese-green",
+   "malachite"
+  ],
+  "parent": "emerald",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "viridian",
+    "gloss": "the French vert émeraude, a chromium green, not the arsenic pigment"
+   },
+   {
+    "slug": "emerald",
+    "gloss": "the gem color, a lighter and brighter green"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "vert de Schweinfurt, vert émeraude (viridian)"
+   },
+   {
+    "lang": "de",
+    "name": "Schweinfurter Grün; Smaragdgrün (confusable with viridian)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#28713E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 16,
+  "peak_decade": {
+   "decade": 1910,
+   "hits": 5,
+   "n": 523,
+   "lift": 14.2
+  },
+  "top_paintings": [
+   "commons-Q18890792",
+   "commons-Q17492360",
+   "commons-Q107206463",
+   "aic-27949"
+  ],
+  "first_dated": {
+   "id": "nga-43713",
+   "year": 1825
+  },
+  "measured": {
+   "iscc": "dark yellowish green",
+   "iscc_de": 6.9,
+   "nearest": [
+    [
+     "Dark Spring Green",
+     2.5
+    ],
+    [
+     "Cadmium Green",
+     3.4
+    ],
+    [
+     "Windsor Green",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 149 (\"Emerald green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 122 (\"Copper arsenite group\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Scheele's green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"emerald green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Scheele's green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. \"The Poisoner Returns\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 8 (Preface)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 300 (note on Cézanne's suppliers)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 228",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 90",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 41",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 41",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, pp. 92, 221",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Werner's nomenclature, Greens (no. 53)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph: RAL, ISCC-NBS, Ridgway 1912, Werner 1821), CIEDE2000 distances",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did copper-arsenic greens in wallpaper make people ill?",
+   "choices": [
+    "Brushing gave off arsenical dust, and damp could release arsine gas",
+    "The color faded to a poisonous black",
+    "The paper was glued with lead",
+    "The gas came from the gem emerald"
+   ],
+   "answer": "Brushing gave off arsenical dust, and damp could release arsine gas",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: it has been proved that green wallpaper killed Napoleon.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In English, what is the name of the chromium green the French call vert émeraude?",
+   "choices": [
+    "Viridian",
+    "Scheele's green",
+    "Verdigris",
+    "Malachite"
+   ],
+   "answer": "Viridian",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The paint called emerald green never contained the element that colors an emerald: it was copper and arsenic, and the gem's green comes from chromium.",
+  "Paolo Veronese died in 1588, two centuries before the green the French named after him was invented.",
+  "In 1858 an estimated 100 square miles of British wallpaper were colored with arsenic greens."
+ ],
+ "words": 1590,
+ "status": "checked",
+ "checked": {
+  "by": "Sonnet 5.5 batch writer (self-check: sentence-to-note trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Paterson says Veronese used the pigment and gives 1822 as first commercial production; Ball's account of the name is used instead and the contradiction is explained in the text.",
+   "Napoleon wallpaper theory stated as unproven; 2008 hair study from St Clair only.",
+   "Archive matches are colors, not pigment identifications.",
+   "Swatch (RAL 6001) is darker than the historical pigment."
+  ]
+ }
+}

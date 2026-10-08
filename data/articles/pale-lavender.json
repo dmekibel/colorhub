@@ -1,0 +1,140 @@
+{
+ "slug": "pale-lavender",
+ "name": "Pale Lavender",
+ "hex": "#EECFFE",
+ "names": [
+  "Pale Lavender"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Lavender is a very light, slightly pink violet, a descriptive name that two color systems list and a few writers use mostly as a mood.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from lists",
+   "body": "The library finds Pale Lavender in the xkcd color survey and in the ISCC-NBS system of 1955, block 226 [1]. A near-duplicate in the library is Very Light Purple, 2.3 units away, and the closest named color is [[thistle]] at 7.7 units [1]. The name is descriptive: it takes the flower's [[lavender]] and lightens it. Who first used it as a fixed color name is undocumented."
+  },
+  {
+   "id": "words",
+   "title": "Pale lavender in prose",
+   "body": "Batchelor recalls a television advertisement in which lavender underpants hung on a washing line are stolen, and the story ends in a pale lavender front room [2]. He reads the pair of adverts, this one and a bright yellow sweatshirt, as parables about how words fail to pin down a color [2]. No book in the corpus treats pale lavender as a pigment or dye [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is almost white: lightness 87 of 100, and a contrast of only 1.4 against white [1]. It is also rare in paintings. No painting in our archive of 23,781 has a color within six units of this swatch covering at least five per cent of the canvas [4]. As photographed: museum photographs of aged, varnished paintings; a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lavender flower, lightened",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library; ISCC-NBS 1955 block 226"
+  },
+  "aka": [
+   "Very Light Purple (near-duplicate)"
+  ],
+  "siblings": [
+   "thistle",
+   "lilac"
+  ],
+  "parent": "lavender",
+  "children": [
+   "pink-lavender"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#EECFFE",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    87,
+    27,
+    315
+   ],
+   "contrast_white": 1.4,
+   "nearest": [
+    [
+     "Thistle",
+     7.7
+    ],
+    [
+     "Very Light Purple",
+     2.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; xkcd set, ISCC-NBS 1955 block 226); CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub concordance of 29 color books (color-kb), searched for the name",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Batchelor use the pale lavender advertisement to illustrate?",
+   "choices": [
+    "The inadequacy of words for color",
+    "A new dye",
+    "A fashion trend",
+    "A paint recipe"
+   ],
+   "answer": "The inadequacy of words for color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch is a strong, dark violet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale lavender is nearly white: it has only 1.4 contrast against white.",
+  "Look for it in pastel interiors, where it often reads as a gray-white."
+ ],
+ "words": 221,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Batchelor passage is recalled, not the book opening; front room is pale lavender in source"
+  ]
+ }
+}

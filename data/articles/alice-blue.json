@@ -1,0 +1,114 @@
+{
+ "slug": "alice-blue",
+ "name": "Alice Blue",
+ "hex": "#F0F8FF",
+ "names": [
+  "Alice Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Alice Blue is a very pale, faintly cool blue-white, named for Alice Roosevelt and now one of the CSS and X11 color keywords.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson's dictionary defines Alice blue as a US term, named after Alice, the wife of Theodore Roosevelt [1]. The dictionary's own wording may be a slip, since the books we hold do not otherwise establish the family relation [1]. Paterson calls the shade greenish-blue, yet he also gives the screen version, AliceBlue, with the code #F0F8FF [1]. That code is nearly white with a cool tint, so the old description and the screen color are not the same thing [1].\n\nThe name is first recorded in our sources in 1912, in Ridgway's color standards, and it later appears in the 1930 Maerz and Paul dictionary and in ISCC-NBS of 1955 [3]. The books we have read say nothing more about its origin, so this page does not add a story that they do not support [1]."
+  },
+  {
+   "id": "screen",
+   "title": "On screen",
+   "body": "AliceBlue is one of the 140 named colors of the X11 set, which web browsers adopted as CSS color keywords [1]. Among our named colors its closest neighbor in family is [[ghost-white]], and it sits at the pale end of the [[light-blue]] range [3].\n\nLike all hex values for named colors, it is a screen approximation and will shift between displays [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 82 contain this color, 0.34% of the total, as photographed [4]. It is most often a light inside a painting, which fits a color that is nearly white [4]. The earliest match is from 1332, which is 580 years before the name's first record, so that match is a look-alike hue in an aged photograph and not evidence of any pigment [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Alice Roosevelt",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Paterson, A Dictionary of Colour, \"Alice blue\""
+  },
+  "aka": [
+   "AliceBlue"
+  ],
+  "siblings": [
+   "ghost-white",
+   "azure",
+   "powder-blue",
+   "lavender-blush"
+  ],
+  "parent": "light-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 82,
+  "pct_present": 0.34,
+  "first_sources": {
+   "ridgway": 1912,
+   "maerz-paul": 1930,
+   "iscc-nbs": 1955
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Alice blue\" and \"AliceBlue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: first-record sources (Ridgway 1912, Maerz & Paul 1930, ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Alice Blue (n=82)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who is Alice Blue named for?",
+   "choices": [
+    "Alice Roosevelt",
+    "Alice Liddell",
+    "Alice Walker",
+    "Queen Alexandra"
+   ],
+   "answer": "Alice Roosevelt",
+   "kind": "pick"
+  },
+  {
+   "q": "What kind of color is the screen version, #F0F8FF?",
+   "choices": [
+    "A nearly white, cool tint",
+    "A deep greenish blue",
+    "A saturated cyan"
+   ],
+   "answer": "A nearly white, cool tint",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Alice Blue is one of the 140 named colors of the X11 set."
+ ],
+ "words": 281,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "slug": "pastel-pink",
+ "name": "Pastel Pink",
+ "hex": "#DEA5A4",
+ "names": [
+  "Pastel Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pastel Pink is a pale, softened pink, named by adding \"pastel\" to pink; the word is a description of lightness, not a pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What pastel means",
+   "body": "Paterson defines \"pastel\" as a pale shade or tint of a color, and gives \"pastel pink\" as his example [1]. The same dictionary says pastel colors are ones to which grey has sometimes been added [1]. It also lists \"ice-cream colours\", pastel pinks among them, as a phrase a newspaper used in 2000 for suede handbags [2].\n\nThe painters' pastel is a separate meaning: a stick of dry ground pigment bound with gum or clay, or, in oil pastels, with fat and wax [1]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our swatch sits in ISCC-NBS block 29, \"moderate pink\", only 0.8 units away on the CIEDE2000 scale, and Maerz and Paul's 1930 atlas records the color from 1899 [3]. The xkcd survey of 2010 gives a very different pastel pink, #FFBACD, much lighter and cooler [3]. That 9.6-unit spread is a reminder that the phrase names a range, not a place on the chart [3].\n\nIt is a near relative of [[pink]], less saturated than [[rose]] and lighter than [[salmon-pink]]."
+  },
+  {
+   "id": "cochineal",
+   "title": "In the dye pot",
+   "body": "Finlay describes a rug dyed with cochineal in Chile whose stripes run from pastel pink to deep purple, each from a slightly different recipe of cochineal and metal salts [4]. The pale end of a dye range is a thin bath, and the pink gets deeper as the bath gets stronger."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 42 works, or 0.18 per cent, which is rarer than 61 per cent of the named colors [5]. Inside a painting it usually plays a hidden color, in 60 per cent of 20 paintings [5]. It peaks in the 1700s, and is most over-represented in Indian paintings, at 3.2 times the expected rate (11 of 721) [5].\n\nThese are photographs of aged, varnished paintings, and paint may have faded, so a color match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pastel (pale tint) + pink",
+   "first_recorded": "Maerz and Paul, 1899 (atlas of 1930); ISCC-NBS 1955",
+   "source": "ColorHub library; Paterson"
+  },
+  "aka": [],
+  "siblings": [
+   "pink",
+   "rose",
+   "salmon-pink"
+  ],
+  "parent": "pink",
+  "children": [
+   "pink-red"
+  ],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes)",
+  "match": {
+   "hex": "#DEA5A4"
+  },
+  "n_present": 42,
+  "peak_century": 1700,
+  "measured": {
+   "iscc": "moderate pink",
+   "de2000": 0.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"pastel\", \"pastel colours\", \"pastel painting\", p. 299",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"ice-cream colours\", p. 214",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway), CIEDE2000 distances; xkcd color survey 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson say \"pastel\" means in a color name?",
+   "choices": [
+    "A pale shade or tint of the color",
+    "A metallic finish",
+    "A tropical dye",
+    "A fluorescent paint"
+   ],
+   "answer": "A pale shade or tint of the color",
+   "kind": "pick"
+  },
+  {
+   "q": "How are the pale pinks of Finlay's Chilean rug made?",
+   "choices": [
+    "Different cochineal recipes with metal salts",
+    "Painted over",
+    "Bleached in the sun",
+    "Mixed with chalk"
+   ],
+   "answer": "Different cochineal recipes with metal salts",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pastel Pink is a description, not a dye: Paterson uses it as his own example of what pastel means.",
+  "A cochineal rug can run from pastel pink to deep purple depending on the recipe."
+ ],
+ "words": 324,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that the color word derives from the chalk medium"
+  ]
+ }
+}

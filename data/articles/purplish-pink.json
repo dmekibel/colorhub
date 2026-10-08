@@ -1,0 +1,112 @@
+{
+ "slug": "purplish-pink",
+ "name": "Purplish Pink",
+ "hex": "#CE5DAE",
+ "names": [
+  "Purplish Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Purplish pink is a descriptive name, not a pigment or a place: a pink pulled toward purple, used by dictionaries for a whole run of older, more specific names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description that stands in for names",
+   "body": "Paterson's dictionary uses the phrase as a definition for at least five entries: corinthian pink, fuchsia pink, mauvette, peach-blossom, and rose marie (which Paterson glosses as a deep pink or purplish pink) [1]. It also allows that orchid pink can be a purplish pink [1]. The books read do not treat the phrase as a color name of its own, only as the plain words that explain other names [1].\n\nThat is useful to know when you meet it. Where a name such as mauvette appears, the dictionary means a violet, a purple or a purplish pink, so the word covers a range, not one point [1]. See [[mauvette]], [[orchid-pink]] and [[rose-pink]] for the named neighbors."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is a modern list color, recorded in the xkcd color survey of 2010 and built from the grammar purplish plus pink [2]. Its nearest ISCC-NBS name, from the 1955 system, is deep purplish pink, about seven units away [2]. In hue it sits on the cool side of [[pink]], toward [[magenta]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, none holds this color over at least five per cent of the canvas, and a finer within-painting search finds it in one [3]. It is rarer than 86 per cent of the named colors [3]. Photographs of aged, varnished paintings are the evidence here, so this says little about what painters mixed [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive grammar: purplish + pink",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "data/graph nodes; Paterson, A Dictionary of Colour"
+  },
+  "aka": [],
+  "siblings": [
+   "mauvette",
+   "orchid-pink",
+   "rose-pink"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "within_painting": 1,
+  "rarer_than_pct": 86,
+  "nearest_iscc": [
+   "deep purplish pink",
+   7.3
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"corinthian pink\", \"fuchsia pink\", \"mauvette\", \"peach-blossom\", \"rose marie\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library and graph nodes (xkcd 2010; ISCC-NBS 1955)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Paterson's dictionary mostly use the phrase purplish pink for?",
+   "choices": [
+    "To define other color names",
+    "To name a pigment",
+    "To name a dye from a plant",
+    "To mark a 1950s paint range"
+   ],
+   "answer": "To define other color names",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds this exact color widely across museum paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mauvette, fuchsia pink and corinthian pink all lean on the same two plain words, purplish pink."
+ ],
+ "words": 252,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rose marie gloss corrected to 'deep pink or purplish pink'"
+  ]
+ }
+}

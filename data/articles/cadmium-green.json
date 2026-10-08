@@ -1,0 +1,105 @@
+{
+ "slug": "cadmium-green",
+ "name": "Cadmium Green",
+ "hex": "#006B3C",
+ "names": [
+  "Cadmium Green"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Cadmium green is the name of a composite artist's green, a blend of a cadmium yellow with viridian rather than a single mineral.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "A mixture, not a mineral",
+   "body": "Paterson describes cadmium green as made by mixing cadmium yellow and viridian [1]. The Pigment Compendium agrees in spirit: it cites a 1928 source for the term as a composite pigment based on a cadmium yellow [2]. The yellow half is a sulphide first made in 1820 and used extensively by artists [1]. So the name tells you the recipe, not a deposit or a plant.\n\nCompare [[cadmium-lemon]] and [[cadmium-orange]], the same cadmium family, and [[viridian]], its green partner [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is rare in museum canvases. It appears in 0.08% of the 23,781 paintings in our archive (19 paintings, as photographed) [3]. The earliest in our data is 1875 and the latest 1918, but the early centuries are thin, so that is a floor, not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "cadmium (the metal) plus green",
+   "first_recorded": "first made after 1820 (the yellow)",
+   "source": "Paterson, A Dictionary of Colour, \"cadmium green\""
+  },
+  "aka": [],
+  "siblings": [
+   "viridian",
+   "emerald-green"
+  ],
+  "parent": "green",
+  "children": [
+   "cadmium-orange",
+   "cadmium-lemon"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 19,
+  "first_dated": 1875,
+  "last_dated": 1918
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cadmium green\", \"cadmium yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"cadmium green\", p. 81",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Paterson, cadmium green is made by mixing cadmium yellow with what?",
+   "choices": [
+    "Viridian",
+    "Ultramarine",
+    "Vermilion"
+   ],
+   "answer": "Viridian",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the earliest cadmium-green painting in our archive is a firm first for the color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The name is a recipe: cadmium yellow mixed with viridian."
+ ],
+ "words": 150,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede said blue-green; sources say viridian",
+   "Cadmium-family wording loosened"
+  ]
+ }
+}

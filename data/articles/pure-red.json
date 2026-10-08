@@ -1,0 +1,159 @@
+{
+ "slug": "pure-red",
+ "name": "Pure Red",
+ "hex": "#E72512",
+ "names": [
+  "Pure Red"
+ ],
+ "tier": "commercial",
+ "lede": "Pure Red is the screen value of a paint-industry standard, RAL 3028, but the phrase is older and bigger than any swatch: painters and theorists have argued for centuries about whether a red can be pure at all.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A standard and a phrase",
+   "body": "The swatch here is the library entry for RAL 3028, an interiors-and-paint standard, and the library marks it as an approximate screen value [1]. Its nearest named neighbor is [[vermilion]], about five CIEDE2000 units away [1]. It is a strong, slightly orange red, not the blue-leaning crimson that some people picture when they hear the phrase.\n\nThe phrase *pure red* turns up in the color books far more as an idea than as a product, and the idea is contested."
+  },
+  {
+   "id": "painters",
+   "title": "Can a red be pure?",
+   "body": "Early color circles already split red in two. Gage notes that the eighteenth-century circle of Claude Boutet replaces Newton's two blues with two reds, a fire-red and a crimson [2]. In the 1920s Mondrian wanted a categorically pure red and, like many painters before him, could manage it only by laying a transparent bluish crimson glaze above an opaque orange-red like vermilion [3].\n\nIn 1944 Robert Motherwell said that the pure red of which certain abstractionists speak does not exist; any red, he said, is rooted in blood, wine, glass and other concrete things [4]. Ball adds that Rothko picked his reds for their hue rather than for their chemistry [4]."
+  },
+  {
+   "id": "theory",
+   "title": "Pure red in color theory",
+   "body": "Johannes Itten's 1961 book The Art of Color promoted a twelve-hue wheel built on red, yellow and blue primaries, which Westland calls a dated choice because red, yellow and blue are poor subtractive primaries [5]. Such wheels are a teaching convention, not a fact about vision; no one set of three paints mixes every color.\n\nThe psychologist Faber Birren, writing in 1950, held that in practice the full red hue is too imperious and leaves too strong an afterimage, though it commands attention [6]. Birren's claims about color and mood are old opinion, not modern evidence, so treat his further remarks on red with care [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds colors within six units of this red, covering at least five per cent of the canvas, in only 15 of 23,781 paintings [7]. The strongest case is a 1760 Basohli illustration from the Cleveland Museum of Art, where it fills about two thirds of the picture [7]. Bonnard's *Corner of a table* (1935) and Matisse's *Painter's Family* (1911) also qualify [7].\n\nBy country the match is commonest in Spain and India, though with so few paintings the pattern is a hint, not a result [7]. These are photographs of aged, varnished paintings, so a match is not a pigment test [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "RAL 3028 (Reinrot), a paint-industry standard",
+   "first_recorded": "origin of the name undocumented in the books",
+   "source": "data/library.json (RAL)"
+  },
+  "aka": [
+   "RAL 3028"
+  ],
+  "siblings": [
+   "vermilion",
+   "scarlet",
+   "crimson"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "red",
+    "gloss": "the whole family; Pure Red is one standardized member"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#E72512",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 15,
+  "top_painting": "cma-136298",
+  "nearest": [
+   "Vermilion",
+   4.9
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json), RAL 3028 'Pure Red', approximate screen value; CIEDE2000 to Vermilion 4.9",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 167 (Boutet's colour circle)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 262",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 22",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Westland et al., Color: Principles, 'Itten's The Art of Color'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 20 (\"The Prescription of Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did painters reach a red close to 'pure' in the 1920s, according to Gage?",
+   "choices": [
+    "Glazing crimson over orange-red",
+    "Mixing red with white",
+    "Using a single natural dye",
+    "Grinding one mineral"
+   ],
+   "answer": "Glazing crimson over orange-red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Motherwell said a pure red exists in abstract painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Motherwell said in 1944 that the pure red some abstractionists speak of does not exist.",
+  "Mondrian reached his pure red by glazing crimson over orange-red."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that Boutet/Le Blon held pure red must be a mixture; now states only Boutet's two-red circle (Gage)",
+   "Motherwell: removed 'told his fellow Abstract Expressionists'; Rothko line restated closer to Ball's meaning",
+   "Itten sentence reworded (was too close to Westland); dropped unsupported 'ignored scientific developments'"
+  ]
+ },
+ "depth": "medium",
+ "status": "checked",
+ "words": 426
+}

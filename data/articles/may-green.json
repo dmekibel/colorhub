@@ -1,0 +1,131 @@
+{
+ "slug": "may-green",
+ "name": "May Green",
+ "hex": "#4C9141",
+ "names": [
+  "May Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "May Green is a mid, slightly yellowish green, the name RAL gave to its standard color 6017, and one that a pigment reference files as a rare variant name for emerald green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with two uses",
+   "body": "The library dates May Green to 1927, as RAL color 6017, an industrial standard color [1]. Its screen value here, #4C9141, is an approximation, and the RAL swatch sits slightly darker, at #468641 [1]. The nearest ISCC-NBS category is strong yellowish green, about 3.5 units away [1].\n\nA second use is older and rarer. The *Pigment Compendium* lists May green among the less common names for emerald green, citing Fiedler and Bayard (1997), and suggests the term probably marks a shade variant [2]. The word *May* is never explained there, and no color book we hold says why the name was chosen [3]. Its closest relatives are [[kelly-green]], [[grass]] and [[leaf-green]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "May Green appears in 10 of the 23,781 paintings in our archive, about 0.04%, as photographed [5]. It is rarer than 70% of the named colors [5]. It peaks in paintings of the 1800s, in 5 of 8,345 (0.1%), 1.4 times the rate expected from the same museums [5]. The earliest match is from 1860, 67 years before the RAL record, so it is a look-alike hue and not evidence of the pigment [5]. These are photographs of varnished paintings, so a match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1927 (RAL 6017)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "kelly-green",
+   "grass",
+   "leaf-green",
+   "emerald-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 10,
+  "pct": 0.04,
+  "peak_period": "1800s",
+  "measured": {
+   "lch": [
+    54.2,
+    52.1,
+    137.1
+   ],
+   "nearest": [
+    [
+     "Kelly Green",
+     5.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): RAL 6017, first recorded 1927; ISCC-NBS strong yellowish green",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh and others, Pigment Compendium, \"May green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Concordance search of ../color-kb/concordance/by-color/may-green.jsonl",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Pigment Compendium say May green probably is?",
+   "choices": [
+    "A shade variant of emerald green",
+    "A name for sap green",
+    "A kind of malachite",
+    "A Victorian dye"
+   ],
+   "answer": "A shade variant of emerald green",
+   "kind": "pick"
+  },
+  {
+   "q": "May Green is dated to 1927 in our library as which standard color?",
+   "choices": [
+    "RAL 6017",
+    "Pantone 15",
+    "NCS 2060",
+    "Munsell 5G"
+   ],
+   "answer": "RAL 6017",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A RAL industrial green that a pigment book also lists as a rare name for emerald green."
+ ],
+ "words": 230,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

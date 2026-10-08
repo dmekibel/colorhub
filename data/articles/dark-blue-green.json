@@ -1,0 +1,133 @@
+{
+ "slug": "dark-blue-green",
+ "name": "Dark Blue Green",
+ "hex": "#005249",
+ "names": [
+  "Dark Blue Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark blue green is a descriptive name for a deep, sea-dark teal, listed by the ISCC-NBS system in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain description",
+   "body": "The swatch is the ISCC-NBS system's block 141 (1955), and the xkcd color survey of 2010 later used the same name [1]. Its closest named neighbor is [[bottle-green]], at a CIEDE2000 distance of 10.1 [1].\n\nThe books do not treat it as a color name, but they use the words. Ball notes that some old paintings have gone dark blue-green because yellow lake glazes over blue underpaint faded in light, as in a Lastman painting of about 1618 [2]. In 1830 Mérimée noted the same effect in Flemish paintings [2]. Salter (1869) used the phrase for green ochre, which was made from yellow ochre with prussiate of potash and resembled Prussian green [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Dark blue green is uncommon in paint. It appears in 41 of 23,781 paintings in our archive, and it is rarer than 60% of the named colors [4]. It is most often a shadow (35% of 23 paintings) or a hidden color (35%), and in the 1900s it runs at 3.5 times the museums' baseline [4]. In printed English the phrase peaks in the 1920s [5]. These are photographs of varnished paintings, so read them as screen colors [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description of the color",
+   "first_recorded": "1955 (ISCC-NBS)",
+   "source": "library"
+  },
+  "aka": [],
+  "siblings": [
+   "bottle-green",
+   "teal",
+   "dark-green",
+   "dark-slate-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+  "n_present": 41,
+  "role_shadow_pct": 35,
+  "ngram": {
+   "peak": 1920
+  },
+  "measured": {
+   "lch": [
+    31,
+    24,
+    182
+   ],
+   "nearest": [
+    [
+     "Bottle green",
+     10.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 141; xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Green ochre\", p. 189",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "web",
+   "cite": "Google Books Ngram, 5-year smoothing",
+   "loc_kind": "",
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What turned the leaves in some old paintings dark blue-green?",
+   "choices": [
+    "Fading yellow lake glazes over blue",
+    "Mold on the varnish",
+    "Overpainting with indigo",
+    "Smoke from candles"
+   ],
+   "answer": "Fading yellow lake glazes over blue",
+   "kind": "pick"
+  },
+  {
+   "q": "When does the phrase dark blue green peak in printed English?",
+   "choices": [
+    "The 1920s",
+    "The 1650s",
+    "The 1990s",
+    "The 1850s"
+   ],
+   "answer": "The 1920s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Some old painted trees are dark blue-green because their yellow glazes faded."
+ ],
+ "words": 206,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

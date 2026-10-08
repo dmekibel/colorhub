@@ -1,0 +1,185 @@
+{
+ "slug": "french-blue",
+ "name": "French Blue",
+ "hex": "#0072BB",
+ "names": [
+  "French Blue"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "French Blue is a strong blue with three histories: the blue of France's royal arms and flag, a name for artificial ultramarine, and a famous stolen diamond.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The blue of France",
+   "body": "Pastoureau treats the royal azure of France, a field of gold fleurs-de-lis on blue, as a continuous French blue since the twelfth century [1]. In the thirteenth century that azure became the color of the monarchy, and in the late Middle Ages the color of royal officers [1]. After 1789 the tricolor cockade carried the blue into the Revolution and then the national flag [1].\n\nThe swatch here is the modern screen color, a strong blue in the ISCC-NBS system (block 194), about 3.1 units from it [2]. It is not a measured heraldic blue [2][1]."
+  },
+  {
+   "id": "ultramarine",
+   "title": "French blue as ultramarine",
+   "body": "In the pigment trade French blue was a synonym for synthetic ultramarine, specifically French ultramarine [3]. Salter in 1869 described a middle shade, new blue, between French blue and permanent blue [4]. The term appears in the long list of ultramarine names with Guimet's blue, laundry blue and permanent mauve [5].\n\nIn the same lists, Prussian blue also carried the label French blue among its many trade names, which shows how loosely the term was used [6]. Livingstone shows that the modern pigment Ultramarine French Blue looks like a pure blue, though the cobalt blue next to it reflects into the green [7]."
+  },
+  {
+   "id": "diamond",
+   "title": "The French Blue diamond",
+   "body": "A different French blue is a gem [8]. The French Blue diamond was stolen in a famous robbery and never seen again as such [8]. About twenty years later a slightly different blue diamond appeared in London, the second-largest fancy blue recorded up to then [8]. In 2005 the Smithsonian's Jeffrey Post commissioned a cubic zirconia cut in the shape of the French Blue and had it recut in the shape of the Hope [8]."
+  },
+  {
+   "id": "lists",
+   "title": "In the color lists",
+   "body": "Paterson lists French blue among the blues alongside French navy, which is a shade of navy, and French green, French grey and others [9]. The term was a general label for a French-made or French-fashion blue, and no single standard shade is given [9]. Close relatives are [[cobalt]], [[royal-blue]] and [[azure]], which are all strong mid blues [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 11 works, or 0.05 per cent, rarer than 77 per cent of the named colors [10]. Nine paintings hold it on at least 5 per cent of the canvas, among them Van Gogh's *Two Poplars in the Alpilles* of 1889 and, the earliest, Fra Angelico's *Madonna of the Pomegranate* of 1426 [10]. As always these are photographs of varnished paintings [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "France; the royal arms, French ultramarine and a diamond all use the name",
+   "first_recorded": "royal azure from the twelfth century; ISCC-NBS 1955",
+   "source": "Pastoureau, Blue; Pigment Compendium"
+  },
+  "aka": [
+   "French ultramarine",
+   "azur de France"
+  ],
+  "siblings": [
+   "royal-blue",
+   "cobalt",
+   "azure",
+   "prussian-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "prussian-blue",
+    "gloss": "older trade lists also call Prussian blue French blue"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+  "match": {
+   "hex": "#0072BB",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 9,
+  "pct_archive": 0.05,
+  "first_dated": 1505,
+  "measured": {
+   "iscc": "strong blue",
+   "de2000": 3.1
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 10 (\"French Blue\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 174 (French blue)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 288 (new blue)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 389 (ultramarine)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 322 (Prussian blue)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Brilliant, ch. 18 (diamonds) and note 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 177, 472, 490",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "French blue was a trade synonym for which pigment?",
+   "choices": [
+    "Synthetic ultramarine",
+    "Indigo",
+    "Cinnabar",
+    "Verdigris"
+   ],
+   "answer": "Synthetic ultramarine",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the French Blue diamond was recovered after the robbery as the same stone.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "French blue was the royal azure of France long before it was a cockade."
+ ],
+ "words": 417,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Hope/French Blue 'questioned' claim removed: Finlay's doubt concerned a Brunswick-diamond theory",
+   "Post experiment described as in Finlay"
+  ]
+ }
+}

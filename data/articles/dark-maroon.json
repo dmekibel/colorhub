@@ -1,0 +1,105 @@
+{
+ "slug": "dark-maroon",
+ "name": "Dark Maroon",
+ "hex": "#3C0008",
+ "names": [
+  "Dark Maroon"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Maroon is a near-black red-brown, the kind of color a painter gets at the dark end of a red pigment's range.",
+ "sections": [
+  {
+   "id": "use",
+   "title": "In pigments and paintings",
+   "body": "The books use the phrase for dark reds rather than as a fixed name. Ball notes that cadmium red, a pigment that was not sold commercially until 1910, can be shifted by changing its selenium content from orange all the way to dark maroon [1]. He also records that the synthetic alizarin reds in Rothko's dark maroon Chapel monochromes have kept their intensity, even though the murals are marred by whitish streaks and cracking [1].\n\nGurney uses it descriptively: a painting built on three starting colors, a blue-green, a cool red and a dull ochre, contains brownish reds, bright pinks and dark maroons as variations of the one red [2]. So the term marks a position, a [[maroon]] pushed dark, more than a historical color with its own story."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a screen color, #3C0008 sits very low in lightness, close to [[burgundy]] in hue but far darker [9]. Few books name it, so the sources here are descriptions rather than history [1][2]. The concordance of 29 color books finds only four strong mentions of this name, so the article stays short rather than pad the record [9]. Screen colors are approximate, and the swatch is a reference value, not a measured pigment [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books",
+   "first_recorded": "not dated in the books",
+   "source": "Ball, Bright Earth, ch. 21-22"
+  },
+  "aka": [
+   "dark red-brown"
+  ],
+  "siblings": [
+   "maroon",
+   "burgundy",
+   "brown",
+   "red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub names, concordance of 29 color books",
+  "hex": "#3C0008",
+  "book_mentions": 4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 21-22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 119",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub name data and the color-book concordance (4 strong mentions)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which pigment can shift from orange to dark maroon by changing its selenium content?",
+   "choices": [
+    "Cadmium red",
+    "Prussian blue",
+    "Lead white",
+    "Indigo"
+   ],
+   "answer": "Cadmium red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Maroon has its own long history as a named dye.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cadmium red can run from orange to dark maroon."
+ ],
+ "words": 218,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Rothko sentence: removed unsupported 'unlike other paints' comparison"
+  ]
+ }
+}

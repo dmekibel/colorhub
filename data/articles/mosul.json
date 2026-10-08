@@ -1,0 +1,131 @@
+{
+ "slug": "mosul",
+ "name": "Mosul",
+ "hex": "#8A643D",
+ "names": [
+  "Mosul"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Mosul is a moderate yellowish brown from Maerz and Paul's 1930 dictionary, named for the Iraqi city that was once a market for textiles and dye materials.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A trading city",
+   "body": "Maerz and Paul's *Dictionary of Color* (1930) lists Mosul at plate 14, position F 8, with 1925 as its earliest use, and the NBS Circular 553 of 1955 cites it [1]. The nearest ISCC-NBS category is moderate yellowish brown, 2.4 units away [1]. Why the compilers chose the city's name is undocumented [2].\n\nThe city itself has a place in the dye trade. Balfour-Paul lists Mosul among the great markets of the Near and Middle East, such as Baghdad, Aleppo and Damascus, where textiles and dye materials changed hands as the Ottoman empire protected traders from the early fifteenth century [3]. That is context for the name and not proof of it. Its neighbors in the dictionary are [[bismarck-brown]], [[sepia]] and [[saddle-brown]] [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Mosul appears in 4,642 of the 23,781 paintings in our archive, about 19.5%, as photographed, which makes it more common than 97% of the named colors [5]. It peaks in paintings of the 1300s, in 80 of 251 (31.9%), 2.8 times the rate expected from the same museums [5]. Inside a painting it most often plays an accent [5]. The match is a broad, common brown, and these are photographs of varnished paintings, so it is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "probably the city of Mosul; origin undocumented",
+   "first_recorded": "1925 (Maerz & Paul 1930)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "bismarck-brown",
+   "sepia",
+   "saddle-brown",
+   "van-dyke-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 4642,
+  "pct": 19.52,
+  "peak_period": "1300s",
+  "measured": {
+   "lch": [
+    45.4,
+    29.9,
+    69.3
+   ],
+   "nearest": [
+    [
+     "Sepia",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 14 F 8, first recorded 1925; NBS Circular 553 (1955), ISCC-NBS moderate yellowish brown",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "Concordance search of ../color-kb/concordance/by-color/mosul.jsonl",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 37",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plate of Maerz and Paul's dictionary holds Mosul?",
+   "choices": [
+    "Plate 14",
+    "Plate 2",
+    "Plate 39",
+    "Plate 27"
+   ],
+   "answer": "Plate 14",
+   "kind": "pick"
+  },
+  {
+   "q": "Is the reason for the name Mosul documented in our sources?",
+   "choices": [
+    "No, it is undocumented",
+    "Yes, a dye from Mosul",
+    "Yes, a Mosul textile",
+    "Yes, a king's order"
+   ],
+   "answer": "No, it is undocumented",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A common brown named for a city that was once a market for dyes."
+ ],
+ "words": 230,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

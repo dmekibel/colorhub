@@ -1,0 +1,324 @@
+{
+ "slug": "orange-red",
+ "name": "Orange Red",
+ "hex": "#FF4500",
+ "names": [
+  "Orange Red"
+ ],
+ "tier": "descriptive",
+ "depth": "long",
+ "lede": "Orange red is the zone where red tips toward orange, and the web color #FF4500 sits in the middle of it; its history is the history of the pigments and dyes that lived there.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name for a zone",
+   "body": "*Orange red* is a compound name: a red leaning toward orange, or an orange pushed toward red. It is not one historical dye or mineral, and no book traces it to a single origin. The swatch here is the web color `orangered`, #FF4500 [6]. The same name turns up in Ridgway's color atlas of 1912, in the RAL system of 1927 and in the ISCC-NBS names of 1955, which file this exact swatch as a vivid reddish orange [6].\n\nBooks use the words loosely, as a zone rather than a point. Paterson's dictionary calls scarlet a bright orange-red, sard a deep orange-red, Goya a rich orange-red, and notes that web designers adopted tomato red as an orange-red name [1][2]. The words mean \"somewhere between\", and each writer places the dial differently.\n\nThe idea of orange as a separate step between yellow and red is itself fairly late. Pastoureau reports that the old Aristotelian order of colors, which dominated European thought for some two thousand years, ran from white through yellow to red, with orange only occasionally inserted [27]. Newton's seven-color spectrum, in which orange sits as its own band beside red, became the standard reference only in the eighteenth century [28]. Before then there was less reason to name a color that was neither one nor the other."
+  },
+  {
+   "id": "material",
+   "title": "Minerals and pigments",
+   "body": "Orange-red is a color that minerals and chemists reached long before dyers could reliably fix it. The oldest candidate is realgar, an arsenic sulfide that the Romans called sandarach and used as an orange-red paint pigment [9][14]. It was traded alongside orpiment, and it is dangerously poisonous [9]. Realgar is also unstable: it can revert toward yellow orpiment on exposure [14].\n\nThe Romans also made one of the first synthetic pigments here [10]. Red lead, or minium, forms when white lead is roasted: it turns yellow first, then deepens to the orange-red of lead tetroxide [10]. Pliny called it false sandarach, to set it apart from the true realgar, and its heavy use in medieval manuscripts gave us the word *miniature*, from the Latin for coloring with minium [11]. Red lead was cheap, so painters used it as a substitute for vermilion; both it and the mineral are highly poisonous [10]. Coles adds that the Egyptians counted this orange-red as a kind of yellow [10], a reminder that old color categories cut the spectrum in different places.\n\n[[vermilion]] is the great orange-red pigment of European painting [12][13]. Its hue depends on how it is made. By Ball's account, the wet process gives a finer powder of orange-red, while the older dry process gives a bluish red [12]. Pastoureau describes the pigment as a beautiful orange-red that reached the West between the eighth and eleventh centuries, and notes its weakness: it darkens in daylight [13].\n\nThe nineteenth century's chemists filled in the rest of the range. The Pigment Compendium lists chrome red, a lead chromate that Salter described in 1869 as a bright orange-red [14]. Cadmium sulfide runs from lemon yellow to orange red, depending on the size of its colloidal grains rather than its chemical formula [15], and [[cadmium-orange]] is the artists' paint that grew from it. The same compendium records thallium chromate pigments in orange, red and yellow [15], and George Field devised an orange-vermilion in the colourman's trade, used extensively from the 1830s [3]. Quinacridone pigments, first marketed in 1958, offered colors from orange-red to violet, and the New York Abstract Expressionists took them up quickly [23]."
+  },
+  {
+   "id": "dyes",
+   "title": "Dyes: madder and Turkey red",
+   "body": "For centuries a dyer could make orange-reds cheaply, from plants, while a true red stayed expensive. Greenfield notes that russets and orange-reds came easily from plant dyes, but a true red needed rare materials and guarded techniques until artificial dyes arrived in the nineteenth century [16]. The commonest source was [[madder]], a small bush with a pink root. Finlay describes the richest orange-reds of the Ottoman world as coming from madder, beside dark reds from kermes and blues from indigo [18].\n\nOrange-red was therefore the red of ordinary people. Peasants could afford the cheaper orange-red and russet dyes, though a too-bright cloth could still collide with sumptuary laws and local custom [17]. For grander wearers only [[scarlet]] and crimson would do, and madder's orange-red was glory enough for those lower and middling ranks [17].\n\nThe best orange-red dye was a secret. Finlay says that \"Turkey red\", the luminous orange-red seen on the carpets of Constantinople, guarded its recipe closely, one of the dyeing world's great secrets [18]. Madder's reach goes back much further than the Turkish dyers [19]. A scrap of cotton found stuck to a silver vase at Mohenjo-daro in the Indus Valley, woven some 4,600 years ago, was dyed with madder root and was pink or orange-red depending on the mordant [19].\n\nAnother orange-red dye came from the Americas [4]. Annatto, from Central America, is a natural orange-red dye now used in food coloring; capsanthin, the pigment of red peppers, is another orange-red food colorant [4]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Painters were using orange-red long before they could say so in the language of a spectrum. In the altarpiece attributed to Masaccio and Masolino (about 1423-8), Saint Jerome's robe is the bright orange-red of vermilion [20]. Gage notes that painters had long found that a pure red could only be reached by glazing a bluish, transparent crimson over opaque orange-red vermilion [21].\n\nThe color also shows how unreliable reproductions are. Ball compares two books' versions of Titian's *Assumption*: in one, the Virgin's orange-red robe appears almost pinkish [22]. A screen swatch such as #FF4500 is no more neutral, and it is far more saturated than any pigment on a canvas [6].\n\nLook for the interplay. Gurney reports that the lit side of a plaster head looked orange-red by contrast when green light bounced into its shadows [25]. The same card can read as orange or as red depending on what sits beside it, and the neighbors do much of the work."
+  },
+  {
+   "id": "science",
+   "title": "Light, wheels and warmth",
+   "body": "In 1855, Maxwell showed that three colored lights, orange-red, green and blue-violet, are enough to produce nearly every color; the triad is usually shortened to red, green and blue [24]. Gurney points out that the red in a corrected color wheel is really an orange-red: it is what you get halfway between yellow and magenta [25].\n\nThe same writer observes that traditional wheels stretch the yellow-to-red end, because the eye separates small steps among yellow, orange and red more finely, and because painters have had many more pigments in the warm range [25]. Orange-red is part of that crowded neighborhood.\n\nAlbers writes that blue is cool and the yellow-orange-red group warm in Western tradition, but he stresses that this is only relative, and that warm blues and cool reds exist [26]. Temperature in color is a comparison, not a property."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a match to this swatch is rare: it appears in 4 paintings (0.02 per cent), and the within-painting lens finds it in 5 [7]. That is rarer than 75 per cent of the named colors, and where it does appear it is always an accent, never a large field [7]. The earliest hit is a painting dated 1763 by Andrey Bolotov [7]. All of this is as photographed, on aged and varnished surfaces, and a color match is not a pigment test.\n\nThe reason is partly the swatch itself. #FF4500 is fully saturated; its Munsell notation is about 8.9R 5.7/18.2 and its contrast ratio against white is about 3.4 [6]. Almost no pigment in a painting reaches that chroma, which is why vermilion, red lead and cadmium look duller than the web color when photographed.\n\nIn printed English, the two-word phrase \"orange red\" peaks in the 1890s (Google Books, all senses) [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a compound of the color words orange and red; origin undocumented",
+   "first_recorded": "Ridgway 1912 in our library; the two-word phrase appears in printed English by 1800",
+   "source": "ColorHub library; Google Books Ngram"
+  },
+  "aka": [
+   "red-orange",
+   "vivid reddish orange (ISCC-NBS)"
+  ],
+  "siblings": [
+   "vermilion-red",
+   "tomato",
+   "flame"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "n_within": 5,
+  "pct": 0.02,
+  "rarer_than_pct": 75,
+  "role": "accent",
+  "first_dated": {
+   "year": 1763,
+   "id": "commons-Q27966342"
+  },
+  "measured": {
+   "hex": "#FF4500",
+   "munsell": "8.9R 5.7/18.2",
+   "contrast_white": 3.44,
+   "iscc": "vivid reddish orange",
+   "iscc_de": 3.0
+  },
+  "ngram": {
+   "term": "orange red",
+   "peak": 1890
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"scarlet\", \"sard\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Goya\", \"tomato red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"orange-vermilion\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"annatto\", \"capsanthin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library and graph node: CSS, ISCC-NBS 1955, RAL 1927, Ridgway 1912, Munsell and contrast measures",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"orange red\" (all senses)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Realgar\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Red lead\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 28",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Realgar\", \"Chrome red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Cadmium yellow\", \"Thallium chromate\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 5",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 14",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Finlay, Fabric, on madder at Mohenjo-daro",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 23 (plate 4.1)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, discussion of De Stijl and red",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 22",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, on the color wheel and reflected light",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, on warm and cool",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "book",
+   "cite": "Pastoureau, Red, ch. 31, and Yellow, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 29",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which pigment did Pliny call false sandarach?",
+   "choices": [
+    "Red lead (minium)",
+    "Vermilion",
+    "Madder lake",
+    "Ultramarine"
+   ],
+   "answer": "Red lead (minium)",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does a screen swatch of orange red look brighter than the same color in a painting?",
+   "choices": [
+    "A screen swatch is fully saturated; almost no pigment reaches that chroma",
+    "Paintings are always painted in a different hue",
+    "Screens are always brighter than paint",
+    "Varnish adds blue"
+   ],
+   "answer": "A screen swatch is fully saturated; almost no pigment reaches that chroma",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maxwell showed in 1855 that three colored lights can make almost any color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Realgar, red lead and vermilion all sit in the same orange-red zone, and all three are poisonous.",
+  "Look at two reproductions of the same Titian: one robe may read orange-red, the other nearly pink."
+ ],
+ "checked": {
+  "by": "batch-21 writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Thin source base: no book treats 'orange red' as one color; honest medium-length article.",
+   "Pigment Compendium notes are entry-level; Gage De Stijl painter unnamed in concordance; hedged."
+  ]
+ },
+ "status": "checked",
+ "words": 1283
+}

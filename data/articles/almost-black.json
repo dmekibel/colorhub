@@ -1,0 +1,192 @@
+{
+ "slug": "almost-black",
+ "name": "Almost Black",
+ "hex": "#070D0D",
+ "names": [
+  "Almost Black"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Almost Black is a crowd-sourced name for a near-black with a faint green-teal cast, a color that painters, dyers and glassmakers keep meeting at the dark end of other colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name made by a survey",
+   "body": "The name Almost Black comes from the 2010 xkcd color survey, where thousands of volunteers typed their own names for screen colors [1]. It is not an old pigment or dye name, and no book in our collection treats it as one [1]. Its place in the ISCC-NBS system is the block called brownish black, about 3.8 units away on the CIEDE2000 scale [1].\n\nThe swatch sits next to [[black]] and shares its job: it is the darkest end of the page, with only a trace of hue left. That is also how books use the phrase. They reach for \"almost black\" when a strong color goes dark enough that its hue is hard to name [2][3]."
+  },
+  {
+   "id": "dark-things",
+   "title": "Colors that go almost black",
+   "body": "Several books use the phrase for colors that are really something else seen in the dark. Ruby glass transmits so little light that it looks nearly black unless it is flashed onto clear glass or lightened with colorless glass [4]. A modern dioxazine violet paint is so loaded with pigment that, squeezed from the tube, the purple looks almost black [5]. Cochineal dye shifts with tin and other additives, and the darkest reds it gives are close to black [6].\n\nIn the dyer's world the same thing happens with purple. Finlay describes Pliny's purple as an almost-black that gives a glimpse of another color in the right light [7]. The lesson is that near-black is often a deep chroma in disguise, and a change in light brings the hue back [4][7]."
+  },
+  {
+   "id": "ageing",
+   "title": "When paint goes dark",
+   "body": "Time can also take a color to almost black. Copper-resin greens used in the late fifteenth century darkened as the resins decomposed in light, and foliage in paintings of that era is now deep brown or almost black [8]. Ball compares the effect to a Magritte-style trick of the light [8]. Pastoureau notes that in Romanesque images artists could paint the devil in any dark color; one church ceiling gives him dark blue, almost black, fur [9].\n\nContext matters too. Next to fresh snow, even ordinary water looks almost black, though it is no darker than on a summer day [10]. The eye judges dark against its neighbors, not in isolation [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 3,604 works, or 15.2 per cent, which makes it more common than 99 per cent of the named colors [11]. It peaks in the 1600s, at 17.2 per cent of the paintings from that century [11]. Several Dutch portraitists use it heavily; Nicolaes Maes has it in 15 of 21 works in the archive [12]. Within a painting it behaves as a shadow color [12].\n\nThese are photographs of aged, varnished paintings, so many of those near-blacks began as browns and greens [11][8]. Read them as screen colors, not pigment tests [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented beyond the 2010 xkcd survey",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "near black"
+  ],
+  "siblings": [
+   "black",
+   "umber",
+   "sepia",
+   "brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "black",
+    "gloss": "the full-darkness color; Almost Black keeps a faint teal trace"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+  "match": {
+   "hex": "#070D0D",
+   "de2000": 4
+  },
+  "n_present": 3604,
+  "pct_archive": 15.15,
+  "peak_century": 1600,
+  "measured": {
+   "iscc": "brownish black",
+   "de2000": 3.8
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930), CIEDE2000 distances; xkcd color survey 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 124",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 377 (rutile)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 79",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 15",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, p. 66",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 19",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 28",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 201",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, painters and role of this color, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does a saturated color like ruby glass or dioxazine violet sometimes look almost black?",
+   "choices": [
+    "It carries so much pigment or absorbs so much light that little of its hue gets through",
+    "It is mixed with black",
+    "It is a different color when wet",
+    "It has no chroma"
+   ],
+   "answer": "It carries so much pigment or absorbs so much light that little of its hue gets through",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: water in a snowy scene looks darker than usual because it really is darker.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ruby glass looks almost black unless it is flashed onto clear glass.",
+  "Stream water in snow looks almost black though it is no darker than in summer."
+ ],
+ "words": 480,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Pastoureau devils claim narrowed to Romanesque and the Zillis example"
+  ]
+ }
+}

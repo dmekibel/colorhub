@@ -1,0 +1,131 @@
+{
+ "slug": "light-violet",
+ "name": "Light Violet",
+ "hex": "#958DD6",
+ "names": [
+  "Light Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Violet is a soft blue-violet whose name has meant different colors on different charts; on one survey it is a pale pink-lilac instead.",
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Ridgway 1912 pl. X; ISCC-NBS 1955 blocks 195 and 206; xkcd alt #D6B4FC; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 120",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 80",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Light Violet (n=2), 23,781 museum paintings as photographed; data/graph/fieldnotes/l.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name that moves",
+   "body": "The library holds two quite different colors under this name: the Ridgway and ISCC-NBS bluish tint shown here, and the xkcd survey's much lighter, pinker #D6B4FC [1]. Names this plain get stretched. A seventeenth-century merchant quoted by Balfour-Paul described good indigo as giving off a pure light violet vapour when burned [2]. Gurney, a painter, uses the words for sky blue bouncing off a red surface [3]. Neither points at one fixed color."
+  },
+  {
+   "id": "standards",
+   "title": "On the old charts",
+   "body": "Ridgway's 1912 atlas shows it on plate X, and the 1955 ISCC-NBS system files it in blocks 195 and 206, where its other names include Bluish Violet and Lavender-Violet [1]. The nearest everyday name is [[periwinkle]], about eight units away; neighbors are [[violet]], [[lavender-violet]] and [[lilac]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Only 2 of 23,781 museum paintings contain the swatch, about 0.01 per cent, rarer than 86 per cent of our named colors [4]. In printed English the phrase's word peaks in the 1930s [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description",
+   "first_recorded": "1912 in Ridgway's atlas (as a plate color)",
+   "source": "data/library.json"
+  },
+  "aka": [
+   "Bluish Violet",
+   "Lavender-Violet"
+  ],
+  "siblings": [
+   "periwinkle",
+   "lavender-violet",
+   "lilac"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "lilac",
+    "gloss": "the xkcd survey's Light Violet, #D6B4FC, is closer to this pale pink-purple"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#958DD6",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "nearest": [
+   "Periwinkle",
+   7.9
+  ],
+  "xkcd_alt": "#D6B4FC"
+ },
+ "questions": [
+  {
+   "q": "True or false: every chart in our library gives Light Violet the same color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What did Balfour-Paul's seventeenth-century source say burning good indigo gave off?",
+   "choices": [
+    "A light violet vapour",
+    "A green smoke",
+    "No smoke",
+    "A red flame"
+   ],
+   "answer": "A light violet vapour",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Light Violet means two different colors in two of the library's sources."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Spot-checked 8 claims against books and library; all supported"
+  ]
+ },
+ "status": "checked",
+ "words": 174
+}

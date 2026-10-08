@@ -1,0 +1,121 @@
+{
+ "slug": "lipstick-red",
+ "name": "Lipstick Red",
+ "hex": "#C0022F",
+ "names": [
+  "Lipstick Red"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Lipstick Red is a strong, slightly blue red, a name that reads as ordinary language but has no documented origin.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no source",
+   "body": "Our library traces the swatch to the 2010 xkcd color survey and a Wikipedia entry, and finds no earlier origin [1]. It sits right on a standard name: the ISCC-NBS block called vivid red is only 0.3 units away on the CIEDE2000 scale [1]. See [[red]] and [[crimson]] for the wider family [1]."
+  },
+  {
+   "id": "words",
+   "title": "Why names like this are hard",
+   "body": "Finlay recounts a color-measurement specialist who complained that names such as barn red are not meaningful in a digital world, and asked what lipstick red means anyway [2]. The point is that the phrase is a familiar idea, not a measured one [2].\n\nGreenfield describes red lipstick, red lights, red sports cars and red sale signs as things that catch the eye, and notes that studies show people respond to red [3]. That is the idea the name borrows, not a specific shade [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color this close appears in only 12 works, rarer than 66 per cent of the named colors [4]. In 92 per cent of those 12 it plays an accent, judged by lightness rank within each painting [4]. These are photographs of aged, varnished paintings [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "vivid red"
+  ],
+  "siblings": [
+   "red",
+   "crimson",
+   "scarlet",
+   "vermilion"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings as photographed",
+  "n_present": 12,
+  "pct_archive": 0.05,
+  "role": "accent (92% of 12)",
+  "measured": {
+   "iscc": "vivid red",
+   "de2000": 0.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz and Paul 1930, Ridgway 1912, CSS, xkcd 2010), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 20",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; dE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In our archive, what role does this color usually play inside a painting?",
+   "choices": [
+    "An accent",
+    "The background",
+    "A shadow",
+    "A sky"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Lipstick Red has a documented origin as a pigment name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Where to look: in paintings, this red is usually the small accent, not the mass."
+ ],
+ "words": 201,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported \"vary by maker and season\" claim"
+  ]
+ }
+}

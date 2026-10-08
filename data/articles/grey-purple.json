@@ -1,0 +1,120 @@
+{
+ "slug": "grey-purple",
+ "name": "Grey Purple",
+ "hex": "#826D8C",
+ "names": [
+  "Grey Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Grey Purple is a muted, dusty violet, a plain descriptive name that several color systems recorded long before screens did.",
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 46 (\"Green today\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): ISCC-NBS 1955 blocks 223 and 228, Ridgway 1912 pl. XXXVI, Maerz & Paul 1930 pl. 44 G 7 (1912), xkcd; CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Grey Purple (n=25), 23,781 museum paintings as photographed; data/graph/fieldnotes/g.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain description",
+   "body": "The books read have no entry for the pair as a color name; where they print the words together they are only items in a list [1]. Pastoureau notes that in favorite-color surveys grey and purple are \"second-rank\" colors that share the crumbs after blue, green and red [1]. The color itself is better documented by charts than by prose."
+  },
+  {
+   "id": "standards",
+   "title": "On the old charts",
+   "body": "The library finds the color in four systems: the xkcd survey, the 1955 ISCC-NBS blocks 223 and 228, Ridgway's 1912 atlas (plate XXXVI), and Maerz and Paul's 1930 dictionary, which first records it in 1912 on plate 44 G 7 [2]. Two near-duplicate names sit within two units: Greyish Purple and Hyssop Violet [2]. Its nearest everyday name is [[mauve]], about ten and a half units away [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch is uncommon in museum paintings: 25 of 23,781 contain it, about 0.11 per cent [3]. The earliest dated painting is from 1658, by Giovanni Francesco Romanelli, and the rest of the 11 dated paintings run to 1924, so the early centuries are thin [3]. In printed English the phrase's word peaks in the 1840s, though that count covers every sense of the word [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description of the color",
+   "first_recorded": "1912 in Maerz and Paul",
+   "source": "data/library.json"
+  },
+  "aka": [
+   "Greyish Purple",
+   "Hyssop Violet"
+  ],
+  "siblings": [
+   "mauve",
+   "taupe",
+   "lavender"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#826D8C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 25,
+  "nearest": [
+   "Mauve",
+   10.6
+  ],
+  "dated_paintings": 11,
+  "first_year": 1658
+ },
+ "questions": [
+  {
+   "q": "Which everyday color name is nearest to Grey Purple on screen?",
+   "choices": [
+    "Mauve",
+    "Orange",
+    "Navy",
+    "Salmon"
+   ],
+   "answer": "Mauve",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Grey Purple is the color's only name in the library's charts.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Grey Purple appears in 25 of 23,781 museum paintings in our archive, the earliest from 1658."
+ ],
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Spot-checked 8 claims against books and library; all supported"
+  ]
+ },
+ "status": "checked",
+ "words": 208
+}

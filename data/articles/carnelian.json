@@ -1,0 +1,166 @@
+{
+ "slug": "carnelian",
+ "name": "Carnelian",
+ "hex": "#B31B1B",
+ "names": [
+  "Carnelian"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Carnelian is a red-to-orange variety of chalcedony, a quartz stone worn as jewelry and carved as a seal for thousands of years, and its screen swatch is a much deeper brick red than most carnelians.",
+ "sections": [
+  {
+   "id": "stone",
+   "title": "The stone",
+   "body": "Carnelian is orange chalcedony, itself an opaque, fibrous form of quartz [1]. Brown chalcedony is called sard, and striped chalcedony onyx, which makes sardonyx a striped brown stone [1]. Paterson spells the name both *carnelian* and *cornelian* and describes the color as a pale reddish brown or ruby red [2]. Finlay calls the stone orange, so the two books already disagree on whether to call it red-brown or orange [1][2].\n\nThe stone also gave its name to a group of reds. Paterson lists *bloodstone* as a name for red stones such as garnet and carnelian, and records carnelian as a birthstone, with ruby, for July [2]."
+  },
+  {
+   "id": "ancient",
+   "title": "Amulet and ornament",
+   "body": "Red stones went into graves to protect the dead. Pastoureau lists carnelian, jasper and garnet among the red objects placed with Roman dead, and among the jewelry of Roman women, alongside glass and coral [3]. Birren reports that carnelian, the so-called blood stone, was thought to restrain hemorrhage and clear the skin, and that red carnelian and Roman [[gem:coral|coral]] drove away disease [4].\n\nFinlay describes silver crowns of a forgotten people inset with red carnelians, with two green emeralds just below the silver rams at the front [1]. Carnelian also appears in the Bible's lists of stones, as one possible reading of *odem* in the high priest's breastplate, where Finlay gives carnelian or red jasper [1]. Pastoureau cautions that translating and identifying those lists is far harder than for Exodus, so a given verse does not prove the stone [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the stone",
+   "body": "The swatch is a strong, dark red, a near twin of the CSS color firebrick, 1.4 ΔE away, and of RAL 3000 flame red [6]. Maerz and Paul first recorded the name in 1923, and the ISCC-NBS system sets it at block 39 [6]. A real carnelian is usually lighter and warmer, between orange and reddish brown [1][2]. The nearest everyday name for the swatch is [[brick]] [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of this swatch fills at least five per cent of the canvas in 125 of 23,781 archive paintings [7]. The rate peaks in the 1520s, 9 of 273 paintings, a lift of 6 over the archive [7]. The earliest is a four-armed Maitreya of about 1150, and Ercole de' Roberti's [[painting:nga-50292|The Wife of Hasdrubal and Her Children]] of 1490 holds it across 30 per cent [7].\n\nThe color shares canvases most often with brick, 113 times, and with [[ochre]], [[sienna]] and [[mahogany]] [7]. The word *carnelian* peaked in printed English in 1928 [8]. These are photographs of aged, varnished paintings, so a match shows a screen color, not a stone or a pigment [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the stone carnelian, also spelled cornelian",
+   "first_recorded": "Maerz & Paul 1923 as a color name",
+   "source": "Paterson; ColorHub library"
+  },
+  "aka": [
+   "Cornelian",
+   "Cornelian red"
+  ],
+  "siblings": [
+   "brick",
+   "mahogany",
+   "sienna"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B31B1B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 125,
+  "top_paintings": [
+   "cma-101357",
+   "commons-Q59825367",
+   "nga-50292"
+  ],
+  "peak_decade": {
+   "decade": 1520,
+   "hits": 9,
+   "n": 273
+  },
+  "company": "Brick 113",
+  "ngram": {
+   "carnelian_peak": 1928
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Jewels, pp. 15-21 (stones, sard and onyx, the Bible lists)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"carnelian\", \"bloodstone\", birthstones",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Red, pp. 10, 14",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 3 (The Amulet Wearers)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, p. 17 (the stones of Revelation)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library: Carnelian, CSS/X11, RAL 3000, ISCC-NBS 1955 block 39, Maerz & Paul 1930 first recorded 1923",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, matched at 6 delta-E units and 5% canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'carnelian', case-insensitive, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is carnelian, mineralogically?",
+   "choices": [
+    "Orange chalcedony, a quartz",
+    "A red garnet",
+    "A red jasper",
+    "Fossilized resin"
+   ],
+   "answer": "Orange chalcedony, a quartz",
+   "kind": "pick"
+  },
+  {
+   "q": "A typical carnelian stone is as dark as the screen swatch.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sard, carnelian and onyx are all chalcedony; only the color and banding differ."
+ ],
+ "words": 450,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

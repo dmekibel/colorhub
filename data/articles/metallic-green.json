@@ -1,0 +1,131 @@
+{
+ "slug": "metallic-green",
+ "name": "Metallic Green",
+ "hex": "#63570F",
+ "names": [
+  "Metallic Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Metallic Green is a dark olive from Maerz and Paul's 1930 dictionary; despite the name, the swatch is closer to olive brown than to green, and the copper greens that painters called metallic are a different thing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dictionary name",
+   "body": "Maerz and Paul's *Dictionary of Color* (1930) lists Metallic Green at plate 15, position L 6, with 1928 as its earliest use, and the NBS Circular 553 of 1955 cites it [1]. The nearest ISCC-NBS category is moderate olive, only 1.6 units away [1]. Its neighbors are [[antique-bronze]], [[olive]] and [[oil-green]] [2].\n\nPainters used the same words for something else. Pastoureau notes that Poussin made artificial metallic greens by treating strips of copper with acid, lime or vinegar; the pigment was splendid but unstable, corrosive and toxic [3]. Vermeer avoided it [3]. Nothing links that pigment to this swatch, whose name is simply the dictionary's [1][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Metallic Green appears in 483 of the 23,781 paintings in our archive, about 2.0%, as photographed [5]. It peaks in paintings of the 1800s, in 131 of 8,345 (1.6%), 1.4 times the rate expected from the same museums [5]. The painter most devoted to it is Karl Isakson, in 6 of 21 works here [5]. These are photographs of varnished paintings, so a match is not a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1928 (Maerz & Paul 1930)",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "antique-bronze",
+   "olive",
+   "oil-green",
+   "hazel"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 483,
+  "pct": 2.03,
+  "peak_period": "1800s",
+  "measured": {
+   "lch": [
+    36.9,
+    40.2,
+    94.8
+   ],
+   "nearest": [
+    [
+     "Antique Bronze",
+     14.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 15 L 6, first recorded 1928; NBS Circular 553 (1955), ISCC-NBS moderate olive",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 33 (\"The green of painters\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Concordance search of ../color-kb/concordance/by-color/metallic-green.jsonl",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Poussin treat copper strips with to make artificial metallic greens?",
+   "choices": [
+    "Acid, lime or vinegar",
+    "Linseed oil",
+    "Lead and tin",
+    "Indigo"
+   ],
+   "answer": "Acid, lime or vinegar",
+   "kind": "pick"
+  },
+  {
+   "q": "Which ISCC-NBS category is closest to this swatch?",
+   "choices": [
+    "Moderate olive",
+    "Vivid green",
+    "Pale blue",
+    "Deep red"
+   ],
+   "answer": "Moderate olive",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A dictionary name for a dark olive that shares a word with Poussin's toxic copper greens."
+ ],
+ "words": 211,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

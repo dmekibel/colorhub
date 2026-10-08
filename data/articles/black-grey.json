@@ -1,0 +1,238 @@
+{
+ "slug": "black-grey",
+ "name": "Black Grey",
+ "hex": "#2E3234",
+ "names": [
+  "Black Grey"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Black Grey is RAL 7021, a very dark grey from the German paint-color system, so close to its neighbors Signal Black and Traffic Black that a screen cannot tell them apart.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A paint-chart name",
+   "body": "Black Grey is the English name of RAL 7021, a very dark grey with a faint cool cast, used on this site at #2E3234 [1][2]. RAL is the German color-matching system for paints and coatings, begun in 1927 by a committee on delivery conditions and quality assurance; its first register held forty colors [3]. The \"7\" in the number places it in the grey group, and the 9000 group holds the whites and blacks [3].\n\nTwo black entries from the same system land almost on top of it: RAL 9004 Signal Black and RAL 9017 Traffic Black, 1.3 and 1.6 units of color difference away [1]. On a screen the three cannot be told apart, though on a chart or a painted door they are different products. The hex values are approximate screen values, since a paint chip is a physical coating and not a screen color [1]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Black, grey and the space between",
+   "body": "The name says what the color is: a black with a little grey in it, or the other way round. Our nearest named neighbors are [[jet]], [[gunmetal]] and [[cannon]], each within four units [4]. [[charcoal-grey]] is a step lighter at 4.9 units [4]. Beside the cut stone [[gem:jet|jet]], which has a rough, nearly black surface, and a Tahitian [[gem:pearl|black pearl]], it matches within 2.6 units [4].\n\nThe line between \"dark grey\" and \"black\" depends on what sits beside it. Albers builds a study in which a pale grey and a near-black grey are made to look alike by the grounds they sit on [5]. A color this dark is rarely read alone, only against whatever surrounds it."
+  },
+  {
+   "id": "history",
+   "title": "The grey in the black-gray-white axis",
+   "body": "The two words in the name have a long shared history in Europe, and not always a gloomy one [6][8]. Until the twelfth century the Virgin Mary was painted in dark clothes in black, gray, brown, purple or dark blue, meant to convey mourning for her son [6]. In the fourteenth century, illuminated manuscripts begin to include grisaille images made only of blacks, grays and whites, a combination seen as more dignified than the colors [7]. In the fifteenth century grey was briefly the color of hope, set against black as the color of affliction, and the fashion for it faded by the 1530s [8][9].\n\nThe sixteenth-century Protestant reformers built on this a moral palette around a black-gray-white axis, and war on colors that were too vivid [10]. In the seventeenth century the English Puritans carried it into daily life, where everything became black, gray and brown [11]. The industrial age gave the pair new meanings. Coal output in the world rose from 172 million tons in 1858 to 928 million in 1905, and the horizon of mines, factories and railways turned black, gray and brown [12]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Black Grey is common in the archive for such a dark color [13]. It appears in 1,131 of 23,781 paintings, 4.76 percent, more often than 89 percent of the named colors, as photographed [13]. Within a painting it most often plays a mid-tone, in 54 percent of the 855 paintings where our within-painting lens finds it [13].\n\nIt rises in the twentieth century: 110 of 1,674 paintings from the 1900s, 6.6 percent and 1.7 times what the same museums would predict [13]. It is over-represented in the United Kingdom, in 130 of 593 paintings [13]. [[painter:pieter-van-der-werff|Pieter van der Werff]] uses it in 7 of 35 works, 5.3 times the baseline, [[painter:henri-matisse|Matisse]] in 12 of 50, and [[painter:raimundo-de-madrazo-y-garreta|Raimundo de Madrazo]] in 5 of 21 [13]. It shares canvases with [[davy-s-grey]] more than chance (lift 6.3) and with [[nickel]] (lift 4.6) [13].\n\nThe first match is a painting by Berlinghiero of 1230, a look-alike hue in an aged photograph and not proof of a pigment, and the name's earliest record in our sources is RAL 1927 [13][3]. For the films that use a near-black like this, our twins are the smoke black of [[film:days-of-heaven|Days of Heaven]] and the black of [[film:raise-the-red-lantern|Raise the Red Lantern]], each eight to nine units away [4]. Look for it in dark painted metal, railings and doors, set beside a true black."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the RAL paint system, entry RAL 7021 (Schwarzgrau)",
+   "first_recorded": "RAL, 1927 in our sources",
+   "source": "ColorHub library; RAL"
+  },
+  "aka": [
+   "RAL 7021",
+   "Schwarzgrau"
+  ],
+  "siblings": [
+   "jet",
+   "gunmetal",
+   "charcoal-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "jet",
+    "gloss": "a near-black, a little darker and warmer; also a gem"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Schwarzgrau (RAL 7021)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1131,
+  "rate_pct": 4.76,
+  "role": {
+   "mid_pct": 54,
+   "n": 855
+  },
+  "painters": [
+   "pieter-van-der-werff",
+   "henri-matisse"
+  ],
+  "measured": {
+   "lch": [
+    20,
+    2,
+    237
+   ],
+   "nearest": [
+    [
+     "Jet",
+     2.6
+    ],
+    [
+     "Gunmetal",
+     3.0
+    ],
+    [
+     "Cannon",
+     3.9
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "Which system does the name Black Grey come from?",
+   "choices": [
+    "RAL, the German paint-color system",
+    "Pantone",
+    "The X11 web colors",
+    "Munsell"
+   ],
+   "answer": "RAL, the German paint-color system",
+   "kind": "pick"
+  },
+  {
+   "q": "Why can a screen not tell RAL 7021, 9004 and 9017 apart?",
+   "choices": [
+    "They are within about 1.6 units of color difference of each other",
+    "They are the same paint",
+    "Screens cannot show dark colors",
+    "RAL gives them one number"
+   ],
+   "answer": "They are within about 1.6 units of color difference of each other",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in the fifteenth century grey was set against black as a color of hope.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Three different RAL paints (7021, 9004, 9017) sit within 1.6 units of one another: a screen shows one dark grey.",
+  "Grey was briefly the color of hope in fifteenth-century France, set against black as the color of affliction."
+ ],
+ "words": 698,
+ "status": "checked",
+ "checked": {
+  "by": "batch-64 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "RAL facts web-only (Wikipedia), hedged to founding and 840 register.",
+   "Name-level history (grey/black) is context, not the history of RAL 7021: stated as such.",
+   "Short article; books say nothing of the RAL color itself."
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Black Grey, RAL 7021, RAL 9004 and RAL 9017, approximate screen values; near-duplicates Signal Black (dE 1.3), Traffic Black (dE 1.6)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub names graph: black-grey, source RAL",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "web",
+   "cite": "RAL colour standard, Wikipedia (founding 1927, RAL 840 with forty colors, numbering by group)",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/RAL_colour_standard"
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alikes and twins for black-grey (CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 115",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 32",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 78",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, pp. 57 and 110",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, section on Jean Robertet's L'Exposition des couleurs",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, pp. 64-68",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 69",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 87",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (L6 field notes, black-grey)",
+   "loc_kind": null,
+   "url": null
+  }
+ ]
+}

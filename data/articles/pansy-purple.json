@@ -1,0 +1,148 @@
+{
+ "slug": "pansy-purple",
+ "name": "Pansy Purple",
+ "hex": "#78184A",
+ "names": [
+  "Pansy Purple"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Pansy purple is a flower name from the early nineteenth century, one of the purples that the Scottish painter Patrick Syme added when he revised Abraham Werner's color nomenclature.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Syme's flower names",
+   "body": "Werner's *Nomenclature of Colours*, a standard for describing minerals, plants and animals, was revised by Patrick Syme in 1814 and again in 1821 [1]. Syme added two principal colors, purple and orange, and renamed violet blue and plum blue as violet purple and plum purple [1]. As a painter who knew flowers, he also added names such as pansy purple and auricula purple, and he raised the total from Werner's list to 108 colors, then 110 in 1821 [1].\n\nIn Syme's purples, pansy purple follows violet purple and comes before campanula purple, imperial purple, auricula purple and plum purple [2]. His recipe for it mixes indigo blue with some carmine red and a faint touch of black [3]. That is a dark, blue-leaning purple, which is not what the screen swatch shows.\n\nThe chart numbers the color 38 among the purples, and its example objects are the sweet-scented violet, a mineral called Derbyshire spar and a beetle [4]. The flower in that list is the [[flower:violet|sweet violet]], not the garden pansy."
+  },
+  {
+   "id": "swatch",
+   "title": "Same name, different purples",
+   "body": "The swatch here, a deep red-purple, is closer to the later plate of Robert Ridgway's 1912 color atlas than to Syme's [4]. Syme's own aged swatch reads as a dark bluish grey-purple today, while Ridgway's plate reads as a wine red, and the three are quite far apart [4]. The ISCC-NBS system of 1955 files the color in block 259 with neighbors named aster purple, beetroot purple and garnet lake, and Maerz and Paul record the name in 1814 [4].\n\nLater books keep the idea but not the dye recipe. Baty reproduces a botany book of 1832 in which the petals of the sweet violet stand for this color, and a nineteenth-century entomology book where a small beetle's back does the same [3]. The name has always pointed at a range, not at a single point.\n\nNearby names in our data include [[violet-purple]], [[auricula-purple]], [[plum-purple]] and [[imperial-purple]] [2][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is one of the rarest named colors in our painting archive. Only 2 of 23,781 paintings match it, and the within-painting lens finds it in a single picture, so it is rarer than 86 per cent of the named colors [5]. The earliest of the two is a painting from 1506 by Giovanni di Niccolò Mansueti, and these are photographs of aged, varnished paintings, so a match shows a look-alike hue and not a pigment [5].\n\nIn printed English the phrase first appears around 1820, rises fastest in the 1910s and peaks in the 1930s, though a Google Books count of a two-word phrase is thin and noisy [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pansy flower, as named by Patrick Syme",
+   "first_recorded": "1814 (Syme's revision of Werner) per Maerz and Paul; Werner no. 38 in the 1821 chart",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "Werner no. 38"
+  ],
+  "siblings": [
+   "violet-purple",
+   "auricula-purple",
+   "plum-purple",
+   "imperial-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "purplish-red",
+    "gloss": "a nearby dark red-purple with an unrelated name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "within_painting": 1,
+  "rank_pct": 86,
+  "first_seen": {
+   "id": "commons-Q21715557",
+   "painter": "Giovanni di Niccolò Mansueti",
+   "year": 1506
+  },
+  "ngram": {
+   "first": 1820,
+   "rise": 1910,
+   "peak": 1930
+  },
+  "werner": {
+   "no": 38,
+   "vegetable": "sweet-scented violet",
+   "mineral": "Derbyshire spar"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 81",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 107-108",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library and swatches: Werner no. 38 (aged swatch, #39334A), Ridgway 1912 plate XII (#843751), ISCC-NBS 1955 block 259, Maerz & Paul 1930 (first recorded 1814, plate 54 L 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Pansy Purple (as photographed; Google Books Ngram, all senses of the phrase)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who added pansy purple to the color vocabulary?",
+   "choices": [
+    "Patrick Syme, in his revision of Werner's nomenclature",
+    "Abraham Werner himself",
+    "Robert Ridgway",
+    "William Perkin"
+   ],
+   "answer": "Patrick Syme, in his revision of Werner's nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "Syme's recipe for pansy purple is mostly which colors?",
+   "choices": [
+    "Indigo blue with carmine red and a trace of black",
+    "Red with white",
+    "Yellow with blue",
+    "Violet with green"
+   ],
+   "answer": "Indigo blue with carmine red and a trace of black",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pansy purple was coined by a painter who knew flowers: Patrick Syme added it, with auricula purple, to Werner's color list.",
+  "In our archive of 23,781 paintings, only 2 contain pansy purple."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Heading said four swatches but text compares three; reworded."
+  ]
+ },
+ "words": 449
+}

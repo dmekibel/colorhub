@@ -1,0 +1,118 @@
+{
+ "slug": "imperial-blue",
+ "name": "Imperial Blue",
+ "hex": "#353D82",
+ "names": [
+  "Imperial Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Imperial Blue is a deep blue with a grand name, part of a small family of colors that borrowed \"imperial\" from the yellow of the Chinese court.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "Paterson defines imperial blue as a deep blue, and as a dye [1]. His entry for the prefix says \"imperial\" was first used for imperial yellow and then borrowed by other colours with pretensions of majesty [2]."
+  },
+  {
+   "id": "family",
+   "title": "The imperial family",
+   "body": "Imperial yellow was a deep yellow that originated in yellow porcelain from China, a color reserved for the imperial court [2]. Imperial red is a deep bluish red, and imperial green is another name for emerald green [2]. Paterson gives the blue no court history of its own [2]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Neighbors",
+   "body": "Close relatives in our list are [[royal-blue]], [[mazarine-blue]] and [[midnight-blue]], plus [[imperial-red]] and [[emerald-green]] from the same naming habit [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The swatch #353D82 measures lightness 28.7, chroma 44.2 and hue angle 295 degrees, a dark, saturated blue leaning slightly toward violet [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the 'imperial' prefix, borrowed from imperial yellow",
+   "first_recorded": "origin undocumented",
+   "source": "Paterson, Dictionary of Colour, \"imperial\""
+  },
+  "aka": [],
+  "siblings": [
+   "royal-blue",
+   "mazarine-blue",
+   "imperial-red"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": []
+ },
+ "field": {
+  "dataset": "ColorHub name list and color math",
+  "hex": "#353D82",
+  "measured": {
+   "lch": [
+    28.7,
+    44.2,
+    295
+   ]
+  },
+  "source": "Paterson, Dictionary of Colour"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"imperial blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"imperial\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color math (CIE LCH from the sRGB hex)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color first carried the 'imperial' prefix?",
+   "choices": [
+    "Imperial yellow",
+    "Imperial blue",
+    "Imperial red"
+   ],
+   "answer": "Imperial yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "What does Paterson say imperial green is?",
+   "choices": [
+    "Another name for emerald green",
+    "A dark blue",
+    "A pale pink"
+   ],
+   "answer": "Another name for emerald green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "'Imperial' started as a yellow reserved for the Chinese court, then spread to other colors."
+ ],
+ "words": 155,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Softened inference about the blue being a \"late follower\"."
+  ]
+ }
+}

@@ -1,0 +1,106 @@
+{
+ "slug": "oxford-blue",
+ "name": "Oxford Blue",
+ "hex": "#002147",
+ "names": [
+  "Oxford Blue"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Oxford blue is a very dark blue named for the University of Oxford, whose sporting color it is.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A university's blue",
+   "body": "Paterson defines Oxford blue as a dark blue [1]. The entry for *blue* explains why: a person who represents Oxford or Cambridge in a sport is called a blue, wearing dark blue for Oxford and light blue for Cambridge [2]. The honor itself is also called a blue [2].\n\nThe light partner is [[cambridge-blue]]; other dark blues nearby include [[royal-blue]] and navy. Paterson also lists Oxford grey, a dark grey, and Oxford chrome, a yellow ochre, so the university lent its name to more than one color [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of museum paintings, a color near this swatch is present in 27 works, 0.11 per cent of the archive [3]. The earliest is a work of about 1400 in the National Gallery of Art, and the latest dates from 1923 [3]. As photographed, a very dark blue like this one is hard to tell from black, so these counts are approximate [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the University of Oxford",
+   "first_recorded": "origin undocumented as a color term",
+   "source": "Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "dark blue"
+  ],
+  "siblings": [
+   "cambridge-blue",
+   "royal-blue",
+   "navy",
+   "sky-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, paintings as photographed",
+  "n_present": 27,
+  "pct_of_archive": 0.11,
+  "first_dated": 1400
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Oxford blue\", \"Oxford grey\", \"Oxford chrome\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes), paintings as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color does Paterson associate with Cambridge?",
+   "choices": [
+    "Light blue",
+    "Dark blue",
+    "Green",
+    "Crimson"
+   ],
+   "answer": "Light blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Oxford chrome is a blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Oxford and Cambridge gave the language a dark blue and a light blue, both called 'a blue'."
+ ],
+ "words": 167,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'only one that survives as household word'; royal blue/navy neighbors no longer attributed to Paterson."
+  ]
+ }
+}

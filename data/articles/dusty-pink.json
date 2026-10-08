@@ -1,0 +1,143 @@
+{
+ "slug": "dusty-pink",
+ "name": "Dusty Pink",
+ "hex": "#D58A94",
+ "names": [
+  "Dusty Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Dusty Pink is a muted, slightly bluish rose; the word *dusty* means a color with grey mixed in, and the name sits beside old rose and antique pink.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Dusty and old",
+   "body": "St Clair defines old rose as a dusty pink with blue undertones [1]; the two names belong to one family with [[dusty-rose]] and [[antique-pink]]. The swatch is in the ISCC-NBS 1955 list as block 29 and in Ridgway's 1912 atlas, and its nearest ISCC-NBS name is \"dark pink\", 4.8 units away [2]. That makes it a close neighbor of [[dark-pink]], with grey added."
+  },
+  {
+   "id": "goats",
+   "title": "A pink nose on a goat",
+   "body": "Finlay, crossing the 5,360-metre Chang La pass in Ladakh, spotted a herd of mostly white goats of the kind that give fine cashmere wool; he noted their dusty pink noses [3]. It is a small case of the name being used for a living thing."
+  },
+  {
+   "id": "words",
+   "title": "The word in print",
+   "body": "In printed English, *dusty pink* peaks in the 1940s and rose fastest in the 1930s, in Google Books, counting every sense of the words [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "It appears in 29 of 23,781 archive paintings, 0.12 per cent, rarer than 70 per cent of named colors [5]. The earliest dated example is from 1560, but the archive's early centuries are thin, so that date is a floor, not a first [5]. Among 15 dated paintings with at least 2 per cent of the canvas, the latest is from 1909 [5]. These are photographs of aged, varnished paintings [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "dusty, grey-mixed + pink",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Old rose (near)"
+  ],
+  "siblings": [
+   "old-rose",
+   "dusty-rose",
+   "antique-pink"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "n_present": 29,
+  "first_dated": {
+   "id": "cma-137452",
+   "year": 1560
+  },
+  "measured": {
+   "lch": [
+    65.3,
+    30.6,
+    12.5
+   ],
+   "nearest_iscc": [
+    "dark pink",
+    4.8
+   ]
+  },
+  "ngram": {
+   "peak": "1940s"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Old rose\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 232",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "Google Books Ngram cache (ColorHub tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does St Clair say old rose is?",
+   "choices": [
+    "A dusty pink with blue undertones",
+    "A deep red",
+    "A pale yellow",
+    "A bright coral"
+   ],
+   "answer": "A dusty pink with blue undertones",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the 1560 painting proves dusty pink began then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Old rose is dusty pink with blue in it; look for the pair in faded silks."
+ ],
+ "words": 231,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

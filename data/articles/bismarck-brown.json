@@ -1,0 +1,117 @@
+{
+ "slug": "bismarck-brown",
+ "name": "Bismarck Brown",
+ "hex": "#855F31",
+ "names": [
+  "Bismarck Brown"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Bismarck brown is a coal-tar dye from the aniline age, sold under several names and still used as a stain, which gave its name to a leathery brown.",
+ "sections": [
+  {
+   "id": "dye",
+   "title": "A synthetic brown",
+   "body": "Paterson defines Bismarck brown as a brown dye that goes by phenylene brown, Manchester brown and vesuvin [1]. He notes that it was used as a stain for histological purposes, that is, to color tissue samples for the microscope [1]. A separate entry gives Bismarck on its own as a leather-brown color [1].\n\nGarfield, writing about the first aniline dyes, lists it with Verguin's fuchsine, Martius yellow, Magdala red and others among the colors people wanted after the first craze for [[mauve]] [2]. At a dinner in Perkin's honor, a speaker named Bismarck-brown with aniline purple, [[magenta]] and methylene blue as secrets written in rainbow colors [3]."
+  },
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The books we have read do not explain why the dye carries the chancellor's name, and this page does not guess [1][2]. Several of its trade names, such as Manchester brown, point to the dye houses that sold it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The archive color on this page, #855F31, is a warm mid brown, close to [[brown]] in family [4]. It appears in 4,792 of 23,781 paintings, 20.15%, more than 97% of named colors, as photographed [4]. The painter most drawn to it is Hubert Robert, in 20 of his 45 works here [4]. Because it is so common, its appearance in a medieval panel is a look-alike hue and not evidence of the dye, which dates from the nineteenth century [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books read",
+   "first_recorded": "1930 (Maerz & Paul, as a color name)",
+   "source": "Paterson, A Dictionary of Colour; Garfield, Mauve"
+  },
+  "aka": [
+   "phenylene brown",
+   "Manchester brown",
+   "vesuvin"
+  ],
+  "siblings": [
+   "brown",
+   "umber",
+   "dark-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4792,
+  "pct_present": 20.15,
+  "top_painter": "Hubert Robert, 20 of 45 works"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Bismarck\" and \"Bismarck brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 15 (\"Mauve Measles\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Bismarck Brown (n=4,792)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which of these is another name for Bismarck brown?",
+   "choices": [
+    "Vesuvin",
+    "Vermilion",
+    "Verdigris"
+   ],
+   "answer": "Vesuvin",
+   "kind": "pick"
+  },
+  {
+   "q": "What was Bismarck brown used for besides dyeing?",
+   "choices": [
+    "A stain for tissue samples",
+    "A tooth whitener",
+    "A pigment for oil paint"
+   ],
+   "answer": "A stain for tissue samples",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Bismarck brown was also sold as Manchester brown and vesuvin, and used to stain tissue."
+ ],
+ "words": 247,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "slug": "lavender-grey",
+ "name": "Lavender Grey",
+ "hex": "#C4C3D0",
+ "names": [
+  "Lavender Grey"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Lavender grey is a pale, cool grey with a trace of purple, named for the color of lavender flowers.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What the name means",
+   "body": "Paterson's dictionary defines *lavender* as a pale lilac, the color of lavender flowers, and notes the shades lavender grey and lavender blue [1]. It adds that the word may come from the Latin *lavare*, to wash [1]. The swatch here is a light purplish grey, and the nearest ISCC-NBS name is light purplish gray [2]. Ridgway carried the name over from his 1886 *Nomenclature of Colors* into his 1912 atlas, whose aged plate is only approximate [2]. See [[lavender]], [[lilac]] and [[grey]] for the colors it sits between [2].\n\nSt Clair uses a related phrase, lavender-gray-pink, for the dull pinkish hulls of a shipping line's liners, in the story behind [[mountbatten-pink]] [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color near this swatch appears in 172, 0.72 per cent, as photographed [4]. It peaks in the 1900s, at 1.3 per cent of paintings from then, 2.2 times the expected rate [4]. Inside a painting it is usually a light, as in 69 per cent of 107 paintings [4]. John Singer Sargent uses it in 8 of the 287 works we hold, 3.1 times the baseline [4]. In Google Books the word peaks in the 1910s [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the lavender flower",
+   "first_recorded": "Ridgway 1886 (Nomenclature of Colors)",
+   "source": "Paterson, A Dictionary of Colour, \"lavender\""
+  },
+  "aka": [
+   "lavender gray",
+   "gris de lavande"
+  ],
+  "siblings": [
+   "lavender",
+   "lilac"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 172,
+  "pct": 0.72,
+  "ngram_peak": 1910,
+  "painters": [
+   "john-singer-sargent"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lavender\" (p. 237)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 nearest names, Ridgway 1912 and Maerz & Paul 1930 entries, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 56",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, relative to peak (data/graph)",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "In our archive, which painter uses lavender grey most beyond his baseline?",
+   "choices": [
+    "John Singer Sargent",
+    "Edvard Weie",
+    "Georges Seurat"
+   ],
+   "answer": "John Singer Sargent",
+   "kind": "pick"
+  },
+  {
+   "q": "Where might the word lavender come from, according to Paterson?",
+   "choices": [
+    "The Latin lavare, to wash",
+    "A Greek island",
+    "A French king"
+   ],
+   "answer": "The Latin lavare, to wash",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sargent reaches for lavender grey about three times as often as his museums' baseline."
+ ],
+ "words": 210,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

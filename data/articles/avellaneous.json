@@ -1,0 +1,118 @@
+{
+ "slug": "avellaneous",
+ "name": "Avellaneous",
+ "hex": "#C29E82",
+ "names": [
+  "Avellaneous"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Avellaneous is an old word for the light brown of a hazelnut, rare in speech but one of the commonest colors in the paintings of our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of a hazel nut",
+   "body": "Paterson defines avellaneous as the light brown of the hazel-nut or filbert-nut [1]. The word sits among his entries of brown colors [1]. Ridgway's 1912 plate 40 gives it as a swatch (hue 17''', tone b), and the ISCC-NBS system placed it in block 57 [2]. On screen it is a tan with a pinkish cast, about six units from [[camel]] and near [[mushroom]], [[hazel]] and [[beige]] [2].\n\nThe books we hold say nothing else about it, so the word's history is undocumented here [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a surprising number: in our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 1,847, nearly one in thirteen [3]. The top matches are not oil paintings but East Asian works on aged silk and paper, such as Kano Tan'yu's Bird on a Lotus Bud, where the color covers about 98 per cent [3]. The earliest is a funerary papyrus of about 1069 BC [3]. Most of this is the ground of aged silk, paper and canvas, so the match reflects supports as much as pigments [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the hazel-nut (Corylus avellana)",
+   "first_recorded": "origin of the word undocumented in our books",
+   "source": "Paterson, A Dictionary of Colour; Ridgway 1912"
+  },
+  "aka": [],
+  "siblings": [
+   "hazel",
+   "camel"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1847,
+  "match": {
+   "hex": "#C29E82",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    68,
+    22,
+    65
+   ],
+   "nearest": [
+    [
+     "Camel",
+     5.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 39",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json) and Color Graph look-alikes, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does avellaneous describe?",
+   "choices": [
+    "The light brown of a hazelnut",
+    "A green leaf",
+    "A grey stone",
+    "A red wine"
+   ],
+   "answer": "The light brown of a hazelnut",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the top matches in our archive are East Asian paintings on silk and paper.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A rare word for a very common color: the ground of aged silk and paper."
+ ],
+ "words": 207,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All key claims verified against fact cards and book text; no changes."
+  ]
+ }
+}

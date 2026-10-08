@@ -1,0 +1,191 @@
+{
+ "slug": "cork",
+ "name": "Cork",
+ "hex": "#A6794E",
+ "names": [
+  "Cork"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Cork is the light brown of the oak bark that stoppers bottles, and the same word once named a red-purple lichen dye and a bluish black.",
+ "sections": [
+  {
+   "id": "which-cork",
+   "title": "Which cork?",
+   "body": "The word cork names three different materials in the pigment literature, and only one of them is brown [1]. The first is the bark of the cork oak, *Quercus suber*, a tree of southern Europe and north Africa whose bark is stripped from trees older than 20 years, then again every 8 to 10 years [1]. The second is the Amur cork tree, a source of yellow dye [1]. The third is a red-purple lichen dye, which in Britain was simply called cork [1][3].\n\nThe color word followed the bark. Paterson's dictionary calls cork \"a beige colour\", and the Maerz and Paul dictionary of 1930 lists it on a plate of light browns [7][8]. The swatch here is that Maerz and Paul brown, which ISCC-NBS files as a light brown [8]. Sources disagree on how pale it should be, from beige to a mid tan-brown [7][8], so treat any single swatch as one reading. Nearby named colors are [[tan]], [[light-brown]] and [[camel]]."
+  },
+  {
+   "id": "lichen",
+   "title": "The cork that dyed purple",
+   "body": "In 1673 the naturalist John Ray noted that a lichen called *kenkerig* in Wales was known in England as cork or arcel [4]. The species is *Ochrolechia tartarea*, and its names ran through *korkje*, *corcur* and *korkir* [3][4]. Scraped from rocks with iron hoops, the lichen was steeped in stale urine to ferment, then mixed with lime or chalk and rolled into balls for storage [3]. The dye ranged from red through pink and magenta to purple [3].\n\nA patent for the process was taken out in 1766 by Dr Cuthbert Gordon, and the trade name *cudbear* is a corruption of his first name [3]. Paterson defines cudbear as a red, violet, purple or brown dye from fermented lichens [7]. Cork was also used as a name for a dye from another lichen, *Parmelia omphalodes*, extracted by boiling water [4]. Mixed up with orchil, turnsole and litmus, these names confused writers until the nineteenth century, and the confusion is why a reader of an old recipe cannot tell what color \"cork\" meant without the context [4]. In our botany data this family sits under [[flower:lichens-orchil|orchil lichens]], and the red end of the family lies near [[crimson]] and [[magenta]]."
+  },
+  {
+   "id": "cork-black",
+   "title": "Cork black",
+   "body": "Charred cork bark gave a black pigment, cork black, also sold as Spanish black into the 1920s [2]. The French writer Bouvier, in 1827, reported that his friends called it *outremer des gueux*, beggar's ultramarine, and said it was the bluest of blacks [2]. He found it weak in mixtures but excellent for white draperies, skies and distances [2]. The modern compendium groups it with bark chars, beside Swedish black from birch and vine black from grapevine [2].\n\nThe lesson for the eye is that a black can lean cool, and Bouvier's praise for skies and distances points the same way [2]. It is a reminder that [[black]] is a family of tones, not one color."
+  },
+  {
+   "id": "place",
+   "title": "Cork, the place",
+   "body": "Cork in Ireland gave its name to a different pigment, Cappagh brown, from a mine on Lord Audley's estate west of Skibbereen opened in 1814 [6]. Church's 1890 analysis found 34.4 per cent iron oxide and 27.2 per cent manganese oxide, which makes it an umber in the geological sense [6]. So a cork brown is the color of the bark, and the county's earth is a different thing, an [[umber]] [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Cork is one of the commonest browns in our archive. In 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 2,908 of them, or 12 per cent [9]. The highest shares are in East Asian works on paper and silk: Miyagawa Choshun's *A Beauty Behind a Screen* (1745) has 89 per cent and Zhai Dakun's *Landscape* (1775) 86 per cent [9]. In those pictures the match is most likely the aged support itself, not a painted pigment, and the archive cannot tell the two apart [9].\n\nThe color rises in the 1200s and 1300s, with a lift of 2.5 to 2.8 against the whole archive, and peaks in the 1270s, when 21 of 48 paintings match [9]. Among painters, Rubens has 19 of 46 works with it [9]. Played in a picture it usually sits in the lightest tones, as a highlight in 65 per cent of cases [9]. As always these are photographs of aged, varnished works, so the colors are as photographed [9]. Next time you see a brown that looks like a wine cork, ask whether it is paint or a century of yellowing varnish and paper."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the bark of the cork oak (Quercus suber)",
+   "first_recorded": "Maerz and Paul 1930 (first recorded 1902 in our record); the lichen dye cork by 1673",
+   "source": "Pigment Compendium, \"cork\"; ColorHub library"
+  },
+  "aka": [
+   "cork black (the charred pigment)",
+   "cudbear (the lichen dye)",
+   "Spanish black"
+  ],
+  "siblings": [
+   "tan",
+   "light-brown",
+   "camel"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mocha",
+    "gloss": "Mocha is the nearest named brown in our library, unrelated in origin"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#A6794E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2908,
+  "rate": 0.122,
+  "role": {
+   "highlight": 0.65,
+   "mid": 0.32,
+   "shadow": 0.03
+  },
+  "peak_decade": {
+   "key": 1270,
+   "hits": 21,
+   "n": 48
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry \"cork\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries \"cork black\", \"carbon-based blacks group\" and \"Spanish black\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry \"cudbear\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries \"lichens group\", \"litmus\" and \"orchil\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry \"Cappagh brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cork\" and \"cudbear\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz and Paul 1930 (first recorded 1902 in our record), ISCC-NBS 1955 light brown (data/library.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did the word cork name besides the bark's brown?",
+   "choices": [
+    "A red-purple lichen dye and a bluish black",
+    "A green copper pigment",
+    "A white lead paint",
+    "A yellow earth"
+   ],
+   "answer": "A red-purple lichen dye and a bluish black",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did Bouvier call cork black beggar's ultramarine?",
+   "choices": [
+    "It was the bluest of blacks and cheap",
+    "It was made from lapis lazuli",
+    "It was sold only to the poor by law",
+    "It faded to white"
+   ],
+   "answer": "It was the bluest of blacks and cheap",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: cudbear is a corruption of the name of Dr Cuthbert Gordon, who patented the lichen dye in 1766.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Cork once named a purple dye: a lichen scraped from rocks and fermented in stale urine.",
+  "Charred cork was called beggar's ultramarine because it is the bluest of blacks."
+ ],
+ "words": 752,
+ "status": "checked",
+ "checked": {
+  "by": "batch-61 writer self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Cork pigment facts rest mainly on the Pigment Compendium (one source).",
+   "Maerz and Paul plate reference differs between library records (12 vs 13 B7), so none is quoted.",
+   "Etymology of Cork the city is not sourced in the books; removed.",
+   "Support-vs-pigment reading of the archive match is a hedged interpretation."
+  ]
+ }
+}

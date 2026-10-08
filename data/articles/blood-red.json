@@ -1,0 +1,311 @@
+{
+ "slug": "blood-red",
+ "name": "Blood Red",
+ "hex": "#660000",
+ "names": [
+  "Blood Red"
+ ],
+ "tier": "standard",
+ "depth": "epic",
+ "lede": "Blood red began as a plain description and was made a standard by eighteenth-century mineralogists, who listed it as a fixed color, and by Patrick Syme, who split it in 1814 into arterial and veinous blood.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description that became a standard",
+   "body": "Blood red began as a plain description, a red the color of blood. Paterson defines it as a dark red, a rich bluish red, and lists *bloody* as a color word of its own [1]. Related words in his dictionary include *sanguine*, from the Latin prefix for blood, which also names a red crayon containing iron oxide, and *sang-de-boeuf*, literally oxblood, a deep red glaze on old Chinese porcelain [1]. The glaze red lives on as [[oxblood]].\n\nWhat makes blood red unusual is that scientists adopted it as a fixed term, long before it was a paint-chart name. Its first home was in the colour lists that mineralogists used to describe stones, and from there it passed to naturalists, painters and, finally, screens [2][3]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner's list and Syme's two bloods",
+   "body": "In the eighteenth century the German geologist Abraham Gottlob Werner described minerals by their colors, and from 1774 he built a nomenclature of 54 colors for the purpose, with mineral specimens as physical examples [3]. His students, and their students, expanded and illustrated it [2]. In 1794 Estner printed color samples in four tables, and on the page of reds gave four versions of *Blutroth*, the German for blood red, running from dark to pale [2].\n\nThe term spread into English [2]. Jameson published an English version of Werner's list in 1804, with 80 color names [2]. Mawe's treatise on diamonds and precious stones uses blood red, cherry red, crimson red and fire red under garnet and opal, and Aikin's mineralogy manual, first printed in America in 1815, uses blood red for flinty chert [2].\n\nIn 1814 the Scottish artist Patrick Syme expanded Werner's list to 108 colors, and to 110 in 1821, adding a painted swatch for each [3]. He split blood red in two, into *arterial* and *veinous*, which Baty suggests was prompted by the research of the surgeon John Hunter on the circulation of blood [3]. In Syme's order arterial blood red sits among the bright reds, between aurora red and flesh red, and veinous blood red follows cochineal red, nearer the dark end [3]. The word *veinous* survives in our name data as [[veinous-blood-red]] [16]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which blood?",
+   "body": "The swatch here, #660000, is a very dark red, close to black [16]. In Syme's list arterial blood red sits between aurora red and flesh red, while veinous blood red comes after cochineal red and before the brownish and chocolate reds, and this dark swatch is nearer in spirit to the second [3][16]. The sources do not agree on the color: in our name data the main swatch is #660000, but a popular color-survey swatch for the same name is #980002, about ten units away in ΔE [16].\n\nThe mismatch is a feature of the name, not an error. Syme's two bloods show that by 1814 naturalists already treated blood as more than one red [3]."
+  },
+  {
+   "id": "fire",
+   "title": "Fire and blood",
+   "body": "Pastoureau argues that red has two natural referents, fire and blood, and finds them in almost every society [4]. Dictionaries still define the word red as the color of fire or blood [4]. The bond with blood needs no argument, since all living vertebrates have red blood, while the link to fire is less obvious, because flames are rarely red [4].\n\nBlood has always carried both life and death. Pastoureau writes that it is a source of life while it circulates and of death when it escapes, and that the idea that it belonged to the gods lay behind animal sacrifice [4]. Some sacrifices demanded animals with red hides, as though the color showed richer blood [4]. Anthropologists, St Clair reports, link red to life, celebration and sex, and also to danger and death, because it is the color of blood [14].\n\nThis is the root of the long use of red earths in burial. Pastoureau notes that Egyptian hematite was at once a pigment, a light dye, and a supposed cure for diseases of the blood and bleeding [4]. In tombs around the ancient Mediterranean, red stones, glass, wine, blood and fabrics were meant to protect the dead and restore some of their vital powers [4]. The ruby, the ultimate red stone, was often given the cut of a blood drop [6]."
+  },
+  {
+   "id": "church",
+   "title": "The blood of Christ and the martyrs",
+   "body": "Christian writers split red in two. The red of fire stood for the Holy Spirit, and the red of blood could be either sinful bloodshed or sanctifying sacrifice [4][5]. Saint Cyprian of Carthage wrote in the third century that the church, once dressed in white for the good works of its members, was now arrayed in crimson through the blood of its martyrs [5].\n\nFrom the twelfth and thirteenth centuries the crimson of Christ's blood appeared on crusaders' banners and in the liturgy of the Cross and of martyrs' feasts [5]. Some medieval authors held it to be a lighter, clearer red than ordinary human blood, which sin had defiled [5]. A few late medieval panel painters tried to show the difference, with a clear, luminous red for Christ and a cloudier, darker one for everyone else [5]. A painter faced with the word *blood red* thus had to choose between at least two reds."
+  },
+  {
+   "id": "pigment",
+   "title": "Blood, dragons and dyes",
+   "body": "Pigments rarely contained blood, though they borrowed its name. Pliny mocked red pigments said to come from the mud of India and the blood of dragons and elephants, an allusion to a legend, still current in the Middle Ages, that many red resins came from a dragon killed by an elephant [6]. The resin was real: dragon's blood is a red exudate of plants of the genera *Daemonorops* and *Dracaena* [7]. Pliny also says that minium could be adulterated with goats' blood, red lead, or crushed berries [7].\n\nCinnabar, the mercury red, is described by Finlay as blood red [11]. The Romans painted gladiators and statues of gods with it, and women made lipstick from it [11]. Cochineal gives a red that Greenfield says literally pours out of a pinched insect, and the dyed cloth remains red for centuries [8]. At Mogok in Burma, Finlay photographed ox-blood-red river water, colored by silt from the ruby mines, not by the stones [11]."
+  },
+  {
+   "id": "language",
+   "title": "Blood red in words",
+   "body": "Writers have reached for the word when they need a red that disturbs. In his *Historia general* of 1535 the Spanish chronicler Fernández de Oviedo tells how he ate the fruit of the nopal cactus and his urine turned blood-red, so that he believed every vein in his body had broken until a friend explained it was harmless [8]. In Proust, as Pastoureau quotes him, a duchess in a red satin evening dress is compared to a great blood-red blossom and a glittering ruby [13]. Jarman imagines that Clytemnestra's carpet was crimson, a blood red with a hint of blue, and that Agamemnon's step onto it was the pride that got him murdered [15].\n\nPlato, as Gage summarizes, explained white as a dilation of the ray the eye sends out, dazzle as a more violent fire, and blood red as the effect of an intermediate fire [9]. Gage also notes that in Schoenberg's *Die glückliche Hand* a scene of changing lights ends in blood red [9]."
+  },
+  {
+   "id": "vangogh",
+   "title": "Van Gogh's room",
+   "body": "The most famous blood-red wall in painting belongs to [[painter:vincent-van-gogh|van Gogh]] [10]. He described *The Night Café* in Arles in a letter to his brother Theo, saying he had tried to express the terrible passions of humanity with red and green [10][9]. The room, he said, was blood red and dull yellow, with a green billiard table and four lemon-yellow lamps [10]. The conflict is the point: Pastoureau notes that by then green had become red's opposite for painters and scientists alike [10].\n\nIt would be wrong to turn this into a rule that red means rage. The letter describes passions in the plural and a clash of reds and greens, not a fixed emotion belonging to one color [9][10]."
+  },
+  {
+   "id": "myths",
+   "title": "Red, blood and the healing myth",
+   "body": "Because blood is red, red was long said to act on the blood. Avicenna, as Birren reports, held that red light stimulates the movement of the blood and blue light soothes it, and advised that a person with a nosebleed should not look at brilliant red [12]. He prescribed red freely in medicines on this reasoning [12]. This is a historical belief and a myth as medicine: modern color science gives no support to chromotherapy of this sort."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 189 works, about 0.8 per cent [16]. That is under 1 per cent of the archive, and in 85 per cent of those works the color sits in the mid-tones, not the shadows [16].\n\nThe earliest dated match is Spinello Aretino's *St Pontianus* of 1383, and the 1400s are the standout century, with 28 of 945 paintings, 3.7 times the archive rate; the 1500s follow with 38 of 2,231 [16]. The decade with the highest rate is the 1470s, with 7 of 156 [16]. The richest matches are mostly portraits. The *Portrait of Nikolai F. Titov* of 1830 has the swatch over 47 per cent of the image [16]. A Rijksmuseum *Madonna and Child* of about 1465 reaches 36 per cent [16]. [[painter:sandro-botticelli|Botticelli]]'s *Portrait of a Young Man* of about 1470 and [[painting:nga-46106|Eleonora di Toledo]], painted in 1560 by [[painter:bronzino|Bronzino]], each reach 34 per cent [16]. The nearest words in the archive's color data are Maroon, Burgundy and Oxblood [16]. As always these are photographs of aged, varnished paintings, so read them as screen colors, not pigment tests [16]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "blood (German Blutroth in the mineralogists' lists)",
+   "first_recorded": "in German mineral colour lists of the 1790s; the first appearance of the English phrase is undocumented in our books",
+   "source": "Baty, Nature's Palette, introduction and Syme list"
+  },
+  "aka": [
+   "Blutroth",
+   "veinous blood red",
+   "bloody"
+  ],
+  "siblings": [
+   "oxblood",
+   "veinous-blood-red",
+   "dragon-s-blood",
+   "maroon"
+  ],
+  "parent": "red",
+  "children": [
+   "veinous-blood-red"
+  ],
+  "disambiguation": [
+   {
+    "slug": "oxblood",
+    "gloss": "the glaze red of Chinese porcelain (sang-de-boeuf), browner and a little brighter"
+   },
+   {
+    "slug": "dragon-s-blood",
+    "gloss": "a plant resin, not blood"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Blutroth (blood red)"
+   },
+   {
+    "lang": "fr",
+    "name": "sang-de-boeuf (oxblood glaze)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#660000",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 189,
+  "top_paintings": [
+   "commons-Q21726345",
+   "commons-Q21741332",
+   "rijks-20026598",
+   "commons-Q742801",
+   "nga-46106"
+  ],
+  "first_dated": {
+   "id": "commons-Q21730886",
+   "painter": "Spinello Aretino",
+   "year": 1383
+  },
+  "peak_century": {
+   "century": 1400,
+   "hits": 28,
+   "n": 945,
+   "lift": 3.73
+  },
+  "role": {
+   "mid": 0.85,
+   "shadow": 0.13,
+   "highlight": 0.02
+  },
+  "company": [
+   "Maroon",
+   "Burgundy",
+   "Oxblood"
+  ],
+  "swatch_spread": {
+   "main": "#660000",
+   "xkcd": "#980002",
+   "de": 10.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"blood-red\", \"bloody\", \"sanguine\", \"sang-de-boeuf\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction on Werner's Nomenclature of Colours and its early followers",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, \"Syme's Colour Chart in Botany\" and the Syme colour list",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, \"Fire and Blood\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Red, \"The Blood of Christ\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Red, the chapter on Rome (red stones, Pliny and pigments)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Dragon's blood\" and \"Vermilion\" and \"Cinnabar\" entries",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, chs. 8 and 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, on Plato, Van Gogh's Night Cafe and Schoenberg",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16; Pastoureau, Green, \"Chevreul and the scientists did not like green\"",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 13 (cinnabar); Finlay, Jewels, ch. 17 (Mogok)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, part 1, ch. 2",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, Red, \"Makeup and Society Life\" (quoting Proust)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Red\" (hematite)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Jarman, Chroma, the red section",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings (tools/article_field.py, ΔE 6, 5% cover), as photographed; data/graph/disambig.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Into which two kinds did Patrick Syme split blood red in 1814?",
+   "choices": [
+    "Arterial and veinous",
+    "Fresh and dried",
+    "Light and dark",
+    "Human and animal"
+   ],
+   "answer": "Arterial and veinous",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does the swatch on this page look darker than fresh blood?",
+   "choices": [
+    "It is closer to veinous blood than to arterial blood",
+    "Blood is always black when it dries",
+    "It is shown as photographed from a varnished painting",
+    "It is a bad swatch"
+   ],
+   "answer": "It is closer to veinous blood than to arterial blood",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Van Gogh's Night Cafe was meant to show that red means anger.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme's 1814 colour chart had two bloods, arterial and veinous, a split that came from the study of how blood circulates.",
+  "In the 1400s the dark red of this swatch is 3.7 times as common in our archive of paintings as it is overall.",
+  "Look at a late medieval panel of the Crucifixion: the painter may have used a clearer red for Christ's blood than for anyone else's."
+ ],
+ "words": 1558,
+ "status": "checked",
+ "checked": {
+  "by": "Sonnet 5.5 writer (batch 24)",
+  "date": "2026-10-08",
+  "issues": [
+   "Syme order of arterial and veinous blood red read from Baty's list; the bracketed word Blood on veinous blood red is not interpreted.",
+   "Baty only suggests Hunter as the reason for Syme's split.",
+   "Cave of pigment/Pliny claims rest on Pastoureau and the Compendium; Finlay's 'blood red' for cinnabar is a descriptive remark.",
+   "Avicenna's red-light view is Birren's report; chromotherapy corrected as unsupported."
+  ]
+ }
+}

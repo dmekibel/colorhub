@@ -1,0 +1,226 @@
+{
+ "slug": "dark-green",
+ "name": "Dark Green",
+ "hex": "#006400",
+ "names": [
+  "Dark Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Dark Green is the web color `#006400`, a deep, saturated green defined for the X11 and CSS color lists, and also the name of a whole family of darker greens.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "One swatch, three systems",
+   "body": "The swatch is the web color `darkgreen`, `#006400`, one of the colors in the X11 set [1]. It has no pigment behind it: red and blue are switched off and the green channel is set to 100 of 255 [9]. The ISCC-NBS system of 1955 files the swatch as a deep yellowish green, block 137, almost exactly (a color distance of 0.7) [9].\n\nThe older systems that carry the same name are much greyer. Ridgway's 1912 plate gives a dark green that, as scanned from an aged plate, is closer to `#4B6A56`, and the XKCD color survey of 2010 produced two quite different answers, `#033500` and `#054907` [9]. So \"dark green\" is a family and not a place. The nearest names to the web swatch in our library are [[deep-green]], [[tree-green]] and [[forest-green]], and the standard cousins are [[racing-green]] and [[sap-green]] [9]."
+  },
+  {
+   "id": "words",
+   "title": "Dark greens with their own names",
+   "body": "English has many names for a dark green when it needs to be exact. Paterson gives *loden*, after the cloth; *racing green*, the dark green of British racing cars of the 1920s; *épinard*, the dark green of spinach; and *invisible green*, so dark that it verges on black [2]. He also lists *Jenkin's green*, a name for a dark green made with amorphous carbon, and *verde eterno*, a dark green pigment of Venetian painters [2]. *Pine* and *nettle* can name dark greens too [2].\n\nThe dark end of the family was dyed from plants as well. Finlay reports that in the Outer Hebrides tweed mill she visited, dark green came from teasels [8]."
+  },
+  {
+   "id": "history",
+   "title": "A dark color for serious people",
+   "body": "The Greek word *prasinos*, literally leek-colored, took over from older words from the third or second century BCE and covered all the strong shades of green, especially the dark ones [3]. Dark green had a gloomy side in the Middle Ages [12]. Pastoureau notes that images of the Virgin from before the twelfth century show her in dark colors that include dark green, which signified mourning [12]. In fifteenth-century French poetry, a \"lost green\" is one of three colors of sorrow and death, with black and tan [4].\n\nIt also marked a line between the sober and the worldly. Pastoureau recounts that Racine, in his short worldly period in the early 1660s, scandalized his patrons at Port-Royal by turning up in a very dark green suit, when only black was acceptable [5]. By the French Enlightenment, people who had always worn black began to wear gray, brown, blue or dark green instead [6]."
+  },
+  {
+   "id": "pair",
+   "title": "What it pairs with",
+   "body": "Gage notes that nineteenth-century color theorists, Helmholtz and Rood among them, held that a bright purplish red is the complement of dark green [7]. That is one tradition's rule of thumb, and other systems of complements give other answers."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within six units of this swatch fills at least five per cent of the canvas in only 5 of 23,781 paintings, and it is rarer than 79 per cent of the named colors [10]. The earliest hit is [[painting:aic-16327|Jean Hey's *The Annunciation*]] of about 1490, with later hits in 1825 and 1895, including [[painting:nga-43713|*Aurora*, an American picture of 1825]] [10]. That date is 422 years before the name's earliest record in our sources, so the match is a look-alike hue in an aged photograph and not proof of a dye [10].\n\nIn Google Books the phrase *dark green* peaks in the 1930s [11]. As always, screen colors are approximate and the archive is photographs of varnished paintings [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: dark + green; web swatch from the X11 set",
+   "first_recorded": "X11 list; Ridgway 1912 in our library",
+   "source": "Paterson, Dictionary of Colour, p. 140"
+  },
+  "aka": [
+   "DarkGreen (CSS keyword)",
+   "deep yellowish green (ISCC-NBS)"
+  ],
+  "siblings": [
+   "deep-green",
+   "tree-green",
+   "forest-green"
+  ],
+  "parent": "green",
+  "children": [
+   "racing-green",
+   "sap-green"
+  ],
+  "disambiguation": [
+   {
+    "slug": "forest-green",
+    "gloss": "a dark green with more blue, less saturated"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#006400",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5,
+  "rarer_than_pct": 79,
+  "first_dated": {
+   "id": "aic-16327",
+   "year": 1490
+  },
+  "latest_dated": {
+   "id": "nga-42428",
+   "year": 1895
+  },
+  "ngram": {
+   "peak": 1930
+  },
+  "measured": {
+   "munsell": "8.9GY 3.5/9.7",
+   "iscc": "deep yellowish green (block 137)",
+   "contrast_white": 7.44
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 140 (\"DarkGreen\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"loden\" (p. 248), \"racing green\" (p. 330), \"epinard\" (p. 160), \"invisible green\" (p. 221), \"Jenkin's green\" (p. 227), \"verde eterno\" (p. 410), \"pine\" (p. 312), \"nettle\" (p. 277)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, opening chapter on ancient Greek color words",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 57",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 69",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 82",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 179",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 207",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, data/graph nodes): ISCC-NBS 1955 block 137, Ridgway 1912 plate XVIII, XKCD 2010, CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, dE2000 <= 6, >= 5% of canvas); photographs of aged, varnished paintings, a color match not a pigment test",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"dark green\", all senses, 5-year smoothing",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, chapter on the Virgin's color",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is special about the red-green-blue values of the web color darkgreen?",
+   "choices": [
+    "Only the green channel is switched on",
+    "All three channels are equal",
+    "Only the red channel is switched on",
+    "Blue is at its maximum"
+   ],
+   "answer": "Only the green channel is switched on",
+   "kind": "pick"
+  },
+  {
+   "q": "In the 1660s, why was a dark green suit scandalous at Port-Royal?",
+   "choices": [
+    "Only black was acceptable there",
+    "Green dye was banned",
+    "It was a royal color",
+    "It was too expensive"
+   ],
+   "answer": "Only black was acceptable there",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a dark green in a museum painting photograph proves the artist used a particular green dye.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The web's dark green has red and blue switched off completely; older color systems' dark greens are far greyer.",
+  "Racine scandalized his Port-Royal patrons in the early 1660s by wearing a very dark green suit."
+ ],
+ "words": 583,
+ "status": "checked",
+ "checked": {
+  "by": "L7 self-check",
+  "date": "2026-10-08",
+  "issues": [
+   "Standard-tier descriptive color: books say little; written short.",
+   "Pastoureau Green opening-chapter locator is approximate; Gage complement point attributed to Gage's account of Helmholtz and Rood.",
+   "Latest-hit id nga-42428 vs. third-earliest: field facts say latest 1895; hedged."
+  ]
+ }
+}

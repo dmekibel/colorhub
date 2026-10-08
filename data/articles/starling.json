@@ -1,0 +1,145 @@
+{
+ "name": "Starling",
+ "hex": "#5C504D",
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Starling is a dark, warm grey-brown named for the bird; the books say little about it as a color, but our archive shows how common it is in painting.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The bird",
+   "body": "The name is a bird's, and the books never define a color called starling [1]. They mention starlings only in passing. Baty's catalogue of nature's colors notes that Imperial Purple is visible on the feathers of a metallic starling, a reminder that this bird's glossy plumage is anything but plain grey-brown [2]. Jarman likens the black floaters in a damaged eye to a flock of starlings at dusk [3].\n\nSo the name is best read as a nature name: a dull dark brown-grey, nearer [[taupe]] than [[charcoal]] [1][2][3]. We find no source for when the color term began, so its origin stays undocumented."
+  },
+  {
+   "id": "science",
+   "title": "A bird in a lighting experiment",
+   "body": "Birren reports experiments by Bissonnette and others showing that the breeding cycle of male starlings depends more on light than on temperature [4]. In a London study recalled by Solly Zuckerman, starlings living under the lights of Trafalgar Square and Piccadilly Circus were compared with a control group from a wood near Oxford [5]. Neither passage is about the color starling, but both show why the bird appears in color books [4][5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is one of the commonest colors in the archive, found in more than one painting in twenty. Of 23,781 paintings, 1,346 hold it as a large enough patch (5.7 per cent), as photographed [6]. Almost half of that mass sits in the shadow range of a painting, and only 6 per cent in the highlights [6]. It is a color of interiors and dusk: the Danish painter Vilhelm Hammershøi has it in 17 of his 50 paintings here (34 per cent), about 6 times the archive's rate [6]. Aged varnish tends to push dark colors toward brown, so part of this is the photograph, not the paint."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the bird (common starling, Sturnus vulgaris)",
+   "first_recorded": "not recorded",
+   "source": "origin undocumented in the books"
+  },
+  "aka": [],
+  "siblings": [
+   "taupe",
+   "charcoal",
+   "dark-grey",
+   "slate"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#5C504D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1346,
+  "rate": 0.0566,
+  "role": {
+   "shadow": 0.48,
+   "mid": 0.46,
+   "highlight": 0.06
+  },
+  "top_paintings": [
+   "smk-KMSsp456",
+   "cma-143307",
+   "nga-33246"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "Concordance search of 29 color books for \"starling\" (no color entry)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 109-110",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 66",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 8",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 30",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, color match within delta-E 6, 5 per cent cover, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do the color books actually say about starlings?",
+   "choices": [
+    "They define a dye called starling",
+    "They mention the bird in passing, never as a dye",
+    "They credit it to a 1856 invention"
+   ],
+   "answer": "They mention the bird in passing, never as a dye",
+   "kind": "pick"
+  },
+  {
+   "q": "In the archive, this swatch sits mostly in which part of a painting?",
+   "choices": [
+    "Shadows and midtones",
+    "Highlights",
+    "Skies only"
+   ],
+   "answer": "Shadows and midtones",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Starling is among the commonest colors in painting: 1 archive painting in 18 holds it, as photographed."
+ ],
+ "slug": "starling",
+ "names": [
+  "Starling"
+ ],
+ "status": "checked",
+ "words": 305,
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "removed invented winter-plumage claim",
+   "trimmed plumage claim to what Baty states"
+  ]
+ }
+}

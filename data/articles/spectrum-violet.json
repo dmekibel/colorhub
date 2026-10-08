@@ -1,0 +1,109 @@
+{
+ "slug": "spectrum-violet",
+ "name": "Spectrum Violet",
+ "hex": "#6740A6",
+ "names": [
+  "Spectrum Violet"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Spectrum Violet is a deep, saturated violet from Ridgway's 1912 atlas; the books do not explain the name, but they do explain why violet is not purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Violet is not purple",
+   "body": "Eckstut and Siegel stress that the color we see at the end of a rainbow is violet, not purple, and that purple would be the wrong word for the spectrum's last band [1]. In color science the two are separate categories, though in everyday English the words are often swapped [1].\n\nThe color name itself comes from Ridgway's *Color Standards and Color Nomenclature* of 1912, where it sits on plate X, hue 59 [2]. Our swatch is taken from a scan of an aged plate, so it is approximate [2]. The ISCC-NBS system files it under \"strong violet\", 3.0 CIEDE2000 units away [2].\n\nThe books add a fact about how we see the end of the spectrum. The short-wavelength cones, needed for blue and violet, also feed into how red looks, and the long-wavelength cones have a small second sensitivity peak in the blue-violet range [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a color painters rarely used at this saturation. No painting in our archive of 23,781 has it covering at least 1 per cent of the canvas, within a CIEDE2000 distance of 4, as photographed [3]. That describes the archive, not painting as a whole, and varnish and age mute violets in photographs [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the violet of the visible spectrum",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "Ridgway 1912, plate X, hue 59"
+  },
+  "aka": [],
+  "siblings": [
+   "violet",
+   "violet-blue",
+   "royal-purple"
+  ],
+  "parent": "violet",
+  "children": [
+   "purple"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+  "n_present": 0,
+  "min_cover": 0.01,
+  "iscc": {
+   "name": "strong violet",
+   "de": 3.0
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Eckstut and Siegel, What Is Color?, ch. 32",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances to ISCC-NBS names; Ridgway 1912, plate X, hue 59 (scan of an aged plate)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes); covering at least 1% of the canvas, within CIEDE2000 4",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color do we actually see in a rainbow, according to Eckstut and Siegel?",
+   "choices": [
+    "Violet, not purple",
+    "Purple, not violet",
+    "Indigo only",
+    "Magenta"
+   ],
+   "answer": "Violet, not purple",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: any painting in our archive covers 1 per cent of its canvas with this color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The end of the rainbow is violet, not purple: color science treats them as two categories.",
+  "Not one of 23,781 museum paintings in our archive covers 1 per cent of its canvas with this violet."
+ ],
+ "words": 222,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede claimed the name came from the rainbow violet; not documented, reworded. Shortened close paraphrase of Eckstut."
+  ]
+ }
+}

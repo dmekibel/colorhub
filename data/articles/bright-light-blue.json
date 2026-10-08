@@ -1,0 +1,103 @@
+{
+ "slug": "bright-light-blue",
+ "name": "Bright Light Blue",
+ "hex": "#26F7FD",
+ "names": [
+  "Bright Light Blue"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Bright Light Blue is a vivid cyan, a screen color far more saturated than almost anything on a canvas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The name",
+   "body": "The name is a plain description from the xkcd color survey, where thousands of people named colors on screen, and the swatch sits nearest to [[aqua]] [1]. It is a screen-born name with no pigment or dye behind it [1].\n\nThe books we hold mention a bright light blue only in an optics passage that Gage quotes from Goethe's Theory of Colours: a dark window bar seen against a dull grey sky grows colored edges, a light-blue one on its upper side [3]. That is an effect of the eye, not a pigment [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this color covering even 1% of its canvas, as photographed [2]. That describes our archive, not painting as a whole, but it fits a color this saturated: nothing in oil or watercolor reaches it easily [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description from the xkcd color survey",
+   "first_recorded": "xkcd survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "aqua",
+   "sky-blue",
+   "turquoise",
+   "blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "pct_paintings": 0,
+  "library_first": 2010
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 205",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where did the name Bright Light Blue come from?",
+   "choices": [
+    "A screen color survey",
+    "A medieval pigment",
+    "A military uniform"
+   ],
+   "answer": "A screen color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "Does any painting in our archive cover 1% of its canvas with this color?",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bright Light Blue is so saturated that no painting in our archive covers 1% of its canvas with it, as photographed."
+ ],
+ "words": 152,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "'afterglow' replaced; Goethe describes a visual fringe effect."
+  ]
+ }
+}

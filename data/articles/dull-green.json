@@ -1,0 +1,152 @@
+{
+ "slug": "dull-green",
+ "name": "Dull Green",
+ "hex": "#74A662",
+ "names": [
+  "Dull Green"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Dull Green is a plain descriptive name for a mid green of low saturation, and as a painters' word it means a green with its chroma turned down.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "What the swatch is",
+   "body": "The swatch is #74A662, a mid green that sits in ISCC-NBS block 148 and also appears in the xkcd survey [1]. Its nearest named neighbor is [[asparagus]], and [[moss]] is 7.5 units away [1]. It is a yellowish green with chroma of about 42, which is middling, so the screen color is softer than a leaf green but far from grey [1].\n\n\"Dull\" is a description, not a historical name, so the books attach it to other things [2][3]. The label was never a single color."
+  },
+  {
+   "id": "usage",
+   "title": "How the books use the word",
+   "body": "Gurney uses dull greens to mean the lower-chroma end of a painter's gamut: a palette with strong cyan and magenta but weaker yellows, violets and dull greens [2]. Gage notes the violets, yellows and dull greens in a 1911 patchwork coverlet Sonia Delaunay made for her baby [3].\n\nIn Paterson, *lovat* is a dull green named for a Scottish town and used of tweed cloth, spelled Lovatt at first [4]. Salter, quoted in the Pigment Compendium, called uranium green a dull olive-leaning oxide, almost black in lumps, and the Compendium thinks artists rarely if ever used it [5]. "
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 16 works [6]. The top two are the *Portrait of Emperor Jahangir* [[painting:aic-62243|Portrait of Emperor Jahangir]] at 51 per cent and a Sérusier landscape at 36 [6]. A Van Gogh painting, [[painting:nga-163323|Green Wheat Fields, Auvers]], follows [6]. Van Gogh has three of his 49 works here, a rate 91 times the archive's [6].\n\nFrance supplies eight hits, 3.5 times its share [6]. These are photographs of aged, varnished paintings, so the color is a screen color [6]. In Google Books *dull green* is present from 1800 and peaks about 1926 [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain description (low chroma green)",
+   "first_recorded": "undocumented; ISCC-NBS 1955 block 148",
+   "source": "ISCC-NBS 1955; Gurney, p. 126"
+  },
+  "aka": [],
+  "siblings": [
+   "asparagus",
+   "moss",
+   "sage-green",
+   "olive-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+  "match": {
+   "hex": "#74A662",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 16,
+  "top_paintings": [
+   "aic-62243",
+   "commons-Q17494664",
+   "nga-163323"
+  ],
+  "ngram": {
+   "peak": 1926,
+   "first_5pct": 1800
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955 block 148, xkcd), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, pp. 126, 128",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 267",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 248",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 313, 392 (\"Uranium green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"dull\" mean when painters talk about a green?",
+   "choices": [
+    "Lower chroma, less saturated",
+    "Darker, near black",
+    "Bluer",
+    "Glossy"
+   ],
+   "answer": "Lower chroma, less saturated",
+   "kind": "pick"
+  },
+  {
+   "q": "Which Scottish tweed color does Paterson describe as dull green?",
+   "choices": [
+    "Lovat",
+    "Heather",
+    "Tartan",
+    "Harris"
+   ],
+   "answer": "Lovat",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "\"Dull green\" is a description, not a historic name; painters use it for greens with their chroma turned down.",
+  "Van Gogh has this green in 3 of his 49 works in our archive."
+ ],
+ "words": 315,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed overstated claim that books record the name only to say pigments were unloved"
+  ]
+ }
+}

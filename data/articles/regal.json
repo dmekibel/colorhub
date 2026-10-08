@@ -1,0 +1,107 @@
+{
+ "slug": "regal",
+ "name": "Regal",
+ "hex": "#2D2E6E",
+ "names": [
+  "Regal"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Regal is a deep, slightly purple navy, with a name that usually points to purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A royal word for a blue",
+   "body": "Our name records first list this color in the Maerz and Paul dictionary of 1930 [1]. Nothing in the color books we hold describes this specific swatch, so its origin is undocumented here [1]. The swatch itself is a dark blue with a trace of violet, not the red-leaning purple the word usually calls to mind [1].\n\nThe word, though, has a long history with purple. Gage notes that, in medieval color symbolism, the regal purple of Christ's robe may be the same as the scarlet of sin [2]. And in Gujarat, one Indian dye book describes a range of colors, from \"regal purple\" to the color of kidney beans, all made from indigo combinations [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive the color appears in 16 paintings, as photographed, rarer than 69% of the named colors [1]. The earliest in our set is by Bronzino, in 1543, centuries before the name's first record, so this is a look-alike hue, not a sign of the dye [1]. Related names: [[royal-purple]], [[midnight-blue]] and [[royal-blue]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "regal, of a king",
+   "first_recorded": "Maerz and Paul, 1930",
+   "source": "ColorHub name library"
+  },
+  "aka": [],
+  "siblings": [
+   "royal-purple",
+   "royal-blue"
+  ],
+  "parent": "midnight-blue",
+  "children": [
+   "indigo"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 16,
+  "first_record": 1930
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub archive and name records (field notes, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 87",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 15",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which 1930 source does our record first list Regal?",
+   "choices": [
+    "Maerz and Paul",
+    "The Oxford dictionary",
+    "Newton's Opticks",
+    "A Crayola box"
+   ],
+   "answer": "Maerz and Paul",
+   "kind": "pick"
+  },
+  {
+   "q": "Which dye does Balfour-Paul say gave the Gujarat dye book its regal purples?",
+   "choices": [
+    "Indigo",
+    "Madder",
+    "Cochineal",
+    "Saffron"
+   ],
+   "answer": "Indigo",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Regal is a navy here, though the word usually means purple."
+ ],
+ "words": 181,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede no longer claims a royalty-purple origin the books do not support",
+   "Gage line restored to 'scarlet of sin'",
+   "Balfour-Paul: regal purple is one of many indigo-made colors; removed speculative meeting-point sentence"
+  ]
+ }
+}

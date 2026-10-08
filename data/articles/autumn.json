@@ -1,0 +1,208 @@
+{
+ "slug": "autumn",
+ "name": "Autumn",
+ "hex": "#524227",
+ "names": [
+  "Autumn"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Autumn is a dark, muted brown named for the season, recorded as a color in 1917, and a reminder that the fall palette is more varied than the one color name suggests.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A season used as a color",
+   "body": "Autumn is the season, used since the early twentieth century as the name of a dark, muted brown. The earliest record of it as a color in our sources is Maerz and Paul's 1930 dictionary, which dates the usage to 1917 and lists it on plate 8 [1]. It is a descriptive name, not a pigment or dye: there is no material called autumn, and the books we hold do not trace the word to a recipe.\n\nOur swatch, `#524227`, is a dark grayish yellow brown by the ISCC-NBS categories, about seven ΔE units from the center of that category [1]. That puts it far from the fiery orange most people picture when they think of fall leaves. Maerz and Paul also list *Autumn Oak*, a reddish brown recorded in 1927 [1], so even within one dictionary \"autumn\" names two different browns."
+  },
+  {
+   "id": "which",
+   "title": "The autumn palette and the fashion trade",
+   "body": "Outside the dictionaries, \"autumn\" is mostly an adjective. Paterson says the fashion trade uses it for colors considered right to wear in autumn, and that color psychology uses it to sort tones by the personalities they suit [2]. His entry for *autumn brown* is a warm reddish brown, and *autumnal colours* are the russets, oranges, browns, yellows and reds of English countryside leaves [2]. A color-forecasting group in the United States, Paterson adds, announces its opinion on trends some 24 months ahead [2].\n\nThe definition of the leaf colors has moved over time. St Clair notes that [[russet]] today suggests the ruddy colors of autumn leaves, but in Maerz and Paul's influential 1930 dictionary it was more orange than red, with pronounced ashy grey undertones [3]. If a color name seems to shift between sources, the sources are not always using the same swatch.\n\nThe nearest named neighbors of our swatch are [[ivory-brown]], [[musk]] and [[dusty-brown]] [1]. For a reddish alternative, see [[autumn-oak]]."
+  },
+  {
+   "id": "leaves",
+   "title": "What the leaves are doing",
+   "body": "Older dictionaries record the pigments behind the season. Paterson lists *erythrophyll* as the red coloring matter in autumn leaves and *phylloxanthin* as their yellow pigment, and he adds that tannin and carotin are yellow or orange pigments found in autumn leaves and in carrots [2]. These are older terms, given without chemistry, and a modern botany text would give a fuller account. The point for the eye is simple: leaves do not turn brown by one route, and the dark brown of fallen leaves is the end of the process, not its brightest moment."
+  },
+  {
+   "id": "seasons",
+   "title": "Seasons and colors, a shifting scheme",
+   "body": "Pastoureau reports that medieval and Renaissance writers who linked colors to the seasons agreed on spring and summer but hardly on autumn [4]. Summer was often red, sometimes gold or orange, while autumn went to yellow or black, the color of Saturn and melancholy, and more rarely to brown [4]. In a related scheme, he says, yellow itself was the color of autumn, in nature and in a human life, with a dull, withered and faded air [5].\n\nGage lists the disagreement in more detail. Alberti assigned white to autumn; Tertullian and Corippus assigned blue; Antiochus of Athens assigned black; and Theon of Smyrna linked autumn to the water-green icosahedron [6]. Gage's own conclusion is that around 1500 these links were arbitrary and conflicting [6]. A brown autumn is a modern habit, not a classical one."
+  },
+  {
+   "id": "painting",
+   "title": "Autumn tones in old paintings",
+   "body": "Pastoureau warns against a common error in reading Ancien Régime landscapes [7]. It is often said that painters of that time neglected spring and bright colors in favor of autumn and dark tones [7]. He argues the impression comes from aging: greens have turned brown and blues have faded away [7]. So some of the autumn brown we see in old paintings is aging, not intention.\n\nThat caution applies to our own data. The brown is common in the archive and peaks in the seventeenth century [8]. It is a reason to read the numbers as \"as photographed\" and not as an artist's palette."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A dark brown like this swatch appears in 6,886 of the 23,781 paintings in our archive, 29 per cent, and by the stricter within-painting lens in 5,055 [8]. It is more common than every other named color we track [8]. That is the nature of a dark, muted brown: it fills shadows, backgrounds and aged varnish.\n\nIt peaks in the 1600s, found in 27.6 per cent of the 6,394 paintings from that century, 1.2 times the rate expected from the museums in the sample [8]. Within a painting it most often plays a mid-tone, in 37 per cent of the paintings that contain it [8]. The most devoted painter is [[painter:juan-carreno-de-miranda|Juan Carreño de Miranda]], who uses it in 15 of his 21 works here, 2.9 times the baseline [8]. [[painter:david-teniers|David Teniers]] and [[painter:frans-snyders|Frans Snyders]] follow, while [[painter:john-singer-sargent|Sargent]] uses it in only 36 of 287 works, 0.6 times the baseline [8].\n\nThe earliest match is a work dated about 900, and the latest is from 1950, over a thousand years before the name's first record in our sources [8]. Early centuries are thin, and a match is a look-alike hue, not proof of any pigment [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the season; a descriptive name with no pigment behind it",
+   "first_recorded": "1917, as a color (Maerz and Paul 1930)",
+   "source": "Maerz and Paul, A Dictionary of Color (1930), via the ColorHub library"
+  },
+  "aka": [
+   "autumn brown (a different, redder shade)"
+  ],
+  "siblings": [
+   "autumn-oak",
+   "russet",
+   "bistre"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "autumn-oak",
+    "gloss": "a reddish brown in the same dictionary, not the same color"
+   },
+   {
+    "slug": "russet",
+    "gloss": "the leaf-red brown, but more orange in 1930"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6886,
+  "n_within_painting": 5055,
+  "pct_present": 28.96,
+  "peak_century": 1600,
+  "peak_rate": 27.6,
+  "measured": {
+   "lch": [
+    29.0,
+    19.2,
+    81.5
+   ],
+   "iscc": "dark grayish yellow brown (dE 6.8)",
+   "contrast_white": 9.69,
+   "nearest": [
+    [
+     "Ivory Brown",
+     2.7
+    ],
+    [
+     "Japanese Bush Warbler Brown",
+     3.1
+    ],
+    [
+     "Musk",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930, plate 8 A 12 (Autumn, first recorded 1917) and Autumn Oak (1927); ISCC-NBS category fit; CIEDE2000 neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"autumn\", \"autumn brown\", \"erythrophyll\", \"phylloxanthin\", \"tannin\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Russet\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 1",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 1",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 37",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 3",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), data/graph/fieldnotes, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why should old paintings' autumn browns be read with care?",
+   "choices": [
+    "Greens have turned brown with age, and blues have faded",
+    "Painters had no other browns",
+    "Brown paint was banned in the Renaissance",
+    "Varnish only ever lightens a picture"
+   ],
+   "answer": "Greens have turned brown with age, and blues have faded",
+   "kind": "pick"
+  },
+  {
+   "q": "In medieval and Renaissance schemes, autumn was always linked to brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which description fits the Autumn swatch in our library?",
+   "choices": [
+    "A dark grayish yellow brown",
+    "A bright orange",
+    "A reddish brown",
+    "A pale yellow"
+   ],
+   "answer": "A dark grayish yellow brown",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Medieval writers could not agree on autumn's color: yellow, black, white and blue all had backers.",
+  "The brown of an old painting may be a green that aged."
+ ],
+ "words": 851,
+ "status": "checked",
+ "checked": {
+  "by": "claude-sonnet",
+  "date": "2026-10-08",
+  "issues": [
+   "Little book material: the name is descriptive and Maerz and Paul is the earliest record",
+   "Paterson leaf-pigment terms are dictionary glosses, not modern chemistry",
+   "Archive match dates before 1917 are look-alike hues"
+  ]
+ }
+}

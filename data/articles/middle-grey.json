@@ -1,0 +1,155 @@
+{
+ "slug": "middle-grey",
+ "name": "Middle Grey",
+ "hex": "#8B8680",
+ "names": [
+  "Middle Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Middle grey is the grey halfway between black and white, a reference that painters and designers use to judge every other color.",
+ "sections": [
+  {
+   "id": "seeing",
+   "title": "The grey the eye does best",
+   "body": "Albers writes that the eye tells middle greys apart better than a camera does, because black-and-white photography pushes darks darker and lights lighter and so loses the middle [1][2]. His teaching exercise has students arrange grey cutouts in smooth steps, and the better the steps are matched, the better the study [2].\n\nHe also warns that a true middle grey is hard to find [3]. When he sets the same even grey in different surroundings, it appears to change, and even bands of one grey seem to form a gradation [4]. A grey is therefore never judged alone."
+  },
+  {
+   "id": "mixing",
+   "title": "Light and paint",
+   "body": "Albers notes that mixing colored light tends toward a middle grey, while mixing painted colors tends toward a dark grey [5]. Light adds; reflected color subtracts [5]. Westland's principles book uses middle grey as the target of a chroma scale, the steps from a color down to grey [6]. The same book cites the Weber-Fechner law: perceived steps follow a geometric, not an even, scale of physical change [6]. Compare [[grey]], [[charcoal]] and [[silver]]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is a slightly warm grey, not a neutral one [7]. Dictionary entries in our sources for this name are web lists with no dated record, so no origin is claimed [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color appears in 1,021 of 23,781 paintings in our archive, 4.29%, as photographed [8]. Inside a painting it most often plays a light, in 39% of the 539 measured [8]. Alfred Sisley uses it in 9 of 50 works, 4.7 to 6.0 times the baseline of the museums those works come from [8]. It peaks in the 1900s, in 4.2% of 1,674 paintings [8]. It shares canvases with [[dim-grey|Dim Grey]] and Pale Ecru-Drab more than chance would give [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its place midway between black and white",
+   "first_recorded": "undocumented in our sources",
+   "source": "Albers; Westland; ColorHub name records"
+  },
+  "aka": [
+   "mid grey",
+   "neutral grey"
+  ],
+  "siblings": [
+   "grey",
+   "charcoal",
+   "silver"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+  "n_present": 1021,
+  "role": "light 39%",
+  "painters": [
+   {
+    "name": "Alfred Sisley",
+    "hits": 9,
+    "n": 50
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 29",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 31",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 97",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, pp. 97, 99",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 43",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Westland, Principles of Color, p. 36",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library and name records (data/library.json, data/graph)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why does Albers say photographs lose middle greys?",
+   "choices": [
+    "They push darks darker and lights lighter",
+    "They only record red",
+    "The paper fades",
+    "Lenses are too small"
+   ],
+   "answer": "They push darks darker and lights lighter",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a surrounding color cannot change how a grey looks.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A true middle grey is hard to find, and the eye changes it by its surroundings."
+ ],
+ "words": 300,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}
