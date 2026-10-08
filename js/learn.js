@@ -244,6 +244,7 @@ function deck(mode, opts = {}) {
     if (firstTry) first.set(id, ok);
     // a swipe is practice (self-graded); Pick it / Say it / Make it are checks that can make the name yours
     if (mode === "review" && firstTry) schedule(it.c, ok, it.kind || "swipe");
+    if (firstTry && !it.kind && typeof learnerLog === "function") learnerLog({ type: "answer", color: it.c, ok, by: "swipe", src: mode });   // js/learner.js
     if (ok) { const seg = el.querySelector(`.segs i[data-id="${CSS.escape(id)}"]`); if (seg) seg.classList.add("on"); }
     else queue.splice(Math.min(2, queue.length), 0, it.kind ? plain(it) : it); // comes back after two other cards, as a swipe card
     mount();

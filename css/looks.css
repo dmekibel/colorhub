@@ -1,0 +1,80 @@
+/* Looks: cards in Explore > Ideas, the look page, "What look is this?" in the Studio, "In looks" on a color page.
+   DESIGN-SYSTEM.md: serif speaks, mono only counts (numbers and hex), no uppercase, one paper primary per screen,
+   color plates on warm black, every swatch carries data-swatch so one tap opens its page. */
+.lkx-str{display:flex;gap:1px;height:100%;width:100%}
+.lkx-str i{display:block;background:var(--c);min-width:3px}
+
+/* card in the Explore feed */
+.lkx-pin{border-top:1px solid var(--rule);padding-top:10px;text-align:left}
+.lkx-pin .lkx-str{height:96px;border-radius:var(--r-1);overflow:hidden}
+.lkx-pin b{display:block;font:400 22px/1.02 var(--serif);letter-spacing:-.01em;margin-top:9px;text-wrap:balance}
+.lkx-pin small{display:block;font:italic 400 15px/1.3 var(--serif);color:var(--soft);margin-top:4px}
+
+/* look page */
+.lkx-hero{display:flex;gap:2px;height:38dvh;min-height:220px;max-height:340px;margin-top:2px}
+.lkx-hero i{background:var(--c);display:flex;align-items:flex-end;padding:8px 6px;min-width:0;font:400 12px/1 var(--mono);letter-spacing:.02em;font-style:normal;transition:flex .35s var(--ease);cursor:pointer}
+.lkx-hero i:first-child{border-radius:var(--r-1) 0 0 var(--r-1)}.lkx-hero i:last-child{border-radius:0 var(--r-1) var(--r-1) 0}
+.lkx-hero i[data-ink="dark"]{color:var(--paper-ink)}.lkx-hero i[data-ink="light"]{color:#fff}
+.lkx-hero span{overflow:hidden;white-space:nowrap}
+.lkx-tabs{display:flex;gap:8px;overflow-x:auto;margin:22px calc(-1 * var(--g)) 0;padding:0 var(--g) 2px;scrollbar-width:none}
+.lkx-tabs::-webkit-scrollbar{display:none}
+.lkx-tabs button{flex:none;display:flex;align-items:center;gap:9px;min-height:44px;padding:0 16px 0 10px;background:var(--surface-2);border-radius:var(--r-pill);font:400 17px/1 var(--serif);color:var(--soft);transition:color .2s,background .2s}
+.lkx-tabs button.on{color:var(--ink);background:var(--surface-3)}
+.lkx-dot{display:flex;width:26px;height:18px;gap:0;border-radius:2px;overflow:hidden;flex:none}
+.lkx-dot i{background:var(--c);display:block;flex:1}
+.lkx-cols{margin-top:14px;border-top:1px solid var(--rule)}
+.lkx-col{display:grid;grid-template-columns:34px 1fr 16px;gap:12px;align-items:center;width:100%;min-height:52px;padding:9px 0;border-bottom:1px solid var(--rule);text-align:left}
+.lkx-col i{width:34px;height:34px;background:var(--c);border-radius:var(--r-1);box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
+.lkx-col span{display:flex;flex-direction:column;gap:4px;min-width:0}
+.lkx-col b{font:400 22px/1.05 var(--serif);overflow-wrap:anywhere}
+.lkx-col em{font:400 12px/1 var(--mono);letter-spacing:.02em;color:var(--faint);font-style:normal}
+.lkx-col svg{width:14px;height:14px;color:var(--faint)}
+.lkx-acts{margin-top:22px}
+.lkx-rows{margin:26px 0 0;border-top:1px solid var(--rule)}
+.lkx-row{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.lkx-row dt{font:italic 400 16px/1.3 var(--serif);color:var(--soft)}
+.lkx-row dd{margin:0;font-size:15px;line-height:1.5;color:var(--ink);text-wrap:pretty}
+.lkx-mood{display:inline-block;font:400 20px/1.2 var(--serif);color:var(--ink);margin-right:12px}
+.lkx-sec{margin-top:36px}
+.lkx-sec h3{font:400 24px/1.1 var(--serif);letter-spacing:-.01em;padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:14px}
+.lkx-sec>p{font-size:16px;line-height:1.6;color:var(--ink);text-wrap:pretty}
+.lkx-sec .lkx-fuzzy{margin-top:12px;font-size:14.5px;color:var(--soft)}
+.lkx-fuzzy b{font-weight:600;color:var(--ink)}
+.lkx-sub{margin:18px 0 10px;color:var(--soft)}
+.lkx-sec h3+.lkx-sub{margin-top:4px}
+.lkx-strip{display:flex;gap:14px;overflow-x:auto;margin:0 calc(-1 * var(--g));padding:0 var(--g) 6px;scroll-snap-type:x proximity;scroll-padding-inline:var(--g);scrollbar-width:none}
+.lkx-strip::-webkit-scrollbar{display:none}
+.lkx-strip>*{scroll-snap-align:start;flex:none}
+.lkx-fig{margin:0;width:236px}
+.lkx-fig img{display:block;width:236px;height:170px;object-fit:cover;border-radius:var(--r-1);background:var(--lift)}
+.lkx-fig figcaption{display:flex;flex-direction:column;gap:4px;margin-top:8px;font-size:13px;line-height:1.4;color:var(--soft)}
+.lkx-fig figcaption a{font-size:12px;color:var(--faint);text-decoration:none}
+.lkx-ptg{width:150px;text-align:left}
+.lkx-ptg img{display:block;width:150px;height:116px;object-fit:cover;border-radius:var(--r-1);background:var(--lift)}
+.lkx-mini{display:flex;height:6px;gap:1px;margin:6px 0 7px}.lkx-mini i{display:block;background:var(--c)}
+.lkx-ptg b{display:block;font:400 18px/1.05 var(--serif)}
+.lkx-ptg small,.lkx-relc small{display:block;font:italic 400 15px/1.3 var(--serif);color:var(--soft);margin-top:4px}
+.lkx-ptg small .mono{font:400 12px/1 var(--mono);font-style:normal}
+.lkx-relc{width:132px;text-align:left}
+.lkx-relc .lkx-str{height:64px;border-radius:var(--r-1);overflow:hidden}
+.lkx-relc b{display:block;font:400 19px/1.05 var(--serif);margin-top:7px}
+.lkx-credit a{color:var(--soft)}
+
+/* "What look is this?" under a Studio palette */
+.lkx-match{margin-top:32px}
+.lkx-mrow{display:grid;grid-template-columns:76px 1fr 16px;gap:14px;align-items:center;width:100%;min-height:60px;padding:10px 0;border-bottom:1px solid var(--rule);text-align:left}
+.lkx-mrow .lkx-str{height:34px;border-radius:var(--r-1);overflow:hidden}
+.lkx-mt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.lkx-mt b{font:400 21px/1.05 var(--serif)}
+.lkx-mt em{font:italic 400 15px/1.3 var(--serif);color:var(--soft)}
+.lkx-mt em .mono{font:400 12px/1 var(--mono);font-style:normal}
+.lkx-mrow svg{width:14px;height:14px;color:var(--faint)}
+
+/* "In looks" on a color page */
+.lkx-in{margin-top:36px}
+.lkx-in h3{font:400 24px/1.1 var(--serif);letter-spacing:-.01em;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.lkx-inrow{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:center;width:100%;min-height:56px;padding:10px 0;border-bottom:1px solid var(--rule);text-align:left}
+.lkx-inrow .lkx-str{height:34px;border-radius:var(--r-1);overflow:hidden}
+.lkx-inrow b{display:block;font:400 21px/1.05 var(--serif)}
+.lkx-inrow small{display:block;font:italic 400 15px/1.3 var(--serif);color:var(--soft);margin-top:3px}
+.lkx-sec .pchip em{letter-spacing:.02em;text-transform:none;font-size:12px;margin-left:6px}

@@ -43,7 +43,7 @@ let seeded = 7; ctx.__rnd = () => (seeded = (seeded * 16807) % 2147483647) / 214
 const shuf = run(`prDeck({ src: "first", n: 50, fam: "all", order: "shuffle", round: 0 }, __rnd).map(it => it.n)`);
 ok(shuf.length === 50 && new Set(shuf).size === 50 && shuf.every(n => stage50.includes(n)), "shuffled first 50 is a permutation of the same 50");
 ok(JSON.stringify(shuf) !== JSON.stringify(stage50), "shuffled first 50 is not in stage order");
-ok(run(`prDeck({ src: "first", n: 1000, fam: "all", order: "order", round: 0 }).length`) === 1000, "first 1,000 = all 1,000 core names");
+ok(run(`prDeck({ src: "first", n: 1000, fam: "all", order: "order", round: 0 }).length`) === ctx.__core.length, `first 1,000 = every core name (${ctx.__core.length})`);
 ok(run(`prDeck({ src: "first", n: 137, fam: "all", order: "order", round: 0 }).length`) === 137, "the slider's any number (137)");
 ok(run(`prRound(prDeck({ src: "first", n: 50, order: "order", round: 10 }), { round: 10 }, 20).map(it => it.n).join()`) === stage50.slice(20, 30).join(), "a round of 10 at offset 20");
 const blues = run(`prDeck({ src: "first", n: 250, fam: "blue", order: "order", round: 0 })`);
@@ -201,11 +201,12 @@ d = D({ seed: { n: "Gendarme Blue", h: "#455D85" }, source: "family", size: 0 })
 ok(d.seed === "gendarme blue" && d.keys[0] === "gendarme blue" && d.keys.length > 20, "a library name past the core list is a seed in its own right");
 ok(run(`prInstantDeck({ seed: { n: "Gendarme Blue", h: "#455D85" }, source: "family", size: 0 }).items.every(x => prFam9(x.h) === prFam9("#455D85"))`), "family: every color shares the seed's family");
 d = D({ seed: "teal", source: "level", size: 0 });
-const tealBand = run(`prBand(prByKey("teal").rank)`);
-ok(d.keys.length > 5 && run(`prInstantDeck({ seed: "teal", source: "level", size: 0 }).items.every(x => prBand(x.rank) === ${tealBand})`), `equal difficulty: all ${d.keys.length} names sit in Teal's stage (${tealBand})`);
+const tealBand = run(`prBand(prLevelRank(prByKey("teal")))`);
+ok(d.keys.length > 5 && run(`prInstantDeck({ seed: "teal", source: "level", size: 0 }).items.every(x => prBand(prLevelRank(x)) === ${tealBand})`), `equal difficulty: all ${d.keys.length} names sit in Teal's stage (${tealBand})`);
 ok(run(`prBand(0)`) === 1 && run(`prBand(24)`) === 1 && run(`prBand(25)`) === 2 && run(`prBand(999)`) === 9 && run(`prBand(9999)`) === 10, "stage bands follow the honeycomb's nine stages");
+ok(run(`prByKey("teal").useRank == null || prLevelRank(prByKey("teal")) === prByKey("teal").useRank`), "same level reads useRank (how common the word is) when the data has it");
 const libBand = run(`prBand(prSeedRank(prSeed({ n: "Gendarme Blue", h: "#455D85" })))`);
-ok(run(`prInstantDeck({ seed: { n: "Gendarme Blue", h: "#455D85" }, source: "level", size: 0, shuffle: false }).items.slice(1).every(x => prBand(x.rank) === ${libBand})`), "a library name's level is its nearest core name's stage");
+ok(run(`prInstantDeck({ seed: { n: "Gendarme Blue", h: "#455D85" }, source: "level", size: 0, shuffle: false }).items.slice(1).every(x => prBand(prLevelRank(x)) === ${libBand})`), "a library name's level is its nearest core name's stage");
 d = D({ items: ["#262B2D", "#455D85", "#677E90", "#314381", "#909C8A", "#A9A55B"], label: "The Starry Night", size: 0 });
 ok(d.source === "these" && d.keys.length >= 4 && d.keys.length <= 6, `a painting's palette becomes its named colors (${d.keys.join(", ")})`);
 ok(D({ items: ["#262B2D", "#262B2D"], size: 0 }).keys.length === 1, "duplicate colors in a set collapse to one card");
@@ -218,6 +219,7 @@ ok(d.source === "mixups" && d.keys[0] === "teal" && d.keys.includes("dark aqua")
 ok(D({ seed: "teal", source: "tricky", size: 0 }).keys.includes("teal"), "Tricky as an instant source");
 ok(D({}).source === "first", "no seed and no set: the first 50");
 ok(run(`typeof prQuick === "function" && typeof prLearnSet === "function"`), "the quick sheet and prLearnSet exist");
+ok(D({ source: "set", items: ["#262B2D", "#455D85"], build: true, size: 0 }).source === "these", "source \"set\" (a ColorSet's colors) builds the These deck");
 
 // ---------- craft details ----------
 run(`S.cards = {}; S.practice = undefined;`);

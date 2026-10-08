@@ -105,7 +105,7 @@ function prSaveSpec(spec) { prState().last = { ...spec }; save(); }
 let PR_CORE = null, PR_CORE_SRC = null, PR_BYKEY = null;
 function prItem(e) {
   const key = e.n.toLowerCase(), c = typeof BYNAME !== "undefined" ? BYNAME.get(key) || null : null;
-  return { n: e.n, h: String(e.h).toUpperCase(), key, rank: e.rank == null ? 9999 : e.rank, also: e.also || [], c: c && c.id ? c : null, vs: c && c.vs || "", d: c && c.d || "" };
+  return { n: e.n, h: String(e.h).toUpperCase(), key, rank: e.rank == null ? 9999 : e.rank, useRank: e.useRank == null ? null : e.useRank, also: e.also || [], c: c && c.id ? c : null, vs: c && c.vs || "", d: c && c.d || "" };
 }
 function prCore() {
   const src = (typeof CORE_NAMES !== "undefined" && CORE_NAMES) || null;
@@ -371,6 +371,13 @@ function prRecord(sess, it, res, kind) {
   prTrick(it, !!res.ok);
   if (sess.el) prCoach(sess, sess.el);
   if (!res.ok && res.answer && res.answer.n) prMixNote(it, res.answer.n);
+  // the Learner Model (js/learner.js): what you answered, and what you mixed it up with
+  try {
+    if (typeof learnerLog === "function") {
+      learnerLog({ type: "answer", color: { n: it.n, h: it.h }, ok: !!res.ok, by: by || "swipe", ms: res.ms, src: "practice" });
+      if (!res.ok && res.answer && res.answer.n && res.answer.h) learnerLog({ type: "confuse", color: { n: it.n, h: it.h }, b: { n: res.answer.n, h: res.answer.h }, src: "practice" });
+    }
+  } catch (e) {}
   return true;
 }
 // Mix-ups: which name you gave instead (a real confusion pair), kept for the "Mix-ups" deck. S.practice.mix[key] = [names]
@@ -1453,7 +1460,8 @@ function prHome(o = {}) {
 
 // ======================================================================
 // Instant decks: start learning any color (or any set of colors) in one tap, outside the path.
-//   prInstantDeck({ seed, source, size, items }) -> { items, label, sources }   (pure: builds the deck, plays nothing)
+//   prInstantDeck({ seed, source, size, items }) -> { items, label, source, seed, counts }   (pure: builds the deck)
+//   prInstantDeck({ set })   a ColorSet from js/colorset.js (csLearn): opens the quick sheet on the set's colors
 //   prQuick({ seed, items, label, source, size, method })                         (the quick sheet; one tap on Start)
 //   prLearnSet(hexes, label)                                                      (a painting, photo, palette or poem's colors)
 // seed: a hex, a name (any of the core names or a library name given as { n, h }), or an item. items: hexes or items.
@@ -1482,8 +1490,13 @@ function prSeed(seed) {
   return prItemOf(seed) || null;
 }
 // For a library name the difficulty band is its nearest core name's
-const prSeedRank = it => it.rank < 9999 ? it.rank : ((prItemOf(it.h) || {}).rank ?? 9999);
+// difficulty = how common the word is (useRank in data/core-names.json), else its place in the stage order
+const prLevelRank = it => it.useRank != null ? it.useRank : it.rank;
+const prSeedRank = it => it.rank < 9999 ? prLevelRank(it) : (prItemOf(it.h) ? prLevelRank(prItemOf(it.h)) : 9999);
 function prInstantDeck(o = {}) {
+  // csLearn (js/colorset.js) hands over a ColorSet: open the quick sheet with its colors as "These colors"
+  if (o.set && !o.build) { const set = typeof o.set === "function" ? o.set() : o.set; return prQuick({ items: ((set && set.colors) || []).map(c => c.h), label: (set && set.title) || "", seed: o.seed }); }
+  if (o.source === "set") o = { ...o, source: "these" };
   const seed = prSeed(o.seed), size = o.size == null ? 10 : +o.size, core = prCore(), p = prState();
   const these = prUnique((o.items || []).map(x => typeof x === "string" ? prItemOf(x) : prSeed(x)).filter(Boolean));
   const cap = (list, n) => n > 0 ? list.slice(0, n) : list;
@@ -1494,12 +1507,15 @@ function prInstantDeck(o = {}) {
     // its family (the nine hue families), nearest first
     family: () => seed ? [seed, ...byDist(core.filter(x => x.key !== seed.key && prFam9(x.h) === prFam9(seed.h)))] : [],
     // names of the same difficulty: the same stage of the path's order
-    level: () => { if (!seed) return []; const b = prBand(prSeedRank(seed)); return [seed, ...prShuffle(core.filter(x => x.key !== seed.key && prBand(x.rank) === b))]; },
+    level: () => { if (!seed) return []; const b = prBand(prSeedRank(seed)); return [seed, ...prShuffle(core.filter(x => x.key !== seed.key && prBand(prLevelRank(x)) === b))]; },
     these: () => these,
     // names you've confused: this color and what you said instead, then your other mix-ups
     mixups: () => {
       const out = [], add = k => { const it = prByKey(k); if (it) out.push(it); };
-      if (seed && p.mix[seed.key]) { out.push(seed); p.mix[seed.key].forEach(add); }
+      const lm = typeof confusions === "function" ? (seed ? confusions({ n: seed.n, h: seed.h }, 8) : confusions(null, 12)) : [];
+      if (seed && (lm.length || p.mix[seed.key])) out.push(seed);
+      lm.forEach(x => { add(String(x.a || "").toLowerCase()); add(String(x.b || "").toLowerCase()); });
+      if (seed && p.mix[seed.key]) p.mix[seed.key].forEach(add);
       Object.entries(p.mix).forEach(([k, list]) => { add(k); list.forEach(add); });
       return out;
     },
@@ -1507,7 +1523,7 @@ function prInstantDeck(o = {}) {
     due: () => prList("due"), tricky: () => prList("tricky"), star: () => prList("star"),
   };
   const counts = {};
-  Object.keys(build).forEach(k => { counts[k] = k === "these" ? these.length : k === "first" ? 50 : k === "mixups" ? Object.keys(p.mix).length : k === "due" ? dueList().length
+  Object.keys(build).forEach(k => { counts[k] = k === "these" ? these.length : k === "first" ? 50 : k === "mixups" ? Object.keys(p.mix).length + (typeof confusions === "function" ? confusions(null, 12).length : 0) : k === "due" ? dueList().length
     : k === "tricky" ? Object.keys(p.tricky).length : k === "star" ? p.star.length : seed ? 1 : 0; });
   let source = o.source && build[o.source] && counts[o.source] ? o.source : these.length ? "these" : seed ? "alike" : "first";
   let items = prUnique(build[source]());

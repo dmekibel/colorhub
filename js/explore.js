@@ -82,7 +82,8 @@ function lensSections(lens) {
       return [{ honey: true }, ...lensSections("origins").map(sec => ({ ...sec, title: sec.title === "Still being traced" ? sec.title : "Named after · " + sec.title }))];
     case "ideas": {
       const sys = pages.filter(p => (p.swatches || []).length >= 3), ideas = pages.filter(p => !sys.includes(p) && ["concept", "person", "work", "tradition", "culture"].includes(p.type));
-      return [{ title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
+      return [...(typeof lkSections === "function" ? lkSections() : []),   // js/looks.js: visual styles, each a family of palettes
+        { title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
         { title: "Color systems", sub: "Traditions that gave each color a meaning.", pins: sys.map(n => pin(n, { system: true })) },
         { title: "Ideas and people", pins: seeded(ideas, today()).map(n => pin(n)) },
         ...[window.passagesSection, window.filmsSection].filter(f => typeof f === "function").flatMap(f => f()),   // js/passages.js, js/films.js
@@ -212,9 +213,9 @@ function explorePager() {
   const covers = [
     coverHTML("all", "For you", "A new pick of colors, paintings and stories every day.", `Today, ${c.n}`,
       tintFromHex(c.h), flatHeroHTML(c.h, c.n), forYouSeam),
-    art ? coverHTML("art", "Art", "Fourteen thousand paintings and eleven thousand poems, found by their colors.", artCoverNote(art),
+    art ? coverHTML("art", "Art", "23,531 paintings and eleven thousand poems, found by their colors.", artCoverNote(art),
       tintFromPalette(art.palette), `<img src="${esc(art.img)}" alt="${esc(art.title)}">`, sixSwatchHTML(art.palette.map(p => p.h), art.palette.map(p => p.share)))
-      : coverHTML("art", "Art", "Fourteen thousand paintings and eleven thousand poems, found by their colors.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
+      : coverHTML("art", "Art", "23,531 paintings and eleven thousand poems, found by their colors.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
     story ? coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", `Today, ${story.title}`,
       tintFromHexList(story.cover), `<div class="xp-flat" style="background:linear-gradient(135deg,${story.cover.join(",")})"></div>`, sixSwatchHTML(story.cover))
       : coverHTML("ideas", "Ideas", "Short stories, systems and history, read through color.", "", null, `<div class="xp-flat" style="background:var(--lift-2)"></div>`, ""),
@@ -343,7 +344,7 @@ function artHome() {
     <div class="art-band" style="${tint ? `--tint:${tint}` : ""}">
       <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="icon-btn glass" data-search aria-label="Search">${ICON.search}</button></header>
       <h1 class="p-title">Art</h1>
-      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from fourteen thousand paintings and eleven thousand poems.` : "Fourteen thousand paintings and eleven thousand poems, found by their colors."}</p>
+      <p class="p-dek">${hex ? `In ${esc(name.toLowerCase())}, from 23,531 paintings and eleven thousand poems.` : "23,531 paintings and eleven thousand poems, found by their colors."} <button class="aw-link" data-awindex>Art history by color</button></p>
       <div class="art-bubbles" role="tablist">${colors.map(c => `<button class="art-bubble${c.n === name ? " on" : ""}" data-hex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
     </div>
     <div class="art-feed" id="artFeed"><p class="fine">Loading the gallery…</p></div>
@@ -376,11 +377,13 @@ function exploreSearchSheet() {
     <div id="xresults">${saved.length ? `<div class="sec-head"><b>Saved</b><span>${saved.length}</span></div>${masonry(saved.map(n => pin(n)))}` : `<p class="fine">Tap ${ICON_HEART} on anything to keep it here, or start typing to search.</p>`}</div>
   `);
   const q = sh.querySelector("#xq"), results = sh.querySelector("#xresults");
+  if (typeof awLoad === "function") awLoad().catch(() => {});
   q.addEventListener("input", () => {
     const s = q.value.trim().toLowerCase();
     if (!s) { results.innerHTML = saved.length ? `<div class="sec-head"><b>Saved</b><span>${saved.length}</span></div>${masonry(saved.map(n => pin(n)))}` : `<p class="fine">Tap ${ICON_HEART} on anything to keep it here, or start typing to search.</p>`; return; }
     const hits = [...graph().nodes.values()].filter(n => (n.title || "").toLowerCase().includes(s)).slice(0, 40);
-    results.innerHTML = hits.length ? masonry(hits.map(n => pin(n))) : `<p class="fine">Nothing called that yet.</p>`;
+    const painters = typeof awSearchHTML === "function" ? awSearchHTML(s, () => q.dispatchEvent(new Event("input"))) : "";   // painters, from the art wiki (js/artwiki.js)
+    results.innerHTML = painters + (hits.length ? masonry(hits.map(n => pin(n))) : painters ? "" : `<p class="fine">Nothing called that yet.</p>`);
   });
   results.addEventListener("click", e => { const p = e.target.closest("[data-pin]"); if (p) { close(); closeup(graph().nodes.get(p.dataset.pin)); } });
   setTimeout(() => q.focus(), 260);
@@ -471,12 +474,14 @@ function xStep(prev) {
   // Studio screens (ROADMAP.md §17 job #1): plain tokens (no ":"), since each reopens from its own remembered
   // state rather than an id. Checked before the generic node lookup at the bottom, which would otherwise treat
   // "harmony" etc. as a (nonexistent) graph node id and silently do nothing.
+  if (prev.startsWith("aw:") && typeof awStep === "function") return awStep(prev);   // the art wiki (js/artwiki.js)
   if (prev === "wheel") return gamutWheel(GW_LAST && GW_LAST.preset, GW_LAST && GW_LAST.pts, false);
   if (prev === "wheelview") return gwReopenView();
   if (prev === "harmony") return LAB.harmony(LAB_HARMONY_STATE && LAB_HARMONY_STATE.base, LAB_HARMONY_STATE && LAB_HARMONY_STATE.scheme, false);
   if (prev === "contrast") return LAB.contrast(LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.set, LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.slot, false);
   if (prev.startsWith("pal:")) return openSavedPalette(prev.slice(4), false);   // a saved palette (js/studio.js)
   if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false);   // a gallery painting (js/gallery.js)
+  if (prev.startsWith("ar:") && typeof arStep === "function") return arStep(prev.slice(3));   // a hub or "which" page (js/article.js)
   if (prev.startsWith("ph:")) return photoPage(prev.slice(3), false);   // a saved photo (js/photos.js)
   if (prev.startsWith("poem:")) return poemPage(prev.slice(5), { back: true });   // a poem (js/poems.js)
   // a library color's own page, not one of the 101 (js/names.js): it isn't a graph node, so look it up by name
@@ -596,10 +601,12 @@ function colorPage(n, tapped) {
     ${stripOthers.length && stripDiff ? `<section class="cp-strip-sec">
       <div class="cp-strip"${tapped ? "" : ` data-nb="${esc(c.n)}"`}>
         <div style="--c:${heroHex}" data-ink="${ink(heroHex)}"><b>${tapped ? "Your color" : esc(c.n)}</b></div>
-        ${stripOthers.map(x => `<div style="--c:${x.h}" data-ink="${ink(x.h)}"><b>${esc(x.n)}</b></div>`).join("")}
+        ${stripOthers.map(x => `<div style="--c:${x.h}" data-ink="${ink(x.h)}"><b>${esc(x.n)}</b>${typeof relMarkHTML === "function" ? relMarkHTML(x) : ""}</div>`).join("")}
       </div>
       <p class="cp-diff">${esc(stripDiff)}</p>
+      ${tapped ? "" : `<div data-csacts></div>`}
     </section>` : ""}
+    <div class="ar-slot" data-ar-slot hidden></div>
     ${c.o && !(w && w.facets.some(f => f.k === "language")) ? `<p class="lead">${esc(c.o)}</p>` : ""}
     ${figHTML(c.n)}
     <section class="gl-in" data-glin></section>
@@ -609,7 +616,7 @@ function colorPage(n, tapped) {
     ${typeof gmRow === "function" ? gmRow(c) : ""}
     <section class="fx-in" data-world-in></section>
     ${(() => {
-      const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + (i === 0 ? figHTML(c.n, 1) : "")]);
+      const secs = (w ? w.facets : []).map((f, i) => [f.k + i, FACET_LABEL[f.k] || f.k, `<p>${linkText(f.text)}</p>` + figHTML(c.n, i + 1)]);
       if (w && w.related && w.related.length) secs.push(["kin", "Kin", w.related.map(r => { const x = graph().resolve(r.to); return x ? `<button class="kin" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i><b>${esc(x.title)}</b><span>${esc(r.why)}</span></button>` : ""; }).join("")]);
       // the sheet used to be the only place these lived (David, 2026-10-07: "everything the sheet had moves
       // onto the page") — the nearest of the ~1,000 core names, same list js/names.js's own pages show.
@@ -621,11 +628,13 @@ function colorPage(n, tapped) {
       secs.push(["codes", "Codes", `<div class="cp-codes">${codeRows(c.h).map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("")}</div>${codeRows(c.h).some(r => r[0].startsWith("CMYK")) ? `<p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press, so check them in a print workflow with a proof.</p>` : ""}`]);
       return (w ? "" : `<p class="fine">The full page for ${esc(c.n)} is being written. Its connections below are already live.</p>`) + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map(x => secHTML(x[0], x[1], x[2], false)).join("");
     })()}
+    ${typeof wgColorTail === "function" ? wgColorTail(c, w) : ""}
     ${connSection(n)}
     ${w && w.sources ? secHTML("src", "Sources", sourcesHTML(w.sources), false) : ""}
   `, "article cp-page");
   el.querySelector("[data-back]").onclick = xBack;
   wireLinks(el); wireSections(el);
+  if (typeof articleRender === "function") articleRender(routeSlug(c.n), el.querySelector("[data-ar-slot]"), { n: c.n, h: c.h });   // js/article.js (lane L8): draws nothing when data/articles/<slug>.json is missing
   onKey = e => { if (e.key === "Escape") xBack(); };
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => typeof prQuick === "function" ? prQuick({ seed: c }) : hmLearnIt(c);   // js/practice.js: the instant-deck sheet
   el.querySelector("[data-save]").onclick = e => { const on = toggleSave(n.id); e.currentTarget.textContent = on ? "♥" : "♡"; e.currentTarget.classList.toggle("saved", on); };
@@ -637,6 +646,10 @@ function colorPage(n, tapped) {
   // a tap anywhere on a near-name row grows its chip into the next page (js/core.js's morphFrom/runMorph)
   el.querySelectorAll("[data-cp-near]").forEach(b => b.onclick = () => { morphFrom(b.querySelector("i")); openCoreName(b.dataset.h, b.dataset.cpNear); });
   const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
+  // the Learner Model (js/learner.js) and the ColorSet verbs on the look-alike strip (js/colorset.js)
+  if (typeof learnerLog === "function" && !tapped) learnerLog({ type: "seen", color: c, src: "page" });
+  const csHost = el.querySelector("[data-csacts]");
+  if (csHost && typeof colorSet === "function") csHost.appendChild(csActions(colorSet({ kind: "lookalikes", id: routeSlug(c.n), title: `${c.n} and its look-alikes`, colors: [c, nb, ...likes].filter(Boolean), src: "color/" + routeSlug(c.n) }), { only: ["play", "map"], back: () => colorPage(n) }));
   colorPoems(el.querySelector(".c-poems"), c);
   if (typeof worldColorRow === "function") worldColorRow(el, n);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
@@ -657,11 +670,12 @@ function wikiPage(n) {
       if (n.stub) return `<p class="fine">This page is being written. Its connections are already live.</p>`;
       const body = n.body || [];
       // pages written with sections use them; older pages get a lead paragraph and a folding "full story"
-      const secs = n.sections && n.sections.length ? n.sections.map((x, i) => ["p" + i, x.title, (Array.isArray(x.text) ? x.text : [x.text]).map(t => `<p>${linkText(t)}</p>`).join("") + (x.img != null ? figHTML(n.id, x.img) : "")])
-        : body.length > 1 ? [["story", "The full story", body.slice(1).map(t => `<p>${linkText(t)}</p>`).join("") + figHTML(n.id, 1)]] : [];
+      const secs = n.sections && n.sections.length ? n.sections.map((x, i) => ["p" + i, x.title, (Array.isArray(x.text) ? x.text : [x.text]).map(t => `<p>${linkText(t)}</p>`).join("") + figHTML(n.id, x.img != null ? x.img : i + 1)])
+        : body.length > 1 ? [["story", "The full story", body.slice(1).map((t, i) => `<p>${linkText(t)}</p>` + figHTML(n.id, i + 1)).join("")]] : [];
       if (n.colors && n.colors.length) secs.push(["colors", "Colors", `<div class="chips-wrap">${n.colors.map(cn => { const x = graph().resolve(cn); return x ? `<button class="pchip" data-node="${esc(x.id)}"><i style="--c:${x.h}"></i>${esc(x.title)}</button>` : ""; }).join("")}</div>`]);
       return (body[0] && !(n.sections && n.sections.length) ? `<p class="lead">${linkText(body[0])}</p>` : "") + tocHTML(secs.map(x => [x[0], x[1]])) + secs.map((x, i) => secHTML(x[0], x[1], x[2], i === 0)).join("");
     })()}
+    ${typeof wgWikiTail === "function" ? wgWikiTail(n) : ""}
     ${connSection(n)}
     ${n.sources ? secHTML("src", "Sources", sourcesHTML(n.sources), false) : ""}
   `, "article");

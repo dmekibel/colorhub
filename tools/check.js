@@ -27,7 +27,9 @@ const RULES = {
   calmer: (a, b) => a[1] < b[1] - M,
   quieter: (a, b) => a[1] < b[1] - M,
   stronger: (a, b) => a[1] > b[1] + M,
-  brighter: (a, b) => a[1] > b[1] + M || a[0] > b[0] + M,
+  // "brighter" is banned (David/L15 2026-10-08): it means lighter to some readers and more vivid to others. Say lighter/darker or
+  // more vivid/duller, whichever the Lab difference actually is.
+  brighter: () => false,
   "more vivid": (a, b) => a[1] > b[1] + M,
   "more intense": (a, b) => a[1] > b[1] + M,
   richer: (a, b) => a[1] > b[1] + M,

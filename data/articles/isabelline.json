@@ -1,0 +1,162 @@
+{
+ "slug": "isabelline",
+ "name": "Isabelline",
+ "hex": "#F4F0EC",
+ "names": [
+  "Isabelline",
+  "Isabella Color"
+ ],
+ "tier": "person",
+ "depth": "medium",
+ "lede": "Isabelline is a pale, faintly yellowish grey-white, an old name for the color of undyed linen and of pale dun animals, saddled with one of color history's most persistent bad jokes.",
+ "sections": [
+  {
+   "id": "story",
+   "title": "The story, and why it is wrong",
+   "body": "The tale goes like this. In 1601 Archduke Albert of Austria laid siege to Ostend, and his wife, the Archduchess Isabella Clara Eugenia, vowed not to change her linen until the town fell [1]. The siege lasted three years, and isabelline is the color her linen had become [1]. Other versions move the vow to Queen Isabella of Castile and a different siege [2][3].\n\nIt is a legend, and an easy one to disprove. The story only appears in print in the nineteenth century, and the color name is older than the siege: an inventory of Queen Elizabeth I's wardrobe, taken a year before Ostend was besieged, already lists an isabelline kirtle and a round gown of Isabella-colored satin [1]. Paterson's dictionary records both Isabellas as suggestions, not facts [3], and Finlay tells the Castile version as something the queen *apparently* did [2]. Where the name really came from is undocumented [1][3]."
+  },
+  {
+   "id": "meaning",
+   "title": "What the word meant",
+   "body": "Whatever its origin, the name stuck to an unglamorous color. Paterson defines isabel or isabella as a dingy yellow-grey, and isabelline as greyish-yellow [3]. One writer on lace, in 1900, described it as a greyish coffee shade and, more bluntly, \"the color of dirt\" [1]. Kipling liked the word enough to use it twice [2].\n\nIts lasting home is natural history. Naturalists use it for pale dun animals, among them palomino horses and Himalayan brown bears, and so is the isabelline wheatear, a bird named for its pale dun plumage [1]. *Isabellinism* is a genetic mutation that turns feathers that should be black, grey or brown a washed-out yellowish color; a few king penguins on Marion Island are a well-known example [1]."
+  },
+  {
+   "id": "swatches",
+   "title": "Three swatches, one name",
+   "body": "The swatch at the top of this page is the modern web isabelline: almost white, with only a trace of warmth, lighter than 98 per cent of our core color names [4]. Older color standards put the name much darker. Ridgway's 1912 *Isabella Color* is a mid greyish tan, and Maerz and Paul's 1930 *Isabella* is a warmer, deeper tan; the two older swatches sit 31 and 36 units away from today's version [4][5]. If you meet isabelline in a nineteenth-century book about horses or birds, picture [[isabella-color]], not the near-white."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The two meanings show up very differently in paintings. In our archive of 23,531 works, a color within six units of the web isabelline covers at least five per cent of the canvas in 642, and in every one it is the lightest color on the canvas: a highlight, linen, or paper [6]. Ridgway's darker Isabella Color is among the archive's most frequent colors, present in 4,107 paintings, about one in six; the canvases where it covers the most are old Japanese and Chinese paintings on silk and paper [6]. These are photographs of aged, varnished works, so much of that tan is the yellowing of time itself [6]. Its nearest named neighbors are [[white]], [[seashell]] and [[platinum]] [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "popularly an Isabella (Isabella Clara Eugenia or Isabella of Castile); origin undocumented",
+   "first_recorded": "by 1600 (Elizabeth I's wardrobe inventory, per St Clair)",
+   "source": "St Clair, The Secret Lives of Colour"
+  },
+  "aka": [
+   "isabella",
+   "isabel",
+   "Isabella Color"
+  ],
+  "siblings": [
+   "isabella-color"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   "Isabelline (web) is near-white.",
+   "Isabella Color (Ridgway 1912) and Isabella (Maerz & Paul 1930) are greyish tans."
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "isabelline": {
+   "hex": "#F4F0EC",
+   "n_present": 642,
+   "role_highlight": 1.0
+  },
+  "isabella_color": {
+   "hex": "#A98856",
+   "n_present": 4107
+  },
+  "swatch_gap": {
+   "ridgway": 30.9,
+   "maerz_paul": 36.0
+  },
+  "measured": {
+   "lch": [
+    95.0,
+    2.5,
+    75
+   ],
+   "lightness_pct_core": 98,
+   "chroma_pct_core": 2,
+   "contrast_black": 18.52
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Isabelline\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 2 (\"Black and Brown\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"isabel, isabella\" and \"isabelline\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, data/core-names.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXX; Maerz & Paul, A Dictionary of Color (1930), plate 13 K7 (data/sources/maerz-paul-1930.json); both approximate scans",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What shows the Ostend linen story is a legend?",
+   "choices": [
+    "Elizabeth I owned Isabella-colored clothes before the siege began",
+    "Isabella never married",
+    "Ostend was never besieged",
+    "The color was invented in 1900"
+   ],
+   "answer": "Elizabeth I owned Isabella-colored clothes before the siege began",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: older color standards made isabella much darker than today's web isabelline.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A queen supposedly wore the same underwear for three years. The wardrobe records say otherwise.",
+  "Isabelline lives on in birds: look for the isabelline wheatear.",
+  "Same name, two colors: a near-white on screens, a dun tan in old books."
+ ],
+ "words": 500,
+ "status": "pilot",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Ostend linen legend told only to refute it (St Clair); origin of the name stated as undocumented."
+  ]
+ }
+}
