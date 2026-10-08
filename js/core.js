@@ -299,7 +299,11 @@ function countUp(root) {
   });
 }
 document.addEventListener("load", e => { if (e.target.tagName === "IMG") e.target.classList.add("ld"); }, true);
-addEventListener("scroll", () => document.body.classList.toggle("scrolled", scrollY > 24), { passive: true });
+// The page's real scroll position. In this app <body> is the scroller (html and body both clip overflow-x, body is 100%
+// tall), so window.scrollY stays 0 and every "am I at the top?" check passed while you were mid-article: a scroll-up
+// read as pull-to-close (David). Read whichever element is actually scrolled.
+function pageScrollTop() { return Math.max(window.scrollY || 0, document.body ? document.body.scrollTop : 0, document.documentElement ? document.documentElement.scrollTop : 0); }
+addEventListener("scroll", () => document.body.classList.toggle("scrolled", pageScrollTop() > 24), { passive: true, capture: true });
 
 // Pinterest-style back (ROADMAP.md §17 job #2): every screen's scroll position is remembered against its own
 // address, so landing back on it (the Back button, the swipe-back gesture, or Escape) puts you where you were.
@@ -398,7 +402,7 @@ function roomsBubbleArt(id) {
 }
 function roomsNote(id) {
   try {
-    if (id === "learn") { const n = dueList().length; return n ? `${n} to recall` : "All caught up"; }
+    if (id === "learn") { const n = dueList().length, nu = !n && typeof nextUnit === "function" && nextUnit(); return n ? `${n} to recall` : nu ? `${nu.colors.length} new names` : "All caught up"; }
     if (id === "gym" && typeof todayTrain === "function") return todayTrain().what;
     if (id === "explore") return "Paintings, poems, the world";
     if (id === "studio") return "Wheel, camera, palettes";

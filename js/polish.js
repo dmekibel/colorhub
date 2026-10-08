@@ -36,9 +36,11 @@ function relHexOf(el) {
 }
 function relDecorate(root) {
   if (document.documentElement.classList.contains("booth")) return;   // judged screens: nothing on or near a swatch
-  root.querySelectorAll(REL_SEL).forEach(el => {
-    if (el.closest(".deck,.drill,.station,.meet,.daily,.pk-board")) return;
-    const s = relState(relHexOf(el));
+  root.querySelectorAll(REL_SEL).forEach(row => {
+    if (row.closest(".deck,.drill,.station,.meet,.daily,.pk-board")) return;
+    // a whole list row that carries data-swatch: the mark goes on the row's own chip, not floating at its corner
+    const el = row.offsetWidth > 160 && row.querySelector(":scope > i, :scope > span > i") || row;
+    const s = relState(relHexOf(row));
     if ((el.dataset.rel || "") === s) return;
     if (!s) { delete el.dataset.rel; return; }
     if (el.dataset.rel == null) {   // first time: never take over an ::after the chip already draws

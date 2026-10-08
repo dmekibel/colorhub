@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """Mechanical gate for data/articles/<slug>.json (the article engine, lane L7). Schema: data/articles/SCHEMA.md.
 
@@ -421,7 +422,8 @@ def surprises(slug):
 
 
 def main():
-    args = [x for x in sys.argv[1:] if not x.startswith("--")]
+    # accept slugs or paths ("mauve", "mauve.json", "data/articles/mauve.json")
+    args = [os.path.basename(x)[:-5] if x.endswith(".json") else x for x in sys.argv[1:] if not x.startswith("--")]
     if "--surprises" in sys.argv:
         for s in args:
             print(json.dumps({s: surprises(s)}, ensure_ascii=False, indent=1))

@@ -497,20 +497,20 @@ function hmPullClose(screen, close) {
   let y0 = null, x0 = 0, dy = 0, t0 = 0, on = false, lastScroll = 0;
   const born = performance.now();
   const onScroll = () => { lastScroll = performance.now(); if (!screen.isConnected) removeEventListener("scroll", onScroll); };
-  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("scroll", onScroll, { passive: true, capture: true });
   const reset = () => { screen.style.transition = "transform .35s var(--ease)"; screen.style.transform = ""; };
   screen.addEventListener("touchstart", e => {
     // arm only when the page is resting at the top: not mid-fling (a scroll in the last 180 ms means the finger is
     // catching a page that's still moving), and not in the first moments after the page opened
     // (not on a canvas, a slider or a field: those drags belong to them)
-    if (e.touches.length !== 1 || scrollY > 0 || e.target.closest("canvas,input,textarea,select,[data-nopull]") || document.querySelector(".sheet") || performance.now() - lastScroll < 180 || performance.now() - born < 350) { y0 = null; return; }
+    if (e.touches.length !== 1 || pageScrollTop() > 0 || e.target.closest("canvas,input,textarea,select,[data-nopull]") || document.querySelector(".sheet") || performance.now() - lastScroll < 180 || performance.now() - born < 350) { y0 = null; return; }
     y0 = e.touches[0].clientY; x0 = e.touches[0].clientX; dy = 0; on = false; t0 = performance.now();
   }, { passive: true });
   screen.addEventListener("touchmove", e => {
     if (y0 == null) return;
     const d = e.touches[0].clientY - y0, dx = e.touches[0].clientX - x0;
     if (!on) {
-      if (d > 14 && d > Math.abs(dx) * 1.5 && scrollY <= 0) on = true;
+      if (d > 14 && d > Math.abs(dx) * 1.5 && pageScrollTop() <= 0) on = true;
       else if (Math.abs(dx) > 10 || d < -6) { y0 = null; return; } else return;
     }
     e.preventDefault();

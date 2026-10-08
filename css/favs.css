@@ -292,3 +292,6 @@ html:has(#app > .screen.fv-run){--ground:#5F5F5F;--lift:#676767;--lift-2:#6E6E6E
   .fv-q{min-height:0;padding:10px 0 6px}.fv-q h2{font-size:28px}.fv-pot-n b{font-size:48px}
   .fv-end-top{height:min(30dvh,200px)}
 }
+/* craft pass 2026-10-08: a narrow segment keeps its label on one line ("Warm 1" wrapped to two) */
+.fp-split i{min-width:max-content}
+.fp-split b{white-space:nowrap}
