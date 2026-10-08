@@ -213,9 +213,9 @@ ok(D({ items: ["#262B2D", "#262B2D"], size: 0 }).keys.length === 1, "duplicate c
 ok(D({ seed: "teal", source: "first", size: 20 }).keys.join() === stage50.slice(0, 20).map(n => n.toLowerCase()).join(), "first N, in stage order");
 ok(D({ seed: "teal", source: "alike", size: 5 }).keys.length === 5 && D({ seed: "teal", source: "alike", size: 20 }).keys.length === 20, "size 5 and 20");
 ok(D({ seed: "teal", source: "mixups" }).source === "alike", "no mix-ups yet: falls back to look-alikes");
-run(`(() => { const s = prSession("quiz", {}, []); prRecord(s, prByKey("teal"), { ok: false, answer: { kind: "pick", n: "Dark Aqua", h: "#05696B" } }, "quiz-name"); })()`);
+run(`(() => { const s = prSession("quiz", {}, []); prRecord(s, prByKey("teal"), { ok: false, answer: { kind: "pick", n: "Jouvence Blue", h: "#1B717A" } }, "quiz-name"); })()`);
 d = D({ seed: "teal", source: "mixups", size: 0 });
-ok(d.source === "mixups" && d.keys[0] === "teal" && d.keys.includes("dark aqua"), "a quiz miss records a mix-up pair, and the Mix-ups deck holds it");
+ok(d.source === "mixups" && d.keys[0] === "teal" && d.keys.includes("jouvence blue"), "a quiz miss records a mix-up pair, and the Mix-ups deck holds it");
 ok(D({ seed: "teal", source: "tricky", size: 0 }).keys.includes("teal"), "Tricky as an instant source");
 ok(D({}).source === "first", "no seed and no set: the first 50");
 ok(run(`typeof prQuick === "function" && typeof prLearnSet === "function"`), "the quick sheet and prLearnSet exist");

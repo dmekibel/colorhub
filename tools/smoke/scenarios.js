@@ -294,7 +294,7 @@ scenario("home", "Arrange sheet: Center on and Sort by change the order inside a
 scenario("home", "View sheet: families tell the truth and combine with tone and your words", async t => {
   await H.homeReady(t, "#shot=home:fam:Pinks");
   const names = t.ev("[...new Set(HM_CTRL.studyPoints().pts.map(p => p.n.toLowerCase()))]");
-  for (const n of ["hot pink", "rose", "cerise", "baby pink", "dusky rose", "magenta"]) t.expect(names.includes(n), `Pinks is missing ${n}`);
+  for (const n of ["hot pink", "rose", "cerise", "baby pink", "dusty rose", "magenta"]) t.expect(names.includes(n), `Pinks is missing ${n}`);
   for (const n of ["crimson", "lavender", "pale periwinkle"]) t.expect(!names.includes(n), `Pinks includes ${n}`);
   await H.sheet(t, "colors");
   const fam = t.$('[data-famv="Pinks"]'); t.expect(fam.classList.contains("on"), "the Pinks chip is not on");
