@@ -402,25 +402,31 @@ function ptArrival(el, o) {
   const host = el.querySelector("[data-glarrive]");
   if (!host || !o.hex) return null;
   const hex = o.hex.toUpperCase(), nm = ptNear(hex), st = { tol: o.tol != null ? o.tol : 3 };
-  let res = null, mask = null, sel = -1, on = false, canvas = null, seq = 0, img = null, readable = false, known = false;
+  let res = null, mask = null, sel = -1, on = false, canvas = null, seq = 0, img = null, readable = false, known = false, more = false;
   host.hidden = false;
+  // David, 2026-10-08: the painting stays the focus. The color you came from is one quiet row under the palette
+  // ("You came from Pink purple · covers 0.41% of the canvas · 3rd most-used"); a tap on the row opens how close
+  // counts (Exact, 3%, 10%), how it was measured, and All paintings like this.
   const html = () => {
     const tolTxt = st.tol === 0 ? "exactly this color" : `within ${st.tol}%`;
     let line;
-    if (!res) line = `<span class="pt-ar-line">Measuring ${esc(nm.toLowerCase())} in this painting…</span>`;
-    else if (res.cover > 0) {
-      const rk = res.rank && res.rank.of > 1 ? `, its ${ptNth(res.rank.rank)} most-used color` : "";
-      line = `<span class="pt-ar-line">Your color covers <b>${ptPct(res.cover)}</b> of this canvas${rk}.</span>`;
-    } else if (res.near) line = `<span class="pt-ar-line">Nothing in this painting is ${tolTxt} of your color. The closest it gets is <b>${pctFmt(res.near.de)} different</b>, over ${ptPct(res.near.cover)} of the canvas.</span>`;
-    else line = `<span class="pt-ar-line">Nothing in this painting comes near your color.</span>`;
+    if (!res) line = "measuring…";
+    else if (res.cover > 0) line = `covers <b>${ptPct(res.cover)}</b> of the canvas${res.rank && res.rank.of > 1 ? ` · ${ptNth(res.rank.rank)} most-used` : ""}`;
+    else if (res.near) line = `nothing ${tolTxt}; the closest is ${pctFmt(res.near.de)} different`;
+    else line = "nothing in this painting comes near it";
     const how = !res ? "" : res.coarse ? "Approximate: measured from a 24-color summary of the picture, not its pixels." : `${esc(nm)} · ${tolTxt} · measured pixel by pixel in the museum's photograph.`;
-    host.innerHTML = `<i class="pt-ar-sw" style="--c:${hex}" data-swatch="${hex}"></i><div class="pt-ar-body">${line}<small>${how}</small>
-      <div class="pt-ar-tools"><div class="pt-seg pt-ar-tol">${[0, 3, 10].map(t => `<button data-t="${t}" class="${st.tol === t ? "on" : ""}">${t ? t + "%" : "Exact"}</button>`).join("")}</div>
-      ${readable && res && !res.coarse ? `<button class="pt-ar-map${on ? " on" : ""}" data-map aria-pressed="${on}">${PT_ICON_MAP}<span>${on ? "Hide map" : "Where it lives"}</span></button>` : ""}
-      <button class="pt-ar-all" data-all>All paintings like this</button></div>
+    const canMap = readable && res && res.cover > 0 && !res.coarse;
+    host.classList.toggle("open", more);
+    host.innerHTML = `<div class="pt-ar-row"><i class="pt-ar-sw" style="--c:${hex}" data-swatch="${hex}" role="button" aria-label="Open ${esc(nm)}"></i>
+      <button class="pt-ar-txt" data-more aria-expanded="${more}"><span class="pt-ar-line">You came from <b>${esc(nm)}</b></span><small>${line}</small></button>
+      ${canMap ? `<button class="pt-ar-map${on ? " on" : ""}" data-map aria-pressed="${on}">${PT_ICON_MAP}<span>${on ? "Hide" : "Where it lives"}</span></button>` : ""}</div>
       ${on && mask ? `<div class="pt-ar-reg"><button data-prev aria-label="Previous place">${ICON.back}</button><span>${mask.regions.length ? (sel < 0 ? `${mask.regions.length} ${mask.regions.length === 1 ? "place" : "places"}, tap one` : `Place ${sel + 1} of ${mask.regions.length} · ${ptPct(mask.regions[sel].share * 100)} of the canvas`) : "No place is large enough to map"}</span><button data-next aria-label="Next place">${ICON.chev}</button></div>` : ""}
-      ${known && !readable && res && res.cover > 0 && !res.coarse ? `<small class="pt-ar-why">${o.why ? esc(o.why) : ""}</small>` : ""}
-    </div>`;
+      <div class="pt-ar-more"${more ? "" : " hidden"}>
+        <div class="pt-ar-tools"><div class="pt-seg pt-ar-tol" role="group" aria-label="How close counts">${[0, 3, 10].map(t => `<button data-t="${t}" class="${st.tol === t ? "on" : ""}">${t ? t + "%" : "Exact"}</button>`).join("")}</div>
+        <button class="pt-ar-all" data-all>All paintings like this</button></div>
+        <small>${how}</small>
+        ${known && !readable && res && res.cover > 0 && !res.coarse ? `<small class="pt-ar-why">${o.why ? esc(o.why) : ""}</small>` : ""}
+      </div>`;
   };
   const measure = async () => {
     const my = ++seq;
@@ -501,12 +507,14 @@ function ptArrival(el, o) {
   const setOn = v => {
     on = v; if (on && !mask) buildMask(); else { if (canvas) canvas.style.opacity = on ? 1 : 0; html(); }
     if (!on) sel = -1;
+    if (on && o.onMap) o.onMap();   // the page's own overlay (palette markers) steps aside
   };
   host.onclick = e => {
     const t = e.target.closest("[data-t]");
     if (t) { st.tol = +t.dataset.t; mask = null; sel = -1; buzz(5); return measure(); }
     if (e.target.closest("[data-map]")) { buzz(6); return setOn(!on); }
     if (e.target.closest("[data-all]")) return paintingsOfPage([hex], { tol: st.tol, back: true });
+    if (e.target.closest("[data-more]")) { more = !more; buzz(4); return html(); }
     const step = e.target.closest("[data-next],[data-prev]");
     if (step && mask && mask.regions.length) { const k = mask.regions.length; sel = e.target.closest("[data-next]") ? (sel + 1) % k : (sel - 1 + k * 2) % k; buzz(4); draw(); html(); }
   };
@@ -526,6 +534,8 @@ function ptArrival(el, o) {
       sel = best === sel ? -1 : best; buzz(6); draw(); html(); return true;
     },
     stop() { seq++; },
+    // js/gallery.js: the palette's markers or highlight came on, so this map goes off
+    mapOff() { if (on) setOn(false); },
   };
 }
 

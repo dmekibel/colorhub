@@ -1532,7 +1532,26 @@ scenario("paintings", "a pair's paintings, the masters' chords, and a painting w
   await t.waitFor(".sp-page .sp-pair", 12000, "a pair page opened from a chord");
   await t.open("#/gallery/15146?c=0047ab&t=3", { settle: 800 });
   await t.waitFor(() => /covers/.test(t.text(".pt-arrive")), 14000, "the pinned coverage line");
-  t.expect(t.$(".pt-arrive [data-t]"), "no tolerance switch on the arrival");
+  // David, 2026-10-08: the color you came from sits under the palette, one quiet row; the tolerance opens on a tap
+  t.expect(t.$(".pt-arrive").getBoundingClientRect().top > t.$("[data-glrows]").getBoundingClientRect().top, "the arriving color sits above the palette");
+  t.expect(t.$(".pt-ar-more").hidden, "the arrival's tools are open before a tap");
+  await t.click(".pt-ar-txt", { force: true, wait: 300 });
+  t.expect(t.$(".pt-arrive [data-t]") && !t.$(".pt-ar-more").hidden, "no tolerance switch after a tap on the arrival");
+});
+scenario("paintings", "a painting's On the painting control: numbered Markers that are remembered and a Highlight that dims", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.waitFor(() => { const w = t.$("[data-glwhere]"); return w && !w.hidden && w; }, 15000, "the On the painting control (a local copy, so its pixels can be read)");
+  await t.click('[data-glw="mark"]', { force: true, wait: 400 });
+  const marks = t.$$(".gl-mks .gl-mk:not(.sm)");
+  t.expect(marks.length >= 3, `only ${marks.length} numbered markers`);
+  t.expect(t.$$("[data-glswatches] .gl-n").length === t.$$("[data-glswatches] [data-swatch]").length, "the strip chips aren't numbered like the markers");
+  t.expect(t.ev("S.glWhere") === "mark", "the choice isn't remembered");
+  const hexes = new Set(t.$$("[data-glswatches] [data-swatch]").map(b => b.dataset.swatch));
+  t.expect(marks.every(m => hexes.has(m.dataset.swatch)), "a marker isn't one of the palette's colors");
+  await t.click('[data-glw="lit"]', { force: true, wait: 400 });
+  t.expect(!t.$(".gl-mks .gl-mk") && t.$("[data-gllitcv]").classList.contains("on"), "Highlight didn't swap the markers for the dimmed painting");
+  await t.click('[data-glw="off"]', { force: true, wait: 300 });
+  t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "Off left the painting dimmed");
 });
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
@@ -1983,7 +2002,8 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   // David, 2026-10-08: the palette is right under the painting, and both fit one screen so you can change types and sizes
   const heroB = t.$(".gl-hero>span").getBoundingClientRect().bottom, stripB = t.$("[data-glswatches]").getBoundingClientRect().bottom;
   t.expect(stripB <= t.ev("innerHeight"), `the palette strip sits below the first screen (${Math.round(stripB)})`);
-  t.expect(t.$("[data-glorder]").getBoundingClientRect().top - heroB < 40, "the palette types aren't right under the painting");
+  t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - heroB < 24, "the palette strip isn't right under the painting");
+  t.expect(t.$("[data-glorder]").getBoundingClientRect().top - stripB < 24, "the palette types aren't right under the strip");
   const nTypes = t.$$("[data-glorder] [data-glo]").length;
   t.expect(nTypes >= 5, `only ${nTypes} palette types`);
   await t.click('[data-glo="shadows"]', { wait: 300 });
