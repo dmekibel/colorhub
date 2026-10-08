@@ -3,9 +3,18 @@
 The Looks archive (Explore > Ideas > Looks, data in `data/looks.js`, code in `js/looks.js`) collects visual styles: art movements, design eras, film and photo looks, and internet aesthetics. David's rule: a look is more than one palette, so every look has 2 to 3 named palettes (Seapunk has 1).
 
 ## Counts
-- **69 looks**: 13 art movements, 21 design eras, 8 film and photo looks, 27 internet aesthetics (the `cat` field).
-- **155 named palettes**, 925 colors, 4 to 7 colors each, with proportions.
+- **104 looks** (October 2026 update, +35): 13 art movements, 21 design eras, 8 film and photo looks, 62 internet aesthetics (the `cat` field).
+- **200 named palettes** across all looks, 4 to 7 colors each, with proportions.
 - No photographs yet: no look carries an `img` list (the page code supports one: Commons images, public domain or CC0 only, with credit and file page).
+
+## October 2026 expansion: harvesting the Aesthetics Wiki
+David's brief was "we are the Aesthetics Wiki on steroids" — go deeper into internet aesthetics. This pass used the live Fandom MediaWiki API (`aesthetics.fandom.com/api.php`, polite one-request-per-second, a descriptive User-Agent) to:
+1. List every page in `Category:Aesthetics Wiki Articles` (1,184 titles) — used only to confirm a slug is real before writing an `aw` link, same as the original 69.
+2. Fetch the infobox wikitext (`action=parse&prop=wikitext`) for ~50 well-documented internet aesthetics, extracting structured facts only — `decade_of_origin`, `key_colours`, `key_motifs`, `related_aesthetics`, `other_names` — never prose. Those facts grounded each new look's era, origin note and palette; every sentence of essence/origin/fuzzy text is original, written for this archive, same method as research/LOOKS.md's existing rule. Nothing from the wiki's prose or images was copied; no wiki images were used.
+3. Of those ~50, 35 had enough real, distinct color identity to become full looks (2-3 palettes each, 1 for a few thin ones); about 15 were skipped as too vague for an honest single-color-identity entry (Rustic, Lolita's broader parent page, Maximalism/Minimalism as movements rather than looks, etc.) or already covered by an existing look.
+4. Every new palette's colors are named by the same nearest-`data/library.json`-entry script as the original 69 (CIEDE2000, `tools/colormath.js`); max distance in this batch is 4.4 ΔE, in line with the existing median.
+
+This is a first pass toward David's larger "aesthetics wiki on steroids" vision (deeper per-aesthetic pages with many measured palettes, an aesthetic map/influence graph, image-derived palette clustering from the wiki's own photos, shareable palette cards). Those are each substantial builds of their own and are intentionally **not** attempted in this pass — flagged as follow-up work, not silently dropped.
 
 ## What each look holds
 id, name, a one-line essence, era, origin note (where the term comes from and when it spread, hedged), an honest "how fuzzy is it" note, light quality, materials, motifs, mood words, related looks (links between looks), palettes, an optional Aesthetics Wiki page slug (`aw`), and optional Commons images (`img`).
