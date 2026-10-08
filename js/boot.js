@@ -104,6 +104,7 @@ function shot(name) {
     case "gymres": return stationDone({ k: arg || "neutral", est: 3.2, before: 4.1, pb: true, best: 3.2 });
     case "closeup": return closeup(g().nodes.get(arg || "c:Cobalt"));
     case "name": return namesShot(arg);   // js/names.js: name:<slug>[@scrolldown], e.g. name:ecru or name:seafoam-green@700
+    case "tapped": return (CORE_NAMES ? Promise.resolve() : loadCoreNames()).then(() => { XSTACK = []; openTappedColor(arg || "#967989"); });   // an in-between hex, never an exact name: tapped:<hex>
     // a honeycomb tap on a non-101 bubble, from a bigger stage (js/home.js hmOpenName): hmname[:stage]
     case "hmname": { S.hm = S.hm || {}; S.hm.src = "stage:" + (arg || "400"); return loadCoreNames().then(() => { const item = hmStageItems(+(arg || 400)).find(it => !it.c); return item ? hmOpenName(item) : hmHome(); }); }
     case "page": return openNode(g().nodes.get(arg || "alchemy"));

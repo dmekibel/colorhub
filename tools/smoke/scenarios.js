@@ -463,6 +463,42 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
   t.expect(sawYours >= 1, "none of the in-between colors showed a 'Your color' page");
 });
 
+scenario("pages", "a world twin (In gems) opens its page in one tap, Back returns to the color", async t => {
+  await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
+  const d = await t.waitFor(() => t.$('[data-rp-drawer="world"]'), 8000, "the 'In the world' drawer");
+  await t.waitFor(() => !d.hidden && t.$$("[data-to]", d).length > 0, 10000, "a twin row (gem, flower, fashion or film) in the world drawer");
+  if (!d.open) await t.click(d.querySelector("summary"), { wait: 200 });
+  const row = t.$$("[data-to]", d).find(e => /^gm:/.test(e.dataset.to)) || t.$$("[data-to]", d)[0];
+  t.expect(row, "no twin row to tap");
+  const id = row.dataset.to;
+  await t.click(row, { wait: 700 });
+  await t.waitFor(() => !t.$(".cp-page .cp-hero-foot h1") || H.title(t) !== "Fiery Rose", 8000, `the twin page for ${id} to open`);
+  t.expect(t.$("#app").innerText.length > 100, `the page for ${id} is empty`);
+  t.notes.push(`Fiery Rose > ${id}`);
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Fiery Rose", 8000, "Back to return to Fiery Rose");
+});
+
+scenario("pages", "hold the cover: the flower rises, dragging lights a hex, letting go opens that color; Back returns", async t => {
+  await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
+  const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();
+  const ev = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 7, pointerType: "touch", isPrimary: true, view: t.w });
+  hero.dispatchEvent(ev("pointerdown", r.left + r.width / 2, r.top + r.height / 3));
+  await t.sleep(520);
+  t.expect(t.$(".rp-hold .rp-flower"), "holding the cover did not raise the flower");
+  const hex = t.$$(".rp-hold .rp-hex[data-h]")[0];
+  t.expect(hex, "the flower has no neighbor to walk to");
+  const hr = hex.getBoundingClientRect(), name = hex.dataset.n;
+  hero.dispatchEvent(ev("pointermove", hr.left + hr.width / 2, hr.top + hr.height / 2));
+  await t.sleep(150);
+  t.expect(hex.classList.contains("hot"), "dragging onto a hex did not light it");
+  hero.dispatchEvent(ev("pointerup", hr.left + hr.width / 2, hr.top + hr.height / 2));
+  await t.waitFor(() => !t.$(".rp-hold") && t.$(".cp-page .cp-hero-foot h1") && H.title(t) !== "Fiery Rose", 8000, `letting go on ${name} to open its page`);
+  t.notes.push(`Fiery Rose > ${H.title(t)} (hold-to-walk)`);
+  await H.back(t);
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Fiery Rose", 8000, "Back to return to Fiery Rose");
+});
+
 scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
@@ -847,6 +883,9 @@ scenario("paintings", "a pair page, the masters' chords, and a painting with its
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  // it lives in the "In paintings" field-note drawer (closed until a tap, like a thumb would)
+  const dr = sec.closest("details");
+  if (dr && !dr.open) await t.click(dr.querySelector("summary"), { wait: 300 });
   sec.scrollIntoView();
   await t.waitFor("[data-pt-quick] [data-pre-tol]", 15000, "the tolerance presets");
   await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0 || /No painting/.test(t.text("[data-pt-lead]")), 20000, "the rail or an honest empty line");

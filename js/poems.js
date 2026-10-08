@@ -253,11 +253,22 @@ function poemGlossSheet(key, text) {
 // ======================================================================
 // "In poems" on a color page
 // ======================================================================
+// If this exact word names no poem lines, fall back to the nearest color word the poem index knows and say so
+// (David, 2026-10-08: no almost-empty pages; most of the library's ~2,700/~1,000 names
+// are never the exact word a poem uses, but a nearby word usually is).
 async function colorPoems(el, c) {
   if (!el) return;
   const ix = await loadPoemIndex(); if (!ix || !el.isConnected) return;
-  const ci = ix.colorByName.get(c.n.toLowerCase());
-  const best = ci != null && ix.best[ci];
+  let name = c.n, h = c.h, note = "";
+  let ci = ix.colorByName.get(name.toLowerCase());
+  let best = ci != null && ix.best[ci];
+  if (!best || !best.length) {
+    // no poem line names this word: fall back to the nearest color word the poem index does know (it has ~60,
+    // "green", "rose", "gold"...) and say so plainly, with how close it is
+    const L0 = lab(c.h); let near = null;
+    ix.colors.forEach((x, i) => { if (!(ix.best[i] && ix.best[i].length)) return; const d = de2000(L0, x[1]); if (!near || d < near.d) near = { i, n: x[0], h: x[1], d }; });
+    if (near && near.d <= 32) { ci = near.i; best = ix.best[ci]; name = near.n; h = near.h; note = `<p class="fine">No poem line names ${esc(c.n.toLowerCase())} itself; here are poems with <b>${esc(near.n.toLowerCase())}</b>, the nearest color word poets use (${pctMatch(near.d)}).</p>`; }
+  }
   if (!best || !best.length) { el.remove(); return; }
   // lines that carry their text in the index come first; fetch the rest only if there are too few
   let items = best.filter(b => b.length > 2).slice(0, 6);
@@ -271,13 +282,13 @@ async function colorPoems(el, c) {
   }
   if (!el.isConnected) return;
   const count = ix.list.filter(p => p.pal.some(([x]) => x === ci)).length;
-  el.innerHTML = `<section class="pm-in"><h3>In poems</h3>${items.map(([id, li, text, s, e]) => {
+  el.innerHTML = `<section class="pm-in"><h3>In poems</h3>${note}${items.map(([id, li, text, s, e]) => {
     const p = ix.byId.get(id); if (!p) return "";
-    return `<button class="pm-q" data-poem="${esc(id)}"><span class="pm-q-line">${markLine(text, [[s, e, poemWord(text.slice(s, e), c.h)]])}</span><small>${esc(p.poet)} · ${esc(p.title)}</small></button>`;
-  }).join("")}${count > items.length ? `<button class="btn ghost" data-allpoems>All ${count.toLocaleString()} poems naming ${esc(c.n.toLowerCase())} ${ICON.arrow}</button>` : ""}</section>`;
+    return `<button class="pm-q" data-poem="${esc(id)}"><span class="pm-q-line">${markLine(text, [[s, e, poemWord(text.slice(s, e), h)]])}</span><small>${esc(p.poet)} · ${esc(p.title)}</small></button>`;
+  }).join("")}${count > items.length ? `<button class="btn ghost" data-allpoems>All ${count.toLocaleString()} poems naming ${esc(name.toLowerCase())} ${ICON.arrow}</button>` : ""}</section>`;
   el.addEventListener("click", e => {
     const p = e.target.closest("[data-poem]"); if (p) { POEM_ORIGIN = "explore"; return poemPage(p.dataset.poem); }
     // the old Poems lens is gone (merged into Art, DESIGN-SYSTEM §12): Art finds the same poems by picking this color's own bubble
-    if (e.target.closest("[data-allpoems]")) artOpenColor(c.h, c.n);
+    if (e.target.closest("[data-allpoems]")) artOpenColor(h, name);
   });
 }
