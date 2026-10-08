@@ -623,7 +623,10 @@ MP_NEW_DE = 2.5  # CIEDE2000: tighter than ISCC_DE (8) on purpose -- these are r
 
 
 def load_maerz_paul_rows():
-    lines = (ROOT / "data" / "sources" / "maerz-paul-1930.json").read_text(encoding="utf-8").splitlines()
+    # the OCR'd names are noisy (research/MAERZ-PAUL.md s7); tools/maerz_filter.py writes the cleaned subset, which is what merges
+    clean = ROOT / "data" / "sources" / "maerz-paul-1930-clean.json"
+    raw = ROOT / "data" / "sources" / "maerz-paul-1930.json"
+    lines = (clean if clean.exists() else raw).read_text(encoding="utf-8").splitlines()
     return [json.loads(l) for l in lines[1:] if l.strip()]
 
 
@@ -765,8 +768,10 @@ def build():
     mp_rep = None
     if mp_path.exists():
         entries, mp_rep = merge_maerz_paul(entries, app)
+    import library_final as LF   # canonical cards, English titles, field, useRank, teach flags (tools/library_final.py)
+    entries, _ = LF.finalize(entries, app_rows, report=True)
     entries.sort(key=sort_key)
-    order = ["n", "h", "src", "fam", "lch", "app", "alts", "altn", "approx", "werner", "jp", "note", "crude"]
+    order = LF.ORDER
     lines = [json.dumps({k: e[k] for k in order if k in e}, ensure_ascii=False, separators=(",", ":")) for e in entries]
     OUT.write_text("[\n" + ",\n".join(lines) + "\n]\n", encoding="utf-8")
     counts = {s: len(per[s]) for s in SOURCES}

@@ -1,0 +1,409 @@
+{
+ "slug": "prussian-blue",
+ "name": "Prussian Blue",
+ "hex": "#003153",
+ "names": [
+  "Prussian Blue"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Prussian blue is a deep, slightly green-leaning blue made by accident in Berlin around 1705: the first cheap, strong blue painters ever had, the blue of blueprints and of Hokusai's wave, and the pigment that gave cyanide its name rather than the other way round.",
+ "sections": [
+  {
+   "id": "discovery",
+   "title": "An accident in Berlin",
+   "body": "Around 1704 or 1705 a Berlin color-maker named Diesbach set out to make a red: a lake pigment from cochineal, which needed an alkali [1][10]. He ran short and borrowed potash from the alchemist Johann Konrad Dippel, potash that had been contaminated with an oil Dippel distilled from animal blood [1][9]. Instead of red, the batch went pale, then purple, then a deep blue [13][14].\n\nIn chemical terms the blood oil had turned the alkali into potassium ferrocyanide, still called *Blutlaugensalz* in German, and that combined with iron sulphate to make iron ferrocyanide [1]. The color itself comes from electrons: when the crystal absorbs red light, an electron hops across a cyanide bridge between two iron atoms of different charge [2]. Its grains are so fine that the paint is translucent, yet a speck of it turns a pile of white strongly blue [1].\n\nThe story is told with confidence, but its details are not settled. Dates in our books run from 1704 to 1710, Pastoureau says nothing is known of Diesbach, not even his first name, while other authors call him Heinrich or Johann Jacob, and Pastoureau stresses that the exact circumstances remain unclear [7][8][13][14]. The first printed notice was an anonymous Latin report published in Berlin in 1710, which praised the new blue as equal to or better than ultramarine and declared it harmless enough to paint sugar sweets [1][7]."
+  },
+  {
+   "id": "names",
+   "title": "Berlin, Paris, Milori, Antwerp",
+   "body": "One substance collected many names. Dippel sold it as Berlin blue, and nineteenth-century German writers mostly kept that name or Paris blue rather than Prussian [7][14]. Paris blue came from Diesbach's pupil De Pierre, who made the pigment in Paris [1]; later writers also used Paris blue for a violet-tinted kind [15]. Milori blue began as the product of Milori and Company, colormen of Lyon, and became one more synonym [15]. Antwerp blue was a paler, lighter form cut with white alumina [15], and in the United States it was simply iron blue [1]. In Japan it became *bero*, from the Dutch for Berlin blue [24].\n\nThe recipe stayed a trade secret for twenty years, until John Woodward published it in London in 1724 [1][12]. By 1750 it was made across Europe [1][12]. Henry David Thoreau later grumbled that so many color names came from obscure foreign places, citing Naples yellow and Prussian blue [22].\n\nOld color books did not always treat the names as one color. Werner's 1821 *Nomenclature*, as revised by Syme, lists Prussian Blue and Berlin Blue separately, matching Prussian Blue to the beauty spot on a mallard drake's wing and the stamens of a bluish-purple anemone, and Berlin Blue to a jay's wing feathers and the hepatica flower [21]. Baty notes that Syme mixed nearly all his blues from Berlin blue, so that his Prussian blue was Berlin blue darkened with black and indigo [20]. In our library the two swatches now sit 36 units apart, which says more about aged color plates than about chemistry [27]."
+  },
+  {
+   "id": "price",
+   "title": "A blue for everyone",
+   "body": "Before 1704 a painter's good blues were ultramarine, ground from lapis lazuli at enormous cost, azurite, smalt and indigo [2]. The 1710 report opened by lamenting that oil painters had few satisfactory blues [2]. Prussian blue cost about a tenth as much as ultramarine, which sold for two guineas a pound as late as 1770 [1][12].\n\nCheapness changed where blue could go. It largely replaced the cheap copper blues called verditers, and it was made mainly for the textile trade, not for artists [6]. Americans used it as house paint from at least 1723 [1]. Jacob Le Blon chose it as the blue plate in his early experiments with three-color printing, though it was a shade too green for the job [5]. In 1842 John Herschel used light-sensitive iron salts to print white lines on Prussian-blue paper, the process that gave architects and engineers the blueprint [10][12].\n\nIt even crossed into dyeing. When Napoleon's blockade of 1806 cut France off from tropical indigo, Prussian blue was among the substitutes tried on uniform wool, and it failed [17]. It was later developed into a dye, the first real alternative to indigo, and dishonest traders sometimes cut indigo with it [17]."
+  },
+  {
+   "id": "painters",
+   "title": "On the palette",
+   "body": "Painters took it up fast. Gainsborough and Watteau used it, as did Hogarth, Blake and Constable [1], and Paterson notes that Canaletto relied on it heavily for his skies [16]. The flower painter Jan van Huysum mixed his greens with indigo in the 1710s and with Prussian blue by 1736 [11]. Delacroix's colorman even sold a brown made by heating Prussian blue, *brun de Prusse* [18].\n\nIn the nineteenth century it was everywhere. It is in the blues of Monet and in Van Gogh's *[[art:nga-46626|La Mousmé]]* of 1888 [1]. Van Gogh described dunes with bushes of Prussian blue in a letter [4], and as a piano pupil in 1885 he compared the notes to colors running from Prussian blue to cadmium yellow until his teacher decided he was mad [18]. Gauguin, who avoided black, used Prussian blue and ultramarine unmixed in its place [4]. Ball suggests Picasso chose it for the Blue Period because its slightly greyish-green tone suited melancholy better than cobalt or ultramarine [1].\n\nMixed with chrome yellow it gave the century its cheap bright greens, and the mixture has aged badly. The greens of Millais's *Ophelia* were made this way [11], and in Seurat's *[[art:aic-27992|A Sunday on La Grande Jatte]]* the Prussian blue and chrome yellow lawn has dulled toward brown [19]."
+  },
+  {
+   "id": "fading",
+   "title": "A blue that fades and comes back",
+   "body": "Prussian blue's weakness is light. It fades in strong sun, especially when mixed with a lot of white, and alkalis break it down, which rules it out of some paints [2][7]. The skies of some Gainsborough, Watteau and Canaletto paintings have turned pearly and washed out where they were once a deeper blue [2]. The eighteenth-century writer Dossie warned that the lightest, brightest varieties, the ones made with white alumina, were the worst [2].\n\nIt also does something stranger. In 1834 the painter Franz Fernbach decorated an outdoor shelter with Prussian blue, found it almost gone after a day in the sun, and came back next morning to find the color fully restored [2]. George Field noticed the same habit of recovering in the dark [2]."
+  },
+  {
+   "id": "japan",
+   "title": "Hokusai's blue",
+   "body": "The pigment reached Japan through Dutch and Chinese traders [24]. It arrived only sporadically from the 1780s, for painters, and was little used in prints until about 1830, when competition between the two groups of importers brought the price down and the supply up [24]. A fan print by Keisai Eisen dated 1829, now in the Brooklyn Museum, is thought to be the earliest datable print made entirely in this blue [24].\n\nHokusai's *Thirty-six Views of Mount Fuji*, published by Nishimura Yohachi from about 1830 to 1832, was first advertised as a series of *aizuri-e*, prints in blue, made with *bero* [24][25]. Hokusai used the new blue extensively, and the series helped make it popular [25]. It was a strong, saturated blue that held up in printing ink, and its arrival coincided with a new genre, the landscape print [24].\n\nThe Japanese lists of traditional colors in our library include Konjō-iro, glossed as Prussian blue color, which sits about five units from this page's swatch [27]. For the older Japanese blue, *ai*, see [[indigo]]."
+  },
+  {
+   "id": "myths",
+   "title": "Cyanide, and other stories",
+   "body": "A persistent rumor says Prussian blue is poisonous, or that it releases prussic acid, which is hydrogen cyanide [7]. It does not: the pigment is not significantly toxic, Pastoureau suspects the rumor owes something to Dippel's bad reputation, and the 1710 report was largely right about the sugar sweets [1][7][8]. Prussian blue is even used as a medicine, to treat poisoning by thallium and radioactive caesium [12].\n\nThe confusion runs the other way round. In 1752 Pierre Macquer split Prussian blue into iron oxide and a volatile part, and in 1782 Carl Wilhelm Scheele prepared hydrogen cyanide from the pigment [23]. German named the new poison *Blausäure*, blue acid, English followed with prussic acid, and the word cyanide was built from the Greek *kyanos*, dark blue, because of where it came from [23]. The poison is named after the paint, not the paint after the poison.\n\nTwo smaller stories show how slippery a pigment name can be. In 1792 a Spanish priest in New Mexico reported that Zuni people gathered free Prussian blue from a mineral spring; it was really ground azurite [15]. In the 1880s a Polish rabbi revived a sacred blue dye supposedly made from squid, and in 1913 Isaac Herzog had it analysed: it was Prussian blue made with iron filings [29]. In 1958 Binney and Smith renamed its Prussian blue crayon [[midnight-blue|Midnight Blue]], after teachers complained that children could not relate to Prussian history [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "On screen, this swatch is darker than 96 per cent of our core color names, with a contrast of more than 13 to 1 against white [27]. Its closest named neighbors are [[yale-blue]], [[indigo-dye]] and [[konjo-iro]], all within six units [27].\n\nIn our archive of 23,531 paintings, a color within six units of it covers at least five per cent of the canvas in only 33 works [26]. In 85 per cent of them it is among the darkest colors of the painting, a shadow rather than a sky [26]. The surprise is the date: eight of the 33 were painted in the 1400s, six times the archive's rate, centuries before the pigment existed [26]. Those deep blues are something else, such as azurite, ultramarine, indigo or darkened varnish, which is the whole lesson of a color archive: a color is not a pigment [26]. Ball names *La Mousmé* as a Prussian blue painting [1]. Our reading finds a dusky blue covering eight per cent of its canvas, about eight units from this swatch: close but not identical, as you would expect of a pigment mixed with white and photographed under varnish [26].\n\nThe phrase itself had its day early. In Google Books, *Prussian blue* is printed most around 1808, falls to a quarter of that by 1900, and has stayed at a few per cent since 1980 [28]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Prussia (Berlin, its capital, where it was made)",
+   "first_recorded": "1710 (anonymous Berlin report)",
+   "source": "Ball, Bright Earth, ch. 18"
+  },
+  "aka": [
+   "Berlin blue",
+   "Paris blue",
+   "Milori blue",
+   "iron blue",
+   "bero (Japan)",
+   "Konjō-iro"
+  ],
+  "siblings": [
+   "berlin-blue",
+   "paris-blue",
+   "konjo-iro",
+   "antwerp-blue"
+  ],
+  "parent": null,
+  "children": [
+   "midnight-blue"
+  ],
+  "disambiguation": [
+   "Prussian Red (Ridgway 1912) is an unrelated brownish red.",
+   "Werner's Berlin Blue swatch is far paler than this one: same pigment name, different aged plates."
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Berliner Blau, Preußischblau"
+   },
+   {
+    "lang": "fr",
+    "name": "bleu de Prusse"
+   },
+   {
+    "lang": "ja",
+    "name": "bero, Konjō-iro (紺青色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+  "match": {
+   "hex": "#003153",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 33,
+  "before_pigment": {
+   "century": 1400,
+   "hits": 8,
+   "lift": 6.0
+  },
+  "role": {
+   "shadow": 0.85,
+   "mid": 0.15
+  },
+  "company": [
+   {
+    "word": "Navy",
+    "lift": 68.4
+   }
+  ],
+  "top_paintings": [
+   "nga-12139",
+   "cma-117843",
+   "commons-Q2179157",
+   "smk-KMSsp40",
+   "nga-41598",
+   "smk-KMS3427"
+  ],
+  "la_mousme": {
+   "id": "nga-46626",
+   "hex": "#303F5D",
+   "cover": 0.08,
+   "de2000": 7.6
+  },
+  "ngram": {
+   "peak": 1808,
+   "rel_1900": 0.25,
+   "rel_1980": 0.07
+  },
+  "measured": {
+   "lch": [
+    19.3,
+    24.9,
+    269
+   ],
+   "lightness_pct_core": 4,
+   "contrast_white": 13.43,
+   "nearest": [
+    [
+     "Yale Blue",
+     4.2
+    ],
+    [
+     "Indigo Dye",
+     5.4
+    ],
+    [
+     "Konjō-iro",
+     5.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 10 and note 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 37",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 308-309",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 8 (\"Blue\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14-15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Prussian blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 139",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 43, 308-309",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 33, 275, 304, 409-410",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Prussian blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 68, 122, 245",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 236, 299",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 41; Pastoureau, Yellow, ch. 33",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 30, 92",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Syme, Werner's Nomenclature of Colours (1821), Blues nos. 25 and 31 (public domain)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "data",
+   "cite": "Thoreau, Excursions (1863), in ColorHub passages (data/passages.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "web",
+   "cite": "Wikipedia, \"Hydrogen cyanide\", History",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Hydrogen_cyanide"
+  },
+  {
+   "n": 24,
+   "kind": "web",
+   "cite": "Scholten Japanese Art, \"Blue Print\" exhibition notes",
+   "loc_kind": null,
+   "url": "https://scholten-japanese-art.com/blueprint.php"
+  },
+  {
+   "n": 25,
+   "kind": "web",
+   "cite": "Wikipedia, \"Thirty-six Views of Mount Fuji\" (citing Calza, Hokusai, 2003)",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Thirty-six_Views_of_Mount_Fuji"
+  },
+  {
+   "n": 26,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, data/core-names.json), CIEDE2000 and WCAG contrast",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 29,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 10 (\"Violet\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Prussian blue was discovered while its maker was trying to make which color?",
+   "choices": [
+    "A red lake from cochineal",
+    "A green from copper",
+    "A black ink",
+    "A yellow from saffron"
+   ],
+   "answer": "A red lake from cochineal",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Prussian blue releases cyanide.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why do some old Prussian-blue skies look pale and washed out?",
+   "choices": [
+    "The pigment fades in strong light, especially mixed with white",
+    "Painters diluted it with water",
+    "It turns into indigo",
+    "Varnish makes blues lighter"
+   ],
+   "answer": "The pigment fades in strong light, especially mixed with white",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A color-maker tried to make red, borrowed some contaminated potash, and got the first cheap strong blue in history.",
+  "The poison cyanide was named after this paint, not the other way round.",
+  "Find it in blueprints, in Hokusai's waves and in the dark corners of Picasso's Blue Period."
+ ],
+ "words": 1654,
+ "status": "pilot",
+ "checked": {
+  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "date": "2026-10-08",
+  "issues": [
+   "Discovery date and Diesbach's first name differ across books: stated as unsettled.",
+   "Cyanide myth corrected; Hokusai/Japan facts from two web sources (Scholten exhibition notes, Wikipedia citing Calza), not the books: medium confidence.",
+   "Archive: 8 of 33 matches predate the pigment; text says so."
+  ]
+ }
+}
