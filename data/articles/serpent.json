@@ -12,7 +12,7 @@
   {
    "id": "swatch",
    "title": "A green with a snake's name",
-   "body": "Serpent is a grayish green with a snake's name, and the name is nearly all the sources tell us. Our swatch, #647E74, comes from Maerz and Paul's 1930 dictionary, plate 29 D 5, which gives 1892 as its first recorded use [1]. The closest ISCC-NBS block is grayish green, 5.1 units away on the CIEDE2000 scale, and its Munsell notation is 8.4G 5.0/2.2 [1]. Who first used the word for a color, and why, is undocumented in the sources we hold [1].\n\nIts nearest named colors are [[deep-bluish-grey-green]], [[deep-greyish-blue-green]], [[hydro]] and [[xanadu]] [1]. The nearest cut stone in our data is [[gem:turquoise|turquoise]], 6.8 units away, a greener and more iron-rich variety [1]. A livelier cousin is [[sage]], and the plant-green family is described under [[moss]]."
+   "body": "Serpent is a grayish green with a snake's name, and the name is nearly all the sources tell us. Our swatch, #647E74, comes from Maerz and Paul's 1930 dictionary, plate 29 D 5, which gives 1892 as its first recorded use [1]. The closest ISCC-NBS block is grayish green, 5.1 units away on the CIEDE2000 scale, and its Munsell notation is 8.4G 5.0/2.2 [1]. Who first used the word for a color, and why, is undocumented in the sources we hold [1].\n\nIts nearest named colors are [[deep-bluish-grey-green]], [[deep-greyish-blue-green]], [[hydro]] and [[xanadu]] [1]. The nearest cut stone in our data is [[gem:turquoise|turquoise]], 6.8 units away [1]. A livelier cousin is [[sage]], and the plant-green family is described under [[moss]]."
   },
   {
    "id": "bestiary",
@@ -27,7 +27,7 @@
   {
    "id": "myths",
    "title": "Legends with serpents in them",
-   "body": "Two stories tie serpents to the history of color, and both are legends. The first is that murexide, a purple dye, came from the excrement of serpents. Garfield records that this was said, but its true source was bird droppings [7]. The second is that the German chemist Kekulé saw the ring of the benzene molecule in a dream of a serpent devouring its tail [8]. Ball calls the tale the stuff of legend and asks how much Kekulé embroidered it in his later accounts, noting that all we can be sure of is the published record [8].\n\nA third, from Essex, is the pamphlet *The Flying Serpent* of 1669, which reported a winged dragon seen near Saffron Walden on 27 May 1668 [10]. It is a report of a sighting, not a color source, and St Clair offers it only as a sign of the last years in which dragons, and their blood, were widely believed in [10]."
+   "body": "Two stories tie serpents to the history of color, and both are legends. The first is that murexide, a purple dye, came from the excrement of serpents. Garfield records that this was said, but its true source was bird droppings [7]. The second is that the German chemist Kekulé saw the ring of the benzene molecule in a dream of a serpent devouring its tail [8]. Ball calls the tale the stuff of legend and asks how much Kekulé embroidered it in his later accounts, noting that all we can be sure of is the published record [8].\n\nA third, from Essex, is the pamphlet *The Flying Serpent* of 1669, which reported a winged dragon seen in Essex on 27 May 1668, with men from Saffron Walden going after it [10]. It is a report of a sighting, not a color source, and St Clair suggests it may have been a last-gasp appearance of a creature about to vanish into myth, and with it the dragon's blood pigment [10]."
   },
   {
    "id": "field",
@@ -203,17 +203,16 @@
   "In medieval bestiaries most serpents were green, and the color signaled an evil nature.",
   "A dull, desaturated green was how medieval artists made dragons and serpents look wet and viscous."
  ],
- "words": 802,
+ "words": 806,
  "status": "checked",
  "checked": {
-  "by": "L7 article engine (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "The color name's origin is undocumented in all sources; article is honest and short, built on the green-serpent tradition.",
-   "Desaturated greens for viscosity is Pastoureau's claim about medieval art, linked to the swatch by interpretation.",
-   "Murexide and Kekule serpent stories are corrected/hedged as legends.",
-   "The Flying Serpent date: 1668 sighting, 1669 pamphlet per St Clair notes.",
-   "Archive matches are look-alike colors on aged photographs."
+   "Removed the unsupported \"greener and more iron-rich variety\" description of turquoise.",
+   "Flying Serpent: sighting placed in Essex with Saffron Walden men in pursuit (St Clair), and the \"last years of belief\" claim softened to St Clair's own hedged suggestion.",
+   "Bestiary, green-eyes, viscous/desaturated, sandragon, murexide, Kekule and Rainbow Serpent claims traced to Pastoureau, Garfield, Ball, Finlay, St Clair: supported; legends already framed as legends.",
+   "Name origin is undocumented; stated as such. Chroma percentile is from our data, not a book."
   ]
  }
 }

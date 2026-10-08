@@ -1,0 +1,249 @@
+{
+ "slug": "bright-orange",
+ "name": "Bright Orange",
+ "hex": "#FF5B00",
+ "names": [
+  "Bright Orange"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Bright Orange is a fully saturated, red-leaning orange (#FF5B00), a plain-language name that the books use as a description far more often than as a defined color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A description, not a standard",
+   "body": "Bright Orange is less a named color than a plain description [1][11]. Our library files #FF5B00 under that name from a 2010 color survey, and places it in ISCC-NBS 1955 block 48 [11]. No pigment, dye or historical standard is attached to it.\n\nThe books reach for the phrase when they define older, firmer names. Paterson's dictionary calls helio a bright orange, red lead a bright orange or red toxic pigment, and scarlet and poppy bright orange-reds [1]. So the phrase marks a neighborhood of the color wheel, and its neighbors [[orange]], [[red-orange]] and [[scarlet]] have the histories."
+  },
+  {
+   "id": "word",
+   "title": "How orange became a color",
+   "body": "The color is named after the fruit, not the other way round. The fruit was probably first grown in China, and its name passed through Persian, Arabic, Sanskrit, Spanish and French before reaching English [2]. St Clair says orange as a color name only emerged in the sixteenth century, and that English speakers before then used the awkward word *giolureade*, meaning yellow-red [2]. One early adjective use is from 1502, when sleeves of \"orenge color\" sarsenet were bought for Margaret Tudor [2].\n\nSt Clair adds that several colors that now look plainly orange, minium among them, were once thought of as red or yellow [2]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "St Clair credits the Impressionists with showing orange's power, pointing to the orange sun at the center of Monet's *Impression, Sunrise*, and to the pairing of bright chrome and cadmium pigments with blue in the work of Toulouse-Lautrec, Munch, Gauguin and Van Gogh [2]. Gage describes Van Gogh's copy of a Hiroshige print as heightening the colors and adding a wholly invented bright orange frame [3]. Finlay notes the startling bright orange gown of John in Michelangelo's unfinished *Entombment* at the National Gallery in London [4].\n\nNone of these passages ties the color to a particular pigment, and the nineteenth-century chrome and cadmium oranges are told in [[cadmium-orange]] [2]."
+  },
+  {
+   "id": "elegant",
+   "title": "Too bright to be elegant",
+   "body": "Orange has long been called showy. Jarman's *Chroma* quotes Chevreul as saying orange is too bright to be elegant and makes fair complexions blue [5]. St Clair gives the same phrase to *Godey's Lady's Book* in 1855 [2]. The two books attribute it differently, and I have not traced the original.\n\nNelson gives the eye's side of the matter. After ten-hour shifts in a restaurant painted orange, she dreamed of it in pale blue, which she takes to be the effect of staring at saturated orange, blue's spectral opposite, as she puts it [6][7]."
+  },
+  {
+   "id": "world",
+   "title": "Signs, screens and ink",
+   "body": "Bright orange is a working color. In the standard safety code of the American National Standards Institute, orange means moderate risk of injury, and fluorescent orange is used for clothing because its high lightness makes it visible [8]. Fluorescence helps: a fluorescent dye absorbs light and re-emits it at longer wavelengths, which raises the intensity in the orange or yellow region [8]. St Clair adds that orange stands out against blue-gray asphalt, even in low light, and that aircraft flight recorders are painted orange to be found after a crash [2].\n\nPrinters know the limit. Eckstut notes that there is no bright orange in the CMYK process, though Pantone's spot colors can print one [9]. On a screen the case is easier: #FF5B00 has the red channel at full strength, and a contrast ratio of 3.1 with white and 6.8 with black (computed from the hex) [11].\n\nFinlay reports a story from Papunya in Australia [4]. When the art teacher Bardon ordered poster paint for the first Western Desert paintings, the artists, in his account, particularly liked the bright orange, saying it was the color of the ochre pits [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is bright, saturated and warm: lightness 61, chroma 92, hue angle 50 [11]. It is 5.5 units from [[safety-orange-blaze-orange]], #FF6700, and 20 units from the standard [[orange]], #F07A1A (our calculation) [11]. The library records a Wikipedia near-duplicate, Willpower Orange, 0.8 units away [11].\n\nThe library's nearest app color is [[orange]], at a distance of 8.4 in its own measure [11]. Other siblings in the same neighborhood are [[tangerine]], [[pumpkin]], [[orange-red]] and [[dark-orange]] [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color match to this swatch appears in 8 paintings, 0.03 per cent, and the within-painting lens finds it in 9 [10]. That is rarer than 69 per cent of named colors in the archive [10]. Only one painting has it over 5 per cent of the canvas: Paul Ranson's [[painting:commons-Q17492345|Witch with a black cat]] of 1893, where it covers 11 per cent and plays the highlight [10].\n\nIn printed English the phrase *bright orange* peaks in the 2010s and rose fastest in the 2000s (Google Books, all senses, so the fruit and the paint both count) [10]. These are photographs of aged, varnished paintings, so a color match is not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fruit's name, by way of the descriptive phrase; origin as a color name undocumented",
+   "first_recorded": "2010 color survey; ISCC-NBS 1955 block 48",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Willpower Orange (near-duplicate)",
+   "vivid orange"
+  ],
+  "siblings": [
+   "orange",
+   "red-orange",
+   "tangerine",
+   "pumpkin",
+   "safety-orange-blaze-orange"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "orange",
+    "gloss": "the standard orange is softer and about 20 units away"
+   },
+   {
+    "slug": "safety-orange-blaze-orange",
+    "gloss": "a close neighbor 5.5 units away, defined for visibility"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FF5B00",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 8,
+  "top_paintings": [
+   "commons-Q17492345"
+  ],
+  "first": {
+   "id": "commons-Q17492345",
+   "year": 1893
+  },
+  "role": {
+   "highlight": 1.0
+  },
+  "ngram": {
+   "first_5pct": 1800,
+   "peak": 2013
+  },
+  "measured": {
+   "lch": [
+    61,
+    92,
+    50
+   ],
+   "contrast_white": 3.1,
+   "nearest": [
+    [
+     "Orange",
+     8.4
+    ],
+    [
+     "Safety Orange",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"helio\", \"red lead\", \"scarlet\", \"poppy\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 45 (\"Orange\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 210 (Van Gogh after Hiroshige)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 10 (Papunya) and ch. 17 (Michelangelo)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 53 (quoting Chevreul)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Nelson, Bluets, ch. 10, section 111",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10 (colour wheel: blue against orange)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, entry 80 (\"Safety Colors\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Eckstut, What Is Color?, ch. 49 (\"What Are PMS Colors?\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed, and Google Books Ngram (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Bright Orange, xkcd 2010, ISCC-NBS block 48; measurements computed from the hex",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to St Clair, what did English speakers call the color before orange became a color name in the sixteenth century?",
+   "choices": [
+    "Yellow-red (giolureade)",
+    "Saffron",
+    "Sunset",
+    "Fire-gold"
+   ],
+   "answer": "Yellow-red (giolureade)",
+   "kind": "pick"
+  },
+  {
+   "q": "Why are fluorescent orange and yellow used for safety clothing?",
+   "choices": [
+    "Their high lightness makes them very visible",
+    "They are cheaper to dye",
+    "They never fade",
+    "They are warm"
+   ],
+   "answer": "Their high lightness makes them very visible",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a bright orange like #FF5B00 can be printed with the four CMYK inks.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The fruit came first: English had no word for orange as a color until the sixteenth century, and said yellow-red.",
+  "Look at a flight recorder or a road sign: bright orange is chosen to be seen, against blue-gray asphalt or a dark sky.",
+  "Nelson worked ten-hour shifts in an orange restaurant and dreamed of it as pale blue."
+ ],
+ "words": 802,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Papunya: Bardon used up the school's poster paint then ordered more; added 'from the land'",
+   "Nelson: 'painter's wheel' replaced with her own 'spectral opposite'",
+   "Opener no longer states a universal afterimage fact; now Nelson's anecdote",
+   "Gage OCR line verified; Chevreul vs Godey's attribution still flagged in text"
+  ]
+ }
+}

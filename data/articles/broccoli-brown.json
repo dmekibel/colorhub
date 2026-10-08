@@ -1,0 +1,203 @@
+{
+ "slug": "broccoli-brown",
+ "name": "Broccoli Brown",
+ "hex": "#9B856B",
+ "names": [
+  "Broccoli Brown"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Broccoli Brown is a dull, greyish olive-brown that earned its odd vegetable name in the colour lists of Scottish naturalists around 1800, long before it became a taupe on a paint chart.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name nobody can explain",
+   "body": "The name is in Patrick Syme's colour chart, where it is brown number 108 in the second edition of 1821 [1]. Syme gives two examples from nature: the head of the black-headed gull and the mineral zircon [1]. He lists no plant, though Baty's illustration of the colour uses the fruit of a *Commiphora*, an incense-tree genus [2]. None of the sources behind this article says which broccoli the name meant, so that part is undocumented.\n\nSyme's recipe for painters is more useful. To make Broccoli Brown, he says, take olive brown, add ash grey and a small tinge of red [1]. Olive brown itself is ash grey with a little blue, red and chestnut brown [2], so the colour is a grey with a warm brown cast, which is why modern charts file it near [[taupe]], [[tan]] and [[umber]] [3]."
+  },
+  {
+   "id": "jameson",
+   "title": "From coal brown to broccoli",
+   "body": "The name was not part of the first standard vocabulary. Werner's nomenclature of 1774 and its early descendants were adjusted by Robert Jameson, the Edinburgh professor who had studied under Werner, and one of his changes was to rename coal brown as broccoli brown [4]. Baty gives no year for the change [4]. Maerz and Paul's dictionary of colour, published in 1930, dates the name to 1805, the year of Jameson's *Treatise on the External Characters of Minerals* [3][5].\n\nSyme carried the name into his chart of 1814, a list of 108 colours, and into the second edition of 1821, which has 110 [5]. Cleaveland's American textbook of 1816 uses a list of 80 colours drawn from Jameson [5]."
+  },
+  {
+   "id": "critics",
+   "title": "Spelled wrong, and still confusing",
+   "body": "In 1841, in a paper on inflammation of the iris, the optician James Hunter gave up Werner's names and reproduced the old terms, misspelling this one \"broccili brown\", as examples of names that cannot be understood without a picture [6]. His complaint was practical: a doctor reading \"cochineal red\" would picture a bright crimson when the swatch is a reddish brown [6].\n\nThe chart's limits were known from the start. Colours named for animals, plants and stones only work for a reader who has seen the gull, the fruit or the zircon [6][4]."
+  },
+  {
+   "id": "modern",
+   "title": "Later colour systems",
+   "body": "The colour kept finding new homes. Ridgway's *Color Standards and Color Nomenclature* of 1912 and the ISCC-NBS system of 1955 both carry this colour, and the nearly identical Drab, within about two units, appears in both [3]. Close neighbours in our library are [[buffy-brown]] and [[ormond]] [3]. On screens the swatch reads as a taupe, a grey-brown between [[tan]] and [[camel]] [3].\n\nThe swatch is a scan of an aged printed plate, so it is an approximation of Syme's painted strip [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This colour is common in painting. In our archive of 23,781 paintings, a colour within six units of the swatch covers at least five per cent of the canvas in 4,447 works, or 18.7 per cent [7]. It is most at home in East Asia: 370 of 698 Japanese works and 272 of 635 Chinese works carry it [7]. By century it is most frequent in the 1100s, with 20 of 50 works [7].\n\nThe largest patches are whole-picture grounds, as in [[painting:cma-86096|Hotei]], a Japanese hanging scroll of about 1475 where the match fills 99 per cent of the picture [7]. A match that large is probably an aged paper or silk ground rather than a painted colour. The earliest dated match is a funerary papyrus of about 1069 BCE [7]. These are photographs of aged, varnished or darkened supports, so this is a screen colour, not a pigment test [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented in the books consulted; first appears as a rename of coal brown in Jameson's colour lists",
+   "first_recorded": "1805 (Maerz and Paul); Syme, 1814",
+   "source": "Baty, Nature's Palette, p. 26; ColorHub library"
+  },
+  "aka": [
+   "Werner's broccoli brown"
+  ],
+  "siblings": [
+   "olive-brown",
+   "taupe",
+   "buffy-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "taupe",
+    "gloss": "modern name for the same screen colour region, with an unrelated history"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#9B856B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 4447,
+  "top_paintings": [
+   "cma-163126",
+   "cma-86096",
+   "cma-151392",
+   "cma-145419"
+  ],
+  "countries": {
+   "Japan": [
+    370,
+    698
+   ],
+   "China": [
+    272,
+    635
+   ]
+  },
+  "peak_century": 1100,
+  "role": {
+   "highlight": 0.63,
+   "mid": 0.31,
+   "shadow": 0.06
+  },
+  "measured": {
+   "lch": [
+    57,
+    18,
+    76
+   ],
+   "nearest": [
+    [
+     "Taupe",
+     5.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 254, 263 (Syme's chart no. 108)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 262-263 (plate captions, Olive Brown no. 109)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library, Broccoli Brown (Syme 1821 no. 108; ISCC-NBS 1955 block 64; Maerz and Paul 1930, first recorded 1805, plate 15 C 5; Ridgway 1912, plate XLVI)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 26",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 28, 34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 220 (Hunter)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, tools/article_field.py, #9B856B, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Jameson's list rename to broccoli brown?",
+   "choices": [
+    "Coal brown",
+    "Hair brown",
+    "Liver brown",
+    "Chestnut brown"
+   ],
+   "answer": "Coal brown",
+   "kind": "pick"
+  },
+  {
+   "q": "What did Hunter dislike about names like broccoli brown in 1841?",
+   "choices": [
+    "Nobody could picture them without an illustration",
+    "They were too modern",
+    "They were all invented by painters",
+    "They described only plants"
+   ],
+   "answer": "Nobody could picture them without an illustration",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the sources say broccoli brown was named for the vegetable.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Broccoli Brown began as Jameson's replacement for coal brown, in a colour list for mineralogists.",
+  "In our archive this grey-brown appears in more than half of the Japanese works, 370 of 698."
+ ],
+ "words": 598,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified key claims against Baty text and fact card; no changes needed."
+  ]
+ }
+}

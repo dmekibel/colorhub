@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "An olive named for an insect",
-   "body": "Beetle is a grayish olive, close to [[dark-olive]], [[bronze-lustre]] and [[olive-green]] on screen [1]. The earliest record in our sources is the Maerz and Paul color dictionary of 1930, plate 16 [1]. Why the authors chose the name is undocumented, and none of the books we read explains it [1].\n\nThe swatch here sits about 2.3 units from the ISCC-NBS block called grayish olive [1]. It is dark enough to hold a white caption at a contrast of about 7 to 1 [1]. No living beetle is exactly this color; the name points at a family of dark, bronzy shells, not a single species."
+   "body": "Beetle is a grayish olive, close to [[dark-olive]], [[bronze-lustre]] and [[olive-green]] on screen [1]. The earliest record in our sources is the Maerz and Paul color dictionary of 1930, plate 16 [1]. Why the authors chose the name is undocumented, and none of the books we read explains it [1].\n\nThe swatch here sits about 2.3 units from the ISCC-NBS block called grayish olive [1]. It is dark enough to hold a white caption at a contrast of about 7 to 1 [1]. The name may point at dark, bronzy shells in general, but the books do not say."
   },
   {
    "id": "false-friend",
@@ -22,7 +22,7 @@
   {
    "id": "shell",
    "title": "Color made by a shell",
-   "body": "What beetles do make is structural color. Paterson notes that iridescence on beetles, butterflies and oil slicks comes from the structure of the surface and not from a dye [7]. Livingstone adds that beetle carapaces get some of their colors from thin transparent layers whose reflections interfere with one another [8]. Pigments absorb light; these shells instead shape it.\n\nPaterson also records the tansy beetle, whose blue-green wing cases decorated Victorian dresses, and calls it almost extinct [9]. Nature charts used beetles as swatches too: a violet oil beetle shows Blackish Green and a small bloody-nosed beetle shows Pansy Purple in Baty's plates, after drawings from an 1891 British beetle survey [10].\n\nTo see it, look for the olive-bronze of a dark shell under a lamp. Move your head and the hue slides toward green or gold, which no flat swatch can do. Birren reports, after Vosburg, that yellow traps catch more Japanese beetles than any other color [11]."
+   "body": "What beetles do make is structural color. Paterson notes that iridescence on beetles, butterflies and oil slicks comes from the structure of the surface and not from a dye [7]. Livingstone adds that beetle carapaces get some of their colors from thin transparent layers whose reflections interfere with one another [8]. Pigments absorb light; these shells instead shape it.\n\nPaterson also records the tansy beetle, whose blue-green wing cases decorated Victorian dresses, and calls it almost extinct [9]. Nature charts used beetles as swatches too: a violet oil beetle shows Blackish Green and a small bloody-nosed beetle shows Pansy Purple in Baty's plates, after drawings from an 1891 British beetle survey [10].\n\nTo see it, look at a dark shell under a lamp and move your head: structural color shifts with the angle, which no flat swatch can do. Birren reports, after Vosburg, that yellow traps catch more Japanese beetles than any other color [11]."
   },
   {
    "id": "field",
@@ -207,13 +207,12 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "L7 batch writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Name origin undocumented in all sources; article is honest-short.",
-   "Books call cochineal and kermes 'beetles'; corrected in text.",
-   "Plate 16 position (I6 vs J6) differs in our data; plate given only."
+   "Removed unsupported 'no living beetle is this color'",
+   "Softened unsourced hue-shift description to the structural-color point sourced to Paterson/Livingstone"
   ]
  },
- "words": 556
+ "words": 547
 }

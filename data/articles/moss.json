@@ -1,0 +1,214 @@
+{
+ "slug": "moss",
+ "name": "Moss",
+ "hex": "#8A9A5B",
+ "names": [
+  "Moss"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Moss is the yellowish, softly greyed green of the plant that carpets stones and trees, a color word that dictionaries define by the plant and paint catalogues borrowed for several different mixed greens.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The plant and the word",
+   "body": "Moss as a color is the plant's color and little more. Paterson's dictionary calls moss simply a shade of green, moss green a yellowy-green or olivy green, and moss-grey a greeny-grey [1]. St Clair's glossary of color names agrees: yellowed green, the color of moss [2].\n\nIt works best as a comparison word, a reference green. Finlay describes a naturally coloured cotton boll, an unexpected aqua green, as sea turquoise mixed with moss and mint [4]. He also lists *moss tone* among the evocative names that Pantone added to its expanded system [3]. In our sources the earliest English record of *moss green* is 1884, and Maerz and Paul's 1930 atlas gives 1905 for *moss* [5]."
+  },
+  {
+   "id": "pigment",
+   "title": "A name for several mixed greens",
+   "body": "In the nineteenth-century paint trade, *moss green* was a bought color, but not one pigment. Linke and Adam (1913), as reported in the Pigment Compendium, list moss green with oil green, olive green, bronze green and silk green as trade names for chrome-green mixtures made mostly from smaragd green (chromium oxide hydrate), zinc yellow and a little barite white [6].\n\nThe books disagree about what it was. The Compendium notes that one source lists moss green as a less common name for emerald green, while another, Mayer in 1991, says it is the same as chrome green [7]. A tube labelled moss green could therefore be quite different things, which is a good reason to treat the word as a color and not as a material [6][7]. Compare [[sap-green]] and [[viridian]], which do name materials."
+  },
+  {
+   "id": "swatch",
+   "title": "Two mosses",
+   "body": "The swatch is a mid-light, yellowish green, `#8A9A5B`, falling in block 120 of the 1955 ISCC-NBS system, which that system calls moderate yellow green [5]. A look-alike called [[moss-green]] sits almost on top of it in our data, and neighbors include [[sage]], [[olive]], [[lichen-green]] and [[mossy-green]] [5].\n\nNot every source agrees on how dark moss is. The library records the German RAL standard's 6005, named moss green, with a screen value near `#0F4336`, a deep bluish green far darker than this swatch [5]. Other sources in the library give mosses closer to our swatch, which is why the page uses the plain, yellowed green that Paterson and St Clair describe [1][2][5]."
+  },
+  {
+   "id": "japan",
+   "title": "In Japan",
+   "body": "Our library files two Japanese traditional colors under English moss words [8]. *Bright moss* renders Hiwamo'egi, \"siskin sprout yellow\", a sharp yellow-green, and *dusty moss* renders Usu'ao, \"pale blue\", a muted grey-green [8]. Another Japanese name, Yanagizome (\"willow-dyed\"), sits on this very swatch [8]. The English words are our glosses, not translations, and the Japanese names are the traditional ones [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 164 works, or 0.7 per cent [9]. It is almost absent before the nineteenth century: none of the 1,388 paintings from the 1100s to the 1400s hold it, and only 4 of 2,231 from the 1500s do [9]. It rises to 86 of 8,345 in the 1800s and 46 of 1,674 in the 1900s, nearly four times the museums' baseline [9]. Inside a painting it is a middle tone about half the time and a highlight 45 per cent of the time, so it tends to be a color of foliage in light, not of shadow [9].\n\nThe devoted painters are of the 1880s and after: [[painter:georges-seurat|Seurat]] holds it in 8 of his 41 works here, Camille Pissarro in 7 of 50 [9]. The largest covers are mostly landscapes and gardens, among them Berthe Morisot's [[painting:nga-52194|Girl in a Boat with Geese]] (1889) and Bonnard's [[painting:commons-Q17492969|The Large Garden]] (1895) [9]. As always these are photographs of aged, varnished paintings, so a match is a look-alike color, not a pigment test [9]. Where to look: in a landscape painting, find the pale foliage that is yellow and grey at once, and you have found moss [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the moss plant",
+   "first_recorded": "moss green 1884 in English (our sources); Maerz and Paul give 1905 for moss",
+   "source": "Paterson, A Dictionary of Colour, p. 270; ColorHub library"
+  },
+  "aka": [
+   "moss green"
+  ],
+  "siblings": [
+   "moss-green",
+   "mossy-green",
+   "sage",
+   "lichen-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "moss-green",
+    "gloss": "a near-twin in our data; the RAL standard's moss green is far darker"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Yanagizome (柳染), willow-dyed"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8A9A5B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 164,
+  "top_paintings": [
+   "smk-KMS3369",
+   "nga-52194",
+   "commons-Q17492969"
+  ],
+  "painters": [
+   "georges-seurat"
+  ],
+  "role": {
+   "mid": 0.49,
+   "highlight": 0.45,
+   "shadow": 0.05
+  },
+  "measured": {
+   "lch": [
+    61,
+    35,
+    118
+   ],
+   "nearest": [
+    [
+     "Moss Green",
+     0.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"moss\", \"moss green\", \"moss-grey\", p. 270",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary, \"Moss\", p. 125",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Finlay, Color, p. 20 (Pantone)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 148",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub library and graph (ISCC-NBS 1955 block 120; Maerz and Paul 1930; RAL 6005, approximate screen value)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium (Eastaugh et al.), \"Chrome green\" and related entries, pp. 111, 187",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Moss green\", p. 281",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub library (Japanese traditional colors, English glosses)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson's dictionary define moss green?",
+   "choices": [
+    "A yellowy-green; an olivy green",
+    "A bluish green",
+    "A bright lime",
+    "A dark forest green"
+   ],
+   "answer": "A yellowy-green; an olivy green",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is it hard to say which pigment moss green names?",
+   "choices": [
+    "It was a trade name for several mixed greens, and sources disagree about it",
+    "It was only ever made from one rare mineral",
+    "It was invented in 1990",
+    "It never existed as a paint"
+   ],
+   "answer": "It was a trade name for several mixed greens, and sources disagree about it",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, which painter holds this moss green in the largest share of the works here?",
+   "choices": [
+    "Seurat",
+    "Rembrandt",
+    "Caravaggio",
+    "Sargent"
+   ],
+   "answer": "Seurat",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Moss green was a paint-trade name for several different mixed greens, and the books disagree about which.",
+  "In a landscape, moss is the green that is pale, yellow and grey at once."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 660
+}

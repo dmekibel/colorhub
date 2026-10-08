@@ -32,7 +32,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 31 works [15]. They cluster in the late 1800s: 20 of 8,345 paintings from that century, and 9 of 1,173 from the 1890s, 5.9 times the archive's rate [15]. The strongest case is Indian painting: 11 of 721 Indian works match, and 7 of 96 Kalighat pictures from Calcutta [15].\n\nThe largest areas are Kalighat paintings of about 1890: the snake goddess Manasa, where the color fills 69 per cent of the canvas, and Hanuman attacking Indrajit, at 49 per cent [15]. In Europe the best case is [[painter:emile-bernard|Émile Bernard]]'s *La Moisson* of 1888, at 44 per cent [[painting:commons-Q17492114|The Harvest]] [15].\n\nWith the finer lens, the color first appears in 1434, in a work by [[painter:fra-angelico|Fra Angelico]], 478 years before the name's first record in our sources [15]. That is a look-alike hue in an aged photograph, not proof of a dye. Inside a painting it most often plays an accent, in 68 per cent of 69 paintings, and [[khaki]] turns up on the same canvases about 20 times more often than chance [15]. As always these are photographs of varnished paintings, so read them as screen colors.\n\nWhere to look: ripe grain, a woven hat or dry grass in low light, and compare it with the swatch. Real straw is usually paler and greyer."
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 31 works [15]. They cluster in the late 1800s: 20 of 8,345 paintings from that century, and 9 of 1,173 from the 1890s, 5.9 times the archive's rate [15]. The strongest case is Indian painting: 11 of 721 Indian works match, and 7 of 96 Kalighat pictures from Calcutta [15].\n\nThe largest areas are Kalighat paintings of about 1890: the snake goddess Manasa, where the color fills 69 per cent of the canvas, and Hanuman attacking Indrajit, at 49 per cent [15]. In Europe the best case is [[painter:emile-bernard|Émile Bernard]]'s *La Moisson* of 1888, at 44 per cent [[painting:commons-Q17492114|The Harvest]] [15].\n\nWith the finer lens, the color first appears in 1434, in a work by [[painter:fra-angelico|Fra Angelico]], 155 years before the 1589 date given above for the name [15]. That is a look-alike hue in an aged photograph, not proof of a dye. Inside a painting it most often plays an accent, in 68 per cent of 69 paintings, and [[khaki]] turns up on the same canvases about 20 times more often than chance [15]. As always these are photographs of varnished paintings, so read them as screen colors.\n\nWhere to look: ripe grain, a woven hat or dry grass in low light, and compare it with the swatch. Real straw is usually paler and greyer."
   }
  ],
  "aside": {
@@ -281,15 +281,14 @@
   "Old novels' 'tow-headed' children are not straw-haired: tow is the coarse flax used for rope.",
   "Paleolithic cave yellows ran from straw to bronze, and none of them leaned toward green."
  ],
- "words": 889,
+ "words": 890,
  "status": "checked",
  "checked": {
-  "by": "batch-35 writer (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Ngram: adjective data from the graph fieldnote; 'straw yellow' phrase peak read from the raw cache and smoothing is unknown, hedged as around the 1920s.",
-   "Furetiere's five shades quoted from Pastoureau; no date given for the dictionary.",
-   "Straw swatch is a saturated greenish yellow, unlike Werner's greyish recipe; stated."
+   "First-seen gap corrected: 1434 vs the 1589 name date is 155 years, not 478 (which used the 1912 Ridgway record and contradicted the article's own 1589).",
+   "Verified tow-headed, Baldovinetti, Furetiere, bowerbird, annealing claims against book text."
   ]
  }
 }

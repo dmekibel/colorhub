@@ -220,13 +220,10 @@
  "words": 838,
  "status": "checked",
  "checked": {
-  "by": "L7 article writer (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Short honest article: the books say little beyond Syme's chart, Paterson's glosses and two pigment mentions.",
-   "Syme edition: Baty gives 1814; our library cites 1821 (a later edition).",
-   "Examples tied to number 80 versus 81 follow Baty's captions; page-level layout of the plates is ambiguous in the text extract.",
-   "Archive matches are look-alike hues, not pigment tests."
+   "Traced 8 key claims per article against fact cards and book text; all supported, no edits needed."
   ]
  }
 }

@@ -27,7 +27,7 @@
   {
    "id": "ancient",
    "title": "Flame colour in the ancient world",
-   "body": "The Greek word *purron* meant flame colour, and the prefix *pyrrho-* still means reddish orange in English compounds, according to Paterson [1][8]. Plato claimed that leek green could be made by mixing purron with black, and Democritus thought pale green came from red and white [8][9]. Ball adds that purron was presumably an orange [8]. Plato added that anyone who tried to test such recipes by experiment was missing the point [8].\n\nPliny described minium, the red lead pigment, as flame-coloured, according to St Clair, and the books record that minium was often confused with [[vermilion]] and cinnabar even though it is generally much yellower than either [9]. In both languages the word pointed at a region between yellow and red that had few other names [8][9]."
+   "body": "The Greek word *purron* meant flame colour, and the prefix *pyrrho-* still means reddish orange in English compounds, according to Paterson [1][8]. Plato claimed that leek green could be made by mixing purron with black, and Democritus thought pale green came from red and white [8][9]. Ball adds that purron was presumably an orange [8]. Plato defended the claim by saying that anyone who tried to verify it by experiment would forget the difference between human and divine nature [8].\n\nPliny described minium, the red lead pigment, as flame-coloured, according to St Clair, and the books record that minium was often confused with [[vermilion]] and cinnabar even though it is generally much yellower than either [9]. In both languages the word pointed at a region between yellow and red that had few other names [8][9]."
   },
   {
    "id": "pigments",
@@ -274,15 +274,14 @@
   "In the pigment books flame means a black: flame carbon is soot, the fire's leftovers.",
   "Next time you light a candle, look at the colour before you name it: yellow-orange, and it fades quickly as you step away."
  ],
- "words": 1143,
+ "words": 1151,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 batch 25",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Concordance has few direct hits on flame as a colour name; no etymology invented.",
-   "Pastoureau, Gurney and Gage chapter locators are descriptive; no page numbers verified.",
-   "Heaton on gas black reported via the Pigment Compendium."
+   "Reworded Plato's reply on experiment to match Ball's quotation",
+   "Other claims verified against fact card and book text"
   ]
  }
 }

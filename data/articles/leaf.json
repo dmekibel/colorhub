@@ -17,7 +17,7 @@
   {
    "id": "green",
    "title": "Why a leaf is green",
-   "body": "The green of a leaf comes from chlorophyll, which Paterson describes as the substance held in the tiny bodies called chloroplasts in plant cells [4]. What we see is also a matter of how the eye compares cone signals. Livingstone observes that a leaf, an orange and a tomato look green, orange and red under both daylight and office fluorescents, even though a spectrophotometer shows big differences [7]. What defines their color is the ratio of long to middle cone signals, which rises from the leaf to the orange to the tomato [7]. Westland adds a practical point for painters and photographers: light shining through a translucent leaf heightens its chroma [8].\n\nGreen is not the color plants use best. Birren describes experiments in which wheat grew best under red rays, with a fall-off under yellow and green and a pickup under blue [9]. Plant stems also lean toward a light source, because the shaded side grows faster [9]."
+   "body": "The green of a leaf comes from chlorophyll, which Paterson describes as the substance held in the tiny bodies called chloroplasts in plant cells [4]. What we see is also a matter of how the eye compares cone signals. Livingstone observes that a leaf, an orange and a tomato look green, orange and red under both daylight and office fluorescents, even though a spectrophotometer shows big differences [7]. What defines their color is the ratio of long to middle cone signals, which rises from the leaf to the orange to the tomato [7]. Westland adds a practical point for painters and photographers: light shining through a translucent leaf heightens its chroma [8].\n\nGreen is not the color plants use best. Birren describes older experiments in which wheat grew best under red rays, with a fall-off under yellow and green and a pickup under blue [9]. Plant stems also lean toward a light source, because the shaded side grows faster [9]."
   },
   {
    "id": "painting",
@@ -251,15 +251,14 @@
   "The word leaf names both the green of spring and, in older color lists, the brown of a dead one.",
   "Look at a tree against the sun: the leaves lit from behind are the strongest yellow-green on it."
  ],
- "words": 1007,
+ "words": 1008,
  "status": "checked",
  "checked": {
-  "by": "epic batch 16 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "ISCC block 51 for the name Leaf taken from our library note; the book itself not consulted.",
-   "Birren plant-growth experiment reported as described (wheat); old experiment, hedged.",
-   "Desmoulins/cockade from Pastoureau Blue; Siegfried legend attributed to Pastoureau Green."
+   "Birren wheat experiment flagged as older work.",
+   "Checked Gurney, Paterson, Desmoulins, Siegfried, archive figures against fact card: supported."
   ]
  }
 }

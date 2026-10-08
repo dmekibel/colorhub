@@ -122,8 +122,6 @@
 .ms-empty p{color:var(--soft);font-size:16px}
 
 /* ---------- entry points ---------- */
-.hm.chrome-hide #hmMapStudy{opacity:0;pointer-events:none}
-.hm #hmMapStudy{transition:opacity .4s var(--ease)}
 .ms-art{display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:4px;padding:10px 18%;background:var(--surface-2)}
 .ms-art i{flex:none;width:26%;aspect-ratio:1;border-radius:50%;background:var(--c)}
 .ms-art i:nth-child(n+3):nth-child(-n+5){margin:0 1px}

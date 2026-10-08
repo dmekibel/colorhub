@@ -27,7 +27,7 @@
   {
    "id": "words",
    "title": "Other places the words turn up",
-   "body": "The purplish red of the Inca textiles was, Finlay writes, the color that stood for the Incas themselves, their armies and their emperor [6]. In color theory, Gage describes the nineteenth-century idea that a bright purplish red is the complement of a dark green, a view he associates with Helmholtz and Rood [7].\n\nThe dictionary uses the phrase as a gloss for others. Paterson defines rose bengal and rose madder as purplish reds, calls fuchsia a purplish red after the flower, and gives the same description for Persian red, a pigment, and for spinel red when it leans purple [8]. The phrase is more often a way of locating a color than a name of its own."
+   "body": "In the knotted cords the Incas used to carry messages, Finlay writes, a deep purplish red stood for the Incas themselves, their armies and their emperor [6]. In color theory, Gage describes the nineteenth-century idea that a bright purplish red is the complement of a dark green, a view he associates with Helmholtz and Rood [7].\n\nThe dictionary uses the phrase as a gloss for others. Paterson defines rose bengal and rose madder as purplish reds, calls fuchsia a purplish red after the flower, and gives the same description for Persian red, a pigment, and for spinel red when it leans purple [8]. The phrase is more often a way of locating a color than a name of its own."
   },
   {
    "id": "swatch",
@@ -222,15 +222,14 @@
   "Medieval painters mixed their purplish reds from azurite and red lake rather than buying them.",
   "Look for it in the shadows of old portraits: three paintings in five show it there or in the mid-tones."
  ],
- "words": 860,
+ "words": 863,
  "status": "checked",
  "checked": {
-  "by": "batch-53 self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Pastoureau passages read via concordance context only (Rubens, purpurarii, Roman women).",
-   "Gage Helmholtz/Rood attribution is the book's phrasing in a damaged OCR passage.",
-   "Finlay Inca line cited to ch. 13 from concordance."
+   "Inca line: Finlay describes quipu cords, not textiles; fixed.",
+   "Verified Kirwan 1794/Syme 1821, Syme no. 94 recipe and examples, Ball azurite+red lake and Gerard David, Pastoureau Rubens/purpurarii/vulgar, Gage Helmholtz/Rood."
   ]
  }
 }

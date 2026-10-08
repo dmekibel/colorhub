@@ -1,0 +1,217 @@
+{
+ "slug": "reddish-black",
+ "name": "Reddish Black",
+ "hex": "#433635",
+ "names": [
+  "Reddish Black"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Reddish Black is one of the named blacks in the nomenclature that naturalists used to describe moth wings, ducks and ores before color photography.",
+ "sections": [
+  {
+   "id": "werner",
+   "title": "A black in Syme's list",
+   "body": "In 1774 the German geologist Abraham Gottlob Werner devised a nomenclature of 54 colors to help identify minerals [1]. The Scottish artist Patrick Syme expanded it to 108 terms in 1814 and 110 in 1821, adding a painted swatch and example species from the animal, vegetable and mineral worlds [1]. Reddish Black is number 21 among the blacks in Syme's 1821 edition [2]. Baty's account places it among the blacks of Syme's own 1814 edition [2]. Our library files it under Werner's nomenclature, and the two accounts differ on that point [3].\n\nThe other blacks run from [[greyish-black]] and [[bluish-black]] through [[greenish-black]] and a brownish pitch black to ink black and velvet black [2]."
+  },
+  {
+   "id": "examples",
+   "title": "What it was matched to",
+   "body": "Syme's examples for Reddish Black were the spots on the large wings of the tiger moth, the breast of the pochard duck, the berry of *Fuchsia coccinea*, and a mineral called olivenite, which Baty glosses as a copper arsenate [2]. His recipe mixed velvet black with a touch of carmine red and a little chestnut brown [2].\n\nThe recipe is a useful lesson. A dark like this reads as black until you place it beside a pure black, and then the warm cast shows."
+  },
+  {
+   "id": "words",
+   "title": "Other words for the same dark",
+   "body": "Older English had Latin-derived words for it [4]. Paterson's dictionary lists *atrorubent* as reddish-black, and *fusco-piceous* as reddish black too [4]. The same dictionary has *atrosanguineous*, for the dark red of blood [4]. In mineralogy, the Pigment Compendium describes brookite, a titanium oxide named after H. J. Brook (1771 to 1857), as a brown or reddish black mineral [5].\n\nNaturalist colors were also borrowed by doctors. Birren's list of colors of illness has frostbite passing from pale skin into dark red, reddish or reddish-black [6]. Baty reports that James Hunter's 1841 table of colors for an inflamed iris adopted Werner's nomenclature, and the terms printed in the extract include reddish black [7]. That last point rests on a single, partly garbled passage, so treat it as likely rather than certain."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here, #433635, is a scan of an aged Werner swatch [3]. It is very dark, at a lightness of 24 out of 100, with a slight red cast [3]. The ISCC-NBS system of 1955 files it in block 20, and the nearest app color is [[umber]], 10.5 units away; [[chocolate-brown]] is the nearest named neighbor in the library [3]. The library's Japanese set pairs it with *dobunezumi*, which means brown-rat grey [3].\n\nBecause the swatch comes from an old printed chart, the tint may have shifted with age. Treat it as a scan, not a standard."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 2,249 works, 9.5 per cent [8]. It is a shadow color, playing that role in 81 per cent of the paintings that carry it [8]. The largest are portraits and heads. First is [[painter:bartholomeus-van-der-helst|van der Helst's]] [[painting:commons-Q30222055|Self-portrait]] of 1667, at 92 per cent of the canvas [8]. Neufchatel's *Portrait of an Elderly Man* of about 1550, also at 92 per cent, comes next [8]. Last is [[painter:vincent-van-gogh|Van Gogh's]] [[painting:commons-Q26220158|Head of a Young Peasant in a Peaked Cap]] of 1885, at 87 per cent [8].\n\nIt grows more common in later centuries: 226 of 1,674 works in the 1900s, 13.5 per cent, with the 1940s at 6 of 28 [8]. Norwegian paintings carry it in 25 of 120 works and Danish ones in 320 of 1,676 [8]. [[painter:carl-bloch|Carl Bloch]] has it in 8 of 15 works and [[painter:wilhelm-marstrand|Marstrand]] in 14 of 36 [8]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive name in Syme's edition of Werner's nomenclature of colours",
+   "first_recorded": "Syme's 1814 edition (Baty); our library lists it under Werner",
+   "source": "Baty, Nature's Palette; ColorHub library"
+  },
+  "aka": [
+   "atrorubent",
+   "fusco-piceous"
+  ],
+  "siblings": [
+   "greenish-black",
+   "greyish-black",
+   "bluish-black"
+  ],
+  "parent": "black",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "umber",
+    "gloss": "the nearest app color, a brown pigment rather than a black"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "dobunezumi (丼鼠), brown-rat grey, paired in our library"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#433635",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2249,
+  "top_paintings": [
+   "commons-Q30222055",
+   "commons-Q26220158"
+  ],
+  "role": {
+   "shadow": 0.81,
+   "mid": 0.19,
+   "highlight": 0.0
+  },
+  "peak_decade": {
+   "1940s": {
+    "hits": 6,
+    "n": 28,
+    "lift": 2.27
+   }
+  },
+  "company": [
+   "Navy",
+   "Silver",
+   "Umber"
+  ],
+  "measured": {
+   "lch": [
+    24,
+    6,
+    27
+   ],
+   "nearest": [
+    [
+     "Umber",
+     10.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (Werner and Syme)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Syme's plates of whites, greys and blacks, no. 21 (pp. 60-68)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Werner swatch, ISCC-NBS 1955 block 20, Japanese set; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"atrorubent\", \"atrosanguineous\", \"fusco-piceous\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Brookite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, p. 18",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 220 (Hunter's table, 1841)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, tools/article_field.py, CIEDE2000 6, 5% cover. As photographed: museum photographs of aged, varnished paintings. A color match, not a pigment test.",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to Syme's recipe, what is Reddish Black made from?",
+   "choices": [
+    "Velvet black with a little carmine red and chestnut brown",
+    "Pure red with soot",
+    "Indigo with brown",
+    "Ink black with orange"
+   ],
+   "answer": "Velvet black with a little carmine red and chestnut brown",
+   "kind": "pick"
+  },
+  {
+   "q": "Which was Reddish Black matched to in Syme's examples?",
+   "choices": [
+    "The wings of the tiger moth",
+    "A sapphire",
+    "A winter sky",
+    "A cherry"
+   ],
+   "answer": "The wings of the tiger moth",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in the archive, Reddish Black mostly plays a highlight role.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reddish Black was matched to the wings of the tiger moth and the breast of the pochard duck.",
+  "Syme's recipe for Reddish Black: velvet black with a little carmine red and chestnut brown.",
+  "In paintings, Reddish Black is a shadow color: 81 per cent of the works that carry it use it that way."
+ ],
+ "words": 617,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Reworded 1814 edition claim to match card",
+   "Removed unsourced fuchsia comparison"
+  ]
+ }
+}

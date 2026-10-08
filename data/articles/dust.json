@@ -27,12 +27,12 @@
   {
    "id": "air",
    "title": "Dust in the air",
-   "body": "Most of the books' mentions of dust concern the air, not a pigment. Gurney explains that atmospheric perspective is strengthened by dust, moisture, haze or smog, and that the usual rule that distance turns things cool can reverse when dust or moist vapour hangs near the sun at sunrise or sunset [5].\n\nDust also helps explain why evening and morning skies differ. If the air is full of moisture and dust, Gurney writes, the setting sun is accompanied by more conspicuous red and yellow clouds, and in the first hour of morning the sequence reverses, often with pinker colours because less dust has been raised [5]. For a painter, a dusty afternoon is a warm one.\n\nBooks disagree about dust and the blue sky. Ball says blue light is scattered by the molecules and dust of the atmosphere, and St Clair says distant hills turn paler and bluer through scattering by dust, pollution and water droplets [6][13]. Finlay recalls that Tyndall blamed dust particles for the blue sky and that Einstein later showed molecules of oxygen and hydrogen were big enough to scatter blue light [7]. The safe reading is that air molecules are enough, and that dust adds to the effect."
+   "body": "Most of the books' mentions of dust concern the air, not a pigment. Gurney explains that atmospheric perspective is strengthened by dust, moisture, haze or smog, and that the usual rule that distance turns things cool can reverse when dust or moist vapour hangs near the sun at sunrise or sunset [5].\n\nDust also helps explain why evening and morning skies differ. If the air is full of moisture and dust, Gurney writes, the setting sun is accompanied by more conspicuous red and yellow clouds, and in the first hour of morning the sequence reverses, often with pinker colours because less dust has been raised [5]. For a painter, a dusty afternoon is a warm one.\n\nBooks disagree about dust and the blue sky. Ball says blue light is scattered by the molecules and dust of the atmosphere, and St Clair says distant hills turn paler and bluer through scattering by dust, pollution and water droplets [6][13]. Finlay recalls that Tyndall blamed dust particles for the blue sky and that Einstein later showed that air molecules alone are big enough to scatter blue light [7]. The safe reading is that air molecules are enough, and that dust adds to the effect."
   },
   {
    "id": "workshop",
    "title": "Dust in the workshop",
-   "body": "For colour makers, dust was often a swindler's ingredient and a hazard. Court minutes of the East India Company warned against buyers of cheap indigo dust who shaped it into cakes and passed it off as quality indigo, Balfour-Paul reports, and makers also added rubber, brick dust and Prussian blue to indigo for weight [8]. St Clair notes that French madder was accused of adulteration with everything from brick dust to oats [9]. Finlay adds that soot and dust were nearly the same colour as indigo, so a buyer had to be careful [7].\n\nThe dust was also dangerous. Jarman recalls Pliny's note that the dust of vermilion drove painters to wear bladder masks [10]. Finlay writes that workers handling lead white should not breathe its dust, and that lead was ground beside a roaring fire so that the updraft carried the dust away [7].\n\nAt the other end of the process, dust is the ground of painting. Finlay observes that many paintings begin with the rubbing of earth, mud, dust, soot or rock onto cloth, paper, wood or wall, and that brighter colours come later [7]. Jarman, in a looser passage, notes that dun-coloured earth turned to mud in winter and dust in summer, and guesses at a link to brown country coats against black city ones [10]."
+   "body": "For colour makers, dust was often a swindler's ingredient and a hazard. Court minutes of the East India Company warned against buyers of cheap indigo dust who shaped it into cakes and passed it off as quality indigo, Balfour-Paul reports, and manufacturers kept being tempted to add bulk with substances from rubber and brick dust to Prussian blue [8]. St Clair notes that French madder was accused of adulteration with everything from brick dust to oats [9]. Finlay adds that soot and dust were nearly the same colour as indigo, so a buyer had to be careful [7].\n\nThe dust was also dangerous. Jarman recalls Pliny's note that the dust of vermilion drove painters to wear bladder masks [10]. Finlay notes that Pliny called lead white poisonous if swallowed and said nothing of the danger of breathing its dust while grinding it, and quotes Ralph Mayer's modern warning not to breathe the dust [7].\n\nAt the other end of the process, dust is the ground of painting. Finlay observes that many paintings begin with the rubbing of earth, mud, dust, soot or rock onto cloth, paper, wood or wall, and that brighter colours come later [7]. Jarman, in a looser passage, notes that dun-coloured earth turned to mud in winter and dust in summer, and guesses at a link to brown country coats against black city ones [10]."
   },
   {
    "id": "field",
@@ -267,16 +267,16 @@
   "Dust makes a sunset warmer: the evening air holds more of it than the morning's, so mornings come out pinker.",
   "Look for this colour in old silk and paper: our archive finds it in about half of Japanese paintings."
  ],
- "words": 1065,
+ "words": 1073,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 batch 25",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "No book documents the colour name Dust itself; origin stated as undocumented.",
-   "Khaki: language (Hindi vs Urdu) and the 1846 Lumsden story are single-source or disputed; hedged in text.",
-   "Archive 'aged ground' explanation is marked as a hypothesis.",
-   "Chapter locators for St Clair, Finlay, Jarman, Balfour-Paul are descriptive."
+   "Removed unsupported 'lead ground beside a roaring fire' claim; Finlay only says Pliny did not mention grinding dust, Mayer warns against breathing dust",
+   "Indigo adulteration sentence aligned to Balfour-Paul (rubber, brick dust, Prussian blue as tempting additives)",
+   "Einstein/Tyndall sentence reworded to avoid Finlay's 'oxygen and hydrogen' error",
+   "Other claims verified"
   ]
  }
 }

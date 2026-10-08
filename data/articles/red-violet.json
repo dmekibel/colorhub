@@ -1,0 +1,206 @@
+{
+ "slug": "red-violet",
+ "name": "Red-Violet",
+ "hex": "#C71585",
+ "names": [
+  "Red-Violet",
+  "Medium Violet Red"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Red-violet is the strong, slightly bluish crimson-magenta that sits between red and violet on the color wheel, a name that marks a position more than a thing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A place on the wheel",
+   "body": "Red-violet is first of all a position. Painters' color wheels list six tertiary colors, each a step between a primary and a neighbouring secondary: red-orange, yellow-orange, yellow-green, blue-green, blue-violet and red-violet, which is also called red-purple [1]. The dictionary of color adds a trade sense, using \"berry-coloured\" for the red-violet range in make-up [2].\n\nUnlike [[madder]] or [[mauve]], it has no flower, dye or discoverer behind it. The books searched for this article give it no origin story of its own, so its origin is undocumented here. Its neighbors on the wheel are the colors with stories: [[magenta]] and [[red-purple]] on the red side, [[violet]] and [[purple]] on the blue, and [[mulberry]] as a lighter, pinker relative."
+  },
+  {
+   "id": "swatch",
+   "title": "Three systems, three reds",
+   "body": "The swatch on this page, #C71585, is exactly the CSS color Medium Violet Red, a difference of 0.0 in CIEDE2000 [7]. The same name appears in ISCC-NBS 1955 and in RAL's 1927 list, where it is number 4002 [7]. The systems do not agree on how it looks. RAL's approximate screen value is a dull wine red, #933D50, and the xkcd color survey's red-violet is a deeper magenta, #9E0168 [7]. Screen values for printed standards are approximations, so each is a neighborhood, not a point [7]."
+  },
+  {
+   "id": "material",
+   "title": "Pigments in this corner",
+   "body": "Real pigments live here, though none is called simply red-violet. [[manganese-violet]], discovered in 1868 by Coles's account, is an opaque red-violet that replaced the weaker cobalt violet [3]. It has only modest strength but gives luminous violets [3]. Monet announced in 1881 that the true color of the atmosphere was violet, and critics joked of \"violettomania\" [3].\n\nThe naming was untidy. Winsor & Newton listed permanent violet and permanent mauve in 1892, and its 1896 catalogue described the first as manganese phosphate [4]. About 1898 Reeves treated permanent mauve as the same as permanent violet, made with alizarin, while Standage in 1892 called it a violet-toned French ultramarine [4]. Books disagree, then, on what permanent mauve was [4].\n\nA twentieth-century route is thioindigo, found by Friedländer in 1905 [5]. Several derivatives became commercial pigments in the 1950s, and the red-violet Pigment Red 88 is the one that kept a market in paints [5]."
+  },
+  {
+   "id": "words",
+   "title": "In print and in painting",
+   "body": "In Google Books the phrase \"red violet\" rose fastest in the 1920s and peaked in the 1930s [8]. That fits the arrival of color cards such as RAL's 1927 list, though the data cannot show cause [7][8]. Before then the position had to be described rather than named.\n\nGurney's example of a limited palette puts a dull red-violet in one corner of the mixing triangle, with a strong red-orange and a dull yellow-green in the others [10]. It is an example of how a dull red-violet can anchor a limited scheme."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive, red-violet is nearly absent. At most two of 23,781 paintings carry it over at least five per cent of the canvas, within six CIEDE2000 units, and both are works from India in the 1900s [9]. The earliest, [[painting:cma-164464|a multi-armed figure]] catalogued as 1900, is the one painting where the within-painting lens finds it [9]. Against the named colors it is rarer than 86 per cent of them [9]. These are photographs of aged, varnished paintings, and a color match is not a pigment test [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its position between red and violet on the color wheel",
+   "first_recorded": "RAL 4002 (1927) is the earliest source in our library",
+   "source": "Paterson, A Dictionary of Colour, p. 391; ColorHub library"
+  },
+  "aka": [
+   "Medium Violet Red (CSS)",
+   "red-purple (wheel name)"
+  ],
+  "siblings": [
+   "red-purple",
+   "magenta"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mulberry",
+    "gloss": "a lighter, pinker red-violet named for the fruit"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#C71585",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "top_paintings": [
+   "cma-164464"
+  ],
+  "ngram": {
+   "rise": 1920,
+   "peak": 1930
+  },
+  "measured": {
+   "lch": [
+    45,
+    73,
+    348
+   ],
+   "nearest": [
+    [
+     "Mulberry",
+     7.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 391",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 47",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 155",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Manganese violet\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Indigoid group\" (thioindigoid compounds), p. 317",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CSS, RAL, ISCC-NBS 1955, xkcd values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, phrase \"red violet\" (ColorHub graph field notes), all senses",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, p. 132",
+   "loc_kind": "pdf-page",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name red-violet mainly point to?",
+   "choices": [
+    "A step between red and violet on the color wheel",
+    "A single pigment dug from the ground",
+    "A dye from one flower",
+    "A fashion color named for a person"
+   ],
+   "answer": "A step between red and violet on the color wheel",
+   "kind": "pick"
+  },
+  {
+   "q": "Which pigment, discovered in 1868, is described as an opaque red-violet that replaced the weaker cobalt violet?",
+   "choices": [
+    "Manganese violet",
+    "Ultramarine",
+    "Mauveine",
+    "Madder lake"
+   ],
+   "answer": "Manganese violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: RAL, CSS and xkcd all give the same screen color for red-violet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "One name, three systems, three different reds: the swatch is CSS's Medium Violet Red, while RAL's version is a dull wine.",
+  "In 1881 Monet announced that the true color of the atmosphere was violet, and critics coined \"violettomania\".",
+  "Look for red-violet as the dull corner of a three-color scheme."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported Impressionist colored-shadows link and 'quickly'",
+   "Removed 'supporting color' generalization from one Gurney example",
+   "Removed unsupported 'quarter of picture' figure"
+  ]
+ },
+ "words": 544
+}

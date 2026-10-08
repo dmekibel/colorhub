@@ -1,0 +1,247 @@
+{
+ "slug": "midnight",
+ "name": "Midnight",
+ "hex": "#03012D",
+ "names": [
+  "Midnight"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Midnight is the color of the sky at its darkest, a name that books use for deep indigo blues, and the swatch here is a near-black navy that few painters ever needed.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A time of day as a color",
+   "body": "St Clair's glossary defines midnight as the dark blue of the night sky [1]. Paterson lists *midnight blue* as an intense blue, apparently the correct shade for men's evening dress [2]. Midnight and midnight blue are not the same swatch in our data: the ISCC-NBS 1955 entry for Midnight is a dark purple, while the near-black navy here comes from the xkcd color list [3].\n\nGarfield's account of the English color vocabulary counts about 7,500 names, of which 55 come from times of day, with midnight blue as his example [4]. The name has a surprising rival: *midnight sun*, in the Pigment Compendium, is a synonym of chrome scarlet, a red [5]. In the Goethe-Schiller *Temperamentenrose* of the late 1790s, red itself stood for midnight, among air, north, winter and old age [6]."
+  },
+  {
+   "id": "indigo",
+   "title": "The midnight of indigo",
+   "body": "The blue most often called midnight in the books is indigo. Balfour-Paul recalls a cloth lifted from the vat and watched as it turned from yellow through turquoise to midnight blue in the air [7]. West African dyers embroidered cloth, dyed it and removed the threads, leaving pale patterns like ghosts on a ground like a midnight sky [8]. Chinese and Korean Buddhist sutras of the ninth to fifteenth centuries were written in gold and silver on indigo paper, burnished with agate until it turned lustrous midnight blue [9]. Midnight blues were also favored in the Islamic courts, beside crimson from insect dyes [10].\n\nNewton is part of this story. Finlay says he added indigo to the spectrum, probably to reach seven, and that indigo was then chiefly a dye word, which is why the midnight stripe is hard to find in a real rainbow [11]. Finlay also reports that Binney & Smith renamed its Prussian blue crayon Midnight Blue in 1958, after teachers said children could not relate to Prussian history [12]. See [[midnight-blue]] and [[prussian-blue]] for those two."
+  },
+  {
+   "id": "painting",
+   "title": "Midnight in paint",
+   "body": "Ball's chapter on blue is titled *Shades of Midnight*, and he describes the dark blues that clothe the figures of Picasso's *The Absinthe Drinker* and *Old Woman*, both of 1901, as midnight blues [13]. Even those are lighter than the swatch here, which is only a few steps from black.\n\nOn a screen the swatch is easy to mistake for black, and its blue shows only beside a true black [3]. For the learnable color nearest to it, see [[oxford-blue]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in only 10 works [14]. Every one is a shadow area, never a mid-tone or light [14]. The earliest is Fra Angelico's *Madonna and Child with Four Angels*, of 1420, at 12.4 per cent [14]. The largest are Huntington's portrait *Dr. James Hall*, of 1857, at 42 per cent, and Paudiß's *The Head of a Girl*, of 1653, at 37 per cent [14].\n\nBy century the clearest signal is the 1700s, with 5 of 3,449 works, 3.5 times the archive rate, and British paintings carry 4 of 593 [14]. Old varnish and soot darken blues in these pictures, so some may be darker now than they were painted, and a match to the screen is not a pigment test [14].\n\nIn print, *midnight blue* is almost absent before 1900 and reaches about 46 per cent of its 2015 peak by 1940 [15]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the middle of the night",
+   "first_recorded": "origin of the color use undocumented in our sources",
+   "source": "St Clair, The Secret Lives of Colour; Garfield, Mauve; ColorHub library"
+  },
+  "aka": [
+   "midnight blue (the related name)"
+  ],
+  "siblings": [
+   "midnight-blue",
+   "dark-navy",
+   "oxford-blue"
+  ],
+  "parent": null,
+  "children": [
+   "midnight-blue"
+  ],
+  "disambiguation": [
+   {
+    "slug": "midnight-blue",
+    "gloss": "the X11 and dictionary color, a brighter, bluer navy than this swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#03012D",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 10,
+  "top_paintings": [
+   "nga-34104",
+   "commons-Q61744810",
+   "aic-16009",
+   "commons-Q27970998"
+  ],
+  "role": {
+   "shadow": 1.0
+  },
+  "peak_decade": {
+   "1700s": {
+    "hits": 5,
+    "n": 3449,
+    "lift": 3.45
+   }
+  },
+  "ngram": {
+   "word": "midnight blue",
+   "rel_1940": 0.459,
+   "peak": 2015
+  },
+  "measured": {
+   "hex_xkcd": "#03012D",
+   "iscc_midnight": "#702670"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Midnight\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"midnight blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library, entries Midnight (ISCC-NBS 1955, block 229) and the xkcd swatch #03012D; screen values approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Midnight sun\" (after Kelly & Judd 1976; Kühn & Curran 1986)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 208",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 9",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 179",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 214",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, rugs and court textiles, p. 224",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10 (\"Shades of Midnight\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, tools/article_field.py, CIEDE2000 6, 5% cover. As photographed: museum photographs of aged, varnished paintings. A color match, not a pigment test.",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"midnight blue\", 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which pigment name appears in the Pigment Compendium as 'midnight sun'?",
+   "choices": [
+    "Chrome scarlet",
+    "Prussian blue",
+    "Ultramarine",
+    "Indigo"
+   ],
+   "answer": "Chrome scarlet",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is a midnight stripe hard to find in a real rainbow, according to Finlay?",
+   "choices": [
+    "Indigo was chiefly a dye word and Newton likely added it to reach seven",
+    "Rainbows have no blue",
+    "Indigo is invisible",
+    "Midnight is a warm color"
+   ],
+   "answer": "Indigo was chiefly a dye word and Newton likely added it to reach seven",
+   "kind": "pick"
+  },
+  {
+   "q": "Binney & Smith renamed its Prussian blue crayon Midnight Blue in 1958.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Midnight sun is not a sky color in the Pigment Compendium: it is another name for the red chrome scarlet.",
+  "Where to look: indigo-dyed cloth coming out of the vat turns from yellow to turquoise to midnight blue in the air."
+ ],
+ "words": 576,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Sources are scattered mentions, article short by design.",
+   "Two different Midnight swatches in library (ISCC purple vs xkcd navy); both stated."
+  ]
+ }
+}

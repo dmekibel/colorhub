@@ -1,0 +1,193 @@
+{
+ "slug": "grey-green",
+ "name": "Grey Green",
+ "hex": "#789B73",
+ "names": [
+  "Grey Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Grey green is a descriptive name for a muted green, best known in the books through celadon, the pale Chinese glaze, and through the way distance dulls foliage.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name made of two words",
+   "body": "Grey Green is a plain description rather than a historical name: a muted, slightly yellowish green [7]. Our library files the swatch under ISCC-NBS 1955 as \"moderate yellowish green\" (block 150), and the xkcd color survey lists a near twin at #86A17D [7]. Its nearest everyday names are [[moss]], at a color difference of 8.3, and [[greyish-green]], a sibling less than two units away [7].\n\nBooks mostly use the words for things, not as a color with a history. The rest of this page follows where they appear."
+  },
+  {
+   "id": "celadon",
+   "title": "Celadon, the grey-green with a history",
+   "body": "The best-known grey green in the books is celadon. Finlay says the word is the generic name given to all Chinese gray-green porcelain [1]. St Clair traces the European word to Céladon, a shepherd dressed in pale green in a French novel of 1607; Finlay also offers a theory involving Saladin and hedges it [2][1].\n\nA popular belief says celadon ware detects poison. It is a legend: Finlay reports that the Mughal emperor Jahangir's test showed it did not [1]. The color is [[celadon]] in our data, and the word covers a range, not one swatch."
+  },
+  {
+   "id": "language",
+   "title": "Words for a grey green",
+   "body": "Latin had no common word for this color and leaned on one. Pastoureau lists *glaucus* as gray-green, greenish or bluish green, while *viridis* occupies nearly the whole range of green [3]. English kept the first as [[glaucous]], which St Clair's glossary defines as a pale gray blue-green, and gave *French gray* to a very pale gray-green [9]."
+  },
+  {
+   "id": "seeing",
+   "title": "Where to see it",
+   "body": "Distance turns green to grey green. Gurney notes that warm foliage fades to a gray-green or blue-green as it recedes, because far colors lose saturation [4]. The same leaves can look sharp yellow-green when light shines through them and gray-green on their upper surface [4]. The practical eye-training habit is to look at a tree line and name the grey in it before you name the green.\n\nPigments drift this way too. The Pigment Compendium says zinc yellow tends to darken in light into a grey-green, through the formation of chromium oxide [5]. A nature book on pigment sources photographs a grey-green vivianite powder, a reminder that minerals give the color first [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 87 contain this grey green on at least five per cent of the canvas, within six color-distance units [8]. These are photographs of aged, varnished paintings, and a match is not a pigment test [8].\n\nThe earliest is Francesco Botticini's Madonna and Child with Tobias and the Angel Raphael, about 1470 [8]. The 1900s hold 21 of 1,674 paintings, 3.43 times the archive rate, and the 1910s peak at 8 of 523 [8]. Austria stands out, with 8 of 121 paintings, and Impressionism has 6 of 140 [8]. The largest single match is Klimt's [[painting:commons-Q17495516|Rosebushes under the Trees]] of 1905, where it covers 44 per cent of the canvas [8]. Renoir's [[painting:nga-1211|The Dancer]] of 1874 reaches 33 per cent [8].\n\nBy lightness, 39 per cent of the matching area sits in highlights, 51 per cent in the midtones and 10 per cent in shadows [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a plain description of a green dulled with grey",
+   "first_recorded": "undocumented",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "gray-green"
+  ],
+  "siblings": [
+   "greyish-green",
+   "sage-green",
+   "moss"
+  ],
+  "parent": null,
+  "children": [
+   "light-grey-green"
+  ],
+  "disambiguation": [
+   {
+    "slug": "celadon",
+    "gloss": "the named grey-green glaze color"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#789B73",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 87,
+  "first": "cma-97150",
+  "top_paintings": [
+   "commons-Q17495516",
+   "nga-1211"
+  ],
+  "role": {
+   "highlight": 0.39,
+   "mid": 0.51,
+   "shadow": 0.1
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Moss",
+     8.3
+    ]
+   ],
+   "iscc": "moderate yellowish green"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, \"Celadon\" and glossary",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 10 (\"Green among the Romans\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, pp. 10 and 178",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"zinc yellow\", p. 422",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, plate list, p. 26",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955 block 150; xkcd 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, glossary, \"French gray\" and \"Glaucous\"",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Is it true that celadon ware reveals poison?",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What happens to the color of green foliage as it recedes into the distance?",
+   "choices": [
+    "It dulls toward gray-green or blue-green",
+    "It turns brighter yellow",
+    "It turns red",
+    "It stays exactly the same"
+   ],
+   "answer": "It dulls toward gray-green or blue-green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Distance is a grey-green mixer: far foliage loses saturation and drifts to gray-green.",
+  "Celadon is the generic name for Chinese gray-green porcelain."
+ ],
+ "words": 518,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Etymology attributed to St Clair only; Finlay gives the Saladin theory",
+   "Removed unsupported xkcd aka"
+  ]
+ }
+}

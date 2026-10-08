@@ -1,0 +1,209 @@
+{
+ "slug": "blackish-grey",
+ "name": "Blackish Grey",
+ "hex": "#5B5C61",
+ "names": [
+  "Blackish Grey"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Blackish grey is a dark, almost neutral grey with a faint cool cast, a name from the colour tables that naturalists used before photographs, and the grey of a nuthatch's back.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A table made for mineralogists",
+   "body": "*Blackish grey* is not a paint-shop name. It belongs to the colour nomenclature that the German mineralogist Abraham Gottlob Werner fixed in 1774, so that a geologist could describe a rock without arguing over words [1]. Patrick Syme revised and widened the table in 1814 and again in 1821, taking it from about 80 terms in Jameson's *Tabular View* of 1804 to 108 and then 110 [3]. In Syme's second edition blackish grey is number 16, in the series of whites, greys and blacks [2].\n\nWhere the English name came from is slightly tangled [2][3]. Baty counts it among Werner's original greys on the 1821 chart [2], and elsewhere says Syme took blackish grey, with bluish green, saffron yellow and lilac, from the English edition of Willdenow's textbook [3]. The two statements can both be true, but Baty's pages do not settle which route the English term took [2][3]."
+  },
+  {
+   "id": "recipe",
+   "title": "Syme's recipe and his three examples",
+   "body": "Syme defined each color twice: by a painted swatch and by a recipe in words. Blackish grey, he wrote, is an ash grey that has been tinted with a little blue and darkened with a portion of black, and he glossed it as Werner's blackish lead grey without the lustre [2]. Then came three things to look at, one from each kingdom of nature: the back of a nuthatch, the old stems of hawthorn, and flint [2].\n\nThe pairing is the point of the system. A bird, a twig and a stone share the same two words, and anyone who has seen a nuthatch knows the grey [2][3]. Baty illustrates the entry with John Gould's nuthatch plate from *Birds of Europe* (1832 to 1837) and a hawthorn stem from Willkomm's flora of Spain and the Balearic Islands (1886 to 1892) [2]."
+  },
+  {
+   "id": "neighbours",
+   "title": "Its neighbours",
+   "body": "On Syme's chart blackish grey sits at the dark end of the greys [4]. The lists in Baty run through lead grey, bluish grey, smoke grey, greenish grey and yellowish grey, then blackish grey, then greyish black, brownish black and bluish black [4]. The order shifts a little between editions, and one list slips iron grey in before greyish black, but blackish grey stands just ahead of greyish black in most [4].\n\nSyme thus separates a grey leaning toward black from a black leaning toward grey. Today the nearest everyday names are [[charcoal]] and [[greyish-black]], with [[steel-grey]], [[bluish-grey]] and [[slate-grey]] a shade lighter or cooler [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is our library's rendering of Werner's number 16, taken from an aged chart and so only approximate [5]. It is nearly neutral, with a chroma of 3 on a lightness of 39, and leans very slightly cool [5]. The closest everyday name is [[charcoal]], 10.8 units of color difference away [5]. How blue the original was before the paper aged nobody can now say, and Syme's own recipe adds only a little blue to ash grey [2]."
+  },
+  {
+   "id": "number",
+   "title": "A grey that a man saw as five",
+   "body": "Birren passes on an old report by Francis Galton of a man who saw numbers in color: for him 1 was black, 2 yellow, 4 brown and 5 blackish gray [6]. It is a single anecdote, but it shows the phrase working as plain English, well outside Syme's chart [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 677 works, or 2.9 per cent [7]. It is a grey of recent painting: 133 of 1,674 paintings from the 1900s hold it (7.9 per cent, 2.8 times the museums' baseline), against 282 of 8,345 from the 1800s and 22 of 945 from the 1400s [7]. Inside a painting it is mostly a middle tone, 57 per cent of the time, and a shadow 35 per cent of the time [7].\n\nSome painters lean on it: [[painter:alfred-sisley|Sisley]] has it in 9 of his 50 works here, and Norwegian painting holds it in 15 of 120 [7]. The largest covers are dark grounds, such as the 63 per cent of the canvas in [[painting:nga-42485|Profile Portrait of a Man]] (1835) and 57 per cent in Bierstadt's [[painting:cma-150968|Fir Trees and Storm Clouds]] [7]. The earliest match is a work dated 1275 [7], but the name's earliest record in our sources is 1821, so that is a look-alike hue and not Syme's grey [5][7]. As always these are photographs of aged, varnished paintings, so a match is a look-alike color, not a pigment test [7].\n\nIn Google Books the phrase stands at about 72 per cent of its early peak in 1800, falls to half by 1840 and to a fifth by 1900, and is near 7 per cent of it in the 2000s [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Werner's grey series (blackish lead grey without the lustre)",
+   "first_recorded": "Werner 1774; Syme 1814, 1821 (no. 16)",
+   "source": "Baty, Nature's Palette, pp. 16, 58-59, 173"
+  },
+  "aka": [
+   "blackish lead grey (Werner)"
+  ],
+  "siblings": [
+   "greyish-black",
+   "bluish-grey",
+   "steel-grey",
+   "charcoal"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "charcoal",
+    "gloss": "the nearest everyday name, about 11 units away and a little lighter"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#5B5C61",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 677,
+  "top_paintings": [
+   "nga-42485",
+   "cma-150968"
+  ],
+  "painters": [
+   "alfred-sisley"
+  ],
+  "role": {
+   "mid": 0.57,
+   "shadow": 0.35,
+   "highlight": 0.08
+  },
+  "ngram": {
+   "peak": 1808,
+   "rel_1840": 0.5,
+   "rel_1900": 0.2
+  },
+  "measured": {
+   "lch": [
+    39,
+    3,
+    283
+   ],
+   "nearest": [
+    [
+     "Charcoal",
+     10.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 16 (introduction)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 58-59 (Syme no. 16, Blackish Grey)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 173-174 (Syme's terminology)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34-35 (lists of Syme's terms)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub library (Werner no. 16, aged swatch, approximate) and graph data",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 15 (\"This Illusory World\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"blackish grey\", all senses, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which three things did Syme give as examples of blackish grey?",
+   "choices": [
+    "The back of a nuthatch, old hawthorn stems, and flint",
+    "A robin's quill feathers, ash bark and clay slate",
+    "A wood pigeon's back, sea kale leaves and limestone",
+    "A raven, ink and coal"
+   ],
+   "answer": "The back of a nuthatch, old hawthorn stems, and flint",
+   "kind": "pick"
+  },
+  {
+   "q": "What recipe did Syme give for blackish grey?",
+   "choices": [
+    "Ash grey with a little blue and a portion of black",
+    "Black with a little white",
+    "Lead with a little brown",
+    "Charcoal with much yellow"
+   ],
+   "answer": "Ash grey with a little blue and a portion of black",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a thirteenth-century painting that matches this swatch shows the color name is that old.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Syme's blackish grey is the back of a nuthatch, the old stems of hawthorn and a piece of flint.",
+  "Look at flint or weathered hawthorn twigs: dark, nearly neutral and never quite black."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 782
+}

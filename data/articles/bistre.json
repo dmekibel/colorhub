@@ -1,0 +1,260 @@
+{
+ "slug": "bistre",
+ "name": "Bistre",
+ "hex": "#3D2B1F",
+ "names": [
+  "Bistre"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Bistre is a warm, transparent dark brown made from the soot of burning beechwood, the wash that old-master draughtsmen reached for until sepia took its place.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A soot brown",
+   "body": "Bistre was made by collecting the soot of burning wood, preferably beech, and boiling it down into a brown wash [2][3]. The word is rare in British sources before the seventeenth century, and when it does appear it is mostly in works with a French connection; plain English writers said \"soot\" or \"soot of wood\" [3]. Earlier names include soot brown, *fuligno* and *caligo* [1][3]. Coles traces *caligo*, Latin for darkness, back through Greek to a Sanskrit word for black [1]. Older texts also spell the English word *bister* [12]."
+  },
+  {
+   "id": "material",
+   "title": "What is in the wash",
+   "body": "Chemically, bistre is a mixture of flame carbon, charred wood and the tarry material left in the soot [1][3]. The tar is what makes it brown rather than black, and it is also why bistre fades faster than the carbon blacks [3][1]. Coles adds that the tone depends on how much resin the beechwood gives up, and that the liquid must not be boiled while it is reduced, or the resin's natural color may be spoiled [1].\n\nThe Pigment Compendium describes the process a little differently: hot or boiling water poured over the soot, the particles left to settle, the liquid decanted and the sediment dried [3]. The two accounts may describe different stages, and neither is a workshop manual. A later trade name for the same material was brown lampblack [10]."
+  },
+  {
+   "id": "drawing",
+   "title": "Pen, wash and the old masters",
+   "body": "Bistre was in use in manuscript illumination from the fourteenth century, and in the seventeenth and eighteenth centuries it was a standard wash for drawings and watercolors [1][4]. It suited water-based work because asphaltum, a stronger dark brown, is too oily to be mixed into water [1]. The Pigment Compendium notes the same division, with asphalt supplying the dark browns of oil painting [3].\n\nBall says [[painter:anthony-van-dyck|Van Dyck]] liked to glaze his shadows with bistre, citing his 1638–9 double portrait of the Stuart brothers, though bitumen is the main subject of that passage [4]. He also stresses that bistre took skill and knowledge to use well in oils [4]. The same compendium suggests the pigment was in primary use for only a short period in the eighteenth century [3].\n\nA nineteenth-century brown for watercolorists, Liquid Prout's Brown, was seemingly named for the English artist Samuel Prout (1783–1852) and, as the chemist Salter implies, was based on bistre or sepia [5]."
+  },
+  {
+   "id": "sepia",
+   "title": "Why sepia replaced it",
+   "body": "Paterson records that bistre was superseded by [[sepia]], and Coles says the same of wash drawings [2][6][7]. Coles also points to the organic, tarry content that made bistre not very lightfast, and says more lightfast pigments replaced it in the nineteenth century [1].\n\nThe books disagree on when. Coles puts sepia's introduction as a watercolor at around 1780 [7]. The Pigment Compendium, following Harley, implies that sepia only became available at the start of the nineteenth century, when it partly displaced both Indian ink and bistre [8]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch #3D2B1F is the value Wikipedia's list gives for bistre [9]. ISCC-NBS (1955) files it as a dark grayish yellow brown, and Ridgway's 1912 plate XXIX shows a Bistre of his own, one of the entries that gives our library a dated record from 1886 [9]. Maerz and Paul (1930) list a Brierwood at this same value, first recorded 1927 [9]. Treat the swatch as a dark warm brown, not a measurement of any historical wash. Coles calls the real material transparent, so a thin wash on paper reads lighter and more golden than this [1].\n\nThe nearest name in our teaching set is [[umber]], 12.7 units away, with [[brown]] as its family [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive, bistre-like brown is the most widespread color there is. A color within six units of this swatch covers at least five per cent of the canvas in 8,919 of 23,781 paintings, or 37.5 per cent [11]. It peaks in the 1600s, when 3,275 of 6,394 canvases (51 per cent) qualify, and the richest single decade is the 1660s, with 471 of 820 [11]. By the 1900s the rate has fallen to 15 per cent, and among Impressionists it is 22 of 140 [11].\n\nThe painters who lean on it hardest include [[painter:jean-baptiste-vanmour|Jean Baptiste Vanmour]], in 28 of 29 works, and [[painter:jan-steen|Jan Steen]], in 20 of 22 [11]. The deepest single matches are Vanmour's [[painting:rijks-200108029|*De reis effendi*]] and [[painting:nga-46629|*Dr. Vignardonne*]] by Gros, each with more than 90 per cent of the canvas within range [11]. Inside a painting this brown falls among the shadows in 77 per cent of the canvases that hold it [11].\n\nThese are photographs of aged, varnished paintings, so a match is a color and not a pigment test. A dark brown canvas does not show that bistre was used, and bistre itself was used mainly for drawings and watercolors, which our painting archive does not hold [11][1]. In print, the word reaches five per cent of its peak frequency by 1800, peaks around 1876 and stands near 6 per cent of that peak by 2000 [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "French *bistre*, a brown wash from wood soot; earlier names soot brown, fuligno and caligo",
+   "first_recorded": "in manuscript illumination from the 14th century; the word is rare in British sources before the 1600s",
+   "source": "Coles, Chromatopia, p. 105; Eastaugh et al., Pigment Compendium, \"bistre\""
+  },
+  "aka": [
+   "bister",
+   "soot brown",
+   "brown lampblack",
+   "fuligno",
+   "caligo"
+  ],
+  "siblings": [
+   "sepia",
+   "umber",
+   "raw-umber"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sepia",
+    "gloss": "the cuttlefish-ink brown that replaced bistre in wash drawings"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "caligo (darkness), an earlier name for the material"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#3D2B1F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 8919,
+  "rate": 0.375,
+  "peak_century": {
+   "century": 1600,
+   "hits": 3275,
+   "n": 6394
+  },
+  "peak_decade": {
+   "decade": 1660,
+   "hits": 471,
+   "n": 820
+  },
+  "role": {
+   "shadow": 0.77,
+   "mid": 0.23
+  },
+  "painters": [
+   {
+    "name": "Jean Baptiste Vanmour",
+    "hits": 28,
+    "n": 29
+   },
+   {
+    "name": "Jan Steen",
+    "hits": 20,
+    "n": 22
+   }
+  ],
+  "top_paintings": [
+   "rijks-200108029",
+   "nga-46629",
+   "rijks-20025753",
+   "nga-81871"
+  ],
+  "ngram": {
+   "first_5pct": 1800,
+   "peak": 1876,
+   "rel_2000": 0.062
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, pp. 105 and 107",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"bistre\", p. 51",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"bistre\", p. 62",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"Prout's brown\", p. 321",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sepia\", p. 362",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 107",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"sepia\", p. 350",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub library: Wikipedia list, Ridgway 1886 and 1912, ISCC-NBS 1955 block 61, Maerz & Paul 1930; nearest-name distance computed by ColorHub (CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"brown lampblack\", p. 76",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive and graph field notes, as photographed (n = 23,781; CIEDE2000 within 6, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"bistre\" (5-year smoothed, relative to peak); ColorHub aliases, \"bister\"",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was bistre made from?",
+   "choices": [
+    "The soot of burning beechwood",
+    "Cuttlefish ink",
+    "Ground brown earth",
+    "Charred bone"
+   ],
+   "answer": "The soot of burning beechwood",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did bistre lose its place to more lightfast pigments?",
+   "choices": [
+    "Its tarry, organic content made it not very lightfast",
+    "It was too expensive to make",
+    "It could not be mixed with water",
+    "It was banned as poisonous"
+   ],
+   "answer": "Its tarry, organic content made it not very lightfast",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: bistre-like browns are as common in Impressionist paintings as in paintings of the 1600s.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bistre is soot: boil down the smoke residue of burning beechwood and you have the brown wash of old-master drawings.",
+  "Books disagree on when sepia replaced bistre: about 1780 by one account, the early 1800s by another.",
+  "In our archive a brown this dark fills a large part of 37 per cent of all paintings, and most heavily in the 1600s."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Wash-making: Coles says do not boil, Eastaugh describes hot or boiling water; reported as differing accounts.",
+   "Date sepia replaced bistre: Coles c. 1780 vs Harley/Eastaugh early 1800s; stated as disagreement.",
+   "Van Dyck bistre glazing is Ball's passing claim inside a bitumen passage; hedged.",
+   "Archive matches are colors, not pigment identifications (said in text).",
+   "Checker re-traced key claims against book text (Coles, Ball, Finlay, Gage); no changes needed."
+  ]
+ },
+ "words": 817
+}

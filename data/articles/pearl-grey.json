@@ -1,0 +1,203 @@
+{
+ "slug": "pearl-grey",
+ "name": "Pearl Grey",
+ "hex": "#B7B5AC",
+ "names": [
+  "Pearl Grey"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Pearl grey is a pale, quiet grey, listed as number 12 among the greys of Syme's 1821 color guide for naturalists, where its examples were a gull's back, a flower's petals and a piece of stone.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey with two descriptions",
+   "body": "Pearl grey is a light, quiet grey. Paterson calls it a blue-grey [4], yet the swatch here falls in the ISCC-NBS block named \"yellowish gray\" (block 93, 4.2 units away) [7]. The same word shows up in Ridgway's color books of 1886 and 1912 (plate LII in the later one) [7]. When a hue word is attached to a grey, it only says which way the grey leans, and sources lean it differently. For a pearl grey that is clearly cool, see [[bluish-grey]]; for one that is clearly warm, [[yellowish-grey]].\n\nWhat the name refers to is not stated in the books. The gem is the obvious guess, and our nearest neighbor is plain [[pearl]], 4 units apart [7], but the nineteenth-century sources anchor the name in birds, flowers and stone instead."
+  },
+  {
+   "id": "syme",
+   "title": "A grey from the naturalists' chart",
+   "body": "Pearl grey is number 12 among the greys in Syme's 1821 edition of Werner's color nomenclature, the chart naturalists used to name the color of a feather, a petal or a mineral [1]. It was not one of Werner's own greys [1]. Syme took it, along with number 15, from the Picardet system, whereas numbers 10, 13, 14 and 16 came from Werner and number 11, French grey, from Syme's own 1814 edition [1]. Baty's chart of color lists from 1774 to 1821 agrees that pearl grey is missing from the earliest list and present in later ones, though the labels in the scan are ambiguous [3].\n\nSyme gave three examples, one for each kingdom of nature: the backs of the black-headed gull and the kittiwake, the back of the petals of the purple hepatica, and porcelain jasper [1]. His recipe for the color is a little crimson red and blue stirred into an ash grey, or a little red into a bluish grey [2]. Baty pairs the entry with a plate of a black-headed gull from Gould's *Birds of Europe* (1832-37), a liverwort plate from *Le Règne végétal* (1864-71) and a specimen of jasper from Sowerby's *British Mineralogy* (1802-17) [2]."
+  },
+  {
+   "id": "words",
+   "title": "Pearl grey in words",
+   "body": "Paterson's dictionary sorts it among the greys with dove-grey, French grey and oyster [4]. In *Chroma*, Jarman's short riff on grey and dress includes a gentleman in a pearl grey hat [5]. Birren quotes a color-and-music analogy in which pearl-gray is the faintest murmur and scarlet the bugle-call [6]. That is a metaphor, not evidence about how people feel color."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 2,370 works, about one in ten [8]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [8]. Inside a painting it most often plays a light, in 62 per cent of 926 paintings measured by lightness rank [8].\n\nThe color grows with time. It appears in 7 per cent of paintings from the 1400s and 17 per cent of those from the 1900s [8]. Impressionism holds it in 32 of 140 works, about 2.3 times the baseline [8]. Among painters, 15 of [[painter:eugene-boudin|Boudin]]'s 33 works here hold it, and 9 of Shen Zhou's 12 [8]. The most extreme canvases are Klimt's [[painting:commons-Q58427233|Beethoven Frieze]], where the match covers 87 per cent, and van Gogh's [[painting:commons-Q19836140|Impasse des Deux Frères]] (1887), at 80 per cent [8].\n\nPaintings that hold pearl grey also hold silver and ash colors far more than chance (lift 5.5 and 4.6) [8]. For the real thing, look at the back of a black-headed gull, which is Syme's own example [1][2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin of the name undocumented in the books; Syme's examples are gull backs, hepatica petals and porcelain jasper",
+   "first_recorded": "Syme 1821 (no. 12, from the Picardet system); absent from Baty's earliest list (1774) and present in later ones",
+   "source": "Baty, Nature's Palette, pp. 32, 51, 54"
+  },
+  "aka": [
+   "Pearl-grey"
+  ],
+  "siblings": [
+   "pearl",
+   "french-grey",
+   "bluish-grey",
+   "yellowish-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "pearl",
+    "gloss": "Pearl is the primary swatch; Pearl Grey is a family word about 4 units away"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B7B5AC",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2370,
+  "top_paintings": [
+   "commons-Q58427233",
+   "cma-147948",
+   "cma-152407",
+   "commons-Q19836140"
+  ],
+  "painters": [
+   "eugene-boudin",
+   "shen-zhou",
+   "carlos-de-haes"
+  ],
+  "role": {
+   "light": 0.62
+  },
+  "company": [
+   "silver",
+   "ash"
+  ],
+  "measured": {
+   "iscc": [
+    "yellowish gray",
+    93,
+    4.2
+   ],
+   "lch": [
+    73.6,
+    4.9,
+    100.8
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 51 (Syme's greys, no. 12)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 54 (\"Pearl Grey\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 32 (lists from Werner to Syme, 1774-1821)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, pp. 302, 501 (\"pearl grey\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 32",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, p. 22",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 93; Ridgway 1886 and 1912 plate LII; Werner/Syme no. 12; nearest names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive and article_field, 23,781 paintings, CIEDE2000 within 6, at least 5% of canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Syme name as the animal example of pearl grey?",
+   "choices": [
+    "The backs of black-headed and kittiwake gulls",
+    "The breast of a robin",
+    "The back of a wood pigeon",
+    "The breast of a long-tailed tit"
+   ],
+   "answer": "The backs of black-headed and kittiwake gulls",
+   "kind": "pick"
+  },
+  {
+   "q": "Where did Syme take pearl grey from in his 1821 edition?",
+   "choices": [
+    "The Picardet system",
+    "Werner's own original greys",
+    "Ridgway's plates",
+    "A paint maker's catalog"
+   ],
+   "answer": "The Picardet system",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson and the ISCC-NBS block for our swatch agree that pearl grey is a blue-grey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look at the back of a black-headed gull: it was Syme's own example of pearl grey in 1821.",
+  "Pearl grey was not one of Werner's original greys; Syme borrowed it from another naturalist's system.",
+  "Pearl grey is found in about one painting in ten in our archive, and more often in later centuries."
+ ],
+ "words": 607,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported full list of Syme's greys 9-16 (only 10-16 partly on cards)",
+   "Removed 'several swatches' causal claim, 'shorthand for refinement', 'emblem of elegant dress', 'older' analogy",
+   "Baty list claim hedged for ambiguous scan labels; aside first_recorded corrected"
+  ]
+ }
+}

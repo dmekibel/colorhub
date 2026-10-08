@@ -1,0 +1,249 @@
+{
+ "slug": "wheat",
+ "name": "Wheat",
+ "hex": "#F5DEB3",
+ "names": [
+  "Wheat"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Wheat is a pale gold, the color of ripe grain in a dry field, and one of the 140 named colors that browsers inherited from the X11 system.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale gold named for the grain",
+   "body": "Paterson's dictionary defines wheat simply as a light yellow, and records that it is one of the 140 colours of the X11 set, with the code #F5DEB3 [1]. The same dictionary uses *wheatish* for light-skinned [1]. St Clair's glossary says pale gold [2]. On screen the swatch is a soft buff, lighter and creamier than [[straw]] and warmer than [[cornsilk]] [3]. Its nearest named color in our library is [[beige]], about three units away on the ΔE scale [3].\n\nFew of the books treat wheat as a color with a history of its own, so most of this article is about what ripe wheat has meant to the people who named yellows [4][5]."
+  },
+  {
+   "id": "swatches",
+   "title": "Three wheats",
+   "body": "The name does not mean one color across sources. The CSS and X11 wheat is the pale buff shown here [1][3]. The xkcd survey's wheat is a much stronger yellow, #FBDD7E, and the Wikipedia entry's wheat is a dark golden brown, #967117 [3]. If you meet a wheat swatch, check which one it is.\n\nThe historical charts are closer to the web color. Our library matches it within about two units to Moccasin, to Ridgway's Light Buff of 1912, and to Werner's Cream Yellow, number 75 in his list of yellows [3]. Werner's own examples for that yellow were the breast of a teal drake and porcelain jasper [3]. Maerz and Paul's 1930 dictionary shows two entries near this color; our library records dates of 1711 and 1920 for them, and does not say which plate is the true wheat, so treat the dates as indicative [3]. The ISCC-NBS system of 1955 files it in several blocks, among them 58, 73 and 87 [3]."
+  },
+  {
+   "id": "yardstick",
+   "title": "Wheat as the yardstick of yellow",
+   "body": "Pastoureau notes that dictionaries explain yellow by pointing at lemon, saffron, gold and ripe wheat; he calls this true but not a definition [4]. In the ancient Mediterranean, where farming fed most people, the golden yellow of ripe wheat and other grain carried positive meanings: light, warmth, prosperity and fertility [5]. Medieval speech kept the comparison, with set phrases such as yellow as honey, wax or ripe wheat [6].\n\nIn Latin, *flavus* described yellows found in nature that people liked, among them flowers, fruit, wheat, barley, honey and sand [7]. Pastoureau mentions a hypothesis that *flavus* is a very early borrowing from the Gaulish *blavos*, yellow, itself from a word for wheat, and calls it tentative [7]. Ceres, the Roman goddess of harvest, was shown with blond hair, crowned with wheat and often dressed in yellow [7]. The Bible hardly names yellow at all, and when it does it goes through gold, wax, honey or ripe wheat [8]."
+  },
+  {
+   "id": "dye-shop",
+   "title": "Wheat in the dye shop",
+   "body": "Wheat also helped to make other colors. In West Africa, cloth was dyed in [[indigo]] after designs were combed through a paste, and Balfour-Paul notes that a similar wheat-starch technique survives in Sierra Leone and the Gambia, though no longer with indigo [9]. In Rajasthan, the clay-rich mud that resists the dye is made adhesive by adding gum arabic, castor oil, lime and a little wheat flour [9]. Wheat bran also appears among the additives that dyers put in fermenting indigo vats [9].\n\nGarfield quotes an English recipe for the fastest blue vat that calls for woad, madder, copperas, lime and a peck of bran, the refuse of wheat [10]. A medieval pigment recipe for a red called cynople uses wheat flour to make cakes of dye [11], and starch from wheat is named among the plant starches that were added to paints as an extender or as a base for dyes [11]. In all these cases wheat is a tool, not the color."
+  },
+  {
+   "id": "straw",
+   "title": "Straw and the Leghorn hat",
+   "body": "The yellow of dried wheat plant is close to the yellow of straw. Paterson defines *leghorn* as the yellow of straw, taking its name from Leghorn, now Livorno, in Italy, where a particular wheat gave the fine straw for hats and bonnets [12]. The straw was green when harvested and was bleached before use [12]. Pale straw yellows of this kind are close relatives of [[ecru]], [[tan]] and [[buff]] on screen [3][12]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Wheat is a common painted color, and mostly a light one. In our archive of 23,781 museum paintings, a color within six units of this swatch covers at least five per cent of the canvas in 492 works, or about 2.1 per cent [13]. In the lightness ordering of each painting this color is a highlight in 98 per cent of cases [13]. Its most frequent company is [[beige]], which appears in 467 of those works, about eleven times the archive's usual rate [13].\n\nBy country it is most concentrated in Iran (3 of 29 works) and China, where 42 of 635 paintings carry it, 3.2 times the archive rate [13]. The archive cannot tell paper or silk from paint, so we cannot say how much of this is undyed ground; that is our guess, not a measurement [13]. The largest patches, covering 78 to 84 per cent of the canvas, are in East Asian and Indian works on paper, among them Matsumura Goshun's *Scenes from Essays in Idleness* and Kehar Singh's *Weaving and Spinning* [13]. Among European painters, [[painter:john-singer-sargent|Sargent]] has 16 works of 287 (5.6 per cent), and Jean-Jacques Henner 4 of 18 [13]. These are photographs of aged, varnished works, so the colors are as photographed [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "ripe wheat (the grain)",
+   "first_recorded": "Maerz & Paul 1930 give 1711 for one entry near this color and 1920 for another; which is wheat is not settled",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "wheatish (light-skinned, Paterson)"
+  ],
+  "siblings": [
+   "straw",
+   "beige",
+   "cornsilk"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "straw",
+    "gloss": "A stronger, greener yellow than wheat on screens"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#F5DEB3",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 492,
+  "top_paintings": [
+   "cma-146143",
+   "cma-153637",
+   "nga-71394"
+  ],
+  "role": {
+   "highlight": 0.98,
+   "mid": 0.02
+  },
+  "company": [
+   [
+    "Beige",
+    467,
+    11.0
+   ],
+   [
+    "Ecru",
+    67,
+    3.49
+   ]
+  ],
+  "measured": {
+   "lch": [
+    89,
+    24,
+    86
+   ],
+   "nearest": [
+    [
+     "Beige",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"wheat\" and \"wheatish\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Wheat (CSS, xkcd, Wikipedia, ISCC-NBS 1955, Maerz & Paul 1930, Werner, Ridgway), near-duplicates and nearest names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 8",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, pp. 132, 166-167",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 150, 365 (\"cynople\"; \"starch\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"leghorn\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which wheat swatch is the one used here?",
+   "choices": [
+    "The pale buff from the CSS and X11 set",
+    "A strong yellow from the xkcd survey",
+    "A dark golden brown from Wikipedia",
+    "A grey-green"
+   ],
+   "answer": "The pale buff from the CSS and X11 set",
+   "kind": "pick"
+  },
+  {
+   "q": "How does Pastoureau treat the idea that Latin flavus came from the Gaulish word for wheat?",
+   "choices": [
+    "As a tentative hypothesis",
+    "As settled fact",
+    "As a medieval forgery",
+    "He does not mention it"
+   ],
+   "answer": "As a tentative hypothesis",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: wheat itself was used as a dye for yellow cloth in the books we checked.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dictionaries often define yellow by naming ripe wheat, and Pastoureau says that is not really a definition.",
+  "Three sources, three wheats: the web color is a pale buff, xkcd's is a strong yellow, Wikipedia's is a dark golden brown."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified 8 key claims against fact card and book text; no changes needed."
+  ]
+ },
+ "words": 876
+}

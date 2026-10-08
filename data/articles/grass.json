@@ -253,13 +253,10 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "claude",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Birren claim marked contested old opinion",
-   "Kirwan's sparrow-grass green identity is unsettled (Baty)",
-   "Swatch Grass comes only from xkcd survey",
-   "Greek xanthos/grass: single book (Gage)"
+   "Re-verified vs Baty, Finlay, Greenfield, Livingstone, St Clair; Birren claim already framed as contested"
   ]
  },
  "words": 1377

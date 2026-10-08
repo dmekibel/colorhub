@@ -27,7 +27,7 @@
   {
    "id": "black",
    "title": "Velvet black and velvet brown",
-   "body": "Velvet also lent its name to darks. Werner's color nomenclature, as extended by Syme in 1821, lists velvet-black in its series of blacks, between iron-black and pitch-black [9]. The *Pigment Compendium* records a pigment called velvet black, which Beguin's dictionary took to be a bone black made, it was said, from the feet of sheep [10]. Velvet brown, by Mayer's account, was a mixture of raw or burnt umber with a dark ochre [10]. The same compendium quotes Church's remark that coconut char gives the densest, most velvet-like black [10].\n\nA velvet black is not a flat black. Gurney asks painters to hold a piece of black velvet beside a distant open window: even a black that looks profound across the street is infused with a soft blue or violet, the same scattering that colors the sky [11]. Jarman, writing as a filmmaker, describes black velvet on film as a black without end [12]."
+   "body": "Velvet also lent its name to darks. Werner's color nomenclature, as extended by Syme in 1821, lists velvet-black in its series of blacks, between iron-black and pitch-black [9]. The *Pigment Compendium* records a pigment called velvet black, which Beguin's dictionary took to be a bone black made, it was said, from the feet of sheep [10]. Velvet brown, by Mayer's account, was a mixture of raw or burnt umber with a dark ochre [10]. The same compendium quotes Church's remark that coconut char gives the densest, most velvet-like black [10].\n\nA velvet black is not a flat black. Gurney suggests holding a piece of black velvet beside a distant open window: even a black that looks profound across the street is infused with a soft blue or violet, the same scattering that colors the sky [11]. Jarman, writing as a filmmaker, describes black velvet on film as a black without end [12]."
   },
   {
    "id": "mauve",
@@ -234,15 +234,13 @@
   "Genoa's weavers added special selvedges to black silk velvet because that was where buyers checked the weave.",
   "The swatch name velvet comes from a 2010 online survey, but the cloth it names carried Europe's most expensive reds."
  ],
- "words": 827,
+ "words": 825,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 26 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Swatch is an xkcd crowd name; origin as a color word is undocumented, stated plainly.",
-   "No painting meets the 1% canvas threshold: reported as an archive limit, not as a claim about painting.",
-   "Jarman and Gurney statements paraphrased, hedged by author."
+   "Gurney velvet test reworded from 'asks' to 'suggests' to match the source."
   ]
  }
 }

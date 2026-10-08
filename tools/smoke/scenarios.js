@@ -17,7 +17,8 @@ const H = {
   // Tap something on a color/name page that should open another page (a swatch, a near color, a palette chip).
   async tapSwatch(t) {
     const before = H.title(t) + "|" + H.chip(t);
-    const sels = ["[data-swatch]", ".lk-row[data-cp-near]", ".lk-row[data-np-near]", ".pchip[data-node]", ".kin[data-node]"];
+    // the Walk's honeycomb is a color page's one neighbor list now (it absorbed Nearest names, 2026-10-08)
+    const sels = ["[data-swatch]", ".lk-row[data-cp-near]", ".lk-row[data-np-near]", ".rp-hc-c[data-rc-open]", ".pchip[data-node]", ".kin[data-node]"];
     let target = null, used = "";
     for (const s of sels) { const e = t.$$(s, t.$("#app"))[0]; if (e) { target = e; used = s; break; } }
     t.expect(target, "no swatch / near-color / palette chip on the page to tap");
@@ -48,6 +49,16 @@ const H = {
     const cv = await t.waitFor("canvas", 10000, "the honeycomb canvas");
     await t.waitFor(() => /\d/.test(t.text(".hm-title small")) && !/Loading/.test(t.text(".hm-title small")), 10000, "the honeycomb to fill");
     return cv;
+  },
+  // Home's right corner: one button, a labeled menu (js/home.js doMenu); which = a [data-do] row
+  async menu(t, which) {
+    await t.click("#hmDo", { wait: 120 });
+    await t.waitFor(".hm-do-stem [data-do]", 6000, "the right corner's menu");
+    if (which) await t.click(`.hm-do-stem [data-do="${which}"]`, { wait: 200 });
+  },
+  async sheet(t, which = "colors") {
+    await H.menu(t, which);
+    await t.waitFor(`.hm-chooser[data-which="${which}"]`, 10000, `the ${which} sheet`);
   },
   async keys(t, key) { t.w.dispatchEvent(new t.w.KeyboardEvent("keydown", { key, bubbles: true })); await t.sleep(300); },
 };
@@ -96,7 +107,7 @@ scenario("home", "chrome buttons stay tappable after a touch", async t => {
   t.expect(!shown.length, `still tappable while dragging: ${shown.map(c => c.getAttribute("aria-label")).join(", ")}`);
   cv.dispatchEvent(new t.w.PointerEvent("pointerup", o2));
   await t.sleep(4000);   // the old bug: the buttons faded and went untappable after a timer
-  for (const sel of ["#hmView", "[data-rooms-corner]", "[data-pr-study]"].filter(s => t.$(s))) {
+  for (const sel of ["#hmDo", "[data-rooms-corner]"].filter(s => t.$(s))) {
     const e = t.$(sel); t.expect(e, `${sel} is missing`);
     const why = t.reachable(e); t.expect(!why, `${sel} ${why} after the honeycomb was touched`);
   }
@@ -104,8 +115,7 @@ scenario("home", "chrome buttons stay tappable after a touch", async t => {
 
 scenario("home", "View sheet opens; stage chips change the count", async t => {
   await H.homeReady(t);
-  await t.click("#hmView", { pointer: true });
-  await t.waitFor(".hm-chooser", 10000, "the View sheet");
+  await H.sheet(t, "colors");
   const chips = t.$$('.hm-chooser [data-src^="stage:"]');
   t.expect(chips.length >= 3, `only ${chips.length} stage chips`);
   const count0 = H.num(t.text("[data-count]")), seen = [count0];
@@ -125,13 +135,10 @@ scenario("home", "View sheet opens; stage chips change the count", async t => {
   t.expect(H.num(t.text(".hm-title small")) === seen[seen.length - 1], `the title says "${t.text(".hm-title small")}" but the sheet says ${seen[seen.length - 1]}`);
 });
 
-scenario("home", "View sheet: Look tab, styles and sliders", async t => {
+scenario("home", "Arrange sheet: Looks and the feel sliders", async t => {
   await H.homeReady(t);
-  await t.click("#hmView", { pointer: true });
-  await t.waitFor(".hm-chooser", 10000, "the View sheet");
-  await t.click('.hm-chooser [data-tab="look"]');
-  t.expect(!t.$('.hm-chooser [data-panel="look"]').hidden, "the Look panel did not show");
-  t.expect(t.$('.hm-chooser [data-panel="show"]').hidden, "the Show panel stayed visible on the Look tab");
+  await H.sheet(t, "arrange");
+  t.expect(!t.$(".hm-tabs, [data-tab]"), "the Arrange sheet still has tabs");
   const styles = t.$$(".hm-look-chip");
   t.expect(styles.length >= 3, `only ${styles.length} style chips`);
   const n0 = H.num(t.text("[data-count]"));
@@ -140,16 +147,71 @@ scenario("home", "View sheet: Look tab, styles and sliders", async t => {
     t.expect(s.classList.contains("on"), `style chip "${t.text(s)}" did not turn on`);
   }
   t.expect(!t.$(".hm-look-sliders, [data-lab-open]"), "the developer sliders or lab link are back in the View sheet");
-  await t.click('.hm-chooser [data-tab="show"]');
-  t.expect(!t.$('.hm-chooser [data-panel="show"]').hidden, "back to the Show tab did not show it");
+  // the three friendly sliders: words at the ends, never raw numbers; Magnify changes the middle bubble; Reset restores
+  const feel = t.$$(".hm-feel-row");
+  t.expect(feel.length === 3, `${feel.length} feel sliders`);
+  t.expect(!feel.some(r => /\d/.test(r.innerText)), "a feel slider shows a number");
+  const mag = t.$('[data-feel="mag"] input'), cfg0 = t.ev("HM_CTRL.getCfg().resolved.m0");
+  mag.value = "0.1"; mag.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(100);
+  const cfg1 = t.ev("HM_CTRL.getCfg().resolved.m0");
+  t.expect(cfg1 < cfg0 - .5, `Magnify down did not flatten the lens (${cfg0} -> ${cfg1})`);
+  t.expect(Math.abs(t.ev("S.hm.feel.mag") - .1) < .01, "Magnify was not kept");
+  await t.click("[data-feel-reset]", { wait: 150 });
+  t.expect(Math.abs(t.ev("HM_CTRL.getCfg().resolved.m0") - cfg0) < .01 && Math.abs(+mag.value - t.ev("HM_FEEL0.mag")) < .01, "Reset did not bring the feel back");
   t.expect(H.num(t.text("[data-count]")) === n0, "looking at styles changed the item count");
   const cv = t.$("canvas"); t.expect(cv && cv.width > 0, "the honeycomb canvas disappeared");
 });
 
+scenario("home", "Arrange sheet: the strip morphs the map and keeps every color", async t => {
+  await H.homeReady(t);
+  await H.sheet(t, "arrange");
+  const arrs = t.$$(".hm-chooser [data-arr]");
+  t.expect(arrs.length >= 8, `only ${arrs.length} arrangements`);
+  await t.waitFor(() => arrs.every(b => { const c = b.querySelector("canvas"), d = c.getContext("2d").getImageData(0, 0, c.width, c.height).data; for (let i = 3; i < d.length; i += 16) if (d[i]) return true; return false; }), 6000, "every arrangement picture to draw");
+  const n0 = H.num(t.text("[data-count]"));
+  for (const b of arrs.filter(b => !b.classList.contains("on"))) {
+    await t.click(b, { wait: 120 });
+    t.expect(b.classList.contains("on") && t.ev("S.hm.arr") === b.dataset.arr, `arrangement "${b.dataset.arr}" did not turn on`);
+    t.expect(t.ev("HM_CTRL.getCfg().resolved.layout") === t.ev(`hmLayoutKey("${b.dataset.arr}", S.hm.style)`), `the map did not take "${b.dataset.arr}"`);
+    t.expect(H.num(t.text("[data-count]")) === n0, `arrangement "${b.dataset.arr}" changed the count`);
+    t.expect(/\S/.test(t.text("[data-arr-sub]")), "no line says what the arrangement means");
+  }
+  // every color exactly once in each arrangement
+  const dupes = t.ev("HONEY_ARR_IDS.filter(id => { const its = hmStageItems(250); const l = honeyLayout(its, hmLayoutKey(id, 'original')); return new Set(l.pts.map(p => p.it.n)).size !== its.length || l.pts.length !== its.length; })");
+  t.expect(!dupes.length, `arrangements that drop or repeat colors: ${dupes.join(", ")}`);
+  // leaving: the clear ✕, and a tap on the map above the sheet
+  await t.click("[data-sheet-close]", { wait: 450 });
+  t.expect(!t.$(".hm-chooser"), "✕ did not close the Arrange sheet");
+  await H.sheet(t, "colors");
+  const scrim = t.$(".scrim.hm-scrim-clear");
+  t.expect(scrim, "the Colors sheet dims the map (no clear scrim)");   // the look itself is checked in the screenshots: headless virtual time leaves the fade mid-way
+  scrim.dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
+  await t.sleep(450);
+  t.expect(!t.$(".hm-chooser"), "a tap on the map did not close the View sheet");
+});
+
+scenario("home", "View sheet: families tell the truth and combine with tone and your words", async t => {
+  await H.homeReady(t, "#shot=home:fam:Pinks");
+  const names = t.ev("[...new Set(HM_CTRL.studyPoints().pts.map(p => p.n.toLowerCase()))]");
+  for (const n of ["hot pink", "rose", "cerise", "baby pink", "dusky rose", "magenta"]) t.expect(names.includes(n), `Pinks is missing ${n}`);
+  for (const n of ["crimson", "lavender", "pale periwinkle"]) t.expect(!names.includes(n), `Pinks includes ${n}`);
+  await H.sheet(t, "colors");
+  const fam = t.$('[data-famv="Pinks"]'); t.expect(fam.classList.contains("on"), "the Pinks chip is not on");
+  const nP = H.num(t.text("[data-count]"));
+  t.expect(H.num(t.text(fam.querySelector("[data-n]"))) === nP, "the Pinks chip's count disagrees with the map");
+  const vivid = t.$('.hm-seg[data-key="tone"] [data-val="vivid"]'), nV = H.num(t.text(vivid.querySelector("[data-n]")));
+  await t.click(vivid, { wait: 100 });
+  await t.waitFor(() => H.num(t.text("[data-count]")) === nV, 8000, `Vivid pinks to show ${nV}`);
+  t.expect(nV > 0 && nV < nP, `vivid pinks ${nV} of ${nP}`);
+  t.expect(/Vivid pinks/.test(t.text("[data-count]")), `the count line says "${t.text("[data-count]")}"`);
+  t.expect(!t.$("[data-clear]").hidden, "no Clear filters with a filter on");
+  await t.click("[data-clear]", { wait: 100 });
+  await t.waitFor(() => !t.ev("S.hm.fam") && !t.ev("S.hm.tone"), 6000, "Clear filters");
+});
+
 scenario("home", "View sheet: filters, Surprise me, Search", async t => {
   const cv = await H.homeReady(t);
-  await t.click("#hmView", { pointer: true });
-  await t.waitFor(".hm-chooser", 10000, "the View sheet");
+  await H.sheet(t, "colors");
   const all = H.num(t.text("[data-count]"));
   const seg = t.$$('.hm-seg[data-key="filter"] button');
   t.expect(seg.length >= 2, "no filter buttons");
@@ -164,8 +226,7 @@ scenario("home", "View sheet: filters, Surprise me, Search", async t => {
   await t.click("[data-surprise]", { wait: 500 });
   t.expect(!t.$(".hm-chooser"), "Surprise me left the View sheet open");
   // Search reveals the field; typing narrows the honeycomb without errors
-  await t.click("#hmView", { pointer: true });
-  await t.waitFor(".hm-chooser", 6000, "the View sheet again");
+  await H.sheet(t, "colors");
   await t.click("[data-search]", { wait: 400 });
   t.expect(!t.$(".hm-chooser"), "Search left the View sheet open");
   t.expect(!t.$("#hmSearch").hidden, "the search field did not appear");
@@ -501,6 +562,12 @@ scenario("pages", "namePage x3: renders, a near name opens another, Back works",
 // js/article-refs.js: the figure cards in an article (Mauve has an article, a twin gem, a film and paintings that hold the color)
 scenario("pages", "article figure cards: Mauve draws them, a card opens its page, Back returns to the article", async t => {
   await H.openPage(t, "#/color/mauve", "Mauve");
+  // a long story is a door on the page (chapters, minutes); Begin reading opens the book on its own screen
+  const door = await t.waitFor(".ar-door [data-ar-begin]", 20000, "Mauve's story door");
+  t.expect(!t.$(".cp-page .ar-sec"), "the long story is drawn inline on the color page, not behind its door");
+  t.expect(t.$$(".ar-door [data-ar-chap]").length >= 2, "the door lists no chapters");
+  await t.click(door, { wait: 700 });
+  await t.waitFor(() => t.$(".ar-read .ar") && /#\/read\/mauve/.test(decodeURIComponent(t.w.location.hash)), 15000, "the book at #/read/mauve");
   await t.waitFor(() => t.$$(".ar-fig").length >= 2, 25000, "the article's figure cards");
   const figs = t.$$(".ar-fig");
   t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
@@ -513,7 +580,9 @@ scenario("pages", "article figure cards: Mauve draws them, a card opens its page
   await t.click(card, { wait: 700 });
   await t.waitFor(() => !t.$(".ar") && t.$(".p-title, .cp-hero-foot h1, .gl-page, .film-page"), 10000, `the page for "${title}"`);
   await t.click("[data-back]", { wait: 600 });
-  await t.waitFor(() => t.$(".ar") && t.$$(".ar-fig").length >= 2, 20000, "the article and its figures after Back");
+  await t.waitFor(() => t.$(".ar-read .ar") && t.$$(".ar-fig").length >= 2, 20000, "the book and its figures after Back");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Mauve" && t.$(".ar-door"), 15000, "Back from the book to Mauve's page and its door");
 });
 
 scenario("pages", "a tapped in-between hex opens its nearest name with 'Your color'", async t => {
@@ -620,7 +689,7 @@ scenario("pages", "Learn opens the instant deck; Start plays flashcards to the r
 
 scenario("home", "Study corner opens the instant deck seeded with the middle color", async t => {
   await H.homeReady(t);
-  await t.click("[data-pr-study]", { wait: 600 });
+  await H.menu(t, "learn");
   await t.waitFor(".pr-quick", 4000, "the instant-deck sheet from Home");
   t.expect(/Learn/.test(t.$("[data-qtitle]").textContent), "the sheet title");
   t.expect(t.$$(".pr-quick .pr-plate i").length >= 5, "the deck plate");
@@ -796,7 +865,7 @@ scenario("studio", "gamut wheel: presets, mask, keep, swatch tap", async t => {
   await t.click("[data-wheel]", { wait: 700 });
   await t.waitFor("canvas.gw-wheel", 6000, "the gamut wheel");
   const presets = t.$$("[data-m]");
-  t.expect(presets.length === 5, `${presets.length} mask presets instead of 5`);
+  t.expect(presets.length === 7, `${presets.length} mask presets instead of 7`);
   const sw0 = t.$$("i[data-swatch]").map(e => e.dataset.swatch).join();
   for (const p of presets) await t.click(p, { wait: 250 });
   const sw1 = t.$$("i[data-swatch]").map(e => e.dataset.swatch).join();
@@ -910,7 +979,7 @@ scenario("studio", "Export sheet opens and Closest in the archive switches metri
 // ================================================================== YOUR COLORS (L23: favorites, ranking, taste)
 scenario("favs", "Home pick mode: tap and hold-sweep heart colors, Save keeps them", async t => {
   const cv = await H.homeReady(t);
-  await t.click("#hmFav", { wait: 500 });
+  await H.menu(t, "fav");
   await t.waitFor(".fv-bar", 4000, "the pick bar");
   const count = () => +t.text(".fv-count b");
   t.expect(count() === 0, "pick mode starts with picks already made");
@@ -1148,16 +1217,57 @@ scenario("map", "the map keeps its pan and zoom when you open a color and come b
   t.expect(Math.hypot(after[0] - before[0], after[1] - before[1]) < .6 && Math.abs(after[2] - before[2]) < .02, `pan/zoom reset: ${before.map(v => v.toFixed(2))} -> ${after.map(v => v.toFixed(2))}`);
   t.expect(t.ev("HM_CTRL.current().n") === name, `the middle changed from ${name} to ${t.ev("HM_CTRL.current().n")}`);
 });
-scenario("map", "Look: family names when zoomed out is off by default and toggles on", async t => {
-  await H.homeReady(t);
-  t.expect(!t.ev("S.hm.famNames"), "family names are on by default");
-  await t.click("#hmView", { pointer: true });
-  await t.waitFor(".hm-chooser", 10000, "the View sheet");
-  t.expect(!/\b101\b/.test(t.text(".hm-chooser")), "the View sheet says 101");
-  await t.click('[data-tab="look"]', { wait: 300 });
-  await t.click('[data-fam="1"]', { wait: 300 });
-  t.expect(t.ev("S.hm.famNames") === true && t.$('[data-fam="1"]').classList.contains("on"), "the Family names choice did not turn on");
+// David, 2026-10-08 ("clicking a color makes it stick"): after a few taps and Backs, big unlabeled bubbles stayed stuck
+// over the map and the map came back off-center. Three opens in a row, each one a far bubble tapped again mid-glide
+// (taps open at once), with Back between: no stand-in bubble or flying chip is left anywhere, and Home comes back
+// centered on a bubble, not on a half-way pan.
+scenario("map", "three bubble taps with Back between leave no stuck bubble and Home re-centers", async t => {
+  let cv = await H.homeReady(t);
+  const leftovers = () => t.$$(".hc-morph, .flyer").length;
+  const onLattice = () => t.ev(`(() => { const [x, y] = HM_CTRL.panValue(), sp = HM_CTRL.studyPoints(); return sp.pts.reduce((m, p) => Math.min(m, Math.hypot(p.x - x, p.y - y)), 1e9); })()`);
+  for (let i = 0; i < 3; i++) {
+    cv = t.$(".screen.hm canvas");
+    const r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    // a bubble outside the open zone (it glides to the middle first), a different one each round
+    const far = t.ev(`(() => { const seen = new Set(), out = []; for (const p of HM_CTRL.studyPoints().pts) { const h = p.o.h; if (seen.has(h)) continue; seen.add(h);
+      const l = HM_CTRL.locate(h); if (!l || l.d < 34) continue; const d = Math.hypot(l.x - ${cx}, l.y - ${cy}); if (d > 130 && d < 230) out.push({ h, n: p.n, d }); }
+      return out.sort((a, b) => a.d - b.d)[${i}] || null; })()`);
+    t.expect(far, `round ${i + 1}: no bubble outside the open zone to tap`);
+    let at = t.ev(`HM_CTRL.locate(${JSON.stringify(far.h)})`);
+    await t.tapAt(cv, at.x, at.y, { wait: 40 });   // starts the glide
+    at = t.ev(`HM_CTRL.locate(${JSON.stringify(far.h)})`) || at;
+    await t.tapAt(cv, at.x, at.y, { wait: 60 });   // the same bubble again, mid-glide: it opens
+    if (!t.$("[data-back]")) { await t.tapAt(cv, cx, cy, { wait: 60 }); }   // (a slow frame finished the glide: the middle one opens)
+    await t.waitFor("[data-back]", 8000, `round ${i + 1}: a page for ${far.n}`);
+    t.expect(!t.$(".hc-morph"), `round ${i + 1}: the tapped bubble's stand-in stayed on the page`);
+    await t.click("[data-back]", { wait: 80 });   // Back at once, while the page may still be flying in
+    await t.waitFor(() => t.$$(".screen.hm canvas").length === 1, 8000, `round ${i + 1}: Home again`);
+    await t.sleep(1000);
+    t.expect(leftovers() === 0, `round ${i + 1}: ${leftovers()} stuck bubble(s) over Home after Back`);
+    const off = onLattice();
+    t.expect(off < .05, `round ${i + 1}: Home came back off-center (${off.toFixed(2)} from the nearest bubble)`);
+  }
+  t.notes.push("3 opens mid-glide, no leftovers, centered on return");
 });
+scenario("map", "one right corner: its menu holds every verb, and closes on a tap outside, Escape and Back", async t => {
+  await H.homeReady(t);
+  t.expect(t.$$(".screen.hm .corner").length === 2, `${t.$$(".screen.hm .corner").length} corner buttons on Home`);
+  t.expect(!t.$("#hmMapStudy, [data-pr-study], #hmFav, #hmView"), "a verb still has its own button on Home");
+  await H.menu(t);
+  const rows = t.$$(".hm-do-stem [data-do]").map(b => b.dataset.do);
+  for (const k of ["learn", "map", "fav", "search", "colors", "arrange"]) t.expect(rows.includes(k), `the menu has no ${k}`);
+  t.expect(t.$$(".hm-do-stem [data-do]").every(b => t.text(b.querySelector("b")).length > 2), "a menu row has no label");
+  t.$(".rm-scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
+  await t.sleep(450);
+  t.expect(!t.$(".hm-do-stem") && t.$("#hmDo").getAttribute("aria-expanded") === "false", "a tap outside did not close the menu");
+  await H.menu(t);
+  await H.keys(t, "Escape"); await t.sleep(400);
+  t.expect(!t.$(".hm-do-stem"), "Escape did not close the menu");
+  await H.menu(t, "map");
+  await t.waitFor(".ms", 8000, "Study the map from the menu");
+  t.expect(!t.ev("'famNames' in S.hm && S.hm.famNames"), "the family names setting is back");
+});
+
 
 // ================================================================== LEARN (past the first units: js/learnmore.js)
 scenario("learn", "the path goes past the first units: Begin teaches a generated unit as core cards", async t => {
@@ -1244,11 +1354,11 @@ scenario("paintings", "paintings-of: looser tolerance never finds fewer; a secon
   await t.click("[data-drop]", { force: true, wait: 600 });
   await t.waitFor(() => t.$$(".pt-chip").length === 1, 4000, "the chip to drop");
 });
-scenario("paintings", "a pair page, the masters' chords, and a painting with its color pinned", async t => {
-  await t.open("#/pair/c2412d+4f6b3a", { settle: 600 });
-  await t.waitFor(".pt-finding", 12000, "the pair page");
+scenario("paintings", "a pair's paintings, the masters' chords, and a painting with its color pinned", async t => {
+  await t.open("#/paintings-of/c2412d+4f6b3a?t=4&m=1", { settle: 600 });
+  await t.waitFor(".pt-finding", 12000, "the pair's paintings");
   await PT.count(t);
-  t.expect(t.$$(".pt-chip").length === 2, "the pair page doesn't show two colors");
+  t.expect(t.$$(".pt-chip").length === 2, "the pair's paintings don't show two colors");
   await t.open("#/chords", { settle: 600 });
   await t.waitFor(".chd-row", 12000, "chord rows");
   t.expect(t.$$(".chd-row").length >= 10, "fewer than ten chords");
@@ -1256,7 +1366,7 @@ scenario("paintings", "a pair page, the masters' chords, and a painting with its
   t.expect(t.$$(".chd-row").length >= 5, "no pairs painters keep apart");
   await t.click('[data-kind="pairs"]', { wait: 300 });
   await t.click(".chd-row", { force: true, wait: 700 });
-  await t.waitFor(".pt-page .pt-chip", 12000, "a pair opened from a chord");
+  await t.waitFor(".sp-page .sp-pair", 12000, "a pair page opened from a chord");
   await t.open("#/gallery/15146?c=0047ab&t=3", { settle: 800 });
   await t.waitFor(() => /covers/.test(t.text(".pt-arrive")), 14000, "the pinned coverage line");
   t.expect(t.$(".pt-arrive [data-t]"), "no tolerance switch on the arrival");
@@ -1273,6 +1383,79 @@ scenario("paintings", "a color page's In paintings section: presets re-run the q
   await t.click('[data-pt-quick] [data-pre-tol="10"]', { force: true, wait: 600 });
   await t.click("[data-pt-tune]", { force: true, wait: 400 });
   t.expect(t.$$("[data-pt-tuner] .pt-range").length === 2, "Fine-tune doesn't open two sliders");
+});
+
+// ================================================================== SET PAGES (js/settray.js, js/setpage.js: a page for every pair and palette)
+const SP = {
+  placed() { try { localStorage.clear(); localStorage.setItem("colorhub-v1", JSON.stringify({ v: 3, placed: { tier: 1, at: "2026-10-01" }, tlHint: 1 })); } catch (e) {} },
+  async lead(t) { await t.waitFor(() => t.text("[data-lead]") && !/Reading the paintings/.test(t.text("[data-lead]")), 25000, "the pair's headline finding"); return t.text("[data-lead]"); },
+};
+scenario("sets", "Pair with on a color page: picker suggests and searches and a tap opens the pair page", async t => {
+  SP.placed();
+  await t.open("#/color/teal", { settle: 800, keepState: true });
+  const btn = await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button");
+  await t.click(btn, { wait: 600 });
+  await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the picker's suggestions");
+  t.expect(t.$$(".sx-sheet .sx-sec").length >= 2, "fewer than two suggestion rows");
+  const q = t.$(".sx-sheet [data-sx-q]"); q.value = "rose"; q.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(200);
+  await t.waitFor(".sx-sheet .sx-li", 6000, "search results for rose");
+  q.value = ""; q.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(200);
+  await t.click(".sx-sheet [data-sx-any]", { force: true, wait: 400 });
+  t.expect(t.$(".sx-sheet .sx-picker .cp"), "Any color didn't open the ring picker");
+  await t.click(".sx-sheet .sx-opt", { force: true, wait: 800 });
+  await t.waitFor(".sp-page .sp-pair .sp-plate", 12000, "the pair page");
+  t.expect(/^#\/pair\/[0-9a-f]{6}\+[0-9a-f]{6}$/.test(t.w.location.hash), `the pair's address is ${t.w.location.hash}`);
+  await SP.lead(t);
+  t.expect(t.$$(".sp-fact").length >= 5, "the relationship facts are missing");
+});
+scenario("sets", "a pair page: facts and paintings and Add a color makes a trio", async t => {
+  SP.placed();
+  await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-plate", 12000, "the pair page");
+  await SP.lead(t);
+  await t.waitFor(() => t.$("[data-ptg] .gl-pin") || /too few|No painting/.test(t.text("[data-ptg]")), 25000, "paintings or an honest line");
+  t.expect(/:1 contrast/.test(t.text(".sp-facts")), "no contrast ratio");
+  await t.click('.cs-act[data-sp-add]', { wait: 600 });
+  await t.waitFor(".sheet.sx-sheet .sx-opt", 6000, "the add-a-color picker");
+  await t.click(".sx-sheet .sx-opt", { force: true, wait: 800 });
+  await t.waitFor(() => /^#\/set\//.test(t.w.location.hash) && t.$(".sp-page .sp-strip"), 12000, "the trio page");
+  t.expect(t.$$(".sp-names .sp-name").length === 3, "the trio doesn't list three colors");
+  await t.click(".sp-page .sp-plus ~ button, .sp-names [data-swatch]", { force: true, wait: 800 });
+  await t.waitFor(".cp-page .cp-hero-foot h1", 12000, "a color page from the trio");
+});
+scenario("sets", "a set page: pairs inside and Improve with Apply and Undo", async t => {
+  SP.placed();
+  await t.open("#/set/2b2a4c-b85c38-e0c097-6f8f72", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-strip", 12000, "the set page");
+  await SP.lead(t);
+  await t.waitFor(() => t.$$("[data-pairs] .sp-prow").length === 6, 25000, "six pairs inside a four-color set");
+  for (const k of ["subtle", "bold", "clear"]) await t.click(`[data-str="${k}"]`, { force: true, wait: 150 });
+  const ap = t.$("[data-apply]");
+  if (ap) {
+    const before = t.w.location.hash;
+    await t.click(ap, { force: true, wait: 800 });
+    await t.waitFor(() => t.$("[data-undo]") && t.w.location.hash !== before, 8000, "the applied palette with Undo");
+    await t.click("[data-undo]", { force: true, wait: 800 });
+    await t.waitFor(() => t.w.location.hash === before, 8000, "Undo to restore the palette");
+  } else t.expect(/Nothing the numbers call for/.test(t.text("[data-impbody]")), "no suggestion and no honest line");
+  await t.click(".sp-names .sp-drop", { force: true, wait: 800 });
+  await t.waitFor(() => t.$$(".sp-names .sp-name").length === 3, 8000, "a color to drop");
+});
+scenario("sets", "long-press a swatch adds it to the tray and the tray opens the set", async t => {
+  SP.placed();
+  // long-press a palette chip on a painting: it joins the set, the tray shows, the page stays; the tray opens the pair
+  await t.open("#/gallery/15146", { settle: 800, keepState: true });
+  t.ev('sxSetTray(["#C9A227"])');
+  const sw = await t.waitFor(() => t.$$("#app .pal[data-swatch], #app .pal-name[data-swatch]").find(e => e.getBoundingClientRect().width > 10 && t.ev("de2000")(e.dataset.swatch, "#C9A227") > 3), 15000, "a palette chip on the painting");
+  sw.scrollIntoView({ block: "center" }); await t.sleep(400);   // let the scroll settle: a scroll cancels a hold
+  const r = sw.getBoundingClientRect(), o = { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, pointerId: 1, pointerType: "touch", isPrimary: true, view: t.w };
+  const n0 = t.ev("sxTray().length"), page = t.w.location.hash;
+  sw.dispatchEvent(new t.w.PointerEvent("pointerdown", o)); await t.sleep(700); sw.dispatchEvent(new t.w.PointerEvent("pointerup", o)); sw.click(); await t.sleep(400);
+  t.expect(t.ev("sxTray().length") === n0 + 1, `the long-press didn't add the color (${n0} then ${t.ev("sxTray().length")})`);
+  t.expect(t.w.location.hash === page, `the long-press also opened ${t.w.location.hash}`);
+  await t.waitFor(() => t.$(".sx-tray:not([hidden])"), 6000, "the tray pill");
+  await t.click(".sx-tray-main", { wait: 800 });
+  await t.waitFor(".sp-page .sp-pair", 12000, "the tray to open the pair");
 });
 
 // ================================================================== DIRECT LOADS (a typed or shared address on a fresh load)
@@ -1408,7 +1591,7 @@ scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map gl
 });
 
 // fresh loads of shared addresses: each opens its page, and Back goes to the map (not a room)
-[["#/painter/abraham-bloemaert", /Bloemaert/], ["#/gallery/15146?c=0047ab", null], ["#/pair/c2412d+4f6b3a", null], ["#/look/rococo", /Rococo/], ["#/hub/source:crayola", /Crayola/i]].forEach(([hash, re]) => {
+[["#/painter/abraham-bloemaert", /Bloemaert/], ["#/gallery/15146?c=0047ab", null], ["#/pair/4f6b3a+c2412d", null], ["#/set/2b2a4c-b85c38-e0c097", null], ["#/look/rococo", /Rococo/], ["#/hub/source:crayola", /Crayola/i]].forEach(([hash, re]) => {
   scenario("trail-links", `a fresh ${hash.split("/")[1].split("?")[0]} address opens it; Back goes to the map`, async t => {
     await TRL.open(t, hash);
     await t.waitFor(() => t.$("#app .screen [data-back]") && !t.$(".screen.waiting") && t.$("#app").innerText.length > 120, 20000, `the page at ${hash}`);
@@ -1531,7 +1714,7 @@ scenario("map-subject", "a painting on the map: the bar's Learn these, Find them
 scenario("map-subject", "the Study corner on a fresh map never studies Grey", async t => {
   await TRL.open(t, "#/home");
   await t.waitFor(() => /\d/.test(t.text(".hm-title small")) && !/Loading/.test(t.text(".hm-title small")), 12000, "the map to fill");
-  await t.click("[data-pr-study]", { wait: 700 });
+  await H.menu(t, "learn");
   await t.waitFor(".ls-sheet", 6000, "the Learn sheet from the Study corner");
   const names = t.text("[data-names]");
   t.expect(names && !/\bgr[ae]y\b/i.test(names.split(",")[0]) && !/^Learn Grey/.test(t.text("[data-qtitle]")), `the corner studied grey: ${t.text("[data-qtitle]")} | ${names}`);

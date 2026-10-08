@@ -207,13 +207,10 @@
  "words": 697,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 22 writer",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Descriptive compound with no single history; short article by design.",
-   "Baty cited at pdf pages from the concordance; the 1813 treatise is unnamed in the notes.",
-   "Bitumen identified from the Ball passage ('it' = asphaltum/bitumen).",
-   "Archive match is the screen color, not a pigment test."
+   "Spot-checked key claims against fact card and book text (Gage Matisse/Cezanne/Gerbier, Ball and Balfour-Paul indigo); no text changes needed."
   ]
  }
 }

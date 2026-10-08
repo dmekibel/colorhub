@@ -28,10 +28,7 @@
   background:var(--surface-2);border:1px solid rgba(236,232,223,.1);box-shadow:0 4px 14px rgba(0,0,0,.38)}
 .corner.l{left:16px}.corner.r{right:16px}
 .corner svg{width:20px;height:20px}
-/* Home's other corner buttons keep their row on the new size (12 px apart), and the heart sits above View */
-.corner.r.pr-study-corner{right:calc(16px + var(--corner) + 12px)}
-.corner.ms-corner{right:calc(16px + (var(--corner) + 12px) * 2)}
-.corner.fv-corner{bottom:calc(var(--corner-b) + var(--corner) + 12px);width:var(--corner);height:var(--corner)}
+/* Home has one right corner now (#hmDo, js/home.js doMenu): every verb lives in its menu */
 .sheet{bottom:calc(-1 * var(--vb));padding-bottom:calc(var(--bottom) + 20px)}
 .sheet:focus{outline:none}
 
@@ -235,4 +232,7 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 .rm-art-you{position:relative}
 .rm-art-you i{position:absolute;inset:38%;border-radius:50%;background:var(--surface-2)}
 /* the honeycomb reaches through the strip an iPhone Home Screen app leaves below its viewport (js/core.js vbFix) */
-.cx-stage{bottom:calc(-1 * var(--vb,0px))}
+.cx-stage{bottom:0}
+/* the map screens (Home, Study the map) are the whole screen on an iPhone Home Screen app: its layout viewport (and
+   100dvh) stop a status bar short of the bottom, and a .fixed screen clips at its own height (js/core.js vbFix) */
+.screen.fixed.cx{position:fixed;top:0;left:0;right:0;height:var(--app-full,100dvh)}

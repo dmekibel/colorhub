@@ -253,12 +253,10 @@
  "words": 919,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 batch writer (self-check: sentence-to-note trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Swatch comes only from the 2010 xkcd survey; no historical standard exists.",
-   "Werner entries known from Baty's tables; exact examples not quoted.",
-   "Archive matches are colors, not pigment identifications; 2 paintings only."
+   "Verified claims against Pastoureau, Gurney, Eckstut, Baty, Paterson: no changes needed"
   ]
  }
 }

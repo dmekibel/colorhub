@@ -1,0 +1,397 @@
+{
+ "slug": "vermilion-red",
+ "name": "Vermilion Red",
+ "hex": "#B5493A",
+ "names": [
+  "Vermilion Red"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Vermilion Red is the chart color of an early-1800s naturalist's handbook, a brown-tinged scarlet named for the mercury pigment and exemplified by coral, a tomato and the ore cinnabar.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A chart color before it was a paint",
+   "body": "Vermilion Red is a number in a book: entry 85 in the reds of Syme's *Werner's Nomenclature of Colours*, the 1821 edition [2]. Abraham Gottlob Werner, a German mineralogist, drew up a list of 54 colour terms in 1774 so that students could describe minerals the same way everywhere [1]. Patrick Syme, a Scottish painter, expanded the list to 108 terms in 1814 and 110 in 1821, and for the first time gave each term a painted swatch and an animal, a plant and a mineral that wore the color [1].\n\nSyme's definition of this one is short: a scarlet red with a minute portion of brownish red [2]. His three examples are red coral, the \"love apple\" (an old name for the tomato) and cinnabar, the red mercury ore [2]. Baty, who reprinted the whole system, notes that Syme took the mineral examples from the Edinburgh professor Robert Jameson's work but chose the animals and plants himself [3]. Syme trained as a botanist and entomologist, which may be why a tomato sits beside a coral [3].\n\nThe entry has no [W] mark, which Baty uses for names found in Werner's own lists [2]. Baty reports that Syme's 1821 reds were a mix: four from Werner (numbers 84, 86, 88 and 90), two from the French Picardet system, one from Jameson, and two that Syme had added in his own 1814 edition, numbers 85 and 87 [2]. Vermilion Red is one of those two [2]. Whether Syme coined the phrase is another matter, since Baty's comparison chart of the nomenclature's growth appears to show *vermilion-red* in one of the longer colour lists of the 1790s, and the extracted text does not say whose [4].\n\nThat makes this a name from natural history rather than from a paint shop. Naturalists used the book to describe birds' eggs, feathers and specimens; Darwin carried Werner's colours on the *Beagle* voyage, and Baty reproduces his specimen catalogue as proof [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "What the swatch is, and is not",
+   "body": "The hex on this page, #B5493A, is a modern estimate of Syme's painted swatch, taken from a 2018 digitization of the 1821 plates [6]. It is a darker, browner red than the pigment vermilion. Our swatch for the pigment, #E34234, differs from it by 9 CIEDE2000 units, a clear gap [6]. That fits Syme's own words: he asked for scarlet with some brown in it [2].\n\nOther systems agree that the color is dark. The ISCC-NBS system of 1955 files it as a dark reddish orange, 5 units from the swatch [6]. Ridgway's 1912 *Color Standards* also lists a Vermilion Red, on his plate XIII in a greyed series, and the same data note warns that every one of these swatches is a scan of an aged plate and so approximate [6].\n\nThe nearest plain name on our list is Red, 6 units away [6]. The pigment's own page treats [[vermilion]] as the bright orange-red of the paintbox; this page treats the older chart color that borrowed its name. Their neighbors overlap: [[dusty-vermilion]], [[english-vermilion]], [[hyacinth-red]] and [[brownish-red]] all sit close by on the library's red shelf [6]."
+  },
+  {
+   "id": "mineral",
+   "title": "The mineral behind the name",
+   "body": "Syme's mineral example, cinnabar, is mercury sulfide, a heavy red ore [5][7]. The color word has a stranger past. *Vermilion* comes from Latin *vermiculum*, \"little worm\", which St Jerome used in the fourth century for the kermes insect that dyed cloth red [8]. How a word for an insect dye came to name an alchemist's mineral pigment, Ball says, only makes sense in the medieval habit of grouping things by their hue rather than by their substance [8].\n\nThe ore itself was old and costly. The main Mediterranean source was in south-west Spain, at the place now called Almadén, and Theophrastus around 315 BC reports a first discovery near Ephesus, though no cinnabar deposit is known there [7]. In Rome the price of Spanish cinnabar was capped by law at 70 sesterces a pound, still ten times the price of fine red ochre from Sinope [7]. Pastoureau gives Pliny's comparison differently, as fifteen times the price of African red ochre and equal to Egyptian blue, the dearest pigment of the time [9].\n\nThe most spectacular surviving use is the frieze in the Villa of the Mysteries at Pompeii, painted on a ground of this red [7]. Roman writers already knew its weakness: Vitruvius and Pliny warned that pure cinnabar turns black in sunlight unless sealed with oil and wax [7]."
+  },
+  {
+   "id": "made",
+   "title": "The red people learned to make",
+   "body": "The great change was learning to manufacture the red. Ball writes that the process may have been invented in China, that the Hellenistic alchemist Zosimus hints at it around AD 300, and that the first clear description is in the *Compositiones ad tingenda*, a Latin recipe manuscript of the eighth or early ninth century [10]. Pastoureau agrees on China and adds that Arab alchemists knew it and that it reached the West between the eighth and eleventh centuries; Coles credits the eighth century [11][12]. The books are therefore close on the date but not on the route.\n\nPastoureau counts it as the only new red pigment the Middle Ages added to the Roman list [11]. For alchemists it mattered because sulfur and mercury were, in their theory, the two parents of every metal [12]. The monk Theophilus, around 1122, describes sealing the two in a pot, burying it in hot coals and hearing a crash as they unite [10]. Ball points out a small puzzle: the compound is over six times heavier in mercury than sulfur, yet medieval recipes typically ask for two parts of sulfur to one of mercury, which he explains by the alchemical idea of balance rather than by error [10].\n\nTechnology kept moving. In the seventeenth century Holland led production with a dry method that first made a black sulfide and then heated it until it turned red [10]. In 1687 Gottfried Schulz found a wet method, whose finer orange-red powder is how most Western vermilion is made today, while the older dry product was a bluer red [10]."
+  },
+  {
+   "id": "names",
+   "title": "A name that means several reds",
+   "body": "Pastoureau puts the problem plainly: is a \"vermilion red\" simply an orange-leaning red, or a pigment made from mercury and sulfur [9]? Pliny's *minium* did not help, because it meant cinnabar to him and red lead to later writers, and Paterson still lists *minium* as both [13].\n\nThe pigment trade piled on more. The Pigment Compendium records Chinese vermilion, the properly Chinese form of the mercury sulfide, and English vermilion, which Watin in 1785 believed was cinnabar mixed with red lead and which he judged paler and less beautiful than true cinnabar [14]. It also lists American vermilion, a term for chrome red or orange, antimony vermilion, a red antimony sulfide, and cadmium vermilion, a cadmium mercury sulfide [14]. None of these is the same material. A reader who finds \"vermilion\" in an old recipe cannot tell which was meant without the date and the country.\n\nRed lead is the quiet double. Coles notes that because red lead was cheap to make it often stood in for vermilion, and that it was the commonest medieval red until the synthetic mercury red arrived [15]. Sienese rules of 1355 had already forbidden painters from passing red earth or red lead off as vermilion, and the same anxiety shows in Cennino's advice to buy it in an unbroken lump [10][16]."
+  },
+  {
+   "id": "painting",
+   "title": "In painting and in argument",
+   "body": "Medieval painters laid vermilion, ultramarine and gold in flat unbroken fields, and the costly materials were the message [17]. Until at least the eleventh century it cost as much to cover a page with vermilion as with gold; by the fifteenth it was used freely [10]. The Church of Christ in Chora in Istanbul shows how far the word red travelled from its stuff: its mosaic of Mary choosing threads renders the skein labelled purple in a bright vermilion red [18].\n\nVenetian painters had the whole shelf. Ball lists Veronese's palette as ultramarine, azurite, smalt, indigo, cochineal lake, vermilion, red lead, lead-tin yellow, orpiment, realgar and copper resinate [19]. Caravaggio went the other way: his early biographer Bellori says he had no interest in vermilion and bright blues, which he subdued [20]. Albers, writing about warm and cool, contrasts Boucher's receding vermilion red with Rubens' advancing white [21].\n\nVermilion also became an argument. Protestant reformers repeated the prophet Jeremiah's complaint about people who panel their temples with cedar and paint them with vermilion, and took red as the colour of luxury, sin and papal Rome [22][23]. In a very different moment, conservators found that the locomotives in Monet's *Gare Saint-Lazare* are mixed from bright vermilion, French ultramarine and emerald green, with almost no black [24]."
+  },
+  {
+   "id": "dark",
+   "title": "Why old vermilion darkens",
+   "body": "Mercury sulfide has two crystal forms: the red cinnabar that is vermilion, and a black one, metacinnabar [25]. Reversion to the black form may happen on the canvas, particularly under blue light, and is commoner in egg tempera than in oil, as in Nardo di Cione's altarpiece of about 1365, where the red lining of a saint's gown shows dull brown patches [25]. The Pigment Compendium adds that a 2000 study traced the change to traces of chlorine, while Field in 1835 blamed adulteration [7].\n\nA brown-tinged vermilion on a chart, a darkened vermilion on a panel and a freshly ground red in a dish are three different appearances of the same name [25]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six CIEDE2000 units of this swatch covers at least five per cent of the canvas in 325 works [26]. The pigment's own brighter swatch qualifies in only 48 [27]. The darker, browner color is far commoner on old paper and panel, which is what aged vermilion and its relatives would produce, though a color match is not a pigment test [26].\n\nIt peaks in the 1400s: 43 of the 945 paintings we hold from that century carry it, 3.3 times the archive's rate [26]. India is the clearest home, with 94 of 721 works, 9.5 times the rate, and Kalighat bazaar painting from Bengal carries it in 32 of 96 [26]. Nepal shows it in 4 of 25 [26]. None of our 140 Impressionist paintings reaches the threshold, although Monet used the pigment [24][26].\n\nThe painting where it covers the most is an Indian Ragamala page of about 1700, [[painting:cma-314125|Women worshiping a Shiva linga]], at 58 per cent of the surface [26]. Close behind are [[painting:rijks-20026322|a Sienese civic account-book panel of about 1440]], at 52 per cent, and [[painting:nga-46625|Gauguin's Self-Portrait]] of 1889, at 28 per cent [26]. Andrea del Sarto, Matisse, Dürer, Bonnard and Botticelli each show it in several works [26]. By the lightness-rank lens, which cannot be fooled by varnish, it is an accent in 88 per cent of the 447 paintings that contain it [26].\n\nThe usual caveats apply. These are photographs of aged, varnished paintings, and Indian red grounds may be red lead or lac as easily as vermilion [26]. In Google Books the word *vermilion* peaks in 1916 relative to all its other years, in any sense, using a five-year smoothing [28]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "vermilion, the pigment made from mercury and sulfur",
+   "first_recorded": "Syme's Werner's Nomenclature of Colours, 1814 edition (entry 85 in 1821)",
+   "source": "Baty, Nature's Palette"
+  },
+  "aka": [
+   "Werner/Syme no. 85",
+   "Vermilion-red"
+  ],
+  "siblings": [
+   "vermilion",
+   "english-vermilion",
+   "scarlet"
+  ],
+  "parent": "vermilion",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "vermilion",
+    "gloss": "the pigment's own page, with a brighter orange-red swatch"
+   },
+   {
+    "slug": "english-vermilion",
+    "gloss": "a deeper paint name, not Syme's chart color"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Zinnober (the pigment)"
+   },
+   {
+    "lang": "fr",
+    "name": "vermillon"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B5493A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 325,
+  "century": {
+   "1400s": {
+    "hits": 43,
+    "n": 945,
+    "lift": 3.3
+   }
+  },
+  "top_country": {
+   "name": "India",
+   "hits": 94,
+   "n": 721,
+   "lift": 9.5
+  },
+  "top_movement": {
+   "name": "Kalighat",
+   "hits": 32,
+   "n": 96
+  },
+  "top_paintings": [
+   "cma-314125",
+   "rijks-20026322",
+   "cma-141737",
+   "commons-Q130221017",
+   "cma-314438",
+   "nga-46625"
+  ],
+  "impressionism": {
+   "hits": 0,
+   "n": 140
+  },
+  "role_lens": {
+   "n": 447,
+   "accent": 0.88
+  },
+  "measured": {
+   "lch": [
+    45.5,
+    53.0,
+    36.0
+   ],
+   "iscc_nbs": "dark reddish orange",
+   "vs_vermilion_de2000": 9.0,
+   "nearest": [
+    [
+     "Red",
+     6.4
+    ]
+   ]
+  },
+  "ngram": {
+   "vermilion_peak": 1916
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (Werner 1774, Syme 1814 and 1821), pp. 6-7",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, reds table and entry 85 'Vermilion Red', pp. 242 and 248-249",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, introduction (Jameson, Syme's method and training)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, 'The evolution of key colour standard nomenclatures from Werner to Syme, 1774-1821', pp. 32-33",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, ch. 2 'Colours in zoology' (Darwin and the Beagle catalogue), p. 130",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes-v.json: ISCC-NBS 1955, Ridgway 1912, Werner/Syme 1821 no. 85), hex from Rougeux's 2018 digitization of the 1821 plates; CIEDE2000 distances computed here",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, pp. 399-400 ('Vermilion')",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 11 ('With Pliny among the Painters')",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 28 ('The Red of Painters')",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, 'Red' (introduction to the red pigments)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, 'minium', p. 266",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entries 'American vermilion', 'Antimony vermilion', 'Cadmium vermilion', 'Chinese vermilion', 'English vermilion', pp. 24, 32, 85, 108, 164",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, 'Red lead', p. 69",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 31",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 160",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, p. 75",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 9 ('A Moral Color')",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 32 ('Protestant morals')",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 11 (Monet, Gare Saint-Lazare)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 26,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py '#B5493A', dE2000 <= 6, >= 5% of canvas; data/graph/fieldnotes/v.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 27,
+   "kind": "data",
+   "cite": "ColorHub archive, same dataset, swatch #E34234 (data/articles/vermilion.json field notes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 28,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'vermilion', relative to peak (tools/article_field.py --ngram vermilion)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is the Vermilion Red swatch darker and browner than a fresh vermilion pigment?",
+   "choices": [
+    "Syme described it as scarlet with a little brownish red, and aged paper and darkened mercury sulfide both push toward brown",
+    "Vermilion is made from a brown mineral",
+    "Syme painted it with chocolate",
+    "It was printed in black ink"
+   ],
+   "answer": "Syme described it as scarlet with a little brownish red, and aged paper and darkened mercury sulfide both push toward brown",
+   "kind": "pick"
+  },
+  {
+   "q": "The name vermilion comes from the mercury mineral cinnabar.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which three things did Syme give as examples of Vermilion Red?",
+   "choices": [
+    "Red coral, the tomato and cinnabar",
+    "A cherry, a ruby and a poppy",
+    "A brick, a fox and a rose",
+    "Blood, wine and rust"
+   ],
+   "answer": "Red coral, the tomato and cinnabar",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Vermilion Red is entry 85 in a naturalist's color book: a scarlet 'with a minute portion of brownish red', shown by coral, a tomato and cinnabar.",
+  "The word vermilion began as Latin for 'little worm', the insect that dyed cloth red, long before it named a mercury pigment."
+ ],
+ "words": 1799,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Clarified the sulfur-to-mercury recipe ratio to match Ball.",
+   "All other spot-checked claims (Baty, Ball, Pigment Compendium, Pastoureau, Gage, Finlay, Albers) held; Syme-coinage question already hedged."
+  ]
+ }
+}

@@ -1,0 +1,213 @@
+{
+ "slug": "manganese-violet",
+ "name": "Manganese Violet",
+ "hex": "#895C9B",
+ "names": [
+  "Manganese Violet"
+ ],
+ "tier": "pigment",
+ "depth": "medium",
+ "lede": "Manganese Violet is a muted red-violet that takes its name from a nineteenth-century artists' pigment, introduced in 1868 as a safer replacement for cobalt violet.",
+ "sections": [
+  {
+   "id": "pigment",
+   "title": "The pigment of 1868",
+   "body": "Manganese violet was introduced in 1868, and Ball dates its discovery to the same year [1][2]. It was presented as a less toxic alternative to cobalt violet, which had come into use in 1860 as a very light-toned toxic violet and was superseded by it [2][3]. Ball notes that the French painter and teacher Jean-Georges Vibert named it among the pigments an artist could trust to keep their brilliance and freshness, together with zinc white, cadmium yellow and cobalt blue [1].\n\nModern sources give the chemistry as manganese ammonium phosphate, written (NH4)2Mn2(P2O7)2 [4]. The older names for it were Nuremberg violet, or *Nürnberg violet*, and fast violet; the Pigment Compendium cautions that in practice these terms probably covered several manganese phosphates [4][5]. The same source calls the terminology confused: in 1892 Winsor & Newton sold a permanent violet and a permanent mauve, and by 1896 its catalogue described the first as phosphate of manganese, while Standage in 1892 had described permanent mauve as a violet-toned French ultramarine [6]. A pigment sold as \"violet\" may therefore be a quite different material from the one the name suggests [6][7]."
+  },
+  {
+   "id": "impressionists",
+   "title": "The Impressionists and their violets",
+   "body": "Coles says critics accused the Impressionists of *violettomania* because of their fondness for the new cobalt and manganese violets [8]. He describes manganese violet as an opaque red-violet that was cheap to make and that quickly replaced the weaker cobalt violet, with only modest strength but light-filled violets [8].\n\nBooks disagree about how much the painters actually used it. Ball says the Impressionists mostly made their violets on the palette, glazing red lake over cobalt blue or ultramarine, instead of buying the new tube violets [9]. Ball adds that the new pigments gave a stronger hue than any mixture could, that Monet favoured them more than most, and that Renoir kept the lake and cobalt blue mixture for the mauves of *At the Theatre* and *The Umbrellas* [9]. The famous remark that the true colour of the atmosphere is violet is credited to Monet by Ball and dated to 1881 by Coles [9][8]. The line is a good one to carry into a gallery, since many of those violet shadows were mixed on the palette and not squeezed from a tube [9].\n\nWriters liked the name as much as the painters liked the paint. The filmmaker and painter Derek Jarman lists manganese violet among the \"romantic names\" of the colourman's shelf, alongside cerulean and Naples yellow [10]. He also puts it in a short catalogue of violets, with cobalt, ultramarine and Mars violet [10]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the paint",
+   "body": "The colour shown here comes from colour-name systems and not from a tube. Ridgway's 1912 *Color Standards* includes it as a plate-XXV violet, hues 61 and 63, and the ISCC-NBS system of 1955 files it under \"moderate purple\", only 3.2 units from this swatch [11]. Maerz and Paul's 1930 dictionary dates the name as a colour term to about 1874 [11]. Its place in these systems is a record of a name in use and not a measurement of the pigment [11].\n\nIn the kinship of purples it sits between the dusty [[old-mauve]] and the more saturated [[purple]], and close to [[mauve]], [[lilac]] and [[nuremberg-violet]] [11]. The Pigment Compendium also lists \"Burgundy violet\" among the related names, so catalogues may use several names for similar materials [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is one of the rarest colours in our archive of 23,781 paintings [12]. Only two works have a colour within six units of the swatch filling at least five per cent of the canvas. Both are French and both late: Paul Signac's [[painting:commons-Q17491415|Woman with a Parasol]] of 1893, where it covers 6.8 per cent, and Georges Dupuis's [[painting:commons-Q21725643|Notre-Dame Embankment, Le Havre]] of 1908, at 12.4 per cent [12]. Three paintings in all show it in some measure [12].\n\nThe rarity has two causes. The pigment is weak, and Ball's account suggests that painters mixed violets instead of buying them [9]. And a tube pigment seen through age and varnish looks different from its swatch, so the match is not a pigment test [12]. Do not conclude that the pigment was little used; our archive measures how the painting looks now, as photographed, and not what was in the tube [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pigment (manganese ammonium phosphate)",
+   "first_recorded": "1868",
+   "source": "Paterson, A Dictionary of Colour, p. 255; Ball, Bright Earth, ch. 15"
+  },
+  "aka": [
+   "Nuremberg violet",
+   "Nürnberg violet",
+   "fast violet"
+  ],
+  "siblings": [
+   "nuremberg-violet",
+   "old-mauve"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "mauve",
+    "gloss": "a coal-tar dye of 1856, unrelated to the manganese pigment"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Nürnberger Violett"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#895C9B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "top_paintings": [
+   "commons-Q17491415",
+   "commons-Q21725643"
+  ],
+  "measured": {
+   "iscc": "moderate purple",
+   "de": 3.2
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 255, \"manganese violet\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 108, \"cobalt violet\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 262 and 291, \"manganese ammonium phosphate\", \"Nuremberg violet\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 168, \"fast violet\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 264, \"manganese violet\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 78, \"Burgundy violet\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 155, \"Manganese\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 5 and 72",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub library: Ridgway 1912 plate XXV, ISCC-NBS 1955 blocks 218 and 223, Maerz & Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was manganese violet introduced to replace?",
+   "choices": [
+    "Cobalt violet, a toxic violet",
+    "Ultramarine",
+    "Tyrian purple",
+    "Mauveine"
+   ],
+   "answer": "Cobalt violet, a toxic violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ball says the Impressionists mostly bought manganese violet in tubes.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which year is given for the introduction of manganese violet?",
+   "choices": [
+    "1868",
+    "1738",
+    "1856",
+    "1920"
+   ],
+   "answer": "1868",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Manganese violet replaced a toxic violet in 1868, yet the Impressionists mostly mixed their violets instead.",
+  "In our archive of 23,781 paintings only two have a patch of this violet big enough to measure."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'coloured shadows' framing.",
+   "Softened Burgundy violet synonym claim to 'related names'."
+  ]
+ },
+ "words": 706
+}

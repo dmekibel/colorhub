@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A word for many fruits",
-   "body": "*Berry* names no single color, because berries come in nearly every one. A red berry sends back red light and swallows green and blue, Ball explains [20]. Holly berries are red, yew berries scarlet and poisonous, ripe grapes dark, and a deadly nightshade berry turns from green to purplish black [13][14]. A poet's remark in *Bluets* is that blue is so rare in food that it often warns of mold or poisonous berries [15].\n\nThe color on this page is the deep purplish red of dark fruit, closest to [[raspberry]] and [[mulberry]] on the red side and to [[cranberry]] when it is lighter and brighter. ISCC-NBS 1955 names the nearest block \"deep purplish red\", and the name Berry appears in Maerz and Paul's dictionary of 1930 [18]. In an older sense it was just the color of ordinary fruit: Greenfield mentions \"berry-colored\" cloth worn by craftsmen and peasants in the early Middle Ages, which could be hard to tell from the cheaper purples that monarchs sometimes used [3]."
+   "body": "*Berry* names no single color, because berries come in nearly every one. A red berry sends back red light and swallows green and blue, Ball explains [20]. Holly berries are red, yew berries scarlet and poisonous, ripe grapes dark, and a deadly nightshade berry turns from green to purplish black [13][14]. A poet's remark in *Bluets* is that blue is so rare in food that it often warns of mold or poisonous berries [15].\n\nThe color on this page is the deep purplish red of dark fruit, closest to [[raspberry]] and [[mulberry]] on the red side and to [[cranberry]] when it is lighter and brighter. ISCC-NBS 1955 names the nearest block \"deep purplish red\", and the name Berry appears in Maerz and Paul's dictionary of 1930 [18]. In an older sense it was just the color of ordinary fruit: Greenfield mentions \"berry-colored\" cloth worn by craftsmen and peasants in medieval Europe, which could be hard to tell from the cheaper purples that monarchs sometimes used [3]."
   },
   {
    "id": "kermes",
@@ -22,7 +22,7 @@
   {
    "id": "buckthorn",
    "title": "The berries of the paint shop",
-   "body": "In an artist's color shop, \"berries\" meant something quite different: they were yellow and green. The trade used the unripe berries of buckthorn, species of *Rhamnus*, under names such as yellow berries, French berries and Avignon berries [7]. Tingry wrote in 1804 that the shrub grew in abundance near Avignon [7]. Turkey berries came from Izmir or Aleppo and Persian berries from the east, and the firm of Berger used them to make Dutch pink and brown pink [8].\n\nThe ripe berries gave sap green, a pigment whose juice is thick enough to use without a binder and which painters adopted by the fourteenth century as an alternative to verdigris [8][9]. From the same plant, Coles notes, colormakers drew a surprising range of colors: a lemon-yellow lake at about 50 degrees Celsius, an orange at 100, with the harvest time and the metal salts added also steering the result [10]. Stil de grain, a yellow lake made this way, was used extensively as an oil color in France and England in the eighteenth century [10]. A related green, Chinese green or lokao, was made in China from buckthorn bark [12].\n\nThe old word \"pink\" belongs to this world too. In seventeenth-century painting a pink was a yellow pigment extracted from weld, broom or unripe buckthorn berries, and there were also green pinks and brown pinks, so the word named a source and a type, not a color [11]. In 1664 Robert Boyle listed extracts of berries, fruits and flowers that change color with acid, and was the first to suggest that such changes might measure acidity [9]."
+   "body": "In an artist's color shop, \"berries\" meant something quite different: they were yellow and green. The trade used the unripe berries of buckthorn, species of *Rhamnus*, under names such as yellow berries, French berries and Avignon berries [7]. Tingry wrote in 1804 that the shrub grew in abundance near Avignon [7]. Turkey berries came from Izmir or Aleppo and Persian berries from the east, and the firm of Berger used them to make Dutch pink and brown pink [8].\n\nSap green comes from the juice of buckthorn berries, thick enough to use without a binder, and it appeared by the fourteenth century as an alternative to verdigris [8][9]. From the same plant, Coles notes, colormakers drew a surprising range of colors: a lemon-yellow lake at about 50 degrees Celsius, an orange at 100, with the harvest time and the metal salts added also steering the result [10]. Stil de grain, a yellow lake made this way, was used extensively as an oil color in France and England in the eighteenth century [10]. A related green, Chinese green or lokao, was made in China from buckthorn bark [12].\n\nThe old word \"pink\" belongs to this world too. In seventeenth-century painting a pink was a yellow pigment extracted from weld, broom or unripe buckthorn berries, and there were also green pinks and brown pinks, so the word named a source and a type, not a color [11]. In 1664 Robert Boyle listed extracts of berries, fruits and flowers that change color with acid, and was the first to suggest that such changes might measure acidity [9]."
   },
   {
    "id": "province",
@@ -260,15 +260,14 @@
   "Painters' 'French berries' were yellow, not red.",
   "Kermes, the berry that was an insect, gave us the words crimson and carmine."
  ],
- "words": 973,
+ "words": 968,
  "status": "checked",
  "checked": {
-  "by": "batch-14 writer",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Few books treat 'berry' as a color; article is built on the word's trade history. Shorter than the epic range; honest, not padded.",
-   "Nelson (poet) remark is hedged as a remark.",
-   "Archive hits very low (n=2-3); stated."
+   "Greenfield's 'berry-colored' cloth: 'early Middle Ages' narrowed to medieval Europe (source spans fall of Rome to fall of Constantinople)",
+   "Sap green: removed 'ripe berries' (sources say juice of buckthorn berries; unripe berries for yellow)"
   ]
  }
 }

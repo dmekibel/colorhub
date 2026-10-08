@@ -22,7 +22,7 @@
   {
    "id": "greeks",
    "title": "Blue as a kind of dark",
-   "body": "Ancient writers often treated dark blue as a degree of darkness. Coles notes that the Greek word that took in blue was *melas*, which meant dark, and that blue was seen as a value of darkness [7]. Pastoureau adds that *kyaneos*, the root of modern *cyan*, almost always designated a dark color, but that it might as easily be dark blue as purple, black or brown [8]. Ball, summarizing the Greek view, says that blue was dark with a little light added [9].\n\nNone of this means the Greeks and Romans could not see blue; that is an old myth [10]. Pastoureau says the controversy rests only on vocabulary, and that scientific texts of antiquity show a good understanding of how color is perceived [10]. The Romans, he adds, were not blind to blue but indifferent or hostile to it: it was the color of barbarians who dyed their bodies with woad, and Pliny reports that Breton women painted themselves dark blue [10].\n\nBall offers a biological reason why the blue end of the spectrum may look dark. The cones that respond to blue light are the least sensitive of the three types, so fully saturated blue looks relatively dark [9]."
+   "body": "Ancient writers often treated dark blue as a degree of darkness. Coles notes that the Greek word that took in blue was *melas*, which meant dark, and that blue was seen as a value of darkness [7]. Pastoureau adds that *kyaneos*, the root of modern *cyan*, almost always designated a dark color, but that it might as easily be dark blue as purple, black or brown [8]. Ball, summarizing the Greek view, says that blue was dark with a little light added [9].\n\nNone of this means the Greeks and Romans could not see blue; that is an old myth [10]. Pastoureau says the controversy rests only on vocabulary, and that scientific texts of antiquity show a good understanding of how color is perceived [10]. The Romans, he adds, were not blind to blue but indifferent or hostile to it: it was the color of barbarians who dyed their bodies with woad, and Pastoureau relays Pliny's assertion that Breton women painted their bodies dark blue, a claim to treat with caution [10].\n\nBall offers a biological reason why the blue end of the spectrum may look dark. The cones that respond to blue light are the least sensitive of the three types, so fully saturated blue looks relatively dark [9]."
   },
   {
    "id": "black",
@@ -287,16 +287,13 @@
   "Before the twelfth century a dark blue devil was almost black: dark blue counted as a kind of black.",
   "The CSS dark blue is the bluest a screen can make without any green or red, which no old dye ever managed."
  ],
- "words": 1251,
+ "words": 1260,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 23 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Greeks-could-not-see-blue myth corrected via Pastoureau.",
-   "Royal Navy 1745 date single-source (Balfour-Paul), hedged.",
-   "Birren aura and therapy claims presented as old beliefs, not evidence.",
-   "Maerz and Paul 1598 date not used in prose; library only."
+   "Pliny's Breton-women woad claim attributed and hedged (woad body-paint stories are disputed)."
   ]
  }
 }

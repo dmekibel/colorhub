@@ -1,0 +1,262 @@
+{
+ "slug": "ocean",
+ "name": "Ocean",
+ "hex": "#017B92",
+ "names": [
+  "Ocean"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Ocean is a deep blue-green, the color the word suggests today; for most of European history, though, water was painted green, and the sea took a long time to become blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The swatch and the word",
+   "body": "The swatch is #017B92, a blue-green slightly greener than [[cerulean]], which is its nearest named color in the app palette at a distance of 7.4 CIEDE2000 units [1]. Our library takes the name from the xkcd color-name list, and the earliest record of it in our sources is 2010, so as a modern screen color it is young [1]. Its closest relatives are [[sea-blue]], [[ocean-blue]] and [[teal-blue]], with [[sea]] and [[turquoise]] a little greener [1].\n\nAn older dictionary use points the other way. Paterson lists *ocean green* as a yellowy green, which is a different color from our blue-green swatch [2]. The word has meant both, and the swatch should not be read back into older texts [2]."
+  },
+  {
+   "id": "green-water",
+   "title": "When the sea was green",
+   "body": "Water was rarely thought of as blue in ancient and medieval societies, Pastoureau writes [3]. In pictures it could be any color, but symbolically it was mostly tied to green [3]. On the oldest maps, oceans, lakes and rivers were almost always green, and the shift to blue began only in the late fifteenth century [3]. He adds that seas and oceans passed from green to blue very slowly, between the fifteenth and seventeenth centuries [4]. In everyday imagination it took longer still [3].\n\nPastoureau suggests that the growing link between blue and water probably played the largest part in blue changing from a warm color to a cool one [3]."
+  },
+  {
+   "id": "wine-dark",
+   "title": "Homer's wine-dark sea",
+   "body": "The best-known ancient sea color is Homer's *oinops*, usually rendered wine-dark [5][6]. Ball cites the suggestion that Greek color words described lustre and brightness at least as much as hue: the same word is used in Greek literature for darkened blood and for a cloud, or for the glint of metal and for a tree [5]. Paterson's dictionary reads it the same way, as a sign that the Greeks cared more about the brightness of a surface than its hue [6].\n\nIn 1858 the statesman Gladstone counted color words in Homer and found black the most frequent, with about 170 mentions, and blue not mentioned once [7]. The claim that the Greeks could not see blue is a myth, and the counts do not prove it: Gage points out that blue pigments, bright and saturated ones made from Egyptian blue, were in use from Mycenaean to Hellenistic times [8]. What the counts show is how few color terms Homer used and how he used them, not what the eye could see [5][8]."
+  },
+  {
+   "id": "physics",
+   "title": "Why deep water looks blue-green",
+   "body": "Gurney's painters' rule is that the sea tends to blue-green, because those wavelengths survive the longest passage through water [9]. Westland gives two reasons for blue water, that it reflects the sky and that its longer wavelengths are absorbed more strongly than short ones [10]. The two books stress different causes, so the sky's part is a matter of emphasis.\n\nThe angle matters too. Looking steeply down into a lake or ocean from a boat, Gurney notes, little light from the sky reaches the eye and the water looks dark [11]. At shallow angles the surface reflects more, and a reflected light object appears slightly darker than the object itself, because some light enters the water instead [11]."
+  },
+  {
+   "id": "words",
+   "title": "Ocean in other words",
+   "body": "The sea has lent its name to colors that have nothing to do with its hue. *Ultramarine* means beyond the sea: Finlay explains that medieval Italians used *oltramarino* as a technical term for imported goods, and the paint came from lapis lazuli mined in Afghanistan [12]. The Indian Ocean mattered for another blue: Balfour-Paul writes that sailors and merchants carried indigo and dyed textiles along its routes [13].\n\nThe ocean also became a figure for color itself. Pastoureau notes that Charles Le Brun, defending drawing, compared color to an ocean where many drown [14]. And one film legend ties the word to a stone: Finlay reports that, according to film lore, James Cameron chose [[gem:tanzanite|tanzanite]] for the jewel in *Titanic* because blue diamonds looked too dark to him and sapphires too dull [15]. Treat that as lore, since the book itself flags it so [15]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Ocean is rare in painting. In our archive of 23,781 museum paintings, only 9 have a patch within six units of this color (CIEDE2000) covering at least five per cent of the canvas, as photographed [16]. Where it appears, it is usually a mid-tone (89 per cent of the matches), not a shadow or a highlight [16].\n\nNone of the six strongest matches is a seascape. They include [[painting:nga-56746|Sisters in Blue]] (1840), where it covers 31 per cent of the canvas, [[painting:aic-109780|Love of Winter]] (1914), and [[painting:nga-46657|Palazzo da Mula, Venice]] by [[painter:claude-monet|Monet]] (1908) [16]. The match is concentrated in the 1900s, with 3 of 1,674 paintings, and in Impressionism, with 1 of 140 [16]. The earliest match, a portrait of 1510, is a look-alike hue and not evidence of any pigment [16]. In printed English the word *ocean* peaks about 1978, but it counts the water itself, so it says nothing about the color [16].\n\nThese numbers are for museum photographs of aged, varnished paintings, and a color match is not a pigment test [16]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sea; as a color name, the xkcd list entry (earliest record 2010)",
+   "first_recorded": "2010 in our sources; 'ocean green' as a yellowy green appears in Paterson's dictionary",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour; Pastoureau, Blue and Green"
+  },
+  "aka": [
+   "ocean blue-green"
+  ],
+  "siblings": [
+   "sea-blue",
+   "ocean-blue",
+   "teal-blue",
+   "sea"
+  ],
+  "parent": "blue-green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "ocean-green",
+    "gloss": "a different color, a medium sea green; Paterson also defines the phrase as a yellowy green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#017B92",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 9,
+  "top_paintings": [
+   "nga-56746",
+   "smk-KMS7609",
+   "aic-109780",
+   "nga-46657",
+   "rijks-20025797",
+   "smk-KMS3052"
+  ],
+  "role": {
+   "mid": 0.89,
+   "highlight": 0.11
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Cerulean",
+     7.4
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 1978,
+   "word": "ocean"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Ocean (source xkcd, 2010; nearest named color Cerulean, 7.4) and name graph",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"ocean green\", p. 283",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 11 (closing chapter on warm and cool)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 25 (\"From green to greenish\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"wine-dark\", p. 426",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 19 (Gladstone)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 34",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 42",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, ch. 83 (\"Nature's Light\")",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 202",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 37",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, ch. 12 (notes)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 16; flagged as film lore in books/CONFLICTS.md",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub archive and field notes (tools/article_field.py), as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "For most of the Middle Ages, what color were seas and rivers usually painted on maps?",
+   "choices": [
+    "Green",
+    "Blue",
+    "Red",
+    "Black"
+   ],
+   "answer": "Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Homer's wine-dark sea shows that the ancient Greeks could not see blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does the deep ocean look blue-green to a painter?",
+   "choices": [
+    "Blue-green wavelengths travel farthest through water",
+    "Seawater contains blue dye",
+    "It only reflects the sunset",
+    "Fish scatter red light"
+   ],
+   "answer": "Blue-green wavelengths travel farthest through water",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "For most of European history, water on maps was green; the move to blue began in the late fifteenth century.",
+  "Where to look: stand over deep water and the surface is dark and teal; at a shallow angle it turns to the sky.",
+  "Ultramarine means beyond the sea, and the stone it comes from was mined in Afghanistan."
+ ],
+ "words": 843,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Paraphrased Finlay's Titanic lore sentence to avoid close book phrasing"
+  ]
+ }
+}

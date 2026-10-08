@@ -218,11 +218,10 @@
  "words": 923,
  "status": "checked",
  "checked": {
-  "by": "batch-18 writer (Sonnet 5.5)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Concordance 'green-blue' hits are mostly noise (spectral lists); article built on compounds, pigment classes and language material",
-   "Pigment Compendium page numbers not given; Pastoureau chapter numbers are epub indices"
+   "No changes needed; 8 key claims verified against fact cards"
   ]
  }
 }

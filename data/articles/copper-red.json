@@ -1,0 +1,219 @@
+{
+ "slug": "copper-red",
+ "name": "Copper Red",
+ "hex": "#CB6D51",
+ "names": [
+  "Copper Red"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Copper red is a reddish orange named for an object, the kind of name early nineteenth-century naturalists used in their color lists and later dropped.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from the object",
+   "body": "Copper red belongs to the family of color names that point at a thing rather than a hue: grass green, lead grey, copper red. It turns up again and again in the early nineteenth-century lists that grew out of Werner's mineralogical color scheme, which Baty traces in a chart of lists from the 1790s to the 1810s [1]. The lists differ, and copper red shuffles between neighbors such as scarlet red, blood red and carmine red from one list to the next [1].\n\nThat shuffling is a clue. The name was never pinned to one chip, and our sources do not say which shade of copper was meant: the metal, its tarnish or the red mineral that forms on its ore [1]. Who first used the phrase as a color is undocumented in the books we have."
+  },
+  {
+   "id": "dropped",
+   "title": "Dropped from the final list",
+   "body": "When Patrick Syme published his illustrated edition of Werner's *Nomenclature of Colours* in 1821, it ran to 110 numbered colors [2]. The reds in that list include tile red, [[scarlet]] red (no. 84), vermilion red (no. 85), aurora red (no. 86), arterial blood red (no. 87) and flesh red (no. 88), but not copper red [2]. The name stayed in the older lists, yet it did not make the edition that circulated in scientific and medical circles.\n\nThe reason for the omission is not recorded, but a contemporary complaint is suggestive. The optician James Hunter noted in 1841 that a color named for an object only works for people who already know that object at first hand, and he gave copper red as one of his examples [3]. Without a printed swatch the name conveys little."
+  },
+  {
+   "id": "material",
+   "title": "Two copper reds in the paint box",
+   "body": "In the pigment trade the phrase meant a material. A catalogue by Salter from 1869 lists two copper reds: copper oxide, which is the mineral cuprite, and an organic copper compound said to come from a bird called the turaco [4]. Salter relays Professor Church's report of a copper-bearing pigment in the feathers of the violet plantain-eater and two other turaco species, which Church named turacine and which was, by this account, the first animal or vegetable pigment found with copper as an essential element [5].\n\nCuprite itself is red copper(I) oxide, Cu2O, a common mineral of the weathered zones of copper ore deposits, with Cornwall and Clifton, Arizona among the places named [6]. A basic copper chromate, meanwhile, is reported in the literature in a range of colors from yellow to chocolate brown, with copper red among them [7]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which red is the swatch",
+   "body": "The swatch on this page, #CB6D51, was filed from four sources: Wikipedia, ISCC-NBS 1955, Maerz and Paul 1930 and Werner [8]. The ISCC-NBS system calls it a moderate reddish orange, a match within 0.6 units, and the nearest everyday name is [[terracotta]] [8]. The library merges it with Werner's aurora red as a near duplicate, 2.0 units away, and the Werner example objects attached to it (the vent feathers of a woodpecker, the red on a naked apple, red orpiment) belong to Werner's no. 86 [8][2].\n\nSo the chip is a terracotta-like orange-red, closer to [[brick-red]] or fired clay than to a polished penny. Treat it as a screen color, not a recipe."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 176 works, about 0.7 per cent [9]. India dominates: 75 of its 721 paintings carry it, 14 times the archive rate [9]. The Kalighat, Rajput and Pahari schools reach 17 of 96, 15 of 97 and 14 of 118, and no Impressionist work among 140 does [9].\n\nThe earliest match is a four-armed Maitreya of about 1150, and the largest is Émile Bernard's *[[painting:commons-Q17490794|Symbolic Self-Portrait]]* of 1891, where it covers 60 per cent of the canvas [9]. It is a middle tone, not a shadow or highlight, in 55 per cent of the places it appears [9]. Its closest company in the archive is [[vermilion]] and [[terracotta]] [9]. These are photographs of aged, varnished paintings, so read them as screen colors [9]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "copper, the metal or its red oxide (the exact shade intended is undocumented)",
+   "first_recorded": "in the Werner-lineage color lists of the 1790s to 1810s; absent from Syme's 1821 list",
+   "source": "Baty, Nature's Palette, pp. 32-35, 205-211"
+  },
+  "aka": [
+   "copper-red"
+  ],
+  "siblings": [
+   "brick-red",
+   "terracotta",
+   "vermilion",
+   "scarlet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CB6D51",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 176,
+  "top_paintings": [
+   "commons-Q17490794",
+   "nga-41630",
+   "cma-136471"
+  ],
+  "countries": {
+   "India": [
+    75,
+    721
+   ]
+  },
+  "role": {
+   "mid": 0.55,
+   "highlight": 0.23,
+   "shadow": 0.22
+  },
+  "company": [
+   "Vermilion",
+   "Terracotta",
+   "Sienna"
+  ],
+  "measured": {
+   "lch": [
+    56.3,
+    47.2,
+    42.9
+   ],
+   "iscc": "moderate reddish orange",
+   "nearest": [
+    [
+     "Terracotta",
+     5.1
+    ],
+    [
+     "Aurora Red",
+     2.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-35 (chart of Werner-lineage color lists, 1790s-1810s)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34-35 and 205-211 (Syme 1821, 110 colors)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 220 (Hunter, 1841)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"copper red\", p. 142 (citing Salter, 1869)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"turacine\" (citing Salter, 1869)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"cuprite\", p. 149",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"copper chromate hydroxide\", p. 137",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json; data/graph/nodes-c.json): ISCC-NBS 1955, Maerz & Paul 1930, Werner; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, color within 6 CIEDE2000 units covering at least 5% of the canvas, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did the optician James Hunter criticize color names like copper red in 1841?",
+   "choices": [
+    "They only convey a color to people who already know the object",
+    "They were too long to print",
+    "They named colors nobody could paint",
+    "They came from a foreign language"
+   ],
+   "answer": "They only convey a color to people who already know the object",
+   "kind": "pick"
+  },
+  {
+   "q": "Copper red is one of the 110 numbered colors in Syme's 1821 edition.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which mineral did Salter's 1869 list name as one of the two copper reds?",
+   "choices": [
+    "Cuprite",
+    "Malachite",
+    "Azurite",
+    "Cinnabar"
+   ],
+   "answer": "Cuprite",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Copper red appears in many early color lists, yet not in the 110 colors of Syme's 1821 standard.",
+  "In 1869 one catalogue listed two copper reds: a mineral and a pigment from the feathers of an African bird.",
+  "Look for this orange-red in Indian miniatures: 75 of 721 in our archive carry it, 14 times the archive rate."
+ ],
+ "words": 683,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsourced list-length range (70 to just over 100).",
+   "Removed unsourced 'everyday speech' survival claim; softened 'standard most naturalists used' to circulation in scientific and medical circles."
+  ]
+ }
+}

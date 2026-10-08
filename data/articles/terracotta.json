@@ -1,0 +1,264 @@
+{
+ "slug": "terracotta",
+ "name": "Terracotta",
+ "hex": "#E2725B",
+ "names": [
+  "Terracotta"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Terracotta is the brownish orange of unglazed fired clay, named from the Italian words for baked earth, and as a tube of paint it was a recipe made to match the pot.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The clay and the paint",
+   "body": "Paterson's dictionary defines terracotta loosely, as any of the many brownish-orange shades of unglazed earthenware [1]. That makes it a range rather than one color, since clay differs from pit to pit and kiln to kiln. A neighbor in the same dictionary, *terra rosa*, is a light red close to [[venetian-red]] [1].\n\nArtists' colormen turned the name into a manufactured paint. The Pigment Compendium reports, on Mayer's authority (1991), that terra cotta was a compound made to imitate clay [2]. Its ingredients were burnt umber, a natural red iron oxide and chalk, in shifting proportions [2]. Baryte, zinc oxide or lithopone could replace the chalk [2]. The paint copied the clay, and the clay lent the name.\n\nThe swatch here is a warm, coral-leaning red. The ISCC-NBS system of 1955 files it as a moderate reddish orange, 5.1 units from the center of its block [3]. Its closest names are [[light-coral-red]] (3.4 units away), [[dark-peach]] (4.5), [[dusty-coral]] (4.7) and [[bright-terracotta]] (4.8) [3]. Paterson's range runs browner than this screen color, which is one reason to treat the swatch as a pointer to the clay, not a portrait of it [1]."
+  },
+  {
+   "id": "ancient",
+   "title": "Clay in mosaics and on temple roofs",
+   "body": "Gage notes that Greek pebble mosaics gave way, about the third century BC, to regularly cut tesserae, and that a sprinkling of artificially colored terracotta or glass was soon added to the natural stone, widening the range of color [4]. Mosaic materials ranked by worth, with marble at the top, glass next, and stone or terracotta cubes at the bottom; when the dearer kinds ran out, workers sometimes fell back on the cheaper [4].\n\nFired clay was also painted. A study of a Greek temple's roof terracottas, by Nirmaier in 2000, reports decorative painting in manganese black and hematite red [5]. On the clay soldiers of Xi'an, Bouherour and colleagues identified Han purple in the paint layers [6]. A conservation footnote adds a curiosity: lichen growing on Chinese terracotta soldiers builds calcium oxalate layers, and in laboratory studies copper-bearing pigments such as [[egyptian-blue]] and Han blue and purple inhibited that growth [7].\n\nSo the brownish-orange surface in a museum case is often only the base of an object that was once painted."
+  },
+  {
+   "id": "art",
+   "title": "Blue leaves in a terracotta vase",
+   "body": "The best-known terracotta in the color books is a painted one. Jan van Huysum's *Flowers in a Terracotta Vase* (1736) hangs in the National Gallery, London [8]. Some of its leaves look blue today, but they were once green: the yellow lake has faded, leaving the blue behind [9].\n\nBall traces the change in van Huysum's own practice [8]. In a flower piece of 1702 to 1720 the greens contain indigo, while by 1736 he had switched to the new [[prussian-blue]] [8]. The vase gives the picture its title, and the leaves show how a fugitive pigment can rewrite a painting.\n\nWhere to look: in an old flower painting, a blue leaf beside a warm orange pot may be a faded green, as in this one [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, a color within four units of this swatch covers at least one per cent of the canvas in 68 paintings, or 0.29 per cent [10]. That is commoner than about half of the named colors [10]. Inside a painting it most often plays an accent, in 85 per cent of the 52 paintings the within-painting lens finds, ranked by lightness inside each painting so varnish cannot fake it [10]. It peaks in the 1500s, found in 0.5 per cent of the 2,231 paintings from that century, about twice the baseline rate of the same museums [10]. By country it stands out in India, at 3.4 times the expected rate (14 of 721 paintings) [10].\n\nA stricter lens, within six units and at least five per cent of the canvas, finds 28 paintings [11]. The largest cover is not a pot but a dog: [[painting:rijks-20027480|Portrait of a Puppy]] (1850) by Guillaume Anne van der Brugghen, at 42 per cent, followed by [[painter:john-singer-sargent|Sargent]]'s [[painting:commons-Q20169820|Gitana]] (1876) at 29 per cent [11]. Three of the 97 Rajput paintings in the archive qualify, a rate about 26 times the baseline [11].\n\nThe earliest hit is dated 1236 (cma-153618), 585 years before the name's earliest record in our library (1821, Werner as edited by Syme) [10][3]. The archive's early centuries are thin, so this is a look-alike hue in an aged photograph, not proof of any pigment [10]. As always these are photographs of varnished paintings, so read them as screen colors.\n\nIn Google Books the word *terracotta* climbs from about 2 per cent of its peak level in 1800 to 96 per cent in 2000, with the peak itself in 2002 [12]. Our fashion data lists Terracotta as a named color of both the 2010s and the 2020s [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "unglazed fired clay (Italian terra cotta, baked earth)",
+   "first_recorded": "1821 in our color library (Werner as edited by Syme); the paint recipe is reported by Mayer (1991)",
+   "source": "Paterson, A Dictionary of Colour; Pigment Compendium, 'Terra cotta'"
+  },
+  "aka": [
+   "terra cotta",
+   "terra-cotta"
+  ],
+  "siblings": [
+   "venetian-red",
+   "brick-red",
+   "copper-red"
+  ],
+  "parent": null,
+  "children": [
+   "deep-terracotta",
+   "bright-terracotta"
+  ],
+  "disambiguation": [
+   {
+    "slug": "bittersweet",
+    "gloss": "a more vivid red-orange only 5 units away, named for a plant"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "terra cotta (baked earth)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#E2725B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 28,
+  "n_present_1pct_de4": 68,
+  "top_paintings": [
+   "rijks-20027480",
+   "commons-Q20169820",
+   "commons-Q125362489",
+   "commons-Q3873251"
+  ],
+  "role": {
+   "accent_share": 0.85,
+   "n": 52
+  },
+  "century_peak": {
+   "century": 1500,
+   "rate": 0.005,
+   "lift": 2.28
+  },
+  "ngram": {
+   "rel_1800": 0.019,
+   "rel_2000": 0.955,
+   "peak": 2002
+  },
+  "measured": {
+   "lch": [
+    60.7,
+    53.0,
+    38.2
+   ],
+   "nearest": [
+    [
+     "Light Coral Red",
+     3.4
+    ],
+    [
+     "Dark Peach",
+     4.5
+    ],
+    [
+     "Dusty Coral",
+     4.7
+    ],
+    [
+     "Bright Terracotta",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"terra-cotta\" and \"terra rosa\" (pdf p. 391)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Terra cotta\" (pdf p. 372), citing Mayer (1991)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph; ISCC-NBS 1955, CIEDE2000 distances)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, pp. 44, 48",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, bibliography (pdf p. 496): Nirmaier (2000) on the painted terracotta roof of a Greek temple",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Han purple\" (pdf p. 194), citing Bouherour et al. (2001)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, pp. 407-408, citing Lamprecht et al. (1997)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14 and plate list",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph fieldnotes; color within CIEDE2000 4 of the swatch, at least 1% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+   "loc_kind": null,
+   "url": "https://books.google.com/ngrams"
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub fashion data (color-of-the-decade twins in data/graph, 2010s and 2020s)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why do some leaves in van Huysum's Flowers in a Terracotta Vase look blue today?",
+   "choices": [
+    "The yellow lake in the green faded, leaving the blue",
+    "Varnish has turned yellow",
+    "He painted them blue on purpose",
+    "The terracotta vase reflects blue light"
+   ],
+   "answer": "The yellow lake in the green faded, leaving the blue",
+   "kind": "pick"
+  },
+  {
+   "q": "What was artists' terra cotta paint, according to Mayer (1991)?",
+   "choices": [
+    "A mixture of burnt umber, red iron oxide and chalk",
+    "Ground fired clay from tile kilns",
+    "A single natural red earth",
+    "A synthetic dye on chalk"
+   ],
+   "answer": "A mixture of burnt umber, red iron oxide and chalk",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: terracotta names one fixed color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The paint called terra cotta was made to imitate the clay, not the other way round.",
+  "In van Huysum's flower painting, the blue leaves beside the orange pot were once green.",
+  "In our archive the biggest patch of terracotta is a Dutch portrait of a puppy, at 42 per cent of the canvas."
+ ],
+ "words": 810,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Ball says 'patchy blue leaves', not all: softened",
+   "'usually a faded green' overstated: narrowed to this painting",
+   "Removed unsupported ancient-world generalization",
+   "Opener/question aligned to source"
+  ]
+ }
+}

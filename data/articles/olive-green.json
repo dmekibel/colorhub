@@ -265,13 +265,10 @@
  "words": 1196,
  "status": "checked",
  "checked": {
-  "by": "batch-35 writer (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Celadon-detects-poison myth corrected from Finlay's Jahangir test; Finlay dates the test to the early 1700s, which cannot be right for Jahangir, so no date is given.",
-   "No historical date for olive drab or khaki found in the books; none given.",
-   "Birren (1950) olive-as-deep-yellow is an old framing, hedged in prose.",
-   "Ngram not used: cached olive green series has no verified start year."
+   "Verified Syme/Picardet chart, Pigment Compendium olive green/lake, Famen mi se, celadon-poison myth against cards and book text; no changes needed."
   ]
  }
 }

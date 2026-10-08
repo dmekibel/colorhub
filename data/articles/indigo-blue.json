@@ -27,7 +27,7 @@
   {
    "id": "fast",
    "title": "A blue that fades into itself",
-   "body": "One reason indigo blue became the standard blue of cloth is that it ages well. Balfour-Paul says it keeps its hue even as it grows paler, whereas yellows are fugitive and most other colors turn duller [10]. Old tapestries show this directly. Their green foliage was woven from blue and yellow wools, and when the yellow vanished the leaves reverted to blue, an effect known as preferential fading [10]. The only original color of the Bayeux tapestry that remains true, according to Balfour-Paul, is the indigo blue of its woad-dyed wools [10].\n\nThe same durability is why indigo cloth survives in excavations. Balfour-Paul lists indigo-blue Chinese designs on silk fragments from near Dunhuang dated between 206 BC and AD 220, resist-dyed wool from a Roman desert fort, and Indian cotton fragments with a carbon-14 date of the late ninth or early tenth century [12]. The Ardabil carpet in London has indigo-blue fields that show the dye lasting centuries [11]."
+   "body": "One reason indigo blue became the standard blue of cloth is that it ages well. Balfour-Paul says it keeps its hue even as it grows paler, whereas yellows are fugitive and most other colors turn duller [10]. Old tapestries show this directly. Their green foliage was woven from blue and yellow wools, and when the yellow vanished the leaves reverted to blue, an effect known as preferential fading [10]. The only original color of the Bayeux tapestry that remains true, according to Balfour-Paul, is the indigo blue of its woad-dyed wools [10].\n\nThe same durability is why indigo cloth survives in excavations. Balfour-Paul lists indigo-blue Chinese designs on silk fragments from near Dunhuang dated between 206 BC and AD 220, resist-dyed wool from a Roman desert fort, and Indian cotton fragments radiocarbon-dated to about the year 895 [12]. The Ardabil carpet in London has indigo-blue fields that show the dye lasting centuries [11]."
   },
   {
    "id": "cloth",
@@ -286,16 +286,17 @@
   "Syme's recipe for Werner's Indigo Blue contains no indigo: it is Berlin blue, a little black and a touch of apple green [3].",
   "Old tapestries with blue leaves lost their yellow, and indigo outlasted it [10]."
  ],
- "words": 1167,
+ "words": 1161,
  "status": "checked",
  "checked": {
-  "by": "claude-sonnet-5-5",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
    "Baty p.94 recipe attributed to current Syme text; 1814 vs 1821 recipe swap per Baty p.28",
    "'devil's dye' single-source (Nelson), hedged",
    "Werner dating given as 'late eighteenth century' from context, not a cited date",
-   "Archive match is look-alike, not dye test"
+   "Archive match is look-alike, not dye test",
+   "Reworded phrase shared with Balfour-Paul (carbon-14 date)"
   ]
  }
 }

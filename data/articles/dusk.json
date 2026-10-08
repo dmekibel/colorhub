@@ -1,0 +1,226 @@
+{
+ "slug": "dusk",
+ "name": "Dusk",
+ "hex": "#4E5481",
+ "names": [
+  "Dusk"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Dusk is the dim time after sunset, and as a color it is a muted blue-violet, a dark with a little blue left in it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark word first",
+   "body": "Paterson defines *dusk* as an adjective for dark, dim or blackish things, usually of twilight, and as a noun for twilight itself, which can also mean the moment in the morning when darkness lifts [1]. He lists *dusk yellow* and *duskish yellow*, and the related *dusky* simply means dark [1]. So the old word was about lightness, not hue.\n\nThe blue sense is more recent in our sources. St Clair's glossary calls the cornflower blue Quimper the color of dusk [2]. In our library the name enters its first list in 1912, in Ridgway [3]."
+  },
+  {
+   "id": "light",
+   "title": "What the light does",
+   "body": "At the golden hour the low sun is more orange or red, forms lit by it take on a golden color, and shadows turn bluer than usual [4]. Gurney gives two reasons: the sky really is a richer blue, and the warm light makes the shadows lean toward the complement [4]. Birren notes that daylight changes in both intensity and hue from dawn to dusk, with sunset sometimes a rich pink and reflected sky light bluish, and that people are rarely aware of it [5].\n\nThe eye changes too. At dusk the rods begin to work while the cones still do, and Livingstone says this is the closest we come to using four kinds of photoreceptor at once [6]. She is firm that it adds no new colors, only a change in brightness: blues look lighter relative to dark reds, so the same bowl and cherries swap their order of lightness [6]. Purkinje first noticed this in 1819, when his geraniums looked red in the afternoon and a darker bluish red at dawn [7]. A lit window at dusk looks yellow or orange against the bluer waning daylight [6]."
+  },
+  {
+   "id": "seen",
+   "title": "Where to look",
+   "body": "Ball says the hue of [[ultramarine]], with its purple tint, is the one that marks the passage from dusk to night [8]. Finlay writes that [[gem:peridot|peridot]] looks its best at dusk, which is why it was long called the evening emerald [9]. Gurney adds that muddy water mirrors the sky most cleanly after sunset, once no direct light falls on it [4].\n\nDusk has also been a tool of war. In 1940 Lord Mountbatten noticed a liner in its peacetime paint vanish into the gloaming before the rest of a convoy, and had his flotilla repainted in a gray warmed with Venetian red, a tone that became known as [[mountbatten-pink]] [10]. Look at red and blue objects after sunset and compare their lightness, as Livingstone describes [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our Dusk, #4E5481, is a blue-violet of middling darkness, a near-duplicate of Purple Navy, 1.2 CIEDE2000 units away, and closest of the taught names to [[denim]], 10.2 away [3]. It sits in the ISCC-NBS list and in Ridgway's plates [3]. It is not the same as [[dusk-blue]], a stronger blue (#26538D) from the xkcd and Crayola lists [3]. Neighbors in feeling are [[twilight]] and [[night-blue]]. The real sky at dusk ranges from orange to nearly black; the swatch is one list's choice of a single moment [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color appears in 63 of the 23,781 paintings in our archive, or 0.26 per cent, as photographed; the stricter within-painting count finds it in 35 [11]. It is rarer than 55 per cent of named colors [11]. It peaks in the 1900s, in 13 of 1,674 paintings, 3.4 times the expected rate from the same museums [11]. Inside a painting it most often plays an accent, in 49 per cent of those 35 [11].\n\nThe earliest match is a panel of 1420, [[painting:cma-124076|by Fra Angelico]], 492 years before the name's first record in our sources [11]. That is a look-alike hue in an aged, varnished photograph, not proof of anything about the painter's pigment [11]. In printed English the word peaks in the 2010s, but it counts every sense, including the time of day [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dim time after sunset (English dusk)",
+   "first_recorded": "as a color name, Ridgway 1912 in our sources",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "Quimper (St Clair's gloss)"
+  ],
+  "siblings": [
+   "twilight",
+   "night-blue",
+   "dusk-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "dusk-blue",
+    "gloss": "a stronger, brighter blue from the xkcd and Crayola lists"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#4E5481",
+   "de2000": 4,
+   "min_cover": 0.02
+  },
+  "n_present": 63,
+  "n_within_painting": 35,
+  "century": {
+   "1900s": {
+    "n": 13,
+    "of": 1674,
+    "lift": 3.4
+   }
+  },
+  "role": {
+   "accent_pct": 49
+  },
+  "first_seen": {
+   "year": 1420,
+   "id": "cma-124076"
+  },
+  "ngram": {
+   "peak": "2010s"
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Purple Navy",
+     1.2
+    ],
+    [
+     "Denim",
+     10.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"dusk\", \"dusky\", \"half-light\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Quimper\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library (data/library.json): Dusk, Dusk Blue",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, sections on golden hour, dusk and reflections",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 24",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, chs. 12, 13 and 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Westland, Universal Principles of Color, on the Purkinje shift",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 14",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. on Mountbatten pink",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes/d.json), dusk, with Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "At dusk, how do blues change relative to dark reds?",
+   "choices": [
+    "Blues look lighter",
+    "Blues look darker",
+    "Nothing changes",
+    "Reds disappear entirely"
+   ],
+   "answer": "Blues look lighter",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: at dusk we perceive new colors we cannot see in daylight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What did the old English word dusk mainly describe?",
+   "choices": [
+    "Darkness or dimness",
+    "A kind of blue",
+    "A kind of purple",
+    "A kind of mist"
+   ],
+   "answer": "Darkness or dimness",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dusk was a word for dimness long before it was a blue: Paterson defines it as dark, not as a hue.",
+  "Look for the Purkinje shift at dusk: blues hold on while reds sink."
+ ],
+ "words": 641,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All sampled claims traced to fact cards and book text; no changes needed."
+  ]
+ }
+}

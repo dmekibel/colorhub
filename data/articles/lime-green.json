@@ -1,0 +1,229 @@
+{
+ "slug": "lime-green",
+ "name": "Lime Green",
+ "hex": "#32CD32",
+ "names": [
+  "Lime Green"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Lime green is a vivid, slightly yellowish green; on the web it is X11's #32CD32, while the older paint of the same name was a copper-and-arsenic green thinned with a white calcium filler.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three things called lime green",
+   "body": "The `LimeGreen` of web design is the X11 color #32CD32, a bright, clean green with a trace of yellow [1][4]. The same two words have named older things: a pale pigment sold to painters and decorators [2], and a muted yellow-green in Ridgway's 1912 color atlas [4]. Maerz and Paul, whose dictionary was printed in 1930, record the phrase as first used in 1905 [4].\n\nWhich lime the name points to, the fruit or the mineral, is undocumented in the books we hold. Paterson's dictionary lists lime white, the color of calcium oxide, and lime yellow beside it, so the word was already busy in the color trade [1]."
+  },
+  {
+   "id": "pigment",
+   "title": "A pigment diluted with a white filler",
+   "body": "As a paint, lime green was a diluted color. Bersch in 1901 described it as a mixture of copper arsenite and calcium sulfate, and the Colour Index of 1971 files it under reference CI 77412 [2]. The Pigment Compendium adds that patent green seems to have meant the same thing [2].\n\nGerman authors of the nineteenth century place it in a family of copper-arsenic greens named for places: Braunschweig, Kaiser, Neuwied and Berg green [3]. Mierzinski in 1881 calls these an emerald green, a copper acetate arsenite, made into a lime green by a filler of calcium or barium sulfate [3]. Mayer in 1991 reads Kaiser green the same way, as a variety of [[emerald-green]] with an inert filler [3]. In that sense a lime green was a cut-down emerald green, paler and cheaper than the full-strength pigment.\n\nThe sources do not agree on what the copper green was. Terry in 1893 called Braunschweig green essentially a basic copper chloride, and recorded about seven distinct recipes for it [3]. Another account in the Compendium places imperial green somewhere between emerald green and Neuwied lime green [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "Four swatches, one name",
+   "body": "The screen swatch is the CSS value #32CD32 [4]. In our library its nearest ISCC-NBS category is vivid yellowish green, within a ΔE of 1.5 [4]. Ridgway's plate XXXI, as scanned from an aged copy, gives a far duller #BDB661, and xkcd's 2010 color list gives a brighter, yellower #89FE05 [4]. The same two words therefore stretch from a muted olive-yellow to a near-neon green.\n\nAmong neighboring names, [[lime]] (hue angle 118), [[chartreuse]] (128) and Lime Green (138) run from yellower to greener [5]. On our own scale the closest learnable color is [[malachite]], 4.2 units away [5]."
+  },
+  {
+   "id": "world",
+   "title": "Where the green turns up",
+   "body": "The strangest lime green in the books is a chemical stage. On the Pacific coast of Mexico, Finlay watched a fisherman rub a sea snail's milky secretion onto white thread; the stain was fluorescent lime green, then turned yellow and finally purple in the sunshine [6]. The compound is light-sensitive, so kept in the dark it stays green [6].\n\nIn 1872 the linguist Gottlieb Leitner collected names for up to a hundred shawl dyes in Gujarat, among them *kapasi*, the color of the cotton flower, which Finlay describes as a luminous lime green [7]. Tipu Sultan's war coat, captured when he died in 1799, was hot pink and lime green, with orange pompoms; by 1972 its silks had mostly turned brown [7].\n\nIn nature it is the color of [[gem:peridot|peridot]]: on the San Carlos mesa in Arizona, gray basalt is dotted with lime-green circles where peridot crystals formed [8].\n\nFashion has used it in waves. A trend forecaster quoted by Garfield around 2000 said that lime green with orange had stayed strong for three years, because shoppers forget a summer color over the winter and find it charming again in spring [9]. Google Books shows the phrase at about 7 per cent of its eventual peak in the 1920s and 56 per cent in the 2000s, peaking in 2013 [11]."
+  },
+  {
+   "id": "eye",
+   "title": "Why it never sits still",
+   "body": "Lime green is a color that changes with its neighbors. Eckstut shows a pair of circles, one lime green and one turquoise blue, that look like opposites against their backgrounds although they are the same color [10]. To see it in the world, hold a hand over the orange or the violet beside a lime-green sign and watch the green settle."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of paintings, as photographed, has no lime green: in 0 of 23,781 paintings does a color within six units of #32CD32 cover at least five per cent of the canvas [12]. That fits the pigment story, since the Compendium's lime green was a pale, dull green, nothing like the screen color [2][12]. These are photographs of aged, varnished canvases, so a missing match is not proof that no painter used a green like it [12]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (the fruit or the mineral lime; no book we hold says)",
+   "first_recorded": "Maerz & Paul list 'lime green' as first recorded in 1905; the X11 value #32CD32 is a screen standard",
+   "source": "Pigment Compendium, 'lime green'; ColorHub library"
+  },
+  "aka": [
+   "LimeGreen (X11, CSS)",
+   "Neuwied lime green (a pigment variant)"
+  ],
+  "siblings": [
+   "lime",
+   "chartreuse",
+   "slime-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "lime",
+    "gloss": "a yellower, brighter green; often confused with lime green"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#32CD32",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 0,
+  "ngram": {
+   "rel_1920": 0.073,
+   "rel_2000": 0.557,
+   "peak": 2013
+  },
+  "measured": {
+   "lch": [
+    73,
+    91,
+    138
+   ],
+   "nearest": [
+    [
+     "Malachite",
+     4.2
+    ]
+   ],
+   "iscc": [
+    "vivid yellowish green",
+    1.5
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"LimeGreen\", \"lime white\", \"lime yellow\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"lime green\" (Bersch 1901; Colour Index 1971, CI 77412)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Braunschweig green\", \"Kaiser green\", \"Neuwied green\", \"imperial green\" (Mierzinski 1881; Terry 1893; Mayer 1991)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: Lime Green sources (CSS, Ridgway 1912 plate XXXI, Maerz & Paul 1930 first recorded 1905, ISCC-NBS 1955, xkcd 2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub measured values (LCH hue angles, nearest learnable color)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 249 (Leitner's shawl alphabet; Tipu Sultan's coat)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Eckstut, What Is Color?, ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"lime green\", relative to peak, 5-year smoothing",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (DE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Bersch say the pigment lime green was made of?",
+   "choices": [
+    "Copper arsenite and calcium sulfate",
+    "Indigo and chalk",
+    "Lead white and yellow ochre",
+    "Crushed peridot"
+   ],
+   "answer": "Copper arsenite and calcium sulfate",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Ridgway's 1912 lime green is as bright as the web's #32CD32.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In Finlay's account of the sea-snail stain, what color does it show first in the sunshine?",
+   "choices": [
+    "Lime green",
+    "Purple",
+    "Red",
+    "Blue"
+   ],
+   "answer": "Lime green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A sea-snail stain on white thread starts out fluorescent lime green, then turns yellow, then purple in the sun.",
+  "The paint called lime green was an emerald green thinned with a white filler of calcium or barium sulfate."
+ ],
+ "words": 760,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

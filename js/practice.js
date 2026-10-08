@@ -1696,7 +1696,7 @@ function prShot(arg) {
   };
   if (what === "quick") {   // the instant-deck sheet, opened from a color page, a name page, Home or a painting
     const tap = (sel, ms = 900) => { let n = 0; const t = () => { const b = document.querySelector(sel); if (b) return setTimeout(() => { b.scrollIntoView({ block: "center" }); b.click(); }, 500); if (++n < 60) setTimeout(t, 200); }; setTimeout(t, ms); };
-    if (st === "home" || st === "homebtn") { hmHome(); if (st === "home") tap("[data-pr-study]", 1500); return; }
+    if (st === "home" || st === "homebtn") { hmHome(); if (st === "home") { tap("#hmDo", 1500); tap("[data-pr-study]", 2400); } return; }
     if (st === "name") { openRoute("#/name/harbor-blue"); return tap("[data-learnit]", 1500); }
     if (st === "painting") { openRoute("#/painting/starry-night"); return tap("[data-pr-scope]"); }
     openRoute("#/color/teal");

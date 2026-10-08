@@ -32,7 +32,7 @@
   {
    "id": "pigment",
    "title": "A pigment synonym",
-   "body": "In the pigment trade, leek green was a minor name. The *Pigment Compendium* lists it, after Mayer (1991), as a synonym of chrome green, the chromium oxide pigment family, and nothing more [11]. The name is far older than the pigment, so the pigment borrowed it rather than the other way round."
+   "body": "In the pigment trade, leek green was a minor name. The *Pigment Compendium* lists it, after Mayer (1991), as a synonym of chrome green, the chromium oxide pigment family, and nothing more [11]."
   },
   {
    "id": "field",
@@ -261,16 +261,13 @@
   "Humphry Davy named chlorine for a pale leek-green color.",
   "Look at a leek in winter: the grey-green of its leaves is Werner's number 48."
  ],
- "words": 898,
+ "words": 879,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Books disagree on lightness: Pastoureau dark/strong, Ball/Davy pale, Paterson olive/yellowish; stated in text.",
-   "Davy's naming date not given by Ball; left undated in the text.",
-   "Paliavana prasinata assignment parsed from Baty's botanical index layout; moderately confident.",
-   "Prase described as a silica mineral from Baty's caption ('Silica'); etymology not claimed."
+   "Removed unsourced inference about the pigment borrowing the name; Compendium only lists the synonym."
   ]
  }
 }

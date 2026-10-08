@@ -1,0 +1,244 @@
+{
+ "slug": "verditter-blue",
+ "name": "Verditter Blue",
+ "hex": "#6FB5A8",
+ "names": [
+  "Verditter Blue"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Verditter blue is the pale blue-green of a copper pigment that silver refiners stumbled on, an artificial cousin of azurite sold to house painters from the seventeenth century.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Green earth, blue result",
+   "body": "Verditter is a copper pigment [1][2]. Ball points out that the term comes from the old French *verd de terre*, green earth, and infers from this that the first verditer made was green and the blue variety followed [1]. The Pigment Compendium agrees that the word came late: it appears only in the later seventeenth century, when large-scale production began as an industrial by-product of silver refining, whereas earlier recipes for copper-ammonia blues were meant for small, individual batches [2].\n\nSpelling varies. Ball and the Pigment Compendium write *verditer*; Syme's 1821 edition of Werner's color nomenclature, which gives us the name in our library, writes *verditter* [1][2][4]."
+  },
+  {
+   "id": "material",
+   "title": "Azurite made in a workshop",
+   "body": "Blue verditer has the same constituents as the mineral [[gem:azurite|azurite]]: copper, carbonate and hydroxide ions [1]. The ratio decides the color. Azurite holds hydroxide and carbonate in equal measure. Green verditer, the twin of [[gem:malachite|malachite]], carries twice as much hydroxide, and with less carbonate the substance turns greenish [1].\n\nThe synthetic pigment was paler than natural azurite but otherwise just as stable, and the Pigment Compendium quotes Terry (1893) calling it sky blue and not very durable in watercolor [2]. Its crystals grow in rounded, spherical clusters unlike those of ground mineral, which is how analysts tell the two apart under a microscope [2]."
+  },
+  {
+   "id": "discovery",
+   "title": "An accident of silver refining",
+   "body": "The origin story is a by-product. To separate silver from copper, refiners dissolved the copper in nitric acid as copper nitrate. De Mayerne, a seventeenth-century Swiss physician, reports that silver miners about a hundred years earlier had cast such a solution onto chalk, which at once turned green [1][2]. The blue came later and, in the Pigment Compendium's account, needed lower temperatures to make well [2].\n\nIt was unreliable. Writing in 1662, Christopher Merret observed that refiners using the same materials in the same quantities sometimes got a fair blue and sometimes a dirty green, and that the blue was worth many times more [1]. Robert Boyle investigated the manufacture, and the English came to be considered the specialists [1][2]. France did not understand the process until the late eighteenth century, when Pelletier analyzed the pigment; Chaptal, in 1807, describes Pelletier's method of mixing copper nitrate with lime, washing the green precipitate and treating it, still wet, with quicklime so that it turned blue [2]."
+  },
+  {
+   "id": "names",
+   "title": "A pigment of many names",
+   "body": "In France the pigment was *cendres bleues*, blue ashes, which invited confusion with a low-grade ultramarine also called ashes [1]. Some English makers anglicized this to Sanders blue and sold it as if it were a different pigment, until the chemist Robert Dossie found in his *Handmaid to the Arts* (1758) that his Sanders blue and his blue verditer were the same thing [1]. The Pigment Compendium also lists Bremen blue, though it says that name more usually belongs to a copper hydroxide, and lime blue and air blue [2]. If you meet [[bremen-blue]] in an old recipe, check what it means there.\n\nBooks disagree about blue bice. Ball, following Rosamond Harley, separates blue bice from blue verditer, which is unambiguously synthetic [1]. The Pigment Compendium says verditer was also known as blue bice, while warning that the terms for azurite can be used for verditer and the other way round [2]. Read a historic *bice* as uncertain."
+  },
+  {
+   "id": "use",
+   "title": "House paint and old masters",
+   "body": "Its low price made verditer a decorator's color. Ball reports that refiner's blue verditer had become a standard house paint, in distemper and in oil, by the 1600s, and he counts it among the first commercial pigments [1]. It can still be seen on the walls of English country houses such as the Great Drawing Room at Bowood House in Wiltshire [1]. Verweij identified it in the decorative scheme of an eighteenth-century house in Haarlem [2].\n\nElsewhere the Pigment Compendium lists reputed identifications on van Eyck's Mystic Lamb altarpiece, on Japanese wall paintings and sculpture, on pre-Columbian and seventeenth-century South American art, and in a number of paintings in the National Gallery, London, all through the review by Gettens and FitzHugh [2]. Treat these as reports, since the compendium itself calls the identifications not abundant, and the pigment is chemically the same as azurite [2].\n\nA cheaper blue ended its run. Ball notes that artificial copper blues were the principal cheap alternatives to costly blue pigments from the fifteenth to the eighteenth century, and were largely replaced by [[prussian-blue]], which was produced primarily for the textile dyeing industry [5]. By 1928 Heaton listed blue verditer as obsolete or of little importance [2]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner's number 32",
+   "body": "In Syme's 1821 edition of Werner, Verditter Blue is number 32 in the section on blues and purples [4]. Syme gives its composition as Berlin blue with a small portion of verdigris green [4]. Our library records the sample as a mineral, Lenticular Ore, the old name for blue copper ore or azurite [6][4]. Baty's illustrations show the color on the breast feathers of a blue manakin in a 1758 plate, on cornflower petals in a 1737 plate and on azurite in a 1797 one [4].\n\nA modern paint name keeps the tradition alive. In Baty's table of modern equivalents, a paint called Blue Verditer sits beside Werner's number 31, Berlin blue [7][4].\n\nThe swatch is a screen guess. Our library calls it Werner's number 32 as an aged, approximate swatch, and the ISCC-NBS system of 1955 would name it a light bluish green, 2.7 units from its block center [6]. The pigment itself was sold as a sky blue [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Verditter blue is scarce as a painted color. In our archive of 23,781 museum paintings, a color within four units of this swatch covers at least one per cent of the canvas in only 19 paintings, 0.08 per cent, rarer than 65 per cent of the named colors [8]. With a stricter lens, within six units and at least five per cent of the canvas, it falls to 8 paintings [9]. The largest cover is 34 per cent in Francesc Masriera's *¡No viene!* (1884), then 15 per cent in [[painter:alfred-sisley|Sisley]]'s [[painting:nga-52227|Meadow]] (1875) and 10 per cent in [[painter:claude-monet|Monet]]'s [[painting:nga-61377|Waterloo Bridge, London, at Dusk]] (1904) [9].\n\nWhere it sits in a painting is the surprise. In 75 per cent of those strict matches it falls in the lightest part of the canvas [9]. Under the within-painting lens its most common role is a hidden color, in 31 per cent of 13 paintings [8]. The earliest dated hit is Bernardino Butinone's painting of 1480 (aic-16134), 341 years before the name's earliest record in our library [8]. The books place the word in the later seventeenth century [2]. The archive's early centuries are thin, so this is a look-alike hue in an aged photograph, not proof of the pigment [8]. These are photographs of varnished paintings.\n\nOur fashion data puts it near the Pantone colors of the year for 2010 (Turquoise, 4.6 units away) and 2005 (Blue Turquoise, 5.3) [10]. Its closest named neighbors are [[blue-turquoise]] (2.7), [[tyrolite-green]] (3.5) and [[light-sulphate-green]] (4.7) [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "verd de terre, green earth (Ball); verditter is the Werner/Syme spelling",
+   "first_recorded": "later seventeenth century as a pigment term (Pigment Compendium); 1821 in our library (Werner as edited by Syme)",
+   "source": "Ball, Bright Earth, ch. 13; Pigment Compendium, 'Blue verditer'; Baty, Nature's Palette"
+  },
+  "aka": [
+   "blue verditer",
+   "refiner's verditer",
+   "cendres bleues",
+   "Sanders blue",
+   "blue bice (disputed)",
+   "lime blue"
+  ],
+  "siblings": [
+   "bremen-blue",
+   "verdigris-green",
+   "turquoise"
+  ],
+  "parent": null,
+  "children": [
+   "blue-turquoise"
+  ],
+  "disambiguation": [
+   {
+    "slug": "bremen-blue",
+    "gloss": "usually a copper hydroxide, though the older name was sometimes applied to verditer"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "cendres bleues (blue ashes)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6FB5A8",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 8,
+  "n_present_1pct_de4": 19,
+  "top_paintings": [
+   "commons-Q60022147",
+   "nga-52227",
+   "nga-43713",
+   "nga-59940"
+  ],
+  "role": {
+   "highlight": 0.75,
+   "shadow": 0.12,
+   "mid": 0.12
+  },
+  "measured": {
+   "lch": [
+    68.9,
+    25.1,
+    180.8
+   ],
+   "nearest": [
+    [
+     "Blue Turquoise",
+     2.7
+    ],
+    [
+     "Tyrolite Green",
+     3.5
+    ],
+    [
+     "Light Sulphate Green",
+     4.7
+    ]
+   ]
+  },
+  "werner": {
+   "no": 32,
+   "mineral": "Lenticular Ore"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Blue verditer\" (pdf p. 69) and \"Green verditer\" (pdf p. 190)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 89, 100 (Syme's 1821 Werner)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph; ISCC-NBS 1955, CIEDE2000 distances); Werner no. 32 (Blues), aged swatch, approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 267 (table of modern equivalents)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph fieldnotes; color within CIEDE2000 4 of the swatch, at least 1% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub fashion data (Pantone Color of the Year twins in data/graph)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why was blue verditer hard to make well?",
+   "choices": [
+    "The same materials sometimes gave a green instead of a blue",
+    "It needed rare lapis lazuli",
+    "It dissolved in oil",
+    "It could only be made in winter"
+   ],
+   "answer": "The same materials sometimes gave a green instead of a blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: blue verditer has the same basic chemistry as the mineral azurite.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Where would you most likely meet blue verditer in the seventeenth and eighteenth centuries?",
+   "choices": [
+    "On the walls of houses, as house paint",
+    "In fine-art miniatures only",
+    "On royal robes",
+    "In stained glass"
+   ],
+   "answer": "On the walls of houses, as house paint",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A blue worth many times its green twin, made from the same materials by the same refiners.",
+  "The pigment's name means green earth, though its best color was blue.",
+  "If a pale blue wall in an English country house is old, it may be verditter."
+ ],
+ "words": 1147,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Chaptal reports Pelletier's method, not his own: fixed",
+   "Removed unsupported 'bluer than this tile' prediction",
+   "Dropped unsupported 'English trade word'"
+  ]
+ }
+}

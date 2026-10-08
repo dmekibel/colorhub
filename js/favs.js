@@ -283,7 +283,7 @@ function fvEmptyShelf(back) {
 // Home, in pick mode. all = the whole map, so your hearts show among every name.
 function fvPickOnHome(all) {
   FV_AUTOPICK = true;
-  if (all) { S.hm = S.hm || {}; S.hm.src = "every-name"; S.hm.filter = "all"; save(); }
+  if (all) { S.hm = S.hm || {}; S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.fam = ""; S.hm.tone = ""; save(); }
   hmHome();
 }
 

@@ -1,0 +1,257 @@
+{
+ "slug": "veronese-green",
+ "name": "Veronese Green",
+ "hex": "#CADA96",
+ "names": [
+  "Veronese Green"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Veronese green is a pale yellowish green on modern color charts, but the name belonged to a poisonous copper-arsenic pigment of the 1800s, one the Venetian painter it seems to honor never used.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name that moved",
+   "body": "Veronese green looks like a tribute to the Venetian painter Paolo Veronese, but the pigment it names is a nineteenth-century invention [1]. Pastoureau notes that Veronese and Giorgione were the two sixteenth-century Venetians who excelled in range of greens, then adds that the pigment usually sold as Veronese green is a man-made copper arsenate, brought to perfection only in the 1800s [1]. The name is a trade compliment, not a record of what he painted with.\n\nIn France, Martel wrote in 1860 that the French called emerald green *vert Paul Véronèse*, and in 1869 Salter said the French version was often adulterated with arsenic [4][5]. The Pigment Compendium, citing Carlyle, thinks the term was first used for a copper-arsenic compound, the pigment now called [[emerald-green]] [6]."
+  },
+  {
+   "id": "which-green",
+   "title": "Which green?",
+   "body": "Books disagree about what the name means. Pastoureau calls it copper arsenate [1]; the Pigment Compendium lists it among the synonyms of emerald green, a copper acetate arsenite [12]. Paterson glosses it as emerald green in one entry and lists it among the many names of [[viridian]], the transparent chromium green, in another [2][3].\n\nThe Compendium dates a shift: Veronese green began as the copper-arsenic pigment and became a synonym for viridian in England sometime in the second half of the nineteenth century [7]. It also records the name used loosely for chrome green, and for [[green-earth]], perhaps through a mix-up between Verona, the source of the earth, and *Veronese*, meaning from Verona [6][8]. Paterson's separate entry for Verona green confirms the earth: a name for terra verte, whose Veronese supply ran out in the 1930s [2].\n\nThe label may be older than the arsenic. The Compendium reports that Lemery, in 1721, gave Veronese green as one name for malachite, chrysocolla or green earth [9]. Whoever first attached the painter's name to a green is undocumented in our sources."
+  },
+  {
+   "id": "poison",
+   "title": "A poisonous green",
+   "body": "The copper-arsenic green was dangerous. Coles reports that it gives off poisonous arsenic vapours when damp, that suspicion fell on it as early as 1815, and that its production was not banned until the 1960s [10]. She counts more than eighty names found for it, among them Schweinfurt green, Vienna green and Veronese green, and suggests the crowd of names may have helped hide its reputation [10]. That reading is hers; the books do not document a deliberate disguise.\n\nFor a painter, the practical lesson is in the name: when a tube or a recipe says Veronese green, the pigment inside depends on the date and the country [4][7]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Matisse remembered the young Vlaminck declaring that one must paint with pure cobalt, pure vermilion and pure Veronese green, and Ball glosses that last as emerald green [11]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch is not the pigment",
+   "body": "The color on this page is Ridgway's Veronese Green of 1912, plate XVIII, a light yellowish green that ISCC-NBS 1955 files as \"light yellow green\" [13]. Maerz and Paul list the name as first recorded around 1864 [13]. The same chart family also holds [[pale-veronese-green]] [13]. Why a color-chart maker chose so pale a tone for a name that belonged to a different pigment is undocumented.\n\nIts nearest everyday name is [[pistachio]], a color difference of 9.9 ΔE2000 [13]. ISCC-NBS lists three other names for the same block: Corydalis, Etherial Green and Flowerlet [13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 24 contain this green on at least five per cent of the canvas, within six color-distance units [14]. These are photographs of aged, varnished paintings, so a match is a color on the screen, not a pigment test [14].\n\nThe earliest is a Memling portrait of 1480, where the match covers 10 per cent of the picture [14]. The pigment itself did not yet exist, which shows how easily a pale yellowish green arises from a varnished sky or ground. The color peaks in the 1890s, with 5 of 1,173 paintings, about four times the archive's overall rate [14]. The largest single match is Albert Pinkham Ryder's [[painting:aic-60239|The Essex Canal]] of 1896, about 48 per cent green of this kind [14].\n\nWhere it appears, it sits in the highlight band: 88 per cent of the time in the painting's lightness order [14]. Look for it in lit grass and pale skies in late nineteenth-century landscapes, and remember that a name on a tube from that era was often a poison."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Paolo Veronese, the Venetian painter (a trade compliment; the pigment is nineteenth-century)",
+   "first_recorded": "c. 1864 on Maerz and Paul's chart; in French as vert Paul Véronèse by 1860",
+   "source": "Pastoureau, Green, ch. 33; Pigment Compendium pp. 306, 401"
+  },
+  "aka": [
+   "Paul Veronese green",
+   "vert Véronèse",
+   "emerald green (in some books)"
+  ],
+  "siblings": [
+   "emerald-green",
+   "viridian",
+   "pale-veronese-green"
+  ],
+  "parent": null,
+  "children": [
+   "pale-veronese-green"
+  ],
+  "disambiguation": [
+   {
+    "slug": "green-earth",
+    "gloss": "Verona green, the earth pigment, which some books confuse with Veronese green"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "vert Paul Véronèse"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CADA96",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 24,
+  "first": "commons-Q4006168",
+  "peak_decade": {
+   "1890s": {
+    "hits": 5,
+    "n": 1173,
+    "lift": 4.22
+   }
+  },
+  "top_paintings": [
+   "aic-60239"
+  ],
+  "role": {
+   "highlight": 0.88
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Pistachio",
+     9.9
+    ]
+   ],
+   "iscc": "light yellow green"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Pastoureau, Green, ch. 33 (\"The green of painters\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Veronese green\" and \"Verona green\", p. 411",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"viridian green\", p. 414",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"French Veronese green\", p. 174",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Paul Veronese green\", p. 306",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Véronèse green\", p. 401",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"viridian\", p. 404",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"green earth\", p. 188",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"mountain green\", p. 282",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 143",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"emerald green\" synonym list, p. 162",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub library: Ridgway 1912 plate XVIII; ISCC-NBS 1955 block 119; Maerz & Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Did the painter Paolo Veronese use the pigment called Veronese green?",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why is the name Veronese green an unreliable guide to the pigment?",
+   "choices": [
+    "Different books and dates applied it to a copper-arsenic green, viridian and green earth",
+    "It was only ever used for one chromium pigment",
+    "It always meant a mixture of blue and yellow paint",
+    "It was invented by the Fauves"
+   ],
+   "answer": "Different books and dates applied it to a copper-arsenic green, viridian and green earth",
+   "kind": "pick"
+  },
+  {
+   "q": "What hazard did the copper-arsenic green carry when damp?",
+   "choices": [
+    "It gave off poisonous arsenic vapours",
+    "It turned black at once",
+    "It dissolved the canvas",
+    "It glowed in the dark"
+   ],
+   "answer": "It gave off poisonous arsenic vapours",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The Venetian painter's name is on a pigment that was invented three centuries after him.",
+  "One green, many pigments: Veronese green meant a poisonous copper-arsenic green, then viridian, then green earth, depending on the date."
+ ],
+ "words": 726,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'deep' pigment, 'favorite of painters' and Fauves palette claims",
+   "Salter date 1869 not 'ten years later'",
+   "Dropped unsupported 'English painters' attribution",
+   "Softened 'reconciles'"
+  ]
+ }
+}
