@@ -1,10 +1,12 @@
 "use strict";
 // Every miss has names (design/IDEAS-10X/train-games.md §7 A). After any eye-game answer, one line names both
 // colors and says how they differ, so every round is also vocabulary, and it teaches that names are regions:
-//   different names: "You found Deep teal among Teal: darker and a touch bluer."
-//   same name:       "Both are Teal. This difference has no word; the odd one is 2.1% darker."
-// Names come from nameOf() (js/naming.js, with its modifiers and its "between X and Y" for far matches); each name
-// is one tap from its page ([data-swatch], js/swatch.js). Direction words follow COLORNERD §6.5: lighter/darker,
+//   different names: "You found petrol among teal: 2.4% different, darker and a touch bluer."
+//   same name:       "Both are rose red; this difference has no word. The odd one is 2.2% different, darker."
+// Each color is named by one Learn word: nameOf()'s nearest of the ~1,000 core names, never its generated
+// description ("Reddish antique ruby" is not a word anyone can learn; design/IMPROVE-2026-10-08/train.md A7).
+// When even the nearest word is far (nameOf's NEAR_DE), the line says "nearest to". Each name is one tap from its
+// page with the exact color shown ([data-swatch], js/swatch.js). Direction words follow COLORNERD §6.5: lighter/darker,
 // more vivid/greyer, and hue words from where the color moves on the a*b* plane (redder, yellower, greener,
 // bluer). Never "brighter", "warmer" or "cooler". An axis is named only when it carries at least 30% of the
 // difference, with "a touch" when its share is under 50%; hue words are skipped when both colors are near grey.
@@ -33,9 +35,13 @@ function eyeDir(aHex, bHex) {
   out.sort((a, b) => b[0] - a[0]);
   return out.map(x => x[1]).join(" and ") || "slightly different";
 }
+// a Learn word inside a sentence: "rose red", but "Prussian blue" (lxLower, js/learnmore.js)
+const eyeLow = n => /\s[A-Z]/.test(n) ? String(n) : typeof lxLower === "function" ? lxLower(n) : String(n).toLowerCase();   // "Mountbatten Pink" keeps its capitals
+const eyeFar = de => de >= (typeof NEAR_DE !== "undefined" ? NEAR_DE : 8);
 function eyeNames(baseHex, oddHex) {
   const a = nameOf(baseHex), b = nameOf(oddHex);
-  return { same: a.n === b.n, a: { n: a.n, text: a.text || a.n, hex: baseHex }, b: { n: b.n, text: b.text || b.n, hex: oddHex }, dir: eyeDir(baseHex, oddHex) };
+  const w = (x, hex) => ({ n: x.n, text: eyeLow(x.n), hex, far: eyeFar(x.de) });
+  return { same: a.n === b.n, a: w(a, baseHex), b: w(b, oddHex), dir: eyeDir(baseHex, oddHex) };
 }
 const eyeLink = x => `<span class="wl wl-c eye-n" style="--c:${x.hex}" data-swatch="${x.hex}">${esc(x.text)}</span>`;
 // One line. opts.found: true when the player found it ("You found…"), false for a miss ("The odd one was…").
@@ -44,8 +50,9 @@ function eyeNamesLine(baseHex, oddHex, opts = {}) {
   if (!baseHex || !oddHex || baseHex === oddHex) return "";
   const e = eyeNames(baseHex, oddHex), d = de2000(baseHex, oddHex), what = opts.what || "the odd one";
   const pct = opts.pct === false ? "" : ` <b class="mono">${pctFmt(d)}</b>`;
-  if (e.same) return `Both are ${eyeLink(e.a)}. This difference has no word; ${what} is${pct ? pct + " different," : ""} ${e.dir}.`;
-  const lead = opts.found === false ? `${what.charAt(0).toUpperCase() + what.slice(1)} was ${eyeLink(e.b)} among ${eyeLink(e.a)}` : `You found ${eyeLink(e.b)} among ${eyeLink(e.a)}`;
+  const What = what.charAt(0).toUpperCase() + what.slice(1);
+  if (e.same) return `Both are ${e.a.far ? "nearest to " : ""}${eyeLink(e.a)}; this difference has no word. ${What} is${pct ? pct + " different," : ""} ${e.dir}.`;
+  const lead = opts.found === false ? `${What} was ${eyeLink(e.b)} among ${eyeLink(e.a)}` : `You found ${eyeLink(e.b)} among ${eyeLink(e.a)}`;
   return `${lead}:${pct}${pct ? " different," : ""} ${e.dir}.`;
 }
 // prefetch the ~1,000 names once a game starts, so the first line already names precisely
