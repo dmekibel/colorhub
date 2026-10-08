@@ -24,7 +24,8 @@ const fvStore = () => (S.favs && typeof S.favs === "object" && !Array.isArray(S.
 const fvHas = h => !!fvStore()[fvKey(h)];
 const fvCount = () => Object.keys(fvStore()).length;
 const fvName = h => (fvStore()[fvKey(h)] || {}).n || "";
-function fvEmit(type, data) { try { if (typeof learnerLog === "function") learnerLog(type, data); } catch (e) {} }
+// The Learner Model (js/learner.js) only knows "like" so far: a heart is a like. (unlike and rank stay local until it grows a type for them.)
+function fvEmit(type, data) { try { if (type === "like" && data && data.h && typeof learnerLog === "function") learnerLog({ type: "like", color: { n: data.n, h: data.h }, src: "favorites" }); } catch (e) {} }
 function fvCommit(adds, removes, why = "pick") {
   const s = fvStore();
   adds.forEach(([k, n]) => { k = fvKey(k); if (!s[k]) { s[k] = { n: n || nameOf(k).n || k, at: today() }; fvEmit("like", { h: k, n: s[k].n, why }); } });
@@ -205,16 +206,16 @@ function favShelf(from) {
   const row = (k, i) => `<div class="fv-row"><button class="fv-row-main" data-swatch="${k}"><span class="fv-rk mono">${i + 6}</span><i class="fv-sw" style="--c:${k}"></i>
       <span class="fv-nm"><b>${esc(fvStore()[k].n)}</b><small>${esc(fam(k))}</small></span></button>
       <button class="fv-un" data-un="${k}" aria-label="Remove ${esc(fvStore()[k].n)} from your colors">${FV_HEART_ON}</button></div>`;
-  const SHOW = 8;
+  const SHOW = 8, hasCS = typeof csActions === "function" && typeof colorSet === "function";
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span style="width:44px"></span></header>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>${hasCS ? `<button class="glass-pill" data-share>${ICON.share}<span>My colors card</span></button>` : `<span style="width:44px"></span>`}</header>
     <h1 class="title-1 fv-title">Your <em>colors</em></h1>
     <p class="note fv-sub">${esc(sub)}</p>
     <div class="fv-hero" id="fvHero"></div>
-    <nav class="fv-verbs" aria-label="What to do with your colors">
+    ${hasCS ? `<div id="fvVerbs"></div>` : `<nav class="fv-verbs" aria-label="What to do with your colors">
       <button data-v="map"><span>${ICON.compass}</span>Map</button><button data-v="learn"><span>${ICON.learn}</span>Learn</button><button data-v="rank"><span>${ICON.bolt}</span>Rank</button>
       <button data-v="palette"><span>${ICON.palette}</span>Palette</button><button data-v="share"><span>${ICON.share}</span>Share</button>
-    </nav>
+    </nav>`}
     ${can ? `<button class="btn fv-go" data-go="${rec.id}">${ranked ? "Keep ranking" : "Rank them"} <small>${esc(rec.title)}</small>${ICON.arrow}</button>`
       : `<button class="btn fv-go" data-pick>Heart a few more ${ICON.arrow}</button>`}
     ${used.length ? `<div class="fv-ctxs" role="tablist">${FV_CTX.filter(c => c[0] === "all" || used.includes(c[0])).map(c => `<button class="${c[0] === FV_CTX_NOW ? "on" : ""}" data-ctx="${c[0]}">${c[1]}</button>`).join("")}</div>` : ""}
@@ -237,6 +238,16 @@ function favShelf(from) {
     pick: o => openTappedColor(o.h) });
   const items = () => order;
   el.querySelectorAll("[data-v]").forEach(b => b.onclick = () => fvVerb(b.dataset.v, items()));
+  // the shared verbs (js/colorset.js: on the map, learn, play, keep), live over whichever order is showing
+  const vh = el.querySelector("#fvVerbs");
+  if (vh) {
+    const row = csActions(() => colorSet({ kind: "favorites", id: "mine", title: "My colors", colors: fvOrder(FV_CTX_NOW).slice(0, 24).map(k => ({ h: k, n: fvStore()[k].n })), src: "favorites" }),
+      { only: ["map", "learn", "play", "keep"], back: () => favShelf() });
+    // until the Practice lane's instant deck exists, "Learn" runs the favorites that are lesson colors as a swipe deck
+    row.addEventListener("click", e => { if (e.target.closest('[data-cs="learn"]') && typeof prInstantDeck !== "function") { e.stopPropagation(); buzz(5); fvLearn(items()); } }, true);
+    vh.replaceWith(row);
+    const sh = el.querySelector("[data-share]"); if (sh) sh.onclick = () => fvShare();
+  }
   el.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { buzz(6); frStart(b.dataset.go, FV_CTX_NOW === "all" ? "all" : FV_CTX_NOW); });
   el.querySelectorAll("[data-ctx]").forEach(b => b.onclick = () => { FV_CTX_NOW = b.dataset.ctx; buzz(4); favShelf(); });
   function wireUn() {

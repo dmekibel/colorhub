@@ -494,20 +494,19 @@ scenario("favs", "shelf: top five, a plate opens its page, Back returns, a row h
   t.expect(t.ev("fvCount()") === n, "Undo didn't bring the color back");
   // the share card draws without throwing (the real share sheet is replaced by a canvas run)
   t.ev("window.__card = false; window.tzShareCanvas = d => { const c = document.createElement('canvas'); c.width = 1080; c.height = 1350; d(c.getContext('2d')); window.__card = true; }");
-  await t.click("[data-v=share]", { wait: 300 });
+  await t.click("[data-share]", { wait: 300 });
   t.expect(t.ev("window.__card"), "the My colors card didn't draw");
-  // the verbs: Learn opens a deck (and Close comes back), Rank opens a ranking screen, Map opens Home in pick mode
-  await t.click("[data-v=learn]", { wait: 600 });
+  // the verbs: Learn opens a deck (and Close comes back), Keep saves a palette, the primary opens a ranking screen, On the map opens Home
+  await t.click("[data-cs=learn]", { wait: 600 });
   await t.waitFor(".screen.deck", 6000, "the Learn my favorites deck");
   await t.click("[data-close]", { wait: 500 });
   await t.waitFor(".fv-shelf", 6000, "the shelf after closing the deck");
-  await t.click("[data-v=rank]", { wait: 500 });
+  await t.click("[data-go]", { wait: 500 });
   await t.waitFor(".screen.fv-run", 6000, "a ranking screen");
   await t.click("[data-close]", { wait: 500 });
   await t.waitFor(".fv-shelf", 6000, "the shelf after closing the ranking");
-  await t.click("[data-v=map]", { wait: 900 });
-  await t.waitFor(".fv-bar", 15000, "Home in pick mode");
-  t.expect(+t.text(".fv-count b") === n, `the map should show your ${n} hearts as picked (shows ${t.text(".fv-count b")})`);
+  await t.click("[data-cs=map]", { wait: 900 });
+  await t.waitFor(".hm canvas", 15000, "Home with your colors lit");
 });
 
 scenario("favs", "best of three: keep one, drop one, a new set arrives; Undo takes it back", async t => {

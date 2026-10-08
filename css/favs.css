@@ -177,8 +177,9 @@ html:has(#app > .screen.fv-run){--ground:#5F5F5F;--lift:#676767;--lift-2:#6E6E6E
 .fv-acts .act svg{width:26px;height:26px}
 
 /* ten drops */
-.fv-pot{flex:none;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:10px 0 12px}
-.fv-pot-h{flex:1 0 100%;margin:8px 0 0;font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
+.fv-pot{flex:none;display:grid;grid-template-columns:1fr auto;grid-template-areas:"n d" "h h";align-items:center;padding:10px 0 12px}
+.fv-pot-n{grid-area:n}.fv-drops{grid-area:d}
+.fv-pot-h{grid-area:h;margin:8px 0 0;font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
 .fv-pot-n{display:flex;align-items:baseline;gap:10px}
 .fv-pot-n b{font:400 64px/.86 var(--serif);letter-spacing:-.04em;font-variant-numeric:tabular-nums;min-width:.55em;text-align:right}
 .fv-drops{display:grid;grid-template-columns:repeat(5,16px);gap:7px}

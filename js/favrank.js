@@ -55,7 +55,7 @@ function frSettle(o) {
       <div class="fv-end-top">${top.map((k, i) => `<button class="fv-p" data-swatch="${k}" data-ink="${ink(k)}" style="--c:${k};--k:${i}"><em>${i + 1}</em><b>${frNm(k)}</b></button>`).join("")}</div>
       ${moved ? `<p class="fv-moved">${moved}</p>` : ""}
       <div class="fv-delta"><div class="fv-meter"><i style="width:${frPct(c0)}%"></i></div>
-        <p>${c0 ? `<span class="mono">${frPct(c0)}%</span> to ` : ""}<b class="mono">${frPct(conf)}%</b> settled · ${esc(PREFM.confLabel(conf).toLowerCase())}</p></div>
+        <p>${c0 && frPct(c0) !== frPct(conf) ? `<span class="mono">${frPct(c0)}%</span> to ` : ""}<b class="mono">${frPct(conf)}%</b> settled · ${esc(PREFM.confLabel(conf).toLowerCase())}</p></div>
     </div>
     <div class="fv-end-acts">
       <button class="btn" data-again>${settled ? "See your colors" : "Keep going"} ${ICON.arrow}</button>
