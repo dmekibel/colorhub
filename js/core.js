@@ -16,6 +16,7 @@ function iosTap() {
   HAPTIC.click();
 }
 const buzz = ms => {
+  if (typeof sndBuzz === "function") try { sndBuzz(ms); } catch (e) {}   // js/sound.js: the haptic vocabulary is also the sound vocabulary
   if (typeof S !== "undefined" && S && S.haptics === false) return;
   try { if (navigator.vibrate) { navigator.vibrate(ms); return; } } catch (e) {}
   iosTap(); if (Array.isArray(ms) && ms.length > 2) setTimeout(iosTap, 90);
