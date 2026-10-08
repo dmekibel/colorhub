@@ -11,6 +11,8 @@
 //   data/artists/p/<slug>.json     gallery indices of the painter's works, museum-baselined signature colors, within-painting roles
 //   data/artists/groups-extra.json key painters, hue profile, palette over time, signature colors per decade / country / movement
 //   data/artists/ids.txt           painting ids in gallery order (only to open "nearest painting in another century")
+//   data/artists/context.json      per painting: lightness, chroma, warmth, country, movement; per group: its most
+//                                  typical painting (tools/artwiki_context.py). Highlight cards and "In context".
 //   data/analysis/                 the analysis engine's own files (tools/analyze.py, research/ANALYSIS.md)
 // Honesty, said once and meant everywhere: every number is "as photographed" (aged varnish, museum cameras), carries
 // its n, and a small sample says so or stays quiet. The archive reads brown, so a painter's signature is measured
@@ -24,7 +26,7 @@
 //   whosePalette(slug)       -> the Train quiz, opened on this painter (L10)
 
 const AW_DIR = "data/artists/", AW_AN = "data/analysis/";
-const AW = { meta: null, stats: null, ge: null, grp: null, idx: null, ready: false, loading: null, P: new Map(), A: new Map(), SH: new Map(), pl: null, list: null, nh: null, ids: null };
+const AW = { meta: null, stats: null, ge: null, grp: null, idx: null, ready: false, loading: null, P: new Map(), A: new Map(), SH: new Map(), pl: null, list: null, nh: null, ids: null, ctx: null, ctxP: null, base: null };
 const awURL = p => p + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "");
 const awGet = (p, kind = "json") => fetch(awURL(p)).then(r => { if (!r.ok) throw new Error(p + " " + r.status); return r[kind](); });
 const awPad = n => String(n).padStart(3, "0");
@@ -64,6 +66,77 @@ function awIdMap() {
   if (AW.ids) return Promise.resolve(AW.ids);
   return awGet(AW_DIR + "ids.txt", "text").then(t => { AW.ids = new Map(t.split("\n").map((id, i) => [id, i])); return AW.ids; });
 }
+// where every painting sits (tools/artwiki_context.py): one byte each for lightness, chroma, warm share (%),
+// country and movement, plus each group's most typical painting
+function awCtxLoad() {
+  if (AW.ctx) return Promise.resolve(AW.ctx);
+  const u = s => Uint8Array.from(atob(s), ch => ch.charCodeAt(0));
+  return AW.ctxP || (AW.ctxP = awGet(AW_DIR + "context.json").then(c => (AW.ctx = { ...c, L: u(c.L), C: u(c.C), W: u(c.W), CO: u(c.CO), MV: u(c.MV) }))
+    .catch(e => { AW.ctxP = null; throw e; }));
+}
+// gallery indices of a decade, movement or country, the same membership the group pages count
+function awMembers(kind, key) {
+  const out = [];
+  if (kind === "decade") { for (let i = 0; i < GAL.n; i++) { const y = GAL.year[i]; if (y !== GL_UNDATED && Math.floor(y / 10) * 10 === +key) out.push(i); } return out; }
+  const c = AW.ctx; if (!c) return out;
+  const arr = kind === "movement" ? c.MV : c.CO, k = (kind === "movement" ? c.mv : c.co).indexOf(String(key)) + 1;
+  if (k) for (let i = 0; i < arr.length; i++) if (arr[i] === k) out.push(i);
+  return out;
+}
+// the archive's pooled color cells (js/browse.js), the baseline a set's distinctive colors are lifted against
+const awGalF = () => ({ G: GAL, N: GAL.n });
+function awBase() {
+  if (!AW.base && typeof xbCellShares === "function") AW.base = xbCellShares(awGalF(), Array.from({ length: GAL.n }, (_, i) => i));
+  return AW.base;
+}
+// Signature chips for a highlight card: the museum-baselined signature first (near-blacks out: varnish and cameras
+// give those to everyone), then, when that's thin, the colors this set holds more of than the whole archive.
+function awSigChips(sig, members) {
+  const out = [], ok = h => lab(h)[0] >= 24 && out.every(x => de2000(x.h, h) > 7);
+  (sig || []).forEach(([c, lift]) => { const [nm, hx] = awCol(c); if (out.length < 5 && lift >= 1.15 && ok(hx)) out.push({ h: hx, n: nm, lift, mus: true }); });
+  if (out.length < 3 && members && members.length >= 10 && typeof xbSetColors === "function" && awBase()) {
+    xbSetColors(awGalF(), members, 14, awBase()).forEach(r => { if (out.length < 5 && ok(r.h)) out.push({ h: r.h, n: nameOf(r.h).text, lift: Math.min(r.lift, 9.9), mus: false }); });
+  }
+  return out;
+}
+// The highlight card (design/ARCHIVE-PAGES.md #1): one real painting, the most typical; one measured sentence;
+// the signature colors, each one tap from its page. It replaces the old hero of area colors (aged-varnish browns).
+function awHighlight(gi, line, chips) {
+  const ar = gi >= 0 ? glAR(gi) : 1, dom = gi >= 0 ? glPal(gi).reduce((a, b) => b.share > a.share ? b : a).h : "#222";
+  const src = !chips.length ? "" : chips.every(c => c.mus) ? "against the same museums" : chips.some(c => c.mus) ? "against the same museums, then the archive" : "against the whole archive";
+  return `<section class="aw-hl">
+    ${gi >= 0 ? `<button class="aw-hl-img" data-gi="${gi}" data-awhl="${gi}" style="--c:${dom};aspect-ratio:${(1 / ar).toFixed(4)}" aria-label="Open the most typical painting"><img alt=""></button>
+    <p class="aw-hl-cap"><em>Most typical</em><span data-awhlt></span></p>` : ""}
+    ${line ? `<p class="aw-hl-line">${line}</p>` : ""}
+    ${chips.length ? `<div class="aw-hl-h"><b>Signature colors</b><span>${src}</span></div>
+    <div class="aw-hl-chips">${chips.map(c => `<button class="aw-hl-chip" data-swatch="${c.h}"><i style="--c:${c.h}"></i><b>${esc(c.n)}</b><em>×${c.lift.toFixed(1)}</em></button>`).join("")}</div>` : ""}
+  </section>`;
+}
+function awFillHighlight(el) {
+  const b = el.querySelector("[data-awhl]"); if (!b) return;
+  const i = +b.dataset.awhl;
+  glDetail(i).then(d => {
+    if (!b.isConnected) return;
+    const im = b.querySelector("img"); im.src = glSmall(d) ? d.img : glBig(d.img); im.alt = d.t;
+    const t = el.querySelector("[data-awhlt]"), y = glYear(i);
+    if (t) t.textContent = d.t + (y ? ", " + y : "");
+    b.setAttribute("aria-label", "Open " + d.t);
+  }).catch(() => {});
+}
+// "Lighter than 88% of the 60 decades here": the most extreme of a few measures, only when it's in the top or
+// bottom quarter (a middling percentile is not a finding)
+function awExtreme(cands) {
+  const best = cands.filter(c => c && Math.abs(c.p - .5) >= .25).sort((a, b) => Math.abs(b.p - .5) - Math.abs(a.p - .5))[0];
+  return best ? best.text : "";
+}
+function awLineJoin(a, b, tail) {
+  const parts = [a, b].filter(Boolean);
+  if (!parts.length) return tail ? tail.charAt(0).toUpperCase() + tail.slice(1) + "." : "";
+  const s = parts.join("; ");
+  return esc(s.charAt(0).toUpperCase() + s.slice(1) + (tail ? ". " + tail.charAt(0).toUpperCase() + tail.slice(1) : "") + ".");
+}
+const awReach = c => c ? `reaches for ${c.n.toLowerCase()} ${c.lift.toFixed(1)}× more than ${c.mus ? "the same museums" : "the whole archive"}` : "";
+
 // run `fn(...args)` once the data is here. While it loads, a quiet placeholder carries the address; the real
 // screen then replaces that history entry (same trick as whenWiki in js/loader.js).
 function awWait(fn, args, need) {
@@ -175,6 +248,7 @@ function awPainter(slug, push = true) {
         <p class="aw-cl-s">${awPct(c.pct / 100)}% of his paintings here · ${c.size} of ${n}</p>
         ${awStrip(c.colors.map(awHex), 26)}<p class="aw-cl-n">${c.colors.map(esc).join(", ")}</p></div></div>`).join("")}` : "";
 
+  const finds = awPainterFindings(A, P, n);   // findings, in words, always with n (now a drawer in Colors)
   // colors: signature (museum-baselined), within-painting roles, avoided, pairs and chords
   let colors = "";
   if (!small && P.sig) {
@@ -188,6 +262,8 @@ function awPainter(slug, push = true) {
     colors = `<div class="sec-head"><b>Colors</b><span>${n} paintings</span></div>
       <p class="aw-sub">The colors used more than in other paintings from the same museums, as photographed. Near-blacks are left out: varnish and cameras make them common to everyone.</p>
       <div class="aw-sigs">${sig || `<p class="fine">Nothing stands clearly above the same museums' baseline.</p>`}</div>
+      ${finds && !small ? `<details class="aw-more"><summary>Findings</summary>${finds}</details>` : ""}
+      <details class="aw-more" data-awptcd hidden><summary>In most of the work</summary><div data-awptc><i data-awbio hidden></i></div></details>
       ${roles ? `<details class="aw-more"><summary>Inside the painting</summary><p class="aw-sub">Roles are relative within one canvas, so they hold up under varnish.</p><div class="aw-roles">${roles}</div></details>` : ""}
       ${dk ? `<details class="aw-more"><summary>His darks and his lights</summary><p class="aw-sub">The darkest, then the lightest, of the colors that cover at least 3% of a canvas (${P.dn} paintings).</p><p class="aw-lbl">Darkest</p><div class="aw-chips">${dk}</div><p class="aw-lbl">Lightest</p><div class="aw-chips">${lt}</div></details>` : ""}
       ${av ? `<details class="aw-more"><summary>Colors he avoids</summary><p class="aw-sub">Much less of these than the same museums' paintings have.</p><div class="aw-chips">${av}</div></details>` : ""}
@@ -202,16 +278,18 @@ function awPainter(slug, push = true) {
   // compared
   const compared = awComparedSection(slug, m, A, P);
 
-  // findings, in words, always with n
-  const finds = awPainterFindings(A, P, n);
+  // the highlight card: his most typical painting, one measured sentence, his signature colors
+  const hlChips = small ? [] : awSigChips(P.sig, P.ix);
+  const hlExt = small ? "" : awExtreme([["L", "Darker", "Lighter"], ["C", "Less colorful", "More colorful"], ["W", "Cooler", "Warmer"]].map(([k, lo, hi]) => m[k] == null ? null : awPctWords(k, m[k], lo, hi)));
+  const hlLine = small ? esc(`Only ${awPlural(n, "painting")} here: a sketch, not a finding.`) : awLineJoin(hlExt, awReach(hlChips[0]), `from ${n} paintings, as photographed`);
   const bcYears = A.barcode.map(b => b[1]).filter(y => awYearOk(slug, y)).sort((a, b) => a - b);
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="glass-pill" data-awvs="${esc(slug)}">${ICON.search}<span>Compare</span></button></header>
     <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(A.name)}</h1><p class="p-dek">${dek}</p></div>${fileUrl ? `<img class="aw-portrait" src="${esc(fileUrl)}" alt="" loading="lazy" onerror="this.remove()">` : ""}</div>
+    ${awHighlight(P.typical != null ? P.typical : -1, hlLine, hlChips)}
     ${A.barcode.length ? `<div class="aw-bcwrap"><div class="aw-bc ${A.barcode.length > 90 ? "tight" : ""}" role="img" aria-label="Every painting, oldest to newest, three main colors each">${A.barcode.map((b, k) => `<button data-gi="${P.ix.length === A.barcode.length ? P.ix[k] : -1}" title="${esc(b[1])}">${b[2].map(nm => `<i style="--c:${awHex(nm)}"></i>`).join("")}</button>`).join("")}</div>
       <div class="aw-bcax"><span>${bcYears.length ? bcYears[0] : ""}</span><em>${n} paintings · as photographed</em><span>${bcYears.length ? bcYears[bcYears.length - 1] : ""}</span></div>
       ${clusters.length > 1 ? `<div class="aw-rooms">${clusters.map((c, k) => `<button class="aw-room" data-awpal>${awStrip(c.colors.slice(0, 3).map(awHex), 8)}<b data-glroom="${P.ctyp[k]}">Palette ${k + 1}</b><em>${awPct(c.pct / 100)}%</em></button>`).join("")}</div>` : ""}</div>` : ""}
-    ${finds}
     <div data-awbio></div>
     <div class="aw-you" data-aw-you></div>
     ${palettes}
@@ -224,7 +302,15 @@ function awPainter(slug, push = true) {
       ${m.q ? `<li>Dates, nationality, movement, teachers and portrait: <a href="https://www.wikidata.org/wiki/${m.q}" target="_blank" rel="noopener">Wikidata</a> (CC0)${m.wp ? ` · <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(m.wp)}" target="_blank" rel="noopener">Wikipedia</a>` : ""}${m.img ? ` · portrait: <a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(m.img)}" target="_blank" rel="noopener">Wikimedia Commons</a>` : ""}</li>` : `<li>No Wikidata match was found for this name, so dates come from the paintings themselves.</li>`}
     </ul></section>`, "article aw-page");
   awWire(el);
-  if (typeof ptPainterColors === "function") ptPainterColors(el, A.name);   // js/paintingsof.js (L26): colors used in a quarter of the works
+  awFillHighlight(el);
+  // js/paintingsof.js (L26): colors used in a quarter of the works, inside the Colors drawer (it inserts before the
+  // first [data-awbio] of the element it's handed, so it gets the drawer's own placeholder, not the bio slot)
+  const ptc = el.querySelector("[data-awptc]");
+  if (ptc && typeof ptPainterColors === "function") {
+    const mo = new MutationObserver(() => { if (ptc.querySelector("[data-pt-painter]")) { ptc.closest("details").hidden = false; mo.disconnect(); } });
+    mo.observe(ptc, { childList: true });
+    ptPainterColors(ptc, A.name);
+  }
   // titles and images of the clusters' typical paintings
   el.querySelectorAll("[data-awpal]").forEach(b => b.onclick = () => { const t = el.querySelector("#aw-pal"); if (t) t.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }); });
   el.querySelectorAll("[data-gltitle]").forEach(t => { const i = +t.dataset.gltitle; if (i >= 0) glDetail(i).then(d => { if (t.isConnected) t.textContent = "The " + d.t.replace(/^(the|a|an)\s+/i, "") + " palette"; const im = el.querySelector(`[data-glimg="${i}"]`); if (im) { im.src = d.img; } }).catch(() => {}); });
@@ -319,7 +405,7 @@ function awComparedSection(slug, m, A, P) {
       <p class="fine">Palette closeness uses mean lightness, chroma and warmth only (a rough guide). Teacher and influence links are Wikidata's, not ours.</p></div>` : "";
   return `<div class="sec-head"><b>Compared</b><span>${AW.list.length} painters here</span></div>
     <div class="aw-pbars">${rows.join("")}</div>
-    <div class="aw-typs">${typ(P.typical, "Most typical")}${typ(P.atypical, "Least typical")}</div>
+    <div class="aw-typs">${typ(P.atypical, "Least typical")}</div>
     ${near.length ? `<p class="aw-lbl">Paints like</p><div class="aw-near">${near.map(x => `<button class="aw-tie" data-awpainter="${x.slug}"><b>${esc(x.name)}</b><span>palette distance ${x.d.toFixed(2)}</span></button>`).join("")}</div><p class="fine">Nearest painters by six numbers: lightness, chroma, warmth, vivid share, muted share and color variety, across all ${AW.list.length}.</p>` : ""}
     ${ties}`;
 }
@@ -352,6 +438,7 @@ function awPaintingHook(el, i, d, ctx) {
       dek.innerHTML = parts.join(" · ");
     }).catch(() => {});
   }
+  awContext(el.querySelector("[data-glctx]"), i, d);
   const host = el.querySelector("[data-awan]"); if (!host) return;
   awShard(i).then(rows => {
     const r = rows[i % 100];
@@ -359,15 +446,54 @@ function awPaintingHook(el, i, d, ctx) {
     awAnalysis(host, el, i, d, r, ctx);
   }).catch(() => { host.innerHTML = ""; });
 }
+// "In context" (design/ARCHIVE-PAGES.md #8): Strava-style dot rows. Each row is one comparison set (the painter's
+// works here, the decade, the movement), drawn as the spread of its paintings on one shared scale with this
+// painting's dot on it. A switch picks the measure (lightness, chroma, warmth: the numbers the Analysis tiles
+// print). A row opens that set's page; a row with fewer than 10 paintings is left out.
+const AW_CX = [["L", "Lightness", "darker", "lighter", v => "lightness " + v], ["C", "Chroma", "quieter", "more colorful", v => "chroma " + v], ["W", "Warmth", "cooler", "warmer", v => v + "% warm"]];
+let AW_CXM = 0;   // the chosen measure, kept while you move between paintings
+function awContext(host, i, d) {
+  if (!host) return;
+  Promise.all([awLoad(), awCtxLoad()]).then(() => {
+    const slug = d.a ? routeSlug(d.a) : "";
+    return (slug && awHasPainter(slug) ? awPainterLoad(slug).then(x => x.P.ix, () => null) : Promise.resolve(null)).then(ix => {
+      if (!host.isConnected) return;
+      const C = AW.ctx, sets = [], y = GAL.year[i];
+      if (ix && ix.length >= 10) sets.push({ label: AW.meta.a[slug].n, list: ix.filter(j => j >= 0), attr: `data-awpainter="${esc(slug)}"` });
+      if (y !== GL_UNDATED) { const dk = Math.floor(y / 10) * 10; if (AW.grp.byDecade[dk]) sets.push({ label: "The " + awDec(dk), list: awMembers("decade", dk), attr: `data-awgroup="decade|${dk}"` }); }
+      const mk = C.MV[i], mv = mk ? C.mv[mk - 1] : ""; if (mv && AW.grp.byMovement[mv]) sets.push({ label: mv, list: awMembers("movement", mv), attr: `data-awgroup="movement|${esc(mv)}"` });
+      const rows = sets.filter(s => s.list.length >= 10);
+      if (!rows.length) { host.innerHTML = ""; return; }
+      const draw = () => {
+        const [k, , lo, hi, show] = AW_CX[AW_CXM], arr = C[k], me = arr[i];
+        // one scale for every row, so the rows compare: the 2nd to 98th percentile of all of them, always with this painting on it
+        const vals = []; rows.forEach(s => s.list.forEach(j => vals.push(arr[j]))); vals.sort((a, b) => a - b);
+        let d0 = Math.min(vals[Math.floor(vals.length * .02)], me), d1 = Math.max(vals[Math.min(vals.length - 1, Math.ceil(vals.length * .98))], me);
+        if (d1 - d0 < 12) { const m = (d0 + d1) / 2; d0 = m - 6; d1 = m + 6; }
+        const NB = 36, X = v => clamp((v - d0) / (d1 - d0), 0, 1);
+        host.innerHTML = `<div class="sec-head"><b>In context</b><span>as photographed</span></div>
+          <div class="aw-cx-top"><div class="seg aw-cx-seg" role="tablist" aria-label="Measure">${AW_CX.map((m, q) => `<button class="${q === AW_CXM ? "on" : ""}" data-cxm="${q}">${m[1]}</button>`).join("")}</div></div>
+          <p class="aw-cx-me"><i></i>This painting: <b>${show(me)}</b></p>
+          ${rows.map(s => {
+            const others = s.list.filter(j => j !== i), below = others.filter(j => arr[j] < me).length / Math.max(1, others.length);
+            const where = below >= .65 ? `${hi} than ${awPct(below)}%` : below <= .35 ? `${lo} than ${awPct(1 - below)}%` : "near the middle";
+            const bins = new Array(NB).fill(0); s.list.forEach(j => bins[Math.min(NB - 1, Math.floor(X(arr[j]) * NB))]++);
+            const mx = Math.max(...bins, 1);
+            return `<button class="aw-cx-row" ${s.attr}><span class="aw-cx-h"><b>${esc(s.label)}</b><em>${where} · ${s.list.length.toLocaleString("en-US")} paintings</em></span>
+              <span class="aw-cx-tr" aria-hidden="true">${bins.map(v => `<i style="height:${v ? Math.max(8, v / mx * 100).toFixed(0) : 0}%"></i>`).join("")}<u style="left:${(X(me) * 100).toFixed(1)}%"></u></span></button>`;
+          }).join("")}
+          <div class="aw-cx-ax"><span>${lo}</span><span>${hi}</span></div>`;
+      };
+      draw();
+      host.onclick = e => { const b = e.target.closest("[data-cxm]"); if (!b || +b.dataset.cxm === AW_CXM) return; AW_CXM = +b.dataset.cxm; buzz(5); draw(); };
+    });
+  }).catch(() => { if (host.isConnected) host.innerHTML = ""; });
+}
 function awAnalysis(host, el, i, d, r, ctx) {
   const st = r.stat, pool = ctx.pool, curPal = ctx.curPal;
   const Lh = awUnb64(st.Lh), hh = awUnb64(st.hh);
-  const pf = r.pct || {}, fin = awGateFinds(r.find, 3);
+  const fin = awGateFinds(r.find, 3);   // where it sits against its painter, decade and movement: the "In context" card (awContext)
   const warm = st.wf / 1000, ch = st.ch.map(v => v / 1000);
-  const pc = (v, base, lo, hi, nTxt) => v == null || (v > 35 && v < 65) ? "" : `${v >= 50 ? hi : lo} than ${v >= 50 ? Math.round(v) : Math.round(100 - v)}% of ${nTxt}`;
-  // one sentence, and no hard-coded archive size (it said 23,531 while the findings below said n=23,781)
-  const lightParts = [pc(pf.a, 0, "Darker", "Lighter", "the paintings in this archive"), pf.p != null && pf.pn ? pc(pf.p, 0, "darker", "lighter", `this painter's other ${pf.pn - 1}`) : ""].filter(Boolean);
-  const lightTxt = lightParts.length ? lightParts.map((t, k) => k ? t.charAt(0).toLowerCase() + t.slice(1) : t).join(", and ") : "";
   const roles = ["foc", "hid", "glu"];
   const poolOK = pool.length >= 6;
   host.innerHTML = `
@@ -379,7 +505,6 @@ function awAnalysis(host, el, i, d, r, ctx) {
       <div><span>Vivid</span><b>${awPct(ch[2])}%</b><em>${awPct(ch[0])}% muted · ${awPct(ch[1])}% moderate</em></div>
       <div><span>Warm / cool</span><b>${awPct(warm)}% warm</b><em>by chroma-weighted hue</em></div>
     </div>
-    ${lightTxt ? `<p class="aw-find">${esc(lightTxt)}.</p>` : ""}
     ${poolOK ? `<div class="aw-look" data-awlook></div>` : ""}
     ${(typeof paintingLesson === "function") ? `<button class="btn" data-awlesson>Learn this painting${ICON.arrow}</button>` : ""}
     <div data-awreadings></div>
@@ -498,20 +623,26 @@ function awGuided(host, i, d, r, pool) {
 // ======================================================================
 function awGroupKeys(kind) { return Object.keys(kind === "movement" ? AW.grp.byMovement : kind === "decade" ? AW.grp.byDecade : AW.grp.byCountry); }
 function awGroup(kind, key, push = true) {
-  if (!AW.ready) return awWait(awGroup, [kind, key, push]);
+  if (!AW.ready || !AW.ctx) return awWait(awGroup, [kind, key, push], awCtxLoad);
   const gs = kind === "movement" ? AW.grp.byMovement : kind === "decade" ? AW.grp.byDecade : AW.grp.byCountry, ges = kind === "movement" ? AW.ge.byMovement : kind === "decade" ? AW.ge.byDecade : AW.ge.byCountry;
   const g = gs[String(key)], x = ges[String(key)];
   if (!g || !x) { toast("No page for that"); return xToOrigin(); }
   if (push) XSTACK.push("aw:group:" + kind + ":" + key);
   const title = kind === "decade" ? awDec(key) : String(key), n = g.n;
-  let dek = `${n.toLocaleString()} paintings, as photographed`;
-  let note = "";
-  if (kind === "movement") {
-    const t = g.tiers || [n, 0, 0];
-    dek = `${n.toLocaleString()} paintings tagged ${title}`;
-    note = `<details class="aw-note"><summary>A sample of ${esc(title)}, not the whole of it</summary><p>How these were tagged: ${t[0]} by the museum, ${t[1]} by Wikidata for the painting itself, ${t[2]} only because their painter is recorded with this movement (a looser link). Only ${Object.keys(AW.grp.byMovement).length} movements reach 20 paintings here; most paintings in the archive carry no movement at all.</p></details>`;
-  } else if (kind === "country") note = `<p class="aw-note">Country is often the painter's nationality, not where the painting was made.</p>`;
-  else note = `<p class="aw-note">Dated ${key}–${key + 9}. Undated and approximately dated works are left out.</p>`;
+  // the n line carries the honesty note in one line; the longer explanation lives in Sources
+  const nn = n.toLocaleString("en-US"), t = g.tiers || [n, 0, 0];
+  const dek = kind === "movement" ? `${nn} paintings; ${awPct(t[0] / Math.max(1, n))}% tagged by museums`
+    : kind === "country" ? `${nn} paintings, mostly by the painter's nationality`
+    : `${nn} paintings dated ${key}–${key + 9}`;
+  const srcNote = kind === "movement" ? `<li>A sample of ${esc(title)}, not the whole of it. How these were tagged: ${t[0]} by the museum, ${t[1]} by Wikidata for the painting itself, ${t[2]} only because their painter is recorded with this movement (a looser link). Only ${Object.keys(AW.grp.byMovement).length} movements reach 20 paintings here; most paintings in the archive carry no movement at all.</li>`
+    : kind === "country" ? `<li>Country is often the painter's nationality, not where the painting was made.</li>`
+    : `<li>Dated ${key}–${key + 9}. Undated and approximately dated works are left out.</li>`;
+  // the highlight card: the painting nearest the group's centroid, one measured sentence, the signature colors
+  const members = awMembers(kind, key), all = Object.values(ges), noun = kind === "decade" ? "decades" : kind === "movement" ? "movements" : "countries";
+  const gpct = (k, lo, hi) => { if (x[k] == null) return null; const p = all.filter(o => o[k] < x[k]).length / all.length; return { p, text: `${p >= .5 ? hi : lo} than ${awPct(p >= .5 ? p : 1 - p)}% of the ${all.length} ${noun} here` }; };
+  const hlChips = awSigChips(x.sig, members);
+  const hlLine = awLineJoin(awExtreme([gpct("L", "darker", "lighter"), gpct("vv", "quieter", "more vivid"), gpct("wf", "cooler", "warmer")]), awReach(hlChips[0]), "as photographed");
+  const hlGi = ((AW.ctx.typ || {})[kind] || {})[String(key)];
   const top = g.top.slice(0, 8), dist = (g.distinctive || []).slice(0, 6), base = AW.ge.archive.hh;
   const timeCols = (x.time || []).map(t => { const tops = t[3]; return `<div class="aw-dcol${t[1] < 10 ? " thin" : ""}"><span class="aw-dstack">${tops.map((c, k) => `<i style="--c:${awCol(c)[1]};flex:${3 - k}" data-swatch="${awCol(c)[1]}" title="${esc(awCol(c)[0])}"></i>`).join("")}</span><em>${awDec(t[0])}</em><u>${t[1]}</u></div>`; }).join("");
   const sig = (x.sig || []).map(([c, lift, own, sup]) => { const [nm, hx] = awCol(c); return `<button class="aw-sig" data-swatch="${hx}"><i style="--c:${hx}" data-ink="${ink(hx)}"></i><b>${esc(nm)}</b><span>×${lift.toFixed(1)}</span><em>in ${sup} of ${n} paintings · ${awPct(own)}% of the canvas</em></button>`; }).join("");
@@ -522,10 +653,7 @@ function awGroup(kind, key, push = true) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="glass-pill" data-awindex>${ICON.explore}<span>Art history</span></button></header>
     <p class="eyebrow p-type">${kind === "movement" ? "Movement" : kind === "decade" ? "Decade" : "Country"}</p><h1 class="p-title">${esc(title)}</h1><p class="p-dek">${dek}</p>
-    ${note}
-    <div class="palette aw-gpal">${top.map(t => `<button class="pal" data-swatch="${awHex(t.name)}" style="--c:${awHex(t.name)};flex:${Math.max(t.share, .004) / Math.max(.01, top.reduce((a, b) => a + b.share, 0)) * 100}" data-ink="${ink(awHex(t.name))}"></button>`).join("")}</div>
-    <div class="pal-names">${top.map(t => `<button class="pal-name" data-swatch="${awHex(t.name)}"><i style="--c:${awHex(t.name)}"></i><b>${esc(t.name)}</b><span>${(t.share * 100).toFixed(1)}% of the average canvas</span><em class="mono">${awHex(t.name)}</em></button>`).join("")}</div>
-    <p class="fine">The biggest colors by area, as photographed. These are mostly the dark browns of aged varnish; the sections below correct for that.</p>
+    ${awHighlight(hlGi != null ? hlGi : -1, hlLine, hlChips)}
     <div class="sec-head"><b>The hue mix</b><span>${awBand(x.hh)} leads</span></div>
     ${awHueBars(x.hh, base)}
     <p class="aw-cap">Bars: this group's chromatic content by hue. Hairlines: the whole archive. Color only counts when it is strong enough to have a hue.</p>
@@ -536,8 +664,9 @@ function awGroup(kind, key, push = true) {
     ${arts ? `<div class="sec-head"><b>Key painters</b><span>most paintings here</span></div><div class="aw-near">${arts}</div>` : ""}
     <button class="btn ghost" data-awcolor="${anyHex}">Everything painted in ${esc(nameOf(anyHex).n.toLowerCase())} ${ICON.arrow}</button>
     ${pn}
-    <section class="srcs"><h3>Sources</h3><ul><li>Computed by ColorHub from ${n} museum photographs; screen colors, as photographed.</li>${kind === "movement" ? `<li>Movement tags: museum records, and Wikidata (CC0).</li>` : ""}</ul></section>`, "article aw-page");
+    <section class="srcs"><h3>Sources</h3><ul><li>Computed by ColorHub from ${n} museum photographs; screen colors, as photographed. The most typical painting is the one nearest the group's average lightness, chroma, warmth and color spread.</li>${srcNote}${kind === "movement" ? `<li>Movement tags: museum records, and Wikidata (CC0).</li>` : ""}</ul></section>`, "article aw-page");
   awWire(el);
+  awFillHighlight(el);
 }
 
 // ======================================================================
@@ -546,26 +675,18 @@ function awGroup(kind, key, push = true) {
 function awIndex(push = true) {
   if (!AW.ready) return awWait(awIndex, [push]);
   if (push) XSTACK.push("aw:index");
-  const base = AW.ge.archive.hh;
-  const decs = awGroupKeys("decade").map(Number).sort((a, b) => a - b).filter(d => d >= 1250);
-  const rows = decs.map((d, k) => {
-    const g = AW.grp.byDecade[d], x = AW.ge.byDecade[d], tot = x.hh.reduce((s, v) => s + v, 0) || 1, Lg = Math.round(x.L * 2.55), cen = d % 100 === 0 || k === 0;
-    return `${cen ? `<p class="aw-century">${Math.floor(d / 100) * 100}s</p>` : ""}<button class="aw-trow" data-awgroup="decade|${d}"><span class="aw-td">${awDec(d)}</span><i class="aw-tl" style="background:rgb(${Lg},${Lg},${Lg})" title="mean lightness ${x.L}"></i><span class="aw-tbar" title="${awBand(x.hh.map((v, b) => v / Math.max(base[b], .004)))} stands out">${x.hh.map((v, b) => `<u style="flex:${Math.min(4, Math.max(.12, v / Math.max(base[b], .004))).toFixed(2)};--c:${AW_BAND_HEX[b]}"></u>`).join("")}</span><em>${g.n.toLocaleString("en-US")}</em></button>`;
-  }).join("");
   const mvs = Object.keys(AW.grp.byMovement).sort((a, b) => AW.grp.byMovement[b].n - AW.grp.byMovement[a].n);
   const tile = (kind, k, g) => `<button class="aw-tile" data-awgroup="${kind}|${esc(k)}"><span class="aw-tp">${g.top.slice(0, 5).map(t => `<i style="--c:${awHex(t.name)}"></i>`).join("")}</span><b>${esc(k)}</b><em>${g.n.toLocaleString()} paintings</em></button>`;
   const cos = Object.keys(AW.grp.byCountry).sort((a, b) => AW.grp.byCountry[b].n - AW.grp.byCountry[a].n);
   const bubbles = BASICS.filter(c => c.n !== "Black" && c.n !== "White" && c.n !== "Grey").map(c => `<button class="aw-bub" data-awcolor="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" aria-label="${esc(c.n)}"></button>`).join("");
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="glass-pill" data-awsurprise>${ICON.dice}<span>Surprise me</span></button></header>
     <p class="eyebrow p-type">Art</p><h1 class="p-title">Art history by color</h1>
-    <p class="p-dek">Every painting in the archive, read for color: by decade, movement, country and painter. All figures are as photographed; the browns of aged varnish are in every row.</p>
+    <p class="p-dek">Every painting in the archive, read for color: by decade, movement, country and painter. As photographed.</p>
+    <div class="sec-head"><b>The river of color</b><span>drag through time</span></div>
+    <div class="aw-river" data-awriver>${typeof xbSkeleton === "function" ? xbSkeleton() : ""}</div>
     <div class="sec-head"><b>Everything painted in…</b><span>pick a color</span></div>
     <div class="aw-bubs">${bubbles}</div>
-    <div class="sec-head"><b>A timeline of hue</b><span>decade by decade</span></div>
-    <p class="aw-sub">Each bar shows which hues a decade has more of than the archive as a whole: a wide band means more than usual, a sliver means less. The grey chip is mean lightness; the number is how many paintings. Tap a decade.</p>
-    <div class="aw-timeline">${rows}</div>
-    <div class="aw-hueleg">${AW_BANDS.map((b, k) => `<span style="--c:${AW_BAND_HEX[k]}"><i></i>${b}</span>`).join("")}</div>
     <div class="sec-head"><b>Movements</b><span>${mvs.length} with enough data</span></div>
     <p class="aw-note">Only ${mvs.length} movements reach 20 paintings here. Museums record movements for few paintings, so most of the archive has none; we added Wikidata's tags for the painting and for the painter, and each page says which is which.</p>
     <div class="aw-tiles2">${mvs.map(k => tile("movement", k, AW.grp.byMovement[k])).join("")}</div>
@@ -577,6 +698,19 @@ function awIndex(push = true) {
     <button class="btn ghost" data-awvs="">Painter against painter ${ICON.arrow}</button>`, "article aw-page");
   awWire(el);
   awFinder(el.querySelector("[data-awfind]"), s => awPainter(s));
+  // Surprise me: a painter with enough paintings to say something (20 or more), at random
+  el.querySelector("[data-awsurprise]").onclick = () => { const pool = AW.list.filter(m => m.k >= 20); buzz(8); awPainter(pool[Math.floor(Math.random() * pool.length)].slug); };
+  awIndexRiver(el.querySelector("[data-awriver]"));
+}
+// Browse's River (js/browse-ui.js), real paint colors decade by decade, in place of the old lift timeline. Its
+// decade panel's button opens that decade's page here instead of Browse's grid.
+function awIndexRiver(host) {
+  if (!host || typeof xbLoad !== "function" || typeof xbRiver !== "function") { if (host) host.remove(); return; }
+  xbLoad().then(F => {
+    if (!host.isConnected) return;
+    host.innerHTML = "";
+    xbRiver(host, F, xbRun(F, xbFresh()), { set: false, decBtn: yr => AW.grp.byDecade[yr] ? `<button class="btn ghost" data-awgroup="decade|${yr}">The ${yr}s, decade page ${ICON.arrow}</button>` : "" });
+  }).catch(() => { if (host.isConnected) host.innerHTML = `<p class="fine">The river didn't load. Check the connection and open this page again.</p>`; });
 }
 // a search box over the painters; calls pick(slug)
 function awFinder(host, pick, opts = {}) {
