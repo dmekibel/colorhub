@@ -177,6 +177,12 @@ The full-screen color, then a one-line definition with its source, then the **Re
 
 ---
 
+## Launch queue (start as slots free; 20 subagents can run at once)
+1. L22 Maerz & Paul round 2: the dictionary index (~4,000 names, plate/cell, origin and date), per-plate color correction, a clean merge.
+2. L9 learning beyond the 101 + the Journey, after Practice (L4) merges.
+3. Ideas synthesis, after the 7 IDEAS-10X panels report.
+4. L7 article engine at scale, after David approves the pilot voice.
+
 ## Progress log
 - 12:4x: L1 ledger landed (design/REQUESTS-LEDGER.md: 111 done, 43 partial, 45 not started). ECC patterns adopted as files (no plugin). L19 design-history corpus started. L6 also computes per-color superlatives (rarest, peak decade, loyal painters).
 - 12:0x: Wave 0 launched: L1 ledger, L2 concordance, L3 smoke harness, L4 Practice resume, L5 rich pages resume.
