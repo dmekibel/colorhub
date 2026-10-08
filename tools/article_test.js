@@ -35,7 +35,7 @@ const cm = require("./colormath.js");
 const diskFetch = k => /^data\/(graph\/(nodes|edges)-[a-z_]\.json|gallery\/ids\.txt|analysis\/artists\/[a-z0-9-]+\.json)$/.test(k) && fs.existsSync(path.join(root, k)) ? fs.readFileSync(path.join(root, k), "utf8") : null;
 const sandbox = {
   console, Promise, setTimeout, Math, Date, JSON, Map, Set, Array, Object, String, Number, RegExp, Error,
-  lab: cm.lab, de2000: cm.de2000, toast: () => {},
+  lab: cm.lab, de2000: cm.de2000, toast: () => {}, icon: () => "",
   pctMatch: n => { const m = Math.max(0, 100 - n); return m >= 100 ? "100% match" : `${m > 99 ? m.toFixed(1) : Math.round(m)}% match`; },
   esc: s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])),
   ink: () => "dark", routeSlug: norm, routeColor: () => null, CORE_NAMES: core, loadCoreNames: () => Promise.resolve(core),
@@ -52,7 +52,7 @@ vm.runInContext(fs.readFileSync(path.join(root, "js/article.js"), "utf8"), sandb
 vm.runInContext(fs.readFileSync(path.join(root, "js/article-refs.js"), "utf8"), sandbox, { filename: "js/article-refs.js" });
 ["data/gems.js", "data/gem-images.js", "data/botany.js", "data/botany-images.js", "data/looks.js", "data/films.js"].forEach(f => vm.runInContext(fs.readFileSync(path.join(root, f), "utf8"), sandbox, { filename: f }));
 const ar = vm.runInContext(`({ arLoadNames, arColor, arLinkHTML, arInline, arBlocks, arNorm, arList, arRefs, arBuildHTML, arMinutes, articleRender, arHubEntry, arWhichEntry, AR_CACHE,
-  arRefList, arRefKind, arBlockHTML, arfBest, arfScore, arfPlan, arfFor, arfAutoKeys, arfFigHTML, arfPicHTML, arfCreditHTML, ARF_DE, ARF_LIMIT, ARF_MAX_AUTO, ARF_MAX_END, ARF_MAX_PER_P, ARF_MIN_COVER, ARF_ORDER, ARF_CACHE })`, sandbox);
+  arRefList, arRefKind, arBlockHTML, arSplit, arSentences, arQuoteOf, arDatesOf, arAccent, arContrast, arfGaps, arfBest, arfScore, arfPlan, arfFor, arfAutoKeys, arfFigHTML, arfPicHTML, arfCreditHTML, ARF_DE, ARF_LIMIT, ARF_MAX_AUTO, ARF_MAX_END, ARF_MAX_PER_P, ARF_MIN_COVER, ARF_ORDER, ARF_CACHE })`, sandbox);
 
 // ---- alias-aware reader (the resolvers load the same files the app does) ----
 const namesLoaded = (async () => {
@@ -142,6 +142,22 @@ ok(count >= 2, "at least 2 articles tested (found " + count + ")");
   ok(ar.arBlockHTML({ t: "p", text: "Plain [[cobalt]]." }, null).startsWith("<p>"), "a paragraph without references is untouched");
   const art = ar.arNorm({ lede: "A lede that is long enough to count.", sections: [{ id: "a", title: "A", body: "x [[gem:spinel|s]]\n\ny [[painting:nga-72328|R]]" }], aside: {}, names: ["Fiery Rose"] }, "t");
   ok(ar.arRefs(art).refs.map(r => r.key).join() === "gem:spinel,painting:nga-72328" && art.names[0] === "Fiery Rose", "arRefs lists the references; arNorm keeps names");
+})();
+
+// reading aids (js/article.js): long paragraphs split at sentence ends, quotations need a speaker, key dates, legible color
+(() => {
+  const s = "In 1704 a Berlin color-maker named Diesbach set out to make a red [1]. He borrowed potash from J. K. Dippel, which was contaminated [2]. ";
+  const long = (s + "The batch went pale, then purple, then a deep blue, and nobody in the shop could say why it had happened that way [3]. ").repeat(3).trim();
+  const parts = ar.arSplit(long);
+  ok(parts.length >= 2 && parts.join(" ") === long, "arSplit: a long paragraph becomes 2+ paragraphs and loses no words: " + parts.length);
+  ok(parts.every(p => !/^\[\d/.test(p)) && ar.arSentences(s).length === 2, "arSplit: note refs stay with their sentence; 'J. K.' initials don't end a sentence");
+  ok(ar.arSplit("Short paragraph [1].").length === 1, "arSplit: a short paragraph is untouched");
+  ok(ar.arQuoteOf('The editor Diana Vreeland called pink "the navy blue of India" [5].').who === "Diana Vreeland", "arQuoteOf: a short quotation with its speaker");
+  ok(ar.arQuoteOf('The ISCC-NBS name is "very light bluish green" [2].') === null, "arQuoteOf: no speaker, no pull quote");
+  const d = ar.arDatesOf(["In 1842 John Herschel used iron salts to print white lines [1]. By 1750 it was made across Europe [2]."]);
+  ok(d.length === 2 && d[0].label === "1750" && d[1].label === "1842" && d[1].snip.startsWith("John Herschel"), "arDatesOf: dates in time order, the 'In 1842' lead-in dropped: " + JSON.stringify(d));
+  ok(ar.arDatesOf(["It weighed 1500 kg [1]. In 1900 it sold [2]."]).length === 0, "arDatesOf: a quantity is not a date, and one date is not a timeline");
+  ["#FF0000", "#003153", "#000080", "#F4C2C2", "#808080"].forEach(h => { const a = ar.arAccent(h); ok(a.mode === "none" || (a.mode === "line" ? !!a.c : ar.arContrast(a.c, "#0E0D0B") >= 4.5), `arAccent ${h}: text highlights pass 4.5:1 or fall back to an underline (${a.mode} ${a.c})`); });
 })();
 
 // the threshold: a picture only when the closest palette color is within CIEDE2000 15 (an 85% match); looks 8; paintings need 2% of the canvas
