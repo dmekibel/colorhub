@@ -196,7 +196,7 @@ function youPage() {
       ${mnRow({ k: "favs", label: "Your colors", value: fvN ? `${n0(fvN)} hearted` : "", sub: fvN ? "" : "Heart the colors you love, then rank them" })}
       ${head ? mnRow({ k: "ftaste", label: esc(head), sub: "Your taste, from your hearts" }) : ""}
       ${tz.color ? mnRow({ k: "tzc", label: "Your color", sub: "From the 20-tap taste test", value: tz.color.at ? esc(fmtDay(tz.color.at)) : "" }) : mnRow({ k: "tzcnew", label: "Find your color", value: "20 taps" })}
-      ${tz.palette ? mnRow({ k: "tzp", label: "Your palette", sub: "From the palette taste test", value: tz.palette.at ? esc(fmtDay(tz.palette.at)) : "" }) : ""}
+      ${tz.palette ? mnRow({ k: "tzp", label: "Your palette", sub: "From the palette taste test", value: tz.palette.at ? esc(fmtDay(tz.palette.at)) : "" }) : mnRow({ k: "tzpnew", label: "Find your palette", value: "15 taps" })}
     </section>
 
     <section class="ym-sec">
@@ -242,6 +242,7 @@ function youPage() {
     if (k === "tzc") return tzReopen("color");
     if (k === "tzp") return tzReopen("palette");
     if (k === "tzcnew") return tasteIntro("color");
+    if (k === "tzpnew") return tasteIntro("palette");
     if (k === "oo") return ooEyePage();
     if (k === "eyer") return eyeReport();
     if (k === "studio") return go("studio");

@@ -128,7 +128,6 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
 // calls routeWrapAll() again before the first address opens (without it a typed #/painter/<slug> lost its address).
 function routeWrapAll() { ROUTED.forEach(([name, f]) => routeWrap(window, name, f)); }
 routeWrapAll();
-routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
 routeWrap(LAB, "namer", () => routed("Name any color", "studio/namer"));   // js/namer.js
 
