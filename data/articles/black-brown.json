@@ -175,12 +175,9 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "batch-51 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "No book defines the name; article is deliberately short.",
-   "Larsen/Greenfield and Huysmans/Pastoureau hits are only the words side by side."
-  ]
+  "issues": []
  },
  "words": 458
 }

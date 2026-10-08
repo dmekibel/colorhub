@@ -1,0 +1,205 @@
+{
+ "slug": "blush",
+ "name": "Blush",
+ "hex": "#DE5D83",
+ "names": [
+  "Blush"
+ ],
+ "tier": "commercial",
+ "depth": "medium",
+ "lede": "Blush is the colour of flushed skin, and the word has two lives: in Paterson's dictionary it runs from red to a delicate pink, and in St Clair's glossary to a pinkish beige, while the swatch on this site is a much deeper pink.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word for a face",
+   "body": "*Blush* is first a verb: to change the colour of the face when embarrassed, stressed or angry [1]. As a colour word it follows from that, and Paterson's dictionary gives it as red-coloured, with *blush pink* as a delicate pink and *blush rose* as a delicate pink that is also sometimes a dark shade of rose [1]. A cosmetic that adds colour to the cheeks is a *blusher* [1].\n\nSt Clair's glossary of colour names defines blush as a pinkish beige, like flushed cheeks [3]. The older word *damask* was used in the same way, glossed by Paterson as a deep pink or rose, \"blush-coloured\" [2]."
+  },
+  {
+   "id": "shame",
+   "title": "Shame, skin and paint",
+   "body": "The idea behind the word is old. Greenfield notes that the ancient Jews linked red with the plainest act of shame and self-betrayal, the blush [4]. A twelfth-century description of a mosaic in the Great Palace at Constantinople, by Constantine Manasses, praised painting over sculpture because shading could show the roughness of skin and every complexion, a blush among them [5].\n\nFinlay, writing about an icon painter's natural pigments, reports the Orthodox view that grinding a piece of natural rock into the blush on a saint's cheek parallels a human transformation [6]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which blush is this?",
+   "body": "The swatch on this page is #DE5D83, a clear mid pink, and it is deeper than the delicate pinks the dictionaries describe [7]. Our library holds it as a name from ISCC-NBS (1955, block 29) and Maerz and Paul (1930), and notes that Wikipedia cites Crayola for it [7]. The Maerz and Paul entry carries a first-recorded year of 1590, which we give as that book's claim and have not checked elsewhere [7].\n\nThe nearest named colour is [[cerise]], at a ΔE of 8.5, so it is a pink with some depth [7]. A second source disagrees about what the name means: the xkcd colour survey of 2010 gives blush as a soft peach, #F29E8E [7]. The paler, skin-like colours are better matched by [[blush-pink]], [[salmon-pink]] and [[peach]], and the deeper ones by [[rose]] and [[old-rose]] [7]. In Paterson's entries, the paler uses are the *blush pink* and *blush rose* ones, not this swatch [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has this exact pink covering at least one per cent of its canvas, within a CIEDE2000 distance of 4 [8]. That describes our archive, not painting as a whole, and the archive is made of photographs of aged, varnished paintings [8].\n\nThe peach version of blush is rarer still in size but easier to find in the right hands. A colour within six units of #F29E8E covers at least five per cent of the canvas in only 7 paintings [9]. The two largest are [[painter:andre-derain|Derain]]'s *Woman in a Chemise* (1906), at 23 per cent of the picture, and [[painter:henri-matisse|Matisse]]'s *Odalisque* (1923), at 20 per cent [9]. Both are paintings of bare or lightly dressed skin [9].\n\nIn Google Books, the word *blush* is at its highest in the earliest decade we have, 1800, fell to about a tenth of that by the 1970s, and had recovered to about 42 per cent of the 1800 level by 2010 [10]. That count includes the verb and the flower and cosmetic senses, so it is the history of a word, not only of a colour [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the flush of a face (the verb to blush)",
+   "first_recorded": "Maerz and Paul 1930 give 1590 (unchecked); ISCC-NBS 1955",
+   "source": "Paterson, A Dictionary of Colour, p. 73; ColorHub library"
+  },
+  "aka": [
+   "blush rose",
+   "blush pink (a paler relative)"
+  ],
+  "siblings": [
+   "blush-pink",
+   "rose-pink",
+   "salmon-pink"
+  ],
+  "parent": null,
+  "children": [
+   "blush-pink"
+  ],
+  "disambiguation": [
+   {
+    "slug": "blush-pink",
+    "gloss": "the delicate pale pink the dictionaries mean by blush"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#DE5D83",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "peach_variant": {
+   "hex": "#F29E8E",
+   "de2000": 6,
+   "min_cover": 0.05,
+   "n_present": 7,
+   "top_paintings": [
+    "smk-KMSr14",
+    "smk-KMSr87"
+   ]
+  },
+  "ngram": {
+   "peak": 1800,
+   "low": 1970,
+   "rel_2010": 0.42
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 73 (\"blush\", \"blush pink\", \"blush rose\", \"blusher\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 138 (\"damask\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Blush\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 7",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 52",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 9",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library, \"Blush\" (ISCC-NBS 1955 block 29; Maerz & Paul 1930; xkcd 2010; Wikipedia/Crayola), screen values approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, CIEDE2000 within 4, at least 1% of canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive, #F29E8E within CIEDE2000 6, at least 5% of canvas, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"blush\", all senses, 1800-2010 in decade buckets (ColorHub graph fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Paterson's dictionary, what is blush pink?",
+   "choices": [
+    "Delicate pink",
+    "A deep crimson",
+    "A pinkish purple",
+    "A bright orange"
+   ],
+   "answer": "Delicate pink",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is the swatch on this page a poor guide to the word's usual meaning?",
+   "choices": [
+    "It is a clear mid pink, far deeper than the pale tint the word names",
+    "It is a brown",
+    "It is exactly the colour of a painted cheek",
+    "It has no name in any source"
+   ],
+   "answer": "It is a clear mid pink, far deeper than the pale tint the word names",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the word blush began as a colour name rather than a verb for a flushed face.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Blush began as a verb for a face going red, and the colour words came after.",
+  "The deep pink swatch here is not the delicate pink that Paterson gives for blush pink."
+ ],
+ "words": 570,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'flesh tone: red thinned' conclusion and 'paler and warmer than most people picture'",
+   "Reframed Finlay Orthodox line as reported view",
+   "Lede/quiz no longer claim dictionaries uniformly mean pale pink (Paterson: red-coloured; St Clair: pinky beige)",
+   "Softened 'what the word was made for' and lipstick/paint-chart claim"
+  ]
+ }
+}

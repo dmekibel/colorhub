@@ -1,0 +1,193 @@
+{
+ "slug": "bluish-purple",
+ "name": "Bluish Purple",
+ "hex": "#703BE7",
+ "names": [
+  "Bluish Purple"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Bluish Purple is a purple leaning toward blue, a name that began as entry 36 in Werner's nomenclature of colors and now marks a vivid screen violet.",
+ "sections": [
+  {
+   "id": "werner",
+   "title": "A purple in Werner's list",
+   "body": "Werner's nomenclature, as expanded by Patrick Syme, has Bluish Purple at no. 36 among the purples [1][2]. Syme's recipe calls for about equal parts of Berlin blue and carmine red [3]. His examples are a butterfly and the purple crocus [2]. Baty's modern pairings in the same system are crocus petals and the wings of the holly blue butterfly [3].\n\nThe same mixture turns up in paint. In the fifteenth century, painters made purplish robes by glazing [[ultramarine]] with a red lake; when the lake faded, the shadows were left a deep bluish purple while the pale pink highlights remained [4]. Ball calls *The Virgin and Child before a Firescreen*, by a follower of Robert Campin around 1440, a particularly striking case of faded lake: the Virgin's robes are now almost as pale as paper, where once they were probably a warm mauve [4]. Much older recipes from Mesopotamia describe overdyeing to get both reddish and bluish purples [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "Two swatches, one name",
+   "body": "The swatch on this page, #703BE7, comes from the xkcd color survey of 2010, and ISCC-NBS 1955 would call it a vivid violet [2]. The Werner swatch in our library is a different color altogether, a dusty blue-lavender near #8590AE [2]. The 1821 color is a quiet, aged lavender-grey, while the survey color is as saturated as a screen allows [2].\n\nPhysics blurs the names further. Violet is a spectral color, produced by very short wavelengths, while purple is a mixture of red and blue light, yet a bluish purple can look identical to violet [6]. Paterson's dictionary even defines violet as a bluish-purple color [7], and lists *cathay* as the name of a bluish purple [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The vivid swatch is almost absent from painting. In our archive of 23,781 paintings, none has a color within four units of this swatch covering even one per cent of its canvas [8]. That describes this archive and these thresholds, not painting as a whole, and it is a stricter test than the five per cent used for most colors [8].\n\nThe words fared better. In Google Books, *bluish purple* peaks in the 1830s and has fallen to about 30 per cent of that peak by 2010 [9]. For purples that real painters used, see [[violet]], [[blue-violet]] and [[amethyst]]; for a painted bluish purple, look at shadows of robes in early oil painting, where ultramarine meets faded lake [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "descriptive modifier: bluish + purple (Werner no. 36)",
+   "first_recorded": "1821, Syme's edition of Werner",
+   "source": "Baty, Nature's Palette; ColorHub graph"
+  },
+  "aka": [
+   "bluish purple"
+  ],
+  "siblings": [
+   "blue-violet",
+   "violet-blue",
+   "royal-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "blue-violet",
+    "gloss": "a bluer, close screen neighbor with its own history"
+   },
+   {
+    "slug": "violet",
+    "gloss": "a spectral color, where bluish purple is a mixture"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#703BE7",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "ngram": {
+   "term": "bluish purple",
+   "peak": "1830s",
+   "rel_2010": 0.29
+  },
+  "measured": {
+   "lch": [
+    41.8,
+    99.5,
+    307.9
+   ],
+   "iscc": "vivid violet"
+  },
+  "werner_swatch": "#8590AE"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Syme's plates of blues and purples",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library and graph: Werner no. 36; xkcd 2010; ISCC-NBS 1955 block 205 (ΔE 11.8) and block 203",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, plate captions and index",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, ch. 2",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, introduction and \"cathay\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, CIEDE2000 4, 1% cover. As photographed: museum photographs of aged, varnished paintings. A color match, not a pigment test.",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'bluish purple', decadal, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What two things did Syme say make Bluish Purple?",
+   "choices": [
+    "Berlin blue and carmine red",
+    "Indigo and yellow ochre",
+    "Ultramarine and white lead",
+    "Verdigris and cochineal"
+   ],
+   "answer": "Berlin blue and carmine red",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did robes in some 1400s paintings end up pink with bluish-purple shadows?",
+   "choices": [
+    "The red lake faded, leaving the ultramarine in the shadows",
+    "The ultramarine turned purple with age",
+    "The painters used two separate dyes",
+    "The varnish added a blue tint"
+   ],
+   "answer": "The red lake faded, leaving the ultramarine in the shadows",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the swatch on this page is the same color as Werner's Bluish Purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Faded red lake turned some fifteenth-century robes pink in the light and bluish purple in the folds.",
+  "Bluish Purple has two swatches a century and a half apart, and they are not the same color."
+ ],
+ "words": 407,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed amethyst from Werner no. 36 pairings (Baty lists it at no. 39).",
+   "Firescreen: robes are pale, not bluish-purple; reworded to match Ball.",
+   "Mesopotamian overdyeing no longer says indigo (source does not).",
+   "Opener no longer ties purple folds to 1440 painting."
+  ]
+ }
+}

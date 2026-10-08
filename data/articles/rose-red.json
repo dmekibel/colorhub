@@ -240,7 +240,7 @@
  "words": 696,
  "status": "checked",
  "checked": {
-  "by": "Claude Sonnet 5.5 (batch 54)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
    "Library calls no. 89 Werner; Baty p.242 says it came from Picardet (reported)",

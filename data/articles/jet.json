@@ -226,13 +226,10 @@
  "words": 1350,
  "status": "checked",
  "checked": {
-  "by": "batch-18 writer (Sonnet 5.5)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Finlay and St Clair differ on mourning rule for jet (Paterson: one stage; St Clair: throughout)",
-   "Spontaneous-combustion lore and red-devils origin are single-source, hedged",
-   "Gilbert 1600 jet list from Finlay ch.1 (loc approximate)",
-   "Danish/Norwegian rates may reflect museum holdings"
+   "No changes needed; 8 key claims verified against fact cards"
   ]
  }
 }

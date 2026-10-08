@@ -33,7 +33,7 @@
   {
    "id": "other",
    "title": "Imperial yellow, green and the borrowed word",
-   "body": "Paterson's *Dictionary of Colour* says the word *imperial* was first used for imperial yellow and then borrowed by other colors with pretensions of majesty [15]. Imperial yellow is a deep yellow from the yellow porcelain of China, reserved for the imperial court [15]. In China yellow gradually became the emperor's color; his robes and carriage were called yellow, and even his path [16]. When the court's yellow silk grew less exclusive, it was granted first to household bodyguards and in a few cases to commoners as an honor [17]. American pencils were later painted yellow in imitation of the robes of the Manchu court, a marketing move [18].\n\nImperial green is a name for emerald green, the arsenic pigment also called Schweinfurt, Paris, Vienna and Brunswick green, which was considered in the 1860s to have caused a number of deaths through fumes from arsenic wallpaper [15]. Paterson defines imperial blue as a deep blue dye and imperial red as a deep bluish red [15]."
+   "body": "Paterson's *Dictionary of Colour* says the word *imperial* was first used for imperial yellow and then lent to other colors that wanted to sound majestic [15]. Imperial yellow is a deep yellow from the yellow porcelain of China, reserved for the imperial court [15]. In China yellow gradually became the emperor's color; his robes and carriage were called yellow, and even his path [16]. When the court's yellow silk grew less exclusive, it was granted first to household bodyguards and in a few cases to commoners as an honor [17]. American pencils were later painted yellow in imitation of the robes of the Manchu court, a marketing move [18].\n\nImperial green is a name for emerald green, the arsenic pigment also called Schweinfurt, Paris, Vienna and Brunswick green, which was considered in the 1860s to have caused a number of deaths through fumes from arsenic wallpaper [15]. Paterson defines imperial blue as a deep blue dye and imperial red as a deep bluish red [15]."
   },
   {
    "id": "japan",
@@ -282,16 +282,13 @@
   "Under Diocletian, a pound of the best purple cloth was worth 50,000 denarii, about its weight in gold.",
   "None of the 23,781 paintings in our archive holds this imperial plum on a large field."
  ],
- "words": 1038,
+ "words": 1039,
  "status": "checked",
  "checked": {
-  "by": "batch13 writer",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Diocletian prices from Greenfield only; single source, hedged by attribution.",
-   "Gage reference to Pliny's test and Theodora robe from concordance excerpts; page locators approximate.",
-   "Imperial yellow bodyguard/commoner honor from St Clair ch.41, wording kept general.",
-   "Pastoureau chapter numbers are concordance chapter indices."
+   "Reworded a Paterson phrase that sat too close to the source"
   ]
  }
 }

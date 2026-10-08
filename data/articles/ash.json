@@ -1,0 +1,287 @@
+{
+ "slug": "ash",
+ "name": "Ash",
+ "hex": "#B2BEB5",
+ "names": [
+  "Ash"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Ash is the pale grey of what is left after burning, a color that old writers treated as colorless, that dyers and bleachers used as an alkali, and that painters borrowed as a name for weak pigments.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word for what is left",
+   "body": "*Ash* is the color of what remains after burning, and English has a family of words for it [1]. Paterson lists *ash-coloured* as whitish grey or brownish grey, *ashen* as grey and also as a very pale complexion, and *ashy* as simply grey [1]. A *cinereous* bird is ash grey, and *favillous* means the color of hot ash [1]. *Ashes of roses* is a pinkish grey and *ash-blond* a light blond, while *cendre*, the French word, means ash-coloured [1]. Paterson's entry for grey ties it to lead, to ash and to the hair of middle age [1].\n\nThe color is a pale, quiet grey, but it is not one fixed grey. Paterson's entries run from whitish and brownish grey to pinkish grey [1], and the swatch on this page is a pale greenish grey, found in the ISCC-NBS 1955 dictionary as block 154 [2]. For the larger family see [[grey]], and for the nearest named neighbors [[cinereous]] and [[pale-grey]]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner's ash grey",
+   "body": "The oldest chart in our library to carry the name is Werner's *Nomenclature of Colours*, which Syme edited in 1821 [2]. Werner lists ash grey among his greys, as number 9, and gives three natural examples [2]. For the animal kingdom it is the breast of a long-tailed hen titmouse, for the vegetable kingdom fresh wood ashes, and for the mineral kingdom flint [2]. So the color name and its material share a source. Baty's book lists ash-grey among the grey names, beside lead-grey, pearl-grey, smoke-grey and steel-grey [3].\n\nWerner's ash grey is paler and warmer than the swatch. The aged plate in our data reads as about #CBC8B7, a faint yellowish grey [2]. The swatch used here, #B2BEB5, is a good match for the ISCC-NBS block, \"light greenish gray\", at a color distance of 2.0 [2]. Both are approximate, because the first comes from the scan of an old plate and the second from a modern screen [2]."
+  },
+  {
+   "id": "ancient",
+   "title": "The residue that goes white",
+   "body": "Ancient writers treated ash as colorless. Aristotle, whom Birren quotes, held that the earth is naturally white and takes its hues from the moisture that tinges it, and he offered ash as proof: ashes turn white when the moisture is burned out of them [4]. Jarman's chapter on shadow quotes the same argument [15].\n\nThe alchemists found a use for the in-between. The fourteenth-century treatise of Simeon of Cologne, which Gage quotes, lists the colors a metal passes through during transmutation, and between true white and true red it places a certain ash-grey color that is not to be despised [13]. It is a minor stage in a long sequence, but it shows how ash grey was filed: not a color to aim for, but one that mattered on the way to something else [13]."
+  },
+  {
+   "id": "cloth",
+   "title": "Cloth, mourning and a queen",
+   "body": "Ash lent its name to clothing. Pastoureau argues that the toga that Romans wore for funerals was probably closer to an ash grey than to true black [5]. The Latin adjective for it, *pullus*, generally refers to a dark, drab wool that falls somewhere between grey and brown [5].\n\nA better-documented case is Elizabeth I. As a young woman she wore red and crimson, but after she took the throne in 1558 she dressed mostly in white, black and gold, with subdued colors such as peach, ash and tawny [8]. St Clair says that scarlet would not do for a virgin queen after her coronation, so she turned to neutral or broken tones such as tawny, gold and ash [8]."
+  },
+  {
+   "id": "lye",
+   "title": "Ash in the vat and the laundry",
+   "body": "Where ash really mattered was as an alkali. Wood ash steeped in water gives a lye, and lye cleaned cloth, made soap and set dye vats. Soap was made for centuries by the same recipe, wood ash with animal or vegetable fat, until potash and soda replaced the ash [6]. Three hundred years ago, linen bleachers around Glasgow spread cloth on bleaching greens and treated it with sour milk and fern ashes [7]. Pastoureau adds that washing with ash, clay or minerals could not make a pure white. It left whites with a bluish, greenish or greyish cast, which is why people in antiquity and the Middle Ages seldom wore truly white clothes [6].\n\nThe indigo vat needed the same alkali. Balfour-Paul says that dyers in many cultures made their vats alkaline with ash water or stale urine [9]. In the fourteenth century Genoese merchants shipped woad, and ash for the vats, to England's south coast, where they traded it for wool [9]. One writer on indigo vats whom Balfour-Paul cites preferred wood ash to lime, noting that even ash from wood of different ages behaves differently [9]. The Lombok villagers whom Finlay met mixed their indigo with ash to make it alkaline [10]. In vats on several continents, then, the grey powder was the unseen half of the process.\n\nAsh also played a smaller part in yellow. Pastoureau notes that Germanic dyers, whom Roman writers disdained, made their yellows from broom, gorse, nettle, fern and the leaves of ash trees, which is the tree and not the residue [17]."
+  },
+  {
+   "id": "glaze",
+   "title": "A glaze from the fire",
+   "body": "Celadon's soft green glaze, the best-known case of ash as an ingredient, is made of wood ash and kaolin, and Finlay stresses that all of it comes from the mountains and their forests [11]. The wood was also the fuel for the kiln, and its ash became part of the glaze [11]. The result is the color of [[celadon]], an ash-born green. Bone has a similar history: the white pigment came from bones heaped on open fires and burned until nothing but ash remained, a method with Neolithic evidence [15]. St Clair adds that prehistoric people also took a deep black from the ashes of their fires [16]."
+  },
+  {
+   "id": "pigment",
+   "title": "Ashes as a pigment name",
+   "body": "Painters used *ashes* as a trade name for pale, low-grade colors. In making ultramarine, Cennino Cennini had the lapis kneaded in lye several times; the first kneadings gave the best blue, and the last gave a greyer, paler product known as ultramarine ash [12]. Ball explains that this was used for pale blue oil glazes [12]. Cennino even describes the stone itself as \"mixed like ashes\", and says the less of that ash color it contains, the better [12].\n\nThe label spread to copper pigments. Blue verditer, a synthetic version of azurite, was known in France as *cendres bleus*, blue ashes [12]. Azurite was also listed under the old name blue ashes of Seville [14]. Hoogstraten, the Dutch painter, complained in the 1670s that \"ashes\" were not durable enough as a green [12], and de Mayerne's recipe for the far distance in a landscape called for the most beautiful ashes of ultramarine and white [13]. A passage on painting by candlelight that Gage quotes says the ash pigments, described as green or blue, look an extremely beautiful blue [13]. In the Pigment Compendium, \"ashes of lead\" is an old name for grey lead oxide [14]. Cennino's warning that over-ground malachite turns dingy and ashy belongs to the same vocabulary [10]. See [[malachite]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Ash is a fairly common color in our painting archive. About 2.16 per cent of the 23,781 paintings (513 of them) contain it, as photographed, and it is more common than 79 per cent of the named colors [2]. Inside a painting it most often plays the light, in 58 per cent of the 375 paintings where the within-painting test finds it [2].\n\nIt peaks in the 1900s: 2.4 per cent of the 1,674 paintings we have from that century (41 paintings), or 1.7 times the baseline of the same museums [2]. The painter most devoted to it is [[painter:paul-signac|Signac]], with 4 of his 18 works here, at 5.6 times the baseline of the museums those works come from [2]. Ash keeps company with Pale Turtle Green and Cement Grey more than chance would predict [2].\n\nThe earliest match is a painting of 1279, but that is a floor and not a first [2]. The archive's early centuries are thin, and the match is a look-alike hue in an aged photograph, 542 years before the name's first record in our sources [2]. In printed English the word peaks in the 1920s, but this counts every sense of *ash*, the tree and the residue included, so it is not a measure of the color [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "wood ash, the residue of burning",
+   "first_recorded": "Werner's Nomenclature of Colours, 1821 (ColorHub library); ISCC-NBS 1955",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "ash grey",
+   "ashen",
+   "cendre",
+   "cinereous"
+  ],
+  "siblings": [
+   "cinereous",
+   "pale-grey",
+   "light-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "cendre"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B2BEB5",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 513,
+  "pct_paintings": 2.16,
+  "century_peak": {
+   "century": 1900,
+   "pct": 2.4,
+   "n": 41,
+   "lift": 1.7
+  },
+  "devoted_painter": {
+   "painter": "Paul Signac",
+   "works": 4,
+   "of": 18,
+   "lift": 5.6
+  },
+  "ngram": {
+   "peak": "1920s",
+   "caveat": "all senses of ash"
+  },
+  "measured": {
+   "lch": [
+    75.8,
+    6.6,
+    152.0
+   ],
+   "contrast_white": 1.92,
+   "contrast_black": 10.93,
+   "nearest_iscc": [
+    "light greenish gray",
+    2.0
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"ash-blond\", \"ash-coloured\", \"ashen\", \"ashes of roses\", \"ashy\", \"cendre\", \"cinereous\", \"favillous\", \"grey\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub library and archive, Ash #B2BEB5: ISCC-NBS 1955 block 154; Werner 1821 no. 9 (Greys), aged swatch; archive of 23,781 paintings, as photographed",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, Werner's greys",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 11 (on Aristotle and the elements)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, on Roman mourning clothes",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, on washing, ash and soap",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Fabric, on bleaching greens near Glasgow",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 11; St Clair, The Secret Lives of Color, ch. 65",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, chapters on the woad and indigo vats",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 16 and ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Color: A Natural History of the Palette, ch. 16 (\"Green\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 13, ch. 14 and ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, on alchemical color sequences, de Mayerne and candlelight",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Azurite\" and \"Grey oxide of lead\" entries",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Bone white\"; Jarman, Chroma, the chapter on shadow",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 13",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was Werner's vegetable example of ash grey in 1821?",
+   "choices": [
+    "Fresh wood ashes",
+    "A grey lichen",
+    "The bark of a birch",
+    "Soot from a candle"
+   ],
+   "answer": "Fresh wood ashes",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did dyers and bleachers use wood ash?",
+   "choices": [
+    "It makes an alkaline lye",
+    "It gives a brilliant white",
+    "It kills mold",
+    "It is a natural dye"
+   ],
+   "answer": "It makes an alkaline lye",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: ultramarine ash was the best, most expensive grade of ultramarine.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Werner's 1821 chart used fresh wood ashes as the plant example of ash grey.",
+  "Celadon's green glaze is made partly of wood ash.",
+  "Ultramarine ash was the pale, grey leftover from the last kneading of the lapis."
+ ],
+ "words": 1360,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Spot-verified Simeon of Cologne, toga pulla, Glasgow bleaching greens, ash-leaf yellows, bone white, prehistoric black ash against book text; no changes needed."
+  ]
+ }
+}

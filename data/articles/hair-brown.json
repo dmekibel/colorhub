@@ -1,0 +1,229 @@
+{
+ "slug": "hair-brown",
+ "name": "Hair Brown",
+ "hex": "#8B7859",
+ "names": [
+  "Hair Brown"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Hair Brown is a grey-tinged, olive-leaning brown from the mineralogists' color lists of around 1800, defined then by a bird's head and a tin ore and later worn as a fashionable color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineralogist's brown",
+   "body": "*Hair brown* belongs to the family of descriptive color names that German mineralogists built in the late eighteenth century so that a stone could be described in words [1]. Werner's list had eight principal colors, among them brown, and every one was subdivided with mixture words or with the name of a familiar object, such as sky-blue or milk-white [2]. In the numbered table that Baty reproduces, Hair Brown is number 107, one of the browns [3].\n\nThe swatch is #8B7859, a brown that has gone slightly grey and olive [4]. Our library lists it as Werner no. 107, an aged swatch that is only approximate, and also finds it in the ISCC-NBS lists of 1955 and the Maerz and Paul dictionary of 1930 [4].\n\nWho made up the name is a small puzzle. Baty reports that Syme marked hair brown as one of Werner's own colors, yet it first appears in the writings of Lenz [5]. What hair is meant, whether a human head or an animal's coat, is not discussed in any book we hold, so the origin is undocumented [5]."
+  },
+  {
+   "id": "recipe",
+   "title": "The definition and its specimens",
+   "body": "Syme's definition, as Baty prints it, is plain: hair brown is olive brown mixed with ash grey [6]. Like every color in the lists, it comes with specimens. The animal example is the head of a pintail duck, and the mineral example is wood tin, a tin-oxide mineral [7].\n\nBaty's plates show it on the wood tin in Rashleigh's *Specimens of British Minerals* (1797) and on fucus seaweed in Weinmann's *Phytanthoza iconographia* (1737) [6]. A third plate, from Gould's bird book of 1862 to 1873, shows it on head feathers [6]. One name was thus applied to a mineral, a plant and an animal [6]."
+  },
+  {
+   "id": "lists",
+   "title": "In the successive lists",
+   "body": "The name sat in the middle of the browns in every revision. Baty's tables of the successive color lists include hair-brown in Syme's edition of 1814 with 108 colors and again in his edition of 1821 with 110, always near liver-brown, wood-brown and broccoli-brown [8]. Two of those neighbors survive as separate colors in our library, [[liver-brown]] and [[broccoli-brown]] [4].\n\nThe dates do not agree across sources. Our library gives 1821 for Werner's list through Syme, while the Maerz and Paul dictionary records the name as first used in 1766, on plate 15 A 4 [4]. Neither date settles who coined it: Baty traces the name to Lenz, and the 1766 entry gives no source we can check [5][4]."
+  },
+  {
+   "id": "ridgway",
+   "title": "The problem with names like this",
+   "body": "Hair brown had a weakness, and the ornithologist Robert Ridgway said so [9]. Of names such as hair-brown, ash-color and lilac, used by Syme, he argued that each varies so much without a fixed standard that the name is practically valueless [9]. Ridgway went on to work on color standards of his own [9].\n\nThe problem outlived mineralogy. St Clair came across hair brown in her research into women's fashion journals, where Ackermann's Repository described a pelisse in hair brown [10]. Colored plates sometimes accompanied the descriptions, she writes, but often they did not, so she could not tell what hair brown could possibly look like [10]. The library files the name under fashion and textiles [4]."
+  },
+  {
+   "id": "neighbors",
+   "title": "Where it sits among the browns",
+   "body": "On screen, the nearest named neighbors of #8B7859 are the greys-of-brown: our library's closest name is [[brownish-grey]], and its nearest named color in the app palette is [[taupe]], at a distance of 7 CIEDE2000 units [4]. Beside it in the lists are [[olive-brown]] and [[yellowish-brown]], and the nearby [[umber]] and [[sepia]] are darker and warmer [4].\n\nThe name is a good teacher for the eye. A brown with a little green and grey in it is what the old lists saw in a pintail's head and in fucus seaweed [6][7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, 5,169 (21.7 per cent) have a patch within six units of this color (CIEDE2000) covering at least five per cent of the canvas, as photographed [11]. It is one of the commonest browns in the archive. In a painting it most often plays a light (51 per cent of the matches) or a mid-tone (41 per cent), and only 8 per cent of the time a shadow [11].\n\nIt is strongest in the oldest paintings and in East Asia [11]. Half of the 50 paintings from the 1100s match, against 16 per cent of the 1,674 paintings from the 1900s [11]. In Japan 331 of 698 works match (47 per cent), and in China 239 of 635 (38 per cent) [11]. Many of these are works on silk and paper, so the match may owe something to age, which we cannot separate from the original color [11]. The strongest single match is [[painting:cma-151078|Plum Tree]] by [[painter:ogata-korin|Ogata Kōrin]] (about 1700), where it covers 93 per cent of the canvas [11]. Among European painters, [[painter:kristian-zahrtmann|Zahrtmann]] has it in 12 of his 18 works [11].\n\nThese numbers come from museum photographs of aged, varnished paintings and are not a test of any pigment [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a descriptive color name of the Werner and Syme mineral lists, first appearing in the writings of Lenz",
+   "first_recorded": "Syme's lists of 1814 and 1821; Maerz and Paul give 1766 (single source)",
+   "source": "Baty, Nature's Palette, pp. 28, 34, 261; ColorHub library"
+  },
+  "aka": [
+   "hair-brown"
+  ],
+  "siblings": [
+   "liver-brown",
+   "broccoli-brown",
+   "olive-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#8B7859",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 5169,
+  "top_paintings": [
+   "cma-151078",
+   "cma-707619",
+   "cma-155067",
+   "aic-182419"
+  ],
+  "role": {
+   "mid": 0.41,
+   "highlight": 0.51,
+   "shadow": 0.08
+  },
+  "countries": [
+   {
+    "key": "Japan",
+    "hits": 331,
+    "n": 698
+   },
+   {
+    "key": "China",
+    "hits": 239,
+    "n": 635
+   }
+  ],
+  "painters": [
+   {
+    "key": "Kristian Zahrtmann",
+    "hits": 12,
+    "n": 18
+   }
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 16-18 (Werner's and Schäffer's color systems)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 16",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 15 (numbered table)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub library: Hair Brown (Werner no. 107; ISCC-NBS 1955 block 64; Maerz & Paul 1930, first recorded 1766, plate 15 A 4)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 28",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 261-262 (plates)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 254",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-35 (tables of color lists)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 135-136",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 7 (introduction)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive and field notes (tools/article_field.py; data/graph/fieldnotes), as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Syme define hair brown?",
+   "choices": [
+    "Olive brown mixed with ash grey",
+    "Chestnut brown with black",
+    "Yellowish brown with red",
+    "Liver brown lightened with white"
+   ],
+   "answer": "Olive brown mixed with ash grey",
+   "kind": "pick"
+  },
+  {
+   "q": "Which specimen pair did the lists give for hair brown?",
+   "choices": [
+    "The head of a pintail duck and wood tin",
+    "A fox's coat and amber",
+    "A hare's fur and pyrite",
+    "A sparrow's wing and jet"
+   ],
+   "answer": "The head of a pintail duck and wood tin",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did Ridgway distrust names like hair-brown?",
+   "choices": [
+    "Without a fixed standard they vary too much to be useful",
+    "They were too modern",
+    "They named rare colors",
+    "They were only used in fashion"
+   ],
+   "answer": "Without a fixed standard they vary too much to be useful",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Hair brown was defined in the early 1800s as olive brown mixed with ash grey, with a pintail duck's head as the bird example.",
+  "Hair brown is one of the commonest browns in our painting archive: 21.7 per cent of 23,781 paintings, as photographed.",
+  "Where to look: fucus seaweed and a pintail's head are the old lists' own examples of hair brown."
+ ],
+ "words": 829,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed 'eighteenth century' dating of the fashion-journal find (Ackermann's Repository is later; card gives no date)"
+  ]
+ }
+}

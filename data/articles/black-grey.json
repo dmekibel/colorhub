@@ -134,13 +134,9 @@
  "words": 698,
  "status": "checked",
  "checked": {
-  "by": "batch-64 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "RAL facts web-only (Wikipedia), hedged to founding and 840 register.",
-   "Name-level history (grey/black) is context, not the history of RAL 7021: stated as such.",
-   "Short article; books say nothing of the RAL color itself."
-  ]
+  "issues": []
  },
  "notes": [
   {

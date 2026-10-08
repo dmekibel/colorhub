@@ -1,0 +1,147 @@
+{
+ "slug": "aqua",
+ "name": "Aqua",
+ "hex": "#00FFFF",
+ "names": [
+  "Aqua"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Aqua, as a color name on screens, means pure full-strength cyan, #00FFFF; it is the web name for a color that older sources call a light greenish blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Water, and a web color",
+   "body": "The word comes from the Latin for water, and as a color name it means water-like: Paterson defines it as a light greenish blue, a name that web designers adopted with the hex code #00FFFF [1]. The same dictionary lists *aqua* among the 16 basic VGA colors and the 140 names of the X11 set used for web pages [1][2]. On screens aqua is identical to cyan: our library shows a distance of zero between the two, and other near-duplicates such as bright cyan and bright turquoise sit within two units [3].\n\nThat makes aqua unusual among named colors. It is not an object or a flower, it is the full-strength blue-green that a screen can produce, with the red light switched off and green and blue at full [3]. It is a screen color, and real paint is unlikely to match it."
+  },
+  {
+   "id": "elsewhere",
+   "title": "Other aquas in the books",
+   "body": "Paterson also records a street use. The color aqua was one of the many colors in which the lamp-posts of Notting Hill were painted for the 1999 Carnival [1]. The dictionary lists aqua blue and aqua green as separate entries [1], and our library holds [[aqua-blue]] and [[aqua-green]] as their own colors, Maerz and Paul recording aqua green in 1927 [3].\n\nFinlay describes a living example. The cotton breeder Sally Fox found, among naturally brown cotton plants, a boll of raw cotton in an unexpected aqua green, which she described as sea turquoise mixed with moss and mint in a foam of white [4]. Brown cotton was already a surprise, and the green and the pale pink she later found were unplanned finds of crossing, not a dye [4].\n\nMost of the other times *aqua* appears in the books we hold, it is the first half of *aqua regia*, *aqua fortis* or *aqua vitae*, the acids and spirits of the alchemists, and has nothing to do with color [5]. Drebbel's tin-scarlet story, which involves aqua regia, is a disputed tale and not a color origin for aqua [5]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has a color within CIEDE2000 distance 4 of aqua covering even 1 per cent of its canvas, as photographed [6]. That describes the archive, not painting as a whole, and it makes sense: #00FFFF is a screen-only extreme [6].\n\nThe closest things to aqua in the world are not paints but [[turquoise]] and the paler [[light-cyan]] and [[pale-turquoise]], each of which a painter can reach [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Latin aqua, water",
+   "first_recorded": "as a web color name, X11 and HTML; no earlier color use recorded in our sources",
+   "source": "Paterson, A Dictionary of Colour; library data"
+  },
+  "aka": [
+   "cyan (identical on screens)"
+  ],
+  "siblings": [
+   "aqua-blue",
+   "aqua-green",
+   "aquamarine"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "aquamarine",
+    "gloss": "a paler, greener color named for the gemstone"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "hex": "#00FFFF",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "measured": {
+   "lch": [
+    91,
+    50,
+    196
+   ],
+   "nearest": [
+    "Cyan"
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"aqua\", \"aqua blue\", \"aqua green\", pp. 31, 428, 464",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"X11 Color Set\", p. 428",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CSS, xkcd and ISCC-NBS entries; Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 148 (naturally colored cotton)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 15, and Finlay, Colour, ch. 13 (aqua regia and aqua fortis)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive and fieldnotes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does aqua mean on a web page?",
+   "choices": [
+    "The same color as cyan, #00FFFF",
+    "A pale grey-green",
+    "A dark teal",
+    "A mix of purple and white"
+   ],
+   "answer": "The same color as cyan, #00FFFF",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: most times 'aqua' appears in the color books we hold, it names a color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "On a screen, aqua and cyan are the very same color: red off, green and blue at full strength."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 423
+}

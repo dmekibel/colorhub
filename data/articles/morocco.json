@@ -1,0 +1,220 @@
+{
+ "slug": "morocco",
+ "name": "Morocco",
+ "hex": "#432A1D",
+ "names": [
+  "Morocco"
+ ],
+ "tier": "place",
+ "depth": "medium",
+ "lede": "Morocco is the color of a leather, a deep brown in the library but a brick red in the one glossary that explains the word, and it is named for a country the color books mostly visit for other reasons.",
+ "sections": [
+  {
+   "id": "leather",
+   "title": "A leather before a color",
+   "body": "St Clair's glossary of color names defines *morocco* as a brick red that was originally the color of painted leather [1]. The Maerz and Paul dictionary of 1930 records the word as a color from 1919, on plate 8 [2]. How the leather was made and why it carried the country's name is not traced in the books we hold, so we do not say.\n\nLiterature gives one clear picture of it. In Mérimée's novella *Carmen*, of 1845, the heroine wears a very short red skirt and small red morocco shoes with a flame-colored ribbon [3]. Her dress is meant to shock the hero, and in Greenfield's account the red does most of the work [3]. Paterson's dictionary lists only the adjective *Moroccan*, for colors coming, or supposed to come, from the country [4]."
+  },
+  {
+   "id": "swatch",
+   "title": "Brick red or dark brown",
+   "body": "The swatch is not the brick red of the glossary. It is a very dark brown, close to the ISCC-NBS block called dark brown, at a distance of 4.9 units [2][5]. Redder versions exist as a separate name, [[morocco-red]] [5]. The nearest names to this brown are [[armada]], [[bistre]] and [[mahogany-brown]], the last a little redder [5].\n\nSo the word can mean a leather in a brick-red dye, as in St Clair, or a dark leather brown, as in this library [1][2]. Treat the swatch as a screen approximation of the second."
+  },
+  {
+   "id": "country",
+   "title": "The country, not the color",
+   "body": "The color books mention the country mostly for its dyes and minerals. Balfour-Paul follows the indigo crop west through north Africa to the Draa valley, in the country's south [6]. Berber shawls striped in indigo and black were valued by the share of true indigo against the other black [7]. Dyers in the High Atlas believed that telling outrageous lies could revive a vat that had stopped working [8][9].\n\nThe *Pigment Compendium* names Moroccan sources for several mineral colors: malachite at Oujda, brochantite and vanadinite at Touissit, and erythrite at Bou Azzer [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a painted color this dark brown is everywhere: it appears in 5,111 of 23,781 paintings in our archive, 21.49 per cent, as photographed, and the within-painting lens finds it in 3,971 [11]. It is more common than 99 per cent of the named colors [11]. Its peak is the 1600s, at 21.6 per cent of the 6,394 paintings from that century, 1.2 times the baseline of the same museums [11].\n\nInside a painting it most often plays a hidden color, by lightness rank, in 43 per cent of the 3,971 [11]. The most devoted painter is [[painter:otto-van-veen|Otto van Veen]], in 11 of his 15 works here, 3.5 times the baseline [11]. These are photographs of aged, varnished paintings, so a match is not proof of leather, dye or pigment [11]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the country Morocco, by way of its leather (the books do not trace the steps)",
+   "first_recorded": "1919 as a color word (Maerz and Paul, 1930)",
+   "source": "St Clair, The Secret Lives of Colour; Maerz and Paul"
+  },
+  "aka": [
+   "morocco leather"
+  ],
+  "siblings": [
+   "armada",
+   "bistre"
+  ],
+  "parent": null,
+  "children": [
+   "morocco-red"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5111,
+  "n_within_painting": 3971,
+  "pct_present": 21.49,
+  "century_peak": {
+   "century": "1600s",
+   "pct": 21.6,
+   "n": 1380,
+   "lift": 1.2
+  },
+  "painters": [
+   [
+    "otto-van-veen",
+    11,
+    15,
+    3.5
+   ]
+  ],
+  "role": "hidden, 43%",
+  "measured": {
+   "lch": [
+    19.8,
+    16.5,
+    53.2
+   ],
+   "iscc": "dark brown",
+   "de": 4.9,
+   "nearest": [
+    [
+     "Armada",
+     2.7
+    ],
+    [
+     "Bistre",
+     3.3
+    ],
+    [
+     "Mahogany Brown",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary \"Morocco\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (Maerz and Paul 1930 plate 8 J 6, first recorded 1919)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Moroccan\", p. 269",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library and look-alike graph (ISCC-NBS 1955; CIEDE2000 distances)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 38",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 188",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 138",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 18",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Malachite\", \"Brochantite\", \"Vanadinite\", \"Erythrite\", pp. 75, 165, 261, 394",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (data/graph/fieldnotes/m.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does St Clair's glossary say morocco was originally the color of?",
+   "choices": [
+    "Painted leather",
+    "A dyed wool",
+    "A mineral pigment",
+    "A fruit"
+   ],
+   "answer": "Painted leather",
+   "kind": "pick"
+  },
+  {
+   "q": "The ColorHub swatch for Morocco is a bright brick red.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Where does this dark brown most often sit inside a painting, by lightness rank?",
+   "choices": [
+    "As a hidden color",
+    "As the brightest light",
+    "As the focal accent",
+    "As the sky"
+   ],
+   "answer": "As a hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Morocco was a leather color first; the glossary calls it brick red, the library shows dark brown.",
+  "Berber dyers in the High Atlas believed lies could revive a dead indigo vat."
+ ],
+ "words": 483,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

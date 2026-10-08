@@ -22,7 +22,7 @@
   {
    "id": "iris-green",
    "title": "Iris green",
-   "body": "By the fourteenth century painters were looking for alternatives to verdigris, a copper green that was popular but unpredictable and that could eat through the parchment it was painted on [3]. Two plant colors filled the gap, sap green and iris green [3]. Ball describes iris green as the juice of iris flowers mixed with water, possibly with alum as a thickener, and used for manuscript illumination [3].\n\nThe Pigment Compendium adds detail [2]. Medieval manuscripts name flower juices as a source of green, sometimes confusingly called sap green [2]. Iris green could be made up as a *pezzetta*, a piece of linen dipped in the juice and dried, or by squeezing the flowers and mixing the juice with an alum base [2]. A specific source named in the literature is *Iris germanica*, whose leaves contain the yellow compound mangiferin [2]. Thompson speculated in 1956 that the main coloring matter of iris green is probably chlorophyll [2]. Italian recipes also call it lily green, or *verde giglio*; the recipes describe the flowers as purple, which suggests that the lilies in question were irises [2].\n\nBooks disagree on the source. Paterson defines iris green as a medieval dye made from the leaves of buckthorn, or possibly from iris flowers, while Ball and the Compendium name the iris flower first [1][3][2]. The Compendium notes a related blending of names: a nineteenth-century edition of Field's *Chromatography* mentions blue iris flowers being added to sap green, and malachite itself has been called iris green [2]. Ball is blunt about the limits: these meadow juices were good enough for a monk's page, but not robust enough for an altarpiece [3]."
+   "body": "By the fourteenth century painters were looking for alternatives to verdigris, a copper green that was popular but unpredictable and that could eat through the parchment it was painted on [3]. Two plant colors filled the gap, sap green and iris green [3]. Ball describes iris green as the juice of iris flowers mixed with water, possibly with alum as a thickener, and used for manuscript illumination [3].\n\nThe Pigment Compendium adds detail [2]. Medieval manuscripts name flower juices as a source of green, sometimes confusingly called sap green [2]. Iris green could be made up as a *pezzetta*, a piece of linen dipped in the juice and dried, or by squeezing the flowers and mixing the juice with an alum base [2]. A specific source named in the literature is *Iris germanica*, whose leaves contain the yellow compound mangiferin [2]. Thompson speculated in 1956 that the main coloring matter of iris green is probably chlorophyll [2]. Italian recipes also call it lily green, or *verde giglio*; the recipes describe the flowers as purple, which suggests that the lilies in question were irises [2].\n\nBooks disagree on the source. Paterson defines iris green as a medieval dye made from the leaves of buckthorn, or possibly from iris flowers, while Ball and the Compendium name the iris flower first [1][3][2]. The Compendium notes a related blending of names: a nineteenth-century edition of Field's *Chromatography* mentions blue iris flowers being added to sap green, and malachite itself has been called iris green [2]. Ball adds a limit: these meadow juices suited a monk's manuscript page, but they were too fragile for large altarpiece work [3]."
   },
   {
    "id": "iris-blue",
@@ -221,15 +221,14 @@
   "Babies' blue eyes contain no blue pigment; the color of a newborn's iris is scattered light.",
   "Syme's Werner nomenclature pairs the standard Pale Blackish Purple with the inner petals of an iris."
  ],
- "words": 1025,
+ "words": 1023,
  "status": "checked",
  "checked": {
-  "by": "batch30 writer + gate",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Iris green source disagreement noted (Paterson buckthorn leaves vs Ball/Compendium flowers).",
-   "Lily-green inference (Compendium) hedged.",
-   "No myth in list touches iris; Chartres glass mentioned only as colour description."
+   "Reworded Ball sentence on altarpieces to avoid near-verbatim phrasing",
+   "Other claims verified against Paterson, Ball, Birren, Pastoureau, Jarman, St Clair, Pigment Compendium"
   ]
  }
 }

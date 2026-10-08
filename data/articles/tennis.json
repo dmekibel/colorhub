@@ -1,0 +1,175 @@
+{
+ "slug": "tennis",
+ "name": "Tennis",
+ "hex": "#BA9D4C",
+ "names": [
+  "Tennis"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Tennis is a muted olive-gold from the 1930 Maerz and Paul dictionary of color, and it is not the color of a modern tennis ball.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a 1930 chart",
+   "body": "Maerz and Paul's *Dictionary of Color* of 1930 lists Tennis on plate 12, square L 6, and dates the name to 1916 [1]. The books we read do not say what the name refers to [1].\n\nOn screen the swatch is a muted, slightly olive gold, with a lightness of 66 and a strong yellow hue [1]. Its nearest everyday names are [[mustard]] and [[pyrite-yellow]] [1]."
+  },
+  {
+   "id": "ball",
+   "title": "The ball was white",
+   "body": "Pastoureau reports that tennis balls were originally white, and that the colored ball is recent [2][3]. The yellow ball dates from the 1970s, but the books give different starting points: one says the International Tennis Federation decided on yellow felt balls in 1972, and that by 1978 they were the emblem of the modern game [2]. Another puts the change in the late 1970s without naming a year [3].\n\nThe reason was seeing, not style. White balls were hard to follow against white court lines on early color television, and umpires struggled to tell whether a ball had touched a line [2][3]. The new ball was a strong, more or less fluorescent yellow [2]. That is far brighter and greener than this swatch, which is why the name should not be read as a ball color [1][2]."
+  },
+  {
+   "id": "whites",
+   "title": "Tennis whites and green courts",
+   "body": "For most of the game's history the dress color was white. Pastoureau notes that the first tournaments began in England and Scotland in the late 1870s, and that white was required of men and women alike, partly because sweat stains do not show on it [3]. Wimbledon still requires entirely white kit, and in 2013 its organizers excluded off-white, cream and ecru [3].\n\nGreen belongs to the playing surface. Pastoureau observes that green is the color of games, from billiard felt to the table in table tennis and the floors of many indoor sports [4]. So the sport's palette was white, green and, from the late twentieth century, ball yellow, but not this olive gold [2][3][4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a common painted color. In our archive of 23,781 paintings, a color within six units of the swatch covers at least five per cent of the canvas in 1,053 works, 4.4 per cent [5]. The largest patches are in Hokusai's *Moon, Pine and Maple* and Maruyama Okyo's *Heron on a Willow Branch*, each about 73 per cent yellow-gold [5].\n\nIt leans to India and Iran: 104 of 721 Indian works carry it, 3.3 times the archive rate, and Kalighat pictures do so 8.5 times as often [5]. It is almost always a highlight or a ground, in 81 per cent of cases [5]. These are photographs of aged paper, silk and varnish, so some of this tone may be the support, not the paint [5]. It keeps company with [[khaki]] and [[olive]] more than with any sports color [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented",
+   "first_recorded": "1916, Maerz & Paul 1930, plate 12 L 6",
+   "source": "ColorHub library; Maerz & Paul 1930"
+  },
+  "aka": [],
+  "siblings": [
+   "mustard",
+   "pyrite-yellow",
+   "khaki",
+   "olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "yellow",
+    "gloss": "the modern tennis ball is a bright fluorescent yellow, far from this olive gold"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#BA9D4C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1053,
+  "top_paintings": [
+   "aic-24460",
+   "cma-159733",
+   "aic-28275"
+  ],
+  "role": {
+   "highlight": 0.81,
+   "mid": 0.19
+  },
+  "company": [
+   "Mustard",
+   "Khaki",
+   "Olive"
+  ],
+  "measured": {
+   "lch": [
+    66,
+    46,
+    89
+   ],
+   "nearest": [
+    [
+     "Mustard",
+     7.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz & Paul 1930, first recorded 1916, plate 12 L 6; screen swatch approximate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, p. 35 (tennis ball)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, White: The History of a Color, pp. 206-207",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, p. 45",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color were tennis balls before the 1970s?",
+   "choices": [
+    "White",
+    "Green",
+    "Orange",
+    "Black"
+   ],
+   "answer": "White",
+   "kind": "pick"
+  },
+  {
+   "q": "Why did officials move to yellow balls?",
+   "choices": [
+    "White balls were hard to see against white lines on color television",
+    "Yellow dye was cheaper",
+    "Players preferred the smell",
+    "Wimbledon required it in 1900"
+   ],
+   "answer": "White balls were hard to see against white lines on color television",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Tennis swatch here is the color of a modern tennis ball.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The tennis ball was white until the 1970s; the swatch called Tennis dates from 1916 and is an olive gold.",
+  "Wimbledon still requires entirely white kit, and in 2013 it excluded cream and ecru."
+ ],
+ "words": 471,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'most hard courts are green'; source cites billiards, table tennis, indoor floors."
+  ]
+ }
+}

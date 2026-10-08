@@ -17,12 +17,12 @@
   {
    "id": "antiquity",
    "title": "In antiquity",
-   "body": "In *On Sense and Sensible Objects*, Aristotle names deep blue as one of five unmixed colors lying between light and dark, along with crimson, violet and leek-green and either grey or yellow [3]. In his *Meteorology* he lists only red, green and purple for the rainbow, so his attitude to blue is hard to pin down [4].\n\nThe Greek word most often translated as blue, *kyaneos*, stood for dark colors in the classical age, spanning deep blue, violet, brown and black [5]. In Homer's day it could mean an iris's bright blue or the black of mourning clothes, yet it was never applied to sky or sea [5]. Ball argues that to the Greeks blue was a kind of darkness, which fits the beards on Greek statues, painted a deep blue that was understood as a kind of black [4].\n\nFrom such facts a nineteenth-century debate grew. William Gladstone even proposed that the Greeks had no word for blue because they could not see it [6]. That idea is wrong. Greek temples carried blue pigment, in backgrounds much darker than later drawings show, and Ball notes several Greek words that do translate as the blue of sky and sea [4][5]. The Greeks saw blue; they filed it largely under darkness [4]."
+   "body": "In *On Sense and Sensible Objects*, Aristotle names deep blue as one of five unmixed colors lying between light and dark, along with crimson, violet and leek-green and either grey or yellow [3]. In his *Meteorology* he lists only red, green and purple for the rainbow, so his attitude to blue is hard to pin down [4].\n\nThe Greek word most often translated as blue, *kyaneos*, stood for dark colors in the classical age, spanning deep blue, violet, brown and black [5]. In Homer's day it could mean an iris's bright blue or the black of mourning clothes, yet it was never applied to sky or sea [5]. Ball argues that to the Greeks blue was a kind of darkness, which fits the beards on Greek statues, painted a deep blue that was understood as a kind of black [4].\n\nFrom such facts a nineteenth-century debate grew. William Gladstone even proposed that the Greeks had no word for blue because they could not see it [6]. That idea is wrong. The Greeks painted their stonework, with blue among the grounds, and Ball notes several Greek words that do translate as the blue of sky and sea [4][5]. The Greeks saw blue; they filed it largely under darkness [4]."
   },
   {
    "id": "pigments",
    "title": "Stones and powders",
-   "body": "For painters, a deep blue meant a material. Lapis lazuli is a stone whose deep blue is threaded with fine veins that ancient peoples believed were gold; they are in fact iron pyrite [5]. Marco Polo, who visited the mines in 1271, wrote of a mountain that yielded the finest blue [7]. The color comes from sulphur atoms in the mineral lazurite, which absorb red light [4].\n\nThe stand-ins were graded by cost. In *Saints Peter and Dorothy* of about 1505 to 1510, the Master of St Bartholomew painted Peter's deep blue robe in the highest grade of azurite and used a cheaper, greener grade for the cuffs, where finer particles gave a lighter shade [4]. Smalt, a ground cobalt glass, kept its strong deep blue only when left coarse, which made it gritty and hard to paint with [4][8]. The best grade had a purplish cast, and it was largely replaced by ultramarine [4][1].\n\nTwo accidents and a chemist's programme gave later blues. When Diesbach tried to concentrate a red lake made with tainted potash, it went purple and then deep blue, and that accident became [[prussian-blue]], available to artists by 1724 [4][8]. A fine deep blue came in 1802 when Thénard roasted cobalt arsenate or phosphate with alumina, the start of [[cobalt-blue]] [7]. Much older is [[egyptian-blue]], made by firing copper oxide, calcium carbonate and silica, and recreated by modern researchers, who needed three firings to get a deep blue mass of crystals; excavations at Tell el-Amarna had uncovered the ancient workshops [9]."
+   "body": "For painters, a deep blue meant a material. Lapis lazuli is a stone whose deep blue is threaded with fine veins that ancient peoples believed were gold; they are in fact iron pyrite [5]. Marco Polo, who visited the mines in 1271, wrote of a mountain that yielded the finest blue [7]. The color comes from sulphur atoms in the mineral lazurite, which absorb red light [4].\n\nThe stand-ins were graded by cost. In *Saints Peter and Dorothy* of about 1505 to 1510, the Master of St Bartholomew painted Peter's deep blue robe in the highest grade of azurite and used a cheaper, greener grade for the cuffs, where finer particles gave a lighter shade [4]. Smalt, a ground cobalt glass, kept its strong deep blue only when left coarse, which made it gritty and hard to paint with [4][8]. The best grade had a purplish cast, and it was largely replaced by ultramarine [4][1].\n\nTwo accidents and a chemist's programme gave later blues. When Diesbach tried to concentrate a red lake made with tainted potash, it went purple and then deep blue, and that accident became [[prussian-blue]], available to artists by 1724 [4][8]. A fine deep blue came in 1802 when Thénard roasted cobalt arsenate or phosphate with alumina, the start of [[cobalt-blue]] [7]. Much older is [[egyptian-blue]], made by firing copper oxide, calcium carbonate and silica, and recreated by modern researchers, who needed three refirings to get a deep blue mass of crystals; excavations at Tell el-Amarna had uncovered the ancient workshops [9]."
   },
   {
    "id": "dyers",
@@ -292,16 +292,14 @@
   "Greek statues' beards were painted a deep blue that the Greeks counted as a kind of black.",
   "To keep its deep blue, smalt had to be ground coarse, which made the paint gritty."
  ],
- "words": 1329,
+ "words": 1326,
  "status": "checked",
  "checked": {
-  "by": "self-check against fact cards (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Twelve vs thirteen rungs in the dyers' ladder: named in the text (Finlay vs Balfour-Paul).",
-   "Newton seven-colors myth corrected; Greeks and blue myth corrected.",
-   "Aristotle's list rests on two translations (Gage, Ball); hedged by attribution.",
-   "Birren advice marked as period opinion."
+   "Removed unsupported claim that Greek temple blues were darker than later drawings show; kept to Ball (stonework painted, blue grounds).",
+   "Egyptian blue: three refirings, per Pigment Compendium."
   ]
  }
 }

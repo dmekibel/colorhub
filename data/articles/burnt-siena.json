@@ -18,7 +18,7 @@
   {
    "id": "earth",
    "title": "The earth from Tuscany",
-   "body": "Sienna is an earth pigment, usually described as a variety of [[ochre]] [1]. It differs from ordinary ochre in a small way: it carries a little manganese oxide, under ten per cent, next to the iron oxide mineral goethite that does the colouring, and sometimes a few per cent of peaty organic matter [1]. That puts it between ochre and [[umber]] in composition [1]. Ball calls the iron-oxide earths of the Tuscan city the ones that gained special respect in the Renaissance [6].\n\nThe original pigment was derived from Siena in Tuscany [1]. The best-informed old account, by Terry in 1893, places the deposits on the western slopes of Monte Amiata, in lake-bed clay under a cover of vegetable soil [1]. Terry says the Tuscan diggers graded the earth by quality, with the price rising as the tint deepened, under four trade names: boletta, fascia, cerchione and terra guilla [1]. Siennas from Pennsylvania and the Harz Mountains of Germany were also sold [1].\n\nThe name has outlived the source. Finlay notes that burnt sienna is named after the Tuscan town, and that it is unlikely sienna still comes from there [5][16]. The name is a record of where the pigment used to be dug, in the way that lamp black is no longer scraped from lamps [16]."
+   "body": "Sienna is an earth pigment, usually described as a variety of [[ochre]] [1]. It differs from ordinary ochre in a small way: it carries a little manganese oxide, under ten per cent, next to the iron oxide mineral goethite that does the colouring, and sometimes a few per cent of peaty organic matter [1]. That puts it between ochre and [[umber]] in composition [1]. Ball calls the iron-oxide earths of the Tuscan city the ones that gained special respect in the Renaissance [6].\n\nThe original pigment was derived from Siena in Tuscany [1]. The best-informed old account, by Terry in 1893, places the deposits on the western slopes of Monte Amiata, in lake-bed clay under a cover of vegetable soil [1]. The Pigment Compendium reports that the Tuscan earth is graded by quality, with the value rising as the tint deepens, under four names from Terry: boletta, fascia, cerchione and terra guilla [1]. Siennas from Pennsylvania and the Harz Mountains of Germany were also sold [1].\n\nThe name has outlived the source. Finlay notes that burnt sienna is named after the Tuscan town, and that it is unlikely sienna still comes from there [5][16]. The name is a record of where the pigment used to be dug, in the way that lamp black is no longer scraped from lamps [16]."
   },
   {
    "id": "fire",
@@ -33,7 +33,7 @@
   {
    "id": "art",
    "title": "In the paintbox",
-   "body": "Burnt sienna was the painters' standard warm brown. A beginner's palette recommended in Gurney's *Color and Light* lists burnt sienna by its pigment code, PBr 7, with [[venetian-red]] and yellow ochre [9]. Gurney also describes priming a panel with a transparent undertone of Venetian red or burnt sienna, so that the warm ground shows through and forces the painter to cover the background with opaque paint [9].\n\nIt was a mixing colour as well. A chart of permanent colours for professional painters, printed in 1816, suggested indigo mixed with burnt sienna and gamboge to make the green of trees [11]. That is a neat piece of colour-mixing: the brown tempers the blue, the yellow lifts it, and the result sits close to natural foliage [11].\n\nFor Ball, the turn away from this palette came with the Impressionists [7]. Pissarro, according to Ball, urged Cézanne to paint with only the three primaries and their mixtures, and had himself given up black, burnt sienna and the ochres [7]. Ball adds that the Impressionists were not always careful about the stability of the new pigments they took up instead [7].\n\nThe earth browns also have a place in architecture, where a myth needs correcting. The idea that Le Corbusier's buildings were all white is a myth [10]. Batchelor reports a researcher's finding that his manifesto pavilion in Paris was painted in ten colours, among them burnt sienna and a darker burnt sienna, and that he built only one white building [10]."
+   "body": "Burnt sienna was the painters' standard warm brown. A beginner's palette recommended in Gurney's *Color and Light* lists burnt sienna by its pigment code, PBr 7, with [[venetian-red]] and yellow ochre [9]. Gurney also describes priming a panel with a transparent undertone of Venetian red or burnt sienna, so that the warm ground shows through and forces the painter to cover the background with opaque paint [9].\n\nIt was a mixing colour as well. A chart of permanent colours for professional painters, printed in 1816, suggested indigo mixed with burnt sienna and gamboge to make the green of trees [11]. That is a neat piece of colour-mixing: the brown tempers the blue, the yellow lifts it, and the result sits close to natural foliage [11].\n\nFor Ball, the turn away from this palette came with the Impressionists [7]. Pissarro, according to Ball, urged Cézanne to paint with only the three primaries and their mixtures, and had purportedly given up black, burnt sienna and the ochres [7]. Ball adds that the Impressionists were not always careful about the stability of the new pigments they took up instead [7].\n\nThe earth browns also have a place in architecture, where a myth needs correcting. The idea that Le Corbusier's buildings were all white is a myth [10]. Batchelor reports a researcher's finding that his manifesto pavilion in Paris was painted in ten colours, among them burnt sienna and a darker burnt sienna, and that he built only one white building [10]."
   },
   {
    "id": "field",
@@ -292,16 +292,14 @@
   "For centuries the pigment had no separate 'burnt' name: it was simply terra di Siena, burnt or raw.",
   "Look for a warm brown glowing through thin paint: it may be a burnt sienna ground."
  ],
- "words": 1537,
+ "words": 1540,
  "status": "checked",
  "checked": {
-  "by": "article engine (batch 40), sentence-to-card trace, myth list",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Swatch is the xkcd survey value, not the pigment: stated.",
-   "Archive match is a colour, not a pigment test: stated.",
-   "Le Corbusier colour scheme is single-source (Batchelor citing a researcher): hedged.",
-   "Impressionist palette claim (Pissarro) is Ball only, with \"purportedly\" in the book: hedged."
+   "Pissarro palette purge hedged as 'purportedly' per Ball",
+   "Terry grading sentence reworded to match the Compendium text"
   ]
  }
 }

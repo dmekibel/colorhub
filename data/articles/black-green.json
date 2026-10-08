@@ -1,0 +1,165 @@
+{
+ "slug": "black-green",
+ "name": "Black Green",
+ "hex": "#31403D",
+ "names": [
+  "Black Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Black Green is a very dark green-grey that looks nearly black, the name of one of the factory paint colours in the German RAL system.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a paint chart",
+   "body": "The swatch is #31403D, a dark teal-leaning grey with lightness 26 and almost no chroma [1]. Our library traces the name to RAL, the German colour standard first issued in 1927, where it is RAL 6012, and it appears in no other source we hold [1]. The screen value is an approximation of a painted chip [1]. The nearest named colour is [[gunmetal]], at a ΔE of 7.1, and the family it sits in is dark neutrals, between [[black]] and [[dark-green]] [1]."
+  },
+  {
+   "id": "books",
+   "title": "What the books say about black and green",
+   "body": "The color books do not describe this colour. Every hit in our concordance is the two words side by side in a list [2][3]. Still, the pair is useful for seeing how the words are built. In Pastoureau's account, black and green are two of the six basic colours of Western culture, with white, red, yellow and blue, and heraldry is where the system moved from three basic colours to six [2][3].\n\nOther systems pair them differently. In the Natural Color System, black belongs with white and green with red, as separate opposites [4]. In the Dani language of New Guinea, one of the two colour terms covers black, green, blue and other dark, cool colours, as Kay and Berlin reported [5]. A third, older scheme is Zaccolini's, a seventeenth-century painter's order of colours as distance turns them to atmospheric blue: black, then green, then yellow-green, purple, tan, red, yellow and white [6]. In it, black green is simply the nearest colour of the far end."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, 585 paintings, or 2.46 per cent, carry this dark green-black, a colour more common than 76 per cent of the named colours [7]. It peaks in the 1900s, in 3.8 per cent of 1,674 paintings, 2.7 times the rate of the same museums as a whole [7]. In 34 per cent of the 291 paintings that hold it by lightness rank, it plays the shadow [7].\n\nThe painter most tied to it is [[painter:paul-cezanne|Cézanne]], with 8 of his 50 works here [7]. In his portrait [[painting:nga-46576|Louis Guillaume]], of 1879, a colour within six units of it covers 57 per cent of the canvas [8]. These are photographs of varnished paintings, so a match is a screen colour, not a pigment test [7][8].\n\nThe name is 828 years younger than the oldest match, a 1099 Japanese sutra wrapper [7]. That is a look-alike hue in an aged photograph, not a sign of any dye [7]. In Google Books, the phrase *black green* peaks in the 1940s [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a RAL factory paint colour (RAL 6012)",
+   "first_recorded": "RAL, 1927",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "RAL 6012"
+  ],
+  "siblings": [
+   "gunmetal",
+   "dark-green",
+   "brown-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 585,
+  "pct": 2.46,
+  "peak_century": 1900,
+  "painters": [
+   [
+    "paul-cezanne",
+    8,
+    50
+   ]
+  ],
+  "ngram": {
+   "peak": 1940
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library, \"Black Green\" (RAL 6012, 1927; screen value approximate)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Black, p. 8 and p. 22",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 20 (\"Yellow in Heraldry\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Westland, Principles of Colour and Appearance, ch. 71 (\"Natural Color System\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, p. 114",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 171",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub graph fieldnotes, \"black-green\" (23,781 paintings, as photographed; Google Books Ngram)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, #31403D within CIEDE2000 6, at least 5% of canvas (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Black Green come from?",
+   "choices": [
+    "The RAL paint standard, number 6012",
+    "A medieval dye",
+    "An Impressionist pigment",
+    "A Japanese tradition"
+   ],
+   "answer": "The RAL paint standard, number 6012",
+   "kind": "pick"
+  },
+  {
+   "q": "In the Natural Color System, which colour is black paired with?",
+   "choices": [
+    "White",
+    "Green",
+    "Red",
+    "Yellow"
+   ],
+   "answer": "White",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color books give Black Green its own history.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Black Green is mostly a paint-chip name: RAL 6012, issued from 1927.",
+  "In Cézanne's *Louis Guillaume* more than half the canvas is this dark green-black."
+ ],
+ "words": 434,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

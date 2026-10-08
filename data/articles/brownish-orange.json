@@ -1,0 +1,208 @@
+{
+ "slug": "brownish-orange",
+ "name": "Brownish Orange",
+ "hex": "#92462F",
+ "names": [
+  "Brownish Orange"
+ ],
+ "tier": "traditional",
+ "depth": "medium",
+ "lede": "Brownish Orange is a dark, red-leaning orange-brown, and the name is older than most of the paint that now wears it: it is entry 79 in a colour chart that Patrick Syme made for naturalists in 1821.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A naturalist's name",
+   "body": "Brownish Orange comes from the colour nomenclature of the naturalist's trade, not from a pigment or a place [1]. Its entry in the color library is number 79 in the Oranges of Syme's 1821 revision of Werner's chart [7]. Syme invented some of his terms and borrowed others; five of the borrowed ones, this among them, came from James Sowerby's *A New Elucidation of Colours* of 1809 [1]. By Baty's account the phrase is therefore at least as old as 1809 and belongs to Sowerby, not Syme [1].\n\nThe pattern is the plain one that runs through all of Syme's chart: a hue word plus a modifier, \"brownish\" saying that the orange has been dulled toward brown [1]. The same family contains [[reddish-orange]], [[deep-reddish-orange]] and [[buff-orange]], which sit beside it in the chart's orange section [2]."
+  },
+  {
+   "id": "recipe",
+   "title": "Syme's recipe and his examples",
+   "body": "Syme described each colour as a mixture of the others, and his entry for this one reads like a painter's note. His formula starts from [[orpiment-orange]], adds a touch of [[hyacinth-red]], and darkens it with a little light chestnut brown [2]. Orpiment Orange, the characteristic colour of the section, Syme gave as roughly half [[gamboge-yellow]] and half arterial blood red [2]. The ingredients are named after a yellow mineral, a gemstone and a vegetable gum, which is how a nineteenth-century naturalist thought about colour [2].\n\nThe examples he gave are all living or mineral. In his chart the colour appears in the eyes of the largest flesh fly and in the style of the orange lily [2]. A companion table of birds lists the kestrel under the same number [3]. A topaz stands for the mineral kingdom [2]. The point of the chart was exactly this: a naturalist in the field could hold a bird, an insect or a crystal against a printed swatch and write down a number instead of an adjective [2].\n\nThe swatch here is a dark, red-leaning brown, which the 1955 ISCC-NBS system calls \"dark reddish orange\" [7]. It is not the same as the bright orange that a listener might expect from the name. A web survey of colour names in 2010 attached the same words to a much lighter, more yellow orange, which shows how loosely a modifier name pins down a hue [7]."
+  },
+  {
+   "id": "in-paint",
+   "title": "Brownish orange in paint and print",
+   "body": "Painters met this colour mostly underneath their pictures. Technical examination has shown that van Dyck in the seventeenth century sometimes laid a double ground, a brownish-orange and a grey, before painting a sky of ultramarine and smalt over a base of smalt alone [4].\n\nThe colour also turns up as a failure in printing. Jacob Christoph Le Blon, working on three-colour mezzotint, had to choose inks that were good primaries, since a slightly bluish red overprinted with yellow gives only a dirty brownish-orange [5]. The ink makers of his day could not supply the pure reds he needed [5].\n\nOther colour words cover much the same ground. Heralds call an orange or brownish orange *tenné*, from the French for tawny, and Paterson's dictionary says the many shades of unglazed [[terracotta]] are brownish-orange [6]. For the same area in daily speech, see [[tawny]], [[rust]] and [[brick]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a colour within six units of this swatch fills at least five per cent of the canvas in 1,150 works, or 4.8 per cent [8]. As always these are museum photographs of aged, varnished paintings, so the figures are screen colours and not a pigment test [8].\n\nThe colour is far more medieval than modern. It appears in 155 of the 945 paintings from the 1400s, or 16.4 per cent, about 3.4 times the rate of the museums those works come from, and in only 3.2 per cent of the 1800s [8]. The peak decade is the 1390s, with 8 of 25 works [8]. By country the strongest signal is Tibet, where 17 of 47 works carry it, and Nepal, 8 of 25 [8]. Among painters, the Master of Alkmaar uses it in 6 of 13 works [8].\n\nThe biggest single patch is the field of [[painting:commons-Q59827122|Pendón de Fernando III el Santo]], an 1878 banner where it covers 57 per cent of the canvas, followed by Pietro Lorenzetti's [[painting:nga-891|Saint Mary Magdalene, with an Angel]] of about 1340 at 43 per cent [8]. Inside a painting it mostly plays a middle tone, in 74 per cent of the works that hold it [8]. Its closest company in the archive's naming is brick, sienna and rust [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain descriptive term: orange dulled toward brown",
+   "first_recorded": "Sowerby, 1809; Syme's Werner, 1821",
+   "source": "Baty, Nature's Palette, pp. 173-174, 205-209"
+  },
+  "aka": [
+   "Syme no. 79"
+  ],
+  "siblings": [
+   "reddish-orange",
+   "deep-reddish-orange",
+   "buff-orange"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "orpiment-orange",
+    "gloss": "Syme's lighter, yellower orange that this colour is built from"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "suzume-cha (雀茶), a Japanese traditional colour in the same area of the library"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#92462F",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1150,
+  "century_peak": {
+   "century": 1400,
+   "hits": 155,
+   "of": 945,
+   "lift": 3.39
+  },
+  "peak_decade": {
+   "decade": 1390,
+   "hits": 8,
+   "of": 25
+  },
+  "countries": {
+   "Tibet": [
+    17,
+    47
+   ],
+   "Nepal": [
+    8,
+    25
+   ]
+  },
+  "measured": {
+   "iscc": "dark reddish orange",
+   "de": 3.3
+  },
+  "company": [
+   "Brick",
+   "Sienna",
+   "Rust"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 173-174 (\"Syme's Colour Terminology\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 205-209 (\"Yellows and Oranges\", no. 79)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 129-130 (birds by colour)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 391, \"tenné\", \"terra-cotta\"",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub library: Werner/Syme 1821 no. 79, ISCC-NBS 1955, xkcd 2010 survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Syme say Brownish Orange is made from?",
+   "choices": [
+    "Orpiment orange with a little hyacinth red and light chestnut brown",
+    "Black and yellow ochre",
+    "Vermilion and umber",
+    "Gamboge and indigo"
+   ],
+   "answer": "Orpiment orange with a little hyacinth red and light chestnut brown",
+   "kind": "pick"
+  },
+  {
+   "q": "In which century is this colour most common in our painting archive?",
+   "choices": [
+    "The 1400s",
+    "The 1600s",
+    "The 1800s",
+    "The 1900s"
+   ],
+   "answer": "The 1400s",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: van Dyck sometimes laid a brownish-orange ground under his skies.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Brownish Orange is entry 79 in a naturalist's chart: kestrel, flesh-fly eyes and a Brazilian topaz all stood for it.",
+  "Under some of van Dyck's blue skies lies a brownish-orange ground; you can see it in a warm glow through the thin glazes."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claim that the name was never a trade name.",
+   "Removed unsupported claim about priming glow reading as depth.",
+   "Reworded Orpiment Orange recipe to avoid near-verbatim book phrasing.",
+   "Dropped 'dark' and 'Brazil' embellishment on the topaz."
+  ]
+ },
+ "words": 764
+}

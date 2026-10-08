@@ -1,0 +1,251 @@
+{
+ "slug": "burgundy",
+ "name": "Burgundy",
+ "hex": "#800020",
+ "names": [
+  "Burgundy"
+ ],
+ "tier": "place",
+ "depth": "long",
+ "lede": "Burgundy is a dark purplish red named for the red wine of the Burgundy region of France, which also gave the name to a court whose fashion was black.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A wine, then a color",
+   "body": "Burgundy is a dark red that leans toward purple, named for the red wine of the Burgundy region of France [1]. Paterson's dictionary defines it as the reddish purple of Burgundy wine, adding that it is less blue than Bordeaux [1]. St Clair's glossary gives a different pair of descriptions: Burgundy as a deep purple-brown, Bordeaux as a deep cherry [2].\n\nBooks describe it differently, then: Paterson calls it reddish purple, St Clair a deep purple-brown [1][2]. That is normal for a name that points at a drink rather than a standard. Ball makes the general point: where puce stops and russet, burgundy and rust-red begin is a dispute that has no end [4].\n\nThe nearest relatives are [[claret]], [[bordeaux]], [[oxblood]] and [[maroon]]; the lighter, browner cousin is [[mahogany]]. Eckstut and Eckstut use burgundy to teach the idea of value: pink and burgundy are the light and dark ends of one red [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which burgundy",
+   "body": "The swatch on this page is #800020, the value most web color lists give [5]. Our library records the name in the ISCC-NBS system of 1955 (block 20) and in Maerz and Paul's 1930 dictionary, which lists it as first recorded in 1915 [5]. The web value is a screen approximation, not a measurement of wine.\n\nThe everyday use is wider than the dictionary one. In the xkcd color survey, which our library also holds, people placed the name on a darker, more purple red, #610023 [5]. If a piece of clothing or a car is called burgundy, expect anything from this swatch to that darker one."
+  },
+  {
+   "id": "duchy",
+   "title": "The duchy and its black",
+   "body": "The region gave its name to a court as well as a wine, and the books remember the court for black, not for red [6][7]. Philip the Good, who ruled the duchy from 1419 to 1467, stayed faithful to black, and the chroniclers Pastoureau cites explain it as mourning for his father, John the Fearless, who had been assassinated [6]. His court made the style a matter of protocol [6].\n\nThe fashion outlived the dukes. Mary of Burgundy married Maximilian of Habsburg, and the Habsburgs of Austria and Spain became the champions of court black [6]. Her grandson Charles V, a Burgundian on his father's side, carried the taste to Spain [6][7].\n\nNo book in our collection ties the color name to this court. The dark red is the wine's, and the black is the duke's; the two share only a place. The duchy did have a red side: the Order of the Golden Fleece, which Philip founded in 1430, gave its knights red mantles and hung its chapter halls in red, black and gold [8]."
+  },
+  {
+   "id": "firsts",
+   "title": "Two small firsts",
+   "body": "The Burgundian ducal accounts of the late 1460s hold what Gage calls the earliest known description of painters' palettes: wooden trenchers on which to set oil colors and hold them in the hand [9]. Gurney dates the same reference to the 1460s [9].\n\nThe region also appears in a pigment name. The Pigment Compendium lists Burgundy violet as a synonym that Mayer gives for [[manganese-violet]], a term it calls itself somewhat confused [10]. Manganese white, a different mineral, is named from deposits at Romanèche-Thorins in Burgundy [10]. Why the violet carries the region's name is not explained in the entry [10]."
+  },
+  {
+   "id": "art",
+   "title": "In painting",
+   "body": "Ball reads a Rothko, *Two Openings in Black over Wine* (1958), as a dim window onto the last of a burgundy dusk [4]. The word is doing what dictionary colors rarely do: it carries the time of day.\n\nThe archive finds burgundy mostly in fifteenth- and sixteenth-century pictures, as the field notes show. A [[painter:sandro-botticelli|Botticelli]] portrait holds the largest patch [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Burgundy, matched within six units of CIEDE2000 and covering at least five per cent of the canvas, appears in 67 of the 23,781 painting photographs in our archive [11]. These are photographs of aged, varnished paintings, so a match is a color match and not a pigment test [11].\n\nThe color is a fifteenth- and sixteenth-century one. It shows up in 11 of 945 paintings from the 1400s and 22 of 2,231 from the 1500s, about 3.5 times the archive rate, and in 5 of 243 from the 1510s [11]. In the 1600s it falls to 7 of 6,394 [11]. The earliest match is a wing of a polyptych by Spinello Aretino, dated 1383, where it covers 24 per cent of the panel [11].\n\nThe largest single patch is in [[painting:nga-41671|Giuliano de' Medici]], Botticelli's portrait of 1478, where it covers 32 per cent of the picture [11]. [[painter:carolus-duran|Carolus-Duran]] is the outlier among painters: 3 of his 13 paintings in the archive carry it, about 82 times the archive rate [11]. When present, it sits in the mid-tones in 69 per cent of cases and in the shadows in 25 per cent [11].\n\nIn print, the word peaks around 1808 in Google Books and falls to a steady fraction of that after 1920 [12]. That curve counts the region and the wine as well as the color, so it is a curve of the word and not of the shade [12].\n\nWhere to look: in a fifteenth-century portrait, find the sitter's robe and ask whether it is more purple than the red beside it. That is the burgundy end of red."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the red wine of the Burgundy region of France",
+   "first_recorded": "Maerz and Paul list it as first recorded in 1915",
+   "source": "Paterson, Dictionary of Colour, p. 82; ColorHub library"
+  },
+  "aka": [
+   "Burgundy red",
+   "Burgundy wine"
+  ],
+  "siblings": [
+   "claret",
+   "bordeaux",
+   "oxblood"
+  ],
+  "parent": null,
+  "children": [
+   "maroon"
+  ],
+  "disambiguation": [
+   {
+    "slug": "manganese-violet",
+    "gloss": "the pigment trade once used the name Burgundy violet for manganese violet, a purple"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "fr",
+    "name": "bourgogne (the region and its wine)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#800020",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 67,
+  "top_paintings": [
+   "nga-41671",
+   "commons-Q60048722",
+   "nga-108382"
+  ],
+  "first_dated": {
+   "id": "commons-Q21730886",
+   "year": 1383,
+   "cover": 0.24
+  },
+  "century_lift": {
+   "1400": 4.13,
+   "1500": 3.5
+  },
+  "peak_decade": {
+   "1510": 7.3
+  },
+  "role": {
+   "mid": 0.69,
+   "shadow": 0.25,
+   "highlight": 0.06
+  },
+  "ngram": {
+   "peak": 1808,
+   "rel_2000": 0.137
+  },
+  "measured": {
+   "lch": [
+    26,
+    53,
+    24
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 82 (\"Burgundy\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Burgundy\", \"Bordeaux\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eckstut and Eckstut, What Is Color?, ch. 44 (value)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 9 (colour terms) and ch. 22 (Rothko)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Burgundy entry; ISCC-NBS 1955 block 20; Maerz & Paul 1930, first recorded 1915; xkcd survey alternate",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, pp. 52-53 and 68",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Red: The History of a Color, ch. 38",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 181; Gurney, Colour and Light, p. 104",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 78 (\"Burgundy violet\") and p. 337 (manganese white)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py \"#800020\", CIEDE2000 within 6, at least 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"burgundy\", case-insensitive, 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color do the books tie to the court of Philip the Good, Duke of Burgundy?",
+   "choices": [
+    "Black",
+    "Red",
+    "Purple",
+    "White"
+   ],
+   "answer": "Black",
+   "kind": "pick"
+  },
+  {
+   "q": "A Burgundy-red robe in a Renaissance portrait is a color match for burgundy, and also a pigment test for it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which pigment does the Pigment Compendium list Burgundy violet as a synonym for?",
+   "choices": [
+    "Manganese violet",
+    "Ultramarine",
+    "Madder lake",
+    "Smalt"
+   ],
+   "answer": "Manganese violet",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The Duke of Burgundy was famous at court for black, not for the wine-dark red that bears his duchy's name.",
+  "The earliest known description of painters' palettes comes from the Burgundian ducal accounts of the 1460s.",
+  "Look for burgundy in fifteenth-century robes: a red leaning toward purple, sitting in the mid-tones."
+ ],
+ "words": 870,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed claim that books disagree on which wine is bluer (only Paterson says that)",
+   "Softened 'wore black all his life' to match Pastoureau's 'fidelity to black'"
+  ]
+ }
+}

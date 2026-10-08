@@ -1,0 +1,199 @@
+{
+ "slug": "romanesque",
+ "name": "Romanesque",
+ "hex": "#442C44",
+ "names": [
+  "Romanesque"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Romanesque is a very dark, slightly reddish purple named in a 1920s color dictionary, a name it shares with the round-arched church style of about 950 to 1150, though no source we hold says why.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no recorded reason",
+   "body": "Romanesque first appears as a color name in Maerz and Paul's *Dictionary of Color*, which our library dates to 1926 for this entry, plate 46, L 10 [1]. The 1955 ISCC-NBS system files it as a dark purple, and the closest familiar name is [[aubergine]], about 10 units away [1]. Its lightness is only 22 on a scale of 100 and its chroma a low 19, so on screen it reads as a near-black plum [1].\n\nWho chose the name, and whether it points to the architecture, is undocumented. None of our books ties this purple to a painted wall or to a pigment of the period. Treat the name as a label that the dictionary gave it, and the history below as the context a reader might expect, not as an origin."
+  },
+  {
+   "id": "period",
+   "title": "The period and its colors",
+   "body": "Pastoureau dates the Romanesque period to about 950 to 1150 [3]. Churches of the time were not plain stone. He writes that after the year 1000 most founding prelates were chromophiles who held that color was a form of light, with a few exceptions such as Saint Bernard, the Cistercian who distrusted color [2][3]. Abbot Suger, who rebuilt Saint-Denis around 1130 to 1140, is the best-known example: he believed nothing was too beautiful to honor God [2]. A bitter quarrel between Cluniac and Cistercian monks over color in the church belongs to the same age [3].\n\nBlue moved most. Before the twelfth century it was rare and unsettling in religious art [3]. Blue devils and demons make their first appearance in art of this age [3], and Pastoureau explains that blue was often seen as a semi-black, used for hell and its demons [2]. The painted wooden ceiling of St Martin at Zillis in Switzerland has a dark blue, almost black devil [2][3]. The books disagree on its date: Pastoureau's *Black* gives about 1120, while the caption in his *Blue* says about 1140, with a question mark [2][3].\n\nThe devil's palette in general was dark. Black and red dominated, and Satan was usually the most saturated, densest figure in the image [2]. Gage notes that blue glass in the Crucifixion window at Poitiers, from about 1180, stands in for the black of Christ's hair and beard [9]. Mary's colors moved the other way: in the Romanesque period her dress lightened and her cloak often became red, before blue took over in the early Gothic [4]. A limewood Virgin of about the year 1000, now in Liège, was first painted black, repainted blue in the thirteenth century, and refashioned again at the end of the seventeenth [3]."
+  },
+  {
+   "id": "changed",
+   "title": "Pigments that changed",
+   "body": "A wall of that age does not look as it was painted. The blue mineral aerinite has been reported in twelfth-century frescoes in Catalonia and Andorra [5]. Howard identified blue vivianite on a Romanesque wall painting that had altered to yellow, so the surface now reads as green overall [7]. In thirteenth-century Romanesque frescoes, atacamite is present as an alteration product of artificial azurite [6]. Color on an old wall has often shifted since it was laid down."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "As a painted color this dark purple is uncommon. In our archive of 23,781 paintings, a color near the swatch appears in 39, or 0.16 per cent, and in 22 by the stricter within-painting test [10]. That is rarer than 60 per cent of the colors we have names for [10]. It peaks in the 1500s, in 7 of 2,231 paintings, which is 2.5 times the rate expected from the same museums [10]. Inside a painting it most often plays a shadow, in 45 per cent of the 22 [10].\n\nThe earliest dated match is [[painting:commons-Q3910903|a painting]] of 1342 by Ambrogio Lorenzetti, among 29 dated paintings with the color covering at least 2 per cent of the canvas, the latest from 1928 [10]. That is nearly two centuries after the Romanesque period ended, but the archive is thin before 1400, so this is a floor and not a first [10]. As always these are photographs of aged, varnished paintings, and a color match is not a pigment test [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented (the word is also the name of the architectural style)",
+   "first_recorded": "1926, Maerz and Paul, plate 46 L 10",
+   "source": "ColorHub library (Maerz and Paul 1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "aubergine",
+   "eggplant",
+   "plum"
+  ],
+  "parent": "dark-purple",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "aubergine",
+    "gloss": "the nearest familiar name, about 10 units away and somewhat lighter"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 39,
+  "n_within_painting": 22,
+  "rank_pct_rarer": 60,
+  "peak_century": 1500,
+  "peak_rate": "7 of 2,231 paintings, 2.5x baseline",
+  "role": "shadow 45%",
+  "first_seen": {
+   "year": 1342,
+   "id": "commons-Q3910903"
+  },
+  "measured": {
+   "lch": [
+    21.8,
+    19.0,
+    326.1
+   ],
+   "nearest": [
+    [
+     "dark purple (ISCC-NBS 224)",
+     5.5
+    ],
+    [
+     "Aubergine",
+     10.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library and graph: Maerz and Paul 1930 (via NBS Circular 553), plate 46 L 10, first recorded 1926; ISCC-NBS 1955 block 224; screen value approximate",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Black, pp. 27-32 (\"In the Devil's Palette\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Blue, pp. 7-9",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, White, p. 103",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Aerinite\" (pdf p. 15)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Atacamite\" (pdf p. 40)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Vivianite\" (pdf p. 273)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 74",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings, as photographed (fieldnotes r)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do our sources say about why this purple is called Romanesque?",
+   "choices": [
+    "The reason is undocumented",
+    "It was copied from a twelfth-century fresco",
+    "It was named after the pigment aerinite",
+    "Abbot Suger commissioned it"
+   ],
+   "answer": "The reason is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "Which colors dominated the devil in Romanesque art, according to Pastoureau?",
+   "choices": [
+    "Black and red",
+    "Green and gold",
+    "Blue and white",
+    "Purple and yellow"
+   ],
+   "answer": "Black and red",
+   "kind": "pick"
+  },
+  {
+   "q": "Why can a Romanesque wall painting look different today from when it was painted?",
+   "choices": [
+    "Some pigments have altered, such as blue vivianite turning yellow so the surface looks green",
+    "The plaster has been bleached",
+    "Painters then used no blue",
+    "Photographs always add green"
+   ],
+   "answer": "Some pigments have altered, such as blue vivianite turning yellow so the surface looks green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Blue was often read as a semi-black, and blue devils entered art in this age [2][3].",
+  "A blue vivianite wall painting altered to yellow and now looks green [7]."
+ ],
+ "words": 689,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Replaced 'Cistercians were in the minority' with Pastoureau's 'a few exceptions such as Saint Bernard'",
+   "Other claims verified against Pastoureau Black/Blue/White, Gage, Pigment Compendium"
+  ]
+ }
+}

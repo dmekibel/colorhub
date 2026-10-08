@@ -22,7 +22,7 @@
   {
    "id": "history",
    "title": "A dark color for serious people",
-   "body": "The Greek word *prasinos*, literally leek-colored, took over from older words from the third or second century BCE and covered all the strong shades of green, especially the dark ones [3]. Dark green had a gloomy side in the Middle Ages [12]. Pastoureau notes that images of the Virgin from before the twelfth century show her in dark colors that include dark green, which signified mourning [12]. In fifteenth-century French poetry, a \"lost green\" is one of three colors of sorrow and death, with black and tan [4].\n\nIt also marked a line between the sober and the worldly. Pastoureau recounts that Racine, in his short worldly period in the early 1660s, scandalized his patrons at Port-Royal by turning up in a very dark green suit, when only black was acceptable [5]. By the French Enlightenment, people who had always worn black began to wear gray, brown, blue or dark green instead [6]."
+   "body": "The Greek word *prasinos*, literally leek-colored, began to compete with older green words from the third or second century BCE and covered all the strong shades of green, especially the dark ones [3]. Dark green had a gloomy side in the Middle Ages [12]. Pastoureau notes that images of the Virgin from before the twelfth century show her in dark colors that include dark green, which signified mourning [12]. In fifteenth-century French poetry, a \"lost green\" is one of three colors of sorrow and death, with black and tan [4].\n\nIt also marked a line between the sober and the worldly. Pastoureau recounts that Racine, in his short worldly period in the early 1660s, scandalized his patrons at Port-Royal by turning up in a very dark green suit, when only black was acceptable [5]. By the French Enlightenment, people who had always worn black began to wear gray, brown, blue or dark green instead [6]."
   },
   {
    "id": "pair",
@@ -212,15 +212,15 @@
   "The web's dark green has red and blue switched off completely; older color systems' dark greens are far greyer.",
   "Racine scandalized his Port-Royal patrons in the early 1660s by wearing a very dark green suit."
  ],
- "words": 583,
+ "words": 585,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Standard-tier descriptive color: books say little; written short.",
-   "Pastoureau Green opening-chapter locator is approximate; Gage complement point attributed to Gage's account of Helmholtz and Rood.",
-   "Latest-hit id nga-42428 vs. third-earliest: field facts say latest 1895; hedged."
+   "Softened prasinos 'took over from older words' to 'began to compete' (Pastoureau says it competes with glaukos and chloros).",
+   "Verified: Racine early 1660s, lost green, Virgin before 12th century, Helmholtz/Rood complement, teasels, Paterson entries.",
+   "Kept hedge on Pastoureau Green locator and the look-alike archive hits."
   ]
  }
 }

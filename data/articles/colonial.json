@@ -162,12 +162,10 @@
  "words": 526,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 22 writer",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Honest short article: the books use 'colonial' as an adjective; no source describes the color. Indigo/uniform material given as context, flagged as not an origin.",
-   "About 40 of 116 concordance passages read, sampled across books.",
-   "Alias file points colonial to yale-blue; not used."
+   "Spot-checked key claims against fact card and book text (Gage Matisse/Cezanne/Gerbier, Ball and Balfour-Paul indigo); no text changes needed."
   ]
  }
 }

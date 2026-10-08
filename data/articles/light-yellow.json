@@ -1,0 +1,187 @@
+{
+ "slug": "light-yellow",
+ "name": "Light Yellow",
+ "hex": "#FFFFE0",
+ "names": [
+  "Light Yellow"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light yellow is a descriptive name for a very pale yellow, best known today as an entry in the web's X11 color list, and in older books a loose label for pale yellow pigments, dyes and fabrics.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The web's pale yellow",
+   "body": "The swatch is #FFFFE0, the value of `LightYellow` in the X11 color set, which Paterson's dictionary lists under that code [1]. It is so pale that the 1955 ISCC-NBS system would call it \"yellowish white\", the nearest named block, at a distance of 7.6 [6]. Against a white page its contrast ratio is only 1.02, so it separates from white mostly in its warm cast [6]. An online color survey of 2010 gives a different \"light yellow\", the much stronger #FFFE7A, so the same two words do not fix a color [6]."
+  },
+  {
+   "id": "words",
+   "title": "Light yellow in the old words",
+   "body": "Paterson gives light yellow as the gloss for many names: cowslip, [[wheat]], the obsolete *palew*, and [[buff]], which it describes as a pale yellowish brown or a light yellow [1]. [[ivory]] yellow is a light yellow approaching white [1]. The dictionary even calls the X11 color BlanchedAlmond a light yellow, though it is warmer and deeper than this swatch [1]."
+  },
+  {
+   "id": "pigments",
+   "title": "Pigments and paints",
+   "body": "In pigment books the phrase labels the pale end of a range. Lead chromates run from light yellow through gold to orange and red, with the lighter shades generally containing more lead sulfate [2][1]. Barium chromate is a light yellow also sold as permanent yellow or yellow ultramarine [1]. A Victorian trade writer, Salter (1869), praised a cadmium yellow as a very vivid light yellow [3], and described *di palito* as a light yellow ochre with purer tints than most ochres [4]. Thomas Bardwell's 1756 manual advises landscape greens mixed from several pigments, a light yellow ochre among them [5]. In the twentieth century the Pop painter Lichtenstein was pleased when his paint maker supplied him with several light yellows in place of one [7].\n\nPastoureau describes the eighteenth-century fashion for Nankin yellow, prized from the 1740s to the 1770s, which covered a range from light yellow to nearly orange and was luminous without being saturated [8]."
+  },
+  {
+   "id": "history",
+   "title": "On the page",
+   "body": "A French medieval manuscript of the Lancelot-Graal, from about 1290, shows loaves of bread simply painted a light yellow [8]. The color also appears in medicine: James Hunter's 1841 table of changes in iris color lists a light yellow and a very light primrose yellow among its entries [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color is rare in paintings. Only 28 of 23,781 archive paintings, about 0.1 percent, hold it over at least 5 percent of the canvas, and every one uses it as a highlight rather than a shadow or mid-tone [10]. The earliest is a Chinese winter scene from about 960 [10]. Seurat's *The Circus (Study)* of 1891 is one of the matches [10]. These are photographs of varnished paintings, so the colors are as photographed. In printed books, the phrase *light yellow* climbs through the nineteenth century and peaks about 1913 [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; a descriptive phrase (light + yellow), fixed on the web by the X11 and CSS color lists",
+   "first_recorded": "ISCC-NBS 1955; X11/CSS",
+   "source": "ColorHub library; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "LightYellow (CSS)"
+  ],
+  "siblings": [
+   "primrose-yellow",
+   "lemon-yellow",
+   "cream"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "lemon-yellow",
+    "gloss": "a stronger yellow, not a pale one"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#FFFFE0",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 28,
+  "role": {
+   "highlight": 1.0
+  },
+  "ngram": {
+   "peak": 1913
+  },
+  "measured": {
+   "contrast_white": 1.02,
+   "iscc_nearest": "yellowish white",
+   "iscc_de": 7.6
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"LightYellow\", \"cowslip\", \"wheat\", \"buff\", \"palew\", \"ivory yellow\", \"BlanchedAlmond\", \"barium chromate\", \"lead chromes\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"chrome yellow\", p. 112",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, citing Salter (1869), \"Thwaites' yellow\", p. 375",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, citing Salter (1869), \"di palito\", p. 153",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library and graph node (data/graph/nodes-l.json): ISCC-NBS 1955, CSS, xkcd 2010, CIEDE2000 distance, WCAG contrast",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 22",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, pp. 22, 32",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 220",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); Google Books Ngram, case-insensitive, 5-year smoothed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which web color list gives light yellow the value #FFFFE0?",
+   "choices": [
+    "X11 / CSS",
+    "Pantone",
+    "RAL",
+    "Crayola"
+   ],
+   "answer": "X11 / CSS",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the paintings in the ColorHub archive that hold this light yellow use it mostly as a highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "On a white page, the web's Light Yellow has a contrast ratio of just 1.02.",
+  "Nankin yellow was the fashionable pale yellow of the 1740s to the 1770s."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 471
+}

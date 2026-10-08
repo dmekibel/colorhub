@@ -17,7 +17,7 @@
   {
    "id": "law",
    "title": "Cloth for carters",
-   "body": "The best-known law is an English statute of 1363, in the thirty-seventh year of Edward III [1]. After dealing with lords, knights, clergy and merchants, it turned to carters, ploughmen, oxherds, cowherds, shepherds, threshers and everyone else with less than forty shillings in goods, and allowed them nothing but blanket and russet at twelvepence [1]. It was one case of a wider habit: from the mid-twelfth century, European sumptuary laws tied color to rank, confining dull earthy russet to the poorest rural people and leaving saturated [[scarlet]] to a select few [2]. St Clair reads the same pattern in dress at large: bright, colorfast dyes were costly, so brown was left to the poor [3].\n\nQuality was another matter. Surviving records from the cloth market at Blackwell show a great deal of defective material, and Kentish russets, with 25 entries, were ranked behind only Gloucester whites (50) and Wiltshire goods (41) for poor workmanship [1]. On 13 April 1562 three Kent clothiers were fined for inferior russets, and one of them, William Watts, had been fined for the same fault the previous November [1]."
+   "body": "The best-known law is an English statute of 1363, in the thirty-seventh year of Edward III [1]. After dealing with lords, knights, clergy and merchants, it turned to carters, ploughmen, oxherds, cowherds, shepherds, threshers and everyone else with less than forty shillings in goods, and allowed them nothing but blanket and russet at twelvepence [1]. It was one case of a wider habit: from the mid-twelfth century, European sumptuary laws tied color to rank, confining dull earthy russet to the poorest rural people and leaving saturated [[scarlet]] to a select few [2]. St Clair reads the same pattern in dress at large: bright, colorfast dyes were costly, so brown was left to the poor [3].\n\nQuality was another matter. Surviving records from the cloth market at Blackwell show a great deal of defective material, and Kentish russets, with 25 entries, were ranked behind only Gloucester whites (50) and Wiltshire goods (41) for poor workmanship [1]. On 13 April 1562 three people from Tonbridge and Benenden were fined for inferior russets, and one of them, William Watts, had been fined for the same fault the previous November [1]."
   },
   {
    "id": "honesty",
@@ -277,14 +277,12 @@
   "In medieval art Judas gained red hair after the year 1000, and the russet word carried the stain."
  ],
  "checked": {
-  "by": "claude-sonnet-5-5 batch 32",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Pastoureau's roux and St Clair's cloth russet are different strands; link between them is our interpretation",
-   "Etymology not given in the books; omitted",
-   "Orange emergence: Pastoureau uncertain"
+   "Removed unsupported 'Kent clothiers' (source names only three people from Tonbridge and Benenden)"
   ]
  },
  "status": "checked",
- "words": 1428
+ "words": 1431
 }

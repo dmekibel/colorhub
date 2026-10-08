@@ -1,0 +1,272 @@
+{
+ "slug": "brunswick-green",
+ "name": "Brunswick Green",
+ "hex": "#1B4D3E",
+ "names": [
+  "Brunswick Green"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Brunswick green is a dark bluish green named for the German city of Braunschweig, where two brothers began selling a copper pigment in the 1760s; by the twentieth century the name meant a cheap mixed green, and then simply a color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark green with a changing recipe",
+   "body": "Brunswick green is a dark, slightly bluish green. Paterson defines it as a bluish-green and a green pigment, and sends the reader on to [[emerald-green]] and chrome green [1]. The swatch here is a modern screen value that falls in the ISCC-NBS block called \"dark green\" (block 146, 2.8 units from the block's reference color) [16]. It is not a measurement of any old paint.\n\nThat caution matters more here than for most colors, because as a pigment Brunswick green never settled into one recipe [3]. The Pigment Compendium concludes that it turned from a specific pigment into a color term: comparable shades made in different ways were sold under the same name [3]. Its own index makes the same point, since a reader who looks up a loose term such as \"Brunswick green\" has to be guided to the several compounds behind it [13]."
+  },
+  {
+   "id": "discovery",
+   "title": "Two brothers in Braunschweig",
+   "body": "The name comes from Braunschweig, called Brunswick in English, the German city where the pigment was first prepared [3]. The makers were the brothers Johann Heinrich Gravenhorst (1719-81) and Christoph Julius Gravenhorst (1731-84), both born and died in the city [3]. Johann Heinrich tried several trades before founding a chemical factory there in 1759, and the brothers were the first in Germany to make sal ammoniac (ammonium chloride) and Glauber's salt [3].\n\nAccording to Krünitz's encyclopedia of 1789, they discovered the pigment in 1764 and published information about it in 1767, after production had begun [3]. The original method was plain: copper filings were covered with a solution of sal ammoniac and left in a closed container, and the solid that formed was washed and dried [3]. Scott reconstructed the recipe in 2002 and found that it makes atacamite, a copper chloride hydroxide, though he suspected an ammonium copper chloride might also form [3].\n\nKrünitz adds that the Gravenhorsts sold two sorts, an ordinary one and a purified one that resembled distilled verdigris, as a dry powder or a liquid [3]."
+  },
+  {
+   "id": "recipes",
+   "title": "One name, many recipes",
+   "body": "The name drifted early. Terry, writing in 1893, still described the pigment as essentially a basic copper chloride and listed seven distinct ways to make it [3]. He then set apart the \"modern\" Brunswick greens, sold in many shades: a white base, usually barytes (barium sulfate) but sometimes gypsum or lead sulfate, tinted with Prussian blue and chrome yellow [3]. Such greens were also sold as chrome greens, Prussian greens and Victoria greens [3].\n\nOther writers used the name differently. In 1906 Zerr and Rübencamp said the term was then applied to Bremen blue, and wrongly to emerald green [3]. They also gave a recipe using copper sulfate, tartaric acid and arsenic, and noted that a mixture of copper arsenite, copper hydroxide and calcium sulfate went by the name [3]. Heaton, in 1928, described it as a \"reduced\" chrome green, chrome yellow and Prussian blue spread over a large proportion of barytes, and he used the plural, which implies several grades [3].\n\nBooks disagree, then, on what Brunswick green is: a copper chloride (Krünitz, Terry), a copper arsenic compound (Zerr and Rübencamp), or a chrome yellow and Prussian blue mix (Heaton) [3]. For a color word, that is the honest answer. Paterson's dictionary lists Brunswick black and Brunswick blue beside it, and Heaton called Brunswick blue a reduced [[prussian-blue]] [1][3]."
+  },
+  {
+   "id": "family",
+   "title": "Chrome, royal and Victoria green",
+   "body": "By the nineteenth century Brunswick green sat in a crowded family of mixed greens [2][3]. Paterson's entry for chrome green, a permanent yellowish green made by mixing chrome yellow with Prussian blue, lists Brunswick green among its many names, with cinnabar green, Milori green and zinc green [2][6]. Heaton gave royal green the same composition as Brunswick green [4], and Victoria green too [5]. The Compendium also records acetate green as a term apparently tied to Brunswick and chrome greens [8], and treats Neuwied green as closely related to Brunswick green and [[imperial-green]] [14].\n\nThe mix was awkward to make. Salter wrote in 1869 that in Brunswick green the Prussian blue would be destroyed by lead chromate, and that it was better combined with barium or bismuth chromate [7]. That advice shows makers were still adjusting the recipe a century after the Gravenhorsts [7]. The closest named neighbors in our color list today are [[hunter-green]], [[bottle-green]] and [[dark-green]] [16]."
+  },
+  {
+   "id": "arsenic",
+   "title": "Arsenic, and where the name misleads",
+   "body": "Some sources use the name for the arsenic greens, which makes it easy to blame Brunswick green for poisonings it may not have caused [9][10]. St Clair groups it with Scheele's green, Paul Veronese green, [[emerald-green]] and Schweinfurt green, the copper arsenite pigments that killed many people who papered rooms, dressed children and wrapped food in them [10]. The Compendium, by contrast, calls the use of the Brunswick name for Scheele's green erroneous [9]. Paterson records that in the 1860s these arsenic greens were thought to have caused a number of deaths through arsenic fumes [11].\n\nThe safe statement is narrower. The original Gravenhorst pigment, if Scott's reconstruction is right, was a copper chloride and held no arsenic [3]. Some later products sold under the name did contain arsenic [3]. Which kind a given old tin held cannot be told from the label alone."
+  },
+  {
+   "id": "paintbox",
+   "title": "In the paint box",
+   "body": "In *Chroma*, the filmmaker Derek Jarman recalls Brunswick green among the cheap oil paint tins he used, and says that cost dictated the colors in his paintings [12]. It is a useful picture of what the name had become by the twentieth century: a staple of the cheapest tin, not a rare pigment with a maker's name attached."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 44 works [15]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [15]. The strongest case is Gauguin's [[painting:cma-149410|In the Waves]] (1889), where the match covers 58 per cent of the canvas [15]. Gauguin and Munch each have 3 of their 50 works here, a rate about 32 times the baseline; with n=3 that is a hint, not a result [15].\n\nThe color is a latecomer. It appears in 24 of 8,345 paintings from the 1800s and 13 of 1,674 from the 1900s, about four times the rate the same museums' collections would predict, with the peak in the 1910s [15]. Inside a painting it most often plays a shadow, in 59 per cent of the matches [15]. Paintings that hold this dark green also tend to hold [[hunter-green]] more than chance (lift 9.4, n=37) [15].\n\nThe earliest match is Botticelli's *Judith with the Head of Holofernes*, dated 1497 [15]. That is 267 years before the name's earliest record in our sources, so it is a dark green that happens to look alike, not Brunswick green [15][3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the German city of Braunschweig (Brunswick), where the Gravenhorst brothers first made it",
+   "first_recorded": "1764 (discovery) and 1767 (published), per Krünitz 1789 as reported in the Pigment Compendium",
+   "source": "Pigment Compendium, \"Brunswick green\", p. 77"
+  },
+  "aka": [
+   "Braunschweig green"
+  ],
+  "siblings": [
+   "emerald-green",
+   "viridian",
+   "hunter-green",
+   "bottle-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "bremen-blue",
+    "gloss": "Zerr and Rübencamp (1906) say the Brunswick green name was then applied to Bremen blue, a copper blue"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#1B4D3E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 44,
+  "top_paintings": [
+   "cma-149410",
+   "commons-Q110278110",
+   "rijks-200109799",
+   "smk-KMS1536"
+  ],
+  "painters": [
+   "paul-gauguin",
+   "edvard-munch"
+  ],
+  "role": {
+   "shadow": 0.59,
+   "mid": 0.34,
+   "highlight": 0.07
+  },
+  "company": [
+   "hunter-green"
+  ],
+  "measured": {
+   "iscc": [
+    "dark green",
+    146,
+    2.8
+   ],
+   "lch": [
+    29.1,
+    21.3,
+    169.3
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 81 (\"Brunswick black\", \"Brunswick blue\", \"Brunswick green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 101 (\"chrome green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Brunswick blue\" and \"Brunswick green\", p. 77",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Royal green\", p. 340",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Victoria green\", p. 402",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Chrome green\", pp. 110-111",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, bismuth chromate entry, p. 60",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Acetate green\", p. 14",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Scheele's green\", p. 348",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 158 (\"emerald green\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 6",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pigment Compendium, introduction, p. 8",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Neuwied green\", p. 288",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub archive and article_field, 23,781 paintings, CIEDE2000 within 6, at least 5% of canvas, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 146; swatch from a general reference list; nearest names",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Brunswick green come from?",
+   "choices": [
+    "The German city of Braunschweig, home of the makers",
+    "A British naval commander",
+    "A mixing ratio of blue and yellow",
+    "A Scottish dye works"
+   ],
+   "answer": "The German city of Braunschweig, home of the makers",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is it hard to say exactly what Brunswick green is as a pigment?",
+   "choices": [
+    "The name was used for several different compositions over time",
+    "No one ever recorded how it was made",
+    "It was only ever a dye, never a pigment",
+    "It was always the same recipe, but badly named"
+   ],
+   "answer": "The name was used for several different compositions over time",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the original 1764 Brunswick green was made by mixing chrome yellow with Prussian blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Brunswick green began in 1764 as copper filings left in sal ammoniac solution, and by 1928 it could mean chrome yellow and Prussian blue spread over barytes.",
+  "A dark green in a 1497 painting cannot be Brunswick green: the name did not exist for another 267 years.",
+  "Not every Brunswick green held arsenic, but the name was sometimes given to the arsenic greens that did."
+ ],
+ "words": 1128,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Jarman passage: removed 'of his youth' and 'London colourmen' (not in fact card)"
+  ]
+ }
+}

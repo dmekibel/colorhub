@@ -205,13 +205,9 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "batch-51 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Honest medium article: the books give lists, recipes and a few uses, not a long history.",
-   "Gage's Democritus passage is single-source and hedged.",
-   "Swatch drift between Werner and Ridgway stated."
-  ]
+  "issues": []
  },
  "words": 762
 }

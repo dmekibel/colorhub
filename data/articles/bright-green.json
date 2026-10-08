@@ -1,0 +1,229 @@
+{
+ "slug": "bright-green",
+ "name": "Bright Green",
+ "hex": "#01FF07",
+ "names": [
+  "Bright Green"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Bright green is a description, not a historic name: on a screen it means the most intense green the display can show, and the swatch here sits almost exactly on pure screen green.",
+ "sections": [
+  {
+   "id": "swatch",
+   "title": "A screen's green",
+   "body": "The swatch #01FF07 is 0.1 units from pure screen green, #00FF00, in our measurements [1]. Its lightness is about 88 and its chroma about 119, a level of intensity that ISCC-NBS (1955) files as \"vivid yellowish green\" [1]. The nearest name in our teaching set is [[chartreuse]], 5.2 units away [1].\n\nThis exact value goes by many names in our library, within two units of one another: Electric Green, Fluorescent Green, Highlighter Green, Hot Green, Neon Green, Poison Green, Radioactive Green, Harlequin and RAL's Luminous Green [1]. Most describe glow, not pigment. St Clair calls [[lime]] a very bright green, originally the fruit and now usually much more luminous, even neon [2]."
+  },
+  {
+   "id": "paint",
+   "title": "Bright green in paint",
+   "body": "Painters had to build their bright greens. Ball reports that Veronese's bright green, seen in his *Adoration of the Kings* (1573), was mixed from three pigments applied in two layers, and it was so much his trademark that the later synthetic emerald green was known in France as *vert Paul Véronèse* [3]. Ball calls emerald green an eighteenth-century pigment, whereas the Pigment Compendium has it in use from about 1830, so the books disagree on the date [3][4]. For [[painter:paolo-veronese|Veronese]], the effect came from layering, not from a single tube [3].\n\nIn Millais's *Ophelia* (1851–2), the bright greens were mixed from Prussian blue and chrome yellow, and the Pre-Raphaelites' critics found such greens \"unripe enough to cause indigestion\" [3].\n\nOlder greens were fragile. Verdigris is bright green or blue when fresh and has always been judged fugitive, and Cennino wrote that it is nice to the eye but does not last [4]. Finlay says Flemish painters locked it in with a preserving varnish, which is why the bright green skirt in van Eyck's *Arnolfini Marriage* (1434) survives [5]. [[gem:malachite|Malachite]] gave a bright green only if it was ground coarsely, since finer powder turned paler [6]."
+  },
+  {
+   "id": "world",
+   "title": "Bright green off the screen",
+   "body": "In 1787 George Washington chose a bright green for the dining room at his plantation house, finding it \"grateful to the eye\" and less likely to fade [5]. Among stones, the bright green grossular garnet called tsavorite, from Kenya's Tsavo National Park, is brighter than [[gem:emerald|emerald]] [7]. The bright green button stones of Zabargad Island in the Red Sea are [[gem:peridot|peridot]] [7].\n\nBright green can also be a trick of reflection. Albers observes that a white ceiling or roof eave near a lawn can look bright green, reflected from the grass [8]. Eckstut adds that the same bright green object looks much darker in low light than in daylight [9].\n\nLatin already had a word for it: *vitreus*, light or bright green [10]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our archive of 23,781 has a color within four units of this swatch covering even one per cent of its canvas [11]. That describes this archive, not painting as a whole, and these are photographs of aged, varnished paintings [11]. Veronese's mixed bright green is a different thing from this swatch, and the archive shows how far apart screen green and painted green sit [11][3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "English descriptive phrase (bright + green); not a coinage",
+   "first_recorded": "origin undocumented as a name; listed in five modern color lists",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "Electric Green",
+   "Fluorescent Green",
+   "Neon Green",
+   "Luminous Green (RAL 6038)"
+  ],
+  "siblings": [
+   "lime",
+   "chartreuse",
+   "kelly-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "hooker-s-green",
+    "gloss": "a historical bright green mixed from Prussian blue and gamboge"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "vitreus (light or bright green)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#01FF07",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    87.7,
+    119.3,
+    136.2
+   ],
+   "de_to_00FF00": 0.1,
+   "nearest": [
+    [
+     "Chartreuse",
+     5.2
+    ]
+   ]
+  },
+  "near_duplicates": [
+   "Electric Green",
+   "Fluorescent Green",
+   "Highlighter Green",
+   "Hot Green",
+   "Neon Green",
+   "Poison Green",
+   "Radioactive Green",
+   "Harlequin",
+   "Luminous Green"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library: xkcd, ISCC-NBS 1955 blocks 139, 186 and 131, Wikipedia list, Maerz & Paul 1930, RAL 6038; distances computed by ColorHub (CIEDE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary (\"Lime\", \"Hooker's green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14 and ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, \"emerald green\" and \"verdigris\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 16",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"malachite\", p. 65",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 13 and ch. 14",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Albers, Interaction of Color, on surface colors and film colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Eckstut and Eckstut, What Is Color?, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 10",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive and graph field notes, as photographed (n = 23,781; CIEDE2000 within 4, at least 1% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How did Veronese get his famous bright green, according to Ball?",
+   "choices": [
+    "He mixed three pigments and applied them in two layers",
+    "He bought a single green tube pigment",
+    "He ground malachite as finely as possible",
+    "He used a dye on silk"
+   ],
+   "answer": "He mixed three pigments and applied them in two layers",
+   "kind": "pick"
+  },
+  {
+   "q": "Which two pigments, mixed, gave the bright greens in Millais's Ophelia?",
+   "choices": [
+    "Prussian blue and chrome yellow",
+    "Verdigris and lead white",
+    "Indigo and madder",
+    "Ultramarine and vermilion"
+   ],
+   "answer": "Prussian blue and chrome yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our archive, many paintings contain this swatch's bright green over a large part of the canvas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Veronese's bright green was a mixture of three pigments in two layers, so famous that France named a later green after him.",
+  "Our archive of 23,781 paintings holds not one canvas with a patch of this screen-bright green.",
+  "A white eave beside a lawn can look bright green: it is only reflecting the grass."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Emerald green date: Ball 'eighteenth-century' vs Pigment Compendium 'from about 1830'; stated as disagreement.",
+   "Washington dining-room story read from Finlay; the New Room at his plantation house, year 1787 per Finlay.",
+   "Malachite page from the text file page markers (p. 65).",
+   "Swatch is screen green; no claim that Veronese's green matched it.",
+   "Checker re-traced key claims against book text (Coles, Ball, Finlay, Gage); no changes needed."
+  ]
+ },
+ "words": 514
+}

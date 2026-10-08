@@ -1,0 +1,293 @@
+{
+ "slug": "golden-yellow",
+ "name": "Golden Yellow",
+ "hex": "#FFDF00",
+ "names": [
+  "Golden Yellow"
+ ],
+ "tier": "standard",
+ "depth": "long",
+ "lede": "Golden yellow is a descriptive name for a warm, bright yellow, and across the centuries it has been attached to pigments, dyes and chemicals that share little beyond the adjective.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name that describes",
+   "body": "Paterson's dictionary defines golden yellow as a deep orangey-yellow [1]. The idea is much older than the phrase. Latin had *flavus* for the golden yellow of everything that ripens in the sun, in a vocabulary that also separated *croceus*, the saffron yellow that leans orange, from *luteus*, the dull yellow of weld and broom [4][2]. Greek used *chrysos* for golden yellow, beside separate words for ocher, greenish yellow, honey and saffron [5].\n\nThe same idea sits in scientific vocabulary. The prefix *chryso-* means golden or golden yellow, and the old word *aureate* means gold in color [1][3]. Maerz and Paul's dictionary of color (1930) lists *golden yellow* on plate 10, L 7, and our library records 1597 as the date of the name's first English use [19]."
+  },
+  {
+   "id": "ancient",
+   "title": "Golden yellow in the old color schemes",
+   "body": "A text in the Aristotelian corpus, *On Colours*, names only white and golden yellow as primaries and ties them to the elements [8]. Gage notes that the ninth-century Syrian writer Job of Edessa, whose *Book of Treasures* leaned on Greek theory, treated black and white as primary and counted golden-yellow among the intermediate colors [10]. In his Cambridge lectures of 1669 and 1670, Newton set out a scale of the prism that listed lemon yellow and golden yellow, or sun-gold, as separate steps [11].\n\nNone of these writers meant a single paint. The phrase marked a place on a scale, between pale lemon and a darker yellow."
+  },
+  {
+   "id": "pigments",
+   "title": "One name, many materials",
+   "body": "As a pigment name it was never stable. The nineteenth-century color writers Field, in 1835, and Salter, in a later edition of 1869, used *golden yellow* alongside golden sulfur of antimony for an orange antimony pigment whose composition remains unclear [12]. The Colour Index entry for lead iodide, CI 77613, calls it a golden yellow pigment used in mosaic gold [13]. The Pigment Compendium adds that mosaic gold is normally the name of tin(IV) sulfide, a bronze or golden yellow compound that decomposes at 600 degrees Celsius [13]. Painters used mosaic gold as a false gold [6].\n\nBetter-known yellows were described the same way. Naples yellow runs from pale to golden yellow [17], and [[indian-yellow]] gives a deep golden yellow that suits watercolor better than oil [9]. Lead chromates, first made in the early nineteenth century, ranged from golden yellow through orange to red [16]. Watin advised in 1785 that the buckthorn berries for a yellow lake called stil de grain should be chosen for a golden yellow color, which gives a jonquil tint [14]. Among dyes, chrysaniline, a golden-yellow dye, is also called aniline yellow [3].\n\nThe great painters' yellow of the old workshop gets the same adjective. Rubens used lead-tin yellow for the golden-yellow touches of his portrait of himself and his wife, and that pigment was the key yellow from the fifteenth century to the middle of the eighteenth [15]. For other yellows near this one, see [[orpiment]], [[ochre]], [[lemon-yellow]] and [[mustard]]."
+  },
+  {
+   "id": "meaning",
+   "title": "What it stood for",
+   "body": "Pastoureau writes that ripe wheat, grain, fruit, honey and the coats of some sheep and cattle gave golden yellow a favorable symbolism in Egypt, Greece and Rome: light, warmth, happiness, fertility and prosperity [4]. When Van Gogh arrived in the south of France, he wrote to his brother Theo that the sun gave a light he could only call yellow, and the words he reached for included sulfur, lemon and golden [7]. In the United States, since 1893, colleges have used a code of academic colors for their faculties; golden yellow stands for science [18]."
+  },
+  {
+   "id": "swatch",
+   "title": "Three goldens on one name",
+   "body": "The swatch on this page, #FFDF00, comes from a Wikipedia list [19]. The nearest ISCC-NBS category is \"brilliant yellow\", 5.1 units away, and the nearest name in our library is [[gold]], 2.5 units away [19]. But RAL 1004, which carries the name \"golden yellow\" in the industrial list of 1927, is a deeper amber of about #E49E00 on screen, some 32 units from our swatch [19]. The xkcd color survey's version, #FEC615, sits between the two, 16 units from ours [19]. The name stretches from a lemon-leaning gold to an amber, and which you get depends on the list. A screen value for a RAL color is only approximate [19]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Golden yellow at this brightness is nearly absent from painting. In our archive of 23,781 paintings, a painting-wide test finds it in one, and the stricter test that compares colors within each painting finds it in two [20]. That makes it rarer than 82 per cent of the colors we have names for [20]. The count says the color is rare, not why; a clean, bright yellow of this strength is far from the muted yellows of aged oil paint. Like every number here, it comes from photographs of aged, varnished paintings, and a color match is not a pigment test [20]. The contrast with [[amber]], [[yellow]] and [[goldenrod]], which painters and dyers used in quantity, is part of the point: the name is old, the exact color is a screen color."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "gold, the metal: a descriptive name, not a person or place",
+   "first_recorded": "English name dated 1597 in Maerz and Paul (1930); RAL 1004 from 1927",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "aureate",
+   "RAL 1004 golden yellow"
+  ],
+  "siblings": [
+   "gold",
+   "goldenrod",
+   "amber"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "gold",
+    "gloss": "nearest name in our library, 2.5 units away"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "flavus (golden yellow of ripening things)"
+   },
+   {
+    "lang": "grc",
+    "name": "chrysos (golden yellow)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "n_within_painting": 2,
+  "rank_pct_rarer": 82,
+  "measured": {
+   "lch": [
+    88.9,
+    88.8,
+    93.8
+   ],
+   "nearest": [
+    [
+     "Gold",
+     2.5
+    ],
+    [
+     "ISCC-NBS brilliant yellow",
+     5.1
+    ]
+   ]
+  },
+  "alts": {
+   "ral1004": "#E49E00",
+   "xkcd": "#FEC615"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"golden yellow\" (p. 191) and \"aureate\" (p. 37)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"flavous, flavus\" (p. 172)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"chryso-\", \"chrysaniline\" (p. 104)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 8 (\"A Beneficial Color\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 16 (\"The Lessons of the Lexicon\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 28 (\"The Yellow of Painters\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 33 (\"Discretion, Transgression, and Modernity\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 68",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 172",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Antimony orange\", \"Golden sulphur of antimony\", \"Golden yellow\" (pdf pp. 30, 185)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Lead iodide\", \"Mosaic gold\", \"Tin sulfides group\" (pdf pp. 241, 281, 376)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Stil de grain\" (pdf p. 366)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. 34",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 141",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 51",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 13 (\"Associations and Analogies\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "data",
+   "cite": "ColorHub library and graph: Maerz and Paul 1930 (via NBS Circular 553), ISCC-NBS 1955, RAL 1004, xkcd; screen values are approximate",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "data",
+   "cite": "ColorHub archive of 23,781 paintings, as photographed (fieldnotes g)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does RAL 1004 \"golden yellow\" compare with the swatch on this page?",
+   "choices": [
+    "It is a deeper, more orange amber",
+    "It is a paler lemon yellow",
+    "It is greener",
+    "It is identical"
+   ],
+   "answer": "It is a deeper, more orange amber",
+   "kind": "pick"
+  },
+  {
+   "q": "Which Latin word names the golden yellow of everything that ripens in the sun?",
+   "choices": [
+    "flavus",
+    "croceus",
+    "luteus",
+    "vitellus"
+   ],
+   "answer": "flavus",
+   "kind": "pick"
+  },
+  {
+   "q": "Golden yellow has always named one specific pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The name golden yellow has been used for an antimony pigment, a lead compound, a buckthorn lake and a dye, with no single material behind it [12][13][14][3].",
+  "RAL's golden yellow is a deeper amber, about 32 units from the bright yellow swatch usually shown under this name [19]."
+ ],
+ "words": 823,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Clarified garbled Maerz and Paul line: 1597 is the first-use date, the dictionary is 1930",
+   "All other claims verified against Paterson, Ball, Gage, Coles, Jarman, Birren, Clair, Pastoureau"
+  ]
+ }
+}

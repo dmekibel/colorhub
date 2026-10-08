@@ -1,0 +1,230 @@
+{
+ "slug": "greenish-grey",
+ "name": "Greenish Grey",
+ "hex": "#8A8D84",
+ "names": [
+  "Greenish Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Greenish Grey is a grey with a faint green cast, a name from the mineralogists' color charts of the 1790s that Syme fixed as number 15 in his 1821 edition of Werner's *Nomenclature of Colours*.",
+ "sections": [
+  {
+   "id": "lineage",
+   "title": "A mineralogist's grey",
+   "body": "The name comes from the world of mineral identification. Abraham Gottlob Werner published a list of 54 color terms in his 1774 textbook on the external characteristics of minerals, meant to be used with a set of mineral samples [1]. Claudine Picardet's French translation of 1790 added 17 colors to his list [2]. When Patrick Syme issued the 1821 edition, with painted swatches and an animal, a vegetable and a mineral example for each color, he marked greenish grey, his number 15, as coming from the Picardet system rather than from Werner's original list [3][4].\n\nBaty's tables show the term in the charts of the 1790s and after, sitting between smoke grey and yellowish grey, with pearl grey next to it [5]. It was a working word, a way to say that a grey rock or feather leaned toward green."
+  },
+  {
+   "id": "recipe",
+   "title": "Syme's recipe and examples",
+   "body": "Syme gave a recipe for each color. For greenish grey the base is ash grey, tinted with a touch of emerald green and lemon yellow and darkened with a small amount of black [4]. The examples he chose were the wing and quill feathers of the robin, the bark of the ash tree, and the rocks clay slate and wacke [4][3]. Baty's index of birds also places the pied flycatcher under this color [6].\n\nThe neighbors in his chart include [[yellowish-grey]], [[bluish-grey]] and [[pearl-grey]], and the lighter [[greenish-white]] and darker [[greenish-black]] sit on the same white-to-black ladder [5]. The same wording still turns up in mineral description: the Pigment Compendium says albite can be white, grey, greenish-grey or bluish-green [7]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch here is a modern screen value, #8A8D84, close to a neutral: its Munsell notation is N 5.7, and the ISCC-NBS system of 1955 files it under greenish gray, block 112 [8]. Syme's own swatch is an aged, hand-painted sample that can only be approximated on a screen [8]. The xkcd color survey of 2010 has its own greenish grey that is noticeably greener, #96AE8D [8]. Its contrast ratio is 3.37 against white and 6.22 against black [8]. Related colors include [[olive-grey]] and the broader [[grey]] family [8].\n\nGurney points out that a grey is judged by its surroundings. In a painting built on greens, the viewer's idea of neutral shifts a little toward green, so a greenish grey stroke can read as a plain grey while a true grey looks faintly reddish [9]."
+  },
+  {
+   "id": "uniform",
+   "title": "Uniforms and offices",
+   "body": "Pastoureau mentions the greenish gray of German uniforms in the two world wars, *feldgrau*, and says it left fashion designers cold [10]. He ties it to what he calls administrative green: a drab, grayish green that spread through offices, train stations and post offices from the 1900s and that he calls the emblematic color of bureaucracy [10]. By his account it stayed popular until the 1970s [10]. These are descriptions of related drab greens, not measurements of this swatch."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Greenish Grey is common in painting [11]. It appears in 1,049 of 23,781 paintings in our archive, 4.41 per cent, and is more common than 84 per cent of the named colors [11]. It peaks in the 1900s, when 3.9 per cent of the 1,674 paintings we hold from that century have it, 1.6 times the rate of the same museums' baseline [11]. Inside a painting it most often plays a light, in 46 per cent of the 590 paintings where the within-painting lens finds it [11].\n\nThe painter most devoted to it is Eugène Boudin, with the color in 9 of 33 works here, 7.0 times the baseline; Matisse has it in 10 of 50 [11]. It shares canvases with Deep Neutral Grey and Agate Grey more than chance would predict [11]. The earliest dated match is [[painting:cma-145719|a work by Devachandra]] of 1279, and the latest is [[painting:commons-Q27966072|a painting of 1950]] [11]. The 1279 match is 542 years before Syme's name, so it is a look-alike hue in an aged photograph, not evidence of any pigment [11]. Every number here is as photographed."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a grey with a green cast; a mineralogist's descriptive term",
+   "first_recorded": "Picardet's 1790 French edition of Werner; Syme 1821, no. 15",
+   "source": "Baty, Natures Palette, pp. 28-35, 52-58"
+  },
+  "aka": [
+   "greenish-grey",
+   "greenish gray"
+  ],
+  "siblings": [
+   "yellowish-grey",
+   "bluish-grey",
+   "olive-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "feldgrau (the uniform color, a related greenish gray)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1049,
+  "presence_pct": 4.41,
+  "more_common_than_pct_of_names": 84,
+  "peak_century": {
+   "century": 1900,
+   "rate_pct": 3.9,
+   "lift": 1.6
+  },
+  "devoted_painter": {
+   "name": "Eugene Boudin",
+   "works": 9,
+   "of": 33,
+   "lift": 7.0
+  },
+  "role": "light (46%)",
+  "first_seen": {
+   "id": "cma-145719",
+   "year": 1279
+  },
+  "latest": {
+   "id": "commons-Q27966072",
+   "year": 1950
+  },
+  "top_paintings": [
+   "cma-145719",
+   "commons-Q27966072"
+  ],
+  "measured": {
+   "lch": [
+    58.1,
+    5.2,
+    122.7
+   ],
+   "contrast_white": 3.37,
+   "contrast_black": 6.22,
+   "munsell": "N 5.7"
+  },
+  "xkcd_alt": "#96AE8D"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, introduction (Werner, 1774; 54 colours)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, introduction (Picardet, 1790)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, p. 52 (Syme 1821, Greys chart, no. 15)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, pp. 58-59 (Greenish Grey)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, pp. 32-35 (the evolution of key colour standards, 1774-1821)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty, Natures Palette, pp. 129-130 (index of birds)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"albite\", p. 16",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub color data (nodes, ISCC-NBS 1955 block 112, xkcd 2010)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 126",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, ch. 44 (\"Brownish Green: Khaki\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Greenish Grey (23,781 paintings, as photographed)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Syme's recipe for greenish grey start from?",
+   "choices": [
+    "Ash grey",
+    "Pure white",
+    "Prussian blue",
+    "Olive green"
+   ],
+   "answer": "Ash grey",
+   "kind": "pick"
+  },
+  {
+   "q": "Which animal example did Syme give for greenish grey?",
+   "choices": [
+    "The quill feathers of the robin",
+    "A grey squirrel",
+    "The wing of a magpie",
+    "A harbor seal"
+   ],
+   "answer": "The quill feathers of the robin",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a greenish grey stroke can look plain grey inside a painting full of greens.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Look at a robin's wing: 200 years ago Syme chose it as the example of greenish grey.",
+  "Greenish grey was one of the colors Claudine Picardet added when she translated Werner into French in 1790.",
+  "The German army's feldgrau and the 'administrative green' of old post offices are drab greenish greys."
+ ],
+ "words": 683,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No unsupported claims found; verified against fact card and book text; no edits needed"
+  ]
+ }
+}

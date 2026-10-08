@@ -1,0 +1,211 @@
+{
+ "slug": "steel-grey",
+ "name": "Steel Grey",
+ "hex": "#6F828A",
+ "names": [
+  "Steel Grey"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Steel Grey is a mid, faintly bluish grey named for the metal; it was already a stock term in the mineral colour lists that naturalists borrowed around 1800.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark grey, or a mid one",
+   "body": "Paterson's dictionary glosses steel grey as simply a dark grey, and lists steel-black as a variant [1]. The swatch here is lighter than that: a mid, slightly bluish grey, with lightness 53 out of 100 and very little color [7]. The gap between the word and the swatch is the first thing to know about it. The word carries the idea of polished metal, and a flat patch of screen cannot.\n\nThe name is not new to any of the big color dictionaries. Maerz and Paul's 1930 dictionary gives it a first record of 1493, a date we have not checked against an earlier source [7]. Ridgway's 1912 color standards and the 1955 ISCC-NBS tables also carry it, and the nearest ISCC-NBS category is bluish gray [7]."
+  },
+  {
+   "id": "werner",
+   "title": "Werner's grey with a lustre",
+   "body": "As a term of the mineral trade, steel grey sits in Werner's series of greys, as passed on by Jameson in 1804 and by Syme in 1814 [4]. The run goes from lead-grey and bluish-grey through ash-grey to steel-grey, close to the dark end beside greyish-black [2].\n\nSyme shows what the name carried. He described French grey as nearly the steel grey of Werner, but without the lustre [3]. So steel grey was a grey with a metallic sheen, a property that a naturalist could see in a specimen and a chart could only hint at [3]."
+  },
+  {
+   "id": "materials",
+   "title": "In pigments and cloth",
+   "body": "The Pigment Compendium uses the word for a pigment too [5]. Cobalt(III) oxide, made by heating precipitated cobalt hydroxide, is described there as a steel grey to black pigment, although commercial supplies are usually a mixture of two cobalt oxides [5].\n\nIn textiles, a reconstruction shown at Tate Modern in 2018 of Anni Albers's wall covering of 1929 for the Bernau trade union school looked grey-blue like steel, according to Finlay [6]. Both uses treat steel grey as a description of a look, not as a recipe."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six units of Steel Grey covers at least five per cent of the canvas in 441 works, or 1.85 per cent [8]. It is a color of light and mid tones: it plays a highlight role in 41 per cent of those paintings and a middle one in 51 per cent [8].\n\n[[painter:claude-monet|Monet]] leads the painters. Fourteen of his 50 paintings in the archive carry it, 15 times the archive's rate, and Impressionism as a whole has 18 of 140, nearly seven times the average [8]. France supplies 108 of the 441 works [8]. The six paintings where it covers most include [[painter:john-singer-sargent|Sargent]]'s *Jungfrau*, a mountain watercolour of 1870 at 66 per cent, and [[painting:smk-KMS1658|Boys Bathing at Skagen]] by Krøyer, 1899, at 61 per cent [8]. The earliest example is [[painting:nga-9|The Madonna of Humility]] by Masaccio, 1423, at 9 per cent [8].\n\nThe word itself peaks in Google Books around 1808, within a few years of Jameson's 1804 mineral colour terms and Syme's 1814 book, though Ngram data cannot show cause [9]. It stands at 56 per cent of that level in 1800, about 20 per cent in 1840 and 13 per cent in 2000 [9]. As always, these are photographs of aged, varnished paintings, and a color match is not a pigment test [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the metal steel",
+   "first_recorded": "1493 per Maerz and Paul (1930), unchecked; in Werner's greys by 1804",
+   "source": "Baty, Nature's Palette, pp. 54, 173; ColorHub library"
+  },
+  "aka": [
+   "steel-black (darker variant, per Paterson)"
+  ],
+  "siblings": [
+   "slate-grey",
+   "blue-grey",
+   "bluish-grey"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "steel-blue",
+    "gloss": "a bluer, more colorful relative; steel grey is almost neutral"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#6F828A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 441,
+  "top_paintings": [
+   "commons-Q20178957",
+   "commons-Q59262160",
+   "smk-KMS1658"
+  ],
+  "painters": [
+   {
+    "key": "Claude Monet",
+    "n": 50,
+    "hits": 14
+   }
+  ],
+  "role": {
+   "highlight": 0.41,
+   "mid": 0.51,
+   "shadow": 0.08
+  },
+  "ngram": {
+   "peak": 1808,
+   "rel_1800": 0.557,
+   "rel_2000": 0.127
+  },
+  "measured": {
+   "lch": [
+    53.1,
+    8.3,
+    232.7
+   ],
+   "nearest": [
+    [
+     "Slate",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"steel grey\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 32-35",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 54",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 173",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"cobalt(III) oxide\", p. 131",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 408",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings (tools/article_field.py), as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which grey did Syme describe as nearly Werner's steel grey, but without the lustre?",
+   "choices": [
+    "French grey",
+    "Pearl grey",
+    "Smoke grey",
+    "Ash grey"
+   ],
+   "answer": "French grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson's dictionary describes steel grey as a pale grey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter has the strongest share of steel-grey paintings in our archive?",
+   "choices": [
+    "Claude Monet",
+    "Rembrandt",
+    "Frans Hals",
+    "Johannes Vermeer"
+   ],
+   "answer": "Claude Monet",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Syme called French grey nearly Werner's steel grey, but without the lustre.",
+  "Fourteen of Monet's 50 paintings in our archive carry a large patch of steel grey.",
+  "Look for steel grey on overcast water and wet slate: a mid grey with a cool, faint blue cast."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 547
+}

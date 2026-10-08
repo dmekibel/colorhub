@@ -22,7 +22,7 @@
   {
    "id": "painters",
    "title": "What painters had to work with",
-   "body": "Ball makes the surprising point that the Renaissance painter's palette was scarcely broader than the medieval one, since mixing pigments was taboo until oil painting made it acceptable [5]. [[vermilion|Vermilion]], scarce and costly in medieval manuscripts, was ubiquitous in Renaissance painting [6]. Titian used orpiment and realgar, the only true orange of the period, which was available in Venice from around 1490 [5]. Alberti wrote his *Della Pittura* in 1435 and advised on placing light colors beside dark ones [5][7].\n\nThe period also thought about color differently. Leonardo ranked six colors, each tied to an element: white to light, yellow to earth, green to water, blue to air, red to fire and black to darkness [8][9]. Pastoureau notes that six basic colors, not three, were the rule in the Middle Ages and the Renaissance, and that blue was then often counted a warm color [10][11]. The long argument over *disegno* against *colore*, drawing against color, ran through the Renaissance and treated color as the lesser art [12]."
+   "body": "Ball makes the surprising point that the Renaissance painter's palette was scarcely broader than the medieval one, since mixing pigments was taboo until oil painting made it acceptable [5]. [[vermilion|Vermilion]], scarce and costly in medieval manuscripts, was ubiquitous in Renaissance painting [6]. Titian used orpiment and realgar, the only true orange of the period, which was available in Venice from around 1490 [5]. Alberti wrote his *Della Pittura* in 1435 and advised painters to model highlight and shadow by adding white and black to a pure pigment, with restraint [5][7].\n\nThe period also thought about color differently. Leonardo ranked six colors, each tied to an element: white to light, yellow to earth, green to water, blue to air, red to fire and black to darkness [8][9]. Pastoureau notes that six basic colors, not three, were the rule in the Middle Ages and the Renaissance, and that blue was then often counted a warm color [10][11]. The long argument over *disegno* against *colore*, drawing against color, ran through the Renaissance and treated color as the lesser art [12]."
   },
   {
    "id": "field",
@@ -211,15 +211,13 @@
   "In Renaissance Florence it cost ten times more to dye cloth scarlet than sky blue, at one dyeshop.",
   "Our 25 paintings tagged Renaissance hold none of this color; it shows up in India and in 1915."
  ],
- "words": 583,
+ "words": 593,
  "status": "checked",
  "checked": {
-  "by": "batch13 writer",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "No source documents the coinage of the name Renaissance; stated as undocumented.",
-   "Birren/Paterson both give Leonardo's six colors; Paterson p.156 pdf-page.",
-   "Pastoureau Blue ch.9 says six basic colors; 'blue warm' is Black ch.9."
+   "Alberti sentence: replaced unsupported 'light beside dark' with Ball's white/black shading advice"
   ]
  }
 }

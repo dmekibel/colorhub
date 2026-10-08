@@ -154,7 +154,7 @@
  "words": 340,
  "status": "checked",
  "checked": {
-  "by": "Claude Sonnet 5.5 (batch 54)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
    "Concordance hits are all the common noun, not a color",

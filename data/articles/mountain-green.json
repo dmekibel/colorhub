@@ -236,9 +236,10 @@
  "words": 871,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
+   "Spot-checked 8 claims against fact card and book text (Pigment Compendium, St Clair, Ball, Baty); all supported, no text changes.",
    "Link between Werner's color and the pigment word Berggrun is not established; stated as undiscussed.",
    "Baty page numbers are the notes' page labels, not verified against printed pages; plate 47 cited by plate.",
    "Swatch vs recipe discrepancy stated."

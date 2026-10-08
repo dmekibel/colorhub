@@ -1,0 +1,145 @@
+{
+ "slug": "blue-blue",
+ "name": "Blue Blue",
+ "hex": "#2242C7",
+ "names": [
+  "Blue Blue"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Blue Blue is a bright, slightly purplish blue that appears on Wikipedia's list of Crayola colors; its origin is otherwise undocumented, and no color book treats it as a named color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with no recorded history",
+   "body": "Blue Blue is a modern color name [2]. Our library files it from Wikipedia's list of Crayola colors, where Wikipedia cites Crayola as the source, and no earlier record turned up [2]. Who coined the name, and when, is undocumented in our sources.\n\nThe color books we read give it no history either. The two words meet by accident in headings and tables, and once on purpose, in a prose poem in Jarman's *Chroma* that calls on a universal Blue Blue as an open door to the soul [1]. That is poetry, not pigment.\n\nTwo other names point here. Denim Blue is filed as a near duplicate, 2.4 units away, and [[persian-blue]], a name with a record back to Ridgway in 1912, is 3.0 units away [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch is #2242C7, a strong, slightly purplish blue [2]. Its Munsell notation is about 7.0 PB 3.5/17.8, and the nearest ISCC-NBS block is called strong purplish blue, 9 units away [2]. The xkcd color survey lists a Blue Blue of its own, a much duller #3B5B92, so the name points at two different swatches [2]. As with every value in the library, the screen color is an approximation."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, none has this color, within four units, covering as much as one per cent of its canvas, as photographed [3]. That describes our archive, not painting as a whole.\n\nThe nearest named colors are [[persian-blue]] at 3.0 units, [[cerulean-blue]] at 5.3, [[cobalt]] at 5.6 and [[egyptian-blue]] at 5.9 [2]. Among gems, a classic blue [[gem:sapphire|sapphire]] sits 6.5 units away, and the glass-bead blue in [[film:three-colours-blue|Three Colours: Blue]] is 5.4 away [2]. For the family this color belongs to, see [[blue]]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "origin undocumented; the color word blue, doubled",
+   "first_recorded": "Wikipedia list of Crayola colors (undated in our data)",
+   "source": "Wikipedia, citing Crayola, via the ColorHub library"
+  },
+  "aka": [
+   "Denim Blue (near duplicate)"
+  ],
+  "siblings": [
+   "persian-blue",
+   "cerulean-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "cobalt",
+    "gloss": "a similar vivid blue (5.6 units away) with a documented pigment history"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#2242C7",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    34.7,
+    81.4,
+    298.2
+   ],
+   "munsell": "7.0PB 3.5/17.8",
+   "nearest": [
+    [
+     "Persian Blue",
+     3.0
+    ],
+    [
+     "Cerulean Blue",
+     5.3
+    ],
+    [
+     "Cobalt",
+     5.6
+    ],
+    [
+     "Egyptian Blue",
+     5.9
+    ]
+   ],
+   "xkcd_alt": "#3B5B92"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 112-113",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/), Wikipedia list of Crayola colors, xkcd 2010, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 4, >= 1% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who coined the name Blue Blue?",
+   "choices": [
+    "Undocumented in our sources",
+    "Crayola, in 1903",
+    "Newton, for his spectrum",
+    "Ridgway, in 1912"
+   ],
+   "answer": "Undocumented in our sources",
+   "kind": "pick"
+  },
+  {
+   "q": "The xkcd survey's Blue Blue is the same screen color as the Crayola-list swatch.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Blue Blue has a name and a swatch but no recorded origin in our sources.",
+  "Its screen color sits within six units of cobalt, cerulean blue and Egyptian blue, and three from Persian Blue."
+ ],
+ "words": 320,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified Jarman Chroma 'universal Blue Blue' passage; no fixes needed"
+  ]
+ }
+}

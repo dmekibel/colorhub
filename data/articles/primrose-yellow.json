@@ -1,0 +1,207 @@
+{
+ "slug": "primrose-yellow",
+ "name": "Primrose Yellow",
+ "hex": "#EBDD99",
+ "names": [
+  "Primrose Yellow"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Primrose yellow is a pale, slightly greenish yellow named for the wild primrose; naturalists fixed it in the early 1800s, and paint makers later gave the same name to several unrelated pale chromate pigments.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower, a canary and a lump of sulphur",
+   "body": "Primrose yellow entered the naturalists' vocabulary through Werner's color nomenclature as English-edited by Patrick Syme [1]. In Syme's 1814 edition it is number 63 in the yellows, and each color is pinned to three examples: the pale canary bird among animals, the wild primrose among plants, and pale-colored sulphur among minerals [1]. Baty credits Syme with introducing the term to naturalists in 1814, along with violet purple, China blue and gallstone yellow [2].\n\nThe same book gives a recipe: gamboge yellow mixed with a little sulphur yellow and a great deal of snow white [1]. That makes the color a tint, a yellow thinned with white, which is why it reads as pale and soft rather than as a strong hue. In the same system, sienna yellow is built from primrose yellow plus a little ochre yellow, so the colors form a chain of small steps [3].\n\nThe name stayed in use. Cleaveland's 1816 mineralogy lists primrose yellow among its eighty colors, between sulphur yellow and wax yellow [4]. Ridgway kept it in his 1912 color standards, which, by Baty's count, took over at least 19 of Syme's terms [5]. Our library has it from three sources: Werner, Ridgway's plate XXX, and ISCC-NBS block 101, and the Maerz and Paul dictionary dates the name to 1629 [6]. That is earlier than Syme, so the English name is older than the naturalists' fixing of it [2][6]. The books we hold do not say who first used it."
+  },
+  {
+   "id": "swatch",
+   "title": "Which primrose is on the screen",
+   "body": "The swatch on this page is the color our library lists for Primrose Yellow, #EBDD99, a light, muted yellow [6]. Ridgway's own plate reads very slightly differently, as a scan of an aged plate, so any screen version is approximate [6]. The nearest named neighbors in our data are soft beiges, which is what a pale yellow with some grey in it turns into [6].\n\nA real primrose petal is a little paler and a little greener than many people expect. The naturalists' example is the wild primrose, *Primula vulgaris*, and Syme's recipe is tuned to it: mostly white, a touch of green-leaning sulphur yellow [1]. If you want to learn the color, look at an old primrose in shade, not at a daffodil."
+  },
+  {
+   "id": "pigment",
+   "title": "The paint called primrose",
+   "body": "Paint makers took the name for pale yellows made from chromates, and the chemistry behind it changes from one source to the next. Ball explains the first route: lead chromate can be made with an admixed lead sulphate, and half and half of the two salts gives a primrose yellow, while a mixture richer in chromate, 65 per cent, is a lemon yellow, and more chromate deepens the tone further [7]. In the Pigment Compendium, chrome primrose and primrose chrome were still current terms in 1928, meaning a very pale tint of lead chromate, or chromate and sulphate of lead [8].\n\nA second meaning appears in the same reference. A Winsor and Newton catalogue of 1896 lists primrose yellow as chromates of zinc and barium, and Heaton in 1928 defines it as zinc chrome [8]. So the same label was applied to a lead pigment and to a zinc pigment, and a painter who bought a tube by the name could not know which one was in it from the name alone [8].\n\nA third meaning is modern. In 1976 Du Pont described a brilliant primrose yellow made from bismuth vanadate, a compound first reported in 1924 and developed into pigments only from the mid-1970s [9]. All three are pale clean yellows, but they are different substances. The color name followed the look, not the chemistry."
+  },
+  {
+   "id": "painted",
+   "title": "Where to look in painting",
+   "body": "Primrose yellow is a light color, and in paintings it works as one. In our archive it plays a light in about 60 per cent of the 277 paintings where it appears inside the picture, judged by lightness rank within each painting, so that varnish cannot fake the result [10]. Painters use it for cloth, sky glow and highlights more than for anything dark.\n\nThe best way to train the eye is to compare it with its neighbors. [[lemon-yellow]] is sharper and more saturated, [[sulphur-yellow]] greener, [[straw]] a little browner, and [[cream]] more white [6]. Primrose sits between them: the yellow you notice only because the white around it is slightly colder."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, the color appears in 472 paintings by area (about 1.98 per cent) and in 277 by the within-painting lens, as photographed [10]. That makes it more common than 76 per cent of the named colors [10]. It peaks in the 1900s, when 27 of the 1,674 paintings we hold from that century carry it, which is 1.6 times the museums' baseline [10].\n\nThe earliest match in the archive is 1305, but the early centuries are thin and the match is a look-alike hue in an aged photograph, not proof of any pigment or dye [10]. Jan Maurits Quinkhard has it in 4 of 40 works here, the highest share of any painter, though no painter stands out against the baseline [10]. In printed English the word *primrose* peaks around 1885, as the Ngram data relative to its peak shows, and this counts the flower and the place names too, not only the color [10]. Every number here is a look-alike count and not a pigment test [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the wild primrose (Primula vulgaris)",
+   "first_recorded": "1629 (Maerz and Paul dictionary); fixed for naturalists by Syme, 1814",
+   "source": "Baty, Nature's Palette, pp. 179, 186-189; library data"
+  },
+  "aka": [
+   "primrose chrome (the pigment)",
+   "chrome primrose"
+  ],
+  "siblings": [
+   "lemon-yellow",
+   "sulphur-yellow",
+   "straw"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "honey-yellow",
+    "gloss": "another Werner-Syme yellow, deeper and warmer than primrose"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 472,
+  "n_within": 277,
+  "pct": 1.98,
+  "percentile_of_names": 76,
+  "peak_century": {
+   "century": 1900,
+   "obs": 27,
+   "n": 1674,
+   "lift": 1.6
+  },
+  "role_light_pct": 60,
+  "ngram": {
+   "word": "primrose",
+   "peak": 1885
+  },
+  "measured": {
+   "lch": [
+    88,
+    36,
+    98
+   ],
+   "nearest": [
+    "Beige"
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 186-189 (Werner/Syme yellows table and recipe)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 179-180",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 201-202 (sienna yellow and ochre yellow recipes)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 34-35 (Cleaveland, 1816, list of 80 colours)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 30 (Ridgway and Syme's terms)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Werner, Ridgway 1912, ISCC-NBS 1955 and Maerz and Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, entries \"chrome primrose\", \"primrose chrome\" and \"primrose yellow\", pp. 111, 321",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"bismuth vanadate\", pp. 60-61",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive and fieldnotes (23,781 paintings, as photographed); Google Books Ngram",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Primrose yellow in Syme's 1814 recipe is mostly which ingredient?",
+   "choices": [
+    "Snow white",
+    "Gamboge yellow",
+    "Sulphur yellow",
+    "Ochre"
+   ],
+   "answer": "Snow white",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: every paint sold as primrose yellow had the same chemical makeup.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which three things did Syme name as examples of the color?",
+   "choices": [
+    "A canary, a wild primrose and pale sulphur",
+    "A lemon, a rose and gold",
+    "A daffodil, honey and brass",
+    "A butterfly, a leaf and quartz"
+   ],
+   "answer": "A canary, a wild primrose and pale sulphur",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Primrose yellow is a recipe: a little gamboge, a touch of sulphur yellow, and mostly snow white.",
+  "Paint called primrose has been lead chromate, zinc and barium chromate, and bismuth vanadate, depending on the decade."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 894
+}
