@@ -254,6 +254,7 @@ function hmHome() {
     title.querySelector("small").textContent = loading ? "Loading…" : `${items.length.toLocaleString()} color${items.length === 1 ? "" : "s"}`;
   }
   async function render(soft) {
+    HONEY_ENDLESS = !!S.hm.endless;
     const g = ++gen, v = hmView(), stage = /^stage:/.test(v.src) ? +v.src.slice(6) : 0, every = HM_EVERY.includes(v.src), set = !stage && !every ? hmSet(v.src) : null;
     if (stage) { if (!CORE_NAMES) { paintTitle(true); await loadCoreNames(); if (!el.isConnected || g !== gen) return; } items = hmStageItems(stage); }
     else if (every) {
@@ -333,6 +334,7 @@ function hmHome() {
         <div class="hm-look-row">${HM_HOME_STYLES.map(id => `<button class="hm-look-chip${v.style === id ? " on" : ""}" data-style="${id}"><i class="hm-look-ic hm-look-${id}"></i><b>${esc((HONEY_STYLES[id] || {}).title || id)}</b></button>`).join("")}</div>
         <div class="cx-sec hm-l18-sec"><b>Zoomed out</b><span>name each family's region</span></div>
         <div class="hm-seg hm-l18-fam" data-l18-fam aria-label="Zoomed out">${[["", "Just colors"], ["1", "Family names"]].map(([k, l]) => `<button class="${!!S.hm.famNames === !!k ? "on" : ""}" data-fam="${k}">${l}</button>`).join("")}</div>
+        <div class="hm-seg hm-l18-fam" aria-label="Map edges">${[["", "One map"], ["1", "Endless"]].map(([k, l]) => `<button class="${!!S.hm.endless === !!k ? "on" : ""}" data-endless="${k}">${l}</button>`).join("")}</div>
         <div class="hm-look-sliders">${HM_FINE_SPECS.map(s => `<label class="hm-tweak-row" data-key="${s.key}"><span>${s.label}</span><input type="range" min="${s.min}" max="${s.max}" step="${s.step}" value="${twVal(s.key)}"><b>${(+twVal(s.key)).toFixed(2)}</b></label>`).join("")}</div>
         <button class="link" data-lab-open>Rate every preset (honeycomb lab) →</button>
       </div>
@@ -384,6 +386,9 @@ function hmHome() {
       });
     });
     // zoomed out: just the colors (default), or family names over each region (L18 H1)
+    sh.querySelectorAll("[data-endless]").forEach(b => b.onclick = () => {
+      applyView("endless", !!b.dataset.endless); sh.querySelectorAll("[data-endless]").forEach(x => x.classList.toggle("on", x === b)); render(true);
+    });
     sh.querySelectorAll("[data-fam]").forEach(b => b.onclick = () => {
       applyView("famNames", !!b.dataset.fam); sh.querySelectorAll("[data-fam]").forEach(x => x.classList.toggle("on", x === b));
       if (ctrl && ctrl.famNames) ctrl.famNames(S.hm.famNames);

@@ -732,7 +732,7 @@ scenario("favs", "taste profile: findings, the painter match and a palette from 
 // ================================================================== MAP (L18: the honeycomb build)
 const L18M = {
   // Home on a big stage, zoomed all the way out
-  async farOut(t, src = "stage:1000") {
+  async farOut(t, src = "every-name") {
     await H.homeReady(t);
     t.ev(`S.hm.src = ${JSON.stringify(src)}; S.hm.filter = "all"; hmHome();`);
     // the old Home crossfades out: wait until only the new one (and its canvas) is left

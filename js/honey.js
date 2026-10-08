@@ -192,10 +192,11 @@ function honeySphere(items) {
   }
   return { pts, globe: true, finite: true, ext: 1 };
 }
+let HONEY_ENDLESS = false;   // L18: the endless mirrored map, opt-in (js/home.js sets it from S.hm.endless)
 const HONEY_MAP_K = { mapWide: 1 / 2.4, mapTall: .63 };
 function honeyLayout(raw, layoutKey) {
   let hs = 2166136261; for (const o of raw) for (let i = 0; i < o.n.length; i++) { hs ^= o.n.charCodeAt(i); hs = Math.imul(hs, 16777619); }
-  const key = `${layoutKey}|${raw.length}|${hs >>> 0}`;
+  const key = `${layoutKey}|${HONEY_ENDLESS ? "e" : "b"}|${raw.length}|${hs >>> 0}`;
   const hit = HONEY_LAYOUTS.get(key); if (hit && hit.raw === raw) return hit;
   const items = raw.map(honeyNorm);
   let lay;
@@ -206,7 +207,17 @@ function honeyLayout(raw, layoutKey) {
   // not just for small sets
   else if (layoutKey === "wheel") lay = Object.assign(honeyWheel(items), { finite: true });
   else if (items.length < HONEY_FINITE) lay = honeyCluster(items);
-  else lay = honeyMap(items, HONEY_MAP_K[layoutKey] || HONEY_MAP_K.mapTall);
+  else {
+    // bounded, the map is one tile shaped like the phone (taller than the endless strip, which mirrored it)
+    lay = honeyMap(items, HONEY_ENDLESS ? HONEY_MAP_K[layoutKey] || HONEY_MAP_K.mapTall : 1.9);
+    // L18 (David: endless mirroring "makes it harder to find the color you need"): by default the map is ONE bounded
+    // world, each color exactly once, centered; panning rubber-bands at the edges and zoom-out fits the whole map.
+    // The old endless tiling stays behind HONEY_ENDLESS (View > Look, off by default).
+    if (!HONEY_ENDLESS) {
+      const one = lay.pts.filter(q => q.y >= 0), cx = one.reduce((t, q) => t + q.x, 0) / one.length, cy = one.reduce((t, q) => t + q.y, 0) / one.length;
+      lay = { pts: one.map(q => ({ it: q.it, x: q.x - cx, y: q.y - cy })), finite: true };
+    }
+  }
   if (lay.finite) { if (!lay.globe) lay.ext = Math.max(.5, ...lay.pts.map(p => Math.hypot(p.x, p.y))); }
   else { const [A, B] = [lay.A, lay.B], det = A[0] * B[1] - B[0] * A[1]; lay.inv = [B[1] / det, -B[0] / det, -A[1] / det, A[0] / det]; lay.per = Math.min(Math.hypot(...A), Math.hypot(...B)); lay.perX = lay.perX || lay.per; lay.perY = lay.perY || lay.per; }
   Object.assign(lay, { key, raw, items });
@@ -322,7 +333,7 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the cell
   // clipping altogether: at that size a slightly smaller circle is indistinguishable and costs nothing.
   const ds = drawn.map(b => b.d).sort((a, c) => a - c), typ = ds[Math.floor(ds.length / 2)] || 8, maxD = ds[ds.length - 1] || 8;
-  const cell = Math.max(4, typ * 1.3), grid = new Map(), key = (i, j) => i * 100003 + j;
+  const cell = Math.max(4, typ * 1.3, maxD * 1.5 / 12), grid = new Map(), key = (i, j) => i * 100003 + j;
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
   const half = gapPx / 2;
   drawn.forEach((b, n) => {
@@ -1146,7 +1157,7 @@ function honeycomb(host, opts = {}) {
       P = [down.P0[0] - dx / k, down.P0[1] - dy / k];
       if (lay.finite) {
         const r = Math.hypot(P[0], P[1]), ext = lay.ext + .6;
-        if (r > ext) { const s = (ext + (r - ext) * .35) / r; P = [P[0] * s, P[1] * s]; }
+        if (r > ext) { const s = Math.min(ext + (r - ext) * .35, ext + 1.5) / r; P = [P[0] * s, P[1] * s]; }   // L18: a soft rubber band with a hard stop
       }
     }
     down.hist.push([now, P[0], P[1]]); while (down.hist.length > 2 && now - down.hist[0][0] > 100) down.hist.shift();
