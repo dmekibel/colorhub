@@ -649,8 +649,15 @@ scenario("pages", "colorPage x3: renders, swatch opens another, Back works", asy
 });
 
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
-  await H.openPage(t, "#/name/pale-aqua");
-  const first = H.title(t);
+  // a name with no story of its own. Stories keep landing (pale-aqua got one in article wave 2, and a missing row then
+  // timed out the whole group), so take the first candidate whose page settles on nearest stories, not a story.
+  let first = null;
+  for (const s of ["pale-aqua", "pale-teal", "dull-aqua", "pale-cyan", "light-aqua", "pale-blue-green"]) {
+    await H.openPage(t, "#/name/" + s);
+    const got = await t.waitFor(() => t.$(".rp-ns-row") ? "rows" : t.$("[data-ar-slot]:not([hidden])") ? "story" : null, 10000, `${s}: its story or its nearest stories`);
+    if (got === "rows") { first = H.title(t); break; }
+  }
+  t.expect(first, "every candidate name has its own story now: pick new ones for this scenario");
   await t.waitFor(".rp-ns-row", 10000, "a nearest-story row on a color with no article of its own");
   const rows = t.$$(".rp-ns-row", t.$("#app"));
   t.expect(rows.length >= 1 && rows.length <= 3, `${rows.length} nearest-story rows`);
