@@ -396,6 +396,26 @@ scenario("pages", "a world twin (In gems) opens its page in one tap, Back return
   await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Fiery Rose", 8000, "Back to return to Fiery Rose");
 });
 
+scenario("pages", "hold the cover: the flower rises, dragging lights a hex, letting go opens that color; Back returns", async t => {
+  await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
+  const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();
+  const ev = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 7, pointerType: "touch", isPrimary: true, view: t.w });
+  hero.dispatchEvent(ev("pointerdown", r.left + r.width / 2, r.top + r.height / 3));
+  await t.sleep(520);
+  t.expect(t.$(".rp-hold .rp-flower"), "holding the cover did not raise the flower");
+  const hex = t.$$(".rp-hold .rp-hex[data-h]")[0];
+  t.expect(hex, "the flower has no neighbor to walk to");
+  const hr = hex.getBoundingClientRect(), name = hex.dataset.n;
+  hero.dispatchEvent(ev("pointermove", hr.left + hr.width / 2, hr.top + hr.height / 2));
+  await t.sleep(150);
+  t.expect(hex.classList.contains("hot"), "dragging onto a hex did not light it");
+  hero.dispatchEvent(ev("pointerup", hr.left + hr.width / 2, hr.top + hr.height / 2));
+  await t.waitFor(() => !t.$(".rp-hold") && t.$(".cp-page .cp-hero-foot h1") && H.title(t) !== "Fiery Rose", 8000, `letting go on ${name} to open its page`);
+  t.notes.push(`Fiery Rose > ${H.title(t)} (hold-to-walk)`);
+  await H.back(t);
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Fiery Rose", 8000, "Back to return to Fiery Rose");
+});
+
 scenario("pages", "Learn it runs meet > recall from a color page", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
