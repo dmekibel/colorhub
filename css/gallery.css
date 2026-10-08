@@ -140,3 +140,8 @@
 .gl-cov b{font:400 19px/1.2 var(--serif)}
 .gl-cov em{font:400 14px/1.35 var(--sans);font-style:normal;color:var(--soft)}
 .gl-cov-go{flex:none;min-height:44px;padding:0 16px;border-radius:var(--r-pill,22px);border:1px solid var(--ink);background:transparent;color:var(--ink);font:italic 400 17px/1 var(--serif)}
+/* "Similar paintings, on the map" (js/paintmap.js): one quiet row under "More like this" */
+.gl-pmap{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;margin:18px 0 4px;padding:0 4px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);text-align:left;color:var(--ink)}
+.gl-pmap span{flex:1;font:400 18px/1.2 var(--serif)}
+.gl-pmap svg:first-child{color:var(--soft)}
+.gl-pmap svg:last-child{color:var(--faint)}

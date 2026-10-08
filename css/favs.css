@@ -293,3 +293,64 @@ html:has(#app > .screen.fv-run){--ground:#5F5F5F;--lift:#676767;--lift-2:#6E6E6E
 /* craft pass 2026-10-08: a narrow segment keeps its label on one line ("Warm 1" wrapped to two) */
 .fp-split i{min-width:max-content}
 .fp-split b{white-space:nowrap}
+
+/* ---------- one shelf, by kind (js/favs.js §5): chips, then each kind in its own layout ---------- */
+.fv-cats,.fv-doors{display:flex;gap:8px;overflow-x:auto;margin:16px calc(-1 * var(--g)) 0;padding:0 var(--g);scrollbar-width:none}
+.fv-cats::-webkit-scrollbar,.fv-doors::-webkit-scrollbar{display:none}
+.fv-cats button,.fv-doors button{flex:none;display:flex;align-items:baseline;gap:7px;height:40px;padding:0 16px;border-radius:var(--r-pill);background:var(--surface-2);color:var(--soft);
+  font:400 17px/40px var(--serif);transition:background .2s,color .2s,transform .2s var(--spring)}
+.fv-cats button em,.fv-doors button em{font:500 12px/1 var(--mono);font-style:normal;color:var(--faint);font-variant-numeric:tabular-nums}
+.fv-cats button.on{background:var(--paper);color:var(--paper-ink)}
+.fv-cats button.on em{color:var(--paper-soft)}
+.fv-cats button:active,.fv-doors button:active{transform:scale(.95)}
+.fv-doors{margin-top:10px}
+.fv-group{margin-top:26px}
+.fv-group .sec-head{align-items:baseline}
+.fv-seeall{display:flex;align-items:center;gap:2px;min-height:44px;margin:-12px 0;font:italic 400 16px/1 var(--serif);color:var(--soft)}
+.fv-seeall svg{width:15px;height:15px}
+/* colors: a swatch grid, each one named */
+.fv-swgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:10px}
+.fv-swc{aspect-ratio:1.25;display:flex;align-items:flex-end;padding:8px;border-radius:var(--r-1);background:var(--c);text-align:left;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);transition:transform .25s var(--spring)}
+.fv-swc:active{transform:scale(.96)}
+.fv-swc b{font:400 16px/1.05 var(--serif);overflow-wrap:break-word;hyphens:auto}
+[data-ink="dark"].fv-swc{color:#141311}[data-ink="light"].fv-swc{color:#fff}
+/* paintings: pictures in a two-column grid, square and uncropped by frames */
+.fva-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 12px;margin-top:10px}
+.fva-pin{display:flex;flex-direction:column;gap:4px;min-width:0;text-align:left;transition:transform .25s var(--spring)}
+.fva-pin:active{transform:scale(.97)}
+.fva-pin b{margin-top:4px;font:400 17px/1.15 var(--serif);color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.fva-pin small{font-size:14px;line-height:1.3;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fva-im{position:relative;display:block;width:100%;aspect-ratio:1;border-radius:var(--r-1);overflow:hidden;background:var(--c)}
+.fva-im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fva-map{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;margin-top:20px;border-radius:var(--r-pill);background:var(--surface-2);
+  border:1px solid rgba(236,232,223,.14);font:400 18px/1 var(--serif);color:var(--ink)}
+.fva-map svg{width:17px;height:17px}
+/* palettes: strips, named */
+.fv-pals{display:flex;flex-direction:column;gap:14px;margin-top:10px}
+.fv-pal{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:6px 12px;text-align:left}
+.fv-pal-c{grid-column:1/-1;display:flex;height:64px;border-radius:var(--r-1);overflow:hidden}
+.fv-pal-c i{flex:1;background:var(--c)}
+.fv-pal b{font:400 18px/1.2 var(--serif);color:var(--ink)}
+.fv-pal small{font-size:14px;color:var(--soft)}
+/* pages: rows */
+.fv-pages{margin-top:6px}
+.fv-pg{display:flex;align-items:center;gap:14px;width:100%;min-height:60px;border-bottom:1px solid var(--rule);text-align:left}
+.fv-pg i{flex:none;width:36px;height:36px;border-radius:var(--r-1);background:var(--c)}
+.fv-pg b{flex:1;min-width:0;font:400 18px/1.2 var(--serif);color:var(--ink)}
+.fv-pg svg{color:var(--faint)}
+/* You: the kept paintings as a strip of pictures */
+.fva-strip{display:flex;gap:2px;width:100%;height:72px;padding:0;margin:12px 0 0;border:0;border-radius:var(--r-1);overflow:hidden;background:none}
+.fva-strip .fva-im{flex:1;height:100%;aspect-ratio:auto;border-radius:0}
+
+/* ---------- the heart on a painting's page: quiet, under the picture, never over it ---------- */
+.fva-heart{flex:none;width:44px;height:44px;margin-left:auto;display:grid;place-items:center;border-radius:50%;color:var(--soft);transition:color .2s,transform .2s var(--spring)}
+.fva-heart.on{color:#E8787A}
+.fva-heart:active{transform:scale(.88)}
+.fva-heart.pop svg{animation:fvaPop .42s var(--spring)}
+.gl-under .gl-full~.fva-heart{margin-left:0}
+@keyframes fvaPop{0%{transform:scale(.6)}55%{transform:scale(1.22)}100%{transform:scale(1)}}
+/* a long press on the picture: a heart blooms where the thumb is, then goes */
+.fva-bloom{position:absolute;z-index:3;width:84px;height:84px;margin:-42px 0 0 -42px;color:#F2EEE6;pointer-events:none;filter:drop-shadow(0 6px 18px rgba(0,0,0,.45));animation:fvaBloom .85s var(--ease-grow) both}
+.fva-bloom svg{width:100%;height:100%}
+@keyframes fvaBloom{0%{opacity:0;transform:scale(.4)}25%{opacity:.95;transform:scale(1.08)}60%{opacity:.95;transform:scale(1)}100%{opacity:0;transform:scale(1.1)}}
+@media (prefers-reduced-motion:reduce){.fva-bloom,.fva-heart.pop svg{animation-duration:.01s}}

@@ -1306,7 +1306,7 @@ scenario("map", "On the map: a painting page lights its colors on Home; #/map/ga
   const nIn = t.$$(".cs-hl-n input").pop();
   t.expect(nIn && +nIn.max > 6, "a museum painting on the map has no How many slider over its pool");
   nIn.value = 12; nIn.dispatchEvent(new t.w.Event("input", { bubbles: true })); nIn.dispatchEvent(new t.w.Event("change", { bubbles: true }));
-  await t.sleep(200);
+  await t.waitFor(() => { const bs = t.$$(".cs-hl-bar"), bb = bs[bs.length - 1]; return bb && bb.querySelectorAll(".cs-hl-c").length === t.ev("HONEY_HL.hexes.length") && t.ev("HONEY_HL.hexes.length") > 6; }, 4000, "the named chips to follow the How many slider").catch(() => {});
   const bars = t.$$(".cs-hl-bar"), bar = bars[bars.length - 1], lit = t.ev("HONEY_HL.hexes.length"), chips = bar.querySelectorAll(".cs-hl-c").length;
   t.expect(lit > 6 && lit <= 12 && chips === lit, `How many 12 lit ${lit} colors and named ${chips}`);
   t.expect(/%/.test(bar.querySelector(".cs-hl-c").textContent), "the named chips don't say their share of the canvas");
@@ -2001,4 +2001,68 @@ scenario("one-today", "todayPick names a color and the painting that holds it; t
   t.expect(note().includes(e.t), "the Art cover doesn't name today's painting");
   await t.open("#shot=learn", { settle: 600 });
   await t.waitFor(".lr-tc-chip.on", 8000, "the Learn card's color chip on the painting");
+});
+
+// ---- the painting map (js/paintmap.js) and painting favorites (js/favs.js §4–5) ----
+scenario("paintmap", "the map lays out, a tap glides a painting to the middle, the middle one opens, Back lands on it again", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out thousands of paintings");
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect(), c0 = t.w.PM_CTRL.center;
+  t.expect(c0 >= 0, "nothing in the middle");
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2 - 210, { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL.center !== c0, 6000, "a tap above the middle to glide that painting to the middle");
+  const c1 = t.w.PM_CTRL.center;
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 900 });
+  await t.waitFor(() => /#\/gallery\//.test(t.w.location.hash), 10000, "the middle painting to open");
+  t.expect(t.w.location.hash.startsWith("#/gallery/" + c1), `opened ${t.w.location.hash}, not the painting in the middle (${c1})`);
+  await t.waitFor("[data-fva]", 8000, "the heart under the painting");
+  t.expect(!t.$(".gl-hero .sq-key"), "the black-and-white button is still on the painting");
+  await t.click("[data-back]", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 12000, "Back to the map, with the same painting in the middle");
+});
+scenario("paintmap", "arrange by time and painter and around the middle one then filter by century (counts and address follow)", async t => {
+  await t.open("#/paintings/map?arr=color&co=France", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100, 20000, "the map of France");
+  const n = t.w.PM_CTRL.count;
+  for (const k of ["time", "painter"]) {
+    await t.click(".pmx-do", { wait: 300 });
+    await t.waitFor(`.pmx-stem [data-pmdo="${k}"]`, 4000, "the corner's arc");
+    await t.click(`.pmx-stem [data-pmdo="${k}"]`, { force: true, wait: 600 });
+    await t.waitFor(() => t.w.PM_CTRL.spec.arr === k && t.w.PM_CTRL.drawn > 0, 8000, `the ${k} arrangement`);
+    t.expect(t.w.PM_CTRL.count === n, `${k} shows ${t.w.PM_CTRL.count} paintings, not the same ${n}`);
+    t.expect(t.text("[data-pmwhy]").length > 10, `${k}: no line saying what position means`);
+  }
+  const mid = t.w.PM_CTRL.center;
+  await t.click(".pmx-do", { wait: 300 });
+  await t.waitFor('.pmx-stem [data-pmdo="similar"]', 4000, "the corner's arc");
+  await t.click('.pmx-stem [data-pmdo="similar"]', { force: true, wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL.spec.arr === "similar" && t.w.PM_CTRL.center === mid, 8000, "the painting in the middle to stay there as the seed");
+  t.expect(/arr=similar/.test(t.w.location.hash) && /seed=/.test(t.w.location.hash), `the address doesn't carry the arrangement: ${t.w.location.hash}`);
+  await t.click("[data-pmfilter]", { wait: 600 });
+  await t.waitFor(".pmx-sheet [data-pmcent]", 6000, "the filter sheet");
+  const chip = t.$$(".pmx-sheet [data-pmcent]").find(b => !b.disabled && +(b.querySelector("em") || { textContent: "0" }).textContent.replace(/\D/g, "") > 20);
+  t.expect(chip, "no century with paintings");
+  await t.click(chip, { force: true, wait: 400 });
+  const want = +t.text(".pmx-sheet [data-pmn]").replace(/\D/g, "");
+  t.expect(want > 0 && want < n, `a century didn't narrow the count (${want} of ${n})`);
+  await t.click(".pmx-sheet [data-pmgo]", { force: true, wait: 900 });
+  await t.waitFor(() => Math.abs(t.w.PM_CTRL.count - want) <= 1, 8000, "the map to show the filtered paintings");
+  t.expect(/y0=\d+/.test(t.w.location.hash), `the address doesn't carry the years: ${t.w.location.hash}`);
+});
+scenario("favs", "a painting's heart keeps it; the shelf sorts favorites into kinds with counts, remembered", async t => {
+  await t.open("#/gallery/8136", { settle: 800 });
+  await t.waitFor("[data-fva]", 14000, "the heart under the painting");
+  await t.click("[data-fva]", { wait: 400 });
+  t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill");
+  t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "the painting isn't in favorites");
+  t.ev(`S.favs = { "#008080": { n: "Teal", at: today() }, "#4682B4": { n: "Steel blue", at: today() } }; S.fvCat = "all"; save(); favShelf()`);
+  await t.waitFor(".fv-cats [data-fvcat]", 6000, "the kinds on the shelf");
+  const kinds = t.$$(".fv-cats [data-fvcat]").map(b => b.dataset.fvcat).join(",");
+  t.expect(kinds === "all,colors,paintings", `the shelf's kinds are ${kinds}`);
+  t.expect(t.$$(".fv-group").length === 2, "All doesn't show one section per kind");
+  await t.click('.fv-cats [data-fvcat="paintings"]', { wait: 400 });
+  await t.waitFor(".fva-grid .fva-pin", 4000, "the paintings grid");
+  t.expect(t.ev("S.fvCat") === "paintings", "the chosen kind isn't remembered");
+  await t.click(".fva-grid .fva-pin", { wait: 900 });
+  await t.waitFor(() => /#\/gallery\/8136/.test(t.w.location.hash), 10000, "a kept painting to open");
 });
