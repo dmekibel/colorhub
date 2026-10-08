@@ -163,7 +163,7 @@ function compassOf(hex, selfName) {
   const pick = (primary, off, min) => {
     let best = null;
     for (const x of cands) {
-      const p = primary(x); if (p < min || off(x) > p * .7) continue;
+      const p = primary(x); if (p < min || off(x) > p) continue;
       if (!best || x.de < best.de) best = x;
     }
     return best && best.de <= COMPASS_CAP ? best : null;

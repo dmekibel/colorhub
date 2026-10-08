@@ -245,7 +245,8 @@ function rcMeasuredHTML(hex) {
 // blend, not a pigment recipe -- marked approximate throughout, never oversold as "how paint actually mixes."
 // ======================================================================
 function rcMixBest(hex) {
-  const target = lab(hex), pool = EVERY();
+  // never mix a color from itself: ingredients within a hair of the target (the color's own name, usually) sit out
+  const target = lab(hex), pool = EVERY().filter(c => de2000(target, c.lab || (c.lab = lab(c.h))) >= 3);
   let best = null;
   for (let i = 0; i < pool.length; i++) {
     const A = pool[i].lab || (pool[i].lab = lab(pool[i].h));
@@ -298,7 +299,7 @@ function rcMixHTML(hex) {
       <div class="rc-mix-eq">≈</div>
       <div class="rc-mix-target" style="--c:${hex}"></div>
     </div>
-    <p class="rc-mix-note">${esc(recipe)} ${pctMatch(r.d)}.</p>
+    <p class="rc-mix-note">${esc(recipe)}: a ${pctMatch(r.d)}.</p>
     <p class="fine">Approximate: a blend in a perceptual color space (Lab), not a real paint recipe — pigments mix by their own chemistry, which the app doesn't model yet.</p>
   </section>`;
 }
@@ -463,12 +464,8 @@ function rcReachLive(hex) {
 // run draw() once the gallery index is in (loaded only when the section nears the screen)
 function rcLazyGallery(id, draw) {
   const go = () => { if (typeof GAL !== "undefined" && GAL) draw(); else loadGallery().then(draw).catch(() => {}); };
-  setTimeout(() => {
-    const box = document.getElementById(id); if (!box) return;
-    if ((typeof GAL !== "undefined" && GAL) || !("IntersectionObserver" in window)) return go();
-    const io = new IntersectionObserver(es => { if (es[0].isIntersecting) { io.disconnect(); go(); } }, { rootMargin: "600px 0px" });
-    io.observe(box); cleanup.push(() => io.disconnect());
-  }, 0);
+  // once the first screen has settled (the hero fills a viewport); the gallery index is about 1 MB, shared with the paintings row
+  setTimeout(() => { if (document.getElementById(id)) go(); }, 700);
 }
 const rcYearLabel = y => y == null ? "" : y < 0 ? `${-y} BCE` : String(y);
 function rcReachSection(name, hex) {
@@ -480,7 +477,7 @@ function rcReachSection(name, hex) {
     const caveat = `<p class="fine">As photographed: aged, varnished paintings, each cut to a few dozen colors, so a very small vivid touch can be lost. This says what our archive shows, not what paint can do.</p>`;
     if (none) {
       box.innerHTML = `<section class="rc-sec rc-reach rc-reach-none"><p class="rc-reach-head">No painting in our 23,531 reaches this color. It's a modern color.</p>
-        <div class="rc-reach-pair"><div style="--c:${hex}" data-ink="${ink(hex)}"><b>This color</b></div><div style="--c:${ph}" data-ink="${ink(ph)}"><b>The closest any painting gets</b><small>${pctDiff(d)}</small></div></div>${caveat}</section>`;
+        <div class="rc-reach-pair"><div style="--c:${hex}" data-ink="${ink(hex)}"><b>This color</b></div><button style="--c:${ph}" data-ink="${ink(ph)}" data-rc-gi="${pi}"><b>The closest any painting gets</b><small>${pctDiff(d)} · tap to see the painting</small></button></div>${caveat}</section>`;
     } else {
       const few = n <= 3;
       box.innerHTML = `<section class="rc-sec rc-reach"><h3>In the archive</h3>

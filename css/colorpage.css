@@ -99,7 +99,7 @@
 .rc-sec{margin-top:30px}
 .rc-sec h3{font:400 24px/1.15 var(--serif);letter-spacing:-.01em;margin-bottom:10px}
 .rc-sec .kin.rc-plain,.rc-plain{cursor:default}
-.kin.rc-harm{grid-template-columns:30px 1fr}
+.kin.rc-harm{grid-template-columns:30px 1fr;grid-template-rows:auto auto;column-gap:12px;row-gap:2px}.kin.rc-harm i{grid-row:1/3}.kin.rc-harm span{grid-column:2}
 
 /* Harmonies */
 .rc-harm-row{margin-bottom:14px}
@@ -168,8 +168,8 @@
 .rc-reach{margin-top:22px}
 .rc-reach-head{font:400 26px/1.15 var(--serif);letter-spacing:-.01em;text-wrap:balance}
 .rc-reach-pair{display:flex;gap:2px;height:84px;margin:14px 0 8px;border-radius:6px;overflow:hidden}
-.rc-reach-pair>div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;padding:10px 12px;background:var(--c)}
-.rc-reach-pair div[data-ink="dark"]{color:#141311}.rc-reach-pair div[data-ink="light"]{color:#fff}
+.rc-reach-pair>div,.rc-reach-pair>button{flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;padding:10px 12px;background:var(--c)}
+.rc-reach-pair [data-ink="dark"]{color:#141311}.rc-reach-pair [data-ink="light"]{color:#fff}
 .rc-reach-pair b{font:400 17px/1.1 var(--serif)}.rc-reach-pair small{font-size:12px;opacity:.85}
 .rc-reach-blocks{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;align-items:start}
 .rc-reach-pin .gl-pin{width:100%}
@@ -180,7 +180,7 @@
 .rc-cell i{grid-row:1/4;width:30px;height:30px;border-radius:50%;background:var(--c)}
 .rc-cell small{font-size:11px;color:var(--soft);text-transform:uppercase;letter-spacing:.06em}
 .rc-cell b{font:400 17px/1.1 var(--serif)}.rc-cell span{font-size:12px;color:var(--soft);grid-column:2}
-.rc-cell-empty{display:block;opacity:.7}
+.rc-cell-empty{display:block;opacity:.7}.rc-cell-empty small{display:block;margin-bottom:4px}
 .rc-crowd{margin-top:12px;font:italic 400 18px/1.3 var(--serif)}
 .rc-passport{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .rc-stamp{display:inline-flex;flex-direction:column;align-items:center;padding:6px 12px;border:1.5px dashed var(--soft);border-radius:8px;transform:rotate(-1.5deg)}
