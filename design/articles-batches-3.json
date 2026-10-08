@@ -1,0 +1,1468 @@
+[
+{
+"tier": "short",
+"colors": [
+{
+"slug": "baby-purple",
+"name": "Baby Purple",
+"hex": "#CA9BF7",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "iris-purple",
+"name": "Iris purple",
+"hex": "#AC1DB8",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "deep-magenta",
+"name": "Deep magenta",
+"hex": "#A00498",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "bright-aqua",
+"name": "Bright Aqua",
+"hex": "#0BF9EA",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "bright-lavender",
+"name": "Bright Lavender",
+"hex": "#C760FF",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "bright-lilac",
+"name": "Bright Lilac",
+"hex": "#D891EF",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "bright-olive",
+"name": "Bright Olive",
+"hex": "#9CBB04",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "bright-teal",
+"name": "Bright Teal",
+"hex": "#01F9C6",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "camo-green",
+"name": "Camo Green",
+"hex": "#526525",
+"tier": "standard-system",
+"src": []
+},
+{
+"slug": "celery",
+"name": "Celery",
+"hex": "#C1FD95",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "dark",
+"name": "Dark",
+"hex": "#1B2431",
+"tier": "standard-system",
+"src": [
+"dark"
+]
+},
+{
+"slug": "dark-aqua",
+"name": "Dark Aqua",
+"hex": "#05696B",
+"tier": "descriptive-modifier",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "pale-butter",
+"name": "Pale butter",
+"hex": "#FFF39A",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "dark-lavender",
+"name": "Dark Lavender",
+"hex": "#9A89A0",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-lilac",
+"name": "Dark Lilac",
+"hex": "#9C6DA5",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-lime",
+"name": "Dark Lime",
+"hex": "#84B701",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-mustard",
+"name": "Dark Mustard",
+"hex": "#A88905",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-peach",
+"name": "Dark Peach",
+"hex": "#DE7E5D",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-periwinkle",
+"name": "Dark Periwinkle",
+"hex": "#665FD1",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-sage",
+"name": "Dark Sage",
+"hex": "#598556",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-seafoam",
+"name": "Dark Seafoam",
+"hex": "#1FB57A",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-tan",
+"name": "Dark Tan",
+"hex": "#AF884A",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-taupe",
+"name": "Dark Taupe",
+"hex": "#7F684E",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-teal",
+"name": "Dark Teal",
+"hex": "#014D4E",
+"tier": "descriptive-modifier",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "darkish-red",
+"name": "Darkish Red",
+"hex": "#A90308",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "deep-lavender",
+"name": "Deep Lavender",
+"hex": "#8D5EB7",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "deep-lilac",
+"name": "Deep Lilac",
+"hex": "#966EBD",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "harbor-blue",
+"name": "Harbor blue",
+"hex": "#3F829D",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "moss-olive",
+"name": "Moss olive",
+"hex": "#667E2C",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "dusky-plum",
+"name": "Dusky plum",
+"hex": "#734A65",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dull-teal",
+"name": "Dull Teal",
+"hex": "#5F9E8F",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusky-blue",
+"name": "Dusky Blue",
+"hex": "#35405E",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusty-lavender",
+"name": "Dusty Lavender",
+"hex": "#AC86A8",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusty-purple",
+"name": "Dusty Purple",
+"hex": "#825F87",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusty-rose",
+"name": "Dusty Rose",
+"hex": "#C0737A",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusty-teal",
+"name": "Dusty Teal",
+"hex": "#4C9085",
+"tier": "descriptive-modifier",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "easter-purple",
+"name": "Easter Purple",
+"hex": "#C071FE",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "faded-pink",
+"name": "Faded Pink",
+"hex": "#DE9DAC",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "flat-green",
+"name": "Flat Green",
+"hex": "#699D4C",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "grape-purple",
+"name": "Grape Purple",
+"hex": "#5D1451",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "greenish-cyan",
+"name": "Greenish Cyan",
+"hex": "#2AFEB7",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "greyish-teal",
+"name": "Greyish Teal",
+"hex": "#719F91",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "hospital-green",
+"name": "Hospital Green",
+"hex": "#9BE5AA",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "key-lime",
+"name": "Key Lime",
+"hex": "#E8F48C",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "kiwi-green",
+"name": "Kiwi Green",
+"hex": "#8EE53F",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "lavender-pink",
+"name": "Lavender Pink",
+"hex": "#DD85D7",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "light-khaki",
+"name": "Light Khaki",
+"hex": "#E6F2A2",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-orchid",
+"name": "Light orchid",
+"hex": "#EFC0FE",
+"tier": "descriptive-modifier",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "light-lime",
+"name": "Light Lime",
+"hex": "#AEFD6C",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-mint",
+"name": "Light Mint",
+"hex": "#B6FFBB",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-periwinkle",
+"name": "Light Periwinkle",
+"hex": "#C5CBE1",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-plum",
+"name": "Light Plum",
+"hex": "#9D5783",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-sage",
+"name": "Light Sage",
+"hex": "#BCECAC",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-seafoam",
+"name": "Light Seafoam",
+"hex": "#A0FEBF",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-teal",
+"name": "Light Teal",
+"hex": "#90E4C1",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "lighter-green",
+"name": "Lighter Green",
+"hex": "#75FD63",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "lightish-blue",
+"name": "Lightish Blue",
+"hex": "#3D7AFD",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "lightish-red",
+"name": "Lightish Red",
+"hex": "#FE2F4A",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "vivid-lilac",
+"name": "Vivid lilac",
+"hex": "#C48EFD",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "merlot",
+"name": "Merlot",
+"hex": "#730039",
+"tier": "nature",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "midnight-purple",
+"name": "Midnight Purple",
+"hex": "#280137",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "military-green",
+"name": "Military Green",
+"hex": "#667C3E",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "milk-chocolate",
+"name": "Milk Chocolate",
+"hex": "#7F4E1E",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "minty-green",
+"name": "Minty Green",
+"hex": "#0BF77D",
+"tier": "standard-system",
+"src": []
+},
+{
+"slug": "mud-green",
+"name": "Mud Green",
+"hex": "#606602",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "muddy-brown",
+"name": "Muddy Brown",
+"hex": "#886806",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "muddy-green",
+"name": "Muddy Green",
+"hex": "#657432",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "mustard-green",
+"name": "Mustard Green",
+"hex": "#A8B504",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "navy-green",
+"name": "Navy Green",
+"hex": "#35530A",
+"tier": "place-institution",
+"src": []
+},
+{
+"slug": "neon-blue",
+"name": "Neon Blue",
+"hex": "#4666FF",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-aqua",
+"name": "Pale Aqua",
+"hex": "#BED3E5",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-magenta",
+"name": "Pale Magenta",
+"hex": "#D767AD",
+"tier": "descriptive-modifier",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "pale-teal",
+"name": "Pale Teal",
+"hex": "#82CBB2",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pastel-yellow",
+"name": "Pastel Yellow",
+"hex": "#FDFD96",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pea-soup",
+"name": "Pea Soup",
+"hex": "#929901",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "peachy-pink",
+"name": "Peachy Pink",
+"hex": "#FF9A8A",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "pinkish-tan",
+"name": "Pinkish Tan",
+"hex": "#D99B82",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "sand-brown",
+"name": "Sand Brown",
+"hex": "#CBA560",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "soft-purple",
+"name": "Soft Purple",
+"hex": "#A66FB5",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "stormy-blue",
+"name": "Stormy Blue",
+"hex": "#507B9C",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "deep-terracotta",
+"name": "Deep terracotta",
+"hex": "#CB6843",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "tree-green",
+"name": "Tree Green",
+"hex": "#2A7E19",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "ugly-blue",
+"name": "Ugly Blue",
+"hex": "#31668A",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "orchid-magenta",
+"name": "Orchid magenta",
+"hex": "#A442A0",
+"tier": "nature",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "vibrant-blue",
+"name": "Vibrant Blue",
+"hex": "#0339F8",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "weird-green",
+"name": "Weird Green",
+"hex": "#3AE57F",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "dark-blue-grey",
+"name": "Dark Blue Grey",
+"hex": "#1F3B4D",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-forest-green",
+"name": "Dark Forest Green",
+"hex": "#002D04",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-hot-pink",
+"name": "Dark Hot Pink",
+"hex": "#D90166",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-forest-green",
+"name": "Light Forest Green",
+"hex": "#4F9153",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-light-green",
+"name": "Light Light Green",
+"hex": "#C8FFB0",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "macaroni-and-cheese",
+"name": "Macaroni and Cheese",
+"hex": "#FFBD88",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "blush-white",
+"name": "Blush white",
+"hex": "#FFF4F2",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "darkish-green",
+"name": "Darkish Green",
+"hex": "#287C37",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "lavender-violet",
+"name": "Lavender violet",
+"hex": "#8756E4",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "purply",
+"name": "Purply",
+"hex": "#983FB2",
+"tier": "undocumented",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "purply-pink",
+"name": "Purply Pink",
+"hex": "#F075E6",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "tealish",
+"name": "Tealish",
+"hex": "#24BCA8",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "warm-silver",
+"name": "Warm silver",
+"hex": "#C9C0BB",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-byzantium",
+"name": "Dark Byzantium",
+"hex": "#5D3954",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-sienna",
+"name": "Dark Sienna",
+"hex": "#3C1414",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-chocolate-brown",
+"name": "Dark chocolate brown",
+"hex": "#2C1608",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "deep-cerise",
+"name": "Deep Cerise",
+"hex": "#DA3287",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "deep-saffron",
+"name": "Deep Saffron",
+"hex": "#FF9933",
+"tier": "pigment-mineral-dye",
+"src": []
+},
+{
+"slug": "floral-lavender",
+"name": "Floral lavender",
+"hex": "#B57EDC",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "falu-red",
+"name": "Falu Red",
+"hex": "#801818",
+"tier": "place-institution",
+"src": []
+},
+{
+"slug": "fuzzy-wuzzy",
+"name": "Fuzzy Wuzzy",
+"hex": "#87421F",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "cerulean-sea",
+"name": "Cerulean sea",
+"hex": "#0087BD",
+"tier": "pigment-mineral-dye",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "lagoon-blue",
+"name": "Lagoon blue",
+"hex": "#0093AF",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "majorelle-blue",
+"name": "Majorelle Blue",
+"hex": "#6050DC",
+"tier": "person",
+"src": []
+},
+{
+"slug": "midnight-green",
+"name": "Midnight Green",
+"hex": "#004953",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "persian-indigo",
+"name": "Persian Indigo",
+"hex": "#32127A",
+"tier": "pigment-mineral-dye",
+"src": []
+},
+{
+"slug": "rebecca-purple",
+"name": "Rebecca Purple",
+"hex": "#663399",
+"tier": "person",
+"src": []
+},
+{
+"slug": "rose-taupe",
+"name": "Rose Taupe",
+"hex": "#905D5D",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "smoky-black",
+"name": "Smoky Black",
+"hex": "#100C08",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "deep-royal-blue",
+"name": "Deep royal blue",
+"hex": "#002366",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "amaranth-deep-purple",
+"name": "Amaranth Deep Purple",
+"hex": "#9F2B68",
+"tier": "standard-system",
+"src": []
+},
+{
+"slug": "paolo-veronese-green",
+"name": "Paolo Veronese Green",
+"hex": "#009B7D",
+"tier": "person",
+"src": []
+},
+{
+"slug": "dark-olive-brown",
+"name": "Dark olive brown",
+"hex": "#3C341F",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "vivid-violet",
+"name": "Vivid violet",
+"hex": "#8601AF",
+"tier": "descriptive-modifier",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "black-bean",
+"name": "Black Bean",
+"hex": "#3D0C02",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "generic-viridian",
+"name": "Generic Viridian",
+"hex": "#007F66",
+"tier": "pigment-mineral-dye",
+"src": []
+},
+{
+"slug": "gotham-green",
+"name": "Gotham Green",
+"hex": "#00573F",
+"tier": "place-institution",
+"src": []
+},
+{
+"slug": "june-bud",
+"name": "June Bud",
+"hex": "#BDDA57",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "msu-green",
+"name": "MSU Green",
+"hex": "#18453B",
+"tier": "place-institution",
+"src": []
+},
+{
+"slug": "manatee",
+"name": "Manatee",
+"hex": "#979AAA",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "pink-orchid",
+"name": "Pink orchid",
+"hex": "#D982B5",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "mimi-pink",
+"name": "Mimi Pink",
+"hex": "#FFDAE9",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "morning-blue",
+"name": "Morning Blue",
+"hex": "#8DA399",
+"tier": "standard-system",
+"src": []
+},
+{
+"slug": "mountain-meadow",
+"name": "Mountain Meadow",
+"hex": "#30BA8F",
+"tier": "place-institution",
+"src": []
+},
+{
+"slug": "mystic-maroon",
+"name": "Mystic Maroon",
+"hex": "#AD4379",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "nyanza",
+"name": "Nyanza",
+"hex": "#E9FFDB",
+"tier": "standard-system",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "pearly-purple",
+"name": "Pearly Purple",
+"hex": "#B768A2",
+"tier": "nature",
+"src": []
+},
+{
+"slug": "purple-pizzazz",
+"name": "Purple Pizzazz",
+"hex": "#FE4EDA",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "deep-rose-red",
+"name": "Deep rose red",
+"hex": "#893843",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "spanish-bistre",
+"name": "Spanish Bistre",
+"hex": "#807532",
+"tier": "pigment-mineral-dye",
+"src": []
+},
+{
+"slug": "steel-pink",
+"name": "Steel Pink",
+"hex": "#CC33CC",
+"tier": "pigment-mineral-dye",
+"src": []
+},
+{
+"slug": "weezy-blue",
+"name": "Weezy Blue",
+"hex": "#189BCC",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "xanadu",
+"name": "Xanadu",
+"hex": "#738678",
+"tier": "place-institution",
+"src": []
+},
+{
+"slug": "zinc-grey",
+"name": "Zinc Grey",
+"hex": "#655B55",
+"tier": "pigment-mineral-dye",
+"src": []
+},
+{
+"slug": "zinzolin",
+"name": "Zinzolin",
+"hex": "#6C0277",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "dark-jungle-green",
+"name": "Dark Jungle Green",
+"hex": "#1A2421",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "french-sky-blue",
+"name": "French Sky Blue",
+"hex": "#77B5FE",
+"tier": "place-institution",
+"src": []
+},
+{
+"slug": "seafoam-teal",
+"name": "Seafoam teal",
+"hex": "#8DD9CC",
+"tier": "nature",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "new-york-pink",
+"name": "New York Pink",
+"hex": "#D7837F",
+"tier": "place-institution",
+"src": []
+},
+{
+"slug": "purple-mountain-majesty",
+"name": "Purple Mountain Majesty",
+"hex": "#9678B6",
+"tier": "place-institution",
+"src": []
+},
+{
+"slug": "wild-blue-yonder",
+"name": "Wild Blue Yonder",
+"hex": "#A2ADD0",
+"tier": "place-institution",
+"src": []
+},
+{
+"slug": "toffee",
+"name": "Toffee",
+"hex": "#A36629",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "light-ivory",
+"name": "Light Ivory",
+"hex": "#E6D2B5",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pastel-turquoise",
+"name": "Pastel Turquoise",
+"hex": "#7FB0B2",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pastel-violet",
+"name": "Pastel Violet",
+"hex": "#A38995",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-olive-grey",
+"name": "Dark olive grey",
+"hex": "#444337",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusty-rose-brown",
+"name": "Dusty rose brown",
+"hex": "#8D746F",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-madder-violet",
+"name": "Dark Madder Violet",
+"hex": "#4A4559",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-payne-s-grey",
+"name": "Pale Payne's Grey",
+"hex": "#9FA8AE",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-lilac-grey",
+"name": "Pale lilac grey",
+"hex": "#BFBAC0",
+"tier": "descriptive-modifier",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "blackish-slate",
+"name": "Blackish Slate",
+"hex": "#404C49",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-citrine",
+"name": "Dark Citrine",
+"hex": "#776B39",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusky-green",
+"name": "Dusky Green",
+"hex": "#43594E",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-blue-grey",
+"name": "Light blue grey",
+"hex": "#A4AAB6",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusty-plum",
+"name": "Dusty plum",
+"hex": "#6E5260",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "purplish-lilac",
+"name": "Purplish Lilac",
+"hex": "#C3A1B3",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "yellowish-citrine",
+"name": "Yellowish Citrine",
+"hex": "#AD9E4B",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "yellowish-olive",
+"name": "Yellowish Olive",
+"hex": "#7C764D",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "bluish-grey-green",
+"name": "Bluish Grey-Green",
+"hex": "#779A93",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-sage",
+"name": "Pale sage",
+"hex": "#D6DDCC",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-bluish-grey-green",
+"name": "Dark Bluish Grey-Green",
+"hex": "#3D6769",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-greyish-lavender",
+"name": "Dark Greyish Lavender",
+"hex": "#9694AE",
+"tier": "descriptive-modifier",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "dark-blue-slate",
+"name": "Dark blue slate",
+"hex": "#47545D",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-yvette-violet",
+"name": "Dark Yvette Violet",
+"hex": "#474754",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-blush",
+"name": "Pale blush",
+"hex": "#D0B2A4",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-cinnamon",
+"name": "Light cinnamon",
+"hex": "#D49772",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dark-silver-pink",
+"name": "Dark silver pink",
+"hex": "#BAABA3",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "deep-bluish-grey-green",
+"name": "Deep Bluish Grey-Green",
+"hex": "#64807C",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "deep-chicory-blue",
+"name": "Deep Chicory Blue",
+"hex": "#808BCE",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "deep-greyish-lavender",
+"name": "Deep Greyish Lavender",
+"hex": "#ABA3B4",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "deep-soft-blue-violet",
+"name": "Deep Soft Blue-Violet",
+"hex": "#6766A1",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusky-mauve",
+"name": "Dusky mauve",
+"hex": "#86617B",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-periwinkle",
+"name": "Pale periwinkle",
+"hex": "#CECAF1",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "deep-jade",
+"name": "Deep jade",
+"hex": "#396F5E",
+"tier": "descriptive-modifier",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "faded-rosewood",
+"name": "Faded rosewood",
+"hex": "#86615E",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-green-grey",
+"name": "Pale green grey",
+"hex": "#BECCB5",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-olive-grey",
+"name": "Pale olive grey",
+"hex": "#C7C8AF",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "greenish-hospital-green",
+"name": "Greenish hospital green",
+"hex": "#A6D89C",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "greyish-brownish-olive",
+"name": "Greyish brownish olive",
+"hex": "#5C584A",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-columbia-blue",
+"name": "Light Columbia Blue",
+"hex": "#97ABC0",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "light-mouse-grey",
+"name": "Light Mouse Grey",
+"hex": "#96928A",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-mouse-grey",
+"name": "Pale Mouse Grey",
+"hex": "#A9A49A",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-russian-blue",
+"name": "Pale Russian Blue",
+"hex": "#B5C6CA",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusty-cornflower",
+"name": "Dusty cornflower",
+"hex": "#7E97C0",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusty-violet",
+"name": "Dusty violet",
+"hex": "#8C739A",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "vivid-taupe-brown",
+"name": "Vivid taupe brown",
+"hex": "#554149",
+"tier": "descriptive-modifier",
+"src": []
+}
+]
+},
+{
+"tier": "short",
+"colors": [
+{
+"slug": "dark-spruce",
+"name": "Dark spruce",
+"hex": "#203838",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "dusty-mahogany",
+"name": "Dusty mahogany",
+"hex": "#592B1F",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "wine-brown",
+"name": "Wine brown",
+"hex": "#512C31",
+"tier": "undocumented",
+"src": []
+},
+{
+"slug": "deep-navy",
+"name": "Deep navy",
+"hex": "#191F45",
+"tier": "descriptive-modifier",
+"src": []
+},
+{
+"slug": "pale-black-shade",
+"name": "Pale black shade",
+"hex": "#2B2028",
+"tier": "undocumented",
+"src": []
+}
+]
+}
+]
