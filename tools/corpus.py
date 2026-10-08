@@ -556,8 +556,33 @@ def backdrop_mask(X, h, w, tol=4.5, ring_min=0.8, max_frac=0.5):
     return reach.reshape(-1)
 
 
-def palette_of(path):
-    im = Image.open(path).convert("RGB")
+def crop_to(im, crop):
+    """The painting inside its frame, wall or margin: `crop` = [left, top, right, bottom] in thousandths of the image
+    (tools/crop_paintings.py). A crop that would leave a sliver is ignored."""
+    if not crop:
+        return im
+    W, H = im.size
+    box = (round(crop[0] * W / 1000), round(crop[1] * H / 1000), round(crop[2] * W / 1000), round(crop[3] * H / 1000))
+    return im.crop(box) if box[2] - box[0] >= 20 and box[3] - box[1] >= 8 else im
+
+
+def wanted_crops():
+    """{corpus id: ([l, t, r, b] permille, cf)} for every image the crop detector says to crop (research/_raw/corpus-crops.jsonl,
+    written by tools/crop_paintings.py run). Set COLORHUB_NOCROP=1 to build as before the crops existed."""
+    import os
+    if os.environ.get("COLORHUB_NOCROP"):
+        return {}
+    import crop_paintings as CP
+    out = {}
+    for k, res in CP.load_crops().items():
+        rc = CP.row_crop(res)
+        if rc:
+            out[k] = rc
+    return out
+
+
+def palette_of(path, crop=None):
+    im = crop_to(Image.open(path).convert("RGB"), crop)
     a = np.asarray(im, dtype=np.float64)
     l, t, r, b = autotrim(a)
     h, w = a.shape[:2]
@@ -583,31 +608,31 @@ def palette_of(path):
     Lp, Cp, _ = lch(X)
     return dict(lab=np.round(cent, 2).tolist(), share=np.round(shares, 4).tolist(),
                 L=round(float(Lp.mean()), 2), C=round(float(Cp.mean()), 2),
-                size=[im.width, im.height], trim=[l, t, r, b], bg=round(float(bg.mean()), 3) if bg is not None else 0)
+                size=[im.width, im.height], trim=[l, t, r, b], bg=round(float(bg.mean()), 3) if bg is not None else 0,
+                crop=list(crop) if crop else None)
 
 
 def _palette_job(args):
-    key, path = args
+    key, path, crop, cf = args
     try:
-        return key, palette_of(path), None
+        res = palette_of(path, crop)
+        res["cf"] = cf
+        return key, res, None
     except Exception as e:  # a broken image is reported and skipped
         return key, None, str(e)
 
 
 def run_palettes(workers=6):
-    done = {}
-    if PAL_CACHE.exists():
-        for line in PAL_CACHE.read_text().splitlines():
-            if line.strip():
-                r = json.loads(line)
-                done[r["key"]] = r
+    done = load_palettes()
     jobs = []
+    crops = wanted_crops()
     for src in SRC:
         for x in select(src, load_meta(src)["rows"]):
             key = f"{src}-{x['id']}"
             p = img_path(src, x["id"])
-            if key not in done and p.exists():
-                jobs.append((key, str(p)))
+            want, cf = crops.get(key) or (None, None)   # a changed crop box recomputes the palette; the newest line wins
+            if p.exists() and (key not in done or (done[key].get("crop") or None) != want):
+                jobs.append((key, str(p), want, cf))
     print(f"palettes: {len(done)} cached, {len(jobs)} to compute", flush=True)
     if not jobs:
         return
@@ -626,11 +651,17 @@ def run_palettes(workers=6):
 
 
 def load_palettes():
+    """{key: palette}; the newest line for a key wins. With COLORHUB_NOCROP=1 the lines made with a crop box are skipped, so
+    the corpus reads as it did before tools/crop_paintings.py (for a before/after comparison from one cache)."""
+    import os
+    skip_crops = bool(os.environ.get("COLORHUB_NOCROP"))
     out = {}
     if PAL_CACHE.exists():
         for line in PAL_CACHE.read_text().splitlines():
             if line.strip():
                 r = json.loads(line)
+                if skip_crops and r.get("crop"):
+                    continue
                 out[r["key"]] = r
     return out
 
@@ -844,6 +875,10 @@ def build_rows():
             r["_lab"] = exact
             r["_share"] = np.array(p["share"])
             r["L"], r["C"] = round(p["L"], 1), round(p["C"], 1)
+            if p.get("crop"):   # the palette was measured inside this box (tools/crop_paintings.py): the app draws it too
+                r["crop"] = p["crop"]
+                if p.get("cf"):
+                    r["cf"] = p["cf"]
             rows.append(r)
     merge_artists(rows)
     rows = dedupe(rows)
@@ -1426,15 +1461,19 @@ def write_corpus(out_rows):
     return written
 
 
-def write_outputs(rows, stats, finds, fetched):
+def write_outputs(rows, stats, finds, fetched, write_rows=True):
     out_rows = []
     for r in rows:
         row = dict(id=r["id"], src=r["src"], t=r["t"], a=r["a"], y=r["y"], co=r["co"], mv=r["mv"],
                   img=r["img"], p=r["p"], L=r["L"], C=r["C"])
+        if r.get("crop"):  # [left, top, right, bottom] in thousandths of the image; cf "m" or "l" when not high confidence
+            row["crop"] = r["crop"]
+            if r.get("cf"):
+                row["cf"] = r["cf"]
         if r.get("url"):  # a record's own page (only Commons sets this; other sources use gallery.py's SOURCES rec)
             row["url"] = r["url"]
         out_rows.append(row)
-    files = write_corpus(out_rows)
+    files = write_corpus(out_rows) if write_rows else [f for f in corpus_files() if "sargent" not in f.name]  # write_rows=False: tools/crop_paintings.py stats
     n_src = Counter(r["src"] for r in rows)
     meta = dict(
         sources=[dict(id=s, name=SRC[s]["name"], api=SRC[s]["api"], license=SRC[s]["license"], n=n_src[s],
@@ -1443,7 +1482,7 @@ def write_outputs(rows, stats, finds, fetched):
         files=[str(p.relative_to(ROOT)) for p in files],
         method=[
             "Public-domain paintings with an image from each museum's open API or open data. Manuscript text pages are dropped, one manuscript or album keeps at most %d leaves, near-duplicate images and black-and-white photographs (mean C* under %.1f) are dropped, and one artist keeps at most %d paintings, spread over the artist's dates." % (GROUP_CAP, BW_C, ARTIST_CAP),
-            "Image: a 200px-wide copy (the Art Institute's 200px IIIF image; the other museums' ~400-900px images scaled down), near-uniform border bands trimmed, plus a 2% inset; a flat neutral photo backdrop around shaped panels and lockets is masked out.",
+            "Image: a 200px-wide copy (the Art Institute's 200px IIIF image; the other museums' ~400-900px images scaled down), first cut to the painting inside any frame, wall or margin (tools/crop_paintings.py: straight-edge detection, no model; the box is the row's `crop`), then near-uniform border bands trimmed, plus a 2% inset; a flat neutral photo backdrop around shaped panels and lockets is masked out.",
             "Palette: k-means (k=6) in CIELAB on a ~120px copy, a*/b* weighted 1.5x for clustering only; each color's share is its pixel area.",
             "Names: each palette color gets the nearest of the app's 101 color names by CIEDE2000. Families follow an LCh rule (familyRule).",
             "L and C: mean CIELAB lightness L* (0 black to 100 white) and mean chroma C* (0 grey; higher = more saturated) over every pixel.",
@@ -1457,7 +1496,9 @@ def write_outputs(rows, stats, finds, fetched):
                     mv="movement or school, where stated",
                     img="display image URL (AIC, NGA, Rijksmuseum: IIIF 400px wide; SMK: IIIF 400px, or its fixed 1600px JPEG where it has no IIIF image; the Met: ~450px 'mobile-large' JPEG; CMA: ~900px web JPEG)",
                     p="palette: [hex, area share, nearest app name, family] x up to 6, largest first",
-                    L="mean L*", C="mean C*"),
+                    L="mean L*", C="mean C*",
+                    crop="optional: [left, top, right, bottom] in thousandths of the image, the painting inside its frame, wall or margin; the palette is measured inside it. No crop = the whole image (high confidence)",
+                    cf="optional: 'm' = medium confidence crop, 'l' = low confidence (the frame could not be told apart; crop is the central 70%)"),
     )
     stats = dict(meta=meta, **stats, findings=finds)
     js = ("// ColorHub art-history color statistics. Generated by tools/corpus.py with the painting corpus "

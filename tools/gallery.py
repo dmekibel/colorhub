@@ -36,6 +36,9 @@ Output: data/gallery/ (deleted and rewritten each run)
                4 bytes each (R, G, B, share x 250, the same byte scheme as index.bin's six), already picked by
                extract_pool()'s port of js/studio.js extractPalette (over-cluster in OKLab, then greedy-pick by
                area x vividness x distinctness); "" when the source image isn't cached locally.
+               crop (12th, only when the row has one): [left, top, right, bottom] in thousandths of the image, the painting inside
+               its frame, wall or margin (tools/crop_paintings.py). The pool and the six colors were measured inside it, index.bin's
+               aspect byte is the CROPPED shape, and js/gallery.js draws the image shifted/scaled so only that box shows.
 
 Museums: one row each in SOURCES (name, credit line, record-URL pattern). A record's own `url` wins over the
 pattern. A museum without a row still works (its code is shown) and the script warns.
@@ -209,8 +212,20 @@ class _Rnd:
         return self.s / 2147483647
 
 
-def extract_pool(path, k=POOL):
-    im = Image.open(path).convert("RGB")
+def crop_image(im, crop):
+    """The painting inside its frame, wall or margin: crop = [l, t, r, b] in thousandths (tools/crop_paintings.py), pulled in
+    another 1.5% on every side so a sliver of frame at the cut does not sample as a color."""
+    if not crop:
+        return im
+    W, H = im.size
+    l, t, r, b = (crop[0] / 1000, crop[1] / 1000, crop[2] / 1000, crop[3] / 1000)
+    iw, ih = (r - l) * 0.015, (b - t) * 0.015
+    box = (round((l + iw) * W), round((t + ih) * H), round((r - iw) * W), round((b - ih) * H))
+    return im.crop(box) if box[2] - box[0] >= 20 and box[3] - box[1] >= 8 else im
+
+
+def extract_pool(path, k=POOL, crop=None):
+    im = crop_image(Image.open(path).convert("RGB"), crop)
     w0, h0 = im.size
     sc = min(1.0, POOL_SIDE / max(w0, h0))
     w, h = max(1, round(w0 * sc)), max(1, round(h0 * sc))
@@ -287,9 +302,9 @@ def pack_pool(entries):
 
 
 def _pool_job(args):
-    key, path = args
+    key, path, crop = args
     try:
-        return key, extract_pool(path), None
+        return key, extract_pool(path, crop=crop), None
     except Exception as e:  # a broken or unreadable image is reported and skipped
         return key, None, str(e)
 
@@ -298,19 +313,21 @@ def run_pools(corpus, raw, workers=8):
     """Pool colors per painting (base64, see pack_pool), cached to research/_raw/corpus-pool.jsonl (corpus.py's
     own corpus-palettes.jsonl pattern): resumable, and a re-run only computes paintings new to the corpus."""
     cache = raw / "corpus-pool.jsonl"
-    done = {}
+    done, made_with = {}, {}
     if cache.exists():
         for line in cache.read_text().splitlines():
             if line.strip():
                 r = json.loads(line)
                 done[r["key"]] = r["pl"]
+                made_with[r["key"]] = r.get("crop") or None   # the newest line for a key wins
     jobs, no_img = [], 0
     for x in corpus:
-        if x["id"] in done:
+        crop = x.get("crop") or None   # a painting with a crop box is sampled inside it (tools/crop_paintings.py)
+        if x["id"] in done and made_with.get(x["id"]) == crop:
             continue
         p = img_cache_path(raw, x["src"], x["id"])
         if p.exists():
-            jobs.append((x["id"], str(p)))
+            jobs.append((x["id"], str(p), crop))
         else:
             no_img += 1
     print(f"pools: {len(done)} cached, {len(jobs)} to compute, {no_img} with no cached image", flush=True)
@@ -318,6 +335,7 @@ def run_pools(corpus, raw, workers=8):
         from multiprocessing import Pool
         import time
         t0 = time.time()
+        crop_of = {j[0]: j[2] for j in jobs}
         with Pool(workers) as pool, cache.open("a") as f:
             for i, (key, entries, err) in enumerate(pool.imap_unordered(_pool_job, jobs, chunksize=8)):
                 if err:
@@ -325,7 +343,7 @@ def run_pools(corpus, raw, workers=8):
                     continue
                 pl = pack_pool(entries)
                 done[key] = pl
-                f.write(json.dumps({"key": key, "pl": pl}) + "\n")
+                f.write(json.dumps({"key": key, "pl": pl, "crop": crop_of[key]}) + "\n")
                 if i % 500 == 0:
                     f.flush()
                     print(f"pools {i + 1}/{len(jobs)}  {time.time() - t0:.0f}s", flush=True)
@@ -398,12 +416,18 @@ def main():
         pl = pools.get(x["id"], "")
         no_pool += not pl
         pool_bytes += len(pl)
-        details.append([x["id"], x.get("t") or "Untitled", x.get("a"), x.get("co"), x.get("mv"), img, rec, li, wi, hi, pl])
+        det = [x["id"], x.get("t") or "Untitled", x.get("a"), x.get("co"), x.get("mv"), img, rec, li, wi, hi, pl]
+        if x.get("crop"):
+            det.append(x["crop"])   # [l, t, r, b] in thousandths: the painting inside its frame/wall (tools/crop_paintings.py)
+        details.append(det)
 
         r = ratio.get(x["id"]) or x.get("r") or (x["h"] / x["w"] if x.get("w") and x.get("h") else None)
         if not r:
             no_size += 1
             r = 1.25
+        if x.get("crop"):   # the box and its pins are the painting's own shape, not the museum photo's
+            cl, ct, cr, cb = x["crop"]
+            r = r * (cb - ct) / (cr - cl)
         o = k * REC
         y = x.get("y")
         index[o:o + 2] = (0 if y is None else byte(y + YEAR0, 1, 65535)).to_bytes(2, "little")
