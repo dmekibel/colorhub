@@ -513,13 +513,13 @@ function honeyStudyMarks(ctx, drawn, marks, t) {
       const k = .5 + .5 * Math.sin(age / 1000 * Math.PI * 2 / 1.8);
       ctx.arc(b.x, b.y, r + 3 + 3 * k, 0, 6.2832); ctx.lineWidth = 3; ctx.strokeStyle = `rgba(239,235,227,${.55 + .4 * k})`; ctx.stroke();
     } else if (m.kind === "right") {
-      const u = Math.min(1, age / 900), e = 1 - Math.pow(1 - u, 3);
+      const u = Math.max(0, Math.min(1, age / 900)), e = 1 - Math.pow(1 - u, 3);
       ctx.arc(b.x, b.y, r + 2 + 10 * e, 0, 6.2832); ctx.lineWidth = 3 * (1 - u) + .5; ctx.strokeStyle = `rgba(154,212,174,${.95 * (1 - u)})`; ctx.stroke();
       ctx.beginPath(); ctx.arc(b.x, b.y, r + 2.5, 0, 6.2832); ctx.lineWidth = 2; ctx.strokeStyle = "rgba(154,212,174,.9)"; ctx.stroke();
     } else if (m.kind === "wrong") {
       ctx.arc(b.x, b.y, r + 2.5, 0, 6.2832); ctx.lineWidth = 1.6; ctx.setLineDash([4, 4]); ctx.strokeStyle = "rgba(240,154,134,.9)"; ctx.stroke(); ctx.setLineDash([]);
     } else if (m.kind === "true") {
-      const u = Math.min(1, age / 420);
+      const u = Math.max(0, Math.min(1, age / 420));
       ctx.arc(b.x, b.y, r + 3 + 8 * (1 - u), 0, 6.2832); ctx.lineWidth = 2.6; ctx.strokeStyle = `rgba(239,235,227,${.4 + .55 * u})`; ctx.stroke();
     } else if (m.kind === "ring") {
       ctx.arc(b.x, b.y, r + 2, 0, 6.2832); ctx.lineWidth = 1.2; ctx.strokeStyle = "rgba(239,235,227,.5)"; ctx.stroke();
