@@ -172,3 +172,17 @@ input[type=range]:not(.mt-sl *):not(.mt-wh *):not(.pt-range)::-moz-range-thumb{w
 .pt-auto.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring)}
 .pt-auto.on small{color:var(--soft);opacity:1}
 .rp-hc-back{border:0;background:var(--s2);font:500 var(--type-ui)/1 var(--sans)}
+
+/* ============================================================ games: picks, the miss compare, results */
+/* Gradients: the picked tile lifts and takes a ring with a gap, never a white square inside it */
+.hg-s.sel::before{inset:-5px;border-radius:calc(var(--r-tile) + 4px);border:2px solid var(--ink);box-shadow:inset 0 0 0 2px var(--booth,#5F5F5F)}
+.hg-k-sq.sel::before{border-radius:calc(var(--r-tile) + 4px);inset:-5px}
+/* the miss compare: the two colors stay full bleed; the panel under them is e1 (warm black), its Next the one paper button */
+.mc-panel{background:var(--s1);color:var(--ink);box-shadow:0 -1px 0 var(--line)}
+.mc-pct{font:500 28px/1 var(--sans);font-variant-numeric:tabular-nums;color:var(--ink)}
+.mc-pct em{color:var(--soft)}
+.mc .mc-line{color:var(--ink);font:400 16px/1.4 var(--sans)}
+.mc-go{background:var(--paper);color:var(--paper-ink);height:var(--tap-l);font:400 22px/1 var(--serif)}
+/* the bet on a booth-grey results screen: the pills sit in the booth, not as black holes */
+.ls-res .lx-bet-b,.pr-res .lx-bet-b{background:rgba(14,13,11,.22);color:#fff}
+.ms-fog input:checked::after{background:var(--ground)}
