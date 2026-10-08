@@ -12,6 +12,7 @@
 
 const NMR_TABS = [["ring", "Ring"], ["plane", "Perceptual"], ["field", "Names"], ["type", "Type"], ["eye", "Eyedrop"]];
 const NMR_SCHEMES = [["off", "Off"], ["complementary", "Complement"], ["analogous", "Analogous"], ["triadic", "Triad"], ["square", "Square"]];
+const NMR_ICON = sv('<path d="M14.5 5.5l4 4M17 3l4 4-3 3-4-4zM13 8l-8 8v3h3l8-8"/>', 22, 1.8);   // a pipette
 const NMR_CMAX = .34;   // the strongest chroma any sRGB color reaches in OKLCH is a little over .32
 let NMR_LAST = { hex: null, tab: "ring", scheme: "off" };
 
@@ -40,6 +41,7 @@ const nmrPaste = t => {   // "#abc", "#aabbcc", "rgb(12, 99, 180)", "12 99 180"
 
 LAB.namer = (hex, push = true) => {
   hex = (hex && /^#[0-9a-f]{6}$/i.test(hex) ? hex : NMR_LAST.hex || "#5F8C8A").toUpperCase();
+  if (push && XSTACK[XSTACK.length - 1] !== "namer") XSTACK.push("namer");
   let cur = hex, tab = NMR_LAST.tab, scheme = NMR_LAST.scheme, raf = 0, urlT = 0, stream = null;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Studio · Name any color</span><span style="width:44px"></span></header>
@@ -52,7 +54,8 @@ LAB.namer = (hex, push = true) => {
     <p class="fine">Names are the nearest of about 1,000, measured with CIEDE2000, and the match is how close your color is to the name's. The perceptual picker is OKLCH (Björn Ottosson, 2020). Screens, cameras and light shift colors, so a camera reading is a good guess, not a measurement.</p>
   `, "article lab namer");
   const $ = s => el.querySelector(s);
-  el.querySelector("[data-back]").onclick = () => { stopCam(); if (history.length > 1) history.back(); else go("studio"); };
+  // one step Back, like every Studio screen: pop this screen's place in the shared trail (the phone's Back gesture presses this button)
+  el.querySelector("[data-back]").onclick = () => { stopCam(); xBack(); };
   loadCoreNames().then(() => { if (!el.isConnected) return; render(); if (tab === "field") openTab("field", true); });
   const stopCam = () => { if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; };
   cleanup.push(stopCam, () => { NMR_LAST.hex = cur; clearTimeout(urlT); cancelAnimationFrame(raf); });

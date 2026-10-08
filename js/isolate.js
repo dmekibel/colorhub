@@ -122,14 +122,17 @@ function isoOpen(opts) {
   function pick(i) {
     const o = cur.options[i], truth = cur.options.find(x => x.kind === "true"), nm = nameOf(cur.hex);
     state = "alone"; buzz(o.kind === "true" ? [8, 30, 8] : 14);
-    // what the guess says about the eye: a hit, the surroundings' name (the classic error), or just a miss
-    const ev = { k: o.kind === "true" ? "recall_ok" : "pick_wrong", ref: "color:" + truth.n.toLowerCase(), as: o.n.toLowerCase(), surf: from, ctx: o.kind === "ctx" || undefined };
-    const log = typeof learnerLog === "function" ? learnerLog : typeof lmLog === "function" ? lmLog : null;
-    try { if (log) log(ev); } catch (e) {}
+    // what the guess says about the eye (the Learner Model, js/learner.js): an answer for the true name, and,
+    // when you named something else, a mix-up (S.iso also counts how often the surroundings fooled you)
+    if (typeof learnerLog === "function") {
+      const ok = o.kind === "true";
+      learnerLog({ type: "answer", color: truth.n, ok, by: "pick", src: from });
+      if (!ok) learnerLog({ type: "confuse", color: truth.n, b: o.n, src: from });
+    }
     S.iso = S.iso || { n: 0, ok: 0, ctx: 0 }; S.iso.n++; if (o.kind === "true") S.iso.ok++; if (o.kind === "ctx") S.iso.ctx++; save();
     root.classList.add("isolated"); veil.style.opacity = 1; ring.style.opacity = 0;
     $("#isoHint").textContent = "Hold the picture to see it back";
-    const line = o.kind === "true" ? "You read it as it is." : o.kind === "ctx" ? `You named its surroundings. Your eye pulled it toward ${esc(o.n.toLowerCase())}, the color around it.` : "Not that one. Next to the others it was easy to mistake.";
+    const line = o.kind === "true" ? "You read it as it is." : o.kind === "ctx" ? `You named its surroundings. Your eye pulled it toward ${esc(o.n.toLowerCase())}, the color around it.` : (() => { const d = lookDiff(o, { h: cur.hex }); return d === "almost the same" ? `${esc(o.n)} and this are almost the same color.` : `Not ${esc(o.n.toLowerCase())}: next to it, this one is ${esc(d)}.`; })();
     card.innerHTML = `<button class="iso-patch" data-swatch="${cur.hex}" style="--c:${cur.hex}" aria-label="Open ${esc(nm.text)}"></button>
       <div class="iso-res"><p class="iso-alone">Alone, it's</p><button class="iso-name" data-swatch="${cur.hex}">${esc(nm.text)}</button><p class="iso-line">${line}</p></div>
       <div class="iso-arch" id="isoArch"></div>
