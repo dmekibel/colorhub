@@ -82,7 +82,8 @@ function lensSections(lens) {
       return [{ honey: true }, ...lensSections("origins").map(sec => ({ ...sec, title: sec.title === "Still being traced" ? sec.title : "Named after · " + sec.title }))];
     case "ideas": {
       const sys = pages.filter(p => (p.swatches || []).length >= 3), ideas = pages.filter(p => !sys.includes(p) && ["concept", "person", "work", "tradition", "culture"].includes(p.type));
-      return [{ title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
+      return [...(typeof lkSections === "function" ? lkSections() : []),   // js/looks.js: visual styles, each a family of palettes
+        { title: "Stories", sub: "Short reads, a few swipes each.", pins: stories.map(n => pin(n)) },
         { title: "Color systems", sub: "Traditions that gave each color a meaning.", pins: sys.map(n => pin(n, { system: true })) },
         { title: "Ideas and people", pins: seeded(ideas, today()).map(n => pin(n)) },
         ...[window.passagesSection, window.filmsSection].filter(f => typeof f === "function").flatMap(f => f()),   // js/passages.js, js/films.js

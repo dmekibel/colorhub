@@ -372,6 +372,7 @@ function paletteView(p) {
     if (hasImg) el.querySelector("#dots").innerHTML = cols.map(c => `<i style="--c:${c.h};left:${c.at[0] * 100}%;top:${c.at[1] * 100}%" data-swatch="${c.h}"></i>`).join("");
   };
   loadCoreNames().then(render); render();
+  if (typeof lkHook === "function") lkHook(el, colsNow, p);   // js/looks.js: "What look is this?"
   const seg = (sel, attr, set) => el.querySelectorAll(`${sel} [${attr}]`).forEach(b => b.onclick = () => { set(b.getAttribute(attr)); el.querySelectorAll(`${sel} [${attr}]`).forEach(x => x.classList.toggle("on", x === b)); render(); buzz(4); });
   if (hasImg) { seg("#cnt", "data-n", v => { n = +v; }); el.querySelector("[data-pct]").onclick = e => { pct = !pct; e.currentTarget.classList.toggle("on", pct); render(); }; }
   seg("#look", "data-look", v => { look = v; });
