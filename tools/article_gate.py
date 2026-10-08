@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """Mechanical gate for data/articles/<slug>.json (the article engine, lane L7). Schema: data/articles/SCHEMA.md.
 
@@ -16,7 +17,10 @@ FAIL (blocks the article):
   - a myth-list phrase (CLAUDE.md "Color myths") with no correcting frame in the same or the next sentence
   - the words "the 101"
   - "words" differs from the computed count (fix with --write-words)
-  - a [[slug]] link (or aside sibling/child/parent) that resolves to no slug in data/graph/names.json or article; an [[art:id|label]] that is not in data/gallery
+  - a [[slug]] link (or aside sibling/child/parent/disambiguation) that resolves to no canonical slug in data/graph/names.json,
+    no alias (data/graph/aliases.json, data/aliases.json), no link-map.json entry and no article; an [[art:id|label]] that is not in data/gallery
+  - a reference card [[gem:id]] [[flower:id]] [[painting:id or n]] [[look:id]] [[garment:id]] [[film:id]] [[painter:slug]] whose id is not in its dataset,
+    or a painting/painter reference with no |label
   - questions: 2-3, kind pick|true-false, answer among the choices
   - fewer than 4 connections (aside siblings + children + aka + [[links]]) or fewer than 3 field keys
 WARN (printed, does not block): a 10-word run shared with a private book text; an unused note; a sentence over 45 words.
@@ -154,6 +158,99 @@ def load_names():
     return names
 
 
+def load_aliases():
+    """alias slug -> canonical slug, from data/graph/aliases.json ({alias: {slug: canonical}}) and data/aliases.json
+    ({slugs: {slug: canonical}}). The first file wins on a clash."""
+    out = {}
+    for rel, key in (("data/graph/aliases.json", "alias"), ("data/aliases.json", "slugs")):
+        p = ROOT / rel
+        if p.exists():
+            for k, v in json.loads(p.read_text()).get(key, {}).items():
+                out.setdefault(k, v)
+    return out
+
+
+def load_link_map():
+    """data/articles/link-map.json: explicit, reasoned overrides. {links: {slug: {to: canonical slug | null, reason, label?}}}.
+    `to: null` means the link is shown as plain text (a pigment or historical name that is not a color in our data)."""
+    p = ART / "link-map.json"
+    return json.loads(p.read_text()).get("links", {}) if p.exists() else {}
+
+
+class Resolver:
+    """A slug resolves if it is in link-map.json, a canonical name in graph/names.json, an article slug, or an alias
+    (graph/aliases.json, data/aliases.json) of a canonical name. Same order as js/article.js arColor."""
+
+    def __init__(self, names, slugs):
+        self.names, self.slugs = names, slugs
+        self.aliases, self.lmap = load_aliases(), load_link_map()
+
+    def canon(self, s):
+        """canonical slug / article slug for s, or None. 'plain' means link-map says show plain text."""
+        if s in self.lmap:
+            to = self.lmap[s].get("to")
+            return to if to and (to in self.names or to in self.slugs) else "plain" if to is None else None
+        if s in self.names or s in self.slugs:
+            return s
+        t = self.aliases.get(s)
+        return t if t and (t in self.names or t in self.slugs) else None
+
+    def ok(self, s, body=True):
+        c = self.canon(s)
+        return c is not None and (body or c != "plain")
+
+
+# ---------- reference cards: [[gem:id]] and friends ----------
+REF_KINDS = {"gem", "flower", "painting", "art", "look", "garment", "film", "painter"}
+REF_ID = re.compile(r"^[A-Za-z0-9._-]+$")
+REF_SRC = {"gem": "gems (data/gems.js)", "flower": "plants and dye plants (data/botany.js)", "painting": "gallery (data/gallery)",
+           "look": "looks (data/looks.js)", "garment": "garments (data/fashion/garments.json)", "film": "films (data/films.js)",
+           "painter": "painters (data/artists/meta.json)"}
+_REFS = {}
+
+
+def _ref_ids(kind, gallery):
+    """The ids a reference of this kind may use, read once from the data files the app itself loads."""
+    if kind in _REFS:
+        return _REFS[kind]
+    d = ROOT / "data"
+    out = set()
+    try:
+        if kind == "gem":
+            t = (d / "gems.js").read_text(encoding="utf-8")
+            t = t[re.search(r"^gems: \[", t, re.M).start():re.search(r"^essays: \[", t, re.M).start()]
+            out = set(re.findall(r'\bid:\s*"([a-z0-9-]+)"', t))
+        elif kind == "flower":
+            t = (d / "botany.js").read_text(encoding="utf-8")
+            j = json.loads(t[t.index("{", t.index("window.BOTANY")):t.rindex("}") + 1])
+            out = {p["id"] for p in j["plants"]} | {p["id"] for p in j["dyes"]}
+        elif kind == "look":
+            out = set(re.findall(r'"id":"([a-z0-9-]+)"', (d / "looks.js").read_text(encoding="utf-8")))
+        elif kind == "garment":
+            out = {r["id"] for r in json.loads((d / "fashion" / "garments.json").read_text(encoding="utf-8"))["rows"]}
+        elif kind == "film":
+            out = set(re.findall(r'"id": "([a-z0-9-]+)"', (d / "films.js").read_text(encoding="utf-8")))
+        elif kind == "painter":
+            out = set(json.loads((d / "artists" / "meta.json").read_text(encoding="utf-8"))["a"])
+        elif kind == "painting":
+            out = set(gallery or ())
+    except Exception as e:  # a missing data file must not hide behind a pass
+        print(f"gate: cannot read the {kind} ids ({e})")
+        out = None
+    _REFS[kind] = out
+    return out
+
+
+def ref_exists(kind, rid, gallery):
+    if kind == "painting" and rid.isdigit():   # a gallery number
+        try:
+            return int(rid) < json.loads((ROOT / "data" / "gallery" / "index.json").read_text(encoding="utf-8"))["n"]
+        except Exception:
+            return False
+    ids = _ref_ids(kind, gallery)
+    return ids is not None and rid in ids
+
+
 def load_gallery_ids():
     ids = set()
     d = ROOT / "data" / "gallery" / "d"
@@ -191,7 +288,8 @@ def book_grams(n=10):
     return _BOOK_GRAMS
 
 
-def check(path, names, gallery, slugs, write_words=False):
+def check(path, names, gallery, slugs, write_words=False, res=None):
+    res = res or Resolver(names, slugs)
     fails, warns = [], []
     try:
         a = json.loads(path.read_text())
@@ -254,6 +352,7 @@ def check(path, names, gallery, slugs, write_words=False):
             fails.append(f"note {n}: web note without url")
     used = set()
     links = set()
+    refs_used = set()
     for where, t in texts:
         for m in REF.finditer(t):
             n = int(m.group(1))
@@ -262,12 +361,21 @@ def check(path, names, gallery, slugs, write_words=False):
                 fails.append(f"{where}: [{n}] has no note")
         for m in LINK.finditer(t):
             tgt = m.group(1).strip()
-            if tgt.startswith("art:"):
-                if gallery and tgt[4:] not in gallery:
-                    fails.append(f"{where}: painting link {tgt} not in data/gallery")
+            kind = tgt.split(":", 1)[0] if ":" in tgt else ""
+            if kind in REF_KINDS:
+                # reference cards (js/article-refs.js): [[gem:id]] [[flower:id]] [[painting:id|n]] [[look:id]] [[garment:id]] [[film:id]] [[painter:slug]] ([[art:id]] = painting)
+                rid = tgt.split(":", 1)[1]
+                k = "painting" if kind == "art" else kind
+                if not REF_ID.match(rid):
+                    fails.append(f"{where}: reference [[{tgt}]] has a malformed id")
+                elif not ref_exists(k, rid, gallery):
+                    fails.append(f"{where}: reference [[{tgt}]] is not in the {REF_SRC[k]}")
+                if k in ("painting", "painter") and not (m.group(2) or "").strip():
+                    fails.append(f"{where}: reference [[{tgt}]] needs a label ([[{tgt}|Title]]): the id says nothing to a reader")
+                refs_used.add(f"{k}:{rid}")
             else:
                 links.add(tgt)
-                if tgt not in names and tgt not in slugs:
+                if not res.ok(tgt):
                     fails.append(f"{where}: link [[{tgt}]] resolves to no color name or article")
         for q in QUOTE.finditer(t):
             if len(q.group(1).split()) > 15:
@@ -313,8 +421,17 @@ def check(path, names, gallery, slugs, write_words=False):
     if len(conns) < 4:
         fails.append(f"only {len(conns)} connections (want >= 4)")
     for s in (asd.get("siblings") or []) + (asd.get("children") or []) + ([asd["parent"]] if asd.get("parent") else []):
-        if s not in names and s not in slugs:
-            fails.append(f"aside: {s} resolves to no color name or article")
+        if not res.ok(s, body=False):
+            fails.append(f"aside: {s} resolves to no color name, alias or article")
+    # disambiguation is structured: [{"slug": ..., "gloss": "..."}] (a bare slug string is allowed); never a prose line
+    for d in asd.get("disambiguation") or []:
+        s = d.get("slug") if isinstance(d, dict) else d
+        if not isinstance(s, str) or route_slug(s) != s:
+            fails.append(f"aside.disambiguation: {str(d)[:60]!r} is prose, not a slug or {{slug, gloss}}")
+        elif not res.ok(s, body=False):
+            fails.append(f"aside.disambiguation: {s} resolves to no color name, alias or article")
+        elif isinstance(d, dict) and not (d.get("gloss") or "").strip():
+            fails.append(f"aside.disambiguation: {s} has no gloss")
     if len(a["field"]) < 3:
         fails.append("fewer than 3 field-note keys")
 
@@ -368,19 +485,28 @@ def surprises(slug):
 
 
 def main():
-    args = [x for x in sys.argv[1:] if not x.startswith("--")]
+    # accept slugs or paths ("mauve", "mauve.json", "data/articles/mauve.json")
+    args = [os.path.basename(x)[:-5] if x.endswith(".json") else x for x in sys.argv[1:] if not x.startswith("--")]
     if "--surprises" in sys.argv:
         for s in args:
             print(json.dumps({s: surprises(s)}, ensure_ascii=False, indent=1))
         return
     write = "--write-words" in sys.argv
-    files = [ART / f"{s}.json" for s in args] if args else sorted(ART.glob("*.json"))
+    files = [ART / f"{s}.json" for s in args] if args else sorted(p for p in ART.glob("*.json") if p.stem != "link-map")
     names = load_names()
     gallery = load_gallery_ids()
-    slugs = {p.stem for p in ART.glob("*.json")}
+    slugs = {p.stem for p in ART.glob("*.json") if p.stem != "link-map"}
+    res = Resolver(names, slugs)
+    for k, v in res.lmap.items():
+        if not v.get("reason"):
+            print(f"link-map: {k} has no reason")
+            sys.exit(1)
+        if v.get("to") and v["to"] not in names and v["to"] not in slugs:
+            print(f"link-map: {k} -> {v['to']} is not a canonical color")
+            sys.exit(1)
     bad = 0
     for p in files:
-        fails, warns, n = check(p, names, gallery, slugs, write)
+        fails, warns, n = check(p, names, gallery, slugs, write, res)
         tag = "FAIL" if fails else "PASS"
         bad += bool(fails)
         print(f"{tag}  {p.stem:<18} {n if n is not None else '?':>5} words")

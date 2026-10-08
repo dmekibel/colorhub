@@ -306,10 +306,12 @@ function gymHome() {
     <h1 class="tab-title">Train</h1>
     ${top}
     ${eyeProfile()}
+    ${typeof ooShelf === "function" ? ooShelf() : ""}
     ${cvdOn() ? `<p class="x-sub" style="margin-top:12px">A simple adjustment for ${S.profile.cvd} color blindness, not a simulation of it: differences lean on lightness and on the colors you see best.</p>` : ""}
     ${SHELVES.map(([name, ks]) => `<div class="sec-head"><b>${name}</b><span>${name === "Applied" ? "built on the basics" : name === "In context" ? "color next to color" : "one judgment at a time"}</span></div>
-      <div class="gs-grid">${ks.map(stationTile).join("")}</div>`).join("")}
+      <div class="gs-grid">${ks.filter(k => typeof ooRetired !== "function" || !["hue", "memory", "order"].includes(k)).map(stationTile).join("")}</div>`).join("")}
     ${typeof matchShelves === "function" ? matchShelves() : ""}
+    ${typeof msTrainShelf === "function" ? msTrainShelf() : ""}
     <div class="sec-head"><b>Game</b><span>for fun</span></div>
     <button class="play-row" data-lightning><span><b>Lightning round</b><span>Forty-five seconds. Name as many colors as you can.</span></span><em class="lt-best">${S.best.lightning ? `<b>${S.best.lightning}</b>best` : "new"}</em></button>
     <p class="fine">Scores are shown as a percent of the full black-to-white range: 100% is the difference between black and white, and about 1% is the smallest difference most people can see side by side. Every swatch is at least a quarter of the screen wide, because small patches look less colorful. Practice sharpens these judgments; it isn't a brain-training claim.</p>
@@ -320,6 +322,8 @@ function gymHome() {
   el.querySelector("[data-lightning]").onclick = lightning;
   el.querySelector("[data-eye]").onclick = eyeReport;
   if (typeof wireMatch === "function") wireMatch(el);
+  if (typeof msWireTrain === "function") msWireTrain(el);
+  if (typeof ooWire === "function") ooWire(el);   // js/games/oo-ui.js: Odd one out, today's board, Whose palette?
 }
 const k0Trials = k => k === "order" ? `${SKILLS[k].trials} strips` : k === "squint" ? `${SKILLS[k].trials} paintings` : `${SKILLS[k].trials} rounds`;
 const dueWords = n => n <= 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`;
@@ -361,6 +365,7 @@ function missCard(k, t) {
       <span class="gy-miss-sw good" style="--c:${pr.correct}"><b>${k === "memory" ? "It was" : "Odd one"}</b></span>
     </div>
     <div class="gy-miss-meta"><b class="mono">${pctFmt(dist)}</b> <small>${unitWord(sk.unit)}</small>${why ? `<span>${esc(why)}</span>` : ""}</div>
+    ${typeof eyeNamesLine === "function" && k === "hue" ? `<p class="gy-miss-names">${eyeNamesLine(pr.picked, pr.correct, { found: false, what: k === "memory" ? "the color you saw" : "the odd one" })}</p>` : ""}
   </div>`;
 }
 // A short set built from exactly the missed pairs, at the same difference each was drawn at.
@@ -526,6 +531,8 @@ function runDrill(k, opts = {}) {
   if (!S.scr && !scrShot()) return screenCheck(() => runDrill(k, opts));
   if (k === "after") return afterimage();
   if (k && k.startsWith("mix:")) return runMixed(k.slice(4));
+  // Odd one out, Color memory and Sort the strip now live in js/games (design/IDEAS-10X/train-games.md §5)
+  if (!Object.keys(opts).length && !scrShot() && typeof ooRetired === "function" && ["hue", "memory", "order"].includes(k)) return ooRetired(k);
   const sk = SKILLS[k];
   if (!sk) return gymHome();
   const g = gyState(), st = stOf(k), day = gyDay();
@@ -727,7 +734,7 @@ const DRILLS = {
     ctx.stage.innerHTML = `<div class="grid" style="--n:${n}">${Array.from({ length: cells }, (_, i) =>
       `<button class="tile" data-i="${i}" style="--c:${i === at ? oddHex : baseHex}" aria-label="Tile ${i + 1}"></button>`).join("")}</div>`;
     tilePick(ctx, () => ctx.stage.querySelector(`[data-i="${at}"]`).classList.add("ring"), at,
-      { ...bandsOf(baseHex), rp: { a: baseHex, b: oddHex } }, `The ringed one was off by <b>${pctFmt(de2000(baseHex, oddHex))}</b>`);
+      { ...bandsOf(baseHex), rp: { a: baseHex, b: oddHex } }, typeof eyeNamesLine === "function" ? eyeNamesLine(baseHex, oddHex, { found: false }) : `The ringed one was off by <b>${pctFmt(de2000(baseHex, oddHex))}</b>`);   // js/eye-names.js
   },
 
   // Which is lighter? Two hues, different lightness (L*). Dials: the hues move apart, then their strength differs.
@@ -1181,6 +1188,7 @@ function gymShotState() {
   ];
 }
 function gymShot(arg) {
+  if (/^oo(:|$)/.test(arg || "") && typeof ooShot === "function") return ooShot((arg || "").slice(3));   // js/games/oo-shot.js
   const [what, k] = (arg || "home").split("-");
   if (what === "fresh") { S.gym.skills = {}; S.best = {}; return go("gym"); }
   if (what === "first") return go("gym");

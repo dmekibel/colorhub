@@ -38,7 +38,10 @@
   "parent": null,
   "children": [],
   "disambiguation": [
-   "B'dazzled Blue (Crayola, metallic) vs Dusk Blue (xkcd survey name): nearly the same screen color, unrelated names."
+   {
+    "slug": "dusk-blue",
+    "gloss": "nearly the same screen color (an xkcd survey name), unrelated name"
+   }
   ],
   "other_languages": []
  },

@@ -1,0 +1,72 @@
+// Builds data/games/pairs.js for "Painters' pairs" (js/games/pairs.js). Run: node tools/pairs_build.js
+// Which colors appear together in paintings more (or less) often than chance? From the gallery archive
+// (data/gallery: 23,781 paintings, six measured colors each, each named with the nearest of the app's lesson
+// colors), a pair's lift = (paintings with both × all paintings) / (paintings with A × paintings with B).
+// Lift 2 means twice as often as chance; 0.5, half. Pairs of near-identical colors (ΔE00 < 15) are left out:
+// they co-occur because they're shades of one passage, not chosen companions.
+// Kept per group too (all, by country, by century), each with its count n and three example paintings
+// (the ones where the two colors cover the most area together). The game only pairs two pairs whose lifts are
+// clearly apart: |ln L1 − ln L2| ≥ 3 × the standard error (≈ sqrt(1/n1 + 1/n2)) and a ratio of at least 1.5.
+// Honest caveat (in the game): these are photographs of varnished paintings, named to the nearest lesson color.
+const fs = require("fs"), path = require("path");
+const { lab, de2000 } = require("./colormath.js");
+const root = path.join(__dirname, "..");
+const head = JSON.parse(fs.readFileSync(path.join(root, "data/gallery/index.json"), "utf8"));
+const bin = fs.readFileSync(path.join(root, "data/gallery/index.bin"));
+const dir = path.join(root, "data/gallery/d"), rows = [];
+for (const f of fs.readdirSync(dir).filter(f => f.endsWith(".json")).sort()) rows.push(...JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")));
+const N = head.n, R = head.rec, app = head.app;
+// the app names' hexes (data/colors.js and the basics)
+const window = {};
+new Function("window", fs.readFileSync(path.join(root, "data/colors.js"), "utf8"))(window);
+const D = window.DATA, hexOf = new Map([...D.basics.map(([n, h]) => [n.toLowerCase(), h]), ...D.units.flatMap(u => u.colors.map(c => [c.n.toLowerCase(), c.h]))]);
+const appHex = app.map(n => hexOf.get(String(n).toLowerCase()) || null);
+const COUNTRY = { Netherlands: "Dutch", France: "French", Spain: "Spanish", Italy: "Italian", "United States": "American", Denmark: "Danish", Belgium: "Flemish and Belgian", India: "Indian", Japan: "Japanese", Germany: "German", China: "Chinese", "United Kingdom": "British" };
+const groups = { all: [] };
+const paint = [];
+for (let i = 0; i < N; i++) {
+  const o = i * R, y = bin[o] | bin[o + 1] << 8, year = y ? y - head.year0 : null, r = rows[i];
+  const sh = Array.from({ length: 6 }, (_, j) => bin[o + 6 + j * 4 + 3] / 250);
+  const share = new Map();
+  (r[8] || []).forEach((w, j) => { if (appHex[w]) share.set(w, (share.get(w) || 0) + sh[j]); });
+  paint.push({ i, year, names: [...share.keys()], share });
+  groups.all.push(i);
+  const g = COUNTRY[r[3]]; if (g) (groups[g] = groups[g] || []).push(i);
+  if (year != null && year >= 1500 && year < 2000) { const c = `${Math.floor(year / 100) + 1}th century`; (groups[c] = groups[c] || []).push(i); }
+}
+const out = { names: app.map((n, k) => [n, appHex[k]]), groups: {}, ex: [] };
+const exIdx = new Map();
+const exOf = i => { if (!exIdx.has(i)) { const r = rows[i]; exIdx.set(i, out.ex.length); out.ex.push([r[1] || "Untitled", r[2] || "", paint[i].year, r[5], r[0], i]); } return exIdx.get(i); };
+for (const [g, list] of Object.entries(groups)) {
+  if (list.length < 400) continue;
+  const n1 = new Map(), n2 = new Map(), best = new Map();
+  for (const i of list) {
+    const ns = paint[i].names;
+    ns.forEach(a => n1.set(a, (n1.get(a) || 0) + 1));
+    for (let x = 0; x < ns.length; x++) for (let z = x + 1; z < ns.length; z++) {
+      const [a, b] = ns[x] < ns[z] ? [ns[x], ns[z]] : [ns[z], ns[x]], k = a * 1000 + b;
+      n2.set(k, (n2.get(k) || 0) + 1);
+      const s = Math.min(paint[i].share.get(a), paint[i].share.get(b)), bl = best.get(k) || [];
+      bl.push([s, i]); bl.sort((p, q) => q[0] - p[0]); if (bl.length > 3) bl.length = 3; best.set(k, bl);
+    }
+  }
+  const M = list.length, pairs = [];
+  for (const a of n1.keys()) for (const b of n1.keys()) {
+    if (a >= b) continue;
+    if (n1.get(a) < 30 || n1.get(b) < 30) continue;
+    if (de2000(appHex[a], appHex[b]) < 15) continue;
+    const k = a * 1000 + b, nab = n2.get(k) || 0, exp = n1.get(a) * n1.get(b) / M;
+    if (exp < 8) continue;    // too rare to say anything either way
+    const lift = nab / exp;
+    // keep clear companions (n ≥ 25) and clear strangers (expected ≥ 20, seen at most half that)
+    if ((nab >= 25 && lift >= 1.2) || (exp >= 20 && lift <= .55)) pairs.push([a, b, nab, +exp.toFixed(1), +lift.toFixed(2), (best.get(k) || []).map(([, i]) => exOf(i))]);
+  }
+  pairs.sort((p, q) => q[4] - p[4]);
+  out.groups[g] = { m: M, pairs };
+  console.log(`${g.padEnd(18)} ${String(M).padStart(5)} paintings · ${pairs.filter(p => p[4] >= 1.2).length} companions · ${pairs.filter(p => p[4] <= .55).length} strangers`);
+}
+fs.writeFileSync(path.join(root, "data/games/pairs.js"),
+  "// Painters' pairs. Generated by tools/pairs_build.js from data/gallery; edit that script, not this file.\n" +
+  "// names: [app name, hex]; groups[g] = { m: paintings, pairs: [[a, b, paintings with both, expected by chance, lift, [example indices]]] }; ex: [title, artist, year, image, id, gallery index].\n" +
+  "window.OO_PAIRS = " + JSON.stringify(out) + ";\n");
+console.log(`pairs: ${Object.keys(out.groups).length} groups, ${out.ex.length} example paintings, ${(fs.statSync(path.join(root, "data/games/pairs.js")).size / 1024).toFixed(0)} KB`);

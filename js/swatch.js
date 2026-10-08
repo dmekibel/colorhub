@@ -97,3 +97,18 @@ function nameSheet(hex) {
   buzz(6);
   if (!CORE_NAMES) loadCoreNames();   // the next sheet shows the real ~1,000-word nearest list, not just the 101
 }
+
+// Graph links ([data-to]) on pages that don't wire their own (name pages: "In gems", "In flowers"…). Pages that do
+// handle [data-to] call preventDefault first, so this bubble-phase fallback only fires where nothing else did
+// (David: tapping Spinel under "In gems" on Fiery Rose did nothing).
+document.addEventListener("click", e => {
+  if (e.defaultPrevented) return;
+  const a = e.target.closest("[data-to]");
+  if (!a || a.closest("[data-swatch]") && e.target.closest("[data-swatch]") !== a) return;
+  const id = a.dataset.to || "";
+  e.preventDefault();
+  // keep the trail (no XSTACK reset), so Back returns to the color page you came from
+  if (id.startsWith("gm:") && typeof gmWhen === "function") return gmWhen(() => { const n = gmNode(id); if (n) openNode(n); });
+  const go = () => { const n = typeof graph === "function" && graph().nodes.get(id); if (n && typeof openNode === "function") openNode(n); };
+  if (typeof loadWiki === "function") loadWiki().then(go, go); else go();
+});

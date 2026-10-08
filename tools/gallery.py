@@ -27,6 +27,7 @@ Output: data/gallery/ (deleted and rewritten each run)
                u16 year + 20000 (0 = undated) · u8 museum (sources index) · u8 aspect (ln(h/w) mapped -1.6..1.6
                onto 0..255) · u8 mean L* x 2.5 · u8 mean C* x 3 · 6 x (R, G, B, share x 250).
                About 30 bytes a painting: 40,000 paintings is 1.2 MB.
+  ids.txt      painting ids, one per line, in index order (line i = gallery index i). For the article reader's [[painting:<id>]].
   names.json   the library names used: [[name, hex, "src src", kanji?, meaning?]]. Loaded with the first painting page.
   d/NNN.json   detail shards of `shard` paintings (index order): [id, title, artist, country, movement, image URL,
                record URL, [library name index x 6], [app word index x 6], hi image URL, pool]. Loaded for the
@@ -463,6 +464,9 @@ def main():
         text = json.dumps(details[s:s + shard], ensure_ascii=False, separators=(",", ":")).replace('],["', '],\n["')
         (OUT / "d" / f"{s // shard:03d}.json").write_text(text, encoding="utf-8")
         n_sh += 1
+    # ids.txt: painting ids, one per line, in gallery order (line i = gallery index i). The article reader (js/article-refs.js)
+    # turns [[painting:<id>]] and the graph's "appears in" ids into gallery numbers with it.
+    (OUT / "ids.txt").write_text("\n".join(d[0] for d in details), encoding="utf-8")
     tot = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())
     print(f"data/gallery/: {len(corpus)} paintings from {', '.join(f.name for f in files)}; "
           f"index.bin {len(index) / 1e3:.0f} KB, index.json {(OUT / 'index.json').stat().st_size / 1e3:.1f} KB, "
@@ -470,6 +474,9 @@ def main():
           f"{n_sh} detail shards of {shard}; {tot / 1e6:.2f} MB in all. "
           f"{no_size} without a known image size, {no_rec} without a record URL, "
           f"{no_pool} without a dynamic palette (no cached image) -- pool data adds ~{pool_bytes / 1e6:.2f} MB.")
+    # Every file keyed by a gallery index goes stale when the corpus changes (node tools/check_ids.js fails on it).
+    print("Now rebuild what is keyed to this order, in this order: tools/analyze.py, tools/metrics_build.py, "
+          "tools/facets.py, tools/artwiki_build.py; then run node tools/check_ids.js.")
 
 
 if __name__ == "__main__":

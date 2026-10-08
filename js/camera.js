@@ -1,6 +1,6 @@
 "use strict";
 // The color eye: point the camera at anything and it names the color in the middle of the frame, live,
-// from the 2,700-name library, with the nearest word the app teaches underneath. Freeze to tap any spot,
+// from the ~1,000 core names, with the next-nearest name underneath. Freeze to tap any spot,
 // keep a find, or turn the whole frame into a palette. Cameras shift color, so the copy calls it a guess.
 // Optional white balance: tap WB, then something white or grey; readings are then corrected by von Kries
 // scaling (wbFrom in js/accuracy.js), so that reference comes out neutral.
@@ -16,6 +16,7 @@ function eye() {
     <div class="eye-card" id="card">
       <button class="eye-name" id="nm"><i id="chip"></i><span><b id="big">Looking…</b><em id="src"></em></span></button>
       <button class="eye-mine" id="mine"></button>
+      <button class="eye-iso" id="iso" hidden>Name this spot, then see it alone</button>
       <div class="eye-bar">
         <label class="eye-side" aria-label="Choose a photo">${ICON_PHOTO}<input type="file" accept="image/*" id="file" hidden></label>
         <button class="eye-shut" id="shut" aria-label="Freeze"><i></i></button>
@@ -30,7 +31,6 @@ function eye() {
   `, "fixed eye");
   const $ = s => el.querySelector(s);
   const vid = $("#vid"), still = $("#still"), ret = $("#ret"), stage = $("#stage");
-  const probe = document.createElement("canvas"), pctx = probe.getContext("2d", { willReadFrequently: true });
   let stream = null, frozen = false, raf = 0, cur = null, smooth = null, last = 0, at = [.5, .5], wb = null, wbArm = false;
   const read = hex => wb ? wb(hex) : hex;
   const stop = () => { cancelAnimationFrame(raf); if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; };
@@ -38,26 +38,17 @@ function eye() {
   $("[data-back]").onclick = () => { stop(); go(S.tab || "explore"); };
   loadCoreNames();
 
-  // average a small patch (in linear light, so it matches what the eye blends) at a point of the source
-  const sample = (src, w, h, fx, fy) => {
-    const side = Math.max(6, Math.min(w, h) * .05), sx = clamp(fx * w - side / 2, 0, w - side), sy = clamp(fy * h - side / 2, 0, h - side);
-    probe.width = probe.height = 12;
-    pctx.drawImage(src, sx, sy, side, side, 0, 0, 12, 12);
-    const d = pctx.getImageData(0, 0, 12, 12).data, lin = v => { v /= 255; return v > .04045 ? ((v + .055) / 1.055) ** 2.4 : v / 12.92; };
-    let r = 0, g = 0, b = 0;
-    for (let p = 0; p < d.length; p += 4) { r += lin(d[p]); g += lin(d[p + 1]); b += lin(d[p + 2]); }
-    const n = d.length / 4, enc = v => { v /= n; v = v > .0031308 ? 1.055 * v ** (1 / 2.4) - .055 : 12.92 * v; return Math.round(clamp(v, 0, 1) * 255).toString(16).padStart(2, "0"); };
-    return ("#" + enc(r) + enc(g) + enc(b)).toUpperCase();
-  };
+  // one sampler for the whole app (isoSample, js/isolate.js): a small patch averaged in linear light
+  const sample = (src, w, h, fx, fy) => isoSample(src, fx, fy);
   const paint = hex => {
     if (!hex) return;
-    const nm = nameOf(hex), [pair] = nearestColors(hex, 1), m = pair && pair[0];
-    cur = { hex, nm, m };
+    const nm = nameOf(hex), nx = nm.near.find(x => x.n !== nm.n && x.de < 12);
+    cur = { hex, nm, nx };
     ret.style.setProperty("--c", hex); $("#chip").style.setProperty("--c", hex);
     $("#big").textContent = nm.text;
-    $("#src").textContent = nm.met ? `A lesson word · ${lessonStatus(nm.n)}` : nm.de < VERY_CLOSE_DE ? "Nearest of about 1,000 names" : `Nearest of about 1,000 names · ${pctDiff(nm.de)}`;
-    // second line: the nearest of the colors the lessons teach (hidden when the big name already is one)
-    $("#mine").innerHTML = m && m.n.toLowerCase() !== nm.n.toLowerCase() ? `<i style="--c:${m.h}" data-swatch="${m.h}"></i><span>Nearest lesson word <b>${esc(m.n)}</b></span><em>${lessonStatus(m.n)}</em>` : "";
+    $("#src").textContent = nm.de < VERY_CLOSE_DE ? "Nearest of about 1,000 names" : `Nearest of about 1,000 names · ${pctDiff(nm.de)}`;
+    // second line: the next-nearest name, one tap to its page (every name is equal)
+    $("#mine").innerHTML = nx ? `<i style="--c:${nx.h}"></i><span>Also near <b>${esc(nx.n)}</b></span><em>${pctDiff(nx.de)}</em>` : "";
   };
   // live: sample about eight times a second and ease between readings so the name doesn't flicker
   const tick = t => {
@@ -67,6 +58,7 @@ function eye() {
     const L = lab(read(sample(vid, vid.videoWidth, vid.videoHeight, .5, .5)));
     smooth = smooth ? smooth.map((x, i) => x + (L[i] - x) * .45) : L;
     paint(labHex(...smooth));
+    if (typeof twLive === "function") twLive(vid, stage);   // the closest painting in the archive to what the camera sees (js/twins.js)
   };
   const freeze = (src, w, h) => {
     frozen = true; el.classList.add("frozen");
@@ -76,12 +68,13 @@ function eye() {
     const c = still.getContext("2d"); c.drawImage(src, (R.width - w * k) / 2 * dpr, (R.height - h * k) / 2 * dpr, w * k * dpr, h * k * dpr);
     vid.style.visibility = "hidden";
     $("#hint").textContent = "Tap anywhere to name it";
+    $("#iso").hidden = false;
     $("#shut").setAttribute("aria-label", "Back to live");
     at = [.5, .5]; placeRet(); paint(read(sample(still, still.width, still.height, .5, .5)));
     buzz(10);
   };
   const live = () => {
-    frozen = false; el.classList.remove("frozen"); still.hidden = true; vid.style.visibility = "";
+    frozen = false; el.classList.remove("frozen"); still.hidden = true; vid.style.visibility = ""; $("#iso").hidden = true;
     $("#hint").textContent = "Point at anything"; $("#shut").setAttribute("aria-label", "Freeze");
     at = [.5, .5]; placeRet();
   };
@@ -113,8 +106,9 @@ function eye() {
     if (frozen) return stream ? live() : null;
     if (vid.videoWidth) freeze(vid, vid.videoWidth, vid.videoHeight);
   };
+  $("#iso").onclick = () => { if (frozen) isoOpen({ src: still, fx: at[0], fy: at[1], from: "camera", ref: "camera" }); };
   $("#nm").onclick = () => cur && openTappedColor(cur.hex);   // David, 2026-10-07: one tap opens the page, not the sheet
-  $("#mine").onclick = () => { if (cur && cur.m) { stop(); XSTACK = []; openNode(graph().nodes.get("c:" + cur.m.n)); } };
+  $("#mine").onclick = () => { if (cur && cur.nx) openTappedColor(cur.nx.h); };
   const fromFile = f => {
     if (!f) return;
     const img = new Image();
@@ -145,11 +139,3 @@ const ICON_PHOTO = sv('<rect x="3" y="5" width="18" height="14" rx="2.5"/><circl
 const ICON_PAL = sv('<rect x="3" y="6" width="4" height="12" rx="1"/><rect x="8.5" y="6" width="4" height="12" rx="1"/><rect x="14" y="6" width="7" height="12" rx="1"/>', 22, 1.8);
 
 LAB.eye = () => eye();
-
-// where a lesson color stands for you: known, being learned, or still ahead
-function lessonStatus(name) {
-  const c = BYNAME.get(name.toLowerCase()); if (!c) return "";
-  if (c.basic) return "a basic word";
-  const st = S.cards[c.id];
-  return st ? (isMine(st) ? "you know it" : "learning") : "not learned yet";
-}

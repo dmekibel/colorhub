@@ -174,3 +174,41 @@
 
 @media (prefers-reduced-motion:reduce){.ar-hex{transition:none}}
 .ar-act[hidden],.ar-slotpanel[hidden]{display:none}
+/* craft pass 2026-10-08: each sense on a "Which" page says how it differs from the main one */
+.ar-plate em{font:italic 400 17px/1.25 var(--serif);max-width:30ch}
+
+/* ---------- reference chips and figure cards (js/article-refs.js) ----------
+   A [[gem:..]] style reference is an inline chip: a small line icon and the name, underlined like a color link. A paragraph that
+   holds one, and the nearest twins of the color, get a figure card: a fixed 112px picture, the name, and "94% match to Fiery
+   Rose". The card is a hairline-ruled row (no box); the picture box never changes size, so nothing moves when the image lands. */
+.ar-ref{display:inline;font:inherit;color:var(--ink);text-decoration:underline;text-decoration-color:rgba(236,232,223,.35);text-decoration-thickness:1px;text-underline-offset:3px;white-space:normal;padding:2px 0}
+.ar-ref svg{display:inline-block;width:.8em;height:.8em;margin:0 .3em 0 .02em;vertical-align:-.06em;opacity:.72}
+.ar-ref:active{opacity:.7}
+span.ar-ref.ar-x{text-decoration:none;color:var(--ar-body)}
+.ar-fig{margin:22px 0;padding:14px 0 10px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.ar-fig-b{display:grid;grid-template-columns:112px minmax(0,1fr);column-gap:16px;align-items:center;width:100%;min-height:112px;text-align:left;color:var(--ink)}
+.ar-fig-b:active .ar-fig-n{opacity:.75}
+.ar-fig-im{position:relative;display:block;width:112px;height:112px;overflow:hidden;border-radius:var(--r-1);background:var(--c,var(--surface-2));box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.ar-fig-im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s ease}
+.ar-fig-im img.ld{opacity:1}
+.ar-fig-hl{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .5s ease .1s;pointer-events:none}
+.ar-fig-hl.on{opacity:1}
+.ar-fig-strip{display:flex}
+.ar-fig-strip i{flex:1 1 0;background:var(--c)}
+.ar-fig-strip i.on{box-shadow:inset 0 -5px 0 rgba(255,255,255,.9)}
+.ar-fig-tx{display:flex;flex-direction:column;min-width:0;gap:5px}
+.ar-fig-k{font:italic 400 15px/1.25 var(--serif);color:var(--soft);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ar-fig-n{font:400 22px/1.08 var(--serif);letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-wrap:balance}
+.ar-fig-m{display:flex;align-items:center;gap:8px;font:400 13px/1.35 var(--sans);color:var(--ar-body)}
+.ar-fig-d{flex:none;display:inline-flex}
+.ar-fig-d i{width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.ar-fig-d i+i{margin-left:-4px}
+.ar-fig-c{font:400 13px/1.3 var(--sans);color:var(--soft)}
+.ar-fig-cr{margin:8px 0 0 128px;font:400 12px/1.4 var(--sans);color:var(--soft)}
+.ar-fig-cr a{color:inherit;text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:2px}
+.ar-fig+.ar-fig{margin-top:-1px}
+.ar-seen{margin-top:8px}
+.ar-seen-h{font:400 22px/1.12 var(--serif);letter-spacing:-.01em;margin:42px 0 4px}
+.ar-seen .ar-fig:first-of-type{margin-top:14px}
+@media (max-width:359px){.ar-fig-b{grid-template-columns:88px minmax(0,1fr);column-gap:12px}.ar-fig-im{width:88px;height:88px}.ar-fig-cr{margin-left:100px}.ar-fig-n{font-size:19px}}
+@media (prefers-reduced-motion:reduce){.ar-fig-im img,.ar-fig-hl{transition:none}}

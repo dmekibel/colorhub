@@ -65,9 +65,14 @@
    "persian-indigo"
   ],
   "disambiguation": [
-   "Indigo (this swatch, CSS and the rainbow) is violet-blue.",
-   "Indigo Dye and Ai-iro are the color of the actual dye: dark, greyed blue.",
-   "Indigo Blue (Werner, Ridgway) is a mid greyish blue from old color plates."
+   {
+    "slug": "indigo-dye",
+    "gloss": "the color of the actual dye: dark, greyed blue (as is Ai-iro)"
+   },
+   {
+    "slug": "indigo-blue",
+    "gloss": "Werner and Ridgway's mid greyish blue, from old color plates"
+   }
   ],
   "other_languages": [
    {

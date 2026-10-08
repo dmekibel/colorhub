@@ -13,7 +13,7 @@
   {
    "id": "name",
    "title": "The name and the plant",
-   "body": "Madder is not a single color but a plant and everything made from it. The dye comes from the roots of *Rubia tinctorum* and a few close relatives, and the main coloring molecule, alizarin, is roughly a hundredth of the root's weight [4][5]. English inherited the word from Old English *mædere*, a Germanic name with cousins in Swedish and Icelandic [29]. The French call it *garance*, and one nineteenth-century French madder lake was sold as *carmin de garance* [18]. The Levantine trade word *alizari* gave chemists the name [[alizarin]] [8].\n\nThe screen swatch for this page is the color that dictionaries call Madder Lake, a strong warm red [32]. Its nearest neighbors among our named colors are plain [[red]] and Persian red, both less than three units away [32]. That fits its history: until 1868, Garfield writes, madder supplied half the world with red [5]. The pink of [[rose-madder]] and the browns and violets of Ridgway's 1912 madder colors ([[madder-brown]], [[madder-violet]]) all borrow the root's name for different treatments of its color [32][19]."
+   "body": "Madder is not a single color but a plant and everything made from it. The dye comes from the roots of *Rubia tinctorum* and a few close relatives, and the main coloring molecule, alizarin, is roughly a hundredth of the root's weight [4][5]. English inherited the word from Old English *mædere*, a Germanic name with cousins in Swedish and Icelandic [29]. The French call it *garance*, and one nineteenth-century French madder lake was sold as *carmin de garance* [18]. The Levantine trade word *alizari* gave chemists the name *alizarin* [8].\n\nThe screen swatch for this page is the color that dictionaries call Madder Lake, a strong warm red [32]. Its nearest neighbors among our named colors are plain [[red]] and Persian red, both less than three units away [32]. That fits its history: until 1868, Garfield writes, madder supplied half the world with red [5]. The pink of [[rose-madder]] and the browns and violets of Ridgway's 1912 madder colors ([[madder-brown]], [[madder-violet]]) all borrow the root's name for different treatments of its color [32][19]."
   },
   {
    "id": "material",
@@ -74,15 +74,24 @@
   ],
   "parent": null,
   "children": [
-   "rose-madder",
    "madder-lake",
    "madder-brown",
    "madder-violet",
    "madder-blue"
   ],
   "disambiguation": [
-   "Madder Lake is the strong red pigment color; Rose Madder is the pink lake; Madder Blue and Madder Violet are Ridgway 1912 names for greyed colors, not blue or violet dyes from madder.",
-   "Alizarin is the coloring molecule; Alizarin (the swatch) is a cooler red."
+   {
+    "slug": "madder-blue",
+    "gloss": "Ridgway 1912 name for a greyed color, not a blue dye from madder"
+   },
+   {
+    "slug": "madder-violet",
+    "gloss": "Ridgway 1912 name for a greyed color, not a violet dye from madder"
+   },
+   {
+    "slug": "alizarin",
+    "gloss": "Alizarin is the coloring molecule; the swatch named Alizarin is a cooler red"
+   }
   ],
   "other_languages": [
    {
