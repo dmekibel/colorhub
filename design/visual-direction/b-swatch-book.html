@@ -1,0 +1,113 @@
+<!doctype html>
+<!-- Visual direction B: Swatch Book. Paper-light, the labelled chip as the motif. Three 440x956 frames. -->
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="shared.js"></script>
+<style>
+:root{
+  --paper:#EEE9DF; --card:#FBF9F4; --card-2:#E4DED2; --ink:#161412; --soft:#5E5A51; --faint:#8A857A; --line:rgba(22,20,18,.12);
+  --good:#2F7A4C; --sans:Geist,system-ui,sans-serif; --serif:'Instrument Serif',Georgia,serif;
+  --r-chip:4px; --r-ctl:12px; --r-card:16px; --r-sheet:24px;
+}
+*{box-sizing:border-box;margin:0}
+body{background:#050505;display:flex;gap:20px;width:1360px;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+.f{width:440px;height:956px;position:relative;overflow:hidden;background:var(--paper)}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:126px;height:37px;border-radius:20px;background:#000;z-index:50}
+.sb{position:absolute;top:18px;left:38px;right:34px;display:flex;justify-content:space-between;font:600 17px var(--sans);z-index:49}
+.num{font-variant-numeric:tabular-nums}
+.head{position:absolute;top:58px;left:0;right:0;height:56px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:var(--paper);z-index:20;border-bottom:1px solid var(--line)}
+.head b{font:700 22px var(--sans);letter-spacing:-.03em}
+.head span{font:500 14px var(--sans);color:var(--soft)}
+.tabs{position:absolute;left:0;right:0;bottom:0;height:96px;background:var(--card);border-top:1px solid var(--line);display:flex;padding:8px 8px 30px;z-index:20}
+.tabs div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font:500 12px var(--sans);color:var(--faint);position:relative}
+.tabs i{width:26px;height:26px;border-radius:var(--r-chip);display:block}
+.tabs .on{color:var(--ink)}
+.tabs .on::before{content:"";position:absolute;top:-8px;left:28%;right:28%;height:3px;background:var(--ink);border-radius:0 0 2px 2px}
+.dim{position:absolute;inset:0;background:rgba(22,20,18,.35);z-index:25}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--card);border-radius:var(--r-sheet) var(--r-sheet) 0 0;padding:10px 20px 40px;z-index:30}
+.grab{width:40px;height:5px;border-radius:3px;background:var(--card-2);margin:0 auto 16px}
+.sheet h3{font:700 28px var(--sans);letter-spacing:-.03em}
+.sheet p{font:15px var(--sans);color:var(--soft);margin:2px 0 16px}
+.fan{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.card{border-radius:var(--r-chip);background:#fff;box-shadow:0 1px 0 var(--line),0 6px 16px rgba(22,20,18,.08);overflow:hidden}
+.card .sw{height:84px}
+.card .lab{padding:8px 10px 10px}
+.card b{font:600 16px var(--sans);display:block;letter-spacing:-.01em}
+.card small{font:12px var(--sans);color:var(--soft)}
+.card.on{box-shadow:0 0 0 2px var(--ink),0 6px 16px rgba(22,20,18,.12)}
+.search{margin-top:14px;height:52px;border-radius:var(--r-ctl);background:var(--paper);display:flex;align-items:center;gap:10px;padding:0 16px;font:16px var(--sans);color:var(--faint)}
+/* color page */
+.big{position:absolute;top:122px;left:20px;right:20px;background:#fff;border-radius:var(--r-chip);box-shadow:0 1px 0 var(--line),0 18px 40px rgba(22,20,18,.12);overflow:hidden}
+.big .sw{height:330px;background:#FFBF00}
+.big .lab{padding:16px 18px 18px;display:flex;justify-content:space-between;align-items:flex-end}
+.big h1{font:700 52px/.95 var(--sans);letter-spacing:-.045em}
+.big .code{font:500 14px var(--sans);color:var(--soft);text-align:right;line-height:1.5}
+.back{position:absolute;top:66px;left:14px;height:44px;padding:0 10px;display:flex;align-items:center;gap:4px;font:500 17px var(--sans);z-index:21}
+.utabs{position:absolute;top:618px;left:20px;right:20px;display:flex;gap:22px;border-bottom:1px solid var(--line)}
+.utabs div{height:44px;display:flex;align-items:center;font:500 16px var(--sans);color:var(--faint)}
+.utabs .on{color:var(--ink);box-shadow:inset 0 -2.5px 0 var(--ink)}
+.kin{position:absolute;top:680px;left:20px;right:20px}
+.kin .t{font:italic 18px var(--serif);color:var(--soft);margin-bottom:10px}
+.row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.row3 .card .sw{height:64px}
+/* game */
+.q{position:absolute;top:130px;left:20px;right:20px}
+.q small{font:500 14px var(--sans);color:var(--soft)}
+.q h2{font:700 36px/1.02 var(--sans);letter-spacing:-.04em;margin-top:6px}
+.top{position:absolute;top:66px;left:20px;right:20px;display:flex;align-items:center;gap:14px}
+.top .x{font:500 26px var(--sans)}
+.top .track{flex:1;display:flex;gap:3px}.top .track i{flex:1;height:6px;border-radius:1px;background:var(--card-2)}.top .track i.d{background:var(--ink)}
+.board{position:absolute;top:252px;left:20px;right:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.board .card .sw{height:104px}.board .card .lab{padding:6px 8px;font:500 12px var(--sans);color:var(--soft)}
+.fb{position:absolute;left:20px;right:20px;top:720px;background:#fff;border-radius:var(--r-card);padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.fb b{font:700 20px var(--sans);color:var(--good)}.fb small{font:14px var(--sans);color:var(--soft);display:block;margin-top:2px}
+.btn{position:absolute;left:20px;right:20px;bottom:38px;height:56px;border-radius:var(--r-ctl);background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font:600 18px var(--sans)}
+</style>
+
+<div class="f">
+  <div class="island"></div><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+  <div class="head"><b>ColorHub</b><span class="num">Hue map · 100</span></div>
+  <div id="mapB" style="position:absolute;top:114px;left:0;right:0;bottom:0"></div>
+  <div class="dim"></div>
+  <div class="sheet">
+    <div class="grab"></div><h3>The map</h3><p>Choose what to see and what to do.</p>
+    <div class="fan">
+      <div class="card on"><div class="sw" style="background:linear-gradient(90deg,#E34234,#FFBF00,#30C5C0,#2A3FB0,#B784A7)"></div><div class="lab"><b>Colors</b><small class="num">Stage 3 · 100</small></div></div>
+      <div class="card"><div class="sw" style="background:linear-gradient(180deg,#F4EFDF,#5A6470)"></div><div class="lab"><b>Arrange</b><small>Hue map</small></div></div>
+      <div class="card"><div class="sw" style="background:#008080"></div><div class="lab"><b>Learn</b><small>12 near you</small></div></div>
+      <div class="card"><div class="sw" style="background:#9CAF88"></div><div class="lab"><b>Study</b><small>Find by place</small></div></div>
+      <div class="card"><div class="sw" style="background:#E8798F"></div><div class="lab"><b>Loved</b><small class="num">14 colors</small></div></div>
+      <div class="card"><div class="sw" style="background:#FFBF00"></div><div class="lab"><b>Today</b><small>Amber</small></div></div>
+    </div>
+    <div class="search">⌕ &nbsp;A color, a hex, a painter, a decade</div>
+  </div>
+</div>
+
+<div class="f">
+  <div class="island"></div><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+  <div class="back">‹ Map</div>
+  <div class="big"><div class="sw"></div><div class="lab"><div><div style="font:italic 18px var(--serif);color:var(--soft)">A gem, then a pigment</div><h1>Amber</h1></div><div class="code num">#FFBF00<br>Known · 3 days</div></div></div>
+  <div class="utabs"><div class="on">Overview</div><div>Paintings</div><div>Kin</div><div>Read</div></div>
+  <div class="kin"><div class="t">Easy to mix up with</div>
+    <div class="row3">
+      <div class="card"><div class="sw" style="background:#F4C430"></div><div class="lab"><b>Saffron</b><small>a touch greener</small></div></div>
+      <div class="card"><div class="sw" style="background:#E1AD01"></div><div class="lab"><b>Mustard</b><small>darker, duller</small></div></div>
+      <div class="card"><div class="sw" style="background:#F28500"></div><div class="lab"><b>Tangerine</b><small>redder</small></div></div>
+    </div></div>
+</div>
+
+<div class="f">
+  <div class="island"></div><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+  <div class="top"><span class="x">×</span><div class="track"><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i class="d"></i><i></i><i></i><i></i><i></i></div><span class="num" style="font:500 15px var(--sans);color:var(--soft)">9</span></div>
+  <div class="q"><small>Odd one out · violets</small><h2>Which chip is different?</h2></div>
+  <div class="board" id="boardB"></div>
+  <div class="fb"><div><b>Right</b><small class="num">3.5% lighter · best 3.2%</small></div><div id="pairB" style="display:flex;width:84px;height:44px;border-radius:4px;overflow:hidden"></div></div>
+  <div class="btn">Next</div>
+</div>
+
+<script>
+document.getElementById("mapB").innerHTML = vdMap({ step:70, cy:.34, shape:"chip", chipLabel:true, label:true });
+const b = vdBoard(3, 268, 50, 36, 4, 4);
+document.getElementById("boardB").innerHTML = b.map((c,i)=>`<div class="card ${i===4?"on":""}"><div class="sw" style="background:${c}"></div><div class="lab num">${i===4?"Chosen":"&nbsp;"}</div></div>`).join("");
+document.getElementById("pairB").innerHTML = `<i style="flex:1;background:${b[0]}"></i><i style="flex:1;background:${b[4]}"></i>`;
+</script>
