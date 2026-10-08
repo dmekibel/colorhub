@@ -28,6 +28,10 @@ What that means in practice (the default, not something David should have to ask
 - Painting palettes must be exact: pull about 6 colors from the real image and give each the most precise name, like "salmon pink", not "pink".
 - Stories must be deep but honest. Every color gets a line on how it differs from its neighbor. Shared history lives at the family level, and only colors with a real history get a signature story.
 - Beautiful UI; most use is on David's phone.
+- Naming policy (David, 2026-10-08):
+  - Primary names are learnable English names. Japanese and other-language names are secondary: "also called", "in other languages", or a section of the article. They are never the title.
+  - The name set has three layers: **Learn** (~600 real words, plus compound variations, up to 1,000); **Archive** (~2,700 distinct colors, each with a page); **Search** (~4,300 alternate names that point to those colors).
+  - No growth to 9,000. Generated descriptions are not names.
 - The 101 are not a special list to users (David, 2026-10-08). Never say "the 101" in the UI, and never link a color to its "closest of the 101". Look-alikes and nearby names come from all ~1,000 names.
 - One tap on any color opens its page (David, 2026-10-08). That covers palette chips, photo palettes, painting analysis, hyperlinks and tiles, anywhere in the app. Never a sheet with an "Open page" button in between. An in-between color opens its nearest name's page with the exact color shown ("Your color · 97% match").
 
