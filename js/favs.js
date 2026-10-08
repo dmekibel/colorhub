@@ -471,10 +471,14 @@ function fvArtWire(el, i, d, pic) {
 }
 
 // ---------- in You ----------
-// You's "What you love": a strip of kept paintings, newest first
+// You's "What you love": your kept paintings, newest first, as the same proper thumbnails (full painting visible,
+// a palette-archive aspect, named) as the shelf's own grid (David, 2026-10-09: the old 72px strip showed only a
+// cropped sliver of one painting; larger tiles here match "Your photos"'s sizing just below).
 function fvArtStrip() {
-  const list = fvArtList().slice(0, 6); if (!list.length) return "";
-  return `<button class="fva-strip" data-ym="favart" aria-label="Your paintings">${list.map(r => fvArtThumb(r)).join("")}</button>`;
+  const list = fvArtList(); if (!list.length) return "";
+  const lim = 4, show = list.slice(0, lim);
+  return `<div class="fva-grid">${show.map(r => `<button class="fva-pin" data-fva-open="${esc(r.id)}" aria-label="${esc(r.t)}">${fvArtThumb(r)}<b>${esc(r.t)}</b><small>${esc([r.a, r.y].filter(Boolean).join(" · "))}</small></button>`).join("")}</div>
+    ${list.length > lim ? `<button class="fv-seeall" data-ym="favart">All ${list.length.toLocaleString()} your paintings ${ICON.chev}</button>` : ""}`;
 }
 // open a kept painting: its saved index if it still holds that id, else find the id in the gallery's id list
 let FVA_IDS = null;

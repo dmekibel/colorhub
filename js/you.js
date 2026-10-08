@@ -251,10 +251,17 @@ function youPage() {
     if (k === "saved") { S.lens = "saved"; save(); return go("explore"); }
   });
   ymWireSettings(el.querySelector(".ym-settings"), youPage);
-  // photos live in IndexedDB: the shelf appears only once there's one to show
+  // photos live in IndexedDB: the shelf appears only once there's one to show. Larger tiles (David, 2026-10-09:
+  // "your photos look small"), each with its palette band underneath, like Studio's own photo cards (js/rooms2.js).
   if (typeof phList === "function") phList().then(rows => {
     const sec = el.querySelector("[data-ym-photos]"); if (!sec || !sec.isConnected || !rows.length) return;
-    sec.querySelector(".ym-photos").innerHTML = rows.slice(0, 8).map(r => `<button class="ym-ph" data-ph="${r.id}"><img src="${phURL(r)}" alt="" loading="lazy"></button>`).join("");
+    sec.querySelector(".ym-photos").innerHTML = rows.slice(0, 6).map(r => {
+      const pal = (r.pals && (r.pals[6] || r.pals[3])) || [];
+      return `<button class="ym-ph" data-ph="${esc(r.id)}">
+        <span class="ym-ph-img"><img src="${esc(phURL(r))}" alt="" loading="lazy"></span>
+        ${pal.length ? `<span class="ym-ph-band">${pal.map(c => `<i style="--c:${c.h};flex:${Math.max(.06, c.share || .16)}"></i>`).join("")}</span>` : ""}
+        <small>${esc(r.title || fmtDay(r.at) || "Photo")}</small></button>`;
+    }).join("");
     sec.hidden = false;
     sec.querySelectorAll("[data-ph]").forEach(x => x.onclick = () => photoPage(x.dataset.ph));
   }).catch(() => {});

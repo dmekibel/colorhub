@@ -957,7 +957,14 @@ img{transition:opacity .6s var(--ease)}
   border-radius:var(--r-3) var(--r-3) 0 0;box-shadow:0 -16px 48px rgba(0,0,0,.45);display:flex;flex-direction:column;
   overflow:hidden;animation:roomIn var(--grow) var(--ease-grow) both}
 @keyframes roomIn{from{transform:translateY(5%) scale(.97);opacity:.6}}
-.room-sheet>.screen{flex:1;min-height:0;overflow-y:auto;padding-top:calc(var(--s4) + 6px)}
+/* margin:0, min-width:0 (David, 2026-10-09): .screen's base rule centers itself with margin:0 auto (for the rare
+   wide/desktop viewport). Auto margins disable flex stretch on the cross axis, so inside room-sheet (a column
+   flex container) .screen stopped filling the room's width and instead sized itself to its content (shrink-to-fit)
+   -- and a non-wrapping horizontal rail inside it (chip rows like .fv-doors, a mix-up row's chips + Untangle
+   button) has a min-content width that can be wider than the room itself. room-sheet's own overflow:hidden then
+   quietly clipped the right edge of EVERY row instead of just that one rail scrolling on its own, which is what
+   made the whole You page look "too wide" (buttons, swatch strips and the favorite painting cut at the edge). */
+.room-sheet>.screen{flex:1;width:100%;min-width:0;min-height:0;overflow-y:auto;padding-top:calc(var(--s4) + 6px)}
 /* inside a room the sheet already sits below the status bar: sticky page headers drop their own safe-area inset */
 .room-sheet .x-head{padding-top:12px}.room-sheet .art-top{padding-top:10px}
 @media (prefers-reduced-motion:reduce){.room-sheet{animation:fade var(--dur-1) linear both}}

@@ -338,9 +338,7 @@ html:has(#app > .screen.fv-run){--ground:#5F5F5F;--lift:#676767;--lift-2:#6E6E6E
 .fv-pg i{flex:none;width:36px;height:36px;border-radius:var(--r-1);background:var(--c)}
 .fv-pg b{flex:1;min-width:0;font:400 18px/1.2 var(--serif);color:var(--ink)}
 .fv-pg svg{color:var(--faint)}
-/* You: the kept paintings as a strip of pictures */
-.fva-strip{display:flex;gap:2px;width:100%;height:72px;padding:0;margin:12px 0 0;border:0;border-radius:var(--r-1);overflow:hidden;background:none}
-.fva-strip .fva-im{flex:1;height:100%;aspect-ratio:auto;border-radius:0}
+/* You's "What you love" paintings now reuse .fva-grid/.fva-pin directly (js/favs.js fvArtStrip, 2026-10-09) */
 
 /* ---------- the heart on a painting's page: in the top bar beside the museum link, always on screen (David,
    2026-10-09 — it used to sit under the picture, a scroll away) ---------- */

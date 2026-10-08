@@ -2211,6 +2211,32 @@ scenario("you-coverage", "You: the week strip shows a color for a day you only p
   t.expect(i && getComputedStyle(i).getPropertyValue("--c").trim().toUpperCase() === "#2A52BE", `the played day's dot is "${i && getComputedStyle(i).getPropertyValue("--c")}", expected the day's focal color`);
 });
 
+// A flex child's automatic min-width is its content's min-content size (app.css .room-sheet>.screen used to have
+// neither min-width:0 nor an explicit width), so a non-wrapping horizontal row -- the favorite-paintings/photos
+// doors, a mix-up's chips + Untangle button -- could be wider than the room itself, and room-sheet's own
+// overflow:hidden then quietly clipped the right edge of every row (David's screenshot, 2026-10-09: the You page
+// looked wider than the screen). Load it with everything that can trigger that: a kept favorite painting (the
+// "What you love" doors gain a third chip), a long mix-up pair (chips + the Untangle button), hearted colors and
+// a saved palette, then assert the page never scrolls horizontally.
+scenario("you-coverage", "You: a favorite painting, long mix-up names and hearted colors never widen the page", async t => {
+  await t.open("#shot=you", { settle: 600 });
+  t.ev(`(() => {
+    S.favArt = { "demo-1": { i: 0, t: "Portrait of a Lady", a: "J. Singer Sargent", y: "1890",
+      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/x.jpg/640px-x.jpg", crop: null, ar: 1.3, h: "#8A6A52", at: today(), n: Date.now() } };
+    const c = (n, h) => ({ n, h });
+    learnerLog({ type: "confuse", color: c("Anthracene violet", "#3A2B3E"), b: c("Amaranth deep purple", "#5E2340"), src: "lesson" });
+    learnerLog({ type: "confuse", color: c("Anthracene violet", "#3A2B3E"), b: c("Amaranth deep purple", "#5E2340"), src: "lesson" });
+    save(); youPage();
+  })()`);
+  await t.sleep(500);
+  t.expect(t.$(".fv-doors"), "no category doors (the favorite painting should add a third)");
+  t.expect(t.$(".ym-untangle"), "no Untangle button on the long mix-up pair");
+  const sw = t.ev("document.scrollingElement.scrollWidth"), cw = t.ev("document.scrollingElement.clientWidth");
+  t.expect(sw <= cw, `the You page scrolls horizontally: scrollWidth ${sw} > clientWidth ${cw}`);
+  const screen = t.$(".screen.you-page");
+  t.expect(screen.getBoundingClientRect().width <= cw + 1, `the You page's own screen is ${Math.round(screen.getBoundingClientRect().width)}px wide, wider than the ${cw}px viewport`);
+});
+
 // ================================================================== THE PAINTING PAGE + NAME IT / FIND IT (PLAN.md lane A)
 scenario("paintings", "lane A: a painting page leads with what stands out; Name its colors runs three rounds, logs them, and offers Learn", async t => {
   await t.open("#/gallery/12", { settle: 800 });
