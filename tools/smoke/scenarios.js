@@ -1306,7 +1306,7 @@ scenario("map", "On the map: a painting page lights its colors on Home; #/map/ga
   const nIn = t.$$(".cs-hl-n input").pop();
   t.expect(nIn && +nIn.max > 6, "a museum painting on the map has no How many slider over its pool");
   nIn.value = 12; nIn.dispatchEvent(new t.w.Event("input", { bubbles: true })); nIn.dispatchEvent(new t.w.Event("change", { bubbles: true }));
-  await t.sleep(200);
+  await t.waitFor(() => { const bs = t.$$(".cs-hl-bar"), bb = bs[bs.length - 1]; return bb && bb.querySelectorAll(".cs-hl-c").length === t.ev("HONEY_HL.hexes.length") && t.ev("HONEY_HL.hexes.length") > 6; }, 4000, "the named chips to follow the How many slider").catch(() => {});
   const bars = t.$$(".cs-hl-bar"), bar = bars[bars.length - 1], lit = t.ev("HONEY_HL.hexes.length"), chips = bar.querySelectorAll(".cs-hl-c").length;
   t.expect(lit > 6 && lit <= 12 && chips === lit, `How many 12 lit ${lit} colors and named ${chips}`);
   t.expect(/%/.test(bar.querySelector(".cs-hl-c").textContent), "the named chips don't say their share of the canvas");
