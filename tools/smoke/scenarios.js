@@ -776,7 +776,7 @@ scenario("studio", "gamut wheel: presets, mask, keep, swatch tap", async t => {
   await t.click("[data-wheel]", { wait: 700 });
   await t.waitFor("canvas.gw-wheel", 6000, "the gamut wheel");
   const presets = t.$$("[data-m]");
-  t.expect(presets.length === 5, `${presets.length} mask presets instead of 5`);
+  t.expect(presets.length === 7, `${presets.length} mask presets instead of 7`);
   const sw0 = t.$$("i[data-swatch]").map(e => e.dataset.swatch).join();
   for (const p of presets) await t.click(p, { wait: 250 });
   const sw1 = t.$$("i[data-swatch]").map(e => e.dataset.swatch).join();

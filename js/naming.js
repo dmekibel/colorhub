@@ -43,14 +43,14 @@ const hueLean = h => { h = (h + 360) % 360; return h < 40 || h >= 345 ? "reddish
 // Words a name may already carry, by axis: a modifier never doubles up on its own axis ("pale dark jungle green").
 const MOD_AXIS_WORDS = { L: /\b(light|pale|dark|deep|dusky|bright)\b/i, C: /\b(grey|gray|greyish|grayish|dusty|dull|vivid|bright|neon|electric)\b/i,
   H: /\b(reddish|yellowish|greenish|bluish|purplish|orangish|pinkish)\b/i };
-function pickModifier(nameLch, targetLch, name = "") {
+function pickModifier(nameLch, targetLch, name = "", skip = "") {
   const [Ln, Cn] = nameLch, [Lt, Ct, Ht] = targetLch;
   const dL = Lt - Ln, dC = Ct - Cn;
   let dH = Ht - nameLch[2]; if (dH > 180) dH -= 360; if (dH < -180) dH += 360;
   const scores = [["L", Math.abs(dL), dL], ["C", Math.abs(dC) * .8, dC]];
   if (Cn > 8 && Ct > 8) scores.push(["H", Math.abs(dH) * Math.min(Cn, Ct) / 40, dH]);
   scores.sort((a, b) => b[1] - a[1]);
-  const ok = scores.filter(sc => !MOD_AXIS_WORDS[sc[0]].test(name));
+  const ok = scores.filter(sc => !skip.includes(sc[0]) && !MOD_AXIS_WORDS[sc[0]].test(name));
   if (!ok.length) return "";
   const [axis, , v] = ok[0];
   if (axis === "L") return v > 0 ? (Ct < 20 ? "pale" : "light") : (Ct > 35 ? "deep" : "dark");
@@ -90,6 +90,15 @@ function nameOf(color, opts = {}) {
     else text = `No close name; nearest is ${top.n}`;
   } else if (top.de >= VERY_CLOSE_DE) {
     mod = pickModifier(lch(top.h), Lt, top.n);
+    // never let the word contradict the color (a vivid red is not "dusty pink red", a near-white is not "dark linen"):
+    // a word only stands when the target's own chroma / lightness agrees; otherwise the next-biggest difference speaks
+    let skip = "";
+    for (let k = 0; k < 2 && mod; k++) {
+      const bad = (/^(dusty|greyish)$/.test(mod) && Lt[1] >= 40) || (/^(vivid|bright)$/.test(mod) && Lt[1] < 45) ? "C"
+        : (/^(dark|deep)$/.test(mod) && Lt[0] >= 75) || (/^(light|pale)$/.test(mod) && Lt[0] < 30) ? "L" : "";
+      if (!bad) break;
+      skip += bad; mod = pickModifier(lch(top.h), Lt, top.n, skip);
+    }
     if (mod) text = `${mod} ${top.n.toLowerCase()}`;
   }
   text = text.charAt(0).toUpperCase() + text.slice(1);   // "Pale salmon", "Between teal and slate"
