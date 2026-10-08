@@ -306,6 +306,7 @@ function gymHome() {
     <h1 class="tab-title">Train</h1>
     ${top}
     ${eyeProfile()}
+    ${typeof ooShelf === "function" ? ooShelf() : ""}
     ${cvdOn() ? `<p class="x-sub" style="margin-top:12px">A simple adjustment for ${S.profile.cvd} color blindness, not a simulation of it: differences lean on lightness and on the colors you see best.</p>` : ""}
     ${SHELVES.map(([name, ks]) => `<div class="sec-head"><b>${name}</b><span>${name === "Applied" ? "built on the basics" : name === "In context" ? "color next to color" : "one judgment at a time"}</span></div>
       <div class="gs-grid">${ks.map(stationTile).join("")}</div>`).join("")}
@@ -320,6 +321,7 @@ function gymHome() {
   el.querySelector("[data-lightning]").onclick = lightning;
   el.querySelector("[data-eye]").onclick = eyeReport;
   if (typeof wireMatch === "function") wireMatch(el);
+  if (typeof ooWire === "function") ooWire(el);   // js/games/oo-ui.js: Odd one out, today's board, Whose palette?
 }
 const k0Trials = k => k === "order" ? `${SKILLS[k].trials} strips` : k === "squint" ? `${SKILLS[k].trials} paintings` : `${SKILLS[k].trials} rounds`;
 const dueWords = n => n <= 0 ? "today" : n === 1 ? "tomorrow" : `in ${n} days`;
@@ -1181,6 +1183,7 @@ function gymShotState() {
   ];
 }
 function gymShot(arg) {
+  if (/^oo(:|$)/.test(arg || "") && typeof ooShot === "function") return ooShot((arg || "").slice(3));   // js/games/oo-shot.js
   const [what, k] = (arg || "home").split("-");
   if (what === "fresh") { S.gym.skills = {}; S.best = {}; return go("gym"); }
   if (what === "first") return go("gym");
