@@ -279,6 +279,7 @@ function eyeProfile() {
 }
 
 function gymHome() {
+  if (typeof r2TrainHome === "function") return r2TrainHome();   // design round 2: js/rooms2.js
   const g = gyState(), day = gyDay(), ci = checkinDue(g.checkins, triedKeys().length, day);
   let top;
   if (ci.due) {
