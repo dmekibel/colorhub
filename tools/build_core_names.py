@@ -162,7 +162,7 @@ def src_rank(srcs):
 MOD_AXIS_RE = {
     "L": re.compile(r"\b(light|pale|dark|deep|dusky|bright)\b", re.I),
     "C": re.compile(r"\b(grey|gray|greyish|grayish|dusty|dull|vivid|bright|neon|electric)\b", re.I),
-    "H": re.compile(r"\b(reddish|yellowish|greenish|bluish|purplish)\b", re.I),
+    "H": re.compile(r"\b(reddish|yellowish|greenish|bluish|purplish|orangish|pinkish)\b", re.I),
 }
 
 
