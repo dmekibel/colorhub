@@ -17,7 +17,8 @@ const H = {
   // Tap something on a color/name page that should open another page (a swatch, a near color, a palette chip).
   async tapSwatch(t) {
     const before = H.title(t) + "|" + H.chip(t);
-    const sels = ["[data-swatch]", ".lk-row[data-cp-near]", ".lk-row[data-np-near]", ".pchip[data-node]", ".kin[data-node]"];
+    // the Walk's honeycomb is a color page's one neighbor list now (it absorbed Nearest names, 2026-10-08)
+    const sels = ["[data-swatch]", ".lk-row[data-cp-near]", ".lk-row[data-np-near]", ".rp-hc-c[data-rc-open]", ".pchip[data-node]", ".kin[data-node]"];
     let target = null, used = "";
     for (const s of sels) { const e = t.$$(s, t.$("#app"))[0]; if (e) { target = e; used = s; break; } }
     t.expect(target, "no swatch / near-color / palette chip on the page to tap");
@@ -561,6 +562,12 @@ scenario("pages", "namePage x3: renders, a near name opens another, Back works",
 // js/article-refs.js: the figure cards in an article (Mauve has an article, a twin gem, a film and paintings that hold the color)
 scenario("pages", "article figure cards: Mauve draws them, a card opens its page, Back returns to the article", async t => {
   await H.openPage(t, "#/color/mauve", "Mauve");
+  // a long story is a door on the page (chapters, minutes); Begin reading opens the book on its own screen
+  const door = await t.waitFor(".ar-door [data-ar-begin]", 20000, "Mauve's story door");
+  t.expect(!t.$(".cp-page .ar-sec"), "the long story is drawn inline on the color page, not behind its door");
+  t.expect(t.$$(".ar-door [data-ar-chap]").length >= 2, "the door lists no chapters");
+  await t.click(door, { wait: 700 });
+  await t.waitFor(() => t.$(".ar-read .ar") && /#\/read\/mauve/.test(decodeURIComponent(t.w.location.hash)), 15000, "the book at #/read/mauve");
   await t.waitFor(() => t.$$(".ar-fig").length >= 2, 25000, "the article's figure cards");
   const figs = t.$$(".ar-fig");
   t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
@@ -573,7 +580,9 @@ scenario("pages", "article figure cards: Mauve draws them, a card opens its page
   await t.click(card, { wait: 700 });
   await t.waitFor(() => !t.$(".ar") && t.$(".p-title, .cp-hero-foot h1, .gl-page, .film-page"), 10000, `the page for "${title}"`);
   await t.click("[data-back]", { wait: 600 });
-  await t.waitFor(() => t.$(".ar") && t.$$(".ar-fig").length >= 2, 20000, "the article and its figures after Back");
+  await t.waitFor(() => t.$(".ar-read .ar") && t.$$(".ar-fig").length >= 2, 20000, "the book and its figures after Back");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Mauve" && t.$(".ar-door"), 15000, "Back from the book to Mauve's page and its door");
 });
 
 scenario("pages", "a tapped in-between hex opens its nearest name with 'Your color'", async t => {
