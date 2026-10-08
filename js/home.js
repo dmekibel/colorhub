@@ -909,7 +909,7 @@ function hmStudyCorner(ctrl, items) {
   const mid = ctrl && ctrl.current();
   const basic = x => { const a = x && x.n && BYNAME.get(String(x.n).toLowerCase()); return !!(a && a.basic); };
   const unknown = x => typeof knowState !== "function" || knowState({ n: x.n, h: x.h }) !== "yours";
-  if (mid && mid.n && !basic(mid) && unknown(mid)) return prQuick({ seed: { n: mid.n, h: mid.h }, src: "map", source: "alike" });
+  if (mid && mid.n && !basic(mid) && unknown(mid)) return prQuick({ seed: { n: mid.n, h: mid.h }, src: "map", source: "alike", sheet: true });
   const edge = typeof edgeOfMap === "function" ? edgeOfMap(10) : [];
   if (edge.length >= 3) return prQuick({ items: edge.map(x => ({ n: x.n, h: x.h })), label: "Next door to what you know", src: "map", source: "these" });
   // nearest on the map itself (the bubbles you see around the middle); by color distance when the layout can't say.

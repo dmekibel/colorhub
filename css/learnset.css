@@ -170,3 +170,11 @@
 @media (max-width:360px){.ls-meet-n{font-size:46px}.ls-mp-half .ls-meet-n{font-size:25px}.ls-meet-line{font-size:16px}}
 @media (prefers-reduced-motion:reduce){.ls-meet-sw,.ls-meet-name,.ls-meet-line,.ls-mp,.ls-mp-half{animation:none!important}}
 .pr-shot .ls-meet-sw,.pr-shot .ls-meet-name,.pr-shot .ls-meet-line,.pr-shot .ls-mp,.pr-shot .ls-mp-half{animation:none}
+
+/* Learn it, straight away (lsQuick): the Adjust link and the short ending */
+.ls-adjust{margin-left:auto;font-size:15px;color:var(--soft)}
+.ls-qend{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;padding:24px 28px}
+.ls-qfan{display:flex;gap:10px;margin-bottom:8px}
+.ls-qfan i{width:44px;height:44px;border-radius:50%;background:var(--c);animation:lsQfan .5s var(--ease,ease) both;animation-delay:calc(var(--k)*70ms)}
+@keyframes lsQfan{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.ls-qfan i{animation-duration:.01s}}

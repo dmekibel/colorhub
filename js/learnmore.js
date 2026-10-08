@@ -604,8 +604,8 @@ function lxShot(arg = "room") {
     }
     const c = lxByName("Chestnut") || gen[3].colors[0];   // a name past the first units, not met yet
     if (arg === "ltdone") return hmLtDone([c, ...lxGroup(c)], c);
-    if (arg === "learnit") return hmLearnIt(c);
-    if (arg === "learnitpage") { hmLearnIt(c); setTimeout(() => { const p = document.querySelector("#ltPager"); if (p) p.scrollTop = p.clientHeight * 2; }, 300); return; }
+    if (arg === "learnit") return hmLearnIt(c, { lesson: true });
+    if (arg === "learnitpage") { hmLearnIt(c, { lesson: true }); setTimeout(() => { const p = document.querySelector("#ltPager"); if (p) p.scrollTop = p.clientHeight * 2; }, 300); return; }
     if ((arg === "edge" || arg === "edgedone") && typeof hmLtEdge === "function") {
       hmLtEdge([c, ...lxGroup(c)], c, () => {});
       if (arg === "edgedone") setTimeout(() => { const b = document.querySelectorAll(".lt-edge-b")[5]; if (b) b.click(); }, 400);
