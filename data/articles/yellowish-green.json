@@ -1,0 +1,229 @@
+{
+ "slug": "yellowish-green",
+ "name": "Yellowish Green",
+ "hex": "#B0DD16",
+ "names": [
+  "Yellowish Green"
+ ],
+ "tier": "descriptive",
+ "depth": "medium",
+ "lede": "Yellowish green is not a story but a measurement in words: a green with some yellow in it, used for centuries by naturalists, dyers and dictionary makers for everything from lettuce to gemstones.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a name",
+   "body": "The term is built, not coined: the suffix -ish tells you the color leans yellow and the noun tells you it is still green. Naturalists used it deliberately. In 1809 James Sowerby listed 68 English and Latin color terms in compound forms such as yellowish green and bluish grey, though Baty suggests naturalists were put off, since the terms felt abstract and the method called for a prism [1].\n\nThe modern standard gave it a place. The ISCC-NBS system of 1955 files our swatch under block 116 and names it a vivid yellow green, within a color distance of 4.4 [12]. Yellowish green is the plain-language label, and in practice the colors that deserve it range widely in lightness and depth."
+  },
+  {
+   "id": "names",
+   "title": "What the dictionary files under it",
+   "body": "Paterson's dictionary defines dozens of names as a yellowish green. A few are plant words: artichoke green, asphodel green, bud green, lettuce green, pistachio green and the delicate green of lime-tree foliage called tilleul [2]. Some are animals, such as the vivid yellowish green of the parakeet's plumage called parrot green [2]. Others are pure labels: cypress green, willow green and seaweed green are all given just as a yellowish green [2].\n\nThe grass in Shakespeare's *Hamlet*, the grass-green turf of Act 4, is also yellowish green by Paterson's reading [2]. Our own [[grass-green]], [[pistachio]] and [[artichoke-green]] swatches show how far the term stretches, from fresh and light to dull and grey."
+  },
+  {
+   "id": "pigments",
+   "title": "Pigments and a drifting name",
+   "body": "Cobalt green is a good warning that the label can mislead. Paterson describes it as a bright yellowish-green found in 1780 by Rinman [3]. The cobalt green in our name set is a pale blue-green, #7BC6A0, so the modern color is not the one first described [3][12]. Paterson also defines emerald green as a dark yellowish-green, originally made from a copper aceto-arsenate [4].\n\nYellowish green also appears as a stage in a dye. The liquid in a working indigo vat is yellowish green, as is the cloth just lifted from it, and the thread turns blue only after minutes of exposure to air [5][6]. Anyone who watches a vat sees green become blue before their eyes."
+  },
+  {
+   "id": "gems",
+   "title": "In stones and paint",
+   "body": "The gem peridot is the classic yellowish green mineral. Finlay says the brilliant green crystals of Zabargad island look best at dusk, which earned them the old name of evening emerald; a peridot she held in the fading light had a yellowish-green hue that seemed to glow a little [7].\n\nIn painting, the term describes tints more than whole pictures. Ball reads Cézanne's *Hillside in Provence*, of about 1885, as strong greens among subdued earths: emerald green and viridian carry the greens, and a glaze of yellow lake gives the foreground its yellowish-green tinge [8]. The yellow is laid over the green rather than mixed into it."
+  },
+  {
+   "id": "people",
+   "title": "Seeing and remembering it",
+   "body": "Kierkegaard turned the color into a sad little memory. In *Either/Or* the narrator sees a poor man in a worn, light yellowish-green coat and is moved because the color recalls his own first childish pictures, in which every hero wore such a coat [9]. Batchelor quotes the passage as a story about the loss of color from adult life [9].\n\nOn perception, Birren claimed in 1950 that the eye sees best in yellowish-green light, but this is old opinion rather than modern evidence [10]. A firmer statement is Livingstone's, that the rare people who lack the short-wavelength cone pigment have trouble telling some bluish colors from some yellowish greens [11]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a color that paintings almost never contain. In our archive of 23,781 works, none has a color within four units of this swatch covering at least one per cent of its canvas [13]. The count describes museum photographs of aged, varnished paintings and not painting as a whole [13].\n\nIn Google Books the phrase *yellowish green* was at its highest level in the earliest period of our curve, from 1800, and by the 2010s it stands at about 13 per cent of that level [14]. The counts include every sense of the phrase, not only the color name [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier: yellowish plus green",
+   "first_recorded": "as a plain-language term in naturalists' compound color lists by 1809; ISCC-NBS block 116 in 1955",
+   "source": "Baty, Nature's Palette, p. 165; ISCC-NBS 1955"
+  },
+  "aka": [
+   "yellow-green"
+  ],
+  "siblings": [
+   "green-yellow",
+   "pear",
+   "june-bud"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "green-yellow",
+    "gloss": "the web color Green Yellow, #ADFF2F, close to this swatch but a different name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B0DD16",
+   "de2000": 4,
+   "min_cover": 0.01
+  },
+  "n_present": 0,
+  "ngram": {
+   "term": "yellowish green",
+   "peak": 1800,
+   "rel_2010": 0.13
+  },
+  "measured": {
+   "lch": [
+    82.4,
+    87.2,
+    115.5
+   ],
+   "iscc": "vivid yellow green",
+   "iscc_de": 4.4
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 165",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries \"artichoke green\", \"asphodel green\", \"bud green\", \"cypress green\", \"grass-green\", \"lettuce green\", \"parrot green\", \"pistachio\", \"seaweed green\", \"tilleul\", \"willow green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"cobalt green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"emerald green\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 126",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Indigo\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 16",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Batchelor, Chromophobia, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 28 (a contested, old claim)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Livingstone, Vision and Art, ch. 13",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955 block 116; name set (Cobalt Green #7BC6A0)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub archive field note, as photographed (n = 23,781)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"yellowish green\" (relative to peak)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color is the liquid in a working indigo vat?",
+   "choices": [
+    "Yellowish green",
+    "Deep blue",
+    "Purple",
+    "Colorless"
+   ],
+   "answer": "Yellowish green",
+   "kind": "pick"
+  },
+  {
+   "q": "In Cézanne's Hillside in Provence, what gives the foreground its yellowish-green tinge?",
+   "choices": [
+    "A glaze of yellow lake",
+    "Viridian alone",
+    "Green earth",
+    "Verdigris"
+   ],
+   "answer": "A glaze of yellow lake",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A working indigo vat is yellowish green; the blue appears only when the thread meets the air.",
+  "Evening emerald was an old name for peridot, a yellowish-green stone that seems to glow at dusk.",
+  "No painting in our archive of 23,781 has this much of the color."
+ ],
+ "words": 685,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Sowerby sentence: abstractness and prism are separate reasons in Baty",
+   "Peridot/Zabargad: Finlay calls the island's crystals brilliant green; yellowish-green and glow come from the crystal she held at dusk"
+  ]
+ }
+}

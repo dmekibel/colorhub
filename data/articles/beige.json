@@ -152,7 +152,7 @@
   {
    "n": 7,
    "kind": "book",
-   "cite": "Pastoureau, Blue, ch. 7",
+   "cite": "Pastoureau, White, on whitening and church vestments",
    "loc_kind": "book-chapter",
    "url": null
   },
@@ -275,12 +275,10 @@
  "words": 1115,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 23 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "First-use date disagrees: mid-19th c. (St Clair), 1879 (Paterson), 1887 (Maerz and Paul); stated as disagreement.",
-   "Universe color myth corrected (turquoise error, beige); 'cosmic latte' via St Clair.",
-   "Archive pattern is a look-alike hue in aged photographs, not a pigment claim."
+   "Footnote 7 (vestments) re-cited to Pastoureau, White; claims otherwise verified against St Clair, Greenfield, Paterson, Pastoureau."
   ]
  }
 }

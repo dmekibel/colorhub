@@ -230,26 +230,52 @@ function honeyRingArr(items, rankOf, groupOf) {
     const p = grp.map(it => Math.min(c - 1, Math.round(honeyAngleOf(it) / 360 * c)));
     for (let i = 1; i < m; i++) p[i] = Math.max(p[i], p[i - 1] + 1);
     if (m && p[m - 1] > c - 1) { p[m - 1] = c - 1; for (let i = m - 2; i >= 0; i--) p[i] = Math.min(p[i], p[i + 1] - 1); }
-    grp.forEach((it, i) => { const cell = cells[p[i]]; pts.push({ it, x: cell.x, y: cell.y, d, g: groupOf ? groupOf(it) : 0 }); });
+    grp.forEach((it, i) => { const cell = cells[p[i]]; pts.push({ it, x: cell.x, y: cell.y, g: groupOf ? groupOf(it) : 0 }); });
   }
-  const lay = { pts: pts.map(q => ({ it: q.it, x: q.x, y: q.y, g: q.g })), finite: true };
-  if (groupOf) {
-    const g = new Map(items.map(it => [it, groupOf(it)])), gs = [...new Set(g.values())].sort((a, b) => a - b), B = 72;
-    lay.bounds = [];
-    for (const gi of gs.slice(0, -1)) {
-      const inR = new Array(B).fill(-1), outR = new Array(B).fill(Infinity);
-      for (const q of pts) {
-        const b = Math.floor(((Math.atan2(q.y, q.x) / (2 * Math.PI) + 1) % 1) * B), r = Math.hypot(q.x, q.y);
-        if (g.get(q.it) <= gi) inR[b] = Math.max(inR[b], r); else outR[b] = Math.min(outR[b], r);
-      }
-      if (inR.every(v => v < 0) || outR.every(v => v === Infinity)) continue;
-      let rr = inR.map((v, b) => v < 0 ? (outR[b] < Infinity ? outR[b] - .5 : null) : outR[b] < Infinity ? (v + outR[b]) / 2 : v + .5);
-      const fill = rr.filter(v => v != null), avg = fill.reduce((t, v) => t + v, 0) / (fill.length || 1);
-      rr = rr.map(v => v == null ? avg : v);
-      for (let pass = 0; pass < 3; pass++) rr = rr.map((v, b) => (rr[(b + B - 1) % B] + 2 * v + rr[(b + 1) % B]) / 4);
-      lay.bounds.push(rr);
+  const lay = { pts, finite: true };
+  if (groupOf) lay.bounds = honeyGroupBounds(pts, groupOf);
+  return lay;
+}
+// the seams between radial groups (stages, Learned/Learning/New), one smooth closed curve each: per angle bucket,
+// halfway between the outermost color of the inner groups and the innermost color of the outer ones
+function honeyGroupBounds(pts, groupOf) {
+  const g = new Map(pts.map(q => [q.it, groupOf(q.it)])), gs = [...new Set(g.values())].sort((a, b) => a - b), B = 72, out = [];
+  for (const gi of gs.slice(0, -1)) {
+    const inR = new Array(B).fill(-1), outR = new Array(B).fill(Infinity);
+    for (const q of pts) {
+      const b = Math.floor(((Math.atan2(q.y, q.x) / (2 * Math.PI) + 1) % 1) * B), r = Math.hypot(q.x, q.y);
+      if (g.get(q.it) <= gi) inR[b] = Math.max(inR[b], r); else outR[b] = Math.min(outR[b], r);
     }
+    if (inR.every(v => v < 0) || outR.every(v => v === Infinity)) continue;
+    let rr = inR.map((v, b) => v < 0 ? (outR[b] < Infinity ? outR[b] - .5 : null) : outR[b] < Infinity ? (v + outR[b]) / 2 : v + .5);
+    const fill = rr.filter(v => v != null), avg = fill.reduce((t, v) => t + v, 0) / (fill.length || 1);
+    rr = rr.map(v => v == null ? avg : v);
+    for (let pass = 0; pass < 3; pass++) rr = rr.map((v, b) => (rr[(b + B - 1) % B] + 2 * v + rr[(b + 1) % B]) / 4);
+    out.push(rr);
   }
+  return out;
+}
+// SUNFLOWER: the golden-angle disc, filled from the middle out in rank order like the rings. The disc is cut into
+// bands one lattice unit wide; each band takes the next colors in rank order, and inside a band the colors go round
+// by hue (the best rotation of hue order onto the band's seeds), so the middle-vs-edge meaning and a hue circle
+// both read, in the sunflower's own packing.
+function honeySunArr(items, rankOf, groupOf) {
+  const N = items.length; if (!N) return { pts: [], finite: true };
+  const c = .56, seeds = [];
+  for (let i = 0; i < N; i++) { const r = c * Math.sqrt(i + .5), a = i * HONEY_GA, x = r * Math.cos(a), y = r * Math.sin(a); let t = Math.atan2(-y, x) * 180 / Math.PI; if (t < 0) t += 360; seeds.push({ x, y, t, band: Math.floor(r) }); }
+  const ordered = items.slice().sort((a, b) => rankOf(a) - rankOf(b) || honeyAngleOf(a) - honeyAngleOf(b)), pts = [];
+  const ad = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
+  for (let i0 = 0; i0 < N;) {
+    let i1 = i0; while (i1 < N && seeds[i1].band === seeds[i0].band) i1++;
+    const cells = seeds.slice(i0, i1).sort((a, b) => a.t - b.t), m = cells.length;
+    const grp = ordered.slice(i0, i1).sort((a, b) => honeyAngleOf(a) - honeyAngleOf(b));
+    let bo = 0, bc = Infinity;
+    for (let o = 0; o < m; o++) { let s = 0; for (let k = 0; k < m && s < bc; k++) s += ad(honeyAngleOf(grp[k]), cells[(k + o) % m].t); if (s < bc) { bc = s; bo = o; } }
+    grp.forEach((it, k) => { const s = cells[(k + bo) % m]; pts.push({ it, x: s.x, y: s.y, g: groupOf ? groupOf(it) : 0 }); });
+    i0 = i1;
+  }
+  const lay = { pts, finite: true };
+  if (groupOf) lay.bounds = honeyGroupBounds(pts, groupOf);
   return lay;
 }
 // a family per region: each family a small grid of its own (sub(items) -> a finite layout), the regions laid out three
@@ -274,14 +300,11 @@ function honeyRegions(items, sub, order = HONEY_PAGE_ORDER) {
     const c = i % COLS, rw = Math.floor(i / COLS);
     // centered in its cell of the book, then snapped to the lattice
     const ox = Math.round(cx[c] + (colW[c] - (r.x1 - r.x0 + 1)) / 2 - r.x0), oy = Math.round((cy[rw] + (rowH[rw] - (r.y1 - r.y0 + HONEY_SQ3)) / 2 - r.y0) / (2 * HONEY_SQ3)) * 2 * HONEY_SQ3;
-    r.g.pts.forEach(q => pts.push({ it: q.it, x: q.x + ox, y: q.y + oy, g: r.f }));
+    // a region's own sub-groups (Sort by: First met keeps met and not-yet-met apart) stay apart inside the family
+    r.g.pts.forEach(q => pts.push({ it: q.it, x: q.x + ox, y: q.y + oy, g: r.f + "|" + (q.g || 0) }));
   });
   return { pts: honeyCenterPts(pts), finite: true, regions: true };
 }
-// Families: inside each region, hue across and light to dark down
-const honeyIslands = items => honeyRegions(items, a => honeyGridArr(a, honeyHueKey, it => 100 - it.L, 2.4));   // tall regions: the book is phone-shaped
-// Pages by hue (a page of the Munsell book per family): inside each region, muted to vivid across, light to dark down
-const honeyPages = items => honeyRegions(items, a => honeyGridArr(a, it => it.C, it => 100 - it.L, 2.4));
 // warm (+1, orange-yellow) to cool (-1, blue), scaled by strength so greys sit in the seam
 const honeyTemp = it => it.C < 6 ? 0 : it.C / (it.C + 18) * Math.cos((it.H - 60) * Math.PI / 180);
 const honeyTier = it => { const c = typeof hmCard === "function" ? hmCard(it.o) : null; return !c ? 2 : typeof isMine === "function" && isMine(c) ? 0 : 1; };
@@ -292,22 +315,89 @@ function honeyStageGroups(items) {
   ord.forEach((it, i) => { let s = 0; while (s < st.length && i >= st[s]) s++; m.set(it, s); });
   return it => m.get(it) || 0;
 }
-// id -> { title, sub (one line: what position means), make(items) }. In strip order (js/home.js View sheet).
+// ---- how often a color turns up in the 23,781 paintings (data/colorindex/painted.json, built from the affinity
+// table by tools/painted_counts.js: paintings holding the color within 4% different over at least 1% of the picture).
+// Names outside the table borrow the count of their nearest name that has one. Loaded only when a view asks.
+let HONEY_PAINTED = null, HONEY_PAINTED_P = null;
+function honeyLoadPainted() {
+  if (HONEY_PAINTED) return Promise.resolve(HONEY_PAINTED);
+  return HONEY_PAINTED_P = HONEY_PAINTED_P || fetch("data/colorindex/painted.json").then(r => r.json()).then(d => {
+    const m = new Map(), ref = [];
+    for (const [n, h, k] of d.c) { m.set(n.toLowerCase(), k); ref.push({ h, k, ok: null }); }
+    return HONEY_PAINTED = { m, ref, n: d.n };
+  }).catch(e => { HONEY_PAINTED_P = null; throw e; });
+}
+function honeyPainted(it) {
+  if (it.pc != null) return it.pc;
+  const P = HONEY_PAINTED; if (!P) return 0;
+  const k = P.m.get(it.n.toLowerCase()); if (k != null) return (it.pc = k);
+  const o = honeyOk(it); let best = 0, bd = Infinity;
+  for (const r of P.ref) { const q = r.ok || (r.ok = honeyOk(r)), d = (q[0] - o[0]) ** 2 + (q[1] - o[1]) ** 2 + (q[2] - o[2]) ** 2; if (d < bd) { bd = d; best = r.k; } }
+  return (it.pc = best);
+}
+// when you first met a color (its card's start date); colors you haven't met sort after every one you have
+const honeyMet = it => { const c = typeof hmCard === "function" ? hmCard(it.o) : null; return c && c.since ? Date.parse(c.since) || 0 : null; };
+
+// ---------- SHAPE x ORDER (David, 2026-10-08: "in one arrangement all the greys are in the middle and it doesn't make
+// sense why… give options for different placements within a single shape and style") ----------
+// A shape is the geometry (rings, the sunflower, the map's grid, the family book, the warm-and-cool plane). An ORDER
+// says what decides where a color goes inside it:
+//  - radial shapes: CENTER ON (what sits in the middle; the rest ring outward in that order, hue going round)
+//  - grid shapes:   SORT BY (what runs left to right; each column runs light to dark, or by hue when lightness leads)
+// A layout key is "shape~order" (and "~#hex" for Around a color); the Hue map's own key stays its Look's map shape,
+// so the default map is exactly the one David approved.
+const honeyDistTo = hex => { const o = honeyOk({ h: hex }); return it => { const q = honeyOk(it); return Math.hypot(q[0] - o[0], q[1] - o[1], q[2] - o[2]); }; };
+// rank(it, items, param) -> lower = nearer the middle; group (optional) -> the seams drawn on the ground
+const HONEY_CENTER = {
+  vivid: { t: "Vivid", mid: "the most vivid", edge: "greys", rank: () => it => -it.C },
+  muted: { t: "Greys", mid: "greys", edge: "the most vivid", rank: () => it => it.C },
+  light: { t: "Light", mid: "white", edge: "black", rank: () => it => -it.L },
+  dark: { t: "Dark", mid: "black", edge: "white", rank: () => it => it.L },
+  known: { t: "Your words", mid: "words you know", edge: "new ones", sig: items => items.map(honeyTier).join(""),
+    rank: () => it => honeyTier(it) * 1e7 + Math.min(1e7 - 1, honeyRankOf(it)), group: () => honeyTier },
+  common: { t: "Everyday", mid: "the everyday names", edge: "the rarest, a ring per stage", rank: () => honeyRankOf, group: items => honeyStageGroups(items) },
+  painted: { t: "Painted", mid: "the most painted", edge: "rarely painted", needs: "painted", rank: () => it => -honeyPainted(it) },
+  today: { t: "Today's color", mid: "", edge: "the least like it", rank: (items, hex) => honeyDistTo(hex || "#808080") },
+  near: { t: "Around a color", mid: "", edge: "the least like it", rank: (items, hex) => honeyDistTo(hex || "#808080") },
+};
+// x(it) runs left to right; y(it) top to bottom inside a column; g (optional) keeps groups apart in the smoothing
+const HONEY_SORT = {
+  hue: { t: "Hue", l: "", r: "", line: "hue across, light to dark down", x: honeyHueKey, y: it => 100 - it.L },
+  light: { t: "Lightness", l: "Lighter", r: "Darker", line: "light to dark across, hue down", x: it => 100 - it.L, y: honeyHueKey },
+  chroma: { t: "Vividness", l: "Muted", r: "Vivid", line: "muted to vivid across, light to dark down", x: it => it.C, y: it => 100 - it.L },
+  warm: { t: "Warmth", l: "Warmer", r: "Cooler", line: "warm to cool across, light to dark down", x: it => -honeyTemp(it), y: it => 100 - it.L },
+  painted: { t: "Painted", l: "Most painted", r: "Rarely painted", line: "most painted to rarely painted across", needs: "painted", x: it => -honeyPainted(it), y: it => 100 - it.L },
+  met: { t: "First met", l: "Met first", r: "Not met yet", line: "the order you met them, then the rest by hue", sig: items => items.map(it => honeyMet(it) || 0).join(","),
+    x: it => { const m = honeyMet(it); return m == null ? 1e15 + honeyHueKey(it) : m; }, y: it => 100 - it.L, g: it => honeyMet(it) == null ? 1 : 0 },
+};
+// a grid by one sort: columns by x, each column by y (groups stay apart when the sort has them)
+function honeySortGrid(items, s, k) {
+  const lay = honeyGridArr(items, s.x, s.y, k);
+  if (s.g) lay.pts.forEach(q => { q.g = s.g(q.it); });
+  return lay;
+}
+// id -> { title, kind ("radial" | "grid" | ""), def (the default order, and why in design/HOME-VIEWS.md §8), sub, make(items, order, param) }
 const HONEY_ARR = {
-  map: { title: "Hue map", sub: "Hue across, light to dark down" },
-  wheel: { title: "Color wheel", sub: "Greys in the middle, stronger outward", make: items => honeyRingArr(items, it => it.C) },
-  light: { title: "Light to dark", sub: "White in the middle, black at the rim", make: items => honeyRingArr(items, it => -it.L) },
-  families: { title: "Families", sub: "A region per family, greys in the middle", make: honeyIslands, fit: true },
-  pages: { title: "Hue pages", sub: "A page per family: muted to vivid across, light to dark down", make: honeyPages, fit: true },
+  map: { title: "Map", kind: "grid", def: "hue", sub: "Hue across, light to dark down",
+    make: (items, ord) => honeySortGrid(items, HONEY_SORT[ord] || HONEY_SORT.light, 1.9) },
+  rings: { title: "Rings", kind: "radial", def: "light", sub: "Rings from the middle out, hue going round",
+    make: (items, ord, p) => { const o = HONEY_CENTER[ord] || HONEY_CENTER.light; return honeyRingArr(items, o.rank(items, p), o.group && o.group(items)); } },
+  sunflower: { title: "Sunflower", kind: "radial", def: "vivid", sub: "A golden spiral from the middle out, hue going round",
+    make: (items, ord, p) => { const o = HONEY_CENTER[ord] || HONEY_CENTER.vivid; return honeySunArr(items, o.rank(items, p), o.group && o.group(items)); } },
+  families: { title: "Families", kind: "grid", def: "hue", sub: "A region per family, greys in the middle", fit: true,
+    make: (items, ord) => { const s = HONEY_SORT[ord] || HONEY_SORT.hue; return honeyRegions(items, a => honeySortGrid(a, s, 2.4)); } },   // tall regions: the book is phone-shaped
   // the color plane seen from above (lightness set aside): warm left, cool right, greens up, magentas down
-  temp: { title: "Warm and cool", sub: "Warm left, cool right, greys in the middle", axes: { l: "Warmer", r: "Cooler" }, make: items => honeyGridArr(items, it => -honeyTemp(it), it => -(it.C < 6 ? 0 : it.C / (it.C + 18) * Math.sin((it.H - 60) * Math.PI / 180)), 1.25) },
-  path: { title: "Path rings", sub: "First words in the middle, a ring per stage", make: items => { const g = honeyStageGroups(items); return honeyRingArr(items, honeyRankOf, g); } },
-  known: { title: "Your words", sub: "Learned in the middle, then learning, then new", sig: items => items.map(honeyTier).join(""),
-    make: items => honeyRingArr(items, it => honeyTier(it) * 1e7 + Math.min(1e7 - 1, honeyRankOf(it)), honeyTier) },
-  sunflower: { title: "Sunflower", sub: "A spiral by hue, then lightness", make: items => honeySunflower(items) },
+  temp: { title: "Warm and cool", kind: "", sub: "Warm left, cool right, greys in the middle", axes: { l: "Warmer", r: "Cooler" }, make: items => honeyGridArr(items, it => -honeyTemp(it), it => -(it.C < 6 ? 0 : it.C / (it.C + 18) * Math.sin((it.H - 60) * Math.PI / 180)), 1.25) },
 };
 const HONEY_ARR_IDS = Object.keys(HONEY_ARR);
-const honeyIsLayout = k => ["wheel", "sunflower", "globe", "spiral", "mapTall", "mapWide"].includes(k) || !!(HONEY_ARR[k] && HONEY_ARR[k].make);
+// the orders a shape offers, in chip order
+const honeyOrdersOf = id => { const a = HONEY_ARR[id]; return !a ? [] : a.kind === "radial" ? Object.keys(HONEY_CENTER) : a.kind === "grid" ? Object.keys(HONEY_SORT) : []; };
+const honeyOrderSpec = (id, ord) => { const a = HONEY_ARR[id]; return !a ? null : a.kind === "radial" ? HONEY_CENTER[ord] || HONEY_CENTER[a.def] : a.kind === "grid" ? HONEY_SORT[ord] || HONEY_SORT[a.def] : null; };
+// "rings~vivid" -> { id: "rings", ord: "vivid", p: undefined }; "rings~near~#AABBCC" -> p "#AABBCC"
+function honeyParseKey(k) { const [id, ord, p] = String(k || "").split("~"); return { id, ord: ord || (HONEY_ARR[id] ? HONEY_ARR[id].def : ""), p }; }
+// older saves: the arrangements that are now a shape plus an order
+const HONEY_ARR_OLD = { wheel: ["rings", "muted"], light: ["rings", "light"], path: ["rings", "common"], known: ["rings", "known"], pages: ["families", "chroma"] };
+const honeyIsLayout = k => ["wheel", "sunflower", "globe", "spiral", "mapTall", "mapWide"].includes(k) || !!(HONEY_ARR[honeyParseKey(k).id] && HONEY_ARR[honeyParseKey(k).id].make);
 // a small live picture of an arrangement, drawn from the actual colors (the View sheet's strip): every color a dot
 // at its place, fitted to the canvas. Uses the same layout cache as the map, so the tap that follows is instant.
 function honeyPreview(cv, raw, layoutKey) {
@@ -378,12 +468,14 @@ let HONEY_ENDLESS = false;   // L18: the endless mirrored map, opt-in (js/home.j
 const HONEY_MAP_K = { mapWide: 1 / 2.4, mapTall: .63 };
 function honeyLayout(raw, layoutKey) {
   let hs = 2166136261; for (const o of raw) for (let i = 0; i < o.n.length; i++) { hs ^= o.n.charCodeAt(i); hs = Math.imul(hs, 16777619); }
-  const arr = HONEY_ARR[layoutKey] && HONEY_ARR[layoutKey].make ? HONEY_ARR[layoutKey] : null, items0 = arr && arr.sig ? raw.map(honeyNorm) : null;
-  const key = `${layoutKey}|${HONEY_ENDLESS ? "e" : "b"}|${raw.length}|${hs >>> 0}${items0 ? "|" + honeyNameHash(arr.sig(items0)) : ""}`;
+  const pk = honeyParseKey(layoutKey), arr = HONEY_ARR[pk.id] && HONEY_ARR[pk.id].make ? HONEY_ARR[pk.id] : null, spec = arr ? honeyOrderSpec(pk.id, pk.ord) : null;
+  const items0 = spec && spec.sig ? raw.map(honeyNorm) : null;
+  // an order that depends on your progress (Your words, First met) or on data still loading (Painted) keys on it too
+  const key = `${layoutKey}|${HONEY_ENDLESS ? "e" : "b"}|${raw.length}|${hs >>> 0}${items0 ? "|" + honeyNameHash(spec.sig(items0)) : ""}${spec && spec.needs === "painted" ? (HONEY_PAINTED ? "|P" : "|p") : ""}`;
   const hit = HONEY_LAYOUTS.get(key); if (hit && hit.raw === raw) return hit;
   const items = items0 || raw.map(honeyNorm);
   let lay;
-  if (arr) lay = arr.make(items);
+  if (arr) lay = arr.make(items, pk.ord, pk.p);
   else if (layoutKey === "globe") lay = honeySphere(items);
   else if (layoutKey === "sunflower") lay = honeySunflower(items);
   else if (layoutKey === "spiral") lay = honeySpiral(items);
@@ -682,7 +774,18 @@ let HONEY_HL = null, HONEY_HL_REV = 0;
 const HONEY_LIVE = new Set();
 function honeyHighlight(hexes, o = {}) {
   const hs = (hexes || []).map(h => String(h).toUpperCase()).filter(h => /^#[0-9A-F]{6}$/.test(h));
-  HONEY_HL = hs.length ? { hexes: hs, title: o.title || "", set: o.set || null, from: o.from || null, rev: ++HONEY_HL_REV, fresh: true } : null;
+  HONEY_HL = hs.length ? { hexes: hs, title: o.title || "", set: o.set || null, from: o.from || null, rev: ++HONEY_HL_REV, fresh: true, hv: 0 } : null;
+  HONEY_LIVE.forEach(f => { if (f() === false) HONEY_LIVE.delete(f); });
+}
+// How many (David, 2026-10-08: "it shows only 6 colors, an arbitrary number"): a set drawn from a bigger pool lights
+// its k biggest colors. The bar stays (same rev); the lit bubbles follow at once (hv), and frame = true reframes them.
+const HONEY_LIT_MIN = 3;
+function honeyLitSize(k, frame) {
+  const s = HONEY_HL && HONEY_HL.set; if (!s || !s.pick) return;
+  k = Math.max(HONEY_LIT_MIN, Math.min(s.max, k | 0));
+  const cs = s.pick(k).filter(c => c && c.h); if (!cs.length) return;
+  s.colors = cs; s.k = k; HONEY_HL.hexes = cs.map(c => String(c.h).toUpperCase()); HONEY_HL.hv++;
+  if (frame) HONEY_HL.reframe = true;
   HONEY_LIVE.forEach(f => { if (f() === false) HONEY_LIVE.delete(f); });
 }
 // the lit set's colors as { h, n?, share? }, biggest share first (the set's own order when it has no shares)
@@ -699,7 +802,8 @@ function honeyLitLabel() {
   const parts = String(HONEY_HL.title || "").split(" · ").map(x => x.trim()).filter(Boolean), n = honeyLitColors().length;
   const kind = HONEY_HL.set && HONEY_HL.set.kind;
   let sub = parts.slice(1).join(" · ");
-  if (!sub) sub = `${n} color${n === 1 ? "" : "s"}${HONEY_PHOTO_KINDS.includes(kind) ? " · as photographed" : ""}`;
+  const photo = HONEY_PHOTO_KINDS.includes(kind);
+  if (!sub) sub = `${n} ${photo ? "named " : ""}color${n === 1 ? "" : "s"}${photo ? " · as photographed" : ""}`;
   return { title: parts[0] || "Your set", sub };
 }
 // Learn these: the Learn sheet (js/learnset.js) on exactly the lit colors, with their source; it comes back to the map
@@ -730,11 +834,14 @@ function honeyLitBar() {
     : bk && bk.c ? `<span class="cs-hl-th" style="background:${esc(bk.c)}"></span>`
     : `<span class="cs-hl-th cs-hl-sw">${sw.map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>`;
   const canFind = typeof msOpen === "function" && cs.length >= HONEY_FIND_MIN;
+  const set = HONEY_HL && HONEY_HL.set, canSize = !!(set && set.pick && set.max > HONEY_LIT_MIN);
   bar.innerHTML = `<div class="cs-hl-head">
-      ${bk ? `<button class="cs-hl-back" aria-label="Back to ${esc(bk.title || title)}">‹</button>` : ""}
+      ${bk ? `<button class="cs-hl-back" aria-label="Back to ${esc(bk.title || title)}">${ICON.back}</button>` : ""}
       ${thumb}<span class="cs-hl-t"><b>${esc(title)}</b><i class="cs-hl-sep"> · </i><small>${esc(sub)}</small></span>
       <button class="cs-hl-x" aria-label="Show every color again">${ICON.x}</button>
     </div>
+    ${canSize ? `<div class="cs-hl-n"><label class="cs-hl-nl"><span>How many</span><input type="range" min="${HONEY_LIT_MIN}" max="${set.max}" step="1" value="${cs.length}" aria-label="How many colors"><b data-hl-k>${cs.length}</b></label>
+      <div class="cs-hl-cols" data-hl-cols></div></div>` : ""}
     <div class="cs-hl-acts">
       <button class="cs-hl-act on" data-hl-learn>Learn these</button>
       ${canFind ? `<button class="cs-hl-act" data-hl-find>Find them</button>` : ""}
@@ -744,6 +851,25 @@ function honeyLitBar() {
   on(".cs-hl-x", () => { buzz(4); honeyHighlight(null); });
   on("[data-hl-learn]", () => { buzz(6); honeyLearnLit(); });
   on("[data-hl-find]", () => { buzz(6); honeyFindLit(); });
+  if (canSize) {
+    // each lit color by name with its share of the canvas, biggest first; one tap opens its page
+    const cols = bar.querySelector("[data-hl-cols]"), kOut = bar.querySelector("[data-hl-k]"), input = bar.querySelector(".cs-hl-n input");
+    const paint = () => {
+      const now = honeyLitColors(), lab0 = honeyLitLabel();
+      kOut.textContent = now.length;
+      bar.querySelector(".cs-hl-t small").textContent = lab0.sub;
+      cols.innerHTML = now.map(c => { const nm = c.n || (typeof nameOf === "function" ? nameOf(c.h).text : c.h), pc = c.share != null ? c.share * 100 : null;
+        return `<button class="cs-hl-c" data-h="${esc(c.h)}" data-n="${esc(nm)}"><i style="background:${esc(c.h)}"></i><span>${esc(nm)}</span>${pc != null ? `<em>${pc >= 9.5 ? Math.round(pc) : pc >= .95 ? pc.toFixed(1).replace(/\.0$/, "") : "<1"}%</em>` : ""}</button>`; }).join("");
+    };
+    paint();
+    input.addEventListener("input", () => { honeyLitSize(+input.value); paint(); });
+    input.addEventListener("change", () => { buzz(3); honeyLitSize(+input.value, true); });
+    cols.addEventListener("click", e => {
+      const b = e.target.closest(".cs-hl-c"); if (!b) return; e.stopPropagation(); buzz(4);
+      if (typeof openTappedColor === "function") openTappedColor(b.dataset.h, b.dataset.n);
+      else if (typeof colorPage === "function") colorPage(b.dataset.n);
+    });
+  }
   // the bar is solid: a drag that starts on it never pans the map underneath
   bar.addEventListener("pointerdown", e => e.stopPropagation());
   return bar;
@@ -1601,10 +1727,10 @@ function honeycomb(host, opts = {}) {
   let hlMemo = null;
   function hlItems() {
     if (!hlOn || !HONEY_HL || !lay) { if (hlPill) { hlPill.remove(); hlPill = null; } return null; }
-    if (hlMemo && hlMemo.lay === lay && hlMemo.rev === HONEY_HL.rev) return hlMemo.set;
+    if (hlMemo && hlMemo.lay === lay && hlMemo.rev === HONEY_HL.rev && hlMemo.hv === HONEY_HL.hv) return hlMemo.set;
     const its = [...new Set(lay.pts.map(q => q.it).filter(Boolean))], set = new Set();
     HONEY_HL.hexes.forEach(h => { const L = lab(h); let best = null, bd = Infinity; for (const it of its) { const dd = (it.lab[0] - L[0]) ** 2 + (it.lab[1] - L[1]) ** 2 + (it.lab[2] - L[2]) ** 2; if (dd < bd) { bd = dd; best = it; } } if (best) set.add(best); });
-    hlMemo = { lay, rev: HONEY_HL.rev, set };
+    hlMemo = { lay, rev: HONEY_HL.rev, hv: HONEY_HL.hv, set };
     hlShowPill();
     return set;
   }
@@ -1615,7 +1741,7 @@ function honeycomb(host, opts = {}) {
     hlPill = honeyLitBar(); hlPill.dataset.rev = HONEY_HL.rev;
     host.parentElement.appendChild(hlPill);
   }
-  if (hlOn) HONEY_LIVE.add(() => { if (dead) return false; hlMemo = null; draw(); return true; });
+  if (hlOn) HONEY_LIVE.add(() => { if (dead) return false; hlMemo = null; if (HONEY_HL && HONEY_HL.reframe) { HONEY_HL.reframe = false; l18FrameLit(); } else draw(); return true; });
   let hlFocus = null;
   if (hlOn && HONEY_HL && HONEY_HL.fresh) { HONEY_HL.fresh = false; hlFocus = { h: HONEY_HL.hexes[0] }; }
   if (hlFocus) { setItems(opts.items, opts.focus || hlFocus, ""); l18FrameLit(); }
@@ -1635,7 +1761,11 @@ function honeycomb(host, opts = {}) {
       morphMs = o.arrange ? L18_ARRANGE_MS : L18_MORPH_MS;
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
       // regions (Families, Hue pages) read best whole: the arrival eases out until most of the book is in view
-      if (o.arrange && HONEY_ARR[cfg.layout] && HONEY_ARR[cfg.layout].fit && !lay.globe) { P = [0, 0]; Plag = P.slice(); zoomTo(Math.max(ZMIN, Math.min(Z, ZMIN * 1.3)), W / 2, vcy()); }
+      const arr = HONEY_ARR[honeyParseKey(cfg.layout).id];
+      if (o.arrange && hlOn && HONEY_HL) l18FrameLit();
+      else if (o.arrange && arr && arr.fit && !lay.globe) { P = [0, 0]; Plag = P.slice(); zoomTo(Math.max(ZMIN, Math.min(Z, ZMIN * 1.3)), W / 2, vcy()); }
+      // a new order travels to the middle (for Center on, where the chosen color now sits)
+      else if (o.recenter && lay.finite && !lay.globe && lay.pts.length) { const c = lay.pts.reduce((m, q) => Math.hypot(q.x, q.y) < Math.hypot(m.x, m.y) ? q : m, lay.pts[0]); P = [c.x, c.y]; Plag = P.slice(); draw(); }
     },
     zoom: (z, animate = true) => animate ? zoomTo(z) : (Z = clamp(z, ZMIN, ZMAX), draw(), remember(), opts.onZoom && opts.onZoom(Z)),
     // so a bottom sheet never covers the magnified middle: the lens center, the "center" bubble and the

@@ -255,13 +255,10 @@
  "words": 987,
  "status": "checked",
  "checked": {
-  "by": "L7 batch 22 writer",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Crayola 1962 rename is single-source (St Clair); hedged.",
-   "pers etymology: books disagree; stated as disputed.",
-   "Birren appetite claims are contested old opinion; contrasted with Eckstut.",
-   "Swatch is the ISCC-NBS/Maerz and Paul peach; wiki and xkcd screen versions differ."
+   "Spot-checked key claims against fact card and book text (Gage Matisse/Cezanne/Gerbier, Ball and Balfour-Paul indigo); no text changes needed."
   ]
  }
 }

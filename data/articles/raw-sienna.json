@@ -1,0 +1,291 @@
+{
+ "slug": "raw-sienna",
+ "name": "Raw Sienna",
+ "hex": "#D68A59",
+ "names": [
+  "Raw Sienna"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Raw sienna is the unroasted form of sienna, the Tuscan earth pigment: a yellowish-brown iron-oxide paint that turns reddish only when it is burnt.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "What raw means",
+   "body": "In paint, *raw* means the earth was dug, washed and ground but never heated [1][5]. Paterson defines raw sienna as an earth used in its untreated state, a yellowish brown a little darker than yellow ochre [1]. Clair agrees on the hue and calls sienna a yellow-tinged brown when it is raw or unheated [3]. Ball describes it simply as yellowish [4].\n\n*Sienna* is the English spelling of the Tuscan city's name, and the earth was first sold as *terra di Siena* [2][5]. The English pair raw sienna and burnt sienna is younger than the earth [7]. Harley, cited by the Pigment Compendium, found the Italian name used for the burnt and unburnt earth alike in English sources from the mid-eighteenth century, with the two English forms coming into routine use only in the nineteenth [7].\n\nBooks and atlases disagree about when the English name began [7][6]. Harley puts routine use in the nineteenth century, while the Maerz and Paul atlas dates *Raw Sienna* to about 1750 and Ridgway printed it by 1886 [7][6]. The atlas date is an editor's earliest citation, so treat it as unverified [6]. For the city, the Tuscan deposits and the burnt swatch used by CSS, see [[sienna]]; this page is about the raw side of the pair [2][5]."
+  },
+  {
+   "id": "swatch",
+   "title": "Which brown is on the screen",
+   "body": "The swatch here, #D68A59, is a light orange-tan, 8.6 CIEDE2000 units from its nearest named neighbor in our palette, [[ochre]] [6]. Other charts disagree about what raw sienna looks like. Ridgway's plate of 1912, read from an aged scan, gives a deeper gold, #C38213, about 13 units away [6]. The xkcd color survey gives a dark brown, #9A6200, about 20 units away [6]. The name sits in ISCC-NBS block 54 [6].\n\nNothing in the books fixes the shade, because the earth itself runs from yellow to chestnut. Terry graded the Tuscan earth by tint, and the chestnut grade was called bole [5]. So this swatch is one reading of a family of golden browns. The redder swatch on the [[sienna]] page, 20 units away, is the burnt end of the same earth [6]."
+  },
+  {
+   "id": "material",
+   "title": "A near-ochre with a little manganese",
+   "body": "Sienna is generally described as a variety of yellow ochre that differs in holding a small share of manganese oxide, under ten per cent, beside the iron oxide hydroxide goethite that does most of the coloring [5]. It may also carry a few per cent of organic matter, which puts it between the ochres and the umbers [5]. Raw sienna is the earth used in that state after washing, levigation (a slurrying that removes coarse grit) and grinding [5]. Like the ochres, siennas make very stable pigments that do not fade [5].\n\nNot every painter loved it. Payne called sienna a greasy color, inferior to gallstone, a verdict the Compendium passes on from Harley [5].\n\nThe original source was Siena in Tuscany, where Terry placed the deposits on the western slopes of Monte Amiata [5]. Good siennas were also dug at Lehigh Gap in Pennsylvania and in the Harz Mountains of Germany [5]. Finlay goes further and says today's sienna probably no longer comes from Siena at all, which the Compendium's list of other deposits would fit [8][5]."
+  },
+  {
+   "id": "burnt",
+   "title": "From raw to burnt",
+   "body": "Heat is what separates the two paints. A moderate heat turns a yellow ochre orange, and a stronger heat turns it red [9]. Burnt sienna, the roasted form, is a warm reddish brown [4]. Coles uses it as her example of the roasted red ochres that are called burnt [9]. Jarman lists burnt umber, burnt ochre and burnt sienna together as earths cooked red hot [10].\n\nThe two paints do different jobs. Gurney's suggested starter palette names yellow ochre and burnt sienna, and he recommends burnt sienna or Venetian red for toning a panel [14]."
+  },
+  {
+   "id": "painters",
+   "title": "In the painter's range",
+   "body": "Raw sienna is an old part of the earth palette rather than a modern novelty. Ball lists ochres, siennas and umbers among the earth colors in Rembrandt's palette, without separating raw from burnt [4]. In 1897 [[painter:henri-matisse|Matisse]] swapped his sombre palette for the bright new pigments yet kept yellow ochre and the sienna pigments [13].\n\nRaw sienna also worked as a mixing partner. Payne's grey, loved by landscape painters, was made from lake, raw sienna and indigo [11]. Verona brown, a fancy name in Toch's 1916 account, was a mixture of [[burnt-umber]] with burnt or raw sienna [12]. Jarman puts raw sienna in a list of pigment names that carry a place, a planet or a painter, beside Naples yellow, Antwerp blue and Van Dyke brown [10].\n\nWhere to look: Clair notes that browns were long used for underdrawings and sketches, sienna among them [3]. A warm yellow-brown line or wash in an old drawing is the place to look."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, 237 hold colors within six units of this swatch over at least five per cent of the canvas, about 1 per cent [15]. These are photographs of aged, varnished paintings, so a match is a hue, not a pigment test [15]. By lightness rank within each painting, 73 per cent of the matched area is highlight, 24 per cent mid-tone and 2 per cent shadow [15]. That fits a light orange-tan, which suits lit skin, paper and bare ground as much as any earth pigment [15].\n\nThe strongest signal is in time and place. In the 1500s, 43 of 2,231 paintings hold it, 1.9 times the archive rate, against 31 of 6,394 in the 1600s, about half the average [15]. The richest decade is 1500 to 1509, with 17 of 417 paintings, 4.1 times the rate [15]. Indian courts lead the countries: 31 of 721 works, 4.3 times the rate, with Rajput painting at 8 of 97 and Mughal at 9 of 168 [15].\n\nThe widest cover is a Mughal album page of about 1556, the [[painting:cma-170788|Portrait of a kneeling holy man]] by Mir Sayyid Ali, at 52 per cent of the canvas [15]. Close behind is George Catlin's [[painting:nga-50468|Facsimile of a Sioux Robe]] of 1861, at 41 per cent [15]. Among painters, [[painter:amedeo-modigliani|Modigliani]] holds the color in 4 of his 18 works here, 22 times the rate, and Thomas Sully in 3 of 25 [15].\n\nIts usual company on a canvas is [[terracotta]] at 6.5 times chance, [[ochre]] at 6.4 times and [[sienna]] at 3.2 times [15]. The first match is a medieval work of about 1150, *Hunt of the Hare*, at 8 per cent of the canvas [15]. The archive's early centuries are thin, so that is a floor, not a first [15]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Siena, the Tuscan city, whose nearby earth was the original source",
+   "first_recorded": "terra di Siena in English sources by the mid-1700s; 'raw sienna' in routine use in the 1800s (Harley)",
+   "source": "Pigment Compendium, sienna; Paterson"
+  },
+  "aka": [
+   "Raw terra di Siena",
+   "Terra di Siena (unburnt)",
+   "Siena earth"
+  ],
+  "siblings": [
+   "ochre",
+   "raw-umber",
+   "tawny"
+  ],
+  "parent": "sienna",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sienna",
+    "gloss": "the burnt-sienna swatch used by CSS and X11, darker and redder"
+   },
+   {
+    "slug": "raw-umber",
+    "gloss": "a cooler, darker earth with more manganese"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "terra di Siena naturale"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#D68A59",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 237,
+  "top_paintings": [
+   "cma-314366",
+   "cma-170788",
+   "nga-54128",
+   "nga-50468",
+   "nga-46521"
+  ],
+  "century_1500s": {
+   "hits": 43,
+   "n": 2231,
+   "lift": 1.93
+  },
+  "peak_decade": {
+   "decade": 1500,
+   "hits": 17,
+   "n": 417,
+   "lift": 4.09
+  },
+  "countries": [
+   {
+    "key": "India",
+    "hits": 31,
+    "n": 721,
+    "lift": 4.31
+   }
+  ],
+  "role": {
+   "highlight": 0.73,
+   "mid": 0.24,
+   "shadow": 0.02
+  },
+  "company": [
+   "Terracotta",
+   "Ochre",
+   "Sienna"
+  ],
+  "measured": {
+   "lch": [
+    64,
+    45,
+    58
+   ],
+   "nearest": [
+    [
+     "Ochre",
+     8.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"raw\" and \"raw sienna\", p. 332",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"sienna, siena\", p. 364",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Clair, The Secret Lives of Colour, entries \"Brown\" and \"Umber\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"sienna\", pp. 352-353",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Raw Sienna, Ridgway 1886 and 1912, ISCC-NBS 1955 block 54, Maerz & Paul 1930, xkcd survey; CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"burnt sienna\" p. 79 and \"terra di Siena\" p. 373, citing Harley (1982)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Finlay, Color, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 37",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Jarman, Chroma, pp. 5 and 44",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 220",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Verona brown\", p. 400, citing Toch (1916)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Gurney, Colour and Light, pp. 98 and 105",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What turns raw sienna into burnt sienna?",
+   "choices": [
+    "Roasting the earth",
+    "Washing it in acid",
+    "Mixing in madder",
+    "Grinding it finer"
+   ],
+   "answer": "Roasting the earth",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: raw sienna is made by heating yellow ochre.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which landscape painter's grey was mixed from lake, raw sienna and indigo?",
+   "choices": [
+    "Payne's grey",
+    "Paris grey",
+    "Davy's grey",
+    "French grey"
+   ],
+   "answer": "Payne's grey",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Raw sienna is simply sienna that was never roasted; heat turns the same earth from yellowish brown to warm reddish brown.",
+  "Payne's grey, a landscape painter's favorite, was mixed from lake, raw sienna and indigo.",
+  "In our archive, Indian court paintings carry this color 4.3 times as often as the average painting."
+ ],
+ "words": 1068,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'rose in value' (Terry grades by tint only)",
+   "Removed unsupported 'transparent undertone' and 'restricted' palette wording"
+  ]
+ }
+}

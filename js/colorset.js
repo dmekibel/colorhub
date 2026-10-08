@@ -30,7 +30,27 @@ function colorSet(o = {}) {
     if (c.share != null && isFinite(c.share)) out.share = +c.share;
     colors.push(out);
   });
-  return { kind, id, key: kind + ":" + id, title: String(o.title || ""), colors, src: o.src || "" };
+  const set = { kind, id, key: kind + ":" + id, title: String(o.title || ""), colors, src: o.src || "" };
+  // a set drawn from a bigger pool (a painting's measured colors): pick(k) -> its k biggest, as { h, n?, share? }, so
+  // the map's "How many" can show more or fewer of them (honey.js honeyLitBar). max: how many the pool holds.
+  if (typeof o.pick === "function" && o.max > 0) { set.pick = o.pick; set.max = Math.min(CS_POOL_MAX, o.max | 0); }
+  return set;
+}
+const CS_POOL_MAX = 30;
+// a pool of measured colors -> a pick(k) for colorSet: the k biggest (by share of the canvas), merged by nearest name
+// (two pool colors that share a name become one, shares added), biggest first
+function csPoolPick(pool) {
+  const sorted = (pool || []).filter(p => p && p.h).slice().sort((a, b) => (b.share || 0) - (a.share || 0));
+  return k => {
+    const by = new Map();
+    for (const p of sorted) {
+      const n = p.n || p.name || (typeof nameOf === "function" ? nameOf(p.h).text : p.h), o = by.get(n);
+      if (o) { o.share += p.share || 0; continue; }
+      if (by.size >= k) continue;
+      by.set(n, { h: csHex(p.h), n, share: p.share || 0 });
+    }
+    return [...by.values()].sort((a, b) => b.share - a.share);
+  };
 }
 const csName = c => c.n || (typeof nameOf === "function" ? nameOf(c.h).text : "") || c.h;   // honest: "Between black and gunmetal", never a far name
 
@@ -134,13 +154,8 @@ function csCompare(a, b) {
 }
 
 // ---------- the action row ----------
-const CS_ICON = {
-  map: sv('<circle cx="7" cy="8" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="12" cy="16.5" r="3"/>', 20, 1.8),
-  learn: sv('<rect x="7" y="3" width="12" height="15" rx="2.5"/><path d="M4 7.5V18a3 3 0 0 0 3 3h8.5"/>', 20, 1.8),
-  play: sv('<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="currentColor"/>', 20, 1.8),
-  compare: sv('<rect x="3" y="5" width="8" height="14" rx="2"/><rect x="13" y="5" width="8" height="14" rx="2"/>', 20, 1.8),
-  keep: sv('<path d="M7 4h10v16l-5-4-5 4z"/>', 20, 1.8),
-  share: sv('<path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>', 20, 1.8),
+const CS_ICON = {   // the shared icon set (js/core.js ICON_PATHS): one metaphor per concept
+  map: icon("map", 20), learn: icon("learn", 20), play: icon("play", 20), compare: icon("compare", 20), keep: icon("heart", 20), share: icon("share", 20),
 };
 const CS_ACTS = [["map", "On the map"], ["learn", "Learn"], ["play", "Play"], ["compare", "Compare"], ["keep", "Keep"], ["share", "Share"]];
 function csActions(set, o = {}) {

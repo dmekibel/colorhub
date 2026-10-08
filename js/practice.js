@@ -406,18 +406,12 @@ const prStarred = it => prState().star.includes(it.key);
 // ======================================================================
 // Small view helpers
 // ======================================================================
-const PR_ICON = {
-  star: sv('<path d="M12 3.6l2.5 5.3 5.8.7-4.3 4 1.1 5.7L12 16.5l-5.1 2.8 1.1-5.7-4.3-4 5.8-.7z"/>', 22, 1.6),
-  starOn: sv('<path d="M12 3.6l2.5 5.3 5.8.7-4.3 4 1.1 5.7L12 16.5l-5.1 2.8 1.1-5.7-4.3-4 5.8-.7z" fill="currentColor"/>', 22, 1.6),
-  shuffle: sv('<path d="M4 7h3.5c4 0 5 10 9 10H20M4 17h3.5c1.6 0 2.7-1.6 3.6-3.4M14 9.6C14.9 8 15.9 7 17.5 7H20M17.5 4.5 20 7l-2.5 2.5M17.5 14.5 20 17l-2.5 2.5"/>', 22, 1.6),
-  mic: sv('<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>', 22, 1.6),
-  back: sv('<path d="M15 6l-6 6 6 6"/>', 22, 1.8),
-  chev: sv('<path d="M9 6l6 6-6 6"/>', 16, 1.8),
-  arrow: sv('<path d="M5 12h14M13 6l6 6-6 6"/>', 20, 1.6),
-  cards: sv('<rect x="7.5" y="4" width="11" height="15" rx="2"/><path d="M5 7.5v11a2 2 0 0 0 2 2h8"/>', 24, 1.6),
+const PR_ICON = {   // js/core.js ICON_PATHS
+  star: icon("star", 22), starOn: icon("starOn", 22), shuffle: icon("shuffle", 22), mic: icon("mic", 22),
+  back: icon("back", 22), chev: icon("chev", 16), arrow: icon("arrow", 20), cards: icon("learn", 24),
 };
-const prX = () => sv('<path d="M6 6l12 12M18 6L6 18"/>', 22, 1.8);
-const prCheck = () => sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>', 24, 2);
+const prX = () => icon("x", 22);
+const prCheck = () => icon("check", 24);
 // Names are long ("Purple Mountain Majesty"): a display size that still fits two lines on a 320 px phone
 function prFit(name, big = 72) {
   const n = String(name).length, s = n <= 7 ? big : n <= 10 ? big * .84 : n <= 14 ? big * .7 : n <= 18 ? big * .6 : big * .54;
@@ -531,20 +525,41 @@ function prMiss(it, pick, from, go, delay = 380) {
   later(() => { if (from && !from.isConnected) return; mcShow({ you: { n: prName(pick), h: pick.h }, was: { n: prName(it), h: it.h }, line: prDiff(it, pick), from, go }); }, delay);
   return true;
 }
+// Next after a miss (David, 2026-10-08, iPhone: "I'm clicking Next and it's stuck"). A touch moves on at pointerup,
+// not only at the click iOS may or may not synthesize afterwards (it drops the click after some DOM changes under
+// the finger), and the click that does follow is swallowed so it can't land on the next question. Fires once.
+let PR_SWALLOW = null;   // { t, x, y }: the click iOS may still send for a touch already acted on at pointerup
+const prSwallow = e => { PR_SWALLOW = { t: performance.now() + 450, x: e.clientX, y: e.clientY }; };
+if (typeof document !== "undefined") document.addEventListener("click", e => {
+  const s = PR_SWALLOW; if (!s) return;
+  if (performance.now() > s.t) { PR_SWALLOW = null; return; }
+  if (Math.hypot(e.clientX - s.x, e.clientY - s.y) > 40) return;
+  PR_SWALLOW = null; e.stopPropagation(); e.preventDefault();
+}, true);
 function prNextBtn(foot, go, label = "Next") {
   foot.innerHTML = prPrimary(label, "", "data-next");
   const b = foot.querySelector("[data-next]");
-  b.onclick = go;
+  let fired = false, down = null;
+  const fire = () => { if (fired) return; fired = true; b.classList.add("pr-fired"); go(); };
+  b.onclick = fire;
+  b.addEventListener("pointerdown", e => { down = e.pointerType !== "mouse" && e.isPrimary ? { id: e.pointerId, x: e.clientX, y: e.clientY } : null; });
+  b.addEventListener("pointerup", e => {
+    if (!down || e.pointerId !== down.id || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 14) return;
+    down = null; if (fired) return;
+    prSwallow(e); fire();
+  });
+  b.addEventListener("pointercancel", () => { down = null; });
   return b;
 }
 PR_STEPS["quiz-name"] = { by: "pick", render(box, it, ctx = {}) {
   return new Promise(resolve => {
-    const t0 = performance.now(), opts = prShuffle([it, ...prNear(it, 3, ctx.deck)]);
+    // ctx.wrong: the wrong options chosen by the caller (Study's early rungs: fewer and farther apart, js/studypace.js)
+    const t0 = performance.now(), opts = prShuffle([it, ...(ctx.wrong && ctx.wrong.length ? ctx.wrong : prNear(it, 3, ctx.deck))]);
     box.innerHTML = `<div class="pr-step pr-s-quiz">
       ${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : ""}
       <div class="pr-sw" style="--c:${it.h}"></div>
       <div class="pr-fb" aria-live="polite"></div>
-      <div class="pr-opts">${opts.map((o, i) => `<button class="pr-opt" data-i="${i}"><span>${esc(prName(o))}</span></button>`).join("")}</div>
+      <div class="pr-opts${opts.length === 3 ? " pr-opts-3" : ""}">${opts.map((o, i) => `<button class="pr-opt" data-i="${i}"><span>${esc(prName(o))}</span></button>`).join("")}</div>
       <div class="pr-foot"><p class="pr-hint">Tap its name</p></div></div>`;
     const fb = box.querySelector(".pr-fb"), foot = box.querySelector(".pr-foot");
     let done = false;
@@ -572,7 +587,7 @@ PR_STEPS["quiz-name"] = { by: "pick", render(box, it, ctx = {}) {
 // ---------- quiz-color: a name, four same-family swatches ----------
 PR_STEPS["quiz-color"] = { by: "pick", render(box, it, ctx = {}) {
   return new Promise(resolve => {
-    const t0 = performance.now(), opts = prShuffle([it, ...prNear(it, 3, ctx.deck)]), nm = prName(it);
+    const t0 = performance.now(), opts = prShuffle([it, ...(ctx.wrong && ctx.wrong.length === 3 ? ctx.wrong : prNear(it, 3, ctx.deck))]), nm = prName(it);
     box.innerHTML = `<div class="pr-step pr-s-qc">
       ${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : ""}
       <div class="pr-q"><span class="pr-note">Which one is</span><b class="pr-t1" style="${prFit(nm, 44)}">${esc(nm)}?</b></div>
@@ -1406,7 +1421,7 @@ function prArt(m, cols) {
     learn: `<span class="a-steps">${[0, 1, 2].map(i => `<i style="--c:${c(i)};height:${30 + i * 12}%"></i>`).join("")}</span>`,
     test: `<span class="a-test">${[0, 1, 2].map(i => `<b><i style="--c:${c(i)}"></i><em></em></b>`).join("")}</span>`,
     say: `<i class="a-sw a-round" style="--c:${c(3)}"></i><span class="a-say">${PR_ICON.mic}</span>`,
-    blitz: `<i class="a-sw" style="--c:${c(1)}"></i><span class="a-yn"><b>✓</b><b>✕</b></span>`,
+    blitz: `<i class="a-sw" style="--c:${c(1)}"></i><span class="a-yn"><b>${icon("check", 18)}</b><b>${icon("x", 18)}</b></span>`,
     pairs: `<span class="a-grid">${[0, 1, 2, 3, 4, 5].map(i => i === 1 ? `<i style="--c:${c(0)}"></i>` : i === 4 ? `<b class="p"></b>` : `<b class="d"></b>`).join("")}</span>`,
     rain: `<span class="a-rain"><i style="--c:${c(2)}"></i><b></b><b></b><b></b></span>`,
     odd: `<span class="a-odd"><i style="--c:${c(0)}"></i><i style="--c:${c(0)}"></i><i style="--c:${c(0)}"></i><i style="--c:${c(1)}"></i></span>`,
@@ -1573,6 +1588,7 @@ function prInstantDeck(o = {}) {
 // The quick sheet. Smart defaults are already chosen, so one tap on Start begins; chips change them; it remembers.
 function prQuick(o = {}) {
   // every "Learn" with a color or a set opens the Learn sheet (js/learnset.js): Look and Study, always both
+  if (typeof lsQuick === "function" && !o.legacy && !o.sheet && o.seed && !(o.items && o.items.length)) return lsQuick(o);   // Learn it starts now (js/learnset.js)
   if (typeof lsOpen === "function" && !o.legacy && ((o.items && o.items.length) || o.seed)) return lsOpen(o);
   if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return void loadCoreNames().then(() => prQuick(o));
   const p = prState(), last = p.quick || {};
@@ -1610,7 +1626,7 @@ function prQuick(o = {}) {
   function start() {
     if (!deck || !deck.items.length) return;
     remember(); close(); buzz(8);
-    if (st.method === "lesson") return hmLearnIt(app);
+    if (st.method === "lesson") return hmLearnIt(app, { lesson: true });
     const exit = () => { if (typeof backTo === "function") backTo(); else if (backTo && /^#\/./.test(backTo)) { if (!openRoute(backTo)) go(S.tab || "learn"); } else prHome(); };
     prPlay(st.method, { items: deck.items, label: deck.label, exit, other: () => { exit(); setTimeout(() => prQuick({ ...o, back: backTo }), 60); } });
   }

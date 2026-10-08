@@ -32,12 +32,12 @@
   {
    "id": "church",
    "title": "The blood of Christ and the martyrs",
-   "body": "Christian writers split red in two. The red of fire stood for the Holy Spirit, and the red of blood could be either sinful bloodshed or sanctifying sacrifice [4][5]. Saint Cyprian of Carthage wrote in the third century that the church, once dressed in white for the good works of its members, was now arrayed in crimson through the blood of its martyrs [5].\n\nFrom the twelfth and thirteenth centuries the crimson of Christ's blood appeared on crusaders' banners and in the liturgy of the Cross and of martyrs' feasts [5]. Some medieval authors held it to be a lighter, clearer red than ordinary human blood, which sin had defiled [5]. A few late medieval panel painters tried to show the difference, with a clear, luminous red for Christ and a cloudier, darker one for everyone else [5]. A painter faced with the word *blood red* thus had to choose between at least two reds."
+   "body": "Christian writers split red in two. The red of fire stood for the Holy Spirit, and the red of blood could be either sinful bloodshed or sanctifying sacrifice [4][5]. Saint Cyprian of Carthage wrote in the third century that the church, once dressed in white for the good works of its members, was now arrayed in crimson through the blood of its martyrs [5].\n\nFrom the twelfth and thirteenth centuries the crimson of Christ's blood appeared on crusaders' banners and in the liturgy of the Cross and of martyrs' feasts [5]. Some medieval authors held it to be a lighter, clearer red than ordinary human blood, which sin had defiled [5]. A few late medieval panel painters tried to show the difference, giving Christ's blood a clearer, more luminous red and other people's a cloudier, darker one [5]. A painter faced with the word *blood red* thus had to choose between at least two reds."
   },
   {
    "id": "pigment",
    "title": "Blood, dragons and dyes",
-   "body": "Pigments rarely contained blood, though they borrowed its name. Pliny mocked red pigments said to come from the mud of India and the blood of dragons and elephants, an allusion to a legend, still current in the Middle Ages, that many red resins came from a dragon killed by an elephant [6]. The resin was real: dragon's blood is a red exudate of plants of the genera *Daemonorops* and *Dracaena* [7]. Pliny also says that minium could be adulterated with goats' blood, red lead, or crushed berries [7].\n\nCinnabar, the mercury red, is described by Finlay as blood red [11]. The Romans painted gladiators and statues of gods with it, and women made lipstick from it [11]. Cochineal gives a red that Greenfield says literally pours out of a pinched insect, and the dyed cloth remains red for centuries [8]. At Mogok in Burma, Finlay photographed ox-blood-red river water, colored by silt from the ruby mines, not by the stones [11]."
+   "body": "Pigments rarely contained blood, though they borrowed its name. Pliny mocked red pigments said to come from the mud of India and the blood of dragons and elephants, an allusion to a legend, still current in the Middle Ages, that many red resins came from a dragon killed by an elephant [6]. The resin was real: dragon's blood is a red exudate of plants of the genera *Daemonorops* and *Dracaena* [7]. Pliny also says that minium could be adulterated with goats' blood, red lead, or crushed berries [7].\n\nCinnabar, the mercury red, is described by Finlay as blood red [11]. The Romans painted gladiators and statues of gods with it, and women made lipstick from it [11]. Greenfield describes cochineal as a dye so strong that cloth mordanted with it stays red for centuries [8]. At Mogok in Burma, Finlay photographed ox-blood-red river water, colored by silt from the ruby mines, not by the stones [11]."
   },
   {
    "id": "language",
@@ -63,7 +63,7 @@
  "aside": {
   "origin": {
    "named_after": "blood (German Blutroth in the mineralogists' lists)",
-   "first_recorded": "in German mineral colour lists of the 1790s; the first appearance of the English phrase is undocumented in our books",
+   "first_recorded": "in German mineral colour lists of the late 1700s (Estner's 1794 samples show four Blutroth variants); the first English use is undocumented in our books",
    "source": "Baty, Nature's Palette, introduction and Syme list"
   },
   "aka": [
@@ -296,16 +296,15 @@
   "In the 1400s the dark red of this swatch is 3.7 times as common in our archive of paintings as it is overall.",
   "Look at a late medieval panel of the Crucifixion: the painter may have used a clearer red for Christ's blood than for anyone else's."
  ],
- "words": 1558,
+ "words": 1553,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 writer (batch 24)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Syme order of arterial and veinous blood red read from Baty's list; the bracketed word Blood on veinous blood red is not interpreted.",
-   "Baty only suggests Hunter as the reason for Syme's split.",
-   "Cave of pigment/Pliny claims rest on Pastoureau and the Compendium; Finlay's 'blood red' for cinnabar is a descriptive remark.",
-   "Avicenna's red-light view is Birren's report; chromotherapy corrected as unsupported."
+   "Cochineal 'literally pours out' softened to Greenfield's actual claim.",
+   "Reworded Christ's-blood panel painting sentence closer to paraphrase.",
+   "Aside first_recorded corrected: Werner's list dates from 1774, Estner's Blutroth samples from 1794; first English use undocumented."
   ]
  }
 }

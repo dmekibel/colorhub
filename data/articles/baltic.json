@@ -22,7 +22,7 @@
   {
    "id": "amber",
    "title": "What the Baltic does give color",
-   "body": "The region's best-known color export is amber, once sold as \"Baltic gold\" and mined from a layer of grey clay called blue earth, which lies about 50 feet down on the Samland peninsula [3]. Baltic amber runs from ivory to near-black. Most pieces are yellow, orange, red or brown, rare ones show a bluish sheen over a darker body, and green amber in jewelry usually means the stone was heated in an oven [3]. The resin is fossilized, about 40 million years old on Finlay's average of a 30 to 50 million range [3]. See [[gem:amber|amber]] for the stone itself.\n\nThe Baltic's ports also gave color a job [4]. Pastoureau traces the red-stop, green-go signal to the two-color beacons of North Sea and Baltic ports, where a green light let a ship in and a red one kept it out [4]."
+   "body": "The region's best-known color export is amber, once sold as \"Baltic gold\" and mined from a layer of grey clay called blue earth, which lies about 50 feet down on the Samland peninsula [3]. Baltic amber runs from ivory to near-black. Most pieces are yellow, orange, red or brown, rare ones show a bluish sheen over a darker body, and green amber in jewelry usually means the stone was heated in an oven [3]. The resin is fossilized, about 40 million years old on Finlay's average of a 30 to 50 million range [3]. See [[gem:amber|amber]] for the stone itself.\n\nThe Baltic's ports also gave color a job [4]. Pastoureau names the two-color signals of some North Sea and Baltic ports as one of the first uses of red-stop, green-go, where a green beacon let a ship in and a red one kept it out [4]."
   },
   {
    "id": "field",
@@ -177,15 +177,13 @@
   "Baltic first appears in print as a color in 1918, but nobody recorded why it was given the name.",
   "Most Baltic amber is yellow, orange, red or brown; blue amber is rare."
  ],
- "words": 470,
+ "words": 475,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Origin of the color name undocumented; Baltic Sea only a guess, flagged as such.",
-   "Amber facts are from Finlay only (single source); amber is a different thing from the swatch.",
-   "Archive color match not a pigment test."
+   "Pastoureau says \"one of its first applications\" in \"some ports\"; sentence had overstated it as the origin."
   ]
  }
 }

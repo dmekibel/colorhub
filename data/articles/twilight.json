@@ -1,0 +1,237 @@
+{
+ "slug": "twilight",
+ "name": "Twilight",
+ "hex": "#4E518B",
+ "names": [
+  "Twilight"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Twilight is a muted purplish blue named for the hour after sunset, when the light thins out and the eye begins to trade reds for blues.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The word and the swatch",
+   "body": "*Twilight* names the period after sunset, and sometimes the one before sunrise, when the sky still glows but the sun is below the horizon [1]. Paterson's dictionary lists *twilight blue* as a greyish or purplish blue, which is the sense this swatch carries [1]. Fielding's dictionary of 1854, as Paterson reports it, defined *dusk* in a similar spirit: a color that turns yellowish, reddish or bluish according to what is added to it [2].\n\nThe swatch here, #4E518B, is a moderate purplish blue in the ISCC-NBS system (block 200, a ΔE of 1.6 from the block's center) [3]. Maerz and Paul's 1930 dictionary of color gives 1920 as the first recorded use of the name for a color, on plate 36 [3]. The nearest other name in our library is [[dusk]], which is almost the same color, and the closest of our core colors is [[cobalt]] [3]. A different swatch, [[twilight-blue]], is a much deeper and less violet blue, and comes from the ISCC-NBS and web-color lists rather than from Maerz and Paul [3]."
+  },
+  {
+   "id": "eye",
+   "title": "What the eye does at dusk",
+   "body": "Dim light changes how colors rank. In weak light, Birren explains, the brightness of the spectrum shifts toward the short waves of blue and violet, so cool colors gain in value and warm ones lose it [4]. Reds that look bright at noon can look nearly black at twilight while blues and greens still read as fairly light [4]. The usual explanation is that the rods, which are more sensitive to blue and violet than to red, take over from the cones as illumination falls [4].\n\nThe rods do not send a color signal of their own, which is why the blues at dusk look pale and faint rather than saturated [4]. Birren puts typical levels at about 10,000 foot-candles in open midday sun, roughly 1,000 under a tree, and under 100 at twilight [5]. The effect is named for the Bohemian physiologist Jan Purkinje, who described it clearly in 1825 [6][7].\n\nPurkinje was not first. The mathematician Philippe de la Hire noted in 1685 that blue looks white in the weak light at the beginning of night, and that some colors lose their beauty by candlelight while others gain it [7]. Ball also observes that artists had noticed the shift before the physiologists did [6]."
+  },
+  {
+   "id": "painters-hour",
+   "title": "The painter's hour",
+   "body": "By the early nineteenth century, according to Gage, English painters called twilight the painter's hour [7]. With color draining away, a painter could study masses of light and dark without being distracted by hue [7]. Yet many artists knew the cost: Reynolds's pupil James Northcote wrote that reds look darker than by day, almost black, while light blues turn white or nearly so [7].\n\nTurner seems to allude to the same effect in a lecture of 1818 when he calls red the first ray of light to acknowledge its fading [7]. Gage adds an irony: once tonal painting declined, the painter's hour fell out of use, and the American color theorist Ogden Rood could credit the discovery to Purkinje rather than to artists [7].\n\nA chart of permanent colors made for professional painters in 1816 recommended [[indigo]] for exactly this subject: it made subtle shades for twilight and evening skies, though it was not bright enough for clear-day skies [8]. Gurney, a modern painter and teacher, describes painting a rainy street in the gathering twilight and softening every edge except the roofline and the lit windows, because fine detail disappears when the cones stop working well [9]."
+  },
+  {
+   "id": "lore",
+   "title": "Evening in other lore",
+   "body": "Some traditions give the hour a color. Birren reports a Navajo legend in which mountains in the four directions cause dawn, day, twilight and darkness, and the western mountains are yellow and bring twilight [10]. This is a single-source retelling of a legend, and Birren's older claims are best treated as opinion rather than modern evidence [10].\n\nA gem fits the hour better than a legend. Finlay held a peridot in the light of the dying sun in a mining camp and saw why it was once called the evening emerald: its yellowish green holds its color in twilight more gently than a bluer, true [[gem:emerald|emerald]] does [11]. He adds that early lapidaries therefore called it a talisman against the terrors of the night [11]. Where to look: at dusk, find a red object and a blue one of equal daytime brightness, and watch the red go dark first."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, 27 contain this color as at least five per cent of the canvas, within a ΔE of 6 [12]. Those are photographs of aged, varnished paintings, so the match is as photographed and not a pigment test [12]. The earliest is a *Madonna and Child Enthroned* by the Master of San Lucchese, dated 1350, where it covers 27 per cent [12]. The largest is Matisse's [[painting:commons-Q1853880|Blue Nude IV]] of 1952, at 46 per cent [12].\n\nThe color is rare in the nineteenth century, when the word was at its height [13]. It is far commoner in the twentieth: 3 of 8,345 paintings from the 1800s, against 10 of 1,674 from the 1900s, about five times the average rate [12]. The peak decade is the 1910s, with 5 of 523 paintings [12]. Klimt's [[painting:commons-Q5967091|The Maiden]], from 1913, is one of them [12]. None of the 140 Impressionist paintings in the set holds it, which is a small surprise for painters of changing light [12].\n\nWhen it appears it is a shadow or middle tone, never a highlight: 52 per cent of its pixels sit in the shadow band and 48 per cent in the middle [12]. Its contrast against white is 7.3 to 1, and against black 2.9 to 1 [3]. For the word rather than the color, Google Books shows *twilight* peaking around 1855, long before it became a swatch [13]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the hour after sunset (and before sunrise)",
+   "first_recorded": "as a color name, 1920 (Maerz & Paul)",
+   "source": "Paterson, Dictionary of Colour; Maerz & Paul 1930"
+  },
+  "aka": [
+   "twilight blue (Paterson)"
+  ],
+  "siblings": [
+   "dusk",
+   "twilight-blue",
+   "cobalt"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "twilight-blue",
+    "gloss": "a deeper, less violet blue from the web-color and ISCC-NBS lists"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#4E518B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 27,
+  "top_paintings": [
+   "commons-Q1853880",
+   "cma-143768",
+   "commons-Q5967091",
+   "smk-KMS3823"
+  ],
+  "role": {
+   "shadow": 0.52,
+   "mid": 0.48
+  },
+  "ngram": {
+   "word": "twilight",
+   "peak": 1855
+  },
+  "measured": {
+   "lch": [
+    36.7,
+    35.9,
+    294.2
+   ],
+   "contrast_white": 7.31,
+   "contrast_black": 2.87,
+   "nearest": [
+    [
+     "Dusk",
+     1.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"twilight\", \"twilight blue\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"dusk\" (citing Fielding, 1854)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955 block 200; Maerz & Paul 1930, plate 36 G 6; xkcd 2010; contrast computed",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 24 (dim light and the Purkinje effect)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 24 (daylight levels)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 196",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 220",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 143",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 10 (Navajo legend)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Finlay, Jewels: A Secret History, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, as photographed; threshold: ΔE 6, at least 5% of the canvas",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"twilight\", 5-year smoothed, relative to peak",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "At twilight, which colors tend to go dark first?",
+   "choices": [
+    "Reds",
+    "Blues",
+    "Greens",
+    "Violets"
+   ],
+   "answer": "Reds",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Jan Purkinje was the first person to notice that colors change at dusk.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "What did early nineteenth-century English painters call twilight?",
+   "choices": [
+    "The painter's hour",
+    "The blue hour",
+    "The tonal veil",
+    "The grey watch"
+   ],
+   "answer": "The painter's hour",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Look at a red and a blue at dusk and the red goes dark first: the Purkinje shift, noticed by painters long before physiologists.",
+  "In 1685 a painter-mathematician wrote that blue looks white at the start of night."
+ ],
+ "words": 961,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

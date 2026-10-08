@@ -620,6 +620,7 @@ function glPage(i, d, fromHex, tol) {
     <h1 class="p-title">${esc(d.t)}</h1>
     <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
     <div class="gl-roles" data-glroles></div>
+    <div class="aw-cx" data-glctx></div>
     <div class="sec-head gl-pal-h"><b>Its colors</b><span data-glpaln>as photographed</span></div>
     <div class="gl-ctl"><div class="seg gl-order" data-glorder><button class="on" data-glo="out">Stands out</button><button data-glo="area">By area</button></div>
     ${pool.length ? `<div class="seg gl-sizes" data-glsizes aria-label="How many colors">${GL_SIZES.map(k => `<button class="${k === curK ? "on" : ""}" data-glk="${k}">${k}</button>`).join("")}</div>` : ""}</div>
@@ -675,7 +676,8 @@ function glPage(i, d, fromHex, tol) {
   if (typeof awPaintingHook === "function") awPaintingHook(el, i, d, { pool, curPal });
   // the ColorSet verbs (js/colorset.js): this painting's palette, at whatever size the slider shows
   if (typeof colorSet === "function") {
-    const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i });
+    const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i,
+      ...(pool.length > 3 && typeof csPoolPick === "function" ? { pick: csPoolPick(pool), max: pool.length } : {}) });
     learnerLog({ type: "seen", set: glSet(), src: "painting" });
     el.querySelector("[data-csacts]").appendChild(csActions(glSet, { back: () => galleryPage(i, false) }));
   }

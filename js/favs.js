@@ -12,8 +12,8 @@
 
 const FV_CTX = [["all", "Anything"], ["room", "A room"], ["wear", "To wear"], ["paint", "To paint with"], ["logo", "A logo"]];
 const FV_CTX_ASK = { all: "", room: "for a room", wear: "to wear", paint: "to paint with", logo: "for a logo" };
-const FV_HEART = sv('<path d="M12 20.4S3.4 15.1 3.4 9.1A4.6 4.6 0 0 1 12 6.7a4.6 4.6 0 0 1 8.6 2.4c0 6-8.6 11.3-8.6 11.3z"/>', 24, 1.8);
-const FV_HEART_ON = `<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M12 20.4S3.4 15.1 3.4 9.1A4.6 4.6 0 0 1 12 6.7a4.6 4.6 0 0 1 8.6 2.4c0 6-8.6 11.3-8.6 11.3z"/></svg>`;
+const FV_HEART = icon("heart", 24);
+const FV_HEART_ON = icon("heartOn", 24);
 let FV_FROM = null;            // where the shelf's Back goes (set by whoever opened it)
 let FV_CTX_NOW = "all";        // which context's order the shelf shows
 let FV_AUTOPICK = false;       // Home opens straight into pick mode (the shelf's "On the map")
@@ -357,7 +357,7 @@ function fvPageSet(el, h, n, on) { fvSet(h, n, on, "page"); buzz(on ? 8 : 4); fv
 // the heart on a library color's page (js/names.js): beside "Learn it" when there is one, else the page's one primary
 function fvHeartRow(h, n, primary) {
   const on = fvHas(h);
-  const icon = `<button class="icon-btn cp-icon fv-heart-btn${on ? " saved" : ""}" data-fvh aria-label="${on ? "Remove from your colors" : "Add to your colors"}" aria-pressed="${on}">${on ? "♥" : "♡"}</button>`;
+  const icon = `<button class="icon-btn cp-icon fv-heart-btn${on ? " saved" : ""}" data-fvh aria-label="${on ? "Remove from your colors" : "Add to your colors"}" aria-pressed="${on}">${on ? ICON.heartOn : ICON.heart}</button>`;
   return `<div class="cp-primary-row">${primary ? primary + icon : `<button class="cp-primary fv-add${on ? " on" : ""}" data-fvh aria-pressed="${on}">${on ? FV_HEART_ON : FV_HEART}<span>${on ? "In your colors" : "Add to your colors"}</span></button>`}</div>`;
 }
 function fvWireHeart(el, h, n) {
@@ -366,7 +366,7 @@ function fvWireHeart(el, h, n) {
     el.querySelectorAll("[data-fvh]").forEach(x => {
       x.setAttribute("aria-pressed", on);
       if (x.classList.contains("fv-add")) { x.classList.toggle("on", on); x.innerHTML = `${on ? FV_HEART_ON : FV_HEART}<span>${on ? "In your colors" : "Add to your colors"}</span>`; }
-      else { x.textContent = on ? "♥" : "♡"; x.classList.toggle("saved", on); }
+      else { x.innerHTML = on ? ICON.heartOn : ICON.heart; x.classList.toggle("saved", on); }
     });
   });
 }

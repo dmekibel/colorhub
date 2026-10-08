@@ -232,12 +232,8 @@
  "words": 746,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "No book treats Dawn as a named color; article is about the word and the light.",
-   "Navaho and Ashante items are single-source, hedged.",
-   "Archive match predates the name; stated."
-  ]
+  "issues": []
  }
 }

@@ -1,0 +1,266 @@
+{
+ "slug": "bright-blue",
+ "name": "Bright Blue",
+ "hex": "#0165FC",
+ "names": [
+  "Bright Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "long",
+ "lede": "Bright Blue is the xkcd survey's name for a saturated blue, and a phrase the color books use for lapis, azure and cornflower alike.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a survey",
+   "body": "Bright Blue, as a color on our list, comes from a survey rather than a tradition [1]. The xkcd color survey, published on 3 May 2010, gathered over five million color names from 222,500 sessions, and it set each name's color at the spot in RGB space where the most people chose that name [1]. Our library records Bright Blue from that survey, filed as a plain modifier plus a basic color word [2]. The phrase itself is plain, undated and nobody's coinage.\n\nThe survey's swatch, #0165FC, is a saturated blue leaning slightly toward violet [2]. It is a vivid blue in the ISCC-NBS system of 1955, 7 CIEDE2000 units from that class's center [2]. Our curriculum Blue (#2563C9) is 6 units away, the pure screen blue `blue` (#0000FF) is 19 away, and the survey's own plain \"blue\" (#0343DF) is 11 away [2]. Bright Blue is therefore a punchier blue than the one we teach first, but not the electric extreme of the screen primary [2]. Beside it on the shelf sit [[lapis-lazuli]], [[blue]], [[royal-blue]] and [[electric-blue]] [2]."
+  },
+  {
+   "id": "books",
+   "title": "What the books mean by it",
+   "body": "The books never pin the phrase to one color [3][4][5]. They use the phrase the way a person describes a color to someone who cannot see it. Paterson's dictionary glosses *azure* as bright blue, often the blue of a cloudless sky, and [[gem:lapis-lazuli|lapis lazuli]] as a bright blue, a mineral he says was used to make ultramarine from the 13th century [3]. St Clair's glossary defines cornflower as a bright blue with a little violet and cyan as a bright blue with a little green [4]. The Pigment Compendium calls the mineral azurite a bright blue hydrated copper carbonate [5].\n\nIn each case \"bright blue\" is the plain starting point and the modifier says which way it leans. That is useful for the reader, because it means our swatch sits near the middle of what the phrase has covered: a clean, strong blue with a slight pull to violet, between a green-leaning cyan and a violet-leaning cornflower [4][2]."
+  },
+  {
+   "id": "rank",
+   "title": "A blue that meant rank",
+   "body": "Whether a bright blue was admired depends on the century. Pastoureau reports that in Rome bright blue was considered ugly, and that blue clothing marked eccentricity or mourning [6]. A stable bright blue dye became possible in the thirteenth century, ending what he calls the somber, grey and washed-out blues of earlier centuries, and the color moved from the work clothes of artisans to aristocratic dress [7].\n\nGreenfield writes that by the 1400s the lapis-like bright blue counted as a noble color, while pale blue stayed with servants and laborers [8]. Rank was written into law: Pastoureau notes that in Italy some patricians and merchants were forbidden certain bright blues, such as the Florentine peacock blues, and turned to black as a result [9]. St Clair adds that from the twelfth century the Virgin was increasingly shown in bright blue robes, having earlier worn dark colors of mourning, and that the pigment most associated with her was ultramarine [10].\n\nBright blue also reached the wardrobe. Greenfield says Henry VIII owned bright blue and red doublets, and that in the 1860s the new synthetic dyes put crinolines in emerald green, bright blue and magenta [11][12]."
+  },
+  {
+   "id": "painters",
+   "title": "Painters and their bright blues",
+   "body": "Painters have treated bright blue as a risk. Caravaggio's early biographer Bellori said the painter had no interest in beautiful single colors such as vermilion and bright blues, which he kept subdued [13]. Ball dates a reversal to 1897, when Matisse dropped a sombre palette for one of bright blues, greens and reds from newly invented pigments, as the Impressionists had done [14].\n\nBrands used the same idea. Pastoureau notes that the bright blue of the Gauloises cigarette packs, introduced in 1910, became an emblem of France, and the name even became a colloquial term for a light greyish blue with a touch of violet [15]. Outside art, St Clair observes that sparks and St Elmo's fire, the glow on ships' masts, are bright blue, sometimes tinted with violet, and that pale bright blue has become the popular color of electricity [16].\n\nGage quotes a passage from *The Hall* about a peacock whose feathers are bright blue in the sun and bright green in shadow, a reminder that a bright blue can come from structure and light rather than from a dye [17]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Bright Blue is almost absent from the museum record we have [18]. By the strictest lens, no painting in our archive of 23,781 has this color covering one per cent of the canvas within a CIEDE2000 distance of 4 [18]. With a looser match, within 10 units and at least two per cent of the canvas, 18 works qualify [18]. That is 0.08 per cent of the archive [18].\n\nThe leaders are Albert Marquet's [[painting:commons-Q21730955|View of Saint-Jean-de-Luz]] of 1907, with a blue patch of 24 per cent, and Alphonse Osbert's [[painting:commons-Q17494748|Paysage avec le Sphinx]] of 1900 at 19 per cent [18]. The list also includes Wouwerman's [[painting:nga-218605|The Departure for the Hunt]] of 1665 and Michelangelo's [[painting:commons-Q1473546|Doni Tondo]] of about 1500, both near 18 per cent [18]. The earliest in the archive is Fra Angelico's [[painting:commons-Q22082602|Madonna of the Pomegranate]] of 1426, at 13 per cent [18]. These are photographs of paintings, often of cloaks and skies, and sometimes of varnish that has altered the blue [18].\n\nThe honest reading is that this bright blue is a modern screen color, and the paintings with it are mostly blue skies and robes whose color has survived. The plain word *blue* is far more common in printed English than any of these details suggest, but that is a fact about the word, not this swatch [18]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the plain English phrase 'bright blue'; the swatch is from the xkcd color survey",
+   "first_recorded": "2010 (xkcd survey, in our library)",
+   "source": "xkcd color survey; ColorHub library"
+  },
+  "aka": [
+   "xkcd bright blue"
+  ],
+  "siblings": [
+   "blue",
+   "royal-blue",
+   "electric-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "electric-blue",
+    "gloss": "a different survey and web swatch, close in hue"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#0165FC",
+   "de2000": 10,
+   "min_cover": 0.02
+  },
+  "n_present": 18,
+  "strict_lens": {
+   "de2000": 4,
+   "min_cover": 0.01,
+   "n": 0
+  },
+  "top_paintings": [
+   "commons-Q21730955",
+   "commons-Q17494748",
+   "nga-218605",
+   "commons-Q1473546",
+   "smk-KMS8760",
+   "aic-139958"
+  ],
+  "first_dated": {
+   "id": "commons-Q22082602",
+   "painter": "Fra Angelico",
+   "year": 1426
+  },
+  "measured": {
+   "lch": [
+    47.4,
+    88.3,
+    293.2
+   ],
+   "iscc_nbs": "vivid blue",
+   "vs_blue_de2000": 6.1,
+   "vs_css_blue_de2000": 18.8,
+   "vs_xkcd_blue_de2000": 11.1
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "xkcd, 'Color Survey Results', 3 May 2010 (222,500 sessions, over five million names)",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph/nodes-b.json: xkcd 2010, ISCC-NBS 1955), CIEDE2000 distances computed here",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, 'azure' p. 40, 'lapis lazuli' p. 236",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary ('Cornflower', 'Cyan')",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, 'Azurite', p. 46",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 7 ('An Uncommon Color')",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 8 ('A New Color')",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 9 ('A Moral Color')",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, 'Blue'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 6",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 24 (the 1860s)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 160",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 21",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color, ch. 10 ('The Favorite Color')",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, 'Electric blue'",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 18",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py '#0165FC' --de 10 --min 0.02; data/graph/fieldnotes/b.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In the books, what does 'bright blue' usually describe?",
+   "choices": [
+    "A plain strong starting point, with other words saying which way it leans",
+    "One specific pigment, ultramarine",
+    "A dull grey-blue",
+    "Only the sky at dusk"
+   ],
+   "answer": "A plain strong starting point, with other words saying which way it leans",
+   "kind": "pick"
+  },
+  {
+   "q": "In fifteenth-century Europe bright blue, the shade of lapis lazuli, was seen as a noble color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our Bright Blue comes from a 2010 online survey of 222,500 sessions.",
+  "In Rome, writes Pastoureau, bright blue was considered ugly; by the 1400s it was noble."
+ ],
+ "words": 932,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed chronology: Virgin in bright blue is twelfth century (St Clair), not 'the same time' as the 1400s.",
+   "Reworded 'meaning flipped again with chemistry' (Henry VIII doublets are Renaissance; claim was overstated).",
+   "Attributed the lapis/ultramarine 13th-century date to Paterson.",
+   "xkcd survey facts rest on the survey's own post, not a book."
+  ]
+ }
+}

@@ -11,7 +11,7 @@
 // Another lane can add a game without touching this file: push { id, name, meta, icon (a key of R2_IC, default
 // "gradient"), more (true = the drills list), open () } onto window.TRAIN_TILES before the room is drawn.
 //
-// Studio: four verbs. Capture (the camera is the primary; pick a photo is the quiet second), Name, Make, Yours
+// Studio: Capture (the camera is the primary; pick a photo is the quiet second), Name, Build (the Gamut wheel, Albers), Yours
 // (photos, palettes, hearted colors, taste), then Export. Its pictures come from your own latest palette and
 // photo when you have them, else from today's painting.
 
@@ -67,6 +67,9 @@ const R2_IC = {
   zorn: ["#ECE6D8", "#C9973F", "#B23A2E", "#262422"].map((c, i) => `<circle cx="${6 + i * 6.7}" cy="16" r="3.2" style="fill:${c}"/>`).join(""),
   checkin: `<rect x="8" y="6" width="16" height="21" rx="1.5"/><path d="M12.5 6V4h7v2"/><path d="M12 16.5l3 3 5.5-6" class="ok"/>`,
   screen: `<rect x="4" y="6" width="24" height="16" rx="1.5"/><path d="M12 27h8M16 22v5"/>${[0, 1, 2, 3].map(i => `<rect x="${7 + i * 4.6}" y="9.5" width="4" height="9" style="fill:${["#222", "#555", "#999", "#DDD"][i]};stroke:none"/>`).join("")}`,
+  // Train's two rows: Drills (three shelves of bars, light to dark) and Your eye (an eye whose iris is a color)
+  drills: `<rect x="5" y="6.5" width="22" height="5" rx="1" class="a"/><rect x="5" y="13.5" width="16" height="5" rx="1" class="b"/><rect x="5" y="20.5" width="19" height="5" rx="1" class="c"/>`,
+  eye: `<path d="M3.5 16c3.4-5 7.6-7.5 12.5-7.5S25.1 11 28.5 16c-3.4 5-7.6 7.5-12.5 7.5S6.9 21 3.5 16z"/><circle cx="16" cy="16" r="4.6" class="a"/><circle cx="16" cy="16" r="1.6" style="fill:var(--ink);stroke:none"/>`,
   history: `<path d="M5 26.5h22"/><path d="M6 21l6-5 5 3 9-9" class="ln"/><circle cx="12" cy="16" r="1.6" class="a"/><circle cx="26" cy="10" r="1.6" class="a"/>`,
 };
 const r2Icon = (k, sm = false) => `<span class="r2-ic${sm ? " sm" : ""}"><svg viewBox="0 0 32 32" aria-hidden="true">${R2_IC[k] || R2_IC.gradient}</svg></span>`;
@@ -75,139 +78,205 @@ const r2Icon = (k, sm = false) => `<span class="r2-ic${sm ? " sm" : ""}"><svg vi
 const r2Acc = (cols, i) => { const [L, C, H] = lch(r2Mid(cols, i)); return gyFit(clamp(L, 56, 74), clamp(C * 1.35, 30, 64), H); };
 function r2Accents(id) { const { cols } = r2Pal(id); return `--a:${r2Acc(cols, 0)};--b:${r2Acc(cols, 1)};--c:${r2Acc(cols, 2)}`; }
 
-// ---------------------------------------------------------------- Train: entries, in order of fun
+// ---------------------------------------------------------------- Train: the room, like the NYT Games home
+// (design/REVIEW-2/learn-play.md top 10 #1, IMPROVE PLAN decision 4.) Today on top: one todayPick(), its three
+// parts (the painting, the color, the board), each with a tick. Then six games in order of fun, each with a
+// personal line. Then two rows: Drills (12 drills, grouped on their own page) and Your eye (one page: the eye
+// profile, the check-in, history, your color vision). Cut from the grid, code kept: Lightning (Study's boss),
+// Imposter, n-back, Out of order, Rebuild, the separate Today's gradient tile, Whose palette?, What changed?,
+// Your screen, and the check-in/history tiles. "New" only on up to two games you haven't played while you've
+// played others; a first visit gets one quiet "Start here" on Odd one out instead.
 const r2Stars = s => Array.isArray(s) ? s.filter(Boolean).length : 0;
 const r2PlayedToday = k => { const h = (S.gym.skills[k] || {}).hist || []; return !!(h.length && h[h.length - 1][0] === today()); };
-function r2Station(k, ic, name) { const s = stationLevel(k); return { id: k, ic, name: name || SKILLS[k].name, meta: s.lv ? `Level ${s.lv}` : "New", attr: `data-st="${k}"`, done: r2PlayedToday(k) }; }
-function r2Mix(id, ic) { const g = OO_MIX.find(m => m.id === id) || { name: id }, n = r2Stars((ooS().mix[id] || {}).stars); return { id, ic, name: g.name, attr: `data-r2-mix="${id}"`, meta: n ? `${n} of 3 ★` : "New" }; }
-function r2Match(id, ic) { const lv = typeof mtLevel === "function" ? mtLevel(id) : 0; return { id: "mt-" + id, ic, name: MATCH[id].name, meta: lv ? `Level ${lv}` : "New", attr: `data-mt="${id}"` }; }
-function r2TrainEntries() {
-  const st = ooS(), ln = st.line && typeof st.line === "object" ? st.line : {};
+function r2Station(k, ic, name) { const s = stationLevel(k); return { id: k, ic, name: name || SKILLS[k].name, meta: s.lv ? `Level ${s.lv}` : SKILLS[k].what, attr: `data-st="${k}"`, done: r2PlayedToday(k) }; }
+function r2Match(id, ic) { const lv = typeof mtLevel === "function" ? mtLevel(id) : 0; return { id: "mt-" + id, ic, name: MATCH[id].name, meta: lv ? `Level ${lv}` : MATCH[id].what, attr: `data-mt="${id}"` }; }
+const r2Extras = () => (Array.isArray(window.TRAIN_TILES) ? window.TRAIN_TILES : []).filter(t => t && t.name);
+const r2Extra = t => ({ id: "x-" + t.id, ic: t.icon || "gradient", name: t.name, meta: t.meta || "", attr: `data-r2-extra="${esc(t.id)}"`, more: t.more, played: !!t.played });
+function r2TrainGames() {
+  const st = ooS(), ln = st.line && typeof st.line === "object" ? st.line : {}, pr = st.pairs && typeof st.pairs === "object" ? st.pairs : {};
   const ms = typeof msState === "function" ? msState() : null, msFound = ms ? (ms.found[msLevelKey(ms.spec.level)] || []).length : 0;
-  const whoseBest = st.mix.whose && st.mix.whose.best, pairsBest = st.pairs && st.pairs.best;
-  const extra = (Array.isArray(window.TRAIN_TILES) ? window.TRAIN_TILES : []).filter(t => t && t.name)
-    .map(t => ({ id: "x-" + t.id, ic: t.icon || "gradient", name: t.name, meta: t.meta || "New", attr: `data-r2-extra="${esc(t.id)}"`, more: t.more }));
+  const mem = st.mix.wasthere || {}, memN = r2Stars(mem.stars);
+  const xs = r2Extras(), hue = xs.find(t => t.id === "hue"), eye = xs.find(t => /painter/i.test(String(t.id)) && !t.more);
+  const hs = typeof hgS === "function" ? hgS() : {};
   const games = [
-    ...(ms ? [{ id: "map", ic: "map", name: "Study the map", attr: "data-mapstudy", meta: msFound ? `${msFound.toLocaleString("en-US")} found` : "Find and name", done: !!(ms.day && ms.day.d === today() && ms.day.done) }] : []),
-    { id: "oo", ic: "odd", name: "Odd one out", attr: "data-oo-map", done: st.last === today(), meta: st.sets ? `Level ${st.lv + 1}${ooStarCount() ? ` · ${ooStarCount()} ★` : ""}` : "Start here" },
-    ...extra.filter(t => !t.more),
-    { id: "pairs", ic: "pairs", name: "Painters' pairs", attr: "data-oo-pairs", meta: pairsBest ? `Best ${pairsBest}` : "New" },
-    { id: "whose", ic: "whose", name: "Whose palette?", attr: "data-oo-whose", meta: whoseBest ? `Best ${whoseBest}` : "New" },
-    { id: "line", ic: "across", name: "Across the line", attr: "data-oo-line", meta: ln.best ? `Best ${ln.best} of 8` : "New" },
-    ...(typeof daily === "function" ? [{ id: "colordle", ic: "colordle", name: "Today's color", attr: "data-r2-colordle", meta: typeof dnDone === "function" && dnDone() ? "Done today" : "Name it in six", done: typeof dnDone === "function" && dnDone() }] : []),
-    { id: "lightning", ic: "lightning", name: "Lightning round", attr: "data-lightning", meta: S.best.lightning ? `Best ${S.best.lightning}` : "45 seconds" },
-    r2Station("squint", "squint"),
-    r2Mix("imposter", "imposter"),
-    r2Mix("changed", "changed"),
-    r2Mix("wasthere", "wasthere"),
-    r2Mix("outoforder", "outoforder"),
-    r2Mix("rebuild", "rebuild"),
-    r2Mix("nback", "nback"),
+    ...(ms ? [{ id: "map", ic: "map", name: "Study the map", attr: "data-mapstudy", played: msFound > 0, meta: msFound ? `${msFound.toLocaleString("en-US")} found` : "Find and name", done: !!(ms.day && ms.day.d === today() && ms.day.done) }] : []),
+    { id: "oo", ic: "odd", name: "Odd one out", attr: "data-oo-map", played: !!st.sets, done: st.last === today(), meta: st.sets ? `Level ${(Number.isFinite(st.lv) ? st.lv : ooYou()) + 1}${ooStarCount() ? ` · ${ooStarCount()} ★` : ""}` : "Spot the odd tile" },
+    ...(hue ? [{ ...r2Extra(hue), id: "hue", played: !!hs.plays, done: hs.last === today() }] : []),
+    { id: "line", ic: "across", name: "Across the line", attr: "data-oo-line", played: !!(ln.n || ln.best), meta: ln.best ? `Best ${ln.best} of 8` : "Where a name ends" },
+    { id: "memory", ic: "wasthere", name: "Color memory", attr: "data-r2-mix=\"wasthere\"", played: !!(memN || mem.best), meta: memN ? `${memN} of 3 ★` : "Find the newcomer" },
+    eye ? r2Extra(eye) : { id: "pairs", ic: "pairs", name: "Painters' pairs", attr: "data-oo-pairs", played: !!(pr.n || pr.best), meta: pr.best ? `Best ${pr.best} of 6` : "Guess the painter" },
+    // another lane's game (window.TRAIN_TILES) still gets a door, after the six
+    ...xs.filter(t => !t.more && t !== hue && t !== eye && t.id !== "hue-daily").map(r2Extra),
   ];
-  const drills = [
-    r2Station("value", "value"), r2Station("shade", "shade"), r2Station("neutral", "neutral"), r2Station("match", "twolooks"), r2Station("vanish", "vanish"),
-    r2Match("value", "valuescale"), r2Match("masses", "masses"), r2Match("zorn", "zorn"), r2Match("cast", "cast"), r2Match("shot", "shot"), r2Match("kelvin", "kelvin"),
-    { id: "after", ic: "after", name: AFTER.name, attr: `data-st="after"`, meta: (S.gym.demos || {}).after ? `${S.gym.demos.after.right} of ${S.gym.demos.after.n} named` : "Twenty seconds" },
-    ...extra.filter(t => t.more),
-  ];
-  return { games, drills };
+  // "New": only while you're already playing, and at most two
+  const anyPlayed = games.some(g => g.played);
+  let n = 0;
+  games.forEach(g => { g.fresh = anyPlayed && !g.played && n < 2 && !!++n; });
+  if (!anyPlayed) { const oo = games.find(g => g.id === "oo"); if (oo) oo.meta = "Start here"; }
+  return games;
 }
-const r2Game = (t, i) => `<button class="r2-g${t.done ? " done" : ""}" ${t.attr} style="--k:${i};${r2Accents(t.id)}">${r2Icon(t.ic)}<b>${esc(t.name)}</b><em>${esc(t.meta || "")}</em></button>`;
+// the drills, in three shelves (IMPROVE train.md: Light and dark, Color in context, The painter's bench)
+function r2Drills() {
+  return [
+    ["Light and dark", [r2Station("value", "value"), r2Station("shade", "shade"), r2Station("vanish", "vanish"), r2Match("value", "valuescale"), r2Station("squint", "squint")]],
+    ["Color in context", [r2Station("neutral", "neutral"), r2Station("match", "twolooks"), r2Match("kelvin", "kelvin"),
+      { id: "after", ic: "after", name: AFTER.name, attr: `data-st="after"`, meta: (S.gym.demos || {}).after ? `${S.gym.demos.after.right} of ${S.gym.demos.after.n} named` : "Twenty seconds" }]],
+    ["The painter's bench", [r2Match("masses", "masses"), r2Match("zorn", "zorn"), r2Match("cast", "cast"), r2Match("shot", "shot"),
+      ...r2Extras().filter(t => t.more).map(r2Extra)]],
+  ];
+}
+const r2Game = (t, i) => `<button class="r2-g${t.done ? " done" : ""}" ${t.attr} style="--k:${i};${r2Accents(t.id)}">${r2Icon(t.ic)}${t.fresh ? `<span class="r2-new">New</span>` : ""}<b>${esc(t.name)}</b><em>${esc(t.meta || "")}</em></button>`;
 const r2Li = t => `<button class="r2-li${t.done ? " done" : ""}" ${t.attr} style="${r2Accents(t.id)}">${r2Icon(t.ic, true)}<span><b>${esc(t.name)}</b><em>${esc(t.meta || "")}</em></span></button>`;
+const r2Row = (attr, ic, name, meta, id) => `<button class="r2-row" ${attr} style="${r2Accents(id)}">${r2Icon(ic, true)}<span><b>${esc(name)}</b><em>${esc(meta)}</em></span>${ICON.chev}</button>`;
+const R2_TICK = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>`;
 
-// ---------------------------------------------------------------- Train: today, under the games
-// The games come first (David, 2026-10-08). Today's painting is the room's one paper card, compact; a due
-// weekly check-in is a quiet banner under it, never a hero that pushes the games off the screen.
+// ---------------------------------------------------------------- Train: today (todayPick's three parts)
+// The color card never shows the color before you've named it (recall before reveal); the board card shows the
+// day's board shape in its source's colors, and your solved corners once it's done.
+const R2_BOARD = new Map();
+function r2DayBoard(day) {
+  if (R2_BOARD.has(day)) return R2_BOARD.get(day);
+  let b = null;
+  try { const spec = hgDailySpec(day, hgDailySrcs()); b = { shape: spec.shape, num: spec.num, c: hgCornerSets(spec.pal, hgRnd(hgHash("r2-today:" + day)), 1)[0] }; } catch (e) {}
+  R2_BOARD.set(day, b);
+  return b;
+}
 function r2TrainToday() {
-  const g = gyState(), ci = checkinDue(g.checkins, triedKeys().length, gyDay()), p = chToday(), n = chStreak();
-  const card = !p ? `<button class="r2-today" data-dpaint><span class="r2-today-pic r2-loading" id="r2DpImg"></span>
-      <span class="r2-today-t"><b>Today's <em>painting</em></b><small>No. ${chNumber()} · ${n > 1 ? `${n} days in a row` : "five ways to look, 2 min"}</small></span><span class="r2-today-go">Play${ICON.arrow}</span></button>`
-    : `<button class="r2-today played" data-dpaint><span class="r2-today-pic r2-loading" id="r2DpImg"></span>
-      <span class="r2-today-t"><b>Today's <em>painting</em></b><small>${(p.hits || []).filter(Boolean).length} of ${(p.hits || []).length || 5} right${n > 1 ? `, ${n} days in a row` : ""}. New one tomorrow</small></span>${ICON.chev}</button>`;
-  const ks = ci.due ? checkinPick(triedKeys(), g.checkins) : [];
-  const banner = ci.due ? `<button class="r2-li r2-ci-banner" data-checkin style="${r2Accents("ci")}">${r2Icon("checkin", true)}<span><b>Weekly check-in is ready</b><em>${esc(ks.map(k => SKILLS[k].name).join(", "))}. No feedback, about 3 min</em></span>${ICON.chev}</button>` : "";
-  return `<section class="r2-todayblk">${card}${banner}</section>`;
+  const day = today(), tp = typeof todayPick === "function" ? todayPick(day) : null, n = typeof chStreak === "function" ? chStreak() : 0;
+  const p = typeof chToday === "function" ? chToday() : null, pHits = p ? (p.hits || []).filter(Boolean).length : 0;
+  const cDone = typeof dnDone === "function" && dnDone(), cRec = typeof dnRec === "function" ? dnRec() : null;
+  const hd = typeof hgS === "function" ? hgS().daily[day] : null, bd = typeof hgDailySpec === "function" ? r2DayBoard(day) : null;
+  const tick = on => on ? `<span class="r2-tick" aria-label="Done">${R2_TICK}</span>` : "";
+  const cHex = cDone && tp && tp.color ? tp.color.h : null;
+  const colorVis = cHex ? `<span class="r2-td-sw" style="--c:${cHex}"></span>`
+    : `<span class="r2-td-q" aria-hidden="true">${"<i></i>".repeat(6)}</span>`;
+  const boardVis = bd && typeof hgMiniHTML === "function" ? hgMiniHTML(bd.shape, hd && Array.isArray(hd.c) && hd.c.length === 4 ? hd.c : bd.c) : "";
+  const cards = [
+    { attr: "data-dpaint", vis: `<span class="r2-td-pic r2-loading" id="r2DpImg"></span>`, name: "Painting", meta: p ? `${pHits} of ${(p.hits || []).length || 5} right` : "Five ways to look", done: !!p },
+    ...(typeof daily === "function" ? [{ attr: "data-r2-colordle", vis: colorVis, name: cHex && tp ? tp.color.n : "Color", meta: cDone ? (cRec && cRec.ok ? `Named in ${cRec.g.length}` : "See it again") : "Name it in six", done: cDone }] : []),
+    ...(typeof hgDaily === "function" ? [{ attr: "data-r2-board", vis: `<span class="r2-td-board">${boardVis}</span>`, name: "Gradient", meta: hd ? `${hd.moves} moves` : "Same board for all", done: !!hd }] : []),
+  ];
+  const all = cards.every(c => c.done);
+  const sub = all ? "All three done. New ones tomorrow" : n > 1 ? `${n} days in a row` : "";
+  return `<section class="r2-tdy">
+    <div class="r2-sh"><h2 class="title-3">Today</h2>${sub ? `<span class="note">${esc(sub)}</span>` : ""}</div>
+    <div class="r2-td-row">${cards.map((c, i) => `<button class="r2-td${c.done ? " done" : ""}" ${c.attr} style="--k:${i}">
+      <span class="r2-td-v">${c.vis}${tick(c.done)}</span><b>${esc(c.name)}</b><em>${esc(c.meta)}</em></button>`).join("")}</div></section>`;
 }
 
-// ---------------------------------------------------------------- Train: your eye, in one honest line
+// ---------------------------------------------------------------- Train: your eye, the summary
 const R2_FAMS = ["Reds", "Oranges", "Yellows", "Greens", "Blues", "Purples", "Pinks", "Browns", "Greys"];
-function r2EyeBlock() {
+function r2EyeData() {
   let m = null, line = "", any = false;
   try { m = ooS().model; any = Object.keys(m.j || {}).some(j => m.j[j] && m.j[j].n); line = ooEyeLine(); } catch (e) {}
   const old = skillState("hue").fam || {};
-  const dots = R2_FAMS.map(f => {
+  const fams = R2_FAMS.map(f => {
     let th = null, sure = false;
     if (any) { const e = ooEye(m, f, null); if (e.th && e.n >= 3) { th = e.th; sure = e.sure; } }
     if (th == null && old[f]) { th = old[f]; sure = true; }
-    const hex = typeof ooFamHex === "function" ? ooFamHex(f) : (FAM_HEX[f] || "#888");
-    return `<span class="r2-fam${th == null ? " na" : sure ? "" : " thin"}"><i style="--c:${hex}"></i><b class="mono">${th == null ? "–" : pctFmt(th)}</b></span>`;
-  }).join("");
+    return { f, th, sure, hex: typeof ooFamHex === "function" ? ooFamHex(f) : (FAM_HEX[f] || "#888") };
+  });
   const measured = any || Object.keys(old).length > 0;
   if (!any && Object.keys(old).length >= 2) { const b = Object.entries(old).sort((x, y) => x[1] - y[1]); line = `You see ${b[0][0].toLowerCase()} to ${pctFmt(b[0][1])} different, ${b[b.length - 1][0].toLowerCase()} to ${pctFmt(b[b.length - 1][1])}.`; }
-  return `<button class="r2-eye" data-eye>
-    <span class="r2-eye-h"><b class="title-3">Your eye</b>${ICON.chev}</span>
-    <span class="r2-fams" aria-hidden="true">${dots}</span>
-    <span class="r2-eye-l">${esc(measured ? line : "Fills in as you play: the smallest difference you can see in each color family.")}</span></button>`;
+  return { any, measured, line, fams };
+}
+// one short line for the Train row: your sharpest family, or how it fills in
+function r2EyeMeta(d, ci) {
+  if (ci.due) return "A check-in is ready";
+  const got = d.fams.filter(x => x.th != null).sort((a, b) => a.th - b.th);
+  if (got.length >= 2) return `Sharpest on ${got[0].f.toLowerCase()}, ${pctFmt(got[0].th)}`;
+  return "Fills in as you play";
 }
 
 // ---------------------------------------------------------------- Train: the room
 function r2TrainHome() {
-  const g = gyState(), ci = checkinDue(g.checkins, triedKeys().length, gyDay()), { games, drills } = r2TrainEntries();
-  const checks = [
-    { id: "ci", ic: "checkin", name: "Weekly check-in", attr: ci.due ? "data-checkin" : "data-r2-ciwhy", meta: ci.due ? "Ready now" : ci.why.replace("Next check-in in", "In").replace("Try three stations to unlock the weekly check-in", "After three drills") },
-    { id: "scr", ic: "screen", name: "Your screen", attr: "data-scr", meta: scrOk() ? "Checked" : "Not checked yet" },
-    { id: "hist", ic: "history", name: "History", attr: "data-r2-history", meta: g.checkins.length ? `${g.checkins.length} check-in${g.checkins.length > 1 ? "s" : ""}` : "Levels and trends" },
-  ];
+  const g = gyState(), ci = checkinDue(g.checkins, triedKeys().length, gyDay()), games = r2TrainGames(), eye = r2EyeData();
+  const nDrills = r2Drills().reduce((s, [, xs]) => s + xs.length, 0);
   const el = show(`
     ${tabHead()}
     <h1 class="tab-title">Train</h1>
-    <div class="r2-games">${games.map(r2Game).join("")}</div>
     ${r2TrainToday()}
-    ${r2EyeBlock()}
-    <section class="r2-more">
-      <div class="r2-sh"><h3 class="title-3">Drills</h3><span class="note">one judgment at a time</span></div>
-      <div class="r2-list">${drills.map(r2Li).join("")}</div>
-      <div class="r2-sh"><h3 class="title-3">Checks</h3><span class="note">the honest numbers</span></div>
-      <div class="r2-list">${checks.map(r2Li).join("")}</div>
-    </section>
-    ${cvdOn() ? `<p class="r2-fine">A simple adjustment for ${esc(S.profile.cvd)} color blindness, not a simulation of it: differences lean on lightness and on the colors you see best.</p>` : ""}
-    <p class="r2-fine">Differences are a percent of the black-to-white range; about 1% is the smallest most people see side by side. Practice sharpens these judgments. It isn't brain training.</p>
+    <section class="r2-gm"><div class="r2-sh"><h2 class="title-3">Games</h2></div>
+      <div class="r2-games">${games.map(r2Game).join("")}</div></section>
+    <div class="r2-rows">
+      ${r2Row("data-r2-drills", "drills", "Drills", `${nDrills} drills, one judgment each`, "drills")}
+      ${r2Row("data-r2-eye", "eye", "Your eye", r2EyeMeta(eye, ci), "eye")}
+    </div>
   `, "gym r2 r2-train", "gym");
   r2WireTrain(el);
   r2TrainAsync(el);
 }
+// the shared wiring: every Train door, on whichever page it sits
 function r2WireTrain(el) {
   const on = (sel, f) => el.querySelectorAll(sel).forEach(b => b.onclick = e => { buzz(4); f(b, e); });
   on("[data-st]", b => runDrill(b.dataset.st));
   on("[data-checkin]", () => runCheckin());
-  on("[data-scr]", () => screenCheck(() => go("gym")));
-  on("[data-lightning]", () => lightning());
   on("[data-oo-map]", () => ooEnter());
   on("[data-oo-line]", () => ooAcross());
-  on("[data-oo-whose]", () => ooWhose());
   on("[data-oo-pairs]", () => ooPairs());
   on("[data-mapstudy]", () => msOpen({ from: "gym" }));
   on("[data-mt]", b => openMatch(b.dataset.mt));
-  on("[data-r2-mix]", b => ooPlayMix(b.dataset.r2Mix, { title: "Train", onQuit: () => go("gym") }));
+  on("[data-r2-mix]", b => ooPlayMix(b.dataset.r2Mix, { title: b.dataset.r2Mix === "wasthere" ? "Color memory" : "Train", onQuit: () => go("gym") }));
   on("[data-r2-colordle]", () => daily());
   on("[data-dpaint]", () => challenge());
-  on("[data-r2-ciwhy]", () => toast(checkinDue(gyState().checkins, triedKeys().length, gyDay()).why));
-  on("[data-r2-history]", () => eyeReport());
+  on("[data-r2-board]", () => hgDaily());
+  on("[data-r2-drills]", () => r2DrillsPage());
+  on("[data-r2-eye]", () => r2EyePage());
   on("[data-r2-extra]", b => { const t = (window.TRAIN_TILES || []).find(x => x && String(x.id) === b.dataset.r2Extra); if (t && typeof t.open === "function") t.open(); });
-  on("[data-eye]", () => {
-    let any = false; try { const m = ooS().model; any = Object.keys(m.j || {}).some(j => m.j[j] && m.j[j].n); } catch (e) {}
-    if (!any) return eyeReport();
-    ooEyePage();   // its own back goes to the Odd one out map; from Train it comes back here
-    const c = document.querySelector(".oo-eye [data-close]"); if (c) c.onclick = () => go("gym");
-  });
 }
 function r2TrainAsync(el) {
   const img = el.querySelector("#r2DpImg");
   if (img && typeof dpLoad === "function") dpLoad().then(e => {
-    if (!img.isConnected || !e) return;
-    img.innerHTML = `<img src="${esc(dpThumb(e))}" alt="" decoding="async"><span class="r2-today-band">${dpPlates(e).map(h => `<i style="--c:${h}"></i>`).join("")}</span>`;
+    if (!img.isConnected) return;
+    if (!e) throw new Error("no painting today");
+    img.innerHTML = `<img src="${esc(dpThumb(e))}" alt="" decoding="async">`;
     const im = img.querySelector("img"); im.onload = () => img.classList.remove("r2-loading");
-  }).catch(() => { if (img.isConnected) { img.classList.remove("r2-loading"); img.innerHTML = `<span class="r2-today-band full">${r2Pal("dp").cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span>`; } });
+  }).catch(() => { if (img.isConnected) { img.classList.remove("r2-loading"); img.innerHTML = `<span class="r2-today-band">${r2Pal("dp").cols.map(h => `<i style="--c:${h}"></i>`).join("")}</span>`; } });
+}
+const r2Back = label => `<header class="deck-top r2-top"><button class="icon-btn" data-close aria-label="${esc(label)}">${ICON.back}</button></header>`;
+
+// ---------------------------------------------------------------- Train › Drills (#/train/drills)
+function r2DrillsPage() {
+  const el = show(`
+    ${r2Back("Back to Train")}
+    <h1 class="tab-title">Drills</h1>
+    <p class="r2-lede">One judgment at a time, each on its own ladder.</p>
+    ${r2Drills().map(([t, xs]) => `<section class="r2-shelf"><div class="r2-sh"><h2 class="title-3">${esc(t)}</h2></div>
+      <div class="r2-list">${xs.map(r2Li).join("")}</div></section>`).join("")}
+  `, "gym r2 r2-sub");
+  r2WireTrain(el);
+  el.querySelector("[data-close]").onclick = () => go("gym");
+}
+
+// ---------------------------------------------------------------- Train › Your eye (#/train/eye)
+// One door for everything about your eye: the nine families, one sentence, then the check-in, the detail by
+// family and judgment (Odd one out's profile), the history of levels and check-ins, and your color vision.
+const R2_CVD = { typical: "Typical", "red-green": "Red–green color blind", "blue-yellow": "Blue–yellow color blind", unsure: "Not sure" };
+function r2EyePage() {
+  const g = gyState(), ci = checkinDue(g.checkins, triedKeys().length, gyDay()), d = r2EyeData();
+  const ks = ci.due ? checkinPick(triedKeys(), g.checkins) : [];
+  const fams = d.fams.map(x => `<span class="r2-fam${x.th == null ? " na" : x.sure ? "" : " thin"}"><i style="--c:${x.hex}"></i><b>${x.th == null ? "–" : pctFmt(x.th)}</b><small>${esc(x.f)}</small></span>`).join("");
+  const el = show(`
+    ${r2Back("Back to Train")}
+    <h1 class="tab-title">Your <em>eye</em></h1>
+    <p class="r2-lede">${esc(d.measured ? d.line : "Fills in as you play: the smallest difference you can see in each color family.")}</p>
+    <div class="r2-fams big" role="img" aria-label="Smallest difference you see, by color family">${fams}</div>
+    <div class="r2-rows">
+      ${ci.due ? r2Row("data-checkin", "checkin", "Weekly check-in", `${ks.map(k => SKILLS[k].name).join(" · ")} · about 3 min, no feedback`, "ci")
+        : r2Row("data-r2-ciwhy", "checkin", "Weekly check-in", ci.why.replace("Next check-in in", "In").replace("Try three stations to unlock the weekly check-in", "Opens after three drills"), "ci")}
+      ${d.any ? r2Row("data-r2-eyedetail", "odd", "By family and judgment", "Lightness, vividness and hue, from Odd one out", "oo") : ""}
+      ${r2Row("data-r2-history", "history", "History", g.checkins.length ? `${g.checkins.length} check-in${g.checkins.length > 1 ? "s" : ""}, levels, the daily painting` : "Levels, check-ins, the daily painting", "hist")}
+      ${r2Row("data-r2-vision", "squint", "Your color vision", S.profile ? R2_CVD[S.profile.cvd] || "Set" : "Not set: drills stay fair either way", "cvd")}
+    </div>
+    <p class="r2-fine">${cvdOn() ? `A simple adjustment for ${esc(S.profile.cvd)} color blindness is on. ` : ""}Differences are a percent of the black-to-white range; about 1% is the smallest most people see side by side. Practice sharpens these judgments. It isn't brain training.</p>
+  `, "gym r2 r2-sub");
+  r2WireTrain(el);
+  const on = (sel, f) => { const b = el.querySelector(sel); if (b) b.onclick = () => { buzz(4); f(); }; };
+  on("[data-r2-ciwhy]", () => toast(checkinDue(gyState().checkins, triedKeys().length, gyDay()).why));
+  on("[data-r2-eyedetail]", () => { ooEyePage(); const c = document.querySelector(".oo-eye [data-close]"); if (c) c.onclick = () => r2EyePage(); });
+  on("[data-r2-history]", () => { eyeReport(); const c = document.querySelector(".gym-eye [data-back]"); if (c) c.onclick = () => r2EyePage(); });
+  on("[data-r2-vision]", () => profileSetup(r2EyePage, { why: "Your color vision" }));
+  el.querySelector("[data-close]").onclick = () => go("gym");
 }
 
 // ================================================================ Studio
@@ -231,12 +300,11 @@ function r2StudioHome() {
   const vf = r2Viewfinder(cols), vfName = nameOf(vf.mid);
   const byL = r2ByL(cols), dark = byL[0], light = byL[byL.length - 1], mid = r2Mid(cols, 0), [, , Hm] = lch(mid);
   const tri = [0, 120, 240].map(d => gyFit(64, 48, Hm + d));
-  const triPts = [90, 210, 330].map(a => [50 + 34 * Math.cos(a * Math.PI / 180), 50 - 34 * Math.sin(a * Math.PI / 180)]);
   const palRow = p => `<button class="r2-pal" data-id="${esc(p.id)}"><span class="r2-pal-s">${p.cols.map(h => r2i(h)).join("")}</span><span class="r2-pal-t"><b>${esc(p.name || p.from || "Palette")}</b><em>${esc(p.at ? fmtDay(p.at) : "")}</em></span></button>`;
-  const favC = S.fav && S.fav.h;
   const el = show(`
     ${tabHead()}
     <h1 class="tab-title">Studio</h1>
+    <div class="r2-sh r2-sh-cap"><h3 class="title-3">Capture</h3><span class="note">camera or photo</span></div>
     <section class="r2-hero r2-cap r2-k0">
       <button class="r2-hpic r2-vf" data-eye aria-label="Point the camera"><span class="r2-vf-img" id="r2VfImg">${vf.html}</span>
         <span class="r2-reticle" aria-hidden="true"></span><span class="r2-vf-tag" id="r2VfTag" data-ink="${ink(vf.mid)}" style="--c:${vf.mid}">${esc(vfName.text || vfName.n)}</span></button>
@@ -253,10 +321,9 @@ function r2StudioHome() {
     </section>
 
     <section class="r2-blk" style="--k:2">
-      <div class="r2-sh"><h3 class="title-3">Make</h3><span class="note">palettes from scratch</span></div>
+      <div class="r2-sh"><h3 class="title-3">Build</h3><span class="note">palettes from scratch</span></div>
       <div class="r2-grid">
-        <button class="r2-tile wide2" data-wheel><span class="r2-pic r2-wheelpic"><span class="r2-mini" id="r2Mini"></span><span class="r2-wheelpal">${tri.concat(cols.slice(0, 3)).slice(0, 5).map(h => r2i(h)).join("")}</span></span><b class="r2-tn">Gamut wheel</b><span class="r2-tm">Lay a shape on the wheel; what's inside is your palette</span></button>
-        <button class="r2-tile" data-lab="harmony"><span class="r2-pic r2-harm"><span class="ring" style="background:${ringStops()}"></span><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="${triPts.map(p => p.map(v => v.toFixed(1)).join(",")).join(" ")}"/>${triPts.map((p, i) => `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="7.5" fill="${tri[i]}"/>`).join("")}</svg></span><b class="r2-tn">Harmony</b><span class="r2-tm">Build on the wheel</span></button>
+        <button class="r2-tile wide2" data-wheel><span class="r2-pic r2-wheelpic"><span class="r2-mini" id="r2Mini"></span><span class="r2-wheelpal">${tri.concat(cols.slice(0, 3)).slice(0, 5).map(h => r2i(h)).join("")}</span></span><b class="r2-tn">Gamut wheel</b><span class="r2-tm">Lay a shape on the wheel, or start from Triad, Complement, Analogous or Square. What's inside is your palette.</span></button>
         <button class="r2-tile" data-lab="contrast"><span class="r2-pic r2-albers"><span style="--g:${light}"><b style="--c:${mid}"></b></span><span style="--g:${dark}"><b style="--c:${mid}"></b></span></span><b class="r2-tn">Albers</b><span class="r2-tm">One color, two looks</span></button>
       </div>
     </section>
@@ -267,10 +334,6 @@ function r2StudioHome() {
       <div class="r2-empty" id="r2Empty" hidden><b class="title-3">Your photos and palettes land here</b><span>Point the camera or pick a photo, and its palette is waiting next time. Palettes you keep from the wheel come here too.</span></div>
       ${saved.length ? `<div class="r2-pals">${saved.slice(0, 4).map(palRow).join("")}${saved.length > 4 ? `<div class="r2-palmore" hidden>${saved.slice(4).map(palRow).join("")}</div><button class="r2-text" data-r2-more>All ${saved.length} palettes</button>` : ""}</div>` : ""}
       ${typeof fvStudioRow === "function" ? fvStudioRow() : ""}
-      <div class="r2-grid r2-taste">
-        <button class="r2-tile" data-taste="color"><span class="r2-pic r2-duel">${favC ? `<i class="one" style="--c:${favC}"></i>` : `<i style="--c:${r2Acc(cols, 0)}"></i><i style="--c:${r2Acc(cols, 1)}"></i>`}</span><b class="r2-tn">${favC ? "Your color" : "Find your color"}</b><span class="r2-tm">${favC ? `${esc(S.fav.n.charAt(0).toUpperCase() + S.fav.n.slice(1))}-ish. Take it again` : "About 20 taps"}</span></button>
-        <button class="r2-tile" data-taste="palette"><span class="r2-pic r2-duel r2-duel-pal">${[cols.slice(0, 4), r2ByL(cols).slice(-4)].map(p => `<i>${p.map(h => `<b style="--c:${h}"></b>`).join("")}</i>`).join("")}</span><b class="r2-tn">Find your palette</b><span class="r2-tm">About 15 taps</span></button>
-      </div>
     </section>
 
     ${saved.length || fvN ? `<section class="r2-blk" style="--k:4"><button class="qrow r2-export" data-r2-export><span class="r2-ex-t"><b>Export</b><em>CSS, Tailwind, Figma, Procreate, Adobe</em></span>${ICON.chev}</button></section>` : ""}
@@ -283,7 +346,6 @@ function r2WireStudio(el) {
   on("[data-namer]", () => LAB.namer());
   on("[data-wheel]", () => gamutWheel());
   on("[data-lab]", b => LAB[b.dataset.lab]());
-  on("[data-taste]", b => tasteIntro(b.dataset.taste));
   on("[data-id]", b => openSavedPalette(b.dataset.id));
   on("[data-fv-row]", () => favShelf(() => go("studio")));
   on("[data-r2-more]", b => { const m = el.querySelector(".r2-palmore"); if (m) { m.hidden = false; b.remove(); } });

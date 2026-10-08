@@ -47,7 +47,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "No painting in our archive of 23,781 museum paintings has this color covering as much as 1 per cent of its canvas, within four CIEDE2000 units of the swatch, as photographed [10]. That says something about the swatch, not about painting: it is a light-emitting screen color with almost no counterpart in aged, varnished paint [10].\n\nAs a phrase, *green yellow* is almost unchanged in Google Books from 1800 to the 1910s, rises from the 1920s, and peaks around 1940 [11]. The count includes plain lists such as \"green, yellow, orange\", so it overstates the color word [11]."
+   "body": "No painting in our archive of 23,781 museum paintings has this color covering as much as 1 per cent of its canvas, within four CIEDE2000 units of the swatch, as photographed [11]. That says something about the swatch, not about painting: it is a light-emitting screen color with almost no counterpart in aged, varnished paint [11].\n\nAs a phrase, *green yellow* is almost unchanged in Google Books from 1800 to the 1910s, rises from the 1920s, and peaks around 1940 [11]. The count includes plain lists such as \"green, yellow, orange\", so it overstates the color word [11]."
   }
  ],
  "aside": {
@@ -221,12 +221,11 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "batch30 writer + gate",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Concordance for 'green, yellow' is mostly word co-occurrence; article rests on Pastoureau (yellow/green), Gurney, Pigment Compendium, Paterson.",
-   "X11/CSS history is web-only (Wikipedia, W3C), no date claimed.",
-   "Judas legend hedged as legend (Pastoureau)."
+   "Field-notes archive claim re-cited from Ball (note 10) to archive data (note 11)",
+   "Other claims verified against Pastoureau, Pigment Compendium, Gurney"
   ]
  },
  "words": 850

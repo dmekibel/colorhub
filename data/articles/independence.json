@@ -22,7 +22,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, this color covers at least five per cent of the canvas, within six units of color distance, in 135 paintings [3]. The rate is rare in older art and climbs in the twentieth century: 37 of 1,674 paintings from the 1900s, about four times the archive's average [3]. The 1920s peak at 8 of 237 paintings [3].\n\nIt is a painter's blue more than a place's. Henri-Edmond Cross has it in 4 of his 12 paintings [3]. Among the pictures it fills most is Pissarro's *Still Life with a Coffeepot* from 1900, at 31 per cent [3]. The names that travel with it are [[denim]], [[navy]] and [[charcoal]] [3]. These are photographs of aged, varnished paintings, so a color match is not a pigment test."
+   "body": "In our archive of 23,781 paintings, this color covers at least five per cent of the canvas, within six units of color distance, in 135 paintings [3]. The rate is rare in older art and climbs in the twentieth century: 37 of 1,674 paintings from the 1900s, about four times the archive's average [3]. The 1920s are its peak decade, with 8 of 237 paintings [3].\n\nIt is a painter's blue more than a place's. Henri-Edmond Cross has it in 4 of his 12 paintings [3]. Among the pictures it fills most is Pissarro's *Still Life with a Coffeepot* from 1900, at 31 per cent [3]. The names that travel with it are [[denim]], [[navy]] and [[charcoal]] [3]. These are photographs of aged, varnished paintings, so a color match is not a pigment test."
   }
  ],
  "aside": {
@@ -127,11 +127,11 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "batch-51 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Origin undocumented; short by design. Greenfield passages concern the political word only."
+   "Fixed grammar of the 1920s peak sentence"
   ]
  },
- "words": 313
+ "words": 316
 }

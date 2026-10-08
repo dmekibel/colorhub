@@ -1,310 +1,308 @@
 {
- "slug": "lapis-lazuli",
- "name": "Lapis Lazuli",
- "hex": "#26619C",
- "names": [
-  "Lapis Lazuli"
- ],
- "tier": "pigment",
- "depth": "epic",
- "lede": "Lapis lazuli is the deep blue stone of Afghanistan, flecked with pyrite, that medieval painters turned into the most expensive pigment in Europe, ultramarine.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A blue stone from beyond the sea",
-   "body": "*Lapis lazuli* simply means \"blue stone\" [1]. Medieval Latin texts use several words for blue stones, among them *azurium*, *lazurium*, *lapis lazuri*, *lapis Scythium* and *sapphirum*, and they often mean sapphire and lapis interchangeably [7]. The pigment made from the stone took the name *ultramarine*, \"beyond the sea\", because the stone had to be brought across the Mediterranean from the East [11].\n\nToday the swatch above is a clear mid blue, ISCC-NBS \"moderate blue\" [15]. It is a screen approximation of a stone whose best examples are deeper, a blue Ball likens to the sky between dusk and night, with a trace of purple [1][4]. Its neighbors on the page are [[egyptian-blue]], [[persian-blue]] and [[cobalt]], and [[indigo]] was long used to imitate the pigment made from it [13]."
+  "slug": "lapis-lazuli",
+  "name": "Lapis Lazuli",
+  "hex": "#26619C",
+  "names": [
+    "Lapis Lazuli"
+  ],
+  "tier": "pigment",
+  "depth": "epic",
+  "lede": "Lapis lazuli is the deep blue stone of Afghanistan, flecked with pyrite, that medieval painters turned into the most expensive pigment in Europe, ultramarine.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A blue stone from beyond the sea",
+      "body": "*Lapis lazuli* simply means \"blue stone\" [1]. Medieval Latin texts use several words for blue stones, among them *azurium*, *lazurium*, *lapis lazuri*, *lapis Scythium* and *sapphirum*, and they often mean sapphire and lapis interchangeably [7]. The pigment made from the stone took the name *ultramarine*, \"beyond the sea\", because the stone had to be brought across the sea from the East [11].\n\nToday the swatch above is a clear mid blue, ISCC-NBS \"moderate blue\" [15]. It is a screen approximation of a stone whose best examples are deeper, a blue Ball likens to the sky between dusk and night, with a trace of purple [1][4]. Its neighbors on the page are [[egyptian-blue]], [[persian-blue]] and [[cobalt]], and [[indigo]] was long used to imitate the pigment made from it [13]."
+    },
+    {
+      "id": "rock",
+      "title": "A rock, not a mineral",
+      "body": "Lapis lazuli is a rock, a mixture of minerals, and the blue comes from only one of them, lazurite [1][4][6]. The rest is usually calcite, which shows as white veins, and pyrite, which shows as brassy yellow flecks [6]. Lazurite is an aluminosilicate that also contains sulfur, and Ball explains that the crystal absorbs red light as an electron shuttles between clusters of sulfur atoms [1]. That is unusual: most blue minerals owe their color to a transition metal such as copper or cobalt [1].\n\nThe flecks are not gold. Pyrite is iron sulfide, \"fool's gold\", and ancient peoples took its glitter for gold [1][7][8]. Finlay, seeing a raw piece for the first time, found it much bluer than the polished stones she knew, and found that the pyrite makes the best pieces look like a night sky [8]. Lapis forms where limestone is changed by heat and pressure next to an igneous intrusion rich in alkali [6]. Carved pieces such as Chinese flasks are always small, and were believed to bring good luck [7].\n\nPowdering it spoils it. The calcite and other pale minerals turn ground lapis a greyish, weaker blue unless the stone is nearly pure lazurite [1][4][5]. This is the main reason the ancient world did not paint with it. Ball reports that no Egyptian, Greek or Roman work has yielded ground lapis, and that the ancient world relied instead on [[gem:azurite|azurite]] and [[egyptian-blue]] [1]."
+    },
+    {
+      "id": "mines",
+      "title": "Badakhshan and the long road west",
+      "body": "For most of history there was one important source: the mines of Badakhshan in northern Afghanistan, in the valley of the Kokcha River, worked for more than 6,000 years [6][1]. Marco Polo reached them in 1271 and described a mountain from which the best blue was dug [1][4]. Large deposits were found elsewhere, in Siberia and Chile, only much later, and the stone also occurs in smaller amounts at Vesuvius, Colorado, California, Argentina and Burma [1][6].\n\nThe oldest use as a paint is in Asia [1][4]. Books differ on how old. Ball dates Afghan wall paintings to the sixth and seventh centuries and adds Byzantine manuscripts of the sixth to the twelfth and Chinese and Indian paintings of the eleventh [1]. St Clair gives a few fifth-century wall paintings in Turkmenistan and seventh-century cave-temple images at Bamiyan [4]. Finlay imagines the unknown person who first mixed the blue powder with glue, in the valley below the great Buddhas of Bamiyan, and notes that the Buddhas and their frescoes were later destroyed [8].\n\nThe first known use in Europe is in the church of San Saba in Rome, from the first half of the eighth century, where it is mixed with [[egyptian-blue]], the old blue of the ancient world [4]. The two pigments were apparently used side by side for longer than was once thought [4]. Marsilio Ficino, quoted by Jarman, tied the stone and its color to Jupiter, and credited it with power against black bile [17]."
+    },
+    {
+      "id": "making",
+      "title": "The recipe that made it a pigment",
+      "body": "Grinding lapis gives a dull powder, so the blue has to be separated from the rock. The method, as medieval workers described it, is to mix ground lapis into a paste with wax, resins and oils, wrap it in cloth and knead it in a lye solution [1][4]. The blue particles wash out and settle, the biggest and bluest first [1]. Cennino Cennini compared the work to kneading bread dough [4].\n\nEach kneading gives a paler blue. The last washings, a grey-blue known as ultramarine ash, were used for pale glazes [1][4]. Cennino advised that the first two yields were worth eight ducats an ounce, and the later ones worse than ashes [1]. A modern estimate is that 100 grams of lapis gives only about four grams of true ultramarine pigment [5].\n\nWho invented the process is unknown. Ball cites Daniel Thompson's argument that finished ultramarine was imported from the East before Europe learned to make it, since otherwise it would not be called \"beyond the sea\" [1]. Arabic alchemical texts describe the extraction, and one recipe is ascribed to Jabir ibn Hayyan, but it was written long after his death in the ninth century [1][5]. Good-quality ultramarine appears in Western art around 1200, by the estimate of the Royal Academy's Arthur Laurie [1][5]. Theophilus, writing in the 1120s, does not mention it, and his azure is azurite [1]."
+    },
+    {
+      "id": "price",
+      "title": "Dearer than gold",
+      "body": "Ball lists ultramarine, vermilion and gold as the glories of the medieval palette, and ultramarine cost more than either of the other two [1]. When the Florentine painter Neri di Bicci bought pigments in 1471, ultramarine cost him about ten times as much as good azurite, and azurite itself cost two and a half times as much as a good green, red lake or yellow lake [2]. In heraldry, the language of blazon ranked the most precious pigment, lapis or ultramarine, beside the two precious metals [10].\n\nPrices, contracts and complaints fill the sources. Dürer, buying in Antwerp in 1521, paid nearly 100 times as much for ultramarine as for some earth pigments, and never mentioned it without grumbling [4]. Filippino Lippi's contract of 1487 for the Strozzi Chapel set aside part of the fee for a trip to Venice, and Pinturicchio's contract of 1502 reserved 200 ducats for a Venetian pigment expedition, because Venice was first in the supply chain [4]. The contract of 1515 for Andrea del Sarto's *Madonna of the Harpies* required the Virgin's robe to use ultramarine worth at least five broad florins an ounce [4].\n\nPrices stayed high in the seventeenth century. Ball puts ultramarine at 45 guilders an ounce in 1626, and notes that when Charles I gave £500 worth of it to van Dyck and Anne Carlisle, it was a royal present indeed [3]. Jan Vermeer, who kept using it, painted *The Milkmaid* around 1658 [3]. In the early 1830s natural ultramarine still cost 8 guineas an ounce, which St Clair compares to just over eleven weeks of a laborer's wages [4]. Patrons knew this: in 1459 the town authorities of Siena kept Sano di Pietro's gold and ultramarine under their own control [4].\n\nEven so, the blue was no guarantee of rank everywhere. In northern Europe, where ultramarine was scarcer, the Virgin was often dressed in red instead [4]."
+    },
+    {
+      "id": "virgin",
+      "title": "The Virgin's blue",
+      "body": "From about 1400 artists increasingly painted the Madonna in ultramarine cloaks, as a sign of esteem for her and for the paint [4]. Duccio's *The Virgin and Child with Saints* of about 1315 is Ball's example of the medieval habit [1]. Greenfield writes that by the 1400s a bright blue, the shade of lapis, was seen as a noble color, while pale blue stayed the color of servants and laborers [18]. Pastoureau adds that blue was at first the color of the Virgin, and at the end of the twelfth century became that of kings, the French royal line adopting it first [19].\n\nContracts often named the pigment and the figure. Many patrons bought it themselves [4]. Painters used it thinly, as a glaze over an opaque underpaint, and kept it for the most important subjects [5]. St Clair notes that, unlike many blues tinged with green, ultramarine is a true blue that can border on violet, and that it lasts exceptionally well [4].\n\nNot every medieval \"sapphire\" is what we would call one today. A thirteenth-century list of the jewels at St Albans, Gage notes, pictures the sapphire, the \"gem of gems\", as opaque lapis [10]. Finlay adds that the biblical *sappir*, and the stone said to carry the Ten Commandments, was probably lapis from Afghanistan, and that only much later did the name settle on the blue [[gem:sapphire|sapphire]] we know [9]. In that sense the old sapphire was a [[gem:lapis-lazuli|lapis lazuli]]."
+    },
+    {
+      "id": "synthetic",
+      "title": "French ultramarine",
+      "body": "The breakthrough came from the chemistry of soda. In 1787 Goethe noted blue deposits on Italian lime kilns, which locals used as a substitute for lapis in ornaments [1]. In 1814 the chemist Tassaert had a blue material from a glass factory's soda kiln analysed, and suggested to the Société d'Encouragement pour l'Industrie Nationale that it pointed the way to artificial ultramarine [1]. In 1824 the Société offered 6,000 francs for an industrial process that could sell the pigment for under 300 francs a kilogram; an earlier British prize, from the Royal College of Arts in 1817, was much smaller and had no winner [1][4].\n\nIn 1828 the prize went to the Toulouse color maker Jean-Baptiste Guimet, who began selling at 400 francs a pound, about a tenth of the natural price [1][4]. Christian Gmelin of Tübingen claimed an independent and earlier invention, and Guimet answered that he had had his own process by 1826 [1]. Books disagree on the dates: the Pigment Compendium gives 1826 to 1828 for Guimet and 1827 for Gmelin [6]. Ball notes that Ingres used Guimet's ultramarine in *The Apotheosis of Homer*, dated 1827, which would support Guimet's claim of priority [1]. Because the French committee backed Guimet, the pigment is still called French ultramarine [1][4].\n\nThe recipe is, in Ball's words, little more than throwing everything together and cooking it: china clay, soda, charcoal, sand and sulfur are heated until they form a green glass, which is ground, washed and heated again until it turns blue [1]. At its cheapest, St Clair says, the natural pigment could sell for 2,500 times more than the synthetic [4]. Gurney points out that the synthetic is chemically identical to the pigment of the stone, which is why it kept the traditional name [11]. Painters did not rush to switch, and Turner seems to have tried it mainly in watercolor [1]."
+    },
+    {
+      "id": "mixes",
+      "title": "Imitations, ashes and mixes",
+      "body": "Because it was so dear, painters imitated it. Cennini told fresco painters to take indigo and lime white if they wanted a drapery that looked like ultramarine, and indigo pigment from Baghdad was taken to be a mineral blue [13]. The waste from the extraction was sold on as a bluish grey called mineral grey [12][6].\n\nBlue also went into mixes. Painters of the Middle Ages made greens by grinding two ores together, azurite with tin yellow, or lapis lazuli with [[orpiment]] [14]."
+    },
+    {
+      "id": "swatch",
+      "title": "What the swatch can and cannot say",
+      "body": "The swatch is the dictionary lapis lazuli, ISCC-NBS block 182, which the 1955 system calls \"moderate blue\", within 3.3 units of this color [15]. Its earliest record in our sources is Ridgway's color plates of 1912, and Maerz and Paul's dictionary of 1930 dates the name to about 1850 [15]. The stone itself, at its best, is deeper and more violet than that, and its flecks are part of its look [1][4][8].\n\nThe color name is therefore much younger than the stone: in our sources it is first recorded 486 years after the first painting in our archive that matches it [16]. A modern color name for a very old material is common, and \"lapis\" here describes a mid-blue, not a rock."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, 47 hold this blue, within six units of the swatch and covering at least five per cent of the canvas, as photographed, which is about 0.2 per cent [16]. A color match in a museum photograph of an aged, varnished painting is not a pigment test, so these are look-alikes, not proof of lapis [16].\n\nThe surprise is when they appear. The fifteen hundreds are no richer in this blue than the archive as a whole, with 6 of 2,231 paintings, a rate of only 1.4 times expected, while the nineteen hundreds hold 15 of 1,674, about 4.5 times expected [16]. The same blue shows up in the era of synthetic ultramarine, not in the age of the dear stone. One likely reason is that painters kept the real pigment for small areas, such as a robe, and often glazed it thinly over an opaque underpaint [5].\n\nThe largest holders include Arthur B. Davies's [[painting:cma-109030|Hermes and the Infant Dionysus]], where it covers 34 per cent of the canvas, and Van Gogh's [[painting:commons-Q26220263|Three White Cottages in Saintes-Maries]], at 29 per cent [16]. It shares canvases with [[denim]] far more than chance, in 45 paintings, about 66 times the expected rate [16]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Latin for 'blue stone'; the pigment 'ultramarine' means 'beyond the sea'",
+      "first_recorded": "Ground lapis in Asian wall paintings by the 6th-7th centuries; the name as a color in our sources in Ridgway 1912",
+      "source": "Ball, Bright Earth, ch. 18; St Clair, The Secret Lives of Colour"
+    },
+    "aka": [
+      "ultramarine (the pigment)",
+      "natural ultramarine",
+      "azure stone",
+      "French ultramarine (the synthetic)"
+    ],
+    "siblings": [
+      "egyptian-blue",
+      "persian-blue",
+      "cobalt"
+    ],
+    "parent": null,
+    "children": [
+      "midnight-blue"
+    ],
+    "disambiguation": [
+      {
+        "slug": "azure",
+        "gloss": "a bright sky blue; the word also goes back to blue stones"
+      },
+      {
+        "slug": "sapphire",
+        "gloss": "the gem; medieval 'sapphire' often meant lapis"
+      }
+    ],
+    "other_languages": []
   },
-  {
-   "id": "rock",
-   "title": "A rock, not a mineral",
-   "body": "Lapis lazuli is a rock, a mixture of minerals, and the blue comes from only one of them, lazurite [1][4][6]. The rest is usually calcite, which shows as white veins, and pyrite, which shows as brassy yellow flecks [6]. Lazurite is an aluminosilicate that also contains sulfur, and Ball explains that the crystal absorbs red light as an electron shuttles between clusters of sulfur atoms [1]. That is unusual: most blue minerals owe their color to a transition metal such as copper or cobalt [1].\n\nThe flecks are not gold. Pyrite is iron sulfide, \"fool's gold\", and ancient peoples took its glitter for gold [1][7][8]. Finlay, seeing a raw piece for the first time, found it much bluer than the polished stones she knew, and found that the pyrite makes the best pieces look like a night sky [8]. Lapis forms where limestone is changed by heat and pressure next to an igneous intrusion rich in alkali [6]. carved pieces such as Chinese flasks are always small, and were believed to bring good luck [7].\n\nPowdering it spoils it. The calcite and other pale minerals turn ground lapis a greyish, weaker blue unless the stone is nearly pure lazurite [1][4][5]. This is the main reason the ancient world did not paint with it. Ball reports that no Egyptian, Greek or Roman work has yielded ground lapis, and that the ancient world relied instead on [[gem:azurite|azurite]] and [[egyptian-blue]] [1]."
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#26619C",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 47,
+    "century_lift": {
+      "1500": 1.36,
+      "1900": 4.53
+    },
+    "top_paintings": [
+      "cma-109030",
+      "commons-Q26220263",
+      "nga-42446",
+      "commons-Q17492402"
+    ],
+    "measured": {
+      "lch": [
+        40.2,
+        37.6,
+        273.1
+      ],
+      "iscc": "moderate blue",
+      "iscc_de": 3.3,
+      "first_name_record": "Ridgway 1912"
+    }
   },
-  {
-   "id": "mines",
-   "title": "Badakhshan and the long road west",
-   "body": "For most of history there was one important source: the mines of Badakhshan in northern Afghanistan, in the valley of the Kokcha River, worked for more than 6,000 years [6][1]. Marco Polo reached them in 1271 and described a mountain from which the best blue was dug [1][4]. Large deposits were found elsewhere, in Siberia and Chile, only much later, and the stone also occurs in smaller amounts at Vesuvius, Colorado, California, Argentina and Burma [1][6].\n\nThe oldest use as a paint is in Asia [1][4]. Books differ on how old. Ball dates Afghan wall paintings to the sixth and seventh centuries and adds Byzantine manuscripts of the sixth to the twelfth and Chinese and Indian paintings of the eleventh [1]. St Clair gives a few fifth-century wall paintings in Turkmenistan and seventh-century cave-temple images at Bamiyan [4]. Finlay imagines the unknown person who first mixed the blue powder with glue, in the valley below the great Buddhas of Bamiyan, and notes that the Buddhas and their frescoes were later destroyed [8].\n\nThe first known use in Europe is in the church of San Saba in Rome, from the first half of the eighth century, where it is mixed with [[egyptian-blue]], the old blue of the ancient world [4]. The two pigments were apparently used side by side for longer than was once thought [4]. Marsilio Ficino, quoted by Jarman, tied the stone and its color to Jupiter, and credited it with power against black bile [17]."
-  },
-  {
-   "id": "making",
-   "title": "The recipe that made it a pigment",
-   "body": "Grinding lapis gives a dull powder, so the blue has to be separated from the rock. The method, as medieval workers described it, is to mix ground lapis into a paste with wax, resins and oils, wrap it in cloth and knead it in a lye solution [1][4]. The blue particles wash out and settle, the biggest and bluest first [1]. Cennino Cennini compared the work to kneading bread dough [4].\n\nEach kneading gives a paler blue. The last washings, a grey-blue known as ultramarine ash, were used for pale glazes [1][4]. Cennino advised that the first two yields were worth eight ducats an ounce, and the later ones worse than ashes [1]. A modern estimate is that 100 grams of lapis gives only about four grams of true ultramarine pigment [5].\n\nWho invented the process is unknown. Ball cites Daniel Thompson's argument that finished ultramarine was imported from the East before Europe learned to make it, since otherwise it would not be called \"beyond the sea\" [1]. Arabic alchemical texts describe the extraction, and one recipe is ascribed to Jabir ibn Hayyan, but it was written long after his death in the ninth century [1][5]. Good-quality ultramarine appears in Western art around 1200, by the estimate of the Royal Academy's Arthur Laurie [1][5]. Theophilus, writing in the 1120s, does not mention it, and his azure is azurite [1]."
-  },
-  {
-   "id": "price",
-   "title": "Dearer than gold",
-   "body": "Ball lists ultramarine, vermilion and gold as the glories of the medieval palette, and ultramarine cost more than either of the other two [1]. When the Florentine painter Neri di Bicci bought pigments in 1471, ultramarine cost him about ten times as much as good azurite, and azurite itself cost two and a half times as much as a good green, red lake or yellow lake [2]. In heraldry, the language of blazon ranked the most precious pigment, lapis or ultramarine, beside the two precious metals [10].\n\nPrices, contracts and complaints fill the sources. Dürer, buying in Antwerp in 1521, paid nearly 100 times as much for ultramarine as for some earth pigments, and never mentioned it without grumbling [4]. Filippino Lippi's contract of 1487 for the Strozzi Chapel set aside part of the fee for a trip to Venice, and Pinturicchio's contract of 1502 reserved 200 ducats for a Venetian pigment expedition, because Venice was first in the supply chain [4]. The contract of 1515 for Andrea del Sarto's *Madonna of the Harpies* required the Virgin's robe to use ultramarine worth at least five broad florins an ounce [4].\n\nPrices stayed high in the seventeenth century. Ball puts ultramarine at 45 guilders an ounce in 1626, and notes that when Charles I gave £500 worth of it to van Dyck and Anne Carlisle, it was a royal present indeed [3]. Jan Vermeer, who kept using it, painted *The Milkmaid* around 1658 [3]. In the early 1830s natural ultramarine still cost 8 guineas an ounce, which St Clair compares to just over eleven weeks of a laborer's wages [4]. Patrons knew this: in 1459 the town authorities of Siena kept Sano di Pietro's gold and ultramarine under their own control [4].\n\nEven so, the blue was no guarantee of rank everywhere. In northern Europe, where ultramarine was scarcer, the Virgin was often dressed in red instead [4]."
-  },
-  {
-   "id": "virgin",
-   "title": "The Virgin's blue",
-   "body": "From about 1400 artists increasingly painted the Madonna in ultramarine cloaks, as a sign of esteem for her and for the paint [4]. Duccio's *The Virgin and Child with Saints* of about 1315 is Ball's example of the medieval habit [1]. Greenfield writes that by the 1400s a bright blue, the shade of lapis, was seen as a noble color, while pale blue stayed the color of servants and laborers [18]. Pastoureau adds that blue was at first the color of the Virgin, and at the end of the twelfth century became that of kings, the French royal line adopting it first [19].\n\nContracts often named the pigment and the figure. Many patrons bought it themselves [4]. Painters used it thinly, as a glaze over an opaque underpaint, and kept it for the most important subjects [5]. St Clair notes that, unlike many blues tinged with green, ultramarine is a true blue that can border on violet, and that it lasts exceptionally well [4].\n\nNot every medieval \"sapphire\" is what we would call one today. A thirteenth-century list of the jewels at St Albans, Gage notes, pictures the sapphire, the \"gem of gems\", as opaque lapis [10]. Finlay adds that the biblical *sappir*, and the stone said to carry the Ten Commandments, was probably lapis from Afghanistan, and that only much later did the name settle on the blue [[gem:sapphire|sapphire]] we know [9]. In that sense the old sapphire was a [[gem:lapis-lazuli|lapis lazuli]]."
-  },
-  {
-   "id": "synthetic",
-   "title": "French ultramarine",
-   "body": "The breakthrough came from the chemistry of soda. In 1787 Goethe noted blue deposits on Italian lime kilns, which locals used as a substitute for lapis in ornaments [1]. In 1814 the chemist Tassaert had a blue material from a glass factory's soda kiln analysed, and suggested to the Société d'Encouragement pour l'Industrie Nationale that it pointed the way to artificial ultramarine [1]. In 1824 the Société offered 6,000 francs for an industrial process that could sell the pigment for under 300 francs a kilogram; an earlier British prize, from the Royal College of Arts in 1817, was much smaller and had no winner [1][4].\n\nIn 1828 the prize went to the Toulouse color maker Jean-Baptiste Guimet, who began selling at 400 francs a pound, about a tenth of the natural price [1][4]. Christian Gmelin of Tübingen claimed an independent and earlier invention, and Guimet answered that he had had his own process by 1826 [1]. Books disagree on the dates: the Pigment Compendium gives 1826 to 1828 for Guimet and 1827 for Gmelin [6]. Ball notes that Ingres used Guimet's ultramarine in *The Apotheosis of Homer*, dated 1827, which would support Guimet's claim of priority [1]. Because the French committee backed Guimet, the pigment is still called French ultramarine [1][4].\n\nThe recipe is, in Ball's words, little more than throwing everything together and cooking it: china clay, soda, charcoal, sand and sulfur are heated until they form a green glass, which is ground, washed and heated again until it turns blue [1]. At its cheapest, St Clair says, the natural pigment could sell for 2,500 times more than the synthetic [4]. Gurney points out that the synthetic is chemically identical to the pigment of the stone, which is why it kept the traditional name [11]. Painters did not rush to switch, and Turner seems to have tried it mainly in watercolor [1]."
-  },
-  {
-   "id": "mixes",
-   "title": "Imitations, ashes and mixes",
-   "body": "Because it was so dear, painters imitated it. Cennini told fresco painters to take indigo and lime white if they wanted a drapery that looked like ultramarine, and indigo pigment from Baghdad was taken to be a mineral blue [13]. The waste from the extraction was sold on as a bluish grey called mineral grey [12][6].\n\nBlue also went into mixes. Painters of the Middle Ages made greens by grinding two ores together, azurite with tin yellow, or lapis lazuli with [[orpiment]] [14]."
-  },
-  {
-   "id": "swatch",
-   "title": "What the swatch can and cannot say",
-   "body": "The swatch is the dictionary lapis lazuli, ISCC-NBS block 182, which the 1955 system calls \"moderate blue\", within 3.3 units of this color [15]. Its earliest record in our sources is Ridgway's color plates of 1912, and Maerz and Paul's dictionary of 1930 dates the name to about 1850 [15]. The stone itself, at its best, is deeper and more violet than that, and its flecks are part of its look [1][4][8].\n\nThe color name is therefore much younger than the stone: in our sources it is first recorded 486 years after the first painting in our archive that matches it [16]. A modern color name for a very old material is common, and \"lapis\" here describes a mid-blue, not a rock."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, 47 hold this blue, within six units of the swatch and covering at least five per cent of the canvas, as photographed, which is about 0.2 per cent [16]. A color match in a museum photograph of an aged, varnished painting is not a pigment test, so these are look-alikes, not proof of lapis [16].\n\nThe surprise is when they appear. The fifteen hundreds are no richer in this blue than the archive as a whole, with 6 of 2,231 paintings, a rate of only 1.4 times expected, while the nineteen hundreds hold 15 of 1,674, about 4.5 times expected [16]. The same blue shows up in the era of synthetic ultramarine, not in the age of the dear stone. One likely reason is that painters kept the real pigment for small areas, such as a robe, and often glazed it thinly over an opaque underpaint [5].\n\nThe largest holders include Arthur B. Davies's [[painting:cma-109030|Hermes and the Infant Dionysus]], where it covers 34 per cent of the canvas, and Van Gogh's [[painting:commons-Q26220263|Three White Cottages in Saintes-Maries]], at 29 per cent [16]. It shares canvases with [[denim]] far more than chance, in 45 paintings, about 66 times the expected rate [16]."
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 18 (Ultramarine, 'Across the seas')",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 13 (pharmacy prices, 1471)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 14 (Vermeer, 1626)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, 'Lapis lazuli', pp. 182-4",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 85 (lapis lazuli)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pigment Compendium, 'lapis lazuli', pp. 232, 389",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 7 ('An Uncommon Color')",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Finlay, Color: A Natural History of the Palette, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, ch. 21 (notes) and ch. 20",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, pp. 70, 86",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, p. 92",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, 'lapis lazuli', 'mineral grey', pp. 236, 265",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, p. 219",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, ch. 33",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "data",
+      "cite": "ColorHub library: ISCC-NBS 1955 block 182; Ridgway 1912, plate VIII; Maerz and Paul 1930",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "data",
+      "cite": "ColorHub archive: 23,781 paintings, as photographed (tools/article_field.py, #26619C, within 6, 5 per cent cover)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 35 (quoting Ficino)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 24",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+      "loc_kind": "epub-chapter",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why were the golden flecks in lapis lazuli not gold?",
+      "choices": [
+        "They are iron pyrite, fool's gold",
+        "They are gold dust added by miners",
+        "They are mica",
+        "They are copper"
+      ],
+      "answer": "They are iron pyrite, fool's gold",
+      "kind": "pick"
+    },
+    {
+      "q": "Why does plain ground lapis lazuli make a weak, greyish blue?",
+      "choices": [
+        "Calcite and other pale minerals dilute the blue lazurite",
+        "It is only a surface stain",
+        "Grinding burns off the sulfur",
+        "It reacts with oil"
+      ],
+      "answer": "Calcite and other pale minerals dilute the blue lazurite",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: artificial ultramarine was invented in the 1820s and made the blue far cheaper.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Lapis in the Madonna's robe was priced like a gem; look for the deep blue glaze in a medieval altarpiece.",
+    "Dürer paid nearly 100 times as much for ultramarine as for some earth pigments.",
+    "The pigment is called 'beyond the sea' because the stone came from Afghanistan."
+  ],
+  "words": 2083,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "'Across the Mediterranean' softened to 'across the sea' (Ball/Filarete wording)",
+      "Fixed lowercase sentence start"
+    ]
   }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Latin for 'blue stone'; the pigment 'ultramarine' means 'beyond the sea'",
-   "first_recorded": "Ground lapis in Asian wall paintings by the 6th-7th centuries; the name as a color in our sources in Ridgway 1912",
-   "source": "Ball, Bright Earth, ch. 18; St Clair, The Secret Lives of Colour"
-  },
-  "aka": [
-   "ultramarine (the pigment)",
-   "natural ultramarine",
-   "azure stone",
-   "French ultramarine (the synthetic)"
-  ],
-  "siblings": [
-   "egyptian-blue",
-   "persian-blue",
-   "cobalt"
-  ],
-  "parent": null,
-  "children": [
-   "midnight-blue"
-  ],
-  "disambiguation": [
-   {
-    "slug": "azure",
-    "gloss": "a bright sky blue; the word also goes back to blue stones"
-   },
-   {
-    "slug": "sapphire",
-    "gloss": "the gem; medieval 'sapphire' often meant lapis"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#26619C",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 47,
-  "century_lift": {
-   "1500": 1.36,
-   "1900": 4.53
-  },
-  "top_paintings": [
-   "cma-109030",
-   "commons-Q26220263",
-   "nga-42446",
-   "commons-Q17492402"
-  ],
-  "measured": {
-   "lch": [
-    40.2,
-    37.6,
-    273.1
-   ],
-   "iscc": "moderate blue",
-   "iscc_de": 3.3,
-   "first_name_record": "Ridgway 1912"
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 18 (Ultramarine, 'Across the seas')",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 13 (pharmacy prices, 1471)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 14 (Vermeer, 1626)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, 'Lapis lazuli', pp. 182-4",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, p. 85 (lapis lazuli)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pigment Compendium, 'lapis lazuli', pp. 232, 389",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 7 ('An Uncommon Color')",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Finlay, Color: A Natural History of the Palette, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, ch. 21 (notes) and ch. 20",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, pp. 70, 86",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, p. 92",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, 'lapis lazuli', 'mineral grey', pp. 236, 265",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, p. 219",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, ch. 33",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "data",
-   "cite": "ColorHub library: ISCC-NBS 1955 block 182; Ridgway 1912, plate VIII; Maerz and Paul 1930",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "data",
-   "cite": "ColorHub archive: 23,781 paintings, as photographed (tools/article_field.py, #26619C, within 6, 5 per cent cover)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 35 (quoting Ficino)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 24",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
-   "loc_kind": "epub-chapter",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why were the golden flecks in lapis lazuli not gold?",
-   "choices": [
-    "They are iron pyrite, fool's gold",
-    "They are gold dust added by miners",
-    "They are mica",
-    "They are copper"
-   ],
-   "answer": "They are iron pyrite, fool's gold",
-   "kind": "pick"
-  },
-  {
-   "q": "Why does plain ground lapis lazuli make a weak, greyish blue?",
-   "choices": [
-    "Calcite and other pale minerals dilute the blue lazurite",
-    "It is only a surface stain",
-    "Grinding burns off the sulfur",
-    "It reacts with oil"
-   ],
-   "answer": "Calcite and other pale minerals dilute the blue lazurite",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: artificial ultramarine was invented in the 1820s and made the blue far cheaper.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Lapis in the Madonna's robe was priced like a gem; look for the deep blue glaze in a medieval altarpiece.",
-  "Dürer paid nearly 100 times as much for ultramarine as for some earth pigments.",
-  "The pigment is called 'beyond the sea' because the stone came from Afghanistan."
- ],
- "words": 2083,
- "status": "checked",
- "checked": {
-  "by": "batch-14 writer",
-  "date": "2026-10-08",
-  "issues": [
-   "Earliest pigment use: Ball (6th-7th c. Afghan) vs St Clair (5th c. Turkmenistan): reported as disagreement.",
-   "Guimet vs Gmelin priority: dates differ between Ball and Pigment Compendium.",
-   "Persian lazhward etymology not used: not verified in the books read.",
-   "Gold-fleck myth corrected."
-  ]
- }
 }

@@ -1,0 +1,259 @@
+{
+ "slug": "rust",
+ "name": "Rust",
+ "hex": "#B7410E",
+ "names": [
+  "Rust"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Rust is the reddish-brown to orange-red of corroded iron, a color so close to the red earth pigments that chemically they are the same thing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word for what iron does",
+   "body": "*Rust* names the film that forms on corroding iron, and the color is named after it. Paterson's dictionary defines it plainly as reddish-brown [5]. The swatch here is #B7410E, a saturated burnt orange-red; the 1955 ISCC-NBS system files it as a deep reddish orange, and Maerz and Paul's 1930 dictionary of color records the word from 1692 [6].\n\nReal rust is less fixed than any swatch. The compound behind it is anhydrous iron oxide, the same one that colors red ochres and hematite, in shades St Clair sums up as running from pink to cayenne [1]. Lepidocrocite, an orange iron oxide hydroxide, is also common in rusts, though far less so than goethite and hematite [11]. A chemist's rule of thumb in Ball's account is that red belongs to iron, in blood, rust and ochre alike [2]."
+  },
+  {
+   "id": "earth",
+   "title": "Rust and the red earths",
+   "body": "Objects stained deep red have accompanied human settlement since the Upper Paleolithic, some 50,000 years ago [1]. The anthropologist Ernst Wreschner, writing in 1980, ranked the collecting and use of red iron oxide beside toolmaking as one of two meaningful regularities in human evolution [1]. Linen dyed with hematite wrapped the mummy of the Egyptian storehouse manager Wah around 1975 BC, and in the fourth century BC Athens passed a law giving its citizens a monopoly on a rich red earth from the island of Kea [1].\n\nPainters rarely used the word. Lomazzo's painting manual of 1584 listed *rust of iron* among the few pigments that orpiment could safely sit beside, although Ball notes that how sound such warnings were is not clear [7]. By the nineteenth century the word had reached the paint box: analysts in 1980 tentatively identified an artificial [[mars-orange]], sold as *rust orange*, in a paint box owned by Winslow Homer [4]. Mars pigments are made by roasting iron oxide hydroxide, and they range from orange to red [4]."
+  },
+  {
+   "id": "other-rusts",
+   "title": "Other things called rust",
+   "body": "The word was never only for iron. Pliny called verdigris *aerugo*, copper rust, made by setting copper over the dregs of wine [3]. A Chinese recipe quoted by Needham, in Scott's account, calls for calcining the rust of copper to start a green pigment [12]. Ball adds that copper can also form rust-red salts [2].\n\nIn the dye pot, the boiling-water method for lichens gives yellow, rust and brown shades [10]. Until recently, conventional breeding of naturally colored cotton kept the range mostly to browns, greens, yellows and rusts [13]. In the other direction, the corrosion that makes the color is also the reason zinc chromate, sold to artists as zinc yellow from the 1850s, was widely used during the Second World War for its rust-preventing properties [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Rust is an uncommon painted color. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 170 works, about 0.7 per cent [9]. The share is highest in the 1400s, at 22 of 945 paintings, which is 3.3 times the archive-wide rate [9]. The 1480s are the peak decade, with 5 of 141 [9]. The cause of that lift was not tested here.\n\nThe largest single coverage is a Pahari manuscript painting of about 1760, *Pradyumna and Samvara Fight with Maces*, where the color fills 66 per cent of the picture [9]. [[painting:nga-46625|Gauguin's 1889 self-portrait]] reaches 28 per cent, and in the within-painting lens the color is most often an accent rather than a mass [9]. Its commonest company among named colors is [[sienna]], followed by [[ochre]] and [[brick]] [9]. As always these are photographs of varnished paintings, so read them as screen colors, and a color match is not a pigment test [9].\n\nThe word itself is entangled with the metal. In Google Books, *rust* peaks around 1928, but the curve counts every use of the word, not only the color [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the oxide film that forms on iron",
+   "first_recorded": "as a color word, 1692 (Maerz and Paul, 1930)",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "rust brown",
+   "rusty",
+   "ferruginous (technical)"
+  ],
+  "siblings": [
+   "russet",
+   "sienna",
+   "venetian-red",
+   "terracotta"
+  ],
+  "parent": null,
+  "children": [
+   "burnt-orange"
+  ],
+  "disambiguation": [
+   {
+    "slug": "mars-orange",
+    "gloss": "an artificial iron-oxide pigment, once sold under the name rust orange"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "la",
+    "name": "ferrugineus (rust-colored); aerugo (copper rust, verdigris)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#B7410E",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 170,
+  "top_paintings": [
+   "cma-136298",
+   "nga-46625",
+   "nga-42436"
+  ],
+  "century_peak": {
+   "1400s": {
+    "hits": 22,
+    "n": 945,
+    "lift": 3.26
+   }
+  },
+  "peak_decade": {
+   "1480s": {
+    "hits": 5,
+    "n": 141
+   }
+  },
+  "company": [
+   "Sienna",
+   "Ochre",
+   "Brick"
+  ],
+  "ngram": {
+   "word": "rust",
+   "peak": 1928,
+   "note": "counts the metal's word too"
+  },
+  "measured": {
+   "lch": [
+    44.1,
+    68.6,
+    48.2
+   ],
+   "iscc": "deep reddish orange"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Hematite\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 10",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry on mars orange",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"rust\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub library: ISCC-NBS 1955 block 55; Maerz and Paul 1930, plate 6 A 12, first recorded 1692",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive field notes, tools/article_field.py, CIEDE2000 6, 5% cover. As photographed: museum photographs of aged, varnished paintings. A color match, not a pigment test.",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry on lichen dyes (archil, orchil)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry on lepidocrocite",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Pigment Compendium, entry on the copper carbonate analogue of chalconatronite (Scott 2002 after Needham 1974)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, on naturally colored cotton",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "Google Books Ngram, 'rust', 5-year smoothed, relative to peak",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What compound gives rust the same color as red ochre and hematite?",
+   "choices": [
+    "Iron oxide",
+    "Copper acetate",
+    "Mercury sulphide",
+    "Lead carbonate"
+   ],
+   "answer": "Iron oxide",
+   "kind": "pick"
+  },
+  {
+   "q": "What did Pliny mean by aerugo?",
+   "choices": [
+    "Copper rust, the source of verdigris",
+    "Iron rust used as a dye",
+    "A red clay from Kea",
+    "A kind of purple shellfish dye"
+   ],
+   "answer": "Copper rust, the source of verdigris",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in our archive, painted rust is most common in the 1800s.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rust is the same iron oxide as red ochre: the pigment people have used for some 50,000 years.",
+  "Pliny's word for verdigris meant copper rust: rust is not only an iron color.",
+  "Look for rust as an accent in old paintings: it is rarely a mass, and the 1400s hold the most."
+ ],
+ "words": 640,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified Wreschner, Lomazzo, Chinese copper-rust recipe, cotton sentence against book text; no changes."
+  ]
+ }
+}

@@ -1,0 +1,191 @@
+{
+ "slug": "apple-green",
+ "name": "Apple Green",
+ "hex": "#76CD26",
+ "names": [
+  "Apple Green"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Apple green is the fresh, yellow-leaning green of an unripe apple; it is one of the oldest object-names for a green, built into the mineralogists' color lists of the 1700s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name from a fruit",
+   "body": "The name works the way the early mineralogists wanted color names to work: a color taken from a familiar object, such as sky-blue, apple-green or milk-white [1]. Baty traces this habit to the Werner tradition, where a few dozen plain names, many of them objects, were meant to be understood without a specialist's training [1]. Apple-green sits among the greens in the lists Baty reproduces for 1774 to 1821, close to grass-green, emerald-green and leek-green [2].\n\nThe last list in that line, Syme's of 1821, numbers it 52 among the greens and illustrates it with two things: the underside of the wings of the green broom moth, and the mineral chrysoprase [3]. The fruit gave the name, but the moth and the stone were the examples a naturalist could hold up against a specimen. Paterson also describes chrysoprase as a bright golden green or an apple green [5]."
+  },
+  {
+   "id": "relatives",
+   "title": "Neighbors on the wheel",
+   "body": "Apple green sits between the true greens and the yellows. [[chartreuse]] is the nearest large neighbor: Paterson defines chartreuse as a pale apple-green with a yellow tinge, and the web color of that name is #7FFF00 [4]. [[mantis]] and [[leaf-green]] are softer cousins, and [[grass-green]] is deeper and bluer.\n\nIn pigments, the Pigment Compendium quotes Salter in 1869 describing chrome arseniate as an agreeable apple-green made from an arsenate of potash and salts of chromic oxide [6]. The compendium files it with the arsenic group, a reminder that many nineteenth-century greens were dangerous to handle [6]."
+  },
+  {
+   "id": "culture",
+   "title": "In art and in interiors",
+   "body": "The color is hard to place in painting, but a few writers pin it down. Gage notes that around 1920 Mondrian, who disliked green for its ties to nature, took a distinctly greenish yellow, sometimes an apple-green, for his third primary in a number of canvases [7]. Gage reads this as a way of squaring the yellow and green of Ostwald's color system [7].\n\nPastoureau records the moment the color turned sour. In the 1970s decorators and designers often paired orange with sharp apple green in the hope of making life more cheerful, and later residents of disadvantaged neighborhoods petitioned to have large surfaces of orange, apple green, pink and violet painted back to white or grey [8]. Pastoureau uses it as a warning that a color scheme can age badly."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Apple green is nearly absent from paintings. In our archive of 23,781 works, a color within six units of this swatch covers at least five per cent of the canvas in exactly one: Gauguin's *Mother and Child under a Tree at Pont-Aven*, from 1886, where it fills 5.2 per cent [9]. This is a photograph of a varnished picture, so read it as a screen color and not as a pigment test [9].\n\nThe word itself has a clearer history. In Google Books *apple green* is present from 1800, rises fastest in the 1910s and peaks in the 1940s [10]. By the 2000s it is at about a third of that peak [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the unripe apple",
+   "first_recorded": "in Werner-tradition color lists of the 1700s and Syme's 1821 edition (no. 52)",
+   "source": "Baty, Nature's Palette, pp. 18, 32"
+  },
+  "aka": [
+   "apple-green"
+  ],
+  "siblings": [
+   "chartreuse",
+   "mantis",
+   "leaf-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "chartreuse",
+    "gloss": "a yellower green, named after a liqueur"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#76CD26",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1,
+  "top_paintings": [
+   "commons-Q79790701"
+  ],
+  "ngram": {
+   "peak": 1946,
+   "rel_1800": 0.285,
+   "rel_2000": 0.345
+  },
+  "measured": {
+   "lch": [
+    74.6,
+    84.9,
+    127.3
+   ],
+   "iscc": "vivid yellow green",
+   "iscc_de": 7.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 18-19",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 32 (nomenclatures from Werner to Syme, 1774-1821)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub library: Werner/Syme 1821 no. 52 (Greens); ISCC-NBS 1955 block 120",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"chartreuse\", p. 96",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"chrysoprase\", p. 104",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Kirby, Pigment Compendium, \"chrome arseniate\", p. 110",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 262",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 34",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive field note, as photographed (n = 23,781)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "Google Books Ngram, \"apple green\" (5-year smoothed, relative to peak)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two things illustrated apple green in Syme's 1821 list?",
+   "choices": [
+    "A moth's wings and chrysoprase",
+    "A leaf and malachite",
+    "A frog and jade",
+    "A pear and emerald"
+   ],
+   "answer": "A moth's wings and chrysoprase",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: apple green is common in museum paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Naturalists in the 1700s used the apple as a standard for one particular green.",
+  "In our archive of 23,781 paintings, exactly one has a large patch of apple green: a Gauguin from 1886.",
+  "Look for apple green on 1970s walls: it was the partner of orange, and neighbors asked for it to be painted over."
+ ],
+ "words": 507,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Pastoureau: period is the 1970s, not 1960s; petitions covered orange, apple green, pink and violet"
+  ]
+ }
+}

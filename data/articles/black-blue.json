@@ -1,0 +1,262 @@
+{
+ "slug": "black-blue",
+ "name": "Black Blue",
+ "hex": "#1D1F2A",
+ "names": [
+  "Black Blue"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Black Blue is a near-black with a cold blue cast, a paint-card name whose root is the old trade term blue black: soot, charcoal and ink that lean blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Which Black Blue",
+   "body": "The swatch is #1D1F2A, a color so dark that it only just reads as blue [1]. The name comes from the RAL paint system, where Black Blue is number 5004, and the earliest record of it in our sources is the 1927 RAL list [1]. RAL colors are printed paint chips, so the on-screen value is an approximation [1].\n\nOur library also pairs the name with the Japanese *kachi-iro*, glossed as a coarse wool color [1]. That pairing is a library mapping, and none of our books discusses it, so treat it as a loose neighbor and not as a translation [1]."
+  },
+  {
+   "id": "blue-black",
+   "title": "Black with a touch of blue",
+   "body": "Long before paint cards, *blue black* was a pigment word. Paterson's dictionary defines it as black with a touch of blue, and also lists it as a kind of carbon black, cross-referred to Frankfort black [2]. The *Pigment Compendium* says it was more than a qualified color word: it seems to have meant charcoal, named for the blue cast the charcoal has, and a term in general use in the second half of the seventeenth century and after [3]. In the later nineteenth century it could also mean ivory black with a little blue pigment added [3].\n\nLamp black is the usual blue-black. Coles calls it a lightfast, opaque blue-black pigment that the ancient Egyptians used for tomb painting more than 4,000 years ago, and says the Romans made a version from burnt wine dregs, the best wines giving a black as blue as indigo [4]. Watercolorists later made the same effect on the palette: Gurney describes Payne's gray as a blue-black blended from black and ultramarine or similar mixes [5]. St Clair credits a landscape painter working in Devon with first mixing a deep blue-black grey, which suited the haze of distant hills [6]."
+  },
+  {
+   "id": "ink",
+   "title": "Ink and cloth",
+   "body": "Blue-black is the color of old writing ink. St Clair describes the recipe: tannic acid from oak galls, combined with iron sulfate, water and gum arabic, gives a velvety blue-black ink that is also very permanent [7]. She adds that Theophilus recorded a variant in the twelfth century that used the tannic acid in crushed buckthorn sap [7].\n\nCloth could be blue-black too. Balfour-Paul notes that the many dippings needed to bring indigo-dyed cloth to a dark blue-black tied it to wealth and religious standing [8]. In Qing China, according to Finlay, pure blue was the official color of minor princes, while blue-black silk marked a civil servant [9]. Our swatch is darker than a dyer's [[indigo]] or a [[navy]] coat; its nearer neighbors are [[bluish-black]] and [[gunmetal]] [1]."
+  },
+  {
+   "id": "werner",
+   "title": "Bluish black in the mineral lists",
+   "body": "Eighteenth-century mineralogists needed words for the many near-blacks of rocks. Werner's system used eight principal colors, each modified by a mixture word such as bluish black or greenish yellow [10]. Syme's black series, as Baty tabulates it, runs through iron-black, velvet-black, pitch-black, raven-black and bluish-black [11]. When Jameson issued his third edition in 1817, he added two blues taken from Lenz, blackish-blue and duck-blue [12]."
+  },
+  {
+   "id": "heraldry",
+   "title": "Where black meets blue",
+   "body": "In medieval heraldry, black (sable) and blue (azure) belonged to the same group of colors. Heraldry sorted its six colors into two groups: white and yellow in one, and red, black, blue and green in the other [13]. The rule forbade placing two colors of the same group side by side or one on the other, except for small details [13]. A black shield could therefore carry a white or yellow lion but not a blue one, so a black-and-blue combination was avoided on arms [13].\n\nJarman uses black-blue as a mood [14]. Looking at Geertgen's *Nativity at Night*, he writes of a black blue sadness in which the virginal blue robe is swallowed by black [14]. It is a personal reading, not a documented painters' term [14]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 museum paintings, 1,014 (4.3 per cent) have a patch within six units of this color (CIEDE2000) covering at least five per cent of the canvas, as photographed [15]. The match is most often a shadow: in 99 per cent of those paintings it sits at the dark end of the picture's own lightness range [15]. It peaks in the 1930s, with 6 of 69 paintings (8.7 per cent), about twice the museums' baseline [15].\n\nThe painter who uses it most often is [[painter:gustave-caillebotte|Caillebotte]], with 6 of his 22 works in the archive, 6.4 times the baseline [15]. The strongest single match is [[painting:commons-Q21725392|Snack]], a Dutch painting of 1650 in which this near-black covers 87 per cent of the canvas, which says more about the dark, varnished picture than about any pigment [15]. The earliest match is an ostracon with a drawing of a king, dated about 1295 BCE, which is a look-alike in an aged photograph and no evidence of a pigment [15]. In printed English the two-word phrase peaks around 1921, though it also counts the words side by side, as in black, blue [15].\n\nAll of these numbers are for museum photographs of aged, varnished paintings. A color match is not a pigment test, and dark values vary most with photography [15]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the trade term blue black (carbon black with a blue cast); the paint-card name is RAL 5004",
+   "first_recorded": "RAL list, 1927 (earliest in our sources); the pigment term was in use by the later 1600s",
+   "source": "RAL via ColorHub library; Pigment Compendium, \"blue black\""
+  },
+  "aka": [
+   "blue black",
+   "blue-black",
+   "RAL 5004"
+  ],
+  "siblings": [
+   "bluish-black",
+   "greyish-black",
+   "gunmetal"
+  ],
+  "parent": "black",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "bluish-black",
+    "gloss": "the lighter, greyer Werner-lineage name, near neighbor on screen"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kachi-iro (褐色), a library pairing, loosely"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#1D1F2A",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1014,
+  "top_paintings": [
+   "commons-Q21725392",
+   "commons-Q107540284",
+   "commons-Q27698270",
+   "smk-DEP697"
+  ],
+  "role": {
+   "shadow": 0.99,
+   "mid": 0.01
+  },
+  "peak_decade": {
+   "decade": 1930,
+   "hits": 6,
+   "n": 69
+  },
+  "painters": [
+   {
+    "key": "Gustave Caillebotte",
+    "hits": 6,
+    "n": 22,
+    "lift": 6.4
+   }
+  ],
+  "ngram": {
+   "peak": 1921,
+   "word": "black blue"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library and RAL entry for Black Blue (RAL 5004, approximate screen value; earliest source 1927)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"blue-black\" and \"blue black\", p. 66; \"azurine\", p. 40",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"blue black\", p. 67",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, \"Lamp black\", p. 41",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 95",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 118",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 120 (ink)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 190",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 366",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 16",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 34 (Syme's color lists)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 26",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Pastoureau, Black, pp. 36-37 (heraldic colors)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 56",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "ColorHub archive and field notes (tools/article_field.py; data/graph/fieldnotes), as photographed",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In old pigment language, what was blue black?",
+   "choices": [
+    "Black with a touch of blue, such as charcoal or lamp black",
+    "A mix of indigo and Prussian blue",
+    "A very dark blue mineral",
+    "A color invented by RAL in 1927"
+   ],
+   "answer": "Black with a touch of blue, such as charcoal or lamp black",
+   "kind": "pick"
+  },
+  {
+   "q": "Why was a black shield with a blue lion avoided in medieval heraldry?",
+   "choices": [
+    "Black and blue belonged to the same color group, which could not touch",
+    "Blue dye was too expensive",
+    "The lion had to be white",
+    "Blue was reserved for kings"
+   ],
+   "answer": "Black and blue belonged to the same color group, which could not touch",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: blue-black ink could be made from oak galls and iron sulfate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Black Blue is the paint-card name; blue black was a pigment word centuries earlier, for charcoal and soot with a blue cast.",
+  "In heraldry, black and blue were in the same group of colors, so they were not allowed to touch.",
+  "Fresh oak-gall ink dries to a velvety blue-black; the recipe uses iron sulfate and is very permanent."
+ ],
+ "words": 841,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

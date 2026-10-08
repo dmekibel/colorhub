@@ -449,17 +449,10 @@
  "words": 2194,
  "status": "checked",
  "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Caligula and gold: Pliny's story kept as his report; St Clair says it came to little; orpiment holds no gold.",
-   "King's yellow date: Coles 17th c. vs Compendium (18th c. in English sources, Dutch synthetic in 17th c.): stated as careful/hedged.",
-   "Origin of 'King's yellow' (two kings) hedged as tentative.",
-   "arzica vs arzicon: Coles vs Compendium/Merrifield stated as books disagree.",
-   "Taj Mahal use is St Clair only (single source).",
-   "Cennini's recipes cited from the public-domain translation via atoms (cennini-yellows-01, cennini-greens-01).",
-   "Kalighat/India archive signal may be paper tone or other yellows: caveat in text.",
-   "Fra Angelico match on gilding is an interpretation of the photograph, hedged 'most likely'."
+   "Spot-checked 8 claims against Ball, St Clair, Finlay: all supported; no changes"
   ]
  }
 }

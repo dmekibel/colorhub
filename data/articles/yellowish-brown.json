@@ -27,7 +27,7 @@
   {
    "id": "dictionary",
    "title": "The word that defines other browns",
-   "body": "Dictionaries lean on this color. Paterson's *Dictionary of Colour* uses *yellowish brown* in the definitions of about thirty other color words [6]. They include [[cinnamon]], *cuir* (the French word for leather), butterscotch, tobacco, teak, rhubarb, shammy and the Algerian [6].\n\nSeveral are close cousins with pages of their own. Paterson calls [[buff]] a pale yellowish brown, [[fawn]] a light yellowish brown and [[khaki]] a drab yellowish brown dust color, sometimes with a greenish tinge [6]. He also glosses [[ochre-yellow]] as a yellowish brown, and the earth [[raw-sienna]], used untreated, as a pigment a little darker than yellow ochre [6].\n\nDamp does the same job on paper. Paterson notes that foxing, the discoloration of books and paper by damp, often turns pages a yellowish brown [6]. A foxed page is the easiest place in a house to find the color. A mid-nineteenth-century pigment, nickel brown, was described by Salter in 1869 as a very pleasing yellowish brown, bright in pale washes and of some richness in oil [10]."
+   "body": "Dictionaries lean on this color. Paterson's *Dictionary of Colour* uses *yellowish brown* in the definitions of about thirty other color words [6]. They include [[cinnamon]], *cuir* (the French word for leather), butterscotch, tobacco, teak, rhubarb, shammy and the Algerian [6].\n\nSeveral are close cousins with pages of their own. Paterson calls [[buff]] a pale yellowish brown, [[fawn]] a light yellowish brown and [[khaki]] a drab yellowish brown dust color, sometimes with a greenish tinge [6]. He also glosses [[ochre-yellow]] as a yellowish brown, and the earth [[raw-sienna]], used untreated, as a pigment a little darker than yellow ochre [6].\n\nDamp does the same job on paper. Paterson notes that foxing, the discoloration of books and paper by damp, often turns pages a yellowish brown [6]. A foxed page is the easiest place in a house to find the color. The pigment nickel brown was described by Salter in 1869 as a very pleasing yellowish brown, bright in pale washes and of some richness in oil [10]."
   },
   {
    "id": "swatch",
@@ -238,15 +238,13 @@
   "A foxed book page is the easiest yellowish brown in the house: damp does it to old paper.",
   "The earliest yellowish-brown match in our painting archive is not paint but a funerary papyrus of about 1069 BC."
  ],
- "words": 922,
+ "words": 921,
  "status": "checked",
  "checked": {
-  "by": "batch 33 writer (sentence-to-card trace, myth list)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Source base is thin outside Baty and Paterson; no history of the pigment-like use beyond Werner/Syme is claimed.",
-   "Werner 1774 list identified in Baty's chart by its 54-colour count; Syme's W marks flagged by Baty as inconsistent.",
-   "Archive matches are look-alike hues in aged photographs; the papyrus match is hedged as the support."
+   "Removed unsupported 'mid-nineteenth-century' dating of nickel brown (card gives only Salter 1869)"
   ]
  }
 }

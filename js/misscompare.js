@@ -17,10 +17,29 @@ const MC_BEAT = 650;   // taps this soon after it opens are the tap that caused 
 const mcName = x => x.n || (typeof nameOf === "function" ? nameOf(x.h).n : "") || x.h;
 const mcHexes = x => x.hs && x.hs.length ? x.hs : [x.h];
 // plain-English difference between the two single colors: "Teal is greener and darker than petrol."
+// When both get the same name, the sentence says so honestly instead of "Butterscotch and Butterscotch are almost
+// the same color": "Both are butterscotch; this difference has no word. Yours is lighter." (REVIEW-2 #14)
+const mcSame = (you, was) => !you.hs && !was.hs && String(mcName(you)).toLowerCase() === String(mcName(was)).toLowerCase();
+// which way the one you picked leans from the right one, even when the gap is small: lighter/darker, more
+// vivid/greyer, or a hue word. Biggest first, at most two.
+function mcLean(you, was) {
+  if (typeof lch !== "function") return "";
+  const [L1, C1, H1] = lch(you.h), [L2, C2, H2] = lch(was.h), dh = Math.abs(((H1 - H2 + 540) % 360) - 180);
+  const out = [{ w: L1 > L2 ? "lighter" : "darker", m: Math.abs(L1 - L2) }, { w: C1 > C2 ? "more vivid" : "greyer", m: Math.abs(C1 - C2) * .8 }];
+  if (typeof colorDiff === "function" && typeof MORE !== "undefined") {
+    const hue = colorDiff(you.h, was.h).find(x => !["light", "dark", "vivid", "grey"].includes(x.w));
+    if (hue && MORE[hue.w]) out.push({ w: MORE[hue.w], m: 2 * Math.sqrt(C1 * C2) * Math.sin(dh * Math.PI / 360) });
+  }
+  const p = out.filter(x => x.m >= .4).sort((a, b) => b.m - a.m).slice(0, 2);
+  return p.length ? p.map(x => x.w).join(" and ") : "";
+}
 function mcLine(you, was) {
   if (!you.h || !was.h || you.hs || was.hs) return "";
+  const lean = mcLean(you, was);
+  if (mcSame(you, was)) return `Both are ${String(mcName(was)).toLowerCase()}; this difference has no word.${lean ? ` Yours is ${lean}.` : ""}`;
   if (typeof compareLine !== "function") return "";
-  return compareLine({ n: mcName(was), h: was.h }, { n: mcName(you), h: you.h });
+  const ln = compareLine({ n: mcName(was), h: was.h }, { n: mcName(you), h: you.h });
+  return / are almost the same color\.$/.test(ln) && lean ? ln.replace(/\.$/, `; yours is ${lean}.`) : ln;
 }
 function mcPct(you, was) {
   if (you.hs || was.hs || !you.h || !was.h) return null;   // a pair against a pair has no single distance
@@ -47,7 +66,8 @@ function mcShow(o) {
   if (!o || !o.you || !o.was) return () => {};
   mcClose(true);
   const you = o.you, was = o.was, d = mcPct(you, was);
-  const line = o.line != null ? o.line : mcLine(you, was);
+  // a caller's own sentence, unless both colors carry the same name (then only the honest "no word" line is true)
+  const line = o.line != null && !(mcSame(you, was) && you.h && was.h) ? o.line : mcLine(you, was);
   const el = document.createElement("div");
   el.className = "mc";
   el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true");
@@ -74,6 +94,19 @@ function mcShow(o) {
     e.preventDefault(); e.stopImmediatePropagation(); cont();
   };
   window.addEventListener("click", m.tap, true); window.addEventListener("keydown", m.key, true);
+  // a touch moves on at pointerup: iOS only synthesizes a click over a plain div when something on it listens for
+  // clicks, and may drop it after DOM changes, so "tap anywhere" and Got it must not depend on that click. The
+  // click that may follow is swallowed (prSwallow, js/practice.js) so it can't land on the next question.
+  let down = null;
+  el.addEventListener("pointerdown", e => { down = e.pointerType !== "mouse" && e.isPrimary ? { id: e.pointerId, x: e.clientX, y: e.clientY } : null; });
+  el.addEventListener("pointerup", e => {
+    if (!down || e.pointerId !== down.id || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 14) return;
+    down = null;
+    if (e.target.closest(".mc-n") || done) return;
+    if (e.target.closest(".mc-go") || ready) { if (typeof prSwallow === "function") prSwallow(e); cont(); }
+  });
+  el.addEventListener("pointercancel", () => { down = null; });
+  el.style.cursor = "pointer";
   document.body.appendChild(el);
   MC_OPEN = m;
   if (typeof cleanup !== "undefined" && Array.isArray(cleanup)) cleanup.push(() => { if (MC_OPEN === m) mcClose(true); });

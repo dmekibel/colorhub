@@ -17,7 +17,7 @@
   {
    "id": "medieval",
    "title": "The ugliest color",
-   "body": "The tan of the late Middle Ages was not today's pale sand [2][3]. Pastoureau describes the fifteenth-century *tanné* as a shade considered ugly, somewhere between brown and red, and elsewhere as fawn-colored or dark russet [2][3]. Paterson agrees on the redder side: in heraldry *tenné* is orange or brownish orange [1]. Books therefore describe the old color slightly differently, and none of them describes the light yellow-brown of the modern swatch [1][2][3].\n\nIts reputation was poor. The poet Jean Robertet, who died in 1502, ended a poem on nine colors with tan and then black, and called tan changeable and unreliable, full of worry [3]. The anonymous successor of the Sicily herald, writing in the same period, called it the ugliest of all colors [3]. Charles d'Orléans, imprisoned in England, wrote in the 1430s that black and tan were his colors, in a poem that set them against the gray of hope [2][3]. The *Blason des couleurs*, a color poem in the same tradition, advised old women to wear tan, purple, gray or black rather than white [4].\n\nTan was thus a color of the old, the sad and the doubtful. Pastoureau lists tan among the three colors of sorrow and death in fifteenth-century French lyric poetry, with black and dark green [2]."
+   "body": "The tan of the late Middle Ages was not today's pale sand [2][3]. Pastoureau describes the fifteenth-century *tanné* as a shade considered ugly, somewhere between brown and red, and elsewhere as fawn-colored or dark russet [2][3]. Paterson agrees on the redder side: in heraldry *tenné* is orange or brownish orange [1]. Books therefore describe the old color slightly differently, and none of them describes the light yellow-brown of the modern swatch [1][2][3].\n\nIts reputation was poor. The poet Jean Robertet, who died in 1502, ended a poem on nine colors with tan and then black, and called tan changeable and unreliable, full of worry [3]. The anonymous successor of the Sicily herald, writing in the same period, called it the ugliest of all colors [3]. Charles d'Orléans, imprisoned in England, wrote that black and tan were his colors, in a poem that turned away from the gray he associated with hope [2][3]. The *Blason des couleurs*, a color poem in the same tradition, advised old women to wear tan, purple, gray or black rather than white [4].\n\nTan was thus a color of the old, the sad and the doubtful. Pastoureau lists tan among the three colors of sorrow and death in fifteenth-century French lyric poetry, with black and dark green [2]."
   },
   {
    "id": "leather",
@@ -37,7 +37,7 @@
   {
    "id": "eye",
    "title": "Where to look",
-   "body": "A tan is a color that depends on its neighbors, and the books show it being confused in both directions. The optics writer Matteo Zaccolini, writing around 1620, listed tan as the fifth color in the sequence in which colors recede into the blue of distance, after black, green, pale yellow-green and purple and before red, yellow and white [15]. Birren reported, around 1950, that women wiring workers in a factory tired from the effort of telling orange from tan, among other pairs, and traced their fatigue to that strain, not to poor lighting [16].\n\nThe practical lesson is to look for tan beside its neighbors, not alone. Our nearest named neighbor is [[burlywood]], only 3.1 units of color difference away, and [[toupe]] is close too [20]. A deep blue makes a good partner, as the soga batiks show [7]. In painting, Ball notes that Titian placed orange and tan tones next to one another in a picture with a blue robe, sea and sky, keeping the warm colors in a quiet family [17]."
+   "body": "A tan is a color that depends on its neighbors, and the books show it being confused in both directions. The optics writer Matteo Zaccolini, writing around 1620, listed tan as the fifth color in the sequence in which colors recede into the blue of distance, after black, green, pale yellow-green and purple and before red, yellow and white [15]. Birren reported, around 1950, that women wiring workers in a factory tired from the effort of telling orange from tan, among other pairs, and traced their fatigue to that strain, not to poor lighting [16].\n\nThe practical lesson is to look for tan beside its neighbors, not alone. Our nearest named neighbor is [[burlywood]], only 3.1 units of color difference away, and [[toupe]] is close too [20]. A deep blue makes a good partner, as the soga batiks show [7]. In painting, Ball notes that in one Titian the blue robe is set against a blue sea and sky while orange and tan tones sit side by side [17]."
   },
   {
    "id": "field",
@@ -154,17 +154,14 @@
   "Late medieval poets called tan the ugliest of colors; now it is in a paint on one painting in eight in our archive.",
   "Look for tan beside a deep blue: the Javanese soga batiks pair the two on a cream ground."
  ],
- "words": 1294,
+ "words": 1288,
  "status": "checked",
  "checked": {
-  "by": "batch-64 writer self-check",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Pastoureau Green gives no page in concordance; cited by section.",
-   "Medieval tanné described differently by Pastoureau (Black vs Green): stated as a disagreement.",
-   "Paterson prints Tan as a dark green: flagged as slip.",
-   "Black and Tans from Paterson only.",
-   "Archive counts differ by lens (3,018 vs 1,928): both stated with their lens."
+   "Removed unsupported 1430s date for Charles d'Orleans poem (source gives no date).",
+   "Titian sentence restated to what Ball says (rules broken, materials distinguish); dropped 'quiet family' gloss."
   ]
  },
  "notes": [

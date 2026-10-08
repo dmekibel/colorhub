@@ -42,7 +42,7 @@
   {
    "id": "werner",
    "title": "In Werner's chart",
-   "body": "Werner's and Syme's chart lists verdigris green as number 50 among the greens, with the tail of the small long-tailed green parrot as its animal example and copper green as its mineral [3]. It also served as a building block for other names: in Syme's recipes, celandine green, the name the chart gives to what we call [[celadon-green]], is verdigris green with ash grey, and [[verditter-blue]] is Berlin blue with a small portion of verdigris green [5]. In the same vocabulary [[mountain-green]] and [[emerald-green]] sit beside it [3].\n\nThe word names a patina as well as a paint. Jarman calls the charioteer of Delphi a verdigris green statue [11]."
+   "body": "Werner's and Syme's chart lists verdigris green as number 50 among the greens, with the tail of the small long-tailed green parrot as its animal example and copper green as its mineral [3]. It also served as a building block for other names: in Syme's recipes, celandine green, the name the chart gives to what we call [[celadon-green]], is verdigris green with ash grey, and [[verditter-blue]] takes a little verdigris green mixed into Berlin blue [5]. In the same vocabulary [[mountain-green]] and [[emerald-green]] sit beside it [3].\n\nThe word names a patina as well as a paint. Jarman calls the charioteer of Delphi a verdigris green statue [11]."
   },
   {
    "id": "field",
@@ -268,17 +268,13 @@
   "Look for brown trees in late-fifteenth-century pictures: the culprit is often copper resinate, not verdigris itself.",
   "Persian painters called verdigris zangar and, by Finlay's account, mixed it with saffron."
  ],
- "words": 1187,
+ "words": 1186,
  "status": "checked",
  "checked": {
-  "by": "batch-58 writer self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Washington's darkened green: Finlay blames verdigris plus lead white; Ball reports modern tests show no harm from that mixture (stated as books disagree).",
-   "Saffron with verdigris: Finlay presents Barkeshli's finding as a recovered lost recipe; the Compendium cites a conflicting study (Lee et al. 1997a).",
-   "Etymology (green from Greece / Spanish green) is St Clair's gloss, hedged.",
-   "Celandine green glossed as the chart's name for celadon: Baty brackets 'Celandine Green [Celadon]'.",
-   "Archive matches (7 paintings) are look-alike hues, not pigment identifications."
+   "Reworded phrasing shared with Baty"
   ]
  }
 }

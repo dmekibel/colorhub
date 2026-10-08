@@ -1,0 +1,251 @@
+{
+ "slug": "oil-green",
+ "name": "Oil Green",
+ "hex": "#AB924B",
+ "names": [
+  "Oil Green"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Oil Green is number 60 in Patrick Syme's 1821 chart of colors for naturalists, an olive gold that he pinned to a water snail's shell, an apple's skin and a beryl.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Number 60 in Syme's chart",
+   "body": "Oil Green is the sixtieth of the 110 colors in Patrick Syme's 1821 edition of Werner's *Nomenclature of Colours*, filed among the greens [1][2]. It was not one of Werner's own terms [2]. Baty credits it to Johann Georg Lenz of Jena, whose mineral handbook of 1791 carried Werner's system forward under his own additions [2][3].\n\nSyme defined it as emerald green mixed with lemon yellow, chestnut brown and yellowish grey [4]. His three examples are the common water snail with its shell, the skin of the Nonpareil apple, and a beryl [4]. That recipe sits between the cool [[emerald-green]] and the warm [[lemon-yellow]] and then dulls the mix toward brown, so the mix reads as an olive gold rather than a clean green [4].\n\nBaty gives no reason for the word *oil*, and none of the other books we searched supplies one [2][4]."
+  },
+  {
+   "id": "eggs",
+   "title": "Eggs and naturalists",
+   "body": "Syme's chart was a working tool for naturalists. William Chapman Hewitson's egg book of 1833 uses number 60 for the skylark and the reed warbler [5]. Its neighbors in the same table are [[grass-green]] for the magpie, [[duck-green]] for the hooded crow and [[sap-green]] for the rook [5].\n\nThe skin of a ripe green apple is Syme's own example, so the color is easy to check against the real thing [4]."
+  },
+  {
+   "id": "pigment",
+   "title": "A paint name too",
+   "body": "By the nineteenth century the words were also a paint trade name. The Pigment Compendium reports Mayer (1991) treating oil green as a synonym for both Bremen green and chrome green, and it calls those two terms of variable meaning [6]. Linke and Adam list oil green among trade names in the compendium's discussion of chrome green and cinnabar green [7].\n\nBremen green itself appears to be a greener variant of Bremen blue [8]. Bersch listed it as a copper hydroxide, Terry linked it to green verditer, and other authors used the name for Scheele's green or emerald green [8]. So a tube labelled oil green in the 1800s need not match Syme's color, and need not share a recipe with another tube of that name [6][8]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "Our library's page for Oil Green merges Syme's chart with Ridgway's plates of 1912, the ISCC-NBS names of 1955 and Maerz and Paul's dictionary of 1930 [9]. The two Maerz and Paul entries it joins date the name differently, to about 1750 in one and to 1805 in the other [9]. The swatch is a muted olive gold, and the nearest named color in the app is [[camel]], about nine units away [9]. Syme's own chip was hand-painted and has aged, so every screen version is approximate [9]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six units of this swatch covers at least five per cent of the canvas in 1,493 works, about 6.3 per cent [10]. In 75 per cent of those works it is among the lightest notes [10].\n\nSome painters return to it far more than their peers. It appears in 14 of Luis Egidio Meléndez's 39 works here, 10 of 28 by [[painter:paulus-potter|Paulus Potter]] and 7 of 20 by [[painter:pedro-berruguete|Pedro Berruguete]] [10]. By century it peaks in the 1400s, at 8.9 per cent of paintings, and the single busiest decade is the 1710s, at 12.4 per cent [10]. Among movements, Kalighat painting from Calcutta carries it in 17 of 96 sheets [10]. Its usual company on a canvas is [[mustard]], [[khaki]] and [[olive-green]] [10].\n\nThese are photographs of aged, varnished paintings, and a color match is not a pigment test [10]. The match says a screen color near this one was photographed, not that anyone mixed Syme's recipe [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Lenz's mineral nomenclature, taken into Syme's 1821 chart; why it is called 'oil' is undocumented",
+   "first_recorded": "Syme, Werner's Nomenclature of Colours, 1821, no. 60",
+   "source": "Baty, Nature's Palette, p. 160"
+  },
+  "aka": [
+   "Oil-green"
+  ],
+  "siblings": [
+   "olive-green",
+   "siskin-green",
+   "sap-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "serpentine-green",
+    "gloss": "Ridgway's Serpentine Green also carries the name Yellowish Oil Green in our library"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AB924B",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 1493,
+  "first_dated": {
+   "id": "aic-117279",
+   "year": 1201
+  },
+  "top_paintings": [
+   "aic-9710",
+   "aic-9707",
+   "met-77195",
+   "aic-60380"
+  ],
+  "role": {
+   "highlight": 0.75,
+   "mid": 0.24,
+   "shadow": 0.02
+  },
+  "painters": [
+   {
+    "name": "Luis Egidio Meléndez",
+    "hits": 14,
+    "n": 39
+   },
+   {
+    "name": "Paulus Potter",
+    "hits": 10,
+    "n": 28
+   },
+   {
+    "name": "Pedro Berruguete",
+    "hits": 7,
+    "n": 20
+   }
+  ],
+  "peak_decade": {
+   "key": 1710,
+   "rate": 0.124
+  },
+  "top_movement": {
+   "name": "Kalighat",
+   "hits": 17,
+   "n": 96
+  },
+  "company": [
+   "Mustard",
+   "Khaki",
+   "Olive",
+   "Moss"
+  ],
+  "measured": {
+   "lch": [
+    61,
+    41,
+    89
+   ],
+   "nearest": [
+    [
+     "Camel",
+     9.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 7-8",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 160",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, p. 20",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 159-160",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 129-130",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 294 (\"Oil green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 187",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 74 (\"Bremen green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Werner/Syme, Ridgway 1912, ISCC-NBS, Maerz & Paul 1930), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where did Syme take Oil Green from?",
+   "choices": [
+    "Werner's original list",
+    "The mineralogist Lenz, who built on Werner's system",
+    "Syme invented it for his 1821 edition",
+    "A Japanese color system"
+   ],
+   "answer": "The mineralogist Lenz, who built on Werner's system",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: in the 1800s a paint sold as oil green always meant the same pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which of these did Syme give as an example of Oil Green?",
+   "choices": [
+    "The skin of the Nonpareil apple",
+    "A blue tit's wing",
+    "Copper ore",
+    "Olive oil"
+   ],
+   "answer": "The skin of the Nonpareil apple",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Syme pinned Oil Green to a water snail's shell, an apple's skin and a beryl.",
+  "Oil Green came from a mineralogist in Jena, not from the Scottish artist who printed it.",
+  "Naturalists used the same number, 60, for a skylark's egg and a reed warbler's."
+ ],
+ "words": 613,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported 'commonest earth-greens' claim",
+   "Dropped Bremen-green citation from the recipe-to-appearance sentence"
+  ]
+ }
+}

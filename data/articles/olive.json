@@ -254,12 +254,8 @@
  "words": 819,
  "status": "checked",
  "checked": {
-  "by": "batch13 writer",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Evidence for olive as a color is thin in the 29 books; article is short and leans on Baty/Werner and the library.",
-   "Gage p.220 is a pdf-page from concordance (Field's tertiaries); not re-read in full text.",
-   "Kestrel head and neck example is Syme no. 109 per Baty."
-  ]
+  "issues": []
  }
 }

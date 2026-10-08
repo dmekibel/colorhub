@@ -264,14 +264,9 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "batch-50 writer self-check (sentence-to-card trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
-  "issues": [
-   "Lumsden 1846 (St Clair, hedged) vs 1848 (Maerz and Paul data): both given.",
-   "Language gloss (Urdu/Hindi/Hindustani) differs by book; stated.",
-   "Britain reliant on German dyes (St Clair note) vs German army short of dyes (Finlay): both reported, not reconciled.",
-   "Pastoureau's aesthetic verdict attributed, not asserted."
-  ]
+  "issues": []
  },
  "words": 1115
 }

@@ -1,0 +1,213 @@
+{
+ "slug": "platinum",
+ "name": "Platinum",
+ "hex": "#E5E4E2",
+ "names": [
+  "Platinum"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Platinum is the cool, pale grey-white of the metal, a name that moved from a Spanish nickname for a metal thought almost worthless to the jeweller's finest white and the colour of silvery hair.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A metal's name",
+   "body": "Paterson defines the colour platinum as a metallic grey resembling the precious metal [1]. The metal's own name began as a Spanish diminutive: the Spaniards who met it in the New World called it *platina*, \"little silver\", and thought it almost valueless [2]. Efficient ways of extracting and casting it were developed only in the nineteenth century [2].\n\nThe swatch here, #E5E4E2, is far lighter than \"metallic grey\" suggests [3]. The library gives it a lightness of 91 out of 100 with almost no chroma, so on screen it reads as an off-white with a faint cool tilt [3]. It is listed in ISCC-NBS 1955 (block 265), and Maerz and Paul give 1918 as the year the name was first recorded, though such first-recorded dates are not always reliable [3]. The darker [[platinum-grey]] (#9A9697) is a separate entry from RAL and a web source, and sits much closer to Paterson's description of the metal [3]. Next to this swatch in the archive's own vocabulary stand [[silver]] and plain [[white]] [4]."
+  },
+  {
+   "id": "jewellers-metal",
+   "title": "The jeweller's metal",
+   "body": "From the late 1870s, Parisian women restocking their jewel boxes wanted subtler styles than the brash ostentation of the decades before, and platinum let goldsmiths oblige [5]. Diamonds, being nearly clear, look better set in white metal than yellow gold; white gold had not yet been invented, and silver was heavy, weak and tarnished easily [5]. Platinum was lighter and stronger than silver, so stones could be held in open mounts that let light pass through them, and in Finlay's telling this caused a sensation [5].\n\nSellers gave it a grand nickname, the Metal of Heaven [5]. Fashionable customers had old diamonds reset in platinum, shaped as brambles, flower baskets and butterflies [5].\n\nThe metal turns up in odd places in other books. Finlay notes that laboratory-grown emeralds can carry tiny platinum crystals, which break off the crucible the stone is grown in and serve as a signature for gemologists [6]. Garfield, writing of Perkin's early dye trials, compares a price: Perkin reckoned he could not sell purified mauve for under £3 an ounce, while platinum itself stood at barely more than £1 an ounce [7]. His difficulty was that an ounce of [[mauve]] took about 400 pounds of coal [7]."
+  },
+  {
+   "id": "pigments",
+   "title": "Platina yellow and platinum blue",
+   "body": "Platinum has also lent its name to two obscure pigments. Platina yellow, also written platinum yellow, was promoted by George Field in 1835, who treated it as another name for [[lemon-yellow]] [8]. Bachhoffner wrote two years later that a mistake seemed to have arisen over its composition, since many artists thought it contained the metal [8]. The Pigment Compendium concludes that the true platina yellow was probably potassium hexachloroplatinate(IV), which forms orange-yellow crystals or a yellow powder, and that cheaper pigments were substituted for it later [8]. The early use of the term is, in the compendium's words, somewhat confused [8].\n\nPlatinum blue appears in the 1869 Salter edition of Field's *Chromatography*: potassium platinocyanide with mercurous nitrate gave a thick smalt-blue precipitate, a mixture of mercury salts rather than a pure platinum compound [9]. Neither pigment resembles the pale grey on this page, and Paterson lists platinum yellow among the yellows [1]."
+  },
+  {
+   "id": "hair",
+   "title": "Hair, and a word for money",
+   "body": "In Paterson's dictionary, *platinum blonde* is the silvery blonde of artificially coloured hair, and also a name for the woman who wears it [1]. The metal's name had by then become a general sign for a pale, cool, expensive shine."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A colour within six units (ΔE 2000) of this swatch, covering at least five per cent of the canvas, appears in 775 of the 23,781 paintings in our archive, 3.3 per cent [4]. These are photographs of aged, varnished paintings, so a match is a colour match and not a pigment test [4].\n\nIn the painting's own lightness order, 99 per cent of the matches fall among the lightest tones [4]. The highest coverage belongs to white grounds: Piet Mondrian's *Composition with Red, Yellow, and Blue* of 1927 matches across 90 per cent of its canvas [4]. By century, the 1300s lead, with 25 of 251 paintings (10 per cent, 3.1 times the archive rate), and the 1410s are the peak decade, with 7 of 25 [4]. Among painters, Vincenzo Carducci stands out at 35 of 50 paintings, 21 times the archive rate [4].\n\nThe word itself rose late. In printed books the word *platinum* was at 7 per cent of its peak frequency in 1800, 82 per cent in 1880 and peaked in the 1920s [10]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the metal; Spanish platina, 'little silver'",
+   "first_recorded": "Maerz and Paul give 1918 for the colour name (not confirmed)",
+   "source": "Finlay, Jewels; ColorHub library"
+  },
+  "aka": [
+   "Platina"
+  ],
+  "siblings": [
+   "silver",
+   "white",
+   "platinum-grey"
+  ],
+  "parent": null,
+  "children": [
+   "platinum-grey"
+  ],
+  "disambiguation": [
+   {
+    "slug": "platinum-grey",
+    "gloss": "the darker grey that matches the metal's description"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "museum paintings as photographed",
+  "match": {
+   "hex": "#E5E4E2",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "n_present": 775,
+  "n_archive": 23781,
+  "rate": 0.0326,
+  "role": {
+   "highlight": 0.99,
+   "mid": 0.01
+  },
+  "ngram": {
+   "word": "platinum",
+   "peak": 1920
+  },
+  "measured": {
+   "lch": [
+    91,
+    1,
+    91
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"platinum\", \"platinum blonde\", \"platinum yellow\", pp. 315, 512",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 21 (note 27)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 265, Maerz and Paul 1930 plate 45 A 3, Platinum Grey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 18",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Finlay, Jewels, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 14",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"platina yellow\", p. 314",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"platinum blue\", p. 314",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did platinum change how diamonds were set in the late 1870s?",
+   "choices": [
+    "It was lighter and stronger than silver, so stones could sit in open mounts",
+    "It was cheaper than gold, so more stones could be bought",
+    "It could be dyed to match each stone",
+    "It never needed to be polished"
+   ],
+   "answer": "It was lighter and stronger than silver, so stones could sit in open mounts",
+   "kind": "pick"
+  },
+  {
+   "q": "What did the Spaniards' name platina mean?",
+   "choices": [
+    "Little silver",
+    "White gold",
+    "Sky metal",
+    "Pale fire"
+   ],
+   "answer": "Little silver",
+   "kind": "pick"
+  },
+  {
+   "q": "In our archive, where do platinum-coloured areas usually fall in a painting's lightness order?",
+   "choices": [
+    "Almost always among the lightest tones",
+    "Mostly in the shadows",
+    "Evenly across all tones",
+    "Only in the mid-tones"
+   ],
+   "answer": "Almost always among the lightest tones",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Platinum began as a Spanish diminutive, platina, 'little silver', for a metal thought almost worthless.",
+  "When Perkin priced his first mauve, an ounce of platinum cost just over £1, and he feared he could not sell an ounce of mauve for under £3.",
+  "Where to look: the white grounds of a Mondrian are among the best platinum matches in our archive."
+ ],
+ "words": 750,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede: removed 'worthless-looking ore' (sources say only that the Spaniards thought the metal almost valueless).",
+   "Opener: Perkin's £3 was his estimate of the lowest price he could supply mauve at, not a sale price; reworded.",
+   "Other claims verified against Finlay, Garfield, Paterson, Pigment Compendium."
+  ]
+ }
+}

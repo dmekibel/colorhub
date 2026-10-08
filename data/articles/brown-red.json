@@ -1,0 +1,263 @@
+{
+ "slug": "brown-red",
+ "name": "Brown Red",
+ "hex": "#7E292C",
+ "names": [
+  "Brown Red"
+ ],
+ "tier": "pigment",
+ "depth": "long",
+ "lede": "Brown red is an old pigment name for the dull red made by burning yellow ochre, later borrowed as the name of a deep red-brown on color charts.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pigment name first",
+   "body": "Before it was a paint-chart color, brown red was a pigment term. The dictionary of color defines it as a red made from burnt ochre [1]. Specialist sources treat it as one of several names, with light red and English red, for ochre-based reds whose exact composition is uncertain [2]. Salter's 1869 list of names for red ochre includes brown red beside [[indian-red]], Spanish red, ruddle and [[bole]] [3].\n\nAn earlier use comes from Schäffer's color system of 1769, which names English red, or brown red, among the pigments for red, alongside minium, cochineal, cinnabar and carmine [4]."
+  },
+  {
+   "id": "material",
+   "title": "Burnt ochre",
+   "body": "The material behind the name is yellow ochre, heated until it turns red. The Pigment Compendium says this change has been known since the Palaeolithic, which makes burnt ochre the first synthetic pigment and the earliest use of fire to change a mineral's chemistry [5]. The mineral goethite starts to lose water at about 230 to 280 degrees Celsius and becomes red iron oxide [5]. More heat gives a run of shades from brown through red to violet [5].\n\nThe written record is old too. Theophrastus described burning ochre in the fourth century BC, and Vitruvius, in the first century BC, wrote that burnt yellow ochre gave a purple color [5]. Pliny, dated 77 AD by the Compendium, mentions burnt ochres, especially ones adulterated with red lead, a mixture he calls sandyx [5]."
+  },
+  {
+   "id": "trade",
+   "title": "Light red and English red",
+   "body": "Harley's study of British sources found that light red came into use as a color name in the eighteenth century, usually for a brownish red made by burning yellow ochre [6]. By 1803 Ibbetson described light red as either calcined green vitriol, sold as [[venetian-red]], or calcined yellow ochre, which he preferred [6]. Salter, in 1869, called it an ochre of an orange-russet hue [6].\n\nEnglish red is where the sources disagree. De Massoul wrote that yellow ochre from Berry in France was shipped to Holland, calcined there and sold as English red [7]. Watin, in 1785, said English brown red was made at Deptford, seven miles from London, and the Compendium reads this as a synthetic iron oxide, made by calcining the iron sulfate left over from making sulfuric acid [7]. Merrifield took the Italian *rosso d'Inghilterra* and the French *rouge violet* for synonyms, and Pozzo described the material as vitriol-like in nature [7]. The two accounts may simply describe different products sold under one name.\n\nA related, obscure name was *ocre de rue*, a kind of brown red or yellow ochre; Peacham recommended it in 1634 for painting hair colors [8]."
+  },
+  {
+   "id": "words",
+   "title": "Other brown-reds",
+   "body": "The compound word turns up elsewhere. [[flower:brazilwood|Brazilwood]], the source of a red dye, is described as a hard, brown-red wood [9]. A scale-insect substitute for kermes gave only a poor dye of brown-red color, by Cardon's account [10]. In metalwork, brown-red marks about 600 degrees Celsius on the usual steel-tempering chart, with white at 1,200 degrees [11]. And St Clair's glossary calls [[terracotta]] brown-red, from the Italian for baked earth [12]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and the pigment",
+   "body": "The swatch here, #7E292C, is a deep red-brown (LCH lightness 30, chroma 41) [13]. It is catalogued as RAL 3011 \"brown red\", in ISCC-NBS 1955 as block 43 and on Maerz and Paul's plate 6 of 1930, and our records trace the name to Syme's 1821 edition of Werner and to Ridgway in 1912 [13]. RAL's value is an approximate screen color, and the xkcd survey's brown red is a more orange #922B05 [13]. Salter's orange-russet light red would sit lighter and warmer than this swatch, so the chart color and the pigment share a name more than a shade [6][13]. [[burgundy]] is its nearest common name, at a distance of 5.2 [13]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this swatch in 353 of 23,781 paintings, 1.48 per cent, as photographed, which makes it more common than 76 per cent of the named colors [14]. It peaks in the 1400s, in 45 of 945 paintings, 3.4 times the museums' baseline, and the single decade of the 1470s reaches 14 of 156 [14]. The most frequent painter is Jan Brueghel the Elder, with 4 of 50 works, though no painter stands out against the museums' baseline [14].\n\nInside a painting it is an accent in 77 per cent of 295 paintings, a small note rather than the ground [14]. Large matches include [[painting:rijks-200109729|a portrait from the Master of the Portraits of Princes]], [[painting:nga-46153|Portrait of an Ecclesiastic]] and Giersing's [[painting:smk-KMS9052|Balletscene]][14]. The earliest match is from 1260, which only marks how thin the archive's early centuries are [14]. In printed English the phrase \"brown red\" peaks in the 1800s [15]. These are photographs of aged, varnished paintings, and a color match is not a pigment test [14]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the brownish red of burnt ochre, sold as light red or English red",
+   "first_recorded": "Schäffer 1769 (as English red, or brown red); 1821 in our color-chart sources",
+   "source": "Baty, Nature's Palette, p. 18; Pigment Compendium; ColorHub library"
+  },
+  "aka": [
+   "English red (pigment sense)",
+   "light red (pigment sense)",
+   "Braunrot (RAL 3011)"
+  ],
+  "siblings": [
+   "english-red",
+   "light-red",
+   "venetian-red",
+   "indian-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "light-red",
+    "gloss": "the screen swatch is a bright coral-red, but the pigment light red is a brownish orange-red"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "it",
+    "name": "rosso d'Inghilterra (English red)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#7E292C",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 353,
+  "top_paintings": [
+   "smk-KMS9052",
+   "rijks-200109729",
+   "nga-46153"
+  ],
+  "role": {
+   "accent": 0.77
+  },
+  "ngram": {
+   "peak": 1800
+  },
+  "measured": {
+   "lch": [
+    30,
+    41,
+    26
+   ],
+   "nearest": [
+    [
+     "Burgundy",
+     5.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 80",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Brown red\" and \"English red\", citing Harley (1982)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Red ochre\", p. 334, citing Salter (1869)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty (ed.), Werner's Nomenclature of Colours (Nature's Palette), p. 18",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Burnt ochre\", p. 214",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Light red\", p. 251, citing Harley (1982)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"English red\", p. 163",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Ocre de rue\", p. 293",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Brazilwood\", p. 73",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Pigment Compendium, \"Lac and kermes insects\", p. 223, citing Cardon (1990)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 207",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Terra-cotta\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): RAL, ISCC-NBS 1955, Maerz & Paul 1930, Werner 1821, Ridgway 1912, xkcd",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram, phrase \"brown red\" (ColorHub graph field notes), all senses",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was \"brown red\" in old pigment lists?",
+   "choices": [
+    "A red made by burning yellow ochre",
+    "A dye ground from cochineal insects",
+    "A red mined as cinnabar",
+    "A lake made from madder roots"
+   ],
+   "answer": "A red made by burning yellow ochre",
+   "kind": "pick"
+  },
+  {
+   "q": "Why is the make-up of English red uncertain?",
+   "choices": [
+    "One source describes calcined ochre, another a by-product iron oxide from sulfuric acid",
+    "No one ever sold it",
+    "It was always the same as vermilion",
+    "It is only known from one painting"
+   ],
+   "answer": "One source describes calcined ochre, another a by-product iron oxide from sulfuric acid",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the heating of yellow ochre to make red is a nineteenth-century invention.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Heat yellow ochre and it turns red: by one authority's account the first synthetic pigment, and one of its names was brown red.",
+  "In 1785 Watin placed English brown red at Deptford, seven miles from London, made from the leftovers of sulfuric acid.",
+  "In our archive this deep red-brown is most often a small accent, and it peaks in 1400s paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Replaced painter and Italy stats not on the fact card with the card's Brueghel figure",
+   "Removed unsupported 'more than half' for Balletscene"
+  ]
+ },
+ "words": 779
+}

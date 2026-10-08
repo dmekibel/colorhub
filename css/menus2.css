@@ -44,7 +44,7 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:none}
 @keyframes mnSpin{from{transform:rotate(-90deg) scale(.5);opacity:0}}
 @keyframes mnSpinBack{from{transform:rotate(90deg) scale(.5);opacity:0}}
 
-/* the capsules: low, under the thumb, a gentle arc rising from the corner (--x from toggleStem) */
+/* the capsules: low, under the thumb, a straight stack up the side, each picture centered over the corner */
 .rooms-stem{position:fixed;inset:0;z-index:17;pointer-events:none;
   --step:min(66px,calc((100dvh - var(--top) - var(--bottom) - 150px) / var(--n,5)));
   --base:calc(var(--corner-b) + var(--corner) + 12px)}
@@ -236,3 +236,135 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 /* the map screens (Home, Study the map) are the whole screen on an iPhone Home Screen app: its layout viewport (and
    100dvh) stop a status bar short of the bottom, and a .fixed screen clips at its own height (js/core.js vbFix) */
 .screen.fixed.cx{position:fixed;top:0;left:0;right:0;height:var(--app-full,100dvh)}
+
+/* ============================================================ bottom band, belt and braces (2026-10-08, David's Arrange
+   sheet screenshot: a 61 px band of ground under every sheet on his iPhone Home Screen app). vbFix now measures
+   where bottom:0 really lands; if a phone still reports it wrong, each bottom sheet paints its own surface on
+   below its edge (a solid offset shadow is never clipped by the sheet's overflow), so no band can show. */
+.sheet{box-shadow:0 -16px 48px rgba(0,0,0,.45),0 160px 0 0 var(--surface-1)}
+.room-sheet{box-shadow:0 160px 0 0 var(--ground)}
+
+/* ============================================================ COMPONENT TOKENS: Night Gallery (design/VISUAL-DIRECTION.md, 2026-10-08)
+   One place for the identity pass; DESIGN-SYSTEM.md §14 documents them. David: "Selecting a button turns it white —
+   ugly; and the button shape." A selection never turns white: it lifts one step (--s3), takes a 1.5 px ring (--line-2,
+   or the item's own color --c when it is a color) and, on tiles, a small dot. Radii 6 (swatches) / 18 (cards, tiles) /
+   28 (sheets, panels) / pill (buttons, segments, chips). 44 pt minimum hits, 56 pt corners and primaries. Two type
+   families: serif names, Geist controls and numbers (tabular); Geist Mono is retired. */
+:root{
+  --s1:#171512; --s2:#201E1A; --s3:#2B2823; --line:rgba(236,232,223,.10); --line-2:rgba(236,232,223,.22);
+  --r-tile:6px; --r-card:18px; --r-sheet:28px;
+  --ctl-fill:var(--s2); --ctl-ink:var(--soft);
+  --sel-fill:var(--s3); --sel-ring:inset 0 0 0 1.5px var(--line-2); --sel-ink:var(--ink); --sel-dot:#FFBF00;
+  --tap:44px; --tap-l:56px; --type-body:16px; --type-ui:15px; --type-cap:13px;
+  --mono:var(--sans);   /* Geist Mono retired: every mono label falls back to Geist */
+  --corner:56px;
+}
+.mono{font-variant-numeric:tabular-nums}
+/* segmented controls: a pill track, the chosen segment a raised, ringed pill */
+.seg button.on,.seg-t.on,.xb-seg button.on,.pt-seg button.on,.pm-view button.on,.cx-ns button.on,
+.hm-seg button.on,.oo-pk-seg button.on,.oo-pk-ch button.on,.xb-cents button.on{
+  background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring);border-color:transparent}
+.seg button,.seg-t{min-height:var(--tap)}
+/* chips and option pills */
+.xb-fc.on,.xb-presets button.on,.gl-chips button.on,.pt-chips button.on,.pt-ar-map.on,.chd-eras button.on,.tz-opts button.on,
+.tw-chips button.on,.lx-bet-b.on,.screen.learnit .lx-bet-b.on,.sq-key.on,.ms-mode.on,.rc-pal-tabs button.on,.xb-optrow .xb-opt.on,.lr-tick.on{
+  background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring);border-color:transparent}
+/* tiles with a title and a caption: raised, ringed, with the dot */
+.hm-rung.on,.hm-fam.on,.ms-lv.on,.ms-set.on,.snd-sw.on,.cx-chip.on{background:var(--sel-fill);box-shadow:var(--sel-ring);border-color:transparent}
+.hm-rung.on b,.hm-fam.on b,.ms-lv.on b,.ms-set.on b,.snd-sw.on{color:var(--sel-ink)}
+.hm-rung.on small,.ms-lv.on small,.ms-set.on small,.snd-sw.on span,.hm-fam.on em{color:var(--soft)}
+.hm-seg-n button.on{background:var(--sel-fill);color:var(--sel-ink);box-shadow:var(--sel-ring)}
+.hm-seg-n button.on em{color:var(--soft);opacity:1}
+.hm-rung,.ms-lv,.ms-set{position:relative}
+.hm-rung.on::after,.ms-lv.on::after,.ms-set.on::after{content:"";position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%;background:var(--sel-dot)}
+/* shapes by size */
+.hm-seg button,.hm-seg-n button,.ms-mode{border-radius:var(--r-pill)}
+.hm-rung,.hm-fam,.ms-lv,.ms-set,.cx-chip{border-radius:var(--r-card)}
+.hm-seg button{min-height:var(--tap);height:auto}
+.cx-chip{border-color:transparent;background:var(--ctl-fill)}
+.cx-chip small{font:400 var(--type-cap)/1 var(--sans);letter-spacing:0;color:var(--soft)}
+/* corner buttons: 56 pt, level 2; open, the ✕ sits on --s3 (never a white disc) */
+.corner{background:var(--s2);border:1px solid var(--line-2);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.corner svg{width:24px;height:24px}
+.corner.on{background:var(--s3);color:var(--ink);border-color:var(--line-2)}
+/* the switch: on = --good track with a ground knob; off = --s3 track with a soft knob */
+.mn-sw{background:var(--s3)}
+.mn-sw.on{background:var(--good)}
+.mn-sw.on i{background:var(--ground)}
+.mn-sw i{box-shadow:0 1px 3px rgba(0,0,0,.35)}
+/* native checkboxes become a 24 px rounded square (radius 6); on = --good with a ground tick. <input switch> becomes the switch. */
+input[type=checkbox]:not([switch]){-webkit-appearance:none;appearance:none;flex:none;width:24px;height:24px;margin:10px;border-radius:var(--r-tile);
+  background:var(--s3);box-shadow:inset 0 0 0 1.5px var(--line-2);display:inline-grid;place-items:center;cursor:pointer;transition:background var(--dur-1)}
+input[type=checkbox]:not([switch])::after{content:"";width:12px;height:7px;border:solid var(--ground);border-width:0 0 2.4px 2.4px;transform:translateY(-1.5px) rotate(-45deg) scale(0);transition:transform var(--dur-1) var(--ease-grow)}
+input[type=checkbox]:not([switch]):checked{background:var(--good);box-shadow:none}
+input[type=checkbox]:not([switch]):checked::after{transform:translateY(-1.5px) rotate(-45deg) scale(1)}
+input[type=checkbox][switch]{-webkit-appearance:none;appearance:none;flex:none;position:relative;width:51px;height:31px;margin:6px 0;border-radius:16px;background:var(--s3);cursor:pointer;transition:background var(--dur-1)}
+input[type=checkbox][switch]::before{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:var(--soft);box-shadow:0 1px 3px rgba(0,0,0,.35);transition:transform var(--dur-2) var(--ease-grow),background var(--dur-1)}
+input[type=checkbox][switch]:checked{background:var(--good)}
+input[type=checkbox][switch]:checked::before{transform:translateX(20px);background:var(--ground)}
+/* keyboard focus: a 2 px ink ring, 2 px out */
+button:focus-visible,input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+
+/* ============================================================ the menu panel (design/VISUAL-DIRECTION.md component 2)
+   Both corners open one floating e1 panel, inset 12 from the edges, just above its corner: a serif title, one note
+   and a 3-column grid of 108 pt tiles (picture top-left, name and note bottom-left). It replaces the pill stacks.
+   Same machinery as before (js/core.js toggleStem/closeStem, js/home.js doMenu): scrim tap, Escape and Back close it. */
+.rooms-stem.mn-panel{inset:auto 12px calc(var(--corner-b) + var(--corner) + 12px) 12px;pointer-events:auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:18px 14px 14px;max-height:calc(100dvh - var(--top) - var(--corner-b) - var(--corner) - 36px);overflow-y:auto;overscroll-behavior:contain;
+  background:var(--s1);border:1px solid var(--line);border-radius:var(--r-sheet);box-shadow:0 -16px 48px rgba(0,0,0,.5);
+  opacity:0;transform:translateY(14px) scale(.97);transform-origin:20% 100%;transition:opacity 160ms ease-in,transform 200ms cubic-bezier(.4,0,1,1)}
+.rooms-stem.mn-panel-r{transform-origin:80% 100%}
+.rooms-stem.mn-panel.on{opacity:1;transform:none;transition:opacity 200ms ease-out,transform 380ms var(--ease-grow)}
+.mn-ph{grid-column:1/-1;padding:0 6px 6px}
+.mn-ph h3{margin:0;font:400 30px/1 var(--serif);letter-spacing:-.02em;color:var(--ink)}
+.mn-ph p{margin:4px 0 0;font:italic 400 16px/1.3 var(--serif);color:var(--soft)}
+.rooms-stem.mn-panel .rm-bubble,.rooms-stem.mn-panel.hm-do-stem .rm-bubble{position:relative;left:auto;right:auto;bottom:auto;height:auto;min-height:108px;
+  flex-direction:column;align-items:flex-start;justify-content:space-between;gap:10px;padding:12px;text-align:left;
+  border-radius:var(--r-card);background:var(--s2);border:0;box-shadow:none;
+  opacity:0;transform:translateY(8px);transition:opacity 160ms ease-in,transform 160ms ease-in,background var(--dur-0);transition-delay:0ms}
+.rooms-stem.mn-panel.on .rm-bubble{opacity:1;transform:none;transition:opacity 220ms ease-out,transform 320ms var(--ease-grow),background var(--dur-0);transition-delay:calc(60ms + var(--i) * 20ms)}
+.rooms-stem.mn-panel .rm-bubble:active{background:var(--s3);transform:scale(.96);transition-delay:0ms}
+.rooms-stem.mn-panel .rm-art{width:40px;height:40px;flex:none}
+.rooms-stem.mn-panel .rm-art-home{zoom:.8}
+.rooms-stem.mn-panel .hm-do-ic{background:none;border-radius:0;width:28px;height:28px;place-items:start}
+.rooms-stem.mn-panel .hm-do-ic svg{width:26px;height:26px}
+.rooms-stem.mn-panel .hm-do-dots{display:flex!important;gap:0;padding:0;width:auto}
+.rooms-stem.mn-panel .hm-do-dots i{width:18px;height:18px;margin-right:-5px;border:2px solid var(--s2);flex:none}
+.rooms-stem.mn-panel .rm-label,.rooms-stem.mn-panel.hm-do-stem .rm-label{align-items:flex-start;gap:4px;width:100%}
+.rooms-stem.mn-panel .rm-label b{font:400 21px/1.05 var(--serif);white-space:normal}
+.rooms-stem.mn-panel .rm-label em{font:400 13px/1.3 var(--sans);font-style:normal;color:var(--soft);max-width:100%;white-space:normal;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* where you are: raised, ringed, with the dot */
+.rooms-stem.mn-panel .rm-bubble.cur{background:var(--s3);box-shadow:var(--sel-ring)}
+.rooms-stem.mn-panel .rm-bubble.cur .rm-art{box-shadow:none}
+.rooms-stem.mn-panel .rm-bubble.cur::after{content:"";position:absolute;top:14px;right:14px;width:8px;height:8px;border-radius:50%;background:var(--sel-dot)}
+/* Home: Colors is the wide tile, Search is a field along the bottom */
+.rooms-stem.mn-panel [data-do="colors"]{grid-column:span 2}
+.rooms-stem.mn-panel .rm-bubble[data-do="search"]{grid-column:1/-1;order:9;min-height:52px;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;padding:0 18px;border-radius:var(--r-pill)}
+.rooms-stem.mn-panel [data-do="search"] .hm-do-ic{width:22px;height:22px;place-items:center}
+.rooms-stem.mn-panel [data-do="search"] .hm-do-ic svg{width:20px;height:20px;color:var(--soft)}
+.rooms-stem.mn-panel [data-do="search"] .rm-label b{display:none}
+.rooms-stem.mn-panel [data-do="search"] .rm-label em{font:400 16px/1.2 var(--sans);-webkit-line-clamp:1}
+.rooms-stem.mn-panel [data-do="recall"] .rm-art{width:100%;height:28px;border-radius:var(--r-tile)}
+@media (max-width:360px){.rooms-stem.mn-panel{grid-template-columns:repeat(2,1fr)}.rooms-stem.mn-panel [data-do="colors"]{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){.rooms-stem.mn-panel,.rooms-stem.mn-panel .rm-bubble,.rooms-stem.mn-panel.on .rm-bubble{transform:none;transition:opacity 160ms linear;transition-delay:0ms}}
+/* sheets take the Night Gallery radius */
+.sheet{border-radius:var(--r-sheet) var(--r-sheet) 0 0}
+
+/* ============================================================ rows: grouped inset sections (VISUAL-DIRECTION component 3)
+   A group is one e1 card (radius 18); its rows are 56 pt with inset hairlines between them, never a box around each.
+   Serif title-3 name, a Geist sub-label (14), a soft value on the right, a chevron only when the row navigates. */
+.mn-group{margin:0 0 22px}
+.mn-gnote{font:500 var(--type-cap)/1.3 var(--sans);font-style:normal;color:var(--soft);margin:0 4px 8px}
+.mn-row{min-height:var(--tap-l);padding:10px 16px;gap:14px;background:var(--s1);border:0;border-radius:0;position:relative}
+.mn-group>.mn-row:first-of-type,.mn-gnote+.mn-row{border-top:0;border-top-left-radius:var(--r-card);border-top-right-radius:var(--r-card)}
+.mn-group>.mn-row:last-of-type{border-bottom:0;border-bottom-left-radius:var(--r-card);border-bottom-right-radius:var(--r-card)}
+.mn-row:not(:last-of-type)::after{content:"";position:absolute;left:62px;right:0;bottom:0;height:1px;background:var(--line)}
+.mn-row:not(:has(.mn-lead)):not(:last-of-type)::after{left:16px}
+.mn-row:active{opacity:1;background:var(--s2)}
+.mn-lead{width:32px;height:32px;border-radius:50%;background:var(--s3);color:var(--ink)}
+.mn-lead svg{width:18px;height:18px}
+.mn-txt small{font:400 14px/1.35 var(--sans)}
+.mn-val{font:400 15px/1.2 var(--sans);font-style:normal;font-variant-numeric:tabular-nums}
+.mn-row.danger .mn-lead{background:rgba(240,154,134,.12)}

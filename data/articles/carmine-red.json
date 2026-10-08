@@ -27,7 +27,7 @@
   {
    "id": "swatch",
    "title": "The swatch",
-   "body": "The swatch here, #CE536B, is our library's approximation of Werner's aged swatch for no. 91 [9]. It is a rosy red, lighter and pinker than the deep red of [[carmine]] itself [9]. The paint standard RAL 3002 is a good deal deeper, at about #A1232B on screen [9].\n\nTwo later systems agree with the rosy reading: Ridgway's 1912 plate XXVI has a near-duplicate called Spinel Red, at 0.6 CIEDE2000 units, and Maerz and Paul recorded the name Carmine Red in 1912 [9]. Its nearest named neighbor is [[cerise]], 5.0 units away, and Maerz and Paul's Mayflower is close behind [9]. The match to [[gem:spinel|spinel]] is more than a pun, since Syme's plate shows this red on a spinel as well as on a ruby [2]."
+   "body": "The swatch here, #CE536B, is our library's approximation of Werner's aged swatch for no. 91 [9]. It is a rosy red, lighter and pinker than the deep red of [[carmine]] itself [9]. The paint standard RAL 3002 is a good deal deeper, at about #A1232B on screen [9].\n\nAnother system agrees with the rosy reading: Ridgway's 1912 plate XXVI has a near-duplicate called Spinel Red, at 0.6 CIEDE2000 units [9]. Its nearest named neighbor is [[cerise]], 5.0 units away, and Maerz and Paul's Mayflower is close behind [9]."
   },
   {
    "id": "field",
@@ -198,16 +198,14 @@
   "In Syme's color lists carmine red is a building block: it goes into crimson, purplish red and even blues and purples.",
   "Carmine was not always an insect: Field's carmine was madder, and permanent carmine can be an azo pigment."
  ],
- "words": 628,
+ "words": 592,
  "status": "checked",
  "checked": {
-  "by": "Sonnet 5.5 batch writer (self-check: sentence-to-note trace, myth list, hedges)",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Short article on purpose: the books give Carmine Red only through Werner/Syme (Baty) and pigment dictionaries; the insect history lives in carmine.json.",
-   "Werner swatch is an aged, approximated swatch; the library hex is not a measured pigment.",
-   "Permanent carmine azo identification is single-source (Mayer via Pigment Compendium); Gurney table layout ambiguous so only the listing is stated.",
-   "Syme 1814 vs 1821 editions both listed; the exact first English use of the phrase is not documented in our books."
+   "Removed claim that Syme's plate shows a spinel (not in fact card; Baty lists ruby only)",
+   "Removed 'Maerz and Paul recorded Carmine Red in 1912' (date unclear in sources)"
   ]
  }
 }

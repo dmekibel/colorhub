@@ -1,0 +1,174 @@
+{
+ "slug": "anemone",
+ "name": "Anemone",
+ "hex": "#AB8795",
+ "names": [
+  "Anemone"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Anemone is a muted rose-mauve named for the windflower, though the flowers themselves run from crimson to violet-blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower's name",
+   "body": "Jarman, writing about the lost color of ancient purple, glosses the anemone as the flower of the wind, and wonders whether that purple looked like its inky flowers [1]. As a color name it is much younger. Paterson's dictionary defines it simply as a pale violet [2]. Maerz and Paul's 1930 dictionary of color gives it a plate of its own, with 1892 as the first recorded use, a date that rests on that single source [3]."
+  },
+  {
+   "id": "swatch",
+   "title": "What the swatch shows",
+   "body": "The swatch, #AB8795, is a greyed, mid-light rose-mauve (LCH lightness 60, chroma 16) [3]. It is not a saturated flower color. The library's Pale Violet, #CEAEFA, is lighter and bluer than it, so the dictionary's words and the chart's color agree on the family but not the shade [3]. The common name nearest in color is [[mauve]], about six units away[3]."
+  },
+  {
+   "id": "chart",
+   "title": "One flower, many colors",
+   "body": "Color charts used anemones to show other colors, which is the best reason not to expect a single anemone color. In Baty's edition of Werner's nomenclature, the stamina of a single purple anemone are the plant example for [[scotch-blue]], and those of a bluish-purple anemone stand for [[prussian-blue]] [4]. The hepatica, which the book labels *Anemone hepatica*, is the example for [[berlin-blue]]; the backs of its blue petals stand for skimmed-milk white and its purple ones for [[pearl-grey]] [5]. A 1737 plate by Weinmann shows [[crimson]] on the petals of anemones [6].\n\nSo a color called anemone is a choice of one reading from a family that spans blue, purple, white, grey and red."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds the swatch in 26 of 23,781 paintings, about 0.11 per cent, as photographed [7]. It is rarer than 63 per cent of the named colors, and it peaks in the 1900s, in 0.3 per cent of the 1,674 paintings from that century, 2.9 times the museums' baseline [7]. Inside a painting it most often plays a hidden color, in 59 per cent of 17 paintings, present but never the focus [7].\n\nThe largest matches are [[painter:john-singer-sargent|Sargent]]'s [[painting:commons-Q20202538|Beach at Capri]] of 1878, at about a third of the canvas, [[painting:commons-Q17492432|Violet Wave]] by Georges Lacombe, and [[painting:commons-Q118895689|Pope Innocent X]] by Velázquez [7]. The earliest match is from 1452, which only marks how thin the archive's early centuries are [7]. These are photographs of aged, varnished paintings, and a color match is not a pigment test [7]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the anemone, the windflower",
+   "first_recorded": "1892, by Maerz and Paul's account (single source); the name is in their 1930 dictionary",
+   "source": "Maerz & Paul 1930 via ColorHub library; Paterson, A Dictionary of Colour, p. 27"
+  },
+  "aka": [
+   "windflower"
+  ],
+  "siblings": [
+   "mauve",
+   "mountbatten-pink",
+   "eupatorium-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "pale-violet",
+    "gloss": "Paterson's gloss for anemone, but the library's Pale Violet is much lighter and bluer"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#AB8795",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 26,
+  "top_paintings": [
+   "commons-Q20202538",
+   "commons-Q17492432",
+   "commons-Q118895689"
+  ],
+  "role": {
+   "hidden": 0.59
+  },
+  "measured": {
+   "lch": [
+    60,
+    16,
+    352
+   ],
+   "nearest": [
+    [
+     "Mauve",
+     6.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Jarman, Chroma, p. 71",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, p. 27",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1930, plate 43 F 3",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty (ed.), Werner's Nomenclature of Colours (Nature's Palette), pp. 89-92",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty (ed.), Werner's Nomenclature of Colours (Nature's Palette), pp. 49, 54, 98",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Baty (ed.), Werner's Nomenclature of Colours (Nature's Palette), p. 246",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why can't \"anemone\" point to one color of flower?",
+   "choices": [
+    "Charts used anemones as examples for blue, purple, white, grey and red",
+    "Anemones are always grey",
+    "The flower has no color of its own",
+    "Every anemone is the same violet"
+   ],
+   "answer": "Charts used anemones as examples for blue, purple, white, grey and red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside paintings, the anemone color most often plays the main, dominant color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The same flower family illustrates Scotch blue, Prussian blue, pearl grey and crimson in Werner's color chart.",
+  "In our archive, the anemone color is most often a hidden color, present in a painting but never the focus."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Dropped unsupported neighbor names",
+   "Reworded Weinmann crimson claim to match the card"
+  ]
+ },
+ "words": 402
+}

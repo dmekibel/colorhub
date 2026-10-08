@@ -182,18 +182,6 @@
 .aw-bubs{display:flex;flex-wrap:wrap;gap:12px 14px;margin-top:16px}
 .aw-bub{width:42px;height:42px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.18)}
 .aw-bub:active{transform:scale(.94)}
-.aw-timeline{margin-top:8px}
-.aw-century{font:400 26px/1 var(--serif);margin:22px 0 4px;color:var(--soft)}
-.aw-trow{display:grid;grid-template-columns:54px 14px minmax(0,1fr) 40px;gap:10px;align-items:center;width:100%;min-height:36px;text-align:left}
-.aw-trow:active{opacity:.7}
-.aw-td{font:500 12.5px/1 var(--mono);color:var(--ink);letter-spacing:.02em}
-.aw-tl{width:14px;height:22px;border-radius:2px;display:block}
-.aw-tbar{display:flex;height:22px;gap:1px;border-radius:2px;overflow:hidden}
-.aw-tbar u{background:var(--c);text-decoration:none;display:block}
-.aw-trow em{font:500 11px/1 var(--mono);color:var(--faint);font-style:normal;text-align:right}
-.aw-hueleg{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:14px}
-.aw-hueleg span{display:inline-flex;align-items:center;gap:5px;font:500 10.5px/1 var(--mono);letter-spacing:.06em;color:var(--soft);text-transform:uppercase}
-.aw-hueleg i{width:10px;height:10px;background:var(--c);border-radius:50%}
 .aw-tiles2{display:grid;grid-template-columns:1fr 1fr;gap:20px 14px;margin-top:14px}
 .aw-tile{display:flex;flex-direction:column;gap:6px;text-align:left;min-width:0}
 .aw-tp{display:flex;height:46px;border-radius:2px;overflow:hidden;gap:1px}
@@ -219,7 +207,7 @@
 .aw-legend{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--soft);margin:14px 0 0}
 .aw-legend i{width:10px;height:10px;border-radius:50%;display:inline-block;margin-left:8px}
 .aw-legend i.a{background:var(--ink)}.aw-legend i.b{background:#e0a13a}
-@media (max-width:374px){.aw-meas{grid-template-columns:1fr}.aw-kv{grid-template-columns:1fr}.aw-trow{grid-template-columns:50px 12px minmax(0,1fr) 34px}}
+@media (max-width:374px){.aw-meas{grid-template-columns:1fr}.aw-kv{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.aw-opt:active,.aw-bub:active{transform:none}}
 
 /* the life strip's rooms: palette families, named after their typical painting */
@@ -243,7 +231,55 @@
 /* the movement caveat: one calm line, the tagging counts one tap away */
 .aw-page details.aw-note>summary{list-style:none;cursor:pointer;font:italic 400 16px/1.35 var(--serif);color:var(--soft)}
 .aw-page details.aw-note>summary::-webkit-details-marker{display:none}
-.aw-page details.aw-note>summary::after{content:" ›";color:var(--faint)}
+.aw-page details.aw-note>summary::after{content:"";display:inline-block;width:.75em;height:.75em;margin-left:.3em;vertical-align:-.05em;background:var(--faint);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.5 5.5L16 12l-6.5 6.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9.5 5.5L16 12l-6.5 6.5'/%3E%3C/svg%3E") center/contain no-repeat}
 .aw-page details.aw-note[open]>summary::after{content:""}
 .aw-page details.aw-note>p{margin:8px 0 0}
 .aw-room{background:none;border:0;padding:0;text-align:left;font:inherit;cursor:pointer}
+
+/* The highlight card (design/ARCHIVE-PAGES.md #1): the most typical painting edge to edge, one measured sentence,
+   the signature colors. It replaces the old hero of area colors, which were the browns of aged varnish. */
+.aw-hl{margin:20px 0 0}
+.aw-hl-img{display:block;width:calc(100% + 2 * var(--g));margin:0 calc(-1 * var(--g));max-height:min(40vh,420px);min-height:180px;padding:0;background:var(--c);overflow:hidden;position:relative}
+.aw-hl-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 35%;opacity:0;transition:opacity var(--dur-2) var(--ease)}
+.aw-hl-img img[src]{opacity:1}
+.aw-hl-img:active img{opacity:.85}
+.aw-hl-cap{display:flex;gap:8px;align-items:baseline;margin:10px 0 0;font:italic 400 15px/1.3 var(--serif);color:var(--soft);min-height:20px}
+.aw-hl-cap em{color:var(--faint);flex:none}
+.aw-hl-cap span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.aw-page .aw-hl-line{font:400 19px/1.35 var(--serif);color:var(--ink);margin:12px 0 0;max-width:46ch;text-wrap:pretty}
+.aw-hl-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin:18px 0 10px}
+.aw-hl-h b{font:400 17px/1.2 var(--serif);color:var(--ink);flex:none}
+.aw-hl-h span{font:italic 400 14px/1.3 var(--serif);color:var(--faint);text-align:right}
+.aw-hl-chips{display:flex;flex-wrap:wrap;gap:8px}
+.aw-hl-chip{display:inline-flex;align-items:center;gap:9px;min-height:42px;padding:0 14px 0 6px;border-radius:var(--r-pill);background:var(--surface-2);border:1px solid var(--rule);color:var(--ink);text-align:left;max-width:100%}
+.aw-hl-chip i{width:30px;height:30px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
+.aw-hl-chip b{font:400 17px/1.1 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.aw-hl-chip em{font:400 12px/1 var(--mono);color:var(--soft);font-style:normal;flex:none}
+.aw-hl-chip:active{transform:scale(.97)}
+/* "In most of the work" sits inside the Colors drawer, whose summary already names it */
+[data-awptc] .sec-head{display:none}
+[data-awptc] .aw-sub{margin-top:0}
+
+/* the River on the art-history index (Browse's, js/browse-ui.js xbRiver) */
+.aw-river{margin-top:14px;min-height:240px}
+
+/* "In context" on a painting page (#8): one shared scale, a row per comparison set, this painting's dot on each */
+.aw-cx:empty{display:none}
+.aw-cx .sec-head{margin-top:28px}
+.aw-cx-top{margin:14px 0 0}
+.aw-cx-seg{display:flex;width:100%}
+.aw-cx-seg button{flex:1;padding:0 6px}
+.aw-cx-me{display:flex;align-items:center;gap:10px;margin:16px 0 2px;font:italic 400 15px/1.3 var(--serif);color:var(--soft)}
+.aw-cx-me i{width:12px;height:12px;border-radius:50%;background:var(--ink);flex:none}
+.aw-cx-me b{font:400 15px/1 var(--mono);color:var(--ink);font-style:normal}
+.aw-cx-row{display:block;width:100%;text-align:left;padding:14px 0 16px;border-bottom:1px solid var(--rule)}
+.aw-cx-row:active{opacity:.75}
+.aw-cx-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.aw-cx-h b{font:400 19px/1.2 var(--serif);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.aw-cx-h em{font:italic 400 14px/1.3 var(--serif);color:var(--soft);text-align:right;flex:none}
+.aw-cx-tr{position:relative;display:flex;align-items:flex-end;gap:1px;height:30px;border-bottom:1px solid rgba(236,232,223,.3)}
+.aw-cx-tr i{flex:1;background:rgba(236,232,223,.22);border-radius:1px 1px 0 0}
+.aw-cx-tr u{position:absolute;bottom:-7px;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px var(--ground);text-decoration:none}
+.aw-cx-tr u::before{content:"";position:absolute;left:6px;bottom:14px;width:2px;height:28px;background:var(--ink);opacity:.5}
+.aw-cx-ax{display:flex;justify-content:space-between;margin-top:10px;font:italic 400 14px/1 var(--serif);color:var(--faint)}
+@media (max-width:374px){.aw-cx-h{flex-wrap:wrap}.aw-cx-h em{text-align:left}}

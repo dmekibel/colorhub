@@ -93,6 +93,7 @@ function chordsPage(o = {}) {
     const kind = e.target.closest("[data-kind]"); if (kind) { CHD.kind = kind.dataset.kind; buzz(5); return draw(); }
     if (e.target.closest("[data-retry]")) return chordsPage({ push: false });
     const r = e.target.closest("[data-hexes]");
+    if (r && typeof spPage === "function") { buzz(6); return spPage(r.dataset.hexes.split("+").map(h => "#" + h.replace("#", ""))); }
     if (r) { buzz(6); return paintingsOfPage(r.dataset.hexes.split("+").map(h => "#" + h), { tol: 4, minCover: 1, maxCover: null, mode: "all", names: r.dataset.names.split("|") }); }
   });
   return el;

@@ -1,0 +1,253 @@
+{
+ "slug": "tawny",
+ "name": "Tawny",
+ "hex": "#C27946",
+ "names": [
+  "Tawny"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Tawny is the dull yellowish orange-brown of tan, deer coats and withered grass, a medieval French-derived word that English used for animals, autumn grass and cloth.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word for tan",
+   "body": "Paterson defines tawny as a dark brown, the colour typically given to birds and beasts, and an old medieval word taken from the French *tanné*, \"tan-coloured\" [1]. The same French word gave heraldry its *tenné*, an orange or brownish orange [1]. Latin and Greek supplied cousins: the prefix *fulv-* means tawny, *fulvous* is a reddish yellow, and the Greek *cirrho-* means tawny or orange [2]. Paterson also records that a deer-coloured thing is tawny-red or greyish-brown, and that the vicuña wears the tawny colour of its coat [2].\n\nSt Clair's glossary agrees on the core, tan-coloured and orange-brown, and adds that *fulvous* is used like tawny for animal colours, usually bird plumage [3]. She also notes that *fallow*, a faded caramel-tawny, the tint of withered leaves or grass, is one of the oldest colour names in English [4]. Underneath the animals lies chemistry: the pigment melanin, in its two forms eumelanin and pheomelanin, sets the range of fur, feather and skin colours, running from roan through tawny up to sable at its densest [5]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch",
+   "body": "The swatch, #C27946, comes from three historical systems: Ridgway's 1912 atlas (plate XV), the ISCC-NBS 1955 colour names (block 54), and Maerz and Paul's 1930 dictionary, which gives 1377 as the year the name was first recorded and places it on plate 13, D 10 [6]. We treat that date as unconfirmed, since first-recorded years in such lists are often unreliable. Ridgway's plate is a scan of aged paper, so the swatch is approximate [6]. In lightness and chroma it is a mid-toned, moderately saturated orange-brown, closest among learnable names to [[ochre]] (ΔE 6.0) and a near neighbour of [[tawny-orange]] and the library's Orpiment Orange [6].\n\nIt sits in the same family as [[russet]], [[tan]] and [[fawn]], but is more orange than any of them and warmer than [[brown]]."
+  },
+  {
+   "id": "dress",
+   "title": "Tawny in dress and dye",
+   "body": "Greenfield and St Clair both list tawny among the muted colours Elizabeth I wore after she took the throne in 1558, alongside white, black, gold, peach and ash [7][8]. According to St Clair, scarlet stayed in her court as a display of majesty, worn by her ladies and retainers instead of the queen [8].\n\nPaterson's entry for *orange-tawny* describes a dull yellowish brown that Shakespeare used in *A Midsummer Night's Dream*, and notes that it was once allotted to people supposed to be of lowly status [2].\n\nIn the dye-house, Balfour-Paul reports that woad combined with other dyes made russets, tawnies and greys, as well as the best blacks [9]. In the glassworks, the craft writer Theophilus advised a glassmaker whose pot turned tawny to use that glass for flesh colour, and to reheat what remained for a light purple that deepened to an exquisite reddish purple [10]. Finlay explains that the colour was hard to predict, as it came from metal oxides, manganese and iron among them, in the beech wood and clay [10]."
+  },
+  {
+   "id": "yellows",
+   "title": "Where the yellows go dark",
+   "body": "Pastoureau, looking at medieval wall paintings, finds that what we call yellow often runs toward orange, beige or brown, and orders the shades from pale to deep: straw, chamois, apricot, honey, russet, tawny, bister, bronze [11]. Tawny sits near the dark end of that run.\n\nIn Assam, Finlay handles muga, a wild silk that cannot be dyed and always keeps the same colour [12]. She finds it might be filed under Dark Beige, Tawny Mouse, Garden String or Wet Hay, all bland, brownish names [12].\n\nThere is one more old use. In the humoral theory that Birren retells, a person's temperament could be read from the colour of the hair, and the tawny-headed or red-haired person was said to have an even temperament, yet with an excess of heat and a tendency to anger [13]. It is a historical belief, not evidence."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A colour within six units (ΔE 2000) of this swatch, covering at least five per cent of the canvas, appears in 483 of the 23,781 paintings in our archive, 2.0 per cent [14]. These are photographs of aged, varnished paintings, so a match is a colour match, not a pigment test [14].\n\nThe surprise is geographic. In India, 56 of 721 works carry it, 7.8 per cent and 3.8 times the archive rate; among Rajput works the figure is 16 of 97, and among Mughal works 14 of 168 [14]. The best match of all is a 1556 portrait of a kneeling holy man from the Prince Salim Album, by Mir Sayyid Ali, which matches across 52 per cent of its canvas [14]. By contrast, none of the 140 Impressionist paintings in the archive reach it [14].\n\nIn Europe the 1400s and 1500s are the high point: 35 of 945 paintings in the 1400s, and 86 of 2,231 in the 1500s (3.9 per cent, 1.9 times the archive rate), against 1.3 per cent in the 1600s [14]. Among painters, Filippo Lippi has it in 4 of 13 works and Dürer in 6 of 47 [14]. Its company in the archive is ochre, burnt orange, terracotta and brick [14].\n\nThe word itself has faded in print: it peaked in the 1850s and by 2000 was at about 13 per cent of that peak [15]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "French tanné, 'tan-coloured'",
+   "first_recorded": "Maerz and Paul give 1377 (not confirmed)",
+   "source": "Paterson, A Dictionary of Colour; ColorHub library"
+  },
+  "aka": [
+   "Fulvous",
+   "Tenné (heraldry)"
+  ],
+  "siblings": [
+   "fulvous",
+   "tan",
+   "russet",
+   "fawn"
+  ],
+  "parent": null,
+  "children": [
+   "tawny-orange"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "museum paintings as photographed",
+  "match": {
+   "hex": "#C27946",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "n_present": 483,
+  "n_archive": 23781,
+  "rate": 0.0203,
+  "role": {
+   "highlight": 0.64,
+   "mid": 0.32,
+   "shadow": 0.04
+  },
+  "company": [
+   "Ochre",
+   "Burnt orange",
+   "Terracotta",
+   "Brick"
+  ],
+  "ngram": {
+   "word": "tawny",
+   "peak": 1850
+  },
+  "measured": {
+   "lch": [
+    58,
+    46,
+    59
+   ],
+   "nearest": "Ochre"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"tawny\", \"tenné\", pp. 389, 391",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"fulv-\", \"fulvous\", \"cirrho-\", \"deer-coloured\", \"vicuna\", \"orange-tawny\", pp. 105, 144, 180, 289, 412",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 125 (glossary)",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 108 (\"Fallow\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 123",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz and Paul 1930",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Greenfield, A Perfect Red, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, ch. 65",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 40",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Finlay, Colour, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow, ch. 9",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Finlay, Fabric, p. 362",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Birren, Color Psychology and Color Therapy, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "data",
+   "cite": "Google Books Ngram, case-insensitive, 5-year smoothed, relative to peak (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which French word does tawny come from?",
+   "choices": [
+    "tanné",
+    "fauve",
+    "tourné",
+    "tendre"
+   ],
+   "answer": "tanné",
+   "kind": "pick"
+  },
+  {
+   "q": "Which sovereign dressed largely in white, black, gold and subdued colours such as tawny after 1558?",
+   "choices": [
+    "Elizabeth I",
+    "Henry VIII",
+    "Mary Queen of Scots",
+    "Charles V"
+   ],
+   "answer": "Elizabeth I",
+   "kind": "pick"
+  },
+  {
+   "q": "Which country's works carry this tawny at almost four times the archive's rate?",
+   "choices": [
+    "India",
+    "Italy",
+    "Sweden",
+    "Switzerland"
+   ],
+   "answer": "India",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Tawny and heraldry's tenné share one French root: tanné, 'tan-coloured'.",
+  "In our archive Indian painting carries tawny 3.8 times as often as the average work, and Impressionism not at all.",
+  "Where to look: autumn grass, deer coats, and the lower end of an old yellow."
+ ],
+ "words": 860,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Lede/opener: removed unsourced 'leather' and 'lions' (sources give tan-coloured, deer, plumage, withered grass).",
+   "Humoral passage reworded to avoid copying Birren's phrase and attributed it more loosely.",
+   "Elizabeth I, Pastoureau yellow run, Theophilus, melanin claims verified."
+  ]
+ }
+}

@@ -17,7 +17,7 @@
   {
    "id": "physics",
    "title": "Why ice is blue-green",
-   "body": "Gurney explains the color in terms a painter can use. Snow and ice soak up red light as it passes through them, so light that bounces around inside comes back blue-green; hollows on grey days show it best [3]. Shadows lying on snow borrow the sky's color: blue under a blue sky, greyer under cloud [3].\n\nFresh powder scatters the most light internally; old snow darkens with dirt, and as its crystals coarsen it grows glossier [3]. The pale swatch above is therefore the color of ice at its cleanest, lit from inside, and not the color of an ice rink [3]."
+   "body": "Gurney explains the color in terms a painter can use. Snow and ice soak up red light as it passes through them, so light that bounces around inside comes back blue-green; hollows on grey days show it best [3]. Shadows lying on snow borrow the sky's color: blue under a blue sky, greyer under cloud [3].\n\nFresh powder scatters the most light internally; old snow darkens with dirt, and as its crystals coarsen it grows glossier [3]. Gurney's point is that the blue-green of snow and ice is a scattered, interior light, which is a useful way to read a pale cool swatch like this one, though the swatch itself is only a named tint [3]."
   },
   {
    "id": "words",
@@ -27,12 +27,12 @@
   {
    "id": "ice-age",
    "title": "Ice and the oldest colors",
-   "body": "Ball notes that cave walls were already being painted at least 30,000 years ago, well before the last Ice Age ended, using only dull earth pigments [6]. The ice that preserved things was just as important. The Pazyryk rug, found in the Altai Mountains in 1949, lay frozen from its burial in the fourth or third century BC [7]. It is the oldest and most impressive example of pile weaving, and its wide bands show the crimson of 'Polish' cochineal [7]. Frozen ground kept its reds for some two and a half thousand years [7]."
+   "body": "Ball notes that cave walls were already being painted at least 30,000 years ago, well before the last Ice Age ended, using only dull earth pigments [6]. The ice that preserved things was just as important. The Pazyryk rug was discovered in the Altai Mountains in 1949, preserved in ice since it was buried in the fourth or third century BC [7]. Balfour-Paul calls it the oldest and most impressive example of pile weaving, with wide bands in a crimson from 'Polish' cochineal [7]. The ice kept that crimson for more than two thousand years [7]."
   },
   {
    "id": "painting",
    "title": "Painting ice and snow",
-   "body": "Europeans came late to the winter landscape. Pastoureau writes that winter scenes are rare in medieval and Renaissance painting, and that Hendrick Avercamp (1585-1634) was the first painter to make winter central to his work [8]. For Avercamp, winter was a chance to multiply shades of white according to the state of the snow, the look of the frozen canals, the time of day and the brightness of the light [8].\n\nPastoureau also argues that Europeans notice fewer whites than people of the Far North, who distinguish many whites in snow and ice [9]. The popular claim that the Inuit have dozens of snow words is a myth, so the safer reading is a difference of practised looking and not of vocabulary [9].\n\nMonet's *The Ice Floes* (*Les Glaçons*) of 1880 is Livingstone's example of a different kind: the repeated horizontal borders of the floes, high in luminance contrast, can make the vertical, equiluminant strokes of the water seem to move [10]. A contemporary critic said the ice looked really swept along by the water [10]."
+   "body": "Europeans came late to the winter landscape. In Pastoureau's account, medieval and Renaissance painters rarely showed winter, and Hendrick Avercamp (1585-1634) was the first to build his art around it [8]. Winter let Avercamp paint many whites, shifting with the snow, the frozen canals, the hour and the strength of the light [8].\n\nPastoureau also argues that Europeans notice fewer whites than people of the Far North, who distinguish many whites in snow and ice [9]. The popular claim that the Inuit have dozens of snow words is a myth, so Pastoureau's point is best read as one about practised looking, not about a long word list [9].\n\nMonet's *The Ice Floes* (*Les Glaçons*) of 1880 is Livingstone's example of a different kind: the repeated horizontal borders of the floes, high in luminance contrast, can make the vertical, equiluminant strokes of the water seem to move [10]. A contemporary critic said the ice looked really swept along by the water [10]."
   },
   {
    "id": "warm-cool",
@@ -229,13 +229,12 @@
  "words": 846,
  "status": "checked",
  "checked": {
-  "by": "article engine batch 28",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Graph fieldnote threshold (dE 6) gives 2 paintings; article_field crashes at dE 6, so dE 10 used and both stated.",
-   "Marienglas passage from the Pigment Compendium: wording 'since the sixteenth century' follows Funders and Moller as cited there.",
-   "Inuit snow words: myth corrected in text.",
-   "'Frozen ground kept its reds' is an inference from the rug being preserved in ice."
+   "Removed unsupported inference that the swatch is \"ice at its cleanest, not an ice rink\"",
+   "Pazyryk passage reworded (close to Balfour-Paul) and attributed; \"frozen ground\" corrected to ice, years made \"more than two thousand\"",
+   "Softened Inuit-myth reading to match Pastoureau"
   ]
  }
 }

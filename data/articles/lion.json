@@ -1,0 +1,198 @@
+{
+ "slug": "lion",
+ "name": "Lion",
+ "hex": "#DECC9C",
+ "names": [
+  "Lion"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Lion is a pale sandy yellow, named for the coat of the animal and recorded as a color name by Maerz and Paul in 1930.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name with thin paper",
+   "body": "The color books we read say almost nothing about this particular shade. Lion comes to us through Maerz and Paul's *Dictionary of Color* of 1930, which gives 1501 as its first recorded use, and through the ISCC-NBS system of 1955, which files it under pale yellow, block 76 [1]. Its Munsell notation is 3.5Y 8.2/3.6, light and only mildly saturated, and the nearest of our teaching colors is [[beige]], about 3.7 units away [1]. Related names are [[sand]], [[wheat]] and [[buff]] [1].\n\nWhat the books do give is the animal's place in the language of yellow, and that is where the name sits."
+  },
+  {
+   "id": "coat",
+   "title": "A tawny coat",
+   "body": "Pastoureau notes that the Latin *fulvus* is a darker yellow than *flavus*, and that Roman writers used it for the hides and feathers of admired or feared wild animals, among them the lion, the wolf and the eagle [2]. It is also the word for flames, lightning and stormy weather [2]. The Lion swatch is lighter and paler than that, with a lightness of 82 [1], so it is better read as the animal's dusty sand-colored hide than the blaze of a flame."
+  },
+  {
+   "id": "heraldry",
+   "title": "The lion in heraldry",
+   "body": "In heraldry a lion is any color the blazon says. A herald writing around the 1440s, probably a Norman or a Picard, ranked yellow, called *or*, as the first and noblest color, and said that in the zodiac the lion is the sign it stands for [3]. That is the lion as a symbol of yellow and gold, not as a pale hide.\n\nThe shield rules kept two colors of the same group apart. On a black field a lion could be white or yellow, but not blue, red or green [4]. The count of Flanders made a black lion on gold famous [5], and Tristan, in the romances, bore a yellow lion on a green field [6]. So heralds chose a lion's color by rule rather than from nature, and the pale sandy hue of this swatch belongs to the living animal, not the shield [4][5].\n\nOne yellow flower still carries the animal in its name. Paterson explains that [[dandelion]] comes from the French *dent de lion*, literally the tooth of the lion, which refers to its tooth-like roots rather than its color [7]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Lion is one of the more common colors in painting. It appears in 1,947 of 23,781 paintings in our archive, 8.19 per cent, and is more common than 92 per cent of the named colors [8]. Its peak century is the 1800s, with 6.2 per cent of the 8,345 paintings we hold from then, 1.2 times the baseline of the same museums [8]. Inside a painting it most often plays a light, in 63 per cent of the 1,198 paintings where the within-painting lens finds it [8].\n\nThe most devoted painter is Arnoud van Halen, who has it in 11 of 50 works here, 3.2 times the baseline [8]. Sargent has it in 21 of 287 works, 1.4 times the baseline [8]. Among Mughal paintings it appears in 27 of 168, 3.3 times the baseline [8]. The earliest dated match is [[painting:aic-108747|a work dated 799]], the latest [[painting:smk-KMS9063|a painting of 1949]] [8]. The first is 1,131 years before the 1930 record of the name, so it is a look-alike hue in an aged, yellowed photograph, not evidence of a pigment [8]. Every number here is as photographed.\n\nWord counts in printed English are no help here, because *lion* also names the animal [8]. Its Ngram curve peaks in the 1800s, but that measures the animal, not the color [8]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the coat of the lion (origin undocumented beyond Maerz and Paul's dictionary entry)",
+   "first_recorded": "1501, as given by Maerz & Paul 1930",
+   "source": "ColorHub library; Maerz & Paul (1930), as cited in ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "sand",
+   "buff"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "gold",
+    "gloss": "heraldic yellow, or, is gold; the lion of the shield is not the color of this swatch"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1947,
+  "presence_pct": 8.19,
+  "more_common_than_pct_of_names": 92,
+  "peak_century": {
+   "century": 1800,
+   "rate_pct": 6.2,
+   "lift": 1.2
+  },
+  "devoted_painter": {
+   "name": "Arnoud van Halen",
+   "works": 11,
+   "of": 50,
+   "lift": 3.2
+  },
+  "role": "light (63%)",
+  "first_seen": {
+   "id": "aic-108747",
+   "year": 799
+  },
+  "latest": {
+   "id": "smk-KMS9063",
+   "year": 1949
+  },
+  "top_paintings": [
+   "aic-108747",
+   "smk-KMS9063"
+  ],
+  "measured": {
+   "lch": [
+    82.4,
+    26.3,
+    92.0
+   ],
+   "munsell": "3.5Y 8.2/3.6"
+  },
+  "name_first_recorded": 1501
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub library and color data, Lion (Maerz & Paul 1930; ISCC-NBS 1955 block 76)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, p. 16 (the Latin lexicon of yellows)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Yellow: The History of a Color, p. 21 (a Norman or Picard herald, c. 1440s)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 37 (heraldic color groups)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Pastoureau, Black: The History of a Color, p. 38 (the count of Flanders)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Pastoureau, Green: The History of a Color, p. 22 (Tristan)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"dandelion\", p. 139",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Lion (23,781 paintings, as photographed)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which Latin word describes the coats of lions, wolves and eagles as a darker yellow than flavus?",
+   "choices": [
+    "Fulvus",
+    "Croceus",
+    "Luteus",
+    "Rutilus"
+   ],
+   "answer": "Fulvus",
+   "kind": "pick"
+  },
+  {
+   "q": "What does the word dandelion literally mean in French?",
+   "choices": [
+    "Tooth of the lion",
+    "Golden sun",
+    "Little yellow",
+    "Field flower"
+   ],
+   "answer": "Tooth of the lion",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: on a black heraldic field, a lion could be blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The word dandelion is French for tooth of the lion, but it names the root, not the yellow.",
+  "A heraldic lion could be any color the blazon allowed, but never the same group as its field.",
+  "Lion is common in paintings: 1,947 of 23,781 in our archive, as photographed."
+ ],
+ "words": 609,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No unsupported claims found; verified against fact card and book text; no edits needed"
+  ]
+ }
+}

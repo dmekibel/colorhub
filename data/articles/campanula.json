@@ -1,0 +1,158 @@
+{
+ "slug": "campanula",
+ "name": "Campanula",
+ "hex": "#634495",
+ "names": [
+  "Campanula"
+ ],
+ "tier": "nature",
+ "depth": "medium",
+ "lede": "Campanula is the botanical name of the bellflowers, borrowed for a deep violet-blue; the books agree on the flower and disagree on whether the color leans blue or purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower's name",
+   "body": "*Campanula* is the genus of the bellflowers, and the color is named for their petals [1][2]. Paterson's dictionary defines it as a violetish blue and credits its use to the art theorist Charles Blanc, who lived from 1813 to 1882 [3]. In 1827 the Nuremberg dermatologist Heinrich Eichhorn used the flower the same way in a list of skin colors, which includes the \"purple of a campanula\" [4].\n\nSo the books disagree on the hue. Paterson reads it as a blue with a violet tint [3]. Baty files it among the purples, as number 39 in a chart of blues and purples, next to [[pansy-purple]] [1]. The swatch here sits between the two, a deep violet that is bluer than [[purple]] and redder than [[violet-blue]] [5]."
+  },
+  {
+   "id": "specimens",
+   "title": "One color in three kingdoms",
+   "body": "Baty's chart pairs each color with a specimen from the animal, plant and mineral worlds [2]. For Campanula Purple the specimens are the wings of the Camberwell Beauty butterfly from a book of 1840, the petals of a peach-leaved bellflower from Jane Loudon's flower-garden book of 1849, and a piece of fluorite from Kurr's *Mineral Kingdom* of 1859 [2]. The plate's heading calls the flower the Canterbury bell, and gives its botanical name as *Campanula persicifolia* [2].\n\nThe pairing is the point of such charts: a reader could name a color by holding a real thing against it. A bellflower, a butterfly wing and a lump of purple fluorite are meant to be the same color to the eye [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "The swatch and its date",
+   "body": "The swatch is the chip from Maerz and Paul's color dictionary of 1930, plate 42, row J, column 10 [5]. That book gives 1918 as the first recorded use, which is late for the name, since Eichhorn's flower comparison was in print in 1827 [5][4]. The 1918 date records what Maerz and Paul found in use, not when the word began [5].\n\nThe nearest named color in our data is [[purple]], at a distance of 5.3 on the CIEDE2000 scale [5]. The argument between Paterson and Baty is about which side of that line the flower falls on [3][1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is a rare painted color. In our archive of 23,781 paintings, only 2 contain a color within six units of the swatch that covers at least five per cent of the canvas [6]. One is [[painter:john-singer-sargent|Sargent]]'s *[[painting:commons-Q131754092|Bedouins]]* of 1905, at about 11 per cent of the picture [6]. The other is a portrait by Gervase Spencer of 1760, at about 6 per cent [6].\n\nTwo hits is too few to say anything about a century or a painter. As always these are photographs of varnished paintings, so the match is a screen color, not a pigment test [6]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the bellflower genus Campanula",
+   "first_recorded": "flower comparison in print by 1827; Maerz & Paul give 1918 as a color name",
+   "source": "Baty, Nature's Palette; Paterson, A Dictionary of Colour"
+  },
+  "aka": [
+   "Campanula Purple",
+   "Canterbury bell"
+  ],
+  "siblings": [
+   "pansy-purple",
+   "bluish-purple",
+   "violet-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#634495",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 2,
+  "top_paintings": [
+   "commons-Q131754092",
+   "aic-20820"
+  ],
+  "measured": {
+   "lch": [
+    36,
+    51,
+    308
+   ],
+   "nearest": [
+    [
+     "Purple",
+     5.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, chart of blues and purples, pp. 34 and 104",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, plate for Campanula Purple, pp. 109-110",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"campanula\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, on Eichhorn's 1827 skin-color list, pp. 220-221",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub library: Maerz & Paul 1930, plate 42 J 10, first recorded 1918; nearest name by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 paintings, color within dE 6 covering at least 5% of the canvas; as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Paterson's dictionary describe campanula?",
+   "choices": [
+    "A violetish blue",
+    "A reddish purple",
+    "A greyish lilac",
+    "A bright magenta"
+   ],
+   "answer": "A violetish blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Campanula was first used as a color word in 1918.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Campanula is the color of a bellflower, and the books cannot agree whether that is a blue or a purple.",
+  "Only 2 of 23,781 paintings in our archive hold this violet-blue over a twentieth of the canvas."
+ ],
+ "words": 458,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed invented claim that a bellflower leans blue in shadow and red in sun."
+  ]
+ }
+}

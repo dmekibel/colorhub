@@ -10,6 +10,7 @@
 //   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
 //   #/poem/<id>  #/passage/<id>  #/film/<id>   (js/poems.js, js/passages.js, js/films.js)
 //   #/practice  #/practice/<method>   build your own deck and study it (js/practice.js)
+//   #/pair/<a>+<b>  #/set/<a>-<b>-<c>…   a page for any pair or set of colors (js/setpage.js; canonical order dark to light)
 //   #/learnit/<color>   the honeycomb home's instant mini-lesson (js/home.js, js/learnit.js). #/today itself
 //   already opens the honeycomb home: go("learn") does (js/core.js), and "today" is routed through go() below.
 // How it works: show() (core.js) calls routeCommit(tab). A tab home replaces the current history entry with
@@ -98,7 +99,8 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["tasteIntro", k => k === "palette" ? routed("Find your palette", "taste/palette") : routed("Find your color", "taste/color")],
   ["glPage", (i, d, fromHex, tol) => routed(d && d.t || "Painting", "gallery/" + i + (fromHex ? "?c=" + String(fromHex).replace("#", "").toLowerCase() + (tol != null ? "&t=" + tol : "") : ""))],
   ["paintingsOfPage", (hexes, o) => { const h = typeof ptHexList === "function" ? ptHexList(hexes) : []; return h.length ? routed("Color in paintings", ptPath(h, { ...PT_PREF, mode: "all", sort: "cover", source: "paintings", ...(o || {}) })) : null; }],   // js/paintingsof.js (L26)
-  ["chordsPage", () => routed("Masters' chords", "chords")],   // js/chords.js (L26)
+  ["chordsPage", () => routed("Masters' chords", "chords")],
+  ["spPage", hexes => { const h = typeof spCanon === "function" ? spCanon(hexes) : []; return h.length >= 2 ? routed(spTitle(h), spPath(h)) : null; }],   // js/setpage.js: a pair or a set   // js/chords.js (L26)
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
   ["passagePage", p => p && p.id ? routed(p.title, "passage/" + p.id) : null],
   ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
@@ -118,16 +120,17 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["gamutWheel", () => routed("Gamut wheel", "studio/wheel")],   // js/studio.js
   ["openSavedPalette", id => routed("Your palette", "studio/palette/" + id)],   // js/studio.js
   ["prHome", () => routed("Practice", "practice")], ["prPlay", m => PR_METHODS[m] ? routed(PR_METHODS[m].t, "practice/" + m) : null],   // js/practice.js
+  ["r2DrillsPage", () => routed("Drills", "train/drills")], ["r2EyePage", () => routed("Your eye", "train/eye")],   // js/rooms2.js: Train's two rows
   ["ooMap", () => routed("Odd one out", "odd")], ["ooEyePage", () => routed("Your eye", "odd/eye")],   // js/games/oo-ui.js
   ["hgMap", () => routed("Gradients", "hue")], ["hgDaily", () => routed("Today's gradient", "hue/daily")],   // js/games/hue-ui.js
   ["ooWhose", () => routed("Whose palette?", "odd/whose")], ["ooAcross", () => routed("Across the line", "line")], ["ooPairs", () => routed("Painters' pairs", "odd/pairs")],
   ["pmOpen", spec => typeof pmRouteOf === "function" ? pmRouteOf(spec) : null],   // js/paintmap.js: #/paintings/map?arr=…&co=…
-  ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null]];   // js/article.js: #/hub/<id>, #/which/<name>
+  ["arHubPage", id => id ? routed(arPretty(id), "hub/" + id) : null], ["arWhichPage", name => name ? routed(arPretty(name), "which/" + name) : null],
+  ["arReadPage", (slug, ch) => slug ? routed(AR_READING.has(slug) ? AR_READING.get(slug).art.name : arPretty(slug), "read/" + slug + (ch ? "/" + ch : "")) : null]];   // js/article.js: the book, #/read/<slug>[/<chapter>]   // js/article.js: #/hub/<id>, #/which/<name>
 // Scripts loaded after router.js (artwiki.js, article.js, looks.js, fashion.js...) aren't defined yet when this runs, so boot.js
 // calls routeWrapAll() again before the first address opens (without it a typed #/painter/<slug> lost its address).
 function routeWrapAll() { ROUTED.forEach(([name, f]) => routeWrap(window, name, f)); }
 routeWrapAll();
-routeWrap(LAB, "harmony", () => routed("Harmony", "lab/harmony"));
 routeWrap(LAB, "contrast", () => routed("Albers", "lab/contrast"));
 routeWrap(LAB, "namer", () => routed("Name any color", "studio/namer"));   // js/namer.js
 
@@ -207,6 +210,8 @@ function openRoute(hash, initial = false) {
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (kind === "map" && id && more != null && typeof hmMapRoute === "function") { base(); XSTACK = []; hmMapRoute(id, more); return true; }   // js/home.js: #/map/gallery/<i>, #/map/painting/<slug>
+  if (kind === "train" && id === "drills" && typeof r2DrillsPage === "function") { base(); XSTACK = []; r2DrillsPage(); return true; }   // js/rooms2.js
+  if (kind === "train" && id === "eye" && typeof r2EyePage === "function") { base(); XSTACK = []; r2EyePage(); return true; }
   if (tabs[kind]) {
     if (kind === "explore" || kind === "museum") S.lens = LENS_LEGACY[id] || Object.keys(LENS_ROUTE).find(k => LENS_ROUTE[k] === id) || "all";
     go(tabs[kind]);
@@ -260,6 +265,7 @@ function openRoute(hash, initial = false) {
   if (kind === "photo" && id && typeof photoPage === "function") { base(); XSTACK = []; photoPage(id); return true; }
   if (kind === "hub" && id && typeof arHubPage === "function") { base(); XSTACK = []; arHubPage(id); return true; }   // js/article.js
   if (kind === "which" && id && typeof arWhichPage === "function") { base(); XSTACK = []; arWhichPage(id); return true; }
+  if (kind === "read" && id && typeof arReadPage === "function") { base(); XSTACK = []; arReadPage(id, more || null); return true; }   // js/article.js: a story, opened as a book
   if (kind === "gallery" && /^\d+$/.test(id || "") && typeof galleryPage === "function") {
     // #/gallery/<n>?c=<hex>&t=<tol>: the color that brought you, and how close it had to be (stripped into tappedHex/tappedTol above)
     const fromHex = tappedHex || null;
@@ -271,9 +277,9 @@ function openRoute(hash, initial = false) {
   }
   if (kind === "paintings" && /^map\b/.test(id || "")) { base(); XSTACK = []; pmGo(hash.includes("?") ? hash.slice(hash.indexOf("?") + 1) : "", true); return true; }   // the painting map (js/paintmap.js)
   if (kind === "chords" && typeof chordsPage === "function") { base(); XSTACK = []; chordsPage(); return true; }   // js/chords.js (L26)
-  if (kind === "pair" && id && typeof paintingsOfPage === "function") {   // #/pair/<a>+<b>: the pair at the standard definition
-    const hs = ptHexList(id);
-    if (hs.length === 2) { base(); XSTACK = []; paintingsOfPage(hs, { tol: CI_STD.tol, minCover: CI_STD.minCover, maxCover: null, mode: "all", sort: "cover", source: "paintings", push: true }); return true; }
+  if ((kind === "pair" || kind === "set") && id && typeof spPage === "function") {   // js/setpage.js: #/pair/<a>+<b>, #/set/<a>-<b>-<c>…
+    const hs = spCanon(id);
+    if (hs.length >= 2) { base(); XSTACK = []; spPage(hs, { push: true }); return true; }
     return false;
   }
   if (kind === "paintings-of" && id && typeof paintingsOfPage === "function") {   // js/paintingsof.js (L26): #/paintings-of/<hex>[+<hex>…]?t=3&m=5

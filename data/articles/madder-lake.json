@@ -1,0 +1,381 @@
+{
+ "slug": "madder-lake",
+ "name": "Madder Lake",
+ "hex": "#CC3336",
+ "names": [
+  "Madder Lake"
+ ],
+ "tier": "pigment",
+ "depth": "epic",
+ "lede": "Madder lake is the painter's form of the madder root: its red dye fixed on a colorless base, sold in grades from deep carmine to pale rose, loved for its glow and blamed for its fading.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A lake, not a color",
+   "body": "A lake is a dye fixed onto a colorless powder so that it can be ground into paint, and madder lake is the red dye of the madder root treated that way [1][4]. Paterson stresses that *lake* names how a pigment was made and not any particular color, which is why there are red lakes, crimson lakes, green lakes and madder lakes [1]. The base the dye is fixed on is insoluble, with alum the usual example [1][2]. The plant, its dyers and its larger history belong to [[madder]]; this page is about the paint.\n\nThe swatch is the color dictionaries call Madder Lake, a strong red in the ISCC-NBS system (block 12) [24]. Its nearest named neighbors are [[red]] and Persian red, 2.6 and 0.8 units away, and the oldest source for the name in our data is Maerz and Paul's dictionary of 1930 [24]. A real madder lake was never a single color. According to the Pigment Compendium the same root yields yellow, orange, red, purple or brown, depending on how the lake was made [3]. The swatch is one point on that range, the strong red in the middle."
+  },
+  {
+   "id": "making",
+   "title": "From root to paint",
+   "body": "The raw material is the root that dyers used, from *Rubia tinctorum*, and it is slow to come [4]. Coles writes that the dye takes at least three years to develop in the plant; the roots are dug, the older ones are cut off and dried, and the plant is replanted to keep growing [4]. The dye is drawn out by fermenting or boiling the roots in an alkaline solution, then fixed onto the base [4][2].\n\nChoices at this stage decide the result. Depending on the chemicals, the temperature and how long the mixture ferments, a lake can run from pinks through reds to crimsons [4]. Extracting alizarin gives a deep, translucent crimson that is useful for glazing and skin tones, while extracting pseudopurpurin, another compound in the root, gives the delicate pink of rose madder [4][5]. Rose madder is therefore not a diluted red but a different selection from the same root [5].\n\nBall adds that resistance to fading depends on three things besides the dye: the method of preparation, the inorganic particles the dye is bound to and the medium it is mixed into [12]. A lake recipe cannot be judged from the name of the dye alone."
+  },
+  {
+   "id": "range",
+   "title": "One root, a whole range",
+   "body": "The Pigment Compendium calls madder production more an art than a science [3]. The color depends on the root, on the inorganic base and on many intermediate treatments that were often never written down, so madder lakes are hard to reproduce from recipes even under controlled conditions [3]. Schweppe, whom the Compendium cites, reports tin-madder lakes that came out orange and scarlet [3].\n\nMetal salts steer the hue. Iron sulfate yields a black-violet and the shade called madder violet, while chromium alum yields a red-brown and iron in the alum a brown [3]. Meyer wrote in 1911 that a lake made from pure alizarin on alumina is somewhat bluer than natural madder lake [3]."
+  },
+  {
+   "id": "names",
+   "title": "A shopfront of names",
+   "body": "Colormen sold the root under a ladder of names. Nineteenth-century English sources, as Carlyle summarizes them, ranked the madder reds from strongest to weakest as madder carmine, madder lake, rose madder and pink madder [2]. Field gave the top grade the name madder carmine, also called Field's carmine, and claimed that it was the only durable carmine for painting in water or oil [7].\n\nThe weaker and stranger members each had names too. Madder purple was also sold as Field's purple or purple rubiate [7][2]. Brown madder was a gently calcined madder lake [7]. Madder orange was linked to the term orange lake, and violet madder lake was a synonym for alizarin violet, made from synthetic purpurin in the same way as an alizarin lake [7]. See also [[madder-brown]] and [[madder-violet]], two of Ridgway's 1912 color names that borrow the root's name [24].\n\nTrade names show how the market worked. Smyrne lake was named for the best and costliest madder, which reached French colormen from Smyrna; Osborn remarked in 1845 that the label survived regardless of where the stock actually came from [7]. Van Dyck red was a cheaper madder lake, made from inferior roots and less brilliant [7].\n\nAdulteration and imitation were routine. Salter reported in 1869 that ground French madder carried about half its weight of gum, sugar and salts, and that it was cut with brick dust, red ochre, clay, mahogany sawdust and bran [7]. Field noted that continental makers imitated madder lakes with lac, cochineal and safflower, and a \"carmine madder\" sent to Mérimée from Berlin owed its brightness to cochineal [7]. Cochineal is the insect dye behind [[carmine]], which makes a madder lake brightened with it an imitation [7]."
+  },
+  {
+   "id": "early",
+   "title": "Before the paintbox",
+   "body": "The dye is ancient, and the pigment is harder to date. Analysts have found madder, in its wild form (*Rubia peregrina*), as the basis of a purple pigment on a Greek marble basin from the 300s BC [6]. They have also found it on a marriage certificate of 972 AD and in Tibetan *thang-ka* paintings of the fifteenth to the nineteenth century [6]. Garfield reports that in 1809 the French chemist Chaptal found a pink pigment in a shop excavated at Pompeii, possibly a madder lake [14]. In 1815 Humphry Davy found a similar color, probably of similar origin, on a broken vase at the Baths of Titus [14].\n\nHeraclius gave a recipe for madder lake in the tenth century, and Ball infers from his text that the Romans knew the art [8][9]. Ball doubts, though, that panel painters used it much before the later centuries [9]. The fifteenth-century evidence is early all the same: madder is in Dieric Bouts's *Virgin and Child with Saints Peter and Paul* of about 1460, and the madder fields of Zeeland made it more common [9]. The Pigment Compendium lists analyses of a Leonardo, a sixteenth-century Swiss painter named Manuel and Vermeer's work of about 1655 [6].\n\nBooks disagree about when the lake became a painter's staple. Ball thinks good madder-lake pigments were unlikely before the seventeenth century [11]. Coles dates the lake four centuries after madder was first grown across Europe in the thirteenth century, and she opens her entry with the claim that Crusaders brought the pigment to Italy [4]. That claim does not fit the recipe of Heraclius in the tenth century or the marriage certificate of 972, both older than the first Crusade [9][6]. On this evidence the Crusaders at most widened a trade that already existed [9][6].\n\nMedieval painters distrusted lakes in general. Cennino Cennini warned that a lake made from cloth shearings loses its color quickly, and Ball reads that as the insect-based kermes lake, which was less stable than madder [8][12]."
+  },
+  {
+   "id": "field-person",
+   "title": "George Field and the painter's lake",
+   "body": "The English colorman George Field turned madder lake into a studio standard [10]. By Ball's account he began his business by making madder lake in London and in 1808 expanded into a color-making factory near Bristol [10]. He tried to grow madder in England, where the Society for the Encouragement of the Arts had offered a premium for it in 1755 to cut the reliance on Dutch imports [10]. He designed a press for extracting the dye and improved the lakes, including brown, pink and purple varieties and the rich madder carmine [10]. [[painter:john-constable|Constable]] and Thomas Lawrence bought their colors from him, and his *Chromatography* of 1835 guided a generation of painters [10]. In Field's scheme, red madder stood for the red primary, with lemon yellow and ultramarine for the other two [10].\n\nFrance had its own champion. Gage writes that the one color for which Mérimée gained a reputation was a brilliant madder lake called *carmin de garance*, well known in France in the 1820s [17]. Ball puts it more briefly: Mérimée's search for new pigments led him to a new form of madder lake that became popular there [10].\n\nThe lake reached the great landscapes. Ball says Field contributed to Turner's blazing canvases, and in 1993 the conservator Townsend identified madder lakes in [[painter:joseph-mallord-william-turner|Turner]]'s palettes [10][6]. Gurney reports that a newly formulated madder lake helped inspire the sunset of Frederic Church's *Twilight in the Wilderness* [19]. Millais's *Ophelia* of 1851-2 is filled with new materials, among them the richest grade of madder lake [10]."
+  },
+  {
+   "id": "art",
+   "title": "On the palette",
+   "body": "Madder lake worked in print as well as in paint. When the printer Le Blon tried full-color engraving with three plates in the early eighteenth century, red was the hardest primary, and he mixed it from madder lake, carmine and a little cinnabar [13][15]. Even then he had to add a black plate and hand-finishing, because no pure primary inks existed [15].\n\nWhere a painter set the lake on the palette says how it was seen. A French handbook of the 1870s, committed to tonal painting, laid the palette out in a line from madder lake to ivory black, with the yellows in between [16]. Matisse's palette of 1937 held seventeen colors in an order Gage calls apparently arbitrary, running from peach-black to madder lake, with several cadmiums, two cobalt violets, ultramarine and viridian along the way [18]. In both cases madder lake sits at an end of the row: the deep, transparent red that the other pigments are measured against.\n\nOur own data agrees with that role. Inside a painting, the madder-lake red most often plays an accent, the case in 95 per cent of the 73 paintings where the graph finds it, ranked by lightness within each picture [25]."
+  },
+  {
+   "id": "fading",
+   "title": "Fading, and the factory replacement",
+   "body": "Madder lakes were permanent by the standards of their rivals and fugitive by the standards of a painter. The Pre-Raphaelite William Holman Hunt wrote to the supplier Roberson in 1875 to say that a new madder lake did not meet the needs of delicate work and should be rejected, praising the original madders by comparison [12]. Finlay tells a related story about Van Gogh's *[[painting:nga-72328|Roses]]*, long titled *White Roses*, where conservators found traces of what was probably a madder red and concluded that the flowers had been pink [22].\n\nChemists offered a way out. By Ball's account, alizarin lake was already acknowledged to be more permanent than natural madder lake [11]. In 1907 the makers of synthetic colors for artists agreed to test their products for several years before selling them, an agreement that, according to Doerner, one manufacturer soon broke [11]. Perkin addressed the Society of Arts in London on 8 May 1879 about replacing the ancient madder with a factory dye [14]. Books disagree on the date of the key synthesis: Paterson says madder growing all but stopped once alizarin was made synthetically, which he dates to 1863, while Coles dates Graebe and Liebermann's synthesis to 1869 [21][4].\n\nNot every substitute was an alizarin. Potter's pink, a roasted tin oxide, chalk and chromium oxide pigment, was used in watercolor as a lightfast alternative to the madder lakes, where fading was still a problem [20]. The result is that the madder lake sold today is almost always a laboratory molecule on a modern base, which is why the old lakes in museum paintings are the ones worth looking for."
+  },
+  {
+   "id": "myths",
+   "title": "Loose ends",
+   "body": "The names overlap and the books do not agree. Paterson says madder lake is also called rose madder or alizarin, but the Pigment Compendium separates the lakes by which compound was extracted, with rose madder made from pseudopurpurin and alizarin a different selection [1][5]. Treat *rose madder* and *alizarin crimson* as neighbors in the madder family, not synonyms.\n\nThe Crusader story is a half-truth, as the early history above shows [4][9]. The word *lake* itself is unrelated to water: it is the trade term for a dye fixed on a base, and Paterson is explicit that it describes the pigment's origin and not its color [1]. Both points are easy to lose when a tube of paint simply says madder."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, a screen color within six units of Madder Lake covers at least five per cent of the canvas in only 52 works [23]. Where it does, it is rarely European: 14 of the 52 are Indian, almost nine times the archive's rate, and Kalighat and Rajput painting each account for four [23]. The painting where it covers the most canvas is an Indian *Krishna Fluting* of about 1675, with the color over 61 per cent of the surface [23]. The earliest dated match is Taddeo Gaddi's *Madonna and Child Enthroned with Angels and Saints* of 1355, at nine per cent [23].\n\nThe graph's other lens counts a color anywhere in a painting and finds it in 64 paintings [25]. Its peak is the 1400s, when it appears in 1.1 per cent of the 945 paintings we hold, about two and a half times the rate expected from the same museums [25]. Its first appearance, in a work of 1320, comes 610 years before the name's earliest record in our sources [25].\n\nTwo caveats come with every number. These are photographs of aged, varnished paintings, and a color match is not a pigment test: an Indian red ground of this hue may be lac, red lead or vermilion rather than madder [23]. The match shows where the red *is*, not what it is made of."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the madder root (Rubia tinctorum), made into a lake pigment",
+   "first_recorded": "a tenth-century recipe (Heraclius); the color name in Maerz and Paul, 1930",
+   "source": "Ball, Bright Earth, ch. 12; Maerz and Paul via library data"
+  },
+  "aka": [
+   "rose madder (the pink grade)",
+   "madder carmine",
+   "Field's carmine",
+   "carmin de garance",
+   "Krapplak (German)"
+  ],
+  "siblings": [
+   "alizarine-pink",
+   "carmine",
+   "crimson"
+  ],
+  "parent": "madder",
+  "children": [
+   "madder-brown",
+   "madder-violet"
+  ],
+  "disambiguation": [
+   {
+    "slug": "madder-violet",
+    "gloss": "Ridgway 1912 name for a greyed color, not the violet madder lake of the paintbox"
+   },
+   {
+    "slug": "alizarine-pink",
+    "gloss": "a pink named for the synthetic molecule, not for the root lake"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "de",
+    "name": "Krapplak"
+   },
+   {
+    "lang": "fr",
+    "name": "laque de garance"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "match": {
+   "hex": "#CC3336",
+   "de2000": 6,
+   "min_cover": 0.05
+  },
+  "n_present": 52,
+  "top_country": {
+   "name": "India",
+   "hits": 14,
+   "lift": 8.9
+  },
+  "top_movement": {
+   "name": "Rajput and Kalighat",
+   "hits": 4
+  },
+  "first_dated": {
+   "id": "commons-Q3842751",
+   "painter": "Taddeo Gaddi",
+   "year": 1355
+  },
+  "top_paintings": [
+   "cma-314462",
+   "cma-314438",
+   "cma-314481"
+  ],
+  "role": {
+   "accent_pct": 95,
+   "n": 73
+  },
+  "measured": {
+   "lch": [
+    46.3,
+    69.0,
+    31
+   ],
+   "contrast_white": 5.13,
+   "nearest": [
+    [
+     "Red",
+     2.6
+    ],
+    [
+     "Persian Red",
+     0.8
+    ]
+   ]
+  }
+ },
+ "questions": [
+  {
+   "q": "Rose madder is a pale pink while madder carmine is deep. What separates them?",
+   "choices": [
+    "Different compounds were extracted from the same root",
+    "Rose madder is mixed with white lead",
+    "Rose madder comes from a different plant entirely",
+    "Rose madder is dyed with cochineal"
+   ],
+   "answer": "Different compounds were extracted from the same root",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the word lake in madder lake describes the color of the paint.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why can two madder lakes with the same dye differ in color and in fading?",
+   "choices": [
+    "The base, the metal salts and the way they were made differ",
+    "One is always from the root and the other from an insect",
+    "They are painted on different canvases",
+    "The dye changes every year the plant grows"
+   ],
+   "answer": "The base, the metal salts and the way they were made differ",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A lake is not a color: it is a dye fixed on a powder, and madder lake came in at least four grades from carmine to pink.",
+  "Henri Matisse laid out his 1937 palette in a line that ended on madder lake.",
+  "In our archive the madder-lake red is most often the accent, not the main color, of a painting."
+ ],
+ "words": 2167,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "All 8 spot-checked claims traced to cards/books; Crusader and 1863/1869 disagreements already hedged; no edits needed"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"lake colours\" and \"madder lake\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 258 (\"madder lake\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 257 (\"madder\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 121 (\"Madder Lake\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 338 (\"rose madder\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, p. 258 (\"madder\", analytical identifications)",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "book",
+   "cite": "Eastaugh et al., Pigment Compendium, entries \"madder carmine\", \"madder purple\", \"brown madder\", \"madder orange\", \"violet madder lake\", \"Smyrne lake\", \"Van Dyck red\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 11",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 12",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 17",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 19",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 13,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 20",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 14,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 17 (\"Madder\")",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 15,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 173",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 16,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 191",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 17,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 192",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 18,
+   "kind": "book",
+   "cite": "Gage, Colour and Culture, p. 219",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 19,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 20",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 20,
+   "kind": "book",
+   "cite": "Coles, Chromatopia, p. 147 (\"potter's pink\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 21,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"madder\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 22,
+   "kind": "book",
+   "cite": "Finlay, Colour, introduction",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 23,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 24,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json, data/graph/nodes-m.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 25,
+   "kind": "data",
+   "cite": "ColorHub graph fieldnotes (data/graph/fieldnotes/m.json), within-painting lens, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ]
+}

@@ -12,7 +12,7 @@
   {
    "id": "swatch",
    "title": "A yellowy grey",
-   "body": "Paterson defines *sand* as a light yellowy-grey, and his color index files it with the greys, not the yellows [1][2]. The swatch here, #C2B280, agrees: the ISCC-NBS system of 1955 calls the block it sits in grayish yellow, and the swatch lands within a unit of that block's center [3]. Our sources first record the name in Maerz and Paul's dictionary of 1930 [3]. Shakespeare already used it as an adjective: Paterson cites a line in *A Midsummer Night's Dream* about hounds that are \"sanded\", meaning the color of sand [1].\n\nThat ISCC-NBS block also holds names with longer histories, among them Flaxen, first recorded in 1602 according to Maerz and Paul, and Chamois, in 1766, as well as Pebble and Sheepskin [3]. Sand is a recent label for an old family of pale buff-greys."
+   "body": "Paterson defines *sand* as a light yellowy-grey, and his color index files it with the greys, not the yellows [1][2]. The swatch here, #C2B280, agrees: the ISCC-NBS system of 1955 calls the block it sits in grayish yellow, and the swatch lands within a unit of that block's center [3]. Our sources first record the name in Maerz and Paul's dictionary of 1930 [3]. Shakespeare already used it as an adjective: Paterson cites a line in *A Midsummer Night's Dream* about hounds that are \"sanded\", meaning the color of sand [1].\n\nThat ISCC-NBS block also holds names with longer histories, among them Flaxen, first recorded in 1602 according to Maerz and Paul, and Chamois, in 1766, as well as Pebble and Sheepskin [3]. Our sources record Sand later than these neighbors, though the family of pale buff-greys is old [3]."
   },
   {
    "id": "beach",
@@ -260,16 +260,13 @@
   "Matisse scooped up the sand that looked red and found it was grey.",
   "Beige was once renamed sand to avoid looking dated."
  ],
- "words": 716,
+ "words": 720,
  "status": "checked",
  "checked": {
-  "by": "article writer, sentence-to-card trace",
+  "by": "checker",
   "date": "2026-10-08",
   "issues": [
-   "Origin of the English word is undocumented in the books; not stated.",
-   "Gage's after-image reading of Matisse is Gage's, hedged.",
-   "Archive counts blend support color (paper, grounds) with painted sand; stated.",
-   "Ngram not used: 'sand' is mostly a noun."
+   "Softened 'recent label' to what the sources record."
   ]
  }
 }

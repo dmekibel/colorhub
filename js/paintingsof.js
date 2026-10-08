@@ -182,7 +182,7 @@ function paintingsOfSection(hex, host, o = {}) {
       return;
     }
     const pair = e.target.closest("[data-pt-pair]");
-    if (pair) return paintingsOfPage([hex, pair.dataset.ptPair], { tol: CI_STD.tol, minCover: CI_STD.minCover, maxCover: null, mode: "all", names: [name, pair.dataset.ptPname] });
+    if (pair) return typeof spPage === "function" ? spPage([hex, pair.dataset.ptPair]) : paintingsOfPage([hex, pair.dataset.ptPair], { tol: CI_STD.tol, minCover: CI_STD.minCover, maxCover: null, mode: "all", names: [name, pair.dataset.ptPname] });
     if (e.target.closest("[data-pt-chords]") && typeof chordsPage === "function") return chordsPage();
     if (e.target.closest("[data-pt-retry]")) return refresh();
   };
@@ -214,9 +214,8 @@ function ptParse(spec) {
   st.source = ["paintings", "design", "both"].includes(q.get("src")) ? q.get("src") : "paintings";
   return { hexes: ptHexList(h), st };
 }
-// the address: a plain pair at the standard definition is #/pair/<a>+<b> (the chords page's numbers); anything else is #/paintings-of/...
-const ptIsPair = (hexes, st) => hexes.length === 2 && st.tol === CI_STD.tol && st.minCover === CI_STD.minCover && !st.maxCover && st.mode === "all" && st.sort === "cover" && st.source === "paintings";
-const ptPath = (hexes, st) => ptIsPair(hexes, st) ? "pair/" + hexes.map(h => h.replace("#", "").toLowerCase()).join("+") : "paintings-of/" + ptSpec(hexes, st);
+// (#/pair/ itself is now the pair page, js/setpage.js; this screen keeps the paintings-of/ address even for a plain pair)
+const ptPath = (hexes, st) => "paintings-of/" + ptSpec(hexes, st);
 function ptSyncURL(hexes, st) {
   const path = ptPath(hexes, st), url = "#/" + path;
   try { if (location.hash !== url) { history.replaceState(history.state, "", url); ROUTE_NOW = url; } } catch (e) {}
@@ -408,7 +407,7 @@ function ptArrival(el, o) {
       <div class="pt-ar-tools"><div class="pt-seg pt-ar-tol">${[0, 3, 10].map(t => `<button data-t="${t}" class="${st.tol === t ? "on" : ""}">${t ? t + "%" : "Exact"}</button>`).join("")}</div>
       ${readable && res && !res.coarse ? `<button class="pt-ar-map${on ? " on" : ""}" data-map aria-pressed="${on}">${PT_ICON_MAP}<span>${on ? "Hide map" : "Where it lives"}</span></button>` : ""}
       <button class="pt-ar-all" data-all>All paintings like this</button></div>
-      ${on && mask ? `<div class="pt-ar-reg"><button data-prev aria-label="Previous place">‹</button><span>${mask.regions.length ? (sel < 0 ? `${mask.regions.length} ${mask.regions.length === 1 ? "place" : "places"}, tap one` : `Place ${sel + 1} of ${mask.regions.length} · ${ptPct(mask.regions[sel].share * 100)} of the canvas`) : "No place is large enough to map"}</span><button data-next aria-label="Next place">›</button></div>` : ""}
+      ${on && mask ? `<div class="pt-ar-reg"><button data-prev aria-label="Previous place">${ICON.back}</button><span>${mask.regions.length ? (sel < 0 ? `${mask.regions.length} ${mask.regions.length === 1 ? "place" : "places"}, tap one` : `Place ${sel + 1} of ${mask.regions.length} · ${ptPct(mask.regions[sel].share * 100)} of the canvas`) : "No place is large enough to map"}</span><button data-next aria-label="Next place">${ICON.chev}</button></div>` : ""}
       ${known && !readable && res && res.cover > 0 && !res.coarse ? `<small class="pt-ar-why">${o.why ? esc(o.why) : ""}</small>` : ""}
     </div>`;
   };
