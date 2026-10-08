@@ -1587,9 +1587,13 @@ function prInstantDeck(o = {}) {
 }
 // The quick sheet. Smart defaults are already chosen, so one tap on Start begins; chips change them; it remembers.
 function prQuick(o = {}) {
-  // every "Learn" with a color or a set opens the Learn sheet (js/learnset.js): Look and Study, always both
-  if (typeof lsQuick === "function" && !o.legacy && !o.sheet && o.seed && !(o.items && o.items.length)) return lsQuick(o);   // Learn it starts now (js/learnset.js)
-  if (typeof lsOpen === "function" && !o.legacy && ((o.items && o.items.length) || o.seed)) return lsOpen(o);
+  // every "Learn"/"Study" with a color or a set opens the Learn sheet (js/learnset.js): Look and Study, always both,
+  // the settings visible before Study begins. A single seeded color (no items) gets the old quick mode's shape as
+  // its starting size (the color + 3 nearest) so it's still one tap away; LS_QUICK_N lives in js/learnset.js.
+  if (typeof lsOpen === "function" && !o.legacy && ((o.items && o.items.length) || o.seed)) {
+    const seedOnly = o.seed && !(o.items && o.items.length);
+    return lsOpen(seedOnly && o.size == null && typeof LS_QUICK_N !== "undefined" ? { ...o, size: LS_QUICK_N } : o);
+  }
   if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return void loadCoreNames().then(() => prQuick(o));
   const p = prState(), last = p.quick || {};
   const backTo = o.back || (typeof ROUTE_NOW !== "undefined" ? ROUTE_NOW : "");

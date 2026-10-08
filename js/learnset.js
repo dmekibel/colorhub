@@ -1,9 +1,10 @@
 "use strict";
 // Learn a set (design/LEARN-SET.md): the one sheet every "Learn" opens (prQuick hands over to lsOpen), with two
 // phases always there: Look (nothing hidden, six views) and Study (the mixed, adaptive session, like Quizlet Learn).
-//   lsOpen({ seed, items, label, back })   the sheet: live preview, a size slider and a closeness slider
+//   lsOpen({ seed, items, label, back })   the sheet: live preview, a size slider and a closeness slider (every
+//     "Learn it" / "Study" from one color opens here first, seeded with it + its 3 nearest, so the settings are
+//     always visible; LS_QUICK_N/LS_QUICK_GAP below are just that seeding default, one more tap from Start)
 //   lsLook(items, { label, view, back })    the Look screen
-//   lsQuick({ seed, back })                 Learn it: the color + 3 neighbors straight into a quick Study
 //   lsStudy(items, { label, back, src, route }, resume)   the mixed session, then its results (lsKeep: cards + the set)
 // Builds on js/practice.js (the PR_STEPS step contract, prRecord for the Learner Model and honest scheduling).
 
@@ -111,21 +112,12 @@ function lsSrcOf(o, from, route) {
 }
 
 // ======================================================================
-// Learn it, straight away (Lane E): the color plus its 3 closest Learn-layer neighbors (ΔE00 ≥ 4 apart), into Study
-// at once in quick mode (js/studypace.js: Meet only the ones you can't name yet, a few questions, no final round, no
-// typing). A quiet "Adjust" link opens the full sheet; the end is "4 climbed · back tomorrow", the colors fly to the
-// map, then you land back on the page you came from. Calls with items still open the sheet (prQuick).
+// Learn it, straight away (Lane E): one tap on a single color opens the sheet below, seeded with it plus its 3
+// closest Learn-layer neighbors (ΔE00 ≥ 4 apart) and today's settings already filled in (David, 2026-10-09: tapping
+// "Learn it"/"Study" from a color used to start Study immediately; now it opens the settings first, one more tap
+// from Start). LS_QUICK_N/LS_QUICK_GAP are just that seeded default's shape.
 // ======================================================================
 const LS_QUICK_N = 4, LS_QUICK_GAP = 4;
-function lsQuick(o = {}) {
-  if (typeof CORE_NAMES !== "undefined" && !CORE_NAMES && typeof loadCoreNames === "function") return void loadCoreNames().then(() => lsQuick(o));
-  const seed = prSeed(o.seed);
-  if (!seed) return lsOpen(o);
-  const items = lsAlike(seed, LS_QUICK_N, LS_QUICK_GAP);
-  const backTo = o.back || (typeof ROUTE_NOW !== "undefined" ? ROUTE_NOW : "");
-  const sheetOpts = { ...o, back: backTo };
-  lsStudy(items, { label: `${prName(seed)} and its look-alikes`, back: lsExitTo(backTo), route: typeof backTo === "string" ? backTo : "", src: "alike", quick: true, adjust: () => { lsExitTo(backTo)(); setTimeout(() => lsOpen(sheetOpts), 60); } });   // the sheet opens over the page you came from
-}
 
 // ======================================================================
 // The sheet
@@ -135,7 +127,9 @@ function lsOpen(o = {}) {
   const ls = lsState(), backTo = o.back || (typeof ROUTE_NOW !== "undefined" ? ROUTE_NOW : "");
   const seed = prSeed(o.seed), app = seed && seed.c && seed.c.unit ? seed.c : null;
   const these = prUnique((o.items || []).map(x => typeof x === "string" ? prItemOf(x) : prSeed(x)).filter(Boolean));
-  const st = { from: these.length && !(seed && o.source === "alike") ? "these" : seed ? "alike" : "these", size: ls.size || 10, close: ls.close != null ? ls.close : 1 };
+  // o.size: a one-time seed default (Learn it hands in LS_QUICK_N, the color + 3 nearest) so the first sheet from a
+  // single color matches the old quick mode; once you touch the slider it's remembered (ls.size) like any other sheet
+  const st = { from: these.length && !(seed && o.source === "alike") ? "these" : seed ? "alike" : "these", size: o.size != null ? o.size : (ls.size || 10), close: ls.close != null ? ls.close : 1 };
   if (!seed && !these.length) return toast("Nothing here to learn yet");
   // pinned (a pair, a set, a palette): these colors are the set; look-alikes are offered beside each (lsNeighbors)
   const pinned = !!o.pin && these.length >= 1, auto = pinned ? lsNeighbors(these) : null;
@@ -412,7 +406,7 @@ function lsStudy(items, o = {}, resume = null) {
   if (o.shot === "ask" || o.shot === "wrong") { lvOf.forEach(q => { q.met = true; }); P.fresh = [...P.newQ, ...P.fresh]; P.newQ.length = 0; }
   const el = show(`<header class="pr-top"><button class="pr-x" data-close aria-label="Close">${prX()}</button>
       <div class="ls-prog">${items.map(it => `<i data-k="${esc(it.key)}" style="--c:${it.h}"></i>`).join("")}</div>
-      <span class="ls-combo" data-combo aria-live="polite"><b>0</b><span>in a row</span></span>${o.adjust ? `<button class="pr-text ls-adjust" data-adjust>Adjust</button>` : ""}</header>
+      <span class="ls-combo" data-combo aria-live="polite"><b>0</b><span>in a row</span></span></header>
     <p class="ls-status"><span data-status></span><span class="ls-pop" data-pop></span></p>
     <p class="pr-coach"${prState().seen.learnset ? " hidden" : ""}>Meet each color first. Then ${o.quick ? "a few quick questions on each" : "each one climbs from picking to typing"}.</p>
     <div class="pr-stage"></div><div class="ls-grad" data-grad></div>`, "fixed pr-play pr-booth pr-m-learn ls-study");
@@ -451,22 +445,61 @@ function lsStudy(items, o = {}, resume = null) {
   el._lsFx = { bump, graduate };   // screenshot hook
   const ctx = extra => ({ deck: items, feedback: true, setKey, screen: el, ...extra });
   el.querySelector("[data-close]").onclick = () => { sess.ended = true; if (sess.first.size) lsResults(sess, { items, o, stopped: true, bestCombo, climbed, lvOf }); else (o.back || lsExitTo(""))(); };
-  { const adj = el.querySelector("[data-adjust]"); if (adj) adj.onclick = () => { sess.ended = true; el.remove(); o.adjust(); }; }
   const coachDone = () => { const c = el.querySelector(".pr-coach"); if (c && !c.hidden) { c.hidden = true; const p = prState(); p.seen.learnset = today(); save(); } };
   // the nearest other color in the set (for a Meet card's one line)
   // a pinned set: each color sits with its group (the pinned color and its look-alikes), so Meet and the questions pair them
   const itemOf = new Map(items.map(it => [it.key, it])), mates = new Map(), pinKeys = new Set((o.pin || []).map(x => x.key));
   (o.groups || []).forEach(g => g.forEach(k => { if (!mates.has(k)) mates.set(k, g.filter(m => m !== k && itemOf.has(m)).map(m => itemOf.get(m))); }));
   const nearestIn = it => { let b = null, bd = Infinity; (mates.get(it.key) && mates.get(it.key).length ? mates.get(it.key) : items).forEach(x => { if (x !== it) { const d = de2000(it.h, x.h); if (d < bd) { bd = d; b = x; } } }); return b; };
-  // a Meet / pair card: waits for Next (button, Enter, Space, →), one beat so a fast double tap can't skip it unseen
-  const card = html => new Promise(resolve => {
-    stage.innerHTML = html;
-    const b = stage.querySelector("[data-meetnext]");
-    let gone = false, live = false;
-    const go = () => { if (gone) return; gone = true; buzz(6); resolve(); };
-    // the button takes taps after a beat: the second tap of a quick double tap is dropped, not spent on this card
-    later(() => { if (!b.isConnected) return; live = true; prNextBtn(b.parentElement, go, b.querySelector("span").textContent).setAttribute("data-meetnext", ""); }, 280);
-    setKey(e => { if (live && ["Enter", " ", "ArrowRight"].includes(e.key)) { e.preventDefault(); go(); } });
+  // The Meet/pair run as an Instagram-story pager (David, 2026-10-09): a wave of meet cards, then the closest-two
+  // pair, all gathered up front (spNext is pure bookkeeping for these — no answer blocks it) and paged with thin
+  // segments on top. Tap the right ~2/3 (or swipe left) to go on, the left ~1/3 (or swipe right) to go back; the
+  // card's own controls (the name button, the Next/Start button) still work exactly where they're drawn. The same
+  // beat-before-live guard as before stops a fast double tap from skipping a card unseen.
+  const lsCardHTML = (a, isLast) => a.t === "pair" ? lsPairHTML(a.a.it, a.b.it, a.why)
+    : lsMeetHTML(a.q.it, a.t === "relook" && a.q.pick && a.q.pick.h !== a.q.it.h ? a.q.pick : nearestIn(a.q.it),
+        { again: a.t === "relook", tag: pinKeys.size ? (pinKeys.has(a.q.it.key) ? "In your set" : "Look-alike") : "", label: a.t === "relook" ? "Got it" : isLast ? "Start" : "Next" });
+  const runStory = run => new Promise(resolve => {
+    const total = run.length, shown = new Set();
+    let i = 0, live = false, down = null;
+    const finish = () => { stage.onpointerdown = stage.onpointerup = null; buzz(6); resolve(); };
+    const renderAt = idx => {
+      i = idx; live = false;
+      const a = run[i], it = a.t === "pair" ? a.a.it : a.q.it;
+      meeting = a.t !== "pair" ? { i: a.i, of: a.of } : null; status();
+      if (!shown.has(i)) {
+        shown.add(i);
+        if (a.t === "meet" && a.i === 1 && a.wave > 0) pop(a.of === 1 ? "One more to meet" : `${a.of} more to meet`, "round");
+        lsSfx("sfxColor", it.h);
+      }
+      stage.innerHTML = `<div class="ls-story-bars" data-bars>${run.map(() => "<i></i>").join("")}</div>` + lsCardHTML(a, i === total - 1);
+      stage.querySelectorAll("[data-bars] i").forEach((seg, k) => { seg.classList.toggle("done", k < i); seg.classList.toggle("on", k === i); });
+      const b = stage.querySelector("[data-meetnext]");
+      // the button takes taps after a beat: the second tap of a quick double tap is dropped, not spent on this card
+      later(() => { if (!b.isConnected) return; live = true; prNextBtn(b.parentElement, next, b.querySelector("span").textContent).setAttribute("data-meetnext", ""); }, 280);
+      coachDone();
+    };
+    const next = () => { if (i < total - 1) renderAt(i + 1); else finish(); };
+    const prev = () => { if (i > 0) renderAt(i - 1); };
+    setKey(e => {
+      if (!live) return;
+      if (["Enter", " ", "ArrowRight"].includes(e.key)) { e.preventDefault(); next(); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); prev(); }
+    });
+    const onDown = e => { const p = e.changedTouches ? e.changedTouches[0] : e; down = { x: p.clientX, y: p.clientY }; };
+    const onUp = e => {
+      if (!down || !live) { down = null; return; }
+      if (e.target.closest("[data-swatch],[data-meetnext]")) { down = null; return; }   // the real controls behave normally
+      const p = e.changedTouches ? e.changedTouches[0] : e, dx = p.clientX - down.x, dy = p.clientY - down.y;
+      down = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) return void (dx < 0 ? next() : prev());   // a clean swipe
+      if (Math.abs(dx) > 10 || Math.abs(dy) > 10) return;   // a drag that wasn't a clean swipe: not a tap either
+      const r = stage.getBoundingClientRect();
+      (p.clientX - r.left) / r.width < .33 ? prev() : next();
+    };
+    stage.onpointerdown = onDown; stage.onpointerup = onUp;
+    stage._lsStory = { next, prev, at: () => i };   // smoke/test hook
+    renderAt(0);
   });
   // options for an early rung: three far apart in the same family (spFar), so the first questions are winnable
   const farOpts = (it, k) => { const w = spFar(it, k, prUnique([...items, ...prCore().filter(x => x.rank <= 600)]), de2000, prFam9); return w.length >= k ? w : null; };
@@ -480,24 +513,23 @@ function lsStudy(items, o = {}, resume = null) {
   };
   (async () => {
     status();
+    let pendingSet = false, pendingVal = null;
     while (!sess.ended) {
       let a;
-      try { a = spNext(P); } catch (err) { console.error("Study pacer failed", err); a = null; }
+      if (pendingSet) { a = pendingVal; pendingSet = false; }
+      else { try { a = spNext(P); } catch (err) { console.error("Study pacer failed", err); a = null; } }
       if (!a) break;
-      if (a.t === "meet" || a.t === "relook") {
-        const it = a.q.it;
-        meeting = a.t === "meet" ? { i: a.i, of: a.of } : null; status();
-        if (a.t === "meet" && a.i === 1 && a.wave > 0) pop(a.of === 1 ? "One more to meet" : `${a.of} more to meet`, "round");
-        lsSfx("sfxColor", it.h);
-        await card(lsMeetHTML(it, a.t === "relook" && a.q.pick && a.q.pick.h !== it.h ? a.q.pick : nearestIn(it), { again: a.t === "relook", tag: pinKeys.size ? (pinKeys.has(it.key) ? "In your set" : "Look-alike") : "", label: a.t === "relook" ? "Got it" : a.i === a.of ? "Start" : "Next" }));
+      if (a.t === "meet" || a.t === "relook" || a.t === "pair") {
+        // gather the whole run (a wave of meets plus its closest-two pair) so it pages as one story, not one call per card
+        const run = [a];
+        while (true) {
+          let b; try { b = spNext(P); } catch (err) { console.error("Study pacer failed", err); b = null; }
+          if (b && (b.t === "meet" || b.t === "relook" || b.t === "pair")) run.push(b);
+          else { pendingVal = b; pendingSet = true; break; }
+        }
+        await runStory(run);
         if (sess.ended || !stage.isConnected) return;
-        coachDone(); meeting = null;
-        continue;
-      }
-      if (a.t === "pair") {
-        meeting = null; status();
-        await card(lsPairHTML(a.a.it, a.b.it, a.why));
-        if (sess.ended || !stage.isConnected) return;
+        meeting = null; status(); coachDone();
         continue;
       }
       if (a.t === "match") {
