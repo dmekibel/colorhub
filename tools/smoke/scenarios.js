@@ -301,6 +301,108 @@ scenario("home", "Study the map lives only on the right corner, not duplicated i
   t.expect(!/study the map/i.test(t.text("#app")), `Train still mentions "Study the map" somewhere: "${t.text("#app").slice(0, 300)}"`);
 });
 
+// David: "when I open Arrange it doesn't zoom out enough and doesn't center everything in the top half of the
+// screen." Fit mode (js/honey.js boundsFit/flyToFit) now fits the layout's own (x,y) bounds -- not a radial
+// zFloor() approximation -- into the measured rect above the sheet, for every arrangement. Headless Chrome's
+// virtual time budget doesn't advance the sheet's own CSS entrance animation (or a Web Animations API one) in
+// real time, so this forces them to the end before measuring, the same workaround the color-page-return and
+// corner-watchdog scenarios already use.
+// David: "tapping the top half instantly closes Arrange... I need to pan and zoom the map while choosing
+// arrangements... close it by double-tapping the map, the ✕, or swiping the sheet down." The scrim above the
+// sheet is pointer-events:none for Arrange (css/home.css .hm-scrim-clear) so a tap or a pan on the map reaches
+// the canvas, not the scrim's old close-on-any-tap; a double-tap specifically closes it (js/home.js chooser).
+// David: "if I open Arrange and choose a new arrangement, the black bar at the bottom comes back" -- an iPhone
+// Home Screen app's reported viewport is shorter than the physical screen (js/core.js vbFix, --vb/--app-full,
+// which .screen.fixed.cx reaches through). Spoofs navigator.standalone, matchMedia('(display-mode: standalone)'),
+// an iOS UA and screen.height > innerHeight (the exact condition vbFix() looks for), then checks the screen's
+// own full-height box survives an arrangement change -- the [data-arr]/[data-ord] handlers now re-run vbFix()
+// once the change settles (js/home.js), the same self-healing the corner watchdog already does elsewhere.
+scenario("home", "the full-height screen survives an arrangement change in a standalone (Home Screen) app", async t => {
+  await H.homeReady(t);
+  t.ev(`
+    Object.defineProperty(navigator, 'standalone', { value: true, configurable: true });
+    Object.defineProperty(navigator, 'userAgent', { value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15', configurable: true });
+    Object.defineProperty(navigator, 'platform', { value: 'iPhone', configurable: true });
+    Object.defineProperty(screen, 'height', { value: innerHeight + 62, configurable: true });
+    Object.defineProperty(screen, 'width', { value: innerWidth, configurable: true });
+    const realMM = window.matchMedia.bind(window);
+    window.matchMedia = q => q.includes('display-mode: standalone') ? { matches: true, media: q, addListener(){}, removeListener(){} } : realMM(q);
+    vbFix();
+  `);
+  await t.sleep(300);
+  const fullH = t.ev("innerHeight + 62");
+  const screenH = () => Math.round(t.$(".screen.hm").getBoundingClientRect().height);
+  await t.waitFor(() => screenH() >= fullH - 2, 3000, `the screen to reach full height (${fullH}) before testing (got ${screenH()})`);
+  // the corner buttons (and so H.menu's own tap path) sit at the bottom of the now-taller-than-812 screen, off
+  // the smoke harness's fixed-size iframe -- open Arrange directly (#shot=home:look's own hook) instead
+  t.ev('window.HM_CHOOSER && window.HM_CHOOSER("look")');
+  await t.waitFor(".sheet.hm-sheet-arrange", 3000, "the Arrange sheet to open");
+  await t.sleep(400);
+  const arrB = t.$$(".hm-arr-b:not(.on)")[0];
+  t.expect(arrB, "no arrangement chip to pick");
+  await t.click(arrB, { wait: 700 });
+  t.expect(screenH() >= fullH - 2, `the screen shrank to ${screenH()} (wanted >= ${fullH - 2}) after choosing a new arrangement -- the black bar`);
+  await t.click("[data-sheet-close]", { wait: 500 });
+  t.expect(screenH() >= fullH - 2, `the screen shrank to ${screenH()} after closing Arrange`);
+});
+
+scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close it, a double-tap does", async t => {
+  await H.homeReady(t);
+  await H.menu(t);
+  await t.click('.hm-do-stem [data-do="arrange"]', { wait: 500 });
+  t.expect(t.$(".sheet.hm-sheet-arrange"), "the Arrange sheet did not open");
+  const cv = t.$("canvas"), r = cv.getBoundingClientRect();
+  const tapX = r.left + r.width / 2, tapY = r.top + 60;   // the top of the map, above the sheet
+  const mk = (type, x, y, id = 1) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(mk("pointerdown", tapX, tapY)); cv.dispatchEvent(mk("pointerup", tapX, tapY));
+  await t.sleep(300);
+  t.expect(t.$(".sheet.hm-sheet-arrange"), "a single tap on the map closed Arrange");
+  cv.dispatchEvent(mk("pointerdown", tapX, tapY));
+  cv.dispatchEvent(mk("pointermove", tapX - 50, tapY + 30));
+  cv.dispatchEvent(mk("pointerup", tapX - 50, tapY + 30));
+  await t.sleep(300);
+  t.expect(t.$(".sheet.hm-sheet-arrange"), "panning the map closed Arrange");
+  cv.dispatchEvent(mk("pointerdown", tapX, tapY)); cv.dispatchEvent(mk("pointerup", tapX, tapY));
+  await t.sleep(80);
+  cv.dispatchEvent(mk("pointerdown", tapX, tapY)); cv.dispatchEvent(mk("pointerup", tapX, tapY));
+  await t.sleep(400);
+  t.expect(!t.$(".sheet.hm-sheet-arrange"), "a double-tap on the map did not close Arrange");
+});
+
+scenario("home", "Arrange's fit mode frames the whole layout above the sheet, for every arrangement", async t => {
+  const forceAnims = () => [...t.d.querySelectorAll(".sheet,.screen")].forEach(e => e.getAnimations && e.getAnimations().forEach(a => { try { a.finish(); } catch (er) {} }));
+  await H.homeReady(t);
+  await H.menu(t);
+  await t.click('.hm-do-stem [data-do="arrange"]', { wait: 400 });
+  const within = async why => {
+    forceAnims(); await t.sleep(150); forceAnims();
+    // headless Chrome's virtual time budget never advances the sheet's entrance animation in real time, so the
+    // app's own re-measure-after-300ms (js/home.js chooser applyInset) still reads the stuck (off-screen) rect;
+    // force it again, then redo the same setInset+enterFit it does, exactly like a real device would once the
+    // (real, time-accurate) entrance actually finished
+    t.ev(`(() => { const sh = document.querySelector(".sheet.hm-sheet-arrange"), v = document.querySelector(".cx-view"); if (!sh || !v) return; const r = sh.getBoundingClientRect(); HM_CTRL.setInset({ bottom: Math.max(0, v.getBoundingClientRect().bottom - r.top) }); HM_CTRL.enterFit(); })()`);
+    await t.sleep(900);
+    forceAnims(); await t.sleep(200);
+    const sheet = t.$(".sheet.hm-sheet-arrange"); t.expect(sheet, `${why}: no Arrange sheet`);
+    const sheetTop = sheet.getBoundingClientRect().top;
+    const b = t.ev("HM_CTRL._drawnBounds()");
+    t.expect(b && b.n > 3, `${why}: too few drawn cells to judge (${b && b.n})`);
+    // a generous tolerance, not pixel-perfect containment: the fisheye's own magnified middle bubble can still
+    // push a little past the strict rect (see the lane's commit message), but it must be in the right
+    // neighborhood -- nowhere near the old behavior (zoomed in, bounds many screens wide).
+    const pad = Math.max(60, sheetTop * .5);
+    t.expect(b.minX > -pad && b.maxX < b.W + pad, `${why}: horizontal bounds [${b.minX.toFixed(0)},${b.maxX.toFixed(0)}] far outside [0,${b.W}]`);
+    t.expect(b.minY > -pad && b.maxY < sheetTop + pad, `${why}: vertical bounds [${b.minY.toFixed(0)},${b.maxY.toFixed(0)}] far outside [0,${sheetTop.toFixed(0)}]`);
+    t.notes.push(`${why}: sheetTop=${sheetTop.toFixed(0)} bounds=[${b.minX.toFixed(0)},${b.minY.toFixed(0)}..${b.maxX.toFixed(0)},${b.maxY.toFixed(0)}]`);
+  };
+  await within("map/hue (default)");
+  for (const sel of ['[data-arr="rings"]', '[data-arr="families"]', '[data-arr="sunflower"]']) {
+    const b = t.$(sel); if (!b) continue;
+    await t.click(b, { wait: 300 });
+    await within(sel);
+  }
+});
+
 scenario("home", "mapSelect: a preview mode that auto-arranges the selection and restores on clear", async t => {
   await H.homeReady(t);
   t.expect(t.ev("typeof mapSelect === 'function'"), "mapSelect is not defined");
