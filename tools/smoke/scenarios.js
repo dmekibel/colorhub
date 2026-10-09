@@ -5008,3 +5008,44 @@ scenario("design", "\"In design objects\" renders on a color page with design-ob
   await t.waitFor(".p-title, .cp-page", 12000, "a color page");
   await t.waitFor(() => /In design objects/.test(t.d.body.innerText), 10000, '"In design objects" section');
 });
+// ================================================================== UKIYO-E PRINTS (js/ukiyoe.js, Archives lane)
+scenario("design", "the ukiyo-e grid opens with filters and a print opens with facts", async t => {
+  await t.open("#/ukiyoe", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the ukiyo-e room");
+  t.expect(/Ukiyo-e prints/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor("#ukFeed .pin", 12000, "at least one print in the grid");
+  const before = t.text(".p-title");
+  await t.click(t.$$("#ukFeed .pin")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the print page to open");
+  await t.waitFor(".palette .pal", 8000, "the print's palette");
+  t.expect(t.$(".facts"), "no artist/date facts row on the print page");
+});
+scenario("design", "the ukiyo-e grid filters by artist", async t => {
+  await t.open("#/ukiyoe", { settle: 900 });
+  await t.waitFor("#ukChips [data-uf]", 12000, "artist/decade chips");
+  const artistChip = t.$$('#ukChips [data-uf="artist"]')[1];
+  t.expect(artistChip, "no specific artist chip rendered");
+  const beforeCount = (t.$$("#ukFeed .pin") || []).length;
+  await t.click(artistChip, { wait: 500 });
+  await t.waitFor(() => (t.$$("#ukFeed .pin") || []).length !== beforeCount || t.$(".fine"), 8000, "the grid to refilter");
+});
+
+// ================================================================== BOTANICAL & BIRD PLATES (js/botanicalplates.js, Archives lane)
+scenario("design", "the botanical grid opens with bird/plant filters and a plate opens with facts", async t => {
+  await t.open("#/botanical", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the botanical room");
+  t.expect(/Botanical/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor("#bpFeed .pin", 12000, "at least one plate in the grid");
+  const before = t.text(".p-title");
+  await t.click(t.$$("#bpFeed .pin")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the plate page to open");
+  await t.waitFor(".palette .pal", 8000, "the plate's palette");
+});
+scenario("design", "the botanical grid filters birds vs. botanical", async t => {
+  await t.open("#/botanical", { settle: 900 });
+  await t.waitFor("#bpChips [data-bf]", 12000, "kind/decade chips");
+  const birdChip = t.$$('#bpChips [data-bf="kind"][data-bv="bird"]')[0];
+  t.expect(birdChip, "no Birds filter chip rendered");
+  await t.click(birdChip, { wait: 500 });
+  await t.waitFor(() => t.$$("#bpFeed .pin").length > 0 || t.$(".fine"), 8000, "the grid to show only birds");
+});

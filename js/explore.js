@@ -769,6 +769,8 @@ function ptSimilarPool(n) {
   if (/^pulp-/.test(n.id)) return window.PULP || [];
   if (n.kind === "painting" && n.typeLabel === "Photograph") return window.PH || [];
   if (n.kind === "painting" && n.typeLabel === "Design object") return (typeof DO !== "undefined" && DO) || [];
+  if (n.kind === "painting" && n.typeLabel === "Ukiyo-e print") return (typeof UK !== "undefined" && UK) || [];
+  if (n.kind === "painting" && (n.typeLabel === "Bird plate" || n.typeLabel === "Botanical plate")) return (typeof BP !== "undefined" && BP) || [];
   return [];
 }
 function ptSimilarByPaletteHTML(n) {

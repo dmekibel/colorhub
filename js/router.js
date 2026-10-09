@@ -123,6 +123,8 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["doGrid", () => routed("Design objects", "design")],   // js/designobjects.js: the World door for posters/textiles/ceramics/etc.
   ["doCategory", cat => cat ? routed(DO_CAT_LABEL[cat] || cat, "design/cat/" + cat) : null],
   ["doMakerPage", slug => slug ? routed((typeof doMakerTitle === "function" && doMakerTitle(slug)) || slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()), "design/maker/" + slug) : null],
+  ["ukGrid", () => routed("Ukiyo-e prints", "ukiyoe")],   // js/ukiyoe.js: the World door for Japanese woodblock prints
+  ["bpGrid", () => routed("Botanical & bird plates", "botanical")],   // js/botanicalplates.js: the World door for natural-history plates ("bp", not "bt" -- js/botany.js already owns that prefix)
   ["photographerPage", slug => slug ? routed((typeof phGetName === "function" && phGetName(slug)) || slug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()), "photographer/" + slug) : null],   // js/photography.js
   ["fashionPage", slug => typeof worldRouteTitle === "function" ? routed(worldRouteTitle(slug), "fashion/" + slug) : null],   // js/world.js
   ["btListPage", kind => typeof btListTitle === "function" ? routed(btListTitle(kind), "botany/" + kind) : null],   // js/botany.js (plant/dye/essay detail pages route via wikiPage above)
@@ -310,6 +312,8 @@ function openRoute(hash, initial = false) {
   if (kind === "design" && !id && typeof doGrid === "function") { base(); XSTACK = []; doGrid(false); return true; }   // js/designobjects.js: #/design
   if (kind === "design" && id === "cat" && more && typeof doCategory === "function") { base(); XSTACK = []; doCategory(more, false); return true; }
   if (kind === "design" && id === "maker" && more && typeof doMakerPage === "function") { base(); XSTACK = []; doMakerPage(more, {}); return true; }
+  if (kind === "ukiyoe" && !id && typeof ukGrid === "function") { base(); XSTACK = []; ukGrid(false); return true; }   // js/ukiyoe.js: #/ukiyoe
+  if (kind === "botanical" && !id && typeof bpGrid === "function") { base(); XSTACK = []; bpGrid(false); return true; }   // js/botanicalplates.js: #/botanical
   if (kind === "brands" && typeof bgOpenRoute === "function") { base(); bgOpenRoute(); return true; }   // js/games/brands-game.js
   if (kind === "name" && id) {
     // an app color's slug opens its own deep page instead (ROADMAP.md §13): same address family, same rule
