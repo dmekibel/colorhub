@@ -1,0 +1,115 @@
+{
+ "slug": "yellow-green-crayola",
+ "name": "Yellow-Green (Crayola)",
+ "hex": "#C5E384",
+ "names": [
+  "Yellow-Green (Crayola)"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Yellow-Green (Crayola) is a pale, yellowish green named in Crayola's own crayon list, qualified in our data to tell it apart from the standard color-wheel hue of the same base name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crayon name, qualified",
+   "body": "Our library records this swatch as named in the Crayola crayon list, via Wikipedia, and calls it an obscure, qualified name rather than one in everyday use [1]. The \"(Crayola)\" tag in our data separates it from [[yellow-green-color-wheel|Yellow-Green (Color Wheel)]], the standard wheel-position hue of the same base name, which is a far more saturated green [1].\n\nIts closest measured look-alikes are [[pale-olive-green|Pale Olive Green]], read as darker, and [[veronese-green|Veronese Green]], read as duller [1]. The ISCC-NBS 1955 system's nearest block is light yellow green, about four units from that block's center [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds no painting where this color covers at least one percent of the canvas, as photographed; a close-reading, within-painting lens finds a single trace appearance [2]. That places it rarer than 88 percent of our named colors [2]. A pale, qualified crayon name has little reason to turn up in centuries of oil paintings [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Crayola's own crayon list",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, citing Crayola; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-olive-green",
+   "veronese-green"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "yellow-green-color-wheel",
+    "gloss": "same base name, a different list's swatch (the color wheel, not Crayola)"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    86.2,
+    49.8,
+    120.0
+   ],
+   "nearest": [
+    [
+     "Pale Olive Green",
+     4.4
+    ],
+    [
+     "Veronese Green",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Crayola list (via Wikipedia); look-alike edges for yellow-green-crayola; ISCC-NBS 1955 block 119",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which company's crayon list names this swatch?",
+   "choices": [
+    "Crayola",
+    "Pantone",
+    "Resene",
+    "Faber-Castell"
+   ],
+   "answer": "Crayola",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Yellow-Green (Crayola) and Yellow-Green (Color Wheel) are the same hex color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Crayola's Yellow-Green is a pale, muted green, nothing like the vivid color-wheel hue of the same name."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 86%, current data/graph/fieldnotes says 88% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 178
+}

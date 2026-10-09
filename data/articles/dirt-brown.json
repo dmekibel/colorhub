@@ -1,0 +1,112 @@
+{
+ "slug": "dirt-brown",
+ "name": "Dirt Brown",
+ "hex": "#836539",
+ "names": [
+  "Dirt Brown"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Dirt Brown is named plainly for the color of dry soil, settled on by the crowd-sourced 2010 xkcd color survey rather than any historical dictionary.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain name for an everyday color",
+   "body": "The xkcd online color survey of 2010 asked volunteers to name swatches freehand, and \"dirt brown\" was one of the straightforward, literal labels that emerged for this moderate yellowish-brown [1]. No older plate, dictionary or traditional system in the books consulted here records this exact hue under this or any related name.\n\nIts closest look-alike on file is [[dresden-brown]], about 2.8 units off, with [[raw-umber]], [[bismarck-brown]] and [[dusty-hazel]] close behind [2]. All sit in the same narrow, muted brown band."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 22.58% of the 23,781 paintings in our archive (5,370 paintings, as photographed); the within-painting lens narrows that to 3,052 [3]. In our archive it is more common than 99% of the named colors [3]. It peaks in the 1300s, present in 23.1% of the 251 paintings we have from that decade (58 paintings), 1.9 times the rate its museums would predict [3]. Inside a painting it most often plays a light across its 3,052 appearances by lightness rank within the painting [3]. Its most devoted painter is Pedro Berruguete, present in 8 of 20 works here, 2.8x the baseline of the museums those works come from (as photographed 2.1x) [3]. The earliest match dates to 799, 1211 years before the name's 2010 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of dry soil",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "dresden-brown",
+   "raw-umber",
+   "bismarck-brown",
+   "dusty-hazel"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5370,
+  "pct_archive": 22.58,
+  "n_within_painting": 3052,
+  "pct_within_painting": 12.83,
+  "rank_pct": 99,
+  "painters": [
+   "Pedro Berruguete",
+   "Hubert Robert"
+  ],
+  "name_first_recorded": 2010,
+  "earliest_match_year": 799
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "xkcd color survey (2010), crowd-sourced color-name labels",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,786 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Dirt Brown come from?",
+   "choices": [
+    "The crowd-sourced 2010 xkcd color survey",
+    "Ridgway's 1912 plates",
+    "The ISCC-NBS 1955 system",
+    "A traditional Japanese list"
+   ],
+   "answer": "The crowd-sourced 2010 xkcd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dirt Brown is a rare color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dirt Brown turns up in nearly one painting in eight in our archive."
+ ],
+ "words": 286,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
+  ]
+ }
+}

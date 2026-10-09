@@ -1,208 +1,208 @@
 {
- "slug": "virgin",
- "name": "Virgin",
- "hex": "#3C7AA8",
- "names": [
-  "Virgin"
- ],
- "tier": "standard",
- "depth": "long",
- "lede": "Virgin is a clear mid blue, entered in a 1930 color dictionary under a name that points to the Virgin Mary, whose blue robe is one of the most durable color conventions in Western art.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dictionary name",
-   "body": "The swatch is a mid [[blue]] that sits between [[steel-blue]] and [[dull-blue]], about 3 color units from steel blue [9]. Maerz and Paul's *Dictionary of Color* of 1930 lists it as Virgin, on plate 35 K 7, and gives 1917 as the first recorded use of the name [9]. Our library files it among names from fashion and textiles [9].\n\nWhy the name was given is undocumented in the books we read. The Marian reading is natural, because Mary's robe is the best-known blue in art, but no source here connects the dictionary entry to it [9]. What can be told with sources is the history behind that reading, and it is surprisingly late and surprisingly costly."
-  },
-  {
-   "id": "before",
-   "title": "Mary before blue",
-   "body": "Mary was not always dressed in blue. Pastoureau notes that images from before the twelfth century show her in a range of dark colors: black, grey, brown, violet, dark blue or dark green, chosen to convey grief for her crucified son [2]. That echoed the habit of wearing black or dark clothes to funerals [2].\n\nBlue itself was a minor color in the early Middle Ages [1]. It served as a background to suggest majesty and divine presence, and now and then it dressed an emperor, the Virgin or a saint, but never as a bright hue; it was a dark shade close to grey or violet [1]. Around the year 1000, blues in manuscripts became clearer and lighter [1]."
-  },
-  {
-   "id": "twelfth",
-   "title": "The twelfth-century turn",
-   "body": "From the twelfth century, Pastoureau argues, the cult of the Virgin made blue a prominent color in her images, and from there a color of sanctity [2]. Around 1140, the glass painters working for Abbot Suger at Saint-Denis perfected a famous blue [2]. The window of the Virgin at Chartres, usually known as Notre-Dame de la Belle Verrière, dates from the middle of the twelfth century and was reinstalled around 1215 to 1220 after a fire [2].\n\nThe Capetian kings of France bore a blue shield with gold lilies, and Pastoureau thinks blue was probably chosen as the royal color in homage to the Virgin, with Suger and Bernard of Clairvaux almost certainly involved [2]. He treats this as likely, not documented [2]. Blue then spread through heraldry, and Arthur's coat of arms became a blue field with three gold crowns between 1260 and 1280 [2].\n\nGothic art did not tie Mary to blue alone, though it remained her main color until the early modern period [2]. The Baroque brought a fashion for a gilded Virgin, which held on into the nineteenth century [2]."
-  },
-  {
-   "id": "cost",
-   "title": "Why the robe was blue: cost",
-   "body": "Ball adds a material argument. Ultramarine, made from [[gem:lapis-lazuli|lapis lazuli]], was so expensive that using it conferred virtue on a sacred work, and the Virgin's ubiquitous blue robe shows this most clearly [4]. When artists began working by private contract, patrons often specified the pigment in order to show their own piety and wealth [4].\n\nThe contracts survive in some cases. In 1434 the painter Saladijn de Stoevere was told that his Virgin in an altarpiece for the Franciscan church in Ghent should wear a robe of gold cloth lined with *azure*, meaning ultramarine or [[gem:azurite|azurite]], and glazed with crimson lake [3]. In 1446 a contract for the church at Antoing named azurite [3]. Pacheco wrote almost a century after the Brueghel altarpiece that even wealthy Spanish painters could not obtain ultramarine, and Brueghel the Elder used cheap smalt for the Virgin's robe in his 1564 *Adoration of the Kings* [4].\n\nBall also corrects a popular idea. Itten held that the Virgin's blue in medieval art is mainly symbolic, but Ball says this overlooks the pigment itself [6]. Both explanations are true at once: the color was holy because it was the costliest [4][6].\n\nJarman, writing as a poet, repeats a Renaissance idea from Ficino that the Virgin's mantle is the [[sky-blue|sky]] [8]."
-  },
-  {
-   "id": "variants",
-   "title": "Pale blues, crimson, and what time did",
-   "body": "Painters varied the blue. Raphael softened the ultramarine of the Virgin's robe in the *Madonna Alba* with lead white [3]. Bellini lightened his Virgin's blue only to a minimum, which left the folds shallow, while Titian made it much paler [4]. Titian paired a red gown with a blue robe in his Pesaro altarpiece [3]. Jan van Eyck robed the Virgin with Chancellor Rolin in crimson, whose purplish tint recalled the most valued dye of antiquity [7].\n\nTime has changed some of these blues. Fourteenth- and fifteenth-century Madonnas were often robed in purplish ultramarine glazed with red lake, and in several the lake has faded, leaving the robe pale pink and deep bluish-purple in the shadows [5]. In *The Virgin and Child before a Firescreen* (about 1440) the robes are nearly as pale as paper, where Ball suggests they were probably a warm mauve [5]. Azurite can darken almost to black, as in the robes of Dieric Bouts and Gerard David [5]. The blue we see on a museum wall is not always the blue that was painted."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, the swatch covers at least five per cent of the canvas in only 35 works, or 0.15 per cent [10]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [10].\n\nIt is mostly a modern color in the archive: 11 of 1,674 works from the 1900s, about 4.5 times the archive's rate, and 2 of 140 Impressionist works, almost ten times the rate [10]. Examples include Monet's [[painting:nga-46523|The Houses of Parliament, Sunset]], Jawlensky's [[painting:nga-130841|Still Life with Bottles and Fruit]] and Sargent's [[painting:commons-Q106357135|Atlantic Storm]] [10].\n\nThe earliest match is Fra Angelico's [[painting:commons-Q22082602|Madonna of the Pomegranate]] of 1426, where the color covers about 13 per cent of the canvas, 504 years before the name was first listed in our sources [10][9]. That is a look-alike in an aged photograph, not proof of what the painter used, but it is a fitting first [10]. Inside a painting it most often plays a mid tone (51 per cent of the time), with shadow (31 per cent) and highlight (17 per cent) following [10]. Where to look: the robes in a medieval or early Renaissance Madonna, remembering that the red glaze may be gone and the azurite may have darkened [5]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "origin undocumented; the Virgin Mary's blue is the natural reading but no source here confirms it",
-   "first_recorded": "1917 (Maerz and Paul, 1930, plate 35 K 7)",
-   "source": "ColorHub library; Maerz and Paul 1930"
-  },
-  "aka": [],
-  "siblings": [
-   "steel-blue",
-   "dull-blue"
+  "slug": "virgin",
+  "name": "Virgin",
+  "hex": "#3C7AA8",
+  "names": [
+    "Virgin"
   ],
-  "parent": "blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#3C7AA8",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 35,
-  "rate": 0.0015,
-  "century_1900": [
-   11,
-   1674
+  "tier": "standard",
+  "depth": "long",
+  "lede": "Virgin is a clear mid blue, entered in a 1930 color dictionary under a name that points to the Virgin Mary, whose blue robe is one of the most durable color conventions in Western art.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dictionary name",
+      "body": "The swatch is a mid [[blue]] that sits between [[steel-blue]] and [[flat-blue]], about 3 color units from steel blue [9]. Maerz and Paul's *Dictionary of Color* of 1930 lists it as Virgin, on plate 35 K 7, and gives 1917 as the first recorded use of the name [9]. Our library files it among names from fashion and textiles [9].\n\nWhy the name was given is undocumented in the books we read. The Marian reading is natural, because Mary's robe is the best-known blue in art, but no source here connects the dictionary entry to it [9]. What can be told with sources is the history behind that reading, and it is surprisingly late and surprisingly costly."
+    },
+    {
+      "id": "before",
+      "title": "Mary before blue",
+      "body": "Mary was not always dressed in blue. Pastoureau notes that images from before the twelfth century show her in a range of dark colors: black, grey, brown, violet, dark blue or dark green, chosen to convey grief for her crucified son [2]. That echoed the habit of wearing black or dark clothes to funerals [2].\n\nBlue itself was a minor color in the early Middle Ages [1]. It served as a background to suggest majesty and divine presence, and now and then it dressed an emperor, the Virgin or a saint, but never as a bright hue; it was a dark shade close to grey or violet [1]. Around the year 1000, blues in manuscripts became clearer and lighter [1]."
+    },
+    {
+      "id": "twelfth",
+      "title": "The twelfth-century turn",
+      "body": "From the twelfth century, Pastoureau argues, the cult of the Virgin made blue a prominent color in her images, and from there a color of sanctity [2]. Around 1140, the glass painters working for Abbot Suger at Saint-Denis perfected a famous blue [2]. The window of the Virgin at Chartres, usually known as Notre-Dame de la Belle Verrière, dates from the middle of the twelfth century and was reinstalled around 1215 to 1220 after a fire [2].\n\nThe Capetian kings of France bore a blue shield with gold lilies, and Pastoureau thinks blue was probably chosen as the royal color in homage to the Virgin, with Suger and Bernard of Clairvaux almost certainly involved [2]. He treats this as likely, not documented [2]. Blue then spread through heraldry, and Arthur's coat of arms became a blue field with three gold crowns between 1260 and 1280 [2].\n\nGothic art did not tie Mary to blue alone, though it remained her main color until the early modern period [2]. The Baroque brought a fashion for a gilded Virgin, which held on into the nineteenth century [2]."
+    },
+    {
+      "id": "cost",
+      "title": "Why the robe was blue: cost",
+      "body": "Ball adds a material argument. Ultramarine, made from [[gem:lapis-lazuli|lapis lazuli]], was so expensive that using it conferred virtue on a sacred work, and the Virgin's ubiquitous blue robe shows this most clearly [4]. When artists began working by private contract, patrons often specified the pigment in order to show their own piety and wealth [4].\n\nThe contracts survive in some cases. In 1434 the painter Saladijn de Stoevere was told that his Virgin in an altarpiece for the Franciscan church in Ghent should wear a robe of gold cloth lined with *azure*, meaning ultramarine or [[gem:azurite|azurite]], and glazed with crimson lake [3]. In 1446 a contract for the church at Antoing named azurite [3]. Pacheco wrote almost a century after the Brueghel altarpiece that even wealthy Spanish painters could not obtain ultramarine, and Brueghel the Elder used cheap smalt for the Virgin's robe in his 1564 *Adoration of the Kings* [4].\n\nBall also corrects a popular idea. Itten held that the Virgin's blue in medieval art is mainly symbolic, but Ball says this overlooks the pigment itself [6]. Both explanations are true at once: the color was holy because it was the costliest [4][6].\n\nJarman, writing as a poet, repeats a Renaissance idea from Ficino that the Virgin's mantle is the [[sky-blue|sky]] [8]."
+    },
+    {
+      "id": "variants",
+      "title": "Pale blues, crimson, and what time did",
+      "body": "Painters varied the blue. Raphael softened the ultramarine of the Virgin's robe in the *Madonna Alba* with lead white [3]. Bellini lightened his Virgin's blue only to a minimum, which left the folds shallow, while Titian made it much paler [4]. Titian paired a red gown with a blue robe in his Pesaro altarpiece [3]. Jan van Eyck robed the Virgin with Chancellor Rolin in crimson, whose purplish tint recalled the most valued dye of antiquity [7].\n\nTime has changed some of these blues. Fourteenth- and fifteenth-century Madonnas were often robed in purplish ultramarine glazed with red lake, and in several the lake has faded, leaving the robe pale pink and deep bluish-purple in the shadows [5]. In *The Virgin and Child before a Firescreen* (about 1440) the robes are nearly as pale as paper, where Ball suggests they were probably a warm mauve [5]. Azurite can darken almost to black, as in the robes of Dieric Bouts and Gerard David [5]. The blue we see on a museum wall is not always the blue that was painted."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, the swatch covers at least five per cent of the canvas in only 35 works, or 0.15 per cent [10]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [10].\n\nIt is mostly a modern color in the archive: 11 of 1,674 works from the 1900s, about 4.5 times the archive's rate, and 2 of 140 Impressionist works, almost ten times the rate [10]. Examples include Monet's [[painting:nga-46523|The Houses of Parliament, Sunset]], Jawlensky's [[painting:nga-130841|Still Life with Bottles and Fruit]] and Sargent's [[painting:commons-Q106357135|Atlantic Storm]] [10].\n\nThe earliest match is Fra Angelico's [[painting:commons-Q22082602|Madonna of the Pomegranate]] of 1426, where the color covers about 13 per cent of the canvas, 504 years before the name was first listed in our sources [10][9]. That is a look-alike in an aged photograph, not proof of what the painter used, but it is a fitting first [10]. Inside a painting it most often plays a mid tone (51 per cent of the time), with shadow (31 per cent) and highlight (17 per cent) following [10]. Where to look: the robes in a medieval or early Renaissance Madonna, remembering that the red glaze may be gone and the azurite may have darkened [5]."
+    }
   ],
-  "movements": {
-   "Impressionism": [
-    2,
-    140
-   ]
+  "aside": {
+    "origin": {
+      "named_after": "origin undocumented; the Virgin Mary's blue is the natural reading but no source here confirms it",
+      "first_recorded": "1917 (Maerz and Paul, 1930, plate 35 K 7)",
+      "source": "ColorHub library; Maerz and Paul 1930"
+    },
+    "aka": [],
+    "siblings": [
+      "steel-blue",
+      "flat-blue"
+    ],
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "role": {
-   "mid": 0.51,
-   "shadow": 0.31,
-   "highlight": 0.17
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#3C7AA8",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 35,
+    "rate": 0.0015,
+    "century_1900": [
+      11,
+      1674
+    ],
+    "movements": {
+      "Impressionism": [
+        2,
+        140
+      ]
+    },
+    "role": {
+      "mid": 0.51,
+      "shadow": 0.31,
+      "highlight": 0.17
+    },
+    "first": {
+      "id": "commons-Q22082602",
+      "year": 1426
+    }
   },
-  "first": {
-   "id": "commons-Q22082602",
-   "year": 1426
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 1 (the early Middle Ages)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 2 (\"A New Color: The Eleventh to the Fourteenth Century\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 18",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 19",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 21",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 57",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; Maerz and Paul 1930, plate 35 K 7; ISCC-NBS 1955), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why does the Virgin's blue robe appear so often in medieval and Renaissance art, according to Ball?",
+      "choices": [
+        "Ultramarine was so costly that using it conferred virtue on the work",
+        "Blue was the cheapest pigment available",
+        "Church law forbade any other color for Mary",
+        "Blue paint never faded"
+      ],
+      "answer": "Ultramarine was so costly that using it conferred virtue on the work",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: before the twelfth century Mary was usually shown in bright blue.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "A pale, paper-white robe in a 1440 Madonna may once have been warmer because...",
+      "choices": [
+        "the red lake glaze faded",
+        "the painter used chalk",
+        "the varnish turned it blue",
+        "the wood panel absorbed it"
+      ],
+      "answer": "the red lake glaze faded",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Before the twelfth century Mary was usually shown in dark colors; blue became hers as the cult of the Virgin grew [2].",
+    "A 1434 contract told a Ghent painter to line the Virgin's gold robe with azure and glaze it with crimson lake [3]."
+  ],
+  "words": 1026,
+  "status": "checked",
+  "checked": {
+    "by": "claude-sonnet-5-5",
+    "date": "2026-10-08",
+    "issues": [
+      "Dictionary name 'Virgin' origin undocumented; Marian link is a reading, not sourced",
+      "Royal blue as homage to the Virgin is Pastoureau's inference",
+      "Concordance for this slug is mostly the Virgin Mary in general; no source discusses the Maerz and Paul entry"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 1 (the early Middle Ages)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 2 (\"A New Color: The Eleventh to the Fourteenth Century\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 13",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 18",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 19",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 21",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 57",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; Maerz and Paul 1930, plate 35 K 7; ISCC-NBS 1955), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why does the Virgin's blue robe appear so often in medieval and Renaissance art, according to Ball?",
-   "choices": [
-    "Ultramarine was so costly that using it conferred virtue on the work",
-    "Blue was the cheapest pigment available",
-    "Church law forbade any other color for Mary",
-    "Blue paint never faded"
-   ],
-   "answer": "Ultramarine was so costly that using it conferred virtue on the work",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: before the twelfth century Mary was usually shown in bright blue.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "A pale, paper-white robe in a 1440 Madonna may once have been warmer because...",
-   "choices": [
-    "the red lake glaze faded",
-    "the painter used chalk",
-    "the varnish turned it blue",
-    "the wood panel absorbed it"
-   ],
-   "answer": "the red lake glaze faded",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Before the twelfth century Mary was usually shown in dark colors; blue became hers as the cult of the Virgin grew [2].",
-  "A 1434 contract told a Ghent painter to line the Virgin's gold robe with azure and glaze it with crimson lake [3]."
- ],
- "words": 1026,
- "status": "checked",
- "checked": {
-  "by": "claude-sonnet-5-5",
-  "date": "2026-10-08",
-  "issues": [
-   "Dictionary name 'Virgin' origin undocumented; Marian link is a reading, not sourced",
-   "Royal blue as homage to the Virgin is Pastoureau's inference",
-   "Concordance for this slug is mostly the Virgin Mary in general; no source discusses the Maerz and Paul entry"
-  ]
- }
 }

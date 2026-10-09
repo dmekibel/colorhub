@@ -1,148 +1,148 @@
 {
- "slug": "midnight-navy",
- "name": "Midnight navy",
- "hex": "#192236",
- "names": [
-  "Midnight navy"
- ],
- "tier": "place",
- "depth": "short",
- "lede": "Midnight navy is a near-black blue that compounds two familiar color words, midnight and navy, the second of them pointing to naval uniform blue rather than any single document our library records a date for.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Two borrowed words",
-   "body": "Our library carries no dated first record for this exact compound name, only its Munsell notation, 5.4PB 1.3/2.9, and the ISCC-NBS block it falls in, a dark blue 7.3 units from that block's center [1]. Navy blue as a color word is tied to naval uniforms: a dark blue became the standard color of British Royal Navy officers' coats from the mid-eighteenth century on, and the word for the color followed the word for the service [3]. Midnight simply names the hour, used across many color names for the darkest member of a family, such as [[midnight-blue]] and [[midnight-purple]].\n\nThe nearest named colors on file are [[mascot]], [[dark]] and [[black-blue]], at 4.1, 4.1 and 4.6 ΔE [3]. It is several shades darker than the plain name [[navy]] and sits beside [[dark-navy]] and [[deep-navy]] in the same small family [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of Midnight navy covers at least five percent of the canvas in 193 works, about eight tenths of one percent [2]. The earliest dated example is Pietro Lorenzetti's 1340 altarpiece of the Madonna and Child enthroned with eight angels, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1920s, in 7 of 237 paintings, more than three and a half times the archive's overall rate for that decade [2]. Ninety-six percent of its appearances fall in a painting's shadows rather than its mid-tones or highlights[2]. It shares a canvas with the plain name [[navy]] far more than chance, thirty-four times the baseline [2]. These are screen-color matches on photographs of aged, varnished paintings, never a claim about pigment [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "navy (naval uniform blue) and the hour of midnight; no single documented date for the compound",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "mascot",
-   "dark",
-   "black-blue",
-   "trooper"
+  "slug": "midnight-navy",
+  "name": "Midnight navy",
+  "hex": "#192236",
+  "names": [
+    "Midnight navy"
   ],
-  "parent": "navy",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "greyish-navy",
-    "gloss": "the same hex, listed separately in our library under an older name"
-   }
+  "tier": "place",
+  "depth": "short",
+  "lede": "Midnight navy is a near-black blue that compounds two familiar color words, midnight and navy, the second of them pointing to naval uniform blue rather than any single document our library records a date for.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Two borrowed words",
+      "body": "Our library carries no dated first record for this exact compound name, only its Munsell notation, 5.4PB 1.3/2.9, and the ISCC-NBS block it falls in, a dark blue 7.3 units from that block's center [1]. Navy blue as a color word is tied to naval uniforms: a dark blue became the standard color of British Royal Navy officers' coats from the mid-eighteenth century on, and the word for the color followed the word for the service [3]. Midnight simply names the hour, used across many color names for the darkest member of a family, such as [[midnight-blue]] and [[midnight-purple]].\n\nThe nearest named colors on file are [[mascot]], [[dark]] and [[black-blue]], at 4.1, 4.1 and 4.6 ΔE [3]. It is several shades darker than the plain name [[navy]] and sits beside [[dark-navy]] and [[deep-navy]] in the same small family [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of Midnight navy covers at least five percent of the canvas in 193 works, about eight tenths of one percent [2]. The earliest dated example is Pietro Lorenzetti's 1340 altarpiece of the Madonna and Child enthroned with eight angels, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1920s, in 7 of 237 paintings, more than three and a half times the archive's overall rate for that decade [2]. Ninety-six percent of its appearances fall in a painting's shadows rather than its mid-tones or highlights[2]. It shares a canvas with the plain name [[navy]] far more than chance, thirty-four times the baseline [2]. These are screen-color matches on photographs of aged, varnished paintings, never a claim about pigment [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#192236",
-   "de2000": 6,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "navy (naval uniform blue) and the hour of midnight; no single documented date for the compound",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "mascot",
+      "dark",
+      "black-blue",
+      "trooper"
+    ],
+    "parent": "navy",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "midnight-navy",
+        "gloss": "the same hex, listed separately in our library under an older name"
+      }
+    ],
+    "other_languages": []
   },
-  "n_present": 193,
-  "peak_decade": 1920,
-  "role": {
-   "shadow": 0.96,
-   "mid": 0.04
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#192236",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 193,
+    "peak_decade": 1920,
+    "role": {
+      "shadow": 0.96,
+      "mid": 0.04
+    },
+    "company": [
+      {
+        "word": "Navy",
+        "lift": 34.29
+      }
+    ],
+    "measured": {
+      "lch": [
+        13.3,
+        14.6,
+        280.8
+      ],
+      "nearest": [
+        [
+          "Mascot",
+          4.1
+        ],
+        [
+          "Dark",
+          4.1
+        ],
+        [
+          "Black Blue",
+          4.6
+        ],
+        [
+          "Trooper",
+          4.9
+        ]
+      ]
+    }
   },
-  "company": [
-   {
-    "word": "Navy",
-    "lift": 34.29
-   }
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "web",
+      "cite": "Wikipedia, \"Navy blue\"",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/Navy_blue"
+    }
   ],
-  "measured": {
-   "lch": [
-    13.3,
-    14.6,
-    280.8
-   ],
-   "nearest": [
-    [
-     "Mascot",
-     4.1
-    ],
-    [
-     "Dark",
-     4.1
-    ],
-    [
-     "Black Blue",
-     4.6
-    ],
-    [
-     "Trooper",
-     4.9
+  "questions": [
+    {
+      "q": "The word navy in a color name usually points back to:",
+      "choices": [
+        "naval uniforms",
+        "a river",
+        "a gemstone",
+        "a painter's surname"
+      ],
+      "answer": "naval uniforms",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: nearly all of Midnight navy's appearances in our archive fall in shadow rather than highlight.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Ninety-six percent of Midnight navy's appearances in our archive sit in shadow."
+  ],
+  "words": 332,
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, Munsell notation entries",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "web",
-   "cite": "Wikipedia, \"Navy blue\"",
-   "loc_kind": null,
-   "url": "https://en.wikipedia.org/wiki/Navy_blue"
-  }
- ],
- "questions": [
-  {
-   "q": "The word navy in a color name usually points back to:",
-   "choices": [
-    "naval uniforms",
-    "a river",
-    "a gemstone",
-    "a painter's surname"
-   ],
-   "answer": "naval uniforms",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: nearly all of Midnight navy's appearances in our archive fall in shadow rather than highlight.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Ninety-six percent of Midnight navy's appearances in our archive sit in shadow."
- ],
- "words": 332,
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

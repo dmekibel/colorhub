@@ -1,0 +1,107 @@
+{
+ "slug": "pale-veronese-green",
+ "name": "Pale Veronese Green",
+ "hex": "#DFE7B9",
+ "names": [
+  "Pale Veronese Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale Veronese Green is a soft, greenish yellow, the pale tone Robert Ridgway charted beside the parent color Veronese Green in his 1912 color atlas, and close enough to Pale Lumiere Green to pass for the same swatch.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale tone of Veronese Green",
+   "body": "Pale Veronese Green puts Ridgway's tone word Pale in front of [[veronese-green]], the paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. Veronese Green itself is Ridgway's plate XVIII, hue 31 prime, tone d, later filed by the ISCC-NBS dictionary of 1955 in block 116, and Maerz and Paul's 1930 *Dictionary of Color* lists it as first recorded around 1864 [1]. The ISCC-NBS block that neighbors it, block 119, also carries [[pale-lumiere-green]], which is why the two pale tones sit so close on screen [1].\n\nIts nearest named neighbor is in fact [[pale-lumiere-green]], only 2.6 units off; [[pale-yellow-green]] sits 3.0 units away, reading more vivid [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 78 of 23,781 paintings, 0.33 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 53, more common than 51 percent of the named colors in our library [2]. It peaks in the 1900s, present in 0.6 percent of the 1,674 paintings from that century, 2.5 times the archive's overall rate [2]. Inside a painting it most often plays a light, in 62 percent of its 53 appearances by lightness rank [2].\n\nThe earliest match dates to 1475, a floor and not a first since the archive's early centuries are thin; that is 437 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]. It is most over-represented in paintings from the United States, 2.7 times the expected rate [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ridgway's tone system: the pale tone of Veronese Green",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XVIII",
+   "source": "Ridgway 1912; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "veronese-green",
+   "pale-lumiere-green",
+   "pale-yellow-green",
+   "oural-green"
+  ],
+  "parent": "veronese-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 78,
+  "n_within_painting": 53,
+  "pct_archive": 0.33,
+  "rank_pct": 51,
+  "measured": {
+   "nearest": [
+    [
+     "Pale Lumiere Green",
+     2.6
+    ],
+    [
+     "Pale Yellow-Green",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930) and look-alike distances, data/graph/edges-p.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Pale Veronese Green?",
+   "choices": [
+    "Pale Lumiere Green",
+    "Pale Yellow-Green",
+    "Oural Green"
+   ],
+   "answer": "Pale Lumiere Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Veronese Green and Pale Lumiere Green are filed in neighboring ISCC-NBS blocks.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Veronese Green and Pale Lumiere Green sit close enough to pass for the same color."
+ ],
+ "words": 297,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

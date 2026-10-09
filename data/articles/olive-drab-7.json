@@ -1,0 +1,122 @@
+{
+ "slug": "olive-drab-7",
+ "name": "Olive Drab #7",
+ "hex": "#3C341F",
+ "names": [
+  "Olive Drab #7"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Olive Drab #7 is a near-black, brownish olive: the darker of the two US Army field-uniform shades issued from 1943, numbered within the military's own olive-drab color series.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darker number in a uniform series",
+   "body": "*Olive* names the plant family's dull yellow-green fruit and leaf color, and *drab* is an old English cloth word for a dull, undyed brown; the US Army strung a series of numbered \"olive drab\" shades across its uniform specifications, from the lighter OD3 and OD33 to this darker OD7 [1]. The earlier, lighter shade proved a poor choice in the field: it stood out against most northern-European backdrops, making soldiers easier to spot, so from 1943 new uniforms and the M1943 field jacket switched to the darker OD7 for better concealment [1].\n\nOur library carries only a Wikipedia source for this exact swatch, with no fixed year or specification number attached beyond that general military history [2]. The nearest look-alikes on file are [[indigo-tea]], a touch lighter, [[brown-olive]], duller, and [[jacaranda-brown|Jacaranda Brown]], lighter and yellower [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A close match to this near-black olive turns up in 5,220 of our 23,781 archived paintings, about 22 per cent, with the within-painting lens finding it in 4,378; that is more common than every other named color we track [3]. It most often sits as a hidden color rather than a highlight, and peaks in the 1600s at 1.2 times the archive's overall rate (1,372 paintings) [3]. Meindert Hobbema is its most devoted painter here, carrying it in 11 of his 16 archived works [3]. As photographed, these are aged, varnished canvases, so a dark match like this one is partly the paint's own age, not only the pigment the painter chose [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "olive (the plant's dull green-brown color) + drab (a dull cloth color) + the U.S. Army's own shade-numbering system",
+   "first_recorded": "1943, when OD7 replaced the lighter OD3/OD33 in U.S. Army field uniforms",
+   "source": "Wikipedia, \"United States Army uniforms in World War II\""
+  },
+  "aka": [
+   "OD7",
+   "O.D. Shade 7"
+  ],
+  "siblings": [
+   "indigo-tea",
+   "brown-olive",
+   "jacaranda-brown"
+  ],
+  "parent": "olive",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4378,
+  "n_archive_hits": 5220,
+  "measured": {
+   "lch": [
+    22.0,
+    14.6,
+    90.2
+   ],
+   "nearest": [
+    [
+     "Indigo tea",
+     3.9
+    ],
+    [
+     "Brown Olive",
+     6.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"United States Army uniforms in World War II\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/United_States_Army_uniforms_in_World_War_II"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-o.json): Wikipedia source, CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/o.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why did the U.S. Army switch from the lighter OD3 shade to the darker Olive Drab #7 in 1943?",
+   "choices": [
+    "The lighter shade stood out against backdrops in northern Europe, endangering soldiers",
+    "OD3 was discontinued by the dye maker",
+    "Soldiers preferred the darker look",
+    "OD7 was cheaper to produce"
+   ],
+   "answer": "The lighter shade stood out against backdrops in northern Europe, endangering soldiers",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Olive Drab #7 is the lightest shade in the U.S. Army's olive-drab numbering.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Olive Drab #7 is the most common color match in our entire painting archive — nearly one canvas in four."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from Wikipedia (U.S. Army uniform history) and ColorHub graph data."
+  ]
+ },
+ "words": 276
+}

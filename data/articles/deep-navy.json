@@ -1,137 +1,137 @@
 {
-  "slug": "deep-navy",
-  "name": "Deep navy",
-  "hex": "#191F45",
-  "names": [
-    "Deep navy",
-    "Dusty midnight blue"
+ "slug": "deep-navy",
+ "name": "Deep navy",
+ "hex": "#191F45",
+ "names": [
+  "Deep navy",
+  "Dusty midnight blue"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Deep navy is a near-black navy, also recorded as Dusty midnight blue, ColorHub's English name for the Japanese traditional color Konkikyō, \"navy blue bellflower.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A navy-blue bellflower",
+   "body": "The nearest named colors on file are [[cobalt-blue]] and [[navy]], at Our library actually files this color under Purples rather than Blues, alongside the core color [[purple|Purple]], a reminder that a name and a database category do not always agree, and that this swatch reads as a near-black blue regardless [3].\n\nIts nearest core app match is [[navy|Navy]], about 4.9 ΔE2000 units away [3]. The library's own ISCC-NBS mapping places it in the same block as several other 1920s names recorded by Maerz and Paul, including Homage Blue, dated to 1928 [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This is one of the rarest colors : our archive finds it in only 37 of 23,781 paintings, about 0.16 percent, as photographed [2]. The earliest match is Pietro Lorenzetti's *Madonna and Child Enthroned with Eight Angels*, dated to 1340, a floor and not a first, since the archive's early centuries are thin [2]. Among sampled painters, Bronzino's twenty-one paintings contain it three times, a rate almost ninety-two times the archive's average, the sharpest spike, though built on a very small count [2]. It is also somewhat more common than average in paintings from the United Kingdom and Russia [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a bellflower crossed with navy indigo (kon)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Konkikyō",
+   "Dusty midnight blue"
   ],
-  "tier": "traditional",
-  "depth": "short",
-  "lede": "Dusty midnight blue is a near-black navy, ColorHub's English name for the Japanese traditional color Konkikyō, \"navy blue bellflower.\"",
-  "sections": [
-    {
-      "id": "name",
-      "title": "A navy-blue bellflower",
-      "body": "The nearest named colors on file are [[cobalt-blue]] and [[navy]], at Our library actually files this color under Purples rather than Blues, alongside the core color [[purple|Purple]], a reminder that a name and a database category do not always agree, and that this swatch reads as a near-black blue regardless [3].\n\nIts nearest core app match is [[navy|Navy]], about 4.9 ΔE2000 units away [3]. The library's own ISCC-NBS mapping places it in the same block as several other 1920s names recorded by Maerz and Paul, including Homage Blue, dated to 1928 [3]."
-    },
-    {
-      "id": "field",
-      "title": "Field notes",
-      "body": "This is one of the rarest colors : our archive finds it in only 37 of 23,781 paintings, about 0.16 percent, as photographed [2]. The earliest match is Pietro Lorenzetti's *Madonna and Child Enthroned with Eight Angels*, dated to 1340, a floor and not a first, since the archive's early centuries are thin [2]. Among sampled painters, Bronzino's twenty-one paintings contain it three times, a rate almost ninety-two times the archive's average, the sharpest spike, though built on a very small count [2]. It is also somewhat more common than average in paintings from the United Kingdom and Russia [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
-    }
+  "siblings": [
+   "cobalt-blue",
+   "navy",
+   "scotch-blue",
+   "oxford-blue"
   ],
-  "aside": {
-    "origin": {
-      "named_after": "a bellflower crossed with navy indigo (kon)",
-      "first_recorded": "undocumented in the sources consulted",
-      "source": "Wikipedia, Traditional colors of Japan"
-    },
-    "aka": [
-      "Konkikyō",
-      "Dusty midnight blue"
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Konkikyō (紺桔梗)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 37,
+  "measured": {
+   "lch": [
+    13,
+    27,
+    294
+   ],
+   "nearest": [
+    [
+     "Cobalt Blue",
+     4.5
     ],
-    "siblings": [
-      "cobalt-blue",
-      "navy",
-      "scotch-blue",
-      "oxford-blue"
+    [
+     "Navy",
+     4.9
     ],
-    "parent": null,
-    "children": [],
-    "disambiguation": [],
-    "other_languages": [
-      {
-        "lang": "ja",
-        "name": "Konkikyō (紺桔梗)"
-      }
+    [
+     "Scotch Blue",
+     5.1
+    ],
+    [
+     "Oxford Blue",
+     5.2
     ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
   },
-  "field": {
-    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-    "n_present": 37,
-    "measured": {
-      "lch": [
-        13,
-        27,
-        294
-      ],
-      "nearest": [
-        [
-          "Cobalt Blue",
-          4.5
-        ],
-        [
-          "Navy",
-          4.9
-        ],
-        [
-          "Scotch Blue",
-          5.1
-        ],
-        [
-          "Oxford Blue",
-          5.2
-        ]
-      ]
-    }
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
   },
-  "notes": [
-    {
-      "n": 1,
-      "kind": "web",
-      "cite": "Wikipedia, \"Traditional colors of Japan\"",
-      "loc_kind": null,
-      "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
-    },
-    {
-      "n": 2,
-      "kind": "data",
-      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 3,
-      "kind": "data",
-      "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
-      "loc_kind": null,
-      "url": null
-    }
-  ],
-  "questions": [
-    {
-      "q": "What flower is named in Konkikyō?",
-      "choices": [
-        "Bellflower",
-        "Iris",
-        "Wisteria",
-        "Morning glory"
-      ],
-      "answer": "Bellflower",
-      "kind": "pick"
-    },
-    {
-      "q": "True or false: our library files this color under Blues.",
-      "choices": [
-        "True",
-        "False"
-      ],
-      "answer": "False",
-      "kind": "true-false"
-    }
-  ],
-  "openers": [
-    "A navy bellflower blue so dark our library quietly files it under Purples."
-  ],
-  "status": "checked",
-  "checked": {
-    "by": "writer",
-    "date": "2026-10-09",
-    "issues": [
-      "Flagged the Purples/Blues family mismatch rather than silently correcting it.",
-      "lint 2026-10-09"
-    ]
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What flower is named in Konkikyō?",
+   "choices": [
+    "Bellflower",
+    "Iris",
+    "Wisteria",
+    "Morning glory"
+   ],
+   "answer": "Bellflower",
+   "kind": "pick"
   },
-  "words": 219
+  {
+   "q": "True or false: our library files this color under Blues.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A navy bellflower blue so dark our library quietly files it under Purples."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Flagged the Purples/Blues family mismatch rather than silently correcting it.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 224
 }

@@ -1,0 +1,107 @@
+{
+ "slug": "gold-fusion",
+ "name": "Gold Fusion",
+ "hex": "#85754E",
+ "names": [
+  "Gold Fusion"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Gold Fusion is a dull, yellowish brown rather than a metallic gold, and one of the most common colors in our entire painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A compound name, no earlier record",
+   "body": "Gold Fusion pairs \"gold\" with \"fusion\"; Wikipedia's color list is our only source for the name, with no further origin documented [1]. The hex value, #85754E, reads as a dull, yellowish brown on screen rather than a metallic gold [1]. Its nearest named look-alikes in our library are [[buffy-olive]], [[green-brown]], [[grey-brown]] and [[hair-brown]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this brown in 18.69 percent of the 23,781 paintings we have, 4,445 of them, as photographed; the within-painting lens finds it in 2,527 [2]. That makes it more common than 97 percent of the named colors in our archive [2]. Inside a painting it most often plays a light, in 39 percent of the 2,527 paintings where it appears, measured by lightness rank within each painting so varnish cannot fake it [2]. Pieter Claesz is its most devoted painter, using it in 7 of 13 works here, 3.7 times the baseline rate of the museums those works come from [2]. It shares canvases with Japanese Bush Warbler and Ecru-Olive more than chance alone would predict [2]. The archive's first match for this hue is dated 900, in a painting attributed to Zhao Guangfu, though our early centuries are thin, so this is a floor on presence, not a claim about when the name began [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the compound \"gold\" plus \"fusion\"",
+   "first_recorded": "undocumented in the sources we hold",
+   "source": "Wikipedia"
+  },
+  "aka": [],
+  "siblings": [
+   "buffy-olive",
+   "green-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4445,
+  "measured": {
+   "lch": [
+    49.8,
+    23.8,
+    89.3
+   ],
+   "nearest": [
+    [
+     "Buffy Olive",
+     2.8
+    ]
+   ]
+  },
+  "role": {
+   "light_pct": 39
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia; computed LCH and nearest named colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Inside a painting, what role does Gold Fusion most often play?",
+   "choices": [
+    "A light",
+    "A shadow",
+    "An accent",
+    "A hidden color"
+   ],
+   "answer": "A light",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain why Gold Fusion is called that.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Gold Fusion turns up in nearly one of every five paintings in our archive, despite an undocumented name."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 237
+}

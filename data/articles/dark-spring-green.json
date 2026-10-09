@@ -1,0 +1,137 @@
+{
+ "slug": "dark-spring-green",
+ "name": "Dark Spring Green",
+ "hex": "#177245",
+ "names": [
+  "Dark Spring Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark Spring Green is a deep, slightly cool green named for the fresh growth of early spring, catalogued as a darker companion to a lighter Spring Green on the web's X11 color list.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A season's green, by way of X11",
+   "body": "The word points to the pale, slightly yellow green of new spring leaves, the sense the lighter Spring Green already carries on the same list, though our sources give no exact year for when the X11 extended color names first wrote either one down [1]. Wikipedia's own color-name pages cite the X11 and web lists as the source for Dark Spring Green rather than a dictionary or an atlas [1]. There is no separate Spring Green entry in our own name set, so the word's nature sense has to carry the whole explanation [1]. Its nearest named neighbors on file are [[emerald-green]] and [[cadmium-green]], both almost the same at 2.5 to 2.7 CIEDE2000 units [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green, as photographed, in 22 of 23,781 paintings, 0.09 percent, rarer than 66 percent of the named colors we track [3]. It peaks in the 1900s, 7 of 1,674 paintings from that century, 5.1 times the expected rate [3]. The earliest dated match is a Tibetan *Tathagata Buddha* painting from 1860; the archive's early centuries are thin, so this is a floor and not a first [3]. Inside a painting it most often plays a mid-tone, in 33 percent of its 12 strongest matches [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fresh green of spring growth, one shade darker than a Spring Green our data does not separately list",
+   "first_recorded": "undocumented; Wikipedia cites the X11 and web color lists",
+   "source": "Wikipedia, citing X11/Web"
+  },
+  "aka": [],
+  "siblings": [
+   "emerald-green",
+   "cadmium-green",
+   "ski",
+   "windsor-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 12,
+  "measured": {
+   "lch": [
+    42.2,
+    41.1,
+    154.4
+   ],
+   "nearest": [
+    [
+     "Emerald Green",
+     2.5
+    ],
+    [
+     "Cadmium Green",
+     2.7
+    ],
+    [
+     "Ski",
+     4.5
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1860,
+   "years_before_record": null
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): \"Dark Spring Green\", Wikipedia citing X11/Web",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the \"spring\" in Dark Spring Green refer to?",
+   "choices": [
+    "New growth in early spring",
+    "A water spring",
+    "A metal coil",
+    "The Spring Equinox festival"
+   ],
+   "answer": "New growth in early spring",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources give an exact year for when Dark Spring Green was first recorded.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In which century does Dark Spring Green peak in our painting archive?",
+   "choices": [
+    "1900s",
+    "1600s",
+    "1400s",
+    "1700s"
+   ],
+   "answer": "1900s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark Spring Green has no separate, lighter \"Spring Green\" anywhere in our own color data.",
+  "It peaks in paintings from the 1900s, at over five times its usual rate."
+ ],
+ "words": 237,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

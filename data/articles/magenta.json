@@ -1,365 +1,365 @@
 {
- "slug": "magenta",
- "name": "Magenta",
- "hex": "#FF00FF",
- "names": [
-  "Magenta"
- ],
- "tier": "place",
- "depth": "epic",
- "lede": "Magenta is the red-purple of the first magenta dye, a coal-tar color made in France in 1858 or 1859 and named for a battle in Italy; on screens and in printing it is now the pure pink-purple where red and blue light meet.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A battle, a flower and a trade name",
-   "body": "*Magenta* is a place name. The town of Magenta lies near Milan, and on 4 June 1859 a French and Piedmontese army beat the Austrians there [3]. The dye took its name from the victory, in the months after it was made [3][1]. Another name from the same war, [[solferino]], was used for the same red, and Garfield says that in Britain the dye was known first as solferino and then as magenta [2][4].\n\nThe dye's first name came from a plant. Its maker called it *fuchsine*, after the flower of the shrub fuchsia [1][2][3]. In Britain the red went to market as *roseine* [1][3]. St Clair writes that neither name suited so assertive a hue, so the battle supplied a better one [3].\n\nMagenta is also a very different thing on a screen. The swatch on this page is pure `magenta` in web terms, full red and full blue with no green, and it is far brighter than any dye of the 1860s [22]. The section on the swatch comes back to that gap."
-  },
-  {
-   "id": "discovery",
-   "title": "A red from the shelf",
-   "body": "The dye came out of the chemistry of coal tar, in the years after Perkin's [[mauve]] [1][2]. Ball's account has François-Emmanuel Verguin managing a picric acid factory near Lyon, where he treated aniline with whatever reagents were on his shelves [1]. Mixing aniline with tin chloride gave him a deep red, in late 1858 or early 1859 [1]. He called it fuchsine, and sold it on to the Lyon dye-makers Renard, who began making it in 1859 [1].\n\nBooks disagree on the order of events. Ball has Verguin leave the picric acid works in early 1859 and then sell his discovery to the Renards [1]. St Clair and Garfield have him move to Renard Frères & Franc in 1858 and find the red almost at once [3][2]. Garfield adds the terms: his contract gave the firm any color he might find, in return for one-fifth of the profits, and within weeks of joining he had a crimson [2].\n\nCredit is also disputed. Ball, St Clair, Greenfield, Garfield and Eckstut name Verguin, a French chemist [1][3][4][2][7]. Finlay attributes magenta and solferino to English chemists [5]. The English claim has some basis, because a London firm made its own aniline red at almost the same time [3]. Edward Chambers Nicholson, a former student of Hofmann, devised a separate procedure in 1859, and from 1860 the firm of Simpson, Maule and Nicholson sold it as roseine [1][3].\n\nAugust Hofmann, the teacher of Nicholson and his partner Maule, had announced in 1858 that he had made a crimson coloring principle [4]. Greenfield adds that he showed no interest in selling it [4]. The commercial dye is what turned a laboratory result into a color that people wore."
-  },
-  {
-   "id": "craze",
-   "title": "The craze, the violets and the blues",
-   "body": "Magenta sold fast. The first customers were European armies, who dyed uniforms with it [3][2]. Fuchsine was made in far greater quantity than mauve, and within a few years it was the latest crush in fashion [2]. Empress Eugénie wore a solferino cashmere petticoat with a matching \"Garibaldi\" blouse, which Greenfield calls dashing [4].\n\nFactories sprang up in Mulhouse, Basel, London, Coventry and Glasgow [3]. Regulars at the Black Horse pub, near Perkin's dyeworks, liked to say that their stretch of the Grand Junction Canal changed color every week [3]. Magenta also became the parent of other colors. Altering the recipe in 1860 gave the French chemists Girard and de Laire an aniline blue by accident [1]. Hofmann found in 1863 that treating the red with ethyl iodide gave a violet, which Simpson, Maule and Nicholson made under licence from 1864 [1]. Garfield adds the Britannia violets, made by heating magenta with turpentine, and Perkin's own magenta, made with mercuric nitrate [2]. Perkin had to curtail it because the mercury harmed his workmen [2].\n\nMauve did not outlast the red. Only two years after the mauve craze, Perkin conceded that its best days were probably over, and fuchsine headed the list of what people wanted [2]. Greenfield adds that Perkin made a magenta of his own, and a new color he called vermillionette [4]."
-  },
-  {
-   "id": "trade",
-   "title": "Patents, lawsuits and a monopoly",
-   "body": "Fashion moved on, but the dye business stayed. In the early 1860s the hottest patent arguments concerned magenta, because it was the color in greatest demand [2]. Renard Frères & Franc won suits against companies in Mulhouse and Paris [2]. In 1861 more than 100 Lyon firms petitioned the French minister of agriculture and commerce for an independent commission, and got little satisfaction [2]. At the end of 1863 Renard allied with Crédit Lyonnais to form La Fuchsine, a monopolistic combine built from several mergers [2]. It made a deal with Simpson, Maule and Nicholson in London: a licence to make magenta in return for licences for Hofmann's violets [2].\n\nThe inventor was not the one who profited. Verguin's contract had signed over his rights, and by St Clair's account he earned little from his creation [3]. The long legal fight also helped end magenta's run as a fashion color. By the time lawsuits settled, it was one option among thousands [3].\n\nFrench patent law protected the product and not the process, so French industrialists moved to Switzerland, where Alexandre Clavel in Basel and the Geigy dye works made aniline dyes from 1859 [1]. In Germany, Bayer began in 1862 by selling fuchsine and aniline blues and violets [1]. Hoechst followed in 1863 and BASF in 1865 [1]. Garfield notes that once competition had pushed down the price of magenta, Perkin turned to alizarin [2]."
-  },
-  {
-   "id": "poison",
-   "title": "Arsenic in the red",
-   "body": "The trouble started with arsenic, which was used in making magenta [9][4]. In 1870 a German chemist, Springmuhl, collected fourteen samples of commercial magenta from friends across Europe and tested them for arsenic [9]. Nine contained at least 2 per cent, and five of the samples held between 4.3 and 6.5 per cent [9]. The German government, which had paid for the work, was under pressure from its dye companies and concluded that women had nothing to fear [9]. Springmuhl himself found that only about 0.0001 of a gram transferred to a square foot of dyed wool [9].\n\nSkin complaints were reported from the 1860s, and accounts multiplied in the 1870s and 1880s [4]. Greenfield says bright reds such as fuchsine were seen as particularly dangerous, and researchers focused on the arsenic acid [4]. Makers pushed back. One German firm said it used arsenic in only one of its 30 classes of coal-tar color, magenta, at about 1 per cent of the crystals, and that 95 per cent stayed in the dye bath [9]. Another firm reported that a London chemist had fed rabbits on oats steeped in magenta and other dyes, and that they stayed white [9].\n\nClass mattered too. The *British Medical Journal* noted that the cheaper magenta and scarlet fabrics were favored by poorer laborers for underclothing and stockings [9]. In 1880 Henry Carr told the Society of Arts that some blues and yellows, and especially magenta, carried arsenic [6]. The Swiss firm Muller-Pack of Basel, which made mauve, fuchsine and violets, faced a health crisis severe enough to collapse the business [9].\n\nBooks disagree on when the arsenic was found. St Clair writes that the discovery came in the early twentieth century, with up to 6.5 per cent in some samples [3]. Garfield, who cites the analysis itself, dates it to 1870 [9]. The 1870 date rests on a named analysis [9]."
-  },
-  {
-   "id": "science",
-   "title": "Rosaniline, and the stain that found bacteria",
-   "body": "Magenta did more for science than for most wardrobes. Hofmann analyzed the dye's composition and renamed it *rosaniline*, and his work revealed the structure of almost all the new aniline dyes [2]. Small changes in that structure turned the red into aniline yellow and other colors [2]. Paterson's dictionary still lists rosaniline as a red dyestuff known as magenta [11]. The Pigment Compendium notes that recipes for aniline blue were based on rosaniline, now better known as fuchsin or magenta [20].\n\nThe dyes also gave biology its stains. In the early 1860s Beneke of Marburg stained cells with mauve, and the American army surgeon Joseph Woodward used fuchsine and aniline blue to study human intestines [10]. In 1875 Carl Weigert showed that methyl violet, a derivative of fuchsine, stained bacteria in tissue samples rather than the tissue itself [10]. This observation probably encouraged Paul Ehrlich to take up staining as a field of study [10].\n\nGarfield counts 108 registered names for early synthetic dyes, and only two, magenta and mauve, were widely known [21]."
-  },
-  {
-   "id": "primaries",
-   "title": "The printer's primary",
-   "body": "Magenta is one of the three subtractive primaries. Paterson defines them as cyan, magenta and yellow, and says magenta absorbs green [11]. Eckstut explains the mechanism: a magenta pigment takes green out of the light and sends back the red and blue [7]. She adds that no natural magenta pigment was known before Verguin's dye, even though flowers had always shown the color, and that printers were the first to see the dye's value [7]. A 1950s comic she reproduces uses magenta dots for the face, the lips and the hair [7].\n\nBooks disagree on the first part of that. The Pigment Compendium says the lichen dye cudbear gives a range from red through pinks and magentas to purples [20]. Eckstut's claim is best read as no *stable, general-purpose* magenta pigment before 1859, since the lichen dyes were real but limited [20][7].\n\nThe standard process inks are cyan, magenta, yellow and black, and Westland explains that black is added because mixing the other three gives an imperfect black [12]. Gurney points out that artists keep the red-yellow-blue wheel mostly from habit, since cyan and magenta do not match our mental image of blue and red [13]. Batchelor makes the same point from a different side: printers work with cyan, magenta, yellow and black inks, while a television builds its picture from red, green and blue light, and commercial paint has four effective primaries [14]. The old claim that red, yellow and blue are the true primaries is a teaching convention, not a law of color, because no three primaries make every color [13][12].\n\nSt Clair argues that magenta's survival as a household word is largely due to color printing [3]. The color is now associated almost entirely with the pink process ink in CMYK [3]."
-  },
-  {
-   "id": "eye",
-   "title": "A color with no wavelength",
-   "body": "The rainbow has no magenta in it. Eckstut explains that purples are mixtures of red and violet, which sit at opposite ends of the spectrum and never meet in it [15]. Livingstone makes the same point: a reddish purple cannot be produced by one wavelength of light, only by a mixture of red and blue wavelengths [16]. Mixing red and blue light is how a screen makes magenta [26].\n\nThe eye can also make magenta disappear. Stare at a magenta dress, look at a white wall, and you see the dress's shape, in yellow-green [8]. The same chemistry is behind the visual purple of the retina, whose color Birren describes as normally a magenta red, bleached by light and rebuilt in darkness [18]."
-  },
-  {
-   "id": "before",
-   "title": "Before the name",
-   "body": "The color is older than the word, and a few writers use the word backward in time. Ball describes the flesh of the goddess in Titian's *Danae* as a rosy magenta-pink that deepens to magenta in the draperies [17]. That is a modern name for a sixteenth-century color. The word did not exist for Titian [17][3].\n\nPhilo of Alexandria's dove's neck, which shifts in the sun through \"a thousand different shades\", appears in Gage's book translated with *magenta* among its colors [19]. The translation is anachronistic, since Philo wrote in about the first century, nearly eighteen centuries before the dye [19][3].\n\nGage records one more consequence of the dye. By the nineteenth century the etcher Bracquemond worried that new color names, born of synthetic dyes and fashion, were out of control [19]. Magenta is one of the names from that flood that survived: an aniline crimson named for a French battle of 1859 [19]. St Clair notes that magenta, now considered a pink, was originally a more purple red [23]."
-  },
-  {
-   "id": "later",
-   "title": "Later lives",
-   "body": "In 1972 Crayola added eight fluorescent crayons to a special box, including ultra pink and hot magenta, all of which glowed under a black light [24]. St Clair connects the new high-chroma colors to the brash look of punk [24].\n\nTwo myths attach themselves to the color, and both are wrong. Bulls are not enraged by red: they are color-blind and react to the movement of the cape, and a matador's capote is magenta on one side and blue on the other, with the same effect [25]. Chromotherapy, the old belief that colored light cures illness, is another. Birren's survey of chromopaths lists magenta as a remedy for impotence and apathy, an example of the claims that his book treats as old opinion and not evidence [18]. A Massachusetts hospital test he cites reports that magenta light calmed disturbed patients for several weeks, and that after a month they became excited when it was replaced by white light [18]."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch is not the dye",
-   "body": "The swatch on this page, `#FF00FF`, is the screen primary mix: all red and all blue [22]. It has a lightness of 60.3 and a chroma of 115.6 in LCH, a very high purity [22]. The nearest ISCC-NBS 1955 block is 217, \"brilliant purple\", at a color distance of 16.5, which is a long way [22]. The 1955 dictionary also lists *magenta* itself, as block 256 [22].\n\nOlder charts show a darker, more red-purple color. Ridgway's 1912 plate XXVI, hue 67, gives a rose-purple that reads as about #AE5287 in our scan of an aged plate, so treat the number as approximate [22]. Maerz and Paul's 1930 dictionary dates the word to 1860 [22]. The dye is closer to a purple-red than to the hot pink on screen, in agreement with St Clair [23]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "We checked the swatch against 23,781 paintings in the ColorHub archive, counting a painting only if the color, within a CIEDE2000 distance of 4, covers at least 1 per cent of the canvas [22]. None qualify [22]. A pure screen mix is not a pigment, and the archive describes photographs of aged, varnished paintings and not painting as a whole [22]. The best use of the page is the opposite exercise: find the dyed fabric, the printed page or the flower that comes nearest.\n\nContrast: the swatch has a contrast ratio of 3.14 against white and 6.7 against black [22]. That makes it more readable as a background for black text than for white."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the Battle of Magenta, 4 June 1859 (the dye was first called fuchsine, after the flower)",
-   "first_recorded": "1859; Maerz and Paul give 1860",
-   "source": "Ball, Bright Earth, ch. 17; St Clair, The Secret Lives of Color"
-  },
-  "aka": [
-   "fuchsine",
-   "aniline red",
-   "roseine",
-   "rosaniline",
-   "solferino"
+  "slug": "magenta",
+  "name": "Magenta",
+  "hex": "#FF00FF",
+  "names": [
+    "Magenta"
   ],
-  "siblings": [
-   "solferino",
-   "mauve",
-   "magenta-dye"
+  "tier": "place",
+  "depth": "epic",
+  "lede": "Magenta is the red-purple of the first magenta dye, a coal-tar color made in France in 1858 or 1859 and named for a battle in Italy; on screens and in printing it is now the pure pink-purple where red and blue light meet.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A battle, a flower and a trade name",
+      "body": "*Magenta* is a place name. The town of Magenta lies near Milan, and on 4 June 1859 a French and Piedmontese army beat the Austrians there [3]. The dye took its name from the victory, in the months after it was made [3][1]. Another name from the same war, [[solferino]], was used for the same red, and Garfield says that in Britain the dye was known first as solferino and then as magenta [2][4].\n\nThe dye's first name came from a plant. Its maker called it *fuchsine*, after the flower of the shrub fuchsia [1][2][3]. In Britain the red went to market as *roseine* [1][3]. St Clair writes that neither name suited so assertive a hue, so the battle supplied a better one [3].\n\nMagenta is also a very different thing on a screen. The swatch on this page is pure `magenta` in web terms, full red and full blue with no green, and it is far brighter than any dye of the 1860s [22]. The section on the swatch comes back to that gap."
+    },
+    {
+      "id": "discovery",
+      "title": "A red from the shelf",
+      "body": "The dye came out of the chemistry of coal tar, in the years after Perkin's [[mauve]] [1][2]. Ball's account has François-Emmanuel Verguin managing a picric acid factory near Lyon, where he treated aniline with whatever reagents were on his shelves [1]. Mixing aniline with tin chloride gave him a deep red, in late 1858 or early 1859 [1]. He called it fuchsine, and sold it on to the Lyon dye-makers Renard, who began making it in 1859 [1].\n\nBooks disagree on the order of events. Ball has Verguin leave the picric acid works in early 1859 and then sell his discovery to the Renards [1]. St Clair and Garfield have him move to Renard Frères & Franc in 1858 and find the red almost at once [3][2]. Garfield adds the terms: his contract gave the firm any color he might find, in return for one-fifth of the profits, and within weeks of joining he had a crimson [2].\n\nCredit is also disputed. Ball, St Clair, Greenfield, Garfield and Eckstut name Verguin, a French chemist [1][3][4][2][7]. Finlay attributes magenta and solferino to English chemists [5]. The English claim has some basis, because a London firm made its own aniline red at almost the same time [3]. Edward Chambers Nicholson, a former student of Hofmann, devised a separate procedure in 1859, and from 1860 the firm of Simpson, Maule and Nicholson sold it as roseine [1][3].\n\nAugust Hofmann, the teacher of Nicholson and his partner Maule, had announced in 1858 that he had made a crimson coloring principle [4]. Greenfield adds that he showed no interest in selling it [4]. The commercial dye is what turned a laboratory result into a color that people wore."
+    },
+    {
+      "id": "craze",
+      "title": "The craze, the violets and the blues",
+      "body": "Magenta sold fast. The first customers were European armies, who dyed uniforms with it [3][2]. Fuchsine was made in far greater quantity than mauve, and within a few years it was the latest crush in fashion [2]. Empress Eugénie wore a solferino cashmere petticoat with a matching \"Garibaldi\" blouse, which Greenfield calls dashing [4].\n\nFactories sprang up in Mulhouse, Basel, London, Coventry and Glasgow [3]. Regulars at the Black Horse pub, near Perkin's dyeworks, liked to say that their stretch of the Grand Junction Canal changed color every week [3]. Magenta also became the parent of other colors. Altering the recipe in 1860 gave the French chemists Girard and de Laire an aniline blue by accident [1]. Hofmann found in 1863 that treating the red with ethyl iodide gave a violet, which Simpson, Maule and Nicholson made under licence from 1864 [1]. Garfield adds the Britannia violets, made by heating magenta with turpentine, and Perkin's own magenta, made with mercuric nitrate [2]. Perkin had to curtail it because the mercury harmed his workmen [2].\n\nMauve did not outlast the red. Only two years after the mauve craze, Perkin conceded that its best days were probably over, and fuchsine headed the list of what people wanted [2]. Greenfield adds that Perkin made a magenta of his own, and a new color he called vermillionette [4]."
+    },
+    {
+      "id": "trade",
+      "title": "Patents, lawsuits and a monopoly",
+      "body": "Fashion moved on, but the dye business stayed. In the early 1860s the hottest patent arguments concerned magenta, because it was the color in greatest demand [2]. Renard Frères & Franc won suits against companies in Mulhouse and Paris [2]. In 1861 more than 100 Lyon firms petitioned the French minister of agriculture and commerce for an independent commission, and got little satisfaction [2]. At the end of 1863 Renard allied with Crédit Lyonnais to form La Fuchsine, a monopolistic combine built from several mergers [2]. It made a deal with Simpson, Maule and Nicholson in London: a licence to make magenta in return for licences for Hofmann's violets [2].\n\nThe inventor was not the one who profited. Verguin's contract had signed over his rights, and by St Clair's account he earned little from his creation [3]. The long legal fight also helped end magenta's run as a fashion color. By the time lawsuits settled, it was one option among thousands [3].\n\nFrench patent law protected the product and not the process, so French industrialists moved to Switzerland, where Alexandre Clavel in Basel and the Geigy dye works made aniline dyes from 1859 [1]. In Germany, Bayer began in 1862 by selling fuchsine and aniline blues and violets [1]. Hoechst followed in 1863 and BASF in 1865 [1]. Garfield notes that once competition had pushed down the price of magenta, Perkin turned to alizarin [2]."
+    },
+    {
+      "id": "poison",
+      "title": "Arsenic in the red",
+      "body": "The trouble started with arsenic, which was used in making magenta [9][4]. In 1870 a German chemist, Springmuhl, collected fourteen samples of commercial magenta from friends across Europe and tested them for arsenic [9]. Nine contained at least 2 per cent, and five of the samples held between 4.3 and 6.5 per cent [9]. The German government, which had paid for the work, was under pressure from its dye companies and concluded that women had nothing to fear [9]. Springmuhl himself found that only about 0.0001 of a gram transferred to a square foot of dyed wool [9].\n\nSkin complaints were reported from the 1860s, and accounts multiplied in the 1870s and 1880s [4]. Greenfield says bright reds such as fuchsine were seen as particularly dangerous, and researchers focused on the arsenic acid [4]. Makers pushed back. One German firm said it used arsenic in only one of its 30 classes of coal-tar color, magenta, at about 1 per cent of the crystals, and that 95 per cent stayed in the dye bath [9]. Another firm reported that a London chemist had fed rabbits on oats steeped in magenta and other dyes, and that they stayed white [9].\n\nClass mattered too. The *British Medical Journal* noted that the cheaper magenta and scarlet fabrics were favored by poorer laborers for underclothing and stockings [9]. In 1880 Henry Carr told the Society of Arts that some blues and yellows, and especially magenta, carried arsenic [6]. The Swiss firm Muller-Pack of Basel, which made mauve, fuchsine and violets, faced a health crisis severe enough to collapse the business [9].\n\nBooks disagree on when the arsenic was found. St Clair writes that the discovery came in the early twentieth century, with up to 6.5 per cent in some samples [3]. Garfield, who cites the analysis itself, dates it to 1870 [9]. The 1870 date rests on a named analysis [9]."
+    },
+    {
+      "id": "science",
+      "title": "Rosaniline, and the stain that found bacteria",
+      "body": "Magenta did more for science than for most wardrobes. Hofmann analyzed the dye's composition and renamed it *rosaniline*, and his work revealed the structure of almost all the new aniline dyes [2]. Small changes in that structure turned the red into aniline yellow and other colors [2]. Paterson's dictionary still lists rosaniline as a red dyestuff known as magenta [11]. The Pigment Compendium notes that recipes for aniline blue were based on rosaniline, now better known as fuchsin or magenta [20].\n\nThe dyes also gave biology its stains. In the early 1860s Beneke of Marburg stained cells with mauve, and the American army surgeon Joseph Woodward used fuchsine and aniline blue to study human intestines [10]. In 1875 Carl Weigert showed that methyl violet, a derivative of fuchsine, stained bacteria in tissue samples rather than the tissue itself [10]. This observation probably encouraged Paul Ehrlich to take up staining as a field of study [10].\n\nGarfield counts 108 registered names for early synthetic dyes, and only two, magenta and mauve, were widely known [21]."
+    },
+    {
+      "id": "primaries",
+      "title": "The printer's primary",
+      "body": "Magenta is one of the three subtractive primaries. Paterson defines them as cyan, magenta and yellow, and says magenta absorbs green [11]. Eckstut explains the mechanism: a magenta pigment takes green out of the light and sends back the red and blue [7]. She adds that no natural magenta pigment was known before Verguin's dye, even though flowers had always shown the color, and that printers were the first to see the dye's value [7]. A 1950s comic she reproduces uses magenta dots for the face, the lips and the hair [7].\n\nBooks disagree on the first part of that. The Pigment Compendium says the lichen dye cudbear gives a range from red through pinks and magentas to purples [20]. Eckstut's claim is best read as no *stable, general-purpose* magenta pigment before 1859, since the lichen dyes were real but limited [20][7].\n\nThe standard process inks are cyan, magenta, yellow and black, and Westland explains that black is added because mixing the other three gives an imperfect black [12]. Gurney points out that artists keep the red-yellow-blue wheel mostly from habit, since cyan and magenta do not match our mental image of blue and red [13]. Batchelor makes the same point from a different side: printers work with cyan, magenta, yellow and black inks, while a television builds its picture from red, green and blue light, and commercial paint has four effective primaries [14]. The old claim that red, yellow and blue are the true primaries is a teaching convention, not a law of color, because no three primaries make every color [13][12].\n\nSt Clair argues that magenta's survival as a household word is largely due to color printing [3]. The color is now associated almost entirely with the pink process ink in CMYK [3]."
+    },
+    {
+      "id": "eye",
+      "title": "A color with no wavelength",
+      "body": "The rainbow has no magenta in it. Eckstut explains that purples are mixtures of red and violet, which sit at opposite ends of the spectrum and never meet in it [15]. Livingstone makes the same point: a reddish purple cannot be produced by one wavelength of light, only by a mixture of red and blue wavelengths [16]. Mixing red and blue light is how a screen makes magenta [26].\n\nThe eye can also make magenta disappear. Stare at a magenta dress, look at a white wall, and you see the dress's shape, in yellow-green [8]. The same chemistry is behind the visual purple of the retina, whose color Birren describes as normally a magenta red, bleached by light and rebuilt in darkness [18]."
+    },
+    {
+      "id": "before",
+      "title": "Before the name",
+      "body": "The color is older than the word, and a few writers use the word backward in time. Ball describes the flesh of the goddess in Titian's *Danae* as a rosy magenta-pink that deepens to magenta in the draperies [17]. That is a modern name for a sixteenth-century color. The word did not exist for Titian [17][3].\n\nPhilo of Alexandria's dove's neck, which shifts in the sun through \"a thousand different shades\", appears in Gage's book translated with *magenta* among its colors [19]. The translation is anachronistic, since Philo wrote in about the first century, nearly eighteen centuries before the dye [19][3].\n\nGage records one more consequence of the dye. By the nineteenth century the etcher Bracquemond worried that new color names, born of synthetic dyes and fashion, were out of control [19]. Magenta is one of the names from that flood that survived: an aniline crimson named for a French battle of 1859 [19]. St Clair notes that magenta, now considered a pink, was originally a more purple red [23]."
+    },
+    {
+      "id": "later",
+      "title": "Later lives",
+      "body": "In 1972 Crayola added eight fluorescent crayons to a special box, including ultra pink and hot magenta, all of which glowed under a black light [24]. St Clair connects the new high-chroma colors to the brash look of punk [24].\n\nTwo myths attach themselves to the color, and both are wrong. Bulls are not enraged by red: they are color-blind and react to the movement of the cape, and a matador's capote is magenta on one side and blue on the other, with the same effect [25]. Chromotherapy, the old belief that colored light cures illness, is another. Birren's survey of chromopaths lists magenta as a remedy for impotence and apathy, an example of the claims that his book treats as old opinion and not evidence [18]. A Massachusetts hospital test he cites reports that magenta light calmed disturbed patients for several weeks, and that after a month they became excited when it was replaced by white light [18]."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch is not the dye",
+      "body": "The swatch on this page, `#FF00FF`, is the screen primary mix: all red and all blue [22]. It has a lightness of 60.3 and a chroma of 115.6 in LCH, a very high purity [22]. The nearest ISCC-NBS 1955 block is 217, \"brilliant purple\", at a color distance of 16.5, which is a long way [22]. The 1955 dictionary also lists *magenta* itself, as block 256 [22].\n\nOlder charts show a darker, more red-purple color. Ridgway's 1912 plate XXVI, hue 67, gives a rose-purple that reads as about #AE5287 in our scan of an aged plate, so treat the number as approximate [22]. Maerz and Paul's 1930 dictionary dates the word to 1860 [22]. The dye is closer to a purple-red than to the hot pink on screen, in agreement with St Clair [23]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "We checked the swatch against 23,781 paintings in the ColorHub archive, counting a painting only if the color, within a CIEDE2000 distance of 4, covers at least 1 per cent of the canvas [22]. None qualify [22]. A pure screen mix is not a pigment, and the archive describes photographs of aged, varnished paintings and not painting as a whole [22]. The best use of the page is the opposite exercise: find the dyed fabric, the printed page or the flower that comes nearest.\n\nContrast: the swatch has a contrast ratio of 3.14 against white and 6.7 against black [22]. That makes it more readable as a background for black text than for white."
+    }
   ],
-  "parent": null,
-  "children": [
-   "deep-magenta",
-   "dark-magenta",
-   "bright-magenta"
+  "aside": {
+    "origin": {
+      "named_after": "the Battle of Magenta, 4 June 1859 (the dye was first called fuchsine, after the flower)",
+      "first_recorded": "1859; Maerz and Paul give 1860",
+      "source": "Ball, Bright Earth, ch. 17; St Clair, The Secret Lives of Color"
+    },
+    "aka": [
+      "fuchsine",
+      "aniline red",
+      "roseine",
+      "rosaniline",
+      "solferino"
+    ],
+    "siblings": [
+      "solferino",
+      "mauve",
+      "magenta-dye"
+    ],
+    "parent": null,
+    "children": [
+      "deep-magenta",
+      "dark-magenta",
+      "magenta"
+    ],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "fuchsine (the dye's first name, from fuchsia)"
+      }
+    ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#FF00FF",
+      "de2000": 4,
+      "min_cover": 0.01
+    },
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        60.3,
+        115.6,
+        328.2
+      ],
+      "contrast_white": 3.14,
+      "contrast_black": 6.7,
+      "nearest_iscc": [
+        "brilliant purple",
+        16.5
+      ]
+    },
+    "sources": [
+      "css",
+      "iscc-nbs 1955",
+      "ridgway 1912",
+      "maerz-paul 1930"
+    ]
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17 (\"The aniline boom\")",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 16 (\"The Terrible Glare\") and ch. 15 (\"Mauve Measles\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, \"Magenta\" and \"Mauve\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 22",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Finlay, Color: A Natural History of the Palette, ch. 13",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Finlay, Color: A Natural History of the Palette, ch. 16 (\"Green\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Eckstut and Eckstut, What Is Color?, Q. 32 (\"What Are Primary Colors?\")",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Eckstut and Eckstut, What Is Color?, Q. 18 (\"What Is an Afterimage?\")",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 18 (\"Poisoning the Clientele\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 21 (\"Self-Destruction\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"rosaniline\", \"subtractive primary colours\", \"aniline\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Westland, Universal Principles of Color, \"CMYK\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, \"Cyan, Magenta, and Yellow\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Batchelor, Chromophobia, ch. 9",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Eckstut and Eckstut, What Is Color?, Q. 43 (\"What Is the CIE Color Space?\")",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art: The Biology of Seeing, on nonspectral colors",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 5 (\"The Eager Chromopath\"), ch. 12 and Part 4",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, on Philo of Alexandria and on Bracquemond's colour names",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Aniline blue\" and \"Cudbear\" entries",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 26,
+      "kind": "book",
+      "cite": "Eckstut and Eckstut, What Is Color?, Q. 16 (\"What Is Trichromacy?\")",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 21,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 23 (\"Physical Acts\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 22,
+      "kind": "data",
+      "cite": "ColorHub library and archive, Magenta #FF00FF: Ridgway 1912 plate XXVI, ISCC-NBS 1955, Maerz and Paul 1930; archive of 23,781 paintings, as photographed",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 23,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, ch. 15 (the passage on color names that drift)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 24,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, ch. 60 (\"Fluorescent\" colors and punk)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 25,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, ch. 64 (\"Red\" and the bull)",
+      "loc_kind": "book-chapter",
+      "url": null
+    }
   ],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "fuchsine (the dye's first name, from fuchsia)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#FF00FF",
-   "de2000": 4,
-   "min_cover": 0.01
-  },
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    60.3,
-    115.6,
-    328.2
-   ],
-   "contrast_white": 3.14,
-   "contrast_black": 6.7,
-   "nearest_iscc": [
-    "brilliant purple",
-    16.5
-   ]
-  },
-  "sources": [
-   "css",
-   "iscc-nbs 1955",
-   "ridgway 1912",
-   "maerz-paul 1930"
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 17 (\"The aniline boom\")",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 16 (\"The Terrible Glare\") and ch. 15 (\"Mauve Measles\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, \"Magenta\" and \"Mauve\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 22",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Finlay, Color: A Natural History of the Palette, ch. 13",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Finlay, Color: A Natural History of the Palette, ch. 16 (\"Green\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Eckstut and Eckstut, What Is Color?, Q. 32 (\"What Are Primary Colors?\")",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Eckstut and Eckstut, What Is Color?, Q. 18 (\"What Is an Afterimage?\")",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 18 (\"Poisoning the Clientele\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 21 (\"Self-Destruction\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"rosaniline\", \"subtractive primary colours\", \"aniline\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Westland, Universal Principles of Color, \"CMYK\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, \"Cyan, Magenta, and Yellow\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Batchelor, Chromophobia, ch. 9",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Eckstut and Eckstut, What Is Color?, Q. 43 (\"What Is the CIE Color Space?\")",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art: The Biology of Seeing, on nonspectral colors",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 13",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 5 (\"The Eager Chromopath\"), ch. 12 and Part 4",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, on Philo of Alexandria and on Bracquemond's colour names",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Aniline blue\" and \"Cudbear\" entries",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 26,
-   "kind": "book",
-   "cite": "Eckstut and Eckstut, What Is Color?, Q. 16 (\"What Is Trichromacy?\")",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 21,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 23 (\"Physical Acts\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 22,
-   "kind": "data",
-   "cite": "ColorHub library and archive, Magenta #FF00FF: Ridgway 1912 plate XXVI, ISCC-NBS 1955, Maerz and Paul 1930; archive of 23,781 paintings, as photographed",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 23,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, ch. 15 (the passage on color names that drift)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 24,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, ch. 60 (\"Fluorescent\" colors and punk)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 25,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, ch. 64 (\"Red\" and the bull)",
-   "loc_kind": "book-chapter",
-   "url": null
+  "questions": [
+    {
+      "q": "What gave the magenta dye its name?",
+      "choices": [
+        "A French and Piedmontese victory over the Austrians near a small Italian town in 1859",
+        "The inventor's home town in France",
+        "The magenta flower",
+        "A Roman dye works"
+      ],
+      "answer": "A French and Piedmontese victory over the Austrians near a small Italian town in 1859",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: magenta is one of the colors of the rainbow.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In CMYK printing, which light does a magenta pigment absorb?",
+      "choices": [
+        "Green",
+        "Red",
+        "Blue",
+        "Yellow"
+      ],
+      "answer": "Green",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "No single wavelength of light is magenta: it exists only as a mixture of red and blue.",
+    "Of 108 registered names for early synthetic dyes, only magenta and mauve were widely known.",
+    "The pink of a printed face is made of magenta dots."
+  ],
+  "words": 2348,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Reworded the Black Horse pub line to match St Clair (regulars, not workers).",
+      "Verified Springmuhl figures, Worcester 1938 magenta light, Weigert 1875, 108 names, Crayola 1972, bull/capote against book text; no other changes."
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What gave the magenta dye its name?",
-   "choices": [
-    "A French and Piedmontese victory over the Austrians near a small Italian town in 1859",
-    "The inventor's home town in France",
-    "The magenta flower",
-    "A Roman dye works"
-   ],
-   "answer": "A French and Piedmontese victory over the Austrians near a small Italian town in 1859",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: magenta is one of the colors of the rainbow.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "In CMYK printing, which light does a magenta pigment absorb?",
-   "choices": [
-    "Green",
-    "Red",
-    "Blue",
-    "Yellow"
-   ],
-   "answer": "Green",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "No single wavelength of light is magenta: it exists only as a mixture of red and blue.",
-  "Of 108 registered names for early synthetic dyes, only magenta and mauve were widely known.",
-  "The pink of a printed face is made of magenta dots."
- ],
- "words": 2348,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Reworded the Black Horse pub line to match St Clair (regulars, not workers).",
-   "Verified Springmuhl figures, Worcester 1938 magenta light, Weigert 1875, 108 names, Crayola 1972, bull/capote against book text; no other changes."
-  ]
- }
 }

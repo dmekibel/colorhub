@@ -1,0 +1,113 @@
+{
+ "slug": "vibrant-purple",
+ "name": "Vibrant Purple",
+ "hex": "#AD03DE",
+ "names": [
+  "Vibrant Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Vibrant Purple is the modifier \"vibrant\" applied to [[purple]], recorded only in the xkcd 2010 crowd color survey, with no earlier listing in our sources.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An intensity modifier",
+   "body": "The name combines the intensity modifier \"vibrant\" with the base color [[purple]]; our data has no record of it before the xkcd 2010 crowd survey [1]. No book or dictionary in our sources files it under an older name.\n\nIts nearest look-alikes are [[dark-orchid]] (3.8 units, duller), [[purple-munsell]] (4.3, duller and darker) and [[dark-violet]] (4.9, darker); [[vivid-purple]] sits at the same distance as Dark Violet but reads more vivid rather than less [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed; a color this saturated is rare in aged, varnished paint [3]. In LCH terms it measures lightness 45, chroma 106 and hue 320 degrees, among the most saturated entries in our purple family [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier (\"vibrant\") on the base color purple",
+   "first_recorded": "2010 (xkcd crowd survey)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-orchid",
+   "purple-munsell",
+   "dark-violet",
+   "vivid-purple"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    44.6,
+    106.1,
+    319.9
+   ],
+   "nearest": [
+    [
+     "Dark Orchid",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 crowd color survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub look-alike graph (data/graph/edges-v.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Vibrant Purple's name combines which modifier with purple?",
+   "choices": [
+    "Vibrant",
+    "Deep",
+    "Dusty",
+    "Pale"
+   ],
+   "answer": "Vibrant",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive has paintings where Vibrant Purple covers a meaningful share of the canvas.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Vibrant Purple is too saturated to show up in any painting in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 155
+}

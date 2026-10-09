@@ -1,0 +1,140 @@
+{
+ "slug": "greenish-sage",
+ "name": "Greenish sage",
+ "hex": "#819C8B",
+ "names": [
+  "Greenish sage"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Seiji-iro, celadon",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Greenish sage is a soft, muted green carried into our library from the Japanese traditional color Seiji-iro, named for celadon ware, and it sits 9.6 units from the plain [[sage]].",
+   "body": "Our library lists this color under the Japanese name Seiji-iro, written 青磁色, glossed as \"celadon color,\" after the pale green glaze used on Chinese and Japanese celadon stoneware [1]. No book consulted independently dates the name's coinage beyond that gloss, so it is undocumented here [1].\n\nThe swatch measures lightness 62, chroma 14 and hue 156 degrees, in the Greens family, low in saturation, which matches the soft, glassy look of a celadon glaze rather than a strong dye [1]. The nearest named colors on file are [[surrey-green]], [[morning-blue]], [[sage-green]] and [[bluish-grey-green]], at 4.1, 4.3, 4.4 and 4.7 ΔE [1]. A deeper, more saturated relative in the same name set is [[greenish-bottle-green]]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 261 of the 23,781 paintings in our archive, about 1.1 percent, as photographed, most often as a highlight [2]. The earliest dated match, a 1470 *Madonna and Child* by an unrecorded painter, predates any celadon-ware link we can verify in a book, so the painting match and the Japanese name are separate strands of evidence, not a shared history, a floor and not a first, since the archive's early centuries are thin [2]. Childe Hassam carries it in 3 of 13 dated paintings, 21 times the archive's overall rate [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "青磁 (seiji), celadon ware, + 色 (iro), color",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Seiji-iro",
+   "青磁色"
+  ],
+  "siblings": [
+   "surrey-green",
+   "morning-blue",
+   "sage-green",
+   "bluish-grey-green"
+  ],
+  "parent": "sage",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Seiji-iro (青磁色), \"celadon color\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 261,
+  "first_seen": {
+   "year": 1470,
+   "painter": null
+  },
+  "painters": [
+   {
+    "name": "Childe Hassam",
+    "n": 13,
+    "hits": 3,
+    "lift": 21.03
+   }
+  ],
+  "measured": {
+   "lch": [
+    62,
+    14,
+    156
+   ],
+   "nearest": [
+    [
+     "Surrey Green",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Seiji-iro refer to?",
+   "choices": [
+    "Celadon glazed stoneware",
+    "A dye insect",
+    "A river stone",
+    "A silk weave"
+   ],
+   "answer": "Celadon glazed stoneware",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the archive's 1470 match proves celadon ware caused that painting's green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which already-named library color sits closest to Greenish sage?",
+   "choices": [
+    "Sage",
+    "Navy",
+    "Tan",
+    "Umber"
+   ],
+   "answer": "Sage",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Greenish sage is named for the pale green glaze of celadon stoneware, seiji in Japanese."
+ ],
+ "words": 219,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Noted that the 1470 archive match and the celadon-ware name are separate, unconnected strands of evidence, to avoid implying causation.",
+   "lint 2026-10-09"
+  ]
+ }
+}

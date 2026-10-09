@@ -1,0 +1,121 @@
+{
+ "slug": "pale-laelia-pink",
+ "name": "Pale Laelia Pink",
+ "hex": "#DBBDC4",
+ "names": [
+  "Pale Laelia Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pale Laelia Pink is a soft, dusty rose, built by putting the modifier pale in front of the base color [[laelia-pink]], named for the laelia orchid's own pink.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on an orchid's name",
+   "body": "Pale Laelia Pink puts the modifier word pale in front of the base color [[laelia-pink]], in the compound-modifier grammar our library uses for names like this one, with the base name pointing to *Laelia*, a genus of showy pink and purple orchids [1]. Robert Ridgway first listed this swatch in his 1912 *Color Standards and Color Nomenclature*, plate XXXVIII, hue 67, tone f, and the Inter-Society Color Council later filed it in the ISCC-NBS 1955 system as block 249 (R) [1]. The library also flags it as a near-duplicate of a separate Ridgway and ISCC-NBS entry, Pale Vinaceous, only 2.5 units away [1].\n\nIts nearest named neighbor is [[light-pinkish-lilac]], 3.2 units off, close enough on screen to read as the same dusty pink [2]; [[queen-pink]] sits 4.0 units away, lighter and purpler [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within range of this swatch in just 27 of 23,781 paintings, 0.11 percent, as photographed; looking for real coverage inside each painting narrows that to 18, rarer than 62 percent of the named colors in our library [3]. It most often plays a light, in 44 percent of its 18 appearances by lightness rank, so varnish cannot fake the result [3].\n\nThe earliest match dates to 1452, a painting by Bartolomeo Caporali, 460 years before Ridgway's 1912 plate [3]. That is a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment or orchid petal [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pale + laelia pink (Laelia, a genus of orchids)",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXXVIII",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Pale Vinaceous (near-duplicate, ΔE 2.5)"
+  ],
+  "siblings": [
+   "light-pinkish-lilac",
+   "queen-pink",
+   "pale-rhodonite-pink"
+  ],
+  "parent": "laelia-pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 27,
+  "n_within_painting": 18,
+  "pct_archive": 0.11,
+  "rank_pct": 38,
+  "measured": {
+   "lch": [
+    79,
+    12,
+    2
+   ],
+   "nearest": [
+    [
+     "Light Pinkish Lilac",
+     3.2
+    ],
+    [
+     "Queen Pink",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXXVIII, hue 67, tone f; ISCC-NBS 1955 block 249 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is the base color of Pale Laelia Pink named after?",
+   "choices": [
+    "Laelia, a genus of orchids",
+    "A traditional Japanese dye",
+    "The Pacific Ocean",
+    "A Crayola crayon"
+   ],
+   "answer": "Laelia, a genus of orchids",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Laelia Pink is a near-duplicate of a separate color, Pale Vinaceous.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Laelia Pink is named for an orchid, but almost never appears in our painting archive."
+ ],
+ "words": 278,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

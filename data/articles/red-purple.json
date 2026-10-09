@@ -1,258 +1,258 @@
 {
- "slug": "red-purple",
- "name": "Red-Purple",
- "hex": "#E40078",
- "names": [
-  "Red-Purple"
- ],
- "tier": "standard",
- "depth": "long",
- "lede": "Red-purple is the hue between red and purple on a colour wheel, a name that standards, dictionaries and old pigment books all use, and whose vivid screen version here is nearer to a magenta-red.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A hue between two hues",
-   "body": "In the Munsell system, red-purple (R-P) is one of ten basic hues, listed in the order yellow, green-yellow, green, blue-green, blue, purple-blue, purple, red-purple, red and yellow-red [1]. Paterson's dictionary puts it in the same place on a twelve-colour painter's wheel, between purple and red [2]. The same book gives red-purple as another name for the tertiary color red-violet, so the two words name one gap on the wheel [2]. Our library keeps a separate [[red-violet]] swatch, a darker, bluer pink [3].\n\nThe name is plain description, not a story. Its first appearance in our library is the ISCC-NBS color-name system of 1955 [3]."
-  },
-  {
-   "id": "swatch",
-   "title": "Two sources, two reds",
-   "body": "The swatch on this page, #E40078, is a vivid pink-red with a Munsell reading of about 7.6RP 4.9/17.9 [3]. ISCC-NBS block 238 calls such a color a vivid purplish red [3]. Its nearest named neighbor is [[cerise]], 6.8 CIEDE2000 units away, and Wikipedia's Mexican Pink is a near-duplicate at 0.9 [3].\n\nThe 2010 xkcd color survey shows a very different Red-Purple, a dark wine, #820747 [3]. Neither is wrong; the name sits on a wheel, not at a point. The softer and darker versions have their own pages, such as [[raspberry]] and [[mulberry]]."
-  },
-  {
-   "id": "eye",
-   "title": "Why red-purple is rare",
-   "body": "A Chinese saying holds that something so red it is purple has gone past red, and, Coles adds, that red-purple brings luck and fame [4]. In the ancient and medieval world the word *purpura* could mean dark red, crimson or purple, and it was bound up with blood [4].\n\nLivingstone explains why this part of the wheel is awkward. A reddish purple cannot be made by a single wavelength of light, only by a mixture of red and blue [5]. A pigment that looks purple must reflect both ends of the spectrum and absorb the green in the middle, which is physically more restrictive than reflecting only one end [5]. For that reason purple objects are uncommon, and purple dyes were historically rare, expensive and at times reserved for royalty [5]."
-  },
-  {
-   "id": "dyes",
-   "title": "Red-purple dyes and pigments",
-   "body": "Pigment books use the label as a category. The *Pigment Compendium* sorts every entry into one colour class, and Red-Purple is one of them [6]. The class holds very different things: the lichen dye French purple, the cobalt arsenate mineral erythrite, the pigment caput mortuum and the indigo isomer indirubin [7][8][9][10].\n\nArchil is the dark red-purple dye made from lichens, chiefly *Roccella tinctoria* [11]. In St Clair's account a Florentine merchant named Federigo brought the technique back from the Levant in the fourteenth century, and it let dyers produce a rich purple that had been tied to the far dearer shellfish dyes [11]. A Venetian recipe of 1540 called for 100 pounds of powdered lichen and 10 pounds of alum, kneaded with urine up to three times a day for as long as 70 days [11]. A preparation of the colouring matter with lime was sold as solid French purple, which Bersch describes as garnet red [7]. Look for it under [[flower:lichens-orchil|archil]].\n\nCaput mortuum is a reddish purple or violet pigment from iron oxide, which Harley took to be a by-product of sulphuric acid manufacture in the seventeenth and eighteenth centuries [8]. The Compendium also finds the synonym *burnt vitriol* in use by the end of the sixteenth century, so the early history is not settled [8]. Purple of Cassius, a gold preparation that runs from ruby red to purple, was used first to color glass and glazes, and is credited to Andreas Cassius, who died around 1673 and published in 1685 [9]. Partington traced a comparable red glass back to a fourteenth-century description, so the credit is shaky [9]. *Pabonazo*, a Spanish and Italian word for purple, may have meant a kermes or cochineal preparation, or a carmine-red mineral pigment used in fresco, and the Compendium cannot decide [12]. Indirubin is the redder isomer of indigotin, and its share in commercial indigo varied [10]. Compare [[madder]] and [[indigo]] for the dyes on either side."
-  },
-  {
-   "id": "aniline",
-   "title": "Aniline and cadmium",
-   "body": "The nineteenth century added a new red-purple from coal tar. In 1858 the French chemist François-Emmanuel Verguin mixed aniline with tin chloride and made a strong dye that sits where red turns to purple, which he called fuchsine, after the flower [13]. A British firm, Simpson, Maule and Nicholson, hit on an aniline red almost at the same time [13]. Accounts of who deserves credit for magenta differ, and St Clair names Verguin [13]. The color's descendant is [[magenta]].\n\nThe twentieth century added a mineral one. Coles dates cadmium reds to 1910, with shades running as far as red-purple, and says they displaced toxic vermilion [14]. Look at a printed photograph: the printing trio is cyan, magenta and yellow [1]. Compare [[purple]] and [[tyrian-purple]] for the older, darker end of the same family."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our archive of 23,781 has this color covering at least one per cent of its canvas, within four CIEDE2000 units of it, as photographed [15]. That describes our archive, not painting as a whole [15]. The color is a screen and print color: it first appears in our library in the ISCC-NBS lists of 1955, and the xkcd survey of 2010 added a second, darker meaning [3].\n\nThe honest summary is that red-purple is more useful as a place on the wheel than as a single historical color. The nearest named colors, [[cerise]] and [[rose]], are better starting points if you are looking for a particular vivid pink-red in a painting."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the hue between red and purple on a color wheel",
-   "first_recorded": "ISCC-NBS 1955 (in our library); Munsell hue R-P",
-   "source": "Gurney, Colour and Light, p. 77; Paterson, A Dictionary of Colour, pp. 126, 383"
-  },
-  "aka": [
-   "red-violet (tertiary color)",
-   "R-P (Munsell)",
-   "purplish red"
+  "slug": "red-purple",
+  "name": "Red-Purple",
+  "hex": "#E40078",
+  "names": [
+    "Red-Purple"
   ],
-  "siblings": [
-   "red-violet",
-   "cerise",
-   "magenta"
+  "tier": "standard",
+  "depth": "long",
+  "lede": "Red-purple is the hue between red and purple on a colour wheel, a name that standards, dictionaries and old pigment books all use, and whose vivid screen version here is nearer to a magenta-red.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A hue between two hues",
+      "body": "In the Munsell system, red-purple (R-P) is one of ten basic hues, listed in the order yellow, green-yellow, green, blue-green, blue, purple-blue, purple, red-purple, red and yellow-red [1]. Paterson's dictionary puts it in the same place on a twelve-colour painter's wheel, between purple and red [2]. The same book gives red-purple as another name for the tertiary color red-violet, so the two words name one gap on the wheel [2]. Our library keeps a separate [[red-violet]] swatch, a darker, bluer pink [3].\n\nThe name is plain description, not a story. Its first appearance in our library is the ISCC-NBS color-name system of 1955 [3]."
+    },
+    {
+      "id": "swatch",
+      "title": "Two sources, two reds",
+      "body": "The swatch on this page, #E40078, is a vivid pink-red with a Munsell reading of about 7.6RP 4.9/17.9 [3]. ISCC-NBS block 238 calls such a color a vivid purplish red [3]. Its nearest named neighbor is [[cerise]], 6.8 CIEDE2000 units away, and Wikipedia's Mexican Pink is a near-duplicate at 0.9 [3].\n\nThe 2010 xkcd color survey shows a very different Red-Purple, a dark wine, #820747 [3]. Neither is wrong; the name sits on a wheel, not at a point. The softer and darker versions have their own pages, such as [[raspberry]] and [[mulberry]]."
+    },
+    {
+      "id": "eye",
+      "title": "Why red-purple is rare",
+      "body": "A Chinese saying holds that something so red it is purple has gone past red, and, Coles adds, that red-purple brings luck and fame [4]. In the ancient and medieval world the word *purpura* could mean dark red, crimson or purple, and it was bound up with blood [4].\n\nLivingstone explains why this part of the wheel is awkward. A reddish purple cannot be made by a single wavelength of light, only by a mixture of red and blue [5]. A pigment that looks purple must reflect both ends of the spectrum and absorb the green in the middle, which is physically more restrictive than reflecting only one end [5]. For that reason purple objects are uncommon, and purple dyes were historically rare, expensive and at times reserved for royalty [5]."
+    },
+    {
+      "id": "dyes",
+      "title": "Red-purple dyes and pigments",
+      "body": "Pigment books use the label as a category. The *Pigment Compendium* sorts every entry into one colour class, and Red-Purple is one of them [6]. The class holds very different things: the lichen dye French purple, the cobalt arsenate mineral erythrite, the pigment caput mortuum and the indigo isomer indirubin [7][8][9][10].\n\nArchil is the dark red-purple dye made from lichens, chiefly *Roccella tinctoria* [11]. In St Clair's account a Florentine merchant named Federigo brought the technique back from the Levant in the fourteenth century, and it let dyers produce a rich purple that had been tied to the far dearer shellfish dyes [11]. A Venetian recipe of 1540 called for 100 pounds of powdered lichen and 10 pounds of alum, kneaded with urine up to three times a day for as long as 70 days [11]. A preparation of the colouring matter with lime was sold as solid French purple, which Bersch describes as garnet red [7]. Look for it under [[flower:lichens-orchil|archil]].\n\nCaput mortuum is a reddish purple or violet pigment from iron oxide, which Harley took to be a by-product of sulphuric acid manufacture in the seventeenth and eighteenth centuries [8]. The Compendium also finds the synonym *burnt vitriol* in use by the end of the sixteenth century, so the early history is not settled [8]. Purple of Cassius, a gold preparation that runs from ruby red to purple, was used first to color glass and glazes, and is credited to Andreas Cassius, who died around 1673 and published in 1685 [9]. Partington traced a comparable red glass back to a fourteenth-century description, so the credit is shaky [9]. *Pabonazo*, a Spanish and Italian word for purple, may have meant a kermes or cochineal preparation, or a carmine-red mineral pigment used in fresco, and the Compendium cannot decide [12]. Indirubin is the redder isomer of indigotin, and its share in commercial indigo varied [10]. Compare [[irresistible]] and [[indigo]] for the dyes on either side."
+    },
+    {
+      "id": "aniline",
+      "title": "Aniline and cadmium",
+      "body": "The nineteenth century added a new red-purple from coal tar. In 1858 the French chemist François-Emmanuel Verguin mixed aniline with tin chloride and made a strong dye that sits where red turns to purple, which he called fuchsine, after the flower [13]. A British firm, Simpson, Maule and Nicholson, hit on an aniline red almost at the same time [13]. Accounts of who deserves credit for magenta differ, and St Clair names Verguin [13]. The color's descendant is [[magenta]].\n\nThe twentieth century added a mineral one. Coles dates cadmium reds to 1910, with shades running as far as red-purple, and says they displaced toxic vermilion [14]. Look at a printed photograph: the printing trio is cyan, magenta and yellow [1]. Compare [[purple]] and [[tyrian-purple]] for the older, darker end of the same family."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our archive of 23,781 has this color covering at least one per cent of its canvas, within four CIEDE2000 units of it, as photographed [15]. That describes our archive, not painting as a whole [15]. The color is a screen and print color: it first appears in our library in the ISCC-NBS lists of 1955, and the xkcd survey of 2010 added a second, darker meaning [3].\n\nThe honest summary is that red-purple is more useful as a place on the wheel than as a single historical color. The nearest named colors, [[cerise]] and [[rose]], are better starting points if you are looking for a particular vivid pink-red in a painting."
+    }
   ],
-  "parent": "purple",
-  "children": [
-   "raspberry",
-   "mulberry"
-  ],
-  "disambiguation": [
-   {
-    "slug": "red-violet",
-    "gloss": "a darker, bluer pink; the same wheel position under a different name"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#E40078",
-   "de2000": 4,
-   "min_cover": 0.01
-  },
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    49.3,
-    78.2,
-    0.1
-   ],
-   "munsell": "7.6RP 4.9/17.9",
-   "nearest": [
-    [
-     "Cerise",
-     6.8
+  "aside": {
+    "origin": {
+      "named_after": "the hue between red and purple on a color wheel",
+      "first_recorded": "ISCC-NBS 1955 (in our library); Munsell hue R-P",
+      "source": "Gurney, Colour and Light, p. 77; Paterson, A Dictionary of Colour, pp. 126, 383"
+    },
+    "aka": [
+      "red-violet (tertiary color)",
+      "R-P (Munsell)",
+      "purplish red"
     ],
-    [
-     "Mexican Pink",
-     0.9
+    "siblings": [
+      "red-violet",
+      "cerise",
+      "magenta"
+    ],
+    "parent": "purple",
+    "children": [
+      "raspberry",
+      "mulberry"
+    ],
+    "disambiguation": [
+      {
+        "slug": "red-violet",
+        "gloss": "a darker, bluer pink; the same wheel position under a different name"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#E40078",
+      "de2000": 4,
+      "min_cover": 0.01
+    },
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        49.3,
+        78.2,
+        0.1
+      ],
+      "munsell": "7.6RP 4.9/17.9",
+      "nearest": [
+        [
+          "Cerise",
+          6.8
+        ],
+        [
+          "Mexican Pink",
+          0.9
+        ]
+      ]
+    },
+    "library": {
+      "first_recorded": 1955,
+      "xkcd_alt": "#820747"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, p. 77",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, pp. 126, 383 (\"colour wheel\", tertiary colours)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 238, xkcd 2010 alternate, Wikipedia near-duplicate, CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 24",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, chapter on color (nonspectral colors, purple)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pigment Compendium, p. 10 (colour classes)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Pigment Compendium, p. 174 (\"French purple\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Pigment Compendium, pp. 79, 94 (\"burnt vitriol\", \"caput mortuum\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Pigment Compendium, p. 325 (\"Purple of Cassius\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Pigment Compendium, p. 209 (\"indirubin\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Archil\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Pigment Compendium, p. 301 (\"pabonazo\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Magenta\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 151",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py; fieldnotes: nothing within dE2000 4 over 1% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "In Paterson's twelve-colour wheel, red-purple sits between which two colors?",
+      "choices": [
+        "Purple and red",
+        "Blue and green",
+        "Red and orange",
+        "Violet and blue"
+      ],
+      "answer": "Purple and red",
+      "kind": "pick"
+    },
+    {
+      "q": "Why are purple pigments and dyes uncommon, according to Livingstone?",
+      "choices": [
+        "They must reflect both ends of the spectrum while absorbing green in the middle",
+        "Purple is not visible in daylight",
+        "Purple needs a single wavelength of light",
+        "Every purple dye is poisonous"
+      ],
+      "answer": "They must reflect both ends of the spectrum while absorbing green in the middle",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Purple of Cassius was invented in the 1600s with no earlier trace.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "No single wavelength of light makes a reddish purple: it takes a mixture of red and blue.",
+    "A Venetian recipe of 1540 made archil purple from lichen and urine, kneaded for up to 70 days.",
+    "Red-purple has two meanings in our data: ISCC's vivid pink-red and xkcd's dark wine."
+  ],
+  "words": 909,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed claim that printer magenta is a red-purple (Gurney does not say it)",
+      "Reworded cadmium sentence to clear book-phrase overlap"
     ]
-   ]
-  },
-  "library": {
-   "first_recorded": 1955,
-   "xkcd_alt": "#820747"
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, p. 77",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, pp. 126, 383 (\"colour wheel\", tertiary colours)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 238, xkcd 2010 alternate, Wikipedia near-duplicate, CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, p. 24",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, chapter on color (nonspectral colors, purple)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pigment Compendium, p. 10 (colour classes)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Pigment Compendium, p. 174 (\"French purple\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Pigment Compendium, pp. 79, 94 (\"burnt vitriol\", \"caput mortuum\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Pigment Compendium, p. 325 (\"Purple of Cassius\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Pigment Compendium, p. 209 (\"indirubin\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Archil\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Pigment Compendium, p. 301 (\"pabonazo\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Magenta\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, p. 151",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py; fieldnotes: nothing within dE2000 4 over 1% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "In Paterson's twelve-colour wheel, red-purple sits between which two colors?",
-   "choices": [
-    "Purple and red",
-    "Blue and green",
-    "Red and orange",
-    "Violet and blue"
-   ],
-   "answer": "Purple and red",
-   "kind": "pick"
-  },
-  {
-   "q": "Why are purple pigments and dyes uncommon, according to Livingstone?",
-   "choices": [
-    "They must reflect both ends of the spectrum while absorbing green in the middle",
-    "Purple is not visible in daylight",
-    "Purple needs a single wavelength of light",
-    "Every purple dye is poisonous"
-   ],
-   "answer": "They must reflect both ends of the spectrum while absorbing green in the middle",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Purple of Cassius was invented in the 1600s with no earlier trace.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "No single wavelength of light makes a reddish purple: it takes a mixture of red and blue.",
-  "A Venetian recipe of 1540 made archil purple from lichen and urine, kneaded for up to 70 days.",
-  "Red-purple has two meanings in our data: ISCC's vivid pink-red and xkcd's dark wine."
- ],
- "words": 909,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed claim that printer magenta is a red-purple (Gurney does not say it)",
-   "Reworded cadmium sentence to clear book-phrase overlap"
-  ]
- }
 }

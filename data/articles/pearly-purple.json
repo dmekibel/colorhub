@@ -1,0 +1,113 @@
+{
+ "slug": "pearly-purple",
+ "name": "Pearly Purple",
+ "hex": "#B768A2",
+ "names": [
+  "Pearly Purple"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Pearly Purple is a dusty, medium-dark magenta-purple filed under nature words, closest in our library to the redder, deeper Mulberry.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pearl word, not a pearl color",
+   "body": "Our classifier files Pearly Purple's name as a nature word, built on \"pearly,\" the family ColorHub uses for plant, animal, food and landscape terms [1]. It is not literally the color of a pearl: pearls run pale and iridescent, while this purple sits at lightness 55 and a fairly strong chroma of 43 on the LCH scale [1]. Wikipedia's color list is the only source we hold for the name, and it does not explain who coined it or when [1].\n\nThe nearest named colors on file are [[cattleya]], [[mulberry-crayola]], [[pale-magenta]] and [[mathews-purple]], at 5.1, 5.9, 6 and 6.3 ΔE [1]. Both sit in the *Purples* family, but Mulberry reads redder and a little darker [1]. Munsell plots the hue near 0.7RP, between red-purple and plain purple [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, has no painting where Pearly Purple covers at least five percent of the canvas within six CIEDE2000 units [2]. That absence is itself a finding: this is a screen-list color, not one the paint record of Western and Asian museum paintings happens to reach [2]. As with any hex value, the swatch here is a screen approximation, not a measured pigment [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources we hold",
+   "source": "Wikipedia color list, via ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "cattleya",
+   "mulberry-crayola",
+   "pale-magenta",
+   "mathews-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    55,
+    43,
+    336
+   ],
+   "nearest": [
+    [
+     "Cattleya",
+     5.1
+    ],
+    [
+     "Mulberry (Crayola)",
+     5.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph nodes (data/library.json, data/graph/nodes-p.json), sourced from Wikipedia's list of colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Pearly Purple in our library?",
+   "choices": [
+    "Mulberry",
+    "Xanadu",
+    "Zinzolin",
+    "Steel Pink"
+   ],
+   "answer": "Mulberry",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain who first named Pearly Purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pearly Purple never turns up in our 23,781-painting archive."
+ ],
+ "words": 216,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Name origin undocumented beyond Wikipedia's list; no archive presence to report beyond zero.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -35,13 +35,13 @@
       "mauve-blush",
       "khaki-web",
       "pale-ecru-drab",
-      "pale-brownish-drab"
+      "dark-silver-pink"
     ],
     "parent": "linen",
     "children": [],
     "disambiguation": [
       {
-        "slug": "drab-grey",
+        "slug": "linen-grey",
         "gloss": "an older alternate name for this same swatch"
       }
     ],

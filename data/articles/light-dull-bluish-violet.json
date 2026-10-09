@@ -1,0 +1,131 @@
+{
+ "slug": "light-dull-bluish-violet",
+ "name": "Light Dull Bluish Violet",
+ "hex": "#9D9BBD",
+ "names": [
+  "Light Dull Bluish Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Dull Bluish Violet is a muted light violet from Ridgway's 1912 atlas, filed again by name in the 1955 ISCC-NBS dictionary, built from a three-word modifier chain on plain [[violet]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier chain on Violet",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate XXXVI, hue 57″″, tone b [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Dull Bluish Violet\" under block 210, \"light violet\" [2]. The name stacks three modifiers, light, dull and bluish, onto [[violet]], describing a desaturated, blue-leaning version of the color rather than naming a new source [1].\n\nIn our color library its closest neighbor is [[dark-greyish-lavender]], about 3.5 units away and nearly the same color [3]. [[blue-bell]] and [[ontario-violet]] both sit 4.2 units off, more vivid and bluer respectively [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings matches this tone in 48 of them, about 0.2 percent, as photographed, rarer than 59 percent of the named colors we track [4]. It peaks in the 1900s, present in 6 of the 1,674 paintings from that decade, 2.0 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays a hidden color, in 60 percent of its 25 clearly-ranked appearances [4]. The earliest dated match is 1516, in a painting by Sebastiano del Piombo, 396 years before the name's first 1912 record, so this is a look-alike hue in an old photograph, not proof of the name's age [4]. The archive's early centuries are thin, so this is a floor, not a first. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a three-word modifier chain (light, dull, bluish) on [[violet]]",
+   "first_recorded": "1912 (Ridgway, plate XXXVI); carried into the 1955 ISCC-NBS dictionary, block 210",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-greyish-lavender",
+   "blue-bell",
+   "ontario-violet"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 48,
+  "measured": {
+   "lch": [
+    65.2,
+    18.9,
+    294.3
+   ],
+   "nearest": [
+    [
+     "Dark Greyish Lavender",
+     3.5
+    ],
+    [
+     "Blue Bell",
+     4.2
+    ],
+    [
+     "Ontario Violet",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXVI, hue 57″″, tone b",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ISCC-NBS, NBS Circular 553 (1955), block 210, \"Light Dull Bluish Violet\" (data/sources/iscc-nbs-names.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many modifier words does the name \"Light Dull Bluish Violet\" stack onto the parent color Violet?",
+   "choices": [
+    "Three",
+    "One",
+    "Five",
+    "Two"
+   ],
+   "answer": "Three",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, Light Dull Bluish Violet most often plays which role?",
+   "choices": [
+    "A hidden color",
+    "A light",
+    "An accent",
+    "A focal color"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Light Dull Bluish Violet stacks three modifiers, light, dull and bluish, onto plain Violet."
+ ],
+ "words": 271,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

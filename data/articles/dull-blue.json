@@ -1,118 +1,110 @@
 {
- "slug": "dull-blue",
- "name": "Dull Blue",
- "hex": "#49759C",
- "names": [
-  "Dull Blue"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Dull Blue is a muted, mid-toned slate blue named by the 2010 xkcd color survey, common enough to turn up in a Monet sunset and a Fra Angelico Madonna alike.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A crowd name for a grayed blue",
-   "body": "The only recorded source for Dull Blue is the xkcd survey of 2010, following the plain modifier grammar *dull* plus [[blue]] [1]. At hex #49759C it measures lightness 48 and chroma 26 in LCH, and the nearest ISCC-NBS block reads as a moderate blue, 4.8 units off [1].\n\nIts closest named neighbor is [[flat-blue|Flat Blue]], 2.5 units away and more vivid, followed by [[stormy-blue|Stormy Blue]], 2.8 units off and almost the same color [2]. [[queen-blue|Queen Blue]] sits 3.9 units away, also almost the same [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this blue in 76 of 23,781 paintings, about 0.32 percent, as photographed [3]. The earliest match is Fra Angelico's *Madonna of the Pomegranate*, from 1426, 584 years before the xkcd survey fixed the name, a floor and not a first, since the archive's early centuries are thin [3]. It peaks in the 1910s, in 8 of 523 paintings, nearly 5 times the archive's overall rate, with Claude Monet carrying it in 3 of his 50 works here, over 18 times the baseline, including a 1903 view of the Houses of Parliament at sunset [3]. These are screen matches on photographs of varnished paintings, not a record of any pigment [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a modifier of blue: dull + blue",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "blue",
-   "flat-blue",
-   "stormy-blue",
-   "queen-blue"
+  "slug": "dull-blue",
+  "name": "Dull Blue",
+  "hex": "#49759C",
+  "names": [
+    "Dull Blue"
   ],
-  "parent": "blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 76,
-  "pct": 0.32,
-  "measured": {
-   "lch": [
-    47.7,
-    26.0,
-    262.0
-   ],
-   "nearest": [
-    [
-     "Flat Blue",
-     2.5
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Dull Blue is a muted, mid-toned slate blue named by the 2010 xkcd color survey, common enough to turn up in a Monet sunset and a Fra Angelico Madonna alike.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A crowd name for a grayed blue",
+      "body": "The only recorded source for Dull Blue is the xkcd survey of 2010, following the plain modifier grammar *dull* plus [[blue]] [1]. At hex #49759C it measures lightness 48 and chroma 26 in LCH, and the nearest ISCC-NBS block reads as a moderate blue, 4.8 units off [1].\n\nIts closest named neighbor is [[flat-blue|Flat Blue]], 2.5 units away and more vivid, followed by [[virgin|Stormy Blue]], 2.8 units off and almost the same color [2]. [[queen-blue|Queen Blue]] sits 3.9 units away, also almost the same [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This match appears in 0.58% of the 23,781 paintings in our archive (139 paintings, as photographed); the within-painting lens narrows that to 64 [3]. In our archive it is more common than 53% of the named colors [3]. It peaks in the 1900s, present in 0.8% of the 1,674 paintings we have from that decade (13 paintings), 2.3 times the rate its museums would predict [3]. Inside a painting it most often plays an accent across its 64 appearances by lightness rank within the painting [3]. The earliest match dates to 1405, 605 years before the name's 2010 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a modifier of blue: dull + blue",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "blue",
+      "flat-blue",
+      "virgin",
+      "queen-blue"
+    ],
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 139,
+    "pct_archive": 0.58,
+    "n_within_painting": 64,
+    "pct_within_painting": 0.27,
+    "rank_pct": 53,
+    "name_first_recorded": 2010,
+    "earliest_match_year": 1405
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-d.json): xkcd color survey, 2010",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which survey first records the name Dull Blue in our library?",
+      "choices": [
+        "The 2010 xkcd color survey",
+        "Ridgway's 1912 atlas",
+        "The ISCC-NBS charts of 1955",
+        "Maerz and Paul's 1930 dictionary"
+      ],
+      "answer": "The 2010 xkcd color survey",
+      "kind": "pick"
+    },
+    {
+      "q": "Which painter carries Dull Blue at the highest rate above the archive baseline?",
+      "choices": [
+        "Claude Monet",
+        "Auguste Renoir",
+        "John Singer Sargent",
+        "Paul Cezanne"
+      ],
+      "answer": "Claude Monet",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Dull Blue peaks in the 1910s, when Monet used it 18 times more often than our archive's average."
+  ],
+  "words": 262,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "field section's presence/rank/decade/painter/country numbers no longer matched data/graph/fieldnotes (stale archive snapshot); replaced with the current fieldnotes facts"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-d.json): xkcd color survey, 2010",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which survey first records the name Dull Blue in our library?",
-   "choices": [
-    "The 2010 xkcd color survey",
-    "Ridgway's 1912 atlas",
-    "The ISCC-NBS charts of 1955",
-    "Maerz and Paul's 1930 dictionary"
-   ],
-   "answer": "The 2010 xkcd color survey",
-   "kind": "pick"
-  },
-  {
-   "q": "Which painter carries Dull Blue at the highest rate above the archive baseline?",
-   "choices": [
-    "Claude Monet",
-    "Auguste Renoir",
-    "John Singer Sargent",
-    "Paul Cezanne"
-   ],
-   "answer": "Claude Monet",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Dull Blue peaks in the 1910s, when Monet used it 18 times more often than our archive's average."
- ],
- "words": 226,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; written from ColorHub library/graph/archive data only."
-  ]
- }
 }

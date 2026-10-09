@@ -22,7 +22,7 @@
     {
       "id": "blending-in",
       "title": "Armies stop being visible",
-      "body": "Before khaki, armies wore bright colors to be seen. In St Clair's account, bright cloth made forces look bigger and let soldiers find friends in battle smoke, but near 1900 aircraft scouting and smokeless guns made being visible a danger [1]. Pastoureau notes that other armies had already moved toward colors that blended with the landscape: grayish green for the Germans, Italians and Russians, grayish blue for Austro-Hungarian soldiers [7].\n\nFrance is the counterexample. Red trousers dyed with [[madder]] were ordered in 1829 and worn until 1915, and in 1911 a former war minister defended them as part of the French national character [7]. Pastoureau suggests that being so easy to see may have cost the army heavy losses in the field [7]."
+      "body": "Before khaki, armies wore bright colors to be seen. In St Clair's account, bright cloth made forces look bigger and let soldiers find friends in battle smoke, but near 1900 aircraft scouting and smokeless guns made being visible a danger [1]. Pastoureau notes that other armies had already moved toward colors that blended with the landscape: grayish green for the Germans, Italians and Russians, grayish blue for Austro-Hungarian soldiers [7].\n\nFrance is the counterexample. Red trousers dyed with [[irresistible]] were ordered in 1829 and worn until 1915, and in 1911 a former war minister defended them as part of the French national character [7]. Pastoureau suggests that being so easy to see may have cost the army heavy losses in the field [7]."
     },
     {
       "id": "world-war",
@@ -42,7 +42,7 @@
     {
       "id": "swatches",
       "title": "Which khaki",
-      "body": "There is no single screen khaki. Our swatch, #BDB76B, is a duller mid yellow-green that ISCC-NBS calls a moderate greenish yellow, about three units away [6]. Paterson gives the X11 keyword khaki as #F0E68C, a much paler yellow [3]. Our library also carries Khaki (Web) at #C3B091, a pale tan, and the xkcd color survey recorded two khakis, #AAA662 and #9B8F55 [6].\n\nNone of these is the cloth of a field uniform, which Paterson describes as a drab yellowish brown [3]. Close relatives in our data are [[khaki-web]], [[khaki-green]], [[khaki-olive]], [[khaki-brown]] and [[light-khaki]] [6]."
+      "body": "There is no single screen khaki. Our swatch, #BDB76B, is a duller mid yellow-green that ISCC-NBS calls a moderate greenish yellow, about three units away [6]. Paterson gives the X11 keyword khaki as #F0E68C, a much paler yellow [3]. Our library also carries Khaki (Web) at #C3B091, a pale tan, and the xkcd color survey recorded two khakis, #AAA662 and #9B8F55 [6].\n\nNone of these is the cloth of a field uniform, which Paterson describes as a drab yellowish brown [3]. Close relatives in our data are [[khaki-web]], [[khaki-green]], [[khaki-olive]], [[khaki-brown]] and [[pale-lime]] [6]."
     },
     {
       "id": "field",
@@ -63,12 +63,12 @@
     "siblings": [
       "khaki-web",
       "khaki-green",
-      "khaki-grey"
+      "khaki-olive"
     ],
     "parent": null,
     "children": [
       "khaki-brown",
-      "light-khaki"
+      "pale-lime"
     ],
     "disambiguation": [
       {

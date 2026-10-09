@@ -1,0 +1,112 @@
+{
+ "slug": "weezy-blue",
+ "name": "Weezy Blue",
+ "hex": "#189BCC",
+ "names": [
+  "Weezy Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Weezy Blue is a vivid greenish blue whose own origin is undocumented in our sources, though its ISCC-NBS paint-chip block holds several older, better-documented names for almost the same color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Origin undocumented",
+   "body": "Our sources trace Weezy Blue only to the web; who coined it and when is undocumented here [1]. It falls in the ISCC-NBS 1955 system's block for vivid greenish blue, about three units from that block's center [1]. That block holds a cluster of older names for nearly the same chip: Bright Greenish Blue, Coeru and Leum, plus Caeruleum, which Maerz and Paul's 1930 dictionary dates to 1859, and Italian Blue, which they date to 1912, plate 33 [1]. None of those names is documented as Weezy Blue's own source, but they show the chip itself has a much longer paper trail than this one name does [1].\n\nIts closest measured look-alike is [[united-nations-blue|United Nations Blue]], read as almost the same color; [[carolina-blue|Carolina Blue]] sits further out, read as bluer [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds this color in only 3 of them, about 0.01 percent, as photographed, rarer than 88 percent of our named colors [2]. A color chip with this much naming history behind it can still be scarce on real canvases: a paint-chip block is a system of classification, not a record of what painters actually used [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library and graph"
+  },
+  "aka": [],
+  "siblings": [
+   "united-nations-blue",
+   "carolina-blue",
+   "sky-steel",
+   "maximum-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "measured": {
+   "lch": [
+    59.9,
+    37.7,
+    245.7
+   ],
+   "nearest": [
+    [
+     "United Nations Blue",
+     2.9
+    ],
+    [
+     "Carolina Blue",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 167 and its alternate names (Maerz and Paul 1930 dates)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Is the origin of the name Weezy Blue documented in our sources?",
+   "choices": [
+    "No, it is undocumented",
+    "Yes, it is a 19th-century dye",
+    "Yes, it is a Crayola name",
+    "Yes, it is named after a painter"
+   ],
+   "answer": "No, it is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: every name in Weezy Blue's ISCC-NBS color-chip block is as recent as Weezy Blue itself.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Weezy Blue's own name is undocumented, but its color-chip block also holds a name dated to 1859."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 86%, current data/graph/fieldnotes says 88% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 217
+}

@@ -17,7 +17,7 @@
   {
    "id": "swatch",
    "title": "Three green-blues",
-   "body": "The swatch here is #1164B4, a clear mid blue of lightness 42 and chroma 49, and the library's nearest app color is plain [[blue]] [2]. It comes from a Wikipedia color list that our library records as its source [2]. The earliest record of the name in our sources is RAL 5001, from 1927, whose approximate screen value is a much darker steel blue, #1F4764 [2]. The web survey xkcd uses the same words for a sea green, #06B48B, which is nearer [[teal]], [[sea-green]] and [[turquoise]] than to any blue [2].\n\nThat makes three colors under one name, from blue-leaning to green-leaning. Nothing in the books fixes which is right, and the point of the name is that it is flexible [1][2].\n\nThe swatch has a group of older names. The ISCC-NBS block of 1955 that holds it includes [[alexandria-blue]], [[armenian-blue]], [[cleopatra]], Hathor and [[bonnie-blue]], which Maerz and Paul first record between 1791 and 1924 [2]. Alexandria Blue dates from 1791 and Armenian Blue from about 1804 [2]."
+   "body": "The swatch here is #1164B4, a clear mid blue of lightness 42 and chroma 49, and the library's nearest app color is plain [[blue]] [2]. It comes from a Wikipedia color list that our library records as its source [2]. The earliest record of the name in our sources is RAL 5001, from 1927, whose approximate screen value is a much darker steel blue, #1F4764 [2]. The web survey xkcd uses the same words for a sea green, #06B48B, which is nearer [[teal]], [[sea-green]] and [[turquoise]] than to any blue [2].\n\nThat makes three colors under one name, from blue-leaning to green-leaning. Nothing in the books fixes which is right, and the point of the name is that it is flexible [1][2].\n\nThe swatch has a group of older names. The ISCC-NBS block of 1955 that holds it includes [[green-blue]], [[green-blue]], [[green-blue]], Hathor and [[green-blue]], which Maerz and Paul first record between 1791 and 1924 [2]. Alexandria Blue dates from 1791 and Armenian Blue from about 1804 [2]."
   },
   {
    "id": "pigments",
@@ -215,7 +215,7 @@
   "Medieval Italians called malachite 'green-blue' because it grows beside azurite.",
   "Three sources use the name Green-Blue for a blue, a steel blue and a sea green."
  ],
- "words": 923,
+ "words": 924,
  "status": "checked",
  "checked": {
   "by": "checker",

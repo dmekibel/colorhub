@@ -1,0 +1,109 @@
+{
+ "slug": "granny-smith-apple",
+ "name": "Granny Smith Apple",
+ "hex": "#A8E4A0",
+ "names": [
+  "Granny Smith Apple"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Granny Smith Apple is a pale, yellowish green named for the apple variety, barely present in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the apple, not further explained",
+   "body": "Granny Smith Apple takes its name from the green apple variety [1]. Wikipedia's color list is our only source for the name, and it does not document who first used the apple's color as a color name [1]. Its nearest named look-alikes in our library are [[greenish-hospital-green]], [[light-grey-green]], [[hospital-green]] and [[very-light-green]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green in just one of the 23,781 paintings we have, a work attributed to Alexander von Kotzebue and dated 1857, as photographed [2]. That is a trace presence, not a pattern, and this archive describes our own museum holdings, not painting as a whole [2]. The hex value, #A8E4A0, is a pale, yellowish green typical of the apple's skin rather than its flesh, and is a screen approximation like every value in our library [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Granny Smith apple variety",
+   "first_recorded": "undocumented in the sources we hold",
+   "source": "Wikipedia"
+  },
+  "aka": [],
+  "siblings": [
+   "greenish-hospital-green",
+   "light-grey-green",
+   "hospital-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "measured": {
+   "lch": [
+    85.2,
+    41.9,
+    139.5
+   ],
+   "nearest": [
+    [
+     "Greenish hospital green",
+     3.0
+    ],
+    [
+     "Light Grey Green",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia; computed LCH and nearest named colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Granny Smith Apple named for?",
+   "choices": [
+    "The green apple variety",
+    "A paint company",
+    "A fashion house",
+    "A gemstone"
+   ],
+   "answer": "The green apple variety",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Granny Smith Apple is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Only one painting in our archive comes close to Granny Smith Apple."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 152
+}

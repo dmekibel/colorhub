@@ -31,7 +31,7 @@
       "Nigrosin Blue (ridgway+iscc-nbs)"
     ],
     "siblings": [
-      "nigrosin-blue",
+      "slate-navy",
       "glacier",
       "acetin-blue",
       "bruges"
@@ -40,7 +40,7 @@
     "children": [],
     "disambiguation": [
       {
-        "slug": "nigrosin-blue",
+        "slug": "slate-navy",
         "gloss": "a separately catalogued name for what our color graph measures as the identical color (ΔE 0.0)"
       }
     ],

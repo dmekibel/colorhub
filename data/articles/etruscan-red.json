@@ -1,0 +1,149 @@
+{
+  "slug": "etruscan-red",
+  "name": "Etruscan Red",
+  "hex": "#AD6B60",
+  "names": [
+    "Etruscan Red"
+  ],
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Etruscan Red is a muted terracotta brown, first filed by Ridgway's 1912 color dictionary and, in Japan, carried under a different name tied to persimmon water.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Filed in 1912, dated earlier",
+      "body": "Etruscan Red is first filed by Ridgway's 1912 \"Color Standards and Color Nomenclature,\" plate XXVII, hue 5″, as a reddish terracotta brown [1]. Maerz and Paul's 1930 dictionary dates the name earlier still, to 1905, plate 4 G 11 [1]. The ISCC-NBS dictionary of 1955 filed the same name in block 39 [2]. Our sources do not explain why the name invokes the Etruscans specifically [1]. The hex value, #AD6B60, comes from a scan of an aged printed plate and only approximates the original [1]."
+    },
+    {
+      "id": "japan",
+      "title": "In Japan: Mizugaki",
+      "body": "In Japan, the same hue is listed among the traditional colors as Mizugaki (水がき), \"water persimmon\" [3]. Its nearest named look-alikes in our library are [[copper-penny]], [[ocher-red]], [[cacao-brown]] and [[marsh-rose]], all within a few units of it [4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this terracotta in 1.07 percent of the 23,781 paintings we have, 255 of them, as photographed; the within-painting lens finds it in 99 [5]. That is more common than 59 percent of the named colors in our archive [5]. It peaks in the 1900s, 2.5 times the expected rate for that century, on 19 paintings [5]. Inside a painting it most often plays an accent, in 53 percent of the 99 paintings where it appears [5]. India is the most over-represented country for it, 2.5 times the expected rate, 23 of 721 paintings [5]. The earliest match in our archive is dated 1301, nearly six centuries before the name's earliest record; the archive's early centuries are thin, so this is a floor, not a first [5]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "first filed by Ridgway's 1912 color dictionary; the Etruscan reference itself is undocumented in our sources",
+      "first_recorded": "1905 (Maerz and Paul, plate 4 G 11)",
+      "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+    },
+    "aka": [],
+    "siblings": [
+      "copper-penny",
+      "ocher-red"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Mizugaki (水がき)"
+      }
+    ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 255,
+    "measured": {
+      "lch": [
+        52.1,
+        30.4,
+        34.6
+      ],
+      "nearest": [
+        [
+          "Copper Penny",
+          2.5
+        ]
+      ]
+    },
+    "iscc_nbs_1955": {
+      "block": 39
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature, plate XXVII, hue 5″; Maerz and Paul, A Dictionary of Color (1930), plate 4 G 11",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955 dictionary filing, block 39",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library: Japanese traditional color list, Mizugaki",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub color library: computed look-alike colors",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which 1912 plate first files a hue close to Etruscan Red?",
+      "choices": [
+        "Ridgway, plate XXVII",
+        "Munsell's Atlas",
+        "Pantone's formula guide",
+        "Werner's Nomenclature"
+      ],
+      "answer": "Ridgway, plate XXVII",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources explain why the name \"Etruscan\" was chosen for this color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In our archive, Etruscan Red is most over-represented in paintings from which country?",
+      "choices": [
+        "India",
+        "Japan",
+        "France",
+        "the Netherlands"
+      ],
+      "answer": "India",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "In Japan the same color goes by Mizugaki, \"water persimmon.\""
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": []
+  },
+  "words": 273
+}

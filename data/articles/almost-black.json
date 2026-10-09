@@ -16,7 +16,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "This is one of the most common tones in our archive: it appears in 15.15 percent of 23,781 paintings (3,604 of them, as photographed), more common than 99 percent of the named colors here [5]. Inside a painting it most often plays a shadow, found that way in 77 percent of the 3,192 paintings where it is the dominant local color [5]. It peaks in paintings from the 1600s, at 1.2 times the expected rate for that century, and shares canvases with [[blood-red|Blood Red]] and [[black-bean|Black Bean]] more than chance [5]. The earliest matching canvas dates to the year 1000, a thousand years before the exact name was recorded in 2010; the archive's early centuries are thin, so this is a floor, not a first, and that distance is a look-alike hue, not proof any painter used this name [5]."
+   "body": "This is one of the most common tones in our archive: it appears in 15.15 percent of 23,781 paintings (3,604 of them, as photographed), more common than 99 percent of the named colors here [5]. Inside a painting it most often plays a shadow across the 3,192 paintings where it is the dominant local color [5]. It peaks in paintings from the 1600s, at 1.2 times the expected rate for that century, and shares canvases with [[blood-red|Blood Red]] and [[black-bean|Black Bean]] more than chance [5]. The earliest matching canvas dates to the year 1000, a thousand years before the exact name was recorded in 2010; the archive's early centuries are thin, so this is a floor, not a first, and that distance is a look-alike hue, not proof any painter used this name [5]."
   }
  ],
  "aside": {
@@ -125,12 +125,12 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": [
    "No single coiner or date for the exact term; distinguished the old descriptive phrase from the 2010 survey record."
   ]
  },
  "slug": "almost-black",
- "words": 306
+ "words": 300
 }

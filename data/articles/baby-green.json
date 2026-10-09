@@ -1,123 +1,123 @@
 {
- "slug": "baby-green",
- "name": "Baby Green",
- "hex": "#8CFF9E",
- "names": [
-  "Baby Green"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Baby Green is a vivid, pale yellow-green listed across the CSS, RAL and ISCC-NBS systems, and far more saturated on screen than most of what it matches in old paint.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name in the library",
-   "body": "This bright green appears across several standard lists: the CSS color keywords, the German RAL system (close to RAL 6029 and RAL 6021), the ISCC-NBS dictionary of 1955, and the xkcd color survey [1]. No single source dates its first use; it reads as a modern, screen-native green rather than a dye or pigment name [1]. The nearest color-graph neighbor is [[light-green]], 3.8 units away, with [[seafoam]], [[easter-green]] and [[light-pastel-green]] all close behind [2].\n\nMunsell gives 1.3G 9.1/10.5, very light and strongly saturated, a combination rare in historical pigments [1]. The hex #8CFF9E sits near the edge of what a screen can display; almost nothing painted before photography reaches this brightness [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "At a looser match (ΔE 15), our archive finds only 3 of 23,781 paintings, as photographed, and the strongest is a well-known case: Vincent van Gogh's *Roses* (1890), at the National Gallery of Art [3]. The pink pigment in that painting has faded over more than a century, and much of what was once rose-pink now reads, in photographs, as this pale green [3]. His *Still Life of Oranges and Lemons with Blue Gloves* (1889) is a weaker second match [3]. The rarity of this exact green elsewhere in the archive reflects how recent and screen-bound the color itself is, not its absence in nature [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "light-green",
-   "seafoam",
-   "easter-green",
-   "light-pastel-green"
+  "slug": "baby-green",
+  "name": "Baby Green",
+  "hex": "#8CFF9E",
+  "names": [
+    "Baby Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 3,
-  "match": {
-   "de2000": 15.0
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Baby Green is a vivid, pale yellow-green listed across the CSS, RAL and ISCC-NBS systems, and far more saturated on screen than most of what it matches in old paint.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name in the library",
+      "body": "This bright green appears across several standard lists: the CSS color keywords, the German RAL system (close to RAL 6029 and RAL 6021), the ISCC-NBS dictionary of 1955, and the xkcd color survey [1]. No single source dates its first use; it reads as a modern, screen-native green rather than a dye or pigment name [1]. The nearest color-graph neighbor is [[light-green]], 3.8 units away, with [[seafoam]], [[lighter-green]] and [[celery]] all close behind [2].\n\nMunsell gives 1.3G 9.1/10.5, very light and strongly saturated, a combination rare in historical pigments [1]. The hex #8CFF9E sits near the edge of what a screen can display; almost nothing painted before photography reaches this brightness [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "At a looser match (ΔE 15), our archive finds only 3 of 23,781 paintings, as photographed, and the strongest is a well-known case: Vincent van Gogh's *Roses* (1890), at the National Gallery of Art [3]. The pink pigment in that painting has faded over more than a century, and much of what was once rose-pink now reads, in photographs, as this pale green [3]. His *Still Life of Oranges and Lemons with Blue Gloves* (1889) is a weaker second match [3]. The rarity of this exact green elsewhere in the archive reflects how recent and screen-bound the color itself is, not its absence in nature [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "light-green",
+      "seafoam",
+      "lighter-green",
+      "celery"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    91.5,
-    63.8,
-    145.2
-   ],
-   "nearest": [
-    [
-     "Light Green",
-     3.8
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 3,
+    "match": {
+      "de2000": 15.0
+    },
+    "measured": {
+      "lch": [
+        91.5,
+        63.8,
+        145.2
+      ],
+      "nearest": [
+        [
+          "Light Green",
+          3.8
+        ]
+      ]
+    },
+    "iscc": {
+      "name": "brilliant yellowish green",
+      "de": 7.4
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why does Van Gogh's *Roses* (1890) now match a bright screen green?",
+      "choices": [
+        "Its pink pigment has faded over time, as photographed today",
+        "Van Gogh originally painted it green",
+        "The museum repainted it",
+        "It is a different painting entirely"
+      ],
+      "answer": "Its pink pigment has faded over time, as photographed today",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: most pre-photography pigments can reach the brightness of Baby Green.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Our best archive match for this bright green is a Van Gogh painting that was originally pink."
+  ],
+  "words": 247,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "iscc": {
-   "name": "brilliant yellowish green",
-   "de": 7.4
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why does Van Gogh's *Roses* (1890) now match a bright screen green?",
-   "choices": [
-    "Its pink pigment has faded over time, as photographed today",
-    "Van Gogh originally painted it green",
-    "The museum repainted it",
-    "It is a different painting entirely"
-   ],
-   "answer": "Its pink pigment has faded over time, as photographed today",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: most pre-photography pigments can reach the brightness of Baby Green.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Our best archive match for this bright green is a Van Gogh painting that was originally pink."
- ],
- "words": 249,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
-   "lint 2026-10-09"
-  ]
- }
 }

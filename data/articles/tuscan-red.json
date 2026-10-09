@@ -1,125 +1,125 @@
 {
- "slug": "tuscan-red",
- "name": "Tuscan Red",
- "hex": "#7C4848",
- "names": [
-  "Tuscan Red"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Tuscan red is a dusky brownish red, and also a pigment name that the old colormen applied to iron-oxide reds sold with a dye lake added.",
- "sections": [
-  {
-   "id": "pigment",
-   "title": "An iron red with a dye",
-   "body": "The Pigment Compendium groups Tuscan red with Venetian red, Indian red, Pompeiian red, light red, rouge, Terra Pozzuoli, colcothar and caput mortuum, a family of names mostly applied to synthetic iron-oxide reds [1]. Weber, in 1923, describes red iron oxides as purer than ochres, and says Tuscan red and Pompeiian red were iron oxide mixed with alizarin madder [1]. Heaton, in 1928, said fuchsine, the aniline dye, was part of Tuscan red together with an iron oxide, as an \"aniline lake such as magenta\" [2].\n\nThe books therefore describe the pigment as variable: different red dyes on different iron-oxide bases, sold under one name [2]. Linked colors include [[pompeian-red]], [[venetian-red]] and [[indian-red]], and the dye side connects to [[magenta]] and the [[madder]] family."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch",
-   "body": "As a color name, Tuscan red appears in several standards [3]. Our swatch is the ISCC-NBS and Werner-era dusky red, and Maerz and Paul record the name from about 1850 [3]. Our data finds a near-duplicate called Cochineal Red in Werner's list, 0.5 units apart, and Neutral Red 2.2 units apart [3]. In a modern paint chart the pigment name appears with burnt sienna, in a comparison of artists' colors by Baty [4]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Tuscan red is moderately common in paintings, in 205 of 23,781, more than 57 per cent of named colors [5]. It is most often an accent, in 52 per cent of the 91 paintings where it is measurable [5]. It peaks in the 1400s at 0.8 per cent of the 945 paintings we have, 1.9 times the museums' baseline [5]. The earliest match is from around 1000, centuries before the name, so it is a look-alike hue and not evidence of the pigment [5]. These are photographs of aged, varnished paintings, so a color match is a look-alike hue, not a pigment test. [5]"
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Tuscany (origin of the name undocumented in the books read)",
-   "first_recorded": "about 1850 (Maerz and Paul)",
-   "source": "Pigment Compendium; Weber; Heaton"
-  },
-  "aka": [
-   "Tuscan red pigment"
+  "slug": "tuscan-red",
+  "name": "Tuscan Red",
+  "hex": "#7C4848",
+  "names": [
+    "Tuscan Red"
   ],
-  "siblings": [
-   "pompeian-red",
-   "venetian-red",
-   "indian-red"
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Tuscan red is a dusky brownish red, and also a pigment name that the old colormen applied to iron-oxide reds sold with a dye lake added.",
+  "sections": [
+    {
+      "id": "pigment",
+      "title": "An iron red with a dye",
+      "body": "The Pigment Compendium groups Tuscan red with Venetian red, Indian red, Pompeiian red, light red, rouge, Terra Pozzuoli, colcothar and caput mortuum, a family of names mostly applied to synthetic iron-oxide reds [1]. Weber, in 1923, describes red iron oxides as purer than ochres, and says Tuscan red and Pompeiian red were iron oxide mixed with alizarin madder [1]. Heaton, in 1928, said fuchsine, the aniline dye, was part of Tuscan red together with an iron oxide, as an \"aniline lake such as magenta\" [2].\n\nThe books therefore describe the pigment as variable: different red dyes on different iron-oxide bases, sold under one name [2]. Linked colors include [[pompeian-red]], [[venetian-red]] and [[indian-red]], and the dye side connects to [[magenta]] and the [[irresistible]] family."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch",
+      "body": "As a color name, Tuscan red appears in several standards [3]. Our swatch is the ISCC-NBS and Werner-era dusky red, and Maerz and Paul record the name from about 1850 [3]. Our data finds a near-duplicate called Cochineal Red in Werner's list, 0.5 units apart, and Neutral Red 2.2 units apart [3]. In a modern paint chart the pigment name appears with burnt sienna, in a comparison of artists' colors by Baty [4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Tuscan red is moderately common in paintings, in 205 of 23,781, more than 57 per cent of named colors [5]. It is most often an accent, in 52 per cent of the 91 paintings where it is measurable [5]. It peaks in the 1400s at 0.8 per cent of the 945 paintings we have, 1.9 times the museums' baseline [5]. The earliest match is from around 1000, centuries before the name, so it is a look-alike hue and not evidence of the pigment [5]. These are photographs of aged, varnished paintings, so a color match is a look-alike hue, not a pigment test. [5]"
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 205,
-  "rank_pct": 57,
-  "peak_century": 1400,
-  "library_first_recorded": "c. 1850"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"iron oxides\" and \"Venetian red\"",
-   "loc_kind": "entry",
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "Tuscany (origin of the name undocumented in the books read)",
+      "first_recorded": "about 1850 (Maerz and Paul)",
+      "source": "Pigment Compendium; Weber; Heaton"
+    },
+    "aka": [
+      "Tuscan red pigment"
+    ],
+    "siblings": [
+      "pompeian-red",
+      "venetian-red",
+      "indian-red"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"aniline\" and \"magenta\" (citing Heaton 1928)",
-   "loc_kind": "entry",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 205,
+    "rank_pct": 57,
+    "peak_century": 1400,
+    "library_first_recorded": "c. 1850"
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ISCC-NBS 1955, Maerz and Paul (1930) and Werner no. 95, via data/library.json; CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"iron oxides\" and \"Venetian red\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"aniline\" and \"magenta\" (citing Heaton 1928)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ISCC-NBS 1955, Maerz and Paul (1930) and Werner no. 95, via data/library.json; CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, color chart",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within-painting lens, lightness rank per painting)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "According to Weber, Tuscan red was iron oxide mixed with what?",
+      "choices": [
+        "Alizarin madder",
+        "Lapis lazuli",
+        "Smalt",
+        "Gamboge"
+      ],
+      "answer": "Alizarin madder",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Tuscan red as a pigment name always meant one fixed recipe.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Tuscan red was sold as iron oxide with a dye added: madder in one account, fuchsine in another."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed 'very permanent' (not in Weber passage)"
+    ]
   },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, color chart",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within-painting lens, lightness rank per painting)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "According to Weber, Tuscan red was iron oxide mixed with what?",
-   "choices": [
-    "Alizarin madder",
-    "Lapis lazuli",
-    "Smalt",
-    "Gamboge"
-   ],
-   "answer": "Alizarin madder",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Tuscan red as a pigment name always meant one fixed recipe.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Tuscan red was sold as iron oxide with a dye added: madder in one account, fuchsine in another."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed 'very permanent' (not in Weber passage)"
-  ]
- },
- "words": 321
+  "words": 321
 }

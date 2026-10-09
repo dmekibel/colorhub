@@ -1,140 +1,139 @@
 {
- "slug": "bronzesheen",
- "name": "Bronzesheen",
- "hex": "#635F4C",
- "names": [
-  "Bronzesheen"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Bronzesheen is a muted olive-brown that Maerz and Paul's 1930 dictionary dates to 1928, and one of the most common colors in the whole ColorHub painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A compound name, undated beyond 1928",
-   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Bronzesheen on plate 16, position H12, and dates its first recorded use to 1928 [1]. The compound reads as *bronze* plus *sheen*, pointing to a metallic glint rather than a pigment, but the dictionary gives no fuller account, so the exact reasoning is undocumented here [1]. The ISCC-NBS 1955 lists do not carry it separately, and the National Bureau of Standards circular cites only Maerz and Paul's entry [1].\n\nThe nearest named colors on file are [[pale-umber]], [[greyish-brownish-olive]] and [[greyish-brownish-olive]], at 2.8, 3.2 and 3.2 ΔE [1]. On canvas it keeps closer company with [[brown-olive|Brown Olive]] and [[mouse-grey|Mouse Grey]], both of which appear alongside it far more than chance [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a color match to this swatch in 3,089 of 23,781 paintings, 12.99 percent, as photographed; the within-painting lens finds it in 1,872, more common than 95 percent of the named colors we track [3]. Georg von Bothmann is its most devoted painter, carrying it in 10 of the 37 Bothmann paintings in the archive, 3.2 times the rate expected from the museums his works come from, with Philips Wouwerman, Jan Brueghel the Elder and Edgar Degas close behind [3].\n\nThe color peaks in the 1900s, 1.2 times the expected rate across 1,674 paintings from that decade, and inside a painting it most often plays a hidden color, sitting low in the painting's own lightness order (36 percent of its 1,872 within-painting matches) [3]. The earliest match dates to 1100, more than 800 years before the name's 1928 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. It shares canvases with Brown Olive and Mouse Grey far more than chance, a company that fits a muted, backgrounded tone [3]. These are photographs of varnished paintings, read as screen colors [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a metallic sheen on bronze, undocumented beyond the compound word",
-   "first_recorded": "Maerz and Paul, 1930 (recorded use from 1928, plate 16 H12)",
-   "source": "Maerz and Paul, A Dictionary of Color (1930)"
-  },
-  "aka": [],
-  "siblings": [
-   "pale-umber",
-   "greyish-brownish-olive",
-   "fuscous",
-   "beetle"
+  "slug": "bronzesheen",
+  "name": "Bronzesheen",
+  "hex": "#635F4C",
+  "names": [
+    "Bronzesheen"
   ],
-  "parent": "brown",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#635F4C",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 3089,
-  "painters": [
-   {
-    "name": "Georg von Bothmann",
-    "hits": 10,
-    "n": 37,
-    "lift": 3.2
-   }
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Bronzesheen is a muted olive-brown that Maerz and Paul's 1930 dictionary dates to 1928, and one of the most common colors in the whole ColorHub painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A compound name, undated beyond 1928",
+      "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Bronzesheen on plate 16, position H12, and dates its first recorded use to 1928 [1]. The compound reads as *bronze* plus *sheen*, pointing to a metallic glint rather than a pigment, but the dictionary gives no fuller account, so the exact reasoning is undocumented here [1]. The ISCC-NBS 1955 lists do not carry it separately, and the National Bureau of Standards circular cites only Maerz and Paul's entry [1].\n\nThe nearest named colors on file are [[pale-umber]], [[greyish-brownish-olive]] and [[greyish-brownish-olive]], at 2.8, 3.2 and 3.2 ΔE [1]. On canvas it keeps closer company with [[brown-olive|Brown Olive]] and [[mouse-grey|Mouse Grey]], both of which appear alongside it far more than chance [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a color match to this swatch in 3,089 of 23,781 paintings, 12.99 percent, as photographed; the within-painting lens finds it in 1,872, more common than 95 percent of the named colors we track [3]. Georg von Bothmann is its most devoted painter, carrying it in 10 of the 37 Bothmann paintings in the archive, 3.2 times the rate expected from the museums his works come from, with Philips Wouwerman, Jan Brueghel the Elder and Edgar Degas close behind [3].\n\nThe color peaks in the 1900s, 1.2 times the expected rate across 1,674 paintings from that decade, and inside a painting it most often plays a hidden color, sitting low in the painting's own lightness order (36 percent of its 1,872 within-painting matches) [3]. The earliest match dates to 1100, more than 800 years before the name's 1928 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. It shares canvases with Brown Olive and Mouse Grey far more than chance, a company that fits a muted, backgrounded tone [3]. These are photographs of varnished paintings, read as screen colors [3]."
+    }
   ],
-  "measured": {
-   "lch": [
-    40.2,
-    11.6,
-    99.5
-   ],
-   "nearest": [
-    [
-     "Pale umber",
-     2.8
+  "aside": {
+    "origin": {
+      "named_after": "a metallic sheen on bronze, undocumented beyond the compound word",
+      "first_recorded": "Maerz and Paul, 1930 (recorded use from 1928, plate 16 H12)",
+      "source": "Maerz and Paul, A Dictionary of Color (1930)"
+    },
+    "aka": [],
+    "siblings": [
+      "pale-umber",
+      "greyish-brownish-olive",
+      "beetle"
     ],
-    [
-     "Greyish brownish olive",
-     3.2
+    "parent": "brown",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#635F4C",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 3089,
+    "painters": [
+      {
+        "name": "Georg von Bothmann",
+        "hits": 10,
+        "n": 37,
+        "lift": 3.2
+      }
     ],
-    [
-     "Fuscous",
-     3.2
-    ],
-    [
-     "Beetle",
-     3.7
+    "measured": {
+      "lch": [
+        40.2,
+        11.6,
+        99.5
+      ],
+      "nearest": [
+        [
+          "Pale umber",
+          2.8
+        ],
+        [
+          "Greyish brownish olive",
+          3.2
+        ],
+        [
+          "Fuscous",
+          3.2
+        ],
+        [
+          "Beetle",
+          3.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Maerz and Paul, A Dictionary of Color, \"Bronzesheen\", plate 16 H12",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), CIEDE2000 distances and canvas co-occurrence",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the compound word Bronzesheen most plainly point to?",
+      "choices": [
+        "A metallic glint on bronze",
+        "A dye made from tree bark",
+        "A gemstone",
+        "A fabric weave"
+      ],
+      "answer": "A metallic glint on bronze",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Bronzesheen is one of the rarest colors in the ColorHub painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A 1928 name for a muted olive-brown that turns out to be one of the most common colors in our whole archive."
+  ],
+  "words": 354,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Maerz and Paul, A Dictionary of Color, \"Bronzesheen\", plate 16 H12",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances and canvas co-occurrence",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the compound word Bronzesheen most plainly point to?",
-   "choices": [
-    "A metallic glint on bronze",
-    "A dye made from tree bark",
-    "A gemstone",
-    "A fabric weave"
-   ],
-   "answer": "A metallic glint on bronze",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Bronzesheen is one of the rarest colors in the ColorHub painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A 1928 name for a muted olive-brown that turns out to be one of the most common colors in our whole archive."
- ],
- "words": 354,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -25,6 +25,9 @@ Everything here is **as photographed or scanned** (studio light, yellowed paper,
 | 11 | **Library of Congress** (WPA posters, ads, Prints and Photographs) | `loc.gov/collections/...?fo=json` | ~900 WPA posters and large ad holdings, public domain | PD | Good | **Blocked.** Requests from a script get a Cloudflare "Just a moment" challenge page. Getting past it would be bypassing bot detection, which we do not do. Worth a manual or sanctioned bulk route later. |
 | 12 | **Boston Public Library, NYPL** public-domain ads and posters | Digital Commonwealth API; NYPL Digital Collections API (needs a token) | Large public-domain ad and ephemera holdings | PD | Good | **Not built** (NYPL needs a token; BPL not probed in time). Best next sources for 1900-1930 commercial work. |
 | 13 | **Wikidata** P465 / P6364 / P462 | SPARQL, keyless | Colors of flags, parties and organizations as facts | CC0 | n/a | **Built** as graph facts (section 5). The generic colors carry pure screen values (blue 0000FF), so only named shades and party hexes are used as hex. |
+| 14 | **Internet Archive, Pulp Magazine Archive** (`archive.org/details/pulpmagazinearchive`) | `advancedsearch.php` (title-matched to ~50 classic pulp and dime-novel titles, keyless) for metadata; `services/img/<id>` for the cover thumbnail | 2026-10-09, added for the pulp-cover lane: ~5,000 items in the collection match a classic pulp title, of which 740 clear our own PD rule (below) | PD only: kept when the item's publication year is 1929 or earlier, or its own `licenseurl` names the public-domain mark | Title, date/year, publisher, creator (rarely the cover artist; IA metadata seldom separates writer from illustrator) | **Built** (`tools/museums/pulpia.py`). |
+| 15 | **Wikimedia Commons, pulp covers by title** (`Category:Weird Tales covers`, `Category:Amazing Stories illustrations`, per-issue subcategories...) | Same `categorymembers` route as commonsd.py, one magazine title at a time via a namespace-14 search for "<title> covers/illustrations/cover art" | 2026-10-09, added for the pulp-cover lane: 1,192 PD/CC0 files across the ~50 titles that have a Commons category at all (most don't) | Public domain / CC0 files only (per-file license, same OPEN/BAD rule as commonsd.py) | Artist (Margaret Brundage, Frank R. Paul, Hannes Bok... when the file's Artist field names one), issue date from the filename or ObjectName | **Built** (`tools/museums/pulpc.py`). One false positive caught and removed: Commons' "Category:Blue book covers" is a generic term for official-directory covers (government and academic "blue books"), unrelated to the pulp magazine *Blue Book* — dropped from the Commons title list entirely (Internet Archive's own Blue Book identifiers are unambiguous and stayed in). |
+| 16 | **Galactic Central** (`philsp.com`), **Comic Book Plus**, **Luminist**, **pulpcovers.com** | n/a | Per-issue metadata (Galactic Central), scanned PD comics (Comic Book Plus), pulp scans (Luminist), a curated discovery blog of cover images (pulpcovers.com) | Unclear or mixed. `pulpcovers.com` reposts scans of uncertain, mixed rights per cover and sits behind a Cloudflare bot challenge (`robots.txt` itself returns the challenge page); scripted access there would mean solving a CAPTCHA, which this corpus does not do under any circumstance. Galactic Central and Luminist publish no stated reuse license for their own pages. | — | **Not built.** Same standard as the Library of Congress row above: no source is scraped past a bot wall, and no source is imported without its own clear PD/CC0 marking. If a later pass wants Galactic Central's issue-level metadata (artist and date, cross-checked against what IA and Commons already carry) it would need a manual or licensed route, not a scripted one. |
 
 ## 2. How the corpus is built (same pipeline as the painting corpus)
 
@@ -79,3 +82,61 @@ Final build: **10,577 design objects**, 619 of the app's colors appear in at lea
 - Paper tone is left out of poster and graphic shares (section 3); stamps keep theirs, so "platinum" (a pale grey) tops 1930-69 stamps (4.8%, n=236).
 - Arts and Crafts (5 makers, n=38), Art Nouveau (13 makers, n=82) have palettes in `superlatives.json`; Bauhaus and Art Deco have n=1 each (in copyright), so there is no "most Bauhaus color" and the app must not claim one.
 - Flags (Wikidata, 197 national flags): the most common colors by nearest name are White (132 flags), Smoky Black (43), Lava (41), Gold (34), Lipstick Red (22). 1,303 notable parties with their own hex and 59 organizations with a named shade are in `graph-facts.json`.
+
+## 7. Pulp magazine and paperback covers (added 2026-10-09, David: "Pulp covers can be part of the app — an archive of pulp art")
+
+A new category, `pulp`, alongside the ten above: pulp magazine and paperback cover art, 1896-1960s (science fiction,
+weird/horror, detective, western, adventure, romance and "spicy" pulps, plus the big dime-novel series), from two
+sources (section 1, rows 14-15): the **Internet Archive's Pulp Magazine Archive** collection and **Wikimedia
+Commons'** per-title cover categories. Both keyless, both rate-limited the same polite way as every other adapter
+here. `pulpcovers.com`, Galactic Central and Comic Book Plus were considered and not built (row 16): the first sits
+behind a bot-detection wall this project does not cross, and the other two publish no clear reuse license for their
+own metadata pages.
+
+**Build: 832 covers** (517 from Commons, 315 from Internet Archive), every one public domain in the US by our own
+rule — pre-1930 publication, or the item's/file's own public-domain or CC0 mark — with no exceptions and no items
+kept on a "probably lapsed" guess. 122 additional scans were fetched and dropped as monochrome (b/w interior art or
+faded photostats, the same auto-reject the rest of the design corpus uses). By decade: 1880s 3, 1890s 27, 1900s 88,
+1910s 178, 1920s 141, 1930s 154, 1940s 143, 1950s 87, 1960s 11 (thin at both ends: few PD-cleared covers before 1900,
+and the IA/Commons PD-marked set thins out fast after 1950 as renewal-lapse research gets harder to crowd-source).
+**154 magazine titles**, topped by *Argosy* (152 covers), *Amazing Stories* (106), *Fantastic Adventures* (103),
+*Weird Tales* (84), *Planet Stories* (57), *Adventure* (49), *Wonder Stories* (33), plus dime-novel weeklies (*Tip
+Top Weekly*, *Wild West Weekly*, *New Nick Carter Weekly*). **Cover-credited artists** (505 of 832 covers carry one):
+led by Robert Gibson Jones, Frank R. Paul, Ed Valigursky, Allen Anderson and Modest Stein (20 covers each at the per-
+maker cap), with Margaret Brundage and Virgil Finlay both present at smaller counts. Every cover is flagged
+commercial (`cm:1`): a pulp magazine is a newsstand product, the same rule that already flags posters and stamps.
+
+**The finding: pulp covers are the single most saturated commercial category in the archive.** Mean chroma C\*
+(the same 6-color k-means and CIELAB measure as the rest of this file, paper margins excluded the way poster and
+graphic design already are — section 2):
+
+| Category | Mean chroma C\* | n |
+|---|---|---|
+| **Pulp covers** | **27.8** | **832** |
+| Posters and advertisements | 20.4 | 1,267 |
+| Graphic design and print | 15.8 | 1,854 |
+
+Pulp beats posters by about a third and graphic design by nearly double. It rises by decade too (mean C\*: 1890s
+15.4, n=27; 1900s 28.5, n=88; 1920s 26.1, n=141; 1940s 33.2, n=143; 1950s 33.9, n=87; 1960s 41.2, n=11, too few to
+call a trend on its own but consistent with the climb). By the vivid-color measure in section 6 (a palette color of
+chroma 60 or more, share of total palette area): **pulp covers hold 9.8% of their area in vivid colors, against
+4.2% for posters** — more than double, and higher than this corpus's own 1960s-70s poster/stamp/ad peak of 5-9%
+(section 6), on magazines that were newsstand-cheap decades earlier. The honest caveat applies in full here too: these
+are photographs and scans of printed, often yellowed paper, at the mercy of whoever scanned and lit them, and pulp
+paper discolors faster than the coated stock most posters were printed on, which can itself warm or dim a palette.
+
+**Why pulp outruns posters and fine art on chroma, in plain terms:** a poster had to read at a distance in a few flat
+color separations (cheap lithography favored bold but limited hues); a pulp cover had to grab a browsing newsstand
+eye in a few square inches at arm's length, cover-to-cover competition on a crowded rack, printed on better stock
+than the pulp interior pages (the Commons category description itself: "pulp covers, printed in color on
+higher-quality [stock] than the cheap wood-pulp paper" inside) — small, high-contrast, saturated illustration work
+with none of a painting's tonal range to spend on anything muted. The same named-vivid-color check as section 6
+(share of area at least 5%, n = objects clearing it): Vermilion-family reds and Poppy-purple/magenta pinks are the
+pulp palette's signature combination (both place in the top 15 named colors at a 15%+ palette share, alongside the
+expected cover blacks, buffs and olive-drab); a cleaner per-color breakdown with n awaits `analyze_design.py`'s next
+full run over all eleven categories together.
+
+**What's not claimed:** no "most pulp" artist ranking beyond the raw cover counts above (artist credit is missing on
+40% of covers, and IA's metadata rarely separates writer from illustrator — see row 14), no per-title palette pages
+yet (that is the `objects-pulp.json` -> UI step, not yet built at the time of this entry), and no claim that any
+*specific* post-1929 title is public domain beyond what its own file or item record already asserts.

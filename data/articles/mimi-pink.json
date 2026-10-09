@@ -1,0 +1,114 @@
+{
+ "slug": "mimi-pink",
+ "name": "Mimi Pink",
+ "hex": "#FFDAE9",
+ "names": [
+  "Mimi Pink"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Mimi Pink is a very pale, barely-there pink, one of the more obscure entries in Wikipedia's extended color lists.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An obscure novelty name",
+   "body": "Our library carries Mimi Pink only from Wikipedia's lists, flagged in our own data as an \"obscure, qualified or novelty name,\" with no brand, person or place attached in the sources checked here [1]. Who coined it and when is undocumented [1].\n\nIts nearest named neighbor by measured color is [[pink-lace]], a touch purpler, with [[queen-pink]], [[pale-pink]] and [[orchid-pink]] close behind [1]. At this pale a lightness, small shifts in screen calibration can move a swatch between several near-identical named pinks [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in only 2 of 23,781 paintings, 0.01 percent, as photographed; the within-painting lens finds it in 1 [2]. That makes it rarer than 86 percent of the named colors we track [2]. A pink this pale and this close to white is also one of the easiest shades for a photograph of an aged, varnished canvas to lose [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources checked here (Wikipedia list of colors)",
+   "source": "ColorHub color library (Wikipedia list of colors)"
+  },
+  "aka": [],
+  "siblings": [
+   "pink-lace",
+   "queen-pink",
+   "pale-pink",
+   "orchid-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "n_within_painting": 1,
+  "rank_rarer_than_pct": 86,
+  "measured": {
+   "lch": [
+    90.5,
+    15.4,
+    350.4
+   ],
+   "nearest": [
+    [
+     "Pink Lace",
+     2.9
+    ],
+    [
+     "Queen Pink",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia list of colors; ColorHub name graph (look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does our data say about the origin of the name Mimi Pink?",
+   "choices": [
+    "It is undocumented in the sources checked",
+    "It was named after a 1960s model named Mimi",
+    "It comes from a French paint catalogue",
+    "It was coined by the ISCC-NBS in 1955"
+   ],
+   "answer": "It is undocumented in the sources checked",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mimi Pink is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mimi Pink's origin is undocumented; our data flags it as an obscure, novelty color name."
+ ],
+ "words": 165,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits and no documented origin for this slug; written as a short, honest article per the voice guide's rule 15."
+  ]
+ }
+}

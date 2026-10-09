@@ -1,0 +1,118 @@
+{
+ "slug": "metallic-seaweed",
+ "name": "Metallic Seaweed",
+ "hex": "#0A7E8C",
+ "names": [
+  "Metallic Seaweed"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Metallic Seaweed is a dark, inky teal, named for wet seaweed's sheen rather than its usual dull green-brown.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The shine, not the color, of seaweed",
+   "body": "Seaweed itself runs from olive-brown to deep green; the name here points at the slick, almost metallic reflection wet seaweed carries in sunlight, not at its ordinary hue [1]. Our library carries this color from Wikipedia's extended color lists, with no further paper trail, so an exact coiner and date are undocumented in the sources checked here [1].\n\nIts nearest named neighbors by measured color are [[capri-blue]] and [[deep-aqua]], the first almost identical, the second a touch greener [1]. [[ocean]] and [[ming]] sit a little further off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 23 of 23,781 paintings, 0.1 percent, as photographed; the within-painting lens finds it in 6 [2]. That makes it rarer than 73 percent of the named colors we track [2]. The earliest dated painting with it is from 1505, by Gerard David, though the archive's early centuries are thin, so this is a floor, not a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the metallic sheen of wet seaweed",
+   "first_recorded": "undocumented in the sources checked here",
+   "source": "ColorHub color library (Wikipedia list of colors)"
+  },
+  "aka": [],
+  "siblings": [
+   "capri-blue",
+   "deep-aqua",
+   "ocean"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 23,
+  "n_within_painting": 6,
+  "rank_rarer_than_pct": 73,
+  "first_seen": {
+   "year": 1505,
+   "painting": "rijks-200109728",
+   "painter": "Gerard David"
+  },
+  "measured": {
+   "lch": [
+    48.1,
+    28.1,
+    214.1
+   ],
+   "nearest": [
+    [
+     "Capri Blue",
+     3.6
+    ],
+    [
+     "Deep Aqua",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia list of colors; ColorHub name graph (look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What part of seaweed does the name Metallic Seaweed point at?",
+   "choices": [
+    "Its wet, slick sheen in sunlight",
+    "Its dried, brittle texture",
+    "Its usual olive-brown hue",
+    "A dye extracted from it"
+   ],
+   "answer": "Its wet, slick sheen in sunlight",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources record who coined the name Metallic Seaweed and when.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Metallic Seaweed is named for wet seaweed's shine, not its ordinary olive-green color."
+ ],
+ "words": 168,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in the 29 books for this slug; sourced from our own library/graph data only."
+  ]
+ }
+}

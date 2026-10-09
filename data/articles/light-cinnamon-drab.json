@@ -1,0 +1,155 @@
+{
+ "slug": "light-cinnamon-drab",
+ "name": "Light Cinnamon-Drab",
+ "hex": "#AF9685",
+ "names": [
+  "Light Cinnamon-Drab"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Cinnamon-Drab is a muted tan from Ridgway's 1912 atlas, filed again by name in the 1955 ISCC-NBS dictionary, and one of the most common named colors in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Ridgway tone, common in paint",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate XLVI, hue 13″″″″, tone b [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Cinnamon-Drab\" under block 45, \"light grayish reddish brown\" [2]. The name builds \"light\" onto [[cinnamon-drab]], itself a compound of the spice word cinnamon and the muted drab family [1].\n\nIn our color library its closest neighbor is [[dusty-cinnamon]], about 3.0 units away, nearly the same color on screen, followed by [[mushroom]] at 3.2 units [3]. [[greyish-tan]] sits 3.6 units off and lighter, and [[light-brownish-drab]] 4.5 units off and redder [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings matches this tone in 1,070 of them, about 4.5 percent, as photographed, more common than 86 percent of the named colors we track [4]. It peaks in the 1200s, present in 10 of the 142 paintings we have from that century, 1.8 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays a hidden color, in 44 percent of its 684 clearly-ranked appearances [4]. Constantin Hansen favors it most, in 8 of his 34 works here, 4.2 times his museums' baseline rate, and the tone is most over-represented in Nepal, 4.5 times the expected rate [4]. It shares canvases with Pale Greyish Vinaceous and Dark Vinaceous-Drab far more than chance, lifts of 8.4 and 7.0 [4]. The earliest dated match is the year 1000, 912 years before the name's first 1912 record, so this is a look-alike hue in an old photograph, not proof of the name's age [4]. The archive's early centuries are thin, so this is a floor, not a first."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"light\" plus [[cinnamon-drab]]",
+   "first_recorded": "1912 (Ridgway, plate XLVI); carried into the 1955 ISCC-NBS dictionary, block 45",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "dusty-cinnamon",
+   "mushroom",
+   "greyish-tan",
+   "light-brownish-drab"
+  ],
+  "parent": "cinnamon-drab",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1070,
+  "painters": [
+   {
+    "name": "Constantin Hansen",
+    "hits": 8,
+    "n": 34,
+    "lift": 4.2
+   }
+  ],
+  "measured": {
+   "lch": [
+    63.9,
+    14.0,
+    62.0
+   ],
+   "nearest": [
+    [
+     "Dusty Cinnamon",
+     3.0
+    ],
+    [
+     "Mushroom",
+     3.2
+    ],
+    [
+     "Greyish Tan",
+     3.6
+    ],
+    [
+     "Light Brownish Drab",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVI, hue 13″″″″, tone b",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ISCC-NBS, NBS Circular 553 (1955), block 45, \"Light Cinnamon-Drab\" (data/sources/iscc-nbs-names.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1955 ISCC-NBS dictionary block files Light Cinnamon-Drab?",
+   "choices": [
+    "Block 45",
+    "Block 154",
+    "Block 101",
+    "Block 8"
+   ],
+   "answer": "Block 45",
+   "kind": "pick"
+  },
+  {
+   "q": "Which country is Light Cinnamon-Drab most over-represented in, relative to expectation?",
+   "choices": [
+    "Nepal",
+    "France",
+    "India",
+    "England"
+   ],
+   "answer": "Nepal",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, Light Cinnamon-Drab most often plays which role?",
+   "choices": [
+    "A hidden color",
+    "A light",
+    "An accent",
+    "A focal color"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Light Cinnamon-Drab is more common in our painting archive than 86 percent of the named colors we track."
+ ],
+ "words": 309,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

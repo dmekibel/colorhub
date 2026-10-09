@@ -1,809 +1,809 @@
 {
- "slug": "red",
- "name": "Red",
- "hex": "#D62F2F",
- "names": [
-  "Red"
- ],
- "tier": "pigment",
- "depth": "epic",
- "lede": "Red is the color of blood, fire and ripe fruit: often the first hue a language names after light and dark, and for most of Western history the color, so central that one word could mean both red and colored.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The first color word",
-   "body": "Red is the hue at the long-wavelength end of the visible spectrum, roughly 620 to 740 nanometres [49]. In language after language, Greenfield notes, its name is older than any color word except those for black and white [2]. Latin *coloratus*, colored, could simply mean red, and Spanish *colorado* still does [1]. In Russian, *krasnyy* (red) shares a root with *krasivyy* (beautiful), which is why Moscow's Red Square was already red under the tsars: the name meant the beautiful square, not brick or politics [1][3].\n\nThe same overlap turns up on other continents. The Aztec word *tlapalli* meant both red and color in general [4]. In the Hebrew Bible about three quarters of the color words fall between russet and purple, and blue is never named [5]. Latin had a firm basic word, *ruber*, which Romans tied to *robur*, oak and strength [5]. The river Rubicon took its name from it for its reddish water, so Caesar's crossing in 49 BC became the first red line [5].\n\nIn 1969 Berlin and Kay proposed that languages gain color words in a fixed order, with red always the first hue after black and white [6][7]. The theory is contested: critics say early-stage languages split dark from light, or fresh from dry, more than black from white, and Pastoureau rejects any universal order [6][5]. English has one quirk worth noticing. *Pink* is the only basic English color word that names part of another, the light end of red [7]."
-  },
-  {
-   "id": "history",
-   "title": "Ochre, blood and the first dyes",
-   "body": "Iron-oxide reds have gone into human graves for about 50,000 years [8]. Their color comes from iron oxide, the compound in rust, and heating yellow ochre turns it red [8]. Paleolithic painters worked mostly in hematite reds, and some heated yellow ochre in stone crucibles to make red, an early piece of pigment chemistry; their palettes hold no blue or green [9]. Red ochre keeps its own records. Its iron particles line up with magnetic north while the paint is wet, which let scientists in Turin show that borders in Vatican frescoes had been repainted in 1870 [10].\n\nDyeing began with red as well. The oldest surviving dyed cloth fragments carry red and only red, and Pastoureau infers that [[madder]] was probably the first dye [11]. Rome's dyers' guild had six separate trades for reds, from madder and kermes to shellfish purple and safflower, and Roman dyers were far better at reds than at blues or greens [11]. Before the late fourteenth century, about three quarters of the recipes in European dyers' manuals were for red [12].\n\nRed did not always mean good. In Egypt it was the color of the desert, of enemies and of the god Seth, set against the fertile black of Nile silt [9][74]. Egyptian tomb painters gave men red-brown skin and women pale yellow [9]. The white, austere Greece of museum casts is a neoclassical invention: Greek statues and temples were painted, and red was probably the commonest color [13].\n\nPliny priced cinnabar, the natural red mercury ore, at fifteen times the cost of red ochre, and the best came from Almadén in Spain [13]. Pompeii's rich villas used it for whole walls [13]. Red also became the color of headings: Athens took a monopoly on the ochre of the island of Kea in the fourth century BC, and *rubric* comes from *rubrica*, red ochre [8]."
-  },
-  {
-   "id": "pigments",
-   "title": "A short shelf of reds",
-   "body": "For painters, red has always been a problem of permanence. [[vermilion|Vermilion]], mercury sulfide, was first ground from [[cinnabar]], then made by heating mercury with sulfur [13][14]. The method was probably perfected in China and reached the West between the eighth and eleventh centuries [14]. It gives a strong orange-red but can turn black, especially in egg tempera, as brown patches show on Nardo di Cione's altarpiece of about 1365 [15]. Red lead, made by roasting white lead, darkens to chocolate brown in old wall paintings [15]. Its Latin name, *minium*, gave us *miniature*, a word about red ink, not about small size [16][17].\n\nThe deep crimsons came from dyes fixed onto a colorless powder, called lakes: kermes, madder and, from the sixteenth century, Mexican cochineal [14]. Pastoureau calls cochineal lake the only real gift of the New World to European painters [14]. Lakes fade. Turner's carmine skies have paled, and when Mr Winsor of Winsor & Newton warned him, Turner told him to mind his own business [16]. His sunset in *The Fighting Temeraire* (1839) used iodine scarlet, which was already changing by 1859 [16]. A careful lake can last: Rembrandt's cochineal still deepens the bride's skirt in *The Jewish Bride* [18].\n\nBall points out that the nineteenth century gave every primary and secondary color a major new pigment except red [19]. Cadmium red, cadmium sulfide with selenium, did not go on sale until 1910 [19]. Quinacridone reds followed from 1958, and the pyrrole (DPP) reds patented in 1983 were first used on cars [20]; Gurney notes that pyrrole red is also sold as Ferrari red [21]. New is not always lasting. Rothko's murals for Harvard, given in 1962, were ruined by 1979 because the Lithol Red in his crimsons faded, leaving them light blue [20]. When Mondrian wanted a categorically pure red, he could only get it by glazing a bluish crimson over an opaque orange vermilion [22]."
-  },
-  {
-   "id": "dyes",
-   "title": "Kermes, cochineal and scarlet",
-   "body": "[[scarlet|Scarlet]] began as a cloth, not a color. In eleventh-century Germany the word named fine shorn wool of any hue, even blue or black, and because the best of it was dyed with kermes, by the thirteenth or fourteenth century it meant red [23][24][16]. Where the word comes from is debated: Persian through Arabic, or Latin *sigillatus*, sealed [24]. Kermes was traded as grain, since the dried insects look like seeds, and many buyers took it for a plant [24]. Cloth dyed in grain was colorfast, which is where *ingrained* comes from [16].\n\nCochineal, a scale insect farmed on prickly-pear cactus in Mexico, reached Spain by the end of 1523 [25]. It was about ten times as strong as kermes, and by 1580 it had pushed the old insect reds to the edges of the market [18]. A pound of dye took tens of thousands of dried insects, but the books disagree on how many: Greenfield and St Clair give about 70,000, while Garfield's figure works out several times higher [4][26][27]. Spain guarded the monopoly, and from 1614 foreigners caught trading in it faced death [28].\n\nFor more than a century, writers outside Spain argued that cochineal was a berry or seed [29]. In 1725 the Dutchman Melchior de Ruusscher won a wager on the question with sworn statements from Oaxaca that it was an insect [30]. Tin made it blaze. Around 1607 Cornelis Drebbel found that tin turned cochineal's crimson into a brilliant scarlet; the story that he found it by spilling acid onto a pewter windowsill is disputed [29][31][16].\n\nThat scarlet dressed armies. Under Cromwell, English officers wore cochineal-and-tin scarlet while ordinary soldiers got cheaper madder red [29], and Finlay dates British officers' cochineal scarlet as late as 1952 [16]. Madder clothed the French infantry in red trousers from 1829 until 1915, when they were swapped for a dull horizon blue [33][73]. Cochineal never vanished: after American regulators banned the synthetic dye amaranth in 1976, it came back as the food color E120, and Peru now grows most of it [32]."
-  },
-  {
-   "id": "power",
-   "title": "Power, piety and punishment",
-   "body": "Red long marked rank. Rome's most powerful men were called *coccinati*, those who wear red [2]. Charlemagne was crowned in 800 dressed entirely in red, and a red mantle stayed imperial insignia for centuries; the kings of France were the exception, crowned in azure with gold lilies [34]. Innocent IV gave cardinals their red hat in 1245 [35]. Their robes turned scarlet in the 1460s, when the Byzantine purple they had worn ran out; Greenfield dates the first order to 1295, so the books disagree on the steps [36][31][37].\n\nHeraldry shows how dominant red was. Of about 7,000 coats of arms from the mid-twelfth to the early fourteenth century, more than 60 per cent include red, called gules; the share falls to 45 per cent around 1400 and 30 per cent in the later 1700s [38]. The popular story that families bear red in memory of Crusader blood is false, Pastoureau writes: the Crusades had nothing to do with the birth of coats of arms [38].\n\nFlorence's clothing inventory of 1343 to 1345 listed 6,874 dresses and coats belonging to about 2,420 women, and red appeared in 67 per cent of them, against 19 per cent for blue [24][39]. Red also stood for justice and punishment: judges and executioners wore it, and so, until the nineteenth century, did many convicts; the teacher's red pen is a survival [40]. Chess came to Europe with red pieces against black, and Europeans changed the black side to white [40]. Black replaced red only in the late Middle Ages, though Pastoureau's own books date the switch anywhere from the thirteenth to the sixteenth century [40][41][42].\n\nProtestant reformers turned on red [43]. Reformers called it the color of papal Rome and the Whore of Babylon, and Calvin's Geneva banned red clothing for men and women in 1558 [43]. Rembrandt's *Night Watch* (1642) is not a night scene: the title dates from the nineteenth century, when its varnish had darkened, and a single red sash picks out the commanding officer [43]. Our archive holds Gerrit Lundens's [[art:rijks-200107938|copy of The Night Watch]] [80]."
-  },
-  {
-   "id": "politics",
-   "title": "Flags, revolutions and stop lights",
-   "body": "Before 1789 a red flag meant martial law: it was hung out to order crowds to disperse [44]. It became the insurgents' flag after the shooting on the Champ-de-Mars on 17 July 1791 [44]. In February 1848 Lamartine talked revolutionaries out of a red national flag, but the Paris Commune flew it in 1871, the Soviet Union adopted red in 1922 and China in 1949 [45]. Greenfield notes that red as the color of radical politics dates only from the 1848 uprisings, and *red tape* from the ribbons that tied British official papers [2].\n\nRed is on 77 per cent of the flags of about 200 independent countries counted in 2016, ahead of white at 58, green at 40 and blue at 37 [46]. Pastoureau traces this to heraldry, where gules ruled, and to flags answering other flags [46]. Red for stop and green for go came from ships and railways between about 1760 and 1840 [46]. London's first road traffic light, a gas lantern of December 1868, exploded the next year and injured the policeman working it [46][47]. Britain's pillar boxes were first painted green, until people kept walking into them, and were repainted red between 1874 and 1884 [16].\n\nSanta Claus's red suit did not come from Coca-Cola advertising in the 1930s [48]. It descends from Saint Nicholas, bishop of Myra, shown in a red cloak since the late Middle Ages [48]."
-  },
-  {
-   "id": "science",
-   "title": "How the eye makes red",
-   "body": "The eye has no detector tuned to red. The long-wavelength cone, often called the red cone, is not tuned to red at all: it peaks in yellow-green, and we see red when it is stimulated more than its middle-wavelength neighbor [50][51]. Primates gained that cone 30 to 40 million years ago by duplicating an older one, and it helps pick out ripe fruit and young leaves [50]. The genes sit on the X chromosome, so red-green color blindness is far commoner in men: about 1 in 12 by Westland's count, about 10 per cent by Livingstone's [52][50]. Most of them still see color but confuse certain pairs [50].\n\nEven the purest red is odd. Every red in the rainbow looks slightly yellowish, so the red that looks neither yellow nor blue does not exist as a single wavelength [53]. In dim light the rods take over, and because they are most sensitive to green, reds darken while blues lighten: red roses look black by moonlight [54]. Jan Purkinje noticed the effect in his red geraniums at dawn; Westland dates it to 1819, while Gage gives 1825 for his published account [55][56].\n\nStare at a red patch for half a minute and then at white paper, and the white turns green or blue-green; no trained eye is immune [57]. Goethe saw a girl's scarlet bodice leave a sea-green afterimage on an inn wall [58]. Paint has limits too. Munsell found that red reaches its strongest chroma at a middle lightness, which is why red neon cannot be matched in paint: paint light enough reads pink or orange [59]. Underwater, red is mostly gone by about ten feet [60].\n\nBulls are not enraged by red. They see roughly as a red-green color-blind person does, and they charge the cape's movement, going for the magenta-and-blue cape just as hard [62][61]."
-  },
-  {
-   "id": "art",
-   "title": "Red in painting",
-   "body": "For about two thousand years Europeans set red in the middle of the color order, between white and black: white, yellow, red, green, blue, black [63]. After Newton's prism experiments of 1666 it moved to one end of the spectrum, a demotion Goethe protested [64][63]. Painting manuals still opened with red: Pliny and the medieval recipe books begin there, and a fifteenth-century Lombard recipe for red starts by telling the illuminator to take an ox [14].\n\nTitian's Pesaro altarpiece (1519 to 1528) is held together by color: the Virgin's red gown answers a red banner across the picture [65]. At a Royal Academy varnishing day, Turner added one daub of red lead to a grey seascape and it outshone the vermilion in Constable's picture beside it; Constable said Turner had been in and fired a gun [66]. Van Gogh wrote that in *[[art:commons-Q674846|The Night Café]]* he tried to express the terrible passions of humanity with red and green [67].\n\nMatisse's *Red Studio* (1911) was first painted blue-grey, close to the real white studio, and his *Harmony in Red* began as a harmony in green [68]. Gage suggests, as a guess, that the red came from an afterimage of his sunlit green garden [68]. Monet's red poppies are almost exactly as light as the green grass around them, which is why they seem to sway [69]."
-  },
-  {
-   "id": "myths",
-   "title": "Myths and loose ends",
-   "body": "Pink for girls is recent. Babies were not color-coded before the 1930s, and boys often wore pink before then [70]. The red heels of Versailles courtiers date from the 1670s and 1680s; the tale that they began when the Duke of Orléans stepped in ox blood is court legend [71]. Nineteenth-century theories that ancient peoples saw red first and were blind to blues and greens have been abandoned, and so has the idea that babies see red before other colors [72][3].\n\nDoes wearing red help you win? St Clair cites studies of red-clad Olympic fighters winning 55 per cent of bouts in 2004 and red-shirted English football teams finishing higher [61]. Pastoureau calls the belief a persistent legend, so the books disagree [48]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a screen color within six units of this page's red covers at least five per cent of the canvas in only 56 works [80]. Most are not European: 21 are Indian, twelve times the archive's rate, and Rajput court painting carries it 35 times as often as the archive as a whole [80]. The six works where it covers most are Indian pages made between 1675 and 1760, with red grounds filling 32 to 43 per cent of the surface [80]. The earliest dated one is a Greek icon of the two Saints Theodore, from 1450 [80].\n\nWiden the net to any clearly colored red, and red is the one strong hue that old paintings kept. A red with CIELAB chroma of at least 30 covers five per cent of the canvas in 2,044 paintings, 8.6 per cent of the archive; the same test finds blue in 94 and green in 125 [80]. Red peaks in the 1400s, in 29 per cent of our 945 dated paintings from that century [80]. Look closely and the reds are darker than this swatch: in Titian's *[[art:nga-41638|Cardinal Pietro Bembo]]*, the cardinal's red reads as a brick red as photographed [80].\n\nThese are photographs of aged, varnished paintings, the hue windows are ours, and a color match is not a pigment test [80]. The swatch itself is a choice. Screens' CSS `red` is the far more intense #FF0000, the American color standard calls this region vivid red, and our nearest named neighbors are [[madder-lake|Madder Lake]], [[spanish-red|Spanish Red]] and [[fire-engine-red|Fire Engine Red]], each under three units away [81]. In Google Books the word *red* rises from about 65 per cent of its peak in 1800 to its peak around 1919, and falls back to 64 per cent by 1980 [82]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the color itself; a basic English color word",
-   "first_recorded": "Old English rēad",
-   "source": "Wiktionary (red)"
-  },
-  "aka": [
-   "gules (heraldry)"
+  "slug": "red",
+  "name": "Red",
+  "hex": "#D62F2F",
+  "names": [
+    "Red"
   ],
-  "siblings": [
-   "scarlet",
-   "vermilion",
-   "crimson",
-   "carmine"
+  "tier": "pigment",
+  "depth": "epic",
+  "lede": "Red is the color of blood, fire and ripe fruit: often the first hue a language names after light and dark, and for most of Western history the color, so central that one word could mean both red and colored.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The first color word",
+      "body": "Red is the hue at the long-wavelength end of the visible spectrum, roughly 620 to 740 nanometres [49]. In language after language, Greenfield notes, its name is older than any color word except those for black and white [2]. Latin *coloratus*, colored, could simply mean red, and Spanish *colorado* still does [1]. In Russian, *krasnyy* (red) shares a root with *krasivyy* (beautiful), which is why Moscow's Red Square was already red under the tsars: the name meant the beautiful square, not brick or politics [1][3].\n\nThe same overlap turns up on other continents. The Aztec word *tlapalli* meant both red and color in general [4]. In the Hebrew Bible about three quarters of the color words fall between russet and purple, and blue is never named [5]. Latin had a firm basic word, *ruber*, which Romans tied to *robur*, oak and strength [5]. The river Rubicon took its name from it for its reddish water, so Caesar's crossing in 49 BC became the first red line [5].\n\nIn 1969 Berlin and Kay proposed that languages gain color words in a fixed order, with red always the first hue after black and white [6][7]. The theory is contested: critics say early-stage languages split dark from light, or fresh from dry, more than black from white, and Pastoureau rejects any universal order [6][5]. English has one quirk worth noticing. *Pink* is the only basic English color word that names part of another, the light end of red [7]."
+    },
+    {
+      "id": "history",
+      "title": "Ochre, blood and the first dyes",
+      "body": "Iron-oxide reds have gone into human graves for about 50,000 years [8]. Their color comes from iron oxide, the compound in rust, and heating yellow ochre turns it red [8]. Paleolithic painters worked mostly in hematite reds, and some heated yellow ochre in stone crucibles to make red, an early piece of pigment chemistry; their palettes hold no blue or green [9]. Red ochre keeps its own records. Its iron particles line up with magnetic north while the paint is wet, which let scientists in Turin show that borders in Vatican frescoes had been repainted in 1870 [10].\n\nDyeing began with red as well. The oldest surviving dyed cloth fragments carry red and only red, and Pastoureau infers that [[irresistible]] was probably the first dye [11]. Rome's dyers' guild had six separate trades for reds, from madder and kermes to shellfish purple and safflower, and Roman dyers were far better at reds than at blues or greens [11]. Before the late fourteenth century, about three quarters of the recipes in European dyers' manuals were for red [12].\n\nRed did not always mean good. In Egypt it was the color of the desert, of enemies and of the god Seth, set against the fertile black of Nile silt [9][74]. Egyptian tomb painters gave men red-brown skin and women pale yellow [9]. The white, austere Greece of museum casts is a neoclassical invention: Greek statues and temples were painted, and red was probably the commonest color [13].\n\nPliny priced cinnabar, the natural red mercury ore, at fifteen times the cost of red ochre, and the best came from Almadén in Spain [13]. Pompeii's rich villas used it for whole walls [13]. Red also became the color of headings: Athens took a monopoly on the ochre of the island of Kea in the fourth century BC, and *rubric* comes from *rubrica*, red ochre [8]."
+    },
+    {
+      "id": "pigments",
+      "title": "A short shelf of reds",
+      "body": "For painters, red has always been a problem of permanence. [[vermilion|Vermilion]], mercury sulfide, was first ground from [[vermilion]], then made by heating mercury with sulfur [13][14]. The method was probably perfected in China and reached the West between the eighth and eleventh centuries [14]. It gives a strong orange-red but can turn black, especially in egg tempera, as brown patches show on Nardo di Cione's altarpiece of about 1365 [15]. Red lead, made by roasting white lead, darkens to chocolate brown in old wall paintings [15]. Its Latin name, *minium*, gave us *miniature*, a word about red ink, not about small size [16][17].\n\nThe deep crimsons came from dyes fixed onto a colorless powder, called lakes: kermes, madder and, from the sixteenth century, Mexican cochineal [14]. Pastoureau calls cochineal lake the only real gift of the New World to European painters [14]. Lakes fade. Turner's carmine skies have paled, and when Mr Winsor of Winsor & Newton warned him, Turner told him to mind his own business [16]. His sunset in *The Fighting Temeraire* (1839) used iodine scarlet, which was already changing by 1859 [16]. A careful lake can last: Rembrandt's cochineal still deepens the bride's skirt in *The Jewish Bride* [18].\n\nBall points out that the nineteenth century gave every primary and secondary color a major new pigment except red [19]. Cadmium red, cadmium sulfide with selenium, did not go on sale until 1910 [19]. Quinacridone reds followed from 1958, and the pyrrole (DPP) reds patented in 1983 were first used on cars [20]; Gurney notes that pyrrole red is also sold as Ferrari red [21]. New is not always lasting. Rothko's murals for Harvard, given in 1962, were ruined by 1979 because the Lithol Red in his crimsons faded, leaving them light blue [20]. When Mondrian wanted a categorically pure red, he could only get it by glazing a bluish crimson over an opaque orange vermilion [22]."
+    },
+    {
+      "id": "dyes",
+      "title": "Kermes, cochineal and scarlet",
+      "body": "[[scarlet|Scarlet]] began as a cloth, not a color. In eleventh-century Germany the word named fine shorn wool of any hue, even blue or black, and because the best of it was dyed with kermes, by the thirteenth or fourteenth century it meant red [23][24][16]. Where the word comes from is debated: Persian through Arabic, or Latin *sigillatus*, sealed [24]. Kermes was traded as grain, since the dried insects look like seeds, and many buyers took it for a plant [24]. Cloth dyed in grain was colorfast, which is where *ingrained* comes from [16].\n\nCochineal, a scale insect farmed on prickly-pear cactus in Mexico, reached Spain by the end of 1523 [25]. It was about ten times as strong as kermes, and by 1580 it had pushed the old insect reds to the edges of the market [18]. A pound of dye took tens of thousands of dried insects, but the books disagree on how many: Greenfield and St Clair give about 70,000, while Garfield's figure works out several times higher [4][26][27]. Spain guarded the monopoly, and from 1614 foreigners caught trading in it faced death [28].\n\nFor more than a century, writers outside Spain argued that cochineal was a berry or seed [29]. In 1725 the Dutchman Melchior de Ruusscher won a wager on the question with sworn statements from Oaxaca that it was an insect [30]. Tin made it blaze. Around 1607 Cornelis Drebbel found that tin turned cochineal's crimson into a brilliant scarlet; the story that he found it by spilling acid onto a pewter windowsill is disputed [29][31][16].\n\nThat scarlet dressed armies. Under Cromwell, English officers wore cochineal-and-tin scarlet while ordinary soldiers got cheaper madder red [29], and Finlay dates British officers' cochineal scarlet as late as 1952 [16]. Madder clothed the French infantry in red trousers from 1829 until 1915, when they were swapped for a dull horizon blue [33][73]. Cochineal never vanished: after American regulators banned the synthetic dye amaranth in 1976, it came back as the food color E120, and Peru now grows most of it [32]."
+    },
+    {
+      "id": "power",
+      "title": "Power, piety and punishment",
+      "body": "Red long marked rank. Rome's most powerful men were called *coccinati*, those who wear red [2]. Charlemagne was crowned in 800 dressed entirely in red, and a red mantle stayed imperial insignia for centuries; the kings of France were the exception, crowned in azure with gold lilies [34]. Innocent IV gave cardinals their red hat in 1245 [35]. Their robes turned scarlet in the 1460s, when the Byzantine purple they had worn ran out; Greenfield dates the first order to 1295, so the books disagree on the steps [36][31][37].\n\nHeraldry shows how dominant red was. Of about 7,000 coats of arms from the mid-twelfth to the early fourteenth century, more than 60 per cent include red, called gules; the share falls to 45 per cent around 1400 and 30 per cent in the later 1700s [38]. The popular story that families bear red in memory of Crusader blood is false, Pastoureau writes: the Crusades had nothing to do with the birth of coats of arms [38].\n\nFlorence's clothing inventory of 1343 to 1345 listed 6,874 dresses and coats belonging to about 2,420 women, and red appeared in 67 per cent of them, against 19 per cent for blue [24][39]. Red also stood for justice and punishment: judges and executioners wore it, and so, until the nineteenth century, did many convicts; the teacher's red pen is a survival [40]. Chess came to Europe with red pieces against black, and Europeans changed the black side to white [40]. Black replaced red only in the late Middle Ages, though Pastoureau's own books date the switch anywhere from the thirteenth to the sixteenth century [40][41][42].\n\nProtestant reformers turned on red [43]. Reformers called it the color of papal Rome and the Whore of Babylon, and Calvin's Geneva banned red clothing for men and women in 1558 [43]. Rembrandt's *Night Watch* (1642) is not a night scene: the title dates from the nineteenth century, when its varnish had darkened, and a single red sash picks out the commanding officer [43]. Our archive holds Gerrit Lundens's [[art:rijks-200107938|copy of The Night Watch]] [80]."
+    },
+    {
+      "id": "politics",
+      "title": "Flags, revolutions and stop lights",
+      "body": "Before 1789 a red flag meant martial law: it was hung out to order crowds to disperse [44]. It became the insurgents' flag after the shooting on the Champ-de-Mars on 17 July 1791 [44]. In February 1848 Lamartine talked revolutionaries out of a red national flag, but the Paris Commune flew it in 1871, the Soviet Union adopted red in 1922 and China in 1949 [45]. Greenfield notes that red as the color of radical politics dates only from the 1848 uprisings, and *red tape* from the ribbons that tied British official papers [2].\n\nRed is on 77 per cent of the flags of about 200 independent countries counted in 2016, ahead of white at 58, green at 40 and blue at 37 [46]. Pastoureau traces this to heraldry, where gules ruled, and to flags answering other flags [46]. Red for stop and green for go came from ships and railways between about 1760 and 1840 [46]. London's first road traffic light, a gas lantern of December 1868, exploded the next year and injured the policeman working it [46][47]. Britain's pillar boxes were first painted green, until people kept walking into them, and were repainted red between 1874 and 1884 [16].\n\nSanta Claus's red suit did not come from Coca-Cola advertising in the 1930s [48]. It descends from Saint Nicholas, bishop of Myra, shown in a red cloak since the late Middle Ages [48]."
+    },
+    {
+      "id": "science",
+      "title": "How the eye makes red",
+      "body": "The eye has no detector tuned to red. The long-wavelength cone, often called the red cone, is not tuned to red at all: it peaks in yellow-green, and we see red when it is stimulated more than its middle-wavelength neighbor [50][51]. Primates gained that cone 30 to 40 million years ago by duplicating an older one, and it helps pick out ripe fruit and young leaves [50]. The genes sit on the X chromosome, so red-green color blindness is far commoner in men: about 1 in 12 by Westland's count, about 10 per cent by Livingstone's [52][50]. Most of them still see color but confuse certain pairs [50].\n\nEven the purest red is odd. Every red in the rainbow looks slightly yellowish, so the red that looks neither yellow nor blue does not exist as a single wavelength [53]. In dim light the rods take over, and because they are most sensitive to green, reds darken while blues lighten: red roses look black by moonlight [54]. Jan Purkinje noticed the effect in his red geraniums at dawn; Westland dates it to 1819, while Gage gives 1825 for his published account [55][56].\n\nStare at a red patch for half a minute and then at white paper, and the white turns green or blue-green; no trained eye is immune [57]. Goethe saw a girl's scarlet bodice leave a sea-green afterimage on an inn wall [58]. Paint has limits too. Munsell found that red reaches its strongest chroma at a middle lightness, which is why red neon cannot be matched in paint: paint light enough reads pink or orange [59]. Underwater, red is mostly gone by about ten feet [60].\n\nBulls are not enraged by red. They see roughly as a red-green color-blind person does, and they charge the cape's movement, going for the magenta-and-blue cape just as hard [62][61]."
+    },
+    {
+      "id": "art",
+      "title": "Red in painting",
+      "body": "For about two thousand years Europeans set red in the middle of the color order, between white and black: white, yellow, red, green, blue, black [63]. After Newton's prism experiments of 1666 it moved to one end of the spectrum, a demotion Goethe protested [64][63]. Painting manuals still opened with red: Pliny and the medieval recipe books begin there, and a fifteenth-century Lombard recipe for red starts by telling the illuminator to take an ox [14].\n\nTitian's Pesaro altarpiece (1519 to 1528) is held together by color: the Virgin's red gown answers a red banner across the picture [65]. At a Royal Academy varnishing day, Turner added one daub of red lead to a grey seascape and it outshone the vermilion in Constable's picture beside it; Constable said Turner had been in and fired a gun [66]. Van Gogh wrote that in *[[art:commons-Q674846|The Night Café]]* he tried to express the terrible passions of humanity with red and green [67].\n\nMatisse's *Red Studio* (1911) was first painted blue-grey, close to the real white studio, and his *Harmony in Red* began as a harmony in green [68]. Gage suggests, as a guess, that the red came from an afterimage of his sunlit green garden [68]. Monet's red poppies are almost exactly as light as the green grass around them, which is why they seem to sway [69]."
+    },
+    {
+      "id": "myths",
+      "title": "Myths and loose ends",
+      "body": "Pink for girls is recent. Babies were not color-coded before the 1930s, and boys often wore pink before then [70]. The red heels of Versailles courtiers date from the 1670s and 1680s; the tale that they began when the Duke of Orléans stepped in ox blood is court legend [71]. Nineteenth-century theories that ancient peoples saw red first and were blind to blues and greens have been abandoned, and so has the idea that babies see red before other colors [72][3].\n\nDoes wearing red help you win? St Clair cites studies of red-clad Olympic fighters winning 55 per cent of bouts in 2004 and red-shirted English football teams finishing higher [61]. Pastoureau calls the belief a persistent legend, so the books disagree [48]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a screen color within six units of this page's red covers at least five per cent of the canvas in only 56 works [80]. Most are not European: 21 are Indian, twelve times the archive's rate, and Rajput court painting carries it 35 times as often as the archive as a whole [80]. The six works where it covers most are Indian pages made between 1675 and 1760, with red grounds filling 32 to 43 per cent of the surface [80]. The earliest dated one is a Greek icon of the two Saints Theodore, from 1450 [80].\n\nWiden the net to any clearly colored red, and red is the one strong hue that old paintings kept. A red with CIELAB chroma of at least 30 covers five per cent of the canvas in 2,044 paintings, 8.6 per cent of the archive; the same test finds blue in 94 and green in 125 [80]. Red peaks in the 1400s, in 29 per cent of our 945 dated paintings from that century [80]. Look closely and the reds are darker than this swatch: in Titian's *[[art:nga-41638|Cardinal Pietro Bembo]]*, the cardinal's red reads as a brick red as photographed [80].\n\nThese are photographs of aged, varnished paintings, the hue windows are ours, and a color match is not a pigment test [80]. The swatch itself is a choice. Screens' CSS `red` is the far more intense #FF0000, the American color standard calls this region vivid red, and our nearest named neighbors are [[madder-lake|Madder Lake]], [[spanish-red|Spanish Red]] and [[fire-engine-red|Fire Engine Red]], each under three units away [81]. In Google Books the word *red* rises from about 65 per cent of its peak in 1800 to its peak around 1919, and falls back to 64 per cent by 1980 [82]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "madder",
-   "pink",
-   "maroon",
-   "venetian-red",
-   "indian-red",
-   "rosso-corsa",
-   "blood-red"
-  ],
-  "disambiguation": [
-   {
-    "slug": "red-orange",
-    "gloss": "a separate name for the orange side of red"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "la",
-    "name": "ruber"
-   },
-   {
-    "lang": "fr",
-    "name": "rouge"
-   },
-   {
-    "lang": "it",
-    "name": "rosso"
-   },
-   {
-    "lang": "de",
-    "name": "rot"
-   },
-   {
-    "lang": "es",
-    "name": "rojo; colorado (\"colored\")"
-   },
-   {
-    "lang": "ru",
-    "name": "krasnyy"
-   },
-   {
-    "lang": "nah",
-    "name": "tlapalli (red, color)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#D62F2F",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 56,
-  "top_country": {
-   "name": "India",
-   "hits": 21,
-   "lift": 12.4
-  },
-  "top_movement": {
-   "name": "Rajput",
-   "hits": 8,
-   "n": 97,
-   "lift": 35.0
-  },
-  "first_dated": {
-   "id": "commons-Q21729866",
-   "title": "Icon: Sts Theodore Stratelates and Theodore Tyron",
-   "year": 1450
-  },
-  "top_paintings": [
-   "cma-314464",
-   "cma-131671",
-   "cma-154764",
-   "cma-314462",
-   "cma-146202",
-   "cma-314491"
-  ],
-  "role": {
-   "shadow": 0.29,
-   "mid": 0.5,
-   "highlight": 0.21
-  },
-  "family_scan": {
-   "rule": "CIELAB chroma >= 30, >= 5% of canvas",
-   "red_hue": [
-    10,
-    45
-   ],
-   "red": 2044,
-   "blue": 94,
-   "green": 125,
-   "red_1400s_pct": 28.9,
-   "red_1400s_n": 945
-  },
-  "example": {
-   "id": "nga-41638",
-   "largest": "Saona #8F371C"
-  },
-  "ngram": {
-   "word": "red",
-   "peak": 1919,
-   "rel_1800": 0.645,
-   "rel_1980": 0.638,
-   "rel_2000": 0.722
-  },
-  "measured": {
-   "lch": [
-    47.7,
-    75.6,
-    33.3
-   ],
-   "munsell": "7.0R 4.7/15.0",
-   "iscc_nbs": "vivid red",
-   "css_red": "#FF0000",
-   "contrast_white": 4.88,
-   "contrast_black": 4.31,
-   "nearest": [
-    [
-     "Madder Lake",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "the color itself; a basic English color word",
+      "first_recorded": "Old English rēad",
+      "source": "Wiktionary (red)"
+    },
+    "aka": [
+      "gules (heraldry)"
     ],
-    [
-     "Spanish Red",
-     2.9
+    "siblings": [
+      "scarlet",
+      "vermilion",
+      "crimson",
+      "carmine"
     ],
-    [
-     "Fire Engine Red",
-     2.9
+    "parent": null,
+    "children": [
+      "irresistible",
+      "pink",
+      "maroon",
+      "venetian-red",
+      "indian-red",
+      "rosso-corsa",
+      "blood-red"
     ],
-    [
-     "Vermilion",
-     5.1
+    "disambiguation": [
+      {
+        "slug": "red-orange",
+        "gloss": "a separate name for the orange side of red"
+      }
     ],
-    [
-     "Crimson",
-     5.6
+    "other_languages": [
+      {
+        "lang": "la",
+        "name": "ruber"
+      },
+      {
+        "lang": "fr",
+        "name": "rouge"
+      },
+      {
+        "lang": "it",
+        "name": "rosso"
+      },
+      {
+        "lang": "de",
+        "name": "rot"
+      },
+      {
+        "lang": "es",
+        "name": "rojo; colorado (\"colored\")"
+      },
+      {
+        "lang": "ru",
+        "name": "krasnyy"
+      },
+      {
+        "lang": "nah",
+        "name": "tlapalli (red, color)"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#D62F2F",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 56,
+    "top_country": {
+      "name": "India",
+      "hits": 21,
+      "lift": 12.4
+    },
+    "top_movement": {
+      "name": "Rajput",
+      "hits": 8,
+      "n": 97,
+      "lift": 35.0
+    },
+    "first_dated": {
+      "id": "commons-Q21729866",
+      "title": "Icon: Sts Theodore Stratelates and Theodore Tyron",
+      "year": 1450
+    },
+    "top_paintings": [
+      "cma-314464",
+      "cma-131671",
+      "cma-154764",
+      "cma-314462",
+      "cma-146202",
+      "cma-314491"
+    ],
+    "role": {
+      "shadow": 0.29,
+      "mid": 0.5,
+      "highlight": 0.21
+    },
+    "family_scan": {
+      "rule": "CIELAB chroma >= 30, >= 5% of canvas",
+      "red_hue": [
+        10,
+        45
+      ],
+      "red": 2044,
+      "blue": 94,
+      "green": 125,
+      "red_1400s_pct": 28.9,
+      "red_1400s_n": 945
+    },
+    "example": {
+      "id": "nga-41638",
+      "largest": "Saona #8F371C"
+    },
+    "ngram": {
+      "word": "red",
+      "peak": 1919,
+      "rel_1800": 0.645,
+      "rel_1980": 0.638,
+      "rel_2000": 0.722
+    },
+    "measured": {
+      "lch": [
+        47.7,
+        75.6,
+        33.3
+      ],
+      "munsell": "7.0R 4.7/15.0",
+      "iscc_nbs": "vivid red",
+      "css_red": "#FF0000",
+      "contrast_white": 4.88,
+      "contrast_black": 4.31,
+      "nearest": [
+        [
+          "Madder Lake",
+          2.6
+        ],
+        [
+          "Spanish Red",
+          2.9
+        ],
+        [
+          "Fire Engine Red",
+          2.9
+        ],
+        [
+          "Vermilion",
+          5.1
+        ],
+        [
+          "Crimson",
+          5.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 8",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 5",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 39",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 8",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 83",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Batchelor, Chromophobia, ch. 4",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Hematite\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 9",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 10 (\"Ochre\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 12",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 11",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 28",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 19",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 13 (\"Red\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 81",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 11",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 21",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 22",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 21,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 96",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 22,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 254",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 23,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 24,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 23",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 25,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 9",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 26,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Cochineal\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 27,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 4",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 28,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 29,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 30,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 31,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Scarlet\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 32,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 23",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 33,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 10",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 34,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 19",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 35,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 18",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 36,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 135",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 37,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 7",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 38,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 20",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 39,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, ch. 25",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 40,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 25",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 41,
+      "kind": "book",
+      "cite": "Pastoureau, White: The History of a Color, p. 74",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 42,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, p. 42",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 43,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 27",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 44,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 35",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 45,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 36",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 46,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 37",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 47,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, ch. 38",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 48,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 38",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 49,
+      "kind": "book",
+      "cite": "Eckstut, What Is Color?, ch. 11",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 50,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 51,
+      "kind": "book",
+      "cite": "Eckstut, What Is Color?, ch. 20",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 52,
+      "kind": "book",
+      "cite": "Westland et al., Universal Principles of Color, ch. 7",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 53,
+      "kind": "book",
+      "cite": "Westland et al., Universal Principles of Color, ch. 98",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 54,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 140",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 55,
+      "kind": "book",
+      "cite": "Westland et al., Universal Principles of Color, ch. 57",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 56,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 196",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 57,
+      "kind": "book",
+      "cite": "Albers, Interaction of Color, p. 37",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 58,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 59,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 78",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 60,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 206",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 61,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Red\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 62,
+      "kind": "book",
+      "cite": "Eckstut, What Is Color?, ch. 29",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 63,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 29",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 64,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 24",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 65,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 5",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 66,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 7",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 67,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 200",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 68,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 216",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 69,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 19",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 70,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 33",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 71,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 30",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 72,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 10",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 73,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 34",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 74,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, p. 20",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 80,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas; family scan: CIELAB chroma >= 30, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 81,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/graph/nodes-r.json, names.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 82,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why does a red flower turn almost black at dusk while the leaves around it stay visible?",
+      "choices": [
+        "In dim light the rods take over, and they are most sensitive to green, so reds darken",
+        "Red pigment fades in the evening air",
+        "The sky scatters red light away at dusk",
+        "Leaves reflect the moonlight"
+      ],
+      "answer": "In dim light the rods take over, and they are most sensitive to green, so reds darken",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: families put red in their coats of arms to remember ancestors' blood shed in the Crusades.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "What did the word scarlet first name in medieval Europe?",
+      "choices": [
+        "A fine woollen cloth that could be any color",
+        "A red insect dye from Mexico",
+        "The color of cardinals' hats",
+        "A red dye made from madder roots"
+      ],
+      "answer": "A fine woollen cloth that could be any color",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "In Latin and Spanish, the word for colored could simply mean red.",
+    "Watch a red flower at dusk: it goes black before the leaves around it do.",
+    "Red is on 77 per cent of national flags, because flags grew out of heraldry, where red ruled."
+  ],
+  "words": 2686,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Chess red-to-black switch range corrected to thirteenth-sixteenth century to match fact card (white book gives late 14th-16th).",
+      "Flag colour ranking now includes green (40%) so 'ahead of' is not selective."
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 8",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 5",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 39",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 8",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 15",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 83",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Batchelor, Chromophobia, ch. 4",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Hematite\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 9",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 10 (\"Ochre\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 12",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 11",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 28",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 19",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 13 (\"Red\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 81",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 11",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 21",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 22",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 21,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 96",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 22,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 254",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 23,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 24,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 23",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 25,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 9",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 26,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Cochineal\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 27,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 4",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 28,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 13",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 29,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 15",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 30,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 31,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Scarlet\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 32,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 23",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 33,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 10",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 34,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 19",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 35,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 18",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 36,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 135",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 37,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 7",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 38,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 20",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 39,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, ch. 25",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 40,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 25",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 41,
-   "kind": "book",
-   "cite": "Pastoureau, White: The History of a Color, p. 74",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 42,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, p. 42",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 43,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 27",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 44,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 35",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 45,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 36",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 46,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 37",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 47,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, ch. 38",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 48,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 38",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 49,
-   "kind": "book",
-   "cite": "Eckstut, What Is Color?, ch. 11",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 50,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 13",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 51,
-   "kind": "book",
-   "cite": "Eckstut, What Is Color?, ch. 20",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 52,
-   "kind": "book",
-   "cite": "Westland et al., Universal Principles of Color, ch. 7",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 53,
-   "kind": "book",
-   "cite": "Westland et al., Universal Principles of Color, ch. 98",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 54,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 140",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 55,
-   "kind": "book",
-   "cite": "Westland et al., Universal Principles of Color, ch. 57",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 56,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 196",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 57,
-   "kind": "book",
-   "cite": "Albers, Interaction of Color, p. 37",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 58,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 15",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 59,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 78",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 60,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 206",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 61,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Red\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 62,
-   "kind": "book",
-   "cite": "Eckstut, What Is Color?, ch. 29",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 63,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 29",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 64,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 24",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 65,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 5",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 66,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 7",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 67,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 200",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 68,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 216",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 69,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 19",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 70,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 33",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 71,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 30",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 72,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 10",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 73,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 34",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 74,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, p. 20",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 80,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas; family scan: CIELAB chroma >= 30, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 81,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/graph/nodes-r.json, names.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 82,
-   "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  }
- ],
- "questions": [
-  {
-   "q": "Why does a red flower turn almost black at dusk while the leaves around it stay visible?",
-   "choices": [
-    "In dim light the rods take over, and they are most sensitive to green, so reds darken",
-    "Red pigment fades in the evening air",
-    "The sky scatters red light away at dusk",
-    "Leaves reflect the moonlight"
-   ],
-   "answer": "In dim light the rods take over, and they are most sensitive to green, so reds darken",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: families put red in their coats of arms to remember ancestors' blood shed in the Crusades.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "What did the word scarlet first name in medieval Europe?",
-   "choices": [
-    "A fine woollen cloth that could be any color",
-    "A red insect dye from Mexico",
-    "The color of cardinals' hats",
-    "A red dye made from madder roots"
-   ],
-   "answer": "A fine woollen cloth that could be any color",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "In Latin and Spanish, the word for colored could simply mean red.",
-  "Watch a red flower at dusk: it goes black before the leaves around it do.",
-  "Red is on 77 per cent of national flags, because flags grew out of heraldry, where red ruled."
- ],
- "words": 2686,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Chess red-to-black switch range corrected to thirteenth-sixteenth century to match fact card (white book gives late 14th-16th).",
-   "Flag colour ranking now includes green (40%) so 'ahead of' is not selective."
-  ]
- }
 }

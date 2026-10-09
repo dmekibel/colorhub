@@ -1,0 +1,113 @@
+{
+ "slug": "steel-pink",
+ "name": "Steel Pink",
+ "hex": "#CC33CC",
+ "names": [
+  "Steel Pink"
+ ],
+ "tier": "pigment",
+ "depth": "brief",
+ "lede": "Steel Pink is a vivid magenta named for a mineral or metal word, \"steel,\" despite looking nothing like the grey metal itself.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "A metal word on a magenta",
+   "body": "The nearest named colors on file are [[pinky-purple]], [[medium-orchid]], [[byzantine]] and [[phlox]], at 4.2, 5.2, 6.8 and 6.9 ΔE [1]. The sources we hold do not explain why a bright magenta carries a metal's name; no recipe or alloy connects the two here [1]. At lightness 51 and chroma 88, it reads as one of the most saturated colors anywhere in our library, closer to a pure dye than to anything grey [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, has no painting where this magenta covers five percent or more of the canvas within six CIEDE2000 units [2]. Pigments and dyes this saturated and this pink-purple are rare in painted canvases of any period; the color belongs more to modern synthetic dye and print than to the historical palette [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the metal word \"steel\"; the connection to this magenta is undocumented",
+   "first_recorded": "undocumented in the sources we hold",
+   "source": "ColorHub graph classifier"
+  },
+  "aka": [],
+  "siblings": [
+   "pinky-purple",
+   "medium-orchid",
+   "byzantine",
+   "phlox"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    51,
+    88,
+    328
+   ],
+   "nearest": [
+    [
+     "Pinky Purple",
+     4.2
+    ],
+    [
+     "Medium Orchid",
+     5.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph nodes (data/library.json, data/graph/nodes-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which word class does our classifier file \"Steel Pink\" under?",
+   "choices": [
+    "Pigment, mineral or dye",
+    "Place or institution",
+    "Basic color term",
+    "Painter's surname"
+   ],
+   "answer": "Pigment, mineral or dye",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Steel Pink turns up often in our museum painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Steel Pink never once appears in our 23,781-painting archive."
+ ],
+ "words": 155,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No sourced link between \"steel\" and this magenta beyond the classifier's word match.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,268 +1,268 @@
 {
- "slug": "maroon",
- "name": "Maroon",
- "hex": "#800000",
- "names": [
-  "Maroon"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Maroon is a dark brownish red, named from the French word for the chestnut, and it began as a brown before it became a red.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A chestnut, then a red",
-   "body": "Paterson derives *maroon* from French *marron*, chestnut, and adds that the French word may in turn come from a Hebrew word for chestnut, a guess he marks with a *perhaps* [1]. St Clair's glossary says the color was originally nut brown and now means a brownish dark red [2]. The chestnut stayed where it was, and the word moved toward red. Our date data has the first English use of *maroon* as a color word in 1789 [3]."
-  },
-  {
-   "id": "swatch",
-   "title": "Which maroon",
-   "body": "The swatch, #800000, is the web keyword for maroon [1]. Paterson lists it among the X11 colors and among the 16 basic color names of early web design [1][4]. It is a pure dark red with no brown in it, and ISCC-NBS, which names colors by looking, calls it a strong reddish brown, about five units away [3].\n\nOlder sources mean something browner. Ridgway's 1912 Maroon, carried into ISCC-NBS, sits near #5B3B34, taken from a scan of an aged plate and so approximate [3]. The xkcd color survey's maroon is a deep crimson, #650021 [3]. Sources also disagree about X11: Paterson gives its Maroon as #800000, while our library carries a separate Maroon (X11) at the pinker #B03060 [1][3]. On screens the word names a neighborhood, not a point."
-  },
-  {
-   "id": "victorian",
-   "title": "A respectable red",
-   "body": "In the early 1850s, English fashion manuals condemned scarlet and crimson as vulgar but allowed a lady dark reds, brick reds and maroon, especially a married one [5]. The vogue for dark reds, together with the full crinoline skirt that swallowed yards of cloth, helped revive the cochineal trade [5]. Greenfield adds that some women who dressed in public only in dull maroon wore bright red woolen petticoats beneath it [5]."
-  },
-  {
-   "id": "pigments",
-   "title": "Maroons from the factory",
-   "body": "Many maroon pigments come from modern chemistry. In cadmium red, a cadmium sulfide-selenide, more selenium moves the color from orange toward dark maroon [6]. The Pigment Compendium gives selenium-to-cadmium ratios of 10:90 for orange, 20:80 for bright red and 30:70 for dark maroon [7]. Ball says the compound now called cadmium red was not available commercially until 1910, and Bayer made it more reliably in 1919 [6].\n\nThe cadmium mercury sulfides run from orange to maroon as the mercury sulfide share rises from 11 to 26 per cent, and are said to have been developed after a shortage of selenium in the later 1940s [7]. Organic chemists reached maroon too. Benzimidazolone pigments give maroons as well as yellows and oranges, and lithol maroon is a barium lithol red bound with rosin, from the lithol red discovered by P. Julius in 1899 [8]. Perylene pigments were found in 1912 and 1913 but came into general use only after 1950, and perylene maroon is listed among artists' pigments [8]."
-  },
-  {
-   "id": "art",
-   "title": "Maroon in paint",
-   "body": "Ball notes that Rothko, wary of letting viewers enjoy his canvases as decoration, toned down his bright early palette for blacks, browns, greys and deep maroons [9]. In the Rothko Chapel murals of 1965, whose dark maroon monochromes are marred by whitish streaks and cracking, the synthetic alizarin-based reds have kept their intensity [9]."
-  },
-  {
-   "id": "science",
-   "title": "Why maroon is a relative color",
-   "body": "A hue needs only two numbers, and a name like maroon needs a third. Livingstone points out that maroon and pink are the same hue and differ only in luminance, and that maroon is red light surrounded by something lighter [10]. Gurney uses Munsell notation to make the point: a maroon can be written R 3/6, a hue, a value of 3 out of 10 and a chroma of 6 [11]. Our swatch is 0.5YR 2.5/11.2 in the same system, darker and far stronger than that example [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Maroon appears in 292 of 23,781 paintings in our archive, 1.23 per cent, and in 236 counted by lightness rank inside each painting [12]. It is more common than 73 per cent of the named colors, and plays an accent in 82 per cent of those 236 [12]. It peaks in the 1400s, in 3.8 per cent of the 945 paintings from that century, 3.4 times the baseline of the same museums [12]. [[painter:sandro-botticelli|Botticelli]] has it in 4 of his 48 works here, but no painter stands out against the baseline [12]. It travels with [[black-bean]] and [[chinese-red]] (lift 10.0 and 6.9) [12].\n\nThe nearest cut stone in our gem data is [[gem:coral|coral]], a rare deep ox-blood red, at 2.4 units, then [[gem:cinnabar|cinnabar]] at 3.5 [13]. Close look-alikes are [[reddy-brown]], [[falu-red]] and [[deep-red]] [13]. In our film notes the nearest color is the restaurant red of [[film:vertigo|Vertigo]] (1958), 5.3 units away [13]. In printed English the word peaks in the 2010s and rose fastest in the 2000s [12].\n\nThe earliest archive match is a work of about 1290 in the Rijksmuseum, 499 years before the name's first record [12]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [12]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "French marron, chestnut",
-   "first_recorded": "English color word, 1789 (Maerz and Paul)",
-   "source": "Paterson, A Dictionary of Colour, 'maroon'; St Clair, Secret Lives of Colour, glossary"
-  },
-  "aka": [
-   "marron (French, chestnut)"
+  "slug": "maroon",
+  "name": "Maroon",
+  "hex": "#800000",
+  "names": [
+    "Maroon"
   ],
-  "siblings": [
-   "burgundy",
-   "falu-red",
-   "reddy-brown"
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Maroon is a dark brownish red, named from the French word for the chestnut, and it began as a brown before it became a red.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A chestnut, then a red",
+      "body": "Paterson derives *maroon* from French *marron*, chestnut, and adds that the French word may in turn come from a Hebrew word for chestnut, a guess he marks with a *perhaps* [1]. St Clair's glossary says the color was originally nut brown and now means a brownish dark red [2]. The chestnut stayed where it was, and the word moved toward red. Our date data has the first English use of *maroon* as a color word in 1789 [3]."
+    },
+    {
+      "id": "swatch",
+      "title": "Which maroon",
+      "body": "The swatch, #800000, is the web keyword for maroon [1]. Paterson lists it among the X11 colors and among the 16 basic color names of early web design [1][4]. It is a pure dark red with no brown in it, and ISCC-NBS, which names colors by looking, calls it a strong reddish brown, about five units away [3].\n\nOlder sources mean something browner. Ridgway's 1912 Maroon, carried into ISCC-NBS, sits near #5B3B34, taken from a scan of an aged plate and so approximate [3]. The xkcd color survey's maroon is a deep crimson, #650021 [3]. Sources also disagree about X11: Paterson gives its Maroon as #800000, while our library carries a separate Maroon (X11) at the pinker #B03060 [1][3]. On screens the word names a neighborhood, not a point."
+    },
+    {
+      "id": "victorian",
+      "title": "A respectable red",
+      "body": "In the early 1850s, English fashion manuals condemned scarlet and crimson as vulgar but allowed a lady dark reds, brick reds and maroon, especially a married one [5]. The vogue for dark reds, together with the full crinoline skirt that swallowed yards of cloth, helped revive the cochineal trade [5]. Greenfield adds that some women who dressed in public only in dull maroon wore bright red woolen petticoats beneath it [5]."
+    },
+    {
+      "id": "pigments",
+      "title": "Maroons from the factory",
+      "body": "Many maroon pigments come from modern chemistry. In cadmium red, a cadmium sulfide-selenide, more selenium moves the color from orange toward dark maroon [6]. The Pigment Compendium gives selenium-to-cadmium ratios of 10:90 for orange, 20:80 for bright red and 30:70 for dark maroon [7]. Ball says the compound now called cadmium red was not available commercially until 1910, and Bayer made it more reliably in 1919 [6].\n\nThe cadmium mercury sulfides run from orange to maroon as the mercury sulfide share rises from 11 to 26 per cent, and are said to have been developed after a shortage of selenium in the later 1940s [7]. Organic chemists reached maroon too. Benzimidazolone pigments give maroons as well as yellows and oranges, and lithol maroon is a barium lithol red bound with rosin, from the lithol red discovered by P. Julius in 1899 [8]. Perylene pigments were found in 1912 and 1913 but came into general use only after 1950, and perylene maroon is listed among artists' pigments [8]."
+    },
+    {
+      "id": "art",
+      "title": "Maroon in paint",
+      "body": "Ball notes that Rothko, wary of letting viewers enjoy his canvases as decoration, toned down his bright early palette for blacks, browns, greys and deep maroons [9]. In the Rothko Chapel murals of 1965, whose dark maroon monochromes are marred by whitish streaks and cracking, the synthetic alizarin-based reds have kept their intensity [9]."
+    },
+    {
+      "id": "science",
+      "title": "Why maroon is a relative color",
+      "body": "A hue needs only two numbers, and a name like maroon needs a third. Livingstone points out that maroon and pink are the same hue and differ only in luminance, and that maroon is red light surrounded by something lighter [10]. Gurney uses Munsell notation to make the point: a maroon can be written R 3/6, a hue, a value of 3 out of 10 and a chroma of 6 [11]. Our swatch is 0.5YR 2.5/11.2 in the same system, darker and far stronger than that example [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Maroon appears in 292 of 23,781 paintings in our archive, 1.23 per cent, and in 236 counted by lightness rank inside each painting [12]. It is more common than 73 per cent of the named colors, and plays an accent in 82 per cent of those 236 [12]. It peaks in the 1400s, in 3.8 per cent of the 945 paintings from that century, 3.4 times the baseline of the same museums [12]. [[painter:sandro-botticelli|Botticelli]] has it in 4 of his 48 works here, but no painter stands out against the baseline [12]. It travels with [[black-bean]] and [[chinese-red]] (lift 10.0 and 6.9) [12].\n\nThe nearest cut stone in our gem data is [[gem:coral|coral]], a rare deep ox-blood red, at 2.4 units, then [[gem:cinnabar|cinnabar]] at 3.5 [13]. Close look-alikes are [[blood-red]], [[falu-red]] and [[deep-red]] [13]. In our film notes the nearest color is the restaurant red of [[film:vertigo|Vertigo]] (1958), 5.3 units away [13]. In printed English the word peaks in the 2010s and rose fastest in the 2000s [12].\n\nThe earliest archive match is a work of about 1290 in the Rijksmuseum, 499 years before the name's first record [12]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [12]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "dark-maroon",
-   "light-maroon",
-   "maroon-x11"
+  "aside": {
+    "origin": {
+      "named_after": "French marron, chestnut",
+      "first_recorded": "English color word, 1789 (Maerz and Paul)",
+      "source": "Paterson, A Dictionary of Colour, 'maroon'; St Clair, Secret Lives of Colour, glossary"
+    },
+    "aka": [
+      "marron (French, chestnut)"
+    ],
+    "siblings": [
+      "burgundy",
+      "falu-red",
+      "blood-red"
+    ],
+    "parent": null,
+    "children": [
+      "dark-sienna",
+      "pomegranate-purple",
+      "berry-red"
+    ],
+    "disambiguation": [
+      {
+        "slug": "berry-red",
+        "gloss": "a pinker maroon, #B03060, that our library files as the X11 value"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "marron (chestnut)"
+      }
+    ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 292,
+    "n_within_painting": 236,
+    "century_peak": {
+      "century": 1400,
+      "pct": 3.8,
+      "lift": 3.4
+    },
+    "painters": [
+      [
+        "sandro-botticelli",
+        4,
+        48
+      ]
+    ],
+    "first_seen": {
+      "year": 1290,
+      "id": "rijks-200109813"
+    },
+    "measured": {
+      "lch": [
+        25.5,
+        61.3,
+        38.4
+      ],
+      "munsell": "0.5YR 2.5/11.2",
+      "iscc": "strong reddish brown, block 16",
+      "alts": [
+        "#5B3B34",
+        "#650021",
+        "#B03060"
+      ]
+    },
+    "company": [
+      [
+        "black-bean",
+        37,
+        10.0
+      ],
+      [
+        "chinese-red",
+        48,
+        6.9
+      ]
+    ]
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, 'maroon', p. 257",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, glossary of other colors",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub library and graph: Maerz and Paul first record 1789, ISCC-NBS block 16, Ridgway 1912 plate I, xkcd and X11 alternates, Munsell conversion",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, 'web colours', p. 428",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 21",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 7 (cadmium red; epub ch. 21)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Pigment Compendium, 'cadmium sulfoselenide' and 'cadmium mercury sulfide', pp. 82, 84",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Pigment Compendium, azo, lithol and perylene entries, pp. 43, 254, 310",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, discussion of Rothko (epub ch. 22)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, sections on nonspectral colors and 'Are Black and White Colors?'",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, section on Munsell's system (epub ch. 78)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "data",
+      "cite": "ColorHub archive field notes and Google Books Ngram, as photographed",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "data",
+      "cite": "ColorHub graph: twins and look-alikes (gems, film notes, nearest names)",
+      "loc_kind": "entry",
+      "url": null
+    }
   ],
-  "disambiguation": [
-   {
-    "slug": "maroon-x11",
-    "gloss": "a pinker maroon, #B03060, that our library files as the X11 value"
-   }
+  "questions": [
+    {
+      "q": "What does the French word marron, the source of maroon, mean?",
+      "choices": [
+        "Chestnut",
+        "Blood",
+        "Cherry",
+        "Brick"
+      ],
+      "answer": "Chestnut",
+      "kind": "pick"
+    },
+    {
+      "q": "In cadmium red, which change moves the color from orange toward dark maroon?",
+      "choices": [
+        "Adding more selenium",
+        "Adding less selenium",
+        "Adding lead white",
+        "Heating it in air"
+      ],
+      "answer": "Adding more selenium",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: maroon and pink differ in hue.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
   ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "marron (chestnut)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 292,
-  "n_within_painting": 236,
-  "century_peak": {
-   "century": 1400,
-   "pct": 3.8,
-   "lift": 3.4
-  },
-  "painters": [
-   [
-    "sandro-botticelli",
-    4,
-    48
-   ]
+  "openers": [
+    "Maroon began as nut brown: the word is French for chestnut.",
+    "Maroon is red light surrounded by something lighter, and pink is the same hue with more luminance.",
+    "The web maroon, #800000, has no brown in it, while older maroons did."
   ],
-  "first_seen": {
-   "year": 1290,
-   "id": "rijks-200109813"
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Softened \"most maroon pigments are twentieth-century chemistry\" (lithol red is 1899)"
+    ]
   },
-  "measured": {
-   "lch": [
-    25.5,
-    61.3,
-    38.4
-   ],
-   "munsell": "0.5YR 2.5/11.2",
-   "iscc": "strong reddish brown, block 16",
-   "alts": [
-    "#5B3B34",
-    "#650021",
-    "#B03060"
-   ]
-  },
-  "company": [
-   [
-    "black-bean",
-    37,
-    10.0
-   ],
-   [
-    "chinese-red",
-    48,
-    6.9
-   ]
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, 'maroon', p. 257",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, glossary of other colors",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub library and graph: Maerz and Paul first record 1789, ISCC-NBS block 16, Ridgway 1912 plate I, xkcd and X11 alternates, Munsell conversion",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, 'web colours', p. 428",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 21",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 7 (cadmium red; epub ch. 21)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Pigment Compendium, 'cadmium sulfoselenide' and 'cadmium mercury sulfide', pp. 82, 84",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Pigment Compendium, azo, lithol and perylene entries, pp. 43, 254, 310",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, discussion of Rothko (epub ch. 22)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, sections on nonspectral colors and 'Are Black and White Colors?'",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, section on Munsell's system (epub ch. 78)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "data",
-   "cite": "ColorHub archive field notes and Google Books Ngram, as photographed",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "data",
-   "cite": "ColorHub graph: twins and look-alikes (gems, film notes, nearest names)",
-   "loc_kind": "entry",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the French word marron, the source of maroon, mean?",
-   "choices": [
-    "Chestnut",
-    "Blood",
-    "Cherry",
-    "Brick"
-   ],
-   "answer": "Chestnut",
-   "kind": "pick"
-  },
-  {
-   "q": "In cadmium red, which change moves the color from orange toward dark maroon?",
-   "choices": [
-    "Adding more selenium",
-    "Adding less selenium",
-    "Adding lead white",
-    "Heating it in air"
-   ],
-   "answer": "Adding more selenium",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: maroon and pink differ in hue.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Maroon began as nut brown: the word is French for chestnut.",
-  "Maroon is red light surrounded by something lighter, and pink is the same hue with more luminance.",
-  "The web maroon, #800000, has no brown in it, while older maroons did."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Softened \"most maroon pigments are twentieth-century chemistry\" (lithol red is 1899)"
-  ]
- },
- "words": 808
+  "words": 808
 }

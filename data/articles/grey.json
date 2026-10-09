@@ -1,646 +1,645 @@
 {
- "slug": "grey",
- "name": "Grey",
- "hex": "#8C9096",
- "names": [
-  "Grey"
- ],
- "tier": "nature",
- "depth": "epic",
- "lede": "Grey is the color between black and white, the one color that is named after nothing; it has meant poverty, hope, old age and good taste in turn, and it changes its look more readily than any other color.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A color named after nothing",
-   "body": "Most color words point at a thing: orange at a fruit, violet at a flower, brown, in some accounts, at a bear [1]. Grey does not. Pastoureau sets it apart from the other half-colors because it has no referent, the word is old, from Germanic *grau*, and its meanings run both ways: sadness and old age, but also wisdom and maturity [1]. French keeps the good side in *matière grise*, grey matter, the stuff of intelligence [1].\n\nLatin had several words in the greys, among them *pullus*, *ravus*, *canus* and *cinereus*, ash-colored [2]. The Greek *phaion*, now translated as grey, seems first to have meant shining [3]. English writes it two ways. *Gray* is the American spelling, and the colorman George Field tried in 1835 to make the two mean different things: grey for mixtures of black and white, gray for any broken, cool color [4]. The distinction did not stick, and today the two spellings divide mainly by country [4]."
-  },
-  {
-   "id": "swatch",
-   "title": "Which grey",
-   "body": "The swatch here is a middle grey with a faint cool cast; by the ISCC-NBS standard of 1955 its nearest name is bluish gray [33]. Its closest neighbors in our library are [[light-violet-grey]], [[silver-grey]], [[deep-plumbeous]] and [[roman-silver]], all within about four units [33]. The CSS keyword `grey`, `#808080`, is a perfectly neutral grey, a little darker and about six and a half units away [4][33].\n\nPaterson's dictionary calls grey the color of lead, of ash and of middle-aged hair [4]. In 1999 Marks & Spencer explained a halving of its half-year profits by saying it had bought too much grey [4]."
-  },
-  {
-   "id": "seeing",
-   "title": "The most changeable color",
-   "body": "Physically, grey is only white light with the volume turned down [5]. Black, white and grey are colors without hue, not non-colors: lightness is one of the three dimensions of color, alongside hue and saturation [6]. Yet a grey almost never looks neutral. On a red ground a grey patch looks greenish, on a blue ground yellowish, and Josef Albers built his teaching on making one color look like two by changing what surrounds it [7][8].\n\nThe brain reads grey from context. In one of James Gurney's demonstrations, the same grey paint reads as a green square in a picture lit red and as a red square in a picture lit green [9]. Hering's classic experiment showed that a card seen through a hole looks white, yet looks grey or black once the card around the hole is flooded with more light, though the card itself reflects exactly the same [10]. A grey hen in sunlight still looks grey, even when its feathers send more light to the eye than a white hen's in shadow [11].\n\nGrey is also what mixing does. Mixed paints give a dirty grey rather than white, as Newton explained in his *Opticks* of 1704: colored powders swallow too much light, so their mixture is a dusky color between light and darkness [12][34]. On a spinning color wheel, where less light is lost, the colors add up to a middle grey [13]. To see grey at work outdoors, look at the shaded underside of a cumulus cloud where it meets blue sky: when the two are equally light the edge disappears [14]. After sunset, the grey band rising in the east is the shadow of the Earth itself [15]."
-  },
-  {
-   "id": "history",
-   "title": "The grey of the poor",
-   "body": "For centuries in Europe grey was a color of poverty, worn by those who could not pay for bright, lasting dyes [16]. Charlemagne ordered peasants to dress in black and grey, and in Renaissance Europe grey and beige marked the poorest people, lowly priests, monks and nuns [16]. A Scottish law of 1457 told peasants to wear grey on ordinary days and keep blue, red and green for holidays [17]. The Cistercians, founded at the end of the eleventh century in undyed wool, were first called the grey monks, and the Franciscans wore grey too [18][19].\n\nMourning also began in the greys. Roman magistrates at funerals wore a dark toga of *pullus*, a drab wool somewhere between grey and brown, probably closer to ash grey than to black [20]. In Paris estate inventories of about 1700, grey made up 20 per cent of servants' clothing but only 5 per cent of nobles' [21]."
-  },
-  {
-   "id": "hope",
-   "title": "The grey of hope",
-   "body": "In the fifteenth century grey changed rank in two generations [19]. New mordants, iron sulfates with a little oak gall, used with baths of birch and alder bark, gave clear, even, luminous greys, and Rouen and Louviers specialized in fine grey cloth [19]. Grey became a princely color and a color of hope, the opposite of black's despair [22]. Charles d'Orléans, a prisoner in England after Agincourt in 1415, asked his friends to wear grey rather than black while he lived, and wrote a poem on the grey of hope around 1430 [22][23]. René d'Anjou kept black with white or grey in his livery all his life [24].\n\nThe fashion lifted pewter, seen as a kind of silver, and grey horses, which became the mounts of choice at tournaments from the 1440s [22]. It had faded by the 1530s [22]. In the medieval moralists' scheme of the ages of life, old age was grey; in their colors of love, grey stood for unhappy love [25]. Grey came back in the 1730s, as shimmering pale greys on silk and cotton, and Chardin painted still lifes built on them [26].\n\nThe Protestant centuries kept grey close [27][28]. Reformers favored black, grey and brown over bright colors, and from 1850 to the First World War the same sober palette ruled men's clothes [27][28]. Victorian widows could move to grey or mauve in their last months of mourning [29][30]."
-  },
-  {
-   "id": "art",
-   "title": "Painting in grey",
-   "body": "*Grisaille* means painting in grey [31]. Fourteenth-century manuscript painters used grey, black and white as a more moral palette, and some altarpieces had grisaille panels that closed over the colored scenes during Advent and Lent [32]. Fifteenth-century Flemish painters used grisaille to imitate sculpture, which cost more than paint; Westland cites Dieric Bouts's *Saint John the Baptist* of 1475 [36]. Mantegna painted *The Introduction of the Cult of Cybele to Rome* of 1506 almost entirely in grey [37]. Fra Angelico painted a distant night scene in his Cortona *Annunciation* without color, as if he knew that night vision loses hue [38].\n\nPainters have argued about grey ever since. Delacroix called it the enemy of all painting; Paul Klee answered that it was the painter's richest color, the one that makes the others speak [26]. Odilon Redon found Fantin-Latour's palette perfect except that it lacked grey, the soul of all color [39]. Gauguin told painters that nothing is black and nothing is grey [40]. Ruskin praised Turner for an undercurrent of grey running through all his color, out of which his few pure notes flash [41]. Ostwald, Gage argues, made grey part of every color, and in 1918 Mondrian counted grey among his six basic colors [42].\n\n[[payne-s-grey|Payne's grey]] is named after the Devon watercolorist William Payne, born in 1760 [43]. It is a convenience mixture rather than one pigment, and the books disagree on the recipe: St Clair gives Prussian blue, yellow ochre and crimson lake, Balfour-Paul a lake with raw sienna and indigo, and Gurney black with ultramarine [43][44][45]. In Monet's *Impression, Sunrise*, the orange sun is exactly as light as the grey clouds around it, which is why it seems to pulse [46]."
-  },
-  {
-   "id": "graphite",
-   "title": "Grey matter and pencil lead",
-   "body": "The pencil's grey is graphite, not lead, whatever its name says [47]. Lead and lead-tin were used for ruling and drawing earlier, but graphite took over after the Borrowdale deposit in the Lake District was found, by legend in 1565 [47]. It was so valuable that the mine opened only about seven weeks a year, workers were searched, and an act of 1752 threatened smugglers with hard labor or transportation [47].\n\nThe brain's grey matter had its own color debate. In 1817 the anatomist John Gordon used Syme's color nomenclature to argue that the brain's grey substance was really Werner's Wood Brown, the first clear medical use of the book [48]. Syme's own list of 1821 had already split grey into smoke, pearl, ash, French grey and more [49]."
-  },
-  {
-   "id": "modern",
-   "title": "Uniform, office and screen",
-   "body": "The world wars put grey into uniform. German soldiers in both wars wore *Feldgrau*, a greenish field grey [50]. French soldiers, who went to war in 1914 in red trousers, were put into a deliberately dull grey-blue, horizon blue, in 1915 [51]. Gurney points out that photography, printing, film and television all began in black and white, so people of the early twentieth century saw much of the world in grey; *The New York Times* ran its first color photograph on the front page only in 1997 [31].\n\nIn Japan a thousand years ago, mourning was worn in greys, and the depth of the dye showed how close the loss was [52]. In *The Tale of Genji*, Genji puts on a light grey mourner's dress for his wife and reflects that, had he died, she would be wearing a deeper dye [52]. In *Faust*, Goethe's Mephistopheles tells a student that all theory is grey and only the tree of life is green [53]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In 696 of 23,781 museum paintings in our archive, about one in thirty-four, a color within six units of this swatch covers at least five per cent of the canvas [54]. Grey grows more common as the centuries pass [54]. Its share in our paintings of the 1900s, 100 of 1,674, is about twice the archive average, and among Impressionist works it is nearly three times the expected rate, 12 of 140 [54]. Camille Pissarro has it in 9 of 50 paintings and the Danish painter P. C. Skovgaard in 9 of 38, and Danish, Swedish and Norwegian pictures each carry it more than twice as often as average [54].\n\nInside a painting this grey is usually a light, not a shadow: in 62 per cent of matches it sits among the lighter tones [54]. Salomon van Ruysdael and Adriaen van de Velde are also among its most frequent users here [54]. Whistler named pictures after it, like *[[art:nga-1238|Grey and Silver: Chelsea Wharf]]* [54]. As always, these are photographs of varnished paintings, and yellowed varnish can warm a grey into a beige [54].\n\nThe spelling has its own history. In Google Books' English corpus, *gray* overtook *grey* around 1860 and has been roughly twice as common since about 1900, though both counts include the surnames Gray and Grey [55]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "nothing: Germanic *grau*, an old basic color word with no referent",
-   "first_recorded": "Old English",
-   "source": "Pastoureau, Le petit livre des couleurs, ch. 7; Paterson, A Dictionary of Colour, \"grey\""
-  },
-  "aka": [
-   "gray (American spelling)",
-   "grisaille (painting in grey)",
-   "Feldgrau (German field grey)"
+  "slug": "grey",
+  "name": "Grey",
+  "hex": "#8C9096",
+  "names": [
+    "Grey"
   ],
-  "siblings": [
-   "silver",
-   "ash",
-   "slate",
-   "charcoal",
-   "dove-grey",
-   "french-grey"
+  "tier": "nature",
+  "depth": "epic",
+  "lede": "Grey is the color between black and white, the one color that is named after nothing; it has meant poverty, hope, old age and good taste in turn, and it changes its look more readily than any other color.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A color named after nothing",
+      "body": "Most color words point at a thing: orange at a fruit, violet at a flower, brown, in some accounts, at a bear [1]. Grey does not. Pastoureau sets it apart from the other half-colors because it has no referent, the word is old, from Germanic *grau*, and its meanings run both ways: sadness and old age, but also wisdom and maturity [1]. French keeps the good side in *matière grise*, grey matter, the stuff of intelligence [1].\n\nLatin had several words in the greys, among them *pullus*, *ravus*, *canus* and *cinereus*, ash-colored [2]. The Greek *phaion*, now translated as grey, seems first to have meant shining [3]. English writes it two ways. *Gray* is the American spelling, and the colorman George Field tried in 1835 to make the two mean different things: grey for mixtures of black and white, gray for any broken, cool color [4]. The distinction did not stick, and today the two spellings divide mainly by country [4]."
+    },
+    {
+      "id": "swatch",
+      "title": "Which grey",
+      "body": "The swatch here is a middle grey with a faint cool cast; by the ISCC-NBS standard of 1955 its nearest name is bluish gray [33]. Its closest neighbors in our library are [[light-violet-grey]], [[silver-grey]], [[deep-plumbeous]] and [[roman-silver]], all within about four units [33]. The CSS keyword `grey`, `#808080`, is a perfectly neutral grey, a little darker and about six and a half units away [4][33].\n\nPaterson's dictionary calls grey the color of lead, of ash and of middle-aged hair [4]. In 1999 Marks & Spencer explained a halving of its half-year profits by saying it had bought too much grey [4]."
+    },
+    {
+      "id": "seeing",
+      "title": "The most changeable color",
+      "body": "Physically, grey is only white light with the volume turned down [5]. Black, white and grey are colors without hue, not non-colors: lightness is one of the three dimensions of color, alongside hue and saturation [6]. Yet a grey almost never looks neutral. On a red ground a grey patch looks greenish, on a blue ground yellowish, and Josef Albers built his teaching on making one color look like two by changing what surrounds it [7][8].\n\nThe brain reads grey from context. In one of James Gurney's demonstrations, the same grey paint reads as a green square in a picture lit red and as a red square in a picture lit green [9]. Hering's classic experiment showed that a card seen through a hole looks white, yet looks grey or black once the card around the hole is flooded with more light, though the card itself reflects exactly the same [10]. A grey hen in sunlight still looks grey, even when its feathers send more light to the eye than a white hen's in shadow [11].\n\nGrey is also what mixing does. Mixed paints give a dirty grey rather than white, as Newton explained in his *Opticks* of 1704: colored powders swallow too much light, so their mixture is a dusky color between light and darkness [12][34]. On a spinning color wheel, where less light is lost, the colors add up to a middle grey [13]. To see grey at work outdoors, look at the shaded underside of a cumulus cloud where it meets blue sky: when the two are equally light the edge disappears [14]. After sunset, the grey band rising in the east is the shadow of the Earth itself [15]."
+    },
+    {
+      "id": "history",
+      "title": "The grey of the poor",
+      "body": "For centuries in Europe grey was a color of poverty, worn by those who could not pay for bright, lasting dyes [16]. Charlemagne ordered peasants to dress in black and grey, and in Renaissance Europe grey and beige marked the poorest people, lowly priests, monks and nuns [16]. A Scottish law of 1457 told peasants to wear grey on ordinary days and keep blue, red and green for holidays [17]. The Cistercians, founded at the end of the eleventh century in undyed wool, were first called the grey monks, and the Franciscans wore grey too [18][19].\n\nMourning also began in the greys. Roman magistrates at funerals wore a dark toga of *pullus*, a drab wool somewhere between grey and brown, probably closer to ash grey than to black [20]. In Paris estate inventories of about 1700, grey made up 20 per cent of servants' clothing but only 5 per cent of nobles' [21]."
+    },
+    {
+      "id": "hope",
+      "title": "The grey of hope",
+      "body": "In the fifteenth century grey changed rank in two generations [19]. New mordants, iron sulfates with a little oak gall, used with baths of birch and alder bark, gave clear, even, luminous greys, and Rouen and Louviers specialized in fine grey cloth [19]. Grey became a princely color and a color of hope, the opposite of black's despair [22]. Charles d'Orléans, a prisoner in England after Agincourt in 1415, asked his friends to wear grey rather than black while he lived, and wrote a poem on the grey of hope around 1430 [22][23]. René d'Anjou kept black with white or grey in his livery all his life [24].\n\nThe fashion lifted pewter, seen as a kind of silver, and grey horses, which became the mounts of choice at tournaments from the 1440s [22]. It had faded by the 1530s [22]. In the medieval moralists' scheme of the ages of life, old age was grey; in their colors of love, grey stood for unhappy love [25]. Grey came back in the 1730s, as shimmering pale greys on silk and cotton, and Chardin painted still lifes built on them [26].\n\nThe Protestant centuries kept grey close [27][28]. Reformers favored black, grey and brown over bright colors, and from 1850 to the First World War the same sober palette ruled men's clothes [27][28]. Victorian widows could move to grey or mauve in their last months of mourning [29][30]."
+    },
+    {
+      "id": "art",
+      "title": "Painting in grey",
+      "body": "*Grisaille* means painting in grey [31]. Fourteenth-century manuscript painters used grey, black and white as a more moral palette, and some altarpieces had grisaille panels that closed over the colored scenes during Advent and Lent [32]. Fifteenth-century Flemish painters used grisaille to imitate sculpture, which cost more than paint; Westland cites Dieric Bouts's *Saint John the Baptist* of 1475 [36]. Mantegna painted *The Introduction of the Cult of Cybele to Rome* of 1506 almost entirely in grey [37]. Fra Angelico painted a distant night scene in his Cortona *Annunciation* without color, as if he knew that night vision loses hue [38].\n\nPainters have argued about grey ever since. Delacroix called it the enemy of all painting; Paul Klee answered that it was the painter's richest color, the one that makes the others speak [26]. Odilon Redon found Fantin-Latour's palette perfect except that it lacked grey, the soul of all color [39]. Gauguin told painters that nothing is black and nothing is grey [40]. Ruskin praised Turner for an undercurrent of grey running through all his color, out of which his few pure notes flash [41]. Ostwald, Gage argues, made grey part of every color, and in 1918 Mondrian counted grey among his six basic colors [42].\n\n[[payne-s-grey|Payne's grey]] is named after the Devon watercolorist William Payne, born in 1760 [43]. It is a convenience mixture rather than one pigment, and the books disagree on the recipe: St Clair gives Prussian blue, yellow ochre and crimson lake, Balfour-Paul a lake with raw sienna and indigo, and Gurney black with ultramarine [43][44][45]. In Monet's *Impression, Sunrise*, the orange sun is exactly as light as the grey clouds around it, which is why it seems to pulse [46]."
+    },
+    {
+      "id": "graphite",
+      "title": "Grey matter and pencil lead",
+      "body": "The pencil's grey is graphite, not lead, whatever its name says [47]. Lead and lead-tin were used for ruling and drawing earlier, but graphite took over after the Borrowdale deposit in the Lake District was found, by legend in 1565 [47]. It was so valuable that the mine opened only about seven weeks a year, workers were searched, and an act of 1752 threatened smugglers with hard labor or transportation [47].\n\nThe brain's grey matter had its own color debate. In 1817 the anatomist John Gordon used Syme's color nomenclature to argue that the brain's grey substance was really Werner's Wood Brown, the first clear medical use of the book [48]. Syme's own list of 1821 had already split grey into smoke, pearl, ash, French grey and more [49]."
+    },
+    {
+      "id": "modern",
+      "title": "Uniform, office and screen",
+      "body": "The world wars put grey into uniform. German soldiers in both wars wore *Feldgrau*, a greenish field grey [50]. French soldiers, who went to war in 1914 in red trousers, were put into a deliberately dull grey-blue, horizon blue, in 1915 [51]. Gurney points out that photography, printing, film and television all began in black and white, so people of the early twentieth century saw much of the world in grey; *The New York Times* ran its first color photograph on the front page only in 1997 [31].\n\nIn Japan a thousand years ago, mourning was worn in greys, and the depth of the dye showed how close the loss was [52]. In *The Tale of Genji*, Genji puts on a light grey mourner's dress for his wife and reflects that, had he died, she would be wearing a deeper dye [52]. In *Faust*, Goethe's Mephistopheles tells a student that all theory is grey and only the tree of life is green [53]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In 696 of 23,781 museum paintings in our archive, about one in thirty-four, a color within six units of this swatch covers at least five per cent of the canvas [54]. Grey grows more common as the centuries pass [54]. Its share in our paintings of the 1900s, 100 of 1,674, is about twice the archive average, and among Impressionist works it is nearly three times the expected rate, 12 of 140 [54]. Camille Pissarro has it in 9 of 50 paintings and the Danish painter P. C. Skovgaard in 9 of 38, and Danish, Swedish and Norwegian pictures each carry it more than twice as often as average [54].\n\nInside a painting this grey is usually a light, not a shadow: in 62 per cent of matches it sits among the lighter tones [54]. Salomon van Ruysdael and Adriaen van de Velde are also among its most frequent users here [54]. Whistler named pictures after it, like *[[art:nga-1238|Grey and Silver: Chelsea Wharf]]* [54]. As always, these are photographs of varnished paintings, and yellowed varnish can warm a grey into a beige [54].\n\nThe spelling has its own history. In Google Books' English corpus, *gray* overtook *grey* around 1860 and has been roughly twice as common since about 1900, though both counts include the surnames Gray and Grey [55]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "light-grey",
-   "dark-grey",
-   "dim-grey",
-   "warm-grey",
-   "cool-grey",
-   "blue-grey",
-   "steel-grey",
-   "battleship-grey",
-   "payne-s-grey"
-  ],
-  "disambiguation": [
-   {
-    "slug": "taupe",
-    "gloss": "French for mole: once a cold dark grey, now drifted brown"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "gris"
-   },
-   {
-    "lang": "de",
-    "name": "grau"
-   },
-   {
-    "lang": "la",
-    "name": "cinereus, canus, ravus"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#8C9096",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 696,
-  "by_century": {
-   "1800": [
-    308,
-    8345,
-    1.26
-   ],
-   "1900": [
-    100,
-    1674,
-    2.04
-   ]
-  },
-  "movements": {
-   "Impressionism": [
-    12,
-    140,
-    2.93
-   ]
-  },
-  "painters": [
-   [
-    "Camille Pissarro",
-    9,
-    50
-   ],
-   [
-    "P.C. Skovgaard",
-    9,
-    38
-   ]
-  ],
-  "countries": {
-   "Denmark": [
-    124,
-    1676,
-    2.53
-   ],
-   "Sweden": [
-    9,
-    120,
-    2.56
-   ],
-   "Norway": [
-    8,
-    120,
-    2.28
-   ]
-  },
-  "role": {
-   "highlight": 0.62,
-   "mid": 0.34,
-   "shadow": 0.04
-  },
-  "top_paintings": [
-   "met-458965",
-   "cma-148076",
-   "aic-16992",
-   "nga-1238"
-  ],
-  "ngram": {
-   "terms": [
-    "grey",
-    "gray"
-   ],
-   "gray_overtakes": 1860,
-   "gray_to_grey_ratio_1900_2000": 2.0,
-   "caveat": "includes surnames"
-  },
-  "measured": {
-   "lch": [
-    59.6,
-    3.7,
-    266.3
-   ],
-   "munsell": "N 5.9",
-   "iscc_nbs_nearest": "bluish gray",
-   "contrast_white": 3.21,
-   "css_grey": [
-    "#808080",
-    6.6
-   ],
-   "nearest": [
-    [
-     "Light Violet-Grey",
-     2.8
+  "aside": {
+    "origin": {
+      "named_after": "nothing: Germanic *grau*, an old basic color word with no referent",
+      "first_recorded": "Old English",
+      "source": "Pastoureau, Le petit livre des couleurs, ch. 7; Paterson, A Dictionary of Colour, \"grey\""
+    },
+    "aka": [
+      "gray (American spelling)",
+      "grisaille (painting in grey)",
+      "Feldgrau (German field grey)"
     ],
-    [
-     "Silver Grey",
-     3.8
+    "siblings": [
+      "silver",
+      "ash",
+      "slate",
+      "charcoal",
+      "dove-grey",
+      "french-grey"
     ],
-    [
-     "Deep Plumbeous",
-     3.9
+    "parent": null,
+    "children": [
+      "light-grey",
+      "cool-grey",
+      "dim-grey",
+      "warm-grey",
+      "blue-grey",
+      "steel-grey",
+      "battleship-grey",
+      "payne-s-grey"
     ],
-    [
-     "Roman Silver",
-     4.1
+    "disambiguation": [
+      {
+        "slug": "taupe",
+        "gloss": "French for mole: once a cold dark grey, now drifted brown"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "gris"
+      },
+      {
+        "lang": "de",
+        "name": "grau"
+      },
+      {
+        "lang": "la",
+        "name": "cinereus, canus, ravus"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#8C9096",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 696,
+    "by_century": {
+      "1800": [
+        308,
+        8345,
+        1.26
+      ],
+      "1900": [
+        100,
+        1674,
+        2.04
+      ]
+    },
+    "movements": {
+      "Impressionism": [
+        12,
+        140,
+        2.93
+      ]
+    },
+    "painters": [
+      [
+        "Camille Pissarro",
+        9,
+        50
+      ],
+      [
+        "P.C. Skovgaard",
+        9,
+        38
+      ]
+    ],
+    "countries": {
+      "Denmark": [
+        124,
+        1676,
+        2.53
+      ],
+      "Sweden": [
+        9,
+        120,
+        2.56
+      ],
+      "Norway": [
+        8,
+        120,
+        2.28
+      ]
+    },
+    "role": {
+      "highlight": 0.62,
+      "mid": 0.34,
+      "shadow": 0.04
+    },
+    "top_paintings": [
+      "met-458965",
+      "cma-148076",
+      "aic-16992",
+      "nga-1238"
+    ],
+    "ngram": {
+      "terms": [
+        "grey",
+        "gray"
+      ],
+      "gray_overtakes": 1860,
+      "gray_to_grey_ratio_1900_2000": 2.0,
+      "caveat": "includes surnames"
+    },
+    "measured": {
+      "lch": [
+        59.6,
+        3.7,
+        266.3
+      ],
+      "munsell": "N 5.9",
+      "iscc_nbs_nearest": "bluish gray",
+      "contrast_white": 3.21,
+      "css_grey": [
+        "#808080",
+        6.6
+      ],
+      "nearest": [
+        [
+          "Light Violet-Grey",
+          2.8
+        ],
+        [
+          "Silver Grey",
+          3.8
+        ],
+        [
+          "Deep Plumbeous",
+          3.9
+        ],
+        [
+          "Roman Silver",
+          4.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pastoureau, Le petit livre des couleurs, ch. 7 (\"Les demi-couleurs\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 197, note 19",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 64",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"gray\", \"Gray\" (X11) and \"grey\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 2",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 15",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Westland, Universal Principles of Color, ch. 87",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Albers, Interaction of Color, p. 24",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, p. 146",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 23",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 24",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 9",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Albers, Interaction of Color, p. 43",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Albers, Interaction of Color, p. 62",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, p. 184",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 6",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 199, note 35",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 64",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 108",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 34",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 21,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 135",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 22,
+      "kind": "book",
+      "cite": "Pastoureau, Black, pp. 109-110",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 23,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 30",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 24,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 76",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 25,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 20",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 26,
+      "kind": "book",
+      "cite": "Pastoureau, Black, pp. 158-159",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 27,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 132",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 28,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow, ch. 33",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 29,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 53 (mourning)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 30,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 332",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 31,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, p. 112",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 32,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 152",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 33,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/graph; ISCC-NBS 1955 centroids; CSS), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 34,
+      "kind": "data",
+      "cite": "ColorHub passages: Newton, Opticks (1704), Prop. V, Theor. IV, Exper. 15 (data/passages.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 36,
+      "kind": "book",
+      "cite": "Westland, Universal Principles of Color, ch. 53",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 37,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 31",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 38,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 124",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 39,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 189",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 40,
+      "kind": "book",
+      "cite": "Pastoureau, Black, p. 177",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 41,
+      "kind": "data",
+      "cite": "ColorHub passages: Ruskin, Modern Painters, vol. 1 (1843), \"Of Truth of Color\" (data/passages.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 42,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 254",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 43,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Payne's gray\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 44,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, p. 210",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 45,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, p. 94",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 46,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 18",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 47,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 2 (\"Black and Brown\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 48,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 218",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 49,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 51",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 50,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 44",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 51,
+      "kind": "book",
+      "cite": "Pastoureau, Blue, ch. 10",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 52,
+      "kind": "data",
+      "cite": "ColorHub passages: Murasaki Shikibu, The Tale of Genji, ch. IX \"Aoi\" (Waley translation, 1925) (data/passages.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 53,
+      "kind": "data",
+      "cite": "ColorHub passages: Goethe, Faust, Part One (Bayard Taylor translation, 1870) (data/passages.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 54,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 55,
+      "kind": "data",
+      "cite": "Google Books Ngram, English corpus, case-insensitive (research/_raw/ngrams: grey, gray)",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why can the same grey look greenish in one place and yellowish in another?",
+      "choices": [
+        "The eye judges it against its surroundings: on red it leans green, on blue it leans yellow",
+        "Grey paint slowly changes color in light",
+        "Grey is a mixture that separates on the canvas",
+        "Screens cannot show true grey"
+      ],
+      "answer": "The eye judges it against its surroundings: on red it leans green, on blue it leans yellow",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the grey in a pencil is lead.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "What did grey stand for in fifteenth-century France, when Charles d'Orléans asked his friends to wear it?",
+      "choices": [
+        "Hope",
+        "Mourning",
+        "Poverty",
+        "Treason"
+      ],
+      "answer": "Hope",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Grey is the one basic color word that is not named after anything.",
+    "In fifteenth-century France grey was the color of hope, the opposite of black's despair.",
+    "Look at the shaded underside of a cumulus cloud: where it is exactly as light as the blue sky, the edge vanishes."
+  ],
+  "words": 1701,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Spot-checked 8+ claims against fact cards and book text (Pliny smell, Vitruvius shades, polls, sumo referee, mapping of notes): no changes needed."
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pastoureau, Le petit livre des couleurs, ch. 7 (\"Les demi-couleurs\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 197, note 19",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 64",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"gray\", \"Gray\" (X11) and \"grey\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 2",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 15",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Westland, Universal Principles of Color, ch. 87",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Albers, Interaction of Color, p. 24",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, p. 146",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 23",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 24",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 9",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Albers, Interaction of Color, p. 43",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Albers, Interaction of Color, p. 62",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, p. 184",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 6",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 199, note 35",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 64",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 108",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 34",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 21,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 135",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 22,
-   "kind": "book",
-   "cite": "Pastoureau, Black, pp. 109-110",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 23,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 30",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 24,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 76",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 25,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 20",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 26,
-   "kind": "book",
-   "cite": "Pastoureau, Black, pp. 158-159",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 27,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 132",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 28,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow, ch. 33",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 29,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 53 (mourning)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 30,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 332",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 31,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, p. 112",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 32,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 152",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 33,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/graph; ISCC-NBS 1955 centroids; CSS), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 34,
-   "kind": "data",
-   "cite": "ColorHub passages: Newton, Opticks (1704), Prop. V, Theor. IV, Exper. 15 (data/passages.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 36,
-   "kind": "book",
-   "cite": "Westland, Universal Principles of Color, ch. 53",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 37,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 31",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 38,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 124",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 39,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 189",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 40,
-   "kind": "book",
-   "cite": "Pastoureau, Black, p. 177",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 41,
-   "kind": "data",
-   "cite": "ColorHub passages: Ruskin, Modern Painters, vol. 1 (1843), \"Of Truth of Color\" (data/passages.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 42,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 254",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 43,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Payne's gray\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 44,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, p. 210",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 45,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, p. 94",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 46,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 18",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 47,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 2 (\"Black and Brown\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 48,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 218",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 49,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 51",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 50,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 44",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 51,
-   "kind": "book",
-   "cite": "Pastoureau, Blue, ch. 10",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 52,
-   "kind": "data",
-   "cite": "ColorHub passages: Murasaki Shikibu, The Tale of Genji, ch. IX \"Aoi\" (Waley translation, 1925) (data/passages.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 53,
-   "kind": "data",
-   "cite": "ColorHub passages: Goethe, Faust, Part One (Bayard Taylor translation, 1870) (data/passages.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 54,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 55,
-   "kind": "data",
-   "cite": "Google Books Ngram, English corpus, case-insensitive (research/_raw/ngrams: grey, gray)",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  }
- ],
- "questions": [
-  {
-   "q": "Why can the same grey look greenish in one place and yellowish in another?",
-   "choices": [
-    "The eye judges it against its surroundings: on red it leans green, on blue it leans yellow",
-    "Grey paint slowly changes color in light",
-    "Grey is a mixture that separates on the canvas",
-    "Screens cannot show true grey"
-   ],
-   "answer": "The eye judges it against its surroundings: on red it leans green, on blue it leans yellow",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the grey in a pencil is lead.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "What did grey stand for in fifteenth-century France, when Charles d'Orléans asked his friends to wear it?",
-   "choices": [
-    "Hope",
-    "Mourning",
-    "Poverty",
-    "Treason"
-   ],
-   "answer": "Hope",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Grey is the one basic color word that is not named after anything.",
-  "In fifteenth-century France grey was the color of hope, the opposite of black's despair.",
-  "Look at the shaded underside of a cumulus cloud: where it is exactly as light as the blue sky, the edge vanishes."
- ],
- "words": 1701,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Spot-checked 8+ claims against fact cards and book text (Pliny smell, Vitruvius shades, polls, sumo referee, mapping of notes): no changes needed."
-  ]
- }
 }

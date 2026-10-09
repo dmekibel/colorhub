@@ -1,0 +1,126 @@
+{
+  "slug": "dusty-sepia",
+  "name": "Dusty sepia",
+  "hex": "#826B58",
+  "names": [
+    "Dusty sepia"
+  ],
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Dusty sepia renders Rikyūcha (利休茶), a traditional Japanese name meaning \"Sen no Rikyū's tea\", after the tea master whose austere aesthetic favored muted browns.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Named for a tea master",
+      "body": "Our color library gives the source as 利休茶 (Rikyūcha), \"Sen no Rikyū's tea\": Sen no Rikyū was the sixteenth-century tea master credited with shaping the wabi-sabi aesthetic, and cha here is both the color word for brown and the tea itself [1]. No first-recorded date survives in our sources, so when the name entered use is undocumented here [1]. The library separately notes that the ISCC-NBS 1955 centroid block for this hue groups English dictionary names including Sable, dated by Maerz and Paul to 1892 [2].\n\nThe nearest named color in our graph is [[raw-umber]], at a color distance (ΔE2000) of 3.3, almost the same shade; [[sepia]] itself sits 3.8 away and reads more vivid [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this brown in 3,228 of 23,781 paintings, about 13.6 percent, one of the most frequent colors we have matched, as photographed [4]. It peaks in the 1270s (29 of 48 paintings from that decade) at over four times the overall rate, and is strongest in Chinese and Japanese landscape and figure painting going back to the tenth century [4]. These are photographs of aged, varnished paintings, so the match is computed, not a pigment identification [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Rikyūcha (利休茶), \"Sen no Rikyū's tea\", after the tea master Sen no Rikyū",
+      "first_recorded": "undocumented",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Rikyūcha (利休茶)"
+    ],
+    "siblings": [
+      "raw-umber",
+      "sepia",
+      "benzo-brown",
+      "siennese-drab"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Rikyūcha (利休茶), \"Sen no Rikyū's tea\""
+      }
+    ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 3228,
+    "rate": 0.1357,
+    "match": {
+      "hex": "#826B58",
+      "de2000": 6.0,
+      "min_cover": 0.05
+    },
+    "peak_decade": {
+      "key": 1270,
+      "lift": 4.45
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955 block entries, citing Maerz & Paul 1930",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Who is the Japanese name behind Dusty sepia, Rikyūcha, named after?",
+      "choices": [
+        "The tea master Sen no Rikyū",
+        "The emperor Meiji",
+        "The painter Hokusai",
+        "The shogun Tokugawa"
+      ],
+      "answer": "The tea master Sen no Rikyū",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Dusty sepia is one of the rarer colors in our archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Dusty sepia is named for a sixteenth-century tea master, and turns up in more than one painting in eight."
+  ],
+  "words": 218,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; ISCC-NBS date belongs to a nearby dictionary name sharing the same block, not to Dusty sepia itself."
+    ]
+  }
+}

@@ -1,0 +1,137 @@
+{
+ "slug": "spanish-viridian",
+ "name": "Spanish Viridian",
+ "hex": "#007F5C",
+ "names": [
+  "Spanish Viridian"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Spanish Viridian is a deep blue-green named for the pigment viridian, a chromium oxide green whose other names the 1955 ISCC-NBS system filed decades before this particular qualifier existed.",
+ "sections": [
+  {
+   "id": "material",
+   "title": "A viridian, by another name",
+   "body": "Our library classes this as a pigment or dye word, built on viridian, the chromium oxide green pigment, though the word 'Spanish' itself is unexplained in the books we checked, and the name reads as one more obscure, qualified variant rather than a documented regional pigment [1]. The ISCC-NBS system's 1955 block for this exact hue carries several other filed names instead: Chrome Green, dated to 1815 in Maerz & Paul's 1930 dictionary, and Chromium Oxide, dated to 1838 — 'Spanish Viridian' itself is not among the names that dictionary filed [1].\n\nIts real nearest look-alike is [[generic-viridian]], almost the same hue and treated in our graph as the color this name is also drawn from, with [[signal-green]] close behind, and [[amazon]] and [[tropical-rainforest]] a little further out, both duller [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green in 10 of 23,781 paintings, about 0.04 percent, as photographed, with the within-painting lens counting 5 — rarer than 75 percent of the named colors we track [3]. The earliest match is from 1783, with the latest from 1940, eight dated paintings in all, a floor and not a first given how thin the archive's early centuries are [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pigment viridian (chromium oxide green); 'Spanish' itself is undocumented in our sources",
+   "first_recorded": "1815, for a related ISCC-NBS filed name (Chrome Green), not this exact qualifier",
+   "source": "ColorHub color library, Spanish Viridian entry"
+  },
+  "aka": [],
+  "siblings": [
+   "generic-viridian",
+   "signal-green",
+   "amazon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "generic-viridian",
+    "gloss": "the plainer viridian this qualified name is drawn from in our graph"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 10,
+  "n_within": 5,
+  "rarer_than_pct": 75,
+  "measured": {
+   "lch": [
+    46.9,
+    40.4,
+    164.6
+   ],
+   "nearest": [
+    [
+     "Generic Viridian",
+     3.2
+    ],
+    [
+     "Signal Green",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia-sourced entry; related ISCC-NBS 1955 block 141 filings (data/library.json, Spanish Viridian)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: look-alike edges (data/graph/edges-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What pigment does the name Spanish Viridian build on?",
+   "choices": [
+    "Viridian, a chromium oxide green",
+    "Ultramarine",
+    "Madder",
+    "Prussian blue"
+   ],
+   "answer": "Viridian, a chromium oxide green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: 'Spanish Viridian' is one of the names the 1955 ISCC-NBS dictionary filed for this color block.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which ISCC-NBS-filed name shares this exact color block, dated to 1815 in Maerz & Paul?",
+   "choices": [
+    "Chrome Green",
+    "Spanish Viridian",
+    "Generic Viridian",
+    "Signal Green"
+   ],
+   "answer": "Chrome Green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The 1955 dictionary filed other names for this exact green decades before 'Spanish Viridian' existed as a qualifier.",
+  "Spanish Viridian and Generic Viridian are close enough that our graph treats one as drawn from the other."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified as internally consistent with cited ColorHub library/graph/archive data; no book or web source cited for this article's factual claims, no myth-list phrase found, and the claims are already conservatively hedged (undocumented origin, floor-not-first framing, thin-sample caveats)."
+  ]
+ },
+ "words": 221
+}

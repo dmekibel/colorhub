@@ -1,0 +1,127 @@
+{
+ "slug": "mountain-meadow",
+ "name": "Mountain Meadow",
+ "hex": "#30BA8F",
+ "names": [
+  "Mountain Meadow"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Mountain Meadow is a vivid, blue-leaning green named for a kind of place rather than any one documented location, and it has no match anywhere in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A landscape type, not a landmark",
+   "body": "Our library traces the name only to a Wikipedia color list, with no first-recorded date given [1]. ColorHub groups it among place and institution names because it names a kind of landscape, a high mountain clearing, though no single documented meadow stands behind it [1]. A related library entry, the gemstone Chrysoprase, a green chalcedony, is dated by Maerz and Paul to 1835 [1].\n\nIts nearest named neighbor is [[jungle-green|Jungle Green]], 4.4 units away and darker [2]. [[caribbean-green|Caribbean Green]] sits 4.8 units out, more vivid and lighter, and [[green-crayola|Green (Crayola)]] 5.0 units out, darker [2]. Measured in LCH it reads lightness 68, chroma 48, a saturated mid-tone green [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries this exact green covering at least one percent of its canvas, as photographed [3]. That describes a gap in this particular archive, not a claim about painting as a whole [3]. In printed English, the phrase \"mountain meadow\" rose fastest from the 1860s and peaked around 1930, by Google Books count across all senses of the words, so the curve tracks the landscape phrase rather than any color swatch [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a mountain meadow (a landscape type, not a specific place)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (a Wikipedia list)"
+  },
+  "aka": [],
+  "siblings": [
+   "jungle-green",
+   "caribbean-green",
+   "green-crayola",
+   "imperial-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    68,
+    48,
+    166
+   ],
+   "nearest_iscc": [
+    "brilliant green",
+    5.6
+   ],
+   "nearest": [
+    [
+     "Jungle Green",
+     4.4
+    ],
+    [
+     "Caribbean Green",
+     4.8
+    ],
+    [
+     "Green (Crayola)",
+     5.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): tier classification, Chrysoprase cross-reference, Ngram curve",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for mountain-meadow (data/graph/edges-m.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Mountain Meadow names one specific, documented meadow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "How many paintings in our archive show a close match to Mountain Meadow covering at least 1% of the canvas?",
+   "choices": [
+    "0",
+    "120",
+    "1,500",
+    "6,000"
+   ],
+   "answer": "0",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Mountain Meadow has no match in any of our 23,781 archived paintings, a rare total absence."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); archive presence is zero, so field notes are thin by nature of the data."
+  ]
+ },
+ "words": 210
+}

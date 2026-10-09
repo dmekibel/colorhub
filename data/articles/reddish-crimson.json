@@ -1,0 +1,117 @@
+{
+ "slug": "reddish-crimson",
+ "name": "Reddish crimson",
+ "hex": "#C93756",
+ "names": [
+  "Reddish crimson"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Reddish crimson is the ColorHub library's English gloss for Nakabeni, a Japanese dye name meaning a medium crimson.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A gloss for Nakabeni",
+   "body": "The library files this hex under the Japanese traditional-color name *Nakabeni* (中紅), whose kanji read literally as \"medium crimson\" and name a mid-strength shade of the safflower-dyed crimson family [1]. \"Reddish crimson\" is the plain-English gloss chosen so the color reads without the Japanese word [1]. The hex #C93756 is a screen approximation; no source here gives a dye recipe or date for this specific shade [1].\n\nIts nearest library look-alike is [[brick-red]], about 2.9 units away in LCH space [1]. The parent hue, [[crimson]], names the whole family this shade belongs to [1].\n\nOther close matches in the library include [[lipstick]], a more vivid red, and [[french-raspberry]], almost the same color [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub painting archive this hue appears in 4 of 23,781 paintings, as photographed, including a 1925 portrait by Pierre Bonnard and two Indian paintings from around 1890 [2]. The match rate is well under one percent, so these are a handful of close calls rather than a pattern [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Nakabeni, a Japanese dye name meaning medium crimson",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Japanese traditional-color data)"
+  },
+  "aka": [
+   "Nakabeni"
+  ],
+  "siblings": [
+   "brick-red",
+   "lipstick",
+   "french-raspberry"
+  ],
+  "parent": "crimson",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Nakabeni (中紅)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "measured": {
+   "lch": [
+    47,
+    61,
+    16
+   ],
+   "nearest": [
+    [
+     "Brick Red",
+     2.9
+    ]
+   ]
+  },
+  "top_painters": [
+   "Pierre Bonnard"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional-color entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Nakabeni literally mean?",
+   "choices": [
+    "Medium crimson",
+    "Morning fog",
+    "Autumn leaf",
+    "Deep indigo"
+   ],
+   "answer": "Medium crimson",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a dye recipe for this exact shade is recorded in the sources checked here.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reddish crimson is an English gloss for a Japanese dye name that already means \"medium crimson.\""
+ ],
+ "words": 178,
+ "status": "checked",
+ "checked": {
+  "by": "batch-29",
+  "date": "2026-10-09",
+  "issues": [
+   "No dye recipe or date found for Nakabeni in the sources consulted."
+  ]
+ }
+}

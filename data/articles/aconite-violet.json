@@ -11,12 +11,12 @@
   {
    "id": "name",
    "title": "A poisonous flower's purple",
-   "body": "The name comes from aconite, the genus *Aconitum*, also called monkshood or wolfsbane, whose hooded flowers run from blue to this dusty purple [1]. The plant is one of the more toxic in the garden, long used to poison arrow tips and wolf bait, but the color name borrows only its flower, not its danger [1].\n\nRobert Ridgway listed it in his 1912 *Color Standards and Color Nomenclature*, plate XXXVII, hue 63″ [1]. Maerz and Paul's 1930 dictionary gives an earlier record, 1905, and the ISCC-NBS system filed it in 1955 under block 223, a moderate purple [2][3]. Nearby named purples include [[faded-purple]] and [[dusty-purple]], both within three units of it, with [[viola]] a more vivid cousin and [[grey-purple]] a duller one [3]."
+   "body": "The name comes from aconite, the genus *Aconitum*, also called monkshood or wolfsbane, a plant better known for its poison than for its hooded purple flowers; the color name borrows only the flower [1].\n\nRobert Ridgway listed it in his 1912 *Color Standards and Color Nomenclature*, plate XXXVII, hue 63″ [1]. His plates survive as scans of aged printed chips, so the screen swatch is an approximation [1]. Maerz and Paul's 1930 dictionary gives an earlier record, 1905, and the ISCC-NBS dictionary of 1955 filed the name under block 223, moderate purple [2][3]. Its nearest named neighbors are [[faded-purple]] at 2.9 units and [[dusty-purple]] at 3.2, with [[viola]] a more vivid cousin and [[grey-purple]] a duller one [3]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds Aconite Violet in only 5 of 23,781 paintings, about 0.02 percent, as photographed [4]. That makes it one of the rarer named purples in the collection [4]. The measurement is a computed color match on scanned canvases, not a pigment identification [4].\n\nThe color is not one modern paintings reach for either: its five matches span from the fifteenth century to the early twentieth, with no single painter or school favoring it [4]."
+   "body": "Our archive finds Aconite Violet in only 5 of 23,781 paintings, about 0.02 percent, as photographed [4]. That makes it one of the rarer named purples in the collection [4]. The dated matches run from 1600 to 1915, with no single painter or school favoring it [4]. Even its strongest match, a 1915 canvas, holds it in only about six percent of the picture [4]. The measurement is a computed color match on photographed canvases, not a pigment identification [4]."
   }
  ],
  "aside": {
@@ -115,10 +115,11 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": [
-   "Very sparse archive presence (n=5); kept article short rather than padded."
+   "Very sparse archive presence (n=5); kept article short rather than padded.",
+   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
   ]
  },
  "slug": "aconite-violet",

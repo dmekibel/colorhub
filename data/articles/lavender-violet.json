@@ -1,140 +1,139 @@
 {
- "slug": "lavender-violet",
- "name": "Lavender violet",
- "hex": "#8756E4",
- "names": [
-  "Lavender violet"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Lavender violet is an xkcd survey name that pairs the paler flower color lavender with the stronger, more saturated violet.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The flower's name, pushed further",
-   "body": "The flower lavender, *Lavandula*, gives English its paler, greyer color word of the same name, but this xkcd entry pairs it with *violet* to describe a much stronger, more saturated purple than the flower itself typically shows [1][2]. No source in our library gives a date or author for when volunteers first combined the two words this way beyond the 2010 survey record [1][2]. The 1955 ISCC-NBS system's nearest block, strong purple, sits a wide 12.1 units away, one of the larger gaps, which fits a name built by combining two existing words rather than matching an established standard [2]. In Munsell terms it sits at 0.7P 4.8/18.8, and in LCH at lightness 49, chroma 83, among the most saturated purples in the library, close to [[violet]], [[lilac]] and [[orchid]] [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive carries a color within four units of Lavender violet covering at least one per cent of its canvas, as photographed [3]. A purple this saturated is difficult for most historical pigments, including the mineral and lake purples available before synthetic dyes, which tended to be either duller or to fade; it sits closer to a modern dye than to any pigment common in old oil paint [3]. In printed English the two-word phrase rose fastest and peaked around 1910, well before this specific hue was ever recorded [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the flower lavender, combined with violet",
-   "first_recorded": "xkcd color survey, 2010",
-   "source": "ColorHub color library and Color Graph"
-  },
-  "aka": [],
-  "siblings": [
-   "lightish-purple",
-   "medium-slate-blue",
-   "bright-violet",
-   "lighter-purple"
+  "slug": "lavender-violet",
+  "name": "Lavender violet",
+  "hex": "#8756E4",
+  "names": [
+    "Lavender violet"
   ],
-  "parent": "lavender",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    48.8,
-    82.7,
-    307.9
-   ],
-   "munsell": "0.7P 4.8/18.8",
-   "iscc_nbs": {
-    "name": "strong purple",
-    "de2000": 12.1
-   },
-   "nearest": [
-    [
-     "Lightish Purple",
-     5.4
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Lavender violet is an xkcd survey name that pairs the paler flower color lavender with the stronger, more saturated violet.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The flower's name, pushed further",
+      "body": "The flower lavender, *Lavandula*, gives English its paler, greyer color word of the same name, but this xkcd entry pairs it with *violet* to describe a much stronger, more saturated purple than the flower itself typically shows [1][2]. No source in our library gives a date or author for when volunteers first combined the two words this way beyond the 2010 survey record [1][2]. The 1955 ISCC-NBS system's nearest block, strong purple, sits a wide 12.1 units away, one of the larger gaps, which fits a name built by combining two existing words rather than matching an established standard [2]. In Munsell terms it sits at 0.7P 4.8/18.8, and in LCH at lightness 49, chroma 83, among the most saturated purples in the library, close to [[violet]], [[lilac]] and [[orchid]] [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive carries a color within four units of Lavender violet covering at least one per cent of its canvas, as photographed [3]. A purple this saturated is difficult for most historical pigments, including the mineral and lake purples available before synthetic dyes, which tended to be either duller or to fade; it sits closer to a modern dye than to any pigment common in old oil paint [3]. In printed English the two-word phrase rose fastest and peaked around 1910, well before this specific hue was ever recorded [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the flower lavender, combined with violet",
+      "first_recorded": "xkcd color survey, 2010",
+      "source": "ColorHub color library and Color Graph"
+    },
+    "aka": [],
+    "siblings": [
+      "bright-lavender",
+      "medium-slate-blue",
+      "bright-violet"
     ],
-    [
-     "Medium Slate Blue",
-     5.8
-    ],
-    [
-     "Bright violet",
-     6.0
-    ],
-    [
-     "Lighter Purple",
-     6.0
+    "parent": "lavender",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        48.8,
+        82.7,
+        307.9
+      ],
+      "munsell": "0.7P 4.8/18.8",
+      "iscc_nbs": {
+        "name": "strong purple",
+        "de2000": 12.1
+      },
+      "nearest": [
+        [
+          "Lightish Purple",
+          5.4
+        ],
+        [
+          "Medium Slate Blue",
+          5.8
+        ],
+        [
+          "Bright violet",
+          6.0
+        ],
+        [
+          "Lighter Purple",
+          6.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "xkcd color survey (2010), crowdsourced color-name list",
+      "loc_kind": null,
+      "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "web",
+      "cite": "Google Books Ngram, case-insensitive",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    }
+  ],
+  "questions": [
+    {
+      "q": "Lavender violet is named for a flower, but how does its color differ from the flower's usual pale shade?",
+      "choices": [
+        "It is far more saturated, pushed toward violet",
+        "It is paler and greyer",
+        "It is a completely different hue",
+        "It is identical to the flower"
+      ],
+      "answer": "It is far more saturated, pushed toward violet",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Lavender violet turns up in our museum-painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Lavender violet borrows the flower's name but skips its famously pale, dusty color."
+  ],
+  "words": 244,
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No source beyond our own library's xkcd record for the compound name's coining.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "xkcd color survey (2010), crowdsourced color-name list",
-   "loc_kind": null,
-   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "web",
-   "cite": "Google Books Ngram, case-insensitive",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  }
- ],
- "questions": [
-  {
-   "q": "Lavender violet is named for a flower, but how does its color differ from the flower's usual pale shade?",
-   "choices": [
-    "It is far more saturated, pushed toward violet",
-    "It is paler and greyer",
-    "It is a completely different hue",
-    "It is identical to the flower"
-   ],
-   "answer": "It is far more saturated, pushed toward violet",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Lavender violet turns up in our museum-painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Lavender violet borrows the flower's name but skips its famously pale, dusty color."
- ],
- "words": 244,
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No source beyond our own library's xkcd record for the compound name's coining.",
-   "lint 2026-10-09"
-  ]
- }
 }

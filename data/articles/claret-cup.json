@@ -11,7 +11,7 @@
     {
       "id": "name",
       "title": "A 1916 plate name",
-      "body": "Maerz and Paul's *A Dictionary of Color* places Claret Cup on plate 6, cell B4, first recorded in 1916 [1]. The ISCC-NBS system files the hue as a greyish reddish purple [2]. The name points toward claret wine, served in a cup, but the dictionary does not confirm that reading, so the exact origin is undocumented here [1].\n\nThe nearest named colors on file are [[dark-mauve]], [[dusky-mauve]], [[dusky-mauve]] and [[dirty-purple]], at 4.3, 4.6, 4.6 and 4.9 ΔE [3]."
+      "body": "Maerz and Paul's *A Dictionary of Color* places Claret Cup on plate 6, cell B4, first recorded in 1916 [1]. The ISCC-NBS system files the hue as a greyish reddish purple [2]. The name points toward claret wine, served in a cup, but the dictionary does not confirm that reading, so the exact origin is undocumented here [1].\n\nThe nearest named colors on file are [[corinthian-purple]], [[dusky-mauve]], [[dusky-mauve]] and [[dull-dark-purple]], at 4.3, 4.6, 4.6 and 4.9 ΔE [3]."
     },
     {
       "id": "field",
@@ -27,10 +27,10 @@
     },
     "aka": [],
     "siblings": [
-      "dark-mauve",
-      "livid-purple",
+      "corinthian-purple",
       "dusky-mauve",
-      "dirty-purple"
+      "dull-dark-purple",
+      "dusky-plum"
     ],
     "parent": null,
     "children": [],
@@ -126,5 +126,5 @@
     ]
   },
   "slug": "claret-cup",
-  "words": 165
+  "words": 166
 }

@@ -1,0 +1,116 @@
+{
+  "slug": "middle-blue-green",
+  "name": "Middle Blue Green",
+  "hex": "#8DD9CC",
+  "names": [
+    "Middle Blue Green"
+  ],
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Middle Blue Green is a pale, soft [[blue-green]], picked up by Wikipedia's extended color lists and matched, in our data, to a crowd of near-identical ISCC-NBS 1955 names.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One hue, many filed names",
+      "body": "The name follows ordinary modifier grammar, \"middle\" plus the parent hue [[blue-green]], and comes to our library from Wikipedia's lists, with no further paper trail [1]. The ISCC-NBS 1955 lists filed at least seventeen separate commercial and descriptive names into the same color block as this shade, among them AprilSky, Aqua Queen, Brook Green, Electra and Robin Egg [1]. That crowding is itself the point: dozens of paint and textile brands each wanted their own name for roughly this one pale aqua [1].\n\nIts nearest named neighbor by measured color is [[nile-blue]], darker and duller, with [[light-sulphate-green]] and [[turquoise]] close behind [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match in only 5 of 23,781 paintings, 0.02 percent, as photographed; the within-painting lens finds it in 4 [2]. That makes it rarer than 77 percent of the named colors we track [2]. The earliest dated painting with it is from 1847, by A. Hashagen, though the archive's early centuries are thin, so this is a floor, not a first [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: middle + blue-green",
+      "first_recorded": "undocumented in the sources checked here; filed alongside the ISCC-NBS 1955 lists for the same hue block",
+      "source": "ColorHub color library: Wikipedia list of colors; ISCC-NBS (1955)"
+    },
+    "aka": [],
+    "siblings": [
+      "nile-blue",
+      "light-sulphate-green",
+      "turquoise"
+    ],
+    "parent": "blue-green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 5,
+    "n_within_painting": 4,
+    "rank_rarer_than_pct": 77,
+    "first_seen": {
+      "year": 1847,
+      "painting": "nga-43632",
+      "painter": "A. Hashagen"
+    },
+    "measured": {
+      "lch": [
+        81.6,
+        26.4,
+        182.3
+      ],
+      "nearest": [
+        [
+          "Nile Blue",
+          4.6
+        ],
+        [
+          "Pale Teal",
+          5.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Wikipedia list of colors; ISCC-NBS (1955, block 162); ColorHub name graph (look-alike edges)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why does our data file so many other names into the same ISCC-NBS 1955 block as Middle Blue Green?",
+      "choices": [
+        "Many brands each coined their own name for roughly the same pale aqua",
+        "The color changes name depending on the season",
+        "It is the only pale aqua the ISCC-NBS recognized",
+        "A printing error duplicated one entry seventeen times"
+      ],
+      "answer": "Many brands each coined their own name for roughly the same pale aqua",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Middle Blue Green is common in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The ISCC-NBS 1955 lists crowded at least seventeen brand names into the same pale-aqua block as Middle Blue Green."
+  ],
+  "words": 196,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
+  }
+}

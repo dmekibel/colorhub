@@ -1,123 +1,123 @@
 {
- "slug": "isabella-color",
- "name": "Isabella Color",
- "hex": "#A98856",
- "names": [
-  "Isabella Color"
- ],
- "tier": "person",
- "depth": "brief",
- "lede": "Isabella Color is a dark, greyish yellow-tan, a swatch from Ridgway's atlases of 1886 and 1912.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The tan, not the near-white",
-   "body": "The name is attached to a legend about an unwashed-linen vow, which the books read treat as doubtful, not as established [1][2]. St Clair notes that two dresses in the color appear in Queen Elizabeth I's wardrobe inventories, one taken a year before the siege the story is built around [1]. Paterson defines isabel as a dingy yellow-grey and records two possible Isabellas as suggestions only [2].\n\nThis swatch is Ridgway's, carried from his 1886 *Nomenclature of Colors* into the 1912 atlas (plate XXX) and the 1955 ISCC-NBS system, which calls it dark grayish yellow [3]. It is far darker than the near-white web [[isabelline]] [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "It is one of the most frequent colors in museum painting: 4,445 of 23,781 paintings contain it, 18.7 per cent, more than 98 per cent of named colors [4]. It is most often an accent, and peaks in the 1300s, in 21.1 per cent of paintings [4]. Maarten van Heemskerck uses it in 7 of 12 works [4]. It shares canvases with [[dirt-brown]] and sits near [[tan]] [4]. Much of this tan is the yellowing of aged varnish [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "an Isabella of legend; origin undocumented",
-   "first_recorded": "by 1600 (Elizabeth I wardrobe); 1886 (Ridgway)",
-   "source": "St Clair; data/library.json"
-  },
-  "aka": [
-   "isabel",
-   "isabella"
+  "slug": "isabella-color",
+  "name": "Isabella Color",
+  "hex": "#A98856",
+  "names": [
+    "Isabella Color"
   ],
-  "siblings": [
-   "isabelline",
-   "dirt-brown",
-   "tan"
+  "tier": "person",
+  "depth": "brief",
+  "lede": "Isabella Color is a dark, greyish yellow-tan, a swatch from Ridgway's atlases of 1886 and 1912.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The tan, not the near-white",
+      "body": "The name is attached to a legend about an unwashed-linen vow, which the books read treat as doubtful, not as established [1][2]. St Clair notes that two dresses in the color appear in Queen Elizabeth I's wardrobe inventories, one taken a year before the siege the story is built around [1]. Paterson defines isabel as a dingy yellow-grey and records two possible Isabellas as suggestions only [2].\n\nThis swatch is Ridgway's, carried from his 1886 *Nomenclature of Colors* into the 1912 atlas (plate XXX) and the 1955 ISCC-NBS system, which calls it dark grayish yellow [3]. It is far darker than the near-white web [[white]] [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "It is one of the most frequent colors in museum painting: 4,445 of 23,781 paintings contain it, 18.7 per cent, more than 98 per cent of named colors [4]. It is most often an accent, and peaks in the 1300s, in 21.1 per cent of paintings [4]. Maarten van Heemskerck uses it in 7 of 12 works [4]. It shares canvases with [[dresden-brown]] and sits near [[tan]] [4]. Much of this tan is the yellowing of aged varnish [4]."
+    }
   ],
-  "parent": "yellow",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "isabelline",
-    "gloss": "the web isabelline is near-white; Ridgway's Isabella Color is a mid tan"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "an Isabella of legend; origin undocumented",
+      "first_recorded": "by 1600 (Elizabeth I wardrobe); 1886 (Ridgway)",
+      "source": "St Clair; data/library.json"
+    },
+    "aka": [
+      "isabel",
+      "isabella"
+    ],
+    "siblings": [
+      "white",
+      "dresden-brown",
+      "tan"
+    ],
+    "parent": "yellow",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "white",
+        "gloss": "the web isabelline is near-white; Ridgway's Isabella Color is a mid tan"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/i.json",
+    "n_present": 4445,
+    "pct": 18.69,
+    "peak": "1300s, 21.1% of 251 paintings",
+    "painters": [
+      [
+        "Maarten van Heemskerck",
+        7,
+        12
+      ]
+    ]
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, ch. \"Isabelline\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"isabel, isabella\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub library (data/library.json): Ridgway 1886 and 1912 plate XXX; ISCC-NBS block 91; CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/i.json",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/i.json",
-  "n_present": 4445,
-  "pct": 18.69,
-  "peak": "1300s, 21.1% of 251 paintings",
-  "painters": [
-   [
-    "Maarten van Heemskerck",
-    7,
-    12
-   ]
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, ch. \"Isabelline\"",
-   "loc_kind": "book-chapter",
-   "url": null
+  "questions": [
+    {
+      "q": "How does Ridgway's Isabella Color differ from web Isabelline?",
+      "choices": [
+        "Much darker, a tan",
+        "Much lighter",
+        "Bluer",
+        "Identical"
+      ],
+      "answer": "Much darker, a tan",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the story of the unwashed linen is established history.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Isabella Color appears in nearly one in five museum paintings in our archive."
+  ],
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"isabel, isabella\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub library (data/library.json): Ridgway 1886 and 1912 plate XXX; ISCC-NBS block 91; CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes/i.json",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "How does Ridgway's Isabella Color differ from web Isabelline?",
-   "choices": [
-    "Much darker, a tan",
-    "Much lighter",
-    "Bluer",
-    "Identical"
-   ],
-   "answer": "Much darker, a tan",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the story of the unwashed linen is established history.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Isabella Color appears in nearly one in five museum paintings in our archive."
- ],
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- },
- "status": "checked",
- "words": 196
+  "status": "checked",
+  "words": 196
 }

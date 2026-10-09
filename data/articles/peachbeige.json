@@ -1,0 +1,127 @@
+{
+ "slug": "peachbeige",
+ "name": "Peachbeige",
+ "hex": "#D6A781",
+ "names": [
+  "Peachbeige"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Peachbeige is a warm, sandy tan between peach and beige, a 1928 fashion-trade name from the Maerz and Paul dictionary.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A trade name, not a flower or place",
+   "body": "The nearest named colors on file are [[tumbleweed]], [[pastel-parchment]] and [[yellowish-camel]], at 2.6, 3.1 and 3.8 ΔE [1]. Running the two words together, rather than writing \"peach beige,\" marks it as a single fixed trade term rather than a description built on the spot [1].\n\nIts Munsell notation is 6.1YR 7.1/4.9, and the closest of our common colors is [[camel]], 6.2 units away, with its nearest library neighbor being [[tumbleweed]] [1]. Nothing in the books we hold explains who coined it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, this tan appears in 1,223, about 5.1 percent, more common than 87 percent of our named colors [2]. It peaks in the 1500s, in 110 of 2,231 paintings, at 1.6 times the expected rate, and it is most over-represented in paintings from India, at 2.8 times the expected rate [2].\n\n[[painter:andre-derain|Andre Derain]] is its most devoted painter, present in 5 of 22 works here, 4.3 times his museums' baseline [2]. The earliest match is a 900-era painting, over a thousand years before the 1928 name, so that early hit is a look-alike hue in an aged photograph, not a trace of this named tan, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases more than chance with [[seashell-pink]] and [[french-beige]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a fashion-trade compound of peach and beige",
+   "first_recorded": "Maerz & Paul, 1930 (dated 1928)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "tumbleweed",
+   "pastel-parchment",
+   "yellowish-camel",
+   "cinnamon-buff"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1223,
+  "pct_present": 5.14,
+  "rank_pct": 87,
+  "role": "light, 51% of 704 matched paintings",
+  "measured": {
+   "lch": [
+    71.9,
+    29.0,
+    65.0
+   ],
+   "nearest": [
+    [
+     "Tumbleweed",
+     2.6
+    ],
+    [
+     "Pastel Parchment",
+     3.1
+    ],
+    [
+     "Yellowish camel",
+     3.8
+    ],
+    [
+     "Cinnamon-Buff",
+     3.8
+    ]
+   ]
+  },
+  "first_record": {
+   "year": 1928,
+   "source": "maerz-paul"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul 1930, first recorded 1928, plate 11 A 6",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Peachbeige (n=1,223)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In what year does the Maerz and Paul dictionary date the name Peachbeige?",
+   "choices": [
+    "1928",
+    "1912",
+    "1886",
+    "1955"
+   ],
+   "answer": "1928",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Peachbeige and Pastel Parchment sit on the same dictionary plate.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Peachbeige is written as one word, a sign it was a fixed trade term rather than an on-the-spot description."
+ ],
+ "words": 249,
+ "status": "draft",
+ "checked": {
+  "by": "",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

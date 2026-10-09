@@ -1,244 +1,244 @@
 {
- "slug": "rosa",
- "name": "Rosa",
- "hex": "#FE86A4",
- "names": [
-  "Rosa"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Rosa is the Latin word for the rose and the plain word for pink in Spanish, Portuguese and German; as a color name here it is a bright screen pink with no documented maker.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A word for pink, not for roses",
-   "body": "*Rosa* is the Latin word for the rose, and in Spanish, Portuguese and German it is also the everyday word for the color pink [1]. In Spanish the color is *rosa*, in Portuguese *cor-de-rosa*, in German *rosa* [1]. Italian uses it too: the leader's jersey in the Giro d'Italia is the *maglia rosa*, a pink one [2]. In English the color is [[pink]], and that word has a different story [1].\n\nWhere this particular swatch got its name is undocumented. Our library finds it in two sources, a wiki list and the xkcd color survey of 2010, and neither says why it was called Rosa [8]. By distance, its nearest named neighbors are [[schauss-pink]], [[salmon-pink]], [[pale-dogwood]] and [[pink]], at 2.6, 3.2, 4.0 and 4.4 CIEDE2000 units [8]. The ISCC-NBS category closest to it is \"vivid pink\" [8]."
-  },
-  {
-   "id": "antiquity",
-   "title": "The rose that was not pink",
-   "body": "The Latin adjective *roseus* sounds like \"rosy\", but Pastoureau calls it a false friend: it meant bright red, vermilion, a very beautiful red [1]. Romans used it for women's makeup and for cloth dyed with kermes [1]. The Greeks and Romans saw pink in flowers, rocks and dawn skies, and Pastoureau argues they never gave the color a name of its own [1].\n\nHomer's \"rosy-fingered\" dawn is the reddish light of sunrise, not a flower and not our pink [1]. Even the roses of antiquity were almost never pink; they were red, white or sometimes yellow [1]. In medieval Latin, *roseus* still meant vermilion, and in Old French the adjective *rose* was rare and could mean pale, beige or yellowish [1]."
-  },
-  {
-   "id": "pink",
-   "title": "How pink got its names",
-   "body": "Pink arrived through a dye. Brazilwood, a wood imported from Asia, had long been considered impermanent as a dye [1]. Around 1380 to 1400, Italian dyers found mordants that made it more stable and gave truly pink shades [1]. Painters turned the dyestuff into lake pigments, and the color needed a name [1]. Venetian and Tuscan *incarnato*, meaning flesh-colored, became the term, and it gave French *incarnat*, Spanish *encarnado* and English *carnation* [1]. Our name list still keeps [[carnation]] [8].\n\nFrom the fifteenth to the seventeenth century, European charts treated this new color as a pale yellow, since the slot between white and red was already taken by yellow [1]. The French adjective *rose* is absent from dictionaries before the middle of the eighteenth century, and the Académie française did not list it until its sixth edition in 1835 [1]. Pastoureau dates the modern pink to the mid-1700s, when Madame de Pompadour made it the fashion, and when roses that were truly rose, unknown in antiquity, had become common through breeding [1]. In Spanish, Portuguese and German the color word also took until the nineteenth century to settle, and English *pink* long meant only the brazilwood dye [1].\n\nA last correction: pink was not always a girls' color. In the eighteenth century it was often worn by men and boys, and the firm split of pink for girls and blue for boys dates from the 1930s [1]."
-  },
-  {
-   "id": "paintbox",
-   "title": "Rosa in the paintbox",
-   "body": "Painters knew *rosa* long before the color name settled. A sixteenth-century Italian recipe term, *roza* or *rosa*, stood for [[madder]], with *roza di Fiandra* as a variant [3]. *Terra rosa*, \"rose earth\", was Church's name for red ochre, whose pinkish red comes from ferric oxide, and Mayer ties it to Venetian red [3]. Neither is the pale pink of today, and both point to red rather than to the flower [3].\n\nAnother Rosa is a person, and the name has nothing to do with the color [4]. Gage lists Salvator Rosa with Claude and Poussin among the earlier landscape painters whom Romantic artists looked back to [4]. The Pigment Compendium names him among the Roman artists of the seventeenth century linked to lead-tin-antimony yellows [10]. See [[painter:salvator-rosa|Salvator Rosa]] for the painter."
-  },
-  {
-   "id": "botany",
-   "title": "Roses in the naturalists' charts",
-   "body": "Werner's nomenclature, as edited by Patrick Syme in 1821, has a \"Rose Red\", number 89 [5]. Syme defines it as carmine red with a great quantity of white and a very small portion of cochineal red, and points to the common garden rose and to flamingo feathers [5]. The French rose, *Rosa gallica*, stands for his darker \"Lake Red\" and \"Purplish Red\" [5]. In 1797 the Swiss chemist Henri Struve described a red, *Rouge de kinorodon*, as the fruit of the sweet briar, though Baty remarks that the fruit of the dog rose would match it better [6].\n\nThe word also lives in a festival. The Spanish town of Consuegra holds a Rosa del Azafrán festival every October, and Finlay reports that a tourist delegation from Toledo invented it in 1962 [7]. It celebrates the harvest behind [[saffron-yellow]] [7]."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch",
-   "body": "The swatch here, #FE86A4, is a bright, slightly cool pink on screens [8]. It is a modern screen color, not a historical dye: the first record we hold is the 2010 survey [8]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This pink is absent from the museum. No painting in our archive of 23,781 has a color within four CIEDE2000 units of it covering even one per cent of the canvas [9]. The same is true of [[pink]], [[carnation]] and [[schauss-pink]] [9]. That describes our archive of photographs of aged, varnished paintings, not painting as a whole [9].\n\nSo the bright pink of the screen is a color that museum paintings, as photographed, do not hold at that strength [9]. The books add that brazilwood dye was long considered impermanent, so fading may play a part, though no archive count can separate it from the painters' own choices [1][9]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "origin of this swatch name undocumented; the word is Latin rosa, rose",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub library; Pastoureau, Red"
-  },
-  "aka": [
-   "rosa (Spanish, German)",
-   "cor-de-rosa (Portuguese)"
+  "slug": "rosa",
+  "name": "Rosa",
+  "hex": "#FE86A4",
+  "names": [
+    "Rosa"
   ],
-  "siblings": [
-   "pink",
-   "carnation",
-   "salmon-pink"
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Rosa is the Latin word for the rose and the plain word for pink in Spanish, Portuguese and German; as a color name here it is a bright screen pink with no documented maker.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A word for pink, not for roses",
+      "body": "*Rosa* is the Latin word for the rose, and in Spanish, Portuguese and German it is also the everyday word for the color pink [1]. In Spanish the color is *rosa*, in Portuguese *cor-de-rosa*, in German *rosa* [1]. Italian uses it too: the leader's jersey in the Giro d'Italia is the *maglia rosa*, a pink one [2]. In English the color is [[pink]], and that word has a different story [1].\n\nWhere this particular swatch got its name is undocumented. Our library finds it in two sources, a wiki list and the xkcd color survey of 2010, and neither says why it was called Rosa [8]. By distance, its nearest named neighbors are [[schauss-pink]], [[salmon-pink]], [[pale-dogwood]] and [[pink]], at 2.6, 3.2, 4.0 and 4.4 CIEDE2000 units [8]. The ISCC-NBS category closest to it is \"vivid pink\" [8]."
+    },
+    {
+      "id": "antiquity",
+      "title": "The rose that was not pink",
+      "body": "The Latin adjective *roseus* sounds like \"rosy\", but Pastoureau calls it a false friend: it meant bright red, vermilion, a very beautiful red [1]. Romans used it for women's makeup and for cloth dyed with kermes [1]. The Greeks and Romans saw pink in flowers, rocks and dawn skies, and Pastoureau argues they never gave the color a name of its own [1].\n\nHomer's \"rosy-fingered\" dawn is the reddish light of sunrise, not a flower and not our pink [1]. Even the roses of antiquity were almost never pink; they were red, white or sometimes yellow [1]. In medieval Latin, *roseus* still meant vermilion, and in Old French the adjective *rose* was rare and could mean pale, beige or yellowish [1]."
+    },
+    {
+      "id": "pink",
+      "title": "How pink got its names",
+      "body": "Pink arrived through a dye. Brazilwood, a wood imported from Asia, had long been considered impermanent as a dye [1]. Around 1380 to 1400, Italian dyers found mordants that made it more stable and gave truly pink shades [1]. Painters turned the dyestuff into lake pigments, and the color needed a name [1]. Venetian and Tuscan *incarnato*, meaning flesh-colored, became the term, and it gave French *incarnat*, Spanish *encarnado* and English *carnation* [1]. Our name list still keeps [[carnation]] [8].\n\nFrom the fifteenth to the seventeenth century, European charts treated this new color as a pale yellow, since the slot between white and red was already taken by yellow [1]. The French adjective *rose* is absent from dictionaries before the middle of the eighteenth century, and the Académie française did not list it until its sixth edition in 1835 [1]. Pastoureau dates the modern pink to the mid-1700s, when Madame de Pompadour made it the fashion, and when roses that were truly rose, unknown in antiquity, had become common through breeding [1]. In Spanish, Portuguese and German the color word also took until the nineteenth century to settle, and English *pink* long meant only the brazilwood dye [1].\n\nA last correction: pink was not always a girls' color. In the eighteenth century it was often worn by men and boys, and the firm split of pink for girls and blue for boys dates from the 1930s [1]."
+    },
+    {
+      "id": "paintbox",
+      "title": "Rosa in the paintbox",
+      "body": "Painters knew *rosa* long before the color name settled. A sixteenth-century Italian recipe term, *roza* or *rosa*, stood for [[irresistible]], with *roza di Fiandra* as a variant [3]. *Terra rosa*, \"rose earth\", was Church's name for red ochre, whose pinkish red comes from ferric oxide, and Mayer ties it to Venetian red [3]. Neither is the pale pink of today, and both point to red rather than to the flower [3].\n\nAnother Rosa is a person, and the name has nothing to do with the color [4]. Gage lists Salvator Rosa with Claude and Poussin among the earlier landscape painters whom Romantic artists looked back to [4]. The Pigment Compendium names him among the Roman artists of the seventeenth century linked to lead-tin-antimony yellows [10]. See [[painter:salvator-rosa|Salvator Rosa]] for the painter."
+    },
+    {
+      "id": "botany",
+      "title": "Roses in the naturalists' charts",
+      "body": "Werner's nomenclature, as edited by Patrick Syme in 1821, has a \"Rose Red\", number 89 [5]. Syme defines it as carmine red with a great quantity of white and a very small portion of cochineal red, and points to the common garden rose and to flamingo feathers [5]. The French rose, *Rosa gallica*, stands for his darker \"Lake Red\" and \"Purplish Red\" [5]. In 1797 the Swiss chemist Henri Struve described a red, *Rouge de kinorodon*, as the fruit of the sweet briar, though Baty remarks that the fruit of the dog rose would match it better [6].\n\nThe word also lives in a festival. The Spanish town of Consuegra holds a Rosa del Azafrán festival every October, and Finlay reports that a tourist delegation from Toledo invented it in 1962 [7]. It celebrates the harvest behind [[saffron-yellow]] [7]."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch",
+      "body": "The swatch here, #FE86A4, is a bright, slightly cool pink on screens [8]. It is a modern screen color, not a historical dye: the first record we hold is the 2010 survey [8]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This pink is absent from the museum. No painting in our archive of 23,781 has a color within four CIEDE2000 units of it covering even one per cent of the canvas [9]. The same is true of [[pink]], [[carnation]] and [[schauss-pink]] [9]. That describes our archive of photographs of aged, varnished paintings, not painting as a whole [9].\n\nSo the bright pink of the screen is a color that museum paintings, as photographed, do not hold at that strength [9]. The books add that brazilwood dye was long considered impermanent, so fading may play a part, though no archive count can separate it from the painters' own choices [1][9]."
+    }
   ],
-  "parent": "pink",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "rose-red",
-    "gloss": "Syme's and Ridgway's rose red is a deeper crimson-pink, not this bright screen pink"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "es",
-    "name": "rosa (pink)"
-   },
-   {
-    "lang": "pt",
-    "name": "cor-de-rosa"
-   },
-   {
-    "lang": "de",
-    "name": "rosa"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#FE86A4",
-   "de2000": 4,
-   "min_cover": 0.01
-  },
-  "n_present": 0,
-  "measured": {
-   "nearest": [
-    [
-     "Schauss Pink",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "origin of this swatch name undocumented; the word is Latin rosa, rose",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub library; Pastoureau, Red"
+    },
+    "aka": [
+      "rosa (Spanish, German)",
+      "cor-de-rosa (Portuguese)"
     ],
-    [
-     "Salmon Pink",
-     3.2
+    "siblings": [
+      "pink",
+      "carnation",
+      "salmon-pink"
     ],
-    [
-     "Pale Dogwood",
-     4.0
+    "parent": "pink",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "rose-red",
+        "gloss": "Syme's and Ridgway's rose red is a deeper crimson-pink, not this bright screen pink"
+      }
     ],
-    [
-     "Pink",
-     4.4
+    "other_languages": [
+      {
+        "lang": "es",
+        "name": "rosa (pink)"
+      },
+      {
+        "lang": "pt",
+        "name": "cor-de-rosa"
+      },
+      {
+        "lang": "de",
+        "name": "rosa"
+      }
     ]
-   ]
   },
-  "sources": [
-   "wiki",
-   "xkcd 2010"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#FE86A4",
+      "de2000": 4,
+      "min_cover": 0.01
+    },
+    "n_present": 0,
+    "measured": {
+      "nearest": [
+        [
+          "Schauss Pink",
+          2.6
+        ],
+        [
+          "Salmon Pink",
+          3.2
+        ],
+        [
+          "Pale Dogwood",
+          4.0
+        ],
+        [
+          "Pink",
+          4.4
+        ]
+      ]
+    },
+    "sources": [
+      "wiki",
+      "xkcd 2010"
+    ],
+    "iscc": "vivid pink",
+    "company": [
+      "Pink",
+      "Carnation",
+      "Schauss Pink absent as well"
+    ]
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, \"On the Margins of Red: Pink\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, \"On the Athletic Fields\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Eastaugh et al., Pigment Compendium, \"roza\", \"terra rosa\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 109",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 242-243, 252-253, 258-261",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 22, 30 (Struve, Rouge de kinorodon)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 6 (\"Yellow\"), Consuegra and the Rosa del Azafran festival",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "data",
+      "cite": "ColorHub library and name graph (data/library.json, data/graph/): sources wiki and xkcd 2010; ISCC-NBS category; nearest names by CIEDE2000",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes; within 4 CIEDE2000 units, at least 1 per cent of the canvas)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Eastaugh et al., Pigment Compendium, \"lead-tin-antimony yellow\", p. 234",
+      "loc_kind": "pdf-page",
+      "url": null
+    }
   ],
-  "iscc": "vivid pink",
-  "company": [
-   "Pink",
-   "Carnation",
-   "Schauss Pink absent as well"
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, \"On the Margins of Red: Pink\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, \"On the Athletic Fields\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Eastaugh et al., Pigment Compendium, \"roza\", \"terra rosa\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 109",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 242-243, 252-253, 258-261",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 22, 30 (Struve, Rouge de kinorodon)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 6 (\"Yellow\"), Consuegra and the Rosa del Azafran festival",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "data",
-   "cite": "ColorHub library and name graph (data/library.json, data/graph/): sources wiki and xkcd 2010; ISCC-NBS category; nearest names by CIEDE2000",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (data/graph/fieldnotes; within 4 CIEDE2000 units, at least 1 per cent of the canvas)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Eastaugh et al., Pigment Compendium, \"lead-tin-antimony yellow\", p. 234",
-   "loc_kind": "pdf-page",
-   "url": null
+  "questions": [
+    {
+      "q": "What did the Latin adjective roseus mean?",
+      "choices": [
+        "Bright red, vermilion",
+        "Pale pink",
+        "Yellowish beige",
+        "Rose-scented"
+      ],
+      "answer": "Bright red, vermilion",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the English word pink first named a dyestuff from brazilwood, before it named a color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    },
+    {
+      "q": "Why was pink treated as a shade of yellow in European charts for two centuries?",
+      "choices": [
+        "The place between white and red was already held by yellow",
+        "Pink dyes always contained saffron",
+        "Pink had no connection to red in Latin",
+        "Brazilwood dye turned yellow with age"
+      ],
+      "answer": "The place between white and red was already held by yellow",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "The Latin word for rose did not mean pink: roseus meant bright red.",
+    "Pink was a boy's color in the eighteenth century; the girl-blue split dates from the 1930s.",
+    "This bright pink does not appear at one per cent of the canvas in any of our 23,781 paintings."
+  ],
+  "words": 909,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "All traced claims verified against Pastoureau Red/Yellow and Finlay; no changes needed"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What did the Latin adjective roseus mean?",
-   "choices": [
-    "Bright red, vermilion",
-    "Pale pink",
-    "Yellowish beige",
-    "Rose-scented"
-   ],
-   "answer": "Bright red, vermilion",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the English word pink first named a dyestuff from brazilwood, before it named a color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  },
-  {
-   "q": "Why was pink treated as a shade of yellow in European charts for two centuries?",
-   "choices": [
-    "The place between white and red was already held by yellow",
-    "Pink dyes always contained saffron",
-    "Pink had no connection to red in Latin",
-    "Brazilwood dye turned yellow with age"
-   ],
-   "answer": "The place between white and red was already held by yellow",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "The Latin word for rose did not mean pink: roseus meant bright red.",
-  "Pink was a boy's color in the eighteenth century; the girl-blue split dates from the 1930s.",
-  "This bright pink does not appear at one per cent of the canvas in any of our 23,781 paintings."
- ],
- "words": 909,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "All traced claims verified against Pastoureau Red/Yellow and Finlay; no changes needed"
-  ]
- }
 }

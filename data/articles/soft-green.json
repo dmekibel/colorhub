@@ -1,0 +1,144 @@
+{
+ "slug": "soft-green",
+ "name": "Soft Green",
+ "hex": "#6FC276",
+ "names": [
+  "Soft Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Soft Green is a muted, yellow-leaning green, modifier grammar for 'soft' plus Green, and the phrase was already common in English print decades before the 2010 crowd survey that formally named this shade.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, and an older phrase",
+   "body": "Our graph files this as a modifier compound, 'soft' added to the family word [[green]], surveyed by xkcd in 2010 rather than drawn from any book, pigment or place [1]. The phrase itself peaks earlier in English print, around the 1870s, and rose fastest in the 1820s, by Google Books' count across every sense of the words, which can include a landscape or a season as easily as a fashion color [2]. No ISCC-NBS or Ridgway filing exists in our library for this exact modifier name, so its naming beyond the 2010 survey is undocumented [1].\n\nIts real nearest look-alike is [[mantis]], more vivid than this muted green, with [[emerald]] close behind, also more vivid, and [[arcadian-green]] a little further out, duller than both [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green in 3 of 23,781 paintings, as photographed, with the within-painting lens counting 2 — rarer than 82 percent of the named colors we track [4]. The two matches span from 1795 to 1914, too thin a sample for any century trend, and neither painting has an attributed artist on file, so no painter claim follows either [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: 'soft' + the family word Green",
+   "first_recorded": "2010 (xkcd survey name); the phrase itself is older in print",
+   "source": "ColorHub color library, Soft Green entry"
+  },
+  "aka": [],
+  "siblings": [
+   "green",
+   "mantis",
+   "emerald"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "n_within": 2,
+  "rarer_than_pct": 82,
+  "ngram": {
+   "peak": 1870,
+   "rise": 1820,
+   "first": 1800
+  },
+  "measured": {
+   "lch": [
+    71.7,
+    51.2,
+    143.4
+   ],
+   "nearest": [
+    [
+     "Mantis",
+     3.5
+    ],
+    [
+     "Emerald",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph node: xkcd 2010 color survey (data/graph/nodes-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache, English-language corpus, all senses of the words (research/_raw/ngrams)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: look-alike edges (data/graph/edges-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of name is Soft Green, by our graph's own classification?",
+   "choices": [
+    "A modifier compound: 'soft' + the family word Green",
+    "A pigment name",
+    "A place name",
+    "A painter's name"
+   ],
+   "answer": "A modifier compound: 'soft' + the family word Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the phrase 'soft green' only appears in English print after the 2010 xkcd survey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "How does Soft Green compare in rarity to other named colors in our archive?",
+   "choices": [
+    "Rarer than 82 percent of them",
+    "More common than 82 percent of them",
+    "Exactly average",
+    "Not measured"
+   ],
+   "answer": "Rarer than 82 percent of them",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The phrase 'soft green' was already common in English print a century before any crowd survey named it.",
+  "Our archive finds this exact green in only two paintings, a century and a half apart."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified as internally consistent with cited ColorHub library/graph/archive data; no book or web source cited for this article's factual claims, no myth-list phrase found, and the claims are already conservatively hedged (undocumented origin, floor-not-first framing, thin-sample caveats)."
+  ]
+ },
+ "words": 215
+}

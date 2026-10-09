@@ -1,150 +1,150 @@
 {
- "slug": "b-dazzled-blue",
- "name": "B'dazzled Blue",
- "hex": "#2E5894",
- "names": [
-  "B'dazzled Blue"
- ],
- "tier": "commercial",
- "depth": "brief",
- "lede": "B'dazzled Blue is a Crayola crayon name, a pun on *bedazzled*, for a mid sapphire blue from the company's metallic line around 2000.",
- "sections": [
-  {
-   "id": "origin",
-   "title": "Where the name comes from",
-   "body": "Crayola introduced a box of metallic crayons in 2000 and renamed the line Metallic FX the following year; B'dazzled Blue is on the color list for both years [1]. The names in that line came from a naming contest open to residents of the United States and Canada, judged by Crayola's parent company, Binney and Smith [1]. Some winning names are credited to named people; B'dazzled Blue's is not, so who coined it is undocumented [1]. Crayola names have a history of their own: in 1958 the company renamed its [[prussian-blue|Prussian blue]] crayon [[midnight-blue|Midnight Blue]] after teachers said children could not relate to Prussian history [5]."
-  },
-  {
-   "id": "swatch",
-   "title": "A flat swatch for a shiny crayon",
-   "body": "The hex value most lists give, #2E5894, comes via Wikipedia from Crayola [2]. It can only be an approximation: the real crayon has a metallic shimmer that no flat screen color can show [1][2]. As a flat color it is a mid sapphire blue, almost identical to [[dusk-blue]], [[sapphire-crayola]] and the modern pigment [[yinmn-blue]], all within three units [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,531 paintings, a color within six units of it covers at least five per cent of the canvas in 58, led by Matisse's *The Conversation*, where it fills nearly half the picture [4]. These are photographs of varnished paintings read as screen colors, and nearly all were painted long before the crayon existed [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a pun on 'bedazzled' (Crayola Metallic line)",
-   "first_recorded": "2000 (Crayola Metallic crayons)",
-   "source": "Jenny's Crayon Collection"
-  },
-  "aka": [],
-  "siblings": [
-   "sapphire-crayola"
+  "slug": "b-dazzled-blue",
+  "name": "B'dazzled Blue",
+  "hex": "#2E5894",
+  "names": [
+    "B'dazzled Blue"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "dusk-blue",
-    "gloss": "nearly the same screen color (an xkcd survey name), unrelated name"
-   }
+  "tier": "commercial",
+  "depth": "brief",
+  "lede": "B'dazzled Blue is a Crayola crayon name, a pun on *bedazzled*, for a mid sapphire blue from the company's metallic line around 2000.",
+  "sections": [
+    {
+      "id": "origin",
+      "title": "Where the name comes from",
+      "body": "Crayola introduced a box of metallic crayons in 2000 and renamed the line Metallic FX the following year; B'dazzled Blue is on the color list for both years [1]. The names in that line came from a naming contest open to residents of the United States and Canada, judged by Crayola's parent company, Binney and Smith [1]. Some winning names are credited to named people; B'dazzled Blue's is not, so who coined it is undocumented [1]. Crayola names have a history of their own: in 1958 the company renamed its [[prussian-blue|Prussian blue]] crayon [[midnight-blue|Midnight Blue]] after teachers said children could not relate to Prussian history [5]."
+    },
+    {
+      "id": "swatch",
+      "title": "A flat swatch for a shiny crayon",
+      "body": "The hex value most lists give, #2E5894, comes via Wikipedia from Crayola [2]. It can only be an approximation: the real crayon has a metallic shimmer that no flat screen color can show [1][2]. As a flat color it is a mid sapphire blue, almost identical to [[dusk-blue]], [[sapphire-crayola]] and the modern pigment [[dusk-blue]], all within three units [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,531 paintings, a color within six units of it covers at least five per cent of the canvas in 58, led by Matisse's *The Conversation*, where it fills nearly half the picture [4]. These are photographs of varnished paintings read as screen colors, and nearly all were painted long before the crayon existed [4]."
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
-  "n_present": 58,
-  "top_painting": {
-   "id": "commons-Q7727514",
-   "painter": "Henri Matisse",
-   "cover": 0.476
+  "aside": {
+    "origin": {
+      "named_after": "a pun on 'bedazzled' (Crayola Metallic line)",
+      "first_recorded": "2000 (Crayola Metallic crayons)",
+      "source": "Jenny's Crayon Collection"
+    },
+    "aka": [],
+    "siblings": [
+      "sapphire-crayola"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "dusk-blue",
+        "gloss": "nearly the same screen color (an xkcd survey name), unrelated name"
+      }
+    ],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    37.3,
-    37.8,
-    279
-   ],
-   "contrast_white": 7.14,
-   "nearest": [
-    [
-     "Dusk Blue",
-     1.9
-    ],
-    [
-     "Sapphire (Crayola)",
-     2.2
-    ],
-    [
-     "YInMn Blue",
-     3.0
+  "field": {
+    "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+    "n_present": 58,
+    "top_painting": {
+      "id": "commons-Q7727514",
+      "painter": "Henri Matisse",
+      "cover": 0.476
+    },
+    "measured": {
+      "lch": [
+        37.3,
+        37.8,
+        279
+      ],
+      "contrast_white": 7.14,
+      "nearest": [
+        [
+          "Dusk Blue",
+          1.9
+        ],
+        [
+          "Sapphire (Crayola)",
+          2.2
+        ],
+        [
+          "YInMn Blue",
+          3.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Jenny's Crayon Collection, \"Crayola Metallic FX and Metallic Crayons\" (2015)",
+      "loc_kind": null,
+      "url": "https://www.jennyscrayoncollection.com/2015/12/crayola-metallic-fx-and-metallic-effect.html"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): \"Wikipedia cites Crayola\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph look-alikes (data/graph), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 8 (\"Blue\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why can't a screen show B'dazzled Blue exactly?",
+      "choices": [
+        "The crayon is metallic, and a flat color can't shimmer",
+        "Crayola keeps the formula secret",
+        "It fades in light",
+        "It is an infrared color"
+      ],
+      "answer": "The crayon is metallic, and a flat color can't shimmer",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: we know who named B'dazzled Blue.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A crayon pun with a near-twin in a 1900 Matisse."
+  ],
+  "words": 241,
+  "status": "pilot",
+  "checked": {
+    "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+    "date": "2026-10-08",
+    "issues": [
+      "Year and contest from a collector's site (web, medium confidence); namer undocumented, said plainly."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "Jenny's Crayon Collection, \"Crayola Metallic FX and Metallic Crayons\" (2015)",
-   "loc_kind": null,
-   "url": "https://www.jennyscrayoncollection.com/2015/12/crayola-metallic-fx-and-metallic-effect.html"
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): \"Wikipedia cites Crayola\"",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph look-alikes (data/graph), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 8 (\"Blue\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why can't a screen show B'dazzled Blue exactly?",
-   "choices": [
-    "The crayon is metallic, and a flat color can't shimmer",
-    "Crayola keeps the formula secret",
-    "It fades in light",
-    "It is an infrared color"
-   ],
-   "answer": "The crayon is metallic, and a flat color can't shimmer",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: we know who named B'dazzled Blue.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A crayon pun with a near-twin in a 1900 Matisse."
- ],
- "words": 241,
- "status": "pilot",
- "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
-  "date": "2026-10-08",
-  "issues": [
-   "Year and contest from a collector's site (web, medium confidence); namer undocumented, said plainly."
-  ]
- }
 }

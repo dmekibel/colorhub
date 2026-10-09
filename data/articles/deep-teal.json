@@ -1,0 +1,108 @@
+{
+ "slug": "deep-teal",
+ "name": "Deep Teal",
+ "hex": "#00555A",
+ "names": [
+  "Deep Teal"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Deep Teal is a darker, bluer-green reading of [[teal]], named for the duck's head after which teal itself is named, and filed in the 1955 ISCC-NBS system and the 2010 xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on a bird's name",
+   "body": "The name follows the library's modifier grammar, *deep* plus [[teal]]; teal itself is named for the dark green patch on a teal duck's head, a connection the ISCC-NBS system of 1955 inherited when it filed this chip into block 164, named moderate bluish green in that system's own list [1]. The xkcd online color survey of 2010 independently settled on the same name for roughly the same hex, from crowd-sourced labels rather than any dictionary [1].\n\nIts nearest look-alike on file is [[dark-teal]], about 3.2 units off, with [[kremlin]] close behind and one named child variant, [[deep-teal-green]], branching from it [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 0.23% of the 23,781 paintings in our archive (54 paintings, as photographed); the within-painting lens narrows that to 27 [3]. In our archive it is rarer than 58% of the named colors [3]. It peaks in the 1900s, present in 0.5% of the 1,674 paintings we have from that decade (8 paintings), 3.4 times the rate its museums would predict [3]. Inside a painting it most often plays a hidden color, in 63% of its 27 appearances by lightness rank within the painting [3]. The earliest match dates to 1430, 525 years before the name's 1955 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "teal, itself named for the dark green head-patch of the teal duck",
+   "first_recorded": "ISCC-NBS 1955; also settled independently by the xkcd color survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-teal",
+   "kremlin"
+  ],
+  "parent": "teal",
+  "children": [
+   "deep-teal-green"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 54,
+  "pct_archive": 0.23,
+  "n_within_painting": 27,
+  "pct_within_painting": 0.11,
+  "rank_pct": 42,
+  "name_first_recorded": 1955,
+  "earliest_match_year": 1430
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "ISCC-NBS Circular 553 (1955), block 164; xkcd color survey (2010)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike and parent/child edges (data/graph/edges-d.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,700 paintings), computed match and decade lift, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is \"teal\", the base of Deep Teal, originally named after?",
+   "choices": [
+    "The dark green head-patch of the teal duck",
+    "A gemstone",
+    "A dye plant",
+    "A place in France"
+   ],
+   "answer": "The dark green head-patch of the teal duck",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Deep Teal became less common in paintings as the nineteenth century went on.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Teal gets more common in paintings as the nineteenth century goes on, not less."
+ ],
+ "words": 284,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
+  ]
+ }
+}

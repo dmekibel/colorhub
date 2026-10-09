@@ -1,0 +1,112 @@
+{
+  "slug": "purpleish-pink",
+  "name": "Purpleish Pink",
+  "hex": "#DF4EC8",
+  "names": [
+    "Purpleish Pink"
+  ],
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Purpleish Pink is a vivid magenta-pink, another compound from the 2010 xkcd color survey, pairing \"purpleish\" with [[pink]].",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A compound crowd name",
+      "body": "Like its blue counterpart, this name follows the survey's modifier-plus-base grammar, here purpleish over pink [1]. The xkcd survey of 2010 is the only record on file; no earlier dictionary or dye name is documented for it [1]. The ISCC-NBS system would place it among the deep purplish pinks, though at a loose fit, 10.9 units off [1].\n\nIts nearest named neighbor is [[pinky-purple]], 3.4 units away and more vivid still [2]. [[pinky-purple]] and [[hot-magenta]] sit a little further off, and the survey's near-duplicate [[pale-magenta]] is 5.3 units away and duller [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our full-canvas search finds no match in the 23,781-painting archive, but a narrower, within-painting search turns up a single trace, as photographed [3]. That single trace is too thin to draw a pattern from [3]. The color's high chroma makes it an unlikely survivor on an aged, varnished canvas in any case [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: purpleish + pink",
+      "first_recorded": "2010 xkcd color survey",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "pinky-purple",
+      "hot-magenta",
+      "magenta"
+    ],
+    "parent": "pink",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "n_within_painting": 1,
+    "measured": {
+      "nearest": [
+        [
+          "Pink Purple",
+          3.4
+        ]
+      ]
+    },
+    "iscc_nbs": {
+      "name": "deep purplish pink",
+      "de2000": 10.9
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS 1955 block",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Purpleish Pink's name was built the same way as which other color here?",
+      "choices": [
+        "Purpleish Blue",
+        "Cornflower",
+        "Isabelline",
+        "Delft Blue"
+      ],
+      "answer": "Purpleish Blue",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Purpleish Pink is a muted, low-chroma color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Purpleish Pink turns up in only one painting, and only when the search looks inside the canvas rather than across it."
+  ],
+  "words": 163,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": []
+  }
+}

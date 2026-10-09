@@ -1,289 +1,289 @@
 {
- "slug": "amethyst",
- "name": "Amethyst",
- "hex": "#9966CC",
- "names": [
-  "Amethyst"
- ],
- "tier": "pigment",
- "depth": "long",
- "lede": "Amethyst is the violet-purple of a quartz crystal, a color word older than any pigment that tried to copy it, and one that painters seem never to have matched.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name and the swatch",
-   "body": "*Amethyst* comes from a Greek word meaning \"not drunken\": the stone was once credited with preventing intoxication [1]. As a color word it names the violet-purple of that quartz, and some dictionaries add a heraldic sense, purplish blue [1].\n\nThe swatch here, #9966CC, is the web-standard amethyst [2]. It is a clear mid-violet [2]. Our library records the name in Maerz & Paul's dictionary of 1930 with a first recorded use of 1572, and gives the nearest ISCC-NBS category as \"brilliant violet\" [2]. That is the oldest dated record we hold for it, though the gem is far older than the English word [2][5]. A lighter relative of this swatch is [[medium-purple]], and the family word is [[violet]]."
-  },
-  {
-   "id": "stone",
-   "title": "The stone",
-   "body": "Amethyst is a purple variety of quartz, silicon dioxide, and its color is attributed to iron impurities [3]. Pure quartz is colorless, and the same crystal family gives pink rose quartz, yellow citrine and grey-brown smoky quartz depending on what else is present [3].\n\nGem writers add that the purple comes from a color center made by natural radiation acting on iron, and that heating the stone past roughly 300 to 470 degrees Celsius breaks the center down and turns it yellow or orange [16]. Most commercial [[gem:citrine|citrine]] is made this way [16]. The stone itself is [[gem:amethyst|amethyst]], and ColorHub lists it as the exact twin of this swatch [16]. That heat-treated amethyst is the practical reason a yellow stone and a purple stone sit side by side in jewelers' trays."
-  },
-  {
-   "id": "pliny",
-   "title": "Pliny's rose and the medieval lapidaries",
-   "body": "Pliny compared the color of amethyst to the finest purple cloth, and the comparison traveled [5]. Isidore of Seville, Bede and Marbode of Rennes each described the stone in the following centuries, and by their account it had the hue of a dark rose [5]. A medieval reader who wanted to picture amethyst was therefore asked to picture something redder than the swatch above.\n\nThe ancient world's \"purple\" was itself a range. Greenfield notes that imperial purple took in scarlets and crimsons as well as amethyst and violet tones, and that dyers prized intensity and luster over exact hue [12]. Compare [[royal-purple]] and [[tyrian-purple]]. Pliny also lists amethyst-violet as one of the principal colors of his day [11]."
-  },
-  {
-   "id": "church",
-   "title": "Scripture, bishops and birthstones",
-   "body": "Amethyst is the last of the twelve foundation stones of the heavenly city in Revelation, though Finlay points out that the list reads more like a catalogue of the best seal stones than of the costliest ones [6]. The Hebrew breastplate list is less certain: Finlay's table offers amethyst as one possible reading for two of the stone names, Achlamath and Bereketh, which shows how loosely ancient gem words map onto modern minerals [7].\n\nLater habits were tidier. Bishops today often choose an amethyst ring over a sapphire, in part because the purple recalls communion wine and in part because the stone costs far less [8]. In the modern birthstone tables amethyst is for February, and in the anniversary list it marks the 33rd year [1][7]. South Carolina's state gem is amethyst [7]."
-  },
-  {
-   "id": "oriental",
-   "title": "Oriental amethyst",
-   "body": "Until about a hundred years ago, a purple corundum was sold as \"Oriental amethyst\", and for a long time it was worth more than diamond [8]. The name described the color and not the mineral, since the stone is a purple sapphire and not quartz [8]. In 1823 the gem-hunter John Mawe praised these stones for uniting the blue of sapphire with the red of ruby into a perfect violet [8].\n\nThe finest purple sapphires still come from Burma, Sri Lanka and Vietnam [8]. If a jeweler tells you a stone is oriental, the old word is a promise of rarity and not of quartz."
-  },
-  {
-   "id": "paint",
-   "title": "Not a pigment",
-   "body": "Amethyst never made a good paint. The Pigment Compendium says it is highly unlikely that amethyst was ground and used as a pigment, because grinding destroys the color [3]. The idea that it was comes from a misreading of Cennini, whose word *amatisto* or *amatito* is Thompson's hematite [3].\n\nWhere a painter's inventory does list a purple mineral, the likelier candidate is fluorite, a strongly colored purple spar that has probably been mistaken for amethyst in technical studies [4][3]. A violet stone and a violet paint are different problems, because purple objects must absorb a narrow band in the middle of the spectrum, which is physically hard to do [13]. That is one reason purple dyes were historically rare and expensive [13]."
-  },
-  {
-   "id": "words",
-   "title": "In words and in nomenclature",
-   "body": "Nineteenth-century naturalists used the stone as a standard of color. Syme's 1821 edition of Werner's nomenclature lists amethyst among the minerals that show Violet Purple, beside the sweet violet and the purple aster [10]. Baty's reproduction of the table sets mineral, plant and animal examples side by side, so amethyst appears next to fluorspar and the pansy [10].\n\nWriters used it for status as well as hue. In Huysmans's *A Rebours* the decadent Des Esseintes ranks amethyst among the vulgar stones, worn on the fingers of butchers' wives, and keeps only the sapphire above the crowd [9]. Therapists of color were less cynical. J. Dodson Hessey, quoted by Birren, held that amethyst light carries the stir of red and the tonic of blue together; Birren calls the enthusiasm of such claims excessive, and chromotherapy is not supported by evidence [11]. Jarman, in his pages on purple, sets Pliny's complaint about painters beside a note that amethyst is his own birthstone [17]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, none has a color within six units of this swatch covering as much as five per cent of the canvas, and none shows it at one per cent within four units [14]. A saturated mid-violet is simply absent as a broad passage of paint. That fits the pigment story: painters mixed their violets from blue and red and kept them dull or dark, and as photographed the museum collection holds almost no pure amethyst [14][13]. As always, these are photographs of aged, varnished paintings and a color match is not a pigment test [14].\n\nThe nearest names in our graph are Deep Lilac, Medium Purple and Deep Lavender, all within about five units, so a pale-purple search will land on one of them before it reaches amethyst [14]. In printed English the word is old and steady: the Google Books curve peaks around 1822 and has slowly sagged since, standing at under half of that peak in the 2000s [15]. Look for the color where the painters were not: in a mineral shop, a bishop's ring or a cut stone held up to a window."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the Greek word for 'not drunken' (the stone prevented intoxication)",
-   "first_recorded": "Maerz & Paul 1930 records 1572 for the color name; the stone is ancient",
-   "source": "Paterson, A Dictionary of Colour; ColorHub library"
-  },
-  "aka": [
-   "amethystine (adjective)",
-   "Oriental amethyst (old trade name for purple sapphire)"
+  "slug": "amethyst",
+  "name": "Amethyst",
+  "hex": "#9966CC",
+  "names": [
+    "Amethyst"
   ],
-  "siblings": [
-   "medium-purple",
-   "deep-lilac",
-   "deep-lavender"
+  "tier": "pigment",
+  "depth": "long",
+  "lede": "Amethyst is the violet-purple of a quartz crystal, a color word older than any pigment that tried to copy it, and one that painters seem never to have matched.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name and the swatch",
+      "body": "*Amethyst* comes from a Greek word meaning \"not drunken\": the stone was once credited with preventing intoxication [1]. As a color word it names the violet-purple of that quartz, and some dictionaries add a heraldic sense, purplish blue [1].\n\nThe swatch here, #9966CC, is the web-standard amethyst [2]. It is a clear mid-violet [2]. Our library records the name in Maerz & Paul's dictionary of 1930 with a first recorded use of 1572, and gives the nearest ISCC-NBS category as \"brilliant violet\" [2]. That is the oldest dated record we hold for it, though the gem is far older than the English word [2][5]. A lighter relative of this swatch is [[medium-purple]], and the family word is [[violet]]."
+    },
+    {
+      "id": "stone",
+      "title": "The stone",
+      "body": "Amethyst is a purple variety of quartz, silicon dioxide, and its color is attributed to iron impurities [3]. Pure quartz is colorless, and the same crystal family gives pink rose quartz, yellow citrine and grey-brown smoky quartz depending on what else is present [3].\n\nGem writers add that the purple comes from a color center made by natural radiation acting on iron, and that heating the stone past roughly 300 to 470 degrees Celsius breaks the center down and turns it yellow or orange [16]. Most commercial [[gem:citrine|citrine]] is made this way [16]. The stone itself is [[gem:amethyst|amethyst]], and ColorHub lists it as the exact twin of this swatch [16]. That heat-treated amethyst is the practical reason a yellow stone and a purple stone sit side by side in jewelers' trays."
+    },
+    {
+      "id": "pliny",
+      "title": "Pliny's rose and the medieval lapidaries",
+      "body": "Pliny compared the color of amethyst to the finest purple cloth, and the comparison traveled [5]. Isidore of Seville, Bede and Marbode of Rennes each described the stone in the following centuries, and by their account it had the hue of a dark rose [5]. A medieval reader who wanted to picture amethyst was therefore asked to picture something redder than the swatch above.\n\nThe ancient world's \"purple\" was itself a range. Greenfield notes that imperial purple took in scarlets and crimsons as well as amethyst and violet tones, and that dyers prized intensity and luster over exact hue [12]. Compare [[royal-purple]] and [[tyrian-purple]]. Pliny also lists amethyst-violet as one of the principal colors of his day [11]."
+    },
+    {
+      "id": "church",
+      "title": "Scripture, bishops and birthstones",
+      "body": "Amethyst is the last of the twelve foundation stones of the heavenly city in Revelation, though Finlay points out that the list reads more like a catalogue of the best seal stones than of the costliest ones [6]. The Hebrew breastplate list is less certain: Finlay's table offers amethyst as one possible reading for two of the stone names, Achlamath and Bereketh, which shows how loosely ancient gem words map onto modern minerals [7].\n\nLater habits were tidier. Bishops today often choose an amethyst ring over a sapphire, in part because the purple recalls communion wine and in part because the stone costs far less [8]. In the modern birthstone tables amethyst is for February, and in the anniversary list it marks the 33rd year [1][7]. South Carolina's state gem is amethyst [7]."
+    },
+    {
+      "id": "oriental",
+      "title": "Oriental amethyst",
+      "body": "Until about a hundred years ago, a purple corundum was sold as \"Oriental amethyst\", and for a long time it was worth more than diamond [8]. The name described the color and not the mineral, since the stone is a purple sapphire and not quartz [8]. In 1823 the gem-hunter John Mawe praised these stones for uniting the blue of sapphire with the red of ruby into a perfect violet [8].\n\nThe finest purple sapphires still come from Burma, Sri Lanka and Vietnam [8]. If a jeweler tells you a stone is oriental, the old word is a promise of rarity and not of quartz."
+    },
+    {
+      "id": "paint",
+      "title": "Not a pigment",
+      "body": "Amethyst never made a good paint. The Pigment Compendium says it is highly unlikely that amethyst was ground and used as a pigment, because grinding destroys the color [3]. The idea that it was comes from a misreading of Cennini, whose word *amatisto* or *amatito* is Thompson's hematite [3].\n\nWhere a painter's inventory does list a purple mineral, the likelier candidate is fluorite, a strongly colored purple spar that has probably been mistaken for amethyst in technical studies [4][3]. A violet stone and a violet paint are different problems, because purple objects must absorb a narrow band in the middle of the spectrum, which is physically hard to do [13]. That is one reason purple dyes were historically rare and expensive [13]."
+    },
+    {
+      "id": "words",
+      "title": "In words and in nomenclature",
+      "body": "Nineteenth-century naturalists used the stone as a standard of color. Syme's 1821 edition of Werner's nomenclature lists amethyst among the minerals that show Violet Purple, beside the sweet violet and the purple aster [10]. Baty's reproduction of the table sets mineral, plant and animal examples side by side, so amethyst appears next to fluorspar and the pansy [10].\n\nWriters used it for status as well as hue. In Huysmans's *A Rebours* the decadent Des Esseintes ranks amethyst among the vulgar stones, worn on the fingers of butchers' wives, and keeps only the sapphire above the crowd [9]. Therapists of color were less cynical. J. Dodson Hessey, quoted by Birren, held that amethyst light carries the stir of red and the tonic of blue together; Birren calls the enthusiasm of such claims excessive, and chromotherapy is not supported by evidence [11]. Jarman, in his pages on purple, sets Pliny's complaint about painters beside a note that amethyst is his own birthstone [17]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, none has a color within six units of this swatch covering as much as five per cent of the canvas, and none shows it at one per cent within four units [14]. A saturated mid-violet is simply absent as a broad passage of paint. That fits the pigment story: painters mixed their violets from blue and red and kept them dull or dark, and as photographed the museum collection holds almost no pure amethyst [14][13]. As always, these are photographs of aged, varnished paintings and a color match is not a pigment test [14].\n\nThe nearest names in our graph are Deep Lilac, Medium Purple and Deep Lavender, all within about five units, so a pale-purple search will land on one of them before it reaches amethyst [14]. In printed English the word is old and steady: the Google Books curve peaks around 1822 and has slowly sagged since, standing at under half of that peak in the 2000s [15]. Look for the color where the painters were not: in a mineral shop, a bishop's ring or a cut stone held up to a window."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "purple",
-    "gloss": "the family word; amethyst is the violet end, redder than royal purple"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "el",
-    "name": "amethystos (the root word)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#9966CC",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 0,
-  "ngram": {
-   "peak": 1822,
-   "rel_2000": 0.455,
-   "first_5pct": 1800
-  },
-  "measured": {
-   "lch": [
-    52.5,
-    60.7,
-    311.6
-   ],
-   "iscc": "brilliant violet (block 206, dE 8.8)",
-   "nearest": [
-    [
-     "Deep Lilac",
-     3.9
+  "aside": {
+    "origin": {
+      "named_after": "the Greek word for 'not drunken' (the stone prevented intoxication)",
+      "first_recorded": "Maerz & Paul 1930 records 1572 for the color name; the stone is ancient",
+      "source": "Paterson, A Dictionary of Colour; ColorHub library"
+    },
+    "aka": [
+      "amethystine (adjective)",
+      "Oriental amethyst (old trade name for purple sapphire)"
     ],
-    [
-     "Medium Purple",
-     4.3
+    "siblings": [
+      "medium-purple",
+      "middle-blue-purple",
+      "deep-lavender"
     ],
-    [
-     "Deep Lavender",
-     4.6
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "purple",
+        "gloss": "the family word; amethyst is the violet end, redder than royal purple"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "el",
+        "name": "amethystos (the root word)"
+      }
     ]
-   ]
   },
-  "twin_gem": "amethyst"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"amethyst\" and the birthstone list",
-   "loc_kind": "entry",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#9966CC",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 0,
+    "ngram": {
+      "peak": 1822,
+      "rel_2000": 0.455,
+      "first_5pct": 1800
+    },
+    "measured": {
+      "lch": [
+        52.5,
+        60.7,
+        311.6
+      ],
+      "iscc": "brilliant violet (block 206, dE 8.8)",
+      "nearest": [
+        [
+          "Deep Lilac",
+          3.9
+        ],
+        [
+          "Medium Purple",
+          4.3
+        ],
+        [
+          "Deep Lavender",
+          4.6
+        ]
+      ]
+    },
+    "twin_gem": "amethyst"
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub library: Amethyst, Maerz & Paul 1930, first recorded 1572; ISCC-NBS 1955 block 223",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Amethyst\" and \"Quartz\", pp. 24 and 328",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Fluorite\", p. 172",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 31",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, ch. 14",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, appendix lists (breastplate stones, anniversaries, state gems)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Finlay, Jewels: A Secret History, ch. 16 and its endnotes",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Batchelor, Chromophobia, ch. 3",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 104-108 (Syme's edition of Werner)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 14",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 7",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 13",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, 2026-10-08)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "data",
-   "cite": "Google Books Ngram, \"amethyst\", case-insensitive, 5-year smoothing",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "data",
-   "cite": "ColorHub gem notes (data/gems.js), Amethyst",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 71",
-   "loc_kind": "pdf-page",
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"amethyst\" and the birthstone list",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub library: Amethyst, Maerz & Paul 1930, first recorded 1572; ISCC-NBS 1955 block 223",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Amethyst\" and \"Quartz\", pp. 24 and 328",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Fluorite\", p. 172",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 31",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, ch. 14",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, appendix lists (breastplate stones, anniversaries, state gems)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Finlay, Jewels: A Secret History, ch. 16 and its endnotes",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Batchelor, Chromophobia, ch. 3",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 104-108 (Syme's edition of Werner)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 14",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 7",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 13",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, 2026-10-08)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "data",
+      "cite": "Google Books Ngram, \"amethyst\", case-insensitive, 5-year smoothing",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "data",
+      "cite": "ColorHub gem notes (data/gems.js), Amethyst",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 71",
+      "loc_kind": "pdf-page",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the Greek root behind the word amethyst mean?",
+      "choices": [
+        "Not drunken",
+        "Sea purple",
+        "Mountain flower",
+        "Royal"
+      ],
+      "answer": "Not drunken",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: ground amethyst was a common artist's pigment.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Why is a stone sold as an Oriental amethyst not quartz?",
+      "choices": [
+        "It is a purple sapphire",
+        "It is dyed glass",
+        "It is purple topaz",
+        "It is fluorite"
+      ],
+      "answer": "It is a purple sapphire",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Amethyst never worked as a paint: ground up, the stone loses its color.",
+    "Our archive of 23,781 paintings holds no broad passage in this violet.",
+    "Look for the color in a bishop's ring, then ask whether the stone is quartz or sapphire."
+  ],
+  "words": 1072,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsupported comparison of swatch with a fine cut stone.",
+      "Spot-checked Pliny, Gage, Finlay, Birren, Pigment Compendium claims against book text: supported."
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What does the Greek root behind the word amethyst mean?",
-   "choices": [
-    "Not drunken",
-    "Sea purple",
-    "Mountain flower",
-    "Royal"
-   ],
-   "answer": "Not drunken",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: ground amethyst was a common artist's pigment.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Why is a stone sold as an Oriental amethyst not quartz?",
-   "choices": [
-    "It is a purple sapphire",
-    "It is dyed glass",
-    "It is purple topaz",
-    "It is fluorite"
-   ],
-   "answer": "It is a purple sapphire",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Amethyst never worked as a paint: ground up, the stone loses its color.",
-  "Our archive of 23,781 paintings holds no broad passage in this violet.",
-  "Look for the color in a bishop's ring, then ask whether the stone is quartz or sapphire."
- ],
- "words": 1072,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsupported comparison of swatch with a fine cut stone.",
-   "Spot-checked Pliny, Gage, Finlay, Birren, Pigment Compendium claims against book text: supported."
-  ]
- }
 }

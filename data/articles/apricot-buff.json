@@ -29,7 +29,7 @@
     "siblings": [
       "yellowish-cinnamon",
       "pinkish-cinnamon",
-      "ochraceous-salmon"
+      "light-orange"
     ],
     "parent": "apricot",
     "children": [],
@@ -119,8 +119,8 @@
   ],
   "status": "checked",
   "checked": {
-    "by": "batch-writer",
-    "date": "2026-10-09",
+    "by": "checker",
+    "date": "2026-10-08",
     "issues": []
   },
   "slug": "apricot-buff",

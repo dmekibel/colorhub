@@ -1,0 +1,126 @@
+{
+ "name": "Pale Oak",
+ "hex": "#9BA88D",
+ "names": [
+  "Pale Oak"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pale Oak is an English translation of a traditional Japanese name, Aoshirotsurubami, a muted sage green named for an oak-dyed cloth.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Japanese dye word in English",
+   "body": "ColorHub's library carries this swatch under the working name Dusty Sage, with Aoshirotsurubami (青白橡, \"pale oak\") listed as its Japanese source name [1]. *Tsurubami* names dye from acorns and oak bark, a staple of old Japanese textile dyeing, and *ao-shiro* (\"blue-white\") marks this as the paler, cooler member of the tsurubami family [1]. ColorHub's English title translates that name directly rather than keeping the Japanese word as the headline, in line with the library's English-first naming rule [1]. A deeper tsurubami, without the ao-shiro qualifier, would read as a warmer, darker oak-bark brown rather than this cool pale green [1].\n\nThe nearest everyday name on file is [[sage]], about 4.2 units of ΔE away [1]. [[moss]], [[fern-green|Fern Green]] and [[khaki]] sit in the same muted-green family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Pale Oak in 503 of 23,781 paintings (2.12 percent), as photographed, mostly as a highlight [2]. It peaks in the 1940s, in 5 of 28 paintings, at over eight times the archive's overall rate for that decade, and it is strongly over-represented in Impressionist painting, more than five times the archive average [2]. It keeps company with Sage, Viridian and Ash more than chance [2]. These are screen approximations of aged, varnished canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "tsurubami (oak-bark dye); ao-shiro means \"blue-white\" (pale)",
+   "first_recorded": "undocumented date; a traditional Japanese dye name",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Dusty Sage",
+   "Aoshirotsurubami"
+  ],
+  "siblings": [
+   "sage",
+   "moss",
+   "fern-green",
+   "khaki"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Aoshirotsurubami (青白橡)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 503,
+  "role": {
+   "highlight": 0.73,
+   "mid": 0.25,
+   "shadow": 0.02
+  },
+  "company": [
+   "Sage",
+   "Viridian",
+   "Ash"
+  ],
+  "measured": {
+   "lch": [
+    67,
+    16,
+    128
+   ],
+   "nearest": [
+    [
+     "Sage",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does tsurubami, the root of Pale Oak's Japanese name, refer to?",
+   "choices": [
+    "Acorn and oak-bark dye",
+    "A shade of imperial silk",
+    "A type of jade",
+    "A seaweed pigment"
+   ],
+   "answer": "Acorn and oak-bark dye",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Oak's English name is a direct translation of its Japanese source name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Oak's English name translates a Japanese oak-bark dye word, Aoshirotsurubami."
+ ],
+ "words": 225,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "pale-oak"
+}

@@ -1,0 +1,126 @@
+{
+  "slug": "seafoam-teal",
+  "name": "Seafoam teal",
+  "hex": "#8DD9CC",
+  "names": [
+    "Seafoam teal"
+  ],
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Seafoam Teal is a light, blue-green named for the foam on breaking waves, built by crossing the seafoam family of names with teal, though no source we checked explains who paired the two.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Foam plus teal",
+      "body": "\"Seafoam\" in color naming is not the clear white froth itself but a pale green-tinted white, the tint the foam picks up from shallow water over sand or algae [1]. Our library lists a related, unrelated-hex entry called plain \"Seafoam,\" filed by the 1955 ISCC-NBS system at block 140 and the 1930 Maerz and Paul dictionary, first recorded there in 1920 [2]. Seafoam Teal itself is a separate, Wikipedia-sourced crowd-list entry with no comparable paper trail of its own [1].\n\nBy our look-alike data the nearest color is [[nile-blue|Nile Blue]], 4.6 units away and read as darker and duller, with [[light-sulphate-green|Pale Teal]] close behind at 5.7, read as greener and darker [3]. It also carries a long \"also known as\" list in our library, including Middle Blue Green and Light Turquoise Green, names other lists use for close variants [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this exact blue-green in 7 of 23,781 paintings, as photographed [4]. The strongest match is an 1847 ship portrait, *Ship \"Arkansas\" Leaving Havana* by A. Hashagen, where it covers 58 percent of the canvas, and the earliest is Canaletto's *A Lock, a Column, and a Church beside a Lagoon* (1717), at 23 percent [4]. Italy carries the largest disproportionate share, 3 of its hits against a base of 1,986 Italian paintings in the archive [4]. The sample is thin enough that no century or painter pattern is reliable beyond noting the color's presence in Venetian lagoon scenes [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "sea foam, crossed with the color teal; the pairing itself is undocumented",
+      "first_recorded": "undocumented for this exact compound name",
+      "source": "ColorHub color library; Wikipedia"
+    },
+    "aka": [
+      "Middle Blue Green",
+      "Light Turquoise Green"
+    ],
+    "siblings": [
+      "nile-blue",
+      "light-sulphate-green",
+      "seafoam",
+      "light-teal"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 7,
+    "measured": {
+      "lch": [
+        81.6,
+        26.4,
+        182.3
+      ],
+      "nearest": [
+        [
+          "Nile Blue",
+          4.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Wikipedia-sourced crowd list entry, Seafoam teal",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: Seafoam entry, ISCC-NBS 1955 block 140; Maerz & Paul 1930, first recorded 1920",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph, look-alike edges (data/graph/edges-s.json, edges-n.json, edges-p.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does \"seafoam\" refer to in color naming, as distinct from a plain white froth?",
+      "choices": [
+        "A pale, green-tinted white, the tint foam picks up over shallow water",
+        "A bright turquoise used only in swimwear design",
+        "The color of deep-ocean water at night",
+        "A pigment made from ground sea coral"
+      ],
+      "answer": "A pale, green-tinted white, the tint foam picks up over shallow water",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: a documented source explains who first paired \"seafoam\" with \"teal\" for this name.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Seafoam Teal's most reliable archive sighting is a Venetian lagoon, which fits a name built from water and foam."
+  ],
+  "words": 269,
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-09",
+    "issues": [
+      "Plain 'Seafoam' and 'Seafoam Teal' are different library entries with different hexes; kept separate and not conflated.",
+      "Archive sample of 7 is too thin for a strong geographic claim beyond noting Venetian subjects."
+    ]
+  }
+}

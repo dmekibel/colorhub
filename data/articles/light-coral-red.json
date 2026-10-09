@@ -1,0 +1,131 @@
+{
+ "slug": "light-coral-red",
+ "name": "Light Coral Red",
+ "hex": "#EE7767",
+ "names": [
+  "Light Coral Red"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Coral Red is a vivid salmon-pink from Ridgway's 1912 atlas, filed again by name in the 1955 ISCC-NBS dictionary, close on screen to both Bittersweet and Salmon.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Ridgway tone, vivid and warm",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate XIII, hue 5′, tone b [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Coral Red\" under block 35, \"strong reddish orange\" [2]. The name builds \"light\" onto [[coral-red]], after the pink-to-red tones found in reef coral [1].\n\nIn our color library its closest neighbors are [[bittersweet]] and [[salmon]], both about 3.1 units away, close enough to pass for the same color [3]. [[terracotta]] sits 3.4 units off, also nearly indistinguishable, and Bright Terracotta 3.6 units off, more vivid [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings matches this tone in 27 of them, about 0.11 percent, as photographed, rarer than 60 percent of the named colors we track [4]. It peaks in the 1500s, present in 5 of the 2,231 paintings from that century, 2.0 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays an accent, in 71 percent of its 21 clearly-ranked appearances [4]. The earliest dated match is 1236, 676 years before the name's first 1912 record, so this is a look-alike hue in an old photograph, not proof of the name's age [4]. The archive's early centuries are thin, so this is a floor, not a first. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"light\" plus [[coral-red]], after reef coral",
+   "first_recorded": "1912 (Ridgway, plate XIII); carried into the 1955 ISCC-NBS dictionary, block 35",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "bittersweet",
+   "salmon",
+   "terracotta"
+  ],
+  "parent": "coral-red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 27,
+  "measured": {
+   "lch": [
+    63.6,
+    53.7,
+    34.2
+   ],
+   "nearest": [
+    [
+     "Bittersweet",
+     3.1
+    ],
+    [
+     "Salmon",
+     3.1
+    ],
+    [
+     "Terracotta",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XIII, hue 5′, tone b",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ISCC-NBS, NBS Circular 553 (1955), block 35, \"Light Coral Red\" (data/sources/iscc-nbs-names.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1955 ISCC-NBS dictionary block files Light Coral Red?",
+   "choices": [
+    "Block 35",
+    "Block 45",
+    "Block 101",
+    "Block 210"
+   ],
+   "answer": "Block 35",
+   "kind": "pick"
+  },
+  {
+   "q": "Light Coral Red's name points to which natural source?",
+   "choices": [
+    "Reef coral",
+    "A flower",
+    "A mineral",
+    "A dye plant"
+   ],
+   "answer": "Reef coral",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "On screen, Light Coral Red sits close enough to both Bittersweet and Salmon to pass for either."
+ ],
+ "words": 256,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

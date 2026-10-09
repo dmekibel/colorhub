@@ -1,0 +1,122 @@
+{
+ "slug": "reed-yellow",
+ "name": "Reed Yellow",
+ "hex": "#DEC67F",
+ "names": [
+  "Reed Yellow"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Reed Yellow is a warm, muted gold, named for the plant and recorded as early as 1530 by Maerz and Paul.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old name for a warm gold",
+   "body": "Maerz and Paul's 1930 dictionary gives Reed Yellow a first recorded date of 1530, at plate 11 E 2, far earlier than most names in our library [1]. Ridgway's 1912 nomenclature separately places it at plate XXX, hue 23'', tone b, and the ISCC-NBS system of 1955 files it as block 101, a light greenish yellow [1]. Werner's 1821 nomenclature, which ties each color to natural comparisons, pairs this hue with the body of the silk moth, white currants and Saxon topaz [1].\n\nThe nearest named color is [[sunbeam|Sunbeam]], 2.5 units away and a shade brighter; [[baryta-yellow|Baryta Yellow]] sits 2.8 units off, paler [2]. [[maple|Maple]] is 3.5 units away, and [[colonial-buff|Colonial Buff]] is 3.7 units off [2]. In LCH terms Reed Yellow measures lightness 80, chroma 39, hue 92 degrees [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Reed Yellow in 991 of 23,781 paintings, 4.17 percent, as photographed, more common than 87 percent of the archive's named colors [3]. It peaks in the 1400s, in 35 of 945 paintings, at 1.2 times the expected rate for that century, and Adolphe Joseph Thomas Monticelli is its most devoted painter, present in 5 of his 22 works here at 4.1 times his baseline [3]. It most often turns up as an accent, in 52 percent of its paintings, rather than as a shadow [3]. The earliest match is dated 1230, five hundred ninety-one years before Werner's 1821 record of the name — a look-alike hue in an aged photograph, not proof of the dye or pigment itself, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "reed, the marsh plant",
+   "first_recorded": "1530, per Maerz and Paul",
+   "source": "ColorHub color library, computed from Ridgway 1912, Werner 1821, ISCC-NBS 1955 and Maerz and Paul 1930"
+  },
+  "aka": [
+   "Wine Yellow",
+   "Prairie Gold"
+  ],
+  "siblings": [
+   "sunbeam",
+   "baryta-yellow",
+   "maple",
+   "colonial-buff"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 991,
+  "measured": {
+   "lch": [
+    80,
+    39,
+    92
+   ],
+   "nearest": [
+    [
+     "Sunbeam",
+     2.5
+    ],
+    [
+     "Baryta Yellow",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930 plate 11 E 2, Ridgway 1912 plate XXX hue 23'', Werner 1821 no. 72, ISCC-NBS 1955 block 101",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed ISCC-NBS block, Munsell notation and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 dictionary gives Reed Yellow its earliest recorded date, 1530?",
+   "choices": [
+    "Maerz and Paul",
+    "Ridgway",
+    "Munsell",
+    "Pantone"
+   ],
+   "answer": "Maerz and Paul",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Werner's 1821 nomenclature pairs Reed Yellow with natural comparisons like the silk moth and Saxon topaz.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reed Yellow is paired, in Werner's 1821 nomenclature, with the body of the silk moth and a Saxon topaz."
+ ],
+ "words": 284,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "slug": "reed-green",
+ "name": "Reed Green",
+ "hex": "#797C5A",
+ "names": [
+  "Reed Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Reed Green is a muted olive, named for the marsh plant, recorded by Ridgway in 1912 and matched today by the paint standard RAL 6013.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A reed-colored olive",
+   "body": "Ridgway's 1912 nomenclature places this hue at plate XVII, hue 25', tone k, and Maerz and Paul's 1930 dictionary gives a first recorded date of 1892, at plate 19 D 2 [1]. The ISCC-NBS system of 1955 files it as block 119, a light yellow green, and the German paint standard RAL lists a close approximation as RAL 6013 [1]. ColorHub's data ties the name to reed, the marsh plant, though the books consulted do not spell out the connection in full [2].\n\nThe nearest named color is [[kronberg-s-green|Kronberg's Green]], 2.7 units away and a touch yellower; [[yellowish-olive|Yellowish Olive]] sits 4.7 units off [2]. [[pois-green|Pois Green]], another muted green in this same wave of names, is 5.7 units away [2]. In LCH terms Reed Green measures lightness 51, chroma 20, hue 111 degrees [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Reed Green in 1,104 of 23,781 paintings, 4.64 percent, as photographed, more common than 85 percent of the archive's named colors [3]. Peter Snayers is its most devoted painter, present in 5 of his 16 works here at 6.2 times his baseline, and it peaks in the 1900s, in 74 of 1,674 paintings, at 1.8 times the expected rate [3]. It most often turns up as a hidden color, tucked into shadow, in 38 percent of its paintings [3]. The earliest match is dated 916, nine hundred ninety-six years before Ridgway's 1912 record of the name — a look-alike hue in an aged photograph, not proof of the pigment itself, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "reed, the marsh plant",
+   "first_recorded": "1892, per Maerz and Paul",
+   "source": "ColorHub color library, computed from Ridgway 1912, ISCC-NBS 1955 and Maerz and Paul 1930"
+  },
+  "aka": [
+   "Light Hellebore Green"
+  ],
+  "siblings": [
+   "kronberg-s-green",
+   "yellowish-olive",
+   "pois-green",
+   "baiko-brown"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1104,
+  "measured": {
+   "lch": [
+    51,
+    20,
+    111
+   ],
+   "nearest": [
+    [
+     "Kronberg's Green",
+     2.7
+    ],
+    [
+     "Yellowish Olive",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate XVII hue 25', RAL 6013, ISCC-NBS 1955 block 119, Maerz and Paul 1930 plate 19 D 2",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed ISCC-NBS block, Munsell notation and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plant gives Reed Green its name?",
+   "choices": [
+    "Reed",
+    "Fern",
+    "Moss",
+    "Bamboo"
+   ],
+   "answer": "Reed",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Reed Green most often appears as a bright highlight in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reed Green is close enough to the paint standard RAL 6013 to be mistaken for it."
+ ],
+ "words": 284,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,126 @@
+{
+ "slug": "dusty-cerise",
+ "name": "Dusty cerise",
+ "hex": "#DB5A6B",
+ "names": [
+  "Dusty cerise"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty cerise is a deep, warm pink, ColorHub's English name for the Japanese traditional color Kobai-iro, \"red plum colored,\" named for a flowering tree rather than the cherry its English name suggests.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of red plum blossom",
+   "body": "Kobai-iro (紅梅色) is named in the Wikipedia list of Japan's traditional colors for \"red plum colored,\" after the red-flowering plum, not the cherry fruit that the English word cerise, French for cherry, points to here [1]. The page gives no further history for the name beyond that literal meaning, and it is undocumented in the sources consulted here [1].\n\nIts nearest named neighbor on file is [[mayflower]], 3.0 units off [2]; [[carmine-red]] sits 4.0 off, almost the same pink from an entirely different source."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in only 7 of 23,781 paintings, 0.03 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 4 [3]. That makes it rarer than 77 percent of the named colors in our library, a genuinely scarce match [3]. These are computed color matches to photographed, varnished paintings, not pigment identifications; a color this saturated and specific rarely survives the aging and varnishing that most of our archive has been through [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Kobai-iro, \"red plum colored\", after red-flowering plum blossom",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Kobai-iro"
+  ],
+  "siblings": [
+   "mayflower",
+   "carmine-red",
+   "paradise-pink",
+   "indian-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kobai-iro (紅梅色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "n_within_painting": 4,
+  "pct_archive": 0.03,
+  "rank_pct": 77,
+  "measured": {
+   "lch": [
+    56,
+    55,
+    18
+   ],
+   "nearest": [
+    [
+     "Mayflower",
+     3.0
+    ],
+    [
+     "Carmine Red",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Kobai-iro name this color after?",
+   "choices": [
+    "Red-flowering plum blossom",
+    "Cherry fruit",
+    "Autumn maple leaves"
+   ],
+   "answer": "Red-flowering plum blossom",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this is a common color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named cerise, for cherry, but the Japanese source names it for plum blossom instead."
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,145 +1,145 @@
 {
- "slug": "deep-neutral-grey",
- "name": "Deep Neutral Grey",
- "hex": "#626863",
- "names": [
-  "Deep Neutral Grey"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Deep Neutral Grey is a true, hueless mid-dark grey from Ridgway's 1912 chart, one of the common colors in our painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A grey with no hue at all",
-   "body": "Ridgway's 1912 plate LIII gives this hue the name Deep Neutral Grey, hue 73, tone i, and the ISCC-NBS system of 1955 files the nearest category as \"grayish green\" in its block 266, even though Ridgway himself called it neutral [1]. The Munsell notation, N 4.3, carries no hue step at all: a neutral grey is defined by having essentially none, unlike the many Ridgway greys that lean warm or cool [1]. A slightly lighter [[dark-neutral-grey]] sits just above it on the same chart [1].\n\nIn LCH terms it measures lightness 43, chroma 4, hue 149 degrees, a hue angle too faint to read by eye [1]. Its closest match in the library is [[deep-mouse-grey]], about 3.0 CIEDE2000 units away [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 1,256 of our 23,781 archive paintings, about 5.3 percent, one of the more common colors we track [4]. It peaks in the 1930s, in 5 of 69 paintings, at 3.0 times the overall rate, and is most loved by Childe Hassam, in five of his thirteen paintings here, and Henri Matisse, in fourteen of his fifty; it most often plays a mid-tone, in 57 percent of its appearances [4].\n\nThe earliest dated match in the archive is *The Kill*, from the year 300 BC, twenty-two centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Ridgway's own neutral-series naming; a grey with no hue step",
-   "first_recorded": "1912, Ridgway, plate LIII",
-   "source": "ColorHub color library; Ridgway, Color Standards and Color Nomenclature (1912)"
-  },
-  "aka": [],
-  "siblings": [
-   "dark-neutral-grey",
-   "dark-plumbeous",
-   "slate-grey"
+  "slug": "deep-neutral-grey",
+  "name": "Deep Neutral Grey",
+  "hex": "#626863",
+  "names": [
+    "Deep Neutral Grey"
   ],
-  "parent": "dark-neutral-grey",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#626863",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 1256,
-  "painters": [
-   {
-    "name": "Henri Matisse",
-    "hits": 14,
-    "of": 50,
-    "lift": 5.3
-   },
-   {
-    "name": "Childe Hassam",
-    "hits": 5,
-    "of": 13,
-    "lift": 7.28
-   }
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Deep Neutral Grey is a true, hueless mid-dark grey from Ridgway's 1912 chart, one of the common colors in our painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A grey with no hue at all",
+      "body": "Ridgway's 1912 plate LIII gives this hue the name Deep Neutral Grey, hue 73, tone i, and the ISCC-NBS system of 1955 files the nearest category as \"grayish green\" in its block 266, even though Ridgway himself called it neutral [1]. The Munsell notation, N 4.3, carries no hue step at all: a neutral grey is defined by having essentially none, unlike the many Ridgway greys that lean warm or cool [1]. A slightly lighter [[dark-neutral-grey]] sits just above it on the same chart [1].\n\nIn LCH terms it measures lightness 43, chroma 4, hue 149 degrees, a hue angle too faint to read by eye [1]. Its closest match in the library is [[deep-mouse-grey]], about 3.0 CIEDE2000 units away [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 1,256 of our 23,781 archive paintings, about 5.3 percent, one of the more common colors we track [4]. It peaks in the 1930s, in 5 of 69 paintings, at 3.0 times the overall rate, and is most loved by Childe Hassam, in five of his thirteen paintings here, and Henri Matisse, in fourteen of his fifty; it most often plays a mid-tone, in 57 percent of its appearances [4].\n\nThe earliest dated match in the archive is *The Kill*, from the year 300 BC, twenty-two centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+    }
   ],
-  "peak_decade": {
-   "decade": 1930,
-   "lift": 3.02
+  "aside": {
+    "origin": {
+      "named_after": "Ridgway's own neutral-series naming; a grey with no hue step",
+      "first_recorded": "1912, Ridgway, plate LIII",
+      "source": "ColorHub color library; Ridgway, Color Standards and Color Nomenclature (1912)"
+    },
+    "aka": [],
+    "siblings": [
+      "dark-neutral-grey",
+      "slate-grey",
+      "quartz-grey"
+    ],
+    "parent": "dark-neutral-grey",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "role": "mid",
-  "measured": {
-   "lch": [
-    43,
-    4,
-    149
-   ],
-   "nearest": [
-    [
-     "Deep Mouse Grey",
-     3.0
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#626863",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 1256,
+    "painters": [
+      {
+        "name": "Henri Matisse",
+        "hits": 14,
+        "of": 50,
+        "lift": 5.3
+      },
+      {
+        "name": "Childe Hassam",
+        "hits": 5,
+        "of": 13,
+        "lift": 7.28
+      }
+    ],
+    "peak_decade": {
+      "decade": 1930,
+      "lift": 3.02
+    },
+    "role": "mid",
+    "measured": {
+      "lch": [
+        43,
+        4,
+        149
+      ],
+      "nearest": [
+        [
+          "Deep Mouse Grey",
+          3.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate LIII, hue 73, tone i; ISCC-NBS, NBS Circular 553 (1955), block 266",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "Color-kb concordance of the 29 color books for this name: no hits",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What makes a grey \"neutral\" in the Munsell system Ridgway used?",
+      "choices": [
+        "It carries essentially no hue step",
+        "It is the lightest possible grey",
+        "It is mixed from black and white paint only",
+        "It matches a specific mineral"
+      ],
+      "answer": "It carries essentially no hue step",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Deep Neutral Grey is one of the rarer colors in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A grey with no hue step at all, by the system's own definition."
+  ],
+  "words": 286,
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate LIII, hue 73, tone i; ISCC-NBS, NBS Circular 553 (1955), block 266",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "Color-kb concordance of the 29 color books for this name: no hits",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What makes a grey \"neutral\" in the Munsell system Ridgway used?",
-   "choices": [
-    "It carries essentially no hue step",
-    "It is the lightest possible grey",
-    "It is mixed from black and white paint only",
-    "It matches a specific mineral"
-   ],
-   "answer": "It carries essentially no hue step",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Deep Neutral Grey is one of the rarer colors in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A grey with no hue step at all, by the system's own definition."
- ],
- "words": 286,
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

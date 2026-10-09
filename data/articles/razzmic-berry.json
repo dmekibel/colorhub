@@ -1,0 +1,117 @@
+{
+  "slug": "razzmic-berry",
+  "name": "Razzmic Berry",
+  "hex": "#8D4E85",
+  "names": [
+    "Razzmic Berry"
+  ],
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Razzmic Berry is a dusty wine purple, named with the generic \"berry\" fruit suffix rather than any one named fruit.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A berry name without a named berry",
+      "body": "Our only source for this entry is Wikipedia, which gives the hex value and the \"berry\" ending but does not say which berry, if any, the color is meant to recall [1]. \"Razzmic\" plays on \"raspberry\" by sound, but that link is not confirmed in the sources here [1]. The color sits near enough to several other names that our library lists them as close matches from other systems: Patricia, an ISCC-NBS name via Maerz and Paul first recorded in 1924, and Phlox Purple, first recorded in 1886 [1].\n\nIts nearest named neighbor is [[plum]], 2.5 units away and more vivid [2]. [[razzmic-berry]] sits almost the same shade, just 3.3 units off, and the library's own near-duplicate crowd name, \"Purplish\", is closer still at 0.9 units [1][2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive matches this color across even a small share of its canvas, as photographed [3]. That absence describes this archive, not painting generally; a muted purple like this is exactly the kind of color varnish and fading can shift away from a match [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a generic berry, unspecified",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Purplish"
+    ],
+    "siblings": [
+      "plum",
+      "razzmic-berry",
+      "nuremberg-violet",
+      "violet-crayola",
+      "dull-magenta-purple"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "nearest": [
+        [
+          "Plum",
+          2.5
+        ]
+      ]
+    },
+    "iscc_nbs": {
+      "name": "moderate reddish purple",
+      "de2000": 4.5
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: library entry and near-duplicate names (ISCC-NBS via Maerz & Paul 1930, xkcd 2010)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which berry does \"Razzmic Berry\" name?",
+      "choices": [
+        "None in particular; the sources do not specify one",
+        "Raspberry, confirmed by our sources",
+        "Blackberry",
+        "Elderberry"
+      ],
+      "answer": "None in particular; the sources do not specify one",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: an ISCC-NBS name called \"Phlox Purple\" sits close to this same hex, first recorded in 1886.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Razzmic Berry sounds like raspberry, but no source here confirms which berry, if any, it is named for."
+  ],
+  "words": 194,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "The raspberry sound-alike is noted as unconfirmed rather than stated as fact."
+    ]
+  }
+}

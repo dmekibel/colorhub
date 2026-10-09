@@ -1,0 +1,112 @@
+{
+ "slug": "deep-soft-blue-violet",
+ "name": "Deep Soft Blue-Violet",
+ "hex": "#6766A1",
+ "names": [
+  "Deep Soft Blue-Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Deep Soft Blue-Violet is a muted, darkened reading of [[blue-violet]], from Ridgway's 1912 plates and filed again in the 1955 ISCC-NBS system.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two modifiers at once",
+   "body": "The name stacks two modifiers, *deep* and *soft*, on the base color [[blue-violet]]; \"soft\" in this library grammar marks a lower chroma than the plain name, and \"deep\" marks a lower lightness [1]. Ridgway's 1912 plate XXIII, hue 55′, tone i, is the recorded source, and the ISCC-NBS system of 1955 later filed the same chip into block 200, named moderate purplish blue in that system's own list [1].\n\nIts closest look-alike is [[greyish-violet-blue]], about 3.4 units off, with its own near-twin [[deep-soft-bluish-violet]] equally close [2]. [[sailor-blue]] and [[gentian-blue]] sit a little further out [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 0.05% of the 23,781 paintings in our archive (12 paintings, as photographed); the within-painting lens narrows that to 3 [3]. In our archive it is rarer than 79% of the named colors [3]. Inside a painting it most often plays a shadow, in 33% of its 3 appearances by lightness rank within the painting [3]. The earliest match dates to 1517, 395 years before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "two stacked modifiers, deep and soft, on the base color blue-violet",
+   "first_recorded": "Ridgway 1912, plate XXIII",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "greyish-violet-blue",
+   "sailor-blue",
+   "gentian-blue"
+  ],
+  "parent": "blue-violet",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "deep-soft-bluish-violet",
+    "gloss": "a separately named near-twin, about 3.4 units away"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 12,
+  "pct_archive": 0.05,
+  "n_within_painting": 3,
+  "pct_within_painting": 0.01,
+  "rank_pct": 21,
+  "name_first_recorded": 1912,
+  "earliest_match_year": 1517
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXIII; ISCC-NBS Circular 553 (1955), block 200",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,700 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which two modifiers does the name Deep Soft Blue-Violet stack on its base color?",
+   "choices": [
+    "Deep and soft",
+    "Dark and pale",
+    "Dusty and bright",
+    "Light and vivid"
+   ],
+   "answer": "Deep and soft",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this exact color turns up often in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Soft Blue-Violet stacks two modifiers on one base color, and almost never turns up in a real painting."
+ ],
+ "words": 241,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
+  ]
+ }
+}

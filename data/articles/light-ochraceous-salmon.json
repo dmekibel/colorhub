@@ -1,0 +1,158 @@
+{
+  "slug": "light-ochraceous-salmon",
+  "name": "Light Ochraceous-Salmon",
+  "hex": "#EEBA92",
+  "names": [
+    "Light Ochraceous-Salmon"
+  ],
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Ochraceous-Salmon pales [[light-orange]], a Ridgway compound joining *ochraceous* (ochre-colored) to *salmon*, and is one painter's favorite peachy tone.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Ochre plus salmon",
+      "body": "The base name [[light-orange]] joins *ochraceous*, meaning ochre-colored, to *salmon*, the pink of the fish's flesh; this compound simply adds the modifier *light* [1]. It is first recorded in Robert Ridgway's 1912 *Color Standards and Nomenclature*, plate XV, hue 13', tone d, a scan of an aged plate and so an approximation [1]. The ISCC-NBS lists of 1955 file the same range as block 73, \"pale orange yellow,\" a Delta-E of 5.4 away [1]. Nearest on file is [[sugar-cane]] at 3.2 units, with [[macaroni-and-cheese]] and [[peach]] close behind [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this tone, as photographed, in 448 of 23,781 paintings, 1.88 percent, more common than 73 percent of our named colors; within a single canvas it is a distinct area in 230 of them [2]. Pierre Puvis de Chavannes is its most devoted painter, using it in 5 of 25 works here, 6.4 times the baseline rate of the museums those paintings come from [2]. It is also most over-represented in Indian paintings in our data, 3.5 times expected, and inside a painting it most often plays a light, in 63 percent of its 230 appearances [2]. The earliest dated match is from the year 1000, 912 years before Ridgway's 1912 record; the archive's early centuries are thin, so this is a floor, not a first [2]. It shares canvases with [[antique-brass]] more often than chance, a lift of 8.5 [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the modifiers light and ochraceous applied to the base color salmon",
+      "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature, plate XV)",
+      "source": "Ridgway, Color Standards and Nomenclature"
+    },
+    "aka": [],
+    "siblings": [
+      "sugar-cane",
+      "macaroni-and-cheese",
+      "peach",
+      "dusty-peach"
+    ],
+    "parent": "light-orange",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 230,
+    "measured": {
+      "lch": [
+        79.3,
+        30.6,
+        63.8
+      ],
+      "nearest_iscc": [
+        "pale orange yellow",
+        5.4
+      ],
+      "nearest": [
+        [
+          "Sugar Cane",
+          3.2
+        ],
+        [
+          "Macaroni and Cheese",
+          4.0
+        ],
+        [
+          "Peach",
+          4.1
+        ],
+        [
+          "Dusty Peach",
+          4.3
+        ]
+      ]
+    },
+    "role_top": {
+      "role": "light",
+      "pct": 63
+    },
+    "painter": {
+      "name": "Pierre Puvis de Chavannes",
+      "n": 5,
+      "of": 25,
+      "lift": 6.4
+    },
+    "country": {
+      "name": "India",
+      "lift": 3.5,
+      "n": 24,
+      "of": 721
+    },
+    "first_seen": {
+      "year": 1000,
+      "years_before_record": 912
+    },
+    "company": {
+      "with": "Antique Brass",
+      "lift": 8.5,
+      "n": 44
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate XV, hue 13'",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the \"ochraceous\" in Light Ochraceous-Salmon's parent name mean?",
+      "choices": [
+        "Ochre-colored",
+        "Ocean-colored",
+        "Autumn-colored",
+        "Oak-colored"
+      ],
+      "answer": "Ochre-colored",
+      "kind": "pick"
+    },
+    {
+      "q": "Which painter in our archive reaches for this tone far more than his peers?",
+      "choices": [
+        "Pierre Puvis de Chavannes",
+        "John Singer Sargent",
+        "Claude Monet",
+        "Albrecht Dürer"
+      ],
+      "answer": "Pierre Puvis de Chavannes",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Ridgway's 1912 plate is the earliest appearance of this color anywhere.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "One painter reaches for this peachy tone over six times as often as his peers."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
+  },
+  "words": 255
+}

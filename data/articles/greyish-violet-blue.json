@@ -1,0 +1,130 @@
+{
+ "slug": "greyish-violet-blue",
+ "name": "Greyish Violet-Blue",
+ "hex": "#5D6594",
+ "names": [
+  "Greyish Violet-Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Greyish Violet-Blue is a muted, slate-leaning blue named by modifier grammar as greyish plus [[violet-blue]], placed on Ridgway's 1912 color plates and filed in the ISCC-NBS dictionary of 1955 under its American spelling, Grayish Violet-Blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Greyish, plus violet-blue",
+   "body": "Robert Ridgway, an American ornithologist, gave this hue plate XXIV, hue 53*, tone i, in his 1912 *Color Standards and Color Nomenclature*, a scan of an aged printed page and so only approximate [1]. The ISCC-NBS dictionary of 1955 later filed the same hue, spelled the American way as Grayish Violet-Blue, at block 211 [1][2].\n\nThe nearest named look-alikes on file are [[sailor-blue|Sailor Blue]], more vivid, and [[deep-soft-blue-violet|Deep Soft Blue-Violet]], also more vivid [3]. [[azure-blue|Azure Blue]] sits further off, duller and bluer [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, 73 paintings carry a color close enough to this one over enough of their canvas to count, 0.31 per cent, as photographed, rarer than 59 per cent of our named colors [4]. Inside a painting it most often plays an accent, by lightness rank, in 50 per cent of the 24 paintings where that lens applies, so varnish cannot fake the reading [4].\n\nIt peaks in the 1900s, found in 0.5 per cent of the 1,674 paintings we have from that century (9 paintings), 3.4 times the expected rate [4]. The earliest match is dated 1420, in a work attributed to Fra Angelico, though the archive's thin early centuries make that a floor on when the hue appears, not a first sighting, and 492 years before Ridgway's 1912 record of the name [4]. These are photographs of aged, varnished paintings, read as screen colors, not pigment matches [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "greyish + violet-blue (modifier grammar)",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXIV, hue 53*",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Grayish Violet-Blue"
+  ],
+  "siblings": [
+   "sailor-blue",
+   "deep-soft-blue-violet",
+   "azure-blue"
+  ],
+  "parent": "violet-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 73,
+  "role": {
+   "accent": 0.5
+  },
+  "measured": {
+   "lch": [
+    43.9,
+    28.2,
+    288.7
+   ],
+   "nearest": [
+    [
+     "Sailor Blue",
+     2.7
+    ],
+    [
+     "Deep Soft Blue-Violet",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-g.json): Ridgway 1912, plate XXIV, hue 53*, tone i",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub sources: ISCC-NBS 1955 filing list (data/sources/iscc-nbs-names.json), block 211, \"Grayish Violet-Blue\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-g.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 source first placed this hue on a numbered plate?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Maerz and Paul's A Dictionary of Color",
+    "Paterson's A Dictionary of Colour",
+    "A Crayola crayon box"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the ISCC-NBS dictionary of 1955 spells this name exactly as Greyish Violet-Blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The British-spelled Greyish Violet-Blue and the ISCC-NBS dictionary's American Grayish Violet-Blue are the same 1955 filing."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); written from ColorHub graph/library data and the ISCC-NBS/Ridgway source files, no book sources."
+  ]
+ },
+ "words": 267
+}

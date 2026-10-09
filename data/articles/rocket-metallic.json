@@ -1,0 +1,109 @@
+{
+ "slug": "rocket-metallic",
+ "name": "Rocket Metallic",
+ "hex": "#8A7F80",
+ "names": [
+  "Rocket Metallic"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Rocket Metallic is a muted reddish grey from a web color list, close to several names the ISCC-NBS system filed independently in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web-list name with ISCC-NBS neighbors",
+   "body": "The ColorHub library records Rocket Metallic from Wikipedia's running list of named colors [1]. No book consulted here, and no reliable institutional source found online, confirms who coined the name or why; low-quality color-aggregator sites offer only vague, unsourced guesses, so the origin is left undocumented rather than repeated [1]. The hex #8A7F80 is a screen approximation of a warm, muted grey, close to [[taupe-grey]], about 3.2 units away in LCH space [1].\n\nSeveral names from the 1955 ISCC-NBS system sit within its block 22: Al Grey, Evenglow, Grey Lilac, Lead Grey and Mist Grey are all near-duplicates of this swatch, though none of them is the name Rocket Metallic itself [1].\n\nOther close matches in the library include [[dark-heliotrope-grey]], [[zircon-grey]] and [[fontainebleau]], read as almost the same or darker than this swatch [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub painting archive this hue appears in 435 of 23,781 paintings, about 1.8 percent, as photographed [2]. It is most common after 1900, and Poul S. Christiansen, Peter Hansen and Fritz Syberg use it far more than the archive average relative to their output [2]. These are computed color matches on varnished, photographed canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Wikipedia)"
+  },
+  "aka": [],
+  "siblings": [
+   "taupe-grey",
+   "dark-heliotrope-grey",
+   "zircon-grey",
+   "fontainebleau"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 435,
+  "measured": {
+   "lch": [
+    54,
+    4,
+    12
+   ],
+   "nearest": [
+    [
+     "Taupe Grey",
+     3.2
+    ]
+   ]
+  },
+  "peak_decade": 1940
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia list of colors; ISCC-NBS 1955 block 22 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: a confirmed coiner for the name Rocket Metallic is recorded in the sources checked here.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which 1955 naming system filed several near-duplicate names close to this swatch?",
+   "choices": [
+    "ISCC-NBS",
+    "Pantone",
+    "Crayola",
+    "Munsell Students' system"
+   ],
+   "answer": "ISCC-NBS",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Rocket Metallic shares its swatch with five different names the ISCC-NBS system filed in 1955."
+ ],
+ "words": 216,
+ "status": "checked",
+ "checked": {
+  "by": "batch-29",
+  "date": "2026-10-09",
+  "issues": [
+   "Web search turned up only unsourced, low-quality color-aggregator claims about the name's origin; none treated as fact."
+  ]
+ }
+}

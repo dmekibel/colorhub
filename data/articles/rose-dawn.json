@@ -1,0 +1,119 @@
+{
+ "slug": "rose-dawn",
+ "name": "Rose Dawn",
+ "hex": "#D6AA9A",
+ "names": [
+  "Rose Dawn"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Rose Dawn is a pale, warm pink recorded by Maerz and Paul in 1930 and most over-represented, in our archive, in Rajput and Pahari painting from India.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dawn-colored pink",
+   "body": "Maerz and Paul's 1930 dictionary gives Rose Dawn a first recorded date of 1928, at plate 3 B 9 [1]. The name pairs rose with dawn, pointing to the warm, pale pink of early morning sky, though the books consulted do not confirm the image directly, so the derivation stays partly undocumented here [1]. The hex value #D6AA9A is a screen approximation of that plate, not a measured natural sample [1].\n\nThe nearest named color is [[light-congo-pink|Light Congo Pink]], 2.7 units away and the library's own nearest match; [[indian-pink|Indian Pink]] sits 3.3 units off [2]. [[japan-rose|Japan Rose]] is 4.0 units away, and [[pale-blush|Pale blush]] is 4.5 units off [2]. In LCH terms Rose Dawn measures lightness 73, chroma 20, hue 46 degrees [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Rose Dawn in 256 of 23,781 paintings, 1.08 percent, as photographed, more common than 66 percent of the archive's named colors [3]. Antonio María Esquivel is its most devoted painter, present in 5 of his 22 works here at 7.7 times his baseline, and it peaks in the 1900s, in 27 of 1,674 paintings, at 2.3 times the expected rate [3]. It is most over-represented in Indian paintings generally, at 2.4 times expected, and within Rajput and Pahari painting specifically, at 3.3 and 3.2 times expected [3]. It most often turns up as a hidden color, in 37 percent of its paintings, and the earliest match is dated 1400, 530 years before Maerz and Paul's 1930 record of the name — a look-alike hue, not proof of a dye, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "dawn, the pale pink of early morning sky; the derivation is only partly confirmed in our sources",
+   "first_recorded": "1928, per Maerz and Paul",
+   "source": "ColorHub color library, Maerz and Paul 1930 plate 3 B 9"
+  },
+  "aka": [],
+  "siblings": [
+   "light-congo-pink",
+   "indian-pink",
+   "japan-rose",
+   "pale-blush"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 256,
+  "measured": {
+   "lch": [
+    73,
+    20,
+    46
+   ],
+   "nearest": [
+    [
+     "Light Congo Pink",
+     2.7
+    ],
+    [
+     "Indian Pink",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930, plate 3 B 9",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed LCH and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painting tradition shows Rose Dawn most over-represented in our archive?",
+   "choices": [
+    "Rajput and Pahari painting",
+    "Impressionism",
+    "Dutch Golden Age painting",
+    "Kalighat painting"
+   ],
+   "answer": "Rajput and Pahari painting",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Rose Dawn is most over-represented in French paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rose Dawn turns up most, in our archive, in Rajput and Pahari painting from India."
+ ],
+ "words": 297,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -17,7 +17,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds a color within six units of this swatch in 458 of 23,781 paintings, 1.93 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 259 [2]. That makes it more common than 75 percent of the named colors in our library [2]. It peaks in the 1900s, present in 4.1 percent of our 1,674 paintings from that decade, 3.5 times the museums' baseline rate [2]. Inside a painting it most often sits as a hidden color, in 46 percent of its 259 appearances by lightness rank [2].\n\nPaul Gauguin is its most devoted painter on file, present in 7 of his 50 works here, several times the baseline rate for the museums that hold them [2]. The earliest match dates to 1301, six centuries before the name's 1912 record, so it marks a look-alike hue in an aged photograph, not a surviving pigment [2]. It is most over-represented in paintings from France, and shares canvases with [[deep-slate-olive|Deep Olive-Grey]] more often than chance [2]."
+   "body": "Our archive finds a color within six units of this swatch in 458 of 23,781 paintings, 1.93 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 259 [2]. That makes it more common than 75 percent of the named colors in our library [2]. It peaks in the 1900s, present in 4.1 percent of our 1,674 paintings from that decade, 3.5 times the museums' baseline rate [2]. Inside a painting it most often sits as a hidden color, in 46 percent of its 259 appearances by lightness rank [2].\n\nPaul Gauguin is its most devoted painter on file, present in 7 of his 50 works here, several times the baseline rate for the museums that hold them [2]. The earliest match dates to 1301, six centuries before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment [2]. It is most over-represented in paintings from France, and shares canvases with [[deep-slate-olive|Deep Olive-Grey]] more often than chance [2]."
   }
  ],
  "aside": {
@@ -102,11 +102,11 @@
  "openers": [
   "Turns up far more in paintings from the 1900s than the archive's average decade."
  ],
- "words": 300,
+ "words": 312,
  "status": "checked",
  "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": []
  }
 }

@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A vivid green with six names at once",
-   "body": "This exact hue is unusually well attested across systems: Ridgway's 1912 atlas lists it on plate VI as hue 31, RAL lists it as RAL 6018, the ISCC-NBS circular of 1955 places it in block 116 and calls it a vivid yellow green, and the crowdsourced xkcd color survey of 2010 names it too [1]. The ISCC-NBS block alone holds at least seven near-duplicate entries, among them Bright Chartreuse, Greenery and Night Green, a reminder that a vivid, saturated hue like this one tends to attract many names rather than one [1].\n\nThe books read give no coiner for the specific phrase *slime green*, and its origin is undocumented here [1]. The nearest named colors on file are [[sheen-green]], [[snot-green]] and [[yellowish-green]], at 2.8, 3.3 and 4.6 ΔE [1]. It also sits near [[chartreuse]] and [[lime-green]] in our library, two other vivid yellow-greens [1]."
+   "body": "This exact hue is unusually well attested across systems: Ridgway's 1912 atlas lists it on plate VI as hue 31, RAL lists it as RAL 6018, the ISCC-NBS circular of 1955 places it in block 116 and calls it a vivid yellow green, and the crowdsourced xkcd color survey of 2010 names it too [1]. The ISCC-NBS block alone holds at least seven near-duplicate entries, among them Bright Chartreuse, Greenery and Night Green, a reminder that a vivid, saturated hue like this one tends to attract many names rather than one [1].\n\nThe books read give no coiner for the specific phrase *slime green*, and its origin is undocumented here [1]. The nearest named colors on file are [[sheen-green]], [[yellowish-green]] and [[apple-green]], at 2.8, 4.6 and 6.0 ΔE [1]. It also sits near [[chartreuse]] and [[lime-green]] in our library, two other vivid yellow-greens [1]."
   },
   {
    "id": "field",
@@ -29,9 +29,9 @@
   "aka": [],
   "siblings": [
    "sheen-green",
-   "snot-green",
    "yellowish-green",
-   "bright-olive"
+   "apple-green",
+   "fibrous-green"
   ],
   "parent": "green",
   "children": [],
@@ -53,16 +53,16 @@
      2.8
     ],
     [
-     "Snot Green",
-     3.3
-    ],
-    [
      "Yellowish Green",
      4.6
     ],
     [
-     "Bright Olive",
-     4.9
+     "Apple Green",
+     6.0
+    ],
+    [
+     "Fibrous Green",
+     6.1
     ]
    ]
   },

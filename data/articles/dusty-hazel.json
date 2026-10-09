@@ -1,136 +1,135 @@
 {
- "slug": "dusty-hazel",
- "name": "Dusty hazel",
- "hex": "#896C39",
- "names": [
-  "Dusty hazel"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Dusty hazel is a muted olive-brown, ColorHub's English name for the Japanese traditional color Kimirucha, \"yellow sea-pine brown.\"",
- "sections": [
-  {
-   "id": "name",
-   "title": "Yellow sea-pine brown",
-   "body": "Kimirucha (黄海松茶) appears in the Wikipedia list of Japan's traditional colors, where the kanji translate as \"yellow sea pine-brown\" [1]. *Miru*, sea pine, is a seaweed, and the name places this brown as a yellowed version of the deeper green-brown *miru-cha* shades in the same list [1].\n\nThe nearest named colors on file are [[green-brown]] and [[dresden-brown]], at A paler, more yellow-green cousin in the same Wikipedia list is Koke-iro, moss color, which ColorHub files separately as [[dusty-hazel-tone|Dusty hazel tone]] [1][3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This is one of the more common matches in our archive: 3,696 of 23,781 paintings, about 15.5 percent, as photographed [2]. It peaks in a small sample of fifty-one paintings from the 1430s, where it appears in nineteen, well above the archive's overall rate for any decade [2]. Among painters with at least a dozen sampled works, Fritz Thomsen's eighteen contain it thirteen times, the highest rate in our data [2]. The match is also common in paintings from Korea, Iran, Belgium, the Netherlands and the United Kingdom [2]. The count is a computed color match to photographed, varnished canvases, not a pigment identification [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "Wikipedia, Traditional colors of Japan"
-  },
-  "aka": [
-   "Kimirucha"
+  "slug": "dusty-hazel",
+  "name": "Dusty hazel",
+  "hex": "#896C39",
+  "names": [
+    "Dusty hazel"
   ],
-  "siblings": [
-   "green-brown",
-   "dresden-brown",
-   "dirt-brown",
-   "imperial-stone"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Dusty hazel is a muted olive-brown, ColorHub's English name for the Japanese traditional color Kimirucha, \"yellow sea-pine brown.\"",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Yellow sea-pine brown",
+      "body": "Kimirucha (黄海松茶) appears in the Wikipedia list of Japan's traditional colors, where the kanji translate as \"yellow sea pine-brown\" [1]. *Miru*, sea pine, is a seaweed, and the name places this brown as a yellowed version of the deeper green-brown *miru-cha* shades in the same list [1].\n\nThe nearest named colors on file are [[green-brown]] and [[dresden-brown]], at A paler, more yellow-green cousin in the same Wikipedia list is Koke-iro, moss color, which ColorHub files separately as [[dusty-hazel-tone|Dusty hazel tone]] [1][3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This is one of the more common matches in our archive: 3,696 of 23,781 paintings, about 15.5 percent, as photographed [2]. It peaks in a small sample of fifty-one paintings from the 1430s, where it appears in nineteen, well above the archive's overall rate for any decade [2]. Among painters with at least a dozen sampled works, Fritz Thomsen's eighteen contain it thirteen times, the highest rate in our data [2]. The match is also common in paintings from Korea, Iran, Belgium, the Netherlands and the United Kingdom [2]. The count is a computed color match to photographed, varnished canvases, not a pigment identification [2]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Kimirucha (黄海松茶)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 3696,
-  "measured": {
-   "lch": [
-    47,
-    33,
-    81
-   ],
-   "nearest": [
-    [
-     "Green Brown",
-     2.7
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "Wikipedia, Traditional colors of Japan"
+    },
+    "aka": [
+      "Kimirucha"
     ],
-    [
-     "Dresden Brown",
-     2.9
+    "siblings": [
+      "green-brown",
+      "dresden-brown",
+      "imperial-stone"
     ],
-    [
-     "Dirt Brown",
-     3.2
-    ],
-    [
-     "Imperial Stone",
-     3.4
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Kimirucha (黄海松茶)"
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "Wikipedia, \"Traditional colors of Japan\"",
-   "loc_kind": null,
-   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 3696,
+    "measured": {
+      "lch": [
+        47,
+        33,
+        81
+      ],
+      "nearest": [
+        [
+          "Green Brown",
+          2.7
+        ],
+        [
+          "Dresden Brown",
+          2.9
+        ],
+        [
+          "Dirt Brown",
+          3.2
+        ],
+        [
+          "Imperial Stone",
+          3.4
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the Japanese name Kimirucha translate to?",
-   "choices": [
-    "Yellow sea-pine brown",
-    "Autumn moss",
-    "Dried seaweed",
-    "Golden sand"
-   ],
-   "answer": "Yellow sea-pine brown",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wikipedia, \"Traditional colors of Japan\"",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the Japanese name Kimirucha translate to?",
+      "choices": [
+        "Yellow sea-pine brown",
+        "Autumn moss",
+        "Dried seaweed",
+        "Golden sand"
+      ],
+      "answer": "Yellow sea-pine brown",
+      "kind": "pick"
+    },
+    {
+      "q": "Which decade shows the highest rate of this color in our sampled archive?",
+      "choices": [
+        "1430s",
+        "1770s",
+        "1890s",
+        "1910s"
+      ],
+      "answer": "1430s",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Named for a sea plant, this brown shows up in roughly one painting in six."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "lint 2026-10-09"
+    ]
   },
-  {
-   "q": "Which decade shows the highest rate of this color in our sampled archive?",
-   "choices": [
-    "1430s",
-    "1770s",
-    "1890s",
-    "1910s"
-   ],
-   "answer": "1430s",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Named for a sea plant, this brown shows up in roughly one painting in six."
- ],
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "words": 201
+  "words": 201
 }

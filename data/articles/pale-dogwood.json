@@ -1,0 +1,119 @@
+{
+ "slug": "pale-dogwood",
+ "name": "Pale Dogwood",
+ "hex": "#ED7A9B",
+ "names": [
+  "Pale Dogwood"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pale Dogwood is a vivid pink named for the flowering dogwood tree, whose spring bracts can show this shade at their base.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flowering tree's name",
+   "body": "Pale Dogwood takes its name from the dogwood, a small flowering tree whose white or pink bracts appear in spring; our library records the name only from Wikipedia, with no dictionary, dye house or formal standard behind it [1]. The library files it as an \"obscure, qualified or novelty name,\" and flags it as a near-duplicate of the pigment and paint name Rose Pompadour, matching it with essentially no measured difference [1].\n\nIts nearest named neighbor in our look-alike data is [[cyclamen]], 3.4 units off, a touch more vivid [2]; [[rosy-pink]] and [[rosa]] both sit 4.0 units away, and [[pale-violet-red]] sits 4.2 units away, a touch darker [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering at least one percent of its canvas, within range of this swatch, as photographed [3]. That describes the limits of this particular archive, not the color in painting generally: a vivid, saturated pink like this is rare across the older museum collections it draws from, whatever role it plays in modern design or horticulture [3].\n\nThe real flower's own pink is subtler and more variable than this swatch, running from near-white to a dusty rose depending on the cultivar and the light; the standardized color names a single point on that range, not the tree as a whole [1]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the dogwood tree",
+   "first_recorded": "undocumented beyond a web record",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Rose Pompadour (near-duplicate, ΔE 0.0)"
+  ],
+  "siblings": [
+   "cyclamen",
+   "rosy-pink",
+   "rosa",
+   "pale-violet-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    65,
+    48,
+    3
+   ],
+   "nearest": [
+    [
+     "Cyclamen",
+     3.4
+    ],
+    [
+     "Rosy Pink",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), Wikipedia entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Pale Dogwood named after?",
+   "choices": [
+    "The dogwood tree",
+    "A pigment company",
+    "A traditional Japanese dye",
+    "A Ridgway plate"
+   ],
+   "answer": "The dogwood tree",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds Pale Dogwood covering a meaningful share of at least one painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Dogwood matches a paint called Rose Pompadour almost exactly."
+ ],
+ "words": 239,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

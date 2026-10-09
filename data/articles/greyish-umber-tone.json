@@ -1,0 +1,156 @@
+{
+ "slug": "greyish-umber-tone",
+ "name": "Greyish umber tone",
+ "hex": "#4F4944",
+ "names": [
+  "Greyish umber tone"
+ ],
+ "tier": "traditional",
+ "depth": "medium",
+ "lede": "Greyish umber tone renders a Japanese traditional color, Aonibi (青鈍), literally \"blue-dull,\" a mourning grey historically tinged with blue rather than the warm, brownish grey our swatch shows.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dulled blue, warmed on screen",
+   "body": "Our library gives this entry's Japanese name as Aonibi, written 青鈍, and glosses it as \"Dull blue\" [1]. The first character, *ao*, is the same word Japanese uses for both blue and green in many traditional names; the second, *nibi*, means a dull grey, traditionally the color of mourning robes [1]. Put together, the name describes a greyed-down blue-green, not the brownish neutral our English label and swatch show: this is a case where the screen rendering and the historical color pull in different directions [1].\n\nOur sources give no fixed date for Aonibi's first listing, unlike the Ridgway or ISCC-NBS systems used elsewhere in our library [1]. A separate 1930 source, Maerz and Paul's dictionary, records an unrelated but nearly identical value under the English name Bear's Hair, first listed in 1766, on their plate 16 A 5 [2]. The nearest named look-alikes on file are [[warm-blackish-brown|Warm Blackish Brown]] and [[vienna-smoke|Vienna Smoke]], both almost the same shade, and [[bone-brown|Bone Brown]] and [[castor-grey|Castor Grey]], also close [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, 1,518 paintings carry a color close enough to this one over enough of their canvas to count, 6.38 per cent, as photographed, making it more common than 90 per cent of our named colors [4]. Inside a painting it most often plays a mid-tone, by lightness rank, in 42 per cent of the 940 paintings where that lens applies, so varnish cannot fake the reading [4].\n\nIt peaks in the 1900s, found in 7.9 per cent of the 1,674 paintings we have from that century (132 paintings), 1.7 times the expected rate [4]. Vilhelm Hammershøi is its most devoted painter by far, carrying it in 16 of the 50 of his works in our archive, 3.2 times the baseline of the museums those works come from [4]; John Singer Sargent and C.W. Eckersberg also carry it often [4]. The earliest match is dated 960, in a work attributed to the painter Juran, far too early for the archive's thin early centuries to support as a true first sighting, only a floor [4]. These are photographs of aged, varnished paintings, read as screen colors, not pigment matches [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Aonibi (青鈍), a Japanese traditional mourning grey literally \"blue-dull\"",
+   "first_recorded": "undocumented in our sources beyond its listing as a traditional Japanese color",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Aonibi"
+  ],
+  "siblings": [
+   "warm-blackish-brown",
+   "vienna-smoke",
+   "bone-brown",
+   "castor-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Aonibi, 青鈍 (\"dull blue\")"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1518,
+  "role": {
+   "mid": 0.42
+  },
+  "painters": [
+   {
+    "name": "Vilhelm Hammershøi",
+    "hits": 16,
+    "n": 50,
+    "lift": 3.2
+   }
+  ],
+  "measured": {
+   "lch": [
+    31.5,
+    4.2,
+    68.8
+   ],
+   "nearest": [
+    [
+     "Warm Blackish Brown",
+     2.9
+    ],
+    [
+     "Vienna Smoke",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-g.json; data/library.json): Aonibi (青鈍), traditional Japanese color list",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul, A Dictionary of Color (1930), plate 16 A 5, first recorded 1766 (\"Bear's Hair\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-g.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Aonibi literally mean?",
+   "choices": [
+    "Blue-dull",
+    "Warm earth",
+    "Mourning cloth",
+    "Umber stone"
+   ],
+   "answer": "Blue-dull",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter in our archive carries this color far more than any other?",
+   "choices": [
+    "Vilhelm Hammershøi",
+    "John Singer Sargent",
+    "Claude Monet",
+    "Alfred Sisley"
+   ],
+   "answer": "Vilhelm Hammershøi",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our swatch's warm, brownish grey matches the color the Japanese name describes.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Aonibi literally means \"blue-dull,\" but the swatch shown here reads as a warm, brownish grey instead.",
+  "Vilhelm Hammershøi painted with this color more than three times as often as our archive's baseline."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources. Swatch-vs-history gap (ao/blue-green in the name vs a warm neutral rendering) flagged per voice rule 7."
+  ]
+ },
+ "words": 381
+}

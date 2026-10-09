@@ -354,6 +354,7 @@ const XB_ROOMS = [
   { id: "favorites", name: "In your favorite colors", note: "The colors you saved and made yours", dyn: () => { const L = xbFavorites(); return L.length ? { hexes: L.slice(0, 12).map(c => c.h), name: "Your favorite colors", tol: 8, cover: 2 } : null; }, sort: "most" },
   { id: "blue1700", name: "Blue before 1700", note: "Blues over an eighth of the canvas, before 1700", f: { hexes: ["#3A5A8C"], name: "Blue", tol: 15, cover: 12, y1: 1699 }, sort: "date" },
   { id: "twins", name: "Twins across time", note: "The same palette, a century or more apart", special: "twins" },
+  { id: "family-tree", name: "The family tree", note: "Every look, movement, subculture and painter, connected", special: "web" },
   { id: "mono", name: "Monochrome masterpieces", note: "The fewest effective colors, and muted", f: { size: 0, chroma: 0 }, sort: "date" },
   { id: "reds", name: "The loudest reds", note: "Vivid paintings with an eighth or more in red", f: { hexes: ["#B3261E"], name: "Red", tol: 12, cover: 12, chroma: 2 }, sort: "most" },
   { id: "unpainted", name: "The unpainted", note: "Named colors no painting here comes close to", special: "unpainted" },
@@ -372,6 +373,7 @@ function xbRoomById(id) {
 const xbRoomF = r => r.dyn ? r.dyn() : r.f ? { ...xbFresh(), ...r.f, hexes: (r.f.hexes || []).slice() } : null;
 function xbOpenRoom(id) {
   const r = xbRoomById(id); if (!r) return;
+  if (r.special === "web") { buzz(6); return typeof agOpenRoute === "function" ? agOpenRoute() : (location.hash = "#/web"); }
   if (r.special) return xbSet(xbFresh(), { special: r.special, room: r.id });
   const f = xbRoomF(r); if (!f) return toast("Nothing here yet");
   xbSet({ ...xbFresh(), ...f }, { room: r.id, view: r.view || "grid", sort: r.sort || "", noRecent: true });
@@ -391,6 +393,7 @@ function xbRooms(host, F) {
       let cover = -1, cols = [];
       if (r.special === "twins") { const t = F.twins[0]; if (t) { cover = t[0]; xbRoomImg(im, t[1], true); } cnt.textContent = `${F.twins.length} pairs`; cols = t ? glPal(t[0]).map(p => ({ h: p.h, share: p.share })) : []; }
       else if (r.special === "unpainted") { cols = F.unpainted.slice(0, 8).map(u => ({ h: u[1], share: 1 })); cnt.textContent = `${F.unpainted.length} colors`; im.classList.add("flat"); im.innerHTML = cols.slice(0, 4).map(c => `<i style="--c:${c.h}"></i>`).join(""); }
+      else if (r.special === "web") { const sw = ["#C0122B", "#D4AF37", "#0B2E6B", "#4C7A3B"]; cnt.textContent = "1,000+ nodes"; im.classList.add("flat"); im.innerHTML = sw.map(h => `<i style="--c:${h}"></i>`).join(""); cols = sw.map(h => ({ h, share: 1 })); }
       else {
         const rf = r.mine ? { ...xbFresh(), ...r.f, hexes: (r.f.hexes || []).slice() } : xbRoomF(r); if (!rf) return;
         const res = xbRun(F, rf), sorted = xbSort(F, res, rf.hexes.length ? "most" : "date");

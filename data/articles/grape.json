@@ -1,226 +1,226 @@
 {
- "slug": "grape",
- "name": "Grape",
- "hex": "#6C3461",
- "names": [
-  "Grape"
- ],
- "tier": "nature",
- "depth": "medium",
- "lede": "Grape is a dark reddish purple named after the fruit, though the books agree that the color is richer than real grapes and that the pigment called grape black is not purple at all.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A fruit that is not quite the color",
-   "body": "Paterson's dictionary defines grape as a dark purple or violet [1]. St Clair's glossary goes further, calling it a violet shade that is much brighter than real grapes [2]. Samuel Johnson described the real fruit differently: in an entry Paterson quotes under *bloom*, the blue on plums and grapes freshly picked is that dusty coating [3]. The swatch cannot show it.\n\nThe swatch here, #6C3461, is the ISCC-NBS 1955 block 212, which that system names \"dark reddish purple\" [4]. Maerz and Paul's 1930 dictionary also carries it, with a first recorded date of 1916 [4]. The same swatch is the Japanese traditional color *ayame-iro*, \"iris color\" [4]. The nearest neighbors in our graph are [[grape-purple]], [[plum]], [[aubergine]] and [[burgundy]] [4]."
-  },
-  {
-   "id": "wine-dark",
-   "title": "Wine-dark and nearly black",
-   "body": "In a passage Jarman attributes to Aristotle, the grape's color is a kind of black [5]. Dark wine gets its color when sunlight is mixed with pure black, and the berries are called wine-dark at ripening because red turns to purple as they grow black [5]. On that view purple is a stage between red and black [5].\n\nThe same thought lies behind the other direction. Paterson notes that white wine can be made from dark grapes whose skins have been removed, and that its color runs from amber to yellow to green but is never colorless [6]. Rosé and pink champagne take their color from the skins of dark grapes [6]. The division of wine into red and white goes back to the Middle Ages [6].\n\nA medieval image joined the grape to blood. The Mystic Winepress, which appeared in the twelfth century and grew very popular in the late Middle Ages, shows Christ crushed in a winepress like a cluster of grapes, his blood collected in a vat [7]."
-  },
-  {
-   "id": "black",
-   "title": "Grape black, which is black",
-   "body": "The pigment called grape black is not the color on this page. It is vine black, a carbon black made from burnt vine twigs or from wine lees, and the Pigment Compendium cites Mayer (1991) for the name [8]. By Pliny's report, the painters Polygnotus and Micon of Athens made a vine black called *tryginon*, meaning grape lees [8]. Tingry (1804) says dried lees produce a coarser black than lees washed and burnt with tartar [8]. It was made in France and on a large scale in Germany, which is why it is also called Frankfort black or German black [8]. The Compendium lists *Rebenschwartz* and *noir de vigne* as names for it [8]. It adds that finely divided blacks mixed with white look blue, an optical effect [8]."
-  },
-  {
-   "id": "fashion",
-   "title": "A color for the season",
-   "body": "Garfield's book on mauve quotes the color forecaster MacLennan, who in the winter of 1999 detected a liking for a family of colors including purple, grape and blood reds [9]. That is a single forecaster's report, but it shows grape working as a trade word for a deep purple. He sets it against [[mauve]], which he calls lighter, greyer and softer than the rest of the family of purples [9]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This is one of the rarest colors in our archive. Of 23,781 paintings, one contains it within six units of ΔE over at least five per cent of the canvas [10]. That one is [[painting:commons-Q17493074|Le Mille e una notte]], painted in 1914 by Vittorio Zecchin, where it covers about 12 per cent of the picture and sits in the shadows [10]. The swatch is very dark, with a lightness of only 31, and a painted bunch of grapes is a small shape, so even still lifes may rarely give it a twentieth of the canvas [4]. All archive numbers are as photographed: museum photographs of aged, varnished paintings, so a color match is not a pigment test.\n\nIn printed English the word peaks around 1865, but that curve mostly counts the fruit; counted as an adjective, the color sense peaks in the 1900s [11]. Against white the swatch has a contrast ratio of 9.1, so it is a strong text color [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the fruit of the grapevine",
-   "first_recorded": "Maerz & Paul 1930 cites 1916; ISCC-NBS 1955 block 212",
-   "source": "ColorHub library; Paterson, A Dictionary of Colour"
-  },
-  "aka": [
-   "Ayame-iro (Japanese traditional color, iris)"
+  "slug": "grape",
+  "name": "Grape",
+  "hex": "#6C3461",
+  "names": [
+    "Grape"
   ],
-  "siblings": [
-   "grape-purple",
-   "plum",
-   "aubergine"
+  "tier": "nature",
+  "depth": "medium",
+  "lede": "Grape is a dark reddish purple named after the fruit, though the books agree that the color is richer than real grapes and that the pigment called grape black is not purple at all.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A fruit that is not quite the color",
+      "body": "Paterson's dictionary defines grape as a dark purple or violet [1]. St Clair's glossary goes further, calling it a violet shade that is much brighter than real grapes [2]. Samuel Johnson described the real fruit differently: in an entry Paterson quotes under *bloom*, the blue on plums and grapes freshly picked is that dusty coating [3]. The swatch cannot show it.\n\nThe swatch here, #6C3461, is the ISCC-NBS 1955 block 212, which that system names \"dark reddish purple\" [4]. Maerz and Paul's 1930 dictionary also carries it, with a first recorded date of 1916 [4]. The same swatch is the Japanese traditional color *ayame-iro*, \"iris color\" [4]. The nearest neighbors in our graph are [[grape]], [[plum]], [[aubergine]] and [[burgundy]] [4]."
+    },
+    {
+      "id": "wine-dark",
+      "title": "Wine-dark and nearly black",
+      "body": "In a passage Jarman attributes to Aristotle, the grape's color is a kind of black [5]. Dark wine gets its color when sunlight is mixed with pure black, and the berries are called wine-dark at ripening because red turns to purple as they grow black [5]. On that view purple is a stage between red and black [5].\n\nThe same thought lies behind the other direction. Paterson notes that white wine can be made from dark grapes whose skins have been removed, and that its color runs from amber to yellow to green but is never colorless [6]. Rosé and pink champagne take their color from the skins of dark grapes [6]. The division of wine into red and white goes back to the Middle Ages [6].\n\nA medieval image joined the grape to blood. The Mystic Winepress, which appeared in the twelfth century and grew very popular in the late Middle Ages, shows Christ crushed in a winepress like a cluster of grapes, his blood collected in a vat [7]."
+    },
+    {
+      "id": "black",
+      "title": "Grape black, which is black",
+      "body": "The pigment called grape black is not the color on this page. It is vine black, a carbon black made from burnt vine twigs or from wine lees, and the Pigment Compendium cites Mayer (1991) for the name [8]. By Pliny's report, the painters Polygnotus and Micon of Athens made a vine black called *tryginon*, meaning grape lees [8]. Tingry (1804) says dried lees produce a coarser black than lees washed and burnt with tartar [8]. It was made in France and on a large scale in Germany, which is why it is also called Frankfort black or German black [8]. The Compendium lists *Rebenschwartz* and *noir de vigne* as names for it [8]. It adds that finely divided blacks mixed with white look blue, an optical effect [8]."
+    },
+    {
+      "id": "fashion",
+      "title": "A color for the season",
+      "body": "Garfield's book on mauve quotes the color forecaster MacLennan, who in the winter of 1999 detected a liking for a family of colors including purple, grape and blood reds [9]. That is a single forecaster's report, but it shows grape working as a trade word for a deep purple. He sets it against [[mauve]], which he calls lighter, greyer and softer than the rest of the family of purples [9]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This is one of the rarest colors in our archive. Of 23,781 paintings, one contains it within six units of ΔE over at least five per cent of the canvas [10]. That one is [[painting:commons-Q17493074|Le Mille e una notte]], painted in 1914 by Vittorio Zecchin, where it covers about 12 per cent of the picture and sits in the shadows [10]. The swatch is very dark, with a lightness of only 31, and a painted bunch of grapes is a small shape, so even still lifes may rarely give it a twentieth of the canvas [4]. All archive numbers are as photographed: museum photographs of aged, varnished paintings, so a color match is not a pigment test.\n\nIn printed English the word peaks around 1865, but that curve mostly counts the fruit; counted as an adjective, the color sense peaks in the 1900s [11]. Against white the swatch has a contrast ratio of 9.1, so it is a strong text color [4]."
+    }
   ],
-  "parent": "purple",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "grape-purple",
-    "gloss": "a darker, more saturated purple from the xkcd survey"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Ayame-iro (菖蒲色), iris color"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#6C3461",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 1,
-  "top_paintings": [
-   "commons-Q17493074"
-  ],
-  "role": {
-   "shadow": 1.0
-  },
-  "ngram": {
-   "term": "grape",
-   "peak": 1865,
-   "adjective_peak": 1900
-  },
-  "measured": {
-   "lch": [
-    30.7,
-    35.2,
-    333.6
-   ],
-   "contrast_white": 9.12,
-   "nearest": [
-    [
-     "ISCC-NBS dark reddish purple",
-     4.8
+  "aside": {
+    "origin": {
+      "named_after": "the fruit of the grapevine",
+      "first_recorded": "Maerz & Paul 1930 cites 1916; ISCC-NBS 1955 block 212",
+      "source": "ColorHub library; Paterson, A Dictionary of Colour"
+    },
+    "aka": [
+      "Ayame-iro (Japanese traditional color, iris)"
+    ],
+    "siblings": [
+      "grape",
+      "plum",
+      "aubergine"
+    ],
+    "parent": "purple",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "grape",
+        "gloss": "a darker, more saturated purple from the xkcd survey"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Ayame-iro (菖蒲色), iris color"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#6C3461",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 1,
+    "top_paintings": [
+      "commons-Q17493074"
+    ],
+    "role": {
+      "shadow": 1.0
+    },
+    "ngram": {
+      "term": "grape",
+      "peak": 1865,
+      "adjective_peak": 1900
+    },
+    "measured": {
+      "lch": [
+        30.7,
+        35.2,
+        333.6
+      ],
+      "contrast_white": 9.12,
+      "nearest": [
+        [
+          "ISCC-NBS dark reddish purple",
+          4.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"grape\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, glossary, \"Grape\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"bloom\" (quoting Samuel Johnson)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub library and color graph: ISCC-NBS 1955 block 212, Maerz & Paul 1930, Japanese traditional colors (approximate screen value)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 17",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"white wine\", \"rosé\", \"pink champagne\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Pastoureau, Red, ch. 18 (\"The Blood of Christ\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Carbon-based blacks group: chars sub-group\", \"Grape black\" and \"Wine lees black\", pp. 97, 186, 403",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 16 (\"The Terrible Glare\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "data",
+      "cite": "ColorHub archive of 23,781 paintings, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "data",
+      "cite": "Google Books Ngram, \"grape\", all senses and adjective use, 5-year smoothed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is the pigment called grape black actually made from?",
+      "choices": [
+        "Burnt vine twigs or wine lees",
+        "Crushed purple grapes",
+        "Dried grape skins mixed with indigo",
+        "Madder and iron"
+      ],
+      "answer": "Burnt vine twigs or wine lees",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the pigment grape black is a dark purple.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "What does Paterson say gives rosé and pink champagne their color?",
+      "choices": [
+        "The skins of dark grapes",
+        "Added cherry juice",
+        "Red wine only from oak",
+        "Cochineal"
+      ],
+      "answer": "The skins of dark grapes",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "The pigment called grape black is made from burnt vine twigs or wine lees, and it is black, not purple.",
+    "In our archive of 23,781 paintings, only one holds this grape-dark purple over a twentieth of the canvas."
+  ],
+  "words": 661,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Verified Aristotle/Jarman, Paterson bloom and wine entries, grape black (Pliny, Tingry, Frankfort), Mystic Winepress, MacLennan against book text: supported, no edits needed."
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"grape\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, glossary, \"Grape\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"bloom\" (quoting Samuel Johnson)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub library and color graph: ISCC-NBS 1955 block 212, Maerz & Paul 1930, Japanese traditional colors (approximate screen value)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 17",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"white wine\", \"rosé\", \"pink champagne\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Pastoureau, Red, ch. 18 (\"The Blood of Christ\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Carbon-based blacks group: chars sub-group\", \"Grape black\" and \"Wine lees black\", pp. 97, 186, 403",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 16 (\"The Terrible Glare\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "data",
-   "cite": "ColorHub archive of 23,781 paintings, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "data",
-   "cite": "Google Books Ngram, \"grape\", all senses and adjective use, 5-year smoothed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is the pigment called grape black actually made from?",
-   "choices": [
-    "Burnt vine twigs or wine lees",
-    "Crushed purple grapes",
-    "Dried grape skins mixed with indigo",
-    "Madder and iron"
-   ],
-   "answer": "Burnt vine twigs or wine lees",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the pigment grape black is a dark purple.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "What does Paterson say gives rosé and pink champagne their color?",
-   "choices": [
-    "The skins of dark grapes",
-    "Added cherry juice",
-    "Red wine only from oak",
-    "Cochineal"
-   ],
-   "answer": "The skins of dark grapes",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "The pigment called grape black is made from burnt vine twigs or wine lees, and it is black, not purple.",
-  "In our archive of 23,781 paintings, only one holds this grape-dark purple over a twentieth of the canvas."
- ],
- "words": 662,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Verified Aristotle/Jarman, Paterson bloom and wine entries, grape black (Pliny, Tingry, Frankfort), Mystic Winepress, MacLennan against book text: supported, no edits needed."
-  ]
- }
 }

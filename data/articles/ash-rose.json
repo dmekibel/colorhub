@@ -31,8 +31,8 @@
     ],
     "siblings": [
       "antique-rose",
-      "deep-vinaceous",
-      "old-rose"
+      "old-rose",
+      "marie-antoinette"
     ],
     "parent": "rose",
     "children": [],
@@ -125,8 +125,8 @@
   ],
   "status": "checked",
   "checked": {
-    "by": "batch-writer",
-    "date": "2026-10-09",
+    "by": "checker",
+    "date": "2026-10-08",
     "issues": [
       "English-language coining undocumented; origin attributed only to the Japanese list source we hold."
     ]

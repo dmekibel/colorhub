@@ -1,114 +1,113 @@
 {
- "slug": "twilight-blue",
- "name": "Twilight Blue",
- "hex": "#0A437A",
- "names": [
-  "Twilight Blue"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Twilight Blue is a descriptive name for the blue of the sky after sunset, which dictionaries describe as greyer than this deep swatch.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Blue after sunset",
-   "body": "Twilight is the period after sunset, or before sunrise, when the sky holds diffuse light, and Paterson defines twilight blue as a greyish or purplish blue [1]. The swatch here is a deep, clear blue, with [[cobalt]] as its nearest named color, 6.6 units away [2]. So the screen color is stronger and bluer than the dictionary's.\n\nOur library lists the name in the ISCC-NBS list of 1955 (block 186), in Maerz and Paul (1930) and in the xkcd survey of 2010 [2]. No book we hold says who first used it, so the coinage is undocumented."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color near Twilight Blue appears in 71 of 23,781 paintings in our archive, 0.3 per cent, and it plays an accent in 61 per cent of the 38 paintings with a within-painting reading [3]. It peaks in the 1900s, in 10 paintings, 2.9 times the expected rate [3]. The earliest dated match is 1405, in a painting by Colart de Laon [3]. These are photographs of aged, varnished paintings, so an early match is a look-alike hue."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the sky at twilight (descriptive)",
-   "first_recorded": "1930 (Maerz and Paul; library)",
-   "source": "Paterson; ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "dusk-blue",
-   "midnight-blue"
+  "slug": "twilight-blue",
+  "name": "Twilight Blue",
+  "hex": "#0A437A",
+  "names": [
+    "Twilight Blue"
   ],
-  "parent": null,
-  "children": [
-   "cobalt",
-   "cobalt",
-   "blue"
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Twilight Blue is a descriptive name for the blue of the sky after sunset, which dictionaries describe as greyer than this deep swatch.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Blue after sunset",
+      "body": "Twilight is the period after sunset, or before sunrise, when the sky holds diffuse light, and Paterson defines twilight blue as a greyish or purplish blue [1]. The swatch here is a deep, clear blue, with [[cobalt]] as its nearest named color, 6.6 units away [2]. So the screen color is stronger and bluer than the dictionary's.\n\nOur library lists the name in the ISCC-NBS list of 1955 (block 186), in Maerz and Paul (1930) and in the xkcd survey of 2010 [2]. No book we hold says who first used it, so the coinage is undocumented."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color near Twilight Blue appears in 71 of 23,781 paintings in our archive, 0.3 per cent, and it plays an accent in 61 per cent of the 38 paintings with a within-painting reading [3]. It peaks in the 1900s, in 10 paintings, 2.9 times the expected rate [3]. The earliest dated match is 1405, in a painting by Colart de Laon [3]. These are photographs of aged, varnished paintings, so an early match is a look-alike hue."
+    }
   ],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 71,
-  "pct": 0.3,
-  "measured": {
-   "nearest": [
-    [
-     "Cobalt",
-     6.6
+  "aside": {
+    "origin": {
+      "named_after": "the sky at twilight (descriptive)",
+      "first_recorded": "1930 (Maerz and Paul; library)",
+      "source": "Paterson; ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "dusk-blue",
+      "midnight-blue"
+    ],
+    "parent": null,
+    "children": [
+      "cobalt",
+      "blue"
+    ],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 71,
+    "pct": 0.3,
+    "measured": {
+      "nearest": [
+        [
+          "Cobalt",
+          6.6
+        ]
+      ]
+    },
+    "century": "1900s, 10 paintings, 2.9x"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"twilight\" and \"twilight blue\", p. 402",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 186, Maerz and Paul 1930, xkcd 2010; nearest named Cobalt",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "How does Paterson describe twilight blue?",
+      "choices": [
+        "A greyish or purplish blue",
+        "A bright turquoise",
+        "A pale yellow-green",
+        "A deep red"
+      ],
+      "answer": "A greyish or purplish blue",
+      "kind": "pick"
+    },
+    {
+      "q": "The Twilight Blue swatch is greyer than the dictionary's description.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The dictionary's twilight blue is greyish or purplish; this swatch is a clear deep blue."
+  ],
+  "words": 196,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsupported comparison to dusk and midnight blue."
     ]
-   ]
-  },
-  "century": "1900s, 10 paintings, 2.9x"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"twilight\" and \"twilight blue\", p. 402",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955 block 186, Maerz and Paul 1930, xkcd 2010; nearest named Cobalt",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
   }
- ],
- "questions": [
-  {
-   "q": "How does Paterson describe twilight blue?",
-   "choices": [
-    "A greyish or purplish blue",
-    "A bright turquoise",
-    "A pale yellow-green",
-    "A deep red"
-   ],
-   "answer": "A greyish or purplish blue",
-   "kind": "pick"
-  },
-  {
-   "q": "The Twilight Blue swatch is greyer than the dictionary's description.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The dictionary's twilight blue is greyish or purplish; this swatch is a clear deep blue."
- ],
- "words": 196,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsupported comparison to dusk and midnight blue."
-  ]
- }
 }

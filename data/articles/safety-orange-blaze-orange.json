@@ -1,0 +1,139 @@
+{
+ "slug": "safety-orange-blaze-orange",
+ "name": "Safety Orange (Blaze Orange)",
+ "hex": "#FF6700",
+ "names": [
+  "Safety Orange (Blaze Orange)"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "Safety Orange, also called Blaze Orange, is the vivid orange chosen as a visibility standard because it reads against sky, snow and foliage better than almost any other hue, and it carries two separate histories: one in industrial signage, one in hunting law.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two histories, one hue",
+   "body": "The industrial side is defined by the ANSI Z535 safety-color standard, which places this orange at Munsell notation 5.0YR hue, 6.0 value, 15 chroma, with an approximate Pantone match of 151c [1]. This side of the name is often called OSHA orange or Caltrans orange depending on the industry using it [1]. The sources checked here do not give an exact founding date for this industrial standard.\n\nThe hunting side is dated more precisely. Outdoor writer Frank Woolner argued for the color in *Field & Stream* in October 1960, citing a 1959 visibility study run jointly by the US Army, the American Optical Company and two Massachusetts state agencies at Fort Devens [2]. Massachusetts became the first state to require hunters to wear blaze orange, in 1961 [2]. The two threads share a name and a hex, not a single origin story [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this exact orange in only 2 of 23,781 paintings, as photographed, which is expected: it is a modern industrial and legal signal color, not a historical pigment [3]. The earlier is Albrecht Dürer's 1526 painting, where it covers about 11 percent of a small accent area, and the later is Paul Ranson's 1893 *Witch with a black cat*, at the same coverage [3]. Germany and France are the only countries represented, each on a single hit [3]. On a base of two matches, nothing can be said about a trend across time or place; the figure mainly confirms that this exact hex is rare outside modern signage and clothing [3]. By our look-alike data the nearest color is [[bright-orange|Bright Orange]], 3.0 units away and read as almost the same, with [[pumpkin|Pumpkin]] equally close but duller [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "an American industrial safety-color standard and a 1960s hunting-visibility law, converging on one hue",
+   "first_recorded": "undocumented in sources checked (industrial standard); 1960-1961 (Field & Stream, Massachusetts hunting law)",
+   "source": "Wikipedia, Safety orange; onX, Hunter Orange History"
+  },
+  "aka": [
+   "Blaze Orange",
+   "OSHA Orange",
+   "Hunter Orange",
+   "Caltrans Orange"
+  ],
+  "siblings": [
+   "bright-orange",
+   "pumpkin",
+   "bright-red-orange",
+   "flame-scarlet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "measured": {
+   "lch": [
+    62.5,
+    89.9,
+    52.6
+   ],
+   "nearest": [
+    [
+     "Bright Orange",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Safety orange\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Safety_orange"
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "onX, \"Hunter Orange History and State Requirements\"",
+   "loc_kind": null,
+   "url": "https://www.onxmaps.com/hunt/blog/hunter-orange"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-s.json, edges-b.json, edges-p.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which state was first to require hunters to wear blaze orange, in 1961?",
+   "choices": [
+    "Massachusetts",
+    "Vermont",
+    "Wisconsin",
+    "Pennsylvania"
+   ],
+   "answer": "Massachusetts",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Safety Orange and Blaze Orange trace back to one single origin story.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does this color turn up in almost no historical paintings in our archive?",
+   "choices": [
+    "It is a modern industrial and legal signal color, not a historical pigment",
+    "The pigment faded out of all surviving paintings",
+    "Museums refuse to photograph orange accurately",
+    "It only exists on synthetic fabric, never on canvas"
+   ],
+   "answer": "It is a modern industrial and legal signal color, not a historical pigment",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Safety Orange carries two separate histories under one hex: an industrial safety standard, and a hunting-visibility law dated to 1961."
+ ],
+ "words": 318,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed unsupported claims: the cited Wikipedia 'Safety orange' article does not give a 1946/1953 founding date, 'American War Standard' history, ANSI Z53.1 predecessor, or a Federal Standard 595 chip number -- it names only the current ANSI Z535 standard and the Munsell/Pantone values. Rewrote the industrial-history sentence to only what the source supports and removed the invented date from first_recorded and the opener.",
+   "Verified the hunting-side claims (Woolner, Field & Stream Oct. 1960, 1959 Fort Devens study with the US Army, American Optical Co. and two Massachusetts agencies, Massachusetts first to require blaze orange in 1961) directly against the cited onX article -- all confirmed as written."
+  ]
+ }
+}

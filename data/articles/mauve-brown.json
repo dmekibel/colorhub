@@ -1,135 +1,136 @@
 {
- "name": "Mauve brown",
- "hex": "#755D5B",
- "names": [
-  "Mauve brown"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Mauve brown is the English name our data gives to Hatobanezumi, a traditional Japanese color whose name translates as \"dove feather grey.\"",
- "sections": [
-  {
-   "id": "name",
-   "title": "A translated Japanese grey",
-   "body": "Our data files this as the English name for *Hatobanezumi* (鳩羽鼠), a traditional Japanese color name meaning \"dove feather grey\" [1]. It is also recorded in English sources as Reddish umber, a near-exact duplicate by our computed color distance (0.0 units) [2]. In LCH terms it reads as lightness 42, chroma 11, hue 27 degrees: a dark, muted red-brown, far duller than any true mauve [1].\n\nOur naming data files it as a family-word variant of [[mauve]], though the two colors share only the word, not the hue [1]. A Japanese fashion-history reference in our data groups it with *Rikyū-nezumi*, one of the roughly forty-eight browns and hundred greys named in Edo-period Japan, about 9.8 units away by measured distance [3]. We have not traced who coined the English name Mauve brown, or when; that is undocumented here [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 232, as photographed (112 by the stricter within-painting measure), which makes it more common than 61 percent of the named colors we track [4]. [[painter:claude-monet|Claude Monet]] used it most: it appears in 5 of his 50 works here, 6.8 times the rate of the museums those works come from, 5.7 times as photographed [4]. It is most over-represented in paintings from France, at 2.0 times the expected rate (38 of 3,443 paintings), and peaks in the 1900s at 2.5 times the expected rate [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Hatobanezumi, a traditional Japanese color name meaning \"dove feather grey\"",
-   "first_recorded": "undocumented in English sources",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Reddish umber"
+  "name": "Mauve brown",
+  "hex": "#755D5B",
+  "names": [
+    "Mauve brown"
   ],
-  "siblings": [
-   "reddish-umber",
-   "haematite-red",
-   "deep-livid-brown"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Mauve brown is the English name our data gives to Hatobanezumi, a traditional Japanese color whose name translates as \"dove feather grey.\"",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A translated Japanese grey",
+      "body": "Our data files this as the English name for *Hatobanezumi* (鳩羽鼠), a traditional Japanese color name meaning \"dove feather grey\" [1]. It is also recorded in English sources as Reddish umber, a near-exact duplicate by our computed color distance (0.0 units) [2]. In LCH terms it reads as lightness 42, chroma 11, hue 27 degrees: a dark, muted red-brown, far duller than any true mauve [1].\n\nOur naming data files it as a family-word variant of [[mauve]], though the two colors share only the word, not the hue [1]. A Japanese fashion-history reference in our data groups it with *Rikyū-nezumi*, one of the roughly forty-eight browns and hundred greys named in Edo-period Japan, about 9.8 units away by measured distance [3]. We have not traced who coined the English name Mauve brown, or when; that is undocumented here [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a close match covers enough of the canvas in 232, as photographed (112 by the stricter within-painting measure), which makes it more common than 61 percent of the named colors we track [4]. [[painter:claude-monet|Claude Monet]] used it most: it appears in 5 of his 50 works here, 6.8 times the rate of the museums those works come from, 5.7 times as photographed [4]. It is most over-represented in paintings from France, at 2.0 times the expected rate (38 of 3,443 paintings), and peaks in the 1900s at 2.5 times the expected rate [4]."
+    }
   ],
-  "parent": "mauve",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Hatobanezumi (鳩羽鼠), \"dove feather grey\""
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 232,
-  "measured": {
-   "lch": [
-    42,
-    11,
-    27
-   ],
-   "nearest": [
-    [
-     "Reddish umber",
-     0.0
+  "aside": {
+    "origin": {
+      "named_after": "Hatobanezumi, a traditional Japanese color name meaning \"dove feather grey\"",
+      "first_recorded": "undocumented in English sources",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Reddish umber"
     ],
-    [
-     "Haematite Red",
-     4.6
+    "siblings": [
+      "mauve-brown",
+      "haematite-red",
+      "faded-rosewood",
+      "hay-s-brown"
+    ],
+    "parent": "mauve",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Hatobanezumi (鳩羽鼠), \"dove feather grey\""
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/nodes-m.json) and core names (data/core-names.json): Mauve brown — Japanese traditional color list, Hatobanezumi",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-m.json): Mauve brown / Reddish umber duplicate pair, CIEDE2000 0.0",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 232,
+    "measured": {
+      "lch": [
+        42,
+        11,
+        27
+      ],
+      "nearest": [
+        [
+          "Reddish umber",
+          0.0
+        ],
+        [
+          "Haematite Red",
+          4.6
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-m.json): fashion-history twin, \"Forty-eight browns, a hundred greys\" (Edo-period Japan), Rikyū-nezumi",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/nodes-m.json) and core names (data/core-names.json): Mauve brown — Japanese traditional color list, Hatobanezumi",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-m.json): Mauve brown / Reddish umber duplicate pair, CIEDE2000 0.0",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-m.json): fashion-history twin, \"Forty-eight browns, a hundred greys\" (Edo-period Japan), Rikyū-nezumi",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/m.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Mauve brown is the English name for which traditional Japanese color?",
+      "choices": [
+        "Hatobanezumi",
+        "Rikyu-nezumi",
+        "Konjo-iro",
+        "Ai-iro"
+      ],
+      "answer": "Hatobanezumi",
+      "kind": "pick"
+    },
+    {
+      "q": "What does \"Hatobanezumi\" translate to?",
+      "choices": [
+        "Dove feather grey",
+        "Mouse's tail",
+        "Autumn leaf",
+        "Evening sky"
+      ],
+      "answer": "Dove feather grey",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Mauve brown is an English stand-in for Hatobanezumi, a Japanese name that literally means \"dove feather grey.\""
+  ],
+  "words": 259,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No book concordance hits for this slug; written from the color graph and core-names Japanese traditional color data only.",
+      "lint 2026-10-09"
+    ]
   },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings, as photographed, data/graph/fieldnotes/m.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Mauve brown is the English name for which traditional Japanese color?",
-   "choices": [
-    "Hatobanezumi",
-    "Rikyu-nezumi",
-    "Konjo-iro",
-    "Ai-iro"
-   ],
-   "answer": "Hatobanezumi",
-   "kind": "pick"
-  },
-  {
-   "q": "What does \"Hatobanezumi\" translate to?",
-   "choices": [
-    "Dove feather grey",
-    "Mouse's tail",
-    "Autumn leaf",
-    "Evening sky"
-   ],
-   "answer": "Dove feather grey",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Mauve brown is an English stand-in for Hatobanezumi, a Japanese name that literally means \"dove feather grey.\""
- ],
- "words": 259,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No book concordance hits for this slug; written from the color graph and core-names Japanese traditional color data only.",
-   "lint 2026-10-09"
-  ]
- },
- "slug": "mauve-brown"
+  "slug": "mauve-brown"
 }

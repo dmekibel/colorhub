@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Four names, one cluster",
-   "body": "The xkcd survey logged this exact shade, or something within about two CIEDE2000 units of it, under at least three other labels besides Bright Olive: Gross Green, Pea, and Sick Green [1]. That scatter is typical of the survey's method; thousands of people typing free-text names for the same swatch rarely agree on one word, and \"olive\" itself reads very differently to different eyes [1].\n\nThe nearest named colors on file are [[sickly-green]], [[snot]], [[acid-green]] and [[puke-green]], at 2.9, 3.4, 3.7 and 3.8 ΔE [1]. Siblings are [[olive]], [[kelly-green|Kelly green]], [[chartreuse]], and [[army-green|Army Green]], all crowded into the same yellow-green corner [1]."
+   "body": "The xkcd survey logged this exact shade, or something within about two CIEDE2000 units of it, under at least three other labels besides Bright Olive: Gross Green, Pea, and Sick Green [1]. That scatter is typical of the survey's method; thousands of people typing free-text names for the same swatch rarely agree on one word, and \"olive\" itself reads very differently to different eyes [1].\n\nThe nearest named colors on file are [[avocado]], [[acid-green]], [[mustard-green]] and [[fibrous-green]], at 2.9, 3.7, 3.8 and 4.5 ΔE [1]. Siblings are [[olive]], [[kelly-green|Kelly green]], [[chartreuse]], and [[army-green|Army Green]], all crowded into the same yellow-green corner [1]."
   },
   {
    "id": "field",
@@ -32,10 +32,10 @@
    "Sick Green (xkcd, near-duplicate)"
   ],
   "siblings": [
-   "sickly-green",
-   "snot",
+   "avocado",
    "acid-green",
-   "puke-green"
+   "mustard-green",
+   "olive"
   ],
   "parent": "olive",
   "children": [],
@@ -55,6 +55,10 @@
     [
      "Sickly Green",
      2.9
+    ],
+    [
+     "Acid Green",
+     3.7
     ]
    ]
   }

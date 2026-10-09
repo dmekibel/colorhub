@@ -28,15 +28,16 @@
     },
     "aka": [],
     "siblings": [
-      "light-hazel",
+      "fallen-leaf",
       "pinchbeck-brown",
-      "honey-yellow"
+      "honey-yellow",
+      "oil-green"
     ],
     "parent": "leaf",
     "children": [],
     "disambiguation": [
       {
-        "slug": "light-hazel",
+        "slug": "fallen-leaf",
         "gloss": "the identical screen color under a separate Japanese-list name"
       }
     ],

@@ -1,0 +1,132 @@
+{
+  "slug": "greyish-pink",
+  "name": "Greyish Pink",
+  "hex": "#C88D94",
+  "names": [
+    "Greyish Pink"
+  ],
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Greyish Pink is a muted, dusty rose named by modifier grammar as greyish plus [[pink]], recorded by the 2010 xkcd color survey and found far more often in old paintings than its coverage of the archive alone would suggest.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Greyish, plus pink",
+      "body": "Our data classes Greyish Pink as a descriptive-modifier name, the hedge [[cement]] pulling the parent color [[pink]] toward neutral [1]. Our sources carry no history for this exact value beyond the 2010 xkcd survey, which asked online visitors to type a name for colors shown on screen [1].\n\nIt sits close enough to [[grey-pink|Grey Pink]], another xkcd-survey name, that the two are only 2.6 color-distance units apart, almost the same shade [2]. Further out, [[dusty-pink|Dusty Pink]] is more vivid, and [[puce|Puce]] leans redder [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our 23,781-painting archive, 52 paintings carry a color close enough to this one over enough of their canvas to count, about 0.22 per cent, as photographed, rarer than 64 per cent of our named colors [3]. Inside a painting it most often sits as a hidden color, by lightness rank, in 40 per cent of the 15 paintings where that lens applies, so varnish cannot fake the reading [3].\n\nThe earliest match in our archive is dated 1301, with others reaching to 1918, but the archive's thin early centuries make that a floor on when the hue appears, not a first sighting, and 709 years before the name itself was recorded [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment matches [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "greyish + pink (modifier grammar)",
+      "first_recorded": "2010, in the xkcd color-name survey",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "grey-pink",
+      "dusty-pink",
+      "puce"
+    ],
+    "parent": "pink",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 52,
+    "role": {
+      "hidden": 0.4
+    },
+    "measured": {
+      "lch": [
+        64.5,
+        24.0,
+        12.7
+      ],
+      "nearest": [
+        [
+          "Grey Pink",
+          2.6
+        ],
+        [
+          "Dusty Pink",
+          3.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-g.json): xkcd 2010 crowd-sourced color-name survey",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-g.json), CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Greyish Pink's name is built from which two pieces?",
+      "choices": [
+        "Greyish + pink",
+        "Dusty + rose",
+        "A painter's surname + pink",
+        "A gemstone name"
+      ],
+      "answer": "Greyish + pink",
+      "kind": "pick"
+    },
+    {
+      "q": "Inside a painting, what role does Greyish Pink most often play, by lightness rank?",
+      "choices": [
+        "A hidden color",
+        "A highlight",
+        "An accent",
+        "A shadow"
+      ],
+      "answer": "A hidden color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Greyish Pink's 1301 archive match proves the name is centuries old.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Greyish Pink most often hides in the darker, less noticed parts of a painting rather than its highlights."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources."
+    ]
+  },
+  "words": 246
+}

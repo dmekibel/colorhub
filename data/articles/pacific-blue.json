@@ -1,0 +1,122 @@
+{
+  "slug": "pacific-blue",
+  "name": "Pacific Blue",
+  "hex": "#1CA9C9",
+  "names": [
+    "Pacific Blue"
+  ],
+  "tier": "place",
+  "depth": "short",
+  "lede": "Pacific Blue is a bright, slightly green-leaning sky blue named for the ocean, not for any dye or standard.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "An ocean's name",
+      "body": "Pacific Blue takes its name directly from the Pacific Ocean, the way color lists also carry [[carolina-blue]] and [[columbia-blue]] for places rather than materials [1]. Our library records it only from Wikipedia, with no dictionary, standard or dye house behind it, so there is no coiner or date to give beyond that web record [1]. The name belongs to a wide family of ocean- and sky-named blues used in branding and everyday speech more than in historical color science [1].\n\nIts nearest named neighbor is [[maximum-blue]], only 2.8 units off on screen, close enough to read as the same blue [2]; [[cyan-blue]] and [[cyan-blue]] both sit 4.0 units away [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a color within range of this swatch in just 1 of 23,781 paintings, as photographed, which is rarer than 86 percent of the named colors in our library [3]. A bright, saturated cyan-blue like this is a modern dye and pigment range; it simply has little precedent in the mostly older paintings our archive holds [3]. This is a photograph of a varnished canvas read as a screen color, not a pigment identification, and here the sample is too thin to support any further claim [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the Pacific Ocean",
+      "first_recorded": "undocumented beyond a web record",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "maximum-blue",
+      "cyan-blue",
+      "carolina-blue",
+      "columbia-blue"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1,
+    "rank_pct": 14,
+    "measured": {
+      "lch": [
+        64,
+        35,
+        228
+      ],
+      "nearest": [
+        [
+          "Maximum Blue",
+          2.8
+        ],
+        [
+          "Cendre Blue",
+          4.0
+        ],
+        [
+          "Cyan Blue",
+          4.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), Wikipedia entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is Pacific Blue named after?",
+      "choices": [
+        "The Pacific Ocean",
+        "A pigment company",
+        "A traditional Japanese dye",
+        "A 1912 color plate"
+      ],
+      "answer": "The Pacific Ocean",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Pacific Blue has a recorded coiner and date.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pacific Blue turns up in only one painting in our whole archive."
+  ],
+  "words": 218,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
+  }
+}

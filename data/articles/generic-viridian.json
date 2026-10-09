@@ -1,118 +1,119 @@
 {
- "slug": "generic-viridian",
- "name": "Generic Viridian",
- "hex": "#007F66",
- "names": [
-  "Generic Viridian"
- ],
- "tier": "pigment",
- "depth": "brief",
- "lede": "Generic Viridian is a blue-green standing in for the pigment family named viridian, Latin for green, without claiming to be any one maker's exact hue.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A stand-in, not a specific paint",
-   "body": "Viridian itself is a chromium oxide pigment, prized by painters for a cool, transparent green unlike the older, more yellow chrome greens [1]. \"Generic\" in the name signals that this swatch is an average stand-in, not a single manufacturer's tube color, the role the library gives it [1]. Our library finds only a Wikipedia list behind the name, with no date for its coining [1].\n\nMeasured in LCH, it sits at lightness 47 with a strong blue-leaning green hue [1]. Its nearest named neighbors are near-ties: [[blue-green]] and [[blue-green]], each within 3 units of CIEDE2000 and described as almost the same [1]. [[spanish-viridian]] and [[arsenate]] sit a little farther out, also close [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This exact swatch is rare in our archive: only 12 of 23,781 paintings match it, rarer than 77 percent of the named colors, as photographed [2]. The earliest matching painting is from 1827, by T. Davies, with the latest from 1959, a floor and not a first, since the archive's early centuries are thin [2]. Viridian the pigment was only patented in 1838, so a true viridian green could not appear before then; any earlier match here is this swatch's chromium-free cousins, not the pigment itself [1][2]. These are photographs of varnished paintings, so a color match is not a pigment test [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "viridian, the chromium oxide green pigment; this swatch is a generic average, not one maker's color",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub library (a Wikipedia list)"
-  },
-  "aka": [],
-  "siblings": [
-   "dark-viridian-green",
-   "blue-green",
-   "spanish-viridian",
-   "arsenate"
+  "slug": "generic-viridian",
+  "name": "Generic Viridian",
+  "hex": "#007F66",
+  "names": [
+    "Generic Viridian"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
-  "n_present": 12,
-  "rank_pct_rare": 77,
-  "measured": {
-   "lch": [
-    47,
-    37,
-    172
-   ],
-   "nearest": [
-    [
-     "Dark Viridian Green",
-     2.5
+  "tier": "pigment",
+  "depth": "brief",
+  "lede": "Generic Viridian is a blue-green standing in for the pigment family named viridian, Latin for green, without claiming to be any one maker's exact hue.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A stand-in, not a specific paint",
+      "body": "Viridian itself is a chromium oxide pigment, prized by painters for a cool, transparent green unlike the older, more yellow chrome greens [1]. \"Generic\" in the name signals that this swatch is an average stand-in, not a single manufacturer's tube color, the role the library gives it [1]. Our library finds only a Wikipedia list behind the name, with no date for its coining [1].\n\nMeasured in LCH, it sits at lightness 47 with a strong blue-leaning green hue [1]. Its nearest named neighbors are near-ties: [[blue-green]] and [[blue-green]], each within 3 units of CIEDE2000 and described as almost the same [1]. [[spanish-viridian]] and [[arsenate]] sit a little farther out, also close [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This exact swatch is rare in our archive: only 12 of 23,781 paintings match it, rarer than 77 percent of the named colors, as photographed [2]. The earliest matching painting is from 1827, by T. Davies, with the latest from 1959, a floor and not a first, since the archive's early centuries are thin [2]. Viridian the pigment was only patented in 1838, so a true viridian green could not appear before then; any earlier match here is this swatch's chromium-free cousins, not the pigment itself [1][2]. These are photographs of varnished paintings, so a color match is not a pigment test [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "viridian, the chromium oxide green pigment; this swatch is a generic average, not one maker's color",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub library (a Wikipedia list)"
+    },
+    "aka": [],
+    "siblings": [
+      "generic-viridian",
+      "blue-green",
+      "spanish-viridian",
+      "arsenate",
+      "tropical-rainforest"
     ],
-    [
-     "Blue-Green",
-     2.9
-    ],
-    [
-     "Spanish Viridian",
-     3.2
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+    "n_present": 12,
+    "rank_pct_rare": 77,
+    "measured": {
+      "lch": [
+        47,
+        37,
+        172
+      ],
+      "nearest": [
+        [
+          "Dark Viridian Green",
+          2.5
+        ],
+        [
+          "Blue-Green",
+          2.9
+        ],
+        [
+          "Spanish Viridian",
+          3.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes and edges): name source, pigment tier, CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does \"generic\" signal in this color's name?",
+      "choices": [
+        "It is an average stand-in, not one maker's exact pigment",
+        "It was the first color ever named",
+        "It is a trademark",
+        "It means the pigment is toxic"
+      ],
+      "answer": "It is an average stand-in, not one maker's exact pigment",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the earliest painting matching this swatch predates viridian's 1838 patent.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Generic Viridian is an average stand-in for the chromium-green pigment family, not any one maker's tube color."
+  ],
+  "words": 235,
+  "status": "checked",
+  "checked": {
+    "by": "batch-10",
+    "date": "2026-10-09",
+    "issues": [
+      "Viridian pigment patent date (1838) used only to bound plausibility of early matches; not re-verified against a book source here.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes and edges): name source, pigment tier, CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does \"generic\" signal in this color's name?",
-   "choices": [
-    "It is an average stand-in, not one maker's exact pigment",
-    "It was the first color ever named",
-    "It is a trademark",
-    "It means the pigment is toxic"
-   ],
-   "answer": "It is an average stand-in, not one maker's exact pigment",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the earliest painting matching this swatch predates viridian's 1838 patent.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Generic Viridian is an average stand-in for the chromium-green pigment family, not any one maker's tube color."
- ],
- "words": 235,
- "status": "checked",
- "checked": {
-  "by": "batch-10",
-  "date": "2026-10-09",
-  "issues": [
-   "Viridian pigment patent date (1838) used only to bound plausibility of early matches; not re-verified against a book source here.",
-   "lint 2026-10-09"
-  ]
- }
 }

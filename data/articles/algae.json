@@ -1,166 +1,167 @@
 {
- "slug": "algae",
- "name": "Algae",
- "hex": "#54AC68",
- "names": [
-  "Algae"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Algae is a clear, mid-light green named for the pond and sea plants it brings to mind, though most algae are not this color at all.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name",
-   "body": "The name comes to us from the 2010 xkcd color survey, as one of the named greens [1]. No book I read treats it as a color word, and who first used it as one is undocumented. ISCC-NBS 1955 would call it a vivid green, 6.6 units away, and its Munsell notation is 1.3G 6.2/8.1 [1]. Close neighbours are [[jade]], [[peppermint]] and [[boring-green]], each a few units off [1]."
-  },
-  {
-   "id": "pigments",
-   "title": "Why algae are green, and often not",
-   "body": "Chlorophyll a is carried by every plant, alga and cyanobacterium that photosynthesises, and chlorophyll b by the green algae and land plants only [2]. That shared chemistry is why a green alga and a leaf both read as [[green]] [2]. Gurney adds that algae growth gives freshwater lakes a greenish look [3].\n\nOther groups wear other colors. Paterson lists fucoxanthin, which makes algae brown, phycocyanin, a blue pigment, and phycoerythrin, which reflects red [4]. He also credits the red pigment with the name of the Red Sea, while allowing that blooms of cyanobacteria may be the real reason [4]. Kelps and diatoms carry a third chlorophyll, chlorophyll c [2]."
-  },
-  {
-   "id": "chalk",
-   "title": "The white of algae",
-   "body": "The most famous algal color is white. Chalk is built from the remains of single-celled marine algae, coccolithophores, laid down as sediment and compacted over millions of years, and it forms the white cliffs of Dover [5][6]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Only two of 23,781 paintings in our archive carry a color within six ΔE units of this green over at least five per cent of the canvas, both by Van Gogh: [[painting:nga-72328|Roses]] and [[painting:nga-163323|Green Wheat Fields, Auvers]], both 1890 [7]. In printed English the word algae peaks around 1978 [8]. These are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [7]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "algae, the water plants",
-   "first_recorded": "xkcd color survey, 2010",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "jade",
-   "peppermint",
-   "boring-green"
+  "slug": "algae",
+  "name": "Algae",
+  "hex": "#54AC68",
+  "names": [
+    "Algae"
   ],
-  "parent": "green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#54AC68",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 2,
-  "top_paintings": [
-   "nga-163323",
-   "nga-72328"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Algae is a clear, mid-light green named for the pond and sea plants it brings to mind, though most algae are not this color at all.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name",
+      "body": "The name comes to us from the 2010 xkcd color survey, as one of the named greens [1]. No book I read treats it as a color word, and who first used it as one is undocumented. ISCC-NBS 1955 would call it a vivid green, 6.6 units away, and its Munsell notation is 1.3G 6.2/8.1 [1]. Close neighbours are [[jade]], [[peppermint]] and [[algae]], each a few units off [1]."
+    },
+    {
+      "id": "pigments",
+      "title": "Why algae are green, and often not",
+      "body": "Chlorophyll a is carried by every plant, alga and cyanobacterium that photosynthesises, and chlorophyll b by the green algae and land plants only [2]. That shared chemistry is why a green alga and a leaf both read as [[green]] [2]. Gurney adds that algae growth gives freshwater lakes a greenish look [3].\n\nOther groups wear other colors. Paterson lists fucoxanthin, which makes algae brown, phycocyanin, a blue pigment, and phycoerythrin, which reflects red [4]. He also credits the red pigment with the name of the Red Sea, while allowing that blooms of cyanobacteria may be the real reason [4]. Kelps and diatoms carry a third chlorophyll, chlorophyll c [2]."
+    },
+    {
+      "id": "chalk",
+      "title": "The white of algae",
+      "body": "The most famous algal color is white. Chalk is built from the remains of single-celled marine algae, coccolithophores, laid down as sediment and compacted over millions of years, and it forms the white cliffs of Dover [5][6]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Only two of 23,781 paintings in our archive carry a color within six ΔE units of this green over at least five per cent of the canvas, both by Van Gogh: [[painting:nga-72328|Roses]] and [[painting:nga-163323|Green Wheat Fields, Auvers]], both 1890 [7]. In printed English the word algae peaks around 1978 [8]. These are photographs of aged, varnished paintings, so a match is a screen color and not a pigment test [7]."
+    }
   ],
-  "ngram": {
-   "peak": 1978
+  "aside": {
+    "origin": {
+      "named_after": "algae, the water plants",
+      "first_recorded": "xkcd color survey, 2010",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "jade",
+      "peppermint",
+      "algae",
+      "jade-green"
+    ],
+    "parent": "green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    63.7,
-    49.6,
-    146.9
-   ],
-   "iscc": "vivid green",
-   "munsell": "1.3G 6.2/8.1"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#54AC68",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 2,
+    "top_paintings": [
+      "nga-163323",
+      "nga-72328"
+    ],
+    "ngram": {
+      "peak": 1978
+    },
+    "measured": {
+      "lch": [
+        63.7,
+        49.6,
+        146.9
+      ],
+      "iscc": "vivid green",
+      "munsell": "1.3G 6.2/8.1"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub library: xkcd color survey 2010, ISCC-NBS 1955 distance, nearest names",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Eastaugh and others, Pigment Compendium, the chlorophyll entry",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, on the color of water",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"fucoxanthin\", \"phycocyanin\", \"phycoerythrin\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, \"Chalk\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Eastaugh and others, Pigment Compendium, \"chalk\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    }
+  ],
+  "questions": [
+    {
+      "q": "What are the white cliffs of Dover mainly made of?",
+      "choices": [
+        "Remains of single-celled algae",
+        "Crushed seashells",
+        "Volcanic ash",
+        "Quartz sand"
+      ],
+      "answer": "Remains of single-celled algae",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: all algae are green.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The white cliffs of Dover are made of the remains of single-celled algae.",
+    "Brown, blue and red algae exist: pigments such as fucoxanthin and phycoerythrin do the coloring."
+  ],
+  "words": 304,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub library: xkcd color survey 2010, ISCC-NBS 1955 distance, nearest names",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Eastaugh and others, Pigment Compendium, the chlorophyll entry",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, on the color of water",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"fucoxanthin\", \"phycocyanin\", \"phycoerythrin\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, \"Chalk\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Eastaugh and others, Pigment Compendium, \"chalk\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  }
- ],
- "questions": [
-  {
-   "q": "What are the white cliffs of Dover mainly made of?",
-   "choices": [
-    "Remains of single-celled algae",
-    "Crushed seashells",
-    "Volcanic ash",
-    "Quartz sand"
-   ],
-   "answer": "Remains of single-celled algae",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: all algae are green.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The white cliffs of Dover are made of the remains of single-celled algae.",
-  "Brown, blue and red algae exist: pigments such as fucoxanthin and phycoerythrin do the coloring."
- ],
- "words": 305,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

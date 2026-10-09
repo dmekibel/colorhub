@@ -1,0 +1,137 @@
+{
+  "slug": "orange-cinnamon",
+  "name": "Orange-Cinnamon",
+  "hex": "#C48256",
+  "names": [
+    "Orange-Cinnamon"
+  ],
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Orange-Cinnamon is a warm, muted brown-orange whose compound name Robert Ridgway coined in 1912, pairing the fruit's color with the spice's.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A spice-toned compound",
+      "body": "The name pairs *orange* with *cinnamon*, the reddish-brown bark spice, in the same hyphenated style Ridgway used across his 1912 *Color Standards and Color Nomenclature*; this one sits on plate XXIX at hue 13 double-prime [1]. The ISCC-NBS committee filed the same Ridgway name into its 1955 dictionary, in block 53, the same block that holds [[light-orange]] [2].\n\nThe identical hex is also the closest match on file to *Ōdo-iro* (黄土色, literally \"earthen yellow,\" i.e. ochre), a Japanese traditional color; again, the two names were coined independently, and the shared swatch is only a coincidence of measurement [1][3]. The nearest English look-alikes are [[antique-brass]], [[tawny]] and [[raw-sienna|Raw Sienna]], all close in hue [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A close match appears in 936 of our 23,781 archived paintings, about 3.9 per cent, with the within-painting lens finding it in 605; more common than 84 per cent of our named colors [4]. It peaks in the 1500s at 1.9 times the archive's overall rate (113 paintings), and most often plays an accent [4]. Thomas Sully is its most devoted painter here, carrying it in 5 of his 26 archived works, and India is its most over-represented country, at 3 times the expected rate [4]. The earliest dated match, from the year 1000, sits 912 years before Ridgway's 1912 name, a floor, not a first sighting, as photographed, not a pigment test [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "orange + cinnamon (the spice's reddish-brown bark color)",
+      "first_recorded": "1912, Ridgway, Color Standards and Color Nomenclature, plate XXIX",
+      "source": "Ridgway, 1912"
+    },
+    "aka": [],
+    "siblings": [
+      "antique-brass",
+      "tawny",
+      "raw-sienna"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "light-orange",
+        "gloss": "a separate Ridgway compound filed in the same ISCC-NBS block, not the same name"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Ōdo-iro (黄土色), look-alike only, unrelated name"
+      }
+    ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 605,
+    "n_archive_hits": 936,
+    "measured": {
+      "lch": [
+        60.2,
+        39.9,
+        58.5
+      ],
+      "nearest": [
+        [
+          "Antique Brass",
+          3.0
+        ],
+        [
+          "Tawny",
+          3.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-o.json): Ridgway 1912, plate XXIX, hue 13″",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub ISCC-NBS 1955 name index (data/sources/iscc-nbs-names.json), block 53",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/o.json), 23,781 paintings, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What two things does the name \"Orange-Cinnamon\" combine?",
+      "choices": [
+        "The fruit's color and the spice's bark color",
+        "Two Japanese traditional color names",
+        "A pigment and a dye",
+        "An artist's name and a flower"
+      ],
+      "answer": "The fruit's color and the spice's bark color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Orange-Cinnamon's Japanese look-alike, Ōdo-iro, shares its word origin.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Orange-Cinnamon is most over-represented in Indian paintings in our archive, at three times the expected rate."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); written from ColorHub graph/library data (Ridgway 1912, ISCC-NBS 1955).",
+      "Fixed: field section said 'more common than 85 per cent' and 'Thomas Sully...5 of his 25 archived works'; data/graph/fieldnotes/o.json gives rp=84 and Sully's total as 26 works. Corrected both."
+    ]
+  },
+  "words": 246
+}

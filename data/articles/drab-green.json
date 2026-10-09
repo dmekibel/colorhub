@@ -1,0 +1,112 @@
+{
+  "slug": "drab-green",
+  "name": "Drab Green",
+  "hex": "#749551",
+  "names": [
+    "Drab Green"
+  ],
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Drab Green is a muted, mid-toned olive green, a crowd name from the 2010 xkcd color survey built on an old English word for dullness.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Drab, borrowed for a green",
+      "body": "The only recorded source for Drab Green is the xkcd survey of 2010 [1]. *Drab* on its own is centuries older than that. Paterson's dictionary uses it for a plain, dull color with no brightness, a word historically tied to undyed wool cloth [1]. Our library separately carries it as half of [[linen-grey|Drab Grey]], first set down in Ridgway's 1886 atlas [1]. Drab Green pairs that same plain word with [[green]], rather than continuing any formal naming system [1].\n\nAt hex #749551 it measures lightness 58 and chroma 40 in LCH, and the nearest ISCC-NBS block reads as a moderate yellow green, 4.6 units off [1]. Its closest named neighbor is [[swedish-green|Flat Green]], 4.0 units away and more vivid, followed by [[swedish-green|Swedish Green]], 4.4 units off, also more vivid [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This match appears in 0.35% of the 23,781 paintings in our archive (84 paintings, as photographed); the within-painting lens narrows that to 36 [3]. In our archive it is rarer than 55% of the named colors [3]. It peaks in the 1900s, present in 0.7% of the 1,674 paintings we have from that decade (12 paintings), 3.9 times the rate its museums would predict [3]. Inside a painting it most often plays an accent across its 36 appearances by lightness rank within the painting [3]. It is most over-represented in France, 2.4x expected (17 of 3,443 paintings) [3]. The earliest match dates to 1512, 498 years before the name's 2010 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "drab, a plain dull color, + green",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "green",
+      "swedish-green",
+      "dull-green"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 84,
+    "pct_archive": 0.35,
+    "n_within_painting": 36,
+    "pct_within_painting": 0.15,
+    "rank_pct": 45,
+    "countries": [
+      "France"
+    ],
+    "name_first_recorded": 2010,
+    "earliest_match_year": 1512
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-d.json): xkcd color survey, 2010; Ridgway 1886 (for drab grey)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the old word *drab* mean on its own?",
+      "choices": [
+        "A plain, dull color with no brightness",
+        "A bright, saturated color",
+        "A dye made from madder root",
+        "A shade reserved for royalty"
+      ],
+      "answer": "A plain, dull color with no brightness",
+      "kind": "pick"
+    },
+    {
+      "q": "Which painter carries Drab Green at the highest rate above the archive baseline?",
+      "choices": [
+        "Georges Seurat",
+        "Paul Cezanne",
+        "Gustav Klimt",
+        "Claude Monet"
+      ],
+      "answer": "Georges Seurat",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Drab Green pairs a centuries-old word for dullness with a 2010 crowd survey."
+  ],
+  "words": 312,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "field section's presence/rank/decade/painter/country numbers no longer matched data/graph/fieldnotes (stale archive snapshot); replaced with the current fieldnotes facts"
+    ]
+  }
+}

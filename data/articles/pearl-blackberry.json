@@ -1,0 +1,108 @@
+{
+ "slug": "pearl-blackberry",
+ "name": "Pearl Blackberry",
+ "hex": "#6B6880",
+ "names": [
+  "Pearl Blackberry"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pearl Blackberry is a muted, greyish purple from the German RAL paint standard, and it lands close enough to our archive's Heather Grey that the two are a near-exact match.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pearl, qualified",
+   "body": "Our library catalogues this name from RAL 4012, the industrial color-matching standard first issued in Germany in 1927, and flags it as an obscure, qualified name rather than a core teaching word [1]. The nearest named colors on file are [[plumbago-slate]], [[deep-slate-violet]], [[campanula-purple]] and [[purplish-grey]], at 5.4, 5.5, 5.5 and 6.1 ΔE [1]. In Munsell terms it reads 9.8PB 4.4/3.2: low chroma, tipped toward blue-violet, and the ISCC-NBS system would call its block \"grayish purple\" [1].\n\nThe nearest named color in our data is [[heather-grey|Heather grey]], at a CIEDE2000 distance of 0.0 — the two names describe the same computed swatch [1]. No book in our library explains why RAL paired \"pearl\" with \"blackberry\" for this particular grey-violet; the pairing is undocumented here [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pearl Blackberry appears in 77 of our 23,781 paintings, about 0.32 percent, as photographed; the within-painting lens finds it covering real area in 40 of them [2]. It peaks in the 1900s, at 2.9 times the expected rate for that century, and is most over-represented in French paintings, at 2.3 times expected [2]. Inside a painting it most often plays a hidden color, tucked in rather than carrying the light [2].\n\nThe earliest match in our archive is dated 1460, in a panel by Filippo Lippi — 467 years before RAL's 1927 record of the name, as photographed, a floor and not a first, since the archive's early centuries are thin [2]. That gap is a look-alike hue surviving in an aged photograph, not proof that anyone mixed this specific grey-violet that early [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; grouped with other RAL \"Pearl\" names",
+   "first_recorded": "1927, RAL 4012",
+   "source": "ColorHub color library: RAL color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "plumbago-slate",
+   "deep-slate-violet",
+   "campanula-purple",
+   "purplish-grey"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 77,
+  "measured": {
+   "lch": [
+    45,
+    14,
+    297
+   ],
+   "nearest": [
+    [
+     "Plumbago Slate",
+     5.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 4012 entry, Munsell notation, ISCC-NBS block and look-alike distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color is a near-exact computed match for Pearl Blackberry?",
+   "choices": [
+    "Heather grey",
+    "Phlox",
+    "Pigeon Blue",
+    "Pinard Yellow"
+   ],
+   "answer": "Heather grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our books explain why RAL combined \"pearl\" with \"blackberry\" for this color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pearl Blackberry and Heather Grey are, by the numbers, the same color under two different names."
+ ],
+ "words": 294,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

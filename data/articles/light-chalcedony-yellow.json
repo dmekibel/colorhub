@@ -1,0 +1,129 @@
+{
+ "slug": "light-chalcedony-yellow",
+ "name": "Light Chalcedony Yellow",
+ "hex": "#F1E595",
+ "names": [
+  "Light Chalcedony Yellow"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Chalcedony Yellow is a light greenish yellow from Ridgway's 1912 atlas, filed again by name in the 1955 ISCC-NBS dictionary, and named after the mineral chalcedony rather than a flower or dye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mineral-named Ridgway tone",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate XVII, hue 25′, tone d [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Chalcedony Yellow\" under block 101, \"light greenish yellow\" [2]. The name builds \"light\" onto [[chalcedony-yellow]], after chalcedony, the waxy quartz that can carry this pale tint [1].\n\nIn our color library its closest neighbor is [[primrose-yellow]], about 2.7 units away and duller, followed by [[barium-yellow]] at 3.0 units, close enough to pass for the same color [3]. [[light-green-yellow]] sits 3.3 units off and more vivid [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings matches this tone in 189 of them, about 0.79 percent, as photographed, more common than 61 percent of the named colors we track [4]. It peaks in the 1400s, present in 6 of the 945 paintings we have from that century, 1.3 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays an accent, in 51 percent of its 114 clearly-ranked appearances [4]. It shares canvases with Dark Olive-Buff more than chance, a lift of 3.2 [4]. The earliest dated match is 1415, 497 years before the name's first 1912 record, so this is a look-alike hue in an old photograph, not proof of the name's age [4]. The archive's early centuries are thin, so this is a floor, not a first. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"light\" plus [[chalcedony-yellow]], after the mineral chalcedony",
+   "first_recorded": "1912 (Ridgway, plate XVII); carried into the 1955 ISCC-NBS dictionary, block 101",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "primrose-yellow",
+   "barium-yellow",
+   "light-green-yellow"
+  ],
+  "parent": "chalcedony-yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 189,
+  "measured": {
+   "lch": [
+    90.3,
+    41.1,
+    100.0
+   ],
+   "nearest": [
+    [
+     "Primrose Yellow",
+     2.7
+    ],
+    [
+     "Barium Yellow",
+     3.0
+    ],
+    [
+     "Light Green-Yellow",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XVII, hue 25′, tone d",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ISCC-NBS, NBS Circular 553 (1955), block 101, \"Light Chalcedony Yellow\" (data/sources/iscc-nbs-names.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Chalcedony Yellow is named after which mineral?",
+   "choices": [
+    "Chalcedony",
+    "Amber",
+    "Topaz",
+    "Citrine"
+   ],
+   "answer": "Chalcedony",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Light Chalcedony Yellow sits closer to Barium Yellow than to Light Green-Yellow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Light Chalcedony Yellow takes its name from the waxy quartz chalcedony, not from a flower or dye."
+ ],
+ "words": 281,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

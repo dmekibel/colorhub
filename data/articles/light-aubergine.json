@@ -1,0 +1,122 @@
+{
+ "slug": "light-aubergine",
+ "name": "Light aubergine",
+ "hex": "#4F284B",
+ "names": [
+  "Light aubergine"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Light aubergine is a dark reddish purple from the Japanese traditional color system, where it stands for *murasaki*, the word for both the color purple and the murasaki root once used to dye it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Murasaki: a plant and a purple",
+   "body": "Our graph files this swatch as a Japanese traditional color name, with the kanji 紫 and the romanized reading *murasaki*, meaning simply \"purple\" [1]. In Japan, the word names both the color and the plant: *murasaki* is gromwell, *Lithospermum erythrorhizon*, whose root dyed cloth this deep reddish purple before synthetic dyes replaced it [1]. The English display name links the shade to the Western vegetable aubergine, the eggplant, whose dark purple skin our library independently dates as a color word to 1794 [1][2].\n\nIn the color graph, Light aubergine's nearest named neighbor is [[coronation|Coronation]], 3.0 units away, with [[japanese-violet|Japanese Violet]] close behind at 3.4 and [[adamia|Adamia]] at 3.6 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this dark purple in 8 of 23,781 paintings, about 0.03 percent, as photographed, with the within-painting lens finding it in 5, rarer than 75 percent of our named colors [3]. The earliest dated match on file is a work by Giovanni Battista Paggi from 1586; that floor marks the limit of a thin early archive, not proof the shade existed earlier still, since the match is a look-alike hue in an old varnished photograph [3]. Inside the paintings that do hold it, it most often plays a shadow, in 60 percent of its matches [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "murasaki (紫), the Japanese word for purple and for the gromwell root once used to dye it",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color graph (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Murasaki"
+  ],
+  "siblings": [
+   "coronation",
+   "japanese-violet"
+  ],
+  "parent": "aubergine",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "murasaki (紫)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 8,
+  "n_within": 5,
+  "rarer_than_pct": 75,
+  "role": {
+   "shadow": 60
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Coronation",
+     3.0
+    ],
+    [
+     "Japanese Violet",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\") and look-alike edges",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul dictionary note on aubergine, dated 1794",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In Japanese, murasaki is the word for purple and also the name of what?",
+   "choices": [
+    "The gromwell root used to dye it",
+    "A royal palace",
+    "A sea creature",
+    "A Buddhist temple"
+   ],
+   "answer": "The gromwell root used to dye it",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside the paintings where it appears, Light aubergine most often plays a shadow rather than a light.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "In Japanese, the same word, murasaki, names both this purple and the root once used to dye it."
+ ],
+ "words": 239,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

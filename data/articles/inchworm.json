@@ -1,0 +1,114 @@
+{
+  "slug": "inchworm",
+  "name": "Inchworm",
+  "hex": "#B2EC5D",
+  "names": [
+    "Inchworm"
+  ],
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Inchworm is a bright yellow-green named for the looping caterpillar, a Crayola color that replaced an older crayon rather than joining the box as something new.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Replacing Magic Mint",
+      "body": "An inchworm is a caterpillar that moves by arching its body into a loop and pulling its back half up to its front, as if measuring the ground in inches [1]. Crayola introduced a crayon of this color in 2003, known as \"Inch Worm\" from 2003 to 2005 before the spelling settled to one word; it replaced the retired color Magic Mint [2]. Our data does not record who chose the name or whether a contest was involved [2].\n\nThe nearest named neighbor by measured color is [[kiwi]], more vivid than this shade; [[light-lime]] sits close by, lighter [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Inchworm covering at least 1 percent of its canvas, as photographed [4]. A yellow-green this bright and this light is rare in oil paint before modern synthetic pigments, and the name itself did not exist before 2003 [2][4]. That describes our museum-sourced archive, not painting as a whole [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the inchworm caterpillar",
+      "first_recorded": "2003, Crayola (as \"Inch Worm\")",
+      "source": "Wikipedia, \"List of Crayola crayon colors\""
+    },
+    "aka": [
+      "Inch Worm"
+    ],
+    "siblings": [
+      "kiwi",
+      "light-lime",
+      "light-pea-green",
+      "june-bud"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "match": {
+      "hex": "#B2EC5D",
+      "de2000": 4,
+      "min_cover": 0.01
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "General reference: inchworm (looper caterpillar) locomotion",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/Geometer_moth"
+    },
+    {
+      "n": 2,
+      "kind": "web",
+      "cite": "Wikipedia, \"List of Crayola crayon colors\"",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors"
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What color did Inchworm replace in Crayola's lineup?",
+      "choices": [
+        "Magic Mint",
+        "Teal Blue",
+        "Blizzard Blue",
+        "Mulberry"
+      ],
+      "answer": "Magic Mint",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: a painting from the 1800s could have been described by its maker as \"Inchworm green.\"",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Inchworm didn't join Crayola's box; it replaced Magic Mint in 2003."
+  ],
+  "words": 182,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": []
+  }
+}

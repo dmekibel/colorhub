@@ -1,317 +1,317 @@
 {
- "slug": "linen",
- "name": "Linen",
- "hex": "#FAF0E6",
- "names": [
-  "Linen"
- ],
- "tier": "standard",
- "depth": "long",
- "lede": "Linen is the pale, faintly pink off-white of the X11 color set, named for cloth woven from flax, the oldest textile known, whose natural color is greyer and browner than its name suggests.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A cloth before it is a color",
-   "body": "Linen is cloth woven from flax, and the color took its name from the cloth. The swatch here, #FAF0E6, is one of the 140 named colors of the X11 set, [1]. It is a very pale, faintly pink off-white, and it is lighter than the [[ecru]] swatch (#F0E6D2) in every channel [1][20].\n\nThe swatch is a screen idea of linen, not linen itself. Real linen thread is rarely this pale on coming from the plant. Its natural color runs from off-white through light grey to brown, taking in the whole range of beige and ecru tones [2]. How anyone got it from there to a clean white is most of this story."
+  "slug": "linen",
+  "name": "Linen",
+  "hex": "#FAF0E6",
+  "names": [
+    "Linen"
+  ],
+  "tier": "standard",
+  "depth": "long",
+  "lede": "Linen is the pale, faintly pink off-white of the X11 color set, named for cloth woven from flax, the oldest textile known, whose natural color is greyer and browner than its name suggests.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A cloth before it is a color",
+      "body": "Linen is cloth woven from flax, and the color took its name from the cloth. The swatch here, #FAF0E6, is one of the 140 named colors of the X11 set, [1]. It is a very pale, faintly pink off-white, and it is lighter than the [[ecru]] swatch (#F0E6D2) in every channel [1][20].\n\nThe swatch is a screen idea of linen, not linen itself. Real linen thread is rarely this pale on coming from the plant. Its natural color runs from off-white through light grey to brown, taking in the whole range of beige and ecru tones [2]. How anyone got it from there to a clean white is most of this story."
+    },
+    {
+      "id": "oldest",
+      "title": "The oldest cloth",
+      "body": "Linen is the oldest known textile [2]. Books disagree on how old the first flax fibers are: Pastoureau gives about thirty-five thousand years for scraps found in a cave in Georgia, Finlay thirty thousand [2][3]. Finlay adds that one spun fiber from that cave had been dyed turquoise and another, from about 23,000 years ago, had been pink, so flax was never undyeable, only best left alone [3].\n\nIn Egypt, from about 2400 BCE, in the Fifth Dynasty, weavers began adding occasional blue stripes along the edges of undyed linen used to wrap mummies [5]. Balfour-Paul suggests indigo was chosen probably because it is the one dye flax fibers take up well [5]. In Egypt and in ancient Palestine, indigo is the only color found on the earliest dyed linen fragments [5]. Most of the resist-dyed hangings of the late Roman and early Christian period, one dated to the fourth century CE, were found at the linen-weaving center of Akhmim, and most are dyed with indigo blue [5]."
+    },
+    {
+      "id": "flax",
+      "title": "From flax to ecru",
+      "body": "Making linen is slow. The flax stems are first retted, soaked in ponds or laid out in the dew, then broken, combed and spun [3]. The dew turns the fiber silver, and pond water turns it pale gold [3]. Ponds are said to give the better linen, though they smell terrible [3].\n\nEven after this the fiber is not white [4]. Its natural color is called *ecru*, from a French word meaning cloth that has never been wet [4]. Related words are *greige*, grey and *drab*, and drab began as the French *drap*, the brownish color of sheets that have not yet been bleached [4]. The same fiber explains why old novels write of flaxen hair and tow-headed children: tow was the dirtier, goldish, lower grade of flax used for rope and coarse cloth [4]."
+    },
+    {
+      "id": "bleaching",
+      "title": "Making linen white",
+      "body": "Pure white linen was hard and expensive for a very long time. Pliny reported that in his day the finest linen came from Saetabis, now Xativa near Valencia, with Retovium near Turin a close second [3]. The Retovium cloth was very white, and Pliny put its price at double that of any other linen [3]. Britain and Gaul were best known for bleaching, and Pliny says they sometimes added the roots of wild poppies to the water [3].\n\nThe Romans soaked linen in milk, or bleached it with morning dew or with oxalic acid from sorrel and sea plants [2]. They also whitened it with chalk mixed with water, but chalk was no dye and had to be reapplied for each ceremony that called for true white [2]. Pastoureau adds that linen alone could be dyed white before the fourteenth century, and only by a complex process, while wool was left undyed or whitened with sunlight and dew [9].\n\nBy the eighteenth century the work was industrial. In Finlay's account, workers at the bleaching greens around Glasgow three hundred years ago used sour milk and fern ashes, and left the cloths outdoors for many days [3]. In the early 1800s many linen workers turned to sulphuric acid, then called vitriol, to speed this up [3]. Wealthy British families sometimes sent linen to the Netherlands because the water was soft, and paintings of Dutch bleach fields show sheets laid out so straight they now look like solar panels [3].\n\nParis was the odd case. The Seine and its tributary the Bievre gave linen a yellowish tinge, and middle-class Parisians mostly put up with it until commercial laundries opened in the 1850s [3]. The richest families shipped their washing to England, the Netherlands, or even the French West Indies, and owned hundreds of shirts and sheets to cover months of absence [3]."
+    },
+    {
+      "id": "white",
+      "title": "One word, many whites",
+      "body": "Linen is the cloth most tied to the idea of a clean, ritual white. Ancient societies seem to have noticed more kinds of white than we do, and the white of the linen that priests wore was not the white of the wool in a Roman toga [6]. Greek temples were offered immaculate linen cloth, white flowers and white animals, and priestesses served in white [2].\n\nGreek had two whites, one pure, bright and uniform, the other dull, dirty and greyish [2]. The first was good and worthy, the second suggested dirt, disease or death, and Pastoureau remarks that Plato was not entirely wrong to prefer cloth in its natural linen shade over the artifices of dyes [2].\n\nJosephus, as Birren reports him, read the plain white linen of the veils as a sign of the earth, because flax grows out of the earth, with purple for the sea, blue for the air and scarlet for fire [7]. Gage records a medieval version of this four-element reading, in which white linen stands for earth, and a reading of a painted Virgin in which it stands for chastity and purity [8]. Pastoureau asks whether white was a symbol of purity because of lilies, linen and milk, and answers that it is impossible to know [2]."
+    },
+    {
+      "id": "dyed",
+      "title": "Dyed linen, and the guilds",
+      "body": "Dyers in medieval Europe were divided by fiber [10]. In most textile towns the dyeing corporations were strictly separated by whether they worked wool, linen, silk or, in certain Italian towns, cotton, and a dyer could not work outside a licensed range of colors [10]. Guilds tested candidates hard, and one exam for a master dyer set forty-eight yards of blue linen as the test piece, plus wool thread dyed blue and green [12].\n\nIndigo and woad did not always mix with linen. A Florentine wool corporation forbade tropical indigo in 1317, yet by the early fifteenth century the indigo vat was allowed for linens, next to the woad vat kept for wools [11]. In Valencia a statute of 1322 let woad and indigo vats co-exist but forbade combining them [11]. Islamic Spain used the stronger indigo vat for linens and for fustian, a mixed cotton and linen cloth, as early as the mid-thirteenth century [11].\n\nSome colors were hard to get onto linen. Pastoureau reports that Roman women's tunics were of wool and linen, and also of cotton and silk, the two fabrics that took green dyes better [13]. In antiquity purple dyes went onto wool and silk, only rarely onto cotton and never onto linen [16]. Indigo, then, was the classic linen color, as the Egyptian stripes suggest [5]."
+    },
+    {
+      "id": "canvas",
+      "title": "Under the paint",
+      "body": "In the fifteenth century, as oil painting rose, artists moved from solid timber to flexible woven linen canvas [14]. Rigid gesso was dropped for supple oil primers colored with lead white, since chalk turns nearly transparent in linseed oil [14]."
+    },
+    {
+      "id": "isabelline",
+      "title": "Linen and a legend",
+      "body": "One famous color name is said to come from linen. The story goes that Archduchess Isabella vowed not to change her underwear until her husband took Ostend, and that [[white]] is the color her linens became after a three-year siege [15]. St Clair calls the tale nonsense: it first appeared in print only in the nineteenth century, and the color name is older [15]. Treat it as a legend, not an origin."
+    },
+    {
+      "id": "modern",
+      "title": "Linen as a word for white",
+      "body": "Because linen is now so tied to bleached white, it has lent its name to paint-chart whites. Eckstut notes that paint companies learned names matter for sales, and a shopper faced with many whites will often choose one whose name is familiar, perhaps a linen white [19]. At the turn of the twentieth century, St Clair reports, all children under two wore easy-to-bleach white linen dresses regardless of sex [17]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of the linen swatch covers at least five per cent of the canvas in 486 works, about 2 per cent of the archive [20]. That is a high count, and probably reflects how often pale paper, silk and plaster grounds appear in photographs [20]. The top match is an album leaf by Bian Shoumin of about 1700, where the swatch fills 96 per cent of the image, presumably bare paper [20].\n\nThe match rate peaks in the 1300s, with 28 of 251 paintings (11 per cent, 5.5 times the archive rate), and the single richest decade is the 1410s, with 7 of 25 [20]. By country, China stands out, with 70 of 635 works [20]. In the archive's color-neighbor data, the words that travel with this swatch are *White* and *Ecru* [20]. As ever these are photographs of aged, varnished paintings, so read them as screen colors and not as pigment tests [20]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "linen cloth, woven from flax",
+      "first_recorded": "as an X11 color name; the date is undocumented in our books",
+      "source": "Paterson, A Dictionary of Colour, \"linen\""
+    },
+    "aka": [
+      "linen white",
+      "flax cloth"
+    ],
+    "siblings": [
+      "ecru",
+      "antique-white",
+      "floral-white",
+      "ivory"
+    ],
+    "parent": "white",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "ecru",
+        "gloss": "the natural, unbleached cloth color: deeper and more tan than the Linen swatch"
+      },
+      {
+        "slug": "white",
+        "gloss": "a legendary linen color, but its swatch is a different pale tan-pink"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "lin (flax); écru for unbleached cloth"
+      }
+    ]
   },
-  {
-   "id": "oldest",
-   "title": "The oldest cloth",
-   "body": "Linen is the oldest known textile [2]. Books disagree on how old the first flax fibers are: Pastoureau gives about thirty-five thousand years for scraps found in a cave in Georgia, Finlay thirty thousand [2][3]. Finlay adds that one spun fiber from that cave had been dyed turquoise and another, from about 23,000 years ago, had been pink, so flax was never undyeable, only best left alone [3].\n\nIn Egypt, from about 2400 BCE, in the Fifth Dynasty, weavers began adding occasional blue stripes along the edges of undyed linen used to wrap mummies [5]. Balfour-Paul suggests indigo was chosen probably because it is the one dye flax fibers take up well [5]. In Egypt and in ancient Palestine, indigo is the only color found on the earliest dyed linen fragments [5]. Most of the resist-dyed hangings of the late Roman and early Christian period, one dated to the fourth century CE, were found at the linen-weaving center of Akhmim, and most are dyed with indigo blue [5]."
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#FAF0E6",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 486,
+    "top_paintings": [
+      "cma-161023",
+      "commons-Q115241482",
+      "cma-152830",
+      "cma-161025"
+    ],
+    "peak_century": {
+      "century": 1300,
+      "hits": 28,
+      "n": 251,
+      "lift": 5.46
+    },
+    "peak_decade": {
+      "decade": 1410,
+      "hits": 7,
+      "n": 25
+    },
+    "top_country": {
+      "name": "China",
+      "hits": 70,
+      "n": 635
+    },
+    "company": [
+      "White",
+      "Ecru",
+      "Silver"
+    ]
   },
-  {
-   "id": "flax",
-   "title": "From flax to ecru",
-   "body": "Making linen is slow. The flax stems are first retted, soaked in ponds or laid out in the dew, then broken, combed and spun [3]. The dew turns the fiber silver, and pond water turns it pale gold [3]. Ponds are said to give the better linen, though they smell terrible [3].\n\nEven after this the fiber is not white [4]. Its natural color is called *ecru*, from a French word meaning cloth that has never been wet [4]. Related words are *greige*, grey and *drab*, and drab began as the French *drap*, the brownish color of sheets that have not yet been bleached [4]. The same fiber explains why old novels write of flaxen hair and tow-headed children: tow was the dirtier, goldish, lower grade of flax used for rope and coarse cloth [4]."
-  },
-  {
-   "id": "bleaching",
-   "title": "Making linen white",
-   "body": "Pure white linen was hard and expensive for a very long time. Pliny reported that in his day the finest linen came from Saetabis, now Xativa near Valencia, with Retovium near Turin a close second [3]. The Retovium cloth was very white, and Pliny put its price at double that of any other linen [3]. Britain and Gaul were best known for bleaching, and Pliny says they sometimes added the roots of wild poppies to the water [3].\n\nThe Romans soaked linen in milk, or bleached it with morning dew or with oxalic acid from sorrel and sea plants [2]. They also whitened it with chalk mixed with water, but chalk was no dye and had to be reapplied for each ceremony that called for true white [2]. Pastoureau adds that linen alone could be dyed white before the fourteenth century, and only by a complex process, while wool was left undyed or whitened with sunlight and dew [9].\n\nBy the eighteenth century the work was industrial. In Finlay's account, workers at the bleaching greens around Glasgow three hundred years ago used sour milk and fern ashes, and left the cloths outdoors for many days [3]. In the early 1800s many linen workers turned to sulphuric acid, then called vitriol, to speed this up [3]. Wealthy British families sometimes sent linen to the Netherlands because the water was soft, and paintings of Dutch bleach fields show sheets laid out so straight they now look like solar panels [3].\n\nParis was the odd case. The Seine and its tributary the Bievre gave linen a yellowish tinge, and middle-class Parisians mostly put up with it until commercial laundries opened in the 1850s [3]. The richest families shipped their washing to England, the Netherlands, or even the French West Indies, and owned hundreds of shirts and sheets to cover months of absence [3]."
-  },
-  {
-   "id": "white",
-   "title": "One word, many whites",
-   "body": "Linen is the cloth most tied to the idea of a clean, ritual white. Ancient societies seem to have noticed more kinds of white than we do, and the white of the linen that priests wore was not the white of the wool in a Roman toga [6]. Greek temples were offered immaculate linen cloth, white flowers and white animals, and priestesses served in white [2].\n\nGreek had two whites, one pure, bright and uniform, the other dull, dirty and greyish [2]. The first was good and worthy, the second suggested dirt, disease or death, and Pastoureau remarks that Plato was not entirely wrong to prefer cloth in its natural linen shade over the artifices of dyes [2].\n\nJosephus, as Birren reports him, read the plain white linen of the veils as a sign of the earth, because flax grows out of the earth, with purple for the sea, blue for the air and scarlet for fire [7]. Gage records a medieval version of this four-element reading, in which white linen stands for earth, and a reading of a painted Virgin in which it stands for chastity and purity [8]. Pastoureau asks whether white was a symbol of purity because of lilies, linen and milk, and answers that it is impossible to know [2]."
-  },
-  {
-   "id": "dyed",
-   "title": "Dyed linen, and the guilds",
-   "body": "Dyers in medieval Europe were divided by fiber [10]. In most textile towns the dyeing corporations were strictly separated by whether they worked wool, linen, silk or, in certain Italian towns, cotton, and a dyer could not work outside a licensed range of colors [10]. Guilds tested candidates hard, and one exam for a master dyer set forty-eight yards of blue linen as the test piece, plus wool thread dyed blue and green [12].\n\nIndigo and woad did not always mix with linen. A Florentine wool corporation forbade tropical indigo in 1317, yet by the early fifteenth century the indigo vat was allowed for linens, next to the woad vat kept for wools [11]. In Valencia a statute of 1322 let woad and indigo vats co-exist but forbade combining them [11]. Islamic Spain used the stronger indigo vat for linens and for fustian, a mixed cotton and linen cloth, as early as the mid-thirteenth century [11].\n\nSome colors were hard to get onto linen. Pastoureau reports that Roman women's tunics were of wool and linen, and also of cotton and silk, the two fabrics that took green dyes better [13]. In antiquity purple dyes went onto wool and silk, only rarely onto cotton and never onto linen [16]. Indigo, then, was the classic linen color, as the Egyptian stripes suggest [5]."
-  },
-  {
-   "id": "canvas",
-   "title": "Under the paint",
-   "body": "In the fifteenth century, as oil painting rose, artists moved from solid timber to flexible woven linen canvas [14]. Rigid gesso was dropped for supple oil primers colored with lead white, since chalk turns nearly transparent in linseed oil [14]."
-  },
-  {
-   "id": "isabelline",
-   "title": "Linen and a legend",
-   "body": "One famous color name is said to come from linen. The story goes that Archduchess Isabella vowed not to change her underwear until her husband took Ostend, and that [[isabelline]] is the color her linens became after a three-year siege [15]. St Clair calls the tale nonsense: it first appeared in print only in the nineteenth century, and the color name is older [15]. Treat it as a legend, not an origin."
-  },
-  {
-   "id": "modern",
-   "title": "Linen as a word for white",
-   "body": "Because linen is now so tied to bleached white, it has lent its name to paint-chart whites. Eckstut notes that paint companies learned names matter for sales, and a shopper faced with many whites will often choose one whose name is familiar, perhaps a linen white [19]. At the turn of the twentieth century, St Clair reports, all children under two wore easy-to-bleach white linen dresses regardless of sex [17]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of the linen swatch covers at least five per cent of the canvas in 486 works, about 2 per cent of the archive [20]. That is a high count, and probably reflects how often pale paper, silk and plaster grounds appear in photographs [20]. The top match is an album leaf by Bian Shoumin of about 1700, where the swatch fills 96 per cent of the image, presumably bare paper [20].\n\nThe match rate peaks in the 1300s, with 28 of 251 paintings (11 per cent, 5.5 times the archive rate), and the single richest decade is the 1410s, with 7 of 25 [20]. By country, China stands out, with 70 of 635 works [20]. In the archive's color-neighbor data, the words that travel with this swatch are *White* and *Ecru* [20]. As ever these are photographs of aged, varnished paintings, so read them as screen colors and not as pigment tests [20]."
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"linen\" and \"écru\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, White: The History of a Color, \"Wool and Linen: Dressing in White\" and \"From Nature to Culture\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Finlay, Fabric, \"The whiteness of linen\" and the flax chapter",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Finlay, Fabric, \"Grey, ecru and drab\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, the early history of the dye in Egypt and the Near East",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pastoureau, White, \"The Lessons of the Lexicon\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, part 1, ch. 10",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, on medieval four-element colour exegesis",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 1, on white at Easter and dyeing in white",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Pastoureau, Blue, ch. 2 and Pastoureau, Green, \"The dyer's vats\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Pastoureau, Red, note 54 to the chapter on Rome",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, the medieval spread of the indigo vat in Spain and Italy",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 6",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Pastoureau, Green, \"Green among the Romans\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, the entries on gesso and chalk grounds",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, \"Isabelline\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, \"Pink\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Eckstut and Eckstut, What Is Color?, on naming and selling whites",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "data",
+      "cite": "ColorHub archive of 23,781 paintings (tools/article_field.py, ΔE 6, 5% cover), as photographed; X11 swatch values",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the word ecru originally describe?",
+      "choices": [
+        "Cloth that has never been wet",
+        "A kind of Egyptian blue",
+        "Flax grown near water",
+        "A bleached sheet"
+      ],
+      "answer": "Cloth that has never been wet",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the color name isabelline comes from the unwashed linen of a queen at the siege of Ostend.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "What dye is the only color found on the earliest dyed linen fragments from Egypt and Palestine?",
+      "choices": [
+        "Indigo",
+        "Madder",
+        "Saffron",
+        "Purple from murex"
+      ],
+      "answer": "Indigo",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Linen thread is not white: the plant gives off-white to grey-brown, and whiteness was made by dew, sour milk and sun.",
+    "In Pliny's day the best linen cost twice as much as any other, and its whiteness was part of the price.",
+    "Look at a worn linen shirt next to a bleached one: you are seeing the difference between ecru and the swatch on this page."
+  ],
+  "words": 1485,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Purple-dye line now says 'in antiquity' (source scope: ancient dyers).",
+      "Spot-checked Pliny prices, Georgia cave dates, indigo vat statutes, Egyptian stripes, guild exam, Isabelline: all supported."
+    ]
   }
- ],
- "aside": {
-  "origin": {
-   "named_after": "linen cloth, woven from flax",
-   "first_recorded": "as an X11 color name; the date is undocumented in our books",
-   "source": "Paterson, A Dictionary of Colour, \"linen\""
-  },
-  "aka": [
-   "linen white",
-   "flax cloth"
-  ],
-  "siblings": [
-   "ecru",
-   "antique-white",
-   "floral-white",
-   "ivory"
-  ],
-  "parent": "white",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "ecru",
-    "gloss": "the natural, unbleached cloth color: deeper and more tan than the Linen swatch"
-   },
-   {
-    "slug": "isabelline",
-    "gloss": "a legendary linen color, but its swatch is a different pale tan-pink"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "lin (flax); écru for unbleached cloth"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#FAF0E6",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 486,
-  "top_paintings": [
-   "cma-161023",
-   "commons-Q115241482",
-   "cma-152830",
-   "cma-161025"
-  ],
-  "peak_century": {
-   "century": 1300,
-   "hits": 28,
-   "n": 251,
-   "lift": 5.46
-  },
-  "peak_decade": {
-   "decade": 1410,
-   "hits": 7,
-   "n": 25
-  },
-  "top_country": {
-   "name": "China",
-   "hits": 70,
-   "n": 635
-  },
-  "company": [
-   "White",
-   "Ecru",
-   "Silver"
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"linen\" and \"écru\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, White: The History of a Color, \"Wool and Linen: Dressing in White\" and \"From Nature to Culture\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Finlay, Fabric, \"The whiteness of linen\" and the flax chapter",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Finlay, Fabric, \"Grey, ecru and drab\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, the early history of the dye in Egypt and the Near East",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pastoureau, White, \"The Lessons of the Lexicon\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, part 1, ch. 10",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, on medieval four-element colour exegesis",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 1, on white at Easter and dyeing in white",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Pastoureau, Blue, ch. 2 and Pastoureau, Green, \"The dyer's vats\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Pastoureau, Red, note 54 to the chapter on Rome",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, the medieval spread of the indigo vat in Spain and Italy",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 6",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Pastoureau, Green, \"Green among the Romans\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, the entries on gesso and chalk grounds",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, \"Isabelline\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, \"Pink\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Eckstut and Eckstut, What Is Color?, on naming and selling whites",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "data",
-   "cite": "ColorHub archive of 23,781 paintings (tools/article_field.py, ΔE 6, 5% cover), as photographed; X11 swatch values",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the word ecru originally describe?",
-   "choices": [
-    "Cloth that has never been wet",
-    "A kind of Egyptian blue",
-    "Flax grown near water",
-    "A bleached sheet"
-   ],
-   "answer": "Cloth that has never been wet",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the color name isabelline comes from the unwashed linen of a queen at the siege of Ostend.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "What dye is the only color found on the earliest dyed linen fragments from Egypt and Palestine?",
-   "choices": [
-    "Indigo",
-    "Madder",
-    "Saffron",
-    "Purple from murex"
-   ],
-   "answer": "Indigo",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Linen thread is not white: the plant gives off-white to grey-brown, and whiteness was made by dew, sour milk and sun.",
-  "In Pliny's day the best linen cost twice as much as any other, and its whiteness was part of the price.",
-  "Look at a worn linen shirt next to a bleached one: you are seeing the difference between ecru and the swatch on this page."
- ],
- "words": 1485,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Purple-dye line now says 'in antiquity' (source scope: ancient dyers).",
-   "Spot-checked Pliny prices, Georgia cave dates, indigo vat statutes, Egyptian stripes, guild exam, Isabelline: all supported."
-  ]
- }
 }

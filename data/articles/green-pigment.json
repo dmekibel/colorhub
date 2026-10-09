@@ -1,0 +1,119 @@
+{
+ "slug": "green-pigment",
+ "name": "Green (Pigment)",
+ "hex": "#00A550",
+ "names": [
+  "Green (Pigment)"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Green (Pigment) is a reference value from the pigment and printing industry, a deep, saturated green closer to ink on a swatch book than to any single named shade in nature.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A reference value, not a story",
+   "body": "Our library gives this entry no deeper history than its function: it is listed as a pigment-industry reference value, one of several named variants of [[green]] alongside [[green-crayola|Green (Crayola)]] [1]. Its own source, cited only as a general web listing, does not explain who set this exact value or when [1].\n\nThe nearest named look-alikes on file are [[peppermint|Peppermint]], a shade duller, and [[green|Green]] itself, also duller [2]. [[medium-green|Medium Green]] sits almost at the same point, and [[shamrock-green|Shamrock Green]] and [[bud-green|Bud Green]] are both duller still [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a color close enough to this one over enough of its canvas to count, as photographed [3]. A reference green built for printed pigment swatches and ink matching has little reason to turn up in painted canvases, which depend on different pigments and binders entirely [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a pigment-industry reference value",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "peppermint",
+   "medium-green",
+   "shamrock-green",
+   "bud-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    59.4,
+    65.0,
+    148.6
+   ],
+   "nearest": [
+    [
+     "Peppermint",
+     3.5
+    ],
+    [
+     "Green",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-g.json), standard-system tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-g.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of source gives Green (Pigment) its value?",
+   "choices": [
+    "A pigment-industry reference value",
+    "A named painter's mix",
+    "A gemstone",
+    "A Japanese traditional list"
+   ],
+   "answer": "A pigment-industry reference value",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources name a specific person or company behind Green (Pigment)'s exact value.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Green (Pigment) is built for ink and pigment swatch books, not for painted canvases, which is why no painting in our archive carries it."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources."
+  ]
+ },
+ "words": 166
+}

@@ -1,0 +1,136 @@
+{
+  "slug": "pale-black-shade",
+  "name": "Pale black shade",
+  "hex": "#2B2028",
+  "names": [
+    "Pale black shade"
+  ],
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Pale black shade is a near-black plum, filed under a traditional Japanese name, Sensaicha, \"thousand year old brown,\" whose own origin is undocumented.",
+  "sections": [
+    {
+      "id": "japan",
+      "title": "A brown with no history given",
+      "body": "Our library lists this swatch as *Sensaicha* (千歳茶), which translates as \"thousand year old brown,\" grouped with the traditional colors of Japan [1]. Unlike most of that family, our data gives this one's own tier as undocumented: no plant, era or dyer is attached to the name in the sources checked here, only the translation itself [1]. The library also carries an alternate hex, #3B3429, for the same name, a reminder that traditional-color swatches vary by source [1].\n\nIts nearest named neighbor is [[vivid-black]], only 2.9 units off, essentially the same color on screen [2]; [[continental-blue]] sits 3.4 units away. It shares its graph hex exactly with the separately named [[pale-black-shade]] (Shikon, blue-violet) [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a color within range of this swatch in 618 of 23,781 paintings, 2.6 percent, as photographed; the within-painting lens finds it in 518 [3]. It most often plays a shadow, in 46 percent of those 518 paintings by lightness rank, so varnish cannot fake the result [3]. The earliest match dates to the year 1201, a floor and not a first, since the archive's early centuries are thin [3]. A name meaning \"a thousand years old\" naturally outruns any dated painting in our archive; the phrase describes a shade of aged brown, not a literal age."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Sensaicha, a traditional Japanese color name (\"thousand year old brown\")",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "Wikipedia, \"Traditional colors of Japan\""
+    },
+    "aka": [
+      "Sensaicha"
+    ],
+    "siblings": [
+      "vivid-black",
+      "continental-blue",
+      "raisin-black",
+      "poppy-purple"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "dark-walnut",
+        "gloss": "a different traditional Japanese color (Binrōjizome, betel nut dyed) with a similar English rendering"
+      },
+      {
+        "slug": "pale-black-shade",
+        "gloss": "shares this exact graph hex but a separate traditional Japanese name (Shikon)"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Sensaicha (千歳茶)"
+      }
+    ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 618,
+    "n_within_painting": 518,
+    "pct_archive": 2.6,
+    "rank_pct": 83,
+    "measured": {
+      "lch": [
+        14,
+        8,
+        335
+      ],
+      "nearest": [
+        [
+          "Vivid black",
+          2.9
+        ],
+        [
+          "Continental Blue",
+          3.4
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), Wikipedia \"Traditional colors of Japan\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does Sensaicha, the name behind Pale black shade, translate as?",
+      "choices": [
+        "Thousand year old brown",
+        "Blue-violet",
+        "Betel nut dyed",
+        "Iron storage"
+      ],
+      "answer": "Thousand year old brown",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources document which dye or dyer Sensaicha comes from.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale black shade's Japanese name translates as a thousand years old, though it is only a brown."
+  ],
+  "words": 236,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
+  }
+}

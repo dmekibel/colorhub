@@ -1,0 +1,137 @@
+{
+  "slug": "light-burgundy",
+  "name": "Light Burgundy",
+  "hex": "#A8415B",
+  "names": [
+    "Light Burgundy"
+  ],
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Light Burgundy is a muted purplish red built by adding the modifier \"light\" to [[burgundy]], first recorded in the 2010 xkcd color survey rather than in any older color dictionary.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on Burgundy",
+      "body": "Light Burgundy follows ordinary English modifier grammar: \"light\" attached to the wine-named color [[burgundy]] [1]. Our library's earliest record of the exact name comes from the xkcd color survey, a 2010 crowdsourced naming project, not from Ridgway's 1912 atlas or the 1955 ISCC-NBS dictionary, neither of which lists this precise tint by name [1].\n\nIn our color library its nearest neighbor is [[pomegranate-purple]], about 2.9 units away and duller, followed by Pomegranate Purple at 3.2 units, almost indistinguishable on screen [2]. [[pomegranate-purple]] sits 3.8 units off, also close, while [[solferino]] and Maroon X11 are duller and more vivid respectively [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings matches this tone in only 18 of them, about 0.08 percent, as photographed, rarer than 68 percent of the named colors we track [3]. It peaks in the 1900s, present in 5 of the 1,674 paintings from that decade, 4.2 times the rate its museums' own baseline would predict [3].\n\nInside a painting it most often plays an accent across its 10 clearly-ranked appearances [3]. The earliest dated match in our archive is 1609, in a painting by El Greco [3]. The archive's early centuries are thin, so this is a floor, not a first. That is 401 years before the name's first record, in the 2010 xkcd survey, so the match is a look-alike hue in an old photograph, not proof the name existed then [3]. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the modifier \"light\" plus [[burgundy]]",
+      "first_recorded": "2010, xkcd color survey",
+      "source": "xkcd color survey (2010)"
+    },
+    "aka": [],
+    "siblings": [
+      "pomegranate-purple",
+      "solferino",
+      "antique-ruby"
+    ],
+    "parent": "burgundy",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 18,
+    "measured": {
+      "lch": [
+        42.6,
+        45.2,
+        8.8
+      ],
+      "nearest": [
+        [
+          "Light Maroon",
+          2.9
+        ],
+        [
+          "Pomegranate Purple",
+          3.2
+        ],
+        [
+          "Solferino",
+          3.7
+        ],
+        [
+          "Dark Rose",
+          3.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "xkcd color survey (2010), rgb.txt results",
+      "loc_kind": null,
+      "url": "https://xkcd.com/color/rgb/"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which 2010 project is the earliest record of the exact name \"Light Burgundy\" in our sources?",
+      "choices": [
+        "The xkcd color survey",
+        "Ridgway's color atlas",
+        "The ISCC-NBS dictionary",
+        "The Maerz and Paul dictionary"
+      ],
+      "answer": "The xkcd color survey",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Light Burgundy appears in Ridgway's 1912 atlas under this exact name.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Inside a painting, Light Burgundy most often plays which role?",
+      "choices": [
+        "An accent",
+        "A light",
+        "A hidden color",
+        "A focal color"
+      ],
+      "answer": "An accent",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Light Burgundy's earliest recorded name comes from a 2010 online color survey, centuries after paintings in our archive already carry its look-alike hue."
+  ],
+  "words": 281,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
+  }
+}

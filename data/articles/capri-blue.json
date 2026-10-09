@@ -1,101 +1,101 @@
 {
- "slug": "capri-blue",
- "name": "Capri Blue",
- "hex": "#278794",
- "names": [
-  "Capri Blue"
- ],
- "tier": "place",
- "depth": "brief",
- "lede": "Capri Blue is a deep greenish blue, named for the water of the island of Capri.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name",
-   "body": "St Clair glosses Capri blue as a sapphire-like shade, named for the water inside the Blue Grotto (Grotta Azzurra) on the island of Capri [3]. The library records it in Ridgway's atlas of 1912, in RAL 5019 and in ISCC-NBS block 160 [1]. It lies near [[teal]] and [[turquoise]] [1].\n\nThe swatch here is the Ridgway match; the RAL paint is a darker, bluer color [1]. Different systems use the one name for different blues, a reminder that place names are loose [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Capri Blue appears in 0.13% of the 23,781 paintings in our archive, as photographed [2]. It is rarer than 67% of the named colors, and it peaks in the 1800s at 0.1% of that century's paintings [2]. Inside a painting it is split between light and shadow roles, 36% each at most [2]. Only 32 paintings hold it, so the numbers are thin [2]. In printed English the word peaks in the 1930s [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the water of the Blue Grotto on Capri",
-   "first_recorded": "1912 (Ridgway)",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "teal",
-   "turquoise",
-   "sapphire"
+  "slug": "capri-blue",
+  "name": "Capri Blue",
+  "hex": "#278794",
+  "names": [
+    "Capri Blue"
   ],
-  "parent": "blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 32,
-  "pct_paintings": 0.13,
-  "peak_century": 1800,
-  "library_first": 1912
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "tier": "place",
+  "depth": "brief",
+  "lede": "Capri Blue is a deep greenish blue, named for the water of the island of Capri.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name",
+      "body": "St Clair glosses Capri blue as a sapphire-like shade, named for the water inside the Blue Grotto (Grotta Azzurra) on the island of Capri [3]. The library records it in Ridgway's atlas of 1912, in RAL 5019 and in ISCC-NBS block 160 [1]. It lies near [[teal]] and [[turquoise]] [1].\n\nThe swatch here is the Ridgway match; the RAL paint is a darker, bluer color [1]. Different systems use the one name for different blues, a reminder that place names are loose [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Capri Blue appears in 0.13% of the 23,781 paintings in our archive, as photographed [2]. It is rarer than 67% of the named colors, and it peaks in the 1800s at 0.1% of that century's paintings [2]. Inside a painting it is split between light and shadow roles, 36% each at most [2]. Only 32 paintings hold it, so the numbers are thin [2]. In printed English the word peaks in the 1930s [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the water of the Blue Grotto on Capri",
+      "first_recorded": "1912 (Ridgway)",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "teal",
+      "turquoise",
+      "cerulean-blue"
+    ],
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 32,
+    "pct_paintings": 0.13,
+    "peak_century": 1800,
+    "library_first": 1912
   },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, glossary",
-   "loc_kind": "entry",
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, glossary",
+      "loc_kind": "entry",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What gave Capri blue its name, according to St Clair?",
+      "choices": [
+        "The Blue Grotto's water",
+        "A mineral from Capri",
+        "A uniform"
+      ],
+      "answer": "The Blue Grotto's water",
+      "kind": "pick"
+    },
+    {
+      "q": "Do all systems agree on one Capri Blue?",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Capri Blue is named for the water in the Blue Grotto."
+  ],
+  "words": 166,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "What gave Capri blue its name, according to St Clair?",
-   "choices": [
-    "The Blue Grotto's water",
-    "A mineral from Capri",
-    "A uniform"
-   ],
-   "answer": "The Blue Grotto's water",
-   "kind": "pick"
-  },
-  {
-   "q": "Do all systems agree on one Capri Blue?",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Capri Blue is named for the water in the Blue Grotto."
- ],
- "words": 166,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

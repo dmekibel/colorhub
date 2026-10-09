@@ -1,0 +1,112 @@
+{
+ "slug": "violet-crayola",
+ "name": "Violet (Crayola)",
+ "hex": "#963D7F",
+ "names": [
+  "Violet (Crayola)"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Violet (Crayola) is Crayola's own named shade of [[violet]], and our data finds it nearly identical to [[plum]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crayon-box shade of violet",
+   "body": "Wikipedia's Crayola color list is our only source for this name, crediting it to the Crayola line with no coining date given [1]. Our data finds it 2.8 units from [[plum]], close enough to read as almost the same color [2].\n\nFurther look-alikes are [[maximum-red-purple]] (4.3, redder), [[razzmic-berry]] (4.5, duller) and [[traffic-purple]] (4.6, more vivid) [2].\n\nIn LCH terms Violet (Crayola) measures lightness 40, chroma 49 and hue 337 degrees, a muted reddish purple rather than a pure spectral violet [2]. Crayola markets it alongside dozens of other named purples, and our sources give no account of why this particular shade earned the plain name \"Violet\" in that line [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Crayola crayon line",
+   "first_recorded": "undocumented release year",
+   "source": "Wikipedia Crayola color list"
+  },
+  "aka": [],
+  "siblings": [
+   "plum",
+   "maximum-red-purple",
+   "razzmic-berry"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    40.2,
+    49.4,
+    337.0
+   ],
+   "nearest": [
+    [
+     "Plum",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia Crayola color list entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub look-alike graph (data/graph/edges-v.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color is nearly identical to Violet (Crayola) in our data?",
+   "choices": [
+    "Plum",
+    "Traffic Purple",
+    "Razzmic Berry",
+    "Magenta Haze"
+   ],
+   "answer": "Plum",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Wikipedia gives a date for when Crayola introduced this shade.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Violet (Crayola) sits so close to Plum that the two are easy to mix up."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 151
+}

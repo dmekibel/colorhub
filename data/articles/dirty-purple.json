@@ -1,0 +1,110 @@
+{
+ "slug": "dirty-purple",
+ "name": "Dirty Purple",
+ "hex": "#734A65",
+ "names": [
+  "Dirty Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dirty Purple is a dark, grayed reddish purple named by the 2010 xkcd color survey, where it sits almost on top of a Ridgway swatch no one connected it to.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd name, close to an older one",
+   "body": "The only recorded source for Dirty Purple is the xkcd survey of 2010, built on the plain modifier grammar *dirty* plus [[purple]] [1]. At hex #734A65 it measures lightness 37 and chroma 24 in LCH, and its nearest ISCC-NBS block is a dark reddish purple, 7.8 units off [1]. No earlier book or chart carries this exact name [1].\n\nIts closest named neighbor is [[dull-dark-purple|Dull Dark Purple]], only 2.6 units away and almost the same color, a Ridgway swatch from 1912 that the two surveys never cross-referenced [2]. Further out sit [[raisin-purple|Raisin Purple]], 4.4 units off and more vivid, and [[old-lilac|Old Lilac]], 4.7 units off, purpler and brighter [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 0.09% of the 23,781 paintings in our archive (22 paintings, as photographed); the within-painting lens narrows that to 7 [3]. In our archive it is rarer than 72% of the named colors [3]. Inside a painting it most often plays a shadow across its 7 appearances by lightness rank within the painting [3]. The earliest match dates to 1337, 673 years before the name's 2010 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier of purple: dirty + purple",
+   "first_recorded": "2010 (xkcd color survey)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "purple",
+   "dull-dark-purple",
+   "raisin-purple",
+   "old-lilac"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 22,
+  "pct_archive": 0.09,
+  "n_within_painting": 7,
+  "pct_within_painting": 0.03,
+  "rank_pct": 28,
+  "name_first_recorded": 2010,
+  "earliest_match_year": 1337
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): xkcd color survey, 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which survey first records the name Dirty Purple in our library?",
+   "choices": [
+    "The 2010 xkcd color survey",
+    "Ridgway's 1912 atlas",
+    "The ISCC-NBS charts of 1955",
+    "Maerz and Paul's 1930 dictionary"
+   ],
+   "answer": "The 2010 xkcd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color sits closest to Dirty Purple?",
+   "choices": [
+    "Dull Dark Purple",
+    "Old Lilac",
+    "Raisin Purple",
+    "Claret Cup"
+   ],
+   "answer": "Dull Dark Purple",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dirty Purple, a 2010 crowd name, lands almost exactly on a Ridgway swatch from 1912 that nobody linked it to."
+ ],
+ "words": 254,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section's presence/rank/decade/painter/country numbers no longer matched data/graph/fieldnotes (stale archive snapshot); replaced with the current fieldnotes facts"
+  ]
+ }
+}
