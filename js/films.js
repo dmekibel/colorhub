@@ -49,6 +49,7 @@ function filmPage(f) {
     ${f.facts && f.facts.length ? `<dl class="facts">${f.facts.map(x => `<div><dt>${esc(x.label)}</dt><dd>${esc(x.value)}</dd></div>`).join("")}</dl>` : ""}
     ${links.length ? `<div class="film-links">${links.map(l => `<a class="btn ghost" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${ICON.arrow}</a>`).join("")}</div>` : ""}
     <p class="fine">${f.early ? esc(f.pd || "Public domain in the US: released before 1930.") : "This film is under copyright, so there are no stills here. The colors above are named by us to illustrate the text; hex values are screen approximations."}</p>
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "film:" + f.id, title: f.title }) : ""}
     ${f.sources && f.sources.length ? secHTML("src", "Sources", sourcesHTML(f.sources), false) : ""}
   `, "article film-page");
   el.querySelector("[data-back]").onclick = xBack;

@@ -37,6 +37,7 @@ const TL_KIND = { color: "Color", name: "Color", painting: "Painting", gallery: 
   movement: "Movement", decade: "Decade", country: "Country", arthistory: "Art history", hub: "Color family", which: "Which is which",
   pair: "A pair in paintings", paintings: "Painting map", "paintings-of": "In paintings", chords: "Masters' chords", look: "Look", fashion: "Fashion", gem: "Gems",
   botany: "Flowers and plants", poem: "Poem", passage: "Passage", film: "Film", photo: "Your photo", page: "Page", story: "Story",
+  subject: "Subject",   // js/subjectview.js: #/subject/<kind>/<id>, PAGES-AUDIT.md plan item 3
   studio: "Studio", practice: "Practice", odd: "Odd one out", line: "Across the line", favorites: "Your colors", taste: "Taste",
   lab: "Lab", mapstudy: "Study the map", daily: "Color of the day", challenge: "Daily challenge", museum: NAV_MUSEUM, explore: NAV_MUSEUM };
 

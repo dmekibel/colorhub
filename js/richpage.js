@@ -847,6 +847,7 @@ function colorDossier(entry, o = {}) {
     <div class="ar-fam-host" data-ar-fam-host hidden></div>
     ${rpIdCardHTML()}
     ${rpNextHTML()}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "c:" + name, title: name }) : ""}
     <p class="fine rp-last">Screen colors are approximate. Painting figures are measured from museum photographs of aged, varnished paintings.</p>
   `, "article cp-page" + (o.cls ? " " + o.cls : ""));
   el.style.setProperty("--c", heroHex);   // the page's own faint tint (css/colorpage.css .screen.cp-page)

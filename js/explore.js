@@ -593,6 +593,9 @@ function xStep(prev) {
   if (prev === "contrast") return LAB.contrast(LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.set, LAB_CONTRAST_STATE && LAB_CONTRAST_STATE.slot, false);
   if (prev.startsWith("pal:")) return openSavedPalette(prev.slice(4), false);   // a saved palette (js/studio.js)
   if (prev.startsWith("g:")) return galleryPage(+prev.slice(2), false, ...(typeof tlTapped === "function" ? [tlTapped(prev), tlTol(prev)] : []));   // with the color that brought you (js/trail.js)   // a gallery painting (js/gallery.js)
+  // the subject palette view (js/subjectview.js): "sv:<kind>:<id>" -- reopen it exactly, without re-pushing a
+  // second trail token (svOpen already finds this one on top of XSTACK and leaves it alone)
+  if (prev.startsWith("sv:") && typeof svOpen === "function") { const [, k, raw] = prev.split(":"); return svOpen({ kind: k, id: decodeURIComponent(raw), label: (typeof TL_META !== "undefined" && TL_META.get(prev) || {}).title }); }
   if (prev.startsWith("ar:") && typeof arStep === "function") return arStep(prev.slice(3));   // a hub or "which" page (js/article.js)
   if (prev.startsWith("ph:")) return photoPage(prev.slice(3), false);   // a saved photo (js/photos.js)
   if (prev.startsWith("poem:")) return poemPage(prev.slice(5), { back: true });   // a poem (js/poems.js)
@@ -710,13 +713,24 @@ function colorPage(n, tapped) {
 
 function wikiPage(n) {
   const sw = n.swatches || [];
+  // Gem and botany pages carry a real, credited Wikimedia photo (data/gem-images.js, data/botany-images.js)
+  // but used to render it as a plain mid-page figure, under a flat color-swatch hero (PAGES-AUDIT.md plan item
+  // 4, David 2026-10-09: "promote the existing sourced/credited images into the hero instead of a flat
+  // swatch"). Any wiki-shaped page with a real photo on file gets it as the hero now; the swatches (when there
+  // are any) move to a compact row under the title instead of disappearing. A page with no photo keeps the
+  // flat-swatch hero exactly as before — nothing here changes for the ~74 concept/pigment/culture pages, which
+  // have no entries in WIKI_IMAGES.
+  const heroPhoto = ((window.WIKI_IMAGES || {})[n.id] || [])[0];
+  const swHero = `<div class="p-hero">${sw.map(s => `<div style="--c:${s.h}" data-swatch="${s.h}" data-ink="${ink(s.h)}" title="${esc(s.label || "")}"><span>${esc(sw.length > 3 ? (s.label || "").split(/ · |: |, /)[0] : s.label || "")}</span></div>`).join("")}</div>`;
+  const swRow = `<div class="chips-wrap p-hero-sw">${sw.map(s => `<button class="pchip" data-swatch="${s.h}">${esc(s.label || "")}</button>`).join("")}</div>`;
   const el = show(`
     ${artTop(n)}
-    ${sw.length ? `<div class="p-hero">${sw.map(s => `<div style="--c:${s.h}" data-swatch="${s.h}" data-ink="${ink(s.h)}" title="${esc(s.label || "")}"><span>${esc(sw.length > 3 ? (s.label || "").split(/ · |: |, /)[0] : s.label || "")}</span></div>`).join("")}</div>` : ""}
+    ${heroPhoto ? `<div class="p-hero-photo">${figHTML(n.id, 0)}</div>` : sw.length ? swHero : ""}
     <p class="eyebrow p-type">${esc(TYPE_LABEL[n.type] || "Page")}</p>
     <h1 class="p-title">${esc(n.title)}</h1>
     ${n.dek ? `<p class="p-dek">${linkText(n.dek)}</p>` : ""}
-    ${figHTML(n.id)}
+    ${heroPhoto && sw.length ? swRow : ""}
+    ${heroPhoto ? "" : figHTML(n.id)}
     ${n.facts && n.facts.length ? `<dl class="facts">${n.facts.map(f => `<div><dt>${esc(f.label)}</dt><dd>${linkText(f.value)}</dd></div>`).join("")}</dl>` : ""}
     ${(() => {
       if (n.stub) return `<p class="fine">This page is being written. Its connections are already live.</p>`;
@@ -729,11 +743,41 @@ function wikiPage(n) {
     })()}
     ${typeof wgWikiTail === "function" ? wgWikiTail(n) : ""}
     ${connSection(n)}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: n.id, title: n.title }) : ""}
     ${n.sources ? secHTML("src", "Sources", sourcesHTML(n.sources), false) : ""}
   `, "article");
   wireArticle(el, n); wireSections(el);
 }
 
+// PAGES-AUDIT.md plan item 2 (David 2026-10-09): paintingPage() is the generic renderer for curated paintings,
+// photographer photos and pulp covers alike -- the one real dead end the audit found (no article, and
+// connSection() returns nothing for any of them, since they're never registered as graph nodes). This doesn't
+// try to write articles for ~4,300 photos and pulp covers; it makes the page degrade gracefully instead of
+// emptily: a real "By [artist]" link wherever that artist already has a painter page (reusing the art wiki's
+// own data-awpainter, same delegated handler artwiki.js already wires for every other painter link in the
+// app), and "Similar palettes" within the same small kind-specific archive it came from (PULP/PH -- both
+// already fully loaded client-side once their grid has been opened once, same reasoning js/pulp.js's own
+// header comment gives for not needing the gallery's heavier binary-indexed loader).
+function ptArtistLinkHTML(n) {
+  if (n.photographerSlug) return `<button class="aw-link" data-photographer="${esc(n.photographerSlug)}">${esc(n.artist || "")}</button>`;
+  const slug = n.artist && typeof routeSlug === "function" ? routeSlug(n.artist) : null;
+  if (slug && typeof awHasPainter === "function" && awHasPainter(slug)) return `<button class="aw-link" data-awpainter="${esc(slug)}">${esc(n.artist)}</button>`;
+  return esc(n.artist || "Artist unknown");
+}
+function ptSimilarPool(n) {
+  if (/^pulp-/.test(n.id)) return window.PULP || [];
+  if (n.kind === "painting" && n.typeLabel === "Photograph") return window.PH || [];
+  return [];
+}
+function ptSimilarByPaletteHTML(n) {
+  const pool = ptSimilarPool(n), names = new Set((n.palette || []).map(p => p.name).filter(Boolean));
+  if (pool.length < 2 || !names.size) return "";
+  const hits = pool.filter(x => x.id !== n.id && (x.palette || []).some(p => names.has(p.name)))
+    .map(x => ({ x, k: (x.palette || []).filter(p => names.has(p.name)).length })).sort((a, b) => b.k - a.k).slice(0, 8);
+  if (!hits.length) return "";
+  return `<div class="sec-head"><b>Similar palettes</b><span>shares a named color</span></div><div class="aw-cx">${hits.map(({ x, k }) =>
+    `<button class="aw-tie" data-ptgo="${esc(x.id)}"><b>${esc(x.title)}</b><span>${k} color${k === 1 ? "" : "s"} in common${x.artist ? " · " + esc(x.artist) : ""}</span></button>`).join("")}</div>`;
+}
 function paintingPage(n) {
   const pal = n.palette || [];
   const el = show(`
@@ -741,17 +785,30 @@ function paintingPage(n) {
     ${n.img ? `<div class="ptg"><img id="pimg" src="${esc(n.img)}" alt="${esc(n.title)} by ${esc(n.artist)}"><canvas id="pmask"></canvas></div>` : ""}
     <p class="eyebrow p-type">${esc(n.typeLabel || "Painting")}${n.year ? " · " + esc(n.year) : ""}</p>
     <h1 class="p-title">${esc(n.title)}</h1>
-    <p class="p-dek">${n.photographerSlug ? `<button class="aw-link" data-photographer="${esc(n.photographerSlug)}">${esc(n.artist || "")}</button>` : esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
+    <p class="p-dek">${ptArtistLinkHTML(n)}${n.place ? ` · ${esc(n.place)}` : ""}</p>
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
       <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
       <p class="fine">Tap a swatch to open its page.</p>${typeof prLearnBtn === "function" ? prLearnBtn(".palette", n.title) : ""}` : `<p class="fine">This painting's palette is being extracted.</p>`}
     ${n.note ? `<p class="p-body">${linkText(n.note)}</p>` : ""}
     ${connSection(n)}
+    ${ptSimilarByPaletteHTML(n)}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: n.id, title: n.title }) : ""}
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">${esc(n.imgSrcLabel || "Wikimedia Commons")}</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
   `, "article");
   wireArticle(el, n);
   // Phase 2 (js/photography.js): a photograph's byline opens its photographer's page, same pattern as a painter link
   const phLink = el.querySelector("[data-photographer]"); if (phLink) phLink.onclick = e => { e.stopPropagation(); if (typeof photographerPage === "function") photographerPage(phLink.dataset.photographer); };
+  el.querySelectorAll("[data-ptgo]").forEach(b => b.onclick = () => { const t = ptSimilarPool(n).find(x => x.id === b.dataset.ptgo); if (t) paintingPage(t); });
+  // the art wiki (AW.meta) is often still loading the first time a photo or pulp cover opens, so the artist
+  // byline upgrades to a real painter link in place once it lands, instead of staying plain text for the rest
+  // of the visit (same reactive-once-data-lands pattern js/gallery.js's own awContext uses on this page kind)
+  if (!n.photographerSlug && n.artist && typeof awLoad === "function") {
+    awLoad().then(() => {
+      if (!el.isConnected) return;
+      const dek = el.querySelector(".p-dek");
+      if (dek && !dek.querySelector("[data-awpainter],[data-photographer]")) dek.innerHTML = ptArtistLinkHTML(n) + (n.place ? ` · ${esc(n.place)}` : "");
+    }).catch(() => {});
+  }
   // L18 H4: the ColorSet verbs for this painting, "On the map" first (js/home.js hmPaintingSet, js/colorset.js csActions)
   if (pal.length && typeof hmPaintingSet === "function" && typeof csActions === "function") { const fine = el.querySelector(".pal-names + .fine"); if (fine) fine.after(csActions(hmPaintingSet(n), { only: ["map", "learn", "play"], back: () => paintingPage(n) })); }
   // highlight where a palette color sits, using the index map

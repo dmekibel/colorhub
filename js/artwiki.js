@@ -250,6 +250,19 @@ function awPortraitHero(slug, A, P, hlChips) {
       <figcaption>${esc(pt.caption || "Portrait")}<span> · Wikimedia Commons</span></figcaption>
     </figure>`;
   }
+  // No recorded portrait (David, 2026-10-09): "put one of his paintings at the top instead — his most famous
+  // painting". The same ranking awFamousRail reads (data/artists/portraits.json's own `famous`, built from
+  // Wikidata-recorded fame where it exists, else closeness to his signature colors); if even that's empty,
+  // his most-reached painting (P.typical, the one already used as the highlight card below) stands in instead.
+  // awFamousRail skips this same gi from its own rail, so it isn't shown twice.
+  const famousGi = (rec.famous || []).find(gi => gi != null && gi >= 0);
+  const heroGi = famousGi != null ? famousGi : (P.typical != null && P.typical >= 0 ? P.typical : null);
+  if (heroGi != null) {
+    return `<figure class="aw-pt-hero" data-pthero="${heroGi}" style="--c:${field}">
+      <button class="aw-pt-open" data-gi="${heroGi}" aria-label="Open the painting"><img alt="" data-ptimg></button>
+      <figcaption data-ptnoport="${esc(A.name)}">Loading…</figcaption>
+    </figure>`;
+  }
   // the signature-color field: clusters, else sig, else the barcode's own most-used colors (always present,
   // even for a painter too small for clusters or a signature -- the barcode skips nothing)
   let barNames = (A.clusters || []).flatMap(c => c.colors);
@@ -268,10 +281,20 @@ function awPortraitHero(slug, A, P, hlChips) {
 function awFillPortrait(el) {
   const b = el.querySelector("[data-pthero]"); if (!b) return;
   const gi = +b.dataset.pthero, im = b.querySelector("[data-ptimg]"); if (!im) return;
-  glDetail(gi).then(d => { if (!b.isConnected) return; im.src = glSmall(d) ? d.img : glBig(d.img); im.alt = d.t; b.setAttribute("aria-label", "Open " + d.t); }).catch(() => {});
+  glDetail(gi).then(d => {
+    if (!b.isConnected) return;
+    im.src = glSmall(d) ? d.img : glBig(d.img); im.alt = d.t; b.setAttribute("aria-label", "Open " + d.t);
+    // this hero is standing in for a missing portrait (awPortraitHero): caption it as what it actually is
+    const cap = b.querySelector("[data-ptnoport]");
+    if (cap) { const name = cap.dataset.ptnoport, yr = glYear(gi); cap.textContent = `${d.t}${yr ? ", " + yr : ""} — no portrait of ${name} in the archive`; }
+  }).catch(() => {});
 }
 function awFamousRail(slug, n) {
-  const rec = (AW.port && AW.port[slug]) || {}, list = (rec.famous || []).filter(gi => gi != null && gi >= 0);
+  const rec = (AW.port && AW.port[slug]) || {}, pt = rec.portrait || { src: "none" };
+  const hasPortrait = ((pt.src === "self" || pt.src === "other") && pt.gi != null) || (pt.src === "wikidata" && !!pt.url);
+  let list = (rec.famous || []).filter(gi => gi != null && gi >= 0);
+  // its first entry is already standing in for the portrait hero above (awPortraitHero) when there isn't one
+  if (!hasPortrait && list.length) list = list.slice(1);
   if (list.length < 2) return "";
   const note = rec.famousBy === "wikidata" ? "most widely recorded" : "closest to his signature colors";
   return `<div class="sec-head"><b>Most famous</b><span>${esc(note)}</span></div>
@@ -470,11 +493,13 @@ function awPainter(slug, push = true) {
     ${time}
     ${compared}
     <div class="aw-acts" data-aw-acts></div>
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "painter:" + slug, title: A.name }) : ""}
     <section class="srcs"><h3>Sources</h3><ul>
       <li>Colors measured by ColorHub from museum photographs (${A.n} paintings by ${esc(A.name)} in the archive); every figure is as photographed, screen color only.</li>
       ${m.q ? `<li>Dates, nationality, movement, teachers and portrait: <a href="https://www.wikidata.org/wiki/${m.q}" target="_blank" rel="noopener">Wikidata</a> (CC0)${m.wp ? ` · <a href="https://en.wikipedia.org/wiki/${encodeURIComponent(m.wp)}" target="_blank" rel="noopener">Wikipedia</a>` : ""}${m.img ? ` · portrait: <a href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(m.img)}" target="_blank" rel="noopener">Wikimedia Commons</a>` : ""}</li>` : `<li>No Wikidata match was found for this name, so dates come from the paintings themselves.</li>`}
     </ul></section>`, "article aw-page");
   awWire(el);
+  if (typeof wireLinks === "function") wireLinks(el);
   awFillHighlight(el);
   awFillPortrait(el);
   awWorksWire(el, slug, m, A, P);
@@ -822,8 +847,10 @@ function awGroup(kind, key, push = true) {
     ${arts ? `<div class="sec-head"><b>Key painters</b><span>most paintings here</span></div><div class="aw-near">${arts}</div>` : ""}
     <button class="btn ghost" data-awcolor="${anyHex}">Everything painted in ${esc(nameOf(anyHex).n.toLowerCase())} ${ICON.arrow}</button>
     ${pn}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: kind + ":" + key, title }) : ""}
     <section class="srcs"><h3>Sources</h3><ul><li>Computed by ColorHub from ${n} museum photographs; screen colors, as photographed. The most typical painting is the one nearest the group's average lightness, chroma, warmth and color spread.</li>${srcNote}${kind === "movement" ? `<li>Movement tags: museum records, and Wikidata (CC0).</li>` : ""}</ul></section>`, "article aw-page");
   awWire(el);
+  if (typeof wireLinks === "function") wireLinks(el);
   awFillHighlight(el);
 }
 
