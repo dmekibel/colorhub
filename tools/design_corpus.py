@@ -40,7 +40,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 import corpus as C  # noqa: E402
-from museums import chndm, rijksd, aicd, cmad, commonsd, npmd, metd  # noqa: E402
+from museums import chndm, rijksd, aicd, cmad, commonsd, npmd, metd, pulpc, pulpia  # noqa: E402
 
 RAW = C.RAW
 _download = C.download
@@ -63,20 +63,22 @@ C.download = _download_retry
 OUT = ROOT / "data" / "design"
 SEL = RAW / "design-selected.json"
 PAL = RAW / "design-palettes.jsonl"
-ADAPTERS = dict(chndm=chndm, rijksd=rijksd, aicd=aicd, cmad=cmad, commonsd=commonsd, npmd=npmd, metd=metd)
+ADAPTERS = dict(chndm=chndm, rijksd=rijksd, aicd=aicd, cmad=cmad, commonsd=commonsd, npmd=npmd, metd=metd,
+                pulpc=pulpc, pulpia=pulpia)
 for _s, _m in ADAPTERS.items():
     C.ADAPTERS[_s] = _m
     C.SRC[_s] = dict(dir=RAW / _s, **_m.INFO)
 
-CATS = ["poster", "graphic", "textile", "wallpaper", "ceramics", "glass", "furniture", "product", "costume", "stamps"]
+CATS = ["poster", "graphic", "textile", "wallpaper", "ceramics", "glass", "furniture", "product", "costume", "stamps", "pulp"]
 CAT_NAME = {"poster": "Posters and advertisements", "graphic": "Graphic design and print", "textile": "Textiles", "wallpaper": "Wallpaper",
             "ceramics": "Ceramics and tiles", "glass": "Glass", "furniture": "Furniture and lighting",
-            "product": "Product and industrial design", "costume": "Costume, fashion and jewelry", "stamps": "Postage stamps"}
+            "product": "Product and industrial design", "costume": "Costume, fashion and jewelry", "stamps": "Postage stamps",
+            "pulp": "Pulp magazine covers"}
 OBJECT_CATS = {"ceramics", "glass", "furniture", "product", "costume"}   # photographed as 3-D objects on a backdrop
 YEAR_MIN, YEAR_MAX = 1800, 1979
 CELL_CAP, SRC_CELL_CAP, MAKER_CAP = 180, 60, 20
 CAT_SRC_CAP = {("commonsd", "stamps"): 50}   # Commons has thousands of stamps; the Postal Museum already covers them
-SRC_CAP = {"commonsd": 120, "rijksd": 100, "npmd": 80}   # the sources for 1900-1979 and for commercial work get a larger share
+SRC_CAP = {"commonsd": 120, "rijksd": 100, "npmd": 80, "pulpc": 220, "pulpia": 220}   # the sources for 1900-1979 and for commercial work get a larger share
 
 
 def decade(y):
@@ -357,13 +359,13 @@ COM_RX = re.compile(r"advert|poster|label|packag|trade card|catalog|cover|billbo
                     r"playbill|program|menu|postcard|circular|prospectus|invoice|letterhead|bill ?head", re.I)
 # Rights of the image shown through the source's own URL: every source here is CC0 or public domain, so a thumbnail is
 # cleared. (Objects still under copyright would carry only their colors and a link: none is in the corpus yet.)
-RIGHTS = dict(chndm="cc0", npmd="cc0", aicd="pd", cmad="cc0", metd="cc0", rijksd="pd", commonsd="pd")
+RIGHTS = dict(chndm="cc0", npmd="cc0", aicd="pd", cmad="cc0", metd="cc0", rijksd="pd", commonsd="pd", pulpc="pd", pulpia="pd")
 
 
 def commercial(r):
     """Commercial design: advertising, posters, packaging and labels, covers, trade literature, stamps, and product /
     industrial design. A rule on the object's category, type and title, not a judgment of the object."""
-    if r["cat"] in ("poster", "stamps", "product"):
+    if r["cat"] in ("poster", "stamps", "product", "pulp"):
         return True
     return r["cat"] == "graphic" and bool(COM_RX.search(f"{r.get('ty') or ''} {r.get('t') or ''}"))
 
