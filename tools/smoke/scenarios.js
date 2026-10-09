@@ -1036,6 +1036,27 @@ scenario("pages", "nearest stories: a name without an article offers the nearest
   t.notes.push(`${first} > ${H.title(t)}`);
 });
 
+// David: a cold #/color/<archive-name-slug> link (a fresh profile, so CORE_NAMES/LONG_NAMES haven't loaded yet)
+// fell back to #/today instead of opening -- #/color/<core-name-slug> (BASICS/ALL, loaded synchronously) worked
+// fine, which is what hid it. js/router.js's "color" route now waits for the names it needs (routeNameAsync,
+// the same resolution #/name/<slug> already used) instead of giving up the moment a synchronous routeColor()
+// lookup misses.
+scenario("pages", "a cold #/color/<slug> link for an archive (non-core) name opens it, never falls back to Today", async t => {
+  const lib = await fetch("/data/library.json").then(r => r.json());
+  const core = new Set((await fetch("/data/core-names.json").then(r => r.json())).map(e => e.n.toLowerCase()));
+  const pool = lib.filter(e => e.n && !e.crude && /^#[0-9a-f]{6}$/i.test(e.h || "") && !core.has(e.n.toLowerCase())).map(e => e.n);
+  t.expect(pool.length >= 3, `too few archive-only names in data/library.json to sample (${pool.length})`);
+  const slugify = s => s.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");   // routeSlug, js/router.js
+  for (const n of t.sample(pool, 3, "coldcolor")) {
+    const slug = slugify(n);
+    await t.open("#/color/" + slug, { settle: 1500 });   // a genuinely fresh load: t.open() clears localStorage by default
+    await t.waitFor(() => t.$(".cp-page") || /No color by that name/.test(t.d.body.innerText), 10000, `${n}: neither a page nor a clean "not found" after a cold #/color/${slug}`);
+    t.expect(!/^#\/(today)?$/.test(t.w.location.hash) && t.w.location.hash !== "", `${n}: cold #/color/${slug} fell back to Today (hash is "${t.w.location.hash}")`);
+    t.expect(t.$(".cp-page"), `${n}: cold #/color/${slug} did not open a page (got: "${t.d.body.innerText.slice(0, 120)}")`);
+    t.expect(H.title(t).toLowerCase() === n.toLowerCase(), `${n}: cold #/color/${slug} opened "${H.title(t)}" instead`);
+  }
+});
+
 scenario("pages", "namePage x3: renders, a near name opens another, Back works", async t => {
   await t.open("#shot=home");
   const core = await fetch("/data/core-names.json").then(r => r.json());

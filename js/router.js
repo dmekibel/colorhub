@@ -233,18 +233,41 @@ function openRoute(hash, initial = false) {
     go(tabs[kind]);
     return true;
   }
-  const node = () => kind === "color" ? (routeColor(id) ? colorNode(routeColor(id)) : null)
-    : graph().nodes.get(kind === "painting" ? "painting-" + id : kind === "story" ? "s:" + id : id) || null;
-  if (["color", "page", "painting", "story"].includes(kind) && id) {
-    if (kind === "color" && !routeColor(id)) return false;
+  // #/color/<slug>: a cold load only has the ~101 core colors (BASICS/ALL) synchronously -- an archive name
+  // (CORE_NAMES, ~1,000; the ~2,700-name library) is still loading. routeColor alone used to just fail for one of
+  // those and the route gave up (`return false`), which bounced a fresh #/color/dawn-grey to the Welcome/Today
+  // fallback while #/color/scarlet (a core name) worked fine. Mirrors the "name" kind below: the fast path is
+  // unchanged for a core color, but a slug routeColor can't find now WAITS for the names it needs (routeNameAsync
+  // -- core names, library names and aliases) and THEN opens, as a color page or a name page, whichever the slug
+  // actually is -- never a silent redirect, and routeNoName (a real "not found" page) only once that's exhausted.
+  if (kind === "color" && id) {
+    const c = routeColor(id);
+    if (c) {
+      base();
+      ROUTE_NEXT = routed(c.n, parts.slice(0, more === "more" ? 3 : 2).join("/"));
+      whenWiki(() => { const n = colorNode(c); if (!n) return xToOrigin(); XSTACK = []; if (more === "more") return closeup(n); return openNode(n, true, tappedHex); });
+      return true;
+    }
     base();
-    ROUTE_NEXT = routed(kind === "color" ? routeColor(id).n : "", parts.slice(0, more === "more" ? 3 : 2).join("/"));
+    if (!CORE_NAMES) { ROUTE_NEXT = routed("", "color/" + id); waitScreen(); ROUTE_REPLACE = true; }
+    XSTACK = [];
+    whenWiki(() => routeNameAsync(id).then(r => {
+      if (r && r.color) { XSTACK = []; const n = colorNode(r.color); if (more === "more") return closeup(n); return openNode(n, true, tappedHex); }
+      if (r && r.entry) { if (more === "more" && typeof closeup === "function") { try { return closeup(r.entry); } catch (e) {} } return namePage(r.entry, true, tappedHex); }
+      routeNoName(id);
+    }));
+    return true;
+  }
+  const node = () => graph().nodes.get(kind === "painting" ? "painting-" + id : kind === "story" ? "s:" + id : id) || null;
+  if (["page", "painting", "story"].includes(kind) && id) {
+    base();
+    ROUTE_NEXT = routed("", parts.slice(0, more === "more" ? 3 : 2).join("/"));
     whenWiki(() => {
       const n = node();
       if (!n) return xToOrigin();
       XSTACK = [];
       if (more === "more") return closeup(n);
-      return n.kind === "story" ? storyPlayer(n) : openNode(n, true, kind === "color" ? tappedHex : null);
+      return n.kind === "story" ? storyPlayer(n) : openNode(n, true, null);
     });
     return true;
   }
