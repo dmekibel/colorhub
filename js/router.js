@@ -217,6 +217,8 @@ function openRoute(hash, initial = false) {
   if (kind === "studio" && id === "namer" && typeof LAB.namer === "function") { base(); XSTACK = []; LAB.namer(tappedHex); return true; }
   if (kind === "studio" && id === "wheel" && typeof gamutWheel === "function") { base(); XSTACK = []; gamutWheel(); return true; }
   if (kind === "studio" && id === "palette" && more && typeof openSavedPalette === "function") { base(); XSTACK = []; openSavedPalette(more); return true; }
+  // the family tree (js/aesthetics-graph.js): #/web, #/web/focus/<nodeId>, #/web/node/<nodeId>
+  if (kind === "web" && typeof agOpenRoute === "function") { base(); XSTACK = []; agOpenRoute(id, more); return true; }
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (kind === "map" && id && more != null && typeof hmMapRoute === "function") { base(); XSTACK = []; hmMapRoute(id, more); return true; }   // js/home.js: #/map/gallery/<i>, #/map/painting/<slug>

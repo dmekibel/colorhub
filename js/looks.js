@@ -147,6 +147,7 @@ function lkOpen(id, opts = {}) {
       ${extra.length ? `<div class="eyebrow lkx-sub">Also in ColorHub</div><div class="chips-wrap">${extra.map(x => `<button class="pchip" data-node="${esc(x.id)}">${x.h ? `<i style="--c:${x.h}"></i>` : ""}${esc(x.title)}<em class="mono">${x.score}%</em></button>`).join("")}</div>` : ""}
     </section>` : ""}
     ${related.length ? `<section class="lkx-sec"><h3>Related looks</h3><div class="lkx-strip lkx-rel">${related.map(r => `<button class="lkx-relc" data-lk="${esc(r.id)}">${lkStripes(r.pals[0].c)}<b>${esc(r.name)}</b><small>${esc(r.era)}</small></button>`).join("")}</div></section>` : ""}
+    <div class="lkx-acts"><button class="btn ghost" data-webfam="${esc(look.id)}">See its family tree ${ICON.arrow}</button></div>
     <p class="fine lkx-credit">${look.aw ? `See also: <a href="https://aesthetics.fandom.com/wiki/${esc(look.aw)}" target="_blank" rel="noopener">Aesthetics Wiki</a>. ` : ""}Descriptions are ColorHub's own. Palettes are chosen by ColorHub and named from the ColorHub library; hex values are screen approximations.${imgs.length ? " Photos: Wikimedia Commons, public domain or CC0." : ""}</p>
   `, "article lkx-page");
   const draw = () => {
@@ -173,6 +174,8 @@ function lkOpen(id, opts = {}) {
   el.addEventListener("click", e => {
     const n = e.target.closest("[data-node]"); if (n) { e.preventDefault(); return lkNode(n.dataset.node, look.id, pi); }
     const rl = e.target.closest("[data-lk]"); if (rl && rl.closest("#lkkb")) { e.preventDefault(); return lkOpen(rl.dataset.lk, { back: () => lkOpen(look.id, { keep: true, pi }) }); }
+    const fam = e.target.closest("[data-webfam]"); if (fam) { e.preventDefault(); buzz(6); return typeof agOpenRoute === "function" ? agOpenRoute("focus", "look:" + fam.dataset.webfam) : (location.hash = "#/web/focus/look:" + fam.dataset.webfam);
+    }
   });
   lkLoadKB(look, el);
 }
