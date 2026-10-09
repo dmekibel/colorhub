@@ -551,7 +551,7 @@ def rank_all():
                     "suggested_depth": kit["suggested_depth"], "book_hits": kit["books"]["n_hits"],
                     "archive_n": (kit["archive_fieldnotes"] or {}).get("ar", {}).get("n", 0),
                     "graph_degree": kit["score_breakdown"]["graph_degree"],
-                    "is_learn_word": "core" in (names_idx.get(slug, [None] * 5)[4] if len(names_idx.get(slug, [])) > 4 else "")})
+                    "is_learn_word": "c" in (names_idx.get(slug, [None] * 5)[4] or "" if len(names_idx.get(slug, [])) > 4 else "")})
     return out
 
 
