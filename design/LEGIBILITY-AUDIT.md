@@ -1,7 +1,7 @@
 # ColorHub legibility audit (2026-10-09)
 
 Crawled with `node tools/check_legibility.js --full` (tools/legibility-audit.js + tools/legibility-routes.js) at 375x812 and 440x956.
-88 screens, 30604 visible text nodes checked, 494 findings (0 hard failures, 494 reported-only).
+88 screens, 30572 visible text nodes checked, 494 findings (0 hard failures, 494 reported-only).
 
 Rules: reading text (>2 chars) under 13px always fails. Text under 24px needs >=4.5:1. "Large" text (>=24px, or >=19px bold) needs >=3:1 (reported, not gated). Italic Instrument Serif under 17px is flagged as hard to read. Paragraphs (>40 chars) with line-height/font-size < 1.4 are flagged. Text sitting directly on an `<img>`/`<canvas>` with no scrim layer found over it is reported as `text-over-image-no-scrim` with `bg: uncertain` (contrast can't be computed honestly without a real screenshot; these need a human look).
 
@@ -15,13 +15,13 @@ Rules: reading text (>2 chars) under 13px always fails. Text under 24px needs >=
 ### challenge-paint
 
 - `span` “J.C. Spengler. Warden of the Royal Cabin” — 375x812, 17px/400, contrast 17.64:1 — **tight-line-height**
-- `span` “J.C. Spengler. Warden of the Royal Cabin” — 440x956, 17px/400, contrast 17.64:1 — **tight-line-height**
+- `span` “J.C. Spengler. Warden of the Royal Cabin” — 440x956, 17px/400, contrast 5.8:1 — **tight-line-height**
 
 ### color-page-data
 
 - `p.rp-tier` “Named from nature · first recorded as a ” — 375x812, 19px/400 italic, contrast 4.77:1 — **tight-line-height**
 - `p.rp-def` “Teal is a dark greenish blue named after” — 375x812, 20px/400, contrast 4.77:1 — **tight-line-height**
-- `span.ar-lead-n` “A male Eurasian teal. The color is named” — 375x812, 18px/400, contrast 15.89:1 — **tight-line-height**
+- `span.ar-lead-n` “A male Eurasian teal. The color is named” — 375x812, 18px/400, contrast 13.61:1 — **tight-line-height**
 - `span` “Louis Le Nain” — 375x812, 13px/400 italic, contrast 7.27:1 — **italic-serif-too-small**
 - `span` “9.9× more than his or her peers, from 7 ” — 375x812, 13px/400, contrast 7.27:1 — **tight-line-height**
 - `span.pm-q-line` “Shimmer of waters with fish in them, the” — 375x812, 21px/400 italic, contrast 14.48:1 — **tight-line-height**
@@ -30,7 +30,7 @@ Rules: reading text (>2 chars) under 13px always fails. Text under 24px needs >=
 - `small` “Control panel · imagined 1970s–80s futur” — 375x812, 17px/400 italic, contrast 7.27:1 — **tight-line-height**
 - `p.rp-tier` “Named from nature · first recorded as a ” — 440x956, 19px/400 italic, contrast 4.77:1 — **tight-line-height**
 - `p.rp-def` “Teal is a dark greenish blue named after” — 440x956, 20px/400, contrast 4.77:1 — **tight-line-height**
-- `span.ar-lead-n` “A male Eurasian teal. The color is named” — 440x956, 18px/400, contrast 15.89:1 — **tight-line-height**
+- `span.ar-lead-n` “A male Eurasian teal. The color is named” — 440x956, 18px/400, contrast 13.61:1 — **tight-line-height**
 - `span` “Louis Le Nain” — 440x956, 13px/400 italic, contrast 7.27:1 — **italic-serif-too-small**
 - `span` “9.9× more than his or her peers, from 7 ” — 440x956, 13px/400, contrast 7.27:1 — **tight-line-height**
 - `span.pm-q-line` “Shimmer of waters with fish in them, the” — 440x956, 21px/400 italic, contrast 14.48:1 — **tight-line-height**
@@ -77,7 +77,7 @@ Rules: reading text (>2 chars) under 13px always fails. Text under 24px needs >=
 ### learnit-done
 
 - `p.lx-bet-q` “How many of these will you name tomorrow” — 375x812, 15px/400, contrast 17.64:1 — **tight-line-height**
-- `p.lx-bet-q` “How many of these will you name tomorrow” — 440x956, 15px/400, contrast 5.8:1 — **tight-line-height**
+- `p.lx-bet-q` “How many of these will you name tomorrow” — 440x956, 15px/400, contrast 17.64:1 — **tight-line-height**
 
 ### mapstudy
 
@@ -340,7 +340,7 @@ Rules: reading text (>2 chars) under 13px always fails. Text under 24px needs >=
 
 ### name-page
 
-- `span.ar-lead-n` “A Livonian man's shirt of unbleached lin” — 375x812, 18px/400, contrast 15.89:1 — **tight-line-height**
+- `span.ar-lead-n` “A Livonian man's shirt of unbleached lin” — 375x812, 18px/400, contrast 13.61:1 — **tight-line-height**
 - `span` “Shitao” — 375x812, 13px/400 italic, contrast 7.27:1 — **italic-serif-too-small**
 - `span` “Min Zhen” — 375x812, 13px/400 italic, contrast 7.27:1 — **italic-serif-too-small**
 - `span` “India” — 375x812, 13px/400 italic, contrast 7.27:1 — **italic-serif-too-small**
@@ -365,7 +365,7 @@ Rules: reading text (>2 chars) under 13px always fails. Text under 24px needs >=
 - `p.fx-in-sub` “Decades and houses whose signature color” — 375x812, 17px/400 italic, contrast 7.27:1 — **tight-line-height**
 - `em` “The bust Karol carries as a stand-in for” — 375x812, 13px/400, contrast 7.27:1 — **tight-line-height**
 - `small` “Country palette · recurring, mid-20th ce” — 375x812, 17px/400 italic, contrast 7.27:1 — **tight-line-height**
-- `span.ar-lead-n` “A Livonian man's shirt of unbleached lin” — 440x956, 18px/400, contrast 15.89:1 — **tight-line-height**
+- `span.ar-lead-n` “A Livonian man's shirt of unbleached lin” — 440x956, 18px/400, contrast 13.61:1 — **tight-line-height**
 - `span` “Shitao” — 440x956, 13px/400 italic, contrast 7.27:1 — **italic-serif-too-small**
 - `span` “Min Zhen” — 440x956, 13px/400 italic, contrast 7.27:1 — **italic-serif-too-small**
 - `span` “India” — 440x956, 13px/400 italic, contrast 7.27:1 — **italic-serif-too-small**
