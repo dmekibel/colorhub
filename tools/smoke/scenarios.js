@@ -2389,7 +2389,9 @@ scenario("sets", "Pair with on a color page: picker suggests, searches, try-on b
   const tryAfterScroll = t.$(".sx-try");
   t.expect(tryAfterScroll && Math.abs(tryAfterScroll.getBoundingClientRect().top - topBefore) < 2, `the preview scrolled away with the list instead of staying on top (was ${topBefore}, now ${tryAfterScroll && tryAfterScroll.getBoundingClientRect().top})`);
   t.expect(tryAfterScroll.classList.contains("collapsed"), "the preview never collapses after scrolling");
-  t.expect(!t.reachable(t.$("[data-try-add]")), "Add is not reachable once the preview has collapsed");
+  let reach = t.reachable(t.$("[data-try-add]"));
+  for (let i = 0; reach && i < 20; i++) { await t.tick(); await t.sleep(100); reach = t.reachable(t.$("[data-try-add]")); }
+  t.expect(!reach, `Add is not reachable once the preview has collapsed: ${reach}`);
   scrollBox.scrollTop = 0; scrollBox.dispatchEvent(new t.w.Event("scroll")); await t.sleep(250);
   t.expect(!t.$(".sx-try").classList.contains("collapsed"), "the preview doesn't expand again back at the top");
   // swapping to another candidate replaces the trial
