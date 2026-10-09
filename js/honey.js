@@ -702,7 +702,9 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
           if (dist / 2 - half < r) r = dist / 2 - half;
         }
       }
-      b.poly = null; b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
+      // rin0: the real neighbor-respecting inscribed radius, kept separately from b.rin (the growth pass below
+      // overwrites b.rin, and must never shrink a bubble PAST this -- see that pass's own comment).
+      b.poly = null; b.rin0 = b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
     }
     for (let i = 0; i < 16; i++) { const t = i / 16 * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
     const ci = Math.floor(b.x / cell), cj = Math.floor(b.y / cell);
@@ -736,12 +738,19 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   // Circles: a small bubble leaves room in its cell that its bigger neighbor can use (the Magnifier's center next to
   // its smaller first ring). Grow each circle, center outward, until it meets its neighbors across the gap, never past
   // its own lens size. Every step keeps r_a + r_b <= distance - gap, so circles still never overlap.
+  // David, 2026-10-09: "this middle gap hasn't been filled" -- a Sunflower/Spiral's own innermost points, after the
+  // fisheye stretches their real neighbors apart, can have a true (pass-1, gap-respecting) inscribed radius well
+  // past d0*grow -- but this pass started from d0*grow every time regardless, SHRINKING those already-correct
+  // circles back down and leaving gaps where several of them meet at the crowded center. b.rin0 (pass 1's own
+  // value, computed from the SAME real neighbors this pass also uses) is already proven non-overlapping on its
+  // own, so it's a safe floor here -- this pass can still grow a bubble further into room a smaller neighbor
+  // cedes, but never shrinks one below what pass 1 already knew was safe.
   if (shapeAmt <= .02) {
     const cx = drawn.reduce((t, b) => t + b.x, 0) / drawn.length, cy = drawn.reduce((t, b) => t + b.y, 0) / drawn.length;
     const order = drawn.map((b, n) => n).sort((a, c) => Math.hypot(drawn[a].x - cx, drawn[a].y - cy) - Math.hypot(drawn[c].x - cx, drawn[c].y - cy));
     for (let pass = 0; pass < 2; pass++) for (const n of order) {
       const b = drawn[n]; if (!b.nb) continue;
-      let lim = b.d0 * grow;
+      let lim = Math.max(b.d0 * grow, b.rin0 || 0);
       for (const [m, dist] of b.nb) lim = Math.min(lim, dist - gapPx - drawn[m].rin);
       b.rin = Math.max(0, lim); b.d = 2 * b.rin;
     }
@@ -1027,6 +1036,78 @@ function honeycomb(host, opts = {}) {
     const v = cfg[k] + d * t;
     return k === "shape" ? clamp(v, 0, 1) : k === "m0" ? Math.max(cfg.m1 + .05, v) : Math.max(0, v);
   }
+  // The whole-layout fit (David, 2026-10-09: the Arrange sheet covers the middle of the map, so zoomed in "you
+  // can barely see the difference between views" when a setting changes it; also reused by zFloor() just below,
+  // for the ordinary pinch-out floor outside the sheet too -- see that comment). Every cell's actual world
+  // (x,y), not a radial "whole book" approximation, which under- or over-zoomed for anything that isn't roughly
+  // circular (Families' three-wide grid, the Map's own tall tile), into whatever's left above the sheet
+  // (vcy()/vy() already track the inset, itself measured from the sheet's own getBoundingClientRect().top by
+  // js/home.js chooser's applyInset -- 0 outside the sheet, so this solves for the full viewport there), with a
+  // real ~16px margin on every side.
+  // Defined here (above zFloor, which calls it) rather than down with flyToFit/enterFit/exitFit where the rest
+  // of fit mode lives, because those are only ever CALLED later (after setup); zFloor() is called once during
+  // the very first setItems(), synchronously, before a later `const` in the same closure has initialized --
+  // boundsFit has no dependency on anything fit-mode-specific (fitMode/fitSaved/fitSaved aren't read here), so
+  // it can live wherever in the closure as long as it's before its first real caller.
+  const boundsFit = () => {
+    if (!lay || lay.globe || !lay.pts.length || !W) return null;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const p of lay.pts) { if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x; if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; }
+    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2, halfW = Math.max(.15, (maxX - minX) / 2), halfH = Math.max(.15, (maxY - minY) / 2);
+    // insetBottom (the target the sheet's own height was just measured to), not vy()/insetCur: the inset eases in
+    // over ~300ms (honey.js's own loop() tween), so fitting against the CURRENT (still mid-tween) value would aim
+    // for wherever the sheet happened to be a moment ago, not where it's about to settle.
+    // David, 2026-10-09: "the original view is now too far away" -- the disk floated at ~45% of the available
+    // width instead of filling it edge to edge. Two things compounded to cause that: (1) the margin reserved for
+    // the fisheye's magnified middle bubble was counted TWICE (once as extra margin scaled by base*m0, again as a
+    // 1.35x inflation of R below) -- now just the plain ~16px margin David asked for, plus one small (1.08x)
+    // allowance for the magnified middle bubble's drawn radius sticking a little past the raw lattice points'
+    // bounding box; and (2) fitting a single circumscribed-circle R (the content's half-diagonal) into the
+    // available rect's own half-diagonal only matches when the content's aspect happens to match the available
+    // rect's -- a lopsided shape (a tall, narrow region into a wide-and-short rect, or back) is under-constrained
+    // on its tighter axis, so one axis can overflow well past the sheet while the other still has room to spare.
+    // Checking width and height as two independent constraints on the SAME z (both must hold, so the smaller --
+    // more zoomed out -- survives) fixes both axes at once; js/honey.js's own zFloor() does the same AND-of-two-
+    // axes trick already (the `fits` helper a little below this function).
+    // David, 2026-10-09: "width ~= screen width minus ~16px margins" -- just the plain margin, no extra safety
+    // factor on top of it. The per-point check below already uses each point's own REAL drawn position (the
+    // same F(r,l)/r radial transform the renderer itself uses, not an approximation of where the magnified
+    // middle bubble might land), so there is nothing left to pad for.
+    const margin = 16, pad = 1;
+    const availW = Math.max(40, W - margin * 2), availH = Math.max(40, Hh - insetBottom - margin * 2);
+    // fit mode wants the OPPOSITE search direction from zFloor()'s own `search` a little below (its own
+    // minimum-zoom floor): here we want the LARGEST zoom that still keeps everything in bounds, so the content
+    // fills as much of the available rect as it can without overflowing it.
+    const searchMax = bad => {
+      let lo = ABS_ZMIN, hi = ZMAX;
+      if (!bad(hi)) return hi;
+      if (bad(lo)) return lo;
+      for (let i = 0; i < 26; i++) { const m = (lo + hi) / 2; if (bad(m)) hi = m; else lo = m; }
+      return lo;
+    };
+    let zt;
+    if (cfg.lensMode === "round") {
+      // the real draw transform (buildFlatDrawn's round branch): a world offset (ex,ey) from the layout's own
+      // center draws at screen offset (ex,ey) * F(r,l)/r, r = hypot(ex,ey) -- a radial warp, not a separable
+      // per-axis one. So (unlike fitting a single circumscribed circle, or checking width/height as independent
+      // axes) the true screen extent has to be checked against every point's own direction: a point near the
+      // diagonal needs neither the plain half-width nor the plain half-height, but the warp still amplifies it
+      // by its own (larger) radial distance from center, same as every other point that far out.
+      zt = searchMax(z => {
+        const l = { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig };
+        for (const p of lay.pts) {
+          const ex = p.x - cx, ey = p.y - cy, r = Math.hypot(ex, ey);
+          if (!r) continue;
+          const k = F(r, l) / r;
+          if (Math.abs(ex * k) * pad > availW / 2 || Math.abs(ey * k) * pad > availH / 2) return true;
+        }
+        return false;
+      });
+    } else {
+      zt = Math.min(availW / 2 / (base * M * halfW * pad), availH / 2 / (base * M * halfH * pad));
+    }
+    return { cx, cy, z: clamp(zt, ABS_ZMIN, ZMAX) };
+  };
   // zoom limits for a wrapping set. A manual zMinUser (preset or Tweak "Zoom-out limit") is a hard floor: once
   // reached it does not rubber-band back to a closer zoom ("stays that far out").
   const zFloor = () => {
@@ -1036,10 +1117,26 @@ function honeycomb(host, opts = {}) {
     // a finite (non-wrapping) cluster has no "repeats" to hide, so its floor is just "the whole cluster fits on
     // screen with a little margin" — never so far out that 25 bubbles become a speck, but a big sunflower disc
     // (large N) still gets room to zoom out and show more of itself.
+    // David, 2026-10-09: "the map doesn't let me zoom out this far -- it always bounces back. Zooming out this
+    // far is helpful" (his screenshot: the whole disk, ~100% of width, centered, black around it). The
+    // diagonal-circle approximation below under- or over-shoots for a lopsided layout the same way the old
+    // fit-mode formula used to (see boundsFit()'s own commit) -- a cheap per-axis (not per-POINT -- this runs on
+    // every resize/tweak/setItems for ordinary browsing, not just a discrete sheet-open/arrangement-change
+    // event the way fit mode's real per-point search can afford to) AND-of-width-and-height check against the
+    // layout's own bounding box fixes the same lopsided-shape problem far more cheaply (an O(1) bbox, not an
+    // O(points) loop inside the search), with whichever of the two asks for MORE zoom-out winning, same pattern
+    // as the zMinUser branch below. Beyond this floor is still just the ordinary rubber band (rubber()).
     if (lay.finite) {
       const R = lay.ext + 1.2;
-      if (cfg.lensMode === "round") return clamp(search(z => Finv(Math.hypot(W, vy()) / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R), ABS_ZMIN, .95);
-      return clamp(search(z => Math.hypot(W, vy()) / 2 / (base * z * M) <= R), ABS_ZMIN, .95);
+      const diag = cfg.lensMode === "round" ? clamp(search(z => Finv(Math.hypot(W, vy()) / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R), ABS_ZMIN, .95)
+        : clamp(search(z => Math.hypot(W, vy()) / 2 / (base * z * M) <= R), ABS_ZMIN, .95);
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      for (const p of lay.pts) { if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x; if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; }
+      const halfW = Math.max(.15, (maxX - minX) / 2 + .6), halfH = Math.max(.15, (maxY - minY) / 2 + .6);
+      const axes = cfg.lensMode === "round"
+        ? clamp(search(z => Finv(W / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= halfW && Finv(vy() / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= halfH), ABS_ZMIN, .95)
+        : clamp(Math.min(W / 2 / (base * M * halfW), vy() / 2 / (base * M * halfH)), ABS_ZMIN, .95);
+      return Math.min(diag, axes);
     }
     const fits = f => z => Finv(W / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= lay.perX * f && Finv(vy() / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= lay.perY * f;
     const a = inner(), u30 = a + 1.2 * (1 - a);
@@ -1902,65 +1999,6 @@ function honeycomb(host, opts = {}) {
   // arrangement change, a deliberate action. The pan and zoom from before fitting are remembered and restored
   // (not just reset to default) when it turns off.
   let fitMode = false, fitSaved = null, fitUserOverride = false;
-  const boundsFit = () => {
-    if (!lay || lay.globe || !lay.pts.length || !W) return null;
-    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    for (const p of lay.pts) { if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x; if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; }
-    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2, halfW = Math.max(.15, (maxX - minX) / 2), halfH = Math.max(.15, (maxY - minY) / 2);
-    // insetBottom (the target the sheet's own height was just measured to), not vy()/insetCur: the inset eases in
-    // over ~300ms (honey.js's own loop() tween), so fitting against the CURRENT (still mid-tween) value would aim
-    // for wherever the sheet happened to be a moment ago, not where it's about to settle.
-    // David, 2026-10-09: "the original view is now too far away" -- the disk floated at ~45% of the available
-    // width instead of filling it edge to edge. Two things compounded to cause that: (1) the margin reserved for
-    // the fisheye's magnified middle bubble was counted TWICE (once as extra margin scaled by base*m0, again as a
-    // 1.35x inflation of R below) -- now just the plain ~16px margin David asked for, plus one small (1.08x)
-    // allowance for the magnified middle bubble's drawn radius sticking a little past the raw lattice points'
-    // bounding box; and (2) fitting a single circumscribed-circle R (the content's half-diagonal) into the
-    // available rect's own half-diagonal only matches when the content's aspect happens to match the available
-    // rect's -- a lopsided shape (a tall, narrow region into a wide-and-short rect, or back) is under-constrained
-    // on its tighter axis, so one axis can overflow well past the sheet while the other still has room to spare.
-    // Checking width and height as two independent constraints on the SAME z (both must hold, so the smaller --
-    // more zoomed out -- survives) fixes both axes at once; js/honey.js's own zFloor() does the same AND-of-two-
-    // axes trick already (the `fits` helper a little above this function).
-    // David, 2026-10-09: "width ~= screen width minus ~16px margins" -- just the plain margin, no extra safety
-    // factor on top of it. The per-point check below already uses each point's own REAL drawn position (the
-    // same F(r,l)/r radial transform the renderer itself uses, not an approximation of where the magnified
-    // middle bubble might land), so there is nothing left to pad for.
-    const margin = 16, pad = 1;
-    const availW = Math.max(40, W - margin * 2), availH = Math.max(40, Hh - insetBottom - margin * 2);
-    // fit mode wants the OPPOSITE search direction from zFloor()'s own `search` a little above (its own
-    // minimum-zoom floor): here we want the LARGEST zoom that still keeps everything in bounds, so the content
-    // fills as much of the available rect as it can without overflowing it.
-    const searchMax = bad => {
-      let lo = ABS_ZMIN, hi = ZMAX;
-      if (!bad(hi)) return hi;
-      if (bad(lo)) return lo;
-      for (let i = 0; i < 26; i++) { const m = (lo + hi) / 2; if (bad(m)) hi = m; else lo = m; }
-      return lo;
-    };
-    let zt;
-    if (cfg.lensMode === "round") {
-      // the real draw transform (buildFlatDrawn's round branch, just above): a world offset (ex,ey) from the
-      // layout's own center draws at screen offset (ex,ey) * F(r,l)/r, r = hypot(ex,ey) -- a radial warp, not a
-      // separable per-axis one. So (unlike fitting a single circumscribed circle, or checking width/height as
-      // independent axes) the true screen extent has to be checked against every point's own direction: a point
-      // near the diagonal needs neither the plain half-width nor the plain half-height, but the warp still
-      // amplifies it by its own (larger) radial distance from center, same as every other point that far out.
-      zt = searchMax(z => {
-        const l = { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig };
-        for (const p of lay.pts) {
-          const ex = p.x - cx, ey = p.y - cy, r = Math.hypot(ex, ey);
-          if (!r) continue;
-          const k = F(r, l) / r;
-          if (Math.abs(ex * k) * pad > availW / 2 || Math.abs(ey * k) * pad > availH / 2) return true;
-        }
-        return false;
-      });
-    } else {
-      zt = Math.min(availW / 2 / (base * M * halfW * pad), availH / 2 / (base * M * halfH * pad));
-    }
-    return { cx, cy, z: clamp(zt, ABS_ZMIN, ZMAX) };
-  };
   const flyToFit = (animate = true) => {
     const f = boundsFit(); if (!f) return;
     // flyTo() clamps its target to [ZMIN, ZMAX] -- ZMIN is the ordinary pinch-out floor (zFloor(), tuned to avoid
@@ -1981,12 +2019,17 @@ function honeycomb(host, opts = {}) {
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
       // regions (Families, Hue pages) read best whole: the arrival eases out until most of the book is in view
       const arr = HONEY_ARR[honeyParseKey(cfg.layout).id];
-      // fit mode (the Arrange sheet is open) wins over every other arrival, but only re-fits on an actual
-      // arrangement change (a new layout has new bounds) -- not a soft/filter update. Picking a new arrangement
-      // is itself a deliberate action, so it always re-fits and clears any pan/pinch override from before; a
-      // soft update (a feel slider, say) respects whatever view the user is already looking at.
+      // fit mode (the Arrange sheet is open) wins over every other arrival. Picking a new arrangement is a
+      // deliberate action, so it always re-fits and clears any pan/pinch override from before. David, 2026-10-09:
+      // "when I switch from Bubbles to Honeycomb it zooms in to a more appropriate distance" (the opening fit is
+      // the one that's wrong) -- a plain Look/feel change used to be a no-op here, leaving whatever zoom the
+      // (possibly-still-settling) open-time fit left behind; what actually "fixed" it was setItems()'s own
+      // ZMIN=zFloor()/clamp picking up the NEW style's floor and incidentally pushing Z back up -- never a real
+      // re-fit at all. Every update() while fit mode is on now re-fits for real (still respecting a manual
+      // pan/pinch override, same as an arrangement change would), so the open path and a later Look change
+      // compute the exact same number from the exact same function.
       if (fitMode && o.arrange) { fitUserOverride = false; flyToFit(true); }
-      else if (fitMode) {}
+      else if (fitMode) { if (!fitUserOverride) flyToFit(true); }
       else if (o.arrange && hlOn && HONEY_HL) l18FrameLit();
       else if (o.arrange && arr && arr.fit && !lay.globe) { P = [0, 0]; Plag = P.slice(); zoomTo(Math.max(ZMIN, Math.min(Z, ZMIN * 1.3)), W / 2, vcy()); }
       // a new order travels to the middle (for Center on, where the chosen color now sits)
@@ -2046,6 +2089,7 @@ function honeycomb(host, opts = {}) {
       return it.o;
     },
     zoomValue: () => Z,
+    zoomFloor: () => ZMIN,   // QA (tools/smoke home group): the ordinary pinch-out limit, recomputed per layout
     panValue: () => [P[0], P[1], Z],   // QA: the pan a return to Home must keep
     // QA (tools/smoke map-return): finish a spring or zoom in flight at once (headless frames don't always run)
     _settle() { if (phase === "spring" && spring) { P = spring.X.slice(); spring = null; phase = "idle"; } if (zAnim) { Z = zAnim.to; zAnim = null; } insetCur = insetBottom; Plag = P.slice(); draw(); return [P[0], P[1], Z]; },

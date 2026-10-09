@@ -635,13 +635,28 @@ function hmHome() {
     // setting change re-fits (js/honey.js update()) so the change reads at a glance; exitFit() below flies back
     // to the pan/zoom you had, on any way the sheet closes.
     const measureInset = () => { if (ctrl && sh.isConnected) { const r = sh.getBoundingClientRect(); ctrl.setInset({ bottom: Math.max(0, viewEl.getBoundingClientRect().bottom - r.top) }); } };   // measured to the map's own bottom (it reaches past innerHeight on an iPhone Home Screen app)
+    // David, 2026-10-09: "the FIRST fit on opening the sheet is wrong... the refit after a Look change is
+    // right." The sheet's own entrance is a CSS animation (css/polish.css .sheet{animation:sheetIn var(--grow)
+    // ...}), and --grow is 420ms (app.css) -- a full 120ms longer than the flat 300ms this used to wait before
+    // its first real measurement, so the open path was fitting against a still-mid-slide-up rect every time.
+    // Wait for the sheet's own animationend (whatever its real duration turns out to be, reduced motion
+    // included, where it's instant) instead of guessing a number, with the old 300ms only as a backstop if the
+    // event never arrives for some reason.
+    // Both the real animationend and the backstop timer are allowed to fire (not a one-shot guard): whichever
+    // one actually lands AFTER the sheet has truly finished moving is the one whose measurement sticks, so an
+    // environment where the backstop's timer can race ahead of the animation itself (a virtual/sped-up clock
+    // that doesn't drive CSS animations in step with its own timers -- true of this project's own smoke harness)
+    // still self-corrects once the real event arrives, instead of being stuck with whichever fired first.
+    let settled = false;
+    const onSettled = () => { if (!sh.isConnected) return; settled = true; measureInset(); if (tab === "arrange" && ctrl) ctrl.enterFit(); };
+    sh.addEventListener("animationend", onSettled, { once: true });
+    setTimeout(onSettled, reduceMotion ? 0 : 500);   // backstop: never wait forever if the event doesn't fire
     const applyInset = () => requestAnimationFrame(() => {
       if (!ctrl) return;
       measureInset();   // an immediate (possibly still-mid-entrance) read, so the map starts recentering right away
-      // the sheet's own slide-up entrance is still moving at this first read -- re-measure once it's actually
-      // settled (same ~300ms as the fit flight below) rather than fit against a transform mid-flight, or the
-      // computed inset (and so the fit) can come out based on where the sheet WAS, not where it ends up.
-      if (tab === "arrange") setTimeout(() => { if (sh.isConnected) { measureInset(); ctrl.enterFit(); } }, reduceMotion ? 0 : 300);
+      // a LATER applyInset (the sheet's own height changing after it's already settled: a chip wrapping, a tab
+      // switch) re-fits at once -- the settle-wait above is only for the very first, still-animating open.
+      if (settled && tab === "arrange" && ctrl) ctrl.enterFit();
     });
     // David: "when I open Arrange it doesn't zoom out enough and doesn't center everything in the top half" --
     // re-measure (and for Arrange, re-fit) whenever the sheet's own height changes, not just once at open: a
