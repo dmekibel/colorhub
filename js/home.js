@@ -678,7 +678,11 @@ function hmHome() {
     const dblClose = e => {
       if (e.pointerType && e.pointerType !== "touch" && e.pointerType !== "mouse") return;
       const now = performance.now();
-      if (now - lastTapT < 350) { e.stopPropagation(); buzz(6); close(); lastTapT = 0; return; }
+      // David, 2026-10-09 ("panning gets stuck"): stopPropagation here means this pointerup never reaches the
+      // honeycomb's own canvas listener (so the map's own double-tap-to-zoom doesn't also fire) -- but its
+      // pointerdown already did, so the honeycomb needs to be told directly, or that pointer stays "down"
+      // forever and the next real pan reads it as an unwanted second finger (js/honey.js ctrl._releasePointer).
+      if (now - lastTapT < 350) { if (ctrl && ctrl._releasePointer) ctrl._releasePointer(e.pointerId); e.stopPropagation(); buzz(6); close(); lastTapT = 0; return; }
       lastTapT = now;
     };
     viewEl.addEventListener("pointerup", dblClose, true);

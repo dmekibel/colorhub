@@ -2189,6 +2189,20 @@ function honeycomb(host, opts = {}) {
     // above is checking. This bypasses the clamp so a test can park there and read the result directly, instead
     // of trying to time a synthetic pinch gesture just right.
     _qaForceZoom(z) { Z = +z; draw(); },
+    _qaState() { return { lay: !!lay, W, Hh, dead, visible, raf, phase, down: !!down, pinch: !!pinch, P: P.slice(), Z, drawnLen: drawn.length, fitMode, fitUserOverride, ptrsSize: ptrs.size }; },
+    // David, 2026-10-09 ("panning gets stuck"): js/home.js's double-tap-to-close-Arrange (dblClose) stops the
+    // second tap's pointerup from ever reaching this canvas's own pointerup listener (stopPropagation, ahead of
+    // it in the capture phase, so the map's own double-tap-to-zoom doesn't ALSO fire) -- but that pointerdown
+    // already landed in ptrs above, so skipping its matching up left a permanent ghost pointer. The next real,
+    // single-finger pan then saw ptrs.size === 2 (the ghost plus the new one), took the two-finger pinch branch
+    // with one "finger" sitting at some old, unrelated screen position, and P came out of the resulting pinch
+    // math astronomically wrong -- every later pan just kept computing more garbage from it. Call this with the
+    // intercepted event's pointerId wherever a pointerup might be swallowed before honey.js ever sees it.
+    _releasePointer(id) { if (id != null) ptrs.delete(id); else ptrs.clear(); if (!ptrs.size) { down = null; pinch = null; if (phase === "drag") phase = "idle"; } },
+    // QA: a hard, unanimated recenter (P=[0,0], Z=1, no spring/drift left mid-flight) -- so a scripted test that
+    // pans several times in a row isn't itself the thing pinning the view at a finite layout's own edge (a real,
+    // correct rubber-band stop there isn't a bug to chase).
+    _qaRecenter() { P = [0, 0]; Plag = P.slice(); Z = 1; phase = "idle"; spring = null; down = null; pinch = null; draw(); },
     // QA (tools/smoke map group): every currently-drawn bubble's own screen rect (CSS px, cv's own box, not the
     // backing store), so a caller can check "does fit mode actually keep everything above the sheet" numerically
     _drawnBounds() {
