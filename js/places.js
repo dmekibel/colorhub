@@ -29,11 +29,16 @@ function placesRecentRow() {
 // Every collection, as a picture tile, recent-first (PLAN §3.1/§3.4: "a directory of destinations... shows every
 // destination as a picture", exempt from the ≤6 rule). js/collections.js owns COLLECTIONS/collRecent().
 // David, 2026-10-09: "Add a picture to each one of these squares." A tile shows its own cover photo (c.img,
-// object-fit:cover, loading="lazy") when it has one, or a small real-color mosaic (c.swatches) when a photo
-// would be dishonest (Brands: no logos). c.pic is the loading/fallback wash either way, and onerror on the
-// <img> removes it so a broken hotlink just falls back to that wash instead of a dead gap.
+// object-fit:cover, loading="lazy") when it has one, a drawn SVG cover (c.cover(), inline and crisp -- "type as
+// image" for the bottom 6, which only had generic swatch mosaics before 2026-10-10) when it builds one, or a
+// small real-color mosaic (c.swatches) when a photo would be dishonest (Brands: no logos). c.pic is the
+// loading/fallback wash either way, and onerror on the <img> removes it so a broken hotlink just falls back to
+// that wash instead of a dead gap.
 function placesCollTile(c) {
-  const cover = c.img ? `<img class="pl-ctile-img" src="${esc(c.img)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`
+  const got = typeof c.cover === "function" ? (c.cover() || {}) : {};
+  const img = got.img || c.img, svg = got.svg;
+  const cover = svg ? `<span class="pl-ctile-svg" aria-hidden="true">${svg}</span>`
+    : img ? `<img class="pl-ctile-img" src="${esc(img)}" alt="" loading="lazy" decoding="async" onerror="this.remove()">`
     : c.swatches && c.swatches.length ? `<span class="pl-ctile-mosaic">${c.swatches.map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>` : "";
   return `<button class="pl-ctile${cover ? " has-cover" : ""}" data-pl-coll="${esc(c.id)}" style="${c.pic ? `--c:${esc(c.pic)}` : ""}">
     ${cover}<b>${esc(c.t)}</b>${c.count ? `<small>${esc(c.count)}</small>` : ""}</button>`;
