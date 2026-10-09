@@ -85,16 +85,17 @@
 .gl-hero img.ld{opacity:1}
 .gl-pal-h{margin-top:30px}
 .gl-page .sec-head{gap:12px}
-.art-top a.glass-pill{text-decoration:none}
-/* the museum link and the heart share the top bar's right side (David, 2026-10-09: the heart used to be a
-   scroll away, under the picture) */
-.gl-page .art-top-r{display:flex;align-items:center;gap:8px}
 /* the bar sits over the full-bleed hero and the page's running text once scrolled; a fading gradient let text
    show through behind the buttons, so give it a solid, blurred backdrop like the color page's bar (David screenshot,
-   2026-10-09) */
+   2026-10-09). PLAN §3.5: the bar is navigation only now (‹ · ⋯ · the place pill) -- the museum link moved into
+   ⋯ › Go, and the heart into the action row below (.gl-act-keep) -- so there's no .art-top-r any more. */
 .gl-page .art-top{background:var(--ground);background:color-mix(in srgb,var(--ground) 92%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--rule)}
 .gl-page .palette{margin-top:12px}
 .gl-sim-h{margin-bottom:16px}
+/* the ♡ Keep action (PLAN §3.6): an opaque .cs-act tile like its two neighbors, holding the plain .fva-heart
+   circle centered, label-less -- the one icon-only action DESIGN-CANON A1 allows, because everyone knows it. */
+.gl-act-keep{padding:8px 2px}
+.gl-act-keep .fva-heart{margin:0 auto}
 
 /* "In paintings" on a color page */
 .gl-in{margin-top:40px}

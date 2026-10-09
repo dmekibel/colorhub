@@ -79,11 +79,13 @@ function bdPage(id, opts = {}) {
   if (!b) { bdWhen(() => bdPage(id, opts)); return; }
   const near = bdAllColors(b).map(h => bdNearest(h)).filter(Boolean);
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">Brand</span><span style="width:44px"></span></header>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
+    <p class="eyebrow p-type">Brand</p>
     <h1 class="p-title">${esc(b.name)}</h1>
     <p class="p-dek">${esc(b.category)}${b.country ? " · " + esc(b.country) : ""}${b.founded ? " · founded " + b.founded : ""}</p>
     <div class="bd-hero">${b.colors.map((c, i) => `<i style="--c:${c.hex}" data-swatch="${c.hex}" aria-label="${esc(c.label || c.hex)}"></i>`).join("")}</div>
     <p class="fine">${b.colors.map((c, i) => `${esc(c.label || c.hex)}${near[i] ? ` — nearest named color <button class="link" data-bd-near="${esc(near[i].h)}" data-bd-near-n="${esc(near[i].n)}">${esc(near[i].n)}</button>` : ""}`).join(". ")}.</p>
+    <div data-bd-acts></div>
     ${bdTimelineHTML(b)}
     <p class="fine bd-last">Colors are our own approximate screen values from ${esc(b.source || "public sources")}, checked ${esc(b.source_date || "")}. No logo is shown; ${esc(b.name)} and other names are trademarks of their owners, and ColorHub is not affiliated with or endorsed by them.</p>
     ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "brand:" + id, title: b.name }) : ""}
@@ -91,6 +93,13 @@ function bdPage(id, opts = {}) {
   el.querySelector("[data-back]").onclick = opts.back || xBack;
   el.querySelectorAll("[data-bd-near]").forEach(btn => btn.onclick = () => { const h = btn.dataset.bdNear; openTappedColor(h); });
   if (typeof wireLinks === "function") wireLinks(el);
+  // Surface actions (design/SIMPLIFY/PLAN.md §3.6's generic archive-object row, "♡ Keep · Share"): a brand has
+  // no favorites system of its own, so Keep here means its signature colors, the same colorSet verb every
+  // other archive page uses.
+  if (typeof colorSet === "function" && typeof csActions === "function") {
+    const acts = el.querySelector("[data-bd-acts]");
+    if (acts) acts.appendChild(csActions(colorSet({ kind: "brand", id, title: b.name, colors: b.colors.map(c => ({ h: c.hex, n: c.label })), src: "brand/" + id }), { only: ["keep", "share"] }));
+  }
   return el;
 }
 function bdOpenRoute(id) { XSTACK = []; bdWhen(() => bdPage(id)); }

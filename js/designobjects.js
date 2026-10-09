@@ -239,8 +239,7 @@ function doMakerPage(slug, opts = {}) {
   const pal = (m.pal || []).slice(0, 8).map(([ci, pct]) => ({ h: doColorHex(ci), name: doColorName(ci) || "—", pct }));
   const sig = (m.sig || []).map(([ci, lift]) => ({ h: doColorHex(ci), name: doColorName(ci) || "—", lift }));
   const el = show(`
-    ${worldTop("Design objects")}
-    <p class="eyebrow p-type">Maker${(m.cat || []).length ? " · " + m.cat.map(c => DO_CAT_LABEL[c] || c).join(", ") : ""}</p>
+    ${worldTop(`Maker${(m.cat || []).length ? " · " + m.cat.map(c => DO_CAT_LABEL[c] || c).join(", ") : ""}`)}
     <h1 class="p-title">${esc(m.a)}</h1>
     <p class="p-dek">${m.n.toLocaleString()} object${m.n === 1 ? "" : "s"} in the archive${m.y ? `, ${m.y[0]}–${m.y[1]}` : ""}.</p>
     ${pal.length ? `<div class="palette">${pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.pct, 1.5)}"><span>${p.pct}%</span></button>`).join("")}</div>

@@ -880,5 +880,38 @@ function colorDossier(entry, o = {}) {
   if (tapped) rpSplitWire(el, name, hex, tapped);
   if (typeof rcWireOpen === "function") rcWireOpen(el, heroHex);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
+  // ⋯ (design/SIMPLIFY/PLAN.md §3.6/§9: "Color page: register ⋯ (Find it in paintings, See it on the map, Test
+  // yourself, Codes, Share). The action row stays."). The top bar (both the floating .cp-close and the pinned
+  // .rp-bar) already gets ⋯ and the place pill for free from js/trail.js tlDecorate -- this just gives ⋯
+  // something to show. Codes and Test yourself already live one scroll down (the ID card, the chapters' own
+  // disclosure); these entries just take you straight there instead of making you find them twice.
+  // colorDossier is shared by js/explore.js colorPage() (route #/color/<slug>, ctx "color") and js/names.js
+  // namePage() (route #/page/<id>, ctx "page") -- both need the same ⋯ groups for the page actually on screen.
+  const rpMoreGroups = () => [
+    { title: "This color", items: [
+      { t: "Find it in paintings", run: () => { if (typeof paintingsOfPage === "function") paintingsOfPage([heroHex], { back: true }); } },
+      { t: "See it on the map", run: () => { if (typeof mapSelect === "function") mapSelect({ title: name, colors: [{ h: heroHex, n: name }], source: "color", id: routeSlug(name), src: "color/" + routeSlug(name) }); } },
+      { t: "Test yourself", run: () => {
+        const sec = el.querySelector("#ar-s-questions"); if (!sec) { toast("No questions for this color yet"); return; }
+        const btn = sec.querySelector("[data-ar-disc-btn]");
+        if (btn && btn.getAttribute("aria-expanded") !== "true") btn.click();
+        sec.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" });
+      } },
+      { t: "Codes", n: "Hex, RGB, Pantone, RAL and more", run: () => { const sec = el.querySelector(".rp-idcard"); if (sec) sec.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); } },
+    ] },
+    { title: "Share", items: [
+      { t: "Share", run: () => {
+        if (typeof sharePalette === "function") return sharePalette([{ h: heroHex }], name, h => ({ nm: nameOf(h) }));
+        const url = typeof shareURL === "function" ? shareURL("color/" + routeSlug(name)) : location.href;
+        if (navigator.share) navigator.share({ text: name + " · ColorHub", url }).catch(() => {});
+        else { try { navigator.clipboard.writeText(url); toast("Copied the link"); } catch (e) {} }
+      } },
+    ] },
+  ];
+  // ctx "page" (#/page/<id>) is shared with js/explore.js wikiPage() -- a different, generic renderer for
+  // concept/idea pages (no hex, no palette). Guard on .cp-page (only colorDossier's own screen class) so a
+  // wiki page's own ⋯ stays empty (Search + Settings) instead of showing color-only actions that don't apply.
+  if (typeof moreRegister === "function") { moreRegister("color", rpMoreGroups); moreRegister("page", () => document.querySelector(".cp-page") ? rpMoreGroups() : []); }
+  if (typeof featureRegister === "function") featureRegister("color-test", { t: "Test yourself on a color", where: "A color · ⋯", words: ["quiz", "test", "questions"], run: () => toast("Open a color, then ⋯ · Test yourself") });
   return el;
 }

@@ -19,7 +19,15 @@
 
 const ARF_DE = 15;                                  // CIEDE2000 distance that still counts as close (pctMatch 85%)
 const ARF_LIMIT = { look: 8 };                      // a look is a palette of many colors, so its single closest one must be nearer
-const ARF_MIN_COVER = .02;                          // a painting must hold at least 2% of the canvas in that color
+const ARF_MIN_COVER = .02;                          // below this, a painting's caption says "a small accent" rather than a plain percent (arfCoverPhrase) -- informational only, never a gate (see arfScore)
+// Closeness always outranks coverage for a painting (David, 2026-10-09: "if there's no good obvious painting,
+// find the closest color match -- even if it's a tiny part of the painting. That's better than a painting with
+// large coverage of a color that's 15% off"). ARF_PAINT_DE_MAX is the one honesty line for "this painting has
+// this color" (tighter than the general ARF_DE=15: paintings are measured per pixel, not matched by palette
+// family); ARF_PAINT_TIERS are the stepwise "exact first" bands arfClosenessSort widens through before it ever
+// falls back to ranking by coverage.
+const ARF_PAINT_DE_MAX = 10;
+const ARF_PAINT_TIERS = [3, 5, 8];
 const ARF_MAX_AUTO = 5, ARF_MAX_END = 3, ARF_MAX_PER_P = 2;
 const ARF_WAIT_MS = 9000;                           // how long to wait for a lazily loaded dataset
 const ARF_WORD = { gem: "Gem", flower: "Flower", painting: "Painting", look: "Look", garment: "Garment", film: "Film", painter: "Painter" };
@@ -49,11 +57,28 @@ function arfBest(hex, pal) {
 }
 const arfPctText = de => typeof pctMatch === "function" ? pctMatch(de) : `${Math.max(0, Math.round(100 - de))}% match`;
 const arfLimit = kind => ARF_LIMIT[kind] || ARF_DE;
-// a loaded thing (palette, optional cover) against the article's color
+// a loaded thing (palette, optional cover) against the article's color. "ok" (close enough to show at all) is
+// closeness only -- coverage never gates it, only informs the caption and (for paintings) the tiebreak within
+// a closeness tier (arfClosenessSort, arfPlan's rank below). A painting with a 0.5% exact speck is "ok"; one
+// covering 30% at 15% off is not.
 function arfScore(base, hex) {
   const best = arfBest(hex, base.pal), cover = typeof base.cover === "function" ? base.cover(hex) : null;
   const de = best ? best.de : 99;
-  return { ...base, best, de, cover, pctText: arfPctText(de), ok: !!best && de <= arfLimit(base.kind) && (cover == null || cover >= ARF_MIN_COVER) };
+  const limit = base.kind === "painting" ? ARF_PAINT_DE_MAX : arfLimit(base.kind);
+  return { ...base, best, de, cover, pctText: arfPctText(de), ok: !!best && de <= limit };
+}
+// Stepwise closeness-first ranking for a list of scored paintings (candidates with { de, cover }): first among
+// patches within ΔE<=3 ("exact"), ranked by how much of the canvas they cover; widening to <=5, then <=8; only
+// once nothing clears ARF_PAINT_TIERS' last band does it fall back to the single closest match, whatever its
+// coverage. Same rule arfLeadPick and arfPlan's painting rank both need, written once.
+function arfPaintTier(de) { for (let i = 0; i < ARF_PAINT_TIERS.length; i++) if (de <= ARF_PAINT_TIERS[i]) return i; return ARF_PAINT_TIERS.length; }
+function arfClosenessSort(cands) {
+  const list = (cands || []).slice();
+  for (const tier of ARF_PAINT_TIERS) {
+    const within = list.filter(t => t.de <= tier);
+    if (within.length) return within.sort((a, b) => (b.cover || 0) - (a.cover || 0));
+  }
+  return list.sort((a, b) => a.de - b.de);
 }
 
 // ---------- the datasets ----------
@@ -209,8 +234,12 @@ async function arfAutoKeys(art, self) {
 // ARF_MAX_AUTO in all and ARF_MAX_END in the closing strip.
 function arfPlan(secs, cands, taken, skip) {
   const used = new Set(taken || []), seen = new Set(skip || []), kinds = new Set(), place = {}, end = [];
-  const rank = t => [ARF_ORDER.indexOf(t.kind), t.kind === "painting" ? -(t.cover || 0) : t.de];
-  const sorted = (cands || []).filter(t => t && t.ok).sort((a, b) => { const x = rank(a), y = rank(b); return x[0] - y[0] || x[1] - y[1]; });
+  // Closeness first, same as arfClosenessSort: a painting's tier (0 = within ΔE 3, …, 3 = past ΔE 8) outranks
+  // its coverage, and coverage only breaks a tie inside one tier (David 2026-10-09, see ARF_PAINT_TIERS above).
+  const rank = t => t.kind === "painting"
+    ? [ARF_ORDER.indexOf(t.kind), arfPaintTier(t.de), arfPaintTier(t.de) < ARF_PAINT_TIERS.length ? -(t.cover || 0) : t.de]
+    : [ARF_ORDER.indexOf(t.kind), t.de, 0];
+  const sorted = (cands || []).filter(t => t && t.ok).sort((a, b) => { const x = rank(a), y = rank(b); return x[0] - y[0] || x[1] - y[1] || x[2] - y[2]; });
   let n = 0;
   for (const t of sorted) {
     if (n >= ARF_MAX_AUTO) break;
@@ -451,9 +480,10 @@ async function arfLeadPick(art, self) {
   const inTime = arfInTime(art);
   let row = null;
   for (const sl of [...new Set([art.slug, self.slug, ...(art.names || []).map(n => routeSlug(n))].filter(Boolean))]) { row = await arfGraphRow(sl); if (row) break; }
-  // 1. the painting that holds this color most (and has a picture)
+  // 1. the painting with this color's closest patch (David 2026-10-09: closeness first, coverage only to
+  // choose among equally-close patches -- arfClosenessSort)
   const pk = await arfLeadPaintings(art, self, row);
-  const ps = (await Promise.all(pk.map(k => arfFor(k, self.h, "light")))).filter(t => t && t.ok && inTime(t)).sort((a, b) => (b.cover || 0) - (a.cover || 0));
+  const ps = arfClosenessSort((await Promise.all(pk.map(k => arfFor(k, self.h, "light")))).filter(t => t && t.ok && inTime(t)));
   for (const c of ps.slice(0, 5)) {
     const t = await arfFor(c.key, self.h);
     if (t && t.ok && t.img && t.img.src) { t.lead = "painting"; return t; }

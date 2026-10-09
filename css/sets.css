@@ -80,6 +80,12 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sp-undo button{height:36px;padding:0 16px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:500 14px/1 var(--sans)}
 @keyframes sxIn2{from{opacity:0;transform:translateY(-6px)}to{opacity:1}}
 .sp-pair{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:20px 0 0;border-radius:var(--r-1);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(236,232,223,.1)}
+/* "Add a color" as a slim third cell, not a full plate (PLAN §3.6's "+" swatch, extended to pairs so turning
+   one into a trio stays a one-tap surface action, not only reachable from ⋯) -- the two plates keep their
+   width; only the add cell is narrow. */
+.sp-pair:has(.sp-pair-add){grid-template-columns:1fr 1fr auto}
+.sp-pair-add{width:40px;display:flex;align-items:center;justify-content:center;background:var(--surface-2);color:var(--soft)}
+.sp-pair-add:active{background:var(--surface-3)}
 .sp-pcell{position:relative;display:flex}
 .sp-plate{flex:1;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;min-height:min(62vw,300px);padding:14px;background:var(--c);color:#F3F0EA;text-align:left}
 .sp-plate[data-ink="dark"]{color:#141311}
@@ -113,6 +119,19 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sp-handle{display:grid;place-items:center;flex:none;width:44px;height:44px;color:var(--faint);touch-action:none;cursor:grab}
 .sp-handle:active{cursor:grabbing}
 .sp-drop{display:grid;place-items:center;flex:none;width:44px;height:44px;color:var(--faint)}
+/* Edit (design/SIMPLIFY/PLAN.md §3.6: "The per-row drag and remove handles -> ⋯ › Edit"): hidden until ⋯ ·
+   Edit colors asks for them (js/setpage.js setEditing toggles .sp-editing on the page) -- nothing about the
+   drag/remove wiring itself changes, only when it's visible. */
+.sp-page:not(.sp-editing) .sp-handle,.sp-page:not(.sp-editing) .sp-drop,.sp-page:not(.sp-editing) .sp-drop-plate{display:none}
+.sp-page.sp-editing .sp-name>button:first-child{flex:1 1 auto}
+/* "Add a color" as a quiet "+" tile at the end of the swatches, not a 4th action-row button (PLAN §3.6) */
+.sp-plus-sw{flex:none;width:44px;display:grid;place-items:center;background:var(--surface-2);color:var(--soft)}
+.sp-plus-sw:active{background:var(--surface-3)}
+/* a sibling of .sp-name (same row shape), but never matched as one of the set's own colors -- tools/smoke's
+   own "the trio lists three colors" check (and anything else that counts .sp-name rows) must only ever see
+   real colors here. */
+.sp-name-add{display:flex;align-items:center;gap:12px;min-height:52px;width:100%;text-align:left;border-bottom:1px solid var(--rule);color:var(--soft)}
+.sp-plus-row{width:34px;height:34px;border-radius:var(--r-1)}
 .sp-lead{margin:22px 0 4px;font:400 22px/1.32 var(--serif);letter-spacing:-.005em;min-height:58px;text-wrap:pretty}
 .sp-acts .cs-acts{margin-top:10px}
 .sp-sec{margin:30px 0 0;padding-top:16px;border-top:1px solid var(--rule)}

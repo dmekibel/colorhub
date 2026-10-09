@@ -68,6 +68,19 @@ function ptNear(hex) { const n = nameOf(hex); return n.de < VERY_CLOSE_DE ? n.n 
 // loosen first (ciAuto); a 4+ color palette then steps "Holds at least" down by one before giving up. m = how
 // many colors are in the query (paintingsOfSection is always a single color, so the atLeast step never applies).
 const ptAtLoosest = (st, m) => st.tol === PT_TOL[PT_TOL.length - 1] && st.minCover === PT_MIN[0] && (m < 4 || (st.atLeast || m) <= 2);
+// Even the loosest setting above still has a coverage floor (minCover, "even a single speck" = .05%) and the
+// person must ask for it (David's "never a silent closest-anyway row", 2026-10-09). But leaving someone with
+// only "nothing" once that's exhausted isn't honest either -- so name the single globally closest patch
+// anyway, coverage ignored entirely, as a plain fact appended to the empty state (coordinator note, same day:
+// "say 'No painting... holds this exact color yet; the closest is...' with the % match"). Closeness, never
+// coverage, decides this one number; it never puts a tile on screen, only a sentence.
+async function ptClosestFact(hexes) {
+  try {
+    const res = await paintingsWith(hexes, { tol: PT_TOL[PT_TOL.length - 1], minCover: 0, maxCover: null, mode: "all", sort: "close", source: "paintings" });
+    const r = res.rows && res.rows[0];
+    return r && r.de != null ? ` The closest is ${pctMatch(r.de)}.` : "";
+  } catch (e) { return ""; }
+}
 async function ptLoosen(hexes, st, m) {
   const s = await ciAuto(hexes, st, PT_TOL, PT_MIN, 1);
   const probe = await paintingsWith(hexes, { ...st, tol: s.tol, minCover: s.minCover, maxCover: null }).catch(() => ({ count: 0 }));
@@ -194,8 +207,9 @@ function paintingsOfSection(hex, host, o = {}) {
       if (!res.count) {
         // never a silent "closest anyway": say so plainly, and only loosen when asked (David, 2026-10-09)
         const atLoosest = ptAtLoosest(st, 1);
-        lead.innerHTML = `${note ? esc(note) + " " : ""}${atLoosest ? `Not one painting holds ${esc(name.toLowerCase())}, even at the loosest measure.` : "Nothing this close yet."}`;
+        lead.innerHTML = `${note ? esc(note) + " " : ""}${atLoosest ? `No painting in the archive holds ${esc(name.toLowerCase())} yet, even at the loosest measure.` : "Nothing this close yet."}`;
         rail.innerHTML = atLoosest ? "" : `<div class="pt-empty"><button type="button" class="btn ghost" data-pt-loosen>Loosen until something matches</button></div>`;
+        if (atLoosest) ptClosestFact([hex]).then(f => { if (my === seq && host.isConnected && f) lead.innerHTML += esc(f); });
         rail._rows = [];
         all.hidden = true;
         return;
@@ -390,11 +404,12 @@ function paintingsOfPage(hexes, o = {}) {
           : st.mode === "any" ? "holds any of them"
           : st.mode === "atleast" ? `holds at least ${st.atLeast} of them`
           : "holds all of them";
-        el.querySelector("[data-finding]").textContent = `${note ? note + " " : ""}${atLoosest ? `Not one painting ${whatHolds}, even at the loosest measure.` : "Nothing this close yet."}`;
+        el.querySelector("[data-finding]").textContent = `${note ? note + " " : ""}${atLoosest ? `No painting in the archive ${whatHolds} yet, even at the loosest measure.` : "Nothing this close yet."}`;
         el.querySelector("[data-results]").innerHTML = atLoosest ? "" : `<div class="pt-empty"><button type="button" class="btn ghost" data-pt-loosen>Loosen until something matches</button></div>`;
         el.querySelector("[data-stats]").hidden = true;
         el.querySelector("[data-sortrow]").hidden = true;
         rows = [];
+        if (atLoosest) ptClosestFact(hexes).then(f => { if (my === seq && el.isConnected && f) { const fe = el.querySelector("[data-finding]"); if (fe) fe.textContent += f; } });
         return;
       }
       note = "";

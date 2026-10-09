@@ -106,6 +106,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["chordsPage", () => routed("Masters' chords", "chords")],
   ["spPage", hexes => { const h = typeof spCanon === "function" ? spCanon(hexes) : []; return h.length >= 2 ? routed(spTitle(h), spPath(h)) : null; }],   // js/setpage.js: a pair or a set   // js/chords.js (L26)
   ["poemPage", id => id != null ? routed("Poem", "poem/" + id) : null],   // js/poems.js   // a museum painting (js/gallery.js); i = its place in the gallery index
+  ["poemsPage", () => routed("Poems", "poems")],   // js/poems.js: the Poems collection (design/SIMPLIFY/PLAN.md §9)
   ["passagePage", p => p && p.id ? routed(p.title, "passage/" + p.id) : null],
   ["filmPage", f => f && f.id ? routed(f.title, "film/" + f.id) : null],   // js/passages.js, js/films.js
   ["namePage", (entry, push, tapped) => entry && entry.n ? routed(entry.n, "name/" + routeSlug(entry.n) + tappedQS(tapped)) : null],   // js/names.js: a library color that isn't one of the 101
@@ -132,6 +133,7 @@ const ROUTED = [["colorPage", (n, tapped) => n && n.id ? routed(n.title, nodeRou
   ["awPainter", slug => slug ? routed(awTitle("painter", slug), "painter/" + slug) : null],   // js/artwiki.js: the art wiki
   ["awGroup", (kind, key) => kind && key != null ? routed(awTitle(kind, key), kind + "/" + (kind === "decade" ? key : routeSlug(key))) : null],
   ["awIndex", () => routed("Art history by color", "arthistory")],
+  ["awPainters", () => routed("Painters", "painter-index")],   // js/artwiki.js: the Painters collection (design/SIMPLIFY/PLAN.md §9)
   ["awVs", (a, b) => routed("Painter against painter", "painters" + (a ? "/" + a + (b ? "/" + b : "") : ""))],
   ["gmListPage", kind => typeof gmListTitle === "function" ? routed(gmListTitle(kind), "gem/" + kind) : null],   // js/gems.js (gem/essay detail pages route via wikiPage above)
   ["bdPage", id => typeof bdTitle === "function" ? routed(bdTitle(id), "brand/" + id) : null],   // js/brands.js
@@ -293,6 +295,9 @@ function openRoute(hash, initial = false) {
   if (kind === "poem" && id && typeof poemPage === "function") {
     base(); XSTACK = []; poemPage(id); return true;
   }
+  if (kind === "poems" && typeof poemsPage === "function") {   // js/poems.js: the Poems collection (design/SIMPLIFY/PLAN.md §9)
+    base(); XSTACK = []; poemsPage(); return true;
+  }
   if (kind === "passage" && id && typeof passagePage === "function") {
     base(); XSTACK = []; archWhen(() => { const p = PSG && PSG.byId.get(id); if (p) passagePage(p); else xToOrigin(); }); return true;
   }
@@ -360,7 +365,7 @@ function openRoute(hash, initial = false) {
     if (q.hexes.length) { paintingsOfPage(q.hexes, { ...q.st, push: true }); return true; }
     return false;
   }
-  if (["painter", "movement", "decade", "country", "arthistory", "painters"].includes(kind) && typeof awOpenRoute === "function") { base(); XSTACK = []; awOpenRoute(kind, id, more); return true; }   // js/artwiki.js
+  if (["painter", "movement", "decade", "country", "arthistory", "painters", "painter-index"].includes(kind) && typeof awOpenRoute === "function") { base(); XSTACK = []; awOpenRoute(kind, id, more); return true; }   // js/artwiki.js
   const simple = { daily: () => daily(), challenge: () => challenge(),
     taste: () => tasteIntro(id === "palette" ? "palette" : "color"),
     favorites: () => typeof favShelf !== "function" ? xToOrigin() : id === "taste" ? favTaste() : id === "rank" ? frStart(more || "bws", "all") : favShelf(),   // js/favs.js
