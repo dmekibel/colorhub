@@ -425,6 +425,25 @@ function awPainterFindings(A, P, n) {
   return gated.length ? `<ul class="aw-finds">${gated.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : "";
 }
 
+// "Why it matters" (design brief, David 2026-10-09: who/why shouldn't need a scroll): one or two lines right
+// under the pinned image, above the palette strip. The corpus has no curated per-painting story yet, so this
+// draws on the same gated findings the Analysis section further down uses (awGateFinds) -- genuinely computed,
+// honest color facts, not filler. Quiet (hidden) when a painting has nothing worth saying (a thin sample).
+function awPaintingWhy(host, r) {
+  if (!host) return;
+  const fin = awGateFinds(r.find, 3);
+  if (!fin.length) { host.hidden = true; host.innerHTML = ""; return; }
+  const [lead, ...rest] = fin;
+  host.hidden = false;
+  host.innerHTML = `<p class="gl-why-t">${esc(lead)}</p>` +
+    (rest.length ? `<button class="gl-why-more" data-glwhymore aria-expanded="false">More</button><ul class="gl-why-ex" hidden>${rest.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : "");
+  const more = host.querySelector("[data-glwhymore]"), ex = host.querySelector(".gl-why-ex");
+  if (more) more.onclick = () => {
+    const open = ex.hidden; ex.hidden = !open; more.setAttribute("aria-expanded", String(open));
+    more.textContent = open ? "Less" : "More";
+  };
+}
+
 // ======================================================================
 // Painting pages: the Analysis section (called from js/gallery.js glPage)
 // ======================================================================
@@ -439,11 +458,13 @@ function awPaintingHook(el, i, d, ctx) {
     }).catch(() => {});
   }
   awContext(el.querySelector("[data-glctx]"), i, d);
+  const whyHost = el.querySelector("[data-glwhy]");
   const host = el.querySelector("[data-awan]"); if (!host) return;
   awShard(i).then(rows => {
     const r = rows[i % 100];
-    if (!r || r.id !== d.id || !host.isConnected) return;
-    awAnalysis(host, el, i, d, r, ctx);
+    if (!r || r.id !== d.id) return;
+    if (whyHost && whyHost.isConnected) awPaintingWhy(whyHost, r);
+    if (host.isConnected) awAnalysis(host, el, i, d, r, ctx);
   }).catch(() => { host.innerHTML = ""; });
 }
 // "In context" (design/ARCHIVE-PAGES.md #8): Strava-style dot rows. Each row is one comparison set (the painter's

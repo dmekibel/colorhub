@@ -748,7 +748,14 @@ function glPage(i, d, fromHex, tol) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><div class="art-top-r">${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}${typeof fvArtHeart === "function" ? fvArtHeart(d.id) : ""}</div></header>
     <div class="gl-pal-wrap">
-    <div class="gl-hero gl-full-w"><span style="--c:${dom};width:min(100%, calc(38dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas></span></div>
+    <div class="gl-hero gl-full-w"><span style="--c:${dom};width:min(100%, calc(30dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas></span></div>
+    <div class="gl-id">
+    <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
+    <h1 class="p-title">${esc(d.t)}</h1>
+    <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
+    <p class="gl-id-src">${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}</p>
+    <div class="gl-why" data-glwhy hidden></div>
+    </div>
     <div class="gl-pal-ui">
     <div class="palette gl-strip" data-glswatches></div>
     <div class="gl-modes-f" data-glfade><div class="gl-modes" data-glorder role="group" aria-label="Palette type"></div></div>
@@ -761,9 +768,6 @@ function glPage(i, d, fromHex, tol) {
     <div data-csacts></div>
     </div></div>
     <div class="gl-under"><div class="gl-quiz" data-glquiz></div>${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
-    <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
-    <h1 class="p-title">${esc(d.t)}</h1>
-    <p class="p-dek">${esc([d.a || "Artist unknown", d.co, d.mv].filter(Boolean).join(" · "))}</p>
     <div class="gl-roles" data-glroles></div>
     <div class="aw-cx" data-glctx></div>
     <p class="fine">Computed by ColorHub, not by the museum, from its photograph. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
