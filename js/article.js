@@ -141,6 +141,14 @@ function arColor(ref) {
   const t = a && arDirect(a.to);
   return t ? { ...t, via: a.via || arPretty(slug) } : null;
 }
+// a system-reference swatch isn't a named color of its own (data-ar-swatch="HEX|label"): open the nearest name's
+// page, showing the exact color (js/richpage.js's "97% match" treatment, same as any in-between color)
+function arOpenSwatch(spec, srcEl) {
+  const i = spec.indexOf("|"), hex = (i < 0 ? spec : spec.slice(0, i)).toUpperCase(), label = i < 0 ? hex : spec.slice(i + 1);
+  if (!/^#[0-9A-F]{6}$/.test(hex) || typeof openCoreName !== "function") return;
+  if (srcEl && typeof morphFrom === "function") { try { morphFrom(srcEl); } catch (e) {} }
+  openCoreName(hex, label);
+}
 function arOpenColor(slug, srcEl) {
   const c = arColor(slug); if (!c) return;
   if (c.book) return arReadPage(c.slug);
@@ -170,6 +178,7 @@ function arLinkHTML(slug, label, hl, word) {
 // deco is the color for big decorative marks (drop cap, quote marks, the timeline): the color itself at 3:1, else the tint.
 const AR_GROUND = "#0E0D0B", AR_BODY_HEX = "#D9D4C8", AR_HL_MAX = 3, AR_SPLIT_W = 90;
 const AR_HL_CLS = { text: "hl-t", tint: "hl-t", line: "hl-l" };
+const AR_PAPER = "#EFEBE3";   // app.css --paper: the warm off-white a truly hueless grey marks with, instead of flat grey
 function arLum(h) { return [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255).map(v => v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4).reduce((s, v, i) => s + v * [.2126, .7152, .0722][i], 0); }
 const arContrast = (a, b) => { const x = arLum(a) + .05, y = arLum(b) + .05; return x > y ? x / y : y / x; };
 const AR_ACC = new Map();
@@ -178,11 +187,23 @@ function arAccent(hex) {
   if (!/^#[0-9A-F]{6}$/.test(hex)) return { mode: "none", c: "", deco: "" };
   if (AR_ACC.has(hex)) return AR_ACC.get(hex);
   const k = arContrast(hex, AR_GROUND), far = h => typeof de2000 !== "function" || de2000(h, AR_BODY_HEX) >= 14;
-  let r;
+  let r, lifted = false;
   if (typeof lch !== "function" || typeof lchHex !== "function") r = k >= 4.5 ? { mode: "text", c: hex } : k >= 1.6 ? { mode: "line", c: hex } : { mode: "none", c: "" };
   else {
     const [L, C, H] = lch(hex);
-    if (C < 12) r = k >= 1.6 ? { mode: "line", c: hex } : { mode: "none", c: "" };
+    if (C < 12) {
+      // low-chroma: the flat grey hex itself never carries the mark (David, 2026-10-09: "not enough color variation").
+      // A color with a real, if faint, hue gets that hue lifted to a legible, pleasant chroma (>= ~28, gamut-clamped);
+      // a truly hueless grey (no hue to lift) gets the warm paper accent instead of flat grey.
+      lifted = true;
+      let found = null;
+      if (C >= 2) for (let L2 = 46; L2 <= 86; L2 += 2) {
+        let C2 = 28; while (C2 > 10 && typeof inGamut === "function" && !inGamut(L2, C2 * Math.cos(H * Math.PI / 180), C2 * Math.sin(H * Math.PI / 180))) C2 -= 2;
+        const t = lchHex(L2, C2, H);
+        if (arContrast(t, AR_GROUND) >= 4.6 && far(t)) { found = t; break; }
+      }
+      r = found ? { mode: "text", c: found } : { mode: "tint", c: AR_PAPER };
+    }
     else if (L >= 78 && C < 35) r = { mode: "line", c: hex };
     else if (k >= 4.5 && far(hex)) r = { mode: "text", c: hex };
     else {
@@ -194,9 +215,58 @@ function arAccent(hex) {
       }
     }
   }
-  r.deco = k >= 3 ? hex : r.mode === "tint" ? r.c : r.c && arContrast(r.c, AR_GROUND) >= 3 ? r.c : "";
+  // decorative marks (drop cap, quote marks, timeline): lifted/paper colors always win here too, never the flat grey
+  r.deco = lifted ? r.c : (k >= 3 ? hex : r.mode === "tint" ? r.c : r.c && arContrast(r.c, AR_GROUND) >= 3 ? r.c : "");
   AR_ACC.set(hex, r);
   return r;
+}
+// ---------- prime notation (David, 2026-10-09: a Ridgway hue like "1'''''" rendered as a run of straight quotes
+// that Safari's font kerning draws stacked into something like 1"""") ----------
+// A digit followed by 2+ straight apostrophes is prime notation (hue 1', tone i''): single, double and triple prime
+// (U+2032/2033/2034) are well-supported glyphs and render as real marks; past three, the glyphs (quadruple prime,
+// U+2057, and beyond) are missing from most text fonts and would just trade one tofu glitch for another, so those
+// render in words instead ("1, 5 primes"). A run past 12 is unparseable and the marks are dropped rather than guessed.
+const AR_PRIME_GLYPH = { 1: "′", 2: "″", 3: "‴" };
+function arPrimes(t) {
+  return String(t == null ? "" : t).replace(/(\d)('{2,})/g, (m, d, qs) => {
+    const n = qs.length;
+    if (n > 12) return d;
+    return d + (AR_PRIME_GLYPH[n] || (", " + n + " primes"));
+  });
+}
+// ---------- system-reference swatches (David, 2026-10-09): a sentence citing "Maerz & Paul... plate 46 B2" or
+// "ISCC-NBS... block 265" gets a small inline swatch of that entry's own color, from our own transcribed plates/blocks
+// (data/sources/*.json; see each file's _provenance). Ridgway, RAL and Munsell have no such per-entry color table in
+// this library yet, so a citation to them stays plain text rather than guessing a swatch. ----------
+let AR_MP = null, AR_ISCC = null, AR_SYSREF_P = null;
+function arJSONL(text) {
+  const out = [];
+  String(text || "").split("\n").forEach(line => { line = line.trim(); if (line[0] !== "{") return; try { out.push(JSON.parse(line)); } catch (e) {} });
+  return out;
+}
+function arLoadSysRefs() {
+  if (AR_SYSREF_P) return AR_SYSREF_P;
+  const base = arCfg().sources || "data/sources/";
+  return (AR_SYSREF_P = Promise.all([
+    fetch(base + "maerz-paul-1930-clean.json" + arVer()).then(r => r.ok ? r.text() : "").catch(() => ""),
+    fetch(base + "iscc-nbs-centroids.json" + arVer()).then(r => r.ok ? r.text() : "").catch(() => "")
+  ]).then(([mpTxt, isccTxt]) => {
+    AR_MP = new Map();
+    arJSONL(mpTxt).forEach(o => { if (o && o.plate != null && o.col && o.row != null && /^#[0-9A-Fa-f]{6}$/.test(o.h || "")) AR_MP.set(o.plate + " " + String(o.col).toUpperCase() + o.row, o.h.toUpperCase()); });
+    AR_ISCC = new Map();
+    arJSONL(isccTxt).forEach(o => { if (o && o.block != null && /^#[0-9A-Fa-f]{6}$/.test(o.hex || "")) AR_ISCC.set(+o.block, o.hex.toUpperCase()); });
+  }));
+}
+const AR_SYSREF_RE = /\b(plate\s+(\d{1,2})\s+([A-L])\s*(\d{1,2})|block\s+(\d{1,3}))\b/gi;
+function arSysRefHex(plate, col, row, block) {
+  if (block != null) return AR_ISCC ? AR_ISCC.get(+block) : null;
+  return AR_MP ? AR_MP.get(plate + " " + String(col).toUpperCase() + row) : null;
+}
+// the system swatch a sentence names, if our own tables have it (for the Key dates timeline: a date's own color)
+function arSysRefIn(text) {
+  let hex = null;
+  String(text || "").replace(AR_SYSREF_RE, (m, w, plate, col, row, block) => { if (!hex) hex = arSysRefHex(plate, col, row, block); return m; });
+  return hex;
 }
 // The color words worth marking in plain text: the eleven basic terms and violet, and every name of two or more words in the
 // ~1,000 core names ("Paris blue", "sky blue"): unambiguous as words. Single-word names (Rose, Orange, Navy) stay plain.
@@ -215,7 +285,7 @@ function arWordsRe() {
 }
 // markup -> plain words (for quotes, dates and their captions)
 function arPlain(t) {
-  return String(t == null ? "" : t).replace(new RegExp(AR_REF_SRC, "gi"), (m, k, id, label) => label || arPretty(id))
+  return arPrimes(String(t == null ? "" : t)).replace(new RegExp(AR_REF_SRC, "gi"), (m, k, id, label) => label || arPretty(id))
     .replace(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/gi, (m, s, label) => { if (label) return label; const c = arColor(s.toLowerCase()); return c ? c.via || c.n : arPretty(s); })
     .replace(/\s*\[\d[\d,\s–-]*\]/g, "").replace(/\*\*([^*]+)\*\*/g, "$1").replace(/\*([^*]+)\*/g, "$1").replace(/`([^`]+)`/g, "$1").replace(/\s+/g, " ").trim();
 }
@@ -283,7 +353,9 @@ function arDatesOf(texts) {
     const w = snip.split(/\s+/), at = w.findIndex(x => x.includes(y));
     if (w.length > 13) snip = at >= 0 && at > 10 ? "…" + w.slice(-12).join(" ") : w.slice(0, 12).join(" ").replace(/[,;:]$/, "") + "…";
     snip = snip.replace(/^[a-z]/, c => c.toUpperCase());
-    if (snip.replace(/…/g, "").split(/\s+/).length >= 3) seen.set(y, { y: +m[1] + (m[2] ? 5 : 0), label: y, snip, p });
+    // the color system this date's own sentence cites (Maerz & Paul plate, ISCC-NBS block), if our tables have it:
+    // the timeline dot and year use that color instead of the page's own accent (David, 2026-10-09: "instead of grey")
+    if (snip.replace(/…/g, "").split(/\s+/).length >= 3) seen.set(y, { y: +m[1] + (m[2] ? 5 : 0), label: y, snip, p, hex: arSysRefIn(plain) });
   }));
   let list = [...seen.values()].sort((a, b) => a.y - b.y);
   if (list.length < 2) return [];
@@ -292,9 +364,12 @@ function arDatesOf(texts) {
 }
 function arDatesHTML(list) {
   const lo = list[0].y, hi = list[list.length - 1].y, span = Math.max(1, hi - lo);
+  // a date's own system swatch, lifted to something legible the same way the page's own accent is (never the raw,
+  // possibly-too-dark-or-too-grey swatch hex straight as text or a dot that vanishes against the ground)
+  const deco = d => d.hex && typeof arAccent === "function" ? (arAccent(d.hex).deco || "") : "";
   return `<figure class="ar-tl" aria-label="Key dates"><figcaption class="ar-tl-h">Key dates</figcaption>
-    <div class="ar-tl-axis" aria-hidden="true"><i class="ar-tl-line"></i>${list.map(d => `<i class="ar-tl-dot" style="left:${(4 + 92 * (d.y - lo) / span).toFixed(1)}%"></i>`).join("")}<span class="ar-tl-lo">${esc(list[0].label)}</span><span class="ar-tl-hi">${esc(list[list.length - 1].label)}</span></div>
-    <ol>${list.map(d => `<li><b>${esc(d.label)}</b><span>${esc(d.snip)}</span></li>`).join("")}</ol></figure>`;
+    <div class="ar-tl-axis" aria-hidden="true"><i class="ar-tl-line"></i>${list.map(d => { const c = deco(d); return `<i class="ar-tl-dot" style="left:${(4 + 92 * (d.y - lo) / span).toFixed(1)}%${c ? `;background:${esc(c)}` : ""}"></i>`; }).join("")}<span class="ar-tl-lo">${esc(list[0].label)}</span><span class="ar-tl-hi">${esc(list[list.length - 1].label)}</span></div>
+    <ol>${list.map(d => { const c = deco(d); return `<li><b${c ? ` style="color:${esc(c)}"` : ""}>${esc(d.label)}</b><span>${esc(d.snip)}</span></li>`; }).join("")}</ol></figure>`;
 }
 function arQuoteHTML(q) { return `<figure class="ar-pq"><blockquote><p>${esc(q.q)}</p></blockquote><figcaption>${esc(q.who)}</figcaption></figure>`; }
 // the colors a paragraph names, side by side with the page's own: big plates, one tap opens each
@@ -329,9 +404,17 @@ function arRefList(text) {
 // hl (optional): { n, self } a paragraph's highlight budget; self = { name, a, done } marks the page's own color name once a chapter
 function arInline(text, art, hl) {
   const stash = [];
-  let s = String(text == null ? "" : text);
+  let s = arPrimes(String(text == null ? "" : text));
   s = s.replace(new RegExp(AR_REF_SRC, "gi"), (m, kind, id, label) => { stash.push(arRefChipHTML(kind, id, label)); return "\u0001" + (stash.length - 1) + "\u0002"; });
   s = s.replace(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/gi, (m, slug, label) => { stash.push(arLinkHTML(slug.toLowerCase(), label, hl)); return "\u0001" + (stash.length - 1) + "\u0002"; });
+  // a sentence citing a system entry we hold a real swatch for ("Maerz & Paul... plate 46 B2", "ISCC-NBS... block 265"):
+  // a small inline swatch, tappable to the nearest color's page (David, 2026-10-09)
+  if (AR_MP || AR_ISCC) s = s.replace(AR_SYSREF_RE, (m, whole, plate, col, row, block) => {
+    const hex = arSysRefHex(plate, col, row, block);
+    if (!hex) return m;
+    stash.push(`<button type="button" class="ar-sysref" data-ar-swatch="${esc(hex)}|${esc(m)}" aria-label="${esc(m)}, this entry's own color"><i style="--c:${hex}"></i>${esc(m)}</button>`);
+    return "\u0001" + (stash.length - 1) + "\u0002";
+  });
   s = esc(s);
   const me = hl && hl.self;
   if (me && !me.done && me.name && me.a.mode !== "none" && hl.n < AR_HL_MAX) {
@@ -419,8 +502,34 @@ function arTreeHTML(self, aside) {
 }
 
 // ---------- the pieces of a page ----------
+// "Source: ColorHub color library" is this app's own internal placeholder, never a real citation (David, 2026-10-09): a
+// bare one is replaced with the real systems this name is grounded in, read off the article's own notes; a wrapped one
+// ("ColorHub color library (Ridgway 1912; Wikipedia)") just loses the wrapper. If nothing real can be found, the row
+// is dropped rather than show the internal name.
+const AR_SYS_CITE = [[/Ridgway/i, "Ridgway"], [/Maerz\s*(?:and|&)\s*Paul/i, "Maerz & Paul"], [/ISCC-?NBS/i, "ISCC-NBS"], [/\bRAL\b/, "RAL"], [/Munsell/i, "Munsell"],
+  [/Pantone/i, "Pantone"], [/Crayola/i, "Crayola"], [/\bWerner\b/i, "Werner"], [/Wikipedia/i, "Wikipedia"], [/\bxkcd\b/i, "xkcd"], [/\bX11\b/, "X11"]];
+function arSourceFromNotes(art) {
+  const texts = art && art.notes ? [...art.notes.values()].map(n => n.cite || "").join(" ; ") : "";
+  if (!texts) return "";
+  const found = [];
+  AR_SYS_CITE.forEach(([re, label]) => {
+    if (!re.test(texts)) return;
+    const y = texts.match(new RegExp(re.source + "[^;.]{0,30}?((?:18|19|20)\\d{2})", "i"));
+    found.push(label + (y ? " " + y[1] : ""));
+  });
+  return found.slice(0, 3).join(" · ");
+}
+function arSourceLabel(o, art) {
+  const raw = String((o && o.source) || "").trim();
+  if (!/^ColorHub color library\b/i.test(raw)) return raw;
+  if (/^ColorHub color library\s*\(/i.test(raw)) {
+    const stripped = raw.replace(/^ColorHub color library\s*\(/i, "").replace(/\)(\s*;?\s*)/, "$1").trim().replace(/^[;,]\s*/, "");
+    if (stripped) return stripped;
+  }
+  return arSourceFromNotes(art);
+}
 function arFactsHTML(art) {
-  const o = art.aside.origin || {}, rows = [["Named after", o.named_after], ["First recorded", o.first_recorded], ["Source", o.source]].filter(r => r[1]);
+  const o = art.aside.origin || {}, rows = [["Named after", o.named_after], ["First recorded", o.first_recorded], ["Source", arSourceLabel(o, art)]].filter(r => r[1]);
   const aka = arList(art.aside.aka);
   return (rows.length ? `<dl class="ar-facts">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${arInline(v, art)}</dd></div>`).join("")}</dl>` : "")
     + (aka.length ? `<p class="ar-aka">Also called ${aka.map(esc).join(", ")}.</p>` : "");
@@ -511,7 +620,7 @@ function arQuestionsHTML(art) {
 const AR_KIND = { book: "Book", paper: "Paper", article: "Article", web: "Web page", archive: "Archive", standard: "Standard", dictionary: "Dictionary", museum: "Museum", data: "Our own data", computed: "Our own data" };
 function arNotesHTML(art) {
   if (!art.notes.size) return "";
-  return `<section class="ar-notes" id="ar-s-notes"><h2>Notes</h2><ol>${[...art.notes.values()].sort((a, b) => a.n - b.n).map(n => `<li id="ar-note-${n.n}"><span class="ar-nn">${n.n}</span><span class="ar-nc">${esc(n.cite || "")}${n.kind ? ` <em>${esc(AR_KIND[String(n.kind).toLowerCase()] || n.kind)}</em>` : ""}${/^https?:\/\//.test(n.url || "") ? ` <a href="${esc(n.url)}" target="_blank" rel="noopener">Open ↗</a>` : ""}</span></li>`).join("")}</ol></section>`;
+  return `<section class="ar-notes" id="ar-s-notes"><h2>Notes</h2><ol>${[...art.notes.values()].sort((a, b) => a.n - b.n).map(n => `<li id="ar-note-${n.n}"><span class="ar-nn">${n.n}</span><span class="ar-nc">${esc(arPrimes(n.cite || ""))}${n.kind ? ` <em>${esc(AR_KIND[String(n.kind).toLowerCase()] || n.kind)}</em>` : ""}${/^https?:\/\//.test(n.url || "") ? ` <a href="${esc(n.url)}" target="_blank" rel="noopener">Open ↗</a>` : ""}</span></li>`).join("")}</ol></section>`;
 }
 // The whole article as one string (pure: the node test builds it too).
 function arBuildHTML(art, self) {
@@ -574,7 +683,7 @@ function arRival(sec, art, self) {
 function arNoteSheet(art, n) {
   const note = art.notes.get(n); if (!note) return;
   const { sh } = sheet(`<div class="ar-ns"><p class="ar-ns-k"><span class="mono">${n}</span>${note.kind ? ` · ${esc(AR_KIND[String(note.kind).toLowerCase()] || note.kind)}` : ""}</p>
-    <p class="ar-ns-c">${esc(note.cite || "No citation recorded.")}</p>
+    <p class="ar-ns-c">${note.cite ? esc(arPrimes(note.cite)) : "No citation recorded."}</p>
     ${/^https?:\/\//.test(note.url || "") ? `<a class="ar-ns-a" href="${esc(note.url)}" target="_blank" rel="noopener">Open the source ↗</a>` : ""}</div>`);
   sh.classList.add("ar-nsheet");
 }
@@ -625,6 +734,7 @@ function arWire(root, art, self) {
     const fn = t.closest("[data-fn]"); if (fn) return arNoteSheet(art, +fn.dataset.fn);
     const rf = t.closest("[data-ar-ref]"); if (rf) return typeof arfOpen === "function" ? arfOpen(rf.dataset.arRef, self) : undefined;
     const op = t.closest("[data-ar-open]"); if (op) return arOpenColor(op.dataset.arOpen, op.querySelector("i"));
+    const sw = t.closest("[data-ar-swatch]"); if (sw) return arOpenSwatch(sw.dataset.arSwatch, sw.querySelector("i"));
     const wh = t.closest("[data-ar-which]"); if (wh) { e.preventDefault(); return arWhichPage(wh.dataset.arWhich); }
     const act = t.closest("[data-ar-act]"); if (act) return arAct(root, art, self, act);
     const ch = t.closest("[data-ar-ch]"); if (ch) return arAnswer(root, art, self, ch);
@@ -730,7 +840,7 @@ function arDoorWire(host, art, self) {
 const AR_READING = new Map();   // slug -> { art, self } once loaded (a facet story needs the wiki, which may be in by now)
 function arReadLoad(slug) {
   if (AR_READING.has(slug)) return Promise.resolve(AR_READING.get(slug));
-  const names = Promise.all([typeof loadCoreNames === "function" ? loadCoreNames() : null, arLoadNames()]);
+  const names = Promise.all([typeof loadCoreNames === "function" ? loadCoreNames() : null, arLoadNames(), arLoadSysRefs()]);
   return Promise.all([arLoad(slug), names]).then(([art]) => {
     let a = art;
     const c = typeof routeColor === "function" ? routeColor(slug) : null;
@@ -798,7 +908,7 @@ function arReadDraw(slug, chap, push) {
 function articleRender(slug, host, ctx) {
   const none = () => { if (host) { host.innerHTML = ""; host.hidden = true; } return false; };
   if (!host || !slug) return Promise.resolve(false);
-  const names = Promise.all([typeof loadCoreNames === "function" ? loadCoreNames() : null, arLoadNames()]);
+  const names = Promise.all([typeof loadCoreNames === "function" ? loadCoreNames() : null, arLoadNames(), arLoadSysRefs()]);
   return Promise.all([arLoad(slug), names]).then(([found]) => {
     const art = found || (ctx && ctx.facet) || null;
     if (!art || (host.isConnected === false)) return none();
@@ -854,7 +964,7 @@ function arShell(html, cls, id) {
   const el = show(html, "article cp-page ar-page " + (cls || ""));
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
-  el.addEventListener("click", e => { const op = e.target.closest("[data-ar-open]"); if (op) arOpenColor(op.dataset.arOpen, op.querySelector("i")); const w = e.target.closest("[data-ar-which]"); if (w) { e.preventDefault(); arWhichPage(w.dataset.arWhich); } });
+  el.addEventListener("click", e => { const op = e.target.closest("[data-ar-open]"); if (op) arOpenColor(op.dataset.arOpen, op.querySelector("i")); const sw = e.target.closest("[data-ar-swatch]"); if (sw) arOpenSwatch(sw.dataset.arSwatch, sw.querySelector("i")); const w = e.target.closest("[data-ar-which]"); if (w) { e.preventDefault(); arWhichPage(w.dataset.arWhich); } });
   return el;
 }
 function arMissing(what) {
