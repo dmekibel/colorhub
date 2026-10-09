@@ -354,8 +354,10 @@ async function ciSetStats(res, hexes, o = {}) {
   }
   return st;
 }
-// one honest line about a set. names: what to call each color.
-function ciFinding(names, res, st) {
+// one honest line about a set. names: what to call each color. o.noFallback: true when the caller has no ranked
+// "closest anyway" list right under this line any more (js/setpage.js's match browser, David 2026-10-09 — a
+// near-miss is only shown once someone explicitly loosens the sliders, so this shouldn't promise one is waiting).
+function ciFinding(names, res, st, o2 = {}) {
   const k = names.length, list = k === 1 ? names[0] : names.length === 2 ? names.join(" and ") : names.slice(0, -1).join(", ") + " and " + names[k - 1];
   const item = res.sources && res.sources.length === 1 ? res.sources[0].item : "picture", plural = item + "s";
   const pct = res.n ? res.count / res.n * 100 : 0, pcts = pct < .1 ? "under 0.1" : pct < 1 ? (+pct.toFixed(1)).toString() : Math.round(pct).toString();
@@ -365,7 +367,7 @@ function ciFinding(names, res, st) {
   const N = n => n.toLocaleString("en-US");
   const n = res.count;
   let s;
-  if (!n) return `Nothing at this setting holds ${k === 1 ? list : k === 2 ? "both " + list : "all of " + list}, ${how}. The closest ${plural} in the archive are ranked below.`;
+  if (!n) return `Nothing at this setting holds ${k === 1 ? list : k === 2 ? "both " + list : "all of " + list}, ${how}.${o2.noFallback ? "" : ` The closest ${plural} in the archive are ranked below.`}`;
   if (k === 1) s = `${N(n)} ${n === 1 ? item : plural} (${pcts}% of ${N(res.n)}) hold ${list}, ${how}.`;
   else if (o.mode === "any") s = `${N(n)} ${n === 1 ? item : plural} hold at least one of ${list}, ${how}.`;
   else if (o.mode === "palette") s = `${N(n)} ${n === 1 ? item : plural} match this palette closely.`;
@@ -417,7 +419,7 @@ function ciTakeaway(nameA, nameB, ps) {
   const rel = { 0: "two neutrals", 1: `${nameA} and ${nameB} pair a color with a neutral`, 2: `${nameA} and ${nameB} are neighbors on the wheel`, 3: "sit a third of the way round the wheel from each other", 4: `${nameA} and ${nameB} are near-opposites on the wheel` }[th.code];
   const theoryLine = th.code === 4 ? `Theory calls near-opposites a vivid pairing${l != null && l < .9 ? ", but painters in this archive use it less than chance" : l != null && l > 1.25 ? ", and painters here do use it more than chance" : ""}.`
     : th.code === 2 ? `Theory calls neighbors on the wheel harmonious${l != null && l > 1.25 ? ", and painters here agree" : l != null && l < .9 ? ", yet this pair is rarer than chance here" : ""}.` : "";
-  if (!n) return `Nothing holds both at this setting; the closest paintings are ranked below. ${theoryLine}`.trim();
+  if (!n) return `Nothing holds both at this setting.${ps.noFallback ? "" : " The closest paintings are ranked below."} ${theoryLine}`.trim();
   if (n < 5) return `${n === 1 ? "One painting holds" : n + " paintings hold"} both: too few to say anything about painters' habits.`;
   const head = l == null ? `${n.toLocaleString("en-US")} paintings hold both.`
     : l >= 1.5 ? `Painters really do reach for this pair: ${l >= 10 ? Math.round(l) : l.toFixed(1)}× more often than chance, ${n.toLocaleString("en-US")} paintings.`

@@ -299,8 +299,8 @@ function spPage(hexes, o = {}) {
     if (!live()) return;
     const box = $("[data-ptg]"), n = res.count, N = res.n, lift = res.lift;
     let lead;
-    if (pair) lead = ciTakeaway(names[0], names[1], { count: n, lift, theory: ciTheory(hexes[0], hexes[1]), stats: st });
-    else lead = ciFinding(q.map(spNm), res, st);
+    if (pair) lead = ciTakeaway(names[0], names[1], { count: n, lift, theory: ciTheory(hexes[0], hexes[1]), stats: st, noFallback: true });
+    else lead = ciFinding(q.map(spNm), res, st, { noFallback: true });
     $("[data-lead]").textContent = lead + looseNote + qNote;
     let big = n && lift != null && n >= SP_MIN_N && res.expected >= 1
       ? `<div class="sp-big"><b>${spTimes(lift)}</b><span>${lift >= 1.25 ? "more often than chance" : lift <= .8 ? "of what chance predicts: painters keep these apart" : "about as often as chance"}</span><em>${spNum(n)} of ${spNum(N)} paintings hold ${pair ? "both" : "all of them"}, about ${ciFmt(res.expected)} expected</em></div>`

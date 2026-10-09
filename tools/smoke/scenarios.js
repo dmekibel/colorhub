@@ -2203,6 +2203,44 @@ scenario("sets", "Pair with on a color page: picker suggests, searches, try-on b
   await SP.lead(t);
   t.expect(t.$$(".sp-fact").length >= 5, "the relationship facts are missing");
 });
+// David, 2026-10-09: build a set from the camera (one color after another) or a photo (tap any spot, exact
+// pixel). The camera side feature-detects window.cameraPick, a sibling lane's build; this checks the honest
+// fallback (opens the camera) and the self-contained "From a photo" flow, which must work today either way.
+scenario("sets", "Pair with… offers Point your camera and From a photo; From a photo picks exact pixels into a set", async t => {
+  SP.placed();
+  await t.open("#/color/teal", { settle: 800, keepState: true });
+  const btn = await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button");
+  await t.click(btn, { wait: 600 });
+  await t.waitFor(".sheet.sx-sheet [data-sx-cam]", 6000, "Point your camera");
+  t.expect(t.$(".sheet.sx-sheet [data-sx-photo]"), "From a photo is missing");
+  await t.click("[data-sx-photo]", { force: true, wait: 300 });
+  // feed the hidden file input a two-color test image, as a real file picker would
+  t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 200; c.height = 100;
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "#E34234"; ctx.fillRect(0, 0, 100, 100);
+    ctx.fillStyle = "#2B2A4C"; ctx.fillRect(100, 0, 100, 100);
+    c.toBlob(blob => {
+      const file = new File([blob], "test.png", { type: "image/png" });
+      const dt = new DataTransfer(); dt.items.add(file);
+      const input = document.querySelector('input[type=file][accept="image/*"]');
+      input.files = dt.files;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+    }, "image/png");
+  })()`);
+  await t.waitFor("[data-sx-photo-img]", 8000, "the photo sheet's image");
+  const img = t.$("[data-sx-photo-img]"), r = () => img.getBoundingClientRect();
+  const r1 = r();
+  await t.tapAt(img, r1.left + r1.width * .25, r1.top + r1.height * .5, {});
+  await t.sleep(200);
+  const r2 = r();
+  await t.tapAt(img, r2.left + r2.width * .75, r2.top + r2.height * .5, {});
+  await t.sleep(200);
+  t.expect(t.$$("[data-sx-photo-strip] .sx-try-sw").length === 3, "expected the seeded color (Teal) plus two picked spots in the strip");
+  await t.click("[data-sx-photo-done]", { force: true, wait: 800 });
+  await t.waitFor(() => /^#\/set\//.test(t.w.location.hash) && t.$(".sp-page .sp-strip"), 12000, "Done opened the set page");
+  t.expect(t.$$(".sp-names .sp-name").length === 3, "the set from the photo doesn't hold three colors");
+});
 scenario("sets", "a pair page: facts and paintings and Add a color makes a trio", async t => {
   SP.placed();
   await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });

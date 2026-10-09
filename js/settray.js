@@ -14,6 +14,8 @@
 const SX_MAX = 8;
 const SX_ICON_PAIR = sv('<circle cx="9" cy="12" r="5.5"/><circle cx="15" cy="12" r="5.5"/>', 18, 1.7);
 const SX_ICON_X = sv('<path d="M6 6l12 12M18 6L6 18"/>', 16, 1.8);
+const SX_ICON_CAM = sv('<path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z"/><circle cx="12" cy="13" r="3.5"/>', 22, 1.7);
+const SX_ICON_PHOTO = sv('<rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5.5-5.5L6 19"/>', 22, 1.7);
 const sxHex = h => /^#?[0-9a-f]{6}$/i.test(String(h || "")) ? "#" + String(h).replace("#", "").toUpperCase() : null;
 const sxTray = () => (Array.isArray(S.setTray) ? S.setTray : (S.setTray = [])).filter(h => sxHex(h));
 const sxNm = h => { const n = nameOf(h); return n.de < VERY_CLOSE_DE && !n.between ? n.n : n.text || h; };
@@ -163,7 +165,9 @@ function sxPick(anchor, o = {}) {
     </div>
     <button class="sx-any" data-sx-any><span class="sx-any-ring"></span><span><b>Any color</b><small>Pick it on the ring</small></span></button>
     <div class="sx-picker" data-sx-picker hidden></div>
-    <button class="btn solid sx-use" data-sx-use hidden>Try this color</button>`);
+    <button class="btn solid sx-use" data-sx-use hidden>Try this color</button>
+    <button class="sx-any" data-sx-cam>${SX_ICON_CAM}<span><b>Point your camera</b><small>Add colors one after another, from what's in front of you</small></span></button>
+    <button class="sx-any" data-sx-photo>${SX_ICON_PHOTO}<span><b>From a photo</b><small>Tap any spot for its exact color</small></span></button>`);
   sh.classList.add("sx-sheet");
   // the set as it stands (the anchor, plus anything already in the tray): what the try-on strip shows beside the
   // dashed trying slot. A candidate never commits on its own tap; Add does (sxTryAdd), Cancel clears the trial.
@@ -231,7 +235,96 @@ function sxPick(anchor, o = {}) {
     if (e.target.closest("[data-sx-use]") && cur) return setTrying(cur);
     if (e.target.closest("[data-try-cancel]")) { buzz(5); return cancelTrying(); }
     if (e.target.closest("[data-try-add]")) return addTrying();
+    if (e.target.closest("[data-sx-cam]")) { buzz(6); close(); return sxCameraFlow(buildSet, o); }
+    if (e.target.closest("[data-sx-photo]")) { buzz(6); close(); return sxPhotoFlow(buildSet, o); }
   });
   sh.querySelector("[data-sx-picker]").addEventListener("pointerdown", e => e.stopPropagation());
   return { sh, close };
+}
+
+// ---------- building a set from the camera or a photo (David, 2026-10-09) ----------
+// Point your camera: pick a color, it's added, you're back at the camera for the next one, the growing set shows
+// as a strip; Done opens the set page. The camera picker itself (exact-pixel sampling, multi-pick, the strip, the
+// Done button) is a separate lane's build — this just feature-detects what it exposes, `cameraPick({onPick,
+// multi:true})`, resolving to the final hexes once Done is tapped. Until that ships, the honest fallback is the
+// camera screen the app already has, one color at a time.
+function sxCameraFlow(start, o = {}) {
+  const addOne = h => { h = sxHex(h); if (!h) return; if (o.onPick) return o.onPick(h); sxAdd(h, { quiet: true }); };
+  const finish = hexes => {
+    if (Array.isArray(hexes)) hexes.forEach(addOne);
+    if (o.onPick) return;
+    const set = sxTray().length ? sxTray() : start;
+    if (set.length >= 2) sxOpen(set);
+  };
+  if (typeof window.cameraPick === "function") {
+    if (!o.onPick) { S.setTray = start.slice(); save(); sxSync(); }
+    const r = window.cameraPick({ multi: true, anchor: start[start.length - 1], onPick: addOne, onDone: finish });
+    if (r && typeof r.then === "function") r.then(finish).catch(() => {});
+    return;
+  }
+  toast("Camera picking for a whole set is coming soon — opening the camera for one color.");
+  if (typeof eye === "function") eye();
+}
+// From a photo: tap any spot on an uploaded photo for its exact pixel color (up to a 2×2 patch, never a wider
+// averaged area — this is "what's really there", not a guess), added straight to the set; tap more spots, then
+// Done. Self-contained here rather than routed through "Name any color" (js/namer.js), which doesn't return a
+// pick today — David's note said to reuse that flow only if it can hand colors back; it can't yet.
+function sxPhotoFlow(start, o = {}) {
+  const input = document.createElement("input");
+  input.type = "file"; input.accept = "image/*"; input.hidden = true;
+  document.body.appendChild(input);
+  input.onchange = () => {
+    const f = input.files[0]; input.remove();
+    if (!f) return;
+    const img = new Image();
+    img.onload = () => { const src = img.src; sxPhotoSheet(img, start, o); URL.revokeObjectURL(src); };
+    img.onerror = () => toast("That photo didn't load");
+    img.src = URL.createObjectURL(f);
+  };
+  input.click();
+}
+function sxPhotoSheet(img, start, o = {}) {
+  const w = img.naturalWidth, h = img.naturalHeight;
+  const cnv = document.createElement("canvas"); cnv.width = w; cnv.height = h;
+  const ctx = cnv.getContext("2d", { willReadFrequently: true }); ctx.drawImage(img, 0, 0, w, h);
+  const exact = (fx, fy) => {
+    const x = Math.max(0, Math.min(w - 2, Math.round(fx * w) - 1)), y = Math.max(0, Math.min(h - 2, Math.round(fy * h) - 1));
+    const d = ctx.getImageData(x, y, 2, 2).data;
+    let r = 0, g = 0, b = 0, n = 0;
+    for (let p = 0; p < d.length; p += 4) { r += d[p]; g += d[p + 1]; b += d[p + 2]; n++; }
+    const hex = v => Math.round(v / n).toString(16).padStart(2, "0");
+    return ("#" + hex(r) + hex(g) + hex(b)).toUpperCase();
+  };
+  const picked = start.slice();
+  const { sh, close } = sheet(`
+    <div class="sx-head"><div><p class="eyebrow">From a photo</p><h2>Tap a spot for its color</h2></div></div>
+    <div class="sx-photo-wrap" data-sx-photo-wrap><img class="sx-photo-img" src="${img.src}" alt="" data-sx-photo-img><i class="sx-photo-pin" data-sx-photo-pin hidden></i></div>
+    <p class="sx-sub" data-sx-photo-cap>An exact pixel, not an average — tap again for another.</p>
+    <div class="sx-try-row" data-sx-photo-strip></div>
+    <button class="btn solid sx-use" data-sx-photo-done>Done${picked.length ? ` · ${picked.length}` : ""}</button>`);
+  sh.classList.add("sx-sheet");
+  const paintStrip = () => {
+    sh.querySelector("[data-sx-photo-strip]").innerHTML = picked.map(h => `<div class="sx-try-sw" style="--c:${h}"><b>${esc(sxNm(h))}</b></div>`).join("");
+    sh.querySelector("[data-sx-photo-done]").textContent = picked.length >= 2 ? `Done · ${picked.length} colors` : "Done";
+  };
+  paintStrip();
+  const im = sh.querySelector("[data-sx-photo-img]"), pin = sh.querySelector("[data-sx-photo-pin]");
+  im.addEventListener("pointerup", e => {
+    const r = im.getBoundingClientRect(), fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+    if (fx < 0 || fy < 0 || fx > 1 || fy > 1) return;
+    const hex = exact(fx, fy);
+    pin.hidden = false; pin.style.left = (fx * 100) + "%"; pin.style.top = (fy * 100) + "%"; pin.style.setProperty("--c", hex);
+    buzz(8);
+    if (o.onPick) { o.onPick(hex); toast(`${sxNm(hex)} picked`); return; }
+    if (sxHas(picked, hex)) { toast(`${sxNm(hex)} is already in your set`); return; }
+    if (picked.length >= SX_MAX) { toast(`A set holds up to ${SX_MAX} colors`); return; }
+    picked.push(hex); paintStrip();
+    toast(`${sxNm(hex)} added · ${picked.length} in your set`);
+  });
+  sh.querySelector("[data-sx-photo-done]").onclick = () => {
+    buzz(10); close();
+    if (o.onPick) return;
+    if (picked.length < 2) return toast("Tap at least one more spot to make a pair");
+    sxOpen(sxSetTray(picked));
+  };
 }
