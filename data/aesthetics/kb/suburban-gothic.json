@@ -1,0 +1,42 @@
+{
+ "id": "suburban-gothic",
+ "name": "Suburban Gothic",
+ "lineage": {
+  "influenced_by": [
+   "liminal-space",
+   "weirdcore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "recurring since the 1950s"
+ ],
+ "places": [],
+ "garments": [
+  "vinyl siding",
+  "manicured lawns",
+  "chain-link fences"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Suburban Gothic"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 42% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 60% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

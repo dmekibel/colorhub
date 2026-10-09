@@ -1,0 +1,41 @@
+{
+ "id": "western",
+ "name": "Western",
+ "lineage": {
+  "influenced_by": [
+   "americana",
+   "mob-wife"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "19th c. roots; recurring fashion revival"
+ ],
+ "places": [],
+ "garments": [
+  "denim",
+  "leather fringe",
+  "turquoise jewelry"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Western"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 45% of the measured color across 6 wiki images is below mid-lightness"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

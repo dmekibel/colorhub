@@ -1,0 +1,41 @@
+{
+ "id": "fisherman-aesthetic",
+ "name": "Fisherman Aesthetic",
+ "lineage": {
+  "influenced_by": [
+   "sailorcore",
+   "coastal-grandmother"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "roots in traditional fishing workwear; 2020s internet aesthetic tag"
+ ],
+ "places": [],
+ "garments": [
+  "oilskin",
+  "wool guernsey knit",
+  "rubber boots"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Fisherman Aesthetic"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 70% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

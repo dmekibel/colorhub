@@ -1,0 +1,41 @@
+{
+ "id": "equestrian",
+ "name": "Equestrian",
+ "lineage": {
+  "influenced_by": [
+   "old-money",
+   "preppy"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "roots in traditional riding dress; recurring fashion reference"
+ ],
+ "places": [],
+ "garments": [
+  "tweed",
+  "leather riding boots",
+  "brass buckles"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Equestrian"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 80% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}
