@@ -40,7 +40,10 @@ function openNow(hex) {
 }
 document.addEventListener("click", e => {
   const sw = e.target.closest("[data-swatch]");
-  if (!sw || e.target.closest("[data-node],[data-nb],a")) return;
+  // [data-locate] (js/gallery.js's painting-strip "Where" glyph, 2026-10-09): a nested control inside a
+  // [data-swatch] chip that means something other than "open the page" -- same exemption pattern as
+  // [data-node]/[data-nb], so its own local click handler gets the tap instead of this one opening a page.
+  if (!sw || e.target.closest("[data-node],[data-nb],[data-locate],a")) return;
   e.stopPropagation(); e.preventDefault();
   const hex = sw.dataset.swatch;
   const dbl = sw.closest("[data-dbltap]");
