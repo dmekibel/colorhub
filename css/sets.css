@@ -177,19 +177,44 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
   .sp-sample{font-size:44px}
 }
 
-/* ---------- the try-on strip (js/settray.js sxPick): the set so far, large, plus a dashed trying slot ---------- */
-.sx-try{margin-top:16px}
+/* ---------- Pair with…: a non-scrolling head (the anchor + the try-on preview) above a scrolling candidate
+   list, js/core.js sheet()'s own supported shape for this ([data-sheet-scroll], already used by js/home.js's
+   chooser sheet) rather than position:sticky inside the sheet's position:fixed box, which some engines get
+   wrong (the preview would stop tracking the scroll and drift off-screen). David, 2026-10-09: "too small" and
+   "I scroll past the preview" — bigger, and stays in view while the candidate list scrolls underneath; it
+   shrinks a little once you've scrolled, so it never crowds the list, but the color and the actions stay put. */
+.sheet.sx-pick-sheet{display:flex;flex-direction:column;overflow:hidden;padding-bottom:0}
+.sx-pick-sheet>.grab{flex:none}
+.sx-pick-sheet>.sx-head,.sx-pick-sheet>.sx-try{flex:none}
+.sx-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-bottom:calc(var(--bottom) + 28px)}
+.sx-try{margin:16px 0 0;padding-top:2px;padding-bottom:10px;background:var(--surface-1);transition:padding .2s var(--ease)}
+.sx-try-big{display:flex;border-radius:var(--r-2);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(236,232,223,.12);height:clamp(96px,30vw,150px);transition:height .22s var(--ease)}
+.sx-try-seg{flex:1;min-width:0;display:flex;align-items:flex-end;padding:12px;background:var(--c);transition:flex .3s var(--ease),padding .2s var(--ease)}
+.sx-try-seg b{font:500 15px/1.2 var(--sans);color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.45);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:font-size .2s var(--ease)}
+.sx-try-seg.trying{animation:sxTryIn .22s var(--ease,ease) both;box-shadow:inset 0 0 0 3px var(--ink,#ECE8DF)}
+.sx-try-seg.empty{background:transparent;box-shadow:inset 0 0 0 2px dashed rgba(236,232,223,.3);align-items:center;justify-content:center;color:var(--faint)}
+.sx-try-seg.empty span{font:400 32px/1 var(--sans)}
+@keyframes sxTryIn{from{transform:scale(.97);opacity:.4}}
+.sx-try-rel{font:italic 400 15px/1.3 var(--serif);color:var(--soft);margin:10px 0 0;transition:margin .2s var(--ease),opacity .2s var(--ease)}
+.sx-try-acts{display:flex;gap:10px;margin-top:10px}
+.sx-try-acts .btn{flex:1;height:48px}
+/* collapsed: past a little scroll, the preview stays but takes less of the screen */
+.sx-try.collapsed{padding-bottom:6px}
+.sx-try.collapsed .sx-try-big{height:60px}
+.sx-try.collapsed .sx-try-seg{padding:6px 10px}
+.sx-try.collapsed .sx-try-seg b{font-size:12px}
+.sx-try.collapsed .sx-try-rel{display:none}
+.sx-try.collapsed .sx-try-acts{margin-top:8px}
+@media (prefers-reduced-motion:reduce){.sx-try-seg.trying{animation:none}}
+
+/* the small-chip strip: still used by "From a photo" (js/settray.js sxPhotoSheet), which has no long scrolling
+   list under it and so needs no sticky/big treatment of its own. */
 .sx-try-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px}
 .sx-try-sw{flex:none;width:76px;height:76px;border-radius:var(--r-2);background:var(--c);display:flex;align-items:flex-end;padding:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
 .sx-try-sw b{font:500 12px/1.2 var(--sans);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sx-try-sw.trying{animation:sxTryIn .22s var(--ease,ease) both;box-shadow:0 0 0 2px var(--ink,#ECE8DF)}
 .sx-try-sw.empty{background:transparent;box-shadow:inset 0 0 0 2px dashed rgba(236,232,223,.3);border:2px dashed var(--rule);align-items:center;justify-content:center;color:var(--faint)}
 .sx-try-sw.empty span{font:400 28px/1 var(--sans)}
-@keyframes sxTryIn{from{transform:scale(.8);opacity:.3}}
-.sx-try-rel{font:italic 400 15px/1.3 var(--serif);color:var(--soft);margin:10px 0 0}
-.sx-try-acts{display:flex;gap:10px;margin-top:10px}
-.sx-try-acts .btn{flex:1;height:48px}
-@media (prefers-reduced-motion:reduce){.sx-try-sw.trying{animation:none}}
 
 /* ---------- double-tap the top swatches to keep the palette: an Instagram-style heart burst ---------- */
 .sp-pair,.sp-strip{position:relative}
