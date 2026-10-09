@@ -1,13 +1,33 @@
 {
  "id": "vienna-secession",
  "name": "Vienna Secession gold",
- "lineage": {},
- "eras": [],
- "places": [],
- "garments": [],
- "media": [],
- "figures": [],
- "reacts_against": "",
+ "lineage": {
+  "influenced_by": [
+   "Art Nouveau",
+   "a breakaway from Vienna's conservative official art academy"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "founded 1897"
+ ],
+ "places": [
+  "Vienna"
+ ],
+ "garments": [
+  "not a fashion look — painting, architecture and graphic design"
+ ],
+ "media": [
+  {
+   "title": "Gustav Klimt, The Kiss (1907–08)",
+   "note": "the movement's best-known single image"
+  }
+ ],
+ "figures": [
+  "Gustav Klimt",
+  "Koloman Moser"
+ ],
+ "reacts_against": "the conservative Vienna Künstlerhaus's academic taste; the group's 1897 split (hence \"Secession\") championed a more decorative, gold-leaf-and-pattern-heavy modern style, summarized by their motto \"To every age its art, to art its freedom.\"",
  "revivals": [],
  "article": "",
  "wiki_facts": {},

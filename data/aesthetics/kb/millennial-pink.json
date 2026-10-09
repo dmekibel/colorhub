@@ -1,13 +1,26 @@
 {
  "id": "millennial-pink",
  "name": "Millennial pink",
- "lineage": {},
- "eras": [],
- "places": [],
- "garments": [],
+ "lineage": {
+  "influenced_by": [
+   "a broad 2010s shift away from earlier decades' brighter, more saturated \"girl\" pink"
+  ],
+  "influences": [
+   "barbiecore"
+  ]
+ },
+ "eras": [
+  "c. 2012–2019 (peak design-media saturation 2016–17)"
+ ],
+ "places": [
+  "design and fashion media broadly"
+ ],
+ "garments": [
+  "a dusty, muted pink across clothing, branding and interiors — Glossier's branding (founded 2014) is a frequently cited example"
+ ],
  "media": [],
  "figures": [],
- "reacts_against": "",
+ "reacts_against": "earlier decades' louder, more gendered hot pink (think Barbiecore), favoring a muted, gender-neutral-marketed, Instagram-friendly dusty rose instead.",
  "revivals": [],
  "article": "",
  "wiki_facts": {},
