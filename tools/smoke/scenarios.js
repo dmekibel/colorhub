@@ -4795,28 +4795,19 @@ scenario("paintmap", "no two drawn cells intersect at 3 zoom levels, including a
   const vh = t.ev("document.querySelector('.pmx-cv').getBoundingClientRect().height");
   t.expect(biggest > vh * .25, `the sparse set's biggest cell is only ${biggest.toFixed(0)}px tall on a ${vh.toFixed(0)}px map -- it still floats tiny`);
 });
-// David's screenshot, 2026-10-09: most of the corpus is on a host that never answers a real CORS request, so the
-// canvas tile alone always falls back to a flat color there -- the <img> overlay (pmx-imglayer) is what actually
-// shows the picture for those. The center painting always gets one if it needs one; other large cells do too.
-scenario("paintmap", "a centered painting on a non-CORS host gets a real <img> overlay, not just a flat color", async t => {
-  await t.open("#/paintings/map?arr=color", { settle: 800 });
-  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
-  // find a painting on a non-CORS host among the drawn cells (most of the corpus is), glide it to the middle,
-  // and confirm it gets an overlay once centered -- this is the live mechanism check PM_CTRL._qaHasOverlay exists
-  // for, since a real network image doesn't reliably resolve inside this harness's virtual-time iframe (same gap
-  // the thumbnail-streaming scenario below documents) -- so this checks the overlay is REQUESTED/tracked for the
-  // center cell as soon as it needs one, not that the pixels finished loading.
-  const unsafeI = t.ev(`(() => { for (let i = 0; i < 2000; i++) { const t2 = typeof pmThumb === "function" && pmThumb(i); if (t2 && !t2.url.startsWith("img/gallery/") && !(typeof GL_CORS_HOSTS !== "undefined" && (() => { try { return GL_CORS_HOSTS.has(new URL(t2.url).hostname); } catch (e) { return false; } })())) return i; } return -1; })()`);
-  t.expect(unsafeI >= 0, "couldn't find a non-CORS-host painting among the first 2000 to test with");
-  t.ev(`PM_CTRL.glideTo(PM_CTRL.lay().items.indexOf(${unsafeI}))`);
-  await t.waitFor(() => t.w.PM_CTRL.center === unsafeI, 4000, "the non-CORS painting to actually be centered");
-  // centerK (what the waitFor above just matched) updates from P's CURRENT position every frame, including
-  // mid-glide -- it can recognize the destination cell well before the 300ms glide animation actually finishes
-  // easing into it, and the overlay eligibility (m > .3, "near enough to center") depends on having actually
-  // arrived, not just being nearest. A real settle margin past the glide's own duration, not a token pause.
-  await t.sleep(500);
-  t.expect(t.ev(`PM_CTRL._qaHasOverlay(${unsafeI})`), `the centered non-CORS painting (gallery index ${unsafeI}) has no <img> overlay -- it would only ever show a flat color`);
-  t.expect(t.$(".pmx-imglayer img"), "no <img> element at all in the overlay layer");
+// David's screenshot, 2026-10-09: most of the corpus is on a host that never answers a real CORS request. bake()
+// used to fall back to a flat color for those (porting a canvas-taint constraint from js/honey.js's own, separate
+// snapshot() canvas that doesn't actually apply here -- nothing ever reads pixels back off .pmx-cv), capped at
+// ~62% coverage even with an <img>-overlay patch over the worst of it. Fixed at the root: bake() now always draws
+// the real pixels it already decoded, safe host or not. A real network image's load doesn't reliably resolve
+// inside this harness's virtual-time iframe (same gap the thumbnail-streaming scenario below works around), so
+// this is a static check on bake() itself, the same pattern that scenario uses.
+scenario("paintmap", "bake() always draws a painting's real pixels, not a flat color for a non-CORS host", async t => {
+  const src = await fetch("/js/paintmap.js").then(r => r.text());
+  const bakeBody = (src.match(/const bake = \(i, img, crop\) => \{[\s\S]*?\n  \};/) || [""])[0];
+  t.expect(bakeBody, "couldn't find bake()'s body to check");
+  t.expect(!/if\s*\(safe\)/.test(bakeBody) && !/fillStyle\s*=\s*pmHex\(i\)/.test(bakeBody), "bake() still branches on a host's CORS-safety and falls back to a flat pmHex() fill for an unsafe one");
+  t.expect(/cx\.drawImage\(img,/.test(bakeBody), "bake() no longer draws the real decoded image at all");
 });
 scenario("paintmap", "the thumbnail-streaming cap and load threshold haven't regressed back to the old ~160-cell ceiling", async t => {
   const src = await fetch("/js/paintmap.js").then(r => r.text());
@@ -5432,4 +5423,91 @@ scenario("trail", "a gesture interrupted mid-drag by a native back swipe leaves 
   await t.sleep(200);
   t.expect(t.bodyOverlayLeaks().length === 0, `a body-level overlay survived the interrupted gesture: ${t.bodyOverlayLeaks().join(", ")}`);
   t.expect(!t.$(".tlg-floor"), "the destination floor was left behind by the interrupted drag");
+});
+
+// ================================================================== DESIGN OBJECTS (js/designobjects.js, Archives lane)
+// The World door for posters/textiles/ceramics/etc., 1800-1979 -- room (shelves per category), a category grid
+// (facet chips, reusing pulp.js's own filter pattern), an object's own page (paintingPage reused, plus the
+// 3-6 color-count control and the maker byline this lane adds to it) and a maker page.
+scenario("design", "the room opens with shelves and at least one object image", async t => {
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the Design objects room");
+  t.expect(/Design objects/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor(".do-shelf-item", 12000, "at least one category shelf item");
+  const imgs = t.$$(".do-shelf-item img").filter(im => im.getAttribute("src"));
+  t.expect(imgs.length > 0, "no shelf item has an image src");
+});
+scenario("design", "a shelf item opens the object page with facts, palette and a maker/credit line", async t => {
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor(".do-shelf-item", 12000, "a shelf item");
+  const before = t.text(".p-title");
+  await t.click(t.$$(".do-shelf-item")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the object page to open");
+  await t.waitFor(".palette .pal", 8000, "the object's palette");
+  t.expect(t.$(".facts"), "no maker/date/category facts row on the object page");
+  t.expect(t.$(".p-dek") && t.text(".p-dek").trim().length > 0, "the object page has no byline");
+});
+scenario("design", "the category grid filters by decade", async t => {
+  await t.open("#/design/cat/poster", { settle: 900 });
+  await t.waitFor(".p-title", 12000, "the poster category page");
+  await t.waitFor("#doCatChips [data-df]", 10000, "decade/maker chips");
+  const decadeChip = t.$$('#doCatChips [data-df="decade"]')[1];
+  t.expect(decadeChip, "no specific decade chip rendered");
+  const beforeCount = (t.$$("#doCatFeed .pin") || []).length;
+  await t.click(decadeChip, { wait: 500 });
+  await t.waitFor(() => (t.$$("#doCatFeed .pin") || []).length !== beforeCount || t.$(".fine"), 8000, "the grid to refilter");
+});
+scenario("design", "a maker page lists their objects", async t => {
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor("[data-do-maker]", 12000, "a maker chip on the room page");
+  const before = t.text(".p-title");
+  await t.click(t.$$("[data-do-maker]")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the maker page to open");
+  await t.waitFor(".masonry .pin", 8000, "the maker's objects grid");
+});
+scenario("design", "\"In design objects\" renders on a color page with design-object coverage", async t => {
+  await t.open("#/color/ivory", { settle: 800 });
+  await t.waitFor(".p-title, .cp-page", 12000, "a color page");
+  await t.waitFor(() => /In design objects/.test(t.d.body.innerText), 10000, '"In design objects" section');
+});
+// ================================================================== UKIYO-E PRINTS (js/ukiyoe.js, Archives lane)
+scenario("design", "the ukiyo-e grid opens with filters and a print opens with facts", async t => {
+  await t.open("#/ukiyoe", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the ukiyo-e room");
+  t.expect(/Ukiyo-e prints/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor("#ukFeed .pin", 12000, "at least one print in the grid");
+  const before = t.text(".p-title");
+  await t.click(t.$$("#ukFeed .pin")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the print page to open");
+  await t.waitFor(".palette .pal", 8000, "the print's palette");
+  t.expect(t.$(".facts"), "no artist/date facts row on the print page");
+});
+scenario("design", "the ukiyo-e grid filters by artist", async t => {
+  await t.open("#/ukiyoe", { settle: 900 });
+  await t.waitFor("#ukChips [data-uf]", 12000, "artist/decade chips");
+  const artistChip = t.$$('#ukChips [data-uf="artist"]')[1];
+  t.expect(artistChip, "no specific artist chip rendered");
+  const beforeCount = (t.$$("#ukFeed .pin") || []).length;
+  await t.click(artistChip, { wait: 500 });
+  await t.waitFor(() => (t.$$("#ukFeed .pin") || []).length !== beforeCount || t.$(".fine"), 8000, "the grid to refilter");
+});
+
+// ================================================================== BOTANICAL & BIRD PLATES (js/botanicalplates.js, Archives lane)
+scenario("design", "the botanical grid opens with bird/plant filters and a plate opens with facts", async t => {
+  await t.open("#/botanical", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the botanical room");
+  t.expect(/Botanical/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor("#bpFeed .pin", 12000, "at least one plate in the grid");
+  const before = t.text(".p-title");
+  await t.click(t.$$("#bpFeed .pin")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the plate page to open");
+  await t.waitFor(".palette .pal", 8000, "the plate's palette");
+});
+scenario("design", "the botanical grid filters birds vs. botanical", async t => {
+  await t.open("#/botanical", { settle: 900 });
+  await t.waitFor("#bpChips [data-bf]", 12000, "kind/decade chips");
+  const birdChip = t.$$('#bpChips [data-bf="kind"][data-bv="bird"]')[0];
+  t.expect(birdChip, "no Birds filter chip rendered");
+  await t.click(birdChip, { wait: 500 });
+  await t.waitFor(() => t.$$("#bpFeed .pin").length > 0 || t.$(".fine"), 8000, "the grid to show only birds");
 });

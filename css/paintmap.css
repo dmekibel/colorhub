@@ -2,11 +2,6 @@
    Full screen and edge to edge; the only chrome is the back button, the title (what's showing; tap to filter), one
    line saying what position means, the caption of the painting in the middle, and the right corner (arrange). */
 .pmx .pmx-stage{position:absolute;inset:0;overflow:hidden;background:var(--ground)}
-/* a non-CORS host's image can never be read back off a canvas (toDataURL/getImageData throw), but a plain <img>
-   needs no CORS header at all to just be SHOWN -- this layer holds those, for exactly the large/centered cells a
-   flat color looks worst on. pointer-events stay off; every tap still goes to the canvas underneath. */
-.pmx-imglayer{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.pmx-imglayer img{position:absolute;object-fit:cover}
 .pmx-cv{display:block;width:100%;height:100%;touch-action:none;cursor:grab;-webkit-tap-highlight-color:transparent}
 .pmx-cv:active{cursor:grabbing}
 .pmx-wait{position:absolute;left:0;right:0;top:46%;margin:0;padding:0 32px;text-align:center;font:italic 400 19px/1.35 var(--serif);color:var(--soft)}
@@ -79,11 +74,11 @@
 .pmx-cap-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:6px 0;text-align:left;color:var(--ink)}
 .pmx-cap-main b{font:400 18px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pmx-cap-main small{font-size:14px;line-height:1.2;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pmx-center,.pmx-heart{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--soft);transition:color .2s,transform .2s var(--spring)}
-.pmx-center svg,.pmx-heart svg{width:21px;height:21px}
+.pmx-heart{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--soft);transition:color .2s,transform .2s var(--spring)}
+.pmx-heart svg{width:21px;height:21px}
 .pmx-heart[hidden]{display:none}
 .pmx-heart.on{color:#E8787A}
-.pmx-center:active,.pmx-heart:active{transform:scale(.88)}
+.pmx-heart:active{transform:scale(.88)}
 .pmx-heart.pop svg{animation:fvaPop .42s var(--spring)}
 .pmx-do svg{width:22px;height:22px}
 .pmx-bloom{position:fixed;z-index:6}
