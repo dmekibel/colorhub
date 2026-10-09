@@ -29,6 +29,18 @@
 @media (max-width:300px){.mc-halves{flex-direction:column}}
 @media (prefers-reduced-motion:reduce){.mc,.mc *{animation:none!important;transition:none!important}}
 
+/* landscape lane (2026-10-09): the halves were already side by side (flex row, not a portrait-only stack), so
+   the one real gap was the notch -- it can sit on either long edge now, right under the outer labels/hex. Adds
+   the real left/right inset (app.css) on top of the fixed 16px; 0px everywhere else. The bottom panel also
+   gets a height ceiling so it never eats so much of a ~390-440px-tall rotated screen that a half drops under
+   its own minimum readable height. */
+@media (orientation:landscape){
+  .mc-side:first-child .mc-cell{padding-left:calc(16px + var(--left))}
+  .mc-side:last-child .mc-cell{padding-right:calc(16px + var(--right))}
+  .mc-side:first-child .mc-lab{left:calc(16px + var(--left))}
+  .mc-panel{max-height:46dvh;overflow-y:auto;padding-left:calc(18px + var(--left));padding-right:calc(18px + var(--right))}
+}
+
 /* quiz-name miss: the big card splits in two */
 .pr-sw.pr-split{display:flex;overflow:hidden;padding:0}
 .pr-half{flex:1 1 50%;min-width:0;background:var(--c);display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:16px 14px;color:#fff;transition:flex-basis .4s cubic-bezier(.2,.8,.2,1)}

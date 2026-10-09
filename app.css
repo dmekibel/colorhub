@@ -24,6 +24,10 @@
   /* ---------- §5: spacing scale, gutter (20px, 16 below 375, 24 at 430+), safe areas ---------- */
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:22px; --s6:32px; --s7:48px;
   --g:20px; --top:env(safe-area-inset-top,0px); --bottom:env(safe-area-inset-bottom,0px);
+  /* landscape lane (2026-10-09): the notch sits on the long edge in landscape, left or right depending on which
+     way the phone is rotated. Nothing read these before -- every side-pinned surface (corners, sheets, the map's
+     bars) now has a real value to add in, instead of the 0px every portrait screen quietly assumed. */
+  --left:env(safe-area-inset-left,0px); --right:env(safe-area-inset-right,0px);
   /* space a scrolling room reserves at the foot so content clears the floating Rooms corner (56px + 24px gap) */
   --tabh:calc(var(--bottom) + 56px + 24px);
   /* ---------- §6: radii — 0 / 4 / 14 / 24 / pill. Old values (1,2,3,6,8,10,12,18,20,22,30) are retired below. ---------- */
@@ -754,6 +758,18 @@ img{transition:opacity .6s var(--ease)}
 .eye-lock{font:600 13px/1 var(--mono);letter-spacing:.08em}
 .eye-lock.on{background:#F3F3F1;color:#141311}
 .eye-lock[hidden]{display:none}
+
+/* landscape lane (2026-10-09, CSS only -- js/camera.js untouched): the viewfinder was already full-bleed
+   (.eye-stage, position:absolute;inset:0), so this is the one camera-specific gap -- a bottom card stacking
+   name/hex/actions/shutter was tall enough on a ~390-440px rotated screen to crowd the shutter. It becomes a
+   right-hand rail instead (same card, same markup order, just a column instead of the full-width bottom strip),
+   leaving the frame itself the full height on the left -- "image fits the height" applied to the live feed too. */
+@media (orientation:landscape){
+  .eye-card{left:auto;right:0;top:0;bottom:0;width:min(44vw,360px);max-width:none;margin:0;
+    padding:calc(var(--top) + 56px) calc(18px + var(--right)) calc(var(--bottom) + 14px) 18px;
+    background:linear-gradient(to left,rgba(14,13,11,.94) 62%,rgba(14,13,11,0));overflow-y:auto}
+  .eye-top{padding-left:calc(16px + var(--left));padding-right:calc(16px + var(--right))}
+}
 .eye-sw{height:120px;background:var(--c);display:flex;align-items:flex-end;padding:12px;border-radius:var(--r-1)}
 .eye-sw[data-ink="dark"]{color:#141311}.eye-sw[data-ink="light"]{color:#fff}
 
@@ -1022,3 +1038,10 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:bright
 .cnt-b:disabled{opacity:.32;cursor:default}
 .cnt-b:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .cs-hl-bar .cnt-b{background:var(--paper-line);color:var(--paper-ink);border-color:transparent}
+
+/* ---------- the black-bar diagnostic HUD (js/core.js vbHud) ---------- */
+.vb-hud{position:fixed;left:8px;right:8px;bottom:8px;z-index:999;background:#000;color:#6f6;border:1px solid #3a3;border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.vb-hud pre{margin:0 0 8px;font:11px/1.5 "Geist Mono",ui-monospace,monospace;white-space:pre-wrap;word-break:break-all;max-height:40vh;overflow:auto}
+.vb-hud-row{display:flex;gap:8px}
+.vb-hud-row button{flex:1;min-height:36px;border-radius:8px;border:1px solid #3a3;background:#0a1a0a;color:#9f9;font:13px/1 "Geist Mono",ui-monospace,monospace}
+.vb-hud-row button:active{background:#143014}
