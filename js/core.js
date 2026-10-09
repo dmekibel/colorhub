@@ -705,12 +705,16 @@ const navTop = (title = "", o = {}) => `<header class="nav-top"><button class="i
 // over it. No tab bar anywhere. The left corner — present on the honeycomb and inside every room, always the
 // same 56px spot — raises "the stem": Learn / Train / Explore / Studio (plus Home, at the foot, inside a room).
 // ================================================================
-// The names of places (David, 2026-10-08: "Explore and Home ... should be kind of the same thing"). The honeycomb floor
-// is the explorable map of every color, so it carries the name Explore; the room of paintings, poems, ideas and the
-// world is the Museum (its internal id stays "explore", so saves and old #/explore links keep working). One constant
-// each, so a rename is one line.
-const NAV_MAP = "Explore", NAV_MAP_NOTE = "Every color", NAV_MUSEUM = "Museum";
-const ROOMS_LIST = [["learn", "Learn"], ["gym", "Train"], ["explore", NAV_MUSEUM], ["studio", "Studio"], ["you", "You"]];   // You: js/you.js
+// The names of places (design/SIMPLIFY/PLAN.md §3.2/§9, David's decisions 2026-10-09): the home is "Map" now
+// (it was "Explore"); the Museum keeps its name (David chose it 2026-10-08 -- only the lenses inside it changed).
+// NAV is the one canonical naming table every lane reads from (a rename is one line, never a search-and-replace);
+// NAV_MAP/NAV_MUSEUM stay as aliases so the many existing call sites across every file keep working untouched.
+const NAV = { map: "Map", learn: "Learn", train: "Train", museum: "Museum", studio: "Studio" };
+const KEEP = { verb: "Keep", done: "Kept" };   // one word for saving (PLAN §3.2): retires Favorites/Your colors/Saved/Collections›Yours
+const NAV_MAP = NAV.map, NAV_MAP_NOTE = "Every color", NAV_MUSEUM = NAV.museum;
+// You folds into Learn/Train/Studio/Settings (PLAN §3.1, §9): the floor keeps its own Home bubble (added back
+// in toggleStem/placesOpen below when a room is open), so this list is just the four places that rise from it.
+const ROOMS_LIST = [["learn", NAV.learn], ["gym", NAV.train], ["explore", NAV_MUSEUM], ["studio", NAV.studio]];
 const ROOMS_GLYPH = icon("rooms", 24);   // a little stack: the rooms rise from it in a straight column
 const HOME_GLYPH = icon("map", 24);
 // a cheap, decorative stand-in for "a strip of the dimmed honeycomb" above a room (the real canvas doesn't
@@ -726,7 +730,10 @@ function roomChrome(inner, tab) {
   inner = inner.replace(LEGACY_HEAD, (_, t) => `<header class="room-head rh-auto"><h1 class="title-1">${t}</h1>${ROOM_NOTES[tab] ? `<span class="note">${ROOM_NOTES[tab]}</span>` : ""}</header>`);
   // L18 B2: the real floor (js/home.js hmSnapFloor), dimmed by a solid scrim; the decorative bars only until one exists
   const floor = typeof ROOM_FLOOR_IMG === "string" && ROOM_FLOOR_IMG ? `<div class="room-floor-peek room-floor-snap" data-floor-peek style="background-image:url('${ROOM_FLOOR_IMG}')"><i></i></div>` : `<div class="room-floor-peek" data-floor-peek>${ROOM_PEEK_BARS}</div>`;
-  return `${floor}<div class="room-sheet" data-room="${tab}">${inner}</div><button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>`;
+  // the left corner (PLAN §3.1/§4): a labeled "≡ Places" pill, never a private icon (DESIGN-CANON A1) -- the
+  // same spot and glyph as before, now self-evident, and opening the Places sheet (js/places.js) instead of
+  // the old bubble-arc stem (toggleStem, below).
+  return `${floor}<div class="room-sheet" data-room="${tab}">${inner}</div><button class="corner l pl-corner" data-rooms-corner aria-label="Places">${ROOMS_GLYPH}<span>Places</span></button>`;
 }
 let STEM_OPEN = false;
 function roomsBubbleArt(id) {
@@ -797,51 +804,15 @@ function closeStem(instant) {
   if (sc) sc.classList.remove("on");
   setTimeout(gone, reduceMotion ? 160 : 320);
 }
-function toggleStem(cornerEl) {
-  if (STEM_OPEN) { buzz(4); return closeStem(); }
-  if (stemJustClosed()) return;   // a ghost click right after closing must not reopen it (see stemJustClosed above)
-  if (document.querySelector(".sheet,.scrim")) return;   // a sheet is already up; don't stack chrome on chrome
-  document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());   // one still sinking from a fast double tap
-  buzz(4);
-  STEM_OPEN = true;
-  document.body.classList.add("stem-open");
-  const roomEl = document.querySelector(".room-sheet"), here = roomEl && roomEl.dataset.room;
-  if (!roomEl && typeof hmSnapFloor === "function") hmSnapFloor();   // L18 B2: the floor as you leave it
-  const items = (roomEl ? [["home", NAV_MAP]] : []).concat(ROOMS_LIST);
-  const scrim = document.createElement("div");
-  scrim.className = "rm-scrim rm-scrim-l";
-  // a tap outside only closes: it never reaches the page underneath, and the page never scrolls or re-renders
-  scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
-  scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
-  scrim.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
-  const stem = document.createElement("div");
-  stem.className = "rooms-stem";
-  stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Rooms");
-  const n = items.length;
-  stem.style.setProperty("--n", n);   // short screens tighten the step so the top capsule stays low (css/menus2.css)
-  // a straight stack up the left edge (David, 2026-10-08: "straight up along the side", and again over the tile panel)
-  stem.innerHTML = items.map(([id, label], i) => {
-    const cur = id === here;
-    return `<button class="rm-bubble${cur ? " cur" : ""}" role="menuitem" data-room="${id}" style="--i:${i}">
-      ${roomsBubbleArt(id)}<span class="rm-label"><b>${esc(label)}</b><em>${esc(cur ? "You're here" : roomsNote(id))}</em></span>
-    </button>`;
-  }).join("");
-  document.body.append(scrim, stem);
-  document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.add("on"); b.innerHTML = ICON.x; b.setAttribute("aria-expanded", "true"); });
-  requestAnimationFrame(() => requestAnimationFrame(() => { scrim.classList.add("on"); stem.classList.add("on"); }));
-  STEM_KEY = e => { if (e.key === "Escape") { e.stopPropagation(); closeStem(); } };
-  addEventListener("keydown", STEM_KEY, true);
-  stem.querySelectorAll("[data-room]").forEach(b => b.onclick = () => {
-    const id = b.dataset.room, art = b.querySelector(".rm-art");
-    buzz(8);
-    if (id === here) return closeStem();   // the room you're in: just put the stem away
-    b.classList.add("go");
-    closeStem();
-    if (id === "home") return roomToFloor(art);
-    growFrom(art, () => go(id));
-  });
-}
-document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-rooms-corner]"); if (b) toggleStem(b); });
+// The left corner's bubble-arc stem is retired (PLAN §4: "Map, left corner | KEEP + label"): the "≡ Places" pill
+// now opens the Places sheet (js/places.js placesOpen()) instead. closeStem/STEM_OPEN/cornersBack stay exactly as
+// they were -- js/home.js's own right-corner menu (doMenu, the map's ⋯) rides the same machinery and isn't touched.
+document.addEventListener("click", e => {
+  const b = e.target.closest && e.target.closest("[data-rooms-corner]"); if (!b) return;
+  if (stemJustClosed() || document.querySelector(".sheet,.scrim,.rooms-stem")) return;
+  if (typeof placesJustClosed === "function" && placesJustClosed()) return;
+  if (typeof placesOpen === "function") placesOpen();
+});
 // tapping the dimmed strip at the top of a room is the same as Rooms → Home
 document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-floor-peek]"); if (b) roomToFloor(b.querySelector("i")); });
 
@@ -910,7 +881,10 @@ function go(tab) {
   if (tab === "gym") return gymHome();
   if (tab === "explore") return exploreHome();
   if (tab === "studio") return studio();
-  if (tab === "you" && typeof youPage === "function") return youPage();   // js/you.js
+  // You folds into Studio (PLAN §3.1, §9, "fold You away"): every address and toast action that used to open
+  // it (#/you, richpage.js's "Added to your palette" → You) now lands on Studio instead. youPage() stays
+  // defined (js/you.js) in case anything still calls it directly, but nothing in the nav reaches it any more.
+  if (tab === "you") return typeof studio === "function" ? studio() : youPage();
   // Learn is the first Room (DESIGN-SYSTEM.md §2): Today folds into it (js/learn.js home()). The honeycomb
   // floor itself is a separate place now — reached via hmHome(), the Rooms corner's Home bubble, or "#/home" —
   // not a tab, so go() never lands there.

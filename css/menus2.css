@@ -336,6 +336,11 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 .corner{background:var(--s2);border:1px solid var(--line-2);box-shadow:0 8px 24px rgba(0,0,0,.5)}
 .corner svg{width:24px;height:24px}
 .corner.on{background:var(--s3);color:var(--ink);border-color:var(--line-2)}
+/* the Places pill (PLAN §3.1/§4/§9): the left corner, now a labeled pill -- never a private icon (A1).
+   Same spot, same glyph (the stacked-list "rooms" icon already meant this), just self-evident now. */
+.corner.pl-corner{width:auto;min-width:var(--corner);padding:0 18px 0 16px;border-radius:999px;
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+.corner.pl-corner span{font:500 15px/1 var(--sans);color:var(--ink)}
 /* the switch: on = --good track with a ground knob; off = --s3 track with a soft knob */
 .mn-sw{background:var(--s3)}
 .mn-sw.on{background:var(--good)}

@@ -106,6 +106,8 @@ function tlNote(el, tab, backNav) {
     // the pill (David, 2026-10-09): only on the very next map draw after an explicit Close stashed one -- not
     // every later visit to the map while it's still sitting there waiting in the trail sheet
     if (el.classList.contains("hm") && TL_RECENT && performance.now() - TL_RECENT.t < 1500) tlRecentPill(el);
+    // first-run orientation, steps 1 and 3 (PLAN §5, js/orient.js): the live map, first time and again later
+    if (el.classList.contains("hm") && typeof orientMapStep === "function") orientMapStep(el);
     return;
   }
   const back = tlBackBtn(el);
@@ -140,35 +142,72 @@ function tlNote(el, tab, backNav) {
   if (backNav) tlHoldScroll();
 }
 
-// ---------- the second control: Close (exit everything), top-right, beside whatever the header already holds ----------
-const TL_EXIT_HTML = (cls = "") => `<button class="tl-exit${cls ? " " + cls : ""}" data-tl-exit aria-label="Close: back to the map, where you left it">${ICON.x}<span>Close</span></button>`;
-// the map reached by Close: the chain behind it is forgotten, so Back (the browser's, the iOS swipe) stays on the map
+// ---------- the one top bar (PLAN §3.5, §9): "‹ <previous page>" · ⋯ · the place pill ----------
+// the route's first path segment, for moreRegister/moreOpen keys (places.js) -- "color", "painting", "gallery"...
+function tlRouteKind() { return (ROUTE_NOW || "").replace(/^#\//, "").split(/[/?]/)[0] || "page"; }
+const tlRoomLabel = room => (ROOMS_LIST.find(r => r[0] === room) || [, NAV.learn])[1];
+// where ‹ ultimately lands when the trail runs out, named -- the same destination the place pill closes to
+function tlOriginName() { const room = xFallbackTab(); return room ? tlRoomLabel(room) : NAV_MAP; }
+const TL_TRUNC = s => { s = String(s || "").replace(/\s+/g, " ").trim(); return s.length > 14 ? s.slice(0, 13).trimEnd() + "…" : s; };
+// the previous page's title, for ‹'s own label (PLAN §3.5: "‹ Periwinkle")
+function tlBackLabel() {
+  if (XSTACK.length >= 2) { const m = tlMetaFor(XSTACK[XSTACK.length - 2]); if (m && m.title) return TL_TRUNC(m.title); }
+  return TL_TRUNC(tlOriginName());
+}
+// the icon for the place ‹ ultimately leads to, and the place pill names (core.js ICON keys)
+const TL_ROOM_ICON = { learn: "learn", gym: "train", explore: "museum", studio: "palette" };
+function tlOriginIcon() { const room = xFallbackTab(); return ICON[TL_ROOM_ICON[room] || "map"] || ICON.map; }
+// "The bar never shows two buttons that do the same thing" (PLAN §3.5/rule 8): when the current page is the
+// first (or only) step on the trail, ‹ already lands on the same place the pill would close to, so it hides.
+const tlPillHides = () => XSTACK.length <= 1;
+const tlPillHTML = (cls = "") => `<button class="tl-exit${cls ? " " + cls : ""}" data-tl-exit aria-label="${esc(tlOriginName())}: close back to where you started">${tlOriginIcon()}<span>${esc(tlOriginName())}</span></button>`;
+const TL_MORE_HTML = `<button class="tl-more" data-tl-more aria-label="More">${ICON.more}</button>`;
+// the map reached by the place pill: the chain behind it is forgotten, so Back (the browser's, the iOS swipe) stays on the map
 // instead of walking into it again (core.js popstate asks tlForgot)
 let TL_FORGOT = false;
 const tlForgot = () => TL_FORGOT && !!app.querySelector(".screen.hm");
 function tlDecorate(el) {
   const back = tlBackBtn(el);
-  if (!back || el.querySelector("[data-tl-exit]") || document.documentElement.classList.contains("booth") || el.classList.contains("hm")) return;
-  // David (2026-10-09): "there should be an easy way to exit everything, and it should forget the whole chain". The
-  // hexagon alone read as a private icon, so the exit is a labeled, solid pill: ✕ Close, top right on every inner page
-  // (and in a color page's pinned header). It goes straight to the map where you left it and forgets the trail.
-  const html = TL_EXIT_HTML();
+  if (!back || el.querySelector("[data-tl-exit],[data-tl-more]") || document.documentElement.classList.contains("booth") || el.classList.contains("hm")) return;
   const nav = back.closest(".nav-top");
   const bar = el.querySelector(".rp-bar");
-  if (bar && !bar.querySelector("[data-tl-exit]")) bar.querySelector(".rp-bar-name").insertAdjacentHTML("afterend", TL_EXIT_HTML("tl-exit-bar"));
-  if (back.classList.contains("cp-close")) back.insertAdjacentHTML("afterend", TL_EXIT_HTML("tl-exit-float"));   // a full-bleed hero: mirrored on the right
-  else if (nav && nav.querySelector(".nav-r")) nav.querySelector(".nav-r").insertAdjacentHTML("beforeend", html);
+  const hd = back.parentElement;
+  // an ad-hoc header that already carries its own button (a painter page's "Compare", Art's "Surprise me"...)
+  // has no reserved room for more: it keeps just the place pill, today's exact footprint, until Lane 4 moves
+  // that button into the page's own action row (PLAN §3.5/§4) and frees the bar up for the rest too. A bare
+  // ad-hoc header (back alone) has the room, same as a .nav-top with its reserved .nav-r.
+  const crowded = !nav && !bar && !back.classList.contains("cp-close") && hd.children.length > 1;
+  // the named ‹ (PLAN §3.5): a small label beside the chevron, only where there's reserved or spare room --
+  // CSS-only (css/trail.css [data-back]:has(.tl-back-label)), so it works the same in every header shape
+  // without any of those headers' own files changing. A crowded ad-hoc header, a float over a full-bleed hero
+  // or the pinned color bar keep the icon alone; its aria-label still names the destination either way.
+  const roomy = (nav && nav.querySelector(".nav-r")) || (!nav && !bar && !back.classList.contains("cp-close") && !crowded);
+  if (roomy && !back.querySelector(".tl-back-label")) back.insertAdjacentHTML("beforeend", `<span class="tl-back-label">${esc(tlBackLabel())}</span>`);
+  back.setAttribute("aria-label", `Back to ${esc(tlBackLabel())}`);
+  const pillHtml = tlPillHides() ? "" : tlPillHTML();
+  const bothHtml = TL_MORE_HTML + pillHtml;
+  // a richpage.js page carries BOTH headers at once (the full-bleed .cp-hero and the pinned .rp-bar that slides
+  // in once you scroll past it) -- not an either/or, so this stays two independent checks, same as the Close
+  // pill did before it (merging them into one if/else-if was the bug that silently dropped the cp-hero copy).
+  if (bar && !bar.querySelector("[data-tl-exit],[data-tl-more]")) bar.querySelector(".rp-bar-name").insertAdjacentHTML("afterend", TL_MORE_HTML.replace('class="tl-more"', 'class="tl-more tl-more-bar"') + (pillHtml ? tlPillHTML("tl-exit-bar") : ""));
+  if (back.classList.contains("cp-close")) back.insertAdjacentHTML("afterend", TL_MORE_HTML.replace('class="tl-more"', 'class="tl-more tl-more-float"') + (pillHtml ? tlPillHTML("tl-exit-float") : ""));
+  else if (nav && nav.querySelector(".nav-r")) nav.querySelector(".nav-r").insertAdjacentHTML("beforeend", bothHtml);
   else {
-    const hd = back.parentElement, last = hd.lastElementChild;
-    // an empty spacer that only balanced the header gives its place to the glyph
-    if (last && last !== back && last.tagName === "SPAN" && !last.children.length && !last.textContent.trim()) last.outerHTML = html;
-    else hd.insertAdjacentHTML("beforeend", html);
+    const last = hd.lastElementChild, addHtml = crowded ? pillHtml : bothHtml;
+    if (addHtml) {
+      // an empty spacer that only balanced the header gives its place to the new controls
+      if (last && last !== back && last.tagName === "SPAN" && !last.children.length && !last.textContent.trim()) last.outerHTML = addHtml;
+      else hd.insertAdjacentHTML("beforeend", addHtml);
+    }
     hd.classList.add("tl-x");
   }
   back.setAttribute("aria-description", "Hold to see your trail");
-  // pull down from the top, or swipe back from the left edge: one step back, like closing a sheet (not on
-  // full-screen tools, whose drags are their own) -- js/trail.js's own gesture, tlgWire below
+  el.querySelectorAll("[data-tl-more]").forEach(b => { if (b._tlWired) return; b._tlWired = true; b.onclick = e => { e.stopPropagation(); if (typeof moreOpen === "function") moreOpen(tlRouteKind()); }; });
+  // pull down from the top, or swipe back from the left edge: pull-down now closes the whole pile, like the
+  // place pill (PLAN §3.5); the edge swipe stays one step back, like ‹ -- js/trail.js's own gesture, tlgWire below
   if (!el.classList.contains("fixed")) tlgWire(el);
+  // first-run orientation, step 2 (PLAN §5, js/orient.js): the first page opened off the map
+  if (typeof orientPageStep === "function") orientPageStep(el);
 }
 
 // ---------- gesture-following back (David, 2026-10-09): "if I swipe down I don't need to see it shrink back
@@ -190,12 +229,16 @@ const TLG_PULL = 110, TLG_EDGE = 28, TLG_SLOP = 10, TLG_BORN = 350, TLG_REST = 7
 function tlgSnapshot() {
   try { return typeof HM_CTRL !== "undefined" && HM_CTRL && HM_CTRL.snapshot ? HM_CTRL.snapshot(Math.round(innerWidth)) : null; } catch (e) { return null; }
 }
-// where releasing this gesture lands -- exactly what the back button already does (xBack if this page is on
-// the trail, tlToOrigin otherwise) -- and whether that's the map, the one case worth a real backdrop. A page
+// where releasing this gesture lands. The edge swipe (axis "x") is ‹: exactly what the back button already
+// does (xBack if this page is on the trail, tlToOrigin otherwise). The pull-down (axis "y") is now the place
+// pill (PLAN §3.5: "a pull-down from the top of the page does the same" as the pill -- closes the whole pile,
+// not one step), via tlExit so it also stashes "Pick up where you left off" the same way a tap on the pill
+// would. Either way, `toMap` says whether that's the map, the one case worth a real backdrop (tlgFloor). A page
 // opened straight from the map still joins the trail as its own one-entry "r:" token (js/trail.js tlNote), so
 // xBack() on it pops that single entry and lands on the origin anyway -- reachesOrigin covers that case too,
 // not just the no-trail one.
-function tlgDest(el) {
+function tlgDest(el, axis) {
+  if (axis === "y") { const toMap = !xFallbackTab(); return { toMap, go: () => tlExit(null) }; }
   const onTrail = !!el.dataset.tl, reachesOrigin = !onTrail || XSTACK.length <= 1, toMap = reachesOrigin && !xFallbackTab();
   return { toMap, go: () => { if (onTrail) xBack(); else tlToOrigin(); } };
 }
@@ -237,7 +280,7 @@ function tlgWire(el) {
       if (a.horizOK && dx > TLG_SLOP && dx > Math.abs(dy) * 1.6) a.axis = "x";
       else if (a.vertOK && dy > TLG_SLOP && dy > Math.abs(dx) * 1.6 && pageScrollTop() <= 0) a.axis = "y";
       else { if (Math.abs(dx) > 10 || Math.abs(dy) > 10) a = null; return; }
-      a.dest = tlgDest(el);
+      a.dest = tlgDest(el, a.axis);
       a.floor = tlgFloor(a.dest.toMap);
       el.style.willChange = "transform";
       try { el.setPointerCapture(a.id); } catch (er) {}

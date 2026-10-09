@@ -32,24 +32,39 @@
 /* the floating ‹ over a full-bleed color hero is solid now, like every other control (DESIGN-SYSTEM §1.2) */
 .cp-close{background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14);border-radius:50%;width:40px;height:40px}
 .cp-close svg{width:22px;height:22px}
-/* Close: exit everything, back to the map (js/trail.js tlExit). A solid, labeled pill, the same on every inner page. */
+/* The one top bar (PLAN §3.5): ‹ <previous page> ... ⋯ ... the place pill. The place pill is the old Close,
+   renamed and relabeled for the place it closes to -- same solid pill, same spot, same tlExit() underneath. */
 .tl-exit{flex:none;display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 15px 0 11px;border-radius:999px;background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14);font:500 15px/1 var(--sans);letter-spacing:0;white-space:nowrap;transition:transform .2s var(--spring)}
 .tl-exit:active{transform:scale(.94)}
 .tl-exit svg{width:18px;height:18px}
 .tl-exit-float{position:absolute;top:calc(var(--top) + 14px);right:20px;z-index:2}
 .ar-hubband .tl-exit-float{right:var(--g)}
 .rp-bar .tl-exit-bar{align-self:center;height:36px}
+/* ⋯ (this page's own ⋯ sheet, js/places.js moreOpen): a solid 40px circle, the same level as the place pill */
+.tl-more{flex:none;width:40px;height:40px;border-radius:50%;background:var(--surface-2);color:var(--ink);
+  border:1px solid rgba(236,232,223,.14);display:inline-flex;align-items:center;justify-content:center;
+  transition:transform .2s var(--spring)}
+.tl-more:active{transform:scale(.9)}
+.tl-more svg{width:20px;height:20px}
+.tl-more-float{position:absolute;top:calc(var(--top) + 14px);right:72px;z-index:2}
+.rp-bar .tl-more-bar{align-self:center;width:34px;height:34px}
+/* the named ‹: a small label beside the chevron (PLAN §3.5, "‹ Periwinkle") -- turns the plain icon circle into
+   a pill wherever there's room (tlDecorate only adds it there; a cramped header keeps the icon alone) */
+[data-back]:has(.tl-back-label){width:auto;padding:0 14px 0 10px;border-radius:999px;display:inline-flex;
+  align-items:center;gap:6px;justify-content:flex-start}
+.tl-back-label{font:500 15px/1 var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
 
-/* a header row: ‹ on the left; whatever the page puts on the right, then the map glyph at the very end */
+/* a header row: ‹ on the left; whatever the page puts on the right, then ⋯ and the place pill at the very end */
 .tl-x{justify-content:flex-start;gap:8px}
 .tl-x>:nth-child(2):not(.eyebrow){margin-left:auto}
+.tl-x>.tl-more{margin-left:auto;margin-right:0}
 .tl-x>.tl-exit{margin-left:0;margin-right:0}
-.tl-x>.tl-exit:nth-child(2){margin-left:auto}
-.tl-x>.eyebrow+.tl-exit{margin-left:0}
-.nav-r .tl-exit{margin-right:0}
-/* a full-screen tool's header (the color explorer) keeps the glyph opposite ‹ */
-.cx-top.tl-x>.tl-exit{margin-left:auto}
-.pr-top.tl-x>.tl-exit{margin-left:auto;margin-right:0}
+.tl-x>.tl-more+.tl-exit,.tl-x>.tl-exit:nth-child(2){margin-left:0}
+.tl-x>.eyebrow+.tl-more{margin-left:auto}
+.nav-r .tl-exit,.nav-r .tl-more{margin-right:0}
+/* a full-screen tool's header (the color explorer) keeps the new controls opposite ‹ */
+.cx-top.tl-x>.tl-more{margin-left:auto}
+.pr-top.tl-x>.tl-more{margin-left:auto;margin-right:0}
 
 /* ---------- the trail sheet (long-press ‹) ---------- */
 .tl-sheet .title-2{margin:0}

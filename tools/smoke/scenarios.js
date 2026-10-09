@@ -902,25 +902,34 @@ scenario("home", "the map fills the full viewport before and after a horizontal 
 // was just closed. js/core.js's stemJustClosed() swallows an open attempt in the instant after a close.
 scenario("home", "closing a corner's menu stays closed (no ghost-click reopen)", async t => {
   await H.homeReady(t);
+  // #hmDo (Home's own right-corner menu, js/home.js doMenu) still rides the old bubble-arc stem (STEM_OPEN).
+  // [data-rooms-corner] (the left "≡ Places" pill, PLAN §3.1/§9) now opens a plain sheet instead (js/places.js
+  // placesOpen) -- same corner, same empirically-observed ghost-click risk, its own guard (placesJustClosed()).
   for (const sel of ["#hmDo", "[data-rooms-corner]"]) {
+    const isOpen = () => sel === "#hmDo" ? t.ev("STEM_OPEN") : !!t.$(".pl-sheet-wrap");
     await t.click(sel, { wait: 200 });
-    t.expect(t.ev("STEM_OPEN"), `${sel}: the menu did not open`);
-    // what a real finger tap at the button's own spot actually hits while the menu is open (the scrim, not the
-    // button -- see the comment above): close it exactly that way, not with a programmatic .click() on the button
-    const btn = t.$(sel), r = btn.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    t.expect(isOpen(), `${sel}: the menu did not open`);
+    const btn = t.$(sel), r = btn.getBoundingClientRect();
+    // #hmDo's scrim leaves a clear hole exactly over the corner it rose from (the comment above), so a tap AT
+    // the button's own spot lands on the scrim and closes it. The Places sheet (js/places.js) is a plain bottom
+    // sheet with no such cutout -- its content covers that same spot now, by design -- so its own "outside the
+    // sheet" area (near the top of the screen) is the equivalent real-finger tap that closes it.
+    const [cx, cy] = sel === "#hmDo" ? [r.left + r.width / 2, r.top + r.height / 2] : [t.w.innerWidth / 2, 40];
     const hit = t.d.elementFromPoint(cx, cy);
     const o = { bubbles: true, cancelable: true, clientX: cx, clientY: cy, pointerId: 3, pointerType: "touch", isPrimary: true, view: t.w };
     hit.dispatchEvent(new t.w.PointerEvent("pointerdown", o));
-    await t.sleep(50);
-    t.expect(!t.ev("STEM_OPEN"), `${sel}: tapping where the menu covers it did not close it`);
-    // the removal timer (closeStem's ~320ms fade) runs after this; a ghost click landing on the real button once
-    // it's exposed again must not reopen the menu
+    // #hmDo's STEM_OPEN flips synchronously; the Places sheet (js/core.js sheet()) animates its close over
+    // ~200-400ms and the element stays in the DOM until that finishes, so isOpen() needs to wait that out too.
+    await t.sleep(sel === "#hmDo" ? 50 : 450);
+    t.expect(!isOpen(), `${sel}: tapping outside the open menu did not close it`);
+    // the removal timer (closeStem's ~320ms fade, or the sheet's own close animation) runs after this; a ghost
+    // click landing on the real button once it's exposed again must not reopen the menu
     await t.sleep(250);
     btn.dispatchEvent(new t.w.MouseEvent("click", { bubbles: true, cancelable: true, clientX: cx, clientY: cy, view: t.w }));
     await t.sleep(150);
-    t.expect(!t.ev("STEM_OPEN") && !t.$(".rooms-stem"), `${sel}: a click just after closing reopened the menu by itself`);
+    t.expect(!isOpen() && !t.$(".rooms-stem"), `${sel}: a click just after closing reopened the menu by itself`);
     await t.sleep(2000);
-    t.expect(!t.ev("STEM_OPEN") && !t.$(".rooms-stem"), `${sel}: the menu reopened on its own 2s after closing`);
+    t.expect(!isOpen() && !t.$(".rooms-stem"), `${sel}: the menu reopened on its own 2s after closing`);
   }
 });
 
@@ -1163,23 +1172,24 @@ scenario("home", "View sheet: filters, Surprise me, Search", async t => {
   t.expect(cv.isConnected, "the honeycomb was replaced while searching");
 });
 
-scenario("home", "Rooms corner opens the stem; each room bubble navigates", async t => {
-  const rooms = [["learn", "Learn"], ["gym", "Train"], ["explore", "Explore"], ["studio", "Studio"]];
+// PLAN §3.1/§9: the left corner's old bubble-arc stem is now the Places sheet (js/places.js placesOpen).
+scenario("home", "Rooms corner opens the Places sheet; each place navigates", async t => {
+  const rooms = [["learn", "Learn"], ["gym", "Train"], ["explore", "Museum"], ["studio", "Studio"]];
   for (const [id, label] of rooms) {
     await H.homeReady(t);
     await t.click("[data-rooms-corner]");
-    await t.waitFor(".rooms-stem", 4000, "the rooms stem");
-    const bubbles = t.$$(".rooms-stem .rm-bubble").map(b => b.dataset.room);
-    t.expect(rooms.every(([r]) => bubbles.includes(r)), `the stem shows ${bubbles.join(", ")}`);
-    await t.click(`.rooms-stem .rm-bubble[data-room="${id}"]`, { wait: 700 });
+    await t.waitFor(".pl-sheet-wrap", 4000, "the Places sheet");
+    const rows = t.$$(".pl-grid [data-pl-go]").map(b => b.dataset.plGo);
+    t.expect(rooms.every(([r]) => rows.includes(r)), `the Places sheet shows ${rows.join(", ")}`);
+    await t.click(`.pl-grid [data-pl-go="${id}"]`, { wait: 700 });
     await t.waitFor(`.room-sheet[data-room="${id}"]`, 6000, `the ${label} room`);
     t.expect(t.$(".room-sheet").innerText.length > 80, `the ${label} room is empty`);
   }
-  // from inside a room the stem also holds Home, which goes back to the honeycomb
+  // from inside a room the sheet also holds Home, which goes back to the honeycomb
   await t.click("[data-rooms-corner]");
-  await t.waitFor('.rooms-stem .rm-bubble[data-room="home"]', 4000, "Home in the stem");
-  await t.click('.rooms-stem .rm-bubble[data-room="home"]', { wait: 900 });
-  await t.waitFor("canvas", 6000, "the honeycomb after Rooms > Home");
+  await t.waitFor('.pl-grid [data-pl-go="home"]', 4000, "Home in the Places sheet");
+  await t.click('.pl-grid [data-pl-go="home"]', { wait: 900 });
+  await t.waitFor("canvas", 6000, "the honeycomb after Places > Home");
 });
 
 // "Colors | Paintings" (David, 2026-10-09: "it should be more prominent... instead of colors you switch to
@@ -1212,8 +1222,8 @@ scenario("home", "Colors | Paintings: the corner-menu switch is bidirectional an
   // the save just written (S.hm.mode) actually carries over to the fresh page
   await t.open("#/today", { settle: 500, keepState: true });
   await t.click("[data-rooms-corner]");
-  await t.waitFor('.rooms-stem .rm-bubble[data-room="home"]', 4000, "Home in the stem");
-  await t.click('.rooms-stem .rm-bubble[data-room="home"]', { wait: 900 });
+  await t.waitFor('.pl-grid [data-pl-go="home"]', 4000, "Home in the Places sheet");
+  await t.click('.pl-grid [data-pl-go="home"]', { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "Rooms > Home to remember paintings mode");
   t.ev('S.hm.mode = "colors"; save();');   // leave state clean for later scenarios
 });
@@ -2086,7 +2096,7 @@ scenario("home", "the left menu's Learn room Recall opens the one Study flow, no
   await H.homeReady(t);
   t.ev("Object.values(S.cards).slice(0, 2).forEach(c => { c.due = addDays(today(), -1); }); save();");
   await t.click("[data-rooms-corner]", { wait: 300 });
-  await t.click('.rooms-stem .rm-bubble[data-room="learn"]', { wait: 700 });
+  await t.click('.pl-grid [data-pl-go="learn"]', { wait: 700 });
   await t.waitFor('.room-sheet[data-room="learn"]', 6000, "the Learn room");
   t.expect(/recall/i.test(t.text(".lh-hero-t")), `the Learn room hero reads "${t.text(".lh-hero-t")}" (wanted a recall count)`);
   await t.click("[data-study]", { wait: 400 });
@@ -3063,11 +3073,11 @@ scenario("map", "the right corner's menu is <=5 rows, has no Recall, and nothing
   for (const k of ["learn", "fav", "search", "colors"]) t.expect(rows.includes(k), `the menu has no ${k}`);
   t.expect(!rows.includes("arrange") && !rows.includes("map"), "Arrange or Study-the-map kept its own separate row instead of folding in");
   t.expect(t.$$(".hm-do-stem [data-do]").every(b => t.text(b.querySelector("b")).length > 2), "a menu row has no label");
-  // one home per action: none of the right menu's rows should duplicate a left (Rooms stem) room
+  // one home per action: none of the right menu's rows should duplicate a left (Places) place
   const rightLabels = t.$$(".hm-do-stem [data-do] b").map(b => t.text(b).trim().toLowerCase());
   await H.keys(t, "Escape"); await t.sleep(200);
   await t.click("[data-rooms-corner]", { wait: 300 });
-  const leftLabels = t.$$(".rooms-stem .rm-bubble b").map(b => t.text(b).trim().toLowerCase());
+  const leftLabels = t.$$(".pl-grid .pl-row .pl-txt b").map(b => t.text(b).trim().toLowerCase());
   await H.keys(t, "Escape"); await t.sleep(200);
   for (const l of rightLabels) t.expect(!leftLabels.includes(l), `"${l}" appears in both the left and right menus`);
   await H.menu(t);
@@ -4173,7 +4183,11 @@ scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map gl
     await t.waitFor(() => t.$("#app .screen [data-back]") && !t.$(".screen.waiting") && t.$("#app").innerText.length > 120, 20000, `the page at ${hash}`);
     t.expect(TRL.hash(t) === decodeURIComponent(hash), `the address changed to ${TRL.hash(t)}`);
     if (re) t.expect(re.test(t.$("#app").innerText), `${hash} doesn't show what it names`);
-    t.expect(t.$("#app .screen [data-tl-exit]"), `${hash} has no map glyph`);
+    // a fresh address is the trail's very first page: ‹ already leads straight to the map, so the place pill
+    // (which would close to that same place) correctly hides here instead of duplicating it (PLAN §3.5 rule 8)
+    const navMap = t.ev("NAV_MAP");
+    t.expect(!t.$("#app .screen [data-tl-exit]"), `${hash}'s place pill shows even though ‹ already leads to the map`);
+    t.expect((t.$("#app .screen [data-back]").getAttribute("aria-label") || "").includes(navMap), `${hash}'s ‹ doesn't say it leads to "${navMap}"`);
     await t.click(TRL.screenBack(t), { wait: 700 });
     await t.waitFor(".hm canvas", 10000, `the map after Back from ${hash}`);
   });
@@ -4940,7 +4954,8 @@ scenario("pages", "double-tap the cover to favorite", async t => {
 });
 
 // David (2026-10-09): "color > painting > color in the painting, then I have to go back all the way to reach the map".
-// Close (top right, labeled) exits everything: the map exactly as it was, the trail forgotten, Back stays on the map.
+// The place pill (top right, labeled -- PLAN §3.5: it replaced "Close", renamed for where it goes) exits
+// everything: the map exactly as it was, the trail forgotten, Back stays on the map.
 scenario("trail", "Close from color > painting > color: the map as it was, the trail forgotten, corners back", async t => {
   await TRL.open(t, "#/home");
   await t.waitFor(".hm canvas", 12000, "the map");
@@ -4949,15 +4964,19 @@ scenario("trail", "Close from color > painting > color: the map as it was, the t
   const pan0 = t.ev("HM_CTRL._settle()");
   t.ev("hmOpenColor(BYNAME.get('cobalt'))");
   await TRL.atHash(t, /^#\/color\/cobalt/, "the cobalt page");
-  t.expect(t.$("#app .screen .cp-hero [data-tl-exit]") && /Close/.test(t.text("#app .screen .cp-hero [data-tl-exit]")), "the color page has no labeled Close");
-  t.expect(t.$(".rp-bar [data-tl-exit]"), `the pinned color header has no Close (bar: ${!!t.$(".rp-bar")}, exits: ${t.$$("[data-tl-exit]").length}, tl: ${t.$("#app .screen").dataset.tl})`);
+  const navMap = t.ev("NAV_MAP");
+  // one hop in (just the cobalt page): ‹ already leads straight back to the map, so the place pill -- which
+  // would close to that same place -- correctly hides here (PLAN §3.5 rule 8, "never two buttons that do the
+  // same thing"); ‹ itself names it instead.
+  t.expect(!t.$("#app .screen .cp-hero [data-tl-exit]") && !t.$(".rp-bar [data-tl-exit]"), "the place pill shows even though ‹ already leads to the map");
+  t.expect((t.$("#app .screen [data-back]").getAttribute("aria-label") || "").includes(navMap), `‹ doesn't say it leads to "${navMap}"`);
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
   const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });
   const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's rail");
   pin.scrollIntoView({ block: "center" }); await t.sleep(200);
   await t.click(pin, { wait: 600 });
   await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
-  t.expect(t.$("#app .screen [data-tl-exit]"), "the painting page has no Close");
+  t.expect(t.$("#app .screen [data-tl-exit]"), "the painting page has no place pill");
   await t.waitFor(() => t.$$("[data-glrows] [data-swatch]").length, 15000, "the painting's palette");
   await t.click(t.$$("[data-glrows] [data-swatch]")[0], { wait: 600 });
   await TRL.atHash(t, /^#\/(color|name)\//, "a color from the painting");
@@ -4975,18 +4994,21 @@ scenario("trail", "Close from color > painting > color: the map as it was, the t
   t.expect(t.$(".screen.hm canvas") && !t.$(".cp-page") && !t.$(".room-sheet"), `Back after Close left the map (${TRL.hash(t)})`);
 });
 
-// David's iPhone (2026-10-09): on a color's cover, ‹ and Close sat on the status bar. With an iPhone's safe area (59px,
-// simulated here), every inner page's ‹ and Close sit below it.
+// David's iPhone (2026-10-09): on a color's cover, ‹ and the place pill sat on the status bar. With an iPhone's
+// safe area (59px, simulated here), every inner page's ‹ and place pill sit below it.
 scenario("pages", "with an iPhone safe area, ‹ and Close sit below the status bar on every kind of inner page", async t => {
   const INSET = 59, bad = [];
   for (const hash of ["#/color/cobalt", "#/name/rose-pink", "#/read/mauve", "#/hub/source:crayola", "#/gallery/15146", "#/pair/4f6b3a+c2412d"]) {
     await t.open(hash, { settle: 300 });
     { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }   // a simulated iPhone safe area
     t.w.location.hash = "#/home"; await t.sleep(300); t.w.location.hash = hash; await t.sleep(300);   // drawn again with the inset in place
-    await t.waitFor(() => t.$("#app .screen [data-back]") && t.$("#app .screen [data-tl-exit]") && !t.$(".screen.waiting"), 15000, `‹ and Close on ${hash}`);
+    // every one of these is a fresh, single-hop load, so the place pill correctly hides (‹ already leads to
+    // the map there too, PLAN §3.5 rule 8) -- only ‹ itself is guaranteed to exist here.
+    await t.waitFor(() => t.$("#app .screen [data-back]") && !t.$(".screen.waiting"), 15000, `‹ on ${hash}`);
     t.w.scrollTo(0, 0); await t.sleep(80);
     for (const sel of ["[data-back]", "[data-tl-exit]"]) {
-      const r = t.$("#app .screen " + sel).getBoundingClientRect();
+      const node = t.$("#app .screen " + sel); if (!node) continue;
+      const r = node.getBoundingClientRect();
       if (r.top < INSET + 6) bad.push(`${hash} ${sel} at ${Math.round(r.top)}px`);
     }
   }
