@@ -278,15 +278,6 @@
 .hm-do-ic svg{width:22px;height:22px}
 .hm-do-dots{grid-template-columns:1fr 1fr;gap:3px;padding:12px}
 .hm-do-dots i{display:block;width:100%;height:100%;border-radius:50%}
-/* a quiet caption at the edges for an arrangement whose direction means something (Warm and cool) */
-.hm-axes{position:absolute;inset:0;pointer-events:none;z-index:2;transition:opacity .4s var(--ease)}
-.hm.chrome-hide .hm-axes{opacity:0}
-.hm-ax{position:absolute;top:50%;padding:5px 10px;border-radius:var(--r-pill);background:var(--surface-2);font:italic 400 14px/1 var(--serif);color:var(--soft);transition:opacity .6s var(--ease)}
-/* a radial shape's one line (what the middle and the edge mean), at the top for a few seconds */
-.hm-ax-t{top:calc(env(safe-area-inset-top,0px) + 18px);left:50%;transform:translateX(-50%);max-width:calc(100% - 32px);padding:7px 14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px}
-.hm-ax.gone{opacity:0}
-.hm-ax-l{left:8px;transform:translateY(-50%)}
-.hm-ax-r{right:8px;transform:translateY(-50%)}
 
 /* ---------- Arrange sheet, iconic (David, 2026-10-08: "previews need to be simple icon versions, or themselves more
    beautiful and clean"). Flat diagrams (js/home.js hmArrIcon) on one tile size, one-line labels, the shared selected
