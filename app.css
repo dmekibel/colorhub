@@ -756,6 +756,47 @@ img{transition:opacity .6s var(--ease)}
 .eye-lock[hidden]{display:none}
 .eye-sw{height:120px;background:var(--c);display:flex;align-items:flex-end;padding:12px;border-radius:var(--r-1)}
 .eye-sw[data-ink="dark"]{color:#141311}.eye-sw[data-ink="light"]{color:#fff}
+/* camera pick mode (cameraPick/photoPick): a running strip of picks, above the caller's own Use/Add+Done */
+.eye-picks{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.eye-picks[hidden]{display:none}
+.eye-picks i{width:30px;height:30px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.eye-picks-done{margin-left:auto;padding:8px 16px;border-radius:var(--r-pill);background:#F3F3F1;color:#141311;font:500 13.5px/1 var(--mono);letter-spacing:.01em}
+/* "Shades of this" entry button on the frozen card */
+.eye-shades{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:12px;padding:12px 8px;border-radius:var(--r-pill);background:rgba(236,232,223,.1);color:var(--ink);font:500 14px/1 var(--mono);letter-spacing:.01em;transition:transform .2s var(--spring),background .2s}
+.eye-shades:active{transform:scale(.97)}
+.eye-shades[hidden]{display:none}
+/* the "Shades of this" sheet: region preview + tighter/wider, how many, the strip + list, actions */
+.shd-sheet .shd-h{font:400 clamp(28px,8vw,36px)/1.05 var(--serif);letter-spacing:-.02em;margin:2px 0 14px}
+.shd-stage{position:relative;width:100%;border-radius:var(--r-1);overflow:hidden;background:#000}
+.shd-stage canvas{display:block;width:100%}
+.shd-mask{position:absolute;inset:0}
+.shd-tol{display:flex;align-items:center;gap:10px;margin-top:14px;font:500 12.5px/1 var(--mono);letter-spacing:.04em;color:var(--faint)}
+.shd-tol input{flex:1}
+.shd-count{margin-top:18px}
+.shd-count>b{display:block;font:400 15px/1 var(--serif);margin-bottom:8px}
+.shd-n-row{display:flex;align-items:center;gap:10px}
+.shd-n-row input{flex:1}
+.shd-n-out{min-width:1.6em;text-align:right;font:500 15px/1 var(--mono);color:var(--ink)}
+.shd-strip{display:flex;height:34px;border-radius:var(--r-1);overflow:hidden;margin-top:16px}
+.shd-seg{background:var(--c);min-width:2px;transition:flex .25s var(--ease)}
+.shd-sort{display:flex;gap:8px;margin-top:10px}
+.shd-sort button{flex:1;padding:8px 6px;border-radius:var(--r-pill);background:rgba(236,232,223,.07);font:500 12.5px/1 var(--mono);letter-spacing:.03em;color:var(--soft)}
+.shd-sort button.on{background:var(--ink);color:var(--ground)}
+.shd-list{margin-top:10px;border-top:1px solid var(--rule)}
+.shd-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule)}
+.shd-sw{width:28px;height:28px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);transition:transform .2s var(--spring),box-shadow .2s}
+.shd-sw.on{box-shadow:0 0 0 2px var(--ground),0 0 0 4px var(--ink);transform:scale(1.08)}
+.shd-name{flex:1;text-align:left;font:400 16px/1.2 var(--serif);color:var(--ink)}
+.shd-pct{font:500 13px/1 var(--mono);letter-spacing:.02em;color:var(--faint)}
+.shd-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.shd-acts button{flex:1 1 calc(50% - 4px);min-width:120px;display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 8px;border-radius:var(--r-pill);background:rgba(236,232,223,.07);font:500 13.5px/1 var(--mono);letter-spacing:.01em;color:var(--ink)}
+/* the full-screen honeycomb of exactly the chosen shades, sized by share */
+.shd-honeyscreen .shd-honey{display:flex;flex-wrap:wrap;gap:6px;padding:16px var(--g) calc(var(--bottom) + 90px)}
+.shd-hcell{flex:var(--w) 1 auto;min-width:88px;aspect-ratio:1.05;clip-path:polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0% 50%);background:var(--c);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:10px;transition:transform .2s var(--spring)}
+.shd-hcell:active{transform:scale(.95)}
+.shd-hcell b{font:400 15px/1.1 var(--serif);color:#141311;mix-blend-mode:plus-darker}
+.shd-hcell span{font:500 12px/1 var(--mono);letter-spacing:.02em;color:rgba(20,19,17,.72)}
+.shd-honey-map{position:fixed;left:var(--g);right:var(--g);bottom:calc(var(--bottom) + 16px)}
 
 /* ---------- studio ---------- */
 .st-tiles{display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;margin-top:22px;padding-top:16px;border-top:1px solid var(--rule)}
