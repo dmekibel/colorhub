@@ -33,7 +33,14 @@ function worldWire(el, selfRender) {
     fashionPage(kind + "-" + id, { back: selfRender || (() => fashionPage(kind)) });
   });
 }
-const worldTop = (title) => `<header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">${esc(title || "Fashion")}</span><span style="width:44px"></span></header>`;
+// The bar is navigation only now (design/SIMPLIFY/PLAN.md §3.5): back, ⋯ and the place pill, same as every
+// other page. It used to also carry the page's eyebrow and a balancing spacer -- harmless on their own, but
+// js/trail.js's crowded check (anything past the back button) read that as "this header has its own button"
+// and withheld ⋯ from every page built with worldTop (botany, gems, fashion, pulp, photography, design
+// objects, ukiyo-e, botanical & bird plates, brands, looks -- everywhere this helper is used). The eyebrow
+// moves to the body, right where every other page in the app already puts one (gallery.js, richpage.js,
+// artwiki.js: an `eyebrow p-type` just above the `h1.p-title` that already follows this call everywhere).
+const worldTop = (title) => `<header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header><p class="eyebrow p-type">${esc(title || "Fashion")}</p>`;
 function worldBackWire(el, opts, fallback) {
   const back = () => (opts && opts.back ? opts.back() : fallback());
   const b = el.querySelector("[data-back]"); if (b) b.onclick = back;
@@ -315,7 +322,6 @@ function fashionHistoryDraw(id, opts = {}) {
   const el = show(`
     ${worldTop("Fashion history")}
     ${sw.length ? `<div class="p-hero">${sw.map(([hex, label]) => `<div style="--c:${hex}" data-swatch="${hex}" data-ink="${ink(hex)}" title="${esc(label)}"><span>${esc(label)}</span></div>`).join("")}</div>` : ""}
-    <p class="eyebrow p-type">Fashion history</p>
     <h1 class="p-title">${esc(h.title)}</h1>
     ${h.dek ? `<p class="p-dek">${worldLinkText(h.dek)}</p>` : ""}
     ${worldImgHTML(h.img)}
@@ -423,8 +429,7 @@ function fashionEraDetail(id, opts = {}) {
   const uiKey = "all";
   const tabs = fashionEraPaletteTabs(st, uiKey);
   const el = show(`
-    ${worldTop("Deep reads")}
-    <p class="eyebrow p-type">Fashion · Measured era</p>
+    ${worldTop("Fashion · Measured era")}
     <h1 class="p-title">${esc(era.title)}</h1>
     <p class="p-dek">${esc(era.dek || "")}</p>
     <p class="fine mono">${st.n.toLocaleString()} measured pieces${st.nCc0 != null ? ` · ${st.nCc0.toLocaleString()} photographed (Met + Cleveland)` : ""}${st.nVa != null ? ` · ${st.nVa.toLocaleString()} measured only (V&A, no image)` : ""}</p>

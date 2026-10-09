@@ -479,7 +479,7 @@ function awPainter(slug, push = true) {
   const hlExt = small ? "" : awExtreme([["L", "Darker", "Lighter"], ["C", "Less colorful", "More colorful"], ["W", "Cooler", "Warmer"]].map(([k, lo, hi]) => m[k] == null ? null : awPctWords(k, m[k], lo, hi)));
   const hlLine = small ? esc(`Only ${awPlural(n, "painting")} here: a sketch, not a finding.`) : awLineJoin(hlExt, awReach(hlChips[0]), `from ${n} paintings, as photographed`);
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="glass-pill" data-awvs="${esc(slug)}">${ICON.search}<span>Compare</span></button></header>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <div class="aw-head"><div><p class="eyebrow p-type">Painter</p><h1 class="p-title">${esc(A.name)}</h1><p class="p-dek">${dek}</p></div></div>
     ${awPortraitHero(slug, A, P, small ? [] : awSigChips(P.sig, P.ix))}
     ${awFamousRail(slug, n)}
@@ -530,13 +530,33 @@ function awPainter(slug, push = true) {
     }
   } catch (e) {}
   const acts = el.querySelector("[data-aw-acts]");
+  // The surface action row (design/SIMPLIFY/PLAN.md §3.6: "Painter: Compare · ♡ Keep · On the map"). Compare
+  // isn't csActions' own generic "diff with whatever I looked at last" verb (csCompare/csPartner) -- it's this
+  // page's own painter-vs-painter picker (awVersus, below), so it's inserted as its own .cs-act tile, in CS_ACTS'
+  // reading order, rather than forcing it through colorSet(). This also frees the header up (PLAN §3.5: an
+  // ad-hoc header with its own button stays "crowded" -- no ⋯, no place pill -- until that button moves here).
+  let paintSet = null;
   if (typeof colorSet === "function" && typeof csActions === "function") {
     const hx = awPainterHexes(A, P);
-    acts.appendChild(csActions(colorSet({ kind: "painter", id: slug, title: A.name, colors: hx.map(h => ({ h })), src: "painter/" + slug,
-      ...(hx.length > 3 ? { pick: k => hx.slice(0, k).map(h => ({ h })), max: hx.length } : {}) }), { back: () => awPainter(slug, false) }));
+    paintSet = colorSet({ kind: "painter", id: slug, title: A.name, colors: hx.map(h => ({ h })), src: "painter/" + slug,
+      ...(hx.length > 3 ? { pick: k => hx.slice(0, k).map(h => ({ h })), max: hx.length } : {}) });
+    const row = csActions(paintSet, { only: ["keep", "map"], back: () => awPainter(slug, false) });
+    const cmp = document.createElement("button"); cmp.className = "cs-act"; cmp.dataset.awvs = slug; cmp.innerHTML = `${ICON.search}<span>Compare</span>`;
+    row.insertBefore(cmp, row.firstChild);
+    row.style.setProperty("--n", row.children.length); row.dataset.n = row.children.length;
+    acts.appendChild(row);
   }
-  if (typeof whosePalette === "function") acts.insertAdjacentHTML("beforeend", `<button class="btn ghost" data-awwhose="${esc(slug)}">Whose palette? Guess ${esc(A.name.split(" ").pop())} from five colors ${ICON.arrow}</button>`);
   acts.onclick = e => { const w = e.target.closest("[data-awwhose]"); if (w) whosePalette(w.dataset.awwhose); };
+  // ⋯ (PLAN §3.6: "In ⋯: Filters, Their most typical painting, Sources") plus "Whose palette?", which used to
+  // sit as a 4th surface button under the action row -- still one tap away, just not on the surface by default.
+  if (typeof moreRegister === "function") moreRegister("painter", () => [
+    { title: A.name, items: [
+      ...(typeof whosePalette === "function" ? [{ t: "Whose palette?", n: `Guess ${A.name.split(" ").pop()} from five colors`, run: () => whosePalette(slug) }] : []),
+      { t: "Filters", n: "Sort their paintings", run: () => { const s = el.querySelector(".aw-wk-sort"); if (s) s.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); } },
+      ...(P.typical >= 0 ? [{ t: "Their most typical painting", run: () => galleryPage(P.typical, true) }] : []),
+      { t: "Sources", run: () => { const s = el.querySelector(".srcs"); if (s) s.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); } },
+    ] },
+  ]);
 }
 
 // favorite pairs and chords: pairs that share a color join into chords of three or four
@@ -924,6 +944,63 @@ function awFinder(host, pick, opts = {}) {
 }
 
 // ======================================================================
+// Painters, as their own collection (design/SIMPLIFY/PLAN.md §9's Lane 4 list: "Painters (js/artwiki.js: the
+// 840, by their colors, with search)" -- CONTRACT.md: "today they share awIndex() with Art history" (a
+// painter search buried at the bottom of a 48,000px page). This is their own door: the same awFinder search,
+// now first, then every painter as a browsable list (portrait where Wikidata has one, dates, country, how
+// many paintings), sortable -- most painted, A to Z, or oldest first. Loading all 840 painters' full color
+// data just for this list would defeat the point (AW.P is lazy per painter), so the list itself stays text
+// -- and-portrait; the colors are one tap away, on each painter's own page, same as everywhere else in the app.
+// ======================================================================
+const AW_PT_SORT = [["k", "Most painted"], ["n", "A to Z"], ["y", "Oldest first"]];
+function awPaintersSort(list, key) {
+  const copy = list.slice();
+  if (key === "n") copy.sort((a, b) => a.n.localeCompare(b.n));
+  else if (key === "y") copy.sort((a, b) => (a.b != null ? a.b : 99999) - (b.b != null ? b.b : 99999) || a.n.localeCompare(b.n));
+  else copy.sort((a, b) => b.k - a.k || a.n.localeCompare(b.n));
+  return copy;
+}
+function awPaintersRowHTML(m) {
+  const dates = m.b != null ? `${awY(m.b)}–${m.d != null ? awY(m.d) : ""}` : (m.y0 ? `${m.y0}–${m.y1}` : "");
+  const img = m.img ? `<img src="https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(m.img)}?width=100" alt="" loading="lazy" decoding="async" onerror="this.remove();this.closest('.aw-pt-row').classList.add('noimg')">` : "";
+  return `<button class="aw-pt-row${img ? "" : " noimg"}" data-awpainter="${esc(m.slug)}"><span class="aw-pt-th">${img}</span><span class="aw-pt-tx"><b>${esc(m.n)}</b><small>${esc([dates, m.co].filter(Boolean).join(" · "))}</small></span><em>${m.k.toLocaleString()}</em></button>`;
+}
+function awPainters(push = true) {
+  if (!AW.ready) return awWait(awPainters, [push]);
+  if (push) XSTACK.push("aw:painters");
+  const el = show(`
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
+    <p class="eyebrow p-type">Art</p><h1 class="p-title">Painters</h1>
+    <p class="p-dek">${AW.list.length.toLocaleString()} painters in the archive, read for color. Open any of them for their palettes, their signature colors and how they changed over a lifetime.</p>
+    <div data-awfind></div>
+    <div class="sec-head"><b>Every painter</b><span data-ptcount></span></div>
+    <div class="aw-wk-sort" role="group" aria-label="Sort">${AW_PT_SORT.map(([k, t], i) => `<button class="aw-chipbtn${i === 0 ? " on" : ""}" data-ptsort="${k}">${esc(t)}</button>`).join("")}</div>
+    <div class="aw-pt-grid" data-ptgrid></div>`, "article aw-page");
+  awWire(el);
+  awFinder(el.querySelector("[data-awfind]"), s => awPainter(s));
+  let sortKey = "k";
+  const draw = () => {
+    const list = awPaintersSort(AW.list, sortKey);
+    el.querySelector("[data-ptcount]").textContent = list.length.toLocaleString();
+    el.querySelector("[data-ptgrid]").innerHTML = list.map(awPaintersRowHTML).join("");
+  };
+  draw();
+  el.querySelector(".aw-wk-sort").onclick = e => {
+    const b = e.target.closest("[data-ptsort]"); if (!b || b.classList.contains("on")) return;
+    el.querySelectorAll("[data-ptsort]").forEach(x => x.classList.toggle("on", x === b));
+    sortKey = b.dataset.ptsort; buzz(5); draw();
+  };
+  if (typeof featureRegister === "function") featureRegister("coll-painters", { t: "Painters", where: "Museum · Painters", words: ["painter", "artist"], run: () => awPainters() });
+  if (typeof moreRegister === "function") moreRegister("painter-index", () => [
+    { title: "Painters", items: [
+      { t: "Painter against painter", n: "Compare two side by side", run: () => awVs("", "") },
+      { t: "Surprise me", n: "A painter with enough paintings to say something", run: () => { const pool = AW.list.filter(mm => mm.k >= 20); buzz(8); awPainter(pool[Math.floor(Math.random() * pool.length)].slug); } },
+      { t: "Art history by color", n: "Movements, countries, decades", run: () => awIndex() },
+    ] },
+  ]);
+}
+
+// ======================================================================
 // Painter against painter
 // ======================================================================
 function awVs(a, b, push = true) {
@@ -998,6 +1075,7 @@ function awOpenRoute(kind, id, more) {
   const run = () => {
     if (kind === "painter") return AW.meta.a[id] ? awPainter(id) : go(S.tab || "learn");
     if (kind === "arthistory") return awIndex();
+    if (kind === "painter-index") return awPainters();
     if (kind === "painters") return awVs(id && AW.meta.a[id] ? id : "", more && AW.meta.a[more] ? more : "");
     const key = awGroupKeys(kind).find(k => routeSlug(k) === routeSlug(id));
     if (key == null) return go(S.tab || "learn");

@@ -333,3 +333,12 @@ function sxPhotoSheet(img, start, o = {}) {
     sxOpen(sxSetTray(picked));
   };
 }
+
+// Findable by search (design/SIMPLIFY/PLAN.md §9's feature index): these already live one tap from a color
+// page's own "Pair with…" button, which carries the anchor color sxPick needs -- without one, the honest
+// answer is to send the visitor there rather than guess a color for them.
+if (typeof featureRegister === "function") {
+  featureRegister("pair-with", { t: "Pair with…", where: "A color · Pair with…", words: ["pair", "combine", "match", "harmony", "set"], run: () => toast("Open a color, then tap Pair with…") });
+  featureRegister("pair-camera", { t: "Point your camera", where: "Pair with… · Point your camera", words: ["camera", "live color", "eyedropper"], run: () => toast("Open a color, then Pair with… · Point your camera") });
+  featureRegister("pair-photo", { t: "From a photo", where: "Pair with… · From a photo", words: ["photo", "picture", "eyedropper"], run: () => toast("Open a color, then Pair with… · From a photo") });
+}

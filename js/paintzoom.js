@@ -16,12 +16,14 @@
 //           pointed at, with +/- taps to refine it, not a fixed color-boundary guess.
 // opts: { src, alt, title, pal: [{h,share}], pix: {w,h,L}|null (litBuild()'s coarse Lab read, or null when this
 // image's pixels can't be read here, which just leaves Where/Pick out), galleryIndex: int|null (unused by
-// Select, kept for callers that still pass it) }
+// Select, kept for callers that still pass it), startTool: "value"|"squint"|"where"|"pick"|"select"|null (opens
+// straight into that tool -- js/gallery.js's ⋯ › Look group, PLAN §3.6, jumps here instead of making the
+// visitor pick the tool twice) }
 function glZoomOpen(opts) {
   const scrim = document.createElement("div");
   scrim.className = "glz-scrim";
   scrim.innerHTML = `
-    <div class="glz-top"><button class="icon-btn glass" data-glzclose aria-label="Close">${ICON.x}</button><span class="glz-title">${esc(opts.title || "")}</span></div>
+    <div class="glz-top"><button class="tl-exit" data-glzclose aria-label="Done, back to the painting">${ICON.back}<span>Done</span></button><span class="glz-title">${esc(opts.title || "")}</span></div>
     <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}" alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas></div></div>
     <div class="glz-tools">
       <div class="seg glz-seg" role="group" aria-label="Look at it">
@@ -391,6 +393,11 @@ function glZoomOpen(opts) {
   // js/richpage.js's rp-bar/rp-hold).
   cleanup.push(close);
   requestAnimationFrame(() => scrim.classList.add("in"));
+  // startTool (js/gallery.js ⋯ › Look, PLAN §3.6): jump straight into a tool instead of making the visitor pick
+  // it again. "where" needs opts.pix; "select" just needs a src (its own probe decides if the host allows it);
+  // anything else (or a tool this image can't offer) falls back to the plain zoomed view, never a dead screen.
+  if (opts.startTool === "where" && opts.pix) setMode("where");
+  else if (opts.startTool === "select" && opts.src) setMode("select");
   // a QA accessor for the gesture fuzz test (tools/smoke/scenarios.js), the same pattern js/honey.js exposes
   // via HM_CTRL._qaState -- the raw camera state plus the bounds it should always be within, so the test can
   // assert on the gesture machinery itself rather than reading rendered pixels back out of a transform string

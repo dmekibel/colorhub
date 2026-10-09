@@ -257,10 +257,10 @@ function spPage(hexes, o = {}) {
     <p class="eyebrow p-type">${pair ? "A pair" : k === 3 ? "A trio" : `A palette of ${k}`}</p>
     <h1 class="p-title sp-title${names.join("").length > 44 ? " longer" : names.join("").length > 24 ? " long" : ""}">${names.map((n, i) => `<button data-swatch="${hexes[i]}">${esc(n)}</button>`).join(`<span class="sp-plus">+</span>`)}</h1>
     ${o.undo ? `<div class="sp-undo" data-undo-bar><span>${esc(o.applied || "Changed")}.</span><button data-undo>Undo</button></div>` : ""}
-    ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1], 0)}${plate(hexes[1], hexes[0], 1)}${expandBtn}</div>`
-      : `<div class="sp-strip" data-strip data-dbltap>${hexes.map(h => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(spNm(h))}"></button>`).join("")}${expandBtn}</div>
+    ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1], 0)}${plate(hexes[1], hexes[0], 1)}${k < 8 ? `<button class="sp-pair-add" data-sp-add aria-label="Add a color">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</button>` : ""}${expandBtn}</div>`
+      : `<div class="sp-strip" data-strip data-dbltap>${hexes.map(h => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(spNm(h))}"></button>`).join("")}${k < 8 ? `<button class="sp-plus-sw" data-sp-add aria-label="Add a color">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</button>` : ""}${expandBtn}</div>
          <p class="sp-strip-cap" data-stripcap>Equal shares. Press and drag a segment to reorder.</p>
-         <div class="sp-names">${hexes.map((h, i) => `<span class="sp-name"><button data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(names[i])}</b><em class="mono">${h}</em></button><button class="sp-handle" data-handle="${i}" aria-label="Drag to reorder ${esc(names[i])}">${SP_ICON_GRIP}</button><button class="sp-drop" data-drop="${i}" aria-label="Remove ${esc(names[i])}">${SX_ICON_X}</button></span>`).join("")}</div>`}
+         <div class="sp-names" data-names>${hexes.map((h, i) => `<span class="sp-name"><button data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(names[i])}</b><em class="mono">${h}</em></button><button class="sp-handle" data-handle="${i}" aria-label="Drag to reorder ${esc(names[i])}">${SP_ICON_GRIP}</button><button class="sp-drop" data-drop="${i}" aria-label="Remove ${esc(names[i])}">${SX_ICON_X}</button></span>`).join("")}${k < 8 ? `<button class="sp-name-add" data-sp-add><span class="sp-plus-sw sp-plus-row">${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}</span><b>Add a color</b></button>` : ""}</div>`}
     <p class="sp-lead" data-lead aria-live="polite">Reading the paintings…</p>
     <div class="sp-acts" data-acts></div>
     <section class="sp-sec"><h3>${pair ? "How they relate" : "How they work together"}</h3><div class="sp-facts">${(pair ? spPairFacts(hexes[0], hexes[1]) : spSetFacts(hexes, spScheme(hexes))).map(([t, s]) => `<div class="sp-fact"><b>${t}</b><p>${esc(s)}</p></div>`).join("")}</div></section>
@@ -292,9 +292,26 @@ function spPage(hexes, o = {}) {
   // "map" here is csActions' shared "See its colors" door (js/colorset.js, js/palettehive.js): this set's own
   // colors in their own honeycomb, sized by share -- David, 2026-10-09, didn't want a pair/set lit among all
   // the map's other names, so this is new, not a replacement of anything setpage.js had before.
-  const acts = typeof csActions === "function" ? csActions(set, { only: ["learn", "map", "keep", "share"] }) : document.createElement("div");
-  if (k < 8) { const add = document.createElement("button"); add.className = "cs-act"; add.dataset.spAdd = ""; add.innerHTML = `${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}<span>Add a color</span>`; acts.appendChild(add); acts.style.setProperty("--n", (+acts.dataset.n || 3) + 1); }
+  // The surface action row (design/SIMPLIFY/PLAN.md §3.6: "Set / pair: Learn · ♡ Keep · Share"). "On the map"
+  // moves to ⋯ (below); "Add a color" is now the "+" swatch at the end of the strip/names list, not a 4th
+  // button here -- the pair's 2-column grid has no room for a "+" cell, so it stays reachable from ⋯ there.
+  const acts = typeof csActions === "function" ? csActions(set, { only: ["learn", "keep", "share"] }) : document.createElement("div");
   $("[data-acts]").replaceChildren(acts);
+  // ⋯ › Edit (PLAN §3.6: "The per-row drag and remove handles → ⋯ › Edit"): off by default (css/sets.css
+  // .sp-page:not(.sp-editing) hides .sp-handle/.sp-drop/.sp-drop-plate), nothing else about drag-to-reorder or
+  // remove changes -- they're wired exactly as before, just not shown until asked for.
+  let spEditing = false;
+  const setEditing = on => { spEditing = on; el.classList.toggle("sp-editing", on); };
+  if (typeof moreRegister === "function") moreRegister(pair ? "pair" : "set", () => [
+    { title: pair ? "This pair" : "This palette", items: [
+      // "Add a color" lives as the "+" swatch on the surface now (the plates/strip above) -- not repeated
+      // here too (PLAN §3.7 rule 7: no duplicate path on the same screen).
+      ...(k >= 2 ? [{ t: spEditing ? "Done editing" : "Edit colors", n: pair ? "Remove either color" : "Reorder or remove a color", run: () => { setEditing(!spEditing); if (!pair) { const nb = $("[data-names]") || $(".sp-names"); if (nb) nb.scrollIntoView({ block: "center", behavior: reduceMotion ? "auto" : "smooth" }); } toast(spEditing ? "Drag a handle to reorder, or tap × to remove. ⋯ · Done editing when finished." : "Done"); } }] : []),
+      { t: "See it in paintings", run: () => { const sec = $("[data-ptg]"); if (sec) sec.scrollIntoView({ block: "start", behavior: reduceMotion ? "auto" : "smooth" }); } },
+      { t: "On the map", run: () => { const s = set(); if (typeof openPaletteHive === "function") openPaletteHive({ title: s.title, colors: s.colors, source: s.kind }); else if (typeof csOnMap === "function") csOnMap(s); } },
+    ] },
+  ]);
+  if (typeof featureRegister === "function") featureRegister("set-edit", { t: "Reorder or remove a color in a set", where: "A set or pair · ⋯", words: ["reorder", "remove", "drag", "edit"], run: () => toast("Open a set, then ⋯ · Edit colors") });
   try { document.title = `${spTitle(hexes)} · ColorHub`; } catch (e) {}
 
   const ctx = { swap: null, painter: null };
@@ -335,7 +352,10 @@ function spPage(hexes, o = {}) {
       const src = n >= SP_MIN_N ? res.rows.slice(0, 60) : good.slice(0, 30), shares = q.map((h, j) => src.length ? src.reduce((a, r) => a + r.covers[j], 0) / src.length : 0);
       if (src.length >= SP_MIN_N && q.length === k && shares.every(x => x > 0)) {
         const tot = shares.reduce((a, b) => a + b, 0);
-        $("[data-strip]").innerHTML = hexes.map((h, j) => { const f = shares[j] / tot; return `<button data-swatch="${h}" style="--c:${h};flex:${Math.max(f, .08).toFixed(3)}" aria-label="${esc(spNm(h))}: ${Math.round(f * 100)}%"><span data-ink="${ink(h)}">${f < .01 ? "<1" : Math.round(f * 100)}%</span></button>`; }).join("");
+        // keep the "+" and the expand button at the end -- this redraw used to drop both (David's rebuild brief
+        // never asked for that; it's just that the old markup only mapped hexes) -- read them back out first.
+        const stripTail = Array.from($("[data-strip]").querySelectorAll("[data-sp-add],.sp-expand")).map(n => n.outerHTML).join("");
+        $("[data-strip]").innerHTML = hexes.map((h, j) => { const f = shares[j] / tot; return `<button data-swatch="${h}" style="--c:${h};flex:${Math.max(f, .08).toFixed(3)}" aria-label="${esc(spNm(h))}: ${Math.round(f * 100)}%"><span data-ink="${ink(h)}">${f < .01 ? "<1" : Math.round(f * 100)}%</span></button>`; }).join("") + stripTail;
         $("[data-stripcap]").textContent = `At the proportions painters used: the average share of each in the ${src.length} ${n >= SP_MIN_N ? "paintings that hold all of them" : "closest paintings"}, as photographed.`;
       }
     }
@@ -473,8 +493,10 @@ function spPage(hexes, o = {}) {
     if (stripBox) {
       let sd = null;
       stripBox.addEventListener("pointerdown", e => {
-        const b = e.target.closest("button"); if (!b) return;
-        const bs = [...stripBox.children];
+        // [data-sp-add] (the "+" swatch, PLAN §3.6) and .sp-expand aren't colors -- they can trail the strip's
+        // children same as .sp-expand always has, but they must never become a drag's `i`/`at` index into hexes.
+        const b = e.target.closest("button"); if (!b || b.hasAttribute("data-sp-add") || b.classList.contains("sp-expand")) return;
+        const bs = [...stripBox.children].filter(x => !x.hasAttribute("data-sp-add") && !x.classList.contains("sp-expand"));
         sd = { b, i: bs.indexOf(b), at: bs.indexOf(b), x: e.clientX, id: e.pointerId, step: b.offsetWidth, n: bs.length, moved: false };
       });
       stripBox.addEventListener("pointermove", e => {

@@ -941,7 +941,7 @@ function glPage(i, d, fromHex, tol) {
   // color, not black (David's rebuild brief, 2026-10-09) — G.mean is the true pixel-weighted mean, in Lab
   const avg = (typeof G.mean !== "undefined" && G.mean) ? labHex(G.mean[i * 3], G.mean[i * 3 + 1], G.mean[i * 3 + 2]) : dom;
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><div class="art-top-r">${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}${typeof fvArtHeart === "function" ? fvArtHeart(d.id) : ""}</div></header>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <div class="gl-pal-wrap">
     <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(62dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas>
     <button class="gl-closer" data-glcloser>${ICON.search}<span>Look closer</span></button>
@@ -1152,17 +1152,42 @@ function glPage(i, d, fromHex, tol) {
   };
   drawPalette();
   if (typeof awPaintingHook === "function") awPaintingHook(el, i, d, { pool, curPal });
-  // the ColorSet verbs (js/colorset.js): one compact row, not the full six-wide grid (David, 2026-10-09 polish
-  // pass) — Learn moved to live in "Learn the colors here" (drawCov) instead, and Play only shows once a real
-  // game is wired to a set (typeof playSet, not the generic hue-drill fallback csPlay falls back to today).
+  // The surface action row (design/SIMPLIFY/PLAN.md §3.6: "Painting: Learn these · ♡ Keep · Share"). ♡ is the
+  // one icon-only action (DESIGN-CANON A1 exempts it: "everyone knows it") and keeps its own meaning -- it hearts
+  // THIS PAINTING (js/favs.js fvArtHeart, moved here from the top bar, which is now navigation-only) -- not the
+  // same "Keep" as csActions' own palette-save verb below, which still exists, just tucked into ⋯ (Go) rather
+  // than shown twice under one word on one screen. On the map and Play move the same way (PLAN's "Go" group).
   if (typeof colorSet === "function") {
     learnerLog({ type: "seen", set: glSet(), src: "painting" });
-    const actsRow = csActions(glSet, { only: ["keep", "share", "map", ...(typeof playSet === "function" ? ["play"] : [])], back: () => galleryPage(i, false) });
-    // Keep, Share, On the map, in that reading order (David's polish pass, 2026-10-09) — csActions itself always
-    // orders by CS_ACTS, shared by every other page that calls it, so this page alone re-sorts its own row
-    const acOrder = ["keep", "share", "map", "play"];
-    [...actsRow.children].sort((a, b) => acOrder.indexOf(a.dataset.cs) - acOrder.indexOf(b.dataset.cs)).forEach(b => actsRow.appendChild(b));
+    const actsRow = csActions(glSet, { only: ["learn", "share"], labels: { learn: "Learn these" }, back: () => galleryPage(i, false) });
+    if (typeof fvArtHeart === "function" && d.id) {
+      const wrap = document.createElement("div"); wrap.className = "cs-act gl-act-keep"; wrap.innerHTML = fvArtHeart(d.id);
+      actsRow.insertBefore(wrap, actsRow.children[1] || null);
+    }
+    actsRow.style.setProperty("--n", actsRow.children.length); actsRow.dataset.n = actsRow.children.length;
     el.querySelector("[data-csacts]").appendChild(actsRow);
+    // fvArtWire (the heart's click/long-press/double-tap wiring) runs later, once armSample has run -- see below.
+  }
+  // ⋯ (design/SIMPLIFY/PLAN.md §3.6/§9): everything that was on the painting page's surface but isn't one of
+  // the 3 actions or the picture's own Pick a color / Look closer. Registered once per draw (moreRegister keys
+  // by ctx, so a re-register on the same painting just replaces the closures with ones that see this draw's d/i).
+  if (typeof moreRegister === "function") moreRegister("gallery", () => [
+    { title: "Look", items: [
+      { t: "Where each color sits", n: "Opens Look closer", run: () => glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "where" }) },
+      { t: "Value and squint", n: "See the light structure, or the big shapes", run: openLookCloser },
+      { t: "Select an object", n: "Tap the thing you want", run: () => glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i, startTool: "select" }) },
+    ] },
+    { title: "Go", items: [
+      { t: "On the map", run: () => { const s = glSet(); if (typeof openPaletteHive === "function") openPaletteHive({ title: s.title, colors: s.colors, source: s.kind, poolFn: s.pick, max: s.max }); else csOnMap(s); } },
+      ...(d.a ? [{ t: "The painter", n: d.a, run: () => { if (typeof awPainter === "function") awPainter(routeSlug(d.a)); } }] : []),
+      ...(d.rec ? [{ t: "Full size at the museum", n: src.name, run: () => window.open(d.rec, "_blank", "noopener") }] : []),
+      ...(typeof playSet === "function" ? [{ t: "Play with these colors", run: () => csPlay(glSet, { back: () => galleryPage(i, false) }) }] : []),
+      { t: "Keep this palette", n: "Separately from the painting itself", run: () => csPalette(glSet) },
+    ] },
+  ]);
+  if (typeof featureRegister === "function") {
+    featureRegister("gl-pick", { t: "Pick a color", where: "A painting · on the picture", words: ["eyedropper", "sample", "pipette"], run: () => { if (canSample) { pickArmed = true; syncEyd(); } else toast("Open a painting first"); } });
+    featureRegister("gl-where", { t: "Where a color sits on a painting", where: "A painting · ⋯ · Look", words: ["where", "locate", "highlight"], run: () => toast("Open a painting, then ⋯ · Where each color sits") });
   }
   // the How-many slider is wired by countify() itself (built lazily inside drawModes, see kCtl) -- its onSet
   // already updates curK, clears locate and redraws, same as this used to do by hand
@@ -1358,7 +1383,7 @@ function glPage(i, d, fromHex, tol) {
   };
   // the arriving color: pinned above the palette, with how much of this canvas it covers and where (js/paintingsof.js, L26)
   if (fromHex && typeof ptArrival === "function") arrival = ptArrival(el, { i, hex: fromHex, tol, pool, heroSpan, getImg: () => sampleImg, onMap: () => { if (locate) { locate = null; drawPalette(); } }, why: "This museum's image server doesn't let ColorHub read its pixels, so the map isn't available for this painting." });
-  if (typeof fvArtWire === "function") fvArtWire(el, i, d, heroSpan);   // the heart action lives in the top bar now; a long press or a double-tap on the picture keeps it too (js/favs.js)
+  if (typeof fvArtWire === "function") fvArtWire(el, i, d, heroSpan);   // the heart now lives in the action row (PLAN §3.6's ♡ Keep), not the top bar; a long press or a double-tap on the picture keeps it too (js/favs.js)
   if (sampleImg.complete && sampleImg.naturalWidth) armSample(sampleImg); else sampleImg.addEventListener("load", () => armSample(sampleImg), { once: true });
   // Double-tap to like (Instagram-style, David 2026-10-09): since a single tap on the painting already does
   // something (names a spot, picks a color, selects a map place), it waits ~280ms for a second tap before

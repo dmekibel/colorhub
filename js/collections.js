@@ -14,6 +14,14 @@ const COLLECTIONS = [
     open: () => { if (typeof tlKeepUnder === "function") tlKeepUnder(); if (typeof openPart === "function") openPart("art"); } },
   { id: "arthistory", t: "Art history by color", group: "Art", count: "Movements, countries, painters", pic: "#3E5B4E",
     open: () => { if (typeof awIndex === "function") awIndex(); } },
+  // Lane 4 built these two real pages where PLAN §3.1/CONTRACT.md flagged "no door at all" (a painter search
+  // buried at the bottom of Art history, and a poems browser that only ever mounted inside the old Explore
+  // lens). Widening the registry here so they're not built-but-unreachable -- see js/artwiki.js awPainters()
+  // and js/poems.js poemsPage().
+  { id: "painters", t: "Painters", group: "Art", count: "840", pic: "#5A4A3E",
+    open: () => { if (typeof awPainters === "function") awPainters(); } },
+  { id: "poems", t: "Poems", group: "Writing & film", count: "11,440", pic: "#4A3E5A",
+    open: () => { if (typeof poemsPage === "function") poemsPage(); } },
   { id: "gems", t: "Gems", group: "Nature", count: "29", pic: "#6B4C7A",
     open: () => { if (typeof gmListPage === "function") gmListPage("gems"); } },
   { id: "flowers", t: "Flowers & dyes", group: "Nature", count: "37 plants", pic: "#4C6B4A",

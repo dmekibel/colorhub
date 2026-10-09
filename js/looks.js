@@ -125,7 +125,7 @@ function lkOpen(id, opts = {}) {
   const extra = lkOtherArchives(look);
   const row = (k, v) => v ? `<div class="lkx-row"><dt>${k}</dt><dd>${v}</dd></div>` : "";
   const el = show(`
-    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eyebrow">${esc(LK_CAT_ONE[look.cat] || "Look")}</span><span style="width:44px"></span></header>
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <div class="lkx-hero" id="lkh"></div>
     <p class="eyebrow p-type">Look · ${esc(look.era)}</p>
     <h1 class="p-title">${esc(look.name)}</h1>

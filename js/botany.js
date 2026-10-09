@@ -191,8 +191,7 @@ function btFloriRowHTML(f) {
 function btFloriPage(opts = {}) {
   const B = window.BOTANY, withColor = B.flori.filter(f => f[3] && f[3].length);
   const el = show(`
-    ${worldTop("Botany")}
-    <p class="eyebrow p-type">Botany · ${B.flori.length} flowers</p>
+    ${worldTop(`Botany · ${B.flori.length} flowers`)}
     <h1 class="p-title">The language of flowers</h1>
     <p class="p-dek">Kate Greenaway's 1884 dictionary of flower meanings — a Victorian parlor tradition, not a fact about flowers. 19th-century dictionaries often disagree with each other on what the same flower means.</p>
     <label class="search bt-search"><span>${ICON.search}</span><input id="bt-q" type="search" placeholder="Search by flower" autocomplete="off" value="${esc(btQ)}"></label>
