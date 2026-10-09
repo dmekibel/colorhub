@@ -759,14 +759,16 @@ function wikiPage(n) {
 // already fully loaded client-side once their grid has been opened once, same reasoning js/pulp.js's own
 // header comment gives for not needing the gallery's heavier binary-indexed loader).
 function ptArtistLinkHTML(n) {
+  if (n.makerSlug && typeof doHasMaker === "function" && doHasMaker(n.makerSlug)) return `<button class="aw-link" data-domaker="${esc(n.makerSlug)}">${esc(n.artist || "")}</button>`;
   if (n.photographerSlug) return `<button class="aw-link" data-photographer="${esc(n.photographerSlug)}">${esc(n.artist || "")}</button>`;
   const slug = n.artist && typeof routeSlug === "function" ? routeSlug(n.artist) : null;
   if (slug && typeof awHasPainter === "function" && awHasPainter(slug)) return `<button class="aw-link" data-awpainter="${esc(slug)}">${esc(n.artist)}</button>`;
-  return esc(n.artist || "Artist unknown");
+  return esc(n.artist || (n.typeLabel === "Design object" ? "Maker unknown" : "Artist unknown"));
 }
 function ptSimilarPool(n) {
   if (/^pulp-/.test(n.id)) return window.PULP || [];
   if (n.kind === "painting" && n.typeLabel === "Photograph") return window.PH || [];
+  if (n.kind === "painting" && n.typeLabel === "Design object") return (typeof DO !== "undefined" && DO) || [];
   return [];
 }
 function ptSimilarByPaletteHTML(n) {
@@ -786,6 +788,7 @@ function paintingPage(n) {
     <p class="eyebrow p-type">${esc(n.typeLabel || "Painting")}${n.year ? " · " + esc(n.year) : ""}</p>
     <h1 class="p-title">${esc(n.title)}</h1>
     <p class="p-dek">${ptArtistLinkHTML(n)}${n.place ? ` · ${esc(n.place)}` : ""}</p>
+    ${n.facts && n.facts.length ? `<dl class="facts">${n.facts.map(f => `<div><dt>${esc(f.label)}</dt><dd>${linkText(f.value)}</dd></div>`).join("")}</dl>` : ""}
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
       <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
       <p class="fine">Tap a swatch to open its page.</p>${typeof prLearnBtn === "function" ? prLearnBtn(".palette", n.title) : ""}` : `<p class="fine">This painting's palette is being extracted.</p>`}
