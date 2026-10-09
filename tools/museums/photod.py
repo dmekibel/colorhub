@@ -76,7 +76,9 @@ def _subcats(C, title):
 # a 400 for plenty of files (a long or punctuation-heavy filename collapses Wikimedia's own thumb path to a
 # generic "NNNpx-thumbnail.jpg" that cannot be reconstructed from the filename at all). iiurlwidth asks the API
 # itself for the real, working thumburl in the same imageinfo call, no extra request, and it never guesses wrong.
-_THUMB_W = 320
+_THUMB_W = 800   # Phase 2 (Museum UI): a painting-page hero needs more than a 320px thumbnail to not look soft on a
+                 # 440px-wide phone; the API's iiurlwidth asks for the real thumburl at this width regardless of
+                 # the CDN's static-path bucket restriction, same as the 320px fetch above, just a bigger request
 
 
 def _files(C, title, cap):
@@ -92,17 +94,30 @@ def _files(C, title, cap):
     return out[:cap]
 
 
-_YEAR = re.compile(r"(1[789]\d\d|20[0-4]\d)")
+_YEAR = re.compile(r"(?<!\d)(1[789]\d\d|20[0-4]\d)(?!\d)")
+# A museum accession/inventory number can itself be a plausible-looking "year": the Rijksmuseum's own glass-plate
+# titles carry "RP-F-2000-21-61" (2000 is the year the OBJECT entered the collection, not when the photo was
+# taken -- these autochromes are early-1900s). Strip the known accession-number shapes before the year search
+# ever sees them, rather than try to out-guess them with more regex; a stripped title falls through to
+# ObjectName/ImageDescription/DateTimeOriginal instead (see _year_of), which is a better source for these anyway.
+_INVENTORY_NO = re.compile(r"\bRP-[A-Z]{1,3}-\d{3,4}(?:[-.]\d+)*\b", re.I)
 
 
 def _year_of(md, title_text):
-    for field in ("DateTimeOriginal", "ObjectName", "ImageDescription"):
+    """The title/filename first, not EXIF: a curated archival title ("1911 год", "(1905-1915)", "Bashkir house
+    (1910 yo)") names the photograph's own date, where a derivative file's DateTimeOriginal often turns out to be
+    when a volunteer *edited* or *restored* it (checked 2026-10-09: dozens of "cleaned"/"restored"/"edit" files
+    carry a 2010-2011 DateTimeOriginal on an early-1900s photograph -- the editing software's save time, not a
+    capture time). ObjectName/ImageDescription come next, DateTimeOriginal last, as the weakest signal here."""
+    m = _YEAR.search(_INVENTORY_NO.sub("", title_text or ""))
+    if m:
+        return int(m.group(1))
+    for field in ("ObjectName", "ImageDescription", "DateTimeOriginal"):
         v = commonsd.plain((md.get(field) or {}).get("value"))
-        m = _YEAR.search(v or "")
-        if m:
+        m = _YEAR.search(_INVENTORY_NO.sub("", v or ""))   # ObjectName/ImageDescription often repeat the same
+        if m:                                              # accession number the title carries (see above)
             return int(m.group(1))
-    m = _YEAR.search(title_text or "")
-    return int(m.group(1)) if m else None
+    return None
 
 
 def usable(page, process, country_hint):
@@ -181,9 +196,11 @@ def meta(C, resume=False):
     with ThreadPoolExecutor(len(ROOTS)) as ex:
         list(ex.map(job, ROOTS))
     cache.write_text(json.dumps(done))
+    for r in meta_nasa(C):
+        all_rows.setdefault(r["title"], r)
     out = sorted(all_rows.values(), key=lambda r: (r["process"], r["title"]))
-    print(f"photod: {len(out)} distinct PD/CC0 candidate files across {len(ROOTS)} collections (before the chroma "
-          f"color/B&W pass)", flush=True)
+    print(f"photod: {len(out)} distinct PD/CC0 candidate files across {len(ROOTS)} collections plus the hand-picked "
+          f"NASA/USGS list (before the chroma color/B&W pass)", flush=True)
     return C.write_meta("photod", out)
 
 
@@ -221,6 +238,36 @@ def _clean_photographer(raw):
     return s
 
 
+# A handful of hand-picked NASA/USGS iconic PD photographs (David, Phase 2: "add NASA/USGS iconic PD images...
+# if they fit cleanly"), read the same way as everything else -- Commons' own mirror, iiurlwidth for a working
+# thumburl -- rather than a category walk (NASA's PD photography on Commons is enormous and overwhelmingly
+# black-and-white or technical imagery; a clean bulk category for "iconic color Earth photographs" doesn't
+# exist, so this is a short, named list instead of a crawl). Both confirmed "Public domain" per-file on Commons,
+# 2026-10-09.
+NASA_TITLES = [
+    ("NASA-Apollo8-Dec24-Earthrise.jpg", "Earthrise", "William Anders", 1968, "NASA/USGS photograph", "United States"),
+    ("The Blue Marble, AS17-148-22727.jpg", "The Blue Marble", "Apollo 17 crew", 1972, "NASA/USGS photograph", "United States"),
+]
+
+
+def meta_nasa(C):
+    out = []
+    for fname, title, photographer, year, process, country in NASA_TITLES:
+        r = _api(C, action="query", titles="File:" + fname, prop="imageinfo",
+                 iiprop="url|extmetadata|mime|size", iiurlwidth=_THUMB_W)
+        pages = r.get("query", {}).get("pages", [])   # formatversion=2 (see _api): a list, not an id-keyed dict
+        if not pages or "imageinfo" not in pages[0]:
+            print(f"   photod/nasa: {fname} not found, skipping", flush=True)
+            continue
+        ii = pages[0]["imageinfo"][0]
+        out.append(dict(title="File:" + fname, name=title, photographer=photographer, license="Public domain",
+                        thumb=ii.get("thumburl"), url=ii.get("descriptionshorturl") or ii.get("descriptionurl"),
+                        w=ii.get("width"), h=ii.get("height"), year=year, process=process, country=country,
+                        source_category="NASA/USGS"))
+    print(f"photod/nasa: {len(out)} of {len(NASA_TITLES)} hand-picked iconic images found", flush=True)
+    return out
+
+
 def group_key(C, x):
     return f"photod:{x['title']}"
 
@@ -233,4 +280,4 @@ def norm(C, x):
     return dict(id="photod-" + re.sub(r"\W+", "_", x["title"].split(":", 1)[-1])[:70], src="photod",
                 t=C.clean_title(x["name"]), a=_clean_photographer(x.get("photographer")), y=x.get("year"),
                 co=x.get("country"), process=x.get("process"), img=image_urls(x)[0], url=x.get("url"),
-                lic=x.get("license"), category=x.get("source_category"))
+                lic=x.get("license"), category=x.get("source_category"), w=x.get("w"), h=x.get("h"))

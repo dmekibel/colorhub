@@ -23,6 +23,7 @@ const CI_DEFAULT = { tol: 3, minCover: 5, mode: "all", sort: "cover", source: "p
 const CI_SOURCES = {
   paintings: { key: "paintings", dir: "data/colorindex/", label: "Paintings", item: "painting" },
   design: { key: "design", dir: "data/design/colorindex/", label: "Design", item: "design piece" },   // beside, not inside, the design corpus lane L19 writes to data/design/
+  photography: { key: "photography", dir: "data/photography/colorindex/", label: "Photography", item: "photograph" },   // Phase 2: js/photography.js
 };
 const CI_BASE = "";
 const CI_MAX_SOFT = 16;
@@ -267,7 +268,7 @@ function ciNearWords(r) {
 // Auto: the tightest pair of sliders that still shows at least `want` pictures. tolList/minList are the slider stops.
 async function ciAuto(hexes, o, tolList, minList, want = CI_WANT) {
   hexes = ciHexes(hexes);
-  const key = o && o.source === "design" ? "design" : "paintings", src = await ciOpen(key), n = src.n, k = hexes.length, any = !!o && o.mode === "any";
+  const key = o && o.source && CI_SOURCES[o.source] ? o.source : "paintings", src = await ciOpen(key), n = src.n, k = hexes.length, any = !!o && o.mode === "any";
   let best = null;
   for (let ti = 0; ti < tolList.length; ti++) {
     const cs = await Promise.all(hexes.map(h => ciCoverage(src, h, tolList[ti])));

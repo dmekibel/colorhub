@@ -8,8 +8,10 @@ loc.gov" explanation: research/PHOTOGRAPHY.md. Everything resumable, cached unde
   python3 tools/photos_corpus.py images              # 2. one ~200px image per candidate (cached, skipped if present)
   python3 tools/photos_corpus.py palettes             # 3. 6-color k-means palette + mono/color test -> research/_raw/photo-palettes.jsonl
   python3 tools/photos_corpus.py build                # 4. name the colors, drop black-and-white/sepia, write data/photography/*.json
+  python3 tools/photos_corpus.py photographers        # 5. per-photographer stats (Phase 2) -> data/photography/photographers.json
+  python3 tools/photos_corpus.py colorindex            # 6. the finer per-pixel index (Phase 2) -> data/photography/colorindex/ ("In photographs")
   python3 tools/photos_corpus.py status               # what is cached so far
-  python3 tools/photos_corpus.py all [--resume]        # 1-4 in order
+  python3 tools/photos_corpus.py all [--resume]        # 1-6 in order
   python3 tools/photos_corpus.py sheet [N] [out.png] [seed]  # contact sheet: image | palette | names
 
 Color/B&W exclusion (per David: "except black-and-white photos, since this app is about color"): a metadata-only
@@ -235,6 +237,90 @@ def cmd_build():
     return rows, summary
 
 
+PHOTOGRAPHER_MIN_N = 3   # a photographer needs at least this many kept photos before statistics are published
+
+
+def _slug(s):
+    s = re.sub(r"[̀-ͯ]", "", __import__("unicodedata").normalize("NFKD", s))
+    return re.sub(r"^-+|-+$", "", re.sub(r"[^a-z0-9]+", "-", s.lower()))
+
+
+def cmd_photographers():
+    """Per-photographer statistics (Phase 2, like a simplified painter page: artwiki.js's own "percentile among
+    painters" idea, scaled down to what this corpus can honestly support). Written to
+    data/photography/photographers.json: [{slug, name, n, processes, decades, countries, meanL, meanC, vivid,
+    pctDarker, pctDuller, typical, leastTypical}]. The comparison pool is OTHER PHOTOGRAPHERS' own means, each
+    counted once regardless of how many photos they have, so a photographer with 1,200 surviving plates
+    (Prokudin-Gorsky) cannot skew what "typical" means for the group."""
+    rows = json.loads((OUT / "photos.json").read_text())
+    by = defaultdict(list)
+    for r in rows:
+        if r.get("a"):
+            by[r["a"]].append(r)
+    groups = {a: rs for a, rs in by.items() if len(rs) >= PHOTOGRAPHER_MIN_N}
+    print(f"photographers: {len(by)} distinct names, {len(groups)} with >= {PHOTOGRAPHER_MIN_N} kept photos", flush=True)
+
+    def vivid_share(r):
+        tot = 0.0
+        for hexv, share, name, fam in r["p"]:
+            rgb = C.hex_to_rgb(hexv)
+            lab = C.rgb_to_lab(np.array([rgb]))[0]
+            _, Cc, _ = C.lch(lab[None, :])
+            if float(Cc[0]) >= 40:
+                tot += share
+        return tot
+
+    stats = {}
+    for a, rs in groups.items():
+        Ls, Cs = np.array([r["L"] for r in rs]), np.array([r["C"] for r in rs])
+        vivids = np.array([vivid_share(r) for r in rs])
+        meanL, meanC, meanV = float(Ls.mean()), float(Cs.mean()), float(vivids.mean())
+        d = np.hypot(Ls - meanL, (Cs - meanC) * 1.2)   # a simple (L*, C*) distance; chroma weighted up a touch
+        typical, least_typical = rs[int(d.argmin())]["id"], rs[int(d.argmax())]["id"]
+        stats[a] = dict(name=a, n=len(rs), meanL=round(meanL, 1), meanC=round(meanC, 1), vivid=round(meanV, 4),
+                        typical=typical, leastTypical=least_typical,
+                        processes=Counter(r.get("process") or "unknown" for r in rs).most_common(),
+                        decades=sorted(Counter((r["y"] // 10 * 10) for r in rs if r.get("y")).items()),
+                        countries=Counter(r.get("co") or "unknown" for r in rs if r.get("co")).most_common(10))
+    allL = sorted(s["meanL"] for s in stats.values())
+    allC = sorted(s["meanC"] for s in stats.values())
+    pct = lambda arr, v: round(100 * sum(1 for x in arr if x < v) / max(1, len(arr) - 1), 1) if len(arr) > 1 else 50.0
+    out = []
+    for a, s in stats.items():
+        out.append(dict(s, slug=_slug(a), peers=len(stats),
+                        pctDarker=round(100 - pct(allL, s["meanL"]), 1),   # % of photographers LIGHTER than this one, i.e. "darker than N%"
+                        pctDuller=round(pct(allC, s["meanC"]), 1)))        # % of photographers DULLER (lower chroma) than this one
+    out.sort(key=lambda s: -s["n"])
+    (OUT / "photographers.json").write_text(json.dumps(out, ensure_ascii=False))
+    print(f"photographers: wrote {len(out)} photographer pages ({PHOTOGRAPHER_MIN_N}+ photos each)", flush=True)
+    return out
+
+
+def cmd_colorindex():
+    """data/photography/colorindex/: the finer per-pixel-cell color index (tools/color_index.py --items), the
+    same mechanism the main design corpus already uses (CI_SOURCES.design in js/colorindex.js), so "In
+    photographs" appears next to "In paintings" on any color page for free once js/colorindex.js lists this
+    source. Palette-only (every photograph is `coarse`): the 200px analysis copy is already a k-means summary,
+    not a full pixel histogram, so this is the honest resolution to index at, same call shape as build_design()."""
+    rows = json.loads((OUT / "photos.json").read_text())
+    items = [{"id": r["id"], "y": r.get("y"), "a": r.get("a"), "mv": r.get("process"), "co": r.get("co"),
+              "colors": [[c[0], c[1]] for c in r["p"]]} for r in rows]
+    idx_p = OUT / "colorindex"
+    idx_p.mkdir(parents=True, exist_ok=True)
+    tmp = idx_p / "_items.json"
+    tmp.write_text(json.dumps(items))
+    import subprocess
+    subprocess.run([sys.executable, str(ROOT / "tools" / "color_index.py"), "--items", str(tmp),
+                    "--out", str(idx_p), "--label", "Photography", "--item-name", "photograph"], check=True)
+    tmp.unlink()
+    tiles = [[r["id"], r["t"], r.get("a") or "", r.get("y"), r.get("process") or "", r["img"]] for r in rows]
+    (idx_p / "items.json").write_text(json.dumps(tiles, ensure_ascii=False, separators=(",", ":")))
+    h = json.loads((idx_p / "index.json").read_text())
+    h["items"] = "items.json"
+    (idx_p / "index.json").write_text(json.dumps(h, separators=(",", ":")))
+    print(f"colorindex: {len(items)} photographs indexed -> {idx_p}", flush=True)
+
+
 def cmd_status():
     meta = C.load_meta(SRC)["rows"] if (C.SRC[SRC]["dir"] / "meta.json").exists() else []
     n_img = len(list((C.SRC[SRC]["dir"] / "img").glob("*.jpg"))) if (C.SRC[SRC]["dir"] / "img").exists() else 0
@@ -287,6 +373,10 @@ if __name__ == "__main__":
         cmd_palettes()
     elif cmd == "build":
         cmd_build()
+    elif cmd == "photographers":
+        cmd_photographers()
+    elif cmd == "colorindex":
+        cmd_colorindex()
     elif cmd == "status":
         cmd_status()
     elif cmd == "sheet":
@@ -297,5 +387,7 @@ if __name__ == "__main__":
         cmd_images()
         cmd_palettes()
         cmd_build()
+        cmd_photographers()
+        cmd_colorindex()
     else:
         print(__doc__)
