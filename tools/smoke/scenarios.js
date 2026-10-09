@@ -3244,6 +3244,36 @@ scenario("paintings", "a color page's In paintings section: presets re-run the q
 // sitting over the real color page underneath, forever: not actually a black page, just one buried under a
 // black curtain nobody pulled back. Fixed by giving glZoomOpen's close() to cleanup.push, the same way every
 // other body-level overlay in this app already protects itself.
+// Option A region segmentation (David's palette-engine brief, 2026-10-09, shipped corpus-wide): tools/
+// regions_build.py precomputes a few coherent color regions per painting (data/regions/d/NNN.json, same shard/
+// order as data/gallery/). The Region tool needs no live pixel read at all (eydMap is pure geometry), so it
+// works even where Pick/Where can't (a non-CORS museum host) -- this test doesn't need the Commons CORS mock
+// the other Look-closer tests use.
+scenario("paintings", "Look closer's Region tool: tap lights a region and opens its own palette sheet, every mode and the slider working", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  const regionBtn = await t.waitFor('[data-glzv="region"]:not([hidden])', 8000, "the Region tool (region data for this painting)");
+  await t.click(regionBtn, { force: true, wait: 400 });
+  const img = t.$(".glz-img"), r = img.getBoundingClientRect();
+  // try a few points: a region grid has real gaps near hard edges, so one honest retry keeps this from being flaky
+  let ok = false;
+  for (const [fx, fy] of [[0.3, 0.3], [0.5, 0.5], [0.7, 0.4], [0.4, 0.7]]) {
+    t.ev(`(() => { const img = document.querySelector(".glz-img"), r = img.getBoundingClientRect(); img.dispatchEvent(new MouseEvent("click", { bubbles: true, clientX: r.left + r.width * ${fx}, clientY: r.top + r.height * ${fy} })); })()`);
+    await t.sleep(500);
+    if (t.$(".rgs-sheet")) { ok = true; break; }
+  }
+  t.expect(ok, "tapping the image in Region mode never opened a region palette sheet");
+  t.expect(t.$(".glz-cv").classList.contains("on"), "the region didn't light up (soft mask) on the painting");
+  t.expect(/This area/.test(t.text(".rgs-head")), "the region sheet doesn't say \"This area\" (an honest label, no guessed object name)");
+  const n0 = t.$$("[data-rgswatches] [data-swatch]").length;
+  t.expect(n0 >= 1, "the region's palette strip has no chips");
+  await t.click('[data-rgm="diverse"]', { force: true, wait: 400 });
+  t.expect(t.$('[data-rgm="diverse"]').classList.contains("on"), "Diverse didn't become the active region palette mode");
+  const slide = t.$("[data-rgk]");
+  if (slide && !t.$("[data-rgslide]").hidden) { slide._countTo(2); await t.sleep(300); t.expect(t.$$("[data-rgswatches] [data-swatch]").length === 2, "the region slider didn't redraw its palette live"); }
+  await t.click(t.$("[data-rgswatches] [data-swatch]"), { force: true, wait: 600 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping a region-palette chip");
+});
 scenario("paintings", "Look closer on a painting then swiping back (popstate) never leaves the color page under a stuck dark scrim", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
