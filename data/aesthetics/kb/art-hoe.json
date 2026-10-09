@@ -1,0 +1,41 @@
+{
+ "id": "art-hoe",
+ "name": "Art Hoe",
+ "lineage": {
+  "influenced_by": [
+   "dark-academia",
+   "cottagecore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2015–2018"
+ ],
+ "places": [],
+ "garments": [
+  "denim overalls",
+  "beret",
+  "painted canvas sneakers"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Art Hoe"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a balanced spread across light, dark and saturation, with no single trait dominating"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

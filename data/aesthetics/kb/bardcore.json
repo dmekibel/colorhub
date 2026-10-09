@@ -1,0 +1,42 @@
+{
+ "id": "bardcore",
+ "name": "Bardcore",
+ "lineage": {
+  "influenced_by": [
+   "witchcore",
+   "royalcore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020–present"
+ ],
+ "places": [],
+ "garments": [
+  "parchment",
+  "tapestry weave",
+  "wrought iron"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Bardcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 43% of the measured color is pale or near-white",
+   "mostly muted — about 50% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

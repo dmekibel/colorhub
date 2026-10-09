@@ -1,0 +1,42 @@
+{
+ "id": "grandmillennial",
+ "name": "Grandmillennial",
+ "lineage": {
+  "influenced_by": [
+   "victorian-parlour",
+   "cluttercore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2019–present"
+ ],
+ "places": [],
+ "garments": [
+  "chintz floral fabric",
+  "needlepoint",
+  "antique brass",
+  "scalloped trim"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Grandmillennial"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 66% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

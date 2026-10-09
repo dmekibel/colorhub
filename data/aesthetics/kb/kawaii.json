@@ -1,0 +1,42 @@
+{
+ "id": "kawaii",
+ "name": "Kawaii",
+ "lineage": {
+  "influenced_by": [
+   "decora",
+   "fairycore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1970s–present (Japan)"
+ ],
+ "places": [],
+ "garments": [
+  "pastel plastic",
+  "plush fabric",
+  "ribbons"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Kawaii"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 65% of the measured color is pale or near-white",
+   "mostly muted — about 63% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

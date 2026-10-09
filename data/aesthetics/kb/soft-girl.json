@@ -1,0 +1,41 @@
+{
+ "id": "soft-girl",
+ "name": "Soft Girl",
+ "lineage": {
+  "influenced_by": [
+   "e-girl-e-boy",
+   "clean-girl"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2018–2021"
+ ],
+ "places": [],
+ "garments": [
+  "pastel knitwear",
+  "plaid mini skirts",
+  "baby-doll tops"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Soft Girl"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 43% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

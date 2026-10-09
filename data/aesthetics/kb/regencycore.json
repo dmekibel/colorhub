@@ -1,0 +1,41 @@
+{
+ "id": "regencycore",
+ "name": "Regencycore",
+ "lineage": {
+  "influenced_by": [
+   "royalcore",
+   "dark-academia"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020s"
+ ],
+ "places": [],
+ "garments": [
+  "empire-waist muslin and silk",
+  "long gloves",
+  "ribbon trim"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Regencycore"
+  }
+ ],
+ "measured": {
+  "n_images": 2,
+  "n_candidates": 2,
+  "findings": [
+   "mostly muted — about 91% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}
