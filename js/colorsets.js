@@ -191,8 +191,10 @@ const COLOR_SETS = [
 const getSet = id => { const s = COLOR_SETS.find(x => x.id === id); return s ? s.get() : []; };
 
 // ---------- view modes ----------
+// David, 2026-10-09 (design/SIMPLIFY/PLAN.md §9): "Map" is the home screen's own name now (NAV.map, js/core.js) --
+// this view's title is label-only renamed to "Grid" (same collision honey.js's HONEY_ARR.map had), id unchanged.
 const COLOR_VIEWS = [
-  { id: "map", title: "Map", render: (host, items, o) => honeycomb(host, { ...o, items, layout: "map" }) },
+  { id: "map", title: "Grid", render: (host, items, o) => honeycomb(host, { ...o, items, layout: "map" }) },
   { id: "wheel", title: "Wheel", render: (host, items, o) => honeycomb(host, { ...o, items, layout: "wheel" }) },
 ];
 

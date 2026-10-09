@@ -417,7 +417,10 @@ function honeySortGrid(items, s, k) {
 }
 // id -> { title, kind ("radial" | "grid" | ""), def (the default order, and why in design/HOME-VIEWS.md §8), sub, make(items, order, param) }
 const HONEY_ARR = {
-  map: { title: "Map", kind: "grid", def: "hue", sub: "Hue across, light to dark down",
+  // David, 2026-10-09 (design/SIMPLIFY/PLAN.md §9, Lane 2's first item): this shape was called "Map", but "Map" is
+  // now the home screen's own name (NAV.map, js/core.js) -- a label-only rename to "Grid" so the two don't collide
+  // in the Map ⋯ sheet ("Grid · Hue across..."). The id stays "map" everywhere (saves, HONEY_ARR_IDS, addresses).
+  map: { title: "Grid", kind: "grid", def: "hue", sub: "Hue across, light to dark down",
     make: (items, ord) => honeySortGrid(items, HONEY_SORT[ord] || HONEY_SORT.light, 1.9) },
   rings: { title: "Rings", kind: "radial", def: "light", sub: "Rings from the middle out, hue going round",
     make: (items, ord, p) => { const o = HONEY_CENTER[ord] || HONEY_CENTER.light; return honeyRingArr(items, o.rank(items, p), o.group && o.group(items)); } },
