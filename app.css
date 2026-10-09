@@ -732,7 +732,17 @@ img{transition:opacity .6s var(--ease)}
 .eye-top{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:calc(var(--top) + 10px) 16px 0;z-index:4;pointer-events:none}
 .eye-top>*{pointer-events:auto}
 .eye-top-r{display:flex;align-items:center;gap:8px}
-.eye-hint{font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:#F3F3F1;background:var(--surface-2);padding:9px 12px;border-radius:var(--r-pill)}
+.eye-hint{display:flex;align-items:center;gap:7px;font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:#F3F3F1;background:var(--surface-2);padding:9px 12px;border-radius:var(--r-pill)}
+/* a small pulsing dot beside the word "Live", shown only while the feed is live -- deliberately NOT red (that
+   reads as "recording" in every camera app); off-white, same as every other mark in this screen (David,
+   2026-10-09: "the video feature is confusing") */
+.eye-live-dot{width:7px;height:7px;flex:none;border-radius:50%;background:#F3F3F1;animation:eyeLiveDot 1.8s ease-in-out infinite}
+.eye-live-dot[hidden]{display:none}
+@keyframes eyeLiveDot{0%,100%{opacity:1}50%{opacity:.35}}
+/* a camera flash, not a recording cue: one bright pulse over the frame at the instant of Freeze */
+.eye-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:5}
+.eye-flash.snap{animation:eyeFlash .32s ease-out}
+@keyframes eyeFlash{0%{opacity:.85}100%{opacity:0}}
 .eye-card{position:absolute;left:0;right:0;bottom:0;z-index:2;max-width:540px;margin:0 auto;padding:18px var(--g) calc(var(--bottom) + 18px);
   background:linear-gradient(to top,rgba(14,13,11,.94) 62%,rgba(14,13,11,0));color:var(--ink)}
 .eye-name{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding-top:28px}
@@ -754,12 +764,21 @@ img{transition:opacity .6s var(--ease)}
 .eye-note{margin-top:14px;font:italic 400 17px/1.3 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint)}
 .eye-bar{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding:0 10px}
 .eye-side{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:rgba(236,232,223,.08);cursor:pointer}
-.eye-shut{width:72px;height:72px;border-radius:50%;box-shadow:inset 0 0 0 3px #F3F3F1;display:grid;place-items:center;transition:transform .3s var(--spring)}
+.eye-shut-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+/* a plain photo shutter -- a ring with a full circle inside, in BOTH states. It deliberately never morphs into a
+   square: that circle-to-square shape is the universal video record/stop icon, and was exactly what read as
+   "this records video" (David, 2026-10-09). Frozen state is told by the ring dimming and the label below it
+   ("Freeze" -> "Live"), plus the one-time flash (.eye-flash) at the moment of capture -- a photography cue. */
+.eye-shut{width:72px;height:72px;border-radius:50%;box-shadow:inset 0 0 0 3px #F3F3F1;display:grid;place-items:center;transition:transform .3s var(--spring),box-shadow .3s var(--ease)}
 .eye-shut i{width:56px;height:56px;border-radius:50%;background:#F3F3F1;transition:all .3s var(--spring)}
 .eye-shut:active{transform:scale(.92)}
-.eye.frozen .eye-shut i{width:24px;height:24px;border-radius:var(--r-1)}
+.eye.frozen .eye-shut{box-shadow:inset 0 0 0 3px rgba(243,243,241,.55)}
+.eye.frozen .eye-shut i{width:44px;height:44px;background:rgba(243,243,241,.55)}
+.eye-shut-label{font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#F3F3F1}
 .eye-off{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:center;padding:var(--g);max-width:540px;margin:0 auto;background:var(--ground)}
-.eye-off h2{font:400 44px/1 var(--serif);letter-spacing:-.025em;margin:12px 0 28px}.eye-off h2 em{font-style:italic}
+.eye-off h2{font:400 36px/1.1 var(--serif);letter-spacing:-.025em;margin:12px 0 16px}.eye-off h2 em{font-style:italic}
+.eye-off-fix{font-size:15px;line-height:1.5;color:var(--soft);margin:0 0 24px;max-width:38ch}
+.eye-off-fix[hidden]{display:none}
 .eye-off .btn{cursor:pointer}
 .eye-off[hidden],.eye.nocam .eye-card,.eye.nocam .eye-ret{display:none}
 .eye.nocam .eye-wb,.eye.nocam .eye-hint,.eye.nocam .eye-lock{display:none}

@@ -2283,6 +2283,34 @@ scenario("studio", "camera screen fails gracefully with no camera", async t => {
   await t.click("[data-back]", { wait: 500 });
   await t.waitFor('.room-sheet[data-room="studio"], .screen.studio', 6000, "Studio after Back");
 });
+// David, 2026-10-09 ("the video feature is confusing"): a refused permission gets its own fix-it line, not the
+// same flat "no camera here" a cameraless Mac gets -- and the live/frozen chrome never implies it records.
+scenario("studio", "camera: a refused permission gets its own fix-it message, and the shutter never implies recording", async t => {
+  await t.open("#shot=studio", { settle: 600 });
+  t.ev("navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('denied', 'NotAllowedError'))");
+  await t.click("[data-eye]", { wait: 500 });
+  await t.waitFor(() => t.$(".screen.eye.nocam") && t.$("#off") && !t.$("#off").hidden, 20000, "the 'no camera' state");
+  t.expect(/camera access/i.test(t.$("#offEyebrow").textContent), `a refused permission should say so, got "${t.$("#offEyebrow").textContent}"`);
+  t.expect(t.$("#offFix").textContent.length > 10, "no fix-it instructions for a refused permission");
+  await t.click("[data-back]", { wait: 500 });
+  // a real (fake-device) stream: the live view names a color, the shutter is a plain circle with a "Freeze"
+  // label (never a square -- that's the video record/stop shape), and a tap announces "Live" with a dot, not red
+  t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 320; c.height = 320;
+    const x = c.getContext("2d"); x.fillStyle = "#4C6B8C"; x.fillRect(0, 0, 320, 320);
+    const stream = typeof c.captureStream === "function" ? c.captureStream() : null;
+    if (stream) navigator.mediaDevices.getUserMedia = () => Promise.resolve(stream);
+  })()`);
+  await t.click("[data-eye]", { wait: 500 });
+  await t.waitFor("#vid", 6000, "the live camera screen");
+  t.expect(t.$("#shutLabel").textContent === "Freeze", `the shutter should say "Freeze" while live, got "${t.$("#shutLabel").textContent}"`);
+  t.expect(!t.$("#liveDot").hidden, "the live dot should show while the feed is live");
+  t.expect(/live/i.test(t.$("#hintText").textContent), `the live hint should say so plainly, got "${t.$("#hintText").textContent}"`);
+  await t.click("#shut", { wait: 400 });
+  t.expect(t.$("#shutLabel").textContent === "Live", `the shutter should say "Live" once frozen, got "${t.$("#shutLabel").textContent}"`);
+  t.expect(t.$("#liveDot").hidden, "the live dot should hide once frozen");
+  t.expect(/frozen/i.test(t.$("#hintText").textContent), `the frozen hint should say so plainly, got "${t.$("#hintText").textContent}"`);
+});
 
 // David, 2026-10-09: the camera eye must read the reticle's exact pixel (or at most a 2x2 average), never a
 // blurred, bigger patch -- tested directly against eyeSample() (js/camera.js) with a hard-edged two-color

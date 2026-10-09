@@ -93,7 +93,15 @@ function shot(name) {
     // another) shows; "shades" uses a richer synthetic frame (a red "dress" with gradient shading and a fold,
     // on a contrasting background with a skin-tone patch and a grey patch) and opens "Shades of this" on it,
     // for design review of the region-growing + clustering sheet (tools/smoke/scenarios.js tests the math directly).
+    // eye:denied / eye:notfound -- design review of the permission-error fix-it copy (js/camera.js eyeOffReason),
+    // no fake stream: getUserMedia rejects with the named DOMException, the way a real refusal or a cameraless
+    // Mac would.
     case "eye": {
+      if (arg === "denied" || arg === "notfound") {
+        navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException("denied", arg === "denied" ? "NotAllowedError" : "NotFoundError"));
+        eye();
+        return;
+      }
       const c = document.createElement("canvas"); c.width = 320; c.height = 568;
       const x = c.getContext("2d");
       if (arg === "shades") {

@@ -229,6 +229,27 @@ function segOverlay(prep, keepIdx) {
   return c;
 }
 
+// Camera failures, explained (David, 2026-10-09: "the video feature is confusing" -- a flat "no camera here"
+// hid the actual, fixable reason). iOS Home Screen apps have had camera access since iOS 16.4; an older iOS
+// (or a camera simply blocked for Safari/this app) needs the Settings fix this spells out.
+function eyeOffReason(e) {
+  const ios = typeof isIOS === "function" && isIOS(), standalone_ = typeof standalone === "function" && standalone();
+  const insecure = location.protocol !== "https:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1";
+  if (insecure) return { head: "This page isn't secure", fix: "The camera only works on https:// (or localhost). Open ColorHub over a secure link, then try again." };
+  if (!navigator.mediaDevices || typeof navigator.mediaDevices.getUserMedia !== "function") {
+    if (ios && standalone_) return { head: "This iPhone can't open the camera here", fix: "Home Screen apps got camera access in iOS 16.4. Update iOS, or open ColorHub in Safari instead of from the Home Screen icon." };
+    return { head: "This browser can't open a camera", fix: "Try Safari or Chrome, or name the colors in a photo instead." };
+  }
+  const name = e && e.name;
+  if (name === "NotAllowedError" || name === "PermissionDeniedError" || name === "SecurityError") {
+    return { head: "Camera access is off", fix: ios
+      ? (standalone_ ? "Open Settings > ColorHub (or Safari) > Camera and turn it on, then come back and try again." : "Open Settings > Safari > Camera (or tap the camera icon by the address bar) and allow it, then try again.")
+      : "Allow camera access for this site -- usually the camera or lock icon by the address bar -- then try again." };
+  }
+  if (name === "NotFoundError" || name === "DevicesNotFoundError") return { head: "No camera here", fix: "This device doesn't have a camera ColorHub can use." };
+  if (name === "NotReadableError" || name === "TrackStartError") return { head: "The camera's busy", fix: "Another app may be using it right now. Close it and try again." };
+  return { head: "No camera here", fix: "" };
+}
 // opts (David, 2026-10-09, cameraPick/photoPick): { pick, multi, onPick(hex,meta), onDone(hexes), title, forcePhoto }.
 // Plain eye() (no opts) is the Train > Your eye camera screen, unchanged. Pick mode swaps the frozen card's own
 // actions for "Use this color" (single) or "Add" + a running strip + "Done" (multi) -- never Keep/tray/quiz --
@@ -239,8 +260,9 @@ function eye(opts = {}) {
       <video id="vid" playsinline muted autoplay></video>
       <canvas id="still" hidden></canvas>
       <i class="eye-ret" id="ret"><b class="eye-ret-h"></b><b class="eye-ret-v"></b></i>
+      <i class="eye-flash" id="flash"></i>
     </div>
-    <header class="eye-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eye-hint" id="hint">${esc(opts.title || "Point at anything")}</span><span class="eye-top-r"><button class="icon-btn glass eye-lock" id="lock" hidden aria-label="Lock exposure and white balance" aria-pressed="false">${ICON_LOCK}</button><button class="icon-btn glass eye-wb" id="wb" aria-label="White balance: tap, then tap something white or grey" aria-pressed="false">WB</button></span></header>
+    <header class="eye-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="eye-hint" id="hint"><b class="eye-live-dot" id="liveDot" aria-hidden="true"></b><span id="hintText">${esc(opts.title || "Live — point at anything")}</span></span><span class="eye-top-r"><button class="icon-btn glass eye-lock" id="lock" hidden aria-label="Lock exposure and white balance" aria-pressed="false">${ICON_LOCK}</button><button class="icon-btn glass eye-wb" id="wb" aria-label="White balance: tap, then tap something white or grey" aria-pressed="false">WB</button></span></header>
     <div class="eye-card" id="card">
       <button class="eye-name" id="nm"><i id="chip"></i><span><b id="big">Looking…</b><em id="src"></em></span></button>
       <p class="eye-hex mono" id="hexline"></p>
@@ -255,13 +277,14 @@ function eye(opts = {}) {
       <p class="eye-note">Phones auto-adjust color and exposure, so this is a close read, not a lab measurement.</p>
       <div class="eye-bar">
         <label class="eye-side" aria-label="Choose a photo">${ICON_PHOTO}<input type="file" accept="image/*" id="file" hidden></label>
-        <button class="eye-shut" id="shut" aria-label="Freeze"><i></i></button>
+        <span class="eye-shut-wrap"><button class="eye-shut" id="shut" aria-label="Freeze the frame (this does not record video)"><i></i></button><b class="eye-shut-label" id="shutLabel">Freeze</b></span>
         <button class="eye-side" id="pal" aria-label="Palette from this frame">${ICON_PAL}</button>
       </div>
     </div>
     <div class="eye-off" id="off" hidden>
-      <p class="eyebrow">No camera here</p>
-      <h2>Name the colors in a <em>photo</em> instead.</h2>
+      <p class="eyebrow" id="offEyebrow">No camera here</p>
+      <h2 id="offHead">Name the colors in a <em>photo</em> instead.</h2>
+      <p class="eye-off-fix" id="offFix" hidden></p>
       <label class="btn">Choose a photo<input type="file" accept="image/*" id="file2" hidden></label>
     </div>
   `, "fixed eye");
@@ -344,10 +367,15 @@ function eye(opts = {}) {
     still.width = R.width * dpr; still.height = R.height * dpr; still.hidden = false;
     const c = still.getContext("2d"); c.drawImage(src, camOx * dpr, camOy * dpr, w * k * dpr, h * k * dpr);
     vid.style.visibility = "hidden";
-    $("#hint").textContent = opts.title && !PICK ? opts.title : "Tap anywhere to name it";
+    $("#hintText").textContent = opts.title && !PICK ? opts.title : "Frozen — tap anywhere to name it";
+    $("#liveDot").hidden = true;
     $("#acts").hidden = false;
     if (!PICK) $("#shadesBtn").hidden = false;
-    $("#shut").setAttribute("aria-label", "Back to live");
+    $("#shut").setAttribute("aria-label", "Back to live (tap to unfreeze)");
+    $("#shutLabel").textContent = "Live";
+    // a snap of brightness, like a photo shutter -- a camera cue, never a recording one (David, 2026-10-09:
+    // "the video feature is confusing" -- this freezes one frame, it never records)
+    if (!reduceMotion) { const fl = $("#flash"); fl.classList.remove("snap"); void fl.offsetWidth; fl.classList.add("snap"); }
     at = [.5, .5]; placeRet();
     paint(read(eyeSample(camSrc, camW, camH, .5, .5, getSampleSize())));
     // a freeze is an exposure, not a quiz answer: log it once to the Learner Model as "seen" (js/learner.js)
@@ -357,7 +385,8 @@ function eye(opts = {}) {
   const live = () => {
     frozen = false; capKind = "camera"; el.classList.remove("frozen"); still.hidden = true; vid.style.visibility = ""; $("#acts").hidden = true;
     const sb = $("#shadesBtn"); if (sb) sb.hidden = true;
-    $("#hint").textContent = opts.title || "Point at anything"; $("#shut").setAttribute("aria-label", "Freeze");
+    $("#hintText").textContent = opts.title || "Live — point at anything"; $("#liveDot").hidden = false;
+    $("#shut").setAttribute("aria-label", "Freeze the frame (this does not record video)"); $("#shutLabel").textContent = "Freeze";
     if (stream) vid.play().catch(() => {});
     at = [.5, .5]; placeRet();
   };
@@ -365,7 +394,7 @@ function eye(opts = {}) {
   // white balance: the next tap picks the reference (live: the middle circle; frozen: where you tap). A
   // reliable reference benefits from isoSample's bigger, noise-averaged patch (js/isolate.js) -- unlike the
   // live read above, this one point is deliberately not the exact-pixel eyeSample.
-  const hintNow = () => $("#hint").textContent = wbArm ? (frozen ? "Tap something white or grey" : "Aim the circle at white or grey, tap") : frozen ? "Tap anywhere to name it" : "Point at anything";
+  const hintNow = () => $("#hintText").textContent = wbArm ? (frozen ? "Tap something white or grey" : "Aim the circle at white or grey, tap") : frozen ? "Frozen — tap anywhere to name it" : "Live — point at anything";
   const wbBtn = $("#wb");
   const setWb = f => { wb = f; wbBtn.classList.toggle("on", !!f); wbBtn.setAttribute("aria-pressed", f ? "true" : "false"); smooth = null; };
   wbBtn.onclick = () => {
@@ -458,7 +487,14 @@ function eye(opts = {}) {
     if (opts.forcePhoto) { el.classList.add("nocam"); $("#off").hidden = false; later(() => { const f2 = $("#file2"); if (f2) f2.click(); }, 30); return; }
     try {
       stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: { ideal: 1280 } }, audio: false });
-    } catch (e) { el.classList.add("nocam"); $("#off").hidden = false; return; }
+    } catch (e) {
+      const r = eyeOffReason(e);
+      el.classList.add("nocam"); $("#off").hidden = false;
+      $("#offEyebrow").textContent = r.head;
+      $("#offHead").innerHTML = "Name the colors in a <em>photo</em> instead.";
+      $("#offFix").hidden = !r.fix; $("#offFix").textContent = r.fix || "";
+      return;
+    }
     // a refused play() (power saving, autoplay rules) is not a missing camera: the muted video starts on its own
     vid.srcObject = stream; vid.play().catch(() => {});
     track = stream.getVideoTracks()[0] || null;
