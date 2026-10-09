@@ -139,7 +139,7 @@ function csCompare(a, b) {
   const lines = [diffs.length ? `<b>${esc(A)}</b> is ${diffs.length > 1 ? diffs.slice(0, -1).join(", ") + " and " + diffs[diffs.length - 1] : diffs[0]}.` : "About as light, as strong and as warm as each other."];
   const match = [];
   a.colors.forEach(x => { let best = null, bd = Infinity; b.colors.forEach(y => { const d = de2000(x.h, y.h); if (d < bd) { bd = d; best = y; } }); if (best && bd <= 6) match.push([x, best, bd]); });
-  const chip = c => `<button class="cs-chip" data-cs-hex="${c.h}"><i style="--c:${c.h}"></i><span>${esc(csName(c))}</span>${typeof relMarkHTML === "function" ? relMarkHTML(c.n ? { n: c.n, h: c.h } : c.h) : ""}</button>`;
+  const chip = c => `<button class="cs-chip" data-cs-hex="${c.h}"><i style="--c:${c.h}"></i><span>${esc(csName(c))}</span></button>`;
   const strip = s => `<div class="cs-strip">${s.colors.map(c => `<button style="--c:${c.h};flex:${Math.max(c.share != null ? c.share : 1 / s.colors.length, .06).toFixed(3)}" data-cs-hex="${c.h}" aria-label="${esc(csName(c))}"></button>`).join("")}</div>`;
   const { sh, close } = sheet(`
     <p class="eyebrow">Compare</p>

@@ -194,3 +194,21 @@
 .ls-groups .ls-chip.pin{box-shadow:inset 0 0 0 1.5px var(--ink,#ECE8DF);cursor:default}
 .ls-chip .ls-x{margin-left:2px;color:var(--soft,#A39E93);font:400 20px/1 var(--sans)}
 .ls-chip.ls-add{padding:0 16px;color:var(--soft,#A39E93);background:transparent;box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
+
+/* ---------- the overview's Quick look (js/learnset.js lsQuickHTML/runStory) ---------- */
+.ls-skip{position:absolute;top:0;right:0;padding:6px 2px;z-index:2}
+.ls-quick .ls-meet-name{align-items:flex-start}
+
+/* ---------- Sort and Gradient (js/studyformats.js): the two set/single-item formats added 2026-10-09 ---------- */
+.pr-s-sort{gap:14px}
+.pr-sort-list{position:relative;flex:1;min-height:220px;display:flex;flex-direction:column}
+.pr-sort-row{position:absolute;left:0;right:0;border-radius:var(--r-2,14px);background:var(--c);display:flex;align-items:center;padding:0 16px;touch-action:none;will-change:transform;transition:transform .18s var(--ease,ease)}
+.pr-sort-row.lift{transition:none;z-index:2;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.pr-sort-row.good{outline:2px solid var(--good,#4E9A5E)}
+.pr-sort-row.bad{outline:2px solid var(--bad,#C0392F)}
+.pr-sort-n{font:400 17px/1.2 var(--sans);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.pr-s-gradient{gap:14px}
+.sf-grad-bar{position:relative;height:56px;border-radius:999px;touch-action:none;margin-top:6px}
+.sf-grad-mark{position:absolute;top:-6px;width:4px;height:68px;border-radius:2px;background:#fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.35);transform:translateX(-50%);pointer-events:none}
+.sf-grad-mark.true{background:#141311;box-shadow:0 0 0 1.5px #fff}
+.sf-grad-ends{display:flex;justify-content:space-between;font:400 14px/1.2 var(--sans);color:var(--soft,#A39E93)}

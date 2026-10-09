@@ -122,6 +122,18 @@ function lsSrcOf(o, from, route) {
 // ======================================================================
 const LS_QUICK_N = 4, LS_QUICK_GAP = 4;
 
+// For any screen outside Learn that needs to start the one Study flow on a plain list of colors (the map's
+// mapSelect "Study these" chip, for one, per David 2026-10-09: a map selection should open the real Study flow,
+// never a shortcut around it) — the same door as everywhere else: the Learn sheet below, sheet -> overview ->
+// varied formats. "Just one way: Flashcards" on that sheet is still the only way to land in the plain swipe deck,
+// and only when picked there by hand.
+function studyColors(colors, o = {}) {
+  if (typeof lsOpen !== "function" || !colors || !colors.length) return;
+  const items = colors.map(c => typeof c === "string" ? c : c && c.h).filter(Boolean);
+  if (!items.length) return;
+  return lsOpen({ items, label: o.title || o.label || "These colors", src: o.from || o.src || "map", back: o.back });
+}
+
 // ======================================================================
 // The sheet
 // ======================================================================
@@ -182,7 +194,7 @@ function lsOpen(o = {}) {
     $s("[data-why]").textContent = lsWhy(items, null, false);
     const pace = o.pace || ls.pace || "you", nNew = items.filter(it => { const k = lsKnow(it); return k === "none" || k === "met"; }).length;
     sh.querySelectorAll("[data-pace]").forEach(b => { const on = b.dataset.pace === pace; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
-    $s("[data-pacesay]").textContent = lsPaceSay(pace, nNew);
+    $s("[data-pacesay]").textContent = lsPaceSay(pace, nNew, items.length);
     const mins = Math.max(1, Math.round((items.length * 2.6 * 5 + (pace === "test" ? 0 : nNew * 6)) / 60));
     $s("[data-go]").querySelector("em") ? 0 : $s("[data-go] span").insertAdjacentHTML("afterend", "<em></em>");
     $s("[data-go] em").textContent = `about ${mins} min`;
@@ -210,7 +222,7 @@ function lsOpen(o = {}) {
     closeIn.value = st.close; $s("[data-closev]").textContent = LS_CLOSE[st.close][0]; $s("[data-closehint]").textContent = LS_CLOSE[st.close][2] + (items.length < st.size ? `. Only ${items.length} names are that far apart here.` : ".");
     const pace = o.pace || ls.pace || "you", nNew = items.filter(it => { const k = fromThese ? pick.know.get(it.key) || lsKnow(it) : lsKnow(it); return k === "none" || k === "met"; }).length;
     sh.querySelectorAll("[data-pace]").forEach(b => { const on = b.dataset.pace === pace; b.classList.toggle("on", on); b.setAttribute("aria-checked", on); });
-    $s("[data-pacesay]").textContent = lsPaceSay(pace, nNew);
+    $s("[data-pacesay]").textContent = lsPaceSay(pace, nNew, items.length);
     const mins = Math.max(1, Math.round((items.length * 2.6 * 5 + (pace === "test" ? 0 : nNew * 6)) / 60));
     $s("[data-go]").querySelector("em") ? 0 : $s("[data-go] span").insertAdjacentHTML("afterend", "<em></em>");
     $s("[data-go] em").textContent = `about ${mins} min`;
@@ -247,13 +259,20 @@ function lsOpen(o = {}) {
   paint();
   return { sh, close };
 }
-// the line under the pace chips: what Study will do with these colors
-function lsPaceSay(pace, nNew) {
-  const meet = nNew ? `Meets the ${nNew === 1 ? "new one" : `${nNew} new ones`} first` : "Nothing new to meet";
-  if (pace === "gentle") return `${meet}, two at a time, with easy questions to start.`;
-  if (pace === "standard") return `${meet}, then a steady climb from picking to naming from memory.`;
+// the line under the pace chips: what Study will do with these colors. Every pace but Test me opens with an
+// overview (David, 2026-10-09): new colors get the full Meet, review colors (already met: "to recall") get a fast
+// Quick look, and this line says so, even when the whole set is review and there's nothing new to meet.
+function lsPaceSay(pace, nNew, total = nNew) {
+  const nReview = Math.max(0, total - nNew);
+  const meet = nNew ? `meets the ${nNew === 1 ? "new one" : `${nNew} new ones`} first` : "";
+  const lead = pace === "test" ? (nNew ? `Meets the ${nNew === 1 ? "new one" : `${nNew} new ones`} first` : "Nothing new to meet")
+    : nReview && nNew ? `A quick look at the rest, then ${meet}`
+    : nReview ? "A quick look, then"
+    : `Meets the ${nNew === 1 ? "new one" : `${nNew} new ones`} first`;
+  if (pace === "gentle") return `${lead}, two at a time, with easy questions to start.`;
+  if (pace === "standard") return `${lead}, then a steady climb from picking to naming from memory.`;
   if (pace === "test") return "No looking first: straight to finding and naming.";
-  return `${meet}, then questions that keep up with you.`;
+  return `${lead}, then questions that keep up with you.`;
 }
 // a hex's label: one line when it fits, else two balanced lines, sized so the longest line fits the hex (about 0.9 wide)
 function lsHexLabel(name, x, y, fill) {
@@ -327,7 +346,11 @@ function lsLook(items, o = {}) {
   const paint = () => {
     el.querySelectorAll("[data-view]").forEach(b => { const on = b.dataset.view === view; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
     body.innerHTML = R[view](); body.dataset.view = view;
-    const bm = body.querySelector("[data-bigmap]"); if (bm) bm.onclick = () => csOnMap(colorSet({ kind: "learn", id: lsHexes(items), title: o.label || "", colors: items.map(it => ({ h: it.h, n: it.n })) }));
+    // David, 2026-10-09: a map selection is a mode inside the real map (mapSelect, js/home.js), not a separate
+    // view; its "Study these" calls studyColors() (above). Falls back to the plain map light-up until it ships.
+    const bm = body.querySelector("[data-bigmap]"); if (bm) bm.onclick = () => typeof mapSelect === "function"
+      ? mapSelect({ title: o.label || "", colors: items.map(it => ({ h: it.h, n: it.n })), source: "learn" })
+      : csOnMap(colorSet({ kind: "learn", id: lsHexes(items), title: o.label || "", colors: items.map(it => ({ h: it.h, n: it.n })) }));
   };
   el.querySelector(".ls-views").onclick = e => { const b = e.target.closest("[data-view]"); if (!b || b.dataset.view === view) return; view = b.dataset.view; ls.view = view; save(); buzz(4); paint(); };
   body.addEventListener("click", e => {
@@ -402,11 +425,24 @@ function lsPairHTML(a, b, why) {
     <p class="ls-meet-line"><span>${esc(prDiff(a, b))}</span></p>
     <div class="pr-foot">${prPrimary("Next", "", "data-meetnext")}</div></div>`;
 }
+// The overview's "Quick look" card, for a color you've already met: full-bleed, its name, gone in a blink (David,
+// 2026-10-09: Study used to skip straight to questions when nothing new needed meeting — "it should first do an
+// overview, then quiz"). Auto-advances (runStory below); the last one gets a Start button like a Meet card does.
+function lsQuickHTML(it, isLast) {
+  const dark = ink(it.h) === "dark" ? "#141311" : "#fff", nm = prName(it);
+  return `<div class="pr-step ls-meet ls-quick">
+    <div class="ls-meet-sw" style="--c:${it.h};color:${dark}">
+      <span class="ls-meet-tag">Quick look</span>
+      <span class="ls-meet-name"><b class="ls-meet-n" style="${prFit(nm, 56)}">${esc(nm)}</b><span class="pr-code">${it.h}</span></span>
+    </div>
+    <p class="ls-meet-line"></p>
+    ${isLast ? `<div class="pr-foot">${prPrimary("Start", "", "data-meetnext")}</div>` : ""}</div>`;
+}
 function lsStudy(items, o = {}, resume = null) {
   if (!items.length) return;
-  const ls = lsState(), n = items.length;
+  const ls = lsState(), n = items.length, studyPace = o.pace || ls.pace || "you";
   const sess = prSession("learn", { dir: "f" }, items, { deckAll: items, label: o.label || "" });
-  const P = lsPlan(items, { pace: o.pace || ls.pace || "you", typing: ls.typing === true, quick: o.quick, looked: o.looked, groups: o.groups }, resume), lvOf = P.qs;
+  const P = lsPlan(items, { pace: studyPace, typing: ls.typing === true, quick: o.quick, looked: o.looked, groups: o.groups }, resume), lvOf = P.qs;
   let combo = 0, bestCombo = 0, climbed = [...lvOf.values()].filter(lsUp).length, boss = null, meeting = null, aside = 0;
   const keep = () => lsKeep(sess, items, o, lvOf);
   // screenshot states (#lsshot=study:…): start mid-session
@@ -467,30 +503,44 @@ function lsStudy(items, o = {}, resume = null) {
   // card's own controls (the name button, the Next/Start button) still work exactly where they're drawn. The same
   // beat-before-live guard as before stops a fast double tap from skipping a card unseen.
   const lsCardHTML = (a, isLast) => a.t === "pair" ? lsPairHTML(a.a.it, a.b.it, a.why)
+    : a.t === "quick" ? lsQuickHTML(a.it, isLast)
     : lsMeetHTML(a.q.it, a.t === "relook" && a.q.pick && a.q.pick.h !== a.q.it.h ? a.q.pick : nearestIn(a.q.it),
         { again: a.t === "relook", tag: pinKeys.size ? (pinKeys.has(a.q.it.key) ? "In your set" : "Look-alike") : "", label: a.t === "relook" ? "Got it" : isLast ? "Start" : "Next" });
-  const runStory = run => new Promise(resolve => {
+  // opts.skippable: a "Skip" control that jumps straight to the end of this run (the whole Quick look, not just one
+  // card) — swipe-to-skip-one and tap-to-skip-all both hold while recall-before-reveal still does: a question's
+  // answer is never on screen before you've answered it; a Quick look only ever shows a name, never a question.
+  const runStory = (run, opts = {}) => new Promise(resolve => {
     const total = run.length, shown = new Set();
-    let i = 0, live = false, down = null;
-    const finish = () => { stage.onpointerdown = stage.onpointerup = null; delete stage._lsStory; buzz(6); resolve(); };
+    let i = 0, live = false, down = null, autoT = null;
+    const clearAuto = () => { if (autoT) { clearTimeout(autoT); autoT = null; } };
+    const finish = () => { clearAuto(); stage.onpointerdown = stage.onpointerup = null; delete stage._lsStory; buzz(6); resolve(); };
     const renderAt = idx => {
+      clearAuto();
       i = idx; live = false;
-      const a = run[i], it = a.t === "pair" ? a.a.it : a.q.it;
+      const a = run[i], it = a.t === "pair" ? a.a.it : a.t === "quick" ? a.it : a.q.it;
       meeting = a.t !== "pair" ? { i: a.i, of: a.of } : null; status();
       if (!shown.has(i)) {
         shown.add(i);
         if (a.t === "meet" && a.i === 1 && a.wave > 0) pop(a.of === 1 ? "One more to meet" : `${a.of} more to meet`, "round");
         lsSfx("sfxColor", it.h);
       }
-      stage.innerHTML = `<div class="ls-story-bars" data-bars>${run.map(() => "<i></i>").join("")}</div>` + lsCardHTML(a, i === total - 1);
+      const skip = opts.skippable ? `<button class="pr-text ls-skip" data-skip-look>Skip</button>` : "";
+      stage.innerHTML = `<div class="ls-story-bars" data-bars>${run.map(() => "<i></i>").join("")}</div>${skip}` + lsCardHTML(a, i === total - 1);
       stage.querySelectorAll("[data-bars] i").forEach((seg, k) => { seg.classList.toggle("done", k < i); seg.classList.toggle("on", k === i); });
+      const sk = stage.querySelector("[data-skip-look]"); if (sk) sk.onclick = () => finish();
       const b = stage.querySelector("[data-meetnext]");
-      // the button takes taps after a beat: the second tap of a quick double tap is dropped, not spent on this card
-      later(() => { if (!b.isConnected) return; live = true; prNextBtn(b.parentElement, next, b.querySelector("span").textContent).setAttribute("data-meetnext", ""); }, 280);
+      // the button (when there is one) takes taps after a beat: the second tap of a quick double tap is dropped
+      later(() => {
+        if (!stage.isConnected) return;
+        live = true;
+        if (b) prNextBtn(b.parentElement, next, b.querySelector("span").textContent).setAttribute("data-meetnext", "");
+        // a Quick look card with no Start button moves on by itself, fast (reduceMotion: almost instant)
+        else if (a.t === "quick") autoT = setTimeout(() => { if (live) next(); }, reduceMotion ? 450 : 1150);
+      }, 280);
       coachDone();
     };
-    const next = () => { if (i < total - 1) renderAt(i + 1); else finish(); };
-    const prev = () => { if (i > 0) renderAt(i - 1); };
+    const next = () => { clearAuto(); if (i < total - 1) renderAt(i + 1); else finish(); };
+    const prev = () => { clearAuto(); if (i > 0) renderAt(i - 1); };
     setKey(e => {
       if (!live) return;
       if (["Enter", " ", "ArrowRight"].includes(e.key)) { e.preventDefault(); next(); }
@@ -499,7 +549,7 @@ function lsStudy(items, o = {}, resume = null) {
     const onDown = e => { const p = e.changedTouches ? e.changedTouches[0] : e; down = { x: p.clientX, y: p.clientY }; };
     const onUp = e => {
       if (!down || !live) { down = null; return; }
-      if (e.target.closest("[data-swatch],[data-meetnext]")) { down = null; return; }   // the real controls behave normally
+      if (e.target.closest("[data-swatch],[data-meetnext],[data-skip-look]")) { down = null; return; }   // the real controls behave normally
       const p = e.changedTouches ? e.changedTouches[0] : e, dx = p.clientX - down.x, dy = p.clientY - down.y;
       down = null;
       if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) return void (dx < 0 ? next() : prev());   // a clean swipe
@@ -532,6 +582,18 @@ function lsStudy(items, o = {}, resume = null) {
   };
   (async () => {
     status();
+    // Every session starts with an overview of its set, always (David, 2026-10-09): colors new to this set get the
+    // full Meet story as each wave is introduced below; colors already met (every review, "to recall") get a fast
+    // Quick look here, up front, so a session that's all review still opens with a look before the first question.
+    // Test me skips it (no looking first); resuming a stopped session or starting straight from Look (o.looked)
+    // skips it too, since you've just seen them. Recall-before-reveal still holds: a Quick look only ever names a
+    // color, never shows a question's answer before the attempt is done.
+    if (!resume && !o.looked && studyPace !== "test" && P.fresh.length) {
+      const quickRun = P.fresh.map((q, i) => ({ t: "quick", it: q.it, i: i + 1, of: P.fresh.length }));
+      await runStory(quickRun, { skippable: true });
+      if (sess.ended || !stage.isConnected) return;
+      meeting = null; status(); coachDone();
+    }
     let pendingSet = false, pendingVal = null;
     while (!sess.ended) {
       let a;
@@ -561,9 +623,19 @@ function lsStudy(items, o = {}, resume = null) {
         bump(res.ok); status(); coachDone();
         continue;
       }
+      if (a.t === "sort") {
+        const set = prShuffle(a.qs);
+        pop("Now: light to dark", "round"); buzz(8); lsSfx("sfx", "rooms", 4);
+        const res = await PR_STEPS.sort.render(stage, set.map(q => q.it), ctx({}));
+        if (sess.ended || !stage.isConnected) return;
+        (res.per || []).forEach(p => { const q = lvOf.get(p.item.key); try { prRecord(sess, p.item, { ok: p.ok, answer: p.answer, ms: res.ms / set.length }, "sort"); } catch (err) { console.error(err); } answer(q, p.ok); });
+        try { keep(); } catch (err) { console.error("Study keep failed", err); }
+        bump(res.ok); status(); coachDone();
+        continue;
+      }
       const q = a.q, kind = a.kind;
       stage._lsIt = q.it;   // test hook
-      const wrong = kind === "echo" ? farOpts(q.it, 1) : kind === "spot" ? spotOpts(q.it, a.opts) : kind === "recall" ? recallOpts(q.it, a.opts) : kind === "edge" ? null
+      const wrong = kind === "echo" ? farOpts(q.it, 1) : kind === "spot" ? spotOpts(q.it, a.opts) : kind === "recall" ? recallOpts(q.it, a.opts) : kind === "edge" || kind === "gradient" ? null
         : a.far ? farOpts(q.it, kind === "quiz-color" ? 3 : a.opts) : groupOpts(q.it, kind);
       // a step that throws, or bookkeeping that throws, must never leave the screen frozen on Next: log it, move on
       let res;

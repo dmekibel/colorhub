@@ -1,58 +1,17 @@
 "use strict";
 // Shared design components (lane L12, DESIGN-SYSTEM.md + design/GENIUS-PANEL-1.md "L12 · Design lead").
 // The organizing idea: ColorHub is one map of all color, which you light up by learning to name and see it.
-// Four small pieces every screen gets for free, with no per-screen wiring:
-//   1. The relation mark: one tiny mark for your relation to a color, the same everywhere (like a checkmark).
-//   2. The squint key: one value-only toggle on every image and palette, so seeing value becomes a habit.
-//   3. The lesson-complete moment: plates settle in, one "done" haptic.
-//   4. Fly to the map: at lesson complete, each new color flies to its spot on the honeycomb and lights it.
-// All four read the DOM after it renders (one debounced MutationObserver), so other lanes' screens pick them up
-// by markup alone: [data-swatch] / [data-rel-hex] chips get the mark, [data-squint] containers get the key.
+// Three small pieces every screen gets for free, with no per-screen wiring:
+//   1. The squint key: one value-only toggle on every image and palette, so seeing value becomes a habit.
+//   2. The lesson-complete moment: plates settle in, one "done" haptic.
+//   3. Fly to the map: at lesson complete, each new color flies to its spot on the honeycomb and lights it.
+// All three read the DOM after it renders (one debounced MutationObserver), so other lanes' screens pick them up
+// by markup alone: [data-squint] containers get the key.
+// (The relation-mark dot that used to live here was removed app-wide outside the Learn lane, David 2026-10-09 —
+// it never decorated Learn's own screens, which show "met"/"yours"/"confused" through words or arHexHTML's
+// fill/outline/dim instead.)
 
-// ---------------------------------------------------------------- 1. the relation mark
-// States:
-//   "" unmet (no mark) · "met" an outline ring · "yours" a solid corner disc (confirmed by a check, never a
-//   self-graded swipe alone) · "confused" a half disc (you mixed it up with a neighbor). Pairs you confuse get a
-//   hairline thread drawn between their chips by .rel-thread (CSS), wherever a screen shows the two together.
-let REL_BYHEX = null;
-function relColorOf(hex) {
-  if (!hex) return null;
-  if (!REL_BYHEX) { REL_BYHEX = new Map(); (typeof ALL !== "undefined" ? ALL : []).forEach(c => REL_BYHEX.set(c.h.toUpperCase(), c)); }
-  return REL_BYHEX.get(String(hex).trim().toUpperCase()) || null;
-}
-// js/learner.js owns the state (relMark(color) -> "" | "met" | "yours" | "confused"); this only draws it.
-// Without the Learner Model, S.cards decides: Yours only once confirmed by a check.
-function relState(cOrHex) {
-  const c = typeof cOrHex === "string" ? (relColorOf(cOrHex) || { h: cOrHex }) : cOrHex;
-  if (!c) return "";
-  if (typeof relMark === "function") { try { return relMark(c) || ""; } catch (e) {} }
-  const app = c.id ? c : relColorOf(c.h), st = app && S && S.cards && S.cards[app.id];
-  if (!st) return "";
-  return typeof isMine === "function" && isMine(st) ? "yours" : "met";
-}
-const REL_SEL = "[data-swatch], [data-rel-hex], .lk-row > i, .cp-near > i, .hc-cap > i";
-function relHexOf(el) {
-  return el.dataset.relHex || el.dataset.swatch || (el.parentElement && el.parentElement.dataset.h) || el.style.getPropertyValue("--c") || "";
-}
-function relDecorate(root) {
-  if (document.documentElement.classList.contains("booth")) return;   // judged screens: nothing on or near a swatch
-  root.querySelectorAll(REL_SEL).forEach(row => {
-    if (row.closest(".deck,.drill,.station,.meet,.daily,.pk-board")) return;
-    // a whole list row that carries data-swatch: the mark goes on the row's own chip, not floating at its corner
-    const el = row.offsetWidth > 160 && row.querySelector(":scope > i, :scope > span > i") || row;
-    const s = relState(relHexOf(row));
-    if ((el.dataset.rel || "") === s) return;
-    if (!s) { delete el.dataset.rel; return; }
-    if (el.dataset.rel == null) {   // first time: never take over an ::after the chip already draws
-      const a = getComputedStyle(el, "::after").content;
-      if (a && a !== "none" && a !== "normal") return;
-    }
-    if (getComputedStyle(el).position === "static") el.style.position = "relative";
-    el.dataset.rel = s;
-  });
-}
-
-// ---------------------------------------------------------------- 2. the squint key
+// ---------------------------------------------------------------- 1. the squint key
 // One toggle, app-wide and remembered for the session: the whole page goes value-only (images through a
 // per-pixel L* pass, since CSS grayscale() isn't perceptual; swatches to the neutral grey of the same L*).
 // Turning it off restores every original. Images that can't be read (no CORS) fall back to CSS grayscale.
@@ -122,7 +81,7 @@ function sqDecorate(root) {
   if (SQUINT) sqApply(root);
 }
 
-// ---------------------------------------------------------------- 3. the lesson-complete moment
+// ---------------------------------------------------------------- 2. the lesson-complete moment
 // The done screens (Learn it's .lt-done-pal, a unit's .result chips, and anything marked [data-done-moment])
 // settle in with the CSS cascade in css/polish.css; this adds the one "done" haptic (DESIGN-SYSTEM §9: 10·30·20).
 function doneMoment(root) {
@@ -132,7 +91,7 @@ function doneMoment(root) {
   setTimeout(() => buzz([10, 30, 20]), reduceMotion ? 0 : 520);
 }
 
-// ---------------------------------------------------------------- 4. fly to the map
+// ---------------------------------------------------------------- 3. fly to the map
 // flyToMap(colors, sources?): the Journey (and any lesson) calls this at lesson complete. Home (the map) takes
 // over; each new color leaves its source chip (or the bottom of the screen) and flies, one after another, to its
 // own bubble on the honeycomb, which lights with a soft ring. Over weeks the map visibly fills.
@@ -188,7 +147,6 @@ let POLISH_RAF = 0;
 function polishPass() {
   POLISH_RAF = 0;
   const root = document.body;
-  try { relDecorate(root); } catch (e) {}
   try { sqDecorate(root); } catch (e) {}
   try { doneMoment(root); } catch (e) {}
 }

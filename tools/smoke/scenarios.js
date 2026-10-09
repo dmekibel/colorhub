@@ -469,18 +469,34 @@ scenario("learn", "Study on the Learn room opens the Study sheet then meets the 
   if (!t.$(".ls-res")) t.notes.push("last: " + log.slice(-6).join(",") + " · " + (t.$(".ls-study .pr-stage .pr-step") || {}).className);
   await t.waitFor(".ls-res", 8000, "the Study results");
 });
-scenario("learn", "due reviews come first in Study and are asked from memory before anything new is met", async t => {
+scenario("learn", "due reviews get a Quick look overview, then are asked from memory before anything new is met", async t => {
   await lrReal(t, "#shot=learn", "Object.values(S.cards).slice(0, 3).forEach(c => { c.due = addDays(today(), -1); });");
   await t.waitFor(".room-learn [data-study]", 6000, "the Learn room");
   t.expect(/to recall/i.test(t.text(".lh-hero-t")), `the headline says "${t.text(".lh-hero-t")}"`);
   await t.click(".room-learn [data-study]", { wait: 600 });
   await t.waitFor(".ls-sheet", 6000, "the Study sheet");
   t.expect(/to recall/.test(t.text(".ls-sheet [data-why]")), `the sheet says what's due ("${t.text(".ls-sheet [data-why]")}")`);
+  t.expect(/quick look/i.test(t.text(".ls-sheet [data-pacesay]")), `the sheet says there's an overview first ("${t.text(".ls-sheet [data-pacesay]")}")`);
   await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
-  await t.waitFor(".ls-study .pr-step", 6000, "the first step");
-  t.expect(!t.$(".ls-study .ls-meet") && !t.$(".ls-study .ls-story-bars"), "a due review was shown before it was asked");
+  // David, 2026-10-09: "it should first do an overview, then quiz" — even an all-review set opens with a Quick
+  // look (every session does), and only then moves into the questions.
+  await t.waitFor(".ls-study .ls-story-bars", 6000, "the Quick look overview");
+  t.expect(t.$(".ls-study .ls-quick"), "the overview card is a Quick look, not a question");
+  for (let i = 0; i < 10 && t.$(".ls-study .ls-story-bars"); i++) { t.ev(LS_SOLVE); await t.sleep(260); }
+  await t.waitFor(".ls-study .pr-step", 6000, "the first question, after the overview");
+  t.expect(!t.$(".ls-study .ls-meet") && !t.$(".ls-study .ls-story-bars"), "the overview ended before the first question");
   const due = t.ev("dueList().map(c => c.n.toLowerCase())"), first = t.ev("(() => { const s = document.querySelector('.ls-study .pr-stage'); return s._lsIt ? s._lsIt.key : ''; })()");
   t.expect(due.includes(first), `the first question is a due review (${first})`);
+});
+scenario("learn", "Test me skips the overview, straight to questions", async t => {
+  await lrReal(t, "#shot=learn", "Object.values(S.cards).slice(0, 3).forEach(c => { c.due = addDays(today(), -1); });");
+  await t.waitFor(".room-learn [data-study]", 6000, "the Learn room");
+  await t.click(".room-learn [data-study]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 6000, "the Study sheet");
+  await t.click('.ls-sheet [data-pace="test"]', { wait: 300 });
+  await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
+  await t.waitFor(".ls-study .pr-step", 6000, "the first step");
+  t.expect(!t.$(".ls-study .ls-story-bars"), "Test me opens straight on a question, no overview");
 });
 
 // ================================================================== THE DAILIES (js/challenge.js, js/colordle.js)
@@ -988,10 +1004,21 @@ scenario("home", "Study corner opens the instant deck seeded with the middle col
   t.expect(/Learn/.test(t.$("[data-qtitle]").textContent), "the sheet title");
   t.expect(t.$$(".pr-quick .pr-plate i").length >= 5, "the deck plate");
 });
+// David, 2026-10-09: "pressing the recall / study button takes you straight into flashcards" — the map's
+// Recall row (and the You page's recall card, below) must open the one Study flow, never js/learn.js's old
+// swipe deck (.deck) directly.
+scenario("home", "the map's Recall opens the one Study flow, not the old swipe deck", async t => {
+  await H.homeReady(t);
+  t.ev("Object.values(S.cards).slice(0, 2).forEach(c => { c.due = addDays(today(), -1); }); save();");
+  await H.menu(t, "recall");
+  await t.waitFor(".ls-sheet, .ls-study", 6000, "the Study sheet or session from Recall");
+  t.expect(!t.$(".deck"), "Recall did not open the old swipe deck directly");
+});
 
 // ================================================================== LEARN A SET (js/learnset.js)
 const LS_SOLVE = `(() => {
   const st = document.querySelector('.ls-study .pr-stage'); if (!st) return 'gone';
+  const skip = st.querySelector('[data-skip-look]'); if (skip) { skip.click(); return 'skiplook'; }
   const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
   const nx = st.querySelector('[data-next]'); if (nx) { nx.click(); return 'next'; }
   const it = st._lsIt, nm = it ? prName(it) : '';
@@ -1000,6 +1027,8 @@ const LS_SOLVE = `(() => {
     const k = tiles.findIndex((t, i) => !t.sw && !btns[i].classList.contains('gone')); if (k < 0) return 'wait';
     const j = tiles.findIndex(t => t.sw && t.i === tiles[k].i); btns[k].click(); btns[j].click(); return 'match';
   }
+  if (st.querySelector('.pr-s-sort')) { const chk = st.querySelector('[data-check]'); if (chk) { chk.click(); return 'sort'; } return 'wait'; }
+  if (st.querySelector('.pr-s-gradient') && st._prChoose) { st._prChoose(.5); return 'gradient'; }
   if (st.querySelector('.pr-s-odd')) { st._prChoose(st._prOpts.findIndex(o => !o.same)); return 'odd'; }
   if (st.querySelector('.pr-s-edge') && st._prEdge) { st._prChoose(st._prEdge.last); return 'edge'; }
   if (st.querySelector('.pr-s-quiz')) { st._prChoose([...st.querySelectorAll('.pr-opt')].findIndex(b => b.textContent.trim() === nm)); return 'qn'; }
@@ -1073,6 +1102,26 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   t.expect(t.ev("Object.values(S.cards).filter(c => c.from && c.due > today()).length") >= 1, "the Study colors are in spaced review");
   await t.click(".ls-res [data-a=look]", { wait: 500 });
   await t.waitFor(".ls-lookscr", 4000, "Look again from the results");
+});
+// Sort (light to dark, drag into order) and Gradient (place it on a strip between two neighbors) — the two
+// formats design/LEARN-ROOM-2.md §Formats lists as missing. Test me starts every color at the "tell apart" rung
+// (lv 2), where both live, so a longer session at that pace gives them a fair chance to come up without relying
+// on the natural climb. Their results feed S.eye, not the naming log (js/studyformats.js sfEyeLog).
+scenario("learnset", "Study: Sort and Gradient come up in a longer session and feed the eye profile, not the naming log", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  await t.click("[data-learnit]", { wait: 600 });
+  await t.waitFor(".ls-sheet", 4000, "Learn it opens the Learn sheet directly");
+  t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(10); })()");
+  await t.click('.ls-sheet [data-pace="test"]', { wait: 300 });
+  const eyeBefore = t.ev("Array.isArray(S.eye) ? S.eye.length : 0");
+  await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
+  const kinds = new Set();
+  for (let i = 0; i < 260 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); kinds.add(k); await t.sleep(k === "wait" ? 250 : 220); }
+  t.notes.push("kinds: " + [...kinds].join(","));
+  t.expect(kinds.has("sort") || kinds.has("gradient"), `neither Sort nor Gradient showed up in a 10-color test-me session (${[...kinds].join(",")})`);
+  const eyeAfter = t.ev("Array.isArray(S.eye) ? S.eye.length : 0");
+  if (kinds.has("sort") || kinds.has("gradient")) t.expect(eyeAfter > eyeBefore, `S.eye grew (${eyeBefore} -> ${eyeAfter})`);
 });
 // Lane E (David, 2026-10-09): Learn it opens the Learn sheet with its settings showing (size, closeness, neighbors,
 // pace, Look vs Study), seeded with the color + its 3 nearest (the old quick mode's shape) — not straight into
@@ -2385,6 +2434,15 @@ scenario("you-coverage", "You: a favorite painting, long mix-up names and hearte
   t.expect(sw <= cw, `the You page scrolls horizontally: scrollWidth ${sw} > clientWidth ${cw}`);
   const screen = t.$(".screen.you-page");
   t.expect(screen.getBoundingClientRect().width <= cw + 1, `the You page's own screen is ${Math.round(screen.getBoundingClientRect().width)}px wide, wider than the ${cw}px viewport`);
+});
+
+scenario("you-coverage", "You: the recall card opens the one Study flow, not the old swipe deck", async t => {
+  await t.open("#shot=you", { settle: 600 });
+  t.ev("Object.values(S.cards).slice(0, 2).forEach(c => { c.due = addDays(today(), -1); }); save(); youPage();");
+  await t.sleep(300);
+  await t.click('[data-ym="recall"]', { wait: 600 });
+  await t.waitFor(".ls-sheet, .ls-study", 6000, "the Study sheet or session from the recall card");
+  t.expect(!t.$(".deck"), "the recall card did not open the old swipe deck directly");
 });
 
 // ================================================================== THE PAINTING PAGE + NAME IT / FIND IT (PLAN.md lane A)
