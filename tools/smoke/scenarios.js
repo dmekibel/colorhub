@@ -5391,3 +5391,90 @@ scenario("trail", "a gesture interrupted mid-drag by a native back swipe leaves 
   t.expect(t.bodyOverlayLeaks().length === 0, `a body-level overlay survived the interrupted gesture: ${t.bodyOverlayLeaks().join(", ")}`);
   t.expect(!t.$(".tlg-floor"), "the destination floor was left behind by the interrupted drag");
 });
+
+// ================================================================== DESIGN OBJECTS (js/designobjects.js, Archives lane)
+// The World door for posters/textiles/ceramics/etc., 1800-1979 -- room (shelves per category), a category grid
+// (facet chips, reusing pulp.js's own filter pattern), an object's own page (paintingPage reused, plus the
+// 3-6 color-count control and the maker byline this lane adds to it) and a maker page.
+scenario("design", "the room opens with shelves and at least one object image", async t => {
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the Design objects room");
+  t.expect(/Design objects/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor(".do-shelf-item", 12000, "at least one category shelf item");
+  const imgs = t.$$(".do-shelf-item img").filter(im => im.getAttribute("src"));
+  t.expect(imgs.length > 0, "no shelf item has an image src");
+});
+scenario("design", "a shelf item opens the object page with facts, palette and a maker/credit line", async t => {
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor(".do-shelf-item", 12000, "a shelf item");
+  const before = t.text(".p-title");
+  await t.click(t.$$(".do-shelf-item")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the object page to open");
+  await t.waitFor(".palette .pal", 8000, "the object's palette");
+  t.expect(t.$(".facts"), "no maker/date/category facts row on the object page");
+  t.expect(t.$(".p-dek") && t.text(".p-dek").trim().length > 0, "the object page has no byline");
+});
+scenario("design", "the category grid filters by decade", async t => {
+  await t.open("#/design/cat/poster", { settle: 900 });
+  await t.waitFor(".p-title", 12000, "the poster category page");
+  await t.waitFor("#doCatChips [data-df]", 10000, "decade/maker chips");
+  const decadeChip = t.$$('#doCatChips [data-df="decade"]')[1];
+  t.expect(decadeChip, "no specific decade chip rendered");
+  const beforeCount = (t.$$("#doCatFeed .pin") || []).length;
+  await t.click(decadeChip, { wait: 500 });
+  await t.waitFor(() => (t.$$("#doCatFeed .pin") || []).length !== beforeCount || t.$(".fine"), 8000, "the grid to refilter");
+});
+scenario("design", "a maker page lists their objects", async t => {
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor("[data-do-maker]", 12000, "a maker chip on the room page");
+  const before = t.text(".p-title");
+  await t.click(t.$$("[data-do-maker]")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the maker page to open");
+  await t.waitFor(".masonry .pin", 8000, "the maker's objects grid");
+});
+scenario("design", "\"In design objects\" renders on a color page with design-object coverage", async t => {
+  await t.open("#/color/ivory", { settle: 800 });
+  await t.waitFor(".p-title, .cp-page", 12000, "a color page");
+  await t.waitFor(() => /In design objects/.test(t.d.body.innerText), 10000, '"In design objects" section');
+});
+// ================================================================== UKIYO-E PRINTS (js/ukiyoe.js, Archives lane)
+scenario("design", "the ukiyo-e grid opens with filters and a print opens with facts", async t => {
+  await t.open("#/ukiyoe", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the ukiyo-e room");
+  t.expect(/Ukiyo-e prints/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor("#ukFeed .pin", 12000, "at least one print in the grid");
+  const before = t.text(".p-title");
+  await t.click(t.$$("#ukFeed .pin")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the print page to open");
+  await t.waitFor(".palette .pal", 8000, "the print's palette");
+  t.expect(t.$(".facts"), "no artist/date facts row on the print page");
+});
+scenario("design", "the ukiyo-e grid filters by artist", async t => {
+  await t.open("#/ukiyoe", { settle: 900 });
+  await t.waitFor("#ukChips [data-uf]", 12000, "artist/decade chips");
+  const artistChip = t.$$('#ukChips [data-uf="artist"]')[1];
+  t.expect(artistChip, "no specific artist chip rendered");
+  const beforeCount = (t.$$("#ukFeed .pin") || []).length;
+  await t.click(artistChip, { wait: 500 });
+  await t.waitFor(() => (t.$$("#ukFeed .pin") || []).length !== beforeCount || t.$(".fine"), 8000, "the grid to refilter");
+});
+
+// ================================================================== BOTANICAL & BIRD PLATES (js/botanicalplates.js, Archives lane)
+scenario("design", "the botanical grid opens with bird/plant filters and a plate opens with facts", async t => {
+  await t.open("#/botanical", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the botanical room");
+  t.expect(/Botanical/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor("#bpFeed .pin", 12000, "at least one plate in the grid");
+  const before = t.text(".p-title");
+  await t.click(t.$$("#bpFeed .pin")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the plate page to open");
+  await t.waitFor(".palette .pal", 8000, "the plate's palette");
+});
+scenario("design", "the botanical grid filters birds vs. botanical", async t => {
+  await t.open("#/botanical", { settle: 900 });
+  await t.waitFor("#bpChips [data-bf]", 12000, "kind/decade chips");
+  const birdChip = t.$$('#bpChips [data-bf="kind"][data-bv="bird"]')[0];
+  t.expect(birdChip, "no Birds filter chip rendered");
+  await t.click(birdChip, { wait: 500 });
+  await t.waitFor(() => t.$$("#bpFeed .pin").length > 0 || t.$(".fine"), 8000, "the grid to show only birds");
+});
