@@ -1039,6 +1039,41 @@ scenario("home", "Rooms corner opens the stem; each room bubble navigates", asyn
   await t.waitFor("canvas", 6000, "the honeycomb after Rooms > Home");
 });
 
+// "Colors | Paintings" (David, 2026-10-09: "it should be more prominent... instead of colors you switch to
+// paintings"): a one-tap, remembered switch between the honeycomb of names and the archive's paintings, laid out
+// by palette likeness (js/paintmap.js). The switch itself lives in each screen's own right-corner menu (js/home.js
+// doMenu's "Paintings" row; js/paintmap.js's own arc's "Colors" row) -- "remembered" is deliberately narrow
+// (js/core.js hmGoFloor): only the two places a person taps to deliberately return to the floor (the brand logo,
+// the Rooms corner's Home bubble) honor S.hm.mode, not the many internal hmHome() calls that need the honeycomb's
+// own setup as a side effect (favoriting, color-set filters, practice flows...).
+scenario("home", "Colors | Paintings: the corner-menu switch is bidirectional and remembered at the floor's own doors", async t => {
+  await H.homeReady(t);
+  await H.menu(t, "paintings");
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the painting map to open from Home's menu");
+  t.expect(t.ev("S.hm.mode") === "paintings", "S.hm.mode was not set to paintings");
+  // back the other way: the painting map's own corner arc gets a "Colors" row. The map's own layout can finish
+  // well under 380ms (only its thumbnails are slow), so right after Home's "Paintings" tap closed Home's own
+  // stem (js/core.js STEM_CLOSED_AT/stemJustClosed, a 380ms real-time ghost-click guard shared by both arcs) a
+  // click here can still be inside that window -- a real sleep past it first, same as a person's own next tap would be.
+  await t.sleep(450);
+  await t.click(".pmx-do", { wait: 300 });
+  await t.waitFor('.pmx-stem [data-pmdo="colors"]', 4000, "the Colors row in the painting map's own arc");
+  await t.click('.pmx-stem [data-pmdo="colors"]', { force: true, wait: 900 });
+  await t.waitFor("canvas", 8000, "the honeycomb after Colors");
+  t.expect(t.ev("S.hm.mode") === "colors", "S.hm.mode was not set back to colors");
+  // remembered: set paintings mode, leave the floor for another room, then use the Rooms corner's Home bubble
+  // (not Home's own menu, which only exists once you're already there) -- the real "come back later" path
+  t.ev('S.hm.mode = "paintings"; save();');
+  // a real address, not #shot=learn (which builds its own demo state and ignores localStorage) -- keepState so
+  // the save just written (S.hm.mode) actually carries over to the fresh page
+  await t.open("#/today", { settle: 500, keepState: true });
+  await t.click("[data-rooms-corner]");
+  await t.waitFor('.rooms-stem .rm-bubble[data-room="home"]', 4000, "Home in the stem");
+  await t.click('.rooms-stem .rm-bubble[data-room="home"]', { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "Rooms > Home to remember paintings mode");
+  t.ev('S.hm.mode = "colors"; save();');   // leave state clean for later scenarios
+});
+
 // ================================================================== ROOMS
 for (const [shot, id, label, needs] of [["learn", "learn", "Learn", ".plates, .btn"], ["gym", "gym", "Train", ".r2-g, .gs-tile"], ["explore", "explore", "Explore", ".xp-cover"], ["studio", "studio", "Studio", "[data-wheel]"]]) {
   scenario("rooms", `${label} renders inside the room sheet`, async t => {

@@ -38,6 +38,8 @@ const PM_ICON = {
   arrange: sv('<path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>', 22, 1.6),
   filter: sv('<path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"/>', 22, 1.6),
   down: sv('<path d="M7 10l5 5 5-5"/>', 14, 2),
+  // the "Colors" row back to the honeycomb (David, 2026-10-09): a small cluster of named bubbles
+  colorsMode: sv('<circle cx="7" cy="8" r="3.4"/><circle cx="16" cy="7" r="2.6"/><circle cx="8.5" cy="16" r="2.8"/><circle cx="16.5" cy="15.5" r="2"/>', 22, 1.6),
 };
 let PM_THUMBS = null, PM_THUMBS_P = null;
 const PM_PAN = new Map();     // layout key -> { x, y, s }: where you were, so Back from a painting lands on it again
@@ -680,6 +682,8 @@ function pmMount(el, s, F) {
     const rows = [
       { id: "filter", t: "Filter", n: pmWords(s, F).join(" · ") || "Country, decade, painter, color…", art: PM_ICON.filter },
       ...PM_ARR.map(([k, t]) => ({ id: k, t: k === "similar" ? "Around this one" : t, n: k === "similar" ? (md ? md.t : "The painting in the middle") : PM_WHY[k], art: PM_ICON[k], cur: s.arr === k && (k !== "similar" || s.seed === mid) })).reverse(),
+      // "Colors | Paintings" (David, 2026-10-09): back to the honeycomb of names, remembered (js/core.js hmGoFloor)
+      { id: "colors", t: "Colors", n: "The honeycomb of color names", art: PM_ICON.colorsMode },
     ];
     const n = rows.length;
     const scrim = document.createElement("div"); scrim.className = "rm-scrim";
@@ -697,6 +701,7 @@ function pmMount(el, s, F) {
     addEventListener("keydown", STEM_KEY, true);
     stem.querySelectorAll("[data-pmdo]").forEach(b => b.onclick = () => {
       const id = b.dataset.pmdo; buzz(8); closeStem(true);
+      if (id === "colors") { S.hm = S.hm || {}; S.hm.mode = "colors"; save(); return typeof hmHome === "function" ? hmHome() : xBack(); }
       if (id === "filter") return pmFilterSheet(s, F, () => rebuild());
       if (id === "similar") { if (mid < 0) return; s.seed = mid; s.arr = "similar"; return rebuild(); }
       if (s.arr === id) return;

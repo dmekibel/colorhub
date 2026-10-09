@@ -488,9 +488,15 @@ function morphFrom(el) {
   PENDING_MORPH = { r, bg: cs.backgroundColor, radius: cs.borderRadius, img, at: performance.now() };
 }
 document.addEventListener("click", e => { const t = e.target.closest && e.target.closest(MORPH_TRIGGER); if (t && app.contains(t)) morphFrom(t); }, true);
+// "Colors | Paintings" (David, 2026-10-09): one tap, remembered. S.hm.mode persists which the floor shows; the
+// many internal hmHome() calls (favoriting, color-set filters, practice flows, …) all need the honeycomb's own
+// setup as a side effect, so the remembered mode is only honored at the two places a person deliberately taps
+// "take me to the floor" -- the brand logo and the Rooms corner's Home bubble (roomToFloor, below) -- never inside
+// hmHome() itself.
+const hmGoFloor = () => { if (typeof S !== "undefined" && S.hm && S.hm.mode === "paintings" && typeof pmGo === "function") pmGo("arr=color"); else if (typeof hmHome === "function") hmHome(); };
 // The brand button on every tab's header (tabHead, above) is the one consistent way back to the honeycomb
 // home (js/home.js). Delegated here, not wired per screen, so it works from Train, Explore and Studio alike.
-document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-hm-brand]"); if (b && app.contains(b) && typeof hmHome === "function") hmHome(); });
+document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-hm-brand]"); if (b && app.contains(b)) hmGoFloor(); });
 function runMorph(root) {
   const m = PENDING_MORPH; PENDING_MORPH = null;
   // only right after the tap that asked for it, so a stale chip never flies into an unrelated screen
@@ -825,8 +831,8 @@ function shrinkTo(root, targetEl, after) {
 // target — e.g. a swipe-down or a tap on the floor-peek strip), then the floor takes over.
 function roomToFloor(targetEl) {
   const cur = document.querySelector(".room-sheet"), corner = document.querySelector("[data-rooms-corner]");
-  if (cur) shrinkTo(cur, targetEl && targetEl.isConnected ? targetEl : corner, () => hmHome());
-  else hmHome();
+  if (cur) shrinkTo(cur, targetEl && targetEl.isConnected ? targetEl : corner, () => hmGoFloor());
+  else hmGoFloor();
 }
 // Back gesture / browser back: close a sheet or panel first; otherwise press the screen's own back or close
 // button (so each screen keeps its own idea of "back"); with none, return to the current tab's home.
