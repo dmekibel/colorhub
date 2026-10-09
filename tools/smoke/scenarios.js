@@ -1973,6 +1973,35 @@ scenario("home", "View sheet: the picker icon opens Name any color", async t => 
   await t.waitFor(".nmr-hero", 6000, "Name any color from Home");
 });
 
+// David, 2026-10-09: "add a diagnostic HUD... #debug=vb in the URL hash" and "long-press the map's left menu
+// button 3s" (js/core.js vbHud). Both open paths, the listed fields are present, Copy works, and Close removes it.
+scenario("home", "the black-bar diagnostic HUD opens from #debug=vb and from a 3s hold on the left corner", async t => {
+  await H.homeReady(t);
+  t.ev('location.hash = "#debug=vb"'); t.w.dispatchEvent(new t.w.Event("hashchange"));
+  await t.waitFor(".vb-hud", 2000, "the HUD from #debug=vb");
+  const text = t.text(".vb-hud pre");
+  for (const k of ["innerHeight", "outerHeight", "screen.height", "visualViewport.height", "visualViewport.offsetTop", "--vb", "--app-full", "safe-area-inset-bottom", "html.clientHeight", "body.clientHeight", "#app.clientHeight", "canvas CSS height", "standalone()", "bottom-10px element"]) {
+    t.expect(text.includes(k), `the HUD is missing "${k}"`);
+  }
+  await t.click("[data-vb-close]", { wait: 100 });
+  t.expect(!t.$(".vb-hud"), "Close did not remove the HUD");
+  t.ev('location.hash = "#/home"');   // clear #debug=vb so it doesn't re-open on the next hashchange below
+  // the 3s hold: a quick tap must NOT open it (that's the ordinary Rooms-stem toggle)
+  const corner = t.$("[data-rooms-corner]"), r = corner.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  const mk = (type) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: cx, clientY: cy, pointerId: 41, pointerType: "touch", isPrimary: true, view: t.w });
+  corner.dispatchEvent(mk("pointerdown")); corner.dispatchEvent(mk("pointerup"));
+  await t.sleep(100);
+  t.expect(!t.$(".vb-hud"), "a plain tap on the left corner opened the HUD");
+  await t.click("[data-rooms-corner]", { wait: 100 });   // close the stem a plain tap just opened
+  corner.dispatchEvent(mk("pointerdown"));
+  await t.sleep(3200);
+  t.expect(t.$(".vb-hud"), "a 3s hold on the left corner did not open the HUD");
+  corner.dispatchEvent(mk("pointerup"));
+  const copyBtn = t.$("[data-vb-copy]");
+  await t.click(copyBtn, { wait: 50 });
+  t.expect(/Copied/.test(t.text(copyBtn)), "Copy did not confirm");
+});
+
 scenario("studio", "Isolator: guess, reveal alone, hold to see it back, try another", async t => {
   await t.open("#shot=studiopv", { settle: 900 });
   const img = await t.waitFor(() => { const i = t.$(".pv-img img"); return i && i.complete && i.naturalWidth ? i : null; }, 8000, "the photo");

@@ -60,6 +60,68 @@ vbFix(); addEventListener("resize", vbFix); addEventListener("load", vbFix); set
 try { visualViewport && visualViewport.addEventListener("resize", vbFix); } catch (e) {}
  addEventListener("orientationchange", () => setTimeout(vbFix, 300));
 
+// ---------- the black-bar diagnostic HUD (David, 2026-10-09: "since it's only reproducible on a real iPhone
+// Home Screen app, add a diagnostic HUD... Then he can screenshot it when the bar appears and we fix it from
+// facts.") Opens with a 3s long-press on the left Rooms corner, or #debug=vb in the URL hash. A small, opaque,
+// live-updating panel -- every number this chapter's black-bar hunt actually needed, in one place, plus a
+// Copy button so the numbers travel in a screenshot's caption or a message instead of being retyped by hand. ----------
+let vbHudRAF = 0;
+function vbHud() {
+  if (document.querySelector(".vb-hud")) return;
+  const el = document.createElement("div");
+  el.className = "vb-hud";
+  el.innerHTML = '<pre></pre><div class="vb-hud-row"><button data-vb-copy>Copy</button><button data-vb-close>Close</button></div>';
+  document.body.appendChild(el);
+  const pre = el.querySelector("pre");
+  // env(safe-area-inset-bottom), measured the same way vbFix() measures where bottom:0 really lands: a real
+  // fixed probe, not a CSS value read back (which some engines report as 0px outside an actual safe-area context)
+  const probe = document.createElement("div");
+  probe.style.cssText = "position:fixed;left:0;bottom:0;width:1px;height:1px;visibility:hidden;pointer-events:none;padding-bottom:env(safe-area-inset-bottom,0px)";
+  document.documentElement.appendChild(probe);
+  const fields = () => {
+    const vv = window.visualViewport, de = document.documentElement;
+    const safeBottom = probe.getBoundingClientRect().height - 1;
+    const bx = innerWidth / 2, by = innerHeight - 5;
+    const bottomEl = document.elementFromPoint(bx, by);
+    const tag = el => el ? el.tagName.toLowerCase() + (el.className ? "." + String(el.className).trim().split(/\s+/).join(".") : "") : "none";
+    const cv = document.querySelector(".hc-cv");
+    const lines = [
+      ["innerHeight", innerHeight], ["outerHeight", outerHeight], ["screen.height", screen.height],
+      ["visualViewport.height", vv ? vv.height.toFixed(1) : "n/a"], ["visualViewport.offsetTop", vv ? vv.offsetTop.toFixed(1) : "n/a"],
+      ["--vb", getComputedStyle(de).getPropertyValue("--vb").trim() || "(none)"],
+      ["--app-full", getComputedStyle(de).getPropertyValue("--app-full").trim() || "(none)"],
+      ["safe-area-inset-bottom", safeBottom.toFixed(1) + "px"],
+      ["html.clientHeight", de.clientHeight], ["body.clientHeight", document.body.clientHeight],
+      ["#app.clientHeight", (typeof app !== "undefined" && app) ? app.clientHeight : "n/a"],
+      ["canvas CSS height", cv ? cv.getBoundingClientRect().height.toFixed(1) : "(no canvas)"],
+      ["standalone()", typeof standalone === "function" ? standalone() : "n/a"],
+      ["bottom-10px element", tag(bottomEl)],
+    ];
+    pre.textContent = lines.map(([k, v]) => `${k.padEnd(23)}${v}`).join("\n");
+    vbHudRAF = requestAnimationFrame(fields);
+  };
+  fields();
+  el.querySelector("[data-vb-copy]").onclick = () => {
+    try { navigator.clipboard.writeText(pre.textContent).catch(() => {}); } catch (e) {}
+    const b = el.querySelector("[data-vb-copy]"), was = b.textContent; b.textContent = "Copied"; setTimeout(() => { b.textContent = was; }, 900);
+  };
+  el.querySelector("[data-vb-close]").onclick = () => { cancelAnimationFrame(vbHudRAF); probe.remove(); el.remove(); };
+}
+// a 3s hold on the left Rooms corner -- a deliberate, out-of-the-way gesture nothing else on that button uses
+// (a plain tap opens/closes the stem; see js/core.js's own document-level click delegation just below)
+(() => {
+  let timer = 0;
+  const cancel = () => { clearTimeout(timer); timer = 0; };
+  document.addEventListener("pointerdown", e => {
+    const b = e.target.closest && e.target.closest("[data-rooms-corner]"); if (!b) return;
+    timer = setTimeout(() => { vbHud(); }, 3000);
+  }, { passive: true });
+  document.addEventListener("pointerup", cancel, { passive: true });
+  document.addEventListener("pointercancel", cancel, { passive: true });
+})();
+const vbHudFromHash = () => { if (/(^#|[#&])debug=vb(&|$)/.test(location.hash)) vbHud(); };
+vbHudFromHash(); addEventListener("hashchange", vbHudFromHash);
+
 // ---------- color math (CIELAB, D65) ----------
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
 function lab(h) {
