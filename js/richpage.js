@@ -204,7 +204,9 @@ function rpOpenFocus(name, hex, cx, cy) {
   const schedule = () => { clearTimeout(dimT); dimT = setTimeout(() => { dim = true; ov.classList.add("dim"); }, 2000); };
   try { if (navigator.wakeLock && navigator.wakeLock.request) navigator.wakeLock.request("screen").then(w => wakeLock = w).catch(() => {}); } catch (e) {}
   requestAnimationFrame(() => { ov.classList.add("on"); schedule(); });
+  let closed = false;
   const close = () => {
+    if (closed) return; closed = true;
     clearTimeout(dimT); if (wakeLock) { try { wakeLock.release(); } catch (e) {} }
     document.removeEventListener("keydown", onKey2);
     ov.classList.remove("on"); ov.classList.add("closing"); buzz(4);
@@ -213,6 +215,12 @@ function rpOpenFocus(name, hex, cx, cy) {
   };
   const onKey2 = e => { if (e.key === "Escape") close(); };
   document.addEventListener("keydown", onKey2);
+  // lives on <body>, same reason js/richpage.js's own rp-bar and js/paintzoom.js's "Look closer" scrim do (escaping
+  // the screen's own entrance-animation transform to stay viewport-fixed) -- so, same as those, it needs its own
+  // cleanup: without this, swiping back (or any navigation) while the focus view was open left this full-viewport
+  // color fill stuck over whatever page came next (David's "the screen goes black" report, 2026-10-09, was this
+  // same leak class in js/paintzoom.js; this is the sibling overlay that opens from the cover itself).
+  cleanup.push(close);
   let sy = 0, sx = 0, dragging = false;
   ov.addEventListener("pointerdown", e => { sy = e.clientY; sx = e.clientX; dragging = true; });
   ov.addEventListener("pointerup", e => {

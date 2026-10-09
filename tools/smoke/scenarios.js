@@ -2343,10 +2343,44 @@ scenario("paintings", "Look closer on a painting then swiping back (popstate) ne
     const scr = t.$(".screen");
     t.expect(scr && t.w.getComputedStyle(scr).opacity === "1", "the color page came back fully transparent, not visible");
     t.expect(scr && scr.textContent.trim().length > 20, "the color page came back with no content");
+    await t.waitFor(() => t.bodyOverlayLeaks().length === 0, 5000, `a full-viewport overlay leaked from the painting page: ${t.bodyOverlayLeaks().join(", ")}`);
     const sec2 = await t.waitFor("[data-glin]", 8000, "the In paintings section again");
     sec2.scrollIntoView();
     await t.waitFor(() => t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin").length > 0, 15000, "the rail to still show its paintings after Back");
   }
+});
+// The generic guard (David, 2026-10-09): "Look closer" and the cover's own focus view are two screens that both
+// append a full-viewport fixed box straight to <body> (so a screen's entrance-animation transform doesn't clip
+// it) -- the exact shape of bug that left the "Look closer" scrim stuck over the color page above. This checks
+// the shape itself (t.bodyOverlayLeaks(), tools/smoke/harness.js), not the two names already fixed, so a THIRD
+// screen built the same way and missing its cleanup still fails this, not just paintzoom.js and richpage.js.
+scenario("pages", "nothing a screen left on document.body outlives a swipe back -- the focus view included", async t => {
+  // a real pushed entry to pop back to: Home, then an in-app navigation into the color page (same path a tapped
+  // bubble takes) -- opening the color page directly, with nothing before it in this document's history, would
+  // make a lone Back a no-op and prove nothing (the paintings scenario above gets its depth the same way, via
+  // a tap into the painting page instead of straight to a color address)
+  await t.open("#/home", { settle: 800 });
+  t.w.openRoute("#/color/cobalt");
+  await t.waitFor(".cp-hero", 10000, "the color page's cover");
+  // core.js show()'s own .fade-ghost (the outgoing screen's 260ms fade) is WAAPI-driven, which needs the real
+  // clock this virtual-time Chrome only advances while t.tick() is waiting on something -- waitFor already loops
+  // tick()+sleep, which a flat sleep() doesn't
+  await t.waitFor(() => t.bodyOverlayLeaks().length === 0, 5000, `a fresh color page keeps a body-level overlay: ${t.bodyOverlayLeaks().join(", ")}`);
+  // the cover's bare fill, tapped once: js/richpage.js rpOpenFocus takes the color full screen
+  const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();
+  hero.dispatchEvent(new t.w.PointerEvent("pointerup", { bubbles: true, cancelable: true, isPrimary: true, button: 0, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2, view: t.w }));
+  await t.waitFor(".rp-focus", 4000, "the focus view to open");
+  // rpOpenFocus grows it in from a scale(.06) origin via requestAnimationFrame(() => ov.classList.add("on")) and a
+  // CSS transition -- virtual-time Chrome only advances that while something is polling for it (see the .fade-ghost
+  // note above), so wait for the grown size itself rather than a fixed sleep
+  await t.waitFor(() => t.bodyOverlayLeaks().includes("div.rp-focus"), 5000, "the focus view isn't recognized as the full-viewport overlay it is");
+  // swipe back without closing it first -- the exact move that left the "Look closer" scrim stuck in the
+  // paintings scenario above; this lands back on Home, not on the color page itself
+  t.w.history.back();
+  await t.waitFor(() => !t.$(".rp-focus"), 5000, "swiping back while the focus view was open left it on the page");
+  await t.waitFor(() => t.bodyOverlayLeaks().length === 0, 5000, `a body-level overlay leaked past the focus view: ${t.bodyOverlayLeaks().join(", ")}`);
+  const scr = t.$(".screen");
+  t.expect(scr && t.w.getComputedStyle(scr).opacity === "1" && scr.textContent.trim().length > 20, "the screen Back landed on isn't actually visible");
 });
 
 // ================================================================== SET PAGES (js/settray.js, js/setpage.js: a page for every pair and palette)
