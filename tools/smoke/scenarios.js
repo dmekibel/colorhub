@@ -4666,10 +4666,10 @@ scenario("paintmap", "arrange by time and painter and around the middle one then
   }
   const mid = t.w.PM_CTRL.center;
   await t.click(".pmx-do", { wait: 300 });
-  await t.waitFor('.pmx-sheet [data-pmarr="similar"]', 4000, "the Arrange tab's shapes");
-  await t.click('.pmx-sheet [data-pmarr="similar"]', { force: true, wait: 900 });
-  await t.waitFor(() => t.w.PM_CTRL.spec.arr === "similar" && t.w.PM_CTRL.center === mid, 8000, "the painting in the middle to stay there as the seed");
-  t.expect(/arr=similar/.test(t.w.location.hash) && /seed=/.test(t.w.location.hash), `the address doesn't carry the arrangement: ${t.w.location.hash}`);
+  await t.waitFor('.pmx-sheet [data-pmarr="rings"]', 4000, "the Arrange tab's shapes");
+  await t.click('.pmx-sheet [data-pmarr="rings"]', { force: true, wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL.spec.arr === "rings" && t.w.PM_CTRL.center === mid, 8000, "the painting in the middle to stay there as the seed");
+  t.expect(/arr=rings/.test(t.w.location.hash) && /seed=/.test(t.w.location.hash), `the address doesn't carry the arrangement: ${t.w.location.hash}`);
   await t.click('.pmx-sheet [data-tab="filter"]', { wait: 300 });
   await t.waitFor(".pmx-sheet [data-pmcent]", 6000, "the Filter tab's chips");
   const chip = t.$$(".pmx-sheet [data-pmcent]").find(b => !b.disabled && +(b.querySelector("em") || { textContent: "0" }).textContent.replace(/\D/g, "") > 20);
@@ -4699,7 +4699,7 @@ scenario("paintmap", "Place by, Center on, filtering by example, and removable t
   await t.waitFor(() => t.w.PM_CTRL.center !== before || t.w.PM_CTRL.drawn > 0, 4000, "the map to relayout under Main color");
   // Center on: a preset ("Most vivid") seeds "around one painting" without already having that painting centered
   await t.click('.pmx-sheet [data-pmcenterk="vivid"]', { force: true, wait: 700 });
-  t.expect(t.w.PM_CTRL.spec.arr === "similar" && t.w.PM_CTRL.spec.seed >= 0, `Center on (vivid) didn't switch to "around one painting": ${JSON.stringify(t.w.PM_CTRL.spec)}`);
+  t.expect(t.w.PM_CTRL.spec.arr === "rings" && t.w.PM_CTRL.spec.seed >= 0, `Center on (vivid) didn't switch to "around one painting": ${JSON.stringify(t.w.PM_CTRL.spec)}`);
   const seeded = t.w.PM_CTRL.spec.seed;
   await t.click("[data-sheet-close]", { wait: 600 });
   await t.waitFor(() => t.w.PM_CTRL.center === seeded, 6000, "the vivid painting to actually be centered");
@@ -4713,7 +4713,7 @@ scenario("paintmap", "Place by, Center on, filtering by example, and removable t
   const moved = t.w.PM_CTRL.center;
   t.expect(moved >= 0 && moved !== seeded, `By time didn't land on a different painting (still ${moved})`);
   await t.click("[data-pmcenter]", { wait: 700 });
-  t.expect(t.w.PM_CTRL.spec.arr === "similar" && t.w.PM_CTRL.spec.seed === moved, `"Center on this painting" seeded ${JSON.stringify(t.w.PM_CTRL.spec)}, not the one actually centered under By time (${moved})`);
+  t.expect(t.w.PM_CTRL.spec.arr === "rings" && t.w.PM_CTRL.spec.seed === moved, `"Center on this painting" seeded ${JSON.stringify(t.w.PM_CTRL.spec)}, not the one actually centered under By time (${moved})`);
   // filtering by example: the centered painting's own facet chips (painter/country/decade/movement/museum/colors)
   await t.waitFor(".pmx-facets [data-pmfacet]", 4000, "the centered painting's own facet chips");
   const chips = t.$$(".pmx-facets [data-pmfacet]");
@@ -4726,6 +4726,54 @@ scenario("paintmap", "Place by, Center on, filtering by example, and removable t
   const narrowed = t.w.PM_CTRL.count;
   await t.click(t.$(".pmx-chipbar [data-pmxclear]"), { wait: 700 });
   t.expect(t.w.PM_CTRL.count > narrowed, `clearing the top chip didn't widen the map back out (still ${t.w.PM_CTRL.count})`);
+});
+// David, 2026-10-09: the deferred shapes -- Families (by movement, the same shelf-packer as By painter), Tones
+// (Vivid/Light/Muted/Dark, honey.js's own split), and the two seeded shapes Rings (concentric shells) and Spiral
+// (golden-angle phyllotaxis, no seams between ranks) -- both built on the same pmSimilarOrder as the old single
+// "similar" arrangement. Checks each lays out the full count with no overlapping cells (lay.n === the grid's own
+// distinct occupied-cell count) and a real "why" line, plus that Rings and Spiral given the SAME seed place that
+// seed at the SAME cell (both start their order with it) but scatter the rest differently (a real, distinct
+// shape, not a relabeled duplicate).
+scenario("paintmap", "the deferred shapes: Families, Tones, Rings and Spiral all lay out cleanly and distinctly", async t => {
+  await t.open("#/paintings/map?arr=color&co=France", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100, 20000, "the map of France");
+  const n = t.w.PM_CTRL.count;
+  const gridDistinct = () => t.ev(`(() => { const l = PM_CTRL.lay(); const seen = new Set(); let dup = 0; for (let k = 0; k < l.n; k++) { const key = l.x[k] + "," + l.y[k]; if (seen.has(key)) dup++; seen.add(key); } return { n: l.n, dup }; })()`);
+  for (const k of ["families", "tones"]) {
+    await t.click(".pmx-do", { wait: 300 });
+    await t.waitFor(`.pmx-sheet [data-pmarr="${k}"]`, 4000, "the Arrange tab's shapes");
+    await t.click(`.pmx-sheet [data-pmarr="${k}"]`, { force: true, wait: 600 });
+    await t.waitFor(() => t.w.PM_CTRL.spec.arr === k && t.w.PM_CTRL.drawn > 0, 8000, `the ${k} arrangement`);
+    t.expect(t.w.PM_CTRL.count === n, `${k} shows ${t.w.PM_CTRL.count} paintings, not the same ${n}`);
+    t.expect(t.text("[data-pmwhy]").length > 10, `${k}: no line saying what position means`);
+    const g = gridDistinct();
+    t.expect(g.n === n && g.dup === 0, `${k}: ${g.dup} overlapping cell(s) of ${g.n}`);
+    await t.click("[data-sheet-close]", { wait: 600 });
+  }
+  // Tones also gets Place by (its grouping depends on which color decides position, same as color/time)
+  await t.click(".pmx-do", { wait: 300 });
+  await t.waitFor('.pmx-sheet [data-pmarr="tones"]', 4000, "the Arrange tab's shapes");
+  await t.click('.pmx-sheet [data-pmarr="tones"]', { force: true, wait: 600 });
+  t.expect(t.$('.pmx-sheet [data-pmplace]'), "Tones doesn't offer Place by");
+  await t.click("[data-sheet-close]", { wait: 600 });
+  // Rings and Spiral: seed on the middle painting, then compare
+  const mid = t.w.PM_CTRL.center;
+  await t.click(".pmx-do", { wait: 300 });
+  await t.waitFor('.pmx-sheet [data-pmarr="rings"]', 4000, "the Arrange tab's shapes");
+  await t.click('.pmx-sheet [data-pmarr="rings"]', { force: true, wait: 900 });
+  t.expect(t.w.PM_CTRL.spec.arr === "rings" && t.w.PM_CTRL.center === mid, "Rings didn't seed on the middle painting");
+  t.expect(t.text("[data-pmwhy]").length > 10, "rings: no line saying what position means");
+  let g = gridDistinct();
+  t.expect(g.n === n && g.dup === 0, `rings: ${g.dup} overlapping cell(s) of ${g.n}`);
+  const ringXY = t.ev("(() => { const l = PM_CTRL.lay(); return [l.x[0], l.y[0]]; })()");
+  await t.click('.pmx-sheet [data-pmarr="spiral"]', { force: true, wait: 900 });
+  t.expect(t.w.PM_CTRL.spec.arr === "spiral" && t.w.PM_CTRL.spec.seed === t.w.PM_CTRL.center, "Spiral didn't keep the same seed switching from Rings");
+  t.expect(t.text("[data-pmwhy]").length > 10, "spiral: no line saying what position means");
+  g = gridDistinct();
+  t.expect(g.n === n && g.dup === 0, `spiral: ${g.dup} overlapping cell(s) of ${g.n}`);
+  const spiralXY = t.ev("(() => { const l = PM_CTRL.lay(); return [l.x[0], l.y[0]]; })()");
+  t.expect(spiralXY[0] === ringXY[0] && spiralXY[1] === ringXY[1], "Rings and Spiral don't agree on where the seed itself sits (both should start their own order with it)");
+  await t.click("[data-sheet-close]", { wait: 600 });
 });
 // David's screenshot, 2026-10-09: "zooming out doesn't load the stuff" -- only a ~160-cell central disc ever got a
 // thumbnail, however long you waited, because the per-frame candidate list handed to pmImages().want() was capped
