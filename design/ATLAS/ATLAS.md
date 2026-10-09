@@ -254,7 +254,7 @@ For each view: what you see, what your thumb does, and what lands in the first t
 - **Compare:** any two bodies of work, with "Same years" to remove the era confound.
 - **Center on:** reuses the map's ideas: Vivid, Greys, Light, Dark, Most used, Time.
 - **Depth one tap away:** tap a cell → a readout in place (plate, name, share, years, thumbnails); tap a chord → its rule; tap a dot in the arc → the painting.
-- **Rule note for David:** in analysis views, a tap *selects* (it is an instrument: pairing, tracing), and the named plate in the readout opens the color page in one tap. Every other color tap in the app stays "one tap opens". *(Open question: is this exception OK?)*
+- **Tap rule (decided by David, 2026-10-09):** in the Atlas analysis views, tapping a color *selects* it: it lights the color, or builds a pair or chord. The color's name chip (or the named plate in a readout) opens its color page in one tap. Every other color tap in the app stays "one tap opens".
 
 ---
 
@@ -555,4 +555,4 @@ Every lane screenshots each state at 440x956 and 375x812 and gets a fresh-contex
 
 **Still open:**
 - **States** (first-run hint, loading skeleton for the field) are designed in section 11 but only partly built.
-- **The tap-to-select exception** in analysis views is David's call.
+- **Tap-to-select in analysis views:** decided by David, 2026-10-09 (see section 5).
