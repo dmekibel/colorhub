@@ -209,6 +209,12 @@
 .gl-cap.open .gl-cap-t{white-space:normal}
 .gl-cap-t[disabled]{cursor:default;opacity:1}
 .gl-cap .aw-link{flex:none}
+/* a located swatch (tapped on the strip, not its name): an outline plus a quiet ring so it reads as "active"
+   distinctly from the "arrived from" .on state (David's rebuild brief, 2026-10-09) */
+.gl-strip .pal.loc{outline:2px solid var(--ink);outline-offset:-2px;box-shadow:inset 0 0 0 4px rgba(14,13,11,.35)}
+.gl-locate{display:flex;align-items:center;gap:8px;min-height:0;margin:4px 0 2px;font:400 14px/1.4 var(--sans);color:var(--soft)}
+.gl-locate[hidden]{display:none}
+.gl-locate i{width:12px;height:12px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
 .gl-pal-ui .pal-names{margin-top:6px}
 .gl-pal-ui .pal-name i{display:grid;place-items:center;font:500 12px/1 var(--sans);font-style:normal}
 /* markers: each palette color's main places on the painting, numbered like its chip */

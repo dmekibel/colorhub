@@ -1735,9 +1735,9 @@ scenario("paintings", "a painting's On the painting control: numbered Markers th
   await t.click('[data-glw="mark"]', { force: true, wait: 400 });
   const marks = t.$$(".gl-mks .gl-mk:not(.sm)");
   t.expect(marks.length >= 3, `only ${marks.length} numbered markers`);
-  t.expect(t.$$("[data-glswatches] .gl-n").length === t.$$("[data-glswatches] [data-swatch]").length, "the strip chips aren't numbered like the markers");
+  t.expect(t.$$("[data-glswatches] .gl-n").length === t.$$("[data-glswatches] [data-glj]").length, "the strip chips aren't numbered like the markers");
   t.expect(t.ev("S.glWhere") === "mark", "the choice isn't remembered");
-  const hexes = new Set(t.$$("[data-glswatches] [data-swatch]").map(b => b.dataset.swatch));
+  const hexes = new Set(t.$$("[data-glrows] [data-swatch]").map(b => b.dataset.swatch));
   t.expect(marks.every(m => hexes.has(m.dataset.swatch)), "a marker isn't one of the palette's colors");
   await t.click('[data-glw="lit"]', { force: true, wait: 400 });
   t.expect(!t.$(".gl-mks .gl-mk") && t.$("[data-gllitcv]").classList.contains("on"), "Highlight didn't swap the markers for the dimmed painting");
@@ -1759,9 +1759,11 @@ scenario("paintings", "a painting's Analysis: Learn this painting opens a deck o
 scenario("paintings", "a color page says where you met it, and the link reopens that painting", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   const title = t.text(".p-title");
-  const sw = await t.waitFor("[data-glswatches] [data-swatch]", 15000, "a palette swatch on the painting");
+  // the strip tile locates a color on the painting; its name row (same hex) is what opens the color page
+  // (David's rebuild brief, 2026-10-09: "make the swatch tile itself locate, the name link open")
+  const sw = await t.waitFor("[data-glrows] [data-swatch]", 15000, "a palette swatch on the painting");
   await t.click(sw, { force: true, wait: 600 });
-  await t.waitFor(".cp-page", 8000, "the color page after tapping a palette swatch");
+  await t.waitFor(".cp-page", 8000, "the color page after tapping a palette color's name");
   const met = await t.waitFor(".rc-you .rc-met", 8000, 'the "You met it in…" line');
   t.expect(new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(t.text(met)), `the met line "${t.text(met)}" doesn't name "${title}"`);
   const link = t.$(".rc-you [data-rc-met]");
@@ -1981,10 +1983,10 @@ const TRL = {
     await TRL.atHash(t, /^#\/gallery\/\d+/, "the second painting");
     note();
     // 5 + 6. a color in it whose page has a gem: try the palette's colors until one does
-    const nSw = (await t.waitFor(() => t.$$("[data-glswatches] [data-swatch]").length && t.$$("[data-glswatches] [data-swatch]"), 15000, "the painting's palette")).length;
+    const nSw = (await t.waitFor(() => t.$$("[data-glrows] [data-swatch]").length && t.$$("[data-glrows] [data-swatch]"), 15000, "the painting's palette")).length;
     let gem = null;
     for (let i = 0; i < nSw && !gem; i++) {
-      await t.click(t.$$("[data-glswatches] [data-swatch]")[i], { wait: 600 });
+      await t.click(t.$$("[data-glrows] [data-swatch]")[i], { wait: 600 });
       await TRL.atHash(t, /^#\/(color|name)\//, "a color page from the palette");
       gem = await t.waitFor(() => t.$("#app .screen [data-to^='gm:gem:']"), 2500, "a gem", 1500).catch(() => null);
       if (!gem) { await t.click(TRL.screenBack(t), { wait: 500 }); await TRL.atHash(t, /^#\/gallery\//, "back on the second painting"); }
@@ -2319,7 +2321,7 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   await t.waitFor(".pal-name b", 12000, "the palette rows");
   t.expect(!t.$$(".pal-name b").some(b => /^between/i.test(b.textContent)), "a 'between X and Y' is used as a name");
   t.expect(t.$("[data-glswatches] .pal.gl-out"), "the strip doesn't lead with a stands-out color");
-  const L0 = t.ev(`lab(document.querySelector("[data-glswatches] .pal").dataset.swatch)[0]`);
+  const L0 = t.ev(`lab(getComputedStyle(document.querySelector("[data-glswatches] .pal")).getPropertyValue("--c").trim())[0]`);
   t.expect(L0 > 30, `the first chip is a near-black (L* ${Math.round(L0)})`);
   // David, 2026-10-08: the palette is right under the identity block, and both fit one screen so you can change types and sizes.
   // David, 2026-10-09: the identity block (title, painter, date, museum, why it matters) now sits between the pinned
@@ -2330,11 +2332,18 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   t.expect(t.$("[data-glorder]").getBoundingClientRect().top - stripB < 24, "the palette types aren't right under the strip");
   const nTypes = t.$$("[data-glorder] [data-glo]").length;
   t.expect(nTypes >= 5, `only ${nTypes} palette types`);
+  // David's rebuild brief, 2026-10-09: "at most 5 chips, chosen per painting, plus More" -- Shadows may be
+  // behind it, so open More first if it's not one of the five shown
+  if (!t.$('[data-glo="shadows"]')) await t.click("[data-glmore]", { wait: 300 });
+  t.expect(t.$('[data-glo="shadows"]'), "Shadows isn't offered even behind More");
+  // "the count slider only in 'By area'" -- every other type is hidden
   await t.click('[data-glo="shadows"]', { wait: 300 });
+  t.expect(t.$("[data-glslide]").hidden, "the How many colors slider shows outside By area");
+  await t.click('[data-glo="area"]', { wait: 300 });
   const kIn = t.$("[data-glk]");
-  t.expect(kIn && !kIn.closest("[hidden]"), "no How many colors slider on Shadows");
+  t.expect(kIn && !kIn.closest("[hidden]"), "no How many colors slider on By area");
   t.ev(`(() => { const s = document.querySelector("[data-glk]"); s.value = 3; s.dispatchEvent(new Event("input", { bubbles: true })); })()`);
-  t.expect(t.$$("[data-glswatches] [data-swatch]").length === 3, "the slider didn't redraw the palette live");
+  t.expect(t.$$("[data-glswatches] [data-glj]").length === 3, "the slider didn't redraw the palette live");
   await t.click('[data-glo="out"]', { wait: 300 });
   await t.waitFor(() => /You can name \d+ of \d+/.test(t.text(".gl-cov")), 6000, "the coverage line");
   await t.click('[data-glo="area"]', { wait: 300 });
@@ -2614,8 +2623,8 @@ scenario("trail", "Close from color > painting > color: the map as it was, the t
   await t.click(pin, { wait: 600 });
   await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
   t.expect(t.$("#app .screen [data-tl-exit]"), "the painting page has no Close");
-  await t.waitFor(() => t.$$("[data-glswatches] [data-swatch]").length, 15000, "the painting's palette");
-  await t.click(t.$$("[data-glswatches] [data-swatch]")[0], { wait: 600 });
+  await t.waitFor(() => t.$$("[data-glrows] [data-swatch]").length, 15000, "the painting's palette");
+  await t.click(t.$$("[data-glrows] [data-swatch]")[0], { wait: 600 });
   await TRL.atHash(t, /^#\/(color|name)\//, "a color from the painting");
   t.expect(TRL.depth(t) >= 3, `the trail holds ${TRL.depth(t)} pages, expected 3`);
   t.w.scrollTo(0, 0); await t.sleep(200);
