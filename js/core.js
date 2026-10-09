@@ -907,6 +907,12 @@ function unlockScroll() {
 // sheet opens can itself be the trigger for Safari's own layout-vs-visual-viewport recompute that uncovers the
 // real background for a moment. Pass {lock:false} for a non-modal sheet; it never locks or unlocks scroll at all.
 function sheet(html, opts = {}) {
+  // David, 2026-10-09 (the Filter sheet's surface ending short of the real bottom edge, black beneath it): --vb/
+  // --app-full are measured on resize/load/orientationchange, but iOS can quietly recompute the layout-vs-visual
+  // viewport split right as a new fixed-position sheet is inserted, so a stale --vb understates the real strip.
+  // Refresh it synchronously on every open -- cheap (a few getBoundingClientRect calls) and makes the belt-and-
+  // braces box-shadow below (css/menus2.css .sheet) sized off the true, current gap.
+  if (typeof vbFix === "function") try { vbFix(); } catch (e) {}
   const doLock = opts.lock !== false;
   const scrim = document.createElement("div"), sh = document.createElement("div");
   scrim.className = "scrim"; sh.className = "sheet"; sh.setAttribute("role", "dialog");

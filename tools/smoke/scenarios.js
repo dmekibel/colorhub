@@ -378,6 +378,49 @@ scenario("home", "the full-height screen survives an arrangement change in a sta
   t.expect(screenH() >= fullH - 2, `the screen shrank to ${screenH()} after closing Arrange`);
 });
 
+// David's screenshot of the painting map's Filter sheet, 2026-10-09: its dark surface ended ~60pt above the real
+// bottom edge, black beneath it, on a Home Screen app -- the same family of bug as the Arrange black bar above,
+// but this time from --vb going stale between vbFix()'s own trigger events (resize/load/orientationchange) and a
+// sheet actually opening. Two fixes: sheet() (js/core.js) now calls vbFix() itself on every open, and the belt-
+// and-braces box-shadow that paints a sheet's own surface on below its edge (css/menus2.css .sheet) grew from
+// 160px to 320px, well past vbFix's own 120px clamp ceiling. This spoofs standalone+iOS+a 62px screen/innerHeight
+// gap (the same recipe as the scenario above) but WITHOUT calling vbFix() first, opens a plain sheet directly
+// (sheet()'s own mechanism, not a page flow), and checks vbFix() ran as a side effect of opening it.
+scenario("home", "a sheet refreshes --vb itself on open, so a stale gap can't leave black beneath it (standalone)", async t => {
+  await H.homeReady(t);
+  t.ev(`
+    Object.defineProperty(navigator, 'standalone', { value: true, configurable: true });
+    Object.defineProperty(navigator, 'userAgent', { value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15', configurable: true });
+    Object.defineProperty(navigator, 'platform', { value: 'iPhone', configurable: true });
+    Object.defineProperty(screen, 'height', { value: innerHeight + 62, configurable: true });
+    Object.defineProperty(screen, 'width', { value: innerWidth, configurable: true });
+    const realMM = window.matchMedia.bind(window);
+    window.matchMedia = q => q.includes('display-mode: standalone') ? { matches: true, media: q, addListener(){}, removeListener(){} } : realMM(q);
+    document.documentElement.style.setProperty('--vb', '0px'); document.documentElement.style.removeProperty('--app-full');   // force it stale/absent first
+  `);
+  t.expect(t.ev("getComputedStyle(document.documentElement).getPropertyValue('--vb').trim()") === "0px", "test setup: --vb did not start stale");
+  t.ev(`window.__vbTestClose = sheet("<p>t</p>").close`);
+  await t.sleep(80);
+  t.ev("document.querySelectorAll('.sheet').forEach(e => e.getAnimations && e.getAnimations().forEach(a => { try { a.finish(); } catch (er) {} }))");
+  const vb = t.ev("getComputedStyle(document.documentElement).getPropertyValue('--vb').trim()");
+  t.expect(vb === "62px", `opening a sheet did not refresh the stale --vb (got "${vb}", wanted "62px")`);
+  // the design is deliberate (css/menus2.css comment): never shift the sheet's own position by --vb (that once cut
+  // off its last row with no way to scroll to it) -- bottom:0 stays bottom:0, and a solid offset box-shadow paints
+  // the strip below it instead. Confirm both halves: position untouched, and the shadow's spread safely exceeds
+  // the live gap.
+  const sh = t.$(".sheet");
+  t.expect(Math.round(sh.getBoundingClientRect().bottom) === t.ev("innerHeight"), "the sheet's own box shifted position instead of staying at bottom:0");
+  // the trick is a plain Y-OFFSET copy of the sheet's own box (no blur, no spread), painted straight down past
+  // bottom:0 -- WebKit's standalone surface can render a little past what innerHeight reports, which is the one
+  // place this offset, not a blur/spread radius, actually matters. Read the larger shadow's offsetY (the 2nd of
+  // its four length values).
+  const shadow = t.ev("getComputedStyle(document.querySelector('.sheet')).boxShadow");
+  const offY = Math.max(...Array.from(String(shadow).matchAll(/(-?[\d.]+)px (-?[\d.]+)px (-?[\d.]+)px (-?[\d.]+)px/g)).map(m => +m[2]));
+  t.expect(offY >= 120, `the belt-and-braces box-shadow's Y-offset (${offY}px) no longer clears vbFix's 120px clamp ceiling`);
+  t.expect(offY > +vb.replace("px", ""), `the box-shadow's Y-offset (${offY}px) does not exceed the live gap (${vb})`);
+  t.ev("window.__vbTestClose()");
+});
+
 scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close it, a double-tap does", async t => {
   await H.homeReady(t);
   await H.sheet(t, "arrange");
