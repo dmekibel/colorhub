@@ -467,6 +467,29 @@ scenario("home", "Arrange's fit-mode zoom after opening matches the zoom after a
   }
 });
 
+// David, 2026-10-09: "the map doesn't let me zoom out this far -- it always bounces back. Zooming out this far
+// is helpful" (his screenshot: the full disk, ~100% of width, centered, black around it). The ordinary
+// pinch-out floor (zFloor(), js/honey.js) now solves the same "whole layout fits with a margin" per-axis check
+// fit mode uses, not just the old diagonal-circle approximation, which under-shot for anything lopsided. Assert
+// the floor itself is permissive enough: zoomed out to the floor, the drawn bounds should span most of the
+// viewport (not float small the way the old formula under-shot for a tall/narrow or lopsided layout).
+scenario("home", "the ordinary pinch-out floor lets a finite layout zoom out to fill most of the screen", async t => {
+  await H.homeReady(t);
+  const cv = t.$("canvas"), r = cv.getBoundingClientRect();
+  for (const arr of [null, "sunflower", "rings"]) {
+    if (arr) { t.ev(`S.hm.arr = "${arr}"; hmHome();`); await t.sleep(300); }
+    const zmin = t.ev("HM_CTRL.zoomFloor()");
+    t.ev(`HM_CTRL.zoom(${zmin}, false)`);
+    await t.sleep(200);
+    const b = t.ev("HM_CTRL._drawnBounds()");
+    t.expect(b && b.n > 3, `${arr || "map (default)"}: too few drawn cells at the floor to judge (${b && b.n})`);
+    const bw = b.maxX - b.minX, bh = b.maxY - b.minY;
+    const fill = Math.max(bw / b.W, bh / b.Hh);
+    t.expect(fill >= .55, `${arr || "map (default)"}: at the pinch-out floor the layout only fills ${(fill * 100).toFixed(0)}% of the screen (bbox ${bw.toFixed(0)}x${bh.toFixed(0)} of ${b.W}x${b.Hh}), wanted >=55%`);
+    t.notes.push(`${arr || "map (default)"}: floor z=${zmin.toFixed(3)}, fills ${(fill * 100).toFixed(0)}%`);
+  }
+});
+
 // David, 2026-10-09: "after you change views the bottom black bar comes back AND you get stuck and can't pan" --
 // a repro attempt for a stray overlay left over by the Colors/Arrange sheet (a scrim, a wrapper, a second
 // instance from a re-render) eating touches after close. Could not reproduce the DOM-leftover shape of this in
