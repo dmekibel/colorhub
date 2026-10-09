@@ -470,5 +470,11 @@
   .cp-page .cp-hero.cp-hero-full{position:fixed;left:0;top:0;bottom:0;z-index:2;margin:0;width:calc(var(--cp-cover-w) + var(--left));
     height:100dvh;min-height:0;border-radius:0;padding:calc(var(--top) + 16px) 18px 22px calc(18px + var(--left))}
   .cp-page .rp-bar{display:none}
+  /* the name is sized off the viewport's own height now (a vh clamp, not the portrait vw one two rules below),
+     so a short landscape screen (740x360) never has to push the top of the cover's content -- the back button's
+     own row -- above the fold to keep the name and actions anchored at the bottom. cp-hero-foot gets a scroll
+     of last resort on top of that, for anything still too tall to fit even at the smallest size in the clamp. */
+  .cp-hero h1.rp-name{font-size:clamp(40px,16dvh,96px)}
+  .cp-page .cp-hero.cp-hero-full .cp-hero-foot{max-height:100%;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
   /* the focus view (tap the cover to go full screen, js/richpage.js) stays a true inset:0 overlay either way */
 }
