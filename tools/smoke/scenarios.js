@@ -4654,6 +4654,33 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
   await t.click("[data-back]", { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 12000, "Back to the map, with the same painting in the middle");
 });
+// David's screenshot, 2026-10-09: "when I look at a painting and tap 'Show it on the map', it opens the map at a
+// different section, so I don't even see the painting that brought me there." Root cause: caption() keeps
+// PM_PAN.set(lay.key, ...) current on every center change, including a plain pan with nothing opened -- so a
+// SECOND visit to the exact same seeded spec (the same painting's "Show it on the map" tapped again, or a
+// different entry that resolves to an already-visited seed) silently restored wherever the map was last panned
+// to, not the painting the entry point promised. Fixed: build() now ignores PM_PAN entirely for any arrangement
+// pinned to a seed (Rings/Spiral), trusting the seed as an anchor rather than treating the remembered pan as a
+// bookmark. Simulated here by injecting a deliberately wrong PM_PAN entry for each key before entering (standing
+// in for "the user panned away during an earlier visit"), since driving a real pan gesture per seed would be slow
+// and the bug is in build()'s own pan-memory lookup, not the gesture.
+scenario("paintmap", "entering the map from 5 different paintings always centers on that painting, not a stale remembered pan", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the map to lay out");
+  const total = t.w.PM_CTRL.count;
+  const seeds = [1500, 5000, 9001, 14777, 20300].filter(i => i < total);
+  t.expect(seeds.length === 5, `expected 5 usable seeds under a corpus of ${total}, got ${seeds.length}`);
+  for (const seed of seeds) {
+    const key = `arr=rings&seed=${seed}|${total}|`;
+    t.ev(`PM_PAN.set(${JSON.stringify(key)}, { x: 9999, y: -9999, s: 2 })`);   // a deliberately wrong remembered pan
+    t.ev(`pmGo("arr=rings&seed=${seed}")`);
+    await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.drawn > 10, 8000, `the map to lay out around seed ${seed}`);
+    await t.waitFor(() => t.w.PM_CTRL.center === seed, 4000, `seed ${seed} to actually be centered, not wherever the injected pan pointed`);
+    t.expect(!t.$("[data-pmcap]").hidden, `the card didn't open for seed ${seed}`);
+    const rect = t.ev(`PM_CTRL._qaRects().find(r => r.i === ${seed})`);
+    t.expect(rect, `seed ${seed}'s own cell isn't in the drawn set at all`);
+  }
+});
 // David, 2026-10-09 ("don't necessarily delete features -- change how you access them"): Color/Time/Painter are
 // the primary Arrange choices; Rings/Spiral/Families/Tones plus Place by/Center on/filters/landmarks are tucked
 // behind "More options" (not yet reorganized in the sheet markup -- tracked separately), not deleted. This test

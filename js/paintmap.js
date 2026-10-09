@@ -568,6 +568,8 @@ function pmMount(el, s, F) {
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
   let P = [0, 0], Z = 1, V = [0, 0], glide = null, raf = 0, dead = false, centerK = -1, lastTick = 0, drawn = [];
   const ZMAX = 2.2;
+  let pulseI = -1, pulseT0 = 0;   // the entry-point highlight ring (David, 2026-10-09): briefly rings whichever painting a seed just pinned the view to
+  const PULSE_MS = 900;
   const imgs = pmImages(() => kick());
   if (!PM_LANDMARKS.size && typeof rcLoadPortraits === "function") {
     rcLoadPortraits().then(port => {
@@ -754,7 +756,7 @@ function pmMount(el, s, F) {
       clampPan();
     }
     draw(t);
-    if (moving || fading) kick();
+    if (moving || fading || (pulseI >= 0 && t - pulseT0 < PULSE_MS)) kick();
   }
   let fading = false;
   function clampPan() {   // the finite map springs back inside its own edges
@@ -864,6 +866,23 @@ function pmMount(el, s, F) {
         ctx.strokeStyle = "rgba(232,120,122,.85)"; ctx.lineWidth = lw;
         ctx.strokeRect(X + lw / 2, Y + lw / 2, w - lw, h - lw);
         ctx.restore();
+      }
+      // the entry-point highlight (David, 2026-10-09, "I don't even see the painting that brought me there"): a
+      // soft ring that breathes once and fades, so the painting an entry point pinned the view to reads as "you're
+      // here", not a silent jump cut. Reduced motion gets a brief steady ring instead of the breathing scale.
+      if (pulseI >= 0 && i === pulseI) {
+        const age = t - pulseT0;
+        if (age >= PULSE_MS) pulseI = -1;
+        else {
+          const u = age / PULSE_MS, alpha = (1 - u) * .85;
+          const breathe = RM ? 1 : 1 + Math.sin(u * Math.PI * 2.4) * (1 - u) * .4;
+          const pad = Math.max(3, b.d * .05) * breathe;
+          ctx.save();
+          ctx.strokeStyle = `rgba(236,232,223,${alpha.toFixed(3)})`;
+          ctx.lineWidth = Math.max(1.5, Math.min(3, b.d * .025));
+          ctx.strokeRect(X - pad, Y - pad, w + pad * 2, h + pad * 2);
+          ctx.restore();
+        }
       }
       // always-labeled landmarks: a painter name, collected here, placed after the loop (see comment above)
       if (PM_LANDMARKS_ON && b.d >= 24 && PM_LANDMARKS.size && PM_LANDMARKS.has(i)) {
@@ -1047,12 +1066,26 @@ function pmMount(el, s, F) {
     wait.hidden = !!lay.n;
     if (!lay.n) wait.innerHTML = `Nothing matches all of that. <button class="wl" data-pmloosen>Clear the filters</button>`;
     const lz = wait.querySelector("[data-pmloosen]"); if (lz) lz.onclick = () => { s.f = xbFresh(); s.fav = 0; rebuild(); };
-    const mem = PM_PAN.get(lay.key);
+    // David, 2026-10-09 ("Show it on the map opens at a different section, so I don't even see the painting that
+    // brought me there"): caption() (below) keeps PM_PAN.set(lay.key, ...) up to date on EVERY center change,
+    // including a plain pan with nothing opened -- so a seeded arrangement's remembered pan isn't "where you left
+    // off reading", it's just "wherever you last panned to", and a SECOND visit to the exact same seeded spec
+    // (tapping "Show it on the map" from the same painting's page again, or from a different painting that
+    // resolves to an already-visited seed) silently overrode the one thing the entry point promised: that painting,
+    // centered. A seed is an anchor, not a bookmark -- always trust it over any remembered pan. This never costs
+    // the original "Back lands where you were" case PM_PAN exists for: the only way to open something other than
+    // the seed is to tap it (which re-seeds onto it first, per tap()'s off-center branch), so by the time anything
+    // opens, the seed already equals whatever's centered -- PM_PAN and lay.start agree. Unseeded arrangements
+    // (color/time/painter, no single anchor) still use PM_PAN as before, so a big dense browse resumes correctly.
+    const pinned = PM_NEEDS_SEED.has(s.arr) && s.seed >= 0;
+    const mem = pinned ? null : PM_PAN.get(lay.key);
     if (mem && !keepPan) { P = [mem.x, mem.y]; Z = mem.s; }
     else if (!keepPan) { P = lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     if (keepPan) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     Z = clamp(Z, zMin(), ZMAX);
     centerK = -1; drawn = []; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); chrome(); kick();
+    // a brief highlight on the painting an entry point promised, so it reads as "you're here", not just a jump cut
+    if (pinned && !keepPan && centerK >= 0) { pulseI = lay.items[centerK]; pulseT0 = clock; }
     if (window.PM_DEBUG) console.log("paintmap layout", s.arr, lay.n, Math.round(performance.now() - t0) + "ms");
   }
   function rebuild() {
