@@ -2965,11 +2965,18 @@ scenario("pages", "painter page: the portrait hero renders (an image or the sign
   const hero = await t.waitFor(".aw-pt-hero", 8000, "the portrait hero");
   t.expect(hero.getBoundingClientRect().height > 100, "the portrait hero has no size");
   t.expect(t.$(".aw-pt-hero figcaption") && t.text(".aw-pt-hero figcaption").length > 0, "the portrait hero has no caption");
-  // a painter with no portrait anywhere still gets the hero, as a field of his own signature colors
+  // No recorded portrait, but paintings in the archive (David, 2026-10-09): the hero becomes his most famous
+  // (or most-reached) painting instead -- an <img> hero, same shape as a real portrait, captioned as a
+  // stand-in and tappable through to the painting -- never the old flat signature-color field, which is now
+  // only the last resort for a painter with neither a portrait nor any paintings to show.
   await t.open("#/painter/adam-pijnacker", { settle: 600 });
   await t.waitFor(".aw-page", 15000, "the painter page (no portrait)");
-  const field = await t.waitFor(".aw-pt-hero.aw-pt-field", 8000, "the signature-color fallback field");
-  t.expect(t.$$(".aw-pt-bars i", field).length > 0, "the fallback field has no color bars");
+  const stand = await t.waitFor("[data-pthero]", 8000, "the no-portrait painting-hero");
+  t.expect(t.$("img", stand), "the no-portrait hero has no img");
+  const cap = t.$("figcaption", stand);
+  await t.waitFor(() => cap && /no portrait of Adam Pijnacker/.test(cap.textContent), 8000, "the no-portrait caption to fill in");
+  const open = t.$(".aw-pt-open", stand);
+  t.expect(open && open.dataset.gi === stand.dataset.pthero, "the hero doesn't link to the painting it shows");
 });
 scenario("pages", "painter page: a sort chip reorders the life's work grid", async t => {
   await t.open("#/painter/john-singer-sargent", { settle: 600 });
@@ -3147,6 +3154,47 @@ scenario("trail-links", "the Museum: its own address, the old one still works, a
   await t.waitFor(() => t.$(".screen[data-tl] [data-back]"), 10000, "a closeup on the trail");
   await t.click(TRL.screenBack(t), { wait: 700 });
   await t.waitFor(".x-feed", 10000, "Ideas again after the trail ran out (not the map, not another room)");
+});
+
+// PAGES-AUDIT.md plan item 3 (David 2026-10-09): the subject palette view (js/subjectview.js) is a sheet, not a
+// show()-based screen, so it doesn't get router.js/trail.js's usual free ride -- this checks it got its own,
+// by hand (js/subjectview.js svOpen/svOpenRoute): a cold #/subject/<kind>/<id> load opens the sheet with the
+// right address and title, and Back (the browser's, same as every other address here) closes it and leaves
+// the address where it was before, not stuck on the subject's own.
+scenario("trail-links", "a fresh #/subject/painter/<id> address opens the subject view; Back closes it", async t => {
+  await TRL.open(t, "#/subject/painter/claude-monet");
+  await t.waitFor(".sv-sheet", 15000, "the subject view sheet");
+  await t.waitFor(() => /Monet/i.test(t.text(".sv-title")), 10000, "the subject view's title to resolve");
+  t.expect(TRL.hash(t) === "#/subject/painter/claude-monet", `the address is ${TRL.hash(t)}, not the subject route`);
+  t.expect(/Monet/i.test(t.d.title), `the document title is "${t.d.title}", not Monet's`);
+  t.w.history.back();
+  await t.waitFor(() => !t.$(".sv-sheet"), 10000, "the sheet to close on Back");
+  await t.sleep(300);
+  t.expect(TRL.hash(t) !== "#/subject/painter/claude-monet", `Back left the address on ${TRL.hash(t)}, the subject's own`);
+});
+
+// PAGES-AUDIT.md plan item 1 (David 2026-10-09): the shared "What links here" component (js/linkshere.js),
+// called near the end of a gem, a look and a source page's builder (js/explore.js wikiPage, js/looks.js
+// lkOpen, js/sources.js sourcePage) -- present on every one, even when empty, never a silently missing section.
+scenario("pages", "\"What links here\" renders on 3 different page kinds (gem, look, source)", async t => {
+  for (const [hash, label] of [["#/gem/spinel", "gem"], ["#/look/rococo", "look"], ["#/source/ridgway", "source"]]) {
+    await t.open(hash, { settle: 700 });
+    await t.waitFor(".screen", 15000, `the ${label} page at ${hash}`);
+    await t.waitFor(() => /What links here/.test(t.d.body.innerText), 10000, `"What links here" on ${hash}`);
+  }
+});
+
+// PAGES-AUDIT.md plan item 2 (David 2026-10-09): the painting-archive "dead end" fix (js/gallery.js glPage's
+// own painter/decade/movement context, already real; js/explore.js's paintingPage adds the rest for photos and
+// pulp covers) -- any painting in the archive, not just the 22 curated ones, has somewhere else to go.
+scenario("pages", "a random archive painting has at least 3 outgoing links", async t => {
+  const gi = t.sample([12, 3531, 8136, 15146, 2000, 500, 9001], 1, "archlinks")[0];
+  await t.open("#/gallery/" + gi, { settle: 1000 });
+  await t.waitFor(".gl-page", 15000, `painting ${gi}`);
+  await t.sleep(700);   // painter/decade/movement context (js/artwiki.js awContext) and the similar-palette rail fill in async
+  const sel = "[data-swatch],[data-awpainter],[data-awgroup],[data-pin],[data-pmap],[data-node],[data-to],[data-ptgo]";
+  const links = new Set(t.$$(sel));
+  t.expect(links.size >= 3, `painting ${gi} has only ${links.size} outgoing links, expected at least 3`);
 });
 
 // ================================================================== STUDY THE MAP (js/mapstudy.js, v2: design/MAP-STUDY-2.md)
