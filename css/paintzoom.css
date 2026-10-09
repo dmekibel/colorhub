@@ -1,0 +1,27 @@
+/* js/paintzoom.js: the full-screen "Look closer" view for a painting page. */
+.glz-scrim{position:fixed;inset:0;z-index:60;display:flex;flex-direction:column;background:rgba(6,6,5,.97);opacity:0;transition:opacity .22s var(--ease)}
+.glz-scrim.in{opacity:1}
+.glz-top{display:flex;align-items:center;gap:12px;padding:calc(var(--top) + 10px) var(--g) 6px;flex:none}
+.glz-title{flex:1;min-width:0;font:400 15px/1.3 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.glz-stage{position:relative;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none}
+.glz-frame{position:relative;max-width:94vw;max-height:94%;will-change:transform;transition:transform .05s linear}
+.glz-img{display:block;max-width:94vw;max-height:94dvh;width:auto;height:auto;object-fit:contain;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:filter .2s var(--ease)}
+.glz-cv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;pointer-events:none;opacity:0;transition:opacity .25s var(--ease);filter:blur(1px)}
+.glz-cv.on{opacity:1}
+.glz-tools{flex:none;display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px var(--g) calc(var(--bottom) + 14px)}
+.glz-seg button[data-glzv]{padding:0 16px}
+.glz-pal{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.glz-pal[hidden]{display:none}
+.glz-pal button{width:34px;height:34px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
+.glz-pal button.on{outline:2px solid var(--ink);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.glz-scrim,.glz-frame,.glz-img{transition:none}}
+
+/* the hero on the painting page itself: much bigger than the old 30dvh box, tinted with the painting's own
+   average color instead of black when it doesn't fill the full width, and a quiet "Look closer" button on it
+   (David's rebuild brief, 2026-10-09) */
+.gl-hero.gl-full-w{background:var(--c);border-radius:2px;margin:0 calc(-1 * var(--g));padding:0 var(--g)}
+/* the button sits inside the picture's own box (.gl-hero>span, already position:relative + overflow:hidden in
+   css/gallery.css), not the full-bleed tinted surround — so it always lands on the image itself, at any aspect
+   ratio, instead of risking the surrounding padding math (David's rebuild brief, 2026-10-09) */
+.gl-closer{position:absolute;right:10px;bottom:10px;z-index:2;display:flex;align-items:center;gap:7px;height:38px;padding:0 14px 0 11px;border-radius:999px;background:rgba(14,13,11,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(236,232,223,.18);color:#fff;font:500 13px/1 var(--mono);letter-spacing:0;text-transform:none;white-space:nowrap}
+.gl-closer svg{width:16px;height:16px}

@@ -178,6 +178,136 @@ scenario("home", "corners always come back after a sheet or a drag", async t => 
   t.expect(cv, "no canvas");
 });
 
+// David (repeatedly, after the render()-level cornersBack() fix): "the buttons on the map still disappear."
+// hmCornerWatch (js/home.js) is the self-healing backstop: whenever Home is active, no sheet/stem is open and
+// nothing is mid-drag, it re-asserts the corners on pageshow (iOS bfcache restore), visibilitychange, resize,
+// orientationchange and a 1s interval -- not just the specific paths that already call cornersBack() themselves.
+scenario("home", "the corner watchdog recovers from a bfcache restore, resize, rotate and a color page round trip", async t => {
+  const corners = async why => {
+    for (const sel of ["#hmDo", "[data-rooms-corner]"]) {
+      const e = t.$(sel); t.expect(e, `${sel} is missing ${why}`);
+      if (!e) continue;
+      const cs = getComputedStyle(e);
+      t.expect(+cs.opacity > .9 && cs.visibility !== "hidden" && cs.pointerEvents !== "none", `${sel} is hidden ${why} (opacity ${cs.opacity}, pointer-events ${cs.pointerEvents})`);
+      const r = t.reachable(e); t.expect(!r, `${sel} ${r} ${why}`);
+    }
+  };
+  const cv = await H.homeReady(t);
+  // simulate a stray stuck fade (as if some path the watchdog doesn't know about left one behind) and confirm the
+  // watchdog itself clears it, not a side effect of the action that triggers it
+  t.$(".screen.hm").classList.add("chrome-hide");
+  // pageshow with persisted:true is exactly what iOS fires restoring a page from the back/forward cache
+  t.w.dispatchEvent(new t.w.Event("pageshow"));
+  await t.sleep(150);
+  await corners("after a simulated bfcache restore (pageshow)");
+
+  t.$(".screen.hm").classList.add("chrome-hide");
+  t.d.dispatchEvent(new t.w.Event("visibilitychange"));
+  await t.sleep(150);
+  await corners("after a simulated visibilitychange");
+
+  t.$(".screen.hm").classList.add("chrome-hide");
+  t.w.dispatchEvent(new t.w.Event("resize"));
+  await t.sleep(150);
+  await corners("after a resize");
+
+  t.$(".screen.hm").classList.add("chrome-hide");
+  t.w.dispatchEvent(new t.w.Event("orientationchange"));
+  await t.sleep(150);
+  await corners("after an orientationchange (rotate)");
+
+  // the 1s watchdog interval on its own, with no event at all
+  t.$(".screen.hm").classList.add("chrome-hide");
+  await t.sleep(1200);
+  await corners("after the watchdog's own interval, no event");
+
+  // open a color from the map, then Back: the corners must be there when the map reappears. js/mapxfer.js's
+  // mxLand shrinks the map back from the color with a JS Web Animations API tween (not a CSS one), which headless
+  // Chrome's virtual time budget does not advance in real time the way it does CSS animations (the harness's own
+  // injected stylesheet forces those near-instant) -- force it to the end, exactly what a real device's
+  // compositor does on its own a few hundred ms after Back.
+  const r = cv.getBoundingClientRect();
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 400 });
+  await t.waitFor(".cp-page", 6000, "a color page after tapping the center bubble");
+  await H.back(t);
+  await t.waitFor("canvas", 6000, "the honeycomb again after Back");
+  t.ev("(() => { if (typeof MX !== 'undefined' && MX) MX.anims.forEach(a => { try { a.finish(); } catch (e) {} }); })()");
+  await t.sleep(300);
+  await corners("after opening a color from the map and Back");
+
+  // Arrange with fit mode: open it, change a setting, close it -- the watchdog must agree with the close path
+  await H.sheet(t, "arrange");
+  const arrB = t.$$(".hm-arr-b:not(.on)")[0]; if (arrB) await t.click(arrB, { wait: 500 });
+  await t.click("[data-sheet-close]", { wait: 400 });
+  await t.waitFor(() => !t.$(".sheet"), 4000, "the Arrange sheet to close");
+  await t.sleep(900);   // the fit mode's own fly-back settles around here
+  await corners("after Arrange (fit mode) opened, changed and closed");
+});
+
+// David: "swiping from right to left creates a black screen that's panned in, and there's a bar at the bottom."
+// The map must fill the full viewport on both axes, before and after a horizontal swipe (a pan moves the MAP's
+// own content, never the page/container), and the page itself must not be draggable (overscroll-behavior:none,
+// css/menus2.css).
+// David: "the transition gets stuck in the middle for a couple of seconds too long" going back to the map from a
+// color page. The shrink-into-the-bubble animation (js/mapxfer.js mxLand) must start within a bounded time no
+// matter how long the map's own data takes to load (js/home.js races render() against a 300ms cap) -- never a
+// multi-second stall. Headless Chrome's virtual time budget does not advance the JS Web Animations API timeline
+// in real time, so this forces every step along instead of sleeping and hoping, and bounds the real wall-clock
+// time the whole round trip took.
+scenario("home", "the color-page return (mxLand) never stalls waiting on data", async t => {
+  const cv = await H.homeReady(t);
+  const r = cv.getBoundingClientRect();
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 400 });
+  await t.waitFor(".cp-page", 6000, "a color page after tapping the center bubble");
+  const t0 = Date.now();
+  await t.click("[data-back]", { wait: 0 });
+  // mxLeave sets MX synchronously inside hmHome(); poll for it (a generous bound -- this machine runs many
+  // parallel Chrome processes during a full smoke run, so it's a sanity check against a multi-second stall, not
+  // a tight perf budget; see tools/_qa for real-device timing)
+  await t.waitFor(() => t.ev("typeof MX !== 'undefined' && !!MX"), 3000, "mxLand's transition to start after Back");
+  const started = Date.now() - t0;
+  t.expect(started < 2500, `the return transition took ${started}ms just to START (render() must never block it)`);
+  // force it to the end (the same virtual-time workaround as the watchdog scenario) and confirm it actually finishes
+  t.ev("(() => { if (typeof MX !== 'undefined' && MX) MX.anims.forEach(a => { try { a.finish(); } catch (e) {} }); })()");
+  await t.waitFor(() => t.ev("typeof MX === 'undefined' || !MX"), 3000, "the transition (MX) to clear once its animations finish");
+  await t.waitFor("canvas", 4000, "the honeycomb again");
+  t.expect(t.reachable(t.d.querySelector("#hmDo")) === "", "the right corner is not tappable once the return finishes");
+});
+
+scenario("home", "the map fills the full viewport before and after a horizontal swipe", async t => {
+  const cv = await H.homeReady(t);
+  // the screen's own entrance animation (css/polish.css .screen "enter") can leave the Home screen a few px off
+  // (its first frame is translateY(10px)) until it's cleared -- js/core.js show() now clears it on animationend
+  // or a 650ms fallback either way; settle past that same margin before asserting "at rest" (headless Chrome's
+  // virtual time budget doesn't always advance a real animation timeline promptly)
+  t.ev("document.querySelectorAll('.screen').forEach(s => { if (typeof s.getAnimations === 'function') s.getAnimations().forEach(a => { try { a.finish(); } catch (e) {} }); })");
+  await t.sleep(700);
+  const fills = why => {
+    const r = cv.getBoundingClientRect();
+    t.expect(Math.abs(r.left) < 1 && Math.abs(r.top) < 1, `the canvas does not start at the top-left ${why} (${r.left},${r.top})`);
+    t.expect(Math.abs(r.width - t.w.innerWidth) < 2, `the canvas is not the viewport's width ${why} (${r.width} vs ${t.w.innerWidth})`);
+    t.expect(Math.abs(r.height - t.w.innerHeight) < 2, `the canvas is not the viewport's height ${why} (${r.height} vs ${t.w.innerHeight}) -- a black band`);
+  };
+  fills("at rest");
+  t.expect(getComputedStyle(t.d.documentElement).overscrollBehaviorX === "none" || getComputedStyle(t.d.documentElement).overscrollBehavior === "none", "the page itself can still be overscrolled");
+  const r0 = cv.getBoundingClientRect(), y = r0.top + r0.height / 2;
+  const mk = (type, x) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 21, pointerType: "touch", isPrimary: true, view: t.w });
+  // a fast right-to-left swipe mid-screen
+  cv.dispatchEvent(mk("pointerdown", r0.right - 10));
+  for (let i = 1; i <= 6; i++) { cv.dispatchEvent(mk("pointermove", r0.right - 10 - (r0.width - 20) * i / 6)); await t.sleep(8); }
+  cv.dispatchEvent(mk("pointerup", r0.left + 10));
+  await t.sleep(400);
+  fills("right after a fast right-to-left swipe");
+  await t.sleep(600);
+  fills("600ms after the swipe settles");
+  // a swipe starting right at the edge (iOS edge-swipe-back territory)
+  cv.dispatchEvent(mk("pointerdown", r0.right - 1));
+  for (let i = 1; i <= 6; i++) { cv.dispatchEvent(mk("pointermove", r0.right - 1 - (r0.width - 40) * i / 6)); await t.sleep(8); }
+  cv.dispatchEvent(mk("pointerup", r0.left + 40));
+  await t.sleep(500);
+  fills("after an edge-starting swipe");
+});
+
 // David: "clicking it again minimizes it, and then automatically it expands again by itself." The corner's "on"
 // z-index is meant to float it above its own scrim so a second real tap lands back on the button, but the button
 // lives inside #app's own stacking context, which caps it there regardless -- a real tap at that spot always hits
@@ -352,7 +482,8 @@ scenario("home", "Arrange sheet: Center on and Sort by change the order inside a
   t.expect(/Sort by/.test(t.text("[data-ord-row]")), "the Map has no Sort by row");
   await t.click('[data-ord="light"]', { wait: 150 });
   t.expect(t.ev("HM_CTRL.getCfg().resolved.layout") === "map~light", "the Map did not take Sort by lightness");
-  t.expect(t.$$(".hm-ax-l, .hm-ax-r").length === 2, "no edge captions for a sorted Map");
+  // David, 2026-10-09: "I don't like the colder/warmer labels" -- no floating edge captions on the map itself
+  t.expect(!t.$(".hm-ax-l, .hm-ax-r, .hm-axes"), "a sorted Map still shows floating edge captions");
   await t.click('[data-ord="painted"]', { wait: 400 });
   await t.waitFor(() => t.ev("!!HONEY_PAINTED") && t.ev("HM_CTRL.getCfg().resolved.layout") === "map~painted", 6000, "the painting counts to load");
   await t.click('[data-ord="hue"]', { wait: 150 });
@@ -1858,9 +1989,9 @@ scenario("paintings", "a painting's On the painting control: numbered Markers th
   await t.click('[data-glw="mark"]', { force: true, wait: 400 });
   const marks = t.$$(".gl-mks .gl-mk:not(.sm)");
   t.expect(marks.length >= 3, `only ${marks.length} numbered markers`);
-  t.expect(t.$$("[data-glswatches] .gl-n").length === t.$$("[data-glswatches] [data-swatch]").length, "the strip chips aren't numbered like the markers");
+  t.expect(t.$$("[data-glswatches] .gl-n").length === t.$$("[data-glswatches] [data-glj]").length, "the strip chips aren't numbered like the markers");
   t.expect(t.ev("S.glWhere") === "mark", "the choice isn't remembered");
-  const hexes = new Set(t.$$("[data-glswatches] [data-swatch]").map(b => b.dataset.swatch));
+  const hexes = new Set(t.$$("[data-glrows] [data-swatch]").map(b => b.dataset.swatch));
   t.expect(marks.every(m => hexes.has(m.dataset.swatch)), "a marker isn't one of the palette's colors");
   await t.click('[data-glw="lit"]', { force: true, wait: 400 });
   t.expect(!t.$(".gl-mks .gl-mk") && t.$("[data-gllitcv]").classList.contains("on"), "Highlight didn't swap the markers for the dimmed painting");
@@ -1882,15 +2013,37 @@ scenario("paintings", "a painting's Analysis: Learn this painting opens a deck o
 scenario("paintings", "a color page says where you met it, and the link reopens that painting", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   const title = t.text(".p-title");
-  const sw = await t.waitFor("[data-glswatches] [data-swatch]", 15000, "a palette swatch on the painting");
+  // the strip tile locates a color on the painting; its name row (same hex) is what opens the color page
+  // (David's rebuild brief, 2026-10-09: "make the swatch tile itself locate, the name link open")
+  const sw = await t.waitFor("[data-glrows] [data-swatch]", 15000, "a palette swatch on the painting");
   await t.click(sw, { force: true, wait: 600 });
-  await t.waitFor(".cp-page", 8000, "the color page after tapping a palette swatch");
+  await t.waitFor(".cp-page", 8000, "the color page after tapping a palette color's name");
   const met = await t.waitFor(".rc-you .rc-met", 8000, 'the "You met it in…" line');
   t.expect(new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(t.text(met)), `the met line "${t.text(met)}" doesn't name "${title}"`);
   const link = t.$(".rc-you [data-rc-met]");
   t.expect(link, 'the met line has no one-tap link back to the painting');
   await t.click(link, { force: true, wait: 600 });
   await t.waitFor(() => t.text(".p-title") === title, 8000, "the painting to reopen from the met line");
+});
+// David's rebuild brief, 2026-10-09, point 7: swipe the picture to move to the next/previous painting by the
+// same painter (trail-aware, so Back works) — wait for "More by this painter" so painterOrder is populated.
+scenario("paintings", "swiping the picture moves to the next/previous painting by the same painter", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.waitFor("[data-glmorepainter] .gl-rail .gl-pin", 15000, "More by this painter (painterOrder ready)");
+  const title0 = t.text(".p-title"), hash0 = TRL.hash(t);
+  const span = t.$(".gl-hero > span"), r = span.getBoundingClientRect(), w = t.w;
+  const swipe = (x1, x2) => {
+    const o = { bubbles: true, cancelable: true, clientY: r.top + r.height / 2, pointerId: 1, pointerType: "touch", isPrimary: true, view: w };
+    span.dispatchEvent(new w.PointerEvent("pointerdown", { ...o, clientX: x1 }));
+    span.dispatchEvent(new w.PointerEvent("pointerup", { ...o, clientX: x2 }));
+  };
+  swipe(r.left + r.width * .85, r.left + r.width * .15);   // swipe left: next
+  await t.sleep(500);
+  if (t.text(".p-title") === title0) { swipe(r.left + r.width * .15, r.left + r.width * .85); await t.sleep(500); }   // the edge of the timeline: try the other way
+  t.expect(t.text(".p-title") !== title0, "a swipe never moved to another painting");
+  t.expect(/^#\/gallery\/\d+/.test(TRL.hash(t)) && TRL.hash(t) !== hash0, "the swipe didn't navigate to a gallery address");
+  await t.click(TRL.screenBack(t), { wait: 500 });
+  t.expect(t.text(".p-title") === title0, "Back after a swipe didn't return to the first painting");
 });
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
@@ -2104,10 +2257,10 @@ const TRL = {
     await TRL.atHash(t, /^#\/gallery\/\d+/, "the second painting");
     note();
     // 5 + 6. a color in it whose page has a gem: try the palette's colors until one does
-    const nSw = (await t.waitFor(() => t.$$("[data-glswatches] [data-swatch]").length && t.$$("[data-glswatches] [data-swatch]"), 15000, "the painting's palette")).length;
+    const nSw = (await t.waitFor(() => t.$$("[data-glrows] [data-swatch]").length && t.$$("[data-glrows] [data-swatch]"), 15000, "the painting's palette")).length;
     let gem = null;
     for (let i = 0; i < nSw && !gem; i++) {
-      await t.click(t.$$("[data-glswatches] [data-swatch]")[i], { wait: 600 });
+      await t.click(t.$$("[data-glrows] [data-swatch]")[i], { wait: 600 });
       await TRL.atHash(t, /^#\/(color|name)\//, "a color page from the palette");
       gem = await t.waitFor(() => t.$("#app .screen [data-to^='gm:gem:']"), 2500, "a gem", 1500).catch(() => null);
       if (!gem) { await t.click(TRL.screenBack(t), { wait: 500 }); await TRL.atHash(t, /^#\/gallery\//, "back on the second painting"); }
@@ -2451,7 +2604,7 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   await t.waitFor(".pal-name b", 12000, "the palette rows");
   t.expect(!t.$$(".pal-name b").some(b => /^between/i.test(b.textContent)), "a 'between X and Y' is used as a name");
   t.expect(t.$("[data-glswatches] .pal.gl-out"), "the strip doesn't lead with a stands-out color");
-  const L0 = t.ev(`lab(document.querySelector("[data-glswatches] .pal").dataset.swatch)[0]`);
+  const L0 = t.ev(`lab(getComputedStyle(document.querySelector("[data-glswatches] .pal")).getPropertyValue("--c").trim())[0]`);
   t.expect(L0 > 30, `the first chip is a near-black (L* ${Math.round(L0)})`);
   // David, 2026-10-08: the palette is right under the identity block, and both fit one screen so you can change types and sizes.
   // David, 2026-10-09: the identity block (title, painter, date, museum, why it matters) now sits between the pinned
@@ -2462,19 +2615,28 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   t.expect(t.$("[data-glorder]").getBoundingClientRect().top - stripB < 24, "the palette types aren't right under the strip");
   const nTypes = t.$$("[data-glorder] [data-glo]").length;
   t.expect(nTypes >= 5, `only ${nTypes} palette types`);
+  // David's rebuild brief, 2026-10-09: "at most 5 chips, chosen per painting, plus More" -- Shadows may be
+  // behind it, so open More first if it's not one of the five shown
+  if (!t.$('[data-glo="shadows"]')) await t.click("[data-glmore]", { wait: 300 });
+  t.expect(t.$('[data-glo="shadows"]'), "Shadows isn't offered even behind More");
+  // "the count slider only in 'By area'" -- every other type is hidden
   await t.click('[data-glo="shadows"]', { wait: 300 });
+  t.expect(t.$("[data-glslide]").hidden, "the How many colors slider shows outside By area");
+  await t.click('[data-glo="area"]', { wait: 300 });
   const kIn = t.$("[data-glk]");
-  t.expect(kIn && !kIn.closest("[hidden]"), "no How many colors slider on Shadows");
+  t.expect(kIn && !kIn.closest("[hidden]"), "no How many colors slider on By area");
   t.ev(`(() => { const s = document.querySelector("[data-glk]"); s.value = 3; s.dispatchEvent(new Event("input", { bubbles: true })); })()`);
-  t.expect(t.$$("[data-glswatches] [data-swatch]").length === 3, "the slider didn't redraw the palette live");
+  t.expect(t.$$("[data-glswatches] [data-glj]").length === 3, "the slider didn't redraw the palette live");
   await t.click('[data-glo="out"]', { wait: 300 });
-  await t.waitFor(() => /You can name \d+ of \d+/.test(t.text(".gl-cov")), 6000, "the coverage line");
+  await t.waitFor(() => /Learn the colors here/.test(t.text(".gl-cov")), 6000, "the coverage line");
   await t.click('[data-glo="area"]', { wait: 300 });
   const shares = t.$$("[data-glswatches] .pal span").map(s => parseInt(s.textContent, 10) || 0);
   t.expect(shares[0] >= Math.max(...shares), "By area doesn't lead with the biggest color");
   await t.click('[data-glo="out"]', { wait: 300 });
   const answers = () => t.ev(`lnS().ev.filter(e => e.e === "answer" && /-it$/.test(e.by || "")).length`);
   const n0 = answers();
+  // the quiz now sits collapsed at the bottom ("Test yourself", David's rebuild brief, 2026-10-09)
+  await t.click(await t.waitFor(".gl-quiz-fold summary", 8000, "the Test yourself fold"), { wait: 300 });
   await t.click(await t.waitFor(".tq-open", 8000, "the Name its colors button"), { wait: 500 });
   for (let r = 0; r < 3; r++) {
     await t.waitFor(".tq-opts button, .tq.finding", 6000, `round ${r + 1}`);
@@ -2746,8 +2908,8 @@ scenario("trail", "Close from color > painting > color: the map as it was, the t
   await t.click(pin, { wait: 600 });
   await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
   t.expect(t.$("#app .screen [data-tl-exit]"), "the painting page has no Close");
-  await t.waitFor(() => t.$$("[data-glswatches] [data-swatch]").length, 15000, "the painting's palette");
-  await t.click(t.$$("[data-glswatches] [data-swatch]")[0], { wait: 600 });
+  await t.waitFor(() => t.$$("[data-glrows] [data-swatch]").length, 15000, "the painting's palette");
+  await t.click(t.$$("[data-glrows] [data-swatch]")[0], { wait: 600 });
   await TRL.atHash(t, /^#\/(color|name)\//, "a color from the painting");
   t.expect(TRL.depth(t) >= 3, `the trail holds ${TRL.depth(t)} pages, expected 3`);
   t.w.scrollTo(0, 0); await t.sleep(200);
