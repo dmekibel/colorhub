@@ -492,7 +492,10 @@ function awContext(host, i, d) {
         let d0 = Math.min(vals[Math.floor(vals.length * .02)], me), d1 = Math.max(vals[Math.min(vals.length - 1, Math.ceil(vals.length * .98))], me);
         if (d1 - d0 < 12) { const m = (d0 + d1) / 2; d0 = m - 6; d1 = m + 6; }
         const NB = 36, X = v => clamp((v - d0) / (d1 - d0), 0, 1);
-        host.innerHTML = `<div class="sec-head"><b>In context</b><span>as photographed</span></div>
+        // this card only ever sits inside the painting page's "Findings" (js/gallery.js glPage, point 5 of
+        // David's rebuild brief, 2026-10-09), which already carries the section header, so it leads with its
+        // own lighter label instead of repeating a sec-head
+        host.innerHTML = `<p class="gl-roles-h">Compared</p>
           <div class="aw-cx-top"><div class="seg aw-cx-seg" role="tablist" aria-label="Measure">${AW_CX.map((m, q) => `<button class="${q === AW_CXM ? "on" : ""}" data-cxm="${q}">${m[1]}</button>`).join("")}</div></div>
           <p class="aw-cx-me"><i></i>This painting: <b>${show(me)}</b></p>
           ${rows.map(s => {
