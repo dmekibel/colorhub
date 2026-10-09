@@ -107,12 +107,27 @@ function spMate(P, q) {
   P.qs.forEach(x => { if (x === q) return; const d = P.de(q.it.h, x.it.h); if (d >= 5 && d <= 30 && d < bd) { bd = d; b = x; } });
   return b;
 }
+// two colors in play that bracket q in lightness, one lighter and one darker, each a believable gap away
+// (ΔE 5 to 32): the gradient between them is a real same-family strip with q sitting meaningfully inside it (the
+// roadmap's Gradient format: place a color in its spot on a gradient between two neighbors).
+function spBracket(P, q) {
+  if (typeof lab !== "function") return null;
+  const L0 = lab(q.it.h)[0];
+  let lo = null, loD = Infinity, hi = null, hiD = Infinity;
+  P.qs.forEach(x => {
+    if (x === q) return;
+    const d = P.de(q.it.h, x.it.h); if (d < 5 || d > 32) return;
+    const L = lab(x.it.h)[0];
+    if (L > L0 && d < hiD) { hiD = d; hi = x.it; } else if (L < L0 && d < loD) { loD = d; lo = x.it; }
+  });
+  return lo && hi ? { a: lo, b: hi } : null;
+}
 function spKind(P, q) {
   const last = P.lastKind, lv = q.lv, hard = P.ease > 0, easy = P.ease < 0;
   let opts;
   if (lv <= 0) opts = q.n === 0 && !q.due ? ["echo", "quiz-name", "quiz-color"] : ["quiz-name", "quiz-color"];
   else if (lv === 1) opts = easy ? ["quiz-name", "quiz-color"] : ["quiz-name", "quiz-color", ...(q.due ? [] : ["flash"])];
-  else if (lv === 2) opts = easy ? ["quiz-color", "quiz-name"] : ["quiz-color", "odd-one-out", "spot", ...(spMate(P, q) ? ["edge"] : [])];
+  else if (lv === 2) opts = easy ? ["quiz-color", "quiz-name"] : ["quiz-color", "odd-one-out", "spot", ...(spMate(P, q) ? ["edge"] : []), ...(spBracket(P, q) ? ["gradient"] : [])];
   // recall: name it from memory among 6 to 8 close names, the color alone (tap, no typing); typing only when asked for
   else opts = P.typing && !P.quick ? ["type", "recall"] : ["recall", hard ? "spot" : "quiz-color"];
   if (P.quick && lv >= 3) opts = ["recall", "quiz-color"];
@@ -135,9 +150,15 @@ function spNext(P) {
   const dueLeft = [...P.qs.values()].some(q => q.due && !q.n && !q.up && !q.out);
   if (P.newQ.length && !dueLeft && (!P.wave.length || (spSettled(P) && (P.ease >= 0 || live < 2)) || live === 0)) { spStartWave(P); return P.acts.shift(); }
   while (P.queue.length < SP_INPLAY && P.fresh.length) P.queue.push(P.fresh.shift());
-  // a Matching round of the colors in play now and then
+  // A set-level round of the colors in play now and then: Matching, or (once there are enough in play) Sort
+  // light to dark, alternating so a long session keeps changing shape (design/LEARN-ROOM-2.md §Formats).
   const inPlay = spLive(P).filter(q => q.met && q.lv >= 1 && P.queue.includes(q));
-  if (P.sinceMatch >= SP_MATCH_EVERY && inPlay.length >= 3) { P.sinceMatch = 0; P.lastKind = "match"; return { t: "match", qs: inPlay.slice(0, 5) }; }
+  if (P.sinceMatch >= SP_MATCH_EVERY && inPlay.length >= 3) {
+    P.sinceMatch = 0;
+    const fmt = inPlay.length >= 4 && P.lastSetFmt !== "sort" ? "sort" : "match";
+    P.lastSetFmt = fmt; P.lastKind = fmt;
+    return { t: fmt, qs: inPlay.slice(0, fmt === "sort" ? 6 : 5) };
+  }
   let q = P.queue.shift();
   while (q && (q.up || q.out)) q = P.queue.shift();
   if (!q) return P.newQ.length ? (spStartWave(P), P.acts.shift()) : null;
@@ -145,11 +166,13 @@ function spNext(P) {
   // far options on the first rung, and on the first three while you're struggling
   const kind = spKind(P, q), far = q.lv === 0 || (q.lv <= 2 && P.ease < 0);
   P.lastKind = kind; P.asked++; P.sinceMatch++;
-  // echo: two to pick from; spot: 6, 8 or 10 tiles by how it's going; edge: the border with its nearest mate
+  // echo: two to pick from; spot: 6, 8 or 10 tiles by how it's going; edge: the border with its nearest mate;
+  // gradient: its spot on a strip between the two colors that bracket it (spBracket)
   if (kind === "echo") return { t: "ask", q, kind, far: true, opts: 1 };
   if (kind === "spot") return { t: "ask", q, kind, far: false, opts: P.ease < 0 ? 5 : P.ease > 0 ? 9 : 7 };
   if (kind === "recall") return { t: "ask", q, kind, far: false, opts: P.ease < 0 ? 5 : 7 };
   if (kind === "edge") { const m = spMate(P, q); return { t: "ask", q, kind, far: false, opts: 0, other: m && m.it }; }
+  if (kind === "gradient") return { t: "ask", q, kind, far: false, opts: 0, other: spBracket(P, q) };
   return { t: "ask", q, kind, far: far && (kind === "quiz-name" || kind === "quiz-color"), opts: far ? 2 : 3 };
 }
 function spAnswer(P, q, ok) {

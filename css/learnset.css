@@ -142,8 +142,7 @@
 .ls-meet-sw{flex:1;min-height:200px;border-radius:var(--r-3,22px);background:var(--c);display:flex;flex-direction:column;justify-content:space-between;padding:18px 20px 20px;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);animation:lsMeetIn .42s var(--spring,cubic-bezier(.3,1.3,.5,1)) both;margin-top:8px}
 @keyframes lsMeetIn{from{opacity:0;transform:translateY(14px) scale(.97)}}
-.ls-meet-tag{align-self:flex-start;font:italic 400 16px/1 var(--serif);padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-[style*="color:#141311"] .ls-meet-tag{background:rgba(20,19,17,.1)}
+.ls-meet-tag{align-self:flex-start;font:italic 400 16px/1 var(--serif);padding:6px 11px;border-radius:999px;background:var(--paper,#EFEBE3);color:var(--paper-ink,#141311)}
 .ls-meet.again .ls-meet-tag{background:var(--paper,#EFEBE3);color:var(--paper-ink,#141311)}
 .ls-meet-name{display:flex;flex-direction:column;gap:8px;animation:lsMeetName .5s .1s var(--ease,ease) both}
 @keyframes lsMeetName{from{opacity:0;transform:translateY(8px)}}
@@ -194,3 +193,22 @@
 .ls-groups .ls-chip.pin{box-shadow:inset 0 0 0 1.5px var(--ink,#ECE8DF);cursor:default}
 .ls-chip .ls-x{margin-left:2px;color:var(--soft,#A39E93);font:400 20px/1 var(--sans)}
 .ls-chip.ls-add{padding:0 16px;color:var(--soft,#A39E93);background:transparent;box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
+
+/* ---------- the overview's Quick look (js/learnset.js lsQuickHTML/runStory) ---------- */
+.ls-skip{position:absolute;top:0;right:0;padding:6px 2px;z-index:2}
+.ls-quick .ls-meet-name{align-items:flex-start}
+
+/* ---------- Sort and Gradient (js/studyformats.js): the two set/single-item formats added 2026-10-09 ---------- */
+.pr-s-sort{gap:14px}
+.pr-sort-list{position:relative;flex:1;min-height:220px;display:flex;flex-direction:column}
+.pr-sort-row{position:absolute;left:0;right:0;border-radius:var(--r-2,14px);background:var(--c);display:flex;align-items:center;padding:0 16px;touch-action:none;will-change:transform;transition:transform .18s var(--ease,ease)}
+.pr-sort-row.lift{transition:none;z-index:2;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.pr-sort-row.good{outline:2px solid var(--good,#4E9A5E)}
+.pr-sort-row.bad{outline:2px solid var(--bad,#C0392F)}
+.pr-sort-row.true{outline:1.5px dashed rgba(255,255,255,.5)}
+.pr-sort-n{font:400 17px/1.2 var(--sans);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.pr-s-gradient{gap:14px;flex:1;justify-content:center}
+.sf-grad-bar{position:relative;height:56px;border-radius:999px;touch-action:none;margin-top:6px}
+.sf-grad-mark{position:absolute;top:-6px;width:4px;height:68px;border-radius:2px;background:#fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.35);transform:translateX(-50%);pointer-events:none}
+.sf-grad-mark.true{width:5px;background:#FFD58A;box-shadow:0 0 0 1.5px #141311}
+.sf-grad-ends{display:flex;justify-content:space-between;font:400 14px/1.2 var(--sans);color:var(--soft,#A39E93)}

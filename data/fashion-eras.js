@@ -1,40 +1,38 @@
-// Measured eras (Explore → World → Fashion → Measured eras). Three periods -- 1700s, 1800-1849, 1850-1899 --
-// where the garment archive (data/fashion/garments.json, the Met + Cleveland Museum of Art open-access
-// corpus) actually has enough western-Europe-and-North-America pieces to measure rather than only describe.
-// David (2026-10-09): "Fashion decades have one little palette and tiny articles -- not enough. We need as
-// much nuance as possible." The existing Decades (data/fashion.js, 1900s-2020s) stay documented-but-
-// unmeasured, because the open-access collections used here hold almost nothing dated after 1900 for this
-// culture group (see research/FASHION.md); rather than fake precision there, this file adds real multi-
-// palette, stats-backed depth where the corpus supports it, and is explicit where it doesn't. Numbers (the
-// "measured" object on each entry) are computed by tools/fashion_measure.py into data/fashion/measured-
-// eras.json, loaded lazily; this file holds only the written article, which quotes those numbers but does
-// not duplicate them, so the two can never drift apart. Rendered by js/world.js (fashionEraDetail);
-// js/fashion.js owns the gallery and tab UI. Gate: node tools/check_names.js.
+// Deep reads (Explore → World → Fashion → Deep reads). Three periods -- 1700s, 1800-1849, 1850-1899 -- read
+// as one continuous story instead of Decades' ten-year slices. The corpus behind both pages is the same:
+// data/fashion/garments.json (Met + Cleveland Museum of Art, CC0/public domain, shown as photos) combined
+// with data/fashion/va-measured.json (the V&A Collections API, measure-only -- colors kept, no image ever
+// stored, since V&A photographs are not CC0/public domain). tools/fashion_measure.py computes the real
+// counts and palettes into data/fashion/measured-decades.json (key "eras"), loaded lazily; this file holds
+// only the written article. Prose here deliberately avoids hard-coding exact counts or percentages (the
+// live "n=" badge and the "What the measurements show" section carry the current numbers, which grow as
+// fashion_va.py's corpus is extended) -- it describes the SHAPE of the finding, not a frozen figure.
+// Rendered by js/world.js (fashionEraDetail); js/fashion.js owns the gallery and tab UI. Gate: check_names.js.
 window.FASHION_ERAS = [
   {
     id: "1700s", years: "1700–1799",
     title: "The 1700s",
     dek: "Before synthetic dye, color came from plants, insects and minerals -- and from how much of them a household could afford.",
     lead: [
-      "There is no single '1700s palette' the way the later Decades pages can sketch one: this is a century, not a decade, and European and colonial dress ran from undyed working linen to silk brocades dyed in three separate vats. What the measured pieces below actually show, across 79 western garments and textiles from the Met and Cleveland Museum of Art, is less a hue and more a texture: muted, earthy neutrals (taupe, umber, sepia, camel) dominate the cloth that survived and was collected, with brighter silk brocades as the visible exception rather than the rule."
+      "There is no single '1700s palette' the way the later Decades pages can sketch one: this is a century, not a decade, and European and colonial dress ran from undyed working linen to silk brocades dyed in three separate vats. What the measured pieces below actually show, from western garments and textiles across the Met, Cleveland Museum of Art and the V&A's catalogue, is less a hue and more a texture: muted, earthy neutrals (taupe, umber, sepia, camel) dominate the cloth that survived and was collected, with brighter silk brocades as the visible exception rather than the rule."
     ],
     sections: [
       {
         title: "What's measured here, and what isn't",
         text: [
           "Before [[william-perkin|synthetic dye]] arrived in 1856, every color in this gallery came from a plant, an insect or a mineral: [[indigo-dye|indigo]] and woad for blue, [[madder|madder]] and [[kermes|kermes]] or [[cochineal|cochineal]] for red, weld and fustic for yellow, logwood for purplish brown, and iron or oak-gall mordants for the blacks and greys that show up so often below. None of that chemistry limited the color wheel the way it's sometimes told: 18th-century dyers could and did hit vivid reds, blues and golds. What limited a household's palette was cost, climate for growing or importing the dyestuff, and how many dye baths a fabric could survive without falling apart.",
-          "The museums' own collecting habits shape this gallery as much as the century did. Surviving 1700s textiles are disproportionately the ones worth keeping: formal silks, trade brocades, and ecclesiastical or upholstery fabric, rather than the plain wool and linen that made up most people's actual wardrobes and wore out or was cut down and reused. 61 of the 79 pieces here are textile fragments, lengths and furnishing cloth rather than finished dress -- read the measured palette as 'surviving luxury and trade cloth of the 1700s', not 'what people wore'."
+          "The museums' own collecting habits shape this gallery as much as the century did. Surviving 1700s textiles are disproportionately the ones worth keeping: formal silks, trade brocades, and ecclesiastical or upholstery fabric, rather than the plain wool and linen that made up most people's actual wardrobes and wore out or was cut down and reused. Most of what shows up in the CC0/public-domain photographs here are textile fragments, lengths and furnishing cloth rather than finished dress; the V&A side adds more finished garments, but read the measured palette as 'surviving luxury and trade cloth of the 1700s', not 'what people wore'."
         ]
       },
       {
         title: "The measured palette",
         text: [
-          "Taupe, umber and camel cover the most cloth across the full set, and 91% of these 79 pieces show a neutral color -- black, white, grey, beige or brown -- somewhere across at least an eighth of their surface. Some of that is real: plain-woven wool, linen and undyed or lightly mordanted silk were everyday cloth. Some of it is also age: 18th-century dyes fade and yellow over three centuries of light exposure even in a museum's controlled storage, and a faded indigo or madder often measures closer to grey-brown than its original hue. Treat 'muted' here as partly a fact about 1700s dyeing and partly a fact about photographing 300-year-old cloth.",
-          "Where brocades and gold-metal weaves appear -- a fifth of the dress pieces here carry visible 'Gunmetal', against 2% of the rest of the set -- they stand out exactly because the baseline is so quiet. That gap is itself a finding: formal 18th-century dress saved its saturated color and metallic thread for silk, while the century's much larger stock of furnishing and trade cloth ran plainer."
+          "Taupe, umber and camel cover the most cloth across the full set, and a large majority of measured pieces show a neutral color -- black, white, grey, beige or brown -- somewhere across at least an eighth of their surface (see the exact share below). Some of that is real: plain-woven wool, linen and undyed or lightly mordanted silk were everyday cloth. Some of it is also age: 18th-century dyes fade and yellow over three centuries of light exposure even in a museum's controlled storage, and a faded indigo or madder often measures closer to grey-brown than its original hue. Treat 'muted' here as partly a fact about 1700s dyeing and partly a fact about photographing 300-year-old cloth.",
+          "Where brocades and gold-metal weaves appear, they stand out exactly because the baseline is so quiet: metallic 'Gunmetal' tones run noticeably more often in dress pieces than in the rest of the set. That gap is itself a finding: formal 18th-century dress saved its saturated color and metallic thread for silk, while the century's much larger stock of furnishing and trade cloth ran plainer."
         ]
       }
     ],
-    hedge: "A century isn't a decade: fashionable Europe's silk trade and a farm laborer's wool coat belong to the same hundred years but not the same palette, and this corpus leans toward the silk trade. Treat every number here as a property of 79 surviving, collected, photographed pieces -- not a survey of the 1700s.",
+    hedge: "A century isn't a decade: fashionable Europe's silk trade and a farm laborer's wool coat belong to the same hundred years but not the same palette, and this corpus leans toward the silk trade. Treat every number here as a property of the surviving, collected, measured pieces in this corpus (count above) -- not a survey of the 1700s.",
     sources: ["Metropolitan Museum of Art (2026). Open Access collection data.", "Cleveland Museum of Art (2026). Open Access collection data.", "Greenfield, A. (2005). A Perfect Red: Empire, Espionage, and the Quest for the Color of Desire. Harper.", "Pastoureau, M. (2001/2008). Blue/Black: The History of a Color. Princeton University Press."]
   },
   {
@@ -42,14 +40,14 @@ window.FASHION_ERAS = [
     title: "1800–1849",
     dek: "Cotton and cheaper mordant dyeing put color within reach of more households, while mourning and modesty still kept much of fashionable dress neutral.",
     lead: [
-      "86 western garments here, three-quarters of them finished dresses rather than fragments, give the first half of the 1800s the best-populated and most dress-heavy measured palette in this corpus. Silver and its close cousins -- grey, taupe, umber -- still lead, but beige, ecru and tan (the cottons and lighter silks of day dress) take a far bigger share than in the 1700s set, where dark brocade and furnishing weaves dominated."
+      "Western garments here, most of them finished dresses rather than fragments, give the first half of the 1800s a dress-heavy measured palette. Silver and its close cousins -- grey, taupe, umber -- still lead, but beige, ecru and tan (the cottons and lighter silks of day dress) take a far bigger share than in the 1700s set, where dark brocade and furnishing weaves dominated."
       ],
     sections: [
       {
         title: "Cotton, chemistry and cheaper color",
         text: [
           "Napoleonic-era neoclassical dress (high-waisted, pale muslin) runs into the Romantic 1820s-40s silhouette of wide sleeves and a dropped waist, and both lean on the same technical shift: printed and mordant-dyed cotton got markedly cheaper and more reliable across this half-century, well before [[william-perkin|synthetic dye]] existed. [[madder|Madder]] on cotton (the base of the English 'madder style' and French indiennes) gave fast reds, browns and purples at industrial scale, and this corpus's measured beige, tan and ecru likely include a good number of these printed cottons alongside plain undyed muslin.",
-          "12% of these pieces show visible white, three times the 1700s rate (4%) in this same corpus -- consistent with [[white|white muslin's rise]] as the fashionable, launderable fabric of the early 1800s, though a sample this size can't rule out that white textiles also simply survive and photograph more legibly than faded dark ones."
+          "Visible white runs markedly more common here than in the 1700s set, consistent with [[white|white muslin's rise]] as the fashionable, launderable fabric of the early 1800s, though a sample like this can't rule out that white textiles also simply survive and photograph more legibly than faded dark ones."
         ]
       },
       {
@@ -67,7 +65,7 @@ window.FASHION_ERAS = [
     title: "1850–1899",
     dek: "The best-measured half-century in this archive, and the one where the aniline-dye flood and Victorian mourning custom both show up as real numbers, not just stories.",
     lead: [
-      "98 western garments, 90 of them dresses, make the second half of the 1800s the deepest set here. Black and its near neighbors (silver, grey, charcoal) lead by a clear margin -- black alone is visible on close to a third of every measured piece, and on a third of the dresses specifically versus none of the smaller handful of non-dress textiles in this bucket. That split lines up with two real, documented forces at once: Victorian [[#history:mourning-dress|mourning dress]], and black's long-standing status as a formal and professional color independent of grief (see [[#history:black|black in fashion]])."
+      "Mostly dresses, the second half of the 1800s is the deepest set here. Black and its near neighbors (silver, grey, charcoal) lead by a clear margin -- visible on a large share of every measured piece, and markedly more often in dresses than in the era's other textiles. That split lines up with two real, documented forces at once: Victorian [[#history:mourning-dress|mourning dress]], and black's long-standing status as a formal and professional color independent of grief (see [[#history:black|black in fashion]])."
     ],
     sections: [
       {
@@ -84,7 +82,7 @@ window.FASHION_ERAS = [
         ]
       }
     ],
-    hedge: "Ninety-eight pieces, nearly all museum-grade formal and dress garments, is still a small, non-random sample of one half-century's fashionable dress in two (mostly American and British) collections -- read every percentage here as a property of this corpus, stated honestly rather than rounded away.",
+    hedge: "Nearly all museum-grade formal and dress garments, this is still a non-random sample of one half-century's fashionable dress in a handful of mostly American and British collections -- read every percentage here as a property of this corpus, stated honestly rather than rounded away.",
     sources: ["Metropolitan Museum of Art (2026). Open Access collection data.", "Cleveland Museum of Art (2026). Open Access collection data.", "Garfield, S. (2000). Mauve: How One Man Invented a Color That Changed the World. W. W. Norton.", "Taylor, L. (1983). Mourning Dress: A Costume and Social History. Allen & Unwin."]
   }
 ];

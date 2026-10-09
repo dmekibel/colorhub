@@ -233,7 +233,8 @@ function youPage() {
     const k = b.dataset.ym || b.dataset.mn;
     if (b.dataset.untangle != null) { const p = mix[+b.dataset.untangle]; if (p) { buzz(8); ymUntangle(p); } return; }
     if (b.dataset.set) { const x = sets.find(z => z.id === b.dataset.set); if (x) { buzz(8); ymLearnSet(x); } return; }
-    if (k === "recall") { buzz(8); return typeof deck === "function" ? deck("review") : go("learn"); }
+    // the one Study door (js/learnset.js lsOpen -> overview -> varied formats), not the old swipe deck directly
+    if (k === "recall") { buzz(8); return typeof lhStudy === "function" && typeof lhDue === "function" ? lhStudy(lhDue(), { label: "Recall", title: "Study <em>what's due</em>", src: "recall", exact: true }) : typeof deck === "function" ? deck("review") : go("learn"); }
     if (b.dataset.pal) return openSavedPalette(b.dataset.pal);
     if (k === "map") { S.hm = S.hm || {}; S.hm.filter = "learned"; save(); buzz(8); return roomToFloor(b); }
     if (k === "learn") return go("learn");

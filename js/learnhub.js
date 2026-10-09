@@ -299,8 +299,13 @@ function lhRoom() {
   wheel.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); famTap(e.target.closest(".lh-w")); } });
   const mb = el.querySelector("[data-lh-map]");
   if (mb) mb.onclick = () => {
+    buzz(6);
+    // David, 2026-10-09: a map selection should be a mode inside the real map (mapSelect, js/home.js), not a
+    // separate chrome-free view, and not the full map re-themed by a filter with no way back to Learn. Light up
+    // exactly the colors this session is about to study; its chip's "Study these" calls studyColors() below.
+    if (typeof mapSelect === "function") return mapSelect({ title: String(title).replace(/<[^>]+>/g, ""), colors: shown.map(c => ({ h: c.h, n: c.n })), source: "learn" });
     const v = { src: "every-name", filter: st.yours ? "learned" : "learning" };
-    S.hm = S.hm || {}; S.hm.src = v.src; S.hm.filter = v.filter; S.hm.fam = ""; S.hm.tone = ""; save(); buzz(6); hmHome();
+    S.hm = S.hm || {}; S.hm.src = v.src; S.hm.filter = v.filter; S.hm.fam = ""; S.hm.tone = ""; save(); hmHome();
   };
   el.querySelector(".lh-rows").addEventListener("click", e => {
     const b = e.target.closest("[data-ch]"); if (!b) return;

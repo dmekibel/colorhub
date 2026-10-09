@@ -306,6 +306,8 @@ function fvLearn(keys) {
   const taught = keys.map(k => BYNAME.get(fvStore()[k].n.toLowerCase())).filter(c => c && c.id && !c.basic);
   const fresh = taught.filter(c => !isMine(S.cards[c.id])).slice(0, 12), list = fresh.length ? fresh : taught.slice(0, 12);
   if (!list.length) { toast("None of these are lesson colors yet. Tap one to read about it."); return; }
+  // the one Study door (js/learnset.js), not the old swipe deck straight away
+  if (typeof studyColors === "function") return studyColors(list.map(c => ({ h: c.h, n: c.n })), { title: "Your favorites", from: "favs" });
   deck("learn", { unit: { colors: list }, cls: "learnit lt-recall", onClose: () => favShelf(),
     onFinish: () => { learnUnit({ id: "favs-" + today(), colors: list }); fvEmit("learn", { why: "favorites", n: list.length }); toast(`${list.length} added to your reviews`); favShelf(); } });
 }
