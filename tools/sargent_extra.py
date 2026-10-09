@@ -168,6 +168,8 @@ def build_rows(cands, pals):
     rows = []
     for it in cands:
         key = f"commons-{it['q']}"
+        if key in C.NONPAINTINGS:   # hand-reviewed non-paintings (data/corpus-nonpaintings.json), e.g. the Belleroche letter
+            continue
         p = pals.get(key)
         if not p or p["C"] < C.BW_C:
             continue
