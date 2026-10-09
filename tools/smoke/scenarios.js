@@ -784,6 +784,35 @@ scenario("home", "Arrange sheet: Looks and the feel sliders", async t => {
   const cv = t.$("canvas"); t.expect(cv && cv.width > 0, "the honeycomb canvas disappeared");
 });
 
+// David, 2026-10-09: "the Colors/Arrange menu... takes up too much of the screen. Make it more compact." Target:
+// the sheet at or under ~40% of the screen height (was ~55%, a fixed 56dvh), every tap target still either at
+// the usual 44px floor (Look's segment, the feel sliders, Edges) or close enough to it that a wide horizontal
+// chip strip stays comfortably tappable (Sort-by/Center-on's own, deliberately shorter, 36px chips).
+scenario("home", "Colors/Arrange sheet is compact: at or under 40% of the screen, in both tabs", async t => {
+  await H.homeReady(t);
+  const vh = t.w.innerHeight;
+  await H.sheet(t, "colors");
+  const colorsH = t.$(".sheet.hm-sheet-panel").getBoundingClientRect().height;
+  t.expect(colorsH / vh <= .41, `Colors is ${(colorsH / vh * 100).toFixed(0)}% of the screen (${colorsH.toFixed(0)}px of ${vh}), wanted <=41%`);
+  await t.click('.hm-ch-tab[data-tab="arrange"]', { wait: 400 });
+  const arrangeH = t.$(".sheet.hm-sheet-arrange").getBoundingClientRect().height;
+  t.expect(arrangeH / vh <= .41, `Arrange is ${(arrangeH / vh * 100).toFixed(0)}% of the screen (${arrangeH.toFixed(0)}px of ${vh}), wanted <=41%`);
+  // every tap target that should still hit the 44px floor
+  for (const sel of ['.hm-look-seg button', '.hm-feel-r input', '[data-endless]']) {
+    const els = t.$$(sel);
+    t.expect(els.length > 0, `no elements matched ${sel}`);
+    for (const el of els) t.expect(el.getBoundingClientRect().height >= 43, `${sel} is ${el.getBoundingClientRect().height.toFixed(0)}px tall, wanted >=44px`);
+  }
+  // the deliberately-shorter Sort-by/Center-on chips: smaller than before (was 40px), but still a real tap target
+  const rung = t.$(".hm-ord .hm-rung");
+  t.expect(rung, "no Sort-by/Center-on chip to measure");
+  const rh = rung.getBoundingClientRect().height;
+  t.expect(rh >= 30 && rh < 40, `a Sort-by/Center-on chip is ${rh.toFixed(0)}px tall, wanted roughly 36px (30-40)`);
+  // the map above should have more room now that the sheet is shorter
+  const mapTop = t.$(".sheet.hm-sheet-arrange").getBoundingClientRect().top;
+  t.expect(mapTop >= vh * .55, `the space above the sheet is only ${(mapTop / vh * 100).toFixed(0)}% of the screen, wanted >=55%`);
+});
+
 scenario("home", "Arrange sheet: the strip morphs the map and keeps every color", async t => {
   await H.homeReady(t);
   await H.sheet(t, "arrange");

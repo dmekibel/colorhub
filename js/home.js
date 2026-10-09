@@ -576,7 +576,7 @@ function hmHome() {
         <div class="hm-ladder hm-ord" data-ord-row role="radiogroup"></div>
         <p class="hm-arr-sub" data-arr-sub></p>
         <div class="cx-sec"><b>Look</b></div>
-        <div class="hm-look-row" role="radiogroup" aria-label="Look">${HM_LOOKS.map(([id, t]) => `<button class="hm-look-chip${v.style === id ? " on" : ""}" data-style="${id}" role="radio" aria-checked="${v.style === id}"><i class="hm-look-ic">${hmLookIcon(id)}</i><b>${esc(t)}</b></button>`).join("")}</div>
+        <div class="hm-seg hm-look-seg" role="radiogroup" aria-label="Look">${HM_LOOKS.map(([id, t]) => `<button class="hm-look-chip${v.style === id ? " on" : ""}" data-style="${id}" role="radio" aria-checked="${v.style === id}"><i class="hm-look-ic">${hmLookIcon(id)}</i><span>${esc(t)}</span></button>`).join("")}</div>
         <div class="hm-feel">${HM_FEEL_SPECS.map(([k, label, lo, hi]) => `<label class="hm-feel-row" data-feel="${k}"><span class="hm-feel-l">${label}</span><span class="hm-feel-r"><i>${lo}</i><input type="range" min="0" max="1" step="0.01" value="${v.feel[k]}" aria-label="${label}"><i>${hi}</i></span></label>`).join("")}
           <button class="hm-feel-reset" data-feel-reset>Reset the feel</button></div>
         <div class="cx-sec"><b>Edges</b></div>
