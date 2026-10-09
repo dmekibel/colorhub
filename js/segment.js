@@ -326,3 +326,8 @@ function segSheet(pool, onClose) {
   }
   return close;
 }
+
+// Findable by search (design/SIMPLIFY/PLAN.md §9): Select lives in Look closer, itself reached from a
+// painting's picture or ⋯ › Look (js/gallery.js), not from a bare address -- the honest answer for a search
+// hit with no painting open is to say where it lives, same pattern as js/settray.js's own context-only tools.
+if (typeof featureRegister === "function") featureRegister("select-object", { t: "Select an object", where: "A painting · Look closer · Select", words: ["select", "object", "mask", "segment", "mobilesam", "sam"], run: () => toast("Open a painting, then Look closer · Select") });

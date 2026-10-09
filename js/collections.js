@@ -23,7 +23,7 @@ const COLLECTIONS = [
   { id: "paintings", t: "Paintings", group: "Art", count: "23,778", pic: "#5E4A3A", img: "img/paintings/starry-night-thumb.jpg",
     open: () => { if (typeof tlKeepUnder === "function") tlKeepUnder(); if (typeof openPart === "function") openPart("art"); } },
   { id: "painters", t: "Painters", group: "Art", count: "840", pic: "#7A5C3E", img: "img/paintings/the-kiss-thumb.jpg",
-    open: () => { if (typeof awIndex === "function") awIndex(); } },
+    open: () => { if (typeof awPainters === "function") awPainters(); else if (typeof awIndex === "function") awIndex(); } },
   { id: "movements", t: "Movements & decades", group: "Art", count: "", pic: "#4A5B3E", img: "img/paintings/composition-vii-thumb.jpg",
     open: () => { if (typeof awIndex === "function") awIndex(); } },
   // ---------- Design ----------
@@ -70,7 +70,7 @@ const COLLECTIONS = [
   // ---------- Writing & film ----------
   { id: "poems", t: "Poems", group: "Writing & film", count: "11,440", pic: "#4A6B7A",
     swatches: ["#4A6B7A", "#B5546B", "#C9A66B", "#4C6B4A"],
-    open: () => { if (typeof musePoems === "function") musePoems(); } },
+    open: () => { if (typeof poemsPage === "function") poemsPage(); else if (typeof musePoems === "function") musePoems(); } },
   { id: "literature", t: "Literature", group: "Writing & film", count: "225 passages", pic: "#2E4B3A",
     swatches: ["#2E4B3A", "#7A5C3E", "#6B4C7A", "#B5432E"],
     open: () => { if (typeof archWhen === "function" && typeof passagesIndexPage === "function") archWhen(() => passagesIndexPage()); } },

@@ -104,6 +104,37 @@ function poemOfTheDayCard() {
 }
 
 // ======================================================================
+// The Poems collection (design/SIMPLIFY/PLAN.md §9's Lane 4 list: "Poems ... browse by color word, with
+// search" -- a real door, where before there was none, CONTRACT.md: "Poems: No door. Only a color page's
+// 'In poems'…"). poemsPanel(el) already was exactly this (search, families, traditions, eras) -- it just had
+// nowhere of its own to live, mounted only inside the old Explore/Ideas lens being retired by this plan. This
+// is the thinnest possible fix: a real page shell (the one top bar, an address, a place to register ⋯) around
+// the panel that already works, not a rewrite of it.
+// ======================================================================
+function poemsPage(push = true) {
+  if (push && XSTACK[XSTACK.length - 1] !== "poems") XSTACK.push("poems");
+  const el = show(`
+    <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
+    <p class="eyebrow p-type">Writing &amp; film</p><h1 class="p-title">Poems</h1>
+    <div data-pm-panel></div>
+  `, "article pm-collpage");
+  el.querySelector("[data-back]").onclick = xBack;
+  onKey = e => { if (e.key === "Escape") xBack(); };
+  if (typeof wireLinks === "function") wireLinks(el);
+  poemsPanel(el.querySelector("[data-pm-panel]"));
+  // ⋯: the panel's own color/family/tradition/era filters already satisfy PLAN's "≤6 + more" rule as visible
+  // chips (they ARE the content, not chrome to tuck) -- what's missing is just making the poem of the day and
+  // a plain A-Z/random way in findable from search, same as every other collection.
+  if (typeof moreRegister === "function") moreRegister("poems", () => [
+    { title: "Poems", items: [
+      { t: "Poem of the day", run: () => { const b = el.querySelector("[data-poem].pm-potd"); if (b) b.click(); else toast("Still loading the poems…"); } },
+      { t: "Surprise me", n: "A random poem", run: () => loadPoemIndex().then(ix => { if (!ix) return toast("The poetry archive didn't load"); const pool = ix.list; POEM_ORIGIN = "explore"; poemPage(pool[Math.floor(Math.random() * pool.length)].id); }) },
+    ] },
+  ]);
+  if (typeof featureRegister === "function") featureRegister("coll-poems", { t: "Poems", where: "Museum · Poems", words: ["poem", "poetry", "verse"], run: () => poemsPage() });
+}
+
+// ======================================================================
 // The Poems lens in Explore
 // ======================================================================
 function poemsPanel(el) {

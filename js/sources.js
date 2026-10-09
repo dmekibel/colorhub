@@ -86,7 +86,7 @@ function sourcePage(id) {
   const sys = SOURCE_SYSTEMS[id];
   if (!sys) { toast("That source isn't in our list yet"); return; }
   const el = show(`
-    <header class="src-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="src-top-t">Source</span><span class="ar-rd-sp"></span></header>
+    <header class="src-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button></header>
     <div class="src-band"><p class="eyebrow">A naming system</p><h1>${esc(sys.title)}</h1><p class="src-short">${esc(sys.short)}</p></div>
     <dl class="ar-facts src-facts">
       <div><dt>Who</dt><dd>${esc(sys.who)}</dd></div>

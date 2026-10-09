@@ -178,7 +178,9 @@ function csActions(set, o = {}) {
   if (!first || !first.colors.length) return row;
   const partner = () => o.compareWith ? csGet(o.compareWith) : csPartner(csGet(set));
   const want = CS_ACTS.filter(([k]) => (!o.only || o.only.includes(k)) && (k !== "compare" || partner()));
-  row.innerHTML = want.map(([k, t]) => `<button class="cs-act" data-cs="${k}">${CS_ICON[k]}<span>${t}</span></button>`).join("");
+  // o.labels: { key: "Custom label" } -- a page-specific word for the same verb (PLAN §3.6's per-page copy,
+  // e.g. the painting page's "Learn these" vs the painter page's plain "Learn"), without forking CS_ACTS itself.
+  row.innerHTML = want.map(([k, t]) => `<button class="cs-act" data-cs="${k}">${CS_ICON[k]}<span>${esc((o.labels && o.labels[k]) || t)}</span></button>`).join("");
   row.style.setProperty("--n", want.length); row.dataset.n = want.length;
   row.onclick = e => {
     const b = e.target.closest("[data-cs]"); if (!b) return;
