@@ -4189,6 +4189,22 @@ scenario("paintmap", "arrange by time and painter and around the middle one then
   await t.waitFor(() => Math.abs(t.w.PM_CTRL.count - want) <= 1, 8000, "the map to show the filtered paintings");
   t.expect(/y0=\d+/.test(t.w.location.hash), `the address doesn't carry the years: ${t.w.location.hash}`);
 });
+// David's screenshot, 2026-10-09: "zooming out doesn't load the stuff" -- only a ~160-cell central disc ever got a
+// thumbnail, however long you waited, because the per-frame candidate list handed to pmImages().want() was capped
+// at 160 BEFORE its own concurrency limit (PM_FLIGHT, 14 concurrent) ever got a say -- everything past the nearest
+// 160 cells was silently never even requested. Fixed by raising the cap and lowering the load threshold. A live
+// scenario that actually waits for thumbnails to stream in turned out to be unworkable here -- real thumbnail
+// fetches (local files and Commons URLs both) don't resolve inside this harness's virtual-time iframe, and a faked
+// window.Image still needs a route change that a #shot= session's own SHOT flag silently swallows (manually
+// verified instead: zooming to z=0.45 went from the old code's ~160 loaded to 582 and climbing). This is the next
+// best thing: a static guard on the two numbers themselves, so neither regresses back silently.
+scenario("paintmap", "the thumbnail-streaming cap and load threshold haven't regressed back to the old ~160-cell ceiling", async t => {
+  const src = await fetch("/js/paintmap.js").then(r => r.text());
+  const cap = +(src.match(/wantImg\.reverse\(\)\.slice\(0,\s*(\d+)\)/) || [])[1];
+  const loadAt = +(src.match(/if\s*\(b\.d\s*>=\s*(\d+)\)\s*wantImg\.push/) || [])[1];
+  t.expect(cap >= 1000, `the per-frame candidate cap is ${cap || "(not found)"}, back near the old 160 -- it should comfortably exceed anything a phone screen holds`);
+  t.expect(loadAt > 0 && loadAt <= 16, `the thumbnail load threshold is ${loadAt || "(not found)"}px, not David's ~14px`);
+});
 scenario("favs", "a painting's heart (now in the top bar) and a double-tap on the picture both keep it; the shelf sorts favorites into kinds with counts, remembered", async t => {
   await t.open("#/gallery/8136", { settle: 800 });
   await t.waitFor("[data-fva]", 14000, "the heart under the painting");
