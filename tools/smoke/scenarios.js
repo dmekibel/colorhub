@@ -1457,6 +1457,29 @@ scenario("pages", "the pinned header's padding clears a simulated status-bar ins
   t.expect(t.$$("body > .rp-bar").length === 1, `${t.$$("body > .rp-bar").length} .rp-bar nodes on body after reopening, expected exactly 1`);
 });
 
+// Root cause found (js/trail.js-owning lane, following up on the scenario above): bar.getAnimations() can report
+// its own transform transition stuck at playState "running" long after its declared duration elapsed -- a fast,
+// scripted scroll (many scroll events with no real time between them) reliably reproduces it. Stuck mid-
+// interpolation, the bar reads as "disappeared" (pinned near its fully hidden preset) or "overlaps the status
+// bar" (a small residual Y offset, still visible but a few px too high) depending on exactly where it got stuck --
+// the same root cause behind both of David's reports on Aero. js/richpage.js rpBarWire's check() now finishes
+// any such stuck transition every time the bar is meant to be on screen, snapping it straight to .on's own
+// resting transform instead of leaving it part-way there.
+scenario("pages", "a fast scripted scroll never leaves the pinned header's transform stuck off its \"on\" resting position", async t => {
+  const INSET = 59;
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  const bar = await t.waitFor(() => t.$("body > .rp-bar"), 8000, "the pinned header");
+  { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }
+  const settled = () => { const r = bar.getBoundingClientRect(); return Math.abs(r.top) < 1; };   // .on's resting transform: translate(-50%,0)
+  for (let rep = 0; rep < 6; rep++) {
+    t.w.scrollTo(0, 0); t.w.document.dispatchEvent(new t.w.Event("scroll"));
+    for (let y = 0; y <= 2000; y += 45) { t.w.scrollTo(0, y); t.w.document.dispatchEvent(new t.w.Event("scroll")); }
+    await t.sleep(30);
+    t.expect(bar.classList.contains("on"), `rep ${rep}: the bar should be "on" once scrolled past the cover`);
+    t.expect(settled(), `rep ${rep}: the bar's transform is stuck at top=${Math.round(bar.getBoundingClientRect().top)}px instead of settling to 0 (on-screen, below the status bar)`);
+  }
+});
+
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
   // a name with no story of its own. Every color is getting an article, so pick one still without a committed article
   // from the article index; when none is left, nearest stories can't show and the scenario only notes it.
