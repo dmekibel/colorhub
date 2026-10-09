@@ -85,8 +85,22 @@
 .rp-focus.closing{opacity:0}
 .rp-focus-name{font:400 20px/1.2 var(--serif);letter-spacing:-.01em;opacity:.92;transition:opacity .4s ease;padding:0 32px;text-align:center;text-wrap:balance}
 .rp-focus.dim .rp-focus-name{opacity:0}
+/* the quiet corner tag (David, 2026-10-09): name + hex, bottom-left, safe-area aware -- a museum label that stays
+   on through the big centered name's own fade (it's "alone with the color", not "alone with no idea what it is") */
+.rp-focus-tag{position:absolute;left:calc(env(safe-area-inset-left,0px) + 18px);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);
+  margin:0;font:400 13px/1.3 var(--mono);letter-spacing:.02em;opacity:.55;pointer-events:none;text-align:left;text-transform:none}
 .rp-focus[data-ink="dark"]{color:#141311}.rp-focus[data-ink="light"]{color:#fff}
 @media (prefers-reduced-motion:reduce){.rp-focus{transform:none;transition:opacity .22s ease}.rp-focus.on{transform:none}.rp-focus-name{transition:opacity .22s ease}}
+/* the same view, 2 or more colors at once (David, 2026-10-09: "same full-screen preview for a pair or more" --
+   js/setpage.js): full-height bands side by side, or stacked full-width when there are 4+ (or the viewport is too
+   narrow for a sliver of a band to read) -- background and the transform-origin scale-in still belong to .rp-focus
+   itself, each band just paints its own fill and carries its own corner tag, inked by its own contrast */
+.rp-focus.cf-multi{background:var(--ground);flex-direction:row;align-items:stretch}
+.rp-focus.cf-multi.cf-stack{flex-direction:column}
+.cf-band{position:relative;flex:1;min-width:0;min-height:0;background:var(--c)}
+.cf-band[data-ink="dark"]{color:#141311}.cf-band[data-ink="light"]{color:#fff}
+.cf-band .rp-focus-tag{opacity:.65}
+@media (prefers-reduced-motion:reduce){.rp-focus.cf-multi{transform:none}}
 
 /* ---------- the look-alike strip: no label, the diff line right under it ---------- */
 .cp-strip-sec{margin-top:26px}
