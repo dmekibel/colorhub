@@ -1,0 +1,76 @@
+{
+ "id": "emo",
+ "name": "Emo",
+ "lineage": {
+  "influenced_by": [
+   "hardcore punk",
+   "post-punk"
+  ],
+  "influences": [
+   "scene",
+   "nu-goth",
+   "indie-sleaze"
+  ]
+ },
+ "eras": [
+  "mid-1980s (DC emocore)",
+  "late 1990s–2000s revival (mall emo, MySpace era)",
+  "2010s pop-punk-adjacent fade"
+ ],
+ "places": [
+  "Washington DC's Dischord scene (origin)",
+  "suburban US malls and Hot Topic (2000s peak)",
+  "MySpace profile pages"
+ ],
+ "garments": [
+  "black skinny jeans",
+  "studded belts",
+  "band tees",
+  "straightened side-swept fringe",
+  "eyeliner",
+  "Chuck Taylors or Vans"
+ ],
+ "media": [
+  {
+   "title": "My Chemical Romance, Three Cheers for Sweet Revenge (2004)",
+   "note": "the record most credited with the mall-emo look going mainstream"
+  },
+  {
+   "title": "Dashboard Confessional, early 2000s",
+   "note": "the confessional-lyric, acoustic-leaning side of the scene"
+  }
+ ],
+ "figures": [
+  "Gerard Way",
+  "Pete Wentz"
+ ],
+ "reacts_against": "the macho posturing of 1980s hardcore (its own parent scene) and, in the 2000s wave, the upbeat polish of pop radio.",
+ "revivals": [
+  "the 2010s/2020s emo-nostalgia wave (When We Were Young festival, 2022–)",
+  "TikTok's 'emo revival' audio trend, 2021–"
+ ],
+ "article": "Emo's color story runs backwards from the one most people picture. It starts in mid-1980s Washington DC, where bands on Ian MacKaye's Dischord label slowed hardcore punk down and let it get emotionally direct — 'emotional hardcore,' shortened fast to emo — and the visual code was still mostly hardcore's own: black, plain, unglamorous. The look most people now call 'emo' is really its second life, the mid-2000s mall version that grew up around bands like My Chemical Romance and Dashboard Confessional and sold itself through Hot Topic: jet-black hair swept hard over one eye, skinny black jeans, studded belts, eyeliner on anyone's face. That palette is almost a photo negative — near-black, white, and one accent, usually a bruised red or violet — and it reads as a costume of sincerity: the darkness isn't goth's ornamental gloom, it's meant to look like you didn't try, even though the side-swept fringe took real effort. MySpace, with its black backgrounds and customizable profile pages, gave the look a home screen to perform on, which is part of why 'emo' and a specific shade of digital-era black now feel inseparable.",
+ "wiki_facts": {
+  "other_names": "Emotional Hardcore",
+  "decade_of_origin": "1980s (First Wave)\n1990s (Midwest Emo)\n2000s (Third Wave/Mainstream Subculture)",
+  "key_motifs": "Side-swept bangs (fringe), skinny jeans, band t-shirts, studded belts, Converse sneakers, heavy eyeliner, confessional lyrics",
+  "key_colours": "Primarily black, often with accents of red, white, or dark jewel tones",
+  "related_aesthetics": "SceneFashioncoreGothPunkGrungeMidwest EmoIndie SleazeE-GirlE-BoyGlitter GraphicsEmo RapTeenpunk",
+  "key_values": "Emotional vulnerability, introspection, sensitivity, angst, heartbreak, musical identity"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Emo"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 42% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 72% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

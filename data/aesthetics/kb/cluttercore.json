@@ -1,0 +1,48 @@
+{
+ "id": "cluttercore",
+ "name": "Cluttercore",
+ "lineage": {
+  "influenced_by": [
+   "maximalist interior design",
+   "cottagecore's collected-objects sensibility",
+   "a reaction to 2010s minimalism/Marie Kondo decluttering culture"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020–present"
+ ],
+ "places": [
+  "Pinterest/TikTok home-decor content"
+ ],
+ "garments": [
+  "not a fashion look — an interior-design aesthetic: dense layering of patterned textiles, collected objects, mismatched color"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "minimalist decluttering culture (explicitly including the Marie Kondo-driven 'does it spark joy' movement), arguing that density and personal history make a space feel alive.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "|decade_of_origin = 2020s",
+  "decade_of_origin": "2020s",
+  "key_motifs": "Curated collections, sentimental objects, gallery walls, overflowing bookshelves, plants, eclectic decor, layered textiles",
+  "key_colours": "Any, but often highly saturated and varied",
+  "key_values": "Authenticity, creativity, individuality, nostalgia, comfort, storytelling"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Cluttercore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 51% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 60% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

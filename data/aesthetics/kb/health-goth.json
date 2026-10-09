@@ -1,0 +1,58 @@
+{
+ "id": "health-goth",
+ "name": "Health Goth",
+ "lineage": {
+  "influenced_by": [
+   "90s techwear",
+   "minimalist sportswear",
+   "industrial/goth club culture"
+  ],
+  "influences": [
+   "cybergoth",
+   "normcore"
+  ]
+ },
+ "eras": [
+  "2013–2016 (coined and peaked)"
+ ],
+ "places": [
+  "Seattle/online (the look was named by a trio who ran a Tumblr and Facebook page)"
+ ],
+ "garments": [
+  "all-black technical sportswear",
+  "Nike and Reebok logos reframed as goth iconography",
+  "mesh panels",
+  "platform sneakers"
+ ],
+ "media": [
+  {
+   "title": "Health Goth (the Facebook page/collective, founded 2013)",
+   "note": "the look's naming event"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "both the color-saturated 2010s athleisure boom and the ornamental excess of traditional goth — it kept goth's black-on-black mood but swapped velvet for performance fabric.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "Early 2010s",
+  "key_motifs": "Monochrome sportswear, mesh fabrics, technical sneakers, performance gear, clean lines, futuristic graphics, transhumanist elements",
+  "key_colours": "Black, white, grey",
+  "related_aesthetics": "GothGorpcoreTechwearMinimalismCyberpunk",
+  "key_values": "Futurism, minimalism, performance, technology, clean aesthetics, transhumanism"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Health_Goth"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 97% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

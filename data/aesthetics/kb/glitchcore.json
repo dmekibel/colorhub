@@ -1,0 +1,55 @@
+{
+ "id": "glitchcore",
+ "name": "Glitchcore",
+ "lineage": {
+  "influenced_by": [
+   "vaporwave",
+   "webcore",
+   "net art",
+   "datamoshing techniques"
+  ],
+  "influences": [
+   "weirdcore",
+   "dreamcore"
+  ]
+ },
+ "eras": [
+  "2019–present (TikTok/Tumblr)"
+ ],
+ "places": [
+  "TikTok edit communities",
+  "Tumblr art blogs"
+ ],
+ "garments": [
+  "not a fashion look — primarily a digital-image style (fashion crossover is minimal and borrowed from y2k/cybergoth)"
+ ],
+ "media": [
+  {
+   "title": "early datamoshing experiments (2000s video art)",
+   "note": "the technical ancestor: deliberately corrupted video codecs"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "clean, over-produced social media imagery; glitchcore treats visual corruption as the point rather than an error to hide.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "2020s",
+  "key_colours": "Neon colors, bright contrasting colors",
+  "related_aesthetics": "2010s Meme MaximalismAnimecoreEarly CyberGlitch ArtGlitchbreakHyperpopKidcoreKrushclubLolicoreScenecoreSynthwaveVaporwave"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Glitchcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a vivid streak — roughly 63% of the color measured is highly saturated"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}
