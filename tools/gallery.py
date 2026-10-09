@@ -60,9 +60,40 @@ OUT = ROOT / "data" / "gallery"
 SHARD = 100     # paintings per detail shard: a screen of results spread over the whole corpus loads ~30 small files
 REC = 30        # bytes per painting in index.bin
 YEAR0 = 20000
-POOL = 24       # dynamic-palette candidates kept per painting (ROADMAP §13): enough headroom above the slider's
-                # top setting (20) that picking 20 from the pool still drops a few near-duplicates by distinctness
-POOL_SIDE = 120 # long side of the copy the pool k-means runs on (corpus.py's own K_SIDE, for the same reasons)
+# ---------------------------------------------------------------------------------------------------------------
+# Pool sizing (David, 2026-10-09 audit -- Gari Melchers' "Maternity": the mother's lilac/mauve sleeve, plainly
+# visible and locally concentrated, never appeared in ANY palette mode). Diagnosis (reproduced by hand against the
+# live NGA image, see the audit note below): the OLD pipeline (POOL_SIDE=120, POOL=24, pure greedy share^.6 x
+# chroma x distinctness pick) doesn't lose the sleeve to the thumbnail alone -- raising POOL_SIDE to 800 and k to
+# 64 on its own still drops it. The real cause is that a canvas dominated by one family (here: browns/ochres, the
+# dress + chair + autumn background) fields dozens of moderate-chroma, moderate-share clusters in that family,
+# and the old greedy objective has no per-hue-family floor, so they out-score the sleeve's few small (~0.15-0.3%
+# share each) mauve/violet clusters at ANY k up to 64. The sleeve's clusters are real and present in the raw
+# k-means output the whole time -- they just never survive the OLD selection step.
+# Fix, in two parts:
+#   1) POOL_SIDE 120 -> 512 (a real thumbnail, not a postage stamp -- this alone recovers some chroma the old
+#      120px box-resize smeared away).
+#   2) extract_pool() over-segments to OVERSEG (48-80, scaled with pool size) clusters, same as before, but the
+#      pick step is no longer pure greedy: it first reserves one slot per hue family (12 x 30 degree bins) whose
+#      total share clears HUE_FLOOR_SHARE, taking that family's best (share x chroma x spatial compactness x
+#      contrast-vs-canvas) cluster -- a guarantee every hue actually present above a small area gets a seat, the
+#      direct fix for the sleeve -- and only THEN fills the remaining seats with the old share^.6 x chroma x
+#      distinctness greedy rule for by-area coverage/fidelity. A final ΔE_ok-ish min-spacing pass drops near
+#      duplicates the two passes both reached for.
+# POOL 24 -> 40 so the extra hue-reserved seats don't crowd out area coverage; the wire format (hex + share, 4
+# bytes/color, base64) is unchanged, so js/gallery.js's glPoolDecode() needs no migration.
+POOL = 40       # dynamic-palette candidates kept per painting: headroom above the live slider's 20-color top
+                # (ROADMAP §13 / David 2026-10-09 "any count via one shared slider, 2-20") so picking 20 still
+                # drops a few near-duplicates by distinctness, AND every present hue family gets a fair shot
+POOL_SIDE = 512 # long side of the copy the pool k-means runs on -- was 120 (a thumbnail so small it was shaving
+                # chroma off thin brushwork before clustering even started); 512 keeps run time sane (~1.2s/
+                # painting measured) while giving fine brushstroke colors (a sleeve, a sash, a flower) enough
+                # pixels to form their own cluster
+OVERSEG_MIN = 64   # raw k-means clusters before any selection (David's "k~48-64"); never fewer than this
+HUE_BINS = 12      # 30-degree OKLab hue wedges for the diversity floor
+HUE_FLOOR_SHARE = .003   # a hue family needs at least this share of the canvas (0.3%) to earn a reserved seat --
+                         # below that it's genuine single-pixel noise, not a real color in the picture
+MIN_SPACE_OK = .045      # final de-dup: two picks closer than this in OKLab (L,a,b together) are near-duplicates
 
 # One row per museum. rec: record-page pattern; {num} = the id after "<src>-", {acc} = CMA accession number
 # (from the image URL). credit: the image and data terms shown under each painting.
@@ -247,6 +278,12 @@ def crop_image(im, crop):
 
 
 def extract_pool(path, k=POOL, crop=None):
+    """Over-cluster in OKLab (OVERSEG_MIN-ish groups), represent each by a real pixel (medoid, never a blended
+    average -- "never pick muddy averages"), then pick k: first one seat per hue family that clears
+    HUE_FLOOR_SHARE (the diagnosis fix: a small, locally concentrated, genuinely-present color family -- a
+    lilac sleeve against an all-brown canvas -- is never allowed to lose every seat to a crowd of browns), then
+    fill the rest by the original share^.6 x chroma x distinctness greedy rule for area coverage. A final
+    min-spacing pass (MIN_SPACE_OK) drops near-duplicates either pass reached for."""
     im = crop_image(Image.open(path).convert("RGB"), crop)
     w0, h0 = im.size
     sc = min(1.0, POOL_SIDE / max(w0, h0))
@@ -259,8 +296,15 @@ def extract_pool(path, k=POOL, crop=None):
     N = len(px)
     if N == 0:
         return []
+    # canvas-level stats used by the hue-floor scoring: the share-weighted mean color (for "contrast vs
+    # surroundings") and each pixel's (x, y) on the sampled grid (for "spatial compactness" -- a concentrated
+    # patch like a sleeve scores higher than the same area scattered as noise across the canvas)
+    mean_col = px.mean(0)
+    ys, xs = np.divmod(np.arange(N), w)
+    diag = math.hypot(w, h) or 1.0
+
     rnd = _Rnd()
-    K = min(N, max(16, k * 2 + 4))
+    K = min(N, max(OVERSEG_MIN, k * 2))
     cents = [px[int(rnd() * N) % N]]
     dmin = ((px - cents[0]) ** 2).sum(1)
     while len(cents) < K:
@@ -287,24 +331,67 @@ def extract_pool(path, k=POOL, crop=None):
         core = order[:max(1, math.ceil(len(order) * .6))]
         chroma = np.hypot(px[core, 1], px[core, 2])
         top = core[np.argsort(-chroma)][:max(1, math.ceil(len(core) * .3))]
-        groups.append({"col": px[top].mean(0), "share": len(idxs) / N})
-    groups = [g for g in groups if g["share"] > .002]
-    picked, left = [], groups[:]
+        blend = px[top].mean(0)
+        # medoid snap: the single real pixel (among the chroma-top subset) nearest the blended center -- the
+        # stored color is always a color that actually exists in the painting, never an average of several
+        medoid_i = top[int(np.argmin(((px[top] - blend) ** 2).sum(1)))]
+        col = np.array(px[medoid_i])   # a plain copy (not a view), used as a numpy array only for math below
+        share = len(idxs) / N
+        spread = math.hypot(float(xs[idxs].std()), float(ys[idxs].std())) / diag
+        compact = 1.0 / (1.0 + 6.0 * spread)                      # tighter spatial spread -> closer to 1
+        contrast = float(np.hypot(*(col[1:] - mean_col[1:]))) + abs(float(col[0] - mean_col[0])) * .5
+        groups.append({"gid": j, "col": col, "share": share, "compact": compact, "contrast": contrast})
+    groups = [g for g in groups if g["share"] > .0015]
+    if not groups:
+        return []
+
+    def chroma_of(g):
+        return math.hypot(g["col"][1], g["col"][2])
+
+    def hue_of(g):
+        return math.degrees(math.atan2(g["col"][2], g["col"][1])) % 360
+
+    # ---- pass 1: one reserved seat per hue family actually present above HUE_FLOOR_SHARE (the diagnosis fix) ----
+    by_bin = {}
+    for g in groups:
+        if chroma_of(g) < .02:         # near-neutral: no stable hue, leave it to the area-coverage pass
+            continue
+        b = int(hue_of(g) // (360 / HUE_BINS)) % HUE_BINS
+        by_bin.setdefault(b, []).append(g)
+    picked, picked_ids = [], set()
+    for b, gs in by_bin.items():
+        tot_share = sum(x["share"] for x in gs)
+        if tot_share < HUE_FLOOR_SHARE:
+            continue
+        best = max(gs, key=lambda g: (g["share"] ** .5) * chroma_of(g) * g["compact"] * (.4 + g["contrast"]))
+        picked.append(best)
+        picked_ids.add(best["gid"])
+
+    # ---- pass 2: fill the rest by area-coverage fidelity (the original share^.6 x chroma x distinctness rule) ----
+    left = [g for g in groups if g["gid"] not in picked_ids]
     while len(picked) < k and left:
         bi, bs = 0, -1.0
         for i, g in enumerate(left):
             near = min(float(np.sqrt(((g["col"] - p["col"]) ** 2).sum())) for p in picked) if picked else 1.0
-            chroma = math.hypot(g["col"][1], g["col"][2])
-            s = (g["share"] ** .6) * (.5 + 3 * chroma) * min(1.0, near / .14) ** 1.5
+            s = (g["share"] ** .6) * (.5 + 3 * chroma_of(g)) * min(1.0, near / .14) ** 1.5
             if s > bs:
                 bi, bs = i, s
         picked.append(left.pop(bi))
-    if not picked:
-        return []
-    PC = np.array([p["col"] for p in picked])
+
+    # ---- final min-spacing de-dup: never two picks closer than MIN_SPACE_OK (a ΔE_ok-ish floor) ----
+    picked.sort(key=lambda g: -g["share"])
+    final_picks = []
+    for g in picked:
+        if all(float(np.sqrt(((g["col"] - p["col"]) ** 2).sum())) >= MIN_SPACE_OK for p in final_picks):
+            final_picks.append(g)
+    if not final_picks:
+        final_picks = picked[:1]
+
+    # ---- re-measure: every canvas pixel goes to its nearest surviving pick, so the shipped shares are honest ----
+    PC = np.array([p["col"] for p in final_picks])
     final = ((px[:, None, :] - PC[None, :, :]) ** 2).sum(-1).argmin(1)
-    counts = np.bincount(final, minlength=len(picked))
-    out = [(_ok_hex(p["col"]), counts[j] / N) for j, p in enumerate(picked) if counts[j] > 0]
+    counts = np.bincount(final, minlength=len(final_picks))
+    out = [(_ok_hex(p["col"]), counts[j] / N) for j, p in enumerate(final_picks) if counts[j] > 0]
     out.sort(key=lambda x: -x[1])
     return out
 

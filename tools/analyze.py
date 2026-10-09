@@ -1268,7 +1268,7 @@ def main():
         trend=trend,
         caveats=[
             "Photographs of aged, varnished paintings from six-plus museum cameras: every stat is 'as photographed'.",
-            "Computed from each painting's 24-color pool + area shares only (tools/gallery.py's extract_pool); "
+            "Computed from each painting's up-to-40-color pool + area shares only (tools/gallery.py's extract_pool); "
             "no raw pixel grid in this job, so the L* histogram, contrast range, gamut area and color count are "
             "palette-level proxies, not exact pixel-level statistics.",
             "No spatial information survives into the pool, so 'top vs ground' (sky vs floor) from ROADMAP §15 "
