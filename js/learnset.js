@@ -588,7 +588,7 @@ function lsStudy(items, o = {}, resume = null) {
     // Test me skips it (no looking first); resuming a stopped session or starting straight from Look (o.looked)
     // skips it too, since you've just seen them. Recall-before-reveal still holds: a Quick look only ever names a
     // color, never shows a question's answer before the attempt is done.
-    if (!resume && !o.looked && studyPace !== "test" && P.fresh.length) {
+    if (!resume && !o.looked && !o.shot && studyPace !== "test" && P.fresh.length) {
       const quickRun = P.fresh.map((q, i) => ({ t: "quick", it: q.it, i: i + 1, of: P.fresh.length }));
       await runStory(quickRun, { skippable: true });
       if (sess.ended || !stage.isConnected) return;
@@ -749,7 +749,10 @@ function lsResults(sess, r) {
 }
 
 // ======================================================================
-// Screenshots: #lsshot=sheet[:close] | look:<view> | study[:wrong|match|grad|boss] | results
+// Screenshots: #lsshot=sheet[:close] | look:<view> | study[:wrong|match|grad|boss|quick|sortfmt|gradfmt] | results
+// study:quick lands on the overview's Quick look (review colors, already "met"); study:sortfmt/gradfmt fast-
+// forward a real Test me session, answering whatever comes up (reusing the same per-kind logic as every other
+// shot state here), until Sort or Gradient appears, then stop so the screenshot lands on it.
 // ======================================================================
 function lsShot(arg) {
   PR_SHOT_ON = true;
@@ -759,6 +762,30 @@ function lsShot(arg) {
   const ls = lsState(); ls.typing = st === "type";
   if (w === "sheet") { openRoute("#/color/teal"); if (st) ls.close = +st; return setTimeout(() => lsOpen({ seed: teal }), 1200); }
   if (w === "look") return lsLook(items, { label, view: st || "grid" });
+  if (w === "study" && st === "quick") {
+    const t = today();
+    items.forEach(it => { if (it.c && it.c.id) S.cards[it.c.id] = { b: 1, due: addDays(t, 5), since: addDays(t, -3), own: false, n: it.n, h: it.h }; });
+    return lsStudy(prShuffle(items), { label });
+  }
+  if (w === "study" && (st === "sortfmt" || st === "gradfmt")) {
+    const set = prUnique([teal, ...lsAlike(teal, 9, 4)]).slice(0, 9);
+    const el = lsStudy(prShuffle(set), { label, pace: "test" });
+    const want = st === "sortfmt" ? ".pr-s-sort" : ".pr-s-gradient";
+    const tick = setInterval(() => {
+      const stage = el.querySelector(".pr-stage"); if (!stage || !stage.isConnected) return clearInterval(tick);
+      if (stage.querySelector(want)) return clearInterval(tick);   // landed: stop so the screenshot shows it
+      const skip = stage.querySelector("[data-skip-look]"); if (skip) return void skip.click();
+      const nx = stage.querySelector("[data-next]"); if (nx) return void nx.click();
+      const nm = stage._lsIt ? prName(stage._lsIt) : "";
+      if (stage.querySelector(".pr-s-match") && stage._prMatch) { const { tiles } = stage._prMatch, b = [...stage.querySelectorAll(".pr-tile")], k = tiles.findIndex((x, i) => !x.sw && !b[i].classList.contains("gone")); if (k < 0) return; const j = tiles.findIndex(x => x.sw && x.i === tiles[k].i); b[k].click(); b[j].click(); return; }
+      if (stage.querySelector(".pr-s-sort")) { const c = stage.querySelector("[data-check]"); if (c) c.click(); return; }
+      if (stage.querySelector(".pr-s-odd")) return void stage._prChoose(stage._prOpts.findIndex(o => !o.same));
+      if (stage.querySelector(".pr-s-edge") && stage._prEdge) return void stage._prChoose(stage._prEdge.last);
+      if (stage.querySelector(".pr-s-quiz")) return void stage._prChoose([...stage.querySelectorAll(".pr-opt")].findIndex(b => b.textContent.trim() === nm));
+      if (stage.querySelector(".pr-s-qc")) return void stage._prChoose([...stage.querySelectorAll(".pr-cell .pr-tag")].findIndex(b => b.textContent.trim() === nm));
+    }, 260);
+    return;
+  }
   if (w === "study") {
     const el = lsStudy(prShuffle(items), { label, shot: st });
     const stage = el.querySelector(".pr-stage");
