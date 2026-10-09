@@ -1029,6 +1029,11 @@ function honeycomb(host, opts = {}) {
   let cfg = honeyResolveCfg(styleId, liveTweak, (opts.items && opts.items.length) || 101);
   let lay = null, P = [0, 0], W = 0, Hh = 0, dpr = 1, base = 30, dead = false;
   let Z = clamp(+opts.zoom || 1, .04, ZMAX), zAnim = null, ghost = null, ghostT0 = 0;
+  // David, 2026-10-09: "it gets stuck sometimes when you pan and zoom" -- the last P/Z draw() itself actually
+  // accepted (never a half-corrupted in-flight one), so any source of NaN/Infinity (a pinch computed from garbage
+  // coordinates, a divide-by-a-collapsed-distance, anything future code might add) has somewhere safe to recover
+  // to, instead of painting a blank/frozen map forever from then on.
+  let lastGoodP = [0, 0], lastGoodZ = 1;
   let phase = "idle", spring = null, touched = RM || SHOOT, visible = true, raf = 0, last = 0;
   let bloom = RM || SHOOT ? 1 : 0, bloomT0 = performance.now(), pressed = null, pressK = 0, drawn = [], center = null, settled = null;
   let ZMIN = .4;
@@ -1409,10 +1414,17 @@ function honeycomb(host, opts = {}) {
   }
   function draw(t = performance.now()) {
     if (!lay || !W || dead) return;
+    // the general recovery net (David, 2026-10-09): whatever produced a non-finite P/Z (a corrupted pinch frame,
+    // or anything else), painting from it would only throw or draw garbage -- recover to the last frame that was
+    // actually fine, and drop whatever gesture was in flight, rather than leaving the map stuck this way forever.
+    if (!Number.isFinite(P[0]) || !Number.isFinite(P[1]) || !Number.isFinite(Z) || Z <= 0) {
+      P = lastGoodP.slice(); Z = lastGoodZ; resetPointers();
+    }
     const l = lens(t);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, W, Hh); ctx.globalAlpha = l.a;
     if (lay.globe) buildGlobeDrawn(l, t); else { buildFlatDrawn(l, t); if (morph) l18MorphApply(t); }
     finishFrame(l, t);
+    lastGoodP = P.slice(); lastGoodZ = Z;
   }
   function caption() {
     const it = center; if (!it) return;
@@ -1701,7 +1713,19 @@ function honeycomb(host, opts = {}) {
   // select mode (honeySelectMode below): a tap toggles a bubble; hold still ~260ms, then drag, to sweep a run of them.
   let sel = null, paint = null, holdT = 0;
   const selSet = (it, on) => { if (!sel || sel.isOn(it.o) === on) return; sel.onToggle(it.o, on); buzz(4); draw(); };
-  const ptrs = new Map();
+  const ptrs = new Map();   // pointerId -> [x, y, lastUpdateMs]
+  // David, 2026-10-09: "it gets stuck sometimes when you pan and zoom" -- the panning-stuck bug fixed earlier
+  // this week (5595057e) was ONE source of a ghost entry left in ptrs (a double-tap-close intercepting the up
+  // before honey.js ever saw it); David's report after that fix shows there are others -- iOS can fail to
+  // deliver a pointerup/pointercancel at all for a finger a SYSTEM gesture claims mid-touch (an edge swipe, the
+  // notification shade, a system pinch, a sheet/overlay appearing over the canvas, palm rejection). No single
+  // intercepted-event fix covers all of those, so this is a general, self-healing reset instead: drop every
+  // tracked pointer and whatever gesture was mid-flight, back to a clean idle state.
+  const resetPointers = () => {
+    ptrs.clear(); down = null; pinch = null; paint = null; pressed = null;
+    clearTimeout(holdT); holdT = 0; clearTimeout(tapTimer); tapTimer = 0; lastTap = null;
+    if (phase === "drag") phase = "idle";
+  };
   const hit = (x, y) => { let best = null, bd = Infinity; for (const b of drawn) { const d = Math.hypot(b.x - x, b.y - y); if (d < b.d / 2 + 4 && d / b.d < bd) { bd = d / b.d; best = b; } } return best; };
   const local = e => { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
   // A bubble opens on pointerup, so the page is already under the finger when a phone sends the tap's own click
@@ -1718,8 +1742,22 @@ function honeycomb(host, opts = {}) {
   cv.addEventListener("pointerdown", e => {
     if (!lay) return;
     if (frozen && performance.now() - frozen > 1500) frozen = 0;   // still here long after an open that never left: the view is yours again
-    lastInput = performance.now();
-    const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]); touchXY = [x, y];
+    const now0 = performance.now(); lastInput = now0;
+    // self-heal: a pointer this old never got its matching up/cancel (iOS can simply fail to send one when a
+    // system gesture claims the finger) -- drop it before it can masquerade as a second, real finger and corrupt
+    // the pinch math below. A real multi-touch gesture always has its second pointerdown land within this window.
+    let pruned = false;
+    for (const [id, v] of ptrs) if (now0 - v[2] > 1000) { ptrs.delete(id); pruned = true; }
+    const [x, y] = local(e); ptrs.set(e.pointerId, [x, y, now0]); touchXY = [x, y];
+    // this gesture set never needs more than 2 real concurrent touches (one finger, or a pinch's two) -- a third
+    // live entry is never a real third finger, it's at least one ghost the 1s staleness window above hasn't
+    // caught yet. Keep only the 2 most recently updated rather than wait it out.
+    if (ptrs.size > 2) { const oldest = [...ptrs.entries()].sort((p, q) => p[1][2] - q[1][2]); while (ptrs.size > 2) { ptrs.delete(oldest.shift()[0]); pruned = true; } }
+    // whatever pruning just removed, any in-flight pinch tracking (exactly the 2 fingers it started with) and any
+    // in-flight single-finger drag are now stale too -- without this, a `pinch` left over from a dropped gesture
+    // would silently block every new tap/drag forever (ptrs.size > 2 || pinch) => return below, with ptrs itself
+    // reporting a clean 0/1 and masking that pinch was the actual reason nothing responded.
+    if (pruned) { pinch = null; down = null; if (phase === "drag") phase = "idle"; }
     try { cv.setPointerCapture(e.pointerId); } catch (er) {}
     if (phase === "spring" || zAnim) loop(performance.now());
     // a tap that catches a glide opens where the glide was going (open() saves that view, not the half-way one)
@@ -1744,16 +1782,27 @@ function honeycomb(host, opts = {}) {
   });
   cv.addEventListener("pointermove", e => {
     if (!ptrs.has(e.pointerId)) return;
-    const [x, y] = local(e); ptrs.set(e.pointerId, [x, y]); touchXY = [x, y];
+    const [x, y] = local(e); ptrs.set(e.pointerId, [x, y, performance.now()]); touchXY = [x, y];
     if (pinch && ptrs.size >= 2) {
       const [a, b] = [...ptrs.values()], mid0 = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], d0 = Math.hypot(a[0] - b[0], a[1] - b[1]);
+      // guard the pinch math (David, 2026-10-09): two fingers reported at (or on their way to) the exact same
+      // point make d0 collapse toward 0 -- dividing by it would send Z toward 0 or NaN, not a real zoom. Skip
+      // this one frame's update instead of computing garbage from it; the next move (fingers apart again) just
+      // picks back up normally.
+      if (!(d0 > 1e-3)) return;
       // L18: a light low-pass on the fingers (half a frame of lag), so pixel jitter never shakes the whole map
       pinch.sd = pinch.sd == null ? d0 : pinch.sd + (d0 - pinch.sd) * .55;
       pinch.sm = pinch.sm ? [pinch.sm[0] + (mid0[0] - pinch.sm[0]) * .55, pinch.sm[1] + (mid0[1] - pinch.sm[1]) * .55] : mid0;
       const d = pinch.sd, mid = pinch.sm;
       if (Math.abs(d0 - pinch.d0) > 8) { pinch.moved = true; if (fitMode) fitUserOverride = true; }
-      Z = rubber(pinch.Z0 * d / pinch.d0);
-      if (!lay.globe) { const o = offAt(mid[0], mid[1], lens(0)); P = [pinch.W0[0] - o[0], pinch.W0[1] - o[1]]; }
+      const zNew = rubber(pinch.Z0 * d / pinch.d0);
+      let pNew = P;
+      if (!lay.globe) { const o = offAt(mid[0], mid[1], lens(0)); pNew = [pinch.W0[0] - o[0], pinch.W0[1] - o[1]]; }
+      // a non-finite or wildly-out-of-range result (corrupt coordinates, a stale/ghost second pointer) must never
+      // reach P/Z directly -- draw()'s own recovery net would catch it a frame late anyway, but skipping it here
+      // keeps the current gesture usable instead of aborting it.
+      if (!Number.isFinite(zNew) || zNew < ZMIN / 4 || zNew > ZMAX * 4 || !Number.isFinite(pNew[0]) || !Number.isFinite(pNew[1])) return;
+      Z = zNew; P = pNew;
       draw(); return;
     }
     if (!down) return;
@@ -1833,6 +1882,18 @@ function honeycomb(host, opts = {}) {
     snap(V);
   };
   cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+  // David, 2026-10-09: belt-and-suspenders for the same class of bug -- a pointer the OS takes over (lost
+  // capture to a system gesture) or that physically leaves the canvas without a clean up/cancel (a corner button,
+  // a sheet, a pill sliding over it) must still clear its ptrs entry, or the next real touch inherits a ghost.
+  cv.addEventListener("lostpointercapture", up);
+  cv.addEventListener("pointerleave", e => { if (e.pointerType !== "mouse") up(e); });
+  // ground truth for how many fingers are ACTUALLY down right now: if the native touch list ever disagrees with
+  // ptrs (fewer real touches than tracked pointers), something upstream silently dropped an up/cancel -- reset
+  // rather than let a pinch run on a frozen ghost coordinate. touchstart fires right after the pointerdown it
+  // corresponds to (the Pointer Events spec dispatches the pointer event first), so by the time this runs, a
+  // healthy ptrs should already match e.touches.length exactly.
+  cv.addEventListener("touchstart", e => { if (ptrs.size > e.touches.length) resetPointers(); }, { passive: true });
+  cv.addEventListener("touchcancel", () => resetPointers(), { passive: true });
   let wheelT = 0;
   cv.addEventListener("wheel", e => {
     if (!lay) return;
@@ -1970,8 +2031,14 @@ function honeycomb(host, opts = {}) {
   cv.addEventListener("contextrestored", () => { sizeMem = new Map(); draw(); });
   const io = "IntersectionObserver" in window ? new IntersectionObserver(es => { visible = es[0].isIntersecting && !document.hidden; if (visible) kick(); }) : null;
   if (io) io.observe(host);
-  const vis = () => { visible = !document.hidden; if (visible) kick(); };
+  // David, 2026-10-09: whatever took the page away mid-gesture (the app switcher, a notification, the share
+  // sheet) is exactly the kind of system interruption that can also eat a pointer's up/cancel -- a touch "ends"
+  // from the finger's point of view the moment the OS takes the screen, with nothing left to tell the canvas so.
+  // Reset on the way out, not just on the way back, so a backgrounded gesture never comes back stuck.
+  const vis = () => { visible = !document.hidden; if (!visible) resetPointers(); else kick(); };
   document.addEventListener("visibilitychange", vis);
+  const onBlur = () => resetPointers();
+  addEventListener("blur", onBlur); addEventListener("pagehide", onBlur);
   if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('16px "Instrument Serif"'), document.fonts.load('500 12px "Geist Mono"')]).then(() => { HONEY_WRAP.clear(); draw(); }).catch(() => {});
   function destroy() {
     if (dead) return;
@@ -1980,6 +2047,7 @@ function honeycomb(host, opts = {}) {
     // L18: give the canvas memory back now (iOS only frees it on a later GC, and every Home rebuild made a new one)
     setTimeout(() => { try { cv.width = cv.height = 0; if (ghost) ghost.width = ghost.height = 0; ghost = null; } catch (e) {} }, 600);
     document.removeEventListener("visibilitychange", vis);
+    removeEventListener("blur", onBlur); removeEventListener("pagehide", onBlur);
   }
   cleanup.push(destroy);
   // QA readout: a visible on-page strip (not just document.title/fetch — a --screenshot run exits as soon as

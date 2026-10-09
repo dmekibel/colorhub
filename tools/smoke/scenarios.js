@@ -712,6 +712,75 @@ scenario("home", "a double-tap that closes Arrange doesn't leave a ghost pointer
   t.expect(!st.pinch, "the honeycomb thinks a pinch is still in progress after the double-tap closed Arrange");
 });
 
+// David, 2026-10-09: "it gets stuck sometimes when you pan and zoom" -- after the double-tap-close fix (above),
+// a report that the phantom-pointer class has OTHER sources too (iOS can simply fail to deliver a pointerup/
+// pointercancel at all when a system gesture claims a finger mid-touch: an edge swipe, the notification shade, a
+// system pinch, a sheet/overlay appearing, palm rejection -- none of them this app's own code). js/honey.js now
+// self-heals (a 1s staleness prune and a hard cap at 2 tracked pointers, both run on every pointerdown; lost/
+// cancelled pointers also clear on lostpointercapture, pointerleave, touchcancel, and on visibilitychange/blur/
+// pagehide; the pinch math itself is guarded against a collapsed two-finger distance or a non-finite/absurd
+// result; draw() has a last-resort recovery to the last good P/Z if one ever gets through anyway).
+// This fuzzes it: 50 reproducible seeds, each a random sequence of 1-3 simulated "fingers" going down, moving,
+// lifting cleanly, being cancelled, or -- the exact bug class -- just vanishing with no up/cancel at all ("lost"),
+// sometimes mid-pinch. Entirely in-page (one eval, not many postMessage round trips) so 50 seeds stay fast, and
+// performance.now() is patched to fast-forward real time between seeds and past the 1s staleness window before
+// each seed's final check, without 50 real-time sleeps. The one assertion that matters, every seed: a clean,
+// ordinary single-finger pan afterward must still move the map.
+scenario("map", "random pointer chaos (lost ups, cancels mid-pinch, 1-3 fingers) never leaves panning stuck -- 50 seeds", async t => {
+  await H.homeReady(t);
+  const result = t.ev(`(() => {
+    const cv = document.querySelector(".hc-cv");
+    if (!cv) return JSON.stringify({ error: "no canvas" });
+    const mk = (type, id, x, y) => new PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: id === 1 });
+    const mulberry32 = seed => () => { seed = seed + 0x6D2B79F5 | 0; let x = Math.imul(seed ^ seed >>> 15, 1 | seed); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; };
+    const realNow = performance.now.bind(performance);
+    let clockOffset = 0;
+    performance.now = () => realNow() + clockOffset;
+    const r = cv.getBoundingClientRect();
+    const fails = [];
+    try {
+      for (let seed = 0; seed < 50; seed++) {
+        clockOffset += 2000;   // a fresh "later" moment each seed: anything left from the previous seed is now ancient
+        if (typeof HM_CTRL !== "undefined" && HM_CTRL._releasePointer) HM_CTRL._releasePointer();
+        if (typeof HM_CTRL !== "undefined" && HM_CTRL._qaRecenter) HM_CTRL._qaRecenter();
+        const rnd = mulberry32(seed + 1);
+        const down = new Set();
+        const steps = 20 + Math.floor(rnd() * 20);
+        for (let s = 0; s < steps; s++) {
+          const id = 1 + Math.floor(rnd() * 3);
+          const x = r.left + 20 + rnd() * Math.max(10, r.width - 40), y = r.top + 20 + rnd() * Math.max(10, r.height - 40);
+          const pick = rnd();
+          if (!down.has(id)) { if (pick < .85) { cv.dispatchEvent(mk("pointerdown", id, x, y)); down.add(id); } }
+          else if (pick < .55) cv.dispatchEvent(mk("pointermove", id, x, y));
+          else if (pick < .75) { cv.dispatchEvent(mk("pointerup", id, x, y)); down.delete(id); }
+          else if (pick < .90) { cv.dispatchEvent(mk("pointercancel", id, x, y)); down.delete(id); }
+          else down.delete(id);   // "lost": the id just vanishes, no up/cancel ever sent -- the exact bug class this guards
+          clockOffset += 5 + rnd() * 20;
+        }
+        clockOffset += 1500;   // past the 1s staleness window, same as real elapsed time would put it
+        // P itself (the map's own world-space camera position, via the QA accessor), not rendered pixels: the
+        // chaos above can legitimately leave the map at any zoom from a random pinch sequence, and at the
+        // extremes a fixed screen-space drag can land back on the same uniform patch of a now-giant or now-tiny
+        // cell -- a real but ambiguous rendering coincidence, not the thing this test is actually checking (that
+        // the GESTURE MACHINERY itself, ptrs/down/pinch, isn't corrupted). P is unambiguous either way.
+        const p0 = (typeof HM_CTRL !== "undefined" && HM_CTRL._qaState) ? HM_CTRL._qaState().P : null;
+        const pid = 1000 + seed, px = r.left + r.width / 2, py = r.top + Math.min(r.height * .7, r.height - 20);
+        cv.dispatchEvent(mk("pointerdown", pid, px, py));
+        for (let i = 1; i <= 8; i++) { clockOffset += 16; cv.dispatchEvent(mk("pointermove", pid, px, py - i * 22)); }
+        clockOffset += 16;
+        cv.dispatchEvent(mk("pointerup", pid, px, py - 176));
+        const st = (typeof HM_CTRL !== "undefined" && HM_CTRL._qaState) ? HM_CTRL._qaState() : null;
+        const moved = p0 && st ? Math.hypot(st.P[0] - p0[0], st.P[1] - p0[1]) : 0;
+        if (!(moved > .3)) fails.push({ seed, moved: Math.round(moved * 1000) / 1000, st });
+      }
+    } finally { performance.now = realNow; }
+    return JSON.stringify({ fails, total: 50 });
+  })()`);
+  const r = JSON.parse(result);
+  t.expect(!r.error, `fuzz test couldn't run: ${r.error}`);
+  t.expect(r.fails.length === 0, `${r.fails.length}/${r.total} seeds left panning stuck: ${JSON.stringify(r.fails.slice(0, 3))}`);
+});
+
 scenario("home", "mapSelect: a preview mode that auto-arranges the selection and restores on clear", async t => {
   await H.homeReady(t);
   t.expect(t.ev("typeof mapSelect === 'function'"), "mapSelect is not defined");
