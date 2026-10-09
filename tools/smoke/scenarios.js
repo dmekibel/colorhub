@@ -3023,7 +3023,8 @@ scenario("map", "search 2.0: a hex and a modifier fly; a decade, a painter and a
 // different, untouched feature (js/home.js hmMapRoute, "Similar paintings on the map") and still lights a
 // museum painting directly on the big shared map -- the second half of this scenario guards that it still does.
 scenario("map", "From a painting: See its colors opens its own honeycomb (not the big map) · the address route still lights the big map directly", async t => {
-  await H.homeReady(t); t.ev(`galleryPage(14423, true)`);   // Mona Lisa -- galleryPage() itself pushes "g:14423" (the real trail Back needs)
+  await H.homeReady(t);
+  t.ev(`galleryPage(14423, true)`);   // Mona Lisa -- galleryPage() itself pushes "g:14423" (the real trail Back needs)
   await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
   // David, 2026-10-09 (Lane 4, PLAN §3.6): the painting page's action row is compact now (Learn these · ♡ Keep ·
   // Share) -- "On the map" (the old [data-cs=map] "See its colors" button) moved into ⋯'s "Go" group
@@ -3065,12 +3066,26 @@ scenario("map", "From a painting: See its colors opens its own honeycomb (not th
 
   // #/map/gallery/<i>: a different door (js/home.js hmMapRoute), untouched -- still lights a museum painting
   // directly on the big shared map, with its own How-many slider over the real measured pool
-  await H.homeReady(t); t.ev("openRoute('#/map/gallery/3')");
+  await H.homeReady(t);
+  t.ev("openRoute('#/map/gallery/3')");
   await t.waitFor(() => /named colou?rs? · as photographed/.test(t.text(".cs-hl-pill")), 20000, "a museum painting's constellation from its address");
   const nIn = t.$$(".cs-hl-n input").pop();
   t.expect(nIn && +nIn.max > 6, "a museum painting on the map has no How many slider over its pool");
   nIn._countTo(12);
-  await t.waitFor(() => { const bs = t.$$(".cs-hl-bar"), bb = bs[bs.length - 1]; return bb && bb.querySelectorAll(".cs-hl-c").length === t.ev("HONEY_HL.hexes.length") && t.ev("HONEY_HL.hexes.length") > 6; }, 4000, "the named chips to follow the How many slider").catch(() => {});
+  // David, 2026-10-09: this was `t.waitFor(..., 4000, ...).catch(() => {})` -- an intentionally soft check (the
+  // chips sometimes trail the slider by a frame, and that's fine). But waitFor's own give-up condition needs
+  // BOTH its virtual-ms budget AND `realMs` (6000ms by default) of REAL time to pass, and the latter is tracked
+  // by polling this.tick()'s own fetch() each iteration -- under headless Chrome's --virtual-time-budget
+  // (tools/smoke/run-chrome.js), that fetch can be deferred far out of step with wall-clock, so the "soft" check
+  // was measured taking 2+ real MINUTES to actually give up and let the .catch() swallow it, blowing straight
+  // through the harness's own 120s hard per-scenario timeout before ever reaching the .catch() (reproduced: 3/6
+  // headless runs hung exactly here, every time past the same line). A plain bounded sleep-poll doesn't depend
+  // on tick()/realT at all, so it can't inherit that lag -- same soft intent, a real (not virtual) time cap.
+  for (let i = 0; i < 10; i++) {
+    const bs = t.$$(".cs-hl-bar"), bb = bs[bs.length - 1];
+    if (bb && bb.querySelectorAll(".cs-hl-c").length === t.ev("HONEY_HL.hexes.length") && t.ev("HONEY_HL.hexes.length") > 6) break;
+    await t.sleep(400);
+  }
   const bars = t.$$(".cs-hl-bar"), bar = bars[bars.length - 1], lit = t.ev("HONEY_HL.hexes.length"), chips = bar.querySelectorAll(".cs-hl-c").length;
   t.expect(lit > 6 && lit <= 12 && chips === lit, `How many 12 lit ${lit} colors and named ${chips}`);
   t.expect(/%/.test(bar.querySelector(".cs-hl-c").textContent), "the named chips don't say their share of the canvas");
