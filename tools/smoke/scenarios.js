@@ -916,11 +916,19 @@ scenario("home", "Arrange sheet: Center on and Sort by change the order inside a
   await t.waitFor(() => t.ev("!!HONEY_PAINTED") && t.ev("HM_CTRL.getCfg().resolved.layout") === "map~painted", 6000, "the painting counts to load");
   await t.click('[data-ord="hue"]', { wait: 150 });
   t.expect(t.ev("S.hm.ord.rings") === "vivid" && t.ev("S.hm.ord.map") === "hue", "the orders were not kept per shape");
-  await t.click('.hm-chooser [data-arr="temp"]', { wait: 150 });
-  t.expect(t.$("[data-ord-row]").hidden, "Warm and cool shows an order row (its plane has no order)");
-  // an old save upgrades: Color wheel = Rings centered on greys; the Magnifier = Bubbles with a strong Magnify
+  // Warm and cool (David, 2026-10-09: retired as its own shape; Map's own Warmth sort-by does the same job)
+  await t.click('[data-ord="warm"]', { wait: 150 });
+  t.expect(t.ev("HM_CTRL.getCfg().resolved.layout") === "map~warm", "the Map did not take Sort by warmth");
+  t.expect(/Warmth/.test(t.text("[data-ord-row]")), "the Map's Sort by row has no Warmth chip");
+  // the left edge is warmer than the right edge (x = -honeyTemp, so lower x = warmer)
+  const warmDelta = t.ev("(() => { const l = honeyLayout(hmStageItems(100), 'map~warm'); const s = l.pts.slice().sort((a, b) => a.x - b.x); return honeyTemp(s[0].it) - honeyTemp(s[s.length - 1].it); })()");
+  t.expect(warmDelta > 0, `Sort by Warmth put the cooler colors on the left (delta ${warmDelta.toFixed(2)})`);
+  // an old save upgrades: Color wheel = Rings centered on greys; the Magnifier = Bubbles with a strong Magnify;
+  // Warm and cool = Map sorted by Warmth (no shape tile or order row of its own any more)
   t.ev("S.hm.arr = 'wheel'; S.hm.style = 'magnifier'; S.hm.feel.mag = .5; hmView()");
   t.expect(t.ev("S.hm.arr") === "rings" && t.ev("S.hm.ord.rings") === "muted" && t.ev("S.hm.style") === "original" && t.ev("S.hm.feel.mag") >= .9, "an old save did not upgrade");
+  t.ev("S.hm.arr = 'temp'; hmView()");
+  t.expect(t.ev("S.hm.arr") === "map" && t.ev("S.hm.ord.map") === "warm", "an old 'temp' save did not become Map sorted by Warmth");
   t.ev("S.hm.arr = 'map'; S.hm.ord = {}; S.hm.feel.mag = HM_FEEL0.mag");
 });
 
