@@ -208,7 +208,11 @@ function twWhy(metric, q, x, ctx) {
   switch (metric) {
     case "overall": return `On average its colors sit ${pctDiff(d)} from yours, matched by area.`;
     case "dominant": return `Its three biggest colors are ${pctDiff(d)} from yours, on average.`;
-    case "accents": return d >= 39 ? "It has no accent like yours." : `Its small vivid colors land ${pctDiff(d)} from yours.`;
+    case "accents": {
+      if (d >= 39) return "It has no small accent color like yours.";
+      const word = d < 6 ? "almost identical to" : d < 16 ? "close to" : "a loose echo of";
+      return `Its small, vivid accents are ${word} yours.`;
+    }
     case "mood": {
       const r = twRec(x.i), a = q.stats, A = [twKeyWord(a.Lm), twChromaWord(a.Cm), twWarmWord(a.warm)], B = [twKeyWord(r.Lm), twChromaWord(r.Cm), twWarmWord(r.warm)];
       const same = A.filter((w, i) => w === B[i]), diff = B.filter((w, i) => w !== A[i]);
@@ -304,6 +308,18 @@ function twHist(a, b) {
   return `<span class="tw-hist" aria-hidden="true">${a.map((v, k) => `<span><i class="y" style="height:${Math.round(v / mx * 100)}%"></i><i class="t" style="height:${Math.round(b[k] / mx * 100)}%"></i></span>`).join("")}</span>`;
 }
 const twMosaic = g => `<span class="tw-mosaic" aria-hidden="true">${g.map(c => `<i style="--c:${c.h}"></i>`).join("")}</span>`;
+// pairs → at most 2 distinct, informative color-to-color matches: never "X to X", never the same pair twice,
+// and the browns every old varnished painting shares lose out to a more distinctive match when both are close.
+function twGoodPairs(pairs) {
+  const named = (pairs || []).filter(p => p && p.de < 16).map(p => ({ p, yn: nameOf(p.yours).n, tn: nameOf(p.theirs).n })).filter(x => x.yn !== x.tn);
+  const best = new Map();
+  named.forEach(x => { const key = x.yn + "→" + x.tn; const cur = best.get(key); if (!cur || x.p.de < cur.p.de) best.set(key, x); });
+  const brownish = hex => { const c = lch(hex); return c[2] >= 15 && c[2] <= 70 && c[1] < 45 && c[0] < 65; };
+  return [...best.values()].sort((a, b) => {
+    const ab = brownish(a.p.theirs) ? 1 : 0, bb = brownish(b.p.theirs) ? 1 : 0;
+    return ab !== bb ? ab - bb : a.p.de - b.p.de;
+  }).slice(0, 2).map(x => x.p);
+}
 function twRender(host, res, ds, ctx) {
   const st = host._tw, q = st.q, m = st.metric, out = host.querySelector(".tw-out"), what = st.o.what || "your palette";
   const [good, loose, isClose, isLoose] = TW_LEAD[m];
@@ -318,7 +334,7 @@ function twRender(host, res, ds, ctx) {
     if (m === "light") { const r = twRec(x.i); return twHist(q.stats.Lh, r.Lh); }
     if (m === "mood") return twMini(q.pool.slice(0, 6)) + twMini(glPal(x.i));
     if (m === "layout") return `<span class="tw-pair">${twMosaic(ctx.grid)}${twMosaic(x.grid)}</span>`;
-    const pairs = x.pairs.filter(p => p.de < 16);
+    const pairs = twGoodPairs(x.pairs);
     return `<div class="tw-threads">${pairs.map(p => `<div class="tw-thread"><button data-swatch="${p.yours}" style="--c:${p.yours}" aria-label="Your ${esc(nameOf(p.yours).n)}"></button><span class="tw-line"></span><button data-swatch="${p.theirs}" style="--c:${p.theirs}" aria-label="Its ${esc(nameOf(p.theirs).n)}"></button></div>
       <p class="tw-names">${esc(nameOf(p.yours).n)}<em>to</em>${esc(nameOf(p.theirs).n)}</p>`).join("")}</div>`;
   };
