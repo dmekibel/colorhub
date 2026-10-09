@@ -3,7 +3,8 @@
  "name": "Avant-Garde",
  "lineage": {
   "influenced_by": [
-   "postmodern"
+   "Dada and Surrealist art's break with convention (early 20th c.)",
+   "postmodern architecture and design's embrace of irony and rule-breaking"
   ],
   "influences": []
  },
@@ -16,11 +17,23 @@
   "raw and unfinished seams",
   "monochrome"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
+ "media": [
+  {
+   "title": "Rei Kawakubo / Comme des Garçons, \"Body Meets Dress\" collection (1997)",
+   "note": "widely cited as a landmark in deconstructed, anti-conventional silhouette"
+  },
+  {
+   "title": "Yohji Yamamoto's monochrome, oversized tailoring (1980s on)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Rei Kawakubo",
+  "Yohji Yamamoto"
+ ],
+ "reacts_against": "the Western fashion industry's assumptions about fit, proportion and \"flattering\" silhouette — Kawakubo and Yamamoto's 1980s Paris shows were initially received by critics as deliberately ugly, before being recognized as a serious formal challenge to those assumptions.",
  "revivals": [],
- "article": "",
+ "article": "\"Avant-garde\" started as a 19th-century French military term — the advance guard, the unit sent ahead of the main force — before 19th and 20th century critics borrowed it for art that seemed to be scouting territory the rest of culture hadn't reached yet. In fashion specifically, the label attached most firmly to a wave of Japanese designers who began showing in Paris in the early 1980s: Rei Kawakubo's Comme des Garçons and Yohji Yamamoto both presented collections built from asymmetry, raw or deliberately unfinished seams, and silhouettes that ignored the waist-defined, body-skimming shape Western fashion had treated as a given. French critics at the time reportedly described the look as \"Hiroshima chic,\" a genuinely offensive comparison that nonetheless signals how disorienting the work was to an industry used to a much narrower idea of what clothing should do. Kawakubo's 1997 \"Body Meets Dress, Dress Meets Body\" collection — padded garments that distorted the wearer's silhouette into lumps and bulges — pushed the same project further, treating the body itself as something fashion could question rather than simply flatter. That willingness to prioritize concept and formal challenge over wearability or convention is what \"avant-garde\" has meant in fashion ever since, applied retroactively to earlier boundary-pushing designers and continuing through each new generation that picks up the same refusal.",
  "wiki_facts": {},
  "sources": [
   {
