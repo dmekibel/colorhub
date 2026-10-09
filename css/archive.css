@@ -18,8 +18,8 @@
 .psg-strip{display:flex;height:6px;gap:1px;margin-bottom:11px}
 .psg-strip i,.psg-row-strip i{background:var(--c);min-width:3px}
 .pin-psg .psg-ex{display:block;font:400 18px/1.24 var(--serif);color:#D9D4C8;text-wrap:pretty}
-.pin-psg b{display:block;font:italic 400 13px/1.35 var(--serif);letter-spacing:0;text-transform:none;color:var(--ink);margin-top:11px}
-.pin-psg small{display:block;font:italic 400 13px/1.35 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:4px}
+.pin-psg b{display:block;font:italic 400 17px/1.35 var(--serif);letter-spacing:0;text-transform:none;color:var(--ink);margin-top:11px}
+.pin-psg small{display:block;font:italic 400 17px/1.35 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:4px}
 .pin-arch-all{border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule);padding:12px 0 16px;display:flex;flex-direction:column;gap:7px}
 .pin-arch-all b{font:400 28px/1 var(--serif);letter-spacing:-.015em}
 .pin-arch-all small{font-size:13px;line-height:1.35;color:var(--soft)}
@@ -33,7 +33,7 @@
 .psg-text p{text-wrap:pretty;hanging-punctuation:first}
 .psg-text p+p{margin-top:14px}
 .psg-why,.psg-cols,.arch-row{margin-top:36px}
-.psg-why h3,.psg-cols h3,.arch-row h3,.psg-index h3{font:italic 400 14px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);padding-bottom:10px;border-bottom:1px solid var(--rule);margin:0 0 14px}
+.psg-why h3,.psg-cols h3,.arch-row h3,.psg-index h3{font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);padding-bottom:10px;border-bottom:1px solid var(--rule);margin:0 0 14px}
 .psg-cols h3,.arch-row h3,.psg-index h3{margin-bottom:0}
 .psg-why p{font-size:16.5px;line-height:1.62;color:#DAD5C9;text-wrap:pretty}
 .psg-cols .pal-name span{line-height:1.35}
@@ -49,16 +49,16 @@
 .psg-row{display:grid;grid-template-columns:44px 1fr;grid-template-rows:auto auto;column-gap:14px;align-items:center;width:100%;text-align:left;padding:11px 0;border-bottom:1px solid var(--rule)}
 .psg-row-strip{display:flex;height:30px;gap:1px;grid-row:span 2;align-self:center}
 .psg-row b{font:400 20px/1.08 var(--serif)}
-.psg-row small{font:italic 400 13px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:3px}
+.psg-row small{font:italic 400 17px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:3px}
 
 /* ---------- color page rows: In books, In films ---------- */
 .arch-quote{display:block;width:100%;text-align:left;padding:13px 0 14px;border-bottom:1px solid var(--rule)}
 .arch-quote .psg-ex{display:block;font:400 20px/1.3 var(--serif);color:#E2DDD1;text-wrap:pretty}
-.arch-quote small{display:block;font:italic 400 13px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:8px}
+.arch-quote small{display:block;font:italic 400 17px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:8px}
 .arch-quote small i{font-style:normal}
 .film-row{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:center;width:100%;text-align:left;padding:12px 0;border-bottom:1px solid var(--rule)}
 .film-row b{display:block;font:400 21px/1.05 var(--serif)}
-.film-row small{display:block;font:italic 400 13px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:4px}
+.film-row small{display:block;font:italic 400 17px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:4px}
 .film-row em{display:block;font-style:normal;font-size:13px;line-height:1.35;color:var(--soft);margin-top:5px}
 
 /* ---------- film strip: the colors discussed as frames between sprocket holes ---------- */
@@ -73,12 +73,12 @@
 .film-strip-s>span{height:40px;gap:2px}
 .pin-film .film-strip{margin-bottom:10px}
 .pin-film b{display:block;font:400 21px/1.02 var(--serif);text-wrap:balance}
-.pin-film small{display:block;font:italic 400 13px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);margin-top:5px}
+.pin-film small{display:block;font:italic 400 17px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);margin-top:5px}
 
 /* ---------- film page ---------- */
 .film-hero{display:flex;height:min(46dvh,340px);gap:2px}
 .film-hero button{flex:1;min-width:0;background:var(--c);display:flex;align-items:flex-end;padding:9px;border-radius:var(--r-1);text-align:left}
-.film-hero span{font:italic 400 13px/1.25 var(--serif);letter-spacing:0;text-transform:none;overflow-wrap:anywhere}
+.film-hero span{font:italic 400 17px/1.25 var(--serif);letter-spacing:0;text-transform:none;overflow-wrap:anywhere}
 .film-hero button[data-ink="dark"] span{color:rgba(20,19,17,.82)}.film-hero button[data-ink="light"] span{color:rgba(255,255,255,.9)}
 .film-cap{margin-top:9px;color:var(--faint)}
 .film-fig{margin-top:4px}

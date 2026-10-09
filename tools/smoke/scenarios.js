@@ -112,6 +112,30 @@ scenario("home", "a pending placement hint reappears on a later Home open, and a
   t.expect(!t.$(".lr-maphint"), "the hint is still in the DOM after being dismissed");
 });
 
+// David, 2026-10-09: "I want to see all the color names, even when tiny... as long as it's legible." A label's
+// own real font size (honeyWrap's cached per-name ratio times the cell's current diameter) now gates whether it
+// draws at all -- not the cell's raw diameter or a style's own labelMin tuning, which could hide a label that
+// would read fine or show one that wouldn't ("no half-legible labels"). Verified with a zoomed screenshot of
+// the smallest labels this draws (Petrol, Hunter green, Steel blue, all crisp at 440x956); this just locks the
+// numeric floor in so it can't quietly regress.
+scenario("home", "every cell shows its name when legible, never smaller than the verified floor", async t => {
+  const cv = await H.homeReady(t);
+  const stat = t.ev("HM_CTRL._labelFsStat()");
+  t.expect(stat.n > 20, `too few labels drawn to judge (${stat.n})`);
+  t.expect(stat.min >= stat.floor, `a label drew at ${stat.min}px, under the ${stat.floor}px legibility floor`);
+  t.notes.push(`${stat.n} labels, ${stat.min}-${stat.max}px (floor ${stat.floor}px)`);
+  // zoomed out, Honeycomb look, the largest set: still never under the floor, and the mosaic's own tiny cells
+  // (honeyCells' cheap hex path) correctly carry NO label at all rather than a smudge
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.style = "honeycomb"; hmHome();');
+  await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
+  const floor = t.ev("HM_CTRL.zoomFloor()");
+  t.ev(`HM_CTRL.zoom(${floor}, false)`);
+  await t.sleep(300);
+  const stat2 = t.ev("HM_CTRL._labelFsStat()");
+  if (stat2.n > 0) t.expect(stat2.min >= stat2.floor, `zoomed out: a label drew at ${stat2.min}px, under the ${stat2.floor}px floor`);
+  t.notes.push(`zoomed out: ${stat2.n} labels, min ${stat2.min}px`);
+});
+
 scenario("home", "a far bubble glides to the middle, it does not open", async t => {
   const cv = await H.homeReady(t);
   const r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
@@ -358,6 +382,11 @@ scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close 
   await H.homeReady(t);
   await H.sheet(t, "arrange");
   t.expect(t.$(".sheet.hm-sheet-arrange"), "the Arrange sheet did not open");
+  // David, 2026-10-09: "pressing Arrange brings the black bar back at the bottom" -- a non-modal sheet (this
+  // one: the map keeps panning and zooming underneath it) never locks body scroll either now (js/core.js
+  // sheet()'s own {lock:false}, js/home.js chooser) -- html.sheet-open (app.css: body{position:fixed}) toggling
+  // right as the sheet opens was a real candidate for the black bar's own trigger on an iOS Home Screen app.
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "the non-modal Arrange sheet locked body scroll anyway");
   const cv = t.$("canvas"), r = cv.getBoundingClientRect();
   const tapX = r.left + r.width / 2, tapY = r.top + 60;   // the top of the map, above the sheet
   const mk = (type, x, y, id = 1) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: true, view: t.w });
@@ -374,6 +403,12 @@ scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close 
   cv.dispatchEvent(mk("pointerdown", tapX, tapY)); cv.dispatchEvent(mk("pointerup", tapX, tapY));
   await t.sleep(400);
   t.expect(!t.$(".sheet.hm-sheet-arrange"), "a double-tap on the map did not close Arrange");
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "sheet-open was left on after Arrange closed");
+  // the opt-out itself, not just this one caller: an ordinary (modal) sheet with no {lock:false} still locks
+  t.ev('(() => { const { close } = sheet("<p>t</p>"); window.__lockedOk = document.documentElement.classList.contains("sheet-open"); close(); })()');
+  await t.sleep(500);
+  t.expect(t.ev("window.__lockedOk"), "sheet()'s default (modal) case stopped locking scroll");
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "sheet-open was left on after the modal test sheet closed");
 });
 
 scenario("home", "Arrange's fit mode frames the whole layout above the sheet, for every arrangement", async t => {
@@ -402,11 +437,22 @@ scenario("home", "Arrange's fit mode frames the whole layout above the sheet, fo
     // David, 2026-10-09: "the original view is now too far away" -- a loose "somewhere in the neighborhood" pad
     // (above) isn't enough to catch a disk floating small in empty space, so also require it to actually fill
     // the space above the sheet, on the axis its own shape is actually constrained by (a tall arrangement like
-    // the default map/hue fills by height, not width; a round one like Sunflower fills by both) -- at least 85%
-    // of the ~16px-margin-adjusted space on whichever axis is tighter.
+    // the default map/hue fills by height, not width; a round one like Sunflower fills by both) -- at least 80%
+    // of the ~16px-margin-adjusted space on whichever axis is tighter. (David's next report, on his own default
+    // Spiral/Sunflower + Honeycomb: the fit was OVERFLOWING the available space by ~14%, because boundsFit()
+    // checked each lattice point's own position but never its DRAWN RADIUS -- fixed by accounting for each
+    // point's real diameter at the candidate zoom, same as buildFlatDrawn's own round branch computes it. That
+    // fix is correctly more conservative for a round arrangement than the diagonal-only approximation it
+    // replaced, landing at ~83-85% instead of exactly 85%+ -- a deliberate, small trade of fill % for the
+    // overflow this is actually guarding against; 80% still confirms it isn't floating small the way the
+    // original bug did.)
     const bw = b.maxX - b.minX, bh = b.maxY - b.minY, availW = b.W - 32, availH = sheetTop - 32;
     const fill = Math.max(bw / availW, bh / availH);
-    t.expect(fill >= .85, `${why}: the fitted layout only fills ${(fill * 100).toFixed(0)}% of the space above the sheet on its own constrained axis (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
+    t.expect(fill >= .8, `${why}: the fitted layout only fills ${(fill * 100).toFixed(0)}% of the space above the sheet on its own constrained axis (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
+    // the overflow bug itself (David: "the preview still zooms out too far" turned out to mean the OPPOSITE --
+    // it was actually overflowing the available space by ~14%, from a point's own drawn radius never being
+    // subtracted): never past ~103% on either axis (a sliver of slack for sub-pixel rounding, not real overflow)
+    t.expect(bw <= availW * 1.03 && bh <= availH * 1.03, `${why}: the fitted layout overflows the space above the sheet (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
     t.notes.push(`${why}: sheetTop=${sheetTop.toFixed(0)} bounds=[${b.minX.toFixed(0)},${b.minY.toFixed(0)}..${b.maxX.toFixed(0)},${b.maxY.toFixed(0)}] fill=${(fill * 100).toFixed(0)}%`);
   };
   await within("map/hue (default)");
@@ -870,11 +916,19 @@ scenario("home", "Arrange sheet: Center on and Sort by change the order inside a
   await t.waitFor(() => t.ev("!!HONEY_PAINTED") && t.ev("HM_CTRL.getCfg().resolved.layout") === "map~painted", 6000, "the painting counts to load");
   await t.click('[data-ord="hue"]', { wait: 150 });
   t.expect(t.ev("S.hm.ord.rings") === "vivid" && t.ev("S.hm.ord.map") === "hue", "the orders were not kept per shape");
-  await t.click('.hm-chooser [data-arr="temp"]', { wait: 150 });
-  t.expect(t.$("[data-ord-row]").hidden, "Warm and cool shows an order row (its plane has no order)");
-  // an old save upgrades: Color wheel = Rings centered on greys; the Magnifier = Bubbles with a strong Magnify
+  // Warm and cool (David, 2026-10-09: retired as its own shape; Map's own Warmth sort-by does the same job)
+  await t.click('[data-ord="warm"]', { wait: 150 });
+  t.expect(t.ev("HM_CTRL.getCfg().resolved.layout") === "map~warm", "the Map did not take Sort by warmth");
+  t.expect(/Warmth/.test(t.text("[data-ord-row]")), "the Map's Sort by row has no Warmth chip");
+  // the left edge is warmer than the right edge (x = -honeyTemp, so lower x = warmer)
+  const warmDelta = t.ev("(() => { const l = honeyLayout(hmStageItems(100), 'map~warm'); const s = l.pts.slice().sort((a, b) => a.x - b.x); return honeyTemp(s[0].it) - honeyTemp(s[s.length - 1].it); })()");
+  t.expect(warmDelta > 0, `Sort by Warmth put the cooler colors on the left (delta ${warmDelta.toFixed(2)})`);
+  // an old save upgrades: Color wheel = Rings centered on greys; the Magnifier = Bubbles with a strong Magnify;
+  // Warm and cool = Map sorted by Warmth (no shape tile or order row of its own any more)
   t.ev("S.hm.arr = 'wheel'; S.hm.style = 'magnifier'; S.hm.feel.mag = .5; hmView()");
   t.expect(t.ev("S.hm.arr") === "rings" && t.ev("S.hm.ord.rings") === "muted" && t.ev("S.hm.style") === "original" && t.ev("S.hm.feel.mag") >= .9, "an old save did not upgrade");
+  t.ev("S.hm.arr = 'temp'; hmView()");
+  t.expect(t.ev("S.hm.arr") === "map" && t.ev("S.hm.ord.map") === "warm", "an old 'temp' save did not become Map sorted by Warmth");
   t.ev("S.hm.arr = 'map'; S.hm.ord = {}; S.hm.feel.mag = HM_FEEL0.mag");
 });
 
@@ -1363,6 +1417,40 @@ scenario("pages", "single tap opens focus view; double tap favorites without ope
   tap(); await t.sleep(60); tap();
 });
 
+// David, 2026-10-09: "tapping the color to go full screen shouldn't let me scroll down in the full screen -- right
+// now it does." lockScroll()/unlockScroll() (js/core.js, the same iOS-safe body lock every sheet already uses) plus
+// touch-action:none stop the page moving underneath; the corner tag (name + hex) is the other half of this request.
+scenario("pages", "the focus view locks background scroll and shows the color's name and hex in a corner", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  t.w.scrollTo(0, 220); t.w.document.dispatchEvent(new t.w.Event("scroll")); await t.sleep(80);
+  const y0 = t.w.scrollY;
+  t.expect(y0 > 100, `the page didn't actually scroll before opening the focus view (scrollY ${y0})`);
+  const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();
+  const o = { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + 170, pointerId: 43, pointerType: "touch", isPrimary: true, view: t.w };
+  hero.dispatchEvent(new t.w.PointerEvent("pointerdown", o)); hero.dispatchEvent(new t.w.PointerEvent("pointerup", o));
+  await t.waitFor(".rp-focus.on", 2000, "the focus view");
+  t.expect(t.d.documentElement.classList.contains("sheet-open"), "opening the focus view didn't lock the background scroll");
+  const lockedY = t.w.scrollY;
+  const name = t.text(".rp-focus .rp-focus-name"), tag = t.text(".rp-focus .rp-focus-tag");
+  t.expect(name === "Teal", `the centered name reads "${name}"`);
+  t.expect(tag.includes("Teal") && /#[0-9A-F]{6}/.test(tag), `the corner tag doesn't show the color's name and hex: "${tag}"`);
+  // scrolling or wheeling the page while the focus view is open must not move the real scroll position
+  t.w.scrollTo(0, lockedY + 400);
+  t.$(".rp-focus").dispatchEvent(new t.w.WheelEvent("wheel", { bubbles: true, cancelable: true, deltaY: 300 }));
+  await t.sleep(80);
+  t.expect(t.w.scrollY === lockedY, `scrolling while the focus view was open moved scrollY from ${lockedY} to ${t.w.scrollY}`);
+  t.expect(t.w.getComputedStyle(t.$(".rp-focus")).touchAction === "none", "the focus view doesn't block a direct touch-scroll (touch-action)");
+  // close it (swipe down): the background scroll position is exactly restored, not left wherever it got pinned
+  const fr = t.$(".rp-focus").getBoundingClientRect();
+  const fo = { bubbles: true, cancelable: true, clientX: fr.left + fr.width / 2, clientY: fr.top + 60, pointerId: 44, pointerType: "touch", isPrimary: true, view: t.w };
+  t.$(".rp-focus").dispatchEvent(new t.w.PointerEvent("pointerdown", fo));
+  t.$(".rp-focus").dispatchEvent(new t.w.PointerEvent("pointerup", { ...fo, clientY: fo.clientY + 140 }));
+  await t.waitFor(() => !t.$(".rp-focus"), 2000, "the focus view to close");
+  await t.sleep(80);
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "the scroll lock was never released");
+  t.expect(t.w.scrollY === y0, `closing the focus view left scrollY at ${t.w.scrollY}, expected the original ${y0}`);
+});
+
 // David, 2026-10-09: a long article's lede already shows on the cover (the "Almost the same as..." / story-first-
 // sentence line); the door card used to repeat it as its own dek. The door now opens straight on the chapter list.
 scenario("pages", "a long article's lede shows once, on the cover -- not again on the door card", async t => {
@@ -1421,6 +1509,29 @@ scenario("pages", "the pinned header's padding clears a simulated status-bar ins
   await H.openPage(t, "#/color/scarlet", "Scarlet");
   await t.waitFor(() => t.$("body > .rp-bar"), 8000, "the pinned header again, after a fast Back and reopen");
   t.expect(t.$$("body > .rp-bar").length === 1, `${t.$$("body > .rp-bar").length} .rp-bar nodes on body after reopening, expected exactly 1`);
+});
+
+// Root cause found (js/trail.js-owning lane, following up on the scenario above): bar.getAnimations() can report
+// its own transform transition stuck at playState "running" long after its declared duration elapsed -- a fast,
+// scripted scroll (many scroll events with no real time between them) reliably reproduces it. Stuck mid-
+// interpolation, the bar reads as "disappeared" (pinned near its fully hidden preset) or "overlaps the status
+// bar" (a small residual Y offset, still visible but a few px too high) depending on exactly where it got stuck --
+// the same root cause behind both of David's reports on Aero. js/richpage.js rpBarWire's check() now finishes
+// any such stuck transition every time the bar is meant to be on screen, snapping it straight to .on's own
+// resting transform instead of leaving it part-way there.
+scenario("pages", "a fast scripted scroll never leaves the pinned header's transform stuck off its \"on\" resting position", async t => {
+  const INSET = 59;
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  const bar = await t.waitFor(() => t.$("body > .rp-bar"), 8000, "the pinned header");
+  { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }
+  const settled = () => { const r = bar.getBoundingClientRect(); return Math.abs(r.top) < 1; };   // .on's resting transform: translate(-50%,0)
+  for (let rep = 0; rep < 6; rep++) {
+    t.w.scrollTo(0, 0); t.w.document.dispatchEvent(new t.w.Event("scroll"));
+    for (let y = 0; y <= 2000; y += 45) { t.w.scrollTo(0, y); t.w.document.dispatchEvent(new t.w.Event("scroll")); }
+    await t.sleep(30);
+    t.expect(bar.classList.contains("on"), `rep ${rep}: the bar should be "on" once scrolled past the cover`);
+    t.expect(settled(), `rep ${rep}: the bar's transform is stuck at top=${Math.round(bar.getBoundingClientRect().top)}px instead of settling to 0 (on-screen, below the status bar)`);
+  }
 });
 
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
@@ -2469,6 +2580,45 @@ scenario("map", "the per-cell seam stroke doesn't slow a continuous pan+pinch on
   t.expect(mean < 60 && p95 < 80, `frame time regressed badly: mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms over ${log.length} frames`);
   t.notes.push(`${log.length} frames, mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms`);
 });
+// David, 2026-10-09: "zoomed-out view of honeycomb spiral looks like circles" -- honeyCells()'s own tiny-bubble
+// shortcut (under 7px, too many to afford the real per-neighbor polygon clip) used to always fall back to a
+// plain circle, even in Honeycomb look. It now hands tiny bubbles a cheap fixed regular hexagon instead, so the
+// mosaic still reads as tiled at low zoom; Bubbles look is untouched (still plain circles, on purpose).
+scenario("map", "Honeycomb look stays tiled at low zoom (not circles); Bubbles stays circles", async t => {
+  await H.homeReady(t);
+  // Deep zoomed out (_qaForceZoom: a QA-only bypass of the ordinary zoom(z) clamp -- js/honey.js's own pinch-out
+  // floor, raised earlier this chapter so "the whole layout fits", means a RESTING zoom rarely pushes a dense
+  // set's cells under the tiny-bubble (7px) threshold this fix is about; a real pinch gesture still can for a
+  // moment, via the elastic rubber-band overshoot before it springs back -- this parks there directly instead
+  // of timing a synthetic gesture just right).
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "spiral"; S.hm.style = "honeycomb"; hmHome();');
+  await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
+  t.ev("HM_CTRL._qaForceZoom(0.08)");
+  await t.sleep(200);
+  const honeyStat = t.ev("HM_CTRL._tinyPolyStat()");
+  t.expect(honeyStat.tiny > 20, `too few tiny cells to judge at this zoom (${honeyStat.tiny})`);
+  t.expect(honeyStat.poly === honeyStat.tiny, `Honeycomb: only ${honeyStat.poly}/${honeyStat.tiny} tiny cells are tiled (the rest fell back to circles)`);
+  t.notes.push(`Honeycomb: ${honeyStat.poly}/${honeyStat.tiny} tiny cells tiled, ${honeyStat.total} drawn`);
+  // Bubbles: the same tiny bubbles should still be plain circles (no regression the other way)
+  t.ev('S.hm.style = "current"; hmHome();');
+  await t.sleep(300);
+  t.ev("HM_CTRL._qaForceZoom(0.08)");
+  await t.sleep(200);
+  const bubbleStat = t.ev("HM_CTRL._tinyPolyStat()");
+  t.expect(bubbleStat.tiny > 20, `too few tiny cells to judge at this zoom (${bubbleStat.tiny})`);
+  t.expect(bubbleStat.poly === 0, `Bubbles: ${bubbleStat.poly}/${bubbleStat.tiny} tiny cells are tiled (should be plain circles)`);
+  // frame time, Honeycomb look, the largest set, at the REAL (clamped) pinch-out floor -- not the forced probe
+  // zoom above, which is further out than a resting view ever reaches: the tiled mosaic should cost about what
+  // the Bubbles circles already cost (both measured just above/below), well inside a 16ms budget with headroom
+  t.ev('S.hm.style = "honeycomb"; hmHome();');
+  await t.sleep(300);
+  const floor = t.ev("HM_CTRL.zoomFloor()");
+  t.ev(`HM_CTRL.zoom(${floor}, false)`);
+  await t.sleep(200);
+  const ms = t.ev(`(() => { let best = Infinity; for (let i = 0; i < 20; i++) { const t0 = performance.now(); HM_CTRL.zoom(${floor} + i * 0.0001, false); best = Math.min(best, performance.now() - t0); } return best; })()`);
+  t.expect(ms < 16, `a draw at Honeycomb's lowest (resting) zoom took ${ms.toFixed(1)}ms, wanted <16ms (no CPU throttle here, so real headroom matters)`);
+  t.notes.push(`Honeycomb @ floor zoom ${floor.toFixed(2)}, every name: best draw ${ms.toFixed(1)}ms`);
+});
 scenario("map", "the map keeps its pan and zoom when you open a color and come back", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();
   const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 11, pointerType: "touch", isPrimary: true, view: t.w });
@@ -3068,6 +3218,51 @@ scenario("sets", "double-tap the top swatches keeps the palette (a heart burst);
   await t.click(t.$(".sp-pair .sp-plate"), { wait: 500 });
   await t.waitFor(".cp-page .cp-hero-foot h1", 8000, "a single tap on a plate still opens its color page");
 });
+
+// David, 2026-10-09: "same full-screen preview for a pair or more." colorFocus() (js/richpage.js) is the one
+// function behind both the color page's cover tap and this button; a pair gets 2 side-by-side bands.
+scenario("sets", "View full screen on a pair shows 2 side-by-side bands, locks scroll, and swipe-down closes", async t => {
+  SP.placed();
+  await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-plate", 12000, "the pair page");
+  const btn = await t.waitFor("[data-sp-expand]", 6000, "the View full screen button");
+  await t.click(btn, { wait: 400 });
+  await t.waitFor(".rp-focus.on", 2000, "the focus view");
+  t.expect(t.$(".rp-focus.cf-multi") && !t.$(".rp-focus.cf-stack"), "a pair (2 colors) should be side by side, not stacked");
+  const bands = t.$$(".cf-band");
+  t.expect(bands.length === 2, `expected 2 bands, got ${bands.length}`);
+  const tags = bands.map(b => t.text(".rp-focus-tag", b));
+  t.expect(tags.every(x => /#[0-9A-F]{6}/.test(x)), `a band's tag doesn't show a hex: ${tags.join(" | ")}`);
+  t.expect(new Set(tags).size === 2, `the two bands show the same tag: ${tags.join(" | ")}`);
+  t.expect(t.d.documentElement.classList.contains("sheet-open"), "the full-screen view didn't lock the background scroll");
+  // swipe down on one band closes the whole view, same as the single-color focus
+  const r = bands[0].getBoundingClientRect(), o = { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + 60, pointerId: 51, pointerType: "touch", isPrimary: true, view: t.w };
+  bands[0].dispatchEvent(new t.w.PointerEvent("pointerdown", o));
+  bands[0].dispatchEvent(new t.w.PointerEvent("pointerup", { ...o, clientY: o.clientY + 140 }));
+  await t.waitFor(() => !t.$(".rp-focus"), 2000, "the focus view to close on swipe down");
+  await t.sleep(80);
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "the scroll lock was never released");
+  await t.waitFor(() => t.bodyOverlayLeaks().length === 0, 3000, `a stuck overlay after closing: ${t.bodyOverlayLeaks().join(", ")}`);
+});
+scenario("sets", "View full screen on a 5-color palette stacks the bands and labels each one", async t => {
+  SP.placed();
+  await t.open("#/set/2b2a4c-b85c38-e0c097-6f8f72-8c3b4a", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page [data-strip]", 12000, "the palette page");
+  const btn = await t.waitFor("[data-sp-expand]", 6000, "the View full screen button");
+  await t.click(btn, { wait: 400 });
+  await t.waitFor(".rp-focus.on", 2000, "the focus view");
+  t.expect(t.$(".rp-focus.cf-stack"), "5 colors should stack (full-width bands), not sit side by side");
+  const bands = t.$$(".cf-band");
+  t.expect(bands.length === 5, `expected 5 bands, got ${bands.length}`);
+  const tags = bands.map(b => t.text(".rp-focus-tag", b));
+  t.expect(tags.every(x => x && /#[0-9A-F]{6}/.test(x)), `every band needs its own name + hex: ${tags.join(" | ")}`);
+  t.expect(new Set(tags).size === 5, `every band's tag should be distinct: ${tags.join(" | ")}`);
+  // a tap closes it directly (no dim/undim step for a multi-color view)
+  await t.click(bands[0], { pointer: true, wait: 400 });
+  await t.waitFor(() => !t.$(".rp-focus"), 2000, "a tap to close the stacked view");
+  await t.waitFor(() => t.bodyOverlayLeaks().length === 0, 3000, `a stuck overlay after closing: ${t.bodyOverlayLeaks().join(", ")}`);
+});
+
 scenario("sets", "a set page: pairs inside and Improve with Apply and Undo", async t => {
   SP.placed();
   await t.open("#/set/2b2a4c-b85c38-e0c097-6f8f72", { settle: 800, keepState: true });
@@ -3234,11 +3429,18 @@ scenario("pages", "painter page: the portrait hero renders (an image or the sign
   const hero = await t.waitFor(".aw-pt-hero", 8000, "the portrait hero");
   t.expect(hero.getBoundingClientRect().height > 100, "the portrait hero has no size");
   t.expect(t.$(".aw-pt-hero figcaption") && t.text(".aw-pt-hero figcaption").length > 0, "the portrait hero has no caption");
-  // a painter with no portrait anywhere still gets the hero, as a field of his own signature colors
+  // No recorded portrait, but paintings in the archive (David, 2026-10-09): the hero becomes his most famous
+  // (or most-reached) painting instead -- an <img> hero, same shape as a real portrait, captioned as a
+  // stand-in and tappable through to the painting -- never the old flat signature-color field, which is now
+  // only the last resort for a painter with neither a portrait nor any paintings to show.
   await t.open("#/painter/adam-pijnacker", { settle: 600 });
   await t.waitFor(".aw-page", 15000, "the painter page (no portrait)");
-  const field = await t.waitFor(".aw-pt-hero.aw-pt-field", 8000, "the signature-color fallback field");
-  t.expect(t.$$(".aw-pt-bars i", field).length > 0, "the fallback field has no color bars");
+  const stand = await t.waitFor("[data-pthero]", 8000, "the no-portrait painting-hero");
+  t.expect(t.$("img", stand), "the no-portrait hero has no img");
+  const cap = t.$("figcaption", stand);
+  await t.waitFor(() => cap && /no portrait of Adam Pijnacker/.test(cap.textContent), 8000, "the no-portrait caption to fill in");
+  const open = t.$(".aw-pt-open", stand);
+  t.expect(open && open.dataset.gi === stand.dataset.pthero, "the hero doesn't link to the painting it shows");
 });
 scenario("pages", "painter page: a sort chip reorders the life's work grid", async t => {
   await t.open("#/painter/john-singer-sargent", { settle: 600 });
@@ -3351,6 +3553,120 @@ scenario("trail", "a page's colors lit on the map keep the trail: the pill's ‹
   t.expect(!t.$(".cs-hl-pill"), "the lit set's pill is still up after going back");
 });
 
+// David, 2026-10-09: "On a painting I tap 'See it on the map', I see those colors on the map, then I tap Close
+// and it brings me back to the plain map. I should be able to go back along the chain of links I was on -- I
+// shouldn't lose all my progress just because I tapped the map." Lighting colors on the map from a page is a
+// step IN the trail, not an exit: the lit map's own ✕ ("Close", js/honey.js honeyLitBar .cs-hl-x) now does the
+// same thing ‹ already did -- back to the page that lit it -- whenever there is one, instead of just clearing
+// the highlight and leaving the bare map with no way drawn back into the chain. The exact repro from the report:
+// color -> painting -> painter -> another painting -> See on map -> Close lands back on that second painting,
+// and Back from there still retraces painter, the first painting, then the color.
+scenario("trail", "On the map's ✕ (\"Close\") returns to the page that lit it, and the rest of the chain is still there", async t => {
+  await TRL.open(t, "#/color/cobalt");
+  await TRL.atHash(t, /^#\/color\/cobalt/, "the cobalt page");
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });
+  sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(300);
+  const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's rail");
+  pin.scrollIntoView({ block: "center" }); await t.sleep(200);
+  await t.click(pin, { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
+  const painter = await t.waitFor(() => t.$("#app .screen [data-awpainter]"), 20000, "the painter link on the painting");
+  await t.click(painter, { wait: 600 });
+  await TRL.atHash(t, /^#\/painter\//, "the painter page");
+  const other = await t.waitFor(() => t.$$("#app .screen [data-gi]").find(x => +x.dataset.gi >= 0), 20000, "another painting on the painter page");
+  await t.click(other, { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "the second painting");
+  const paintingHash = TRL.hash(t), depthAtPainting = TRL.depth(t);
+  t.expect(depthAtPainting >= 3, `expected at least color+painting+painter on the trail before the second painting, got ${depthAtPainting}: ${t.ev("XSTACK.join(' , ')")}`);
+  const mapBtn = await t.waitFor("[data-cs='map']", 10000, "the second painting's On the map action");
+  await t.click(mapBtn, { wait: 800 });
+  await t.waitFor(() => t.$(".screen.hm canvas"), 12000, "the lit map");
+  await t.sleep(300);
+  t.expect(TRL.depth(t) === depthAtPainting, `lighting the map changed the trail depth to ${TRL.depth(t)}, expected ${depthAtPainting}`);
+  const x = await t.waitFor(".cs-hl-x", 6000, "the lit map's ✕ (Close)");
+  t.expect(/Close/i.test(x.getAttribute("aria-label")) && /back to/i.test(x.getAttribute("aria-label")), `✕'s aria-label doesn't promise a return: "${x.getAttribute("aria-label")}"`);
+  await t.click(x, { wait: 800 });
+  await TRL.atHash(t, new RegExp("^" + paintingHash.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), "back on the second painting after Close");
+  t.expect(TRL.depth(t) === depthAtPainting, `Close landed with trail depth ${TRL.depth(t)}, expected ${depthAtPainting} (the chain, not just the painting)`);
+  t.expect(!t.$(".cs-hl-pill"), "the lit set's pill is still up after Close");
+  // Back from here still retraces the rest of the chain: painter, then the first painting, then the color
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, /^#\/painter\//, "Back from the painting lands on the painter");
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "Back from the painter lands on the first painting");
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, /^#\/color\/cobalt/, "Back from the first painting lands on cobalt");
+});
+
+// David, 2026-10-09: "don't lose all my progress just because I tapped the map" -- extended to the OTHER Close,
+// the ordinary ✕ "map glyph" (tl-exit) that deliberately forgets the live trail (the previous scenario covers
+// the lit-map's own ✕). Close still forgets XSTACK and Back still stays on the map (unchanged, see the
+// "map glyph exits... trail wasn't cleared" scenario below) -- it just isn't thrown away: a small "Back to…"
+// pill (js/trail.js tlRecentPill) offers it back on the very next map draw, and tapping it resumes the whole
+// chain, landing exactly where Close happened.
+const TLR = {
+  // color (cobalt) -> a painting from its rail -> its painter; returns { painterHash, depth }
+  async toPainter(t) {
+    await TRL.open(t, "#/color/cobalt");
+    const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+    const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });
+    sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(300);
+    const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's rail");
+    pin.scrollIntoView({ block: "center" }); await t.sleep(200);
+    await t.click(pin, { wait: 600 });
+    await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
+    const painter = await t.waitFor(() => t.$("#app .screen [data-awpainter]"), 20000, "the painter link on the painting");
+    await t.click(painter, { wait: 600 });
+    await TRL.atHash(t, /^#\/painter\//, "the painter page");
+    return { painterHash: TRL.hash(t), depth: TRL.depth(t) };
+  },
+};
+scenario("trail", "Close stashes the trail: a \"Back to…\" pill on the map resumes it, landing back on the chain", async t => {
+  const { painterHash, depth } = await TLR.toPainter(t);
+  t.expect(depth >= 2, `expected color+painting on the trail before the painter page, got ${depth}`);
+  // explicit Close: the plain map, the live trail forgotten the usual way
+  await t.click("#app .screen [data-tl-exit]", { wait: 900 });
+  await t.waitFor(".hm canvas", 10000, "the map after Close");
+  t.expect(TRL.depth(t) === 0, `Close should still clear the live trail; it holds ${TRL.depth(t)}`);
+  const pill = await t.waitFor(".tl-recent-pill.in", 4000, "the \"Back to…\" pill");
+  t.expect(t.text(".tl-recent-pill .tl-recent-txt").length > 0 && /back to/i.test(pill.getAttribute("aria-label") || ""), `the pill doesn't read as a way back: "${pill.getAttribute("aria-label")}"`);
+  await t.click(pill, { wait: 800 });
+  await TRL.atHash(t, new RegExp("^" + painterHash.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), "the pill resumed the painter page");
+  t.expect(TRL.depth(t) === depth, `resuming landed with trail depth ${TRL.depth(t)}, expected ${depth}`);
+  // and Back from there still retraces the rest of the chain, exactly as if Close had never happened
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "Back from the painter lands on the painting");
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, /^#\/color\/cobalt/, "Back from the painting lands on cobalt");
+});
+scenario("trail", "the \"Back to…\" pill disappears on a real pan, and the stash still shows in the trail sheet afterward", async t => {
+  const { depth } = await TLR.toPainter(t);
+  await t.click("#app .screen [data-tl-exit]", { wait: 900 });
+  await t.waitFor(".hm canvas", 10000, "the map after Close");
+  const cv = await t.waitFor(".tl-recent-pill.in", 4000, "the pill").then(() => t.$(".hm canvas"));
+  const r = cv.getBoundingClientRect(), o = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 31, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(new t.w.PointerEvent("pointerdown", o(r.width * .5, r.height * .6)));
+  cv.dispatchEvent(new t.w.PointerEvent("pointermove", o(r.width * .5 - 60, r.height * .6 - 40)));
+  await t.waitFor(() => !t.$(".tl-recent-pill"), 2000, "the pill to clear after a real pan");
+  cv.dispatchEvent(new t.w.PointerEvent("pointerup", o(r.width * .5 - 60, r.height * .6 - 40)));
+  // the stash itself survives the pan -- still reachable from the long-press trail sheet (a fresh page first:
+  // the bare map itself has no ‹ to long-press)
+  t.ev("hmOpenColor(BYNAME.get('viridian'))");
+  await t.waitFor(() => t.$("#app .screen [data-back]") && !t.$(".screen.waiting"), 15000, "a fresh, unrelated page from the map");
+  const back = TRL.screenBack(t), br = back.getBoundingClientRect(), bo = { bubbles: true, cancelable: true, clientX: br.left + 10, clientY: br.top + 10, pointerId: 32, pointerType: "touch", isPrimary: true, view: t.w };
+  back.dispatchEvent(new t.w.PointerEvent("pointerdown", bo));
+  await t.sleep(700);
+  t.w.dispatchEvent(new t.w.PointerEvent("pointerup", bo)); back.click();
+  await t.waitFor(".tl-sheet", 4000, "the trail sheet");
+  t.expect(t.$(".tl-recent-h") && /last trail/i.test(t.text(".tl-recent-h")), "the sheet doesn't offer \"Your last trail\" after the pan");
+  const recentList = t.$$(".tl-sheet .tl-list")[1];
+  t.expect(recentList && recentList.querySelectorAll(".tl-row").length === depth, `the stashed trail should list ${depth} rows, got ${recentList ? recentList.querySelectorAll(".tl-row").length : "no second list"}`);
+  // tapping a row in it resumes that point in the OLD chain -- not the fresh page the sheet was opened from
+  await t.click(recentList.querySelector(".tl-row"), { wait: 700 });
+  await t.waitFor(() => !/viridian/i.test(TRL.hash(t)) && t.$("#app .screen [data-back]") && !t.$(".screen.waiting"), 15000, "a row from the stashed trail to open its own page");
+});
+
 scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map glyph exits with the map's pan and zoom kept", async t => {
   await TRL.open(t, "#/home");
   const cv = await t.waitFor(".hm canvas", 12000, "the map");
@@ -3416,6 +3732,47 @@ scenario("trail-links", "the Museum: its own address, the old one still works, a
   await t.waitFor(() => t.$(".screen[data-tl] [data-back]"), 10000, "a closeup on the trail");
   await t.click(TRL.screenBack(t), { wait: 700 });
   await t.waitFor(".x-feed", 10000, "Ideas again after the trail ran out (not the map, not another room)");
+});
+
+// PAGES-AUDIT.md plan item 3 (David 2026-10-09): the subject palette view (js/subjectview.js) is a sheet, not a
+// show()-based screen, so it doesn't get router.js/trail.js's usual free ride -- this checks it got its own,
+// by hand (js/subjectview.js svOpen/svOpenRoute): a cold #/subject/<kind>/<id> load opens the sheet with the
+// right address and title, and Back (the browser's, same as every other address here) closes it and leaves
+// the address where it was before, not stuck on the subject's own.
+scenario("trail-links", "a fresh #/subject/painter/<id> address opens the subject view; Back closes it", async t => {
+  await TRL.open(t, "#/subject/painter/claude-monet");
+  await t.waitFor(".sv-sheet", 15000, "the subject view sheet");
+  await t.waitFor(() => /Monet/i.test(t.text(".sv-title")), 10000, "the subject view's title to resolve");
+  t.expect(TRL.hash(t) === "#/subject/painter/claude-monet", `the address is ${TRL.hash(t)}, not the subject route`);
+  t.expect(/Monet/i.test(t.d.title), `the document title is "${t.d.title}", not Monet's`);
+  t.w.history.back();
+  await t.waitFor(() => !t.$(".sv-sheet"), 10000, "the sheet to close on Back");
+  await t.sleep(300);
+  t.expect(TRL.hash(t) !== "#/subject/painter/claude-monet", `Back left the address on ${TRL.hash(t)}, the subject's own`);
+});
+
+// PAGES-AUDIT.md plan item 1 (David 2026-10-09): the shared "What links here" component (js/linkshere.js),
+// called near the end of a gem, a look and a source page's builder (js/explore.js wikiPage, js/looks.js
+// lkOpen, js/sources.js sourcePage) -- present on every one, even when empty, never a silently missing section.
+scenario("pages", "\"What links here\" renders on 3 different page kinds (gem, look, source)", async t => {
+  for (const [hash, label] of [["#/gem/spinel", "gem"], ["#/look/rococo", "look"], ["#/source/ridgway", "source"]]) {
+    await t.open(hash, { settle: 700 });
+    await t.waitFor(".screen", 15000, `the ${label} page at ${hash}`);
+    await t.waitFor(() => /What links here/.test(t.d.body.innerText), 10000, `"What links here" on ${hash}`);
+  }
+});
+
+// PAGES-AUDIT.md plan item 2 (David 2026-10-09): the painting-archive "dead end" fix (js/gallery.js glPage's
+// own painter/decade/movement context, already real; js/explore.js's paintingPage adds the rest for photos and
+// pulp covers) -- any painting in the archive, not just the 22 curated ones, has somewhere else to go.
+scenario("pages", "a random archive painting has at least 3 outgoing links", async t => {
+  const gi = t.sample([12, 3531, 8136, 15146, 2000, 500, 9001], 1, "archlinks")[0];
+  await t.open("#/gallery/" + gi, { settle: 1000 });
+  await t.waitFor(".gl-page", 15000, `painting ${gi}`);
+  await t.sleep(700);   // painter/decade/movement context (js/artwiki.js awContext) and the similar-palette rail fill in async
+  const sel = "[data-swatch],[data-awpainter],[data-awgroup],[data-pin],[data-pmap],[data-node],[data-to],[data-ptgo]";
+  const links = new Set(t.$$(sel));
+  t.expect(links.size >= 3, `painting ${gi} has only ${links.size} outgoing links, expected at least 3`);
 });
 
 // ================================================================== STUDY THE MAP (js/mapstudy.js, v2: design/MAP-STUDY-2.md)
@@ -4226,6 +4583,72 @@ scenario("trail", "popstate (the native iOS/browser back swipe) swaps straight t
   t.expect(!sawMx, "the native back swipe still played the bubble-shrink animation");
   await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "the map after the native back swipe");
   MXT.corners(t, "after a native back swipe");
+});
+
+// David's iPhone, 2026-10-09: "Going from a painting back to the color page is still a black screen." Root cause
+// (verified by reverting the fix below and watching this scenario fail): show() (js/core.js) never removed a
+// leftover .tlg-floor, js/trail.js's gesture-following backdrop. iOS doesn't reliably deliver a pointerup or
+// pointercancel once it's claimed a touch for its own back gesture, so a native back winning that race against
+// our own pointer tracking left the backdrop (a full-viewport var(--ground) layer) with nobody left to clean it
+// up -- stuck over every screen drawn after it, forever, not just one bad frame. The fix: show() now sweeps
+// .tlg-floor on every render and cancels any leftover TLG_ANIM, and the gesture's own commit no longer fires a
+// second, stale back once its page is already gone (el.isConnected).
+scenario("trail", "a native back racing an in-flight edge-swipe (no pointerup ever follows) doesn't strand the backdrop", async t => {
+  await TRL.open(t, "#/color/cobalt");
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });
+  sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(300);
+  const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's rail");
+  pin.scrollIntoView({ block: "center" }); await t.sleep(200);
+  await t.click(pin, { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
+  await t.sleep(500);   // tlgWire only arms once the page has rested a moment (TLG_BORN), like a real swipe
+  const scr = t.$("#app .screen"), r = scr.getBoundingClientRect(), y = r.top + r.height * .5, w = t.w, id = 91;
+  const o = (x, cy) => ({ bubbles: true, cancelable: true, clientX: x, clientY: cy, pointerId: id, pointerType: "touch", isPrimary: true, view: w });
+  scr.dispatchEvent(new w.PointerEvent("pointerdown", o(8, y)));
+  await t.sleep(16);
+  scr.dispatchEvent(new w.PointerEvent("pointermove", o(60, y)));
+  await t.sleep(16);
+  t.expect(t.$(".tlg-floor"), "the edge-swipe never armed (no backdrop under the drag)");
+  // iOS's own back gesture wins the race here: a real popstate, with this pointer sequence left dangling --
+  // no pointerup or pointercancel ever arrives for it (that's the point of this scenario)
+  t.w.history.back();
+  await TRL.atHash(t, /^#\/(color|name)\/cobalt/, "back on the cobalt page");
+  await t.sleep(300);
+  t.expect(!t.$(".tlg-floor"), "the edge-swipe's backdrop was left behind, blacking out the color page");
+  t.expect(t.bodyOverlayLeaks().length === 0, `a stuck overlay is covering the color page: ${t.bodyOverlayLeaks().join(", ")}`);
+  t.expect(t.$(".cp-hero"), `the color page itself isn't actually drawn (snapshot: ${t.snapshot()})`);
+});
+
+scenario("trail", "a native back winning the race after an edge-swipe already committed doesn't double-back or strand the backdrop", async t => {
+  await TRL.open(t, "#/color/cobalt");
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });
+  sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(300);
+  const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's rail");
+  pin.scrollIntoView({ block: "center" }); await t.sleep(200);
+  await t.click(pin, { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
+  await t.sleep(500);
+  const depthBefore = TRL.depth(t);
+  const scr = t.$("#app .screen"), r = scr.getBoundingClientRect(), y = r.top + r.height * .5;
+  // a real edge-swipe, past the commit threshold: the finger lifts normally (a real pointerup), so the
+  // "continue off-screen" animation starts the ordinary way -- it's just slow to finish (the harness's virtual
+  // clock doesn't drive WAAPI animations on its own; see TLGT.forceCommit above)
+  await t.drag(scr, [{ x: 8, y }, { x: 20, y }, { x: 160, y }], { ms: 35, wait: 0 });
+  await t.waitFor(() => t.ev("typeof TLG_ANIM !== 'undefined' && !!TLG_ANIM"), 3000, "the commit animation to start");
+  const anim = t.ev("TLG_ANIM");
+  // ...but iOS's own back gesture gets there first: a real popstate lands well before that animation would
+  // ever finish on its own
+  t.w.history.back();
+  await TRL.atHash(t, /^#\/(color|name)\/cobalt/, "back on the cobalt page");
+  await t.sleep(300);
+  t.expect(!t.$(".tlg-floor"), "the committed edge-swipe's backdrop was left behind");
+  t.expect(t.bodyOverlayLeaks().length === 0, `a stuck overlay is covering the color page: ${t.bodyOverlayLeaks().join(", ")}`);
+  t.expect(t.$(".cp-hero"), `the color page itself isn't actually drawn (snapshot: ${t.snapshot()})`);
+  t.expect(anim.playState === "idle", `the stranded commit animation was never cancelled (playState: ${anim.playState})`);
+  t.expect(t.ev("typeof TLG_ANIM !== 'undefined' && TLG_ANIM === null"), "TLG_ANIM still points at the stranded animation");
+  t.expect(TRL.depth(t) === Math.max(0, depthBefore - 1), `the native back landed twice: trail depth is ${TRL.depth(t)}, expected ${Math.max(0, depthBefore - 1)} (was ${depthBefore})`);
 });
 
 // ---------- landscape (2026-10-09, design/DESIGN-CANON.md §5 rule 7 "nothing horizontally scrolls"): key

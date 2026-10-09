@@ -231,7 +231,11 @@ function fashionDecadeDetail(id, opts = {}) {
   const self = () => fashionDecadeDetail(id, opts);
   if (!FX_DECADE_STATS) {
     const el = fashionDecadeDetailDraw(d, null, opts, self);
-    fxDecadeStatsLoad().then(() => { if (el.isConnected) { ROUTE_REPLACE = true; fashionDecadeDetail(id, opts); } });
+    // the redraw goes back through fashionPage() (router.js's ROUTED entry, which only wraps that public name),
+    // not fashionDecadeDetail() directly -- a bare recursive call here skipped ROUTE_NEXT and left the address
+    // bar on whatever tab was open before this page, a real bug a cold #/fashion/decade-<id> link would hit
+    // every time (PAGES-AUDIT.md's page-system lane, found verifying plan item 1's fashion wiring)
+    fxDecadeStatsLoad().then(() => { if (el.isConnected) { ROUTE_REPLACE = true; fashionPage("decade-" + id, opts); } });
     return el;
   }
   return fashionDecadeDetailDraw(d, fashionDecadeStatsFor(id), opts, self);
@@ -257,6 +261,7 @@ function fashionDecadeDetailDraw(d, st, opts, self) {
     ${worldImgHTML(d.img)}
     ${st ? fashionEraGalleryHTML(st) : ""}
     ${d.synthetic ? `<p class="fine"><a class="wl" data-fashion-to="era:${esc(fashionEraIdFor(d.id))}">Read the longer piece on this period →</a></p>` : ""}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "fashion:decade-" + d.id, title: d.label }) : ""}
     ${d.sources ? sourcesHTML(d.sources) : `<p class="fine">Sources: Metropolitan Museum of Art and Cleveland Museum of Art open-access collection data (CC0/public domain); Victoria and Albert Museum Collections API (colors measured, images not stored).</p>`}
   `, "article wd");
   worldBackWire(el, opts, () => fashionList("decade", {}));
@@ -284,6 +289,7 @@ function fashionHouseDetail(id, opts = {}) {
     <div class="z-hero z-color" data-swatch="${h.hex}" style="--c:${h.hex}" data-ink="${ink(h.hex)}"><span class="eyebrow">${esc(h.house)}</span><h1>${esc(h.label)}</h1><span class="mono">${esc(h.hex)}</span></div>
     ${h.body ? `<p class="z-sum">${worldLinkText(h.body)}</p>` : ""}
     ${h.hedge ? `<p class="fine">${esc(h.hedge)}</p>` : ""}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "fashion:house-" + h.id, title: h.house }) : ""}
     ${sourcesHTML(h.sources)}
   `, "article wd");
   worldBackWire(el, opts, () => fashionList("house", {}));
@@ -295,7 +301,8 @@ function fashionHouseDetail(id, opts = {}) {
 function fashionHistoryDetail(id, opts = {}) {
   if (!window.FASHION_HISTORY) {   // the long versions load lazily: draw the short page now, the full one when it lands
     const el = fashionHistoryDraw(id, opts);
-    worldWhenHistory(() => { if (window.FASHION_HISTORY && el && el.isConnected) { const y = scrollY; ROUTE_REPLACE = true; fashionHistoryDraw(id, opts); scrollTo(0, y); } });
+    // same fix as fashionDecadeDetail above: back through fashionPage() so the route actually commits
+    worldWhenHistory(() => { if (window.FASHION_HISTORY && el && el.isConnected) { const y = scrollY; ROUTE_REPLACE = true; fashionPage("history-" + id, opts); scrollTo(0, y); } });
     return el;
   }
   return fashionHistoryDraw(id, opts);
@@ -316,6 +323,7 @@ function fashionHistoryDraw(id, opts = {}) {
     ${(h.sections || []).map(x => `<section class="wd-sec"><h3>${esc(x.title)}</h3>${x.text.map(p => `<p class="wd-p">${worldLinkText(p)}</p>`).join("")}</section>`).join("")}
     ${(h.colors || []).length ? `<section class="wd-sec"><h3>Colors in this story</h3><div class="chips-wrap">${h.colors.map(cn => { const x = graph().resolve(cn); return x ? `<button class="pchip" data-to="${esc(x.id)}"><i style="--c:${x.h}"></i>${esc(x.title)}</button>` : ""; }).join("")}</div></section>` : ""}
     ${h.facts && h.facts.length ? `<dl class="facts">${h.facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>` : ""}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "fashion:history-" + h.id, title: h.title }) : ""}
     ${sourcesHTML(h.sources)}
   `, "article wd");
   worldBackWire(el, opts, () => fashionList("history", {}));
@@ -405,7 +413,8 @@ function fashionEraDetail(id, opts = {}) {
   if (!fashionEraReady()) {
     const el = show(`${worldTop("Fashion")}<h1 class="p-title">Loading…</h1>`, "article wd");
     worldBackWire(el, opts, () => fashionEraList({}));
-    fashionEraWhenReady(() => { if (el.isConnected) { ROUTE_REPLACE = true; fashionEraDetail(id, opts); } });
+    // same fix as fashionDecadeDetail above: back through fashionPage() so the route actually commits
+    fashionEraWhenReady(() => { if (el.isConnected) { ROUTE_REPLACE = true; fashionPage("era-" + id, opts); } });
     return el;
   }
   const era = window.FASHION_ERAS.find(x => x.id === id);
@@ -418,13 +427,14 @@ function fashionEraDetail(id, opts = {}) {
     <p class="eyebrow p-type">Fashion · Measured era</p>
     <h1 class="p-title">${esc(era.title)}</h1>
     <p class="p-dek">${esc(era.dek || "")}</p>
-    <p class="fine mono">${st.n.toLocaleString()} measured pieces · ${Object.entries(st.museums).map(([k, v]) => `${k === "met" ? "The Met" : "Cleveland Museum of Art"} ${v}`).join(" · ")}</p>
+    <p class="fine mono">${st.n.toLocaleString()} measured pieces${st.nCc0 != null ? ` · ${st.nCc0.toLocaleString()} photographed (Met + Cleveland)` : ""}${st.nVa != null ? ` · ${st.nVa.toLocaleString()} measured only (V&A, no image)` : ""}</p>
     <section class="wd-sec"><h3>Measured palette</h3>${tabs.html}</section>
     ${st.findings && st.findings.length ? `<section class="wd-sec"><h3>What the measurements show</h3><ul class="wd-pieces">${st.findings.map(f => `<li>${esc(f)}</li>`).join("")}</ul></section>` : ""}
     ${(era.lead || []).map(p => `<p class="wd-p">${worldLinkText(p)}</p>`).join("")}
     ${(era.sections || []).map(x => `<section class="wd-sec"><h3>${esc(x.title)}</h3>${x.text.map(p => `<p class="wd-p">${worldLinkText(p)}</p>`).join("")}</section>`).join("")}
     ${fashionEraGalleryHTML(st)}
     ${era.hedge ? `<p class="fine">${esc(era.hedge)}</p>` : ""}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "fashion:era-" + id, title: era.title }) : ""}
     ${sourcesHTML(era.sources)}
   `, "article wd");
   worldBackWire(el, opts, () => fashionEraList({}));

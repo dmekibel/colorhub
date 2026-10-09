@@ -20,7 +20,7 @@
 
 /* ---------- the "Learn it" button on a color page (js/explore.js, colorPage only) ---------- */
 .c-learnit{display:inline-flex;align-items:center;gap:8px;margin-top:14px;height:40px;padding:0 16px 0 13px;border:1px solid var(--rule-2);border-radius:var(--r-pill);
-  font:italic 400 15px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:inherit;transition:transform .3s var(--spring)}
+  font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:inherit;transition:transform .3s var(--spring)}
 .c-learnit:active{transform:scale(.95)}
 .c-learnit svg{width:16px;height:16px}
 .c-learnit small{font:500 13px/1 var(--mono);letter-spacing:.06em;text-transform:none;opacity:.7}
@@ -92,7 +92,7 @@
 .hm-tweak-row input{width:100%;accent-color:var(--ink)}
 .hm-tweak-row b{text-align:right;font:500 13px/1 var(--mono);color:var(--faint)}
 .hm-tweak-foot{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px calc(10px + var(--bottom));border-top:1px solid var(--rule)}
-.cx-pill{height:38px;padding:0 16px;border:1px solid var(--rule-2);border-radius:var(--r-pill);font:italic 400 15px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--ink)}
+.cx-pill{height:38px;padding:0 16px;border:1px solid var(--rule-2);border-radius:var(--r-pill);font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--ink)}
 
 /* ---------- the honeycomb lab (#/lab/honey): full-screen preview, two steppers and a rating row at the bottom ---------- */
 .hm-lab{position:relative;height:100%}
@@ -113,7 +113,7 @@
 .hm-lab-stars button.on{color:#F4C94C}
 
 /* the count line under the Show/Look tabs */
-.hm-count{margin:-4px 0 10px;font:400 15px/1.3 var(--serif);font-style:italic;color:var(--soft)}
+.hm-count{margin:-4px 0 10px;font:400 17px/1.3 var(--serif);font-style:italic;color:var(--soft)}
 
 /* the View panel's header (DESIGN-SYSTEM §12 "View panel"): the name, Search and Surprise me */
 .hm-chooser-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
@@ -216,7 +216,7 @@
 .hm-arr-b b{font:400 13px/1.15 var(--sans);color:var(--soft);text-align:center;width:100%;min-height:2.3em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .hm-arr-b.on .hm-arr-pic{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--surface-1)}
 .hm-arr-b.on b{color:var(--ink)}
-.hm-arr-sub{flex:none;margin:4px 0 12px;padding:0 16px;font:italic 400 16px/1.3 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-arr-sub{flex:none;margin:4px 0 12px;padding:0 16px;font:italic 400 17px/1.3 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hm-arr-sub b{font-weight:400;font-style:normal;color:var(--ink)}
 .hm-ch-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 16px calc(var(--bottom,0px) + 24px);-webkit-overflow-scrolling:touch}
 .hm-ch-scroll .cx-sec{margin-top:18px}

@@ -52,7 +52,7 @@
 /* ---------- primary row: the one filled button, plus save/share ---------- */
 .cp-primary-row{display:flex;align-items:center;gap:10px;margin-top:20px}
 .cp-primary{flex:1;display:flex;align-items:center;gap:10px;height:58px;padding:0 22px;background:var(--paper);color:var(--paper-ink);border-radius:var(--r-pill);font:400 24px/1 var(--serif);letter-spacing:-.01em}
-.cp-primary em{font:italic 400 14px/1 var(--serif);color:var(--paper-soft);font-style:italic;margin-left:2px}
+.cp-primary em{font:italic 400 17px/1 var(--serif);color:var(--paper-soft);font-style:italic;margin-left:2px}
 .cp-primary svg{width:18px;height:18px;margin-left:auto;flex:none}
 .cp-icon{width:44px;height:44px;flex:none}
 
@@ -62,7 +62,7 @@
 .rp-learnpill{display:flex;align-items:center;gap:7px;height:40px;padding:0 16px;border-radius:var(--r-pill);font:500 15px/1 var(--sans);background:rgba(20,19,17,.88);color:#F3F0EA;flex:none}
 [data-ink="light"] .rp-learnpill{background:rgba(20,19,17,.88);color:#F3F0EA}
 [data-ink="dark"] .rp-learnpill{background:rgba(255,255,255,.86);color:#1A1814}
-.rp-learnpill em{font:italic 400 13px/1 var(--serif);opacity:.72;font-style:italic}
+.rp-learnpill em{font:italic 400 17px/1 var(--serif);opacity:.72;font-style:italic}
 .rp-learnpill-known{opacity:.86}
 .rp-learnpill svg{width:15px;height:15px;flex:none}
 .rp-actrow .sx-pairbtn{margin:0;flex:none}
@@ -85,8 +85,22 @@
 .rp-focus.closing{opacity:0}
 .rp-focus-name{font:400 20px/1.2 var(--serif);letter-spacing:-.01em;opacity:.92;transition:opacity .4s ease;padding:0 32px;text-align:center;text-wrap:balance}
 .rp-focus.dim .rp-focus-name{opacity:0}
+/* the quiet corner tag (David, 2026-10-09): name + hex, bottom-left, safe-area aware -- a museum label that stays
+   on through the big centered name's own fade (it's "alone with the color", not "alone with no idea what it is") */
+.rp-focus-tag{position:absolute;left:calc(env(safe-area-inset-left,0px) + 18px);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);
+  margin:0;font:400 13px/1.3 var(--mono);letter-spacing:.02em;opacity:.55;pointer-events:none;text-align:left;text-transform:none}
 .rp-focus[data-ink="dark"]{color:#141311}.rp-focus[data-ink="light"]{color:#fff}
 @media (prefers-reduced-motion:reduce){.rp-focus{transform:none;transition:opacity .22s ease}.rp-focus.on{transform:none}.rp-focus-name{transition:opacity .22s ease}}
+/* the same view, 2 or more colors at once (David, 2026-10-09: "same full-screen preview for a pair or more" --
+   js/setpage.js): full-height bands side by side, or stacked full-width when there are 4+ (or the viewport is too
+   narrow for a sliver of a band to read) -- background and the transform-origin scale-in still belong to .rp-focus
+   itself, each band just paints its own fill and carries its own corner tag, inked by its own contrast */
+.rp-focus.cf-multi{background:var(--ground);flex-direction:row;align-items:stretch}
+.rp-focus.cf-multi.cf-stack{flex-direction:column}
+.cf-band{position:relative;flex:1;min-width:0;min-height:0;background:var(--c)}
+.cf-band[data-ink="dark"]{color:#141311}.cf-band[data-ink="light"]{color:#fff}
+.cf-band .rp-focus-tag{opacity:.65}
+@media (prefers-reduced-motion:reduce){.rp-focus.cf-multi{transform:none}}
 
 /* ---------- the look-alike strip: no label, the diff line right under it ---------- */
 .cp-strip-sec{margin-top:26px}
@@ -115,8 +129,8 @@
 .sw-sheet .pk-hero{border-radius:var(--r-1,4px)}
 .cp-sheet-title{display:flex;align-items:baseline;gap:10px;margin-top:16px;flex-wrap:wrap}
 .cp-sheet-title h2{font:400 34px/1.05 var(--serif);letter-spacing:-.02em}
-.cp-sheet-tag{display:inline-block;font:italic 400 14px/1 var(--serif);color:var(--soft);padding:3px 10px;border:1px solid var(--cp-rule);border-radius:var(--r-pill)}
-.cp-sheet-desc,.cp-sheet-note{margin-top:6px;font:italic 400 16px/1.35 var(--serif);color:var(--soft)}
+.cp-sheet-tag{display:inline-block;font:italic 400 17px/1 var(--serif);color:var(--soft);padding:3px 10px;border:1px solid var(--cp-rule);border-radius:var(--r-pill)}
+.cp-sheet-desc,.cp-sheet-note{margin-top:6px;font:italic 400 17px/1.35 var(--serif);color:var(--soft)}
 
 /* near-name bubbles: tap one and the sheet becomes that color (js/swatch.js walks the chain) */
 .cp-near-row{display:flex;gap:14px;margin-top:18px;overflow-x:auto;-webkit-overflow-scrolling:touch}
@@ -126,7 +140,7 @@
 
 .cp-sheet-primary{margin-top:20px}
 .cp-sheet-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px}
-.cp-link{font:italic 400 16px/1 var(--serif);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;color:var(--ink)}
+.cp-link{font:italic 400 17px/1 var(--serif);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;color:var(--ink)}
 
 /* ============================================================
    Rich color-page sections (js/richcolor.js): Painters, When and where, Often paired with, Harmonies, The
@@ -248,7 +262,7 @@
 .rc-passport{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .rc-stamp{display:inline-flex;flex-direction:column;align-items:center;padding:6px 12px;border:1.5px dashed var(--soft);border-radius:8px;transform:rotate(-1.5deg)}
 .rc-stamp:nth-child(even){transform:rotate(1.2deg)}
-.rc-stamp b{font:500 13px/1.2 var(--mono)}.rc-stamp em{font:italic 400 14px/1.2 var(--serif);color:var(--soft)}
+.rc-stamp b{font:500 13px/1.2 var(--mono)}.rc-stamp em{font:italic 400 17px/1.2 var(--serif);color:var(--soft)}
 .rc-tier{margin-top:8px}
 
 /* ============================================================
@@ -259,7 +273,7 @@
 .cp-hero h1.rp-name{margin-top:6px;font-size:96px;line-height:.9;letter-spacing:-.04em;text-wrap:balance}
 .rp-tier{margin-top:8px;font:italic 400 19px/1.25 var(--serif)}
 .rp-def{margin-top:10px;font:400 20px/1.3 var(--serif);max-width:30ch;text-wrap:pretty}
-.rp-defsrc{margin-top:4px;font:italic 400 14.5px/1.3 var(--serif);opacity:.8}
+.rp-defsrc{margin-top:4px;font:italic 400 17px/1.3 var(--serif);opacity:.8}
 .rp-def:empty,.rp-defsrc:empty,.rp-tier:empty{display:none}
 .cp-hex em{font-style:normal;opacity:.8}
 .cp-scroll-hint{display:none}

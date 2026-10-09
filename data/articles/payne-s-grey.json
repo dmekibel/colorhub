@@ -6,117 +6,190 @@
   "Payne's Grey"
  ],
  "tier": "pigment",
- "depth": "short",
- "lede": "Payne's Grey is a blue-grey mixed by watercolorists in place of plain black, named for the English painter William Payne around 1800.",
+ "depth": "long",
+ "lede": "Payne's Grey is a dark, muted blue-grey that the English watercolorist William Payne mixed as a gentler stand-in for black, and two respected sources cannot agree on what he actually put in it.",
  "sections": [
   {
-   "id": "name",
-   "title": "A painter's substitute for black",
-   "body": "William Payne was a British watercolorist, born in Devon around 1760, who worked first as an engineer before teaching watercolor in London [3]. He is credited with mixing a softer, bluish grey to replace the flat, deadening black many of his students reached for in shadows [3]. His original recipe combined Prussian blue, yellow ochre and crimson lake, a far more complex mix than the name's later, simpler recipes suggest [3].\n\nThe nearest named colors on file are [[black-coral]] and [[delphinium]], at The ISCC-NBS 1955 revision places it in block 186, \"grayish blue,\" a near-exact match (ΔE 0.4) to the Ridgway chip [1][2]. Maerz and Paul's 1930 dictionary dates the name in English to 1835, decades after Payne's own death [1].\n\nTwentieth-century recipes for \"Payne's grey\" paint drifted from Payne's own mixture: one later formula swaps in indigo for Prussian blue, and most modern tubes now mix ultramarine with a carbon black instead [3]. The name has outlived the paint it first described."
+   "id": "origin",
+   "title": "A teacher's substitute for black",
+   "body": "William Payne (1760-1830) was an English painter and etcher, a drawing-master who developed methods that considerably widened what watercolor could do, particularly in rendering sunlight and atmosphere [1]. Those methods, more than the specific grey he is remembered for today, are what made him briefly the most fashionable drawing-master in London [1]. Black was the traditional way to darken a wash, but Payne wanted something that organized shadows and values without the visually blunt result plain black gives a landscape, so he mixed his own dark, violet-leaning grey and recommended it to his students instead [1]. Wikipedia and Maerz and Paul's 1930 color dictionary agree on when the name itself first appears in English print: 1835, five years after Payne's death [1][2]. That is a separate claim from our own graph's earliest-dated citation for this exact swatch, which comes from a different, later source, Ridgway's 1912 color-standards system [2] — the word is older than any of our own sources that measured this particular hex."
+  },
+  {
+   "id": "formula",
+   "title": "Two formulas that disagree",
+   "body": "What Payne actually mixed is not settled [1][3]. One account gives Prussian blue, yellow ochre and crimson lake [1]. A separate, respected source on indigo gives a different recipe entirely: lake, raw sienna and indigo [3]. Both are real, sourced claims, and this article does not pick a winner between them — what both agree on is the idea, a convenient, pre-mixed neutral tint built from pigments already on a watercolorist's palette, not a single mineral or dye of its own [1][3]. Balfour-Paul adds a practical reason indigo-based versions stayed popular into the twentieth century: the mix washes on more smoothly than a wash built straight from Prussian blue, and painters often reached for it specifically where Prussian blue would otherwise be the obvious choice [3]. Gurney offers a third formula again, black and ultramarine, and gives the real reason three sources can disagree: in his technical vocabulary, Payne's Grey is what painters call a convenience mixture, a blended paint sold under one recognizable name with no single pigment of its own, the same category a mixed paint-store \"mauve\" and phthalo yellow-green belong to [12]. A convenience mixture is defined by the result it reaches, not by one fixed recipe, so different manufacturers and painters filling the same gap were never guaranteed to use the same ingredients.\n\nThe name has its own small history of getting garbled in transmission. The Pigment Compendium notes that some older technical sources spell it \"Pattison\" or \"Patterson\" rather than Payne's, a slip that risks tangling the watercolorist's grey up with an unrelated nineteenth-century process for refining lead, named for a different man entirely, a metallurgist called Pattinson [11]. The two have nothing in common beyond a few accidentally shared letters."
+  },
+  {
+   "id": "use",
+   "title": "A wash for shadow, not a subject",
+   "body": "Payne's Grey is built to sit in the parts of a painting the eye is not meant to linger on [4][5]. One watercolorist working more than a century and a half after Payne describes the habit directly, illustrating a flying city for *Dinotopia: First Flight* (1999): to paint a minaret's shadowed lower half, he laid a Payne's gray wash first, under the rest of the color, specifically because shadow areas in watercolor cannot be premixed the way oil paint allows [4]. The glowing passageways beside it, lit after the sun had set in the scene, were painted afterward, over that same grey foundation [4]. That instinct shows up again and again in technical references: a working colorist's own pigment-matching charts list Payne's Gray repeatedly among the practical neutral blacks and greys, the colors chosen for structure and shade rather than for being looked at directly [5]. Garments in our own archive echo the same quiet, background role: a woven textile from Sardinia carries a near-match 2.8 units off, a nineteenth-century Chinese fragment 3.7 off, and a twentieth-century English fragment 4.0 off [6] — three continents, one unglamorous blue-grey."
+  },
+  {
+   "id": "neighbors",
+   "title": "Its neighbors",
+   "body": "In the color graph, Payne's Grey sits 3.0 units from [[black-coral]], almost the same color [7]. [[delphinium]], 4.2 units off, is lighter; [[dark-orient-blue]], 4.3 off, is bluer; [[deep-slate-blue]], 4.7 off, is darker; [[blue-slate]], 5.0 off, is duller [7]. Its own named variant, [[deep-payne-s-grey]], sits 5.1 units away and is almost the same color again [7][2]. The family runs three named variants under the same root: [[dark-payne-s-grey]] is markedly darker still, [[deep-payne-s-grey]] is the one closest to the root color (the real look-alike edge above), and [[pale-payne-s-grey]] is lifted much higher in lightness, nearly a pastel version of the same hue — a sign of how useful one mixed neutral turned out to be, stretched across a whole tonal range under one family name [2]. Our own computed-nearest ISCC-NBS block for this hex and the real 1955 dictionary filing for the exact name Payne's Grey agree for once, both landing on block 186, \"grayish blue,\" only 0.4 units apart [2]. On a painter's mixing wheel, its true complement sits nearest [[olive-brown]], [[pale-brown]] and [[mole-brown]] — three warm, dusty browns opposite a cold, muted blue-grey [7]."
+  },
+  {
+   "id": "seen-in",
+   "title": "Seen in",
+   "body": "Among design aesthetics, the closest full-palette matches near Payne's Grey are Tonalism, 2.9 units off on its neighbor Deep Slate-Blue, and Frutiger Aero, 3.7 off on Deep Payne's Grey, with Hypebeast a step further at 4.6 units on Black Coral [8]. Tonalism is the fitting one: an American painting movement built on muted, closely related tones is a natural late home for a pigment invented to soften contrast [8]. On screen, *Blade Runner 2049*'s cold, synthetic palette lands 4.2 units from this exact grey [9]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "A screen match for this grey-blue turns up in 270 of 23,781 paintings in our archive, about 1.1 percent, as photographed [2]. It is almost three times more common in paintings from the 1900s decade than the archive's average rate, and leans toward painters working in watery, atmospheric blues: Paul Signac, Paul Sérusier and Claude Monet all carry it well above the archive's base rate [2]. Its single most covered appearance is Whistler's *Violet and Silver—The Deep Sea* (1893), where it fills more than half the canvas [2]. These are computed color matches on photographs of aged, varnished paintings, not identifications of any pigment Payne, Whistler or Monet actually used [2]."
+   "body": "Our archive finds this grey in 380 of 23,778 paintings, about 1.6 percent as photographed; a stricter within-painting lens finds it in 143 [10]. That makes it more common than 63 percent of the named colors in the archive [10]. The single clearest number here is the role it plays once it is present: in 50 percent of its 143 clearest matches it sits as a hidden color, the least visible rank by lightness within the canvas, far ahead of any of the other four roles we measure [10]. That is exactly the part a painting draws least attention to, and exactly where Payne built his mixture to work [10].\n\nIt peaks century-wide in the 1900s, 1.9 percent of 1,674 paintings from that century, 2.8 times the expected rate, and the sharper single-decade peak is the 1910s, 2.5 percent of 523 paintings, 3.4 times expected [10]. It is also over-represented in paintings from India, 2.3 times expected across 721 paintings, and from France, 2.2 times expected across 3,443 [10]. The earliest match in the archive is from 1100, with 258 dated paintings carrying it through to 1950; the archive's early centuries are thin, so this is a floor, not a first, and an 1100 match sits more than seven centuries before any of our own sources date the name itself — a look-alike hue in an aged photograph, not proof that anyone mixed this exact blend that early [10]. This is a computed color match on photographed, varnished canvases, not a pigment test."
   }
  ],
  "aside": {
   "origin": {
-   "named_after": "William Payne, English watercolorist",
-   "first_recorded": "1835, per Maerz and Paul",
-   "source": "Maerz and Paul, A Dictionary of Color (1930)"
+   "named_after": "William Payne (1760-1830), the English watercolorist who mixed it",
+   "first_recorded": "1835 in English print (Wikipedia; Maerz & Paul, 1930 dictionary)",
+   "source": "ColorHub color library"
   },
-  "aka": [
-   "Payne's gray"
-  ],
+  "aka": [],
   "siblings": [
    "black-coral",
    "delphinium",
    "dark-orient-blue",
-   "deep-slate-blue"
+   "deep-slate-blue",
+   "blue-slate"
   ],
-  "parent": "grey",
+  "parent": null,
   "children": [
-   "dark-payne-s-grey"
+   "dark-payne-s-grey",
+   "deep-payne-s-grey",
+   "pale-payne-s-grey"
   ],
   "disambiguation": [],
   "other_languages": []
  },
  "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 270,
-  "rate": 0.0114,
-  "peak_decade": {
-   "key": 1910,
-   "rate": 0.038,
-   "lift": 3.37
-  },
-  "top_paintings": [
-   "aic-84088"
-  ],
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
+  "n_present": 380,
+  "n_present_within_painting_lens": 143,
   "measured": {
    "lch": [
-    43,
-    12,
-    252
+    42.9,
+    12.1,
+    252.1
    ],
    "nearest": [
     [
      "Black Coral",
      3.0
-    ],
-    [
-     "Delphinium",
-     4.2
-    ],
-    [
-     "Dark Orient Blue",
-     4.3
-    ],
-    [
-     "Deep Slate-Blue",
-     4.7
     ]
    ]
-  }
+  },
+  "iscc_real_1955_filing": {
+   "name": "grayish blue",
+   "block": 186
+  },
+  "iscc_computed_nearest": {
+   "name": "grayish blue",
+   "de": 0.4
+  },
+  "most_common_role": "hidden"
  },
  "notes": [
   {
    "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLIX, hue 49‴; Maerz and Paul, A Dictionary of Color (1930), plate 47 A 9",
-   "loc_kind": "entry",
-   "url": null
+   "kind": "web",
+   "cite": "Wikipedia, \"William Payne (painter)\" and \"Payne's grey\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/William_Payne_(painter)"
   },
   {
    "n": 2,
    "kind": "data",
-   "cite": "ColorHub color library and archive (23,781 paintings): ISCC-NBS 1955 block 186, LCH values, computed match, as photographed",
+   "cite": "ColorHub color library: Ridgway 1912, Maerz & Paul 1930, ISCC-NBS 1955 filing, Munsell renotation, named variants",
    "loc_kind": null,
    "url": null
   },
   {
    "n": 3,
-   "kind": "web",
-   "cite": "Liquitex, \"The Story of Payne's Gray Color\"; Wikipedia, \"William Payne (painter)\"",
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, p. 220",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 54",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "Baty, Nature's Palette, pp. 267-268",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: garment palette twins (ΔE2000 ≤ 10)",
    "loc_kind": null,
-   "url": "https://www.liquitex.com/blogs/uncapped/paynes-gray"
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE ΔE2000, the real look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: design-look palette twins (ΔE2000 ≤ 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: film-palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 10,
+   "kind": "data",
+   "cite": "ColorHub archive (23,778 paintings), two-lens computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 11,
+   "kind": "book",
+   "cite": "Pigment Compendium, p. 306 (\"Payne's Grey\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 12,
+   "kind": "book",
+   "cite": "Gurney, Color and Light, p. 95",
+   "loc_kind": "pdf-page",
+   "url": null
   }
  ],
  "questions": [
   {
-   "q": "Payne's Grey was originally mixed as a substitute for what?",
+   "q": "Why did William Payne mix his own grey instead of just using black?",
    "choices": [
-    "Plain black",
-    "Sepia ink",
-    "Indigo dye",
-    "White lead"
+    "Plain black gave a visually blunt result in a landscape wash",
+    "Black pigment was too expensive in the 1790s",
+    "Black was banned from watercolor palettes",
+    "He was colorblind to true black"
    ],
-   "answer": "Plain black",
+   "answer": "Plain black gave a visually blunt result in a landscape wash",
    "kind": "pick"
   },
   {
-   "q": "True or false: William Payne's original recipe is the same mix sold as Payne's Grey paint today.",
+   "q": "True or false: all our sources agree on the exact three pigments in the original Payne's Grey mixture.",
    "choices": [
     "True",
     "False"
@@ -125,28 +198,29 @@
    "kind": "true-false"
   },
   {
-   "q": "Which painting in our archive shows the most Payne's Grey by covered area?",
+   "q": "What role does Payne's Grey most often play inside a painting, by our own archive's measurement?",
    "choices": [
-    "Whistler's Violet and Silver—The Deep Sea",
-    "Monet's Water Lilies",
-    "A Caillebotte still life",
-    "A Toulouse-Lautrec dance hall scene"
+    "A hidden color, the least visible by lightness in the canvas",
+    "The brightest highlight",
+    "The main subject's primary color",
+    "An even split across all roles"
    ],
-   "answer": "Whistler's Violet and Silver—The Deep Sea",
+   "answer": "A hidden color, the least visible by lightness in the canvas",
    "kind": "pick"
   }
  ],
  "openers": [
-  "Payne's Grey was invented so students would stop reaching for plain black — and the recipe has changed completely since."
+  "Two respected sources disagree on what William Payne actually mixed into his own namesake grey.",
+  "Payne's Grey is built to hide: half the time our archive finds it, it is the least visible color on the whole canvas."
  ],
- "words": 291,
+ "words": 1200,
  "status": "checked",
  "checked": {
-  "by": "batch-23",
-  "date": "2026-10-08",
+  "by": "checker",
+  "date": "2026-10-09",
   "issues": [
-   "No concordance hits for this slug; biography and recipe history come from web sources (Liquitex, Wikipedia), hedged as not institutional. Our own library/archive data are the primary citations.",
-   "lint 2026-10-09"
+   "Depth wave pilot: built from color-kb concordance (25 hits: Gurney, Balfour-Paul, Baty, Paterson, Pigment Compendium, St Clair) plus a web source for William Payne's biography, the color graph's real look-alikes and named variants, archive fieldnotes, and look/film/garment twins. States both disagreeing historical formulas rather than picking one.",
+   "Fresh-context fact-check (2026-10-09): found one unsupported qualitative claim (neighbors section said Deep Payne's Grey 'leans a touch greener', contradicting the real look-alike edge's own 'almost the same' tag); removed the invented nuance."
   ]
  }
 }

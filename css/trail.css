@@ -6,6 +6,29 @@
 .tlg-floor{position:fixed;inset:0;background:var(--ground);pointer-events:none}
 .tlg-floor-img{background-size:cover;background-position:center}
 
+/* "Back to <last page>" (David, 2026-10-09): the pill offered on the map right after an explicit Close stashed a
+   trail (js/trail.js tlRecentPill). position:absolute, not fixed -- .screen.hm has no positioned ancestor of its
+   own, so this resolves against the initial containing block exactly like js/honey.js's own .cs-hl-pill, and
+   sidesteps the containing-block trap a position:fixed child of an animating .screen can fall into (core.js
+   show()'s own comment on that, by the corner buttons). Directly above the left (Rooms) corner, same offset the
+   rooms-stem capsules use above it (css/menus2.css --corner-b/--corner), so neither ever overlaps the other. */
+.tl-recent-pill{position:absolute;z-index:4;left:16px;bottom:calc(var(--corner-b) + var(--corner) + 12px);
+  display:flex;align-items:center;gap:8px;max-width:calc(100vw - 32px - 64px);height:44px;padding:0 14px 0 10px;
+  border-radius:999px;background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14);
+  box-shadow:0 10px 28px rgba(0,0,0,.5);font:500 15px/1.2 var(--sans);text-align:left;
+  opacity:0;transform:translateY(8px) scale(.96);transition:opacity .22s ease,transform .22s var(--spring,ease)}
+.tl-recent-pill.in{opacity:1;transform:none}
+.tl-recent-pill svg{flex:none;width:18px;height:18px;color:var(--soft)}
+.tl-recent-pill .tl-th{width:26px;height:26px;border-radius:7px}
+.tl-recent-txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl-recent-txt b{font-weight:600}
+.tl-recent-pill:active{transform:scale(.97)}
+@media (orientation:landscape){.tl-recent-pill{left:calc(16px + var(--left))}}
+@media (prefers-reduced-motion:reduce){.tl-recent-pill{transition:opacity .16s ease}}
+
+/* "Your last trail" in the long-press sheet: its own clearly separate section, under the live trail */
+.tl-recent-h{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule)}
+
 /* the floating ‹ over a full-bleed color hero is solid now, like every other control (DESIGN-SYSTEM §1.2) */
 .cp-close{background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14);border-radius:50%;width:40px;height:40px}
 .cp-close svg{width:22px;height:22px}
@@ -47,7 +70,7 @@
 .tl-th-room .rm-art{width:48px;height:48px;box-shadow:none}
 .tl-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .tl-txt b{font:400 19px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tl-txt em{font:italic 400 14px/1.3 var(--serif);color:var(--soft)}
+.tl-txt em{font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
 .tl-foot{margin-top:4px}
 .tl-list li+li .tl-foot{border-top:1px solid var(--rule);border-radius:0;padding-top:12px}
 .tl-list li:has(.tl-foot)+li .tl-foot{border-top:0;padding-top:8px}

@@ -5,7 +5,7 @@
 .src-top-t{flex:1;font:italic 400 17px/1.2 var(--serif);color:var(--soft)}
 .src-band{margin:14px 0 0}
 .src-band h1{font:400 40px/1.05 var(--serif);letter-spacing:-.02em;margin-top:4px;text-wrap:balance}
-.src-short{font:italic 400 16px/1.3 var(--serif);color:var(--soft);margin-top:4px}
+.src-short{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin-top:4px}
 .src-facts{margin-top:24px}
 .src-caveat{margin-top:16px}
 .src-h2{font:400 26px/1.1 var(--serif);letter-spacing:-.01em;margin:36px 0 12px}

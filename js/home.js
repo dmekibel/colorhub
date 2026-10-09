@@ -62,7 +62,7 @@ const HM_LOOKS = [["original", "Bubbles"], ["honeycomb", "Honeycomb"]];
 // ---- the Arrange sheet's pictures (David, 2026-10-08: "the previews need to be simple icon versions"): one flat,
 // iconic diagram per arrangement, same 64 px grid, same dot size, a fixed calm palette (never the live colors, which
 // read as noise at this size). Short one-line labels; the full title and its line show under the strip. ----------
-const HM_ARR_SHORT = { map: "Map", rings: "Rings", sunflower: "Spiral", families: "Families", temp: "Warm–cool" };
+const HM_ARR_SHORT = { map: "Map", rings: "Rings", sunflower: "Spiral", families: "Families", tones: "Tones" };
 const hmHue = (h, l = 60, c = 62) => `hsl(${Math.round(h)} ${c}% ${l}%)`;
 function hmArrIcon(id) {
   const dot = (x, y, r, f, extra = "") => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${f}"${extra}/>`;
@@ -84,11 +84,9 @@ function hmArrIcon(id) {
       b += `<rect x="${x}" y="${y}" width="22" height="22" rx="4" fill="rgba(236,232,223,.07)"/>`;
       for (let r = 0; r < 2; r++) for (let c = 0; c < 2; c++) b += `<rect x="${x + 3 + c * 8.5}" y="${y + 3 + r * 8.5}" width="7" height="7" rx="2" fill="${hmHue(h, 72 - r * 26, 30 + c * 36)}"/>`;
     });
-  } else if (id === "temp") {   // warm left, cool right, greys down the middle
-    for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) {
-      const x = 12 + c * 10, y = 17 + r * 10;
-      b += dot(x, y, 3.8, c === 2 ? `hsl(40 5% ${76 - r * 12}%)` : c < 2 ? hmHue(4 + c * 24 + r * 6, 72 - r * 9) : hmHue(170 + (c - 3) * 44 + r * 6, 72 - r * 9));
-    }
+  } else if (id === "tones") {   // four moods, a little cluster each: vivid, light, muted, dark
+    const cl = (x, y, l, c) => [0, 125, 250].map((h, i) => dot(x + (i - 1) * 7.4, y + (i === 1 ? 7 : 0), 3.6, hmHue(h, l, c))).join("");
+    b = cl(16, 16, 56, 68) + cl(44, 15, 88, 30) + cl(16, 45, 58, 16) + cl(44, 46, 24, 46);
   } else if (id === "path" || id === "rings") {   // rings from the middle out, hue going round
     b = `<circle cx="32" cy="32" r="11.5" fill="none" stroke="rgba(236,232,223,.18)" stroke-width="1"/><circle cx="32" cy="32" r="22" fill="none" stroke="rgba(236,232,223,.18)" stroke-width="1"/>`
       + dot(32, 32, 4.4, hmHue(24, 64)) + ring(6, 11.5, 3.4, i => hmHue(30 + i * 60, 62)) + ring(12, 22, 3.4, i => hmHue(i * 30 + 15, 60));
@@ -210,7 +208,7 @@ function hmMeaning(v = hmView()) {
   if (a.kind === "grid") {
     if (v.arr === "map" && ord === "hue") return { line: a.sub + "." };
     const line = spec.line.charAt(0).toUpperCase() + spec.line.slice(1);
-    return { line: v.arr === "families" ? `Inside each family: ${spec.line}.` : line + "." };
+    return { line: a.unit ? `Inside each ${a.unit}: ${spec.line}.` : line + "." };
   }
   return { line: a.sub + "." };
 }
@@ -606,7 +604,9 @@ function hmHome() {
           ${typeof ssOpen === "function" ? `<button class="iconq" data-slideshow aria-label="Slideshow">${ICON.play}</button>` : ""}`;
       body = `${head(colorsActs)}${colorsPane}${arrangePane}`;
     }
-    const { sh, close } = sheet(`<div class="cx-sh hm-chooser" data-which="colors-arrange" data-tab="${tab}">${body}</div>`);
+    // David, 2026-10-09: "pressing Arrange brings the black bar back" -- non-modal (below), so it never locks
+    // body scroll either (js/core.js sheet()'s own {lock:false}); see that function's comment for why.
+    const { sh, close } = sheet(`<div class="cx-sh hm-chooser" data-which="colors-arrange" data-tab="${tab}">${body}</div>`, { lock: false });
     sh.classList.add("cx-sheet", "hm-sheet-panel", "hm-sheet-colors-arrange", tab === "arrange" ? "hm-sheet-arrange" : "hm-sheet-colors");
     // David, 2026-10-09 (both tasks together): "tapping the top half instantly closes Arrange... I need to pan
     // and zoom the map while choosing" + "combine Colors and Arrange into one menu with a tab." Non-modal in
