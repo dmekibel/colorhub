@@ -1194,14 +1194,15 @@ scenario("home", "Colors | Paintings: the corner-menu switch is bidirectional an
   await H.menu(t, "paintings");
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the painting map to open from Home's menu");
   t.expect(t.ev("S.hm.mode") === "paintings", "S.hm.mode was not set to paintings");
-  // back the other way: the painting map's own corner arc gets a "Colors" row. The map's own layout can finish
-  // well under 380ms (only its thumbnails are slow), so right after Home's "Paintings" tap closed Home's own
-  // stem (js/core.js STEM_CLOSED_AT/stemJustClosed, a 380ms real-time ghost-click guard shared by both arcs) a
-  // click here can still be inside that window -- a real sleep past it first, same as a person's own next tap would be.
+  // back the other way: the painting map's own Arrange|Filter sheet (js/paintmap.js openSheet) gets a "Colors"
+  // icon button beside its close X. The map's own layout can finish well under 380ms (only its thumbnails are
+  // slow), so right after Home's "Paintings" tap closed Home's own stem (js/core.js STEM_CLOSED_AT/
+  // stemJustClosed, a 380ms real-time ghost-click guard shared by both the stem and this sheet) a click here can
+  // still be inside that window -- a real sleep past it first, same as a person's own next tap would be.
   await t.sleep(450);
   await t.click(".pmx-do", { wait: 300 });
-  await t.waitFor('.pmx-stem [data-pmdo="colors"]', 4000, "the Colors row in the painting map's own arc");
-  await t.click('.pmx-stem [data-pmdo="colors"]', { force: true, wait: 900 });
+  await t.waitFor(".pmx-sheet [data-pmcolors]", 4000, "the Colors button in the painting map's own sheet");
+  await t.click(".pmx-sheet [data-pmcolors]", { force: true, wait: 900 });
   await t.waitFor("canvas", 8000, "the honeycomb after Colors");
   t.expect(t.ev("S.hm.mode") === "colors", "S.hm.mode was not set back to colors");
   // remembered: set paintings mode, leave the floor for another room, then use the Rooms corner's Home bubble
@@ -4482,34 +4483,87 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
   await t.click("[data-back]", { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 12000, "Back to the map, with the same painting in the middle");
 });
+// David, 2026-10-09: the old radial "arc" stem menu and the Filter-only sheet (a separate "Show N on the map"
+// confirm button) are both replaced by one compact, non-modal Arrange|Filter sheet (js/paintmap.js openSheet,
+// the same css/home.css .hm-sheet-panel the color map's own chooser() uses) -- every change (a shape, a filter
+// chip) applies live, no confirm step. Rewritten for that: the corner opens the sheet straight onto its Arrange
+// tab (shapes as [data-pmarr]), and the Filter tab's chips (reached via its own tab button) narrow the map the
+// moment you tap one.
 scenario("paintmap", "arrange by time and painter and around the middle one then filter by century (counts and address follow)", async t => {
   await t.open("#/paintings/map?arr=color&co=France", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100, 20000, "the map of France");
   const n = t.w.PM_CTRL.count;
   for (const k of ["time", "painter"]) {
     await t.click(".pmx-do", { wait: 300 });
-    await t.waitFor(`.pmx-stem [data-pmdo="${k}"]`, 4000, "the corner's arc");
-    await t.click(`.pmx-stem [data-pmdo="${k}"]`, { force: true, wait: 600 });
+    await t.waitFor(`.pmx-sheet [data-pmarr="${k}"]`, 4000, "the Arrange tab's shapes");
+    await t.click(`.pmx-sheet [data-pmarr="${k}"]`, { force: true, wait: 600 });
     await t.waitFor(() => t.w.PM_CTRL.spec.arr === k && t.w.PM_CTRL.drawn > 0, 8000, `the ${k} arrangement`);
     t.expect(t.w.PM_CTRL.count === n, `${k} shows ${t.w.PM_CTRL.count} paintings, not the same ${n}`);
     t.expect(t.text("[data-pmwhy]").length > 10, `${k}: no line saying what position means`);
+    await t.click("[data-sheet-close]", { wait: 600 });
   }
   const mid = t.w.PM_CTRL.center;
   await t.click(".pmx-do", { wait: 300 });
-  await t.waitFor('.pmx-stem [data-pmdo="similar"]', 4000, "the corner's arc");
-  await t.click('.pmx-stem [data-pmdo="similar"]', { force: true, wait: 900 });
+  await t.waitFor('.pmx-sheet [data-pmarr="similar"]', 4000, "the Arrange tab's shapes");
+  await t.click('.pmx-sheet [data-pmarr="similar"]', { force: true, wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL.spec.arr === "similar" && t.w.PM_CTRL.center === mid, 8000, "the painting in the middle to stay there as the seed");
   t.expect(/arr=similar/.test(t.w.location.hash) && /seed=/.test(t.w.location.hash), `the address doesn't carry the arrangement: ${t.w.location.hash}`);
-  await t.click("[data-pmfilter]", { wait: 600 });
-  await t.waitFor(".pmx-sheet [data-pmcent]", 6000, "the filter sheet");
+  await t.click('.pmx-sheet [data-tab="filter"]', { wait: 300 });
+  await t.waitFor(".pmx-sheet [data-pmcent]", 6000, "the Filter tab's chips");
   const chip = t.$$(".pmx-sheet [data-pmcent]").find(b => !b.disabled && +(b.querySelector("em") || { textContent: "0" }).textContent.replace(/\D/g, "") > 20);
   t.expect(chip, "no century with paintings");
   await t.click(chip, { force: true, wait: 400 });
-  const want = +t.text(".pmx-sheet [data-pmn]").replace(/\D/g, "");
-  t.expect(want > 0 && want < n, `a century didn't narrow the count (${want} of ${n})`);
-  await t.click(".pmx-sheet [data-pmgo]", { force: true, wait: 900 });
-  await t.waitFor(() => Math.abs(t.w.PM_CTRL.count - want) <= 1, 8000, "the map to show the filtered paintings");
+  // live-applied: no separate "Show N" confirm button any more -- the map itself (not just the sheet's own
+  // count readout) narrows the moment the chip is tapped
+  await t.waitFor(() => t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count < n, 8000, "a century to narrow the map");
   t.expect(/y0=\d+/.test(t.w.location.hash), `the address doesn't carry the years: ${t.w.location.hash}`);
+});
+// David, 2026-10-09: Paintings mode gets the color map's own Arrange+Filter parity -- Place by (only where a
+// painting's own color decides its position: color/time), Center on (a quick preset instead of having to
+// already be looking at the right painting), filtering by example (the centered painting's own facet chips,
+// "only these"), and removable chips atop the map for whatever's currently active, from any source.
+scenario("paintmap", "Place by, Center on, filtering by example, and removable top chips all drive the same spec", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  // Place by: only offered for color/time, defaults to Average, and actually changes the layout (a different
+  // cache key -- js/paintmap.js pmLayout includes s.place) not just the spec field
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor(".pmx-sheet [data-pmplace]", 4000, "the Place by row");
+  t.expect(t.w.PM_CTRL.spec.place === "avg" || !t.w.PM_CTRL.spec.place, `Place by didn't default to Average: ${t.w.PM_CTRL.spec.place}`);
+  const before = t.w.PM_CTRL.center;
+  await t.click('.pmx-sheet [data-pmplace="main"]', { force: true, wait: 500 });
+  t.expect(t.w.PM_CTRL.spec.place === "main", `Place by didn't switch to Main color: ${t.w.PM_CTRL.spec.place}`);
+  t.expect(/pl=main/.test(t.w.location.hash), `the address doesn't carry Place by: ${t.w.location.hash}`);
+  await t.waitFor(() => t.w.PM_CTRL.center !== before || t.w.PM_CTRL.drawn > 0, 4000, "the map to relayout under Main color");
+  // Center on: a preset ("Most vivid") seeds "around one painting" without already having that painting centered
+  await t.click('.pmx-sheet [data-pmcenterk="vivid"]', { force: true, wait: 700 });
+  t.expect(t.w.PM_CTRL.spec.arr === "similar" && t.w.PM_CTRL.spec.seed >= 0, `Center on (vivid) didn't switch to "around one painting": ${JSON.stringify(t.w.PM_CTRL.spec)}`);
+  const seeded = t.w.PM_CTRL.spec.seed;
+  await t.click("[data-sheet-close]", { wait: 600 });
+  await t.waitFor(() => t.w.PM_CTRL.center === seeded, 6000, "the vivid painting to actually be centered");
+  // the bottom card's own "Center on this painting" button (js/paintmap.js centerBtn): switch to a DIFFERENT
+  // shape first (By time), so whatever lands in the middle is a different, real painting the button has never
+  // seeded on itself -- then confirm it reads whatever is ACTUALLY centered now, not the vivid one from before
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor('.pmx-sheet [data-pmarr="time"]', 4000, "the Arrange tab's shapes");
+  await t.click('.pmx-sheet [data-pmarr="time"]', { force: true, wait: 600 });
+  await t.click("[data-sheet-close]", { wait: 600 });
+  const moved = t.w.PM_CTRL.center;
+  t.expect(moved >= 0 && moved !== seeded, `By time didn't land on a different painting (still ${moved})`);
+  await t.click("[data-pmcenter]", { wait: 700 });
+  t.expect(t.w.PM_CTRL.spec.arr === "similar" && t.w.PM_CTRL.spec.seed === moved, `"Center on this painting" seeded ${JSON.stringify(t.w.PM_CTRL.spec)}, not the one actually centered under By time (${moved})`);
+  // filtering by example: the centered painting's own facet chips (painter/country/decade/movement/museum/colors)
+  await t.waitFor(".pmx-facets [data-pmfacet]", 4000, "the centered painting's own facet chips");
+  const chips = t.$$(".pmx-facets [data-pmfacet]");
+  t.expect(chips.length >= 2, `too few facet chips to test (${chips.length})`);
+  const before2 = t.w.PM_CTRL.count;
+  await t.click(chips[0], { wait: 700 });
+  t.expect(t.w.PM_CTRL.count <= before2, `tapping a facet chip (${t.text(chips[0])}) didn't narrow the map (${t.w.PM_CTRL.count} of ${before2})`);
+  // removable chips atop the map: the filter just applied by example shows up there too, and clearing it restores the count
+  await t.waitFor(".pmx-chipbar [data-pmxclear]", 4000, "a removable chip for the facet filter just applied");
+  const narrowed = t.w.PM_CTRL.count;
+  await t.click(t.$(".pmx-chipbar [data-pmxclear]"), { wait: 700 });
+  t.expect(t.w.PM_CTRL.count > narrowed, `clearing the top chip didn't widen the map back out (still ${t.w.PM_CTRL.count})`);
 });
 // David's screenshot, 2026-10-09: "zooming out doesn't load the stuff" -- only a ~160-cell central disc ever got a
 // thumbnail, however long you waited, because the per-frame candidate list handed to pmImages().want() was capped

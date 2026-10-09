@@ -30,6 +30,31 @@ const PM_WHY = {
   painter: "A block for each painter, earliest first",
   similar: "The nearer the middle, the closer the colors",
 };
+// David, 2026-10-09: "Place by" -- which of a painting's own colors decides WHERE it sits, for the two
+// arrangements position actually comes from a color (color, time). The default (and the only option before this)
+// was always the true pixel-weighted mean across the whole canvas; "Main color" instead uses the single biggest
+// swatch of its 6-color palette (pmDom, same swatch a painting's own dominant-color tile uses before its picture
+// loads), and "Standout" uses the most saturated of the 6 -- the one that would catch your eye in the frame, even
+// if it's a small accent. Only meaningful where a painting's OWN color decides its position; "painter" (grouped
+// by artist, ordered by date) and "similar" (whole-palette matching, already finer-grained than any one swatch)
+// are unaffected and ignore it.
+const PM_PLACE = [["avg", "Average"], ["main", "Main color"], ["standout", "Standout"]];
+function pmPlaceLab(i, place) {
+  if (!place || place === "avg") return [GAL.mean[i * 3], GAL.mean[i * 3 + 1], GAL.mean[i * 3 + 2]];
+  const j = place === "main" ? pmDom(i) : (() => { let b = 0, bc = -1; for (let t = 0; t < 6; t++) { const c = GAL.ch[i * 6 + t]; if (c > bc) { bc = c; b = t; } } return b; })();
+  const o = (i * 6 + j) * 3;
+  return [GAL.lab[o], GAL.lab[o + 1], GAL.lab[o + 2]];
+}
+// David, 2026-10-09: "Center on" -- a quick way to land the (otherwise generic) "around one painting" arrangement
+// on a painting chosen by some property of the CURRENT filtered list, not by having already found one yourself.
+// Each returns a gallery index (or -1 if the list is empty / has no favorite in it).
+const PM_CENTER = [
+  ["vivid", "Most vivid", list => { let b = -1, bv = -1; for (const i of list) if (GAL.C[i] > bv) { bv = GAL.C[i]; b = i; } return b; }],
+  ["grey", "Greyest", list => { let b = -1, bv = 1e9; for (const i of list) if (GAL.C[i] < bv) { bv = GAL.C[i]; b = i; } return b; }],
+  ["light", "Lightest", list => { let b = -1, bv = -1; for (const i of list) if (GAL.mean[i * 3] > bv) { bv = GAL.mean[i * 3]; b = i; } return b; }],
+  ["dark", "Darkest", list => { let b = -1, bv = 1e9; for (const i of list) if (GAL.mean[i * 3] < bv) { bv = GAL.mean[i * 3]; b = i; } return b; }],
+  ["fav", "A favorite", list => { const ids = typeof fvArtList === "function" ? fvArtList() : []; if (!ids.length) return -1; const want = new Set(ids.map(r => r.i)); for (const i of list) if (want.has(i)) return i; return -1; }],
+];
 const PM_ICON = {
   color: sv('<circle cx="8" cy="8" r="3.2"/><circle cx="16" cy="8" r="3.2"/><circle cx="12" cy="15.5" r="3.2"/>', 22, 1.7),
   time: sv('<path d="M4 6h16M4 12h16M4 18h16"/><path d="M8 4v4M14 10v4M10 16v4"/>', 22, 1.7),
@@ -67,10 +92,11 @@ const pmDom = i => { let b = 0; for (let j = 1; j < 6; j++) if (GAL.sh[i * 6 + j
 const pmHex = i => glHex(i, pmDom(i));
 
 // ---------- the spec: what to show and how (the address's query) ----------
-const pmFresh = () => ({ arr: "color", f: xbFresh(), seed: -1, fav: 0 });
+const pmFresh = () => ({ arr: "color", f: xbFresh(), seed: -1, fav: 0, place: "avg" });
 function pmParse(q, F) {
   const s = pmFresh(), p = new URLSearchParams(String(q || "").replace(/^\?/, ""));
   const a = p.get("arr"); if (PM_ARR.some(x => x[0] === a)) s.arr = a;
+  const pl = p.get("pl"); if (PM_PLACE.some(x => x[0] === pl)) s.place = pl;
   const f = s.f, num = k => { const v = p.get(k); return v != null && v !== "" && isFinite(+v) ? +v : null; };
   if (p.get("c")) { f.hexes = p.get("c").split(",").filter(h => /^[0-9a-f]{6}$/i.test(h)).map(h => "#" + h.toUpperCase()); f.name = f.hexes.length ? nameOf(f.hexes[0]).text : ""; f.tol = num("t") || 8; f.cover = num("m") != null ? num("m") : 2; }
   f.y0 = num("y0"); f.y1 = num("y1");
@@ -85,6 +111,7 @@ function pmParse(q, F) {
 }
 function pmQS(s, F) {
   const f = s.f, out = [["arr", s.arr]];
+  if (s.place && s.place !== "avg") out.push(["pl", s.place]);
   if (f.hexes.length) { out.push(["c", f.hexes.map(h => h.slice(1).toLowerCase()).join(",")], ["t", f.tol], ["m", f.cover]); }
   if (f.y0 != null) out.push(["y0", f.y0]); if (f.y1 != null) out.push(["y1", f.y1]);
   if (f.painter && F) out.push(["p", F.meta.artists[f.painter - 1][1]]);
@@ -105,6 +132,41 @@ function pmWords(s, F) {
   const c = xbChips(F, s.f).map(x => x.dim === "color" ? x.text : x.text);
   if (s.fav) c.unshift("Your favorites");
   return c;
+}
+// the active filters as removable chips (David, 2026-10-09: filter-by-example's companion -- wherever a filter
+// came from, a chip here undoes exactly that one dimension). xbChips already knows every dimension's current
+// value and label; xbWithout already knows how to clear exactly one. "Your favorites" isn't an xbRun filter at
+// all (s.fav lives beside s.f), so it's synthesized as its own chip with dim "fav".
+function pmActiveChips(s, F) {
+  const c = xbChips(F, s.f).map(x => ({ dim: x.dim, text: x.text }));
+  if (s.fav) c.unshift({ dim: "fav", text: "Your favorites" });
+  return c;
+}
+// a painting's own facets, as tappable "only these" chips (David, 2026-10-09: "filtering by example" -- the
+// bottom card for whatever's centered shows painter, country, decade, movement, museum and its 2-3 main colors;
+// tapping one narrows the whole map to it). Undated paintings get no "when" chip (nothing honest to filter by).
+function pmFacetsOf(i, F) {
+  const out = [];
+  if (F.artist[i]) out.push({ dim: "painter", val: F.artist[i], label: xbArtistName(F, F.artist[i]) });
+  if (F.country[i]) out.push({ dim: "co", val: F.country[i], label: F.meta.countries[F.country[i] - 1] });
+  const y = F.G.year[i];
+  if (y !== GL_UNDATED) {
+    const y0 = y < 1500 ? Math.floor(y / 100) * 100 : Math.floor(y / 10) * 10, y1 = y < 1500 ? y0 + 99 : y0 + 9;
+    out.push({ dim: "when", val: [y0, y1], label: `${y0}s` });
+  }
+  if (F.mv[i]) out.push({ dim: "mv", val: F.mv[i], label: F.meta.movements[F.mv[i] - 1] });
+  out.push({ dim: "mus", val: F.G.mus[i], label: F.G.src[F.G.mus[i]].short });
+  glPal(i).slice(0, 3).forEach(c => out.push({ dim: "color", val: c.h, label: nameOf(c.h).text }));
+  return out;
+}
+// apply one facet to the filter spec in place (mirrors xbWithout's per-dim shape, the "set" half)
+function pmFacetApply(f, dim, val) {
+  if (dim === "painter") f.painter = val;
+  else if (dim === "co") f.co = val;
+  else if (dim === "mv") f.mv = val;
+  else if (dim === "mus") f.mus = val;
+  else if (dim === "when") { f.y0 = val[0]; f.y1 = val[1]; }
+  else if (dim === "color") { f.hexes = [val]; f.name = nameOf(val).text; f.tol = 8; f.cover = 5; }
 }
 
 // ---------- the list: the filters, then your favorites ----------
@@ -140,9 +202,11 @@ function pmFeat(list) {
   return f;
 }
 const pmHueKey = (a, b) => { let H = Math.atan2(b, a) * 180 / Math.PI; if (H < 0) H += 360; return (H - 330 + 360) % 360; };   // reds first, then oranges, browns, yellows, greens, blues, purples
-function pmLayColor(list) {
-  const G = GAL, n = list.length, cols = Math.max(1, Math.round(Math.sqrt(n / 1.55))), rows = Math.ceil(n / cols);
-  const L = k => G.mean[list[k] * 3], A = k => G.mean[list[k] * 3 + 1], B = k => G.mean[list[k] * 3 + 2];
+function pmLayColor(list, place) {
+  const n = list.length, cols = Math.max(1, Math.round(Math.sqrt(n / 1.55))), rows = Math.ceil(n / cols);
+  const Lp = new Float32Array(n), Ap = new Float32Array(n), Bp = new Float32Array(n);
+  for (let k = 0; k < n; k++) { const c = pmPlaceLab(list[k], place); Lp[k] = c[0]; Ap[k] = c[1]; Bp[k] = c[2]; }
+  const L = k => Lp[k], A = k => Ap[k], B = k => Bp[k];
   const idx = Array.from({ length: n }, (_, k) => k);
   const chroma = idx.filter(k => Math.hypot(A(k), B(k)) >= 5).sort((p, q) => pmHueKey(A(p), B(p)) - pmHueKey(A(q), B(q)));
   const greys = idx.filter(k => Math.hypot(A(k), B(k)) < 5);
@@ -192,20 +256,21 @@ function pmBand(i) {
   if (y < 1500) { const c = Math.floor(y / 100) * 100; return { key: c, label: c < 0 ? `${-c} BCE` : `${c}–${c + 99}` }; }
   const d = Math.floor(y / 10) * 10; return { key: d, label: d + "s" };
 }
-function pmLayTime(list) {
+function pmLayTime(list, place) {
   const n = list.length, Wc = Math.max(3, Math.min(16, Math.round(Math.sqrt(n) / 2.2)));
   const bands = new Map();
   list.forEach(i => { const b = pmBand(i); if (!bands.has(b.key)) bands.set(b.key, { ...b, items: [] }); bands.get(b.key).items.push(i); });
-  const keys = [...bands.keys()].sort((a, b) => a - b), G = GAL;
+  const keys = [...bands.keys()].sort((a, b) => a - b);
+  const Lv = i => pmPlaceLab(i, place)[0], Av = i => pmPlaceLab(i, place)[1], Bv = i => pmPlaceLab(i, place)[2];
   const items = new Int32Array(n), X = new Int32Array(n), Y = new Int32Array(n), labels = [];
   const ox = Math.floor(Wc / 2);
   let y = 0, m = 0, start = null, half = n / 2, seen = 0;
   keys.forEach(key => {
-    const b = bands.get(key), its = b.items.sort((p, q) => G.mean[q * 3] - G.mean[p * 3]);
+    const b = bands.get(key), its = b.items.sort((p, q) => Lv(q) - Lv(p));
     labels.push({ x: -ox, y, text: b.label, n: its.length, w: Wc });
     y++;
     for (let r = 0; r * Wc < its.length; r++) {
-      const row = its.slice(r * Wc, r * Wc + Wc).sort((p, q) => pmHueKey(G.mean[p * 3 + 1], G.mean[p * 3 + 2]) - pmHueKey(G.mean[q * 3 + 1], G.mean[q * 3 + 2]));
+      const row = its.slice(r * Wc, r * Wc + Wc).sort((p, q) => pmHueKey(Av(p), Bv(p)) - pmHueKey(Av(q), Bv(q)));
       row.forEach((i, c) => { items[m] = i; X[m] = c - ox; Y[m] = y; m++; });
       y++;
     }
@@ -255,7 +320,7 @@ function pmLayout(s, F) {
   const list = pmList(s, F), key = pmQS(s, F) + "|" + list.length + "|" + (s.fav ? (typeof fvArtList === "function" ? fvArtList().map(r => r.i).join(",") : "") : "");
   let lay = PM_LAYOUTS.get(key);
   if (!lay) {
-    lay = s.arr === "time" ? pmLayTime(list) : s.arr === "painter" ? pmLayPainter(list, F) : s.arr === "similar" ? pmLaySimilar(list, s.seed) : pmLayColor(list);
+    lay = s.arr === "time" ? pmLayTime(list, s.place) : s.arr === "painter" ? pmLayPainter(list, F) : s.arr === "similar" ? pmLaySimilar(list, s.seed) : pmLayColor(list, s.place);
     lay.key = key; lay.arr = s.arr;
     PM_LAYOUTS.set(key, lay); if (PM_LAYOUTS.size > 8) PM_LAYOUTS.delete(PM_LAYOUTS.keys().next().value);
   }
@@ -332,7 +397,13 @@ function pmOpen(spec, o = {}) {
       <span class="pmx-sp"></span>
     </header>
     <p class="pmx-why" data-pmwhy></p>
-    <div class="pmx-cap" data-pmcap hidden><button class="pmx-cap-main" data-pmopen><b data-pmct></b><small data-pmcb></small></button><button class="pmx-heart" data-pmheart aria-label="Add to your favorites"></button></div>
+    <div class="pmx-chipbar" data-pmchipbar hidden></div>
+    <div class="pmx-facets" data-pmfacets hidden></div>
+    <div class="pmx-cap" data-pmcap hidden>
+      <button class="pmx-cap-main" data-pmopen><b data-pmct></b><small data-pmcb></small></button>
+      <button class="pmx-center" data-pmcenter aria-label="Center the map on this painting">${PM_ICON.similar}</button>
+      <button class="pmx-heart" data-pmheart aria-label="Add to your favorites"></button>
+    </div>
     <button class="corner r pmx-do" data-do-corner aria-label="Arrange and filter" aria-haspopup="menu" aria-expanded="false">${PM_ICON.arrange}</button>
   `, "fixed cx pmx");
   const back = el.querySelector("[data-back]");
@@ -355,6 +426,7 @@ function pmOpen(spec, o = {}) {
 function pmMount(el, s, F) {
   const cv = el.querySelector(".pmx-cv"), ctx = cv.getContext("2d"), wait = el.querySelector(".pmx-wait");
   const RM = reduceMotion, cap = el.querySelector("[data-pmcap]"), heart = el.querySelector("[data-pmheart]");
+  const centerBtn = el.querySelector("[data-pmcenter]"), facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]");
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
   let P = [0, 0], Z = 1, V = [0, 0], glide = null, raf = 0, dead = false, centerK = -1, lastTick = 0, drawn = [];
   const ZMAX = 2.2;
@@ -400,7 +472,7 @@ function pmMount(el, s, F) {
   }
   let capTimer = 0;
   function caption() {
-    if (centerK < 0 || !lay) { cap.hidden = true; return; }
+    if (centerK < 0 || !lay) { cap.hidden = true; facets.hidden = true; return; }
     const i = lay.items[centerK], a = F.artist[i], y = glYear(i), by = [a ? xbArtistName(F, a) : "", y].filter(Boolean).join(" · ");
     cap.hidden = false;
     const d = glDetailNow(i);
@@ -410,6 +482,18 @@ function pmMount(el, s, F) {
     paintHeart(i, d);
     if (!d) { clearTimeout(capTimer); capTimer = setTimeout(() => glDetail(i).then(() => { if (!dead && lay && lay.items[centerK] === i) caption(); }).catch(() => {}), 90); }
     PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z });
+    paintFacets(i);
+  }
+  // filter-by-example (David, 2026-10-09): the centered painting's own facets as tappable "only these" chips,
+  // plus "More like this" (the same whole-palette matching as the "similar" arrangement, seeded here)
+  function paintFacets(i) {
+    const fs = pmFacetsOf(i, F);
+    facets.hidden = false;
+    facets.innerHTML = `<button class="pmx-fchip pmx-fchip-more" data-pmmore>More like this</button>${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${fc.dim === "color" ? `<i style="--c:${fc.val}"></i>` : ""}${esc(fc.label)}</button>`).join("")}`;
+    facets.querySelector("[data-pmmore]").onclick = () => { buzz(6); s.seed = i; s.arr = "similar"; rebuild(); };
+    facets.querySelectorAll("[data-pmfacet]").forEach(b => b.onclick = () => {
+      const fc = fs[+b.dataset.pmfacet]; buzz(6); pmFacetApply(s.f, fc.dim, fc.val); rebuild();
+    });
   }
   function paintHeart(i, d) {
     const on = !!(d && typeof fvArtHas === "function" && fvArtHas(d.id));
@@ -642,6 +726,14 @@ function pmMount(el, s, F) {
   }
   el.querySelector("[data-pmopen]").onclick = () => { if (centerK >= 0) openK(centerK); };
   heart.onclick = () => toggleHeart(false);
+  // "Center on this painting" (David, 2026-10-09, part of the Arrange parity with the color map): the quickest
+  // way to pivot to "around one painting" is the one you're already looking at, right from its own bottom card
+  centerBtn.onclick = () => {
+    if (centerK < 0) return;
+    const i = lay.items[centerK]; buzz(6);
+    if (s.arr === "similar" && s.seed === i) return;
+    s.seed = i; s.arr = "similar"; rebuild();
+  };
 
   // ---- the chrome: the title says what's showing (tap: filter), one line says what position means, the corner arranges
   function chrome() {
@@ -650,6 +742,21 @@ function pmMount(el, s, F) {
     el.querySelector("[data-pmsub]").textContent = `${n.toLocaleString()} ${n === 1 ? "painting" : "paintings"}${words.length ? " · " + words.join(" · ") : ""}`;
     let why = PM_WHY[s.arr];
     el.querySelector("[data-pmwhy]").textContent = why;
+    paintChipbar();
+  }
+  // removable active-filter chips atop the map (David, 2026-10-09): the primary way to SEE and UNDO a filter,
+  // whichever way it got set (the Filter tab, or a tap on a painting's own facet) -- opening the sheet is no
+  // longer required just to clear one thing.
+  function paintChipbar() {
+    const chips = pmActiveChips(s, F);
+    chipbar.hidden = !chips.length;
+    if (!chips.length) return;
+    chipbar.innerHTML = chips.map((c, k) => `<button class="pmx-xchip" data-pmxclear="${k}">${esc(c.text)}<i>${ICON.x}</i></button>`).join("");
+    chipbar.querySelectorAll("[data-pmxclear]").forEach(b => b.onclick = () => {
+      const c = chips[+b.dataset.pmxclear]; buzz(5);
+      if (c.dim === "fav") s.fav = 0; else s.f = xbWithout(s.f, c.dim);
+      rebuild();
+    });
   }
   function build(keepPan) {
     const t0 = performance.now();
@@ -670,119 +777,138 @@ function pmMount(el, s, F) {
     try { ROUTE_NOW = "#/" + pmRouteOf(s).path; history.replaceState(history.state, "", ROUTE_NOW); } catch (e) {}
     build(false);
   }
-  // ---- the corner: the arrangements as a labeled arc (Home's right-corner menu, js/home.js doMenu), plus Filter
+  // ---- the corner and the title both open one compact, non-modal Arrange|Filter sheet (David, 2026-10-09: the
+  // same Arrange+Filter parity the color map's chooser() has -- shapes/sort/place-by/center-on, live-applied,
+  // no separate confirm step). Replaces the old radial stem menu and the standalone Filter-only sheet.
   const doBtn = el.querySelector(".pmx-do"); doBtn._html = doBtn.innerHTML;
-  doBtn.onclick = () => {
-    if (STEM_OPEN) { buzz(4); return closeStem(); }
+  doBtn.onclick = () => openSheet("arrange");
+  el.querySelector("[data-pmfilter]").onclick = () => openSheet("filter");
+  function openSheet(startTab) {
+    if (document.querySelector(".sheet")) return;
     if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
-    if (document.querySelector(".sheet,.scrim")) return;
-    document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());
-    buzz(4); STEM_OPEN = true; document.body.classList.add("stem-open");
-    const mid = centerK >= 0 ? lay.items[centerK] : -1, md = mid >= 0 ? glDetailNow(mid) : null;
-    const rows = [
-      { id: "filter", t: "Filter", n: pmWords(s, F).join(" · ") || "Country, decade, painter, color…", art: PM_ICON.filter },
-      ...PM_ARR.map(([k, t]) => ({ id: k, t: k === "similar" ? "Around this one" : t, n: k === "similar" ? (md ? md.t : "The painting in the middle") : PM_WHY[k], art: PM_ICON[k], cur: s.arr === k && (k !== "similar" || s.seed === mid) })).reverse(),
-      // "Colors | Paintings" (David, 2026-10-09): back to the honeycomb of names, remembered (js/core.js hmGoFloor)
-      { id: "colors", t: "Colors", n: "The honeycomb of color names", art: PM_ICON.colorsMode },
-    ];
-    const n = rows.length;
-    const scrim = document.createElement("div"); scrim.className = "rm-scrim";
-    scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
-    const stem = document.createElement("div");
-    stem.className = "rooms-stem hm-do-stem pmx-stem"; stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Arrange the map");
-    stem.style.setProperty("--n", n);
-    stem.innerHTML = rows.map((r, k) => { const i = n - 1 - k, t = (i + 1) / n;
-      return `<button class="rm-bubble${r.cur ? " cur" : ""}" role="menuitem" data-pmdo="${r.id}" style="--i:${i};--x:${(26 * t * t).toFixed(1)}px"${r.cur ? ' aria-current="true"' : ""}>
-        <span class="rm-art hm-do-ic">${r.art}</span><span class="rm-label"><b>${esc(r.t)}</b><em>${esc(r.n)}</em></span></button>`; }).join("");
-    document.body.append(scrim, stem);
-    doBtn.classList.add("on"); doBtn.innerHTML = ICON.x; doBtn.setAttribute("aria-expanded", "true");
-    requestAnimationFrame(() => requestAnimationFrame(() => { scrim.classList.add("on"); stem.classList.add("on"); }));
-    STEM_KEY = e => { if (e.key === "Escape") { e.stopPropagation(); closeStem(); } };
-    addEventListener("keydown", STEM_KEY, true);
-    stem.querySelectorAll("[data-pmdo]").forEach(b => b.onclick = () => {
-      const id = b.dataset.pmdo; buzz(8); closeStem(true);
-      if (id === "colors") { S.hm = S.hm || {}; S.hm.mode = "colors"; save(); return typeof hmHome === "function" ? hmHome() : xBack(); }
-      if (id === "filter") return pmFilterSheet(s, F, () => rebuild());
-      if (id === "similar") { if (mid < 0) return; s.seed = mid; s.arr = "similar"; return rebuild(); }
-      if (s.arr === id) return;
-      // keep the painting you were looking at in the middle of the new arrangement
-      s.arr = id; const keep = mid; rebuild();
-      if (keep >= 0) { const k = lay.items.indexOf(keep); if (k >= 0) { P = [lay.x[k], lay.y[k]]; kick(); } }
+    let tab = startTab === "filter" ? "filter" : "arrange";
+    let fopen = { co: false, painter: false }, fq = "";
+    const tabsHTML = `<div class="hm-ch-tabs pmx-tabs" role="tablist" aria-label="Arrange or filter the painting map">
+        <button class="hm-ch-tab" data-tab="arrange" role="tab">Arrange</button>
+        <button class="hm-ch-tab" data-tab="filter" role="tab">Filter</button>
+      </div>`;
+    const head = `<div class="hm-ch-head" data-sheet-grab>${tabsHTML}
+        <button class="iconq" data-pmcolors aria-label="Switch to the color map">${PM_ICON.colorsMode}</button>
+        <button class="iconq hm-ch-x" data-sheet-close aria-label="Close">${ICON.x}</button></div>`;
+    const { sh, close } = sheet(`<div class="hm-chooser pmx-chooser" data-tab="${tab}">${head}
+        <div class="hm-ch-scroll" data-pane="arrange" data-sheet-scroll></div>
+        <div class="hm-ch-scroll" data-pane="filter" data-sheet-scroll><div data-pmbody></div></div>
+      </div>`, { lock: false });
+    // the color map's own compact, non-modal panel sizing (css/home.css .hm-sheet-panel: height min(40dvh,400px),
+    // the map stays interactive underneath) -- the same bar this sheet is matching, not new CSS of its own.
+    // .hm-sheet-arrange additionally goes height:auto there (the Arrange tab's content decides it); toggled to
+    // match whichever tab is actually showing, same as home.js's own chooser() does on a tab switch.
+    sh.classList.add("pmx-sheet", "hm-sheet-panel");
+    sh.classList.toggle("hm-sheet-arrange", tab === "arrange");
+    sh.setAttribute("aria-label", "Arrange or filter the painting map");
+    const scrim = sh.previousElementSibling; if (scrim && scrim.classList.contains("scrim")) scrim.classList.add("hm-scrim-clear");
+    const q$ = sel => sh.querySelector(sel), qa$ = sel => [...sh.querySelectorAll(sel)];
+    const paneArr = q$('[data-pane="arrange"]'), paneFilt = q$('[data-pane="filter"]');
+    const syncTab = () => {
+      paneArr.hidden = tab !== "arrange"; paneFilt.hidden = tab !== "filter";
+      qa$(".hm-ch-tab").forEach(b => { const on = b.dataset.tab === tab; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
+      sh.dataset.tab = tab;
+      sh.classList.toggle("hm-sheet-arrange", tab === "arrange");
+    };
+    syncTab();
+    qa$(".hm-ch-tab").forEach(b => b.onclick = () => { if (b.dataset.tab === tab) return; buzz(4); tab = b.dataset.tab; syncTab(); });
+    q$("[data-pmcolors]").onclick = () => { buzz(6); S.hm = S.hm || {}; S.hm.mode = "colors"; save(); if (typeof hmHome === "function") hmHome(); else xBack(); };
+    qa$("[data-sheet-close]").forEach(b => b.onclick = () => { buzz(4); close(); });
+
+    // ---- Arrange: shape, place by (only where a painting's own color decides position), center on, and the
+    // arc's old "Around this one" is now "Center on this painting" (also on the bottom card) ----
+    function renderArrange() {
+      const mid = centerK >= 0 ? lay.items[centerK] : -1, md = mid >= 0 ? glDetailNow(mid) : null;
+      const list = pmList(s, F);
+      paneArr.innerHTML = `
+        <div class="cx-sec"><b>Shape</b></div>
+        <div class="hm-arr pmx-arr" role="radiogroup" aria-label="Arrange by">${PM_ARR.map(([k, t]) => `
+          <button class="hm-arr-b${s.arr === k ? " on" : ""}" data-pmarr="${k}" role="radio" aria-checked="${s.arr === k}">
+            <span class="hm-arr-pic">${PM_ICON[k]}</span><b>${esc(k === "similar" ? "Around one" : t)}</b></button>`).join("")}</div>
+        <p class="hm-arr-sub">${s.arr === "similar" ? (md ? `Around ${esc(md.t)}` : "Around the middle painting") : esc(PM_WHY[s.arr])}</p>
+        ${s.arr === "color" || s.arr === "time" ? `<div class="cx-sec"><b>Place by</b></div>
+          <div class="hm-seg" role="radiogroup" aria-label="Place by">${PM_PLACE.map(([k, t]) => `<button class="${(s.place || "avg") === k ? "on" : ""}" data-pmplace="${k}">${esc(t)}</button>`).join("")}</div>` : ""}
+        <div class="cx-sec"><b>Center on</b></div>
+        <div class="hm-seg hm-seg-n pmx-center-seg">${PM_CENTER.map(([k, t]) => {
+          const found = t === "A favorite" ? (typeof fvArtList === "function" && fvArtList().length) : true;
+          return `<button data-pmcenterk="${k}"${found ? "" : " disabled"}>${esc(t)}</button>`;
+        }).join("")}</div>`;
+      qa$("[data-pmarr]").forEach(b => b.onclick = () => {
+        const id = b.dataset.pmarr; buzz(5);
+        if (id === "similar") { if (mid < 0) return; s.seed = mid; s.arr = "similar"; }
+        else { if (s.arr === id) return; s.arr = id; }
+        rebuild(); renderArrange();
+      });
+      qa$("[data-pmplace]").forEach(b => b.onclick = () => {
+        const p = b.dataset.pmplace; if ((s.place || "avg") === p) return; buzz(5); s.place = p; rebuild(); renderArrange();
+      });
+      qa$("[data-pmcenterk]").forEach(b => b.onclick = () => {
+        const fn = PM_CENTER.find(c => c[0] === b.dataset.pmcenterk)[2], found = fn(list);
+        if (found < 0) return; buzz(6); s.seed = found; s.arr = "similar"; rebuild(); renderArrange();
+      });
+    }
+    // ---- Filter: every chip with its count, applied live (no separate confirm -- matches the color map's
+    // non-modal Colors/Arrange sheet) ----
+    function renderFilter() {
+      const res = xbRun(F, s.f), C = res.counts;
+      let n = res.list.length;
+      const favIds = typeof fvArtList === "function" ? fvArtList() : [], favSet = new Set(favIds.map(r => r.i));
+      if (s.fav) n = Array.from(res.list).filter(i => favSet.has(i)).length;
+      const favN = Array.from(res.list).filter(i => favSet.has(i)).length;
+      const chip = (attr, val, label, cnt, on) => `<button class="${on ? "on" : ""}" ${attr}="${esc(String(val))}"${!cnt && !on ? " disabled" : ""}>${esc(label)}${cnt != null ? `<em>${cnt.toLocaleString()}</em>` : ""}</button>`;
+      const f = s.f, top = (arr, k) => arr.map((name, j) => ({ name, v: j + 1, n: C[k][j + 1] })).filter(x => x.n || f[k] === x.v).sort((a, b) => b.n - a.n);
+      const cent = new Map(); for (let d = 0; d < XB_NDEC; d++) { const c = Math.floor((XB_DEC0 + d * 10) / 100) * 100; cent.set(c, (cent.get(c) || 0) + C.when[d]); }
+      const cOn = f.y0 != null && f.y1 != null ? Math.floor(f.y0 / 100) * 100 : null, decOn = f.y0 != null && f.y1 - f.y0 === 9;
+      const cents = [...cent.entries()].filter(([c, v]) => v || c === cOn).filter(([c]) => c >= 1300);
+      const decs = cOn != null ? Array.from({ length: 10 }, (_, j) => cOn + j * 10).map(y => ({ y, n: C.when[(y - XB_DEC0) / 10] || 0 })) : [];
+      const cols = [...BASICS, ...ALL].filter(c => !c.basic || /^(Red|Blue|Green|Yellow|Pink|Purple|Orange|Brown)$/.test(c.n));
+      const colsSorted = typeof glHueOrder === "function" ? glHueOrder(cols) : cols;
+      const cos = top(F.meta.countries, "co"), mvs = top(F.meta.movements, "mv"), pas = top(F.meta.artists.map(a => a[0]), "painter");
+      const pList = fq ? pas.filter(x => x.name.toLowerCase().includes(fq.toLowerCase())).slice(0, 24) : pas.slice(0, fopen.painter ? 40 : 10);
+      q$("[data-pmbody]").innerHTML = `
+        <div class="pmx-sh-top"><b>Filter</b><span>${n.toLocaleString()} ${n === 1 ? "painting" : "paintings"}</span><button class="pmx-reset" data-pmreset>Reset</button></div>
+        ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
+        <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes[0] === c.h.toUpperCase() ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
+          ${f.hexes.length ? `<p class="pmx-cap2"><i style="--c:${f.hexes[0]}"></i>${esc(f.name || nameOf(f.hexes[0]).text)} <span>· within ${f.tol}% · at least ${f.cover}% of the painting</span></p>` : ""}</div>
+        <div class="pmx-row"><span class="pmx-lab">When</span><div class="pmx-chips">${cents.map(([c, v]) => chip("data-pmcent", c, c + "s", v, cOn === c && !decOn)).join("")}</div>
+          ${decs.length ? `<div class="pmx-chips pmx-sub">${decs.map(d => chip("data-pmdec", d.y, d.y + "s", d.n, decOn && f.y0 === d.y)).join("")}</div>` : ""}</div>
+        <div class="pmx-row"><span class="pmx-lab">Country</span><div class="pmx-chips">${(fopen.co ? cos : cos.slice(0, 10)).map(x => chip("data-pmco", x.v, x.name, x.n, f.co === x.v)).join("")}${cos.length > 10 && !fopen.co ? `<button class="pmx-more" data-pmmore="co">All ${cos.length}</button>` : ""}</div></div>
+        ${mvs.length ? `<div class="pmx-row"><span class="pmx-lab">Movement</span><div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, f.mv === x.v)).join("")}</div></div>` : ""}
+        <div class="pmx-row"><span class="pmx-lab">Museum</span><div class="pmx-chips">${F.G.src.map((m, k) => chip("data-pmmus", k, m.short, C.mus[k], f.mus === k)).join("")}</div></div>
+        <div class="pmx-row"><span class="pmx-lab">Painter</span>
+          <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a painter" value="${esc(fq)}" autocomplete="off"></label>
+          <div class="pmx-chips">${f.painter && !pList.some(x => x.v === f.painter) ? chip("data-pmp", f.painter, xbArtistName(F, f.painter), C.painter[f.painter], true) : ""}${pList.map(x => chip("data-pmp", x.v, x.name, x.n, f.painter === x.v)).join("")}${!fq && !fopen.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More painters</button>` : ""}</div></div>`;
+      const inp = q$("[data-pmq]");
+      inp.oninput = () => { fq = inp.value.trim(); const pos = inp.selectionStart; renderFilter(); const ni = q$("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
+    }
+    paneFilt.addEventListener("click", e => {
+      const b = e.target.closest("button"); if (!b || b.disabled) return;
+      const f = s.f, d = b.dataset;
+      if (d.pmreset != null) { s.f = xbFresh(); s.fav = 0; fq = ""; buzz(6); rebuild(); return renderFilter(); }
+      if (d.pmmore) { fopen[d.pmmore] = true; return renderFilter(); }
+      if (d.pmfav != null) s.fav = s.fav ? 0 : 1;
+      else if (d.pmhex) { const same = f.hexes[0] === d.pmhex.toUpperCase(); f.hexes = same ? [] : [d.pmhex.toUpperCase()]; f.name = same ? "" : d.name; f.tol = 8; f.cover = 5; }
+      else if (d.pmcent) { const c = +d.pmcent, on = f.y0 === c && f.y1 === c + 99; f.y0 = on ? null : c; f.y1 = on ? null : c + 99; }
+      else if (d.pmdec) { const y = +d.pmdec, on = f.y0 === y && f.y1 === y + 9; const c = Math.floor(y / 100) * 100; f.y0 = on ? c : y; f.y1 = on ? c + 99 : y + 9; }
+      else if (d.pmco) f.co = f.co === +d.pmco ? 0 : +d.pmco;
+      else if (d.pmmv) f.mv = f.mv === +d.pmmv ? 0 : +d.pmmv;
+      else if (d.pmmus) f.mus = f.mus === +d.pmmus ? -1 : +d.pmmus;
+      else if (d.pmp) f.painter = f.painter === +d.pmp ? 0 : +d.pmp;
+      else return;
+      buzz(5); rebuild(); renderFilter();
     });
-  };
-  el.querySelector("[data-pmfilter]").onclick = () => pmFilterSheet(s, F, () => rebuild());
+    renderArrange(); renderFilter();
+  }
   // ---- life cycle
   const ro = new ResizeObserver(() => size()); ro.observe(cv);
   cleanup.push(() => { dead = true; clearTimeout(tapTimer); ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
   size(); build(false);
   window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); } };
-}
-
-// ---------- Filter: one sheet, every chip with its count; the map follows when you close it ----------
-function pmFilterSheet(s, F, onDone) {
-  if (document.querySelector(".sheet")) return;
-  const before = pmQS(s, F) + s.fav;
-  const { sh, close: shut } = sheet(`<div class="pmx-sh"><div class="pmx-sh-top" data-sheet-grab><b>Filter</b><span data-pmn></span><button class="pmx-reset" data-pmreset>Reset</button></div><div data-pmbody></div></div>
-    <button class="btn solid pmx-go" data-pmgo></button>`);
-  sh.classList.add("pmx-sheet"); sh.setAttribute("aria-label", "Filter the painting map");
-  if (sh.previousElementSibling) sh.previousElementSibling.classList.add("pmx-scrim");
-  let open = { co: false, painter: false }, q = "";
-  const close = () => { shut(); if (pmQS(s, F) + s.fav !== before) onDone(); };
-  // the sheet's own close (a tap outside, a drag down) also applies what changed
-  const mo = new MutationObserver(() => { if (!sh.isConnected) { mo.disconnect(); if (pmQS(s, F) + s.fav !== before && !sh._applied) { sh._applied = true; onDone(); } } });
-  mo.observe(document.body, { childList: true });
-  const chip = (attr, val, label, n, on) => `<button class="${on ? "on" : ""}" ${attr}="${esc(String(val))}"${!n && !on ? " disabled" : ""}>${esc(label)}${n != null ? `<em>${n.toLocaleString()}</em>` : ""}</button>`;
-  function render() {
-    const res = xbRun(F, s.f), C = res.counts;
-    let n = res.list.length;
-    const favIds = typeof fvArtList === "function" ? fvArtList() : [], favSet = new Set(favIds.map(r => r.i));
-    if (s.fav) n = Array.from(res.list).filter(i => favSet.has(i)).length;
-    const favN = Array.from(res.list).filter(i => favSet.has(i)).length;
-    sh.querySelector("[data-pmn]").textContent = `${n.toLocaleString()} ${n === 1 ? "painting" : "paintings"}`;
-    const go = sh.querySelector("[data-pmgo]"); go.textContent = n ? `Show ${n.toLocaleString()} on the map` : "Nothing matches"; go.disabled = !n;
-    const f = s.f, top = (arr, k) => arr.map((name, j) => ({ name, v: j + 1, n: C[k][j + 1] })).filter(x => x.n || f[k] === x.v).sort((a, b) => b.n - a.n);
-    // when: centuries, and the decades of the chosen one
-    const cent = new Map(); for (let d = 0; d < XB_NDEC; d++) { const c = Math.floor((XB_DEC0 + d * 10) / 100) * 100; cent.set(c, (cent.get(c) || 0) + C.when[d]); }
-    const cOn = f.y0 != null && f.y1 != null ? Math.floor(f.y0 / 100) * 100 : null, decOn = f.y0 != null && f.y1 - f.y0 === 9;
-    const cents = [...cent.entries()].filter(([c, v]) => v || c === cOn).filter(([c]) => c >= 1300);
-    const decs = cOn != null ? Array.from({ length: 10 }, (_, j) => cOn + j * 10).map(y => ({ y, n: C.when[(y - XB_DEC0) / 10] || 0 })) : [];
-    const cols = [...BASICS, ...ALL].filter(c => !c.basic || /^(Red|Blue|Green|Yellow|Pink|Purple|Orange|Brown)$/.test(c.n));
-    const colsSorted = typeof glHueOrder === "function" ? glHueOrder(cols) : cols;
-    const cos = top(F.meta.countries, "co"), mvs = top(F.meta.movements, "mv"), pas = top(F.meta.artists.map(a => a[0]), "painter");
-    const pList = q ? pas.filter(x => x.name.toLowerCase().includes(q.toLowerCase())).slice(0, 24) : pas.slice(0, open.painter ? 40 : 10);
-    sh.querySelector("[data-pmbody]").innerHTML = `
-      ${favIds.length ? `<div class="pmx-row"><span class="pmx-lab">Yours</span><div class="pmx-chips">${chip("data-pmfav", 1, "Your favorites", favN, !!s.fav)}</div></div>` : ""}
-      <div class="pmx-row"><span class="pmx-lab">Color</span><div class="pmx-sw">${colsSorted.map(c => `<button data-pmhex="${c.h}" data-name="${esc(c.n)}" style="--c:${c.h}" class="${f.hexes[0] === c.h.toUpperCase() ? "on" : ""}" aria-label="${esc(c.n)}"></button>`).join("")}</div>
-        ${f.hexes.length ? `<p class="pmx-cap2"><i style="--c:${f.hexes[0]}"></i>${esc(f.name || nameOf(f.hexes[0]).text)} <span>· within ${f.tol}% · at least ${f.cover}% of the painting</span></p>` : ""}</div>
-      <div class="pmx-row"><span class="pmx-lab">When</span><div class="pmx-chips">${cents.map(([c, v]) => chip("data-pmcent", c, c + "s", v, cOn === c && !decOn)).join("")}</div>
-        ${decs.length ? `<div class="pmx-chips pmx-sub">${decs.map(d => chip("data-pmdec", d.y, d.y + "s", d.n, decOn && f.y0 === d.y)).join("")}</div>` : ""}</div>
-      <div class="pmx-row"><span class="pmx-lab">Country</span><div class="pmx-chips">${(open.co ? cos : cos.slice(0, 10)).map(x => chip("data-pmco", x.v, x.name, x.n, f.co === x.v)).join("")}${cos.length > 10 && !open.co ? `<button class="pmx-more" data-pmmore="co">All ${cos.length}</button>` : ""}</div></div>
-      ${mvs.length ? `<div class="pmx-row"><span class="pmx-lab">Movement</span><div class="pmx-chips">${mvs.map(x => chip("data-pmmv", x.v, x.name, x.n, f.mv === x.v)).join("")}</div></div>` : ""}
-      <div class="pmx-row"><span class="pmx-lab">Museum</span><div class="pmx-chips">${F.G.src.map((m, k) => chip("data-pmmus", k, m.short, C.mus[k], f.mus === k)).join("")}</div></div>
-      <div class="pmx-row"><span class="pmx-lab">Painter</span>
-        <label class="search pmx-find"><span>${ICON.search}</span><input data-pmq type="search" placeholder="Find a painter" value="${esc(q)}" autocomplete="off"></label>
-        <div class="pmx-chips">${f.painter && !pList.some(x => x.v === f.painter) ? chip("data-pmp", f.painter, xbArtistName(F, f.painter), C.painter[f.painter], true) : ""}${pList.map(x => chip("data-pmp", x.v, x.name, x.n, f.painter === x.v)).join("")}${!q && !open.painter && pas.length > 10 ? `<button class="pmx-more" data-pmmore="painter">More painters</button>` : ""}</div></div>`;
-    const inp = sh.querySelector("[data-pmq]");
-    inp.oninput = () => { q = inp.value.trim(); const pos = inp.selectionStart; render(); const ni = sh.querySelector("[data-pmq]"); ni.focus(); try { ni.setSelectionRange(pos, pos); } catch (e) {} };
-  }
-  sh.addEventListener("click", e => {
-    const b = e.target.closest("button"); if (!b || b.disabled) return;
-    const f = s.f, d = b.dataset;
-    if (d.pmgo != null) { sh._applied = true; return close(); }
-    if (d.pmreset != null) { s.f = xbFresh(); s.fav = 0; q = ""; buzz(6); return render(); }
-    if (d.pmmore) { open[d.pmmore] = true; return render(); }
-    if (d.pmfav) s.fav = s.fav ? 0 : 1;
-    else if (d.pmhex) { const same = f.hexes[0] === d.pmhex.toUpperCase(); f.hexes = same ? [] : [d.pmhex.toUpperCase()]; f.name = same ? "" : d.name; f.tol = 8; f.cover = 5; }
-    else if (d.pmcent) { const c = +d.pmcent, on = f.y0 === c && f.y1 === c + 99; f.y0 = on ? null : c; f.y1 = on ? null : c + 99; }
-    else if (d.pmdec) { const y = +d.pmdec, on = f.y0 === y && f.y1 === y + 9; const c = Math.floor(y / 100) * 100; f.y0 = on ? c : y; f.y1 = on ? c + 99 : y + 9; }
-    else if (d.pmco) f.co = f.co === +d.pmco ? 0 : +d.pmco;
-    else if (d.pmmv) f.mv = f.mv === +d.pmmv ? 0 : +d.pmmv;
-    else if (d.pmmus) f.mus = f.mus === +d.pmmus ? -1 : +d.pmmus;
-    else if (d.pmp) f.painter = f.painter === +d.pmp ? 0 : +d.pmp;
-    else return;
-    buzz(5); render();
-  });
-  render();
 }
 
 // this file can load after router.js (on first use): give pmOpen its address now

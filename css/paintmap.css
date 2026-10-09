@@ -25,7 +25,33 @@
   padding:7px 16px;border-radius:var(--r-pill);background:rgba(14,13,11,.86);text-align:center;font:italic 400 15px/1.3 var(--serif);
   color:rgba(236,232,223,.92);pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* bottom: the painting in the middle, named; the heart beside it; the corner at the right */
+/* David, 2026-10-09: a removable chip for every active filter, atop the map -- the primary way to SEE and undo
+   one, whichever way it got set (the Filter tab, or a tap on a painting's own facet chip below), replacing a
+   trip into the sheet just to clear one thing. */
+.pmx-chipbar{position:absolute;z-index:3;left:0;right:0;top:calc(var(--top) + 108px);display:flex;gap:6px;
+  overflow-x:auto;padding:0 12px;scrollbar-width:none;pointer-events:none}
+.pmx-chipbar[hidden]{display:none}
+.pmx-chipbar::-webkit-scrollbar{display:none}
+.pmx-xchip{pointer-events:auto;flex:none;display:flex;align-items:center;gap:6px;height:34px;padding:0 6px 0 14px;
+  border-radius:var(--r-pill);background:rgba(14,13,11,.86);color:rgba(236,232,223,.92);font:400 14px/1 var(--sans);
+  white-space:nowrap;transition:transform .2s var(--spring)}
+.pmx-xchip i{display:grid;place-items:center;flex:none;width:22px;height:22px;border-radius:50%;background:rgba(236,232,223,.14)}
+.pmx-xchip i svg{width:11px;height:11px}
+.pmx-xchip:active{transform:scale(.95)}
+
+/* filtering by example (David, 2026-10-09): the centered painting's own facets, each one tap = "only these" */
+.pmx-facets{position:absolute;z-index:3;left:12px;right:16px;bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) + 8px);
+  display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;pointer-events:none}
+.pmx-facets[hidden]{display:none}
+.pmx-facets::-webkit-scrollbar{display:none}
+.pmx-fchip{pointer-events:auto;flex:none;display:flex;align-items:center;gap:6px;height:36px;padding:0 14px;
+  border-radius:var(--r-pill);background:rgba(14,13,11,.86);color:rgba(236,232,223,.92);font:400 14px/1 var(--serif);
+  white-space:nowrap;transition:transform .2s var(--spring)}
+.pmx-fchip i{flex:none;width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+.pmx-fchip-more{font-style:italic;color:rgba(236,232,223,.98)}
+.pmx-fchip:active{transform:scale(.95)}
+
+/* bottom: the painting in the middle, named; "center on this" and the heart beside it; the corner at the right */
 .pmx-cap{position:absolute;z-index:3;left:12px;right:calc(16px + var(--corner,56px) + 10px);bottom:var(--corner-b,calc(var(--bottom) + 12px));min-height:var(--corner,56px);
   display:flex;align-items:center;gap:4px;padding:4px 4px 4px 0;border-radius:var(--r-2);background:var(--surface-2);border:1px solid rgba(236,232,223,.12);box-shadow:0 8px 24px rgba(0,0,0,.45)}
 .pmx-cap[hidden]{display:none}
@@ -33,10 +59,11 @@
 .pmx-cap-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding:6px 0;text-align:left;color:var(--ink)}
 .pmx-cap-main b{font:400 18px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pmx-cap-main small{font-size:14px;line-height:1.2;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pmx-heart{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--soft);transition:color .2s,transform .2s var(--spring)}
+.pmx-center,.pmx-heart{flex:none;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--soft);transition:color .2s,transform .2s var(--spring)}
+.pmx-center svg,.pmx-heart svg{width:21px;height:21px}
 .pmx-heart[hidden]{display:none}
 .pmx-heart.on{color:#E8787A}
-.pmx-heart:active{transform:scale(.88)}
+.pmx-center:active,.pmx-heart:active{transform:scale(.88)}
 .pmx-heart.pop svg{animation:fvaPop .42s var(--spring)}
 .pmx-do svg{width:22px;height:22px}
 .pmx-bloom{position:fixed;z-index:6}
