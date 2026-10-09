@@ -3,9 +3,12 @@
  "name": "Beatnik",
  "lineage": {
   "influenced_by": [
-   "dark-academia"
+   "bebop jazz culture",
+   "French existentialist philosophy and literature"
   ],
-  "influences": []
+  "influences": [
+   "dark-academia"
+  ]
  },
  "eras": [
   "1948–1963"
@@ -17,11 +20,23 @@
   "bongos",
   "dark sunglasses"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
+ "media": [
+  {
+   "title": "Jack Kerouac, On the Road (1957)",
+   "note": "the novel most credited with bringing Beat writing to a mass audience"
+  },
+  {
+   "title": "Allen Ginsberg, \"Howl\" (1956)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Jack Kerouac",
+  "Allen Ginsberg"
+ ],
+ "reacts_against": "1950s American conformity and consumerism, building an explicitly intellectual, anti-materialist alternative around poetry, jazz and cheap coffeehouse living.",
  "revivals": [],
- "article": "",
+ "article": "The word \"beatnik\" was coined in 1958 by San Francisco Chronicle columnist Herb Caen, who fused \"Beat Generation\" (the writers' own term, from Jack Kerouac) with \"Sputnik,\" the Soviet satellite then dominating headlines — a joke implying the Beats were a passing, slightly absurd fad, not a label the writers themselves ever embraced. The literary movement it half-mockingly named was real and serious: Kerouac's 1957 novel On the Road and Allen Ginsberg's 1956 poem \"Howl\" both grew out of a specific bohemian scene around Columbia University and later San Francisco's North Beach, built on bebop jazz, French existentialism and a deliberate rejection of 1950s American consumer conformity. The visual uniform later associated with \"beatnik\" culture — black turtlenecks, berets, dark sunglasses — came more from the coffeehouse scene that grew up around public poetry readings than from the writers' own typically unglamorous dress, and it's this secondhand, slightly caricatured version of Beat style that survives as the recognizable look today.",
  "wiki_facts": {},
  "sources": [
   {

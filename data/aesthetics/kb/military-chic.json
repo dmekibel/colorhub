@@ -3,10 +3,13 @@
  "name": "Military Chic",
  "lineage": {
   "influenced_by": [
-   "gorpcore",
-   "dieselpunk"
+   "1960s anti-war counterculture's ironic adoption of army surplus",
+   "actual military uniform design history"
   ],
-  "influences": []
+  "influences": [
+   "dieselpunk",
+   "techwear"
+  ]
  },
  "eras": [
   "recurring since the 1960s"
@@ -20,9 +23,13 @@
  ],
  "media": [],
  "figures": [],
- "reacts_against": "",
- "revivals": [],
- "article": "",
+ "reacts_against": "the garments' own original martial function and chain of command signaling, repeatedly stripping them of that context and repurposing them as either anti-war statement (1960s-70s) or pure aesthetic (2000s high fashion).",
+ "revivals": [
+  "1960s-70s anti-war surplus fashion",
+  "1990s grunge-adjacent army-jacket styling",
+  "2000s-10s Yves Saint Laurent and Balmain runway seasons"
+ ],
+ "article": "Military surplus clothing has entered civilian fashion in waves, and each wave has meant something different. In the 1960s-70s, young Americans wearing decommissioned army jackets to anti-war protests turned military dress into a pointed political statement — wearing the uniform of a war you opposed, emptied of its original chain-of-command meaning. Grunge picked up army surplus again in the early 1990s, mostly for its cheapness and durability rather than any political content. High fashion revisited military tailoring repeatedly from the 2000s on, most visibly in Yves Saint Laurent and Balmain runway collections, stripping epaulettes and brass buttons of any real-world rank significance and treating them purely as texture and silhouette. Because the look keeps recurring with such different intentions attached — protest, practicality, pure glamour — military chic is better understood as a recurring design move than a single, dated movement.",
  "wiki_facts": {},
  "sources": [
   {

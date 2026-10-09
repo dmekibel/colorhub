@@ -3,10 +3,13 @@
  "name": "Rockabilly",
  "lineage": {
   "influenced_by": [
-   "mcbling",
-   "disco"
+   "country and western swing music",
+   "rhythm and blues"
   ],
-  "influences": []
+  "influences": [
+   "mcbling",
+   "pin-up"
+  ]
  },
  "eras": [
   "1954–1960"
@@ -18,11 +21,22 @@
   "polka-dot cotton",
   "saddle shoes"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
- "revivals": [],
- "article": "",
+ "media": [
+  {
+   "title": "Elvis Presley's early Sun Records singles (1954–55)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Elvis Presley",
+  "Carl Perkins"
+ ],
+ "reacts_against": "the racial segregation of 1950s American popular music, fusing a white country tradition with Black rhythm and blues at a moment when that mixing was itself socially loaded.",
+ "revivals": [
+  "1980s British psychobilly (a punk-inflected variant)",
+  "a steady vintage-fashion subculture ever since"
+ ],
+ "article": "Rockabilly's name says exactly what it is: rock and roll plus hillbilly, a fusion of country and western swing with Black rhythm and blues that producer Sam Phillips captured at Sun Records in Memphis starting in 1954, most famously on Elvis Presley's early singles. Fusing a white country tradition with Black R&B carried real social weight in the segregated American South of the time, and the music's rapid crossover into mainstream white youth culture is a significant, often flattened part of its story. The look that grew up around it — greased pompadours, leather jackets, full circle skirts, cuffed denim — became a visual shorthand for the first generation of rock and roll almost overnight, and stayed in circulation well past the music's own 1950s window, most notably through a 1980s British \"psychobilly\" scene that bolted rockabilly's fashion onto punk's faster, harder sound.",
  "wiki_facts": {},
  "sources": [
   {

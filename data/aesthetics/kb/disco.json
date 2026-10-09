@@ -3,10 +3,14 @@
  "name": "Disco",
  "lineage": {
   "influenced_by": [
-   "eighties-neon",
-   "glam-rock"
+   "Philadelphia soul and Motown's orchestral pop",
+   "underground Black, Latino and gay club culture in early-1970s New York"
   ],
-  "influences": []
+  "influences": [
+   "glam-rock",
+   "eighties-neon",
+   "rave"
+  ]
  },
  "eras": [
   "1973–1980"
@@ -18,11 +22,26 @@
   "platform shoes",
   "polyester"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
- "revivals": [],
- "article": "",
+ "media": [
+  {
+   "title": "Saturday Night Fever (1977)",
+   "note": "the film most responsible for disco's mainstream, largely white reframing"
+  },
+  {
+   "title": "Donna Summer, \"I Feel Love\" (1977)",
+   "note": "a key record for disco's synthesizer-driven later sound"
+  }
+ ],
+ "figures": [
+  "Donna Summer",
+  "Nile Rodgers"
+ ],
+ "reacts_against": "the album-oriented rock radio of its moment, building a club-centered, dance-first culture that rock critics of the era often dismissed outright — a dismissal many historians now read as carrying real racial and homophobic undertones.",
+ "revivals": [
+  "directly cited by 1980s glam and eighties-neon design",
+  "a recurring reference in 2010s-20s pop production and nightlife branding"
+ ],
+ "article": "Disco's story is often told starting with Saturday Night Fever, but the real history starts five years earlier and in a very different room. From around 1970, DJs in New York clubs serving Black, Latino and gay audiences — spaces largely excluded from the era's mainstream nightlife — built a continuous, beat-matched dance culture around soul, funk and early electronic production. Donna Summer and producer Giorgio Moroder's 1977 \"I Feel Love\" pushed the genre toward the synthesizer-heavy sound that would define its late period, around the same time Saturday Night Fever carried a polished, largely white version of disco culture to a mass audience and, with it, the mirror ball and metallic lamé look most people now picture. That mainstream wave didn't last: a backlash culminated in 1979's \"Disco Demolition Night,\" a Chicago baseball-stadium event where a crate of disco records was blown up between games, an incident historians have since read as carrying real hostility toward the genre's Black and gay roots. Disco's visual language — mirror balls, metallic fabric, saturated stage lighting — nonetheless outlived the backlash, feeding directly into 1980s glam and, decades later, into revival aesthetics like eighties-neon.",
  "wiki_facts": {},
  "sources": [
   {

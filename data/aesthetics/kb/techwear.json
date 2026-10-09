@@ -3,8 +3,8 @@
  "name": "Techwear",
  "lineage": {
   "influenced_by": [
-   "cyberpunk",
-   "gorpcore"
+   "high-performance outdoor gear (Arc'teryx, The North Face)",
+   "Japanese cyberpunk street style and manga/anime costume design"
   ],
   "influences": []
  },
@@ -17,11 +17,18 @@
   "webbing straps",
   "articulated joints"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
+ "media": [
+  {
+   "title": "Errolson Hugh's ACRONYM label (founded 1994)",
+   "note": "widely cited as a foundational techwear brand"
+  }
+ ],
+ "figures": [
+  "Errolson Hugh"
+ ],
+ "reacts_against": "both traditional fashion's disregard for technical performance and outdoor brands' disregard for silhouette, trying to satisfy both at once.",
  "revivals": [],
- "article": "",
+ "article": "Techwear grew through online forums and a handful of designer labels — most influentially Errolson Hugh's ACRONYM, founded in 1994 — that treated waterproofing, breathability and articulated movement as fashion priorities on equal footing with silhouette, something neither mainstream fashion nor mainstream outdoor-gear brands had done. Its visual debt to Japanese cyberpunk media (manga and anime's close-fitting, strap-heavy tactical costuming) is frequently cited by the community itself, and the look's near-exclusive commitment to black is partly practical — black fabric hides stains and wear on technical materials better than light colors — and partly aesthetic, keeping focus on cut and hardware rather than color or print. The scene has stayed largely online and subcultural rather than crossing into mainstream fashion media the way grunge or Y2K did, which means its documentation lives mostly in forum histories and brand lore rather than fashion-press retrospectives.",
  "wiki_facts": {},
  "sources": [
   {

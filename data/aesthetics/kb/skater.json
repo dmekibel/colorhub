@@ -3,10 +3,13 @@
  "name": "Skater",
  "lineage": {
   "influenced_by": [
+   "1970s California surf culture (skateboarding began as a dry-land stand-in for surfing)",
+   "punk's DIY ethic"
+  ],
+  "influences": [
    "grunge",
    "indie-sleaze"
-  ],
-  "influences": []
+  ]
  },
  "eras": [
   "1970s–present"
@@ -17,11 +20,19 @@
   "graphic tees",
   "canvas sneakers"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
+ "media": [
+  {
+   "title": "Dogtown and Z-Boys (2001 documentary)",
+   "note": "a widely cited history of 1970s Southern California skate culture"
+  }
+ ],
+ "figures": [
+  "Tony Alva",
+  "Tony Hawk"
+ ],
+ "reacts_against": "formal athletic-wear conventions, favoring loose, durable, impact-resistant clothing built for falling as much as for riding.",
  "revivals": [],
- "article": "",
+ "article": "Skateboarding began in 1950s-60s California literally as a way to surf when the ocean was flat, and its fashion grew directly out of that beach culture before splitting into its own distinct look through the 1970s-80s. The Zephyr team (\"Z-Boys\") out of Venice and Santa Monica, documented in the 2001 film Dogtown and Z-Boys, pioneered the aggressive, low-to-the-ground riding style that turned skating from a surf-adjacent pastime into its own sport with its own visual identity. Skate fashion absorbed punk's DIY ethic through the 1980s (board graphics functioned much like punk flyer art) and hip-hop's baggier silhouettes through the 1990s, which is why the look has never settled into one fixed decade-specific silhouette the way many of this list's other entries have — baggy jeans gave way to skinny jeans and back again as skate media and sponsorship shifted. What's stayed constant is the underlying logic: clothing durable enough to survive repeated falls onto concrete, which still shapes the silhouette even in skate-adjacent streetwear worn by people who've never stepped on a board.",
  "wiki_facts": {},
  "sources": [
   {
