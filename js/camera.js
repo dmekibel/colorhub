@@ -536,8 +536,7 @@ function eyeShadesOpen(o) {
     <div class="shd-list" data-shd-list></div>
     <div class="shd-acts">
       <button data-shd="keep">Keep</button>
-      <button data-shd="honey">${ICON_HONEY}<span>See as honeycomb</span></button>
-      ${typeof mapSelect === "function" ? `<button data-shd="map">Show on the big map</button>` : ""}
+      <button data-shd="honey">${ICON_HONEY}<span>See its colors</span></button>
       <button data-shd="share">Share</button>
     </div>
     <p class="eye-note">Camera exposure, white balance and lighting shift these shades. Lock (top bar) helps.</p>
@@ -601,24 +600,12 @@ function eyeShadesOpen(o) {
     if (!act) return;
     const k = act.dataset.shd;
     if (k === "keep") { if (typeof keepPalette === "function") keepPalette(shades.map(s => s.hex), title ? `Shades of ${title}` : "Shades of this"); buzz(10); }
-    else if (k === "honey") { close(); shdHoneycomb(shades, title); }
-    else if (k === "map") { if (typeof mapSelect === "function") mapSelect({ title: title ? `Shades of ${title}` : "Shades of this", colors: shades.map(s => ({ h: s.hex, n: s.name, share: s.share })), source: "set" }); }
+    // David, 2026-10-09: "showing it on the color map is a useless feature" -- these shades, alone, sized by
+    // share, in their own honeycomb (js/palettehive.js), not dimmed in among all ~2,700 other names. Replaces
+    // both the old flat shdHoneycomb screen and its separate "Show on the big map" button with the one real view.
+    else if (k === "honey") { close(); if (typeof openPaletteHive === "function") openPaletteHive({ title: title ? `Shades of ${title}` : "Shades of this", colors: shades.map(s => ({ h: s.hex, n: s.name, share: s.share })), source: "camera" }); }
     else if (k === "share") { if (typeof sharePalette === "function") sharePalette(shades.map(s => ({ h: s.hex })), title ? `Shades of ${title}` : "Shades of this", h => ({ nm: nameOf(h) })); else toast("Sharing isn't ready here yet"); }
   });
-}
-// ---------- "See as honeycomb": exactly the chosen shades, their real photo hexes, sized by share ----------
-function shdHoneycomb(shades, title) {
-  const total = shades.reduce((a, c) => a + c.share, 0) || 1;
-  const cells = shades.map(c => `<button class="shd-hcell" data-open="${c.hex}" style="--c:${c.hex};--w:${Math.max(c.share / total, .03).toFixed(3)}"><b>${esc(c.name)}</b><span>${pctFmt(c.share / total * 100)}</span></button>`).join("");
-  const el = show(`
-    <header class="nav-top"><button class="icon-btn" data-back aria-label="Back">${ICON.back}</button><span class="nav-title">${esc(title ? `Shades of ${title}` : "Shades of this")}</span><span class="nav-r"></span></header>
-    <div class="shd-honey">${cells}</div>
-    ${typeof mapSelect === "function" ? `<button class="btn ghost shd-honey-map" data-honey-map>Show on the big map</button>` : ""}
-  `, "fixed shd-honeyscreen");
-  el.querySelector("[data-back]").onclick = () => typeof xBack === "function" ? xBack() : history.back();
-  el.querySelectorAll("[data-open]").forEach(b => b.onclick = () => openTappedColor(b.dataset.open));
-  const mapBtn = el.querySelector("[data-honey-map]");
-  if (mapBtn) mapBtn.onclick = () => mapSelect({ title: title ? `Shades of ${title}` : "Shades of this", colors: shades.map(c => ({ h: c.hex, n: c.name, share: c.share })), source: "set" });
 }
 
 // ---------- public pick APIs (David, 2026-10-09): cameraPick({ onPick(hex,meta), multi, title }) opens this

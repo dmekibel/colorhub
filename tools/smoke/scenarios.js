@@ -2875,15 +2875,46 @@ scenario("map", "search 2.0: a hex and a modifier fly; a decade, a painter and a
   h = await ask("between teal and navy");
   await t.waitFor(() => /Between Teal and Navy/i.test(t.text(".cs-hl-pill")), 15000, "the road constellation");
 });
-scenario("map", "On the map: a painting page lights its colors on Home; #/map/gallery/<i> does the same", async t => {
-  await H.homeReady(t); t.ev("openRoute('#/painting/starry-night')");   // shot mode: placed, so Home is the floor
-  const b = await t.waitFor("[data-cs=map]", 12000, "the On the map button on a painting page");
-  await t.click(b, { force: true, wait: 900 });
-  await t.waitFor(() => /as photographed/.test(t.text(".cs-hl-pill")), 15000, "the painting's constellation on Home");
-  t.notes.push(t.text(".cs-hl-pill"));
+// David, 2026-10-09: "tapping a color palette or a painting and showing it on the color map is a useless
+// feature -- it doesn't give you anything." csActions' "map" door (js/colorset.js) now opens the painting's OWN
+// honeycomb (js/palettehive.js) instead of lighting it among every other name on Home. #/map/gallery/<i> is a
+// different, untouched feature (js/home.js hmMapRoute, "Similar paintings on the map") and still lights a
+// museum painting directly on the big shared map -- the second half of this scenario guards that it still does.
+scenario("map", "From a painting, See its colors opens its own honeycomb (not the big map); the address route still lights the big map directly", async t => {
+  await H.homeReady(t); t.ev(`galleryPage(14423, true)`);   // Mona Lisa -- galleryPage() itself pushes "g:14423" (the real trail Back needs)
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
+  const b = await t.waitFor("[data-cs=map]", 12000, "the See its colors button on a painting page");
+  t.expect(/see its colors/i.test(t.text(b)), `the map action isn't labeled "See its colors": "${t.text(b)}"`);
+  await t.click(b, { force: true, wait: 500 });
+  await t.waitFor(".ph-sheet", 12000, "the palette honeycomb sheet");
+  await t.waitFor(() => t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, 8000, "the honeycomb to lay out its cells");
+  let shown = +t.text("[data-ph-n]"), cells = t.ev("PH_DEBUG.count()");
+  t.expect(shown > 0 && shown === cells, `the slider says ${shown} but the honeycomb drew ${cells} cells`);
+  // slide the count: the honeycomb must recompute to match, never just truncate what it already had. Go down
+  // when there's room to (every painting's pool holds more than PH_MIN_N), otherwise up to the real ceiling --
+  // either way read from PH_DEBUG.max(), never a guessed number that the slider might just clamp away.
+  const max = t.ev("PH_DEBUG.max()"), target = shown > 3 ? shown - 2 : Math.min(max, shown + 2);
+  t.expect(target !== shown, `no room to move the slider off ${shown} (max ${max})`);
+  t.ev(`document.querySelector('.ph-count-l input')._countTo(${target})`);
+  await t.waitFor(() => +t.text("[data-ph-n]") === target, 6000, `the count to reach ${target} after sliding`);
+  shown = +t.text("[data-ph-n]");
+  await t.waitFor(() => t.ev("PH_DEBUG.count()") === shown, 6000, "the honeycomb to redraw at the new count");
+  cells = t.ev("PH_DEBUG.count()");
+  t.expect(shown === cells, `after sliding, the slider says ${shown} but the honeycomb drew ${cells} cells`);
+  // tap the first cell -> its color page, in one tap, no sheet in between
+  const hex = t.ev("PH_DEBUG.hexAt(0)"), at = t.ev(`PH_DEBUG.screenOf(${JSON.stringify(hex)})`);
+  t.expect(at, "couldn't find the first cell's screen position");
+  await t.tapAt(t.$(".ph-cv"), at.x, at.y, { wait: 500 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping a cell");
+  t.expect(!t.$(".ph-sheet"), "the honeycomb sheet is still open after tapping a cell");
+  // Back returns to the painting, not to the honeycomb
+  await H.back(t);
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 8000, "Back to return to the painting page");
+
+  // #/map/gallery/<i>: a different door (js/home.js hmMapRoute), untouched -- still lights a museum painting
+  // directly on the big shared map, with its own How-many slider over the real measured pool
   await H.homeReady(t); t.ev("openRoute('#/map/gallery/3')");
   await t.waitFor(() => /named colou?rs? · as photographed/.test(t.text(".cs-hl-pill")), 20000, "a museum painting's constellation from its address");
-  // How many: the measured pool, not a fixed six; the lit set and the named chips follow the slider
   const nIn = t.$$(".cs-hl-n input").pop();
   t.expect(nIn && +nIn.max > 6, "a museum painting on the map has no How many slider over its pool");
   nIn._countTo(12);
