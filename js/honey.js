@@ -874,6 +874,9 @@ function honeyLitLabel() {
   let sub = parts.slice(1).join(" · ");
   const photo = HONEY_PHOTO_KINDS.includes(kind);
   if (!sub) sub = `${n} ${photo ? "named " : ""}color${n === 1 ? "" : "s"}${photo ? " · as photographed" : ""}`;
+  // David: "say it in the chip subtitle" -- which arrangement the map auto-picked to keep the selection together
+  // (js/home.js hmBestArrangeFor, set on HONEY_HL.why), so "scattered" never has to be taken on faith
+  if (HONEY_HL.why) sub = sub ? `${sub} · ${HONEY_HL.why}` : HONEY_HL.why;
   return { title: parts[0] || "Your set", sub };
 }
 // Learn these: the Learn sheet (js/learnset.js) on exactly the lit colors, with their source; it comes back to the map

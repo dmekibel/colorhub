@@ -218,6 +218,53 @@ function hmMeaning(v = hmView()) {
 // regions to specks. Your Magnify still moves it, from a calmer start.
 const hmLiveTweak = v => { const a = HONEY_ARR[v.arr], feel = a && a.fit ? { ...v.feel, mag: v.feel.mag * .45 } : v.feel; return { ...hmFeelTweak(v.style, feel), layout: hmLayoutKey(v.arr, v.style, hmOrd(v.arr, v)) }; };
 
+// ---------- selection mode's own arrangement choice (David, 2026-10-09: "I don't like when the selected colors
+// are scattered... pick the appropriate view so they're minimally scattered"). Among a handful of candidate
+// arrangements, hmBestArrangeFor lays the WHOLE current item set out each way (honeyLayout, the same builder the
+// live map uses) and keeps whichever one packs the SELECTED colors into the smallest bounding box -- a cheap,
+// honest proxy for "minimally scattered" that needs no canvas. The radial shapes are centered on the selection's
+// own average color (hmAvgHex), which usually wins outright for anything that was already one family or palette.
+function hmAvgHex(hexes) {
+  const labs = hexes.map(h => lab(h));
+  const L = labs.reduce((s, v) => s + v[0], 0) / labs.length, a = labs.reduce((s, v) => s + v[1], 0) / labs.length, b = labs.reduce((s, v) => s + v[2], 0) / labs.length;
+  return labHex(L, a, b);
+}
+const HM_SEL_CANDIDATES = [
+  ["map", "hue", "arranged by hue so they sit together"],
+  ["map", "light", "arranged by lightness so they sit together"],
+  ["map", "chroma", "arranged by vividness so they sit together"],
+  ["families", "hue", "grouped by family so they sit together"],
+  ["rings", "near", "centered on their own average color"],
+  ["sunflower", "near", "centered on their own average color"],
+];
+function hmBestArrangeFor(items, hexes) {
+  if (!hexes || hexes.length < 2 || !items || !items.length) return null;
+  // a selection's own hexes (a painting's measured palette, say) rarely land exactly on a named bubble's hex, so
+  // match each one to its NEAREST point in Lab, the same way honey.js hlItems() finds the lit bubbles themselves
+  const labs = hexes.map(h => lab(h));
+  let near = null;
+  try { near = hmAvgHex(hexes); } catch (e) {}
+  let best = null;
+  for (const [arr, ord, why] of HM_SEL_CANDIDATES) {
+    if (!HONEY_ARR[arr] || (ord === "near" && !near)) continue;
+    const key = ord === "near" ? `${arr}~near~${near.toUpperCase()}` : `${arr}~${ord}`;
+    let lay; try { lay = honeyLayout(items, key); } catch (e) { continue; }
+    if (!lay.pts.length) continue;
+    const seen = new Set(), matched = [];
+    for (const L of labs) {
+      let bp = null, bd = Infinity;
+      for (const p of lay.pts) { const it = p.it, dd = (it.lab[0] - L[0]) ** 2 + (it.lab[1] - L[1]) ** 2 + (it.lab[2] - L[2]) ** 2; if (dd < bd) { bd = dd; bp = p; } }
+      if (bp && !seen.has(bp)) { seen.add(bp); matched.push(bp); }
+    }
+    if (matched.length < Math.min(2, hexes.length)) continue;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const p of matched) { if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x; if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; }
+    const area = Math.max(.02, maxX - minX) * Math.max(.02, maxY - minY);
+    if (!best || area < best.area) best = { arr, ord, why, area, near: ord === "near" ? { h: near, n: "" } : null };
+  }
+  return best;
+}
+
 // ---------- the Tweak panel: live sliders over whatever preset is active, saved in S.hm.tweak ----------
 // A compact, opaque, non-modal sheet (~45dvh): the honeycomb above it keeps running and repainting as the
 // sliders move, so the effect of each one is immediate. Shared by the home's View panel ("Tweak…" row) and the
@@ -412,7 +459,7 @@ function hmHome() {
       else { if (fx && fx.morph) fx.morph(); open(); }
     } finally { if (src) src.remove(); }
   };
-  let hlAll = false;
+  let hlAll = false, selPrevArr = null;   // selPrevArr: the arrangement a selection (HONEY_HL) displaced, restored when it clears
   if (typeof HONEY_LIVE !== "undefined") HONEY_LIVE.add(() => { if (!el.isConnected) return false; if (hlAll && !HONEY_HL) { hlAll = false; render(true); } return true; });
   let baseItems = [];   // the source's colors before the family / tone / knowledge filters (the chips count from these)
   function paintTitle(loading) {
@@ -442,7 +489,23 @@ function hmHome() {
     if (typeof HONEY_HL !== "undefined" && HONEY_HL && (HONEY_HL.fresh || HONEY_HL.every) && !every) {
       if (!LONG_NAMES || !CORE_NAMES) { await Promise.all([loadCoreNames(), loadLongNames()]); if (!el.isConnected || g !== gen) return; }
       items = hmEveryNameItems(); hlAll = true; HONEY_HL.every = true;
-    } else if (!(typeof HONEY_HL !== "undefined" && HONEY_HL)) hlAll = false;
+      // David: "pick the appropriate view for the list of colors so they're minimally scattered." Chosen once per
+      // distinct selection (HONEY_HL.rev), not on every reframe (Learn these/Find them set .fresh again on the way
+      // back) -- the arrangement a selection displaces is remembered in selPrevArr and restored the moment it clears.
+      if (HONEY_HL.arrRev !== HONEY_HL.rev) {
+        HONEY_HL.arrRev = HONEY_HL.rev;
+        if (!selPrevArr) selPrevArr = { arr: S.hm.arr, ord: { ...(S.hm.ord || {}) }, near: S.hm.near };
+        const picked = typeof hmBestArrangeFor === "function" ? hmBestArrangeFor(items, HONEY_HL.hexes) : null;
+        if (picked) {
+          S.hm.arr = picked.arr; S.hm.ord = { ...(S.hm.ord || {}), [picked.arr]: picked.ord };
+          if (picked.near) S.hm.near = picked.near;
+          HONEY_HL.why = picked.why;
+        }
+      }
+    } else if (!(typeof HONEY_HL !== "undefined" && HONEY_HL)) {
+      hlAll = false;
+      if (selPrevArr) { S.hm.arr = selPrevArr.arr; S.hm.ord = selPrevArr.ord; if (selPrevArr.near) S.hm.near = selPrevArr.near; selPrevArr = null; }
+    }
     baseItems = items;
     if (!hlAll) {
       let out = hmFiltered(items);
@@ -761,6 +824,13 @@ function hmHome() {
     // which this must never interrupt)
     if (typeof el.getAnimations === "function") { try { el.getAnimations().forEach(a => { if (a.playState === "finished") a.cancel(); }); } catch (e) {} }
     cornersBack();
+    // David's screenshot: a ~130pt black band under the honeycomb on an iPhone Home Screen app. --vb/--app-full
+    // (js/core.js vbFix -- the strip a standalone iOS app's translucent status bar leaves the reported viewport
+    // short by, which .screen.fixed.cx{height:var(--app-full,100dvh)} reaches through) are computed once at
+    // script load plus a few fixed points (load, a 600ms timeout, resize, orientationchange); if the real device
+    // hadn't settled its own viewport yet at any of those moments, the map's screen could be sized from a stale
+    // measurement forever after. The same events this watchdog already listens to are reasons to recompute it too.
+    if (typeof vbFix === "function") vbFix();
   }
   const hmWatchEvents = ["pageshow", "resize", "orientationchange"];
   hmWatchEvents.forEach(k => addEventListener(k, hmCornerWatch));

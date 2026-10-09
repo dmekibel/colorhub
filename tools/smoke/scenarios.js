@@ -274,6 +274,39 @@ scenario("home", "the color-page return (mxLand) never stalls waiting on data", 
   t.expect(t.reachable(t.d.querySelector("#hmDo")) === "", "the right corner is not tappable once the return finishes");
 });
 
+// David: "it's a selection, so it should be a preview mode within the map... pick the appropriate view for the
+// list of colors so they're minimally scattered." mapSelect (js/colorset.js) is the one entry point every "show
+// on the map" caller uses (Learn's See them on the map, a painting's palette, a set, a Look, a photo palette, a
+// family…); it stays ON the real map (same corners, honey.js honeyHighlight dims the rest), auto-picks whichever
+// candidate arrangement packs the selection into the smallest footprint (js/home.js hmBestArrangeFor) and says so
+// in the chip, and clearing it (✕) restores the arrangement AND the full, undimmed map.
+scenario("home", "mapSelect: a preview mode that auto-arranges the selection and restores on clear", async t => {
+  await H.homeReady(t);
+  t.expect(t.ev("typeof mapSelect === 'function'"), "mapSelect is not defined");
+  const arr0 = t.ev("S.hm.arr"), ord0 = t.ev("JSON.stringify(S.hm.ord||{})"), count0 = H.num(t.text(".hm-title small"));
+  // a painting's own palette (the source a caller like a gallery painting passes) -- a handful of near-neighbor
+  // blues, which should read as "minimally scattered" under a lightness- or hue-led arrangement
+  t.ev('mapSelect({ title: "A Starry Blue", colors: ["#1F4FBF","#2255C5","#1C49B5","#2A5ACF","#1E4DBA"], source: "painting" })');
+  await t.sleep(700);
+  t.expect(t.ev("typeof HONEY_HL !== 'undefined' && !!HONEY_HL"), "the selection did not light up (HONEY_HL)");
+  const chip = t.$(".cs-hl-bar");
+  t.expect(chip, "no selection chip (.cs-hl-bar) appeared");
+  t.expect(/A Starry Blue/.test(t.text(chip)), `the chip doesn't name the selection: "${t.text(chip)}"`);
+  t.expect(/5/.test(t.text(chip)), `the chip doesn't say how many colors: "${t.text(chip)}"`);
+  t.expect(/arranged by|centered on/.test(t.text(chip)), `the chip doesn't say WHY that arrangement: "${t.text(chip)}"`);
+  // still the real map: the corners are there, and Home's own canvas (not a separate screen) is what's lit
+  t.expect(t.$("canvas") && t.$("#hmDo") && t.$("[data-rooms-corner]"), "selection mode left the real map/corners");
+  const why = t.ev("HONEY_HL.why"), arrPicked = t.ev("S.hm.arr");
+  t.notes.push(`picked ${arrPicked}: ${why}`);
+  // clear it: the ✕ in the chip
+  await t.click(".cs-hl-x", { wait: 400 });
+  t.expect(!t.ev("typeof HONEY_HL !== 'undefined' && !!HONEY_HL"), "the selection is still lit after ✕");
+  await t.waitFor(() => !t.$(".cs-hl-bar"), 3000, "the chip to go away after ✕");
+  t.expect(t.ev("S.hm.arr") === arr0, `the arrangement was not restored (now "${t.ev("S.hm.arr")}", was "${arr0}")`);
+  t.expect(t.ev("JSON.stringify(S.hm.ord||{})") === ord0, "the per-shape order was not restored");
+  await t.waitFor(() => H.num(t.text(".hm-title small")) === count0, 4000, `the full map (${count0} colors) to come back, not still the selection`);
+});
+
 scenario("home", "the map fills the full viewport before and after a horizontal swipe", async t => {
   const cv = await H.homeReady(t);
   // the screen's own entrance animation (css/polish.css .screen "enter") can leave the Home screen a few px off
