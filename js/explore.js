@@ -692,32 +692,18 @@ function cpReadNextHTML(n) {
   if (!list.length) return "";
   return `<section class="rp-next"><h2>Read next</h2>${list.map(x => `<button class="rp-next-row" data-node="${esc(x.to.id)}"><b>${esc(x.to.title)}</b><span>${esc(x.why || x.rel || "")}</span></button>`).join("")}</section>`;
 }
+// David, 2026-10-09: the old primary row (Learn it + Save + Share icons) is gone -- Learn it, Pair with… and
+// the heart now live in the cover's own compact action row (js/richpage.js rpActionRowHTML), and the heart is
+// the one "save" a color page offers (the older bookmark-style isSaved/toggleSave stays for Explore's pins,
+// just not wired here any more). Share moves to the ID card.
 function colorPage(n, tapped) {
-  const c = n.c, w = n.wiki, st = c.id && S.cards[c.id], mine = isMine(st);
+  const c = n.c, w = n.wiki;
   tapped = tapped ? String(tapped).toUpperCase() : null;
-  const saved = isSaved(n.id) || (typeof fvHas === "function" && fvHas(c.h));   // the heart is also "your colors" (js/favs.js)
   const coreSelf = (CORE_NAMES || (typeof coreFallback === "function" ? coreFallback() : [])).find(e => e.n.toLowerCase() === c.n.toLowerCase());
   const entry = { n: c.n, h: c.h, src: (coreSelf && coreSelf.src) || ["app"], also: (coreSelf && coreSelf.also) || [], notes: (coreSelf && coreSelf.notes) || [] };
-  const primary = `<div class="cp-primary-row">
-      ${typeof prQuick === "function" || typeof hmLearnIt === "function" ? `<button class="cp-primary" data-learnit>${mine ? "Review it" : "Learn it"}${mine ? "" : `<em>2 min</em>`}${ICON.arrow}</button>` : ""}
-      <button class="icon-btn cp-icon${saved ? " saved" : ""}" data-save aria-label="Save" aria-pressed="${saved}">${saved ? ICON.heartOn : ICON.heart}</button>
-      <button class="icon-btn cp-icon" data-share aria-label="Share">${ICON.share}</button>
-    </div>`;
-  const el = colorDossier(entry, { tapped, node: n, primary, paintHost: `<section class="gl-in" data-glin></section>`,
-    facet: typeof arFacetArt === "function" ? arFacetArt(c) : null, fig: figHTML(c.n), sources: (w && w.sources) || [], codes: codeRows(tapped || c.h), readNext: cpReadNextHTML(n) });
+  const el = colorDossier(entry, { tapped, node: n,
+    facet: typeof arFacetArt === "function" ? arFacetArt(c) : null, codes: codeRows(tapped || c.h) });
   const li = el.querySelector("[data-learnit]"); if (li) li.onclick = () => typeof prQuick === "function" ? prQuick({ seed: c }) : hmLearnIt(c);   // js/practice.js: the instant-deck sheet
-  el.querySelector("[data-save]").onclick = e => {
-    const b = e.currentTarget, want = !b.classList.contains("saved");
-    if (isSaved(n.id) !== want) toggleSave(n.id);
-    if (typeof fvPageSet === "function") fvPageSet(el, c.h, c.n, want);   // js/favs.js: the same heart fills "Your colors"
-    b.innerHTML = want ? ICON.heartOn : ICON.heart; b.setAttribute("aria-pressed", want); b.classList.toggle("saved", want);
-  };
-  el.querySelector("[data-share]").onclick = () => {
-    const url = shareURL("color/" + routeSlug(c.n)), text = `${c.n} · ColorHub`;
-    if (navigator.share) navigator.share({ text, url }).catch(() => {});
-    else { try { navigator.clipboard.writeText(url); toast("Copied the link"); } catch (e) {} }
-  };
-  const gi = el.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, c);
   if (typeof learnerLog === "function" && !tapped) learnerLog({ type: "seen", color: c, src: "page" });   // the Learner Model (js/learner.js)
   return el;   // so growFrom (js/core.js, js/home.js hmOpenColor) can grow this page from the tapped honeycomb bubble
 }

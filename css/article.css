@@ -11,8 +11,13 @@
 .ar-slot[hidden]{display:none}
 
 .ar{margin-top:34px;padding-bottom:8px}
+.ar-wrap{margin-top:0}
+.ar-wrap .ar-head,.ar-wrap .ar-body{margin-top:0}
+.ar-body{margin-top:34px}   /* the split color-page case: head has its own margin from the layout above it; this one needs its own gap after Paintings */
 .ar-kind{font:italic 400 16px/1.3 var(--serif);color:var(--soft)}
 .ar-lede{font:400 28px/1.2 var(--serif);letter-spacing:-.015em;color:var(--paper);margin-top:12px;text-wrap:pretty}
+.ar-personal{font:400 15px/1.5 var(--sans);color:var(--soft);margin-top:10px}
+.ar-personal .ar-link{font:inherit;color:inherit}
 .ar-draft{font:italic 400 15px/1.4 var(--serif);color:var(--soft);margin-top:14px}
 
 /* ---------- origin facts + also called ---------- */
@@ -22,13 +27,23 @@
 .ar-facts dd{margin:0;font:400 15px/1.5 var(--sans);color:var(--ar-body)}
 .ar-aka{font:italic 400 17px/1.35 var(--serif);color:var(--soft);margin-top:14px}
 
-/* ---------- the sticky contents bar: one opaque line that stays while you read ---------- */
-.ar-bar{position:sticky;top:var(--top);z-index:5;display:flex;align-items:center;gap:12px;width:100%;min-height:48px;margin:26px 0 0;padding:0 2px;background:var(--ground);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);text-align:left;overflow:hidden}
+/* ---------- Contents, inline (David, 2026-10-09: "feels separate from the article" -- no more bottom sheet):
+   the summary row stays a sticky progress line; tapping it expands the chapter list right there, pushing the
+   rest of the article down (arAccordion, js/article.js), chevron rotating; reduced-motion -> instant. ---------- */
+.ar-bar{position:sticky;top:var(--top);z-index:5;margin:26px 0 0;background:var(--ground)}
+.ar-bar-sum{position:relative;display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:0 2px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);text-align:left;overflow:hidden}
 .ar-bar-l{font:400 18px/1 var(--serif);flex:none}
 .ar-bar-c{flex:1;min-width:0;font:italic 400 17px/1 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ar-bar-n{flex:none;font-size:13px;color:var(--soft)}
-.ar-bar::after{content:"";width:9px;height:9px;flex:none;border-right:1px solid var(--soft);border-bottom:1px solid var(--soft);transform:rotate(45deg) translate(-2px,-2px)}
+.ar-bar-i{width:9px;height:9px;flex:none;border-right:1px solid var(--soft);border-bottom:1px solid var(--soft);transform:rotate(45deg);transition:transform .25s var(--ease)}
+.ar-bar-sum[aria-expanded="true"] .ar-bar-i{transform:rotate(225deg)}
 .ar-bar-p{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--ink);transform-origin:0 50%;transform:scaleX(0);opacity:.7}
+.ar-bar-list{overflow:hidden}
+.ar-bar-list[hidden]{display:none}
+.ar-bar-row{display:grid;grid-template-columns:28px 1fr;align-items:baseline;width:100%;min-height:52px;padding:14px 2px;border-bottom:1px solid var(--rule);text-align:left}
+.ar-bar-row .mono{font-size:13px;color:var(--soft)}
+.ar-bar-row b{font:400 20px/1.12 var(--serif)}
+@media (prefers-reduced-motion:reduce){.ar-bar-i{transition:none}}
 
 /* ---------- reading ---------- */
 .ar-sec{padding-top:6px;scroll-margin-top:64px}
@@ -93,13 +108,27 @@
 .ar-dnext{min-height:44px;padding:0 22px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:400 18px/1 var(--serif)}
 .ar-dlink{font:italic 400 17px/1 var(--serif);color:var(--b-ink);text-decoration:underline;text-underline-offset:3px;min-height:44px}
 
-/* ---------- family: the honeycomb strip, disambiguation ---------- */
+/* ---------- Family (David, 2026-10-09): "usually one hex above a line of siblings, no visible structure" ----------
+   A segmented switch (js/family.js famHTML/famWire), remembered per viewer: Tree (the honeycomb, legible with
+   row labels and connectors), Spectrum (one sorted strip), Compare (self beside its closest relatives, a
+   draggable split on the nearest), Map (a button out to the honeycomb). Every swatch is one tap to its page
+   (the shared .ar-hex, reused from the old honeycomb) and keeps the known/met/unmet states. */
 .ar-fam h2{margin-top:50px}
-.ar-tree{display:flex;flex-direction:column;align-items:center;margin:8px 0 0}
-.ar-trow{display:flex;justify-content:center;gap:3px;margin-top:calc(var(--ar-hex-h) * -.25 + 2px)}
-.ar-trow:first-child{margin-top:0}
-.ar-trow.shift-r{transform:translateX(calc(var(--ar-hex-w) / 2 + 1px))}
-.ar-trow.shift-l{transform:translateX(calc(var(--ar-hex-w) / -2 - 1px))}
+.fam-seg{display:flex;gap:4px;margin:6px 0 20px;padding:3px;border-radius:999px;background:var(--surface-1);width:max-content;max-width:100%;overflow-x:auto}
+.fam-seg-b{flex:none;min-height:38px;padding:0 16px;border-radius:999px;font:400 15px/1 var(--sans);color:var(--soft)}
+.fam-seg-b.on{background:var(--surface-3);color:var(--ink)}
+.fam-seg-sm{background:none;padding:0;gap:8px}
+.fam-seg-sm .fam-seg-b{min-height:30px;padding:0 4px;font-size:14px;color:var(--soft);border-bottom:2px solid transparent}
+.fam-seg-sm .fam-seg-b.on{background:none;color:var(--ink);border-bottom-color:var(--ink)}
+.fam-empty{padding:10px 0}
+
+/* Tree: thin connector lines parent -> self -> children, a tiny label per row, empty rows dropped */
+.fam-tree{display:flex;flex-direction:column;align-items:center;gap:0}
+.fam-trow{width:100%;text-align:center}
+.fam-trow-l{font:400 13px/1 var(--sans);color:var(--soft);margin-bottom:8px}
+.fam-trow-hex{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.fam-trow-mid .fam-trow-hex{gap:3px}
+.fam-line{display:block;width:1px;height:20px;background:var(--rule-strong);margin:2px auto}
 .ar-hex{position:relative;flex:none;width:var(--ar-hex-w);height:var(--ar-hex-h);clip-path:var(--ar-clip);background:var(--c);display:block;transition:transform .2s var(--spring)}
 .ar-hex>span{position:absolute;inset:0;clip-path:var(--ar-clip);background:var(--c);display:grid;place-items:center;padding:0 10px}
 .ar-hex b{font:400 13px/1.05 var(--serif);text-align:center;text-wrap:balance;color:#fff;overflow-wrap:anywhere}
@@ -110,7 +139,42 @@
 .ar-hex.self{background:var(--paper)}
 .ar-hex.self>span{inset:4px}
 .ar-hex:not(.self):active{transform:scale(.94)}
-.ar-tnote{font:italic 400 15px/1.4 var(--serif);color:var(--soft);margin-top:14px;text-wrap:pretty}
+.fam-note{font:italic 400 14px/1.4 var(--serif);color:var(--soft);margin-top:16px;text-wrap:pretty}
+
+/* Spectrum: one sorted strip, self marked, names under each -- scrolls at 320px rather than squeezing */
+.fam-spec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.fam-spec-h{font:400 15px/1 var(--sans);color:var(--soft)}
+.fam-spec-strip{display:flex;gap:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.fam-spec-c{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;width:60px;text-align:center}
+.fam-spec-c i{display:block;width:44px;height:44px;border-radius:50%;background:var(--c)}
+.fam-spec-c.self i{box-shadow:0 0 0 2px var(--ink),0 0 0 5px var(--ground)}
+.fam-spec-c[data-know="unmet"] i{opacity:.5}
+.fam-spec-c b{font:400 13px/1.15 var(--serif);text-wrap:balance}
+
+/* Compare: self beside its closest relatives -- the nearest is a draggable split, the rest are plain rows */
+.fam-cmp-split{position:relative;height:160px;border-radius:var(--r-2);overflow:hidden;touch-action:none}
+.fam-cmp-half{position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px;background:var(--c)}
+.fam-cmp-half b{font:400 20px/1.1 var(--serif);text-wrap:balance}
+.fam-cmp-a[data-ink="dark"],.fam-cmp-b[data-ink="dark"]{color:#141311}.fam-cmp-a[data-ink="light"],.fam-cmp-b[data-ink="light"]{color:#fff}
+.fam-cmp-b{clip-path:inset(0 0 0 50%)}
+.fam-cmp-handle{position:absolute;top:0;bottom:0;width:40px;transform:translateX(-20px);display:flex;align-items:center;justify-content:center;cursor:ew-resize}
+.fam-cmp-handle i{width:3px;height:36px;border-radius:2px;background:rgba(255,255,255,.9);box-shadow:0 0 0 1px rgba(0,0,0,.3)}
+.fam-cmp-line{font:400 20px/1.3 var(--serif);letter-spacing:-.01em;margin-top:14px;text-wrap:pretty}
+.fam-cmp-open{min-height:44px;padding:0 4px;margin-top:4px;display:inline-flex;align-items:center;gap:6px;font:italic 400 17px/1 var(--serif);color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.fam-cmp-open svg{width:16px;height:16px}
+.fam-cmp-rows{display:flex;flex-direction:column;margin-top:18px}
+.fam-cmp-row{display:flex;align-items:center;gap:12px;width:100%;padding:12px 0;border-top:1px solid var(--rule);text-align:left}
+.fam-cmp-row-sw{display:flex;flex:none}
+.fam-cmp-row-sw i{width:22px;height:22px;border-radius:50%;background:var(--c)}
+.fam-cmp-row-sw i+i{margin-left:-8px;box-shadow:0 0 0 2px var(--ground)}
+.fam-cmp-row-tx{min-width:0}
+.fam-cmp-row-tx b{display:block;font:400 18px/1.15 var(--serif)}
+.fam-cmp-row-tx span{font:400 14px/1.4 var(--sans);color:var(--soft)}
+
+/* Map: a quiet way out to the honeycomb when an inline map isn't worth the weight */
+.fam-map-btn{display:flex;align-items:center;gap:8px;min-height:48px;padding:0 4px;font:400 18px/1 var(--serif);color:var(--ink)}
+.fam-map-btn svg{width:17px;height:17px}
+
 .ar-h3{font:400 22px/1.12 var(--serif);letter-spacing:-.01em;margin:34px 0 4px}
 .ar-rows{display:flex;flex-direction:column}
 .ar-row{display:grid;grid-template-columns:30px 1fr;column-gap:12px;align-items:center;width:100%;text-align:left;padding:12px 0;border-bottom:1px solid var(--rule);min-height:56px}
@@ -126,8 +190,17 @@
 .ar-you-line{font:400 22px/1.22 var(--serif);letter-spacing:-.01em;margin-bottom:16px;text-wrap:pretty}
 .ar-you-line .ar-link{font:inherit}
 
-/* ---------- check yourself ---------- */
-.ar-qs h2{margin-top:50px}
+/* ---------- Test yourself (David, 2026-10-09: "takes too much space and is too cheesy") -- a single quiet
+   disclosure row, collapsed by default, the same open/close mechanics as the inline Contents above ---------- */
+.ar-disc{margin-top:50px;border-top:1px solid var(--rule)}
+.ar-disc-sum{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:14px 2px;text-align:left}
+.ar-disc-l{font:400 18px/1 var(--serif)}
+.ar-disc-c{flex:1;text-align:right;font:400 14px/1 var(--sans);color:var(--soft)}
+.ar-disc-i{width:9px;height:9px;flex:none;border-right:1px solid var(--soft);border-bottom:1px solid var(--soft);transform:rotate(45deg);transition:transform .25s var(--ease)}
+.ar-disc-sum[aria-expanded="true"] .ar-disc-i{transform:rotate(225deg)}
+.ar-disc-body{overflow:hidden}
+.ar-disc-body[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.ar-disc-i{transition:none}}
 .ar-q{padding:18px 0 22px;border-top:1px solid var(--rule)}
 .ar-qt{font:400 22px/1.2 var(--serif);letter-spacing:-.01em;text-wrap:pretty}
 .ar-qc{display:flex;flex-direction:column;gap:8px;margin-top:14px}
@@ -154,10 +227,7 @@
 .ar-ns-k .mono{font-style:normal;font-size:13px}
 .ar-ns-c{font:400 22px/1.25 var(--serif)!important;color:var(--ink)!important;margin:0 0 18px!important;text-wrap:pretty}
 .ar-ns-a{display:inline-flex;align-items:center;min-height:44px;font:italic 400 18px/1 var(--serif);color:var(--ink);text-decoration:underline;text-underline-offset:4px}
-.ar-toc-h{font:italic 400 16px/1 var(--serif)!important;color:var(--soft)!important;margin:0 0 6px!important}
-.ar-toc-row{display:grid;grid-template-columns:28px 1fr;align-items:baseline;width:100%;min-height:52px;padding:14px 0;border-bottom:1px solid var(--rule);text-align:left}
-.ar-toc-row .mono{font-size:13px;color:var(--soft)}
-.ar-toc-row b{font:400 22px/1.12 var(--serif)}
+.ar-ns-sys{display:flex}
 
 /* ---------- hub + which pages ---------- */
 .ar-page{padding-bottom:calc(var(--tabh) + 24px)}

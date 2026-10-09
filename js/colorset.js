@@ -64,6 +64,17 @@ function csOnMap(set) {
   if (from) TL_MAPKEEP = { ...from, t: performance.now() };
   if (typeof hmHome === "function") hmHome(); else go("learn");
 }
+// mapSelect({ title, colors: [hex…] | [{h,n?,share?}…], source }): the one entry point for "show these colors on
+// the map" (David, 2026-10-09 -- Learn's See them on the map, a painting's palette, a set, a Look, a photo
+// palette, a color family…). A selection, not a destination: the real map stays underneath (same corners, same
+// pan/zoom you'd get to otherwise), the given colors light up and everything else dims, the map auto-arranges
+// itself to keep the selection together (js/home.js hmBestArrangeFor) and says so in the chip, and ✕ (or Back)
+// clears it back to the exact view -- including arrangement -- you had before. A thin wrapper over colorSet() +
+// csOnMap() above: same colorSet shape, same honeyHighlight/csOnMap plumbing, nothing duplicated.
+function mapSelect(o = {}) {
+  const colors = (o.colors || []).map(c => typeof c === "string" ? { h: c } : c);
+  return csOnMap(colorSet({ kind: o.source || "set", id: o.id || (colors[0] && colors[0].h) || "", title: o.title || "", colors, src: o.src || "" }));
+}
 // the set's colors, biggest share first, each as its nearest taught color; the first that isn't yours yet
 function csTeachable(set) {
   const near = set.colors.slice().sort((a, b) => (b.share || 0) - (a.share || 0)).map(c => {

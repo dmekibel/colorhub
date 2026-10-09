@@ -13,6 +13,9 @@
    which is right for a deck or a drill, but on a short article (few facets, no connections) it leaves a
    slab of dead ground after the last line (research/DESIGN-AUDIT.md problem #8). */
 .screen.cp-page{min-height:0}
+/* David, 2026-10-09: a faint tint of the page's own color instead of flat black (progressive enhancement --
+   unsupported browsers just keep the plain dark ground; the mix is light enough that text contrast is unaffected) */
+.screen.cp-page{background:color-mix(in srgb, var(--c,transparent) 4%, var(--ground))}
 
 /* ---------- the full-bleed hero ---------- */
 .cp-page .cp-hero{
@@ -32,7 +35,8 @@
    color in home, you should be able to click it to make it full screen with the hex on the bottom left").
    The hero already bleeds to every edge (.cp-page .cp-hero above); at 100dvh its bottom edge lands exactly on
    the viewport's own bottom, so the rest of the page (primary row, strip, shelves…) sits one scroll away. */
-.cp-hero-full{height:calc(100svh - 88px);min-height:520px}
+/* David, 2026-10-09: the lede's first line should peek above the fold -- about half the screen, not nearly all of it */
+.cp-hero-full{height:min(58svh,540px);min-height:420px}
 .cp-close{position:absolute;top:calc(var(--top) + 14px);left:20px;width:36px;height:36px;display:grid;place-items:center;z-index:2;transition:transform .2s var(--spring)}
 .cp-close:active{transform:scale(.88)}
 .cp-close svg{width:24px;height:24px}
@@ -51,6 +55,38 @@
 .cp-primary em{font:italic 400 14px/1 var(--serif);color:var(--paper-soft);font-style:italic;margin-left:2px}
 .cp-primary svg{width:18px;height:18px;margin-left:auto;flex:none}
 .cp-icon{width:44px;height:44px;flex:none}
+
+/* ---------- the cover's compact action row (David, 2026-10-09): Learn it, Pair with…, the heart, all on the
+   color itself -- legible on very light, very dark, grey and vivid covers, never a bright white slab ---------- */
+.rp-actrow{display:flex;align-items:center;gap:8px;margin-top:16px;flex-wrap:wrap}
+.rp-learnpill{display:flex;align-items:center;gap:7px;height:40px;padding:0 16px;border-radius:var(--r-pill);font:500 15px/1 var(--sans);background:rgba(20,19,17,.88);color:#F3F0EA;flex:none}
+[data-ink="light"] .rp-learnpill{background:rgba(20,19,17,.88);color:#F3F0EA}
+[data-ink="dark"] .rp-learnpill{background:rgba(255,255,255,.86);color:#1A1814}
+.rp-learnpill em{font:italic 400 13px/1 var(--serif);opacity:.72;font-style:italic}
+.rp-learnpill-known{opacity:.86}
+.rp-learnpill svg{width:15px;height:15px;flex:none}
+.rp-actrow .sx-pairbtn{margin:0;flex:none}
+.rp-heart{width:40px;height:40px;flex:none;border-radius:50%;background:rgba(20,19,17,.5);color:inherit}
+[data-ink="dark"] .rp-heart{background:rgba(255,255,255,.4)}
+.rp-heart.saved svg{fill:currentColor}
+/* 320px: Learn it + heart keep priority; Pair with becomes the row's third item and may wrap alone */
+@media (max-width:339px){.rp-actrow{row-gap:8px}.rp-learnpill{order:1}.rp-heart{order:2}.sx-pairbtn{order:3;flex-basis:100%}}
+/* the liking moment: the heart fills with the page's own color, anticipation -> impact -> settle */
+.rp-heart.rp-like-go{animation:rpHeartLike .5s var(--spring,ease)}
+@keyframes rpHeartLike{0%{transform:scale(1)}30%{transform:scale(.82)}55%{transform:scale(1.22);background:var(--rp-heart-c);color:#fff}100%{transform:scale(1);background:var(--rp-heart-c);color:#fff}}
+.rp-heart.saved{background:var(--rp-heart-c,rgba(20,19,17,.5))}
+@media (prefers-reduced-motion:reduce){.rp-heart.rp-like-go{animation:none;background:var(--rp-heart-c);color:#fff}}
+/* the def line's tappable neighbor (opens Family's Compare, pinned on it) */
+.rp-def-link{display:inline;color:inherit;font:inherit;text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:currentColor;text-underline-offset:2px;opacity:.95}
+
+/* ---------- the focus view (David, 2026-10-09): tap the cover's bare fill to take the color full screen ---------- */
+.rp-focus{position:fixed;inset:0;z-index:400;background:var(--c);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.06);transform-origin:var(--ox,50%) var(--oy,50%);transition:opacity .4s var(--ease,ease),transform .4s var(--ease,ease)}
+.rp-focus.on{opacity:1;transform:scale(1)}
+.rp-focus.closing{opacity:0}
+.rp-focus-name{font:400 20px/1.2 var(--serif);letter-spacing:-.01em;opacity:.92;transition:opacity .4s ease;padding:0 32px;text-align:center;text-wrap:balance}
+.rp-focus.dim .rp-focus-name{opacity:0}
+.rp-focus[data-ink="dark"]{color:#141311}.rp-focus[data-ink="light"]{color:#fff}
+@media (prefers-reduced-motion:reduce){.rp-focus{transform:none;transition:opacity .22s ease}.rp-focus.on{transform:none}.rp-focus-name{transition:opacity .22s ease}}
 
 /* ---------- the look-alike strip: no label, the diff line right under it ---------- */
 .cp-strip-sec{margin-top:26px}
@@ -336,16 +372,17 @@
 .rp-hc-map{display:block;margin:12px auto 0;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--cp-rule,var(--rule));background:none;color:var(--ink);font:inherit;font-size:14px;cursor:pointer}
 .rc-pal-note{display:flex;align-items:center;gap:10px}
 
-/* ---------- the color header (IMPROVE-2026-10-08 color-page #4): pinned when the cover scrolls away ---------- */
-.rp-bar{position:fixed;top:0;left:50%;z-index:30;width:min(100%,540px);transform:translate(-50%,-110%);transition:transform .32s var(--ease);background:var(--c);padding:calc(var(--top) + 6px) var(--g) 8px;display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;column-gap:10px;row-gap:6px;pointer-events:none}
-.rp-bar-back{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14)}.rp-bar-back svg{width:22px;height:22px}
+/* ---------- the color header (David, 2026-10-09: "too big -- harder to read the article"): one slim row,
+   back + name + small text tabs, about 56pt below the status bar, not two stacked rows ---------- */
+.rp-bar{position:fixed;top:0;left:50%;z-index:30;width:min(100%,540px);transform:translate(-50%,-110%);transition:transform .32s var(--ease);background:var(--c);padding:calc(var(--top) + 4px) var(--g) 6px;display:flex;align-items:center;column-gap:10px;pointer-events:none}
+.rp-bar-back{width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14)}.rp-bar-back svg{width:17px;height:17px}
 .rp-bar.on{transform:translate(-50%,0);pointer-events:auto}
 .rp-bar-hair{box-shadow:0 1px 0 rgba(255,255,255,.1)}
 .rp-bar[data-ink="dark"]{color:#141311}.rp-bar[data-ink="light"]{color:#fff}
-.rp-bar-name{align-self:center;min-height:36px;padding:0;background:none;border:0;color:inherit;font:400 25px/1.1 var(--serif);letter-spacing:-.01em;text-align:left;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rp-bar-chips{grid-column:1/-1;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.rp-bar-name{flex:none;min-height:30px;padding:0;background:none;border:0;color:inherit;font:400 17px/1.1 var(--serif);letter-spacing:-.01em;text-align:left;max-width:34%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rp-bar-chips{flex:1;display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;justify-content:flex-end}
 .rp-bar-chips::-webkit-scrollbar{display:none}
-.rp-bar-chips button{flex:none;min-height:34px;padding:0 14px;border-radius:999px;background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14);font:400 15px/1 var(--serif)}
+.rp-bar-chips button{flex:none;min-height:30px;padding:0 2px;background:none;border:0;color:inherit;opacity:.75;font:400 14px/1 var(--sans)}
 .rp-bar-chips button[hidden]{display:none}
 .cp-page .cp-close{z-index:31}
 @media (prefers-reduced-motion:reduce){.rp-bar{transition:none}}
@@ -381,3 +418,35 @@
 .cp-hero{touch-action:manipulation}
 .cp-hero .rp-like{z-index:2;filter:drop-shadow(0 6px 18px rgba(0,0,0,.3))}
 .cp-hero .rp-like.off{animation-duration:.6s;opacity:.8}
+
+/* ---------- Paintings, first class (David, 2026-10-09: "one of the most important sections... hidden at the
+   bottom in Field notes"): the lead painting as a museum label, then the gallery strip (js/paintingsof.js,
+   unchanged), the painter, the decade line, remaining archive findings as plain one-liners ---------- */
+.rp-paint{margin-top:38px}
+.rp-paint h2{font:400 30px/1.1 var(--serif);letter-spacing:-.01em;margin-bottom:10px}
+.rp-paint-lead:empty{display:none}
+.rp-findings-box:empty,.rp-findings-box:has(.rp-findings:empty){display:none}
+.rp-findings-h{font:400 18px/1.2 var(--serif);color:var(--soft);margin:26px 0 8px}
+.rp-findings{display:flex;flex-direction:column}
+.rp-findings li{list-style:none;border-top:1px solid var(--cp-rule)}
+.rp-findings li button{display:block;width:100%;padding:12px 0;text-align:left;font:400 17px/1.4 var(--serif);text-wrap:pretty}
+.rp-findings li button b{font-weight:500;color:var(--ink)}
+.rp-paint [data-rp-painters] .rc-sec,.rp-paint [data-rp-whenwhere] .rc-sec{margin-top:26px}
+.rp-paint [data-rp-painters]:empty,.rp-paint [data-rp-whenwhere]:empty{display:none}
+.rp-paint .c-poems:empty,.rp-paint [data-world-in]:empty{display:none}
+
+/* ---------- the ID card: facts, codes and sources in one specimen card ---------- */
+.rp-idcard{margin-top:38px}
+.rp-idcard h2{font:400 30px/1.1 var(--serif);letter-spacing:-.01em;margin-bottom:12px}
+.rp-id-swatch{width:100%;height:84px;border-radius:var(--r-2);background:var(--c,var(--surface-2));margin-bottom:4px}
+.rp-id-facts:empty{display:none;margin:0}
+.rc-passport{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.rc-stamp{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:7px 12px;border-radius:999px;background:var(--surface-2);border:1px solid var(--cp-rule)}
+.rc-stamp b{font:400 14px/1 var(--serif)}.rc-stamp em{font-style:normal;font-size:11px;color:var(--soft)}
+
+/* ---------- "Next: <relative>" -- a tap or a horizontal swipe walks the family ---------- */
+.rp-next-rel{margin-top:30px}
+.rp-next-btn{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:14px 0;border-top:1px solid var(--cp-rule);text-align:left}
+.rp-next-btn span{font:400 14px/1 var(--sans);color:var(--soft)}
+.rp-next-btn b{flex:1;font:400 20px/1.2 var(--serif);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rp-next-btn svg{flex:none;width:18px;height:18px;opacity:.7}
