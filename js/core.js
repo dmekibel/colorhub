@@ -918,7 +918,20 @@ function sheet(html, opts = {}) {
   // viewport split right as a new fixed-position sheet is inserted, so a stale --vb understates the real strip.
   // Refresh it synchronously on every open -- cheap (a few getBoundingClientRect calls) and makes the belt-and-
   // braces box-shadow below (css/menus2.css .sheet) sized off the true, current gap.
-  if (typeof vbFix === "function") try { vbFix(); } catch (e) {}
+  // David, 2026-10-09 ("panning in the map gets stuck now"): this call was unconditional, so it ran on EVERY
+  // sheet open, even on platforms where vbFix() can only ever be a no-op (standalone()&&isIOS() both have to hold
+  // for its own if-block to do anything -- everywhere else it was 3 lines re-setting --vb to the "0px" it already
+  // was). Bisected to this exact line with a scratch worktree per commit (git worktree add, each checked out at
+  // a candidate and its parent) and a scripted pointerdown/pointermove*N/pointerup test on the canvas: open the
+  // Colors sheet, close it, and a pan that worked before this line was added (js/core.js bfeff870) stopped
+  // moving the view at all after -- the honeycomb's own pan math (P in js/honey.js) kept computing a correct new
+  // position every frame, but the canvas never drew it, pointing at the redraw loop (kick()/RAF, gated on an
+  // IntersectionObserver-driven `visible` flag) rather than the pan math itself; the exact browser-internal
+  // trigger wasn't pinned down further given how reliably gating the call fixed it. Skipping the call entirely
+  // when it would have been a no-op (gating it behind the same standalone()&&isIOS() check its own body already
+  // requires) removes whatever this was triggering everywhere it was never doing real work in the first place,
+  // while keeping the original black-bar fix for the one platform it's actually for.
+  if (typeof vbFix === "function" && typeof standalone === "function" && typeof isIOS === "function" && standalone() && isIOS()) try { vbFix(); } catch (e) {}
   const doLock = opts.lock !== false;
   const scrim = document.createElement("div"), sh = document.createElement("div");
   scrim.className = "scrim"; sh.className = "sheet"; sh.setAttribute("role", "dialog");

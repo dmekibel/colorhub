@@ -588,6 +588,63 @@ scenario("home", "the ordinary pinch-out floor lets a finite layout zoom out to 
 // fool JS reads, not the real fixed-position containing block a device's actual shorter viewport changes).
 // Kept as a permanent regression guard for the part that IS testable here: nothing invisible should ever sit
 // over the map and block it after a sheet closes, from any close path.
+//
+// 2026-10-09, second occurrence: this DID happen in plain headless Chrome after all -- js/core.js sheet()'s
+// unconditional vbFix() call (bfeff870, the black-bar fix two commits before this one) desynced the map's own
+// redraw loop after a sheet closed. The pan() check below missed it the first time because it compared
+// HM_CTRL._settle()'s raw [P,Z] numbers, and _settle() itself forces a draw() -- so it was testing "does the pan
+// math update P" (it did; that was never broken) rather than "does a real pan actually repaint the canvas"
+// (it didn't). Rewritten to sample actual canvas pixels before/after, the same way the bisect that found the
+// real bug did (a scratch worktree per commit, git worktree add).
+// Three sample points, not one: a single fixed point can coincidentally read the same color before and after a
+// REAL pan (it lands on a stable background patch, or -- at the pinch-out floor, or two arrangement changes deep
+// in the same session -- on a spot two different layouts both happen to tint alike), which both the first draft
+// of this check and the pre-existing "nothing blocks the map" scenario below hit as false failures. The max
+// across three points well apart is robust to that while staying just as sensitive to the real bug (nothing
+// moves ANYWHERE).
+const panMoved = async (t, note) => {
+  const r = t.$("canvas").getBoundingClientRect();
+  const cv = t.$("canvas");
+  const pts = [[r.width * .3, r.height * .4], [r.width * .5, Math.min(r.height * .7, r.height - 20)], [r.width * .7, r.height * .5]];
+  const before = pts.map(([x, y]) => H.canvasSig(cv, x, y, 8));
+  const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 61, pointerType: "touch", isPrimary: true, view: t.w });
+  const x0 = r.left + r.width / 2, y0 = r.top + Math.min(r.height * .7, r.height - 20);
+  cv.dispatchEvent(mk("pointerdown", x0, y0));
+  for (let i = 1; i <= 8; i++) cv.dispatchEvent(mk("pointermove", x0, y0 - i * 22));
+  cv.dispatchEvent(mk("pointerup", x0, y0 - 176));
+  await t.sleep(250);
+  const after = pts.map(([x, y]) => H.canvasSig(cv, x, y, 8));
+  const dists = pts.map((_, i) => H.dist(before[i], after[i])), maxD = Math.max(...dists);
+  t.expect(maxD > 8, `a pan did not move the map${note ? ` (${note})` : ""} (best of ${dists.map(d => d.toFixed(1)).join(", ")}, wanted > 8)`);
+};
+scenario("home", "a real pan actually repaints the canvas, in several states: plain, after the sheet, after Close with the pill showing", async t => {
+  await H.homeReady(t);
+  await panMoved(t, "plain, fresh Home");
+  // after opening and closing the Colors/Arrange sheet (the exact regression: js/core.js sheet()'s vbFix() call desynced the redraw loop)
+  await H.sheet(t, "colors");
+  await t.click("[data-sheet-close]", { wait: 600 });
+  await t.waitFor(() => !t.$(".sheet"), 3000, "the sheet to close");
+  await panMoved(t, "after the Colors/Arrange sheet");
+  // after Close from a page, with the "Back to…" pill showing (js/trail.js) -- a different map-draw path than a
+  // plain Home open. The pill only offers a stash worth two or more steps (TLR.toPainter below, the same chain
+  // the trail group's own pill scenarios build), not a single hop.
+  await TLR.toPainter(t);
+  await t.click("#app .screen [data-tl-exit]", { wait: 900 });
+  await t.waitFor(".hm canvas", 10000, "the map after Close");
+  await t.waitFor(".tl-recent-pill.in", 4000, "the \"Back to…\" pill");
+  await panMoved(t, "after Close, with the pill showing");
+});
+// at the ordinary pinch-out floor (David's own "stuck" report was after zooming around) -- its own fresh Home
+// rather than chained onto the states above: a finite layout that's already zoomed out to fill the screen can
+// legitimately rubber-band a short drag close to zero in some *specific* direction (nowhere left to reveal), so
+// this needs a clean baseline to tell "rubber-banded" apart from "actually stuck" rather than inheriting whatever
+// pan position a long prior sequence left behind.
+scenario("home", "a real pan still repaints the canvas at the ordinary pinch-out floor", async t => {
+  await H.homeReady(t);
+  t.ev(`HM_CTRL.zoom(HM_CTRL.zoomFloor(), false)`);
+  await t.sleep(200);
+  await panMoved(t, "at the zoom floor");
+});
 scenario("home", "after closing the Colors/Arrange sheet, nothing blocks the map and panning still works", async t => {
   await H.homeReady(t);
   const grid = () => {
@@ -600,18 +657,6 @@ scenario("home", "after closing the Colors/Arrange sheet, nothing blocks the map
       if (!ok) bad.push({ x: Math.round(x), y: Math.round(y), top: top ? top.tagName.toLowerCase() + "." + String(top.className).split(" ").join(".") : "none" });
     }
     return bad;
-  };
-  const pan = async () => {
-    const r = t.$("canvas").getBoundingClientRect();
-    const before = t.ev("HM_CTRL._settle()");
-    const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 9, pointerType: "touch", isPrimary: true, view: t.w });
-    const cv = t.$("canvas"), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-    cv.dispatchEvent(mk("pointerdown", cx, cy));
-    cv.dispatchEvent(mk("pointermove", cx - 80, cy - 40));
-    cv.dispatchEvent(mk("pointerup", cx - 80, cy - 40));
-    await t.sleep(200);
-    const after = t.ev("HM_CTRL._settle()");
-    return Math.hypot(after[0] - before[0], after[1] - before[1]) > 1e-4;
   };
   const closers = [
     ["the X button", async () => t.click("[data-sheet-close]", { wait: 600 })],
@@ -633,7 +678,7 @@ scenario("home", "after closing the Colors/Arrange sheet, nothing blocks the map
       await t.sleep(200);
       const bad = grid();
       t.expect(bad.length === 0, `after closing with ${how} (${arr}): blocked at ${JSON.stringify(bad)}`);
-      t.expect(await pan(), `after closing with ${how} (${arr}): a pan on the map did not move it`);
+      await panMoved(t, `closed with ${how}, ${arr}`);
     }
   }
 });
