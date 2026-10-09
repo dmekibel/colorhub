@@ -753,9 +753,9 @@ function paintingPage(n) {
   const el = show(`
     ${artTop(n)}
     ${n.img ? `<div class="ptg"><img id="pimg" src="${esc(n.img)}" alt="${esc(n.title)} by ${esc(n.artist)}"><canvas id="pmask"></canvas></div>` : ""}
-    <p class="eyebrow p-type">Painting · ${esc(n.year || "")}</p>
+    <p class="eyebrow p-type">${esc(n.typeLabel || "Painting")}${n.year ? " · " + esc(n.year) : ""}</p>
     <h1 class="p-title">${esc(n.title)}</h1>
-    <p class="p-dek">${esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
+    <p class="p-dek">${n.photographerSlug ? `<button class="aw-link" data-photographer="${esc(n.photographerSlug)}">${esc(n.artist || "")}</button>` : esc(n.artist || "")}${n.place ? ` · ${esc(n.place)}` : ""}</p>
     ${pal.length ? `<div class="palette">${pal.map((p, i) => `<button class="pal" data-pi="${i}" data-swatch="${p.h}" style="--c:${p.h};flex:${Math.max(p.share, .08)}" data-ink="${ink(p.h)}"><span>${Math.round(p.share * 100)}%</span></button>`).join("")}</div>
       <div class="pal-names">${pal.map((p, i) => { const fam = typeof familyOf === "function" && familyOf(p.h); return `<button class="pal-name" data-pi="${i}" data-swatch="${p.h}"><i style="--c:${p.h}"></i><b>${esc(p.name)}</b>${fam ? `<span>${esc(fam.head.n)} family</span>` : ""}<em class="mono">${p.h}</em></button>`; }).join("")}</div>
       <p class="fine">Tap a swatch to open its page.</p>${typeof prLearnBtn === "function" ? prLearnBtn(".palette", n.title) : ""}` : `<p class="fine">This painting's palette is being extracted.</p>`}
@@ -764,6 +764,8 @@ function paintingPage(n) {
     ${n.commons ? `<section class="srcs"><h3>Image</h3><ul><li><a href="${esc(n.commons)}" target="_blank" rel="noopener">${esc(n.imgSrcLabel || "Wikimedia Commons")}</a> · ${esc(n.license || "Public domain")}</li></ul></section>` : ""}
   `, "article");
   wireArticle(el, n);
+  // Phase 2 (js/photography.js): a photograph's byline opens its photographer's page, same pattern as a painter link
+  const phLink = el.querySelector("[data-photographer]"); if (phLink) phLink.onclick = e => { e.stopPropagation(); if (typeof photographerPage === "function") photographerPage(phLink.dataset.photographer); };
   // L18 H4: the ColorSet verbs for this painting, "On the map" first (js/home.js hmPaintingSet, js/colorset.js csActions)
   if (pal.length && typeof hmPaintingSet === "function" && typeof csActions === "function") { const fine = el.querySelector(".pal-names + .fine"); if (fine) fine.after(csActions(hmPaintingSet(n), { only: ["map", "learn", "play"], back: () => paintingPage(n) })); }
   // highlight where a palette color sits, using the index map
