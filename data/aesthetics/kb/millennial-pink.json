@@ -24,5 +24,15 @@
  "revivals": [],
  "article": "",
  "wiki_facts": {},
- "sources": []
+ "sources": [],
+ "measured": {
+  "n_images": 3,
+  "n_candidates": 3,
+  "findings": [
+   "light — about 44% of the measured color is pale or near-white",
+   "mostly muted — about 84% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
 }

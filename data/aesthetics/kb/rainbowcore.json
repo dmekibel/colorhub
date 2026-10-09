@@ -1,0 +1,40 @@
+{
+ "id": "rainbowcore",
+ "name": "Rainbowcore",
+ "lineage": {
+  "influenced_by": [
+   "kidcore",
+   "clowncore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2019–present"
+ ],
+ "places": [],
+ "garments": [
+  "color-blocked knitwear",
+  "rainbow sequins"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Rainbowcore"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 64% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

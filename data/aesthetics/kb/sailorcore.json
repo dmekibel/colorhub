@@ -1,0 +1,41 @@
+{
+ "id": "sailorcore",
+ "name": "Sailorcore",
+ "lineage": {
+  "influenced_by": [
+   "coastal-grandmother",
+   "old-money"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020s"
+ ],
+ "places": [],
+ "garments": [
+  "Breton stripes",
+  "brass buttons",
+  "rope trim"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Sailorcore"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 62% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

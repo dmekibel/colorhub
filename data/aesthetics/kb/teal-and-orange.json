@@ -28,5 +28,14 @@
  "revivals": [],
  "article": "",
  "wiki_facts": {},
- "sources": []
+ "sources": [],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 50% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
 }

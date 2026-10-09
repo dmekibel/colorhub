@@ -1,0 +1,41 @@
+{
+ "id": "avant-garde",
+ "name": "Avant-Garde",
+ "lineage": {
+  "influenced_by": [
+   "postmodern"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "recurring, named from 19th c. military term"
+ ],
+ "places": [],
+ "garments": [
+  "asymmetric tailoring",
+  "raw and unfinished seams",
+  "monochrome"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Avant-Garde"
+  }
+ ],
+ "measured": {
+  "n_images": 3,
+  "n_candidates": 3,
+  "findings": [
+   "light — about 56% of the measured color is pale or near-white",
+   "mostly muted — about 85% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

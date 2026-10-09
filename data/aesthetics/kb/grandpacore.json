@@ -1,0 +1,42 @@
+{
+ "id": "grandpacore",
+ "name": "Grandpacore",
+ "lineage": {
+  "influenced_by": [
+   "grandmillennial",
+   "cabincore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020s"
+ ],
+ "places": [],
+ "garments": [
+  "corduroy",
+  "cardigan knitwear",
+  "tweed caps"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Grandpacore"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "dark — about 43% of the measured color across 5 Commons photos is below mid-lightness",
+   "mostly muted — about 84% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

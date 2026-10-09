@@ -1,0 +1,41 @@
+{
+ "id": "farmcore",
+ "name": "Farmcore",
+ "lineage": {
+  "influenced_by": [
+   "cottagecore",
+   "americana"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020s"
+ ],
+ "places": [],
+ "garments": [
+  "denim overalls",
+  "plaid flannel",
+  "straw"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Farmcore"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 71% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

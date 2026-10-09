@@ -1,0 +1,41 @@
+{
+ "id": "lighthousecore",
+ "name": "Lighthousecore",
+ "lineage": {
+  "influenced_by": [
+   "sailorcore",
+   "fisherman-aesthetic"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020s"
+ ],
+ "places": [],
+ "garments": [
+  "painted stone",
+  "cast iron",
+  "glass lens"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Lighthousecore"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 54% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}
