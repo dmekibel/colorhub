@@ -606,7 +606,9 @@ function hmHome() {
           ${typeof ssOpen === "function" ? `<button class="iconq" data-slideshow aria-label="Slideshow">${ICON.play}</button>` : ""}`;
       body = `${head(colorsActs)}${colorsPane}${arrangePane}`;
     }
-    const { sh, close } = sheet(`<div class="cx-sh hm-chooser" data-which="colors-arrange" data-tab="${tab}">${body}</div>`);
+    // David, 2026-10-09: "pressing Arrange brings the black bar back" -- non-modal (below), so it never locks
+    // body scroll either (js/core.js sheet()'s own {lock:false}); see that function's comment for why.
+    const { sh, close } = sheet(`<div class="cx-sh hm-chooser" data-which="colors-arrange" data-tab="${tab}">${body}</div>`, { lock: false });
     sh.classList.add("cx-sheet", "hm-sheet-panel", "hm-sheet-colors-arrange", tab === "arrange" ? "hm-sheet-arrange" : "hm-sheet-colors");
     // David, 2026-10-09 (both tasks together): "tapping the top half instantly closes Arrange... I need to pan
     // and zoom the map while choosing" + "combine Colors and Arrange into one menu with a tab." Non-modal in

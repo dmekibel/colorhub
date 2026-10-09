@@ -112,6 +112,30 @@ scenario("home", "a pending placement hint reappears on a later Home open, and a
   t.expect(!t.$(".lr-maphint"), "the hint is still in the DOM after being dismissed");
 });
 
+// David, 2026-10-09: "I want to see all the color names, even when tiny... as long as it's legible." A label's
+// own real font size (honeyWrap's cached per-name ratio times the cell's current diameter) now gates whether it
+// draws at all -- not the cell's raw diameter or a style's own labelMin tuning, which could hide a label that
+// would read fine or show one that wouldn't ("no half-legible labels"). Verified with a zoomed screenshot of
+// the smallest labels this draws (Petrol, Hunter green, Steel blue, all crisp at 440x956); this just locks the
+// numeric floor in so it can't quietly regress.
+scenario("home", "every cell shows its name when legible, never smaller than the verified floor", async t => {
+  const cv = await H.homeReady(t);
+  const stat = t.ev("HM_CTRL._labelFsStat()");
+  t.expect(stat.n > 20, `too few labels drawn to judge (${stat.n})`);
+  t.expect(stat.min >= stat.floor, `a label drew at ${stat.min}px, under the ${stat.floor}px legibility floor`);
+  t.notes.push(`${stat.n} labels, ${stat.min}-${stat.max}px (floor ${stat.floor}px)`);
+  // zoomed out, Honeycomb look, the largest set: still never under the floor, and the mosaic's own tiny cells
+  // (honeyCells' cheap hex path) correctly carry NO label at all rather than a smudge
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.style = "honeycomb"; hmHome();');
+  await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
+  const floor = t.ev("HM_CTRL.zoomFloor()");
+  t.ev(`HM_CTRL.zoom(${floor}, false)`);
+  await t.sleep(300);
+  const stat2 = t.ev("HM_CTRL._labelFsStat()");
+  if (stat2.n > 0) t.expect(stat2.min >= stat2.floor, `zoomed out: a label drew at ${stat2.min}px, under the ${stat2.floor}px floor`);
+  t.notes.push(`zoomed out: ${stat2.n} labels, min ${stat2.min}px`);
+});
+
 scenario("home", "a far bubble glides to the middle, it does not open", async t => {
   const cv = await H.homeReady(t);
   const r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
@@ -358,6 +382,11 @@ scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close 
   await H.homeReady(t);
   await H.sheet(t, "arrange");
   t.expect(t.$(".sheet.hm-sheet-arrange"), "the Arrange sheet did not open");
+  // David, 2026-10-09: "pressing Arrange brings the black bar back at the bottom" -- a non-modal sheet (this
+  // one: the map keeps panning and zooming underneath it) never locks body scroll either now (js/core.js
+  // sheet()'s own {lock:false}, js/home.js chooser) -- html.sheet-open (app.css: body{position:fixed}) toggling
+  // right as the sheet opens was a real candidate for the black bar's own trigger on an iOS Home Screen app.
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "the non-modal Arrange sheet locked body scroll anyway");
   const cv = t.$("canvas"), r = cv.getBoundingClientRect();
   const tapX = r.left + r.width / 2, tapY = r.top + 60;   // the top of the map, above the sheet
   const mk = (type, x, y, id = 1) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: true, view: t.w });
@@ -374,6 +403,12 @@ scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close 
   cv.dispatchEvent(mk("pointerdown", tapX, tapY)); cv.dispatchEvent(mk("pointerup", tapX, tapY));
   await t.sleep(400);
   t.expect(!t.$(".sheet.hm-sheet-arrange"), "a double-tap on the map did not close Arrange");
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "sheet-open was left on after Arrange closed");
+  // the opt-out itself, not just this one caller: an ordinary (modal) sheet with no {lock:false} still locks
+  t.ev('(() => { const { close } = sheet("<p>t</p>"); window.__lockedOk = document.documentElement.classList.contains("sheet-open"); close(); })()');
+  await t.sleep(500);
+  t.expect(t.ev("window.__lockedOk"), "sheet()'s default (modal) case stopped locking scroll");
+  t.expect(!t.d.documentElement.classList.contains("sheet-open"), "sheet-open was left on after the modal test sheet closed");
 });
 
 scenario("home", "Arrange's fit mode frames the whole layout above the sheet, for every arrangement", async t => {
@@ -402,11 +437,22 @@ scenario("home", "Arrange's fit mode frames the whole layout above the sheet, fo
     // David, 2026-10-09: "the original view is now too far away" -- a loose "somewhere in the neighborhood" pad
     // (above) isn't enough to catch a disk floating small in empty space, so also require it to actually fill
     // the space above the sheet, on the axis its own shape is actually constrained by (a tall arrangement like
-    // the default map/hue fills by height, not width; a round one like Sunflower fills by both) -- at least 85%
-    // of the ~16px-margin-adjusted space on whichever axis is tighter.
+    // the default map/hue fills by height, not width; a round one like Sunflower fills by both) -- at least 80%
+    // of the ~16px-margin-adjusted space on whichever axis is tighter. (David's next report, on his own default
+    // Spiral/Sunflower + Honeycomb: the fit was OVERFLOWING the available space by ~14%, because boundsFit()
+    // checked each lattice point's own position but never its DRAWN RADIUS -- fixed by accounting for each
+    // point's real diameter at the candidate zoom, same as buildFlatDrawn's own round branch computes it. That
+    // fix is correctly more conservative for a round arrangement than the diagonal-only approximation it
+    // replaced, landing at ~83-85% instead of exactly 85%+ -- a deliberate, small trade of fill % for the
+    // overflow this is actually guarding against; 80% still confirms it isn't floating small the way the
+    // original bug did.)
     const bw = b.maxX - b.minX, bh = b.maxY - b.minY, availW = b.W - 32, availH = sheetTop - 32;
     const fill = Math.max(bw / availW, bh / availH);
-    t.expect(fill >= .85, `${why}: the fitted layout only fills ${(fill * 100).toFixed(0)}% of the space above the sheet on its own constrained axis (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
+    t.expect(fill >= .8, `${why}: the fitted layout only fills ${(fill * 100).toFixed(0)}% of the space above the sheet on its own constrained axis (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
+    // the overflow bug itself (David: "the preview still zooms out too far" turned out to mean the OPPOSITE --
+    // it was actually overflowing the available space by ~14%, from a point's own drawn radius never being
+    // subtracted): never past ~103% on either axis (a sliver of slack for sub-pixel rounding, not real overflow)
+    t.expect(bw <= availW * 1.03 && bh <= availH * 1.03, `${why}: the fitted layout overflows the space above the sheet (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
     t.notes.push(`${why}: sheetTop=${sheetTop.toFixed(0)} bounds=[${b.minX.toFixed(0)},${b.minY.toFixed(0)}..${b.maxX.toFixed(0)},${b.maxY.toFixed(0)}] fill=${(fill * 100).toFixed(0)}%`);
   };
   await within("map/hue (default)");
@@ -2525,6 +2571,45 @@ scenario("map", "the per-cell seam stroke doesn't slow a continuous pan+pinch on
   t.expect(log.length > 10, "too few frames captured to judge");
   t.expect(mean < 60 && p95 < 80, `frame time regressed badly: mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms over ${log.length} frames`);
   t.notes.push(`${log.length} frames, mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms`);
+});
+// David, 2026-10-09: "zoomed-out view of honeycomb spiral looks like circles" -- honeyCells()'s own tiny-bubble
+// shortcut (under 7px, too many to afford the real per-neighbor polygon clip) used to always fall back to a
+// plain circle, even in Honeycomb look. It now hands tiny bubbles a cheap fixed regular hexagon instead, so the
+// mosaic still reads as tiled at low zoom; Bubbles look is untouched (still plain circles, on purpose).
+scenario("map", "Honeycomb look stays tiled at low zoom (not circles); Bubbles stays circles", async t => {
+  await H.homeReady(t);
+  // Deep zoomed out (_qaForceZoom: a QA-only bypass of the ordinary zoom(z) clamp -- js/honey.js's own pinch-out
+  // floor, raised earlier this chapter so "the whole layout fits", means a RESTING zoom rarely pushes a dense
+  // set's cells under the tiny-bubble (7px) threshold this fix is about; a real pinch gesture still can for a
+  // moment, via the elastic rubber-band overshoot before it springs back -- this parks there directly instead
+  // of timing a synthetic gesture just right).
+  t.ev('S.hm.src = "every-name"; S.hm.filter = "all"; S.hm.arr = "spiral"; S.hm.style = "honeycomb"; hmHome();');
+  await t.waitFor(() => H.num(t.text(".hm-title small")) > 500, 10000, "every name to fill");
+  t.ev("HM_CTRL._qaForceZoom(0.08)");
+  await t.sleep(200);
+  const honeyStat = t.ev("HM_CTRL._tinyPolyStat()");
+  t.expect(honeyStat.tiny > 20, `too few tiny cells to judge at this zoom (${honeyStat.tiny})`);
+  t.expect(honeyStat.poly === honeyStat.tiny, `Honeycomb: only ${honeyStat.poly}/${honeyStat.tiny} tiny cells are tiled (the rest fell back to circles)`);
+  t.notes.push(`Honeycomb: ${honeyStat.poly}/${honeyStat.tiny} tiny cells tiled, ${honeyStat.total} drawn`);
+  // Bubbles: the same tiny bubbles should still be plain circles (no regression the other way)
+  t.ev('S.hm.style = "current"; hmHome();');
+  await t.sleep(300);
+  t.ev("HM_CTRL._qaForceZoom(0.08)");
+  await t.sleep(200);
+  const bubbleStat = t.ev("HM_CTRL._tinyPolyStat()");
+  t.expect(bubbleStat.tiny > 20, `too few tiny cells to judge at this zoom (${bubbleStat.tiny})`);
+  t.expect(bubbleStat.poly === 0, `Bubbles: ${bubbleStat.poly}/${bubbleStat.tiny} tiny cells are tiled (should be plain circles)`);
+  // frame time, Honeycomb look, the largest set, at the REAL (clamped) pinch-out floor -- not the forced probe
+  // zoom above, which is further out than a resting view ever reaches: the tiled mosaic should cost about what
+  // the Bubbles circles already cost (both measured just above/below), well inside a 16ms budget with headroom
+  t.ev('S.hm.style = "honeycomb"; hmHome();');
+  await t.sleep(300);
+  const floor = t.ev("HM_CTRL.zoomFloor()");
+  t.ev(`HM_CTRL.zoom(${floor}, false)`);
+  await t.sleep(200);
+  const ms = t.ev(`(() => { let best = Infinity; for (let i = 0; i < 20; i++) { const t0 = performance.now(); HM_CTRL.zoom(${floor} + i * 0.0001, false); best = Math.min(best, performance.now() - t0); } return best; })()`);
+  t.expect(ms < 16, `a draw at Honeycomb's lowest (resting) zoom took ${ms.toFixed(1)}ms, wanted <16ms (no CPU throttle here, so real headroom matters)`);
+  t.notes.push(`Honeycomb @ floor zoom ${floor.toFixed(2)}, every name: best draw ${ms.toFixed(1)}ms`);
 });
 scenario("map", "the map keeps its pan and zoom when you open a color and come back", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();
