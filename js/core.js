@@ -899,13 +899,21 @@ function unlockScroll() {
   if (!LOCKS || --LOCKS) return;
   document.documentElement.classList.remove("sheet-open"); document.body.style.top = ""; scrollTo(0, LOCK_Y);
 }
-function sheet(html) {
+// opts.lock (default true): a MODAL sheet locks body scroll while it's open (the ordinary case: the page behind
+// it isn't meant to be touched). David, 2026-10-09 (the black bar coming back on pressing Arrange): the Colors/
+// Arrange sheet is deliberately NON-modal (js/home.js chooser -- the scrim is pointer-events:none so the map
+// keeps panning and zooming underneath it), so locking scroll for it was never semantically right in the first
+// place, and on an iOS Home Screen app, toggling html.sheet-open's body{position:fixed} (app.css) right as the
+// sheet opens can itself be the trigger for Safari's own layout-vs-visual-viewport recompute that uncovers the
+// real background for a moment. Pass {lock:false} for a non-modal sheet; it never locks or unlocks scroll at all.
+function sheet(html, opts = {}) {
+  const doLock = opts.lock !== false;
   const scrim = document.createElement("div"), sh = document.createElement("div");
   scrim.className = "scrim"; sh.className = "sheet"; sh.setAttribute("role", "dialog");
   sh.innerHTML = `<div class="grab"></div>${html}`;
   let gone = false;
   const close = () => {
-    if (gone) return; gone = true; unlockScroll(); cornersBack(); if (sh._esc) removeEventListener("keydown", sh._esc, true);
+    if (gone) return; gone = true; if (doLock) unlockScroll(); cornersBack(); if (sh._esc) removeEventListener("keydown", sh._esc, true);
     if (reduceMotion) { scrim.remove(); sh.remove(); return; }
     scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" }).onfinish = () => scrim.remove();
     sh.animate([{ transform: getComputedStyle(sh).transform === "none" ? "none" : getComputedStyle(sh).transform }, { transform: "translateY(105%)" }], { duration: 240, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => sh.remove();
@@ -948,7 +956,7 @@ function sheet(html) {
   sh.addEventListener("pointerdown", e => { if (e.pointerType === "mouse") start(e.clientX, e.clientY, e.target); });
   sh.addEventListener("pointermove", e => { if (e.pointerType === "mouse") move(e.clientX, e.clientY, null); });
   sh.addEventListener("pointerup", e => { if (e.pointerType === "mouse") end(); });
-  lockScroll();
+  if (doLock) lockScroll();
   // the menu family (css/menus2.css): a modal for assistive tech, Escape closes, focus comes back where it was
   const back = document.activeElement, esc0 = e => { if (e.key === "Escape" && sh.isConnected && !gone) { e.stopPropagation(); close(); } };
   sh.setAttribute("aria-modal", "true"); sh.tabIndex = -1;
