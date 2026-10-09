@@ -451,7 +451,7 @@ def analyze_painting(x, pool_named, core_meta, pool_fallback):
         i0, i1 = top2
         if abs(L[i0] - L[i1]) <= 3 and (s[i0] + s[i1]) >= 0.3:
             local_findings.append(f"{names_str[i0]} and {names_str[i1]} sit at nearly the same lightness "
-                                  f"(together {round((s[i0] + s[i1]) * 100):.0f}% of the canvas) -- a likely "
+                                  f"(together {round((s[i0] + s[i1]) * 100):.0f}% of the canvas) — a likely "
                                   f"source of glow or flatness.")
     if pigment_hint:
         local_findings.append(f"{pigment_name} is consistent with pigments available from the "

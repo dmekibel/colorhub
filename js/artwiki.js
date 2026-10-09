@@ -513,15 +513,17 @@ function awContext(host, i, d) {
     });
   }).catch(() => { if (host.isConnected) host.innerHTML = ""; });
 }
+// This card only ever sits behind the painting page's "Findings" > "More" fold now (js/gallery.js glPage, David's
+// polish pass, 2026-10-09: "Findings" and "Analysis" read as two data sections back to back) — the strongest
+// 2-3 lines (the role crops, "In context") already lead outside the fold, so this never repeats them with its
+// own header or its own "Findings" details; it's the deeper measurements and the painter/era links.
 function awAnalysis(host, el, i, d, r, ctx) {
   const st = r.stat, pool = ctx.pool, curPal = ctx.curPal;
   const Lh = awUnb64(st.Lh), hh = awUnb64(st.hh);
-  const fin = awGateFinds(r.find, 3);   // where it sits against its painter, decade and movement: the "In context" card (awContext)
   const warm = st.wf / 1000, ch = st.ch.map(v => v / 1000);
   const roles = ["foc", "hid", "glu"];
   const poolOK = pool.length >= 6;
   host.innerHTML = `
-    <div class="sec-head"><b>Analysis</b><span>as photographed</span></div>
     <p class="aw-sub">Many readings of one painting, from the museum photo. Tap any color to open its page.</p>
     <div class="aw-tiles">
       <div><span>Value key</span><b>${AW_KEYWORD[st.key] || st.key}</b><em>mean lightness ${st.Lm}</em></div>
@@ -545,7 +547,6 @@ function awAnalysis(host, el, i, d, r, ctx) {
       <p class="aw-kv"><span>Dominant family</span><b>${esc(st.df)}</b><em></em></p>
       <p class="fine">Palette-level proxies: they describe the ${r.n} extracted colors, not every pixel.</p>
     </details>
-    ${fin.length ? `<details class="aw-more" open><summary>Findings</summary><ul class="aw-finds">${fin.map(f => `<li>${esc(f)}</li>`).join("")}</ul></details>` : ""}
     <div data-awpig></div>
     <div data-awnn></div>
     <div data-awpainter-row></div>`;

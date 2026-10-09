@@ -683,9 +683,9 @@ function glModeSet(m, pool, k, row) {
     case "skin": return fromSub(sub(p => p.C >= 10 && p.C <= 50 && p.H >= 15 && p.H <= 65 && p.L >= 30 && p.L <= 88, .04));
     case "accents": {
       let a = row && row.acc ? row.acc.map(j => P[j]).filter(Boolean) : P.filter(p => p.C >= 28 && p.share < .06 && p.L >= 20).sort((x, y) => y.C - x.C).slice(0, 5);
-      return raw(a, "Small, vivid areas set against the bigger colors. Markers show where they sit.");
+      return raw(a, "Small, vivid areas set against the bigger colors.");
     }
-    case "hidden": return row && row.hid ? raw(row.hid.map(j => P[j]).filter(Boolean), "Quiet and rare, from another family than the rest, like the greens under skin. Markers show where they hide.") : null;
+    case "hidden": return row && row.hid ? raw(row.hid.map(j => P[j]).filter(Boolean), "Quiet and rare, from another family than the rest, like the greens under skin.") : null;
     case "focal": {
       const f = row && row.foc != null && P[row.foc]; if (!f) return null;
       const near = P.filter(p => p !== f && de2000(p.h, f.h) < 22).sort((x, y) => de2000(x.h, f.h) - de2000(y.h, f.h)).slice(0, 4);
@@ -722,15 +722,9 @@ function glModeSet(m, pool, k, row) {
 // (js/setpage.js) it is an array, the whole set: ptArrival (js/paintingsof.js) measures and shows every one.
 // "On the painting" (David, 2026-10-08): one control for where each palette color sits. Markers put a numbered dot
 // at each color's main places; Highlight dims everything else. Remembered across paintings in S.glWhere.
+// The painting page dropped this switch (David, 2026-10-09: redundant once a swatch tile locates itself on tap —
+// see toggleLocate/litDraw in glPage); js/studio.js's photo palette still uses the constant and its own markers.
 const GL_WHERE = [["off", "Off"], ["mark", "Markers"], ["lit", "Highlight"]];
-// a long press on a palette chip shows its markers; the click that ends that press must not open the color page
-let GL_PEEK = 0;
-window.addEventListener("click", e => {
-  if (!GL_PEEK) return;
-  const hit = Date.now() - GL_PEEK < 2500 && e.target.closest && e.target.closest(".gl-pal-ui [data-glj]");
-  GL_PEEK = 0;
-  if (hit) { e.stopPropagation(); e.preventDefault(); }
-}, true);
 // a scrolling chip row fades only at the edge where more chips are hiding
 function glFadeEdges(wrap, row) {
   if (!wrap || !row) return;
@@ -761,8 +755,6 @@ function glPage(i, d, fromHex, tol) {
   let row = null;      // this painting's analysis row once it loads (accents, hidden, focal)
   const picks = [];    // "Pick from the painting": colors the visitor tapped
   const lit = { ok: false, img: null, pix: null };   // the photo's pixels, once the host lets a canvas read them
-  // "On the painting": off, numbered markers, or highlight. Remembered across paintings (S.glWhere).
-  let where = typeof S !== "undefined" && S && GL_WHERE.some(w => w[0] === S.glWhere) ? S.glWhere : "off";
   let capOpen = false;
   let modesOpen = false;   // "at most 5 chips, chosen per painting, plus More" (David, 2026-10-09)
   let locate = null;       // a palette swatch tapped on the strip: { j, hex } — dims the rest, glows where it sits
@@ -776,6 +768,10 @@ function glPage(i, d, fromHex, tol) {
   };
   const curSet = () => modeSet(mode, curK) || modeSet("out", curK);
   const curPal = () => curSet().pal;
+  // the ColorSet verbs (js/colorset.js): this painting's palette, at whatever size the slider shows. Declared
+  // early so both the action row and the coverage row's Learn button (David, 2026-10-09) can use it.
+  const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i,
+    ...(pool.length > 3 && (mode === "out" || mode === "area") && typeof csPoolPick === "function" ? { pick: csPoolPick(pool), max: pool.length } : {}) });
   const dom = pal6.reduce((a, b) => b.share > a.share ? b : a).h;
   // the surround behind the picture (when it doesn't fill the full width) tints with the painting's own average
   // color, not black (David's rebuild brief, 2026-10-09) — G.mean is the true pixel-weighted mean, in Lab
@@ -796,7 +792,6 @@ function glPage(i, d, fromHex, tol) {
     <div class="palette gl-strip" data-glswatches></div>
     <div class="gl-modes-f" data-glfade><div class="gl-modes" data-glorder role="group" aria-label="Palette type"></div></div>
     <div class="pr-slide gl-slide" data-glslide hidden><input type="range" min="3" max="24" step="1" value="6" data-glk aria-label="How many colors"><span class="gl-kn-t" data-glkn>6 colors</span></div>
-    <div class="gl-where" data-glwhere hidden><span>On the painting</span><div class="gl-where-seg" role="group" aria-label="Show where each color is on the painting">${GL_WHERE.map(([k, t]) => `<button data-glw="${k}" aria-pressed="false">${t}</button>`).join("")}</div></div>
     <p class="gl-locate" data-gllocate hidden></p>
     <p class="gl-cap" data-glcap></p>
     <div class="pal-names" data-glrows></div>
@@ -807,9 +802,9 @@ function glPage(i, d, fromHex, tol) {
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <div class="gl-finds"><div class="sec-head"><b>Findings</b><span>as photographed</span></div>
     <div class="gl-roles" data-glroles></div>
-    <div class="aw-cx" data-glctx></div></div>
+    <div class="aw-cx" data-glctx></div>
     <p class="fine">Computed by ColorHub, not by the museum, from its photograph. Names are the nearest of about 1,000. Old varnish and the photograph shift color, and screens differ.</p>
-    <div data-awan></div>
+    <details class="gl-finds-more"><summary>More</summary><div data-awan></div></details></div>
     <div class="gl-morepainter" data-glmorepainter></div>
     ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>`}
@@ -826,8 +821,9 @@ function glPage(i, d, fromHex, tol) {
     pal.forEach(p => { const nm = nameOf(p.h); if (nm.n && nm.de < NEAR_DE && !seen.has(nm.n)) { seen.add(nm.n); items.push({ n: nm.n, h: p.h }); } });
     if (items.length < 2) { host.innerHTML = ""; return; }
     const cov = setCoverage(items), rest = items.filter(x => { try { return typeof knowState !== "function" || knowState(x) !== "yours"; } catch (e) { return true; } });
-    // a quiet row right by the palette, not a boast (David's rebuild brief, 2026-10-09)
-    host.innerHTML = `${coverageRing(cov, { size: 40, stroke: 4 })}<span><b>Learn the colors here</b><em>${cov.yours === cov.total ? "Every name here is yours." : `${cov.yours} of ${cov.total} so far — the rest, once recalled on a later day.`}</em></span>${cov.yours && rest.length && typeof prQuick === "function" ? `<button class="gl-cov-go" data-glrest>Learn the rest</button>` : ""}`;
+    // a quiet row right by the palette, not a boast (David's rebuild brief, 2026-10-09). Learn lives here now,
+    // not in the action row below — and targets whatever's actually left to learn, known or not yet started
+    host.innerHTML = `${coverageRing(cov, { size: 40, stroke: 4 })}<span><b>Learn the colors here</b><em>${cov.yours === cov.total ? "Every name here is yours." : `${cov.yours} of ${cov.total} so far — the rest, once recalled on a later day.`}</em></span>${rest.length && typeof prQuick === "function" ? `<button class="gl-cov-go" data-glrest>${cov.yours ? "Learn the rest" : "Learn"}</button>` : ""}`;
     const go = host.querySelector("[data-glrest]");
     if (go) go.onclick = () => prQuick({ items: rest.map(x => x.h), label: d.t, src: "painting", route });
   };
@@ -836,14 +832,13 @@ function glPage(i, d, fromHex, tol) {
     const set = curSet(), pal = set.pal;
     drawModes(set);
     const near = fromPrimary ? glNearestSwatch(pal, fromPrimary) : null;
-    const num = where === "mark" && lit.ok && mode !== "pick";   // the markers' numbers, repeated on the strip and the rows
     // the strip swatch locates (dims the rest, glows where it sits); its NAME, below, still opens the color page
     // (app rule kept, just split between the two halves of the same chip — David's rebuild brief, 2026-10-09)
-    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="Find ${esc(nameOf(p.h).n)} on the painting" aria-pressed="${locate && locate.j === j}">${num ? `<em class="gl-n">${j + 1}</em>` : ""}<span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
+    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="Find ${esc(nameOf(p.h).n)} on the painting" aria-pressed="${locate && locate.j === j}"><span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
     el.querySelector("[data-glrows]").innerHTML = pal.map((p, j) => {
       const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
       const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : glPctTxt(p.share)].filter(Boolean).join(" · ");
-      return `<button class="pal-name${near && near.i === j ? " on" : ""}" data-swatch="${p.h}" data-glj="${j}"><i style="--c:${p.h}" data-ink="${ink(p.h)}">${num ? j + 1 : ""}</i><b>${esc(nm.t)}</b><span>${esc(p.out && nm.sub ? sub + " · " + nm.sub : sub)}</span><em class="mono">${p.h}</em></button>`;
+      return `<button class="pal-name${near && near.i === j ? " on" : ""}" data-swatch="${p.h}" data-glj="${j}"><i style="--c:${p.h}" data-ink="${ink(p.h)}"></i><b>${esc(nm.t)}</b><span>${esc(p.out && nm.sub ? sub + " · " + nm.sub : sub)}</span><em class="mono">${p.h}</em></button>`;
     }).join("");
     drawCov(pal);
     const arrive = el.querySelector("[data-glarrive]");
@@ -857,7 +852,7 @@ function glPage(i, d, fromHex, tol) {
       arrive.hidden = false; arrive.textContent = nm ? `No close swatch; the nearest is ${nm.text}, ${pctDiff(near.de)}.` : "No close swatch in this palette.";
     }
     if (el._awPal && pal.length) el._awPal(pal);   // the Analysis readings follow the palette on screen (js/artwiki.js)
-    litDraw(pal); markDraw(pal); drawLocate(pal);
+    litDraw(pal); drawLocate(pal);
     const acts = el.querySelector("[data-csacts]"); if (acts) acts.hidden = !pal.length;
   };
   // the palette types as one row of chips, only the ones this painting has; the slider and caption follow the type
@@ -881,10 +876,6 @@ function glPage(i, d, fromHex, tol) {
     const cap = el.querySelector("[data-glcap]");
     cap.classList.toggle("open", capOpen || short === full);
     cap.innerHTML = `<button class="gl-cap-t" data-glcapt aria-expanded="${capOpen}"${short === full ? " disabled" : ""}>${esc(capOpen ? full : short)}</button>` + (mode === "pick" && picks.length ? `<button class="aw-link" data-glclear>Start over</button>` : "");
-    // On the painting: only where the photo's pixels can be read; Pick from it has its own dots
-    const wh = el.querySelector("[data-glwhere]");
-    wh.hidden = !lit.ok || mode === "pick";
-    wh.querySelectorAll("[data-glw]").forEach(b => { const on = b.dataset.glw === where; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     const sel = host.querySelector(".on"); if (sel && host.scrollWidth > host.clientWidth) { const l = sel.offsetLeft - (host.clientWidth - sel.offsetWidth) / 2; host.scrollTo ? host.scrollTo({ left: l }) : (host.scrollLeft = l); }
     glFadeEdges(el.querySelector("[data-glfade]"), host);
   };
@@ -900,19 +891,19 @@ function glPage(i, d, fromHex, tol) {
       return lit.pix = { w, h, L };
     } catch (e) { lit.ok = false; return null; }
   };
+  // a located swatch dims the rest of the painting and glows where it sits — the whole job this canvas does now
+  // that the three-way "On the painting" switch is gone (David, 2026-10-09: redundant with tap-to-locate)
   const litDraw = pal => {
     const cv = el.querySelector("[data-gllitcv]");
     if (!cv) return;
-    // a located swatch takes over this canvas: dim everything but that one color, regardless of the "On the
-    // painting" toggle (David's rebuild brief, 2026-10-09 — tapping a chip should always show where it sits)
     const locHex = locate && pal[locate.j] && pal[locate.j].h;
-    if (!locHex && (where !== "lit" || !lit.ok || !pal.length)) { cv.classList.remove("on"); return; }
+    if (!locHex) { cv.classList.remove("on"); return; }
     const P = litBuild(); if (!P) { cv.classList.remove("on"); return; }
     cv.width = P.w; cv.height = P.h;
-    const x = cv.getContext("2d"), out = x.createImageData(P.w, P.h), T = locHex ? [lab(locHex)] : pal.map(p => lab(p.h));
+    const x = cv.getContext("2d"), out = x.createImageData(P.w, P.h), t = lab(locHex);
     for (let j = 0; j < P.w * P.h; j++) {
-      let m = 1e9; for (const t of T) { const dd = Math.hypot(P.L[j * 3] - t[0], P.L[j * 3 + 1] - t[1], P.L[j * 3 + 2] - t[2]); if (dd < m) m = dd; }
-      const o = j * 4; out.data[o] = 14; out.data[o + 1] = 13; out.data[o + 2] = 11; out.data[o + 3] = m < 13 ? 0 : 205;
+      const dd = Math.hypot(P.L[j * 3] - t[0], P.L[j * 3 + 1] - t[1], P.L[j * 3 + 2] - t[2]);
+      const o = j * 4; out.data[o] = 14; out.data[o + 1] = 13; out.data[o + 2] = 11; out.data[o + 3] = dd < 13 ? 0 : 205;
     }
     x.putImageData(out, 0, 0); cv.classList.add("on");
   };
@@ -948,82 +939,28 @@ function glPage(i, d, fromHex, tol) {
     const share = p.share < .005 ? "under 1% of the canvas" : Math.round(p.share * 100) + "% of the canvas";
     cap.innerHTML = `<i style="--c:${p.h}"></i><span>${esc(nameOf(p.h).n)} · ${share}${region ? ", mostly " + esc(region) : ""}.</span>`;
   };
+  // toggling a located swatch is the one overlay the picture shows now (David, 2026-10-09: the old three-way
+  // "On the painting" switch — Off/Markers/Highlight — is gone; locate replaces it; it still steps the arriving
+  // color's own map aside, same as the switch used to, so only one overlay ever shows at once)
   const toggleLocate = j => {
     const pal = curPal(); if (!pal[j]) return;
     locate = locate && locate.j === j ? null : { j, hex: pal[j].h };
-    drawPalette();
-  };
-  // Markers: each palette color's main places on the painting (up to three), numbered like its chip. Read from the
-  // same coarse copy of the photo: every pixel goes to its nearest palette color (if it's close), the densest
-  // patches of each color win, and a marker sits at the weighted center of its patch. Only the part on screen counts.
-  const markDraw = pal => {
-    let L = heroSpan.querySelector(".gl-mks");
-    const clear = () => { if (L) L.innerHTML = ""; };
-    if (locate || where !== "mark" || !lit.ok || mode === "pick" || !pal.length) return clear();
-    const P = litBuild(); if (!P || !lit.img) return clear();
-    const ir = lit.img.getBoundingClientRect(), sr = heroSpan.getBoundingClientRect();
-    if (!ir.width || !sr.width) return clear();
-    const x0 = Math.floor(clamp((sr.left - ir.left) / ir.width, 0, 1) * P.w), x1 = Math.ceil(clamp((sr.right - ir.left) / ir.width, 0, 1) * P.w);
-    const y0 = Math.floor(clamp((sr.top - ir.top) / ir.height, 0, 1) * P.h), y1 = Math.ceil(clamp((sr.bottom - ir.top) / ir.height, 0, 1) * P.h);
-    const T = pal.map(p => lab(p.h)), G = Math.max(5, Math.round(Math.min(x1 - x0, y1 - y0) / 9));
-    const gw = Math.max(1, Math.ceil((x1 - x0) / G)), gh = Math.max(1, Math.ceil((y1 - y0) / G)), NC = gw * gh, R = 18;
-    const W = T.map(() => new Float32Array(NC)), SX = T.map(() => new Float32Array(NC)), SY = T.map(() => new Float32Array(NC));
-    for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) {
-      const j = (y * P.w + x) * 3; let bk = -1, bd = R;
-      for (let k = 0; k < T.length; k++) { const t = T[k], dd = Math.hypot(P.L[j] - t[0], P.L[j + 1] - t[1], P.L[j + 2] - t[2]); if (dd < bd) { bd = dd; bk = k; } }
-      if (bk < 0) continue;
-      const w = 1 - bd / R, c = ((y - y0) / G | 0) * gw + ((x - x0) / G | 0);
-      W[bk][c] += w; SX[bk][c] += w * x; SY[bk][c] += w * y;
-    }
-    const near = (c, f) => { const cx = c % gw, cy = c / gw | 0; for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { const X = cx + dx, Y = cy + dy; if (X >= 0 && Y >= 0 && X < gw && Y < gh) f(Y * gw + X); } };
-    const found = [];
-    T.forEach((t, k) => {
-      const sm = new Float32Array(NC); for (let c = 0; c < NC; c++) near(c, n => { sm[c] += W[k][n]; });
-      let first = 0;
-      for (let n = 0; n < 3; n++) {
-        let bc = -1; for (let c = 0; c < NC; c++) if (sm[c] > 0 && (bc < 0 || sm[c] > sm[bc])) bc = c;
-        if (bc < 0 || (n && (sm[bc] < first * .45 || sm[bc] < 3))) break;
-        if (!n) first = sm[bc];
-        let w = 0, sx = 0, sy = 0; near(bc, m => { w += W[k][m]; sx += SX[k][m]; sy += SY[k][m]; });
-        if (!(w > 0)) break;
-        found.push({ k, n, fx: (sx / w + .5) / P.w, fy: (sy / w + .5) / P.h });
-        const bx = bc % gw, by = bc / gw | 0;   // the next place for this color has to be somewhere else
-        for (let c = 0; c < NC; c++) if (Math.abs(c % gw - bx) <= 2 && Math.abs((c / gw | 0) - by) <= 2) sm[c] = -1;
-      }
-    });
-    // in screen terms, as a share of the box (so a resize or the big image swapping in keeps them in place)
-    const placed = [];
-    found.sort((a, b) => a.n - b.n).forEach(o => {
-      const px = (o.fx * ir.width + ir.left - sr.left) / sr.width * 100, py = (o.fy * ir.height + ir.top - sr.top) / sr.height * 100;
-      if (px < 2 || py < 2 || px > 98 || py > 98) return;
-      if (o.n && placed.some(q => Math.hypot((q.px - px) * sr.width, (q.py - py) * sr.height) / 100 < 30)) return;   // a second place never sits on top of another marker
-      placed.push({ ...o, px, py });
-    });
-    if (!L) { L = document.createElement("div"); L.className = "gl-mks"; heroSpan.appendChild(L); }
-    const fresh = L.dataset.k !== mode + curK + pal.map(p => p.h).join();
-    L.dataset.k = mode + curK + pal.map(p => p.h).join();
-    L.innerHTML = placed.map((o, q) => { const h = pal[o.k].h; return `<button class="gl-mk${o.n ? " sm" : ""}${fresh ? " in" : ""}" data-swatch="${h}" data-glmk="${o.k}" data-ink="${ink(h)}" style="left:${o.px.toFixed(2)}%;top:${o.py.toFixed(2)}%;--c:${h};--d:${q * 20}ms" aria-label="${esc(glName(h).t)}, color ${o.k + 1}">${o.n ? "" : o.k + 1}</button>`; }).join("");
-  };
-  // a palette chip held down: its markers pulse (and a long hold shows them without opening the page)
-  const pulse = j => {
-    const L = heroSpan.querySelector(".gl-mks"); if (!L) return;
-    L.querySelectorAll(`[data-glmk="${j}"]`).forEach(m => { m.classList.remove("pulse", "in"); void m.offsetWidth; m.classList.add("pulse"); });
-  };
-  const setWhere = (w, keep) => {
-    if (w === where) return;
-    where = w; locate = null;
-    if (keep && typeof S !== "undefined" && S) { S.glWhere = w; if (typeof save === "function") save(); }
-    if (w !== "off" && arrival && arrival.mapOff) arrival.mapOff();   // one overlay at a time: the arriving color's map steps aside
+    if (locate && arrival && arrival.mapOff) arrival.mapOff();
     drawPalette();
   };
   drawPalette();
   if (typeof awPaintingHook === "function") awPaintingHook(el, i, d, { pool, curPal });
-  // the ColorSet verbs (js/colorset.js): this painting's palette, at whatever size the slider shows
+  // the ColorSet verbs (js/colorset.js): one compact row, not the full six-wide grid (David, 2026-10-09 polish
+  // pass) — Learn moved to live in "Learn the colors here" (drawCov) instead, and Play only shows once a real
+  // game is wired to a set (typeof playSet, not the generic hue-drill fallback csPlay falls back to today).
   if (typeof colorSet === "function") {
-    const glSet = () => colorSet({ kind: "painting", id: "g" + i, title: d.t, colors: curPal().map(p => ({ h: p.h, share: p.share })), src: "gallery/" + i,
-      ...(pool.length > 3 && (mode === "out" || mode === "area") && typeof csPoolPick === "function" ? { pick: csPoolPick(pool), max: pool.length } : {}) });
     learnerLog({ type: "seen", set: glSet(), src: "painting" });
-    el.querySelector("[data-csacts]").appendChild(csActions(glSet, { back: () => galleryPage(i, false) }));
+    const actsRow = csActions(glSet, { only: ["keep", "share", "map", ...(typeof playSet === "function" ? ["play"] : [])], back: () => galleryPage(i, false) });
+    // Keep, Share, On the map, in that reading order (David's polish pass, 2026-10-09) — csActions itself always
+    // orders by CS_ACTS, shared by every other page that calls it, so this page alone re-sorts its own row
+    const acOrder = ["keep", "share", "map", "play"];
+    [...actsRow.children].sort((a, b) => acOrder.indexOf(a.dataset.cs) - acOrder.indexOf(b.dataset.cs)).forEach(b => actsRow.appendChild(b));
+    el.querySelector("[data-csacts]").appendChild(actsRow);
   }
   el.querySelector("[data-glk]").oninput = e => { curK = +e.target.value; locate = null; drawPalette(); };   // live while sliding
   el.querySelector("[data-glk]").onchange = () => buzz(5);
@@ -1038,28 +975,15 @@ function glPage(i, d, fromHex, tol) {
     if (e.target.closest("[data-glmore]")) { modesOpen = !modesOpen; buzz(5); drawPalette(); return; }
     const b = e.target.closest("[data-glo]"); if (!b || b.dataset.glo === mode) return;
     mode = b.dataset.glo; locate = null;
-    // the Look-for types are about where the colors sit: mark them on the painting (for this visit; not remembered)
-    if (["accents", "hidden", "focal", "skin"].includes(mode) && lit.ok && where === "off") { where = "mark"; if (arrival && arrival.mapOff) arrival.mapOff(); }
     capOpen = false;
     clearDots(); if (mode === "pick") picks.forEach(addDot);
     buzz(5); drawPalette();
   };
   el.querySelector("[data-glorder]").onscroll = () => glFadeEdges(el.querySelector("[data-glfade]"), el.querySelector("[data-glorder]"));
-  el.querySelector("[data-glwhere]").onclick = e => { const b = e.target.closest("[data-glw]"); if (b) { buzz(5); setWhere(b.dataset.glw, true); } };
   el.querySelector("[data-glcap]").onclick = e => {
     if (e.target.closest("[data-glclear]")) { picks.length = 0; clearDots(); buzz(5); drawPalette(); return; }
     if (e.target.closest("[data-glcapt]")) { capOpen = !capOpen; buzz(4); drawPalette(); }
   };
-  // press a chip (strip or row) and its markers pulse; hold it and they stay on show, without opening the page
-  let holdT = 0;
-  el.querySelector(".gl-pal-ui").addEventListener("pointerdown", e => {
-    const c = e.target.closest("[data-glj]"); if (!c || where !== "mark" || !heroSpan.querySelector(".gl-mk")) return;
-    pulse(c.dataset.glj); clearTimeout(holdT);
-    holdT = setTimeout(() => { GL_PEEK = Date.now(); buzz(8); pulse(c.dataset.glj); }, 450);
-  });
-  ["pointerup", "pointercancel", "pointerleave"].forEach(t => el.querySelector(".gl-pal-ui").addEventListener(t, () => clearTimeout(holdT)));
-  el.querySelector(".gl-pal-ui").addEventListener("contextmenu", e => { if (e.target.closest("[data-glj]") && where === "mark") e.preventDefault(); });
-  el.querySelector(".gl-pal-ui").addEventListener("mouseover", e => { const c = e.target.closest("[data-glj]"); if (c && c !== el._glHover && where === "mark") { el._glHover = c; pulse(c.dataset.glj); } });
   // the painter's own hue habits sharpen "stands out" (a camel that's rare for van Dyck), quietly, once they load
   glPainterHue(d.a).then(h => { if (h && el.isConnected) { prior = h; if (mode === "out") drawPalette(); } });
   // accents, the color you'd miss, and the focal color (data/analysis, the same reading as the Analysis drawer), above the bars
@@ -1147,7 +1071,7 @@ function glPage(i, d, fromHex, tol) {
     return "#" + [rr, gg, bb].map(v => clamp(Math.round(v / n), 0, 255).toString(16).padStart(2, "0")).join("").toUpperCase();
   };
   // the arriving color: pinned above the palette, with how much of this canvas it covers and where (js/paintingsof.js, L26)
-  if (fromHex && typeof ptArrival === "function") arrival = ptArrival(el, { i, hex: fromHex, tol, pool, heroSpan, getImg: () => sampleImg, onMap: () => setWhere("off"), why: "This museum's image server doesn't let ColorHub read its pixels, so the map isn't available for this painting." });
+  if (fromHex && typeof ptArrival === "function") arrival = ptArrival(el, { i, hex: fromHex, tol, pool, heroSpan, getImg: () => sampleImg, onMap: () => { if (locate) { locate = null; drawPalette(); } }, why: "This museum's image server doesn't let ColorHub read its pixels, so the map isn't available for this painting." });
   if (typeof fvArtWire === "function") fvArtWire(el, i, d, heroSpan);   // the heart action lives in the top bar now; a long press or a double-tap on the picture keeps it too (js/favs.js)
   if (sampleImg.complete && sampleImg.naturalWidth) armSample(sampleImg); else sampleImg.addEventListener("load", () => armSample(sampleImg), { once: true });
   // Double-tap to like (Instagram-style, David 2026-10-09): since a single tap on the painting already does
