@@ -56,7 +56,8 @@ const YM_CVD = { typical: "Typical", "red-green": "Red–green", "blue-yellow": 
 function ymSettingsHTML() {
   const p = S.profile || null, last = S.backedUp ? fmtDay(S.backedUp) : "";
   return mnGroup("How you see", [
-    { k: "profile", lead: YM_I.eye, label: "Color vision and tools", value: p ? esc(YM_CVD[p.cvd] || "Set") : "Not set" }])
+    { k: "profile", lead: YM_I.eye, label: "Color vision and tools", value: p ? esc(YM_CVD[p.cvd] || "Set") : "Not set" },
+    { k: "samplesize", lead: icon("pipette", 20), label: "Eyedropper sample size", value: typeof EYD_LABEL !== "undefined" ? esc(EYD_LABEL[getSampleSize()]) : "Point" }])
   + mnGroup("While you learn", [
     { k: "haptics", lead: YM_I.tap, label: "Haptics", sub: "A small tap on every answer", sw: S.haptics !== false },
     { k: "quick", lead: YM_I.quick, label: "Quick mode", sub: "Reviews skip typing and mixing", sw: !!S.quick }])
@@ -80,6 +81,7 @@ function ymWireSettings(root, back, close = () => {}) {
         .then(yes => { if (!yes) return; close(); S = fresh(); save(); welcome(); });
     }
     if (k === "you") { close(); return youPage(); }
+    if (k === "samplesize") { if (typeof eydSizeSheet === "function") eydSizeSheet(); return; }
     close();
     if (k === "profile") profileSetup(back);
     if (k === "restore") restoreProgress();

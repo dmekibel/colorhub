@@ -153,7 +153,8 @@ const fmtDay = k => { if (!k) return ""; const [y, m, d] = k.split("-").map(Numb
 // ---------- state ----------
 const KEY = "colorhub-v1";
 // tab: last tab · gym: drill scores and history · daily: color-of-the-day answers · lightning: best score
-const fresh = () => ({ v: 1, placed: null, start: 0, cards: {}, done: {}, tab: "learn", gym: { skills: {}, workouts: {} }, daily: {}, best: {} });
+// sampleSize: the shared eyedropper's Photoshop-style pick size (js/eyedrop.js EYD_SIZES), default Point (1px)
+const fresh = () => ({ v: 1, placed: null, start: 0, cards: {}, done: {}, tab: "learn", gym: { skills: {}, workouts: {} }, daily: {}, best: {}, sampleSize: 1 });
 // Progress is never thrown away. An older save is migrated step by step (bump STATE_V and add a step when the
 // shape changes); a save from a newer version is kept as it is; unknown keys always survive. A save that
 // can't be read is copied aside (KEY + "-unreadable") before anything is written over it.

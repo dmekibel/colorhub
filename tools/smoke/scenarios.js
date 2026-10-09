@@ -2316,6 +2316,71 @@ scenario("paintings", "on a Commons painting, the resolved CORS fallback makes P
   await t.waitFor(() => /colors you took/i.test(t.text("[data-glcap]")), 4000, "a picked color after tapping the picture");
   t.expect(t.$(".gl-tap-dot"), "no pick dot appeared, so the tap never reached a real pixel");
 });
+// js/eyedrop.js: the shared press-and-drag eyedropper. A synthetic two-color test image (left half pure red,
+// right half pure blue) proves the sampling math directly, with no network and no dependence on any one screen
+// that's adopted it yet (David, 2026-10-09).
+scenario("eyedrop", "the shared eyedropper: drag reads each side, and sample size changes the reading at the boundary", async t => {
+  await t.open("#/home", { settle: 300 });
+  const raw = await t.ev(`(() => new Promise(resolve => {
+    const c = document.createElement("canvas"); c.width = 100; c.height = 40;
+    const cx = c.getContext("2d");
+    cx.fillStyle = "#FF0000"; cx.fillRect(0, 0, 50, 40);
+    cx.fillStyle = "#0000FF"; cx.fillRect(50, 0, 50, 40);
+    const img = new Image();
+    img.onload = () => {
+      img.style.cssText = "position:fixed;left:0;top:0;width:200px;height:80px;z-index:999";
+      document.body.appendChild(img);
+      const r = img.getBoundingClientRect();
+      const fire = (el, type, x) => el.dispatchEvent(new PointerEvent(type, { bubbles: true, clientX: r.left + x, clientY: r.top + r.height / 2, isPrimary: true, pointerId: 1 }));
+      setSampleSize(1);
+      const moves1 = [];
+      const a1 = eyedropAttach(img, { onMove: (hex) => moves1.push(hex) });
+      fire(img, "pointerdown", 10);
+      const redHex = moves1[moves1.length - 1];
+      fire(img, "pointermove", 190);
+      const blueHex = moves1[moves1.length - 1];
+      fire(img, "pointermove", 100);
+      const pointBoundary = moves1[moves1.length - 1];
+      fire(img, "pointerup", 100);
+      a1.detach();
+      setSampleSize(31);
+      const moves2 = [];
+      const a2 = eyedropAttach(img, { onMove: (hex) => moves2.push(hex) });
+      fire(img, "pointerdown", 100);
+      const avgBoundary = moves2[moves2.length - 1];
+      fire(img, "pointerup", 100);
+      a2.detach();
+      setSampleSize(1);
+      document.body.removeChild(img);
+      resolve(JSON.stringify({ redHex, blueHex, pointBoundary, avgBoundary }));
+    };
+    img.src = c.toDataURL();
+  }))()`);
+  const r = JSON.parse(raw);
+  t.expect(r.redHex === "#FF0000", `the red side read ${r.redHex}, not pure red`);
+  t.expect(r.blueHex === "#0000FF", `the blue side read ${r.blueHex}, not pure blue`);
+  t.expect(r.pointBoundary === "#FF0000" || r.pointBoundary === "#0000FF", `Point at the boundary should land on one exact side, got ${r.pointBoundary}`);
+  t.expect(r.avgBoundary !== "#FF0000" && r.avgBoundary !== "#0000FF" && /^#[0-9A-F]{6}$/.test(r.avgBoundary), `31×31 at the boundary should blend the two sides, got ${r.avgBoundary}`);
+  // the loupe follows the drag and shows a live readout
+  const loupeInfo = await t.ev(`(() => new Promise(resolve => {
+    const img = document.createElement("img");
+    img.style.cssText = "position:fixed;left:0;top:0;width:200px;height:80px;z-index:999";
+    img.onload = () => {
+      document.body.appendChild(img);
+      const r = img.getBoundingClientRect();
+      eyedropAttach(img, {});
+      img.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, clientX: r.left + 10, clientY: r.top + r.height / 2, isPrimary: true, pointerId: 1 }));
+      const loupe = document.querySelector(".eyd-loupe");
+      resolve(JSON.stringify({ shown: !!loupe, hex: loupe && loupe.querySelector(".eyd-loupe-hex").textContent }));
+    };
+    const c = document.createElement("canvas"); c.width = 100; c.height = 40;
+    c.getContext("2d").fillRect(0, 0, 100, 40);
+    img.src = c.toDataURL();
+  }))()`);
+  const lr = JSON.parse(loupeInfo);
+  t.expect(lr.shown, "the loupe never appeared on pointerdown");
+  t.expect(/^#[0-9A-F]{6}$/.test(lr.hex), `the loupe's hex readout is missing or wrong: ${lr.hex}`);
+});
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
