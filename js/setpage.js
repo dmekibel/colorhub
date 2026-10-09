@@ -598,8 +598,16 @@ function spMountMatch(host, q, names, pair, isLive) {
       // both all the way loose, that IS the loosest it gets. A 4+ palette isn't exhausted until atLeast is 2.
       const atLoosest = st.tol === PT_TOL[PT_TOL.length - 1] && st.minCover === PT_MIN[0] && (m < 4 || st.atLeast <= 2);
       if (!res.count) {
-        body.innerHTML = `<p class="sp-say">${note && !atLoosest ? esc(note) + " " : ""}${atLoosest ? `Not one painting holds ${st.atLeast < m ? `even ${st.atLeast} of them` : pair ? "both" : "all of them"}, even at the loosest measure.` : "Nothing this close yet."}</p>
+        const sayEl = "sp-say-" + Math.random().toString(36).slice(2, 8);
+        body.innerHTML = `<p class="sp-say" id="${sayEl}">${note && !atLoosest ? esc(note) + " " : ""}${atLoosest ? `Not one painting holds ${st.atLeast < m ? `even ${st.atLeast} of them` : pair ? "both" : "all of them"}, even at the loosest measure.` : "Nothing this close yet."}</p>
           ${atLoosest ? "" : `<button class="btn ghost" data-mt-loosen>Loosen until something matches</button>`}`;
+        // Closeness over coverage, even in the exhausted state (coordinator note, 2026-10-09, same as
+        // js/paintingsof.js ptClosestFact): say what the single closest painting actually gets, instead of
+        // leaving only "nothing" on screen.
+        if (atLoosest) paintingsWith(q, { tol: PT_TOL[PT_TOL.length - 1], minCover: 0, maxCover: null, mode: "all", sort: "close", source: "paintings" }).then(close => {
+          const r = close.rows && close.rows[0]; if (!r || r.de == null || my !== seq || !live()) return;
+          const p = document.getElementById(sayEl); if (p) p.textContent += ` The closest is ${pctMatch(r.de)}.`;
+        }).catch(() => {});
         return;
       }
       const rows = res.rows.slice(0, 10);

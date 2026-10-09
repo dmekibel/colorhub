@@ -1977,6 +1977,30 @@ scenario("pages", "an in-between color's split cover is a clean two-up band, not
   t.expect(/to your color/i.test(capText), `the lead caption on a tapped page doesn't say "to your color": "${capText}"`);
 });
 
+// David, 2026-10-09: "if there's no good obvious painting, find the closest color match -- even if it's a tiny
+// part of the painting. That's better than a painting with large coverage of a color that's 15% off." Checks
+// js/article-refs.js's arfClosenessSort/arfPaintTier directly, against real candidates for 3 real colors
+// (coverage used to win outright -- arfLeadPick/arfPlan both sorted by `cover` first): the picture actually
+// chosen never sits in a worse closeness tier than the best one some candidate reaches.
+scenario("pages", "a color's lead picture never prefers a far painting with more coverage over a closer one (Aero + 2 more)", async t => {
+  for (const { route, hex } of [{ route: "#/name/aero", hex: "#7CB9E8" }, { route: "#/color/periwinkle", hex: null }, { route: "#/color/teal", hex: null }]) {
+    await t.open(route, { settle: 400 });
+    const h = hex || await t.ev(`document.querySelector(".cp-hero")?.style.getPropertyValue("--c2")?.trim() || document.querySelector(".cp-hero")?.style.getPropertyValue("--c")?.trim() || null`);
+    t.expect(h, `couldn't read ${route}'s own hex off .cp-hero`);
+    const r = await t.ev(`(async () => {
+      if (typeof loadGallery === "function") await loadGallery();
+      const keys = (typeof npGalleryHits === "function" ? npGalleryHits("${h}", 10) : []).map(x => "painting:" + x[0]);
+      const scored = (await Promise.all(keys.map(k => arfFor(k, "${h}", "light")))).filter(x => x && x.ok);
+      if (!scored.length) return { n: 0 };
+      const chosen = arfClosenessSort(scored)[0];
+      const bestDe = Math.min(...scored.map(x => x.de));
+      return { n: scored.length, chosenDe: chosen.de, bestDe, chosenTier: arfPaintTier(chosen.de), bestTier: arfPaintTier(bestDe) };
+    })()`);
+    t.expect(r && r.n > 0, `no scored painting candidates for ${route} (${h})`);
+    t.expect(r.chosenTier <= r.bestTier, `${route}: chose a painting in a worse closeness tier (${r.chosenTier}, ΔE ${r.chosenDe.toFixed(1)}) than the best available (tier ${r.bestTier}, ΔE ${r.bestDe.toFixed(1)})`);
+  }
+});
+
 scenario("pages", "a world twin (In gems) opens its page in one tap, Back returns to the color", async t => {
   await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
   // David, 2026-10-09: "Found in the world" (gems/botany/brands/fashion twins) tucks into the Paintings section now
