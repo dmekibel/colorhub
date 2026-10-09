@@ -906,6 +906,15 @@ function honeyFindLit() {
 }
 // the bar itself (Home's honeycomb asks for one per lit set). Two rows: ‹, the source's picture, its title and
 // subline, ✕; then the two verbs. ‹ only shows while the page that lit the set can still be reached.
+// David, 2026-10-09: "I tap Close and it brings me back to the plain map. I should be able to go back along the
+// chain of links I was on -- I shouldn't lose all my progress just because I tapped the map." Lighting colors on
+// the map from a page is a step IN the trail, not an exit (js/colorset.js csOnMap already keeps XSTACK behind the
+// map for exactly this -- TL_MAPKEEP, js/trail.js), but ✕ used to only clear the highlight and leave you staring
+// at the bare map with no way back drawn anywhere: reasonable as "show every color again" when there's truly no
+// source page, but read by anyone as a plain dismiss/Close (the X glyph), and the one place in the app an X
+// doesn't retrace the page it closed. With a source to return to, ✕ now does exactly what ‹ does -- the two
+// controls stop being redundant with each other in the one case that matters: there is no un-doing a tap that
+// looks like "go away" into "stay here, just quieter."
 function honeyLitBar() {
   const bar = document.createElement("div");
   bar.className = "cs-hl-pill cs-hl-bar"; bar.setAttribute("role", "region");
@@ -920,7 +929,7 @@ function honeyLitBar() {
   bar.innerHTML = `<div class="cs-hl-head">
       ${bk ? `<button class="cs-hl-back" aria-label="Back to ${esc(bk.title || title)}">${ICON.back}</button>` : ""}
       ${thumb}<span class="cs-hl-t"><b>${esc(title)}</b><i class="cs-hl-sep"> · </i><small>${esc(sub)}</small></span>
-      <button class="cs-hl-x" aria-label="Show every color again">${ICON.x}</button>
+      <button class="cs-hl-x" aria-label="${bk ? `Close: back to ${esc(bk.title || title)}` : "Show every color again"}">${ICON.x}</button>
     </div>
     ${canSize ? `<div class="cs-hl-n"><label class="cs-hl-nl"><span>How many</span><input type="range" min="${HONEY_LIT_MIN}" max="${set.max}" step="1" value="${cs.length}" aria-label="How many colors"><b data-hl-k>${cs.length}</b></label>
       <div class="cs-hl-cols" data-hl-cols></div></div>` : ""}
@@ -930,7 +939,10 @@ function honeyLitBar() {
     </div>`;
   const on = (sel, f) => { const b = bar.querySelector(sel); if (b) b.onclick = e => { e.stopPropagation(); f(); }; };
   on(".cs-hl-back", () => { buzz(6); honeyHighlight(null); bk.go(); });
-  on(".cs-hl-x", () => { buzz(4); honeyHighlight(null); });
+  // ✕ ("Close"): back to the source page when there is one (same as ‹ -- see the comment above), otherwise the
+  // old behavior, clear the highlight and stay on the bare map (a selection with no page behind it, e.g. one
+  // lit from Learn or a search, has nowhere to "close" back to).
+  on(".cs-hl-x", () => { buzz(bk ? 6 : 4); honeyHighlight(null); if (bk) bk.go(); });
   on("[data-hl-learn]", () => { buzz(6); honeyLearnLit(); });
   on("[data-hl-find]", () => { buzz(6); honeyFindLit(); });
   if (canSize) {

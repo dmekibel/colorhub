@@ -3322,6 +3322,52 @@ scenario("trail", "a page's colors lit on the map keep the trail: the pill's ‹
   t.expect(!t.$(".cs-hl-pill"), "the lit set's pill is still up after going back");
 });
 
+// David, 2026-10-09: "On a painting I tap 'See it on the map', I see those colors on the map, then I tap Close
+// and it brings me back to the plain map. I should be able to go back along the chain of links I was on -- I
+// shouldn't lose all my progress just because I tapped the map." Lighting colors on the map from a page is a
+// step IN the trail, not an exit: the lit map's own ✕ ("Close", js/honey.js honeyLitBar .cs-hl-x) now does the
+// same thing ‹ already did -- back to the page that lit it -- whenever there is one, instead of just clearing
+// the highlight and leaving the bare map with no way drawn back into the chain. The exact repro from the report:
+// color -> painting -> painter -> another painting -> See on map -> Close lands back on that second painting,
+// and Back from there still retraces painter, the first painting, then the color.
+scenario("trail", "On the map's ✕ (\"Close\") returns to the page that lit it, and the rest of the chain is still there", async t => {
+  await TRL.open(t, "#/color/cobalt");
+  await TRL.atHash(t, /^#\/color\/cobalt/, "the cobalt page");
+  const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
+  const fold = sec.closest("details:not([open])"); if (fold) await t.click(fold.querySelector("summary"), { wait: 300 });
+  sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); await t.sleep(300);
+  const pin = await t.waitFor(() => { sec.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); return t.$$("[data-pt-rail] .gl-pin, [data-pt-rail] .pin, [data-glin] [data-gi]")[0]; }, 25000, "a painting in cobalt's rail");
+  pin.scrollIntoView({ block: "center" }); await t.sleep(200);
+  await t.click(pin, { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "the painting page");
+  const painter = await t.waitFor(() => t.$("#app .screen [data-awpainter]"), 20000, "the painter link on the painting");
+  await t.click(painter, { wait: 600 });
+  await TRL.atHash(t, /^#\/painter\//, "the painter page");
+  const other = await t.waitFor(() => t.$$("#app .screen [data-gi]").find(x => +x.dataset.gi >= 0), 20000, "another painting on the painter page");
+  await t.click(other, { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "the second painting");
+  const paintingHash = TRL.hash(t), depthAtPainting = TRL.depth(t);
+  t.expect(depthAtPainting >= 3, `expected at least color+painting+painter on the trail before the second painting, got ${depthAtPainting}: ${t.ev("XSTACK.join(' , ')")}`);
+  const mapBtn = await t.waitFor("[data-cs='map']", 10000, "the second painting's On the map action");
+  await t.click(mapBtn, { wait: 800 });
+  await t.waitFor(() => t.$(".screen.hm canvas"), 12000, "the lit map");
+  await t.sleep(300);
+  t.expect(TRL.depth(t) === depthAtPainting, `lighting the map changed the trail depth to ${TRL.depth(t)}, expected ${depthAtPainting}`);
+  const x = await t.waitFor(".cs-hl-x", 6000, "the lit map's ✕ (Close)");
+  t.expect(/Close/i.test(x.getAttribute("aria-label")) && /back to/i.test(x.getAttribute("aria-label")), `✕'s aria-label doesn't promise a return: "${x.getAttribute("aria-label")}"`);
+  await t.click(x, { wait: 800 });
+  await TRL.atHash(t, new RegExp("^" + paintingHash.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")), "back on the second painting after Close");
+  t.expect(TRL.depth(t) === depthAtPainting, `Close landed with trail depth ${TRL.depth(t)}, expected ${depthAtPainting} (the chain, not just the painting)`);
+  t.expect(!t.$(".cs-hl-pill"), "the lit set's pill is still up after Close");
+  // Back from here still retraces the rest of the chain: painter, then the first painting, then the color
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, /^#\/painter\//, "Back from the painting lands on the painter");
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, /^#\/gallery\/\d+/, "Back from the painter lands on the first painting");
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await TRL.atHash(t, /^#\/color\/cobalt/, "Back from the first painting lands on cobalt");
+});
+
 scenario("trail", "long-press ‹ shows the trail; a row jumps there; the map glyph exits with the map's pan and zoom kept", async t => {
   await TRL.open(t, "#/home");
   const cv = await t.waitFor(".hm canvas", 12000, "the map");
