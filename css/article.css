@@ -47,7 +47,7 @@
 
 /* ---------- reading ---------- */
 .ar-sec{padding-top:6px;scroll-margin-top:64px}
-.ar-sec h2,.ar-qs h2,.ar-notes h2,.ar-fam h2{font:400 32px/1.04 var(--serif);letter-spacing:-.02em;margin:46px 0 16px;text-wrap:balance}
+.ar-sec h2,.ar-qs h2,.ar-fam h2{font:400 32px/1.04 var(--serif);letter-spacing:-.02em;margin:46px 0 16px;text-wrap:balance}
 .ar-sec>p,.ar-hubi>p{font:400 16px/1.66 var(--sans);color:var(--ar-body);margin:0 0 1.05em;text-wrap:pretty}
 .ar-sec>p:last-of-type{margin-bottom:0}
 .ar-sec em,.ar-hubi em{font-family:var(--serif);font-style:italic;font-size:1.08em;letter-spacing:0}
@@ -214,8 +214,7 @@
 .ar-qscore{font:italic 400 18px/1.35 var(--serif);color:var(--soft);margin-top:6px;text-wrap:pretty}
 .ar-qscore:empty{display:none}
 
-/* ---------- notes ---------- */
-.ar-notes h2{margin-top:50px}
+/* ---------- notes (Sources: a collapsed disclosure now, same mechanics as Test yourself above) ---------- */
 .ar-notes ol{list-style:none;margin:0;padding:0}
 .ar-notes li{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:11px 0;border-top:1px solid var(--rule);font:400 14px/1.5 var(--sans);color:var(--ar-body)}
 .ar-nn{font:500 13px/1.9 var(--mono);color:var(--soft)}
@@ -290,26 +289,6 @@ span.ar-ref.ar-x{text-decoration:none;color:var(--ar-body)}
 .ar-seen .ar-fig:first-of-type{margin-top:14px}
 @media (max-width:359px){.ar-fig-b{grid-template-columns:88px minmax(0,1fr);column-gap:12px}.ar-fig-im{width:88px;height:88px}.ar-fig-cr{margin-left:100px}.ar-fig-n{font-size:19px}}
 @media (prefers-reduced-motion:reduce){.ar-fig-im img,.ar-fig-hl{transition:none}}
-
-/* ---------- the story door (IMPROVE-2026-10-08 color-page #1, COLOR-PAGE-DESIGN §2.5): a long story is a book ---------- */
-.ar-door{margin-top:26px;padding:20px 18px 18px;background:var(--surface-2);border-radius:var(--r-2);border:1px solid var(--cp-rule,var(--rule))}
-.ar-door .fig{margin:-20px -18px 16px;border-radius:var(--r-2) var(--r-2) 0 0;overflow:hidden}
-.ar-door .fig img{display:block;width:100%;max-height:220px;object-fit:cover}
-.ar-door .fig figcaption{padding:8px 18px 0;font-size:13px}
-.ar-door-k{font:italic 400 17px/1.2 var(--serif);color:var(--soft)}
-.ar-door-t{margin-top:6px;font:400 34px/1.04 var(--serif);letter-spacing:-.02em;text-wrap:balance}
-.ar-door-dek{margin-top:10px;font:400 18px/1.35 var(--serif);color:var(--ink);text-wrap:pretty}
-.ar-door-meta{margin-top:10px;font-size:14px;color:var(--soft)}
-.ar-door-rows{margin-top:12px;border-top:1px solid var(--rule)}
-.ar-door-row{display:grid;grid-template-columns:28px 1fr auto;align-items:baseline;gap:10px;width:100%;min-height:48px;padding:12px 0;border-bottom:1px solid var(--rule);text-align:left;color:var(--ink)}
-.ar-door-row span{font-size:13px;color:var(--soft)}
-.ar-door-row b{font:400 20px/1.2 var(--serif)}
-.ar-door-row em{font:italic 400 17px/1 var(--serif);color:var(--soft)}
-.ar-door-more b{font-size:16px;color:var(--soft);line-height:1.35}
-.ar-door-prog{height:4px;margin-top:14px;border-radius:2px;background:var(--rule);overflow:hidden}
-.ar-door-prog i{display:block;height:100%;width:var(--p);background:var(--ink)}
-.ar-door-go{display:flex;align-items:center;gap:10px;margin-top:16px;width:100%;height:54px;padding:0 20px;border-radius:999px;background:var(--paper);color:var(--paper-ink);font:400 21px/1 var(--serif)}
-.ar-door-go svg{margin-left:auto;flex:none}
 
 /* ---------- the book: its own screen ---------- */
 .ar-rd-top{display:flex;align-items:center;gap:12px;min-height:48px;padding-top:calc(var(--top) + 10px)}   /* below the status bar (an .article screen has no top padding) */
@@ -403,8 +382,24 @@ b.ar-lead-n{font-weight:400}
 .ar-lead-m{display:flex;align-items:center;gap:8px;flex-basis:100%;font:400 14px/1.35 var(--sans);color:var(--soft)}
 .ar-lead-cr{margin-top:4px;font:400 13px/1.4 var(--sans);color:var(--soft)}
 .ar-lead-cr a{color:inherit;text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:2px}
-.ar-door .ar-lead{margin:-20px -18px 16px}
-.ar-door .ar-lead-im{border-radius:var(--r-2) var(--r-2) 0 0;box-shadow:none}
-.ar-door .ar-lead-tx,.ar-door .ar-lead-cr{padding:0 18px}
 .ar-read .ar-lead{margin:16px 0 0}
 @media (prefers-reduced-motion:reduce){.ar-lead-im img{transition:none}}
+
+/* ---------- collapsible chapters, Wikipedia-style (David, 2026-10-09: "the article should be part of the
+   page... minimizing the article could be like minimizing sections — every section can be collapsed, and you
+   tap a section to expand it, just like a Wikipedia article"). A chapter's heading is the whole tap target
+   (≥44px, chevron rotating); the panel opens and closes with the same height animation as the inline Contents
+   bar and the Sources/Test yourself disclosures above (arAccordion, js/article.js). "Expand all / Collapse all"
+   is one quiet text control, not another button. ---------- */
+.ar-sec.ar-cs{margin-top:40px}
+.ar-cs-sum{display:flex;align-items:flex-start;gap:14px;width:100%;min-height:52px;padding:2px 2px 6px;text-align:left}
+.ar-cs-tx{flex:1;min-width:0}
+.ar-cs-sum h2{margin:0}
+.ar-cs-sum .ar-chk{margin:0 0 4px}
+.ar-cs-i{width:9px;height:9px;flex:none;margin-top:20px;border-right:1px solid var(--soft);border-bottom:1px solid var(--soft);transform:rotate(45deg);transition:transform .25s var(--ease)}
+.ar-cs-sum[aria-expanded="true"] .ar-cs-i{transform:rotate(225deg)}
+.ar-cs-body{overflow:hidden}
+.ar-cs-body[hidden]{display:none}
+.ar-expand-all{display:inline-flex;align-items:center;min-height:40px;margin:16px 2px 0;font:italic 400 16px/1 var(--serif);color:var(--soft);text-decoration:underline;text-decoration-color:rgba(236,232,223,.3);text-underline-offset:4px}
+.ar-expand-all:active{opacity:.7}
+@media (prefers-reduced-motion:reduce){.ar-cs-i{transition:none}}

@@ -553,11 +553,85 @@ function arActionsFor(sec) {
 // and between the paragraphs (never two in one gap, spread out): a plate of the colors a paragraph names, the chapter's
 // short attributed quotation, and its key dates. js/article-refs.js later fills the remaining long runs with pictures.
 // a paragraph's self-highlight tracker ({ name, a, done, used, words }): the page's own name takes its own legible
-// color once per call site (lede, each chapter, the door's dek — never the same mention twice, never every mention)
+// color once per call site (lede, each chapter, a quote card — never the same mention twice, never every mention)
 function arSelfMe(art, self) {
   return self ? { name: art.name || self.n, a: arAccent(self.h), done: false, used: new Set([self.slug]), words: arWordsRe() } : null;
 }
-function arSectionHTML(sec, art, self, ch) {
+// ---------- collapsible chapters (David, 2026-10-09: "the article should be part of the page... minimizing the
+// article could be like minimizing sections — every section can be collapsed, and you tap a section to expand
+// it, just like a Wikipedia article") -- a titled section's heading is the whole tap target (chevron, the shared
+// arAccordion height animation below), the first chapter (or first two, when the first is short) start open, the
+// rest start collapsed. State is kept per article slug for this page/session only (AR_SECOPEN: it resets on a
+// hard reload, same as the Contents/Test-yourself disclosures already did) -- re-rendering the same article
+// (navigating away and back without a reload) remembers what the reader opened.
+const AR_SECOPEN = new Map();   // slug -> Set<section id>, currently open
+function arSecWords(sec) {
+  return sec.blocks.reduce((n, b) => n + arPlain(b.text != null ? b.text : [b.say, b.rec].filter(Boolean).join(" ")).split(/\s+/).filter(Boolean).length, 0);
+}
+function arDefaultOpenIds(art) {
+  const titled = art.sections.filter(s => s.title);
+  if (!titled.length) return new Set();
+  const open = new Set([titled[0].id]);
+  if (titled.length > 1 && arSecWords(titled[0]) < 90) open.add(titled[1].id);   // a short first chapter: open the second too
+  return open;
+}
+function arOpenSet(art) {
+  if (!AR_SECOPEN.has(art.slug)) AR_SECOPEN.set(art.slug, arDefaultOpenIds(art));
+  return AR_SECOPEN.get(art.slug);
+}
+// Deep links to one chapter (#/color/<slug>/s-<id>): js/router.js (a different lane) only keeps a third path
+// segment when it's literally "more", so a link like this still opens the color page fine, just with the
+// chapter id silently dropped from the address it rewrites to. Reading the hash ourselves, straight from the
+// hashchange event's own newURL (fixed at dispatch, immune to that later rewrite) or the raw hash at boot,
+// means no router change is needed to still open and scroll to the right chapter.
+function arSecHashMatch(hash) {
+  const m = String(hash || "").match(/^#\/color\/([a-z0-9-]+)\/s-([a-z0-9][a-z0-9_-]*)\/?$/i);
+  return m ? { slug: m[1].toLowerCase(), id: m[2].toLowerCase() } : null;
+}
+let AR_PENDING_SEC = (typeof location !== "undefined" && arSecHashMatch(location.hash)) || null;
+if (typeof addEventListener === "function") addEventListener("hashchange", e => {
+  const raw = e && e.newURL ? "#" + (e.newURL.split("#")[1] || "") : (typeof location !== "undefined" ? location.hash : "");
+  const m = arSecHashMatch(raw);
+  if (m) AR_PENDING_SEC = m;
+});
+function arSyncExpandAll(root) {
+  const btn = root.querySelector("[data-ar-expand-all]"); if (!btn) return;
+  const boxes = [...root.querySelectorAll(".ar-cs[data-ar-sec] > [data-ar-cs-btn]")];
+  const allOpen = boxes.length > 0 && boxes.every(b => b.getAttribute("aria-expanded") === "true");
+  btn.textContent = allOpen ? "Collapse all" : "Expand all";
+}
+function arSecToggle(root, art, btn) {
+  const panel = document.getElementById(btn.getAttribute("aria-controls")); if (!panel) return;
+  arAccordion(btn, panel);
+  const sec = btn.closest("[data-ar-sec]"), id = sec && sec.dataset.arSec, open = btn.getAttribute("aria-expanded") === "true";
+  if (id) { const set = arOpenSet(art); if (open) set.add(id); else set.delete(id); }
+  arSyncExpandAll(root);
+}
+function arExpandAllToggle(root, art, btn) {
+  const boxes = [...root.querySelectorAll(".ar-cs[data-ar-sec] > [data-ar-cs-btn]")];
+  const allOpen = boxes.length > 0 && boxes.every(b => b.getAttribute("aria-expanded") === "true");
+  const set = arOpenSet(art);
+  boxes.forEach(b => {
+    const isOpen = b.getAttribute("aria-expanded") === "true";
+    if (allOpen !== isOpen) return;   // only touch the ones not already at the target state
+    const panel = document.getElementById(b.getAttribute("aria-controls"));
+    if (panel) arAccordion(b, panel);
+    const sec = b.closest("[data-ar-sec]"), id = sec && sec.dataset.arSec;
+    if (id) { if (allOpen) set.delete(id); else set.add(id); }
+  });
+  btn.textContent = allOpen ? "Expand all" : "Collapse all";
+}
+// a shared link or a reload that lands with #…/s-<id>: open that one chapter (if it isn't already) and scroll to it
+function arApplyPendingSection(root, art) {
+  if (!AR_PENDING_SEC || AR_PENDING_SEC.slug !== art.slug) return;
+  const sec = root.querySelector(`.ar-cs[data-ar-sec="${CSS.escape(AR_PENDING_SEC.id)}"]`);
+  if (!sec) return;
+  AR_PENDING_SEC = null;
+  const btn = sec.querySelector("[data-ar-cs-btn]"), panel = btn && document.getElementById(btn.getAttribute("aria-controls"));
+  if (btn && panel && btn.getAttribute("aria-expanded") !== "true") { arAccordion(btn, panel); arOpenSet(art).add(sec.dataset.arSec); arSyncExpandAll(root); }
+  arScrollTo(sec);
+}
+function arSectionHTML(sec, art, self, ch, open) {
   const acts = arActionsFor(sec);
   const items = [];
   sec.blocks.forEach(b => { if (b.t === "p") arSplit(b.text).forEach(t => items.push({ t: "p", text: t })); else items.push(b); });
@@ -582,9 +656,15 @@ function arSectionHTML(sec, art, self, ch) {
   const first = ps[0], cap = first != null && /^[A-Z][A-Za-z]*[\s,]/.test(items[first].text) && arPlain(items[first].text).split(/\s+/).length >= 30 ? first : -1;   // a drop cap on a full first paragraph
   const body = items.map((b, i) => (b.t === "p" ? arBlockHTML(b, art, { hl: { n: 0, self: me }, cls: i === cap ? "ar-dc" : "" }) : arBlockHTML(b, art)) + (after.get(i) || "")).join("");
   const kick = ch && ch.n > 1 && sec.title ? `<p class="ar-chk">Chapter ${ch.i} of ${ch.n}</p>` : "";
-  return `<section class="ar-sec" id="ar-s-${esc(sec.id)}" data-ar-sec="${esc(sec.id)}">${kick}${sec.title ? `<h2>${esc(sec.title)}</h2>` : ""}${body}`
-    + (acts.length ? `<div class="ar-acts">${acts.map(k => `<button type="button" class="ar-act" data-ar-act="${k}" data-ar-sec="${esc(sec.id)}">${AR_ACT_LABEL[k]}<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>`).join("")}</div><div class="ar-slotpanel" data-ar-panel="${esc(sec.id)}" hidden></div>` : "")
-    + `</section>`;
+  const actsHTML = acts.length ? `<div class="ar-acts">${acts.map(k => `<button type="button" class="ar-act" data-ar-act="${k}" data-ar-sec="${esc(sec.id)}">${AR_ACT_LABEL[k]}<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>`).join("")}</div><div class="ar-slotpanel" data-ar-panel="${esc(sec.id)}" hidden></div>` : "";
+  // an untitled section (rare: the gate-recommended "field" section can lack one in old data) has no heading to
+  // tap, so it stays plain, always visible, exactly as before
+  if (!sec.title) return `<section class="ar-sec" id="ar-s-${esc(sec.id)}" data-ar-sec="${esc(sec.id)}">${body}${actsHTML}</section>`;
+  const pid = "ar-cs-b-" + art.slug.replace(/[^a-z0-9]/gi, "") + "-" + sec.id.replace(/[^a-z0-9_-]/gi, "-");
+  return `<section class="ar-sec ar-cs" id="ar-s-${esc(sec.id)}" data-ar-sec="${esc(sec.id)}">
+    <button type="button" class="ar-cs-sum" data-ar-cs-btn aria-expanded="${open ? "true" : "false"}" aria-controls="${pid}"><span class="ar-cs-tx">${kick}<h2>${esc(sec.title)}</h2></span><i class="ar-cs-i" aria-hidden="true"></i></button>
+    <div class="ar-cs-body" id="${pid}"${open ? "" : " hidden"}>${body}${actsHTML}</div>
+  </section>`;
 }
 function arDisambHTML(self, aside) {
   const list = arList(aside.disambiguation).map(arColor).filter(Boolean).filter(c => c.slug !== self.slug);
@@ -656,16 +736,27 @@ function arAccordion(btn, panel) {
   }
 }
 const AR_KIND = { book: "Book", paper: "Paper", article: "Article", web: "Web page", archive: "Archive", standard: "Standard", dictionary: "Dictionary", museum: "Museum", data: "Our own data", computed: "Our own data" };
+// Footnotes/sources as their own collapsed "Sources" section (David, 2026-10-09) -- the same quiet disclosure
+// mechanics as Test yourself (arQuestionsHTML) and the inline Contents bar, all sharing arAccordion.
 function arNotesHTML(art) {
   if (!art.notes.size) return "";
-  return `<section class="ar-notes" id="ar-s-notes"><h2>Notes</h2><ol>${[...art.notes.values()].sort((a, b) => a.n - b.n).map(n => `<li id="ar-note-${n.n}"><span class="ar-nn">${n.n}</span><span class="ar-nc">${esc(arPrimes(n.cite || ""))}${n.kind ? ` <em>${esc(AR_KIND[String(n.kind).toLowerCase()] || n.kind)}</em>` : ""}${/^https?:\/\//.test(n.url || "") ? ` <a href="${esc(n.url)}" target="_blank" rel="noopener">Open ↗</a>` : ""}</span></li>`).join("")}</ol></section>`;
+  const n = art.notes.size, pid = "ar-ns-p-" + art.slug.replace(/[^a-z0-9]/gi, "");
+  return `<section class="ar-disc ar-notes" id="ar-s-notes" data-ar-disc>
+    <button type="button" class="ar-disc-sum" data-ar-disc-btn aria-expanded="false" aria-controls="${pid}">
+      <span class="ar-disc-l">Sources</span><span class="ar-disc-c">${n} note${n === 1 ? "" : "s"}</span><i class="ar-disc-i" aria-hidden="true"></i>
+    </button>
+    <div class="ar-disc-body" id="${pid}" hidden><ol>${[...art.notes.values()].sort((a, b) => a.n - b.n).map(n => `<li id="ar-note-${n.n}"><span class="ar-nn">${n.n}</span><span class="ar-nc">${esc(arPrimes(n.cite || ""))}${n.kind ? ` <em>${esc(AR_KIND[String(n.kind).toLowerCase()] || n.kind)}</em>` : ""}${/^https?:\/\//.test(n.url || "") ? ` <a href="${esc(n.url)}" target="_blank" rel="noopener">Open ↗</a>` : ""}</span></li>`).join("")}</ol></div>
+  </section>`;
 }
 // The whole article as one string (pure: the node test builds it too).
-// Order (David, 2026-10-09 restructure): kicker, lede (+ the one personal line), draft notice, inline Contents
-// (skipped for a short read: AR_SHORT_MIN), the chapters themselves, Family (js/family.js, Tree/Spectrum/Compare/
-// Map) with "Not to be confused with" folded in, You, Test yourself (collapsed), Notes. The facts table (named
-// after / first recorded / source) no longer renders here: it moved into the color page's ID card, where every
-// source is tappable to its own page (js/sources.js) -- arFactsHTML stays for js/article.js's own unit test only.
+// Order (David, 2026-10-09 restructure; collapsible chapters added the same day): kicker, lede (+ the one
+// personal line), draft notice, inline Contents (skipped for a short read: AR_SHORT_MIN) with "Expand all /
+// Collapse all" beside it, the chapters themselves (each one a collapsible block, the first — or first two,
+// when the first is short — open, the rest collapsed), Family (js/family.js, Tree/Spectrum/Compare/Map) with
+// "Not to be confused with" folded in, You, Sources (collapsed), Test yourself (collapsed, last). The facts
+// table (named after / first recorded / source) no longer renders here: it moved into the color page's ID card,
+// where every source is tappable to its own page (js/sources.js) -- arFactsHTML stays for js/article.js's own
+// unit test only.
 const AR_SHORT_MIN = 2;   // minutes: at or under this, no Contents bar and no "Chapter N of M" labels
 // The intro: kicker, lede, the one personal line, the draft notice. Split out so the color page can put its
 // Paintings section between this and arBodyHTML (David, 2026-10-09 order); the /read/ book page below still
@@ -685,22 +776,25 @@ function arHeadHTML(art, self) {
 // article is short (inline), long (a door) or missing, so it's never silently absent on a long article's page;
 // the /read/ book screen still gets it inline, via arBodyHTML below.
 function arFamilyHTML(art, self) { return famHTML(self, art.aside, null, arDisambHTML(self, art.aside)); }
-// The chapters onward: inline Contents (skipped under AR_SHORT_MIN), the chapters, Family, You, Test yourself
-// (collapsed), Notes. The facts table (named after / first recorded / source) moved to the color page's ID card.
+// The chapters onward: inline Contents (skipped under AR_SHORT_MIN) + Expand/Collapse all, the chapters
+// (collapsible), Family, You, Sources (collapsed), Test yourself (collapsed, final). The facts table (named
+// after / first recorded / source) moved to the color page's ID card.
 // opts.noFamily: the color page renders Family in its own slot instead (see arFamilyHTML above).
 function arBodyHTML(art, self, opts = {}) {
   const toc = art.sections.filter(s => s.title), mins = arMinutes(art), short = mins <= AR_SHORT_MIN;
   const tocId = "ar-toc-" + art.slug.replace(/[^a-z0-9]/gi, "");
+  const openSet = arOpenSet(art);
   return `<div class="ar ar-body" data-ar="${esc(art.slug)}">
     ${!short && toc.length > 1 ? `<div class="ar-bar" data-ar-bar>
       <button type="button" class="ar-bar-sum" data-ar-disc-btn aria-expanded="false" aria-controls="${tocId}"><span class="ar-bar-l">Contents</span><span class="ar-bar-c" data-ar-cur></span><span class="ar-bar-n mono" data-ar-pos></span><i class="ar-bar-i" aria-hidden="true"></i><i class="ar-bar-p" data-ar-prog></i></button>
       <div class="ar-bar-list" id="${tocId}" hidden>${toc.map((s, i) => `<button type="button" class="ar-bar-row" data-ar-go="ar-s-${esc(s.id)}"><span class="mono">${i + 1}</span><b>${esc(s.title)}</b></button>`).join("")}</div>
     </div>` : ""}
-    ${art.sections.map(s => arSectionHTML(s, art, self, !short && s.title ? { i: toc.indexOf(s) + 1, n: toc.length } : null)).join("")}
+    ${toc.length > 1 ? `<button type="button" class="ar-expand-all" data-ar-expand-all>${openSet.size >= toc.length ? "Collapse all" : "Expand all"}</button>` : ""}
+    ${art.sections.map(s => arSectionHTML(s, art, self, !short && s.title ? { i: toc.indexOf(s) + 1, n: toc.length } : null, openSet.has(s.id))).join("")}
     ${opts.noFamily ? "" : arFamilyHTML(art, self)}
     ${arYouHTML(self)}
-    ${arQuestionsHTML(art)}
     ${arNotesHTML(art)}
+    ${arQuestionsHTML(art)}
   </div>`;
 }
 // The whole article as one string (pure: the node test builds it too) -- used only by the /read/ book page now;
@@ -807,8 +901,9 @@ function arWire(root, art, self) {
     tick();
   }
   // Contents, inline (David, 2026-10-09: "feels separate from the article"): tapping the summary row expands the
-  // chapter list in place, pushing everything below down; tapping a row scrolls to that chapter and collapses it
-  // again. Test yourself (arQuestionsHTML) uses the exact same arAccordion mechanics on its own disclosure.
+  // chapter list in place, pushing everything below down; tapping a row opens that chapter (each one is now its
+  // own collapsible block) and scrolls to it, then collapses the list again. Sources and Test yourself
+  // (arNotesHTML, arQuestionsHTML) use the exact same arAccordion mechanics on their own disclosures.
   root.querySelectorAll("[data-ar-disc-btn]").forEach(btn => {
     const panel = document.getElementById(btn.getAttribute("aria-controls")); if (!panel) return;
     btn.onclick = () => arAccordion(btn, panel);
@@ -816,8 +911,16 @@ function arWire(root, art, self) {
   root.querySelectorAll("[data-ar-go]").forEach(b => b.onclick = () => {
     const list = b.closest(".ar-bar-list"), sumBtn = list && list.previousElementSibling;
     if (list && sumBtn && !list.hidden) arAccordion(sumBtn, list);
-    const el = document.getElementById(b.dataset.arGo); if (el) arScrollTo(el);
+    const el = document.getElementById(b.dataset.arGo); if (!el) return;
+    const csBtn = el.querySelector("[data-ar-cs-btn]"), csPanel = csBtn && document.getElementById(csBtn.getAttribute("aria-controls"));
+    if (csBtn && csPanel && csBtn.getAttribute("aria-expanded") !== "true") { arAccordion(csBtn, csPanel); arOpenSet(art).add(el.dataset.arSec); arSyncExpandAll(root); }
+    arScrollTo(el);
   });
+  // every chapter's own heading row (the collapsible block itself) and the quiet Expand all / Collapse all control
+  root.querySelectorAll("[data-ar-cs-btn]").forEach(btn => { if (btn.__arCsWired) return; btn.__arCsWired = true; btn.onclick = () => arSecToggle(root, art, btn); });
+  const expandAll = root.querySelector("[data-ar-expand-all]");
+  if (expandAll && !expandAll.__arWired) { expandAll.__arWired = true; expandAll.onclick = () => arExpandAllToggle(root, art, expandAll); }
+  arApplyPendingSection(root, art);
   if (typeof famWire === "function") famWire(root, self, art.aside);
   arWireClicks(root, art, self);
 }
@@ -883,11 +986,14 @@ function arAnswer(root, art, self, btn) {
 }
 
 
-// ---------- the story door and the book (design/IMPROVE-2026-10-08/color-page.md #1, COLOR-PAGE-DESIGN §2.5, §3) ----------
-// A long story is a book you open on purpose, not 11,000 px inline on the color page: the page draws a door (dek, the
-// first chapters, minutes, a resume line) and the book reads on its own screen at #/read/<slug>[/<chapter>], which
-// remembers where you stopped. A short story (under AR_DOOR_MIN words) still reads inline as the page's lead.
-const AR_DOOR_MIN = 600;
+// ---------- the book: a separate, shareable/crawlable screen (design/IMPROVE-2026-10-08/color-page.md #1,
+// COLOR-PAGE-DESIGN §2.5, §3) ----------
+// David, 2026-10-09: "the article should be part of the page... tap a section to expand it, just like a
+// Wikipedia article" -- the full story, chapters and all, now reads inline on its own page (color page and
+// every other page kind that has one: articleRender/articleRenderSplit below, always the full arBuildHTML/
+// arBodyHTML, never a teaser). The separate book screen at #/read/<slug>[/<chapter>] stays reachable (sharing,
+// crawlers, js/router.js's "read" kind), it just isn't a forced step any more -- nothing links to it from a
+// color page, so "Begin reading" and the chapter-list door card are gone.
 // One of the app's own colors without a written article still has its own story: its wiki facets (history,
 // language, symbolism...) become the chapters, and its kin become the last one. Never a twin's story when it has one.
 function arFacetArt(c) {
@@ -902,42 +1008,9 @@ function arFacetArt(c) {
   const slug = routeSlug(c.n), words = sections.reduce((s, x) => s + x.words, 0);
   return { slug, name: c.n, names: [c.n], hex: c.h, tier: "", lede: "", sections, aside: {}, notes: new Map(), questions: [], words, status: "", facet: true, dek: typeof plainText === "function" ? plainText(w.facets[0].text).split(/(?<=[.!?])\s/)[0] : "", sources: w.sources || [] };
 }
-const arChapters = art => art.sections.filter(s => s.title).map((s, i) => ({ id: s.id, title: s.title, i,
-  min: ((m) => m < .75 ? "<1" : String(Math.max(1, Math.round(m))))(((s.words || s.blocks.reduce((t, b) => t + String(b.text || b.say || "").split(/\s+/).length + String(b.rec || "").split(/\s+/).length, 0)) / AR_WPM)) }));
-// where you stopped, per story (inside S, so migrateState keeps it): { s: chapter id, i, n, p: 0..1, done }
+// where you stopped reading the separate book screen (inside S, so migrateState keeps it): { s: chapter id, i, n, p: 0..1, done }
 const arReadStore = () => (S.arRead && typeof S.arRead === "object" ? S.arRead : (S.arRead = {}));
 const arReadState = slug => arReadStore()[slug] || null;
-function arDoorHTML(art, self, fig) {
-  const ch = arChapters(art), st = arReadState(art.slug), mins = arMinutes(art);
-  const started = st && st.p > .03 && !st.done, cur = started ? ch.find(c => c.id === st.s) || ch[0] : null;
-  const left = started ? Math.max(1, Math.round(mins * (1 - st.p))) : 0;
-  // David, 2026-10-09: on a long article the lede already shows on the cover (rpDefinition's first sentence);
-  // showing it again here as the door's dek read as a duplicate. The door now opens straight on the chapter
-  // list instead. `art.dek` would still show if an article ever sets one explicitly (none do today).
-  const dek = art.dek || "";
-  const src = art.notes && art.notes.size ? art.notes.size : (art.sources || []).length;
-  const meta = [`${mins} min`, `${ch.length} chapter${ch.length === 1 ? "" : "s"}`, src ? `${src} source${src === 1 ? "" : "s"}` : ""].filter(Boolean).join(" · ");
-  const rows = started
-    ? `<div class="ar-door-prog" style="--p:${Math.round(st.p * 100)}%"><i></i></div><button type="button" class="ar-door-row ar-door-cont" data-ar-chap="${esc(cur.id)}"><span class="mono">${cur.i + 1}</span><b>Continue · ${esc(cur.title)}</b><em>${left} min left</em></button>`
-    : ch.slice(0, 3).map(c => `<button type="button" class="ar-door-row" data-ar-chap="${esc(c.id)}"><span class="mono">${c.i + 1}</span><b>${esc(c.title)}</b><em>${c.min} min</em></button>`).join("")
-      + (ch.length > 3 ? `<button type="button" class="ar-door-row ar-door-more" data-ar-chap="${esc(ch[3].id)}"><span class="mono">+</span><b>${ch.length - 3} more: ${esc(ch.slice(3).map(c => c.title).join(", "))}</b></button>` : "");
-  return `<section class="ar-door" data-ar-door="${esc(art.slug)}">${fig || ""}
-    <p class="ar-door-k">The story${st && st.done ? " · read" : ""}</p>
-    <h2 class="ar-door-t">${esc(art.name || self.n)}</h2>
-    ${dek ? `<p class="ar-door-dek">${arInline(dek, art, { n: 0, self: arSelfMe(art, self) })}</p>` : ""}
-    <p class="ar-door-meta">${esc(meta)}</p>
-    <div class="ar-door-rows">${rows}</div>
-    <button type="button" class="ar-door-go" data-ar-begin>${started ? `Continue reading · ${left} min` : st && st.done ? "Read it again" : `Begin reading · ${mins} min`}<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-  </section>`;
-}
-function arDoorWire(host, art, self) {
-  host.addEventListener("click", e => {
-    const ch = e.target.closest("[data-ar-chap]"), go = e.target.closest("[data-ar-begin]");
-    if (!ch && !go) return;
-    const st = arReadState(art.slug);
-    arReadPage(art.slug, ch ? ch.dataset.arChap : st && !st.done && st.p > .03 ? st.s : null, true, { art, self });
-  });
-}
 
 // The book: its own screen, the article in full, a contents bar that follows you, a "Back to <color>" at the end.
 const AR_READING = new Map();   // slug -> { art, self } once loaded (a facet story needs the wiki, which may be in by now)
@@ -1005,9 +1078,10 @@ function arReadDraw(slug, chap, push) {
 }
 
 // ---------- entry point ----------
-// Draws the story for `slug` into `host`: the door for a long one (AR_DOOR_MIN words or more), the text itself for a
-// short one. ctx.facet is a story built from the wiki (arFacetArt), used when there's no written article; ctx.fig a
-// cover figure. Resolves true if there is a story; otherwise draws nothing and resolves false.
+// Draws the story for `slug` into `host`, the full article inline (lede, every chapter as its own collapsible
+// block, Family, You, Sources, Test yourself) -- never a teaser that sends the reader to a separate page. ctx.facet
+// is a story built from the wiki (arFacetArt), used when there's no written article; ctx.fig a cover figure.
+// Resolves true if there is a story; otherwise draws nothing and resolves false.
 function articleRender(slug, host, ctx) {
   const none = () => { if (host) { host.innerHTML = ""; host.hidden = true; } return false; };
   if (!host || !slug) return Promise.resolve(false);
@@ -1018,15 +1092,6 @@ function articleRender(slug, host, ctx) {
     const self = arColor(slug) || (ctx && ctx.h ? { slug, n: ctx.n || art.name, h: ctx.h } : art.hex ? { slug, n: art.name, h: art.hex } : null);
     if (!self) return none();
     host.hidden = false;
-    // a wiki-facet story is chapters by nature (history, language, symbolism...): a book from three of them
-    if (!(ctx && ctx.door === false) && (art.facet ? art.sections.length >= 3 : (art.words || arWords(art)) >= AR_DOOR_MIN)) {
-      AR_READING.set(art.slug, { art, self });
-      host.innerHTML = arDoorHTML(art, self, ctx && ctx.fig);
-      arDoorWire(host, art, self);
-      const door = host.querySelector(".ar-door");
-      if (door && !(ctx && ctx.fig) && typeof arfLead === "function") { try { arfLead(f => door.isConnected ? door.prepend(f) : false, art, self); } catch (e) {} }   // every story opens with a picture
-      return true;
-    }
     host.innerHTML = (ctx && ctx.fig || "") + arBuildHTML(art, self);
     const inl = host.querySelector(".ar-wrap");
     if (!(ctx && ctx.fig) && inl && typeof arfLead === "function") { try { inl.__lead = arfLead(f => inl.isConnected ? inl.before(f) : false, art, self); } catch (e) {} }   // every story opens with a picture
@@ -1035,13 +1100,15 @@ function articleRender(slug, host, ctx) {
     return true;
   }).catch(e => { try { console.warn("article render failed:", slug, e); } catch (_) {} return none(); });
 }
-// ---------- the color page's own entry point (David, 2026-10-09 restructure) ----------
+// ---------- the color page's own entry point (David, 2026-10-09 restructure; always inline since) ----------
 // Draws the intro into headHost and the chapters onward into bodyHost, so js/richpage.js can put its Paintings
-// section between them (order #3, before the chapters at #4). For a long article it still draws the teaser door
-// into headHost (bodyHost stays hidden: the full chapters live on the separate /read/ page).
-// Resolves { has, door } so richpage.js knows whether bodyHost actually holds anything to wire/measure.
+// section between them (order #3, before the chapters at #4). Every article renders in full here now, however
+// long: no teaser door, no forced trip to the separate /read/ page (David, 2026-10-09: "the article should be
+// part of the page... at least the short version" -- the long version is now the only version, just with its
+// chapters collapsed past the first one or two). Resolves { has, art, self } so richpage.js knows whether
+// bodyHost actually holds anything to wire/measure.
 function articleRenderSplit(slug, headHost, bodyHost, ctx) {
-  const none = () => { if (headHost) { headHost.innerHTML = ""; headHost.hidden = true; } if (bodyHost) { bodyHost.innerHTML = ""; bodyHost.hidden = true; } return { has: false, door: false }; };
+  const none = () => { if (headHost) { headHost.innerHTML = ""; headHost.hidden = true; } if (bodyHost) { bodyHost.innerHTML = ""; bodyHost.hidden = true; } return { has: false }; };
   if (!headHost || !bodyHost || !slug) return Promise.resolve(none());
   const names = Promise.all([typeof loadCoreNames === "function" ? loadCoreNames() : null, arLoadNames(), arLoadSysRefs()]);
   return Promise.all([arLoad(slug), names]).then(([found]) => {
@@ -1055,22 +1122,6 @@ function articleRenderSplit(slug, headHost, bodyHost, ctx) {
     // the name it's merely close to, and its caption should say "your color" rather than borrow the name's.
     const leadSelf = ctx && ctx.tapped ? { ...self, h: String(ctx.tapped).toUpperCase(), n: "your color", tapped: true } : self;
     headHost.hidden = false;
-    if (!(ctx && ctx.door === false) && (art.facet ? art.sections.length >= 3 : (art.words || arWords(art)) >= AR_DOOR_MIN)) {
-      AR_READING.set(art.slug, { art, self });
-      headHost.innerHTML = arDoorHTML(art, self, null);
-      arDoorWire(headHost, art, self);
-      arWireClicks(headHost, art, self);
-      // David, 2026-10-09: "the painting that uses the color the most should be the photo inside the article...
-      // so all articles and pages feel equal in value" -- the color page used to leave this to its own Paintings
-      // section further down (to avoid a double picture), which meant skimming the top of the page showed no
-      // photo at all for the many colors with no contextual image of their own. Same call, same slot, as the
-      // standalone /read/ page already does (articleRender above): arfLeadPick tries a real contextual photo
-      // first, then falls back to the painting that covers the most of this color.
-      const door = headHost.querySelector(".ar-door");
-      if (door && typeof arfLead === "function") { try { arfLead(f => door.isConnected ? door.prepend(f) : false, art, leadSelf); } catch (e) {} }
-      bodyHost.innerHTML = ""; bodyHost.hidden = true;
-      return { has: true, door: true, art, self };
-    }
     headHost.innerHTML = arHeadHTML(art, self);
     bodyHost.innerHTML = arBodyHTML(art, self, { noFamily: true }); bodyHost.hidden = false;
     arWireClicks(headHost, art, self);
@@ -1078,7 +1129,7 @@ function articleRenderSplit(slug, headHost, bodyHost, ctx) {
     if (headEl && typeof arfLead === "function") { try { arfLead(f => headEl.isConnected ? headEl.before(f) : false, art, leadSelf); } catch (e) {} }
     arWire(bodyHost.querySelector(".ar-body") || bodyHost, art, self);
     if (typeof arfEnhance === "function") { try { arfEnhance(bodyHost, art, self); } catch (e) { try { console.warn("article figures failed:", e); } catch (_) {} } }
-    return { has: true, door: false, art, self };
+    return { has: true, art, self };
   }).catch(e => { try { console.warn("article render failed:", slug, e); } catch (_) {} return none(); });
 }
 

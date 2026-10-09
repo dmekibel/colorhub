@@ -1707,25 +1707,56 @@ scenario("pages", "the focus view locks background scroll and shows the color's 
 });
 
 // David, 2026-10-09: a long article's lede already shows on the cover (the "Almost the same as..." / story-first-
-// sentence line); the door card used to repeat it as its own dek. The door now opens straight on the chapter list.
-scenario("pages", "a long article's lede shows once, on the cover -- not again on the door card", async t => {
+// sentence line); it should never repeat as another dek further down. The article itself (David, same day:
+// "the article should be part of the page... every section can be collapsed, tap a section to expand it, just
+// like a Wikipedia article") now reads inline on the page, however long: every chapter is its own collapsible
+// block, the first one open, the rest collapsed, with a quiet "Expand all" beside Contents.
+scenario("pages", "a long article reads inline (no door) with collapsible chapters and an Expand all control", async t => {
   await H.openPage(t, "#/color/scarlet", "Scarlet");
-  await t.waitFor(".ar-door", 10000, "the story door (Scarlet is long enough for one)");
-  t.expect(!t.$(".ar-door-dek"), "the door card still shows its own dek under the title");
+  t.expect(!t.$(".ar-door"), "the old story door still exists -- the article should read inline now");
   t.expect(t.$(".rp-def") && t.text(".rp-def").length > 10, "the cover has no definition line to show the lede once");
-  t.expect(t.$$(".ar-door-row").length >= 1, "the door opens on the chapter list with no dek in the way");
+  const chapters = await t.waitFor(() => { const l = t.$$(".cp-page .ar-cs[data-ar-sec]"); return l.length >= 2 ? l : null; }, 10000, "Scarlet's chapters, collapsible and inline on the color page");
+  const btns = chapters.map(c => c.querySelector("[data-ar-cs-btn]"));
+  t.expect(btns[0].getAttribute("aria-expanded") === "true", "the first chapter should start open");
+  t.expect(btns.slice(1).some(b => b.getAttribute("aria-expanded") === "false"), "every chapter after the first started open -- at least one should start collapsed");
+  const secondBody = t.d.getElementById(btns[1].getAttribute("aria-controls"));
+  t.expect(secondBody && secondBody.hidden, "a collapsed chapter's body isn't actually hidden");
+  await t.click(btns[1], { wait: 350 });
+  t.expect(btns[1].getAttribute("aria-expanded") === "true" && !secondBody.hidden, "tapping a collapsed chapter's heading didn't open it");
+  t.expect(t.w.location.href.includes("#/color/scarlet"), "tapping a chapter heading navigated away from the color page");
+  const expandAll = t.$(".cp-page [data-ar-expand-all]");
+  t.expect(expandAll, "no Expand all / Collapse all control");
+  await t.click(expandAll, { wait: 350 });
+  t.expect(t.$$(".cp-page .ar-cs [data-ar-cs-btn]").every(b => b.getAttribute("aria-expanded") === "true"), "Expand all didn't open every chapter");
+  t.expect(t.text(expandAll) === "Collapse all", "the control's label didn't flip to \"Collapse all\"");
+  await t.click(expandAll, { wait: 350 });
+  t.expect(t.$$(".cp-page .ar-cs [data-ar-cs-btn]").every(b => b.getAttribute("aria-expanded") === "false"), "Collapse all didn't close every chapter");
 });
 
-// David, 2026-10-09: caught while craft-reviewing Olive (a color with children) -- a door-length article's
-// chapters/Family/Notes live behind "Begin reading", so Family used to be silently absent on the color page for
-// every long article (~260 of the richest ones). It now has its own always-present slot.
-scenario("pages", "Family still shows on a door-length article's color page (Olive -- it has children)", async t => {
+// David, 2026-10-09: a shared #/color/<slug>/s-<id> link should land straight on that chapter, open and
+// scrolled to, even on a long article -- the way a message or a notes app would actually open it (a fresh
+// load), not an in-app tap. "field" (Field notes) is schema-guaranteed last in every article (data/articles/
+// SCHEMA.md), so it's a stable id to link to without first discovering one from a normal page open.
+scenario("pages", "a #/color/<slug>/s-<id> deep link opens straight on that chapter and scrolls to it", async t => {
+  await t.open("#/color/scarlet/s-field", { settle: 1200 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && t.text(".cp-page .cp-hero-foot h1") === "Scarlet", 12000, "Scarlet's color page from the deep link");
+  const btn = () => t.$('.cp-page .ar-cs[data-ar-sec="field"] [data-ar-cs-btn]');
+  await t.waitFor(() => btn() && btn().getAttribute("aria-expanded") === "true", 20000, "the deep-linked chapter (Field notes) should start open");
+  // the scroll-to-it half of this (arScrollTo, js/article.js) is checked by hand against the real app -- this
+  // harness's own body-scroll measurement is unreliable under its virtual clock for a scroll that fires from a
+  // setTimeout after the open animation, so the automated half of this scenario stops at "opened".
+});
+
+// David, 2026-10-09: caught while craft-reviewing Olive (a color with children) -- Family needs to show on the
+// color page no matter how long the article above it is (it has its own always-present slot, independent of
+// the article's own rendering).
+scenario("pages", "Family still shows on a long article's color page (Olive -- it has children)", async t => {
   await H.openPage(t, "#/name/olive", "Olive");
-  await t.waitFor(".ar-door", 10000, "the story door (Olive is long enough for one)");
-  const fam = await t.waitFor(".ar-fam", 8000, "the Family section, even though the article is a door");
+  await t.waitFor("[data-ar-head]:not([hidden]) .ar-lede", 10000, "Olive's article, inline on the color page");
+  const fam = await t.waitFor(".ar-fam", 8000, "the Family section, alongside a long inline article");
   t.expect(t.$$(".fam-trow-l", fam).some(p => p.textContent === "Variations"), "Olive's children ('Variations') don't show in the family tree");
   await t.click([...t.$$(".fam-seg-b", fam)].find(b => b.textContent === "Compare"), { wait: 300 });
-  t.expect(t.$(".fam-cmp-line", fam), "Compare has no split/diff line for a door-length article's color page");
+  t.expect(t.$(".fam-cmp-line", fam), "Compare has no split/diff line for a long article's color page");
 });
 
 // David, 2026-10-09: "header feels too big -- harder to read the article". Scrolling down slims the pinned bar
@@ -1850,18 +1881,18 @@ scenario("pages", "namePage x3: renders, a near name opens another, Back works",
   }
 });
 
-// js/article-refs.js: the figure cards in an article (Mauve has an article, a twin gem, a film and paintings that hold the color)
-scenario("pages", "article figure cards: Mauve draws them, a card opens its page, Back returns to the article", async t => {
+// js/article-refs.js: the figure cards in an article (Mauve has an article, a twin gem, a film and paintings that
+// hold the color). David, 2026-10-09: the article is part of the color page now, so these draw inline -- no trip
+// to a separate screen needed (Expand all just reveals the collapsed chapters they live in).
+scenario("pages", "article figure cards: Mauve draws them inline; a card opens its page; Back returns", async t => {
   await H.openPage(t, "#/color/mauve", "Mauve");
-  // a long story is a door on the page (chapters, minutes); Begin reading opens the book on its own screen
-  const door = await t.waitFor(".ar-door [data-ar-begin]", 20000, "Mauve's story door");
-  t.expect(!t.$(".cp-page .ar-sec"), "the long story is drawn inline on the color page, not behind its door");
-  t.expect(t.$$(".ar-door [data-ar-chap]").length >= 2, "the door lists no chapters");
-  await t.click(door, { wait: 700 });
-  await t.waitFor(() => t.$(".ar-read .ar") && /#\/read\/mauve/.test(decodeURIComponent(t.w.location.hash)), 15000, "the book at #/read/mauve");
-  await t.waitFor(() => t.$$(".ar-fig").length >= 2, 25000, "the article's figure cards");
+  await t.waitFor(() => t.$$(".cp-page .ar-cs[data-ar-sec]").length >= 2, 20000, "Mauve's chapters, inline on the color page");
+  t.expect(!t.$(".ar-door"), "the old story door still exists -- the article should read inline now");
+  const expandAll = await t.waitFor(".cp-page [data-ar-expand-all]", 5000, "the Expand all control");
+  await t.click(expandAll, { wait: 400 });
+  await t.waitFor(() => t.$$(".cp-page .ar-fig").length >= 2, 25000, "the article's figure cards, once every chapter is open");
   // the planned twins (at most 5, one per section) plus the pictures that break up long runs of text (data-ar-gap, at most 10)
-  const all = t.$$(".ar-fig"), figs = all.filter(f => !f.hasAttribute("data-ar-gap")), gapFigs = all.filter(f => f.hasAttribute("data-ar-gap"));
+  const all = t.$$(".cp-page .ar-fig"), figs = all.filter(f => !f.hasAttribute("data-ar-gap")), gapFigs = all.filter(f => f.hasAttribute("data-ar-gap"));
   t.expect(figs.length <= 5, `${figs.length} auto-figures, the limit is 5`);
   t.expect(gapFigs.length <= 10, `${gapFigs.length} pictures between paragraphs, the limit is 10`);
   t.expect(all.every(f => /\d+% match to Mauve/.test(t.text(f.querySelector(".ar-fig-m")))), "a card is missing its '% match to Mauve' line");
@@ -1869,14 +1900,15 @@ scenario("pages", "article figure cards: Mauve draws them, a card opens its page
   t.expect(all.every(f => { const r = f.querySelector(".ar-fig-im").getBoundingClientRect(); return f.classList.contains("ar-wide") ? r.width > 200 && [3 / 4, 2 / 3].some(k => Math.abs(r.height - r.width * k) < 2) : [112, 88].includes(r.width); }), "a card's picture box lost its fixed proportions");
   const secs = figs.map(f => (f.closest("[data-ar-sec]") || {}).id || "seen").filter(x => x !== "seen");
   t.expect(new Set(secs).size === secs.length, "two figures landed in one section");
-  const card = t.$('.ar-fig[data-kind="gem"] .ar-fig-b') || t.$(".ar-fig .ar-fig-b");
+  const card = t.$('.cp-page .ar-fig[data-kind="gem"] .ar-fig-b') || t.$(".cp-page .ar-fig .ar-fig-b");
   const title = t.text(card.querySelector(".ar-fig-n"));
   await t.click(card, { wait: 700 });
   await t.waitFor(() => !t.$(".ar") && t.$(".p-title, .cp-hero-foot h1, .gl-page, .film-page"), 10000, `the page for "${title}"`);
   await t.click("[data-back]", { wait: 600 });
-  await t.waitFor(() => t.$(".ar-read .ar") && t.$$(".ar-fig").length >= 2, 20000, "the book and its figures after Back");
-  await t.click("[data-back]", { wait: 600 });
-  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Mauve" && t.$(".ar-door"), 15000, "Back from the book to Mauve's page and its door");
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Mauve" && t.$$(".cp-page .ar-fig").length >= 2, 15000, "Back returns to Mauve's page, still showing its figures inline");
+  // the separate book screen stays reachable (sharing, crawlers), even though nothing on the color page links to it
+  await t.open("#/read/mauve", { settle: 1500 });
+  await t.waitFor(() => t.$(".ar-read .ar-lede"), 15000, "#/read/mauve still opens its own full-article screen");
 });
 
 scenario("pages", "a tapped in-between hex opens its nearest name with 'Your color'", async t => {
