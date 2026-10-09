@@ -243,7 +243,7 @@ function arfFigHTML(t, self, o) {
   const word = ARF_WORD[t.kind] || "", nm = t.best && t.palNames && t.palNames[t.best.i];
   const sub = [word, t.sub].filter(Boolean).join(" · ");
   const near = t.kind === "painting" || !nm || String(nm).toLowerCase() === String(self.n).toLowerCase() ? "" : ` · ${esc(nm)}`;
-  const cov = t.kind === "painting" && t.cover != null ? `<span class="ar-fig-c">${Math.max(1, Math.round(t.cover * 100))}% of the canvas</span>` : "";
+  const cov = t.kind === "painting" && t.cover != null ? `<span class="ar-fig-c">${esc(arfCoverPhrase(t.cover))}</span>` : "";
   const aria = `${t.name}${t.sub ? ", " + t.sub : ""}. ${t.pctText} to ${self.n}. Open`;
   return `<figure class="ar-fig${wide ? " ar-wide" : ""}" data-kind="${t.kind}" data-ar-fig="${esc(t.key)}"${o && o.gap ? " data-ar-gap" : ""}>
     <button type="button" class="ar-fig-b" data-ar-ref="${esc(t.key)}" aria-label="${esc(aria)}">${arfPicHTML(t)}
@@ -460,16 +460,27 @@ async function arfLeadPick(art, self) {
   if (cs[0]) { cs[0].lead = cs[0].kind; return cs[0]; }
   return null;
 }
+// A museum label (David, 2026-10-09): the painting's own title and painter/year (t.sub, from the gallery's
+// detail shard), then how much of the canvas and how close a match -- "a small accent, about 1% of the canvas"
+// below ARF_MIN_COVER's own honesty line, otherwise "about 18% of the canvas". Same line for every painting
+// figure (arfFigHTML below reuses arfCoverPhrase), so the color page never shows two different captions for the
+// same kind of fact.
+const arfCoverPct = c => Math.max(1, Math.round(c * 100));
+function arfCoverPhrase(c) { return c == null ? "" : c < .02 ? `a small accent, about ${arfCoverPct(c)}% of the canvas` : `about ${arfCoverPct(c)}% of the canvas`; }
+const arfCapFirst = s => s.charAt(0).toUpperCase() + s.slice(1);
 function arfLeadHTML(t, self) {
   const own = t.kind === "own", src = t.img.src;
   const big = t.kind === "painting" && typeof glBig === "function" ? glBig(src) : src;
-  const crop = t.kind === "painting" && t.img.crop && typeof glCropStyle === "function" && t.i != null && typeof GAL !== "undefined" && GAL ? glCropStyle(t.i, { crop: t.img.crop }, ARF_LEAD_AB) : "";
+  // Plain object-fit:cover, always (David, 2026-10-09: the computed crop transform left a white strip on one
+  // edge when a photo's real aspect didn't exactly match the lead box's 16:10 -- not worth the risk box-wide).
   const noref = /^https?:/.test(big) ? ` referrerpolicy="no-referrer"` : "";
-  const im = `<span class="ar-lead-im" style="--c:${t.best.h}"><img src="${esc(big)}" alt="${own ? esc(t.caption || self.n) : ""}" loading="lazy" decoding="async"${noref}${crop} onload="this.classList.add('ld')"></span>`;
+  const im = `<span class="ar-lead-im" style="--c:${t.best.h}"><img src="${esc(big)}" alt="${own ? esc(t.caption || self.n) : ""}" loading="lazy" decoding="async"${noref} onload="this.classList.add('ld')"></span>`;
+  const covLine = t.kind === "painting" && t.cover != null ? arfCoverPhrase(t.cover) : "";
+  const matchTxt = covLine ? `${esc(arfCapFirst(covLine))} · ${esc(t.pctText)} match` : `${esc(t.pctText)} to ${esc(self.n)}`;
   const cap = own ? `<span class="ar-lead-n">${esc(t.caption || self.n)}</span>`
-    : `<span class="ar-lead-k">${esc(ARF_WORD[t.kind] || "")}</span><b class="ar-lead-n">${esc(t.name)}</b><span class="ar-lead-m"><span class="ar-fig-d" aria-hidden="true"><i style="--c:${self.h}"></i><i style="--c:${t.best.h}"></i></span>${esc(t.pctText)} to ${esc(self.n)}</span>`;
+    : `<span class="ar-lead-k">${esc(ARF_WORD[t.kind] || "")}${t.sub ? " · " + esc(t.sub) : ""}</span><b class="ar-lead-n">${esc(t.name)}</b><span class="ar-lead-m"><span class="ar-fig-d" aria-hidden="true"><i style="--c:${self.h}"></i><i style="--c:${t.best.h}"></i></span>${matchTxt}</span>`;
   const credit = arfCreditHTML(t.credit).replace("ar-fig-cr", "ar-lead-cr");
-  const aria = ` aria-label="${esc(`${t.name}. ${t.pctText} to ${self.n}. Open`)}"`;
+  const aria = ` aria-label="${esc(`${t.name}${t.sub ? ", " + t.sub : ""}. ${covLine ? arfCapFirst(covLine) + ". " : ""}${t.pctText} match. Open`)}"`;
   return `<figure class="ar-lead" data-kind="${t.kind}" data-ar-lead="${esc(t.key || "own")}">${own ? im + `<div class="ar-lead-tx">${cap}</div>`
     : `<button type="button" class="ar-lead-b" data-ar-ref="${esc(t.key)}"${aria}>${im}<span class="ar-lead-tx">${cap}</span></button>`}${credit}</figure>`;
 }

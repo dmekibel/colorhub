@@ -1,0 +1,13 @@
+/* Source pages (js/sources.js sourcePage) -- one short page per naming system the app cites, reached by tapping
+   any source mention on a color page (the cover's tier line, the ID card, a citation popover). Reuses the app's
+   shared .ar-facts / .lk-list / .lk-row primitives (css/article.css, app.css) for the facts and the color strip. */
+.src-top{display:flex;align-items:center;gap:12px;min-height:48px;padding-top:calc(var(--top) + 10px)}
+.src-top-t{flex:1;font:italic 400 17px/1.2 var(--serif);color:var(--soft)}
+.src-band{margin:14px 0 0}
+.src-band h1{font:400 40px/1.05 var(--serif);letter-spacing:-.02em;margin-top:4px;text-wrap:balance}
+.src-short{font:italic 400 16px/1.3 var(--serif);color:var(--soft);margin-top:4px}
+.src-facts{margin-top:24px}
+.src-caveat{margin-top:16px}
+.src-h2{font:400 26px/1.1 var(--serif);letter-spacing:-.01em;margin:36px 0 12px}
+.src-strip{margin-top:4px;max-height:420px;overflow-y:auto}
+.src-link{display:inline;color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(236,232,223,.5);text-underline-offset:2px;font:inherit}
