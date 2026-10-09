@@ -581,6 +581,12 @@ scenario("home", "the ordinary pinch-out floor lets a finite layout zoom out to 
 // across three points well apart is robust to that while staying just as sensitive to the real bug (nothing
 // moves ANYWHERE).
 const panMoved = async (t, note) => {
+  // a hard, unanimated recenter first: several of these checks run back-to-back on the same map (this scenario's
+  // own loop, 4 arrangement-and-close combos), and the real app always lands at a sane position after a fresh
+  // arrangement pick or a fresh open -- but a scripted test, same direction every time, can otherwise walk the
+  // view to a finite layout's own edge over several calls and legitimately rubber-band there, which isn't the bug
+  // this guards (js/honey.js ctrl._qaRecenter).
+  if (t.ev("typeof HM_CTRL !== 'undefined' && !!HM_CTRL._qaRecenter")) { t.ev("HM_CTRL._qaRecenter()"); await t.sleep(50); }
   const r = t.$("canvas").getBoundingClientRect();
   const cv = t.$("canvas");
   const pts = [[r.width * .3, r.height * .4], [r.width * .5, Math.min(r.height * .7, r.height - 20)], [r.width * .7, r.height * .5]];
@@ -593,7 +599,8 @@ const panMoved = async (t, note) => {
   await t.sleep(250);
   const after = pts.map(([x, y]) => H.canvasSig(cv, x, y, 8));
   const dists = pts.map((_, i) => H.dist(before[i], after[i])), maxD = Math.max(...dists);
-  t.expect(maxD > 8, `a pan did not move the map${note ? ` (${note})` : ""} (best of ${dists.map(d => d.toFixed(1)).join(", ")}, wanted > 8)`);
+  const dbg = maxD <= 8 ? (() => { try { return JSON.stringify(t.ev("HM_CTRL._qaState()")); } catch (e) { return "qaState threw: " + e; } })() : "";
+  t.expect(maxD > 8, `a pan did not move the map${note ? ` (${note})` : ""} (best of ${dists.map(d => d.toFixed(1)).join(", ")}, wanted > 8) STATE=${dbg}`);
 };
 scenario("home", "a real pan actually repaints the canvas, in several states: plain, after the sheet, after Close with the pill showing", async t => {
   await H.homeReady(t);
@@ -659,6 +666,27 @@ scenario("home", "after closing the Colors/Arrange sheet, nothing blocks the map
       await panMoved(t, `closed with ${how}, ${arr}`);
     }
   }
+});
+// The exact mechanism, isolated: js/home.js's double-tap-to-close-Arrange (dblClose) deliberately stops the
+// second tap's pointerup from ever reaching the honeycomb's own canvas listener (js/honey.js), so the map's own
+// double-tap-to-zoom doesn't ALSO fire -- but that tap's pointerdown already landed in the honeycomb's pointer-
+// tracking Map, and nothing used to tell it the matching up was never coming. The next real, single-finger pan
+// then found two "pointers" on record, took the two-finger pinch branch with one finger frozen at the old tap's
+// position, and P came out of that pinch math astronomically wrong (js/home.js now calls the honeycomb's new
+// ctrl._releasePointer(id) right where it intercepts the event). This checks the mechanism directly rather than
+// only its downstream symptom (a stuck pan): right after a double-tap close, exactly 0 pointers are on record.
+scenario("home", "a double-tap that closes Arrange doesn't leave a ghost pointer behind in the honeycomb", async t => {
+  await H.homeReady(t);
+  await H.sheet(t, "arrange");
+  const cv = t.$("canvas"), r = cv.getBoundingClientRect(), tx = r.left + r.width / 2, ty = r.top + 60;
+  const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 23, pointerType: "touch", isPrimary: true, view: t.w });
+  cv.dispatchEvent(mk("pointerdown", tx, ty)); cv.dispatchEvent(mk("pointerup", tx, ty));
+  await t.sleep(80);
+  cv.dispatchEvent(mk("pointerdown", tx, ty)); cv.dispatchEvent(mk("pointerup", tx, ty));
+  await t.waitFor(() => !t.$(".hm-chooser"), 3000, "the sheet to close with a double-tap");
+  const st = t.ev("HM_CTRL._qaState()");
+  t.expect(st.ptrsSize === 0, `the honeycomb still has ${st.ptrsSize} pointer(s) on record after the double-tap closed Arrange`);
+  t.expect(!st.pinch, "the honeycomb thinks a pinch is still in progress after the double-tap closed Arrange");
 });
 
 scenario("home", "mapSelect: a preview mode that auto-arranges the selection and restores on clear", async t => {
