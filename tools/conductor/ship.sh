@@ -28,4 +28,4 @@ fi
 [ $ok = 1 ] || fail=1
 if [ $fail = 0 ]; then git add index.html; git commit -qm "Ship ?v=$NEW
 
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"; git push -q origin main 2>&1 | tail -1; echo "SHIPPED ?v=$NEW"; else git checkout -q index.html; echo "NOT SHIPPED"; fi
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"; if git push -q origin main 2>/tmp/ship-push.log; then echo "SHIPPED ?v=$NEW"; else grep -E 'GH0|secret|rejected|path:|commit:' /tmp/ship-push.log | head -8; echo "COMMITTED ?v=$NEW BUT PUSH FAILED -- NOT LIVE"; fi; else git checkout -q index.html; echo "NOT SHIPPED"; fi
