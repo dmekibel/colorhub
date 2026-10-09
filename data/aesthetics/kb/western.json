@@ -3,10 +3,13 @@
  "name": "Western",
  "lineage": {
   "influenced_by": [
+   "real 19th-century American cattle-ranching workwear",
+   "Hollywood Western films' romanticized visual mythology"
+  ],
+  "influences": [
    "americana",
    "mob-wife"
-  ],
-  "influences": []
+  ]
  },
  "eras": [
   "19th c. roots; recurring fashion revival"
@@ -17,11 +20,22 @@
   "leather fringe",
   "turquoise jewelry"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
- "revivals": [],
- "article": "",
+ "media": [
+  {
+   "title": "Hollywood Western films of the 1930s-60s (John Ford's work especially)",
+   "note": "the main vehicle that turned working ranch dress into a widely recognized fashion silhouette"
+  }
+ ],
+ "figures": [
+  "John Ford"
+ ],
+ "reacts_against": "nothing consistent across its many revivals; each wave (1950s, 1980s, 2020s) has drawn on the same source wardrobe for different reasons, from pure Hollywood romance to 2020s \"yeehaw\" irony.",
+ "revivals": [
+  "1980s urban cowboy trend",
+  "2018-20 \"yeehaw agenda\" revival",
+  "2023-24 western/mob-wife-adjacent maximalism"
+ ],
+ "article": "Western fashion draws on real 19th-century American cattle-ranching workwear — denim built to withstand hard labor, leather chaps, sturdy boots — but the specific romanticized silhouette most people picture (fringe, turquoise jewelry, an idealized rugged individualism) owes at least as much to Hollywood Western films of the 1930s-60s, particularly John Ford's work, as to any actual period ranch photography. The look has resurfaced in fashion repeatedly and for different reasons each time: a 1980s \"urban cowboy\" trend tied to the film of the same name, a 2018-20 internet-driven \"yeehaw agenda\" that reclaimed Western style partly through Black country and hip-hop culture's own relationship to cowboy imagery, and a 2023-24 wave that arrived alongside — and partly overlapped with — the mob wife trend's maximalist mood. That repeated, differently-motivated cycling is typical of workwear-derived aesthetics on this list, where the garments' practical origin stays constant while their cultural meaning shifts with each revival.",
  "wiki_facts": {},
  "sources": [
   {

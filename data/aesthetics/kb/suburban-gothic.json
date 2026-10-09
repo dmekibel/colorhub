@@ -3,8 +3,7 @@
  "name": "Suburban Gothic",
  "lineage": {
   "influenced_by": [
-   "liminal-space",
-   "weirdcore"
+   "postwar American suburban development and its promise of uniform, idealized domestic life"
   ],
   "influences": []
  },
@@ -17,11 +16,22 @@
   "manicured lawns",
   "chain-link fences"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
+ "media": [
+  {
+   "title": "Blue Velvet (1986, dir. David Lynch)",
+   "note": "the film most frequently cited as the genre's defining text"
+  },
+  {
+   "title": "Edward Scissorhands (1990)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "David Lynch"
+ ],
+ "reacts_against": "the postwar suburb's own promise of safety and normalcy, treating that very tidiness as a mask for repression or danger.",
  "revivals": [],
- "article": "",
+ "article": "Suburban Gothic is less a fashion look than a recurring move in film and fiction: setting horror, unease or repression inside the clean, orderly, pastel-colored postwar American suburb, so that the neighborhood's own tidiness becomes the source of dread rather than its opposite. David Lynch's Blue Velvet (1986) is the genre's most frequently cited touchstone, opening with a famously idyllic suburban street shot that pulls back to reveal severed violence hidden just beneath the lawn; Tim Burton's Edward Scissorhands (1990) uses a nearly identical pastel-suburb backdrop for a gentler but similarly unsettling fable. Because the label describes a critical and artistic strategy applied across many decades of different films, books and photography rather than one dated visual movement, its specific color and prop vocabulary (pastel houses, manicured lawns, station wagons, fluorescent kitchen light) has stayed remarkably consistent even as the genre's tone has shifted from Lynch's surrealism to lighter, more contemporary internet-horror uses of the same suburban unease.",
  "wiki_facts": {},
  "sources": [
   {

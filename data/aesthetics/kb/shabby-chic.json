@@ -3,10 +3,11 @@
  "name": "Shabby Chic",
  "lineage": {
   "influenced_by": [
-   "grandmillennial",
-   "cottagecore"
+   "English country-house antique furniture traditions"
   ],
-  "influences": []
+  "influences": [
+   "grandmillennial"
+  ]
  },
  "eras": [
   "coined 1989"
@@ -17,11 +18,18 @@
   "faded floral linen",
   "white-washed finishes"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
+ "media": [
+  {
+   "title": "Rachel Ashwell, Shabby Chic (book, 1996)",
+   "note": "the style's defining published statement"
+  }
+ ],
+ "figures": [
+  "Rachel Ashwell"
+ ],
+ "reacts_against": "both overly formal, untouchable \"museum\" antique display and sterile modern minimalism, favoring furniture that looks lived-in, loved and gently distressed instead.",
  "revivals": [],
- "article": "",
+ "article": "Shabby chic has an unusually clean paper trail for an interior-design style: British designer Rachel Ashwell opened a Santa Monica shop under that exact name in 1989, built around deliberately distressed, white-painted antique furniture and faded floral linen, and codified the look nationally with her 1996 book Shabby Chic. The style's core idea — elegance that looks gently aged and used rather than pristine — positioned it against both overly formal antique collecting (where pieces are treated as untouchable museum objects) and the sterile, hard-edged minimalism dominant in 1990s interior design media. Ashwell's brand built a substantial retail business around the aesthetic through the 1990s-2000s, and the look's soft, faded palette and love of secondhand and inherited objects anticipated several later trends by decades, grandmillennial decorating in particular revives much of the same chintz-and-antique sensibility for a different generation.",
  "wiki_facts": {},
  "sources": [
   {

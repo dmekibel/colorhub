@@ -3,10 +3,12 @@
  "name": "Pin-up",
  "lineage": {
   "influenced_by": [
-   "rockabilly",
-   "mcbling"
+   "commercial illustration traditions of the 1930s-40s (Gil Elvgren, Alberto Vargas)",
+   "wartime morale and advertising imagery"
   ],
-  "influences": []
+  "influences": [
+   "rockabilly"
+  ]
  },
  "eras": [
   "1940s-1950s"
@@ -17,11 +19,25 @@
   "high-waisted shorts",
   "red lipstick"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
- "revivals": [],
- "article": "",
+ "media": [
+  {
+   "title": "Gil Elvgren's calendar illustrations (1940s-60s)",
+   "note": "among the most widely reproduced pin-up artwork of the era"
+  },
+  {
+   "title": "Bettie Page's 1950s photography",
+   "note": "a key later figure bridging illustration-era pin-up into photographic pin-up"
+  }
+ ],
+ "figures": [
+  "Gil Elvgren",
+  "Bettie Page"
+ ],
+ "reacts_against": "wartime austerity and rationing, offering a deliberately glamorous, idealized escapism through illustration and photography even as real fabric and goods were restricted.",
+ "revivals": [
+  "1990s-2000s \"neo-burlesque\" revival (Dita Von Teese and others)"
+ ],
+ "article": "Pin-up as a recognizable visual genre grew through 1930s-40s American commercial illustration, with artists like Gil Elvgren producing calendar and advertising artwork built around a specific, idealized glamorous female figure — bright red lipstick, victory-roll hair, playful poses — distributed enormously during World War II as morale imagery for servicemen even while fabric itself was being rationed at home. Bettie Page's 1950s photography later carried the same visual vocabulary from illustration into photography, becoming one of the genre's most enduringly recognizable figures. The look went dormant as a mainstream reference for several decades before a \"neo-burlesque\" revival, led by performers like Dita Von Teese from the 1990s-2000s on, brought pin-up's silhouette back into fashion and performance culture, this time reframed partly as a knowing, performer-controlled reclamation of an aesthetic originally produced almost entirely by and for men.",
  "wiki_facts": {},
  "sources": [
   {

@@ -3,10 +3,12 @@
  "name": "Minimalism",
  "lineage": {
   "influenced_by": [
-   "japandi",
-   "wabi-sabi"
+   "1960s minimalist fine art and architecture (Donald Judd, Agnes Martin)",
+   "Japanese Zen aesthetics and wabi-sabi"
   ],
-  "influences": []
+  "influences": [
+   "japandi"
+  ]
  },
  "eras": [
   "design roots 1960s; lifestyle trend peaked 2010s"
@@ -17,11 +19,19 @@
   "neutral linen",
   "pale wood"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
+ "media": [
+  {
+   "title": "Marie Kondo, The Life-Changing Magic of Tidying Up (2011 book; Netflix series from 2019)",
+   "note": "the single biggest driver of minimalism's 2010s lifestyle-trend form"
+  }
+ ],
+ "figures": [
+  "Donald Judd",
+  "Marie Kondo"
+ ],
+ "reacts_against": "postwar consumer clutter and (in its 1960s fine-art origin) the emotional excess of Abstract Expressionism, paring both down to essential form.",
  "revivals": [],
- "article": "",
+ "article": "Minimalism as a design philosophy traces to 1960s fine art and architecture, where artists like Donald Judd stripped sculpture down to industrial, unornamented geometric form as a direct reaction against Abstract Expressionism's emotional, gestural excess — a lineage that long predates the word's current lifestyle-trend usage. That older minimalism fed into decades of architecture and product design before a much more specifically 2010s version took hold in popular culture, driven overwhelmingly by Marie Kondo's 2011 book and its hugely popular 2019 Netflix adaptation, which turned \"does it spark joy\" into a household phrase and pushed a particular beige-and-white, possession-light interior style into mainstream home-decor media. That lifestyle-trend version of minimalism is specifically what grandmillennial and maximalism were both later named in explicit reaction against, even though the underlying design philosophy it draws on is six decades older and considerably broader than the decluttering fad built on top of it.",
  "wiki_facts": {},
  "sources": [
   {

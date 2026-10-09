@@ -3,10 +3,13 @@
  "name": "Americana",
  "lineage": {
   "influenced_by": [
-   "rockabilly",
-   "farmcore"
+   "mid-20th century American roadside and small-town commercial design (diners, drive-ins, gas stations)",
+   "denim workwear's long association with American manufacturing"
   ],
-  "influences": []
+  "influences": [
+   "western",
+   "country"
+  ]
  },
  "eras": [
   "recurring, mid-20th century roots"
@@ -17,11 +20,18 @@
   "red-white-and-blue",
   "chrome"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
+ "media": [
+  {
+   "title": "Edward Hopper's paintings of American diners and gas stations (1930s–1950s)",
+   "note": "a frequently cited visual-art touchstone, predating the fashion sense of the term"
+  }
+ ],
+ "figures": [
+  "Edward Hopper"
+ ],
+ "reacts_against": "nothing consistent; Americana's meaning shifts with who's invoking it, which is part of why fashion and design coverage treats it as a broad, politically loaded reference rather than one fixed trend.",
  "revivals": [],
- "article": "",
+ "article": "Americana draws its visual vocabulary from mid-20th century small-town and roadside American commercial design — diners, drive-in theaters, chrome-trimmed cars, hand-painted road signage — a visual world Edward Hopper's paintings had already been documenting with a certain wistful distance since the 1930s, decades before \"Americana\" became a fashion or design-trend label. Denim, as both a practical workwear fabric and a symbol of American manufacturing, runs through nearly every version of the look. What makes Americana harder to pin down than most entries on this list is how much its connotation depends on context: the same red-white-and-blue, diner-and-denim visual language can read as cozy small-town nostalgia, ironic kitsch, or pointed patriotic statement depending entirely on who's using it and why, which is why design and fashion writers tend to treat it as a broad recurring reference pool rather than a single coherent movement with one fixed meaning.",
  "wiki_facts": {},
  "sources": [
   {

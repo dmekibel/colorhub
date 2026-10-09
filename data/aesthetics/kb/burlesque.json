@@ -3,10 +3,12 @@
  "name": "Burlesque",
  "lineage": {
   "influenced_by": [
+   "Victorian-era theatrical parody and variety entertainment"
+  ],
+  "influences": [
    "pin-up",
    "glam-rock"
-  ],
-  "influences": []
+  ]
  },
  "eras": [
   "19th c. roots; American form from 1868; neo-burlesque revival 1990s"
@@ -17,11 +19,25 @@
   "ostrich feathers",
   "rhinestones"
  ],
- "media": [],
- "figures": [],
- "reacts_against": "",
- "revivals": [],
- "article": "",
+ "media": [
+  {
+   "title": "Lydia Thompson and her British Blondes troupe (American tour, 1868)",
+   "note": "the production most credited with establishing American burlesque as a genre"
+  },
+  {
+   "title": "Dita Von Teese's performances (1990s–)",
+   "note": "central to the neo-burlesque revival"
+  }
+ ],
+ "figures": [
+  "Lydia Thompson",
+  "Dita Von Teese"
+ ],
+ "reacts_against": "Victorian theatrical propriety, using exaggerated costume, comedy and partial undress as deliberate, provocative parody of \"respectable\" entertainment.",
+ "revivals": [
+  "\"neo-burlesque\" revival, 1990s–present"
+ ],
+ "article": "American burlesque traces to a specific 1868 touring production: Lydia Thompson's British Blondes troupe, performing irreverent comic parodies of classical and mythological stories in revealing costume, scandalized and captivated New York audiences in roughly equal measure, establishing the genre's core formula of satire, spectacle and partial undress aimed squarely at Victorian theatrical propriety. The genre's visual language — corsetry, ostrich feathers, rhinestones, elaborate fans — developed over the following decades as burlesque moved from theatrical parody toward the striptease-adjacent variety entertainment more commonly pictured today. A \"neo-burlesque\" revival, led most visibly by performer Dita Von Teese from the 1990s on, brought the look back into fashion and nightlife culture, this time explicitly framed by many of its performers as a form of body-positive, self-directed glamour rather than entertainment produced primarily for a male audience — a reframing that echoes pin-up's own more recent reclamation.",
  "wiki_facts": {},
  "sources": [
   {
