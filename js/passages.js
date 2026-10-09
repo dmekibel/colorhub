@@ -139,6 +139,7 @@ function passagePage(p) {
     }).join("")}<p class="fine">Hex values are our screen approximations of what each word meant.</p></section>
     ${more.length ? `<div class="sec-head"><b>More from ${esc(p.author)}</b><span>${more.length}</span></div>${masonry(more.slice(0, 6).map(psgPin))}` : ""}
     ${alsoColor.length ? `<div class="sec-head"><b>Also ${esc(top.app.toLowerCase())}</b><span>${alsoColor.length}</span></div>${masonry(seeded(alsoColor, p.id).slice(0, 4).map(psgPin))}` : ""}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "passage:" + p.id, title: p.title }) : ""}
     <section class="srcs"><h3>Source</h3><ul><li><a href="${esc(p.source)}" target="_blank" rel="noopener">${esc(p.work)}${p.translator ? ` (${esc(p.translator)})` : ""} · Project Gutenberg</a></li>
       <li>Public domain in the US: ${p.translator ? (p.trYear ? `this translation was published in ${p.trYear}, before 1930` : "an older translation that Project Gutenberg cleared as US public domain") : `published in ${p.year < 0 ? Math.abs(p.year) + " BCE" : p.year}, before 1930`}.</li></ul>
       <p class="fine"><button class="lnk" data-arch="psg:index">All passages</button></p></section>

@@ -798,6 +798,8 @@ function glPage(i, d, fromHex, tol) {
     <div class="pt-arrive gl-arrive" data-glarrive hidden></div>
     <div class="gl-cov" data-glcov></div>
     <div data-csacts></div>
+    ${!S.pmMapHintSeen ? `<p class="gl-pmap-hint" data-glpmhint><i aria-hidden="true"></i><span>New: browse paintings by how alike their colors are</span></p>` : ""}
+    <button class="gl-pmap gl-pmap-top" data-pmap="arr=similar&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
     </div></div>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <div class="gl-finds"><div class="sec-head"><b>Findings</b><span>as photographed</span></div>
@@ -813,6 +815,19 @@ function glPage(i, d, fromHex, tol) {
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
   `, "article gl-page");
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
+  // first-run hint (David, 2026-10-09: "it should be more prominent"), once -- same "fades out at the first touch
+  // anywhere" pattern as the honeycomb's own first-run hint (js/learn.js lrMapHint), but inline beside the button
+  // itself (not position:fixed) since this page scrolls and the button isn't pinned to one spot on screen
+  const pmHint = el.querySelector("[data-glpmhint]");
+  if (pmHint) {
+    S.pmMapHintSeen = 1; save();   // shown once ever, not "until dismissed" -- a later open never shows it again
+    const dismiss = () => {
+      document.removeEventListener("pointerdown", dismiss, true);
+      if (!pmHint.isConnected) return;
+      pmHint.classList.add("out"); later(() => pmHint.remove(), reduceMotion ? 0 : 320);
+    };
+    document.addEventListener("pointerdown", dismiss, true);
+  }
   // "You can name 4 of 6" (js/coverage.js) for the colors on screen, one name each, and "Learn the rest"
   const drawCov = pal => {
     const host = el.querySelector("[data-glcov]");
@@ -1187,7 +1202,10 @@ function glPage(i, d, fromHex, tol) {
 // fetch to pass, so that fails the whole load (confirmed: ERR_FAILED, "blocked by CORS policy"). Rather than
 // give up on ~40% of the corpus, glCommonsResolve() below gets the real, already-CORS-safe URL a different way.
 // The Art Institute's local copies (img/gallery/aic/) are same-origin, so they just work with no entry here at
-// all; Cleveland's CDN sends no CORS header anywhere in its chain, so it's the one source that's genuinely stuck.
+// all. Cleveland is the one source still genuinely stuck: re-checked 2026-10-09 (David asked whether their Open
+// Access API exposes a CORS path, the way Commons' MediaWiki API did) — neither openaccess-api.clevelandart.org
+// (the JSON API itself) nor any size on openaccess-cdn.clevelandart.org (web/print/full) sends
+// Access-Control-Allow-Origin, with or without an Origin header, so there's no door in anywhere in that chain.
 const GL_CORS_HOSTS = new Set(["api.nga.gov", "iiif.micr.io", "images.metmuseum.org", "api.smk.dk", "iip-thumb.smk.dk"]);
 function glCORS(url) {
   try { return GL_CORS_HOSTS.has(new URL(String(url || ""), location.href).hostname) ? ' crossorigin="anonymous"' : ""; }

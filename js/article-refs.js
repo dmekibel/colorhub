@@ -132,7 +132,11 @@ function arfPainting(id) {
         // the title, picture and credit come from the detail shard: loaded only for a painting that is close enough to be shown
         fill: () => glDetail(i).then(d => {
           base.name = d.t; base.sub = [d.a || d.co, glYear(i)].filter(Boolean).join(" · ");
-          base.img = d.img ? { src: d.img, cors: /^img\//.test(d.img) || (typeof glCORS === "function" && glCORS(d.img) !== ""), crop: d.crop || null } : null;
+          // d.hi (the detail shard's own high-res field, same one js/gallery.js glPage swaps in after the small
+          // copy): without it, a lead picture backed by a local thumbnail (img/gallery/...) stayed at that
+          // thumbnail's own small size forever, stretched to the lead box's full width -- blurry (David,
+          // 2026-10-09). arfLead below does the same progressive swap glPage does.
+          base.img = d.img ? { src: d.img, hi: d.hi || "", cors: /^img\//.test(d.img) || (typeof glCORS === "function" && glCORS(d.img) !== ""), crop: d.crop || null } : null;
           base.credit = { credit: src.name + (src.credit ? " · " + src.credit : ""), url: d.rec || "", licenseUrl: "" };
         }) };
       return base;
@@ -439,7 +443,11 @@ async function arfLeadPaintings(art, self, row) {
 async function arfLeadPick(art, self) {
   if (!art || !self || !/^#[0-9a-f]{6}$/i.test(self.h || "")) return null;
   if (typeof loadWiki === "function") { try { await loadWiki(); } catch (e) {} }
-  const own = arfLeadOwn(art, self); if (own) return own;
+  // self.tapped (js/article.js articleRenderSplit's leadSelf): an in-between color's own lead should match the
+  // exact hex the visitor tapped, not the named color's unrelated contextual photo (David, 2026-10-09: "the
+  // lead picture should match the user's color, and say which") -- skip straight to the scored painting/gem/
+  // flower search below, which already keys off self.h (here, the tapped hex).
+  const own = self.tapped ? null : arfLeadOwn(art, self); if (own) return own;
   const inTime = arfInTime(art);
   let row = null;
   for (const sl of [...new Set([art.slug, self.slug, ...(art.names || []).map(n => routeSlug(n))].filter(Boolean))]) { row = await arfGraphRow(sl); if (row) break; }
@@ -474,13 +482,22 @@ function arfLeadHTML(t, self) {
   // Plain object-fit:cover, always (David, 2026-10-09: the computed crop transform left a white strip on one
   // edge when a photo's real aspect didn't exactly match the lead box's 16:10 -- not worth the risk box-wide).
   const noref = /^https?:/.test(big) ? ` referrerpolicy="no-referrer"` : "";
-  const im = `<span class="ar-lead-im" style="--c:${t.best.h}"><img src="${esc(big)}" alt="${own ? esc(t.caption || self.n) : ""}" loading="lazy" decoding="async"${noref} onload="this.classList.add('ld')"></span>`;
+  // data-hi: the real, full-size museum image (same field js/gallery.js glPage swaps in after this small copy);
+  // arfLead below wires the swap once the figure is actually in the page.
+  const hiAttr = t.img.hi ? ` data-hi="${esc(t.img.hi)}"` : "";
+  const im = `<span class="ar-lead-im" style="--c:${t.best.h}"><img src="${esc(big)}" alt="${own ? esc(t.caption || self.n) : ""}" loading="lazy" decoding="async"${noref}${hiAttr} onload="this.classList.add('ld')"></span>`;
   const covLine = t.kind === "painting" && t.cover != null ? arfCoverPhrase(t.cover) : "";
-  const matchTxt = covLine ? `${esc(arfCapFirst(covLine))} · ${esc(t.pctText)} match` : `${esc(t.pctText)} to ${esc(self.n)}`;
+  // t.pctText (arfPctText -> pctMatch) already reads "98% match" on its own -- appending a second literal
+  // "match" after it read as "98% match match" (David, 2026-10-09). Always say what it's a match *to*, so a
+  // tapped color's own lead (self.n "your color") reads unambiguously, not just implied by page context.
+  const matchTxt = covLine ? `${esc(arfCapFirst(covLine))} · ${esc(t.pctText)} to ${esc(self.n)}` : `${esc(t.pctText)} to ${esc(self.n)}`;
+  // Title first (what you're looking at), then who/when, then the match line -- a museum label reads top to
+  // bottom in that order; this used to lead with "Painting · <artist> · <year>" ahead of the title itself,
+  // which read as a run-on (David, 2026-10-09).
   const cap = own ? `<span class="ar-lead-n">${esc(t.caption || self.n)}</span>`
-    : `<span class="ar-lead-k">${esc(ARF_WORD[t.kind] || "")}${t.sub ? " · " + esc(t.sub) : ""}</span><b class="ar-lead-n">${esc(t.name)}</b><span class="ar-lead-m"><span class="ar-fig-d" aria-hidden="true"><i style="--c:${self.h}"></i><i style="--c:${t.best.h}"></i></span>${matchTxt}</span>`;
+    : `<b class="ar-lead-n">${esc(t.name)}</b>${t.sub ? `<span class="ar-lead-k">${esc(t.sub)}</span>` : (ARF_WORD[t.kind] ? `<span class="ar-lead-k">${esc(ARF_WORD[t.kind])}</span>` : "")}<span class="ar-lead-m"><span class="ar-fig-d" aria-hidden="true"><i style="--c:${self.h}"></i><i style="--c:${t.best.h}"></i></span>${matchTxt}</span>`;
   const credit = arfCreditHTML(t.credit).replace("ar-fig-cr", "ar-lead-cr");
-  const aria = ` aria-label="${esc(`${t.name}${t.sub ? ", " + t.sub : ""}. ${covLine ? arfCapFirst(covLine) + ". " : ""}${t.pctText} match. Open`)}"`;
+  const aria = ` aria-label="${esc(`${t.name}${t.sub ? ", " + t.sub : ""}. ${covLine ? arfCapFirst(covLine) + ". " : ""}${t.pctText} to ${self.n}. Open`)}"`;
   return `<figure class="ar-lead" data-kind="${t.kind}" data-ar-lead="${esc(t.key || "own")}">${own ? im + `<div class="ar-lead-tx">${cap}</div>`
     : `<button type="button" class="ar-lead-b" data-ar-ref="${esc(t.key)}"${aria}>${im}<span class="ar-lead-tx">${cap}</span></button>`}${credit}</figure>`;
 }
@@ -492,6 +509,23 @@ function arfLead(place, art, self) {
     const fig = tpl.content.firstElementChild;
     fig.addEventListener("click", e => { const b = e.target.closest("[data-ar-ref]"); if (b) { e.stopPropagation(); arfOpen(b.dataset.arRef, self); } });
     const r = arfInsert(null, () => { const ok = place(fig); return ok === false ? null : fig; });
+    // swap in the big image when it arrives, same as js/gallery.js glPage does for the painting page itself
+    // (David, 2026-10-09: the lead picture "is blurry -- a low-res thumbnail upscaled to full width"). A
+    // Commons URL goes through glCommonsResolve first (its own Special:FilePath can't be read with crossorigin).
+    if (r) {
+      const hiImg = fig.querySelector("img[data-hi]");
+      if (hiImg && typeof glCommonsFilename === "function") {
+        const swap = (url, cors) => {
+          const big = new Image(); if (cors) big.crossOrigin = "anonymous";
+          big.onload = () => { if (hiImg.isConnected) { if (cors) hiImg.crossOrigin = "anonymous"; hiImg.src = big.src; } };
+          big.onerror = () => {};   // quietly keep the small copy if even the fallback fails
+          big.src = url;
+        };
+        const hiUrl = hiImg.dataset.hi, commonsFn = glCommonsFilename(hiUrl);
+        if (commonsFn) glCommonsResolve(hiUrl, 1200).then(resolved => swap(resolved || hiUrl, !!resolved));
+        else swap(hiUrl, !!(typeof glCORS === "function" && glCORS(hiUrl)));
+      }
+    }
     return r ? t : null;
   });
 }

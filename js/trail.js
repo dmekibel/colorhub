@@ -11,6 +11,9 @@
 //  - Long-press ‹ opens the trail sheet: where you've been, newest first, with a picture of each; tap one to jump.
 //  - Every inner page gets a second control, top-right: Close (a labeled pill), straight to the map exactly where you
 //    left it (honey.js HONEY_PAN), forgetting the whole chain. A pull down from the top of a page goes one step back.
+//  - Close doesn't destroy the chain, just forgets it from the live trail's point of view: it's stashed as
+//    TL_RECENT, offered back as a small "Back to…" pill on the very next map draw (tlRecentPill, ~8s or until a
+//    pan) and afterwards as "Your last trail" in the long-press sheet, until a new trail replaces it.
 //  - The trail lives in sessionStorage, so a reload keeps it.
 // core.js show() calls tlNote() for every screen; router.js routeWrap() calls tlCallNote() for every addressed one.
 
@@ -20,14 +23,21 @@ let TL_CALL = null;            // the addressed screen call in progress: { run, 
 let TL_PREV = "";              // the trail as it stood at the previous screen
 let TL_KEEP = null;            // a replay that must not lose the trail behind it: { stack, root, t }
 let TL_MAPKEEP = null;         // a page lit its colors on the map (csOnMap): the trail stays behind the map so the lit set can return: { stack, root, t }
+// David, 2026-10-09: "don't lose all my progress just because I [explicitly closed]." tlExit() (✕ "Close", the
+// map glyph on an ordinary page) still forgets the chain outright -- the browser/iOS Back staying on the map
+// after it is deliberate and already relied on (see TL_FORGOT below) -- but it no longer destroys it silently:
+// the chain is stashed here first, one at a time, offered back as a pill on the very next map draw (tlRecentPill)
+// and, afterwards, as "Your last trail" in the long-press sheet (tlSheet), until a genuinely new trail replaces it.
+let TL_RECENT = null;          // { stack, root, meta: [[tok,metaObj]...], scroll: [[hash,y]...], title, img, c, sw, t }
 let TL_SUPPRESS = 0;           // the click that ends a long press must not also go back
 let TL_BOOTED = false;
-const TL_KEY = "colorhub-trail";
+const TL_KEY = "colorhub-trail", TL_RECENT_KEY = "colorhub-trail-recent";
 // what each address is, in a word, for the trail sheet
 const TL_KIND = { color: "Color", name: "Color", painting: "Painting", gallery: "Painting", painter: "Painter", painters: "Painters",
   movement: "Movement", decade: "Decade", country: "Country", arthistory: "Art history", hub: "Color family", which: "Which is which",
   pair: "A pair in paintings", paintings: "Painting map", "paintings-of": "In paintings", chords: "Masters' chords", look: "Look", fashion: "Fashion", gem: "Gems",
   botany: "Flowers and plants", poem: "Poem", passage: "Passage", film: "Film", photo: "Your photo", page: "Page", story: "Story",
+  subject: "Subject",   // js/subjectview.js: #/subject/<kind>/<id>, PAGES-AUDIT.md plan item 3
   studio: "Studio", practice: "Practice", odd: "Odd one out", line: "Across the line", favorites: "Your colors", taste: "Taste",
   lab: "Lab", mapstudy: "Study the map", daily: "Color of the day", challenge: "Daily challenge", museum: NAV_MUSEUM, explore: NAV_MUSEUM };
 
@@ -66,6 +76,14 @@ function tlRestore() {
   meta.forEach((v, k) => TL_META.set(k, v));
   XSTACK = d.stack.slice(); X_ROOT = d.root || null;
 }
+// the stashed "last trail" (tlExit): sessionStorage is cheap enough to make it survive a reload too, same as the
+// live trail above -- try/catch throughout, since losing this is never worse than the Close it came from
+function tlRecentSave() {
+  try { if (TL_RECENT) sessionStorage.setItem(TL_RECENT_KEY, JSON.stringify(TL_RECENT)); else sessionStorage.removeItem(TL_RECENT_KEY); } catch (e) {}
+}
+function tlRecentRestore() {
+  try { const raw = sessionStorage.getItem(TL_RECENT_KEY); if (raw) TL_RECENT = JSON.parse(raw); } catch (e) {}
+}
 
 // Called by show() (core.js) once the screen is in the page.
 function tlNote(el, tab, backNav) {
@@ -76,15 +94,26 @@ function tlNote(el, tab, backNav) {
   // a loading placeholder (loader.js waitScreen): the real screen it stands in for is the one that joins the trail
   if (el.classList.contains("waiting")) { TL_CALL = call; return; }
   if (TL_KEEP) { if (performance.now() - TL_KEEP.t < 4000) { XSTACK = TL_KEEP.stack; X_ROOT = TL_KEEP.root; } TL_KEEP = null; }
-  if (!TL_BOOTED) { TL_BOOTED = true; tlRestore(); }
+  if (!TL_BOOTED) { TL_BOOTED = true; tlRestore(); tlRecentRestore(); }
   // the map opened BY a page (a painting's colors lit on it): the trail stays, so the lit set can go back to its source
   if (el.classList.contains("hm") && TL_MAPKEEP) {
     const k = TL_MAPKEEP; TL_MAPKEEP = null;
     if (performance.now() - k.t < 4000 && k.stack.length) { XSTACK = k.stack; X_ROOT = k.root; TL_UNDER = null; TL_PREV = ""; tlSave(); return; }
   }
   // a room or the map is where a trail starts: nothing behind it, and it's where the trail returns when it runs out
-  if (tab || el.classList.contains("hm")) { XSTACK = []; X_ROOT = tab || "home"; TL_UNDER = null; TL_PREV = ""; tlSave(); return; }
+  if (tab || el.classList.contains("hm")) {
+    XSTACK = []; X_ROOT = tab || "home"; TL_UNDER = null; TL_PREV = ""; tlSave();
+    // the pill (David, 2026-10-09): only on the very next map draw after an explicit Close stashed one -- not
+    // every later visit to the map while it's still sitting there waiting in the trail sheet
+    if (el.classList.contains("hm") && TL_RECENT && performance.now() - TL_RECENT.t < 1500) tlRecentPill(el);
+    return;
+  }
   const back = tlBackBtn(el);
+  // a genuinely new trail has started: not just glancing at one fresh page from the map (extremely common, and
+  // tossing the stash the instant that happens would make "stays reachable" nearly worthless), but a second step
+  // taken on a path that isn't the stashed one -- tlResumeRecent() always leaves XSTACK identical to what it
+  // resumed, so this really is the reader building something new, not tapping back into the old chain
+  if (TL_RECENT && XSTACK.length > 1 && XSTACK.join("\n") !== TL_RECENT.stack.slice(0, XSTACK.length).join("\n")) { TL_RECENT = null; tlRecentSave(); }
   // a part of the Museum (Art, For you, Ideas, World, Saved) starts trails too: running out comes back to it
   if (back && !call && !XSTACK.length && S.tab === "explore" && ROUTE_NOW.indexOf("#/" + TAB_ROUTE.explore[0]) === 0) X_ROOT = "explore";
   const sig = XSTACK.join("\n");
@@ -137,8 +166,118 @@ function tlDecorate(el) {
     hd.classList.add("tl-x");
   }
   back.setAttribute("aria-description", "Hold to see your trail");
-  // pull down from the top: one step back, like closing a sheet (not on full-screen tools, whose drags are their own)
-  if (!el.classList.contains("fixed") && typeof hmPullClose === "function") hmPullClose(el, () => { if (el.dataset.tl) xBack(); else tlToOrigin(); });
+  // pull down from the top, or swipe back from the left edge: one step back, like closing a sheet (not on
+  // full-screen tools, whose drags are their own) -- js/trail.js's own gesture, tlgWire below
+  if (!el.classList.contains("fixed")) tlgWire(el);
+}
+
+// ---------- gesture-following back (David, 2026-10-09): "if I swipe down I don't need to see it shrink back
+// into its original bubble, I just need to see the page swiped away downwards; if I swipe back, the zoom-out
+// animation doesn't make sense in that context." Both directions track the finger 1:1 (with light resistance),
+// show the destination already sitting underneath as you drag -- the honeycomb's own last frame for a return
+// straight to the map (js/honey.js snapshot(): the one destination worth a real preview, since the live canvas
+// can't be rebuilt mid-drag without risking a cancelled gesture having to undo it), a calm surface otherwise --
+// and either spring back (release early) or carry on off-screen at the release velocity (release past the
+// threshold), landing on the real screen only once that motion is done. TLG_SKIP stands down js/mapxfer.js's
+// bubble grow/shrink and show()'s own crossfade/entrance for that one landing, since the gesture already did
+// the motion; a deliberate tap (‹, Close, the map glyph) is untouched and keeps the bubble shrink.
+// Reduced motion: this gesture isn't wired at all -- ‹ (already instant under reduceMotion) is the way back.
+let TLG_SKIP = false;
+let TLG_ANIM = null;   // the in-flight "continue off-screen" animation, if any (tools/smoke: force it to the end, same as MX.anims)
+const TLG_PULL = 110, TLG_EDGE = 28, TLG_SLOP = 10, TLG_BORN = 350, TLG_REST = 700, TLG_FLING = .5, TLG_SPRING = 260, TLG_CAP = 320;
+// the one destination with a cheap, honest preview: the map's last drawn frame, kept alive in HM_CTRL's own
+// (possibly detached) canvas whether or not the map is on screen right now
+function tlgSnapshot() {
+  try { return typeof HM_CTRL !== "undefined" && HM_CTRL && HM_CTRL.snapshot ? HM_CTRL.snapshot(Math.round(innerWidth)) : null; } catch (e) { return null; }
+}
+// where releasing this gesture lands -- exactly what the back button already does (xBack if this page is on
+// the trail, tlToOrigin otherwise) -- and whether that's the map, the one case worth a real backdrop. A page
+// opened straight from the map still joins the trail as its own one-entry "r:" token (js/trail.js tlNote), so
+// xBack() on it pops that single entry and lands on the origin anyway -- reachesOrigin covers that case too,
+// not just the no-trail one.
+function tlgDest(el) {
+  const onTrail = !!el.dataset.tl, reachesOrigin = !onTrail || XSTACK.length <= 1, toMap = reachesOrigin && !xFallbackTab();
+  return { toMap, go: () => { if (onTrail) xBack(); else tlToOrigin(); } };
+}
+function tlgCommit(dest) {
+  TLG_SKIP = true;
+  try { dest.go(); } finally { TLG_SKIP = false; }
+}
+function tlgFloor(toMap) {
+  const d = document.createElement("div");
+  d.className = "tlg-floor";
+  const img = toMap && tlgSnapshot();
+  if (img) { d.style.backgroundImage = `url(${img})`; d.classList.add("tlg-floor-img"); }
+  document.body.appendChild(d);
+  return d;
+}
+function tlgWire(el) {
+  if (!el || reduceMotion) return;
+  const born = performance.now(), blocked = e => e.target.closest && e.target.closest("canvas,input,textarea,select,[data-nopull]");
+  let lastScroll = 0;
+  const onScroll = () => { lastScroll = performance.now(); if (!el.isConnected) removeEventListener("scroll", onScroll); };
+  addEventListener("scroll", onScroll, { passive: true, capture: true });
+  let a = null;   // the live gesture: { id, axis, x0, y0, dest, floor, anim }
+  const clean = () => {
+    if (a && a.floor) a.floor.remove();
+    if (a && a.anim) { try { a.anim.cancel(); } catch (e) {} if (TLG_ANIM === a.anim) TLG_ANIM = null; }
+    el.style.transition = ""; el.style.transform = ""; el.style.willChange = "";
+    a = null;
+  };
+  el.addEventListener("pointerdown", e => {
+    if (!e.isPrimary || a || document.querySelector(".sheet") || performance.now() - born < TLG_BORN || blocked(e)) return;
+    const vertOK = pageScrollTop() <= 0 && performance.now() - lastScroll >= TLG_REST, horizOK = e.clientX < TLG_EDGE;
+    if (!vertOK && !horizOK) return;
+    a = { id: e.pointerId, x0: e.clientX, y0: e.clientY, axis: null, vertOK, horizOK, lastX: e.clientX, lastY: e.clientY, lastT: performance.now(), vx: 0, vy: 0, floor: null, anim: null };
+  }, { passive: true });
+  el.addEventListener("pointermove", e => {
+    if (!a || e.pointerId !== a.id) return;
+    const dx = e.clientX - a.x0, dy = e.clientY - a.y0;
+    if (!a.axis) {
+      if (a.horizOK && dx > TLG_SLOP && dx > Math.abs(dy) * 1.6) a.axis = "x";
+      else if (a.vertOK && dy > TLG_SLOP && dy > Math.abs(dx) * 1.6 && pageScrollTop() <= 0) a.axis = "y";
+      else { if (Math.abs(dx) > 10 || Math.abs(dy) > 10) a = null; return; }
+      a.dest = tlgDest(el);
+      a.floor = tlgFloor(a.dest.toMap);
+      el.style.willChange = "transform";
+      try { el.setPointerCapture(a.id); } catch (er) {}
+    }
+    e.preventDefault();
+    const now = performance.now(), dt = Math.max(1, now - a.lastT);
+    const d = a.axis === "x" ? dx : dy, resisted = Math.max(0, d < 80 ? d * .55 : 44 + (d - 80) * .35);
+    el.style.transition = "none";
+    el.style.transform = a.axis === "x" ? `translateX(${resisted}px)` : `translateY(${resisted}px)`;
+    const v = ((a.axis === "x" ? e.clientX - a.lastX : e.clientY - a.lastY)) / dt;
+    if (a.axis === "x") a.vx = v; else a.vy = v;
+    a.lastX = e.clientX; a.lastY = e.clientY; a.lastT = now; a.d = d; a.resisted = resisted;
+  }, { passive: false });
+  const release = e => {
+    if (!a || e.pointerId !== a.id) return;
+    if (!a.axis) { a = null; return; }
+    const v = a.axis === "x" ? a.vx : a.vy, past = (a.d || 0) > TLG_PULL || v > TLG_FLING, dest = a.dest, floor = a.floor;
+    const final = a.axis === "x" ? `translateX(${innerWidth + 60}px)` : `translateY(${innerHeight * .7 + 60}px)`;
+    if (past) {
+      const remaining = (a.axis === "x" ? innerWidth - a.resisted : innerHeight * .7 - a.resisted);
+      const dur = Math.min(TLG_CAP, Math.max(120, remaining / Math.max(v, .35)));
+      el.style.transition = "none";
+      a.anim = TLG_ANIM = el.animate([{ transform: el.style.transform || "none" }, { transform: final }], { duration: dur, easing: "linear", fill: "forwards" });
+      // something else (a native back winning a race against our own pointer tracking -- iOS doesn't reliably
+      // send a pointerup/pointercancel once it's claimed the touch) may already have navigated and redrawn the
+      // screen while this animation was still running: el is this gesture's own page, so if it's no longer in
+      // the document, that already happened. Committing anyway would both double the back (xBack()/tlToOrigin()
+      // again, on top of the one that already ran) and, since show() cleans up .tlg-floor/TLG_ANIM on every
+      // render now, there is nothing left here worth finishing against.
+      a.anim.onfinish = () => { TLG_ANIM = null; floor.remove(); if (el.isConnected) tlgCommit(dest); };
+    } else {
+      el.style.transition = `transform ${TLG_SPRING}ms var(--spring)`;
+      el.style.transform = "translate(0,0)";
+      setTimeout(() => { if (floor) floor.remove(); el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; }, TLG_SPRING + 20);
+    }
+    a = null;
+  };
+  el.addEventListener("pointerup", release);
+  el.addEventListener("pointercancel", () => { clean(); });
+  el.addEventListener("lostpointercapture", e => { if (a && a.id === e.pointerId && a.axis) release(e); });
 }
 
 // ---------- going back, jumping, exiting ----------
@@ -163,6 +302,48 @@ function tlMapBack() {
   return { title: m.title || "", img: m.img || "", c: m.c || "", sw: m.sw || [],
     go: () => { XSTACK = from.stack.slice(); X_ROOT = from.root; tlJump(XSTACK.length - 1); } };
 }
+// the pill (David, 2026-10-09): "Back to <last page>", bottom-left, directly above the Rooms corner -- the one
+// map draw right after an explicit Close stashed TL_RECENT. A real pan (pointerdown + real movement, anywhere
+// but the pill itself) or ~8s of nobody touching it ends it early; tapping it resumes the whole stashed trail.
+// It's a child of the map screen itself (el), not document.body, so a plain screen swap (opening anything else)
+// clears it for free -- same reason js/honey.js's own cs-hl-pill lives there instead of being position:fixed
+// (css/menus2.css's own containing-block note on .screen's entrance animation applies here too).
+const TL_PILL_MS = 8000;
+function tlRecentPill(el) {
+  const r = TL_RECENT; if (!r || !r.stack.length || el.querySelector(".tl-recent-pill")) return;
+  const title = r.title || tlMetaFor(r.stack[r.stack.length - 1]).title || "your last page";
+  const btn = document.createElement("button");
+  btn.className = "tl-recent-pill";
+  btn.setAttribute("aria-label", `Back to ${title}`);
+  btn.innerHTML = `${ICON.back}${tlThumb({ img: r.img, c: r.c, sw: r.sw })}<span class="tl-recent-txt">Back to <b>${esc(title)}</b></span>`;
+  el.appendChild(btn);
+  let gone = false;
+  const clean = () => {
+    el.removeEventListener("pointerdown", onDown, true);
+    removeEventListener("pointermove", onMove, true);
+    removeEventListener("pointerup", onUp, true);
+    clearTimeout(timer);
+  };
+  const remove = () => {
+    if (gone) return; gone = true; clean();
+    btn.classList.remove("in");
+    setTimeout(() => btn.remove(), 220);
+  };
+  let x0 = 0, y0 = 0;
+  const onMove = e => { if (Math.hypot(e.clientX - x0, e.clientY - y0) > 10) remove(); };
+  const onUp = () => { removeEventListener("pointermove", onMove, true); removeEventListener("pointerup", onUp, true); };
+  // a pan starting anywhere on the map but the pill itself: the honeycomb's own pan handling isn't touched
+  // (no preventDefault/stopPropagation here), this only watches for real movement to know the pill should go
+  const onDown = e => {
+    if (btn.contains(e.target)) return;
+    x0 = e.clientX; y0 = e.clientY;
+    addEventListener("pointermove", onMove, true); addEventListener("pointerup", onUp, true);
+  };
+  el.addEventListener("pointerdown", onDown, true);
+  const timer = setTimeout(remove, TL_PILL_MS);
+  btn.onclick = e => { e.stopPropagation(); buzz(6); remove(); tlResumeRecent(); };
+  requestAnimationFrame(() => btn.classList.add("in"));
+}
 function tlJump(i) {
   if (i < 0 || i >= XSTACK.length) return;
   XSTACK.length = i + 1;
@@ -173,10 +354,37 @@ function tlJump(i) {
 function tlToOrigin() { XSTACK = []; BACK_RENDER = true; xStep(undefined); }
 function tlExit(btn) {
   buzz(6);
+  // stash it first (David, 2026-10-09): the chain is still forgotten from the live trail's own point of view
+  // (XSTACK=[] below, TL_FORGOT so Back stays on the map -- both unchanged, and the existing "map glyph exits...
+  // the trail wasn't cleared" smoke scenario still checks exactly that) -- just not thrown away: tlRecentPill()
+  // offers it back on the very next map draw, and tlSheet() keeps offering it after that, until a new one replaces it
+  if (XSTACK.length) {
+    const top = XSTACK[XSTACK.length - 1], m = TL_META.get(top) || {};
+    TL_RECENT = {
+      stack: XSTACK.slice(), root: X_ROOT,
+      meta: XSTACK.filter(t => TL_META.has(t)).map(t => [t, TL_META.get(t)]),
+      scroll: XSTACK.map(t => { const mt = TL_META.get(t); const y = mt && mt.hash ? SCROLL_BY_HASH.get(mt.hash) : null; return mt && mt.hash && y != null ? [mt.hash, y] : null; }).filter(Boolean),
+      title: m.title || "", img: m.img || "", c: m.c || "", sw: m.sw || [],
+      t: performance.now(),
+    };
+    tlRecentSave();
+  }
   XSTACK = []; X_ROOT = null; TL_UNDER = null; TL_MAPKEEP = null; TL_FORGOT = true; tlSave();   // the whole chain is forgotten
   const scr = app.querySelector(".screen"), home = () => typeof hmHome === "function" ? hmHome() : go(S.tab || "learn");
   // a color's page goes back into its own bubble on the map instead (js/mapxfer.js, from hmHome)
   if (scr && btn && btn.isConnected && !(scr.querySelector(".cp-hero") && typeof mxLeave === "function")) shrinkTo(scr, btn, home); else home();
+}
+// resume a stashed trail (the map's "Back to…" pill, or a "Your last trail" row in the sheet): toIndex truncates
+// to that point (same semantics as tlJump), defaulting to the whole stashed stack -- its own top page
+function tlResumeRecent(toIndex) {
+  const r = TL_RECENT; if (!r || !r.stack.length) return;
+  r.scroll.forEach(([h, y]) => SCROLL_BY_HASH.set(h, y));
+  r.meta.forEach(([k, v]) => TL_META.set(k, v));
+  const i = toIndex != null ? Math.max(0, Math.min(toIndex, r.stack.length - 1)) : r.stack.length - 1;
+  XSTACK = r.stack.slice(0, i + 1); X_ROOT = r.root;
+  TL_RECENT = null; tlRecentSave();
+  BACK_RENDER = true;
+  xStep(XSTACK[XSTACK.length - 1]);
 }
 // the exact color that opened a color or name page as its nearest name ("Your color · 97% match"), so Back draws it
 // the same way: it rode in the page's address as ?c=<hex> (router.js tappedQS)
@@ -282,8 +490,14 @@ function tlSheet() {
   const room = xFallbackTab(), fromMap = !room, roomName = (ROOMS_LIST.find(r => r[0] === room) || [, "Learn"])[1];
   const mapRow = `<li><button class="tl-row tl-foot" data-tl-go="map"><span class="tl-th tl-th-map">${HOME_GLYPH}</span><span class="tl-txt"><b>${esc(NAV_MAP)}</b><em>${fromMap ? "Where you started · " : ""}${esc(NAV_MAP_NOTE)}</em></span>${ICON.chev}</button></li>`;
   const roomRow = fromMap ? "" : `<li><button class="tl-row tl-foot" data-tl-go="origin"><span class="tl-th tl-th-room">${typeof roomsBubbleArt === "function" ? roomsBubbleArt(room) : ""}</span><span class="tl-txt"><b>${esc(roomName)}</b><em>Where you started</em></span>${ICON.chev}</button></li>`;
+  // David, 2026-10-09: a trail an explicit Close just stashed (TL_RECENT) stays offered here too -- its own,
+  // clearly separate list, so it never reads as part of the live trail above it -- until a genuinely new trail
+  // replaces it (tlNote, js/trail.js)
+  const recentRows = TL_RECENT ? TL_RECENT.stack.map((tok, i) => tlRow("recent:" + i, tlMetaFor(tok), tlKind(tlMetaFor(tok).hash), false)).reverse().join("") : "";
+  const recentBlock = TL_RECENT ? `<h2 class="title-2 tl-recent-h">Your last trail</h2><p class="note">${TL_RECENT.stack.length} ${TL_RECENT.stack.length === 1 ? "page" : "pages"}, from before you closed</p>
+    <ol class="tl-list">${recentRows}</ol>` : "";
   const { sh, close } = sheet(`<div class="tl-sheet"><h2 class="title-2">Your trail</h2><p class="note">${XSTACK.length > 1 ? `${XSTACK.length} pages, newest first` : "Every page you open from here joins it"}</p>
-    <ol class="tl-list">${rows.join("")}${roomRow}${mapRow}</ol></div>`);
+    <ol class="tl-list">${rows.join("")}${roomRow}${mapRow}</ol>${recentBlock}</div>`);
   sh.classList.add("tl-sheet-wrap");
   sh.addEventListener("click", e => {
     const b = e.target.closest("[data-tl-go]"); if (!b || b.classList.contains("here")) return;
@@ -291,6 +505,7 @@ function tlSheet() {
     buzz(6); close();
     if (k === "map") return tlExit(null);
     if (k === "origin") return tlToOrigin();
+    if (k.startsWith("recent:")) return tlResumeRecent(+k.slice(7));
     if (k !== "none") tlJump(+k);
   });
 }

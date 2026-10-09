@@ -18,7 +18,7 @@
 .mc-panel{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;padding:18px 18px calc(env(safe-area-inset-bottom,0px) + 16px);
   background:var(--paper,#EFEBE3);color:var(--paper-ink,#141311);border-radius:18px 18px 0 0;margin-top:-18px;position:relative;box-shadow:0 -10px 30px -14px rgba(0,0,0,.4)}
 .mc-pct{display:flex;align-items:baseline;gap:6px;font:500 28px/1 var(--mono);letter-spacing:-.02em}
-.mc-pct em{font:italic 400 15px/1 var(--serif);letter-spacing:0;color:var(--paper-soft,#5E5A51)}
+.mc-pct em{font:italic 400 17px/1 var(--serif);letter-spacing:0;color:var(--paper-soft,#5E5A51)}
 .mc .mc-line{flex:1 1 180px;margin:0;font:400 18px/1.3 var(--serif);letter-spacing:0;text-transform:none;color:var(--paper-ink,#141311);opacity:1;text-wrap:pretty}
 .mc-go{flex:1 0 100%;height:54px;margin-top:4px;border:0;border-radius:999px;background:var(--paper-ink,#141311);color:var(--paper,#EFEBE3);font:400 24px/1 var(--serif);letter-spacing:0;text-align:center;cursor:pointer;
   transition:transform .12s ease-out}
@@ -28,6 +28,18 @@
 @keyframes mcUp{from{transform:translateY(40px);opacity:0}}
 @media (max-width:300px){.mc-halves{flex-direction:column}}
 @media (prefers-reduced-motion:reduce){.mc,.mc *{animation:none!important;transition:none!important}}
+
+/* landscape lane (2026-10-09): the halves were already side by side (flex row, not a portrait-only stack), so
+   the one real gap was the notch -- it can sit on either long edge now, right under the outer labels/hex. Adds
+   the real left/right inset (app.css) on top of the fixed 16px; 0px everywhere else. The bottom panel also
+   gets a height ceiling so it never eats so much of a ~390-440px-tall rotated screen that a half drops under
+   its own minimum readable height. */
+@media (orientation:landscape){
+  .mc-side:first-child .mc-cell{padding-left:calc(16px + var(--left))}
+  .mc-side:last-child .mc-cell{padding-right:calc(16px + var(--right))}
+  .mc-side:first-child .mc-lab{left:calc(16px + var(--left))}
+  .mc-panel{max-height:46dvh;overflow-y:auto;padding-left:calc(18px + var(--left));padding-right:calc(18px + var(--right))}
+}
 
 /* quiz-name miss: the big card splits in two */
 .pr-sw.pr-split{display:flex;overflow:hidden;padding:0}

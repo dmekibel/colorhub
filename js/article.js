@@ -1037,9 +1037,8 @@ function articleRender(slug, host, ctx) {
 }
 // ---------- the color page's own entry point (David, 2026-10-09 restructure) ----------
 // Draws the intro into headHost and the chapters onward into bodyHost, so js/richpage.js can put its Paintings
-// section between them (order #3, before the chapters at #4) without duplicating the lead picture -- the color
-// page's Paintings section owns that now; articleRenderSplit never calls arfLead. For a long article it still
-// draws the teaser door into headHost (bodyHost stays hidden: the full chapters live on the separate /read/ page).
+// section between them (order #3, before the chapters at #4). For a long article it still draws the teaser door
+// into headHost (bodyHost stays hidden: the full chapters live on the separate /read/ page).
 // Resolves { has, door } so richpage.js knows whether bodyHost actually holds anything to wire/measure.
 function articleRenderSplit(slug, headHost, bodyHost, ctx) {
   const none = () => { if (headHost) { headHost.innerHTML = ""; headHost.hidden = true; } if (bodyHost) { bodyHost.innerHTML = ""; bodyHost.hidden = true; } return { has: false, door: false }; };
@@ -1050,18 +1049,33 @@ function articleRenderSplit(slug, headHost, bodyHost, ctx) {
     if (!art || headHost.isConnected === false) return none();
     const self = arColor(slug) || (ctx && ctx.h ? { slug, n: ctx.n || art.name, h: ctx.h } : art.hex ? { slug, n: art.name, h: art.hex } : null);
     if (!self) return none();
+    // David, 2026-10-09, on an in-between (tapped) color's page: "the lead picture should match the user's
+    // color, and say which" -- self.h here is the nearest NAMED color (the article is still its story), but a
+    // tapped page's own hero is the visitor's exact hex, so the lead picture should be scored against that, not
+    // the name it's merely close to, and its caption should say "your color" rather than borrow the name's.
+    const leadSelf = ctx && ctx.tapped ? { ...self, h: String(ctx.tapped).toUpperCase(), n: "your color", tapped: true } : self;
     headHost.hidden = false;
     if (!(ctx && ctx.door === false) && (art.facet ? art.sections.length >= 3 : (art.words || arWords(art)) >= AR_DOOR_MIN)) {
       AR_READING.set(art.slug, { art, self });
       headHost.innerHTML = arDoorHTML(art, self, null);
       arDoorWire(headHost, art, self);
       arWireClicks(headHost, art, self);
+      // David, 2026-10-09: "the painting that uses the color the most should be the photo inside the article...
+      // so all articles and pages feel equal in value" -- the color page used to leave this to its own Paintings
+      // section further down (to avoid a double picture), which meant skimming the top of the page showed no
+      // photo at all for the many colors with no contextual image of their own. Same call, same slot, as the
+      // standalone /read/ page already does (articleRender above): arfLeadPick tries a real contextual photo
+      // first, then falls back to the painting that covers the most of this color.
+      const door = headHost.querySelector(".ar-door");
+      if (door && typeof arfLead === "function") { try { arfLead(f => door.isConnected ? door.prepend(f) : false, art, leadSelf); } catch (e) {} }
       bodyHost.innerHTML = ""; bodyHost.hidden = true;
       return { has: true, door: true, art, self };
     }
     headHost.innerHTML = arHeadHTML(art, self);
     bodyHost.innerHTML = arBodyHTML(art, self, { noFamily: true }); bodyHost.hidden = false;
     arWireClicks(headHost, art, self);
+    const headEl = headHost.querySelector(".ar-head");
+    if (headEl && typeof arfLead === "function") { try { arfLead(f => headEl.isConnected ? headEl.before(f) : false, art, leadSelf); } catch (e) {} }
     arWire(bodyHost.querySelector(".ar-body") || bodyHost, art, self);
     if (typeof arfEnhance === "function") { try { arfEnhance(bodyHost, art, self); } catch (e) { try { console.warn("article figures failed:", e); } catch (_) {} } }
     return { has: true, door: false, art, self };

@@ -145,7 +145,7 @@
 .gl-finds-more>summary::-webkit-details-marker{display:none}
 .gl-finds-more[open]>summary{padding-bottom:10px}
 .gl-role span{display:flex;flex-direction:column;gap:2px;min-width:0}
-.gl-role em{font:italic 400 15px/1.2 var(--serif);color:var(--soft)}
+.gl-role em{font:italic 400 17px/1.2 var(--serif);color:var(--soft)}
 .gl-role b{font:400 18px/1.15 var(--serif);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .gl-role small{font:400 13px/1.3 var(--sans);color:var(--soft)}
 .gl-ctl{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:14px}
@@ -162,6 +162,20 @@
 .gl-pmap span{flex:1;font:400 18px/1.2 var(--serif)}
 .gl-pmap svg:first-child{color:var(--soft)}
 .gl-pmap svg:last-child{color:var(--faint)}
+/* the same action, a second time, right by the palette (David, 2026-10-09: "it should be more prominent" --
+   the one below "More like this" was the only way to it, easy to miss on a long page). An opaque pill instead
+   of the bordered full-width row, so it reads as a clear control inside the palette card, not another section. */
+.gl-pmap-top{min-height:48px;margin:14px 0 0;padding:0 16px;border:0;border-radius:var(--r-pill,24px);background:var(--surface-2)}
+.gl-pmap-top span{font-size:16px}
+/* the first-run hint above it (David, 2026-10-09), once ever -- inline, not position:fixed, since the page
+   scrolls and the button it points at isn't pinned to one spot on screen (js/gallery.js glPage) */
+.gl-pmap-hint{display:flex;align-items:center;gap:9px;margin:14px 0 0;padding:0 2px;font:400 15px/1.3 var(--sans);color:var(--soft);animation:glPmHintIn .5s var(--spring) .3s both}
+.gl-pmap-hint i{width:7px;height:7px;flex:none;border-radius:50%;background:var(--sel-ink,var(--ink));animation:glPmHintPulse 1.6s ease-in-out .8s infinite}
+.gl-pmap-hint.out{animation:glPmHintOut .3s var(--ease) both}
+@keyframes glPmHintIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes glPmHintOut{to{opacity:0;transform:translateY(-4px)}}
+@keyframes glPmHintPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.35}}
+@media (prefers-reduced-motion:reduce){.gl-pmap-hint,.gl-pmap-hint i,.gl-pmap-hint.out{animation:none}}
 
 /* David's rebuild brief, 2026-10-09: the picture is now much bigger (css/paintzoom.css), so it no longer stays
    pinned while you change palette types below it -- at this size that would eat the whole screen. "Look closer"
@@ -189,7 +203,9 @@
    slim rows (type, how many, on the painting) and a one-line caption. Selection lifts a step, never turns white. */
 .gl-pal-ui{padding-top:0}
 .gl-page .gl-pal-ui .palette.gl-strip{height:52px;margin-top:2px;border-radius:var(--r-tile,6px);overflow:hidden}
-.gl-strip .pal{position:relative;padding:6px 7px;font:500 12px/1 var(--sans);letter-spacing:0;font-variant-numeric:tabular-nums}
+/* legibility pass (2026-10-09): 12px is under the 13px reading-text floor -- these percentage labels (a photo
+   palette's share-of-area, js/studio.js's palPhotoView) are real reading text, not decoration. */
+.gl-strip .pal{position:relative;padding:6px 7px;font:500 13px/1 var(--sans);letter-spacing:0;font-variant-numeric:tabular-nums}
 .gl-strip .pal[data-ink="dark"],.pal-name i[data-ink="dark"]{color:rgba(14,13,11,.78)}
 .gl-strip .pal[data-ink="light"],.pal-name i[data-ink="light"]{color:rgba(255,255,255,.88)}
 .gl-strip .pal,.gl-pal-ui .pal-name{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}

@@ -134,6 +134,7 @@ function shot(name) {
     case "gymres": return stationDone({ k: arg || "neutral", est: 3.2, before: 4.1, pb: true, best: 3.2 });
     case "closeup": return closeup(g().nodes.get(arg || "c:Cobalt"));
     case "name": return namesShot(arg);   // js/names.js: name:<slug>[@scrolldown], e.g. name:ecru or name:seafoam-green@700
+    case "rpfocus": { const [n, h] = (arg || "Ivory@FFFFF0").split("@"); go("learn"); rpOpenFocus(n, "#" + h.replace(/^#/, "")); if (RP_FOCUS) { RP_FOCUS.style.transition = "none"; RP_FOCUS.classList.add("on"); } return; }   // js/richpage.js: rpfocus:<name>@<hex>, for design review of the color-alone focus view (the entrance is forced straight to its settled state, since its transition needs a real compositor frame a one-shot --screenshot capture doesn't reliably provide)
     case "tapped": return (CORE_NAMES ? Promise.resolve() : loadCoreNames()).then(() => { XSTACK = []; openTappedColor(arg || "#967989"); });   // an in-between hex, never an exact name: tapped:<hex>
     // a honeycomb tap on a non-101 bubble, from a bigger stage (js/home.js hmOpenName): hmname[:stage]
     case "hmname": { S.hm = S.hm || {}; S.hm.src = "stage:" + (arg || "400"); return loadCoreNames().then(() => { const item = hmStageItems(+(arg || 400)).find(it => !it.c); return item ? hmOpenName(item) : hmHome(); }); }

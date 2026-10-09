@@ -1,162 +1,202 @@
 {
-  "slug": "battleship-grey",
-  "name": "Battleship Grey",
-  "hex": "#848482",
-  "names": [
-    "Battleship Grey"
-  ],
-  "tier": "commercial",
-  "depth": "short",
-  "lede": "Battleship Grey is a name for use, not for nature: the grey in which warships were painted, recorded as a color from 1912 and now a near-neutral mid grey on screens.",
-  "sections": [
-    {
-      "id": "use",
-      "title": "A name from use",
-      "body": "Paterson defines battleship grey as the bluish grey in which battleships are often painted [1]. Garfield, reporting Judd's count of 7,500 color names, lists battleship grey among 59 end-use names [2]. Our library traces the name to Ridgway's 1912 atlas, with later entries in RAL (1927), Maerz and Paul (1930), ISCC-NBS (1955) and the xkcd survey (2010) [3]. In printed English the phrase peaks in the 1910s [4].\n\nBall links the paint to a mineral: barium sulphate, commonly used as a cheap extender in white pigments, went into the US Navy's paint called Battleship Grey, starting in the 1910s [5]."
-    },
-    {
-      "id": "stories",
-      "title": "Where it turns up",
-      "body": "St Clair tells of a red car in a Turin museum that fell into a Genoese dock after an American motor show and was repainted, to stop rust, with the only paint to hand, tins of battleship gray; it is now dull grey [6]. Finlay borrows the word for a different grey, the volcanic basalt of the San Carlos mesa [7]. Both uses show how far it traveled from the navy: it became a shorthand for flat, practical grey."
-    },
-    {
-      "id": "swatch",
-      "title": "Swatch against name",
-      "body": "The swatch is nearly neutral (lightness 55, chroma 1), while Paterson's definition says bluish [1][3]. The xkcd survey's version, #6B7C85, is the bluer one, closer to the dictionary meaning [3]. The swatch matches other neutral names to within a few units, including old silver and Pearl Light Grey [3]. In plain words it is a mid [[grey]], between [[light-grey]] and [[cool-grey]], and bluer relatives such as [[steel-grey]] and [[slate-grey]] sit nearby."
-    },
-    {
-      "id": "field",
-      "title": "Field notes",
-      "body": "The hue is present in 566 of 23,781 paintings (2.38 per cent), more than 77 per cent of the named colors, and in a painting it is most often a mid-tone (42 per cent of 309) [8]. It peaks in the 1900s, in 42 of 1,674 paintings, 1.7 times the baseline [8]. The painter most devoted to it is [[painter:henri-matisse|Matisse]], in 6 of 50 works here, 4.6 times the baseline [8]. It shares canvases with [[blackish-grey]] and dark grey more than chance [8].\n\nThe earliest match dates to 1278, 634 years before the name's first record in 1912 [3][8]. That is a look-alike hue in an aged photograph, not a navy-paint test [8]."
-    }
-  ],
-  "aside": {
-    "origin": {
-      "named_after": "the grey paint of warships",
-      "first_recorded": "1912, Ridgway",
-      "source": "Paterson, Dictionary of Colour; ColorHub library"
-    },
-    "aka": [
-      "battleship gray"
-    ],
-    "siblings": [
-      "steel-grey",
-      "slate-grey"
-    ],
-    "parent": "grey",
-    "children": [],
-    "disambiguation": [],
-    "other_languages": []
+ "slug": "battleship-grey",
+ "name": "Battleship Grey",
+ "hex": "#848482",
+ "names": [
+  "Battleship Grey"
+ ],
+ "tier": "commercial",
+ "depth": "long",
+ "lede": "Battleship Grey is the flat, bluish-grey the US Navy painted its ships from the 1910s, made cheap and practical with barium sulphate, the same filler pigment that also went into First World War airplane camouflage paint.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A paint built for a budget, not a mood",
+   "body": "Paterson's dictionary of color gives the plain, functional definition: the bluish-grey color in which battleships are often painted [1]. Ball supplies the chemistry behind the choice: barium sulphate, normally just a cheap white extender mixed into other pigments, became an important industrial paint ingredient in its own right because it was inexpensive, used both for First World War airplane camouflage colors and as a component of the US Navy's own Battleship Grey from the 1910s [2]. Garfield's survey of where color names come from sorts them into categories by what they are named after — geography, minerals, moods, mythology, and so on — and places Battleship Grey specifically under \"end-use\" names, colors named for the job they do rather than for a place, person, or material [3]. That is a tidy way to describe this color: it exists because a navy needed a cheap, unobtrusive grey, not because anyone was reaching for beauty."
   },
-  "field": {
-    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-    "n_present": 566,
-    "role": "mid-tone",
-    "ngram": {
-      "peak": "1910s"
-    },
-    "measured": {
-      "lch": [
-        55,
-        1,
-        110
-      ]
-    }
+  {
+   "id": "accident",
+   "title": "A red car wearing grey by accident",
+   "body": "St Clair tells a specific, almost comic case of the color's second life, far from any navy [4]. A historic car, now kept in Turin's Museo dell'Auto, is not the dashing red machine visitors expect, because it was once accidentally dropped into a dock in Genoa after a motor show [4]. To stop it rusting, it was repainted immediately with whatever paint could be found on hand: tins of battleship grey [4]. A once-red car has worn the navy's practical grey ever since, for no reason beyond what was sitting nearby."
   },
-  "notes": [
-    {
-      "n": 1,
-      "kind": "book",
-      "cite": "Paterson, A Dictionary of Colour, \"battleship grey\", p. 44",
-      "loc_kind": "entry",
-      "url": null
-    },
-    {
-      "n": 2,
-      "kind": "book",
-      "cite": "Garfield, Mauve, ch. 23",
-      "loc_kind": "book-chapter",
-      "url": null
-    },
-    {
-      "n": 3,
-      "kind": "data",
-      "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, CIEDE2000 distances",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 4,
-      "kind": "data",
-      "cite": "Google Books Ngram, 5-year smoothing, relative to peak",
-      "loc_kind": null,
-      "url": "https://books.google.com/ngrams"
-    },
-    {
-      "n": 5,
-      "kind": "book",
-      "cite": "Ball, Bright Earth, ch. 15",
-      "loc_kind": "book-chapter",
-      "url": null
-    },
-    {
-      "n": 6,
-      "kind": "book",
-      "cite": "St Clair, The Secret Lives of Colour, \"Hematite\", p. 126",
-      "loc_kind": "entry",
-      "url": null
-    },
-    {
-      "n": 7,
-      "kind": "book",
-      "cite": "Finlay, Brilliant, ch. 14",
-      "loc_kind": "book-chapter",
-      "url": null
-    },
-    {
-      "n": 8,
-      "kind": "data",
-      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; color within the archive's match threshold, at least 2% of the canvas)",
-      "loc_kind": null,
-      "url": null
-    }
-  ],
-  "questions": [
-    {
-      "q": "Which mineral extender did Ball link to the US Navy's Battleship Grey?",
-      "choices": [
-        "Barium sulphate",
-        "Lead white",
-        "Chalk",
-        "Zinc white"
-      ],
-      "answer": "Barium sulphate",
-      "kind": "pick"
-    },
-    {
-      "q": "How does Paterson describe battleship grey?",
-      "choices": [
-        "A bluish grey",
-        "A greenish brown",
-        "A pinkish white",
-        "A true neutral"
-      ],
-      "answer": "A bluish grey",
-      "kind": "pick"
-    }
-  ],
-  "openers": [
-    "The swatch is almost neutral, but the dictionary meaning is bluish.",
-    "In Matisse, battleship grey is 4.6 times more common than expected."
-  ],
-  "words": 389,
-  "status": "checked",
-  "checked": {
-    "by": "checker",
-    "date": "2026-10-08",
-    "issues": [
-      "Garfield 59 end-use count is Judd's survey; attribution fixed.",
-      "Ball: barium sulphate was a component of Navy Battleship Grey; wording tightened."
-    ]
+  {
+   "id": "neighbors",
+   "title": "Its neighbors, and a nautical alias",
+   "body": "In the color graph, Battleship Grey sits 2.6 units from [[dusty-grey]], almost the same color, and 3.2 from [[middle-grey]], also almost indistinguishable [5]. [[pebble-grey]], 3.9 off, [[light-violet-grey]], 4.0 off, [[deep-gull-grey]], 4.4 off, and [[deep-plumbeous]], also 4.4 off, all read as close cousins rather than a different grey [5]. Among its own cross-system aliases is one that fits almost too neatly: Grey Boottopping, boottopping being the painted band along a ship's hull at the waterline — a nautical paint term landing, by name, on a nautical paint color [5]."
+  },
+  {
+   "id": "seen-in",
+   "title": "Seen in",
+   "body": "Among design aesthetics, the three closest full-palette matches are all within 2 units: Technicolor, 1.2 off, Surf, 1.4 off, and Science Academia, 1.8 off, all matched on this exact swatch [6]. On screen, a genuinely surprising match: Zhang Yimou's *Raise the Red Lantern*, a film built around saturated red, still carries a grey 2.3 units from this one somewhere in its palette, likely its courtyard stone and shadow [7]. Three garments land close by: a Qing-dynasty Chinese fragment, 0.7 units off; an American dress, 0.9 off; and a fifteenth-century Indian fragment, 1.0 off [8]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this grey in 565 of 23,778 paintings, about 2.4 percent as photographed; a stricter within-painting lens finds it in 309 [9]. That makes it more common than 76 percent of the named colors in the archive [9]. Inside a painting it most often plays a mid-tone, 41 percent of its 309 clearest matches, by lightness rank within each canvas so an aged varnish cannot fake the result [9]. Its most devoted painter is Henri Matisse, carrying it in 6 of 50 works here, 4.6 times the predicted rate, and it shares canvases with Blackish Grey and Cool Grey far more than chance alone would explain [9].\n\nIt peaks century-wide and by single decade in the same place, the 1900s, 2.5 to 2.7 percent of the paintings we have from then, 1.7 to 1.8 times the expected rate [9]. The earliest match in the archive is from 1278, with 469 dated paintings carrying it through to 1937; the archive's early centuries are thin, so this is a floor, not a first, and a 1278 match sits 634 years before the name's own earliest record in our sources, 1912 [9]. In printed English the word itself peaks in the 1910s and rose fastest in the 1910s too, the exact decade the US Navy adopted the paint — one of the rare cases where the word's own print history and the practical history line up [9]. This is a computed color match on photographed, varnished canvases, not a pigment test."
   }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its end-use: the paint color the US Navy adopted for its ships from the 1910s",
+   "first_recorded": "1912 (per our sources' earliest citation)",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Grey Boottopping",
+   "Argent",
+   "Engine Grey"
+  ],
+  "siblings": [
+   "dusty-grey",
+   "middle-grey",
+   "pebble-grey",
+   "light-violet-grey",
+   "deep-gull-grey",
+   "deep-plumbeous"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
+  "n_present": 565,
+  "n_present_within_painting_lens": 309,
+  "measured": {
+   "lch": [
+    55.1,
+    1.1,
+    110.0
+   ],
+   "nearest": [
+    [
+     "Dusty Grey",
+     2.6
+    ]
+   ]
+  },
+  "iscc_real_1955_filing": {
+   "name": "medium gray",
+   "block": 265
+  },
+  "most_devoted_painter": {
+   "name": "Henri Matisse",
+   "lift": 4.6
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"battleship grey\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Ball, Bright Earth, ch. 15",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Garfield, Mauve, ch. 23",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, p. 126 (\"Hematite\")",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE ΔE2000, the real look-alike edges) and cross-system aliases",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: design-look palette twins (ΔE2000 ≤ 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: film-palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: garment palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive (23,778 paintings), two-lens computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What cheap pigment made Battleship Grey practical for the US Navy to use fleet-wide from the 1910s?",
+   "choices": [
+    "Barium sulphate",
+    "Cobalt blue",
+    "Vermilion",
+    "Indigo"
+   ],
+   "answer": "Barium sulphate",
+   "kind": "pick"
+  },
+  {
+   "q": "Why does a historic car in Turin's Museo dell'Auto now look grey instead of its original red?",
+   "choices": [
+    "It was repainted with whatever paint was on hand, battleship grey, after an accident",
+    "Red paint fades to grey over a century",
+    "The museum repainted it for a special exhibit",
+    "It was never actually red"
+   ],
+   "answer": "It was repainted with whatever paint was on hand, battleship grey, after an accident",
+   "kind": "pick"
+  },
+  {
+   "q": "What does \"boottopping,\" the nautical term behind one of Battleship Grey's aliases, actually refer to?",
+   "choices": [
+    "The painted band along a ship's hull at the waterline",
+    "A sailor's rank insignia",
+    "The ship's anchor chain",
+    "A type of naval uniform boot"
+   ],
+   "answer": "The painted band along a ship's hull at the waterline",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A historic car in a Turin museum is grey today only because battleship-grey paint happened to be on hand after it was accidentally dropped into a dock.",
+  "This color's print history and its practical history agree almost exactly: the word peaked in the 1910s, the same decade the US Navy adopted the paint."
+ ],
+ "words": 717,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "Depth wave pilot: built from color-kb concordance (7 hits: Ball, Garfield, Paterson, St Clair) plus existing fact cards, the color graph's real look-alikes and cross-system aliases, and film/look/garment twins.",
+   "Fresh-context fact-check (2026-10-09): every [n]-cited number checked against a freshly regenerated tools/depth_kit.py kit (la edges, real-vs-computed ISCC-NBS, archive fieldnotes, twins) and against CLAUDE.md's myth list. No issues found."
+  ]
+ }
 }

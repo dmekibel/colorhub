@@ -97,9 +97,11 @@ function sourcePage(id) {
     </dl>
     <p class="fine src-caveat">${esc(sys.caveat)} Screen colors are always approximate.</p>
     <div data-src-colors></div>
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "source:" + id, title: sys.title }) : ""}
   `, "article src-page");
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
+  if (typeof wireLinks === "function") wireLinks(el);
   srcColorsFor(id).then(colors => {
     const box = el.querySelector("[data-src-colors]"); if (!box || !el.isConnected) return;
     box.innerHTML = colors.length

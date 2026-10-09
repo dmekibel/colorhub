@@ -27,7 +27,7 @@
 .tz-strip{flex:1;display:flex;gap:2px;min-width:0}
 .tz-strip i{background:var(--c);min-width:3px}
 .tz-alt{display:flex;justify-content:center;align-items:center;gap:6px;padding:4px 0 2px}
-.tz-alt button{min-height:44px;padding:0 16px;font:italic 400 15px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);transition:color .2s}
+.tz-alt button{min-height:44px;padding:0 16px;font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);transition:color .2s}
 .tz-alt button:active{color:var(--ink)}
 .tz-alt i{width:3px;height:3px;border-radius:50%;background:var(--faint)}
 .tz-reveal{min-height:150px}
@@ -46,13 +46,13 @@
 .tz-pick-c[data-ink="light"] .eyebrow{color:rgba(255,255,255,.78)}
 .tz-pick.low .tz-pick-c{aspect-ratio:4/5}
 .tz-pick b{font:400 26px/1 var(--serif);letter-spacing:-.015em;margin-top:12px;text-wrap:balance}
-.tz-pick small{font:italic 400 15px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:7px}
+.tz-pick small{font:italic 400 17px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:7px}
 .tz-pick .mono{font-size:13px;color:var(--soft);margin-top:4px;letter-spacing:.06em}
-.tz-word{align-self:flex-start;font:italic 400 15px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);text-decoration:underline;text-underline-offset:4px;padding:12px 0 4px}
+.tz-word{align-self:flex-start;font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);text-decoration:underline;text-underline-offset:4px;padding:12px 0 4px}
 .tz-lc{display:grid;grid-template-columns:18px 1fr;grid-template-rows:auto auto;gap:6px 8px;margin-top:16px}
-.tz-ax-y{writing-mode:vertical-rl;transform:rotate(180deg);font:italic 400 15px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);text-align:right}
+.tz-ax-y{writing-mode:vertical-rl;transform:rotate(180deg);font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);text-align:right}
 .tz-ax-y::after{content:" →"}
-.tz-ax-x{grid-column:2;font:italic 400 15px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);text-align:right}
+.tz-ax-x{grid-column:2;font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);text-align:right}
 .tz-lc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
 .tz-lc-grid i{aspect-ratio:1.6;display:grid;place-items:center;position:relative}
 .tz-lc-grid i::before{content:"";width:100%;height:100%;background:var(--c);transform:scale(var(--s));border-radius:var(--r-1);transition:transform .6s var(--ease)}
@@ -83,20 +83,20 @@
 .tz-name{display:grid;grid-template-columns:20px 1fr auto;grid-template-rows:auto auto;column-gap:12px;align-items:center;width:100%;padding:11px 0;border-bottom:1px solid var(--rule);text-align:left}
 .tz-name i{grid-row:span 2;width:20px;height:32px;border-radius:var(--r-1);background:var(--c)}
 .tz-name b{font:400 21px/1.05 var(--serif);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tz-name small{grid-column:2;font:italic 400 15px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:3px}
+.tz-name small{grid-column:2;font:italic 400 17px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);margin-top:3px}
 .tz-name em{grid-row:1 / span 2;grid-column:3;font-style:normal;font-size:13px;color:var(--soft)}
 .tz-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
 .tz-dials{display:flex;flex-direction:column;gap:20px;padding-top:18px}
 .tz-dial-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .tz-dial-top b{font:400 22px/1 var(--serif)}
-.tz-dial-top em{font:italic 400 15px/1.2 var(--serif);font-style:normal;letter-spacing:0;text-transform:none;color:var(--ink);text-align:right}
+.tz-dial-top em{font:italic 400 17px/1.2 var(--serif);font-style:normal;letter-spacing:0;text-transform:none;color:var(--ink);text-align:right}
 .tz-track{position:relative;height:1px;background:var(--rule-2);margin:14px 6px 0}
 .tz-track i,.tz-track s{position:absolute;top:50%;width:13px;height:13px;margin:-6.5px;border-radius:50%}
 .tz-track i{background:var(--ink)}
 .tz-track s{box-shadow:inset 0 0 0 1px var(--soft)}
 .tz-dial.weak .tz-track i{background:var(--ground);box-shadow:inset 0 0 0 1px var(--soft)}
 .tz-dial.weak .tz-dial-top em{color:var(--faint)}
-.tz-ends{display:flex;justify-content:space-between;gap:16px;margin-top:10px;font:italic 400 15px/1.3 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint)}
+.tz-ends{display:flex;justify-content:space-between;gap:16px;margin-top:10px;font:italic 400 17px/1.3 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint)}
 .tz-ends span:last-child{text-align:right}
 .tz-ptg{display:grid;grid-template-columns:96px 1fr 18px;gap:14px;align-items:center;width:100%;padding:12px 0;border-bottom:1px solid var(--rule);text-align:left;color:var(--soft)}
 .tz-ptg .tz-strip{height:52px;gap:1px}

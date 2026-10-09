@@ -211,6 +211,7 @@ async function poemPage(id, opts = {}) {
     <p class="p-dek">${esc(r.poet)}${poem.po && poem.po !== r.poet ? ` <span class="pm-po">${esc(poem.po)}</span>` : ""}${poem.dated ? `<br><span class="pm-dated">${esc(poem.dated)}</span>` : ""}</p>
     <div class="pm-body view-${view}">${origText}${enText}</div>
     ${poem.tnote ? `<p class="fine">${esc(poem.tnote)}</p>` : ""}
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "poem:" + id, title: poem.t }) : ""}
     <section class="srcs"><h3>Source</h3><ul>
       ${tr || src ? `<li>${tr}${tr && src ? " · " : ""}${src}</li>` : ""}
       ${hasOrig && poem.ourl ? `<li>Original: <a href="${esc(poem.ourl)}" target="_blank" rel="noopener">${esc((() => { try { return decodeURIComponent(poem.ourl); } catch (e) { return poem.ourl; } })().replace(/^https?:\/\/(www\.)?/, "").replace(/_/g, " "))}</a></li>` : ""}
@@ -228,6 +229,7 @@ async function poemPage(id, opts = {}) {
     const w = e.target.closest("[data-ci]"); if (w) return poemColorTap(+w.dataset.ci);
     const g = e.target.closest("[data-g]"); if (g) return poemGlossSheet(g.dataset.g, g.textContent);
   });
+  if (typeof wireLinks === "function") wireLinks(el);
 }
 // A color word: app colors open their page; library names open a small sheet
 function poemColorTap(ci) {

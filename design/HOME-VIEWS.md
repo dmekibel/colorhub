@@ -80,10 +80,15 @@ Picked for: strong meaning, neighbors always related, works from 25 to 2,700 nam
 | `light` | Light to dark | white center → black rim, hue around (greys form one quiet spoke) | rings (rank = 100 − L, angle = hue) |
 | `families` | Families | a region per family, Greys in the middle, the rest clockwise in hue order | regions of small grids (hue × lightness inside) |
 | `pages` | Hue pages | a page per family: muted→vivid across, light→dark down (the Munsell book) | regions of small grids |
-| `temp` | Warm and cool | the color plane from above: warm left → cool right, greens up, magentas down, greys in the middle | grid (x = temperature, y = the other hue axis) |
 | `path` | Path rings | first words center, a ring per stage, hue around | rings (rank = useRank, angle = hue) + stage rings drawn on the ground |
 | `known` | Your words | Learned center → Learning → New, hue around | rings (rank = knowledge tier then useRank) + tier rings |
 | `sunflower` | Sunflower | golden-angle disc, hue then lightness | existing |
+| `tones` | Tones | a region per mood (Vivid, Light, Muted, Dark — full coverage, no overlap), hue around inside each | regions of small grids, grouped by `honeyToneGroup` instead of family |
+
+> 2026-10-09: `temp` ("Warm and cool") is retired as its own shape — it had no order chips, and Map's own
+> "Warmth" Sort-by already does the same job (warm to cool across, light to dark down). An old save with
+> `S.hm.arr === "temp"` becomes Map sorted by Warmth (`HONEY_ARR_OLD` in `js/honey.js`). Added `tones`, reusing
+> the Families book layout (`honeyRegions`) with a mood grouping instead of a family one.
 
 Every arrangement places each color exactly once (bounded, finite), so switching is a **morph**: each bubble keeps its identity and flies from where it was to its new place (`l18MorphApply`, 650 ms for an arrangement change), the middle color stays in the middle.
 

@@ -38,6 +38,8 @@ const PM_ICON = {
   arrange: sv('<path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>', 22, 1.6),
   filter: sv('<path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"/>', 22, 1.6),
   down: sv('<path d="M7 10l5 5 5-5"/>', 14, 2),
+  // the "Colors" row back to the honeycomb (David, 2026-10-09): a small cluster of named bubbles
+  colorsMode: sv('<circle cx="7" cy="8" r="3.4"/><circle cx="16" cy="7" r="2.6"/><circle cx="8.5" cy="16" r="2.8"/><circle cx="16.5" cy="15.5" r="2"/>', 22, 1.6),
 };
 let PM_THUMBS = null, PM_THUMBS_P = null;
 const PM_PAN = new Map();     // layout key -> { x, y, s }: where you were, so Back from a painting lands on it again
@@ -498,7 +500,7 @@ function pmMount(el, s, F) {
       b.w = w; b.h = h;
       if (m > .3) { ctx.save(); ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = 28; ctx.shadowOffsetY = 8; ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); ctx.restore(); }
       else { ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); }
-      if (b.d >= 20) wantImg.push([i, b.d > 92 || m > .3]);
+      if (b.d >= 14) wantImg.push([i, b.d > 92 || m > .3]);
       if (e && e.st === 1 && b.d >= 7) {
         if (e.fadeT == null) e.fadeT = t;
         const age = t - e.fadeT, a = RM ? 1 : Math.min(1, age / 260); if (a < 1) fading = true;
@@ -535,7 +537,14 @@ function pmMount(el, s, F) {
         if (room - tw > 40) { ctx.font = `500 ${Math.max(11, fs * .55)}px "Geist Mono", Menlo, monospace`; ctx.fillStyle = "rgba(163,158,146,.9)"; ctx.fillText(L.n.toLocaleString(), sx + tw + 8, sy); }
       }
     }
-    imgs.want(wantImg.reverse().slice(0, 160));   // nearest the middle first (drawn is smallest first)
+    // David, 2026-10-09: "zooming out doesn't load the stuff" -- this cap used to be 160, which silently excluded
+    // every cell beyond the nearest ~160 from ever being requested at all, however long you waited: want()'s own
+    // PM_FLIGHT (14 concurrent) and PM_CACHE_MAX (650) already bound real network/memory use, so the extra slice
+    // here was only ever throttling visibility, not cost. 2000 is comfortably above what a phone screen can hold
+    // at the 14px threshold above (zMin() also caps how far you can zoom out), so every on-screen eligible cell
+    // now gets a turn in the queue, nearest the middle first, same as before.
+    imgs.want(wantImg.reverse().slice(0, 2000));
+
     const c = nearestK(P[0], P[1]); setCenter(c);
   }
   // ---- gestures: drag to pan (the middle follows the thumb), pinch or wheel to zoom, flick to glide, a tap opens or brings
@@ -673,6 +682,8 @@ function pmMount(el, s, F) {
     const rows = [
       { id: "filter", t: "Filter", n: pmWords(s, F).join(" · ") || "Country, decade, painter, color…", art: PM_ICON.filter },
       ...PM_ARR.map(([k, t]) => ({ id: k, t: k === "similar" ? "Around this one" : t, n: k === "similar" ? (md ? md.t : "The painting in the middle") : PM_WHY[k], art: PM_ICON[k], cur: s.arr === k && (k !== "similar" || s.seed === mid) })).reverse(),
+      // "Colors | Paintings" (David, 2026-10-09): back to the honeycomb of names, remembered (js/core.js hmGoFloor)
+      { id: "colors", t: "Colors", n: "The honeycomb of color names", art: PM_ICON.colorsMode },
     ];
     const n = rows.length;
     const scrim = document.createElement("div"); scrim.className = "rm-scrim";
@@ -690,6 +701,7 @@ function pmMount(el, s, F) {
     addEventListener("keydown", STEM_KEY, true);
     stem.querySelectorAll("[data-pmdo]").forEach(b => b.onclick = () => {
       const id = b.dataset.pmdo; buzz(8); closeStem(true);
+      if (id === "colors") { S.hm = S.hm || {}; S.hm.mode = "colors"; save(); return typeof hmHome === "function" ? hmHome() : xBack(); }
       if (id === "filter") return pmFilterSheet(s, F, () => rebuild());
       if (id === "similar") { if (mid < 0) return; s.seed = mid; s.arr = "similar"; return rebuild(); }
       if (s.arr === id) return;

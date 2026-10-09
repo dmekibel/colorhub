@@ -35,6 +35,8 @@ function rcWireOpen(host, hex) {
     if (g) return galleryPage(+g.dataset.rcGi, true, host._rcHex || null);
     const pr = e.target.closest("[data-rc-pair]");
     if (pr) { const [a, b2] = pr.dataset.rcPair.split("+"), [na, nb2] = pr.dataset.rcNames.split("|"); return paintingsOfPage(["#" + a, "#" + b2], { tol: CI_STD.tol, minCover: CI_STD.minCover, maxCover: null, mode: "all", sort: "cover", names: [na, nb2] }); }
+    const ap = e.target.closest("[data-awpainter]");
+    if (ap) return typeof awPainter === "function" && awPainter(ap.dataset.awpainter);
     const b = e.target.closest("[data-rc-open]"); if (!b) return;
     morphFrom(b.querySelector("i") || b); openCoreName(b.dataset.h, b.dataset.n);
   });
@@ -158,9 +160,14 @@ function rcRoleSection(name, hex) {
     const r = rcRoleStats(hex);
     if (!r || r.n < 3) { box.innerHTML = ""; return; }
     const tot = RC_ROLES.reduce((a, [k]) => a + r.roles[k].length, 0) || 1;
+    // sqrt-weighted, not raw share: a role held by 8% of matches still needs enough width to read its own
+    // sentence. Raw counts (e.g. 1044 vs 5663, a 5.4x spread) squeezed the rarest card well past where its own
+    // unbreakable words (and the repeated "of 13,662" on every card) could fit, and the text ran off the edge
+    // of the screen with nothing to stop it (David, 2026-10-09: "uneven widths, text cut"). The percent replaces
+    // that repeated denominator -- it's said once, in the caption below, for the whole bar.
     const segs = RC_ROLES.filter(([k]) => r.roles[k].length).map(([k, label, what]) => {
-      const list = r.roles[k], top = list.reduce((a, b) => b[1] > a[1] ? b : a);
-      return `<button class="rc-role" data-role="${k}" data-rc-gi="${top[0]}" style="flex:${Math.max(list.length, tot * .06)}"><b>${label}</b><span>${list.length} of ${r.n}</span><small>${esc(what)}</small></button>`;
+      const list = r.roles[k], top = list.reduce((a, b) => b[1] > a[1] ? b : a), pct = Math.max(1, Math.round(list.length / r.n * 100));
+      return `<button class="rc-role" data-role="${k}" data-rc-gi="${top[0]}" style="flex:${Math.sqrt(list.length).toFixed(2)}"><b>${label}</b><span>${pct}%</span><small>${esc(what)}</small></button>`;
     }).join("");
     box.innerHTML = `<section class="rc-sec rc-roles"><h3>Its role in paintings</h3>
       <div class="rc-role-bar" style="--c:${hex}">${segs}</div>
@@ -188,16 +195,21 @@ function rcRolePaintingsHTML(name, hex) {
       box.innerHTML = `<section class="rc-sec rc-roleimg"><h3>Its roles, one painting each</h3>
         <div class="rc-roleimg-row">${roles.map(([k, label]) => `<button type="button" class="rc-ri wait" data-role="${k}" aria-label="${esc(label)}"><span class="rc-ri-im"></span><small>${esc(label)}</small></button>`).join("")}</div>
         <p class="fine">A real painting where it plays each part, as photographed.</p></section>`;
-      roles.forEach(([k]) => {
+      const settled = roles.map(([k]) =>
         arfPainting(rp[k]).then(base => base ? Promise.resolve(base.fill ? base.fill() : null).catch(() => {}).then(() => base) : null).then(base => {
-          const tile = box.querySelector(`[data-role="${k}"]`); if (!tile) return;
-          if (!base) { tile.remove(); return; }
+          const tile = box.querySelector(`[data-role="${k}"]`); if (!tile) return false;
+          if (!base || !base.img || !base.img.src) { tile.remove(); return false; }   // genuinely nothing to show: hide the role rather than a swatch that reads as an empty box
           tile.classList.remove("wait"); tile.dataset.rcGi = base.i;
           const im = tile.querySelector(".rc-ri-im");
-          if (base.img && base.img.src) im.innerHTML = `<img src="${esc(base.img.src)}" alt="" loading="lazy" decoding="async"${base.img.cors ? ' crossorigin="anonymous"' : ""} onload="this.classList.add('ld')">`;
-          else im.style.background = (base.pal && base.pal[0]) || hex;
-        }).catch(() => { const tile = box.querySelector(`[data-role="${k}"]`); if (tile) tile.remove(); });
-      });
+          // display only, never pixel-read: crossorigin is for the canvas sampling other pages do, and several
+          // museum CDNs in GL_CORS_HOSTS (images.metmuseum.org, verified 2026-10-09) don't actually answer with
+          // Access-Control-Allow-Origin, so tagging a plain <img> with it makes the browser fail the load outright
+          // (David, 2026-10-09: "Mid and Light are empty dark boxes" -- Shadow/Accent happened to be local images,
+          // unaffected by the attribute, which is why only the remote-hosted roles went dark).
+          im.innerHTML = `<img src="${esc(base.img.src)}" alt="" loading="lazy" decoding="async" onload="this.classList.add('ld')" onerror="this.closest('.rc-ri').remove()">`;
+          return true;
+        }).catch(() => { const tile = box.querySelector(`[data-role="${k}"]`); if (tile) tile.remove(); return false; }));
+      Promise.all(settled).then(oks => { if (!box.isConnected) return; if (oks.filter(Boolean).length < 2) box.remove(); });
     }).catch(() => { const box2 = document.getElementById(id); if (box2) box2.remove(); });
   };
   rcLazyGallery(id, draw);   // arfPainting (js/article-refs.js) resolves through the same gallery index
@@ -459,21 +471,83 @@ function rcLoadArtists() {
   return RC_ARTISTS_LOADING || (RC_ARTISTS_LOADING = fetch("data/analysis/color-artists.json" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
     .then(r => r.ok ? r.json() : {}).catch(() => ({})).then(d => (RC_ARTISTS = d)));
 }
-function rcPaintersHTML(name) {
+// David, 2026-10-09 on Baby Pink: "It's not letting me tap Paul Signac... and Paul has no photo." The painter
+// page (js/artwiki.js awPainter) already resolves a real portrait per painter (data/artists/portraits.json: a
+// Wikidata/self/other-painting portrait, or "none"); this row just never linked out or showed one. Same data,
+// same slug (routeSlug(name), the same key awPainter's own pages use).
+let RC_PORTRAITS = null, RC_PORTRAITS_LOADING = null;
+function rcLoadPortraits() {
+  if (RC_PORTRAITS) return Promise.resolve(RC_PORTRAITS);
+  return RC_PORTRAITS_LOADING || (RC_PORTRAITS_LOADING = fetch("data/artists/portraits.json" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
+    .then(r => r.ok ? r.json() : null).catch(() => null).then(d => (RC_PORTRAITS = (d && d.a) || {})));
+}
+// a painter row's avatar: a real portrait when one resolves (a plain Wikidata image is ready now; a self/other
+// portrait that's itself a gallery painting needs its image resolved async, like the painter page's own hero --
+// rcPaintersSection wires that after the fact). With no portrait at all, the painter page's own fallback applies
+// here too (David, 2026-10-09, on seeing an empty circle next to painters who do have portraits: "take their
+// most famous painting and put it in their circle, so it looks the same as painters with portraits"): the
+// portraits.json `famous` list, else the per-painter file's `typical` (most-reached painting) -- the same two
+// steps js/artwiki.js awPortraitHero falls through before it ever draws a plain swatch.
+function rcPainterPortHTML(slug, port) {
+  const pt = (port && port[slug] && port[slug].portrait) || { src: "none" };
+  if (pt.src === "wikidata" && pt.url) return `<img class="rc-painter-port" src="${esc(pt.url)}" alt="" loading="lazy" decoding="async" crossorigin="anonymous" onerror="this.outerHTML='<i class=&quot;rc-painter-port rc-painter-port-sw&quot; style=&quot;--c:#8a8a82&quot;></i>'">`;
+  if ((pt.src === "self" || pt.src === "other") && pt.gi != null) return `<i class="rc-painter-port rc-painter-port-sw wait" style="--c:#8a8a82" data-port-gi="${pt.gi}"></i>`;
+  const famousGi = ((port && port[slug] && port[slug].famous) || []).find(gi => gi != null && gi >= 0);
+  if (famousGi != null) return `<i class="rc-painter-port rc-painter-port-sw wait" style="--c:#8a8a82" data-port-gi="${famousGi}"></i>`;
+  return `<i class="rc-painter-port rc-painter-port-sw wait" style="--c:#8a8a82" data-port-pending="${esc(slug)}"></i>`;
+}
+function rcPaintersHTML(name, port) {
   const rows = (RC_ARTISTS || {})[name];
   if (!rows || !rows.length) return "";
   return `<section class="rc-sec rc-painters"><h3>Painters who use it</h3>
-    ${rows.slice(0, 5).map(r => `<div class="kin rc-plain"><i style="--c:#8a8a82"></i><b>${esc(r.a)}</b><span>${r.l.toFixed(1)}× more than his or her peers, from ${r.n} painting${r.n === 1 ? "" : "s"} here</span></div>`).join("")}
-    <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small), as photographed, from the gallery's 23,781 paintings (n per painter above). Artist pages aren't built yet, so names aren't links yet.</p>
+    ${rows.slice(0, 5).map(r => { const slug = r.s || routeSlug(r.a);
+      return `<button type="button" class="kin rc-plain rc-painter" data-awpainter="${esc(slug)}">${rcPainterPortHTML(slug, port)}<b>${esc(r.a)}</b><span>${r.l.toFixed(1)}× more than their peers, from ${r.n} painting${r.n === 1 ? "" : "s"} here</span></button>`; }).join("")}
+    <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small), as photographed, from the gallery's 23,781 paintings (n per painter above).</p>
   </section>`;
+}
+// resolves one painting tile (an <i data-port-gi>) into its image, same crop/size as a real portrait.
+// No loading="lazy" here: the browser can't judge viewport proximity for an element that isn't in the document
+// yet, and for at least one real case this measurably hung forever rather than degrading to eager -- a painting
+// sourced from Commons, whose d.img is a commons.wikimedia.org/wiki/Special:FilePath/... redirect URL (the raw
+// form the rest of the gallery already hands to a normal, attached <img> just fine; it's specifically the
+// unattached + lazy combination that breaks). Verified live: identical fetch, removing only `loading="lazy"`,
+// went from a 5s timeout to loading normally. The row is already off-screen until scrolled to, so there's
+// nothing lazy-loading would have saved here anyway.
+function rcPainterFillGi(i) {
+  glDetail(+i.dataset.portGi).then(d => {
+    if (!i.isConnected || !d) return;
+    const img = document.createElement("img");
+    img.className = "rc-painter-port"; img.alt = ""; img.decoding = "async";
+    img.src = glSmall(d) ? d.img : glBig(d.img);
+    img.onerror = () => { i.classList.remove("wait"); };
+    img.onload = () => i.replaceWith(img);
+  }).catch(() => { i.classList.remove("wait"); });
+}
+let RC_PTYP = new Map();   // slug -> Promise<typical gi | null> (data/artists/p/<slug>.json), shared across rows/sections
+function rcPainterTypicalGi(slug) {
+  if (!RC_PTYP.has(slug)) RC_PTYP.set(slug, fetch(`data/artists/p/${slug}.json` + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
+    .then(r => r.ok ? r.json() : null).catch(() => null).then(P => P && P.typical != null && P.typical >= 0 ? P.typical : null));
+  return RC_PTYP.get(slug);
 }
 function rcPaintersSection(name, hex) {
   const id = "rc-painters-" + Math.random().toString(36).slice(2, 8);
-  rcLoadArtists().then(() => {
+  Promise.all([rcLoadArtists(), rcLoadPortraits()]).then(([, port]) => {
     const box = document.getElementById(id); if (!box) return;
-    let html = rcPaintersHTML(name);
-    if (!html) { const near = rcNearestWith(hex, name, n => (RC_ARTISTS[n] || []).length); if (near) html = rcPaintersHTML(near.n).replace("<h3>Painters who use it</h3>", "<h3>Painters who use it</h3>" + rcNearNote(name, near)); }
+    let html = rcPaintersHTML(name, port);
+    if (!html) { const near = rcNearestWith(hex, name, n => (RC_ARTISTS[n] || []).length); if (near) html = rcPaintersHTML(near.n, port).replace("<h3>Painters who use it</h3>", "<h3>Painters who use it</h3>" + rcNearNote(name, near)); }
     box.innerHTML = html;
+    // any painting-backed avatar (a self/other portrait, or a painter's famous/typical painting) resolves the
+    // same way the painter page's own hero does (js/artwiki.js awFillPortrait), not before loadGallery() has
+    // the detail shard in. A pending tile (no gi known yet: no portrait and no famous painting) looks up the
+    // painter's own typical painting first, then joins the same resolve path.
+    const ready = () => { const w = box.querySelectorAll("[data-port-gi]"); if (w.length && typeof loadGallery === "function") loadGallery().then(() => w.forEach(rcPainterFillGi)).catch(() => {}); };
+    ready();
+    box.querySelectorAll("[data-port-pending]").forEach(i => rcPainterTypicalGi(i.dataset.portPending).then(gi => {
+      if (!i.isConnected) return;
+      if (gi == null) { i.classList.remove("wait"); return; }   // truly nothing to show: the signature-color swatch stands
+      i.removeAttribute("data-port-pending"); i.dataset.portGi = gi;
+      if (typeof loadGallery === "function") loadGallery().then(() => rcPainterFillGi(i)).catch(() => i.classList.remove("wait"));
+    }).catch(() => { if (i.isConnected) i.classList.remove("wait"); }));
   });
   return `<div id="${id}"></div>`;
 }
@@ -615,23 +689,31 @@ function rcLazyGallery(id, draw) {
   setTimeout(() => { if (document.getElementById(id)) go(); }, 700);
 }
 const rcYearLabel = y => y == null ? "" : y < 0 ? `${-y} BCE` : String(y);
+// A painting year outside this range is almost certainly a parsing slip, not a real date (our oldest genuine
+// holdings -- Egyptian funerary papyri and the like -- run back several thousand years BCE, never further; and
+// a museum record can't postdate the archive build). Keep the line off rather than assert a date we can't trust.
+const rcYearPlausible = y => y != null && Number.isFinite(y) && y > -5000 && y <= new Date().getFullYear();
 function rcReachSection(name, hex) {
   const id = "rc-reach-" + Math.random().toString(36).slice(2, 8);
   const paint = (r, box) => {
     const [d, pi, ph, n, y] = r;
     const none = d > 8 && n === 0;
     const pin = () => (typeof GAL !== "undefined" && GAL) ? glPinHTML(pi, { badge: pctMatch(d) }) : "";
-    const caveat = `<p class="fine">As photographed: aged, varnished paintings, each cut to a few dozen colors, so a very small vivid touch can be lost. This says what our archive shows, not what paint can do.</p>`;
+    const caveat = `<p class="fine">As photographed: aged, varnished paintings, each cut to a few dozen colors, so a very small vivid touch can be lost. This says what our archive shows, not what paint can do. Dates are the museums' own, and only roughly known for the oldest work.</p>`;
     if (none) {
       box.innerHTML = `<section class="rc-sec rc-reach rc-reach-none"><p class="rc-reach-head">No painting in our 23,781 reaches this color. It's a modern color.</p>
         <div class="rc-reach-pair"><div style="--c:${hex}" data-ink="${ink(hex)}"><b>This color</b></div><button style="--c:${ph}" data-ink="${ink(ph)}" data-rc-gi="${pi}"><b>The closest any painting gets</b><small>${pctDiff(d)} · tap to see the painting</small></button></div>${caveat}</section>`;
     } else {
-      const few = n <= 3;
+      const few = n <= 3, yearOK = rcYearPlausible(y);
       box.innerHTML = `<section class="rc-sec rc-reach"><h3>In the archive</h3>
         <div class="rc-reach-blocks"><div class="rc-reach-pin">${pin()}</div>
-          <div class="rc-reach-stat"><b>${few ? (n ? `Only ${n} painting${n === 1 ? "" : "s"}` : "Barely any") : n.toLocaleString() + " paintings"}</b><span>${few ? "come close" : "come close to it"} (within ${pctFmt(6)}).</span>${y != null ? `<span>Earliest in our archive: <b>${esc(rcYearLabel(y))}</b>.</span>` : ""}<span>The closest, ${pctDiff(d)}, is the one at left.</span></div></div>${caveat}</section>`;
+          <div class="rc-reach-stat"><b>${few ? (n ? `Only ${n} painting${n === 1 ? "" : "s"}` : "Barely any") : n.toLocaleString() + " paintings"}</b><span>${few ? "come close" : "come close to it"} (within 6%).</span>${yearOK ? `<span class="rc-reach-earliest">Earliest in our archive: <b class="rc-reach-yr">${esc(rcYearLabel(y))}</b></span>` : ""}<span>The closest here, ${pctMatch(d)}, is the one at left.</span></div></div>${caveat}</section>`;
     }
     glFill(box);
+    // the hero pin is a plain gl-pin (data-gi), not one of the rc-* swatches rcWireOpen already delegates for;
+    // wire it locally so "tap the painting" works the same as every other painting tile on the page (David,
+    // 2026-10-09: "I'm unable to tap the painting to open the painting page").
+    box.onclick = e => { const p = e.target.closest("[data-gi]"); if (p) galleryPage(+p.dataset.gi, true, hex); };
   };
   Promise.all([rcLoadReach()]).then(() => {
     let r = RC_REACH && RC_REACH[name];

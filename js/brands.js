@@ -86,9 +86,11 @@ function bdPage(id, opts = {}) {
     <p class="fine">${b.colors.map((c, i) => `${esc(c.label || c.hex)}${near[i] ? ` — nearest named color <button class="link" data-bd-near="${esc(near[i].h)}" data-bd-near-n="${esc(near[i].n)}">${esc(near[i].n)}</button>` : ""}`).join(". ")}.</p>
     ${bdTimelineHTML(b)}
     <p class="fine bd-last">Colors are our own approximate screen values from ${esc(b.source || "public sources")}, checked ${esc(b.source_date || "")}. No logo is shown; ${esc(b.name)} and other names are trademarks of their owners, and ColorHub is not affiliated with or endorsed by them.</p>
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "brand:" + id, title: b.name }) : ""}
   `, "article bd-page");
   el.querySelector("[data-back]").onclick = opts.back || xBack;
   el.querySelectorAll("[data-bd-near]").forEach(btn => btn.onclick = () => { const h = btn.dataset.bdNear; openTappedColor(h); });
+  if (typeof wireLinks === "function") wireLinks(el);
   return el;
 }
 function bdOpenRoute(id) { XSTACK = []; bdWhen(() => bdPage(id)); }

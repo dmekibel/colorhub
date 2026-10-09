@@ -156,10 +156,10 @@ function ptPairsHTML(name, aff, hex) {
   if (!aff || (!aff.c && !aff.a)) return "";
   const comp = (aff.c || []).slice(0, 8), avo = (aff.a || []).slice(0, 5);
   return `${comp.length ? `<h3>Often paired with</h3>
-    <p class="gl-in-sub">Colors that turn up in the same paintings as ${esc(name.toLowerCase())} more often than chance would put them there.</p>
+    <p class="gl-in-sub">Colors that turn up in the same paintings as ${esc(name)} more often than chance would put them there.</p>
     <div class="pt-pairs">${comp.map(([n, h, k, l]) => `<button class="pt-pair" data-pt-pair="${h}" data-pt-pname="${esc(n)}"><i style="--c:${h}"></i><b>${esc(n)}</b><span>${l >= 10 ? Math.round(l) : l.toFixed(1)}× chance · ${ptNum(k)} paintings</span></button>`).join("")}</div>` : ""}
     ${avo.length ? `<h3>Seldom seen with</h3>
-    <p class="gl-in-sub">Painters rarely put these next to ${esc(name.toLowerCase())}.</p>
+    <p class="gl-in-sub">Painters rarely put these next to ${esc(name)}.</p>
     <div class="pt-pairs">${avo.map(([n, h, e, k, l]) => `<button class="pt-pair" data-pt-pair="${h}" data-pt-pname="${esc(n)}"><i style="--c:${h}"></i><b>${esc(n)}</b><span>${ptNum(k)} together, ${ptNum(Math.round(e))} expected</span></button>`).join("")}</div>` : ""}
     <p class="fine">Counted over ${ptNum(CI_SOURCES.paintings.n || 0)} paintings, as photographed: a painting has a color when something within 4% of it covers at least 1% of the canvas. “× chance” compares with the colors being scattered independently.</p>
     ${typeof chordsPage === "function" ? `<button class="btn ghost gl-all" data-pt-chords>Which pairs do painters favor overall? ${ICON.arrow}</button>` : ""}`;
@@ -211,8 +211,12 @@ function paintingsOfSection(hex, host, o = {}) {
   };
   const start = () => {
     shell(); refresh();
-    // the facts that don't need the gallery: how many, stated in the one definition the field notes use
-    ciAffinity(name).then(aff => {
+    // the facts that don't need the gallery: how many, stated in the one definition the field notes use.
+    // ciAffinity's own fetch (one small per-letter shard) can resolve before refresh()'s paintingsFor() has
+    // opened the paintings source and set CI_SOURCES.paintings.n -- ptPairsHTML's "Counted over N paintings"
+    // read that field before it existed and said "0" (David, 2026-10-09, caught on Ochre Brown's rail). Open it
+    // alongside the affinity fetch so the count is always real by the time this renders.
+    Promise.all([ciOpen("paintings").catch(() => null), ciAffinity(name)]).then(([, aff]) => {
       const sl = host.querySelector("[data-pt-pairs]"); if (!sl || !aff) return;
       sl.innerHTML = ptPairsHTML(name, aff, hex);
     });

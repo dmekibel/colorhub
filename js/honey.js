@@ -311,14 +311,15 @@ function honeySunArr(items, rankOf, groupOf) {
   if (groupOf) lay.bounds = honeyGroupBounds(pts, groupOf);
   return lay;
 }
-// a family per region: each family a small grid of its own (sub(items) -> a finite layout), the regions laid out three
-// across like the pages of a book (read left to right, top to bottom), with a one-cell sea between them. Each region
-// is snapped to the lattice (whole columns, an even number of rows), so its cells stay on the honeycomb.
+// a family (or other group) per region: each group a small grid of its own (sub(items) -> a finite layout), the
+// regions laid out three across like the pages of a book (read left to right, top to bottom), with a one-cell sea
+// between them. Each region is snapped to the lattice (whole columns, an even number of rows), so its cells stay on
+// the honeycomb. groupOf (default: the family) decides which region a color falls into.
 // read around the middle (Greys) clockwise from the top left: Pinks, Reds, Oranges, Browns, Yellows, Greens, Blues, Purples
 const HONEY_PAGE_ORDER = ["Pinks", "Reds", "Oranges", "Purples", "Greys", "Browns", "Blues", "Greens", "Yellows"];
-function honeyRegions(items, sub, order = HONEY_PAGE_ORDER) {
+function honeyRegions(items, sub, order = HONEY_PAGE_ORDER, groupOf = csFamily) {
   const by = new Map();
-  for (const it of items) { const f = csFamily(it); let a = by.get(f); if (!a) by.set(f, a = []); a.push(it); }
+  for (const it of items) { const f = groupOf(it); let a = by.get(f); if (!a) by.set(f, a = []); a.push(it); }
   const regs = order.filter(f => by.has(f)).map(f => {
     const g = sub(by.get(f)), xs = g.pts.map(q => q.x), ys = g.pts.map(q => q.y);
     return { f, g, x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) };
@@ -340,6 +341,11 @@ function honeyRegions(items, sub, order = HONEY_PAGE_ORDER) {
 }
 // warm (+1, orange-yellow) to cool (-1, blue), scaled by strength so greys sit in the seam
 const honeyTemp = it => it.C < 6 ? 0 : it.C / (it.C + 18) * Math.cos((it.H - 60) * Math.PI / 180);
+// TONES: every color sits in exactly one mood, by lightness then chroma (dark first, since a dark vivid red is
+// still read as "a dark red" before "a vivid red"): Dark (L<40), Light (L>=78), Vivid (the rest, C>=45), Muted
+// (everyone calmer and in between) -- full coverage, no color falls between the islands.
+const HONEY_TONE_ORDER = ["Vivid", "Light", "Muted", "Dark"];
+const honeyToneGroup = it => it.L < 40 ? "Dark" : it.L >= 78 ? "Light" : it.C >= 45 ? "Vivid" : "Muted";
 const honeyTier = it => { const c = typeof hmCard === "function" ? hmCard(it.o) : null; return !c ? 2 : typeof isMine === "function" && isMine(c) ? 0 : 1; };
 const honeyRankOf = it => it.o.rank != null ? +it.o.rank : 1e9;
 // the stage each color falls in (by its place in rank order, so a stage is exactly its round number)
@@ -417,10 +423,10 @@ const HONEY_ARR = {
     make: (items, ord, p) => { const o = HONEY_CENTER[ord] || HONEY_CENTER.light; return honeyRingArr(items, o.rank(items, p), o.group && o.group(items)); } },
   sunflower: { title: "Sunflower", kind: "radial", def: "vivid", sub: "A golden spiral from the middle out, hue going round",
     make: (items, ord, p) => { const o = HONEY_CENTER[ord] || HONEY_CENTER.vivid; return honeySunArr(items, o.rank(items, p), o.group && o.group(items)); } },
-  families: { title: "Families", kind: "grid", def: "hue", sub: "A region per family, greys in the middle", fit: true,
+  families: { title: "Families", kind: "grid", def: "hue", sub: "A region per family, greys in the middle", fit: true, unit: "family",
     make: (items, ord) => { const s = HONEY_SORT[ord] || HONEY_SORT.hue; return honeyRegions(items, a => honeySortGrid(a, s, 2.4)); } },   // tall regions: the book is phone-shaped
-  // the color plane seen from above (lightness set aside): warm left, cool right, greens up, magentas down
-  temp: { title: "Warm and cool", kind: "", sub: "Warm left, cool right, greys in the middle", make: items => honeyGridArr(items, it => -honeyTemp(it), it => -(it.C < 6 ? 0 : it.C / (it.C + 18) * Math.sin((it.H - 60) * Math.PI / 180)), 1.25) },
+  tones: { title: "Tones", kind: "grid", def: "hue", sub: "An island per mood: vivid, light, muted, dark; hue around inside each", fit: true, unit: "mood",
+    make: (items, ord) => { const s = HONEY_SORT[ord] || HONEY_SORT.hue; return honeyRegions(items, a => honeySortGrid(a, s, 2.4), HONEY_TONE_ORDER, honeyToneGroup); } },
 };
 const HONEY_ARR_IDS = Object.keys(HONEY_ARR);
 // the orders a shape offers, in chip order
@@ -429,7 +435,9 @@ const honeyOrderSpec = (id, ord) => { const a = HONEY_ARR[id]; return !a ? null 
 // "rings~vivid" -> { id: "rings", ord: "vivid", p: undefined }; "rings~near~#AABBCC" -> p "#AABBCC"
 function honeyParseKey(k) { const [id, ord, p] = String(k || "").split("~"); return { id, ord: ord || (HONEY_ARR[id] ? HONEY_ARR[id].def : ""), p }; }
 // older saves: the arrangements that are now a shape plus an order
-const HONEY_ARR_OLD = { wheel: ["rings", "muted"], light: ["rings", "light"], path: ["rings", "common"], known: ["rings", "known"], pages: ["families", "chroma"] };
+// (David, 2026-10-09: "Warm and cool" was its own plane with no order chips; Map's "Warmth" sort-by already does
+// the same job — warm to cool across, light to dark down — so the dedicated shape is retired in its favor)
+const HONEY_ARR_OLD = { wheel: ["rings", "muted"], light: ["rings", "light"], path: ["rings", "common"], known: ["rings", "known"], pages: ["families", "chroma"], temp: ["map", "warm"] };
 const honeyIsLayout = k => ["wheel", "sunflower", "globe", "spiral", "mapTall", "mapWide"].includes(k) || !!(HONEY_ARR[honeyParseKey(k).id] && HONEY_ARR[honeyParseKey(k).id].make);
 // a small live picture of an arrangement, drawn from the actual colors (the View sheet's strip): every color a dot
 // at its place, fitted to the canvas. Uses the same layout cache as the map, so the tap that follows is instant.
@@ -635,6 +643,17 @@ const honeyEaseS = u => u <= 0 ? 0 : u >= 1 ? 1 : u * u * (3 - 2 * u);   // smoo
 const honeyErf = x => { const s = x < 0 ? -1 : 1; x = Math.abs(x); const t = 1 / (1 + .3275911 * x);
   return s * (1 - ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - .284496736) * t + .254829592) * t * Math.exp(-x * x)); };
 const HONEY_WRAP = new Map();
+// David, 2026-10-09: "I want to see all the color names, even when tiny... as long as it's legible." A cell's
+// own font size (honeyWrap's cached per-name wrap ratio, below, times the cell's current diameter) is the real
+// legibility signal -- not the cell's raw diameter or a style's own labelMin tuning (meant for when a REGION
+// starts revealing names, a design choice, not a legibility floor), which could hide a label that would still
+// read fine, or show one that wouldn't. 7 CSS px is a verified floor (screenshotted at 440x956, 3x device
+// pixel ratio: the smallest labels this draws stay crisp, nothing smudgy); below it, no label at all -- never
+// a half-legible one. honeyWrap's own per-name cache (not per-size: the fs it returns is a RATIO, scaled by
+// whatever diameter a cell currently has) means this costs nothing extra across a frame's many tiny cells that
+// never reach the floor -- the expensive part (ctx.measureText, picking the wrap) runs once per unique name,
+// ever, not once per cell per frame.
+const HONEY_LABEL_FS_MIN = 7;
 function honeyWrap(ctx, name) {
   let w = HONEY_WRAP.get(name); if (w) return w;
   const maxW = 76, words = name.split(" ");
@@ -673,17 +692,30 @@ const honeyExtent = (theta, r, shapeAmt) => shapeAmt <= .02 ? r : r * (1 - shape
 //   shape 0 = the largest circle that fits in the cell (touching its nearest neighbors across the same gap)
 //   between = the circle blended toward the cell, so the corners round off
 // A bubble at the edge of what's drawn (neighbors culled) is also bounded by its own lens size, so it never balloons.
+// A unit regular hexagon (pointy-top, the same orientation as hmLookIcon's own honeycomb glyph in js/home.js),
+// reused below as the cheap tiled-cell shape for tiny bubbles -- six precomputed points, scaled per bubble by a
+// single multiply, instead of the full per-neighbor polygon clip.
+const HONEY_HEX_UNIT = Array.from({ length: 6 }, (_, i) => { const a = (i * 60 + 30) * Math.PI / 180; return [Math.cos(a), Math.sin(a)]; });
 function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {   // clipAll (L18 glide): clip even tiny bubbles   // grow: how far a bubble may swell past its own lens size, as a fraction of its diameter
   if (!drawn.length) return;
   // Speed: the grid is sized to a TYPICAL bubble (not the biggest, which put thousands of tiny ones in every lookup),
-  // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the cell
-  // clipping altogether: at that size a slightly smaller circle is indistinguishable and costs nothing.
+  // and each bubble searches only as many cells as its own size needs. Tiny bubbles (under ~7 px) skip the real
+  // per-neighbor cell clipping either way (too expensive to run on a few thousand of them every frame) -- but a
+  // tiled look still wants a TILED cell there, not a plain circle. David, 2026-10-09: "zoomed-out honeycomb
+  // spiral looks like circles" -- below, a fixed regular hexagon (the honeycomb lattice's own natural cell
+  // shape, not a pixel-exact Voronoi cell the way the full clip computes for a bigger bubble, but a solid
+  // mosaic at a glance, which is what low zoom needs) costs the same O(1) as the circle it replaces.
+  const tinyHex = shapeAmt > .5 ? HONEY_HEX_UNIT : null;
   const ds = drawn.map(b => b.d).sort((a, c) => a - c), typ = ds[Math.floor(ds.length / 2)] || 8, maxD = ds[ds.length - 1] || 8;
   const cell = Math.max(4, typ * 1.3, maxD * 1.5 / 12), grid = new Map(), key = (i, j) => i * 100003 + j;
   drawn.forEach((b, n) => { const k = key(Math.floor(b.x / cell), Math.floor(b.y / cell)); let a = grid.get(k); if (!a) grid.set(k, a = []); a.push(n); });
   const half = gapPx / 2;
   drawn.forEach((b, n) => {
-    if (b.d < 7 && !clipAll) { b.poly = null; b.rin = Math.max(0, b.d * .44 - half); b.d0 = b.d; b.d = 2 * b.rin; return; }
+    if (b.d < 7 && !clipAll) {
+      const rin = Math.max(0, b.d * .44 - half);
+      b.poly = tinyHex ? tinyHex.map(p => [p[0] * rin, p[1] * rin]) : null;
+      b.rin = rin; b.d0 = b.d; b.d = 2 * rin; return;
+    }
     const reach = Math.min(12, Math.ceil((b.d + maxD) * .75 / cell));
     // start from a 16-gon a little bigger than the bubble's own lens size
     const R0 = b.d * Math.max(.62, grow * 1.2); let poly = [];
@@ -702,7 +734,9 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
           if (dist / 2 - half < r) r = dist / 2 - half;
         }
       }
-      b.poly = null; b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
+      // rin0: the real neighbor-respecting inscribed radius, kept separately from b.rin (the growth pass below
+      // overwrites b.rin, and must never shrink a bubble PAST this -- see that pass's own comment).
+      b.poly = null; b.rin0 = b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
     }
     for (let i = 0; i < 16; i++) { const t = i / 16 * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
     const ci = Math.floor(b.x / cell), cj = Math.floor(b.y / cell);
@@ -736,12 +770,19 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   // Circles: a small bubble leaves room in its cell that its bigger neighbor can use (the Magnifier's center next to
   // its smaller first ring). Grow each circle, center outward, until it meets its neighbors across the gap, never past
   // its own lens size. Every step keeps r_a + r_b <= distance - gap, so circles still never overlap.
+  // David, 2026-10-09: "this middle gap hasn't been filled" -- a Sunflower/Spiral's own innermost points, after the
+  // fisheye stretches their real neighbors apart, can have a true (pass-1, gap-respecting) inscribed radius well
+  // past d0*grow -- but this pass started from d0*grow every time regardless, SHRINKING those already-correct
+  // circles back down and leaving gaps where several of them meet at the crowded center. b.rin0 (pass 1's own
+  // value, computed from the SAME real neighbors this pass also uses) is already proven non-overlapping on its
+  // own, so it's a safe floor here -- this pass can still grow a bubble further into room a smaller neighbor
+  // cedes, but never shrinks one below what pass 1 already knew was safe.
   if (shapeAmt <= .02) {
     const cx = drawn.reduce((t, b) => t + b.x, 0) / drawn.length, cy = drawn.reduce((t, b) => t + b.y, 0) / drawn.length;
     const order = drawn.map((b, n) => n).sort((a, c) => Math.hypot(drawn[a].x - cx, drawn[a].y - cy) - Math.hypot(drawn[c].x - cx, drawn[c].y - cy));
     for (let pass = 0; pass < 2; pass++) for (const n of order) {
       const b = drawn[n]; if (!b.nb) continue;
-      let lim = b.d0 * grow;
+      let lim = Math.max(b.d0 * grow, b.rin0 || 0);
       for (const [m, dist] of b.nb) lim = Math.min(lim, dist - gapPx - drawn[m].rin);
       b.rin = Math.max(0, lim); b.d = 2 * b.rin;
     }
@@ -897,6 +938,15 @@ function honeyFindLit() {
 }
 // the bar itself (Home's honeycomb asks for one per lit set). Two rows: ‹, the source's picture, its title and
 // subline, ✕; then the two verbs. ‹ only shows while the page that lit the set can still be reached.
+// David, 2026-10-09: "I tap Close and it brings me back to the plain map. I should be able to go back along the
+// chain of links I was on -- I shouldn't lose all my progress just because I tapped the map." Lighting colors on
+// the map from a page is a step IN the trail, not an exit (js/colorset.js csOnMap already keeps XSTACK behind the
+// map for exactly this -- TL_MAPKEEP, js/trail.js), but ✕ used to only clear the highlight and leave you staring
+// at the bare map with no way back drawn anywhere: reasonable as "show every color again" when there's truly no
+// source page, but read by anyone as a plain dismiss/Close (the X glyph), and the one place in the app an X
+// doesn't retrace the page it closed. With a source to return to, ✕ now does exactly what ‹ does -- the two
+// controls stop being redundant with each other in the one case that matters: there is no un-doing a tap that
+// looks like "go away" into "stay here, just quieter."
 function honeyLitBar() {
   const bar = document.createElement("div");
   bar.className = "cs-hl-pill cs-hl-bar"; bar.setAttribute("role", "region");
@@ -911,7 +961,7 @@ function honeyLitBar() {
   bar.innerHTML = `<div class="cs-hl-head">
       ${bk ? `<button class="cs-hl-back" aria-label="Back to ${esc(bk.title || title)}">${ICON.back}</button>` : ""}
       ${thumb}<span class="cs-hl-t"><b>${esc(title)}</b><i class="cs-hl-sep"> · </i><small>${esc(sub)}</small></span>
-      <button class="cs-hl-x" aria-label="Show every color again">${ICON.x}</button>
+      <button class="cs-hl-x" aria-label="${bk ? `Close: back to ${esc(bk.title || title)}` : "Show every color again"}">${ICON.x}</button>
     </div>
     ${canSize ? `<div class="cs-hl-n"><label class="cs-hl-nl"><span>How many</span><input type="range" min="${HONEY_LIT_MIN}" max="${set.max}" step="1" value="${cs.length}" aria-label="How many colors"><b data-hl-k>${cs.length}</b></label>
       <div class="cs-hl-cols" data-hl-cols></div></div>` : ""}
@@ -921,7 +971,10 @@ function honeyLitBar() {
     </div>`;
   const on = (sel, f) => { const b = bar.querySelector(sel); if (b) b.onclick = e => { e.stopPropagation(); f(); }; };
   on(".cs-hl-back", () => { buzz(6); honeyHighlight(null); bk.go(); });
-  on(".cs-hl-x", () => { buzz(4); honeyHighlight(null); });
+  // ✕ ("Close"): back to the source page when there is one (same as ‹ -- see the comment above), otherwise the
+  // old behavior, clear the highlight and stay on the bare map (a selection with no page behind it, e.g. one
+  // lit from Learn or a search, has nowhere to "close" back to).
+  on(".cs-hl-x", () => { buzz(bk ? 6 : 4); honeyHighlight(null); if (bk) bk.go(); });
   on("[data-hl-learn]", () => { buzz(6); honeyLearnLit(); });
   on("[data-hl-find]", () => { buzz(6); honeyFindLit(); });
   if (canSize) {
@@ -1027,6 +1080,84 @@ function honeycomb(host, opts = {}) {
     const v = cfg[k] + d * t;
     return k === "shape" ? clamp(v, 0, 1) : k === "m0" ? Math.max(cfg.m1 + .05, v) : Math.max(0, v);
   }
+  // The whole-layout fit (David, 2026-10-09: the Arrange sheet covers the middle of the map, so zoomed in "you
+  // can barely see the difference between views" when a setting changes it; also reused by zFloor() just below,
+  // for the ordinary pinch-out floor outside the sheet too -- see that comment). Every cell's actual world
+  // (x,y), not a radial "whole book" approximation, which under- or over-zoomed for anything that isn't roughly
+  // circular (Families' three-wide grid, the Map's own tall tile), into whatever's left above the sheet
+  // (vcy()/vy() already track the inset, itself measured from the sheet's own getBoundingClientRect().top by
+  // js/home.js chooser's applyInset -- 0 outside the sheet, so this solves for the full viewport there), with a
+  // real ~16px margin on every side.
+  // Defined here (above zFloor, which calls it) rather than down with flyToFit/enterFit/exitFit where the rest
+  // of fit mode lives, because those are only ever CALLED later (after setup); zFloor() is called once during
+  // the very first setItems(), synchronously, before a later `const` in the same closure has initialized --
+  // boundsFit has no dependency on anything fit-mode-specific (fitMode/fitSaved/fitSaved aren't read here), so
+  // it can live wherever in the closure as long as it's before its first real caller.
+  const boundsFit = () => {
+    if (!lay || lay.globe || !lay.pts.length || !W) return null;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const p of lay.pts) { if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x; if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; }
+    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2, halfW = Math.max(.15, (maxX - minX) / 2), halfH = Math.max(.15, (maxY - minY) / 2);
+    // insetBottom (the target the sheet's own height was just measured to), not vy()/insetCur: the inset eases in
+    // over ~300ms (honey.js's own loop() tween), so fitting against the CURRENT (still mid-tween) value would aim
+    // for wherever the sheet happened to be a moment ago, not where it's about to settle.
+    // David, 2026-10-09: "the original view is now too far away" -- the disk floated at ~45% of the available
+    // width instead of filling it edge to edge. Two things compounded to cause that: (1) the margin reserved for
+    // the fisheye's magnified middle bubble was counted TWICE (once as extra margin scaled by base*m0, again as a
+    // 1.35x inflation of R below) -- now just the plain ~16px margin David asked for, plus one small (1.08x)
+    // allowance for the magnified middle bubble's drawn radius sticking a little past the raw lattice points'
+    // bounding box; and (2) fitting a single circumscribed-circle R (the content's half-diagonal) into the
+    // available rect's own half-diagonal only matches when the content's aspect happens to match the available
+    // rect's -- a lopsided shape (a tall, narrow region into a wide-and-short rect, or back) is under-constrained
+    // on its tighter axis, so one axis can overflow well past the sheet while the other still has room to spare.
+    // Checking width and height as two independent constraints on the SAME z (both must hold, so the smaller --
+    // more zoomed out -- survives) fixes both axes at once; js/honey.js's own zFloor() does the same AND-of-two-
+    // axes trick already (the `fits` helper a little below this function).
+    // David, 2026-10-09: "width ~= screen width minus ~16px margins" -- just the plain margin. The per-point
+    // check below uses each point's own REAL drawn position (the same F(r,l)/r radial transform the renderer
+    // itself uses) -- but David's next report ("the preview still zooms out too far", on his own default
+    // Spiral/Sunflower + Honeycomb) showed this wasn't the whole picture: a point's own DRAWN RADIUS (strong
+    // magnification can make the near-center cells considerably bigger than the lattice spacing alone
+    // suggests) was never subtracted, so a cell right at the computed boundary could still draw well past it --
+    // measured overflowing the available space by ~14% on that exact combination. localScale (defined above,
+    // the same function buildFlatDrawn's own round branch calls) gives each point's real diameter at a
+    // candidate zoom; checking center-position-plus-own-radius against the boundary, not just the center, is
+    // what _drawnBounds() -- the actual rendered extent -- would also measure.
+    const margin = 16, pad = 1;
+    const availW = Math.max(40, W - margin * 2), availH = Math.max(40, Hh - insetBottom - margin * 2);
+    // fit mode wants the OPPOSITE search direction from zFloor()'s own `search` a little below (its own
+    // minimum-zoom floor): here we want the LARGEST zoom that still keeps everything in bounds, so the content
+    // fills as much of the available rect as it can without overflowing it.
+    const searchMax = bad => {
+      let lo = ABS_ZMIN, hi = ZMAX;
+      if (!bad(hi)) return hi;
+      if (bad(lo)) return lo;
+      for (let i = 0; i < 26; i++) { const m = (lo + hi) / 2; if (bad(m)) hi = m; else lo = m; }
+      return lo;
+    };
+    let zt;
+    if (cfg.lensMode === "round") {
+      // the real draw transform (buildFlatDrawn's round branch): a world offset (ex,ey) from the layout's own
+      // center draws at screen offset (ex,ey) * F(r,l)/r, r = hypot(ex,ey) -- a radial warp, not a separable
+      // per-axis one. So (unlike fitting a single circumscribed circle, or checking width/height as independent
+      // axes) the true screen extent has to be checked against every point's own direction: a point near the
+      // diagonal needs neither the plain half-width nor the plain half-height, but the warp still amplifies it
+      // by its own (larger) radial distance from center, same as every other point that far out.
+      zt = searchMax(z => {
+        const l = { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig };
+        for (const p of lay.pts) {
+          const ex = p.x - cx, ey = p.y - cy, r = Math.hypot(ex, ey);
+          const k = r ? F(r, l) / r : 0, sx = ex * k, sy = ey * k;
+          const rad = base * z * localScale(r, l) * pack() / 2;   // this point's own drawn radius at this z
+          if (Math.abs(sx) + rad * pad > availW / 2 || Math.abs(sy) + rad * pad > availH / 2) return true;
+        }
+        return false;
+      });
+    } else {
+      zt = Math.min(availW / 2 / (base * M * halfW * pad), availH / 2 / (base * M * halfH * pad));
+    }
+    return { cx, cy, z: clamp(zt, ABS_ZMIN, ZMAX) };
+  };
   // zoom limits for a wrapping set. A manual zMinUser (preset or Tweak "Zoom-out limit") is a hard floor: once
   // reached it does not rubber-band back to a closer zoom ("stays that far out").
   const zFloor = () => {
@@ -1036,10 +1167,26 @@ function honeycomb(host, opts = {}) {
     // a finite (non-wrapping) cluster has no "repeats" to hide, so its floor is just "the whole cluster fits on
     // screen with a little margin" — never so far out that 25 bubbles become a speck, but a big sunflower disc
     // (large N) still gets room to zoom out and show more of itself.
+    // David, 2026-10-09: "the map doesn't let me zoom out this far -- it always bounces back. Zooming out this
+    // far is helpful" (his screenshot: the whole disk, ~100% of width, centered, black around it). The
+    // diagonal-circle approximation below under- or over-shoots for a lopsided layout the same way the old
+    // fit-mode formula used to (see boundsFit()'s own commit) -- a cheap per-axis (not per-POINT -- this runs on
+    // every resize/tweak/setItems for ordinary browsing, not just a discrete sheet-open/arrangement-change
+    // event the way fit mode's real per-point search can afford to) AND-of-width-and-height check against the
+    // layout's own bounding box fixes the same lopsided-shape problem far more cheaply (an O(1) bbox, not an
+    // O(points) loop inside the search), with whichever of the two asks for MORE zoom-out winning, same pattern
+    // as the zMinUser branch below. Beyond this floor is still just the ordinary rubber band (rubber()).
     if (lay.finite) {
       const R = lay.ext + 1.2;
-      if (cfg.lensMode === "round") return clamp(search(z => Finv(Math.hypot(W, vy()) / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R), ABS_ZMIN, .95);
-      return clamp(search(z => Math.hypot(W, vy()) / 2 / (base * z * M) <= R), ABS_ZMIN, .95);
+      const diag = cfg.lensMode === "round" ? clamp(search(z => Finv(Math.hypot(W, vy()) / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R), ABS_ZMIN, .95)
+        : clamp(search(z => Math.hypot(W, vy()) / 2 / (base * z * M) <= R), ABS_ZMIN, .95);
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      for (const p of lay.pts) { if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x; if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; }
+      const halfW = Math.max(.15, (maxX - minX) / 2 + .6), halfH = Math.max(.15, (maxY - minY) / 2 + .6);
+      const axes = cfg.lensMode === "round"
+        ? clamp(search(z => Finv(W / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= halfW && Finv(vy() / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= halfH), ABS_ZMIN, .95)
+        : clamp(Math.min(W / 2 / (base * M * halfW), vy() / 2 / (base * M * halfH)), ABS_ZMIN, .95);
+      return Math.min(diag, axes);
     }
     const fits = f => z => Finv(W / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= lay.perX * f && Finv(vy() / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= lay.perY * f;
     const a = inner(), u30 = a + 1.2 * (1 - a);
@@ -1216,9 +1363,14 @@ function honeycomb(host, opts = {}) {
       // edge, light on a dark cell and dark on a light one, reads as a deliberate boundary either way and masks
       // a stray sliver instead of leaving it bare. Was dark-cells-only; now every cell at a readable size gets one.
       ctx.lineWidth = Math.max(1, d * .018); ctx.strokeStyle = it.L < 50 ? `rgba(236,232,223,${it.L < 14 ? .34 : it.L < 26 ? .24 : .14})` : `rgba(14,13,11,${it.L > 86 ? .16 : .1})`; ctx.stroke();
-      const la = Math.min(1, Math.max(0, (d - zc("labelMin")) / 5));
-      if (la > 0) {
-        const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * d, 30), lh = fs * 1.02;
+      // a cheap pre-filter before the honeyWrap lookup: even the most compact name (honeyWrap's own best-case
+      // fs ratio, ~.19) can't clear the legibility floor below roughly this diameter, so most of a crowded
+      // frame's tiny cells skip the (cached, but still a Map lookup) call entirely
+      if (d * .19 < HONEY_LABEL_FS_MIN) continue;
+      const w = honeyWrap(ctx, it.n), fsReal = w.fs * d;
+      if (fsReal >= HONEY_LABEL_FS_MIN) {
+        const la = Math.min(1, (fsReal - HONEY_LABEL_FS_MIN) / 2);   // a quick ~2px fade right at the floor, not a hard pop
+        const fs = Math.min(fsReal, 30), lh = fs * 1.02;
         const sub = Math.min(1, Math.max(0, (d - 150) / 30)), subH = sub ? fs * .9 : 0;
         const y0 = b.y - (w.lines.length - 1) * lh / 2 + fs * .06 - subH / 2;
         ctx.font = `${fs}px "Instrument Serif",Georgia,serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
@@ -1705,9 +1857,14 @@ function honeycomb(host, opts = {}) {
     if (!b || !(b.d > 0)) return null;
     const r = cv.getBoundingClientRect(), shp = zc("shape"), rays = [];
     for (let i = 0; i < 72; i++) { const t = i / 72 * 6.283185307; rays.push(b.poly && shp > .02 && b.rin >= 3 ? b.rin * (1 - shp) + honeyRay(b.poly, t) * shp : b.rin); }
-    const it = b.it, la = (b.d - zc("labelMin")) / 5;
+    const it = b.it;
     let label = null;
-    if (la > .5 && !(ST.label && !ST.label(it.o))) { const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * b.d, 30); label = { lines: w.lines, fs, lh: fs * 1.02, ink: it.ink }; }
+    // the same legibility gate the main draw loop uses (HONEY_LABEL_FS_MIN), so a bubble morphing into its own
+    // page starts from exactly the label state it was actually showing, not the old labelMin-based guess
+    if (!(ST.label && !ST.label(it.o))) {
+      const w = honeyWrap(ctx, it.n), fsReal = w.fs * b.d;
+      if (fsReal >= HONEY_LABEL_FS_MIN) { const fs = Math.min(fsReal, 30); label = { lines: w.lines, fs, lh: fs * 1.02, ink: it.ink }; }
+    }
     return { x: r.left + b.x, y: r.top + b.y, d: b.d, rays, label, h: it.h, n: it.n };
   }
   function open(it, b) {
@@ -1902,34 +2059,6 @@ function honeycomb(host, opts = {}) {
   // arrangement change, a deliberate action. The pan and zoom from before fitting are remembered and restored
   // (not just reset to default) when it turns off.
   let fitMode = false, fitSaved = null, fitUserOverride = false;
-  const boundsFit = () => {
-    if (!lay || lay.globe || !lay.pts.length || !W) return null;
-    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    for (const p of lay.pts) { if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x; if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; }
-    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2, halfW = Math.max(.15, (maxX - minX) / 2), halfH = Math.max(.15, (maxY - minY) / 2);
-    // insetBottom (the target the sheet's own height was just measured to), not vy()/insetCur: the inset eases in
-    // over ~300ms (honey.js's own loop() tween), so fitting against the CURRENT (still mid-tween) value would aim
-    // for wherever the sheet happened to be a moment ago, not where it's about to settle.
-    // the fisheye's own middle bubble is the thing this lens magnifies most -- fitting the raw lattice POINTS
-    // into the available rect still leaves its drawn RADIUS (roughly base*m0 screen px, near size-independent of
-    // zoom) sticking out past that, so reserve room for it too, on top of the plain margin.
-    const margin = 16 + base * (cfg.m0 || 1) * .6;
-    const availW = Math.max(40, W - margin * 2), availH = Math.max(40, Hh - insetBottom - margin * 2);
-    // the same shape as zFloor()'s own "finite" formula above (R, the content's own radius, fits inside the
-    // screen's own half-diagonal) -- proven there already -- just with R taken from the layout's actual (x,y)
-    // bounds instead of lay.ext, and the screen half-diagonal from the real available rect instead of the whole
-    // viewport. A first pass here solved width and height as two separate linear constraints and, for the round
-    // (fisheye) lens, landed nowhere near the available space -- Finv's warp doesn't decompose per-axis that
-    // simply. The diagonal/radius form sidesteps that, with a safety factor on R: it matches the available rect's
-    // own aspect only when the content's aspect happens to match it too, and under-constrains the tighter axis
-    // when the two are lopsided (a tall, narrow region into a nearly-square area, say).
-    const R = Math.hypot(halfW, halfH) * 1.35, avail = Math.hypot(availW, availH);
-    const search = ok => { let lo = ABS_ZMIN, hi = ZMAX; if (!ok(hi)) return hi; for (let i = 0; i < 26; i++) { const m = (lo + hi) / 2; if (ok(m)) hi = m; else lo = m; } return hi; };
-    const zt = cfg.lensMode === "round"
-      ? search(z => Finv(avail / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R)
-      : avail / 2 / (base * M * R);
-    return { cx, cy, z: clamp(zt, ABS_ZMIN, ZMAX) };
-  };
   const flyToFit = (animate = true) => {
     const f = boundsFit(); if (!f) return;
     // flyTo() clamps its target to [ZMIN, ZMAX] -- ZMIN is the ordinary pinch-out floor (zFloor(), tuned to avoid
@@ -1950,12 +2079,17 @@ function honeycomb(host, opts = {}) {
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
       // regions (Families, Hue pages) read best whole: the arrival eases out until most of the book is in view
       const arr = HONEY_ARR[honeyParseKey(cfg.layout).id];
-      // fit mode (the Arrange sheet is open) wins over every other arrival, but only re-fits on an actual
-      // arrangement change (a new layout has new bounds) -- not a soft/filter update. Picking a new arrangement
-      // is itself a deliberate action, so it always re-fits and clears any pan/pinch override from before; a
-      // soft update (a feel slider, say) respects whatever view the user is already looking at.
+      // fit mode (the Arrange sheet is open) wins over every other arrival. Picking a new arrangement is a
+      // deliberate action, so it always re-fits and clears any pan/pinch override from before. David, 2026-10-09:
+      // "when I switch from Bubbles to Honeycomb it zooms in to a more appropriate distance" (the opening fit is
+      // the one that's wrong) -- a plain Look/feel change used to be a no-op here, leaving whatever zoom the
+      // (possibly-still-settling) open-time fit left behind; what actually "fixed" it was setItems()'s own
+      // ZMIN=zFloor()/clamp picking up the NEW style's floor and incidentally pushing Z back up -- never a real
+      // re-fit at all. Every update() while fit mode is on now re-fits for real (still respecting a manual
+      // pan/pinch override, same as an arrangement change would), so the open path and a later Look change
+      // compute the exact same number from the exact same function.
       if (fitMode && o.arrange) { fitUserOverride = false; flyToFit(true); }
-      else if (fitMode) {}
+      else if (fitMode) { if (!fitUserOverride) flyToFit(true); }
       else if (o.arrange && hlOn && HONEY_HL) l18FrameLit();
       else if (o.arrange && arr && arr.fit && !lay.globe) { P = [0, 0]; Plag = P.slice(); zoomTo(Math.max(ZMIN, Math.min(Z, ZMIN * 1.3)), W / 2, vcy()); }
       // a new order travels to the middle (for Center on, where the chosen color now sits)
@@ -2015,6 +2149,7 @@ function honeycomb(host, opts = {}) {
       return it.o;
     },
     zoomValue: () => Z,
+    zoomFloor: () => ZMIN,   // QA (tools/smoke home group): the ordinary pinch-out limit, recomputed per layout
     panValue: () => [P[0], P[1], Z],   // QA: the pan a return to Home must keep
     // QA (tools/smoke map-return): finish a spring or zoom in flight at once (headless frames don't always run)
     _settle() { if (phase === "spring" && spring) { P = spring.X.slice(); spring = null; phase = "idle"; } if (zAnim) { Z = zAnim.to; zAnim = null; } insetCur = insetBottom; Plag = P.slice(); draw(); return [P[0], P[1], Z]; },
@@ -2026,6 +2161,34 @@ function honeycomb(host, opts = {}) {
       gs.sort((x, y) => x - y);
       return { n: drawn.length, w: cv.width, h: cv.height, gap: gs.length ? +gs[Math.floor(gs.length / 2)].toFixed(2) : null, p90: gs.length ? +gs[Math.floor(gs.length * .9)].toFixed(2) : null };
     },
+    // QA (tools/smoke home group): among the currently-drawn TINY bubbles (the ones honeyCells' own cheap path
+    // handles, under 7px -- see that function's own comment), how many have a real polygon (tiled, David,
+    // 2026-10-09: "zoomed-out honeycomb... looks like circles") vs none (a plain circle). A style with a high
+    // shapeAmt (Honeycomb) should tile even its tiniest cells; a low one (Bubbles) should still draw circles.
+    _tinyPolyStat() {
+      const tiny = drawn.filter(b => b.d0 != null && b.d0 < 7);
+      return { tiny: tiny.length, poly: tiny.filter(b => b.poly).length, total: drawn.length };
+    },
+    // QA (tools/smoke home group): every currently-drawn bubble's REAL label font size in CSS px (honeyWrap's
+    // cached per-name ratio times the bubble's current diameter), for bubbles that would actually draw one
+    // (HONEY_LABEL_FS_MIN or above) -- so a test (or a screenshot-driven check) can confirm nothing smaller
+    // than the verified legibility floor ever gets a label, and report the smallest one actually shown.
+    _labelFsStat() {
+      const fs = [];
+      for (const b of drawn) {
+        if (!b.it || !(b.d > 0)) continue;
+        const w = honeyWrap(ctx, b.it.n), real = w.fs * b.d;
+        if (real >= HONEY_LABEL_FS_MIN) fs.push(+real.toFixed(2));
+      }
+      fs.sort((a, c) => a - c);
+      return { n: fs.length, min: fs[0] ?? null, max: fs[fs.length - 1] ?? null, floor: HONEY_LABEL_FS_MIN };
+    },
+    // QA only: the ordinary zoom(z) always clamps to [ZMIN,ZMAX] (the pinch-out floor), but a real pinch can
+    // still swing well past it for a moment (rubber(), the elastic overshoot before it springs back) -- which
+    // is genuinely where a dense set's cells can still drop under the tiny-bubble threshold _tinyPolyStat()
+    // above is checking. This bypasses the clamp so a test can park there and read the result directly, instead
+    // of trying to time a synthetic pinch gesture just right.
+    _qaForceZoom(z) { Z = +z; draw(); },
     // QA (tools/smoke map group): every currently-drawn bubble's own screen rect (CSS px, cv's own box, not the
     // backing store), so a caller can check "does fit mode actually keep everything above the sheet" numerically
     _drawnBounds() {

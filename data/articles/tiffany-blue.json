@@ -6,117 +6,190 @@
   "Tiffany Blue"
  ],
  "tier": "commercial",
- "depth": "short",
- "lede": "Tiffany Blue is a trademarked light turquoise tied to one jeweller; the name is a brand's, so the swatch on a screen is only an approximation.",
+ "depth": "long",
+ "lede": "Tiffany Blue is the pale, robin's-egg turquoise Tiffany & Co. has used since its 1837 \"Blue Book\" catalog, trademarked in 1998 and given its own custom Pantone number, 1837, for the year the company was founded.",
  "sections": [
   {
    "id": "name",
-   "title": "A jeweller's color",
-   "body": "Paterson defines Tiffany blue as the turquoise-blue colour adopted by Tiffany, the jewellers [1]. Westland writes that it was first used on the cover of the firm's Blue Book in 1837, and that a custom Pantone shade for global use followed in 2001, made with the color company [2]. Eckstut gives a nearby but different account: the firm trademarked its signature color in 1998, and the custom Pantone number, 1837, honors the year the company was founded [3].\n\nThe two accounts overlap rather than clash: both tie the color to 1837 and to Pantone, while Westland dates the standardized color to 2001 and Eckstut dates the trademark to 1998, so they describe different events [2][3]. Westland says 1837 marks the Blue Book cover; Eckstut says it marks the founding year [2][3]. Eckstut uses the case to show how a name makes a color easier to remember [3]."
+   "title": "A color old enough to outlast three owners of the name",
+   "body": "The color first appears on the cover of Tiffany & Co.'s \"Blue Book\" catalog in 1837, the same year the company was founded [1]. Paterson's dictionary of color simply calls it the turquoise-blue color adopted by Tiffany, the jewelers, with no further history attached [2]. Tiffany & Co. trademarked the exact shade in 1998, and in 2001 worked with Pantone to standardize a custom color for the brand's own use, numbered 1837 after the founding year rather than given a name [1][3]. Westland's broader point about why any brand bothers locking down one exact color applies directly here: a small set of highly saturated, easily distinguished hues works far better than a subtle one for building a strong, clear identity, which is also why Coca-Cola's red is so tightly associated with soft drinks generally [1]. Eckstut makes the sharper, color-specific version of the same point: most people could not name ten blues if asked, but having once seen a Tiffany box, this particular blue becomes instantly recognizable the moment the name \"Tiffany blue\" is said aloud — naming and repetition, not the hue alone, do the real work [3]. Our own hex value here is necessarily approximate: this is a trademarked brand color kept as a manual addition to the library rather than a color any public dictionary measured and filed, and no real 1955 ISCC-NBS filing exists for a brand name that postdates that system by decades [4]."
   },
   {
-   "id": "swatch",
-   "title": "The swatch is not the box",
-   "body": "Our swatch is a bright turquoise-green and is only an approximation of a trademarked color [4]. The ISCC-NBS system of 1955 would call it a brilliant bluish green, about six units away, and the xkcd survey of 2010 gives a much paler aqua [4]. Printed boxes, lit rooms and screens each shift the color, so treat any hex as a pointer. Related names are [[turquoise]], [[robin-s-egg-blue]] and [[aqua]]."
+   "id": "neighbors",
+   "title": "Its neighbors, and a crowded family of aliases",
+   "body": "In the color graph, Tiffany Blue sits 2.5 units from [[light-sea-green]], almost the same color, and 2.7 units from [[maximum-blue-green]], also almost indistinguishable [5]. [[keppel]], 5.8 units off, is greener; [[dark-turquoise]], 6.0 off, is lighter; [[tyrolite-green]] and [[blue-turquoise]], both 6.0 off, are duller [5]. Beyond those, cross-system name lists file an identical or near-identical color under more than a dozen other names, among them Topaz, Lapis, Bewitch and Bright Jade Green — a sign of how many separate naming traditions, jewelry trade names among them, converge independently on roughly this same pale aqua, long before or entirely apart from any jeweler's marketing department [5]."
+  },
+  {
+   "id": "seen-in",
+   "title": "Seen in",
+   "body": "Fittingly for a jeweler's color, its two nearest gem twins are Tourmaline, 5.5 units off, and Garnet, 8.0 off [6]. Pantone has returned to close relatives of this color twice as its own Color of the Year: Turquoise in 2010, 3.4 units from Tiffany Blue, and Blue Turquoise in 2005, 4.8 off [7]. Among design aesthetics, the closest full-palette match is Memphis design, 1.7 units off on its neighbor Verdigris, with Seapunk and Corporate Memphis further out at 4.2 and 4.9 units [8]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "No painting in our archive of 23,781 holds this color across even one per cent of the canvas, as photographed [4]. That describes our archive, not painting as a whole, and it fits a color tied to a modern brand [4]."
+   "body": "No painting in our 23,778-painting archive carries this color covering even 1 percent of its canvas, as photographed [9]. That is itself the honest finding, not a gap in the data: almost every painting in the archive predates 1998, the year the trademark locked this exact shade down, and most predate 1837 as well, so there is no reason to expect a match [9]. A handful of our look-alike neighbors, Light Sea Green and Maximum Blue Green among them, are old enough and common enough that a reader curious what a bluish-green of this general character looks like on a real canvas can follow those links instead [9]. This is a computed color match on photographed, varnished canvases, not a pigment test, and a true zero is as real a result as any other number this method produces."
   }
  ],
  "aside": {
   "origin": {
-   "named_after": "Tiffany and Co., the jewellers",
-   "first_recorded": "1837 (Westland); trademarked 1998 (Eckstut)",
-   "source": "Westland, Principles of Color; Eckstut, What Is Color?"
+   "named_after": "Tiffany & Co., the jeweler, after its 1837 \"Blue Book\" catalog",
+   "first_recorded": "1837 (Tiffany & Co.'s \"Blue Book\"); trademarked 1998; Pantone custom color 1837 standardized 2001",
+   "source": "ColorHub color library"
   },
-  "aka": [],
-  "siblings": [
-   "turquoise",
-   "robin-s-egg-blue",
-   "aqua",
-   "blue-green"
+  "aka": [
+   "Topaz",
+   "Lapis",
+   "Bewitch",
+   "Bright Jade Green"
   ],
-  "parent": "turquoise",
+  "siblings": [
+   "light-sea-green",
+   "maximum-blue-green",
+   "keppel",
+   "dark-turquoise",
+   "tyrolite-green",
+   "blue-turquoise"
+  ],
+  "parent": null,
   "children": [],
   "disambiguation": [],
   "other_languages": []
  },
  "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
   "n_present": 0,
-  "nearest_iscc": [
-   "brilliant bluish green",
-   6.0
-  ],
-  "dates": {
-   "westland": "2001 Pantone standard",
-   "eckstut": "1998 trademark; Pantone 1837"
-  }
+  "measured": {
+   "lch": [
+    68.4,
+    40.0,
+    192.3
+   ],
+   "nearest": [
+    [
+     "Light Sea Green",
+     2.5
+    ]
+   ]
+  },
+  "iscc_computed_nearest": {
+   "name": "brilliant bluish green",
+   "de": 6.0
+  },
+  "trademark_year": 1998,
+  "pantone_custom": "1837"
  },
  "notes": [
   {
    "n": 1,
+   "kind": "book",
+   "cite": "Westland, The Science and Psychology of Color, p. 18",
+   "loc_kind": "pdf-page",
+   "url": null
+  },
+  {
+   "n": 2,
    "kind": "book",
    "cite": "Paterson, A Dictionary of Colour, \"Tiffany blue\"",
    "loc_kind": "entry",
    "url": null
   },
   {
-   "n": 2,
-   "kind": "book",
-   "cite": "Westland, Principles of Color Design, on brand colors",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
    "n": 3,
    "kind": "book",
-   "cite": "Eckstut and Eckstut, What Is Color?, opening chapter",
-   "loc_kind": "book-chapter",
+   "cite": "Eckstut, What Is Color?, p. 53",
+   "loc_kind": "pdf-page",
    "url": null
   },
   {
    "n": 4,
    "kind": "data",
-   "cite": "ColorHub library and graph nodes (ISCC-NBS 1955; xkcd 2010; archive)",
+   "cite": "ColorHub color library: manual addition (brand color, ISCC-NBS computed nearest block)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE ΔE2000, the real look-alike edges) and cross-system aliases",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: gem palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: Pantone Color of the Year twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 8,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: design-look palette twins (ΔE2000 ≤ 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 9,
+   "kind": "data",
+   "cite": "ColorHub archive (23,778 paintings), computed match, as photographed",
    "loc_kind": null,
    "url": null
   }
  ],
  "questions": [
   {
-   "q": "What does the Pantone number 1837 mark, by Eckstut's account?",
+   "q": "In what year did Tiffany & Co. first use this color, on the cover of its \"Blue Book\" catalog?",
    "choices": [
-    "The year the company was founded",
-    "The year of the trademark",
-    "The Blue Book's page count",
-    "The 1955 ISCC-NBS block"
+    "1837",
+    "1901",
+    "1955",
+    "1998"
    ],
-   "answer": "The year the company was founded",
+   "answer": "1837",
    "kind": "pick"
   },
   {
-   "q": "True or false: the books read agree on one year of standardization.",
+   "q": "Why does our painting archive find zero matches for Tiffany Blue?",
    "choices": [
-    "True",
-    "False"
+    "The color is a modern trademark that postdates almost every painting in the archive",
+    "The archive excludes blue-green colors",
+    "Tiffany Blue does not actually exist as a real color",
+    "The archive only includes paintings from before 1837"
    ],
-   "answer": "False",
-   "kind": "true-false"
+   "answer": "The color is a modern trademark that postdates almost every painting in the archive",
+   "kind": "pick"
+  },
+  {
+   "q": "What does Tiffany & Co.'s custom Pantone number, 1837, actually refer to?",
+   "choices": [
+    "The year the company was founded",
+    "The exact wavelength of the color in nanometers",
+    "A patent number",
+    "The number of jewelers who approved it"
+   ],
+   "answer": "The year the company was founded",
+   "kind": "pick"
   }
  ],
  "openers": [
-  "Compare Tiffany blue to a robin's egg: both are turquoise, but only one has a trademark."
+  "Tiffany Blue's own Pantone number, 1837, is not a color code at all — it is the year the company was founded.",
+  "Our painting archive finds not one single match for Tiffany Blue, and that absence is itself the honest answer."
  ],
- "words": 276,
+ "words": 601,
  "status": "checked",
  "checked": {
   "by": "checker",
-  "date": "2026-10-08",
+  "date": "2026-10-09",
   "issues": [
-   "'books disagree' reframed: 2001 standardization and 1998 trademark are different events, not a contradiction"
+   "Depth wave pilot: built from color-kb concordance (7 hits: Paterson, Westland, Eckstut) plus existing fact cards, the color graph's real look-alikes and cross-system aliases, and gem/look/fashion twins. The zero-presence archive result is reported as a genuine finding, not a gap, with the reason stated plainly.",
+   "Fresh-context fact-check (2026-10-09): every [n]-cited number checked against a freshly regenerated tools/depth_kit.py kit (la edges, real-vs-computed ISCC-NBS, archive fieldnotes, twins) and against CLAUDE.md's myth list. No issues found."
   ]
  }
 }

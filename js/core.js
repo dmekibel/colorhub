@@ -60,6 +60,68 @@ vbFix(); addEventListener("resize", vbFix); addEventListener("load", vbFix); set
 try { visualViewport && visualViewport.addEventListener("resize", vbFix); } catch (e) {}
  addEventListener("orientationchange", () => setTimeout(vbFix, 300));
 
+// ---------- the black-bar diagnostic HUD (David, 2026-10-09: "since it's only reproducible on a real iPhone
+// Home Screen app, add a diagnostic HUD... Then he can screenshot it when the bar appears and we fix it from
+// facts.") Opens with a 3s long-press on the left Rooms corner, or #debug=vb in the URL hash. A small, opaque,
+// live-updating panel -- every number this chapter's black-bar hunt actually needed, in one place, plus a
+// Copy button so the numbers travel in a screenshot's caption or a message instead of being retyped by hand. ----------
+let vbHudRAF = 0;
+function vbHud() {
+  if (document.querySelector(".vb-hud")) return;
+  const el = document.createElement("div");
+  el.className = "vb-hud";
+  el.innerHTML = '<pre></pre><div class="vb-hud-row"><button data-vb-copy>Copy</button><button data-vb-close>Close</button></div>';
+  document.body.appendChild(el);
+  const pre = el.querySelector("pre");
+  // env(safe-area-inset-bottom), measured the same way vbFix() measures where bottom:0 really lands: a real
+  // fixed probe, not a CSS value read back (which some engines report as 0px outside an actual safe-area context)
+  const probe = document.createElement("div");
+  probe.style.cssText = "position:fixed;left:0;bottom:0;width:1px;height:1px;visibility:hidden;pointer-events:none;padding-bottom:env(safe-area-inset-bottom,0px)";
+  document.documentElement.appendChild(probe);
+  const fields = () => {
+    const vv = window.visualViewport, de = document.documentElement;
+    const safeBottom = probe.getBoundingClientRect().height - 1;
+    const bx = innerWidth / 2, by = innerHeight - 5;
+    const bottomEl = document.elementFromPoint(bx, by);
+    const tag = el => el ? el.tagName.toLowerCase() + (el.className ? "." + String(el.className).trim().split(/\s+/).join(".") : "") : "none";
+    const cv = document.querySelector(".hc-cv");
+    const lines = [
+      ["innerHeight", innerHeight], ["outerHeight", outerHeight], ["screen.height", screen.height],
+      ["visualViewport.height", vv ? vv.height.toFixed(1) : "n/a"], ["visualViewport.offsetTop", vv ? vv.offsetTop.toFixed(1) : "n/a"],
+      ["--vb", getComputedStyle(de).getPropertyValue("--vb").trim() || "(none)"],
+      ["--app-full", getComputedStyle(de).getPropertyValue("--app-full").trim() || "(none)"],
+      ["safe-area-inset-bottom", safeBottom.toFixed(1) + "px"],
+      ["html.clientHeight", de.clientHeight], ["body.clientHeight", document.body.clientHeight],
+      ["#app.clientHeight", (typeof app !== "undefined" && app) ? app.clientHeight : "n/a"],
+      ["canvas CSS height", cv ? cv.getBoundingClientRect().height.toFixed(1) : "(no canvas)"],
+      ["standalone()", typeof standalone === "function" ? standalone() : "n/a"],
+      ["bottom-10px element", tag(bottomEl)],
+    ];
+    pre.textContent = lines.map(([k, v]) => `${k.padEnd(23)}${v}`).join("\n");
+    vbHudRAF = requestAnimationFrame(fields);
+  };
+  fields();
+  el.querySelector("[data-vb-copy]").onclick = () => {
+    try { navigator.clipboard.writeText(pre.textContent).catch(() => {}); } catch (e) {}
+    const b = el.querySelector("[data-vb-copy]"), was = b.textContent; b.textContent = "Copied"; setTimeout(() => { b.textContent = was; }, 900);
+  };
+  el.querySelector("[data-vb-close]").onclick = () => { cancelAnimationFrame(vbHudRAF); probe.remove(); el.remove(); };
+}
+// a 3s hold on the left Rooms corner -- a deliberate, out-of-the-way gesture nothing else on that button uses
+// (a plain tap opens/closes the stem; see js/core.js's own document-level click delegation just below)
+(() => {
+  let timer = 0;
+  const cancel = () => { clearTimeout(timer); timer = 0; };
+  document.addEventListener("pointerdown", e => {
+    const b = e.target.closest && e.target.closest("[data-rooms-corner]"); if (!b) return;
+    timer = setTimeout(() => { vbHud(); }, 3000);
+  }, { passive: true });
+  document.addEventListener("pointerup", cancel, { passive: true });
+  document.addEventListener("pointercancel", cancel, { passive: true });
+})();
+const vbHudFromHash = () => { if (/(^#|[#&])debug=vb(&|$)/.test(location.hash)) vbHud(); };
+vbHudFromHash(); addEventListener("hashchange", vbHudFromHash);
+
 // ---------- color math (CIELAB, D65) ----------
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
 function lab(h) {
@@ -96,8 +158,20 @@ function de2000(h1, h2) {
   const Sl = 1 + .015 * (Lb - 50) ** 2 / Math.sqrt(20 + (Lb - 50) ** 2), Sc = 1 + .045 * Cbp, Sh = 1 + .015 * Cbp * T, Rt = -Math.sin(2 * dTh * rad) * Rc;
   return Math.sqrt((dL / Sl) ** 2 + (dC / Sc) ** 2 + (dH / Sh) ** 2 + Rt * (dC / Sc) * (dH / Sh));
 }
+// WCAG 2 relative luminance / contrast ratio, so text on a swatch is picked by real contrast, not a lightness
+// guess (David, 2026-10-09: "Ice" was barely visible on the Sort board — white text on a near-white swatch).
+function relLum(hex) {
+  const h = String(hex).replace("#", ""), c = [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
+  const lin = v => v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4);
+  return .2126 * lin(c[0]) + .7152 * lin(c[1]) + .0722 * lin(c[2]);
+}
+function contrastRatio(h1, h2) { const a = relLum(h1), b = relLum(h2), hi = Math.max(a, b), lo = Math.min(a, b); return (hi + .05) / (lo + .05); }
+const INK_DARK = "#141311", INK_LIGHT = "#FFFFFF";
+// The ink hex (not just "dark"/"light") for a swatch: whichever of ink/paper has the higher real WCAG contrast,
+// so every very light or very dark swatch still gets a readable name, everywhere (Study, Learn, the map, …).
+const inkHex = h => contrastRatio(h, INK_DARK) >= contrastRatio(h, INK_LIGHT) ? INK_DARK : INK_LIGHT;
 // Text color that stays readable on a swatch
-const ink = h => lab(h)[0] > 64 ? "dark" : "light";
+const ink = h => inkHex(h) === INK_DARK ? "dark" : "light";
 
 // ---------- percent display (David, 2026-10-10: "a delta number doesn't feel like anything") ----------
 // CIEDE2000 between pure black and pure white is 100, and L* also runs 0-100, so a ΔE00 or ΔL* value already
@@ -414,9 +488,15 @@ function morphFrom(el) {
   PENDING_MORPH = { r, bg: cs.backgroundColor, radius: cs.borderRadius, img, at: performance.now() };
 }
 document.addEventListener("click", e => { const t = e.target.closest && e.target.closest(MORPH_TRIGGER); if (t && app.contains(t)) morphFrom(t); }, true);
+// "Colors | Paintings" (David, 2026-10-09): one tap, remembered. S.hm.mode persists which the floor shows; the
+// many internal hmHome() calls (favoriting, color-set filters, practice flows, …) all need the honeycomb's own
+// setup as a side effect, so the remembered mode is only honored at the two places a person deliberately taps
+// "take me to the floor" -- the brand logo and the Rooms corner's Home bubble (roomToFloor, below) -- never inside
+// hmHome() itself.
+const hmGoFloor = () => { if (typeof S !== "undefined" && S.hm && S.hm.mode === "paintings" && typeof pmGo === "function") pmGo("arr=color"); else if (typeof hmHome === "function") hmHome(); };
 // The brand button on every tab's header (tabHead, above) is the one consistent way back to the honeycomb
 // home (js/home.js). Delegated here, not wired per screen, so it works from Train, Explore and Studio alike.
-document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-hm-brand]"); if (b && app.contains(b) && typeof hmHome === "function") hmHome(); });
+document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-hm-brand]"); if (b && app.contains(b)) hmGoFloor(); });
 function runMorph(root) {
   const m = PENDING_MORPH; PENDING_MORPH = null;
   // only right after the tap that asked for it, so a stale chip never flies into an unrelated screen
@@ -485,11 +565,26 @@ const SCROLL_BY_HASH = new Map();
 function show(html, cls = "", tab = null) {
   const leavingHash = ROUTE_NOW, leavingY = scrollY;
   const backNav = BACK_RENDER; BACK_RENDER = false;
+  // the exit already played its own animation -- a native back swipe, or js/trail.js's own gesture-following
+  // pull-down/edge-swipe (TLG_SKIP) -- so this landing is a plain, instant swap: no crossfade, no entrance.
+  const skipAnim = (typeof HIST_POP !== "undefined" && HIST_POP) || (typeof TLG_SKIP !== "undefined" && TLG_SKIP);
   timers.forEach(clearTimeout); timers = []; onKey = null;
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
   // (.flyer / .hc-morph: a bubble-to-page shape belongs to the screen that asked for it; one left mid-flight or
   // orphaned by an error must never float over the next screen as a stuck, unlabeled circle)
-  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph").forEach(n => n.remove());
+  // .tlg-floor: js/trail.js's own gesture-following backdrop (pull-down / edge-swipe). It normally removes
+  // itself (the gesture's own release/cancel handlers), but a navigation that preempts the gesture entirely --
+  // the native iOS back swipe completing before our pointer sequence gets a pointerup/pointercancel, which it
+  // doesn't reliably send once the OS has claimed the touch -- left it (and the "continue off-screen" commit
+  // animation it belonged to) with nobody left to clean it up: a full-viewport backdrop stuck over every screen
+  // after, reading as a permanent black screen (David, 2026-10-09: "it looks like the black bar is always
+  // there"). Every render is a fresh start, so this is the one place that can promise it: no screen is ever
+  // drawn underneath a leftover gesture backdrop, however it was abandoned.
+  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph,.tlg-floor").forEach(n => n.remove());
+  // the gesture's own "continue off-screen" animation, if one was still in flight when something else (that
+  // same preempting navigation) got here first: cancel it so its onfinish never fires a second, stale xBack()/
+  // tlToOrigin() on top of the navigation that already happened (the double-back suspect).
+  if (typeof TLG_ANIM !== "undefined" && TLG_ANIM) { try { TLG_ANIM.cancel(); } catch (e) {} TLG_ANIM = null; }
   document.body.classList.remove("stem-open"); STEM_OPEN = false;
   // a new screen always scrolls: release any scroll lock a sheet or panel left behind (leaving a screen with a sheet
   // open used to keep the body pinned, so the next page couldn't scroll)
@@ -499,7 +594,7 @@ function show(html, cls = "", tab = null) {
   // the old screen fades out underneath the new one (and, combined with growFrom's clip-path on the new
   // content below, is also what stands in for "the honeycomb dims" during a Room's grow-in: DESIGN-SYSTEM §8)
   const old = app.firstElementChild;
-  if (old && !reduceMotion) {
+  if (old && !reduceMotion && !skipAnim) {
     const ghost = document.createElement("div"), y = scrollY;
     ghost.className = "fade-ghost"; ghost.style.top = -y + "px";
     ghost.appendChild(old);
@@ -521,6 +616,12 @@ function show(html, cls = "", tab = null) {
   else window.scrollTo(0, 0);
   document.body.classList.remove("scrolled");
   const el = app.querySelector(".screen");
+  if (skipAnim) el.style.animation = "none";   // no entrance either: the gesture (or the native swipe) already moved it
+  // skipAnim already read whatever TLG_SKIP was for THIS screen; clear it now so a flag a gesture left set (it
+  // never reached its own tlgCommit() finally, again the preempted-gesture case above) can't also apply to some
+  // later, unrelated screen that was never meant to skip its entrance and would otherwise be forced visible from
+  // frame one with no animation to bring it in.
+  if (typeof TLG_SKIP !== "undefined" && TLG_SKIP) TLG_SKIP = false;
   if (typeof mxOnShow === "function") mxOnShow(el);   // a bubble growing into this page, or a page shrinking back into the map (js/mapxfer.js)
   const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   if (typeof tlNote === "function") tlNote(el, tab, backNav);   // the one trail, the map glyph, the pull-down (js/trail.js)
@@ -730,8 +831,8 @@ function shrinkTo(root, targetEl, after) {
 // target — e.g. a swipe-down or a tap on the floor-peek strip), then the floor takes over.
 function roomToFloor(targetEl) {
   const cur = document.querySelector(".room-sheet"), corner = document.querySelector("[data-rooms-corner]");
-  if (cur) shrinkTo(cur, targetEl && targetEl.isConnected ? targetEl : corner, () => hmHome());
-  else hmHome();
+  if (cur) shrinkTo(cur, targetEl && targetEl.isConnected ? targetEl : corner, () => hmGoFloor());
+  else hmGoFloor();
 }
 // Back gesture / browser back: close a sheet or panel first; otherwise press the screen's own back or close
 // button (so each screen keeps its own idea of "back"); with none, return to the current tab's home.
@@ -787,8 +888,14 @@ const fanVars = (n, k) => `--k:${k};--mid:${(n - 1) / 2}`;
 // Lock page scrolling under a sheet or panel without losing your place (overflow:hidden on a 100%-tall body
 // would jump to the top): pin the body at its current offset, then put the scroll back on release.
 // iOS Safari ignores user-scalable=no, so stop its pinch-zoom gesture on pages directly (the honeycomb and other
-// canvases read raw pointers, which this doesn't touch)
-document.addEventListener("gesturestart", e => e.preventDefault(), { passive: false });
+// canvases read raw pointers, which this doesn't touch). David, 2026-10-09: "if I zoom out far enough, panning
+// gets stuck and the black bar comes back" -- preventDefault on gesturestart ALONE doesn't reliably hold off
+// Safari's native page pinch-zoom once it's underway; gesturechange (and gestureend, belt and braces) need it
+// too, or a strong two-finger pinch at the map's own zoom limit can still hand the gesture to the page itself,
+// which scales/shifts the document (visualViewport moves), uncovers the real background below the fixed
+// canvas (the black bar) and leaves the canvas's own pointer listeners stranded under a page that's now panned
+// or zoomed out from under them (the "stuck" panning).
+["gesturestart", "gesturechange", "gestureend"].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive: false }));
 let LOCKS = 0, LOCK_Y = 0;
 function lockScroll() {
   if (LOCKS++) return;
@@ -798,13 +905,40 @@ function unlockScroll() {
   if (!LOCKS || --LOCKS) return;
   document.documentElement.classList.remove("sheet-open"); document.body.style.top = ""; scrollTo(0, LOCK_Y);
 }
-function sheet(html) {
+// opts.lock (default true): a MODAL sheet locks body scroll while it's open (the ordinary case: the page behind
+// it isn't meant to be touched). David, 2026-10-09 (the black bar coming back on pressing Arrange): the Colors/
+// Arrange sheet is deliberately NON-modal (js/home.js chooser -- the scrim is pointer-events:none so the map
+// keeps panning and zooming underneath it), so locking scroll for it was never semantically right in the first
+// place, and on an iOS Home Screen app, toggling html.sheet-open's body{position:fixed} (app.css) right as the
+// sheet opens can itself be the trigger for Safari's own layout-vs-visual-viewport recompute that uncovers the
+// real background for a moment. Pass {lock:false} for a non-modal sheet; it never locks or unlocks scroll at all.
+function sheet(html, opts = {}) {
+  // David, 2026-10-09 (the Filter sheet's surface ending short of the real bottom edge, black beneath it): --vb/
+  // --app-full are measured on resize/load/orientationchange, but iOS can quietly recompute the layout-vs-visual
+  // viewport split right as a new fixed-position sheet is inserted, so a stale --vb understates the real strip.
+  // Refresh it synchronously on every open -- cheap (a few getBoundingClientRect calls) and makes the belt-and-
+  // braces box-shadow below (css/menus2.css .sheet) sized off the true, current gap.
+  // David, 2026-10-09 ("panning in the map gets stuck now"): this call was unconditional, so it ran on EVERY
+  // sheet open, even on platforms where vbFix() can only ever be a no-op (standalone()&&isIOS() both have to hold
+  // for its own if-block to do anything -- everywhere else it was 3 lines re-setting --vb to the "0px" it already
+  // was). Bisected to this exact line with a scratch worktree per commit (git worktree add, each checked out at
+  // a candidate and its parent) and a scripted pointerdown/pointermove*N/pointerup test on the canvas: open the
+  // Colors sheet, close it, and a pan that worked before this line was added (js/core.js bfeff870) stopped
+  // moving the view at all after -- the honeycomb's own pan math (P in js/honey.js) kept computing a correct new
+  // position every frame, but the canvas never drew it, pointing at the redraw loop (kick()/RAF, gated on an
+  // IntersectionObserver-driven `visible` flag) rather than the pan math itself; the exact browser-internal
+  // trigger wasn't pinned down further given how reliably gating the call fixed it. Skipping the call entirely
+  // when it would have been a no-op (gating it behind the same standalone()&&isIOS() check its own body already
+  // requires) removes whatever this was triggering everywhere it was never doing real work in the first place,
+  // while keeping the original black-bar fix for the one platform it's actually for.
+  if (typeof vbFix === "function" && typeof standalone === "function" && typeof isIOS === "function" && standalone() && isIOS()) try { vbFix(); } catch (e) {}
+  const doLock = opts.lock !== false;
   const scrim = document.createElement("div"), sh = document.createElement("div");
   scrim.className = "scrim"; sh.className = "sheet"; sh.setAttribute("role", "dialog");
   sh.innerHTML = `<div class="grab"></div>${html}`;
   let gone = false;
   const close = () => {
-    if (gone) return; gone = true; unlockScroll(); cornersBack(); if (sh._esc) removeEventListener("keydown", sh._esc, true);
+    if (gone) return; gone = true; if (doLock) unlockScroll(); cornersBack(); if (sh._esc) removeEventListener("keydown", sh._esc, true);
     if (reduceMotion) { scrim.remove(); sh.remove(); return; }
     scrim.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" }).onfinish = () => scrim.remove();
     sh.animate([{ transform: getComputedStyle(sh).transform === "none" ? "none" : getComputedStyle(sh).transform }, { transform: "translateY(105%)" }], { duration: 240, easing: "cubic-bezier(.3,0,.8,.2)", fill: "forwards" }).onfinish = () => sh.remove();
@@ -847,7 +981,7 @@ function sheet(html) {
   sh.addEventListener("pointerdown", e => { if (e.pointerType === "mouse") start(e.clientX, e.clientY, e.target); });
   sh.addEventListener("pointermove", e => { if (e.pointerType === "mouse") move(e.clientX, e.clientY, null); });
   sh.addEventListener("pointerup", e => { if (e.pointerType === "mouse") end(); });
-  lockScroll();
+  if (doLock) lockScroll();
   // the menu family (css/menus2.css): a modal for assistive tech, Escape closes, focus comes back where it was
   const back = document.activeElement, esc0 = e => { if (e.key === "Escape" && sh.isConnected && !gone) { e.stopPropagation(); close(); } };
   sh.setAttribute("aria-modal", "true"); sh.tabIndex = -1;
