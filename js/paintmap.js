@@ -569,6 +569,11 @@ function pmMount(el, s, F) {
   let P = [0, 0], Z = 1, V = [0, 0], glide = null, raf = 0, dead = false, centerK = -1, lastTick = 0, drawn = [];
   const ZMAX = 2.2;
   let pulseI = -1, pulseT0 = 0;   // the entry-point highlight ring (David, 2026-10-09): briefly rings whichever painting a seed just pinned the view to
+  // David, 2026-10-09: "the name of the painting at the bottom isn't necessary -- we only need the name when we
+  // tap it." The card used to track whatever's nearest the middle continuously, all through a pan -- now it only
+  // opens for an explicit reason (a tap re-centers onto a painting, Walk/Center-on-presets/a facet chip land on
+  // one, or a seeded entry point pins to one) and closes again the moment you start a new pan or tap empty space.
+  let cardOpen = false;
   const PULSE_MS = 900;
   const imgs = pmImages(() => kick());
   if (!PM_LANDMARKS.size && typeof rcLoadPortraits === "function") {
@@ -632,7 +637,7 @@ function pmMount(el, s, F) {
   function caption() {
     if (centerK < 0 || !lay) { cap.hidden = true; facets.hidden = true; return; }
     const i = lay.items[centerK], a = F.artist[i], y = glYear(i), by = [a ? xbArtistName(F, a) : "", y].filter(Boolean).join(" · ");
-    cap.hidden = false;
+    cap.hidden = !cardOpen; facets.hidden = !cardOpen;
     const d = glDetailNow(i);
     cap.querySelector("[data-pmct]").textContent = d ? d.t : " ";
     cap.querySelector("[data-pmcb]").textContent = by || (d && d.co) || "";
@@ -641,7 +646,10 @@ function pmMount(el, s, F) {
     if (!d) { clearTimeout(capTimer); capTimer = setTimeout(() => glDetail(i).then(() => { if (!dead && lay && lay.items[centerK] === i) caption(); }).catch(() => {}), 90); }
     PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z });
     paintFacets(i);
+    facets.hidden = !cardOpen;   // paintFacets() always unhides itself when it (re)builds the chip row -- cardOpen has the final say
   }
+  function showCard() { if (!cardOpen) { cardOpen = true; caption(); } }
+  function hideCard() { if (cardOpen) { cardOpen = false; caption(); } }
   // "Walk from here" (David, 2026-10-09): step to the most similar painting by a DIFFERENT painter -- the point
   // is leaving your own painter's room each step, not drilling into one artist's own palette range -- excluding
   // anywhere the walk has already been too, so it can't loop back on itself. A cheap mean-color+chroma distance
@@ -801,34 +809,11 @@ function pmMount(el, s, F) {
         drawn.push({ k, i, x: mx, y: my, d, z, m, w, h });
       }
     }
-    // David, 2026-10-09: "cells overlap at every zoom/fisheye level" -- the near-center magnification above (a
-    // painting's own aspect ratio, "a little bigger than its cell") can push a box past the lattice halfway
-    // boundary into a genuinely nearby neighbor, worst with a sparse filtered set or a ragged arrangement like
-    // Rings/Spiral/Tones. A spatial hash finds each tile's own nearest OTHER drawn tile and clamps its half-
-    // diagonal (the circumscribed-circle radius, so a diagonal approach is covered too) to never exceed half
-    // that real on-screen gap -- both tiles in any pair clamp to their OWN worst-case nearest neighbor, which is
-    // always <= what's needed for that specific pair, so no two final boxes can ever intersect. The search
-    // radius is sized to the biggest cell actually on screen this frame (not a fixed guess), since a fixed
-    // one-bucket search missed the one magnified near-center cell once zoomed in enough that its own reach
-    // exceeded the bucket size.
-    {
-      const BUCKET = 80, buckets = new Map(), bkey = (gx, gy) => gx * 100000 + gy;
-      for (const b of drawn) { const gx = Math.floor(b.x / BUCKET), gy = Math.floor(b.y / BUCKET), k = bkey(gx, gy); if (!buckets.has(k)) buckets.set(k, []); buckets.get(k).push(b); }
-      let maxReach = 0; for (const b of drawn) { const r2 = Math.hypot(b.w, b.h) / 2; if (r2 > maxReach) maxReach = r2; }
-      const RAD = Math.max(1, Math.ceil((maxReach + 4) / BUCKET)), GUTTER = 2;
-      for (const b of drawn) {
-        const gx = Math.floor(b.x / BUCKET), gy = Math.floor(b.y / BUCKET);
-        let nearest = Infinity;
-        for (let dy = -RAD; dy <= RAD; dy++) for (let dx = -RAD; dx <= RAD; dx++) {
-          const arr = buckets.get(bkey(gx + dx, gy + dy)); if (!arr) continue;
-          for (const o of arr) { if (o === b) continue; const dd = Math.hypot(o.x - b.x, o.y - b.y); if (dd < nearest) nearest = dd; }
-        }
-        if (nearest < 1e8) {
-          const halfDiag = Math.hypot(b.w, b.h) / 2, maxHalfDiag = Math.max(2, (nearest - GUTTER) / 2);
-          if (halfDiag > maxHalfDiag) { const sc = maxHalfDiag / halfDiag; b.w *= sc; b.h *= sc; }
-        }
-      }
-    }
+    // David, 2026-10-09: reverted the spatial-hash anti-overlap clamp that used to live here. It genuinely
+    // stopped cells from intersecting, but it did that by shrinking them away from their natural size whenever a
+    // neighbor was close -- which reads as cells sitting too far apart, not as a fix. The original map (before
+    // today's redesign) never clamped this at all: the near-center magnification above is allowed to overlap its
+    // neighbors slightly, same as it always did -- "the overlap wasn't a problem if it was subtle."
     drawn.sort((a, b) => a.d - b.d);
     fading = false;
     // landmark labels and the <img> overlay are both collected here and placed/synced in a SEPARATE pass once
@@ -963,6 +948,7 @@ function pmMount(el, s, F) {
     } else if (pts.size === 2) {
       clearTimeout(press); press = null;
       const [a, b] = [...pts.values()]; pinch = { d0: Math.hypot(a[0] - b[0], a[1] - b[1]), z0: Z }; if (drag) drag.moved = true;
+      hideCard();
     }
   });
   cv.addEventListener("pointermove", e => {
@@ -975,7 +961,7 @@ function pmMount(el, s, F) {
     if (!drag) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
     if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 8) return;
-    if (!drag.moved) { drag.moved = true; clearTimeout(press); press = null; }
+    if (!drag.moved) { drag.moved = true; clearTimeout(press); press = null; hideCard(); }
     const [u, v] = toPlane(dx, dy); P[0] -= u; P[1] -= v; clampPan();
     drag.x = e.clientX; drag.y = e.clientY;
     const now = performance.now(); drag.hist.push([now, e.clientX, e.clientY]); while (drag.hist.length > 2 && now - drag.hist[0][0] > 90) drag.hist.shift();
@@ -1011,8 +997,9 @@ function pmMount(el, s, F) {
   // the heart burst + toggle instead of opening the page
   let lastTapAt = 0, tapTimer = 0;
   function tap(x, y) {
-    const b = hitAt(x, y); if (!b) return;
+    const b = hitAt(x, y); if (!b) { hideCard(); return; }   // tap-away: empty space closes whatever's open
     if (b.k === centerK && b.z < .6) {
+      showCard();   // a tap always shows the name, even on the already-centered painting about to open
       const now = performance.now();
       if (now - lastTapAt < 300) {
         clearTimeout(tapTimer); tapTimer = 0; lastTapAt = 0;
@@ -1029,7 +1016,7 @@ function pmMount(el, s, F) {
     // color" -- the core interaction (message 3), kept through the later "don't delete capabilities" correction
     // (message 4): still auto-seeds Spiral, same as before; that correction was about tucking the OTHER
     // shapes/filters behind More options, not about reverting this. Already-seeded-on-this-one just glides.
-    if (s.arr === "spiral" && s.seed === b.i) { glideTo([lay.x[b.k], lay.y[b.k]], 360); return; }
+    if (s.arr === "spiral" && s.seed === b.i) { showCard(); glideTo([lay.x[b.k], lay.y[b.k]], 360); return; }
     s.seed = b.i; s.arr = "spiral"; rebuild();
   }
   function openK(k) {
@@ -1083,6 +1070,10 @@ function pmMount(el, s, F) {
     else if (!keepPan) { P = lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     if (keepPan) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     Z = clamp(Z, zMin(), ZMAX);
+    // the card itself (David, 2026-10-09): opens for a reason -- a seed just pinned the view to one painting
+    // (a tap, Walk, a Center-on preset, a fresh entry point) -- and stays closed for a plain dense browse, same
+    // as switching Arrange to Color/Time/Painter should clear whatever was open rather than leave it stranded.
+    if (!keepPan) cardOpen = pinned;
     centerK = -1; drawn = []; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); chrome(); kick();
     // a brief highlight on the painting an entry point promised, so it reads as "you're here", not just a jump cut
     if (pinned && !keepPan && centerK >= 0) { pulseI = lay.items[centerK]; pulseT0 = clock; }

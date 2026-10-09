@@ -4708,6 +4708,11 @@ scenario("paintmap", "the settings sheet offers Color, Time and Painter as Arran
 scenario("paintmap", "the card's Same painter / Same decade / Same place chips narrow the map; a removable top chip undoes it", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  // the card (and its facet chips) only opens on a tap now (David, 2026-10-09: "we only need the name when we tap
+  // it") -- tap an off-center painting to re-center and open it (not the already-centered one, which opens the
+  // gallery page instead), the same way a real visit would
+  const cv0 = t.$(".pmx-cv"), r00 = cv0.getBoundingClientRect();
+  await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
   await t.waitFor(".pmx-facets button", 6000, "the card's facet chips");
   const labels = t.$$(".pmx-facets button").map(b => t.text(b));
   t.expect(labels.every(l => ["Same painter", "Same decade", "Same place", "Open", "Walk from here"].includes(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
@@ -4724,6 +4729,9 @@ scenario("paintmap", "the card's Same painter / Same decade / Same place chips n
 scenario("paintmap", "Walk from here steps to a different painter each time", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  // the card (and its Walk chip) only opens on a tap now -- tap an off-center painting to open it first
+  const cv0 = t.$(".pmx-cv"), r00 = cv0.getBoundingClientRect();
+  await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
   await t.waitFor(".pmx-facets [data-pmwalk-go]", 6000, "the Walk from here chip");
   const start = t.w.PM_CTRL.center, startPainter = t.ev(`typeof XBF !== "undefined" ? XBF.artist[${start}] : null`);
   await t.click(".pmx-facets [data-pmwalk-go]", { wait: 700 });
@@ -4737,18 +4745,25 @@ scenario("paintmap", "Walk from here steps to a different painter each time", as
 scenario("paintmap", "your favorites glow doesn't break the draw loop under a real pan", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  // the card (and the heart inside it) only opens on a tap now (David, 2026-10-09: "we only need the name when we
+  // tap it") -- tap an off-center painting to re-center it and open the card, the same way a real visit would
+  const cv = t.$(".pmx-cv"), r0 = cv.getBoundingClientRect();
+  await t.tapAt(cv, r0.left + r0.width / 2, r0.top + r0.height / 2 - 150, { wait: 900 });
   await t.waitFor("[data-pmheart]:not([hidden])", 6000, "the heart under the centered painting");
   await t.click("[data-pmheart]", { wait: 400 });
   const favored = t.w.PM_CTRL.center;
   t.expect(t.ev(`(() => { const d = typeof glDetailNow === "function" && glDetailNow(${favored}); return !!(d && typeof fvArtHas === "function" && fvArtHas(d.id)); })()`), "the centered painting didn't actually become a favorite");
-  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect();
+  const r = cv.getBoundingClientRect();
   const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 77, pointerType: "touch", isPrimary: true, view: t.w });
   cv.dispatchEvent(mk("pointerdown", r.left + r.width / 2, r.top + r.height / 2));
   for (let i = 1; i <= 6; i++) cv.dispatchEvent(mk("pointermove", r.left + r.width / 2 - i * 10, r.top + r.height / 2 - i * 6));
   cv.dispatchEvent(mk("pointerup", r.left + r.width / 2 - 60, r.top + r.height / 2 - 36));
   await t.sleep(250);
   t.expect(t.errors.length === 0, `window errors after panning with favorites drawn: ${t.errors.join(" | ")}`);
-  await t.click("[data-pmheart]", { wait: 300 });   // leave state clean for later scenarios
+  // the pan above closes the card again (David, 2026-10-09: "hides again on pan") and may have re-centered a
+  // different painting, so un-favorite the one this test actually favorited directly rather than via the UI,
+  // to leave state clean for later scenarios
+  t.ev(`(() => { const d = typeof glDetailNow === "function" && glDetailNow(${favored}); if (d && typeof fvArtSet === "function") fvArtSet(${favored}, d, false); })()`);
 });
 // David's screenshots, 2026-10-09: "pictures don't load as well as before" (most of the corpus is on a non-CORS
 // host, which the canvas-taint fix had fall back to a flat color tile with nothing to show it otherwise -- fixed
@@ -4756,33 +4771,38 @@ scenario("paintmap", "your favorites glow doesn't break the draw loop under a re
 // level (a near-center cell's own "a little bigger than its cell" magnification could push past the lattice
 // halfway point into a genuinely nearby neighbor, worst in a sparse filtered set or Spiral's ragged angular gaps
 // -- fixed with a spatial-hash nearest-neighbor clamp, PM_CTRL._qaRects() exposes the final post-clamp rects).
-scenario("paintmap", "no two drawn cells intersect at 3 zoom levels, including a sparse (4-result) filter", async t => {
-  const noOverlap = (label) => {
+// David, 2026-10-09: "the overlap wasn't a problem if it was subtle -- now they're all too far apart." Reverted
+// the spatial-hash clamp that used to force zero overlap here (it worked, but by shrinking cells away from their
+// natural size whenever a neighbor was close, which read as gaps, not a fix). The original map's own near-center
+// magnification (draw()'s `m`/`B` math, untouched) is allowed to overlap its neighbors a little, same as it
+// always did -- this now checks overlap stays bounded (nothing runaway/broken), not that it's exactly zero.
+scenario("paintmap", "cell overlap stays subtle (not runaway) at 3 zoom levels, and a sparse (4-result) filter fits the view", async t => {
+  const checkOverlap = (label) => {
     const rects = t.ev("PM_CTRL._qaRects()");
     t.expect(rects.length > 0, `${label}: nothing drawn`);
-    let worst = 0;
+    let worst = 0, worstFrac = 0;
     for (let a = 0; a < rects.length; a++) for (let b = a + 1; b < rects.length; b++) {
       const p = rects[a], q = rects[b];
       const ox = Math.max(0, Math.min(p.x + p.w / 2, q.x + q.w / 2) - Math.max(p.x - p.w / 2, q.x - q.w / 2));
       const oy = Math.max(0, Math.min(p.y + p.h / 2, q.y + q.h / 2) - Math.max(p.y - p.h / 2, q.y - q.h / 2));
-      if (ox > 0 && oy > 0) worst = Math.max(worst, Math.min(ox, oy));
+      if (ox > 0 && oy > 0) { const ov = Math.min(ox, oy), small = Math.min(p.w, p.h, q.w, q.h); if (ov > worst) worst = ov; const frac = small > 0 ? ov / small : 0; if (frac > worstFrac) worstFrac = frac; }
     }
-    t.expect(worst === 0, `${label}: cells overlap by up to ${worst.toFixed(1)}px (${rects.length} drawn)`);
+    t.expect(worstFrac < .75, `${label}: cells overlap by up to ${worst.toFixed(1)}px, ${(worstFrac * 100).toFixed(0)}% of the smaller cell -- that's runaway, not subtle (${rects.length} drawn)`);
   };
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
-  noOverlap("normal zoom, dense set");
+  checkOverlap("normal zoom, dense set");
   t.ev("PM_CTRL.zoom(2.1)"); await t.sleep(200);
-  noOverlap("zoomed in, dense set");
+  checkOverlap("zoomed in, dense set");
   t.ev("PM_CTRL.zoom(0.3)"); await t.sleep(200);
-  noOverlap("zoomed out, dense set");
-  // David's own screenshot: a 4-result filter (a painter with only a handful of works) -- fit-to-view (bug 5)
-  // and the overlap clamp (bug 4) both matter most exactly here
+  checkOverlap("zoomed out, dense set");
+  // David's own screenshot: a 4-result filter (a painter with only a handful of works) -- fit-to-view matters
+  // most exactly here (fitZoomFor's Math.max(1, ...) floor, unrelated to the overlap revert above and still in place)
   const rarePainter = t.ev(`(() => { const counts = new Map(); for (let i = 0; i < XBF.N; i++) { const a = XBF.artist[i]; if (!a) continue; counts.set(a, (counts.get(a) || 0) + 1); } let best = 0, bn = 1e9; for (const [a, n] of counts) if (n >= 2 && n <= 6 && n < bn) { bn = n; best = a; } return best; })()`);
   t.expect(rarePainter > 0, "couldn't find a painter with a small handful of works to test the sparse case");
   await t.open(`#/paintings/map?arr=color&p=${t.ev(`XBF.meta.artists[${rarePainter} - 1][1]`)}`, { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count <= 6, 20000, "the sparse filtered map to lay out");
-  noOverlap(`a sparse (${t.w.PM_CTRL.count}-result) filter`);
+  checkOverlap(`a sparse (${t.w.PM_CTRL.count}-result) filter`);
   // fit-to-view: a small set shouldn't float tiny in the middle -- the biggest drawn cell should fill a
   // meaningful share of the screen, not sit at a flat default zoom meant for a dense set
   const rects = t.ev("PM_CTRL._qaRects()"), biggest = Math.max(...rects.map(r => Math.max(r.w, r.h)));
