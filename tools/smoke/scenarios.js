@@ -3457,6 +3457,59 @@ scenario("paintings", "Look closer's Region tool: tap lights a region and opens 
   await t.click(t.$("[data-rgswatches] [data-swatch]"), { force: true, wait: 600 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping a region-palette chip");
 });
+// David, 2026-10-09: "it gets janky -- I can pan around and it gets stuck in weird poses... I should only be
+// able to zoom in, not zoom out too far". js/paintzoom.js's gesture rewrite: Z is a real scale against the
+// image's own natural pixels, hard-clamped to [fitZ, fitZ*8] every frame (no rubber band on zoom -- David's ask
+// was literal), and pan is clamped to the overflow past the stage on each axis, with a BOUNDED rubber-band
+// (asymptotes to 140px past the clamp, see js/paintzoom.js's rubber()) during a live drag so it can never run
+// away. Same pointer hygiene as the map's own fuzz test above: 1-3 simulated fingers going down, moving,
+// lifting, cancelling, or vanishing with no up/cancel at all. Checks the gesture's own state (scrim._glzQA, the
+// same QA-accessor pattern as HM_CTRL._qaState) after every step, not rendered pixels -- Z and P are asserted
+// to stay within those bounds at every single step, which is true by construction unless something let a
+// NaN/Infinity through or skipped a clamp.
+scenario("paintings", "Look closer: random gesture fuzz (pinch/pan/lost fingers) never zooms below fit or sends the image off-screen", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  await t.waitFor(".glz-scrim.in", 4000, "the Look closer overlay");
+  const result = t.ev(`(() => {
+    const scrim = document.querySelector(".glz-scrim"), stage = document.querySelector(".glz-stage");
+    if (!scrim || !scrim._glzQA || !stage) return JSON.stringify({ error: "no scrim/QA" });
+    const QA = scrim._glzQA;
+    const mk = (type, id, x, y) => new PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: id === 1 });
+    const mulberry32 = seed => () => { seed = seed + 0x6D2B79F5 | 0; let x = Math.imul(seed ^ seed >>> 15, 1 | seed); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; };
+    const r = stage.getBoundingClientRect();
+    const OVERSHOOT = 145;   // rubber()'s asymptote (140) plus a hair of slack
+    const fails = [];
+    for (let seed = 0; seed < 40 && fails.length < 5; seed++) {
+      QA.stopMomentum(); QA.reset();
+      const rnd = mulberry32(seed + 1);
+      const down = new Set();
+      const steps = 15 + Math.floor(rnd() * 20);
+      for (let s = 0; s < steps; s++) {
+        const id = 1 + Math.floor(rnd() * 3);
+        const x = r.left + 10 + rnd() * Math.max(10, r.width - 20), y = r.top + 10 + rnd() * Math.max(10, r.height - 20);
+        const pick = rnd();
+        if (!down.has(id)) { if (pick < .85) { stage.dispatchEvent(mk("pointerdown", id, x, y)); down.add(id); } }
+        else if (pick < .55) stage.dispatchEvent(mk("pointermove", id, x, y));
+        else if (pick < .75) { stage.dispatchEvent(mk("pointerup", id, x, y)); down.delete(id); }
+        else if (pick < .90) { stage.dispatchEvent(mk("pointercancel", id, x, y)); down.delete(id); }
+        else down.delete(id);   // "lost": the id just vanishes, no up/cancel ever sent
+        const st = QA.state();
+        if (!Number.isFinite(st.Z) || !Number.isFinite(st.P[0]) || !Number.isFinite(st.P[1])) { fails.push({ seed, s, reason: "non-finite", st }); break; }
+        if (st.Z < st.fitZ - .001) fails.push({ seed, s, reason: "below fit", st });
+        if (st.Z > st.maxZ + .001) fails.push({ seed, s, reason: "above max", st });
+        const limX = Math.max(0, (st.natW * st.Z - r.width) / 2) + OVERSHOOT, limY = Math.max(0, (st.natH * st.Z - r.height) / 2) + OVERSHOOT;
+        if (Math.abs(st.P[0]) > limX) fails.push({ seed, s, reason: "P.x off-screen", st, limX });
+        if (Math.abs(st.P[1]) > limY) fails.push({ seed, s, reason: "P.y off-screen", st, limY });
+      }
+    }
+    QA.stopMomentum();
+    return JSON.stringify({ fails: fails.slice(0, 5), failCount: fails.length, total: 40 });
+  })()`);
+  const r = JSON.parse(result);
+  t.expect(!r.error, `fuzz test couldn't run: ${r.error}`);
+  t.expect(r.failCount === 0, `${r.failCount} invalid gesture states out of ${r.total} seeds: ${JSON.stringify(r.fails)}`);
+});
 scenario("paintings", "Look closer on a painting then swiping back (popstate) never leaves the color page under a stuck dark scrim", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
