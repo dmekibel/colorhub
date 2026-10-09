@@ -513,6 +513,7 @@ function pmOpen(spec, o = {}) {
     </header>
     <p class="pmx-why" data-pmwhy></p>
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
+    <div class="pmx-walk" data-pmwalk hidden></div>
     <div class="pmx-facets" data-pmfacets hidden></div>
     <div class="pmx-cap" data-pmcap hidden>
       <button class="pmx-cap-main" data-pmopen><b data-pmct></b><small data-pmcb></small></button>
@@ -541,7 +542,8 @@ function pmOpen(spec, o = {}) {
 function pmMount(el, s, F) {
   const cv = el.querySelector(".pmx-cv"), ctx = cv.getContext("2d"), wait = el.querySelector(".pmx-wait");
   const RM = reduceMotion, cap = el.querySelector("[data-pmcap]"), heart = el.querySelector("[data-pmheart]");
-  const centerBtn = el.querySelector("[data-pmcenter]"), facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]");
+  const centerBtn = el.querySelector("[data-pmcenter]"), facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]"), walkBar = el.querySelector("[data-pmwalk]");
+  let walk = [];   // "Walk from here" (David, 2026-10-09): the gallery indices visited this walk, in order; [] when none is active
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
   let P = [0, 0], Z = 1, V = [0, 0], glide = null, raf = 0, dead = false, centerK = -1, lastTick = 0, drawn = [];
   const ZMAX = 2.2;
@@ -607,16 +609,53 @@ function pmMount(el, s, F) {
     PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z });
     paintFacets(i);
   }
+  // "Walk from here" (David, 2026-10-09): step to the most similar painting by a DIFFERENT painter -- the point
+  // is leaving your own painter's room each step, not drilling into one artist's own palette range -- excluding
+  // anywhere the walk has already been too, so it can't loop back on itself. A cheap mean-color+chroma distance
+  // (pmSimilarOrder's own first pass) over the current filtered list: fast enough for a one-off tap, and good
+  // enough that "most similar" reads as true at a glance.
+  function pmWalkCandidate(fromI, excludeSet) {
+    const G = GAL, m = G.mean, q = fromI * 3, painter = F.artist[fromI];
+    let best = -1, bd = Infinity;
+    for (const j of pmList(s, F)) {
+      if (j === fromI || excludeSet.has(j)) continue;
+      if (painter && F.artist[j] === painter) continue;
+      const a = m[j * 3] - m[q], b = m[j * 3 + 1] - m[q + 1], c = m[j * 3 + 2] - m[q + 2], e = G.C[j] - G.C[fromI];
+      const d = a * a + b * b + c * c + e * e;
+      if (d < bd) { bd = d; best = j; }
+    }
+    return best;
+  }
+  function doWalk() {
+    if (centerK < 0) return;
+    const from = lay.items[centerK];
+    if (!walk.length) walk = [from];
+    const next = pmWalkCandidate(from, new Set(walk));
+    if (next < 0) { toast("No different-painter match left to walk to", { low: true }); return; }
+    buzz(8); walk.push(next); s.seed = next; s.arr = "rings"; rebuild();
+  }
+  function paintWalk() {
+    if (walk.length < 2) { walkBar.hidden = true; walkBar.innerHTML = ""; return; }
+    walkBar.hidden = false;
+    walkBar.innerHTML = `<button class="pmx-walk-x" data-pmwalkx aria-label="End the walk">${ICON.x}</button>${walk.map((i, k) => `<button class="pmx-walk-dot${k === walk.length - 1 ? " cur" : ""}" data-pmwalkto="${k}" style="--c:${pmHex(i)}" aria-label="Step ${k + 1} of the walk"></button>`).join("")}`;
+    walkBar.querySelector("[data-pmwalkx]").onclick = () => { buzz(4); walk = []; paintWalk(); };
+    walkBar.querySelectorAll("[data-pmwalkto]").forEach(b => b.onclick = () => {
+      const k = +b.dataset.pmwalkto; if (k === walk.length - 1) return;
+      buzz(5); walk = walk.slice(0, k + 1); s.seed = walk[k]; s.arr = "rings"; rebuild();
+    });
+  }
   // filter-by-example (David, 2026-10-09): the centered painting's own facets as tappable "only these" chips,
   // plus "More like this" (the same whole-palette matching as the "similar" arrangement, seeded here)
   function paintFacets(i) {
     const fs = pmFacetsOf(i, F);
     facets.hidden = false;
-    facets.innerHTML = `<button class="pmx-fchip pmx-fchip-more" data-pmmore>More like this</button>${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${fc.dim === "color" ? `<i style="--c:${fc.val}"></i>` : ""}${esc(fc.label)}</button>`).join("")}`;
+    facets.innerHTML = `<button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here →</button><button class="pmx-fchip pmx-fchip-more" data-pmmore>More like this</button>${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${fc.dim === "color" ? `<i style="--c:${fc.val}"></i>` : ""}${esc(fc.label)}</button>`).join("")}`;
+    facets.querySelector("[data-pmwalk-go]").onclick = () => doWalk();
     facets.querySelector("[data-pmmore]").onclick = () => { buzz(6); s.seed = i; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild(); };
     facets.querySelectorAll("[data-pmfacet]").forEach(b => b.onclick = () => {
       const fc = fs[+b.dataset.pmfacet]; buzz(6); pmFacetApply(s.f, fc.dim, fc.val); rebuild();
     });
+    paintWalk();
   }
   function paintHeart(i, d) {
     const on = !!(d && typeof fvArtHas === "function" && fvArtHas(d.id));
