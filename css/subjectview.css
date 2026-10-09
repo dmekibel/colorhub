@@ -1,0 +1,58 @@
+/* Subject palette view (js/subjectview.js): the map Search's palette view for a painter, a decade, a movement, a
+   look. A plain sheet (app.css .sheet/.scrim): title, an honest subline, the count slider, measure/filter chip
+   rows, a segmented arrangement switch, the preview itself, then On the map / Learn / Play (js/colorset.js
+   .cs-acts) as secondary doors -- never the only two. */
+.sv-sheet{max-width:560px}
+.sv-title{font:400 30px/1.05 var(--serif);letter-spacing:-.02em;margin-top:2px}
+.sv-sub{color:var(--soft);font:400 14px/1.4 var(--sans);margin-top:6px}
+.sv-body{margin-top:16px}
+.sv-empty{margin-top:0}
+
+/* How many: countify's own stepper (core.js) rides beside the slider, same pattern as the map's own "How many" */
+.sv-count{margin-bottom:14px}
+.sv-count-l{display:flex;align-items:center;gap:10px;min-height:40px}
+.sv-count-l>span{flex:none;font:400 15px/1 var(--sans);opacity:.72}
+.sv-count-l input{flex:1;min-width:0;height:32px;accent-color:var(--paper-ink);touch-action:pan-x}
+.sv-count-l b{flex:none;min-width:2.4ch;text-align:right;font:400 20px/1 var(--serif);font-variant-numeric:tabular-nums}
+
+/* measure / filter chip rows: horizontal, scrollable, one selected at a time -- labeled text, no private icons */
+.sv-row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:3px 0;margin:0 -2px 8px;-webkit-overflow-scrolling:touch}
+.sv-row::-webkit-scrollbar{display:none}
+.sv-chip-sm{flex:none;min-height:34px;padding:0 13px;border-radius:var(--r-pill);font:400 14px/1 var(--sans);color:var(--soft);box-shadow:inset 0 0 0 1px var(--rule);white-space:nowrap;transition:background .15s,color .15s}
+.sv-chip-sm.on{background:var(--paper);color:var(--paper-ink);box-shadow:none}
+.sv-chip-sm:active{transform:scale(.96)}
+
+/* arrangement: a segmented control, equal width, self-evident text labels */
+.sv-seg{display:flex;gap:2px;padding:3px;border-radius:var(--r-pill);background:rgba(236,232,223,.06);margin-bottom:14px;overflow:visible}
+.sv-seg-b{flex:1;min-height:36px;border-radius:calc(var(--r-pill) - 2px);font:400 13px/1 var(--sans);color:var(--soft);white-space:nowrap}
+.sv-seg-b.on{background:var(--paper);color:var(--paper-ink)}
+
+.sv-canvas{min-height:64px}
+
+/* Strip: a barcode sized by share, biggest first */
+.sv-strip{display:flex;gap:2px;height:56px;border-radius:var(--r-1);overflow:hidden}
+.sv-strip-c{background:var(--c);min-width:3px}
+.sv-legend{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:12px}
+.sv-chip{display:inline-flex;align-items:center;gap:6px;min-height:32px;font:400 13px/1.3 var(--sans);color:var(--soft)}
+.sv-chip i{width:16px;height:16px;border-radius:50%;background:var(--c);flex:none;box-shadow:inset 0 0 0 1px var(--rule)}
+.sv-chip em{font-style:normal;opacity:.65;font-variant-numeric:tabular-nums}
+.sv-more{align-self:center;font:400 13px/1.3 var(--sans);color:var(--faint)}
+
+/* Grid: every shown color, sorted by hue, a real swatch tile with its name -- never a 12px data square */
+.sv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:8px}
+.sv-tile{aspect-ratio:1;border-radius:var(--r-1);background:var(--c);display:flex;align-items:flex-end;padding:6px;box-shadow:inset 0 0 0 1px rgba(20,19,17,.12)}
+.sv-tile span{font:400 11px/1.15 var(--sans);color:#141311;background:rgba(239,235,227,.78);padding:2px 5px;border-radius:5px;text-align:left}
+
+/* Ramp: light to dark, a vertical stack of full-width bars */
+.sv-ramp{display:flex;flex-direction:column;gap:2px;border-radius:var(--r-1);overflow:hidden}
+.sv-ramp-c{display:flex;align-items:center;justify-content:space-between;min-height:30px;padding:0 12px;background:var(--c)}
+.sv-ramp-c b,.sv-ramp-c em{font:400 13px/1 var(--sans);color:#141311;text-shadow:0 1px 1px rgba(239,235,227,.3)}
+.sv-ramp-c em{font-style:normal;opacity:.75}
+
+/* Wheel: hue around, chroma out from the middle, dot size by share -- a quiet preview, not a precision tool */
+.sv-wheel{position:relative;width:272px;height:272px;margin:4px auto 0}
+.sv-dot{position:absolute;left:calc(50% + var(--x));top:calc(50% + var(--y));width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(20,19,17,.15),0 1px 3px rgba(0,0,0,.3)}
+.sv-wheel-mid{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--rule-strong);opacity:.5}
+
+.sv-acts{margin-top:16px}
+.sv-fine{margin-top:12px}
