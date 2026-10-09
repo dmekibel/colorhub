@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A compound name, undated beyond 1928",
-   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Bronzesheen on plate 16, position H12, and dates its first recorded use to 1928 [1]. The compound reads as *bronze* plus *sheen*, pointing to a metallic glint rather than a pigment, but the dictionary gives no fuller account, so the exact reasoning is undocumented here [1]. The ISCC-NBS 1955 lists do not carry it separately, and the National Bureau of Standards circular cites only Maerz and Paul's entry [1].\n\nThe nearest named colors on file are [[pale-umber]], [[greyish-brownish-olive]] and [[fuscous]], at 2.8, 3.2 and 3.2 ΔE [1]. On canvas it keeps closer company with [[brown-olive|Brown Olive]] and [[mouse-grey|Mouse Grey]], both of which appear alongside it far more than chance [2]."
+   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Bronzesheen on plate 16, position H12, and dates its first recorded use to 1928 [1]. The compound reads as *bronze* plus *sheen*, pointing to a metallic glint rather than a pigment, but the dictionary gives no fuller account, so the exact reasoning is undocumented here [1]. The ISCC-NBS 1955 lists do not carry it separately, and the National Bureau of Standards circular cites only Maerz and Paul's entry [1].\n\nThe nearest named colors on file are [[pale-umber]], [[greyish-brownish-olive]] and [[greyish-brownish-olive]], at 2.8, 3.2 and 3.2 ΔE [1]. On canvas it keeps closer company with [[brown-olive|Brown Olive]] and [[mouse-grey|Mouse Grey]], both of which appear alongside it far more than chance [2]."
   },
   {
    "id": "field",
@@ -128,7 +128,7 @@
  "openers": [
   "A 1928 name for a muted olive-brown that turns out to be one of the most common colors in our whole archive."
  ],
- "words": 352,
+ "words": 354,
  "status": "checked",
  "checked": {
   "by": "checker",

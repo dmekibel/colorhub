@@ -1,122 +1,123 @@
 {
- "slug": "grey-teal",
- "name": "Grey teal",
- "hex": "#81A6AA",
- "names": [
-  "Grey teal"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Grey teal is a muted, greyed blue-green named for the teal duck's head feathers, carried by Ridgway in 1912 and the ISCC-NBS system in 1955, and painted most often by Eugène Boudin among the artists in our archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A duck's feather, greyed",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this hue, and the ISCC-NBS system of 1955 filed it as a light greenish blue [1]. Teal takes its name from the teal duck, whose iridescent head patch gives the bright original; this name mutes that patch toward grey [2]. In Munsell terms it sits near 1.6B 6.5/2.8: pale, low chroma, tipped slightly blue of pure green-blue [2].\n\nThe nearest named color is [[pastel-turquoise|Pastel Turquoise]], 3.9 units away and almost the same; [[greenish-blue|Greenish Blue]] sits at 4.0, darker [2]. The library also carries Dark Pastel Turquoise and Glaucous-Blue as near-duplicate names for the same small patch of color [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Grey teal appears in 243 of our 23,781 paintings, as photographed, more common than 66 percent of the archive's named colors [3]. It peaks in the 1900s, at 2.1 times the expected rate, and Eugène Boudin carries it most often, in 4 of his 33 works here, though no painter stands out sharply against the museum baseline [3]. Inside a painting it most often plays a hidden color [3]. The earliest match is dated 1375, 537 years before Ridgway's 1912 record — a look-alike hue in an aged photograph, not proof of any teal-named pigment, a floor and not a first, since the archive's early centuries are thin [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the teal duck's head feathers",
-   "first_recorded": "1912, per Ridgway",
-   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
-  },
-  "aka": [
-   "Dark pastel turquoise",
-   "Glaucous-Blue"
+  "slug": "grey-teal",
+  "name": "Grey teal",
+  "hex": "#81A6AA",
+  "names": [
+    "Grey teal",
+    "Glaucous-Blue"
   ],
-  "siblings": [
-   "pastel-turquoise",
-   "greenish-blue",
-   "greyish-blue",
-   "grey-aqua"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Grey teal is a muted, greyed blue-green named for the teal duck's head feathers, carried by Ridgway in 1912 and the ISCC-NBS system in 1955, and painted most often by Eugène Boudin among the artists in our archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A duck's feather, greyed",
+      "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this hue, and the ISCC-NBS system of 1955 filed it as a light greenish blue [1]. Teal takes its name from the teal duck, whose iridescent head patch gives the bright original; this name mutes that patch toward grey [2]. In Munsell terms it sits near 1.6B 6.5/2.8: pale, low chroma, tipped slightly blue of pure green-blue [2].\n\nThe nearest named color is [[pastel-turquoise|Pastel Turquoise]], 3.9 units away and almost the same; [[greenish-blue|Greenish Blue]] sits at 4.0, darker [2]. The library also carries Dark Pastel Turquoise and Glaucous-Blue as near-duplicate names for the same small patch of color [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Grey teal appears in 243 of our 23,781 paintings, as photographed, more common than 66 percent of the archive's named colors [3]. It peaks in the 1900s, at 2.1 times the expected rate, and Eugène Boudin carries it most often, in 4 of his 33 works here, though no painter stands out sharply against the museum baseline [3]. Inside a painting it most often plays a hidden color [3]. The earliest match is dated 1375, 537 years before Ridgway's 1912 record — a look-alike hue in an aged photograph, not proof of any teal-named pigment, a floor and not a first, since the archive's early centuries are thin [3]."
+    }
   ],
-  "parent": null,
-  "children": null,
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 243,
-  "measured": {
-   "lch": [
-    66,
-    13,
-    208
-   ],
-   "nearest": [
-    [
-     "Pastel Turquoise",
-     3.9
+  "aside": {
+    "origin": {
+      "named_after": "the teal duck's head feathers",
+      "first_recorded": "1912, per Ridgway",
+      "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+    },
+    "aka": [
+      "Dark pastel turquoise",
+      "Glaucous-Blue"
     ],
-    [
-     "Greenish Blue",
-     4.0
+    "siblings": [
+      "pastel-turquoise",
+      "greenish-blue",
+      "greyish-blue",
+      "grey-aqua"
+    ],
+    "parent": null,
+    "children": null,
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 243,
+    "measured": {
+      "lch": [
+        66,
+        13,
+        208
+      ],
+      "nearest": [
+        [
+          "Pastel Turquoise",
+          3.9
+        ],
+        [
+          "Greenish Blue",
+          4.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912); ISCC-NBS (1955)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: Munsell notation and look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What bird gives the teal color family its name?",
+      "choices": [
+        "The teal duck",
+        "The heron",
+        "The kingfisher",
+        "The peacock"
+      ],
+      "answer": "The teal duck",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: one painter in our archive uses Grey teal far more than the museum baseline would predict.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Grey teal is a duck's bright head feather, muted down toward grey."
+  ],
+  "words": 252,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912); ISCC-NBS (1955)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: Munsell notation and look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What bird gives the teal color family its name?",
-   "choices": [
-    "The teal duck",
-    "The heron",
-    "The kingfisher",
-    "The peacock"
-   ],
-   "answer": "The teal duck",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: one painter in our archive uses Grey teal far more than the museum baseline would predict.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Grey teal is a duck's bright head feather, muted down toward grey."
- ],
- "words": 252,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,114 +1,117 @@
 {
- "slug": "dusty-rose-brown",
- "name": "Dusty rose brown",
- "hex": "#8D746F",
- "names": [
-  "Dusty rose brown"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Dusty rose brown is a muted, greyed pink-brown recorded by Werner in 1821, its name a plain description with no further story behind the choice of words.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A muted rose",
-   "body": "Our library traces this color to Werner's 1821 nomenclature, which ties its near-duplicate, a shade it calls Brownish Purple Red, to a natural example: the flower of deadly nightshade [1]. The nearest named colors on file are [[crocus-martis]], [[rose-castor]], [[reddish-grey]] and [[fontainebleau]], at 2.9, 3.2, \nIn ISCC-NBS terms it reads as a light grayish reddish brown, in Munsell notation 8.8R 5.0/2.2 [1]. Close lookalikes in our library include [[crocus-martis]] and [[rose-castor]], both almost the same hue [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this muted pink-brown in 240 of 23,781 paintings, 1.01 percent, more common than 63 percent of our named colors, as photographed [2]. It peaks in the 1900s, in 42 of 1,674 paintings, nearly four times the archive's baseline rate for that century, and most often hides in shadow, in 46 percent of its appearances [2]. Félix Vallotton favors it most, in 5 of his 40 catalogued works, over six times the baseline for the museums those works come from [2]. The earliest dated example, from 1340, predates Werner's 1821 record of the name by nearly five centuries, so the match is a look-alike hue in aged paint, not proof of the pigment, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "plain description: dusty + rose-brown",
-   "first_recorded": "Werner, 1821",
-   "source": "ColorHub color library (Werner 1821)"
-  },
-  "aka": [],
-  "siblings": [
-   "crocus-martis",
-   "rose-castor",
-   "reddish-grey",
-   "fontainebleau"
+  "slug": "dusty-rose-brown",
+  "name": "Dusty rose brown",
+  "hex": "#8D746F",
+  "names": [
+    "Dusty rose brown",
+    "Brownish Purple Red"
   ],
-  "parent": "rose-brown",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 240,
-  "rate": 0.0101,
-  "measured": {
-   "lch": [
-    51.0,
-    11.0,
-    35.7
-   ],
-   "nearest": [
-    [
-     "Crocus Martis",
-     2.9
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Dusty rose brown is a muted, greyed pink-brown recorded by Werner in 1821, its name a plain description with no further story behind the choice of words.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A muted rose",
+      "body": "Our library traces this color to Werner's 1821 nomenclature, which ties its near-duplicate, a shade it calls Brownish Purple Red, to a natural example: the flower of deadly nightshade [1]. The nearest named colors on file are [[crocus-martis]], [[rose-castor]], [[reddish-grey]] and [[fontainebleau]], at 2.9, 3.2, \nIn ISCC-NBS terms it reads as a light grayish reddish brown, in Munsell notation 8.8R 5.0/2.2 [1]. Close lookalikes in our library include [[crocus-martis]] and [[rose-castor]], both almost the same hue [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this muted pink-brown in 240 of 23,781 paintings, 1.01 percent, more common than 63 percent of our named colors, as photographed [2]. It peaks in the 1900s, in 42 of 1,674 paintings, nearly four times the archive's baseline rate for that century, and most often hides in shadow, in 46 percent of its appearances [2]. Félix Vallotton favors it most, in 5 of his 40 catalogued works, over six times the baseline for the museums those works come from [2]. The earliest dated example, from 1340, predates Werner's 1821 record of the name by nearly five centuries, so the match is a look-alike hue in aged paint, not proof of the pigment, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "plain description: dusty + rose-brown",
+      "first_recorded": "Werner, 1821",
+      "source": "ColorHub color library (Werner 1821)"
+    },
+    "aka": [
+      "Brownish Purple Red (werner)"
+    ],
+    "siblings": [
+      "crocus-martis",
+      "rose-castor",
+      "reddish-grey",
+      "fontainebleau"
+    ],
+    "parent": "rose-brown",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 240,
+    "rate": 0.0101,
+    "measured": {
+      "lch": [
+        51.0,
+        11.0,
+        35.7
+      ],
+      "nearest": [
+        [
+          "Crocus Martis",
+          2.9
+        ]
+      ]
+    },
+    "first_seen": {
+      "year": 1340,
+      "painting": "commons-Q3842761",
+      "painter": "Pietro Lorenzetti"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Werner 1821 (Brownish Purple Red, near-duplicate, deadly nightshade flower example)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does \"dusty\" signal in Dusty rose brown?",
+      "choices": [
+        "A specific dye lot",
+        "A desaturated, muted version of rose-brown",
+        "A mineral source",
+        "A place name"
+      ],
+      "answer": "A desaturated, muted version of rose-brown",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Werner's book explains exactly why he chose a name this close to this color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Dusty rose brown's closest Werner cousin was tied to the flower of deadly nightshade, not to anything rose-colored."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   },
-  "first_seen": {
-   "year": 1340,
-   "painting": "commons-Q3842761",
-   "painter": "Pietro Lorenzetti"
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Werner 1821 (Brownish Purple Red, near-duplicate, deadly nightshade flower example)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does \"dusty\" signal in Dusty rose brown?",
-   "choices": [
-    "A specific dye lot",
-    "A desaturated, muted version of rose-brown",
-    "A mineral source",
-    "A place name"
-   ],
-   "answer": "A desaturated, muted version of rose-brown",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Werner's book explains exactly why he chose a name this close to this color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Dusty rose brown's closest Werner cousin was tied to the flower of deadly nightshade, not to anything rose-colored."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "words": 240
+  "words": 240
 }

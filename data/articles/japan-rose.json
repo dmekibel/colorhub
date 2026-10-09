@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A rose, not a place",
-   "body": "The library records Japan Rose from Maerz and Paul's 1930 dictionary, plate 3 A 10, first recorded 1912 [1]. The nearest named colors on file are [[pinkish-tan]], [[fawn]], [[vinaceous-fawn]] and [[light-russet-vinaceous]], at 2.8, 3.5, \nIn LCH terms it measures lightness 69, chroma 24, hue 49 degrees, the ISCC-NBS \"moderate yellowish pink\" block, Munsell 1.7YR 6.8/4.5, between [[pink]] and [[orange]] [1]. 8, 3.5, 3.5 and 3.6 ΔE [1]."
+   "body": "The library records Japan Rose from Maerz and Paul's 1930 dictionary, plate 3 A 10, first recorded 1912 [1]. The nearest named colors on file are [[pinkish-tan]], [[fawn]], [[fawn]] and [[light-russet-vinaceous]], at 2.8, 3.5, \nIn LCH terms it measures lightness 69, chroma 24, hue 49 degrees, the ISCC-NBS \"moderate yellowish pink\" block, Munsell 1.7YR 6.8/4.5, between [[pink]] and [[orange]] [1]. 8, 3.5, 3.5 and 3.6 ΔE [1]."
   },
   {
    "id": "field",
@@ -100,7 +100,7 @@
  "openers": [
   "Despite its name, Japan Rose is most over-represented in Indian paintings in our archive."
  ],
- "words": 242,
+ "words": 241,
  "status": "checked",
  "checked": {
   "by": "writer",

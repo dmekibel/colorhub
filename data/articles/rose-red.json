@@ -1,252 +1,252 @@
 {
- "slug": "rose-red",
- "name": "Rose Red",
- "hex": "#C21E56",
- "names": [
-  "Rose Red"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Rose red is the red of a garden rose, a name naturalists fixed on a chart as a pale pink in the early 1800s and one that screens now show as a deep crimson-pink.",
- "sections": [
-  {
-   "id": "swatch",
-   "title": "Two rose reds",
-   "body": "*Rose red* has meant a pale pink and a vivid crimson, sometimes in the same century. Paterson's dictionary gives it simply as a vivid red [7]. The chart where naturalists fixed the name defines it very differently, as carmine red lightened with plenty of snow white and a touch of cochineal red [1].\n\nOur library holds both ends. The aged Werner swatch for rose red is a pale cream-pink, #EEDAC3, Ridgway's 1912 plate is a strong rose, #D1294E, and the swatch on this page, #C21E56, is deeper still [9]. Its nearest named neighbor today is [[raspberry]], with [[carmine]] and [[old-rose]] close by in the same part of the wheel [9]. This is a different color from [[rose-pink]], which is lighter and bluer [9]."
-  },
-  {
-   "id": "syme",
-   "title": "A rose on Syme's chart",
-   "body": "In Patrick Syme's chart of reds, rose red is number 89, set between flesh red (88) and peach blossom red (90) [2]. Its natural example is the common garden rose, and its mineral is figure stone [2]. Syme defined [[flesh-red]] in turn as a blend of rose red, tile red and a touch of white, so the rose sits one step upstream of the skin tone [1].\n\nOur library files the entry under Werner, because Syme's chart is Werner's revised [9]. Baty traces number 89 itself to the French system of Picardet, one of two reds in the 1821 edition taken from there, rather than to Werner's own reds [14][9]. Baty's modern illustrations for the entry are rose petals from Rössig's rose atlas and a flamingo's feathers [1].\n\nSyme was not coining a new term. Rose-red appears in several of the eighteenth- and early nineteenth-century lists of color names that Baty tabulates [4]. Maerz and Paul's dictionary of 1930 gives about 1300 as its first record, a date we could not check against the underlying sources [9]."
-  },
-  {
-   "id": "recipes",
-   "title": "How a rose red was made",
-   "body": "An earlier recipe is almost the same as Syme's [3]. In 1769 Jacob Schäffer's chart of reds listed no. 71, rose red, as cochineal mixed with lead white [3]. His table had 150 numbered compartments, of which only 33 were painted, and the student was left to fill the rest by mixing [3]. Both recipes make the same point: a rose red of this period was a lake of cochineal or carmine thinned with white.\n\nThe name lives on in paints and ceramics. The *Pigment Compendium* records that Salter (1869) described a tin-chromium pigment that took on a rose-red color after an acid wash, which the Compendium treats as probably the same as mineral lake or potter's pink [15]. It also lists Thalo Red Rose as an American proprietary name for a quinacridone red [16]."
-  },
-  {
-   "id": "seeing",
-   "title": "Rose red in writing and in the eye",
-   "body": "Chevreul's observation, quoted by Jarman, is a lesson for the eye: placed beside even a rosy complexion, rose red and light crimson rob it of freshness and push it toward green [17]. It is simultaneous contrast at work, and it is easy to test with a red sleeve held beside a cheek.\n\nGreenfield uses the word in two places. In a translation of Aztec accounts, women pray that their daughters will dye feathers in varied colors, rose red among them, and the Aztec word for red, *tlapalli*, also meant color in general [18]. Later she describes rose-red geraniums on her kitchen windowsill in a snowbound Massachusetts winter and imagines that this was all the red the world had [19]. Birren recalls Schubert comparing E minor to a maiden in white with a rose-red bow [20]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This is one of the rarest colors in our archive of 23,781 paintings [10]. A color within six units of this swatch covers at least five per cent of the canvas in only one work, [[painting:cma-164465|a large multi-armed figure of about 1900]], where it fills 29 per cent [10]. That makes it rarer than 86 per cent of the named colors [10]. As always these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [10].\n\nIn Google Books the phrase *rose red* peaked in the 1820s, the decade after Syme's second edition, and has been flatter since, though the count covers every sense of the words [11]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the common garden rose (Syme's natural example)",
-   "first_recorded": "Syme's chart of reds, 1821 edition, no. 89 (from Picardet); Maerz and Paul give c. 1300, unchecked",
-   "source": "Baty, Nature's Palette, pp. 229, 242"
-  },
-  "aka": [
-   "Pictorial Carmine (near duplicate, dE 1.9)"
+  "slug": "rose-red",
+  "name": "Rose Red",
+  "hex": "#C21E56",
+  "names": [
+    "Rose Red"
   ],
-  "siblings": [
-   "flesh-red",
-   "carmine-red",
-   "raspberry"
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Rose red is the red of a garden rose, a name naturalists fixed on a chart as a pale pink in the early 1800s and one that screens now show as a deep crimson-pink.",
+  "sections": [
+    {
+      "id": "swatch",
+      "title": "Two rose reds",
+      "body": "*Rose red* has meant a pale pink and a vivid crimson, sometimes in the same century. Paterson's dictionary gives it simply as a vivid red [7]. The chart where naturalists fixed the name defines it very differently, as carmine red lightened with plenty of snow white and a touch of cochineal red [1].\n\nOur library holds both ends. The aged Werner swatch for rose red is a pale cream-pink, #EEDAC3, Ridgway's 1912 plate is a strong rose, #D1294E, and the swatch on this page, #C21E56, is deeper still [9]. Its nearest named neighbor today is [[raspberry]], with [[carmine]] and [[old-rose]] close by in the same part of the wheel [9]. This is a different color from [[rose-pink]], which is lighter and bluer [9]."
+    },
+    {
+      "id": "syme",
+      "title": "A rose on Syme's chart",
+      "body": "In Patrick Syme's chart of reds, rose red is number 89, set between flesh red (88) and peach blossom red (90) [2]. Its natural example is the common garden rose, and its mineral is figure stone [2]. Syme defined [[pale-flesh]] in turn as a blend of rose red, tile red and a touch of white, so the rose sits one step upstream of the skin tone [1].\n\nOur library files the entry under Werner, because Syme's chart is Werner's revised [9]. Baty traces number 89 itself to the French system of Picardet, one of two reds in the 1821 edition taken from there, rather than to Werner's own reds [14][9]. Baty's modern illustrations for the entry are rose petals from Rössig's rose atlas and a flamingo's feathers [1].\n\nSyme was not coining a new term. Rose-red appears in several of the eighteenth- and early nineteenth-century lists of color names that Baty tabulates [4]. Maerz and Paul's dictionary of 1930 gives about 1300 as its first record, a date we could not check against the underlying sources [9]."
+    },
+    {
+      "id": "recipes",
+      "title": "How a rose red was made",
+      "body": "An earlier recipe is almost the same as Syme's [3]. In 1769 Jacob Schäffer's chart of reds listed no. 71, rose red, as cochineal mixed with lead white [3]. His table had 150 numbered compartments, of which only 33 were painted, and the student was left to fill the rest by mixing [3]. Both recipes make the same point: a rose red of this period was a lake of cochineal or carmine thinned with white.\n\nThe name lives on in paints and ceramics. The *Pigment Compendium* records that Salter (1869) described a tin-chromium pigment that took on a rose-red color after an acid wash, which the Compendium treats as probably the same as mineral lake or potter's pink [15]. It also lists Thalo Red Rose as an American proprietary name for a quinacridone red [16]."
+    },
+    {
+      "id": "seeing",
+      "title": "Rose red in writing and in the eye",
+      "body": "Chevreul's observation, quoted by Jarman, is a lesson for the eye: placed beside even a rosy complexion, rose red and light crimson rob it of freshness and push it toward green [17]. It is simultaneous contrast at work, and it is easy to test with a red sleeve held beside a cheek.\n\nGreenfield uses the word in two places. In a translation of Aztec accounts, women pray that their daughters will dye feathers in varied colors, rose red among them, and the Aztec word for red, *tlapalli*, also meant color in general [18]. Later she describes rose-red geraniums on her kitchen windowsill in a snowbound Massachusetts winter and imagines that this was all the red the world had [19]. Birren recalls Schubert comparing E minor to a maiden in white with a rose-red bow [20]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This is one of the rarest colors in our archive of 23,781 paintings [10]. A color within six units of this swatch covers at least five per cent of the canvas in only one work, [[painting:cma-164465|a large multi-armed figure of about 1900]], where it fills 29 per cent [10]. That makes it rarer than 86 per cent of the named colors [10]. As always these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [10].\n\nIn Google Books the phrase *rose red* peaked in the 1820s, the decade after Syme's second edition, and has been flatter since, though the count covers every sense of the words [11]."
+    }
   ],
-  "parent": "red",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "rose-pink",
-    "gloss": "a lighter, bluer pink, not Syme's rose red"
-   },
-   {
-    "slug": "rose",
-    "gloss": "the plain rose color is lighter and softer"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#C21E56",
-   "de2000": 6,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "the common garden rose (Syme's natural example)",
+      "first_recorded": "Syme's chart of reds, 1821 edition, no. 89 (from Picardet); Maerz and Paul give c. 1300, unchecked",
+      "source": "Baty, Nature's Palette, pp. 229, 242"
+    },
+    "aka": [
+      "Pictorial Carmine (near duplicate, dE 1.9)"
+    ],
+    "siblings": [
+      "flesh-red",
+      "carmine-red",
+      "raspberry"
+    ],
+    "parent": "red",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "rose-pink",
+        "gloss": "a lighter, bluer pink, not Syme's rose red"
+      },
+      {
+        "slug": "rose",
+        "gloss": "the plain rose color is lighter and softer"
+      }
+    ],
+    "other_languages": []
   },
-  "n_present": 1,
-  "top_paintings": [
-   "cma-164465"
-  ],
-  "rank": "rarer than 86% of named colors",
-  "ngram": {
-   "rise": 1820,
-   "peak": 1820
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#C21E56",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 1,
+    "top_paintings": [
+      "cma-164465"
+    ],
+    "rank": "rarer than 86% of named colors",
+    "ngram": {
+      "rise": 1820,
+      "peak": 1820
+    },
+    "measured": {
+      "lch": [
+        43,
+        65,
+        10
+      ],
+      "nearest": [
+        [
+          "Raspberry",
+          4.9
+        ]
+      ]
+    }
   },
-  "measured": {
-   "lch": [
-    43,
-    65,
-    10
-   ],
-   "nearest": [
-    [
-     "Raspberry",
-     4.9
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 239-240 (Syme's rose red and flesh red)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 229-230 (Syme's chart of reds)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 18 (Schäffer, Table II)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 32-35 (comparative lists of terms)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 345",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "data",
+      "cite": "ColorHub library: Werner/Syme 1821 swatch, Ridgway 1912 plate XII, ISCC-NBS 1955 block 15, Maerz and Paul 1930, xkcd; nearest names measured in CIELCh",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5% of the canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "data",
+      "cite": "Google Books Ngram, 'rose red', case-insensitive, all senses",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 242 (sources of Syme's 1821 reds)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Pigment Compendium, p. 376 (tin pink)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Pigment Compendium, p. 374 (Thalo Red Rose)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 22 (quoting Chevreul)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 8",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 27",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 13 (Associations and Analogies)",
+      "loc_kind": "book-chapter",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "According to Syme, what was rose red made of?",
+      "choices": [
+        "Carmine red with much white and a little cochineal",
+        "Vermilion with black",
+        "Madder lake with yellow ochre",
+        "Pure cochineal, undiluted"
+      ],
+      "answer": "Carmine red with much white and a little cochineal",
+      "kind": "pick"
+    },
+    {
+      "q": "Why does the swatch on this page differ from Syme's rose red?",
+      "choices": [
+        "The word drifted from a pale pink toward a vivid red",
+        "The swatch was photographed from a faded chart",
+        "Syme's rose red was darker than crimson",
+        "Rose red is a different color on each screen by law"
+      ],
+      "answer": "The word drifted from a pale pink toward a vivid red",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Chevreul said rose red beside a rosy complexion makes the skin look fresher.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Syme's rose red was carmine thinned with plenty of white, far paler than today's swatch.",
+    "In 1769 Schäffer made rose red from cochineal and lead white."
+  ],
+  "words": 696,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Library calls no. 89 Werner; Baty p.242 says it came from Picardet (reported)",
+      "Maerz and Paul c.1300 date unchecked",
+      "Birren/Greenfield uses are incidental",
+      "Swatch is deeper than Syme's recipe (reported)"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 239-240 (Syme's rose red and flesh red)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 229-230 (Syme's chart of reds)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 18 (Schäffer, Table II)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 32-35 (comparative lists of terms)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 345",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "data",
-   "cite": "ColorHub library: Werner/Syme 1821 swatch, Ridgway 1912 plate XII, ISCC-NBS 1955 block 15, Maerz and Paul 1930, xkcd; nearest names measured in CIELCh",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5% of the canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "data",
-   "cite": "Google Books Ngram, 'rose red', case-insensitive, all senses",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 242 (sources of Syme's 1821 reds)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Pigment Compendium, p. 376 (tin pink)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Pigment Compendium, p. 374 (Thalo Red Rose)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 22 (quoting Chevreul)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 8",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 27",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 13 (Associations and Analogies)",
-   "loc_kind": "book-chapter",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "According to Syme, what was rose red made of?",
-   "choices": [
-    "Carmine red with much white and a little cochineal",
-    "Vermilion with black",
-    "Madder lake with yellow ochre",
-    "Pure cochineal, undiluted"
-   ],
-   "answer": "Carmine red with much white and a little cochineal",
-   "kind": "pick"
-  },
-  {
-   "q": "Why does the swatch on this page differ from Syme's rose red?",
-   "choices": [
-    "The word drifted from a pale pink toward a vivid red",
-    "The swatch was photographed from a faded chart",
-    "Syme's rose red was darker than crimson",
-    "Rose red is a different color on each screen by law"
-   ],
-   "answer": "The word drifted from a pale pink toward a vivid red",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Chevreul said rose red beside a rosy complexion makes the skin look fresher.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Syme's rose red was carmine thinned with plenty of white, far paler than today's swatch.",
-  "In 1769 Schäffer made rose red from cochineal and lead white."
- ],
- "words": 696,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Library calls no. 89 Werner; Baty p.242 says it came from Picardet (reported)",
-   "Maerz and Paul c.1300 date unchecked",
-   "Birren/Greenfield uses are incidental",
-   "Swatch is deeper than Syme's recipe (reported)"
-  ]
- }
 }

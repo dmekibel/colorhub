@@ -1,149 +1,151 @@
 {
- "slug": "signal-red",
- "name": "Signal red",
- "hex": "#E72512",
- "names": [
-  "Signal red"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Signal red is a vivid red named for warning lights, and also a trade name for the synthetic pigment para red and for vermilion substitutes.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Two meanings",
-   "body": "Paterson defines the term as a vivid red, and notes that coloured lights are used on railways as warning signals, in preference to semaphore signals [1]. That is the modern sense.\n\nIn the pigment trade the name has another sense. The Pigment Compendium lists signal red as a synonym of para red, which is a pigment classed as Colour Index 12070 or Pigment Red 1 and introduced in 1885 [2]. It lost most of its importance because of its deficiencies [2]. By Heaton's account in 1928, signal red was also a variety of vermilionette, a family of substitutes for [[vermilion]] made by precipitating dyes such as eosin [2][3]. Other names in that family were royal red and Victoria red [3]."
-  },
-  {
-   "id": "swatch",
-   "title": "Which red?",
-   "body": "Our swatch, #E72512, is a bright orange-leaning red [4]. The library's other Signal Red, the RAL 3001 industrial standard, is much darker, about #A02128 on screen, and the ISCC-NBS system of 1955 files the name in block 11 [4]. Maerz and Paul first recorded the name in 1902 [4]. Near neighbors are [[tomato-red]], [[scarlet]] and [[carmine]]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 museum paintings, 15 contain this red over at least five per cent of the canvas, within six units [5]. Seven are from the 1800s and three from the 1900s, and six are Spanish [5]. A 1935 table scene by Bonnard is among them [5]. These are photographs of aged, varnished paintings, so this is a color match and not a pigment test [5]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "red warning signals; as a pigment, a trade name of para red/vermilionette",
-   "first_recorded": "1902 as a color name (Maerz & Paul)",
-   "source": "Pigment Compendium p. 303, p. 400; Paterson p. 365"
-  },
-  "aka": [
-   "para red (pigment)",
-   "vermilionette"
+  "slug": "signal-red",
+  "name": "Signal red",
+  "hex": "#E72512",
+  "names": [
+    "Signal red",
+    "Pure Red"
   ],
-  "siblings": [
-   "tomato-red",
-   "scarlet"
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Signal red is a vivid red named for warning lights, and also a trade name for the synthetic pigment para red and for vermilion substitutes.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Two meanings",
+      "body": "Paterson defines the term as a vivid red, and notes that coloured lights are used on railways as warning signals, in preference to semaphore signals [1]. That is the modern sense.\n\nIn the pigment trade the name has another sense. The Pigment Compendium lists signal red as a synonym of para red, which is a pigment classed as Colour Index 12070 or Pigment Red 1 and introduced in 1885 [2]. It lost most of its importance because of its deficiencies [2]. By Heaton's account in 1928, signal red was also a variety of vermilionette, a family of substitutes for [[vermilion]] made by precipitating dyes such as eosin [2][3]. Other names in that family were royal red and Victoria red [3]."
+    },
+    {
+      "id": "swatch",
+      "title": "Which red?",
+      "body": "Our swatch, #E72512, is a bright orange-leaning red [4]. The library's other Signal Red, the RAL 3001 industrial standard, is much darker, about #A02128 on screen, and the ISCC-NBS system of 1955 files the name in block 11 [4]. Maerz and Paul first recorded the name in 1902 [4]. Near neighbors are [[tomato-red]], [[scarlet]] and [[carmine]]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 museum paintings, 15 contain this red over at least five per cent of the canvas, within six units [5]. Seven are from the 1800s and three from the 1900s, and six are Spanish [5]. A 1935 table scene by Bonnard is among them [5]. These are photographs of aged, varnished paintings, so this is a color match and not a pigment test [5]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "carmine",
-    "gloss": "the darker library Signal Red (RAL 3001) lies nearest to carmine"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-  "match": {
-   "hex": "#E72512",
-   "de2000": 6,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "red warning signals; as a pigment, a trade name of para red/vermilionette",
+      "first_recorded": "1902 as a color name (Maerz & Paul)",
+      "source": "Pigment Compendium p. 303, p. 400; Paterson p. 365"
+    },
+    "aka": [
+      "para red (pigment)",
+      "vermilionette",
+      "Pure Red (ral)"
+    ],
+    "siblings": [
+      "tomato-red",
+      "scarlet"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "carmine",
+        "gloss": "the darker library Signal Red (RAL 3001) lies nearest to carmine"
+      }
+    ],
+    "other_languages": []
   },
-  "n_present": 15,
-  "n_archive": 23781,
-  "measured": {
-   "lch": [
-    35,
-    59,
-    30
-   ],
-   "nearest": [
-    [
-     "Carmine",
-     4.1
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+    "match": {
+      "hex": "#E72512",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 15,
+    "n_archive": 23781,
+    "measured": {
+      "lch": [
+        35,
+        59,
+        30
+      ],
+      "nearest": [
+        [
+          "Carmine",
+          4.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"signal red\", p. 365",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"para red\", p. 303",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"vermilionette\", p. 400",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): RAL 3001 (approximate screen value), ISCC-NBS block 11, Maerz & Paul 1930 first recorded 1902",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What did signal red mean in the pigment trade?",
+      "choices": [
+        "A synonym for para red and a vermilion substitute",
+        "Real cinnabar",
+        "A red clay",
+        "A cochineal lake"
+      ],
+      "answer": "A synonym for para red and a vermilion substitute",
+      "kind": "pick"
+    },
+    {
+      "q": "When was para red introduced, according to the Pigment Compendium?",
+      "choices": [
+        "1885",
+        "1485",
+        "1785",
+        "1985"
+      ],
+      "answer": "1885",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Signal red was once a trade name for vermilion substitutes made by precipitating a dye."
+  ],
+  "words": 259,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsupported 'cheap', 'coal-tar' and 'older' claims.",
+      "Paterson says warning signals, not stop signals."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"signal red\", p. 365",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"para red\", p. 303",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"vermilionette\", p. 400",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): RAL 3001 (approximate screen value), ISCC-NBS block 11, Maerz & Paul 1930 first recorded 1902",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What did signal red mean in the pigment trade?",
-   "choices": [
-    "A synonym for para red and a vermilion substitute",
-    "Real cinnabar",
-    "A red clay",
-    "A cochineal lake"
-   ],
-   "answer": "A synonym for para red and a vermilion substitute",
-   "kind": "pick"
-  },
-  {
-   "q": "When was para red introduced, according to the Pigment Compendium?",
-   "choices": [
-    "1885",
-    "1485",
-    "1785",
-    "1985"
-   ],
-   "answer": "1885",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Signal red was once a trade name for vermilion substitutes made by precipitating a dye."
- ],
- "words": 259,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsupported 'cheap', 'coal-tar' and 'older' claims.",
-   "Paterson says warning signals, not stop signals."
-  ]
- }
 }

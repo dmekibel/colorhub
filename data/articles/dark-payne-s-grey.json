@@ -1,127 +1,127 @@
 {
- "slug": "dark-payne-s-grey",
- "name": "Dark Payne's Grey",
- "hex": "#3D525B",
- "names": [
-  "Dark Payne's Grey"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Dark Payne's Grey darkens [[payne-s-grey]], the blue-grey artists' mixing color, and Ridgway charted this darker tone on plate XLIX of his 1912 color atlas without it later being picked up by the 1955 ISCC-NBS dictionary.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A darkened mixing grey",
-   "body": "The name applies dark to [[payne-s-grey]], a blue-grey long used by painters to mix shadows and skies without resorting to black [1]. Ridgway recorded this darker variant in *Color Standards and Color Nomenclature* (1912), plate XLIX, hue 49′′′′, tone k [1]. Our library finds no corresponding entry for it in the 1955 ISCC-NBS dictionary, unlike several of its Ridgway-plate neighbors [1].\n\nMeasured against our Color Graph, its closest match is [[arona]], only 2.6 units away and a touch bluer; [[dusky-slate-blue]], [[dark-blue-slate]] and [[dark-violet-slate]] all sit within about 3.3 units, almost the same color on screen [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A match for this color covers at least five per cent of the canvas in 350 of 23,781 paintings, about 1.5 per cent, as photographed [3]. It is strongest in Post-Impressionist works, 7 of 45 paintings, 10.6 times the archive's overall rate [3]. The earliest dated match is a 1270 panel, *The Mourning Saint John the Evangelist*, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the parent color Payne's Grey, darkened",
-   "first_recorded": "1912 (Ridgway, plate XLIX)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "arona",
-   "dusky-slate-blue",
-   "dark-blue-slate",
-   "dark-violet-slate"
+  "slug": "dark-payne-s-grey",
+  "name": "Dark Payne's Grey",
+  "hex": "#3D525B",
+  "names": [
+    "Dark Payne's Grey"
   ],
-  "parent": "payne-s-grey",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#3D525B",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 350,
-  "rate": 0.0147,
-  "movements": [
-   [
-    "Post-Impressionism",
-    45,
-    7,
-    10.57
-   ]
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Dark Payne's Grey darkens [[payne-s-grey]], the blue-grey artists' mixing color, and Ridgway charted this darker tone on plate XLIX of his 1912 color atlas without it later being picked up by the 1955 ISCC-NBS dictionary.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A darkened mixing grey",
+      "body": "The name applies dark to [[payne-s-grey]], a blue-grey long used by painters to mix shadows and skies without resorting to black [1]. Ridgway recorded this darker variant in *Color Standards and Color Nomenclature* (1912), plate XLIX, hue 49′′′′, tone k [1]. Our library finds no corresponding entry for it in the 1955 ISCC-NBS dictionary, unlike several of its Ridgway-plate neighbors [1].\n\nMeasured against our Color Graph, its closest match is [[arona]], only 2.6 units away and a touch bluer; [[dusky-slate-blue]], [[dark-blue-slate]] and [[dark-blue-slate]] all sit within about 3.3 units, almost the same color on screen [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A match for this color covers at least five per cent of the canvas in 350 of 23,781 paintings, about 1.5 per cent, as photographed [3]. It is strongest in Post-Impressionist works, 7 of 45 paintings, 10.6 times the archive's overall rate [3]. The earliest dated match is a 1270 panel, *The Mourning Saint John the Evangelist*, a floor on the color's age in painting rather than a claim of its first appearance [3]. As photographed: these are computed color matches on museum photographs of aged, varnished paintings, not a pigment test [3]."
+    }
   ],
-  "measured": {
-   "lch": [
-    33.5,
-    9.7,
-    234.6
-   ],
-   "nearest": [
-    [
-     "Arona",
-     2.6
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XLIX, hue 49′′′′, tone k",
-   "loc_kind": null,
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "the parent color Payne's Grey, darkened",
+      "first_recorded": "1912 (Ridgway, plate XLIX)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "arona",
+      "dusky-slate-blue",
+      "dark-blue-slate",
+      "dark-violet-slate"
+    ],
+    "parent": "payne-s-grey",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#3D525B",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 350,
+    "rate": 0.0147,
+    "movements": [
+      [
+        "Post-Impressionism",
+        45,
+        7,
+        10.57
+      ]
+    ],
+    "measured": {
+      "lch": [
+        33.5,
+        9.7,
+        234.6
+      ],
+      "nearest": [
+        [
+          "Arona",
+          2.6
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XLIX, hue 49′′′′, tone k",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What do painters traditionally use Payne's Grey, the parent of this color, for?",
+      "choices": [
+        "Mixing shadows and skies without black",
+        "Priming canvas",
+        "Varnishing finished paintings",
+        "Toning paper for drawing"
+      ],
+      "answer": "Mixing shadows and skies without black",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Dark Payne's Grey has its own named block in the 1955 ISCC-NBS color dictionary.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A Ridgway blue-grey that never made it into the 1955 color dictionary."
+  ],
+  "words": 231,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "What do painters traditionally use Payne's Grey, the parent of this color, for?",
-   "choices": [
-    "Mixing shadows and skies without black",
-    "Priming canvas",
-    "Varnishing finished paintings",
-    "Toning paper for drawing"
-   ],
-   "answer": "Mixing shadows and skies without black",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Dark Payne's Grey has its own named block in the 1955 ISCC-NBS color dictionary.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A Ridgway blue-grey that never made it into the 1955 color dictionary."
- ],
- "words": 231,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-09",
-  "issues": []
- }
 }

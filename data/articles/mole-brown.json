@@ -1,130 +1,131 @@
 {
- "slug": "mole-brown",
- "name": "Mole brown",
- "hex": "#76665E",
- "names": [
-  "Mole brown"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Mole brown is a muted, warm grey-brown named for the animal's coat, listed by Ridgway in 1912 and matched in our own graph to the Japanese traditional grey Sunezumi, \"plain mouse.\"",
- "sections": [
-  {
-   "id": "name",
-   "title": "A coat color, and a Japanese cousin",
-   "body": "Ridgway's 1912 nomenclature and the ISCC-NBS lists of 1955 both carry this tone, though without a specific plate or block note in the records we hold [1]. In the ColorHub library the same point is also carried under Dark Vinaceous-Drab, an exact duplicate (ΔE 0.0) [1][3]. No book held in color-kb mentions \"Mole brown\" by name [4].\n\nIts nearest distinct named neighbor, 2.7 units off and \"almost the same\" by our graph, is [[plain-mouse]], the English rendering of the Japanese traditional grey *Sunezumi* (素鼠) [3]. Edo-period Japan is recorded as naming dozens of distinct browns and greys for clothing; our graph's closest cross-reference for Mole brown among those traditional names is *Rikyu-nezumi*, 5.4 units off [3]. A fourth close cousin in the library is [[zinc-grey]], a cooler, greyer step away from the same point [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds Mole brown in 1,441 of 23,781 paintings, about 6.1 percent, as photographed, making it one of the more common tones in this group [2]. It covers the largest share of canvas in East Asian works: a twelfth-century Chinese handscroll, [[painting:aic-96627|The Wangchuan Villa]], and a seventeenth-century Japanese screen by Kano Tan'yu, each over 85 percent [2]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the coat color of the mole",
-   "first_recorded": "1912, Ridgway",
-   "source": "Ridgway 1912; ISCC-NBS 1955"
-  },
-  "aka": [
-   "Dark Vinaceous-Drab"
+  "slug": "mole-brown",
+  "name": "Mole brown",
+  "hex": "#76665E",
+  "names": [
+    "Mole brown",
+    "Dark Vinaceous-Drab"
   ],
-  "siblings": [
-   "plain-mouse",
-   "dark-vinaceous-drab",
-   "taupe",
-   "zinc-grey"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Mole brown is a muted, warm grey-brown named for the animal's coat, listed by Ridgway in 1912 and matched in our own graph to the Japanese traditional grey Sunezumi, \"plain mouse.\"",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A coat color, and a Japanese cousin",
+      "body": "Ridgway's 1912 nomenclature and the ISCC-NBS lists of 1955 both carry this tone, though without a specific plate or block note in the records we hold [1]. In the ColorHub library the same point is also carried under Dark Vinaceous-Drab, an exact duplicate (ΔE 0.0) [1][3]. No book held in color-kb mentions \"Mole brown\" by name [4].\n\nIts nearest distinct named neighbor, 2.7 units off and \"almost the same\" by our graph, is [[plain-mouse]], the English rendering of the Japanese traditional grey *Sunezumi* (素鼠) [3]. Edo-period Japan is recorded as naming dozens of distinct browns and greys for clothing; our graph's closest cross-reference for Mole brown among those traditional names is *Rikyu-nezumi*, 5.4 units off [3]. A fourth close cousin in the library is [[zinc-grey]], a cooler, greyer step away from the same point [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds Mole brown in 1,441 of 23,781 paintings, about 6.1 percent, as photographed, making it one of the more common tones in this group [2]. It covers the largest share of canvas in East Asian works: a twelfth-century Chinese handscroll, [[painting:aic-96627|The Wangchuan Villa]], and a seventeenth-century Japanese screen by Kano Tan'yu, each over 85 percent [2]. Counts are computed matches on varnished, photographed paintings, not pigment identifications [2]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "cf. Sunezumi 素鼠 (\"plain mouse\"), a close Japanese traditional grey"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1441,
-  "measured": {
-   "lch": [
-    44.5,
-    8.5,
-    54.2
-   ],
-   "nearest": [
-    [
-     "Plain mouse",
-     2.7
+  "aside": {
+    "origin": {
+      "named_after": "the coat color of the mole",
+      "first_recorded": "1912, Ridgway",
+      "source": "Ridgway 1912; ISCC-NBS 1955"
+    },
+    "aka": [
+      "Dark Vinaceous-Drab"
+    ],
+    "siblings": [
+      "plain-mouse",
+      "dark-vinaceous-drab",
+      "taupe",
+      "zinc-grey"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "cf. Sunezumi 素鼠 (\"plain mouse\"), a close Japanese traditional grey"
+      }
     ]
-   ]
-  }
- },
- "questions": [
-  {
-   "q": "Mole brown is closest in our graph to which Japanese traditional name?",
-   "choices": [
-    "Sunezumi (\"plain mouse\")",
-    "Konjo-iro",
-    "Ai-iro",
-    "Bero"
-   ],
-   "answer": "Sunezumi (\"plain mouse\")",
-   "kind": "pick"
   },
-  {
-   "q": "True or false: Mole brown is one of the rarer colors in our archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Mole brown's nearest named neighbor is an English rendering of a Japanese traditional grey, Sunezumi, \"plain mouse.\""
- ],
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1441,
+    "measured": {
+      "lch": [
+        44.5,
+        8.5,
+        54.2
+      ],
+      "nearest": [
+        [
+          "Plain mouse",
+          2.7
+        ]
+      ]
+    }
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "Mole brown is closest in our graph to which Japanese traditional name?",
+      "choices": [
+        "Sunezumi (\"plain mouse\")",
+        "Konjo-iro",
+        "Ai-iro",
+        "Bero"
+      ],
+      "answer": "Sunezumi (\"plain mouse\")",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Mole brown is one of the rarer colors in our archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Mole brown's nearest named neighbor is an English rendering of a Japanese traditional grey, Sunezumi, \"plain mouse.\""
+  ],
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes, data/library.json): ISCC-NBS 1955, Maerz & Paul 1930, Ridgway 1912, RAL, Munsell and CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match (ΔE2000 ≤ 6, ≥ 5% of canvas), as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
+      "lint 2026-10-09"
+    ]
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest named neighbors and cross-domain twin matches (gems, films, fashion decades, Werner 1821 cross-reference), computed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "Concordance of the 29 color books held in color-kb for this name: no hits",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No book concordance hits for this name; sourced from ColorHub's own color library and archive data.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 235
+  "words": 235
 }

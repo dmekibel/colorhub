@@ -11,7 +11,7 @@
   {
    "id": "name",
    "title": "The word for hue, as a hue",
-   "body": "Maerz and Paul's *A Dictionary of Color* places this brownish orange on plate 12, cell L10, first recorded in 1898 [1]. Unlike most entries in the dictionary, the name is not a material, place or person; it borrows the general word \"colour\" itself, in its British spelling [1]. The same plate area carries related names Wild Honey (1926) and Rose Amber (1927), both warmer variants [1]. The ISCC-NBS 1955 report files the hue as a brownish orange [2].\n\nThe nearest named colors on file are [[copper]], [[india-spice]], [[gallstone-yellow]] and [[toffee]], at 3.7, 3.9, 4.2 and 4.2 ΔE [3]."
+   "body": "Maerz and Paul's *A Dictionary of Color* places this brownish orange on plate 12, cell L10, first recorded in 1898 [1]. Unlike most entries in the dictionary, the name is not a material, place or person; it borrows the general word \"colour\" itself, in its British spelling [1]. The same plate area carries related names Wild Honey (1926) and Rose Amber (1927), both warmer variants [1]. The ISCC-NBS 1955 report files the hue as a brownish orange [2].\n\nThe nearest named colors on file are [[copper]], [[india-spice]], [[toffee]] and [[toffee]], at 3.7, 3.9, 4.2 and 4.2 ΔE [3]."
   },
   {
    "id": "field",
@@ -126,5 +126,5 @@
   ]
  },
  "slug": "colour",
- "words": 206
+ "words": 205
 }

@@ -1,111 +1,111 @@
 {
- "slug": "basalt-grey",
- "name": "Basalt Grey",
- "hex": "#596163",
- "names": [
-  "Basalt Grey"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Basalt Grey is a dark, cool grey standardized by RAL, and under Werner's 1814 naturalist's system the same hue was pinned to a beetle's wing case and the mineral serpentine.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A grey pinned to a beetle and a stone",
-   "body": "The library dates Basalt Grey to RAL colors 7011 and 7012, both approximate screen values, and to the ISCC-NBS block 113 of 1955 [1]. Werner's system, read from an aged swatch and treated as approximate, assigns a close match to the elytra (wing cases) of the beetle *Meloe violaceus* and to dark streaks on cayenne pepper leaves [1]. It also ties the same match to the mineral serpentine, and names it Blackish Green there, a name the library grades a near-duplicate rather than the same color [1].\n\nThe nearest named colors on file are [[slate-color]], [[slate-grey]], [[dark-plumbeous]] and [[violet-slate]], at 3.1, 3.5, 3.5 and 3.8 ΔE [1]. The library's closest recorded neighbor is Iron Grey, about 1.9 units away [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this grey in 777 of 23,781 paintings, 3.3 percent, as photographed [2]. The earliest dated match, Saint John the Evangelist by the Master of Saint Francis, is from 1272, more than six centuries before either the RAL or Werner records, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1930s, at 3.1 times the archive's overall rate, and Henri Matisse carries it in 14 of his 50 paintings here, well above his own museums' baseline [2]. Inside a painting it most often plays a mid-tone, in 54 percent of its appearances [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the volcanic rock basalt",
-   "first_recorded": "undocumented beyond the RAL and Werner records on file",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "slate-color",
-   "slate-grey",
-   "dark-plumbeous",
-   "violet-slate"
+  "slug": "basalt-grey",
+  "name": "Basalt Grey",
+  "hex": "#596163",
+  "names": [
+    "Basalt Grey"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 777,
-  "measured": {
-   "lch": [
-    41,
-    3,
-    220
-   ],
-   "nearest": [
-    [
-     "Slate Color",
-     3.1
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Basalt Grey is a dark, cool grey standardized by RAL, and under Werner's 1814 naturalist's system the same hue was pinned to a beetle's wing case and the mineral serpentine.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A grey pinned to a beetle and a stone",
+      "body": "The library dates Basalt Grey to RAL colors 7011 and 7012, both approximate screen values, and to the ISCC-NBS block 113 of 1955 [1]. Werner's system, read from an aged swatch and treated as approximate, assigns a close match to the elytra (wing cases) of the beetle *Meloe violaceus* and to dark streaks on cayenne pepper leaves [1]. It also ties the same match to the mineral serpentine, and names it Blackish Green there, a name the library grades a near-duplicate rather than the same color [1].\n\nThe nearest named colors on file are [[slate-color]], [[slate-grey]], [[slate-grey]] and [[blue-slate]], at 3.1, 3.5, 3.5 and 3.8 ΔE [1]. The library's closest recorded neighbor is Iron Grey, about 1.9 units away [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this grey in 777 of 23,781 paintings, 3.3 percent, as photographed [2]. The earliest dated match, Saint John the Evangelist by the Master of Saint Francis, is from 1272, more than six centuries before either the RAL or Werner records, a floor and not a first, since the archive's early centuries are thin [2]. It peaks in the 1930s, at 3.1 times the archive's overall rate, and Henri Matisse carries it in 14 of his 50 paintings here, well above his own museums' baseline [2]. Inside a painting it most often plays a mid-tone, in 54 percent of its appearances [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the volcanic rock basalt",
+      "first_recorded": "undocumented beyond the RAL and Werner records on file",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "slate-color",
+      "slate-grey",
+      "dark-plumbeous",
+      "violet-slate"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 777,
+    "measured": {
+      "lch": [
+        41,
+        3,
+        220
+      ],
+      "nearest": [
+        [
+          "Slate Color",
+          3.1
+        ]
+      ]
+    },
+    "role": {
+      "mid": 0.54
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: RAL 7011/7012, ISCC-NBS 1955 block 113, Werner's Nomenclature of Colours no. 49 (Blackish Green), near-duplicate Iron Grey",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Werner's naturalist system ties a close match of this grey to which mineral?",
+      "choices": [
+        "Serpentine",
+        "Basalt",
+        "Quartz",
+        "Granite"
+      ],
+      "answer": "Serpentine",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Werner's system also ties a close match of this grey to a beetle's wing cases.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A paint-chart grey that an 1814 naturalist's system once pinned to a beetle's wing case."
+  ],
+  "words": 257,
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "role": {
-   "mid": 0.54
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: RAL 7011/7012, ISCC-NBS 1955 block 113, Werner's Nomenclature of Colours no. 49 (Blackish Green), near-duplicate Iron Grey",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed color match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Werner's naturalist system ties a close match of this grey to which mineral?",
-   "choices": [
-    "Serpentine",
-    "Basalt",
-    "Quartz",
-    "Granite"
-   ],
-   "answer": "Serpentine",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Werner's system also ties a close match of this grey to a beetle's wing cases.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A paint-chart grey that an 1814 naturalist's system once pinned to a beetle's wing case."
- ],
- "words": 257,
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

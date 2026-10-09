@@ -3,7 +3,8 @@
  "name": "Deep teal green",
  "hex": "#297069",
  "names": [
-  "Deep teal green"
+  "Deep teal green",
+  "Anthracene Green"
  ],
  "tier": "nature",
  "depth": "brief",
@@ -12,7 +13,7 @@
   {
    "id": "name",
    "title": "Two readings of one hex",
-   "body": "The ISCC-NBS system of 1955 classes the swatch as moderate bluish green, about 2.9 units from its block center, and Ridgway's 1912 nomenclature carries the same hex without a matching plate reading [1]. Our library lists the identical hex again under [[anthracene-green]], a separate ISCC-NBS and Ridgway reading at zero distance, so two names here point to one screen color [1][2].\n\nThe closest distinct color is [[myrtle-green]], about 3.4 units away, with [[dark-aquamarine]] and [[dark-green-blue]] further out [2]. The name itself simply marks a deep step on the [[deep-teal]] ladder [1]."
+   "body": "The ISCC-NBS system of 1955 classes the swatch as moderate bluish green, about 2.9 units from its block center, and Ridgway's 1912 nomenclature carries the same hex without a matching plate reading [1]. Our library lists the identical hex again under [[deep-teal-green]], a separate ISCC-NBS and Ridgway reading at zero distance, so two names here point to one screen color [1][2].\n\nThe closest distinct color is [[myrtle-green]], about 3.4 units away, with [[dark-aquamarine]] and [[dark-green-blue]] further out [2]. The name itself simply marks a deep step on the [[deep-teal]] ladder [1]."
   },
   {
    "id": "field",
@@ -26,7 +27,9 @@
    "first_recorded": "1912, Ridgway (library record)",
    "source": "data/library.json"
   },
-  "aka": [],
+  "aka": [
+   "Anthracene Green (ridgway+iscc-nbs)"
+  ],
   "siblings": [
    "anthracene-green",
    "myrtle-green",
@@ -105,5 +108,5 @@
    "lint 2026-10-09"
   ]
  },
- "words": 226
+ "words": 227
 }

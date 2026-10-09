@@ -1,131 +1,131 @@
 {
- "slug": "sea-teal",
- "name": "Sea teal",
- "hex": "#48929B",
- "names": [
-  "Sea teal"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Sea teal is one of ColorHub's own curriculum colors rather than a name from the classic dictionaries, and it shares its exact hex with another library name, Light teal tone.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A curriculum name, not a dictionary one",
-   "body": "Sea teal is one of ColorHub's own curriculum colors rather than a name drawn from Ridgway, Maerz and Paul, or the ISCC-NBS census [1]. Our data flags it as also appearing in a Japanese traditional color list, but records no kanji, romanization, or date for that entry, so the connection stays undocumented here [1].\n\nThe nearest named colors on file are [[capri-blue]] and [[cadet-blue]], at The Inter-Society Color Council's nearest 1955 block describes a color this hue as a light greenish blue [1]. A fifth, slightly farther neighbor is [[blue-munsell]], 6.5 ΔE away, bluer and more vivid [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds Sea teal in 31 of 23,781 paintings, about 0.1 percent, as photographed [2]. It sits as a mid-tone more often than as a highlight or shadow, and shares canvases with paintings also carrying [[teal]] at 237 times the rate chance alone would predict [2]. United States paintings carry it a little above the archive's base rate, France and Belgium not far behind [2]. The counts are a computed color match on varnished, photographed canvases, never a pigment identification [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented; possibly linked to a Japanese traditional list, but no name or date is recorded",
-   "first_recorded": "undocumented",
-   "source": "ColorHub curriculum data"
-  },
-  "aka": [],
-  "siblings": [
-   "capri-blue",
-   "cadet-blue",
-   "viridian-green",
-   "ether"
+  "slug": "sea-teal",
+  "name": "Sea teal",
+  "hex": "#48929B",
+  "names": [
+    "Sea teal"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 31,
-  "measured": {
-   "lch": [
-    56,
-    24,
-    210
-   ],
-   "nearest": [
-    [
-     "Capri Blue",
-     4.9
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Sea teal is one of ColorHub's own curriculum colors rather than a name from the classic dictionaries, and it shares its exact hex with another library name, Light teal tone.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A curriculum name, not a dictionary one",
+      "body": "Sea teal is one of ColorHub's own curriculum colors rather than a name drawn from Ridgway, Maerz and Paul, or the ISCC-NBS census [1]. Our data flags it as also appearing in a Japanese traditional color list, but records no kanji, romanization, or date for that entry, so the connection stays undocumented here [1].\n\nThe nearest named colors on file are [[capri-blue]] and [[cadet-blue]], at The Inter-Society Color Council's nearest 1955 block describes a color this hue as a light greenish blue [1]. A fifth, slightly farther neighbor is [[lagoon-blue]], 6.5 ΔE away, bluer and more vivid [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds Sea teal in 31 of 23,781 paintings, about 0.1 percent, as photographed [2]. It sits as a mid-tone more often than as a highlight or shadow, and shares canvases with paintings also carrying [[teal]] at 237 times the rate chance alone would predict [2]. United States paintings carry it a little above the archive's base rate, France and Belgium not far behind [2]. The counts are a computed color match on varnished, photographed canvases, never a pigment identification [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented; possibly linked to a Japanese traditional list, but no name or date is recorded",
+      "first_recorded": "undocumented",
+      "source": "ColorHub curriculum data"
+    },
+    "aka": [],
+    "siblings": [
+      "capri-blue",
+      "cadet-blue",
+      "viridian-green",
+      "ether"
     ],
-    [
-     "Cadet Blue",
-     5.1
-    ],
-    [
-     "Viridian Green",
-     6.0
-    ],
-    [
-     "Ether",
-     6.2
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 31,
+    "measured": {
+      "lch": [
+        56,
+        24,
+        210
+      ],
+      "nearest": [
+        [
+          "Capri Blue",
+          4.9
+        ],
+        [
+          "Cadet Blue",
+          5.1
+        ],
+        [
+          "Viridian Green",
+          6.0
+        ],
+        [
+          "Ether",
+          6.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library/graph: curriculum and Japanese-list flags, no book source confirmed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "True or false: Sea teal comes from Ridgway's 1912 plates.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which library name shares Sea teal's exact hex?",
+      "choices": [
+        "Light teal tone",
+        "Cadet Blue",
+        "Capri Blue",
+        "Jade"
+      ],
+      "answer": "Light teal tone",
+      "kind": "pick"
+    },
+    {
+      "q": "In our archive, which word's area-color keeps turning up alongside Sea teal far more than chance?",
+      "choices": [
+        "Teal",
+        "Scarlet",
+        "Ochre",
+        "Violet"
+      ],
+      "answer": "Teal",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Sea teal shares its exact hex with another library name, Light teal tone, and keeps turning up in the same paintings as plain Teal."
+  ],
+  "words": 208,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library/graph: curriculum and Japanese-list flags, no book source confirmed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "True or false: Sea teal comes from Ridgway's 1912 plates.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which library name shares Sea teal's exact hex?",
-   "choices": [
-    "Light teal tone",
-    "Cadet Blue",
-    "Capri Blue",
-    "Jade"
-   ],
-   "answer": "Light teal tone",
-   "kind": "pick"
-  },
-  {
-   "q": "In our archive, which word's area-color keeps turning up alongside Sea teal far more than chance?",
-   "choices": [
-    "Teal",
-    "Scarlet",
-    "Ochre",
-    "Violet"
-   ],
-   "answer": "Teal",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Sea teal shares its exact hex with another library name, Light teal tone, and keeps turning up in the same paintings as plain Teal."
- ],
- "words": 208,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

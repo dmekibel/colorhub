@@ -1,136 +1,136 @@
 {
- "slug": "dusty-peach",
- "name": "Dusty peach",
- "hex": "#E2BE9F",
- "names": [
-  "Dusty peach"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Dusty peach is a pale tan with a warm pink cast, ColorHub's English name for the Japanese traditional color Torinoko-iro, \"eggshell paper color.\"",
- "sections": [
-  {
-   "id": "name",
-   "title": "The color of eggshell paper",
-   "body": "Torinoko-iro (鳥の子色) is named in the Wikipedia list of Japan's traditional colors for *torinoko-gami*, a smooth, cream-colored handmade paper whose name literally means \"bird's child,\" or egg, paper [1]. The color describes the paper's pale, warm tone rather than an egg itself [1].\n\nThe nearest named colors on file are [[pale-flesh]] and [[flesh-red]], at 2.9 and 2.9 ΔE [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 858 of 23,781 paintings, about 3.6 percent, as photographed [2]. The earliest match is a Chinese painting by Zhao Guangfu, *Barbarian Royalty Worshiping the Buddha*, dated to about 900, though the matching area is small, a floor and not a first, since the archive's early centuries are thin [2]. The rate peaks in a sample of 169 paintings from the 1710s, about two and a half times the archive's overall rate for that decade [2]. Among sampled painters, Xugu's sixteen paintings contain it eleven times, by far the highest rate recorded, well ahead of Thomas Cole and Kano Tan'yū [2]. It is also disproportionately common in paintings from India, Japan, Korea, Iran and China [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "torinoko-gami, a traditional handmade paper",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "Wikipedia, Traditional colors of Japan"
-  },
-  "aka": [
-   "Torinoko-iro"
+  "slug": "dusty-peach",
+  "name": "Dusty peach",
+  "hex": "#E2BE9F",
+  "names": [
+    "Dusty peach"
   ],
-  "siblings": [
-   "pale-flesh",
-   "flesh-red",
-   "desert-sand",
-   "pastel-parchment"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Dusty peach is a pale tan with a warm pink cast, ColorHub's English name for the Japanese traditional color Torinoko-iro, \"eggshell paper color.\"",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The color of eggshell paper",
+      "body": "Torinoko-iro (鳥の子色) is named in the Wikipedia list of Japan's traditional colors for *torinoko-gami*, a smooth, cream-colored handmade paper whose name literally means \"bird's child,\" or egg, paper [1]. The color describes the paper's pale, warm tone rather than an egg itself [1].\n\nThe nearest named colors on file are [[pale-flesh]] and [[pale-flesh]], at 2.9 and 2.9 ΔE [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 858 of 23,781 paintings, about 3.6 percent, as photographed [2]. The earliest match is a Chinese painting by Zhao Guangfu, *Barbarian Royalty Worshiping the Buddha*, dated to about 900, though the matching area is small, a floor and not a first, since the archive's early centuries are thin [2]. The rate peaks in a sample of 169 paintings from the 1710s, about two and a half times the archive's overall rate for that decade [2]. Among sampled painters, Xugu's sixteen paintings contain it eleven times, by far the highest rate recorded, well ahead of Thomas Cole and Kano Tan'yū [2]. It is also disproportionately common in paintings from India, Japan, Korea, Iran and China [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Torinoko-iro (鳥の子色)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 858,
-  "measured": {
-   "lch": [
-    79,
-    22,
-    68
-   ],
-   "nearest": [
-    [
-     "Pale flesh",
-     2.9
+  "aside": {
+    "origin": {
+      "named_after": "torinoko-gami, a traditional handmade paper",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "Wikipedia, Traditional colors of Japan"
+    },
+    "aka": [
+      "Torinoko-iro"
     ],
-    [
-     "Flesh Red",
-     2.9
+    "siblings": [
+      "pale-flesh",
+      "flesh-red",
+      "desert-sand",
+      "pastel-parchment"
     ],
-    [
-     "Desert Sand",
-     3.4
-    ],
-    [
-     "Pastel Parchment",
-     4.0
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Torinoko-iro (鳥の子色)"
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "Wikipedia, \"Traditional colors of Japan\"",
-   "loc_kind": null,
-   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 858,
+    "measured": {
+      "lch": [
+        79,
+        22,
+        68
+      ],
+      "nearest": [
+        [
+          "Pale flesh",
+          2.9
+        ],
+        [
+          "Flesh Red",
+          2.9
+        ],
+        [
+          "Desert Sand",
+          3.4
+        ],
+        [
+          "Pastel Parchment",
+          4.0
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does Torinoko-iro name this color after?",
-   "choices": [
-    "A traditional handmade paper",
-    "A ripe peach",
-    "A dried apricot",
-    "Sun-bleached silk"
-   ],
-   "answer": "A traditional handmade paper",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wikipedia, \"Traditional colors of Japan\"",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does Torinoko-iro name this color after?",
+      "choices": [
+        "A traditional handmade paper",
+        "A ripe peach",
+        "A dried apricot",
+        "Sun-bleached silk"
+      ],
+      "answer": "A traditional handmade paper",
+      "kind": "pick"
+    },
+    {
+      "q": "Which painter's sampled works show the highest rate of this color?",
+      "choices": [
+        "Xugu",
+        "Thomas Cole",
+        "Kano Tan'yū",
+        "Albert Marquet"
+      ],
+      "answer": "Xugu",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Named for paper, not fruit, and most at home in paintings from East and South Asia."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "lint 2026-10-09"
+    ]
   },
-  {
-   "q": "Which painter's sampled works show the highest rate of this color?",
-   "choices": [
-    "Xugu",
-    "Thomas Cole",
-    "Kano Tan'yū",
-    "Albert Marquet"
-   ],
-   "answer": "Xugu",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Named for paper, not fruit, and most at home in paintings from East and South Asia."
- ],
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "words": 213
+  "words": 213
 }

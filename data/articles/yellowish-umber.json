@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Iwaicha, an Iwai brown",
-   "body": "Our library lists this color from the Wikipedia survey *Traditional colors of Japan*, under the romanized name Iwaicha, written 岩井茶 [1]. The library glosses the pair as \"Iwai brown\"; no further date or dyeing detail is given, and what \"Iwai\" itself refers to is undocumented here [1].\n\nThe nearest named colors on file are [[fuscous]], [[greyish-brownish-olive]] and [[guinea-hen]], at 3, 3 and 4.2 ΔE [1]. By the numbers, yellowish umber leans more yellow-green, at a hue angle of 86 degrees against umber's 56, while plain umber leans warmer and more orange [1]. The hex given here, #5E5545, is a modern screen reading chosen to match the library's gloss, not a measurement of dyed cloth or a pigment sample, so treat it as approximate [1]."
+   "body": "Our library lists this color from the Wikipedia survey *Traditional colors of Japan*, under the romanized name Iwaicha, written 岩井茶 [1]. The library glosses the pair as \"Iwai brown\"; no further date or dyeing detail is given, and what \"Iwai\" itself refers to is undocumented here [1].\n\nThe nearest named colors on file are [[greyish-brownish-olive]], [[greyish-brownish-olive]] and [[guinea-hen]], at 3, 3 and 4.2 ΔE [1]. By the numbers, yellowish umber leans more yellow-green, at a hue angle of 86 degrees against umber's 56, while plain umber leans warmer and more orange [1]. The hex given here, #5E5545, is a modern screen reading chosen to match the library's gloss, not a measurement of dyed cloth or a pigment sample, so treat it as approximate [1]."
   },
   {
    "id": "field",
@@ -147,7 +147,7 @@
  "openers": [
   "Yellowish umber comes from a Japanese name glossed as \"Iwai brown,\" and it turns up in about a quarter of the paintings in our archive."
  ],
- "words": 282,
+ "words": 284,
  "status": "checked",
  "checked": {
   "by": "checker",

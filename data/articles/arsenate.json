@@ -47,7 +47,7 @@
   {
    "id": "swatch",
    "title": "The swatch and what it matches",
-   "body": "The swatch on this page, #1C8674, is a dark teal-green, and our library puts it about four units from [[viridian]] and nearest to the name [[dark-viridian-green]] [15]. Our name list folds Arsenate in as an alias of [[generic-viridian]], an umbrella entry for the viridian family [15]. Viridian is a chromium oxide green, with no arsenic in it [4].\n\nSo this page's color matches neither of the arsenic pigments. Scheele's green was slightly dirty, a pea green, and emerald green was brilliant and cool, whereas the swatch is dark and deep [4]. Read the name as a label for a color, not as a recipe."
+   "body": "The swatch on this page, #1C8674, is a dark teal-green, and our library puts it about four units from [[viridian]] and nearest to the name [[blue-green]] [15]. Our name list folds Arsenate in as an alias of [[generic-viridian]], an umbrella entry for the viridian family [15]. Viridian is a chromium oxide green, with no arsenic in it [4].\n\nSo this page's color matches neither of the arsenic pigments. Scheele's green was slightly dirty, a pea green, and emerald green was brilliant and cool, whereas the swatch is dark and deep [4]. Read the name as a label for a color, not as a recipe."
   },
   {
    "id": "field",
@@ -298,7 +298,7 @@
   "Cobalt violet is an arsenate: the most likely main compound is magnesium cobalt arsenate.",
   "The word arsenate names a chemical family; as a color it is a deep teal filed under viridian."
  ],
- "words": 1724,
+ "words": 1723,
  "status": "checked",
  "checked": {
   "by": "checker",

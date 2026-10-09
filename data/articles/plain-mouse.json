@@ -12,7 +12,7 @@
   {
    "id": "japan",
    "title": "The mouse family's middle grade",
-   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Su-nezumi (素鼠), where su means \"plain\" or \"undyed\" and nezumi (\"mouse\") marks the family of muted greys it heads [1]. Unlike [[pale-taupe|Gin-nezumi]] (\"silver mouse\") or other graded members of the same family, Su-nezumi names the baseline, unmodified grey before any lightening or darkening word is added [1]. The ISCC-NBS dictionary of 1955 places it in block 64, \"brownish gray,\" about 5.5 units from that block's centre [2]. The library's nearest other named colors, [[dark-vinaceous-drab]] and [[mole-brown]], are each 2.7 units away [2].\n\nMeasured in LCH it reads lightness 42, chroma 8, hue 56 degrees, a mid-toned, warm-leaning grey [2]."
+   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Su-nezumi (素鼠), where su means \"plain\" or \"undyed\" and nezumi (\"mouse\") marks the family of muted greys it heads [1]. Unlike [[pale-taupe|Gin-nezumi]] (\"silver mouse\") or other graded members of the same family, Su-nezumi names the baseline, unmodified grey before any lightening or darkening word is added [1]. The ISCC-NBS dictionary of 1955 places it in block 64, \"brownish gray,\" about 5.5 units from that block's centre [2]. The library's nearest other named colors, [[mole-brown]] and [[mole-brown]], are each 2.7 units away [2].\n\nMeasured in LCH it reads lightness 42, chroma 8, hue 56 degrees, a mid-toned, warm-leaning grey [2]."
   },
   {
    "id": "field",
@@ -113,7 +113,7 @@
  "openers": [
   "Plain Mouse is the baseline grade of a whole Japanese family of named grey \"mice.\""
  ],
- "words": 210,
+ "words": 209,
  "status": "checked",
  "checked": {
   "by": "writer",

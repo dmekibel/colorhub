@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Shion-iro, the Tatarian aster",
-   "body": "Our library lists this color under the Japanese name Shion-iro, written 紫苑色, glossed as \"Tatarian aster color\" after the pale purple daisy-like flower *Aster tataricus* [1]. The Wikipedia survey \"Traditional colors of Japan\" is the only record we have for the name, and no book consulted for this project independently dates its coinage, so beyond that gloss it is undocumented here [1].\n\nIn LCH terms the library's swatch measures lightness 51, chroma 28 and hue 320 degrees, placing it in the Purples family [1]. The nearest named colors on file are [[dusty-violet]], [[saccardo-s-violet]], [[aconite-violet]] and [[viola]], at 2.7, 2.7, 2.9 and 3.1 ΔE [1]. Two other library names nearby are [[opera-mauve]] and [[bishop-s-purple]]."
+   "body": "Our library lists this color under the Japanese name Shion-iro, written 紫苑色, glossed as \"Tatarian aster color\" after the pale purple daisy-like flower *Aster tataricus* [1]. The Wikipedia survey \"Traditional colors of Japan\" is the only record we have for the name, and no book consulted for this project independently dates its coinage, so beyond that gloss it is undocumented here [1].\n\nIn LCH terms the library's swatch measures lightness 51, chroma 28 and hue 320 degrees, placing it in the Purples family [1]. The nearest named colors on file are [[dusty-violet]], [[dusty-violet]], [[aconite-violet]] and [[viola]], at 2.7, 2.7, 2.9 and 3.1 ΔE [1]. Two other library names nearby are [[opera-mauve]] and [[bishop-s-purple]]."
   },
   {
    "id": "field",
@@ -119,7 +119,7 @@
  "openers": [
   "Faded Purple takes its name from the Tatarian aster, a pale purple daisy once called Shion in Japan."
  ],
- "words": 205,
+ "words": 204,
  "status": "checked",
  "checked": {
   "by": "batch-writer",

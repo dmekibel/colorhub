@@ -7,12 +7,12 @@
  ],
  "tier": "descriptive",
  "depth": "short",
- "lede": "Dark Bluish Glaucous is a muted, pale green modifier on [[glaucous]] — itself named for the dusty bloom on grapes and some leaves — scanned from Ridgway's 1912 plates and filed by the ISCC-NBS system in 1955 as a light green.",
+ "lede": "Dark Bluish Glaucous is a muted, pale green modifier on [[dusty-blue]] — itself named for the dusty bloom on grapes and some leaves — scanned from Ridgway's 1912 plates and filed by the ISCC-NBS system in 1955 as a light green.",
  "sections": [
   {
    "id": "name",
    "title": "A double modifier on an old botanical word",
-   "body": "The name stacks two modifiers, *dark bluish* plus [[glaucous]], onto a word botanists and naturalists use for the pale, waxy bloom on a grape skin or a cabbage leaf [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* places a hue this muted at plate XLII, hue 37‴, a scan of an aged plate and so only approximate; the ISCC-NBS system filed the same chip in 1955 as a light green [1].\n\nIts nearest named neighbors by color distance are [[niagara-green]], at 3.3 units, and [[deep-glaucous-green]], at 4.1, both read as greener than this chip [2]."
+   "body": "The name stacks two modifiers, *dark bluish* plus [[dusty-blue]], onto a word botanists and naturalists use for the pale, waxy bloom on a grape skin or a cabbage leaf [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* places a hue this muted at plate XLII, hue 37‴, a scan of an aged plate and so only approximate; the ISCC-NBS system filed the same chip in 1955 as a light green [1].\n\nIts nearest named neighbors by color distance are [[niagara-green]], at 3.3 units, and [[deep-glaucous-green]], at 4.1, both read as greener than this chip [2]."
   },
   {
    "id": "field",
@@ -111,7 +111,7 @@
  "openers": [
   "Glaucous describes the dusty bloom on a grape skin; this is a darker, bluer reading of it."
  ],
- "words": 241,
+ "words": 243,
  "status": "checked",
  "checked": {
   "by": "checker",

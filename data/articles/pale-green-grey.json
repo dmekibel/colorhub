@@ -7,7 +7,7 @@
  ],
  "tier": "descriptive",
  "depth": "brief",
- "lede": "Pale green grey is a soft, washed grey-green, the library's lightened variant of [[green-grey]], and on screen the exact swatch of [[greenish-glaucous]].",
+ "lede": "Pale green grey is a soft, washed grey-green, the library's lightened variant of [[green-grey]], and on screen the exact swatch of [[pale-green-grey]].",
  "sections": [
   {
    "id": "name",
@@ -112,5 +112,5 @@
    "lint 2026-10-09"
   ]
  },
- "words": 307
+ "words": 308
 }

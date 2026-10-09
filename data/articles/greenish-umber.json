@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Greenish umber is a dark olive-brown carried into our library from the Japanese traditional color Yanagisusutake, \"sooty willow bamboo,\" and it sits 11.7 units from the plain [[umber]].",
-   "body": "Our library lists this color under the Japanese name Yanagisusutake, written 柳煤竹, combining *yanagi* (willow), *susu* (soot) and *take* (bamboo) [1]. No book consulted independently dates the coinage beyond that library gloss, so it is undocumented here [1].\n\nThe swatch measures lightness 32, chroma 11 and hue 103 degrees, filed under Neutrals and used chiefly for painter's pigments [1]. The nearest named colors on file are [[guinea-hen]], [[dark-olive]], [[yellow-olive]] and [[dark-olive-grey]], at 2.6, 3.4, 3.4 and 3.4 ΔE [1]. A lighter, more saturated relative in the same name set is [[greenish-sage]]."
+   "body": "Our library lists this color under the Japanese name Yanagisusutake, written 柳煤竹, combining *yanagi* (willow), *susu* (soot) and *take* (bamboo) [1]. No book consulted independently dates the coinage beyond that library gloss, so it is undocumented here [1].\n\nThe swatch measures lightness 32, chroma 11 and hue 103 degrees, filed under Neutrals and used chiefly for painter's pigments [1]. The nearest named colors on file are [[guinea-hen]], [[dark-olive]], [[dark-olive-grey]] and [[dark-olive-grey]], at 2.6, 3.4, 3.4 and 3.4 ΔE [1]. A lighter, more saturated relative in the same name set is [[grey-celadon]]."
   },
   {
    "id": "field",
@@ -127,7 +127,7 @@
  "openers": [
   "Greenish umber's Japanese name, yanagisusutake, stitches together willow, soot and bamboo into one dark olive-brown."
  ],
- "words": 175,
+ "words": 176,
  "status": "checked",
  "checked": {
   "by": "batch-writer",

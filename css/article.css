@@ -49,6 +49,12 @@
 .ar-link i{display:inline-block;width:.72em;height:.72em;margin:0 .32em 0 .02em;border-radius:2px;background:var(--c);vertical-align:-.03em;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
 .ar-link .ar-bk{display:inline-block;width:.8em;height:.8em;margin:0 .3em 0 .02em;vertical-align:-.05em;opacity:.7}
 .ar-x{text-decoration:none;color:var(--ar-body)}
+
+/* a system-reference swatch (David, 2026-10-09): "Maerz & Paul... plate 46 B2" gets a small swatch of that entry's own
+   color inline, same shape as a [[link]], tappable to the nearest name's page */
+.ar-sysref{display:inline;font:inherit;color:var(--ink);text-decoration:underline;text-decoration-color:rgba(236,232,223,.35);text-decoration-thickness:1px;text-underline-offset:3px;white-space:normal;padding:2px 0}
+.ar-sysref i{display:inline-block;width:.72em;height:.72em;margin:0 .32em 0 .02em;border-radius:2px;background:var(--c);vertical-align:-.03em;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+.ar-sysref:active{opacity:.7}
 .ar-link:active{opacity:.7}
 
 /* ---------- callouts ---------- */
