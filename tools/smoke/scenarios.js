@@ -3040,6 +3040,27 @@ scenario("paintings", "the action row is compact (Keep/Share/On the map) and Fin
   await t.click(more.querySelector("summary"), { wait: 400 });
   t.expect(/Value key/.test(t.text("[data-awan]")), "opening More doesn't reveal the Analysis tiles");
 });
+// David, 2026-10-09 ("it should be more prominent"): a prominent "Similar paintings on the map" button now sits
+// right by the palette (js/gallery.js .gl-pmap-top), not only buried below Findings, plus a first-run hint the
+// first time anyone opens a painting, once ever (js/gallery.js glPage, S.pmMapHintSeen).
+scenario("paintings", "a prominent Similar-paintings-on-the-map button sits by the palette, with a once-ever first-run hint", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  const top = t.$(".gl-pmap-top");
+  t.expect(top, "no prominent map button near the palette");
+  t.expect(/Similar paintings on the map/.test(t.text(top)), `the prominent button's label is wrong: "${t.text(top)}"`);
+  t.expect(t.$(".gl-pmap:not(.gl-pmap-top)"), "the original bottom-of-page button is gone (it should stay, as a safety net)");
+  const hint = t.$(".gl-pmap-hint");
+  t.expect(hint, "no first-run hint on a fresh save");
+  t.expect(t.ev("S.pmMapHintSeen") === 1, "S.pmMapHintSeen was not set as soon as the hint showed");
+  // dismiss: any tap, anywhere, same pattern as the honeycomb's own first-run hint (js/learn.js lrMapHint)
+  t.d.body.dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true }));
+  await t.sleep(400);
+  t.expect(!t.$(".gl-pmap-hint"), "the first-run hint did not dismiss on tap");
+  // a second painting page, same session: never shows it again
+  await t.open("#/gallery/13", { settle: 800, keepState: true });
+  t.expect(t.$(".gl-pmap-top"), "the prominent map button is missing on a second painting");
+  t.expect(!t.$(".gl-pmap-hint"), "the first-run hint reappeared on a later painting");
+});
 // David, 2026-10-09: a Commons painting's own Special:FilePath URL can't be read with crossorigin (verified by
 // hand: its redirect chain never sends Access-Control-Allow-Origin on the intermediate hops), so
 // glCommonsResolve() asks the MediaWiki API instead, which answers with CORS directly and hands back an already

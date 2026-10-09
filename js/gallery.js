@@ -798,6 +798,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="pt-arrive gl-arrive" data-glarrive hidden></div>
     <div class="gl-cov" data-glcov></div>
     <div data-csacts></div>
+    ${!S.pmMapHintSeen ? `<p class="gl-pmap-hint" data-glpmhint><i aria-hidden="true"></i><span>New: browse paintings by how alike their colors are</span></p>` : ""}
     <button class="gl-pmap gl-pmap-top" data-pmap="arr=similar&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
     </div></div>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
@@ -814,6 +815,19 @@ function glPage(i, d, fromHex, tol) {
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
   `, "article gl-page");
   const route = "#/gallery/" + i, heroSpan = el.querySelector(".gl-hero > span");
+  // first-run hint (David, 2026-10-09: "it should be more prominent"), once -- same "fades out at the first touch
+  // anywhere" pattern as the honeycomb's own first-run hint (js/learn.js lrMapHint), but inline beside the button
+  // itself (not position:fixed) since this page scrolls and the button isn't pinned to one spot on screen
+  const pmHint = el.querySelector("[data-glpmhint]");
+  if (pmHint) {
+    S.pmMapHintSeen = 1; save();   // shown once ever, not "until dismissed" -- a later open never shows it again
+    const dismiss = () => {
+      document.removeEventListener("pointerdown", dismiss, true);
+      if (!pmHint.isConnected) return;
+      pmHint.classList.add("out"); later(() => pmHint.remove(), reduceMotion ? 0 : 320);
+    };
+    document.addEventListener("pointerdown", dismiss, true);
+  }
   // "You can name 4 of 6" (js/coverage.js) for the colors on screen, one name each, and "Learn the rest"
   const drawCov = pal => {
     const host = el.querySelector("[data-glcov]");
