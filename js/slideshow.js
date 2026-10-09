@@ -151,7 +151,9 @@ function ssRenderLayer(spec) {
   if (hint) hint.textContent = String(SS.pos + 1);
 }
 function ssShowNew() {
+  const alreadyHandedOff = SS.mode === "today" && SS.usedToday;   // true only once today's own slide has already gone by
   const spec = ssNextSpec();
+  if (alreadyHandedOff) ssPaintModeBtn();   // the pill must never keep claiming "Today" once it's handed off to Shuffle
   ssRemember(spec);
   SS.history = SS.history.slice(0, SS.pos + 1);
   SS.history.push(spec);
@@ -202,6 +204,19 @@ function ssTeardown() {
 }
 
 // ---------- mode switch ----------
+// which mode's label/icon the Mode button shows right now ("today" reads as "Shuffle" once it has handed off —
+// David-critic fix: the pill must never keep claiming a mode that isn't actually running, honestly per P19)
+function ssModeShown() { return SS.mode === "today" && SS.usedToday ? "shuffle" : SS.mode; }
+function ssPaintModeBtn() {
+  const id = ssModeShown(), m = SS_MODES.find(x => x[0] === id) || SS_MODES[0];
+  const btn = SS.sh.querySelector("[data-ss-mode-btn]"); if (!btn) return;
+  btn.querySelector(".lbl").textContent = m[1];
+  const ic = btn.querySelector("svg:first-child"); if (ic) ic.outerHTML = m[2];
+}
+function ssClosePicker() {
+  const p = SS.sh.querySelector("[data-ss-picker]"), b = SS.sh.querySelector("[data-ss-mode-btn]");
+  if (p) p.hidden = true; if (b) b.setAttribute("aria-expanded", "false");
+}
 function ssRebuild(mode) {
   SS.mode = mode; S.ssMode = mode; save();
   SS.recentSet = new Set(); SS.recentOrder = [];
@@ -209,19 +224,26 @@ function ssRebuild(mode) {
   SS.history = []; SS.pos = -1;
   SS.sh.querySelectorAll("[data-ss-mode]").forEach(b => { const on = b.dataset.ssMode === mode; b.classList.toggle("on", on); b.setAttribute("aria-selected", on ? "true" : "false"); });
   const strip = SS.sh.querySelector("[data-ss-famstrip]"); if (strip) strip.hidden = mode !== "family";
+  ssPaintModeBtn();
   ssStep(1);
 }
+// one Mode button (David-critic fix: four pills plus a family row stacked over the hero color broke Law 1 —
+// "the color is the interface" — so only ✕, Mode and Pause sit over it at rest now; the four choices and,
+// in Family mode, the family row live in a compact picker the Mode button opens)
 function ssShellHTML(mode) {
+  const m = SS_MODES.find(x => x[0] === mode) || SS_MODES[0];
   return `<div class="ss-ov" data-ss>
     <div class="ss-stage" data-ss-stage></div>
     <div class="ss-top">
       <button class="ss-x" data-ss-close aria-label="Close slideshow">${ICON.x}</button>
-      <div class="ss-modes" role="tablist" aria-label="Slideshow mode">${SS_MODES.map(([id, label, ic]) =>
-        `<button class="ss-mode${mode === id ? " on" : ""}" data-ss-mode="${id}" role="tab" aria-selected="${mode === id}">${ic}<span>${esc(label)}</span></button>`).join("")}</div>
+      <button class="ss-mode-btn" data-ss-mode-btn aria-haspopup="true" aria-expanded="false" aria-label="Slideshow mode">${m[2]}<span class="lbl">${esc(m[1])}</span><span class="chev">${icon("chev", 14)}</span></button>
       <button class="ss-pause" data-ss-pause aria-label="Pause">${SS_ICON.pause}</button>
     </div>
-    <div class="ss-fam-strip"${mode === "family" ? "" : " hidden"} data-ss-famstrip>${SS_FAM_CYCLE.map(f =>
-      `<button class="ss-fam-chip${(S.ssFamily || "Blues") === f ? " on" : ""}" data-ss-fam="${esc(f)}">${esc(f)}</button>`).join("")}</div>
+    <div class="ss-picker" data-ss-picker hidden role="menu" aria-label="Slideshow mode">
+      ${SS_MODES.map(([id, label, ic]) => `<button class="ss-mode${mode === id ? " on" : ""}" data-ss-mode="${id}" role="menuitemradio" aria-checked="${mode === id}">${ic}<span>${esc(label)}</span></button>`).join("")}
+      <div class="ss-fam-strip"${mode === "family" ? "" : " hidden"} data-ss-famstrip>${SS_FAM_CYCLE.map(f =>
+        `<button class="ss-fam-chip${(S.ssFamily || "Blues") === f ? " on" : ""}" data-ss-fam="${esc(f)}">${esc(f)}</button>`).join("")}</div>
+    </div>
     <p class="ss-hint" data-ss-hint aria-hidden="true"></p>
   </div>`;
 }
@@ -233,7 +255,12 @@ function ssOpen(mode, opts = {}) {
   mode = mode && SS_MODES.some(m => m[0] === mode) ? mode : (S.ssMode && SS_MODES.some(m => m[0] === S.ssMode) ? S.ssMode : "shuffle");
   S.ssFamily = S.ssFamily || "Blues";
   const fromIdle = !!opts.idle;
+  // the tap that opens the slideshow must never go quiet while CORE_NAMES loads (David-critic fix: every
+  // touch answers within 100ms) — the trigger itself shows a brief pressed/loading state
+  const trigger = document.activeElement && document.activeElement.closest && document.activeElement.closest("button");
+  if (trigger && !(typeof CORE_NAMES !== "undefined" && CORE_NAMES)) { trigger.classList.add("ss-loading"); trigger.disabled = true; }
   const open = () => {
+    if (trigger) { trigger.classList.remove("ss-loading"); trigger.disabled = false; }
     const { sh, close } = sheet(ssShellHTML(mode));
     sh.classList.add("ss-full");
     SS = { mode, fam: S.ssFamily, recentSet: new Set(), recentOrder: [], famList: null, famIdx: 0, famDir: 1, usedToday: false,
@@ -242,25 +269,34 @@ function ssOpen(mode, opts = {}) {
     document.title = "Slideshow · ColorHub";
     ssWakeAcquire();
     sh.querySelector("[data-ss-close]").onclick = () => close();
+    const modeBtn = sh.querySelector("[data-ss-mode-btn]"), picker = sh.querySelector("[data-ss-picker]");
+    modeBtn.onclick = () => {
+      buzz(4);
+      const open2 = picker.hidden;
+      picker.hidden = !open2; modeBtn.setAttribute("aria-expanded", open2 ? "true" : "false");
+    };
     sh.querySelectorAll("[data-ss-mode]").forEach(b => b.onclick = () => {
-      if (b.dataset.ssMode === SS.mode) { if (SS.mode === "family") { const strip = sh.querySelector("[data-ss-famstrip]"); if (strip) strip.hidden = !strip.hidden; } return; }
-      buzz(4); ssRebuild(b.dataset.ssMode);
+      buzz(4);
+      if (b.dataset.ssMode === SS.mode) { if (SS.mode !== "family") ssClosePicker(); return; }
+      ssRebuild(b.dataset.ssMode);
+      if (b.dataset.ssMode !== "family") ssClosePicker();
     });
     sh.querySelectorAll("[data-ss-fam]").forEach(b => b.onclick = () => {
       S.ssFamily = b.dataset.ssFam; save(); SS.fam = S.ssFamily; SS.famList = null;
       sh.querySelectorAll("[data-ss-fam]").forEach(x => x.classList.toggle("on", x.dataset.ssFam === S.ssFamily));
-      buzz(4); ssStep(1);
+      buzz(4); ssStep(1); ssClosePicker();
     });
     sh.querySelector("[data-ss-pause]").onclick = () => { buzz(6); ssSetPaused(!SS.paused); };
     // tap to pause/resume (manual sessions) or dismiss (idle sessions, "easy to dismiss with any tap");
     // swipe left/right to step. Both skip the controls, the family strip and the name buttons.
     const stage = sh.querySelector("[data-ss-stage]");
     let x0 = 0, y0 = 0, t0 = 0, moved = false;
-    const isChrome = t => t.closest(".ss-top,.ss-fam-strip,.ss-name-btn,.ss-half,.grab");
+    const isChrome = t => t.closest(".ss-top,.ss-picker,.ss-name-btn,.ss-half,.grab");
     stage.addEventListener("pointerdown", e => { if (isChrome(e.target)) return; x0 = e.clientX; y0 = e.clientY; t0 = performance.now(); moved = false; });
     stage.addEventListener("pointermove", e => { if (Math.abs(e.clientX - x0) > 8 || Math.abs(e.clientY - y0) > 8) moved = true; });
     stage.addEventListener("pointerup", e => {
       if (isChrome(e.target)) return;
+      if (!picker.hidden) { ssClosePicker(); return; }   // a tap outside the open picker just closes it
       const dx = e.clientX - x0, dt = performance.now() - t0;
       if (Math.abs(dx) > 48 && dt < 700) { buzz(4); ssStep(dx < 0 ? 1 : -1); return; }
       if (!moved && dt < 450) { if (SS.fromIdle) close(); else { buzz(4); ssSetPaused(!SS.paused); } }
