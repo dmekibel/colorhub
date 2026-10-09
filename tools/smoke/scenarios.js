@@ -394,12 +394,20 @@ scenario("home", "Arrange's fit mode frames the whole layout above the sheet, fo
     const b = t.ev("HM_CTRL._drawnBounds()");
     t.expect(b && b.n > 3, `${why}: too few drawn cells to judge (${b && b.n})`);
     // a generous tolerance, not pixel-perfect containment: the fisheye's own magnified middle bubble can still
-    // push a little past the strict rect (see the lane's commit message), but it must be in the right
-    // neighborhood -- nowhere near the old behavior (zoomed in, bounds many screens wide).
-    const pad = Math.max(60, sheetTop * .5);
+    // push a little past the strict rect, but it must be in the right neighborhood -- nowhere near the old
+    // behavior (zoomed in, bounds many screens wide).
+    const pad = Math.max(60, sheetTop * .65);
     t.expect(b.minX > -pad && b.maxX < b.W + pad, `${why}: horizontal bounds [${b.minX.toFixed(0)},${b.maxX.toFixed(0)}] far outside [0,${b.W}]`);
     t.expect(b.minY > -pad && b.maxY < sheetTop + pad, `${why}: vertical bounds [${b.minY.toFixed(0)},${b.maxY.toFixed(0)}] far outside [0,${sheetTop.toFixed(0)}]`);
-    t.notes.push(`${why}: sheetTop=${sheetTop.toFixed(0)} bounds=[${b.minX.toFixed(0)},${b.minY.toFixed(0)}..${b.maxX.toFixed(0)},${b.maxY.toFixed(0)}]`);
+    // David, 2026-10-09: "the original view is now too far away" -- a loose "somewhere in the neighborhood" pad
+    // (above) isn't enough to catch a disk floating small in empty space, so also require it to actually fill
+    // the space above the sheet, on the axis its own shape is actually constrained by (a tall arrangement like
+    // the default map/hue fills by height, not width; a round one like Sunflower fills by both) -- at least 85%
+    // of the ~16px-margin-adjusted space on whichever axis is tighter.
+    const bw = b.maxX - b.minX, bh = b.maxY - b.minY, availW = b.W - 32, availH = sheetTop - 32;
+    const fill = Math.max(bw / availW, bh / availH);
+    t.expect(fill >= .85, `${why}: the fitted layout only fills ${(fill * 100).toFixed(0)}% of the space above the sheet on its own constrained axis (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
+    t.notes.push(`${why}: sheetTop=${sheetTop.toFixed(0)} bounds=[${b.minX.toFixed(0)},${b.minY.toFixed(0)}..${b.maxX.toFixed(0)},${b.maxY.toFixed(0)}] fill=${(fill * 100).toFixed(0)}%`);
   };
   await within("map/hue (default)");
   for (const sel of ['[data-arr="rings"]', '[data-arr="families"]', '[data-arr="sunflower"]']) {
@@ -1401,7 +1409,7 @@ scenario("home", "Study corner opens the instant deck seeded with the middle col
 // lives only in the left menu's Learn room now (the map's right-corner menu dropped its own Recall
 // row as a duplicate), and it must open the one Study flow, never js/learn.js's old swipe deck
 // (.deck) directly.
-scenario("home", "DEBUGTMP the left menu's Learn room Recall opens the one Study flow not the old swipe deck", async t => {
+scenario("home", "the left menu's Learn room Recall opens the one Study flow, not the old swipe deck", async t => {
   await H.homeReady(t);
   t.ev("Object.values(S.cards).slice(0, 2).forEach(c => { c.due = addDays(today(), -1); }); save();");
   await t.click("[data-rooms-corner]", { wait: 300 });
@@ -2209,6 +2217,7 @@ scenario("map", "the right corner's menu is <=5 rows, has no Recall, and nothing
   const leftLabels = t.$$(".rooms-stem .rm-bubble b").map(b => t.text(b).trim().toLowerCase());
   await H.keys(t, "Escape"); await t.sleep(200);
   for (const l of rightLabels) t.expect(!leftLabels.includes(l), `"${l}" appears in both the left and right menus`);
+  await H.menu(t);
   t.$(".rm-scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(450);
   t.expect(!t.$(".hm-do-stem") && t.$("#hmDo").getAttribute("aria-expanded") === "false", "a tap outside did not close the menu");
