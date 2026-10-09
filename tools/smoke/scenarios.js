@@ -286,6 +286,21 @@ scenario("home", "the color-page return (mxLand) never stalls waiting on data", 
 // family…); it stays ON the real map (same corners, honey.js honeyHighlight dims the rest), auto-picks whichever
 // candidate arrangement packs the selection into the smallest footprint (js/home.js hmBestArrangeFor) and says so
 // in the chip, and clearing it (✕) restores the arrangement AND the full, undimmed map.
+// David: "is it redundant to have Study on the bottom-left button's menu and also on the bottom-right button's
+// menu?" Yes -- it's an action you take ON the map, so it lives only on the right (the map's own Do menu); the
+// Train room (reached from the left, the Rooms corner -- "where you go") no longer offers its own door to it.
+scenario("home", "Study the map lives only on the right corner, not duplicated in Train", async t => {
+  await H.homeReady(t);
+  await H.menu(t);
+  const rightLabels = t.$$(".hm-do-stem [data-do] b").map(b => t.text(b));
+  t.expect(rightLabels.includes("Study the map"), `the right corner's menu has no Study the map: ${rightLabels.join(", ")}`);
+  t.d.querySelector(".rm-scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
+  await t.sleep(400);
+  await t.open("#/train", { settle: 600 });
+  t.expect(!t.$("[data-mapstudy]"), "the Train room still has its own Study the map tile");
+  t.expect(!/study the map/i.test(t.text("#app")), `Train still mentions "Study the map" somewhere: "${t.text("#app").slice(0, 300)}"`);
+});
+
 scenario("home", "mapSelect: a preview mode that auto-arranges the selection and restores on clear", async t => {
   await H.homeReady(t);
   t.expect(t.ev("typeof mapSelect === 'function'"), "mapSelect is not defined");
