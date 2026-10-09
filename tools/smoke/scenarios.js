@@ -3030,22 +3030,28 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
   // scrolling the page at that height (440x956 is checked separately with a real screenshot -- see colorhub-verify)
   t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
 });
-// David's polish pass, 2026-10-09: the three-way "On the painting" switch (Off/Markers/Highlight) is gone,
-// redundant once a swatch tile locates itself on tap. Tapping a strip tile should dim the rest of the painting,
-// glow where that color sits, and caption its share and a plain-English region; tapping it again clears it.
-scenario("paintings", "a painting's strip tile locates a color on the painting (the old Markers/Highlight switch is gone)", async t => {
+// David, relayed 2026-10-09 ("usually tapping a color should open the color, not the segmentation of it"):
+// a strip tile now opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md); "Where this
+// sits on the painting" moved to the small glyph in its corner, a second, explicit gesture.
+scenario("paintings", "a painting's strip tile opens its color page in one tap; the Where glyph locates it instead", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   t.expect(!t.$("[data-glwhere]"), "the old On the painting switch is still in the DOM");
   await t.waitFor("[data-glswatches] [data-glj]", 15000, "a palette swatch tile");
-  // the strip redraws (a fresh node) every time locate toggles, so re-query it each time rather than keep a reference
   const tileAt0 = () => t.$('[data-glswatches] [data-glj="0"]');
-  await t.click(tileAt0(), { force: true, wait: 400 });
-  t.expect(tileAt0().classList.contains("loc"), "the tapped tile doesn't show as located");
+  t.expect(tileAt0().hasAttribute("data-swatch"), "the strip chip isn't a [data-swatch] (one tap should open its page)");
+  await t.click(tileAt0(), { force: true, wait: 600 });
+  await t.waitFor(".cp-page", 8000, "the color page after tapping the chip body");
+  await t.click(TRL.screenBack(t), { wait: 600 });
+  await t.waitFor("[data-glswatches] [data-glj]", 10000, "the painting page again after Back");
+  const whereAt0 = () => t.$('[data-glswatches] [data-glj="0"] [data-locate]');
+  t.expect(whereAt0(), "no Where glyph on the chip");
+  await t.click(whereAt0(), { force: true, wait: 400 });
+  t.expect(tileAt0().classList.contains("loc"), "the chip doesn't show as located after tapping its Where glyph");
   await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims around the located color");
   const cap = t.$("[data-gllocate]");
   t.expect(cap && !cap.hidden && /% of the canvas/.test(t.text(cap)), `the locate caption is missing or wrong: "${cap && t.text(cap)}"`);
-  await t.click(tileAt0(), { force: true, wait: 400 });
-  t.expect(!tileAt0().classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping the tile again didn't clear the locate state");
+  await t.click(whereAt0(), { force: true, wait: 400 });
+  t.expect(!tileAt0().classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping Where again didn't clear the locate state");
   t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "the dim canvas is still on after clearing locate");
 });
 // The Analysis section's "Learn this painting" button (js/artwiki.js awAnalysis) was guarded by
@@ -4244,13 +4250,18 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   // behind it, so open More first if it's not one of the five shown
   if (!t.$('[data-glo="shadows"]')) await t.click("[data-glmore]", { wait: 300 });
   t.expect(t.$('[data-glo="shadows"]'), "Shadows isn't offered even behind More");
-  // "the count slider only in 'By area'" -- every other type is hidden
+  // David's palette-engine brief, 2026-10-09: "a slider for all of them" -- every mode that reads live from the
+  // pool now gets the 2-20 How-many slider, not just By area; only the structurally-fixed readings (a value
+  // ladder is always 5 bands) stay without one.
   await t.click('[data-glo="shadows"]', { wait: 300 });
-  t.expect(t.$("[data-glslide]").hidden, "the How many colors slider shows outside By area");
+  t.expect(!t.$("[data-glslide]").hidden, "Shadows should have the How many colors slider too now");
+  if (!t.$('[data-glo="ladder"]')) await t.click("[data-glmore]", { wait: 300 });
+  await t.click('[data-glo="ladder"]', { wait: 300 });
+  t.expect(t.$("[data-glslide]").hidden, "Value ladder is structurally fixed (5 bands) -- it shouldn't show the slider");
   await t.click('[data-glo="area"]', { wait: 300 });
   const kIn = t.$("[data-glk]");
   t.expect(kIn && !kIn.closest("[hidden]"), "no How many colors slider on By area");
-  t.ev(`(() => { const s = document.querySelector("[data-glk]"); s.value = 3; s.dispatchEvent(new Event("input", { bubbles: true })); })()`);
+  t.ev(`document.querySelector("[data-glk]")._countTo(3)`);
   t.expect(t.$$("[data-glswatches] [data-glj]").length === 3, "the slider didn't redraw the palette live");
   await t.click('[data-glo="out"]', { wait: 300 });
   await t.waitFor(() => /Learn the colors here/.test(t.text(".gl-cov")), 6000, "the coverage line");
@@ -4275,6 +4286,70 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   await t.click(".tq-learn", { wait: 700 });
   await t.waitFor(".ls-sheet", 5000, "the Learn sheet from the quiz");
   t.expect(/Helena/.test(t.text(".ls-sheet")), "the Learn sheet doesn't name the painting");
+});
+// David's audit, 2026-10-09: Gari Melchers' "Maternity" (NGA 178092, gallery index 11403) -- the mother's lilac/
+// mauve sleeve, plainly visible, never showed in ANY palette mode. Root cause (see tools/gallery.py's
+// extract_pool() comment): the offline pool's old greedy pick had no per-hue-family floor, so a canvas-dominant
+// family (browns, here) could crowd out a small-but-real, locally concentrated one at any k. The fix adds a
+// hue-floor diversity pass to the pool AND a dedicated Diverse mode (farthest-point sampling, objective iii:
+// "the lilac must appear" independent of area ranking) on top of it. This checks the fix actually landed: the
+// pool itself holds a purple-family color, and Diverse (which structurally cannot drop a present hue family)
+// surfaces it at a modest count.
+scenario("paintings", "Maternity: the lilac/mauve sleeve the old palette finder always missed now shows in Diverse", async t => {
+  await t.open("#/gallery/11403", { settle: 800 });
+  await t.waitFor(() => /Maternity/.test(t.text(".p-title")), 15000, "the Maternity painting page");
+  if (!t.$('[data-glo="diverse"]')) await t.click("[data-glmore]", { wait: 300 });
+  await t.click(await t.waitFor('[data-glo="diverse"]', 8000, "the Diverse chip"), { wait: 400 });
+  t.ev(`document.querySelector("[data-glk]") && document.querySelector("[data-glk]")._countTo(14)`);
+  await t.sleep(300);
+  // the recovered family reads, by the app's own naming/family system, as mauve/rose/raspberry -- a dusty
+  // mauve-rose, not a pure cool violet (see tools/gallery.py's extract_pool() comment: that's the honest color
+  // once you actually measure the sleeve's pixels). Checking the app's own familyOf() rather than reinventing
+  // hue math sidesteps CIELAB-hue-vs-HSV-hue confusion entirely, and is exactly what a visitor would see named.
+  const hasMauve = t.ev(`[...document.querySelectorAll("[data-glswatches] [data-glj]")].some(b => { const c = getComputedStyle(b).getPropertyValue("--c").trim(); const fam = typeof familyOf === "function" && familyOf(c); return fam && /mauve|rose|raspberry|plum|purple|lilac|magenta|pink|orchid|violet/i.test(fam.head.n); })`);
+  t.expect(hasMauve, "Diverse at 14 colors still has nothing in the mauve/rose/purple family on Maternity");
+});
+// David, relayed 2026-10-09 ("pressing on the picture should make it full screen, instead of instantly starting
+// the color picker"): a plain tap on the painting opens Look closer; no loupe, no sampling.
+scenario("paintings", "a plain tap on the painting opens Look closer, not the color picker", async t => {
+  await t.open("#/home", { settle: 300 });
+  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
+  t.ev(`galleryPage(14423, true)`);   // Mona Lisa, a Commons-sourced painting
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
+  const img = await t.waitFor(() => { const s = t.$(".gl-hero > span"); return s && s.classList.contains("gl-tap") && t.$(".gl-hero img"); }, 15000, "the painting's image, readable for sampling");
+  t.expect(t.$("[data-glpickbtn]") && !t.$("[data-glpickbtn]").hidden, "no explicit \"Pick a color\" button once the image is readable");
+  t.expect(!t.$("[data-glpickbtn]").classList.contains("on"), "the eyedropper starts armed");
+  const r = img.getBoundingClientRect(), w = t.w;
+  img.dispatchEvent(new w.MouseEvent("click", { bubbles: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 }));
+  await t.waitFor(".glz-scrim.in", 4000, "Look closer after a plain tap on the painting");
+  t.expect(!t.$(".eyd-loupe"), "the eyedrop loupe showed from a plain tap");
+  t.expect(!t.$(".gcr-sheet, .sw-sheet"), "a color readout opened from a plain tap");
+  t.expect(!t.$(".iso"), "the guessing game opened from a plain tap");
+});
+// D+E of the same brief, now gated behind the explicit "Pick a color" button (eyedropper icon): once armed,
+// press-and-drag shows the magnifier loupe (js/eyedrop.js eyedropAttach), and release opens a plain color
+// readout -- never js/isolate.js's "guess its name" game.
+scenario("paintings", "Pick a color arms the eyedropper: drag shows the loupe, release opens a plain readout, never the guessing game", async t => {
+  await t.open("#/home", { settle: 300 });
+  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
+  t.ev(`galleryPage(14423, true)`);
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
+  const img = await t.waitFor(() => { const s = t.$(".gl-hero > span"); return s && s.classList.contains("gl-tap") && t.$(".gl-hero img"); }, 15000, "the painting's image, readable for sampling");
+  await t.click(await t.waitFor("[data-glpickbtn]", 8000, "the Pick a color button"), { force: true, wait: 300 });
+  t.expect(t.$("[data-glpickbtn]").classList.contains("on"), "the Pick a color button doesn't show armed");
+  const r = img.getBoundingClientRect(), w = t.w;
+  const pt = (x, y, type) => img.dispatchEvent(new w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 7, pointerType: "touch", isPrimary: true, button: 0, view: w }));
+  const cx = r.left + r.width * .5, cy = r.top + r.height * .5;
+  pt(cx, cy, "pointerdown");
+  await t.sleep(80);
+  pt(cx + 10, cy + 6, "pointermove");
+  await t.waitFor(".eyd-loupe", 3000, "the eyedrop loupe while dragging, armed");
+  t.expect(!t.$(".iso"), "the guessing game opened from an armed drag on the painting");
+  pt(cx + 10, cy + 6, "pointerup");
+  await t.waitFor(".gcr-sheet, .sw-sheet", 4000, "the color readout sheet after releasing");
+  t.expect(!t.$(".iso"), "the guessing game opened after releasing an armed drag on the painting");
+  t.expect(t.$(".gcr-sheet [data-gcr-open], .gcr-sheet .cp-sheet-primary"), "the readout has no way to open the color's page");
+  t.expect(t.$(".gcr-sheet [data-gcr-where]"), "the readout has no \"Where else in this painting\" action");
 });
 // Lane H (design/IMPROVE-2026-10-08/PLAN.md): Across the line clicks. The anchor chip shows the word's own color,
 // a right answer offers the neighbor word, adding it makes a review card due tomorrow, a miss says "In ColorHub's

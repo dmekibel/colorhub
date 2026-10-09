@@ -1,12 +1,15 @@
 "use strict";
 // Full-screen "Look closer" (David's painting-page rebuild brief, 2026-10-09, point 1): pinch/pan the picture
-// itself, plus three switches that read the same coarse pixel data the painting page already builds for
-// "On the painting" (js/gallery.js litBuild) -- no extra network or canvas work, just a bigger stage for it:
+// itself, plus four tools that read the same coarse pixel data the painting page already builds for "On the
+// painting" (js/gallery.js litBuild) -- no extra network or canvas work, just a bigger stage for it:
 //   Value   greyscale, to see the light structure without color getting in the way
 //   Squint  blurred, so the big shapes read before the detail does (a classic painting-study trick)
 //   Where   pick a palette color; everywhere else dims, same as the page's own Highlight
+//   Pick    the eyedropper, explicit here too (David, relayed 2026-10-09: "pressing on the picture should make
+//           it full screen, instead of instantly starting the color picker" -- a plain drag pans/zooms as
+//           always; Pick arms eyedropAttach instead, same loupe + readout as the painting page's own button)
 // opts: { src, alt, title, pal: [{h,share}], pix: {w,h,L}|null (litBuild()'s coarse Lab read, or null when this
-// image's pixels can't be read here, which just leaves Where out) }
+// image's pixels can't be read here, which just leaves Where/Pick out) }
 function glZoomOpen(opts) {
   const scrim = document.createElement("div");
   scrim.className = "glz-scrim";
@@ -15,19 +18,21 @@ function glZoomOpen(opts) {
     <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}" alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas></div></div>
     <div class="glz-tools">
       <div class="seg glz-seg" role="group" aria-label="Look at it">
-        <button data-glzv="value">Value</button><button data-glzv="squint">Squint</button>${opts.pix ? `<button data-glzv="where">Where</button>` : ""}
+        <button data-glzv="value">Value</button><button data-glzv="squint">Squint</button>${opts.pix ? `<button data-glzv="where">Where</button>` : ""}${typeof eyedropAttach === "function" ? `<button data-glzv="pick">${typeof icon === "function" ? icon("pipette", 15) : ""}<span>Pick</span></button>` : ""}
       </div>
       <div class="glz-pal" hidden role="group" aria-label="Which color"></div>
     </div>`;
   document.body.appendChild(scrim);
   const prevOverflow = document.body.style.overflow; document.body.style.overflow = "hidden";
-  const frame = scrim.querySelector(".glz-frame"), cv = scrim.querySelector(".glz-cv"), stage = scrim.querySelector(".glz-stage");
+  const frame = scrim.querySelector(".glz-frame"), cv = scrim.querySelector(".glz-cv"), stage = scrim.querySelector(".glz-stage"), img = scrim.querySelector(".glz-img");
   let Z = 1, P = [0, 0], active = null, palHex = null;
   const ZMAX = 6;
   const apply = () => { frame.style.transform = `translate(${P[0]}px,${P[1]}px) scale(${Z})`; };
-  // pinch/pan/wheel, the same pointer-map pattern js/paintmap.js uses for its canvas
+  // pinch/pan/wheel, the same pointer-map pattern js/paintmap.js uses for its canvas -- stepped aside while
+  // "Pick" is active (eydAttach, below, owns the gesture then; a one-finger drag samples, not pans)
   const pts = new Map(); let drag = null, pinch = null;
   stage.addEventListener("pointerdown", e => {
+    if (active === "pick") return;
     pts.set(e.pointerId, [e.clientX, e.clientY]);
     try { stage.setPointerCapture(e.pointerId); } catch (err) {}
     if (pts.size === 1) drag = { x: e.clientX, y: e.clientY, moved: false, x0: e.clientX, y0: e.clientY };
@@ -46,31 +51,49 @@ function glZoomOpen(opts) {
   const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (!pts.size) drag = null; };
   stage.addEventListener("pointerup", up); stage.addEventListener("pointercancel", up);
   stage.addEventListener("wheel", e => { e.preventDefault(); Z = clamp(Z * Math.exp(-e.deltaY * .0015), 1, ZMAX); apply(); }, { passive: false });
-  stage.addEventListener("dblclick", () => { Z = Z > 1.2 ? 1 : 2.4; if (Z === 1) P = [0, 0]; apply(); });
+  stage.addEventListener("dblclick", () => { if (active !== "pick") { Z = Z > 1.2 ? 1 : 2.4; if (Z === 1) P = [0, 0]; apply(); } });
   stage.addEventListener("contextmenu", e => e.preventDefault());
-  // Value / Squint / Where
+  // "Pick": eyedropAttach (js/eyedrop.js) on the zoomed image itself, armed only while this tool is active, so
+  // it never fights the pan/pinch handlers above (D+E of David's palette-engine brief, 2026-10-09). The readout
+  // card's "Where else" switches straight into the Where tool with the sampled hex, even when it isn't one of
+  // the painting's own named palette colors.
+  let eyd = null;
+  const syncPick = () => {
+    if (eyd) { eyd.detach(); eyd = null; }
+    if (active === "pick" && typeof eyedropAttach === "function") {
+      eyd = eyedropAttach(img, { onPick: hex => {
+        if (typeof buzz === "function") buzz(6);
+        if (typeof glColorReadout === "function") glColorReadout(hex, { pal: opts.pal, locateHex: opts.pix ? (h => {
+          palHex = h;
+          if (active !== "where") {
+            active = "where";
+            scrim.querySelectorAll("[data-glzv]").forEach(b => { const on = b.dataset.glzv === "where"; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+            scrim.querySelector(".glz-img").style.filter = ""; scrim.querySelector(".glz-pal").hidden = false; syncPick();
+          }
+          drawPalRow(); drawWhere();
+        }) : null });
+      } });
+    }
+  };
+  // Value / Squint / Where / Pick
   const setMode = m => {
     active = active === m ? null : m;
     scrim.querySelectorAll("[data-glzv]").forEach(b => { const on = b.dataset.glzv === active; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     scrim.querySelector(".glz-img").style.filter = active === "value" ? "grayscale(1)" : active === "squint" ? "blur(min(2.5vw,16px))" : "";
     const palBox = scrim.querySelector(".glz-pal"); palBox.hidden = active !== "where";
     if (active !== "where") { cv.classList.remove("on"); palHex = null; } else drawPalRow();
-    drawWhere();
+    drawWhere(); syncPick();
   };
   const drawPalRow = () => {
     const box = scrim.querySelector(".glz-pal");
     box.innerHTML = (opts.pal || []).slice(0, 8).map(p => `<button data-glzc="${p.h}" style="--c:${p.h}" class="${palHex === p.h ? "on" : ""}" aria-label="${esc(typeof nameOf === "function" ? nameOf(p.h).n : p.h)}"></button>`).join("");
   };
+  // the same soft mask the painting page's own "Where" uses (js/gallery.js glPaintMask) -- a smooth ΔE falloff,
+  // speckle filter and box blur instead of a hard per-pixel cut (David's audit, 2026-10-09: blocky, glitchy)
   const drawWhere = () => {
     const P2 = opts.pix;
-    if (!P2 || !palHex) { cv.classList.remove("on"); return; }
-    cv.width = P2.w; cv.height = P2.h;
-    const x = cv.getContext("2d"), out = x.createImageData(P2.w, P2.h), t = lab(palHex);
-    for (let j = 0; j < P2.w * P2.h; j++) {
-      const dd = Math.hypot(P2.L[j * 3] - t[0], P2.L[j * 3 + 1] - t[1], P2.L[j * 3 + 2] - t[2]);
-      const o = j * 4; out.data[o] = 14; out.data[o + 1] = 13; out.data[o + 2] = 11; out.data[o + 3] = dd < 13 ? 0 : 205;
-    }
-    x.putImageData(out, 0, 0); cv.classList.add("on");
+    if (!P2 || !palHex || typeof glPaintMask !== "function") { cv.classList.remove("on"); return; }
+    glPaintMask(cv, P2, palHex); cv.classList.add("on");
   };
   scrim.querySelector(".glz-tools").onclick = e => {
     const v = e.target.closest("[data-glzv]"); if (v) { if (typeof buzz === "function") buzz(5); setMode(v.dataset.glzv); return; }
