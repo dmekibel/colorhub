@@ -828,9 +828,31 @@ function pmMount(el, s, F) {
     // blot out or clip an earlier cell's label/overlay -- drawn is sorted smallest-d-first specifically so
     // bigger/closer cells paint OVER smaller/farther ones, backwards for something that has to survive the pass)
     const landmarkCandidates = [];
+    // David, 2026-10-09 ("zoom out and back in and the pictures start to jitter in place"): two causes, both
+    // fixed here rather than chasing a single repro. (1) snap every tile's drawn rect to whole DEVICE pixels --
+    // X/Y/W/H are continuous floats re-derived from P/Z every frame, and even when P/Z are themselves holding
+    // perfectly still, antialiasing a rect whose edge sits a hair either side of a pixel boundary can render
+    // a touch differently frame to frame (sub-pixel rounding "noise" that was never actually in the math, only
+    // in how the rasterizer treats it) -- rounding the rect's edges to the nearest device pixel (snapPx) makes
+    // every cell's rect bit-for-bit identical across frames when nothing is actually moving. (2) hysteresis on
+    // which image source a cell draws from: "big" (the full picture, live-cropped every frame from e.src) and
+    // the baked square (e.bm, a fixed 144x144 canvas) are NOT pixel-identical crops of the same photo, so a
+    // cell sitting right at the old single b.d>92-or-m>.02 boundary used to flip between the two sources on
+    // alternating frames as P/Z wobbled by a sub-pixel amount -- each flip is a real, visible jump in exactly
+    // which pixels are drawn, which is what actually read as "jitter". closeScore combines both the size (d)
+    // and lens-magnification (m) signals the original condition OR'd together into one normalized number (>=1
+    // means "qualifies"); hysteresis() requires dropping notably BELOW 1 (not just under it) to disqualify
+    // again, so a cell parked right on the boundary keeps showing whichever source it already committed to
+    // instead of flapping every frame.
+    const snapPx = v => Math.round(v * dpr) / dpr;
+    const hysteresis = (e, key, score, off) => { const was = !!e[key]; const on = was ? score >= off : score >= 1; e[key] = on; return on; };
     for (const b of drawn) {
-      const i = b.i, e = imgs.get(i), w = b.w, h = b.h, m = b.m;
-      const X = b.x - w / 2, Y = b.y - h / 2;
+      const i = b.i, e = imgs.get(i), w0 = b.w, h0 = b.h, m = b.m;
+      const X0 = b.x - w0 / 2, Y0 = b.y - h0 / 2;
+      // snap the rect's two edges independently, then derive w/h -- keeps neighboring cells seamless (each
+      // shared edge snaps to the same device pixel from both sides) instead of snapping a center + a width,
+      // which can leave a 1px seam or overlap between a cell and the neighbor it's supposed to touch
+      const X = snapPx(X0), Y = snapPx(Y0), w = snapPx(X0 + w0) - X, h = snapPx(Y0 + h0) - Y;
       if (m > .3) { ctx.save(); ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = 28; ctx.shadowOffsetY = 8; ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); ctx.restore(); }
       else { ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); }
       if (b.d >= 14) wantImg.push([i, b.d > 92 || m > .3]);
@@ -838,12 +860,16 @@ function pmMount(el, s, F) {
         if (e.fadeT == null) e.fadeT = t;
         const age = t - e.fadeT, a = RM ? 1 : Math.min(1, age / 260); if (a < 1) fading = true;
         ctx.globalAlpha = a;
-        const big = (b.d > 92 || m > .02) && imgs.big(i);
+        // the original condition was (b.d > 92 || m > .02); normalize each side of the OR to 1.0 at its own
+        // boundary so a single hysteresis() call can gate both at once, with a shared ~25% dead zone below 1
+        const closeScore = Math.max(b.d / 92, m / .02);
+        const qualifies = hysteresis(e, "closeOn", closeScore, .75);
+        const big = qualifies && imgs.big(i);
         if (big) {   // from the full picture: crop (frame away), then cover the tile's own shape
           const sr = e.src, ta = h / w; let sw = sr.sw, sh = sr.sh;
           if (sh / sw > ta) sh = sw * ta; else sw = sh / ta;
           ctx.drawImage(big, sr.sx + (sr.sw - sw) / 2, sr.sy + (sr.sh - sh) / 2, sw, sh, X, Y, w, h);
-        } else if (m > .02) {   // still only the baked square: show it as the square crop at the middle size
+        } else if (qualifies) {   // still only the baked square: show it as the square crop at the middle size
           const s = Math.max(w, h); ctx.save(); ctx.beginPath(); ctx.rect(X, Y, w, h); ctx.clip(); ctx.drawImage(e.bm, b.x - s / 2, b.y - s / 2, s, s); ctx.restore();
         } else {   // the baked square, cover-cropped to the tile's shape
           const q = PM_BAKE, sw = w >= h ? q : q * w / h, sh = h >= w ? q : q * h / w;
