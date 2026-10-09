@@ -59,6 +59,9 @@ const HM_KEEP = { all: () => true, learned: it => isMine(hmCard(it)), learning: 
 // (David, 2026-10-08: magnification applies to either, so the Magnifier is no longer a Look: it's the Magnify slider
 // turned up, and an old "Magnifier" save becomes Bubbles with a strong Magnify)
 const HM_LOOKS = [["original", "Bubbles"], ["honeycomb", "Honeycomb"]];
+// the "Paintings" row's icon (Home's right-corner menu, js/home.js doMenu): a small framed picture, matching the
+// stroke style of every other menu-row glyph there (js/core.js sv())
+const HM_ICON_PAINTINGS = sv('<rect x="3" y="4.5" width="18" height="14" rx="1.6"/><path d="M3 15l5-5 4 4 3.5-4L21 15"/><circle cx="8" cy="9" r="1.4"/>', 24);
 // ---- the Arrange sheet's pictures (David, 2026-10-08: "the previews need to be simple icon versions"): one flat,
 // iconic diagram per arrangement, same 64 px grid, same dot size, a fixed calm palette (never the live colors, which
 // read as noise at this size). Short one-line labels; the full title and its line show under the strip. ----------
@@ -953,6 +956,10 @@ function hmHome() {
       typeof fvPickStart === "function" && { id: "fav", t: "Favorites", n: "Colors you love", art: ic(FV_HEART), attr: 'id="hmFav"' },
       { id: "search", t: "Search", n: "A color, a hex, a painter, a decade", art: ic(ICON.search), attr: "data-do-search" },
       { id: "colors", t: "Colors & Arrange", n: `${hlAll ? "Every name" : hmViewLabel()} · ${hmArrLabel()}`, art: dots(sample), attr: "data-do-colors" },
+      // "Colors | Paintings" (David, 2026-10-09: "it should be more prominent... instead of colors you switch to
+      // paintings"): the same floor, the archive's paintings instead of names, laid out by palette likeness
+      // (js/paintmap.js, through the honeycomb's own fisheye). One tap; S.hm.mode remembers it (js/core.js hmGoFloor).
+      { id: "paintings", t: "Paintings", n: "23,778 paintings, laid out by color", art: ic(HM_ICON_PAINTINGS), attr: "data-do-paintings" },
     ].filter(Boolean);
     const n = rows.length;
     const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-r";
@@ -979,6 +986,7 @@ function hmHome() {
       fav: () => fvPickStart(el, ctrl),
       search: () => openSearch(),
       colors: () => chooser(S.hm.chooserTab === "arrange" ? "arrange" : "colors"),   // Colors & Arrange, one sheet, last tab remembered
+      paintings: () => { S.hm.mode = "paintings"; save(); if (typeof pmGo === "function") pmGo("arr=color"); },
     };
     stem.querySelectorAll("[data-do]").forEach(b => b.onclick = () => { buzz(8); closeStem(true); acts[b.dataset.do](); });
   }

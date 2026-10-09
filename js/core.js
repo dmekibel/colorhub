@@ -488,9 +488,15 @@ function morphFrom(el) {
   PENDING_MORPH = { r, bg: cs.backgroundColor, radius: cs.borderRadius, img, at: performance.now() };
 }
 document.addEventListener("click", e => { const t = e.target.closest && e.target.closest(MORPH_TRIGGER); if (t && app.contains(t)) morphFrom(t); }, true);
+// "Colors | Paintings" (David, 2026-10-09): one tap, remembered. S.hm.mode persists which the floor shows; the
+// many internal hmHome() calls (favoriting, color-set filters, practice flows, …) all need the honeycomb's own
+// setup as a side effect, so the remembered mode is only honored at the two places a person deliberately taps
+// "take me to the floor" -- the brand logo and the Rooms corner's Home bubble (roomToFloor, below) -- never inside
+// hmHome() itself.
+const hmGoFloor = () => { if (typeof S !== "undefined" && S.hm && S.hm.mode === "paintings" && typeof pmGo === "function") pmGo("arr=color"); else if (typeof hmHome === "function") hmHome(); };
 // The brand button on every tab's header (tabHead, above) is the one consistent way back to the honeycomb
 // home (js/home.js). Delegated here, not wired per screen, so it works from Train, Explore and Studio alike.
-document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-hm-brand]"); if (b && app.contains(b) && typeof hmHome === "function") hmHome(); });
+document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-hm-brand]"); if (b && app.contains(b)) hmGoFloor(); });
 function runMorph(root) {
   const m = PENDING_MORPH; PENDING_MORPH = null;
   // only right after the tap that asked for it, so a stale chip never flies into an unrelated screen
@@ -825,8 +831,8 @@ function shrinkTo(root, targetEl, after) {
 // target — e.g. a swipe-down or a tap on the floor-peek strip), then the floor takes over.
 function roomToFloor(targetEl) {
   const cur = document.querySelector(".room-sheet"), corner = document.querySelector("[data-rooms-corner]");
-  if (cur) shrinkTo(cur, targetEl && targetEl.isConnected ? targetEl : corner, () => hmHome());
-  else hmHome();
+  if (cur) shrinkTo(cur, targetEl && targetEl.isConnected ? targetEl : corner, () => hmGoFloor());
+  else hmGoFloor();
 }
 // Back gesture / browser back: close a sheet or panel first; otherwise press the screen's own back or close
 // button (so each screen keeps its own idea of "back"); with none, return to the current tab's home.
@@ -912,7 +918,20 @@ function sheet(html, opts = {}) {
   // viewport split right as a new fixed-position sheet is inserted, so a stale --vb understates the real strip.
   // Refresh it synchronously on every open -- cheap (a few getBoundingClientRect calls) and makes the belt-and-
   // braces box-shadow below (css/menus2.css .sheet) sized off the true, current gap.
-  if (typeof vbFix === "function") try { vbFix(); } catch (e) {}
+  // David, 2026-10-09 ("panning in the map gets stuck now"): this call was unconditional, so it ran on EVERY
+  // sheet open, even on platforms where vbFix() can only ever be a no-op (standalone()&&isIOS() both have to hold
+  // for its own if-block to do anything -- everywhere else it was 3 lines re-setting --vb to the "0px" it already
+  // was). Bisected to this exact line with a scratch worktree per commit (git worktree add, each checked out at
+  // a candidate and its parent) and a scripted pointerdown/pointermove*N/pointerup test on the canvas: open the
+  // Colors sheet, close it, and a pan that worked before this line was added (js/core.js bfeff870) stopped
+  // moving the view at all after -- the honeycomb's own pan math (P in js/honey.js) kept computing a correct new
+  // position every frame, but the canvas never drew it, pointing at the redraw loop (kick()/RAF, gated on an
+  // IntersectionObserver-driven `visible` flag) rather than the pan math itself; the exact browser-internal
+  // trigger wasn't pinned down further given how reliably gating the call fixed it. Skipping the call entirely
+  // when it would have been a no-op (gating it behind the same standalone()&&isIOS() check its own body already
+  // requires) removes whatever this was triggering everywhere it was never doing real work in the first place,
+  // while keeping the original black-bar fix for the one platform it's actually for.
+  if (typeof vbFix === "function" && typeof standalone === "function" && typeof isIOS === "function" && standalone() && isIOS()) try { vbFix(); } catch (e) {}
   const doLock = opts.lock !== false;
   const scrim = document.createElement("div"), sh = document.createElement("div");
   scrim.className = "scrim"; sh.className = "sheet"; sh.setAttribute("role", "dialog");

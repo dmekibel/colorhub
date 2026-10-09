@@ -588,6 +588,63 @@ scenario("home", "the ordinary pinch-out floor lets a finite layout zoom out to 
 // fool JS reads, not the real fixed-position containing block a device's actual shorter viewport changes).
 // Kept as a permanent regression guard for the part that IS testable here: nothing invisible should ever sit
 // over the map and block it after a sheet closes, from any close path.
+//
+// 2026-10-09, second occurrence: this DID happen in plain headless Chrome after all -- js/core.js sheet()'s
+// unconditional vbFix() call (bfeff870, the black-bar fix two commits before this one) desynced the map's own
+// redraw loop after a sheet closed. The pan() check below missed it the first time because it compared
+// HM_CTRL._settle()'s raw [P,Z] numbers, and _settle() itself forces a draw() -- so it was testing "does the pan
+// math update P" (it did; that was never broken) rather than "does a real pan actually repaint the canvas"
+// (it didn't). Rewritten to sample actual canvas pixels before/after, the same way the bisect that found the
+// real bug did (a scratch worktree per commit, git worktree add).
+// Three sample points, not one: a single fixed point can coincidentally read the same color before and after a
+// REAL pan (it lands on a stable background patch, or -- at the pinch-out floor, or two arrangement changes deep
+// in the same session -- on a spot two different layouts both happen to tint alike), which both the first draft
+// of this check and the pre-existing "nothing blocks the map" scenario below hit as false failures. The max
+// across three points well apart is robust to that while staying just as sensitive to the real bug (nothing
+// moves ANYWHERE).
+const panMoved = async (t, note) => {
+  const r = t.$("canvas").getBoundingClientRect();
+  const cv = t.$("canvas");
+  const pts = [[r.width * .3, r.height * .4], [r.width * .5, Math.min(r.height * .7, r.height - 20)], [r.width * .7, r.height * .5]];
+  const before = pts.map(([x, y]) => H.canvasSig(cv, x, y, 8));
+  const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 61, pointerType: "touch", isPrimary: true, view: t.w });
+  const x0 = r.left + r.width / 2, y0 = r.top + Math.min(r.height * .7, r.height - 20);
+  cv.dispatchEvent(mk("pointerdown", x0, y0));
+  for (let i = 1; i <= 8; i++) cv.dispatchEvent(mk("pointermove", x0, y0 - i * 22));
+  cv.dispatchEvent(mk("pointerup", x0, y0 - 176));
+  await t.sleep(250);
+  const after = pts.map(([x, y]) => H.canvasSig(cv, x, y, 8));
+  const dists = pts.map((_, i) => H.dist(before[i], after[i])), maxD = Math.max(...dists);
+  t.expect(maxD > 8, `a pan did not move the map${note ? ` (${note})` : ""} (best of ${dists.map(d => d.toFixed(1)).join(", ")}, wanted > 8)`);
+};
+scenario("home", "a real pan actually repaints the canvas, in several states: plain, after the sheet, after Close with the pill showing", async t => {
+  await H.homeReady(t);
+  await panMoved(t, "plain, fresh Home");
+  // after opening and closing the Colors/Arrange sheet (the exact regression: js/core.js sheet()'s vbFix() call desynced the redraw loop)
+  await H.sheet(t, "colors");
+  await t.click("[data-sheet-close]", { wait: 600 });
+  await t.waitFor(() => !t.$(".sheet"), 3000, "the sheet to close");
+  await panMoved(t, "after the Colors/Arrange sheet");
+  // after Close from a page, with the "Back to…" pill showing (js/trail.js) -- a different map-draw path than a
+  // plain Home open. The pill only offers a stash worth two or more steps (TLR.toPainter below, the same chain
+  // the trail group's own pill scenarios build), not a single hop.
+  await TLR.toPainter(t);
+  await t.click("#app .screen [data-tl-exit]", { wait: 900 });
+  await t.waitFor(".hm canvas", 10000, "the map after Close");
+  await t.waitFor(".tl-recent-pill.in", 4000, "the \"Back to…\" pill");
+  await panMoved(t, "after Close, with the pill showing");
+});
+// at the ordinary pinch-out floor (David's own "stuck" report was after zooming around) -- its own fresh Home
+// rather than chained onto the states above: a finite layout that's already zoomed out to fill the screen can
+// legitimately rubber-band a short drag close to zero in some *specific* direction (nowhere left to reveal), so
+// this needs a clean baseline to tell "rubber-banded" apart from "actually stuck" rather than inheriting whatever
+// pan position a long prior sequence left behind.
+scenario("home", "a real pan still repaints the canvas at the ordinary pinch-out floor", async t => {
+  await H.homeReady(t);
+  t.ev(`HM_CTRL.zoom(HM_CTRL.zoomFloor(), false)`);
+  await t.sleep(200);
+  await panMoved(t, "at the zoom floor");
+});
 scenario("home", "after closing the Colors/Arrange sheet, nothing blocks the map and panning still works", async t => {
   await H.homeReady(t);
   const grid = () => {
@@ -600,18 +657,6 @@ scenario("home", "after closing the Colors/Arrange sheet, nothing blocks the map
       if (!ok) bad.push({ x: Math.round(x), y: Math.round(y), top: top ? top.tagName.toLowerCase() + "." + String(top.className).split(" ").join(".") : "none" });
     }
     return bad;
-  };
-  const pan = async () => {
-    const r = t.$("canvas").getBoundingClientRect();
-    const before = t.ev("HM_CTRL._settle()");
-    const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 9, pointerType: "touch", isPrimary: true, view: t.w });
-    const cv = t.$("canvas"), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-    cv.dispatchEvent(mk("pointerdown", cx, cy));
-    cv.dispatchEvent(mk("pointermove", cx - 80, cy - 40));
-    cv.dispatchEvent(mk("pointerup", cx - 80, cy - 40));
-    await t.sleep(200);
-    const after = t.ev("HM_CTRL._settle()");
-    return Math.hypot(after[0] - before[0], after[1] - before[1]) > 1e-4;
   };
   const closers = [
     ["the X button", async () => t.click("[data-sheet-close]", { wait: 600 })],
@@ -633,7 +678,7 @@ scenario("home", "after closing the Colors/Arrange sheet, nothing blocks the map
       await t.sleep(200);
       const bad = grid();
       t.expect(bad.length === 0, `after closing with ${how} (${arr}): blocked at ${JSON.stringify(bad)}`);
-      t.expect(await pan(), `after closing with ${how} (${arr}): a pan on the map did not move it`);
+      await panMoved(t, `closed with ${how}, ${arr}`);
     }
   }
 });
@@ -1037,6 +1082,41 @@ scenario("home", "Rooms corner opens the stem; each room bubble navigates", asyn
   await t.waitFor('.rooms-stem .rm-bubble[data-room="home"]', 4000, "Home in the stem");
   await t.click('.rooms-stem .rm-bubble[data-room="home"]', { wait: 900 });
   await t.waitFor("canvas", 6000, "the honeycomb after Rooms > Home");
+});
+
+// "Colors | Paintings" (David, 2026-10-09: "it should be more prominent... instead of colors you switch to
+// paintings"): a one-tap, remembered switch between the honeycomb of names and the archive's paintings, laid out
+// by palette likeness (js/paintmap.js). The switch itself lives in each screen's own right-corner menu (js/home.js
+// doMenu's "Paintings" row; js/paintmap.js's own arc's "Colors" row) -- "remembered" is deliberately narrow
+// (js/core.js hmGoFloor): only the two places a person taps to deliberately return to the floor (the brand logo,
+// the Rooms corner's Home bubble) honor S.hm.mode, not the many internal hmHome() calls that need the honeycomb's
+// own setup as a side effect (favoriting, color-set filters, practice flows...).
+scenario("home", "Colors | Paintings: the corner-menu switch is bidirectional and remembered at the floor's own doors", async t => {
+  await H.homeReady(t);
+  await H.menu(t, "paintings");
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the painting map to open from Home's menu");
+  t.expect(t.ev("S.hm.mode") === "paintings", "S.hm.mode was not set to paintings");
+  // back the other way: the painting map's own corner arc gets a "Colors" row. The map's own layout can finish
+  // well under 380ms (only its thumbnails are slow), so right after Home's "Paintings" tap closed Home's own
+  // stem (js/core.js STEM_CLOSED_AT/stemJustClosed, a 380ms real-time ghost-click guard shared by both arcs) a
+  // click here can still be inside that window -- a real sleep past it first, same as a person's own next tap would be.
+  await t.sleep(450);
+  await t.click(".pmx-do", { wait: 300 });
+  await t.waitFor('.pmx-stem [data-pmdo="colors"]', 4000, "the Colors row in the painting map's own arc");
+  await t.click('.pmx-stem [data-pmdo="colors"]', { force: true, wait: 900 });
+  await t.waitFor("canvas", 8000, "the honeycomb after Colors");
+  t.expect(t.ev("S.hm.mode") === "colors", "S.hm.mode was not set back to colors");
+  // remembered: set paintings mode, leave the floor for another room, then use the Rooms corner's Home bubble
+  // (not Home's own menu, which only exists once you're already there) -- the real "come back later" path
+  t.ev('S.hm.mode = "paintings"; save();');
+  // a real address, not #shot=learn (which builds its own demo state and ignores localStorage) -- keepState so
+  // the save just written (S.hm.mode) actually carries over to the fresh page
+  await t.open("#/today", { settle: 500, keepState: true });
+  await t.click("[data-rooms-corner]");
+  await t.waitFor('.rooms-stem .rm-bubble[data-room="home"]', 4000, "Home in the stem");
+  await t.click('.rooms-stem .rm-bubble[data-room="home"]', { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "Rooms > Home to remember paintings mode");
+  t.ev('S.hm.mode = "colors"; save();');   // leave state clean for later scenarios
 });
 
 // ================================================================== ROOMS
@@ -3005,6 +3085,27 @@ scenario("paintings", "the action row is compact (Keep/Share/On the map) and Fin
   await t.click(more.querySelector("summary"), { wait: 400 });
   t.expect(/Value key/.test(t.text("[data-awan]")), "opening More doesn't reveal the Analysis tiles");
 });
+// David, 2026-10-09 ("it should be more prominent"): a prominent "Similar paintings on the map" button now sits
+// right by the palette (js/gallery.js .gl-pmap-top), not only buried below Findings, plus a first-run hint the
+// first time anyone opens a painting, once ever (js/gallery.js glPage, S.pmMapHintSeen).
+scenario("paintings", "a prominent Similar-paintings-on-the-map button sits by the palette, with a once-ever first-run hint", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  const top = t.$(".gl-pmap-top");
+  t.expect(top, "no prominent map button near the palette");
+  t.expect(/Similar paintings on the map/.test(t.text(top)), `the prominent button's label is wrong: "${t.text(top)}"`);
+  t.expect(t.$(".gl-pmap:not(.gl-pmap-top)"), "the original bottom-of-page button is gone (it should stay, as a safety net)");
+  const hint = t.$(".gl-pmap-hint");
+  t.expect(hint, "no first-run hint on a fresh save");
+  t.expect(t.ev("S.pmMapHintSeen") === 1, "S.pmMapHintSeen was not set as soon as the hint showed");
+  // dismiss: any tap, anywhere, same pattern as the honeycomb's own first-run hint (js/learn.js lrMapHint)
+  t.d.body.dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true }));
+  await t.sleep(400);
+  t.expect(!t.$(".gl-pmap-hint"), "the first-run hint did not dismiss on tap");
+  // a second painting page, same session: never shows it again
+  await t.open("#/gallery/13", { settle: 800, keepState: true });
+  t.expect(t.$(".gl-pmap-top"), "the prominent map button is missing on a second painting");
+  t.expect(!t.$(".gl-pmap-hint"), "the first-run hint reappeared on a later painting");
+});
 // David, 2026-10-09: a Commons painting's own Special:FilePath URL can't be read with crossorigin (verified by
 // hand: its redirect chain never sends Access-Control-Allow-Origin on the intermediate hops), so
 // glCommonsResolve() asks the MediaWiki API instead, which answers with CORS directly and hands back an already
@@ -4236,6 +4337,22 @@ scenario("paintmap", "arrange by time and painter and around the middle one then
   await t.click(".pmx-sheet [data-pmgo]", { force: true, wait: 900 });
   await t.waitFor(() => Math.abs(t.w.PM_CTRL.count - want) <= 1, 8000, "the map to show the filtered paintings");
   t.expect(/y0=\d+/.test(t.w.location.hash), `the address doesn't carry the years: ${t.w.location.hash}`);
+});
+// David's screenshot, 2026-10-09: "zooming out doesn't load the stuff" -- only a ~160-cell central disc ever got a
+// thumbnail, however long you waited, because the per-frame candidate list handed to pmImages().want() was capped
+// at 160 BEFORE its own concurrency limit (PM_FLIGHT, 14 concurrent) ever got a say -- everything past the nearest
+// 160 cells was silently never even requested. Fixed by raising the cap and lowering the load threshold. A live
+// scenario that actually waits for thumbnails to stream in turned out to be unworkable here -- real thumbnail
+// fetches (local files and Commons URLs both) don't resolve inside this harness's virtual-time iframe, and a faked
+// window.Image still needs a route change that a #shot= session's own SHOT flag silently swallows (manually
+// verified instead: zooming to z=0.45 went from the old code's ~160 loaded to 582 and climbing). This is the next
+// best thing: a static guard on the two numbers themselves, so neither regresses back silently.
+scenario("paintmap", "the thumbnail-streaming cap and load threshold haven't regressed back to the old ~160-cell ceiling", async t => {
+  const src = await fetch("/js/paintmap.js").then(r => r.text());
+  const cap = +(src.match(/wantImg\.reverse\(\)\.slice\(0,\s*(\d+)\)/) || [])[1];
+  const loadAt = +(src.match(/if\s*\(b\.d\s*>=\s*(\d+)\)\s*wantImg\.push/) || [])[1];
+  t.expect(cap >= 1000, `the per-frame candidate cap is ${cap || "(not found)"}, back near the old 160 -- it should comfortably exceed anything a phone screen holds`);
+  t.expect(loadAt > 0 && loadAt <= 16, `the thumbnail load threshold is ${loadAt || "(not found)"}px, not David's ~14px`);
 });
 scenario("favs", "a painting's heart (now in the top bar) and a double-tap on the picture both keep it; the shelf sorts favorites into kinds with counts, remembered", async t => {
   await t.open("#/gallery/8136", { settle: 800 });
