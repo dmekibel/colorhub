@@ -457,6 +457,11 @@ html.sheet-open body{position:fixed;left:0;right:0;overflow:hidden}
 .z-page i,.p-hero div{flex:1;background:var(--c);display:flex;align-items:flex-end;padding:8px;font-style:normal}
 .z-page span,.p-hero span{font:italic 400 15px/1.25 var(--serif);letter-spacing:0;text-transform:none}
 .z-page span[data-ink="dark"],.p-hero div[data-ink="dark"] span{color:rgba(20,19,17,.8)}.z-page span[data-ink="light"],.p-hero div[data-ink="light"] span{color:rgba(255,255,255,.9)}
+/* a wiki page's real photo as its hero, in front of a flat swatch (js/explore.js wikiPage, PAGES-AUDIT.md plan item 4) */
+.p-hero-photo .fig{margin-top:0}
+.p-hero-photo .fig img{border-radius:var(--r-1);max-height:48dvh}
+.p-hero-sw{margin-top:14px}
+.p-hero-sw .pchip{font-size:17px}
 .z-sum{font:400 22px/1.3 var(--serif);color:#E2DDD1;margin-top:18px;text-wrap:pretty}
 .z-btns{margin-top:22px}
 .codes{display:grid;grid-template-columns:repeat(4,1fr);margin-top:2px;border-bottom:1px solid var(--rule)}

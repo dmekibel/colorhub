@@ -148,6 +148,7 @@ function lkOpen(id, opts = {}) {
     </section>` : ""}
     ${related.length ? `<section class="lkx-sec"><h3>Related looks</h3><div class="lkx-strip lkx-rel">${related.map(r => `<button class="lkx-relc" data-lk="${esc(r.id)}">${lkStripes(r.pals[0].c)}<b>${esc(r.name)}</b><small>${esc(r.era)}</small></button>`).join("")}</div></section>` : ""}
     <div class="lkx-acts"><button class="btn ghost" data-webfam="${esc(look.id)}">See its family tree ${ICON.arrow}</button></div>
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "look:" + look.id, title: look.name }) : ""}
     <p class="fine lkx-credit">${look.aw ? `See also: <a href="https://aesthetics.fandom.com/wiki/${esc(look.aw)}" target="_blank" rel="noopener">Aesthetics Wiki</a>. ` : ""}Descriptions are ColorHub's own. Palettes are chosen by ColorHub and named from the ColorHub library; hex values are screen approximations.${imgs.length ? " Photos: Wikimedia Commons, public domain or CC0." : ""}</p>
   `, "article lkx-page");
   const draw = () => {

@@ -235,6 +235,7 @@ function phpDraw(el, slug) {
     ${leastTypical && leastTypical.id !== (typical || {}).id ? `<div class="sec-head"><b>Least typical</b><span>furthest from the average</span></div>
       <div class="ph-single">${pin(leastTypical).html}</div>` : ""}
     <section class="srcs"><h3>Sources</h3><ul><li>Colors measured by ColorHub from Wikimedia Commons' own scans (${s.n} photographs by ${esc(s.name)} in the archive); every figure is as scanned, screen color only.</li></ul></section>
+    ${typeof linksHereHTML === "function" ? linksHereHTML({ id: "photographer:" + slug, title: s.name }) : ""}
   `;
   const grid = body.querySelector("#phpGrid"); if (grid) grid.innerHTML = masonry(photos.map(n => pin(n)));
   body.addEventListener("click", e => {
@@ -242,4 +243,5 @@ function phpDraw(el, slug) {
     const p = e.target.closest("[data-pin]"); if (p) { const n = photographyNodeById(p.dataset.pin); if (n) paintingPage(n); return; }
     const pr = e.target.closest("[data-phr]"); if (pr) return phProcessSheet(pr.dataset.phr);
   });
+  if (typeof wireLinks === "function") wireLinks(body);
 }
