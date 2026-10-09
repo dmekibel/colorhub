@@ -1,109 +1,112 @@
 {
- "slug": "olive-mud",
- "name": "Olive mud",
- "hex": "#6C541E",
- "names": [
-  "Olive mud"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Olive mud is a dark, brownish olive, closer to wet earth than to the fruit, and it shares its exact screen color with a second library name, Field Drab.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Earth, not fruit",
-   "body": "The library files Olive mud through the ISCC-NBS 1955 lists, which classify it as a moderate olive brown [1]. The name joins [[olive]] to [[mud]], landing on the brown, low-chroma end of the olive family rather than the green most people picture [1]. At this hex our library also records a second name, Field Drab, at an identical value, two different everyday words for the same dull brown [1].\n\nThe nearest distinct neighbor is [[acanthe|Acanthe]], about 2.6 units away by CIEDE2000, with [[mud-brown|Mud Brown]] close behind it [1]. In LCH terms it measures lightness 37, chroma 34, hue 84 degrees, Munsell 3.2Y 3.7/5.1 [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 2,155 of 23,781 paintings, 9.06 percent, as photographed [2]. It is most over-represented in the 1440s, in 11 of that decade's 58 paintings, about twice the expected rate [2]. Fritz Thomsen is its most devoted painter here, carrying it in 11 of his 18 works, nearly 7 times the baseline [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "olive + mud; shares its exact screen color with Field Drab",
-   "first_recorded": "undocumented in our sources beyond the ISCC-NBS 1955 lists",
-   "source": "ColorHub library; ISCC-NBS 1955"
-  },
-  "aka": [],
-  "siblings": [
-   "olive",
-   "mud"
+  "slug": "olive-mud",
+  "name": "Olive mud",
+  "hex": "#6C541E",
+  "names": [
+    "Olive mud",
+    "Field Drab"
   ],
-  "parent": null,
-  "children": [
-   "acanthe"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Olive mud is a dark, brownish olive, closer to wet earth than to the fruit, and it shares its exact screen color with a second library name, Field Drab.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Earth, not fruit",
+      "body": "The library files Olive mud through the ISCC-NBS 1955 lists, which classify it as a moderate olive brown [1]. The name joins [[olive]] to [[mud]], landing on the brown, low-chroma end of the olive family rather than the green most people picture [1]. At this hex our library also records a second name, Field Drab, at an identical value, two different everyday words for the same dull brown [1].\n\nThe nearest distinct neighbor is [[acanthe|Acanthe]], about 2.6 units away by CIEDE2000, with [[mud-brown|Mud Brown]] close behind it [1]. In LCH terms it measures lightness 37, chroma 34, hue 84 degrees, Munsell 3.2Y 3.7/5.1 [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 2,155 of 23,781 paintings, 9.06 percent, as photographed [2]. It is most over-represented in the 1440s, in 11 of that decade's 58 paintings, about twice the expected rate [2]. Fritz Thomsen is its most devoted painter here, carrying it in 11 of his 18 works, nearly 7 times the baseline [2]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [2]."
+    }
   ],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 2155,
-  "measured": {
-   "lch": [
-    37,
-    34,
-    84
-   ],
-   "nearest": [
-    [
-     "Acanthe",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "olive + mud; shares its exact screen color with Field Drab",
+      "first_recorded": "undocumented in our sources beyond the ISCC-NBS 1955 lists",
+      "source": "ColorHub library; ISCC-NBS 1955"
+    },
+    "aka": [
+      "Field Drab (wiki+iscc-nbs)"
+    ],
+    "siblings": [
+      "olive",
+      "mud"
+    ],
+    "parent": null,
+    "children": [
+      "acanthe"
+    ],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 2155,
+    "measured": {
+      "lch": [
+        37,
+        34,
+        84
+      ],
+      "nearest": [
+        [
+          "Acanthe",
+          2.6
+        ]
+      ]
+    },
+    "painter": "Fritz Thomsen"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955; near-duplicate match Field Drab, ΔE 0.0; nearest distinct match Acanthe, ΔE 2.6",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Olive mud shares its exact screen color with which other library name?",
+      "choices": [
+        "Field Drab",
+        "Acanthe",
+        "Old Moss Green",
+        "Olive-Buff"
+      ],
+      "answer": "Field Drab",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Olive mud reads as a bright green.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Olive mud and Field Drab are two names in our library for the exact same dull brown."
+  ],
+  "words": 206,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "painter": "Fritz Thomsen"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955; near-duplicate match Field Drab, ΔE 0.0; nearest distinct match Acanthe, ΔE 2.6",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
   }
- ],
- "questions": [
-  {
-   "q": "Olive mud shares its exact screen color with which other library name?",
-   "choices": [
-    "Field Drab",
-    "Acanthe",
-    "Old Moss Green",
-    "Olive-Buff"
-   ],
-   "answer": "Field Drab",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Olive mud reads as a bright green.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Olive mud and Field Drab are two names in our library for the exact same dull brown."
- ],
- "words": 206,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

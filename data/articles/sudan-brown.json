@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Ridgway's plate III",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue on plate III, hue 15, tone k, and the ISCC-NBS circular of 1955 cites the same block, classing it a strong brown, Munsell notation 7.3YR 4.5/6.7 [1]. Maerz and Paul's 1930 dictionary records the same name on plate 14, swatch L12, also dated to 1912, confirming Ridgway as the earliest source among the systems our library tracks [1]. The books read give no further story for the name beyond the place it invokes, and anything more specific is undocumented here [1].\n\nThe nearest named colors on file are [[gallstone-yellow]], [[toffee]], [[amber-brown]] and [[ochre-brown]], at 3.2, 3.2, 3.6 and 3.7 ΔE [1]."
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue on plate III, hue 15, tone k, and the ISCC-NBS circular of 1955 cites the same block, classing it a strong brown, Munsell notation 7.3YR 4.5/6.7 [1]. Maerz and Paul's 1930 dictionary records the same name on plate 14, swatch L12, also dated to 1912, confirming Ridgway as the earliest source among the systems our library tracks [1]. The books read give no further story for the name beyond the place it invokes, and anything more specific is undocumented here [1].\n\nThe nearest named colors on file are [[toffee]], [[toffee]], [[amber-brown]] and [[ochre-brown]], at 3.2, 3.2, 3.6 and 3.7 ΔE [1]."
   },
   {
    "id": "field",
@@ -111,7 +111,7 @@
  "openers": [
   "Sudan Brown turns up in nearly one painting in ten in our archive, the most common color in this entire batch."
  ],
- "words": 337,
+ "words": 336,
  "status": "checked",
  "checked": {
   "by": "checker",

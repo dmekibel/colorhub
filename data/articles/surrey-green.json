@@ -1,122 +1,122 @@
 {
- "slug": "surrey-green",
- "name": "Surrey Green",
- "hex": "#8D9C8A",
- "names": [
-  "Surrey Green"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Surrey Green is a greyed yellow-green from the Maerz and Paul color dictionary, and in our painting archive it shows up more often than most named colors.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dictionary green",
-   "body": "Maerz and Paul list Surrey Green at #8D9C8A, first recorded around 1844, on plate 20 A4 of their 1930 dictionary [1]. The same plate carries a related, later-recorded tone called Aloes, from 1882 [1]. The ISCC-NBS system, built from that dictionary in 1955, files the hue's nearest block as a grayish yellow green, about 5 units away by that era's color-difference math [1].\n\nThe nearest named colors on file are [[greenish-sage]] and [[grey-celadon]], at Surrey Green sits with the Neutrals rather than the Greens here, because its yellow-green cast is faint enough to look grey-green on screen [1]. Neither dictionary explains where the county-sounding name comes from, so its origin stays undocumented [1].\n\nLike [[titmouse-blue]], another greyed standard name in our Neutrals family, Surrey Green reads as grey first and a hue second [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this hue, as photographed, in 576 of 23,781 paintings (2.42 percent), more common than 79 percent of the named colors we track [2]. It peaks in the 1900s, in 44 of 1,674 paintings, at 1.8 times the expected rate for paintings from that century [2]. Inside a painting it most often turns up as a hidden color, in the darkest part of the canvas, in 39 percent of its 372 occurrences [2].\n\n[[painter:alfred-sisley|Alfred Sisley]] is its most devoted painter here, carrying it in 6 of 50 of his works, about 4.6 times what his home museums would predict [2]. The earliest matching painting in our archive is dated 1399, 531 years before Maerz and Paul wrote the name down in 1930; that gap says the hue is old, not that anyone called it Surrey Green that early, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases more than chance with [[slate-olive]] and [[corydalis-green]] [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "c. 1844, per Maerz and Paul (1930)",
-   "source": "Maerz and Paul, A Dictionary of Color"
-  },
-  "aka": [],
-  "siblings": [
-   "greenish-sage",
-   "grey-celadon",
-   "morning-blue",
-   "leek-green"
+  "slug": "surrey-green",
+  "name": "Surrey Green",
+  "hex": "#8D9C8A",
+  "names": [
+    "Surrey Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 576,
-  "pct": 2.42,
-  "rank_pct": 79,
-  "measured": {
-   "lch": [
-    62.7,
-    11.7,
-    139.3
-   ],
-   "nearest": [
-    [
-     "Greenish sage",
-     4.1
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Surrey Green is a greyed yellow-green from the Maerz and Paul color dictionary, and in our painting archive it shows up more often than most named colors.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dictionary green",
+      "body": "Maerz and Paul list Surrey Green at #8D9C8A, first recorded around 1844, on plate 20 A4 of their 1930 dictionary [1]. The same plate carries a related, later-recorded tone called Aloes, from 1882 [1]. The ISCC-NBS system, built from that dictionary in 1955, files the hue's nearest block as a grayish yellow green, about 5 units away by that era's color-difference math [1].\n\nThe nearest named colors on file are [[grey-celadon]] and [[grey-celadon]], at Surrey Green sits with the Neutrals rather than the Greens here, because its yellow-green cast is faint enough to look grey-green on screen [1]. Neither dictionary explains where the county-sounding name comes from, so its origin stays undocumented [1].\n\nLike [[titmouse-blue]], another greyed standard name in our Neutrals family, Surrey Green reads as grey first and a hue second [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this hue, as photographed, in 576 of 23,781 paintings (2.42 percent), more common than 79 percent of the named colors we track [2]. It peaks in the 1900s, in 44 of 1,674 paintings, at 1.8 times the expected rate for paintings from that century [2]. Inside a painting it most often turns up as a hidden color, in the darkest part of the canvas, in 39 percent of its 372 occurrences [2].\n\n[[painter:alfred-sisley|Alfred Sisley]] is its most devoted painter here, carrying it in 6 of 50 of his works, about 4.6 times what his home museums would predict [2]. The earliest matching painting in our archive is dated 1399, 531 years before Maerz and Paul wrote the name down in 1930; that gap says the hue is old, not that anyone called it Surrey Green that early, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases more than chance with [[slate-olive]] and [[corydalis-green]] [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "c. 1844, per Maerz and Paul (1930)",
+      "source": "Maerz and Paul, A Dictionary of Color"
+    },
+    "aka": [],
+    "siblings": [
+      "greenish-sage",
+      "grey-celadon",
+      "morning-blue",
+      "leek-green"
     ],
-    [
-     "Grey celadon",
-     4.1
-    ],
-    [
-     "Morning Blue",
-     4.5
-    ],
-    [
-     "Leek Green",
-     4.5
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 576,
+    "pct": 2.42,
+    "rank_pct": 79,
+    "measured": {
+      "lch": [
+        62.7,
+        11.7,
+        139.3
+      ],
+      "nearest": [
+        [
+          "Greenish sage",
+          4.1
+        ],
+        [
+          "Grey celadon",
+          4.1
+        ],
+        [
+          "Morning Blue",
+          4.5
+        ],
+        [
+          "Leek Green",
+          4.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 20 A4-5; cited in ISCC-NBS Circular 553 (1955)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which 1930 dictionary first records Surrey Green?",
+      "choices": [
+        "Maerz and Paul",
+        "Ridgway",
+        "RAL",
+        "Crayola"
+      ],
+      "answer": "Maerz and Paul",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the books explain why Surrey Green is named after the English county.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Surrey Green turns up as a hidden, shadow-level color in nearly 4 of 10 paintings that carry it."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 20 A4-5; cited in ISCC-NBS Circular 553 (1955)",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which 1930 dictionary first records Surrey Green?",
-   "choices": [
-    "Maerz and Paul",
-    "Ridgway",
-    "RAL",
-    "Crayola"
-   ],
-   "answer": "Maerz and Paul",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the books explain why Surrey Green is named after the English county.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Surrey Green turns up as a hidden, shadow-level color in nearly 4 of 10 paintings that carry it."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "words": 324
+  "words": 324
 }

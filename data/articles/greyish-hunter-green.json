@@ -1,140 +1,140 @@
 {
- "slug": "greyish-hunter-green",
- "name": "Greyish hunter green",
- "hex": "#374231",
- "names": [
-  "Greyish hunter green"
- ],
- "tier": "traditional",
- "depth": "brief",
- "lede": "Chitosemidori, thousand-year green",
- "sections": [
-  {
-   "id": "name",
-   "title": "Greyish hunter green is a dark, muted green carried into our library from the Japanese traditional color Chitosemidori, \"thousand-year green,\" a name tied to the pine tree's evergreen symbolism, and it sits 12.4 units from the plain [[hunter-green]].",
-   "body": "Our library lists this color under the Japanese name Chitosemidori, written 千歳緑, glossed as \"thousand year old green\" [1]. *Chitose* (千歳) means a thousand years and *midori* (緑) means green; pine needles, which stay green through winter, carried this association with long life in Japanese design [1]. No book consulted independently confirms the pine link for this specific name, so it is stated here only as the plain meaning of the characters [1].\n\nThe swatch measures lightness 27, chroma 12 and hue 133 degrees, in the Greens family, dark and low in saturation, used chiefly in fashion and textile contexts [1]. The nearest named colors on file are [[nickle-green]], [[rifle-green]], [[insect-screen]] and [[vivid-gunmetal]], at 3.8, 3.9, 4.8 and 5 ΔE [1]. A lighter, cooler cousin in the Greens family is [[greenish-sage]] [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color within range of this swatch appears in 856 of the 23,781 paintings in our archive, about 3.6 percent, as photographed, most often as a shadow color [2]. The earliest dated match is a 1381 *Virgin and Child* by an unrecorded painter, a floor and not a first, since the archive's early centuries are thin [2]. Henri Rousseau carries it in 5 of 13 dated paintings, 10.7 times the archive's overall rate [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "千歳 (chitose), a thousand years, + 緑 (midori), green",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
-  },
-  "aka": [
-   "Chitosemidori",
-   "千歳緑"
+  "slug": "greyish-hunter-green",
+  "name": "Greyish hunter green",
+  "hex": "#374231",
+  "names": [
+    "Greyish hunter green"
   ],
-  "siblings": [
-   "nickle-green",
-   "rifle-green",
-   "insect-screen",
-   "vivid-gunmetal"
+  "tier": "traditional",
+  "depth": "brief",
+  "lede": "Chitosemidori, thousand-year green",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Greyish hunter green is a dark, muted green carried into our library from the Japanese traditional color Chitosemidori, \"thousand-year green,\" a name tied to the pine tree's evergreen symbolism, and it sits 12.4 units from the plain [[hunter-green]].",
+      "body": "Our library lists this color under the Japanese name Chitosemidori, written 千歳緑, glossed as \"thousand year old green\" [1]. *Chitose* (千歳) means a thousand years and *midori* (緑) means green; pine needles, which stay green through winter, carried this association with long life in Japanese design [1]. No book consulted independently confirms the pine link for this specific name, so it is stated here only as the plain meaning of the characters [1].\n\nThe swatch measures lightness 27, chroma 12 and hue 133 degrees, in the Greens family, dark and low in saturation, used chiefly in fashion and textile contexts [1]. The nearest named colors on file are [[nickle-green]], [[rifle-green]], [[insect-screen]] and [[vivid-gunmetal]], at 3.8, 3.9, 4.8 and 5 ΔE [1]. A lighter, cooler cousin in the Greens family is [[grey-celadon]] [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color within range of this swatch appears in 856 of the 23,781 paintings in our archive, about 3.6 percent, as photographed, most often as a shadow color [2]. The earliest dated match is a 1381 *Virgin and Child* by an unrecorded painter, a floor and not a first, since the archive's early centuries are thin [2]. Henri Rousseau carries it in 5 of 13 dated paintings, 10.7 times the archive's overall rate [2]."
+    }
   ],
-  "parent": "hunter-green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Chitosemidori (千歳緑), \"thousand year old green\""
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 856,
-  "first_seen": {
-   "year": 1381,
-   "painter": null
-  },
-  "painters": [
-   {
-    "name": "Henri Rousseau",
-    "n": 13,
-    "hits": 5,
-    "lift": 10.69
-   }
-  ],
-  "measured": {
-   "lch": [
-    27,
-    12,
-    133
-   ],
-   "nearest": [
-    [
-     "Nickle Green",
-     3.8
+  "aside": {
+    "origin": {
+      "named_after": "千歳 (chitose), a thousand years, + 緑 (midori), green",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+    },
+    "aka": [
+      "Chitosemidori",
+      "千歳緑"
+    ],
+    "siblings": [
+      "nickle-green",
+      "rifle-green",
+      "insect-screen",
+      "vivid-gunmetal"
+    ],
+    "parent": "hunter-green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Chitosemidori (千歳緑), \"thousand year old green\""
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does Chitosemidori literally mean?",
-   "choices": [
-    "Thousand-year green",
-    "Green bamboo",
-    "Sprouting onion green",
-    "Mossy stone"
-   ],
-   "answer": "Thousand-year green",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 856,
+    "first_seen": {
+      "year": 1381,
+      "painter": null
+    },
+    "painters": [
+      {
+        "name": "Henri Rousseau",
+        "n": 13,
+        "hits": 5,
+        "lift": 10.69
+      }
+    ],
+    "measured": {
+      "lch": [
+        27,
+        12,
+        133
+      ],
+      "nearest": [
+        [
+          "Nickle Green",
+          3.8
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: a book consulted for this project confirms a specific link between this name and pine trees.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which library color is a brighter, more saturated version of this same base hue?",
-   "choices": [
-    "Greenish hunter green",
-    "Greyish navy",
-    "Greyish tan",
-    "Faded Purple"
-   ],
-   "answer": "Greenish hunter green",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does Chitosemidori literally mean?",
+      "choices": [
+        "Thousand-year green",
+        "Green bamboo",
+        "Sprouting onion green",
+        "Mossy stone"
+      ],
+      "answer": "Thousand-year green",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: a book consulted for this project confirms a specific link between this name and pine trees.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which library color is a brighter, more saturated version of this same base hue?",
+      "choices": [
+        "Greenish hunter green",
+        "Greyish navy",
+        "Greyish tan",
+        "Faded Purple"
+      ],
+      "answer": "Greenish hunter green",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Greyish hunter green's Japanese name, chitosemidori, literally means \"thousand-year green,\" an association long carried by evergreen pine."
+  ],
+  "words": 211,
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-09",
+    "issues": [
+      "The pine/longevity association is the common gloss for chitose names generally, not confirmed for this swatch specifically by any book consulted; stated plainly as the characters' meaning only.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "openers": [
-  "Greyish hunter green's Japanese name, chitosemidori, literally means \"thousand-year green,\" an association long carried by evergreen pine."
- ],
- "words": 211,
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
-  "issues": [
-   "The pine/longevity association is the common gloss for chitose names generally, not confirmed for this swatch specifically by any book consulted; stated plainly as the characters' meaning only.",
-   "lint 2026-10-09"
-  ]
- }
 }

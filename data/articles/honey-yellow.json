@@ -22,7 +22,7 @@
   {
    "id": "syme",
    "title": "Syme's swatch and recipe",
-   "body": "Patrick Syme (1774 to 1845), an Edinburgh flower painter, did what the earlier lists could not: he painted a swatch for each name [2]. His first edition of 1814 had 108 colours, and the second, of 1821, had 110 [1][2]. He added a mineral, plant and animal example for most of them, and marked with [W] each name that appeared in Werner's lists [1][5].\n\nSyme's own description of honey yellow is a recipe: sulphur yellow mixed with chesnut brown [5]. His examples were the lower neck of a bird of paradise and the mineral fluor spar, now called fluorite [5][10]. Syme's other yellows lean on it as an ingredient, since his gallstone yellow is gamboge with a little Dutch orange and a minute proportion of honey yellow [5]. Next to it in the book are [[sulphur-yellow]], [[gallstone-yellow]], [[saffron-yellow]] and [[ochre-yellow]] [5].\n\nA modern edition, Patrick Baty's *Nature's Palette*, notes that Syme's swatches have faded and muted with age [1]. It also fills gaps with examples of its own, marked by an asterisk, and the pineapple fruit under honey yellow is one of these, not Syme's choice [5]."
+   "body": "Patrick Syme (1774 to 1845), an Edinburgh flower painter, did what the earlier lists could not: he painted a swatch for each name [2]. His first edition of 1814 had 108 colours, and the second, of 1821, had 110 [1][2]. He added a mineral, plant and animal example for most of them, and marked with [W] each name that appeared in Werner's lists [1][5].\n\nSyme's own description of honey yellow is a recipe: sulphur yellow mixed with chesnut brown [5]. His examples were the lower neck of a bird of paradise and the mineral fluor spar, now called fluorite [5][10]. Syme's other yellows lean on it as an ingredient, since his gallstone yellow is gamboge with a little Dutch orange and a minute proportion of honey yellow [5]. Next to it in the book are [[sulphur-yellow]], [[toffee]], [[saffron-yellow]] and [[ochre-yellow]] [5].\n\nA modern edition, Patrick Baty's *Nature's Palette*, notes that Syme's swatches have faded and muted with age [1]. It also fills gaps with examples of its own, marked by an asterisk, and the pineapple fruit under honey yellow is one of these, not Syme's choice [5]."
   },
   {
    "id": "darwin",
@@ -232,7 +232,7 @@
   "Honey yellow is entry 70 in Syme's 1821 colour book, defined as sulphur yellow mixed with chesnut brown.",
   "Charles Darwin recorded animal colours on the Beagle with the same book that names honey yellow."
  ],
- "words": 941,
+ "words": 940,
  "status": "checked",
  "checked": {
   "by": "checker",

@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A flower word, not the dye",
-   "body": "The library records Iris Mauve from Maerz and Paul's 1930 dictionary, plate 3 B 7, first recorded 1926 [1]. The nearest named colors on file are [[shell-pink]], [[pale-greyish-vinaceous]], [[tussore]] and [[almond]], at 2.6, 2.6, 3.3 and 3.7 ΔE [1]. In LCH terms it measures lightness 84, chroma 11, hue 66 degrees, the ISCC-NBS \"pale yellowish pink\" block, Munsell 5.6YR 8.3/2.0, [1]. 6, 2.6, 3.3 and 3.7 ΔE [1]."
+   "body": "The library records Iris Mauve from Maerz and Paul's 1930 dictionary, plate 3 B 7, first recorded 1926 [1]. The nearest named colors on file are [[shell-pink]], [[shell-pink]], [[tussore]] and [[almond]], at 2.6, 2.6, 3.3 and 3.7 ΔE [1]. In LCH terms it measures lightness 84, chroma 11, hue 66 degrees, the ISCC-NBS \"pale yellowish pink\" block, Munsell 5.6YR 8.3/2.0, [1]. 6, 2.6, 3.3 and 3.7 ΔE [1]."
   },
   {
    "id": "field",
@@ -100,7 +100,7 @@
  "openers": [
   "Despite the name, Iris Mauve is a pale pink, not a purple."
  ],
- "words": 240,
+ "words": 239,
  "status": "checked",
  "checked": {
   "by": "writer",

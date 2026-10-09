@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A paler wash",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this swatch as plate XLIX, hue 49 with four primes, tone f [1]. It takes its name from Payne's grey, the blue-black watercolor mix named for the eighteenth-century English painter William Payne, who favored it over flat black for softening shadows [1][2]. The American ISCC-NBS dictionary later filed the same swatch as block 185, a pale blue, and the German RAL system gives a near-duplicate of its own, Window Grey, only 2.2 units away [1].\n\nIn Munsell notation it reads as N 6.7, a near-neutral grey with almost no hue [1]. The nearest named colors on file are [[pale-green-blue-grey]], [[light-blue-grey]], [[endive-blue]] and [[cadet-grey]], at 3.6, 3.9, 3.9 and 4.3 ΔE [1]."
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this swatch as plate XLIX, hue 49 with four primes, tone f [1]. It takes its name from Payne's grey, the blue-black watercolor mix named for the eighteenth-century English painter William Payne, who favored it over flat black for softening shadows [1][2]. The American ISCC-NBS dictionary later filed the same swatch as block 185, a pale blue, and the German RAL system gives a near-duplicate of its own, Window Grey, only 2.2 units away [1].\n\nIn Munsell notation it reads as N 6.7, a near-neutral grey with almost no hue [1]. The nearest named colors on file are [[pale-green-blue-grey]], [[light-blue-grey]], [[light-blue-grey]] and [[cadet-grey]], at 3.6, 3.9, 3.9 and 4.3 ΔE [1]."
   },
   {
    "id": "field",
@@ -120,5 +120,5 @@
    "lint 2026-10-09"
   ]
  },
- "words": 273
+ "words": 274
 }

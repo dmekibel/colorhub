@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A dusty pink, not a brown",
-   "body": "Ridgway's 1912 atlas carries this tone on plate XXXIX, hue 5‴ [1]. The 1955 ISCC-NBS dictionary groups it under block 8, naming it grayish pink, 2.5 units from Ridgway's reading, its Munsell notation given as 7.1R 7.4/2.7 [1].\n\nDespite the word \"brownish\" in its name, its nearest neighbor in our library is [[silver-pink]], about 3.2 units away and redder, followed by [[pale-purplish-vinaceous]], almost the same color at 3.6 units [2]. [[pale-blush]] and [[light-vinaceous-fawn]] sit a little further, each about 4.2 units off and more yellow [2]. *Vinaceous*, wine-colored, is the operative word; the brown reads as a dusty cast over pink, not a separate hue [1]."
+   "body": "Ridgway's 1912 atlas carries this tone on plate XXXIX, hue 5‴ [1]. The 1955 ISCC-NBS dictionary groups it under block 8, naming it grayish pink, 2.5 units from Ridgway's reading, its Munsell notation given as 7.1R 7.4/2.7 [1].\n\nDespite the word \"brownish\" in its name, its nearest neighbor in our library is [[silver-pink]], about 3.2 units away and redder, followed by [[pale-purplish-vinaceous]], almost the same color at 3.6 units [2]. [[pale-blush]] and [[pale-blush]] sit a little further, each about 4.2 units off and more yellow [2]. *Vinaceous*, wine-colored, is the operative word; the brown reads as a dusty cast over pink, not a separate hue [1]."
   },
   {
    "id": "field",
@@ -120,7 +120,7 @@
  "openers": [
   "Light Brownish Vinaceous reads as a dusty wine-pink, not a brown, despite its name."
  ],
- "words": 256,
+ "words": 255,
  "status": "checked",
  "checked": {
   "by": "batch-36",

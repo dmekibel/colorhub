@@ -583,6 +583,27 @@ scenario("train", "Gradients: map and Choose mode and the daily board", async t 
   t.expect(/today/i.test(t.text("#hgq")), "the daily board has no title");
 });
 
+// Brand colors (js/games/brands-game.js): the Train tile opens a round (mode A: pick the brand from a swatch;
+// mode B: pick the color for a named brand), real taps through a whole session to the results screen.
+scenario("train", "Brand colors: tap through a full round to results", async t => {
+  await t.open("#shot=gx:home", { settle: 600 });
+  const tile = await t.waitFor("[data-r2-extra=brands]", 6000, "the Brand colors tile");
+  await t.click(tile, { wait: 700 });
+  await t.waitFor(".bg-page .bg-opt", 6000, "the first round");
+  let rounds = 0;
+  for (let i = 0; i < 60 && !t.$(".bg-page .p-title"); i++) {
+    const opt = t.$(".bg-opt:not(:disabled)");
+    const next = t.$("[data-bg-next]");
+    if (next) { await t.click(next, { force: true, wait: 350 }); }
+    else if (opt) { await t.click(opt, { force: true, wait: 400 }); rounds++; }
+    else await t.sleep(250);
+  }
+  await t.waitFor(".bg-page .p-title", 8000, "the results screen");
+  t.expect(/\d+\/\d+/.test(t.text(".bg-page .p-title")), "the results heading doesn't show a score");
+  const quit = t.$("[data-done]"); if (quit) await t.click(quit, { wait: 400 });
+  t.notes.push(`${rounds} rounds played`);
+});
+
 // ================================================================== EXPLORE
 for (const [part, expect] of [["all", ".x-feed .pin, .x-feed [data-pin]"], ["art", ".xb-pick"], ["ideas", ".x-feed .pin, .x-feed [data-pin]"], ["world", "#world *"], ["saved", ".x-feed"]]) {
   scenario("explore", `${part} cover opens and goes back`, async t => {
@@ -1690,6 +1711,22 @@ scenario("paintings", "a pair's paintings, the masters' chords, and a painting w
   await t.click(".pt-ar-txt", { force: true, wait: 300 });
   t.expect(t.$(".pt-arrive [data-t]") && !t.$(".pt-ar-more").hidden, "no tolerance switch after a tap on the arrival");
 });
+// David, 2026-10-09: "weird that you need to scroll far down just to get who and why for paintings" -- title,
+// painter, date and museum now sit right under the pinned image, above the palette strip, instead of below it.
+scenario("paintings", "a painting's identity (title, painter, museum) sits above the palette strip, under the image", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  const hero = await t.waitFor(".gl-hero", 10000, "the painting's pinned image");
+  const id = t.$(".gl-id"), title = t.$(".gl-id .p-title"), dek = t.$(".gl-id .p-dek"), src = t.$(".gl-id-src"), strip = t.$("[data-glswatches]");
+  t.expect(id && title && dek && src && strip, "the identity block or the palette strip is missing");
+  t.expect(/./.test(t.text(title)), "the painting's title is empty");
+  t.expect(/./.test(t.text(dek)), "the painter/country/movement line is empty");
+  const heroTop = hero.getBoundingClientRect().top, idTop = id.getBoundingClientRect().top, stripTop = strip.getBoundingClientRect().top;
+  t.expect(idTop >= heroTop, "the identity block isn't under the pinned image");
+  t.expect(stripTop > idTop, "the palette strip isn't below the identity block (title/painter/date/museum)");
+  // the smoke iframe is 375x812 (tools/smoke/harness.js); the palette strip should still be reachable without
+  // scrolling the page at that height (440x956 is checked separately with a real screenshot -- see colorhub-verify)
+  t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
+});
 scenario("paintings", "a painting's On the painting control: numbered Markers that are remembered and a Highlight that dims", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   await t.waitFor(() => { const w = t.$("[data-glwhere]"); return w && !w.hidden && w; }, 15000, "the On the painting control (a local copy, so its pixels can be read)");
@@ -2282,10 +2319,12 @@ scenario("paintings", "lane A: a painting page leads with what stands out; Name 
   t.expect(t.$("[data-glswatches] .pal.gl-out"), "the strip doesn't lead with a stands-out color");
   const L0 = t.ev(`lab(document.querySelector("[data-glswatches] .pal").dataset.swatch)[0]`);
   t.expect(L0 > 30, `the first chip is a near-black (L* ${Math.round(L0)})`);
-  // David, 2026-10-08: the palette is right under the painting, and both fit one screen so you can change types and sizes
-  const heroB = t.$(".gl-hero>span").getBoundingClientRect().bottom, stripB = t.$("[data-glswatches]").getBoundingClientRect().bottom;
+  // David, 2026-10-08: the palette is right under the identity block, and both fit one screen so you can change types and sizes.
+  // David, 2026-10-09: the identity block (title, painter, date, museum, why it matters) now sits between the pinned
+  // image and the palette, so the strip follows the identity block, not the image, directly.
+  const idB = t.$(".gl-id").getBoundingClientRect().bottom, stripB = t.$("[data-glswatches]").getBoundingClientRect().bottom;
   t.expect(stripB <= t.ev("innerHeight"), `the palette strip sits below the first screen (${Math.round(stripB)})`);
-  t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - heroB < 24, "the palette strip isn't right under the painting");
+  t.expect(t.$("[data-glswatches]").getBoundingClientRect().top - idB < 24, "the palette strip isn't right under the identity block");
   t.expect(t.$("[data-glorder]").getBoundingClientRect().top - stripB < 24, "the palette types aren't right under the strip");
   const nTypes = t.$$("[data-glorder] [data-glo]").length;
   t.expect(nTypes >= 5, `only ${nTypes} palette types`);

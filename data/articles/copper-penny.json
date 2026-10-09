@@ -1,125 +1,125 @@
 {
- "slug": "copper-penny",
- "name": "Copper Penny",
- "hex": "#AD6F69",
- "names": [
-  "Copper Penny"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Copper Penny is a dusty, reddish brown named for the metal in small coins, with Wikipedia citing Crayola as its source.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A coin-metal brown",
-   "body": "The nearest named colors on file are [[etruscan-red]], [[marsh-rose]], [[blast-off-bronze]] and [[deep-vinaceous]], at 2.5, 2.7, 3.9 and 4.2 ΔE [1]. The 1955 ISCC-NBS system would class a close match as light reddish brown, 6.4 units of ΔE away, the same block it shares with [[blast-off-bronze]] [1]. A second library color, [[copper-rose]], is built on the same metal word but leans toward pink rather than brown [1]. In LCH terms Copper Penny is mid-toned and moderately chromatic: lightness 53, chroma 28, hue 30 degrees [1]. A fifth, slightly farther neighbor is [[antique-rose]], 4.2 ΔE away, redder [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings finds a close match to Copper Penny in 135, about 0.6 percent, as photographed [2]. Its fullest appearance is Gustav Klimt's *Women Friends* of 1916, at 38 percent coverage, and its heaviest use, relative to each painter's own baseline, falls to Klimt and Henri Matisse, both working in the early 1900s [2]. The color's use across the archive also skews toward Nepal and India, over 21 and 13 times the expected rate, and peaks in paintings from the 1890s [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the metal copper",
-   "first_recorded": "undocumented in our library beyond the Wikipedia/Crayola record",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "etruscan-red",
-   "marsh-rose",
-   "blast-off-bronze",
-   "deep-vinaceous"
+  "slug": "copper-penny",
+  "name": "Copper Penny",
+  "hex": "#AD6F69",
+  "names": [
+    "Copper Penny"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 135,
-  "match": {
-   "hex": "#AD6F69",
-   "de2000": 6,
-   "min_cover": 0.05
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Copper Penny is a dusty, reddish brown named for the metal in small coins, with Wikipedia citing Crayola as its source.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A coin-metal brown",
+      "body": "The nearest named colors on file are [[etruscan-red]], [[marsh-rose]], [[blast-off-bronze]] and [[antique-rose]], at 2.5, 2.7, 3.9 and 4.2 ΔE [1]. The 1955 ISCC-NBS system would class a close match as light reddish brown, 6.4 units of ΔE away, the same block it shares with [[blast-off-bronze]] [1]. A second library color, [[copper-rose]], is built on the same metal word but leans toward pink rather than brown [1]. In LCH terms Copper Penny is mid-toned and moderately chromatic: lightness 53, chroma 28, hue 30 degrees [1]. A fifth, slightly farther neighbor is [[antique-rose]], 4.2 ΔE away, redder [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings finds a close match to Copper Penny in 135, about 0.6 percent, as photographed [2]. Its fullest appearance is Gustav Klimt's *Women Friends* of 1916, at 38 percent coverage, and its heaviest use, relative to each painter's own baseline, falls to Klimt and Henri Matisse, both working in the early 1900s [2]. The color's use across the archive also skews toward Nepal and India, over 21 and 13 times the expected rate, and peaks in paintings from the 1890s [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the metal copper",
+      "first_recorded": "undocumented in our library beyond the Wikipedia/Crayola record",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "etruscan-red",
+      "marsh-rose",
+      "blast-off-bronze",
+      "deep-vinaceous"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    53,
-    28,
-    30
-   ],
-   "nearest": [
-    [
-     "Etruscan Red",
-     2.5
-    ],
-    [
-     "Marsh Rose",
-     2.7
-    ],
-    [
-     "Blast-Off Bronze",
-     3.9
-    ],
-    [
-     "Deep Vinaceous",
-     4.2
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 135,
+    "match": {
+      "hex": "#AD6F69",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "measured": {
+      "lch": [
+        53,
+        28,
+        30
+      ],
+      "nearest": [
+        [
+          "Etruscan Red",
+          2.5
+        ],
+        [
+          "Marsh Rose",
+          2.7
+        ],
+        [
+          "Blast-Off Bronze",
+          3.9
+        ],
+        [
+          "Deep Vinaceous",
+          4.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is Copper Penny named for?",
+      "choices": [
+        "The metal copper, as in small coins",
+        "A clay roof tile",
+        "A gemstone",
+        "A dye plant"
+      ],
+      "answer": "The metal copper, as in small coins",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Copper Penny and Copper Rose are both named for the same metal.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Copper Penny turns up over 21 times its expected rate in paintings from Nepal in our archive."
+  ],
+  "words": 211,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is Copper Penny named for?",
-   "choices": [
-    "The metal copper, as in small coins",
-    "A clay roof tile",
-    "A gemstone",
-    "A dye plant"
-   ],
-   "answer": "The metal copper, as in small coins",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Copper Penny and Copper Rose are both named for the same metal.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Copper Penny turns up over 21 times its expected rate in paintings from Nepal in our archive."
- ],
- "words": 211,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,128 +1,131 @@
 {
- "slug": "dusty-cornflower",
- "name": "Dusty cornflower",
- "hex": "#7E97C0",
- "names": [
-  "Dusty cornflower"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Dusty cornflower is a muted, greyed blue, the library's softened variant of [[cornflower]], the blue named for the flower's petals.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on an existing name",
-   "body": "The library catalogues this as \"dusty\" layered onto the base entry [[cornflower]], drawn from Ridgway's 1912 atlas; our index carries no ISCC-NBS block for this particular variant, and no specific plate number either [1]. The nearest named color on file is [[berlin-blue]], 2.8 ΔE off [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive, a match appears in 169 of 23,781 paintings, 0.71 percent, as photographed; the within-painting lens finds it in 88 [2]. That puts it ahead of 57 percent of our named colors [2]. It peaks in the 1900s, in 12 of 1,674 paintings, found in 0.7 percent of the 1,674 paintings (12 of them) we have from that century, about 1.3 times the archive's typical rate [2]. Inside a painting it most often plays an accent, in 39 percent of its appearances [2]. The earliest example in our data is from 1405, a work by Spinello Aretino; that is nearly five centuries before the name's earliest record in our sources, 1912, so the match is a look-alike hue in an aged photograph, never proof of the name or pigment that early [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: dusty + cornflower",
-   "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912",
-   "source": "ColorHub color library and Color Graph"
-  },
-  "aka": [],
-  "siblings": [
-   "berlin-blue",
-   "light-windsor-blue",
-   "flax-flower-blue",
-   "lupine"
+  "slug": "dusty-cornflower",
+  "name": "Dusty cornflower",
+  "hex": "#7E97C0",
+  "names": [
+    "Dusty cornflower",
+    "Neropalin Blue"
   ],
-  "parent": "cornflower",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 169,
-  "measured": {
-   "lch": [
-    62.0,
-    24.1,
-    272.9
-   ],
-   "munsell": "5.3PB 6.1/6.2",
-   "iscc_nbs": {
-    "name": "light purplish blue",
-    "de2000": 4.7
-   },
-   "nearest": [
-    [
-     "Berlin Blue",
-     2.8
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Dusty cornflower is a muted, greyed blue, the library's softened variant of [[cornflower]], the blue named for the flower's petals.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on an existing name",
+      "body": "The library catalogues this as \"dusty\" layered onto the base entry [[cornflower]], drawn from Ridgway's 1912 atlas; our index carries no ISCC-NBS block for this particular variant, and no specific plate number either [1]. The nearest named color on file is [[berlin-blue]], 2.8 ΔE off [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive, a match appears in 169 of 23,781 paintings, 0.71 percent, as photographed; the within-painting lens finds it in 88 [2]. That puts it ahead of 57 percent of our named colors [2]. It peaks in the 1900s, in 12 of 1,674 paintings, found in 0.7 percent of the 1,674 paintings (12 of them) we have from that century, about 1.3 times the archive's typical rate [2]. Inside a painting it most often plays an accent, in 39 percent of its appearances [2]. The earliest example in our data is from 1405, a work by Spinello Aretino; that is nearly five centuries before the name's earliest record in our sources, 1912, so the match is a look-alike hue in an aged photograph, never proof of the name or pigment that early [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: dusty + cornflower",
+      "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912",
+      "source": "ColorHub color library and Color Graph"
+    },
+    "aka": [
+      "Neropalin Blue (ridgway)"
     ],
-    [
-     "Light Windsor Blue",
-     3.4
+    "siblings": [
+      "berlin-blue",
+      "light-windsor-blue",
+      "flax-flower-blue",
+      "lupine"
     ],
-    [
-     "Flax-Flower Blue",
-     5.2
-    ],
-    [
-     "Lupine",
-     5.2
+    "parent": "cornflower",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 169,
+    "measured": {
+      "lch": [
+        62.0,
+        24.1,
+        272.9
+      ],
+      "munsell": "5.3PB 6.1/6.2",
+      "iscc_nbs": {
+        "name": "light purplish blue",
+        "de2000": 4.7
+      },
+      "nearest": [
+        [
+          "Berlin Blue",
+          2.8
+        ],
+        [
+          "Light Windsor Blue",
+          3.4
+        ],
+        [
+          "Flax-Flower Blue",
+          5.2
+        ],
+        [
+          "Lupine",
+          5.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Dusty cornflower is built by adding \"dusty\" to which existing color name?",
+      "choices": [
+        "Cornflower",
+        "Periwinkle",
+        "Slate",
+        "Ash"
+      ],
+      "answer": "Cornflower",
+      "kind": "pick"
+    },
+    {
+      "q": "Inside a painting, dusty cornflower most often plays which role?",
+      "choices": [
+        "An accent",
+        "A shadow",
+        "A base wash",
+        "A hidden underlayer"
+      ],
+      "answer": "An accent",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Dusty cornflower's earliest match in our archive predates its 1912 name by nearly five centuries — a look-alike hue, not proof of the pigment that early."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Field notes claimed 127 paintings (~0.5%), a Johan Thomas Lundbye/Danish-paintings statistic, and companion colors; the cited fieldnotes (data/graph/fieldnotes/d.json) show 169/88 paintings (0.71%/0.37%), an empty painter-nationality array and an empty co-occurrence array, so those claims were unsupported and have been corrected or removed. The role description ('48 and 46 percent' highlight/mid-tone) did not match the source role array (accent dominant at 39%) and was corrected.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Dusty cornflower is built by adding \"dusty\" to which existing color name?",
-   "choices": [
-    "Cornflower",
-    "Periwinkle",
-    "Slate",
-    "Ash"
-   ],
-   "answer": "Cornflower",
-   "kind": "pick"
-  },
-  {
-   "q": "Inside a painting, dusty cornflower most often plays which role?",
-   "choices": [
-    "An accent",
-    "A shadow",
-    "A base wash",
-    "A hidden underlayer"
-   ],
-   "answer": "An accent",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Dusty cornflower's earliest match in our archive predates its 1912 name by nearly five centuries — a look-alike hue, not proof of the pigment that early."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Field notes claimed 127 paintings (~0.5%), a Johan Thomas Lundbye/Danish-paintings statistic, and companion colors; the cited fieldnotes (data/graph/fieldnotes/d.json) show 169/88 paintings (0.71%/0.37%), an empty painter-nationality array and an empty co-occurrence array, so those claims were unsupported and have been corrected or removed. The role description ('48 and 46 percent' highlight/mid-tone) did not match the source role array (accent dominant at 39%) and was corrected.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 201
+  "words": 201
 }

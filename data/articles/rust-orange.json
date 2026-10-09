@@ -1,125 +1,127 @@
 {
- "slug": "rust-orange",
- "name": "Rust orange",
- "hex": "#CB6325",
- "names": [
-  "Rust orange"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Rust orange is a deep orange named for oxidised iron; a real paint called by this name turns up in a famous American painter's paint box.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Iron's orange",
-   "body": "The name takes its picture from [[rust]]. Ridgway recorded it in 1912, and ISCC-NBS 1955 files it under deep orange [2]. Close relatives are [[orange]], [[sienna]] and [[mars-orange]] [2]."
-  },
-  {
-   "id": "homer",
-   "title": "In Winslow Homer's paint box",
-   "body": "In the Pigment Compendium, mars yellow, essentially iron oxide hydroxide, can be roasted to produce a range of colors through oranges to reds [1]. Newman and colleagues in 1980 tentatively identified mars orange in a paint box owned by Winslow Homer, labelled rust orange and adulterated with calcite [1]. Chalk adulteration also appears in the records of the Amsterdam materials firm Claus and Fritz [1]. So the name was a real tube label, not only a swatch word [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive it appears in 0.69% of paintings (163), most often as an accent, as photographed [3]. It peaks in the 1300s at 2.2 times the expected rate, and is over-represented in Indian paintings, at 4 times [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "rust, oxidised iron",
-   "first_recorded": "Ridgway, 1912",
-   "source": "ColorHub library; Pigment Compendium"
-  },
-  "aka": [
-   "mars orange (pigment)"
+  "slug": "rust-orange",
+  "name": "Rust orange",
+  "hex": "#CB6325",
+  "names": [
+    "Rust orange",
+    "Orange-Rufous"
   ],
-  "siblings": [
-   "rust",
-   "mars-orange",
-   "sienna"
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Rust orange is a deep orange named for oxidised iron; a real paint called by this name turns up in a famous American painter's paint box.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Iron's orange",
+      "body": "The name takes its picture from [[rust]]. Ridgway recorded it in 1912, and ISCC-NBS 1955 files it under deep orange [2]. Close relatives are [[orange]], [[sienna]] and [[mars-orange]] [2]."
+    },
+    {
+      "id": "homer",
+      "title": "In Winslow Homer's paint box",
+      "body": "In the Pigment Compendium, mars yellow, essentially iron oxide hydroxide, can be roasted to produce a range of colors through oranges to reds [1]. Newman and colleagues in 1980 tentatively identified mars orange in a paint box owned by Winslow Homer, labelled rust orange and adulterated with calcite [1]. Chalk adulteration also appears in the records of the Amsterdam materials firm Claus and Fritz [1]. So the name was a real tube label, not only a swatch word [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive it appears in 0.69% of paintings (163), most often as an accent, as photographed [3]. It peaks in the 1300s at 2.2 times the expected rate, and is over-represented in Indian paintings, at 4 times [3]."
+    }
   ],
-  "parent": "orange",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "rust",
-    "gloss": "a redder, darker rust brown-orange"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "rust, oxidised iron",
+      "first_recorded": "Ridgway, 1912",
+      "source": "ColorHub library; Pigment Compendium"
+    },
+    "aka": [
+      "mars orange (pigment)",
+      "Orange-Rufous (ridgway+iscc-nbs+maerz-paul)"
+    ],
+    "siblings": [
+      "rust",
+      "mars-orange",
+      "sienna"
+    ],
+    "parent": "orange",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "rust",
+        "gloss": "a redder, darker rust brown-orange"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 163,
+    "measured": {
+      "lch": [
+        53.8,
+        63.9,
+        54.0
+      ],
+      "iscc": "deep orange"
+    },
+    "first_record": {
+      "year": 1912,
+      "source": "Ridgway"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Eastaugh et al., Pigment Compendium, p. 267 (\"mars orange\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub library, Rust orange: Ridgway 1912; ISCC-NBS 1955",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive field notes, Rust orange",
+      "loc_kind": "entry",
+      "url": null
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 163,
-  "measured": {
-   "lch": [
-    53.8,
-    63.9,
-    54.0
-   ],
-   "iscc": "deep orange"
-  },
-  "first_record": {
-   "year": 1912,
-   "source": "Ridgway"
+  "questions": [
+    {
+      "q": "Whose paint box held a pigment labelled rust orange?",
+      "choices": [
+        "Winslow Homer",
+        "Claude Monet",
+        "J. M. W. Turner",
+        "Georgia O'Keeffe"
+      ],
+      "answer": "Winslow Homer",
+      "kind": "pick"
+    },
+    {
+      "q": "What was the rust orange in that paint box adulterated with?",
+      "choices": [
+        "Calcite",
+        "Gold",
+        "Sand",
+        "Wax"
+      ],
+      "answer": "Calcite",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Winslow Homer's paint box held a tube labelled rust orange."
+  ],
+  "words": 168,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Eastaugh et al., Pigment Compendium, p. 267 (\"mars orange\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub library, Rust orange: Ridgway 1912; ISCC-NBS 1955",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive field notes, Rust orange",
-   "loc_kind": "entry",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Whose paint box held a pigment labelled rust orange?",
-   "choices": [
-    "Winslow Homer",
-    "Claude Monet",
-    "J. M. W. Turner",
-    "Georgia O'Keeffe"
-   ],
-   "answer": "Winslow Homer",
-   "kind": "pick"
-  },
-  {
-   "q": "What was the rust orange in that paint box adulterated with?",
-   "choices": [
-    "Calcite",
-    "Gold",
-    "Sand",
-    "Wax"
-   ],
-   "answer": "Calcite",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Winslow Homer's paint box held a tube labelled rust orange."
- ],
- "words": 168,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

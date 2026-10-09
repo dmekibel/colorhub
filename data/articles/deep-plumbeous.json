@@ -1,143 +1,143 @@
 {
- "slug": "deep-plumbeous",
- "name": "Deep Plumbeous",
- "hex": "#80868B",
- "names": [
-  "Deep Plumbeous"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Deep Plumbeous is a cool mid grey from Ridgway's 1912 chart, named for lead, and later picked up again for an industrial RAL signal color.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Lead-colored, twice over",
-   "body": "Ridgway's 1912 plate LII gives this hue the name Deep Plumbeous, hue 49′′′′′, and the ISCC-NBS system of 1955 files the nearest category as \"grayish blue\" in its block 186 [1]. *Plumbeous* means lead-colored, from the Latin *plumbum*; Ridgway built a small family of plumbeous greys across several plates, including the lighter [[dark-plumbeous]] [1]. Our library also places RAL 7046, a later German industrial-signal grey, at an approximate screen match to this same swatch, though the two systems were built decades apart for different purposes [1].\n\nIn LCH terms it measures lightness 56, chroma 4, hue 251 degrees, Munsell N 5.5, essentially hueless [1]. Its closest match in the library is [[squirrel-grey]], about 3.2 CIEDE2000 units away, with [[light-violet-grey]] close behind at 3.7 units [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 702 of our 23,781 archive paintings, about 3.0 percent [4]. It peaks in the 1940s, in 5 of 28 paintings, at 6.1 times the overall rate, and is most loved by Bernardo Bellotto, Meindert Hobbema and Albert Marquet, each carrying it in a quarter of their paintings here, more than eight times their own museums' baseline; it most often plays a highlight, in 52 percent of its appearances [4].\n\nThe earliest dated match is a folio from a Kalpa-sutra manuscript, 1278, more than six centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "plumbeous, Latin plumbum, \"lead\"",
-   "first_recorded": "1912, Ridgway, plate LII",
-   "source": "ColorHub color library; Ridgway, Color Standards and Color Nomenclature (1912)"
-  },
-  "aka": [],
-  "siblings": [
-   "dark-plumbeous",
-   "blackish-plumbeous",
-   "squirrel-grey"
+  "slug": "deep-plumbeous",
+  "name": "Deep Plumbeous",
+  "hex": "#80868B",
+  "names": [
+    "Deep Plumbeous"
   ],
-  "parent": "dark-plumbeous",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#80868B",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 702,
-  "painters": [
-   {
-    "name": "Bernardo Bellotto",
-    "hits": 5,
-    "of": 20,
-    "lift": 8.47
-   }
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Deep Plumbeous is a cool mid grey from Ridgway's 1912 chart, named for lead, and later picked up again for an industrial RAL signal color.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Lead-colored, twice over",
+      "body": "Ridgway's 1912 plate LII gives this hue the name Deep Plumbeous, hue 49′′′′′, and the ISCC-NBS system of 1955 files the nearest category as \"grayish blue\" in its block 186 [1]. *Plumbeous* means lead-colored, from the Latin *plumbum*; Ridgway built a small family of plumbeous greys across several plates, including the lighter [[slate-grey]] [1]. Our library also places RAL 7046, a later German industrial-signal grey, at an approximate screen match to this same swatch, though the two systems were built decades apart for different purposes [1].\n\nIn LCH terms it measures lightness 56, chroma 4, hue 251 degrees, Munsell N 5.5, essentially hueless [1]. Its closest match in the library is [[squirrel-grey]], about 3.2 CIEDE2000 units away, with [[light-violet-grey]] close behind at 3.7 units [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A match within six CIEDE2000 units covering at least five percent of the canvas turns up in 702 of our 23,781 archive paintings, about 3.0 percent [4]. It peaks in the 1940s, in 5 of 28 paintings, at 6.1 times the overall rate, and is most loved by Bernardo Bellotto, Meindert Hobbema and Albert Marquet, each carrying it in a quarter of their paintings here, more than eight times their own museums' baseline; it most often plays a highlight, in 52 percent of its appearances [4].\n\nThe earliest dated match is a folio from a Kalpa-sutra manuscript, 1278, more than six centuries before Ridgway recorded the name in 1912; early centuries are thin in the archive, so this is a floor, not a first, and a photograph of an aged canvas is a screen color, not a pigment test [4]."
+    }
   ],
-  "peak_decade": {
-   "decade": 1940,
-   "lift": 6.05
-  },
-  "role": "highlight",
-  "measured": {
-   "lch": [
-    56,
-    4,
-    251
-   ],
-   "nearest": [
-    [
-     "Squirrel Grey",
-     3.2
+  "aside": {
+    "origin": {
+      "named_after": "plumbeous, Latin plumbum, \"lead\"",
+      "first_recorded": "1912, Ridgway, plate LII",
+      "source": "ColorHub color library; Ridgway, Color Standards and Color Nomenclature (1912)"
+    },
+    "aka": [],
+    "siblings": [
+      "dark-plumbeous",
+      "blackish-plumbeous",
+      "squirrel-grey"
     ],
-    [
-     "Light Violet-Grey",
-     3.7
+    "parent": "dark-plumbeous",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#80868B",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 702,
+    "painters": [
+      {
+        "name": "Bernardo Bellotto",
+        "hits": 5,
+        "of": 20,
+        "lift": 8.47
+      }
+    ],
+    "peak_decade": {
+      "decade": 1940,
+      "lift": 6.05
+    },
+    "role": "highlight",
+    "measured": {
+      "lch": [
+        56,
+        4,
+        251
+      ],
+      "nearest": [
+        [
+          "Squirrel Grey",
+          3.2
+        ],
+        [
+          "Light Violet-Grey",
+          3.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate LII, hue 49′′′′′; ISCC-NBS, NBS Circular 553 (1955), block 186; RAL 7046, approximate screen match",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "Color-kb concordance of the 29 color books for this name: no hits",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does \"plumbeous\" mean?",
+      "choices": [
+        "Lead-colored",
+        "Feathered",
+        "Watery",
+        "Smoky"
+      ],
+      "answer": "Lead-colored",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Deep Plumbeous and the RAL 7046 industrial signal grey were designed by the same system.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A 1912 lead-grey that an unrelated industrial color system later landed on again."
+  ],
+  "words": 292,
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway, Color Standards and Color Nomenclature (1912), plate LII, hue 49′′′′′; ISCC-NBS, NBS Circular 553 (1955), block 186; RAL 7046, approximate screen match",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "Color-kb concordance of the 29 color books for this name: no hits",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does \"plumbeous\" mean?",
-   "choices": [
-    "Lead-colored",
-    "Feathered",
-    "Watery",
-    "Smoky"
-   ],
-   "answer": "Lead-colored",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Deep Plumbeous and the RAL 7046 industrial signal grey were designed by the same system.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A 1912 lead-grey that an unrelated industrial color system later landed on again."
- ],
- "words": 292,
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

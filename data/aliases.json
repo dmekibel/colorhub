@@ -755,6 +755,556 @@
 "Lime",
 "Yellowy Green",
 3.2
+],
+[
+"Dusty plum",
+"Naphthalene Violet",
+0.0
+],
+[
+"Heather pink",
+"Heather Violet",
+0.0
+],
+[
+"Berry pink",
+"Rosolane Purple",
+0.0
+],
+[
+"Mauve rose",
+"Vinaceous-Lilac",
+0.0
+],
+[
+"Berry red",
+"Maroon (X11)",
+0.0
+],
+[
+"Wine brown",
+"Dusty wine",
+0.0
+],
+[
+"Deep rose red",
+"Solid Pink",
+0.0
+],
+[
+"Red plum",
+"Dusty cerise",
+0.0
+],
+[
+"Old pink",
+"Corinthian Pink",
+0.0
+],
+[
+"Antique rose",
+"Deep Vinaceous",
+0.0
+],
+[
+"Ash rose",
+"Dusty puce",
+0.0
+],
+[
+"Brick rose",
+"Dark Vinaceous",
+0.0
+],
+[
+"Faded rosewood",
+"Deep Livid Brown",
+0.0
+],
+[
+"Espresso",
+"Black kite",
+0.0
+],
+[
+"Peach rose",
+"Orange-Vinaceous",
+0.0
+],
+[
+"Rose brown",
+"Vinaceous-Brown",
+0.0
+],
+[
+"Pale periwinkle",
+"Pallid Violet",
+0.0
+],
+[
+"Light orchid",
+"Light Lavendar",
+0.0
+],
+[
+"Orchid pink",
+"Rosolane Pink",
+0.0
+],
+[
+"Clay pink",
+"Russet-Vinaceous",
+0.0
+],
+[
+"Deep terracotta",
+"Terracota",
+0.0
+],
+[
+"Pale blush",
+"Light Vinaceous-Fawn",
+0.0
+],
+[
+"Rust orange",
+"Orange-Rufous",
+0.0
+],
+[
+"Light cinnamon",
+"Vinaceous-Cinnamon",
+0.0
+],
+[
+"Toffee",
+"Gallstone Yellow",
+0.0
+],
+[
+"Tawny orange",
+"Ochraceous-Tawny",
+0.0
+],
+[
+"Biscuit",
+"Vinaceous-Buff",
+0.0
+],
+[
+"Dark chocolate brown",
+"Zinnwaldite Brown",
+0.0
+],
+[
+"Olive mud",
+"Field Drab",
+0.0
+],
+[
+"Bronze",
+"Medal Bronze",
+0.0
+],
+[
+"Khaki olive",
+"Khaki Grey",
+0.0
+],
+[
+"Dark olive brown",
+"Olive Drab #7",
+0.0
+],
+[
+"Seaweed green",
+"Codium fragile seaweed",
+0.0
+],
+[
+"Pale flesh",
+"Flesh Red",
+0.0
+],
+[
+"Fallen leaf",
+"Light hazel",
+0.0
+],
+[
+"Lemon Meringue",
+"Seafoam Green",
+0.0
+],
+[
+"Pale lime",
+"Viridine Green",
+0.0
+],
+[
+"Pale olive grey",
+"Yellowish Glaucous",
+0.0
+],
+[
+"Spring onion",
+"Greenish pistachio",
+0.0
+],
+[
+"Pale oak",
+"Dusty sage",
+0.0
+],
+[
+"Pale green grey",
+"Greenish Glaucous",
+0.0
+],
+[
+"Greenish hospital green",
+"Light Cendre Green",
+0.0
+],
+[
+"Mint leaf",
+"Cendre Green",
+0.0
+],
+[
+"Spruce green",
+"Pearl Green",
+0.0
+],
+[
+"Grey celadon",
+"Greenish sage",
+0.0
+],
+[
+"Deep jade",
+"Diamine Green",
+0.0
+],
+[
+"Seafoam teal",
+"Middle Blue Green",
+0.0
+],
+[
+"Grey aqua",
+"Dark ash",
+0.0
+],
+[
+"Deep teal green",
+"Anthracene Green",
+0.0
+],
+[
+"Grey teal",
+"Glaucous-Blue",
+0.0
+],
+[
+"Sea teal",
+"Light teal tone",
+0.0
+],
+[
+"Lagoon blue",
+"Blue (Munsell)",
+0.0
+],
+[
+"Dark peacock",
+"Bluish petrol",
+0.0
+],
+[
+"Cyan blue",
+"Cendre Blue",
+0.0
+],
+[
+"Sky steel",
+"Bluish steel blue",
+0.0
+],
+[
+"Cerulean sea",
+"Blue (NCS)",
+0.0
+],
+[
+"Dusty cornflower",
+"Neropalin Blue",
+0.0
+],
+[
+"Slate navy",
+"Nigrosin Blue",
+0.0
+],
+[
+"Midnight navy",
+"Greyish navy",
+0.0
+],
+[
+"Wedgwood Blue",
+"Wedgewood Blue",
+0.0
+],
+[
+"Deep royal blue",
+"Royal Blue (Dark)",
+0.0
+],
+[
+"Deep navy",
+"Dusty midnight blue",
+0.0
+],
+[
+"Wisteria blue",
+"Perrywinkle",
+0.0
+],
+[
+"Heather grey",
+"Pearl Blackberry",
+0.0
+],
+[
+"Floral lavender",
+"Lavender (Floral)",
+0.0
+],
+[
+"Dusty violet",
+"Saccardo's Violet",
+0.0
+],
+[
+"Orchid purple",
+"Amparo Purple",
+0.0
+],
+[
+"Vivid violet",
+"Violet (RYB)",
+0.0
+],
+[
+"Dusky mauve",
+"Livid Purple",
+0.0
+],
+[
+"Pink orchid",
+"Middle Purple",
+0.0
+],
+[
+"Pale sage",
+"Pale Glaucous-Green",
+0.0
+],
+[
+"Pale sea grey",
+"Pale Dull Glaucous-Blue",
+0.0
+],
+[
+"Oatmeal",
+"Pale Vinaceous-Fawn",
+0.0
+],
+[
+"Warm silver",
+"Silver (Crayola)",
+0.0
+],
+[
+"Pale lilac grey",
+"Red Lilac Purple",
+0.0
+],
+[
+"Sage grey",
+"Glaucous-Grey",
+0.0
+],
+[
+"Dark silver pink",
+"Pale Brownish Drab",
+0.0
+],
+[
+"Linen grey",
+"Drab-Grey",
+0.0
+],
+[
+"Cool grey",
+"Dark Grey",
+0.0
+],
+[
+"Mauve grey",
+"Vinaceous-Grey",
+0.0
+],
+[
+"Mushroom brown",
+"Brownish Drab",
+0.0
+],
+[
+"Dusty rose brown",
+"Brownish Purple Red",
+0.0
+],
+[
+"Purple slate",
+"Lavender Purple",
+0.0
+],
+[
+"Mole brown",
+"Dark Vinaceous-Drab",
+0.0
+],
+[
+"Slate grey",
+"Dark Plumbeous",
+0.0
+],
+[
+"Blue slate",
+"Violet-Slate",
+0.0
+],
+[
+"Mauve brown",
+"Reddish umber",
+0.0
+],
+[
+"Graphite violet",
+"Heliotrope-Slate",
+0.0
+],
+[
+"Smoke",
+"Vinaceous-Slate",
+0.0
+],
+[
+"Greyish brownish olive",
+"Fuscous",
+0.0
+],
+[
+"Dark teal grey",
+"Saccardo's Slate",
+0.0
+],
+[
+"Plum grey",
+"Anthracene Purple",
+0.0
+],
+[
+"Dark blue slate",
+"Dark Violet-Slate",
+0.0
+],
+[
+"Vivid taupe brown",
+"Dark Naphthalene Violet",
+0.0
+],
+[
+"Dark spruce",
+"Bluish charcoal",
+0.0
+],
+[
+"Dark walnut",
+"Pale black",
+0.0
+],
+[
+"Black brown",
+"Very Dark Brown",
+0.0
+],
+[
+"Signal red",
+"Pure Red",
+0.0
+],
+[
+"Clay",
+"Testaceous",
+0.0
+],
+[
+"Fawn",
+"Vinaceous-Fawn",
+0.0
+],
+[
+"Light orange",
+"Ochraceous-Salmon",
+0.0
+],
+[
+"Copper brown",
+"Pearl Copper",
+0.0
+],
+[
+"Blue Green",
+"Dark Viridian Green",
+0.49
+],
+[
+"Dusty blue",
+"Glaucous",
+0.0
+],
+[
+"Violet blue",
+"Violet-Blue (Crayola)",
+0.0
+],
+[
+"Shell pink",
+"Pale Greyish Vinaceous",
+0.0
+],
+[
+"Light blue grey",
+"Endive Blue",
+0.0
+],
+[
+"Pebble grey",
+"Quaker Drab",
+0.0
+],
+[
+"Dark olive grey",
+"Yellow Olive",
+0.0
+],
+[
+"Pale black shade",
+"Pale black hue",
+0.0
 ]
 ],
 "slugs":{
@@ -1820,7 +2370,7 @@
 "dark-aniline-blue":"charcoal",
 "dark-anthracene-violet":"slate-navy",
 "dark-aqua":"jouvence-blue",
-"dark-ash":"sage-grey",
+"dark-ash":"grey-aqua",
 "dark-ash-tone":"grey-aqua",
 "dark-beige":"oil-green",
 "dark-benzo-brown":"mole-brown",
@@ -1954,7 +2504,7 @@
 "dark-vinaceous-purple":"perilla-purple",
 "dark-violet-grey":"slate-color",
 "dark-violet-slate":"dark-blue-slate",
-"dark-viridian-green":"generic-viridian",
+"dark-viridian-green":"blue-green",
 "dark-wedgwood":"twilight",
 "dark-wedgwood-blue":"twilight",
 "dark-yellow":"old-gold",
@@ -2762,6 +3312,7 @@
 "light-king-s-blue":"light-columbia-blue",
 "light-lacquer-red":"brick",
 "light-lacquer-red-t":"brick",
+"light-lavendar":"light-orchid",
 "light-lavender-blue":"ontario-violet",
 "light-lavender-violet":"light-hyssop-violet",
 "light-lemon-yellow":"maize",
@@ -3177,6 +3728,7 @@
 "pale-aniline-lilac":"sky",
 "pale-beaver":"beaver",
 "pale-black":"dark-walnut",
+"pale-black-hue":"pale-black-shade",
 "pale-blackish-purple":"dark-madder-violet",
 "pale-blackish-slate":"dark-teal-grey",
 "pale-blue":"ice",
@@ -3319,6 +3871,7 @@
 "periwinkle-crayola":"light-periwinkle",
 "permanent-geranium-lake":"red",
 "permanent-violet":"blue-lilac",
+"perrywinkle":"wisteria-blue",
 "persenche":"dark-greyish-lavender",
 "persian-blue":"blue-blue",
 "persian-lilac":"faded-pink",
@@ -3560,7 +4113,7 @@
 "sea-green-crayola":"bright-teal",
 "sea-lavender-violet":"light-violet",
 "seafoam-blue":"medium-aquamarine",
-"seafoam-green":"seafoam",
+"seafoam-green":"lemon-meringue",
 "seafoam-yellow":"lemon-meringue",
 "seasan":"biscuit",
 "seashell":"linen",
@@ -3718,6 +4271,7 @@
 "telemagenta":"ruber",
 "tenne":"burnt-orange",
 "tennis":"light-cadmium",
+"terracota":"deep-terracotta",
 "terre-verte":"hooker-s-green",
 "tersweet":"brick",
 "testaceous":"clay",
@@ -3866,6 +4420,7 @@
 "washed-out-green":"celery",
 "water-blue":"jouvence-blue",
 "watermelon":"pink-red",
+"wedgewood-blue":"wedgwood-blue",
 "weird-green":"minty-green",
 "wheat":"beige",
 "white-aluminium":"cool-grey",
@@ -5120,7 +5675,7 @@
 "Dark Vinaceous-Purple":"Perilla Purple",
 "Dark Violet-Grey":"Slate Color",
 "Dark Violet-Slate":"Dark blue slate",
-"Dark Viridian Green":"Generic Viridian",
+"Dark Viridian Green":"Blue Green",
 "Dark Wedgwood":"Twilight",
 "Dark Wedgwood Blue":"Twilight",
 "Dark Yellow":"Old Gold",
@@ -5129,7 +5684,7 @@
 "Dark Zinc Green":"Hooker's Green",
 "Dark Zinc Yellow Primer":"Yew Green",
 "Dark almond":"Oatmeal",
-"Dark ash":"Sage grey",
+"Dark ash":"Grey aqua",
 "Dark ash tone":"Grey aqua",
 "Dark benzo brown":"Mole brown",
 "Dark bistre":"Dark chocolate brown",
@@ -5962,6 +6517,7 @@
 "Light King's Blue":"Light Columbia Blue",
 "Light Lacquer Red":"Brick",
 "Light Lacquer Red T":"Brick",
+"Light Lavendar":"Light orchid",
 "Light Lavender-Blue":"Ontario Violet",
 "Light Lavender-Violet":"Light Hyssop Violet",
 "Light Lemon Yellow":"Maize",
@@ -6466,6 +7022,7 @@
 "Pale Yellowish Brown":"Grey Beige",
 "Pale beaver":"Beaver",
 "Pale black":"Dark walnut",
+"Pale black hue":"Pale black shade",
 "Pale blackish slate":"Dark teal grey",
 "Pale cameo brown":"Rose brown",
 "Pale charcoal":"Slate Color",
@@ -6543,6 +7100,7 @@
 "Periwinkle (Crayola)":"Light Periwinkle",
 "Permanent Geranium Lake":"Red",
 "Permanent Violet":"Blue Lilac",
+"Perrywinkle":"Wisteria blue",
 "Persenche":"Dark Greyish Lavender",
 "Persian Blue":"Blue Blue",
 "Persian Lilac":"Faded Pink",
@@ -6789,7 +7347,7 @@
 "Sea Green (Crayola)":"Bright Teal",
 "Sea Lavender Violet":"Light Violet",
 "Seafoam Blue":"Medium Aquamarine",
-"Seafoam Green":"Seafoam",
+"Seafoam Green":"Lemon Meringue",
 "Seafoam Yellow":"Lemon Meringue",
 "Seasan":"Biscuit",
 "Seashell":"Linen",
@@ -6951,6 +7509,7 @@
 "Telemagenta":"Ruber",
 "Tennis":"Light Cadmium",
 "Tenné":"Burnt orange",
+"Terracota":"Deep terracotta",
 "Terre Verte":"Hooker's Green",
 "Tersweet":"Brick",
 "Testaceous":"Clay",
@@ -7102,6 +7661,7 @@
 "Washed Out Green":"Celery",
 "Water Blue":"Jouvence Blue",
 "Watermelon":"Pink Red",
+"Wedgewood Blue":"Wedgwood Blue",
 "Weird Green":"Minty Green",
 "Weird-Green":"Minty Green",
 "Wheat":"Beige",

@@ -1,0 +1,129 @@
+{
+  "slug": "lemon-meringue",
+  "name": "Lemon Meringue",
+  "hex": "#E9E0B7",
+  "names": [
+    "Lemon Meringue",
+    "Seafoam Green"
+  ],
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Seafoam Green is a pale yellow-beige that Maerz and Paul trace to 1892, sharing a name but no real kinship with the bright green Seafoam.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Pale, beige, and misleadingly named",
+      "body": "Ridgway's 1912 plates give this pale yellow-beige at hue 27′′, tone f, on plate XXXI, and the Inter-Society Color Council's 1955 census files it in block 121 as a pale yellow, Munsell 5.9Y 8.9/2.6 [1]. Maerz and Paul trace the name itself to 1892 [1].\n\nDespite sharing a name with the bright green [[seafoam]], Seafoam Green sits nowhere near it in hue: its nearest library match shares its exact hex, [[lemon-meringue]], with [[marguerite-yellow]] and [[pale-chalcedony-yellow]] both within 3 units [1]. ColorHub's broader palette map also places it near [[beige]], about 4.2 units off [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds Seafoam Green in 584 of 23,781 paintings, about 2.5 percent, almost always as a highlight [2]. It peaks in the 1850s, in 43 of 864 paintings, twice its average rate, and favors Dutch marine painters: Pieter Gerardus van Os carries it in 4 of 13 dated works, Willem van de Velde the Elder in 3 of 14 [2]. Iranian paintings carry it seven times the archive's base rate [2]. It shares canvases with [[cream]] and [[beige]] far more than chance alone predicts [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented beyond the word itself",
+      "first_recorded": "1892, per Maerz & Paul (1930)",
+      "source": "Ridgway (1912) / Maerz & Paul via ColorHub library"
+    },
+    "aka": [
+      "Seafoam Green"
+    ],
+    "siblings": [
+      "lemon-meringue",
+      "beige"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "seafoam",
+        "gloss": "a bright, saturated green-mint, unrelated in hue despite the shared name"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 584,
+    "measured": {
+      "lch": [
+        89,
+        22,
+        99
+      ],
+      "nearest": [
+        [
+          "Lemon Meringue",
+          0.0
+        ],
+        [
+          "Marguerite Yellow",
+          2.77
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What year does Maerz and Paul give for Seafoam Green's name?",
+      "choices": [
+        "1892",
+        "1920",
+        "1955",
+        "1912"
+      ],
+      "answer": "1892",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Seafoam Green and Seafoam are close in hue.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In which decade does Seafoam Green peak in our archive?",
+      "choices": [
+        "1850s",
+        "1700s",
+        "1920s",
+        "1600s"
+      ],
+      "answer": "1850s",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Seafoam Green shares a name with the bright green Seafoam but sits nowhere near it in hue — its real twin is a pale yellow-beige called Lemon Meringue."
+  ],
+  "words": 222,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
+  }
+}

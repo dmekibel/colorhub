@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A landscape word",
-   "body": "ColorHub's library carries Lagoon blue as a landscape name, grouped with words for a place or a body of water rather than a pigment or a person [1]. The nearest named colors on file are [[sky-steel]], [[bluish-steel-blue]], [[capri-blue]] and [[sea-teal]], at 5.5, 5.5, 6.4 and 6.5 ΔE [1]. The ISCC-NBS system would file the hex #0093AF as a vivid greenish blue, a measured distance of 7.4 units from its nearest official block [2]. In Munsell terms it lands near 4.9B 5.5/7.4, a mid-value, strongly saturated blue-green [2]. Who first wrote the two words together as a color name is not recorded in our sources, so the coinage stays undocumented here [1].\n\nThe word itself tracks a real body of water: a lagoon is shallow enough that sunlight reaches the pale sand below, which is what gives real lagoons their saturated turquoise-to-blue range rather than the deep navy of open ocean. Look for that same light-struck quality in [[turquoise]] and [[persian-green]], its closer relatives on the color wheel."
+   "body": "ColorHub's library carries Lagoon blue as a landscape name, grouped with words for a place or a body of water rather than a pigment or a person [1]. The nearest named colors on file are [[sky-steel]], [[sky-steel]], [[capri-blue]] and [[sea-teal]], at 5.5, 5.5, 6.4 and 6.5 ΔE [1]. The ISCC-NBS system would file the hex #0093AF as a vivid greenish blue, a measured distance of 7.4 units from its nearest official block [2]. In Munsell terms it lands near 4.9B 5.5/7.4, a mid-value, strongly saturated blue-green [2]. Who first wrote the two words together as a color name is not recorded in our sources, so the coinage stays undocumented here [1].\n\nThe word itself tracks a real body of water: a lagoon is shallow enough that sunlight reaches the pale sand below, which is what gives real lagoons their saturated turquoise-to-blue range rather than the deep navy of open ocean. Look for that same light-struck quality in [[turquoise]] and [[persian-green]], its closer relatives on the color wheel."
   },
   {
    "id": "field",
@@ -138,7 +138,7 @@
  "openers": [
   "Real lagoons look this saturated because sunlight bounces off the pale sand underneath."
  ],
- "words": 351,
+ "words": 350,
  "status": "checked",
  "checked": {
   "by": "batch-9 writer",

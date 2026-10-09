@@ -53,6 +53,7 @@ const R2_IC = {
   rebuild: `<path d="M8 13c2-5.5 14-5.5 16 0"/><path d="M24.5 13l.6-4M24.5 13l-4-.8"/><rect x="4" y="18" width="5" height="7" rx=".8" class="a"/><rect x="10.3" y="18" width="5" height="7" rx=".8" class="b"/><rect x="16.6" y="18" width="5" height="7" rx=".8"/><rect x="23" y="18" width="5" height="7" rx=".8"/>`,
   nback: `<path d="M25 14c-2-6.5-16-6.5-18 0"/><path d="M7 14l-1.4-3.6M7 14l3.4-1.8"/><circle cx="7" cy="20.5" r="4" class="a"/><circle cx="16" cy="20.5" r="4" class="b"/><circle cx="25" cy="20.5" r="4" class="a"/>`,
   gradient: `<rect x="4" y="8" width="5" height="16" rx="1" class="a"/><rect x="10" y="8" width="5" height="16" rx="1" class="ab"/><rect x="16" y="8" width="5" height="16" rx="1" class="bb"/><rect x="22" y="8" width="5" height="16" rx="1" class="b"/>`,
+  brands: `<rect x="4" y="7" width="10" height="18" rx="2" class="a"/><rect x="18" y="7" width="10" height="18" rx="2" class="b"/><path d="M9 16h14" stroke-dasharray="1.6 1.8"/>`,
   value: `<rect x="5" y="8" width="11" height="16" rx="1.5" class="a"/><rect x="16" y="8" width="11" height="16" rx="1.5" class="b"/><path d="M21.5 4.5v2M10.5 4.5v2"/>`,
   shade: `<path d="M16 7a9 9 0 0 0 0 18z" class="a"/><path d="M16 7a9 9 0 0 1 0 18z" class="g"/>`,
   neutral: `<rect x="5" y="6" width="22" height="20" rx="1.5" class="a"/><rect x="11.5" y="12" width="9" height="8" rx="1" class="g"/>`,
