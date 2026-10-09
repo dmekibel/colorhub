@@ -3536,19 +3536,20 @@ scenario("paintings", "swiping the picture moves to the next/previous painting b
 // David's polish pass, 2026-10-09: a compact action row (Keep, Share, On the map — Play only once a real game is
 // wired, never Learn or Compare, which don't belong on this page any more), and "Findings" + "Analysis" merged
 // into one section with the strongest lines first and the rest behind one "More".
-// PLAN §3.6 (design/SIMPLIFY/PLAN.md): the painting page's surface action row is Learn these · ♡ Keep ·
-// Share -- On the map and Play moved into ⋯ (PLAN's "Go" group). ♡ Keep is the page's own heart (js/favs.js
-// fvArtHeart, favoriting the painting), not csActions' own "keep" (saving the palette separately), which is
-// why it has no [data-cs] of its own -- see .gl-act-keep in js/gallery.js/css/gallery.css.
-scenario("paintings", "the action row is compact (Learn/Keep/Share) and Findings/Analysis read as one section", async t => {
+// PLAN §3.6 (design/SIMPLIFY/PLAN.md), revised per the coordinator's favs fix (2026-10-10): the heart lives
+// in the top bar now (visible without scrolling, beside ⋯ -- js/trail.js tlDecorate, David relayed 2026-10-09:
+// "make the heart on any painting much closer up"), not the action row, so the row's third slot is "On the
+// map" (csActions' shared door, labeled "See its colors"): Learn these · See its colors · Share.
+scenario("paintings", "the action row is compact (Learn/See its colors/Share) and Findings/Analysis read as one section", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   const acts = await t.waitFor("[data-csacts] .cs-act", 15000, "the action row");
   const keys = t.$$("[data-csacts] .cs-act[data-cs]").map(b => b.dataset.cs);
   t.expect(keys.length <= 3, `the action row has ${keys.length} csActions buttons, not compact`);
-  t.expect(!keys.includes("compare") && !keys.includes("map") && !keys.includes("play"), `On the map, Play or Compare still in the action row: ${keys}`);
+  t.expect(!keys.includes("compare") && !keys.includes("play") && !keys.includes("keep"), `Play, Compare or the duplicate palette-keep is in the action row: ${keys}`);
   t.expect(keys[0] === "learn", `expected Learn first, got ${keys}`);
+  t.expect(keys.includes("map"), `On the map ("See its colors") is missing from the action row: ${keys}`);
   t.expect(keys.includes("share"), `Share is missing from the action row: ${keys}`);
-  t.expect(t.$("[data-csacts] .gl-act-keep .fva-heart"), "the ♡ Keep heart is missing from the action row");
+  t.expect(t.$(".art-top [data-fva]"), "the heart isn't in the top bar beside the museum link, where it's visible without scrolling");
   // the wrapper's own header reads "Findings"; nested sub-cards (painter row, "another century") keep their own
   // headers, but nothing in here should say "Analysis" any more -- it folded into this one section
   t.expect(/Findings/.test(t.text(".gl-finds > .sec-head")), "the Findings wrapper's own header is missing or wrong");

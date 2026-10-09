@@ -175,8 +175,12 @@ function tlDecorate(el) {
   // an ad-hoc header that already carries its own button (a painter page's "Compare", Art's "Surprise me"...)
   // has no reserved room for more: it keeps just the place pill, today's exact footprint, until Lane 4 moves
   // that button into the page's own action row (PLAN §3.5/§4) and frees the bar up for the rest too. A bare
-  // ad-hoc header (back alone) has the room, same as a .nav-top with its reserved .nav-r.
-  const crowded = !nav && !bar && !back.classList.contains("cp-close") && hd.children.length > 1;
+  // ad-hoc header (back alone) has the room, same as a .nav-top with its reserved .nav-r. One exception: a
+  // [data-fva] heart (David, relayed 2026-10-10: "make the heart on any painting much closer up... visible
+  // without scrolling" -- js/favs.js fvArtHeart on the painting page) is one of the bar's allowed slots, same
+  // as the color page's own hero heart -- it doesn't make the header "crowded" on its own.
+  const heartSlot = hd.querySelector(":scope > [data-fva]");
+  const crowded = !nav && !bar && !back.classList.contains("cp-close") && hd.children.length > (heartSlot ? 2 : 1);
   // the named ‹ (PLAN §3.5): a small label beside the chevron, only where there's reserved or spare room --
   // CSS-only (css/trail.css [data-back]:has(.tl-back-label)), so it works the same in every header shape
   // without any of those headers' own files changing. A crowded ad-hoc header, a float over a full-bleed hero
