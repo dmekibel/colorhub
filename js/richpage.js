@@ -31,10 +31,21 @@ const RP_TIER = { "pigment-mineral-dye": "A pigment, dye or mineral name", "trad
   person: "Named after a person", "standard-system": "A standard's name", commercial: "A brand name", "descriptive-modifier": "A described shade", "basic-term": "A basic color word", undocumented: "Origin undocumented" };
 const RP_FS = { since: y => `first recorded as a color word, ${y}`, ral: y => `RAL, ${y}`, "maerz-paul": y => `Maerz & Paul, ${y}`, ridgway: y => `Ridgway, ${y}`, "ridgway-1886": y => `Ridgway, ${y}`,
   "iscc-nbs": y => `ISCC-NBS, ${y}`, xkcd: y => `the crowd survey, ${y}`, werner: y => `Werner, ${y}`, pigment: y => `${y}` };
+// the source-system id (js/sources.js) behind each "fs" code, when we have a page for it -- so the cover's
+// second tier clause ("Named from nature · Ridgway, 1912") is tappable straight to that page (David, 2026-10-09).
+const RP_FS_SRC = { ral: "ral", "maerz-paul": "maerz-paul", ridgway: "ridgway", "ridgway-1886": "ridgway", "iscc-nbs": "iscc-nbs", xkcd: "xkcd", werner: "werner", pigment: "pigment" };
 function rpTierLine(node, entry) {
-  if (!node) return entry && entry.src ? rcTierLine(entry.src) : "";
-  const first = RP_TIER[node.tier] || "", fs = node.fs && RP_FS[node.fs], second = fs && node.fy && node.fy > 0 ? fs(node.fy) : "";   // a negative year is a prehistoric pigment, not a word
-  return first ? (second ? `${first} · ${second}` : first) : "";
+  if (!node) return entry && entry.src ? esc(rcTierLine(entry.src)) : "";
+  const first = RP_TIER[node.tier] || ""; if (!first) return "";
+  const fs = node.fs && RP_FS[node.fs], secondTxt = fs && node.fy && node.fy > 0 ? fs(node.fy) : "";   // a negative year is a prehistoric pigment, not a word
+  if (!secondTxt) return esc(first);
+  const sysId = RP_FS_SRC[node.fs];
+  let secondHTML;
+  if (sysId && typeof srcLinkHTML === "function") {
+    const m = /^([^,]+)(,.*)?$/.exec(secondTxt);
+    secondHTML = m ? srcLinkHTML(sysId, m[1]) + esc(m[2] || "") : esc(secondTxt);
+  } else secondHTML = esc(secondTxt);
+  return `${esc(first)} · ${secondHTML}`;
 }
 const rpCap = s => s.charAt(0).toUpperCase() + s.slice(1);
 // definition (truth pass, 2026-10-08): the story's own first sentence (cut at its colon when long), else the color's
@@ -60,7 +71,23 @@ function rpDefinition(name, hex, node, art) {
   const near = (CORE_NAMES || coreFallback()).map(e => ({ e, d: de2000(hex, e.lab || (e.lab = lab(e.h))) })).filter(x => x.e.n.toLowerCase() !== name.toLowerCase() && x.d >= 1.5).sort((a, b) => a.d - b.d)[0];
   if (!near || (node && node.tier === "basic-term")) return null;
   const diff = lookDiff({ h: near.e.h, n: near.e.n }, { h: hex, n: name });
-  return { t: diff === "almost the same" ? `Almost the same as ${near.e.n.toLowerCase()}.` : `${rpCap(diff)} than ${near.e.n.toLowerCase()}.`, src: "Measured" };
+  return { t: diff === "almost the same" ? `Almost the same as ${near.e.n.toLowerCase()}.` : `${rpCap(diff)} than ${near.e.n.toLowerCase()}.`, src: "Measured",
+    near: { n: near.e.n, h: near.e.h, slug: routeSlug(near.e.n) } };   // David, 2026-10-09: this neighbor's name opens Family's Compare view, pinned on it
+}
+// the def line, with its neighbor's name tappable when there is one (js/family.js famOpenCompare)
+function rpDefLineHTML(def) {
+  if (!def) return "";
+  if (!def.near) return esc(def.t);
+  const label = def.near.n.toLowerCase(), i = def.t.toLowerCase().lastIndexOf(label);
+  if (i < 0) return esc(def.t);
+  return `${esc(def.t.slice(0, i))}<button type="button" class="rp-def-link" data-rp-cmp="${esc(def.near.slug)}" data-h="${def.near.h}">${esc(def.t.slice(i, i + label.length))}</button>${esc(def.t.slice(i + label.length))}`;
+}
+// Learn it's label follows the Learner Model (David, 2026-10-09): "Learn it" -> "Review" while in progress ->
+// "Known" (a quiet check) once it's yours.
+function rpLearnLabel(name, hex) {
+  if (typeof knowState !== "function") return { t: "Learn it", known: false };
+  let st = "none"; try { st = knowState({ n: name, h: hex }); } catch (e) {}
+  return st === "yours" ? { t: "Known", known: true } : (st === "learning" || st === "met") ? { t: "Review", known: false } : { t: "Learn it", known: false };
 }
 function rpRelation(name, tapped, hex) {
   if (tapped) return "Your color";   // the match % is said once, on the hex line below
@@ -83,34 +110,116 @@ function rpYoursLine(name, hex, tapped) {
   const d = lookDiff({ h: tapped, n: "Your color" }, { h: hex, n: name }), m = pctMatch(de2000(tapped, hex));
   return d === "almost the same" ? `Yours is almost the same as ${name.toLowerCase()} · ${m}` : `Yours is ${d} than ${name.toLowerCase()} · ${m}`;
 }
+// One compact action row on the cover (David, 2026-10-09: "Learn it could be a small button next to the Pair
+// with… button, and the heart somewhere there as well"): Learn it (small pill, the row's primary), Pair with…,
+// the heart -- sized and styled to stay legible sitting right on the color itself. Below it, the quiet hex row.
+function rpActionRowHTML(name, hex, tapped) {
+  const learnHex = tapped || hex, label = rpLearnLabel(name, learnHex);
+  const liked = typeof fvHas === "function" && fvHas(learnHex);
+  return `<div class="rp-actrow">
+    <button type="button" class="rp-learnpill${label.known ? " rp-learnpill-known" : ""}" data-learnit>${label.known ? ICON.check || "" : ""}<span>${esc(label.t)}</span>${!label.known ? `<em>2 min</em>` : ""}</button>
+    ${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(learnHex, name) : ""}
+    <button type="button" class="icon-btn rp-heart${liked ? " saved" : ""}" data-fvh data-rp-heart aria-label="${liked ? "Remove from your colors" : "Add to your colors"}" aria-pressed="${liked}">${liked ? ICON.heartOn : ICON.heart}</button>
+  </div>`;
+}
 function rpCoverFoot(name, hex, tapped, entry) {
   const id = "rp-cov-" + Math.random().toString(36).slice(2, 8), rel = rpRelation(name, tapped, entry && entry.h || hex);
   return { id, html: `${rel ? `<span class="cp-chip">${esc(rel)}</span>` : ""}
         <h1 class="rp-name">${esc(name)}</h1>
         ${tapped ? `<p class="rp-yours">${esc(rpYoursLine(name, hex, tapped))}</p>` : `<p class="rp-tier" data-rp-tier></p>
         <p class="rp-def" data-rp-def></p><p class="rp-defsrc" data-rp-defsrc></p>`}
-        <span class="rp-hexrow"><button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}</button>${tapped && typeof fvSet === "function" ? `<button class="rp-saveyours" data-rp-saveyours>${typeof fvHas === "function" && fvHas(tapped) ? "Saved to your colors" : "Save your color"}</button>` : ""}</span>${typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(tapped || hex, name) : ""}` };
+        ${!tapped ? rpActionRowHTML(name, hex, tapped) : ""}
+        <span class="rp-hexrow"><button class="mono cp-hex" data-copy="${tapped || hex}">${tapped || hex}</button>${tapped && typeof fvSet === "function" ? `<button class="rp-saveyours" data-rp-saveyours>${typeof fvHas === "function" && fvHas(tapped) ? "Saved to your colors" : "Save your color"}</button>` : ""}</span>${tapped && typeof sxPairBtnHTML === "function" ? sxPairBtnHTML(tapped || hex, name) : ""}` };
+}
+// a quick, good-enough legibility lift for the liking-moment fill: blend the page's color toward white or black
+// until it reads against the heart's own dark surface, without a full perceptual model (it's a decoration, not a swatch)
+function rpBlendHex(a, b, t) {
+  const pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
+  const mix = (sh) => Math.round(((pa >> sh & 255)) + (((pb >> sh & 255)) - ((pa >> sh & 255))) * t);
+  return "#" + [mix(16), mix(8), mix(0)].map(v => Math.max(0, Math.min(255, v)).toString(16).padStart(2, "0")).join("");
+}
+function rpLegibleFill(hex) {
+  if (typeof rcContrast !== "function") return hex;
+  let h = hex, i = 0; const toward = ink(hex) === "dark" ? "#FFFFFF" : "#000000";
+  while (rcContrast(h, "#1F1D18") < 1.5 && i < 6) { h = rpBlendHex(h, toward, .14); i++; }
+  return h;
+}
+// the liking moment (David, 2026-10-09): the heart fills with the page's own color (lifted if it would be
+// illegible), anticipation -> impact -> settle, a haptic, and a quiet toast to the You page.
+function rpLikeMoment(btn, hex, on) {
+  if (!btn) return;
+  const fill = rpLegibleFill(hex);
+  btn.style.setProperty("--rp-heart-c", fill);
+  btn.classList.remove("rp-like-go"); void btn.offsetWidth; if (on) btn.classList.add("rp-like-go");
+  buzz(on ? 8 : 4);
+  if (on) toast("Added to your palette", { dot: fill, ms: 1800, action: typeof go === "function" ? "You" : null, onAction: typeof go === "function" ? () => go("you") : null });
 }
 // Double-tap the cover's color to keep it in your colors, or let it go (David, 2026-10-08), like a photo you love: a heart
-// blooms where you tapped, with a haptic and the color's own note. Only the bare color counts: a tap on the hex, a
-// button or a link stays theirs, and a single tap does exactly what it did before (nothing waits for a second one).
+// blooms where you tapped, with a haptic and the color's own note. A single tap, once ~250ms pass with no second tap,
+// opens the full-screen focus view (David, 2026-10-09) instead -- so the two gestures never race each other. A tap on
+// the hex, a button or a link is always theirs alone, immediately, with no wait for either gesture.
 function rpCoverLike(el, name, hex) {
   const hero = el.querySelector(".cp-hero"); if (!hero || typeof fvSet !== "function") return;
-  let last = null;
+  let last = null, singleT = 0;
   hero.addEventListener("pointerup", e => {
-    if (!e.isPrimary || e.button > 0 || e.target.closest("button, a, input, [data-copy], [data-back], [data-tl-exit]")) { last = null; return; }
+    if (!e.isPrimary || e.button > 0 || e.target.closest("button, a, input, [data-copy], [data-back], [data-tl-exit]")) { last = null; if (singleT) { clearTimeout(singleT); singleT = 0; } return; }
     const now = performance.now();
-    if (!last || now - last.t > 320 || Math.hypot(e.clientX - last.x, e.clientY - last.y) > 32) { last = { t: now, x: e.clientX, y: e.clientY }; return; }
-    last = null;
-    const on = !fvHas(hex), btn = el.querySelector("[data-fvh]");
-    if (btn) btn.click(); else fvPageSet(el, hex, name, on);   // the page's own heart repaints with it
-    if (!btn) buzz(on ? 8 : 4);
-    if (on && typeof sfxColor === "function") sfxColor(hex);
-    const r = hero.getBoundingClientRect(), b = document.createElement("i");
-    b.className = "fva-bloom rp-like" + (on ? "" : " off"); b.innerHTML = on ? FVA_HEART_ON : FV_HEART;
-    b.style.left = e.clientX - r.left + "px"; b.style.top = e.clientY - r.top + "px"; b.style.color = ink(hex) === "dark" ? "#1A1814" : "#F2EEE6";
-    hero.appendChild(b); setTimeout(() => b.remove(), 900);
-    toast(on ? "In your colors" : "Taken out of your colors", { dot: hex, ms: 1600 });
+    if (last && now - last.t <= 320 && Math.hypot(e.clientX - last.x, e.clientY - last.y) <= 32) {
+      if (singleT) { clearTimeout(singleT); singleT = 0; }
+      last = null;
+      const on = !fvHas(hex), btn = el.querySelector("[data-rp-heart]");
+      if (btn) { rpLikeMoment(btn, hex, on); btn.innerHTML = on ? ICON.heartOn : ICON.heart; btn.classList.toggle("saved", on); btn.setAttribute("aria-pressed", on); fvPageSet(el, hex, name, on); }
+      else fvPageSet(el, hex, name, on);
+      if (on && typeof sfxColor === "function") sfxColor(hex);
+      const r = hero.getBoundingClientRect(), b = document.createElement("i");
+      b.className = "fva-bloom rp-like" + (on ? "" : " off"); b.innerHTML = on ? FVA_HEART_ON : FV_HEART;
+      b.style.left = e.clientX - r.left + "px"; b.style.top = e.clientY - r.top + "px"; b.style.color = ink(hex) === "dark" ? "#1A1814" : "#F2EEE6";
+      hero.appendChild(b); setTimeout(() => b.remove(), 900);
+      if (!btn) toast(on ? "In your colors" : "Taken out of your colors", { dot: hex, ms: 1600 });
+      return;
+    }
+    last = { t: now, x: e.clientX, y: e.clientY };
+    if (singleT) clearTimeout(singleT);
+    const cx = e.clientX, cy = e.clientY;
+    singleT = setTimeout(() => { singleT = 0; if (typeof rpOpenFocus === "function") rpOpenFocus(name, hex, cx, cy); }, 260);
+  });
+}
+// ---------- the focus view (David, 2026-10-09): a tap on the cover's bare fill takes the color full screen, so you
+// can look at it alone. The name sits small and quiet, fading after ~2s; a tap while it's dim brings it back; a tap
+// while it's lit, or a swipe down, returns exactly to the page. Grows from where you tapped; a reduced-motion visitor
+// gets a plain fade instead. Keeps the screen awake while open, when Wake Lock exists.
+let RP_FOCUS = null;
+function rpOpenFocus(name, hex, cx, cy) {
+  if (RP_FOCUS) return;
+  const reduce = typeof reduceMotion !== "undefined" && reduceMotion;
+  const ov = document.createElement("div");
+  ov.className = "rp-focus"; ov.setAttribute("data-ink", ink(hex));
+  ov.style.setProperty("--c", hex);
+  ov.style.setProperty("--ox", (cx != null ? cx / innerWidth * 100 : 50) + "%");
+  ov.style.setProperty("--oy", (cy != null ? cy / innerHeight * 100 : 50) + "%");
+  ov.innerHTML = `<p class="rp-focus-name">${esc(name)}</p>`;
+  document.body.appendChild(ov);
+  RP_FOCUS = ov;
+  let dimT = 0, wakeLock = null, dim = false;
+  const schedule = () => { clearTimeout(dimT); dimT = setTimeout(() => { dim = true; ov.classList.add("dim"); }, 2000); };
+  try { if (navigator.wakeLock && navigator.wakeLock.request) navigator.wakeLock.request("screen").then(w => wakeLock = w).catch(() => {}); } catch (e) {}
+  requestAnimationFrame(() => { ov.classList.add("on"); schedule(); });
+  const close = () => {
+    clearTimeout(dimT); if (wakeLock) { try { wakeLock.release(); } catch (e) {} }
+    document.removeEventListener("keydown", onKey2);
+    ov.classList.remove("on"); ov.classList.add("closing"); buzz(4);
+    RP_FOCUS = null;
+    if (reduce) ov.remove(); else setTimeout(() => ov.remove(), 280);
+  };
+  const onKey2 = e => { if (e.key === "Escape") close(); };
+  document.addEventListener("keydown", onKey2);
+  let sy = 0, sx = 0, dragging = false;
+  ov.addEventListener("pointerdown", e => { sy = e.clientY; sx = e.clientX; dragging = true; });
+  ov.addEventListener("pointerup", e => {
+    if (!dragging) return; dragging = false;
+    if (e.clientY - sy > 70 && Math.abs(e.clientX - sx) < 80) return close();   // swipe down, always returns
+    if (dim) { dim = false; ov.classList.remove("dim"); schedule(); return; }   // tap while dim: just bring the name back
+    close();   // tap while lit: return to the page
   });
 }
 function rpCoverFill(el, name, hex, heroHex, entry) {
@@ -121,15 +230,20 @@ function rpCoverFill(el, name, hex, heroHex, entry) {
     if (!el.isConnected) return;
     const tier = rpTierLine(g.node, entry), def = rpDefinition(name, hex, g.node, a ? { lede: a.lede, n: a.notes ? a.notes.size : 0 } : null);
     const q = s => el.querySelector(s);
-    el.querySelectorAll("[data-rp-tier]").forEach(t => t.textContent = tier);   // the cover and the Names and codes drawer say the same thing
-    // "Also called": what the story's sources say it's also called
-    const aka = a && a.aside && Array.isArray(a.aside.aka) ? a.aside.aka.filter(x => x && x.toLowerCase() !== name.toLowerCase()) : [];
-    const ap = el.querySelector("[data-rp-aka]");
-    if (ap && aka.length && ap.hidden) { ap.textContent = `Also called ${aka.join(", ")}.`; ap.hidden = false; const h = el.querySelector('[data-rp-head="names"]'); if (h && !/also /.test(h.textContent)) h.textContent += ` · also ${aka[0]}`; }
-    if (def && q("[data-rp-def]")) { q("[data-rp-def]").textContent = def.t; q("[data-rp-defsrc]").textContent = def.src; }
+    el.querySelectorAll("[data-rp-tier]").forEach(t => t.innerHTML = tier);   // the cover and the ID card say the same thing
+    if (def && q("[data-rp-def]")) {
+      q("[data-rp-def]").innerHTML = rpDefLineHTML(def); q("[data-rp-defsrc]").textContent = def.src;
+      const cmp = q("[data-rp-cmp]"); if (cmp) cmp.onclick = () => rpOpenFamilyCompare(el, cmp.dataset.rpCmp, cmp.dataset.h);
+    }
     el.querySelectorAll(".rp-cov-hold").forEach(x => x.classList.add("in"));
     el.dataset.coverReady = "1";   // the cover's words are in: the title won't move again (js/mapxfer.js waits for this)
   });
+}
+// the cover's near-neighbor line opens Family in Compare, pinned on it (js/family.js famOpenCompare); waits for
+// the article/body to have loaded if the tap lands before it has.
+function rpOpenFamilyCompare(el, slug, hex) {
+  const go = () => { if (el.__artData && el.__bodyHost && typeof famOpenCompare === "function") famOpenCompare(el.__bodyHost, el.__artData.self, (el.__artData.art && el.__artData.art.aside) || {}, slug, hex); else toast("Loading its family…"); };
+  if (el.__artPromise) el.__artPromise.then(go); else go();
 }
 
 // ---------- the glance strip (a peek of it sits under the cover) ----------
@@ -421,26 +535,33 @@ function rpNamesDrawer(entry, name, hex, o) {
   return rpDrawer("names", "Names and codes", body, esc(`${hex}${n ? ` · listed by ${n} naming system${n === 1 ? "" : "s"}` : ""}${aka.length ? ` · also ${aka[0]}` : ""}`));
 }
 
-// ---------- the story slot: its own story, as a door or inline; only without one, the twin's ----------
+// ---------- the story: head first (lede), then Paintings sits between it and the chapters/Family body ----------
+// David, 2026-10-09 restructure: articleRenderSplit (js/article.js) draws the intro into headHost and the
+// chapters onward into bodyHost, so the Paintings section's own markup can sit between them in the DOM without
+// either piece needing to know about it. A color with no article gets the twin fallback in headHost instead.
 function rpStoryFill(el, name, hex, o) {
-  const slot = el.querySelector("[data-ar-slot]"); if (!slot) return;
-  const twin = () => { if (el.isConnected && !el.querySelector(".rp-twin-host")) slot.insertAdjacentHTML("afterend", `<div class="rp-twin-host">${rpTwinHTML(name, hex)}</div>`); };
-  if (typeof articleRender !== "function") return twin();
-  articleRender(routeSlug(name), slot, { n: name, h: hex, facet: o.facet || null, fig: o.fig || "" }).then(has => {
-    if (!has) return twin();
+  const headHost = el.querySelector("[data-ar-head]"), bodyHost = el.querySelector("[data-ar-body]");
+  if (!headHost || !bodyHost) return Promise.resolve(null);
+  const twin = () => { headHost.hidden = false; if (!headHost.querySelector(".rp-twin-host")) headHost.innerHTML = `<div class="rp-twin-host">${rpTwinHTML(name, hex)}</div>`; return { has: false }; };
+  if (typeof articleRenderSplit !== "function") { el.__artPromise = Promise.resolve(twin()); return el.__artPromise; }
+  el.__artPromise = articleRenderSplit(routeSlug(name), headHost, bodyHost, { n: name, h: hex, facet: o.facet || null }).then(r => {
+    if (!r || !r.has) return twin();
+    el.__artData = { art: r.art, self: r.self }; el.__bodyHost = bodyHost;
     rpBarSync(el);
+    return r;
   });
+  return el.__artPromise;
 }
 
-// ---------- the color header: stays when the cover scrolls away, with jump chips (#4) ----------
+// ---------- the color header: stays when the cover scrolls away, with jump chips to the new sections ----------
 function rpBarHTML(name, hex) {
   const hair = typeof rcContrast === "function" && rcContrast(hex, "#0E0D0B") < 1.6 ? " rp-bar-hair" : "";
   return `<div class="rp-bar${hair}" style="--c:${hex}" data-ink="${ink(hex)}" aria-hidden="true">
     <button class="rp-bar-back" data-rp-back aria-label="Back">${ICON.back}</button><button class="rp-bar-name" data-rp-top>${esc(name)}</button>
-    <nav class="rp-bar-chips">${[["story", "Story"], ["paint", "Paintings"], ["walk", "Neighbors"], ["names", "Codes"]].map(([k, t]) => `<button data-rp-jump="${k}" hidden>${t}</button>`).join("")}</nav></div>`;
+    <nav class="rp-bar-chips">${[["story", "Story"], ["paint", "Paintings"], ["family", "Family"], ["id", "ID"]].map(([k, t]) => `<button data-rp-jump="${k}" hidden>${t}</button>`).join("")}</nav></div>`;
 }
 function rpBarSync(el) {
-  const has = { story: !!el.querySelector(".ar-door,.ar,.rp-twin"), paint: (() => { const d = el.querySelector('[data-rp-drawer="paint"]'); return d && !d.hidden; })(), walk: !!el.querySelector(".rp-walk"), names: !!el.querySelector('[data-rp-drawer="names"]') };
+  const has = { story: !!el.querySelector(".ar-door,.ar-head,.rp-twin"), paint: !!el.querySelector(".rp-paint"), family: !!el.querySelector(".ar-fam"), id: !!el.querySelector(".rp-idcard") };
   const bar = el.querySelector(".rp-bar") || document.querySelector("body > .rp-bar"); if (!bar) return;
   bar.querySelectorAll("[data-rp-jump]").forEach(b => { b.hidden = !has[b.dataset.rpJump]; });
 }
@@ -452,11 +573,10 @@ function rpBarWire(el) {
     if (e.target.closest("[data-rp-top]")) return window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
     const j = e.target.closest("[data-rp-jump]"); if (!j) return;
     const k = j.dataset.rpJump;
-    if (k === "story") return scrollTo(el.querySelector(".ar-door,.ar,.rp-twin"));
-    if (k === "walk") return scrollTo(el.querySelector(".rp-walk"));
-    const d = el.querySelector(`[data-rp-drawer="${k}"]`); if (!d) return;
-    el.querySelectorAll(".rp-drawer[open]").forEach(x => { if (x !== d) x.open = false; });
-    d.open = true; setTimeout(() => scrollTo(d), 30);
+    if (k === "story") return scrollTo(el.querySelector(".ar-door,.ar-head,.rp-twin"));
+    if (k === "paint") return scrollTo(el.querySelector(".rp-paint"));
+    if (k === "family") return scrollTo(el.querySelector(".ar-fam"));
+    if (k === "id") return scrollTo(el.querySelector(".rp-idcard"));
   });
   // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page
   document.body.appendChild(bar);
@@ -466,6 +586,122 @@ function rpBarWire(el) {
   document.addEventListener("scroll", onScroll, { passive: true, capture: true });
   cleanup.push(() => { document.removeEventListener("scroll", onScroll, true); bar.remove(); });
   setTimeout(() => { rpBarSync(el); check(); }, 400);   // a Back that lands mid-page shows it at once
+}
+
+// ---------- Paintings (David, 2026-10-09: "one of the most important sections... hidden at the bottom") ----------
+// First-class, high up: the lead painting as a museum label, the gallery strip + sliders + source tabs + its own
+// pairing lines (js/paintingsof.js paintingsOfSection, unchanged), the painter who used it most, the decade line,
+// then the remaining archive findings as plain one-liners (the old stat-card carousel, reworded). "In words" and
+// "In the world" (poems, gems, botany, fashion, films) tuck in quietly at the end: real depth, no new headline.
+function rpPaintSectionHTML(name, hex, entry, famC) {
+  const call = (f, ...a) => typeof f === "function" ? f(...a) : "";
+  return `<section class="rp-paint" id="rp-s-paint">
+    <h2>Paintings</h2>
+    <div class="rp-paint-lead" data-rp-lead></div>
+    <div class="gl-in" data-glin></div>
+    ${call(rcRolePaintingsHTML, name, hex)}
+    ${call(rcReachSection, name, hex)}
+    ${call(rcRoleSection, name, hex)}
+    ${call(rcPaintersSection, name, hex)}
+    ${call(rcWhenWhereSection, name, hex)}
+    ${call(rcYouHTML, name, hex)}
+    <div class="rp-findings-box" data-rp-findings></div>
+    <div class="rp-elsewhere">
+      <div class="c-poems"></div>
+      ${call(archiveRows, entry, "books", famC)}
+      ${call(rcWernerLine, name, hex)}
+      ${call(btRow, entry, famC)}
+      ${call(gmRow, entry, famC)}
+      ${call(bdRow, entry, famC)}
+      <section class="fx-in" data-world-in></section>
+      ${call(archiveRows, entry, "films", famC)}
+    </div>
+  </section>`;
+}
+function rpPaintFill(el, name, hex, entry, famC) {
+  const sec = el.querySelector(".rp-paint"); if (!sec) return;
+  const artPromise = el.__artPromise || Promise.resolve(null);
+  const leadHost = sec.querySelector("[data-rp-lead]");
+  artPromise.then(r => {
+    const art = (r && r.art) || {}, self = (r && r.self) || { slug: routeSlug(name), n: name, h: hex };
+    if (leadHost && leadHost.isConnected && typeof arfLead === "function") arfLead(f => { leadHost.appendChild(f); return true; }, art, self).catch(() => {});
+  });
+  const gi = sec.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, { n: name, h: hex });
+  if (typeof rcWireYou === "function") rcWireYou(sec, name, hex);
+  Promise.all([rpGraph(name), typeof rcLoadReach === "function" ? rcLoadReach() : Promise.resolve(null)]).then(([g, rr]) => {
+    const box = sec.querySelector("[data-rp-findings]"); if (!box) return;
+    const cards = rpGlanceCards(name, hex, g, rr && rr[name]);
+    if (!cards.length) { box.remove(); return; }
+    box.innerHTML = `<p class="rp-findings-h">In the archive</p><ul class="rp-findings">${cards.map(c => `<li><button type="button" data-rp-door="${c.door}"><b>${esc(c.fig)}</b> ${esc(c.text)}</button></li>`).join("")}</ul>`;
+    box.addEventListener("click", e => { const b = e.target.closest("[data-rp-door]"); if (b && b.dataset.rpDoor === "paint" && typeof paintingsOfPage === "function") paintingsOfPage([hex], { back: true }); });
+  });
+  colorPoems(sec.querySelector(".c-poems"), entry);
+  if (typeof worldColorRow === "function") worldColorRow(sec, { kind: "color", h: hex, title: name }, famC);
+  // quiet: the two extra blocks collapse to nothing if they turn out empty
+  setTimeout(() => { [".c-poems", "[data-world-in]"].forEach(s => { const x = sec.querySelector(s); if (x && !x.textContent.trim() && !x.querySelector("img,button,i")) x.remove(); }); }, 900);
+}
+
+// ---------- the ID card (David, 2026-10-09): facts, codes and sources merged into one specimen card ----------
+function rpIdCardHTML() {
+  return `<section class="rp-idcard" id="rp-s-id">
+    <h2>ID card</h2>
+    <div class="rp-id-swatch" data-rp-id-swatch></div>
+    <dl class="ar-facts rp-id-facts" data-rp-id-facts></dl>
+    <p class="rp-n-h">Codes</p>
+    <div class="cp-codes" data-rp-id-codes></div>
+    <p class="fine cp-codes-fine">CMYK here is a rough formula, not a print profile: real values depend on the paper and press.</p>
+    <div class="rc-passport" data-rp-id-stamps hidden></div>
+  </section>`;
+}
+function rpSourceValueHTML(text) {
+  if (!text || typeof SOURCE_SYSTEMS === "undefined") return esc(text || "");
+  for (const [id, sys] of Object.entries(SOURCE_SYSTEMS)) {
+    const label = sys.short.split(",")[0];
+    if (new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(text)) return esc(text).replace(new RegExp(esc(label), "i"), m => srcLinkHTML(id, m));
+  }
+  return esc(text);
+}
+function rpIdCardFill(el, entry, name, hex, codes) {
+  const sec = el.querySelector(".rp-idcard"); if (!sec) return;
+  const sw = sec.querySelector("[data-rp-id-swatch]"); if (sw) { sw.style.setProperty("--c", hex); sw.setAttribute("data-ink", ink(hex)); }
+  const codesBox = sec.querySelector("[data-rp-id-codes]");
+  if (codesBox) codesBox.innerHTML = codes.map(([k, v]) => `<button class="cp-code-row" data-copy="${esc(v)}"><span>${esc(k)}</span><b class="mono">${esc(v)}</b></button>`).join("");
+  const famC = typeof rcFamC === "function" ? rcFamC(hex) : null;
+  (el.__artPromise || Promise.resolve(null)).then(r => {
+    const art = r && r.art, o = (art && art.aside && art.aside.origin) || {};
+    const rows = [];
+    if (famC && famC.n && famC.n.toLowerCase() !== name.toLowerCase()) rows.push(["Family", `<button type="button" class="link" data-ar-open-fam="${esc(routeSlug(famC.n))}" data-h="${famC.h}">${esc(famC.n)}</button>`]);
+    if (o.named_after) rows.push(["Named after", esc(o.named_after)]);
+    if (o.first_recorded) rows.push(["First recorded", rpSourceValueHTML(o.first_recorded)]);
+    const factsBox = sec.querySelector("[data-rp-id-facts]");
+    if (factsBox) { factsBox.innerHTML = rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join(""); const fo = factsBox.querySelector("[data-ar-open-fam]"); if (fo) fo.onclick = () => openCoreName(fo.dataset.h, fo.textContent); }
+    const stampsBox = sec.querySelector("[data-rp-id-stamps]");
+    if (stampsBox && typeof RC_STAMPS !== "undefined") {
+      const stamps = RC_STAMPS.filter(([k]) => (entry.src || []).includes(k));
+      if (stamps.length) { stampsBox.hidden = false; stampsBox.innerHTML = stamps.map(([k, label, date]) => `<button type="button" class="rc-stamp" data-src-open="${esc(k)}"><b>${esc(label)}</b>${date ? `<em>${esc(date)}</em>` : ""}</button>`).join(""); }
+    }
+  });
+}
+
+// ---------- "Next: <name> ›" (David, 2026-10-09): walks the family by nearest ΔE, a tap or a swipe ----------
+function rpNextHTML() { return `<div class="rp-next-rel" data-rp-next-rel hidden></div>`; }
+function rpNextFill(el, name, hex) {
+  const box = el.querySelector("[data-rp-next-rel]"); if (!box) return;
+  (el.__artPromise || Promise.resolve(null)).then(r => {
+    const aside = (r && r.art && r.art.aside) || {};
+    const fam = [...arList(aside.siblings || []), ...arList(aside.children || []), ...arList(aside.parent || [])].map(s => typeof arColor === "function" ? arColor(s) : null).filter(c => c && c.n.toLowerCase() !== name.toLowerCase());
+    let best = fam.map(c => ({ c, d: de2000(hex, c.h) })).sort((a, b) => a.d - b.d)[0];
+    if (!best) { const list = CORE_NAMES || coreFallback(); const e = list.map(x => ({ x, d: de2000(hex, x.lab || (x.lab = lab(x.h))) })).filter(x => x.x.n.toLowerCase() !== name.toLowerCase()).sort((a, b) => a.d - b.d)[0]; if (e) best = { c: { n: e.x.n, h: e.x.h }, d: e.d }; }
+    if (!best) { box.remove(); return; }
+    box.hidden = false;
+    box.innerHTML = `<button type="button" class="rp-next-btn" data-h="${best.c.h}" data-n="${esc(best.c.n)}"><span>Next</span><b>${esc(best.c.n)}</b>${ICON.arrow}</button>`;
+    const open = () => openCoreName(best.c.h, best.c.n);
+    box.querySelector("button").onclick = open;
+    let tsx = 0, tsy = 0, moved = false;
+    box.addEventListener("touchstart", e => { const t = e.touches[0]; if (!t) return; tsx = t.clientX; tsy = t.clientY; moved = false; }, { passive: true });
+    box.addEventListener("touchmove", () => { moved = true; }, { passive: true });
+    box.addEventListener("touchend", e => { const t = e.changedTouches[0]; if (!t) return; if (moved && Math.abs(t.clientX - tsx) > 60 && Math.abs(t.clientY - tsy) < 40) open(); }, { passive: true });
+  });
 }
 
 // ---------- the tapped color's split cover (#7): save your exact color ----------
@@ -479,13 +715,13 @@ function rpSplitWire(el, name, hex, tapped) {
   };
 }
 
-// ---------- one page for every color (COLOR-PAGE-DESIGN §1; IMPROVE-2026-10-08/color-page.md, the ideal order) ----------
-// js/explore.js colorPage (the app's own colors) and js/names.js namePage (every other name) both draw through this, so
-// every color reads in one order: cover · color header · glance · primary · the story · you · field notes (Names and
-// codes last) · walk from here (the only neighbor list) · read next · the last line.
-// entry {n, h, src?, also?, notes?, shade?}; o: { tapped, cls, primary (html), paintHost (html), facet (a story built
-// from the wiki, js/article.js arFacetArt), fig (html), aka [], sources [], codes [[k, v]], readNext (html), node,
-// shadeBase }. Returns the screen; the caller wires its own primary row.
+// ---------- one page for every color (David, 2026-10-09 restructure, replacing the Field notes grab-bag) ----------
+// js/explore.js colorPage (the app's own colors) and js/names.js namePage (every other name) both draw through this,
+// so every color reads in one order: cover (name, origin, action row) · the story's intro (lede) · Paintings (first
+// class, high up) · the chapters (inline Contents) · Family (Tree/Spectrum/Compare/Map) · the ID card · a quiet
+// "Next: <relative>" row · the last line. Test yourself lives collapsed at the end of the chapters themselves.
+// entry {n, h, src?, also?, notes?, shade?}; o: { tapped, cls, facet (a story built from the wiki, js/article.js
+// arFacetArt), codes [[k, v]], node }. Returns the screen; the caller wires its own save/share icons, if any.
 function colorDossier(entry, o = {}) {
   const name = entry.n, hex = entry.h, tapped = o.tapped ? String(o.tapped).toUpperCase() : null, heroHex = tapped || hex;
   const famC = typeof rcFamC === "function" ? rcFamC(heroHex) : null;
@@ -500,28 +736,38 @@ function colorDossier(entry, o = {}) {
       </div>
     </div>
     ${rpBarHTML(name, heroHex)}
-    ${typeof rpGlanceHTML === "function" ? rpGlanceHTML(name, hex) : ""}
-    ${o.primary || ""}
     ${entry.shade ? `<p class="fine np-shade">A described shade: ${esc(entry.shade.base)} made ${esc(entry.shade.mod)}${o.shadeBase ? `. <button class="link" data-shade-base>See ${esc(entry.shade.base)}</button>` : "."}</p>` : ""}
-    <div class="ar-slot" data-ar-slot hidden></div>
-    ${typeof rcYouHTML === "function" ? rcYouHTML(name, hex) : ""}
-    ${rpDrawersHTML(entry, name, heroHex, famC, o.paintHost || "", o)}
-    ${rpWalkSection(name, heroHex)}
-    ${o.readNext || ""}
+    <div class="ar-head" data-ar-head hidden></div>
+    ${rpPaintSectionHTML(name, heroHex, entry, famC)}
+    <div class="ar-body" data-ar-body hidden></div>
+    ${rpIdCardHTML()}
+    ${rpNextHTML()}
     <p class="fine rp-last">Screen colors are approximate. Painting figures are measured from museum photographs of aged, varnished paintings.</p>
   `, "article cp-page" + (o.cls ? " " + o.cls : ""));
+  el.style.setProperty("--c", heroHex);   // the page's own faint tint (css/colorpage.css .screen.cp-page)
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
   wireLinks(el);
+  el.addEventListener("click", e => { const s = e.target.closest("[data-src-open]"); if (s) { e.preventDefault(); if (typeof sourcePage === "function") sourcePage(s.dataset.srcOpen); } });
   rpStoryFill(el, name, hex, o);
   rpCoverFill(el, name, hex, heroHex, entry);
   rpCoverLike(el, name, hex);
-  rpDrawersWire(el, name, heroHex);
+  // a direct tap on the heart itself, the same liking moment as the cover's double-tap (js/favs.js fvWireHeart
+  // only swaps the icon; this adds the fill + toast). Guarded: namePage() also calls fvWireHeart on this page,
+  // so the plain swap stays a harmless no-op fallback if this one is ever skipped.
+  const heartBtn = el.querySelector("[data-rp-heart]");
+  if (heartBtn && typeof fvSet === "function") heartBtn.onclick = () => {
+    const on = !fvHas(hex);
+    rpLikeMoment(heartBtn, hex, on); heartBtn.innerHTML = on ? ICON.heartOn : ICON.heart; heartBtn.classList.toggle("saved", on); heartBtn.setAttribute("aria-pressed", on);
+    fvPageSet(el, hex, name, on);
+    if (!on) toast("Removed from your colors");
+  };
+  rpPaintFill(el, name, heroHex, entry, famC);
+  rpIdCardFill(el, entry, name, heroHex, o.codes || []);
+  rpNextFill(el, name, heroHex);
   rpHoldWalk(el, name, heroHex);
   rpBarWire(el);
   if (tapped) rpSplitWire(el, name, hex, tapped);
-  colorPoems(el.querySelector(".c-poems"), entry, famC);
-  if (typeof worldColorRow === "function") worldColorRow(el, o.node || { kind: "color", h: hex, title: name }, famC);
   if (typeof rcWireOpen === "function") rcWireOpen(el, heroHex);
   el.querySelectorAll("[data-copy]").forEach(b => b.onclick = () => { try { navigator.clipboard.writeText(b.dataset.copy); toast("Copied " + b.dataset.copy); } catch (e) {} });
   return el;

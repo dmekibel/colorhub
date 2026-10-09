@@ -18,7 +18,13 @@ const H = {
   async tapSwatch(t) {
     const before = H.title(t) + "|" + H.chip(t);
     // the Walk's honeycomb is a color page's one neighbor list now (it absorbed Nearest names, 2026-10-08)
-    const sels = ["[data-swatch]", ".lk-row[data-cp-near]", ".lk-row[data-np-near]", ".rp-hc-c[data-rc-open]", ".pchip[data-node]", ".kin[data-node]"];
+    // David, 2026-10-09: the Field notes grab-bag (and its Walk honeycomb) is gone; a color page's reliable
+    // neighbor links are now Family's Tree/Compare swatches (.ar-hex / .fam-cmp-row, data-ar-open) and the
+    // "Next: <relative>" row at the end (rp-next-btn, always rendered -- it falls back to the nearest named
+    // color when there's no family data at all).
+    const sels = ["[data-swatch]", ".lk-row[data-cp-near]", ".lk-row[data-np-near]", ".ar-hex[data-ar-open]", ".fam-spec-c[data-ar-open]", ".fam-cmp-row[data-ar-open]", ".pchip[data-node]", ".kin[data-node]", ".rp-next-btn"];
+    // most of these land after the article/Family load (a network fetch), so give them a moment before giving up
+    await t.waitFor(() => sels.some(s => t.$$(s, t.$("#app"))[0]), 6000, "a swatch / near-color / palette chip / next-relative row").catch(() => {});
     let target = null, used = "";
     for (const s of sels) { const e = t.$$(s, t.$("#app"))[0]; if (e) { target = e; used = s; break; } }
     t.expect(target, "no swatch / near-color / palette chip on the page to tap");
@@ -951,13 +957,56 @@ scenario("pages", "colorPage x3: renders, swatch opens another, Back works", asy
   }
 });
 
+// David, 2026-10-09: every source name on a color page (the cover's origin line, the ID card's "Listed by"
+// stamps) opens its own page at #/source/<id>; Back returns exactly.
+scenario("pages", "a source name on the cover opens its source page and Back returns", async t => {
+  await H.openPage(t, "#/name/dawn-grey", "Dawn Grey");   // a library name, not one of the taught app colors: #/name/, not #/color/
+  const link = await t.waitFor(() => t.$(".rp-tier [data-src-open], .rc-stamp[data-src-open]"), 10000, "a tappable source name");
+  const id = link.dataset.srcOpen;
+  await t.click(link, { wait: 500 });
+  await t.waitFor(() => /^#\/source\//.test(t.w.location.hash), 6000, "the source page's own address");
+  t.expect(t.$(".src-band h1") && t.text(".src-band h1").length > 0, "the source page has no title");
+  t.expect(t.$$(".src-facts > div").length >= 3, "the source page is missing its facts (who/when/why/how)");
+  await t.click("[data-back]", { wait: 500 });
+  await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Dawn Grey", 8000, "Back to return to Dawn Grey");
+  t.notes.push(`source: ${id}`);
+});
+
+// David, 2026-10-09: a single tap on the cover's bare color fill opens the full-screen focus view (after waiting
+// ~250ms for a possible second tap); a double tap favorites instead and never opens focus.
+scenario("pages", "single tap opens focus view; double tap favorites without opening it", async t => {
+  await H.openPage(t, "#/color/teal", "Teal");
+  const hero = t.$(".cp-hero"), r = hero.getBoundingClientRect();
+  const was = t.ev(`fvHas(${JSON.stringify(t.$(".cp-hex").dataset.copy)})`);
+  const tap = () => { const o = { bubbles: true, cancelable: true, clientX: r.left + r.width / 2, clientY: r.top + 170, pointerId: 41, pointerType: "touch", isPrimary: true, view: t.w }; hero.dispatchEvent(new t.w.PointerEvent("pointerdown", o)); hero.dispatchEvent(new t.w.PointerEvent("pointerup", o)); };
+  // a single tap: nothing for ~250ms, then the focus view opens
+  tap();
+  await t.sleep(80);
+  t.expect(!t.$(".rp-focus"), "focus opened before the double-tap window closed");
+  await t.waitFor(".rp-focus.on", 2000, "the focus view after a single tap");
+  t.expect(t.$(".cp-hex").dataset.copy && t.ev(`fvHas(${JSON.stringify(t.$(".cp-hex").dataset.copy)})`) === was, "a single tap changed the favorite");
+  // swipe down to close
+  const fr = t.$(".rp-focus").getBoundingClientRect();
+  const fo = { bubbles: true, cancelable: true, clientX: fr.left + fr.width / 2, clientY: fr.top + 100, pointerId: 42, pointerType: "touch", isPrimary: true, view: t.w };
+  t.$(".rp-focus").dispatchEvent(new t.w.PointerEvent("pointerdown", fo));
+  const fo2 = { ...fo, clientY: fo.clientY + 140 };
+  t.$(".rp-focus").dispatchEvent(new t.w.PointerEvent("pointerup", fo2));
+  await t.waitFor(() => !t.$(".rp-focus"), 2000, "the focus view to close on swipe down");
+  // a double tap: favorites, never opens focus
+  tap(); await t.sleep(60); tap(); await t.sleep(80);
+  t.expect(!t.$(".rp-focus"), "a double tap opened focus instead of favoriting");
+  t.expect(t.ev(`fvHas(${JSON.stringify(t.$(".cp-hex").dataset.copy)})`) === !was, "a double tap did not toggle the favorite");
+  await t.sleep(400);   // undo it, so this scenario leaves no state behind
+  tap(); await t.sleep(60); tap();
+});
+
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
   // a name with no story of its own. Every color is getting an article, so pick one still without a committed article
   // from the article index; when none is left, nearest stories can't show and the scenario only notes it.
   let first = null;
   for (const s of ["carolina-blue", "columbia-blue", "phlox"]) {
     await H.openPage(t, "#/name/" + s);
-    const got = await t.waitFor(() => t.$(".rp-ns-row") ? "rows" : t.$("[data-ar-slot]:not([hidden])") ? "story" : null, 3000, s, 2000).catch(() => null);
+    const got = await t.waitFor(() => t.$(".rp-ns-row") ? "rows" : t.$("[data-ar-head]:not([hidden])") ? "story" : null, 3000, s, 2000).catch(() => null);
     if (got === "rows") { first = H.title(t); break; }
     if (got === "story") break;
   }
@@ -1048,9 +1097,9 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
 
 scenario("pages", "a world twin (In gems) opens its page in one tap, Back returns to the color", async t => {
   await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
-  const d = await t.waitFor(() => t.$('[data-rp-drawer="world"]'), 8000, "the 'In the world' drawer");
-  await t.waitFor(() => !d.hidden && t.$$("[data-to]", d).length > 0, 10000, "a twin row (gem, flower, fashion or film) in the world drawer");
-  if (!d.open) await t.click(d.querySelector("summary"), { wait: 200 });
+  // David, 2026-10-09: "Found in the world" (gems/botany/brands/fashion twins) tucks into the Paintings section now
+  const d = await t.waitFor(() => t.$(".rp-paint .rp-elsewhere"), 8000, "the Paintings section's elsewhere block");
+  await t.waitFor(() => t.$$("[data-to]", d).length > 0, 10000, "a twin row (gem, flower, fashion or film) near Paintings");
   const row = t.$$("[data-to]", d).find(e => /^gm:/.test(e.dataset.to)) || t.$$("[data-to]", d)[0];
   t.expect(row, "no twin row to tap");
   const id = row.dataset.to;
@@ -1066,8 +1115,8 @@ scenario("pages", "a world twin (In gems) opens its page in one tap, Back return
 // both already computed, never shown before this -- js/richcolor.js rcRolePaintingsHTML / rcWernerLine.
 scenario("pages", "role paintings and Werner's 1821 example show on the color page", async t => {
   await H.openPage(t, "#/name/auburn", "Auburn");
-  const paint = await t.waitFor(() => t.$('[data-rp-drawer="paint"]'), 8000, "the 'In paintings' drawer");
-  if (!paint.open) await t.click(paint.querySelector("summary"), { wait: 200 });
+  // David, 2026-10-09: Paintings is a first-class section now, not a drawer behind a summary tap
+  const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
   await t.waitFor(() => t.$$(".rc-ri", paint).length >= 2, 15000, "a role-paintings row (shadow/mid/light/accent/hidden)");
   const tiles = t.$$(".rc-ri", paint);
   t.expect(tiles.every(x => /Shadow|Mid|Light|Accent|Hidden/.test(x.textContent)), "a role tile is missing its label");
@@ -1078,8 +1127,7 @@ scenario("pages", "role paintings and Werner's 1821 example show on the color pa
   await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) === "Auburn", 8000, "Back to return to Auburn");
 
   await H.openPage(t, "#/name/indigo-blue", "Indigo Blue");
-  const world = await t.waitFor(() => t.$('[data-rp-drawer="world"]'), 8000, "the 'In the world' drawer");
-  if (!world.open) await t.click(world.querySelector("summary"), { wait: 200 });
+  const world = await t.waitFor(() => t.$(".rp-paint .rp-elsewhere"), 8000, "the Paintings section's elsewhere block");
   const line = await t.waitFor(() => t.$(".rc-werner", world), 15000, "Werner's 1821 example line");
   t.expect(/Werner, 1821:.*Blue Copper Ore.*\(mineral\)/.test(t.text(line)), `the Werner line reads "${t.text(line)}"`);
 });
