@@ -68,9 +68,8 @@ function agHome(focusId) {
   ROUTE_NEXT = routed("Family tree", focusId ? "web/focus/" + focusId : "web");
   const el = show(`
     <div class="ag-screen">
-      <header class="art-top ag-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
-        <button class="glass-pill ag-title">${ICON.web}<span>Family tree</span></button>
-        <button class="icon-btn glass" data-agshow aria-label="Filter">${ICON.tune}</button></header>
+      <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><button class="icon-btn glass" data-agshow aria-label="Show">${ICON.tune}</button></header>
+      <p class="ag-label">${ICON.web}<span>Family tree</span></p>
       <canvas class="ag-canvas"></canvas>
       <div class="ag-hint" data-aghint>Pinch or scroll to zoom &middot; drag to pan &middot; tap a bubble to open it</div>
       <div class="ag-panel" data-agpanel hidden></div>
@@ -119,14 +118,14 @@ function agOpenRoute(id, more) {
 
 // ---------- mount: fetch, layout math, canvas drawing, pan/zoom, hit-testing ----------
 function agMount(el, focusId) {
-  const canvas = el.querySelector(".ag-canvas"), ctx = canvas.getContext("2d");
+  const canvas = el.querySelector(".ag-canvas"), ctx = canvas.getContext("2d"), box = el.querySelector(".ag-screen");
   const panel = el.querySelector("[data-agpanel]"), hint = el.querySelector("[data-aghint]");
   const view = { x: 0, y: 0, scale: 0.42 };
   let nodes = [], edgesVisible = [], dpr = Math.min(2, window.devicePixelRatio || 1), destroyed = false;
   let hoverId = null, pressId = null;
-  const fit = () => { const r = el.getBoundingClientRect(); canvas.width = Math.round(r.width * dpr); canvas.height = Math.round((r.height) * dpr); canvas.style.width = r.width + "px"; canvas.style.height = r.height + "px"; };
+  const fit = () => { const r = box.getBoundingClientRect(); canvas.width = Math.round(r.width * dpr); canvas.height = Math.round((r.height) * dpr); canvas.style.width = r.width + "px"; canvas.style.height = r.height + "px"; };
   fit();
-  const ro = new ResizeObserver(fit); ro.observe(el);
+  const ro = new ResizeObserver(fit); ro.observe(box);
 
   const worldToScreen = (x, y) => [(x * AG_K * view.scale + view.x) * dpr, (y * AG_K * view.scale + view.y) * dpr];
   const screenToWorld = (sx, sy) => [((sx / dpr) - view.x) / (AG_K * view.scale), ((sy / dpr) - view.y) / (AG_K * view.scale)];
@@ -141,7 +140,7 @@ function agMount(el, focusId) {
 
   function draw() {
     if (destroyed) return;
-    const r = el.getBoundingClientRect();
+    const r = box.getBoundingClientRect();
     ctx.save(); ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue("--ground") || "#0E0D0B";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -191,10 +190,10 @@ function agMount(el, focusId) {
   // pan + pinch/wheel zoom (pointer events cover mouse and touch alike)
   const pts = new Map();
   let pinchD0 = 0, scale0 = 1;
-  canvas.addEventListener("pointerdown", e => { try { canvas.setPointerCapture(e.pointerId); } catch (err) {} pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); if (pts.size === 1) { pressId = (nodeAt((e.clientX - el.getBoundingClientRect().left) * dpr, (e.clientY - el.getBoundingClientRect().top) * dpr) || {}).id || null; } });
+  canvas.addEventListener("pointerdown", e => { try { canvas.setPointerCapture(e.pointerId); } catch (err) {} pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); if (pts.size === 1) { pressId = (nodeAt((e.clientX - box.getBoundingClientRect().left) * dpr, (e.clientY - box.getBoundingClientRect().top) * dpr) || {}).id || null; } });
   canvas.addEventListener("pointermove", e => {
     if (!pts.has(e.pointerId)) {
-      const r = el.getBoundingClientRect();
+      const r = box.getBoundingClientRect();
       const n = nodeAt((e.clientX - r.left) * dpr, (e.clientY - r.top) * dpr);
       if ((n && n.id) !== hoverId) { hoverId = n ? n.id : null; canvas.style.cursor = n ? "pointer" : "grab"; draw(); }
       return;
@@ -210,11 +209,11 @@ function agMount(el, focusId) {
   canvas.addEventListener("pointerdown", pinchStart);
   const release = e => { pts.delete(e.pointerId); pinchD0 = 0; if (pts.size === 0 && pressId != null) { const n = AG.nodes.get(pressId); if (n) agOpen(n); } pressId = null; };
   canvas.addEventListener("pointerup", release); canvas.addEventListener("pointercancel", release);
-  canvas.addEventListener("wheel", e => { e.preventDefault(); const r = el.getBoundingClientRect(); const before = screenToWorld((e.clientX - r.left) * dpr, (e.clientY - r.top) * dpr); view.scale = clamp(view.scale * (e.deltaY < 0 ? 1.12 : 0.89), 0.06, 4); const [ax, ay] = worldToScreen(before[0], before[1]); view.x += e.clientX - r.left - ax / dpr; view.y += e.clientY - r.top - ay / dpr; draw(); }, { passive: false });
+  canvas.addEventListener("wheel", e => { e.preventDefault(); const r = box.getBoundingClientRect(); const before = screenToWorld((e.clientX - r.left) * dpr, (e.clientY - r.top) * dpr); view.scale = clamp(view.scale * (e.deltaY < 0 ? 1.12 : 0.89), 0.06, 4); const [ax, ay] = worldToScreen(before[0], before[1]); view.x += e.clientX - r.left - ax / dpr; view.y += e.clientY - r.top - ay / dpr; draw(); }, { passive: false });
 
   function centerOn(id, scale) {
     const n = AG.nodes.get(id); if (!n) return;
-    const r = el.getBoundingClientRect();
+    const r = box.getBoundingClientRect();
     view.scale = scale || Math.max(view.scale, 1.1);
     view.x = r.width / 2 - n.px * AG_K * view.scale;
     view.y = r.height / 2 - n.py * AG_K * view.scale;
@@ -224,7 +223,24 @@ function agMount(el, focusId) {
 
   agLoad().then(() => {
     recompute();
-    if (focusId && AG.nodes.has(focusId)) centerOn(focusId); else { view.x = el.clientWidth / 2; view.y = el.clientHeight / 2; }
+    if (focusId && AG.nodes.has(focusId)) centerOn(focusId);
+    else {
+      // zoomed out = everything, fit to the viewport -- centered and scaled on the CONNECTED nodes only, not
+      // every node's raw centroid/radius: a third of the painters here carry no teacher/influence/movement tag
+      // and sit as a loose, lopsided halo around the connected mass (see tools/build_aesthetics_graph.js's
+      // layout() comment), and that halo's own centroid can sit off to one side, which would skew the whole
+      // first view toward empty space. Panning still reaches every outlier; this just frames the thing most
+      // people came to see. Falls back to all nodes if, under some filter, nothing has an edge.
+      const touched = new Set(); edgesVisible.forEach(e => { touched.add(e.from); touched.add(e.to); });
+      const core = (touched.size ? nodes.filter(n => touched.has(n.id)) : nodes);
+      const cx = core.reduce((s, n) => s + n.px, 0) / core.length, cy = core.reduce((s, n) => s + n.py, 0) / core.length;
+      const radii = core.map(n => Math.hypot(n.px - cx, n.py - cy)).sort((a, b) => a - b);
+      const r90 = radii[Math.floor(radii.length * 0.9)] || radii[radii.length - 1] || 1;
+      const w = box.clientWidth || 375, h = box.clientHeight || 700;
+      view.scale = clamp((Math.min(w, h) / (AG_K * r90 * 2)) * 0.88, 0.06, 1.6);
+      view.x = w / 2 - cx * AG_K * view.scale;
+      view.y = h / 2 - cy * AG_K * view.scale;
+    }
     hint.classList.add("in"); setTimeout(() => hint.classList.remove("in"), 3200);
     loop();
   }).catch(() => { toast("The family tree didn't load"); });

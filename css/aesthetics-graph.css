@@ -1,7 +1,11 @@
 /* The family tree (js/aesthetics-graph.js): #/web, #/web/node/<id>, #/web/focus/<id>. */
-.ag-screen { position: relative; height: calc(100vh - var(--top)); min-height: 480px; overflow: hidden; background: var(--ground); }
-.ag-top { position: absolute; left: 0; right: 0; top: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; gap: var(--s3); }
-.ag-top .ag-title { pointer-events: none; }
+/* fixed, not relative-in-flow: .screen.article carries its own side padding, which would offset the canvas from
+   the real viewport box that el.getBoundingClientRect() (js/aesthetics-graph.js agMount) measures against,
+   miscentering every pan/zoom/hit-test calculation by exactly that padding */
+.ag-screen { position: fixed; inset: 0; overflow: hidden; background: var(--ground); z-index: 1; }
+.ag-screen .art-top { position: absolute; left: 0; right: 0; top: 0; z-index: 3; }
+.ag-label { position: absolute; left: var(--s4); top: calc(var(--top) + 64px); z-index: 2; margin: 0; display: flex; align-items: center; gap: 8px; color: var(--soft); font-size: 13px; pointer-events: none; }
+.ag-label svg { width: 16px; height: 16px; opacity: .8; }
 .ag-canvas { position: absolute; inset: 0; touch-action: none; cursor: grab; }
 .ag-hint { position: absolute; left: 50%; bottom: calc(var(--bottom) + var(--s5)); transform: translate(-50%, 6px); color: var(--soft); font-size: 13px; background: rgba(23, 22, 15, .78); backdrop-filter: blur(8px); padding: var(--s2) var(--s4); border-radius: var(--r-pill); opacity: 0; transition: opacity .3s var(--ease), transform .3s var(--ease); pointer-events: none; white-space: nowrap; }
 .ag-hint.in { opacity: 1; transform: translate(-50%, 0); }

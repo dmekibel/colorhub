@@ -277,7 +277,11 @@ function layout(nodeList, edgeList, iters = 240) {
   const deg = new Array(nodeList.length).fill(0);
   const eIdx = edgeList.map(e => [idx.get(e.from), idx.get(e.to)]).filter(([a, b]) => a != null && b != null);
   for (const [a, b] of eIdx) { deg[a]++; deg[b]++; }
-  const N = nodeList.length, area = N * 90, k = Math.sqrt(area / Math.max(1, N));
+  const N = nodeList.length, area = N * 140, k = Math.sqrt(area / Math.max(1, N));
+  // a third of this archive's painters carry no teacher/influence/movement tag at all (no edges), so pure
+  // repulsion would fling them out into empty space forever; a weak pull toward the centroid (same idea as
+  // d3-force's forceCenter) keeps every node, connected or not, somewhere inside one readable constellation
+  const GRAVITY = 0.012;
   for (let it = 0; it < iters; it++) {
     const disp = pos.map(() => [0, 0]);
     // repulsion (all pairs -- N ~= 1050, fine for a one-off offline build)
@@ -296,6 +300,8 @@ function layout(nodeList, edgeList, iters = 240) {
       dx /= d; dy /= d;
       disp[a][0] -= dx * f; disp[a][1] -= dy * f; disp[b][0] += dx * f; disp[b][1] += dy * f;
     }
+    // gravity toward the centroid, stronger on nodes with no edges to pull them in any other way
+    for (let i = 0; i < N; i++) { const g = GRAVITY * (deg[i] ? 1 : 2.2); disp[i][0] -= pos[i][0] * g; disp[i][1] -= pos[i][1] * g; }
     const temp = Math.max(0.5, k * (1 - it / iters));
     for (let i = 0; i < N; i++) {
       const dl = Math.sqrt(disp[i][0] ** 2 + disp[i][1] ** 2) || 0.01;
