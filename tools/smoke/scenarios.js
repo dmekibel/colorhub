@@ -3114,6 +3114,15 @@ scenario("favs", "a painting's heart (now in the top bar) and a double-tap on th
   await t.click("[data-fva]", { wait: 400 });
   t.expect(t.$("[data-fva]").getAttribute("aria-pressed") === "true", "the heart didn't fill");
   t.expect(t.ev("Object.keys(S.favArt || {}).length") === 1, "the painting isn't in favorites");
+  // David, 2026-10-09: a toast used to land right over the heart it was confirming. Now it's low, and the heart
+  // (still animating/settled) stays the top hit at its own center the whole time.
+  const atHeart = t.ev(`(() => { const r = document.querySelector("[data-fva]").getBoundingClientRect(); const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2); return el && el.closest("[data-fva]") === document.querySelector("[data-fva]"); })()`);
+  t.expect(atHeart, "the heart is no longer the top element at its own center — something is covering it");
+  const toastEl = t.$(".toast");
+  t.expect(toastEl && toastEl.classList.contains("toast-low"), "the favorites toast isn't the low (bottom) variant");
+  t.expect(toastEl.getBoundingClientRect().top > t.$(".art-top").getBoundingClientRect().bottom, "the toast overlaps the top bar");
+  t.expect(!!toastEl.querySelector("button"), "the toast has no tappable favorites link");
+
   t.ev(`S.favs = { "#008080": { n: "Teal", at: today() }, "#4682B4": { n: "Steel blue", at: today() } }; S.fvCat = "all"; save(); favShelf()`);
   await t.waitFor(".fv-cats [data-fvcat]", 6000, "the kinds on the shelf");
   const kinds = t.$$(".fv-cats [data-fvcat]").map(b => b.dataset.fvcat).join(",");

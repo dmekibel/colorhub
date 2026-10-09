@@ -766,10 +766,13 @@ addEventListener("keydown", e => { if (onKey && !e.metaKey && !e.ctrlKey) onKey(
 // One toast for the whole app (css/menus2.css): a solid capsule that drops in under the status bar, clear of the
 // corners and every primary, says one thing and leaves. o.undo (or o.action + o.onAction) adds one text action;
 // o.dot shows the color it's about; o.ms sets how long it stays. toast(msg) alone works as it always did.
+// o.low: a bottom toast instead of the usual one under the status bar (David, 2026-10-09 — a top toast with an
+// action button was landing right over a top-bar control, like the painting/photo heart, covering the very thing
+// it was confirming). Still toast(): same API, same Undo/action pattern, just anchored low and clear of the top bar.
 function toast(msg, o = {}) {
   document.querySelectorAll(".toast").forEach(n => n.remove());
   const t = document.createElement("div"), act = o.undo ? "Undo" : o.action, run = o.undo || o.onAction;
-  t.className = "toast"; t.setAttribute("role", "status"); t.setAttribute("aria-live", "polite");
+  t.className = "toast" + (o.low ? " toast-low" : ""); t.setAttribute("role", "status"); t.setAttribute("aria-live", "polite");
   t.innerHTML = `${o.dot ? `<i class="toast-dot" style="--c:${esc(o.dot)}"></i>` : ""}<span>${esc(msg)}</span>${act && run ? `<button type="button">${esc(act)}</button>` : ""}`;
   document.body.appendChild(t);
   const leave = () => { if (!t.isConnected) return; t.classList.add("out"); setTimeout(() => t.remove(), 220); };
