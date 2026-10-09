@@ -1,6 +1,94 @@
 # The Color Atlas (design, 2026-10-09)
 
-A painter's whole life, one painting, two painters side by side, or the whole archive, read as color data and laid out in space, in the map's own visual language (bubbles, honeycomb, sunflower, rings), with time as a slider. Prototype: `design/ATLAS/prototype.html` (real data; how to run it is in section 12). Corpus findings: `design/ATLAS/mine.py` writes `design/ATLAS/data/findings.json`. Screens: `design/ATLAS/shots/` (440x956).
+A painter's whole life, one painting, two painters side by side, or the whole archive, read as color data and laid out in space, in the map's own visual language (bubbles, honeycomb, sunflower, rings), with time as a slider.
+
+- **Prototype:** `design/ATLAS/prototype.html` is v2 (real data; how to run it is in section 12). The 7-tab v1 is kept at `prototype-v1.html`, for its extra views: river, butterfly-only, time rings, hue and warm–cool maps.
+- **Corpus findings:** `design/ATLAS/mine.py` writes `design/ATLAS/data/findings.json`.
+- **Screens:** `design/ATLAS/shots/`, 440x956.
+- **Best entry:** `prototype.html#p=vincent-van-gogh&w=nga-106382`.
+
+---
+
+## v2: one experience (2026-10-09, after David: "a good start… could be improved a lot")
+
+**What v1 got wrong.** It was a chart deck: seven tabs, each resetting its own dock, with no thread from a career down to one relationship (critique by a fresh-context designer).
+
+**What v2 does.** It is one vertical walk, with the controls that belong to whatever is on screen anchored under the thumb.
+
+1. **Pick.** A serif title and one search field covering all 840 painters. A big "start here" card shows a real painting; eight featured painters each carry their career palette strip.
+2. **The painting dances** (the hero).
+   - The real painting is rendered in WebGL at full resolution. Each pixel's membership in each of the nine notes is a softmax in OKLab, computed in the shader. A selection is a weight per note, so every move between selections is an eased crossfade at 60 fps. The Canvas 2D fallback is the same math, precomputed.
+   - It plays itself in a musical order:
+     1. one family alone ("The yellows alone");
+     2. a duet;
+     3. their values, as a wipe that leaves the color on the left and the values on the right, with tags, so the comparison is side by side;
+     4. the other relationships;
+     5. the whole painting.
+   - The dock holds play, a step dot per relationship and "2 of 7 · Yellows and blues". Swipe the painting to step.
+   - Tap the painting to pick the color under your finger; tap more to build a duet or a chord. The caption names the relationship, its contact against chance and whether it is a discord.
+   - Every named color is a chip that opens its color page in one tap.
+   - One hint ("Tap the painting to pick its colors") appears once, after the first pass.
+3. **Two more lenses on the same painting:**
+   - **Tiles:** a honeycomb mosaic that keeps the composition; tap to isolate; "Sort" flies the tiles into color order and back.
+   - **Shape:** where each color lives and which way it runs.
+4. **Woven "What art says."** Under the painting comes the archive finding that fits it, measured on this painting:
+   - a portrait: its center against its edges, against the lit-sitter rate for its era;
+   - a landscape: top against bottom;
+   - otherwise: whether it is one of the rare opposite-hue paintings.
+   - Below them, all its relationships in plain words ("Side by side, opposite hues make each other look more intense"); a tap replays that one in the dance.
+5. **Go wider** into the career:
+   - **A computed headline.** It groups career colors by what they look like (yellows, ochres, olives…), not raw hue bins, and finds the sharpest peak, for example "Van Gogh's greens peak in Saint-Rémy, 1890" or "Monet's greens peak in Argenteuil, 1873". The cells it names are ringed. On first arrival, the years play from the start to that peak.
+   - **The dock becomes the time scrubber:**
+     - play;
+     - a works-per-year histogram in each year's mean color;
+     - life-event ticks, with a label when the thumb is on one;
+     - momentum, settling on events and painted years, with a haptic tick for each year that has paintings;
+     - window 1, 2 or 4 years, or All.
+   - While you scrub, the headline speaks for the year in view: the year, the place, and which colors take the most. Relationship links are drawn in a lighter cousin of each color so they read on the dark ground.
+   - **Tap a color** for its readout: plate, name and share; when it appears; the paintings where it is strongest; and one paper button, "See it in Still Life of Oranges…, 1889". That button opens the dance with that color already lit, so career leads back to painting.
+6. **The arc.** It shows only the measures that changed (permutation-tested), names the turn ("Vividness turns up in 1887: 39 → 63, p = .04") and lists events near the turn. Steady measures collapse to one line. "We measure the color; any link to the life is yours to judge."
+7. **Surprises:**
+   - *Most Van Gogh:* the closest to his own average.
+   - *Least Van Gogh:* with the reason, e.g. "darker than 42 of the other 47".
+   - *Broke the habit:* a color used in at most two paintings, at its biggest.
+8. **Relationships, year by year.** A bar per painting for the top four chords, with "mostly 1885–1889", plus the archive's opposites finding set against this painter's own rate.
+9. **Compare** is one gesture: chips for Monet or Van Gogh, the painter's five nearest palettes in the archive, or "Any painter…". It produces:
+   - a computed headline ("Van Gogh uses 4.4× the ochres");
+   - side-by-side or overlap maps;
+   - "Same years" to remove the era;
+   - a shared-ground card (53%);
+   - the live fingerprint: how many paintings 24 colors alone assign to the right painter.
+
+**Works for any painter in the archive** (840 with 6+ works), with honest thin-data states:
+- under 12 paintings: "read this as a sketch";
+- under 8: no change points;
+- under 6: no career;
+- impossible dates set aside and counted;
+- a museum whose images can't be read pixel by pixel: the painting still shows, with a plain note.
+
+The dance uses whichever of the painter's works a CORS-friendly museum holds (NGA, Rijksmuseum, local copies).
+
+**Every state is in the address:** `p`, `w`, `step` or `sel`, `lens`, `t`, `win`, `c`, `vs`, `cm`, `same`, `at`. Back and forward work, and `&still=1` freezes motion for screenshots. Legibility: reading text 16 px or more, captions 13 px or more, and every text color 4.5:1 or better (`--soft` #A9A497 is 7.8:1 on the ground and 6.7:1 on the raised surface). Targets are 44 px or more, the primary controls 52 px.
+
+**Critique loop.**
+- **v1 critique:** biggest mistake was "a chart deck, not one experience".
+- **v2 critique: REVISE, average 3.7/5.** Fixed since:
+  - a fade where content meets the dock;
+  - Color/Values tags on the split;
+  - lighter, thicker relationship links;
+  - the shared-ground stat as a card with a bar;
+  - the dock caption naming the current step;
+  - a quieter year watermark;
+  - placeholder contrast;
+  - a headless paint bug that blanked the dock.
+- **Kept, as the critic asked:** the honesty layer, the dotted-ring selection motif and the thin-data framing.
+
+**Still open:**
+- the "All at once" pulse mode;
+- the periodic table of chords as a front door;
+- the duet scrubber (two careers in lockstep);
+- an offline pixel grid, so the dance works for every museum (phase 2, lane C);
+- measuring the WebGL frame rate on a real iPhone (it runs fine on SwiftShader).
 
 ---
 
@@ -424,14 +512,15 @@ Every lane screenshots each state at 440x956 and 375x812 and gets a fresh-contex
 
 ## 12. The prototype
 
-- **Run:** from the repo root, `python3 -m http.server 8813` (any port but 8791), then open `http://127.0.0.1:8813/design/ATLAS/prototype.html`.
-  - Every state has an address, e.g. `#v=career&who=vg&win=2&t=1888.6`, `#v=painting&pid=nga-106382&pm=dance&step=1`, `#v=compare`, `#v=art`.
-- **Data:** nothing is mocked. It reads `data/gallery`, `data/artists`, `data/core-names.json` and `findings.json`.
-  - The dance and the mosaic read the National Gallery of Art's IIIF images (CORS) at about 850 px.
+- **Run:** from the repo root, `python3 -m http.server 8813` (any port but 8791), then open `http://127.0.0.1:8813/design/ATLAS/prototype.html#p=vincent-van-gogh&w=nga-106382`.
+  - v2 addresses: `#p=<painter>&w=<painting>&step=<n>|sel=<i,j>&lens=dance|tiles|shape&t=<year>&win=1|2|4|0&c=<cell>&vs=<painter>&at=career|arc|surp|compare`.
+  - `&test=1` drives the real controls as a self-test and reports into `#out`.
+  - The v1 addresses still work in `prototype-v1.html`.
+- **Data:** nothing is mocked. It reads `data/gallery`, `data/artists`, `data/analysis/artists` (nearest palettes), `data/core-names.json` and `findings.json`.
+  - The dance reads museum IIIF images that send CORS headers (NGA, Rijksmuseum) at about 850 px.
   - Chicago and Copenhagen images are local but only 200 px wide.
-- **Views:** Career (time-lapse + links), Arc, Years (river), Chords, Compare (butterfly/overlap), One painting (Dance / Mosaic / Geometry + symphony), What art says.
 - **Known gaps:**
-  - No WebGL, so measure the frame rate on an iPhone.
+  - The frame rate isn't measured on an iPhone (WebGL, with a Canvas 2D fallback).
   - No museum filter.
   - The periodic table, terrain, tree and loom are design only.
   - Haptics use `navigator.vibrate`, which does nothing on iOS.
