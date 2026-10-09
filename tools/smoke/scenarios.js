@@ -2012,6 +2012,70 @@ scenario("sets", "a pair's painting rail carries the whole pair, not one color: 
   await t.click(".pt-arrive [data-opensp]", { force: true, wait: 800 });
   await t.waitFor(".sp-page .sp-pair .sp-plate", 12000, "the row reopened the pair page");
 });
+// David, 2026-10-08: "Once you choose two it's hard to delete one." Removing the second of a pair now has a
+// remove control on each plate too, and lands on that one color's own page (calmer than a picker sheet right
+// after a delete), with "Removed X · Undo" back to the pair.
+scenario("sets", "removing the second of a pair lands on that color's own page, with Undo back to the pair", async t => {
+  SP.placed();
+  await t.open("#/pair/4f6b3a+c2412d", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-pair .sp-plate", 12000, "the pair page");
+  t.expect(t.$$(".sp-drop-plate").length === 2, "the pair's plates have no remove control");
+  const before = t.w.location.hash;
+  await t.click('.sp-pair [data-drop="0"]', { force: true, wait: 200 });
+  // the toast shows right away (it self-dismisses after a few seconds, well before a lazy-loaded color page
+  // might settle), so check it before waiting on the page it navigated to.
+  await t.waitFor(".toast", 4000, "a toast after removing the second color of a pair");
+  t.expect(/Undo/.test(t.text(".toast")), `the toast offers no Undo: "${t.text(".toast")}"`);
+  t.expect(t.w.location.hash !== before, "removing a color from the pair didn't change the address");
+  await t.click(".toast button", { force: true, wait: 800 });
+  await t.waitFor(".sp-page .sp-pair .sp-plate", 10000, "Undo to put the pair back");
+});
+// David, 2026-10-08: "Once you choose three you can't rearrange." A handle on each row drags it to a new spot;
+// the order is a fresh address (still a /set/ address — reordering isn't a new trail stop).
+scenario("sets", "drag a row's handle to reorder a trio; the new order is still a set address", async t => {
+  SP.placed();
+  await t.open("#/set/2b2a4c-b85c38-e0c097", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-names .sp-name", 12000, "the trio's rows");
+  const before = t.$$("#app .sp-names .sp-name em.mono").map(e => e.textContent);
+  t.expect(before.length === 3, `expected three rows, found ${before.length}`);
+  const h0 = t.$('[data-handle="0"]'), row1 = t.$$('.sp-names .sp-name')[1];
+  t.expect(h0 && row1, "the handle or the second row is missing");
+  const r0 = h0.getBoundingClientRect(), r1 = row1.getBoundingClientRect();
+  const o = { bubbles: true, clientX: r0.left + r0.width / 2, clientY: r0.top + r0.height / 2, pointerId: 11, pointerType: "touch", isPrimary: true, view: t.w };
+  h0.dispatchEvent(new t.w.PointerEvent("pointerdown", o));
+  const o2 = { ...o, clientY: r1.bottom - 2 };
+  h0.dispatchEvent(new t.w.PointerEvent("pointermove", o2));
+  await t.sleep(80);
+  h0.dispatchEvent(new t.w.PointerEvent("pointerup", o2));
+  await t.waitFor(() => t.$$("#app .sp-names .sp-name em.mono").map(e => e.textContent).join() !== before.join(), 8000, "the row order to change after the drag");
+  const after = t.$$("#app .sp-names .sp-name em.mono").map(e => e.textContent);
+  t.expect(after[0] !== before[0], `dragging the first row down should move it (still ${after[0]} first)`);
+  t.expect(after.slice().sort().join() === before.slice().sort().join(), `a reorder must not add or drop a color: before ${before.join(",")} after ${after.join(",")}`);
+  t.expect(/^#\/set\//.test(t.w.location.hash), `a reorder left the address as ${t.w.location.hash}`);
+});
+// David, 2026-10-09: "sooner or later something will match" if you loosen enough, so Together in paintings never
+// shows a near-miss as if it mattered — a vivid, mostly-synthetic trio (rare in oil paint) says so plainly, and
+// Loosen until something matches is explicit about how far it went.
+scenario("sets", "a trio with no close match says so plainly, with no unrelated painting shown until you loosen it yourself", async t => {
+  SP.placed();
+  await t.open("#/set/656300-8000ff-b70088", { settle: 800, keepState: true });
+  await t.waitFor(".sp-page .sp-strip", 12000, "the trio page");
+  await SP.lead(t);
+  await t.waitFor("[data-ptg] .sp-match [data-mt-sliders] .pt-range", 20000, "the Closeness / Minimum share sliders");
+  await t.waitFor(() => /Nothing this close yet|Not one painting holds/.test(t.text("[data-ptg] .sp-mt-body")) || t.$("[data-ptg] .sp-mt-body .gl-pin"), 25000, "a real result or an honest empty state");
+  const emptyMsg = t.text("[data-ptg] .sp-mt-body");
+  if (/Nothing this close yet/.test(emptyMsg) || /Not one painting holds/.test(emptyMsg)) {
+    t.expect(!t.$("[data-ptg] .sp-mt-body .gl-pin"), "a near-miss painting is showing without being asked for");
+    if (/Nothing this close yet/.test(emptyMsg)) {
+      const btn = t.$("[data-mt-loosen]");
+      t.expect(btn, "no Loosen until something matches button at the default setting");
+      await t.click(btn, { force: true, wait: 1500 });
+      await t.waitFor(() => /Loosened/.test(t.text("[data-ptg] .sp-mt-body")) || /even at the loosest measure/.test(t.text("[data-ptg] .sp-mt-body")), 20000, "an honest line about how far it loosened, or a final no");
+    }
+  } else {
+    t.notes.push("this trio already had a real match at the standard measure");
+  }
+});
 
 // ================================================================== DIRECT LOADS (a typed or shared address on a fresh load)
 scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home", async t => {

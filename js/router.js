@@ -10,7 +10,7 @@
 //   #/daily  #/challenge  #/taste/<color|palette>  #/lab/<harmony|contrast>  #/gallery/<n> (a museum painting)
 //   #/poem/<id>  #/passage/<id>  #/film/<id>   (js/poems.js, js/passages.js, js/films.js)
 //   #/practice  #/practice/<method>   build your own deck and study it (js/practice.js)
-//   #/pair/<a>+<b>  #/set/<a>-<b>-<c>…   a page for any pair or set of colors (js/setpage.js; canonical order dark to light)
+//   #/pair/<a>+<b>  #/set/<a>-<b>-<c>…   a page for any pair or set of colors (js/setpage.js; the order given, which can be dragged)
 //   #/learnit/<color>   the honeycomb home's instant mini-lesson (js/home.js, js/learnit.js). #/today itself
 //   already opens the honeycomb home: go("learn") does (js/core.js), and "today" is routed through go() below.
 // How it works: show() (core.js) calls routeCommit(tab). A tab home replaces the current history entry with

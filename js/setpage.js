@@ -7,6 +7,7 @@
 // suggestions are plain LCh arithmetic on measured reasons. Getting here: js/settray.js. Top-level names start with sp.
 
 const SP_STRENGTH = [["subtle", "Subtle", .4], ["clear", "Clear", .7], ["bold", "Bold", 1]];
+const SP_ICON_GRIP = sv('<circle cx="9" cy="6" r="1.5" fill="currentColor" stroke="none"/><circle cx="15" cy="6" r="1.5" fill="currentColor" stroke="none"/><circle cx="9" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="9" cy="18" r="1.5" fill="currentColor" stroke="none"/><circle cx="15" cy="18" r="1.5" fill="currentColor" stroke="none"/>', 18);
 const SP_MIN_N = 5;        // fewer paintings than this and we don't talk about painters' habits
 const SP_Q = 5;            // the index takes up to five colors at once
 let SP_STR = "clear", SP_SEQ = 0;
@@ -25,11 +26,12 @@ function spMake(L, C, H) {
   return lchHex(L, c, H);
 }
 const spHex = h => /^#?[0-9a-f]{6}$/i.test(String(h || "")) ? "#" + String(h).replace("#", "").toUpperCase() : null;
-// the canonical order (dark to light, then hex), one entry per color: the same set is always one address
+// one entry per color, in the order given (David, 2026-10-09: sets can be dragged into a chosen order, so the
+// order is no longer forced dark-to-light — it's whatever order the colors arrived in, or were dragged to).
 function spCanon(hexes) {
   const out = [];
   (Array.isArray(hexes) ? hexes : String(hexes || "").split(/[+,\-]/)).map(spHex).filter(Boolean).forEach(h => { if (!out.some(x => de2000(x, h) < 1) && out.length < 8) out.push(h); });
-  return out.sort((a, b) => lab(a)[0] - lab(b)[0] || a.localeCompare(b));
+  return out;
 }
 const spPath = hexes => (hexes.length === 2 ? "pair/" + hexes.map(h => h.slice(1).toLowerCase()).join("+") : "set/" + hexes.map(h => h.slice(1).toLowerCase()).join("-"));
 const spNm = h => { const n = nameOf(h); return n.de < VERY_CLOSE_DE && !n.between ? n.n : n.text || h; };
@@ -233,7 +235,7 @@ function spPage(hexes, o = {}) {
   if (o.push !== false && XSTACK[XSTACK.length - 1] !== key) XSTACK.push(key);
   // the set page does not keep the tray alive: opening it consumed the tray (js/settray.js sxOpen)
   const set = () => colorSet({ kind: "set", id: hexes.join("+"), title: spTitle(hexes), colors: hexes.map(h => ({ h, n: spNm(h) })), src: path });
-  const plate = (h, other) => `<button class="sp-plate" data-swatch="${h}" style="--c:${h}" data-ink="${ink(h)}" aria-label="Open ${esc(spNm(h))}"><span class="sp-sample" style="color:${other}">Aa</span><b>${esc(spNm(h))}</b><em class="mono">${h}</em></button>`;
+  const plate = (h, other, i) => `<span class="sp-pcell"><button class="sp-plate" data-swatch="${h}" style="--c:${h}" data-ink="${ink(h)}" aria-label="Open ${esc(spNm(h))}"><span class="sp-sample" style="color:${other}">Aa</span><b>${esc(spNm(h))}</b><em class="mono">${h}</em></button><button class="sp-drop sp-drop-plate" data-ink="${ink(h)}" data-drop="${i}" aria-label="Remove ${esc(spNm(h))}">${SX_ICON_X}</button></span>`;
   // double-tap the swatches at the top to keep the palette (David, 2026-10-08): a single tap still opens that
   // color's page (js/swatch.js data-dbltap delays it ~280ms to listen for a second tap first). A heart burst at
   // the tap point, a haptic and a sound; no middle step, no toggle to miss.
@@ -250,10 +252,10 @@ function spPage(hexes, o = {}) {
     <p class="eyebrow p-type">${pair ? "A pair" : k === 3 ? "A trio" : `A palette of ${k}`}</p>
     <h1 class="p-title sp-title${names.join("").length > 44 ? " longer" : names.join("").length > 24 ? " long" : ""}">${names.map((n, i) => `<button data-swatch="${hexes[i]}">${esc(n)}</button>`).join(`<span class="sp-plus">+</span>`)}</h1>
     ${o.undo ? `<div class="sp-undo" data-undo-bar><span>${esc(o.applied || "Changed")}.</span><button data-undo>Undo</button></div>` : ""}
-    ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1])}${plate(hexes[1], hexes[0])}</div>`
+    ${pair ? `<div class="sp-pair" data-dbltap>${plate(hexes[0], hexes[1], 0)}${plate(hexes[1], hexes[0], 1)}</div>`
       : `<div class="sp-strip" data-strip data-dbltap>${hexes.map(h => `<button data-swatch="${h}" style="--c:${h};flex:1" aria-label="${esc(spNm(h))}"></button>`).join("")}</div>
-         <p class="sp-strip-cap" data-stripcap>Equal shares.</p>
-         <div class="sp-names">${hexes.map((h, i) => `<span class="sp-name"><button data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(names[i])}</b><em class="mono">${h}</em></button><button class="sp-drop" data-drop="${i}" aria-label="Remove ${esc(names[i])}">${SX_ICON_X}</button></span>`).join("")}</div>`}
+         <p class="sp-strip-cap" data-stripcap>Equal shares. Press and drag a segment to reorder.</p>
+         <div class="sp-names">${hexes.map((h, i) => `<span class="sp-name"><button data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(names[i])}</b><em class="mono">${h}</em></button><button class="sp-handle" data-handle="${i}" aria-label="Drag to reorder ${esc(names[i])}">${SP_ICON_GRIP}</button><button class="sp-drop" data-drop="${i}" aria-label="Remove ${esc(names[i])}">${SX_ICON_X}</button></span>`).join("")}</div>`}
     <p class="sp-lead" data-lead aria-live="polite">Reading the paintings…</p>
     <div class="sp-acts" data-acts></div>
     <section class="sp-sec"><h3>${pair ? "How they relate" : "How they work together"}</h3><div class="sp-facts">${(pair ? spPairFacts(hexes[0], hexes[1]) : spSetFacts(hexes, spScheme(hexes))).map(([t, s]) => `<div class="sp-fact"><b>${t}</b><p>${esc(s)}</p></div>`).join("")}</div></section>
@@ -274,6 +276,11 @@ function spPage(hexes, o = {}) {
     const kb = $("[data-acts] [data-cs=\"keep\"]"); if (kb) kb.querySelector("span").textContent = "Kept";
   });
   onKey = e => { if (e.key === "Escape") xBack(); };
+  // the top bar needs a real backdrop once content has scrolled under it (David, 2026-10-09): a gradient alone
+  // let scrolled text show through near the buttons. Solid + blurred past a few px, back to the plain wash at top.
+  const topBar = el.querySelector(".art-top"), onScroll = () => topBar.classList.toggle("scrolled", scrollY > 6);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+  cleanup.push(() => removeEventListener("scroll", onScroll));
   const $ = s => el.querySelector(s), my = ++SP_SEQ, live = () => my === SP_SEQ && el.isConnected;
   const acts = typeof csActions === "function" ? csActions(set, { only: ["learn", "keep", "share"] }) : document.createElement("div");
   if (k < 8) { const add = document.createElement("button"); add.className = "cs-act"; add.dataset.spAdd = ""; add.innerHTML = `${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}<span>Add a color</span>`; acts.appendChild(add); acts.style.setProperty("--n", (+acts.dataset.n || 3) + 1); }
@@ -308,14 +315,6 @@ function spPage(hexes, o = {}) {
         ${facts("Where", st.countries.slice(0, 2), d => `${esc(d.label)} (${d.hit} of ${spNum(d.total)})`)}
       </div>`;
     }
-    if (n) body += `<div class="gl-rail sp-rail" data-rail>${res.rows.slice(0, 10).map(r => glPinHTML(r.i, { badge: `${ptPct(r.cover)} of the canvas${pair ? ", the lesser" : ", least of them"}` })).join("")}</div>
-      <button class="btn ghost gl-all" data-all>See all ${spNum(n)} ${ICON.arrow}</button>`;
-    if (n < 10) {
-      const cl = await ciClosest(q, res, { max: 10 - n }).catch(() => null);
-      if (!live()) return;
-      if (cl && cl.rows.length) body += `<h4 class="sp-h4">Closest in the archive</h4><p class="sp-sub">${n ? "The nearest others" : "Nothing holds " + (pair ? "both" : "all of them") + " at this measure, so these come nearest"}, best first: how much of the canvas each holds, as photographed.</p>
-      <div class="gl-rail sp-rail" data-rail3>${cl.rows.map(r => glPinHTML(r.i, { badge: ciNearWords(r) })).join("")}</div>${n ? "" : `<button class="btn ghost gl-all" data-all>See the closest ${ICON.arrow}</button>`}`;
-    }
     // a set: the closest paintings as a palette, and the proportions painters used
     if (!pair) {
       const pal = await paintingsWith(q, { ...CI_STD, mode: "palette" }).catch(() => null);
@@ -330,9 +329,10 @@ function spPage(hexes, o = {}) {
         $("[data-stripcap]").textContent = `At the proportions painters used: the average share of each in the ${src.length} ${n >= SP_MIN_N ? "paintings that hold all of them" : "closest paintings"}, as photographed.`;
       }
     }
-    box.innerHTML = `<h3>Together in paintings</h3>${body}`;
-    box.querySelectorAll("[data-rail],[data-rail2],[data-rail3]").forEach(glFill);
-    box._rows = res.rows; box._res = res;
+    box.innerHTML = `<h3>Together in paintings</h3>${body}<div class="sp-match" data-match></div>`;
+    box.querySelectorAll("[data-rail2]").forEach(glFill);
+    box._res = res;
+    if (typeof spMountMatch === "function") spMountMatch($("[data-match]"), q, names, pair, () => live());
     // the top painter, for "as they would"
     const P = st && st.painters[0];
     if (P && P.hit >= 4) { if (!PT_PAINTERS) PT_PAINTERS = fetch("data/colorindex/painters.json").then(r => r.ok ? r.json() : {}).catch(() => ({})); const all = await PT_PAINTERS; const pp = all && all[P.label]; if (pp && pp.c && pp.c.length) { ctx.painter = { name: P.label, n: pp.n, cols: pp.c }; if (live()) improve(); } }
@@ -345,9 +345,11 @@ function spPage(hexes, o = {}) {
       if (!live()) return;
       const ok = list.filter(x => x.lift != null && x.n >= SP_MIN_N && x.e >= 1).sort((x, y) => y.lift - x.lift);
       const strong = ok[0], weak = ok.length > 1 ? ok[ok.length - 1] : null;
-      const row = x => `<button class="sp-prow" data-pair="${x.a}+${x.b}"><span class="sp-psw"><i style="--c:${x.a}"></i><i style="--c:${x.b}"></i></span><span class="sp-pt"><b>${esc(spNm(x.a))} + ${esc(spNm(x.b).toLowerCase())}</b><small>${x.lift != null && x.n >= SP_MIN_N && x.e >= 1 ? `${spTimes(x.lift)} chance · ${spNum(x.n)} paintings` : x.n ? `${x.n} ${x.n === 1 ? "painting" : "paintings"}, too few to say` : "no painting holds both"}${x.loose ? " (measured loosely)" : ""}${x === strong ? " · the strongest" : x === weak ? " · the weakest" : ""}</small></span>${ICON.arrow}</button>`;
-      const sorted = [...ok, ...list.filter(x => !ok.includes(x))];
-      $("[data-pairs]").innerHTML = `<h3>The pairs inside</h3><p class="sp-sub">${strong && weak ? `${esc(spNm(strong.a))} with ${esc(spNm(strong.b).toLowerCase())} holds this palette together in paintings; ${esc(spNm(weak.a).toLowerCase())} with ${esc(spNm(weak.b).toLowerCase())} is the loosest link.` : "How often painters put each two of them together."}</p><div class="sp-plist">${sorted.map(row).join("")}</div>`;
+      const row = x => `<button class="sp-prow" data-pair="${x.a}+${x.b}"><span class="sp-psw"><i style="--c:${x.a}"></i><i style="--c:${x.b}"></i></span><span class="sp-pt"><b>${esc(spNm(x.a))} + ${esc(spNm(x.b).toLowerCase())}</b><small>${x.lift != null && x.n >= SP_MIN_N && x.e >= 1 ? `${spTimes(x.lift)} chance · ${spNum(x.n)} paintings` : `${x.n} ${x.n === 1 ? "painting" : "paintings"}, too few to say`}${x.loose ? " (measured loosely)" : ""}${x === strong ? " · the strongest" : x === weak ? " · the weakest" : ""}</small></span>${ICON.arrow}</button>`;
+      // rows with at least one real number stand on their own; rows with no data at all (David 2026-10-08: "'no
+      // painting holds both' ×3 is noise") collapse into a single closing line instead of repeating the same words.
+      const withData = [...ok, ...list.filter(x => !ok.includes(x) && x.n)], none = list.filter(x => !x.n);
+      $("[data-pairs]").innerHTML = `<h3>The pairs inside</h3><p class="sp-sub">${strong && weak ? `${esc(spNm(strong.a))} with ${esc(spNm(strong.b).toLowerCase())} holds this palette together in paintings; ${esc(spNm(weak.a).toLowerCase())} with ${esc(spNm(weak.b).toLowerCase())} is the loosest link.` : "How often painters put each two of them together."}</p>${withData.length ? `<div class="sp-plist">${withData.map(row).join("")}</div>` : ""}${none.length ? `<p class="sp-sub">No painting holds both ${esc(spList(none.map(x => `${spNm(x.a)} and ${spNm(x.b).toLowerCase()}`)))}.</p>` : ""}`;
       // the weakest member: lowest average lift with the others, below chance
       const mean = q.map(h => { const m = ok.filter(x => x.a === h || x.b === h); return m.length ? m.reduce((t, x) => t + x.lift, 0) / m.length : null; });
       let wi = -1; mean.forEach((v, i) => { if (v != null && v < .9 && (wi < 0 || v < mean[wi])) wi = i; });
@@ -424,6 +426,71 @@ function spPage(hexes, o = {}) {
   }
   improve();
 
+  // ---- drag to reorder (a set of 3+ only; David 2026-10-08, "once you choose three you can't rearrange") ----
+  // A handle on each row in "The names" (vertical), or press-drag a segment of the big strip (horizontal). Only
+  // the dragged element reflows live; on drop the whole order commits and the page redraws (push:false, so it
+  // replaces — a reorder isn't a new trail stop). The same pattern as js/favrank.js frOrder, one axis each way.
+  if (!pair) {
+    const commitOrder = (from, to) => { if (to === from) return; buzz(10); const order = hexes.slice(); const [mv] = order.splice(from, 1); order.splice(to, 0, mv); ROUTE_REPLACE = true; scrollTo(0, scrollY); spPage(order, { push: false }); };
+    const namesBox = $(".sp-names");
+    if (namesBox) {
+      const rowsOf = () => [...namesBox.children];
+      let rd = null;
+      namesBox.addEventListener("pointerdown", e => {
+        const h = e.target.closest("[data-handle]"); if (!h) return;
+        const row = h.closest(".sp-name"), rs = rowsOf(), gap = parseFloat(getComputedStyle(namesBox).rowGap) || 0;
+        rd = { row, i: rs.indexOf(row), at: rs.indexOf(row), y: e.clientY, id: e.pointerId, step: row.offsetHeight + gap, n: rs.length, moved: false };
+        try { row.setPointerCapture(e.pointerId); } catch (er) {}
+      });
+      namesBox.addEventListener("pointermove", e => {
+        if (!rd || e.pointerId !== rd.id) return;
+        const dy = e.clientY - rd.y;
+        if (!rd.moved && Math.abs(dy) > 5) { rd.moved = true; rd.row.classList.add("dragging"); buzz(6); }
+        if (!rd.moved) return;
+        rd.at = Math.max(0, Math.min(rd.n - 1, Math.round(rd.i + dy / rd.step)));
+        rd.row.style.transform = `translateY(${dy}px)`;
+        rowsOf().forEach((r, idx) => { if (r === rd.row) return; let s = 0; if (rd.i < rd.at && idx > rd.i && idx <= rd.at) s = -rd.step; if (rd.i > rd.at && idx < rd.i && idx >= rd.at) s = rd.step; r.style.transform = s ? `translateY(${s}px)` : ""; });
+      });
+      const rowEnd = e => {
+        if (!rd || e.pointerId !== rd.id) return;
+        const d = rd; rd = null;
+        rowsOf().forEach(r => r.style.transform = ""); d.row.classList.remove("dragging");
+        if (d.moved) commitOrder(d.i, d.at);
+      };
+      namesBox.addEventListener("pointerup", rowEnd); namesBox.addEventListener("pointercancel", rowEnd);
+    }
+    const stripBox = $("[data-strip]");
+    if (stripBox) {
+      let sd = null;
+      stripBox.addEventListener("pointerdown", e => {
+        const b = e.target.closest("button"); if (!b) return;
+        const bs = [...stripBox.children];
+        sd = { b, i: bs.indexOf(b), at: bs.indexOf(b), x: e.clientX, id: e.pointerId, step: b.offsetWidth, n: bs.length, moved: false };
+      });
+      stripBox.addEventListener("pointermove", e => {
+        if (!sd || e.pointerId !== sd.id) return;
+        const dx = e.clientX - sd.x;
+        if (!sd.moved && Math.abs(dx) > 6) {
+          sd.moved = true; sd.b.classList.add("dragging"); try { sd.b.setPointerCapture(sd.id); } catch (er) {} buzz(6);
+        }
+        if (!sd.moved) return;
+        e.preventDefault();
+        sd.at = Math.max(0, Math.min(sd.n - 1, Math.round(sd.i + dx / sd.step)));
+        sd.b.style.transform = `translateX(${dx}px) scale(1.05)`;
+        [...stripBox.children].forEach((bEl, idx) => { if (bEl === sd.b) return; let s = 0; if (sd.i < sd.at && idx > sd.i && idx <= sd.at) s = -sd.step; if (sd.i > sd.at && idx < sd.i && idx >= sd.at) s = sd.step; bEl.style.transform = s ? `translateX(${s}px)` : ""; });
+      });
+      const stripEnd = e => {
+        if (!sd || e.pointerId !== sd.id) return;
+        const d = sd; sd = null;
+        [...stripBox.children].forEach(b => b.style.transform = ""); d.b.classList.remove("dragging");
+        // the click that follows a real drag would otherwise open the color page (js/swatch.js): swallow it the
+        // same way settray.js does after its own long-press gesture (SX_SWALLOW, a shared window-capture guard).
+        if (d.moved) { SX_SWALLOW = performance.now(); commitOrder(d.i, d.at); }
+      };
+      stripBox.addEventListener("pointerup", stripEnd); stripBox.addEventListener("pointercancel", stripEnd);
+    }
+  }
+
   // ---- taps ----
   el.addEventListener("click", e => {
     // a painting from one of these rails arrived from the whole set, not just one color of it (David, 2026-10-08):
@@ -431,13 +498,27 @@ function spPage(hexes, o = {}) {
     // this used to make here isn't needed any more.
     const g = e.target.closest("[data-gi]");
     if (g) return galleryPage(+g.dataset.gi, true, hexes, CI_STD.tol);
-    if (e.target.closest("[data-all]")) { const o2 = ($("[data-ptg]")._res || {}).o || CI_STD; return paintingsOfPage(q, { tol: o2.tol, minCover: o2.minCover, mode: "all", sort: "cover", source: "paintings", maxCover: null, names: q.map(spNm) }); }
     const pr = e.target.closest("[data-pair]"); if (pr) { buzz(6); return spPage(pr.dataset.pair.split("+")); }
     const pa = e.target.closest("[data-painter]"); if (pa && typeof awPainter === "function") { buzz(5); return awPainter(routeSlug(pa.dataset.painter)); }
     const lk = e.target.closest("[data-lk]"); if (lk && typeof lkOpen === "function") { buzz(5); return lkOpen(lk.dataset.lk, { pi: +lk.dataset.lkp, back: () => spPage(hexes, { push: false }) }); }
     const ad = e.target.closest("[data-addhex]"); if (ad) { buzz(8); return spPage([...hexes, ad.dataset.addhex]); }
     if (e.target.closest("[data-sp-add]")) { e.stopPropagation(); buzz(5); return sxPick(hexes[hexes.length - 1], { title: spTitle(hexes), onPick: h => spPage([...hexes, h]) }); }
-    const dr = e.target.closest("[data-drop]"); if (dr) { buzz(6); const left = hexes.filter((_, i) => i !== +dr.dataset.drop); ROUTE_REPLACE = true; return spPage(left, { push: false, undo: hexes, applied: `Removed ${spNm(hexes[+dr.dataset.drop]).toLowerCase()}` }); }
+    const dr = e.target.closest("[data-drop]");
+    if (dr) {
+      buzz(6);
+      const idx = +dr.dataset.drop, removed = hexes[idx], left = hexes.filter((_, i) => i !== idx), was = hexes.slice();
+      ROUTE_REPLACE = true;
+      // down to one color: the calmest landing is that color's own page, not a picker sheet right after a delete
+      // (David 2026-10-08 asked which; this is the choice) — still with the same Undo, back to the pair.
+      if (left.length < 2) {
+        // navigate first, THEN toast: show() (core.js) clears any existing .toast as part of leaving the old
+        // screen, so a toast raised before the navigate would vanish before anyone could read it.
+        if (typeof openTappedColor === "function") openTappedColor(left[0]); else spPage(left);
+        toast(`Removed ${spNm(removed)}`, { dot: removed, undo: () => { ROUTE_REPLACE = true; spPage(was, { push: false }); } });
+        return;
+      }
+      return spPage(left, { push: false, undo: was, applied: `Removed ${spNm(removed).toLowerCase()}` });
+    }
     const lkb = e.target.closest("[data-lock]");
     if (lkb) { const [id, i] = lkb.dataset.lock.split(":"), set = LOCKS[id] || (LOCKS[id] = new Set()); set.has(+i) ? set.delete(+i) : set.add(+i); buzz(5); const y = scrollY; improve(); scrollTo(0, y); return; }
     const sb = e.target.closest("[data-str]"); if (sb) { SP_STR = sb.dataset.str; el.querySelectorAll("[data-str]").forEach(b => b.classList.toggle("on", b === sb)); buzz(4); return improve(); }
@@ -446,6 +527,88 @@ function spPage(hexes, o = {}) {
     if (e.target.closest("[data-retry]")) { ROUTE_REPLACE = true; return spPage(hexes, { push: false }); }
   });
   return el;
+}
+
+// ---------- the match browser: Closeness + Minimum share (+ "Holds at least N of M" for 4+), never a silent
+// fallback (David, 2026-10-09: "we could always have sliders... sooner or later something will match," so the
+// looseness has to be a choice the person makes, in words, not something shown to them as if it mattered). A
+// result always genuinely holds that many of the colors, at that closeness and that share — nothing is shown
+// just because it's the least-far-away thing around. Reuses js/paintingsof.js's own two-slider widget (ptSliders)
+// so this is the same control the rest of the app already uses, not a second vocabulary. Also used wherever a
+// set/palette shows its paintings — pairs and trios always need every color; a palette of 4+ gets the third slider.
+const spCloseWord = de => de < 1 ? "near-exact" : de <= 4 ? "close" : de <= 8 ? "loose" : "very loose";
+function spMountMatch(host, q, names, pair, isLive) {
+  if (!host) return;
+  const m = q.length;
+  const st = { tol: CI_STD.tol, minCover: CI_STD.minCover, maxCover: null, mode: "all", sort: "cover", source: "paintings", atLeast: m };
+  const live = () => (typeof isLive !== "function" || isLive()) && host.isConnected;
+  host.innerHTML = `<h4 class="sp-h4">Browse the matches</h4>
+    <div data-mt-sliders></div>
+    ${m >= 4 ? `<div class="sp-mt-n" data-mt-n>
+      <div class="pt-ctl-h"><b>Holds at least</b><span data-mt-n-v></span></div>
+      <input class="pt-range" type="range" min="2" max="${m}" step="1" value="${m}" aria-label="How many of the colors a painting must hold">
+    </div>` : ""}
+    <div class="sp-mt-body" data-mt-body><p class="fine">Measuring…</p></div>`;
+  const nBox = host.querySelector("[data-mt-n]"), nRange = nBox && nBox.querySelector(".pt-range");
+  const paintN = () => { if (!nBox) return; nRange.value = st.atLeast; nBox.querySelector("[data-mt-n-v]").textContent = st.atLeast === m ? `all ${m}` : `${st.atLeast} of ${m}`; nRange.style.setProperty("--p", ((st.atLeast - 2) / Math.max(1, m - 2) * 100) + "%"); };
+  let note = "", seq = 0;
+  const body = host.querySelector("[data-mt-body]");
+  const tuner = ptSliders(host.querySelector("[data-mt-sliders]"), st, () => { note = ""; run(); }, { compact: true });
+  function run() {
+    st.mode = st.atLeast < m ? "atleast" : "all";
+    paintN();
+    const my = ++seq;
+    body.innerHTML = `<p class="fine">Measuring…</p>`;
+    paintingsWith(q, st).then(res => {
+      if (my !== seq || !live()) return;
+      tuner.count(res.count ? `<b>${spNum(res.count)}</b> of ${spNum(res.n)} ${res.count === 1 ? "painting holds" : "paintings hold"} ${st.atLeast < m ? `at least ${st.atLeast} of them` : pair ? "both" : "all of them"}` : "");
+      // a pair/trio (m<4) has no "Holds at least" slider to fall back on: once Closeness and Minimum share are
+      // both all the way loose, that IS the loosest it gets. A 4+ palette isn't exhausted until atLeast is 2.
+      const atLoosest = st.tol === PT_TOL[PT_TOL.length - 1] && st.minCover === PT_MIN[0] && (m < 4 || st.atLeast <= 2);
+      if (!res.count) {
+        body.innerHTML = `<p class="sp-say">${note && !atLoosest ? esc(note) + " " : ""}${atLoosest ? `Not one painting holds ${st.atLeast < m ? `even ${st.atLeast} of them` : pair ? "both" : "all of them"}, even at the loosest measure.` : "Nothing this close yet."}</p>
+          ${atLoosest ? "" : `<button class="btn ghost" data-mt-loosen>Loosen until something matches</button>`}`;
+        return;
+      }
+      const rows = res.rows.slice(0, 10);
+      // small dots on a 4+ palette's card: which of the colors this painting actually holds (David 2026-10-09)
+      const dots = r => m < 4 ? "" : `<span class="sp-dots">${q.map((h, j) => `<i class="sp-dot${r.covers[j] >= st.minCover ? " on" : ""}" style="--c:${h}"></i>`).join("")}</span>`;
+      const tile = r => `<div class="sp-mtile">${glPinHTML(r.i, { badge: `${spCloseWord(r.de)} · ${ptPct(r.cover)} of the canvas` })}${dots(r)}</div>`;
+      // the full-screen browser (js/paintingsof.js) doesn't yet know "holds at least N of M" (outside this lane);
+      // only send someone there when the mode it understands ("all") is the one in effect.
+      body.innerHTML = `${note ? `<p class="sp-sub">${esc(note)}</p>` : ""}
+        <div class="gl-rail sp-rail">${rows.map(tile).join("")}</div>
+        ${res.count > rows.length && st.mode === "all" ? `<button class="btn ghost gl-all" data-mt-all>See all ${spNum(res.count)} ${ICON.arrow}</button>` : ""}`;
+      glFill(body);
+    }).catch(() => { if (my === seq && live()) body.innerHTML = `<p class="fine">The paintings didn't load. <button class="wl" data-mt-retry>Try again</button></p>`; });
+  }
+  run();
+  host.addEventListener("click", e => {
+    const loosenBtn = e.target.closest("[data-mt-loosen]");
+    if (loosenBtn) {
+      loosenBtn.disabled = true; loosenBtn.textContent = "Loosening…";
+      ciAuto(q, st, PT_TOL, PT_MIN, 1).then(async s => {
+        const probe = await paintingsWith(q, { ...st, tol: s.tol, minCover: s.minCover, maxCover: null }).catch(() => ({ count: 0 }));
+        if (probe.count) {
+          // closeness (how near a color must be, how much of the canvas) got there: say exactly how far it went
+          st.tol = s.tol; st.minCover = s.minCover; st.maxCover = null; tuner.set(st); buzz(8);
+          note = `Loosened to ${ptTolWord(st.tol)}, ${ptCoverWord(st.minCover, st.maxCover)}${st.atLeast < m ? `, holds at least ${st.atLeast} of ${m}` : ""}.`;
+        } else if (m >= 4 && st.atLeast > 2) {
+          // closeness alone can't do it, even at its loosest: step "Holds at least" down next, and say so
+          st.tol = s.tol; st.minCover = s.minCover; st.maxCover = null; st.atLeast--; tuner.set(st); paintN(); buzz(8);
+          note = `Loosened to holds at least ${st.atLeast} of ${m}, at ${ptTolWord(st.tol)}, ${ptCoverWord(st.minCover, st.maxCover)}.`;
+        } else {
+          st.tol = s.tol; st.minCover = s.minCover; st.maxCover = null; tuner.set(st); buzz(8);
+          note = `Loosened all the way, to ${ptTolWord(st.tol)}, ${ptCoverWord(st.minCover, st.maxCover)}.`;
+        }
+        run();
+      });
+      return;
+    }
+    if (e.target.closest("[data-mt-all]")) return paintingsOfPage(q, { tol: st.tol, minCover: st.minCover, mode: "all", sort: "cover", source: "paintings", maxCover: null, names });
+    if (e.target.closest("[data-mt-retry]")) return run();
+  });
+  if (nRange) nRange.addEventListener("input", () => { const v = +nRange.value; if (v !== st.atLeast) { st.atLeast = v; note = ""; buzz(3); run(); } });
 }
 
 // the standard measure first (CI_STD: within 4%, 1% of the canvas); under SP_MIN_N matches, a looser one, said so

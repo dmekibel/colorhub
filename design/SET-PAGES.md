@@ -35,13 +35,25 @@ One screen, `spPage(hexes)`, two shapes:
 - Actions on both: Learn these (prQuick), Keep (keepPalette), Share (share card), Add a color.
 
 ## Rules
-- Canonical address: colors sorted dark to light (L*, then hex), so the same set is always one URL. A 2-color
-  `#/set` opens the pair; a 3+ `#/pair` opens the set.
+- Address: the colors in the order they arrived or were dragged to (David, 2026-10-09 — order is now a feature,
+  not canonicalized away). A 2-color `#/set` opens the pair; a 3+ `#/pair` opens the set.
 - Honest minimums: no lift claim under 5 paintings; "a curiosity, not a trend" under 15; never "ever" or
   "always"; every painting number says *as photographed*; the wheel is CIELAB hue, not a painter's wheel.
 - Paintings queries take at most 5 colors (the index); a bigger set is measured on its 5 most distinct colors and
   says so.
 - One tap on any color opens its page; every pair row opens its pair page; every painting opens the painting.
+- Removing a color works at any count: 3+ removes down and offers Undo; removing the second of a pair lands on
+  the one color's own page (calmer than opening a picker sheet right after a delete), with "Removed X · Undo".
+- **Reorder (David, 2026-10-09):** a set of 3+ can be dragged into a new order — a handle on each row in *The
+  names*, or press-drag a segment of the big strip. The new order is a fresh address (push:false, replaces).
+- **Together in paintings never shows a noisy near-miss as if it mattered** (David, 2026-10-09: "sooner or later
+  something will match" if you loosen enough, so the looseness has to be explicit and chosen, never silent).
+  Two sliders — Closeness (ΔE, worded "near-exact/close/loose/very loose") and Minimum share of the canvas — and,
+  for a palette of 4+, a third: "Holds at least N of M" (default N=M). Every result genuinely holds that many of
+  the colors at that closeness and share; nothing is shown just because it's the least-far-away thing available.
+  Empty at the current settings says so plainly, with one tap to "Loosen until something matches" (steps
+  Closeness and Minimum share first, then N for a bigger palette, and says exactly what it loosened). A 4+
+  result card shows small dots, filled for each color it holds.
 
 ## Update 2026-10-08
 - **Tray**: only while building. Opening the set page consumes it, two screens without adding clears it, ✕ clears it.

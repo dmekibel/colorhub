@@ -72,24 +72,34 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sp-undo button{height:36px;padding:0 16px;border-radius:var(--r-pill);background:var(--paper);color:var(--paper-ink);font:500 14px/1 var(--sans)}
 @keyframes sxIn2{from{opacity:0;transform:translateY(-6px)}to{opacity:1}}
 .sp-pair{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:20px 0 0;border-radius:var(--r-1);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(236,232,223,.1)}
-.sp-plate{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;min-height:min(62vw,300px);padding:14px;background:var(--c);color:#F3F0EA;text-align:left}
+.sp-pcell{position:relative;display:flex}
+.sp-plate{flex:1;position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;min-height:min(62vw,300px);padding:14px;background:var(--c);color:#F3F0EA;text-align:left}
 .sp-plate[data-ink="dark"]{color:#141311}
 .sp-plate b{font:400 22px/1.1 var(--serif);letter-spacing:-.005em}
 .sp-plate em{font:500 13px/1 var(--mono);font-style:normal;opacity:.75}
 .sp-sample{position:absolute;top:12px;left:14px;font:400 56px/1 var(--serif);letter-spacing:-.02em}
 .sp-plate:active{filter:brightness(1.05)}
+/* the pair's own remove (David 2026-10-08: removing must work at any count, including a pair down to one) */
+.sp-drop-plate{position:absolute;top:8px;right:8px;z-index:2;color:#F3F0EA;background:rgba(14,13,11,.28);border-radius:50%}
+.sp-drop-plate[data-ink="dark"]{color:#141311;background:rgba(243,240,234,.32)}
+.sp-drop-plate:active{filter:brightness(1.15)}
 .sp-strip{display:flex;height:150px;margin:20px 0 0;border-radius:var(--r-1);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(236,232,223,.1);transition:all .4s var(--ease)}
 .sp-strip button{position:relative;background:var(--c);min-width:18px;transition:flex .5s var(--ease)}
 .sp-strip span{position:absolute;left:8px;bottom:8px;white-space:nowrap;overflow:hidden;max-width:calc(100% - 10px);font:500 13px/1 var(--mono);color:#F3F0EA}
 .sp-strip span[data-ink="dark"]{color:#141311}
 .sp-strip-cap{font:400 13px/1.4 var(--sans);color:var(--soft);margin:8px 0 0}
+.sp-strip button{touch-action:none;transition:box-shadow .15s}
+.sp-strip button.dragging{z-index:2;box-shadow:0 10px 24px -8px rgba(0,0,0,.6);transition:none}
 .sp-names{display:flex;flex-direction:column;margin:10px 0 0}
-.sp-name{display:flex;align-items:center;border-bottom:1px solid var(--rule)}
+.sp-name{display:flex;align-items:center;border-bottom:1px solid var(--rule);background:var(--ground);transition:box-shadow .15s}
+.sp-name.dragging{position:relative;z-index:2;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);transition:none}
 .sp-name>button:first-child{flex:1;display:flex;align-items:center;gap:12px;min-height:52px;text-align:left}
 .sp-name i{flex:none;width:34px;height:34px;border-radius:var(--r-1);background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.12)}
 .sp-name b{flex:1;font:400 19px/1.2 var(--serif)}
 .sp-name em{font:400 13px/1 var(--mono);font-style:normal;color:var(--faint)}
-.sp-drop{display:grid;place-items:center;width:44px;height:44px;color:var(--faint)}
+.sp-handle{display:grid;place-items:center;flex:none;width:44px;height:44px;color:var(--faint);touch-action:none;cursor:grab}
+.sp-handle:active{cursor:grabbing}
+.sp-drop{display:grid;place-items:center;flex:none;width:44px;height:44px;color:var(--faint)}
 .sp-lead{margin:22px 0 4px;font:400 22px/1.32 var(--serif);letter-spacing:-.005em;min-height:58px;text-wrap:pretty}
 .sp-acts .cs-acts{margin-top:10px}
 .sp-sec{margin:30px 0 0;padding-top:16px;border-top:1px solid var(--rule)}
@@ -180,3 +190,26 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 @keyframes spHeart{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}18%{transform:translate(-50%,-50%) scale(1.15);opacity:1}32%{transform:translate(-50%,-50%) scale(.92)}45%{transform:translate(-50%,-50%) scale(1.04)}100%{transform:translate(-50%,-60%) scale(1);opacity:0}}
 @media (prefers-reduced-motion:reduce){.sp-heart{animation:spHeartFade .5s ease forwards}}
 @keyframes spHeartFade{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+
+/* ---------- the top bar needs a real backdrop once content has scrolled under it (David, 2026-10-09): the
+   plain gradient wash let the lead/fact text show through near Back. Solid + blurred past a few px of scroll. --- */
+.sp-page .art-top{transition:background .18s,box-shadow .18s}
+.sp-page .art-top.scrolled{background:var(--ground);box-shadow:0 1px 0 var(--rule)}
+@supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)){
+  .sp-page .art-top.scrolled{background:rgba(14,13,11,.88);-webkit-backdrop-filter:blur(14px) saturate(1.1);backdrop-filter:blur(14px) saturate(1.1)}
+}
+
+/* ---------- Together in paintings: the match browser (Closeness, Minimum share, Holds at least N of M) ----------
+   David, 2026-10-09: sliders are the only way to widen a match — never a silent near-miss shown as if it counted. */
+.sp-match{margin-top:22px}
+.sp-match .pt-sl{margin-top:2px}
+.sp-mt-n{padding:12px 0 8px;border-top:1px solid var(--rule)}
+.sp-mt-body{margin-top:4px}
+.sp-mt-body .btn{margin-top:4px}
+.sp-mtile{position:relative}
+.gl-rail>.sp-mtile{flex:none;scroll-snap-align:start}
+.gl-rail>.sp-mtile .gl-im{height:150px;width:auto}
+.gl-rail>.sp-mtile>.gl-pin>:not(.gl-im){width:0;min-width:100%}
+.sp-dots{position:absolute;top:6px;right:6px;z-index:1;display:flex;gap:3px;padding:3px 4px;border-radius:var(--r-pill);background:rgba(14,13,11,.5)}
+.sp-dot{width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5);opacity:.3}
+.sp-dot.on{opacity:1}

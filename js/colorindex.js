@@ -192,6 +192,20 @@ async function ciOne(key, hexes, o) {
     const good = rows.filter(r => r.score >= .5);
     return { src, n, per, rows, count: good.length };
   }
+  // "atleast": holds at least `need` of the k colors (a bigger palette, David 2026-10-09 — "Holds at least N of M
+  // colors"), each of the `need` best-covered ones clearing the threshold. need===k is the same test as "all";
+  // need===1 is the same test as "any" (both kept as their own branches below since they're the common case).
+  if (o.mode === "atleast") {
+    const need = Math.max(1, Math.min(k, o.atLeast || k));
+    for (let i = 0; i < n; i++) {
+      const covs = hard.map(c => c.cov[i]), order = covs.map((_, j) => j).sort((a, b) => covs[b] - covs[a]);
+      const worst = covs[order[need - 1]];
+      if (worst < m || worst > hiM) continue;
+      let de = 0; for (let t = 0; t < need; t++) { const j = order[t]; if (hard[j].de[i] > de && isFinite(hard[j].de[i])) de = hard[j].de[i]; }
+      rows.push({ src: key, i, cover: worst * 100, covers: covs.map(c => c * 100), de });
+    }
+    return { src, n, per, rows, count: rows.length };
+  }
   for (let i = 0; i < n; i++) {
     let lo = Infinity, hi = 0, de = 0;
     for (let j = 0; j < k; j++) { const c = hard[j].cov[i]; if (c < lo) lo = c; if (c > hi) hi = c; if (hard[j].de[i] > de && isFinite(hard[j].de[i])) de = hard[j].de[i]; }
@@ -266,14 +280,17 @@ function ciNearWords(r) {
   return `nearest patch ${r.de < 1 ? "under 1" : Math.round(r.de)}% away, ${f(r.cover)} of the canvas within ${r.tc}%`;
 }
 // Auto: the tightest pair of sliders that still shows at least `want` pictures. tolList/minList are the slider stops.
+// o.mode "any" needs 1 of k, "atleast" needs o.atLeast of k, anything else ("all") needs every one — the same
+// "Nth highest coverage wins" test ciOne uses, so this agrees with what the sliders will actually show.
 async function ciAuto(hexes, o, tolList, minList, want = CI_WANT) {
   hexes = ciHexes(hexes);
-  const key = o && o.source && CI_SOURCES[o.source] ? o.source : "paintings", src = await ciOpen(key), n = src.n, k = hexes.length, any = !!o && o.mode === "any";
+  const key = o && o.source && CI_SOURCES[o.source] ? o.source : "paintings", src = await ciOpen(key), n = src.n, k = hexes.length;
+  const need = o && o.mode === "any" ? 1 : o && o.mode === "atleast" ? Math.max(1, Math.min(k, o.atLeast || k)) : k;
   let best = null;
   for (let ti = 0; ti < tolList.length; ti++) {
     const cs = await Promise.all(hexes.map(h => ciCoverage(src, h, tolList[ti])));
     const v = new Float32Array(n);
-    for (let i = 0; i < n; i++) { let a = any ? 0 : Infinity; for (let j = 0; j < k; j++) { const c = cs[j].cov[i]; a = any ? Math.max(a, c) : Math.min(a, c); } v[i] = a; }
+    for (let i = 0; i < n; i++) { const covs = []; for (let j = 0; j < k; j++) covs.push(cs[j].cov[i]); covs.sort((a, b) => b - a); v[i] = covs[need - 1]; }
     v.sort();
     const kth = v[Math.max(0, n - want)] * 100;
     let mi = -1; for (let m = 0; m < minList.length; m++) if (minList[m] <= kth + 1e-6) mi = m;
