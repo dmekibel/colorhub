@@ -66,10 +66,15 @@ const SOURCE_SYSTEMS = {
     n: "varies; the app draws on a working list of historically documented pigments and dyes", how: "A pigment name (ultramarine, vermilion, Prussian blue) names the material, with a representative color measured from it; the same pigment can look different depending on how finely it's ground and what it's mixed with.",
     caveat: "A pigment's color varies by source, era and preparation; the hex shown is one representative reading, not the only one a historical pigment could produce." },
 };
-const srcColorsFor = id => {
-  const list = (typeof CORE_NAMES !== "undefined" && CORE_NAMES) || (typeof coreFallback === "function" ? coreFallback() : []);
-  return list.filter(e => (e.src || []).includes(id) || (e.fs === id)).slice(0, 48);
-};
+// CORE_NAMES loads lazily (js/loader.js); a direct #/source/<id> load can land before it has. Waits for it
+// (coreFallback's small built-in list has no .src tags to match against) rather than saying "none" too soon.
+function srcColorsFor(id) {
+  const ready = typeof CORE_NAMES !== "undefined" && CORE_NAMES;
+  const go = list => list.filter(e => (e.src || []).includes(id) || (e.fs === id)).slice(0, 48);
+  if (ready) return Promise.resolve(go(CORE_NAMES));
+  if (typeof loadCoreNames === "function") return loadCoreNames().then(() => go((typeof CORE_NAMES !== "undefined" && CORE_NAMES) || []));
+  return Promise.resolve([]);
+}
 function srcLinkHTML(id, label) {
   if (!SOURCE_SYSTEMS[id]) return esc(label || "");
   return `<button type="button" class="src-link" data-src-open="${esc(id)}">${esc(label || SOURCE_SYSTEMS[id].short)}</button>`;
@@ -80,7 +85,6 @@ function srcWireLinks(el) {
 function sourcePage(id) {
   const sys = SOURCE_SYSTEMS[id];
   if (!sys) { toast("That source isn't in our list yet"); return; }
-  const colors = srcColorsFor(id);
   const el = show(`
     <header class="src-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span class="src-top-t">Source</span><span class="ar-rd-sp"></span></header>
     <div class="src-band"><p class="eyebrow">A naming system</p><h1>${esc(sys.title)}</h1><p class="src-short">${esc(sys.short)}</p></div>
@@ -92,10 +96,16 @@ function sourcePage(id) {
       <div><dt>How it names colors</dt><dd>${esc(sys.how)}</dd></div>
     </dl>
     <p class="fine src-caveat">${esc(sys.caveat)} Screen colors are always approximate.</p>
-    ${colors.length ? `<h2 class="src-h2">Colors in our archive from this source</h2><div class="lk-list src-strip">${colors.map(e => `<button class="lk-row" data-nn="${esc(e.n)}" data-h="${e.h}"><i style="--c:${e.h}"></i><b>${esc(e.n)}</b></button>`).join("")}</div>` : `<p class="fine">We don't have any of our colors tagged to this source yet.</p>`}
+    <div data-src-colors></div>
   `, "article src-page");
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
-  el.querySelectorAll("[data-nn]").forEach(b => b.onclick = () => openCoreName(b.dataset.h, b.dataset.nn));
+  srcColorsFor(id).then(colors => {
+    const box = el.querySelector("[data-src-colors]"); if (!box || !el.isConnected) return;
+    box.innerHTML = colors.length
+      ? `<h2 class="src-h2">Colors in our archive from this source</h2><div class="lk-list src-strip">${colors.map(e => `<button class="lk-row" data-nn="${esc(e.n)}" data-h="${e.h}"><i style="--c:${e.h}"></i><b>${esc(e.n)}</b></button>`).join("")}</div>`
+      : `<p class="fine">We don't have any of our colors tagged to this source yet.</p>`;
+    box.querySelectorAll("[data-nn]").forEach(b => b.onclick = () => openCoreName(b.dataset.h, b.dataset.nn));
+  });
   return el;
 }

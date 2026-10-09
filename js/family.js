@@ -48,7 +48,7 @@ function famCompareHTML(self, all, pin) {
   const list = pool.map(c => ({ c, d: de2000(self.h, c.h) })).sort((a, b) => a.d - b.d).slice(0, 4);
   if (!list.length) return `<p class="fine fam-empty">No close relative to compare yet.</p>`;
   const [first, ...rest] = list;
-  const diffLine = (c, d) => `${esc(rpCapWord(lookDiff(self, c)))} than ${esc(self.n.toLowerCase())}, ${esc(pctDiff(d))}.`;
+  const diffLine = (c, d) => { const diff = lookDiff(self, c); return `${diff === "almost the same" ? `Almost the same as ${esc(self.n.toLowerCase())}` : `${esc(rpCapWord(diff))} than ${esc(self.n.toLowerCase())}`}, ${esc(pctDiff(d))}.`; };
   return `<div class="fam-cmp-split" data-fam-split data-a="${self.h}" data-b="${first.c.h}">
       <div class="fam-cmp-half fam-cmp-a" style="--c:${self.h}" data-ink="${ink(self.h)}"><b>${esc(self.n)}</b></div>
       <div class="fam-cmp-half fam-cmp-b" style="--c:${first.c.h}" data-ink="${ink(first.c.h)}"><b>${esc(first.c.n)}</b></div>
