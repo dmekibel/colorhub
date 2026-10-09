@@ -1599,7 +1599,7 @@ function honeycomb(host, opts = {}) {
       pinch.sd = pinch.sd == null ? d0 : pinch.sd + (d0 - pinch.sd) * .55;
       pinch.sm = pinch.sm ? [pinch.sm[0] + (mid0[0] - pinch.sm[0]) * .55, pinch.sm[1] + (mid0[1] - pinch.sm[1]) * .55] : mid0;
       const d = pinch.sd, mid = pinch.sm;
-      if (Math.abs(d0 - pinch.d0) > 8) pinch.moved = true;
+      if (Math.abs(d0 - pinch.d0) > 8) { pinch.moved = true; if (fitMode) fitUserOverride = true; }
       Z = rubber(pinch.Z0 * d / pinch.d0);
       if (!lay.globe) { const o = offAt(mid[0], mid[1], lens(0)); P = [pinch.W0[0] - o[0], pinch.W0[1] - o[1]]; }
       draw(); return;
@@ -1607,7 +1607,7 @@ function honeycomb(host, opts = {}) {
     if (!down) return;
     if (paint) { const pb = hit(x, y); if (pb) selSet(pb.it, paint.on); return; }
     const dx = x - down.x, dy = y - down.y;
-    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; springTo = zTo = null; pressed = null; glided = null; clearTimeout(holdT); kick(); }
+    if (!down.moved && Math.hypot(dx, dy) > 10) { down.moved = true; if (fitMode) fitUserOverride = true; springTo = zTo = null; pressed = null; glided = null; clearTimeout(holdT); kick(); }
     if (!down.moved) return;
     const now = performance.now();
     if (lay.globe) { P = [down.P0[0] + dx / GLOBE_ROT_K, clamp(down.P0[1] - dy / GLOBE_ROT_K, -1.5, 1.5)]; }
@@ -1891,17 +1891,54 @@ function honeycomb(host, opts = {}) {
     ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw();
   }
   // ---- fit mode (David, 2026-10-09: the Arrange sheet covers the middle of the map, so zoomed in "you can
-  // barely see the difference between views" when a setting changes it): while it's on, the map flies to show the
-  // whole thing (zFloor(), the same "whole book fits" zoom the arr.fit arrangements already use) centered in
-  // whatever's left above the sheet (vcy() already accounts for the inset), and update() re-flies there on every
-  // setting change so the new arrangement is visible at a glance instead of mostly hidden under the sheet. The pan
-  // and zoom you had before fitting are remembered and restored (not just reset to default) when it turns off.
-  let fitMode = false, fitSaved = null;
+  // barely see the difference between views" when a setting changes it): while it's on, the map flies to frame
+  // the WHOLE current layout's bounds -- every cell's actual world (x,y), not zFloor's radial "whole book"
+  // approximation, which under- or over-zoomed for anything that isn't roughly circular (Families' three-wide
+  // grid, the Map's own tall tile) -- into whatever's left above the sheet (vcy()/vy() already track the inset,
+  // itself measured from the sheet's own getBoundingClientRect().top by js/home.js chooser's applyInset), with a
+  // real ~16px margin on every side. Re-fit happens only on an actual arrangement/order/style change (o.arrange),
+  // not on every soft update -- and not at all once the user has panned or pinched manually (fitUserOverride),
+  // so choosing an arrangement doesn't fight a view they just set up themselves; it resumes on the NEXT
+  // arrangement change, a deliberate action. The pan and zoom from before fitting are remembered and restored
+  // (not just reset to default) when it turns off.
+  let fitMode = false, fitSaved = null, fitUserOverride = false;
+  const boundsFit = () => {
+    if (!lay || lay.globe || !lay.pts.length || !W) return null;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const p of lay.pts) { if (p.x < minX) minX = p.x; if (p.x > maxX) maxX = p.x; if (p.y < minY) minY = p.y; if (p.y > maxY) maxY = p.y; }
+    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2, halfW = Math.max(.15, (maxX - minX) / 2), halfH = Math.max(.15, (maxY - minY) / 2);
+    // insetBottom (the target the sheet's own height was just measured to), not vy()/insetCur: the inset eases in
+    // over ~300ms (honey.js's own loop() tween), so fitting against the CURRENT (still mid-tween) value would aim
+    // for wherever the sheet happened to be a moment ago, not where it's about to settle.
+    // the fisheye's own middle bubble is the thing this lens magnifies most -- fitting the raw lattice POINTS
+    // into the available rect still leaves its drawn RADIUS (roughly base*m0 screen px, near size-independent of
+    // zoom) sticking out past that, so reserve room for it too, on top of the plain margin.
+    const margin = 16 + base * (cfg.m0 || 1) * .6;
+    const availW = Math.max(40, W - margin * 2), availH = Math.max(40, Hh - insetBottom - margin * 2);
+    // the same shape as zFloor()'s own "finite" formula above (R, the content's own radius, fits inside the
+    // screen's own half-diagonal) -- proven there already -- just with R taken from the layout's actual (x,y)
+    // bounds instead of lay.ext, and the screen half-diagonal from the real available rect instead of the whole
+    // viewport. A first pass here solved width and height as two separate linear constraints and, for the round
+    // (fisheye) lens, landed nowhere near the available space -- Finv's warp doesn't decompose per-axis that
+    // simply. The diagonal/radius form sidesteps that, with a safety factor on R: it matches the available rect's
+    // own aspect only when the content's aspect happens to match it too, and under-constrains the tighter axis
+    // when the two are lopsided (a tall, narrow region into a nearly-square area, say).
+    const R = Math.hypot(halfW, halfH) * 1.35, avail = Math.hypot(availW, availH);
+    const search = ok => { let lo = ABS_ZMIN, hi = ZMAX; if (!ok(hi)) return hi; for (let i = 0; i < 26; i++) { const m = (lo + hi) / 2; if (ok(m)) hi = m; else lo = m; } return hi; };
+    const zt = cfg.lensMode === "round"
+      ? search(z => Finv(avail / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R)
+      : avail / 2 / (base * M * R);
+    return { cx, cy, z: clamp(zt, ABS_ZMIN, ZMAX) };
+  };
   const flyToFit = (animate = true) => {
-    if (!lay || lay.globe) return;
-    const zt = zFloor();
-    if (animate) flyTo([0, 0], zt, { buzz: false });
-    else { P = [0, 0]; Plag = P.slice(); Z = clamp(zt, ABS_ZMIN, ZMAX); draw(); }
+    const f = boundsFit(); if (!f) return;
+    // flyTo() clamps its target to [ZMIN, ZMAX] -- ZMIN is the ordinary pinch-out floor (zFloor(), tuned to avoid
+    // a moire texture on a wrapping set), which exists to stop the USER zooming out too far, not to cap how far
+    // IN fit mode is allowed to go to show the whole layout above the sheet. A fit target below it must lower it
+    // first, or flyTo silently re-clamps back up to ZMIN and fit mode zooms in instead of out.
+    if (f.z < ZMIN) ZMIN = f.z;
+    if (animate) flyTo([f.cx, f.cy], f.z, { buzz: false });
+    else { P = [f.cx, f.cy]; Plag = P.slice(); Z = f.z; draw(); }
   };
   return {
     update(o = {}) {
@@ -1913,9 +1950,12 @@ function honeycomb(host, opts = {}) {
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
       // regions (Families, Hue pages) read best whole: the arrival eases out until most of the book is in view
       const arr = HONEY_ARR[honeyParseKey(cfg.layout).id];
-      // fit mode (the Arrange sheet is open) wins over every other arrival: every setting change flies back to
-      // the whole-map view so the change is visible above the sheet instead of mostly hidden under it
-      if (fitMode) flyToFit(true);
+      // fit mode (the Arrange sheet is open) wins over every other arrival, but only re-fits on an actual
+      // arrangement change (a new layout has new bounds) -- not a soft/filter update. Picking a new arrangement
+      // is itself a deliberate action, so it always re-fits and clears any pan/pinch override from before; a
+      // soft update (a feel slider, say) respects whatever view the user is already looking at.
+      if (fitMode && o.arrange) { fitUserOverride = false; flyToFit(true); }
+      else if (fitMode) {}
       else if (o.arrange && hlOn && HONEY_HL) l18FrameLit();
       else if (o.arrange && arr && arr.fit && !lay.globe) { P = [0, 0]; Plag = P.slice(); zoomTo(Math.max(ZMIN, Math.min(Z, ZMIN * 1.3)), W / 2, vcy()); }
       // a new order travels to the middle (for Center on, where the chosen color now sits)
@@ -1928,11 +1968,19 @@ function honeycomb(host, opts = {}) {
     // the Arrange sheet (js/home.js chooser("look")): enterFit() remembers the pan/zoom you had and flies to the
     // whole-map view (flyToFit, above); every update() while it's on flies back there so a setting change is
     // visible at once. exitFit() flies back to what you had -- not just a reset -- when the sheet closes.
-    enterFit() { if (!lay || lay.globe) return; if (!fitMode) { fitSaved = [P[0], P[1], Z]; fitMode = true; } flyToFit(true); },
+    enterFit() {
+      if (!lay || lay.globe) return;
+      const first = !fitMode;
+      if (first) { fitSaved = [P[0], P[1], Z]; fitMode = true; }
+      // a re-entry (the sheet's own height changed, say) respects a pan/pinch the user already made; only the
+      // very first entry (opening Arrange) and an actual arrangement change (honey.js update(), above) override it
+      if (first || !fitUserOverride) flyToFit(true);
+    },
     exitFit() {
-      if (!fitMode) return; fitMode = false;
+      if (!fitMode) return; fitMode = false; fitUserOverride = false;
       const s = fitSaved; fitSaved = null;
       if (s) flyTo([s[0], s[1]], s[2], { buzz: false });
+      ZMIN = zFloor();   // fit mode may have lowered it past the ordinary pinch-out floor; restore the real one
     },
     // legacy back-compat shims (the pre-preset "Lens strength" / "Lens mode" controls, if anything still calls them)
     lens: k => { if (!(liveTweak && liveTweak.m0 != null)) { const base0 = (HONEY_STYLES[styleId] || HONEY_STYLES.current).cfg, pm0 = base0.m0 != null ? base0.m0 : HONEY_CFG_BASE.m0, pm1 = base0.m1 != null ? base0.m1 : HONEY_CFG_BASE.m1; applyTweak({ m0: pm1 + (pm0 - pm1) * Math.max(.12, clamp(+k, 0, 2)) }); } },
@@ -1977,6 +2025,14 @@ function honeycomb(host, opts = {}) {
       for (const b of big) { let g = Infinity; for (const o of drawn) { if (o === b) continue; const v = Math.hypot(o.x - b.x, o.y - b.y) - b.d / 2 - o.d / 2; if (v < g) g = v; } if (isFinite(g)) gs.push(g); }
       gs.sort((x, y) => x - y);
       return { n: drawn.length, w: cv.width, h: cv.height, gap: gs.length ? +gs[Math.floor(gs.length / 2)].toFixed(2) : null, p90: gs.length ? +gs[Math.floor(gs.length * .9)].toFixed(2) : null };
+    },
+    // QA (tools/smoke map group): every currently-drawn bubble's own screen rect (CSS px, cv's own box, not the
+    // backing store), so a caller can check "does fit mode actually keep everything above the sheet" numerically
+    _drawnBounds() {
+      if (!drawn.length) return null;
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      for (const b of drawn) { const r = b.d / 2; if (b.x - r < minX) minX = b.x - r; if (b.x + r > maxX) maxX = b.x + r; if (b.y - r < minY) minY = b.y - r; if (b.y + r > maxY) maxY = b.y + r; }
+      return { n: drawn.length, minX, maxX, minY, maxY, W, Hh };
     },
     // L18 B2: a small JPEG of the map as it looks right now (the rooms' floor strip shows it under a solid scrim)
     snapshot(w = 390) {
