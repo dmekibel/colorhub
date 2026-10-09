@@ -1,0 +1,128 @@
+{
+ "slug": "old-bamboo",
+ "name": "Old bamboo",
+ "hex": "#5E644F",
+ "names": [
+  "Old bamboo"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Old bamboo is a muted grey-green, the plain English translation of *Oitake-iro*, a traditional Japanese color named for the dulled stalks of mature bamboo.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bamboo stalk's later color",
+   "body": "*Oitake-iro* (老竹色) reads literally as \"old bamboo color\": *oi* for old or aged, *take* for bamboo, *iro* for color [1]. Where young bamboo runs bright green, older canes dull toward grey and olive as they weather, and the traditional name captures that later, quieter stage rather than the plant's first green [1]. Our data carries no further record of which dictionary or era first listed the name beyond the Wikipedia catalogue of Japanese traditional colors [1].\n\nThe nearest look-alikes on file are [[ivy-green]] and [[yew-green]], both almost the same shade, and [[ebony|Ebony]] and [[deep-slate-olive|Deep Slate Olive]], both greener [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A close match to this green appears in 1,215 of our 23,781 archived paintings, about 5.1 per cent, with the within-painting lens finding it in 731; that makes it more common than 86 per cent of our named colors [3]. It peaks in the 1900s, at 1.7 times the archive's overall rate (89 paintings), and most often sits as a hidden color rather than a shadow or highlight [3]. Edvard Weie is its most devoted painter here, carrying it in 10 of his 33 archived works, well above the baseline for the museums holding them [3]. The earliest dated match is 1190, as photographed, a floor from the archive's thin early centuries, not a sighting of bamboo in paint that old [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Oitake-iro (老竹色), \"old bamboo color,\" a traditional Japanese name",
+   "first_recorded": "undocumented beyond the Wikipedia catalogue",
+   "source": "Wikipedia, \"Traditional colors of Japan\""
+  },
+  "aka": [
+   "Oitake-iro"
+  ],
+  "siblings": [
+   "ivy-green",
+   "yew-green",
+   "ebony",
+   "deep-slate-olive"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Oitake-iro (老竹色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 731,
+  "n_archive_hits": 1215,
+  "measured": {
+   "lch": [
+    41.3,
+    12.9,
+    120.1
+   ],
+   "nearest": [
+    [
+     "Ivy Green",
+     2.9
+    ],
+    [
+     "Yew Green",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/o.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name behind Old bamboo literally describe?",
+   "choices": [
+    "The dulled, aged color of older bamboo stalks",
+    "A dye made from bamboo leaves",
+    "A bamboo forest at dusk",
+    "A pigment imported from China"
+   ],
+   "answer": "The dulled, aged color of older bamboo stalks",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: young, fresh bamboo and \"Old bamboo\" the color are the same shade.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Old bamboo is named for the stalk's later color, after the plant has already dulled from green toward grey."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from ColorHub graph/library data (Japanese traditional source).",
+   "Fixed: field section said 'more common than 87 per cent'; data/graph/fieldnotes/o.json gives rp=86. Corrected to 86."
+  ]
+ },
+ "words": 243
+}

@@ -1,0 +1,139 @@
+{
+ "slug": "st-patrick-s-blue",
+ "name": "St. Patrick's Blue",
+ "hex": "#23297A",
+ "names": [
+  "St. Patrick's Blue"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "St. Patrick's Blue is a deep, near-navy blue named for the Irish patron saint, a place-and-institution color that our graph also treats as a close relative of Indigo.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A patronal blue",
+   "body": "Our library files this as a place or institution name, tied to Saint Patrick and used historically as a heraldic and institutional color in Ireland, though the books we checked carry no fuller account of when or how the name was fixed to this exact navy [1]. Our graph also marks it as drawn from [[indigo]], its closest broad family, with the real nearest look-alikes being [[cosmic-cobalt]] and [[resolution-blue]], both more vivid than this deep, slightly greyed navy, and [[midnight-blue]] darker still [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this navy in 12 of 23,781 paintings, about 0.05 percent, as photographed, with the within-painting lens counting 11 — rarer than 67 percent of the named colors we track [3]. It peaks in the 1900s, 0.4 percent of the 1,674 paintings we have from then (6 paintings), 4.7 times the museums' expected rate, and plays an accent in 91 percent of its appearances [3]. The earliest match is Bronzino's 1543 portrait, with the latest from 1924, four dated paintings in all, too thin a sample to call it anything but a floor [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Saint Patrick, patron saint of Ireland, as a heraldic and institutional blue",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library, St. Patrick's Blue entry"
+  },
+  "aka": [],
+  "siblings": [
+   "indigo",
+   "cosmic-cobalt",
+   "resolution-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "indigo",
+    "gloss": "the broad family color our graph draws this navy from"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 12,
+  "n_within": 11,
+  "rarer_than_pct": 67,
+  "century_peak": "1900s, 4.7x expected",
+  "role": "accent 91%",
+  "measured": {
+   "lch": [
+    21.4,
+    53.7,
+    299.2
+   ],
+   "nearest": [
+    [
+     "Cosmic Cobalt",
+     2.7
+    ],
+    [
+     "Resolution Blue",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia-sourced entry (data/library.json, St. Patrick's Blue)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: look-alike and family edges (data/graph/edges-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who is St. Patrick's Blue named after?",
+   "choices": [
+    "Saint Patrick, patron saint of Ireland",
+    "A Dublin pigment maker",
+    "A British naval officer",
+    "A textile company"
+   ],
+   "answer": "Saint Patrick, patron saint of Ireland",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books we checked fully document when this name was first fixed to this exact navy.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Our archive's earliest match for this navy is a 1543 portrait by which painter?",
+   "choices": [
+    "Bronzino",
+    "Johannes Vermeer",
+    "Hans Memling",
+    "Henri Matisse"
+   ],
+   "answer": "Bronzino",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "St. Patrick's Blue plays an accent in 91 percent of its rare appearances in our archive.",
+  "Our graph treats this navy as a close relative of Indigo."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified as internally consistent with cited ColorHub library/graph/archive data; no book or web source cited for this article's factual claims, no myth-list phrase found, and the claims are already conservatively hedged (undocumented origin, floor-not-first framing, thin-sample caveats)."
+  ]
+ },
+ "words": 209
+}

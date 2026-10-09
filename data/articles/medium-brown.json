@@ -1,0 +1,138 @@
+{
+ "slug": "medium-brown",
+ "name": "Medium Brown",
+ "hex": "#7F5112",
+ "names": [
+  "Medium Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Medium Brown is exactly what it says: a mid-depth [[brown]], placed between the lighter and darker members of the family by the online xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain modifier on brown",
+   "body": "The name follows ordinary modifier grammar, \"medium\" plus the parent hue [[brown]], rather than naming a dye, place or person [1]. It comes from the xkcd color survey, a large 2010 crowd-sourced naming experiment where volunteers typed free-text names for colors on screen [1]. Paterson's dictionary never defines \"medium brown\" as a term of art; it only notes, in passing, that the pigment Vandyke brown (named for the Flemish painter Anthony van Dyck) can itself be a deep brown or a medium one depending on the batch [2].\n\nMedium Brown's nearest named neighbor by measured color is [[milk-chocolate]], almost the same hue, with [[bismarck-brown]] and [[brussels-brown]] a little further off [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 1,695 of 23,781 paintings, 7.13 percent, as photographed; the within-painting lens finds it in 906 [3]. That makes it more common than 89 percent of the named colors we track [3]. It peaks in the 1300s, found in 16 of the 251 paintings we have from that century, 2.0 times the expected rate [3]. Adriaen van Ostade is its most devoted painter, present in 11 of his 39 works here, well above the baseline for the museums those works come from [3]. Paintings carrying Medium Brown are more likely than chance to also carry Caramel and Dark Goldenrod [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: medium + brown",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library (xkcd survey)"
+  },
+  "aka": [],
+  "siblings": [
+   "milk-chocolate",
+   "bismarck-brown",
+   "brussels-brown"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1695,
+  "n_within_painting": 906,
+  "rank_more_common_than_pct": 89,
+  "century_peak": {
+   "century": 1300,
+   "lift": 2.0
+  },
+  "painter": {
+   "name": "Adriaen van Ostade",
+   "n": 11,
+   "of": 39,
+   "lift": 5.0
+  },
+  "company": [
+   [
+    "Caramel",
+    7.2
+   ],
+   [
+    "Dark Goldenrod",
+    4.5
+   ]
+  ],
+  "measured": {
+   "lch": [
+    38.6,
+    44.0,
+    71.4
+   ],
+   "nearest": [
+    [
+     "Milk Chocolate",
+     3.6
+    ],
+    [
+     "Bismarck Brown",
+     5.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd color survey (2010); ColorHub name graph (look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Vandyke brown\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Medium Brown come from?",
+   "choices": [
+    "The 2010 xkcd color-naming survey",
+    "A 17th-century Flemish painter",
+    "A museum pigment catalogue",
+    "A dye trade price list"
+   ],
+   "answer": "The 2010 xkcd color-naming survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson's dictionary defines \"medium brown\" as a specific named pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Medium Brown comes from a 2010 crowd-sourced color-naming survey, not a dye or a painter."
+ ],
+ "words": 241,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

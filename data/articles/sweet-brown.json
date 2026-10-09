@@ -1,0 +1,140 @@
+{
+ "slug": "sweet-brown",
+ "name": "Sweet Brown",
+ "hex": "#A83731",
+ "names": [
+  "Sweet Brown"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Sweet Brown is a warm, brick-leaning red-brown, named with the vague, appetite-driven modifier 'sweet,' and it is one of the more common named colors in our entire painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A sweet-tasting red-brown",
+   "body": "Our graph classes this as a plant, food or landscape word — 'sweet,' used loosely rather than tied to any single fruit or spice — with no fuller account in the books we checked [1]. It is also drawn from [[brazil-red]] in our graph, with its real nearest look-alike being [[medium-carmine]], almost the same hue, and [[levant-red]] and [[reddish-brick]] close behind [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this red-brown in 382 of 23,781 paintings, about 1.61 percent, as photographed, with the within-painting lens counting 414 — more common than 81 percent of the named colors we track [3]. It peaks in the 1400s, 6.8 percent of the 945 paintings we have from then (64 paintings), 3.2 times the museums' expected rate, and plays an accent in 91 percent of its appearances [3]. Its most devoted painter is Henri Matisse, in 6 of 50 works here, 5.0 times his own baseline, and it shares canvases with Persian Plum and Dark Sienna far more than chance would predict [3]. It is also most over-represented in paintings from India, 2.5 times expected [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the vague modifier 'sweet,' not tied to a documented fruit or spice",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library, Sweet Brown entry"
+  },
+  "aka": [],
+  "siblings": [
+   "brazil-red",
+   "medium-carmine",
+   "levant-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "brazil-red",
+    "gloss": "the close look-alike this name is also drawn from in our graph"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 382,
+  "n_within": 414,
+  "common_than_pct": 81,
+  "painter": "Henri Matisse, 6 of 50 works, 5.0x baseline",
+  "century_peak": "1400s, 3.2x expected",
+  "country": "India, 2.5x expected",
+  "measured": {
+   "lch": [
+    40.0,
+    54.5,
+    32.7
+   ],
+   "nearest": [
+    [
+     "Medium Carmine",
+     2.7
+    ],
+    [
+     "Levant Red",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph node (data/graph/nodes-s.json, Sweet Brown)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: look-alike and family edges (data/graph/edges-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the modifier in Sweet Brown most likely describe?",
+   "choices": [
+    "A vague, appetite-driven word, not tied to one documented plant",
+    "A specific fruit named in the books we checked",
+    "A place in Brazil",
+    "A painter's signature"
+   ],
+   "answer": "A vague, appetite-driven word, not tied to one documented plant",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Sweet Brown is one of the rarest named colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter used this red-brown far more than his peers?",
+   "choices": [
+    "Henri Matisse",
+    "George Dawe",
+    "Xugu",
+    "Bronzino"
+   ],
+   "answer": "Henri Matisse",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sweet Brown is more common in our archive than 81 percent of the named colors we track.",
+  "This red-brown peaks in paintings from the 1400s, at over three times the expected rate."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified as internally consistent with cited ColorHub library/graph/archive data; no book or web source cited for this article's factual claims, no myth-list phrase found, and the claims are already conservatively hedged (undocumented origin, floor-not-first framing, thin-sample caveats)."
+  ]
+ },
+ "words": 208
+}

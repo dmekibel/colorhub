@@ -1,0 +1,155 @@
+{
+ "slug": "dark-sulphate-green",
+ "name": "Dark Sulphate Green",
+ "hex": "#498D7A",
+ "names": [
+  "Dark Sulphate Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark Sulphate Green is a muted, bluish-leaning green, Robert Ridgway's darker step down from his own Sulphate Green, a chemical-sounding name whose exact sulphate is never named.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A chemical's name, darkened",
+   "body": "Ridgway placed Dark Sulphate Green on plate XIX in 1912, directly below the lighter [[sulphate-green|Sulphate Green]] on the same hue column [1]. The ISCC-NBS dictionary filed the exact darker name again in 1955, block 164, as a moderate bluish green [2]. Neither source explains which sulphate the family name points to; copperas, a sulphate salt long used in dye vats, is one candidate the books raise for the lighter color, but the link is not documented for either [3]. Its nearest named neighbors on file are [[dusty-teal]] and [[illuminating-emerald]], both close at 3.4 to 3.6 CIEDE2000 units [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green, as photographed, in 30 of 23,781 paintings, 0.13 percent, rarer than 66 percent of the named colors we track [5]. It peaks in the 1900s, 6 of 1,674 paintings from that century, 4.4 times the expected rate [5]. The earliest dated match is a Hans Memling painting from 1480, 432 years before Ridgway's plate; the archive's early centuries are thin, so this is a floor and not a first [5]. Inside a painting it most often plays a mid-tone, in 42 percent of its 12 strongest matches [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color Sulphate Green, darkened; the exact sulphate meant is not documented",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XIX; filed again by ISCC-NBS in 1955, block 164",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "dusty-teal",
+   "illuminating-emerald",
+   "wintergreen-dream",
+   "viridian"
+  ],
+  "parent": "sulphate-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 12,
+  "measured": {
+   "lch": [
+    53.9,
+    26.6,
+    172.5
+   ],
+   "nearest_iscc": [
+    "moderate bluish green",
+    8.1
+   ],
+   "nearest": [
+    [
+     "Dusty Teal",
+     3.4
+    ],
+    [
+     "Illuminating Emerald",
+     3.6
+    ],
+    [
+     "Wintergreen Dream",
+     4.2
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1480,
+   "years_before_record": 432
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XIX, hue 39′",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 164 (\"moderate bluish green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Balfour-Paul, Indigo, glossary entry for copperas (green vitriol, hydrated ferrous sulphate)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plate of Ridgway's 1912 atlas carries Dark Sulphate Green?",
+   "choices": [
+    "Plate XIX",
+    "Plate VII",
+    "Plate XXIII",
+    "Plate XLII"
+   ],
+   "answer": "Plate XIX",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm exactly which sulphate the name refers to.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, in which century does Dark Sulphate Green peak?",
+   "choices": [
+    "1900s",
+    "1700s",
+    "1500s",
+    "1300s"
+   ],
+   "answer": "1900s",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark Sulphate Green never says which sulphate it is named for.",
+  "Its earliest archive match predates Ridgway's own plate by more than four centuries."
+ ],
+ "words": 218,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

@@ -1,0 +1,108 @@
+{
+ "slug": "pig-pink",
+ "name": "Pig Pink",
+ "hex": "#E78EA5",
+ "names": [
+  "Pig Pink"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pig Pink is a warm, moderate pink from the ISCC-NBS color system, closer to a real pig's skin than to the pale cartoon pink the name suggests.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Not the cartoon pink",
+   "body": "The ISCC-NBS system, published in 1955, files this hue as \"moderate purplish pink\" in block 250 [1]. Wikipedia's record of the name cites Plochere as an earlier source, and xkcd's 2010 color survey, built from an open web poll of how people name colors, recorded a similar hue independently [1]. In Munsell it reads 7.3RP 6.8/8.7, warmer and a touch more purple than the flat, pale pink often drawn for pigs in illustration [1].\n\nOur library also flags a near-duplicate, Charm Pink, 2.0 CIEDE2000 units away — close enough that the two names are easy to confuse on screen even though they come from separate sources [1]. The nearest color in our own data is [[mauvelous|Mauvelous]], 2.8 units off, with [[pink|Pink]], [[schauss-pink|Schauss Pink]] and [[amaranth-pink|Amaranth Pink]] close behind [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pig Pink appears in just 5 of our 23,781 paintings, as photographed; the within-painting lens finds it in 2, rarer than 82 percent of our named colors [2]. The two usable matches come from paintings dated 1655 and 1908 [2]. In printed English the phrase \"pig pink\" is a recent coinage, rising fastest and peaking in the 2000s, long after the paintings in our archive were made [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pink of a pig's skin",
+   "first_recorded": "1955, ISCC-NBS",
+   "source": "ColorHub color library: ISCC-NBS block 250 entry"
+  },
+  "aka": [],
+  "siblings": [
+   "mauvelous",
+   "pink",
+   "schauss-pink",
+   "amaranth-pink"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5,
+  "measured": {
+   "lch": [
+    69,
+    37,
+    4
+   ],
+   "nearest": [
+    [
+     "Mauvelous",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 250 entry, near-duplicate and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings) and Ngram word-frequency cache, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Pig Pink is as pale and flat as the pink often drawn for cartoon pigs.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which other name in our library sits closest in color to Pig Pink?",
+   "choices": [
+    "Charm Pink",
+    "Phlox",
+    "Plumbago Slate",
+    "Pearl Green"
+   ],
+   "answer": "Charm Pink",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pig Pink is warmer and more purple than the pale pink most illustrations give a pig."
+ ],
+ "words": 222,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,104 @@
+{
+ "slug": "french-raspberry",
+ "name": "French Raspberry",
+ "hex": "#C72C48",
+ "names": [
+  "French Raspberry"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "French Raspberry is a deep, slightly crimson red named for France and the fruit raspberry, rare in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A place word on a fruit color",
+   "body": "French Raspberry pairs the place word \"French\" with [[raspberry]], the fruit's color [1]. Wikipedia's color list again credits the French site Pourpre.com as its source; the deeper origin of the pairing is not documented in our data [1]. Its nearest named look-alikes are [[lipstick]], [[carmine-m-p]] and [[brick-red]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this red in 0.04 percent of the 23,781 paintings we have, 9 of them, as photographed; the within-painting lens finds it in 6 [2]. That makes it rarer than 73 percent of the named colors in our archive, as photographed [2]. The earliest dated match in our archive is from 1800; the archive's early centuries are thin, so with so few paintings this is a floor, not a first [2]. Among our French-named siblings, [[french-fuchsia]] and [[french-sky-blue]] follow the same pattern: a place word in front of an existing color word, traced to Pourpre.com, with little trace in painting [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "France, paired with the fruit raspberry",
+   "first_recorded": "undocumented beyond Wikipedia's citation of Pourpre.com",
+   "source": "Wikipedia, citing Pourpre.com"
+  },
+  "aka": [],
+  "siblings": [
+   "lipstick",
+   "carmine-m-p"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 9,
+  "measured": {
+   "lch": [
+    44.8,
+    64.9,
+    20.4
+   ],
+   "nearest": [
+    [
+     "Lipstick",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia, citing Pourpre.com; computed LCH and nearest named colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which site does Wikipedia credit as the source for the name French Raspberry?",
+   "choices": [
+    "Pourpre.com",
+    "Pantone",
+    "Crayola",
+    "RAL"
+   ],
+   "answer": "Pourpre.com",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: French Raspberry is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "French Raspberry is rarer than most of the named colors in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 173
+}

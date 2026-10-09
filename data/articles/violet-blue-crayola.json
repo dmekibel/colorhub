@@ -1,0 +1,129 @@
+{
+ "slug": "violet-blue-crayola",
+ "name": "Violet-Blue (Crayola)",
+ "hex": "#766EC8",
+ "names": [
+  "Violet-Blue (Crayola)"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Violet-Blue (Crayola) is a Crayola-branded name for a color our data finds is an exact match for the hue we file as [[violet-blue]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crayon-box label",
+   "body": "Our source for this name is Wikipedia's Crayola color list, which credits it to the Crayola crayon line without giving a release year [1]. In our own data, Violet-Blue (Crayola) and plain [[violet-blue]] are an exact match, 0.0 units apart, so the \"(Crayola)\" tag marks the brand, not a different color [2].\n\nIts nearest distinct look-alike is [[soft-blue-violet]] (2.8 units, duller); [[gentian-blue]] and [[dark-periwinkle]] sit further off, at 5.4 and 5.8 [3].\n\nIn LCH terms it measures lightness 51, chroma 53 and hue 299 degrees, a blue-leaning violet rather than a true mid-point between the two hues [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed [4]. That is unsurprising for a 20th-century crayon-box name this saturated, on top of an archive whose early centuries are thin to begin with [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Crayola crayon line",
+   "first_recorded": "undocumented release year",
+   "source": "Wikipedia Crayola color list"
+  },
+  "aka": [],
+  "siblings": [
+   "soft-blue-violet",
+   "gentian-blue",
+   "dark-periwinkle"
+  ],
+  "parent": "violet-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    50.9,
+    52.5,
+    298.9
+   ],
+   "nearest": [
+    [
+     "Soft Blue-Violet",
+     2.8
+    ],
+    [
+     "Gentian Blue",
+     5.4
+    ],
+    [
+     "Dark Periwinkle",
+     5.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia Crayola color list entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub look-alike graph: exact-duplicate entries (data/graph/edges-v.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub look-alike graph (data/graph/edges-v.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In our data, Violet-Blue (Crayola) is an exact match for which other color?",
+   "choices": [
+    "Violet-Blue",
+    "Gentian Blue",
+    "Soft Blue-Violet",
+    "Dark Periwinkle"
+   ],
+   "answer": "Violet-Blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Wikipedia gives a specific release year for Violet-Blue (Crayola).",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Violet-Blue (Crayola) and plain Violet-Blue are, in our data, the same color under two names."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes had an invented archive-presence stat (2 matches, rarer than 82%) with no backing entry in data/graph/fieldnotes for this slug; replaced with the true n_present=0 and the computed LCH, which matches the one already stated in the name section."
+  ]
+ },
+ "words": 170
+}

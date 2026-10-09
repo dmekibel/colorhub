@@ -1,0 +1,104 @@
+{
+ "slug": "french-sky-blue",
+ "name": "French Sky Blue",
+ "hex": "#77B5FE",
+ "names": [
+  "French Sky Blue"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "French Sky Blue is a light, saturated blue named for France and the sky, found in only a handful of paintings in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A place word on sky blue",
+   "body": "French Sky Blue pairs the place word \"French\" with [[sky-blue]] [1]. Wikipedia's color list again credits the French site Pourpre.com as its source; the deeper origin of the pairing is not documented in our data [1]. Its nearest named look-alikes are [[aero]], [[mazarine-blue]] and [[blue-jeans]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this blue in 0.03 percent of the 23,781 paintings we have, 7 of them, as photographed; the within-painting lens finds it in 5 [2]. That makes it rarer than 75 percent of the named colors in our archive [2]. The earliest match in our archive is dated 1500, in a work attributed to Michelangelo; the archive's early centuries are thin, so a handful of paintings is a floor, not a full history [2]. Among our French-named siblings, [[french-fuchsia]] and [[french-raspberry]] follow the same pattern: a place word in front of an existing color word, traced to Pourpre.com rather than to a documented coiner [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "France, paired with sky blue",
+   "first_recorded": "undocumented beyond Wikipedia's citation of Pourpre.com",
+   "source": "Wikipedia, citing Pourpre.com"
+  },
+  "aka": [],
+  "siblings": [
+   "aero",
+   "mazarine-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "measured": {
+   "lch": [
+    72.3,
+    42.2,
+    270.3
+   ],
+   "nearest": [
+    [
+     "Aero",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia, citing Pourpre.com; computed LCH and nearest named colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which site does Wikipedia credit as the source for the name French Sky Blue?",
+   "choices": [
+    "Pourpre.com",
+    "Pantone",
+    "Crayola",
+    "RAL"
+   ],
+   "answer": "Pourpre.com",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: French Sky Blue appears in dozens of paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Only seven paintings in our archive come close to French Sky Blue."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 179
+}

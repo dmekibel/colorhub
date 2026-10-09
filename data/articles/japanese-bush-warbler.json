@@ -1,0 +1,134 @@
+{
+ "slug": "japanese-bush-warbler",
+ "name": "Japanese bush warbler",
+ "hex": "#645530",
+ "names": [
+  "Japanese bush warbler"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Japanese bush warbler is a muted olive-brown named for a small songbird, and one of the most common named colors in our entire painting archive.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "In Japan: Uguisu-iro",
+   "body": "The name is written 鶯色, romanized Uguisu-iro, literally \"bush-warbler-colored,\" after the small Japanese bush warbler (*uguisu*), whose song is a familiar sound of early spring in Japan [1]. A darker, browner variant of the same name, [[japanese-bush-warbler-brown]], is listed alongside it as a family member [1]. Our library gives no date for when the name was first fixed to this shade [1].\n\nThe nearest named neighbor by measured color is [[acanthe]], almost the same shade; [[brownish-olive]] sits close by, duller [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Japanese bush warbler in 4,878 of 23,781 paintings, about 20.5 percent, more common than 98 percent of the named colors we track, as photographed [3]. It peaks in the 1700s, in 500 of 3,449 paintings from that century, 1.2 times the rate its share of the archive would predict [3]. Inside a painting it most often plays a mid-tone, in 37 percent of its appearances [3].\n\nThe painter most devoted to it is Jean-Charles Cazin, in 8 of his 16 paintings here, 2.7 times his peers' rate, as photographed [3]. The earliest archive match is dated 1000; the archive's early centuries are thin, so that is a floor, not a first [3]. It shares canvases more than chance with the colors we call Gold Fusion and Water Grey [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Japanese bush warbler (uguisu)",
+   "first_recorded": "undocumented in the sources we have",
+   "source": "ColorHub color library: traditional colors of Japan"
+  },
+  "aka": [],
+  "siblings": [
+   "acanthe",
+   "brownish-olive",
+   "olive-mud"
+  ],
+  "parent": null,
+  "children": [
+   "japanese-bush-warbler-brown"
+  ],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "鶯色 (Uguisu-iro)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4878,
+  "measured": {
+   "lch": [
+    36.8,
+    23.8,
+    88.3
+   ],
+   "nearest": [
+    [
+     "Acanthe",
+     2.8
+    ],
+    [
+     "Brownish Olive",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is this color named after?",
+   "choices": [
+    "A small Japanese songbird",
+    "A type of green tea",
+    "A dye imported from China",
+    "A kabuki costume"
+   ],
+   "answer": "A small Japanese songbird",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Japanese bush warbler is one of the rarest named colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which traditional color is this one's darker, browner variant?",
+   "choices": [
+    "Japanese bush warbler-brown",
+    "Baiko brown",
+    "Indigo tea",
+    "Harbor rat"
+   ],
+   "answer": "Japanese bush warbler-brown",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Japanese bush warbler is more common in our archive than 98 percent of the named colors we track."
+ ],
+ "words": 255,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

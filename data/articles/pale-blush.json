@@ -1,0 +1,118 @@
+{
+ "slug": "pale-blush",
+ "name": "Pale blush",
+ "hex": "#D0B2A4",
+ "names": [
+  "Pale blush"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pale blush is a muted, warm beige-pink, built by putting the modifier pale in front of the base color [[blush]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on blush",
+   "body": "Pale blush puts the modifier word pale in front of the base color [[blush]], in the compound-modifier grammar our library uses for names like this one [1]. Both the Inter-Society Color Council's 1955 ISCC-NBS system and Robert Ridgway's 1912 *Color Standards and Color Nomenclature* carry this swatch, though our data does not give the exact plate for this entry [1].\n\nIts nearest named neighbor is [[sweet-pea]], only 3.3 units off, close enough on screen to read as the same warm pink-beige [2]; [[light-brownish-vinaceous]] and [[rose-dawn]] sit within 4.5 units [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within range of this swatch in 381 of 23,781 paintings, 1.6 percent, as photographed; looking for real coverage inside each painting narrows that to 255 [3]. That makes it more common than 74 percent of the named colors in our library [3]. It most often plays a hidden color, in 47 percent of its 255 appearances by lightness rank, meaning it tends to sit in a shadow or a mixed tone rather than a bold patch [3].\n\nThe earliest match dates to the year 900, over a thousand years before Ridgway's 1912 plate, a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment or dye [3]. In printed English the word blush rose fastest around 1800, well before this specific compound name was standardized [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pale + blush",
+   "first_recorded": "Ridgway 1912 / ISCC-NBS 1955",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "sweet-pea",
+   "light-brownish-vinaceous",
+   "rose-dawn"
+  ],
+  "parent": "blush",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 381,
+  "n_within_painting": 255,
+  "pct_archive": 1.6,
+  "rank_pct": 74,
+  "measured": {
+   "lch": [
+    75,
+    14,
+    52
+   ],
+   "nearest": [
+    [
+     "Sweet Pea",
+     3.3
+    ],
+    [
+     "Light Brownish Vinaceous",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912; ISCC-NBS 1955",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Pale blush?",
+   "choices": [
+    "Sweet Pea",
+    "Light Brownish Vinaceous",
+    "Rose Dawn"
+   ],
+   "answer": "Sweet Pea",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale blush most often appears as a bold, prominent patch of color in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale blush and Sweet Pea sit close enough to pass for the same warm pink-beige."
+ ],
+ "words": 255,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

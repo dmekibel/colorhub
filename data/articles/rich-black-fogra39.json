@@ -1,0 +1,109 @@
+{
+ "slug": "rich-black-fogra39",
+ "name": "Rich Black (FOGRA39)",
+ "hex": "#010203",
+ "names": [
+  "Rich Black (FOGRA39)"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Rich Black (FOGRA39) names a print-industry black calibrated to FOGRA's standard for glossy or matte coated paper.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From a printing term to a swatch",
+   "body": "\"Rich black\" is a printing term for an ink mixture of solid black over one or more of the other CMYK inks, giving a darker, denser result than black ink alone [1]. FOGRA, a German printing-research body, publishes registered characterization data sets describing how ink behaves on specific papers under ISO offset-printing conditions [2]. FOGRA39 describes gloss or matte coated paper at 115 grams per square meter, and is one of the most common default print profiles in design software [2]. The swatch is a flat screen approximation of that printing condition, not a measured ink sample [1][2].\n\nIts closest sibling is [[rich-black-fogra29]], the equivalent standard for uncoated paper, and both sit near plain [[black]] on screen [1].\n\nIt also sits close to the generic near-blacks [[near-black]] and [[smoky-black]], both read as almost the same color [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub painting archive this near-black hue appears in 3,188 of 23,781 paintings, about 13.4 percent, the most common of the dark neutrals checked in this project, as photographed [3]. It peaks around the 1560s, and Francisco Jover y Casanova, Nicolaes Maes and Frans van Mieris use it far more than the archive average relative to their output [3]. These are computed color matches on varnished, photographed canvases, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "FOGRA's printing-characterization data set for coated paper",
+   "first_recorded": "undocumented exact year; current ISO offset-printing characterization practice",
+   "source": "Wikipedia (\"Rich black\"); International Color Consortium CMYK registry"
+  },
+  "aka": [],
+  "siblings": [
+   "rich-black-fogra29",
+   "near-black",
+   "smoky-black"
+  ],
+  "parent": "black",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3188,
+  "measured": {
+   "lch": [
+    1,
+    0,
+    255
+   ]
+  },
+  "peak_decade": 1560
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Rich black\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Rich_black"
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "International Color Consortium, CMYK characterization-data registry (FOGRA entries)",
+   "loc_kind": null,
+   "url": "https://registry.color.org/cmyk-registry/"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What paper does the FOGRA39 characterization data set describe?",
+   "choices": [
+    "Gloss or matte coated paper",
+    "Uncoated paper",
+    "Newsprint",
+    "Watercolor paper"
+   ],
+   "answer": "Gloss or matte coated paper",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: rich black means solid black ink with no other CMYK ink underneath it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rich Black (FOGRA39) is the most common near-black match among the dark neutrals checked here."
+ ],
+ "words": 225,
+ "status": "checked",
+ "checked": {
+  "by": "batch-29",
+  "date": "2026-10-09",
+  "issues": [
+   "Exact year FOGRA39 was first published not confirmed in sources checked; described as current ISO offset practice instead."
+  ]
+ }
+}

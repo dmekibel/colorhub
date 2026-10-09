@@ -1,0 +1,111 @@
+{
+ "slug": "light-rose",
+ "name": "Light Rose",
+ "hex": "#FFC5CB",
+ "names": [
+  "Light Rose"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Rose is a pale pink, a much lighter and softer step off [[rose]], the flower-named color that for most of history simply meant red.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on an old flower name",
+   "body": "The name is built by grammar: \"light\" over the parent [[rose]], which did not settle into today's pink until new dyes and new garden roses gave it a color of its own [1]. Three sources converge on this exact pale step: Ridgway's 1912 atlas at plate I, hue 3, tone f; the ISCC-NBS lists of 1955; and the Maerz and Paul dictionary, which gives 1905 as its first record, plate 1 G 7 [1]. Measured, it is far lighter and far less saturated than rose itself (lightness 85 against 55, chroma 22 against 85), closer to a baby pink [1].\n\nIts nearest named neighbor is [[baby-pink|Baby Pink]], 3.1 units away, almost the same, with [[light-pink|Light Pink]] close behind at 4.1, more vivid [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale pink in only 1 of 23,781 paintings (as photographed), rarer than 86 percent of the named colors we track [2]. That single match, by Isaac Grünewald in 1917, plays as the painting's lightest color [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive modifier: light + Rose",
+   "first_recorded": "1905 (Maerz and Paul, plate 1 G 7); also Ridgway 1912, plate I; ISCC-NBS 1955",
+   "source": "Maerz and Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "baby-pink",
+   "light-pink",
+   "pale-rhodonite-pink"
+  ],
+  "parent": "rose",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "measured": {
+   "lch": [
+    85,
+    22,
+    13
+   ],
+   "nearest": [
+    [
+     "Baby Pink",
+     3.1
+    ],
+    [
+     "Light Pink",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930 ed.), plate 1 G 7, first recorded 1905; Ridgway, Color Standards and Color Nomenclature (1912), plate I, hue 3, tone f; ISCC-NBS 1955; cited via ColorHub color library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which source gives the earliest recorded date for Light Rose, and what year?",
+   "choices": [
+    "Maerz and Paul, 1905",
+    "Ridgway, 1912",
+    "ISCC-NBS, 1955",
+    "xkcd, 2010"
+   ],
+   "answer": "Maerz and Paul, 1905",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: for most of its history, \"rose\" as a color word meant pink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "For most of history \"rose\" meant red, not pink; this pale step only works because rose later came to mean pink too."
+ ],
+ "words": 185,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from Ridgway, Maerz and Paul, and ISCC-NBS via the color library and archive."
+  ]
+ }
+}

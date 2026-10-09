@@ -1,0 +1,133 @@
+{
+ "slug": "international-orange-engineering",
+ "name": "International Orange (Engineering)",
+ "hex": "#BA160C",
+ "names": [
+  "International Orange (Engineering)"
+ ],
+ "tier": "standard",
+ "depth": "medium",
+ "lede": "International Orange (Engineering) is the deepest, reddest of three colors called international orange, the one that belongs to engineering specifications rather than to the Golden Gate Bridge or to aerospace.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One name, three oranges",
+   "body": "The phrase \"international orange\" traces to the Golden Gate Bridge [1]. Its consulting architect, Irving Morrow, noticed the reddish-orange primer already on some of the steel, and pushed to keep it as the finish color over the Navy's preference for black-and-yellow stripes, when the bridge opened in 1937 [1]. That bridge's own paint is a custom mix, lighter than this one [1]. A second shade, International Orange (Aerospace), is lighter and more orange still, used on aircraft and spacecraft for visibility [1].\n\nThis variant, International Orange (Engineering), is deeper and redder than both, defined under Federal Standard 595, the United States government's 1956 paint-color specification for military and engineering contractors, as color FS 12197 [1]. The three share a name and a family resemblance but are not interchangeable paints [1].\n\nIts nearest named neighbor by measured color is [[venetian-red]], almost the same shade; [[carnelian]] sits close by, duller [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for this red-orange in 114 of 23,781 paintings, about 0.48 percent, more common than 64 percent of the named colors we track, as photographed [3]. It peaks in the 1400s, in 18 of 945 paintings from that century, 2.9 times the rate its share of the archive would predict [3]. Inside a painting it most often plays an accent, in 95 percent of its appearances, which fits a color built for visibility rather than for covering a surface [3].\n\nIt is most over-represented in paintings from Italy, at 2.1 times the expected rate [3]. The earliest archive match is dated 1365, in a work by Luca di Tommè; the archive's early centuries are thin, so that is a floor, not a first, and no fifteenth-century painter was using a paint standardized in 1956 [1][3]. It shares canvases more than chance with the colors we call Dark Chocolate Brown and Rich Black (FOGRA39) [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the \"international orange\" family of high-visibility colors, first associated with the Golden Gate Bridge (1937); this variant fixed by Federal Standard 595 (1956) as FS 12197",
+   "first_recorded": "1956, Federal Standard 595",
+   "source": "Wikipedia, \"International orange\""
+  },
+  "aka": [],
+  "siblings": [
+   "venetian-red",
+   "carnelian",
+   "darkish-red",
+   "burnt-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "chinese-red",
+    "gloss": "a different standard orange-red, not this engineering specification"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 114,
+  "measured": {
+   "lch": [
+    39.6,
+    78.0,
+    39.1
+   ],
+   "nearest": [
+    [
+     "Venetian Red",
+     3.1
+    ],
+    [
+     "Carnelian",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"International orange\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/International_orange"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which structure is most associated with the name \"international orange,\" even though it uses a different custom shade?",
+   "choices": [
+    "The Golden Gate Bridge",
+    "The Eiffel Tower",
+    "The Empire State Building",
+    "The Sydney Harbour Bridge"
+   ],
+   "answer": "The Golden Gate Bridge",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: International Orange (Engineering), International Orange (Aerospace) and the Golden Gate Bridge's paint are all the exact same shade.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Why does this color turn up mostly as a small accent in our painting archive, rather than covering large areas?",
+   "choices": [
+    "It is a high-visibility safety color, used in small amounts on purpose",
+    "It fades fastest of all reds",
+    "Painters avoided mixing it",
+    "It only exists on metal, never on canvas"
+   ],
+   "answer": "It is a high-visibility safety color, used in small amounts on purpose",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "\"International orange\" is really three different paints wearing one name."
+ ],
+ "words": 343,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

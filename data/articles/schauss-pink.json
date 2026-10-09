@@ -1,0 +1,145 @@
+{
+ "slug": "schauss-pink",
+ "name": "Schauss Pink",
+ "hex": "#FF91AF",
+ "names": [
+  "Schauss Pink"
+ ],
+ "tier": "person",
+ "depth": "medium",
+ "lede": "Schauss Pink is named for Alexander Schauss, the researcher who proposed in the late 1970s that staring at this exact pink could sap physical strength and calm aggression, a claim later research has not been able to confirm.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The experiment behind the name",
+   "body": "Schauss, then director of the American Institute for Biosocial Research in Tacoma, Washington, ran a study in which 153 young men stared at either blue or pink cardboard for one minute and then took a strength test; all but two of the men who had looked at the pink card tested weaker than average, by his account [1][5]. The exact pink, mixed as roughly one part white indoor latex to eight parts red trim semi-gloss outdoor paint, became known as Baker-Miller Pink after two officers at the Naval Correctional Institution in Seattle who first applied it to cell walls, also called \"drunk-tank pink\"; no later study has confirmed that it, or any color, reliably calms people [1][2].\n\nFrom there it spread to bus-station waiting rooms and a football stadium's visitors' locker room, all on the theory that the color itself could pacify people, a claim that was never confirmed outside Schauss's own study [1]. No other research since has reproduced his specific finding, and an academic backlash followed; the color's popularity declined once that scrutiny became public [1]. The idea that any color reliably calms aggression is the same myth as chromotherapy, the claim that colors heal, which the evidence does not support [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive shows no match for this exact pink among its 23,781 paintings at this matching threshold, as photographed [3]. That is unsurprising: Schauss Pink is a 20th-century mixed-paint color built for institutional walls, not a historical pigment painters reached for [3]. By our look-alike data the nearest color is [[rosa|Rosa]], 2.6 units away and read as almost the same, with [[salmon-pink|Salmon Pink]] equally close [4]. Measured, it comes out at lightness 73, chroma 45, hue 3 degrees, a light, warm pink rather than the cooler lavender-pink some retellings imply [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Alexander Schauss, the researcher who proposed the color's calming effect in the late 1970s",
+   "first_recorded": "late 1970s (Schauss's study); the Baker-Miller name follows shortly after",
+   "source": "Wikipedia, \"Baker-Miller pink\""
+  },
+  "aka": [
+   "Baker-Miller Pink",
+   "Drunk-Tank Pink",
+   "P-618"
+  ],
+  "siblings": [
+   "rosa",
+   "salmon-pink",
+   "pink",
+   "mauvelous"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    72.6,
+    44.8,
+    3.4
+   ],
+   "nearest": [
+    [
+     "Rosa",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Baker-Miller pink\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Baker%E2%80%93Miller_pink"
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "CLAUDE.md color-myths catalog: \"colors heal (chromotherapy)\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-r.json, edges-s.json, edges-p.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Color, ch. on Baker-Miller pink (gives the 153-men strength test; \"all but two\" were weaker)",
+   "loc_kind": "epub-chapter",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who is Schauss Pink named after?",
+   "choices": [
+    "Alexander Schauss, a researcher who studied the color's effect on strength and aggression",
+    "A fashion designer named Schauss",
+    "The Schauss paint company",
+    "A Swiss pigment chemist"
+   ],
+   "answer": "Alexander Schauss, a researcher who studied the color's effect on strength and aggression",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: later research has confirmed that Schauss Pink reliably calms aggression.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Schauss Pink is also known by which other name, from the two officers who first applied it to cell walls?",
+   "choices": [
+    "Baker-Miller Pink",
+    "Tickle Me Pink",
+    "Vanilla Ice",
+    "Amaranth Pink"
+   ],
+   "answer": "Baker-Miller Pink",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Schauss Pink is the pink once painted on jail cells to calm inmates, a claim no later study has been able to confirm."
+ ],
+ "words": 326,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Fixed fabricated/wrong statistic: the article claimed a specific 'strength loss of up to 26 percent' for the pink-card group, but that 26% figure does not exist in either cited Wikipedia source or St Clair's book for this study (it belongs to an unrelated red-clothing tipping study in the same book). Replaced with the figure the sources actually give ('all but two' of 153 men tested weaker after looking at pink), added St Clair as a source for that number, and kept Wikipedia and the myth-catalog note for the unconfirmed-calming-effect framing.",
+   "The 'calms aggression' claim remains explicitly framed as unconfirmed/disputed per CLAUDE.md's myth list."
+  ]
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "slug": "greenish-teal",
+ "name": "Greenish Teal",
+ "hex": "#32BF84",
+ "names": [
+  "Greenish Teal"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Greenish Teal is a bright sea green named by modifier grammar as greenish plus [[teal]], recorded by the 2010 xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Greenish, plus teal",
+   "body": "Our data classes Greenish Teal as a crowd modifier name, the word greenish pushing the parent color [[teal]] away from blue [1]. Like most xkcd-survey compounds, it carries no deeper history than the 2010 online survey that collected it; our sources name no earlier dictionary or pigment list for this exact value [1]. Our library files it as an alternate name of [[imperial-green|Imperial Green]], 3.9 units away [1].\n\nThe swatch is not teal. Teal is a dark blue-green, while this survey value is a light, clear green with only a hint of blue [1]. Its nearest named look-alikes are Imperial Green and [[mountain-meadow|Mountain Meadow]], both at 3.9 units, with [[caribbean-green|Caribbean Green]] at 4.5 and [[emerald|Emerald]] at 5.3 [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a color within six units of this one over at least five percent of its canvas, as photographed [3]. That says more about this collection of photographed, varnished museum paintings than about what greens painters could mix [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "greenish + teal (modifier grammar)",
+   "first_recorded": "2010, in the xkcd color-name survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "imperial-green",
+   "mountain-meadow",
+   "caribbean-green",
+   "emerald"
+  ],
+  "parent": "teal",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    69.2,
+    54.3,
+    159.1
+   ],
+   "nearest": [
+    [
+     "Imperial Green",
+     3.9
+    ],
+    [
+     "Mountain Meadow",
+     3.9
+    ]
+   ]
+  },
+  "match": {
+   "de2000": 6.0,
+   "min_cover": 0.05
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-g.json): xkcd 2010 crowd-sourced color-name survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-g.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Greenish Teal's name is built from which two pieces?",
+   "choices": [
+    "Greenish + teal",
+    "Dark + seafoam",
+    "A gemstone name + green",
+    "A painter's surname"
+   ],
+   "answer": "Greenish + teal",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Greenish Teal swatch is a dark blue-green like teal itself.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Despite its name, Greenish Teal is a clear, light green, nearer emerald than the dark blue-green of teal."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources.",
+   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
+  ]
+ },
+ "words": 183
+}

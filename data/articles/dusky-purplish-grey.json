@@ -17,7 +17,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds a color within six units of this swatch in 632 of 23,781 paintings, 2.66 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 361 [2]. That makes it more common than 79 percent of the named colors in our library [2]. It peaks in the 1900s, present in 3.8 percent of our 1,674 paintings from that decade, 2.2 times the museums' baseline rate [2]. Inside a painting it most often sits as a mid-tone, in 42 percent of its 361 appearances by lightness rank [2].\n\nAndré Derain is its most devoted painter on file, present in 5 of his 22 works here, several times the baseline rate for the museums that hold them [2]. The earliest match dates to 1099, eight centuries before the name's 1912 record, so it marks a look-alike hue in an aged photograph, not a surviving pigment [2]. It is most over-represented in paintings from the United Kingdom, and shares canvases with [[deep-neutral-grey|Deep Neutral Grey]] and [[moss-grey|Moss Grey]] more often than chance [2]."
+   "body": "Our archive finds a color within six units of this swatch in 632 of 23,781 paintings, 2.66 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 361 [2]. That makes it more common than 79 percent of the named colors in our library [2]. It peaks in the 1900s, present in 3.8 percent of our 1,674 paintings from that decade, 2.2 times the museums' baseline rate [2]. Inside a painting it most often sits as a mid-tone, in 42 percent of its 361 appearances by lightness rank [2].\n\nAndré Derain is its most devoted painter on file, present in 5 of his 22 works here, several times the baseline rate for the museums that hold them [2]. The earliest match dates to 1099, eight centuries before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment [2]. It is most over-represented in paintings from the United Kingdom, and shares canvases with [[deep-neutral-grey|Deep Neutral Grey]] and [[moss-grey|Moss Grey]] more often than chance [2]."
   }
  ],
  "aside": {
@@ -102,11 +102,11 @@
  "openers": [
   "Named \"purplish,\" but the Munsell reading calls it almost hueless."
  ],
- "words": 342,
+ "words": 354,
  "status": "checked",
  "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": []
  }
 }

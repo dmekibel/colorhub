@@ -1,0 +1,121 @@
+{
+ "slug": "light-teal-tone",
+ "name": "Light teal tone",
+ "hex": "#48929B",
+ "names": [
+  "Light teal tone"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Light teal tone translates Asagi-iro (浅葱色), a traditional Japanese blue-green named for the pale color of a scallion shoot.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A scallion-shoot blue-green",
+   "body": "Our color graph files this hue as a Japanese traditional color, *Asagi-iro* (浅葱色), whose kanji combine \"pale\" and \"scallion\" and whose standard meaning is given simply as \"light blue color\" [1]. It carries no separate Ridgway or ISCC-NBS record in our sources, unlike most of its western-numbered neighbors [1]. English-language use files it here as \"Light teal tone,\" with [[teal]] itself as a wider, better-known sibling name for this family of dark blue-greens [1].\n\nIts nearest named neighbor is [[capri-blue|Capri Blue]], 4.9 units away and darker, with [[cadet-blue|Cadet Blue]] close behind at 5.1, greener and lighter [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this blue-green in 57 of 23,781 paintings (0.24 percent, as photographed), rarer than 59 percent of the named colors we track [2]. It most often plays a light, in 46 percent of its strongest matches, and peaks in paintings from the 1900s at 2.2 times the expected rate [2]. The earliest dated match runs to 1445, by Domenico Veneziano; a floor, not a first, since the archive's early centuries are thin and our sources carry no fixed-record date for this name to compare it against [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Asagi-iro (浅葱色), Japanese for \"pale scallion\", rendered in standard meaning as \"light blue color\"",
+   "first_recorded": "undocumented in the Ridgway or ISCC-NBS sources consulted",
+   "source": "ColorHub color graph: Japanese traditional color names"
+  },
+  "aka": [
+   "Asagi-iro"
+  ],
+  "siblings": [
+   "capri-blue",
+   "cadet-blue",
+   "teal",
+   "viridian-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Asagi-iro (浅葱色), light blue color"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 57,
+  "measured": {
+   "lch": [
+    56,
+    24,
+    210
+   ],
+   "nearest": [
+    [
+     "Capri Blue",
+     4.9
+    ],
+    [
+     "Cadet Blue",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: Japanese traditional color names, Asagi-iro (浅葱色), and look-alike edges",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "The kanji in Asagi-iro, this color's Japanese name, combine \"pale\" with which word?",
+   "choices": [
+    "Scallion",
+    "Indigo",
+    "Persimmon",
+    "Pine"
+   ],
+   "answer": "Scallion",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, this color most often plays which role?",
+   "choices": [
+    "A light",
+    "A hidden color",
+    "An accent",
+    "A mid-tone"
+   ],
+   "answer": "A light",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "This blue-green's Japanese name, Asagi-iro, literally means \"pale scallion.\""
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); no Ridgway or ISCC-NBS record in our sources; written from the Japanese traditional-colors graph entry and archive."
+  ]
+ }
+}

@@ -1,0 +1,113 @@
+{
+ "slug": "maximum-red-purple",
+ "name": "Maximum Red Purple",
+ "hex": "#A63A79",
+ "names": [
+  "Maximum Red Purple"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Maximum Red Purple is a deep magenta from Crayola's \"Maximum\" crayon line, a 1990s set built to give the most saturated version of each mixed hue its own name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A maximum of red and purple",
+   "body": "Crayola's \"Maximum\" crayons, including Maximum Red Purple, Maximum Blue Purple and Maximum Green Yellow, name a color by its two parent hues and claim the fullest saturation of that mix [1]. Our library carries this one from Wikipedia's color lists, with no further paper trail, so who coined the exact name and when is undocumented in the sources checked here [1].\n\nIts nearest named neighbors by measured color are [[magenta-haze]] and [[mystic-maroon]], almost the same color but a touch brighter, with [[fandango]] and [[amaranth-deep-purple]] close behind [1]. The hex value is a screen approximation; no pigment or dye sits behind it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in only 3 of 23,781 paintings, as photographed, rarer than 79 percent of the named colors we track [2]. Every one of the three uses it as an accent, not a dominant color [2]. The small count may reflect how uncommon the exact mix is in paint, or how thin our coverage is for this hue; a color match here is not a pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a Crayola \"Maximum\" naming pattern (maximum saturation of a two-hue mix)",
+   "first_recorded": "undocumented in the sources checked here",
+   "source": "ColorHub color library (Wikipedia list of colors)"
+  },
+  "aka": [],
+  "siblings": [
+   "magenta-haze",
+   "mystic-maroon",
+   "fandango",
+   "amaranth-deep-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "rank_rarer_than_pct": 79,
+  "measured": {
+   "lch": [
+    42.0,
+    52.2,
+    346.1
+   ],
+   "nearest": [
+    [
+     "Magenta Haze",
+     2.7
+    ],
+    [
+     "Mystic Maroon",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia list of colors; ColorHub name graph (look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Crayola's \"Maximum\" naming pattern describe?",
+   "choices": [
+    "The most saturated version of a two-hue mix",
+    "The most popular crayon in the box",
+    "The last color added to a set",
+    "A color mixed from leftover wax"
+   ],
+   "answer": "The most saturated version of a two-hue mix",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources record exactly who named Maximum Red Purple and when.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Maximum Red Purple appears in only 3 of our 23,781 archived paintings, always as a small accent."
+ ],
+ "words": 201,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Crayola origin for the 'Maximum' naming pattern is general knowledge, not confirmed by a book or dated web source; hedged as undocumented in the checked sources."
+  ]
+ }
+}

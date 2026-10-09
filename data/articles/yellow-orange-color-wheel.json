@@ -1,0 +1,124 @@
+{
+ "slug": "yellow-orange-color-wheel",
+ "name": "Yellow Orange (Color Wheel)",
+ "hex": "#FF9505",
+ "names": [
+  "Yellow Orange (Color Wheel)"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Yellow-Orange (Color Wheel) names the exact midpoint between yellow and orange on the traditional artist's color wheel, a position rather than a pigment or dye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A wheel position, not a pigment",
+   "body": "Our library files Yellow-Orange (Color Wheel) from Wikipedia's color lists, under the family word [[yellow]], marking a spot on the color wheel rather than a named material [1]. The parenthetical \"(Color Wheel)\" exists because other systems, such as Crayola's crayon lists, use the same words for a different hex value [1].\n\nThe nearest named color in our look-alike data is [[dark-orange]], 2.9 units away, with [[deep-saffron]] and [[sun-yellow]] close behind at 3.0 [2]. [[tangerine]], 4.7 units off, reads darker [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this exact orange in 0.09 percent of 23,781 paintings, 21 of them as photographed, rarer than 61 percent of the named colors we track [3]. It peaks in the 1800s, found in 0.2 percent of the 8,345 paintings we have from then, 15 of them, 1.6 times the expected rate [3]. Inside a painting it plays an accent 96 percent of the time [3]. The earliest dated match is a 1438 panel by Filippo Lippi, though the archive's early centuries are thin enough that this is a floor, not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its position on the artist's color wheel, halfway between yellow and orange",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library (Wikipedia color lists)"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-orange",
+   "deep-saffron",
+   "sun-yellow"
+  ],
+  "parent": "yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 21,
+  "pct": 0.09,
+  "rank_pct": 61,
+  "measured": {
+   "lch": [
+    71.4,
+    82.6,
+    67.0
+   ],
+   "nearest": [
+    [
+     "Dark Orange",
+     2.9
+    ],
+    [
+     "Deep Saffron",
+     3.0
+    ],
+    [
+     "Sun Yellow",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia color-wheel position names",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges, data/graph/edges-y.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"(Color Wheel)\" in the name refer to?",
+   "choices": [
+    "Its exact position between yellow and orange on the artist's color wheel",
+    "A paint company's product line",
+    "A historical dye recipe",
+    "A pigment mineral"
+   ],
+   "answer": "Its exact position between yellow and orange on the artist's color wheel",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Yellow-Orange (Color Wheel) is a historical pigment name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Yellow-Orange (Color Wheel) marks a wheel position, not a pigment."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 59%, current data/graph/fieldnotes says 61% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 203
+}

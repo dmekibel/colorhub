@@ -1,0 +1,120 @@
+{
+ "name": "Pale Violet-Plumbeous",
+ "hex": "#B3B5B9",
+ "names": [
+  "Pale Violet-Plumbeous"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pale Violet-Plumbeous is a cool, faintly violet grey whose name joins a color (violet) to *plumbeous*, Latin for lead-colored, one of Ridgway's own qualifying terms.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A lead-colored qualifier",
+   "body": "Ridgway's 1912 color standards record this swatch on plate XLIX, hue 53, tone f [1]. *Plumbeous* is Ridgway's own Latin-derived term for a dull leaden grey, used across his system to qualify a hue rather than to name a material in its own right [1]. ColorHub's library flags the full compound name itself as \"obscure, qualified or novelty,\" which is why it keeps the plainer [[silver]] as the closest everyday match, about 3.7 units of ΔE away [1]. \"Violet\" here is also a qualifier, not the dominant hue: the swatch reads as a near-neutral grey with only a faint cool cast, washed pale than to any true violet [1]. [[periwinkle]] and [[grey]] sit nearby in the same cool-neutral family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Pale Violet-Plumbeous in 821 of 23,781 paintings (3.45 percent), as photographed, overwhelmingly as a highlight [2]. It peaks in the 1930s, in 8 of 69 paintings, at more than three times the archive's overall rate, and two of Gustav Klimt's *Beethoven Frieze* panels are among its closest matches [2]. It keeps company with Silver, Periwinkle and Cornflower more than chance [2]. These are screen approximations of aged, varnished canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "violet plus plumbeous, Ridgway's term for a leaden grey",
+   "first_recorded": "Ridgway, 1912, plate XLIX",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "silver",
+   "periwinkle",
+   "grey",
+   "denim"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 821,
+  "role": {
+   "highlight": 0.91,
+   "mid": 0.08,
+   "shadow": 0.0
+  },
+  "company": [
+   "Silver",
+   "Periwinkle",
+   "Cornflower"
+  ],
+  "measured": {
+   "lch": [
+    74,
+    2,
+    272
+   ],
+   "nearest": [
+    [
+     "Silver",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"plumbeous\" mean in Ridgway's 1912 system?",
+   "choices": [
+    "Lead-colored, a dull leaden grey",
+    "Named after a plum",
+    "A gloss finish",
+    "A shade reserved for metals"
+   ],
+   "answer": "Lead-colored, a dull leaden grey",
+   "kind": "pick"
+  },
+  {
+   "q": "Which Gustav Klimt work is among our archive's closest matches to Pale Violet-Plumbeous?",
+   "choices": [
+    "The Beethoven Frieze",
+    "The Kiss",
+    "Judith",
+    "Danae"
+   ],
+   "answer": "The Beethoven Frieze",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pale Violet-Plumbeous borrows Ridgway's own Latin word for lead-grey."
+ ],
+ "words": 219,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "pale-violet-plumbeous"
+}

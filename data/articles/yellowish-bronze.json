@@ -1,0 +1,130 @@
+{
+ "slug": "yellowish-bronze",
+ "name": "Yellowish bronze",
+ "hex": "#DB8449",
+ "names": [
+  "Yellowish bronze"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Yellowish bronze is ColorHub's English name for Akakuchiba, a traditional Japanese color meaning \"red fallen leaves.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Red fallen leaves",
+   "body": "The Japanese name 赤朽葉 (Akakuchiba) literally means red fallen leaves, one of a family of \"kuchiba\" fallen-leaf colors that also includes the paler [[yellowish-camel]] [1]. Our sources carry no date for when the name entered use; traditional Japanese color names are typically centuries old but undated here [1].\n\nThe nearest look-alike in our archive is [[raw-sienna]], 2.7 units away, almost the same; [[orpiment-orange]] follows at 2.8 [2]. [[mars]], 4.3 units off, is almost the same again but drifts toward brown [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color appears in 0.8 percent of our 23,781 paintings, 191 of them as photographed, more common than 66 percent of the names we track [3]. It peaks in the 1500s, found in 1.4 percent of the 2,231 paintings we have from then, 31 of them, 1.8 times the expected rate [3]. Inside a painting it plays an accent 80 percent of the time [3]. It is most over-represented in paintings from India, at 2.8 times the expected rate [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of red, fallen autumn leaves",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [],
+  "siblings": [
+   "raw-sienna",
+   "orpiment-orange",
+   "mars",
+   "dusty-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "赤朽葉 (Akakuchiba), \"red fallen leaves\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 191,
+  "pct": 0.8,
+  "rank_pct": 66,
+  "measured": {
+   "lch": [
+    63.4,
+    53.4,
+    58.0
+   ],
+   "nearest": [
+    [
+     "Raw Sienna",
+     2.7
+    ],
+    [
+     "Orpiment Orange",
+     2.8
+    ],
+    [
+     "Mars",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges, data/graph/edges-y.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Akakuchiba, the Japanese name behind Yellowish bronze, literally mean?",
+   "choices": [
+    "Red fallen leaves",
+    "Golden temple roof",
+    "Autumn persimmon",
+    "Rust on iron"
+   ],
+   "answer": "Red fallen leaves",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources give an exact year when the name Akakuchiba first appeared.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Yellowish bronze is the English name for a Japanese color meaning \"red fallen leaves.\""
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 68%, current data/graph/fieldnotes says 66% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 181
+}

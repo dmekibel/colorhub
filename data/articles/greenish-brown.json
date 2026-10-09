@@ -1,0 +1,138 @@
+{
+ "slug": "greenish-brown",
+ "name": "Greenish Brown",
+ "hex": "#696112",
+ "names": [
+  "Greenish Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Greenish Brown is a dark, olive-leaning brown named by straightforward modifier grammar, greenish plus [[brown]], and recorded by the 2010 xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Greenish, plus brown",
+   "body": "Our data classes Greenish Brown as a descriptive-modifier name: the word *greenish* qualifying the parent color [[brown]], a construction also used for [[greenish-teal|Greenish Teal]] and [[greenish-glaucous|Greenish Glaucous]] [1]. It comes from the 2010 xkcd online color survey rather than any older dictionary or pigment list [1].\n\nThe nearest named look-alikes on file are [[drabolve|Drabolve]] and [[antique-bronze|Antique Bronze]], both almost the same shade, and [[metallic-green|Metallic Green]], also close [2]. [[mud-green|Mud Green]] and [[mud|Mud]] sit further off, both yellower and more vivid [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, 308 paintings carry a color close enough to this one over enough of their canvas to count, about 1.3 per cent, as photographed, which makes it more common than 67 per cent of our named colors [3]. It peaks in the 1800s, found in 1.0 per cent of the 8,345 paintings we have from then (86 paintings), 1.4 times the expected rate, and inside a painting it most often plays an accent rather than a shadow or mid-tone, by lightness rank, so varnish cannot fake the reading [3]. It is most over-represented in Indian paintings, at 2.6 times the expected rate, and the earliest match is dated 1308, though the archive's thin early centuries make that a floor, not a first sighting, and 702 years older than the name itself [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "greenish + brown (modifier grammar)",
+   "first_recorded": "2010, in the xkcd color-name survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "drabolve",
+   "antique-bronze",
+   "metallic-green"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 308,
+  "role": {
+   "accent": 0.42
+  },
+  "country": [
+   {
+    "name": "India",
+    "lift": 2.6
+   }
+  ],
+  "measured": {
+   "lch": [
+    40.6,
+    42.9,
+    98.2
+   ],
+   "nearest": [
+    [
+     "Drabolve",
+     2.7
+    ],
+    [
+     "Antique Bronze",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-g.json): xkcd 2010 crowd-sourced color-name survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-g.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Greenish Brown's name is built from which two pieces?",
+   "choices": [
+    "Greenish + brown",
+    "Olive + drab",
+    "A painter's surname + brown",
+    "A Japanese traditional term"
+   ],
+   "answer": "Greenish + brown",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, what role does Greenish Brown most often play, by lightness rank?",
+   "choices": [
+    "An accent",
+    "A shadow",
+    "A highlight",
+    "A mid-tone"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Greenish Brown's earliest archive match proves the name is centuries old.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Greenish Brown turns up in Indian paintings at more than double the rate you'd expect by chance."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources."
+  ]
+ },
+ "words": 238
+}

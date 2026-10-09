@@ -12,6 +12,18 @@
 DATA_SRC.looks = "data/looks.js";   // not part of WIKI_FILES (that list was fixed when loader.js ran)
 const lkWhen = fn => window.LOOKS ? fn() : loadData("looks").then(ok => { if (ok) fn(); });
 
+// ---------- the knowledge base: data/aesthetics/kb/<id>.json, one file per look, fetched only when its page opens ----------
+// Fields: lineage (influenced_by/influences, as look ids or names), eras, places, garments, media, figures,
+// reacts_against, revivals, article (original prose), wiki_facts (decade/colours/motifs read from the Aesthetics
+// Wiki infobox, facts only, never prose), measured (findings + n from k-means on Aesthetics Wiki photos, which
+// are downloaded, measured and discarded -- never stored or shown -- per research/LOOKS.md's method).
+const lkKBVer = () => (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "");
+const LK_KB_CACHE = new Map();
+function lkFetchKB(id) {
+  if (!LK_KB_CACHE.has(id)) LK_KB_CACHE.set(id, fetch(`data/aesthetics/kb/${id}.json${lkKBVer()}`).then(r => r.ok ? r.json() : null).catch(() => null));
+  return LK_KB_CACHE.get(id);
+}
+
 const LK_CATS = [["art", "Art movements"], ["design", "Design eras"], ["film", "Film and photo"], ["net", "Internet aesthetics"]];
 const LK_CAT_ONE = { art: "Art movement", design: "Design era", film: "Film and photo look", net: "Internet aesthetic" };
 const lkAll = () => window.LOOKS || [];
@@ -50,6 +62,15 @@ function lookMatch(colorsHex, shares) {
   }).sort((a, b) => b.score - a.score).slice(0, 3);
 }
 
+// ---------- "Palette of the day": a deterministic daily pick across every look's every palette, same for everyone that day ----------
+function lkDaily() {
+  const all = lkAll(); if (!all.length) return null;
+  const flat = []; all.forEach(look => look.pals.forEach((p, pi) => flat.push({ look, pi })));
+  if (!flat.length) return null;
+  const seed = String(today()).split("").reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 0);
+  return flat[seed % flat.length];
+}
+
 // ---------- "Your closest looks": the palette taste test's six dials (contrast, vividness, warmth, spread, count, proportions) ----------
 function lkYours() {
   const rec = S.taste && S.taste.palette, dials = rec && rec.dials;
@@ -78,6 +99,8 @@ function lkSections() {
     return [];
   }
   const secs = [];
+  const daily = lkDaily();
+  if (daily) secs.push({ title: "Looks · Palette of the day", sub: "One palette, picked fresh each day from every look in the archive.", pins: [lkPin(daily.look, { pi: daily.pi })] });
   const yours = lkYours();
   if (yours.length) secs.push({ title: "Looks · Your closest", sub: "Matched to your dials from Find your palette.", pins: yours.map(y => lkPin(y.look, { pi: y.pi, why: `${y.score}% match · ${y.look.pals[y.pi].n}` })) });
   LK_CATS.forEach(([k, t], i) => {
@@ -109,13 +132,14 @@ function lkOpen(id, opts = {}) {
     <p class="p-dek">${esc(look.essence)}</p>
     <div class="lkx-tabs" role="tablist">${look.pals.map((p, i) => `<button role="tab" data-pi="${i}" class="${i === pi ? "on" : ""}">${lkStripes(p.c, "lkx-dot")}<span>${esc(p.n)}</span></button>`).join("")}</div>
     <div class="lkx-cols" id="lkc"></div>
-    <div class="lkx-acts"><button class="btn" data-studio>Open in Studio ${ICON.arrow}</button></div>
+    <div class="lkx-acts"><button class="btn" data-studio>Open in Studio ${ICON.arrow}</button><button class="btn ghost" data-share>${ICON.share} Share</button></div>
     <dl class="lkx-rows">
       ${row("Light", esc(look.light))}
       ${row("Materials", esc((look.materials || []).join(", ")))}
       ${row("Motifs", esc((look.motifs || []).join(", ")))}
       ${row("Mood", (look.mood || []).map(m => `<span class="lkx-mood">${esc(m)}</span>`).join(""))}
     </dl>
+    <div id="lkkb"></div>
     <section class="lkx-sec"><h3>Where the name comes from</h3><p>${esc(look.origin)}</p><p class="lkx-fuzzy"><b>How fuzzy is it?</b> ${esc(look.fuzzy)}</p></section>
     ${imgs.length || ptgs.length || extra.length ? `<section class="lkx-sec"><h3>Where to see it</h3>
       ${imgs.length ? `<div class="lkx-strip lkx-imgs">${imgs.map(f => `<figure class="lkx-fig"><img src="${esc(f.src)}" alt="${esc(f.alt || "")}" loading="lazy"${f.w ? ` width="${f.w}" height="${f.h}"` : ""}><figcaption>${esc(f.caption || "")}<span><a href="${esc(f.commons)}" target="_blank" rel="noopener">${esc(f.credit || "Wikimedia Commons")}</a></span></figcaption></figure>`).join("")}</div>` : ""}
@@ -123,6 +147,7 @@ function lkOpen(id, opts = {}) {
       ${extra.length ? `<div class="eyebrow lkx-sub">Also in ColorHub</div><div class="chips-wrap">${extra.map(x => `<button class="pchip" data-node="${esc(x.id)}">${x.h ? `<i style="--c:${x.h}"></i>` : ""}${esc(x.title)}<em class="mono">${x.score}%</em></button>`).join("")}</div>` : ""}
     </section>` : ""}
     ${related.length ? `<section class="lkx-sec"><h3>Related looks</h3><div class="lkx-strip lkx-rel">${related.map(r => `<button class="lkx-relc" data-lk="${esc(r.id)}">${lkStripes(r.pals[0].c)}<b>${esc(r.name)}</b><small>${esc(r.era)}</small></button>`).join("")}</div></section>` : ""}
+    <div class="lkx-acts"><button class="btn ghost" data-webfam="${esc(look.id)}">See its family tree ${ICON.arrow}</button></div>
     <p class="fine lkx-credit">${look.aw ? `See also: <a href="https://aesthetics.fandom.com/wiki/${esc(look.aw)}" target="_blank" rel="noopener">Aesthetics Wiki</a>. ` : ""}Descriptions are ColorHub's own. Palettes are chosen by ColorHub and named from the ColorHub library; hex values are screen approximations.${imgs.length ? " Photos: Wikimedia Commons, public domain or CC0." : ""}</p>
   `, "article lkx-page");
   const draw = () => {
@@ -141,8 +166,46 @@ function lkOpen(id, opts = {}) {
     paletteView({ cols: p.c.map(c => ({ h: c[0], share: c[2] })), from: `${look.name} · ${p.n}` });
     lkRewire(() => lkOpen(look.id, { keep: true, pi }));
   };
+  el.querySelector("[data-share]").onclick = () => {
+    const p = look.pals[pi];
+    cardShare({ layout: "palette", note: `${LK_CAT_ONE[look.cat] || "Look"} · ${look.era}`, title: look.name, sub: p.n, plates: p.c.map(c => ({ h: c[0] })) },
+      `${look.name} · ${p.n} · ColorHub`, shareURL("look/" + look.id));
+  };
   el.addEventListener("click", e => {
     const n = e.target.closest("[data-node]"); if (n) { e.preventDefault(); return lkNode(n.dataset.node, look.id, pi); }
+    const rl = e.target.closest("[data-lk]"); if (rl && rl.closest("#lkkb")) { e.preventDefault(); return lkOpen(rl.dataset.lk, { back: () => lkOpen(look.id, { keep: true, pi }) }); }
+    const fam = e.target.closest("[data-webfam]"); if (fam) { e.preventDefault(); buzz(6); return typeof agOpenRoute === "function" ? agOpenRoute("focus", "look:" + fam.dataset.webfam) : (location.hash = "#/web/focus/look:" + fam.dataset.webfam);
+    }
+  });
+  lkLoadKB(look, el);
+}
+
+// ---------- the knowledge-base layer: findings, lineage, further reach, in-depth article, one tap down from the summary ----------
+// Law 6, "calm surface, deep layers": the page above already shows the summary (palette, rows, origin); this
+// fills in under it once the small per-look JSON lands, never blocking the first paint.
+function lkLoadKB(look, el) {
+  lkFetchKB(look.id).then(kb => {
+    if (!kb || !el.isConnected) return;
+    const box = el.querySelector("#lkkb"); if (!box) return;
+    const chip = (id) => { const l = lkGet(id); return l ? `<button class="pchip" data-lk="${esc(l.id)}"><i style="--c:${l.pals[0].c[0][0]}"></i>${esc(l.name)}</button>` : `<span class="pchip" style="cursor:default">${esc(id.replace(/-/g, " "))}</span>`; };
+    const lineRow = (k, v) => v ? `<div class="lkx-row"><dt>${esc(k)}</dt><dd>${v}</dd></div>` : "";
+    const m = kb.measured;
+    const findSec = m && m.findings && m.findings.length ? `<section class="lkx-sec"><h3>What the colors measure</h3><ul class="lkx-finds">${m.findings.map(f => `<li>${esc(f.charAt(0).toUpperCase() + f.slice(1))}</li>`).join("")}</ul><p class="lkx-caveat">From ${m.n_images} photo${m.n_images === 1 ? "" : "s"} on the Aesthetics Wiki, measured and discarded, never stored or shown here. ${esc(m.caveat)}</p></section>` : "";
+    const lin = kb.lineage || {};
+    const lineageRows = [
+      lineRow("Influenced by", (lin.influenced_by || []).length ? `<div class="chips-wrap">${lin.influenced_by.map(chip).join("")}</div>` : ""),
+      lineRow("Influenced", (lin.influences || []).length ? `<div class="chips-wrap">${lin.influences.map(chip).join("")}</div>` : ""),
+      lineRow("Eras", (kb.eras || []).join("; ")),
+      lineRow("Places", (kb.places || []).join("; ")),
+      lineRow("Garments & objects", (kb.garments || []).join(", ")),
+      lineRow("Reacts against", kb.reacts_against ? esc(kb.reacts_against) : ""),
+      lineRow("Revivals", (kb.revivals || []).join("; ")),
+    ].filter(Boolean).join("");
+    const media = (kb.media || []).length ? `<div class="eyebrow lkx-sub">Further viewing</div><ul class="lkx-finds">${kb.media.map(x => `<li><b>${esc(x.title)}</b>${x.note ? ` — ${esc(x.note)}` : ""}</li>`).join("")}</ul>` : "";
+    const lineageSec = lineageRows || media ? `<section class="lkx-sec"><h3>Lineage and reach</h3><dl class="lkx-rows lkx-lineage">${lineageRows}</dl>${media}</section>` : "";
+    const article = kb.article ? `<section class="lkx-sec"><h3>In depth</h3><p>${esc(kb.article)}</p></section>` : "";
+    const src = kb.sources && kb.sources.length ? `<p class="fine lkx-credit">Facts (decade, motifs, key colors) from the <a href="${esc(kb.sources[0].url)}" target="_blank" rel="noopener">Aesthetics Wiki (CC BY-SA)</a>; all prose on this page is ColorHub's own.</p>` : "";
+    box.innerHTML = findSec + lineageSec + article + src;
   });
 }
 // a tapped swatch opens its color page (js/swatch.js, capture phase, runs first); once that screen is up, point its Back here

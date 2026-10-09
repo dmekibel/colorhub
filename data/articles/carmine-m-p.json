@@ -1,0 +1,129 @@
+{
+ "slug": "carmine-m-p",
+ "name": "Carmine (M&P)",
+ "hex": "#D70040",
+ "names": [
+  "Carmine (M&P)"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Carmine (M&P) is a variant swatch of [[carmine]], the name as Maerz and Paul charted it in their 1930 color dictionary, and brighter than the pigment it names.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One plate's carmine",
+   "body": "Carmine itself is the historic crimson made from the cochineal insect, ground and used as a dye and pigment for centuries. This particular swatch is not that history; it is a single plate's reading of carmine, catalogued by Maerz and Paul in 1930 and carried into Wikipedia's color lists under their name [1]. Its nearest named neighbor is [[crimson|Crimson]], only 2.8 units away and read as almost the same color [2]; [[cherry|Cherry]] sits close behind, likewise near enough to call the same hue [2]. [[lipstick|Lipstick]] sits a little further out, read as darker by comparison [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "Brighter than the dye",
+   "body": "At hex #D70040, this swatch reads as a near-neon pink-red on screen, more saturated than the duller, brownish-red crimson that ground cochineal actually produces once mixed into paint or cloth [1]. The mismatch is ordinary for a historic dye name: a single printed plate, scanned decades later, sets the screen value, not a sample of the dye itself [1]. Treat this swatch as one witness among several: Wikipedia's own Carmine page lists other hex values closer to the duller, brick-red carmine most painters and dyers would recognize [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color appears in a single painting in our 23,781-painting archive, as photographed, rarer than 86 percent of our named colors [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "carmine, the cochineal-derived dye and pigment",
+   "first_recorded": "1930 (Maerz and Paul)",
+   "source": "Wikipedia, citing Maerz and Paul"
+  },
+  "aka": [],
+  "siblings": [
+   "crimson",
+   "cherry",
+   "lipstick"
+  ],
+  "parent": "carmine",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "carmine",
+    "gloss": "the pigment and dye this swatch is one plate's reading of"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "match": {
+   "min_cover": 0.02
+  },
+  "measured": {
+   "lch": [
+    45.4,
+    77.4,
+    22.0
+   ],
+   "nearest": [
+    [
+     "Cherry",
+     2.8
+    ],
+    [
+     "Crimson",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930, cited by Wikipedia",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for carmine-m-p",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 color dictionary is the source of this carmine swatch?",
+   "choices": [
+    "Maerz and Paul",
+    "Ridgway",
+    "ISCC-NBS",
+    "Pantone"
+   ],
+   "answer": "Maerz and Paul",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this swatch's hex value is a direct sample of the cochineal dye.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "This carmine swatch reads as near-neon on screen, far brighter than the dull, brownish dye it is named for."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 229
+}

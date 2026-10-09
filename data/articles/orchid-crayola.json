@@ -1,0 +1,119 @@
+{
+ "slug": "orchid-crayola",
+ "name": "Orchid (Crayola)",
+ "hex": "#E29CD2",
+ "names": [
+  "Orchid (Crayola)"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Orchid is a soft pink-purple that Crayola has sold under that name since 1958, after nine years as \"Medium Red-Violet.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A flower name that replaced a mixing label",
+   "body": "Crayola introduced this hue in its crayon boxes in 1949 under a plainly descriptive name, Medium Red-Violet; from 1958 the same color has been sold as Orchid, after the flower family, which Wikipedia's crayon history lists as the same color under a new name [1]. Unlike many Crayola colors, it has stayed in the lineup ever since, without a retirement [1]. Our sources carry no further record of why the flower name was chosen over the older descriptive one [1].\n\nThe nearest named look-alikes on file are [[rose-purple|Rose-Purple]], almost the same shade, and [[kobi|Kobi]] and [[mallow-pink|Mallow Pink]], both redder [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A close match to this pink-purple turns up in only 1 of our 23,781 archived paintings, about 0.004 per cent, rarer than 88 per cent of our named colors [3]. A sample of one painting is too small to support any claim beyond its bare existence, and these are photographs of an aged, varnished canvas, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the orchid flower family, replacing the color's earlier descriptive name, Medium Red-Violet",
+   "first_recorded": "1949 (as Medium Red-Violet); renamed Orchid in 1958",
+   "source": "Crayola crayon history"
+  },
+  "aka": [
+   "Medium Red-Violet"
+  ],
+  "siblings": [
+   "rose-purple",
+   "kobi",
+   "mallow-pink"
+  ],
+  "parent": "orchid",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "n_archive_hits": 1,
+  "measured": {
+   "lch": [
+    72.6,
+    38.3,
+    333.6
+   ],
+   "nearest": [
+    [
+     "Rose-Purple",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"History of Crayola crayons\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/History_of_Crayola_crayons"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/o.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What was Crayola's Orchid crayon originally called, before its 1958 renaming?",
+   "choices": [
+    "Medium Red-Violet",
+    "Opera Mauve",
+    "Best Friends",
+    "Wild Orchid"
+   ],
+   "answer": "Medium Red-Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Crayola has retired its Orchid crayon at least once since 1949.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Crayola's Orchid has never been retired since 1949, under one name or the other."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from Wikipedia (Crayola color history) and ColorHub graph data.",
+   "Fixed: field section said 'rarer than 86 per cent'; data/graph/fieldnotes/o.json gives rp=12, i.e. rarer than 88 per cent. Corrected to 88.",
+   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
+  ]
+ },
+ "words": 176
+}

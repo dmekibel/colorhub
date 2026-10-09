@@ -1,0 +1,107 @@
+{
+ "slug": "pallid-blue-violet",
+ "name": "Pallid Blue-Violet",
+ "hex": "#CED2F4",
+ "names": [
+  "Pallid Blue-Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pallid Blue-Violet is a very light lavender-blue, the pallid tone Robert Ridgway charted for the base hue blue-violet in his 1912 color atlas, and close enough to Pale periwinkle to be used as its alternate name in some sources.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pallid tone of Blue-Violet",
+   "body": "Pallid Blue-Violet puts Ridgway's tone word Pallid, meaning paler and more washed out than his plain Pale, in front of the base hue [[blue-violet]], the paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. The name later reached the ISCC-NBS dictionary of 1955, which filed it alongside the family's other tones [1]. Some library sources list Pallid Blue-Violet as an alternate name for [[pale-periwinkle]], a color 3.6 units away, the two sitting close enough on screen to be used almost interchangeably [1].\n\nIts nearest distinct named neighbor is [[wedgwood-blue]], 3.7 units away and almost the same color [1]; [[lavender-blue]] sits 4.5 units out, more vivid [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 24 of 23,781 paintings, 0.1 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 17, rarer than 63 percent of the named colors in our library [2]. It is slightly below its expected rate in the 1800s, present in 0.1 percent of the 8,345 paintings from that century, 0.8 times the archive's overall rate [2]. Inside a painting it most often plays a hidden color, in 53 percent of its 17 appearances by lightness rank, so it tends to sit in shadow or along an edge rather than out in the open [2].\n\nThe earliest match dates to 1474, in a work by Piero della Francesca, a floor and not a first since the archive's early centuries are thin; that is 438 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ridgway's tone system: the pallid tone of Blue-Violet",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912",
+   "source": "Ridgway 1912; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "blue-violet",
+   "pale-periwinkle",
+   "wedgwood-blue",
+   "lavender-blue"
+  ],
+  "parent": "blue-violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 24,
+  "n_within_painting": 17,
+  "pct_archive": 0.1,
+  "rank_pct": 63,
+  "measured": {
+   "nearest": [
+    [
+     "Wedgwood Blue",
+     3.7
+    ],
+    [
+     "Lavender Blue",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955) and look-alike distances, data/graph/edges-p.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Pallid Blue-Violet?",
+   "choices": [
+    "Pallid Violet",
+    "Wedgwood Blue",
+    "Lavender Blue"
+   ],
+   "answer": "Pallid Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside its paintings, Pallid Blue-Violet most often sits out in the open as a highlight.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pallid Blue-Violet sits close enough to Pale periwinkle that some sources use the two names for the same swatch."
+ ],
+ "words": 308,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

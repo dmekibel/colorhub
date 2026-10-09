@@ -1,0 +1,104 @@
+{
+ "slug": "faded-green",
+ "name": "Faded Green",
+ "hex": "#7BB274",
+ "names": [
+  "Faded Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Faded Green is a dulled, greyish green from the xkcd 2010 color-naming survey, pairing the modifier \"faded\" with plain green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on green",
+   "body": "Faded Green pairs \"faded\" with [[green]], naming a dulled, greyish green [1]. The name comes from the xkcd 2010 color-naming survey; who first typed this pairing is not recorded in our data [1]. Its nearest named look-alikes in our library are [[arcadian-green]], [[dusty-green]] and [[dull-green]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green in 0.09 percent of the 23,781 paintings we have, 22 of them, as photographed; the within-painting lens finds it in 13 [2]. That makes it rarer than 65 percent of the named colors in our archive [2]. It peaks in the 1900s, found at 4.2 times the expected rate for that century, though on only 6 paintings [2]. Inside a painting it most often plays an accent across the 13 paintings where it appears [2]. The earliest match in our archive is dated 1795, two centuries before the name's own earliest record of 2010; the archive's early centuries are thin, so this is a floor, not a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"faded\" plus green",
+   "first_recorded": "2010 (xkcd color-naming survey)",
+   "source": "ColorHub color library (xkcd 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "arcadian-green",
+   "dusty-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 22,
+  "measured": {
+   "lch": [
+    67.5,
+    40.0,
+    139.2
+   ],
+   "nearest": [
+    [
+     "Arcadian Green",
+     2.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color-naming survey; computed LCH and nearest named colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which survey gave us the name Faded Green?",
+   "choices": [
+    "The xkcd 2010 color-naming survey",
+    "Ridgway's 1912 color dictionary",
+    "The ISCC-NBS 1955 dictionary",
+    "Crayola's crayon list"
+   ],
+   "answer": "The xkcd 2010 color-naming survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Faded Green is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Faded Green turns up in our archive at 4.2 times the expected rate for the 1900s, though on just six paintings."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 178
+}

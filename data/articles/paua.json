@@ -1,0 +1,126 @@
+{
+ "slug": "paua",
+ "name": "Paua",
+ "hex": "#1F005E",
+ "names": [
+  "Paua"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Paua is a deep, near-black [[violet]]-blue named for the paua, New Zealand's native abalone shellfish, prized for the iridescent blues and purples inside its shell.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Māori name for a New Zealand shell",
+   "body": "*Pāua* is the Māori name for several large sea-snail species native to New Zealand; when Europeans first adopted the word themselves is not documented in the sources checked here, though British jewellers were already seeking out the shells by the 19th century [1]. The shell's interior is famous for an iridescence of cool blues, sea greens and inky purples, which Māori craftspeople have long used as inlay, most recognisably for the eyes in traditional carvings [1]. Our color library records this flat swatch as a single deep violet-blue drawn from that range, not a fixed measurement of the shell itself [2].\n\nThe nearest named colors by measured distance are [[deep-blue]], more vivid, and [[persian-indigo]], lighter and more vivid [3]. [[midnight-blue]] and [[dark-blue]] sit further out, lighter; [[russian-violet]] reads further still, duller and lighter [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a match for this near-black violet-blue in 5 of them, about 0.02 percent, rarer than 72 percent of the named colors we track, as photographed [4]. A swatch this dark and this saturated is scarce across the whole archive, so the small count is expected rather than notable [4]. The shell's own color plays across a wide iridescent range; the flat hex here is one slice of that, not a measurement of the nacre [1][2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the paua, a New Zealand abalone shellfish prized for its iridescent shell",
+   "first_recorded": "undocumented as a color name beyond our library's wiki-sourced entry",
+   "source": "Wikipedia, \"Pāua\""
+  },
+  "aka": [],
+  "siblings": [
+   "deep-blue",
+   "persian-indigo",
+   "midnight-blue"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5,
+  "rank_pct": 72,
+  "measured": {
+   "lch": [
+    9.8,
+    61.8,
+    309.4
+   ],
+   "nearest": [
+    [
+     "Deep Blue",
+     4.1
+    ],
+    [
+     "Persian Indigo",
+     5.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Pāua\": Māori name, 19th-century British jeweller demand for the shells, shell iridescence and use in carving",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/P%C4%81ua"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): list entry, source \"wiki\"/\"xkcd\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Paua named after?",
+   "choices": [
+    "A New Zealand abalone shellfish prized for its iridescent shell",
+    "A French dye works",
+    "A Crayola crayon",
+    "A Ridgway 1912 plate"
+   ],
+   "answer": "A New Zealand abalone shellfish prized for its iridescent shell",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the hex swatch for Paua is a fixed measurement of the shell's nacre.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paua is named for a shell whose inside flashes blue, green and purple; the flat swatch here is only one slice of that range."
+ ],
+ "words": 239,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Removed an unsupported claim (European settlers adopted the word 'pāua' in the 1840s) not present in the cited Wikipedia \"Pāua\" article; replaced with a verifiable detail from the same source (19th-century British jeweller demand for the shells) and an honest note that the adoption date is undocumented."
+  ]
+ }
+}

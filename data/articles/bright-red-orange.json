@@ -1,0 +1,118 @@
+{
+ "slug": "bright-red-orange",
+ "name": "Bright Red Orange",
+ "hex": "#F3752C",
+ "names": [
+  "Bright Red Orange"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Bright Red Orange is a modifier on [[red-orange]], taken from the German RAL color standard, first charted in 1927.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "From a German industrial standard",
+   "body": "RAL, the German body that set paint and coating colors for industry, published its first chart in 1927, and this hue is drawn from one of its numbered entries, its hex value an approximation of the printed swatch [1]. Its nearest named neighbor is [[pumpkin]], only 2.7 units away and read as more vivid [2]; plain [[orange]] sits close behind at 4.1 units, almost the same color [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color appears in 30 of our 23,781 paintings, about 0.13 percent, rarer than 56 percent of our named colors, as photographed [3]. It peaks in paintings from the 1700s, 1.8 times the rate expected from that century's share of the archive, and it is most over-represented in Indian paintings, at 3.8 times the expected rate [3]. Inside a painting it plays an accent, never a mid-tone or shadow, in every one of the 33 instances our within-painting lens finds [3].\n\nThe earliest match is a 1320 panel by Master of San Torpè, 607 years before RAL's 1927 chart; our archive's early centuries are thin, so this is a floor, not a first, and a color match on an aged photograph is not proof of a pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "red-orange, intensified; drawn from a RAL industrial color chart",
+   "first_recorded": "1927 (RAL)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pumpkin",
+   "dusty-orange"
+  ],
+  "parent": "red-orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 30,
+  "match": {
+   "min_cover": 0.02
+  },
+  "measured": {
+   "lch": [
+    63.3,
+    74.3,
+    53.4
+   ],
+   "nearest": [
+    [
+     "Pumpkin",
+     2.7
+    ],
+    [
+     "Orange",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 1927 entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for bright-red-orange",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which standard is Bright Red Orange drawn from?",
+   "choices": [
+    "RAL, the German color standard",
+    "CSS",
+    "ISCC-NBS",
+    "Crayola"
+   ],
+   "answer": "RAL, the German color standard",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, this color most often appears as a mid-tone.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bright Red Orange comes from a German industrial paint chart first printed in 1927."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 215
+}

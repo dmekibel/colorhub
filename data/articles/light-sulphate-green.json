@@ -1,0 +1,111 @@
+{
+ "slug": "light-sulphate-green",
+ "name": "Light Sulphate Green",
+ "hex": "#6EC5B2",
+ "names": [
+  "Light Sulphate Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Sulphate Green is a paler, bluer step off [[sulphate-green|Sulphate Green]], a vivid bluish green Ridgway plated in 1912 without naming any actual sulphate pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a chemical name",
+   "body": "The name is built by grammar: \"light\" over the parent [[sulphate-green|Sulphate Green]]; the books mention sulphates giving dyers and pigment makers several green and blue colors, but none confirm this particular name came from one [1]. Ridgway's 1912 atlas plates this lighter step at plate XIX, hue 39', tone b, and ISCC-NBS separately filed it in 1955 as block 163 [1]. Measured, it is noticeably lighter than its parent at a close chroma (lightness 74 against 60) [1].\n\nIts nearest named neighbor is [[verditter-blue|Verditter Blue]], 4.7 units away, darker and duller, with [[medium-aquamarine|Medium Aquamarine]] close behind at 5.1, greener and more vivid [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale bluish green in 6 of 23,781 paintings (0.03 percent, as photographed), rarer than 86 percent of the named colors we track [2]. The earliest dated match runs to 1825, 87 years before Ridgway's 1912 record; a floor, not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive modifier: light + Sulphate Green",
+   "first_recorded": "1912 (Ridgway, plate XIX); also ISCC-NBS 1955, block 163",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "verditter-blue",
+   "medium-aquamarine",
+   "seafoam-teal"
+  ],
+  "parent": "sulphate-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "measured": {
+   "lch": [
+    74,
+    31,
+    178
+   ],
+   "nearest": [
+    [
+     "Verditter Blue",
+     4.7
+    ],
+    [
+     "Medium Aquamarine",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XIX, hue 39', tone b; ISCC-NBS 1955, block 163; cited via ColorHub color library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Sulphate Green is a lightened step off which parent color?",
+   "choices": [
+    "Sulphate Green",
+    "Teal",
+    "Tyrian Blue",
+    "Pastel Green"
+   ],
+   "answer": "Sulphate Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm this color's name comes from a sulphate pigment.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sulphates gave dyers several greens and blues, but no source we hold confirms this color is one of them."
+ ],
+ "words": 179,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from Ridgway and ISCC-NBS via the color library and archive."
+  ]
+ }
+}

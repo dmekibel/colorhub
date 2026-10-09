@@ -1,0 +1,73 @@
+{
+ "id": "seapunk",
+ "name": "Seapunk",
+ "lineage": {
+  "influenced_by": [
+   "vaporwave",
+   "cyberpunk",
+   "rave culture",
+   "90s web graphics"
+  ],
+  "influences": [
+   "vaporwave",
+   "frutiger-aero",
+   "glitchcore"
+  ]
+ },
+ "eras": [
+  "2011–2013 (Tumblr/Twitter peak)",
+  "brief 2012 pop crossover (Rihanna, Azealia Banks styling)"
+ ],
+ "places": [
+  "Tumblr",
+  "early Vine/Twitter meme accounts",
+  "a handful of 2012–13 club nights in NY/LA"
+ ],
+ "garments": [
+  "holographic fabric",
+  "dolphin and shell prints",
+  "dreadlocks dyed teal",
+  "mesh and netting",
+  "trident jewelry"
+ ],
+ "media": [
+  {
+   "title": "Azealia Banks, \"Atlantis\" (2012)",
+   "note": "the clearest pop-culture crossover moment"
+  },
+  {
+   "title": "LOL Boys / Zombelle club sets",
+   "note": "the music side, sampled and glitchy"
+  }
+ ],
+ "figures": [
+  "Lil Internet (early Tumblr curator credited with naming/spreading the term)"
+ ],
+ "reacts_against": "the beige minimalism of mid-2000s web design and the self-seriousness of goth/rave scenes it borrowed from — seapunk treated the ocean as a joke prop, not a mood.",
+ "revivals": [
+  "as a visual shorthand inside vaporwave and Y2K revival content, 2019–present",
+  "glitter-and-chrome aquatic motifs resurfacing in 2023–24 'cyber mermaid' TikTok edits"
+ ],
+ "article": "Seapunk started as a joke that outran its own punchline. On Tumblr in 2011, a small cluster of artists and DJs began posting dolphins, holographic nail art and Atlantis clip-art over teal gradients, tagging it #seapunk half in earnest and half as parody of how quickly internet \"-punk\" suffixes were multiplying. The look borrowed its palette wholesale from early-90s rave flyers and PlayStation-era CGI — the same chrome, the same impossible cyan — but pointed it at the sea instead of outer space or the dancefloor. For about eighteen months it was a genuinely small, self-aware in-joke; then Azealia Banks and Rihanna wore seapunk-adjacent looks in 2012 music videos, and the aesthetic got a brief, loud mainstream moment that most of its originators found uncomfortable, since the joke had always partly been about how commercial culture strip-mines internet subcultures. By 2013 it had mostly receded, but its palette — holographic teal, coral, deep-sea black with chrome highlights — became a building block other aesthetics reused without the irony: vaporwave absorbed its gradients, and a decade later TikTok's 'cybercore mermaid' edits picked the same colors back up with no memory of the original joke at all.",
+ "wiki_facts": {
+  "other_names": "|decade_of_origin=2010s",
+  "decade_of_origin": "2010s",
+  "key_motifs": "Dolphins, mermaids, pyramids, palm trees, yin-yangs, smiley faces, oceans, 1990s 3D net art, Silicon Dreams",
+  "key_colours": "Aquamarine, cyan, seafoam green, lilac, pastel pink, turquoise",
+  "related_aesthetics": "CyberpunkCybertweeFuture FunkIcepunkOcean GrungePastel GothPC MusicSlimepunkTrillwaveTropicalVaporwaveWitch HouseY2K Futurism"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Seapunk"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a vivid streak — roughly 35% of the color measured is highly saturated"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

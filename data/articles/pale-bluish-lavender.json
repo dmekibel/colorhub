@@ -1,0 +1,119 @@
+{
+ "slug": "pale-bluish-lavender",
+ "name": "Pale Bluish Lavender",
+ "hex": "#D4CBD7",
+ "names": [
+  "Pale Bluish Lavender"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pale Bluish Lavender is a near-white grey-violet, built by putting the modifiers pale and bluish in front of the base color [[lavender]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two modifiers on lavender",
+   "body": "Pale Bluish Lavender stacks two modifier words, pale and bluish, in front of the base color [[lavender]], the compound-modifier grammar our library uses for names like this one [1]. It was first listed by Robert Ridgway in his 1912 *Color Standards and Color Nomenclature*, plate XXXVI, hue 57, tone f, and the Inter-Society Color Council later filed it in the ISCC-NBS 1955 system as block 213 (R) [1].\n\nIts nearest named neighbor is [[languid-lavender]], only 3.1 units off, close enough on screen to read as the same pale violet [2]; [[pale-lilac]] and [[lavender-grey]] both sit within 4.2 units [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within range of this swatch in 78 of 23,781 paintings, 0.33 percent, as photographed; looking for real coverage inside each painting narrows that to 51 [3]. That still makes it more common than half the named colors in our library [3]. It most often plays a light, in 84 percent of its 51 appearances by lightness rank, so varnish cannot fake the result [3]. John Singer Sargent is its most devoted painter, present in 7 of his 287 works here, 4.4 times the expected rate for the museums those paintings come from [3].\n\nThe earliest match dates to 1405, five hundred years before Ridgway's 1912 plate, a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment or dye [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pale bluish + lavender",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXXVI",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "languid-lavender",
+   "pale-lilac",
+   "lavender-grey"
+  ],
+  "parent": "lavender",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 78,
+  "n_within_painting": 51,
+  "pct_archive": 0.33,
+  "rank_pct": 50,
+  "measured": {
+   "lch": [
+    83,
+    7,
+    318
+   ],
+   "nearest": [
+    [
+     "Languid Lavender",
+     3.1
+    ],
+    [
+     "Pale Lilac",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXXVI, hue 57, tone f; ISCC-NBS 1955 block 213 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color standard first listed Pale Bluish Lavender?",
+   "choices": [
+    "Ridgway, 1912",
+    "The ISCC-NBS system alone",
+    "Crayola",
+    "The xkcd color survey"
+   ],
+   "answer": "Ridgway, 1912",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Bluish Lavender is built from a base color plus two modifier words.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Bluish Lavender and Languid Lavender are close enough to read as the same pale violet."
+ ],
+ "words": 260,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

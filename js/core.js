@@ -294,6 +294,7 @@ const ICON_PATHS = {
   today: '<rect x="4.5" y="5" width="15" height="15" rx="2.5"/><path d="M4.5 10h15M8.5 3v4M15.5 3v4"/>',
   compass: '<circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
   wheel: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.4"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/>',
+  web: '<circle cx="12" cy="5" r="1.9"/><circle cx="5" cy="19" r="1.9"/><circle cx="19" cy="19" r="1.9"/><circle cx="12" cy="12.5" r="1.9"/><path d="M12 7v3.6M10.3 14L7 17.3M13.7 14L17 17.3"/>',   // js/aesthetics-graph.js: the family tree
   // kinds of things (article references, cards)
   gem: '<path d="M3.5 9l3-4.5h11l3 4.5L12 20z"/><path d="M3.5 9h17M9 4.5L12 9l3-4.5M12 9v11"/>',
   flower: '<circle cx="12" cy="10" r="2.2"/><path d="M12 7.8C10 5.6 10.4 3.5 12 3.5s2 2.1 0 4.3zM14.2 10c2.2-2 4.3-1.6 4.3 0s-2.1 2-4.3 0zM12 12.2c2 2.2 1.6 4.3 0 4.3s-2-2.1 0-4.3zM9.8 10c-2.2 2-4.3 1.6-4.3 0s2.1-2 4.3 0zM12 16.5v4"/>',
@@ -311,7 +312,7 @@ const ICON = {
   search: icon("search", 20), play: icon("play", 18), today: icon("today", 24), compass: icon("compass", 24), palette: icon("studio", 24),
   bolt: icon("bolt", 20), camera: icon("camera", 22), dice: icon("dice", 22), heart: icon("heart", 22), heartOn: icon("heartOn", 22),
   star: icon("star", 22), starOn: icon("starOn", 22), map: icon("map", 22), colors: icon("colors", 22), arrange: icon("arrange", 22),
-  sound: icon("sound", 22), compare: icon("compare", 22), you: icon("you", 24),
+  sound: icon("sound", 22), compare: icon("compare", 22), you: icon("you", 24), web: icon("web", 22), tune: icon("tune", 20),
 };
 // Night Gallery sliders (css/ng.css): every range input's track fills in ink up to its thumb. --ngp is kept in step on
 // input and change, and for sliders that arrive with a screen or have their value set in code (a Reset), on the next frame.

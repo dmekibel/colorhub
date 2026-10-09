@@ -1,0 +1,56 @@
+{
+ "id": "princesscore",
+ "name": "Princesscore",
+ "lineage": {
+  "influenced_by": [
+   "Disney princess media",
+   "royalcore",
+   "coquette aesthetics"
+  ],
+  "influences": [
+   "royalcore"
+  ]
+ },
+ "eras": [
+  "2020s (TikTok)"
+ ],
+ "places": [
+  "TikTok",
+  "Pinterest moodboards"
+ ],
+ "garments": [
+  "tulle and lace",
+  "pastel ball gowns",
+  "tiaras",
+  "satin gloves",
+  "bows"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "minimalist, neutral 'quiet luxury' dressing — princesscore is maximalist and unapologetically girlish.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "|decade_of_origin=Late 2010s",
+  "decade_of_origin": "Late 2010s",
+  "key_motifs": "Puff-sleeve dresses, corsets, tulle, lace, tiaras, ball gowns, pearls, opulent fabrics",
+  "key_colours": "Pastels (especially pink), white, cream, gold",
+  "related_aesthetics": "CoquetteCottagecoreEtherealPink PrincessRoyalcoreLight Academia",
+  "key_values": "Elegance, romance, femininity, escapism, kindness, grace"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Princesscore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 44% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 74% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

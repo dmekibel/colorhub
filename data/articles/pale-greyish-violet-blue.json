@@ -1,0 +1,119 @@
+{
+ "slug": "pale-greyish-violet-blue",
+ "name": "Pale Greyish Violet-Blue",
+ "hex": "#9FACD9",
+ "names": [
+  "Pale Greyish Violet-Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pale Greyish Violet-Blue is a soft periwinkle, built by putting the modifiers pale and greyish in front of the base color [[violet-blue]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two modifiers on violet-blue",
+   "body": "Pale Greyish Violet-Blue stacks two modifier words, pale and greyish, in front of the base color [[violet-blue]], in the compound-modifier grammar our library uses for names like this one [1]. Robert Ridgway first listed this swatch in his 1912 *Color Standards and Color Nomenclature*, plate XXIV, hue 53, tone d, and the Inter-Society Color Council later filed it in the ISCC-NBS 1955 system as block 199 (R) [1].\n\nIts nearest named neighbor is [[wild-blue-yonder]], 2.6 units off, a touch duller [2]; [[chicory-blue]] sits 3.4 units away, and [[pale-soft-blue-violet]] 3.6 units away, slightly more vivid and purpler [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within range of this swatch in 63 of 23,781 paintings, 0.26 percent, as photographed; looking for real coverage inside each painting narrows that to 40, rarer than 53 percent of the named colors in our library [3]. It most often plays an accent, in 32 percent of its 40 appearances by lightness rank, so varnish cannot fake the result [3].\n\nThe earliest match dates to 1474, Piero della Francesca's year, 438 years before Ridgway's 1912 plate, a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment or dye [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pale greyish + violet-blue",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXIV",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "wild-blue-yonder",
+   "chicory-blue",
+   "pale-soft-blue-violet"
+  ],
+  "parent": "violet-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 63,
+  "n_within_painting": 40,
+  "pct_archive": 0.26,
+  "rank_pct": 53,
+  "measured": {
+   "lch": [
+    71,
+    25,
+    283
+   ],
+   "nearest": [
+    [
+     "Wild Blue Yonder",
+     2.6
+    ],
+    [
+     "Chicory Blue",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXIV, hue 53, tone d; ISCC-NBS 1955 block 199 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color standard first listed Pale Greyish Violet-Blue?",
+   "choices": [
+    "Ridgway, 1912",
+    "Crayola",
+    "The xkcd color survey",
+    "Maerz and Paul alone"
+   ],
+   "answer": "Ridgway, 1912",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Greyish Violet-Blue is more common than half the named colors in our library.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Greyish Violet-Blue's earliest archive match is a Piero della Francesca painting."
+ ],
+ "words": 235,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

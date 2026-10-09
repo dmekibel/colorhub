@@ -1,0 +1,123 @@
+{
+ "slug": "satin-sheen-gold",
+ "name": "Satin Sheen Gold",
+ "hex": "#CBA135",
+ "names": [
+  "Satin Sheen Gold"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Satin Sheen Gold is a muted, brownish gold from the extended web color lists, its name describing a fabric finish rather than any coiner or standard on record.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A finish word, not a pedigree",
+   "body": "Our library carries Satin Sheen Gold only as a Wikipedia-sourced crowd-list entry, with no dictionary, dye house or company credited and no first-recorded date [1]. \"Satin\" and \"sheen\" both describe surface finish, a soft, low-glare gloss, rather than naming a pigment, mineral or place, so the color is filed here as a descriptive compound built on the base word \"gold\" [1]. Several low-quality color-reference sites online repeat an unsourced claim tying the name to a television costume; it is not corroborated by any institutional source and is left out here [2].\n\nBy our look-alike data the nearest color is [[mustard|Mustard]], 2.6 units away and read as more vivid, with [[goldenrod|Goldenrod]] further off at 3.6, also more vivid [3]. Against the library's own curriculum colors it sits closest to Mustard as well [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to this gold in 423 of 23,781 paintings, about 1.8 percent, as photographed [4]. The strongest single match is Maurice Denis's 1890 *Le Christ vert*, where it covers 68 percent of the canvas, and the earliest is a 1230 crucifix panel, at 6 percent [4]. The 1820s decade carries a real lift, 46 hits across 731 paintings from that decade, well above the archive's overall rate [4]. George Dawe, Paul Sérusier and Pierre Bonnard are the painters most disproportionately associated with it, and India is the most disproportionate country, with 63 hits across 721 paintings [4]. All of this is a computed color match on varnished, photographed canvases, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a satin fabric sheen applied to a gold base word; origin otherwise undocumented",
+   "first_recorded": "undocumented in the sources checked here",
+   "source": "ColorHub color library; Wikipedia"
+  },
+  "aka": [],
+  "siblings": [
+   "mustard",
+   "goldenrod",
+   "metallic-gold",
+   "saffron-yellow"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 423,
+  "measured": {
+   "lch": [
+    68.3,
+    59.2,
+    85.3
+   ],
+   "nearest": [
+    [
+     "Mustard",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia-sourced crowd list entry, Satin Sheen Gold",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "Assorted color-reference listing sites repeating an uncorroborated claim; not used as a cited fact here",
+   "loc_kind": null,
+   "url": "https://colors.artyclick.com/color-names-dictionary/color-names/satin-sheen-gold-color"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-s.json, edges-m.json, edges-g.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color is the nearest look-alike to Satin Sheen Gold in our data?",
+   "choices": [
+    "Mustard",
+    "Goldenrod",
+    "Metallic Gold",
+    "Olive Ocher"
+   ],
+   "answer": "Mustard",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a dictionary or company is credited on reliable sources with coining the name Satin Sheen Gold.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Satin Sheen Gold describes a fabric finish, not a mineral or a maker; no reliable source says who coined it."
+ ],
+ "words": 273,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "A costume-origin claim found on several low-quality SEO sites is uncorroborated and deliberately excluded.",
+   "Field notes rest on a computed color match, not a pigment identification."
+  ]
+ }
+}

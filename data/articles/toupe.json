@@ -1,0 +1,146 @@
+{
+ "slug": "toupe",
+ "name": "Toupe",
+ "hex": "#C7AC7D",
+ "names": [
+  "Toupe"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Toupe is a warm, muted tan carried in our library as its own entry, a crowd name from the 2010 xkcd color survey rather than a modifier of another word.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crowd name, kept separate",
+   "body": "Our library dates this name to the 2010 xkcd survey, in which respondents typed free-text names for color swatches, and a Wikipedia list repeats it [1]. Who used the word before that survey is undocumented in the sources consulted [1]. The library also lists Light French Beige as a near-duplicate of this swatch, 0.4 units away, two names landing on almost the same tan [1].\n\nIts nearest named neighbors are [[sandstone]] at 2.7 units of CIEDE2000, more vivid, [[long-beach]] at 2.9, almost the same, and [[very-light-brown]] at 2.9, also almost the same [2]. [[tan]] sits a little farther at 3.6, also almost the same [2]. Measured in LCH it reads lightness 72, chroma 28, a mid-warm tan [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 3,694 of 23,781 paintings (15.53 percent), more common than 96 percent of the named colors, as photographed, making it one of the most frequent colors we track [3]. It peaks in the 1400s, in 113 of 945 paintings from that century, 1.1 times the expected rate [3]. Willem van de Velde (II) is its most devoted painter, using it in 7 of his 15 works here, 3.5 times the baseline of the museums those works come from [3]. It is most over-represented in paintings from Iran, 3.9 times the expected rate [3]. The earliest dated match in our archive is 799, more than a thousand years before the name's own 2010 record, a resemblance of hue in an aged photograph, not proof the dye existed that early [3]. The archive's early centuries are thin, so this is a floor, not a first [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a crowd name, undocumented beyond the 2010 xkcd survey",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Light French Beige"
+  ],
+  "siblings": [
+   "sandstone",
+   "long-beach",
+   "very-light-brown",
+   "tan"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+  "n_present": 3694,
+  "rank_pct": 96,
+  "peak_century": [
+   1400,
+   1.1
+  ],
+  "top_painter": [
+   "Willem van de Velde (II)",
+   3.5
+  ],
+  "top_country": [
+   "Iran",
+   3.9
+  ],
+  "first_dated": {
+   "year": 799,
+   "before_record": true
+  },
+  "measured": {
+   "lch": [
+    72,
+    28,
+    84
+   ],
+   "nearest": [
+    [
+     "Sandstone",
+     2.7
+    ],
+    [
+     "Long Beach",
+     2.9
+    ],
+    [
+     "Very Light Brown",
+     2.9
+    ],
+    [
+     "Tan",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): xkcd (2010) source, near-duplicate entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does our library date the name Toupe to?",
+   "choices": [
+    "The 2010 xkcd crowd color survey",
+    "A 1912 Ridgway plate",
+    "A Crayola crayon box",
+    "The ISCC-NBS 1955 list"
+   ],
+   "answer": "The 2010 xkcd crowd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Toupe is a rare color in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Toupe turns up in more than one painting in six, one of the most frequent named colors we track."
+ ],
+ "words": 314,
+ "status": "checked",
+ "checked": {
+  "by": "batch-32",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); name dated only to the 2010 xkcd survey. Left any resemblance to the separately-listed name Taupe unstated, since our sources do not connect them."
+  ]
+ }
+}

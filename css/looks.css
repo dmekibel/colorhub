@@ -29,7 +29,14 @@
 .lkx-col b{font:400 22px/1.05 var(--serif);overflow-wrap:anywhere}
 .lkx-col em{font:400 13px/1 var(--mono);letter-spacing:.02em;color:var(--faint);font-style:normal}
 .lkx-col svg{width:14px;height:14px;color:var(--faint)}
-.lkx-acts{margin-top:22px}
+.lkx-acts{margin-top:22px;display:flex;gap:10px}
+.lkx-acts .btn{flex:1}
+.lkx-acts .btn.ghost{flex:none;padding:0 20px}
+.lkx-finds{list-style:none;margin:0;padding:0}
+.lkx-finds li{padding:11px 0;border-top:1px solid var(--rule);font-size:15px;line-height:1.45;color:var(--ink);text-wrap:pretty}
+.lkx-finds li:last-child{border-bottom:1px solid var(--rule)}
+.lkx-sec .lkx-caveat{margin-top:10px;font-size:13.5px;color:var(--faint)}
+.lkx-lineage dd .chips-wrap{margin-top:2px}
 .lkx-rows{margin:26px 0 0;border-top:1px solid var(--rule)}
 .lkx-row{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--rule);align-items:baseline}
 .lkx-row dt{font:italic 400 16px/1.3 var(--serif);color:var(--soft)}

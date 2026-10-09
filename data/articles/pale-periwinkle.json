@@ -1,0 +1,106 @@
+{
+ "slug": "pale-periwinkle",
+ "name": "Pale periwinkle",
+ "hex": "#CECAF1",
+ "names": [
+  "Pale periwinkle"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale periwinkle is a soft lavender-blue, the pale tone Robert Ridgway charted beside the parent color Periwinkle in his 1912 color atlas, decades before the plain name Periwinkle itself was recorded.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale tone of Periwinkle",
+   "body": "Pale periwinkle puts Ridgway's tone word Pale in front of [[periwinkle]], the paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. The plain name Periwinkle only entered Maerz and Paul's *Dictionary of Color* in 1922, a decade later, and was later filed by the ISCC-NBS dictionary of 1955 in block 203 [1]. Some library sources also use Pale periwinkle as an alternate label for [[pallid-violet]] and [[pallid-blue-violet]], names this close in color often double up in the record [1].\n\nIts nearest named neighbor is [[pallid-blue-violet]], 3.6 units off and bluer than this swatch [1]; [[pale-wistaria-blue]] sits the same distance away, almost the same color [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in only 3 of 23,781 paintings, 0.01 percent, as photographed, rarer than 79 percent of the named colors in our library [2]. In all three it plays a mid-value color by lightness rank [2]. The earliest match dates to 1516, in a work by Sebastiano del Piombo, a floor and not a first since the archive's early centuries are thin; that is 396 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2].\n\nIn printed English the general word periwinkle (covering the plant and the sea snail along with any color sense) peaked in the 1870s, well before Ridgway's 1912 atlas, a reminder that an early Ngram count is catching the word, not this specific swatch [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ridgway's tone system: the pale tone of Periwinkle",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912",
+   "source": "Ridgway 1912; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "periwinkle",
+   "pallid-violet",
+   "pallid-blue-violet",
+   "pale-wistaria-blue"
+  ],
+  "parent": "periwinkle",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "pct_archive": 0.01,
+  "rank_pct": 79,
+  "measured": {
+   "nearest": [
+    [
+     "Pallid Blue-Violet",
+     3.6
+    ],
+    [
+     "Pale Wistaria Blue",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930) and look-alike distances, data/graph/edges-p.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings) and Google Books Ngram cache, as photographed, data/graph/fieldnotes/p.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Pale periwinkle?",
+   "choices": [
+    "Pallid Blue-Violet",
+    "Pale Wistaria Blue",
+    "Lavender Blue"
+   ],
+   "answer": "Pallid Blue-Violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the plain name Periwinkle was recorded before Ridgway charted Pale periwinkle.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale periwinkle was named by Ridgway in 1912, a decade before the plain color Periwinkle itself was first recorded."
+ ],
+ "words": 276,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

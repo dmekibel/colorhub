@@ -1,0 +1,121 @@
+{
+ "slug": "dusty-rust",
+ "name": "Dusty rust",
+ "hex": "#B64925",
+ "names": [
+  "Dusty rust"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty rust renders Kaba-iro (蒲色), a traditional Japanese name meaning \"cattail color\", after the brown-orange flower spike of the cattail plant.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the cattail",
+   "body": "Our color library gives the source as 蒲色 (Kaba-iro), \"cattail color\", from the traditional colors of Japan; 蒲 (kaba) is the cattail, a marsh plant whose dense, brown-orange flower spike this name points to [1]. No first-recorded date survives in our sources, so exactly when the name entered use is undocumented here [1].\n\nThe nearest named color in our graph is [[yellowish-sienna]], at a color distance (ΔE2000) of 2.8, a duller shade; [[rust]] itself sits 3.3 away and reads more vivid by comparison [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this rust in 312 of 23,781 paintings, about 1.3 percent, as photographed [3]. It peaks in the 1400s (7 of 73 paintings from that decade), more than three-and-a-half times the overall rate, with Filippo Lippi's paintings carrying it at over three times his peers' usage [3]. By country it is strongest in Nepali and Tibetan painting, each running about six and three times the archive average, and in Indian work more broadly [3]. The earliest dated match is a Buddhist votive card from the year 1000, a floor set by what survives and was photographed, not a first appearance [3]. These are photographs of aged, varnished paintings; the match is computed, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Kaba-iro (蒲色), \"cattail color\", after the cattail plant",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Kaba-iro (蒲色)"
+  ],
+  "siblings": [
+   "yellowish-sienna",
+   "rust",
+   "mars-orange",
+   "sinopia"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kaba-iro (蒲色), \"cattail color\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 312,
+  "rate": 0.0131,
+  "match": {
+   "hex": "#B64925",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "painters": [
+   [
+    "Filippo Lippi",
+    14.52
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What plant does the name behind Dusty rust, Kaba-iro, refer to?",
+   "choices": [
+    "The cattail",
+    "The maple",
+    "The chrysanthemum",
+    "The plum"
+   ],
+   "answer": "The cattail",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusty rust is most common among paintings made in the 1900s.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty rust's Japanese name points to the brown-orange flower spike of the cattail plant."
+ ],
+ "words": 221,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; no first-recorded date for the Japanese source name."
+  ]
+ }
+}

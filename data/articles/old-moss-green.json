@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "One spot, several names",
-   "body": "The library records Old Moss Green from Maerz and Paul's 1930 dictionary, plate 14 L 2, first recorded in 1905 [1]. Our computed classification gives it a light olive, built on [[moss-green]] but pulled toward yellow rather than the blue-green moss usually shows [1]. The same plate position carries three near-duplicate names recorded in other years: Lizard Bronze in 1892, Palmleaf in 1917 and Romantic Green in 1928, each within a hair of the same hex [1].\n\nThe nearest distinct neighbor in the library is [[baby-poop|Baby Poop]], about 4.8 units away by CIEDE2000, with [[silver-fern|Silver Fern]] close behind it [1]. In LCH terms it measures lightness 56, chroma 61, hue 98 degrees, Munsell 8.3Y 5.4/8.3 [1]."
+   "body": "The library records Old Moss Green from Maerz and Paul's 1930 dictionary, plate 14 L 2, first recorded in 1905 [1]. Our computed classification gives it a light olive, built on [[moss-green]] but pulled toward yellow rather than the blue-green moss usually shows [1]. The same plate position carries three near-duplicate names recorded in other years: Lizard Bronze in 1892, Palmleaf in 1917 and Romantic Green in 1928, each within a hair of the same hex [1].\n\nThe nearest distinct neighbor in the library is [[silver-fern|Silver Fern]], about 4.9 units away by CIEDE2000, with [[olive|Olive]], almost the same color, close behind it [1]. In LCH terms it measures lightness 56, chroma 61, hue 98 degrees, Munsell 8.3Y 5.4/8.3 [1]."
   },
   {
    "id": "field",
@@ -29,7 +29,8 @@
   "aka": [],
   "siblings": [
    "moss-green",
-   "olive"
+   "olive",
+   "warbler-green"
   ],
   "parent": null,
   "children": [],
@@ -47,8 +48,12 @@
    ],
    "nearest": [
     [
-     "Baby Poop",
-     4.8
+     "Silver Fern",
+     4.9
+    ],
+    [
+     "Olive",
+     5.0
     ]
    ]
   }
@@ -57,7 +62,7 @@
   {
    "n": 1,
    "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930, plate 14 L 2, first recorded 1905; near-duplicate names Lizard Bronze (1892), Palmleaf (1917), Romantic Green (1928); nearest distinct match Baby Poop, ΔE 4.8",
+   "cite": "ColorHub color library: Maerz & Paul 1930, plate 14 L 2, first recorded 1905; near-duplicate names Lizard Bronze (1892), Palmleaf (1917), Romantic Green (1928); nearest distinct match Silver Fern, ΔE 4.9",
    "loc_kind": null,
    "url": null
   },
@@ -94,7 +99,7 @@
  "openers": [
   "Three separate dictionary names — 1892, 1917 and 1928 — all landed on almost the same hex as Old Moss Green."
  ],
- "words": 213,
+ "words": 216,
  "status": "checked",
  "checked": {
   "by": "writer",

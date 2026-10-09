@@ -1,0 +1,107 @@
+{
+ "slug": "pale-salmon",
+ "name": "Pale Salmon",
+ "hex": "#FFB19A",
+ "names": [
+  "Pale Salmon"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale Salmon is a light, warm pink, built by putting the modifier pale in front of the fish-named base color salmon rather than naming anything of its own.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on Salmon",
+   "body": "Pale Salmon puts the modifier word pale in front of the base color [[salmon]], in the compound-modifier grammar ColorHub's library uses for descriptive names like this one [1]. The name entered the xkcd color survey of 2010, where volunteers labeled a swatch grid with whatever words they chose, rather than any older dictionary or standard; the base color salmon itself is much older, charted by Ridgway in 1912 and filed by the ISCC-NBS dictionary of 1955 in block 26 [1].\n\nIts nearest named neighbor is [[flesh-color]], 3.3 units off and darker than this swatch [1]; [[melon]] sits 4.2 units away, reading duller [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 20 of 23,781 paintings, 0.08 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 9, rarer than 69 percent of the named colors in our library [2]. The earliest match dates to 1515, in a work by Correggio, a floor and not a first since the archive's early centuries are thin; that is 495 years before the name's 2010 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment or dye [2].\n\nIn printed English the general word salmon peaked in the 1910s and rose fastest in the 1870s (Google Books, all senses of the word, so a color name that is also a fish can mislead), well before xkcd's volunteers settled on this particular pale tone in 2010 [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pale + salmon",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "salmon",
+   "flesh-color",
+   "melon",
+   "grenadine-pink"
+  ],
+  "parent": "salmon",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 20,
+  "n_within_painting": 9,
+  "pct_archive": 0.08,
+  "rank_pct": 69,
+  "measured": {
+   "nearest": [
+    [
+     "Flesh Color",
+     3.3
+    ],
+    [
+     "Melon",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json; xkcd color survey 2010; Ridgway 1912; ISCC-NBS 1955) and look-alike distances, data/graph/edges-p.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings) and Google Books Ngram cache, as photographed, data/graph/fieldnotes/p.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Pale Salmon?",
+   "choices": [
+    "Flesh Color",
+    "Melon",
+    "Grenadine Pink"
+   ],
+   "answer": "Flesh Color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale Salmon comes from a sourced historical color standard rather than a volunteer survey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Salmon is a 2010 volunteer name; the base color Salmon it modifies is a century older."
+ ],
+ "words": 266,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

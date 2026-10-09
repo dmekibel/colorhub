@@ -1,0 +1,113 @@
+{
+ "slug": "deep-violet",
+ "name": "Deep Violet",
+ "hex": "#490648",
+ "names": [
+  "Deep Violet"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Deep Violet is a very dark, reddish reading of [[violet]], close enough to near-black that it was also sold as Eggplant Purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Almost black",
+   "body": "The name follows the library's modifier grammar, *deep* plus [[violet]]; our record traces the exact chip to the 2010 xkcd online color survey, a crowd-sourced naming exercise rather than a dictionary or a painted plate [1]. The same hex has also circulated under Eggplant Purple, an alternate commercial name with no further history recorded here [1].\n\nAt lightness 16 out of 100 it sits near the dark end of the whole violet family; its closest look-alike on file is [[deep-purple]], about 4.1 units off, with [[petunia]] and [[grape-purple]] a little further out [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This exact shade is almost absent from our archive: a near match appears in just 1 of roughly 23,700 paintings, under 0.01 per cent, as photographed [3]. A color this close to black is hard to tell apart from shadow in a photographed, varnished canvas, which likely suppresses the count further [3]. The single match is a screen comparison only, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a very dark, near-black reading of violet; also sold as Eggplant Purple",
+   "first_recorded": "xkcd color survey, 2010",
+   "source": "ColorHub library"
+  },
+  "aka": [
+   "Eggplant Purple"
+  ],
+  "siblings": [
+   "deep-purple",
+   "petunia",
+   "grape-purple"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,700 paintings, as photographed",
+  "n_present": 1,
+  "pct_archive": 0.0,
+  "match": {
+   "hex": "#490648",
+   "de2000": 4.1
+  },
+  "measured": {
+   "lch": [
+    15.6,
+    44.1,
+    328.6
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "xkcd color survey (2010); ColorHub color library alternate-name record (Eggplant Purple)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,700 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which naming source first records this exact shade of Deep Violet?",
+   "choices": [
+    "The 2010 xkcd color survey",
+    "Ridgway's 1912 plates",
+    "The ISCC-NBS 1955 system",
+    "Maerz and Paul's 1930 dictionary"
+   ],
+   "answer": "The 2010 xkcd color survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Deep Violet turns up in many paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Violet is so close to black it barely registers in our painting archive."
+ ],
+ "words": 179,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

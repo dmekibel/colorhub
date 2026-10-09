@@ -1,0 +1,137 @@
+{
+ "slug": "indian-pink",
+ "name": "Indian Pink",
+ "hex": "#D8A396",
+ "names": [
+  "Indian Pink"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Indian Pink is a soft, warm pink first recorded by Maerz and Paul in 1902, an older entry than most of the other \"Indian\"-named colors in our library.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The oldest of the \"Indian\" names here",
+   "body": "The nearest named colors on file are [[rosebloom]], [[rose-dawn]], [[light-congo-pink]] and [[japan-rose]], at 2.8, 3.3, 3.8 and 4.1 ΔE [1]. Neither that dictionary nor our other sources explain what the \"Indian\" modifier refers to for this particular chip [1]. In Munsell terms it reads 8.7R 7.1/4.7, light and only moderately saturated [1]. 8, 3.3, 3.8 and 4.1 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to this color in 129 of 23,781 paintings, about 0.54 percent, and in 67 by the stricter within-painting measure, which still makes it more common than 53 percent of the named colors we track [2]. Inside those paintings it most often sits as a hidden color, 30 percent of the 67, present without dominating [2]. It is most over-represented in paintings from India, at 2.4 times the expected rate, 15 of 721 such paintings, and peaks in paintings from the 1900s, at 2.6 times expected [2].\n\nThe earliest match in our archive dates to 1230, in a painting attributed to Berlinghiero, with the latest from 1922, 82 dated paintings in all, 700 years before the name's own earliest record, 1902 [1], a floor and not a first, since the archive's early centuries are thin [1][2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented in the sources consulted",
+   "first_recorded": "1902, per Maerz and Paul",
+   "source": "ColorHub color library, Indian Pink entry"
+  },
+  "aka": [],
+  "siblings": [
+   "rosebloom",
+   "rose-dawn",
+   "light-congo-pink",
+   "japan-rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 129,
+  "n_within": 67,
+  "more_common_than_pct": 53,
+  "country": "India, 2.4x expected",
+  "century_peak": "1900s, 2.6x expected",
+  "role": "hidden color 30%",
+  "measured": {
+   "lch": [
+    71.6,
+    22.9,
+    38.9
+   ],
+   "nearest": [
+    [
+     "Rosebloom",
+     2.8
+    ],
+    [
+     "Rose Dawn",
+     3.3
+    ],
+    [
+     "Light Congo Pink",
+     3.8
+    ],
+    [
+     "Japan Rose",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930 entries (data/library.json, Indian Pink)",
+   "loc_kind": null,
+   "url": null,
+   "n": 1
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null,
+   "n": 2
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which of our three \"Indian\"-named colors has the earliest first-recorded date?",
+   "choices": [
+    "Indian Pink (1902)",
+    "India Spice (1927)",
+    "Dull Indian Purple (1912)",
+    "All the same year"
+   ],
+   "answer": "Indian Pink (1902)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain what \"Indian\" refers to in Indian Pink's name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, Indian Pink is most over-represented in paintings from which country?",
+   "choices": [
+    "India",
+    "France",
+    "Japan",
+    "the Netherlands"
+   ],
+   "answer": "India",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Indian Pink's 1902 record makes it the oldest of three unexplained \"Indian\"-named colors in our library.",
+  "In our archive, this soft pink turns up most often as a hidden color rather than a dominant one."
+ ],
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 253
+}

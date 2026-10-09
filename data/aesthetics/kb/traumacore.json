@@ -1,0 +1,43 @@
+{
+ "id": "traumacore",
+ "name": "Traumacore",
+ "lineage": {
+  "influenced_by": [
+   "weirdcore",
+   "medical/hospital imagery",
+   "self-harm-adjacent online communities"
+  ],
+  "influences": [
+   "weirdcore"
+  ]
+ },
+ "eras": [
+  "2016–2019 (Tumblr/early TikTok)"
+ ],
+ "places": [
+  "Tumblr"
+ ],
+ "garments": [
+  "not a fashion look — an image-collage aesthetic built from found photos, medical imagery and childhood ephemera"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "sanitized self-help content, instead presenting distress imagery directly and without a redemptive arc — the aesthetic has drawn real concern about glorifying self-harm, and ColorHub covers it only as a documented visual style, not an endorsement.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Traumacore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 50% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

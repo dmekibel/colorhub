@@ -1,0 +1,129 @@
+{
+ "slug": "yellowy-green",
+ "name": "Yellowy Green",
+ "hex": "#BFF128",
+ "names": [
+  "Yellowy Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Yellowy Green is a plain compound name recorded by the 2010 xkcd color-name survey, not a historical dictionary entry.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A phrase, not an entry",
+   "body": "Paterson's dictionary uses the phrase \"yellowy green\" more than a dozen times, describing chrome green, Hooker's green, French green, jade green, sap green and spring green, among others, but it never lists Yellowy Green itself as a named color [1]. This hex, #BFF128, comes instead from the 2010 xkcd color-name survey, where thousands of people typed free-text names for colors shown on screen [2].\n\nIts nearest look-alikes are [[lime]], 3.2 units away and more vivid, and [[lime-yellow]], 3.3 units away [3]. [[yellowish-green]], 4.4 units off, is darker [3]. The xkcd survey ran as a public web experiment rather than a curated dictionary, which is why its names, including this one, read as plain description rather than craft terminology [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive holds enough of this exact bright green to count as present, as photographed [4]. That reflects the limits of our archive's palette of older paintings, not a claim about the color itself [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"yellowy\" plus the color word green",
+   "first_recorded": "2010, the xkcd color-name survey",
+   "source": "ColorHub color library (xkcd 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "lime",
+   "lime-yellow",
+   "yellowish-green",
+   "green-yellow"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "pct": 0.0,
+  "measured": {
+   "lch": [
+    89.0,
+    90.6,
+    116.3
+   ],
+   "nearest": [
+    [
+     "Lime",
+     3.2
+    ],
+    [
+     "Lime Yellow",
+     3.3
+    ],
+    [
+     "Yellowish-green",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entries for chrome green, French green, Hooker's green, jade green, sap green, spring green",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd color-name survey (2010)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges, data/graph/edges-y.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the exact hex #BFF128 for Yellowy Green come from?",
+   "choices": [
+    "The 2010 xkcd color-name survey",
+    "Ridgway's 1912 color dictionary",
+    "Pantone's color-of-the-year list",
+    "Paterson's Dictionary of Colour as its own entry"
+   ],
+   "answer": "The 2010 xkcd color-name survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson's dictionary lists \"Yellowy Green\" as a named color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "\"Yellowy green\" shows up over a dozen times in one color dictionary describing other colors, but never as its own entry."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 176
+}

@@ -1,0 +1,144 @@
+{
+ "slug": "english-violet",
+ "name": "English Violet",
+ "hex": "#563C5C",
+ "names": [
+  "English Violet"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "English Violet is a dark, bluish purple catalogued by Robert Ridgway in 1912 and again by Maerz and Paul, whose records disagree on when the name itself first appeared.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two dictionaries, two dates",
+   "body": "Ridgway's 1912 nomenclature places this hue on plate XI, hue 61, tone m, and the ISCC-NBS system later classified it as a dark purple, about 2.1 units from that block's reference color [1]. Maerz and Paul's 1930 dictionary lists the name too, but our sources carry two different first-recorded dates for it, 1912 and 1928, and nothing in the record resolves which is right [1]. Wikipedia's entry for this color cites the ISCC-NBS classification rather than offering a naming story, so whether \"English\" points to a dye, a garden flower, or simply a convention of English-language dictionaries is undocumented here [1].\n\nIn Munsell terms the chip reads 6.3P 2.9/4.4, dark and moderately saturated [1]. The nearest named colors on file are [[auricula-purple]] and [[madder-violet]], at 2.7 and 3.8 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to this color in 21 of 23,781 paintings, about 0.09 percent, and in 10 by the stricter within-painting measure, which makes it rarer than 68 percent of the named colors we track [3]. Inside those paintings it most often sits as a shadow, 50 percent of the 10 [3]. It peaks in paintings from the 1800s, at 1.2 times the expected rate [3].\n\nThe earliest match in our archive dates to 1545, in a painting attributed to Bronzino, with the latest from 1915, 14 dated paintings in all, a floor and not a first, since the archive's early centuries are thin [3]. That earliest match is 367 years before the name's earliest record in our sources, 1912 [2][3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented in the sources consulted",
+   "first_recorded": "1912 or 1928, depending on the source (Ridgway; Maerz and Paul)",
+   "source": "ColorHub color library, English Violet entry"
+  },
+  "aka": [],
+  "siblings": [
+   "auricula-purple",
+   "madder-violet",
+   "dark-byzantium",
+   "japanese-violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 21,
+  "n_within": 10,
+  "rarer_than_pct": 68,
+  "century_peak": "1800s, 1.2x expected",
+  "role": "shadow 50%",
+  "measured": {
+   "lch": [
+    29.4,
+    23.0,
+    320.6
+   ],
+   "nearest": [
+    [
+     "Auricula Purple",
+     2.7
+    ],
+    [
+     "Madder Violet",
+     3.8
+    ],
+    [
+     "Dark Byzantium",
+     3.9
+    ],
+    [
+     "Japanese Violet",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "kind": "web",
+   "cite": "Wikipedia, \"English violet\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/English_violet",
+   "n": 1
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 and Maerz and Paul 1930 entries (data/library.json, English Violet)",
+   "loc_kind": null,
+   "url": null,
+   "n": 2
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null,
+   "n": 3
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: our sources agree on exactly one first-recorded date for English Violet.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which named color is closest to English Violet in our library's color match?",
+   "choices": [
+    "Byzantium",
+    "Cornflower",
+    "Sepia",
+    "Lemon Meringue"
+   ],
+   "answer": "Byzantium",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, how does English Violet most often function, by our archive's measure?",
+   "choices": [
+    "As a shadow",
+    "As a highlight",
+    "As a border",
+    "As a background wash"
+   ],
+   "answer": "As a shadow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "English Violet's two main sources can't agree on when the name first appeared: 1912 or 1928.",
+  "This dark purple shows up in our archive mostly as a shadow color, the kind of tone that hides in a painting's dark corners."
+ ],
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Library note shows two conflicting Maerz and Paul first-recorded dates (1912 and 1928); both stated, neither silently chosen.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 299
+}

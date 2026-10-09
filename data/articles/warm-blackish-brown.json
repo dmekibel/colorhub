@@ -1,0 +1,124 @@
+{
+ "slug": "warm-blackish-brown",
+ "name": "Warm Blackish Brown",
+ "hex": "#554A45",
+ "names": [
+  "Warm Blackish Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Warm Blackish Brown is a near-black, slightly reddish brown, built from modifier grammar (warm + blackish) over the base color [[brown]], and filed by Ridgway in 1912.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier name, not a story",
+   "body": "The name is built the way our data groups modifier colors: \"warm\" and \"blackish\" stack onto the base word [[brown]], rather than naming a plant, mineral or person [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* carries it on plate XXXIX, hue 1′′′, tone m, and the ISCC-NBS system filed it in 1955 in block 20, dark grayish red [2]. Its nearest listed neighbor there is [[bone-brown|Bone Brown]] [2].\n\nIts closest look-alikes by measured color are [[starling|Starling]] and Bone Brown, both almost the same color, followed by a Greyish Umber pair and [[umber|Umber]] a little further out [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds this color in 1,138 of them, 4.79 percent, as photographed, more common than 86 percent of our named colors [3]. Inside a painting it most often plays a mid-tone, in 40 percent of its appearances, a reading based on lightness rank within each canvas that varnish cannot fake [3]. It peaks in paintings from the 1100s, 2.4 times the expected rate for that century [3].\n\nIts most devoted painter is Vilhelm Hammershøi, present in 13 of the 50 Hammershøi works in our archive, about 3.0 times the baseline for the museums those works come from [3]. The earliest match is a 960 panel attributed to Juran, 952 years before Ridgway's 1912 record; our archive's early centuries are thin, so this is a floor, not a first, and an aged, varnished photograph's color match is not proof of a painter's actual pigment [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: warm + blackish + brown",
+   "first_recorded": "1912 (Ridgway, Color Standards and Color Nomenclature, plate XXXIX)",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "starling",
+   "bone-brown",
+   "greyish-umber",
+   "umber"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1138,
+  "match": {
+   "min_cover": 0.02
+  },
+  "measured": {
+   "lch": [
+    32.4,
+    5.9,
+    51.9
+   ],
+   "nearest": [
+    [
+     "Starling",
+     2.6
+    ],
+    [
+     "Bone Brown",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for warm-blackish-brown",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate XXXIX, ISCC-NBS 1955 block 20",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 source first lists Warm Blackish Brown?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "A Crayola naming contest",
+    "The xkcd color survey",
+    "Maerz and Paul's dictionary"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, what role does Warm Blackish Brown most often play?",
+   "choices": [
+    "A mid-tone",
+    "A bright highlight",
+    "A background sky",
+    "A skin tone"
+   ],
+   "answer": "A mid-tone",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Warm Blackish Brown's earliest match in our archive is 952 years older than the name's first written record."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 87%, current data/graph/fieldnotes says 86% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 268
+}

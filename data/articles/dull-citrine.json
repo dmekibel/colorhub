@@ -1,0 +1,125 @@
+{
+ "slug": "dull-citrine",
+ "name": "Dull Citrine",
+ "hex": "#8D8552",
+ "names": [
+  "Dull Citrine"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dull Citrine is a grayed, olive-toned yellow-brown first plated by Robert Ridgway in 1912, and one of the more common colors in our whole painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on an old fruit name",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* of 1912 plates this swatch at plate XVI, hue 21 prime, on an aged, scanned original that is itself approximate [1]. The ISCC-NBS dictionary of 1955 files the name in block 106, light olive [1]. The name pairs *dull* with [[citrine]], a word that first meant lemon yellow and later named the tertiary between orange and green [4].\n\nAt hex #8D8552 it measures lightness 55 and chroma 29 in LCH [1]. Its closest named neighbor is [[serpentine-green|Serpentine Green]], 2.8 units away and more vivid; [[buffy-citrine|Buffy Citrine]] sits 4.7 units off and yellower, and [[parrot-green|Parrot Green]] 4.8 units off, also yellower and brighter [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 6.57% of the 23,781 paintings in our archive (1,562 paintings, as photographed); the within-painting lens narrows that to 853 [3]. In our archive it is more common than 88% of the named colors [3]. It peaks in the 1700s, present in 4.9% of the 3,449 paintings we have from that century (169 paintings), 1.3 times the rate its museums would predict [3]. Inside a painting it most often plays a light, in 37% of the paintings where the within-painting lens finds it, by lightness rank [3]. Its most devoted painter is Arnoud van Halen, present in 21 of 50 works here, 6.3x the baseline of the museums those works come from (as photographed 4.0x) [3]. The earliest match dates to 916, 996 years before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier of citrine: dull + citrine",
+   "first_recorded": "1912 (Ridgway, plate XVI)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "citrine",
+   "serpentine-green",
+   "buffy-citrine",
+   "parrot-green"
+  ],
+  "parent": "citrine",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1562,
+  "pct_archive": 6.57,
+  "n_within_painting": 853,
+  "pct_within_painting": 3.59,
+  "rank_pct": 88,
+  "painters": [
+   "Arnoud van Halen",
+   "Jacob Maris"
+  ],
+  "name_first_recorded": 1912,
+  "earliest_match_year": 916,
+  "role": {
+   "light": 37
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912, plate XVI, hue 21'; ISCC-NBS 1955, block 106 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, glossary",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plate first fixes the name Dull Citrine in our sources?",
+   "choices": [
+    "Ridgway, 1912, plate XVI",
+    "The ISCC-NBS charts of 1955",
+    "The 2010 xkcd color survey",
+    "Maerz and Paul, 1930"
+   ],
+   "answer": "Ridgway, 1912, plate XVI",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter carries Dull Citrine at the highest rate above the archive baseline?",
+   "choices": [
+    "Peter Snayers",
+    "Paulus Potter",
+    "Jan Maurits Quinkhard",
+    "Arnoud van Halen"
+   ],
+   "answer": "Arnoud van Halen",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dull Citrine is common enough to appear in about one painting in fifteen in our archive, often as one of the lightest areas."
+ ],
+ "words": 315,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section's presence/rank/decade/painter/country numbers no longer matched data/graph/fieldnotes (stale archive snapshot); replaced with the current fieldnotes facts",
+   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
+  ]
+ }
+}

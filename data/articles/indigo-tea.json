@@ -1,0 +1,132 @@
+{
+ "slug": "indigo-tea",
+ "name": "Indigo tea",
+ "hex": "#473F2D",
+ "names": [
+  "Indigo tea"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Indigo tea is a dark, warm brown from Japan's traditional color list, and one of the single most common named colors in our entire painting archive.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "In Japan: Aikobicha",
+   "body": "The name is written 藍媚茶, romanized Aikobicha, and our color library glosses it as \"indigo tea\" [1]. The closing kanji, 茶 (*cha*), marks it as a member of Japan's tea/brown family of names, the same character that ends [[baiko-brown]], another traditional color in this family [1]. Who paired indigo with tea in this particular shade, and when, is undocumented in the sources we have [1].\n\nThe nearest named neighbor by measured color is [[jacaranda-brown]], yellower than this shade; [[olive-drab-7]] and [[dark-olive-brown]] sit close by, both darker [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Indigo tea in 5,716 of 23,781 paintings, about 24 percent, more common than every other named color we track, as photographed [3]. It peaks in the 1600s, in 1,390 of 6,394 paintings from that century, 1.4 times the rate its share of the archive would predict [3]. Inside a painting it most often plays a mid-tone, in 35 percent of its appearances [3].\n\nThe painter most devoted to it is Meindert Hobbema, in 11 of his 16 paintings here, 3.4 times his peers' rate, as photographed [3]. The earliest archive match is dated 900; the archive's early centuries are thin, so that is a floor, not a first [3]. It shares canvases more than chance with Deep Olive and [[baiko-brown]] [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a member of the traditional Japanese \"cha\" (tea/brown) family of names",
+   "first_recorded": "undocumented in the sources we have",
+   "source": "ColorHub color library: traditional colors of Japan"
+  },
+  "aka": [],
+  "siblings": [
+   "jacaranda-brown",
+   "olive-drab-7",
+   "dark-olive-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "藍媚茶 (Aikobicha)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5716,
+  "measured": {
+   "lch": [
+    27.0,
+    12.3,
+    89.0
+   ],
+   "nearest": [
+    [
+     "Jacaranda Brown",
+     3.1
+    ],
+    [
+     "Olive Drab 7",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the closing kanji 茶 (cha) usually signal in a traditional Japanese color name?",
+   "choices": [
+    "A tea- or brown-toned color",
+    "A bright blue color",
+    "A kabuki actor's name",
+    "A silk-weaving technique"
+   ],
+   "answer": "A tea- or brown-toned color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Indigo tea is one of the rarest named colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive used Indigo tea most, relative to his own output?",
+   "choices": [
+    "Meindert Hobbema",
+    "Frans Hals",
+    "Andrea Vaccaro",
+    "Jean-Baptiste-Camille Corot"
+   ],
+   "answer": "Meindert Hobbema",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Indigo tea is more common in our archive than any other named color we track."
+ ],
+ "words": 258,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

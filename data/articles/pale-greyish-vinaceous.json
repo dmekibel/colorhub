@@ -1,0 +1,116 @@
+{
+ "slug": "pale-greyish-vinaceous",
+ "name": "Pale Greyish Vinaceous",
+ "hex": "#DCC5B8",
+ "names": [
+  "Pale Greyish Vinaceous"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Greyish Vinaceous is a pale, dusty pink with a wine-like cast, one of Ridgway's 1912 \"vinaceous\" family of names built from the Latin word for wine.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A wine-toned pink",
+   "body": "Ridgway coined his vinaceous terms from *vinaceus*, Latin for wine-colored, to describe pinks with a greyish or purplish cast rather than a clear rose [1]. This shade sits on plate XXXIX, hue 9''', tone f, of his 1912 standards, read from a scan of an aged plate [1]. The 1955 ISCC-NBS system lists the same area as block 10, \"pale yellowish pink,\" about 4.9 units from this exact color [1]. Its Munsell notation is 3.8YR 8.1/2.2 [1].\n\nThe nearest named colors on file are [[iris-mauve]], [[sandust]], [[pale-congo-pink]] and [[tussore]], at 2.6, 3.5, 3.7 and 4.1 ΔE [1]. Who used the color beyond Ridgway's plates is undocumented in the books we hold [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, this pink appears in 489, about 2.1 percent, more common than 78 percent of our named colors [2]. It peaks in the 1900s, in 54 of 1,674 paintings, at 2.1 times the expected rate, and it is most over-represented in paintings from India, at 2.5 times the expected rate [2].\n\nInside a painting it is most often a light [2]. The earliest match is a 900 painting by Zhao Guangfu, over a thousand years before Ridgway's 1912 name, so that early hit is a look-alike hue in an aged photograph, not a trace of this named pink, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases more than chance with [[light-brownish-drab]] and [[hay-s-brown|Hay's Brown]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "vinaceus, Latin for wine-colored, a Ridgway family of pinks",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "iris-mauve",
+   "sandust",
+   "pale-congo-pink",
+   "tussore"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 489,
+  "pct_present": 2.06,
+  "rank_pct": 78,
+  "role": "light, 52% of 334 matched paintings",
+  "measured": {
+   "lch": [
+    81.1,
+    11.2,
+    57.6
+   ],
+   "nearest": [
+    [
+     "Iris Mauve",
+     2.6
+    ]
+   ]
+  },
+  "iscc": {
+   "block": 10,
+   "name": "pale yellowish pink",
+   "de": 4.9
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XXXIX, hue 9'''; ISCC-NBS 1955 block 10",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Pale Greyish Vinaceous (n=489)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What Latin word did Ridgway build his \"vinaceous\" names from?",
+   "choices": [
+    "Vinaceus, wine-colored",
+    "Vinea, vineyard",
+    "Vinum, drink",
+    "Vinco, to win"
+   ],
+   "answer": "Vinaceus, wine-colored",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the 900-era painting match proves this exact named pink existed then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ridgway named a whole family of pinks after wine, vinaceus in Latin."
+ ],
+ "words": 278,
+ "status": "draft",
+ "checked": {
+  "by": "",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

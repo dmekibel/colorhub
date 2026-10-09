@@ -12,12 +12,12 @@
   {
    "id": "name",
    "title": "A survey name for a vivid, murky yellow",
-   "body": "The only recorded source for Dirty Yellow is the xkcd survey of 2010, following the plain modifier grammar *dirty* plus [[yellow]] [1]. At hex #CDC50A it measures lightness 78 and chroma 79 in LCH, close in strength to the nearest ISCC-NBS block, a vivid greenish yellow only 1.1 units off, despite the word *dirty* in its name [1].\n\nIts closest named neighbor is [[puke-yellow|Puke Yellow]], 2.3 units away and almost the same color, another xkcd name from the same 2010 survey [2]. Further out sit [[piss-yellow|Piss Yellow]], 4.1 units off and lighter, and [[citrine|Citrine]], 4.4 units off and lighter still [2]."
+   "body": "The only recorded source for Dirty Yellow is the xkcd survey of 2010, following the plain modifier grammar *dirty* plus [[yellow]] [1]. At hex #CDC50A it measures lightness 78 and chroma 79 in LCH, close in strength to the nearest ISCC-NBS block, a vivid greenish yellow only 1.1 units off, despite the word *dirty* in its name [1].\n\nIts closest named neighbor is [[citronelle|Citronelle]], 4.1 units away and lighter, also an xkcd-era name [2]. [[citrine|Citrine]] sits 4.4 units off, lighter still [2]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds this yellow in only 2 of 23,781 paintings, as photographed, making it one of the rarest matches in the whole set [3]. Both are from Asian art: an 1700 Pahari court scene of King Bali and a Bonnard interior of 1891, a combination too thin to support any claim about era or region [3]. These are screen matches on photographs of varnished paintings, not a record of any pigment, and a count this small is closer to noise than to a pattern [3]."
+   "body": "This match appears in 0.02% of the 23,781 paintings in our archive (5 paintings, as photographed); the within-painting lens narrows that to 6 [3]. In our archive it is rarer than 73% of the named colors [3]. Inside a painting it most often plays an accent across its 6 appearances by lightness rank within the painting [3]. The earliest match dates to 1700, 310 years before the name's 2010 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
   }
  ],
  "aside": {
@@ -29,9 +29,9 @@
   "aka": [],
   "siblings": [
    "yellow",
-   "puke-yellow",
-   "piss-yellow",
-   "citrine"
+   "citronelle",
+   "citrine",
+   "sulphur-yellow"
   ],
   "parent": "yellow",
   "children": [],
@@ -39,22 +39,14 @@
   "other_languages": []
  },
  "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 2,
-  "pct": 0.01,
-  "measured": {
-   "lch": [
-    77.8,
-    78.9,
-    100.4
-   ],
-   "nearest": [
-    [
-     "Puke Yellow",
-     2.3
-    ]
-   ]
-  }
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5,
+  "pct_archive": 0.02,
+  "n_within_painting": 6,
+  "pct_within_painting": 0.03,
+  "rank_pct": 27,
+  "name_first_recorded": 2010,
+  "earliest_match_year": 1700
  },
  "notes": [
   {
@@ -106,13 +98,13 @@
  "openers": [
   "Dirty Yellow is a vivid color despite its name, and one of the rarest matches in our whole painting archive."
  ],
- "words": 210,
+ "words": 222,
  "status": "checked",
  "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": [
-   "No concordance hits; written from ColorHub library/graph/archive data only. n_present=2 is too small to support any era or region claim, so field notes stay descriptive only."
+   "field section's presence/rank/decade/painter/country numbers no longer matched data/graph/fieldnotes (stale archive snapshot); replaced with the current fieldnotes facts"
   ]
  }
 }

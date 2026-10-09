@@ -1,0 +1,148 @@
+{
+ "slug": "dark-yvette-violet",
+ "name": "Dark Yvette Violet",
+ "hex": "#474754",
+ "names": [
+  "Dark Yvette Violet"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Dark Yvette Violet is a dark, muted violet-grey, Robert Ridgway's darker step down from his own Yvette Violet, a woman's name no source explains.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A darker step, the same unanswered name",
+   "body": "Ridgway recorded Dark Yvette Violet in 1912, at plate XXXVI, hue 55 double-prime, tone m, directly below [[yvette-violet|Yvette Violet]] on the same card [1]. The ISCC-NBS dictionary filed this darker name again in 1955, block 229, as a dark grayish purple [2]. Neither source explains who Yvette was, the same gap its lighter parent carries [1]. Its nearest named neighbors on file are [[diamin-azo-blue]] and [[dark-madder-violet]], at 4.2 to 4.4 CIEDE2000 units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this dark violet-grey, as photographed, in 299 of 23,781 paintings, 1.26 percent, more common than 64 percent of the named colors we track [4]. It peaks in the 1900s, 34 of 1,674 paintings from that century, 2.7 times the expected rate [4]. The earliest dated match runs to 1099, 813 years before Ridgway's 1912 plate; the archive's early centuries are thin, so this is a floor and not a first [4]. Inside a painting it most often plays a mid-tone, in 32 percent of its 138 strongest matches, and it shares canvases with Black Blue more than chance would predict [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color Yvette Violet, darkened; who Yvette was is undocumented",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXVI; filed again by ISCC-NBS in 1955, block 229",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "diamin-azo-blue",
+   "dark-madder-violet",
+   "graphite-grey",
+   "bluish-black"
+  ],
+  "parent": "yvette-violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 138,
+  "measured": {
+   "lch": [
+    30.6,
+    8.3,
+    291.7
+   ],
+   "nearest_iscc": [
+    "dark grayish purple",
+    6.5
+   ],
+   "nearest": [
+    [
+     "Diamin Azo Blue",
+     4.2
+    ],
+    [
+     "Dark Madder Violet",
+     4.4
+    ],
+    [
+     "Graphite-Grey",
+     4.7
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1099,
+   "years_before_record": 813
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXXVI, hue 55″, tone m",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 229 (\"dark grayish purple\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Who was Yvette, the woman this color and its parent are named for?",
+   "choices": [
+    "Undocumented in our sources",
+    "A French dye-maker",
+    "Queen Victoria's dressmaker",
+    "Ridgway's wife"
+   ],
+   "answer": "Undocumented in our sources",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the ISCC-NBS dictionary describes Dark Yvette Violet's block as a dark grayish purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which color shares canvases with Dark Yvette Violet more than chance would predict?",
+   "choices": [
+    "Black Blue",
+    "Madder Lake",
+    "Prussian Blue",
+    "Viridian"
+   ],
+   "answer": "Black Blue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Who Yvette was is as much a mystery for this darker shade as for its lighter parent.",
+  "It shares canvases with Black Blue far more than chance would predict."
+ ],
+ "words": 203,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

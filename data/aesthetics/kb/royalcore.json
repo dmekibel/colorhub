@@ -1,0 +1,60 @@
+{
+ "id": "royalcore",
+ "name": "Royalcore",
+ "lineage": {
+  "influenced_by": [
+   "historical European court dress",
+   "princesscore",
+   "period drama costuming"
+  ],
+  "influences": [
+   "princesscore"
+  ]
+ },
+ "eras": [
+  "2020s (TikTok/Pinterest)"
+ ],
+ "places": [
+  "Pinterest moodboards",
+  "period-drama fan communities (Bridgerton, The Crown)"
+ ],
+ "garments": [
+  "brocade and velvet",
+  "corsetry",
+  "jeweled accessories",
+  "fur trim",
+  "rich jewel-tone fabric"
+ ],
+ "media": [
+  {
+   "title": "Bridgerton (2020–)",
+   "note": "a major driver of the look's 2020s visibility"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "casual athleisure and streetwear norms, reclaiming formal, structured historical silhouettes as everyday aspiration.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Royaltycore",
+  "decade_of_origin": "Late 2010s",
+  "key_motifs": "Ball gowns, corsets, tiaras, castles, palaces, elaborate tea sets, gold details, pearl jewelry, handwritten letters",
+  "key_colours": "Gold, silver, pastel pink, powder blue, cream, rich jewel tones (royal blue, emerald green, deep red)",
+  "related_aesthetics": "AngelcoreBaroqueCoquetteCottagecoreDark AcademiaEtherealLight AcademiaOld MoneyPrincesscoreRegencycoreRococo",
+  "key_values": "Elegance, romance, opulence, sophistication, escapism, femininity"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Royalcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 62% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

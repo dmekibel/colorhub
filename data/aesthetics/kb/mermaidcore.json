@@ -1,0 +1,58 @@
+{
+ "id": "mermaidcore",
+ "name": "Mermaidcore",
+ "lineage": {
+  "influenced_by": [
+   "seapunk",
+   "fairycore",
+   "y2k mermaid fashion dolls/films"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020–present (TikTok)"
+ ],
+ "places": [
+  "TikTok",
+  "beach/ocean imagery"
+ ],
+ "garments": [
+  "iridescent sequins",
+  "shell jewelry",
+  "flowing fabric that moves like water",
+  "pearl accents",
+  "scale-print textures"
+ ],
+ "media": [
+  {
+   "title": "The Little Mermaid (1989/2023)",
+   "note": "the recurring cultural touchstone, though the aesthetic is broader than any one film"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "land-bound, matte, neutral fashion palettes — mermaidcore is explicitly about iridescence and movement.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Mermaid Style",
+  "decade_of_origin": "2020s",
+  "key_motifs": "Seashells, pearls, fish scales (sequins, paillettes), coral, waves, iridescent textures, crochet/netting, starfish",
+  "key_colours": "Aquamarine, seafoam green, lilac, coral pink, iridescent silvers and blues, jewel tones",
+  "related_aesthetics": "Coconut GirlDark NauticalFantasyNauticalSeapunkSurf Crush",
+  "key_values": "|related_aesthetics=Coconut GirlDark NauticalFantasyNauticalSeapunkSurf Crush"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Mermaidcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 83% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

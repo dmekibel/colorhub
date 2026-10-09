@@ -1,0 +1,112 @@
+{
+ "slug": "pearl-green",
+ "name": "Pearl Green",
+ "hex": "#1B542C",
+ "names": [
+  "Pearl Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pearl Green is a dark, slightly yellowish green from the German RAL paint standard, and it is a near-exact computed match for the archive's Spruce Green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pearl that is actually green",
+   "body": "Our library catalogues this color as RAL 6035, from the RAL industrial color standard first published in Germany in 1927 [1]. It shares the small \"Pearl\" naming family with [[pearl-blackberry|Pearl Blackberry]] and [[pearl-gentian|Pearl Gentian]], a purple and a teal: the three names have nothing in common but a borrowed gem-word, since a real [[gem:pearl|pearl]] carries almost no color at all [1]. The ISCC-NBS system calls its block \"dark yellowish green\"; in Munsell it reads 0.9G 3.1/6.0 [1].\n\nThe nearest named color in our data is [[spruce-green|Spruce green]], at a CIEDE2000 distance of 0.0 — the two names resolve to the same computed swatch [1]. [[spruce|Spruce]] itself sits close too, at 4.3 units, making this a crowded corner of dark conifer greens [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pearl Green appears in 45 of our 23,781 paintings, about 0.19 percent, as photographed; the within-painting lens finds it in 23 of them, rarer than 60 percent of our named colors [2]. It peaks in the 1900s, in 5 of 1,674 paintings, at 2.4 times the expected rate for that century [2]. Inside a painting it most often sits as a shadow, in 39 percent of the 23 paintings where it carries real area [2].\n\nThe earliest match is dated 1790, in a portrait by Charles Peale Polk — 137 years before RAL's 1927 record of the name, as photographed, a floor and not a first, since the archive's early centuries are thin [2]. The gap is a look-alike hue in an aged photograph, not proof that this exact paint existed that early [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; grouped with other RAL \"Pearl\" names",
+   "first_recorded": "1927, RAL 6035",
+   "source": "ColorHub color library: RAL color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "pearl-blackberry",
+   "pearl-gentian",
+   "spruce-green",
+   "spruce"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 45,
+  "measured": {
+   "lch": [
+    31,
+    34,
+    148
+   ],
+   "nearest": [
+    [
+     "Spruce green",
+     0.0
+    ],
+    [
+     "Spruce",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 6035 entry, Munsell notation, ISCC-NBS block and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which archive color is a near-exact computed match for Pearl Green?",
+   "choices": [
+    "Spruce green",
+    "Pig Pink",
+    "Phlox",
+    "Plumbago Grey"
+   ],
+   "answer": "Spruce green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pearl Green most often plays a shadow, rather than a highlight, in our archive's paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Despite the name, Pearl Green has nothing to do with the color of a real pearl."
+ ],
+ "words": 280,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

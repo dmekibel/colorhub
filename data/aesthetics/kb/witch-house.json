@@ -1,0 +1,58 @@
+{
+ "id": "witch-house",
+ "name": "Witch House",
+ "lineage": {
+  "influenced_by": [
+   "witch aesthetics",
+   "drone/noise music",
+   "early internet occult meme culture"
+  ],
+  "influences": [
+   "nu-goth",
+   "weirdcore"
+  ]
+ },
+ "eras": [
+  "2010–2012 (coined and peaked)"
+ ],
+ "places": [
+  "online music blogs (coined by music journalists to describe a loose cluster of acts)"
+ ],
+ "garments": [
+  "unreadable glyph-heavy band logos",
+  "all-black minimal streetwear",
+  "inverted crosses and triangles as graphic motifs"
+ ],
+ "media": [
+  {
+   "title": "Salem (band)",
+   "note": "one of the acts most cited as central to the term's coining"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "legible branding — witch house acts often used intentionally unpronounceable symbol-based names, extending into a visual language built on illegibility and dread.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "Late 2000s",
+  "key_motifs": "Triangles (△), crosses (✝), Unicode symbols, occult imagery, distorted visuals, lo-fi aesthetics",
+  "key_colours": "Black, desaturated colors, dark red, purple, blue",
+  "related_aesthetics": "GothHealth GothHorrorIndustrialNu-GothSeapunkTrillwaveVaporwaveWitchcore",
+  "key_values": "Occultism, surrealism, nocturnal themes, horror, dark atmospheres, DIY ethos"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Witch_House"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 85% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 82% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

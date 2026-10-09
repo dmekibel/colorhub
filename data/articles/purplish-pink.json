@@ -1,0 +1,116 @@
+{
+ "slug": "purplish-pink",
+ "name": "Purplish Pink",
+ "hex": "#CE5DAE",
+ "names": [
+  "Purplish Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Purplish Pink is a deep orchid pink, the standard-spelling twin of [[purpleish-pink]] from the same 2010 xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The standard spelling of a compound",
+   "body": "As with its blue counterpart, the survey kept both \"purplish\" and \"purpleish\" forms over pink, so this name and [[purpleish-pink]] are near-duplicates, 5.3 units apart [1]. No earlier dictionary or dye name is documented for either; 2010 is the only source on file [1]. The ISCC-NBS system would place it among the deep purplish pinks, 7.3 units off [1].\n\nIts nearest named neighbor is [[pale-magenta]], 3.5 units away and almost the same shade [2]. [[mulberry-crayola]] sits close behind, also nearly the same, with [[pinky-purple]] and [[frostbite]] further off and more vivid [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our full-canvas search finds no match in the 23,781-painting archive, but a narrower, within-painting search turns up a single trace, as photographed [3]. That single trace puts it rarer than 86 percent of our named colors by that measure [3]. One painting is too thin a record to draw a pattern from [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: purplish + pink",
+   "first_recorded": "2010 xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-magenta",
+   "mulberry-crayola",
+   "pinky-purple",
+   "frostbite"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "n_within_painting": 1,
+  "rank_percentile": 86,
+  "measured": {
+   "nearest": [
+    [
+     "Pale Magenta",
+     3.5
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "deep purplish pink",
+   "de2000": 7.3
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS 1955 block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Purplish Pink is a near-duplicate of which other library entry?",
+   "choices": [
+    "Purpleish Pink",
+    "Razzmic Berry",
+    "Baby Pink",
+    "Mauve"
+   ],
+   "answer": "Purpleish Pink",
+   "kind": "pick"
+  },
+  {
+   "q": "Among our named colors, how rare is Purplish Pink by its within-painting match?",
+   "choices": [
+    "Rarer than 86 percent of them",
+    "More common than average",
+    "The single most common color",
+    "Exactly at the median"
+   ],
+   "answer": "Rarer than 86 percent of them",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Purplish Pink turns up in only one painting in our whole archive, and only by its narrowest measure."
+ ],
+ "words": 165,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

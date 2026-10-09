@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A crayon name, undocumented beyond that",
-   "body": "Our only sources for this color are Wikipedia, which names it as a Crayola color, and a Japanese traditional-color cross-reference to Umezome (梅染), meaning plum-dyed [1]. Neither explains why \"atomic\" was paired with \"tangerine,\" and no book consulted here dates the pairing [1]. The classification here tags \"Atomic\" as a place or institution word, though that label describes how our system sorts the name rather than any documented origin [1].\n\nThe closest named color on screen is [[light-salmon]], 3.7 units away and read as duller than Atomic Tangerine; [[yellowish-cinnamon]] sits at the same distance, also duller, [[apricot-buff]] at 4.3, duller still, and [[orangeish]] at 4.4, more vivid [3]. A [[gem:coral|coral]] twin in our gems data sits further off, 6.4 units, a loose match at best [3]."
+   "body": "Our only sources for this color are Wikipedia, which names it as a Crayola color, and a Japanese traditional-color cross-reference to Umezome (梅染), meaning plum-dyed [1]. Neither explains why \"atomic\" was paired with \"tangerine,\" and no book consulted here dates the pairing [1]. The classification here tags \"Atomic\" as a place or institution word, though that label describes how our system sorts the name rather than any documented origin [1].\n\nThe closest named color on screen is [[light-salmon]], 3.7 units away and read as duller than Atomic Tangerine; [[yellowish-cinnamon]] sits at the same distance, also duller, [[apricot-buff]] at 4.3, duller still, and [[light-orange]] at 4.7, duller [3]. A [[gem:coral|coral]] twin in our gems data sits further off, 6.4 units, a loose match at best [3]."
   },
   {
    "id": "field",
@@ -31,7 +31,7 @@
    "light-salmon",
    "yellowish-cinnamon",
    "apricot-buff",
-   "orangeish"
+   "light-orange"
   ],
   "parent": null,
   "children": [],

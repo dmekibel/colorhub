@@ -1,0 +1,160 @@
+{
+ "slug": "very-light-brown",
+ "name": "Very Light Brown",
+ "hex": "#D3B683",
+ "names": [
+  "Very Light Brown"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Very Light Brown is a pale, dusty tan that our data files as a Japanese traditional color name, found in about one painting in eight in our archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A steamed-chestnut tan",
+   "body": "Our data traces this hue to the Japanese traditional color list as 蒸栗色 (Mushikuri-iro), literally \"steamed chestnut color\" [1]. The English label \"Very Light Brown\" comes from the xkcd 2010 crowd color survey, filed in our library at the same hex as the Japanese name [1][2]. No earlier dated listing survives in our sources, so 2010 is the first date we can give it [2].\n\nIts nearest look-alikes are [[toupe]] (2.9 units, almost the same), [[sandstone]] (3.1, almost the same) and [[tan]] (3.2, slightly duller) [3]. [[maple]] and [[burlywood]] sit a touch further off, close enough to confuse at a glance [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this tan in 2,874 of 23,781 paintings, about 12.1 percent, as photographed; that puts it among the most common named colors we track, ahead of 95 percent of the rest [4]. It peaks in the 1400s, found in 8.9 percent of the 945 paintings we have from then (84 paintings), 1.1 times the expected rate for that century, and plays a light tone in 55 percent of the paintings that carry it [4]. John Singer Sargent uses it most, in 35 of his 287 works here [4]. It shows up most in Iranian paintings, at 4.1 times the baseline rate, and shares canvases more than chance with [[isabella-color]] and [[blanched-almond]] [4]. The earliest dated match is 799, a floor set by our archive's thin early centuries rather than a true first; that is 1,211 years before the English name's earliest record, so the match is a look-alike hue in an aged photograph, not proof of any dye [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of a steamed chestnut, per the Japanese traditional color list",
+   "first_recorded": "2010 (xkcd crowd survey), undocumented for the Japanese name",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "toupe",
+   "sandstone",
+   "tan",
+   "maple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Mushikuri-iro (蒸栗色), \"steamed chestnut color\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2874,
+  "rank_pct": 95,
+  "century_peak": {
+   "century": "1400s",
+   "lift": 1.1,
+   "n": 84
+  },
+  "role": {
+   "kind": "light",
+   "share": 0.55,
+   "n": 1802
+  },
+  "painters": [
+   [
+    "john-singer-sargent",
+    35,
+    287
+   ]
+  ],
+  "country": {
+   "name": "Iran",
+   "lift": 4.1,
+   "n": 11
+  },
+  "company": [
+   [
+    "isabella-color",
+    2.3
+   ],
+   [
+    "blanched-almond",
+    2.1
+   ]
+  ],
+  "first_seen": {
+   "year": 799,
+   "before_record_years": 1211
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color list entry for Mushikuri-iro",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 crowd color survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub look-alike graph (data/graph/edges-v.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which Japanese traditional color name does our data pair with Very Light Brown?",
+   "choices": [
+    "Mushikuri-iro (steamed chestnut color)",
+    "Aimirucha (seaweed brown)",
+    "Kurobeni (dark red)",
+    "Konjō-iro (deep indigo)"
+   ],
+   "answer": "Mushikuri-iro (steamed chestnut color)",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive's earliest match for Very Light Brown proves the pigment existed in 799.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter uses Very Light Brown most often in our archive?",
+   "choices": [
+    "John Singer Sargent",
+    "Paul Cezanne",
+    "George Dawe",
+    "Harald Giersing"
+   ],
+   "answer": "John Singer Sargent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Very Light Brown turns up in about one painting in eight in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 293
+}

@@ -1,0 +1,133 @@
+{
+ "name": "Pale Gull Grey",
+ "hex": "#C4BFB1",
+ "names": [
+  "Pale Gull Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pale Gull Grey is a warm, slightly tan grey that Ridgway's 1912 color standards placed on three different plates, one of the most reused swatches in that system.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "One swatch, three plates",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* locates this grey on plate LIII (hue 75), plate XLVI (hue 21) and plate XLVI again (hue 17), each a slightly different tone group [1]. The 1955 ISCC-NBS system, which cites Ridgway's plates, then splits the swatch across three of its own blocks, including block 93 [1]. ColorHub's library records seven ISCC-NBS near-duplicates at this hex, among them Shell Grey, Woodash and Paper White, each first dated by Maerz and Paul to between 1385 and 1926 [1].\n\nThe nearest named colors on file are [[french-grey]], [[pearl-grey]] and [[pale-ecru-drab]], at 2.6, [[ash]], [[beige]] and [[tan]] sit in the same warm-neutral family, and a reader who already knows those three has most of what this name adds [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Pale Gull Grey in 2,818 of 23,781 paintings (11.85 percent), as photographed, almost entirely as a highlight rather than a shadow [2]. It is over three times more common in Pahari painting than the archive average, and over four times more common in work by the Chinese painter Shen Zhou [2]. It keeps company with Ecru, Silver and Ash more than chance [2].\n\nThese are screen approximations of aged, varnished canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a gull's pale grey plumage",
+   "first_recorded": "Ridgway, 1912, plate LIII",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Pale Smoke Grey",
+   "Shell Grey",
+   "Woodash"
+  ],
+  "siblings": [
+   "french-grey",
+   "pearl-grey",
+   "pale-ecru-drab",
+   "lilac-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2818,
+  "role": {
+   "highlight": 0.94,
+   "mid": 0.05
+  },
+  "company": [
+   "Ecru",
+   "Silver",
+   "Ash"
+  ],
+  "measured": {
+   "lch": [
+    77,
+    8,
+    95
+   ],
+   "nearest": [
+    [
+     "French Grey",
+     2.6
+    ],
+    [
+     "Pearl Grey",
+     3.6
+    ],
+    [
+     "Pale Ecru-Drab",
+     4.5
+    ],
+    [
+     "Lilac-Grey",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does our library trace the best-documented swatch of Pale Gull Grey to?",
+   "choices": [
+    "Ridgway, 1912, plate LIII",
+    "Werner, 1821",
+    "RAL, 1927",
+    "Crayola, 1903"
+   ],
+   "answer": "Ridgway, 1912, plate LIII",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds Pale Gull Grey mostly acting as a shadow color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ridgway's 1912 standards folded this grey into three different plates."
+ ],
+ "words": 233,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "pale-gull-grey"
+}

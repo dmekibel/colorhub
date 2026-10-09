@@ -1,0 +1,141 @@
+{
+ "slug": "india-spice",
+ "name": "India Spice",
+ "hex": "#AB7446",
+ "names": [
+  "India Spice"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "India Spice is a brownish orange from the Maerz and Paul dictionary of 1930, one of the most common colors in our painting archive despite a name that points to no documented pigment or dye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1930 name, no pigment attached",
+   "body": "Maerz and Paul's 1930 dictionary dates this color's first recording to 1927, on plate 13 B 8, and gives it an alternate name, Toasted Almond, in the same entry [1]. No ISCC-NBS block is recorded for this chip in our library, and neither source says which spice, or which part of India, the name is meant to evoke [1]. In Munsell terms it reads 6.2YR 5.3/6.2, a warm, moderately saturated orange-brown [1].\n\nThe nearest named colors on file are [[cork]] and [[mikado-brown]], at 2.8 and 3.5 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to this color in 1,945 of 23,781 paintings, about 8.18 percent, and in 1,267 by the stricter within-painting measure, more common than 92 percent of the named colors we track [2]. Inside those paintings it most often sits as an accent, 61 percent of the 1,267 [2]. It peaks in paintings from the 1300s, at 2.2 times the expected rate, and is most over-represented in paintings from India itself, at 2.1 times expected, 54 of 721 such paintings, and in Mughal court paintings specifically, at 2.8 times expected [2]. Andre Derain is its most devoted painter here, present in 7 of his 22 works in the archive, 2.9 to 4.2 times the baseline [2].\n\nThe earliest match in our archive dates to the year 1100, with the latest from 1936, 1,133 dated paintings in all, 830 years before the name's own earliest record, 1930 [1], a floor and not a first, since the archive's early centuries are thin [1][2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented in the sources consulted",
+   "first_recorded": "1927, per Maerz and Paul 1930",
+   "source": "ColorHub color library, India Spice entry"
+  },
+  "aka": [
+   "Toasted Almond"
+  ],
+  "siblings": [
+   "cork",
+   "mikado-brown",
+   "colour",
+   "leather"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1945,
+  "n_within": 1267,
+  "more_common_than_pct": 92,
+  "country": "India, 2.1x expected",
+  "movement": "Mughal, 2.8x expected",
+  "century_peak": "1300s, 2.2x expected",
+  "painter": "Andre Derain, 7 of 22 works, 2.9-4.2x baseline",
+  "role": "accent 61%",
+  "measured": {
+   "lch": [
+    53.6,
+    37.8,
+    63.7
+   ],
+   "nearest": [
+    [
+     "Cork",
+     2.8
+    ],
+    [
+     "Mikado Brown",
+     3.5
+    ],
+    [
+     "Colour",
+     3.9
+    ],
+    [
+     "Leather",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930 entries (data/library.json, India Spice)",
+   "loc_kind": null,
+   "url": null,
+   "n": 1
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null,
+   "n": 2
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Maerz and Paul explain which spice India Spice is named for.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, which painter is most associated with India Spice?",
+   "choices": [
+    "Andre Derain",
+    "Rosa Bonheur",
+    "Bronzino",
+    "Jacob Maris"
+   ],
+   "answer": "Andre Derain",
+   "kind": "pick"
+  },
+  {
+   "q": "India Spice is more common than what share of named colors in our archive?",
+   "choices": [
+    "92 percent",
+    "20 percent",
+    "50 percent",
+    "99 percent"
+   ],
+   "answer": "92 percent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "India Spice has no documented pigment or dye behind its name, yet it is one of the most common colors in our archive.",
+  "This brownish orange peaks in Mughal court paintings at nearly three times its expected rate."
+ ],
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 310
+}

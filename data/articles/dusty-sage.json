@@ -1,0 +1,121 @@
+{
+ "slug": "dusty-sage",
+ "name": "Dusty sage",
+ "hex": "#9BA88D",
+ "names": [
+  "Dusty sage"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty sage renders Aoshirotsurubami (青白橡), a traditional Japanese name meaning \"pale oak\", for a greyed, greenish sage.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale-oak compound name",
+   "body": "Our color library gives the source as 青白橡 (Aoshirotsurubami), literally built from ao (blue-green), shiro (white/pale) and tsurubami, the grey-brown dyed with acorns from the oak tree, so \"pale oak\" is the sense the library records [1]. No first-recorded date survives in our sources, so when the name entered use is undocumented here [1].\n\nThe nearest named color in our graph is [[sage]] itself, at a color distance (ΔE2000) of 4.2, a more vivid shade; [[gnaphalium-green]], named for the grey-leaved cudweed plant, sits the same distance away and reads duller and greener [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this sage in 503 of 23,781 paintings, about 2.1 percent, as photographed [3]. It is strongest in Impressionist painting overall, more than five times the archive average, led by Childe Hassam, whose canvases carry it at close to twenty-two times that rate, with Berthe Morisot close behind [3]. By country it is most concentrated in Nepali and Iranian work, and the earliest dated match is a Madonna and Child from 1455, a floor set by what survives and was photographed, not a first sighting [3]. These are photographs of aged, varnished paintings; the figures are a color match, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Aoshirotsurubami (青白橡), \"pale oak\"",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Aoshirotsurubami (青白橡)"
+  ],
+  "siblings": [
+   "sage",
+   "gnaphalium-green",
+   "artichoke-green",
+   "leek-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Aoshirotsurubami (青白橡), \"pale oak\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 503,
+  "rate": 0.0212,
+  "match": {
+   "hex": "#9BA88D",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "painters": [
+   [
+    "Childe Hassam",
+    21.82
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the name behind Dusty sage, Aoshirotsurubami, mean?",
+   "choices": [
+    "Pale oak",
+    "Deep forest",
+    "Morning mist",
+    "Young bamboo"
+   ],
+   "answer": "Pale oak",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusty sage is rare in our archive, appearing in under 1 percent of paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty sage's Japanese name is built from three words meaning roughly \"pale oak-grey\"."
+ ],
+ "words": 214,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; no first-recorded date for the Japanese source name."
+  ]
+ }
+}
