@@ -462,65 +462,10 @@ function home() {
   return lhRoom();
 }
 
-// ---------- Today: one card (PLAN.md decision 5) ----------
-// One color and one painting that holds it: todayPick() (js/today.js, lane B) when it's in. Until then the card
-// falls back to the two dailies as they are (Today's painting, and the color behind Name it in six), which aren't
-// linked, so the title doesn't pretend they are. The color's name never shows before it's named (it's the answer
-// to Name it in six). Two parts, each with its own tick: Look (Today's painting) and Name it in six.
-function lrPick() {
-  try { if (typeof todayPick === "function") { const p = todayPick(today()); if (p && p.color && p.color.h) return p; } } catch (e) {}
-  return null;
-}
-const lrName = n => { const s = typeof lxLower === "function" ? lxLower(n) : String(n); return s.charAt(0).toUpperCase() + s.slice(1); };
-function lrTodayHtml() {
-  const k = today(), p = typeof chToday === "function" ? chToday() : null, now = S.dpNow && S.dpNow.k === k ? S.dpNow : null;
-  const d = S.daily && S.daily[k], dr = d && d.g ? d : null, n = typeof chStreak === "function" ? chStreak() : 0;
-  const pDone = !!p, dDone = typeof dnDone === "function" && dnDone(k);
-  const pSt = p ? `${(p.hits || []).filter(Boolean).length} of ${(p.hits || []).length || 5} seen` : now ? `Round ${now.i + 1} of 5` : "Five ways to look";
-  const dSt = dr ? (dr.done ? (dr.ok ? (dr.hint ? "Named, with choices" : `Named in ${dr.g.length}`) : "Missed today") : `${dr.g.length} ${dr.g.length === 1 ? "guess" : "guesses"} so far`) : d ? "Named" : "Six guesses";
-  // Night Gallery row lead (css/ng.css): a 32 px disc with the part's own icon; done, it turns --good with a tick
-  const tick = (on, ic) => `<span class="lr-tick${on ? " on" : ""}" aria-hidden="true">${icon(on ? "check" : ic, on ? 16 : 18)}</span>`;
-  return `<section class="lr-today">
-    <div class="dl-head"><h3 class="title-3">Today</h3><span class="note">${n > 1 ? `${n}-day streak` : ""}</span>${typeof ssOpen === "function" ? `<button class="icon-btn" data-slideshow="today" aria-label="Slideshow, starting with today's color">${icon("play", 18)}</button>` : ""}</div>
-    <div class="lr-tcard${pDone && dDone ? " done" : ""}">
-      <button class="lr-tc-art" data-dpaint aria-label="Today's painting"><span class="dl-art dl-ph lr-tc-img" id="dlPaintArt"></span><span class="lr-tc-chip" id="dlColorArt"></span></button>
-      <div class="lr-tc-text"><p class="lr-tc-title" id="lrTcTitle">Today's painting <em>and color</em></p><p class="note lr-tc-sub" id="lrTcSub">&nbsp;</p></div>
-      <div class="lr-tc-acts">
-        <button class="lr-tc-act${pDone ? " done" : ""}" data-dpaint>${tick(pDone, "museum")}<b>Look</b><span class="lr-tc-st">${esc(pSt)}</span>${ICON.chev}</button>
-        <button class="lr-tc-act${dDone ? " done" : ""}" data-daily>${tick(dDone, "colors")}<b>Name it in six</b><i class="lr-tc-sw" id="lrTcSw" aria-hidden="true"></i><span class="lr-tc-st" id="dlColorSt">${esc(dSt)}</span>${ICON.chev}</button>
-      </div>
-    </div></section>`;
-}
-function lrTodayWire(el) {
-  el.querySelectorAll("[data-dpaint]").forEach(b => b.onclick = () => challenge());
-  el.querySelectorAll("[data-daily]").forEach(b => b.onclick = () => daily());
-  const tok = SHOW_N, k = today(), $ = s => el.querySelector(s);
-  const paint = (e, c, linked) => {
-    if (SHOW_N !== tok || !el.isConnected) return;
-    const named = typeof dnDone === "function" && dnDone(k);
-    const t = $("#lrTcTitle"), sub = $("#lrTcSub"), art = $("#dlPaintArt"), chip = $("#dlColorArt");
-    if (e && art) { art.classList.remove("dl-ph"); art.innerHTML = `<img src="${esc(dpThumb(e))}" alt="">`; }
-    const sw = $("#lrTcSw"); if (c && sw) { sw.style.background = c.h; sw.classList.add("on"); }
-    // the chip sits on the painting only when the color really is in it (todayPick); the fallback pair isn't linked
-    if (c && chip && linked) {
-      chip.style.setProperty("--c", c.h); chip.classList.add("on");
-      chip.innerHTML = named ? `<span data-ink="${ink(c.h)}">${esc(lrName(c.n))}</span>` : "";
-    }
-    if (!t || !e) return;
-    const pt = `<em>${esc(e.t)}</em>`;
-    t.innerHTML = linked
-      ? (named && c ? `${esc(lrName(c.n))}, in ${pt}` : `Today's color hides in ${pt}`)
-      : (named && c ? `${pt}, and ${esc(lrName(c.n))}` : `${pt}, and a color to name`);
-    if (sub) sub.textContent = [e.a, e.yr].filter(Boolean).join(", ");
-  };
-  const pk = lrPick();
-  const color = pk ? Promise.resolve(pk.color) : loadCoreNames().then(() => typeof dnTarget === "function" ? dnTarget() : null).catch(() => null);
-  Promise.all([dpLoad().catch(() => null), color]).then(([e, c]) => {
-    // linked only when todayPick() named this very painting (its painting may be an id or an object)
-    const pid = pk && pk.painting && (pk.painting.id || pk.painting.node || pk.painting);
-    paint(e, c, !!(pk && e && (!pid || pid === e.id || pid === e.node)));
-  });
-}
+// Today's painting and Name it in six used to repeat here as their own card (lrTodayHtml/lrTodayWire); removed
+// 2026-10-09 (design/SIMPLIFY/PLAN.md §7 R5/R6) -- the identical boards (and their own Slideshow row) already
+// live in Train › Today (js/rooms2.js r2TrainToday/r2WireTrain, which wires the same challenge()/daily() calls).
+// Nothing is lost: Train is one tap from Learn via Places, and `challenge()`/`daily()` are unchanged.
 
 function menu() {
   // design round 2: the Settings sheet in the menu family (js/you.js); the old list below stays as a fallback

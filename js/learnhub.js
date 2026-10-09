@@ -287,11 +287,9 @@ function lhRoom() {
       <p class="note lh-wheel-n">${fresh ? "Every family is open. Tap one to study it." : fy.stage.st ? `<span>${esc(lhStageName(fy.stage.st))} · ${fy.stage.met.toLocaleString("en-US")} of ${fy.stage.all.length.toLocaleString("en-US")} met</span>` : ck ? `Next milestone · <b>${esc(lxStageWord(ck))}</b>` : ""}${st.yours + on && typeof lxWordsView === "function" ? ` <button class="lh-map" data-lh-map>See them on the map ${ICON.arrow}</button>` : ""}</p>
     </section>
     <section class="lh-choose"><div class="dl-head"><h3 class="title-3">Or choose</h3></div><div class="lh-rows">${rows}</div></section>
-    ${lrTodayHtml()}
     ${installHint()}
   `, "home room-learn lh-room", "learn");
   wireInstall(el);
-  lrTodayWire(el);
   const fyGo = () => lhStudy(fy.items, { label: "For you", title: "Study <em>for you</em>", src: "foryou", nDue, why: its => lhWhyLine(its, fy.why, fy.edgeFrom) });
   el.querySelectorAll("[data-study],[data-fy]").forEach(b => b.onclick = fyGo);
   const wheel = el.querySelector(".lh-wheel");

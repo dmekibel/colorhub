@@ -276,7 +276,7 @@ function fvEmptyShelf(back) {
       <div class="fv-bubbles" aria-hidden="true"><i style="--c:#C8553D"></i><i style="--c:#E0A458"></i><i style="--c:#3F7C8C"></i></div>
       <h1 class="title-1">Nothing hearted <em>yet</em></h1>
       <p class="lead">Heart the colors you love. ColorHub ranks them, learns your taste, and finds the painter whose palette is closest to yours.</p>
-      <button class="btn" data-pick>Pick favorites ${ICON.arrow}</button>
+      <button class="btn" data-pick>Keep colors ${ICON.arrow}</button>
       <button class="btn ghost" data-test>Or take the 20-tap taste test</button>
     </div>`, "fv fv-shelf");
   el.querySelector("[data-back]").onclick = back;
@@ -307,7 +307,7 @@ function fvLearn(keys) {
   const fresh = taught.filter(c => !isMine(S.cards[c.id])).slice(0, 12), list = fresh.length ? fresh : taught.slice(0, 12);
   if (!list.length) { toast("None of these are lesson colors yet. Tap one to read about it."); return; }
   // the one Study door (js/learnset.js), not the old swipe deck straight away
-  if (typeof studyColors === "function") return studyColors(list.map(c => ({ h: c.h, n: c.n })), { title: "Your favorites", from: "favs" });
+  if (typeof studyColors === "function") return studyColors(list.map(c => ({ h: c.h, n: c.n })), { title: "Your kept colors", from: "favs" });
   deck("learn", { unit: { colors: list }, cls: "learnit lt-recall", onClose: () => favShelf(),
     onFinish: () => { learnUnit({ id: "favs-" + today(), colors: list }); fvEmit("learn", { why: "favorites", n: list.length }); toast(`${list.length} added to your reviews`); favShelf(); } });
 }
@@ -432,18 +432,18 @@ function fvArtCropStyle(r, ab) {
 const fvArtThumb = r => `<span class="fva-im" style="--c:${esc(r.h || "#3A3630")}">${r.img ? `<img src="${esc(r.img)}" alt="" loading="lazy" decoding="async"${fvArtCropStyle(r, 1)}>` : ""}</span>`;
 
 // ---------- the heart on a painting's page: a quiet button under the picture, never over it ----------
-const fvArtHeart = id => { const on = fvArtHas(id); return `<button class="fva-heart${on ? " on" : ""}" data-fva aria-pressed="${on}" aria-label="${on ? "Remove from your favorites" : "Add to your favorites"}">${on ? FVA_HEART_ON : FVA_HEART}</button>`; };
+const fvArtHeart = id => { const on = fvArtHas(id); return `<button class="fva-heart${on ? " on" : ""}" data-fva aria-pressed="${on}" aria-label="${on ? "Remove from Kept" : "Keep this painting"}">${on ? FVA_HEART_ON : FVA_HEART}</button>`; };
 // fvArtWire(page, i, d, picture): the button toggles; a long press on the picture keeps it (a heart blooms over the
 // picture for a moment and goes), and the tap that ends the press doesn't also sample a color
 function fvArtWire(el, i, d, pic) {
   const btn = el.querySelector("[data-fva]"); if (!btn || !d || !d.id) return;
-  const paint = () => { const on = fvArtHas(d.id); btn.classList.toggle("on", on); btn.setAttribute("aria-pressed", on); btn.setAttribute("aria-label", on ? "Remove from your favorites" : "Add to your favorites"); btn.innerHTML = on ? FVA_HEART_ON : FVA_HEART; };
+  const paint = () => { const on = fvArtHas(d.id); btn.classList.toggle("on", on); btn.setAttribute("aria-pressed", on); btn.setAttribute("aria-label", on ? "Remove from Kept" : "Keep this painting"); btn.innerHTML = on ? FVA_HEART_ON : FVA_HEART; };
   const set = (on, how) => {
     fvArtSet(i, d, on); paint();
     btn.classList.remove("pop"); void btn.offsetWidth; if (on) btn.classList.add("pop");
     buzz(on ? 10 : 4);
     // low: this heart lives in the top bar; the usual toast would land right over it (David, 2026-10-09)
-    if (on) toast(how === "hold" ? "Kept in your favorites" : "In your favorites", { action: "See them", onAction: () => { XSTACK.push("favs"); favShelf(); }, low: true, ms: 3000 });
+    if (on) toast(how === "hold" ? "Kept" : "In Kept", { action: "See them", onAction: () => { XSTACK.push("favs"); favShelf(); }, low: true, ms: 3000 });
   };
   btn.onclick = e => { e.stopPropagation(); set(!fvArtHas(d.id), "tap"); };
   if (!pic) return;
@@ -556,7 +556,7 @@ function fvCatShelf(cat, cats, back) {
   const sub = cat === "all" ? kinds.map(c => `${c.n.toLocaleString()} ${c.t.toLowerCase()}`).join(" · ") : `${one.n.toLocaleString()} kept`;
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><span style="width:44px"></span></header>
-    <h1 class="title-1 fv-title">Your <em>favorites</em></h1>
+    <h1 class="title-1 fv-title">${esc(KEEP.done)}</h1>
     ${fvCatChips(cats, cat)}
     <p class="note fv-sub">${esc(sub)}</p>
     <div class="fv-catbody">${body}</div>
