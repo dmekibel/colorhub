@@ -454,3 +454,21 @@
 .rp-next-btn span{font:400 14px/1 var(--sans);color:var(--soft)}
 .rp-next-btn b{flex:1;font:400 20px/1.2 var(--serif);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rp-next-btn svg{flex:none;width:18px;height:18px;opacity:.7}
+
+/* ============================================================ landscape lane (2026-10-09, CSS only -- the
+   page's markup and js/richpage.js are untouched). David: "the cover becomes the left half, content scrolls
+   on the right". The cover (.cp-hero.cp-hero-full, already a flex column that pins the name/def/actions to its
+   own bottom edge -- app.css .c-hero) goes position:fixed as a true left column, the full viewport height; the
+   rest of the color page (everything after it: Paintings, Family, the ID card, Next, the last line) is left in
+   normal document flow, and the page's own left padding is pushed past the cover's width so that flow becomes
+   the scrolling right side -- no wrapper div, no JS, the existing document scroll does the work. The collapsed
+   "name reappears once you scroll past the cover" bar (.rp-bar) only makes sense when the cover scrolls away,
+   which it no longer does here, so it stays off. ============================================================ */
+@media (orientation:landscape){
+  :root{--cp-cover-w:clamp(280px,42vw,440px)}
+  .screen.cp-page{max-width:none;margin:0;padding-left:calc(var(--cp-cover-w) + var(--g) + var(--left));padding-right:calc(var(--g) + var(--right))}
+  .cp-page .cp-hero.cp-hero-full{position:fixed;left:0;top:0;bottom:0;z-index:2;margin:0;width:calc(var(--cp-cover-w) + var(--left));
+    height:100dvh;min-height:0;border-radius:0;padding:calc(var(--top) + 16px) 18px 22px calc(18px + var(--left))}
+  .cp-page .rp-bar{display:none}
+  /* the focus view (tap the cover to go full screen, js/richpage.js) stays a true inset:0 overlay either way */
+}

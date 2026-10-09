@@ -188,6 +188,14 @@
 /* a color set aside for tomorrow: its segment dims */
 .ls-prog i.aside{opacity:.4}
 @media (max-width:360px){.ls-meet-n{font-size:46px}.ls-mp-half .ls-meet-n{font-size:25px}.ls-meet-line{font-size:16px}}
+/* landscape lane (2026-10-09): the Study card already flexes to whatever height the screen's own flex column
+   gives it (flex:1), but on a ~390-440px-tall rotated phone that's little enough that the name and Next both
+   need a smaller floor than the 200px portrait one, so Next never has to be scrolled to. */
+@media (orientation:landscape){
+  .ls-meet-sw,.ls-mp{min-height:140px}
+  .ls-meet-n{font-size:40px}
+  .ls-mp-half .ls-meet-n{font-size:24px}
+}
 @media (prefers-reduced-motion:reduce){.ls-meet-sw,.ls-meet-name,.ls-meet-line,.ls-mp,.ls-mp-half{animation:none!important}}
 .pr-shot .ls-meet-sw,.pr-shot .ls-meet-name,.pr-shot .ls-meet-line,.pr-shot .ls-mp,.pr-shot .ls-mp-half{animation:none}
 

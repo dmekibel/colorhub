@@ -21,6 +21,10 @@
       this.close();
       if (!opt.keepState) { try { localStorage.clear(); } catch (e) {} }
       const f = document.createElement("iframe");
+      // landscape lane (2026-10-09): opt.size = [w, h] overrides the default 375x812 iframe (wrapper.html's own
+      // stylesheet) for scenarios that need to check a landscape viewport (e.g. 956x440). Every other scenario
+      // passes no size and keeps the usual portrait frame untouched.
+      if (opt.size) { f.style.width = opt.size[0] + "px"; f.style.height = opt.size[1] + "px"; }
       document.body.appendChild(f);
       const w = f.contentWindow;
       this.frame = f; this.w = w;

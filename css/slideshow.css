@@ -78,3 +78,15 @@
 /* the trigger button answers within 100ms even while data is still loading (David-critic fix, 2026-10-09) */
 @keyframes ssLoadPulse{0%,100%{opacity:1}50%{opacity:.5}}
 .ss-loading{animation:ssLoadPulse .9s ease-in-out infinite;pointer-events:none}
+
+/* landscape lane (2026-10-09): already full-bleed and edge-to-edge (the one screen that needed no reflow), but
+   its fixed side padding sat flush against where a rotated phone's notch now is. var(--left)/var(--right)
+   (app.css) add the real inset on top of the existing padding; 0px in every other case. */
+@media (orientation:landscape){
+  .ss-layer{padding-left:calc(28px + var(--left));padding-right:calc(28px + var(--right))}
+  .ss-half:first-child{padding-left:calc(20px + var(--left))}
+  .ss-half:last-child{padding-right:calc(20px + var(--right))}
+  .ss-top{padding-left:calc(16px + var(--left));padding-right:calc(16px + var(--right))}
+  .ss-picker{left:calc(16px + var(--left));right:calc(16px + var(--right))}
+  .ss-hint{right:calc(18px + var(--right))}
+}

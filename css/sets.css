@@ -177,6 +177,15 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
   .sp-sample{font-size:44px}
 }
 
+/* landscape lane (2026-10-09, CSS only -- js/setpage.js untouched): on a short rotated screen, a plate sized
+   off the (now very wide) viewport width would eat almost the whole height before any fact or finding shows.
+   Cap it to the available height instead, same number either way (David's "max-width centered sheet" column
+   already keeps the page a sane width, css/menus2.css/app.css .screen). */
+@media (orientation:landscape){
+  .sp-plate{min-height:min(40dvh,220px)}
+  .sp-sample{font-size:44px}
+}
+
 /* ---------- Pair with…: a non-scrolling head (the anchor + the try-on preview) above a scrolling candidate
    list, js/core.js sheet()'s own supported shape for this ([data-sheet-scroll], already used by js/home.js's
    chooser sheet) rather than position:sticky inside the sheet's position:fixed box, which some engines get
