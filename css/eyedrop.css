@@ -1,0 +1,16 @@
+/* js/eyedrop.js: the shared press-and-drag eyedropper's loupe. */
+.eyd-loupe{position:fixed;z-index:70;width:140px;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none;transform:translate(-50%,-100%);filter:drop-shadow(0 10px 24px rgba(0,0,0,.55))}
+.eyd-loupe-mag{position:relative;width:132px;height:132px;border-radius:50%;overflow:hidden;background:var(--surface-2);box-shadow:0 0 0 3px rgba(236,232,223,.9),0 0 0 4px rgba(0,0,0,.4)}
+.eyd-loupe-cv{display:block;width:132px;height:132px;image-rendering:pixelated}
+.eyd-loupe-cross{position:absolute;left:50%;top:50%;width:15px;height:15px;margin:-7.5px 0 0 -7.5px;border-radius:50%;box-shadow:0 0 0 1.5px #fff,0 0 0 2.5px rgba(0,0,0,.6),inset 0 0 0 1.5px rgba(0,0,0,.6)}
+.eyd-loupe-info{display:flex;align-items:center;gap:8px;max-width:100%;padding:6px 12px;border-radius:999px;background:var(--surface-3);box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
+.eyd-loupe-sw{width:18px;height:18px;border-radius:50%;flex:none;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.22)}
+.eyd-loupe-info span{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.eyd-loupe-name{font:400 14px/1.2 var(--serif);color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eyd-loupe-hex{font:500 12px/1 var(--mono);letter-spacing:0;font-style:normal;color:var(--soft)}
+.eyd-loupe .eyd-sizes{pointer-events:auto;padding:2px;transform:scale(.88)}
+.eyd-loupe .eyd-sizes button{min-height:30px;padding:0 10px;font:500 13px/1 var(--mono);font-style:normal}
+@media (max-width:374px){.eyd-loupe{width:120px}.eyd-loupe-mag,.eyd-loupe-cv{width:112px;height:112px}}
+
+/* the same five-way control, plain (js/you.js Settings, and anywhere else that isn't the floating loupe) */
+.eyd-sizes.seg{flex-wrap:wrap}
