@@ -1910,24 +1910,55 @@ function honeycomb(host, opts = {}) {
     // insetBottom (the target the sheet's own height was just measured to), not vy()/insetCur: the inset eases in
     // over ~300ms (honey.js's own loop() tween), so fitting against the CURRENT (still mid-tween) value would aim
     // for wherever the sheet happened to be a moment ago, not where it's about to settle.
-    // the fisheye's own middle bubble is the thing this lens magnifies most -- fitting the raw lattice POINTS
-    // into the available rect still leaves its drawn RADIUS (roughly base*m0 screen px, near size-independent of
-    // zoom) sticking out past that, so reserve room for it too, on top of the plain margin.
-    const margin = 16 + base * (cfg.m0 || 1) * .6;
+    // David, 2026-10-09: "the original view is now too far away" -- the disk floated at ~45% of the available
+    // width instead of filling it edge to edge. Two things compounded to cause that: (1) the margin reserved for
+    // the fisheye's magnified middle bubble was counted TWICE (once as extra margin scaled by base*m0, again as a
+    // 1.35x inflation of R below) -- now just the plain ~16px margin David asked for, plus one small (1.08x)
+    // allowance for the magnified middle bubble's drawn radius sticking a little past the raw lattice points'
+    // bounding box; and (2) fitting a single circumscribed-circle R (the content's half-diagonal) into the
+    // available rect's own half-diagonal only matches when the content's aspect happens to match the available
+    // rect's -- a lopsided shape (a tall, narrow region into a wide-and-short rect, or back) is under-constrained
+    // on its tighter axis, so one axis can overflow well past the sheet while the other still has room to spare.
+    // Checking width and height as two independent constraints on the SAME z (both must hold, so the smaller --
+    // more zoomed out -- survives) fixes both axes at once; js/honey.js's own zFloor() does the same AND-of-two-
+    // axes trick already (the `fits` helper a little above this function).
+    // David, 2026-10-09: "width ~= screen width minus ~16px margins" -- just the plain margin, no extra safety
+    // factor on top of it. The per-point check below already uses each point's own REAL drawn position (the
+    // same F(r,l)/r radial transform the renderer itself uses, not an approximation of where the magnified
+    // middle bubble might land), so there is nothing left to pad for.
+    const margin = 16, pad = 1;
     const availW = Math.max(40, W - margin * 2), availH = Math.max(40, Hh - insetBottom - margin * 2);
-    // the same shape as zFloor()'s own "finite" formula above (R, the content's own radius, fits inside the
-    // screen's own half-diagonal) -- proven there already -- just with R taken from the layout's actual (x,y)
-    // bounds instead of lay.ext, and the screen half-diagonal from the real available rect instead of the whole
-    // viewport. A first pass here solved width and height as two separate linear constraints and, for the round
-    // (fisheye) lens, landed nowhere near the available space -- Finv's warp doesn't decompose per-axis that
-    // simply. The diagonal/radius form sidesteps that, with a safety factor on R: it matches the available rect's
-    // own aspect only when the content's aspect happens to match it too, and under-constrains the tighter axis
-    // when the two are lopsided (a tall, narrow region into a nearly-square area, say).
-    const R = Math.hypot(halfW, halfH) * 1.35, avail = Math.hypot(availW, availH);
-    const search = ok => { let lo = ABS_ZMIN, hi = ZMAX; if (!ok(hi)) return hi; for (let i = 0; i < 26; i++) { const m = (lo + hi) / 2; if (ok(m)) hi = m; else lo = m; } return hi; };
-    const zt = cfg.lensMode === "round"
-      ? search(z => Finv(avail / 2, { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig }) <= R)
-      : avail / 2 / (base * M * R);
+    // fit mode wants the OPPOSITE search direction from zFloor()'s own `search` a little above (its own
+    // minimum-zoom floor): here we want the LARGEST zoom that still keeps everything in bounds, so the content
+    // fills as much of the available rect as it can without overflowing it.
+    const searchMax = bad => {
+      let lo = ABS_ZMIN, hi = ZMAX;
+      if (!bad(hi)) return hi;
+      if (bad(lo)) return lo;
+      for (let i = 0; i < 26; i++) { const m = (lo + hi) / 2; if (bad(m)) hi = m; else lo = m; }
+      return lo;
+    };
+    let zt;
+    if (cfg.lensMode === "round") {
+      // the real draw transform (buildFlatDrawn's round branch, just above): a world offset (ex,ey) from the
+      // layout's own center draws at screen offset (ex,ey) * F(r,l)/r, r = hypot(ex,ey) -- a radial warp, not a
+      // separable per-axis one. So (unlike fitting a single circumscribed circle, or checking width/height as
+      // independent axes) the true screen extent has to be checked against every point's own direction: a point
+      // near the diagonal needs neither the plain half-width nor the plain half-height, but the warp still
+      // amplifies it by its own (larger) radial distance from center, same as every other point that far out.
+      zt = searchMax(z => {
+        const l = { s: z, m0: cfg.m0, m1: cfg.m1, sig: cfg.sig };
+        for (const p of lay.pts) {
+          const ex = p.x - cx, ey = p.y - cy, r = Math.hypot(ex, ey);
+          if (!r) continue;
+          const k = F(r, l) / r;
+          if (Math.abs(ex * k) * pad > availW / 2 || Math.abs(ey * k) * pad > availH / 2) return true;
+        }
+        return false;
+      });
+    } else {
+      zt = Math.min(availW / 2 / (base * M * halfW * pad), availH / 2 / (base * M * halfH * pad));
+    }
     return { cx, cy, z: clamp(zt, ABS_ZMIN, ZMAX) };
   };
   const flyToFit = (animate = true) => {
