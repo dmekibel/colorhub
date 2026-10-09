@@ -3786,3 +3786,78 @@ scenario("web", "switching the edge-type filter animates nodes to a different pr
   }
   t.expect(moved > before.length * 0.3, `only ${moved}/${before.length} sampled nodes moved to the new layout`);
 });
+
+// ================================================================== GESTURE-FOLLOWING BACK (js/trail.js tlgWire)
+// David, 2026-10-09: "if I swipe down I don't need to see it shrink back into its original bubble, I just need to
+// see the page swiped away downwards; if I swipe back, the zoom-out animation doesn't make sense in that context."
+const TLGT = {
+  async openFromMap(t) {
+    TRL.placed(t);
+    await t.open("#/home", { settle: 600, keepState: true });
+    await t.waitFor(".hm canvas", 12000, "the map");
+    await t.sleep(300);
+    t.ev("hmOpenColor(BYNAME.get('cobalt'))");
+    await TRL.atHash(t, /^#\/color\/cobalt/, "the cobalt page");
+    await t.sleep(500);   // tlgWire only arms once the page has rested a moment (TLG_BORN) -- same as a real swipe
+    return t.$("#app .screen");
+  },
+  // force the "continue off-screen" WAAPI animation to the end (the virtual clock doesn't drive it on its own --
+  // the same workaround the "mxLand never stalls" scenario above uses for js/mapxfer.js's own animations)
+  async forceCommit(t) {
+    await t.waitFor(() => t.ev("typeof TLG_ANIM !== 'undefined' && !!TLG_ANIM"), 3000, "the gesture's own animation to start");
+    t.ev("(() => { if (typeof TLG_ANIM !== 'undefined' && TLG_ANIM) TLG_ANIM.finish(); })()");
+  },
+};
+scenario("trail", "pull-down on a color page opened from the map swipes it away (no shrink-to-bubble) and lands on the map", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect();
+  // a slow, generous pull past the threshold -- distance alone should carry it, not velocity
+  await t.drag(scr, [{ x: r.left + r.width / 2, y: r.top + 80 }, { x: r.left + r.width / 2, y: r.top + 90 }, { x: r.left + r.width / 2, y: r.top + 260 }], { ms: 40, wait: 0 });
+  t.expect(t.$(".tlg-floor"), "no destination floor appeared under the drag");
+  t.expect(t.$(".tlg-floor-img"), "the map's own snapshot didn't back the floor (going straight back to the map)");
+  await TLGT.forceCommit(t);
+  t.expect(!t.$(".mx") && !t.$(".mx-floor"), "the old shrink-to-bubble animation ran on a swiped-away page");
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "back on the map after the pull");
+  await t.sleep(150);
+  t.expect(!t.$(".tlg-floor"), "the destination floor was left behind");
+  t.expect(t.ev("typeof TLG_SKIP !== 'undefined' && !TLG_SKIP"), "TLG_SKIP was left on");
+  MXT.corners(t, "after a pull-down");
+});
+scenario("trail", "a short, slow pull-down springs the page back without navigating", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + 80;
+  await t.drag(scr, [{ x: cx, y: cy }, { x: cx, y: cy + 12 }, { x: cx, y: cy + 40 }], { ms: 90, wait: 400 });
+  t.expect(t.$(".cp-page") && /\/color\/cobalt/.test(TRL.hash(t)), "a short pull navigated away instead of springing back");
+  await t.waitFor(() => !t.$(".tlg-floor"), 2000, "the floor to clear after springing back");
+  t.expect(scr.style.transform === "" || scr.style.transform === "none" || !scr.isConnected, "the page didn't settle back to its own place");
+});
+scenario("trail", "a left-edge swipe slides the page off to the right (no shrink) and lands on the map", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), y = r.top + r.height * .5;
+  await t.drag(scr, [{ x: 8, y }, { x: 20, y }, { x: 160, y }], { ms: 35, wait: 0 });
+  t.expect(t.$(".tlg-floor"), "no destination floor appeared under the edge-swipe");
+  await TLGT.forceCommit(t);
+  t.expect(!t.$(".mx") && !t.$(".mx-floor"), "the old shrink-to-bubble animation ran on an edge-swiped page");
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "back on the map after the edge-swipe");
+  await t.sleep(150);
+  MXT.corners(t, "after a left-edge swipe");
+});
+scenario("trail", "a fast flick past a short distance still commits (velocity, not just distance)", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + 80;
+  // well under the 110px distance threshold, but fast (big steps, short ms)
+  await t.drag(scr, [{ x: cx, y: cy }, { x: cx, y: cy + 20 }, { x: cx, y: cy + 70 }], { ms: 8, wait: 0 });
+  await TLGT.forceCommit(t);
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "a fast short flick still reached the map");
+});
+scenario("trail", "popstate (the native iOS/browser back swipe) swaps straight to the map with no shrink and no crossfade", async t => {
+  await TLGT.openFromMap(t);
+  t.expect(!t.$(".mx") && !t.$(".tlg-floor"), "something was already animating before Back");
+  t.w.history.back();
+  // if mxLeave ran (HIST_POP not honored), .mx/.mx-floor would appear for the shrink; poll fast enough to catch it
+  let sawMx = false;
+  for (let i = 0; i < 20; i++) { if (t.$(".mx") || t.$(".mx-floor")) { sawMx = true; break; } await t.sleep(20); }
+  t.expect(!sawMx, "the native back swipe still played the bubble-shrink animation");
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "the map after the native back swipe");
+  MXT.corners(t, "after a native back swipe");
+});

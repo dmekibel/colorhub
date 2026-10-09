@@ -485,6 +485,9 @@ const SCROLL_BY_HASH = new Map();
 function show(html, cls = "", tab = null) {
   const leavingHash = ROUTE_NOW, leavingY = scrollY;
   const backNav = BACK_RENDER; BACK_RENDER = false;
+  // the exit already played its own animation -- a native back swipe, or js/trail.js's own gesture-following
+  // pull-down/edge-swipe (TLG_SKIP) -- so this landing is a plain, instant swap: no crossfade, no entrance.
+  const skipAnim = (typeof HIST_POP !== "undefined" && HIST_POP) || (typeof TLG_SKIP !== "undefined" && TLG_SKIP);
   timers.forEach(clearTimeout); timers = []; onKey = null;
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
   // (.flyer / .hc-morph: a bubble-to-page shape belongs to the screen that asked for it; one left mid-flight or
@@ -499,7 +502,7 @@ function show(html, cls = "", tab = null) {
   // the old screen fades out underneath the new one (and, combined with growFrom's clip-path on the new
   // content below, is also what stands in for "the honeycomb dims" during a Room's grow-in: DESIGN-SYSTEM §8)
   const old = app.firstElementChild;
-  if (old && !reduceMotion) {
+  if (old && !reduceMotion && !skipAnim) {
     const ghost = document.createElement("div"), y = scrollY;
     ghost.className = "fade-ghost"; ghost.style.top = -y + "px";
     ghost.appendChild(old);
@@ -521,6 +524,7 @@ function show(html, cls = "", tab = null) {
   else window.scrollTo(0, 0);
   document.body.classList.remove("scrolled");
   const el = app.querySelector(".screen");
+  if (skipAnim) el.style.animation = "none";   // no entrance either: the gesture (or the native swipe) already moved it
   if (typeof mxOnShow === "function") mxOnShow(el);   // a bubble growing into this page, or a page shrinking back into the map (js/mapxfer.js)
   const mb = tab && el.querySelector("[data-menu]"); if (mb) mb.onclick = () => menu();
   if (typeof tlNote === "function") tlNote(el, tab, backNav);   // the one trail, the map glyph, the pull-down (js/trail.js)
