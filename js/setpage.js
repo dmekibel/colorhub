@@ -289,7 +289,10 @@ function spPage(hexes, o = {}) {
   addEventListener("scroll", onScroll, { passive: true }); onScroll();
   cleanup.push(() => removeEventListener("scroll", onScroll));
   const $ = s => el.querySelector(s), my = ++SP_SEQ, live = () => my === SP_SEQ && el.isConnected;
-  const acts = typeof csActions === "function" ? csActions(set, { only: ["learn", "keep", "share"] }) : document.createElement("div");
+  // "map" here is csActions' shared "See its colors" door (js/colorset.js, js/palettehive.js): this set's own
+  // colors in their own honeycomb, sized by share -- David, 2026-10-09, didn't want a pair/set lit among all
+  // the map's other names, so this is new, not a replacement of anything setpage.js had before.
+  const acts = typeof csActions === "function" ? csActions(set, { only: ["learn", "map", "keep", "share"] }) : document.createElement("div");
   if (k < 8) { const add = document.createElement("button"); add.className = "cs-act"; add.dataset.spAdd = ""; add.innerHTML = `${sv('<path d="M12 5v14M5 12h14"/>', 20, 1.8)}<span>Add a color</span>`; acts.appendChild(add); acts.style.setProperty("--n", (+acts.dataset.n || 3) + 1); }
   $("[data-acts]").replaceChildren(acts);
   try { document.title = `${spTitle(hexes)} · ColorHub`; } catch (e) {}

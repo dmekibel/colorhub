@@ -130,7 +130,11 @@ function svPool(data, measure, base) {
 const svPct = sh => sh >= .095 ? Math.round(sh * 100) + "%" : sh >= .0095 ? (sh * 100).toFixed(1).replace(/\.0$/, "") + "%" : "<1%";
 
 // ---------- the sheet ----------
-const SV_ARR = [["map", "Map"], ["strip", "Strip"], ["gridhue", "Grid"], ["ramp", "Ramp"], ["wheel", "Wheel"]];
+// "map" last and relabeled (David, 2026-10-09): csActions' own "See its colors" (js/colorset.js, wired below in
+// wireActs) is the real door now -- every subject's measured colors in their own honeycomb, sized by share. The
+// big shared map still has a use here (previewing where a subject's colors sit among every name while you keep
+// browsing its filters), so it stays, just demoted to the one arrangement chip that still means it literally.
+const SV_ARR = [["strip", "Strip"], ["gridhue", "Grid"], ["ramp", "Ramp"], ["wheel", "Wheel"], ["map", "On the big map"]];
 const SV_POSSESSIVE = { painter: true, look: true };   // "Monet's 20…" reads right; "1890s's 8…" does not -- those get "1890s · 8…"
 function svSubline(data, shown, f) {
   const parts = [];

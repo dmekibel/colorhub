@@ -1393,13 +1393,12 @@ scenario("train", "every entry on the Train menu opens something (nothing locked
   t.notes.push(`${n} Train entries and ${d} drills opened`);
 });
 
-scenario("train", "Odd one out: tap tiles through a whole round", async t => {
-  // js/games: the Train shelf opens the Odd one out map (a played save), then level 1
-  await t.open("#shot=gx:home", { settle: 600 });
-  const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
-  await t.click(st, { wait: 600 });
-  const play = await t.waitFor("[data-play], .oo-board", 6000, "the map or level 1");
-  if (play.matches("[data-play]")) await t.click(play, { wait: 600 });
+// David, 2026-10-09 ("spot the difference seems too complex"): one tap from the Train shelf lands on the board
+// (For you, adaptive) -- no setup screen first, for a first-timer or a returning player. The old Classic/Shuffle/
+// Choose/names-on-tiles/session-length setup now lives behind a small Customize icon (js/games/oo-ui.js
+// ooCustomizeSheet), never gating round one. The play screen itself shows only the board, one instruction and a
+// quiet progress indicator; the end-of-session screen is one number, one sentence, then Details.
+const ooTapRound = async t => {
   await t.waitFor(".oo-board .oo-t", 6000, "the board");
   t.expect(t.$$(".oo-board .oo-t").length >= 9, `${t.$$(".oo-board .oo-t").length} tiles`);
   const first = t.$("#oostage").innerHTML;
@@ -1412,7 +1411,41 @@ scenario("train", "Odd one out: tap tiles through a whole round", async t => {
   }
   await t.waitFor(".result", 6000, "the station result screen");
   t.expect(t.$(".result").innerText.length > 40, "the result screen is empty");
-  t.notes.push(`${taps} taps to the result`);
+  return taps;
+};
+scenario("train", "Odd one out: one tap from the shelf to the board, then a whole round", async t => {
+  await t.open("#shot=gx:home", { settle: 600 });
+  const st = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf");
+  await t.click(st, { wait: 700 });
+  t.expect(!t.$("[data-play]"), "a first tap on the shelf should land on the board, not a setup screen");
+  const taps = await ooTapRound(t);
+  t.notes.push(`${taps} taps to the result (first-timer, direct entry)`);
+  // a returning player: back to Train, tap the shelf again -- still straight to the board, not the ladder/map
+  await t.click("[data-map]", { wait: 500 });
+  await t.waitFor(".oo-map [data-close]", 6000, "the ladder map");
+  await t.click(".oo-map [data-close]", { wait: 500 });
+  const st2 = await t.waitFor("[data-oo-map]", 6000, "the Odd one out shelf again");
+  await t.click(st2, { wait: 700 });
+  t.expect(!t.$("[data-play]"), "a returning player should also land on the board in one tap");
+  await t.waitFor(".oo-board .oo-t", 6000, "the board, second time");
+});
+
+scenario("train", "Odd one out: Customize is one sheet behind a small icon, not shown before round one", async t => {
+  await t.open("#shot=gx:oo:lv-1", { settle: 600 });
+  await t.waitFor(".oo-board .oo-t", 6000, "level 1's board");
+  t.expect(!t.$(".oo-pk, .oo-sl"), "setup controls should not sit on the play screen itself");
+  const tune = await t.waitFor("[data-tune]", 4000, "the Customize icon");
+  await t.click(tune, { wait: 500 });
+  await t.waitFor(".cx-sh-head h3", 4000, "the Customize sheet");
+  t.expect(/customize/i.test(t.text(".cx-sh-head h3")), "the sheet should say Customize");
+  t.expect(t.$$("[data-len]").length === 3, "session length should offer Short, Standard and Long");
+  await t.click('[data-len="15"]', { wait: 400 });
+  t.expect(t.$('[data-len="15"]').classList.contains("on"), "Short did not get selected");
+  await t.click('[data-names="off"]', { wait: 400 });
+  t.expect(t.$('[data-names="off"]').classList.contains("on"), "Names off did not get selected");
+  await t.click("[data-done]", { wait: 500 });
+  t.expect(!t.$(".cx-sh-head h3"), "the sheet should close");
+  await t.waitFor(".oo-board .oo-t", 4000, "the board is still there after closing Customize");
 });
 
 // Gradients (js/games/hue-*.js): the shelf opens the teaching board; swap the two tiles with real taps, then play
@@ -2766,7 +2799,9 @@ scenario("favs", "shelf: top five, a plate opens its page, Back returns, a row h
   t.ev("window.__card = false; window.tzShareCanvas = d => { const c = document.createElement('canvas'); c.width = 1080; c.height = 1350; d(c.getContext('2d')); window.__card = true; }");
   await t.click("[data-share]", { wait: 300 });
   t.expect(t.ev("window.__card"), "the My colors card didn't draw");
-  // the verbs: Learn opens a deck (and Close comes back), Keep saves a palette, the primary opens a ranking screen, On the map opens Home
+  // the verbs: Learn opens a deck (and Close comes back), Keep saves a palette, the primary opens a ranking
+  // screen, See its colors opens your own colors' honeycomb (js/palettehive.js, not Home lit up among every
+  // other name -- David, 2026-10-09, the same fix as every other palette/painting door)
   await t.click("[data-cs=learn]", { wait: 600 });
   // Learn now opens Practice's quick sheet (prInstantDeck) first: start it, then a deck or a Practice run appears
   await t.waitFor(".screen.deck, [data-qgo], .screen.pr-play", 6000, "the Learn sheet or deck");
@@ -2779,7 +2814,8 @@ scenario("favs", "shelf: top five, a plate opens its page, Back returns, a row h
   await t.click("[data-close]", { wait: 500 });
   await t.waitFor(".fv-shelf", 6000, "the shelf after closing the ranking");
   await t.click("[data-cs=map]", { wait: 900 });
-  await t.waitFor(".hm canvas", 15000, "Home with your colors lit");
+  await t.waitFor(".ph-sheet", 15000, "your colors' own honeycomb");
+  t.expect(t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, "the honeycomb drew no cells");
 });
 
 scenario("favs", "best of three: keep one, drop one, a new set arrives; Undo takes it back", async t => {
@@ -2907,15 +2943,46 @@ scenario("map", "search 2.0: a hex and a modifier fly; a decade, a painter and a
   h = await ask("between teal and navy");
   await t.waitFor(() => /Between Teal and Navy/i.test(t.text(".cs-hl-pill")), 15000, "the road constellation");
 });
-scenario("map", "On the map: a painting page lights its colors on Home; #/map/gallery/<i> does the same", async t => {
-  await H.homeReady(t); t.ev("openRoute('#/painting/starry-night')");   // shot mode: placed, so Home is the floor
-  const b = await t.waitFor("[data-cs=map]", 12000, "the On the map button on a painting page");
-  await t.click(b, { force: true, wait: 900 });
-  await t.waitFor(() => /as photographed/.test(t.text(".cs-hl-pill")), 15000, "the painting's constellation on Home");
-  t.notes.push(t.text(".cs-hl-pill"));
+// David, 2026-10-09: "tapping a color palette or a painting and showing it on the color map is a useless
+// feature -- it doesn't give you anything." csActions' "map" door (js/colorset.js) now opens the painting's OWN
+// honeycomb (js/palettehive.js) instead of lighting it among every other name on Home. #/map/gallery/<i> is a
+// different, untouched feature (js/home.js hmMapRoute, "Similar paintings on the map") and still lights a
+// museum painting directly on the big shared map -- the second half of this scenario guards that it still does.
+scenario("map", "From a painting, See its colors opens its own honeycomb (not the big map); the address route still lights the big map directly", async t => {
+  await H.homeReady(t); t.ev(`galleryPage(14423, true)`);   // Mona Lisa -- galleryPage() itself pushes "g:14423" (the real trail Back needs)
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
+  const b = await t.waitFor("[data-cs=map]", 12000, "the See its colors button on a painting page");
+  t.expect(/see its colors/i.test(t.text(b)), `the map action isn't labeled "See its colors": "${t.text(b)}"`);
+  await t.click(b, { force: true, wait: 500 });
+  await t.waitFor(".ph-sheet", 12000, "the palette honeycomb sheet");
+  await t.waitFor(() => t.ev("window.PH_DEBUG && PH_DEBUG.count()") > 0, 8000, "the honeycomb to lay out its cells");
+  let shown = +t.text("[data-ph-n]"), cells = t.ev("PH_DEBUG.count()");
+  t.expect(shown > 0 && shown === cells, `the slider says ${shown} but the honeycomb drew ${cells} cells`);
+  // slide the count: the honeycomb must recompute to match, never just truncate what it already had. Go down
+  // when there's room to (every painting's pool holds more than PH_MIN_N), otherwise up to the real ceiling --
+  // either way read from PH_DEBUG.max(), never a guessed number that the slider might just clamp away.
+  const max = t.ev("PH_DEBUG.max()"), target = shown > 3 ? shown - 2 : Math.min(max, shown + 2);
+  t.expect(target !== shown, `no room to move the slider off ${shown} (max ${max})`);
+  t.ev(`document.querySelector('.ph-count-l input')._countTo(${target})`);
+  await t.waitFor(() => +t.text("[data-ph-n]") === target, 6000, `the count to reach ${target} after sliding`);
+  shown = +t.text("[data-ph-n]");
+  await t.waitFor(() => t.ev("PH_DEBUG.count()") === shown, 6000, "the honeycomb to redraw at the new count");
+  cells = t.ev("PH_DEBUG.count()");
+  t.expect(shown === cells, `after sliding, the slider says ${shown} but the honeycomb drew ${cells} cells`);
+  // tap the first cell -> its color page, in one tap, no sheet in between
+  const hex = t.ev("PH_DEBUG.hexAt(0)"), at = t.ev(`PH_DEBUG.screenOf(${JSON.stringify(hex)})`);
+  t.expect(at, "couldn't find the first cell's screen position");
+  await t.tapAt(t.$(".ph-cv"), at.x, at.y, { wait: 500 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping a cell");
+  t.expect(!t.$(".ph-sheet"), "the honeycomb sheet is still open after tapping a cell");
+  // Back returns to the painting, not to the honeycomb
+  await H.back(t);
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 8000, "Back to return to the painting page");
+
+  // #/map/gallery/<i>: a different door (js/home.js hmMapRoute), untouched -- still lights a museum painting
+  // directly on the big shared map, with its own How-many slider over the real measured pool
   await H.homeReady(t); t.ev("openRoute('#/map/gallery/3')");
   await t.waitFor(() => /named colou?rs? · as photographed/.test(t.text(".cs-hl-pill")), 20000, "a museum painting's constellation from its address");
-  // How many: the measured pool, not a fixed six; the lit set and the named chips follow the slider
   const nIn = t.$$(".cs-hl-n input").pop();
   t.expect(nIn && +nIn.max > 6, "a museum painting on the map has no How many slider over its pool");
   nIn._countTo(12);
@@ -3242,28 +3309,75 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
   t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
 });
 // David, relayed 2026-10-09 ("usually tapping a color should open the color, not the segmentation of it"):
-// a strip tile now opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md); "Where this
-// sits on the painting" moved to the small glyph in its corner, a second, explicit gesture.
-scenario("paintings", "a painting's strip tile opens its color page in one tap; the Where glyph locates it instead", async t => {
+// a strip tile opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md).
+// David, 2026-10-09 again ("the palette strip looks weird now because there's a symbol on the colors... it
+// looked better when the swatches had no symbols on top"): the corner "Where" glyph is gone from the strip
+// entirely. "Where this sits on the painting" is now a long-press on a strip chip, and an explicit row action
+// (the same [data-locate] glyph, just in the expanded list below the strip) -- never a symbol sitting on a chip.
+// NOTE: a timed (480ms setTimeout-driven) long-press is not simulated here -- tools/smoke/scenarios.js's own
+// pre-existing "sets / long-press a swatch adds it to the tray" scenario (same js/settray.js SX_HOLD mechanism
+// this chip opts out of) is independently flaky under Chrome's --virtual-time-budget for the same reason: a
+// real-time setTimeout inside the iframe racing the harness's own outer-page timing doesn't advance reliably
+// under virtual time. Manually verified instead (Browser pane, real clock, 2026-10-09): press-hold-release on
+// a strip chip locates it (dims the painting, shows the caption, the trailing click is swallowed -- still on
+// the painting page); a second long-press clears it; a plain short tap is unaffected and still opens the
+// color page. This scenario covers everything that IS reliable under virtual time: the glyph is gone from the
+// strip, a plain tap still opens the page, and the row action (an ordinary click, no timer) does the same job.
+scenario("paintings", "a painting's strip tile opens its color page in one tap, with no Where glyph on the chip; the expanded list's row action locates it", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   t.expect(!t.$("[data-glwhere]"), "the old On the painting switch is still in the DOM");
   await t.waitFor("[data-glswatches] [data-glj]", 15000, "a palette swatch tile");
   const tileAt0 = () => t.$('[data-glswatches] [data-glj="0"]');
   t.expect(tileAt0().hasAttribute("data-swatch"), "the strip chip isn't a [data-swatch] (one tap should open its page)");
+  t.expect(!tileAt0().querySelector("[data-locate], .pal-where"), "the strip chip still has a Where glyph on it");
+  t.expect(t.$("[data-glswatches]").hasAttribute("data-no-hold"), "the strip doesn't opt out of settray.js's app-wide long-press (needed so its own long-press can locate instead)");
   await t.click(tileAt0(), { force: true, wait: 600 });
   await t.waitFor(".cp-page", 8000, "the color page after tapping the chip body");
   await t.click(TRL.screenBack(t), { wait: 600 });
-  await t.waitFor("[data-glswatches] [data-glj]", 10000, "the painting page again after Back");
-  const whereAt0 = () => t.$('[data-glswatches] [data-glj="0"] [data-locate]');
-  t.expect(whereAt0(), "no Where glyph on the chip");
-  await t.click(whereAt0(), { force: true, wait: 400 });
-  t.expect(tileAt0().classList.contains("loc"), "the chip doesn't show as located after tapping its Where glyph");
-  await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims around the located color");
+  // the expanded list's own row action: an ordinary click, no timing involved, so it's reliable here
+  await t.waitFor("[data-glrows] [data-glj]", 10000, "the expanded palette rows");
+  const rowWhereAt0 = () => t.$('[data-glrows] [data-glj="0"] [data-locate]');
+  t.expect(rowWhereAt0(), "no Where row-action on the expanded list");
+  await t.click(rowWhereAt0(), { force: true, wait: 400 });
+  t.expect(t.$('[data-glrows] [data-glj="0"]').classList.contains("loc"), "the row doesn't show as located after tapping its Where action");
+  await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims from the row action");
   const cap = t.$("[data-gllocate]");
   t.expect(cap && !cap.hidden && /% of the canvas/.test(t.text(cap)), `the locate caption is missing or wrong: "${cap && t.text(cap)}"`);
-  await t.click(whereAt0(), { force: true, wait: 400 });
-  t.expect(!tileAt0().classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping Where again didn't clear the locate state");
+  await t.click(rowWhereAt0(), { force: true, wait: 400 });
+  t.expect(!t.$('[data-glrows] [data-glj="0"]').classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping the row action again didn't clear the locate state");
   t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "the dim canvas is still on after clearing locate");
+});
+// David, 2026-10-09: "the color palette slider doesn't show more than 11 colors." Root cause: a flex item's
+// default min-width is auto (its own content size, here padding + the percent label's text -- not 0), so the
+// strip's chips stopped shrinking once each one needed ~35-40px, and the rest silently overflowed the row's own
+// overflow:hidden. css/gallery.css now floors each chip at 14px and makes it its own container so its percent
+// label (data-glj's <span>) drops out on its own once the chip is too narrow to show it legibly, instead of the
+// chip itself vanishing. Checked on a painting with a pool bigger than 11 (gallery/777, Diverse mode, max 18
+// here) at five slider positions, at both 440px and 375px: the number of VISIBLE (non-zero-width) chips always
+// equals the slider's value, and the expanded list below always shows every one regardless.
+scenario("paintings", "the palette strip shows every chip the slider asks for, not just the first ~11", async t => {
+  for (const w of [440, 375]) {
+    await t.open("#/gallery/777", { settle: 800, size: [w, 956] });
+    const diverse = await t.waitFor(() => t.$$("[data-glo]").find(b => b.dataset.glo === "diverse"), 15000, "the Diverse mode chip");
+    await t.click(diverse, { force: true, wait: 400 });
+    const slide = await t.waitFor("[data-glk]", 8000, "the How-many slider");
+    t.expect(typeof slide._countTo === "function", "the slider isn't a countify() control");
+    const max = +slide.max;
+    t.expect(max >= 12, `this painting's Diverse pool is only ${max} colors -- too small to exercise the >11 case at ${w}px`);
+    for (const k of [2, 8, 12, 16, max]) {
+      if (k > max) continue;
+      slide._countTo(k);
+      await t.sleep(250);
+      const visible = t.$$("[data-glswatches] [data-glj]").filter(c => c.getBoundingClientRect().width > 0);
+      t.expect(visible.length === k, `at ${w}px, ${k} colors asked for but ${visible.length} chips are actually visible`);
+      const rows = t.$$("[data-glrows] [data-glj]");
+      t.expect(rows.length === k, `at ${w}px, the expanded list shows ${rows.length} rows, not all ${k}`);
+      // no chip is clipped off the right edge of the strip
+      const stripR = t.$("[data-glswatches]").getBoundingClientRect();
+      const offscreen = visible.filter(c => c.getBoundingClientRect().right > stripR.right + 1);
+      t.expect(!offscreen.length, `at ${w}px with ${k} colors, ${offscreen.length} chip(s) run past the strip's own right edge`);
+    }
+  }
 });
 // The Analysis section's "Learn this painting" button (js/artwiki.js awAnalysis) was guarded by
 // `typeof paintingLesson === "function"`, a function that was never defined anywhere, so the button never
@@ -3488,6 +3602,89 @@ scenario("paintings", "Look closer's Region tool: tap lights a region and opens 
   if (slide && !t.$("[data-rgslide]").hidden) { slide._countTo(2); await t.sleep(300); t.expect(t.$$("[data-rgswatches] [data-swatch]").length === 2, "the region slider didn't redraw its palette live"); }
   await t.click(t.$("[data-rgswatches] [data-swatch]"), { force: true, wait: 600 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping a region-palette chip");
+});
+// David, 2026-10-09: "it gets janky -- I can pan around and it gets stuck in weird poses... I should only be
+// able to zoom in, not zoom out too far". js/paintzoom.js's gesture rewrite: Z is a real scale against the
+// image's own natural pixels, hard-clamped to [fitZ, fitZ*8] every frame (no rubber band on zoom -- David's ask
+// was literal), and pan is clamped to the overflow past the stage on each axis, with a BOUNDED rubber-band
+// (asymptotes to 140px past the clamp, see js/paintzoom.js's rubber()) during a live drag so it can never run
+// away. Same pointer hygiene as the map's own fuzz test above: 1-3 simulated fingers going down, moving,
+// lifting, cancelling, or vanishing with no up/cancel at all. Checks the gesture's own state (scrim._glzQA, the
+// same QA-accessor pattern as HM_CTRL._qaState) after every step, not rendered pixels -- Z and P are asserted
+// to stay within those bounds at every single step, which is true by construction unless something let a
+// NaN/Infinity through or skipped a clamp.
+scenario("paintings", "Look closer: random gesture fuzz (pinch/pan/lost fingers) never zooms below fit or sends the image off-screen", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  await t.waitFor(".glz-scrim.in", 4000, "the Look closer overlay");
+  const result = t.ev(`(() => {
+    const scrim = document.querySelector(".glz-scrim"), stage = document.querySelector(".glz-stage");
+    if (!scrim || !scrim._glzQA || !stage) return JSON.stringify({ error: "no scrim/QA" });
+    const QA = scrim._glzQA;
+    const mk = (type, id, x, y) => new PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: id === 1 });
+    const mulberry32 = seed => () => { seed = seed + 0x6D2B79F5 | 0; let x = Math.imul(seed ^ seed >>> 15, 1 | seed); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; };
+    const r = stage.getBoundingClientRect();
+    const OVERSHOOT = 145;   // rubber()'s asymptote (140) plus a hair of slack
+    const fails = [];
+    for (let seed = 0; seed < 40 && fails.length < 5; seed++) {
+      QA.stopMomentum(); QA.reset();
+      const rnd = mulberry32(seed + 1);
+      const down = new Set();
+      const steps = 15 + Math.floor(rnd() * 20);
+      for (let s = 0; s < steps; s++) {
+        const id = 1 + Math.floor(rnd() * 3);
+        const x = r.left + 10 + rnd() * Math.max(10, r.width - 20), y = r.top + 10 + rnd() * Math.max(10, r.height - 20);
+        const pick = rnd();
+        if (!down.has(id)) { if (pick < .85) { stage.dispatchEvent(mk("pointerdown", id, x, y)); down.add(id); } }
+        else if (pick < .55) stage.dispatchEvent(mk("pointermove", id, x, y));
+        else if (pick < .75) { stage.dispatchEvent(mk("pointerup", id, x, y)); down.delete(id); }
+        else if (pick < .90) { stage.dispatchEvent(mk("pointercancel", id, x, y)); down.delete(id); }
+        else down.delete(id);   // "lost": the id just vanishes, no up/cancel ever sent
+        const st = QA.state();
+        if (!Number.isFinite(st.Z) || !Number.isFinite(st.P[0]) || !Number.isFinite(st.P[1])) { fails.push({ seed, s, reason: "non-finite", st }); break; }
+        if (st.Z < st.fitZ - .001) fails.push({ seed, s, reason: "below fit", st });
+        if (st.Z > st.maxZ + .001) fails.push({ seed, s, reason: "above max", st });
+        const limX = Math.max(0, (st.natW * st.Z - r.width) / 2) + OVERSHOOT, limY = Math.max(0, (st.natH * st.Z - r.height) / 2) + OVERSHOOT;
+        if (Math.abs(st.P[0]) > limX) fails.push({ seed, s, reason: "P.x off-screen", st, limX });
+        if (Math.abs(st.P[1]) > limY) fails.push({ seed, s, reason: "P.y off-screen", st, limY });
+      }
+    }
+    QA.stopMomentum();
+    return JSON.stringify({ fails: fails.slice(0, 5), failCount: fails.length, total: 40 });
+  })()`);
+  const r = JSON.parse(result);
+  t.expect(!r.error, `fuzz test couldn't run: ${r.error}`);
+  t.expect(r.failCount === 0, `${r.failCount} invalid gesture states out of ${r.total} seeds: ${JSON.stringify(r.fails)}`);
+});
+// David, 2026-10-09: "when I open a painting, sometimes it doesn't let me tap the painter." Root cause: the
+// name only became a real link once js/loader.js's lazy wiki data finished loading (awPaintingHook, js/
+// artwiki.js's "upgrade plain text to a button" pattern) -- commonly still loading on the first painting you
+// open in a session, so a tap in that window landed on inert text. js/gallery.js's .p-dek now renders the link
+// immediately (an optimistic slug straight off the painting's own artist field); artwiki.js's hook only
+// confirms it once the real data lands (or downgrades a genuine non-painter to plain text). This drives 10
+// random painting pages straight off a fresh #/home load -- no wait for the background wiki fetch at all --
+// and checks the painter link is already there and actually opens the painter page every time.
+scenario("paintings", "the painter link on a painting page is tappable immediately, before the painter list finishes loading -- 10 random paintings", async t => {
+  const N = 23778;   // the corpus size (tools/check.js's "ids gate"); an out-of-range pick is simply skipped below
+  let tries = 0, ok = 0, noLoad = 0, noLink = 0;
+  const found = [], misses = [];
+  while (ok < 10 && tries < 30) {   // ~14% of the corpus has no credited artist, so a wide-enough budget matters
+    tries++;
+    const i = Math.floor(Math.random() * N);
+    // a FRESH reload every pick, on purpose: this is exactly the real bug's window (js/loader.js's wiki data
+    // hasn't had a chance to arrive yet on a cold load), not just a client-side re-render mid-session
+    await t.open(`#/gallery/${i}`, { settle: 250 });
+    const got = await t.waitFor(() => t.$(".p-title") && t.text(".p-title").length ? true : null, 10000, "the painting page").catch(() => null);
+    if (!got) { noLoad++; misses.push({ i, why: "no-load", title: t.$(".p-title") ? t.text(".p-title") : null }); continue; }
+    const link = t.$(".p-dek [data-awpainter]");
+    if (!link) { noLink++; misses.push({ i, why: "no-link", title: t.text(".p-title"), dek: t.$(".p-dek") ? t.text(".p-dek") : null }); continue; }
+    const name = t.text(link);
+    await t.click(link, { wait: 500 });
+    const landed = await t.waitFor(() => /^#\/painter\//.test(t.w.location.hash), 8000, "the painter page").catch(() => false);
+    t.expect(landed, `tapping "${name}" (painting ${i}) didn't open the painter page (hash: ${t.w.location.hash})`);
+    found.push(i); ok++;
+  }
+  t.expect(ok === 10, `only found ${ok}/10 (tries ${tries}, noLoad ${noLoad}, noLink ${noLink}): ${JSON.stringify(misses)}`);
 });
 scenario("paintings", "Look closer on a painting then swiping back (popstate) never leaves the color page under a stuck dark scrim", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
@@ -4070,8 +4267,11 @@ scenario("trail", "On the map's ✕ (\"Close\") returns to the page that lit it,
   await TRL.atHash(t, /^#\/gallery\/\d+/, "the second painting");
   const paintingHash = TRL.hash(t), depthAtPainting = TRL.depth(t);
   t.expect(depthAtPainting >= 3, `expected at least color+painting+painter on the trail before the second painting, got ${depthAtPainting}: ${t.ev("XSTACK.join(' , ')")}`);
-  const mapBtn = await t.waitFor("[data-cs='map']", 10000, "the second painting's On the map action");
-  await t.click(mapBtn, { wait: 800 });
+  // the painting page's own [data-cs=map] now opens its palette honeycomb (js/palettehive.js, David 2026-10-09:
+  // "showing it on the color map is a useless feature"), not the big shared map -- csOnMap/mapSelect themselves
+  // are unchanged, so this step lights the map the same way the map/gallery address route and the search bar
+  // still do, to keep testing exactly what this scenario is about: the trail surviving Close on a lit map.
+  t.ev(`mapSelect({ title: "This painting", colors: ["#1F4FBF", "#2255C5", "#1C49B5"], source: "painting" })`);
   await t.waitFor(() => t.$(".screen.hm canvas"), 12000, "the lit map");
   await t.sleep(300);
   t.expect(TRL.depth(t) === depthAtPainting, `lighting the map changed the trail depth to ${TRL.depth(t)}, expected ${depthAtPainting}`);
@@ -4333,10 +4533,13 @@ scenario("mapstudy", "Name it, Neighborhood and Wander all play; Choose shows bo
 // ================================================================== LANE F: the lit set is the map's subject (js/honey.js honeyLitBar)
 scenario("map-subject", "a painting on the map: the bar's Learn these, Find them, ‹ back with the scroll kept, ✕", async t => {
   await TRL.open(t, "#/painting/milkmaid");
-  const b = await t.waitFor("[data-cs=map]", 15000, "the On the map button on The Milkmaid");
+  await t.waitFor("[data-cs=map]", 15000, "the painting page to render (its own action row)");
   t.w.scrollTo(0, 400); await t.sleep(200);
   const y0 = Math.round(t.w.scrollY);
-  await t.click(b, { force: true, wait: 900 });
+  // the painting page's own [data-cs=map] now opens its palette honeycomb (js/palettehive.js) -- this lane is
+  // about honeyLitBar itself (Learn these, Find them, ‹, ✕), still reachable exactly the way the bar's own ✕
+  // step below already does, directly, the same real call csOnMap()/mapSelect() made from inside that button
+  t.ev("csOnMap(hmPaintingSet(graph().nodes.get('painting-milkmaid')))");
   await t.waitFor(() => /The Milkmaid/.test(t.text(".cs-hl-bar")) && /as photographed/.test(t.text(".cs-hl-bar")), 15000, "the Milkmaid bar on the map");
   t.expect(t.$(".cs-hl-bar .cs-hl-back"), "the bar has no ‹ back to the painting");
   // Learn these: the Learn sheet on exactly the lit set, with its source
@@ -4686,6 +4889,33 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
   await t.click("[data-back]", { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 12000, "Back to the map, with the same painting in the middle");
 });
+// David's screenshot, 2026-10-09: "when I look at a painting and tap 'Show it on the map', it opens the map at a
+// different section, so I don't even see the painting that brought me there." Root cause: caption() keeps
+// PM_PAN.set(lay.key, ...) current on every center change, including a plain pan with nothing opened -- so a
+// SECOND visit to the exact same seeded spec (the same painting's "Show it on the map" tapped again, or a
+// different entry that resolves to an already-visited seed) silently restored wherever the map was last panned
+// to, not the painting the entry point promised. Fixed: build() now ignores PM_PAN entirely for any arrangement
+// pinned to a seed (Rings/Spiral), trusting the seed as an anchor rather than treating the remembered pan as a
+// bookmark. Simulated here by injecting a deliberately wrong PM_PAN entry for each key before entering (standing
+// in for "the user panned away during an earlier visit"), since driving a real pan gesture per seed would be slow
+// and the bug is in build()'s own pan-memory lookup, not the gesture.
+scenario("paintmap", "entering the map from 5 different paintings always centers on that painting, not a stale remembered pan", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the map to lay out");
+  const total = t.w.PM_CTRL.count;
+  const seeds = [1500, 5000, 9001, 14777, 20300].filter(i => i < total);
+  t.expect(seeds.length === 5, `expected 5 usable seeds under a corpus of ${total}, got ${seeds.length}`);
+  for (const seed of seeds) {
+    const key = `arr=rings&seed=${seed}|${total}|`;
+    t.ev(`PM_PAN.set(${JSON.stringify(key)}, { x: 9999, y: -9999, s: 2 })`);   // a deliberately wrong remembered pan
+    t.ev(`pmGo("arr=rings&seed=${seed}")`);
+    await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.drawn > 10, 8000, `the map to lay out around seed ${seed}`);
+    await t.waitFor(() => t.w.PM_CTRL.center === seed, 4000, `seed ${seed} to actually be centered, not wherever the injected pan pointed`);
+    t.expect(!t.$("[data-pmcap]").hidden, `the card didn't open for seed ${seed}`);
+    const rect = t.ev(`PM_CTRL._qaRects().find(r => r.i === ${seed})`);
+    t.expect(rect, `seed ${seed}'s own cell isn't in the drawn set at all`);
+  }
+});
 // David, 2026-10-09 ("don't necessarily delete features -- change how you access them"): Color/Time/Painter are
 // the primary Arrange choices; Rings/Spiral/Families/Tones plus Place by/Center on/filters/landmarks are tucked
 // behind "More options" (not yet reorganized in the sheet markup -- tracked separately), not deleted. This test
@@ -4713,6 +4943,11 @@ scenario("paintmap", "the settings sheet offers Color, Time and Painter as Arran
 scenario("paintmap", "the card's Same painter / Same decade / Same place chips narrow the map; a removable top chip undoes it", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  // the card (and its facet chips) only opens on a tap now (David, 2026-10-09: "we only need the name when we tap
+  // it") -- tap an off-center painting to re-center and open it (not the already-centered one, which opens the
+  // gallery page instead), the same way a real visit would
+  const cv0 = t.$(".pmx-cv"), r00 = cv0.getBoundingClientRect();
+  await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
   await t.waitFor(".pmx-facets button", 6000, "the card's facet chips");
   const labels = t.$$(".pmx-facets button").map(b => t.text(b));
   t.expect(labels.every(l => ["Same painter", "Same decade", "Same place", "Open", "Walk from here"].includes(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
@@ -4729,6 +4964,9 @@ scenario("paintmap", "the card's Same painter / Same decade / Same place chips n
 scenario("paintmap", "Walk from here steps to a different painter each time", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  // the card (and its Walk chip) only opens on a tap now -- tap an off-center painting to open it first
+  const cv0 = t.$(".pmx-cv"), r00 = cv0.getBoundingClientRect();
+  await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
   await t.waitFor(".pmx-facets [data-pmwalk-go]", 6000, "the Walk from here chip");
   const start = t.w.PM_CTRL.center, startPainter = t.ev(`typeof XBF !== "undefined" ? XBF.artist[${start}] : null`);
   await t.click(".pmx-facets [data-pmwalk-go]", { wait: 700 });
@@ -4742,18 +4980,25 @@ scenario("paintmap", "Walk from here steps to a different painter each time", as
 scenario("paintmap", "your favorites glow doesn't break the draw loop under a real pan", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  // the card (and the heart inside it) only opens on a tap now (David, 2026-10-09: "we only need the name when we
+  // tap it") -- tap an off-center painting to re-center it and open the card, the same way a real visit would
+  const cv = t.$(".pmx-cv"), r0 = cv.getBoundingClientRect();
+  await t.tapAt(cv, r0.left + r0.width / 2, r0.top + r0.height / 2 - 150, { wait: 900 });
   await t.waitFor("[data-pmheart]:not([hidden])", 6000, "the heart under the centered painting");
   await t.click("[data-pmheart]", { wait: 400 });
   const favored = t.w.PM_CTRL.center;
   t.expect(t.ev(`(() => { const d = typeof glDetailNow === "function" && glDetailNow(${favored}); return !!(d && typeof fvArtHas === "function" && fvArtHas(d.id)); })()`), "the centered painting didn't actually become a favorite");
-  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect();
+  const r = cv.getBoundingClientRect();
   const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 77, pointerType: "touch", isPrimary: true, view: t.w });
   cv.dispatchEvent(mk("pointerdown", r.left + r.width / 2, r.top + r.height / 2));
   for (let i = 1; i <= 6; i++) cv.dispatchEvent(mk("pointermove", r.left + r.width / 2 - i * 10, r.top + r.height / 2 - i * 6));
   cv.dispatchEvent(mk("pointerup", r.left + r.width / 2 - 60, r.top + r.height / 2 - 36));
   await t.sleep(250);
   t.expect(t.errors.length === 0, `window errors after panning with favorites drawn: ${t.errors.join(" | ")}`);
-  await t.click("[data-pmheart]", { wait: 300 });   // leave state clean for later scenarios
+  // the pan above closes the card again (David, 2026-10-09: "hides again on pan") and may have re-centered a
+  // different painting, so un-favorite the one this test actually favorited directly rather than via the UI,
+  // to leave state clean for later scenarios
+  t.ev(`(() => { const d = typeof glDetailNow === "function" && glDetailNow(${favored}); if (d && typeof fvArtSet === "function") fvArtSet(${favored}, d, false); })()`);
 });
 // David's screenshots, 2026-10-09: "pictures don't load as well as before" (most of the corpus is on a non-CORS
 // host, which the canvas-taint fix had fall back to a flat color tile with nothing to show it otherwise -- fixed
@@ -4761,33 +5006,38 @@ scenario("paintmap", "your favorites glow doesn't break the draw loop under a re
 // level (a near-center cell's own "a little bigger than its cell" magnification could push past the lattice
 // halfway point into a genuinely nearby neighbor, worst in a sparse filtered set or Spiral's ragged angular gaps
 // -- fixed with a spatial-hash nearest-neighbor clamp, PM_CTRL._qaRects() exposes the final post-clamp rects).
-scenario("paintmap", "no two drawn cells intersect at 3 zoom levels, including a sparse (4-result) filter", async t => {
-  const noOverlap = (label) => {
+// David, 2026-10-09: "the overlap wasn't a problem if it was subtle -- now they're all too far apart." Reverted
+// the spatial-hash clamp that used to force zero overlap here (it worked, but by shrinking cells away from their
+// natural size whenever a neighbor was close, which read as gaps, not a fix). The original map's own near-center
+// magnification (draw()'s `m`/`B` math, untouched) is allowed to overlap its neighbors a little, same as it
+// always did -- this now checks overlap stays bounded (nothing runaway/broken), not that it's exactly zero.
+scenario("paintmap", "cell overlap stays subtle (not runaway) at 3 zoom levels, and a sparse (4-result) filter fits the view", async t => {
+  const checkOverlap = (label) => {
     const rects = t.ev("PM_CTRL._qaRects()");
     t.expect(rects.length > 0, `${label}: nothing drawn`);
-    let worst = 0;
+    let worst = 0, worstFrac = 0;
     for (let a = 0; a < rects.length; a++) for (let b = a + 1; b < rects.length; b++) {
       const p = rects[a], q = rects[b];
       const ox = Math.max(0, Math.min(p.x + p.w / 2, q.x + q.w / 2) - Math.max(p.x - p.w / 2, q.x - q.w / 2));
       const oy = Math.max(0, Math.min(p.y + p.h / 2, q.y + q.h / 2) - Math.max(p.y - p.h / 2, q.y - q.h / 2));
-      if (ox > 0 && oy > 0) worst = Math.max(worst, Math.min(ox, oy));
+      if (ox > 0 && oy > 0) { const ov = Math.min(ox, oy), small = Math.min(p.w, p.h, q.w, q.h); if (ov > worst) worst = ov; const frac = small > 0 ? ov / small : 0; if (frac > worstFrac) worstFrac = frac; }
     }
-    t.expect(worst === 0, `${label}: cells overlap by up to ${worst.toFixed(1)}px (${rects.length} drawn)`);
+    t.expect(worstFrac < .75, `${label}: cells overlap by up to ${worst.toFixed(1)}px, ${(worstFrac * 100).toFixed(0)}% of the smaller cell -- that's runaway, not subtle (${rects.length} drawn)`);
   };
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
-  noOverlap("normal zoom, dense set");
+  checkOverlap("normal zoom, dense set");
   t.ev("PM_CTRL.zoom(2.1)"); await t.sleep(200);
-  noOverlap("zoomed in, dense set");
+  checkOverlap("zoomed in, dense set");
   t.ev("PM_CTRL.zoom(0.3)"); await t.sleep(200);
-  noOverlap("zoomed out, dense set");
-  // David's own screenshot: a 4-result filter (a painter with only a handful of works) -- fit-to-view (bug 5)
-  // and the overlap clamp (bug 4) both matter most exactly here
+  checkOverlap("zoomed out, dense set");
+  // David's own screenshot: a 4-result filter (a painter with only a handful of works) -- fit-to-view matters
+  // most exactly here (fitZoomFor's Math.max(1, ...) floor, unrelated to the overlap revert above and still in place)
   const rarePainter = t.ev(`(() => { const counts = new Map(); for (let i = 0; i < XBF.N; i++) { const a = XBF.artist[i]; if (!a) continue; counts.set(a, (counts.get(a) || 0) + 1); } let best = 0, bn = 1e9; for (const [a, n] of counts) if (n >= 2 && n <= 6 && n < bn) { bn = n; best = a; } return best; })()`);
   t.expect(rarePainter > 0, "couldn't find a painter with a small handful of works to test the sparse case");
   await t.open(`#/paintings/map?arr=color&p=${t.ev(`XBF.meta.artists[${rarePainter} - 1][1]`)}`, { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count <= 6, 20000, "the sparse filtered map to lay out");
-  noOverlap(`a sparse (${t.w.PM_CTRL.count}-result) filter`);
+  checkOverlap(`a sparse (${t.w.PM_CTRL.count}-result) filter`);
   // fit-to-view: a small set shouldn't float tiny in the middle -- the biggest drawn cell should fill a
   // meaningful share of the screen, not sit at a flat default zoom meant for a dense set
   const rects = t.ev("PM_CTRL._qaRects()"), biggest = Math.max(...rects.map(r => Math.max(r.w, r.h)));

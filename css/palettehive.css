@@ -1,0 +1,28 @@
+/* Palette honeycomb (js/palettehive.js): every color inside one painting, photo, set or subject, sized by how
+   much of it there is -- never a single truncated palette. A near-full sheet (app.css sheet()/scrim) over the
+   page that opened it: Back, close, the scrim and a swipe down all just reveal that page again. */
+.ph-sheet{max-width:560px;height:94dvh;max-height:94dvh;display:flex;flex-direction:column}
+.ph-title{font:400 28px/1.05 var(--serif);letter-spacing:-.02em;margin-top:2px;flex:none}
+.ph-sub{color:var(--soft);font:400 14px/1.4 var(--sans);margin-top:4px;flex:none}
+
+/* How many: countify's own stepper rides beside the slider, same pattern as the subject view and the map */
+.ph-count{margin-top:14px;flex:none}
+.ph-count-l{display:flex;align-items:center;gap:10px;min-height:40px}
+.ph-count-l>span{flex:none;font:400 15px/1 var(--sans);opacity:.72}
+.ph-count-l input{flex:1;min-width:0;height:32px;accent-color:var(--paper-ink);touch-action:pan-x}
+.ph-count-l b{flex:none;min-width:2.4ch;text-align:right;font:400 20px/1 var(--serif);font-variant-numeric:tabular-nums}
+
+/* Arrangement: a segmented control, equal width, self-evident text labels (no private icons) */
+.ph-arr{display:flex;gap:2px;padding:3px;border-radius:var(--r-pill);background:rgba(236,232,223,.06);margin-top:12px;flex:none}
+.ph-arr-b{flex:1;min-height:36px;border-radius:calc(var(--r-pill) - 2px);font:400 13px/1 var(--sans);color:var(--soft);white-space:nowrap}
+.ph-arr-b.on{background:var(--paper);color:var(--paper-ink)}
+.ph-arr-b:active{transform:scale(.97)}
+
+/* The honeycomb itself: solid, opaque, fills whatever room the sheet has left -- judged on booth grey/warm
+   black like the rest of the app, never see-through */
+.ph-stage{position:relative;flex:1;min-height:140px;margin-top:14px;border-radius:var(--r-2);overflow:hidden;background:var(--ground);touch-action:none}
+.ph-cv{position:absolute;inset:0;display:block;touch-action:none}
+
+.ph-fine{margin-top:10px;flex:none}
+
+@media (max-width:374px){ .ph-title{font-size:25px} }
