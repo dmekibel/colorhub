@@ -1,0 +1,72 @@
+{
+ "id": "afrofuturism",
+ "name": "Afrofuturism",
+ "lineage": {
+  "influenced_by": [
+   "jazz-age Black speculative art",
+   "Egyptian/African historical iconography",
+   "space-age design"
+  ],
+  "influences": [
+   "cyberpunk",
+   "solarpunk"
+  ]
+ },
+ "eras": [
+  "coined 1993 (Mark Dery)",
+  "rooted in work from the 1950s–70s (Sun Ra)",
+  "mainstream 2010s–20s visibility (Black Panther, 2018)"
+ ],
+ "places": [
+  "jazz and funk performance culture",
+  "literary science fiction (Octavia Butler, Samuel Delany)"
+ ],
+ "garments": [
+  "metallic and iridescent fabric fused with African textile patterns",
+  "elaborate headwear",
+  "tech-and-tradition hybrid silhouettes"
+ ],
+ "media": [
+  {
+   "title": "Sun Ra and his Arkestra (performances from the 1950s on)",
+   "note": "the earliest widely cited visual/musical touchstone"
+  },
+  {
+   "title": "Black Panther (2018)",
+   "note": "the film most credited with bringing Afrofuturist design language to a mass audience"
+  }
+ ],
+ "figures": [
+  "Sun Ra",
+  "Octavia Butler",
+  "Mark Dery (coined the term)"
+ ],
+ "reacts_against": "science fiction's historical whiteness, imagining Black futures and reclaiming African historical imagery within speculative, technological settings.",
+ "revivals": [
+  "ongoing renewed visibility through film and fashion since 2018"
+ ],
+ "article": "Afrofuturism is older than its name. The term itself was coined in 1993 by the cultural critic Mark Dery, but the thing he was naming — Black artists imagining futures, outer space and advanced technology on their own terms — reaches back decades earlier, most famously to the bandleader Sun Ra, who from the 1950s on performed in elaborate Egyptian-and-space-age costuming while claiming (at least as performance, maybe as belief) to be from Saturn. The visual language that developed across jazz, funk and literary science fiction fuses two sources that mainstream science fiction had almost never put together: African and African-diasporic textile, adornment and historical iconography on one hand, and the chrome-and-circuitry vocabulary of space-age technology on the other. The palette that results tends toward deep, saturated jewel tones — purples, golds, deep blues — set against metallic accents, a deliberate departure from science fiction's more common sterile white-and-grey futurism. The look reached its widest audience with the 2018 film Black Panther, whose costume and production design translated decades of Afrofuturist visual thinking into a single, globally seen reference point, and the aesthetic has only grown more visible in fashion and design since.",
+ "wiki_facts": {
+  "other_names": "|key_motifs = Technology, cosmology, diaspora, reclamation",
+  "decade_of_origin": "1950s-Present",
+  "key_motifs": "Technology, cosmology, diaspora, reclamation",
+  "key_colours": "Metallic, deep blues, earth tones",
+  "related_aesthetics": "Art HoeCyber GhettoCyberpunkFunkIndigenous FuturismsRetrofuturismSolarpunkSynthwave",
+  "key_values": "Liberation, innovation, heritage, future vision"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Afrofuturism"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 51% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 59% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

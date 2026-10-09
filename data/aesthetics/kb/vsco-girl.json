@@ -1,0 +1,57 @@
+{
+ "id": "vsco-girl",
+ "name": "VSCO girl",
+ "lineage": {
+  "influenced_by": [
+   "VSCO photo-editing app's filter aesthetic",
+   "surf/skate casual wear"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2019 (brief, intense TikTok peak)"
+ ],
+ "places": [
+  "TikTok",
+  "US middle/high schools"
+ ],
+ "garments": [
+  "oversized tees",
+  "scrunchies (often worn in multiples on the wrist)",
+  "Birkenstocks",
+  "Hydro Flask water bottles covered in stickers",
+  "shell necklaces",
+  "mom jean shorts"
+ ],
+ "media": [
+  {
+   "title": "VSCO (photo app, launched 2011)",
+   "note": "the aesthetic is named for the app's muted-filter look, though by 2019 it referred more to the fashion than the photo edit"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "the heavily posed, filtered 'Instagram baddie' look that preceded it; VSCO girl styling presented itself as effortless and environmentally conscious (metal straws, reusable bottles).",
+ "revivals": [],
+ "article": "The VSCO girl look is unusual on this list because it names a photo filter rather than a garment, a scene or a decade. VSCO, a photo-editing app launched in 2011, built its identity on desaturated, slightly faded presets that made ordinary phone photos look like they'd been shot on film — muted greens, soft warm whites, no oversaturated reds. By 2019 \"VSCO girl\" had drifted from describing a photo style to describing the person who posted that way: oversized T-shirts, scrunchies worn three deep on one wrist, Birkenstocks, a Hydro Flask armored in stickers, and a studied, performed casualness that positioned itself against the heavily posed, contoured \"Instagram baddie\" look dominant just before it. The trend burned hot and fast on TikTok for a single summer, driven largely by parody videos (\"and I oop—\") as much as by genuine adopters, and faded almost as quickly as it arrived. Its color signature — sun-faded, slightly cool-toned, nothing fully saturated — is really the VSCO app's own filter math, which makes it one of the few aesthetics on this list whose palette can be traced to a specific piece of software rather than a subculture, a place or an era.",
+ "wiki_facts": {
+  "other_names": "|decade_of_origin=Late 2010s",
+  "decade_of_origin": "Late 2010s",
+  "key_motifs": "Oversized T-shirts, scrunchies, Hydro Flasks, Pura Vida bracelets, Birkenstocks/Crocs/Vans, puka shell necklaces, messy buns, simple makeup, Polaroid cameras",
+  "key_colours": "Earthy tones, pastels, bright and natural colors (often enhanced with VSCO app filters)",
+  "related_aesthetics": "2010s Summer NostalgiaArt HoeBasic GirlE-GirlGranolaSoft GirlTikTok Preppy"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/VSCO_Girl"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 49% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

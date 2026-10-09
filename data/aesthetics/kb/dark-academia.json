@@ -1,0 +1,66 @@
+{
+ "id": "dark-academia",
+ "name": "Dark Academia",
+ "lineage": {
+  "influenced_by": [
+   "Donna Tartt's The Secret History (1992)",
+   "Oxbridge/Ivy League academic imagery",
+   "classical and Gothic literature"
+  ],
+  "influences": [
+   "light-academia",
+   "chaotic-academia",
+   "science-academia"
+  ]
+ },
+ "eras": [
+  "novel published 1992",
+  "aesthetic coalesced mid-2010s on Tumblr",
+  "peak 2020–2021 on TikTok (pandemic lockdown reading/studying content)"
+ ],
+ "places": [
+  "Tumblr",
+  "university campuses (real and imagined)",
+  "TikTok during 2020–21 lockdowns"
+ ],
+ "garments": [
+  "tweed blazers",
+  "pleated skirts",
+  "turtlenecks",
+  "oxford shoes",
+  "wool scarves",
+  "leather satchels"
+ ],
+ "media": [
+  {
+   "title": "Donna Tartt, The Secret History (1992)",
+   "note": "the novel most credited as the aesthetic's literary origin"
+  },
+  {
+   "title": "Dead Poets Society (1989)",
+   "note": "a frequently cited visual touchstone, pre-dating the term"
+  }
+ ],
+ "figures": [
+  "Donna Tartt"
+ ],
+ "reacts_against": "fast fashion and disposable digital culture, romanticizing slow, book-filled, candlelit intellectual life — though critics note it often romanticizes real darkness (obsession, violence, self-destruction) along with the aesthetics.",
+ "revivals": [
+  "sustained rather than revived — it has stayed one of the most durable internet aesthetics since 2020"
+ ],
+ "article": "Dark academia's color story starts with a book, not a photograph. Donna Tartt's 1992 novel The Secret History — about a tight, secretive group of classics students at a New England college, one of whom is murdered by the others — supplied almost the entire visual grammar the aesthetic would eventually run on: tweed, candlelight, old libraries, ancient Greek, a beauty described explicitly as terrifying. The aesthetic itself didn't coalesce online until the mid-2010s, built up slowly on Tumblr moodboards that mixed stills from Dead Poets Society and photos of Oxford and Cambridge with the novel's own imagery, but it exploded during 2020's lockdowns, when students stuck at home turned fantasies of library stacks and seminar rooms into a genuine aesthetic movement on TikTok. The palette is almost entirely tonal — black, brown, burgundy, dark green, cream — built from the same materials the books describe: aged paper, old wood, wool and leather, candle flame against dark rooms. It's a deliberately narrow range, closer to a single Rembrandt-style value structure than to a varied wardrobe, which is part of why dark academia photographs so consistently: nearly every image in the genre sits in the same tight band of dark, warm, low-saturation color, lit from one source. The aesthetic has also drawn real criticism for romanticizing the novel's darker content — obsession, substance abuse, violence — alongside its candlelit study scenes, something any honest account of the look has to sit with rather than aestheticize away.",
+ "wiki_facts": {
+  "other_names": "|decade_of_origin=Mid-2010s (peak popularity in the early 2020s)",
+  "decade_of_origin": "Mid-2010s (peak popularity in the early 2020s)",
+  "key_motifs": "Books, libraries, classical art, ancient history, poetry, writing, candles, old architecture, tweed jackets, pleated skirts",
+  "key_colours": "Black, brown, dark green, burgundy, tan, cream",
+  "related_aesthetics": "BeatnikDarkest AcademiaChaotic AcademiaDandyGothicLight AcademiaOld MoneyPreppyRomantic AcademiaStudyblrThought DaughterWhimsigothVictorian",
+  "key_values": "Intellectualism, self-discovery, romanticism, mystery, rebellion, decadence"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Dark_Academia"
+  }
+ ]
+}

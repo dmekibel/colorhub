@@ -1,0 +1,55 @@
+{
+ "id": "cybergoth",
+ "name": "Cybergoth",
+ "lineage": {
+  "influenced_by": [
+   "traditional goth",
+   "rave/industrial fashion",
+   "cyberpunk"
+  ],
+  "influences": [
+   "health-goth"
+  ]
+ },
+ "eras": [
+  "late 1990s origin",
+  "2000s–2010s peak"
+ ],
+ "places": [
+  "industrial/EBM club scenes"
+ ],
+ "garments": [
+  "neon-and-black color blocking",
+  "fiber-optic hair falls",
+  "goggles",
+  "platform boots",
+  "UV-reactive accessories"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "traditional goth's all-black, candlelit romanticism, injecting it with rave-era UV neon and visible technology (goggles, LEDs, fiber optics).",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "Late 1990s",
+  "key_motifs": "Synthetic dreadfalls (cyberlox), goggles, gas masks, biohazard symbols, circuit patterns, platform boots, PVC and vinyl clothing",
+  "key_colours": "Black contrasted with bright neon or UV-reactive colors (green, pink, blue, orange)",
+  "related_aesthetics": "AggrotechBrostepCyberpunkFetish GothIndustrialRivetheadRaverTechwear",
+  "key_values": "Futurism, technology, dystopian themes, electronic music, club culture, individuality"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Cybergoth"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 60% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 75% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

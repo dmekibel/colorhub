@@ -1,0 +1,59 @@
+{
+ "id": "vaporwave",
+ "name": "Vaporwave",
+ "lineage": {
+  "influenced_by": [
+   "muzak/elevator music",
+   "1980s-90s corporate and mall culture",
+   "early internet nostalgia",
+   "chillwave"
+  ],
+  "influences": [
+   "seapunk",
+   "frutiger-aero",
+   "y2k revival aesthetics"
+  ]
+ },
+ "eras": [
+  "2010–2013 (musical/visual genre coalesces)",
+  "ongoing low-level internet presence since"
+ ],
+ "places": [
+  "Bandcamp/online music distribution",
+  "imageboards and early meme culture"
+ ],
+ "garments": [
+  "not primarily a clothing look — a graphic-design and music aesthetic"
+ ],
+ "media": [
+  {
+   "title": "Macintosh Plus, Floral Shoppe (2011)",
+   "note": "the album most credited as the genre's defining release"
+  },
+  {
+   "title": "Oneohtrix Point Never, early 2010s releases",
+   "note": "a key figure in the slowed/sampled aesthetic that fed vaporwave"
+  }
+ ],
+ "figures": [
+  "Daniel Lopatin (Oneohtrix Point Never)",
+  "Ramona Xavier (Macintosh Plus/Vektroid)"
+ ],
+ "reacts_against": "late capitalism's own advertising language, repurposing (and slowing down, pitch-shifting, glitching) corporate muzak and mall imagery to make it feel uncanny rather than comforting.",
+ "revivals": [],
+ "article": "Vaporwave's whole project is making the recent past feel haunted. The genre coalesced around 2011–2012 among online musicians who sampled and drastically slowed down smooth jazz, muzak and 1980s–90s corporate soundtrack music, pairing it with a visual language scavenged from the same source: Roman busts, early 3D-rendered grids, mall escalators, Windows 95 interface chrome, all of it set against washed pastel-and-magenta gradient skies. The palette leans hard on pink and cyan together — a combination with almost no precedent in design history before vaporwave, since the two sit nearly opposite each other and create a deliberately synthetic, retina-buzzing glow when placed side by side — plus a washed, slightly desaturated version of 1980s mall-interior beige and teal. The effect the genre is going for is a specific kind of uncanny nostalgia: images and sounds that were originally meant to sell confidence and comfort (elevator music, corporate branding, early virtual-mall software) get slowed down and glitched until they feel eerie instead, as if capitalism's own optimism has been left running in an empty building. Vaporwave never had a single mainstream breakout moment the way Y2K or dark academia did, but its visual grammar — that pink/cyan gradient above all — leaked into dozens of later aesthetics, from seapunk's chrome-and-teal to the whole 2020s wave of synthwave-adjacent design.",
+ "wiki_facts": {
+  "other_names": "Vapor",
+  "decade_of_origin": "Early 2010s",
+  "key_motifs": "Hellenic statues, 1990s web design and CGI, Japanese text, Glitch Art, palm trees, obsolete technology (Windows 95, VHS), corporate logos",
+  "key_colours": "Pastel pink and cyan, purple, neon gradients",
+  "related_aesthetics": "Cassette FuturismClassicismCleancoreDemosceneGlitch ArtItalo DiscoLiminal SpaceLo-fiMemphis DesignMemphis Lite[https://cari.institute/aesthetics/neoclassical-pomo Neoclassical PoMo]PC MusicRetrofuturismSeapunkSynthwaveWebcoreOld WebUtopian ScholasticY2K Futurism",
+  "key_values": "Nostalgia (often for a fabricated past), anti-capitalist critique (ambiguous), irony, technological melancholy, surrealism"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Vaporwave"
+  }
+ ]
+}

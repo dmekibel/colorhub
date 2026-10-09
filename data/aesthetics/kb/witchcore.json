@@ -1,0 +1,54 @@
+{
+ "id": "witchcore",
+ "name": "Witchcore",
+ "lineage": {
+  "influenced_by": [
+   "cottagecore",
+   "goblincore",
+   "real pagan/witchcraft revival aesthetics"
+  ],
+  "influences": [
+   "goblincore"
+  ]
+ },
+ "eras": [
+  "2019–present (TikTok/Tumblr)"
+ ],
+ "places": [
+  "TikTok",
+  "rural/forest imagery"
+ ],
+ "garments": [
+  "flowing dark florals",
+  "dried herb bundles",
+  "moon-phase jewelry",
+  "layered skirts and shawls"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "cottagecore's sunlit cheerfulness, keeping its rural, nature-based motifs but tilting the mood toward dusk, ritual and mystery.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Witches of Instagram, Hexcore, Magicore, Teen Witch, Witch Tok, Witchblr, Wiccacore",
+  "key_motifs": "Frogs, owls, bats, tarot cards, magic, brooms, crystal balls, potions, old houses/architecture, cats, wands, halloween, woods/outdoors, nature, occult imagery",
+  "key_colours": "Black, Green, Orange, Purple, dark/dull colours",
+  "related_aesthetics": "AngelcoreCabincoreCottagecoreCottagegoreCryptidcoreDark FantasyDragoncoreGothicGoblincoreHalloweenHellenicHoneycoreHorrorMallgothMedieval FantasyMushroomcoreNaturecoreStregaWerewolfWhimsigothicWitch House",
+  "key_values": "The occult, the unknown, energy, self-growth, connection to nature, female empowerment"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Witchcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 47% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 78% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}
