@@ -504,7 +504,15 @@ function show(html, cls = "", tab = null) {
   cleanup.forEach(f => { try { f(); } catch (e) {} }); cleanup = [];
   // (.flyer / .hc-morph: a bubble-to-page shape belongs to the screen that asked for it; one left mid-flight or
   // orphaned by an error must never float over the next screen as a stuck, unlabeled circle)
-  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph").forEach(n => n.remove());
+  // David, 2026-10-09: "it looks like the black bar is always there" -- .tlg-floor (js/trail.js tlgWire, the
+  // gesture-following back's own backdrop) is appended straight to document.body, a sibling of #app, so it
+  // survives every ordinary screen swap untouched; this function only ever replaces #app's OWN children. Any
+  // gesture that doesn't cleanly finish its own release()/clean() path (a second navigation starting mid-drag,
+  // a pointer event the handler didn't expect) leaves it sitting behind #app forever after -- a solid --ground
+  // layer peeking through wherever #app doesn't fully cover the real screen (exactly the vb/app-full gap), on
+  // every future screen, not just the one the gesture happened on. Added here as the same belt-and-suspenders
+  // backstop as the rest of this line: nothing from a gesture or a transition is allowed to outlive its screen.
+  document.querySelectorAll(".scrim,.sheet,.toast,.fade-ghost,.rooms-stem,.rm-scrim,.flyer,.hc-morph,.tlg-floor").forEach(n => n.remove());
   document.body.classList.remove("stem-open"); STEM_OPEN = false;
   // a new screen always scrolls: release any scroll lock a sheet or panel left behind (leaving a screen with a sheet
   // open used to keep the body pinned, so the next page couldn't scroll)
@@ -803,8 +811,14 @@ const fanVars = (n, k) => `--k:${k};--mid:${(n - 1) / 2}`;
 // Lock page scrolling under a sheet or panel without losing your place (overflow:hidden on a 100%-tall body
 // would jump to the top): pin the body at its current offset, then put the scroll back on release.
 // iOS Safari ignores user-scalable=no, so stop its pinch-zoom gesture on pages directly (the honeycomb and other
-// canvases read raw pointers, which this doesn't touch)
-document.addEventListener("gesturestart", e => e.preventDefault(), { passive: false });
+// canvases read raw pointers, which this doesn't touch). David, 2026-10-09: "if I zoom out far enough, panning
+// gets stuck and the black bar comes back" -- preventDefault on gesturestart ALONE doesn't reliably hold off
+// Safari's native page pinch-zoom once it's underway; gesturechange (and gestureend, belt and braces) need it
+// too, or a strong two-finger pinch at the map's own zoom limit can still hand the gesture to the page itself,
+// which scales/shifts the document (visualViewport moves), uncovers the real background below the fixed
+// canvas (the black bar) and leaves the canvas's own pointer listeners stranded under a page that's now panned
+// or zoomed out from under them (the "stuck" panning).
+["gesturestart", "gesturechange", "gestureend"].forEach(t => document.addEventListener(t, e => e.preventDefault(), { passive: false }));
 let LOCKS = 0, LOCK_Y = 0;
 function lockScroll() {
   if (LOCKS++) return;

@@ -417,6 +417,65 @@ scenario("home", "Arrange's fit mode frames the whole layout above the sheet, fo
   }
 });
 
+// David, 2026-10-09: "after you change views the bottom black bar comes back AND you get stuck and can't pan" --
+// a repro attempt for a stray overlay left over by the Colors/Arrange sheet (a scrim, a wrapper, a second
+// instance from a re-render) eating touches after close. Could not reproduce the DOM-leftover shape of this in
+// plain headless Chrome (the sheet/scrim are cleanly removed and panning works after every close path tried
+// here); the vbFix()/--vb path this might also be tangled with only runs on a real iOS Home-Screen app
+// (gated behind standalone()&&isIOS(), unreachable here even by spoofing navigator/matchMedia -- those only
+// fool JS reads, not the real fixed-position containing block a device's actual shorter viewport changes).
+// Kept as a permanent regression guard for the part that IS testable here: nothing invisible should ever sit
+// over the map and block it after a sheet closes, from any close path.
+scenario("home", "after closing the Colors/Arrange sheet, nothing blocks the map and panning still works", async t => {
+  await H.homeReady(t);
+  const grid = () => {
+    const r = t.$("canvas").getBoundingClientRect();
+    const xs = [r.left + 10, r.left + r.width / 2, r.right - 10], ys = [r.top + 10, r.top + r.height / 2, r.bottom - 10];
+    const bad = [];
+    for (const y of ys) for (const x of xs) {
+      const top = t.d.elementFromPoint(x, y);
+      const ok = top && (top.closest("canvas, [data-rooms-corner], #hmDo, [data-do-corner]"));
+      if (!ok) bad.push({ x: Math.round(x), y: Math.round(y), top: top ? top.tagName.toLowerCase() + "." + String(top.className).split(" ").join(".") : "none" });
+    }
+    return bad;
+  };
+  const pan = async () => {
+    const r = t.$("canvas").getBoundingClientRect();
+    const before = t.ev("HM_CTRL._settle()");
+    const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 9, pointerType: "touch", isPrimary: true, view: t.w });
+    const cv = t.$("canvas"), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    cv.dispatchEvent(mk("pointerdown", cx, cy));
+    cv.dispatchEvent(mk("pointermove", cx - 80, cy - 40));
+    cv.dispatchEvent(mk("pointerup", cx - 80, cy - 40));
+    await t.sleep(200);
+    const after = t.ev("HM_CTRL._settle()");
+    return Math.hypot(after[0] - before[0], after[1] - before[1]) > 1e-4;
+  };
+  const closers = [
+    ["the X button", async () => t.click("[data-sheet-close]", { wait: 600 })],
+    ["a double-tap on the map", async () => {
+      const r = t.$("canvas").getBoundingClientRect(), cv = t.$("canvas"), tx = r.left + r.width / 2, ty = r.top + 60;
+      const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 8, pointerType: "touch", isPrimary: true, view: t.w });
+      cv.dispatchEvent(mk("pointerdown", tx, ty)); cv.dispatchEvent(mk("pointerup", tx, ty));
+      await t.sleep(80);
+      cv.dispatchEvent(mk("pointerdown", tx, ty)); cv.dispatchEvent(mk("pointerup", tx, ty));
+      await t.sleep(500);
+    }],
+  ];
+  for (const [how, close] of closers) {
+    for (const arr of ['[data-arr="rings"]', '[data-arr="sunflower"]']) {
+      await H.sheet(t, "arrange");
+      const b = t.$(arr); if (b) await t.click(b, { wait: 400 });
+      await close();
+      await t.waitFor(() => !t.$(".hm-chooser"), 3000, `the sheet to close with ${how}`);
+      await t.sleep(200);
+      const bad = grid();
+      t.expect(bad.length === 0, `after closing with ${how} (${arr}): blocked at ${JSON.stringify(bad)}`);
+      t.expect(await pan(), `after closing with ${how} (${arr}): a pan on the map did not move it`);
+    }
+  }
+});
+
 scenario("home", "mapSelect: a preview mode that auto-arranges the selection and restores on clear", async t => {
   await H.homeReady(t);
   t.expect(t.ev("typeof mapSelect === 'function'"), "mapSelect is not defined");
@@ -3902,4 +3961,26 @@ scenario("trail", "popstate (the native iOS/browser back swipe) swaps straight t
   t.expect(!sawMx, "the native back swipe still played the bubble-shrink animation");
   await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "the map after the native back swipe");
   MXT.corners(t, "after a native back swipe");
+});
+// David, 2026-10-09: "it looks like the black bar is always there" (after shipping the gesture-following back
+// lane) -- .tlg-floor is appended straight to document.body (js/trail.js tlgWire), a sibling of #app, so it
+// survives a normal screen swap untouched; only show()'s own leak-guard line (js/core.js, now including
+// .tlg-floor) removes it. This interrupts a gesture mid-drag with a SECOND, different way to leave the page
+// (the native back swipe) before it ever reaches its own release()/clean() -- the shape of leak the generic
+// t.bodyOverlayLeaks() check (tools/smoke/harness.js) exists for.
+scenario("trail", "a gesture interrupted mid-drag by a native back swipe leaves no stray floor behind", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + 80;
+  const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 77, pointerType: "touch", isPrimary: true, view: t.w });
+  scr.dispatchEvent(new t.w.PointerEvent("pointerdown", o(cx, cy)));
+  await t.sleep(20);
+  scr.dispatchEvent(new t.w.PointerEvent("pointermove", o(cx, cy + 40)));   // past TLG_SLOP: the floor exists now
+  await t.sleep(20);
+  t.expect(t.$(".tlg-floor"), "the floor never appeared for this drag");
+  // never sends pointerup/pointercancel -- a different path (the native swipe) takes over instead
+  t.w.history.back();
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "the map after the interrupted drag's own back swipe");
+  await t.sleep(200);
+  t.expect(t.bodyOverlayLeaks().length === 0, `a body-level overlay survived the interrupted gesture: ${t.bodyOverlayLeaks().join(", ")}`);
+  t.expect(!t.$(".tlg-floor"), "the destination floor was left behind by the interrupted drag");
 });

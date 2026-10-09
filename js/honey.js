@@ -702,7 +702,9 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
           if (dist / 2 - half < r) r = dist / 2 - half;
         }
       }
-      b.poly = null; b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
+      // rin0: the real neighbor-respecting inscribed radius, kept separately from b.rin (the growth pass below
+      // overwrites b.rin, and must never shrink a bubble PAST this -- see that pass's own comment).
+      b.poly = null; b.rin0 = b.rin = Math.max(0, r); b.d0 = b.d; b.d = 2 * b.rin; return;
     }
     for (let i = 0; i < 16; i++) { const t = i / 16 * 6.283185307; poly.push([Math.cos(t) * R0, Math.sin(t) * R0]); }
     const ci = Math.floor(b.x / cell), cj = Math.floor(b.y / cell);
@@ -736,12 +738,19 @@ function honeyCells(drawn, gapPx, shapeAmt = 0, grow = .52, clipAll = false) {  
   // Circles: a small bubble leaves room in its cell that its bigger neighbor can use (the Magnifier's center next to
   // its smaller first ring). Grow each circle, center outward, until it meets its neighbors across the gap, never past
   // its own lens size. Every step keeps r_a + r_b <= distance - gap, so circles still never overlap.
+  // David, 2026-10-09: "this middle gap hasn't been filled" -- a Sunflower/Spiral's own innermost points, after the
+  // fisheye stretches their real neighbors apart, can have a true (pass-1, gap-respecting) inscribed radius well
+  // past d0*grow -- but this pass started from d0*grow every time regardless, SHRINKING those already-correct
+  // circles back down and leaving gaps where several of them meet at the crowded center. b.rin0 (pass 1's own
+  // value, computed from the SAME real neighbors this pass also uses) is already proven non-overlapping on its
+  // own, so it's a safe floor here -- this pass can still grow a bubble further into room a smaller neighbor
+  // cedes, but never shrinks one below what pass 1 already knew was safe.
   if (shapeAmt <= .02) {
     const cx = drawn.reduce((t, b) => t + b.x, 0) / drawn.length, cy = drawn.reduce((t, b) => t + b.y, 0) / drawn.length;
     const order = drawn.map((b, n) => n).sort((a, c) => Math.hypot(drawn[a].x - cx, drawn[a].y - cy) - Math.hypot(drawn[c].x - cx, drawn[c].y - cy));
     for (let pass = 0; pass < 2; pass++) for (const n of order) {
       const b = drawn[n]; if (!b.nb) continue;
-      let lim = b.d0 * grow;
+      let lim = Math.max(b.d0 * grow, b.rin0 || 0);
       for (const [m, dist] of b.nb) lim = Math.min(lim, dist - gapPx - drawn[m].rin);
       b.rin = Math.max(0, lim); b.d = 2 * b.rin;
     }
