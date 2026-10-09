@@ -1,0 +1,126 @@
+{
+ "slug": "light-moss-green",
+ "name": "Light Moss Green",
+ "hex": "#A6C875",
+ "names": [
+  "Light Moss Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Moss Green pales [[moss-green]] toward yellow, filed by the ISCC-NBS in 1955 and rarely found in our painting archive before the 1860s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A paled moss",
+   "body": "The name is the modifier *light* set against the base color [[moss-green]] [1]. The ISCC-NBS 1955 Circular 553 files the matching range as block 106, \"light olive,\" a Delta-E of 7.8 from this hex; the xkcd 2010 crowd survey records the same compound independently [1]. Nearest on file are [[pale-olive-green]] at 2.6 units and [[pistachio]] at 3.4, both close enough to read as the same family at a glance [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 9 of 23,781 paintings, 0.04 percent; within a single canvas it is a distinct area in 6 of them, rarer than 73 percent of our named colors [2]. The earliest dated match is an 1861 painting, 94 years before the name's 1955 record; the archive's early centuries are thin, so this is a floor, not a first, and a hue match in an aged photograph is not proof of a dye or pigment [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier light applied to the base color moss-green",
+   "first_recorded": "1955 (ISCC-NBS, National Bureau of Standards Circular 553, block 106)",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-olive-green",
+   "pistachio",
+   "pale-olive",
+   "light-olive"
+  ],
+  "parent": "moss-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "measured": {
+   "lch": [
+    76.5,
+    45.5,
+    123.8
+   ],
+   "nearest_iscc": [
+    "light olive",
+    7.8
+   ],
+   "nearest": [
+    [
+     "Pale Olive-Green",
+     2.6
+    ],
+    [
+     "Pistachio",
+     3.4
+    ],
+    [
+     "Pale Olive",
+     3.7
+    ],
+    [
+     "Light Olive",
+     4.0
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1861,
+   "years_before_record": 94
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values, ISCC-NBS 1955 block 106, xkcd 2010 survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which base color does Light Moss Green lighten?",
+   "choices": [
+    "Moss-Green",
+    "Pistachio",
+    "Olive",
+    "Pale Olive"
+   ],
+   "answer": "Moss-Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds Light Moss Green in a large share of its paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our archive turns up only nine paintings with this paled moss green."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 179
+}

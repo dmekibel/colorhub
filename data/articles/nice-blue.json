@@ -1,0 +1,137 @@
+{
+ "slug": "nice-blue",
+ "name": "Nice Blue",
+ "hex": "#107AB0",
+ "names": [
+  "Nice Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Nice Blue is a strong greenish blue recorded in both a Wikipedia color list and the xkcd 2010 crowd survey, its plain, approving name left unexplained in either source.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An unexplained compliment",
+   "body": "Our library finds this name in both a Wikipedia color list and the xkcd 2010 crowd survey, but neither source explains why \"nice\" was the chosen word [1]. A related library entry, Blue Sapphire, is dated by Maerz and Paul to 1927 [1]. A near-duplicate name, Star Command Blue, sits only 1.3 units away, two names for almost the same blue [1]. The ISCC-NBS dictionary's nearest block is \"strong greenish blue,\" 6.2 units from that block's centre [1].\n\nIts nearest named neighbor is [[virgin|Virgin]], 3.0 units away and duller [2]. [[cerulean|Cerulean]] sits 3.2 units out, bluer, and [[faience|Faience]] 3.7 units out, duller [2]. Measured in LCH it reads lightness 49, chroma 37, hue 258 degrees [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 30 of 23,781 paintings (11 by the within-painting lens), rarer than 69 percent of the named colors, as photographed [3]. It peaks in the 1800s, found in 6 of the 8,345 paintings we have from that century, 1.3 times the expected rate [3]. Inside a painting it most often plays a shadow, 36 percent of its 11 occurrences [3]. The earliest archive match dates to 1482, 528 years before the name's 2010 record in our sources; that gap marks a look-alike hue in an aged photograph, not evidence the name itself is old [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain approving judgment, not a material or place",
+   "first_recorded": "2010 (xkcd crowd color survey)",
+   "source": "ColorHub color library (Wikipedia; xkcd 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "virgin",
+   "cerulean",
+   "faience",
+   "ocean-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 30,
+  "rank_pct": 31,
+  "peak_century": [
+   1800,
+   1.3
+  ],
+  "role_top": [
+   "shadow",
+   36
+  ],
+  "measured": {
+   "lch": [
+    49,
+    37,
+    258
+   ],
+   "nearest_iscc": [
+    "strong greenish blue",
+    6.2
+   ],
+   "nearest": [
+    [
+     "Virgin",
+     3.0
+    ],
+    [
+     "Cerulean",
+     3.2
+    ],
+    [
+     "Faience",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-n.json): Wikipedia and xkcd sources, Blue Sapphire cross-reference, ISCC-NBS block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for nice-blue (data/graph/edges-n.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 2010 crowd survey also recorded Nice Blue?",
+   "choices": [
+    "xkcd",
+    "Pantone",
+    "RAL",
+    "Maerz and Paul"
+   ],
+   "answer": "xkcd",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources explain why Nice Blue is called \"nice.\"",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Nice Blue's earliest archive match, from 1482, predates the name's own 2010 record by more than five centuries."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); facts drawn from the graph, library and archive fieldnotes only.",
+   "Fixed: field section said 'rarer than 67 percent'; data/graph/fieldnotes/n.json gives rp=31, i.e. rarer than 69 percent. Corrected prose to 69 and field.rank_pct to 31 (the commonness percentile)."
+  ]
+ },
+ "words": 242
+}

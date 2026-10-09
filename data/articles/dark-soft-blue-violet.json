@@ -1,0 +1,148 @@
+{
+ "slug": "dark-soft-blue-violet",
+ "name": "Dark Soft Blue-Violet",
+ "hex": "#59588F",
+ "names": [
+  "Dark Soft Blue-Violet"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark Soft Blue-Violet is a dusky, muted blue-violet, one of Robert Ridgway's many modifier compounds built directly onto a base hue he had already named Soft Blue-Violet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier chain, not a new story",
+   "body": "Dark Soft Blue-Violet stacks two modifiers, *dark* and *soft*, onto [[blue-violet|Blue-Violet]], the way Robert Ridgway built most of his 1912 color atlas [1]. He plotted it on plate XXIII, hue 55 prime, tone k, beside [[soft-blue-violet|Soft Blue-Violet]], the lighter step in the same column [1]. The ISCC-NBS dictionary filed the exact name again in 1955, block 200, calling it a moderate purplish blue [2]. Our own color graph puts its nearest independent neighbors at [[twilight]], [[sailor-blue]] and [[dusk]], all within 3.4 CIEDE2000 units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this hue, as photographed, in 20 of 23,781 paintings, 0.08 percent, rarer than 69 percent of the named colors we track [4]. The earliest dated match is Fra Angelico's *Coronation of the Virgin*, from 1420, 492 years before Ridgway's 1912 plate; the archive's early centuries are thin, so this is a floor and not a first [4]. Inside a painting it most often sits in shadow, in 56 percent of its 9 strongest matches [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color Blue-Violet, by way of Ridgway's own modifier 'dark soft'",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXIII; filed again by ISCC-NBS in 1955, block 200",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "twilight",
+   "sailor-blue",
+   "dusk",
+   "windsor-blue"
+  ],
+  "parent": "soft-blue-violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 9,
+  "measured": {
+   "lch": [
+    39.7,
+    33.6,
+    295.6
+   ],
+   "nearest_iscc": [
+    "moderate purplish blue",
+    3.8
+   ],
+   "nearest": [
+    [
+     "Twilight",
+     3.0
+    ],
+    [
+     "Sailor Blue",
+     3.3
+    ],
+    [
+     "Dusk",
+     3.4
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1420,
+   "years_before_record": 492
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXIII, hue 55′, tone k",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 200 (\"moderate purplish blue\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which modifiers does Ridgway stack onto Blue-Violet to make this name?",
+   "choices": [
+    "Dark and soft",
+    "Deep and pale",
+    "Dusky and faint",
+    "Dim and mild"
+   ],
+   "answer": "Dark and soft",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the ISCC-NBS dictionary filed Dark Soft Blue-Violet under its own exact name in 1955.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, where does Dark Soft Blue-Violet most often sit inside a painting?",
+   "choices": [
+    "In shadow",
+    "As a highlight",
+    "Dead center of the canvas",
+    "Only in borders"
+   ],
+   "answer": "In shadow",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark Soft Blue-Violet is Ridgway's own darker, softer step down from Blue-Violet.",
+  "Its earliest archive match is Fra Angelico's Coronation of the Virgin, nearly five centuries before the name was recorded."
+ ],
+ "words": 186,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

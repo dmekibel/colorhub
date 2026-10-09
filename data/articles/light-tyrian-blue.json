@@ -1,0 +1,113 @@
+{
+ "slug": "light-tyrian-blue",
+ "name": "Light Tyrian Blue",
+ "hex": "#6B8199",
+ "names": [
+  "Light Tyrian Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Tyrian Blue is a paler, greyer step off [[tyrian-blue|Tyrian Blue]], the blue sibling of Tyrian purple, the ancient shellfish dye.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on the shellfish dye's blue",
+   "body": "The name is built by grammar: \"light\" over the parent [[tyrian-blue|Tyrian Blue]], whose best-known story is a religious one tied to Tyrian purple [1]. Ridgway's 1912 atlas plates this lighter, greyer step at plate XXXIV, hue 47'', and ISCC-NBS separately filed it in 1955 as block 186 [1]. Measured, it is only a little lighter than its parent and far less saturated (chroma 16 against 17, close; lightness 53 against 51), reading as a soft slate blue [1].\n\nIts nearest named neighbor is [[tyrian-blue|Tyrian Blue]] itself, 2.6 units away and almost the same, with [[slate]] close behind, also 2.6 and almost the same [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this slate blue in 290 of 23,781 paintings (1.22 percent, as photographed), more common than 66 percent of the named colors we track [2]. It most often plays a hidden color, in 47 percent of its strongest matches, and peaks in paintings from the 1900s [2]. The earliest dated match runs to 1405, by Spinello Aretino, 507 years before Ridgway's 1912 record; a floor, not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive modifier: light + Tyrian Blue",
+   "first_recorded": "1912 (Ridgway, plate XXXIV); also ISCC-NBS 1955, block 186",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "slate",
+   "light-slate-grey",
+   "pigeon-blue"
+  ],
+  "parent": "tyrian-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 290,
+  "measured": {
+   "lch": [
+    53,
+    16,
+    262
+   ],
+   "nearest": [
+    [
+     "Tyrian Blue",
+     2.6
+    ],
+    [
+     "Slate",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIV, hue 47''; ISCC-NBS 1955, block 186; cited via ColorHub color library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Tyrian Blue is a modifier on which parent color?",
+   "choices": [
+    "Tyrian Blue",
+    "Royal Blue",
+    "Teal",
+    "Russet-Vinaceous"
+   ],
+   "answer": "Tyrian Blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, this color most often plays which role?",
+   "choices": [
+    "A hidden color",
+    "An accent",
+    "A light",
+    "A mid-tone"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "This soft slate blue is named as a lighter step off Tyrian Blue, the blue partner to the ancient shellfish dye Tyrian purple."
+ ],
+ "words": 200,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from Ridgway and ISCC-NBS via the color library and archive."
+  ]
+ }
+}

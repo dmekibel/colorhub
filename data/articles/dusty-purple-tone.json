@@ -1,0 +1,120 @@
+{
+ "slug": "dusty-purple-tone",
+ "name": "Dusty purple tone",
+ "hex": "#614E6E",
+ "names": [
+  "Dusty purple tone"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty purple tone is an English rendering of Futa'ai (二藍), a traditional Japanese name meaning \"dark indigo\", applied here to a greyed violet.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark-indigo name for a greyed violet",
+   "body": "Our color library lists this name as the English rendering of 二藍 (Futa'ai), \"dark indigo\", from the traditional colors of Japan [1]. The library gives the kanji and the meaning but no first-recorded date, so when the name entered use is undocumented here [1].\n\nThe hex itself (#614E6E) reads as a dusty, muted [[purple]] rather than the blue \"indigo\" the name points to [1]. That gap between a historical name and its modern screen swatch is common among the traditional names, which our library flags for checking against the dye rather than the pixel [1]. The nearest named color in our graph is [[madder-violet]], at a color distance (ΔE2000) of 2.6, almost the same shade; [[anthracene-violet]] sits 3.4 away and reads more vivid, and [[imperial-purple]] is 4.6 away, purpler and more vivid still [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this violet in only 22 of 23,781 paintings, about 0.1 percent, as photographed [3]. Its single biggest source is Impressionist and Post-Impressionist landscape painting from the 1890s, led by John Singer Sargent, whose canvases carry it at eleven times the archive's overall rate [3]. These are photographs of aged, varnished paintings, so the count is a color match, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Futa'ai (二藍), a traditional Japanese name meaning \"dark indigo\"",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Futa'ai (二藍)"
+  ],
+  "siblings": [
+   "madder-violet",
+   "anthracene-violet",
+   "imperial-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Futa'ai (二藍), \"dark indigo\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 22,
+  "rate": 0.0009,
+  "match": {
+   "hex": "#614E6E",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "painters": [
+   [
+    "John Singer Sargent",
+    11.3
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name behind Dusty purple tone, Futa'ai, literally mean?",
+   "choices": [
+    "Dark indigo",
+    "Cherry blossom",
+    "Imperial purple",
+    "Autumn leaf"
+   ],
+   "answer": "Dark indigo",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the modern swatch for Dusty purple tone looks like the blue that its name describes.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty purple tone's name literally means \"dark indigo\", though the swatch reads as violet, not blue."
+ ],
+ "words": 223,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; no first-recorded date available for the Japanese source name, left undocumented."
+  ]
+ }
+}

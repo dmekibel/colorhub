@@ -1,0 +1,111 @@
+{
+ "slug": "kiwi",
+ "name": "Kiwi",
+ "hex": "#9CEF43",
+ "names": [
+  "Kiwi"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Kiwi is a sharp yellow-green named for the fruit's flesh, a word that barely appears in print before 1870 and climbed fastest only after the 1960s.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The fruit, not the bird",
+   "body": "As a color word, Kiwi borrows its name from the flesh of the kiwifruit rather than from the flightless bird the fruit itself is named after, and our graph files it simply as a plant, animal, food or landscape word [1]. The 2010 xkcd color survey is the source behind this exact swatch, crowd-sourced the same way as its closest neighbor, [[kiwi-green|Kiwi Green]], 2.5 units away, which our graph treats as a named child shade of this one [1]. [[inchworm|Inchworm]] and [[light-lime|Light Lime]] sit a little further out, at 3.4 and 4.2 units, with [[green-yellow|Green Yellow]] beyond that at 4.3 [1].\n\nIn Google's Ngram data, the word *kiwi* is essentially absent until about 1870, stays flat for decades, and only starts climbing fast after 1960, peaking by 2010, the last decade measured [1]. That curve covers every sense of the word, the bird and the fruit included, not the color alone, so it is a guide, not a measurement of the color name itself [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. That is unsurprising for a fruit-flesh green this saturated: kiwifruit itself only entered Western markets widely in the twentieth century, long after most of the paintings in our archive were made, so painters had neither the fruit nor the word to paint from [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the flesh of the kiwifruit",
+   "first_recorded": "2010 (xkcd color survey)",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "inchworm",
+   "light-lime"
+  ],
+  "parent": null,
+  "children": [
+   "kiwi-green"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "ngram": {
+   "term": "kiwi",
+   "first": 1870,
+   "rise": 1960,
+   "peak": 2010
+  },
+  "measured": {
+   "nearest": [
+    [
+     "Kiwi Green",
+     2.5
+    ],
+    [
+     "Inchworm",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: xkcd 2010 crowd color survey, look-alike edges and Google Books Ngram data",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Kiwi, the color, is named for which part of the fruit?",
+   "choices": [
+    "Its flesh",
+    "Its skin",
+    "Its seeds",
+    "Its flower"
+   ],
+   "answer": "Its flesh",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the color name Kiwi was common in print well before 1900.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "The word kiwi barely appears in print before 1870, and climbs fastest only after 1960."
+ ],
+ "words": 259,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

@@ -1,0 +1,136 @@
+{
+ "slug": "grassy-green",
+ "name": "Grassy Green",
+ "hex": "#419C03",
+ "names": [
+  "Grassy Green"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Grassy Green is a sharp, yellow-leaning green named for grass itself, recorded by the 2010 xkcd color-name survey and barely distinguishable from the older name Grass Green.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for the plant underfoot",
+   "body": "Our library traces Grassy Green to the xkcd color survey of 2010, an online project that asked visitors to type a name for colors shown on screen and kept the names enough of them agreed on [1]. The name itself is plain: grass, the plant, plus the color word [[green]] [1].\n\nIt sits close enough to [[grass-green|Grass Green]], an older and more common name for nearly the same hue, that the two are only 0.6 color-distance units apart, closer than most eyes can tell on a screen [2]. The nearest other named look-alikes on file are [[true-green|True Green]] and [[leaf-green|Leaf Green]], both a touch lighter [2]. In print, the two-word phrase \"grassy green\" was already common by the early 1800s and peaked around 1820, close to two centuries before the survey logged it as a single color name [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries a color close enough to this one over enough of its canvas to count, as photographed [4]. That says more about the collection, weighted toward European and pre-modern museum holdings, than about where the color turns up in the world, which is mostly fresh grass under bright light [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "grass, the plant, plus green",
+   "first_recorded": "2010, in the xkcd color-name survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "grass-green",
+   "true-green",
+   "leaf-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    57.0,
+    77.0,
+    130.5
+   ],
+   "nearest": [
+    [
+     "True Green",
+     4.6
+    ],
+    [
+     "Leaf Green",
+     5.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-g.json): xkcd 2010 crowd-sourced color-name survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-g.json), CIEDE2000 near-duplicate and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "Google Books Ngram phrase frequency, \"grassy green\", via ColorHub graph fieldnotes (data/graph/fieldnotes/g.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which name is Grassy Green close enough to that most eyes can't tell them apart?",
+   "choices": [
+    "Grass Green",
+    "Puce",
+    "Sailor Blue",
+    "Jade"
+   ],
+   "answer": "Grass Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Grassy Green was first recorded in a nineteenth-century color dictionary.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Grassy Green takes its name from:",
+   "choices": [
+    "Grass, the plant",
+    "A 1912 color dictionary",
+    "A gemstone",
+    "A painter's surname"
+   ],
+   "answer": "Grass, the plant",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Grassy Green and Grass Green are close enough in color that most eyes can't tell them apart."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources."
+  ]
+ },
+ "words": 217
+}

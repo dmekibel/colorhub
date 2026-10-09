@@ -93,10 +93,20 @@ def load_aliases():
     return json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
 
 
+def load_nonpaintings():
+    """Hand-reviewed non-painting ids (letters, personal correspondence, etc.) to drop even if they're still
+    sitting in a corpus shard -- see data/corpus-nonpaintings.json and design/CORPUS-NONPAINTINGS.md. tools/corpus.py
+    also filters these out at build time; this second check means the gallery never shows one even when it's
+    built from a corpus that wasn't freshly rebuilt."""
+    f = ROOT / "data" / "corpus-nonpaintings.json"
+    return {x["id"] for x in json.loads(f.read_text(encoding="utf-8"))} if f.exists() else set()
+
+
 def load_corpus(aliases=True):
     """Corpus rows in gallery order. With aliases (the default) a painter's spelling variants are folded into one
     name ("Hilaire Germain Edgar Degas" -> "Edgar Degas") so every later stage sees one identity per painter."""
     al = load_aliases() if aliases else {}
+    nonpaintings = load_nonpaintings()
     files = ([ROOT / "data" / "corpus.json"] if (ROOT / "data" / "corpus.json").exists() else []) + \
         sorted((ROOT / "data" / "corpus").glob("*.json"))
     seen, rows = set(), []
@@ -104,7 +114,7 @@ def load_corpus(aliases=True):
         data = json.loads(f.read_text(encoding="utf-8"))
         data = data.get("rows", data) if isinstance(data, dict) else data
         for x in data:
-            if x["id"] in seen or not x.get("img") or len(x.get("p") or []) != 6:
+            if x["id"] in seen or not x.get("img") or len(x.get("p") or []) != 6 or x["id"] in nonpaintings:
                 continue
             seen.add(x["id"])
             if x.get("a") in al:

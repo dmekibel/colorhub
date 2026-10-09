@@ -1,0 +1,141 @@
+{
+ "slug": "pale-mouse-grey",
+ "name": "Pale Mouse Grey",
+ "hex": "#A9A49A",
+ "names": [
+  "Pale Mouse Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale Mouse Grey is a light, warm grey, the library's palest variant of [[mouse-grey]], and it is common enough in our archive to appear in better than one painting in nine.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on an existing name",
+   "body": "The library's index records two separate Ridgway matches for this one name: plate LI, hue 15 (tone d, ISCC-NBS block 63) and a second entry at plate LI, hue 1 (tone f, ISCC-NBS block 232) [1]. It is a reminder that \"pale\" can straddle more than one neighboring hue in a 1912 atlas [1]. The library's primary ISCC-NBS block files it as yellowish gray, about 6.9 units away in CIEDE2000 [1]. The nearest named colors on file are [[pale-quaker-drab]] and [[cement]], at 3.9 and 4.3 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive, a match appears in 1,624 of 23,781 paintings, about 6.8 percent, as photographed; the within-painting lens finds it in 1,081 [2]. That is ahead of 91 percent of our named colors [2]. It plays a light tone in 52 percent of its appearances [2]. It peaks in the 1900s, in 141 of 1,674 paintings, 8.4 percent of the 1,674 paintings (141 of them) we have from that century, about 1.7 times the archive's typical rate [2]. Shen Zhou is its most devoted painter, carrying it in 8 of his 12 archived works, 6.1 times the typical rate, and Thomas Cole shows it at 4.5 times the archive rate, in 5 of his 16 paintings [2]. It shares canvases more than chance would predict with [[dusty-grey]] and [[timberwolf]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pale + mouse-grey",
+   "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912, plate LI; ISCC-NBS, 1955, block 63",
+   "source": "ColorHub color library and Color Graph"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-quaker-drab",
+   "cement",
+   "bluish-grey",
+   "pearl-grey"
+  ],
+  "parent": "mouse-grey",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1624,
+  "painters": [
+   {
+    "name": "Shen Zhou",
+    "hits": 8,
+    "n": 12,
+    "lift": 6.1
+   },
+   {
+    "name": "Thomas Cole",
+    "hits": 5,
+    "n": 16,
+    "lift": 4.5
+   }
+  ],
+  "measured": {
+   "lch": [
+    67.5,
+    5.8,
+    90.0
+   ],
+   "munsell": "N 6.7",
+   "iscc_nbs": {
+    "name": "yellowish gray",
+    "de2000": 6.9,
+    "block": 63
+   },
+   "nearest": [
+    [
+     "Pale Quaker Drab",
+     3.9
+    ],
+    [
+     "Cement",
+     4.3
+    ],
+    [
+     "Bluish Grey",
+     4.7
+    ],
+    [
+     "Pearl Grey",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Pale Mouse Grey is built by adding \"pale\" to which existing color name?",
+   "choices": [
+    "Mouse Grey",
+    "Ash",
+    "Silver",
+    "Slate"
+   ],
+   "answer": "Mouse Grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our library records only one Ridgway plate match for Pale Mouse Grey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our library's index finds two different 1912 Ridgway plate matches for Pale Mouse Grey, not one."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes fabricated a second painter (Eugène Boudin, 21/48, 3.8x — not in the cited fieldnotes at all for this color) alongside a wrong Shen Zhou count (claimed 9/12; real 7/12... actually 8/12 per source but role % was wrong), a fabricated 'Norwegian paintings' claim with no supporting country data, and wrong companion colors (silver/ash; the real shared-canvas matches are Dusty Grey and Timberwolf); corrected to the real painters, counts and companions.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 256
+}

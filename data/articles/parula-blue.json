@@ -1,0 +1,118 @@
+{
+ "name": "Parula Blue",
+ "hex": "#6E90A1",
+ "names": [
+  "Parula Blue"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Parula Blue is a muted slate blue named for the parula warblers, small American songbirds whose backs carry close to this exact grey-blue.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A warbler's back",
+   "body": "Ridgway's 1912 color standards, written by an ornithologist who also founded the field's standard color reference, record this swatch on plate XLII, hue 45 [1]. Maerz and Paul's 1930 dictionary independently records the same name, first dated to 1912, on plate 36 [1]. The 1955 ISCC-NBS system, citing both, classes it in block 186 [1]. The parulas themselves, a family that includes the Northern Parula and a scatter of closely related American warblers, carry this grey-blue mainly across the back and wings, with brighter yellow underneath, so the name borrows only the muted half of the bird [1].\n\nThe nearest named colors on file are [[ether]], [[celestial-blue]], [[grey-blue]] and [[deep-orient-blue]], at 5.5, 5.5, [[denim]] and [[grey]] sit nearby in the same muted-blue family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Parula Blue in 235 of 23,781 paintings (0.99 percent), as photographed, split fairly evenly between highlight and midtone roles [2]. It is strongly over-represented in work by Adriaen van de Velde, Gustave Caillebotte and Vincent van Gogh, each well over ten times the archive average [2]. It keeps company with Slate and Denim more than chance [2]. These are screen approximations of aged, varnished canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "parula warblers, small American songbirds",
+   "first_recorded": "Ridgway, 1912, plate XLII; also Maerz and Paul, 1930, first recorded 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "ether",
+   "celestial-blue",
+   "grey-blue",
+   "deep-orient-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 235,
+  "role": {
+   "highlight": 0.49,
+   "mid": 0.46,
+   "shadow": 0.05
+  },
+  "company": [
+   "Slate",
+   "Denim",
+   "Grey"
+  ],
+  "measured": {
+   "lch": [
+    58,
+    15,
+    239
+   ],
+   "nearest": [
+    [
+     "Ether",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Parula Blue named after?",
+   "choices": [
+    "Parula warblers, small American songbirds",
+    "A French porcelain factory",
+    "A mineral pigment",
+    "A sea creature"
+   ],
+   "answer": "Parula warblers, small American songbirds",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds Parula Blue used almost entirely as a shadow color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Parula Blue is named for a songbird's back, not a dye or a place."
+ ],
+ "words": 222,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "parula-blue"
+}

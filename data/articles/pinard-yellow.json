@@ -1,0 +1,122 @@
+{
+ "slug": "pinard-yellow",
+ "name": "Pinard Yellow",
+ "hex": "#FEE97F",
+ "names": [
+  "Pinard Yellow"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pinard Yellow is a pale, warm yellow recorded by Ridgway in 1912, and it sits so close to the Crayola crayon called Yellow that the two are nearly indistinguishable on screen.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale yellow, three ways over",
+   "body": "Ridgway's 1912 color standards place this hue on plate IV, hue 21, tone d; it is reproduced from a scan of an aged plate, so the printed color is approximate [1]. The ISCC-NBS system later filed it in block 86, \"moderate yellow\", and Maerz and Paul's 1930 dictionary also records it, on plate 9 J 2 [2][3]. Who or what \"Pinard\" refers to is undocumented in the books our library draws on [1].\n\nOur library flags a near-duplicate: Yellow, the Crayola crayon color cited on Wikipedia, sits only 0.8 CIEDE2000 units away [2]. The nearest other named colors are [[yellow-tan|Yellow Tan]], 2.5 units off, and [[barium-yellow|Barium Yellow]], [[sandy|Sandy]] and [[straw|Straw]] close behind [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pinard Yellow appears in 57 of our 23,781 paintings, about 0.24 percent, as photographed; the within-painting lens finds it in 48, more common than half our named colors [4]. It peaks in the 1400s, in 6 of 945 paintings, at 2.5 times the expected rate for that century [4]. Inside a painting it most often plays an accent, in 56 percent of the 48 paintings where it carries real area [4].\n\nThe earliest match is dated 1434, in a work by Fra Angelico — 478 years before Ridgway's 1912 record of the name, as photographed, a floor and not a first, since the archive's early centuries are thin [4]. The gap is a look-alike hue surviving in an aged photograph, not proof that this exact paint existed that early [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "1912, Ridgway plate IV",
+   "source": "Ridgway, Color Standards and Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "yellow-tan",
+   "barium-yellow",
+   "sandy",
+   "straw"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 57,
+  "measured": {
+   "lch": [
+    92,
+    54,
+    97
+   ],
+   "nearest": [
+    [
+     "Yellow Tan",
+     2.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Nomenclature (1912), plate IV, hue 21, tone d",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 86 entry and near-duplicate distance",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 9 J 2",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: our sources explain who or what \"Pinard\" refers to.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which familiar crayon color is a near-duplicate of Pinard Yellow?",
+   "choices": [
+    "Yellow (Crayola)",
+    "Phlox",
+    "Pigeon Blue",
+    "Pearl Blackberry"
+   ],
+   "answer": "Yellow (Crayola)",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pinard Yellow is nearly indistinguishable, by the numbers, from the Crayola crayon simply called Yellow."
+ ],
+ "words": 268,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

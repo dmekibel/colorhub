@@ -1,0 +1,106 @@
+{
+ "slug": "ksu-purple",
+ "name": "KSU Purple",
+ "hex": "#512888",
+ "names": [
+  "KSU Purple"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "KSU Purple is a dark, strong violet named for a university's own colors, a case where the place in the name is an institution rather than a city or a country.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An institution's color",
+   "body": "Our color graph files this name under place-and-institution words, and the obvious reading of the initials is a university's own branded purple [1]. The sources we hold give only Wikipedia for the swatch and no further documentation of which school, or who chose the shade, so beyond the initials themselves the story is undocumented here [1].\n\nComputed by ISCC-NBS block, the swatch lands as a strong violet, 7.1 units from that block's center, and Munsell gives it as 0.7P 2.7/12.7, a dark, high-chroma purple [1]. In the color graph its nearest named neighbor is [[seance|Seance]], 3.8 units away, followed by [[clematis|Clematis]] at 3.9, [[indigo|Indigo]] at 4.2, and [[wood-violet|Wood Violet]] at 4.3 [1]. All four sit close enough together that a viewer would struggle to tell them apart without the hex values side by side."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. A dark, saturated institutional purple like this, mixed for a modern brand rather than from any historical pigment, is simply not a shade painters had reason to use [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a university's own brand purple (the specific institution is undocumented here)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "seance",
+   "clematis"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "iscc": "strong violet",
+   "nearest": [
+    [
+     "Seance",
+     3.8
+    ],
+    [
+     "Clematis",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph and library: web-sourced name and look-alike edges",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "KSU Purple is most likely named for which kind of place?",
+   "choices": [
+    "A university",
+    "A river",
+    "A mountain range",
+    "A royal palace"
+   ],
+   "answer": "A university",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources name the specific institution behind KSU Purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "KSU Purple's initials point to a university, but no source here names which one."
+ ],
+ "words": 224,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Which university 'KSU' refers to is not documented in sources consulted; left unspecified rather than guessed."
+  ]
+ }
+}

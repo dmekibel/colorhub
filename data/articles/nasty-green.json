@@ -1,0 +1,125 @@
+{
+ "slug": "nasty-green",
+ "name": "Nasty Green",
+ "hex": "#70B23F",
+ "names": [
+  "Nasty Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Nasty Green is a vivid yellow-green named by a volunteer in the xkcd 2010 crowd color survey, pairing a plain negative judgment with [[green]] itself.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A judgment, not a material",
+   "body": "Our library traces this name only to the xkcd 2010 survey, which also produced many other plain-judgment names for this color family; why this particular volunteer reached for \"nasty\" is not recorded [1]. It modifies the plain [[green]] with a judgment rather than a material or place [1]. The ISCC-NBS dictionary's nearest block is \"strong yellow green,\" 8.3 units from that block's centre, a loose match [1].\n\nIts nearest named neighbor is [[leaf|Leaf]], 2.6 units away and read as almost the same color [2]. [[grass|Grass]] sits 3.0 units out, more vivid [2]. Measured in LCH it reads lightness 66, chroma 65, a saturated, bright green [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this exact color in only 3 of 23,781 paintings, rarer than 79 percent of the named colors, as photographed [3]. The sample is too thin here to say which painters or centuries favor it [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a plain negative judgment on green, not a material or place",
+   "first_recorded": "2010 (xkcd crowd color survey)",
+   "source": "ColorHub color library (xkcd 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "leaf",
+   "grass",
+   "murky-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "rank_pct": 79,
+  "measured": {
+   "lch": [
+    66,
+    65,
+    129
+   ],
+   "nearest_iscc": [
+    "strong yellow green",
+    8.3
+   ],
+   "nearest": [
+    [
+     "Leaf",
+     2.6
+    ],
+    [
+     "Grass",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-n.json): xkcd 2010 source, ISCC-NBS block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for nasty-green (data/graph/edges-n.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 2010 crowd survey first recorded Nasty Green?",
+   "choices": [
+    "xkcd",
+    "Pantone",
+    "Maerz and Paul",
+    "RAL"
+   ],
+   "answer": "xkcd",
+   "kind": "pick"
+  },
+  {
+   "q": "What is Nasty Green's nearest named neighbor?",
+   "choices": [
+    "Leaf",
+    "Grass",
+    "Kermit Green",
+    "Asparagus"
+   ],
+   "answer": "Leaf",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Nasty Green comes from the same 2010 crowd survey that named colors like Murky Green and Bright Pink."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); archive sample is thin (n=3), so field notes are limited to presence and rank."
+  ]
+ },
+ "words": 165
+}

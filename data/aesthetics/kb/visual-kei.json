@@ -1,0 +1,70 @@
+{
+ "id": "visual-kei",
+ "name": "Visual Kei",
+ "lineage": {
+  "influenced_by": [
+   "glam rock/metal",
+   "Japanese kabuki theater makeup",
+   "gothic-lolita crossover"
+  ],
+  "influences": [
+   "gothic-lolita",
+   "cybergoth",
+   "scene"
+  ]
+ },
+ "eras": [
+  "late 1980s origin (Japan)",
+  "1990s–2000s international spread"
+ ],
+ "places": [
+  "Japanese rock music scene"
+ ],
+ "garments": [
+  "elaborate androgynous makeup",
+  "teased/spiked dyed hair",
+  "theatrical costuming blending punk, glam and historical references"
+ ],
+ "media": [
+  {
+   "title": "X Japan (band, formed 1982)",
+   "note": "widely credited as the genre-defining act"
+  },
+  {
+   "title": "Malice Mizer",
+   "note": "key act for the gothic/elegant strand that fed into gothic-lolita crossover"
+  }
+ ],
+ "figures": [
+  "Yoshiki (X Japan)",
+  "Mana (Malice Mizer)"
+ ],
+ "reacts_against": "conventional Japanese gender presentation in pop music, using extreme androgynous visual spectacle as a core part of the genre's identity, not a costume side effect.",
+ "revivals": [
+  "ongoing: visual kei has had a continuous, evolving scene since the 1980s rather than a single revival"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "VK, V-Kei, V系",
+  "decade_of_origin": "1980s",
+  "key_motifs": "Androgyny, elaborate costumes, dramatic makeup, extravagant hairstyles (often brightly colored and spiked), historical and fantastical themes",
+  "key_colours": "Varies widely by sub-genre, from all-black to vibrant, multi-colored palettes",
+  "related_aesthetics": "Glam RockGothGothic LolitaPunkNew RomanticAngura Kei",
+  "key_values": "Visual self-expression, artistic freedom, theatricality, rebellion against conformity, musical diversity"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Visual_Kei"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 77% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 74% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

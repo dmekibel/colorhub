@@ -1,0 +1,119 @@
+{
+ "slug": "dusty-salmon",
+ "name": "Dusty salmon",
+ "hex": "#F58F84",
+ "names": [
+  "Dusty salmon"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty salmon renders Tokiha-iro (鴇羽色), a traditional Japanese name meaning \"ibis wing color\", after the pale pink flight feathers of the crested ibis.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a bird's feather",
+   "body": "Our color library gives the source as 鴇羽色 (Tokiha-iro), \"ibis wing color\": toki is the Japanese crested ibis, a bird known for its soft pink flight feathers, and ha is feather or wing [1]. No first-recorded date survives in our sources, so when the name entered use is undocumented here [1]. The library separately records Peachy Pink as a modern, 2010 xkcd crowd-survey name for a near-duplicate shade, at a color distance of 3.2, not a distinct historical name of its own [1].\n\nThe nearest named color in our graph is [[mona-lisa]], at a color distance (ΔE2000) of 2.6, almost the same shade; [[peachy-pink]] sits the same distance away, and [[salmon]] itself is 3.9 away and reads more vivid [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale pink in only 2 of 23,781 paintings, as photographed, among the rarest matches we have recorded [3]. Both appearances are small highlight passages, in Correggio's *Salvator Mundi* (1515) and a Louis Gustave Ricard self-portrait (1853) [3]. With so few hits, this is closer to an absence than a trend; the figures remain a computed color match on aged, varnished canvases, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Tokiha-iro (鴇羽色), \"ibis wing color\", after the crested ibis",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Tokiha-iro (鴇羽色)",
+   "Peachy Pink (xkcd, near-duplicate)"
+  ],
+  "siblings": [
+   "mona-lisa",
+   "peachy-pink",
+   "salmon",
+   "light-coral"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Tokiha-iro (鴇羽色), \"ibis wing color\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "match": {
+   "hex": "#F58F84",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "top_paintings": [
+   "nga-46167",
+   "commons-Q17495200"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What bird gives Dusty salmon its Japanese name, Tokiha-iro?",
+   "choices": [
+    "The crested ibis",
+    "The crane",
+    "The peacock",
+    "The swan"
+   ],
+   "answer": "The crested ibis",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusty salmon is common in our painting archive, found in hundreds of works.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty salmon is named for the pink flight feathers of the Japanese crested ibis, and our archive finds it in just two paintings."
+ ],
+ "words": 212,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "Only 2 archive hits; kept field notes honest about the near-absence rather than overstating a pattern."
+  ]
+ }
+}

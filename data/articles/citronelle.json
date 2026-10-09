@@ -11,7 +11,7 @@
   {
    "id": "name",
    "title": "A 1928 dictionary name",
-   "body": "Maerz and Paul's *A Dictionary of Color* places Citronelle on plate 18, cell L2, first recorded in 1928 [1]. The ISCC-NBS system files the same block as a vivid greenish yellow [2]. The word echoes *citronella*, the lemon-scented grass and its oil, but the dictionary does not say the name was chosen for that reason, so the connection is undocumented here [1].\n\nThe nearest named colors on file are [[dijon]], [[dirty-yellow]], [[piss-yellow]] and [[oil-yellow]], at 4.1, 4.1, 4.3 and 4.4 ΔE [3]."
+   "body": "Maerz and Paul's *A Dictionary of Color* places Citronelle on plate 18, cell L2, first recorded in 1928 [1]. The ISCC-NBS system files the same block as a vivid greenish yellow [2]. The word echoes *citronella*, the lemon-scented grass and its oil, but the dictionary does not say the name was chosen for that reason, so the connection is undocumented here [1].\n\nThe nearest named colors on file are [[dijon]], [[dirty-yellow]], [[sulphur-yellow]] and [[oil-yellow]], at 4.1, 4.1, 4.9 and 4.4 ΔE [3]."
   },
   {
    "id": "field",
@@ -29,7 +29,7 @@
   "siblings": [
    "dijon",
    "dirty-yellow",
-   "piss-yellow",
+   "sulphur-yellow",
    "oil-yellow"
   ],
   "parent": null,

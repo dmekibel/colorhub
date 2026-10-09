@@ -1,0 +1,116 @@
+{
+ "slug": "rejane-green",
+ "name": "Rejane Green",
+ "hex": "#A0B893",
+ "names": [
+  "Rejane Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Rejane Green is a pale sage first plated by Ridgway in 1912 and later refiled under the ISCC-NBS system in 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Filed under Ridgway, then ISCC-NBS",
+   "body": "The library traces this name to Robert Ridgway's *Color Standards and Color Nomenclature* (1912), plate XXXIII, hue 37″, tone b, a scan of an aged printed plate that is itself approximate [1]. The ISCC-NBS system later filed the same name in its 1955 block 136, among the murky-to-raw sage greens [1]. No source consulted here records who Rejane was or whether the name honors a person; that origin is undocumented here [1].\n\nThe Japanese library entry glosses the same hue as *Byakuroku* (白緑), \"whitish green,\" a name used independently in Japanese traditional color lists [1]. Its nearest library neighbor is [[sage]], and a near-duplicate entry, \"Dark Greenish Glaucous,\" sits only 2.3 units away from the same Ridgway plate [1].\n\nFurther along the same family are [[malachite-green]], [[cameo-green]] and [[deep-glaucous-green]], all greener or more vivid than this swatch [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub painting archive this hue appears in 133 of 23,781 paintings, about 0.6 percent, as photographed [2]. Vincent van Gogh, Alfred Sisley, Edvard Munch and Gustav Klimt use it far more than the archive average relative to their output, and it peaks in the 1910s (9 of 523 paintings from that decade) [2]. These are computed color matches on varnished, photographed canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXXIII",
+   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+  },
+  "aka": [
+   "Byakuroku"
+  ],
+  "siblings": [
+   "sage",
+   "malachite-green",
+   "cameo-green",
+   "deep-glaucous-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Byakuroku (白緑)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 133,
+  "measured": {
+   "lch": [
+    72,
+    22,
+    133
+   ],
+   "nearest": [
+    [
+     "Sage",
+     2.8
+    ]
+   ]
+  },
+  "peak_decade": 1910
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate data, ISCC-NBS 1955 filings, Japanese traditional-color entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 work first plates the name Rejane Green?",
+   "choices": [
+    "Ridgway's Color Standards and Color Nomenclature",
+    "Maerz and Paul's A Dictionary of Color",
+    "Munsell's Atlas",
+    "Werner's Nomenclature of Colours"
+   ],
+   "answer": "Ridgway's Color Standards and Color Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the sources consulted here confirm the name honors a specific person.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Rejane Green's own Japanese gloss, Byakuroku, simply means \"whitish green.\""
+ ],
+ "words": 225,
+ "status": "checked",
+ "checked": {
+  "by": "batch-29",
+  "date": "2026-10-09",
+  "issues": [
+   "Could not confirm whether the name honors a person named Rejane; left undocumented rather than repeating an unverified claim."
+  ]
+ }
+}

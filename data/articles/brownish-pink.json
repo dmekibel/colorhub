@@ -1,0 +1,126 @@
+{
+ "slug": "brownish-pink",
+ "name": "Brownish Pink",
+ "hex": "#C27E79",
+ "names": [
+  "Brownish Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Brownish Pink is a modifier on [[pink]], a phrase Paterson's dictionary reaches for to describe other named colors rather than one he enters on its own.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A phrase borrowed to define other words",
+   "body": "As a swatch name, Brownish Pink is recorded only by the xkcd 2010 crowd survey [1]. But Paterson's *A Dictionary of Colour* already uses the phrase twice: he calls \"nude\" a brownish pink, quoting a 1900 *Times* reference to \"nude-coloured chiffon dresses\" [2]. He also notes that tea rose, usually a yellowish pink, is \"sometimes a brownish pink,\" and cites Fowler's *English Usage* for the first recorded use of \"tea rose\" as a color term in 1892 [2].\n\nIts nearest named neighbor is [[old-rose|Old Rose]], only 2.6 units away and read as almost the same color [3]. [[dirty-pink|Dirty Pink]] sits a little further out, redder by comparison [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color appears in 119 of our 23,781 paintings, about 0.5 percent, rarer than 55 percent of our named colors, as photographed [4]. It peaks in paintings from the 1900s, 3.2 times the rate expected from that century's share of the archive, and Henri Matisse is its most devoted painter here, with 4 of his 50 works carrying it, 6.8 times his baseline [4]. The earliest match dates to the year 1000, 1,010 years before the xkcd survey; our archive's early centuries are thin, so this is a floor, not a first [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pink, pulled toward brown",
+   "first_recorded": "2010 as a swatch name (xkcd); the phrase itself appears in Paterson's dictionary describing other colors",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "old-rose",
+   "peach-rose",
+   "dirty-pink"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 119,
+  "match": {
+   "min_cover": 0.02
+  },
+  "measured": {
+   "lch": [
+    59.7,
+    29.2,
+    27.9
+   ],
+   "nearest": [
+    [
+     "Old Rose",
+     2.6
+    ],
+    [
+     "Peach rose",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"nude\" and \"tea rose\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for brownish-pink",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1892 color term does Paterson say is \"sometimes a brownish pink\"?",
+   "choices": [
+    "Tea rose",
+    "Nude",
+    "Old Rose",
+    "Dusky Pink"
+   ],
+   "answer": "Tea rose",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Brownish Pink has its own entry in Paterson's dictionary.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson never entered Brownish Pink itself, but used the phrase to define two other colors."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 225
+}

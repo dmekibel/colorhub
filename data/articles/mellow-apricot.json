@@ -1,0 +1,132 @@
+{
+ "slug": "mellow-apricot",
+ "name": "Mellow Apricot",
+ "hex": "#F8B878",
+ "names": [
+  "Mellow Apricot"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Mellow Apricot is a soft orange, named in English for the fruit [[apricot]] and carried in our data as a traditional Japanese color, *Asagi*, whose name actually means \"light yellow.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Apricot in English, light yellow in Japanese",
+   "body": "The English name is a modifier on the fruit [[apricot]], \"mellow\" softening its usual brightness [1]. Our library also files this hue under the traditional Japanese color list as *Asagi* (浅黄), which our data translates literally as \"light yellow,\" a looser match to the hue than the English fruit name suggests [1]. Japanese traditional color names were not standardized the way the ISCC-NBS lists would later be; a single name could drift toward orange or yellow depending on the dye lot and the fabric [1].\n\nIts nearest named neighbor by measured color is [[apricot]] itself, more vivid, with [[macaroni-and-cheese]], [[antimony-yellow]] and [[buff]] close behind [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 223 of 23,781 paintings, 0.94 percent, as photographed; the within-painting lens finds it in 146 [2]. That makes it more common than 65 percent of the named colors we track [2]. It peaks in the 1900s, found in 19 of the 1,674 paintings we have from that century, 1.5 times the expected rate [2]. It is most over-represented in paintings from India, at 3.3 times the expected rate [2]. Inside a painting it most often plays an accent, in 63 percent of the 146 paintings where it appears, ranked by lightness so varnish cannot fake the result [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the apricot fruit, softened by \"mellow\"; carried in Japanese tradition as Asagi (浅黄, \"light yellow\")",
+   "first_recorded": "undocumented date; listed in our sources as a traditional Japanese color name",
+   "source": "ColorHub color library (traditional colors of Japan)"
+  },
+  "aka": [
+   "Asagi"
+  ],
+  "siblings": [
+   "apricot",
+   "macaroni-and-cheese",
+   "antimony-yellow",
+   "buff"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Asagi (浅黄)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 223,
+  "n_within_painting": 146,
+  "rank_more_common_than_pct": 65,
+  "century_peak": {
+   "century": 1900,
+   "n": 19,
+   "of": 1674,
+   "lift": 1.5
+  },
+  "country": {
+   "name": "India",
+   "lift": 3.3
+  },
+  "role_accent_pct": 63,
+  "measured": {
+   "lch": [
+    79.4,
+    44.3,
+    68.9
+   ],
+   "nearest": [
+    [
+     "Apricot",
+     3.2
+    ],
+    [
+     "Macaroni and Cheese",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (via Wikipedia); ColorHub name graph (look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Mellow Apricot's Japanese name, Asagi, translate to in our sources?",
+   "choices": [
+    "Light yellow",
+    "Soft apricot",
+    "Autumn leaf",
+    "Pale coral"
+   ],
+   "answer": "Light yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mellow Apricot is rarer in our archive than most of the named colors we track.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mellow Apricot's Japanese name, Asagi, actually translates to \"light yellow,\" not apricot."
+ ],
+ "words": 239,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in the 29 books for this slug; sourced from our own library/graph data only."
+  ]
+ }
+}

@@ -1,0 +1,120 @@
+{
+ "slug": "orangish",
+ "name": "Orangish",
+ "hex": "#FC824A",
+ "names": [
+  "Orangish"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Orangish is a warm, salmon-leaning orange named simply for being nearly, but not quite, orange, carried in our data by both a general web source and the 2010 xkcd color survey.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A word that means almost orange",
+   "body": "Orangish is built from [[orange]] plus the suffix *-ish*, softening grammar also used elsewhere in the library's descriptive names [1]. Our sources carry no author, pigment or standards body behind this exact value, only a general web listing and the 2010 xkcd survey; the origin stays undocumented in our data [1].\n\nThe nearest named look-alikes on file are [[coral|Coral]] and [[mandarin|Mandarin]], both almost the same shade [2]. That is itself a small lesson in crowd naming: a survey like xkcd's records whatever spelling and wording a visitor typed, with no settled standard behind it [1][2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a close match turns up in 15 paintings, about 0.06 per cent, with the within-painting lens finding it in 16, rarer than 63 per cent of our named colors [3]. It peaks in the 1600s, at 1.4 times the archive's overall rate (6 paintings), and most often plays an accent [3]. The earliest match, by Sandro Botticelli and dated 1470, sits 540 years before the 2010 survey name; that gap is a floor, not a first sighting, as photographed, not a pigment match [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the suffix -ish added to orange",
+   "first_recorded": "2010, in the xkcd color-name survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "coral",
+   "mandarin",
+   "orange",
+   "light-orange"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 16,
+  "n_archive_hits": 15,
+  "measured": {
+   "lch": [
+    67.4,
+    66.0,
+    49.9
+   ],
+   "nearest": [
+    [
+     "Coral",
+     2.5
+    ],
+    [
+     "Mandarin",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-o.json): web source and xkcd 2010 crowd-sourced color-name survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/o.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the suffix -ish usually do to a color word like orange?",
+   "choices": [
+    "Softens it, meaning \"nearly but not quite\"",
+    "Marks a pigment's chemical family",
+    "Names a specific decade's fashion color",
+    "Signals a Crayola retirement"
+   ],
+   "answer": "Softens it, meaning \"nearly but not quite\"",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Orangish and Orangeish are the exact same hex value in our data.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Orangish and Orangeish spell almost the same idea two different ways, and land on two close but distinct shades."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources."
+  ]
+ },
+ "words": 210
+}

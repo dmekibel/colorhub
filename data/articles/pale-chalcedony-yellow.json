@@ -1,0 +1,119 @@
+{
+ "slug": "pale-chalcedony-yellow",
+ "name": "Pale Chalcedony Yellow",
+ "hex": "#F0E8B5",
+ "names": [
+  "Pale Chalcedony Yellow"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Pale Chalcedony Yellow is a soft, pale cream-yellow, built by putting the modifier pale in front of the base color [[chalcedony-yellow]], named for the pale yellow banding seen in the mineral chalcedony.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on a mineral's name",
+   "body": "Pale Chalcedony Yellow puts the modifier word pale in front of the base color [[chalcedony-yellow]], in the compound-modifier grammar our library uses for names like this one [1]. The base name points to chalcedony, a waxy quartz that can show pale, honeyed bands, though our data does not go further into which specific stone or supplier set the standard swatch [1]. Robert Ridgway first listed it in his 1912 *Color Standards and Color Nomenclature*, plate XVII, hue 25, tone f, and the Inter-Society Color Council later filed it in the ISCC-NBS 1955 system as block 104 (R) [1].\n\nIts nearest named neighbor is [[pale-goldenrod]], only 2.5 units off, close enough on screen to read as the same pale yellow [2]; [[lemon-meringue]] and [[seafoam-green]] both sit 3.0 units away [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within range of this swatch in 487 of 23,781 paintings, 2.05 percent, as photographed; looking for real coverage inside each painting narrows that to 270 [3]. That makes it more common than 75 percent of the named colors in our library [3]. It most often plays a light, in 73 percent of its 270 appearances by lightness rank, so varnish cannot fake the result [3]. John Singer Sargent is its most devoted painter, present in 12 of his 287 works here, 2.9 times the expected rate for the museums those paintings come from [3].\n\nThe earliest match dates to 1413, exactly five hundred years before Ridgway's 1912 plate, a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment or mineral [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: pale + chalcedony yellow (chalcedony, a banded quartz)",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XVII",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-goldenrod",
+   "lemon-meringue",
+   "seafoam-green"
+  ],
+  "parent": "chalcedony-yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 487,
+  "n_within_painting": 270,
+  "pct_archive": 2.05,
+  "rank_pct": 75,
+  "measured": {
+   "lch": [
+    91,
+    26,
+    101
+   ],
+   "nearest": [
+    [
+     "Pale Goldenrod",
+     2.5
+    ],
+    [
+     "Lemon Meringue",
+     3.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XVII, hue 25, tone f; ISCC-NBS 1955 block 104 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color standard first listed Pale Chalcedony Yellow?",
+   "choices": [
+    "Ridgway, 1912",
+    "The ISCC-NBS system alone",
+    "Maerz and Paul, 1930",
+    "Crayola"
+   ],
+   "answer": "Ridgway, 1912",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: chalcedony, the mineral behind this name, is a type of quartz.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Chalcedony Yellow turns up in a John Singer Sargent painting nearly three times more often than chance."
+ ],
+ "words": 303,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

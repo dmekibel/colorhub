@@ -1,0 +1,107 @@
+{
+ "slug": "eerie-black",
+ "name": "Eerie Black",
+ "hex": "#1B1B1B",
+ "names": [
+  "Eerie Black"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Eerie Black is a near-black from Crayola's crayon list, closest in our archive to a painting's deepest shadow and present in nearly one of every five paintings we have.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crayon name, no earlier record",
+   "body": "Eerie Black is cited via Wikipedia as a name from Crayola's crayon list [1]. Its hex value, #1B1B1B, approximates RAL 9011, a graphite black from the RAL color-matching system [1]. No earlier record of the name is documented in our data [1]. Our color library's nearest look-alikes are [[black]], [[raisin-black]], [[smoky-black]] and [[almost-black]], all within a few units of it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this near-black in 19.61 percent of the 23,781 paintings we have, 4,663 of them, as photographed; the within-painting lens finds it in 4,329 [2]. That makes it more common than 99 percent of the named colors in our archive [2]. Inside a painting it most often plays a shadow, in 68 percent of the 4,329 paintings where it appears, measured by lightness rank within each painting so varnish cannot fake it [2]. Pieter van der Werff is its most devoted painter, using it in 28 of 35 works here, four times the baseline rate of the museums those works come from [2]. The earliest match in our archive is dated 1000, nine centuries before the name's own earliest record of 1927 [2]. The archive's early centuries are thin, so this is a floor, not a first, and a look-alike hue in an aged photograph is not proof the name or pigment existed that early [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the Crayola crayon list",
+   "first_recorded": "1927 (RAL color system)",
+   "source": "Wikipedia, citing Crayola"
+  },
+  "aka": [],
+  "siblings": [
+   "black",
+   "raisin-black"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4663,
+  "measured": {
+   "lch": [
+    9.8,
+    0.0,
+    296.8
+   ],
+   "nearest": [
+    [
+     "Black",
+     2.5
+    ]
+   ]
+  },
+  "role": {
+   "shadow_pct": 68
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Crayola list (via Wikipedia); RAL 9011, approximate screen value",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Inside a painting, what role does Eerie Black most often play?",
+   "choices": [
+    "Shadow",
+    "Light",
+    "Accent",
+    "Mid-tone"
+   ],
+   "answer": "Shadow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Eerie Black's name is explained by a documented historical source in our data.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Eerie Black turns up in nearly one of every five paintings in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 246
+}

@@ -1,0 +1,127 @@
+{
+ "slug": "phlox-pink",
+ "name": "Phlox Pink",
+ "hex": "#B290BA",
+ "names": [
+  "Phlox Pink"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Phlox Pink is a dusty lilac, the paler, lower-chroma member of the Phlox name family, and it differs from its vivid parent by losing almost all of the saturation.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The pale cousin",
+   "body": "Maerz and Paul's 1930 dictionary records this name on plate 41 E 4, with a first recorded date of 1912, six years earlier than [[phlox|Phlox]] itself [1]. The two names share the flower, but almost nothing else in color: [[phlox|Phlox]] is a near-saturated magenta, while Phlox Pink reads as the ISCC-NBS block \"light purple\", with low chroma and a soft, greyed cast [2]. Our library's own distance between the two Phlox names is 2.2 units — close, but not identical [2].\n\nThe nearest other named color is [[hay-s-lilac|Hay's Lilac]], 3.8 CIEDE2000 units away, with [[heather|Heather]] and [[dusty-lavender|Dusty Lavender]] close behind [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Phlox Pink appears in just 2 of our 23,781 paintings, as photographed; the within-painting lens finds it in only 1, rarer than 86 percent of our named colors [3]. Both matches come from the same painter, Paul Sérusier, between 1894 and 1898, and the color plays no large, prominent role in either canvas [3]. With a sample this thin, the finding describes two specific paintings, not a reliable pattern across his work [3].\n\nBy contrast, [[phlox|Phlox]] itself, the far more saturated parent name, has no match at all in the archive at the one-percent-of-canvas threshold, so neither Phlox name is well represented in museum collections as photographed [3]. That is consistent with both being late, commercial color names rather than traditional pigment words painters reached for before the twentieth century [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the phlox flower, a paler reading",
+   "first_recorded": "1912, per Maerz and Paul",
+   "source": "Maerz and Paul, A Dictionary of Color (1930), plate 41 E 4"
+  },
+  "aka": [],
+  "siblings": [
+   "hay-s-lilac",
+   "heather",
+   "dusty-lavender",
+   "opera-mauve"
+  ],
+  "parent": "phlox",
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "measured": {
+   "lch": [
+    64,
+    26,
+    320
+   ],
+   "nearest": [
+    [
+     "Hay's Lilac",
+     3.8
+    ],
+    [
+     "Heather",
+     4.2
+    ],
+    [
+     "Dusty Lavender",
+     4.2
+    ],
+    [
+     "Opera Mauve",
+     5.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 41 E 4",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS block entry and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does Phlox Pink differ in color from its parent name, Phlox?",
+   "choices": [
+    "It is far less saturated and greyer",
+    "It is more saturated",
+    "It is a completely different hue",
+    "They are identical"
+   ],
+   "answer": "It is far less saturated and greyer",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Phlox Pink is one of the more common named colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Phlox Pink shares a flower with vivid Phlox but almost none of its intensity."
+ ],
+ "words": 254,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

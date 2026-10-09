@@ -1,0 +1,121 @@
+{
+ "slug": "dusty-vermilion",
+ "name": "Dusty vermilion",
+ "hex": "#D34E36",
+ "names": [
+  "Dusty vermilion"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty vermilion renders Terigaki (照柿), a traditional Japanese name meaning \"glazed persimmon\", after the shine of a ripe persimmon's skin.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Named for a ripe fruit",
+   "body": "Our color library gives the source as 照柿 (Terigaki): teri is shine or glaze, and kaki is the persimmon, so the name points to the lacquered gleam of the fruit's ripe orange-red skin [1]. No first-recorded date survives in our sources, so when the name entered use is undocumented here [1].\n\nThe nearest named color in our graph is [[vermilion]] itself, at a color distance (ΔE2000) of 3.3, a more vivid shade; the related [[dusty-scarlet]] sits 5.5 away and reads lighter [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this orange-red in 126 of 23,781 paintings, about 0.5 percent, as photographed [3]. It is heavily concentrated in Indian court painting, more than fifteen times the overall rate, with Kalighat work alone running nearly forty times that average, Rajput work twenty-seven times it, and Pahari work close to thirteen times it [3]. The earliest dated match is a *Madonna and Child* by the Master of San Torpè, from 1320, a floor set by what survives and was photographed, not a first appearance; the color peaks again in the 1890s, led by Henri Matisse [3]. These are photographs of aged, varnished paintings; the match is computed, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Terigaki (照柿), \"glazed persimmon\", after the ripe persimmon fruit",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Terigaki (照柿)"
+  ],
+  "siblings": [
+   "vermilion",
+   "dusty-scarlet",
+   "cedar-chest",
+   "blood-orange"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Terigaki (照柿), \"glazed persimmon\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 126,
+  "rate": 0.0053,
+  "match": {
+   "hex": "#D34E36",
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "countries": [
+   [
+    "India",
+    15.44
+   ]
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What fruit does the Japanese name behind Dusty vermilion, Terigaki, refer to?",
+   "choices": [
+    "The persimmon",
+    "The pomegranate",
+    "The plum",
+    "The orange"
+   ],
+   "answer": "The persimmon",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusty vermilion is especially common in Indian court painting in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty vermilion is named for the lacquered shine of a ripe persimmon's skin."
+ ],
+ "words": 213,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "No concordance hits; no first-recorded date for the Japanese source name."
+  ]
+ }
+}

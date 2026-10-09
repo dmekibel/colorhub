@@ -1,0 +1,126 @@
+{
+ "slug": "dusty-bronze",
+ "name": "Dusty bronze",
+ "hex": "#BB8141",
+ "names": [
+  "Dusty bronze"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty bronze is a warm, dark gold-brown, ColorHub's English name for the Japanese traditional color Kitsurubami, \"golden oak,\" named for a tree's dye rather than the metal its English name suggests.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of oak dye",
+   "body": "Kitsurubami (黄橡) is named in the Wikipedia list of Japan's traditional colors for \"golden oak,\" not for bronze metal [1]. The page gives no further history for the name beyond that literal meaning, and it is undocumented in the sources consulted here [1].\n\nIts nearest named neighbors on file are [[tawny-orange]] and [[ochraceous-tawny]], each 2.7 units off [2], close enough on screen that a tree's dye and a metal both land on the same warm gold-brown."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in 1,489 of 23,781 paintings, 6.26 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 1,194 [3]. That makes it more common than 92 percent of the named colors in our library [3]. It peaks hard in the 1300s, present in 16.3 percent of our 251 paintings from that century, 3.8 times the museums' baseline rate [3]. Inside a painting it most often plays an accent, in 67 percent of its 1,194 appearances by lightness rank [3].\n\nPietro Perugino is its most devoted painter on file, present in 7 of his 16 works here, more than four times the baseline rate for the museums that hold them [3]. The earliest match dates to the year 1000, a floor and not a first, since the archive's early centuries are thin [3]. It shares canvases with [[indian-yellow|Indian Yellow]] and [[sudan-brown|Sudan Brown]] far more often than chance [3]. These are computed color matches to photographed, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Kitsurubami, dye of the golden oak",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Kitsurubami"
+  ],
+  "siblings": [
+   "tawny-orange",
+   "ochraceous-tawny",
+   "chamoline",
+   "copper"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kitsurubami (黄橡)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1489,
+  "n_within_painting": 1194,
+  "pct_archive": 6.26,
+  "rank_pct": 92,
+  "measured": {
+   "lch": [
+    59,
+    46,
+    70
+   ],
+   "nearest": [
+    [
+     "Tawny orange",
+     2.7
+    ],
+    [
+     "Ochraceous-Tawny",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Kitsurubami name this color after?",
+   "choices": [
+    "Dye from the golden oak",
+    "Bronze metal",
+    "An autumn sunset"
+   ],
+   "answer": "Dye from the golden oak",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this is one of the rarer colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named for oak dye, not the metal its English name suggests."
+ ],
+ "words": 282,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

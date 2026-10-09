@@ -1,0 +1,115 @@
+{
+ "slug": "wintergreen-dream",
+ "name": "Wintergreen Dream",
+ "hex": "#56887D",
+ "names": [
+  "Wintergreen Dream"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Wintergreen Dream is a muted, bluish-green named for wintergreen, the evergreen shrub whose leaves give wintergreen oil its scent, with \"Dream\" added as a decorative suffix.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plant word, dressed up",
+   "body": "Wintergreen is a low evergreen shrub, best known for the oil pressed from its leaves and used to scent and flavor everything from chewing gum to liniment [1]. Our sources trace the color word to that plant but do not document who first paired it with \"Dream\" or when [1]. The \"Dream\" suffix is decorative rather than descriptive, the kind of flourish paint and crayon lists add to a plain color word [1].\n\nIts closest measured look-alikes are [[jasper-green|Jasper Green]], read as almost the same color, and [[dusty-teal|Dusty Teal]], also almost the same; [[mint-turquoise|Mint Turquoise]] sits a little further out, read as bluer [1]. The ISCC-NBS 1955 system's nearest block is strong bluish green, about eight units from that block's center [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds this color in 101 of them, 0.42 percent, as photographed, rarer than 52 percent of our named colors [2]. It peaks in paintings from the 1400s, at 0.7 percent of that century's works, 2.4 times the expected rate [2]. Inside a painting it most often sits as a hidden color, in 39 percent of its appearances, found by close reading rather than at a glance [2].\n\nThe earliest match is a 1480 panel by Bernardino Jacobi Butinone; our archive's early centuries are thin, so this is a floor, not a first, and a color match on an aged, varnished photograph is not proof that any painter used wintergreen as a reference [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "wintergreen, the evergreen shrub",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library and graph"
+  },
+  "aka": [],
+  "siblings": [
+   "jasper-green",
+   "dusty-teal",
+   "mint-turquoise",
+   "porcelain-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 101,
+  "rank_pct_rarer": 52,
+  "measured": {
+   "lch": [
+    53.0,
+    19.5,
+    178.3
+   ],
+   "nearest": [
+    [
+     "Jasper Green",
+     3.1
+    ],
+    [
+     "Dusty Teal",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: look-alike edges for wintergreen-dream; ISCC-NBS 1955 block 160",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What plant does the name Wintergreen Dream refer to?",
+   "choices": [
+    "Wintergreen, the evergreen shrub",
+    "A pine tree",
+    "A fern",
+    "A type of moss"
+   ],
+   "answer": "Wintergreen, the evergreen shrub",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, how does Wintergreen Dream most often appear?",
+   "choices": [
+    "As a hidden color, found on close reading",
+    "As the brightest highlight",
+    "As the sky",
+    "As a skin tone"
+   ],
+   "answer": "As a hidden color, found on close reading",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Wintergreen Dream is named for the shrub behind wintergreen oil, with \"Dream\" added purely for flourish."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Field notes had the rank direction and number backwards: it said 'more common than 50 percent' when data/graph/fieldnotes/w.json says rarer than 52%; corrected both the body text and the field dict."
+  ]
+ },
+ "words": 261
+}

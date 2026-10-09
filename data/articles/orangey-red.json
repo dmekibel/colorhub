@@ -1,0 +1,118 @@
+{
+ "slug": "orangey-red",
+ "name": "Orangey Red",
+ "hex": "#FA4224",
+ "names": [
+  "Orangey Red"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Orangey Red is a vivid, hot red named by plain grammar: the modifier \"orangey\" pushing the base color [[red]] toward orange.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on an existing color",
+   "body": "*Orangey* softens [[orange]] into a qualifier, the same pattern seen in [[orangey-brown|Orangey Brown]]; paired with *red*, it marks this as a red pulled toward orange rather than a coined name [1]. The exact value comes from the 2010 xkcd online color-name survey, and our sources record no earlier use of the two-word phrase as a fixed color name, only as ordinary descriptive English [1].\n\nThe nearest named look-alikes on file are [[scarlet|Scarlet]] and [[bright-red|Bright Red]], both more vivid [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A close match to this red appears in only 6 of our 23,781 archived paintings, about 0.03 per cent, with the within-painting lens also finding it in 6; rarer than 73 per cent of our named colors [3]. The sample is too small here to support any claim about when or where it is most common; these are photographs of aged, varnished paintings, not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "orangey (a softened orange) + red",
+   "first_recorded": "2010, in the xkcd color-name survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "scarlet",
+   "bright-red"
+  ],
+  "parent": "red",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "n_archive_hits": 6,
+  "measured": {
+   "lch": [
+    56.4,
+    88.8,
+    40.3
+   ],
+   "nearest": [
+    [
+     "Scarlet",
+     3.2
+    ],
+    [
+     "Bright Red",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-o.json): xkcd 2010 crowd-sourced color-name survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/o.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What role does the word \"orangey\" play in the name Orangey Red?",
+   "choices": [
+    "It's a modifier pulling red toward orange, not a name on its own",
+    "It names a specific dye maker",
+    "It marks an ISCC-NBS filed name",
+    "It is a place name"
+   ],
+   "answer": "It's a modifier pulling red toward orange, not a name on its own",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Orangey Red comes from the 2010 xkcd crowd-sourced color survey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Orangey Red is rare enough in our archive that only six paintings carry a close match to it."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Five Paterson dictionary concordance hits exist for the generic adjective \"orangey-red,\" none specific to this swatch; not used as a source for that reason."
+  ]
+ },
+ "words": 165
+}

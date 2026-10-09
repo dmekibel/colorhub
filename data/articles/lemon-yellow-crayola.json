@@ -1,0 +1,111 @@
+{
+ "slug": "lemon-yellow-crayola",
+ "name": "Lemon Yellow (Crayola)",
+ "hex": "#FFFF9F",
+ "names": [
+  "Lemon Yellow (Crayola)"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Lemon Yellow (Crayola) is a pale, named crayon shade of the older artist's color [[lemon-yellow|Lemon Yellow]], and it carries almost the same hex code as our [[pastel-yellow|Pastel Yellow]] article.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A crayon box variant",
+   "body": "Our color graph marks this as a Crayola-named variant of the long-standing artist's color [[lemon-yellow|Lemon Yellow]], citing Wikipedia for the crayon's place in the Crayola list [1]. Lemon Yellow itself traces back through Werner's 1821 chart and Ridgway's plates to the ISCC-NBS charts of 1955, but Crayola's own paler, creamier box shade is a separate, later naming, not a repeat of that history [1]. By computed ISCC-NBS block, this crayon's pale swatch lands as a light greenish yellow [1].\n\nThe color graph places this crayon shade almost on top of its own near-duplicate, [[pastel-yellow|Pastel Yellow]], at a distance of just 1.2 units, and close to [[pale-butter|Pale butter]] at 3.8 and [[dark-cream|Dark Cream]] at 3.8 as well [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale yellow in 7 of 23,781 paintings, about 0.03 percent, as photographed, with the within-painting lens finding it in 6, rarer than 73 percent of our named colors [2]. The earliest dated match on file runs back to 1513, long before any Crayola crayon existed; that floor marks the limit of a thin early archive, not proof the shade existed that early, since the match is a look-alike hue in an old varnished photograph [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a Crayola crayon's naming of the artist's color lemon yellow",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color graph; Wikipedia for the Crayola listing"
+  },
+  "aka": [],
+  "siblings": [
+   "pastel-yellow",
+   "pale-butter"
+  ],
+  "parent": "lemon-yellow",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "lemon-yellow",
+    "gloss": "the older, more saturated artist's and pigment color this crayon is named after"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "n_within": 6,
+  "rarer_than_pct": 73,
+  "measured": {
+   "iscc": "light greenish yellow",
+   "nearest": [
+    [
+     "Pastel Yellow",
+     1.2
+    ],
+    [
+     "Pale butter",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph and library: Crayola-named variant, Wikipedia source and look-alike edges",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Lemon Yellow (Crayola) is named after which older color?",
+   "choices": [
+    "Lemon Yellow",
+    "Alice Blue",
+    "Khaki",
+    "Aubergine"
+   ],
+   "answer": "Lemon Yellow",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Lemon Yellow (Crayola) is almost identical, in our color graph, to Pastel Yellow.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Lemon Yellow (Crayola) sits just 1.2 units from Pastel Yellow in our color graph, almost a duplicate."
+ ],
+ "words": 224,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

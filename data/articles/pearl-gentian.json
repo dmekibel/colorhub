@@ -1,0 +1,112 @@
+{
+ "slug": "pearl-gentian",
+ "name": "Pearl Gentian",
+ "hex": "#296478",
+ "names": [
+  "Pearl Gentian"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pearl Gentian is a dark, greenish teal from the German RAL paint standard, named for a flower it is nothing like in color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Pearl, not petrol",
+   "body": "Our library catalogues this color from RAL 5025, issued under the RAL industrial color standard first published in Germany in 1927 [1]. The gentian flower it borrows from blooms a bright, saturated blue; this swatch is darker, greyer and pulled toward green, closer to the ISCC-NBS block \"moderate greenish blue\" than to any flower petal [1]. In Munsell it sits at 6.1B 3.9/4.7, and it shares the small \"Pearl\" naming family with [[pearl-blackberry|Pearl Blackberry]] and [[pearl-green|Pearl Green]], three unconnected hues joined only by that borrowed gem-word [1].\n\nThe nearest named colors in our data are [[bluish-petrol|Bluish petrol]] and [[dark-peacock|Dark peacock]], both 2.6 CIEDE2000 units away — near enough that either could stand in for Pearl Gentian on screen [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pearl Gentian appears in 120 of our 23,781 paintings, about 0.5 percent, as photographed; the within-painting lens finds it in 53 of them [2]. It peaks in the 1900s, at 2.3 times the expected rate for that century [2]. Inside a painting it most often plays a hidden color, present but not carrying the light [2].\n\nThe earliest match is dated 1433, in a work by Robert Campin — 494 years before RAL's 1927 record of the name, as photographed, a floor and not a first, since the archive's early centuries are thin [2]. The gap is a look-alike hue surviving in an aged photograph, not evidence of the paint itself that early [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the gentian flower, loosely",
+   "first_recorded": "1927, RAL 5025",
+   "source": "ColorHub color library: RAL color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "pearl-blackberry",
+   "pearl-green",
+   "bluish-petrol",
+   "dark-peacock"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 120,
+  "measured": {
+   "lch": [
+    40,
+    21,
+    234
+   ],
+   "nearest": [
+    [
+     "Bluish petrol",
+     2.6
+    ],
+    [
+     "Dark peacock",
+     2.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 5025 entry, Munsell notation, ISCC-NBS block and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Gentian flowers are usually a bright, saturated blue. How does Pearl Gentian the color compare?",
+   "choices": [
+    "Darker, greyer and greener",
+    "Exactly the same shade",
+    "Much lighter and pinker",
+    "A pure yellow"
+   ],
+   "answer": "Darker, greyer and greener",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pearl Gentian most often appears as a painting's brightest highlight in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pearl Gentian is named for a flower far brighter and bluer than the color itself."
+ ],
+ "words": 253,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

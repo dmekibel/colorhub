@@ -1,0 +1,126 @@
+{
+ "slug": "meat",
+ "name": "Meat",
+ "hex": "#F9906F",
+ "names": [
+  "Meat"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Meat is a warm salmon-orange, the English rendering of *Shishi-iro*, a traditional Japanese color name that reads literally as \"meat-color.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A color named for flesh",
+   "body": "Our library files this hue from the Japanese traditional-colors list under *Shishi-iro* (猪色), given in our data as meaning \"meat-color\" [1]. Japanese traditional names routinely describe a hue by the material it resembles rather than a mixed-pigment recipe, the way English has *salmon* and *flesh* [1].\n\nNearest named neighbors by measured color are [[conch-shell]] and [[dark-salmon]], both close duller cousins, with [[light-salmon]] and [[dusty-coral]] a little further off [1]. The screen swatch is a modern approximation; no physical dye sample backs it [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 23 of 23,781 paintings, about 0.1 percent, as photographed; the within-painting lens finds it in 14 [2]. That makes it rarer than 65 percent of the named colors we track [2]. It peaks in paintings from the 1800s, at 1.0 times the expected rate for that century [2]. Inside a painting it most often plays an accent, in 64 percent of the 14 paintings where it appears, ranked by lightness so varnish cannot fake the result [2]. The earliest dated painting with it is from 1333, a work attributed to Bernardo Daddi, though the archive's early centuries are thin, so this is a floor, not a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "flesh or meat, from the Japanese *Shishi-iro* (猪色, \"meat-color\")",
+   "first_recorded": "undocumented date; listed in our sources as a traditional Japanese color name",
+   "source": "ColorHub color library (traditional colors of Japan)"
+  },
+  "aka": [
+   "Shishi-iro"
+  ],
+  "siblings": [
+   "conch-shell",
+   "dark-salmon",
+   "light-salmon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Shishi-iro (猪色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 23,
+  "n_within_painting": 14,
+  "rank_rarer_than_pct": 65,
+  "role_accent_pct": 64,
+  "first_seen": {
+   "year": 1333,
+   "painting": "nga-1",
+   "painter": "Bernardo Daddi"
+  },
+  "measured": {
+   "lch": [
+    70.3,
+    50.4,
+    43.5
+   ],
+   "nearest": [
+    [
+     "Conch Shell",
+     2.8
+    ],
+    [
+     "Dark Salmon",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (via Wikipedia); ColorHub name graph (look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name behind Meat, Shishi-iro, literally describe?",
+   "choices": [
+    "The color of meat or flesh",
+    "A mountain at sunset",
+    "A type of cherry blossom",
+    "The color of a temple roof"
+   ],
+   "answer": "The color of meat or flesh",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: inside a painting, Meat most often plays the dominant color rather than an accent.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Meat's Japanese name, Shishi-iro, reads literally as \"meat-color.\""
+ ],
+ "words": 215,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits in the 29 books for this slug; sourced from our own library/graph data only."
+  ]
+ }
+}

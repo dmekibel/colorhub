@@ -1,0 +1,58 @@
+{
+ "id": "normcore",
+ "name": "Normcore",
+ "lineage": {
+  "influenced_by": [
+   "90s/2000s suburban dressing",
+   "tech-industry function-over-form clothing"
+  ],
+  "influences": [
+   "health-goth",
+   "gorpcore"
+  ]
+ },
+ "eras": [
+  "2013–2014 (coined and peaked)"
+ ],
+ "places": [
+  "coined by trend forecasting collective K-HOLE (2013)"
+ ],
+ "garments": [
+  "plain fleece",
+  "dad sneakers",
+  "unbranded basics",
+  "mom jeans",
+  "fanny packs"
+ ],
+ "media": [
+  {
+   "title": "K-HOLE, \"Youth Mode\" report (2013)",
+   "note": "the trend-forecasting document that coined the term"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "hypebeast logomania and curated individuality-as-brand; normcore's joke/thesis was that true confidence looks deliberately unremarkable.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "2010s",
+  "key_motifs": "Plain silhouettes, brand-less basics, suburban utility, technical gear, \"dad\" fashion",
+  "key_colours": "Navy, gray, white, beige, washed-out denim, black",
+  "related_aesthetics": "Eclectic Grandpa\nGorpcore\nMenocore\nMinimalism\nVacation Dadcore",
+  "key_values": "Functionality, anonymity, anti-trend, adaptability, comfort"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Normcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 71% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

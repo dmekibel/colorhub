@@ -1,0 +1,116 @@
+{
+ "slug": "wine-brown",
+ "name": "Wine Brown",
+ "hex": "#512C31",
+ "names": [
+  "Wine brown"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Wine Brown is a dark, reddish brown whose own naming origin is undocumented in our sources, and whose nearest match in our data, [[dusty-wine|Dusty Wine]], measures as essentially the same color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Origin undocumented",
+   "body": "Our sources flag Wine Brown as coming through a Japanese color list, though the name itself reads as a plain English compound of \"wine\" and \"brown\"; who coined it and when is not documented here [1]. [[dusty-wine|Dusty Wine]] sits at a measured distance of 0.0 units, meaning the two names point at effectively the same swatch in our data [1]. Beyond that near-duplicate, its closest distinct look-alikes are Rubient, read as more vivid, and Black-Red, read as darker [1].\n\nA separate, unrelated Japanese traditional color, Murasakitobi (紫鳶, literally \"purple kite\"), sits in a similarly dark reddish-purple-brown range; our data does not claim any link between that name and Wine Brown's own origin, but the two make a useful comparison across naming traditions [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds this color in 232 of them, 0.98 percent, as photographed, more common than 64 percent of our named colors [2]. It peaks in paintings from the 1900s, at 1.4 percent of that century's works, 1.8 times the expected rate [2]. Inside a painting it most often sits as a hidden color, in 57 percent of its appearances, found by close reading rather than at a glance [2].\n\nThe earliest match is a 1405 panel by Starnina (Gherardo di Jacopo); our archive's early centuries are thin, so this is a floor, not a first [2]. It is most over-represented in paintings from Germany, 2.4 times the expected rate, and in printed English the word rose fastest in the 1860s, across all its senses [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented (a plain English compound: wine + brown)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library and graph"
+  },
+  "aka": [
+   "Dusty wine"
+  ],
+  "siblings": [
+   "dusty-wine",
+   "rubient",
+   "black-red"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 232,
+  "match": {
+   "min_cover": 0.02
+  },
+  "measured": {
+   "lch": [
+    22.9,
+    18.2,
+    13.4
+   ],
+   "nearest": [
+    [
+     "Dusty wine",
+     0.0
+    ],
+    [
+     "Rubient",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: duplicate and look-alike edges for wine-brown; Japanese traditional color list (Murasakitobi)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings) and Google Books Ngram cache, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color does Wine Brown measure as essentially identical to in our data?",
+   "choices": [
+    "Dusty Wine",
+    "Umber",
+    "Chocolate",
+    "Carolina Blue"
+   ],
+   "answer": "Dusty Wine",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources document who first coined the name Wine Brown.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Wine Brown and Dusty Wine measure as the same color in our data, down to the decimal."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 65%, current data/graph/fieldnotes says 64% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 280
+}

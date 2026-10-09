@@ -1,0 +1,52 @@
+{
+ "id": "tenniscore",
+ "name": "Tenniscore",
+ "lineage": {
+  "influenced_by": [
+   "1970s–80s tennis uniforms",
+   "preppy/old-money dressing"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020s (TikTok/Pinterest)"
+ ],
+ "places": [
+  "TikTok",
+  "country-club adjacent styling"
+ ],
+ "garments": [
+  "pleated tennis skirts",
+  "polo shirts",
+  "white sneakers",
+  "cable-knit sweaters",
+  "headbands"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "streetwear's logo-forward maximalism, favoring clean, sport-coded preppiness instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "|key_colours=White, green, navy",
+  "decade_of_origin": "2020s",
+  "key_motifs": "Tennis skirts, polo shirts, tennis dresses, visors, sweatbands, tennis bracelets",
+  "key_colours": "White, green, navy",
+  "related_aesthetics": "BalletcoreBarbiecoreBlokecoreBloketteNormcoreOld MoneyPreppySummer",
+  "key_values": "Athleticism, classic style, preppiness, luxury, leisure"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Tenniscore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 61% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

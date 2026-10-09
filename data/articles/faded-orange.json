@@ -1,0 +1,104 @@
+{
+ "slug": "faded-orange",
+ "name": "Faded Orange",
+ "hex": "#F0944D",
+ "names": [
+  "Faded Orange"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Faded Orange pairs the modifier \"faded\" with plain orange, naming a dulled, warm orange that Ridgway's 1912 dictionary lists a close hue for decades before the exact compound name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on orange, with an earlier hue",
+   "body": "Faded Orange pairs \"faded\" with [[orange]], the xkcd 2010 color-naming survey's term for this dulled, warm orange [1]. Our color library also ties the hue to Ridgway's 1912 \"Color Standards and Color Nomenclature,\" plate XV, hue 13′ [1]. Its nearest named look-alikes are [[mars]], [[mikado-orange]] and [[ochraceous-orange]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this orange in 0.3 percent of the 23,781 paintings we have, 71 of them, as photographed; the within-painting lens finds it in 74 [2]. That is more common than 55 percent of the named colors in our archive [2]. It peaks in the 1900s, 1.8 times the expected rate for that century, on 11 paintings [2]. Inside a painting it most often plays an accent, in 82 percent of the 74 paintings where it appears [2]. India is the most over-represented country for it, 3.3 times the expected rate, 9 of 721 paintings [2]. The earliest match in our archive is dated 1333, nearly six centuries before Ridgway's 1912 plate; the archive's early centuries are thin, so this is a floor, not a first [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"faded\" plus orange",
+   "first_recorded": "1912 (Ridgway, plate XV, hue 13′)",
+   "source": "ColorHub color library (Ridgway 1912; xkcd 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "mars",
+   "mikado-orange"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 71,
+  "measured": {
+   "lch": [
+    69.6,
+    58.6,
+    60.7
+   ],
+   "nearest": [
+    [
+     "Mars",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XV, hue 13′; xkcd 2010 color-naming survey; computed LCH and nearest named colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In our archive, Faded Orange is most over-represented in paintings from which country?",
+   "choices": [
+    "India",
+    "Japan",
+    "France",
+    "Mexico"
+   ],
+   "answer": "India",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Faded Orange most often plays an accent role inside the paintings where it appears.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Faded Orange shows up at more than three times the expected rate in Indian paintings in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ },
+ "words": 202
+}

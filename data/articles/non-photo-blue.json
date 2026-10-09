@@ -1,0 +1,117 @@
+{
+ "slug": "non-photo-blue",
+ "name": "Non-Photo Blue",
+ "hex": "#A4DDED",
+ "names": [
+  "Non-Photo Blue"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Non-Photo Blue is a pale cyan-blue named for a technical trick: the printing film and photocopiers of the mid-twentieth century could not see it, so artists drew in it on purpose.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A blue the camera could not see",
+   "body": "Comic-book pencillers and newspaper editors marked up artwork in this light cyan because the orthochromatic film used in offset printing, and later many photocopiers and scanners, were tuned to ignore that wavelength of blue [1]. Guidelines, corrections and notes drawn in it simply vanished once the page was shot for the plate, leaving the inked art behind [1]. Trade writers put the practice at more than eighty years old, but no single inventor or year is recorded in our sources, and the exact origin stays undocumented here [1][2].\n\nOur library carries only a Wikipedia source for the hex, with no pigment maker, standards body or dictionary behind it [2]. Its nearest look-alikes on file are [[light-blue]], almost the same shade, and [[powder-blue]], [[sky-blue]] and [[calamine-blue|Calamine Blue]], all a little bluer or darker [2]. Our own computed match to the ISCC-NBS 1955 centroids calls it \"very light greenish blue,\" though that is ColorHub's nearest match, not a name the 1955 dictionary itself filed [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our 23,781-painting archive, a close match to this blue appears in 14 paintings, about 0.06 per cent, with the within-painting lens finding it in 9; that makes it rarer than 71 per cent of our named colors [3]. The earliest is Bernardo Bellotto's *View of Pirna with the Fortress of Sonnenstein*, dated 1755, two centuries before photocopiers existed [3]. As photographed, that gap means the match is a look-alike hue surviving in an old painting's photograph, not evidence that anyone used a non-photo-blue pencil there; the archive's early centuries are thin, so 1755 is a floor, not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its invisibility to early photographic printing film and photocopiers",
+   "first_recorded": "undocumented; trade writers place the practice at 80+ years old",
+   "source": "Wikipedia"
+  },
+  "aka": [
+   "Non-Repro Blue"
+  ],
+  "siblings": [
+   "light-blue",
+   "powder-blue",
+   "sky-blue",
+   "calamine-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 9,
+  "n_archive_hits": 14,
+  "measured": {
+   "lch": [
+    84.9,
+    19.9,
+    223.5
+   ],
+   "nearest_iscc": [
+    "very light greenish blue",
+    3.4
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Blue pencil (editing)\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Blue_pencil_(editing)"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-n.json): Wikipedia source, computed LCH and nearest ISCC-NBS 1955 category",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/n.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why couldn't old photocopiers and printing film pick up marks drawn in Non-Photo Blue?",
+   "choices": [
+    "The film and copier sensors weren't tuned to see that wavelength of blue",
+    "The marks were drawn in invisible ink",
+    "The color only shows under ultraviolet light",
+    "It was a trademarked secret dye"
+   ],
+   "answer": "The film and copier sensors weren't tuned to see that wavelength of blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive's 1755 match for this color proves painters were already using non-photo-blue pencils by then.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A pencil color invisible to the camera: that is the whole reason Non-Photo Blue exists."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from Wikipedia and ColorHub graph/library data only, no book sources.",
+   "Fixed: field section said 'rarer than 69 per cent'; data/graph/fieldnotes/n.json gives rp=29, i.e. rarer than 71 per cent. Corrected to 71."
+  ]
+ },
+ "words": 291
+}

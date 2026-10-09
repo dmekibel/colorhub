@@ -1,0 +1,130 @@
+{
+ "slug": "cyber-grape",
+ "name": "Cyber Grape",
+ "hex": "#58427C",
+ "names": [
+  "Cyber Grape"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Cyber Grape is a dark, dusky violet-purple from Crayola's crayon list, dark enough that the ISCC-NBS system reads it as a moderate violet rather than a true purple.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Crayola name, undocumented beyond that",
+   "body": "Our only record of this name traces to Wikipedia's inventory of Crayola crayon names; Crayola does not publish an explanation of the choice, and when the crayon entered the line is undocumented in the sources we have [1]. The ISCC-NBS system classifies the hex value as a moderate violet, about 2.5 units from that block's reference color, and the Munsell notation works out to 1.4P 3.2/7.6, low in lightness and middling in chroma [2]. The nearest named colors on file are [[anthracene-violet]], [[imperial-purple]], [[hyacinth-blue]] and [[corsican-blue]], at 4.6, 4.6, 4.6 and 5 ΔE [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to this color in only 7 of 23,781 paintings, about 0.03 percent, and in 6 by the stricter within-painting measure, making it rarer than 73 percent of the named colors we track [3]. The earliest match dates to 1875, attributed to Alfred Sisley, with the latest from 1929, only 4 dated paintings in all, a floor and not a first, since the archive's early centuries are thin [3]. That is a thin record even by the standards of a modern, saturated color name invented for a crayon box rather than taken from paint or dye history [2][3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented (a Crayola crayon name)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, List of Crayola crayon colors"
+  },
+  "aka": [],
+  "siblings": [
+   "anthracene-violet",
+   "imperial-purple",
+   "hyacinth-blue",
+   "corsican-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 7,
+  "n_within": 6,
+  "rarer_than_pct": 73,
+  "measured": {
+   "lch": [
+    32.8,
+    37.4,
+    307.6
+   ],
+   "nearest": [
+    [
+     "Anthracene Violet",
+     4.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "kind": "web",
+   "cite": "Wikipedia, \"List of Crayola crayon colors\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors",
+   "n": 1
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS and Munsell entries (data/library.json, Cyber Grape)",
+   "loc_kind": null,
+   "url": null,
+   "n": 2
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null,
+   "n": 3
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Crayola publishes an explanation of where the name Cyber Grape comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which named color is closest to Cyber Grape in our library's color match?",
+   "choices": [
+    "Purple",
+    "Mauve",
+    "Cerulean",
+    "Burlywood"
+   ],
+   "answer": "Purple",
+   "kind": "pick"
+  },
+  {
+   "q": "According to the ISCC-NBS classification, what kind of color is Cyber Grape, despite 'grape' suggesting a fruit's red-purple?",
+   "choices": [
+    "A moderate violet",
+    "A strong red",
+    "A pale pink",
+    "A yellowish brown"
+   ],
+   "answer": "A moderate violet",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Cyber Grape is a Crayola name with no documented explanation -- not even a date for when the crayon appeared.",
+  "Despite the name, Cyber Grape reads as a moderate violet in the ISCC-NBS system, not a true grape-red purple."
+ ],
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "No siblings/children resolve for this slug; connections rely on inline links only.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 247
+}

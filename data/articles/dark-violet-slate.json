@@ -1,0 +1,148 @@
+{
+ "slug": "dark-violet-slate",
+ "name": "Dark Violet-Slate",
+ "hex": "#47545D",
+ "names": [
+  "Dark Violet-Slate"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark Violet-Slate is a dark, cool grey with only a faint purple cast, Robert Ridgway's darker step down from his own Violet-Slate.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A grey with a whisper of violet",
+   "body": "Ridgway recorded Dark Violet-Slate in 1912, at plate XLIX, hue 53 quadruple-prime, tone k, directly below [[violet-slate|Violet-Slate]] on the same card [1]. The ISCC-NBS dictionary filed this darker name again in 1955, block 186, as a plain grayish blue, which is how little of the violet survives at this depth [2]. Measured in LCH, the hue sits at only chroma 7, so the color reads first as grey and only faintly as violet [1]. Its nearest named neighbors on file are [[dark-violet-grey]] and [[dark-payne-s-grey]], both almost the same at 3.1 to 3.3 CIEDE2000 units [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this grey, as photographed, in 501 of 23,781 paintings, 2.11 percent, more common than 70 percent of the named colors we track [4]. It peaks in the 1900s, 42 of 1,674 paintings from that century, 2.6 times the expected rate [4]. Gustav Klimt is its most devoted painter here, in 4 of his 50 works, 4.1 times the baseline rate [4]. Inside a painting it most often plays a shadow across its 194 strongest matches, and it is most over-represented in paintings from India, at 2.4 times the expected rate [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color Violet-Slate, darkened by Ridgway's own grammar",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLIX; filed again by ISCC-NBS in 1955, block 186",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-violet-grey",
+   "dark-payne-s-grey",
+   "arona",
+   "blackish-plumbeous"
+  ],
+  "parent": "violet-slate",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 194,
+  "measured": {
+   "lch": [
+    34.9,
+    7.5,
+    247.8
+   ],
+   "nearest_iscc": [
+    "dark bluish gray",
+    2.5
+   ],
+   "nearest": [
+    [
+     "Dark Violet-Grey",
+     3.1
+    ],
+    [
+     "Dark Payne's Grey",
+     3.3
+    ],
+    [
+     "Arona",
+     3.4
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1100,
+   "years_before_record": 812
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XLIX, hue 53‴‴, tone k",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 186 (\"grayish blue\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does the ISCC-NBS dictionary describe Dark Violet-Slate's block?",
+   "choices": [
+    "Grayish blue",
+    "Vivid violet",
+    "Strong purple",
+    "Dark bluish green"
+   ],
+   "answer": "Grayish blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dark Violet-Slate reads mostly as grey because its measured chroma is very low.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter in our archive is most over-represented in Dark Violet-Slate?",
+   "choices": [
+    "Gustav Klimt",
+    "Claude Monet",
+    "Edvard Munch",
+    "Henri Matisse"
+   ],
+   "answer": "Gustav Klimt",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dark Violet-Slate is filed by the ISCC-NBS dictionary as a plain grayish blue, with almost no violet left in it.",
+  "It is most over-represented in paintings from India."
+ ],
+ "words": 216,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

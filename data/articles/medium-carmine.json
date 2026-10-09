@@ -1,0 +1,136 @@
+{
+ "slug": "medium-carmine",
+ "name": "Medium Carmine",
+ "hex": "#AF4035",
+ "names": [
+  "Medium Carmine"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Medium Carmine is a brick-dark red, \"medium\" plus [[carmine]], the crimson pigment made from crushed cochineal insects.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Medium plus a cochineal red",
+   "body": "The name is a plain modifier on carmine, not an independent coinage [1]. Our library traces it across four older sources: Werner's 1821 nomenclature, Ridgway's 1912 color standards, the ISCC-NBS 1955 lists, and Wikipedia [1]. Werner's 1821 color-naming system, used by naturalists in the field, matched this shade of red to the scarlet ibis, the red oriental poppy, and light red cinnabar [1]. Ridgway's 1912 *Color Standards and Color Nomenclature* places a close variant on plate I, hue 3, though that printed plate is itself an aged, approximate scan [1]. The ISCC-NBS 1955 lists file it in color block 11 [1].\n\nIts books disagree on how distinct it really is: Werner, Ridgway and the ISCC-NBS lists all file a near-duplicate, Scarlet Red, only 1.5 units away [1]. Its nearest named neighbors by measured color are [[vermilion-red]] and [[sweet-brown]], both almost the same hue [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match in 425 of 23,781 paintings, 1.79 percent, as photographed; the within-painting lens finds it in 441 [2]. That makes it more common than 81 percent of the named colors we track [2]. It peaks in the 1400s, found in 62 of the 945 paintings we have from that century, 2.8 times the expected rate [2]. Albrecht Dürer is its most devoted painter, carrying it in 6 of his 47 works here [2]. It is most over-represented in paintings from India, at 2.7 times the expected rate, and shares canvases more than chance with Brown Red and Almond [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: medium + carmine (the cochineal-insect crimson)",
+   "first_recorded": "Werner's nomenclature, 1821",
+   "source": "ColorHub color library: Werner (1821), Ridgway (1912), ISCC-NBS (1955), Wikipedia"
+  },
+  "aka": [],
+  "siblings": [
+   "vermilion-red",
+   "sweet-brown",
+   "brazil-red"
+  ],
+  "parent": "carmine",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 425,
+  "n_within_painting": 441,
+  "rank_more_common_than_pct": 81,
+  "century_peak": {
+   "century": 1400,
+   "n": 62,
+   "of": 945,
+   "lift": 2.8
+  },
+  "painter": {
+   "name": "Albrecht Dürer",
+   "n": 6,
+   "of": 47
+  },
+  "country": {
+   "name": "India",
+   "lift": 2.7
+  },
+  "company": [
+   [
+    "Brown Red",
+    6.0
+   ],
+   [
+    "Almond",
+    3.1
+   ]
+  ],
+  "measured": {
+   "lch": [
+    42.8,
+    54.1,
+    34.5
+   ],
+   "nearest": [
+    [
+     "Vermilion Red",
+     2.7
+    ],
+    [
+     "Sweet Brown",
+     2.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Werner (1821), Ridgway (1912), ISCC-NBS (1955), Wikipedia; ColorHub name graph (look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What pigment does the \"carmine\" in Medium Carmine refer to?",
+   "choices": [
+    "Crimson made from crushed cochineal insects",
+    "A mineral earth pigment",
+    "A synthetic aniline dye",
+    "Charred bone black"
+   ],
+   "answer": "Crimson made from crushed cochineal insects",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources agree that Medium Carmine is clearly distinct from every nearby named red.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Werner's 1821 field guide matched this red to the scarlet ibis and the red oriental poppy."
+ ],
+ "words": 260,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

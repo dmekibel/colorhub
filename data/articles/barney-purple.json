@@ -97,8 +97,8 @@
  "words": 182,
  "status": "checked",
  "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": [
    "No private fact-card file for this slug.",
    "Which person the family name refers to is undocumented in our data."

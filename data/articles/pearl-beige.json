@@ -1,0 +1,118 @@
+{
+ "name": "Pearl Beige",
+ "hex": "#908370",
+ "names": [
+  "Pearl Beige"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pearl Beige is a muted taupe-brown standardized as RAL 1035, and one of the most common colors in our entire painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A RAL standard, not a pearl",
+   "body": "ColorHub's library sets this swatch to RAL 1035, part of the RAL system used across European paint, design and industry since the 1920s [1]. Despite the name, nothing in the library ties it to an actual pearl; *pearl* here works as a soft-sheen qualifier, the way it does across several beiges and greys in the same system [1]. RAL names like this one describe a specific, repeatable paint batch rather than a natural or historical object, which is why the library gives it no first-recorded date the way it can for Ridgway or Maerz and Paul names [1]. The nearest everyday name on file is [[taupe]], about 3.2 units of ΔE away [1].\n\n[[tan]], [[ecru]] and [[silver]] sit nearby in the same warm-neutral family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Pearl Beige in 3,991 of 23,781 paintings (16.78 percent), as photographed, making it one of the more common colors on file, roughly steady across every century from the 1100s to the 1900s [2]. It runs highest in Chinese and Japanese painting, over twice the archive rate, led by Shen Zhou, Kano Tan'yū and the Dutch painter Jan van Goyen [2]. It keeps company with Taupe, Silver and Ecru more than chance [2]. These are screen approximations of aged, varnished canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a pearl-like soft sheen on a beige-brown; RAL 1035",
+   "first_recorded": "RAL system",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "taupe",
+   "tan",
+   "ecru",
+   "silver"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3991,
+  "role": {
+   "mid": 0.38,
+   "highlight": 0.54,
+   "shadow": 0.08
+  },
+  "company": [
+   "Taupe",
+   "Silver",
+   "Ecru"
+  ],
+  "measured": {
+   "lch": [
+    55,
+    12,
+    82
+   ],
+   "nearest": [
+    [
+     "Taupe",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Pearl Beige's hex standardized as in the RAL system?",
+   "choices": [
+    "RAL 1035",
+    "RAL 9018",
+    "RAL 7001",
+    "RAL 3020"
+   ],
+   "answer": "RAL 1035",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our archive finds Pearl Beige among the rarer colors on file.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pearl Beige shows up in nearly one painting in six of our entire archive."
+ ],
+ "words": 233,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "pearl-beige"
+}

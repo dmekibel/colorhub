@@ -1,0 +1,120 @@
+{
+ "slug": "pale-purple-drab",
+ "name": "Pale Purple-Drab",
+ "hex": "#B3A29E",
+ "names": [
+  "Pale Purple-Drab"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Pale Purple-Drab is a muted, dusty mauve-brown, one of Ridgway's 1912 \"drab\" names for the flat, low-chroma tans and greys of natural history illustration.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A drab with a purple lean",
+   "body": "Drab, in Ridgway's system, marks a family of dull, greyish browns rather than any single hue; \"purple-drab\" adds a faint purple cast to that base [1]. This shade is plate XLV, hue 1'''', tone d, of Ridgway's 1912 standards, read from a scan of an aged plate [1]. We hold no ISCC-NBS or Maerz and Paul record for this exact step, so only Ridgway is cited here [1].\n\nThe nearest named colors on file are [[dark-silver-pink]], [[sweet-pea]], [[silver-pink]] and [[greyish-tan]], at 3.5, 4.5, 4.6 and 4.8 ΔE [1]. The books we hold say nothing about why naturalists needed this particular step, so that origin is undocumented [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In our archive of 23,781 paintings, as photographed, this drab appears in 298, about 1.25 percent, more common than 70 percent of our named colors [2]. It peaks in the 1900s, in 54 of 1,674 paintings, at 3.0 times the expected rate for that century, and inside a painting it is most often a light [2].\n\n[[painter:xugu|Xugu]] is its most devoted painter, present in 4 of 16 works here, 6.7 times his museums' baseline [2]. The earliest match is a 1287 painting, over six centuries before Ridgway's 1912 name, so that early hit is a look-alike hue in an aged photograph, not a trace of this named drab, a floor and not a first, since the archive's early centuries are thin [2]. It shares canvases more than chance with [[fontainebleau]] and [[iris-mauve]] [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; one of Ridgway's \"drab\" family, a greyish brown with a purple cast",
+   "first_recorded": "Ridgway, 1912",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-silver-pink",
+   "sweet-pea",
+   "silver-pink",
+   "greyish-tan"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 298,
+  "pct_present": 1.25,
+  "rank_pct": 70,
+  "role": "light, 50% of 191 matched paintings",
+  "measured": {
+   "lch": [
+    67.9,
+    7.0,
+    38.2
+   ],
+   "nearest": [
+    [
+     "Dark silver pink",
+     3.5
+    ],
+    [
+     "Sweet Pea",
+     4.5
+    ]
+   ]
+  },
+  "iscc": {
+   "block": 32,
+   "name": "grayish yellowish pink",
+   "de": 5.0
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912, plate XLV, hue 1''''",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes for Pale Purple-Drab (n=298)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"drab\" describe in Ridgway's system?",
+   "choices": [
+    "A family of dull, greyish browns",
+    "A bright saturated red",
+    "A metallic finish",
+    "A fluorescent dye"
+   ],
+   "answer": "A family of dull, greyish browns",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: we hold an ISCC-NBS record for this exact shade.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ridgway's \"drab\" names mark dull, flattened browns, not any one hue."
+ ],
+ "words": 269,
+ "status": "draft",
+ "checked": {
+  "by": "",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

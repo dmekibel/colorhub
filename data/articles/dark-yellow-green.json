@@ -1,0 +1,137 @@
+{
+ "slug": "dark-yellow-green",
+ "name": "Dark Yellow Green",
+ "hex": "#728F02",
+ "names": [
+  "Dark Yellow Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dark Yellow Green is a dark, olive-leaning green, simply the plain words \"dark\" and \"yellow green\" combined; no catalog or dictionary in our sources files the name at all.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plain description, undocumented elsewhere",
+   "body": "The name is the plainest kind of compound: *dark* plus *yellow green*, describing the color directly rather than naming it after a place, person or material [1]. It does not appear in Ridgway's 1912 atlas, the ISCC-NBS dictionary of 1955, or Maerz and Paul's 1930 dictionary in our sources, and there is no separate \"Yellow Green\" entry to call its parent [1]. Who coined it, and when, is undocumented here [1]. Its nearest named neighbors on file are [[avocado]] and [[ugly-green]], both almost the same at 2.8 CIEDE2000 units, and the gem [[gem:peridot|peridot]], the closest colored stone [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this olive green, as photographed, in only 7 of 23,781 paintings, 0.03 percent, rarer than 77 percent of the named colors we track [3]. The earliest dated match is an 1890 Henri Moret landscape of Brittany; the archive's early centuries are thin, so this is a floor and not a first [3]. With so few matches, no century, painter or country stands out against the archive's own baseline [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; a plain description, dark plus yellow green",
+   "first_recorded": "undocumented in the sources we hold",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "avocado",
+   "ugly-green",
+   "bright-moss",
+   "swamp-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "measured": {
+   "lch": [
+    55.3,
+    64.3,
+    114.7
+   ],
+   "nearest": [
+    [
+     "Avocado",
+     2.8
+    ],
+    [
+     "Ugly Green",
+     2.8
+    ],
+    [
+     "Bright Moss",
+     3.6
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1890,
+   "years_before_record": null
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: no Ridgway, ISCC-NBS or Maerz & Paul entry found for \"Dark Yellow Green\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which dictionary or atlas in our sources files the name Dark Yellow Green?",
+   "choices": [
+    "None of them",
+    "Ridgway 1912",
+    "ISCC-NBS 1955",
+    "Maerz & Paul 1930"
+   ],
+   "answer": "None of them",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our data has a separate, lighter \"Yellow Green\" that Dark Yellow Green darkens.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which gem comes closest in color to Dark Yellow Green?",
+   "choices": [
+    "Peridot",
+    "Ruby",
+    "Sapphire",
+    "Amethyst"
+   ],
+   "answer": "Peridot",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "No dictionary or atlas in our sources files the name Dark Yellow Green at all.",
+  "Its closest gem match is peridot, the olive-green birthstone."
+ ],
+ "words": 196,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

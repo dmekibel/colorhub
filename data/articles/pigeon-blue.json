@@ -1,0 +1,112 @@
+{
+ "slug": "pigeon-blue",
+ "name": "Pigeon Blue",
+ "hex": "#6C7C98",
+ "names": [
+  "Pigeon Blue"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pigeon Blue is a muted, greyish blue from the German RAL paint standard, named for the slate-blue sheen on a pigeon's neck feathers rather than its plain grey body.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A bird's sheen, not its body",
+   "body": "Our library catalogues this color as RAL 5014, from the RAL industrial color standard first published in Germany in 1927 [1]. Most of a pigeon's plumage is a flat grey, but the iridescent feathers around its neck shift between green and this kind of dusty blue-violet depending on the angle of the light, which is the likelier source of the name [1]. The ISCC-NBS system would call its block \"pale purplish blue\"; in Munsell it reads 5.2PB 5.1/4.3 [1].\n\nThe nearest named colors in our data are [[tyrian-blue|Tyrian Blue]], 2.9 CIEDE2000 units away, and [[light-tyrian-blue|Light Tyrian Blue]], 3.7 units away, with [[madder-blue|Madder Blue]] and [[shadow-blue|Shadow Blue]] close behind [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Pigeon Blue appears in 223 of our 23,781 paintings, about 0.94 percent, as photographed; the within-painting lens finds it in 112, more common than 61 percent of our named colors [2]. It peaks in the 1900s, in 17 of 1,674 paintings, at 2.6 times the expected rate for that century, and in the 1840s decade specifically at 2.2 times expected [2]. Inside a painting it most often plays a hidden color, present in half of the 112 paintings where it carries real area [2].\n\nThe earliest match is dated 1405, in a work by Spinello Aretino — 522 years before RAL's 1927 record of the name, as photographed, a floor and not a first, since the archive's early centuries are thin [2]. No single painter stands out against the museum baseline, though the Danish landscapist Peter Christian Skovgaard uses it most often among painters in our archive, in 4 of his 38 works here [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the slate-blue sheen on a pigeon's neck feathers",
+   "first_recorded": "1927, RAL 5014",
+   "source": "ColorHub color library: RAL color standard"
+  },
+  "aka": [],
+  "siblings": [
+   "tyrian-blue",
+   "light-tyrian-blue",
+   "madder-blue",
+   "shadow-blue"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 223,
+  "measured": {
+   "lch": [
+    52,
+    17,
+    273
+   ],
+   "nearest": [
+    [
+     "Tyrian Blue",
+     2.9
+    ],
+    [
+     "Light Tyrian Blue",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: RAL 5014 entry, Munsell notation, ISCC-NBS block and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What part of a pigeon most likely gave Pigeon Blue its name?",
+   "choices": [
+    "The iridescent sheen on its neck feathers",
+    "Its flat grey wings",
+    "Its red feet",
+    "Its eyes"
+   ],
+   "answer": "The iridescent sheen on its neck feathers",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pigeon Blue most often appears as the brightest highlight in a painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pigeon Blue comes from a bird's iridescent neck feathers, not its plain grey body."
+ ],
+ "words": 294,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

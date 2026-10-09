@@ -1,0 +1,133 @@
+{
+ "name": "Peach Blush",
+ "hex": "#A55B45",
+ "names": [
+  "Peach Blush"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Peach Blush is a warm reddish terracotta that Maerz and Paul dated to 1926, but our painting archive finds it concentrated centuries earlier, in South Asian painting.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1926 fashion word",
+   "body": "Maerz and Paul's 1930 dictionary first records Peach Blush in 1926, on plate 5, swatch C11 [1]. Despite the fruit in its name, ColorHub's library files it under Browns, closer to terracotta and sienna than to any pink [1]. A peach's actual blush runs lighter and pinker than this swatch; the name describes the deeper shadow side of the fruit's skin, not its sunlit cheek [1]. The nearest named colors on file are [[hyacinth-red]], [[ferruginous]] and [[polished-brown]], at 3.4, \n[[terracotta]], [[brick]] and [[red]] sit nearby in the same warm-earth family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Peach Blush in 584 of 23,781 paintings (2.46 percent), as photographed, mostly as a midtone or shadow color [2]. It is strongly concentrated in South Asian painting: 38 of 96 Kalighat paintings carry it, over 16 times the archive rate, and it runs almost as high in Pahari and Rajput work, and in paintings from Tibet, Nepal and India generally [2]. Pontormo and Amedeo Modigliani use it far more than their peers [2]. It keeps company with Vermilion, Sienna and Red more than chance [2]. These are screen approximations of aged, varnished canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the warm flush of a peach's skin",
+   "first_recorded": "Maerz and Paul, 1930, first recorded 1926",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "hyacinth-red",
+   "ferruginous",
+   "polished-brown",
+   "ocher-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 584,
+  "role": {
+   "mid": 0.61,
+   "shadow": 0.24,
+   "highlight": 0.15
+  },
+  "company": [
+   "Vermilion",
+   "Sienna",
+   "Red"
+  ],
+  "measured": {
+   "lch": [
+    47,
+    38,
+    43
+   ],
+   "nearest": [
+    [
+     "Hyacinth Red",
+     3.4
+    ],
+    [
+     "Ferruginous",
+     3.6
+    ],
+    [
+     "Polished brown",
+     4.5
+    ],
+    [
+     "Ocher Red",
+     4.8
+    ]
+   ]
+  },
+  "surprises": [
+   "Kalighat: 38 of 96 works carry it, 16.12x the archive rate"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "In which movement does our archive find Peach Blush most over-represented?",
+   "choices": [
+    "Kalighat painting",
+    "Impressionism",
+    "Renaissance",
+    "Post-Impressionism"
+   ],
+   "answer": "Kalighat painting",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Peach Blush's name is dated by Maerz and Paul to the twentieth century, even though its closest archive matches cluster in South Asian painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "A 1926 fashion name turns out to be over-represented in centuries-older Kalighat painting."
+ ],
+ "words": 218,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "peach-blush"
+}

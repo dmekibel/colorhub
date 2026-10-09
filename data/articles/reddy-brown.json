@@ -1,0 +1,117 @@
+{
+ "slug": "reddy-brown",
+ "name": "Reddy Brown",
+ "hex": "#6E1005",
+ "names": [
+  "Reddy Brown"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Reddy Brown is a modifier name: \"reddy,\" an informal variant of \"reddish,\" attached to the parent color [[brown]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on brown",
+   "body": "The name follows one of the library's most common patterns: the modifier \"reddy\" (an informal spelling of \"reddish\") placed in front of the parent color, [[brown]] [1]. This exact label is first recorded in 2010, in the xkcd color survey, a large, informal internet survey in which hundreds of thousands of visitors typed their own name for a swatch; the library keeps names that enough people typed the same way [1][2]. No source consulted here records any coiner beyond that crowd, so the name's inventor is undocumented [1]. The hex #6E1005 is a screen approximation of a very dark, red-leaning brown, close to a dried-blood shade [1].\n\nIts nearest library look-alike is [[blood-red]], about 2.9 units away in LCH space, read as almost the same color [1].\n\nFurther along the same family are [[maroon]], more vivid, and [[rosewood]], almost the same color [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub painting archive this hue appears in 353 of 23,781 paintings, about 1.5 percent, as photographed [3]. It peaks in the 1460s (8 of 71 paintings from that decade), and Amedeo Modigliani, Juan Correa de Vivar and Sandro Botticelli use it most often relative to their output [3]. These are computed color matches on varnished, photographed canvases, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented beyond the modifier \"reddy\" (informal \"reddish\") attached to \"brown\"",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library (xkcd 2010)"
+  },
+  "aka": [
+   "Reddy-Brown"
+  ],
+  "siblings": [
+   "blood-red",
+   "maroon",
+   "rosewood"
+  ],
+  "parent": "brown",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 353,
+  "measured": {
+   "lch": [
+    20,
+    38,
+    30
+   ],
+   "nearest": [
+    [
+     "Blood Red",
+     2.9
+    ]
+   ]
+  },
+  "peak_decade": 1460
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "xkcd color survey (2010), via Randall Munroe, \"Color Survey Results\"",
+   "loc_kind": null,
+   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "\"Reddy\" in Reddy Brown is an informal variant of which word?",
+   "choices": [
+    "Reddish",
+    "Ready",
+    "Ruddy only",
+    "Radiant"
+   ],
+   "answer": "Reddish",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a specific coiner is named for Reddy Brown beyond the 2010 survey that recorded it.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reddy Brown comes from a 2010 internet survey where hundreds of thousands of people typed their own names for colors."
+ ],
+ "words": 219,
+ "status": "checked",
+ "checked": {
+  "by": "batch-29",
+  "date": "2026-10-09",
+  "issues": [
+   "Origin traced to the 2010 xkcd color survey rather than left undocumented, once the graph's own src/fy fields were checked."
+  ]
+ }
+}

@@ -1,0 +1,151 @@
+{
+ "slug": "solid-pink",
+ "name": "Solid Pink",
+ "hex": "#893843",
+ "names": [
+  "Solid Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Solid Pink is a dark, dusty rose-red so close to Deep Rose Red that our graph treats the two as the same color, and its own naming is undocumented beyond a bare Wikipedia listing.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An undocumented name, a near-duplicate",
+   "body": "Wikipedia lists this as one of its web-sourced color names, and our library notes its origin as simply obscure: a qualified or novelty name with no traceable history in the books we checked [1]. By real look-alike distance it is a near-duplicate of [[deep-rose-red]] — essentially the same color under two different names — and it also neighbors [[peony-red]] and [[vandyke-red]], with [[bordeaux]] a little further out, duller and darker [2]. In English print the phrase 'solid pink' itself is comparatively recent, peaking and rising fastest in the 1950s, by Google Books' count across every sense of the words [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this rose-red in 84 of 23,781 paintings, about 0.35 percent, as photographed, more common than 52 percent of the named colors we track [4]. It peaks in the 1900s, at 0.7 percent of the 1,674 paintings we have from then (11 paintings), 2.1 times the museums' expected rate, and plays an accent in 74 percent of its appearances [4]. The earliest match is Hans Memling's 1470 painting, with the latest from 1947, fifty-one dated paintings in all — a floor, not a first, since the archive's early centuries are thin [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; Wikipedia lists it without explaining the name",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library, Solid Pink entry"
+  },
+  "aka": [
+   "Deep Rose Red"
+  ],
+  "siblings": [
+   "deep-rose-red",
+   "peony-red",
+   "vandyke-red"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "deep-rose-red",
+    "gloss": "a near-duplicate of this same color under a different name"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 84,
+  "n_within": 57,
+  "common_than_pct": 52,
+  "ngram": {
+   "peak": 1950,
+   "rise": 1950,
+   "first": 1890
+  },
+  "measured": {
+   "lch": [
+    35.1,
+    37.2,
+    16.9
+   ],
+   "nearest": [
+    [
+     "Peony Red",
+     2.9
+    ],
+    [
+     "Vandyke Red",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia-sourced entry (data/library.json, Solid Pink)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: look-alike and near-duplicate edges (data/graph/edges-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache, English-language corpus, all senses of the words (research/_raw/ngrams)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color is Solid Pink nearly identical to in our graph?",
+   "choices": [
+    "Deep Rose Red",
+    "Hot Pink",
+    "Mulberry",
+    "Raspberry"
+   ],
+   "answer": "Deep Rose Red",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the books we checked document a clear origin for the name Solid Pink.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Our archive's earliest match for Solid Pink is a 1470 painting by which artist?",
+   "choices": [
+    "Hans Memling",
+    "Johannes Vermeer",
+    "Sandro Botticelli",
+    "Henri Matisse"
+   ],
+   "answer": "Hans Memling",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Solid Pink and Deep Rose Red are close enough in our graph to be the same color under two names.",
+  "Our archive's earliest match for this rose-red is a 1470 painting, nearly five centuries before any 1950s rise in the phrase itself."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified as internally consistent with cited ColorHub library/graph/archive data; no book or web source cited for this article's factual claims, no myth-list phrase found, and the claims are already conservatively hedged (undocumented origin, floor-not-first framing, thin-sample caveats)."
+  ]
+ },
+ "words": 228
+}

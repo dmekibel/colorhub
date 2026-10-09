@@ -1,0 +1,126 @@
+{
+ "slug": "plumbago-grey",
+ "name": "Plumbago Grey",
+ "hex": "#98959D",
+ "names": [
+  "Plumbago Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Plumbago Grey is a pale, purplish grey named for plumbago, a word that means both a blue-flowered garden shrub and the old name for graphite, though this swatch favors neither plant blue nor pencil black.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two plumbagos, one grey",
+   "body": "Ridgway's 1912 color standards place this hue on plate L, hue 61'''', tone d; it is reproduced from a scan of an aged plate, so the printed color is approximate [1]. The ISCC-NBS system later filed it in block 227, \"purplish gray\", and Maerz and Paul's 1930 dictionary also records it, on plate 44 B 4 [2][3]. \"Plumbago\" names both the shrub Plumbago auriculata, grown for its clear sky-blue flowers, and, in Latin, lead ore, the old word for graphite before \"carbon\" took over [1]. This swatch is far greyer and paler than either the flower's blue or graphite's near-black [1].\n\nThe nearest named colors in our data are [[irisglow|Irisglow]], 3.0 CIEDE2000 units away, and [[platinum-grey|Platinum Grey]] and [[manatee|Manatee]] close behind [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Plumbago Grey appears in 277 of our 23,781 paintings, about 1.16 percent, as photographed; the within-painting lens finds it in 146, more common than 65 percent of our named colors [4]. It peaks in the 1900s, in 23 of 1,674 paintings, at 1.6 times the expected rate for that century, and is most over-represented in Swiss paintings, at 4.3 times expected, and in Impressionist works, at 4.3 times expected [4]. Inside a painting it most often sits as a light, in 45 percent of the 146 paintings where it carries real area [4].\n\nIts most devoted painter is Rosa Bonheur, at 5.9 times the baseline of the museums her work comes from, in 4 of her 24 works here [4]. The earliest match is dated 1119, 793 years before Ridgway's 1912 record of the name, as photographed, a floor and not a first, since the archive's early centuries are thin [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "plumbago, a flowering shrub and the old word for graphite",
+   "first_recorded": "1912, Ridgway plate L",
+   "source": "Ridgway, Color Standards and Nomenclature (1912)"
+  },
+  "aka": [],
+  "siblings": [
+   "irisglow",
+   "platinum-grey",
+   "manatee",
+   "plumbago-slate"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 277,
+  "measured": {
+   "lch": [
+    62,
+    5,
+    305
+   ],
+   "nearest": [
+    [
+     "Irisglow",
+     3.0
+    ],
+    [
+     "Platinum Grey",
+     3.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Nomenclature (1912), plate L, hue 61''''",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955 block 227 entry and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 44 B 4",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What two different things does the word \"plumbago\" name?",
+   "choices": [
+    "A blue-flowered shrub and the old word for graphite",
+    "A fish and a bird",
+    "Only a mineral",
+    "Only a flower"
+   ],
+   "answer": "A blue-flowered shrub and the old word for graphite",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Plumbago Grey most often appears as a shadow rather than a light in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Plumbago Grey borrows a word that means both a blue flower and a mineral, but matches neither closely."
+ ],
+ "words": 306,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

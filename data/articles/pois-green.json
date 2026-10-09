@@ -1,0 +1,122 @@
+{
+ "slug": "pois-green",
+ "name": "Pois Green",
+ "hex": "#828B68",
+ "names": [
+  "Pois Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pois Green is a muted, grayish yellow-green recorded by Ridgway in 1912 and filed in ColorHub's data under pois, the French word for pea.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pea-colored green",
+   "body": "Ridgway's 1912 nomenclature places this hue at plate XLI, hue 29''', tone i, and the ISCC-NBS system of 1955 files it as block 122, a grayish yellow green [1]. Maerz and Paul's 1930 dictionary gives a first recorded date of 1905, at plate 22 G 5 [1]. ColorHub's library tags the name to the word pois, French for pea, but nothing in our sources confirms that link directly, so the exact derivation stays undocumented here [2].\n\nThe nearest named color is [[celadon-green|Celadon Green]], 4.2 units away and a touch cooler; [[chromium-green|Chromium Green]] sits 4.3 units off, slightly yellower [2]. [[reed-green|Reed Green]], a darker olive carrying the same reed word elsewhere in this family, is 5.7 units away [2]. In LCH terms Pois Green measures lightness 56, chroma 20, hue 119 degrees [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Pois Green in 663 of 23,781 paintings, 2.79 percent, as photographed, more common than 80 percent of the archive's named colors [3]. It peaks in the 1900s, in 68 of 1,674 paintings, at 2.5 times the expected rate, and Peter Snayers is its most devoted painter, present in 4 of his 16 works here at 5.8 times his baseline [3]. It most often turns up as a hidden color, tucked into shadow, in 31 percent of its paintings [3]. The earliest match is dated 916, nine hundred ninety-six years before Ridgway's 1912 record of the name — a look-alike hue in an aged photograph, not proof of a pea-green pigment, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pois, French for pea (ColorHub's own naming data; the link is undocumented beyond that)",
+   "first_recorded": "1905, per Maerz and Paul",
+   "source": "ColorHub color library, computed from Ridgway 1912, ISCC-NBS 1955 and Maerz and Paul 1930"
+  },
+  "aka": [
+   "Deep Grape Green",
+   "Light Elm Green"
+  ],
+  "siblings": [
+   "celadon-green",
+   "chromium-green",
+   "reed-green",
+   "rinnemann-s-green"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 663,
+  "measured": {
+   "lch": [
+    56,
+    20,
+    119
+   ],
+   "nearest": [
+    [
+     "Celadon Green",
+     4.2
+    ],
+    [
+     "Chromium Green",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 plate XLI hue 29''', ISCC-NBS 1955 block 122, Maerz and Paul 1930 plate 22 G 5",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed ISCC-NBS block, Munsell notation and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 source records a plate and hue number for Pois Green?",
+   "choices": [
+    "Ridgway",
+    "Pantone",
+    "Crayola",
+    "Winsor and Newton"
+   ],
+   "answer": "Ridgway",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pois Green most often appears as the brightest highlight in a painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pois Green takes its name from pois, the French word for pea."
+ ],
+ "words": 280,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

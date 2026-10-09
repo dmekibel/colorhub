@@ -1,0 +1,107 @@
+{
+ "slug": "pale-lumiere-green",
+ "name": "Pale Lumiere Green",
+ "hex": "#E5E7B2",
+ "names": [
+  "Pale Lumiere Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pale Lumiere Green is a soft greenish yellow, the pale tone Robert Ridgway charted beside the parent color Lumiere Green in his 1912 color atlas.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pale tone of Lumiere Green",
+   "body": "Pale Lumiere Green puts Ridgway's tone word Pale in front of [[lumiere-green]], one of the paired tone variants his 1912 *Color Standards and Color Nomenclature* set beside each named hue [1]. Lumiere Green itself is Ridgway's plate XVII, hue 29 prime, tone b, later filed by the ISCC-NBS dictionary of 1955 in block 119, and Maerz and Paul's 1930 *Dictionary of Color* lists it as first recorded in 1905 [1].\n\nIts nearest named neighbor is [[pale-veronese-green]], only 2.6 units off and close enough on screen to read as the same color [1]; [[pale-goldenrod]] and [[pale-yellow-green]] each sit 3.2 units away [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 158 of 23,781 paintings, 0.66 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 97 [2]. That makes it more common than 58 percent of the named colors in our library [2]. It peaks in the 1900s, present in 0.8 percent of the 1,674 paintings from that century, 2.2 times the archive's overall rate [2]. Inside a painting it most often plays a light, in 70 percent of its 97 appearances by lightness rank [2].\n\nThe earliest match dates to 1413, in a work attributed to Oguri Sotan, a floor and not a first since the archive's early centuries are thin; that is 499 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]. Jacob Maris used it most, in 4 of his 40 paintings here, 4.9 times the rate of the museums those works come from [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Ridgway's tone system: the pale tone of Lumiere Green",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XVII",
+   "source": "Ridgway 1912; ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "lumiere-green",
+   "pale-veronese-green",
+   "pale-goldenrod",
+   "pale-yellow-green"
+  ],
+  "parent": "lumiere-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 158,
+  "n_within_painting": 97,
+  "pct_archive": 0.66,
+  "rank_pct": 58,
+  "measured": {
+   "nearest": [
+    [
+     "Pale Veronese Green",
+     2.6
+    ],
+    [
+     "Pale Goldenrod",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930) and look-alike distances, data/graph/edges-p.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Pale Lumiere Green?",
+   "choices": [
+    "Pale Veronese Green",
+    "Pale Goldenrod",
+    "Pale Yellow-Green"
+   ],
+   "answer": "Pale Veronese Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our painting archive's earliest match for this color predates its 1912 naming by centuries.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale Lumiere Green and Pale Veronese Green sit close enough to pass for the same color."
+ ],
+ "words": 291,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

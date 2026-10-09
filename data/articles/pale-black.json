@@ -1,0 +1,136 @@
+{
+ "slug": "pale-black",
+ "name": "Pale black",
+ "hex": "#352925",
+ "names": [
+  "Pale black"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Pale black is a dark reddish-brown filed under a traditional Japanese color name, Binrōjizome, \"betel nut dyed.\"",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "A betel-nut dye",
+   "body": "Our library lists this swatch as *Binrōjizome* (檳榔子染), which translates as \"betel nut dyed,\" one of the traditional colors of Japan recorded on Wikipedia's list of that name [1]. The English label \"Pale black\" is this app's own rendering of the name, not a separate historical term, and the dye plant or source behind the Japanese name is not further documented in the sources checked here [1]. Its nearest named neighbor in our data is [[pale-black-tone]], only 2.8 units off, essentially the same color on screen [2]; [[zulu]] sits 3.2 units away.\n\nDespite its name, the swatch reads as a warm, dark brown rather than true black, close to [[woodland-brown]] and [[chocolate-brown]] in hue [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within range of this swatch in 3,316 of 23,781 paintings, 13.94 percent, as photographed; the within-painting lens, requiring real coverage, finds it in 2,803 [3]. That makes it more common than 98 percent of the named colors in our library [3]. It most often plays a mid-tone, in 44 percent of those 2,803 paintings by lightness rank, so varnish cannot fake the result [3].\n\nEastman Johnson is its most devoted painter, present in 6 of his 18 works here, 3.3 times the expected rate for the museums those paintings come from [3]. The earliest match dates to the year 1119, centuries before any dyed textile using this name could have existed, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Binrōjizome, a traditional Japanese dye name (\"betel nut dyed\")",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, \"Traditional colors of Japan\""
+  },
+  "aka": [
+   "Binrōjizome"
+  ],
+  "siblings": [
+   "pale-black-tone",
+   "zulu",
+   "woodland-brown",
+   "chocolate-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "pale-black-hue",
+    "gloss": "a different traditional Japanese color (Shikon, blue-violet) with a similar English rendering"
+   },
+   {
+    "slug": "pale-black-shade",
+    "gloss": "a different traditional Japanese color (Sensaicha) with a similar English rendering"
+   }
+  ],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Binrōjizome (檳榔子染)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3316,
+  "n_within_painting": 2803,
+  "pct_archive": 13.94,
+  "rank_pct": 98,
+  "measured": {
+   "lch": [
+    18,
+    7,
+    45
+   ],
+   "nearest": [
+    [
+     "Pale black tone",
+     2.8
+    ],
+    [
+     "Zulu",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), Wikipedia \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name behind Pale black, Binrōjizome, mean?",
+   "choices": [
+    "Betel nut dyed",
+    "Iron storage",
+    "Thousand year old brown",
+    "Blue-violet"
+   ],
+   "answer": "Betel nut dyed",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Pale black, Pale black hue and Pale black shade are the same traditional Japanese color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pale black is really a warm, dark brown, named after a betel-nut dye."
+ ],
+ "words": 265,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

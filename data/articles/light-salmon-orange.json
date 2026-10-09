@@ -1,0 +1,127 @@
+{
+ "slug": "light-salmon-orange",
+ "name": "Light Salmon-Orange",
+ "hex": "#FEAD82",
+ "names": [
+  "Light Salmon-Orange"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Light Salmon-Orange is a soft, pale orange filed three ways in our sources: as a modifier on [[light-salmon|Light Salmon]], as a Ridgway hue from 1912, and as the Japanese traditional color Usugaki, \"pale persimmon.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Three records, one hue",
+   "body": "Ridgway's 1912 atlas plates this hue at plate II, hue 11, tone d, and the ISCC-NBS system separately filed it in 1955 as block 53 [1]. Our color graph files the same approximate hue, sourced to Wikipedia's list of traditional Japanese colors, as *Usugaki* (薄柿), literally \"pale persimmon,\" one of a family of persimmon-dyed browns and oranges named for the fruit [2]. In our data it also sits in the \"family word\" position under [[light-salmon|Light Salmon]], the X11 web color, measuring a touch lighter and less saturated (lightness 78 against 75, chroma 42 against 47) [1].\n\nIts nearest named neighbor is [[salmon-color|Salmon Color]], 2.8 units away and duller, with [[light-orange|Light Orange]] close behind at 3.8, more vivid [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale orange in 34 of 23,781 paintings (0.14 percent, as photographed), rarer than 60 percent of the named colors we track [3]. It most often plays an accent, in 62 percent of its strongest matches, and peaks in paintings from the 1800s [3]. The earliest dated match runs to 1516, by Raphael, 396 years before Ridgway's 1912 record; a floor, not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive modifier: light + Salmon-Orange; also the Japanese traditional color Usugaki, \"pale persimmon\"",
+   "first_recorded": "1912 (Ridgway, plate II); also ISCC-NBS 1955, block 53",
+   "source": "Ridgway, Color Standards and Color Nomenclature; Wikipedia, \"Traditional colors of Japan\""
+  },
+  "aka": [
+   "Usugaki"
+  ],
+  "siblings": [
+   "salmon-color",
+   "light-orange",
+   "ochraceous-salmon"
+  ],
+  "parent": "light-salmon",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Usugaki (薄柿), pale persimmon"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 34,
+  "measured": {
+   "lch": [
+    78,
+    42,
+    54
+   ],
+   "nearest": [
+    [
+     "Salmon Color",
+     2.8
+    ],
+    [
+     "Light Orange",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate II, hue 11, tone d; ISCC-NBS 1955, block 53; cited via ColorHub color library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: Japanese traditional color names, Usugaki (薄柿), sourced there to Wikipedia's \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name for this color, Usugaki, literally mean?",
+   "choices": [
+    "Pale persimmon",
+    "Light peach",
+    "Soft coral",
+    "Autumn leaf"
+   ],
+   "answer": "Pale persimmon",
+   "kind": "pick"
+  },
+  {
+   "q": "Which hue plate in Ridgway's 1912 atlas records this color?",
+   "choices": [
+    "Plate II, hue 11",
+    "Plate XI, hue 63",
+    "Plate XXVI, hue 69",
+    "Plate XL, hue 13"
+   ],
+   "answer": "Plate II, hue 11",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "This pale orange is also the Japanese traditional color Usugaki: literally, \"pale persimmon.\""
+ ],
+ "words": 224,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from Ridgway, ISCC-NBS and the Japanese traditional-colors list via the color library and archive."
+  ]
+ }
+}

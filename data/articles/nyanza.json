@@ -1,0 +1,132 @@
+{
+ "slug": "nyanza",
+ "name": "Nyanza",
+ "hex": "#E9FFDB",
+ "names": [
+  "Nyanza"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Nyanza is a very pale yellow-green, named, by most accounts, for the Swahili word for \"lake\" that once labeled East Africa's Great Lakes on colonial-era maps.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A lake-country word",
+   "body": "*Nyanza* is Bantu and Swahili for \"lake,\" and the word was long attached to the African Great Lakes; Lake Victoria appeared on nineteenth-century maps as \"Victoria Nyanza\" [1]. Our sources do not record who first attached the word to this particular pale green, so the link to lake-country scenery is a reasonable reading, not a documented fact [1].\n\nThe swatch itself is older on paper than that story: Maerz and Paul's 1930 dictionary of color names lists it at plate 19, cell C4, and its editors traced the name's first recorded use back to 1892 [2]. The nearest look-alikes on file are [[pale-blue-green]] and [[tea-green]], both darker, and [[honeydew]] and [[oural-green|Oural Green]], duller and greener [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A close match to this green turns up in 7 of our 23,781 archived paintings, about 0.03 per cent, with the within-painting lens finding it in 3; that is rarer than 81 per cent of our named colors [4]. In printed English the word *nyanza* itself peaks in the 1890s and climbs fastest from the 1860s, a Google Books curve that covers every sense of the word, including the lake and the place name, not only the color; the archive counts above are as photographed, a screen-color match, not a pigment test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Swahili nyanza, \"lake,\" as in the old name Victoria Nyanza for Lake Victoria (reading, not a documented fact)",
+   "first_recorded": "1892 (Maerz & Paul, 1930)",
+   "source": "Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-blue-green",
+   "tea-green",
+   "honeydew",
+   "oural-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "n_archive_hits": 7,
+  "measured": {
+   "lch": [
+    97.6,
+    20.0,
+    132.2
+   ],
+   "nearest": [
+    [
+     "Pale Blue-Green",
+     4.0
+    ],
+    [
+     "Tea Green",
+     5.3
+    ]
+   ]
+  },
+  "ngram": {
+   "peak": 1890,
+   "rise": 1860
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"List of colors: N–Z\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/List_of_colors:_N%E2%80%93Z"
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Maerz & Paul, A Dictionary of Color, plate 19 C 4 (via ColorHub library)",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-n.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes and Ngram cache (data/graph/fieldnotes/n.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the word \"nyanza\" mean in Swahili?",
+   "choices": [
+    "Lake",
+    "Green",
+    "Garden",
+    "Sky"
+   ],
+   "answer": "Lake",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our data proves that Nyanza the color was named directly for Lake Victoria.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Nyanza carries the same word once used for Lake Victoria on the map: \"Victoria Nyanza.\""
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from Wikipedia and ColorHub library/graph data.",
+   "Fixed: field section said 'rarer than 79 per cent'; data/graph/fieldnotes/n.json gives rp=19, i.e. rarer than 81 per cent. Corrected to 81."
+  ]
+ },
+ "words": 234
+}

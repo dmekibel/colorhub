@@ -1,0 +1,126 @@
+{
+ "slug": "bright-sea-green",
+ "name": "Bright Sea Green",
+ "hex": "#05FFA6",
+ "names": [
+  "Bright Sea Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Bright Sea Green modifies [[sea-green]] toward full saturation, a name that lives in web color-name lists rather than any painter's palette.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web-list color",
+   "body": "The name turns up in Wikipedia's list of web colors and in the xkcd 2010 crowd survey, but not in any of the 29 color books behind this archive, so its origin beyond modifier grammar is undocumented here [1]. Its nearest named neighbor is [[greenish-cyan|Greenish Cyan]], only 3.1 units away and read as duller [2].\n\nThe nearest color twin in our gem data is [[gem:aquamarine|aquamarine]], a match close enough to call a real resemblance [3]; on screen, the closest film reference is a green from the title sequence of [[film:vertigo|Vertigo]] (1958) [3]. [[weird-green|Weird Green]] sits a little further off, darker by comparison [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries this color covering at least one percent of its canvas, as photographed [4]. A green this saturated and this light has no real precedent on an aged, varnished surface [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "sea-green, intensified",
+   "first_recorded": "undocumented beyond web color-name lists (Wikipedia, xkcd 2010)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "greenish-cyan",
+   "light-greenish-blue",
+   "weird-green"
+  ],
+  "parent": "sea-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "min_cover": 0.01
+  },
+  "measured": {
+   "lch": [
+    89.1,
+    75.6,
+    157.6
+   ],
+   "nearest": [
+    [
+     "Greenish Cyan",
+     3.1
+    ],
+    [
+     "Light Greenish Blue",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia and xkcd 2010 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for bright-sea-green",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: gem and film twin edges for bright-sea-green",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where is Bright Sea Green's name first documented?",
+   "choices": [
+    "Only in web color-name lists, not the color books",
+    "A 1927 RAL chart",
+    "ISCC-NBS 1955",
+    "A Crayola crayon"
+   ],
+   "answer": "Only in web color-name lists, not the color books",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color appears in a well-known painting in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bright Sea Green lives in web color lists, not in any painter's palette we can find."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 157
+}

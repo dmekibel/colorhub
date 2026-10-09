@@ -1,0 +1,130 @@
+{
+ "slug": "royal-blue-dark",
+ "name": "Royal Blue (Dark)",
+ "hex": "#002366",
+ "names": [
+  "Royal Blue (Dark)"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Royal Blue (Dark) is a near-black navy blue built by darkening [[royal-blue|Royal Blue]], not a color coined under its own name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a new word",
+   "body": "Royal Blue (Dark) takes the word \"dark\" and attaches it to Royal Blue rather than being coined on its own [1]. The parent name is the one with a history: it is carried by CSS and X11, the 2010 xkcd crowd survey, the 1955 ISCC-NBS dictionary and the 1930 Maerz and Paul dictionary, which first records it in 1892 at plate 43, swatch D 12 [1]. Wikipedia's entry for Royal Blue separately credits Crayola, and the 1955 ISCC-NBS system filed the plain name at block 179 [1].\n\nNothing in our library explains who darkened Royal Blue into this exact swatch, or when, so the modifier itself is undocumented [1]. The nearest color by our look-alike data is [[navy|Navy]], 4.5 units away and read as a duller version of this blue, with [[st-patrick-s-blue|St. Patrick's Blue]] a little further off at 4.7, read as more vivid and lighter [2]."
+  },
+  {
+   "id": "swatch",
+   "title": "How dark is dark",
+   "body": "On screen this measures lightness 16 out of 100, far below the mid-tone Royal Blue it modifies [1]. [[midnight-blue|Midnight Blue]] sits in the same dark-blue cluster, 5.5 units off and read as more vivid and more purple [2]. Treat the hex as a screen approximation only: no pigment, dye or paint-chip sample backs this specific value [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this exact dark blue in 2 of 23,781 paintings, as photographed [3]. The earlier is a mid-19th-century Spanish royal portrait, *Berenguela reina de León y Castilla* by Francisco Prats y Velasco (1850), where it covers about 6 percent of the canvas [3]. The other is Maurice Denis's *Portrait of Yvonne Lerolle in three views* (1897), where it covers about 11 percent [3]. Spain and France are the only countries it turns up in at this threshold, both on samples too thin to generalize from [3]. The count is a computed color match on varnished, photographed paintings, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darker modifier of Royal Blue; the exact variant is undocumented",
+   "first_recorded": "undocumented for this modifier (the parent Royal Blue: 1892, Maerz and Paul)",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "navy",
+   "midnight-blue"
+  ],
+  "parent": "royal-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 2,
+  "measured": {
+   "lch": [
+    16.3,
+    46.3,
+    293.9
+   ],
+   "nearest": [
+    [
+     "Navy",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia, CSS/X11, xkcd 2010, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-r.json, edges-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1930 dictionary first records the un-darkened Royal Blue, in 1892?",
+   "choices": [
+    "Maerz and Paul",
+    "Crayola",
+    "ISCC-NBS",
+    "RAL"
+   ],
+   "answer": "Maerz and Paul",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our library explains exactly who darkened Royal Blue into this shade.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which color is the nearest look-alike to Royal Blue (Dark) in our data?",
+   "choices": [
+    "Navy",
+    "Midnight Blue",
+    "St. Patrick's Blue",
+    "Resolution Blue"
+   ],
+   "answer": "Navy",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Royal Blue (Dark) is Royal Blue pushed down to near-black, not a separately coined color name."
+ ],
+ "words": 320,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "The darkening of Royal Blue into this exact swatch is undocumented; only the parent name's history is sourced.",
+   "Archive n_present is 2, too thin to generalize geography."
+  ]
+ }
+}

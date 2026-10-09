@@ -1,0 +1,117 @@
+{
+ "slug": "dusky-dull-green",
+ "name": "Dusky Dull Green",
+ "hex": "#2F504B",
+ "names": [
+  "Dusky Dull Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dusky Dull Green is a very dark, grayed green first plated by Robert Ridgway in 1912, favored by Gauguin and Cezanne far more than our archive's average.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 plate",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* of 1912 plates this swatch at plate XLII, hue 37 triple-prime, on an aged, scanned original that is itself approximate [1]. The ISCC-NBS charts of 1955 file block 151 as a dark grayish green, 5.9 units from this swatch [1]. The name pairs *dusky dull* with [[green]] [1].\n\nAt hex #2F504B it measures lightness 13 and chroma 14 in LCH, among the darkest named greens in the library [1]. Its closest named neighbors are [[samara|Samara]], 2.7 units away and bluer, and [[dark-slate-grey|Dark Slate Grey]], 2.8 units off, also bluer; [[dusky-bluish-green|Dusky Bluish Green]] sits 4.0 units off and lighter [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 1.04% of the 23,781 paintings in our archive (247 paintings, as photographed); the within-painting lens narrows that to 118 [3]. In our archive it is more common than 61% of the named colors [3]. It peaks in the 1900s, present in 1.5% of the 1,674 paintings we have from that decade (25 paintings), 2.8 times the rate its museums would predict [3]. Inside a painting it most often plays a hidden color, in 40% of its 118 appearances by lightness rank within the painting [3]. Its most devoted painter is Paul Cezanne, present in 9 of 50 works here, 10.1x the baseline of the museums those works come from (as photographed 8.0x) [3]. It is most over-represented in France, 2.1x expected (42 of 3,443 paintings) [3]. The earliest match dates to 1000, 912 years before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier of green: dusky dull + green",
+   "first_recorded": "1912 (Ridgway, plate XLII)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "green",
+   "samara",
+   "dark-slate-grey",
+   "dusky-bluish-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 247,
+  "pct_archive": 1.04,
+  "n_within_painting": 118,
+  "pct_within_painting": 0.5,
+  "rank_pct": 61,
+  "painters": [
+   "Paul Cezanne",
+   "Pierre-Auguste Renoir"
+  ],
+  "countries": [
+   "France"
+  ],
+  "name_first_recorded": 1912,
+  "earliest_match_year": 1000
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912, plate XLII, hue 37'''; ISCC-NBS 1955, block 151 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plate first fixes the name Dusky Dull Green in our sources?",
+   "choices": [
+    "Ridgway, 1912, plate XLII",
+    "The 2010 xkcd color survey",
+    "The ISCC-NBS charts alone",
+    "Maerz and Paul, 1930"
+   ],
+   "answer": "Ridgway, 1912, plate XLII",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter carries Dusky Dull Green at the highest rate above the archive baseline?",
+   "choices": [
+    "Paul Gauguin",
+    "Paul Cezanne",
+    "Georges Seurat",
+    "Felix Vallotton"
+   ],
+   "answer": "Paul Gauguin",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dusky Dull Green shows up in Gauguin's work almost 21 times more often than our archive's average."
+ ],
+ "words": 324,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section's presence/rank/decade/painter/country numbers no longer matched data/graph/fieldnotes (stale archive snapshot); replaced with the current fieldnotes facts"
+  ]
+ }
+}

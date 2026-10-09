@@ -1,0 +1,60 @@
+{
+ "id": "hypebeast",
+ "name": "Hypebeast",
+ "lineage": {
+  "influenced_by": [
+   "streetwear (Supreme, Stüssy)",
+   "sneaker culture",
+   "luxury logomania"
+  ],
+  "influences": [
+   "y2k"
+  ]
+ },
+ "eras": [
+  "2000s origin (sneaker/streetwear forums)",
+  "2010s peak with drop culture and resale markets"
+ ],
+ "places": [
+  "limited sneaker releases",
+  "Hypebeast.com (the media outlet the subculture is named for)"
+ ],
+ "garments": [
+  "logo-heavy hoodies",
+  "collaborative sneaker drops",
+  "box logo tees",
+  "designer x streetwear crossovers"
+ ],
+ "media": [
+  {
+   "title": "Hypebeast (media site, founded 2005)",
+   "note": "the outlet the whole look is named after"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "quiet, logo-free taste; hypebeast dressing is explicitly about visible, legible status and scarcity, not subtlety.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Hype Beast, Drip Fashion",
+  "decade_of_origin": "Mid-2000s (peak popularity in the late 2010s)",
+  "key_motifs": "Prominent brand logos, limited-edition sneakers, graphic prints, artist/brand collaborations",
+  "related_aesthetics": "Emo RapHealth GothHip-HopPaninaroSwagTechwearUrbancore",
+  "key_values": "Exclusivity, brand consciousness, social status, trend-following, conspicuous consumption"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Hypebeast"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 41% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 86% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "caveat": "Colors measured from Aesthetics Wiki photos as photographed and displayed on screen; actual garments and materials vary, and screen colors are approximate."
+ }
+}

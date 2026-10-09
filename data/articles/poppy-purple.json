@@ -1,0 +1,126 @@
+{
+ "slug": "poppy-purple",
+ "name": "Poppy purple",
+ "hex": "#3F313A",
+ "names": [
+  "Poppy purple"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Poppy purple is a near-black, warm neutral that ColorHub's library carries as the English gloss of Messhi, a Japanese traditional color name.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A dark neutral by way of Japan",
+   "body": "ColorHub's library records this hue only through a Japanese entry: *Messhi* (滅紫), glossed in our data as \"Poppy purple\" [1]. The kanji reads, more literally, toward a faded or spent purple, and our sources carry no separate Western record, Ridgway plate or ISCC-NBS block for the name, so an English coinage date is undocumented here [1]. At lightness 22, chroma 9, Poppy purple sits so dark and so low in chroma that it reads as a brown-black rather than a true purple on screen [2].\n\nThe nearest named color is [[dante|Dante]], 3.2 units away and marginally warmer; [[veinous-blood-red|Veinous Blood Red]] sits 3.3 units off, close enough to be mistaken for the same swatch [2]. [[graphite|Graphite]], a cooler, less reddish near-black, is 5.3 units away, and [[zulu|Zulu]] is 5.5 units off [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Poppy purple in 292 of 23,781 paintings, 1.23 percent, as photographed, more common than 71 percent of the archive's named colors [3]. It most often sits as a shadow, in 36 percent of its paintings, and peaks in the 1900s, in 26 of 1,674 paintings, at 1.4 times the expected rate [3]. The earliest match is dated 1414, in a panel by Lorenzo Monaco, with no single painter standing out above the rest of the archive, a floor and not a first, since the archive's early centuries are thin [3]. As with any near-black, the measured hex is a screen approximation of a varnished, aged photograph, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Messhi (滅紫), a Japanese traditional color name our library glosses as \"Poppy purple\"",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library, Japanese traditional-color entry"
+  },
+  "aka": [
+   "Messhi"
+  ],
+  "siblings": [
+   "dante",
+   "veinous-blood-red",
+   "graphite",
+   "zulu"
+  ],
+  "parent": null,
+  "children": null,
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Messhi (滅紫)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 292,
+  "measured": {
+   "lch": [
+    22,
+    9,
+    338
+   ],
+   "nearest": [
+    [
+     "Dante",
+     3.2
+    ],
+    [
+     "Veinous Blood Red",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional-color entry, Messhi (滅紫)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed LCH and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Poppy purple's only recorded source in our library is a traditional color name from which country?",
+   "choices": [
+    "Japan",
+    "France",
+    "England",
+    "the United States"
+   ],
+   "answer": "Japan",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Poppy purple most often appears as a shadow color in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Poppy purple is dark enough to pass for black, and reaches English by way of a Japanese name, Messhi."
+ ],
+ "words": 266,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

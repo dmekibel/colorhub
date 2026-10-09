@@ -1,0 +1,136 @@
+{
+ "slug": "light-alice-blue",
+ "name": "Light Alice Blue",
+ "hex": "#A2B5C1",
+ "names": [
+  "Light Alice Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Alice Blue is a pale, slightly greyed blue reached by the word \"light\" plus [[alice-blue|Alice Blue]], recorded in Ridgway's 1912 color standards and filed again in the ISCC-NBS system of 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on Alice Blue",
+   "body": "Our graph builds this name by grammar, not by a new story: \"light\" plus the parent color [[alice-blue|Alice Blue]], itself named for Alice Roosevelt and recorded by 1902, the date Maerz and Paul give [1][3]. This particular pale swatch is Ridgway's own plate XXXIV, hue 45″, tone d, a scan of an aged printed plate that is only approximate on screen [1]. The ISCC-NBS dictionary of 1955 separately filed the name Light Alice Blue itself under block 181, light blue [1]. The parent's screen swatch is a different thing: today's web Alice Blue is a near-white, while Ridgway's chip was a real pale blue [1].\n\nIn the color graph, its nearest named neighbor is [[ethereal-blue|Ethereal Blue]], 3.0 units away, with [[russian-blue|Russian Blue]] close behind at 3.5 and [[light-columbia-blue|Light Columbia Blue]] at 4.8 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale blue-grey in 403 of 23,781 paintings, 1.69 percent, as photographed, with the within-painting lens finding it in 263, more common than 73 percent of our named colors [2]. It most often plays a light tone inside a painting, in 52 percent of its matches, and peaks in the 1900s, 30 of the 1,674 paintings we have from that century, 1.4 times the expected rate [2]. Alfred Sisley is its most devoted painter, with 8 of 50 of his works on file carrying it, more than seven times the baseline for the museums that hold them [2]. The earliest dated match runs to 1315, nearly six centuries before Ridgway's 1912 record of the name; that floor is a look-alike hue in an aged, varnished photograph, not evidence that the pigment or the name existed that early [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive modifier: light + Alice Blue",
+   "first_recorded": "1912 (Ridgway, plate XXXIV); also ISCC-NBS 1955, block 181",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "ethereal-blue",
+   "russian-blue"
+  ],
+  "parent": "alice-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 403,
+  "n_within": 263,
+  "pct": 1.69,
+  "role": {
+   "light": 52
+  },
+  "painters": [
+   [
+    "Alfred Sisley",
+    8,
+    50,
+    7.3
+   ]
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "Ethereal Blue",
+     3.0
+    ],
+    [
+     "Russian Blue",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: Ridgway 1912 plate XXXIV, ISCC-NBS 1955 block 181, and look-alike edges",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, entry \"Alice blue\"; ColorHub color library (Maerz & Paul 1930)",
+   "loc_kind": "entry",
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Alice Blue is a modifier built on which parent color?",
+   "choices": [
+    "Alice Blue",
+    "Khaki",
+    "Aubergine",
+    "Lemon Yellow"
+   ],
+   "answer": "Alice Blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter in our archive used Light Alice Blue the most, relative to his peers?",
+   "choices": [
+    "Alfred Sisley",
+    "John Singer Sargent",
+    "Claude Monet",
+    "Willem van de Velde"
+   ],
+   "answer": "Alfred Sisley",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our earliest archive match for this color is older than Ridgway's 1912 record of the name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our earliest match for Light Alice Blue is from 1315, nearly six centuries before Ridgway recorded the name."
+ ],
+ "words": 304,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
+  ]
+ }
+}

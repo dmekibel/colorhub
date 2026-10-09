@@ -1,0 +1,118 @@
+{
+ "slug": "popstar",
+ "name": "Popstar",
+ "hex": "#BE4F62",
+ "names": [
+  "Popstar"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Popstar is a dusty, rose-tinted red, a name recorded by web color lists with no older dictionary source and no documented coiner.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color list name, origin undocumented",
+   "body": "ColorHub's library carries Popstar from a general web color-name list, which cites no original source, pigment maker or standards body for it [1]. None of the books consulted here, including Ridgway's 1912 plates and the ISCC-NBS 1955 filings, record this name, and no earlier print source for it turned up [1]. Who coined it, and when, is undocumented in the sources available here.\n\nIts closest look-alikes on file are [[carmine-red|Carmine Red]], almost the same color, and [[brick-red|Brick Red]], more vivid, with [[reddish-crimson|Reddish Crimson]] close behind, also more vivid [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, finds a match for this rose-red in only 9 of them, about 0.04 percent, rarer than 69 percent of our named colors [3]. Its most common role inside a painting, when it does appear, is as an accent, present in all 9 cases, ranked by lightness rather than raw area [3].\n\nThe earliest dated match is a 1571 portrait by François Clouet; our archive's early centuries are thin, so that date is a floor, not a first, and the data is too sparse here for a reliable century trend [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented in the sources consulted",
+   "first_recorded": "undocumented in the books consulted; carried by ColorHub's web color-name library",
+   "source": "ColorHub color library (web color-name list)"
+  },
+  "aka": [],
+  "siblings": [
+   "carmine-red",
+   "brick-red",
+   "reddish-crimson",
+   "swiss-rose"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 9,
+  "pct_archive": 0.04,
+  "measured": {
+   "nearest": [
+    [
+     "Carmine Red",
+     3.8
+    ],
+    [
+     "Brick Red",
+     4.4
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1571,
+   "painting_id": "nga-46112",
+   "painter": "François Clouet"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: web color-name list entry; checked against Ridgway (1912) and ISCC-NBS (1955) in data/library.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match and first-seen date, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color list first documents the name Popstar, according to the sources checked here?",
+   "choices": [
+    "None; the coiner and date are undocumented",
+    "Ridgway's 1912 plates",
+    "The ISCC-NBS 1955 lists",
+    "Maerz and Paul's 1930 dictionary"
+   ],
+   "answer": "None; the coiner and date are undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Popstar is one of the more common colors in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Popstar's earliest match in our archive is a 1571 portrait by François Clouet, but the name itself has no documented coiner."
+ ],
+ "words": 222,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}
