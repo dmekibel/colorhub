@@ -217,13 +217,16 @@ function colorFocus(colors, opts = {}) {
     ov.style.setProperty("--ox", (cx != null ? cx / innerWidth * 100 : 50) + "%");
     ov.style.setProperty("--oy", (cy != null ? cy / innerHeight * 100 : 50) + "%");
     // the color's own name and hex, quietly in a corner (always on, independent of the big centered name's own
-    // fade -- a museum label, not part of "alone with the color")
-    ov.innerHTML = `<p class="rp-focus-name">${esc(name)}</p><p class="rp-focus-tag">${esc(name)} · ${esc(String(hex).toUpperCase())}</p>`;
+    // fade -- a museum label, not part of "alone with the color"). David, 2026-10-09: "the color's name is in a
+    // small, ugly font -- not as pretty as before going full screen" -- the app's own display type now, not the
+    // mono code-ish line this used to be: the name in the serif display face at a generous size, the hex quietly
+    // beneath it in the sans, same contrast-aware ink (data-ink, already set above) either way.
+    ov.innerHTML = `<p class="rp-focus-name">${esc(name)}</p><div class="rp-focus-tag"><p class="rp-focus-tag-name">${esc(name)}</p><p class="rp-focus-tag-hex">${esc(String(hex).toUpperCase())}</p></div>`;
   } else {
     // 2+ colors: full-height (or, stacked, full-width) bands, each with its own name + hex in its own corner,
     // by its own contrast -- no single big name makes sense once there's more than one color to look at alone
     ov.innerHTML = colors.map(({ name, hex }) =>
-      `<div class="cf-band" style="--c:${hex}" data-ink="${ink(hex)}"><p class="rp-focus-tag">${esc(name)} · ${esc(String(hex).toUpperCase())}</p></div>`).join("");
+      `<div class="cf-band" style="--c:${hex}" data-ink="${ink(hex)}"><div class="rp-focus-tag"><p class="rp-focus-tag-name">${esc(name)}</p><p class="rp-focus-tag-hex">${esc(String(hex).toUpperCase())}</p></div></div>`).join("");
   }
   document.body.appendChild(ov);
   RP_FOCUS = ov;
@@ -329,7 +332,7 @@ function rpDrawersHTML(entry, name, hex, famC, paintHost, o = {}) {
   const call = (f, ...a) => typeof f === "function" ? f(...a) : "";
   const paint = `${paintHost}${call(rcRolePaintingsHTML, name, hex)}${call(rcReachSection, name, hex)}${call(rcRoleSection, name, hex)}${call(rcPaintersSection, name, hex)}${call(rcWhenWhereSection, name, hex)}`;
   const words = `<div class="c-poems"></div>${call(archiveRows, entry, "books", famC)}`;
-  const world = `${call(rcWernerLine, name, hex)}${call(btRow, entry, famC)}${call(gmRow, entry, famC)}${call(bdRow, entry, famC)}<section class="fx-in" data-world-in></section>${call(archiveRows, entry, "films", famC)}`;
+  const world = `${call(rcWernerLine, name, hex)}${call(btRow, entry, famC)}${call(gmRow, entry, famC)}${call(bdRow, entry, famC)}${call(doRow, entry, famC)}<section class="fx-in" data-world-in></section>${call(archiveRows, entry, "films", famC)}`;
   const measured = `${rcMeasuredHTML(hex)}${rcMixHTML(hex)}${rcHarmonyHTML(hex, name)}`;
   const [L, C] = lch(hex);
   rcPercentileCaches();
@@ -708,6 +711,7 @@ function rpPaintSectionHTML(name, hex, entry, famC) {
       ${call(btRow, entry, famC)}
       ${call(gmRow, entry, famC)}
       ${call(bdRow, entry, famC)}
+      ${call(doRow, entry, famC)}
       <section class="fx-in" data-world-in></section>
       ${call(archiveRows, entry, "films", famC)}
     </div>

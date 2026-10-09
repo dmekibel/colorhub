@@ -93,6 +93,9 @@ const PM_LAYOUTS = new Map(); // layout key -> layout (the color pass costs ~100
 // the rest of the app uses, not a new one invented here). Labeled by painter name (already in hand synchronously
 // via F.artist, no extra fetch per cell) at a far lower size threshold than any other on-map text gets.
 let PM_LANDMARKS = new Set();
+// David, 2026-10-09: landmarks default OFF now ("make it less overwhelming") -- a "More options" toggle, not a
+// forced-on overlay. The capability (and its collision-avoided, sans-font rendering, fixed earlier) stays.
+let PM_LANDMARKS_ON = false;
 
 // ---------- data ----------
 function pmThumbsLoad() {
@@ -177,21 +180,18 @@ function pmActiveChips(s, F) {
   if (s.fav) c.unshift({ dim: "fav", text: "Your favorites" });
   return c;
 }
-// a painting's own facets, as tappable "only these" chips (David, 2026-10-09: "filtering by example" -- the
-// bottom card for whatever's centered shows painter, country, decade, movement, museum and its 2-3 main colors;
-// tapping one narrows the whole map to it). Undated paintings get no "when" chip (nothing honest to filter by).
+// the card's own three facets (David, 2026-10-09, the minimalist pass -- "filtering by example" stays, pared to
+// the card's own 3-chip budget): Same painter / Same decade / Same place, only the ones that actually apply.
+// Movement, museum and color-swatch filters still exist -- in the sheet's Filter group (More options), not here.
 function pmFacetsOf(i, F) {
   const out = [];
-  if (F.artist[i]) out.push({ dim: "painter", val: F.artist[i], label: xbArtistName(F, F.artist[i]) });
-  if (F.country[i]) out.push({ dim: "co", val: F.country[i], label: F.meta.countries[F.country[i] - 1] });
+  if (F.artist[i]) out.push({ dim: "painter", val: F.artist[i], label: "Same painter" });
   const y = F.G.year[i];
   if (y !== GL_UNDATED) {
     const y0 = y < 1500 ? Math.floor(y / 100) * 100 : Math.floor(y / 10) * 10, y1 = y < 1500 ? y0 + 99 : y0 + 9;
-    out.push({ dim: "when", val: [y0, y1], label: `${y0}s` });
+    out.push({ dim: "when", val: [y0, y1], label: "Same decade" });
   }
-  if (F.mv[i]) out.push({ dim: "mv", val: F.mv[i], label: F.meta.movements[F.mv[i] - 1] });
-  out.push({ dim: "mus", val: F.G.mus[i], label: F.G.src[F.G.mus[i]].short });
-  glPal(i).slice(0, 3).forEach(c => out.push({ dim: "color", val: c.h, label: nameOf(c.h).text }));
+  if (F.country[i]) out.push({ dim: "co", val: F.country[i], label: "Same place" });
   return out;
 }
 // apply one facet to the filter spec in place (mirrors xbWithout's per-dim shape, the "set" half)
@@ -441,41 +441,42 @@ function pmLayout(s, F) {
 
 // ---------- thumbnails: load the few on screen, bake each once, recycle ----------
 const PM_BAKE = 144, PM_CACHE_MAX = 650, PM_BIG_MAX = 36, PM_FLIGHT = 14;
-// Canvas taint (map lane's audit, 2026-10-09): a thumbnail drawn onto a canvas WITHOUT a crossorigin request
-// that the host actually honors leaves that canvas "not origin-clean" forever -- every later toDataURL/
-// getImageData on it throws SecurityError, and the taint propagates to any OTHER canvas it's later drawn onto
-// (js/honey.js's own HM_CTRL.snapshot() reads the shared honeycomb canvas, which these baked tiles are drawn
-// onto). Most of the corpus (AIC, Cleveland, Commons -- tools/gallery.py's own GL_CORS_HOSTS-equivalent list,
-// js/gallery.js's GL_CORS_HOSTS) isn't on a host that answers a CORS request, so requesting crossorigin from
-// them would just fail the LOAD entirely (gallery.js's own glCORS() comment covers the same ground). The fix
-// here is the other half of that same rule: request crossorigin from the hosts that do support it (NGA, the
-// Rijksmuseum's IIIF host, the Met, SMK) so those tiles stay readable, and for every other remote host, never
-// draw the real pixels onto a canvas at all -- fill with the painting's own dominant color instead (already
-// computed, pmHex()), which keeps the honeycomb's shared canvas genuinely readable for snapshot() no matter
-// which paintings happen to be on screen, at the cost of a plain color tile for most non-local paintings. Our
-// own local copies (img/gallery/<path>, the "L" code in thumbs.txt) are same-origin and always safe either way.
+// Canvas taint, corrected (2026-10-09, after measuring only ~62% of drawn cells showed a real photo and finding
+// why): drawing a cross-origin image onto a canvas WITHOUT a crossorigin request the host actually honors does
+// leave THAT canvas unreadable (toDataURL/getImageData throw), and the taint spreads to any other canvas it's
+// later drawn onto -- but nothing in this file, or anywhere else in the app, ever reads pixels back off .pmx-cv
+// or off a baked tile's own offscreen canvas (grepped: the only getImageData/toDataURL on a map canvas is
+// js/honey.js's HM_CTRL.snapshot(), which reads honey.js's OWN separate honeycomb canvas -- a different element
+// this file never touches). The original fix ported honey.js's real constraint onto a canvas that never needed
+// it, so most of the corpus (Commons, Cleveland -- not in GL_CORS_HOSTS, and Commons' own Special:FilePath
+// redirect chain fails an actual crossOrigin="anonymous" load even though its final CDN response does carry
+// Access-Control-Allow-Origin: *, confirmed live) got a flat color tile instead of its photo, no matter the
+// size or zoom. bake() now always draws the real pixels it already has in memory, safe host or not -- a tainted
+// canvas is only a problem for code that tries to read it back, and nothing here does. crossOrigin is still
+// only requested from hosts we know answer it correctly (pmSafeHost/GL_CORS_HOSTS): asking a host that doesn't
+// support it would fail the LOAD entirely (gallery.js's own glCORS() comment covers the same ground), not just
+// taint a canvas nothing reads.
 function pmSafeHost(url) {
   try { return GL_CORS_HOSTS.has(new URL(url, location.href).hostname); } catch (e) { return false; }
 }
 function pmImages(onReady) {
   const cache = new Map(), bigs = new Map();   // i -> { st: 0 loading | 1 ready | 2 failed, bm, ar, used } ; i -> HTMLImageElement (kept for the big tiles)
   let flying = 0, frame = 0, dead = false;
-  const bake = (i, img, crop, safe) => {
+  const bake = (i, img, crop) => {
     const nw = img.naturalWidth, nh = img.naturalHeight;
     let sx = 0, sy = 0, sw = nw, sh = nh;
     if (crop && crop[2] - crop[0] > 50 && crop[3] - crop[1] > 50) { sx = crop[0] / 1000 * nw; sy = crop[1] / 1000 * nh; sw = (crop[2] - crop[0]) / 1000 * nw; sh = (crop[3] - crop[1]) / 1000 * nh; }
     const src = { sx, sy, sw, sh }, m = Math.min(sw, sh);
     const cv = document.createElement("canvas"); cv.width = cv.height = PM_BAKE;
     const cx = cv.getContext("2d");
-    if (safe) cx.drawImage(img, sx + (sw - m) / 2, sy + (sh - m) / 2, m, m, 0, 0, PM_BAKE, PM_BAKE);
-    else { cx.fillStyle = pmHex(i); cx.fillRect(0, 0, PM_BAKE, PM_BAKE); }
+    cx.drawImage(img, sx + (sw - m) / 2, sy + (sh - m) / 2, m, m, 0, 0, PM_BAKE, PM_BAKE);
     return { cv, src };
   };
   function want(list) {   // list: gallery indices, most wanted first; also tells which ones need the full picture
     frame++;
     for (const [i, big] of list) {
       const e = cache.get(i);
-      if (e) { e.used = frame; if (big && e.safe && e.st === 1 && !bigs.has(i) && e.url) pmBigLoad(i, e); continue; }
+      if (e) { e.used = frame; if (big && e.st === 1 && !bigs.has(i) && e.url) pmBigLoad(i, e); continue; }
       if (flying >= PM_FLIGHT) continue;
       const t = pmThumb(i); if (!t) { cache.set(i, { st: 2, used: frame }); continue; }
       const local = t.url.startsWith("img/gallery/"), safe = local || pmSafeHost(t.url);
@@ -486,10 +487,11 @@ function pmImages(onReady) {
         flying--; ent.img = null; if (dead) return;
         (img.decode ? img.decode().catch(() => {}) : Promise.resolve()).then(() => {
           if (dead) return;
-          // never hand an unsafe-host image to ctx.drawImage() directly (that's what taints the shared canvas,
-          // js/trail.js's HM_CTRL.snapshot() included) -- only the baked square (itself safe: see bake()) goes
-          // up for those; "big" stays reserved for a host we know answers a real CORS request
-          try { const b = bake(i, img, t.crop, safe); ent.bm = b.cv; ent.src = b.src; ent.st = 1; ent.t0 = performance.now(); if (big && safe) { bigs.set(i, img); trimBig(); } } catch (err) { ent.st = 2; }
+          // bake() always draws the real pixels now (see the comment above pmSafeHost) -- "big" (the full,
+          // less-cropped picture, kept for the always-biggest centered/magnified cell) is no longer reserved for
+          // a CORS-answering host either; pmBigLoad just has to avoid requesting crossorigin from a host that
+          // won't honor it (that would fail the load outright, not merely taint a canvas nothing reads).
+          try { const b = bake(i, img, t.crop); ent.bm = b.cv; ent.src = b.src; ent.st = 1; ent.t0 = performance.now(); if (big) { bigs.set(i, img); trimBig(); } } catch (err) { ent.st = 2; }
           onReady();
         });
       };
@@ -505,10 +507,11 @@ function pmImages(onReady) {
     }
   }
   function pmBigLoad(i, e) {
-    if (e.bigLoading || !e.safe) return; e.bigLoading = true;   // unsafe hosts never get a raw drawImage -- the baked square (e.bm) covers them
+    if (e.bigLoading) return; e.bigLoading = true;
     const local = e.url.startsWith("img/gallery/");
-    const img = new Image(); img.decoding = "async"; if (!local) img.crossOrigin = "anonymous";
+    const img = new Image(); img.decoding = "async"; if (!local && e.safe) img.crossOrigin = "anonymous";   // only from a host that actually answers CORS -- requesting it elsewhere fails the load outright
     img.onload = () => { if (dead) return; bigs.set(i, img); trimBig(); onReady(); };
+    img.onerror = () => { e.bigLoading = false; };
     img.src = e.url;
   }
   function trimBig() { while (bigs.size > PM_BIG_MAX) { const k = bigs.keys().next().value; bigs.delete(k); const e = cache.get(k); if (e) e.bigLoading = false; } }
@@ -528,19 +531,16 @@ function pmOpen(spec, o = {}) {
     <div class="pmx-stage"><canvas class="pmx-cv" aria-label="Paintings as a map: drag to browse, pinch to zoom, tap the middle one to open it"></canvas><p class="pmx-wait">Laying out the paintings…</p></div>
     <header class="pmx-top">
       <button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
-      <button class="pmx-title" data-pmfilter aria-haspopup="dialog"><b><span data-pmt>Paintings</span>${PM_ICON.down}</b><small data-pmsub></small></button>
-      <span class="pmx-sp"></span>
+      <p class="pmx-title"><b>Paintings</b></p>
+      <button class="corner r pmx-do" data-do-corner aria-label="Settings" aria-haspopup="dialog">${PM_ICON.arrange}</button>
     </header>
-    <p class="pmx-why" data-pmwhy></p>
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
     <div class="pmx-walk" data-pmwalk hidden></div>
     <div class="pmx-facets" data-pmfacets hidden></div>
     <div class="pmx-cap" data-pmcap hidden>
       <button class="pmx-cap-main" data-pmopen><b data-pmct></b><small data-pmcb></small></button>
-      <button class="pmx-center" data-pmcenter aria-label="Center the map on this painting">${PM_ICON.similar}</button>
       <button class="pmx-heart" data-pmheart aria-label="Add to your favorites"></button>
     </div>
-    <button class="corner r pmx-do" data-do-corner aria-label="Arrange and filter" aria-haspopup="menu" aria-expanded="false">${PM_ICON.arrange}</button>
   `, "fixed cx pmx");
   const back = el.querySelector("[data-back]");
   back.onclick = () => xBack();
@@ -562,12 +562,19 @@ function pmOpen(spec, o = {}) {
 function pmMount(el, s, F) {
   const cv = el.querySelector(".pmx-cv"), ctx = cv.getContext("2d"), wait = el.querySelector(".pmx-wait");
   const RM = reduceMotion, cap = el.querySelector("[data-pmcap]"), heart = el.querySelector("[data-pmheart]");
-  const centerBtn = el.querySelector("[data-pmcenter]"), facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]"), walkBar = el.querySelector("[data-pmwalk]");
+  const facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]"), walkBar = el.querySelector("[data-pmwalk]");
   let walk = [];   // "Walk from here" (David, 2026-10-09): the gallery indices visited this walk, in order; [] when none is active
   let scrubTimer = 0;   // the time scrubber's own Play timer (0 = not playing); lives here, not inside openSheet, so it survives a sheet close/reopen
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
   let P = [0, 0], Z = 1, V = [0, 0], glide = null, raf = 0, dead = false, centerK = -1, lastTick = 0, drawn = [];
   const ZMAX = 2.2;
+  let pulseI = -1, pulseT0 = 0;   // the entry-point highlight ring (David, 2026-10-09): briefly rings whichever painting a seed just pinned the view to
+  // David, 2026-10-09: "the name of the painting at the bottom isn't necessary -- we only need the name when we
+  // tap it." The card used to track whatever's nearest the middle continuously, all through a pan -- now it only
+  // opens for an explicit reason (a tap re-centers onto a painting, Walk/Center-on-presets/a facet chip land on
+  // one, or a seeded entry point pins to one) and closes again the moment you start a new pan or tap empty space.
+  let cardOpen = false;
+  const PULSE_MS = 900;
   const imgs = pmImages(() => kick());
   if (!PM_LANDMARKS.size && typeof rcLoadPortraits === "function") {
     rcLoadPortraits().then(port => {
@@ -593,6 +600,16 @@ function pmMount(el, s, F) {
   const zMin = () => {
     const D = Math.hypot(W, H) / 2 + 30, fit = lay ? Math.max(lay.GW, lay.GH) * .62 + 2 : 45, R = Math.min(45, Math.max(5, fit));
     return Math.max(.18, Math.min(1, D / (R + A) / base));
+  };
+  // David, 2026-10-09: "with only 4 results the layout floats tiny in the middle" -- fit the whole filtered set
+  // to the view by default. Math.max(1, ...) is load-bearing: this ONLY ever zooms IN past the ordinary Z=1
+  // default, never further out -- a dense set's own "fit" zoom comes out far below 1 (fitting a 124x192-cell
+  // grid into one screen), and without the floor every open would start absurdly zoomed out instead of only the
+  // genuinely sparse ones this was for.
+  const fitZoomFor = l => {
+    if (!l.GW || !l.GH || !base) return 1;
+    const perUnit = Math.min(W / (l.GW + 1.4), H / (l.GH + 1.4));
+    return clamp(Math.max(1, perUnit / base), zMin(), ZMAX);
   };
   function size() {
     const r = cv.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(3, devicePixelRatio || 1);
@@ -620,7 +637,7 @@ function pmMount(el, s, F) {
   function caption() {
     if (centerK < 0 || !lay) { cap.hidden = true; facets.hidden = true; return; }
     const i = lay.items[centerK], a = F.artist[i], y = glYear(i), by = [a ? xbArtistName(F, a) : "", y].filter(Boolean).join(" · ");
-    cap.hidden = false;
+    cap.hidden = !cardOpen; facets.hidden = !cardOpen;
     const d = glDetailNow(i);
     cap.querySelector("[data-pmct]").textContent = d ? d.t : " ";
     cap.querySelector("[data-pmcb]").textContent = by || (d && d.co) || "";
@@ -629,7 +646,10 @@ function pmMount(el, s, F) {
     if (!d) { clearTimeout(capTimer); capTimer = setTimeout(() => glDetail(i).then(() => { if (!dead && lay && lay.items[centerK] === i) caption(); }).catch(() => {}), 90); }
     PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z });
     paintFacets(i);
+    facets.hidden = !cardOpen;   // paintFacets() always unhides itself when it (re)builds the chip row -- cardOpen has the final say
   }
+  function showCard() { if (!cardOpen) { cardOpen = true; caption(); } }
+  function hideCard() { if (cardOpen) { cardOpen = false; caption(); } }
   // "Walk from here" (David, 2026-10-09): step to the most similar painting by a DIFFERENT painter -- the point
   // is leaving your own painter's room each step, not drilling into one artist's own palette range -- excluding
   // anywhere the walk has already been too, so it can't loop back on itself. A cheap mean-color+chroma distance
@@ -653,7 +673,7 @@ function pmMount(el, s, F) {
     if (!walk.length) walk = [from];
     const next = pmWalkCandidate(from, new Set(walk));
     if (next < 0) { toast("No different-painter match left to walk to", { low: true }); return; }
-    buzz(8); walk.push(next); s.seed = next; s.arr = "rings"; rebuild();
+    buzz(8); walk.push(next); s.seed = next; s.arr = "spiral"; rebuild();
   }
   function paintWalk() {
     if (walk.length < 2) { walkBar.hidden = true; walkBar.innerHTML = ""; return; }
@@ -662,7 +682,7 @@ function pmMount(el, s, F) {
     walkBar.querySelector("[data-pmwalkx]").onclick = () => { buzz(4); walk = []; paintWalk(); };
     walkBar.querySelectorAll("[data-pmwalkto]").forEach(b => b.onclick = () => {
       const k = +b.dataset.pmwalkto; if (k === walk.length - 1) return;
-      buzz(5); walk = walk.slice(0, k + 1); s.seed = walk[k]; s.arr = "rings"; rebuild();
+      buzz(5); walk = walk.slice(0, k + 1); s.seed = walk[k]; s.arr = "spiral"; rebuild();
     });
   }
   // the time scrubber (David, 2026-10-09): "paintings appear decade by decade." scrubTimer lives on pmMount
@@ -690,14 +710,16 @@ function pmMount(el, s, F) {
     if (s.upToYear == null || s.upToYear >= hi) s.upToYear = lo;
     rebuild(); scrubTimer = setInterval(scrubStep, 420); scrubUpdateUI();
   }
-  // filter-by-example (David, 2026-10-09): the centered painting's own facets as tappable "only these" chips,
-  // plus "More like this" (the same whole-palette matching as the "similar" arrangement, seeded here)
+  // filter-by-example (David, 2026-10-09, the minimalist pass): up to 3 fixed "only this" chips (Same painter/
+  // decade/place), Open, and Walk from here. "More like this" is gone as a true duplicate -- tapping the
+  // painting itself already does the exact same thing (seed on it, Spiral, rebuild); it wasn't a distinct
+  // capability, just a second way to trigger the one tap-to-center interaction already has.
   function paintFacets(i) {
     const fs = pmFacetsOf(i, F);
     facets.hidden = false;
-    facets.innerHTML = `<button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here →</button><button class="pmx-fchip pmx-fchip-more" data-pmmore>More like this</button>${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${fc.dim === "color" ? `<i style="--c:${fc.val}"></i>` : ""}${esc(fc.label)}</button>`).join("")}`;
+    facets.innerHTML = `${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${esc(fc.label)}</button>`).join("")}<button class="pmx-fchip pmx-fchip-open" data-pmopen2>Open</button><button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here</button>`;
+    facets.querySelector("[data-pmopen2]").onclick = () => openK(centerK);
     facets.querySelector("[data-pmwalk-go]").onclick = () => doWalk();
-    facets.querySelector("[data-pmmore]").onclick = () => { buzz(6); s.seed = i; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild(); };
     facets.querySelectorAll("[data-pmfacet]").forEach(b => b.onclick = () => {
       const fc = fs[+b.dataset.pmfacet]; buzz(6); pmFacetApply(s.f, fc.dim, fc.val); rebuild();
     });
@@ -742,7 +764,7 @@ function pmMount(el, s, F) {
       clampPan();
     }
     draw(t);
-    if (moving || fading) kick();
+    if (moving || fading || (pulseI >= 0 && t - pulseT0 < PULSE_MS)) kick();
   }
   let fading = false;
   function clampPan() {   // the finite map springs back inside its own edges
@@ -777,22 +799,31 @@ function pmMount(el, s, F) {
         tw = Math.min(tw, th * 1.5) - gap; th = Math.min(th, (x1 - x0) * 1.5) - gap;
         const mx = (x0 + x1) / 2, my = (y0 + y1) / 2, d = Math.max(tw, th);
         if (d < 1.2 || mx < -d || my < -d || mx > W + d || my > H + d) continue;
-        drawn.push({ k, x: mx, y: my, d, z, tw, th });
+        const i = lay.items[k];
+        const m = Math.exp(-((z / .5) ** 2));
+        let w = tw, h = th;
+        if (m > .02) {
+          const ar = GAL.ar[i], B = d * (1 + .4 * m), cw = ar > 1 ? B / ar : B, ch = ar > 1 ? B : B * ar;
+          w = tw + (cw - tw) * m; h = th + (ch - th) * m;
+        }
+        drawn.push({ k, i, x: mx, y: my, d, z, m, w, h });
       }
     }
+    // David, 2026-10-09: reverted the spatial-hash anti-overlap clamp that used to live here. It genuinely
+    // stopped cells from intersecting, but it did that by shrinking them away from their natural size whenever a
+    // neighbor was close -- which reads as cells sitting too far apart, not as a fix. The original map (before
+    // today's redesign) never clamped this at all: the near-center magnification above is allowed to overlap its
+    // neighbors slightly, same as it always did -- "the overlap wasn't a problem if it was subtle."
     drawn.sort((a, b) => a.d - b.d);
     fading = false;
+    // landmark labels and the <img> overlay are both collected here and placed/synced in a SEPARATE pass once
+    // every cell is drawn (David, 2026-10-09: drawing either inline here let a later, bigger tile painted on top
+    // blot out or clip an earlier cell's label/overlay -- drawn is sorted smallest-d-first specifically so
+    // bigger/closer cells paint OVER smaller/farther ones, backwards for something that has to survive the pass)
+    const landmarkCandidates = [];
     for (const b of drawn) {
-      const i = lay.items[b.k], e = imgs.get(i);
-      let w = b.tw, h = b.th;
-      // the middle one takes its own shape, whole and uncropped, a little bigger than its cell
-      const m = Math.exp(-((b.z / .5) ** 2));
-      if (m > .02) {
-        const ar = GAL.ar[i], B = b.d * (1 + .4 * m), cw = ar > 1 ? B / ar : B, ch = ar > 1 ? B : B * ar;
-        w = b.tw + (cw - b.tw) * m; h = b.th + (ch - b.th) * m;
-      }
+      const i = b.i, e = imgs.get(i), w = b.w, h = b.h, m = b.m;
       const X = b.x - w / 2, Y = b.y - h / 2;
-      b.w = w; b.h = h;
       if (m > .3) { ctx.save(); ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = 28; ctx.shadowOffsetY = 8; ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); ctx.restore(); }
       else { ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); }
       if (b.d >= 14) wantImg.push([i, b.d > 92 || m > .3]);
@@ -814,28 +845,57 @@ function pmMount(el, s, F) {
         ctx.globalAlpha = 1;
       }
       if (b.d >= 40 && GAL.mean[i * 3] < 24) { ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.lineWidth = 1; ctx.strokeRect(X + .5, Y + .5, w - 1, h - 1); }
-      // your favorites glow (the same pink the heart icon turns "on")
+      // your favorites glow (the same pink the heart icon turns "on"), kept subtle: a thin ring, not a halo
       if (favSet && favSet.size && b.d >= 7 && favSet.has(i)) {
-        ctx.save(); const lw = Math.max(1.5, Math.min(3, b.d * .025));
-        ctx.shadowColor = "rgba(232,120,122,.85)"; ctx.shadowBlur = Math.min(18, b.d * .2);
-        ctx.strokeStyle = "rgba(232,120,122,.95)"; ctx.lineWidth = lw;
+        ctx.save(); const lw = Math.max(1.25, Math.min(2, b.d * .018));
+        ctx.strokeStyle = "rgba(232,120,122,.85)"; ctx.lineWidth = lw;
         ctx.strokeRect(X + lw / 2, Y + lw / 2, w - lw, h - lw);
         ctx.restore();
       }
-      // always-labeled landmarks (a painter name, small and opaque, regardless of how small the cell otherwise reads)
-      if (b.d >= 16 && PM_LANDMARKS.size && PM_LANDMARKS.has(i)) {
-        const nm = F.artist[i] ? xbArtistName(F, F.artist[i]) : "";
-        if (nm) {
-          const py = Y + h + 4;
-          if (py > -16 && py < H + 16) {
-            ctx.save(); ctx.font = `500 ${Math.max(10, Math.min(13, b.d * .15))}px "Geist Mono", Menlo, monospace`;
-            ctx.textAlign = "center"; ctx.textBaseline = "top";
-            const tw2 = ctx.measureText(nm).width;
-            ctx.fillStyle = "rgba(14,13,11,.82)"; ctx.fillRect(b.x - tw2 / 2 - 5, py - 2, tw2 + 10, 15);
-            ctx.fillStyle = "rgba(236,232,223,.95)"; ctx.fillText(nm, b.x, py);
-            ctx.restore();
-          }
+      // the entry-point highlight (David, 2026-10-09, "I don't even see the painting that brought me there"): a
+      // soft ring that breathes once and fades, so the painting an entry point pinned the view to reads as "you're
+      // here", not a silent jump cut. Reduced motion gets a brief steady ring instead of the breathing scale.
+      if (pulseI >= 0 && i === pulseI) {
+        const age = t - pulseT0;
+        if (age >= PULSE_MS) pulseI = -1;
+        else {
+          const u = age / PULSE_MS, alpha = (1 - u) * .85;
+          const breathe = RM ? 1 : 1 + Math.sin(u * Math.PI * 2.4) * (1 - u) * .4;
+          const pad = Math.max(3, b.d * .05) * breathe;
+          ctx.save();
+          ctx.strokeStyle = `rgba(236,232,223,${alpha.toFixed(3)})`;
+          ctx.lineWidth = Math.max(1.5, Math.min(3, b.d * .025));
+          ctx.strokeRect(X - pad, Y - pad, w + pad * 2, h + pad * 2);
+          ctx.restore();
         }
+      }
+      // always-labeled landmarks: a painter name, collected here, placed after the loop (see comment above)
+      if (PM_LANDMARKS_ON && b.d >= 24 && PM_LANDMARKS.size && PM_LANDMARKS.has(i)) {
+        const nm = F.artist[i] ? xbArtistName(F, F.artist[i]) : "";
+        if (nm) landmarkCandidates.push({ x: b.x, y: Y + h + 4, d: b.d, text: nm });
+      }
+    }
+    // landmark labels: a real sans font (not the mono the count-labels use), truncated with an ellipsis rather
+    // than clipped, clamped inside the canvas width, and skipped (not stacked) when it would collide with an
+    // already-placed one -- fewer, cleaner labels, biggest cells (most confidently legible) win a collision.
+    if (landmarkCandidates.length) {
+      landmarkCandidates.sort((a, b) => b.d - a.d);
+      ctx.textAlign = "center"; ctx.textBaseline = "top";
+      const placed = [];
+      for (const c of landmarkCandidates) {
+        if (placed.length >= 14) break;
+        const fs = Math.max(11, Math.min(14, c.d * .14));
+        ctx.font = `500 ${fs}px "Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif`;
+        let txt = c.text, tw2 = ctx.measureText(txt).width;
+        const maxW = Math.min(140, W - 16);
+        if (tw2 > maxW) { while (txt.length > 2 && ctx.measureText(txt + "…").width > maxW) txt = txt.slice(0, -1); txt += "…"; tw2 = ctx.measureText(txt).width; }
+        const px = Math.min(W - 6 - tw2 / 2, Math.max(6 + tw2 / 2, c.x));
+        const rx0 = px - tw2 / 2 - 6, rx1 = px + tw2 / 2 + 6, ry0 = c.y - 2, ry1 = c.y + fs + 4;
+        if (ry1 < -8 || ry0 > H + 8) continue;
+        if (placed.some(p => rx0 < p.rx1 && rx1 > p.rx0 && ry0 < p.ry1 && ry1 > p.ry0)) continue;
+        placed.push({ rx0, rx1, ry0, ry1 });
+        ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fillRect(rx0, ry0, rx1 - rx0, ry1 - ry0);
+        ctx.fillStyle = "rgba(236,232,223,.96)"; ctx.fillText(txt, px, c.y);
       }
     }
     // band and painter labels, where there's room to read them
@@ -888,6 +948,7 @@ function pmMount(el, s, F) {
     } else if (pts.size === 2) {
       clearTimeout(press); press = null;
       const [a, b] = [...pts.values()]; pinch = { d0: Math.hypot(a[0] - b[0], a[1] - b[1]), z0: Z }; if (drag) drag.moved = true;
+      hideCard();
     }
   });
   cv.addEventListener("pointermove", e => {
@@ -900,7 +961,7 @@ function pmMount(el, s, F) {
     if (!drag) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
     if (!drag.moved && Math.hypot(e.clientX - drag.x0, e.clientY - drag.y0) < 8) return;
-    if (!drag.moved) { drag.moved = true; clearTimeout(press); press = null; }
+    if (!drag.moved) { drag.moved = true; clearTimeout(press); press = null; hideCard(); }
     const [u, v] = toPlane(dx, dy); P[0] -= u; P[1] -= v; clampPan();
     drag.x = e.clientX; drag.y = e.clientY;
     const now = performance.now(); drag.hist.push([now, e.clientX, e.clientY]); while (drag.hist.length > 2 && now - drag.hist[0][0] > 90) drag.hist.shift();
@@ -936,8 +997,9 @@ function pmMount(el, s, F) {
   // the heart burst + toggle instead of opening the page
   let lastTapAt = 0, tapTimer = 0;
   function tap(x, y) {
-    const b = hitAt(x, y); if (!b) return;
+    const b = hitAt(x, y); if (!b) { hideCard(); return; }   // tap-away: empty space closes whatever's open
     if (b.k === centerK && b.z < .6) {
+      showCard();   // a tap always shows the name, even on the already-centered painting about to open
       const now = performance.now();
       if (now - lastTapAt < 300) {
         clearTimeout(tapTimer); tapTimer = 0; lastTapAt = 0;
@@ -949,7 +1011,13 @@ function pmMount(el, s, F) {
       tapTimer = setTimeout(() => { lastTapAt = 0; if (!dead) openK(b.k); }, 280);
       return;
     }
-    buzz(5); glideTo([lay.x[b.k], lay.y[b.k]], 360);
+    buzz(5);
+    // David, 2026-10-09: "tap a painting -> it glides to the center and its neighbors re-arrange around it by
+    // color" -- the core interaction (message 3), kept through the later "don't delete capabilities" correction
+    // (message 4): still auto-seeds Spiral, same as before; that correction was about tucking the OTHER
+    // shapes/filters behind More options, not about reverting this. Already-seeded-on-this-one just glides.
+    if (s.arr === "spiral" && s.seed === b.i) { showCard(); glideTo([lay.x[b.k], lay.y[b.k]], 360); return; }
+    s.seed = b.i; s.arr = "spiral"; rebuild();
   }
   function openK(k) {
     const i = lay.items[k];
@@ -960,22 +1028,9 @@ function pmMount(el, s, F) {
   }
   el.querySelector("[data-pmopen]").onclick = () => { if (centerK >= 0) openK(centerK); };
   heart.onclick = () => toggleHeart(false);
-  // "Center on this painting" (David, 2026-10-09, part of the Arrange parity with the color map): the quickest
-  // way to pivot to "around one painting" is the one you're already looking at, right from its own bottom card
-  centerBtn.onclick = () => {
-    if (centerK < 0) return;
-    const i = lay.items[centerK]; buzz(6);
-    if (PM_NEEDS_SEED.has(s.arr) && s.seed === i) return;
-    s.seed = i; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild();
-  };
 
-  // ---- the chrome: the title says what's showing (tap: filter), one line says what position means, the corner arranges
+  // ---- the chrome: back, the static title, one settings button; a removable chip for every active filter
   function chrome() {
-    const n = lay ? lay.n : 0, words = pmWords(s, F);
-    el.querySelector("[data-pmt]").textContent = PM_ARR.find(a => a[0] === s.arr)[1];
-    el.querySelector("[data-pmsub]").textContent = `${n.toLocaleString()} ${n === 1 ? "painting" : "paintings"}${words.length ? " · " + words.join(" · ") : ""}`;
-    let why = PM_WHY[s.arr];
-    el.querySelector("[data-pmwhy]").textContent = why;
     paintChipbar();
   }
   // removable active-filter chips atop the map (David, 2026-10-09): the primary way to SEE and UNDO a filter,
@@ -998,12 +1053,30 @@ function pmMount(el, s, F) {
     wait.hidden = !!lay.n;
     if (!lay.n) wait.innerHTML = `Nothing matches all of that. <button class="wl" data-pmloosen>Clear the filters</button>`;
     const lz = wait.querySelector("[data-pmloosen]"); if (lz) lz.onclick = () => { s.f = xbFresh(); s.fav = 0; rebuild(); };
-    const mem = PM_PAN.get(lay.key);
+    // David, 2026-10-09 ("Show it on the map opens at a different section, so I don't even see the painting that
+    // brought me there"): caption() (below) keeps PM_PAN.set(lay.key, ...) up to date on EVERY center change,
+    // including a plain pan with nothing opened -- so a seeded arrangement's remembered pan isn't "where you left
+    // off reading", it's just "wherever you last panned to", and a SECOND visit to the exact same seeded spec
+    // (tapping "Show it on the map" from the same painting's page again, or from a different painting that
+    // resolves to an already-visited seed) silently overrode the one thing the entry point promised: that painting,
+    // centered. A seed is an anchor, not a bookmark -- always trust it over any remembered pan. This never costs
+    // the original "Back lands where you were" case PM_PAN exists for: the only way to open something other than
+    // the seed is to tap it (which re-seeds onto it first, per tap()'s off-center branch), so by the time anything
+    // opens, the seed already equals whatever's centered -- PM_PAN and lay.start agree. Unseeded arrangements
+    // (color/time/painter, no single anchor) still use PM_PAN as before, so a big dense browse resumes correctly.
+    const pinned = PM_NEEDS_SEED.has(s.arr) && s.seed >= 0;
+    const mem = pinned ? null : PM_PAN.get(lay.key);
     if (mem && !keepPan) { P = [mem.x, mem.y]; Z = mem.s; }
-    else if (!keepPan) { P = lay.start.slice(); Z = 1; const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
+    else if (!keepPan) { P = lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     if (keepPan) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     Z = clamp(Z, zMin(), ZMAX);
+    // the card itself (David, 2026-10-09): opens for a reason -- a seed just pinned the view to one painting
+    // (a tap, Walk, a Center-on preset, a fresh entry point) -- and stays closed for a plain dense browse, same
+    // as switching Arrange to Color/Time/Painter should clear whatever was open rather than leave it stranded.
+    if (!keepPan) cardOpen = pinned;
     centerK = -1; drawn = []; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); chrome(); kick();
+    // a brief highlight on the painting an entry point promised, so it reads as "you're here", not just a jump cut
+    if (pinned && !keepPan && centerK >= 0) { pulseI = lay.items[centerK]; pulseT0 = clock; }
     if (window.PM_DEBUG) console.log("paintmap layout", s.arr, lay.n, Math.round(performance.now() - t0) + "ms");
   }
   function rebuild() {
@@ -1016,7 +1089,6 @@ function pmMount(el, s, F) {
   // no separate confirm step). Replaces the old radial stem menu and the standalone Filter-only sheet.
   const doBtn = el.querySelector(".pmx-do"); doBtn._html = doBtn.innerHTML;
   doBtn.onclick = () => openSheet("arrange");
-  el.querySelector("[data-pmfilter]").onclick = () => openSheet("filter");
   function openSheet(startTab) {
     if (document.querySelector(".sheet")) return;
     if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
@@ -1079,7 +1151,7 @@ function pmMount(el, s, F) {
       qa$("[data-pmarr]").forEach(b => b.onclick = () => {
         const id = b.dataset.pmarr; buzz(5);
         if (PM_NEEDS_SEED.has(id)) { if (mid < 0) return; s.seed = mid; s.arr = id; }
-        else { if (s.arr === id) return; s.arr = id; }
+        else { if (s.arr === id) return; s.arr = id; s.seed = -1; } // a stale seed from a prior Rings/Spiral shouldn't linger into Color/Time/Painter
         rebuild(); renderArrange();
       });
       qa$("[data-pmplace]").forEach(b => b.onclick = () => {
@@ -1087,7 +1159,7 @@ function pmMount(el, s, F) {
       });
       qa$("[data-pmcenterk]").forEach(b => b.onclick = () => {
         const fn = PM_CENTER.find(c => c[0] === b.dataset.pmcenterk)[2], found = fn(list);
-        if (found < 0) return; buzz(6); s.seed = found; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild(); renderArrange();
+        if (found < 0) return; buzz(6); s.seed = found; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "spiral"; rebuild(); renderArrange();
       });
       q$("[data-pmscrub]").oninput = e => {
         if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; }
@@ -1155,7 +1227,11 @@ function pmMount(el, s, F) {
     // QA (tools/smoke paintmap group): a real network fetch of data/artists/portraits.json doesn't reliably
     // resolve inside the virtual-time test harness, so a forced override makes "landmarks label themselves" a
     // deterministic check rather than a timing bet.
-    _qaLandmarks: arr => { PM_LANDMARKS = new Set(arr); kick(); } };
+    _qaLandmarks: arr => { PM_LANDMARKS = new Set(arr); PM_LANDMARKS_ON = true; kick(); },
+    _qaRects: () => drawn.map(b => ({ i: b.i, x: b.x, y: b.y, w: b.w, h: b.h })),
+    // true once that painting's own real pixels are baked (bake() no longer falls back to a flat color for a
+    // non-CORS host -- see the comment above pmSafeHost), false only while still loading or on a genuine failure
+    _qaImageReal: i => { const e = imgs.get(i); return !!(e && e.st === 1); } };
 }
 
 // this file can load after router.js (on first use): give pmOpen its address now

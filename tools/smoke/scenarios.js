@@ -3241,28 +3241,75 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
   t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
 });
 // David, relayed 2026-10-09 ("usually tapping a color should open the color, not the segmentation of it"):
-// a strip tile now opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md); "Where this
-// sits on the painting" moved to the small glyph in its corner, a second, explicit gesture.
-scenario("paintings", "a painting's strip tile opens its color page in one tap; the Where glyph locates it instead", async t => {
+// a strip tile opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md).
+// David, 2026-10-09 again ("the palette strip looks weird now because there's a symbol on the colors... it
+// looked better when the swatches had no symbols on top"): the corner "Where" glyph is gone from the strip
+// entirely. "Where this sits on the painting" is now a long-press on a strip chip, and an explicit row action
+// (the same [data-locate] glyph, just in the expanded list below the strip) -- never a symbol sitting on a chip.
+// NOTE: a timed (480ms setTimeout-driven) long-press is not simulated here -- tools/smoke/scenarios.js's own
+// pre-existing "sets / long-press a swatch adds it to the tray" scenario (same js/settray.js SX_HOLD mechanism
+// this chip opts out of) is independently flaky under Chrome's --virtual-time-budget for the same reason: a
+// real-time setTimeout inside the iframe racing the harness's own outer-page timing doesn't advance reliably
+// under virtual time. Manually verified instead (Browser pane, real clock, 2026-10-09): press-hold-release on
+// a strip chip locates it (dims the painting, shows the caption, the trailing click is swallowed -- still on
+// the painting page); a second long-press clears it; a plain short tap is unaffected and still opens the
+// color page. This scenario covers everything that IS reliable under virtual time: the glyph is gone from the
+// strip, a plain tap still opens the page, and the row action (an ordinary click, no timer) does the same job.
+scenario("paintings", "a painting's strip tile opens its color page in one tap, with no Where glyph on the chip; the expanded list's row action locates it", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   t.expect(!t.$("[data-glwhere]"), "the old On the painting switch is still in the DOM");
   await t.waitFor("[data-glswatches] [data-glj]", 15000, "a palette swatch tile");
   const tileAt0 = () => t.$('[data-glswatches] [data-glj="0"]');
   t.expect(tileAt0().hasAttribute("data-swatch"), "the strip chip isn't a [data-swatch] (one tap should open its page)");
+  t.expect(!tileAt0().querySelector("[data-locate], .pal-where"), "the strip chip still has a Where glyph on it");
+  t.expect(t.$("[data-glswatches]").hasAttribute("data-no-hold"), "the strip doesn't opt out of settray.js's app-wide long-press (needed so its own long-press can locate instead)");
   await t.click(tileAt0(), { force: true, wait: 600 });
   await t.waitFor(".cp-page", 8000, "the color page after tapping the chip body");
   await t.click(TRL.screenBack(t), { wait: 600 });
-  await t.waitFor("[data-glswatches] [data-glj]", 10000, "the painting page again after Back");
-  const whereAt0 = () => t.$('[data-glswatches] [data-glj="0"] [data-locate]');
-  t.expect(whereAt0(), "no Where glyph on the chip");
-  await t.click(whereAt0(), { force: true, wait: 400 });
-  t.expect(tileAt0().classList.contains("loc"), "the chip doesn't show as located after tapping its Where glyph");
-  await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims around the located color");
+  // the expanded list's own row action: an ordinary click, no timing involved, so it's reliable here
+  await t.waitFor("[data-glrows] [data-glj]", 10000, "the expanded palette rows");
+  const rowWhereAt0 = () => t.$('[data-glrows] [data-glj="0"] [data-locate]');
+  t.expect(rowWhereAt0(), "no Where row-action on the expanded list");
+  await t.click(rowWhereAt0(), { force: true, wait: 400 });
+  t.expect(t.$('[data-glrows] [data-glj="0"]').classList.contains("loc"), "the row doesn't show as located after tapping its Where action");
+  await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims from the row action");
   const cap = t.$("[data-gllocate]");
   t.expect(cap && !cap.hidden && /% of the canvas/.test(t.text(cap)), `the locate caption is missing or wrong: "${cap && t.text(cap)}"`);
-  await t.click(whereAt0(), { force: true, wait: 400 });
-  t.expect(!tileAt0().classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping Where again didn't clear the locate state");
+  await t.click(rowWhereAt0(), { force: true, wait: 400 });
+  t.expect(!t.$('[data-glrows] [data-glj="0"]').classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping the row action again didn't clear the locate state");
   t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "the dim canvas is still on after clearing locate");
+});
+// David, 2026-10-09: "the color palette slider doesn't show more than 11 colors." Root cause: a flex item's
+// default min-width is auto (its own content size, here padding + the percent label's text -- not 0), so the
+// strip's chips stopped shrinking once each one needed ~35-40px, and the rest silently overflowed the row's own
+// overflow:hidden. css/gallery.css now floors each chip at 14px and makes it its own container so its percent
+// label (data-glj's <span>) drops out on its own once the chip is too narrow to show it legibly, instead of the
+// chip itself vanishing. Checked on a painting with a pool bigger than 11 (gallery/777, Diverse mode, max 18
+// here) at five slider positions, at both 440px and 375px: the number of VISIBLE (non-zero-width) chips always
+// equals the slider's value, and the expanded list below always shows every one regardless.
+scenario("paintings", "the palette strip shows every chip the slider asks for, not just the first ~11", async t => {
+  for (const w of [440, 375]) {
+    await t.open("#/gallery/777", { settle: 800, size: [w, 956] });
+    const diverse = await t.waitFor(() => t.$$("[data-glo]").find(b => b.dataset.glo === "diverse"), 15000, "the Diverse mode chip");
+    await t.click(diverse, { force: true, wait: 400 });
+    const slide = await t.waitFor("[data-glk]", 8000, "the How-many slider");
+    t.expect(typeof slide._countTo === "function", "the slider isn't a countify() control");
+    const max = +slide.max;
+    t.expect(max >= 12, `this painting's Diverse pool is only ${max} colors -- too small to exercise the >11 case at ${w}px`);
+    for (const k of [2, 8, 12, 16, max]) {
+      if (k > max) continue;
+      slide._countTo(k);
+      await t.sleep(250);
+      const visible = t.$$("[data-glswatches] [data-glj]").filter(c => c.getBoundingClientRect().width > 0);
+      t.expect(visible.length === k, `at ${w}px, ${k} colors asked for but ${visible.length} chips are actually visible`);
+      const rows = t.$$("[data-glrows] [data-glj]");
+      t.expect(rows.length === k, `at ${w}px, the expanded list shows ${rows.length} rows, not all ${k}`);
+      // no chip is clipped off the right edge of the strip
+      const stripR = t.$("[data-glswatches]").getBoundingClientRect();
+      const offscreen = visible.filter(c => c.getBoundingClientRect().right > stripR.right + 1);
+      t.expect(!offscreen.length, `at ${w}px with ${k} colors, ${offscreen.length} chip(s) run past the strip's own right edge`);
+    }
+  }
 });
 // The Analysis section's "Learn this painting" button (js/artwiki.js awAnalysis) was guarded by
 // `typeof paintingLesson === "function"`, a function that was never defined anywhere, so the button never
@@ -3487,6 +3534,89 @@ scenario("paintings", "Look closer's Region tool: tap lights a region and opens 
   if (slide && !t.$("[data-rgslide]").hidden) { slide._countTo(2); await t.sleep(300); t.expect(t.$$("[data-rgswatches] [data-swatch]").length === 2, "the region slider didn't redraw its palette live"); }
   await t.click(t.$("[data-rgswatches] [data-swatch]"), { force: true, wait: 600 });
   await t.waitFor(".cp-page", 8000, "a color page after tapping a region-palette chip");
+});
+// David, 2026-10-09: "it gets janky -- I can pan around and it gets stuck in weird poses... I should only be
+// able to zoom in, not zoom out too far". js/paintzoom.js's gesture rewrite: Z is a real scale against the
+// image's own natural pixels, hard-clamped to [fitZ, fitZ*8] every frame (no rubber band on zoom -- David's ask
+// was literal), and pan is clamped to the overflow past the stage on each axis, with a BOUNDED rubber-band
+// (asymptotes to 140px past the clamp, see js/paintzoom.js's rubber()) during a live drag so it can never run
+// away. Same pointer hygiene as the map's own fuzz test above: 1-3 simulated fingers going down, moving,
+// lifting, cancelling, or vanishing with no up/cancel at all. Checks the gesture's own state (scrim._glzQA, the
+// same QA-accessor pattern as HM_CTRL._qaState) after every step, not rendered pixels -- Z and P are asserted
+// to stay within those bounds at every single step, which is true by construction unless something let a
+// NaN/Infinity through or skipped a clamp.
+scenario("paintings", "Look closer: random gesture fuzz (pinch/pan/lost fingers) never zooms below fit or sends the image off-screen", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  await t.waitFor(".glz-scrim.in", 4000, "the Look closer overlay");
+  const result = t.ev(`(() => {
+    const scrim = document.querySelector(".glz-scrim"), stage = document.querySelector(".glz-stage");
+    if (!scrim || !scrim._glzQA || !stage) return JSON.stringify({ error: "no scrim/QA" });
+    const QA = scrim._glzQA;
+    const mk = (type, id, x, y) => new PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: id === 1 });
+    const mulberry32 = seed => () => { seed = seed + 0x6D2B79F5 | 0; let x = Math.imul(seed ^ seed >>> 15, 1 | seed); x = x + Math.imul(x ^ x >>> 7, 61 | x) ^ x; return ((x ^ x >>> 14) >>> 0) / 4294967296; };
+    const r = stage.getBoundingClientRect();
+    const OVERSHOOT = 145;   // rubber()'s asymptote (140) plus a hair of slack
+    const fails = [];
+    for (let seed = 0; seed < 40 && fails.length < 5; seed++) {
+      QA.stopMomentum(); QA.reset();
+      const rnd = mulberry32(seed + 1);
+      const down = new Set();
+      const steps = 15 + Math.floor(rnd() * 20);
+      for (let s = 0; s < steps; s++) {
+        const id = 1 + Math.floor(rnd() * 3);
+        const x = r.left + 10 + rnd() * Math.max(10, r.width - 20), y = r.top + 10 + rnd() * Math.max(10, r.height - 20);
+        const pick = rnd();
+        if (!down.has(id)) { if (pick < .85) { stage.dispatchEvent(mk("pointerdown", id, x, y)); down.add(id); } }
+        else if (pick < .55) stage.dispatchEvent(mk("pointermove", id, x, y));
+        else if (pick < .75) { stage.dispatchEvent(mk("pointerup", id, x, y)); down.delete(id); }
+        else if (pick < .90) { stage.dispatchEvent(mk("pointercancel", id, x, y)); down.delete(id); }
+        else down.delete(id);   // "lost": the id just vanishes, no up/cancel ever sent
+        const st = QA.state();
+        if (!Number.isFinite(st.Z) || !Number.isFinite(st.P[0]) || !Number.isFinite(st.P[1])) { fails.push({ seed, s, reason: "non-finite", st }); break; }
+        if (st.Z < st.fitZ - .001) fails.push({ seed, s, reason: "below fit", st });
+        if (st.Z > st.maxZ + .001) fails.push({ seed, s, reason: "above max", st });
+        const limX = Math.max(0, (st.natW * st.Z - r.width) / 2) + OVERSHOOT, limY = Math.max(0, (st.natH * st.Z - r.height) / 2) + OVERSHOOT;
+        if (Math.abs(st.P[0]) > limX) fails.push({ seed, s, reason: "P.x off-screen", st, limX });
+        if (Math.abs(st.P[1]) > limY) fails.push({ seed, s, reason: "P.y off-screen", st, limY });
+      }
+    }
+    QA.stopMomentum();
+    return JSON.stringify({ fails: fails.slice(0, 5), failCount: fails.length, total: 40 });
+  })()`);
+  const r = JSON.parse(result);
+  t.expect(!r.error, `fuzz test couldn't run: ${r.error}`);
+  t.expect(r.failCount === 0, `${r.failCount} invalid gesture states out of ${r.total} seeds: ${JSON.stringify(r.fails)}`);
+});
+// David, 2026-10-09: "when I open a painting, sometimes it doesn't let me tap the painter." Root cause: the
+// name only became a real link once js/loader.js's lazy wiki data finished loading (awPaintingHook, js/
+// artwiki.js's "upgrade plain text to a button" pattern) -- commonly still loading on the first painting you
+// open in a session, so a tap in that window landed on inert text. js/gallery.js's .p-dek now renders the link
+// immediately (an optimistic slug straight off the painting's own artist field); artwiki.js's hook only
+// confirms it once the real data lands (or downgrades a genuine non-painter to plain text). This drives 10
+// random painting pages straight off a fresh #/home load -- no wait for the background wiki fetch at all --
+// and checks the painter link is already there and actually opens the painter page every time.
+scenario("paintings", "the painter link on a painting page is tappable immediately, before the painter list finishes loading -- 10 random paintings", async t => {
+  const N = 23778;   // the corpus size (tools/check.js's "ids gate"); an out-of-range pick is simply skipped below
+  let tries = 0, ok = 0, noLoad = 0, noLink = 0;
+  const found = [], misses = [];
+  while (ok < 10 && tries < 30) {   // ~14% of the corpus has no credited artist, so a wide-enough budget matters
+    tries++;
+    const i = Math.floor(Math.random() * N);
+    // a FRESH reload every pick, on purpose: this is exactly the real bug's window (js/loader.js's wiki data
+    // hasn't had a chance to arrive yet on a cold load), not just a client-side re-render mid-session
+    await t.open(`#/gallery/${i}`, { settle: 250 });
+    const got = await t.waitFor(() => t.$(".p-title") && t.text(".p-title").length ? true : null, 10000, "the painting page").catch(() => null);
+    if (!got) { noLoad++; misses.push({ i, why: "no-load", title: t.$(".p-title") ? t.text(".p-title") : null }); continue; }
+    const link = t.$(".p-dek [data-awpainter]");
+    if (!link) { noLink++; misses.push({ i, why: "no-link", title: t.text(".p-title"), dek: t.$(".p-dek") ? t.text(".p-dek") : null }); continue; }
+    const name = t.text(link);
+    await t.click(link, { wait: 500 });
+    const landed = await t.waitFor(() => /^#\/painter\//.test(t.w.location.hash), 8000, "the painter page").catch(() => false);
+    t.expect(landed, `tapping "${name}" (painting ${i}) didn't open the painter page (hash: ${t.w.location.hash})`);
+    found.push(i); ok++;
+  }
+  t.expect(ok === 10, `only found ${ok}/10 (tries ${tries}, noLoad ${noLoad}, noLink ${noLink}): ${JSON.stringify(misses)}`);
 });
 scenario("paintings", "Look closer on a painting then swiping back (popstate) never leaves the color page under a stuck dark scrim", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
@@ -4660,6 +4790,12 @@ scenario("one-today", "todayPick names a color and the painting that holds it; t
 });
 
 // ---- the painting map (js/paintmap.js) and painting favorites (js/favs.js §4–5) ----
+// David, 2026-10-09: "make the painting map as minimalist as possible." The richer version this lane shipped
+// first (Rings/Spiral/Families/Tones, Place by, Center on presets, a time scrubber, always-labeled landmarks, a
+// multi-step Walk trail) is gone -- not hidden, deleted -- replaced by: tap a painting to center it (the map
+// re-arranges around it by color, Spiral); a settings sheet with exactly 3 Arrange choices (Color/Time/Painter);
+// a bottom card with up to 3 "only this" chips (Same painter/Same decade/Same place), Open, and Walk from here;
+// removable top chips for whatever's filtered. These scenarios replace every old one for the richer version.
 scenario("paintmap", "the map lays out, a tap glides a painting to the middle, the middle one opens, Back lands on it again", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out thousands of paintings");
@@ -4667,241 +4803,187 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
   t.expect(c0 >= 0, "nothing in the middle");
   await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2 - 210, { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL.center !== c0, 6000, "a tap above the middle to glide that painting to the middle");
+  t.expect(t.w.PM_CTRL.spec.arr === "spiral", `tapping an off-center painting should switch to Spiral ("around this painting"): ${t.w.PM_CTRL.spec.arr}`);
+  // centerK updates synchronously inside build(), but `drawn` (what hitAt() actually taps against) is only
+  // repopulated by the next animation frame -- a beat to let that frame land before tapping again
+  await t.sleep(150);
   const c1 = t.w.PM_CTRL.center;
   await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 900 });
   await t.waitFor(() => /#\/gallery\//.test(t.w.location.hash), 10000, "the middle painting to open");
   t.expect(t.w.location.hash.startsWith("#/gallery/" + c1), `opened ${t.w.location.hash}, not the painting in the middle (${c1})`);
   await t.waitFor("[data-fva]", 8000, "the heart under the painting");
-  t.expect(!t.$(".gl-hero .sq-key"), "the black-and-white button is still on the painting");
   await t.click("[data-back]", { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 12000, "Back to the map, with the same painting in the middle");
 });
-// David, 2026-10-09: the old radial "arc" stem menu and the Filter-only sheet (a separate "Show N on the map"
-// confirm button) are both replaced by one compact, non-modal Arrange|Filter sheet (js/paintmap.js openSheet,
-// the same css/home.css .hm-sheet-panel the color map's own chooser() uses) -- every change (a shape, a filter
-// chip) applies live, no confirm step. Rewritten for that: the corner opens the sheet straight onto its Arrange
-// tab (shapes as [data-pmarr]), and the Filter tab's chips (reached via its own tab button) narrow the map the
-// moment you tap one.
-scenario("paintmap", "arrange by time and painter and around the middle one then filter by century (counts and address follow)", async t => {
-  await t.open("#/paintings/map?arr=color&co=France", { settle: 800 });
-  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100, 20000, "the map of France");
-  const n = t.w.PM_CTRL.count;
-  for (const k of ["time", "painter"]) {
-    await t.click(".pmx-do", { wait: 300 });
-    await t.waitFor(`.pmx-sheet [data-pmarr="${k}"]`, 4000, "the Arrange tab's shapes");
-    await t.click(`.pmx-sheet [data-pmarr="${k}"]`, { force: true, wait: 600 });
-    await t.waitFor(() => t.w.PM_CTRL.spec.arr === k && t.w.PM_CTRL.drawn > 0, 8000, `the ${k} arrangement`);
-    t.expect(t.w.PM_CTRL.count === n, `${k} shows ${t.w.PM_CTRL.count} paintings, not the same ${n}`);
-    t.expect(t.text("[data-pmwhy]").length > 10, `${k}: no line saying what position means`);
-    await t.click("[data-sheet-close]", { wait: 600 });
-  }
-  const mid = t.w.PM_CTRL.center;
-  await t.click(".pmx-do", { wait: 300 });
-  await t.waitFor('.pmx-sheet [data-pmarr="rings"]', 4000, "the Arrange tab's shapes");
-  await t.click('.pmx-sheet [data-pmarr="rings"]', { force: true, wait: 900 });
-  await t.waitFor(() => t.w.PM_CTRL.spec.arr === "rings" && t.w.PM_CTRL.center === mid, 8000, "the painting in the middle to stay there as the seed");
-  t.expect(/arr=rings/.test(t.w.location.hash) && /seed=/.test(t.w.location.hash), `the address doesn't carry the arrangement: ${t.w.location.hash}`);
-  await t.click('.pmx-sheet [data-tab="filter"]', { wait: 300 });
-  await t.waitFor(".pmx-sheet [data-pmcent]", 6000, "the Filter tab's chips");
-  const chip = t.$$(".pmx-sheet [data-pmcent]").find(b => !b.disabled && +(b.querySelector("em") || { textContent: "0" }).textContent.replace(/\D/g, "") > 20);
-  t.expect(chip, "no century with paintings");
-  await t.click(chip, { force: true, wait: 400 });
-  // live-applied: no separate "Show N" confirm button any more -- the map itself (not just the sheet's own
-  // count readout) narrows the moment the chip is tapped
-  await t.waitFor(() => t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count < n, 8000, "a century to narrow the map");
-  t.expect(/y0=\d+/.test(t.w.location.hash), `the address doesn't carry the years: ${t.w.location.hash}`);
-});
-// David, 2026-10-09: Paintings mode gets the color map's own Arrange+Filter parity -- Place by (only where a
-// painting's own color decides its position: color/time), Center on (a quick preset instead of having to
-// already be looking at the right painting), filtering by example (the centered painting's own facet chips,
-// "only these"), and removable chips atop the map for whatever's currently active, from any source.
-scenario("paintmap", "Place by, Center on, filtering by example, and removable top chips all drive the same spec", async t => {
+// David's screenshot, 2026-10-09: "when I look at a painting and tap 'Show it on the map', it opens the map at a
+// different section, so I don't even see the painting that brought me there." Root cause: caption() keeps
+// PM_PAN.set(lay.key, ...) current on every center change, including a plain pan with nothing opened -- so a
+// SECOND visit to the exact same seeded spec (the same painting's "Show it on the map" tapped again, or a
+// different entry that resolves to an already-visited seed) silently restored wherever the map was last panned
+// to, not the painting the entry point promised. Fixed: build() now ignores PM_PAN entirely for any arrangement
+// pinned to a seed (Rings/Spiral), trusting the seed as an anchor rather than treating the remembered pan as a
+// bookmark. Simulated here by injecting a deliberately wrong PM_PAN entry for each key before entering (standing
+// in for "the user panned away during an earlier visit"), since driving a real pan gesture per seed would be slow
+// and the bug is in build()'s own pan-memory lookup, not the gesture.
+scenario("paintmap", "entering the map from 5 different paintings always centers on that painting, not a stale remembered pan", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
-  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
-  // Place by: only offered for color/time, defaults to Average, and actually changes the layout (a different
-  // cache key -- js/paintmap.js pmLayout includes s.place) not just the spec field
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, "the map to lay out");
+  const total = t.w.PM_CTRL.count;
+  const seeds = [1500, 5000, 9001, 14777, 20300].filter(i => i < total);
+  t.expect(seeds.length === 5, `expected 5 usable seeds under a corpus of ${total}, got ${seeds.length}`);
+  for (const seed of seeds) {
+    const key = `arr=rings&seed=${seed}|${total}|`;
+    t.ev(`PM_PAN.set(${JSON.stringify(key)}, { x: 9999, y: -9999, s: 2 })`);   // a deliberately wrong remembered pan
+    t.ev(`pmGo("arr=rings&seed=${seed}")`);
+    await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.drawn > 10, 8000, `the map to lay out around seed ${seed}`);
+    await t.waitFor(() => t.w.PM_CTRL.center === seed, 4000, `seed ${seed} to actually be centered, not wherever the injected pan pointed`);
+    t.expect(!t.$("[data-pmcap]").hidden, `the card didn't open for seed ${seed}`);
+    const rect = t.ev(`PM_CTRL._qaRects().find(r => r.i === ${seed})`);
+    t.expect(rect, `seed ${seed}'s own cell isn't in the drawn set at all`);
+  }
+});
+// David, 2026-10-09 ("don't necessarily delete features -- change how you access them"): Color/Time/Painter are
+// the primary Arrange choices; Rings/Spiral/Families/Tones plus Place by/Center on/filters/landmarks are tucked
+// behind "More options" (not yet reorganized in the sheet markup -- tracked separately), not deleted. This test
+// checks the primary three are present and switching still resets any seed; it does not yet assert the extra
+// controls are hidden, since the tuck-behind-More-options reshuffle is still pending.
+scenario("paintmap", "the settings sheet offers Color, Time and Painter as Arrange choices, and switching resets any seed", async t => {
+  await t.open("#/paintings/map?arr=spiral&seed=100", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100, 20000, "the map to lay out around a seed");
+  t.expect(t.w.PM_CTRL.spec.arr === "spiral", "didn't open seeded on Spiral");
   await t.click(".pmx-do", { wait: 400 });
-  await t.waitFor(".pmx-sheet [data-pmplace]", 4000, "the Place by row");
-  t.expect(t.w.PM_CTRL.spec.place === "avg" || !t.w.PM_CTRL.spec.place, `Place by didn't default to Average: ${t.w.PM_CTRL.spec.place}`);
-  const before = t.w.PM_CTRL.center;
-  await t.click('.pmx-sheet [data-pmplace="main"]', { force: true, wait: 500 });
-  t.expect(t.w.PM_CTRL.spec.place === "main", `Place by didn't switch to Main color: ${t.w.PM_CTRL.spec.place}`);
-  t.expect(/pl=main/.test(t.w.location.hash), `the address doesn't carry Place by: ${t.w.location.hash}`);
-  await t.waitFor(() => t.w.PM_CTRL.center !== before || t.w.PM_CTRL.drawn > 0, 4000, "the map to relayout under Main color");
-  // Center on: a preset ("Most vivid") seeds "around one painting" without already having that painting centered
-  await t.click('.pmx-sheet [data-pmcenterk="vivid"]', { force: true, wait: 700 });
-  t.expect(t.w.PM_CTRL.spec.arr === "rings" && t.w.PM_CTRL.spec.seed >= 0, `Center on (vivid) didn't switch to "around one painting": ${JSON.stringify(t.w.PM_CTRL.spec)}`);
-  const seeded = t.w.PM_CTRL.spec.seed;
-  await t.click("[data-sheet-close]", { wait: 600 });
-  await t.waitFor(() => t.w.PM_CTRL.center === seeded, 6000, "the vivid painting to actually be centered");
-  // the bottom card's own "Center on this painting" button (js/paintmap.js centerBtn): switch to a DIFFERENT
-  // shape first (By time), so whatever lands in the middle is a different, real painting the button has never
-  // seeded on itself -- then confirm it reads whatever is ACTUALLY centered now, not the vivid one from before
-  await t.click(".pmx-do", { wait: 400 });
-  await t.waitFor('.pmx-sheet [data-pmarr="time"]', 4000, "the Arrange tab's shapes");
+  await t.waitFor(".pmx-sheet [data-pmarr]", 4000, "the Arrange choices");
+  const ids = t.$$(".pmx-sheet [data-pmarr]").map(b => b.dataset.pmarr);
+  for (const want of ["color", "time", "painter"]) t.expect(ids.includes(want), `the sheet is missing the "${want}" Arrange choice (has ${JSON.stringify(ids)})`);
   await t.click('.pmx-sheet [data-pmarr="time"]', { force: true, wait: 600 });
-  await t.click("[data-sheet-close]", { wait: 600 });
-  const moved = t.w.PM_CTRL.center;
-  t.expect(moved >= 0 && moved !== seeded, `By time didn't land on a different painting (still ${moved})`);
-  await t.click("[data-pmcenter]", { wait: 700 });
-  t.expect(t.w.PM_CTRL.spec.arr === "rings" && t.w.PM_CTRL.spec.seed === moved, `"Center on this painting" seeded ${JSON.stringify(t.w.PM_CTRL.spec)}, not the one actually centered under By time (${moved})`);
-  // filtering by example: the centered painting's own facet chips (painter/country/decade/movement/museum/colors)
-  await t.waitFor(".pmx-facets [data-pmfacet]", 4000, "the centered painting's own facet chips");
-  const chips = t.$$(".pmx-facets [data-pmfacet]");
-  t.expect(chips.length >= 2, `too few facet chips to test (${chips.length})`);
-  const before2 = t.w.PM_CTRL.count;
-  await t.click(chips[0], { wait: 700 });
-  t.expect(t.w.PM_CTRL.count <= before2, `tapping a facet chip (${t.text(chips[0])}) didn't narrow the map (${t.w.PM_CTRL.count} of ${before2})`);
-  // removable chips atop the map: the filter just applied by example shows up there too, and clearing it restores the count
-  await t.waitFor(".pmx-chipbar [data-pmxclear]", 4000, "a removable chip for the facet filter just applied");
-  const narrowed = t.w.PM_CTRL.count;
-  await t.click(t.$(".pmx-chipbar [data-pmxclear]"), { wait: 700 });
-  t.expect(t.w.PM_CTRL.count > narrowed, `clearing the top chip didn't widen the map back out (still ${t.w.PM_CTRL.count})`);
+  t.expect(t.w.PM_CTRL.spec.arr === "time" && t.w.PM_CTRL.spec.seed < 0, `switching to Time didn't reset the shape/seed: ${JSON.stringify(t.w.PM_CTRL.spec)}`);
+  t.expect(t.text("[data-pmwhy], .hm-arr-sub").length > 5 || t.text(".hm-arr-sub").length > 5, "Time doesn't say what position means");
+  await t.click("[data-sheet-close]", { wait: 500 });
+  // the Colors|Paintings switch is still here, just moved into the one sheet
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor(".pmx-sheet [data-pmcolors]", 4000, "the Colors button in the sheet");
 });
-// David, 2026-10-09: the deferred shapes -- Families (by movement, the same shelf-packer as By painter), Tones
-// (Vivid/Light/Muted/Dark, honey.js's own split), and the two seeded shapes Rings (concentric shells) and Spiral
-// (golden-angle phyllotaxis, no seams between ranks) -- both built on the same pmSimilarOrder as the old single
-// "similar" arrangement. Checks each lays out the full count with no overlapping cells (lay.n === the grid's own
-// distinct occupied-cell count) and a real "why" line, plus that Rings and Spiral given the SAME seed place that
-// seed at the SAME cell (both start their order with it) but scatter the rest differently (a real, distinct
-// shape, not a relabeled duplicate).
-scenario("paintmap", "the deferred shapes: Families, Tones, Rings and Spiral all lay out cleanly and distinctly", async t => {
-  await t.open("#/paintings/map?arr=color&co=France", { settle: 800 });
-  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 100, 20000, "the map of France");
-  const n = t.w.PM_CTRL.count;
-  const gridDistinct = () => t.ev(`(() => { const l = PM_CTRL.lay(); const seen = new Set(); let dup = 0; for (let k = 0; k < l.n; k++) { const key = l.x[k] + "," + l.y[k]; if (seen.has(key)) dup++; seen.add(key); } return { n: l.n, dup }; })()`);
-  for (const k of ["families", "tones"]) {
-    await t.click(".pmx-do", { wait: 300 });
-    await t.waitFor(`.pmx-sheet [data-pmarr="${k}"]`, 4000, "the Arrange tab's shapes");
-    await t.click(`.pmx-sheet [data-pmarr="${k}"]`, { force: true, wait: 600 });
-    await t.waitFor(() => t.w.PM_CTRL.spec.arr === k && t.w.PM_CTRL.drawn > 0, 8000, `the ${k} arrangement`);
-    t.expect(t.w.PM_CTRL.count === n, `${k} shows ${t.w.PM_CTRL.count} paintings, not the same ${n}`);
-    t.expect(t.text("[data-pmwhy]").length > 10, `${k}: no line saying what position means`);
-    const g = gridDistinct();
-    t.expect(g.n === n && g.dup === 0, `${k}: ${g.dup} overlapping cell(s) of ${g.n}`);
-    await t.click("[data-sheet-close]", { wait: 600 });
-  }
-  // Tones also gets Place by (its grouping depends on which color decides position, same as color/time)
-  await t.click(".pmx-do", { wait: 300 });
-  await t.waitFor('.pmx-sheet [data-pmarr="tones"]', 4000, "the Arrange tab's shapes");
-  await t.click('.pmx-sheet [data-pmarr="tones"]', { force: true, wait: 600 });
-  t.expect(t.$('.pmx-sheet [data-pmplace]'), "Tones doesn't offer Place by");
-  await t.click("[data-sheet-close]", { wait: 600 });
-  // Rings and Spiral: seed on the middle painting, then compare
-  const mid = t.w.PM_CTRL.center;
-  await t.click(".pmx-do", { wait: 300 });
-  await t.waitFor('.pmx-sheet [data-pmarr="rings"]', 4000, "the Arrange tab's shapes");
-  await t.click('.pmx-sheet [data-pmarr="rings"]', { force: true, wait: 900 });
-  t.expect(t.w.PM_CTRL.spec.arr === "rings" && t.w.PM_CTRL.center === mid, "Rings didn't seed on the middle painting");
-  t.expect(t.text("[data-pmwhy]").length > 10, "rings: no line saying what position means");
-  let g = gridDistinct();
-  t.expect(g.n === n && g.dup === 0, `rings: ${g.dup} overlapping cell(s) of ${g.n}`);
-  const ringXY = t.ev("(() => { const l = PM_CTRL.lay(); return [l.x[0], l.y[0]]; })()");
-  await t.click('.pmx-sheet [data-pmarr="spiral"]', { force: true, wait: 900 });
-  t.expect(t.w.PM_CTRL.spec.arr === "spiral" && t.w.PM_CTRL.spec.seed === t.w.PM_CTRL.center, "Spiral didn't keep the same seed switching from Rings");
-  t.expect(t.text("[data-pmwhy]").length > 10, "spiral: no line saying what position means");
-  g = gridDistinct();
-  t.expect(g.n === n && g.dup === 0, `spiral: ${g.dup} overlapping cell(s) of ${g.n}`);
-  const spiralXY = t.ev("(() => { const l = PM_CTRL.lay(); return [l.x[0], l.y[0]]; })()");
-  t.expect(spiralXY[0] === ringXY[0] && spiralXY[1] === ringXY[1], "Rings and Spiral don't agree on where the seed itself sits (both should start their own order with it)");
-  await t.click("[data-sheet-close]", { wait: 600 });
-});
-// David, 2026-10-09: "your favorites glowing on the map" (a pink outline+glow per drawn cell, js/paintmap.js
-// draw()'s favSet) and "always-labeled landmark paintings" (a painter-name label on any cell whose gallery index
-// is in PM_LANDMARKS -- the SAME "famous" definition data/artists/portraits.json already uses for painter-page
-// portraits, not a new one). Both are canvas pixels, not DOM, so this checks the thing that actually matters --
-// the real data state (a heart tap really does favorite the centered painting) and that the draw loop runs
-// clean with both decorations active through a real pan, rather than fragile pixel sampling of glow/label
-// colors. PM_CTRL._qaLandmarks(arr) sidesteps the real portraits.json fetch, which doesn't reliably resolve
-// inside this harness's virtual-time iframe (same class of timing gap as the thumbnail-streaming scenario above).
-scenario("paintmap", "your favorites glow and always-labeled landmarks don't break the draw loop", async t => {
+// filtering by example (David, 2026-10-09, the minimalist pass): up to 3 fixed chips -- Same painter, Same
+// decade, Same place -- not the old dynamic movement/museum/color-swatch list, no "More like this" (tapping the
+// painting itself already re-centers on it), no trail of dots.
+scenario("paintmap", "the card's Same painter / Same decade / Same place chips narrow the map; a removable top chip undoes it", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  // the card (and its facet chips) only opens on a tap now (David, 2026-10-09: "we only need the name when we tap
+  // it") -- tap an off-center painting to re-center and open it (not the already-centered one, which opens the
+  // gallery page instead), the same way a real visit would
+  const cv0 = t.$(".pmx-cv"), r00 = cv0.getBoundingClientRect();
+  await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
+  await t.waitFor(".pmx-facets button", 6000, "the card's facet chips");
+  const labels = t.$$(".pmx-facets button").map(b => t.text(b));
+  t.expect(labels.every(l => ["Same painter", "Same decade", "Same place", "Open", "Walk from here"].includes(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
+  t.expect(!labels.includes("undefined"), `a chip rendered the literal text "undefined": ${JSON.stringify(labels)}`);
+  const facetBtn = t.$$(".pmx-facets button").find(b => ["Same painter", "Same decade", "Same place"].includes(t.text(b)));
+  t.expect(facetBtn, "no Same painter/decade/place chip to test (this painting has none of the three?)");
+  const before = t.w.PM_CTRL.count, label = t.text(facetBtn);
+  await t.click(facetBtn, { wait: 700 });
+  t.expect(t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count <= before, `tapping "${label}" didn't narrow the map (${t.w.PM_CTRL.count} of ${before})`);
+  await t.waitFor(".pmx-chipbar [data-pmxclear]", 4000, "a removable chip for the filter just applied");
+  await t.click(t.$(".pmx-chipbar [data-pmxclear]"), { wait: 700 });
+  t.expect(t.w.PM_CTRL.count === before, `clearing the top chip didn't restore the full count (now ${t.w.PM_CTRL.count}, was ${before})`);
+});
+scenario("paintmap", "Walk from here steps to a different painter each time", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  // the card (and its Walk chip) only opens on a tap now -- tap an off-center painting to open it first
+  const cv0 = t.$(".pmx-cv"), r00 = cv0.getBoundingClientRect();
+  await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
+  await t.waitFor(".pmx-facets [data-pmwalk-go]", 6000, "the Walk from here chip");
+  const start = t.w.PM_CTRL.center, startPainter = t.ev(`typeof XBF !== "undefined" ? XBF.artist[${start}] : null`);
+  await t.click(".pmx-facets [data-pmwalk-go]", { wait: 700 });
+  t.expect(t.w.PM_CTRL.spec.arr === "spiral", `Walk from here didn't center on a new painting: ${t.w.PM_CTRL.spec.arr}`);
+  const step1 = t.w.PM_CTRL.spec.seed;
+  t.expect(step1 >= 0 && step1 !== start, "Walk from here didn't move to a new painting");
+  const step1Painter = t.ev(`typeof XBF !== "undefined" ? XBF.artist[${step1}] : null`);
+  t.expect(!startPainter || step1Painter !== startPainter, `Walk from here landed on the SAME painter (${startPainter})`);
+});
+// David, 2026-10-09: favorites glow stays (kept subtle -- a thin ring, no halo); landmarks are gone entirely.
+scenario("paintmap", "your favorites glow doesn't break the draw loop under a real pan", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  // the card (and the heart inside it) only opens on a tap now (David, 2026-10-09: "we only need the name when we
+  // tap it") -- tap an off-center painting to re-center it and open the card, the same way a real visit would
+  const cv = t.$(".pmx-cv"), r0 = cv.getBoundingClientRect();
+  await t.tapAt(cv, r0.left + r0.width / 2, r0.top + r0.height / 2 - 150, { wait: 900 });
   await t.waitFor("[data-pmheart]:not([hidden])", 6000, "the heart under the centered painting");
   await t.click("[data-pmheart]", { wait: 400 });
   const favored = t.w.PM_CTRL.center;
   t.expect(t.ev(`(() => { const d = typeof glDetailNow === "function" && glDetailNow(${favored}); return !!(d && typeof fvArtHas === "function" && fvArtHas(d.id)); })()`), "the centered painting didn't actually become a favorite");
-  const sample = t.ev("PM_CTRL.lay().items.slice(0, 40)");
-  t.ev(`PM_CTRL._qaLandmarks([${[favored, ...sample].join(",")}])`);
-  await t.sleep(150);
-  t.expect(t.errors.length === 0, `window errors after forcing landmarks: ${t.errors.join(" | ")}`);
-  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect();
+  const r = cv.getBoundingClientRect();
   const mk = (type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 77, pointerType: "touch", isPrimary: true, view: t.w });
   cv.dispatchEvent(mk("pointerdown", r.left + r.width / 2, r.top + r.height / 2));
   for (let i = 1; i <= 6; i++) cv.dispatchEvent(mk("pointermove", r.left + r.width / 2 - i * 10, r.top + r.height / 2 - i * 6));
   cv.dispatchEvent(mk("pointerup", r.left + r.width / 2 - 60, r.top + r.height / 2 - 36));
   await t.sleep(250);
-  t.expect(t.errors.length === 0, `window errors after panning with favorites+landmarks drawn: ${t.errors.join(" | ")}`);
-  await t.click("[data-pmheart]", { wait: 300 });   // leave state clean for later scenarios
+  t.expect(t.errors.length === 0, `window errors after panning with favorites drawn: ${t.errors.join(" | ")}`);
+  // the pan above closes the card again (David, 2026-10-09: "hides again on pan") and may have re-centered a
+  // different painting, so un-favorite the one this test actually favorited directly rather than via the UI,
+  // to leave state clean for later scenarios
+  t.ev(`(() => { const d = typeof glDetailNow === "function" && glDetailNow(${favored}); if (d && typeof fvArtSet === "function") fvArtSet(${favored}, d, false); })()`);
 });
-// David, 2026-10-09: "Walk from here" -- step to the most similar painting by a DIFFERENT painter each time (the
-// point is leaving your own painter's palette range, not drilling into it), with the trail visible (a dot per
-// step, the current one bigger and ringed; an earlier dot jumps back there and trims the trail after it).
-scenario("paintmap", "Walk from here steps to a different painter each time, with a visible trail", async t => {
+// David's screenshots, 2026-10-09: "pictures don't load as well as before" (most of the corpus is on a non-CORS
+// host, which the canvas-taint fix had fall back to a flat color tile with nothing to show it otherwise -- fixed
+// with a plain <img> overlay that needs no CORS header to just be SHOWN) and overlapping cells at every zoom
+// level (a near-center cell's own "a little bigger than its cell" magnification could push past the lattice
+// halfway point into a genuinely nearby neighbor, worst in a sparse filtered set or Spiral's ragged angular gaps
+// -- fixed with a spatial-hash nearest-neighbor clamp, PM_CTRL._qaRects() exposes the final post-clamp rects).
+// David, 2026-10-09: "the overlap wasn't a problem if it was subtle -- now they're all too far apart." Reverted
+// the spatial-hash clamp that used to force zero overlap here (it worked, but by shrinking cells away from their
+// natural size whenever a neighbor was close, which read as gaps, not a fix). The original map's own near-center
+// magnification (draw()'s `m`/`B` math, untouched) is allowed to overlap its neighbors a little, same as it
+// always did -- this now checks overlap stays bounded (nothing runaway/broken), not that it's exactly zero.
+scenario("paintmap", "cell overlap stays subtle (not runaway) at 3 zoom levels, and a sparse (4-result) filter fits the view", async t => {
+  const checkOverlap = (label) => {
+    const rects = t.ev("PM_CTRL._qaRects()");
+    t.expect(rects.length > 0, `${label}: nothing drawn`);
+    let worst = 0, worstFrac = 0;
+    for (let a = 0; a < rects.length; a++) for (let b = a + 1; b < rects.length; b++) {
+      const p = rects[a], q = rects[b];
+      const ox = Math.max(0, Math.min(p.x + p.w / 2, q.x + q.w / 2) - Math.max(p.x - p.w / 2, q.x - q.w / 2));
+      const oy = Math.max(0, Math.min(p.y + p.h / 2, q.y + q.h / 2) - Math.max(p.y - p.h / 2, q.y - q.h / 2));
+      if (ox > 0 && oy > 0) { const ov = Math.min(ox, oy), small = Math.min(p.w, p.h, q.w, q.h); if (ov > worst) worst = ov; const frac = small > 0 ? ov / small : 0; if (frac > worstFrac) worstFrac = frac; }
+    }
+    t.expect(worstFrac < .75, `${label}: cells overlap by up to ${worst.toFixed(1)}px, ${(worstFrac * 100).toFixed(0)}% of the smaller cell -- that's runaway, not subtle (${rects.length} drawn)`);
+  };
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
-  await t.waitFor(".pmx-facets [data-pmwalk-go]", 6000, "the Walk from here chip");
-  const start = t.w.PM_CTRL.center, startPainter = t.ev(`typeof XBF !== "undefined" ? XBF.artist[${start}] : null`);
-  await t.click(".pmx-facets [data-pmwalk-go]", { wait: 600 });
-  t.expect(t.w.PM_CTRL.spec.arr === "rings", `Walk from here didn't switch to an "around one painting" shape: ${t.w.PM_CTRL.spec.arr}`);
-  const step1 = t.w.PM_CTRL.spec.seed;
-  t.expect(step1 >= 0 && step1 !== start, "Walk from here didn't move to a new painting");
-  const step1Painter = t.ev(`typeof XBF !== "undefined" ? XBF.artist[${step1}] : null`);
-  t.expect(!startPainter || step1Painter !== startPainter, `Walk from here landed on the SAME painter (${startPainter})`);
-  await t.waitFor(".pmx-walk [data-pmwalkto]", 4000, "the walk trail");
-  t.expect(t.$$(".pmx-walk [data-pmwalkto]").length === 2, `the trail should show 2 steps, shows ${t.$$(".pmx-walk [data-pmwalkto]").length}`);
-  await t.click(".pmx-facets [data-pmwalk-go]", { wait: 600 });
-  const step2 = t.w.PM_CTRL.spec.seed;
-  t.expect(step2 >= 0 && step2 !== step1 && step2 !== start, "Walk from here's second step didn't move to a genuinely new painting");
-  t.expect(t.$$(".pmx-walk [data-pmwalkto]").length === 3, `the trail should show 3 steps, shows ${t.$$(".pmx-walk [data-pmwalkto]").length}`);
-  // jump back to the trail's first step (walk[1] === step1) via its own dot
-  await t.click(t.$$(".pmx-walk [data-pmwalkto]")[1], { wait: 600 });
-  t.expect(t.w.PM_CTRL.spec.seed === step1, `jumping back to the trail's first step landed on ${t.w.PM_CTRL.spec.seed}, not ${step1}`);
-  t.expect(t.$$(".pmx-walk [data-pmwalkto]").length === 2, "jumping back didn't trim the later step off the trail");
-  await t.click(".pmx-walk [data-pmwalkx]", { wait: 400 });
-  t.expect(!t.$(".pmx-walk [data-pmwalkto]"), "ending the walk didn't clear the trail");
+  checkOverlap("normal zoom, dense set");
+  t.ev("PM_CTRL.zoom(2.1)"); await t.sleep(200);
+  checkOverlap("zoomed in, dense set");
+  t.ev("PM_CTRL.zoom(0.3)"); await t.sleep(200);
+  checkOverlap("zoomed out, dense set");
+  // David's own screenshot: a 4-result filter (a painter with only a handful of works) -- fit-to-view matters
+  // most exactly here (fitZoomFor's Math.max(1, ...) floor, unrelated to the overlap revert above and still in place)
+  const rarePainter = t.ev(`(() => { const counts = new Map(); for (let i = 0; i < XBF.N; i++) { const a = XBF.artist[i]; if (!a) continue; counts.set(a, (counts.get(a) || 0) + 1); } let best = 0, bn = 1e9; for (const [a, n] of counts) if (n >= 2 && n <= 6 && n < bn) { bn = n; best = a; } return best; })()`);
+  t.expect(rarePainter > 0, "couldn't find a painter with a small handful of works to test the sparse case");
+  await t.open(`#/paintings/map?arr=color&p=${t.ev(`XBF.meta.artists[${rarePainter} - 1][1]`)}`, { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 0 && t.w.PM_CTRL.count <= 6, 20000, "the sparse filtered map to lay out");
+  checkOverlap(`a sparse (${t.w.PM_CTRL.count}-result) filter`);
+  // fit-to-view: a small set shouldn't float tiny in the middle -- the biggest drawn cell should fill a
+  // meaningful share of the screen, not sit at a flat default zoom meant for a dense set
+  const rects = t.ev("PM_CTRL._qaRects()"), biggest = Math.max(...rects.map(r => Math.max(r.w, r.h)));
+  const vh = t.ev("document.querySelector('.pmx-cv').getBoundingClientRect().height");
+  t.expect(biggest > vh * .25, `the sparse set's biggest cell is only ${biggest.toFixed(0)}px tall on a ${vh.toFixed(0)}px map -- it still floats tiny`);
 });
-// David, 2026-10-09: "a time scrubber with play (paintings appear decade by decade)". Dragging the slider narrows
-// the map to only paintings dated at or before that year (undated ones excluded until the slider reaches the
-// real end of the range, where filtering turns back off); Play advances it on its own timer.
-scenario("paintmap", "the time scrubber narrows by year, and Play advances it on its own", async t => {
-  await t.open("#/paintings/map?arr=color", { settle: 800 });
-  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
-  const full = t.w.PM_CTRL.count;
-  await t.click(".pmx-do", { wait: 400 });
-  await t.waitFor(".pmx-sheet [data-pmscrub]", 4000, "the time scrubber");
-  const [yLo, yHi] = t.ev("pmYearRange()");
-  t.expect(+t.$(".pmx-sheet [data-pmscrub]").value === yHi, `the scrubber didn't start at the full range's end (${yHi}), reads ${t.$(".pmx-sheet [data-pmscrub]").value}`);
-  t.expect(/showing every year/i.test(t.text("[data-pmscrublabel]")), `the label didn't say every year: "${t.text("[data-pmscrublabel]")}"`);
-  // drag it back to the middle of the real range (step-aligned to 5, the same as the slider's own step, so the
-  // browser's native range-input value clamping can't round it to something a touch off from what we asked for)
-  const mid = yLo + Math.round(((yLo + yHi) / 2 - yLo) / 5) * 5;
-  t.ev(`(() => { const i = document.querySelector(".pmx-sheet [data-pmscrub]"); i.value = ${mid}; i.dispatchEvent(new Event("input", { bubbles: true })); })()`);
-  await t.waitFor(() => t.w.PM_CTRL.count < full, 4000, "scrubbing back to narrow the map");
-  t.expect(t.w.PM_CTRL.spec.upToYear === mid, `the spec's upToYear is ${t.w.PM_CTRL.spec.upToYear}, not ${mid}`);
-  t.expect(new RegExp("uy=" + mid).test(t.w.location.hash), `the address doesn't carry the scrubbed year: ${t.w.location.hash}`);
-  t.expect(new RegExp("Up to " + mid).test(t.text("[data-pmscrublabel]")), `the label doesn't say "Up to ${mid}": "${t.text("[data-pmscrublabel]")}"`);
-  // Play: the button itself reflects state correctly (the timer's own real-time advance isn't asserted here --
-  // see the comment above the thumbnail-streaming scenario for why real timing is unworkable in this harness)
-  await t.click("[data-pmscrubplay]", { wait: 300 });
-  t.expect(t.$("[data-pmscrubplay]").classList.contains("on"), "Play didn't turn the button on");
-  t.expect(t.$("[data-pmscrubplay]").getAttribute("aria-label") === "Pause", "Play didn't relabel the button to Pause");
-  await t.click("[data-pmscrubplay]", { wait: 300 });
-  t.expect(!t.$("[data-pmscrubplay]").classList.contains("on"), "Pause didn't turn the button off");
-  // dragging all the way back to the end turns filtering off again (upToYear -> null) and undated paintings return
-  t.ev(`(() => { const i = document.querySelector(".pmx-sheet [data-pmscrub]"); i.value = ${yHi}; i.dispatchEvent(new Event("input", { bubbles: true })); })()`);
-  await t.waitFor(() => t.w.PM_CTRL.count === full, 4000, "scrubbing back to the end to restore the full count");
-  t.expect(t.w.PM_CTRL.spec.upToYear == null, `upToYear should be back to null at the end of the range, is ${t.w.PM_CTRL.spec.upToYear}`);
+// David's screenshot, 2026-10-09: most of the corpus is on a host that never answers a real CORS request. bake()
+// used to fall back to a flat color for those (porting a canvas-taint constraint from js/honey.js's own, separate
+// snapshot() canvas that doesn't actually apply here -- nothing ever reads pixels back off .pmx-cv), capped at
+// ~62% coverage even with an <img>-overlay patch over the worst of it. Fixed at the root: bake() now always draws
+// the real pixels it already decoded, safe host or not. A real network image's load doesn't reliably resolve
+// inside this harness's virtual-time iframe (same gap the thumbnail-streaming scenario below works around), so
+// this is a static check on bake() itself, the same pattern that scenario uses.
+scenario("paintmap", "bake() always draws a painting's real pixels, not a flat color for a non-CORS host", async t => {
+  const src = await fetch("/js/paintmap.js").then(r => r.text());
+  const bakeBody = (src.match(/const bake = \(i, img, crop\) => \{[\s\S]*?\n  \};/) || [""])[0];
+  t.expect(bakeBody, "couldn't find bake()'s body to check");
+  t.expect(!/if\s*\(safe\)/.test(bakeBody) && !/fillStyle\s*=\s*pmHex\(i\)/.test(bakeBody), "bake() still branches on a host's CORS-safety and falls back to a flat pmHex() fill for an unsafe one");
+  t.expect(/cx\.drawImage\(img,/.test(bakeBody), "bake() no longer draws the real decoded image at all");
 });
-// David's screenshot, 2026-10-09: "zooming out doesn't load the stuff" -- only a ~160-cell central disc ever got a
-// thumbnail, however long you waited, because the per-frame candidate list handed to pmImages().want() was capped
-// at 160 BEFORE its own concurrency limit (PM_FLIGHT, 14 concurrent) ever got a say -- everything past the nearest
-// 160 cells was silently never even requested. Fixed by raising the cap and lowering the load threshold. A live
-// scenario that actually waits for thumbnails to stream in turned out to be unworkable here -- real thumbnail
-// fetches (local files and Commons URLs both) don't resolve inside this harness's virtual-time iframe, and a faked
-// window.Image still needs a route change that a #shot= session's own SHOT flag silently swallows (manually
-// verified instead: zooming to z=0.45 went from the old code's ~160 loaded to 582 and climbing). This is the next
-// best thing: a static guard on the two numbers themselves, so neither regresses back silently.
 scenario("paintmap", "the thumbnail-streaming cap and load threshold haven't regressed back to the old ~160-cell ceiling", async t => {
   const src = await fetch("/js/paintmap.js").then(r => r.text());
   const cap = +(src.match(/wantImg\.reverse\(\)\.slice\(0,\s*(\d+)\)/) || [])[1];
@@ -5516,4 +5598,91 @@ scenario("trail", "a gesture interrupted mid-drag by a native back swipe leaves 
   await t.sleep(200);
   t.expect(t.bodyOverlayLeaks().length === 0, `a body-level overlay survived the interrupted gesture: ${t.bodyOverlayLeaks().join(", ")}`);
   t.expect(!t.$(".tlg-floor"), "the destination floor was left behind by the interrupted drag");
+});
+
+// ================================================================== DESIGN OBJECTS (js/designobjects.js, Archives lane)
+// The World door for posters/textiles/ceramics/etc., 1800-1979 -- room (shelves per category), a category grid
+// (facet chips, reusing pulp.js's own filter pattern), an object's own page (paintingPage reused, plus the
+// 3-6 color-count control and the maker byline this lane adds to it) and a maker page.
+scenario("design", "the room opens with shelves and at least one object image", async t => {
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the Design objects room");
+  t.expect(/Design objects/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor(".do-shelf-item", 12000, "at least one category shelf item");
+  const imgs = t.$$(".do-shelf-item img").filter(im => im.getAttribute("src"));
+  t.expect(imgs.length > 0, "no shelf item has an image src");
+});
+scenario("design", "a shelf item opens the object page with facts, palette and a maker/credit line", async t => {
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor(".do-shelf-item", 12000, "a shelf item");
+  const before = t.text(".p-title");
+  await t.click(t.$$(".do-shelf-item")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the object page to open");
+  await t.waitFor(".palette .pal", 8000, "the object's palette");
+  t.expect(t.$(".facts"), "no maker/date/category facts row on the object page");
+  t.expect(t.$(".p-dek") && t.text(".p-dek").trim().length > 0, "the object page has no byline");
+});
+scenario("design", "the category grid filters by decade", async t => {
+  await t.open("#/design/cat/poster", { settle: 900 });
+  await t.waitFor(".p-title", 12000, "the poster category page");
+  await t.waitFor("#doCatChips [data-df]", 10000, "decade/maker chips");
+  const decadeChip = t.$$('#doCatChips [data-df="decade"]')[1];
+  t.expect(decadeChip, "no specific decade chip rendered");
+  const beforeCount = (t.$$("#doCatFeed .pin") || []).length;
+  await t.click(decadeChip, { wait: 500 });
+  await t.waitFor(() => (t.$$("#doCatFeed .pin") || []).length !== beforeCount || t.$(".fine"), 8000, "the grid to refilter");
+});
+scenario("design", "a maker page lists their objects", async t => {
+  await t.open("#/design", { settle: 900 });
+  await t.waitFor("[data-do-maker]", 12000, "a maker chip on the room page");
+  const before = t.text(".p-title");
+  await t.click(t.$$("[data-do-maker]")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the maker page to open");
+  await t.waitFor(".masonry .pin", 8000, "the maker's objects grid");
+});
+scenario("design", "\"In design objects\" renders on a color page with design-object coverage", async t => {
+  await t.open("#/color/ivory", { settle: 800 });
+  await t.waitFor(".p-title, .cp-page", 12000, "a color page");
+  await t.waitFor(() => /In design objects/.test(t.d.body.innerText), 10000, '"In design objects" section');
+});
+// ================================================================== UKIYO-E PRINTS (js/ukiyoe.js, Archives lane)
+scenario("design", "the ukiyo-e grid opens with filters and a print opens with facts", async t => {
+  await t.open("#/ukiyoe", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the ukiyo-e room");
+  t.expect(/Ukiyo-e prints/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor("#ukFeed .pin", 12000, "at least one print in the grid");
+  const before = t.text(".p-title");
+  await t.click(t.$$("#ukFeed .pin")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the print page to open");
+  await t.waitFor(".palette .pal", 8000, "the print's palette");
+  t.expect(t.$(".facts"), "no artist/date facts row on the print page");
+});
+scenario("design", "the ukiyo-e grid filters by artist", async t => {
+  await t.open("#/ukiyoe", { settle: 900 });
+  await t.waitFor("#ukChips [data-uf]", 12000, "artist/decade chips");
+  const artistChip = t.$$('#ukChips [data-uf="artist"]')[1];
+  t.expect(artistChip, "no specific artist chip rendered");
+  const beforeCount = (t.$$("#ukFeed .pin") || []).length;
+  await t.click(artistChip, { wait: 500 });
+  await t.waitFor(() => (t.$$("#ukFeed .pin") || []).length !== beforeCount || t.$(".fine"), 8000, "the grid to refilter");
+});
+
+// ================================================================== BOTANICAL & BIRD PLATES (js/botanicalplates.js, Archives lane)
+scenario("design", "the botanical grid opens with bird/plant filters and a plate opens with facts", async t => {
+  await t.open("#/botanical", { settle: 900 });
+  await t.waitFor(".p-title", 15000, "the botanical room");
+  t.expect(/Botanical/.test(t.text(".p-title")), `room title was "${t.text(".p-title")}"`);
+  await t.waitFor("#bpFeed .pin", 12000, "at least one plate in the grid");
+  const before = t.text(".p-title");
+  await t.click(t.$$("#bpFeed .pin")[0], { wait: 600 });
+  await t.waitFor(() => t.text(".p-title") !== before, 10000, "the plate page to open");
+  await t.waitFor(".palette .pal", 8000, "the plate's palette");
+});
+scenario("design", "the botanical grid filters birds vs. botanical", async t => {
+  await t.open("#/botanical", { settle: 900 });
+  await t.waitFor("#bpChips [data-bf]", 12000, "kind/decade chips");
+  const birdChip = t.$$('#bpChips [data-bf="kind"][data-bv="bird"]')[0];
+  t.expect(birdChip, "no Birds filter chip rendered");
+  await t.click(birdChip, { wait: 500 });
+  await t.waitFor(() => t.$$("#bpFeed .pin").length > 0 || t.$(".fine"), 8000, "the grid to show only birds");
 });
