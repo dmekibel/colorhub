@@ -2646,3 +2646,55 @@ scenario("pages", "with an iPhone safe area, ‹ and Close sit below the status 
   }
   t.expect(!bad.length, `on the status bar: ${bad.join(", ")}`);
 });
+
+// ================================================================== SLIDESHOW (js/slideshow.js)
+scenario("slideshow", "opens from Learn's Or choose, switches modes, steps by swipe and pause, and a name opens its page", async t => {
+  await lrReal(t, "#shot=learn");
+  await t.waitFor(".room-learn [data-ch='slideshow']", 6000, "the Learn room's Slideshow row");
+  await t.click(".room-learn [data-ch='slideshow']", { wait: 500 });
+  await t.waitFor(".ss-ov .ss-layer", 6000, "the slideshow's first slide");
+  t.expect(t.$(".ss-mode.on") && t.text(".ss-mode.on").toLowerCase().includes("shuffle"), "Shuffle isn't the remembered default mode");
+
+  // switch to Look-alikes: a split pair with a one-line distinction
+  await t.click(`[data-ss-mode="lookalikes"]`, { wait: 400 });
+  await t.waitFor(".ss-ov .ss-layer.ss-pair", 6000, "a look-alike pair");
+  t.expect(/\bthan\b/.test(t.text(".ss-diff")), `the distinction line reads "${t.text(".ss-diff")}"`);
+
+  // switch to Family: the chip strip appears and picking one keeps a single color on screen
+  await t.click(`[data-ss-mode="family"]`, { wait: 400 });
+  await t.waitFor(() => !t.$("[data-ss-famstrip]").hidden, 4000, "the family chip strip");
+  await t.click(`[data-ss-fam="Greens"]`, { wait: 500 });
+  await t.waitFor(".ss-ov .ss-layer:not(.ss-pair)", 6000, "a single-color slide for Greens");
+
+  // back to Shuffle: a tap pauses (manual session), a second tap resumes
+  await t.click(`[data-ss-mode="shuffle"]`, { wait: 400 });
+  await t.waitFor(".ss-ov .ss-layer:not(.ss-pair)", 4000, "a shuffled slide");
+  await t.click(".ss-stage", { pointer: true, wait: 300 });
+  t.expect(/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "a tap on the stage did not pause");
+  await t.click(".ss-stage", { pointer: true, wait: 300 });
+  t.expect(/^pause$/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "a second tap did not resume");
+
+  // swipe left steps to a new slide (the progress hint advances)
+  const before = t.text("[data-ss-hint]");
+  { const r = t.$(".ss-stage").getBoundingClientRect(), w = t.w, o = { bubbles: true, cancelable: true, pointerId: 1, pointerType: "touch", isPrimary: true, view: w, clientY: r.top + r.height * .5 };
+    t.$(".ss-stage").dispatchEvent(new w.PointerEvent("pointerdown", { ...o, clientX: r.left + r.width * .82 }));
+    t.$(".ss-stage").dispatchEvent(new w.PointerEvent("pointermove", { ...o, clientX: r.left + r.width * .2 }));
+    t.$(".ss-stage").dispatchEvent(new w.PointerEvent("pointerup", { ...o, clientX: r.left + r.width * .2 })); }
+  await t.sleep(500);
+  t.expect(t.text("[data-ss-hint]") !== before, `the progress hint didn't move past "${before}"`);
+
+  // pause first: Chrome's virtual time budget can let the 9s auto-advance timer fire between two slow test
+  // steps, swapping the very slide this test is about to tap (a test-only race, not a real-world one — a real
+  // viewer's tap lands well inside a dwell, and ssScheduleNext() restarts the clock on every step regardless)
+  if (!/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label"))) await t.click("[data-ss-pause]", { pointer: true, wait: 300 });
+  t.expect(/resume/i.test(t.el("[data-ss-pause]").getAttribute("aria-label")), "could not pause before the name tap");
+  await t.waitFor(".ss-layer.in .ss-name-btn", 4000, "the current slide's name button, settled");
+
+  // tapping the name opens that color's real page, and leaving it returns to the Learn room, not the slideshow
+  await t.click(".ss-layer.in .ss-name-btn", { wait: 600 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping its name");
+  t.expect(!t.$(".ss-ov"), "the slideshow is still open behind the color page");
+  await t.click("[data-back]", { wait: 500 });
+  await t.waitFor(() => !t.$(".cp-page") && !t.$(".ss-ov"), 6000, "Back to leave the color page");
+  t.expect(t.$(".room-learn"), `Back landed on "${t.snapshot()}", expected the Learn room`);
+});

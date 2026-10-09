@@ -507,7 +507,8 @@ function hmHome() {
       const segN = (key, opts) => `<div class="hm-seg hm-seg-n" data-key="${key}">${opts.map(([id, label]) => `<button class="${(v[key] || "") === id ? "on" : ""}" data-val="${id}"><span>${esc(label)}</span><em data-n></em></button>`).join("")}</div>`;
       body = `${head("Colors", `<button class="iconq" data-search aria-label="Search">${ICON.search}</button>
           ${typeof NMR_ICON !== "undefined" ? `<button class="iconq" data-namer aria-label="Name any color">${NMR_ICON}</button>` : ""}
-          <button class="iconq" data-surprise aria-label="Surprise me">${ICON.dice}</button>`)}
+          <button class="iconq" data-surprise aria-label="Surprise me">${ICON.dice}</button>
+          ${typeof ssOpen === "function" ? `<button class="iconq" data-slideshow aria-label="Slideshow">${ICON.play}</button>` : ""}`)}
       <div class="hm-ch-scroll" data-sheet-scroll>
         <div class="cx-sec"><b>How many</b></div>
         <div class="hm-ladder">${HM_STAGES.map((n, i) => rung("stage:" + n, n.toLocaleString(), "Stage " + (i + 1))).join("")}${rung("every-name", everyNameCount.toLocaleString(), "Every name")}${shadeCount ? rung("every-shade", (everyNameCount + shadeCount).toLocaleString(), "Every shade") : ""}</div>
@@ -652,6 +653,7 @@ function hmHome() {
       q("[data-search]").onclick = () => { close(); openSearch(); };
       q("[data-surprise]").onclick = () => { close(); hmDice(); };
       const nmBtn = q("[data-namer]"); if (nmBtn) nmBtn.onclick = () => { close(); XSTACK = []; X_ROOT = "home"; LAB.namer(); };   // Name any color (js/namer.js)
+      const ssBtn = q("[data-slideshow]"); if (ssBtn) ssBtn.onclick = () => { close(); if (typeof ssOpen === "function") ssOpen(); };   // js/slideshow.js
     }
     applyInset();
   }
