@@ -178,6 +178,136 @@ scenario("home", "corners always come back after a sheet or a drag", async t => 
   t.expect(cv, "no canvas");
 });
 
+// David (repeatedly, after the render()-level cornersBack() fix): "the buttons on the map still disappear."
+// hmCornerWatch (js/home.js) is the self-healing backstop: whenever Home is active, no sheet/stem is open and
+// nothing is mid-drag, it re-asserts the corners on pageshow (iOS bfcache restore), visibilitychange, resize,
+// orientationchange and a 1s interval -- not just the specific paths that already call cornersBack() themselves.
+scenario("home", "the corner watchdog recovers from a bfcache restore, resize, rotate and a color page round trip", async t => {
+  const corners = async why => {
+    for (const sel of ["#hmDo", "[data-rooms-corner]"]) {
+      const e = t.$(sel); t.expect(e, `${sel} is missing ${why}`);
+      if (!e) continue;
+      const cs = getComputedStyle(e);
+      t.expect(+cs.opacity > .9 && cs.visibility !== "hidden" && cs.pointerEvents !== "none", `${sel} is hidden ${why} (opacity ${cs.opacity}, pointer-events ${cs.pointerEvents})`);
+      const r = t.reachable(e); t.expect(!r, `${sel} ${r} ${why}`);
+    }
+  };
+  const cv = await H.homeReady(t);
+  // simulate a stray stuck fade (as if some path the watchdog doesn't know about left one behind) and confirm the
+  // watchdog itself clears it, not a side effect of the action that triggers it
+  t.$(".screen.hm").classList.add("chrome-hide");
+  // pageshow with persisted:true is exactly what iOS fires restoring a page from the back/forward cache
+  t.w.dispatchEvent(new t.w.Event("pageshow"));
+  await t.sleep(150);
+  await corners("after a simulated bfcache restore (pageshow)");
+
+  t.$(".screen.hm").classList.add("chrome-hide");
+  t.d.dispatchEvent(new t.w.Event("visibilitychange"));
+  await t.sleep(150);
+  await corners("after a simulated visibilitychange");
+
+  t.$(".screen.hm").classList.add("chrome-hide");
+  t.w.dispatchEvent(new t.w.Event("resize"));
+  await t.sleep(150);
+  await corners("after a resize");
+
+  t.$(".screen.hm").classList.add("chrome-hide");
+  t.w.dispatchEvent(new t.w.Event("orientationchange"));
+  await t.sleep(150);
+  await corners("after an orientationchange (rotate)");
+
+  // the 1s watchdog interval on its own, with no event at all
+  t.$(".screen.hm").classList.add("chrome-hide");
+  await t.sleep(1200);
+  await corners("after the watchdog's own interval, no event");
+
+  // open a color from the map, then Back: the corners must be there when the map reappears. js/mapxfer.js's
+  // mxLand shrinks the map back from the color with a JS Web Animations API tween (not a CSS one), which headless
+  // Chrome's virtual time budget does not advance in real time the way it does CSS animations (the harness's own
+  // injected stylesheet forces those near-instant) -- force it to the end, exactly what a real device's
+  // compositor does on its own a few hundred ms after Back.
+  const r = cv.getBoundingClientRect();
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 400 });
+  await t.waitFor(".cp-page", 6000, "a color page after tapping the center bubble");
+  await H.back(t);
+  await t.waitFor("canvas", 6000, "the honeycomb again after Back");
+  t.ev("(() => { if (typeof MX !== 'undefined' && MX) MX.anims.forEach(a => { try { a.finish(); } catch (e) {} }); })()");
+  await t.sleep(300);
+  await corners("after opening a color from the map and Back");
+
+  // Arrange with fit mode: open it, change a setting, close it -- the watchdog must agree with the close path
+  await H.sheet(t, "arrange");
+  const arrB = t.$$(".hm-arr-b:not(.on)")[0]; if (arrB) await t.click(arrB, { wait: 500 });
+  await t.click("[data-sheet-close]", { wait: 400 });
+  await t.waitFor(() => !t.$(".sheet"), 4000, "the Arrange sheet to close");
+  await t.sleep(900);   // the fit mode's own fly-back settles around here
+  await corners("after Arrange (fit mode) opened, changed and closed");
+});
+
+// David: "swiping from right to left creates a black screen that's panned in, and there's a bar at the bottom."
+// The map must fill the full viewport on both axes, before and after a horizontal swipe (a pan moves the MAP's
+// own content, never the page/container), and the page itself must not be draggable (overscroll-behavior:none,
+// css/menus2.css).
+// David: "the transition gets stuck in the middle for a couple of seconds too long" going back to the map from a
+// color page. The shrink-into-the-bubble animation (js/mapxfer.js mxLand) must start within a bounded time no
+// matter how long the map's own data takes to load (js/home.js races render() against a 300ms cap) -- never a
+// multi-second stall. Headless Chrome's virtual time budget does not advance the JS Web Animations API timeline
+// in real time, so this forces every step along instead of sleeping and hoping, and bounds the real wall-clock
+// time the whole round trip took.
+scenario("home", "the color-page return (mxLand) never stalls waiting on data", async t => {
+  const cv = await H.homeReady(t);
+  const r = cv.getBoundingClientRect();
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2, { wait: 400 });
+  await t.waitFor(".cp-page", 6000, "a color page after tapping the center bubble");
+  const t0 = Date.now();
+  await t.click("[data-back]", { wait: 0 });
+  // mxLeave sets MX synchronously inside hmHome(); poll for it (a generous bound -- this machine runs many
+  // parallel Chrome processes during a full smoke run, so it's a sanity check against a multi-second stall, not
+  // a tight perf budget; see tools/_qa for real-device timing)
+  await t.waitFor(() => t.ev("typeof MX !== 'undefined' && !!MX"), 3000, "mxLand's transition to start after Back");
+  const started = Date.now() - t0;
+  t.expect(started < 2500, `the return transition took ${started}ms just to START (render() must never block it)`);
+  // force it to the end (the same virtual-time workaround as the watchdog scenario) and confirm it actually finishes
+  t.ev("(() => { if (typeof MX !== 'undefined' && MX) MX.anims.forEach(a => { try { a.finish(); } catch (e) {} }); })()");
+  await t.waitFor(() => t.ev("typeof MX === 'undefined' || !MX"), 3000, "the transition (MX) to clear once its animations finish");
+  await t.waitFor("canvas", 4000, "the honeycomb again");
+  t.expect(t.reachable(t.d.querySelector("#hmDo")) === "", "the right corner is not tappable once the return finishes");
+});
+
+scenario("home", "the map fills the full viewport before and after a horizontal swipe", async t => {
+  const cv = await H.homeReady(t);
+  // the screen's own entrance animation (css/polish.css .screen "enter") can leave the Home screen a few px off
+  // (its first frame is translateY(10px)) until it's cleared -- js/core.js show() now clears it on animationend
+  // or a 650ms fallback either way; settle past that same margin before asserting "at rest" (headless Chrome's
+  // virtual time budget doesn't always advance a real animation timeline promptly)
+  t.ev("document.querySelectorAll('.screen').forEach(s => { if (typeof s.getAnimations === 'function') s.getAnimations().forEach(a => { try { a.finish(); } catch (e) {} }); })");
+  await t.sleep(700);
+  const fills = why => {
+    const r = cv.getBoundingClientRect();
+    t.expect(Math.abs(r.left) < 1 && Math.abs(r.top) < 1, `the canvas does not start at the top-left ${why} (${r.left},${r.top})`);
+    t.expect(Math.abs(r.width - t.w.innerWidth) < 2, `the canvas is not the viewport's width ${why} (${r.width} vs ${t.w.innerWidth})`);
+    t.expect(Math.abs(r.height - t.w.innerHeight) < 2, `the canvas is not the viewport's height ${why} (${r.height} vs ${t.w.innerHeight}) -- a black band`);
+  };
+  fills("at rest");
+  t.expect(getComputedStyle(t.d.documentElement).overscrollBehaviorX === "none" || getComputedStyle(t.d.documentElement).overscrollBehavior === "none", "the page itself can still be overscrolled");
+  const r0 = cv.getBoundingClientRect(), y = r0.top + r0.height / 2;
+  const mk = (type, x) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: 21, pointerType: "touch", isPrimary: true, view: t.w });
+  // a fast right-to-left swipe mid-screen
+  cv.dispatchEvent(mk("pointerdown", r0.right - 10));
+  for (let i = 1; i <= 6; i++) { cv.dispatchEvent(mk("pointermove", r0.right - 10 - (r0.width - 20) * i / 6)); await t.sleep(8); }
+  cv.dispatchEvent(mk("pointerup", r0.left + 10));
+  await t.sleep(400);
+  fills("right after a fast right-to-left swipe");
+  await t.sleep(600);
+  fills("600ms after the swipe settles");
+  // a swipe starting right at the edge (iOS edge-swipe-back territory)
+  cv.dispatchEvent(mk("pointerdown", r0.right - 1));
+  for (let i = 1; i <= 6; i++) { cv.dispatchEvent(mk("pointermove", r0.right - 1 - (r0.width - 40) * i / 6)); await t.sleep(8); }
+  cv.dispatchEvent(mk("pointerup", r0.left + 40));
+  await t.sleep(500);
+  fills("after an edge-starting swipe");
+});
+
 // David: "clicking it again minimizes it, and then automatically it expands again by itself." The corner's "on"
 // z-index is meant to float it above its own scrim so a second real tap lands back on the button, but the button
 // lives inside #app's own stacking context, which caps it there regardless -- a real tap at that spot always hits
@@ -352,7 +482,8 @@ scenario("home", "Arrange sheet: Center on and Sort by change the order inside a
   t.expect(/Sort by/.test(t.text("[data-ord-row]")), "the Map has no Sort by row");
   await t.click('[data-ord="light"]', { wait: 150 });
   t.expect(t.ev("HM_CTRL.getCfg().resolved.layout") === "map~light", "the Map did not take Sort by lightness");
-  t.expect(t.$$(".hm-ax-l, .hm-ax-r").length === 2, "no edge captions for a sorted Map");
+  // David, 2026-10-09: "I don't like the colder/warmer labels" -- no floating edge captions on the map itself
+  t.expect(!t.$(".hm-ax-l, .hm-ax-r, .hm-axes"), "a sorted Map still shows floating edge captions");
   await t.click('[data-ord="painted"]', { wait: 400 });
   await t.waitFor(() => t.ev("!!HONEY_PAINTED") && t.ev("HM_CTRL.getCfg().resolved.layout") === "map~painted", 6000, "the painting counts to load");
   await t.click('[data-ord="hue"]', { wait: 150 });
