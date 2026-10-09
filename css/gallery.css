@@ -162,6 +162,11 @@
 .gl-pmap span{flex:1;font:400 18px/1.2 var(--serif)}
 .gl-pmap svg:first-child{color:var(--soft)}
 .gl-pmap svg:last-child{color:var(--faint)}
+/* the same action, a second time, right by the palette (David, 2026-10-09: "it should be more prominent" --
+   the one below "More like this" was the only way to it, easy to miss on a long page). An opaque pill instead
+   of the bordered full-width row, so it reads as a clear control inside the palette card, not another section. */
+.gl-pmap-top{min-height:48px;margin:14px 0 0;padding:0 16px;border:0;border-radius:var(--r-pill,24px);background:var(--surface-2)}
+.gl-pmap-top span{font-size:16px}
 
 /* David's rebuild brief, 2026-10-09: the picture is now much bigger (css/paintzoom.css), so it no longer stays
    pinned while you change palette types below it -- at this size that would eat the whole screen. "Look closer"

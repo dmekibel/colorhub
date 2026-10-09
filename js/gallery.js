@@ -798,6 +798,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="pt-arrive gl-arrive" data-glarrive hidden></div>
     <div class="gl-cov" data-glcov></div>
     <div data-csacts></div>
+    <button class="gl-pmap gl-pmap-top" data-pmap="arr=similar&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
     </div></div>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <div class="gl-finds"><div class="sec-head"><b>Findings</b><span>as photographed</span></div>
