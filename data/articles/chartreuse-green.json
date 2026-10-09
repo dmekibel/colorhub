@@ -7,7 +7,7 @@
  ],
  "tier": "nature",
  "depth": "brief",
- "lede": "Chartreuse Green is a yellow-green named for the French liqueur, and for the Carthusian monastery that still makes it, recorded by Maerz and Paul in 1926.",
+ "lede": "Chartreuse Green is a yellow-green named for the French liqueur, and for the Carthusian monastery that still makes it, recorded in Maerz and Paul's 1930 dictionary as first used in 1926.",
  "sections": [
   {
    "id": "name",
@@ -100,7 +100,7 @@
  "openers": [
   "Chartreuse Green is named for a liqueur still distilled by Carthusian monks."
  ],
- "words": 192,
+ "words": 197,
  "status": "checked",
  "checked": {
   "by": "batch-writer",

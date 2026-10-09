@@ -7,7 +7,7 @@
  ],
  "tier": "standard",
  "depth": "short",
- "lede": "Bakst Green is a near-black forest green recorded by Maerz and Paul in 1924, in the same years the designer Léon Bakst's jewel-toned Ballets Russes costumes were at their height of fashion.",
+ "lede": "Bakst Green is a near-black forest green, recorded in Maerz and Paul's 1930 dictionary as first used in 1924, in the same years the designer Léon Bakst's jewel-toned Ballets Russes costumes were at their height of fashion.",
  "sections": [
   {
    "id": "name",
@@ -111,7 +111,7 @@
  "openers": [
   "Bakst Green appears as a portrait background behind two Medici-era Renaissance sitters, centuries before its 1924 name."
  ],
- "words": 244,
+ "words": 249,
  "status": "checked",
  "checked": {
   "by": "checker",
