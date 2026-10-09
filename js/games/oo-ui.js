@@ -288,6 +288,7 @@ function ooAsk(ui, r, o = {}) {
 // far"): the odd tile carries its name and the way it differs ("Jade · lighter"), one plain tile beside it carries the
 // rest's name. Only when a tile is wide enough for a body-size word (about 84 px); tiny tiles keep the line below.
 function ooTileNames(board, tiles, r, picked) {
+  if (!ooPref("oo").names) return;
   if (typeof nameOf !== "function" || !r.base || !r.odd || r.base === r.odd || r.none || r.b === "painting" || !(r.ans || []).length) return;
   const odd = r.v === "twins" ? null : tiles[r.ans[0]];
   if (!odd || odd.getBoundingClientRect().width < 84) return;
@@ -381,24 +382,26 @@ function ooRun(cfg) {
   const segs = cfg.lives ? `<div class="oo-hearts" aria-label="${cfg.lives} lives">${Array.from({ length: cfg.lives }, () => `<i></i>`).join("")}</div>`
     : bar ? `<div class="oo-prog" role="progressbar" aria-valuemin="0" aria-valuemax="${cfg.total}"><i style="--w:${(st.i / cfg.total * 100).toFixed(1)}%"></i></div>`
     : `<div class="segs">${Array.from({ length: cfg.total }, () => `<i style="--c:var(--ink)"></i>`).join("")}</div>`;
+  // Play itself shows only the board, one short instruction and this quiet indicator -- nothing else (David,
+  // 2026-10-09: "spot the difference seems too complex"). Level, streak and points move to the end-of-session
+  // Details and the eye profile; a small Customize icon (grid size, Shuffle, names on tiles, session length)
+  // replaces the setup screen that used to sit before round one.
   const html = `
-    <header class="deck-top">${cfg.box ? "" : `<button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>`}${segs}<span class="left mono oo-lvl">${esc(cfg.labelOf ? cfg.labelOf() : cfg.label || "")}</span></header>
-    <div class="drill-head oo-head"><h2 id="ooq"></h2>${cfg.meter ? `<div class="oo-meter" id="oometer">${cfg.meter()}</div>` : ""}<p class="oo-combo" id="oocombo"></p></div>
+    <header class="deck-top">${cfg.box ? "" : `<button class="icon-btn" data-close aria-label="Close">${ICON.x}</button>`}${segs}${cfg.customize && !cfg.box ? `<button class="icon-btn" data-tune aria-label="Customize">${ICON.tune}</button>` : ""}</header>
+    <div class="drill-head oo-head"><h2 id="ooq"></h2></div>
     <div class="drill-stage oo-stage" id="oostage"></div>
     <div class="drill-foot oo-foot" id="oofoot"></div>`;
   let el;
   if (cfg.box) { cfg.box.innerHTML = `<div class="oo-inbox station">${html}</div>`; el = cfg.box; }
   else el = show(html, "fixed drill station oo-play" + (cfg.cls ? " " + cfg.cls : ""));
   const ui = { q: el.querySelector("#ooq"), stage: el.querySelector("#oostage"), foot: el.querySelector("#oofoot"), el };
-  const comboEl = el.querySelector("#oocombo");
   const quit = () => cfg.onQuit ? cfg.onQuit() : ooMap();
   const cb = el.querySelector("[data-close]"); if (cb) cb.onclick = quit;
+  const tb = el.querySelector("[data-tune]"); if (tb) tb.onclick = () => ooCustomizeSheet();
   if (!cfg.box) onKey = e => { if (e.key === "Escape") quit(); };
-  const segEls = el.querySelectorAll(".segs i"), hearts = el.querySelectorAll(".oo-hearts i"), progEl = el.querySelector(".oo-prog i"), lvlEl = el.querySelector(".oo-lvl"), meterEl = el.querySelector("#oometer");
-  const showCombo = (moment) => {
-    if (moment) { comboEl.innerHTML = `<em class="oo-streak">${moment}</em>`; return; }
-    comboEl.innerHTML = cfg.combo && st.combo >= 2 ? `<span class="mono">×${Math.min(st.combo, 5)}</span><i style="--w:${Math.min(st.combo, 5) / 5 * 100}%"></i><span class="mono">${st.pts.toLocaleString()}</span>` : "";
-  };
+  const segEls = el.querySelectorAll(".segs i"), hearts = el.querySelectorAll(".oo-hearts i"), progEl = el.querySelector(".oo-prog i"), lvlEl = null, meterEl = null;
+  // the streak and level-up moment stay as sound and a haptic (buzz calls below); no running HUD text during play
+  const showCombo = () => {};
   async function round() {
     const it = cfg.gen(st.i, st);
     if (!it) return end();
@@ -491,7 +494,7 @@ function ooPlay(opt = {}) {
   const lay0 = mode === "classic" ? (opt.sess && opt.sess.lay) || ooClassic(pf.grid, pf.odd) : null;
   const first = !opt.sess && st.sets === 0 && !opt.layout && opt.lv == null && pf.m !== "pick";
   const lv = opt.lv != null ? opt.lv : pf.m === "pick" ? ooPickLv() : ooYou();
-  const sess = opt.sess || Object.assign(ooSess(lv), { mode, lay: lay0, pick: pf.m === "pick" || opt.lv != null });
+  const sess = opt.sess || Object.assign(ooSess(lv, pf.len), { mode, lay: lay0, pick: pf.m === "pick" || opt.lv != null });
   if (opt.sess) sess.n += OO_SESSION_MORE;
   const warm = !opt.sess && !opt.layout && !!st.last && st.last !== today();
   let last = null, chainBase = null;
@@ -514,7 +517,7 @@ function ooPlay(opt = {}) {
   const lvWord = () => `Level ${Math.floor(sess.x) + 1}`;
   ooRun({
     label: lvWord(), labelOf: lvWord, total: sess.n, i0: sess.i, combo: true, gen, cls: lay0 && lay0.n >= 9 ? "oo-dense" : "",
-    meter: () => ooMeter(sess),
+    customize: true,
     // every answer moves the staircase; reaching a new level is the big moment (the level-up sound)
     onAnswer: res => { const up = ooSessStep(sess, !!res.ok); if (!up) return null; later(() => buzz([10, 30, 10, 30, 24]), 120); return `Level ${Math.floor(sess.x) + 1}`; },
     onEnd: s => ooSessDone(sess, s),
@@ -568,24 +571,28 @@ function ooSessDone(sess, s) {
   const vs = !prev ? "Your first measured edge." : better ? `Up from ${pctFmt(pg)} last time.` : worse ? `Last time ${pctFmt(pg)}. Light, screen and tired eyes move it from day to day.` : `About the same as last time (${pctFmt(pg)}).`;
   const misses = s.res.filter(x => !x.ok && x.base && x.odd && x.base !== x.odd && !x.none).slice(-6);
   const board = sess.mode === "classic" && sess.lay ? `Classic · ${sess.lay.n} × ${sess.lay.n}${sess.lay.k > 1 ? ` · ${sess.lay.k} odd tiles` : ""}` : "Shuffle";
+  // David, 2026-10-09 ("spot the difference seems too complex"): the end screen shows one number, one sentence
+  // and the two actions; the chart, the stat rows and your misses still exist, one tap down in Details.
   const el = show(`
     <p class="eyebrow">${esc(board)} · ${sess.i} rounds</p>
     <h1>Your edge today: <em>${pctFmt(gap)}</em></h1>
-    <p class="lede">Level ${lvN}. ${esc(vs)}</p>
-    ${sess.hist.length >= 4 ? ooClimbSVG(sess, edgeX) : ""}
-    <div class="res-list">
-      <div class="res"><span>Right</span><b class="mono">${sess.hits} of ${sess.i}</b><span class="oo-rp">${rightPct}%</span></div>
-      ${top >= 0 ? `<div class="res"><span>Highest level</span><b class="mono">Level ${top + 1} · ${pctFmt(OO_GAPS[top])}</b>${newTop ? "<em>new</em>" : "<span></span>"}</div>` : ""}
-      ${s.maxCombo >= 3 ? `<div class="res"><span>Longest streak</span><b class="mono">${s.maxCombo} in a row</b><span></span></div>` : ""}
-      ${s.minPair ? `<div class="res"><span>Smallest you spotted</span><b class="mono">${pctFmt(s.min)}</b><span class="oo-pair"><i style="--c:${s.minPair[0]}" data-swatch="${s.minPair[0]}"></i><i style="--c:${s.minPair[1]}" data-swatch="${s.minPair[1]}"></i></span></div>` : ""}
-    </div>
+    <p class="lede">${esc(vs)}</p>
     ${!mix0 && ooMixOpen() ? `<p class="gy-news"><b>Unlocked</b> The Mix: What changed?, Out of order, Rebuild, Was it there?, Imposter and n-back.</p>` : ""}
-    ${misses.length ? `<div class="sec-head"><b>Your misses</b><span>tap a color to open it</span></div><div class="oo-miss">${misses.map(m => `<span><i style="--c:${m.base}" data-swatch="${m.base}"></i><i style="--c:${m.odd}" data-swatch="${m.odd}"></i><em class="mono">${pctFmt(m.act || 0)}</em></span>`).join("")}</div>` : ""}
-    <p class="fine">Your edge is where you get about three in four right, measured on this screen.</p>
     <div class="stack">
       <button class="btn" data-more>Keep going ${ICON.arrow}</button>
       <button class="btn ghost" data-map>Done</button>
-    </div>`, "result oo-res oo-sres");
+    </div>
+    <details class="oo-more"><summary>Details</summary>
+      ${sess.hist.length >= 4 ? ooClimbSVG(sess, edgeX) : ""}
+      <div class="res-list">
+        <div class="res"><span>Right</span><b class="mono">${sess.hits} of ${sess.i}</b><span class="oo-rp">${rightPct}%</span></div>
+        ${top >= 0 ? `<div class="res"><span>Highest level</span><b class="mono">Level ${top + 1} · ${pctFmt(OO_GAPS[top])}</b>${newTop ? "<em>new</em>" : "<span></span>"}</div>` : ""}
+        ${s.maxCombo >= 3 ? `<div class="res"><span>Longest streak</span><b class="mono">${s.maxCombo} in a row</b><span></span></div>` : ""}
+        ${s.minPair ? `<div class="res"><span>Smallest you spotted</span><b class="mono">${pctFmt(s.min)}</b><span class="oo-pair"><i style="--c:${s.minPair[0]}" data-swatch="${s.minPair[0]}"></i><i style="--c:${s.minPair[1]}" data-swatch="${s.minPair[1]}"></i></span></div>` : ""}
+      </div>
+      ${misses.length ? `<div class="sec-head"><b>Your misses</b><span>tap a color to open it</span></div><div class="oo-miss">${misses.map(m => `<span><i style="--c:${m.base}" data-swatch="${m.base}"></i><i style="--c:${m.odd}" data-swatch="${m.odd}"></i><em class="mono">${pctFmt(m.act || 0)}</em></span>`).join("")}</div>` : ""}
+      <p class="fine">Your edge is where you get about three in four right, measured on this screen. Level ${lvN}.</p>
+    </details>`, "result oo-res oo-sres");
   el.querySelector("[data-more]").onclick = () => ooPlay({ sess });
   el.querySelector("[data-map]").onclick = () => ooMap();
   onKey = e => { if (e.key === "Enter") el.querySelector("[data-more]").click(); };
@@ -690,7 +697,13 @@ function ooSetupHTML() {
     <div class="oo-setgap"></div>
     ${seg("data-pk-m", pf.m, [["you", "For you"], ["pick", "Choose"]])}
     ${pick ? row("Start at", `Level ${lv + 1} · ${pctFmt(ooLevelGap(lv))}`, `<input type="range" min="1" max="${OO_LEVEL_N}" step="1" value="${lv + 1}" data-lv aria-label="Starting level">`) : ""}
-    <p class="oo-pk-note" data-note>${pick ? "Round 1 is drawn at exactly this gap. Then it climbs or eases with you." : `Starts at level ${lv + 1}, a ${pctFmt(ooLevelGap(lv))} gap, just below your edge, and climbs as you get them right.`}</p>`;
+    <p class="oo-pk-note" data-note>${pick ? "Round 1 is drawn at exactly this gap. Then it climbs or eases with you." : `Starts at level ${lv + 1}, a ${pctFmt(ooLevelGap(lv))} gap, just below your edge, and climbs as you get them right.`}</p>
+    <div class="oo-setgap"></div>
+    <p class="oo-pk-note" style="margin-bottom:6px">Names on tiles</p>
+    ${seg("data-names", pf.names ? "on" : "off", [["on", "On"], ["off", "Off"]])}
+    <div class="oo-setgap"></div>
+    <p class="oo-pk-note" style="margin-bottom:6px">Session length</p>
+    ${seg("data-len", String(pf.len), [["15", "Short"], ["30", "Standard"], ["50", "Long"]])}`;
 }
 // the live preview: the grid you'll play, its odd tiles a clear step off (so you can see what you set)
 function ooPreviewHTML(n, k) {
@@ -708,6 +721,8 @@ function ooSetupMount(host, onChange) {
       // an old preset (Easy..Edge) becomes its level on the slider; a first Choose starts the slider where For you would
       if (pf.m === "pick" && (pf.d !== "level" || pf.lv == null)) { const lv = pf.d !== "level" ? ooPickLevel({ m: "pick", d: pf.d }, ooEye(ooS().model, null, null).th) : ooYou(); pf.d = "level"; pf.lv = lv; }
     }));
+    host.querySelectorAll("[data-names]").forEach(b => b.onclick = tap(() => { pf.names = b.dataset.names === "on"; }));
+    host.querySelectorAll("[data-len]").forEach(b => b.onclick = tap(() => { pf.len = +b.dataset.len; }));
     // sliders: the value and the preview follow the thumb; the choice is saved when you let go
     const slide = (sel, set, label) => { const inp = host.querySelector(sel); if (!inp) return;
       const val = inp.closest(".oo-sl").querySelector("[data-val]");
@@ -718,6 +733,19 @@ function ooSetupMount(host, onChange) {
     slide("[data-lv]", v => { pf.d = "level"; pf.lv = v - 1; }, v => `Level ${v} · ${pctFmt(ooLevelGap(v - 1))}`);
   };
   draw();
+}
+// one line summarizing the current setup, for the map's Customize row
+function ooSetupLine() {
+  const pf = ooPref("oo"), mode = pf.mode === "classic" ? `Classic, ${pf.grid} × ${pf.grid}${pf.odd > 1 ? ` · ${pf.odd} odd` : ""}` : "Shuffle";
+  return `${mode} · ${pf.m === "pick" ? "Choose" : "For you"}`;
+}
+// Customize: the one sheet that holds everything the old setup screen used to show before round one -- Classic
+// vs Shuffle, grid size, odd tiles, For you vs Choose, names on tiles, session length. Reachable from the small
+// icon on the play screen (and from the map below); never shown before a first-timer's first round.
+function ooCustomizeSheet(onChange) {
+  const { sh, close } = sheet(`<div class="cx-sh-head"><h3>Customize</h3><button class="cx-pill" data-done>Done</button></div><div class="oo-cust" data-body></div>`);
+  ooSetupMount(sh.querySelector("[data-body]"), () => { if (onChange) onChange(); });
+  sh.querySelector("[data-done]").onclick = close;
 }
 function ooMap() {
   eyeNamesReady();
@@ -737,7 +765,7 @@ function ooMap() {
     <header class="deck-top"><button class="icon-btn" data-close aria-label="Back to Train">${ICON.back}</button><span style="flex:1"></span><span class="mono oo-tot">${ooStarCount()} ${icon("starOn", 14)}</span></header>
     <h1 class="title-1 oo-title">Odd one out</h1>
     <p class="note">${back ? "Welcome back. Your first round today is a warm-up." : eg ? `Your edge: ${pctFmt(ooGapAt(eg.x))}, level ${Math.round(eg.x) + 1}.` : "Find the tile that's different. Each right answer makes the gap smaller."}</p>
-    <div class="oo-setup" data-setup></div>
+    <button class="oo-eyeline" data-customize><span>${esc(ooSetupLine())}</span><b>Customize ${ICON.chev}</b></button>
     <button class="oo-eyeline" data-eye><span>${esc(ooEyeLine())}</span><b>Your eye ${ICON.chev}</b></button>
     <div class="sec-head oo-ladhead"><b>Your ladder</b><span>tap a level to start there</span></div>
     <div class="oo-path">${rows}</div>
@@ -748,10 +776,11 @@ function ooMap() {
     const pf = ooPref("oo"), lv = pf.m === "pick" ? ooPickLv() : cur;
     play.innerHTML = `${st.sets || pf.m === "pick" ? `Start at level ${lv + 1}` : "Start"} ${ICON.arrow}`;
   };
+  const custRow = el.querySelector("[data-customize]"), paintCust = () => { custRow.querySelector("span").textContent = ooSetupLine(); };
   el.querySelector("[data-close]").onclick = () => go("gym");
   play.onclick = () => ooPlay();
   el.querySelector("[data-eye]").onclick = ooEyePage;
-  ooSetupMount(el.querySelector("[data-setup]"), paintPlay);
+  custRow.onclick = () => ooCustomizeSheet(() => { paintCust(); paintPlay(); });
   paintPlay();
   el.querySelectorAll("[data-lv]").forEach(b => b.onclick = () => ooLevelTap(+b.dataset.lv));
   el.querySelectorAll("[data-mix]").forEach(b => b.onclick = () => b.dataset.locked ? toast(b.dataset.locked) : ooPlayMix(b.dataset.mix));
@@ -861,8 +890,11 @@ function ooShelf() {
     <button class="play-row" data-oo-pairs><span><b>Painters' pairs</b><span>Which colors did painters put together?</span></span><em class="lt-best">${st.pairs && st.pairs.best ? `<b>${st.pairs.best}</b>best` : "new"}</em></button>
     <button class="play-row" data-oo-whose><span><b>Whose palette?</b><span>Five colors from a painter's work: whose are they?</span></span><em class="lt-best">${st.mix.whose && st.mix.whose.best ? `<b>${st.mix.whose.best}</b>best` : "new"}</em></button>`;
 }
-// the first tap on Odd one out goes straight into a Classic 3 × 3 session from level 1 (taught by doing); after that, the setup
-const ooEnter = () => ooS().sets ? ooMap() : ooPlay();
+// Every tap on Odd one out goes straight to the board (David, 2026-10-09: "spot the difference seems too complex") --
+// one tap in, For you, adaptive. A first-timer lands on a Classic 3 × 3 taught-by-doing round one; after that it
+// resumes right where their own level sits. The setup that used to sit in between (grid size, Shuffle, a level
+// picker) lives in the Customize sheet now (a small icon on the play screen), never gating the first round.
+const ooEnter = () => ooPlay();
 function ooWire(el) {
   const m = el.querySelector("[data-oo-map]"); if (m) m.onclick = ooEnter;
   const l = el.querySelector("[data-oo-line]"); if (l) l.onclick = () => ooAcross();

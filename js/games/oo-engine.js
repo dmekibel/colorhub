@@ -714,6 +714,10 @@ function ooPrefNorm(p) {
   q.mode = p.mode === "shuffle" ? "shuffle" : "classic";
   q.grid = Number.isInteger(p.grid) ? ooLim(p.grid, OO_GRID_MIN, OO_GRID_MAX) : 3;
   q.odd = Number.isInteger(p.odd) ? ooLim(p.odd, 1, OO_ODD_MAX) : 1;
+  // Customize (David, 2026-10-09: "Spot the difference seems too complex" -- these move off the entry screen,
+  // into one sheet): names, whether the odd tile's name shows on the board; len, how many rounds a session runs.
+  q.names = p.names !== false;
+  q.len = [15, 30, 50].includes(p.len) ? p.len : OO_SESSION_N;
   return q;
 }
 // Odd one out: the ladder level a Choose pick plays, or null for For you. th is your threshold (ΔE00) for Edge of my eye.

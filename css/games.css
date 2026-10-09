@@ -34,16 +34,11 @@
 @keyframes ooBreathe{50%{transform:scale(.8)}}
 @media (prefers-reduced-motion:reduce){.oo-breathe .oo-t{animation:none}.oo-t.rip,.oo-t.tap{animation:none}}
 
-/* ---------- header extras: combo and hearts ---------- */
+/* ---------- header extras: hearts (lives), the Customize icon ---------- */
 .oo-head h2{min-height:46px}
-.oo-combo{display:flex;align-items:center;gap:10px;height:16px;margin-top:8px;color:var(--soft);font:500 13px/1 var(--mono);letter-spacing:.08em}
-.oo-combo i{flex:1;max-width:120px;height:2px;background:var(--rule);position:relative}
-.oo-combo i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:var(--w);background:#E8C66B;transition:width .4s var(--ease)}
-.oo-combo span:first-child{color:#F2D78A;font-size:13px}
 .oo-hearts{flex:1;display:flex;gap:7px}
 .oo-hearts i{width:11px;height:11px;border-radius:50%;background:var(--bad);transition:background .3s,transform .3s var(--spring)}
 .oo-hearts i.gone{background:var(--rule);transform:scale(.7)}
-.oo-lvl{min-width:38px;text-align:right}
 
 /* ---------- the foot: answers, pills, the feedback line ---------- */
 .oo-foot{min-height:112px;flex-direction:column;gap:10px}
@@ -82,6 +77,7 @@
 .oo-dt b{display:block;font:400 22px/1.1 var(--serif)}
 .oo-dt em{font-style:normal;font-size:13.5px;color:var(--soft)}
 .oo-eyeline{display:flex;flex-direction:column;gap:6px;width:100%;margin-top:14px;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);text-align:left}
+.oo-eyeline + .oo-eyeline{margin-top:-1px;border-top:0;padding-top:13px}
 .oo-eyeline span{font:italic 400 17px/1.35 var(--serif);color:var(--ink)}
 .oo-eyeline b{display:flex;align-items:center;gap:4px;font:italic 400 17px/1 var(--serif);color:var(--soft)}
 .oo-eyeline svg{width:14px;height:14px}
@@ -293,8 +289,8 @@
 .oo-jump{padding:4px 0 8px}
 .oo-jump .note{margin:6px 0 16px}
 
-/* ---------- Odd one out sessions (2026-10-09): setup, level meter, dense grids, names on tiles, the climb ---------- */
-.oo-setup{display:flex;flex-direction:column;gap:12px;margin:18px 0 6px}
+/* ---------- Odd one out sessions (2026-10-09): Customize, the progress bar, dense grids, names on tiles, the climb ---------- */
+.oo-cust{display:flex;flex-direction:column;gap:12px}
 .oo-setgap{height:6px}
 .oo-sl{display:flex;flex-direction:column;gap:2px}
 .oo-sl-h{display:flex;justify-content:space-between;align-items:baseline;font:400 17px/1.3 var(--sans);color:var(--soft)}
@@ -306,17 +302,14 @@
 .oo-ladhead{margin-top:22px}
 .oo-prog{flex:1;height:4px;margin:0 14px;border-radius:2px;background:var(--rule);overflow:hidden}
 .oo-prog i{display:block;height:100%;width:var(--w);background:var(--ink);border-radius:2px;transition:width .4s var(--ease)}
-.oo-lvl{font:500 15px/1 var(--mono);color:var(--ink)}
-.oo-lvl.up{animation:ooLvUp .7s var(--spring)}
-@keyframes ooLvUp{0%{transform:scale(1)}35%{transform:scale(1.28);color:#F2D78A}100%{transform:scale(1)}}
-.oo-meter{display:flex;align-items:center;gap:12px;margin-top:10px}
-.oo-mtrack{position:relative;flex:1;height:6px;border-radius:3px;background:var(--rule)}
-.oo-mfill{position:absolute;left:0;top:0;bottom:0;width:var(--w);border-radius:3px;background:linear-gradient(90deg,rgba(242,215,138,.35),#F2D78A);transition:width .5s var(--ease)}
-.oo-mhi{position:absolute;top:-4px;bottom:-4px;left:var(--l);width:2px;margin-left:-1px;background:var(--ink);opacity:.55;transition:left .5s var(--ease)}
-.oo-mtxt{flex:none;font:400 17px/1 var(--serif);color:var(--soft)}
-.oo-mtxt b{font:500 17px/1 var(--mono);color:var(--ink)}
-.oo-combo{min-height:18px;height:auto;font-size:15px}
-.oo-streak{font-size:18px}
+/* a single disclosure for the end-of-session chart, stats and misses (David, 2026-10-09: one headline, one
+   sentence, Play again / Keep going -- everything else moves one tap down, matching .aw-more elsewhere) */
+.oo-more{border-top:1px solid var(--rule);margin-top:18px}
+.oo-more>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;justify-content:space-between;gap:12px;min-height:50px;padding:14px 0;font:400 20px/1.15 var(--serif);color:var(--ink)}
+.oo-more>summary::-webkit-details-marker{display:none}
+.oo-more>summary::after{content:"+";font:400 22px/1 var(--sans);color:var(--soft);flex:none}
+.oo-more[open]>summary::after{content:"–"}
+.oo-more[open]{padding-bottom:4px}
 .oo-dense .oo-t{border-radius:2px}
 .oo-dense .oo-t.ring,.oo-dense .oo-t.miss,.oo-dense .oo-t.sel{outline-width:2px;outline-offset:1px;z-index:1}
 .oo-t .oo-tn{font-size:17px;line-height:1.15;pointer-events:none}
