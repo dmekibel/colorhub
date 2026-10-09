@@ -422,7 +422,9 @@ function pmMount(el, s, F) {
     const on = !fvArtHas(d.id); if (only && !on) { buzz(6); return; }
     fvArtSet(i, d, on); buzz(on ? 10 : 4); paintHeart(i, d);
     heart.classList.remove("pop"); void heart.offsetWidth; if (on) heart.classList.add("pop");
-    if (on) toast("In your favorites", { action: "See them", onAction: () => { S.fvCat = "paintings"; save(); XSTACK.push("favs"); favShelf(); } });
+    // low: this heart sits in the map's own corner bar, not the fixed top bar, but a top toast would still cover
+    // it the same way (David, 2026-10-09)
+    if (on) toast("In your favorites", { action: "See them", onAction: () => { S.fvCat = "paintings"; save(); XSTACK.push("favs"); favShelf(); }, low: true, ms: 3000 });
   }
   // ---- drawing
   function kick() { if (!raf && !dead) raf = requestAnimationFrame(frame); }

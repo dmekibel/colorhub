@@ -179,7 +179,11 @@
 
 /* ---------- the View sheet (design/HOME-VIEWS.md §5): Arrange by on top, then Colors / Look. A fixed-height,
    opaque sheet whose own body scrolls, so the map above it stays in view and recentered (ctrl.setInset) ---------- */
-.scrim.hm-scrim-clear{background:transparent;animation:none}
+/* David, 2026-10-09: "tapping the top half instantly closes Arrange... I need to pan and zoom the map while
+   choosing arrangements." The scrim stayed fully interactive even where it reads as "clear" -- pointer-events:none
+   lets every tap, pan and pinch on the map above the sheet through to the canvas untouched; closing is ✕, a
+   swipe down on the sheet itself (both already worked), or a double-tap on the map (js/home.js chooser). */
+.scrim.hm-scrim-clear{background:transparent;animation:none;pointer-events:none}
 .sheet.hm-sheet-panel{display:flex;flex-direction:column;height:min(56dvh,540px);max-height:min(56dvh,540px);overflow:hidden;padding-left:0;padding-right:0;padding-bottom:0}
 .hm-sheet-panel>.grab{flex:none}
 .hm-sheet-panel .hm-chooser{flex:1;min-height:0;display:flex;flex-direction:column}

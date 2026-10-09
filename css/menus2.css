@@ -188,9 +188,15 @@ body.stem-open .screen,body.stem-open .hc,body.stem-open .hm-stage{filter:none}
   text-decoration:underline;text-underline-offset:4px}
 .toast.fv-toast{padding:10px 20px}
 html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b-rule)}
+/* toast(msg, { low: true }): anchored above the safe area instead, for a moment that's confirming something in
+   the top bar itself (a heart there, say) — the usual top toast would land right on top of it */
+.toast.toast-low{top:auto;bottom:calc(var(--bottom) + 90px);animation:mnToastInLow var(--dur-2) var(--ease-grow) both}
+.toast.toast-low.out{animation:mnToastOutLow 200ms ease-in both}
+@keyframes mnToastInLow{from{opacity:0;transform:translate(-50%,14px) scale(.96)}}
+@keyframes mnToastOutLow{to{opacity:0;transform:translate(-50%,10px) scale(.97)}}
 @keyframes mnToastIn{from{opacity:0;transform:translate(-50%,-14px) scale(.96)}}
 @keyframes mnToastOut{to{opacity:0;transform:translate(-50%,-10px) scale(.97)}}
-@media (prefers-reduced-motion:reduce){.toast,.toast.out{animation-name:fade}}
+@media (prefers-reduced-motion:reduce){.toast,.toast.out,.toast.toast-low,.toast.toast-low.out{animation-name:fade}}
 
 /* ============================================================ the You page (js/you.js) */
 .you-page .room-head{margin-bottom:var(--s5)}

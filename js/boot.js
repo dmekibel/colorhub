@@ -74,6 +74,8 @@ function shot(name) {
     // the Learn it mini-lesson (js/learnit.js): learnit:<meet|recall|tell|done>
     case "learnit": return hmLearnitShot(arg || "meet");
     case "lx": return lxShot(arg || "room");   // js/learnmore.js: lx:<room|unit|meet|deck|learnit|learnitpage|edge>
+    // the slideshow overlay (js/slideshow.js), for design review: slideshow[:<shuffle|family|lookalikes|today>]
+    case "slideshow": go("learn"); return later2(() => ssOpen(arg || null), 250);
     case "gym": return go("gym");
     case "studio": return go("studio");
     // a Studio photo palette, for design review (ROADMAP §17 job #1 screenshots): a synthetic canvas run

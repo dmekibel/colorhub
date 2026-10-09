@@ -150,9 +150,15 @@ function sxPick(anchor, o = {}) {
   const alike = (typeof lookalikes === "function" ? lookalikes({ n: nameOf(anchor).n, h: anchor }, 8) : []).map(x => x.x || x).filter(x => x && x.h);
   const favs = typeof fvStore === "function" ? Object.keys(fvStore()).slice(-12).reverse().map(sxHex).filter(h => h && de2000(h, anchor) >= 1) : [];
   const recent = typeof trail === "function" ? trail(14).filter(x => x.kind === "color" && x.colors[0]).map(x => x.colors[0].h).map(sxHex).filter(h => h && de2000(h, anchor) >= 1) : [];
+  // David, 2026-10-09: "the visualization [is] too small" and "I scroll past the preview so I can't see it
+  // anymore" — the preview (sx-head + the big try-on swatch) sits outside the scrolling area entirely, sheet()'s
+  // own supported pattern for a sheet with a non-scrolling top and a scrolled body ([data-sheet-scroll], already
+  // used by js/home.js's chooser sheet): simpler and more reliably "stays put" than position:sticky inside a
+  // position:fixed sheet, which some engines get wrong.
   const { sh, close } = sheet(`
     <div class="sx-head"><i style="--c:${anchor}"></i><div><p class="eyebrow">${o.title ? "Add a color to" : "Pair with…"}</p><h2>${esc(o.title || name)}</h2></div></div>
     <div class="sx-try" data-sx-try></div>
+    <div class="sx-scroll" data-sheet-scroll>
     ${others.length && !o.onPick ? `<button class="sx-addset" data-sx-addset><span class="sx-tray-sw">${others.map(h => `<i style="--c:${h}"></i>`).join("")}<i style="--c:${anchor}"></i></span><span><b>Add to your set</b><small>${others.length + 1} colors: ${esc(others.map(sxNm).slice(0, 3).join(", "))}${others.length > 3 ? "…" : ""} and ${esc(name.toLowerCase())}</small></span>${ICON.arrow}</button>` : ""}
     <label class="sx-search"><input type="search" placeholder="Search any color name" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search any color name" data-sx-q></label>
     <div class="sx-results" data-sx-results hidden></div>
@@ -167,22 +173,27 @@ function sxPick(anchor, o = {}) {
     <div class="sx-picker" data-sx-picker hidden></div>
     <button class="btn solid sx-use" data-sx-use hidden>Try this color</button>
     <button class="sx-any" data-sx-cam>${SX_ICON_CAM}<span><b>Point your camera</b><small>Add colors one after another, from what's in front of you</small></span></button>
-    <button class="sx-any" data-sx-photo>${SX_ICON_PHOTO}<span><b>From a photo</b><small>Tap any spot for its exact color</small></span></button>`);
-  sh.classList.add("sx-sheet");
+    <button class="sx-any" data-sx-photo>${SX_ICON_PHOTO}<span><b>From a photo</b><small>Tap any spot for its exact color</small></span></button>
+    </div>`);
+  sh.classList.add("sx-sheet", "sx-pick-sheet");
   // the set as it stands (the anchor, plus anything already in the tray): what the try-on strip shows beside the
   // dashed trying slot. A candidate never commits on its own tap; Add does (sxTryAdd), Cancel clears the trial.
   const buildSet = others.length ? [...others, anchor] : [anchor];
   let trying = null;
   const tryBox = sh.querySelector("[data-sx-try]");
+  // David, 2026-10-09: "too small; make the visualization bigger" and "keep the preview on top while scrolling" —
+  // a real split swatch (not a row of small chips), sticky to the top of the sheet (its own opaque background,
+  // so the candidate list never shows through) while you keep browsing suggestions underneath. It shrinks a
+  // little once you've scrolled a bit, so it never eats the whole screen, but the color and the actions stay put.
   const paintTry = () => {
     const full = trying ? [...buildSet, trying] : buildSet, against = buildSet[buildSet.length - 1];
-    tryBox.innerHTML = `<div class="sx-try-row">${buildSet.map(h => `<div class="sx-try-sw" style="--c:${h}"><b>${esc(sxNm(h))}</b></div>`).join("")}${
-      trying ? `<div class="sx-try-sw trying" data-sx-trying style="--c:${trying}"><b>${esc(sxNm(trying))}</b></div>`
-             : `<div class="sx-try-sw empty" data-sx-trying aria-label="Trying nothing yet"><span>+</span></div>`}</div>
+    const seg = (h, cls) => `<div class="sx-try-seg${cls ? " " + cls : ""}" style="--c:${h}"${cls === "trying" ? ' data-sx-trying' : ""}><b>${esc(sxNm(h))}</b></div>`;
+    tryBox.innerHTML = `<div class="sx-try-big">${buildSet.map(h => seg(h)).join("")}${
+      trying ? seg(trying, "trying") : `<div class="sx-try-seg empty" data-sx-trying aria-label="Trying nothing yet"><span>+</span></div>`}</div>
       ${trying ? `<p class="sx-try-rel">${esc(sxRelLine(against, trying))}</p>
       <div class="sx-try-acts"><button class="btn ghost" data-try-cancel>Cancel</button><button class="btn solid" data-try-add ${full.length > SX_MAX ? "disabled" : ""}>Add</button></div>` : ""}`;
   };
-  const setTrying = h => { h = sxHex(h); if (!h || buildSet.some(x => de2000(x, h) < 1)) return; trying = h; buzz(6); paintTry(); tryBox.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" }); };
+  const setTrying = h => { h = sxHex(h); if (!h || buildSet.some(x => de2000(x, h) < 1)) return; trying = h; buzz(6); paintTry(); };
   const cancelTrying = () => { trying = null; paintTry(); };
   const addTrying = () => {
     if (!trying) return;
@@ -194,6 +205,8 @@ function sxPick(anchor, o = {}) {
   // sfxChord lives in js/sound.js, loaded after this file in some screens; guard the same way js/learnset.js does
   const lsSfx2 = (fn, ...a) => { try { if (typeof window[fn] === "function") window[fn](...a); } catch (e) {} };
   paintTry();
+  const scrollBox = sh.querySelector("[data-sheet-scroll]");
+  scrollBox.addEventListener("scroll", () => tryBox.classList.toggle("collapsed", scrollBox.scrollTop > 36), { passive: true });
   const pick = h => {
     h = sxHex(h); if (!h) return;
     setTrying(h);

@@ -76,11 +76,25 @@ function glZoomOpen(opts) {
     const v = e.target.closest("[data-glzv]"); if (v) { if (typeof buzz === "function") buzz(5); setMode(v.dataset.glzv); return; }
     const c = e.target.closest("[data-glzc]"); if (c) { if (typeof buzz === "function") buzz(5); palHex = palHex === c.dataset.glzc ? null : c.dataset.glzc; drawPalRow(); drawWhere(); }
   };
-  const close = () => { document.body.style.overflow = prevOverflow; scrim.remove(); document.removeEventListener("keydown", onKey); };
+  let closed = false;
+  const close = () => {
+    if (closed) return; closed = true;
+    document.body.style.overflow = prevOverflow; scrim.remove(); document.removeEventListener("keydown", onKey);
+  };
   const onKey = e => { if (e.key === "Escape") close(); };
   document.addEventListener("keydown", onKey);
   scrim.querySelector("[data-glzclose]").onclick = close;
   scrim.addEventListener("click", e => { if (e.target === scrim) close(); });
+  // the scrim lives on <body>, outside the screen it opened over (so pinch/pan isn't clipped by the screen's own
+  // transform), same reason js/richpage.js's rp-bar does. That means the screen swap that show() does on ANY
+  // navigation away -- forward to another page, or Back/the iOS swipe-back gesture, which both re-render through
+  // show() too -- never touches it on its own. Without this, swiping back while "Look closer" was open left this
+  // near-opaque scrim (background rgba(6,6,5,.97), z-index 60, covering the full viewport) sitting over the page
+  // behind it forever: the color page you landed on was really there, just invisible under it -- "the screen goes
+  // black" (David, reported 2026-10-09). core.js show() runs every registered cleanup first, on every screen it
+  // draws, so this is where every other body-level overlay already protects itself (js/browse-ui.js's jump nav,
+  // js/richpage.js's rp-bar/rp-hold).
+  cleanup.push(close);
   requestAnimationFrame(() => scrim.classList.add("in"));
   return { close };
 }
