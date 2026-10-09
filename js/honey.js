@@ -1209,7 +1209,13 @@ function honeycomb(host, opts = {}) {
       if (ST.label && !ST.label(it.o)) { if (d >= 8 && it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = "rgba(236,232,223,.24)"; ctx.stroke(); } continue; }
       if (hlSet) { if (!hlSet.has(it)) { ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fill(); continue; } ctx.lineWidth = Math.max(1.5, d * .03); ctx.strokeStyle = "rgba(239,235,227,.95)"; ctx.stroke(); }
       if (d < 8) continue;
-      if (it.L < 26) { ctx.lineWidth = Math.max(1, d * .025); ctx.strokeStyle = `rgba(236,232,223,${it.L < 14 ? .34 : .24})`; ctx.stroke(); }
+      // David, 2026-10-09: "any way to prevent these ugly holes between the colors?" -- at the magnified focus,
+      // where sizes vary most, two neighboring cells' own independently-blended shapes (honeyCellPath's circle/
+      // polygon mix) don't always meet pixel-exact, leaving a sliver of the background between them. The cheap
+      // fallback (true shared-edge Voronoi is its own, riskier pass): a thin seam stroked on every cell's own
+      // edge, light on a dark cell and dark on a light one, reads as a deliberate boundary either way and masks
+      // a stray sliver instead of leaving it bare. Was dark-cells-only; now every cell at a readable size gets one.
+      ctx.lineWidth = Math.max(1, d * .018); ctx.strokeStyle = it.L < 50 ? `rgba(236,232,223,${it.L < 14 ? .34 : it.L < 26 ? .24 : .14})` : `rgba(14,13,11,${it.L > 86 ? .16 : .1})`; ctx.stroke();
       const la = Math.min(1, Math.max(0, (d - zc("labelMin")) / 5));
       if (la > 0) {
         const w = honeyWrap(ctx, it.n), fs = Math.min(w.fs * d, 30), lh = fs * 1.02;

@@ -1867,6 +1867,42 @@ scenario("map", "panning keeps the resting seams, and fast pans and pinches at e
     }
   }
 });
+// David: "any way to prevent these ugly holes between the colors?" (near the magnified focus, where cell sizes
+// vary most, two neighboring cells' independently-blended edges don't always meet pixel-exact). The cheap fallback
+// (honey.js finishFrame, the per-cell seam stroke): every cell at a readable size now strokes its own edge, light
+// on dark and dark on light, instead of that being dark-cells-only -- a deliberate boundary masks a stray sliver
+// instead of leaving it bare. Perf guard: the extra stroke call must not meaningfully slow the biggest set's own
+// continuous pan + pinch (David asked for frame-time numbers; see the lane's commit message for the measured
+// before/after -- this is a loose sanity bound against a real regression, not a tight budget this headless,
+// unthrottled environment can honestly claim to enforce).
+scenario("map", "the per-cell seam stroke doesn't slow a continuous pan+pinch on the largest set", async t => {
+  await H.homeReady(t);
+  await H.menu(t);
+  const everyName = t.$('.hm-do-stem [data-do="colors"]'); if (everyName) everyName.click();
+  await t.waitFor(".hm-chooser", 6000, "the Colors sheet");
+  await t.click('.hm-chooser [data-src="every-name"]', { wait: 900 });
+  await t.click("[data-sheet-close]", { wait: 400 });
+  const ctrl = t.ev("HM_CTRL"), cv = t.$("canvas"), r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  t.expect(ctrl, "no HM_CTRL");
+  const times = t.ev(`(() => {
+    const times = []; let last = performance.now();
+    const hook = () => { const now = performance.now(); times.push(now - last); last = now; window.requestAnimationFrame(hook); };
+    window.requestAnimationFrame(hook);
+    return new Promise(res => setTimeout(() => res(times), 1400));
+  })()`);
+  const mk = (id, type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: id === 1, view: t.w });
+  cv.dispatchEvent(mk(1, "pointerdown", cx, cy));
+  for (let i = 1; i <= 40; i++) { cv.dispatchEvent(mk(1, "pointermove", cx + Math.sin(i * .3) * 80, cy + Math.cos(i * .2) * 60)); await t.sleep(12); }
+  cv.dispatchEvent(mk(1, "pointerup", cx, cy));
+  cv.dispatchEvent(mk(1, "pointerdown", cx - 60, cy)); cv.dispatchEvent(mk(2, "pointerdown", cx + 60, cy));
+  for (let i = 1; i <= 30; i++) { const s = 60 - i * 1.5; cv.dispatchEvent(mk(1, "pointermove", cx - s, cy)); cv.dispatchEvent(mk(2, "pointermove", cx + s, cy)); await t.sleep(12); }
+  cv.dispatchEvent(mk(1, "pointerup", cx, cy)); cv.dispatchEvent(mk(2, "pointerup", cx, cy));
+  const log = await times;
+  const sorted = log.slice().sort((a, b) => a - b), mean = log.reduce((s, v) => s + v, 0) / (log.length || 1), p95 = sorted[Math.floor(sorted.length * .95)] || 0;
+  t.expect(log.length > 10, "too few frames captured to judge");
+  t.expect(mean < 60 && p95 < 80, `frame time regressed badly: mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms over ${log.length} frames`);
+  t.notes.push(`${log.length} frames, mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms`);
+});
 scenario("map", "the map keeps its pan and zoom when you open a color and come back", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();
   const o = (x, y) => ({ bubbles: true, cancelable: true, clientX: r.left + x, clientY: r.top + y, pointerId: 11, pointerType: "touch", isPrimary: true, view: t.w });
