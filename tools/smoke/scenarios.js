@@ -1771,6 +1771,26 @@ scenario("paintings", "a color page says where you met it, and the link reopens 
   await t.click(link, { force: true, wait: 600 });
   await t.waitFor(() => t.text(".p-title") === title, 8000, "the painting to reopen from the met line");
 });
+// David's rebuild brief, 2026-10-09, point 7: swipe the picture to move to the next/previous painting by the
+// same painter (trail-aware, so Back works) — wait for "More by this painter" so painterOrder is populated.
+scenario("paintings", "swiping the picture moves to the next/previous painting by the same painter", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.waitFor("[data-glmorepainter] .gl-rail .gl-pin", 15000, "More by this painter (painterOrder ready)");
+  const title0 = t.text(".p-title"), hash0 = TRL.hash(t);
+  const span = t.$(".gl-hero > span"), r = span.getBoundingClientRect(), w = t.w;
+  const swipe = (x1, x2) => {
+    const o = { bubbles: true, cancelable: true, clientY: r.top + r.height / 2, pointerId: 1, pointerType: "touch", isPrimary: true, view: w };
+    span.dispatchEvent(new w.PointerEvent("pointerdown", { ...o, clientX: x1 }));
+    span.dispatchEvent(new w.PointerEvent("pointerup", { ...o, clientX: x2 }));
+  };
+  swipe(r.left + r.width * .85, r.left + r.width * .15);   // swipe left: next
+  await t.sleep(500);
+  if (t.text(".p-title") === title0) { swipe(r.left + r.width * .15, r.left + r.width * .85); await t.sleep(500); }   // the edge of the timeline: try the other way
+  t.expect(t.text(".p-title") !== title0, "a swipe never moved to another painting");
+  t.expect(/^#\/gallery\/\d+/.test(TRL.hash(t)) && TRL.hash(t) !== hash0, "the swipe didn't navigate to a gallery address");
+  await t.click(TRL.screenBack(t), { wait: 500 });
+  t.expect(t.text(".p-title") === title0, "Back after a swipe didn't return to the first painting");
+});
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");

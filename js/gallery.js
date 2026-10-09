@@ -766,6 +766,7 @@ function glPage(i, d, fromHex, tol) {
   let capOpen = false;
   let modesOpen = false;   // "at most 5 chips, chosen per painting, plus More" (David, 2026-10-09)
   let locate = null;       // a palette swatch tapped on the strip: { j, hex } — dims the rest, glows where it sits
+  let painterOrder = null, painterRank = -1;   // this painter's paintings (chronological if dated), once loaded — swipe the picture to move along it
   const modeSet = (m, k) => {
     if (m === "out") return { pal: glStandOut(pool.length ? pool : pal6, pool.length ? k : 6, prior), max: pool.length ? Math.min(pool.length, 24) : 6 };
     if (m === "area") return { pal: pool.length ? glPoolPick(pool, k) : pal6, max: pool.length ? Math.min(pool.length, 24) : 6 };
@@ -782,8 +783,8 @@ function glPage(i, d, fromHex, tol) {
   const el = show(`
     <header class="art-top"><button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button><div class="art-top-r">${d.rec ? `<a class="glass-pill" href="${esc(d.rec)}" target="_blank" rel="noopener">${GL_ICON_OUT}<span>${esc(src.short)}</span></a>` : ""}${typeof fvArtHeart === "function" ? fvArtHeart(d.id) : ""}</div></header>
     <div class="gl-pal-wrap">
-    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(62dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas></span>
-    <button class="gl-closer" data-glcloser>${ICON.search}<span>Look closer</span></button></div>
+    <div class="gl-hero gl-full-w" style="--c:${avg}"><span style="width:min(100%, calc(62dvh / ${ar.toFixed(3)}));aspect-ratio:${(1 / ar).toFixed(4)}"><img src="${esc(glBig(d.img))}" alt="${esc(d.t)}${d.a ? " by " + esc(d.a) : ""}"${glCropStyle(i, d, ar)}${d.hi ? ` data-hi="${esc(d.hi)}"` : ""}${glCORS(glBig(d.img))}><canvas class="gl-lit-cv" data-gllitcv aria-hidden="true"${glCropStyle(i, d, ar)}></canvas>
+    <button class="gl-closer" data-glcloser>${ICON.search}<span>Look closer</span></button></span></div>
     <div class="gl-id">
     <p class="eyebrow p-type">Painting${yr ? " · " + yr : ""}</p>
     <h1 class="p-title">${esc(d.t)}</h1>
@@ -1092,6 +1093,8 @@ function glPage(i, d, fromHex, tol) {
         if (all.length < 2) return;
         const order = dated.slice().sort((a, b) => G.year[a] - G.year[b]);
         const rank = order.indexOf(i), idxOf = new Map(order.map((j, k) => [j, k]));
+        // swiping the picture moves along this same sequence (chronological when dated, else just the painter's list)
+        painterOrder = rank >= 0 ? order : all; painterRank = rank >= 0 ? rank : all.indexOf(i);
         // the nearest in time read as "where this painting sits" better than a random sample of the painter's works
         const near = rank >= 0
           ? order.filter(j => j !== i).sort((a, b) => Math.abs(idxOf.get(a) - rank) - Math.abs(idxOf.get(b) - rank)).slice(0, 6)
@@ -1191,6 +1194,20 @@ function glPage(i, d, fromHex, tol) {
       buzz(6); openTappedColor(hex);   // David, 2026-10-07: tap anywhere on the painting opens that color's page, not the sheet
     } catch (e) { canSample = false; heroSpan.classList.remove("gl-tap"); }   // tainted after all: quietly give up
   };
+  // swipe the picture left/right to move to the next/previous painting by the same painter (trail-aware: a
+  // normal galleryPage navigation, so Back works) — David's rebuild brief, 2026-10-09, point 7
+  let swipeStart = null;
+  heroSpan.addEventListener("pointerdown", e => { swipeStart = { x: e.clientX, y: e.clientY }; });
+  heroSpan.addEventListener("pointerup", e => {
+    if (!swipeStart) return;
+    const dx = e.clientX - swipeStart.x, dy = e.clientY - swipeStart.y; swipeStart = null;
+    if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.6) return;
+    if (!painterOrder || painterRank < 0) return;
+    const nextRank = painterRank + (dx < 0 ? 1 : -1);
+    if (nextRank < 0 || nextRank >= painterOrder.length) return;
+    buzz(6); galleryPage(painterOrder[nextRank], true);
+  });
+  heroSpan.addEventListener("pointercancel", () => { swipeStart = null; });
   heroSpan.addEventListener("click", e => {
     const now = performance.now();
     if (now - glTapAt < 300) {
