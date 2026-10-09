@@ -532,8 +532,9 @@ function pmOpen(spec, o = {}) {
     <header class="pmx-top">
       <button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
       <p class="pmx-title"><b>Paintings</b></p>
-      <button class="corner r pmx-do" data-do-corner aria-label="Settings" aria-haspopup="dialog">${PM_ICON.arrange}</button>
+      <button class="corner r pmx-do" data-do-corner aria-label="Arrange or filter" aria-haspopup="dialog">${PM_ICON.arrange}</button>
     </header>
+    ${typeof hmLayerSwitchHTML === "function" ? hmLayerSwitchHTML("paintings") : ""}
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
     <div class="pmx-walk" data-pmwalk hidden></div>
     <div class="pmx-facets" data-pmfacets hidden></div>
@@ -545,6 +546,11 @@ function pmOpen(spec, o = {}) {
   const back = el.querySelector("[data-back]");
   back.onclick = () => xBack();
   onKey = e => { if (e.key === "Escape" && !document.querySelector(".sheet,.rooms-stem")) xBack(); };
+  // the top-center Colors|Paintings switch (js/home.js hmWireLayerSwitch): the only way to move between the two
+  // layers now (David, 2026-10-09) -- the sheet's own "switch to the color map" icon is retired below.
+  if (typeof hmWireLayerSwitch === "function") hmWireLayerSwitch(el, "paintings", id => {
+    if (id === "colors") { S.hm = S.hm || {}; S.hm.mode = "colors"; save(); if (typeof hmHome === "function") hmHome(); else xBack(); }
+  });
   Promise.all([xbLoad(), pmThumbsLoad()]).then(([F]) => {
     if (!el.isConnected) return;
     const kept = !fresh && PM_STATE.get(from);
@@ -1098,8 +1104,10 @@ function pmMount(el, s, F) {
         <button class="hm-ch-tab" data-tab="arrange" role="tab">Arrange</button>
         <button class="hm-ch-tab" data-tab="filter" role="tab">Filter</button>
       </div>`;
+    // David, 2026-10-09: the "switch to the color map" icon here is retired -- the top-center Colors|Paintings
+    // switch (hmWireLayerSwitch, wired in pmOpen) is the one way to move between layers now, not a second one
+    // tucked inside this sheet too.
     const head = `<div class="hm-ch-head" data-sheet-grab>${tabsHTML}
-        <button class="iconq" data-pmcolors aria-label="Switch to the color map">${PM_ICON.colorsMode}</button>
         <button class="iconq hm-ch-x" data-sheet-close aria-label="Close">${ICON.x}</button></div>`;
     const { sh, close } = sheet(`<div class="hm-chooser pmx-chooser" data-tab="${tab}">${head}
         <div class="hm-ch-scroll" data-pane="arrange" data-sheet-scroll></div>
@@ -1123,7 +1131,6 @@ function pmMount(el, s, F) {
     };
     syncTab();
     qa$(".hm-ch-tab").forEach(b => b.onclick = () => { if (b.dataset.tab === tab) return; buzz(4); tab = b.dataset.tab; syncTab(); });
-    q$("[data-pmcolors]").onclick = () => { buzz(6); S.hm = S.hm || {}; S.hm.mode = "colors"; save(); if (typeof hmHome === "function") hmHome(); else xBack(); };
     qa$("[data-sheet-close]").forEach(b => b.onclick = () => { buzz(4); close(); });
 
     // ---- Arrange: shape, place by (only where a painting's own color decides position), center on, and the
@@ -1236,3 +1243,13 @@ function pmMount(el, s, F) {
 
 // this file can load after router.js (on first use): give pmOpen its address now
 if (typeof routeWrapAll === "function") routeWrapAll();
+
+// One search finds the paintings layer too (design/SIMPLIFY/PLAN.md §3.7/§9, Lane 2: "register map features in
+// search... each arrangement and order"). js/search.js loads before this file (index.html), so this is safe at
+// module load -- no runtime guard needed, just the typeof check in case that ever changes.
+if (typeof featureRegister === "function") {
+  featureRegister("paintings-floor", { t: "Paintings", where: "Map · ⋯ · Colors | Paintings", words: "paintings map archive gallery by color",
+    run: () => { if (typeof S !== "undefined") { S.hm = S.hm || {}; S.hm.mode = "paintings"; } pmGo("arr=color"); } });
+  PM_ARR.forEach(([id, title]) => featureRegister("pm-arr-" + id, { t: `Paintings: ${title}`, where: "Paintings · ⋯ · Arrange",
+    words: "paintings arrange arrangement shape " + title.toLowerCase(), run: () => { if (typeof S !== "undefined") { S.hm = S.hm || {}; S.hm.mode = "paintings"; } pmGo("arr=" + id); } }));
+}

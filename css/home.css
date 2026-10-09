@@ -280,20 +280,25 @@
 .hm-sheet-arrange .hm-arr{margin:0 -16px;padding-top:4px}
 .hm-sheet-arrange .hm-arr-sub{padding:0;margin-top:2px}
 
-/* ---------- the right corner: one button and its labeled arc (js/home.js doMenu; PLAN.md decision #2) ---------- */
+/* ---------- the right corner: one ⋯ button, opening the one Map sheet (js/places.js moreOpen; design/SIMPLIFY/
+   PLAN.md §9). The old labeled arc (doMenu, a bespoke stem only this corner had) is retired in its favor. ---------- */
 .hm-do{overflow:visible}
 .hm-do svg{width:20px;height:20px}
 .hm-do-n{position:absolute;top:-5px;right:-5px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--paper);color:var(--paper-ink);
   font:500 12.5px/22px var(--sans);font-style:normal;text-align:center;font-variant-numeric:tabular-nums;box-shadow:0 0 0 2px var(--ground)}
-/* the stem mirror: a straight stack up the right edge, picture on the right, words right-aligned */
-.rooms-stem.hm-do-stem .rm-bubble{left:auto;right:calc(11px + var(--x,0px));flex-direction:row-reverse;padding:3px 3px 3px 22px;text-align:right;
-  transform-origin:calc(100% - 30px) 100%;transform:translate(var(--x,0px),calc(var(--step) * (var(--i) + 1) * .55)) scale(.55)}
-.rooms-stem.hm-do-stem.on .rm-bubble{transform:none}
-.rooms-stem.hm-do-stem .rm-label{align-items:flex-end}
-.hm-do-ic{display:grid!important;place-items:center;background:var(--surface-3,#2A2822);border-radius:50%;color:var(--ink)}
-.hm-do-ic svg{width:22px;height:22px}
-.hm-do-dots{grid-template-columns:1fr 1fr;gap:3px;padding:12px}
-.hm-do-dots i{display:block;width:100%;height:100%;border-radius:50%}
+
+/* ---------- Colors | Paintings: an always-visible top-center switch, on the map's own screen, not a menu row
+   (David, 2026-10-09: "it doesn't make sense that the painting map is accessed through [a menu]... make it a
+   small, always-visible segmented control... not a menu row and not buried in a sheet"). An opaque two-word
+   pill, safe-area aware; js/paintmap.js reuses the same markup and this same CSS on its own screen. ---------- */
+.hm-layer{position:fixed;top:calc(var(--top,0px) + 10px);left:50%;transform:translateX(-50%);z-index:4;
+  display:flex;gap:2px;padding:3px;border-radius:999px;background:var(--surface-2);box-shadow:0 2px 10px rgba(0,0,0,.28);
+  -webkit-backdrop-filter:none;backdrop-filter:none}
+.hm-layer button{flex:none;height:32px;padding:0 16px;border:0;border-radius:999px;background:transparent;
+  font:500 14px/1 var(--sans);color:var(--soft);white-space:nowrap;transition:transform .15s var(--spring)}
+.hm-layer button.on{background:var(--paper);color:var(--paper-ink)}
+.hm-layer button:active{transform:scale(.95)}
+@supports (padding:max(0px)){.hm-layer{top:calc(max(var(--top,0px),env(safe-area-inset-top)) + 10px)}}
 
 /* ---------- Arrange sheet, iconic (David, 2026-10-08: "previews need to be simple icon versions, or themselves more
    beautiful and clean"). Flat diagrams (js/home.js hmArrIcon) on one tile size, one-line labels, the shared selected

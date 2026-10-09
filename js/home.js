@@ -15,9 +15,8 @@
 // the brand button at the top-left of their own headers (tabHead, js/core.js) — the thing already there.
 
 const HM_SUN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>`;
-// the right corner's one button: four quiet dots (a menu), the due count beside it when reviews wait
-const HM_DO_GLYPH = icon("grid", 22);
-const HM_SLIDERS = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>`;
+// the right corner's one button: ⋯ (design/SIMPLIFY/PLAN.md §9 -- one Map sheet, js/places.js moreOpen), the
+// due count beside it when reviews wait
 // The nine stages of the path (ROADMAP §14): stage N shows the first N names of the core list (data/core-names.json,
 // ordered by `rank` until the stage ordering exists), so you can preview what any stage holds.
 const HM_STAGES = [25, 50, 100, 150, 250, 400, 600, 800, 1000];
@@ -59,13 +58,11 @@ const HM_KEEP = { all: () => true, learned: it => isMine(hmCard(it)), learning: 
 // (David, 2026-10-08: magnification applies to either, so the Magnifier is no longer a Look: it's the Magnify slider
 // turned up, and an old "Magnifier" save becomes Bubbles with a strong Magnify)
 const HM_LOOKS = [["original", "Bubbles"], ["honeycomb", "Honeycomb"]];
-// the "Paintings" row's icon (Home's right-corner menu, js/home.js doMenu): a small framed picture, matching the
-// stroke style of every other menu-row glyph there (js/core.js sv())
-const HM_ICON_PAINTINGS = sv('<rect x="3" y="4.5" width="18" height="14" rx="1.6"/><path d="M3 15l5-5 4 4 3.5-4L21 15"/><circle cx="8" cy="9" r="1.4"/>', 24);
 // ---- the Arrange sheet's pictures (David, 2026-10-08: "the previews need to be simple icon versions"): one flat,
 // iconic diagram per arrangement, same 64 px grid, same dot size, a fixed calm palette (never the live colors, which
 // read as noise at this size). Short one-line labels; the full title and its line show under the strip. ----------
-const HM_ARR_SHORT = { map: "Map", rings: "Rings", sunflower: "Spiral", families: "Families", tones: "Tones" };
+// (David, 2026-10-09: "Map" the shape -> "Grid", so it stops colliding with "Map" the home screen's own name)
+const HM_ARR_SHORT = { map: "Grid", rings: "Rings", sunflower: "Spiral", families: "Families", tones: "Tones" };
 const hmHue = (h, l = 60, c = 62) => `hsl(${Math.round(h)} ${c}% ${l}%)`;
 function hmArrIcon(id) {
   const dot = (x, y, r, f, extra = "") => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${f}"${extra}/>`;
@@ -399,6 +396,33 @@ function labHoney() {
   build();
 }
 
+// ---------- Colors | Paintings: an always-visible top-center switch (David, 2026-10-09: "it doesn't make sense
+// that the painting map is accessed through [a menu]... make it a small, always-visible segmented control, so
+// switching layers is one tap on the map itself -- not a menu row and not buried in a sheet"). Shared markup
+// (js/paintmap.js reuses it too, loaded after this file -- index.html) and CSS (css/home.css .hm-layer): a
+// two-word opaque pill, safe-area aware (var(--top)), remembered in S.hm.mode. The Map ⋯ sheet no longer carries
+// the switch at all -- David's own call ("probably not") on keeping a copy there too for discoverability. ----------
+function hmLayerSwitchHTML(cur) {
+  return `<div class="hm-layer" data-hm-layer role="tablist" aria-label="Map layer">
+    <button type="button" role="tab" aria-selected="${cur === "colors"}" class="${cur === "colors" ? "on" : ""}" data-layer="colors">Colors</button>
+    <button type="button" role="tab" aria-selected="${cur === "paintings"}" class="${cur === "paintings" ? "on" : ""}" data-layer="paintings">Paintings</button>
+  </div>`;
+}
+// wires the switch once per screen; onSwitch(id) only runs for the layer that ISN'T already showing
+function hmWireLayerSwitch(el, cur, onSwitch) {
+  el.querySelectorAll("[data-hm-layer] [data-layer]").forEach(b => b.onclick = () => {
+    if (b.dataset.layer === cur) return;
+    buzz(6); onSwitch(b.dataset.layer);
+  });
+}
+// #hmDo's own ghost-click guard, same empirically-observed iOS quirk js/core.js stemJustClosed/js/places.js
+// placesJustClosed exist for (David: "clicking it again minimizes it, and then automatically it expands again
+// by itself" -- a delayed synthetic click iOS can still fire once whatever covered the button is gone). moreOpen
+// (js/places.js) doesn't expose its own "just closed" flag, and its sheet is a generic modal with no cutout over
+// this corner the way the old bubble-arc stem's scrim had -- so this is self-contained here, the same pattern.
+let HM_DO_CLOSED_AT = 0;
+const hmDoJustClosed = () => Date.now() - HM_DO_CLOSED_AT < 380;
+
 function hmHome() {
   if (!S.placed) return welcome();
   S.hm = S.hm || {};
@@ -420,8 +444,9 @@ function hmHome() {
       <label class="search"><span>${ICON.search}</span><input id="hmq" type="search" placeholder="a color, a hex, a painter, a decade…" autocomplete="off" enterkeyhint="go"></label>
       <button class="hm-l18-hint" id="hmqHint" hidden></button>
     </div>
-    <button class="corner l" data-rooms-corner aria-label="Rooms">${ROOMS_GLYPH}</button>
-    <button class="corner r hm-do" id="hmDo" data-do-corner aria-label="Menu" aria-haspopup="menu" aria-expanded="false"></button>
+    ${hmLayerSwitchHTML("colors")}
+    <button class="corner l pl-corner" data-rooms-corner aria-label="Places">${ROOMS_GLYPH}<span>Places</span></button>
+    <button class="corner r hm-do" id="hmDo" data-do-corner aria-label="More" aria-haspopup="dialog" aria-expanded="false"></button>
   `, "fixed cx hm");
   const $ = s => el.querySelector(s), viewEl = $(".cx-view"), title = $(".hm-title");
   loadLongNames();
@@ -598,14 +623,14 @@ function hmHome() {
         <div class="cx-sec"><b>Your words</b></div>
         ${segN("filter", HM_FILTERS)}
         <button class="hm-clear" data-clear hidden>Clear filters</button>
-        <div class="cx-sec"><b>Collections</b></div>
+        <!-- "Collections" now means the Museum's archives (PLAN §3.2); these are Name lists (Werner, xkcd...) -->
+        <div class="cx-sec"><b>Name lists</b></div>
         <div class="cx-chips">${coll.map(s => `<button class="cx-chip${v.src === s.id ? " on" : ""}" data-src="${s.id}">${cxDots(dotsFor(s))}<b>${esc(s.title)}</b></button>`).join("")}</div>
       </div>`;
-      const colorsActs = `<button class="iconq" data-search aria-label="Search">${ICON.search}</button>
-          ${typeof NMR_ICON !== "undefined" ? `<button class="iconq" data-namer aria-label="Name any color">${NMR_ICON}</button>` : ""}
-          <button class="iconq" data-surprise aria-label="Surprise me">${ICON.dice}</button>
-          ${typeof ssOpen === "function" ? `<button class="iconq" data-slideshow aria-label="Slideshow">${ICON.play}</button>` : ""}`;
-      body = `${head(colorsActs)}${colorsPane}${arrangePane}`;
+      // David, 2026-10-09 (PLAN §4): the four icon-only header buttons (Search, Name any color, Surprise me,
+      // Slideshow -- private symbols, DESIGN-CANON A1) moved out to labeled rows in the Map ⋯ sheet's "Map
+      // tools" group (js/home.js, above), so this header carries only the tabs and ✕ now -- no duplicate path.
+      body = `${head("")}${colorsPane}${arrangePane}`;
     }
     // David, 2026-10-09: "pressing Arrange brings the black bar back" -- non-modal (below), so it never locks
     // body scroll either (js/core.js sheet()'s own {lock:false}); see that function's comment for why.
@@ -809,10 +834,6 @@ function hmHome() {
       qa(".hm-seg-n").forEach(g => g.querySelectorAll("button").forEach(b => b.onclick = () => { applyView(g.dataset.key, b.dataset.val); after(); }));
       q("[data-clear]").onclick = () => { S.hm.fam = ""; S.hm.tone = ""; S.hm.filter = "all"; save(); buzz(6); after(); };
       refresh();
-      q("[data-search]").onclick = () => { close(); openSearch(); };
-      q("[data-surprise]").onclick = () => { close(); hmDice(); };
-      const nmBtn = q("[data-namer]"); if (nmBtn) nmBtn.onclick = () => { close(); XSTACK = []; X_ROOT = "home"; LAB.namer(); };   // Name any color (js/namer.js)
-      const ssBtn = q("[data-slideshow]"); if (ssBtn) ssBtn.onclick = () => { close(); if (typeof ssOpen === "function") ssOpen(); };   // js/slideshow.js
     }
     applyInset();
   }
@@ -924,77 +945,91 @@ function hmHome() {
   const hmWatchTimer = setInterval(hmCornerWatch, 1000);
   cleanup.push(() => { hmWatchEvents.forEach(k => removeEventListener(k, hmCornerWatch)); document.removeEventListener("visibilitychange", hmCornerWatch); clearInterval(hmWatchTimer); });
   hmShowChrome(); cornersBack();   // every way into Home starts with both corners drawn and tappable
-  // ---------- the right corner: ONE button (PLAN.md decision #2; David: "Study the map is a mini game that belongs with
-  // learning, inside a menu, not its own button"). It shows how many names are due, and opens a labeled arc of verbs,
-  // the rooms stem's mirror: Study the map · Favorites · Search · Colors & Arrange. The arc is the stem's own
-  // machinery (STEM_OPEN, .rm-scrim, closeStem), so a tap outside, Escape and Back all close it.
-  // David, 2026-10-09: "this menu is too long... Recall doesn't belong here, it's already in the left menu" (the
-  // Rooms corner's Learn room, which leads with the due check-in) -- dropped. "Learn these and Study the map
-  // overlap" -- folded into one: Study the map (the instant deck, what the old "Learn these" actually opened),
-  // its own subtitle now carrying the "names near the middle" default scope the separate mapstudy.js games
-  // screen used to own alone. Colors and Arrange are one combined sheet now (chooser, below) with its own tab
-  // switch, so they're one door here too. Four items, not seven. ----------
+  // ---------- the right corner: ⋯, the one Map sheet (design/SIMPLIFY/PLAN.md §9's day-0 contract, js/places.js
+  // moreOpen/moreRegister). Replaces the old 4-5-row bubble-arc stem (doMenu) David found "too long": Study the
+  // map, Favorites, Search, Colors & Arrange and Paintings now live as labeled rows inside the ONE sheet every
+  // other screen's ⋯ already opens, instead of a bespoke arc only this corner had. It still shows how many names
+  // are due, same as before. ----------
   const doBtn = $("#hmDo");
   function paintDo() {
     const due = typeof dueList === "function" ? dueList().length : 0;
-    doBtn.innerHTML = `${HM_DO_GLYPH}${due ? `<em class="hm-do-n" aria-hidden="true">${due > 99 ? "99+" : due}</em>` : ""}`;
-    doBtn.setAttribute("aria-label", due ? `Menu, ${due} to recall` : "Menu");
+    doBtn.innerHTML = `${ICON.more}${due ? `<em class="hm-do-n" aria-hidden="true">${due > 99 ? "99+" : due}</em>` : ""}`;
+    doBtn.setAttribute("aria-label", due ? `More, ${due} to recall` : "More");
     doBtn._html = doBtn.innerHTML;
   }
   paintDo();
-  function doMenu() {
-    if (STEM_OPEN) { buzz(4); return closeStem(); }
-    if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
-    if (document.querySelector(".sheet,.scrim")) return;
-    document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());
-    hmDismissHint();
-    buzz(4);
-    STEM_OPEN = true; document.body.classList.add("stem-open");
-    const v = hmView(), lit = typeof HONEY_HL !== "undefined" && HONEY_HL;
-    const ic = svg => `<span class="rm-art hm-do-ic">${svg}</span>`;
-    const dots = hs => `<span class="rm-art hm-do-ic hm-do-dots">${hs.slice(0, 4).map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>`;
-    const sample = items.filter((_, i) => i % Math.max(1, Math.floor(items.length / 4)) === 0).map(it => it.h);
-    // top to bottom as read; the thumb's nearest (the bottom) are the map's own controls
-    const rows = [
-      typeof prQuick === "function" && { id: "learn", t: "Study the map", n: lit ? honeyLitLabel().title : "Names near the middle", art: ic(PR_ICON.cards), attr: "data-pr-study" },
-      typeof fvPickStart === "function" && { id: "fav", t: "Favorites", n: "Colors you love", art: ic(FV_HEART), attr: 'id="hmFav"' },
-      { id: "search", t: "Search", n: "A color, a hex, a painter, a decade", art: ic(ICON.search), attr: "data-do-search" },
-      { id: "colors", t: "Colors & Arrange", n: `${hlAll ? "Every name" : hmViewLabel()} · ${hmArrLabel()}`, art: dots(sample), attr: "data-do-colors" },
-      // "Colors | Paintings" (David, 2026-10-09: "it should be more prominent... instead of colors you switch to
-      // paintings"): the same floor, the archive's paintings instead of names, laid out by palette likeness
-      // (js/paintmap.js, through the honeycomb's own fisheye). One tap; S.hm.mode remembers it (js/core.js hmGoFloor).
-      { id: "paintings", t: "Paintings", n: "23,778 paintings, laid out by color", art: ic(HM_ICON_PAINTINGS), attr: "data-do-paintings" },
-    ].filter(Boolean);
-    const n = rows.length;
-    const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-r";
-    scrim.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); buzz(4); closeStem(); });
-    scrim.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); });
-    scrim.addEventListener("touchmove", e => e.preventDefault(), { passive: false });
-    const stem = document.createElement("div");
-    stem.className = "rooms-stem hm-do-stem"; stem.setAttribute("role", "menu"); stem.setAttribute("aria-label", "Home menu");
-    stem.style.setProperty("--n", n);
-    stem.innerHTML = rows.map((r, k) => {
-      const i = n - 1 - k;   // a straight stack up the right edge (David preferred it over the tile panel), pictures centered over the corner
-      return `<button class="rm-bubble" role="menuitem" data-do="${r.id}" ${r.attr || ""} style="--i:${i}">
-        ${r.art}<span class="rm-label"><b>${esc(r.t)}</b><em>${esc(r.n)}</em></span></button>`;
-    }).join("");
-    document.body.append(scrim, stem);
-    doBtn.classList.add("on"); doBtn.innerHTML = ICON.x; doBtn.setAttribute("aria-expanded", "true");
-    requestAnimationFrame(() => requestAnimationFrame(() => { scrim.classList.add("on"); stem.classList.add("on"); }));
-    STEM_KEY = e => { if (e.key === "Escape") { e.stopPropagation(); closeStem(); } };
-    addEventListener("keydown", STEM_KEY, true);
-    const acts = {
-      // "Study the map": the instant deck seeded with whatever's lit, else the middle of the map (the old
-      // "Learn these"). Recall itself lives only in the left menu's Learn room now (its own due check-in).
-      learn: () => hmStudyCorner(ctrl, items),
-      fav: () => fvPickStart(el, ctrl),
-      search: () => openSearch(),
-      colors: () => chooser(S.hm.chooserTab === "arrange" ? "arrange" : "colors"),   // Colors & Arrange, one sheet, last tab remembered
-      paintings: () => { S.hm.mode = "paintings"; save(); if (typeof pmGo === "function") pmGo("arr=color"); },
-    };
-    stem.querySelectorAll("[data-do]").forEach(b => b.onclick = () => { buzz(8); closeStem(true); acts[b.dataset.do](); });
+  // "Colors | Paintings" (David, 2026-10-09: "it should be more prominent... instead of colors you switch to
+  // paintings"): the same floor, the archive's paintings instead of names, laid out by palette likeness
+  // (js/paintmap.js, through the honeycomb's own fisheye). One tap; S.hm.mode remembers it (js/core.js hmGoFloor).
+  const hmGoPaintings = () => { if (S.hm.mode !== "paintings") { S.hm.mode = "paintings"; save(); } if (typeof pmGo === "function") pmGo("arr=color"); };
+  // moreRegister("map", ...): PLAN §3.3's depth ladder -- the mode switch and the two most-used doors sit right
+  // in the sheet; "Colors & Arrange" is one tap further into chooser() below (the ladder's own "two taps: a
+  // sub-page" tier), which already merges How many/Family/Tone/Collections/Arrange/Look/Feel/Edges into one
+  // non-modal sheet -- so this ISN'T rebuilding that sheet, just giving it one consistent front door.
+  // js/places.js moreOpen() already calls the real close() (js/core.js sheet()) before invoking a row's run() --
+  // unlockScroll/cornersBack/the esc listener are handled synchronously there, regardless of what happens to the
+  // DOM node next. Only the EXIT ANIMATION is still pending (close() delays scrim.remove()/sh.remove() by up to
+  // ~400ms so it can be seen), and every one of these rows opens ANOTHER sheet (chooser) or leaves the map
+  // interactive right away -- removing the node outright here, instead of waiting that out, is what stops it
+  // from sitting (still matching ".sheet"/".scrim", just invisible) over the live map or the next sheet, which
+  // both moreOpen's own re-entry guard and #hmDo's below would otherwise read as "something is still open" and
+  // silently refuse to act on. The old doMenu did the same thing (closeStem(true)) before its own actions.
+  const hmMoreRun = fn => () => { document.querySelectorAll(".sheet,.scrim").forEach(n => n.remove()); fn(); };
+  // Colors|Paintings lives ONLY as the top-center switch now (hmLayerSwitchHTML/hmWireLayerSwitch below) --
+  // David, 2026-10-09: "it doesn't make sense that the painting map is accessed through [a menu]... remove the
+  // Paintings row from any menu", and no, not a copy here either ("probably not" to keeping one for discoverability).
+  if (typeof moreRegister === "function") moreRegister("map", () => [
+    { title: "Show", items: [
+      { t: "Colors & Arrange", n: `${hlAll ? "Every name" : hmViewLabel()} · ${hmArrLabel()}`, run: hmMoreRun(() => chooser(S.hm.chooserTab === "arrange" ? "arrange" : "colors")) },
+      // David, 2026-10-09: "where can I access the slideshow deliberately?" -- it was an icon in the old Colors
+      // sheet header, Learn's Today card, and the 60s idle trigger, with no plain door of its own. A clear
+      // labeled row near the top of the sheet (not buried in "Map tools" below); the idle trigger and Learn's
+      // own entry stay exactly as they were.
+      typeof ssOpen === "function" && { t: "Slideshow", n: "Let the colors play", run: hmMoreRun(() => ssOpen()) },
+    ].filter(Boolean) },
+    // David, 2026-10-09: "this menu is too long... Recall doesn't belong here, it's already in the left menu" (the
+    // Places menu's Learn row, which leads with the due check-in) -- Study the map stays (its own "names near the
+    // middle" scope), and the Colors sheet's 4 icon-only header buttons (A1: no private symbols) move in here too.
+    { title: "Map tools", items: [
+      { t: "Search", n: "A color, a hex, a painter, a decade", run: hmMoreRun(() => openSearch()) },
+      typeof prQuick === "function" && { t: "Study the map", n: (typeof HONEY_HL !== "undefined" && HONEY_HL) ? honeyLitLabel().title : "Names near the middle", run: hmMoreRun(() => hmStudyCorner(ctrl, items)) },
+      typeof fvPickStart === "function" && { t: "Keep colors from the map", n: "Favorites", run: hmMoreRun(() => fvPickStart(el, ctrl)) },
+      { t: "Name any color", run: hmMoreRun(() => { XSTACK = []; X_ROOT = "home"; LAB.namer(); }) },
+      { t: "Surprise me", n: "A color you haven't met", run: hmMoreRun(() => hmDice()) },
+    ].filter(Boolean) },
+  ]);
+  // featureRegister (js/search.js, loaded after home.js -- hence the typeof guard and doing this at runtime,
+  // not module load): every arrangement findable by name from the one search (PLAN §3.7/§9 "each arrangement
+  // and order"). Picking one jumps straight to the map with it applied, not just a shortcut to the sheet.
+  if (typeof featureRegister === "function" && !window.HM_FEATURES_REGISTERED) {
+    window.HM_FEATURES_REGISTERED = true;
+    HONEY_ARR_IDS.forEach(id => featureRegister("arr-" + id, { t: HONEY_ARR[id].title, where: "Map · ⋯ · Colors & Arrange",
+      words: "arrange arrangement shape map grid " + HONEY_ARR[id].title.toLowerCase(), run: () => { S.hm.arr = id; save(); if (typeof hmHome === "function") hmHome(); } }));
+    featureRegister("map-slideshow", { t: "Slideshow", where: "Map · ⋯ · Show", words: "slideshow play screensaver ambient auto colors",
+      run: () => { if (typeof hmGoFloor === "function") hmGoFloor(); setTimeout(() => { if (typeof ssOpen === "function") ssOpen(); }, 0); } });
+    featureRegister("map-surprise", { t: "Surprise me", where: "Map · ⋯ · Map tools", words: "random dice unmet color",
+      run: () => { if (typeof hmGoFloor === "function") hmGoFloor(); } });
+    featureRegister("map-namer", { t: "Name any color", where: "Map · ⋯ · Map tools", words: "eyedropper pick hex namer",
+      run: () => { XSTACK = []; X_ROOT = "home"; if (typeof LAB !== "undefined") LAB.namer(); } });
+    featureRegister("map-lookfeel", { t: "Look & feel", where: "Map · ⋯ · Colors & Arrange", words: "magnify spacing size fisheye lens honeycomb bubbles",
+      run: () => { S.hm.chooserTab = "arrange"; save(); if (typeof hmGoFloor === "function") hmGoFloor(); setTimeout(() => { if (typeof window.HM_CHOOSER === "function") window.HM_CHOOSER("arrange"); }, 350); } });
   }
-  doBtn.onclick = doMenu;
+  doBtn.onclick = () => {
+    if (hmDoJustClosed() || document.querySelector(".sheet,.scrim,.rooms-stem")) return;
+    hmDismissHint(); buzz(4);
+    if (typeof moreOpen !== "function") return;
+    moreOpen("map");
+    // the common case (a tap on the scrim) is caught the instant it happens; a MutationObserver is the fallback
+    // for every other way the sheet can leave (swipe-down, Escape, a row) -- js/places.js placesOpen's own exact
+    // pattern (PLACES_CLOSED_AT), kept consistent with it on purpose: the observer re-stamping at actual removal
+    // (not the original tap) is deliberate there too, since that's closer to when the corner is visually exposed
+    // again -- right when a delayed ghost click would land.
+    const scrimEl = document.querySelector(".scrim");
+    if (scrimEl) scrimEl.addEventListener("pointerdown", () => { HM_DO_CLOSED_AT = Date.now(); }, { capture: true });
+    const doMo = new MutationObserver(() => { if (!document.querySelector(".mr-sheet")) { HM_DO_CLOSED_AT = Date.now(); doMo.disconnect(); } });
+    doMo.observe(document.body, { childList: true });
+  };
+  hmWireLayerSwitch(el, "colors", id => { if (id === "paintings") hmGoPaintings(); });
   // (the swipe-up-from-the-bottom shortcut to Learn is gone: David, 2026-10-08, a scroll near the bottom kept landing
   // in Learn. The rooms button is the way in.)
   // L18 B3: the mirror gesture, a pull down from the top of Home opens search (View's magnifier stays the second way in)
@@ -1304,5 +1339,5 @@ function hmShot(arg) {
   if (arg === "arrange") setTimeout(() => window.HM_CHOOSER && window.HM_CHOOSER("look"), 150);   // the Arrange sheet
   if (arg === "do") setTimeout(() => { const b = document.getElementById("hmDo"); if (b) b.click(); }, 150);   // the right corner's menu
   if (arg === "look") setTimeout(() => window.HM_CHOOSER && window.HM_CHOOSER("look"), 150);   // the long-press shortcut, without the long-press
-  if (arg === "search") setTimeout(() => { window.HM_CHOOSER && window.HM_CHOOSER("show"); setTimeout(() => hmTap(document.querySelector("[data-search]")), 150); }, 150);
+  if (arg === "search") setTimeout(() => { if (window.HM_SEARCH) window.HM_SEARCH(""); }, 150);
 }
