@@ -643,7 +643,11 @@ function rpBarWire(el) {
     if (k === "family") return scrollTo(el.querySelector(".ar-fam"));
     if (k === "id") return scrollTo(el.querySelector(".rp-idcard"));
   });
-  // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page
+  // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page.
+  // Defensive: a fast Back-then-forward can call this again before the last page's own cleanup has run (David,
+  // 2026-10-09: "the header disappears" -- two stale .rp-bar nodes fighting over the "on" class reads as a flicker
+  // that looks like the bar vanishing), so never leave more than the one this call owns.
+  document.querySelectorAll("body > .rp-bar").forEach(b => b.remove());
   document.body.appendChild(bar);
   // David, 2026-10-09: "header feels too big -- harder to read the article" -> while actively reading down, the
   // bar slims further (name + back only, the jump tabs fade out); scrolling up a little brings the tabs straight
@@ -703,7 +707,14 @@ function rpPaintFill(el, name, hex, entry, famC) {
   const leadHost = sec.querySelector("[data-rp-lead]");
   artPromise.then(r => {
     const art = (r && r.art) || {}, self = (r && r.self) || { slug: routeSlug(name), n: name, h: hex };
-    if (leadHost && leadHost.isConnected && typeof arfLead === "function") arfLead(f => { leadHost.appendChild(f); return true; }, art, self).catch(() => {});
+    // articleRenderSplit (js/article.js) now shows the lead picture at the top of the article itself, in the
+    // same slot every other story opens with -- a real contextual photo first, the painting that covers the
+    // most of this color otherwise (David, 2026-10-09: "so all articles and pages feel equal in value"). This
+    // slot only still needs to fill in when that didn't happen: a color with no article at all, where
+    // rpStoryFill's twin fallback (rpTwinHTML) runs instead and has no picture of its own. r.has (not a DOM
+    // check) is the right signal -- articleRenderSplit always attempts its own lead as soon as it finds an
+    // article, well before that lead's own async picture-pick resolves, so a DOM check here could race it.
+    if (leadHost && leadHost.isConnected && typeof arfLead === "function" && !(r && r.has)) arfLead(f => { leadHost.appendChild(f); return true; }, art, self).catch(() => {});
   });
   const gi = sec.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, { n: name, h: hex });
   if (typeof rcWireYou === "function") rcWireYou(sec, name, hex);

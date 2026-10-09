@@ -1431,6 +1431,32 @@ scenario("pages", "the pinned header slims its tabs away on scroll down, brings 
   await t.waitFor(() => !bar.classList.contains("collapsed"), 2000, "the header to bring its tabs back on scroll up");
 });
 
+// David, 2026-10-09 on Aero: "The collapsed sticky header (‹ Aero · ✕ Close) overlaps the iOS status bar --
+// the time '3:13' is drawn on top of 'Aero' and the Close pill." Two things confirmed while chasing this:
+// (1) the bar's own padding-top formula (calc(var(--top) + 4px)) is correct -- checked directly below, no
+// scrolling needed. (2) the "✕ Close" pill is js/trail.js's own tl-exit-bar, inserted into .rp-bar by
+// tlDecorate() (js/trail.js ~line 129) -- not something richpage.js draws. A scrolled, transitioning repro
+// (scroll past the cover with a simulated --top, then read the bar's transform) sometimes measures the
+// *hidden* preset's transform well after the .on class and the .32s transition should have settled, which may
+// be a real interaction with trail.js's own DOM edits to this element (or with its gesture wiring) -- flagged
+// for the trail.js-owning lane rather than guessed at here, since I'm not to touch that file this pass.
+scenario("pages", "the pinned header's padding clears a simulated status-bar inset, and stays a single instance", async t => {
+  const INSET = 59;
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  const bar = await t.waitFor(() => t.$("body > .rp-bar"), 8000, "the pinned header");
+  { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }
+  const padTop = parseFloat(t.w.getComputedStyle(bar).paddingTop);
+  t.expect(padTop >= INSET, `the bar's own padding-top is ${padTop}px, short of the ${INSET}px status-bar inset`);
+  t.expect(t.$$("body > .rp-bar").length === 1, `${t.$$("body > .rp-bar").length} .rp-bar nodes on body, expected exactly 1`);
+  // a fast Back then reopen: the old bar's cleanup must finish before (or in place of) the new one appending.
+  // The bar itself is still off screen (nothing has scrolled it .on yet), so this uses the cover's own back
+  // button, the same control xBack wires everywhere else.
+  await t.click("[data-back]", { wait: 100 });
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  await t.waitFor(() => t.$("body > .rp-bar"), 8000, "the pinned header again, after a fast Back and reopen");
+  t.expect(t.$$("body > .rp-bar").length === 1, `${t.$$("body > .rp-bar").length} .rp-bar nodes on body after reopening, expected exactly 1`);
+});
+
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
   // a name with no story of its own. Every color is getting an article, so pick one still without a committed article
   // from the article index; when none is left, nearest stories can't show and the scenario only notes it.
@@ -1582,6 +1608,59 @@ scenario("pages", "role paintings and Werner's 1821 example show on the color pa
   const world = await t.waitFor(() => t.$(".rp-paint .rp-elsewhere"), 8000, "the Paintings section's elsewhere block");
   const line = await t.waitFor(() => t.$(".rc-werner", world), 15000, "Werner's 1821 example line");
   t.expect(/Werner, 1821:.*Blue Copper Ore.*\(mineral\)/.test(t.text(line)), `the Werner line reads "${t.text(line)}"`);
+});
+
+// David, 2026-10-09 on Ochre Brown: "I'm unable to tap the painting to open the painting page" -- the "In the
+// archive" hero pin (js/richcolor.js rcReachSection) used glPinHTML's plain [data-gi] markup, which nothing on
+// the color page was ever wired to handle (rcWireOpen only delegated [data-rc-gi]/[data-rc-open]/[data-rc-pair]).
+// Every painting tile on a color page -- the In paintings rail, the archive hero, a role-paintings tile -- must
+// open its painting in one tap; this walks all three on one color with a rich paintings record.
+scenario("pages", "every painting tile on a color page opens its painting: the In paintings rail, the archive hero, a role tile", async t => {
+  // colorDossier() rebuilds the whole page on every Back, so .rp-paint (and everything under it) must be
+  // re-queried fresh after each round trip -- a reused reference from before a navigation is a detached node.
+  const freshPaint = () => t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
+
+  await H.openPage(t, "#/name/ochre-brown", "Ochre Brown");
+
+  // 1. the In paintings rail (js/paintingsof.js paintingsOfSection, inside [data-glin]) -- it starts itself via
+  // an IntersectionObserver (500px rootMargin), so nudge layout with a scroll event the way the other rail
+  // scenarios do, rather than waiting on real scroll motion in a small iframe.
+  let paint = await freshPaint();
+  const rail = await t.waitFor(() => { const g = t.$("[data-glin]", paint); if (g) { g.scrollIntoView(); t.w.dispatchEvent(new t.w.Event("scroll")); } return t.$$("[data-glin] [data-gi]", paint)[0]; }, 20000, "a painting tile in the In paintings rail");
+  await t.click(rail, { wait: 700 });
+  await t.waitFor(() => t.$(".gl-page"), 10000, "the rail painting's own page");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the rail");
+
+  // 2. "In the archive": the hero pin beside "N paintings come close to it" (rcReachSection)
+  paint = await freshPaint();
+  const archive = await t.waitFor(() => t.$(".rc-reach:not(.rc-reach-none)", paint), 20000, "the In the archive section");
+  const hero = await t.waitFor(() => t.$(".rc-reach-pin [data-gi]", archive), 10000, "the archive's closest-painting pin");
+  await t.click(hero, { wait: 700 });
+  await t.waitFor(() => t.$(".gl-page"), 10000, "the archive pin's own page");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the archive hero");
+
+  // 3. a role-paintings tile (rcRolePaintingsHTML) -- resolves async per role; any one that lands counts
+  paint = await freshPaint();
+  const role = await t.waitFor(() => t.$$(".rc-ri[data-rc-gi]", paint)[0], 15000, "a resolved role-paintings tile");
+  await t.click(role, { wait: 700 });
+  await t.waitFor(() => t.$(".gl-page"), 10000, "the role tile's own page");
+  await t.click("[data-back]", { wait: 600 });
+  await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the role tile");
+});
+
+// David, 2026-10-09 on Baby Pink: "It's not letting me tap Paul Signac... and Paul has no photo" -- a painter
+// row in "Painters who use it" (js/richcolor.js rcPaintersHTML) now opens that painter's page, and shows a real
+// portrait when one exists (data/artists/portraits.json) or the honest signature-color swatch when it doesn't.
+scenario("pages", "a painter row in Painters who use it opens their page, and always shows a portrait or a swatch", async t => {
+  await H.openPage(t, "#/name/baby-pink", "Baby pink");
+  const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
+  const row = await t.waitFor(() => t.$$(".rc-painter[data-awpainter]", paint)[0], 20000, "a painter row");
+  t.expect(t.$(".rc-painter-port", row), "the painter row has no portrait or swatch");
+  await t.click(row, { wait: 700 });
+  await t.waitFor(() => t.$(".aw-page"), 10000, "the painter's own page");
+  t.expect(t.$(".aw-pt-hero"), "the painter page has no portrait hero");
 });
 
 scenario("pages", "hold the cover: the flower rises, dragging lights a hex, letting go opens that color; Back returns", async t => {
