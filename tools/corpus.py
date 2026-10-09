@@ -220,18 +220,6 @@ TEXT_PAGE = re.compile(r"^(genealogical )?text\b|text page|^(persian )?calligrap
                        r"^poem in |^album cover|title page and front cover|final page and back cover", re.I)
 
 
-# Hand-reviewed non-paintings (letters, personal correspondence, etc.) that would otherwise pass every filter above
-# because their title doesn't match TEXT_PAGE and their image isn't a flat black-and-white scan (BW_C). Found by
-# audit, listed with reasons in data/corpus-nonpaintings.json (see design/CORPUS-NONPAINTINGS.md) and never
-# hand-edited into a shard. Keyed by the row's full corpus id ("<src>-<id>"), the same id tools/gallery.py uses.
-def load_nonpaintings():
-    p = ROOT / "data" / "corpus-nonpaintings.json"
-    return {x["id"] for x in json.loads(p.read_text())} if p.exists() else set()
-
-
-NONPAINTINGS = load_nonpaintings()
-
-
 def group_key(src, x):
     if src in ADAPTERS:
         return ADAPTERS[src].group_key(THIS, x)
@@ -254,8 +242,7 @@ def leaf_group(src, acc, title, rid):
 
 
 def select(src, rows):
-    keep = [x for x in rows if not TEXT_PAGE.search(x.get("title") or "")
-            and f"{src}-{x['id']}" not in NONPAINTINGS]
+    keep = [x for x in rows if not TEXT_PAGE.search(x.get("title") or "")]
     groups = defaultdict(list)
     for x in keep:
         groups[group_key(src, x)].append(x)

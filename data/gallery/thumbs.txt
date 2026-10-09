@@ -300,7 +300,9 @@ Laic/14620.jpg
 Laic/14624.jpg	
 Laic/14630.jpg	
 Laic/14634.jpg	
+Laic/14647.jpg	
 Laic/14650.jpg	
+Laic/14655.jpg	
 Laic/14664.jpg	
 Laic/14780.jpg	22,138,978,1000
 Laic/14848.jpg	0,48,890,1000
@@ -435,8 +437,10 @@ Laic/16571.jpg
 Laic/16579.jpg	
 Laic/16584.jpg	
 Laic/16589.jpg	150,150,850,850
+Laic/16600.jpg	
 Laic/16617.jpg	
 Laic/16622.jpg	
+Laic/16629.jpg	
 Laic/16633.jpg	
 Laic/16636.jpg	0,0,947,1000
 Laic/16648.jpg	
@@ -574,6 +578,7 @@ Laic/25790.jpg	20,0,980,970
 Laic/25806.jpg	
 Laic/25810.jpg	
 Laic/25812.jpg	
+Laic/25825.jpg	
 Laic/25832.jpg	
 Laic/25865.jpg	
 Laic/25872.jpg	
@@ -921,6 +926,7 @@ Laic/59914.jpg	62,14,938,961
 Laic/59916.jpg	
 Laic/59927.jpg	
 Laic/59940.jpg	
+Laic/59944.jpg	
 Laic/59956.jpg	0,0,1000,927
 Laic/59960.jpg	
 Laic/59969.jpg	
@@ -1182,6 +1188,7 @@ Laic/81551.jpg
 Laic/81552.jpg	
 Laic/81555.jpg	
 Laic/81557.jpg	
+Laic/81558.jpg	
 Laic/81561.jpg	
 Laic/81562.jpg	
 Laic/81564.jpg	
@@ -1435,6 +1442,7 @@ Laic/110760.jpg	22,118,953,882
 Laic/110761.jpg	
 Laic/110776.jpg	
 Laic/110782.jpg	
+Laic/110798.jpg	
 Laic/110824.jpg	
 Laic/110867.jpg	
 Laic/110869.jpg	0,0,1000,963
@@ -1867,6 +1875,8 @@ Laic/269805.jpg	0,0,1000,985
 Laic/270002.jpg	0,84,1000,1000
 Laic/271417.jpg	88,165,912,896
 Laic/271418.jpg	83,165,912,896
+Laic/271419.jpg	
+Laic/271420.jpg	
 Laic/274209.jpg	0,0,949,1000
 Laic/282029.jpg	
 Laic/282030.jpg	
@@ -2016,6 +2026,7 @@ V1916.1040/1916.1040_web.jpg
 V1916.1041/1916.1041_web.jpg	
 V1916.1042/1916.1042_web.jpg	
 V1916.1044/1916.1044_web.jpg	
+V1916.1046/1916.1046_web.jpg	
 V1916.1047/1916.1047_web.jpg	
 V1916.1048/1916.1048_web.jpg	
 V1916.1049/1916.1049_web.jpg	
@@ -2301,12 +2312,14 @@ V1940.535/1940.535_web.jpg
 V1940.539/1940.539_web.jpg	
 V1940.540/1940.540_web.jpg	
 V1940.542/1940.542_web.jpg	
+V1941.14/1941.14_web.jpg	
 V1941.279/1941.279_web.jpg	20,44,980,969
 V1941.597/1941.597_web.jpg	
 V1941.68/1941.68_web.jpg	150,150,850,850
 V1941.68.a/1941.68.a_web.jpg	121,107,880,893
 V1941.68.b/1941.68.b_web.jpg	25,105,975,889
 V1941.68.c/1941.68.c_web.jpg	20,92,980,910
+V1942.1065/1942.1065_web.jpg	
 V1942.1133/1942.1133_web.jpg	
 V1942.121/1942.121_web.jpg	
 V1942.122/1942.122_web.jpg	20,0,1000,1000
@@ -2347,7 +2360,6 @@ V1943.90/1943.90_web.jpg	0,15,980,1000
 V1944.466/1944.466_web.jpg	150,150,850,850
 V1944.466.1/1944.466.1_web.jpg	0,0,1000,865
 V1944.466.2/1944.466.2_web.jpg	150,150,850,850
-V1944.466.2.a/1944.466.2.a_web.jpg	
 V1944.496/1944.496_web.jpg	20,20,980,964
 V1944.497/1944.497_web.jpg	55,39,940,944
 V1944.498/1944.498_web.jpg	150,150,850,850
@@ -2444,6 +2456,7 @@ V1950.89/1950.89_web.jpg
 V1950.90/1950.90_web.jpg	0,0,1000,851
 V1950.91/1950.91_web.jpg	
 V1951.323/1951.323_web.jpg	
+V1951.324/1951.324_web.jpg	
 V1951.325/1951.325_web.jpg	
 V1951.328/1951.328_web.jpg	
 V1951.330/1951.330_web.jpg	
@@ -2511,6 +2524,7 @@ V1954.261/1954.261_web.jpg	150,150,850,850
 V1954.262/1954.262_web.jpg	
 V1954.263/1954.263_web.jpg	
 V1954.369/1954.369_web.jpg	0,132,1000,1000
+V1954.392/1954.392_web.jpg	
 V1954.393/1954.393_web.jpg	90,64,910,924
 V1954.581/1954.581_web.jpg	
 V1954.582/1954.582_web.jpg	36,0,980,990
@@ -3879,7 +3893,6 @@ V2000.126/2000.126_web.jpg
 V2000.17/2000.17_web.jpg	
 V2000.4/2000.4_web.jpg	30,35,965,975
 V2000.4.1/2000.4.1_web.jpg	32,71,958,949
-V2000.4.2/2000.4.2_web.jpg	
 V2000.67/2000.67_web.jpg	150,150,850,850
 V2000.68/2000.68_web.jpg	20,24,980,984
 V2000.69/2000.69_web.jpg	48,0,977,1000
@@ -4139,14 +4152,12 @@ V2013.300/2013.300_web.jpg	49,17,980,974
 V2013.301/2013.301_web.jpg	20,136,980,874
 V2013.302/2013.302_web.jpg	40,0,955,969
 V2013.303/2013.303_web.jpg	150,150,850,850
-V2013.303.a/2013.303.a_web.jpg	
 V2013.304/2013.304_web.jpg	150,150,850,850
 V2013.305/2013.305_web.jpg	150,150,850,850
 V2013.306/2013.306_web.jpg	53,22,952,978
 V2013.307/2013.307_web.jpg	150,150,850,850
 V2013.308/2013.308_web.jpg	20,0,980,984
 V2013.309/2013.309_web.jpg	150,150,850,850
-V2013.309.a/2013.309.a_web.jpg	
 V2013.310/2013.310_web.jpg	35,28,955,972
 V2013.311/2013.311_web.jpg	32,46,970,979
 V2013.312/2013.312_web.jpg	45,22,957,1000
@@ -4160,7 +4171,6 @@ V2013.315.2.a/2013.315.2.a_web.jpg	128,61,915,936
 V2013.315.2.b/2013.315.2.b_web.jpg	128,65,905,944
 V2013.317/2013.317_web.jpg	47,0,958,972
 V2013.318/2013.318_web.jpg	175,125,835,894
-V2013.318.a/2013.318.a_web.jpg	
 V2013.318.b/2013.318.b_web.jpg	150,150,850,850
 V2013.319/2013.319_web.jpg	150,150,850,850
 V2013.320/2013.320_web.jpg	62,24,927,976
@@ -4195,16 +4205,13 @@ V2013.341/2013.341_web.jpg	20,0,1000,1000
 V2013.341.a/2013.341.a_web.jpg	150,150,850,850
 V2013.342/2013.342_web.jpg	37,29,958,1000
 V2013.343/2013.343_web.jpg	150,150,850,850
-V2013.343.a/2013.343.a_web.jpg	
 V2013.344/2013.344_web.jpg	150,150,850,850
 V2013.345/2013.345_web.jpg	20,170,980,931
 V2013.346/2013.346_web.jpg	150,150,850,850
 V2013.347/2013.347_web.jpg	38,110,892,1000
 V2013.347.a/2013.347.a_web.jpg	70,69,933,843
 V2013.348/2013.348_web.jpg	150,150,850,850
-V2013.348.a/2013.348.a_web.jpg	
 V2013.349/2013.349_web.jpg	150,150,850,850
-V2013.349.a/2013.349.a_web.jpg	
 V2013.350/2013.350_web.jpg	28,88,1000,896
 V2013.350.a/2013.350.a_web.jpg	50,32,950,965
 V2013.351/2013.351_web.jpg	60,49,940,955
@@ -4635,6 +4642,7 @@ Eep/mobile-large/Wrightsman21.jpg	0,33,977,1000
 Eep/mobile-large/DP147601.jpg	0,29,1000,1000
 Eep/mobile-large/DP-19458-001.jpg	25,26,975,974
 Eep/mobile-large/DP-23479-001.jpg	41,29,954,967
+Eep/mobile-large/DP-35674-001.jpg	40,49,960,951
 Eep/mobile-large/DP-14274-015.jpg	48,52,957,933
 Erl/mobile-large/DP-29455-001.jpg	150,150,850,850
 Erl/mobile-large/DT3016.jpg	
@@ -5479,6 +5487,7 @@ MtVMkm
 MaMEbn	0,96,1000,1000
 MAQNwA	
 MwJEHd	
+MhRchp	
 MEXwWm	
 MZhZEn	
 MCxLdH	
@@ -8475,6 +8484,7 @@ MaRoEK	0,0,899,1000
 MbvEVY	
 MQktzX	0,46,1000,1000
 MftfSe	146,0,840,1000
+MXELHe	115,86,925,934
 MMbBYj	
 MTNrka	76,66,929,1000
 Mtmbrh	20,16,980,1000
@@ -9193,7 +9203,6 @@ Nf10d1973-e827-4a48-b792-5bf76a77ae9d
 Nb565a60f-1432-48c7-8ae8-009497cdbe09	
 N45fa82c0-494f-489b-9062-9b62c842008c	0,0,1000,966
 N19f544a4-cb58-4450-87d2-a4affa623869	150,0,875,1000
-N35bda0d1-9ca6-4fee-a339-8046cc6e198c	
 N39eccc24-0e44-4e47-bbc2-24d5cacd4417	
 N74df6f92-b371-42c7-b835-b4cb9ae167b6	
 Nd03d911a-9d6d-4eb5-ab44-298db3d40c10	51,39,939,1000
@@ -9383,6 +9392,7 @@ Ne69c25bb-f772-4ac2-966f-2954eb420a84
 Nc1e33e8d-ffe4-4d20-a267-87ffcf94f7ce	
 N4c91e476-adc9-4dbd-be17-0d81069af41b	
 Nfe8a2703-99bd-4da9-9d8e-5ae7bad003cf	
+N975037ab-19bf-4a87-8df4-a6cc311d84de	
 Nd9d2e050-e740-4bc7-8c09-69ad8aee5fbb	
 N483d4eb2-e0cf-4a48-85d9-dc460ba41494	0,0,915,971
 Nbe5b8763-bff0-4394-9e06-60fbbbd44356	
@@ -9609,6 +9619,7 @@ N8ff2d6a0-c863-4127-bb9a-7edd6a56650a	0,0,1000,922
 N718e014f-fb5f-4702-a95a-db496abefeb7	
 Na7d7601a-e81e-4eb1-bc2c-e3295c0946ca	
 N316dccad-88d1-4ac8-a2f0-31dd5ba2e10a	
+Nb5420e70-c513-436f-aff4-2369dc7350f5	
 N730b46b8-d08f-4391-bcf4-20ac283d598c	
 Nee686635-b527-4e36-82fc-53f09e10cee4	
 N28847b06-0eb8-406e-befc-5867fd9651c2	
@@ -9635,6 +9646,7 @@ N67e0fd82-fc9e-4118-bc9d-8b9ce7aabb1c
 N3bce5798-6a21-4b3c-b8d7-bd883928df1d	
 N56561c9f-5aad-45e5-9381-651ee5f350f1	
 N5fc5c211-bd9f-452e-856f-a5832fbb6f62	
+N1153f2b7-bfe6-4159-8ca4-211ce86564b1	
 N868be5f8-bd09-44b4-a173-ab65103bbf4f	
 Nab3fda0a-1bc8-4fe0-a3af-841862b622f4	
 N9ef2a890-2516-4f5a-bcc7-cc70a22125b5	0,78,1000,1000
@@ -9937,6 +9949,7 @@ Na7df9210-3411-4764-8ca6-67d2b2b97aa3
 N7ae13804-c548-4448-82eb-b11fd4dfe7e1	
 N90bcc63f-35ae-4118-96e8-eebc7a3b6e84	
 N3dddd187-5008-4183-8fa6-6ae29853744b	
+Neaa4615c-fa8f-4fc5-b207-0866402c872e	
 N7ed645da-d95f-4bf0-82c5-75541704d762	
 N4c997540-be91-40a8-8503-b67b3986e7ca	
 N5c5e94ac-df18-4bf3-97c4-124d6fc85156	
@@ -10244,6 +10257,7 @@ N14918d11-0824-4a85-aa84-579d9434d7dc
 Na8656156-1570-4a6c-8ef7-f3211bc14fad	
 N350ae4bb-a288-4d65-be2a-0680e75ff6d6	
 N83d4f5b6-7e34-456a-a1bc-470e4838bf3b	
+N38b5d6d9-acd5-4a0b-bd88-0ece50cb989b	
 Nc5bb7c2b-675e-4c31-8674-2e229e22a40b	
 Nb2db1aa0-36a4-4b42-bb37-8a9d53e3db99	
 Nf0894a78-9e57-4d46-83b3-18d05bcbd0e6	37,0,908,1000
@@ -10331,6 +10345,10 @@ N9cc79c1d-3e5d-4531-9bea-0462449a8abc
 N6eb167b3-9282-46a9-8d83-4943dccf4363	0,123,1000,1000
 N79cb3eba-4af9-4197-87a3-d61ca03ed227	
 N3a66581f-ed84-47d2-994c-de44b957caef	
+N2c537630-f523-480f-9c1f-b89f1bac59a8	
+N3ebc1c6d-6ab0-403d-bc31-e1a27ebc443e	
+Nbcc517e0-84c3-4e21-8c08-c9a0181ced29	
+Nff85b5dc-6632-465f-a147-a2077fda92cb	0,0,1000,938
 N29f42b08-4e31-4a50-9a5f-f0f2d31a7f90	
 N58a3cf06-8a1e-4672-b9fd-ae683c79e622	
 Nc6518c61-98bb-4759-9042-b4bc2ec343ef	
@@ -10453,6 +10471,7 @@ N187aebc3-ef48-4f5f-8dd2-8b5c74b298ab
 N47966446-8944-44fa-9166-be2c68bbc30a	
 N23f6c82f-a9d5-480c-b675-dc1f4e454bee	24,57,1000,1000
 N05213163-b2fc-4523-b963-575f85884783	
+N2f96f6f4-39d6-462d-9d14-14e0d3f722d0	
 Nd3a9cb09-4b14-4f03-9de7-7b6c69c455ca	
 N3de53820-9a39-4c57-b8a7-d83a4f8158bb	
 N8357df03-8ea9-47ca-921e-8fd730a4f1c5	
@@ -10470,6 +10489,7 @@ N8c73a8e6-8a04-41fa-b06f-3fadbe8037b1
 N6f7521dc-a2a8-4c9f-8206-f3db66eccb86	
 N16707b5a-1217-4e98-8133-b3d552380b4a	
 N0fcd9850-455a-44a8-a1a5-8a57eb56c0bc	
+Nf422307b-82b4-4785-99bd-c331742bb866	
 N309ca665-ff41-4f7e-8433-c8dd6e0038a0	
 Nb1ba636f-04e3-4962-8343-a0f7127a8152	
 Ne0812330-4915-4452-9b71-a0bac1147a07	
@@ -10508,16 +10528,25 @@ Ne291058c-0769-493c-a5f3-8e0e64e9ea46
 N2f61c3b8-00ff-41d4-941a-9d639c291472	
 Nf6d58869-3d3a-480d-bf1b-0eeddee012a3	
 N4bb653ec-5b4f-4c4b-b7ee-7c94ef4d5b79	
+N56303f18-6101-4d5d-9b03-20b58d657afa	
+Nbb8d8019-7d4b-4b27-8098-436ff7b1d3f6	
 Nb580ff1e-a8d3-4361-b8c1-1bb6726cf2f9	
+N0191f5a7-69f5-4e95-a9cf-11fa232f6db2	
 N535245c8-9921-4526-8d1f-f67d80fa6bec	
+N7577f78d-d44a-413b-b50c-ae30b5ebc882	
 N33e69f85-6eec-4d80-8ddd-48fde0795bef	
+Nf8d4d42a-8c4b-420d-8d13-070ebcb2846f	
 Nbed3ab69-a7a0-41c9-8541-6ac6548b7d62	
+Naa894c64-0a23-4b6f-9052-e7a97ae230a0	
 N98081c82-5126-40f2-b351-042f6819272e	
 Nd95eb54e-9761-4eaa-9517-d3dadad71c4c	
 N6462ab17-0175-403d-9af4-fa89dc453263	
 Nc986c2b3-cb9f-4c57-a888-217eedc8330a	
 N18480bb2-1e28-4b33-a757-f6e87f677949	
 N8fdbb379-5dd5-46bf-b884-75758156b68b	20,13,980,987
+N6d47c316-c131-460f-9b1e-77f501bf0633	
+N4ea1a505-ffe0-4045-9323-454992344051	
+Na09fb093-8aa6-460e-971d-e22dd3425ac8	
 N62cb319e-f061-4f42-b76b-1b92f57a8e07	0,24,1000,1000
 N6f169290-6717-4c01-9767-2f675230718d	
 Na65a3648-e5a9-48a5-82c6-e002562a2baa	
@@ -10612,6 +10641,7 @@ N944afd93-9c4a-47e4-be24-c0d2890f3ae6
 N79264fe4-9f16-4e2a-9b93-b6d021eedc8e	
 Nf395c5e5-6711-487e-8c1b-747c698d1ef9	0,0,980,1000
 N12fe2768-f444-4d16-a86b-1ddc5bd01423	
+N215d8ccb-49a9-47a1-a4c8-ab8a5601ea3c	
 N45dc7208-ccc2-4e0c-bb61-fc7497ce13b5	
 N259bb66c-762d-426a-89e3-851d553988db	
 Na85ccd40-d8e0-46ee-b1ec-9ec665cf5d23	
@@ -10859,6 +10889,7 @@ Nb4419dc5-cea3-4a69-9c48-60a896901ca1
 N249223aa-3fd2-4591-ae57-8a472e8ba5fc	
 Nedca3c10-24f3-4484-9188-463415d394f6	
 N93d0b993-6291-44bc-bd2f-4b5b35e31473	
+N594b2f21-2660-4a52-9c8e-599eb52c9079	
 Nb74f7de3-fb66-406b-80b9-3a8381097bf6	
 N5d57cb1a-8dce-42b2-9868-1cdfb8756061	
 Nd667be6d-6d30-47f4-8160-ca5971691ad4	
@@ -10910,6 +10941,7 @@ Nbef8c58d-15ae-4649-b2ff-ae0ead24714e
 N0331bb3f-90d2-4fe8-a079-57315ac929a6	
 N95cea25c-e880-4054-bc81-15ea37a5eb8a	
 N39a9ac6c-8098-491f-8a9f-b517567275d5	
+Nd3dcba8f-48e0-434e-a981-17b5b832a064	
 N5eb45d68-2a8c-4e86-be2e-82ae022c3cd7	
 Ncdd32fb4-89be-4332-81e3-88a06d4ad91b	
 N25fd02c7-2296-4e89-853e-20f22740b8ce	
@@ -11408,6 +11440,7 @@ Na615bdb8-f4a8-4cb2-a10a-ac34f295579f
 N016249c7-c3d7-4203-9b7f-decf29692d6d	
 Nfa591eb0-29d2-44fb-81e7-42d25e8642b0	
 Nd0e73fbc-b10f-4ea8-a9a0-04dddc0636c9	
+Ne11d2304-c999-4d2f-86d4-65e3362394ae	
 Nf1e8637b-03bd-41ec-b660-09411d8a194b	0,0,1000,910
 N24f4797f-4550-4da5-b1f1-d1a8b4bd1579	
 Nd12d7b5d-6e51-4e5a-af84-e55067bffc51	
@@ -12727,6 +12760,7 @@ Lsmk/KMS3214.jpg
 Lsmk/KMS3216.jpg	
 Lsmk/KMS3217.jpg	
 Lsmk/KMS3220.jpg	
+Lsmk/KMS3222.jpg	
 Lsmk/KMS3224.jpg	
 Lsmk/KMS3225.jpg	30,21,970,1000
 Lsmk/KMS3227.jpg	
@@ -13954,6 +13988,7 @@ Lsmk/KMSsp235.jpg
 Lsmk/KMSsp237.jpg	
 Lsmk/KMSsp239.jpg	
 Lsmk/KMSsp240.jpg	
+Lsmk/KMSsp241.jpg	
 Lsmk/KMSsp242.jpg	20,16,1000,980
 Lsmk/KMSsp247.jpg	20,0,1000,1000
 Lsmk/KMSsp250.jpg	
@@ -14202,6 +14237,7 @@ Lsmk/KMSsp725.jpg
 Lsmk/KMSsp726.jpg	20,0,1000,1000
 Lsmk/KMSsp727.jpg	
 Lsmk/KMSsp728.jpg	
+Lsmk/KMSsp729.jpg	
 Lsmk/KMSsp730.jpg	
 Lsmk/KMSsp731.jpg	
 Lsmk/KMSsp734.jpg	
@@ -14655,6 +14691,7 @@ CRaffaello%2C%20ritratto%20di%20maria%20pia%20da%20montefeltro.jpg
 CPietro%20Perugino%20cat58a.jpg	
 CPietro%20Perugino%20catA2.jpg	
 CCarlos%20de%20Austria%2C%20infante%20de%20Espa%C3%B1a.jpg	
+CLa%20Yole%20de%20P.-A.%20Renoir%20%28Fondation%20Vuitton%2C%20Paris%29%20%2846534881555%29.jpg	150,150,850,850
 CCaravaggio-Baptist-Toledo.jpg	
 CCaravaggio%20-%20San%20Giovanni%20Battista%20%28Galleria%20Corsini%29.jpg	
 CJohn%20the%20Baptist%20in%20the%20wilderness%20%28by%20Raffaello%20Sanzio%29%20%E2%80%93%20Tribuna%20degli%20Uffizi%2C%20Florence.jpg	
@@ -14727,6 +14764,7 @@ CAndrea%20del%20Sarto%20-%20Portrait%20of%20a%20Woman%20with%20a%20Basket%20of%2
 CLe%20Transport%20du%20Christ%20vers%20le%20tombeau%20-%20Titien%20-%20Mus%C3%A9e%20du%20Louvre%20Peintures%20INV%20749%20%3B%20MR%20516.jpg	
 CGiordano%2C%20Luca%20-%20The%20Defeat%20of%20Sisera%20-%20c.%201692.jpg	
 CBonaventura%20Berlinghieri.%20Crusifixion.%20Madonna%20and%20Child%20with%20Saints.%20Diptych.%20c.%201255.%20103x123cm.%20Uffizi%2C%20Florence..jpg	0,0,1000,964
+CPierre-Auguste%20Renoir%20035.jpg	
 CRidolfo%20del%20Ghirlandaio%20-%20Portrait%20of%20a%20Woman%2C%20called%20%22The%20Nun%22%20-%20WGA08928.jpg	
 CAndrea%20del%20sarto%2C%20dossale%20dei%20quattro%20santi%20o%20pala%20di%20vallombrosa.jpg	150,150,850,850
 CJos%C3%A9%20de%20Ribera%20026.jpg	
@@ -16295,7 +16333,7 @@ CFleury-Fran%C3%A7ois%20Richard%20-%20Valentine%20of%20Milan%20Mourning%20her%20
 CHeilige%20Rochus%20door%20Christus%20aangesteld%20tot%20patroon%20van%20de%20pestlijders%20-%20Peter%20Paul%20Rubens%20-%20Sint-Martinuskerk%20Aalst.jpg	
 CJohn%20Singer%20Sargent%27s%20Madame%20Ramon%20Subercaseaux.jpg	
 CCaravaggio%20I%20bari%20%28Mahon%29.jpg	
-CJohn%20Singer%20Sargent%20-%20Fum%C3%A9e%20d%27ambre%20gris%20%28Smoke%20of%20Ambergris%29%20-%201955.15%20-%20Clark%20Art%20Institute.tiff	
+CJohn%20Singer%20Sargent%20-%20Fum%C3%A9e%20d%27ambre%20gris%20%28Smoke%20of%20Ambergris%29%20-%201955.15%20-%20Clark%20Art%20Institute.tiff	25,13,980,1000
 C%D0%9C%D0%B0%D0%B4%D0%BE%D0%BD%D0%BD%D0%B0%20%D1%81%20%D0%BC%D0%BB%D0%B0%D0%B4%D0%B5%D0%BD%D1%86%D0%B5%D0%BC%2C%20%D1%87%D0%B5%D1%82%D1%8B%D1%80%D1%8C%D0%BC%D1%8F%20%D1%81%D0%B2%D1%8F%D1%82%D1%8B%D0%BC%D0%B8%20%D0%B8%20%D1%87%D0%B5%D1%82%D1%8B%D1%80%D1%8C%D0%BC%D1%8F%20%D0%B0%D0%BD%D0%B3%D0%B5%D0%BB%D0%B0%D0%BC%D0%B8.jpg	20,24,1000,1000
 C%28Toulouse%29%20D%C3%A9mocrite%20%281630%29%20-%20Jusepe%20de%20Ribera%20-%20Madrid%2C%20Museo%20Nacional%20del%20Prado.jpg	
 CLes%20Rochers%20%28Camille%20Corot%29.jpg	
@@ -16327,6 +16365,7 @@ CJan%20Brueghel%20I%20%26%20Peter%20Paul%20Rubens%20-%20Sight%20%28Museo%20del%2
 CJoaqu%C3%ADn%20Sorolla%20-%20La%20ni%C3%B1a%20Mar%C3%ADa%20Figueroa%20vestida%20de%20menina.jpg	
 CAndrea%20del%20Castagno%20-%20Pippo%20Spano%2C%20Niccol%C3%B2%20Acciaiuoli%2C%20Francesco%20Petrarca%20-%20Google%20Art%20Project.jpg	270,54,905,949
 CAndrea%20Mantegna%20-%20Trittico%20-%20Google%20Art%20Project.jpg	150,150,850,850
+CAnthony%20Van%20Dick%20-%20Ritratto%20equestre%20dell%27imperatore%20Carlo%20V%20-%20Google%20Art%20Project.jpg	
 CBartolomeo%20Manfredi%20-%20Il%20tributo%20a%20Cesare%20-%20Google%20Art%20Project.jpg	
 CCanaletto%20-%20Veduta%20del%20Canal%20Grande%20-%20Google%20Art%20Project.jpg	0,32,977,1000
 CCanaletto%20-%20Veduta%20del%20Palazzo%20Ducale%20di%20Venezia%20-%20Google%20Art%20Project.jpg	
@@ -16471,20 +16510,20 @@ CFusilamiento%20de%20Torrijos%20%28Gisbert%29.jpg
 CJan%20Both%20-%20Italian%20Landscape%20with%20Roman%20Warriors%20-%20WGA2677.jpg	
 CMel%C3%A9ndez%2C%20Luis%20Egidio%20-%20Still%20Life%20with%20Fruit%20and%20Cheese.jpg	0,0,1000,887
 CJoseph%20Plepp%20001.jpg	0,0,1000,898
-CStudy%20for%20%22Death%20and%20Victory%22%20MET%2050.130.84.jpg	
-CEgyptian%20Woman%20MET%20DT212007.jpg	
-CLandscape%20with%20Goatherd%20MET%20DT2941.jpg	
-CEgyptians%20Raising%20Water%20from%20the%20Nile%20MET%20DT11903.jpg	
+CStudy%20for%20%22Death%20and%20Victory%22%20MET%2050.130.84.jpg	95,41,905,959
+CEgyptian%20Woman%20MET%20DT212007.jpg	20,17,975,1000
+CLandscape%20with%20Goatherd%20MET%20DT2941.jpg	20,26,1000,974
+CEgyptians%20Raising%20Water%20from%20the%20Nile%20MET%20DT11903.jpg	0,0,1000,984
 CEug%C3%A8ne%20Ferdinand%20Victor%20Delacroix%20025.jpg	
 CArab%20Woman%20MET%20DT235913.jpg	
 CNathanael%20Sichel%20001.jpg	0,0,1000,964
 CRushing%20Brook%20MET%20ap50.130.80i.jpg	
-CAngels%2C%20Mosaic%2C%20Palatine%20Chapel%2C%20Palermo%20MET%2050.130.83f.jpg	
-CRushing%20Water%20MET%2050.130.80e.jpg	
-CVenice%20MET%20APS2532.jpg	
-CA%20Male%20Model%20Standing%20before%20a%20Stove%20MET%20ap1972.32.jpg	
-CMountain%20View%20at%20Bormio%20%28from%20Switzerland%201869%20Sketchbook%29%20MET%2050.130.147dd.jpg	
-CStreet%2C%20Tangier%20MET%20APS131.jpg	
+CAngels%2C%20Mosaic%2C%20Palatine%20Chapel%2C%20Palermo%20MET%2050.130.83f.jpg	24,34,924,959
+CRushing%20Water%20MET%2050.130.80e.jpg	42,25,958,978
+CVenice%20MET%20APS2532.jpg	150,150,850,850
+CA%20Male%20Model%20Standing%20before%20a%20Stove%20MET%20ap1972.32.jpg	0,16,1000,1000
+CMountain%20View%20at%20Bormio%20%28from%20Switzerland%201869%20Sketchbook%29%20MET%2050.130.147dd.jpg	32,0,967,956
+CStreet%2C%20Tangier%20MET%20APS131.jpg	35,15,1000,1000
 CFrom%20%C3%81vila%20MET%20DT235917.jpg	
 CFrom%20Jerusalem%20MET%20DT235915.jpg	
 CBay%20of%20Uri%2C%20Brunnen%20%28from%20Switzerland%201870%20Sketchbook%29%20MET%2050.130.148l.jpg	
@@ -16496,7 +16535,7 @@ CJacques%20Courtois%20-%20Battle%20between%20Christians%20and%20Muslims.jpg
 CPieter%20Claesz.%20-%20Stilleven.jpg	
 CJohann%20Heinrich%20Roos%20002.jpg	
 CWoman%20with%20Collie%20MET%20ap50.130.27.jpg	
-CPatio%20de%20los%20Leones%2C%20Alhambra%20MET%20APS6421.jpg	
+CPatio%20de%20los%20Leones%2C%20Alhambra%20MET%20APS6421.jpg	35,59,975,948
 CAchenbach%2C%20Oswald%20%E2%80%94%20Feuerwerk%20in%20Neapel%20%28Santa%20Lucia%20mit%20Monte%20Echia%20und%20Castel%20dell%27Ovo%29%201875%20%E2%80%94%20WD%20item%20Q19938884.jpg	
 CJoseph%20Wright%20of%20Derby.%20The%20Girandola%20in%20Rome.%20exhibited%201779.jpg	
 CFlipart-mesa%20revuelta.jpg	
@@ -16524,28 +16563,28 @@ CPieter%20Brueghel%20%28II%29%20-%20Fair%20with%20a%20theatrical%20presentation.
 CJacob%20Jordaens%20-%20The%20Bean%20King%20%28Hermitage%29.jpg	
 CTeniers-tiro%20con%20arco.jpg	
 CGitana%20MET%20ap10.64.10.jpg	
-CJohn%20Singer%20Sargent%20-%20Bringing%20Down%20Marble%20from%20the%20Quarries%20to%20Carrara%20-%20Inl%C3%A5n%20JSS%20522-01%20-%20Nationalmuseum.jpg	
-CTiepolo%20Ceiling%2C%20Milan%20MET%2050.130.25.jpg	
-CMountain%20Stream%20MET%20DT1544.jpg	
-CCliffs%20at%20Deir%20el%20Bahri%2C%20Egypt%20MET%20DT212014.jpg	
-CEgyptian%20Woman%20with%20Earrings%20MET%20DT212008.jpg	
-CAstarte%20MET%20ap50.130.3.jpg	
-CVenice%20MET%20DT2889.jpg	
+CJohn%20Singer%20Sargent%20-%20Bringing%20Down%20Marble%20from%20the%20Quarries%20to%20Carrara%20-%20Inl%C3%A5n%20JSS%20522-01%20-%20Nationalmuseum.jpg	20,0,980,974
+CTiepolo%20Ceiling%2C%20Milan%20MET%2050.130.25.jpg	20,14,968,986
+CMountain%20Stream%20MET%20DT1544.jpg	23,30,977,970
+CCliffs%20at%20Deir%20el%20Bahri%2C%20Egypt%20MET%20DT212014.jpg	23,36,1000,964
+CEgyptian%20Woman%20with%20Earrings%20MET%20DT212008.jpg	20,0,980,984
+CAstarte%20MET%20ap50.130.3.jpg	81,0,1000,1000
+CVenice%20MET%20DT2889.jpg	24,0,1000,972
 CFigure%20in%20Hammock%2C%20Florida%20MET%20ap50.130.57.jpg	
-CArched%20Doorway%20MET%20DP167101.jpg	
-CGreen%20Door%2C%20Santa%20Maria%20della%20Salute%20MET%2050.130.76.jpg	
-CMarket%20Place%20MET%20DT212020.jpg	
+CArched%20Doorway%20MET%20DP167101.jpg	20,0,980,986
+CGreen%20Door%2C%20Santa%20Maria%20della%20Salute%20MET%2050.130.76.jpg	64,43,960,975
+CMarket%20Place%20MET%20DT212020.jpg	24,28,1000,1000
 CSirmione%20MET%20ap15.142.5.jpg	
-CStudy%20for%20%22The%20Coming%20of%20the%20Americans%22%20MET%2050.130.79.jpg	
+CStudy%20for%20%22The%20Coming%20of%20the%20Americans%22%20MET%2050.130.79.jpg	50,0,955,983
 CStream%20and%20Rocks%20MET%20DT235918.jpg	
-COrtler%20Spitz%20from%20Summit%20of%20Stelvio%20Pass%20%28from%20Switzerland%201869%20Sketchbook%29%20MET%2050.130.147bb.jpg	
+COrtler%20Spitz%20from%20Summit%20of%20Stelvio%20Pass%20%28from%20Switzerland%201869%20Sketchbook%29%20MET%2050.130.147bb.jpg	0,0,1000,928
 CJungfrau%20%28from%20%22Splendid%20Mountain%20Watercolours%22%20Sketchbook%29%20MET%20APS2575%20%28cropped%29.jpg	
-CMan%20and%20Pool%2C%20Florida%20MET%20DT243231.jpg	
+CMan%20and%20Pool%2C%20Florida%20MET%20DT243231.jpg	0,30,1000,1000
 CEllen%20Peabody%20Endicott%20E-000642-20111108.jpg	
 CJohn%20Singer%20Sargent%20-%20Nonchaloir%20%281911%29.jpg	
 CTrout%20Stream%20in%20the%20Tyrol%20by%20John%20Singer%20Sargent%2C%201914.JPG	
-CSargent%20-%20Beach%20at%20Capri%2C%201878%2C%201965.32.jpg	
-CSargent%20-%20Study%20of%20Architecture%2C%20Florence%2C%20ca.%201910%2C%2066.14.jpg	
+CSargent%20-%20Beach%20at%20Capri%2C%201878%2C%201965.32.jpg	0,100,1000,1000
+CSargent%20-%20Study%20of%20Architecture%2C%20Florence%2C%20ca.%201910%2C%2066.14.jpg	150,150,850,850
 CChicago%20art%20inst%20singer%20sargent%20m%20dyer.JPG	
 CJohn%20Singer%20Sargent%20-%20Venetian%20Glass%20Workers%20-%201933.1217%20-%20Art%20Institute%20of%20Chicago.jpg	
 CSargent%20-%20Autumn%20leaves%2C%201913%2C%20586-2.jpg	
@@ -16567,18 +16606,18 @@ CJohn%20Singer%20Sargent%20-%20Architecture%2C%20Painting%20and%20Sculpture%20Pr
 CJohn%20Singer%20Sargent%20-%20Classic%20and%20Romantic%20Art%20-%2021.10514%20-%20Museum%20of%20Fine%20Arts.jpg	
 CJohn%20Singer%20Sargent%20-%20The%20Sphinx%20and%20the%20Chimaera%20-%2021.10515%20-%20Museum%20of%20Fine%20Arts.jpg	
 CJohn%20Singer%20Sargent%20-%20Philosophy%20-%2025.637%20-%20Museum%20of%20Fine%20Arts.jpg	
-CApollo%20by%20John%20Singer%20Sargent.jpg	
-CSargent%20-%20The%20Winds%2C%201922%E2%80%9325%2C%2025.641.jpg	
-CJohn%20Singer%20Sargent%20-%20Perseus%20on%20Pegasus%20Slaying%20Medusa%20-%2025.642%20-%20Museum%20of%20Fine%20Arts.jpg	
-CSinger%20Sargent%2C%20John%20-%20Orestes%20Pursued%20by%20the%20Furies%20-%201921.jpg	
-CJohn%20Singer%20Sargent%20-%20Phaethon%20-%2025.646%20-%20Museum%20of%20Fine%20Arts.jpg	
-CSinger%20Sargent%2C%20John%20-%20Hercules%20-%201921.jpg	
+CApollo%20by%20John%20Singer%20Sargent.jpg	38,108,962,922
+CSargent%20-%20The%20Winds%2C%201922%E2%80%9325%2C%2025.641.jpg	23,160,1000,849
+CJohn%20Singer%20Sargent%20-%20Perseus%20on%20Pegasus%20Slaying%20Medusa%20-%2025.642%20-%20Museum%20of%20Fine%20Arts.jpg	75,63,975,937
+CSinger%20Sargent%2C%20John%20-%20Orestes%20Pursued%20by%20the%20Furies%20-%201921.jpg	20,0,1000,1000
+CJohn%20Singer%20Sargent%20-%20Phaethon%20-%2025.646%20-%20Museum%20of%20Fine%20Arts.jpg	30,25,975,965
+CSinger%20Sargent%2C%20John%20-%20Hercules%20-%201921.jpg	35,48,959,952
 CJohn%20Singer%20Sargent%20-%20Sketch%20for%20Atlas%20and%20the%20Hesperides%20-%2029.138%20-%20Museum%20of%20Fine%20Arts.jpg	
 CJohn%20Singer%20Sargent%20-%20Sketch%20for%20Chiron%20and%20Achilles%20-%2029.139%20-%20Museum%20of%20Fine%20Arts.jpg	
-CJohn%20Singer%20Sargent%20-%20Sketch%20for%20Phaethon%20-%2029.140%20-%20Museum%20of%20Fine%20Arts.jpg	
-CJohn%20Singer%20Sargent%20-%20Pagan%20Deities%20-%2037.46%20-%20Museum%20of%20Fine%20Arts.jpg	
+CJohn%20Singer%20Sargent%20-%20Sketch%20for%20Phaethon%20-%2029.140%20-%20Museum%20of%20Fine%20Arts.jpg	35,24,970,971
+CJohn%20Singer%20Sargent%20-%20Pagan%20Deities%20-%2037.46%20-%20Museum%20of%20Fine%20Arts.jpg	20,5,975,1000
 CJohn%20Singer%20Sargent%20-%20Sketch%20for%20Perseus%20on%20Pegasus%20Slaying%20Medusa%20-%2029.137%20-%20Museum%20of%20Fine%20Arts.jpg	
-CCircle%20of%20John%20Singer%20Sargent%20%28copy%20after%20Diego%20Vel%C3%A1zquez%29%20-%20King%20Philip%20IV%20%28of%20Spain%29%20-%20MFA%20Boston.jpg	
+CCircle%20of%20John%20Singer%20Sargent%20%28copy%20after%20Diego%20Vel%C3%A1zquez%29%20-%20King%20Philip%20IV%20%28of%20Spain%29%20-%20MFA%20Boston.jpg	146,96,858,904
 CJacob%20Isaacksz.%20van%20Ruisdael%20-%20Landscape%20with%20a%20House%20in%20the%20Grove%20-%20WGA20472.jpg	
 CJacob%20van%20Ruisdael%20-%20Waterfall%20in%20a%20hilly%20landscape.jpg	
 CJacob%20van%20Ruisdael%20-%20Mountain%20landscape%20by%20a%20river.jpg	
@@ -16648,6 +16687,7 @@ CDiana%20with%20her%20nymphs%20by%20Jacob%20Adriaensz%20Backer.jpg
 CAdriaen%20van%20de%20Velde%20-%20Een%20rustpauze%20-%20%D0%93%D0%AD-6827%20-%20Hermitage%20Museum.jpg	
 CAlexei%20Grigoryevich%20Orlov.PNG	
 CSimon%20de%20Vos%20-%20Abigail%20Bringing%20a%20Gift%20to%20David.jpg	
+CVan%20Dyck%20-%20Portrait%20of%20a%20Man%20%28Portrait%20of%20Mark-Antoine%20Lumagne%29%2C%20%D0%93%D0%AD-536.jpg	
 CJosef%20Grassi%20002.jpg	
 C%27Rue%20Custine%20in%20Montmartre%27%20by%20Maurice%20Utrillo%2C%201909-10%2C%20Hermitage%20Museum.jpg	
 CTalyzin%201%20Fyodor%20Ivanovich.jpg	
@@ -17236,8 +17276,10 @@ CCeraiolo%20Crucifixion.jpg	55,0,950,968
 CClaude%20Lorrain%20-%20Ulysses%20Recieved%20by%20the%20Daughters%20of%20Lycomedes%20-%20Hermitage.jpg	23,0,1000,882
 CThe%20Church%20Parade%20of%20the%20Finnish%20Life%20Guards%20Regiment.jpg	
 CAnne-Louis%20Girodet%20de%20Roucy-Trioson%20-%20T%C3%AAte%20d%27une%20femme%20dans%20un%20turban.jpg	
+CPortrait-of-Queen-Henrietta-Maria.jpg	
 CHubert%20Robert%20-%20Green%20Wall.jpg	
 C%D0%9E%D1%80%D0%B5%D1%81%D1%82%20%D0%90.%20%D0%9A%D0%B8%D0%BF%D1%80%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20-%20%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82%20%D0%B3%D1%80%D0%B0%D1%84%D0%B0%20%D0%93%D1%80%D0%B8%D0%B3%D0%BE%D1%80%D0%B8%D1%8F%20%D0%93.%20%D0%9A%D1%83%D1%88%D0%B5%D0%BB%D0%B5%D0%B2%D0%B0%20%28%D0%BE.1827%29.jpg	
+C%27Portrait%20of%20the%20Members%20of%20the%20Oude%20Voetboog%20Guild%20in%20Antwerp%27%20by%20David%20Teniers%20the%20Younger.JPG	
 CFair%20%28Wauters%29.jpg	
 CFranz%20Kr%C3%BCger%20-%20Portr%C3%A4t%20des%20Grafen%20Alexander%20Kuschelew-Besborodko.jpg	
 CGuido%20Reni%20-%20St%20Joseph%20with%20the%20Infant%20Jesus%20-%20WGA19304.jpg	
@@ -17473,6 +17515,7 @@ CCharles-Fran%C3%A7ois%20Daubigny%20-%20River%20Bank%20-%20WGA5937.jpg
 CSievers%201%20Karl%20Karlovich.jpg	
 COstermann-tolstoi%20by%20Prudhon.jpg	
 CEleonor%20of%20Toledo%20by%20Allori%20%28Hermitage%29.jpeg	
+CAnthonis%20van%20Dyck%20-%20Portrait%20of%20two%20Ladies%20%28Hermitage%20museum%29.jpg	
 CJohn%20Wootton%20-%20Hounds%20and%20a%20Magpie%20-%20WGA25864.jpg	
 CFilippo%20Lauri%20-%20Appearance%20of%20Christ%20to%20Mary%20Magdalene.jpg	
 CAdoration%20of%20the%20Infant%20Christ.JPG	
@@ -17663,6 +17706,7 @@ CHermitagebatoniholyfamily.jpg
 CTimothy-and-Lois.jpg	
 CHenri%20Rousseau%20-%20The%20Luxembourg%20Gardens.%20Monument%20to%20Shopin.jpg	
 CClaudio%20Coello%20-%20Self-Portrait%20-%20WGA5134.jpg	
+C%27Shepherd%27%20by%20David%20Teniers%20the%20Younger%2C%20The%20Hermitage.JPG	
 CGeorg%20Heinrich%20Crola%20-%20Eichen%20%281833%29.jpg	
 CBenedetto%20Luti%20-%20Boy%20with%20a%20Flute%20-%20WGA13780.jpg	
 CMezencev%202%20Mihail%20Ivanovich.jpg	
@@ -17672,6 +17716,7 @@ CGerard%20Dou%20-%20Old%20Woman%20Reading%20a%20Book.jpg	0,0,1000,985
 CL%C3%A9on%20Bonnat%20-%20Cheikhs%20arabes%20dans%20les%20montagnes.jpg	
 CMaurice%20Denis-Mother%20and%20Child-Hermitage%20Museum.jpg	0,67,934,1000
 CGerard%20ter%20Borch%20-%20The%20Rural%20Postman.jpg	
+CDyck%2C%20Anthony%20van%20-%20Family%20Portrait.jpg	
 CBirth%20of%20St%20John%20the%20Baptist%20%28Giordano%29.jpg	
 CAlexander%20and%20Constantine%20Pavlovich%20by%20Richard%20Brompton.jpeg	0,0,1000,948
 CShuvalov%20P%20A%20by-Kruger.jpg	
@@ -18188,6 +18233,7 @@ CGiulia%20Lama.jpg
 CSelf-portrait%20by%20Giovanni%20Battista%20Salvi%20da%20Sassoferrato.jpg	
 CBernardo%20Cavallino%20-%20Martirio%20di%20S.%20Stefano%20%28Museo%20del%20Prado%29.jpg	
 CSofie%20Amalia%20Ribbing%20-%20Self-portrait%20in%20the%20Uffizi.jpg	0,0,980,986
+CRenoir%20Woman%20with%20Rose.jpg	
 CGauguin%201884%20Mlle%20S.%20Manthey.jpg	
 CRavine%20-%20Vincent%20Van%20Gogh.jpg	
 CAlbrecht%20durer%20heavenly%20body%20in%20the%20night%20sky.jpg	30,15,970,978
@@ -18628,6 +18674,7 @@ CPieter%20Neefs%20the%20Elder%20-%20Interior%20of%20a%20Flemish%20church%20or%20
 CEl%20Ap%C3%B3stol%20Santiago%20el%20Mayor%20de%20Guido%20Reni.jpg	20,13,980,987
 CJuan%20ribalta-san%20juan.jpg	
 CAnthony%20van%20Dyck%20-%20Head%20of%20an%20Old%20Man.jpg	
+CAnthony%20van%20Dyck%2C%20Peter%20Paul%20Rubens%20-%20The%20Christ%20Child%2C%20Saint%20John%20and%20the%20Lamb.jpg	
 CLandscape%20with%20Sea%20and%20Mountains%20%281%29.jpg	
 CE%20Caj%C3%A9s%20Virgen%20con%20el%20ni%C3%B1o%201613%20o%201618%20Museo%20del%20Prado.jpg	
 CSan%20Mateo%20y%20San%20Juan%20Evangelista%2C%20de%20Juan%20Ribalta%20%28Museo%20del%20Prado%29.jpg	
@@ -18689,6 +18736,7 @@ CMassimo%20Stanzione%20-%20Beheading%20of%20St%20John%20the%20Baptist%20-%20WGA2
 CAparici%C3%B3n%20de%20Cristo%20crucificado%20a%20Santa%20Teresa%20de%20Jes%C3%BAs%20%28Museo%20del%20Prado%29.jpg	
 CAparici%C3%B3n%20de%20Cristo%20Salvador%20a%20Santa%20Teresa%20de%20Jes%C3%BAs%20%28Museo%20del%20Prado%29.jpg	
 CLot%20y%20sus%20hijas%20%28Furini%29.jpg	
+CAnton%20van%20Dyck%20-%20The%20Cardinal-Infante%20Fernando%20de%20Austria.jpg	
 CFrans%20Snyders%20-%20Concert%20of%20Birds%20-%20WGA21526.jpg	
 CJos%C3%A9%20de%20Ribera%20047.jpg	
 CNoli%20me%20tangere%20%28N%C3%BA%C3%B1ez%20del%20Valle%29.jpg	20,13,980,987
@@ -18784,6 +18832,7 @@ CJan%20Both%20Candace.jpg
 CJan%20Both%20-%20Zuidelijk%20landschap%20met%20een%20waterval%20-%20P002066%20-%20Museo%20del%20Prado.jpg	
 CEl%20vado%2C%20Claudio%20de%20Lorena.jpg	0,0,1000,898
 CMountain%20Pass%20by%20Jan%20Both%20Museo%20del%20Prado%20P005451.jpg	
+CDavid%20Teniers%20%28II%29%20-%20The%20bivouac.jpg	24,0,1000,1000
 CFlorero%20%28P00250%29%20%28Nuzzi%29.jpg	
 CSimon%20de%20Vlieger%20-%20Forest.jpg	20,20,980,980
 CJacques%20Linard%20Vanitas.jpg	
@@ -19414,6 +19463,7 @@ CMassacre%20des%20Innocents%20-%20S%C3%A9bastien%20Bourdon%20-%20Hermitage%20Mus
 CGiulio%20Cesare%20Procaccini%20-%20Holy%20Family%20with%20John%20the%20Baptist%20and%20an%20Angel%20-%20WGA18427.jpg	
 CEsaias%20Boursse%20-%20Drie%20mannen%20repareren%20een%20drumstel%20-%20%D0%93%D0%AD-3069%20-%20Hermitage%20Museum.jpg	
 CHillestrom%20children%20bandaging%20finger.jpg	
+CDavid%20Teniers%20the%20Younger%20-%20Landscape%20with%20a%20Maid%20at%20the%20Well.jpg	0,0,1000,931
 CEmpreror%20Nicholas%20II%20Presenting%20the%20Colour%20to%20the%20145th%20Novocherkassk%20Infantry%20Regiment%20by%20Narkiz%20Bunin%20%281900%29.jpg	150,150,850,850
 CZbievsky%20Timofey%20Ivanovich.jpg	
 CPortrait%20of%20Varvara%20A.%20Kobylinsky.jpg	
@@ -19852,6 +19902,7 @@ CBottalla%20Moses%20Striking%20the%20Rock.jpg
 CPortrait%20of%20Christopher%20A%20von%20Lieven.jpg	20,16,980,984
 CLotto%20-%20Rest%20on%20the%20Flight%20into%20Egypt%20with%20St%20Justine%2C%201529-1530%2C%20%D0%93%D0%AD-2204.jpg	
 CSimone%20Cantarini%20-%20Holy%20Family%20%28Hermitage%29.jpg	20,15,980,985
+CDavid%20Il%20G%20Teniers%20The%20Village%20Feast.jpg	
 CBattle%20Between%20Persians%20and%20Russians%20-%20State%20Hermitage%20Museum.jpg	
 CGeorg%20Christoph%20Grooth%2005.jpeg	
 CJan%20Josef%20Horemans%20the%20Elder%20-%20Dance.jpg	
@@ -19918,6 +19969,7 @@ CHendrick%20van%20Steenwyck%20%28II%29%20-%20Interior%20of%20a%20Gothic%20Church
 CCarl%20Ludwig%20Christinec%20024.jpg	
 CSimon%20de%20Vos%20-%20Death%20of%20Decius%20Mus.jpg	
 CPeter%20II%20by%20anonymous%20%281800s%2C%20Hermitage%29.jpg	
+CDavid%20Teniers%20-%20Landscape%20with%20a%20Shepherds%20and%20a%20Flock.jpeg	
 CAlessandro%20Magnasco%20and%20Clemente%20Spera%20-%20Banditti%20at%20Rest%20%282%29.jpg	
 CIvan%20Aivazovsky%20-%20Ship%20in%20the%20Stormy%20Sea.jpg	
 CPortrait%20of%20a%20Woman%20from%20the%20Schmidt%20Family.jpg	
@@ -20139,9 +20191,9 @@ CJohn%20Singer%20Sargent%20%281856-1925%29%20-%20Alfred%2C%20Son%20of%20Asher%20
 CPlautilla%20Nelli%20-%20St%20Catherine%20with%20the%20Lily.jpg	
 CJean-L%C3%A9on%20G%C3%A9r%C3%B4me%20-%20Pool%20in%20a%20Harem.jpg	0,0,1000,950
 CFede%20Galizia%20-%20Portrait%20of%20Federico%20Zuccaro.jpg	
-CJohn%20Singer%20Sargent%20-%20Under%20the%20Willows%20-%20Google%20Art%20Project.jpg	
+CJohn%20Singer%20Sargent%20-%20Under%20the%20Willows%20-%20Google%20Art%20Project.jpg	0,44,1000,956
 CJohn%20Singer%20Sargent%20-%20Henry%20Cabot%20Lodge%20-%20Google%20Art%20Project.jpg	
-CJohn%20Singer%20Sargent%20-%20The%20Mosquito%20Net%20-%20Google%20Art%20Project.jpg	
+CJohn%20Singer%20Sargent%20-%20The%20Mosquito%20Net%20-%20Google%20Art%20Project.jpg	0,0,1000,969
 CJohn%20Singer%20Sargent%20-%20Rosina%20Ferrara%2C%20Head%20of%20a%20Capri%20Girl%20-%20Google%20Art%20Project.jpg	
 CBattista%20sforza.jpg	
 CAlbrecht%20D%C3%BCrer%2C%20attributed%20to%2C%20his%20studio%3F%20-%20Portrait%20of%20a%20man%20-%20Google%20Art%20Project.jpg	20,0,1000,1000
@@ -20193,7 +20245,7 @@ CJan%20van%20Haensbergen%20-%20Italianate%20Landscape%20-%20Sine%20Cerere%20et%2
 CCornelis%20van%20Haarlem%20-%20A%20Man%20and%20Woman%20Singing.jpg	
 CEnrique%20Simonet%20-%20Flevit%20super%20illam%201892.jpg	
 CSargent%20-%20Muddy%20Alligators.jpg	
-CLizzie%20B.%20Dewey%20by%20John%20Singer%20Sargent%20-%20Worcester%20Art%20Museum%20-%20IMG%207105.JPG	
+CLizzie%20B.%20Dewey%20by%20John%20Singer%20Sargent%20-%20Worcester%20Art%20Museum%20-%20IMG%207105.JPG	150,150,850,850
 CJohn%20Singer%20Sargent%20-%20Katharine%20Chase%20Pratt.jpg	
 CJohn%20SInger%20Sargent%20-%20Mrs.%20Alexander%20H.%20Bullock.jpg	
 CJacob%20Duck%20-%20Card%20Players%20and%20Merrymakers.jpg	
@@ -20375,7 +20427,7 @@ CSandro%20botticelli%20e%20bottega%2C%20venere%20pudica%2C%201485-90%20ca.%20%28
 CJos%C3%A9%20de%20Ribera%20053.jpg	
 C%D0%A1%D0%BC%D0%B5%D1%80%D1%82%D1%8C%20%D0%9A%D0%B0%D0%BC%D0%B8%D0%BB%D0%BB%D1%8B%20%28%D0%A7%D0%B8%D0%BD%D1%8C%D1%8F%D0%BD%D0%B8%29.jpg	
 CPortrait%20of%20Manuela%20T%C3%A9llez-Gir%C3%B3n%20by%20Agustin%20Esteve%20y%20Marques.jpg	
-CSargent%20-%20A%20Game%20of%20Bowls%2C%201889%2C%20NT%20826023.jpg	
+CSargent%20-%20A%20Game%20of%20Bowls%2C%201889%2C%20NT%20826023.jpg	48,69,952,938
 CMaria%20Fyodorovna%20%28Kramskoj%2C%201880s%29.jpg	
 C%D0%90.%D0%9F.%20%D0%91%D0%BE%D0%B1%D1%80%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9%20%28%D0%9A%D1%80%D0%B0%D0%BC%D1%81%D0%BA%D0%BE%D0%B9%29.jpg	
 CFrederick%20Maurice%20van%20Heiden%20%28Kramskoy%29.jpg	
@@ -20899,9 +20951,11 @@ CPieter%20Snayers%20-%20The%20relief%20of%20the%20plaza%20de%20L%C3%A9rida.jpg	2
 CSocorro%20de%20Saint-Omer%2C%20por%20Peter%20Snayers.jpg	
 CPieter%20Snayers%20-%20The%20taking%20of%20Ypres.jpg	
 CDavid%20Teniers%20%28II%29%20-%20Smokers%20and%20drinkers.jpg	20,26,980,974
+CDavid%20Teniers%20%28II%29%20-%20Group%20of%20smokers.jpg	20,14,980,986
 CTeniers-godofredo.jpg	
 CDavid%20teniers-fumadores-prado.jpg	
 CTeniers-pablo%20y%20antonio-prado.jpg	
+CDavid%20Teniers%20%28II%29%20-%20The%20magician%20discovers%20Carlos%20and%20Ubaldo%2C%20the%20whereabouts%20of%20Reinaldo%20%28The%20search%20for%20Reinaldo%29.jpg	
 CPieter%20Spierinckx%20-%20Landscape%20with%20tavern%20and%20Roman%20aqueduct.jpg	
 CDavid%20Teniers%20%28II%29%20-%20Reconciliation%20of%20Reinaldo%20and%20Armida.jpg	
 CAbraham%20Teniers%20-%20Een%20wachtlokaal%2C%201%20%28Prado%29.jpg	
@@ -20909,6 +20963,7 @@ CDavid%20Teniers%20%28III%29%20-%20Landscape%20with%20gypsies.jpg
 CDavid%20Teniers%20%28II%29%20-%20Pastoral%20conversation.jpg	20,24,980,976
 CTeniers-antonio%20abad-prado.jpg	
 CTeniers-carlos%20y%20ubaldo%20en%20las%20islas%20afortunadas.jpg	
+CDavid%20teniers-monos%20en%20una%20bodega-prado.jpg	
 CPaul%20de%20Vos%20-%20Running%20fox.jpg	
 CPaul%20de%20Vos%20-%20The%20larder.jpg	0,0,1000,884
 CPaul%20de%20Vos%20-%20A%20greyhound%20on%20the%20prowl.jpg	
@@ -21340,6 +21395,7 @@ CLuis%20M%C3%A9ndez%20Quijada%20%28Museo%20del%20Prado%29.jpg
 CMelchor%20Rafael%20de%20Macanaz%20%28Museo%20del%20Prado%29.jpg	
 CEl%20brigadier%20Francisco%20Rovira%20%28Museo%20del%20Prado%29.jpg	0,0,1000,969
 CSan%20Jer%C3%B3nimo%2C%20del%20taller%20de%20Luis%20Trist%C3%A1n%20%28Museo%20del%20Prado%29.jpg	25,15,980,973
+CDavid%20Teniers%20%28II%29%20%28copy%20of%29%20-%20Drinkers.jpg	
 CSan%20Lorenzo%20%28Luis%20Fern%C3%A1ndez%29.jpg	0,0,872,1000
 CLa%20infanta%20Mar%C3%ADa%20de%20Austria%2C%20futura%20reina%20de%20Hungr%C3%ADa%2C%20de%20Rodrigo%20de%20Villandrando%20%28Museo%20del%20Prado%29.jpg	20,13,980,1000
 CCarducho.%20Pinturas%20del%20claustro%20de%20El%20Paular%2008.jpg	
@@ -22268,6 +22324,7 @@ CAutorretrato%20Juan%20Antonio%20Benlliure.jpg	0,0,1000,985
 CToegeschreven%20aan%20Jan%20Brueghel%20%28I%29%20-%20Boslandschap%20met%20een%20kasteel%20in%20de%20achtergrond%20-%20P001385%20-%20Museo%20del%20Prado.jpg	20,0,1000,1000
 CJan%20Brueghel%20%28I%29%20-%20Vase%20of%20flowers.jpg	20,14,980,1000
 CJan%20van%20Remmerswale%20-%20San%20Jer%C3%B3nimo%20en%20su%20estudio%2C%20P005742.jpg	66,27,960,938
+CDavid%20teniers-san%20antonio%20abad-prado.jpg	
 CJan%20Brueghel%20%28I%29%20-%20Flowers%20-%20WGA3596.jpg	
 CCarlos%20II%20de%20Espa%C3%B1a%2C%20de%20Juan%20Carre%C3%B1o%20de%20Miranda%20%28Museo%20del%20Prado%29.jpg	
 CFelipe%20V%20de%20Espa%C3%B1a%2C%20por%20Miguel%20Jacinto%20Mel%C3%A9ndez%20%28Museo%20del%20Prado%29.jpg	20,18,980,985
@@ -22543,6 +22600,7 @@ CItalian%20landscape%20with%20peasants%20resting%20by%20ruins%20%28unknown%20dat
 C%D0%91%D0%BE%D1%82%D0%BC%D0%B0%D0%BD%20-%20%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82%20%D1%84%D0%B5%D0%BB%D1%8C%D0%B4%D0%BC%D0%B0%D1%80%D1%88%D0%B0%D0%BB%D0%B0%20%D0%BA%D0%BD%D1%8F%D0%B7%D1%8F%20%D0%9F.%20%D0%A5.%20%D0%92%D0%B8%D1%82%D0%B3%D0%B5%D0%BD%D1%88%D1%82%D0%B5%D0%B9%D0%BD%D0%B0.jpg	
 CKutuzow-by-Basin.jpg	
 CPortrait%20of%20Fieldmarshal-General%20His%20Serene%20Highness%20Prince%20Tavrichesky%20Count%20Grigory%20Alexandrovich%20Potemkin%20.JPG	
+CDavid%20Teniers%20%28II%29%20-%20Temptation%20of%20St%20Antony%20-%20WGA22102.jpg	
 CPierre%20Bonnard%20Early%20Spring%2C%20Little%20Fauns.jpg	0,0,938,1000
 CKamila%20Ivasheva.jpg	
 CJuan%20de%20la%20Corte%20-%20Battle%20-%20WGA5367.jpg	
@@ -22785,7 +22843,7 @@ CEmpress%20Eug%C3%A9nie%20in%20Court%20Dress%20%28Kwiatkowski%20after%20Winterha
 C016%20Les%20feux%20de%20la%20Saint-Jean%20%28Charles%20Cottet%2C%20huile%20sur%20toile%2C%20salon%20de%201901%2C%20manoir%20de%20Kerazan%2C%20fondation%20Astor%29.JPG	
 CGustave%20Guillaumet%20tisseuse%20a%20boo%20saada.jpg	150,150,850,850
 CFrancisco%20Jos%C3%A9%20de%20Goya%20y%20Lucientes%20-%20Portrait%20of%20Ger%C3%B3nima%20Goicoechea%20y%20Galarza%20-%2034.1366%20-%20Rhode%20Island%20School%20of%20Design%20Museum.jpg	0,0,980,1000
-CJohn%20Singer%20Sargent%20-%20A%20Boating%20Party%20-%2078.086%20-%20Rhode%20Island%20School%20of%20Design%20Museum.jpg	
+CJohn%20Singer%20Sargent%20-%20A%20Boating%20Party%20-%2078.086%20-%20Rhode%20Island%20School%20of%20Design%20Museum.jpg	0,0,980,1000
 CJohn%20Singer%20Sargent%20-%20Portrait%20of%20Frederic%20Porter%20Vinton%20-%2029.111%20-%20Rhode%20Island%20School%20of%20Design%20Museum.jpg	
 CJohn%20Singer%20Sargent%20-%20Portrait%20of%20Mrs.%20Charles%20Deering%20-%2076.046.1%20-%20Rhode%20Island%20School%20of%20Design%20Museum.jpg	
 CSargent%20-%20Fisherwomen%20Returning%2C%20ca.%201877%2C%20F77-361.png	
@@ -22835,6 +22893,7 @@ CJacob%20Ochtervelt%20-%20Jonge%20vrouw%20zingend%20in%20een%20venster%20-%20626
 CBotticelli%20-%20The%20Madonna%20and%20Child%20with%20the%20Infant%20Saint%20John%20the%20Baptist.jpg	0,0,960,1000
 CCaspar%20Netscher%20-%20Jonge%20vrouw%2C%20een%20ketel%20schrobbend%20-%201288%20-%20Uffizi%20Gallery.jpg	
 CLouise-Aurore%20Villeboeuf%2C%20enfant.jpg	150,150,850,850
+CPierre-Auguste%20Renoir%20-%20Jeune%20Femme%20assise%20%28La%20Pens%C3%A9e%29.jpg	
 CPulzone%2C%20Scipione%20-%20Cristina%20di%20Lorena%2C%20granduchessa%20di%20Toscana%20-%201590.jpg	36,0,1000,1000
 CMichelangelo%20Merisi%20known%20as%20Caravaggio%20-%20Portrait%20of%20a%20gentleman%20%28Scipione%20Borghese%3F%29%20-%20Google%20Art%20Project.jpg	
 CFrans%20Pourbus%20%28II%29%20-%20Portrait%20of%20Marie%20de%20M%C3%A9dicis%20-%20WGA18242.jpg	
@@ -22848,7 +22907,7 @@ CSigismund%2C%20Holy%20Roman%20Emperor%2C%20by%20Albrecht%20D%C3%BCrer.jpg	145,7
 C10a%20Andrea%20Orcagna%20and%20Jacopo%20di%20Cione%20St.%20Matthew%20and%20Four%20Stories%20from%20His%20Life.%20Detail%28291x265cm%29%201367-68%20Uffizi%2C%20Florence%20-%20%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F.jpg	25,83,1000,816
 CCotton%20Merchants%20in%20New%20Orleans%20by%20Edgar%20Degas%201873.jpeg	
 C%C3%89mile%20Bernard%20-%20Autoportrait%20au%20tableau%20%C2%AB%20Baigneuses%20%C3%A0%20la%20vache%20rouge%20%C2%BB.jpg	
-CChicago%20art%20inst%20singer%20sargent%20bunker.JPG	
+CChicago%20art%20inst%20singer%20sargent%20bunker.JPG	0,19,1000,1000
 CSignorelli%20-%20Adoration%20of%20The%20Magi%20-%20Uffizi.jpg	150,150,850,850
 CGeorge%20Washington%20Vanderbilt%2C%20oil%20on%20canvas%20portrait%20by%20John%20Singer%20Sargent%2C%20The%20Biltmore%20House%2C%20Asheville%2C%20North%20Carolina%20circa%201890.jpg	
 CEdgar%20Germain%20Hilaire%20Degas%20075.jpg	65,0,1000,1000
@@ -22857,7 +22916,7 @@ CPaul%20Gauguin%20005.jpg
 C%27Landscape%20with%20Mimosas%27%20%281912%29%20by%20Pierre-Auguste%20Renoir%20-%20Museo%20Soumaya%20-%20Mexico%202024.jpg	34,26,1000,1000
 CGauguin%201899%20Th%C3%A9i%C3%A8re%2C%20cruche%20et%20fruits.jpg	30,47,970,1000
 CAlex%D0%B5%D1%83%20Fyodorovich%20Orlov.jpg	
-CSargent%20-%20The%20Portal%20of%20S.%20Giorgio%20Maggiore%2C%20Venice%2C%20c.%201903%2C%202018.55.jpg	
+CSargent%20-%20The%20Portal%20of%20S.%20Giorgio%20Maggiore%2C%20Venice%2C%20c.%201903%2C%202018.55.jpg	44,0,1000,1000
 CA%20Spanish%20Infanta%20in%2017th%20Century%20Costume%20.PNG	20,13,980,987
 CThe%20Blinding%20of%20Elymas%20P1805.jpg	20,38,980,974
 CFrancisco%20de%20Goya%20-%20El%20Conde%20del%20Tajo%20%28ca.1800%29.jpg	
@@ -22870,13 +22929,14 @@ CJohn%20Singer%20Sargent%20-%20Dorothy%20-%201982.35%20-%20Dallas%20Museum%20of%
 CEdgar%20Degas%20-%20Wash%20Women%20-%201957.68%20-%20Dallas%20Museum%20of%20Art.jpg	20,0,980,912
 CMother%20and%20Child%20under%20a%20Tree%20at%20Pont-Aven.jpg	0,0,929,1000
 CPope%20Alexander%20Vi.jpg	
-CMadame%20Gautreau%20by%20John%20Singer%20Sargent%20circa%201883.jpeg	
+CMadame%20Gautreau%20by%20John%20Singer%20Sargent%20circa%201883.jpeg	20,0,980,986
+CRenoir%20-%20Paysage%20%28Landscape%29%2C%20c.%201902.jpg	
 CBemberg%20Fondation%20Toulouse%20-%20Portrait%20d%27Alphonse%20dEste%20-%20Titien%20Inv.1053.jpg	
 CAngelo%20Bronzino%20-%20Piet%C3%A0%20-%20WGA3284.jpg	0,0,1000,949
-CMan%20with%20Red%20Drapery%20MET%20DT11905.jpg	
-CIn%20the%20Generalife%20MET%20DT4540.jpg	
-CSchreckhorn%2C%20Eismeer%20%28from%20%22Splendid%20Mountain%20Watercolours%22%20Sketchbook%29%20MET%20DP257548.jpg	
-CVenetian%20Canal%20MET%20DT4606.jpg	
+CMan%20with%20Red%20Drapery%20MET%20DT11905.jpg	28,29,972,1000
+CIn%20the%20Generalife%20MET%20DT4540.jpg	20,24,980,1000
+CSchreckhorn%2C%20Eismeer%20%28from%20%22Splendid%20Mountain%20Watercolours%22%20Sketchbook%29%20MET%20DP257548.jpg	0,42,947,951
+CVenetian%20Canal%20MET%20DT4606.jpg	20,27,980,1000
 CDon%20Juan%20y%20el%20Comendador%20por%20Francisco%20Goya.jpg	
 C%27Cow%20at%20Watering%20Place%27%20by%20Aelbert%20Cuyp%2C%20Pushkin%20Museum.JPG	
 CAelbert%20Cuyp%20-%20Cattle%20by%20a%20River%20COL%20GAG%203715-001.jpg	
@@ -22891,6 +22951,7 @@ CPareja-bautismo.JPG	23,30,977,970
 CInfanta%20Isabel%20of%20Spain%2C%20Countess%20Gurowski%2C%20in%201860.jpg	
 CDegas%20-%20Double%20Portrait%20-%20The%20Cousins%20of%20the%20Painter%2C%20c.%201868-70.jpg	
 CEdgar%20Germain%20Hilaire%20Degas%20039.jpg	
+CWomen%20Tying%20her%20Shoes%20Pierre-Auguste%20Renoir.jpg	
 CPaul%20Gauguin%20-%20Te%20rereioa%20%281897%29.jpg	
 CMaximilien%20luce%2C%20f%C3%A9lix%20f%C3%A9n%C3%A9on%2C%201901.JPG	105,111,895,911
 CGillis%20Mostaert%20I%20-%20Spring.jpg	
@@ -22900,6 +22961,7 @@ CGillis%20Mostaert%20I%20-%20Winter.jpg
 CGillis%20Mostaert%20-%20Landscape%20with%20the%20Flight%20into%20Egypt%20-%20WGA16292.jpg	
 CStudio%20of%20Sir%20Anthony%20van%20Dyck%20-%20Portrait%20of%20Jan%20van%20Malderen.jpg	
 CBayeu%2C%20Ram%C3%B3n%20-%20Fernando%20VII%2C%20ni%C3%B1o.jpg	
+CAnthony%20van%20Dyck%20-%20Self-Portrait%20-%20WGA07406.jpg	
 CChrist%20and%20the%20penitent%20sinners%20-%20Pieter%20Paul%20Rubens.jpg	
 CVan%20Dyck%20-%20%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82%20%D0%90%D0%B4%D1%80%D0%B8%D0%B0%D0%BD%D0%B0%20%D0%A1%D1%82%D0%B5%D0%B2%D0%B5%D0%BD%D1%81%D0%B0.%201629.jpg	
 CAbraham%20van%20Diepenbeeck%20-%20Last%20Judgement%2C%20ca.%201645.jpg	115,0,855,1000
@@ -22910,6 +22972,7 @@ CPredella%20pala%20barbadori%2C%20uffizi%2C%2003.jpg
 CSaint%20Gr%C3%A9goire%20pape%2C%20entour%C3%A9%20de%20saints%20et%20de%20saintes%20-%20Rubens%20-%20Mus%C3%A9e%20de%20Grenoble.jpg	
 CMarie%20de%20Medici%27s%20marriage.jpg	0,0,1000,970
 CDegas%20-%20Portrait%20de%20Madame%20Jeantaud%2C%20Vers%201877.jpg	30,61,970,956
+CAnthony%20van%20Dyck%20-%20Portrait%20of%20Jean%20de%20Montfort%2C%20Uffizi.jpg	
 CAuguste%20Renoir%20-%20Deux%20baigneuses%20-%20Mus%C3%A9e%20Zambaccian.jpg	
 CC%C3%A9zanne%20-%20FWN%20962.jpg	
 CAnthony%20van%20Dyck%20-%20Portrait%20of%20the%20mother%20of%20the%20artist%20Justus%20Sustermans%20c1640-50%20-%20%28MeisterDrucke-559011%29.jpg	
@@ -22930,13 +22993,12 @@ CJohn%20Singer%20Sargent%20-%20A%20Tent%20in%20the%20Rockies.jpg
 CJohn%20Singer%20Sargent%20-%20Santa%20Maria%20dei%20Gesuati%2C%20Venice%20-%20P11s35%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	
 CJohn%20Singer%20Sargent%20-%20Santa%20Maria%20della%20Salute%2C%20Venice%20-%20P3w31%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	
 CJohn%20Singer%20Sargent%20-%20Ponte%20della%20Canonica%20-%20P3w3%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	
-CJohn%20Singer%20Sargent%20-%20San%20Giuseppe%20di%20Castello%2C%20Venice%20-%20P3s22%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	
-CSargent%20-%20The%20Terrace%20at%20La%20Granja%2C%201903-1904%20%28or%201912%29%2C%20P3s21.jpg	
+CJohn%20Singer%20Sargent%20-%20San%20Giuseppe%20di%20Castello%2C%20Venice%20-%20P3s22%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	0,0,977,970
+CSargent%20-%20The%20Terrace%20at%20La%20Granja%2C%201903-1904%20%28or%201912%29%2C%20P3s21.jpg	0,0,1000,970
 CJohn%20Singer%20Sargent%20-%20Incensing%20the%20Veil%20-%20P3w33%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	
 CJohn%20Singer%20Sargent%20-%20Mrs.%20Gardner%20at%20Fenway%20Court%20-%20P1s4%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	
 CAlbrecht%20D%C3%BCrer%20-%20A%20Man%20in%20a%20Fur%20Coat%20-%20P21n10%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	
 CMrs.%20Gardner%20in%20White%20%281922%29%20by%20John%20Singer%20Sargent.jpg	
-CJohn%20Singer%20Sargent%20-%20Bus%20Horses%20in%20Jerusalem%20-%20P3w32%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	
 CJohn%20Singer%20Sargent%20-%20A%20Spanish%20Madonna%20-%20P27w2%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	
 CJohn%20Singer%20Sargent%20-%20Miss%20Violet%20Sargent%20-%20P3w35%20-%20Isabella%20Stewart%20Gardner%20Museum.jpg	
 CDegas%20-%20The%20Laundress%20Ironing%20%28La%20Blanchisseuse%20Repassant%29%2C%20c.%201882%20-%201886.jpg	
@@ -22944,9 +23006,10 @@ CJohn%20Singer%20Sargent%20-%20Capri%20Girl%20on%20a%20Rooftop%20-%202011.32%20-
 CGustav%20Klimt%20013.jpg	
 CFrancisco%20de%20Goya%20-%20Bildnis%20Don%20Juan%20Bautista%20de%20Goicoechea%20y%20Urrutia%20-%202515%20-%20Staatliche%20Kunsthalle%20Karlsruhe.jpg	
 CEl%20Greco%20-%20Tears%20of%20Saint%20Peter%2C%20Contini-Bonacossi.jpg	
+CRenoir%20A%20Box%20at%20the%20Theater%20%28At%20the%20Concert%29.jpg	
 CSargent%20-%20Blonde%20Model%2C%20c.%201877%2C%201955.574.jpg	
-CSargent%20-%20Resting%2C%20c.%201875%2C%201955.579.jpg	
-CSargent%20-%20Staircase%2C%20c.%201878%2C%201955.582.jpg	
+CSargent%20-%20Resting%2C%20c.%201875%2C%201955.579.jpg	20,25,980,1000
+CSargent%20-%20Staircase%2C%20c.%201878%2C%201955.582.jpg	0,0,931,985
 CEdgar%20Degas%20-%20Petites%20paysannes%20se%20lavant%20%C3%A0%20la%20mer%20vers%20le%20soir.jpg	
 CAnnibale%20carracci%2C%20ritratto%20d%27uomo%20con%20scimmia%2C%201588-90%2C%2002.jpg	0,70,1000,1000
 CGustave%20Caillebotte%20-%20Portrait%20de%20Jean%20Daurelle%20en%20pied.jpg	
@@ -22966,23 +23029,23 @@ CJulius%20Porcellis%20-%20Calm%20Sea%20with%20Two%20Sailing%20Vessels%20%28%D0%9
 CKarel%20van%20Mander%20%28I%29%20-%20The%20Massacre%20of%20the%20Innocents.jpg	
 CJohn%20Singer%20Sargent%20-%20Two%20Boys%20on%20a%20Beach%20with%20Boats%20-%20Inl%C3%A5n%20JSS%20300-01%20-%20Society%20of%20Swedish%20Literature%20in%20Finland.jpg	
 CJohn%20Singer%20Sargent%20-%20Shoeing%20the%20Ox.jpg	
-CJohn%20Singer%20Sargent%20-%20Wrecked%20Sugar%20Refinery%20-%20Inl%C3%A5n%20JSS%20401-01%20-%20Imperial%20War%20Museum%20London.jpg	
-CJohn%20Singer%20Sargent%20-%20A%20Crashed%20Aeroplane%20-%20Inl%C3%A5n%20JSS%20401-02%20-%20Imperial%20War%20Museum%20London.jpg	
-CJohn%20Singer%20Sargent%20-%20A%20Street%20in%20Arras%20-%20Inl%C3%A5n%20JSS%20401-03%20-%20Imperial%20War%20Museum%20London.jpg	
-CJohn%20Singer%20Sargent%20-%20Interior%20of%20a%20Hospital%20Tent%20-%20Inl%C3%A5n%20JSS%20401-04%20-%20Imperial%20War%20Museum%20London.jpg	
-C%27thou%20Shalt%20Not%20Steal%27%20Art.IWMART1609.jpg	
-CJohn%20Singer%20Sargent%20-%20Camouflaged%20Tanks%2C%20Berles-au-Bois%20-%20Inl%C3%A5n%20JSS%20401-06%20-%20Imperial%20War%20Museum%20London.jpg	
-CJohn%20Singer%20Sargent%20-%20Scots%20Greys%20-%20Inl%C3%A5n%20JSS%20401-07%20-%20Imperial%20War%20Museum%20London.jpg	
-CJohn%20Singer%20Sargent%20-%20The%20Sunken%20Road%2C%20Ransart%20-%20Inl%C3%A5n%20JSS%20401-08%20-%20Imperial%20War%20Museum%20London.jpg	
+CJohn%20Singer%20Sargent%20-%20Wrecked%20Sugar%20Refinery%20-%20Inl%C3%A5n%20JSS%20401-01%20-%20Imperial%20War%20Museum%20London.jpg	0,0,1000,969
+CJohn%20Singer%20Sargent%20-%20A%20Crashed%20Aeroplane%20-%20Inl%C3%A5n%20JSS%20401-02%20-%20Imperial%20War%20Museum%20London.jpg	23,0,977,969
+CJohn%20Singer%20Sargent%20-%20A%20Street%20in%20Arras%20-%20Inl%C3%A5n%20JSS%20401-03%20-%20Imperial%20War%20Museum%20London.jpg	20,0,1000,973
+CJohn%20Singer%20Sargent%20-%20Interior%20of%20a%20Hospital%20Tent%20-%20Inl%C3%A5n%20JSS%20401-04%20-%20Imperial%20War%20Museum%20London.jpg	20,27,980,973
+C%27thou%20Shalt%20Not%20Steal%27%20Art.IWMART1609.jpg	20,13,980,981
+CJohn%20Singer%20Sargent%20-%20Camouflaged%20Tanks%2C%20Berles-au-Bois%20-%20Inl%C3%A5n%20JSS%20401-06%20-%20Imperial%20War%20Museum%20London.jpg	23,31,977,1000
+CJohn%20Singer%20Sargent%20-%20Scots%20Greys%20-%20Inl%C3%A5n%20JSS%20401-07%20-%20Imperial%20War%20Museum%20London.jpg	0,31,977,969
+CJohn%20Singer%20Sargent%20-%20The%20Sunken%20Road%2C%20Ransart%20-%20Inl%C3%A5n%20JSS%20401-08%20-%20Imperial%20War%20Museum%20London.jpg	23,31,1000,969
 CJohn%20Singer%20Sargent%20-%20On%20his%20Holidays%2C%20Norway%20%281901%29.jpg	
 CJohn%20Singer%20Sargent%20-%20Wineglasses%20%28National%20Gallery%2C%20London%29.jpg	
-CJohn%20Singer%20Sargent%20-%20The%20Earl%20of%20Dalhousie%20-%20Inl%C3%A5n%20JSS%20406-01%20-%20private%20collection.jpg	
-CJohn%20Singer%20Sargent%20-%20Cathedral%20of%20Arras%2C%20August%201918%20-%20Inl%C3%A5n%20JSS%20407-02%20-%20private%20collection.jpg	
-CJohn%20Singer%20Sargent%20-%20Two%20Girls%20in%20White%20Dresses%20-%20Inl%C3%A5n%20JSS%20407-05%20-%20private%20collection.jpg	
-CJohn%20Singer%20Sargent%20-%20View%20of%20Venice%20%28on%20the%20canal%29%20-%20Inl%C3%A5n%20JSS%20416-02%20-%20Petit%20Palais.jpg	
+CJohn%20Singer%20Sargent%20-%20The%20Earl%20of%20Dalhousie%20-%20Inl%C3%A5n%20JSS%20406-01%20-%20private%20collection.jpg	20,0,1000,1000
+CJohn%20Singer%20Sargent%20-%20Cathedral%20of%20Arras%2C%20August%201918%20-%20Inl%C3%A5n%20JSS%20407-02%20-%20private%20collection.jpg	94,44,961,956
+CJohn%20Singer%20Sargent%20-%20Two%20Girls%20in%20White%20Dresses%20-%20Inl%C3%A5n%20JSS%20407-05%20-%20private%20collection.jpg	51,0,945,944
+CJohn%20Singer%20Sargent%20-%20View%20of%20Venice%20%28on%20the%20canal%29%20-%20Inl%C3%A5n%20JSS%20416-02%20-%20Petit%20Palais.jpg	24,28,976,1000
 CJohn%20Singer%20Sargent%20-%20Gypsy%20Encampment%20%28c.%201912-1913%29.jpg	
 CJohn%20Singer%20Sargent%20-%20Annie%20Adams%20Fields%20-%20Inl%C3%A5n%20JSS%20501-01%20-%20Boston%20Athen%C3%A6um.jpg	
-CJohn%20Singer%20Sargent%20-%20Salmon%20River%20-%2009.837%20-%20Brooklyn%20Museum.jpg	
+CJohn%20Singer%20Sargent%20-%20Salmon%20River%20-%2009.837%20-%20Brooklyn%20Museum.jpg	24,0,976,972
 CJohn%20Singer%20Sargent%20-%20Atlantic%20Storm%20-%20Inl%C3%A5n%20JSS%20506-02%20-%20Nationalmuseum.jpg	
 CAlbum%20of%20Figure%20Studies%20John%20Singer%20Sargent.jpg	
 CJohn%20Singer%20Sargent%20-%20Reclining%20Male%20Nude%2C%20Draped.jpg	
@@ -22991,16 +23054,16 @@ CJohn%20Singer%20Sargent%20-%20Recumbent%20Male%20Nude%20Leaning%20on%20His%20Ri
 CJohn%20Singer%20Sargent%20-%20Male%20Reclining%20on%20a%20Stairway%20-%20Inl%C3%A5n%20JSS%20512-06%20-%20Nationalmuseum.jpg	
 CJohn%20Singer%20Sargent%20-%20Reclining%20Male%20Nude%20Seen%20from%20Behind%20-%20Inl%C3%A5n%20JSS%20512-07%20-%20Nationalmuseum.jpg	
 CJohn%20Singer%20Sargent%20-%20Standing%20Male%20Nude%20-%20Inl%C3%A5n%20JSS%20512-08%20-%20Nationalmuseum.jpg	
-CJohn%20Singer%20Sargent%20-%20Male%20Nude%20Reclining%20with%20Drapery%20-%20Inl%C3%A5n%20JSS%20512-09%20-%20Nationalmuseum.jpg	
+CJohn%20Singer%20Sargent%20-%20Male%20Nude%20Reclining%20with%20Drapery%20-%20Inl%C3%A5n%20JSS%20512-09%20-%20Nationalmuseum.jpg	20,36,955,925
 CJohn%20Singer%20Sargent%20-%20Male%20Nude%20Leaning%20Back%20on%20a%20Ladder.jpg	
 CJohn%20Singer%20Sargent%20-%20Reclining%20Male%20Nude%20%28Nicola%20D%27Inverno%29%20-%20Inl%C3%A5n%20JSS%20512-11%20-%20Nationalmuseum.jpg	
-CJohn%20Singer%20Sargent%20-%20Carrara%2C%20Wet%20Quarries%20-%20Inl%C3%A5n%20JSS%20514-02%20-%20Nationalmuseum.jpg	
+CJohn%20Singer%20Sargent%20-%20Carrara%2C%20Wet%20Quarries%20-%20Inl%C3%A5n%20JSS%20514-02%20-%20Nationalmuseum.jpg	0,0,980,1000
 CJohn%20Singer%20Sargent%20-%20Venice%2C%20I%20Gesuati%20-%20Inl%C3%A5n%20JSS%20514-04%20-%20Nationalmuseum.jpg	
-CJohn%20Singer%20Sargent%20-%20Alexander%20McCulloch%20-%20Inl%C3%A5n%20JSS%20518-01%20-%20Nationalmuseum.jpg	
+CJohn%20Singer%20Sargent%20-%20Alexander%20McCulloch%20-%20Inl%C3%A5n%20JSS%20518-01%20-%20Nationalmuseum.jpg	20,0,980,973
 CJohn%20Singer%20Sargent%20-%20A%20Parisian%20Beggar%20Girl.jpg	
-CJohn%20Singer%20Sargent%20-%20Women%20Approaching%20-%20Inl%C3%A5n%20JSS%20522-07%20-%20Nationalmuseum.jpg	
-CJohn%20Singer%20Sargent%20-%20Camp%20at%20Lake%20O%27Hara%20-%20Inl%C3%A5n%20JSS%20522-08%20-%20Nationalmuseum.jpg	
-CJohn%20Singer%20Sargent%20-%20Violet%20Sargent%20-%20Inl%C3%A5n%20JSS%20528-02%20-%20Nationalmuseum.jpg	
+CJohn%20Singer%20Sargent%20-%20Women%20Approaching%20-%20Inl%C3%A5n%20JSS%20522-07%20-%20Nationalmuseum.jpg	24,28,976,1000
+CJohn%20Singer%20Sargent%20-%20Camp%20at%20Lake%20O%27Hara%20-%20Inl%C3%A5n%20JSS%20522-08%20-%20Nationalmuseum.jpg	0,27,980,973
+CJohn%20Singer%20Sargent%20-%20Violet%20Sargent%20-%20Inl%C3%A5n%20JSS%20528-02%20-%20Nationalmuseum.jpg	25,22,970,974
 CJohn%20Singer%20Sargent%20-%20Corner%20of%20the%20Church%20of%20San%20Stae%2C%20Venice%20-%20Inl%C3%A5n%20JSS%20529-03%20-%20Nationalmuseum.jpg	
 CSargent%20-%20Girl%20Fishing%2C%201913%2C%20lot-5810236.jpg	
 CSheep%20on%20a%20Pasture%20-%20Rosa%20Bonheur%20-%20HM%20%D0%93%D0%AD-3811.jpg	
@@ -23034,13 +23097,13 @@ CPortrait%20of%20Pope%20Paul%20III%20with%20Camauro%20%28by%20Titian%29%20-%20Na
 CFran%C3%A7ois-Joseph%20Dupressoir%20after%20Dujardin%20-%20Le%20Paturage%2C%20Hermitage.jpg	0,0,936,946
 CJuego%20de%20ni%C3%B1os%2C%20el%20paso.jpg	
 CBeaux-Arts%20de%20Carcassonne%20-%20La%20Porte%20de%20Tolede%20%281869%29%20-%20Achille%20Zo.jpg	
-CJohn%20Singer%20Sargent%20-%20A%20Venetian%20Woman%20in%20a%20Scarlet%20Shawl%20%28%22Gigia%20Viani%22%29%20-%201943.149%20-%20Fogg%20Museum.jpg	
-CJohn%20Singer%20Sargent%20-%20Man%20with%20a%20White%20Turban%20-%201937.202%20-%20Harvard%20Art%20Museums.jpg	
-CJohn%20Singer%20Sargent%20-%20In%20the%20Simplon%20Valley%20-%201943.155%20-%20Fogg%20Museum.jpg	
-CJohn%20Singer%20Sargent%20-%20Overlay%20Drawing%20for%20%22Frieze%20of%20the%20Angels%2C%22%20Boston%20Public%20Library%20-%201933.45.B.1%20-%20Fogg%20Museum.jpg	
-CJohn%20Singer%20Sargent%20-%20Courtyard%20of%20the%20Scuola%20Grande%20di%20San%20Giovanni%20Evangelista%2C%20Venice%2C%20Italy.%20-%201942.187%20-%20Fogg%20Museum.jpg	
-CJohn%20Singer%20Sargent%20-%20Study%20for%20%22Acis%20and%20Galatea%2C%22%20Museum%20of%20Fine%20Arts%2C%20Boston%20-%201939.91%20-%20Harvard%20Art%20Museums.jpg	
-CJohn%20Singer%20Sargent%20-%20Study%20for%20%22Frieze%20of%20the%20Angels%2C%22%20Boston%20Public%20Library%20-%201933.45.B%20-%20Fogg%20Museum.jpg	
+CJohn%20Singer%20Sargent%20-%20A%20Venetian%20Woman%20in%20a%20Scarlet%20Shawl%20%28%22Gigia%20Viani%22%29%20-%201943.149%20-%20Fogg%20Museum.jpg	0,16,1000,984
+CJohn%20Singer%20Sargent%20-%20Man%20with%20a%20White%20Turban%20-%201937.202%20-%20Harvard%20Art%20Museums.jpg	0,0,882,1000
+CJohn%20Singer%20Sargent%20-%20In%20the%20Simplon%20Valley%20-%201943.155%20-%20Fogg%20Museum.jpg	0,0,1000,976
+CJohn%20Singer%20Sargent%20-%20Overlay%20Drawing%20for%20%22Frieze%20of%20the%20Angels%2C%22%20Boston%20Public%20Library%20-%201933.45.B.1%20-%20Fogg%20Museum.jpg	71,164,945,860
+CJohn%20Singer%20Sargent%20-%20Courtyard%20of%20the%20Scuola%20Grande%20di%20San%20Giovanni%20Evangelista%2C%20Venice%2C%20Italy.%20-%201942.187%20-%20Fogg%20Museum.jpg	150,150,850,850
+CJohn%20Singer%20Sargent%20-%20Study%20for%20%22Acis%20and%20Galatea%2C%22%20Museum%20of%20Fine%20Arts%2C%20Boston%20-%201939.91%20-%20Harvard%20Art%20Museums.jpg	20,0,980,983
+CJohn%20Singer%20Sargent%20-%20Study%20for%20%22Frieze%20of%20the%20Angels%2C%22%20Boston%20Public%20Library%20-%201933.45.B%20-%20Fogg%20Museum.jpg	150,150,850,850
 CMeiren-jacob-prado.jpg	
 CGijsbrecht%20Leytens%20-%20Winter%20Landscape%20with%20Woodcutters.jpg	
 CAcheson%20Sisters%20%28Ladies%20Alexandra%2C%20Mary%20and%20Theo%20Acheson%29.jpg	
@@ -23075,7 +23138,7 @@ CHand%20fan%20with%20mother-of-pearl%20insects%20by%20Gebr%C3%BCder%20Rodeck%2C%
 CFolding%20Fan%20Depicting%20the%20Chariot%20of%20Aurora.jpg	0,0,1000,873
 CFan%20with%20V.V.%20Karakhan%20dress.jpg	
 CJewel%20exhibition%2C%20Hermitage%20Amsterdam%20pic26.JPG	
-CSargent%20-%20The%20Loggia%2C%20ABDAG003837.jpg	
+CSargent%20-%20The%20Loggia%2C%20ABDAG003837.jpg	150,150,850,850
 CJustus%20Sustermans%20-%20Madonna%20Domenica%20delle%20Cascine%2C%20la%20Cecca%20di%20Pratolino%20e%20Pietro%20moro.jpg	
 C%C2%A1Todo%20a%20babor%21%2C%20por%20Ventura%20%C3%81lvarez.jpg	0,0,958,1000
 CAutoritratto%2C%20Giuseppe%20Amisani.jpg	
@@ -23140,7 +23203,7 @@ CDa%20caravaggio%2C%20incredulit%C3%A0%20di%20san%20tommaso%20%28Uffizi%29.jpg
 CRubens%20-%20RKDimages%2C%20240938.jpg	
 CRubens%20-%20draft%20vignette%20for%20Opticorum%20libri%20sex%20by%20Franciscus%20Aguilon%2C%20c.%201613.jpg	
 CAlbrecht%20D%C3%BCrer%20050.jpg	
-CViana%20do%20Castelo%20%28c.%201903%29%20-%20John%20Singer%20Sargent.png	
+CViana%20do%20Castelo%20%28c.%201903%29%20-%20John%20Singer%20Sargent.png	0,30,957,970
 CFrans%20van%20Mieris%20-%20A%20Young%20Woman%20Writing%20a%20Letter%20-%20FM-124%20-%20Leiden%20Collection.jpg	0,0,1000,936
 CEgbert%20van%20der%20Poel%20-%20The%20Fair%20-%20WGA17999.jpg	
 CCatherine%20of%20Alexandria%20Philotheos%20Skoufos.png	
@@ -23209,7 +23272,7 @@ CAlbrecht%20D%C3%BCrer%20-%20Wunderbare%20Errettung%20eines%20ertrunkenen%20Knab
 CMme%20Edmond%20Rostand%2C%20n%C3%A9e%20Rosemonde%20G%C3%A9rard.jpg	
 CRENOIR%20Auguste%20Marine%20Huile%20sur%20toile.jpg	
 CD%C3%BCrer%20-%20Christus%20am%20Kreuz.jpg	0,121,1000,879
-CJohn%20Singer%20Sargent%2C%20Synagogue%2C%201919.jpg	
+CJohn%20Singer%20Sargent%2C%20Synagogue%2C%201919.jpg	0,0,1000,960
 CRitratto-di-Basilio-Bessarione.jpg	
 COld%20Bivouacs%20-%20Sargent%2C%201918.jpg	
 CJoaqu%C3%ADn%20Sorolla%20-%20Retrato%20de%20Juan%20Bartolom%C3%A9%20Coss%C3%ADo%20-%20P008428%20-%20Museo%20del%20Prado.jpg	
@@ -23250,6 +23313,7 @@ CTitian%20and%20his%20workshop%20-%20Last%20Supper%20-%201560-1580.jpg	46,0,1000
 CJohn%20S.%20Sargent%20-%20At%20Chioggia%20%28c.%201903%29%20-%20Mint%20Museum.jpg	
 CJoseph-Marie%20Vien%20-%20Minerva%201754.jpg	
 CLappoli%20-%20autoritratto%20di%20Giovanni%20Antonio%20Lappoli%2C%2000293453.jpg	70,14,980,979
+CWoman%20Arranging%20Her%20Hat%20by%20Pierre%20Auguste%20Renoir%2C%20High%20Museum%20of%20Art.jpg	
 CEna%20and%20Betty%20Daughters%20of%20Wertheimer.jpg	
 CSodoma%20003.jpg	
 CAlbrecht%20Durer%20%28maniera%29%20-%20Autoritratto%20di%20Albrecht%20Durer%20-%201889%20-%20Vasari%20Corridor.jpg	25,24,948,976
@@ -23280,7 +23344,7 @@ CSargent%20-%20Mrs%20Graham%20Robertson%2C%201880%2C%20COMWG%20568%2C%20Watts%20
 CSargent%20-%20Hercules%20Brabazon%20Brabazon%20%281821%E2%80%931906%29%2C%201900%2C%20NMW%20A%20179%2C%20National%20Museum%20Wales%2C%20National%20Museum%20Cardiff.jpg	
 CSargent%20-%20Henry%20Richardson%2C%201902%2C%20TWCMS%20C607%2C%20Laing%20Art%20Gallery.jpg	
 CPortrait%20of%20Lorenzo%20de%27%20Medici%20il%20Vecchio.jpg	20,0,980,1000
-CSargent%20-%20At%20Torre%20Galli%20Ladies%20in%20a%20Garden%2C%201910%2C%20031388%2C%20Royal%20Academy%20of%20Arts.jpg	
+CSargent%20-%20At%20Torre%20Galli%20Ladies%20in%20a%20Garden%2C%201910%2C%20031388%2C%20Royal%20Academy%20of%20Arts.jpg	150,150,850,850
 CSargent%20-%20Randall%20Thomas%20Davidson%20%281848%E2%80%931930%29%2C%20Archbishop%20of%20Canterbury%2C%201910%2C%2010%2C%20Lambeth%20Palace.jpg	
 CSandro%20Botticelli%20%281444-1445-1510%29%20%28copy%20after%29%20-%20Feast%20in%20the%20House%20of%20Simon%20%28predella%2C%20panel%20two%29%20-%20P.1947.Lf.41.2%20-%20Courtauld%20Gallery.jpg	150,150,850,850
 CMarten%20van%20Cleve%20-%20Carnival%20in%20a%20Village%20with%20Beggars%20Dancing.jpg	0,0,976,1000
@@ -23394,7 +23458,7 @@ CPeeter%20van%20den%20Bemden%20%28Attributed%20to%29%20-%20Still%20life%20of%20d
 C%C3%89mile%20Bernard%20-%20Baigneuses%20aux%20n%C3%A9nuphars.jpg	
 CFrancesco%20granacci%2C%20entrata%20di%20Carlo%20VIII%20a%20Firenze.jpg	33,0,1000,1000
 CHelleu%20Paul%20Cesar%20-%20Portrait%20Of%20A%20Woman.jpg	
-C2017-02%20John%20Singer%20Sargent%20-%20The%20Crucifixion.jpg	
+C2017-02%20John%20Singer%20Sargent%20-%20The%20Crucifixion.jpg	58,129,1000,857
 C2017-02%20John%20Singer%20Sargent%20RA%20-%20Charles%20Russell%2C%20Baron%20Russell%20of%20Killowen.jpg	
 C3-dubourgVictoria-table-grenoble.jpg	0,24,970,1000
 CDossoDossiHarpie.jpg	23,0,977,938
@@ -23463,7 +23527,7 @@ CAlphonse%20de%20neuville%2C%20entrata%20dei%20negoziatori%20tedeschi%20a%20belf
 CAndrea%20Celesti%20-%20Feast%20of%20Belshazzar%20-%20WGA04620.jpg	
 CAlessandro%20allori%2C%20venere%20e%20cupido%2C%20versione%20piccola%20da%20un%20cartone%20di%20michelangelo%2C%201570%20ca.%2001.jpg	135,114,865,831
 CDavid%20with%20the%20Head%20of%20Goliath%20%28by%20Guido%20Reni%29%20-%20Uffizi%20Gallery%2C%20Florence.jpg	
-CView%20from%20Mount%20Pilatus%20MET%20APS2594.jpg	
+CView%20from%20Mount%20Pilatus%20MET%20APS2594.jpg	30,43,965,945
 CAn%C3%B3nimo%20-%20Carlos%20V%20con%20armadura%20-%20P006082%20-%20Museo%20del%20Prado.jpg	
 CAngelo%20Bronzino%20-%20Alessandro%20de%27%20Medici%20-%20WGA3243.jpg	
 CAnna%20Leopoldovna%20-%20workshop%20of%20Caravaque%20%2819%20c%2C%20Hermitage%29.JPG	
@@ -23569,6 +23633,7 @@ CEmma%20gaggiotti%20richards%2C%20autoritratto%2C%201850%20ca.jpg
 C%D0%A2%D0%B8%D1%86%D0%B8%D0%B0%D0%BD%20%D0%92%D0%B5%D1%87%D0%B5%D0%BB%D0%BB%D0%B8%D0%BE%20-%20%D0%A1%D0%B5%20%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA%20-%20%D0%96-187%20-%20Pushkin%20Museum%20of%20Fine%20Arts.jpg	20,0,1000,1000
 CJan%20van%20den%20Hecke%20-%20Bust%20of%20the%20Virgin%20Framed%20with%20a%20Garland%20of%20Fruit.jpg	150,150,850,850
 CPeter%20Paul%20Rubens%20-%20Saint%20Margaret.jpg	
+CRenoir%20-%20Jeune%20fille%20au%20chapeau%2C%201900-05.jpg	
 CLamen-banquete-granada.JPG	
 C1894%20Renoir%20The%20Bathers%20Tel%20Aviv%20Museum%20of%20Art%20anagoria.jpg	
 CThe%20green%20Christ%2C%201890%2C%20Maurice%20Denis%20%282%29.jpg	52,33,963,974
@@ -23590,7 +23655,7 @@ CBotticelli-portrait-young-man-red-cap.jpeg
 CBon%20Boullogne%20-%20Jephtha%27s%20Daughter%20-%20WGA02936.jpg	
 CBrooklyn%20Museum%20-%20Arab%20Gypsies%20in%20a%20Tent%20-%20John%20Singer%20Sargent.jpg	
 CBrooklyn%20Museum%20-%20Hills%20of%20Galilee%20-%20John%20Singer%20Sargent.jpg	
-CBrooklyn%20Museum%20-%20A%20Summer%20Idyll%20-%20John%20Singer%20Sargent%20-%20overall.jpg	
+CBrooklyn%20Museum%20-%20A%20Summer%20Idyll%20-%20John%20Singer%20Sargent%20-%20overall.jpg	0,25,1000,975
 CBrooklyn%20Museum%20-%20From%20the%20Gondola%20-%20John%20Singer%20Sargent.jpg	
 CBrooklyn%20Museum%20-%20Tangier%20-%20John%20Singer%20Sargent.jpg	
 CLa%20Communiante%2C%20par%20Jules%20Bastien-Lepage%20au%20mus%C3%A9e%20d%27Orsay.jpg	
@@ -23599,8 +23664,8 @@ CFrancesco%20Furini%20-%20Self-portrait%20holding%20a%20palette.jpeg	27,0,1000,1
 CHet%20gebed%2C%20objectnr%20A%2011838.tif	60,56,940,862
 CDe%20lafenis%2C%20objectnr%20A%2011847.tif	67,41,933,896
 CBruno%20Liljefors%20-%20Curlews%201913.jpg	23,0,1000,964
-CBrooklyn%20Museum%20-%20In%20a%20Hayloft%20-%20John%20Singer%20Sargent.jpg	
-CBrooklyn%20Museum%20-%20Black%20Tent%20-%20John%20Singer%20Sargent.jpg	
+CBrooklyn%20Museum%20-%20In%20a%20Hayloft%20-%20John%20Singer%20Sargent.jpg	20,15,980,981
+CBrooklyn%20Museum%20-%20Black%20Tent%20-%20John%20Singer%20Sargent.jpg	150,150,850,850
 CManet%20-%20T%C3%AAte%20de%20jeune%20homme%2C%20d%27apr%C3%A8s%20l%27Autoportrait%20de%20Fra%20Filippo%20Lippi%2C%2085514.jpg	
 CMonsieur%20Ruelle.jpg	20,0,963,984
 CDenys%20calvaert%2C%20morte%20di%20cleopatra%2C%201580-90%20ca.%2C%2001.jpg	150,150,850,850
@@ -23634,10 +23699,10 @@ CJan%20Van%20Eyck%20school%20-%20Triptych%20of%20the%20Adoration%20of%20the%20Ma
 CJean%20Nocret%2C%20Portrait%20du%20Grand%20Dauphin%2C%20vers%201668%2C%20Madrid%2C%20museo%20del%20Prado%2C%20inv.%20P006147.jpg	
 CFrank%20O%27Meara%20-%20John%20Singer%20Sargent.jpg	
 CJohn%20Singer%20Sargent%27s%20Ram%C3%B3n%20Subercaseaux.jpg	
-CVue%20de%20Venise%20ou%20Caf%C3%A9%20sur%20la%20Riva%20degli%20Schiavoni%2C%20Venise.jpg	
+CVue%20de%20Venise%20ou%20Caf%C3%A9%20sur%20la%20Riva%20degli%20Schiavoni%2C%20Venise.jpg	52,100,946,900
 CYoung%20Woman%20with%20a%20Black%20Skirt%20MET%20DT243229.jpg	
 CIvan%20Nikolaevich%20Selifontov%20%28by%20V.%20Hau%29.jpg	
-CSargent%20-%20Mrs%20Reubell%20Seated%20in%20Front%20of%20a%20Screen%2C%20lot.96.jpg	
+CSargent%20-%20Mrs%20Reubell%20Seated%20in%20Front%20of%20a%20Screen%2C%20lot.96.jpg	150,0,850,1000
 CGuerchin%2040.jpg	
 CGuerchin%20stPierre2-uffizi.jpg	
 CLe%20Go%C3%BBter%20sur%20l%27herbe%20-%20Henri%20Lebasque%20-%20D%C3%A9tails.jpg	
@@ -23667,28 +23732,32 @@ CJean-Laurent%20Mosnier%2C%20Self-Portrait%20with%20His%20Daughters%2C%201786%2C
 CJean-Laurent%20Mosnier%2C%20Portrait%20of%20a%20Boy%2C%201789%2C%20Hermitage%20Museum%20%D0%93%D0%AD-3700.jpeg	
 CCarriera%2C%20Rosalba%20-%20Spring%20-%20c.%201725.jpg	0,0,1000,972
 CPierre-%C3%89tienne%20Falconet%2C%20Grand%20Duke%20Pavel%20Petrovich%20of%20Russia%2C%20c.%201773%2C%20Hermitage%20Museum%20%D0%93%D0%AD-4446%3B%20from%20hermitagemuseum.org.jpeg	
-CCorner%20of%20the%20Church%20of%20San%20Stae%2C%20Venice.JPG	
+CCorner%20of%20the%20Church%20of%20San%20Stae%2C%20Venice.JPG	20,31,980,1000
 CAmiens%20%28Somme%29%20-%20Mus%C3%A9e%20de%20Picardie%20-%20%22Le%20Dante%20rencontre%20Matilda%22%20%28Albert%20Maignan%2C%201845-1908%29.jpg	
 CCosroe%20Dusi%2C%20Ksenia%20Cavos%2C%201849%2C%20Hermitage%20Museum%20%D0%AD%D0%A0%D0%96-1254.jpg	
 CCosroe%20Dusi%2C%20Alberto%20Cavos%2C%201849%2C%20Hermitage%20Museum%20%D0%AD%D0%A0%D0%96-912.jpg	
 CBernardo%20daddi%20e%20bottega%2C%20madonna%20del%20parto%2C%201330-35%20ca.jpg	95,0,980,1000
 CNiccol%C3%B2%20gerini%2C%20crocifissione%2C%201395-1400%2C%20da%20coll.%20serristori.jpg	147,0,840,967
 CJohn%20Singer%20Sargent%2C%20Album%20d%27%C3%A9tudes%20de%20marine%20et%20de%20croquis.jpg	
-CSargent%20IMG%208950.jpg	
-CSargent%20IMG%208949.jpg	
-CSargent%20IMG%208980.jpg	
-CLettre%20de%20John%20Singer%20Sargent%20%C3%A0%20Claude%20Monet.jpg	
+CSargent%20IMG%208950.jpg	115,97,865,970
+CSargent%20IMG%208949.jpg	140,0,860,947
+CSargent%20IMG%208980.jpg	133,68,933,955
+CLettre%20de%20John%20Singer%20Sargent%20%C3%A0%20Claude%20Monet.jpg	36,0,942,1000
+CLettre%20de%20John%20Singer%20Sargent%20%C3%A0%20Albert%20de%20Belleroche%20avec%20un%20dessin%20de%20Madame%20Gautreau%20qui%20regarde%20par-dessus%20un%20piano.jpg	150,150,850,850
 CNikolai%20Dmitriyevich%20Kuznetsov%2C%20Kalman%20Ze%27ev%20Wissotzky%2C%201896%2C%20Hermitage%20Museum%20%D0%AD%D0%A0%D0%96-2041%3B%20from%20hermitagemuseum.org.jpg	
+CLa%20loge%20or%20l%27avant-sc%C3%A9ne.jpg	
 CPierre-Auguste%20Renoir%20-%20Fleurs%20et%20chats.jpg	
 CEl%20mundo%20nuevo.jpg	23,35,977,895
 CRenoir%20-%20Fleurs%20dans%20un%20vase%2C%201878%2C%2023.5%20x%2017.8%20cm.jpg	
 CRenoir%20-%20Still%20Life%20with%20a%20faience%20Figure.jpg	43,26,931,1000
+CRenoir%20-%20BAIGNEUSE%20%28ASSISE%29%2C%20circa%201882.jpg	
 CEcce%20Homo%20%28copia%29%2C%20Tiziano.jpg	0,15,1000,985
 CJacob-Ferdinand%20Voet%20-%20Retrato%20de%20dama%20-%20Museo%20del%20Prado.jpg	
 CPortrait%20de%20Victor%20Segalen%2C%20par%20Daniel%20de%20Monfreid.jpg	
 CRenoir%20-%20vase-of-roses-and-dahlias-1884.jpg%21PinterestLarge.jpg	
 CIrrllichter%20Klimt.jpg	
 CGustav%20Klimt%20-%20Gerta%20Loew%20-%201902.jpeg	
+CPierre-Auguste%20Renoir%2C%20The%20Bridge%20at%20Argenteuil%2C%20ca.%201888.jpg	44,52,970,1000
 CPortrait%20of%20Claude%20of%20France%20%28Claude%20of%20Valois%29%2C%20duchess%20of%20Lorraine.jpg	
 C1549%20Anna.jpg	
 CFrans%20Il%20Giovane%20-%20ritratto%20di%20donna%20-%20Uffizi.png	
@@ -23700,6 +23769,7 @@ CCristoforo%20dell%27altissimo%2C%20ritratto%20di%20eleonora%20di%20toledo%20%28
 CRenoir%20-%20walls-in-spain.jpg%21PinterestLarge.jpg	
 CDeutscher%20Maler%20001.jpg	
 CLa%20Magicienne-Narcisse%20Diaz%20de%20la%20Pena-IMG%208347.JPG	
+CRenoir%20-%20two-women-in-a-garden-1895.jpg%21PinterestLarge.jpg	
 CDomenichino%20Virginio%20Cesarini.jpg	
 CAnonymous%20-%20Portrait%20of%20a%20Black-Bearded%20Man%20%28Muhammad%20Shah%3F%29%20-%20V%D0%A0-1099.jpg	
 CRafael%20Santi%20Svyatoe%20Semeistvo%201509.jpg	
