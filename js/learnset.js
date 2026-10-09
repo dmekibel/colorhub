@@ -288,6 +288,10 @@ function lsHexLabel(name, x, y, fill) {
   return `<text x="${x}" fill="${fill}" font-size="${fs.toFixed(3)}">${lines.map((l, i) => `<tspan x="${x}" y="${(y0 + i * lh).toFixed(3)}">${esc(l)}</tspan>`).join("")}</text>`;
 }
 const LS_ICON = { eye: icon("train", 22), map: icon("map", 18) };   // js/core.js ICON_PATHS
+// The one refined primary button for Study/Learn (David, 2026-10-09: the old pr-primary pill — beige, serif,
+// an arrow — read as "ugly" here; this is used for every Next, Check and Start in these formats, so they're all
+// the same button). Sans label, medium weight, opaque, comfortable height, centered — no arrow, no italic note.
+const lsBtn = (label, attr = "") => `<button class="ls-primary" ${attr}>${esc(label)}</button>`;
 
 // ======================================================================
 // Look: no hiding, many views
@@ -406,37 +410,61 @@ function lsPlan(items, o = {}, resume = null) {
   return P;
 }
 function lsLevels(items, resume, o = {}) { return lsPlan(items, o, resume).qs; }
-// A Meet card: the color big, its name, and how it differs from its nearest neighbor in the set. Learning, not a test.
-function lsMeetHTML(it, nb, o = {}) {
-  const dark = ink(it.h) === "dark" ? "#141311" : "#fff", nm = prName(it);
-  return `<div class="pr-step ls-meet${o.again ? " again" : ""}">
-    <div class="ls-meet-sw" style="--c:${it.h};color:${dark}">
-      <span class="ls-meet-tag">${o.again ? "Look again" : o.tag || "New"}</span>
-      <span class="ls-meet-name"><button class="ls-meet-n" data-swatch="${it.h}" style="${prFit(nm, 56)}">${esc(nm)}</button><span class="pr-code">${it.h}</span></span>
-    </div>
-    ${nb ? `<p class="ls-meet-line"><span class="pr-pair"><i style="--c:${it.h}"></i><i style="--c:${nb.h}"></i></span><span>${esc(prDiff(it, nb))}</span></p>` : `<p class="ls-meet-line"></p>`}
-    <div class="pr-foot">${prPrimary(o.label || "Next", "", "data-meetnext")}</div></div>`;
+// The overview's cards (a paged story, like a quiz step — David, 2026-10-09: "Next is always there and it's an
+// important part, so keep it"). A Meet card is the color, its name, and a real side-by-side against its nearest
+// neighbor — David, 2026-10-09: "this comparison is too small... visually this comparison is easier to learn" —
+// the same big split the "closest two" pair card already used, each half named and coded, never the small
+// 2-chip + sentence. A Quick look card (a color you've already met) is just the swatch and name.
+const lsMpHalf = (x, tag) => `<div class="ls-mp-half" style="--c:${x.h}" data-ink="${ink(x.h)}">${tag ? `<span class="ls-meet-tag">${tag}</span>` : ""}<button class="ls-meet-n" data-swatch="${x.h}" style="${prFit(prName(x), 26)}">${esc(prName(x))}</button><span class="pr-code">${x.h}</span></div>`;
+function lsMeetCardHTML(it, nb, o = {}) {
+  const tag = o.again ? "Look again" : o.tag || "New";
+  if (!nb) {   // no neighbor to compare against (rare): the swatch alone
+    const dark = inkHex(it.h), nm = prName(it);
+    return `<div class="pr-step ls-meet${o.again ? " again" : ""}">
+      <div class="ls-meet-sw" style="--c:${it.h};color:${dark}">
+        <span class="ls-meet-tag">${tag}</span>
+        <span class="ls-meet-name"><button class="ls-meet-n" data-swatch="${it.h}" style="${prFit(nm, 48)}">${esc(nm)}</button><span class="pr-code">${it.h}</span></span>
+      </div>
+      <p class="ls-meet-line"></p>
+    </div>`;
+  }
+  return `<div class="pr-step ls-meet ls-mpair${o.again ? " again" : ""}">
+    <div class="ls-mp ls-mp-meet">${lsMpHalf(it, tag)}${lsMpHalf(nb)}</div>
+    <p class="ls-meet-line"><span>${esc(prDiff(it, nb))}</span></p>
+  </div>`;
 }
-function lsPairHTML(a, b, why) {
-  const half = x => `<div class="ls-mp-half" style="--c:${x.h}" data-ink="${ink(x.h)}"><button class="ls-meet-n" data-swatch="${x.h}" style="${prFit(prName(x), 30)}">${esc(prName(x))}</button><span class="pr-code">${x.h}</span></div>`;
+function lsPairCardHTML(a, b, why) {
   return `<div class="pr-step ls-meet ls-mpair">
     <p class="ls-mp-t">${why === "mixup" ? "You've mixed these up before" : "The closest two"}</p>
-    <div class="ls-mp">${half(a)}${half(b)}</div>
+    <div class="ls-mp">${lsMpHalf(a)}${lsMpHalf(b)}</div>
     <p class="ls-meet-line"><span>${esc(prDiff(a, b))}</span></p>
-    <div class="pr-foot">${prPrimary("Next", "", "data-meetnext")}</div></div>`;
+  </div>`;
 }
-// The overview's "Quick look" card, for a color you've already met: full-bleed, its name, gone in a blink (David,
-// 2026-10-09: Study used to skip straight to questions when nothing new needed meeting — "it should first do an
-// overview, then quiz"). Auto-advances (runStory below); the last one gets a Start button like a Meet card does.
-function lsQuickHTML(it, isLast) {
-  const dark = ink(it.h) === "dark" ? "#141311" : "#fff", nm = prName(it);
+function lsQuickCardHTML(it) {
+  const dark = inkHex(it.h), nm = prName(it);
   return `<div class="pr-step ls-meet ls-quick">
     <div class="ls-meet-sw" style="--c:${it.h};color:${dark}">
       <span class="ls-meet-tag">Quick look</span>
-      <span class="ls-meet-name"><b class="ls-meet-n" style="${prFit(nm, 56)}">${esc(nm)}</b><span class="pr-code">${it.h}</span></span>
+      <span class="ls-meet-name"><b class="ls-meet-n" style="${prFit(nm, 48)}">${esc(nm)}</b><span class="pr-code">${it.h}</span></span>
     </div>
-    <p class="ls-meet-line"></p>
-    ${isLast ? `<div class="pr-foot">${prPrimary("Start", "", "data-meetnext")}</div>` : ""}</div>`;
+  </div>`;
+}
+// Like prNextBtn (js/practice.js) — same robust touch handling (iOS can drop the synthesized click after a
+// real touch) — but drawn with the Study/Learn primary button (lsBtn above), not the pr-primary pill.
+function lsNextBtn(foot, go, label = "Next") {
+  foot.innerHTML = lsBtn(label, "data-next");
+  const b = foot.querySelector("[data-next]");
+  let fired = false, down = null;
+  const fire = () => { if (fired) return; fired = true; b.classList.add("pr-fired"); go(); };
+  b.onclick = fire;
+  b.addEventListener("pointerdown", e => { down = e.pointerType !== "mouse" && e.isPrimary ? { id: e.pointerId, x: e.clientX, y: e.clientY } : null; });
+  b.addEventListener("pointerup", e => {
+    if (!down || e.pointerId !== down.id || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 14) return;
+    down = null; if (fired) return;
+    prSwallow(e); fire();
+  });
+  b.addEventListener("pointercancel", () => { down = null; });
+  return b;
 }
 function lsStudy(items, o = {}, resume = null) {
   if (!items.length) return;
@@ -454,7 +482,7 @@ function lsStudy(items, o = {}, resume = null) {
       <div class="ls-prog">${items.map(it => `<i data-k="${esc(it.key)}" style="--c:${it.h}"></i>`).join("")}</div>
       <span class="ls-combo" data-combo aria-live="polite"><b>0</b><span>in a row</span></span></header>
     <p class="ls-status"><span data-status></span><span class="ls-pop" data-pop></span></p>
-    <p class="pr-coach"${prState().seen.learnset ? " hidden" : ""}>${[...lvOf.values()].some(q => q.due) ? "The ones due today come first, from memory. Then you meet the new ones." : `Meet each color first. Then ${o.quick ? "a few quick questions on each" : "each one climbs from picking to naming it from memory"}.`}</p>
+    <p class="pr-coach"${prState().seen.learnset ? " hidden" : ""}>${[...lvOf.values()].some(q => q.due) ? "The ones due today come first, from memory. Then you meet the new ones." : `Scroll to meet each color, then tap Start. Then ${o.quick ? "a few quick questions on each" : "each one climbs from picking to naming it from memory"}.`}</p>
     <div class="pr-stage"></div><div class="ls-grad" data-grad></div>`, "fixed pr-play pr-booth pr-m-learn ls-study");
   const stage = el.querySelector(".pr-stage"), comboEl = el.querySelector("[data-combo]");
   let stepKey = null;
@@ -497,50 +525,45 @@ function lsStudy(items, o = {}, resume = null) {
   const itemOf = new Map(items.map(it => [it.key, it])), mates = new Map(), pinKeys = new Set((o.pin || []).map(x => x.key));
   (o.groups || []).forEach(g => g.forEach(k => { if (!mates.has(k)) mates.set(k, g.filter(m => m !== k && itemOf.has(m)).map(m => itemOf.get(m))); }));
   const nearestIn = it => { let b = null, bd = Infinity; (mates.get(it.key) && mates.get(it.key).length ? mates.get(it.key) : items).forEach(x => { if (x !== it) { const d = de2000(it.h, x.h); if (d < bd) { bd = d; b = x; } } }); return b; };
-  // The Meet/pair run as an Instagram-story pager (David, 2026-10-09): a wave of meet cards, then the closest-two
-  // pair, all gathered up front (spNext is pure bookkeeping for these — no answer blocks it) and paged with thin
-  // segments on top. Tap the right ~2/3 (or swipe left) to go on, the left ~1/3 (or swipe right) to go back; the
-  // card's own controls (the name button, the Next/Start button) still work exactly where they're drawn. The same
-  // beat-before-live guard as before stops a fast double tap from skipping a card unseen.
-  const lsCardHTML = (a, isLast) => a.t === "pair" ? lsPairHTML(a.a.it, a.b.it, a.why)
-    : a.t === "quick" ? lsQuickHTML(a.it, isLast)
-    : lsMeetHTML(a.q.it, a.t === "relook" && a.q.pick && a.q.pick.h !== a.q.it.h ? a.q.pick : nearestIn(a.q.it),
-        { again: a.t === "relook", tag: pinKeys.size ? (pinKeys.has(a.q.it.key) ? "In your set" : "Look-alike") : "", label: a.t === "relook" ? "Got it" : isLast ? "Start" : "Next" });
-  // opts.skippable: a "Skip" control that jumps straight to the end of this run (the whole Quick look, not just one
-  // card) — swipe-to-skip-one and tap-to-skip-all both hold while recall-before-reveal still does: a question's
-  // answer is never on screen before you've answered it; a Quick look only ever shows a name, never a question.
+  // The Meet/pair run as a paged story (David, 2026-10-09: "Next is always there and it's an important part, so
+  // keep it instead of replacing it with scrolling"): a wave of meet cards, then the closest-two pair, all
+  // gathered up front (spNext is pure bookkeeping for these — no answer blocks it) and paged one at a time with
+  // a quiet segmented bar standing in for the usual status line (David: "one quiet progress indicator, not two
+  // stacked bars"). Tap the right ~2/3 (or swipe left) to go on, the left ~1/3 (or swipe right) to go back, or
+  // use the button — it's always there, never auto-advancing. The same beat-before-live guard as every other
+  // step stops a fast double tap from skipping a card unseen. Each card logs itself seen to the Learner Model —
+  // never "yours" or climbing, which still take a real check later.
+  const lsCardHTML = a => a.t === "pair" ? lsPairCardHTML(a.a.it, a.b.it, a.why)
+    : a.t === "quick" ? lsQuickCardHTML(a.it)
+    : lsMeetCardHTML(a.q.it, a.t === "relook" && a.q.pick && a.q.pick.h !== a.q.it.h ? a.q.pick : nearestIn(a.q.it),
+        { again: a.t === "relook", tag: pinKeys.size ? (pinKeys.has(a.q.it.key) ? "In your set" : "Look-alike") : "" });
+  const lsExposureColors = a => a.t === "pair" ? [a.a.it, a.b.it] : a.t === "quick" ? [a.it] : [a.q.it];
   const runStory = (run, opts = {}) => new Promise(resolve => {
     const total = run.length, shown = new Set();
-    let i = 0, live = false, down = null, autoT = null;
-    const clearAuto = () => { if (autoT) { clearTimeout(autoT); autoT = null; } };
-    const finish = () => { clearAuto(); stage.onpointerdown = stage.onpointerup = null; delete stage._lsStory; buzz(6); resolve(); };
+    let i = 0, live = false, down = null;
+    el.classList.add("ls-ov-on");
+    meeting = { i: 1, of: total, t: run[0] && run[0].t }; status();
+    const finish = () => { stage.onpointerdown = stage.onpointerup = null; delete stage._lsStory; el.classList.remove("ls-ov-on"); meeting = null; status(); buzz(6); resolve(); };
     const renderAt = idx => {
-      clearAuto();
-      i = idx; live = false;
+      i = idx; live = false; meeting.i = i + 1; status();
       const a = run[i], it = a.t === "pair" ? a.a.it : a.t === "quick" ? a.it : a.q.it;
-      meeting = a.t !== "pair" ? { i: a.i, of: a.of, t: a.t } : null; status();
       if (!shown.has(i)) {
         shown.add(i);
-        if (a.t === "meet" && a.i === 1 && a.wave > 0) pop(a.of === 1 ? "One more to meet" : `${a.of} more to meet`, "round");
+        try { lsExposureColors(a).forEach(x => learnerLog({ type: "seen", color: { n: x.n, h: x.h }, src: "lesson" })); } catch (err) {}
         lsSfx("sfxColor", it.h);
       }
       const skip = opts.skippable ? `<button class="pr-text ls-skip" data-skip-look>Skip</button>` : "";
-      stage.innerHTML = `<div class="ls-story-bars" data-bars>${run.map(() => "<i></i>").join("")}</div>${skip}` + lsCardHTML(a, i === total - 1);
+      const label = a.t === "relook" ? "Got it" : i === total - 1 ? "Start" : "Next";
+      stage.innerHTML = `<div class="ls-story-bars" data-bars>${run.map(() => "<i></i>").join("")}</div>${skip}` + lsCardHTML(a) + `<div class="pr-foot">${lsBtn(label, "data-meetnext")}</div>`;
       stage.querySelectorAll("[data-bars] i").forEach((seg, k) => { seg.classList.toggle("done", k < i); seg.classList.toggle("on", k === i); });
       const sk = stage.querySelector("[data-skip-look]"); if (sk) sk.onclick = () => finish();
       const b = stage.querySelector("[data-meetnext]");
-      // the button (when there is one) takes taps after a beat: the second tap of a quick double tap is dropped
-      later(() => {
-        if (!stage.isConnected) return;
-        live = true;
-        if (b) prNextBtn(b.parentElement, next, b.querySelector("span").textContent).setAttribute("data-meetnext", "");
-        // a Quick look card with no Start button moves on by itself, fast (reduceMotion: almost instant)
-        else if (a.t === "quick") autoT = setTimeout(() => { if (live) next(); }, reduceMotion ? 450 : 1150);
-      }, 280);
+      // the button takes taps after a beat: the second tap of a quick double tap is dropped, not spent on this card
+      later(() => { if (!b.isConnected) return; live = true; lsNextBtn(b.parentElement, next, label).setAttribute("data-meetnext", ""); }, 280);
       coachDone();
     };
-    const next = () => { clearAuto(); if (i < total - 1) renderAt(i + 1); else finish(); };
-    const prev = () => { clearAuto(); if (i > 0) renderAt(i - 1); };
+    const next = () => { if (i < total - 1) renderAt(i + 1); else finish(); };
+    const prev = () => { if (i > 0) renderAt(i - 1); };
     setKey(e => {
       if (!live) return;
       if (["Enter", " ", "ArrowRight"].includes(e.key)) { e.preventDefault(); next(); }
@@ -592,7 +615,7 @@ function lsStudy(items, o = {}, resume = null) {
       const quickRun = P.fresh.map((q, i) => ({ t: "quick", it: q.it, i: i + 1, of: P.fresh.length }));
       await runStory(quickRun, { skippable: true });
       if (sess.ended || !stage.isConnected) return;
-      meeting = null; status(); coachDone();
+      coachDone();
     }
     let pendingSet = false, pendingVal = null;
     while (!sess.ended) {
@@ -610,7 +633,7 @@ function lsStudy(items, o = {}, resume = null) {
         }
         await runStory(run);
         if (sess.ended || !stage.isConnected) return;
-        meeting = null; status(); coachDone();
+        coachDone();
         continue;
       }
       if (a.t === "match") {
@@ -758,7 +781,9 @@ function lsShot(arg) {
   PR_SHOT_ON = true;
   try { const set = localStorage.setItem.bind(localStorage); localStorage.setItem = (k, v) => { if (k !== KEY) set(k, v); }; } catch (e) {}
   document.documentElement.classList.add("pr-shot");
-  const [w, st] = String(arg).split(":"), teal = prByKey("teal"), items = lsAlike(teal, 8, 5), label = "Teal and its look-alikes";
+  const [w, st, seedArg] = String(arg).split(":");
+  const seedColor = seedArg ? prItemOf(/^#/.test(seedArg) ? seedArg : "#" + seedArg) : null, teal = seedColor || prByKey("teal");
+  const items = lsAlike(teal, 8, 5), label = seedColor ? `${prName(teal)} and its look-alikes` : "Teal and its look-alikes";
   const ls = lsState(); ls.typing = st === "type";
   if (w === "sheet") { openRoute("#/color/teal"); if (st) ls.close = +st; return setTimeout(() => lsOpen({ seed: teal }), 1200); }
   if (w === "look") return lsLook(items, { label, view: st || "grid" });
@@ -780,8 +805,10 @@ function lsShot(arg) {
     return;
   }
   if (w === "study") {
-    const el = lsStudy(prShuffle(items), { label, shot: st });
+    const el = lsStudy(prShuffle(items), { label, shot: st === "ovgo" ? undefined : st });
     const stage = el.querySelector(".pr-stage");
+    // ovgo: click through the Meet/Quick-look pager's Next/Start until a real question shows, for a mid-session shot
+    if (st === "ovgo") { const tick = setInterval(() => { if (!stage._lsStory) return clearInterval(tick); stage._lsStory.next(); }, 250); }
     setTimeout(() => {
       if (st === "wrong" && stage._prChoose) { const i = [...stage.querySelectorAll(".pr-opt")].findIndex(b => b.textContent.trim() !== prName(stage._lsIt)); stage._prChoose(i); }
       if (st === "grad") { const nm = prName(stage._lsIt); setTimeout(() => { el._lsFx.bump(true); el._lsFx.graduate(stage._lsIt); }, 200); if (stage._prType && stage.querySelector(".pr-s-type")) stage._prType(nm); else if (stage.querySelector(".pr-s-card")) { stage._prReveal(); setTimeout(() => stage.querySelector("[data-yes]").click(), 100); } }

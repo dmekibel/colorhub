@@ -106,8 +106,8 @@ PR_STEPS.sort = { by: null, render(box, items, ctx = {}) {
     const correct = items.slice().sort((a, b) => lab(b.h)[0] - lab(a.h)[0]);   // lightest first
     const shown = prShuffle(items);
     box.innerHTML = `<div class="pr-step pr-s-sort">${ctx.note ? `<p class="pr-stepnote">${esc(ctx.note)}</p>` : `<p class="pr-stepnote">Light to dark: drag into order</p>`}
-      <div class="pr-sort-list" data-sort>${shown.map(it => `<div class="pr-sort-row" data-k="${esc(it.key)}" style="--c:${it.h}"><span class="pr-sort-n">${esc(prName(it))}</span></div>`).join("")}</div>
-      <div class="pr-foot"><button class="btn" data-check>Check</button></div></div>`;
+      <div class="pr-sort-list" data-sort>${shown.map(it => `<div class="pr-sort-row" data-k="${esc(it.key)}" data-ink="${ink(it.h)}" style="--c:${it.h}"><span class="pr-sort-n">${esc(prName(it))}</span></div>`).join("")}</div>
+      <div class="pr-foot">${lsBtn("Check", "data-check")}</div></div>`;
     const list = box.querySelector("[data-sort]");
     let rows = [...list.children], rowH = 0, checked = false;
     const layout = skip => rows.forEach((r, i) => { if (r !== skip) r.style.transform = `translateY(${i * rowH}px)`; });
@@ -160,7 +160,7 @@ PR_STEPS.gradient = { by: null, render(box, it, ctx = {}) {
       <div class="sf-grad-bar" data-bar style="background:linear-gradient(to right, ${ends.a.h}, ${ends.b.h})"><i class="sf-grad-mark" data-mark style="left:50%"></i></div>
       <div class="sf-grad-ends"><span>${esc(na)}</span><span>${esc(nb)}</span></div>
       <div class="pr-fb" aria-live="polite"></div>
-      <div class="pr-foot"><button class="btn" data-set>Set it there</button></div></div>`;
+      <div class="pr-foot">${lsBtn("Set it there", "data-set")}</div></div>`;
     const bar = box.querySelector("[data-bar]"), mark = box.querySelector("[data-mark]"), fb = box.querySelector(".pr-fb"), foot = box.querySelector(".pr-foot");
     let pos = .5, done = false, dragging = false;
     const setPos = x => { pos = clamp(x, 0, 1); mark.style.left = (pos * 100) + "%"; };

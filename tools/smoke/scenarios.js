@@ -654,7 +654,7 @@ scenario("learn", "Study on the Learn room opens the Study sheet then meets the 
   if (!t.$(".ls-res")) t.notes.push("last: " + log.slice(-6).join(",") + " · " + (t.$(".ls-study .pr-stage .pr-step") || {}).className);
   await t.waitFor(".ls-res", 8000, "the Study results");
 });
-scenario("learn", "due reviews get a Quick look overview, then are asked from memory before anything new is met", async t => {
+scenario("learn", "due reviews get a Quick look overview (a paged story, Next always there), then are asked from memory before anything new is met", async t => {
   await lrReal(t, "#shot=learn", "Object.values(S.cards).slice(0, 3).forEach(c => { c.due = addDays(today(), -1); });");
   await t.waitFor(".room-learn [data-study]", 6000, "the Learn room");
   t.expect(/to recall/i.test(t.text(".lh-hero-t")), `the headline says "${t.text(".lh-hero-t")}"`);
@@ -664,12 +664,16 @@ scenario("learn", "due reviews get a Quick look overview, then are asked from me
   t.expect(/quick look/i.test(t.text(".ls-sheet [data-pacesay]")), `the sheet says there's an overview first ("${t.text(".ls-sheet [data-pacesay]")}")`);
   await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
   // David, 2026-10-09: "it should first do an overview, then quiz" — even an all-review set opens with a Quick
-  // look (every session does), and only then moves into the questions.
+  // look (every session does), and only then moves into the questions. "Next is always there" (David again,
+  // reversing an earlier scroll-list attempt), so this plays as the usual paged story, one quiet segmented bar.
   await t.waitFor(".ls-study .ls-story-bars", 6000, "the Quick look overview");
   t.expect(t.$(".ls-study .ls-quick"), "the overview card is a Quick look, not a question");
+  t.expect(t.$(".ls-study [data-meetnext]"), "Next is always there");
+  const seen = t.ev("Array.isArray(S.learn && S.learn.ev) ? S.learn.ev.filter(e => e.e === 'seen' && e.src === 'lesson').length : -1");
+  t.expect(seen > 0, `the card on screen logged its exposure to the Learner Model (${seen})`);
   for (let i = 0; i < 10 && t.$(".ls-study .ls-story-bars"); i++) { t.ev(LS_SOLVE); await t.sleep(260); }
   await t.waitFor(".ls-study .pr-step", 6000, "the first question, after the overview");
-  t.expect(!t.$(".ls-study .ls-meet") && !t.$(".ls-study .ls-story-bars"), "the overview ended before the first question");
+  t.expect(!t.$(".ls-study .ls-story-bars"), "the overview ended before the first question");
   const due = t.ev("dueList().map(c => c.n.toLowerCase())"), first = t.ev("(() => { const s = document.querySelector('.ls-study .pr-stage'); return s._lsIt ? s._lsIt.key : ''; })()");
   t.expect(due.includes(first), `the first question is a due review (${first})`);
 });
@@ -1371,7 +1375,7 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   await t.waitFor(".ls-sheet", 4000, "Learn it opens the Learn sheet directly");
   t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(4); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
-  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the overview or the first question");
   const kinds = new Set();
   for (let i = 0; i < 160 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); kinds.add(k); await t.sleep(k === "wait" ? 300 : 250); }
   await t.waitFor(".ls-res", 6000, "the Study results");
@@ -1397,7 +1401,7 @@ scenario("learnset", "Study: Sort and Gradient come up in a longer session and f
   await t.click('.ls-sheet [data-pace="test"]', { wait: 300 });
   const eyeBefore = t.ev("Array.isArray(S.eye) ? S.eye.length : 0");
   await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
-  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the overview or the first question");
   const kinds = new Set();
   for (let i = 0; i < 260 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); kinds.add(k); await t.sleep(k === "wait" ? 250 : 220); }
   t.notes.push("kinds: " + [...kinds].join(","));
@@ -1420,15 +1424,20 @@ scenario("learnset", "Color page -> Learn it -> the sheet with settings visible 
   await t.waitFor(".ls-study .ls-meet", 4000, "Start begins Study and lands on a Meet card");
   t.expect(t.$$(".ls-prog i").length === 4, `${t.$$(".ls-prog i").length} colors in Study, expected 4`);
 });
-// David, 2026-10-09: the Meet run plays as an Instagram-story pager — tap/swipe the right to advance, the left to
-// go back — with thin segmented bars standing in for the usual "Next" taps.
-scenario("learnset", "Meet plays as a story pager: right taps advance, left taps go back, swipe works too", async t => {
+// David, 2026-10-09 (after trying a scroll list): "Next is always there and it's an important part, so keep it
+// instead of replacing it with scrolling" — the Meet run plays as a paged story, right taps/swipe advance, left
+// taps/swipe go back, a quiet segmented bar stands in for the usual per-card Next-tap count, and a new color's
+// own comparison is a real big split (two tall halves, each named + hex), not a tiny 2-chip + sentence.
+scenario("learnset", "Meet plays as a story pager: right taps advance, left taps go back, swipe works too, and each card's comparison is a big split", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(4); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
   await t.waitFor(".ls-study .ls-story-bars", 6000, "the story's segmented bars over the first Meet card");
+  t.expect(t.$(".ls-study .ls-mp .ls-mp-half") && t.$$(".ls-study .ls-mp .ls-mp-half").length === 2, "the Meet card's comparison is a big two-half split, not a small chip");
+  const seen = t.ev("Array.isArray(S.learn && S.learn.ev) ? S.learn.ev.filter(e => e.e === 'seen' && e.src === 'lesson').length : -1");
+  t.expect(seen > 0, `the first card logged its exposure to the Learner Model (${seen})`);
   await t.sleep(350);   // past the beat that guards a fast double tap from skipping a card unseen
   const at = () => t.ev("document.querySelector('.ls-study .pr-stage')._lsStory.at()");
   // a tap: pointerdown and pointerup at the same point, x as a fraction of the stage width
@@ -1458,7 +1467,6 @@ const LS_WRONG = `(() => {
     b.dispatchEvent(new PointerEvent('pointerdown', o)); b.dispatchEvent(new PointerEvent('pointerup', o)); };
   window.__lsN = (window.__lsN || 0) + 1;
   const mc = document.querySelector('.mc:not(.out) .mc-go'); if (mc) { if (window.__lsN % 2) touch(mc, 1); else mc.click(); return 'mc'; }
-  const meet = document.querySelector('.ls-study [data-meetnext]'); if (meet) { meet.click(); return 'meet'; }
   const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
   const nx = st.querySelector('[data-next]'); if (nx) { if (window.__lsN % 2) touch(nx, 2); else nx.click(); return 'next'; }
   const it = st._lsIt, nm = it ? prName(it) : '', wrong = (window.__lsW = !window.__lsW);
@@ -1511,7 +1519,9 @@ scenario("learnset", "Study: new colors are met (a Meet card each, then the clos
   t.expect(!t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"), "no question before the colors are met");
   const seen = [];
   for (let i = 0; i < 12 && !t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"); i++) {
-    seen.push(t.$(".ls-mpair") ? "pair" : t.$(".ls-meet") ? "meet" : "?");
+    // a Meet card's own comparison also uses the big split (.ls-mpair) now, so "pair" (the closest-two card) is
+    // told apart by its own label (.ls-mp-t), not by the split class both share
+    seen.push(t.$(".ls-mp-t") ? "pair" : t.$(".ls-meet") ? "meet" : "?");
     await t.waitFor(".ls-study [data-meetnext][data-next]", 3000, "the Meet card's Next");
     await t.click(".ls-study [data-meetnext][data-next]", { wait: 420 });
   }
@@ -1532,7 +1542,7 @@ scenario("learnset", "Study: stop part-way, Keep going picks each color up at it
   await t.waitFor(".ls-sheet", 4000, "Learn it opens the Learn sheet directly");
   t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(4); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
-  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the overview or the first question");
   const lvSum = () => t.ev("[...document.querySelectorAll('.ls-prog i')].reduce((s, i) => s + (+i.style.getPropertyValue('--lv') || 0), 0)");
   for (let i = 0; i < 40 && lvSum() < .9; i++) { const k = t.ev(LS_SOLVE); await t.sleep(k === "wait" ? 300 : 250); }
   const before = lvSum();
