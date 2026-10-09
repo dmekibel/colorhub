@@ -184,7 +184,7 @@ function csActions(set, o = {}) {
     const b = e.target.closest("[data-cs]"); if (!b) return;
     e.stopPropagation(); buzz(5);
     const s = csGet(set), k = b.dataset.cs;
-    if (k === "map") csOnMap(s);
+    if (k === "map") { if (typeof mapSelect === "function") mapSelect({ title: s.title, colors: s.colors, source: s.kind, id: s.id, src: s.src }); else csOnMap(s); }
     else if (k === "learn") csLearn(s, { back: o.back });
     else if (k === "play") csPlay(s, { back: o.back });
     else if (k === "compare") csCompare(s, partner());

@@ -58,9 +58,30 @@ const ptTolWord = t => t === 0 ? "exactly this color" : `within ${t}%`;
 const ptCoverWord = (m, mx) => mx ? `between ${m}% and ${mx}% of the painting` : m <= .05 ? "even a single speck" : m >= 50 ? "half the painting or more" : `at least ${m}% of the painting`;
 const ptTolShort = t => t === 0 ? "Exact" : t + "%";
 const ptAutoFor = (hexes, st) => ciAuto(hexes, st, PT_TOL, PT_MIN);
-// a tile for a fallback ("closest in the archive") row
-const ptNearBadge = r => ciNearWords(r);
 function ptNear(hex) { const n = nameOf(hex); return n.de < VERY_CLOSE_DE ? n.n : n.text; }
+
+// ---------- the loosen ladder (David, 2026-10-09: "results always satisfy the query; looseness is explicit") ----------
+// Never a silent "closest anyway" row: a painting on screen always really holds that color (or every one of the
+// colors asked for, at that closeness and that share) -- nothing is shown just because it's the least-far-away
+// thing around. When nothing passes, the person chooses to loosen, one honest step at a time, and is always told
+// exactly how far it went. The same ladder js/setpage.js spMountMatch already ships: Closeness and Minimum share
+// loosen first (ciAuto); a 4+ color palette then steps "Holds at least" down by one before giving up. m = how
+// many colors are in the query (paintingsOfSection is always a single color, so the atLeast step never applies).
+const ptAtLoosest = (st, m) => st.tol === PT_TOL[PT_TOL.length - 1] && st.minCover === PT_MIN[0] && (m < 4 || (st.atLeast || m) <= 2);
+async function ptLoosen(hexes, st, m) {
+  const s = await ciAuto(hexes, st, PT_TOL, PT_MIN, 1);
+  const probe = await paintingsWith(hexes, { ...st, tol: s.tol, minCover: s.minCover, maxCover: null }).catch(() => ({ count: 0 }));
+  if (probe.count) {
+    st.tol = s.tol; st.minCover = s.minCover; st.maxCover = null;
+    return { ok: true, note: `Loosened to ${ptTolWord(st.tol)}, ${ptCoverWord(st.minCover, st.maxCover)}${m >= 4 && st.atLeast != null && st.atLeast < m ? `, holds at least ${st.atLeast} of ${m}` : ""}.` };
+  }
+  if (m >= 4 && (st.atLeast || m) > 2) {
+    st.tol = s.tol; st.minCover = s.minCover; st.maxCover = null; st.mode = "atleast"; st.atLeast = (st.atLeast || m) - 1;
+    return { ok: true, note: `Loosened to holds at least ${st.atLeast} of ${m}, at ${ptTolWord(st.tol)}, ${ptCoverWord(st.minCover, st.maxCover)}.` };
+  }
+  st.tol = s.tol; st.minCover = s.minCover; st.maxCover = null;
+  return { ok: false, note: `Loosened all the way, to ${ptTolWord(st.tol)}, ${ptCoverWord(st.minCover, st.maxCover)}.` };
+}
 
 // ---------- the edge of the range: the colors exactly `tol` away in six directions ----------
 function ptEdge(hex, tol) {
@@ -150,7 +171,7 @@ function paintingsOfSection(hex, host, o = {}) {
   if (!host) return;
   hex = hex.toUpperCase();
   const name = o.name || ptNear(hex), st = { ...PT_PREF, mode: "all", sort: "cover", source: "paintings" };
-  let tuner = null, seq = 0;
+  let tuner = null, seq = 0, note = "";
   const shell = () => {
     host.innerHTML = `<h3>In paintings</h3>
       <p class="gl-in-sub" data-pt-lead>Where ${esc(name.toLowerCase())} lives in paintings, measured pixel by pixel in the museum photographs.</p>
@@ -169,23 +190,23 @@ function paintingsOfSection(hex, host, o = {}) {
       if (my !== seq || !host.isConnected) return;
       const lead = host.querySelector("[data-pt-lead]"), all = host.querySelector("[data-pt-all]");
       const words = `${ptTolWord(st.tol)}, ${ptCoverWord(st.minCover, st.maxCover)}`;
-      if (tuner) tuner.count(res.count ? `<b>${ptNum(res.count)}</b> ${res.count === 1 ? "painting" : "paintings"} ${words}` : `Nothing at this setting: showing the closest.`);
-      const tail = res.count >= 12 ? Promise.resolve({ rows: [] }) : ciClosest([hex], res, { max: 24 });
-      tail.then(cl => {
-        if (my !== seq || !host.isConnected) return;
-        if (!res.count) {
-          const best = cl.rows[0];
-          lead.innerHTML = `Nothing is ${esc(words)} for ${esc(name.toLowerCase())}, so here are the closest paintings in the archive, best first.${best ? ` The best: ${esc(ciNearWords(best))}, as photographed.` : ""}`;
-        } else {
-          lead.innerHTML = `<b>${ptNum(res.count)}</b> ${res.count === 1 ? "painting" : "paintings"} ${esc(words)} (${res.count / res.n * 100 < 1 ? "under 1" : Math.round(res.count / res.n * 100)}% of ${ptNum(res.n)}).${res.count < 12 ? " The closest others follow." : ""}`;
-        }
-        const top = res.rows.slice(0, 8), more = cl.rows.slice(0, Math.max(0, 8 - top.length));
-        rail.innerHTML = top.map(r => glPinHTML(r.i, { badge: `${ptPct(r.cover)} of the canvas` })).join("")
-          + more.map(r => glPinHTML(r.i, { badge: `${ptPct(r.cover)} within ${r.tc}%` })).join("");
-        glFill(rail);
-        rail._rows = top.concat(more);
-        all.hidden = false; all.innerHTML = res.count ? `See all ${ptNum(res.count)} ${ICON.arrow}` : `See the closest ${ICON.arrow}`;
-      }).catch(() => { if (my === seq && host.isConnected) rail.innerHTML = `<p class="fine">The paintings didn't load. <button class="wl" data-pt-retry>Try again</button></p>`; });
+      if (tuner) tuner.count(res.count ? `<b>${ptNum(res.count)}</b> ${res.count === 1 ? "painting" : "paintings"} ${words}` : "Nothing at this setting");
+      if (!res.count) {
+        // never a silent "closest anyway": say so plainly, and only loosen when asked (David, 2026-10-09)
+        const atLoosest = ptAtLoosest(st, 1);
+        lead.innerHTML = `${note ? esc(note) + " " : ""}${atLoosest ? `Not one painting holds ${esc(name.toLowerCase())}, even at the loosest measure.` : "Nothing this close yet."}`;
+        rail.innerHTML = atLoosest ? "" : `<div class="pt-empty"><button type="button" class="btn ghost" data-pt-loosen>Loosen until something matches</button></div>`;
+        rail._rows = [];
+        all.hidden = true;
+        return;
+      }
+      note = "";
+      lead.innerHTML = `<b>${ptNum(res.count)}</b> ${res.count === 1 ? "painting" : "paintings"} ${esc(words)} (${res.count / res.n * 100 < 1 ? "under 1" : Math.round(res.count / res.n * 100)}% of ${ptNum(res.n)}).`;
+      const top = res.rows.slice(0, 8);
+      rail.innerHTML = top.map(r => glPinHTML(r.i, { badge: `${ptPct(r.cover)} of the canvas` })).join("");
+      glFill(rail);
+      rail._rows = top;
+      all.hidden = false; all.innerHTML = `See all ${ptNum(res.count)} ${ICON.arrow}`;
     }).catch(() => { if (my === seq && host.isConnected) host.querySelector("[data-pt-rail]").innerHTML = `<p class="fine">The paintings didn't load. <button class="wl" data-pt-retry>Try again</button></p>`; });
   };
   const start = () => {
@@ -214,6 +235,8 @@ function paintingsOfSection(hex, host, o = {}) {
     if (pair) return typeof spPage === "function" ? spPage([hex, pair.dataset.ptPair]) : paintingsOfPage([hex, pair.dataset.ptPair], { tol: CI_STD.tol, minCover: CI_STD.minCover, maxCover: null, mode: "all", names: [name, pair.dataset.ptPname] });
     if (e.target.closest("[data-pt-chords]") && typeof chordsPage === "function") return chordsPage();
     if (e.target.closest("[data-pt-retry]")) return refresh();
+    const lo = e.target.closest("[data-pt-loosen]");
+    if (lo) { lo.disabled = true; lo.textContent = "Loosening…"; ptLoosen([hex], st, 1).then(r => { note = r.note; ptSave(st); if (tuner) tuner.set(st); buzz(8); refresh(); }); return; }
   };
   // the gallery loads when the section scrolls near the screen
   host.innerHTML = `<h3>In paintings</h3><div class="pt-wait">Paintings with ${esc(name.toLowerCase())} load as you scroll.</div>`;
@@ -270,6 +293,10 @@ function paintingsOfPage(hexes, o = {}) {
     <p class="pt-finding" data-finding aria-live="polite"></p>
     <p class="pt-take" data-take hidden></p>
     <div data-sliders></div>
+    <div class="sp-mt-n" data-mt-n hidden>
+      <div class="pt-ctl-h"><b>Holds at least</b><span data-mt-n-v></span></div>
+      <input class="pt-range" type="range" min="2" step="1" data-mt-input aria-label="How many of the colors a painting must hold">
+    </div>
     <div class="pt-acts" data-acts></div>
     <button class="gl-pmap pt-pmap" data-pmap="arr=color&c=${hexes.map(h => h.slice(1).toLowerCase()).join(",")}&t=${st.tol}&m=${st.minCover || 0}">${GL_ICON_MAP}<span>See them as a map</span>${ICON.chev}</button>
     <details class="pt-stats" data-stats hidden><summary>What the numbers say</summary><div data-statsbody></div></details>
@@ -279,7 +306,7 @@ function paintingsOfPage(hexes, o = {}) {
   `, "article pt-page");
   el.querySelector("[data-back]").onclick = xBack;
   onKey = e => { if (e.key === "Escape") xBack(); };
-  let seq = 0, shown = 0, rows = [], tuner = null, lastRes = null;
+  let seq = 0, shown = 0, rows = [], tuner = null, lastRes = null, note = "";
   const PAGE = 36;
   const colorsRow = () => {
     el.querySelector("[data-colors]").innerHTML = hexes.map((h, i) => `<span class="pt-chip"><button class="pt-chip-c" data-open="${h}" aria-label="${esc(nm(h))}"><i style="--c:${h}"></i><b>${esc(nm(h))}</b></button>${hexes.length > 1 ? `<button class="pt-chip-x" data-drop="${i}" aria-label="Remove ${esc(nm(h))}">${PT_ICON_X}</button>` : ""}</span>`).join("")
@@ -288,29 +315,32 @@ function paintingsOfPage(hexes, o = {}) {
     const mr = el.querySelector("[data-modes]");
     mr.hidden = hexes.length < 2;
     mr.innerHTML = hexes.length < 2 ? "" : `<div class="pt-seg">${PT_MODES.map(([k, t]) => `<button data-mode="${k}" class="${st.mode === k ? "on" : ""}">${t}</button>`).join("")}</div>`;
+    // "Holds at least N of M" (David, 2026-10-09): only a real choice once there are 4+ colors to hold, same
+    // gate as js/setpage.js spMountMatch. Dragging it to the top value is the same as "All of them".
+    const mn = el.querySelector("[data-mt-n]"), inp = mn.querySelector("[data-mt-input]");
+    mn.hidden = hexes.length < 4;
+    if (hexes.length >= 4) {
+      inp.max = hexes.length;
+      const v = st.mode === "atleast" && st.atLeast ? st.atLeast : hexes.length;
+      inp.value = v;
+      inp.style.setProperty("--p", ((v - 2) / (hexes.length - 2) * 100) + "%");
+      mn.querySelector("[data-mt-n-v]").textContent = `${v} of ${hexes.length}`;
+    }
     el.querySelector("[data-acts]").replaceChildren(typeof csActions === "function" ? csActions(set, { only: ["learn", "map"] }) : document.createElement("span"));
     el.querySelectorAll("[data-sort]").forEach(b => b.classList.toggle("on", b.dataset.sort === st.sort));
     el.querySelector("[data-sortrow]").hidden = st.mode === "palette";
   };
+  // every tile on screen genuinely passes the sliders -- no more "near:true" fallback rows mixed in (David,
+  // 2026-10-09: a result always satisfies the query; looseness is a choice, made explicit by the Loosen button)
   const tile = (r) => {
-    if (r.near) return r.src === "paintings" ? glPinHTML(r.i, { badge: ptNearBadge(r) }) : tile({ ...r, near: false });
-    if (r.src === "paintings") return glPinHTML(r.i, { badge: st.mode === "palette" ? `${Math.round(r.score * 100)}% match` : st.mode === "all" && hexes.length > 1 ? `${ptPct(r.cover)} of the canvas, least of the set` : `${ptPct(r.cover)} of the canvas` });
+    if (r.src === "paintings") return glPinHTML(r.i, { badge: st.mode === "palette" ? `${Math.round(r.score * 100)}% match` : st.mode === "atleast" ? `${ptPct(r.cover)} of the canvas, least of the ${st.atLeast}` : st.mode === "all" && hexes.length > 1 ? `${ptPct(r.cover)} of the canvas, least of the set` : `${ptPct(r.cover)} of the canvas` });
     const def = CI_SOURCES[r.src]; return def && def.pin ? def.pin(r, st) : `<span class="pt-tile"><b>${esc(def ? def.label : "Item")} ${r.i + 1}</b></span>`;
   };
   const paint = (more) => {
     const host = el.querySelector("[data-results]");
     if (!more) { shown = 0; host.innerHTML = `<div class="masonry pt-masonry"><div></div><div></div></div><button class="btn ghost gl-all" data-more hidden></button>`; host._h = [0, 0]; }
-    let cols = host.querySelectorAll(".masonry > div:not(.pt-nearhead)"), next = rows.slice(shown, shown + PAGE);
-    if (!more) host._near = false;
+    const cols = host.querySelectorAll(".masonry > div"), next = rows.slice(shown, shown + PAGE);
     next.forEach(r => {
-      if (r.near && !host._near) {
-        host._near = true;
-        const sep = document.createElement("div");
-        sep.className = "pt-closest";
-        sep.innerHTML = `<h3>Closest in the archive</h3><p class="fine">${lastRes && lastRes.count ? `Only ${ptNum(lastRes.count)} ${lastRes.count === 1 ? "painting passes" : "paintings pass"} these sliders. These come nearest, best first, with their honest numbers (as photographed).` : "Nothing passes these sliders, so every painting is ranked by how much of this color it holds, best first (as photographed)."}</p><div class="masonry pt-masonry"><div></div><div></div></div>`;
-        host.insertBefore(sep, host.querySelector("[data-more]"));
-        cols = sep.querySelectorAll(".masonry > div"); host._h = [0, 0];
-      }
       const k = host._h[0] <= host._h[1] ? 0 : 1; host._h[k] += (r.src === "paintings" ? glAR(r.i) : 1) + .3;
       cols[k].insertAdjacentHTML("beforeend", tile(r));
     });
@@ -326,9 +356,9 @@ function paintingsOfPage(hexes, o = {}) {
       if (res !== lastRes) return;
       const line = (label, items, f) => items.length ? `<div class="pt-st"><span>${label}</span><div>${items.map(f).join("")}</div></div>` : "";
       const rate = res.count / res.n, tk = el.querySelector("[data-take]");
-      if (hexes.length === 2 && res.o.mode === "all") { tk.hidden = false; tk.textContent = ciTakeaway(nm(hexes[0]), nm(hexes[1]), { count: res.count, lift: res.lift, theory: ciTheory(hexes[0], hexes[1]), stats: s }); } else tk.hidden = true;
+      if (hexes.length === 2 && res.o.mode === "all") { tk.hidden = false; tk.textContent = ciTakeaway(nm(hexes[0]), nm(hexes[1]), { count: res.count, lift: res.lift, theory: ciTheory(hexes[0], hexes[1]), stats: s, noFallback: true }); } else tk.hidden = true;
       body.innerHTML = `
-        <p class="pt-st-lead">${esc(ciFinding(hexes.map(nm), res, s))}</p>
+        <p class="pt-st-lead">${esc(ciFinding(hexes.map(nm), res, s, { noFallback: true }))}</p>
         ${line("When", s.decades, d => `<p><b>${d.g}s</b> ${d.hit} of ${ptNum(d.total)} paintings (${Math.round(d.hit / d.total * 100)}%, against ${Math.round(rate * 100) || "under 1"}% overall)</p>`)}
         ${line("Painters", s.painters, d => `<p><b>${esc(d.label)}</b> ${d.hit} of ${d.total} works</p>`)}
         ${line("Where", s.countries, d => `<p><b>${esc(d.label)}</b> ${d.hit} of ${ptNum(d.total)} paintings</p>`)}
@@ -343,20 +373,30 @@ function paintingsOfPage(hexes, o = {}) {
     const my = ++seq;
     ptSync();
     el.querySelector("[data-finding]").textContent = "Measuring…";
+    el.querySelector("[data-take]").hidden = true;
     Promise.all([loadGallery().catch(() => null), paintingsWith(hexes, st)]).then(([, res]) => {
       if (my !== seq || !el.isConnected) return;
       lastRes = res; rows = res.rows;
       const names = hexes.map(nm);
-      el.querySelector("[data-finding]").textContent = ciFinding(names, res, null);
-      const done = cl => {
-        if (my !== seq || !el.isConnected) return;
-        rows = res.rows.concat(cl.rows);
-        if (!rows.length) { el.querySelector("[data-results]").innerHTML = `<p class="fine">The archive has nothing to rank for this color. Try “Any”, or remove a color.</p>`; el.querySelector("[data-stats]").hidden = true; return; }
-        if (!res.count) { const b = cl.rows[0]; el.querySelector("[data-finding]").textContent = `Nothing passes these sliders. The best in the archive: ${ciNearWords(b)}.`; }
-        paint(false); stats(res);
-      };
-      if (res.count >= 12) return done({ rows: [] });
-      return ciClosest(hexes, res, { max: 60 }).then(done);
+      // never a silent "closest anyway" grid: a tile on screen always really passes these sliders. When nothing
+      // does, say so plainly and only loosen when asked, one honest step at a time (David, 2026-10-09).
+      if (!res.count) {
+        const atLoosest = ptAtLoosest(st, hexes.length);
+        const whatHolds = hexes.length === 1 ? `holds ${names[0].toLowerCase()}`
+          : st.mode === "any" ? "holds any of them"
+          : st.mode === "atleast" ? `holds at least ${st.atLeast} of them`
+          : "holds all of them";
+        el.querySelector("[data-finding]").textContent = `${note ? note + " " : ""}${atLoosest ? `Not one painting ${whatHolds}, even at the loosest measure.` : "Nothing this close yet."}`;
+        el.querySelector("[data-results]").innerHTML = atLoosest ? "" : `<div class="pt-empty"><button type="button" class="btn ghost" data-pt-loosen>Loosen until something matches</button></div>`;
+        el.querySelector("[data-stats]").hidden = true;
+        el.querySelector("[data-sortrow]").hidden = true;
+        rows = [];
+        return;
+      }
+      note = "";
+      el.querySelector("[data-finding]").textContent = ciFinding(names, res, null, { noFallback: true });
+      el.querySelector("[data-sortrow]").hidden = st.mode === "palette";
+      paint(false); stats(res);
     }).catch(() => { if (my === seq && el.isConnected) el.querySelector("[data-results]").innerHTML = `<p class="fine">The paintings didn't load. <button class="wl" data-retry>Try again</button></p>`; });
   };
   const ptSync = () => ptSyncURL(hexes, st);
@@ -380,17 +420,30 @@ function paintingsOfPage(hexes, o = {}) {
     const ph = e.target.closest("[data-pt-photo]"); if (ph) return ptOpenPhoto(ph.dataset.ptPhoto);
     if (e.target.closest("[data-more]")) return paint(true);
     if (e.target.closest("[data-retry]")) return run();
+    const lo = e.target.closest("[data-pt-loosen]");
+    if (lo) { lo.disabled = true; lo.textContent = "Loosening…"; ptLoosen(hexes, st, hexes.length).then(r => { note = r.note; ptSave(st); if (tuner) tuner.set(st); colorsRow(); buzz(8); run(); }); return; }
     const drop = e.target.closest("[data-drop]");
-    if (drop) { hexes.splice(+drop.dataset.drop, 1); buzz(6); colorsRow(); if (tuner && hexes.length === 1) { tune(); } return run(); }
+    if (drop) { hexes.splice(+drop.dataset.drop, 1); if (hexes.length < 4 && st.mode === "atleast") { st.mode = "all"; st.atLeast = null; } buzz(6); colorsRow(); if (tuner && hexes.length === 1) { tune(); } return run(); }
     const op = e.target.closest("[data-open]");
     if (op) return openTappedColor(op.dataset.open);
     if (e.target.closest("[data-add]")) return ptAddSheet(hexes, h => { hexes.push(h); colorsRow(); if (hexes.length === 2) tune(); run(); });
     const md = e.target.closest("[data-mode]");
-    if (md) { st.mode = md.dataset.mode; buzz(5); colorsRow(); return run(); }
+    if (md) { st.mode = md.dataset.mode; if (st.mode !== "atleast") st.atLeast = null; buzz(5); colorsRow(); return run(); }
     const so = e.target.closest("[data-sort]");
     if (so) { st.sort = so.dataset.sort; buzz(4); colorsRow(); return run(); }
     const sr = e.target.closest("[data-src]");
     if (sr) { st.source = sr.dataset.src; el.querySelectorAll("[data-src]").forEach(b => b.classList.toggle("on", b === sr)); buzz(5); return run(); }
+  });
+  // the "Holds at least N of M" slider (4+ colors only): live number while dragging, run() on release
+  el.querySelector("[data-mt-input]").addEventListener("input", e => {
+    const v = +e.target.value;
+    e.target.style.setProperty("--p", ((v - 2) / (hexes.length - 2) * 100) + "%");
+    el.querySelector("[data-mt-n-v]").textContent = `${v} of ${hexes.length}`;
+  });
+  el.querySelector("[data-mt-input]").addEventListener("change", e => {
+    const v = +e.target.value;
+    st.atLeast = v >= hexes.length ? null : v; st.mode = v >= hexes.length ? "all" : "atleast";
+    buzz(5); colorsRow(); run();
   });
   colorsRow(); tune(); run();
   return el;

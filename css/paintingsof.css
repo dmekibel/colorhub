@@ -91,6 +91,11 @@
 .pt-masonry{margin-top:2px}
 .pt-tile{display:grid;place-items:center;aspect-ratio:1;background:var(--lift);border-radius:var(--r-1);font:400 16px/1.2 var(--serif);color:var(--soft)}
 
+/* the honest empty state: nothing passes the sliders, so nothing is shown -- only an explicit way to loosen
+   (David, 2026-10-09: a result always satisfies the query; looseness is a choice, stated plainly) */
+.pt-empty{width:100%;padding:10px 0 4px}
+.gl-rail .pt-empty{flex:1 1 100%;width:auto;padding:4px 0}
+
 /* the add-a-color sheet */
 .pt-add-sw{display:flex;flex-wrap:wrap;gap:7px;padding:6px 0 14px}
 .pt-add-sw button{width:30px;height:30px;border-radius:2px;background:var(--c)}

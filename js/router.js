@@ -226,6 +226,14 @@ function openRoute(hash, initial = false) {
   // the floor (the honeycomb, js/home.js): not a tab, so it's its own address
   if (kind === "home" && typeof hmHome === "function") { base(); XSTACK = []; hmHome(); return true; }
   if (kind === "map" && id && more != null && typeof hmMapRoute === "function") { base(); XSTACK = []; hmMapRoute(id, more); return true; }   // js/home.js: #/map/gallery/<i>, #/map/painting/<slug>
+  // the slideshow is an overlay, not a screen of its own (js/slideshow.js): on a fresh load straight into
+  // #/slideshow there is nothing underneath it yet, so the map (or Learn, if there's no placement) goes up first
+  if (kind === "slideshow" && typeof ssOpenRoute === "function") {
+    base();
+    if (!app.firstElementChild) (S.placed ? hmHome() : go(S.tab || "learn"));
+    ssOpenRoute(id);
+    return true;
+  }
   if (kind === "train" && id === "drills" && typeof r2DrillsPage === "function") { base(); XSTACK = []; r2DrillsPage(); return true; }   // js/rooms2.js
   if (kind === "train" && id === "eye" && typeof r2EyePage === "function") { base(); XSTACK = []; r2EyePage(); return true; }
   if (tabs[kind]) {
