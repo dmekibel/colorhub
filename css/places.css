@@ -1,0 +1,77 @@
+/* The Places menu, the one ⋯ More sheet, the one search, and first-run orientation (js/places.js, js/search.js,
+   js/orient.js -- design/SIMPLIFY/PLAN.md §9's day-0 contract). Reuses the sheet/mn-row/mn-group family
+   (css/menus2.css) wherever it already fits; only what's genuinely new lives here. */
+
+/* ---------- the Places sheet (js/places.js placesOpen) ---------- */
+.pl-sheet .title-2{margin:0 0 4px}
+.pl-sheet-wrap .sheet,.mr-sheet-wrap .sheet,.sr-sheet-wrap .sheet{max-height:84dvh;overflow-y:auto;overscroll-behavior:contain}
+.pl-coll-h{margin:18px 0 10px;color:var(--soft);font-size:17px}
+.pl-grid{list-style:none;margin:0 0 4px;padding:0;display:flex;flex-direction:column;gap:2px}
+.pl-row{width:100%;display:flex;align-items:center;gap:14px;min-height:64px;padding:8px 6px;text-align:left;color:var(--ink);border-radius:var(--r-2,14px);transition:background var(--dur-1,.2s)}
+.pl-row:active{background:var(--surface-2)}
+.pl-row>svg{flex:none;color:var(--soft);width:16px;height:16px}
+.pl-row .rm-art{width:48px;height:48px;flex:none;border-radius:50%;box-shadow:none;position:relative}
+.pl-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pl-txt b{font:400 19px/1.15 var(--serif);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-txt em{font:italic 400 16px/1.3 var(--serif);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* "Pick up where you left off" (replaces the timed "Back to…" map pill, PLAN §9): a paper row, always on top */
+.pl-recent{width:100%;display:flex;align-items:center;gap:14px;min-height:64px;padding:8px 10px;margin-bottom:10px;
+  text-align:left;border-radius:var(--r-2,14px);background:var(--paper);color:var(--paper-ink)}
+.pl-recent:active{opacity:.9}
+.pl-recent .tl-th{width:40px;height:40px;border-radius:8px}
+.pl-recent>svg{flex:none;width:16px;height:16px}
+.pl-recent .pl-txt b{font:600 16px/1.2 var(--sans);font-family:var(--sans)}
+.pl-recent .pl-txt em{color:inherit;opacity:.75}
+/* the collections grid: a picture tile per collection, three a row -- a directory of destinations, exempt from
+   the ≤6 rule (PLAN §3.4): "a collection you can't see is the exact problem this plan fixes" */
+.pl-colls{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pl-ctile{aspect-ratio:1;border-radius:var(--r-card,18px);background:var(--c,var(--surface-2));position:relative;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:10px;text-align:left;overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(236,232,223,.1)}
+.pl-ctile::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.55) 85%)}
+.pl-ctile b{position:relative;font:500 14px/1.2 var(--sans);color:#fff;z-index:1}
+.pl-ctile small{position:relative;font:400 12px/1.2 var(--sans);color:rgba(255,255,255,.75);z-index:1}
+.pl-ctile:active{transform:scale(.97)}
+.pl-search{margin-top:18px}
+.pl-search-row{width:100%;display:flex;align-items:center;gap:10px;min-height:56px;padding:0 16px;border-radius:999px;
+  background:var(--surface-2);color:var(--soft);text-align:left;font:400 16px/1 var(--sans)}
+.pl-search-row svg{flex:none;width:18px;height:18px}
+
+/* ---------- the one ⋯ More sheet (js/places.js moreOpen) ---------- */
+.mr-sheet .mn-group:first-of-type{margin-top:4px}
+.mr-search{width:100%;display:flex;align-items:center;gap:10px;min-height:52px;padding:0 14px;margin-bottom:18px;
+  border-radius:999px;background:var(--surface-2);color:var(--soft);text-align:left;font:400 16px/1 var(--sans)}
+.mr-search svg{flex:none;width:18px;height:18px}
+.mr-chips{display:flex;flex-wrap:wrap;gap:8px;padding:10px 16px}
+.mr-chip{height:38px;padding:0 14px;border-radius:999px;background:var(--s2);color:var(--ink);font:400 15px/1 var(--sans)}
+.mr-chip:active{background:var(--s3)}
+.mr-more{margin:2px 16px 10px;color:var(--soft);font:400 14px/1 var(--sans)}
+
+/* ---------- one search (js/search.js searchOpen) ---------- */
+.sr-field{display:flex;align-items:center;gap:10px;height:52px;padding:0 14px;margin-bottom:16px;border-radius:999px;background:var(--surface-2)}
+.sr-field svg{flex:none;width:18px;height:18px;color:var(--soft)}
+.sr-input{flex:1;background:none;border:0;color:var(--ink);font:400 17px/1 var(--sans)}
+.sr-input::placeholder{color:var(--soft)}
+.sr-empty{margin:18px 4px}
+.sr-h{margin:18px 0 10px;color:var(--soft);font-size:17px}
+.sr-h:first-child{margin-top:4px}
+.sr-colors{display:flex;flex-wrap:wrap;gap:10px}
+.sr-color{display:flex;flex-direction:column;align-items:center;gap:6px;width:72px}
+.sr-color i{width:56px;height:56px;border-radius:50%;display:block}
+.sr-color b{font:400 14px/1.2 var(--sans);text-align:center}
+.sr-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.sr-row{width:100%;display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 6px;text-align:left;border-radius:var(--r-2,14px)}
+.sr-row:active{background:var(--surface-2)}
+.sr-row b{font:400 17px/1.2 var(--serif)}
+.sr-row small{display:block;color:var(--soft);font:400 13px/1.2 var(--sans)}
+.sr-dot{flex:none;width:28px;height:28px;border-radius:50%}
+
+/* ---------- first-run orientation (js/orient.js), 3 steps max (PLAN §5) ---------- */
+.orient-tip{position:absolute;left:16px;right:16px;bottom:calc(var(--corner-b) + var(--corner) + 16px);
+  z-index:5;padding:14px 16px;border-radius:var(--r-card,18px);background:var(--paper);color:var(--paper-ink);
+  font:500 16px/1.35 var(--sans);box-shadow:0 10px 28px rgba(0,0,0,.5);
+  opacity:0;transform:translateY(8px);transition:opacity .22s ease,transform .22s var(--spring,ease)}
+.orient-tip.in{opacity:1;transform:none}
+@media (orientation:landscape){.orient-tip{left:calc(16px + var(--left));right:calc(16px + var(--right))}}
+@keyframes orientGlow{0%,100%{box-shadow:0 4px 14px rgba(0,0,0,.38)}50%{box-shadow:0 0 0 6px rgba(255,191,0,.35),0 4px 14px rgba(0,0,0,.38)}}
+.corner.orient-glow{animation:orientGlow 1.6s ease-in-out}
