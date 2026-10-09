@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ColorHub navigation prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* ColorHub, simplified navigation (design/SIMPLIFY/PLAN.md). Night Gallery tokens (design/VISUAL-DIRECTION.md §2).
+   Open from the repo (design/SIMPLIFY/mockups.html) so the painting images in ../../img/paintings load.
+   ?s=<state> opens a state directly (used for the before/after shots): map, places, more-map, more-paintings,
+   learn, train, collections, collection-pulp, collections-paintings, studio, color, painting, more-painting, search, settings, trail, first. */
+:root {
+  --ground:#0E0D0B; --s1:#171512; --s2:#201E1A; --s3:#2B2823;
+  --ink:#ECE8DF; --soft:#A9A497; --line:rgba(236,232,223,.10); --line-2:rgba(236,232,223,.22);
+  --paper:#EFEBE3; --paper-ink:#15130F; --good:#9AD4AE; --c:#A3A8EE;
+  --serif:"Instrument Serif", Georgia, serif; --sans:"Geist", -apple-system, system-ui, sans-serif;
+  --r-tile:6px; --r-card:18px; --r-sheet:28px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+* { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body { margin:0; background:#050504; color:var(--ink); font:16px/1.5 var(--sans); }
+button { font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer; }
+.stage { display:flex; gap:40px; justify-content:center; align-items:flex-start; padding:24px 16px 60px; }
+.phone { position:relative; width:440px; height:956px; background:var(--ground); overflow:hidden; border-radius:44px; box-shadow:0 0 0 1px #2a2722, 0 40px 120px rgba(0,0,0,.6); flex:none; }
+@media (max-width:600px) { .stage { padding:0; } .phone { width:100vw; height:100dvh; border-radius:0; box-shadow:none; } .notes { display:none; } }
+body.bare .stage { padding:0; } body.bare .phone { border-radius:0; box-shadow:none; } body.bare .notes { display:none; }
+#screen { position:absolute; inset:0; overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+#screen::-webkit-scrollbar { display:none; }
+#overlay, #chrome { position:absolute; inset:0; pointer-events:none; }
+#chrome > * { pointer-events:auto; }
+#chrome.fade::before { content:""; position:absolute; left:0; right:0; bottom:0; height:104px; background:linear-gradient(rgba(14,13,11,0),var(--ground) 70%); pointer-events:none; }
+#overlay > * { pointer-events:auto; }
+.enter { animation:enter .26s var(--ease); }
+@keyframes enter { from { opacity:0; transform:translateY(10px); } }
+
+/* ---------- notes panel (desktop only) ---------- */
+.notes { width:330px; color:var(--soft); font-size:15px; position:sticky; top:24px; }
+.notes h1 { font:400 40px/1 var(--serif); color:var(--ink); margin:0 0 6px; }
+.notes h2 { font:400 22px/1.1 var(--serif); color:var(--ink); margin:26px 0 8px; }
+.notes p { margin:0 0 10px; }
+.notes ol { padding-left:20px; margin:0; } .notes li { margin:0 0 6px; }
+.notes .jump { display:flex; flex-wrap:wrap; gap:6px; }
+.notes .jump button { background:var(--s2); border:1px solid var(--line); border-radius:999px; padding:6px 12px; font-size:14px; color:var(--ink); }
+.notes b { color:var(--ink); font-weight:500; }
+
+/* ---------- type ---------- */
+.t-hero { font:400 92px/.86 var(--serif); letter-spacing:-.03em; margin:0; }
+.t-display { font:400 64px/.9 var(--serif); letter-spacing:-.02em; margin:0; }
+.t-1 { font:400 44px/.98 var(--serif); margin:0; }
+.t-2 { font:400 30px/1 var(--serif); margin:0; }
+.t-3 { font:400 22px/1.1 var(--serif); margin:0; }
+.note { font:italic 400 17px/1.3 var(--serif); color:var(--soft); }
+.small { font-size:14px; line-height:1.4; color:var(--soft); }
+.ui { font:500 16px/1.2 var(--sans); }
+
+/* ---------- chrome: the two corners on places, the bar on pages ---------- */
+.corner { position:absolute; bottom:calc(16px + env(safe-area-inset-bottom)); height:56px; z-index:5; background:var(--s2); border:1px solid var(--line-2); box-shadow:0 8px 24px rgba(0,0,0,.5); border-radius:999px; display:flex; align-items:center; gap:10px; transition:transform .12s; }
+.corner:active { transform:scale(.96); background:var(--s3); }
+.corner.l { left:16px; padding:0 20px 0 16px; }
+.corner.r { right:16px; width:56px; justify-content:center; }
+.corner .pw { font:400 23px/1 var(--serif); }
+.corner svg, .ic svg { width:24px; height:24px; stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.corner.glow { animation:glow 1.6s ease-in-out infinite; }
+@keyframes glow { 50% { box-shadow:0 0 0 6px rgba(239,235,227,.18), 0 8px 24px rgba(0,0,0,.5); } }
+
+.bar { position:sticky; top:0; z-index:6; display:flex; align-items:center; gap:8px; padding:12px 16px 8px; pointer-events:none; }
+.bar > * { pointer-events:auto; }
+.bar .sp { flex:1; }
+.pill { height:44px; display:inline-flex; align-items:center; gap:6px; padding:0 16px 0 12px; border-radius:999px; background:var(--s2); border:1px solid var(--line-2); font:500 16px/1 var(--sans); max-width:210px; transition:transform .12s; }
+.pill:active { transform:scale(.96); background:var(--s3); }
+.pill span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.pill.icon { width:44px; padding:0; justify-content:center; }
+.pill svg { width:22px; height:22px; flex:none; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+/* ---------- sheets: one pattern ---------- */
+.scrim { position:absolute; inset:0; background:rgba(5,5,4,.55); opacity:0; transition:opacity .22s; z-index:20; }
+.scrim.on { opacity:1; }
+.scrim.clear { background:transparent; }
+.sheet.live { max-height:64%; }
+.sheet { position:absolute; left:0; right:0; bottom:0; max-height:86%; z-index:21; background:var(--s1); border-top:1px solid var(--line); border-radius:var(--r-sheet) var(--r-sheet) 0 0; box-shadow:0 -16px 48px rgba(0,0,0,.5); transform:translateY(100%); transition:transform .34s cubic-bezier(.32,.72,0,1); display:flex; flex-direction:column; }
+.sheet.on { transform:none; }
+.sheet .grab { width:40px; height:5px; border-radius:3px; background:var(--line-2); margin:8px auto 4px; flex:none; }
+.sheet .sh-head { display:flex; align-items:center; gap:12px; padding:6px 16px 12px; flex:none; }
+.sheet .sh-head .t-2 { flex:1; }
+.sheet .sh-body { overflow-y:auto; padding:0 16px 28px; scrollbar-width:none; }
+.sheet .sh-body::-webkit-scrollbar { display:none; }
+.x { width:44px; height:44px; border-radius:999px; background:var(--s2); border:1px solid var(--line); display:grid; place-items:center; flex:none; }
+.x svg { width:20px; height:20px; stroke:currentColor; stroke-width:1.9; fill:none; stroke-linecap:round; }
+.grp { margin:18px 0 0; }
+.grp > .gh { display:flex; align-items:baseline; justify-content:space-between; margin:0 0 10px; }
+.grp > .gh .t-3 { font-size:21px; }
+.grp > .gh .small { font-size:14px; }
+
+/* the search field at the top of every More sheet */
+.sfield { display:flex; align-items:center; gap:10px; height:52px; padding:0 16px; border-radius:999px; background:var(--s2); border:1px solid var(--line); color:var(--soft); font-size:16px; width:100%; text-align:left; }
+.sfield svg { width:20px; height:20px; stroke:currentColor; stroke-width:1.8; fill:none; stroke-linecap:round; }
+.sfield input { flex:1; background:none; border:0; outline:0; color:var(--ink); font:16px var(--sans); }
+
+/* rows */
+.rows { background:var(--s2); border-radius:var(--r-card); overflow:hidden; }
+.row { display:flex; align-items:center; gap:14px; min-height:56px; padding:10px 16px; width:100%; text-align:left; border-bottom:1px solid var(--line); }
+.row:last-child { border-bottom:0; }
+.row:active { background:var(--s3); }
+.row .rt { flex:1; min-width:0; }
+.row .rt b { display:block; font:400 21px/1.15 var(--serif); }
+.row .rt i { display:block; font-style:normal; font-size:14px; color:var(--soft); line-height:1.35; margin-top:2px; }
+.row .rv { font-size:15px; color:var(--soft); white-space:nowrap; }
+.row .chev { width:18px; height:18px; stroke:var(--soft); stroke-width:1.8; fill:none; flex:none; }
+.row .lead { width:36px; height:36px; border-radius:999px; flex:none; display:grid; place-items:center; background:var(--s3); }
+.row .lead svg { width:20px; height:20px; stroke:var(--ink); stroke-width:1.7; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.row .lead.sq { border-radius:var(--r-tile); }
+
+/* place rows (the Places menu) */
+.place { display:flex; align-items:center; gap:14px; min-height:68px; padding:10px 14px; border-radius:var(--r-card); background:var(--s2); width:100%; text-align:left; margin:0 0 8px; border:1px solid transparent; transition:transform .12s; }
+.place:active { transform:scale(.98); background:var(--s3); }
+.place.cur { background:var(--s3); border-color:var(--line-2); }
+.place .art { width:48px; height:48px; border-radius:999px; flex:none; overflow:hidden; position:relative; }
+.place .rt { flex:1; }
+.place .rt b { display:block; font:400 26px/1 var(--serif); }
+.place .rt i { display:block; font-style:normal; font-size:14px; color:var(--soft); margin-top:4px; }
+.place .here { font-size:14px; color:var(--ink); display:flex; align-items:center; gap:6px; }
+.place .here::before { content:""; width:8px; height:8px; border-radius:99px; background:var(--good); }
+.resume { display:flex; align-items:center; gap:14px; padding:12px 14px; border-radius:var(--r-card); background:var(--paper); color:var(--paper-ink); width:100%; text-align:left; margin:0 0 14px; }
+.resume .rt b { display:block; font:400 22px/1.05 var(--serif); }
+.resume .rt i { display:block; font-style:normal; font-size:14px; opacity:.75; margin-top:2px; }
+.resume .stack { display:flex; } .resume .stack i { width:26px; height:26px; border-radius:99px; border:2px solid var(--paper); margin-left:-8px; }
+.resume .stack i:first-child { margin-left:0; }
+
+/* chips, segments, tiles */
+.chips { display:flex; flex-wrap:wrap; gap:8px; }
+.chip { height:44px; display:inline-flex; align-items:center; gap:8px; padding:0 14px; border-radius:999px; background:var(--s2); border:1px solid var(--line); font:500 15px/1 var(--sans); }
+.chip .dot { width:18px; height:18px; border-radius:99px; flex:none; box-shadow:inset 0 0 0 1px rgba(255,255,255,.12); }
+.chip .n { color:var(--soft); font-weight:400; font-variant-numeric:tabular-nums; }
+.chip.on { background:var(--s3); box-shadow:inset 0 0 0 1.5px var(--line-2); }
+.chip.on::after { content:""; width:7px; height:7px; border-radius:99px; background:var(--good); margin-left:2px; }
+.chip.more { color:var(--soft); }
+.seg { display:flex; height:48px; padding:3px; border-radius:999px; background:var(--s2); border:1px solid var(--line); }
+.seg button { flex:1; border-radius:999px; font:500 16px/1 var(--sans); color:var(--soft); }
+.seg button.on { background:var(--s3); color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--line-2); }
+.shapes { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+.shape { display:flex; flex-direction:column; align-items:center; gap:6px; font-size:14px; color:var(--soft); }
+.shape .pic { width:100%; aspect-ratio:1; border-radius:var(--r-card); background:var(--s2); border:1px solid var(--line); display:grid; place-items:center; position:relative; }
+.shape.on .pic { background:var(--s3); box-shadow:inset 0 0 0 1.5px var(--line-2); }
+.shape.on { color:var(--ink); }
+.shape.on .pic::after { content:""; position:absolute; top:7px; right:7px; width:7px; height:7px; border-radius:9px; background:var(--good); }
+.shape svg { width:60%; height:60%; }
+.slider { position:relative; height:44px; display:flex; align-items:center; }
+.slider .tr { position:absolute; left:0; right:0; height:6px; border-radius:3px; background:var(--s3); }
+.slider .fill { position:absolute; left:0; height:6px; border-radius:3px; background:var(--ink); }
+.slider .th { position:absolute; width:28px; height:28px; border-radius:99px; background:var(--ink); transform:translateX(-50%); box-shadow:0 2px 8px rgba(0,0,0,.5); }
+.slider input { position:absolute; inset:0; opacity:0; width:100%; cursor:pointer; }
+.ends { display:flex; justify-content:space-between; font-size:14px; color:var(--soft); margin-top:-4px; }
+.switch { width:51px; height:31px; border-radius:99px; background:var(--s3); position:relative; flex:none; }
+.switch::after { content:""; position:absolute; top:3px; left:3px; width:25px; height:25px; border-radius:99px; background:var(--soft); transition:transform .2s; }
+.switch.on { background:var(--good); } .switch.on::after { transform:translateX(20px); background:var(--ground); }
+
+/* buttons */
+.paperbtn { display:flex; align-items:center; justify-content:space-between; width:100%; height:58px; padding:0 22px 0 26px; border-radius:999px; background:var(--paper); color:var(--paper-ink); font:400 26px/1 var(--serif); }
+.paperbtn small { font:italic 400 17px var(--serif); opacity:.7; margin-left:8px; }
+.paperbtn svg { width:22px; height:22px; stroke:currentColor; stroke-width:1.8; fill:none; }
+.acts { display:flex; gap:8px; align-items:center; }
+.act { height:44px; padding:0 18px; border-radius:999px; background:var(--s2); border:1px solid var(--line-2); font:500 16px/1 var(--sans); display:inline-flex; align-items:center; gap:8px; }
+.act.primary { background:var(--paper); color:var(--paper-ink); border-color:transparent; }
+.act.round { width:44px; padding:0; justify-content:center; }
+.act svg { width:20px; height:20px; stroke:currentColor; stroke-width:1.8; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.act.kept svg { fill:#E86A6A; stroke:#E86A6A; }
+
+/* pages */
+.pg-pad { padding:0 24px; }
+.sec { margin:36px 0 0; }
+.sec > .t-3 { margin:0 0 12px; }
+.hero-c { min-height:520px; margin-top:-64px; padding:88px 24px 28px; display:flex; flex-direction:column; justify-content:flex-end; }
+.strip { display:flex; gap:10px; overflow-x:auto; scrollbar-width:none; margin:0 -24px; padding:0 24px; }
+.strip::-webkit-scrollbar { display:none; }
+.ptile { flex:none; width:150px; text-align:left; }
+.ptile .img { width:150px; height:190px; border-radius:var(--r-tile); background:#222 center/cover; }
+.ptile b { display:block; font:400 19px/1.1 var(--serif); margin-top:8px; }
+.ptile i { display:block; font-style:normal; font-size:14px; color:var(--soft); }
+.cchips { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.cchip { display:flex; flex-direction:column; text-align:left; border-radius:var(--r-card); overflow:hidden; background:var(--s2); }
+.cchip .sw { height:84px; }
+.cchip b { font:400 20px/1.1 var(--serif); padding:10px 12px 2px; }
+.cchip i { font-style:normal; font-size:14px; color:var(--soft); padding:0 12px 12px; }
+.palbar { display:flex; height:84px; border-radius:var(--r-tile); overflow:hidden; gap:2px; }
+.palbar button { position:relative; min-width:30px; }
+.palbar button span { position:absolute; left:8px; bottom:6px; font:500 14px var(--sans); }
+.pname { display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:12px; }
+.pname button { display:flex; align-items:center; gap:8px; font:400 19px var(--serif); }
+.pname i { width:14px; height:14px; border-radius:99px; }
+.imgwrap { position:relative; margin:-64px 0 0; }
+.imgwrap img { width:100%; display:block; max-height:600px; object-fit:cover; }
+.imgwrap .on-img { position:absolute; right:16px; bottom:16px; }
+.on-img { height:44px; padding:0 16px; border-radius:999px; background:rgba(20,18,15,.92); border:1px solid var(--line-2); display:inline-flex; gap:8px; align-items:center; font:500 15px var(--sans); }
+.on-img svg { width:18px; height:18px; stroke:currentColor; stroke-width:1.8; fill:none; stroke-linecap:round; }
+
+/* rooms */
+.room { padding:56px 24px 110px; min-height:100%; }
+.room-h { display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; }
+.tiles2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.door { border-radius:var(--r-card); background:var(--s2); overflow:hidden; text-align:left; display:flex; flex-direction:column; transition:transform .12s; }
+.door:active { transform:scale(.98); }
+.door .pic { height:128px; background:#222 center/cover; }
+.door b { font:400 26px/1 var(--serif); padding:12px 14px 2px; }
+.door i { font-style:normal; font-size:14px; color:var(--soft); padding:0 14px 14px; }
+.today3 { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.today3 button { text-align:left; }
+.today3 .pic { display:block; aspect-ratio:1; border-radius:var(--r-card); background:var(--s2) center/cover; position:relative; }
+.today3 .pic .done { position:absolute; right:8px; top:8px; width:22px; height:22px; border-radius:99px; background:var(--good); display:grid; place-items:center; }
+.today3 b { display:block; font:400 20px/1.1 var(--serif); margin-top:8px; }
+.today3 i { display:block; font-style:normal; font-size:14px; color:var(--soft); }
+.nextcard { border-radius:var(--r-card); background:var(--s2); padding:18px; }
+.board { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; width:120px; }
+.board i { aspect-ratio:1; border-radius:4px; }
+
+
+.ctiles { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.ctiles.three { grid-template-columns:repeat(3,1fr); gap:10px; }
+.ctile { text-align:left; display:flex; flex-direction:column; transition:transform .12s; }
+.ctile:active { transform:scale(.97); }
+.ctile .pic { display:grid; place-items:center; aspect-ratio:1.25; border-radius:var(--r-card); position:relative; overflow:hidden; }
+.ctiles.three .ctile .pic { aspect-ratio:1; border-radius:14px; }
+.ctile .pic em { font:italic 400 19px/1.1 var(--serif); color:#ECE8DF; padding:0 10px; text-align:center; }
+.ctile b { font:400 22px/1.05 var(--serif); margin-top:8px; }
+.ctiles.three .ctile b { font-size:18px; }
+.ctile i { font-style:normal; font-size:14px; color:var(--soft); line-height:1.3; }
+.ctiles.three .ctile i { font-size:13px; }
+.ctile.soon .pic { opacity:.55; }
+.ghd { display:flex; justify-content:space-between; align-items:baseline; margin:30px 0 12px; }
+/* the map */
+.map { position:absolute; inset:0; overflow:hidden; background:var(--ground); }
+.bub { position:absolute; border-radius:999px; display:grid; place-items:center; text-align:center; font-family:var(--serif); line-height:1; transform:translate(-50%,-50%); transition:transform .12s; padding:4px; }
+.bub:active { transform:translate(-50%,-50%) scale(.95); }
+.bub.pulse { animation:breathe 1.8s ease-in-out infinite; z-index:3; }
+@keyframes breathe { 50% { transform:translate(-50%,-50%) scale(1.07); box-shadow:0 0 0 8px rgba(255,255,255,.12); } }
+.ptl { position:absolute; transform:translate(-50%,-50%); border-radius:4px; background:#222 center/cover; box-shadow:0 0 0 1px rgba(0,0,0,.5); }
+.mapcap { position:absolute; top:calc(14px + env(safe-area-inset-top)); left:50%; transform:translateX(-50%); z-index:4; padding:8px 16px; border-radius:999px; background:rgba(14,13,11,.88); border:1px solid var(--line); font:italic 400 17px var(--serif); color:var(--ink); white-space:nowrap; transition:opacity .6s; }
+
+/* coach line (first run) */
+.coach { position:absolute; left:16px; right:16px; z-index:30; padding:14px 18px; border-radius:var(--r-card); background:var(--paper); color:var(--paper-ink); font:400 22px/1.2 var(--serif); box-shadow:0 12px 40px rgba(0,0,0,.6); display:flex; align-items:center; gap:12px; }
+.coach small { font:500 14px var(--sans); opacity:.7; margin-left:auto; white-space:nowrap; }
+.coach .stepn { font:500 14px var(--sans); opacity:.7; }
+
+.toast { position:absolute; left:50%; bottom:96px; transform:translateX(-50%); z-index:40; background:var(--s3); border:1px solid var(--line-2); padding:12px 18px; border-radius:999px; font-size:15px; white-space:nowrap; }
+.look { position:absolute; inset:0; background:#060605; display:flex; flex-direction:column; }
+.look .lk-img { flex:1; display:grid; place-items:center; overflow:hidden; }
+.look .lk-img img { max-width:100%; max-height:100%; }
+.tools { display:flex; gap:6px; justify-content:center; padding:12px 12px calc(20px + env(safe-area-inset-bottom)); }
+.tools button { height:48px; padding:0 14px; border-radius:999px; background:var(--s2); border:1px solid var(--line); font:500 15px var(--sans); }
+.tools button.on { background:var(--s3); box-shadow:inset 0 0 0 1.5px var(--line-2); }
+.res { display:flex; align-items:center; gap:14px; padding:10px 4px; width:100%; text-align:left; border-bottom:1px solid var(--line); min-height:60px; }
+.res .sw { width:40px; height:40px; border-radius:99px; flex:none; background:#333 center/cover; }
+.res .sw.sq { border-radius:var(--r-tile); }
+.res b { display:block; font:400 21px/1.1 var(--serif); }
+.res i { display:block; font-style:normal; font-size:14px; color:var(--soft); }
+.res .kind { margin-left:auto; font-size:14px; color:var(--soft); }
+.reshead { font:500 14px var(--sans); color:var(--soft); margin:18px 0 2px; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="phone" id="phone"><div id="screen"></div><div id="chrome"></div><div id="overlay"></div></div>
+  <aside class="notes">
+    <h1>One map, four places</h1>
+    <p>A clickable sketch of the navigation in <b>design/SIMPLIFY/PLAN.md</b>. Everything is real Night Gallery tokens at 440 × 956; the content is sample data.</p>
+    <h2>Try this path</h2>
+    <ol>
+      <li>Tap a bubble: its page opens.</li>
+      <li>Tap a painting on that page, then a color in the painting.</li>
+      <li><b>‹</b> walks back one step and says where it goes. Hold it to see the whole trail.</li>
+      <li>The pill on the right (<b>Map</b>, <b>Museum</b>…) closes the pages and takes you back to the place you started from. A pull down from the top does the same.</li>
+      <li><b>≡ Places</b> (bottom left) lists the places and every collection, plus "Pick up where you left off".</li>
+      <li><b>⋯</b> on any screen: search first, then that screen's options and tools, then Settings.</li>
+      <li>Every collection (paintings, photographs, pulp covers, fashion, gems, poems…) is two taps from any place: <b>≡ Places</b>, then its tile. Recent ones come first.</li>
+      <li>In search, try "pulp", "slideshow", "eyedropper" or "haptics": collections and features are findable too.</li>
+    </ol>
+    <h2>Jump to</h2>
+    <div class="jump" id="jump"></div>
+  </aside>
+</div>
+<script>
+"use strict";
+// ---------------------------------------------------------------- data (sample)
+const COLORS = [["Navy","#1C2B5A"],["Royal blue","#4169E1"],["Sky blue","#87CEEB"],["Periwinkle","#A3A8EE"],["Turquoise","#40E0D0"],["Teal","#008080"],["Aqua","#00FFFF"],["Scarlet","#FF2400"],["Crimson","#DC143C"],["Maroon","#800000"],["Burgundy","#800020"],["Coral","#FF7F50"],["Salmon","#FA8072"],["Baby pink","#F4C2C2"],["Hot pink","#FF69B4"],["Magenta","#FF00FF"],["Lime","#BFFF00"],["Mint","#A8EBC4"],["Kelly green","#4CBB17"],["Emerald","#50C878"],["Sage","#9CAF88"],["Olive","#808000"],["Forest green","#228B22"],["Lavender","#BFA2E8"],["Lilac","#C8A2C8"],["Mauve","#A8778F"],["Plum","#8E4585"],["Violet","#8000FF"],["Indigo","#3D2B8E"],["Gold","#FFD700"],["Mustard","#CFA41C"],["Khaki","#BDB76B"],["Tan","#D2B48C"],["Rust","#B7410E"],["Chocolate","#7B3F00"],["Ivory","#FFFFF0"],["Cream","#FFFDD0"],["Beige","#E6D5B0"],["Taupe","#8E7F71"],["Silver","#C0C0C0"],["Slate","#708090"],["Charcoal","#36454F"],["Powder blue","#B0E0E6"],["Cornflower","#6495ED"],["Azure","#007FFF"],["Cerulean","#007BA7"],["Cobalt","#0047AB"],["Steel blue","#4682B4"],["Denim","#3B638C"],["Petrol","#005F6A"],["Midnight blue","#191970"],["Vermilion","#E34234"],["Carmine","#960018"],["Oxblood","#4A0000"],["Brick","#A03623"],["Cerise","#DE3163"],["Raspberry","#B00149"],["Peach","#FFCBA4"],["Apricot","#FFB16D"],["Tangerine","#F28500"],["Burnt orange","#CC5500"],["Ochre","#CC7722"],["Marigold","#EAA221"],["Amber","#FFBF00"],["Canary","#FFEF00"],["Chartreuse","#7FFF00"],["Pistachio","#93C572"],["Celadon","#ACCFB0"],["Jade","#00A86B"],["Malachite","#0BDA51"],["Viridian","#40826D"],["Moss","#8A9A5B"],["Hunter green","#355E3B"],["Bottle green","#006A4E"],["Thistle","#D8BFD8"],["Orchid","#DA70D6"],["Amethyst","#9966CC"],["Puce","#CC8899"],["Mulberry","#C54B8C"],["Byzantium","#702963"],["Aubergine","#3D0734"],["Ecru","#F0E6D2"],["Camel","#C19A6B"],["Terracotta","#E2725B"],["Sienna","#A0522D"],["Sepia","#8A6A4F"],["Umber","#635147"],["Mahogany","#6C2E1F"],["Ash","#B2BEB5"],["Gunmetal","#2A3439"],["White","#F7F5EF"],["Black","#151515"],["Grey","#8C8C8C"],["Red","#D7261E"],["Blue","#1F5FD0"],["Green","#2E9E44"],["Yellow","#F5D10F"],["Orange","#F07D16"],["Purple","#7A3DA8"],["Pink","#F2A3BD"],["Brown","#7A4E2D"]];
+const PAINTINGS = [
+ {id:"starry-night",t:"The Starry Night",a:"Vincent van Gogh",y:"1889",pal:[["Black Grey","#262B2D",27],["Gendarme Blue","#455D85",25],["Deep Orient Blue","#677E90",19],["Cyanine Blue","#314381",14],["Leek Green","#909C8A",12],["Courge Green","#A9A55B",4]]},
+ {id:"sunflowers",t:"Sunflowers",a:"Vincent van Gogh",y:"1888",pal:[["Reed Yellow","#D9C678",42],["Dark Gold","#B4922C",23],["Bistre Brown","#9F7425",15],["Golden Brown","#896228",12],["Yellowish Oil Green","#88893F",6],["Cedar Green","#656D48",3]]},
+ {id:"great-wave",t:"The Great Wave off Kanagawa",a:"Katsushika Hokusai",y:"c. 1831",pal:[["Eggshell","#F4EDD9",35],["Dutch White","#F0DFBC",21],["Papyrus White","#CAD1C5",14],["Light Navy","#2C4F6F",13],["Bluish Grey","#999E9C",11],["Delft Blue","#5F7789",5]]},
+ {id:"pearl-earring",t:"Girl with a Pearl Earring",a:"Johannes Vermeer",y:"c. 1665",pal:[["Sumi-iro","#261F15",60],["Rikancha","#5A4E37",12],["Buffy Brown","#97805F",9],["Charcoal","#3C4B58",5],["Sand Yellow","#C6A36F",5],["Pale Greyish Vinaceous","#DDC3AC",5],["Cadet Grey","#92A3AE",4]]},
+ {id:"milkmaid",t:"The Milkmaid",a:"Johannes Vermeer",y:"c. 1658",pal:[["Pale Gull Grey","#D0C8B5",29],["Sepia Brown","#453727",21],["Black","#1A1E21",19],["Taupe","#8D7F6A",12],["Nut Brown","#5F3824",9],["Oxford Blue","#182A44",7],["Dark Beige","#B49360",4]]},
+ {id:"arnolfini",t:"The Arnolfini Portrait",a:"Jan van Eyck",y:"1434",pal:[["Graphite Black","#211E1B",34],["Bistre","#362A1E",28],["Olive-Brown","#6C5A43",11],["Duck Green","#2C3B0A",10],["Tobi-iro","#4D251E",10],["Very Dark Green","#1F270E",7]]},
+ {id:"birth-of-venus",t:"The Birth of Venus",a:"Sandro Botticelli",y:"c. 1485",pal:[["Yellowish Glaucous","#D1CFB5",25],["Brown Olive","#383526",18],["Green Beige","#CCB888",16],["Dark Tan","#BC9451",13],["Khaki Grey","#6F5F3B",12],["Pois Green","#898E73",11],["Amber Brown","#955C3A",6]]},
+ {id:"the-kiss",t:"The Kiss",a:"Gustav Klimt",y:"c. 1907–1909",pal:[["Green Brown","#8C7640",52],["Pyrite Yellow","#BEA44A",21],["Light Greyish Olive","#9F977A",12],["Moss Green","#819554",9],["Hyssop Violet","#837496",4],["Blackish Brown","#423A2D",3]]},
+ {id:"the-scream",t:"The Scream",a:"Edvard Munch",y:"1893",pal:[["Deep Brownish Drab","#74685A",26],["Warm Blackish Brown","#534D4A",23],["Buffy Brown","#8F785C",15],["Rood's Brown","#91644E",13],["Blackish Grey","#55565E",10],["Hay's Russet","#94533E",8],["Mocha","#9F7546",6]]},
+ {id:"wanderer",t:"Wanderer above the Sea of Fog",a:"Caspar David Friedrich",y:"c. 1817",pal:[["Black Grey","#252C2C",26],["Endive Blue","#A3A6B1",23],["Dutch Blue","#8794A5",19],["Silver","#BEBBBB",18],["Dark Green-Blue Grey","#68767E",9],["Fuscous-Black","#494B40",5]]},
+ {id:"grande-jatte",t:"A Sunday on La Grande Jatte",a:"Georges Seurat",y:"1884–1886",pal:[["Hunter Green","#39583C",26],["Courge Green","#ACAA68",19],["Yvette Violet","#5F5169",16],["Glaucous-Grey","#AFB6B4",14],["Onyx","#3D3D3D",13],["Beaver","#9E7F6E",13]]},
+ {id:"woman-parasol",t:"Woman with a Parasol",a:"Claude Monet",y:"1875",pal:[["French Grey","#BFC1BC",20],["Dusky Olive-Green","#515D4C",20],["Light King's Blue","#A7B9CB",18],["Light Windsor Blue","#768CAC",15],["Light Elm Green","#7F8558",15],["Plumbeous","#868D92",12]]},
+ {id:"water-lilies",t:"Water Lilies",a:"Claude Monet",y:"1906",pal:[["Delft Blue","#567384",25],["Dusty Blue","#5685A4",22],["Dark Bluish Grey-Green","#4B7475",20],["Distant Blue","#506A8C",18],["Clear Green-Blue Grey","#8A9C9A",8],["French Green","#59896E",7]]},
+ {id:"houses-of-parliament",t:"Houses of Parliament, Sunset",a:"Claude Monet",y:"1904",pal:[["Old Lavender","#7F6E77",22],["Dark Madder Blue","#4C596E",21],["Blackish Grey","#5E5C5E",21],["Brownish Purple Red","#866D65",20],["Vinaceous-Russet","#A2715E",10],["Tawny","#B7794E",8]]},
+ {id:"the-swing",t:"The Swing",a:"Jean-Honoré Fragonard",y:"1767",pal:[["Eerie Black","#161915",26],["Chitosemidori","#303C2A",25],["Dark Cress Green","#525E3E",24],["Grass Green","#818A54",12],["Sage Green","#81A088",10],["Mikado Brown","#B0784D",4]]},
+ {id:"mona-lisa",t:"Mona Lisa",a:"Leonardo da Vinci",y:"c. 1503–1519",pal:[["Ink Black","#201625",33],["Grass Green","#828A57",20],["Old Burgundy","#452B28",16],["Brown","#774D29",11],["Dark Ivy Green","#51563F",11],["Olive-Ocher","#C29A49",8]]},
+ {id:"composition-vii",t:"Composition VII",a:"Wassily Kandinsky",y:"1913",pal:[["Leek Green","#9E9E83",37],["Iron Grey","#576067",22],["Yellowish Citrine","#A99C4C",15],["Amber Brown","#9D5D23",11],["Vandyke Red","#8C4347",11],["Dark Slate Blue","#3C3E82",4]]},
+ {id:"impression-sunrise",t:"Impression, Sunrise",a:"Claude Monet",y:"1872",pal:[["Dark Olive-Grey","#6E6D5B",25],["Dusky Blue-Green","#51675F",19],["Nickel","#6C726D",19],["Slate-Olive","#6F7D6A",16],["Benzo Brown","#897666",12],["Rood's Brown","#916D57",9]]}
+];
+const IMG = id => `../../img/paintings/${id}.jpg`, THUMB = id => `../../img/paintings/${id}-thumb.jpg`;
+const P = id => PAINTINGS.find(p => p.id === id);
+// Every collection is its own tile: one plain noun each, two taps from anywhere (Places pill, then the tile).
+const WIKI = f => `../../img/wiki/${f}`;
+const blocks = hs => `linear-gradient(90deg,${hs.map((h, i) => `${h} ${i / hs.length * 100}% ${(i + 1) / hs.length * 100}%`).join(",")})`;
+const COLLS = [
+  { id: "paintings", t: "Paintings", n: "23,778", g: "Art", bg: `url('${THUMB("water-lilies")}') center/cover` },
+  { id: "painters", t: "Painters", n: "840", g: "Art", bg: `url('${THUMB("pearl-earring")}') center/cover` },
+  { id: "photographs", t: "Photographs", n: "3,465 early color", g: "Art", bg: "linear-gradient(160deg,#C9B48A,#7C6A4F 55%,#2E3B44)" },
+  { id: "history", t: "Movements & decades", n: "23 movements · 60 decades", g: "Art", bg: blocks(["#5B4A3A", "#8C6B3F", "#B79A6B", "#5F7789", "#2C4F6F", "#A44A3F"]) },
+  { id: "ukiyoe", t: "Ukiyo-e prints", n: "Soon", g: "Art", bg: `url('${THUMB("great-wave")}') center/cover`, soon: 1 },
+  { id: "fashion", t: "Fashion", n: "33 decades · 991 garments", g: "Design", bg: blocks(["#C8A2C8", "#1C2B5A", "#E2725B", "#F0E6D2", "#355E3B"]) },
+  { id: "brands", t: "Brands", n: "129 brand colors", g: "Design", bg: blocks(["#0A84FF", "#E50914", "#FFD100", "#1DB954", "#81D8D0"]) },
+  { id: "pulp", t: "Pulp covers", n: "832 covers", g: "Design", bg: "linear-gradient(135deg,#E8C21A 0 30%,#B3261E 30% 62%,#1A1E21 62%)" },
+  { id: "design", t: "Design objects", n: "Soon: posters, textiles, ceramics", g: "Design", bg: blocks(["#D9C678", "#2F5FB3", "#E58FB0", "#3F8F4E"]), soon: 1 },
+  { id: "flowers", t: "Flowers & dyes", n: "37 plants · 12 dyes", g: "Nature", bg: `url('${WIKI("lavender-1.jpg")}') center/cover` },
+  { id: "gems", t: "Gems", n: "29 gems and minerals", g: "Nature", bg: `url('${WIKI("emerald-1.jpg")}') center/cover` },
+  { id: "plates", t: "Botanical & bird plates", n: "Soon", g: "Nature", bg: `url('${WIKI("marigold-1.jpg")}') center/cover`, soon: 1 },
+  { id: "poems", t: "Poems", n: "11,440, by the colors they name", g: "Writing & film", bg: "#2C3B2A", word: "“the green of it”" },
+  { id: "literature", t: "Literature", n: "225 passages", g: "Writing & film", bg: "#3B2A2A", word: "“a crimson thread”" },
+  { id: "films", t: "Films", n: "32 films", g: "Writing & film", bg: blocks(["#0F3B4A", "#B83A2E", "#E8B04A", "#1F2A44", "#D85F8A", "#0B6E4F"]) },
+  { id: "stories", t: "Stories", n: "58 short reads", g: "Looks & ideas", bg: "linear-gradient(160deg,#1C2B5A,#A3A8EE)" },
+  { id: "aesthetics", t: "Aesthetics", n: "159 looks: Bauhaus to Y2K", g: "Looks & ideas", bg: `url('${THUMB("the-kiss")}') center/cover` },
+  { id: "pigments", t: "Pigments & ideas", n: "74 pages", g: "Looks & ideas", bg: `url('${WIKI("indigo-dye-1.jpg")}') center/cover` },
+];
+const C = id => COLLS.find(c => c.id === id);
+const ctile = (c, cls = "") => `<button class="ctile${cls}${c.soon ? " soon" : ""}" data-coll="${c.id}"><span class="pic" style="background:${c.bg}">${c.word ? `<em>${c.word}</em>` : ""}</span><b>${c.t}</b><i>${c.n}</i></button>`;
+
+
+// ---------------------------------------------------------------- color math
+const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const lin = v => { v /= 255; return v <= .04045 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); };
+const lum = h => { const [r, g, b] = rgb(h).map(lin); return .2126 * r + .7152 * g + .0722 * b; };
+const inkOn = h => lum(h) > .32 ? "#15130F" : "#F4F1EA";
+function hsl(h) { let [r, g, b] = rgb(h).map(v => v / 255); const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2; let s = 0, hu = 0;
+  if (mx !== mn) { const d = mx - mn; s = l > .5 ? d / (2 - mx - mn) : d / (mx + mn);
+    hu = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; hu *= 60; }
+  return [hu, s, l]; }
+const dist = (a, b) => { const x = rgb(a), y = rgb(b); const rm = (x[0] + y[0]) / 2; return Math.sqrt((2 + rm / 256) * (x[0] - y[0]) ** 2 + 4 * (x[1] - y[1]) ** 2 + (2 + (255 - rm) / 256) * (x[2] - y[2]) ** 2); };
+const nearest = (h, k = 1, skip) => COLORS.filter(c => c[0] !== skip).map(c => [c, dist(h, c[1])]).sort((a, b) => a[1] - b[1]).slice(0, k);
+const matchPct = d => Math.max(60, Math.round(100 - d / 7.6));
+
+// ---------------------------------------------------------------- icons (one family: 24 grid, 1.7 stroke, round caps)
+const I = {
+  places: '<path d="M4 7h16M4 12h16M4 17h10"/>',
+  more: '<circle cx="5.5" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="18.5" cy="12" r="1.3" fill="currentColor"/>',
+  back: '<path d="M15 5l-7 7 7 7"/>',
+  map: '<circle cx="8" cy="9" r="3.2"/><circle cx="16.2" cy="8" r="2.2"/><circle cx="15" cy="15.5" r="3.6"/><circle cx="7" cy="16.5" r="2"/>',
+  x: '<path d="M6 6l12 12M18 6L6 18"/>',
+  search: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
+  chev: '<path d="M9 5l7 7-7 7"/>',
+  heart: '<path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.3a4.3 4.3 0 0 1 7.5 2.5C19.5 15.4 12 20 12 20z"/>',
+  share: '<path d="M12 4v11M7.5 8.5L12 4l4.5 4.5M5 13v6h14v-6"/>',
+  pair: '<circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/>',
+  look: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5M11 8v6M8 11h6"/>',
+  pipette: '<path d="M14 6l4 4M5 19l1.5-1.5 7-7 2 2-7 7L7 21z M13 7l3-3a2.1 2.1 0 0 1 3 3l-3 3"/>',
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>',
+  cards: '<rect x="4" y="6" width="12" height="14" rx="2"/><path d="M8 3h10a2 2 0 0 1 2 2v12"/>',
+  eye: '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>',
+  frame: '<rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 16l5-5 4 4 3-3 4 4"/>',
+  brush: '<path d="M14.5 4.5l5 5-8 8-5-5z"/><path d="M6.5 12.5c-2 0-3 1.6-3 3.5 0 1.6-.6 2.5-1 3 3 .5 6.5-.5 6.5-4"/>',
+  play: '<path d="M8 5v14l11-7z"/>',
+  camera: '<rect x="3" y="7" width="18" height="13" rx="2.5"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8.5 7l1.5-2.5h4L15.5 7"/>',
+  sliders: '<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>',
+  dice: '<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="15" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/><circle cx="9" cy="15" r="1" fill="currentColor"/>',
+  wheel: '<circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3L6.3 17.7"/>',
+  type: '<path d="M5 7V5h14v2M12 5v14M9 19h6"/>',
+  tag: '<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/>',
+  grid: '<rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/>',
+  clock: '<circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2"/>',
+  route: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/>',
+  book: '<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23"/>',
+};
+const svg = (k, sz = 24) => `<svg viewBox="0 0 24 24" width="${sz}" height="${sz}">${I[k]}</svg>`;
+const esc = s => String(s).replace(/[&<>"]/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[m]));
+
+// ---------------------------------------------------------------- state
+const ST = { stack: [{ s: "map" }], recent: null, layer: "colors", howMany: 100, fam: "All", shape: "Grid", order: "Hue", pshape: "By color",
+  kept: new Set(["Periwinkle", "Sage", "Teal"]), recentC: ["pulp", "photographs", "gems"], keptP: new Set(["milkmaid"]), first: 0, scroll: {} };
+const PLACES = [["map", "Map", "Every color, and every painting"], ["learn", "Learn", "7 new names · 3 to review"], ["train", "Train", "Odd one out · level 12"], ["collections", "Museum", "Every collection: paintings, photos, pulp, gems…"], ["studio", "Studio", "12 kept · camera · palettes"]];
+const PICON = { map: "map", learn: "cards", train: "eye", collections: "frame", studio: "brush" };
+const isPlace = s => PLACES.some(p => p[0] === s);
+const topE = () => ST.stack[ST.stack.length - 1];
+function titleOf(e) {
+  if (!e) return "";
+  if (isPlace(e.s)) return PLACES.find(p => p[0] === e.s)[1];
+  if (e.s === "color") return e.n;
+  if (e.s === "painting") return P(e.id).t;
+  if (e.s === "paintings") return "Paintings";
+  if (e.s === "collection") return C(e.id).t;
+  if (e.s === "look") return "Look closer";
+  if (e.s === "search") return "Search";
+  return e.s;
+}
+const placeOf = () => ST.stack[0].s;
+
+const scr = document.getElementById("screen"), ov = document.getElementById("overlay"), chromeEl = document.getElementById("chrome");
+function nav(e) { ST.scroll[ST.stack.length - 1] = scr.scrollTop; ST.stack.push(e); render(); scr.scrollTop = 0; }
+function back() { if (ST.stack.length > 1) { ST.stack.pop(); render(); scr.scrollTop = ST.scroll[ST.stack.length - 1] || 0; if (ST.first === 2 && ST.stack.length === 1) setTimeout(() => firstRun(3), 300); } }
+function home() { if (ST.stack.length > 1) ST.recent = ST.stack.slice(); ST.stack = [ST.stack[0]]; render(); if (ST.first === 2) setTimeout(() => firstRun(3), 300); }
+function goPlace(id) { closeSheet(); ST.stack = [{ s: id }]; render(); scr.scrollTop = 0; }
+function jumpTo(i) { closeSheet(); ST.stack = ST.stack.slice(0, i + 1); render(); }
+
+// ---------------------------------------------------------------- chrome
+const cornerL = () => `<button class="corner l${ST.first === 3 ? " glow" : ""}" data-places aria-label="Places">${svg("places")}<span class="pw">Places</span></button>`;
+const cornerR = ctx => `<button class="corner r" data-more="${ctx}" aria-label="More: search, options, tools, settings">${svg("more")}</button>`;
+function bar(ctx) {
+  const prev = ST.stack[ST.stack.length - 2];
+  return `<header class="bar">
+    <button class="pill" data-back aria-label="Back to ${esc(titleOf(prev))}. Hold for your trail">${svg("back")}<span>${esc(titleOf(prev))}</span></button>
+    <span class="sp"></span>
+    <button class="pill icon" data-more="${ctx}" aria-label="More: search, options, tools, settings">${svg("more")}</button>
+    ${ST.stack.length === 2 ? "" : `<button class="pill" data-home aria-label="Back to ${titleOf(ST.stack[0])}, where you started">${svg(PICON[placeOf()])}<span>${titleOf(ST.stack[0])}</span></button>`}
+  </header>`;
+}
+
+// ---------------------------------------------------------------- the map
+function bubbles() {
+  const cols = 10, chromatic = [], greys = [];
+  COLORS.forEach(c => { const [h, s, l] = hsl(c[1]); (s < .16 || (l > .92 && s < .5) ? greys : chromatic).push({ c, h, s, l }); });
+  chromatic.sort((a, b) => a.h - b.h);
+  const per = Math.ceil(chromatic.length / (cols - 1)), columns = [];
+  for (let i = 0; i < cols - 1; i++) columns.push(chromatic.slice(i * per, (i + 1) * per));
+  columns.splice(5, 0, greys);
+  const out = [], sp = 50, A = 232, a = 78, cx = 220, cy = 466;
+  columns.forEach((col, ci) => { col.sort((x, y) => y.l - x.l); const n = col.length;
+    col.forEach((o, ri) => {
+      const gx = (ci - (cols - 1) / 2) * sp + (ri % 2 ? sp / 2 : 0) - sp / 4, gy = (ri - (n - 1) / 2) * sp * .9 - 10;
+      const d = Math.hypot(gx, gy) || 1, F = A * Math.log(1 + d / a), Fp = A / (a + d);
+      const x = cx + gx / d * F * 1.02, y = cy + gy / d * F * 1.22, size = Math.max(16, sp * Fp * 1.06);
+      out.push({ n: o.c[0], h: o.c[1], x, y, size });
+    }); });
+  return out;
+}
+const BUBS = bubbles();
+function mapScreen() {
+  if (ST.layer === "paintings") {
+    const n = PAINTINGS.length, out = [], cx = 220, cy = 470;
+    const order = PAINTINGS.map(p => ({ p, l: lum(p.pal[0][1]) * .6 + lum(p.pal[1][1]) * .4, h: hsl(p.pal[1][1])[0] })).sort((a, b) => a.l - b.l); const many = Array.from({ length: 64 }, (_, i) => order[i % order.length]);
+    many.forEach((o, i) => { const ang = i * 2.39996, d = 30 * Math.sqrt(i + .3), F = 230 * Math.log(1 + d / 60), sz = Math.max(30, 230 / (1 + d / 60) * .62);
+      out.push(`<button class="ptl" data-open-p="${o.p.id}" aria-label="${esc(o.p.t)}" style="left:${cx + Math.cos(ang) * F}px;top:${cy + Math.sin(ang) * F * 1.25}px;width:${sz}px;height:${sz * 1.18}px;background-image:url('${THUMB(o.p.id)}')"></button>`); });
+    return `<div class="map">${out.join("")}</div><div class="mapcap" id="cap">Map · paintings, darker in the middle</div>`;
+  }
+  const bs = BUBS.map((b, i) => { const fs = Math.max(0, Math.min(30, b.size * .2)); const pulse = ST.first === 1 && b.n === "Periwinkle";
+    return `<button class="bub${pulse ? " pulse" : ""}" data-open-c="${esc(b.n)}" style="left:${b.x}px;top:${b.y}px;width:${b.size}px;height:${b.size}px;background:${b.h};color:${inkOn(b.h)};font-size:${fs}px" aria-label="${esc(b.n)}">${fs >= 12 ? esc(b.n) : ""}</button>`; }).join("");
+  return `<div class="map">${bs}</div><div class="mapcap" id="cap">Map · hue across, light to dark down</div>`;
+}
+
+// ---------------------------------------------------------------- places
+function learnScreen() {
+  const ten = ["Periwinkle", "Celadon", "Puce", "Ochre", "Viridian", "Thistle", "Petrol", "Sienna", "Cerise", "Ecru"].map(n => COLORS.find(c => c[0] === n));
+  return `<div class="room enter">
+    <div class="room-h"><h1 class="t-1">Learn</h1><button class="pill icon" data-search aria-label="Search">${svg("search", 20)}</button></div><p class="note" style="margin:-12px 0 16px">3 yours · 625 to fluent</p>
+    <div style="display:flex;height:150px;border-radius:var(--r-tile);overflow:hidden;gap:2px">${ten.map(c => `<button data-open-c="${c[0]}" style="flex:1;background:${c[1]}" aria-label="${c[0]}"></button>`).join("")}</div>
+    <h2 class="t-display" style="font-size:52px;margin:20px 0 4px">Your next <em>ten</em></h2>
+    <p class="note" style="margin:0 0 18px">Each beside the look-alike it's easiest to mix up</p>
+    <button class="paperbtn" data-toast="Opens the swipe deck">Learn these <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    <div class="sec"><div class="rows">
+      <button class="row" data-toast="Opens Review"><span class="lead">${svg("cards", 20)}</span><span class="rt"><b>Review</b><i>3 names from yesterday</i></span><span class="rv">2 min</span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>
+    </div></div>
+    <div class="sec"><div class="gh" style="display:flex;justify-content:space-between;align-items:baseline"><h3 class="t-3">Your families</h3><span class="small">tap one to study it</span></div>
+      <div class="chips" style="margin-top:10px">${["Reds", "Oranges", "Browns", "Yellows", "Greens", "Blues", "Purples", "Pinks", "Greys"].map((f, i) => `<button class="chip" data-toast="${f}: study this family"><span class="dot" style="background:${["#B3261E", "#E07A1F", "#7A4E2D", "#E8C21A", "#3F8F4E", "#2F5FB3", "#6E3FA0", "#E58FB0", "#8C8C8C"][i]}"></span>${f}<span class="n">${[1, 0, 0, 0, 1, 1, 0, 0, 0][i]}</span></button>`).join("")}</div></div>
+    <div class="sec"><div class="rows"><button class="row" data-more="learn"><span class="lead">${svg("more", 20)}</span><span class="rt"><b>More ways to learn</b><i>Your own deck, surprise me, placement</i></span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button></div></div>
+  </div>`;
+}
+function trainScreen() {
+  const hu = 205, base = `hsl(${hu} 30% 46%)`, odd = `hsl(${hu} 30% 53%)`;
+  return `<div class="room enter">
+    <div class="room-h"><h1 class="t-1">Train</h1><button class="pill icon" data-search aria-label="Search">${svg("search", 20)}</button></div>
+    <div class="nextcard" style="display:flex;gap:18px;align-items:center">
+      <div class="board">${Array.from({ length: 9 }, (_, i) => `<i style="background:${i === 5 ? odd : base}"></i>`).join("")}</div>
+      <div style="flex:1"><p class="small" style="margin:0">Next for you</p><h2 class="t-2" style="margin:2px 0 4px">Odd one out</h2><p class="small" style="margin:0">Level 12 · blues are your edge</p></div>
+    </div>
+    <div style="margin-top:12px"><button class="paperbtn" data-toast="Starts Odd one out at your level">Play <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+    <div class="sec"><h3 class="t-3">Today</h3><div class="today3">
+      <button data-open-p="wanderer"><span class="pic" style="background-image:url('${THUMB("wanderer")}')"></span><b>Painting</b><i>Five ways to look</i></button>
+      <button data-toast="Name today's color in six"><span class="pic" style="background:#5E7F8E"><span class="done"><svg viewBox="0 0 24 24" width="14" height="14" style="stroke:#0E0D0B;stroke-width:2.4;fill:none"><path d="M5 12l5 5 9-10"/></svg></span></span><b>Color</b><i>Name it in six</i></button>
+      <button data-toast="Today's gradient"><span class="pic" style="background:linear-gradient(135deg,#C9E5C2,#3E7A52)"></span><b>Gradient</b><i>Same board for all</i></button>
+    </div></div>
+    <div class="sec"><h3 class="t-3">Games</h3><div class="rows">
+      ${[["Odd one out", "Spot the one that's off", "level 12"], ["Gradients", "Put the colors back", "best 94%"], ["Across the line", "Where a name ends", "new"], ["Color memory", "Find the newcomer", ""], ["Painters' pairs", "Guess the painter", ""], ["Brand colors", "Guess the brand, or its color", ""]].map(([t, n, v]) => `<button class="row" data-toast="Opens ${t}"><span class="rt"><b>${t}</b><i>${n}</i></span><span class="rv">${v}</span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>`).join("")}
+    </div></div>
+    <div class="sec"><div class="rows">
+      <button class="row" data-toast="13 drills"><span class="lead">${svg("sliders", 20)}</span><span class="rt"><b>Drills</b><i>13 drills, one judgment each</i></span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>
+      <button class="row" data-toast="Your eye profile"><span class="lead">${svg("eye", 20)}</span><span class="rt"><b>Your eye</b><i>By family, lightness, vividness, hue</i></span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>
+    </div></div>
+  </div>`;
+}
+function collectionsScreen() {
+  const mk = P("milkmaid"), groups = ["Art", "Design", "Nature", "Writing & film", "Looks & ideas"];
+  return `<div class="room enter">
+    <div class="room-h"><h1 class="t-1">Museum</h1><button class="pill icon" data-search aria-label="Search">${svg("search", 20)}</button></div><p class="note" style="margin:-12px 0 16px">Every collection, measured by its colors</p>
+    <button class="door" data-open-p="milkmaid" style="width:100%"><span class="pic" style="height:220px;background-image:url('${IMG("milkmaid")}')"></span>
+      <span style="display:flex;height:10px">${mk.pal.map(c => `<i style="flex:${c[2]};background:${c[1]}"></i>`).join("")}</span>
+      <b>The Milkmaid</b><i>Today's painting · Vermeer, c. 1658 · seven colors</i></button>
+    <div class="ghd"><h3 class="t-3">Recent</h3><span class="small">where you were last</span></div>
+    <div class="ctiles three">${ST.recentC.map(id => ctile(C(id))).join("")}</div>
+    ${groups.map(g => `<div class="ghd"><h3 class="t-3">${g}</h3></div><div class="ctiles">${COLLS.filter(c => c.g === g).map(c => ctile(c)).join("")}</div>`).join("")}
+  </div>`;
+}
+function collectionScreen(e) {
+  const c = C(e.id);
+  if (ST.recentC[0] !== c.id) ST.recentC = [c.id, ...ST.recentC.filter(x => x !== c.id)].slice(0, 3);
+  const seed = [...c.id].reduce((a, ch) => a + ch.charCodeAt(0), 0);
+  const items = Array.from({ length: 18 }, (_, i) => { const h = (seed * 7 + i * 47) % 360; return `linear-gradient(160deg,hsl(${h} 45% ${40 + (i % 3) * 12}%),hsl(${(h + 40) % 360} 35% ${22 + (i % 4) * 8}%))`; });
+  return `${bar("collection")}
+  <div class="pg-pad" style="padding-bottom:60px">
+    <h1 class="t-1" style="margin-top:8px">${c.t}</h1>
+    <p class="small" style="margin:6px 0 16px">${c.n}${c.soon ? " · being built" : ""}</p>
+    <button class="sfield" data-search>${svg("search", 20)}<span>Search ${c.t.toLowerCase()} by color or name</span></button>
+    <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+      <div class="seg" style="flex:1"><button class="on" data-toast="Grid">Grid</button><button data-toast="By color, on the map">On the map</button></div>
+      <button class="chip" data-more="collection">${svg("sliders", 18)}Filter</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:20px">${items.map(bg => `<button data-toast="Opens the item's page" style="aspect-ratio:.78;border-radius:4px;background:${bg}"></button>`).join("")}</div>
+    <p class="small" style="margin-top:16px">Sample tiles: the real page shows the collection's own pictures.</p>
+  </div>`;
+}
+function studioScreen() {
+  const kept = [...ST.kept].map(n => COLORS.find(c => c[0] === n)).filter(Boolean);
+  return `<div class="room enter">
+    <div class="room-h"><h1 class="t-1">Studio</h1><button class="pill icon" data-search aria-label="Search">${svg("search", 20)}</button></div>
+    <div style="height:200px;border-radius:var(--r-card);background:linear-gradient(120deg,#7A8F68,#9CB0A3 45%,#6C6F64);display:grid;place-items:center;position:relative">
+      <span style="width:58px;height:58px;border-radius:99px;border:2px solid #F4F1EA;background:#93A68E"></span>
+      <span style="position:absolute;bottom:22px;padding:6px 14px;border-radius:99px;background:rgba(14,13,11,.85);font:400 19px var(--serif)">Sage</span></div>
+    <div style="margin-top:14px"><button class="paperbtn" data-toast="Opens the camera">Point the camera <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+    <p class="small" style="text-align:center;margin:10px 0 0"><button style="text-decoration:underline;color:var(--ink)" data-toast="Pick a photo">or pick a photo</button></p>
+    <div class="sec"><div class="gh" style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px"><h3 class="t-3">Kept</h3><span class="small">everything you ♡</span></div>
+      <div class="rows">
+        <button class="row" data-toast="Your kept colors"><span class="lead" style="background:conic-gradient(${kept.map(c => c[1]).join(",")})"></span><span class="rt"><b>Colors</b><i>${kept.map(c => c[0]).join(", ")}</i></span><span class="rv">${kept.length}</span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>
+        <button class="row" data-toast="Your kept paintings"><span class="lead sq" style="background:url('${THUMB("milkmaid")}') center/cover"></span><span class="rt"><b>Paintings</b><i>The Milkmaid</i></span><span class="rv">${ST.keptP.size}</span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>
+        <button class="row" data-toast="Your palettes"><span class="lead sq" style="background:linear-gradient(90deg,#7B68EE 0 33%,#E6E6FA 33% 66%,#FF7F50 66%)"></span><span class="rt"><b>Palettes</b><i>Slate, ghost white and coral</i></span><span class="rv">2</span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>
+        <button class="row" data-toast="Your photos"><span class="lead sq" style="background:linear-gradient(120deg,#7A8F68,#6C6F64)"></span><span class="rt"><b>Photos</b><i>From the camera</i></span><span class="rv">1</span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>
+      </div></div>
+    <div class="sec"><h3 class="t-3">Tools</h3><div class="rows">
+      <button class="row" data-toast="Name any color"><span class="lead">${svg("type", 20)}</span><span class="rt"><b>Name any color</b><i>Drag, type a hex, or eyedrop</i></span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>
+      <button class="row" data-toast="Gamut wheel"><span class="lead">${svg("wheel", 20)}</span><span class="rt"><b>Gamut wheel</b><i>Build a palette from a shape</i></span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>
+      <button class="row" data-toast="Albers"><span class="lead">${svg("grid", 20)}</span><span class="rt"><b>Albers</b><i>One color, two looks</i></span><svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>
+    </div></div>
+  </div>`;
+}
+
+// ---------------------------------------------------------------- pages
+function colorScreen(e) {
+  const h = e.h || COLORS.find(c => c[0] === e.n)[1], ink = inkOn(h), kept = ST.kept.has(e.n);
+  const near = nearest(h, 5, e.n);
+  const inP = PAINTINGS.map(p => ({ p, d: Math.min(...p.pal.map(c => dist(h, c[1]))) })).sort((a, b) => a.d - b.d).slice(0, 5);
+  const ns = nearest(h, 1)[0];
+  const sub = e.h && ns[0][0] !== e.n ? `Nearest learn name: ${ns[0][0]} · ${matchPct(ns[1])}% match` : "A color in the map";
+  return `${bar("color")}
+  <div class="hero-c" style="background:${h};color:${ink}">
+    <p class="note" style="color:${ink};opacity:.8;margin:0 0 6px">Color</p>
+    <h1 class="t-hero" style="font-size:${e.n.length > 12 ? 64 : 92}px">${esc(e.n)}</h1>
+    <p style="margin:10px 0 18px;font:400 18px var(--serif);opacity:.85">${esc(sub)}</p>
+    <div class="acts">
+      <button class="act primary" data-toast="Learn it: a 2-minute lesson">Learn it</button>
+      <button class="act" style="background:rgba(20,18,15,.9);color:#F4F1EA" data-toast="Pair with… opens a pair page">${svg("pair", 20)}Pair with…</button>
+      <button class="act round${kept ? " kept" : ""}" style="background:rgba(20,18,15,.9);color:#F4F1EA" data-keep="${esc(e.n)}" aria-label="${kept ? "Kept" : "Keep"}">${svg("heart", 20)}</button>
+    </div>
+  </div>
+  <div class="pg-pad" style="padding-bottom:60px">
+    <div class="sec"><h3 class="t-3">In paintings</h3><div class="strip">${inP.map(o => `<button class="ptile" data-open-p="${o.p.id}"><span class="img" style="display:block;background-image:url('${THUMB(o.p.id)}')"></span><b>${esc(o.p.t)}</b><i>${esc(o.p.a)}</i></button>`).join("")}</div></div>
+    <div class="sec"><h3 class="t-3">Easy to mix up with</h3><div class="cchips">${near.slice(0, 4).map(([c]) => `<button class="cchip" data-open-c="${esc(c[0])}"><span class="sw" style="background:${c[1]}"></span><b>${esc(c[0])}</b><i>${matchPct(dist(h, c[1]))}% alike</i></button>`).join("")}</div></div>
+    <div class="sec"><p class="small">The rest of the page (story, family, poems, what links here) stays as it is. This prototype only shows how you arrive, move and leave.</p></div>
+  </div>`;
+}
+function paintingScreen(e) {
+  const p = P(e.id), kept = ST.keptP.has(p.id), r = e.read || "Stands out";
+  const pal = r === "By area" ? p.pal.slice().sort((a, b) => b[2] - a[2]) : r === "Accents" ? p.pal.slice().sort((a, b) => a[2] - b[2]) : p.pal;
+  return `${bar("painting")}
+  <div class="imgwrap"><img src="${IMG(p.id)}" alt="${esc(p.t)}"><button class="on-img" data-look-pick="${p.id}" style="right:auto;left:16px">${svg("pipette", 18)}Pick a color</button><button class="on-img" data-look="${p.id}">${svg("look", 18)}Look closer</button></div>
+  <div class="pg-pad" style="padding-bottom:60px">
+    <p class="note" style="margin:18px 0 4px">Painting · ${esc(p.y)}</p>
+    <h1 class="t-1">${esc(p.t)}</h1>
+    <p style="margin:8px 0 18px"><button style="text-decoration:underline;text-underline-offset:3px" data-toast="Opens ${esc(p.a)}'s painter page">${esc(p.a)}</button></p>
+    <div class="palbar">${pal.map(c => `<button data-open-c="${esc(c[0])}" data-h="${c[1]}" style="flex:${Math.max(c[2], 4)};background:${c[1]};color:${inkOn(c[1])}" aria-label="${esc(c[0])}, ${c[2]}%"><span>${c[2]}%</span></button>`).join("")}</div>
+    <div class="pname">${pal.map(c => `<button data-open-c="${esc(c[0])}" data-h="${c[1]}"><i style="background:${c[1]}"></i>${esc(c[0])}</button>`).join("")}</div>
+    <div class="seg" style="margin-top:18px">${["Stands out", "By area", "Accents"].map(x => `<button class="${x === r ? "on" : ""}" data-read="${x}">${x}</button>`).join("")}</div>
+    <div style="margin-top:8px"><div class="slider"><span class="tr"></span><span class="fill" style="width:40%"></span><span class="th" style="left:40%"></span><input type="range" min="3" max="20" value="6" aria-label="How many colors"></div><div class="ends"><span>3 colors</span><span>${p.pal.length} now</span><span>20</span></div></div>
+    <div class="acts" style="margin-top:22px">
+      <button class="act primary" data-toast="Learn these ${p.pal.length} colors">Learn these</button>
+      <button class="act${kept ? " kept" : ""}" data-keepp="${p.id}">${svg("heart", 20)}${kept ? "Kept" : "Keep"}</button>
+      <button class="act" data-toast="Share card ready">${svg("share", 20)}Share</button>
+    </div>
+    <div class="sec"><h3 class="t-3">More like this</h3><div class="strip">${PAINTINGS.filter(x => x.id !== p.id).map(x => ({ x, d: x.pal.reduce((s, c) => s + Math.min(...p.pal.map(q => dist(c[1], q[1]))), 0) })).sort((a, b) => a.d - b.d).slice(0, 5).map(o => `<button class="ptile" data-open-p="${o.x.id}"><span class="img" style="display:block;background-image:url('${THUMB(o.x.id)}')"></span><b>${esc(o.x.t)}</b><i>${esc(o.x.a)}</i></button>`).join("")}</div></div>
+  </div>`;
+}
+function paintingsScreen() {
+  return `${bar("paintings")}
+  <div class="pg-pad" style="padding-bottom:60px">
+    <h1 class="t-1" style="margin-top:8px">Paintings</h1>
+    <p class="small" style="margin:6px 0 16px">23,778 paintings, found by their colors</p>
+    <button class="sfield" data-search>${svg("search", 20)}<span>A color, a painter, a decade, a mood</span></button>
+    <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+      <div class="seg" style="flex:1">${["Grid", "Wall", "Map"].map((x, i) => `<button class="${i === 0 ? "on" : ""}" data-toast="${x} view">${x}</button>`).join("")}</div>
+      <button class="chip" data-more="paintings">${svg("sliders", 18)}Filter</button>
+    </div>
+    <div class="sec" style="margin-top:26px"><div style="display:flex;justify-content:space-between;align-items:baseline"><h3 class="t-3">Rooms</h3><span class="small">curated ways in</span></div>
+      <div class="strip" style="margin-top:12px">${[["Blue before 1700", "water-lilies"], ["Twins across time", "the-swing"], ["Monochrome masterpieces", "whistlers-mother"]].map(([t, id]) => `<button class="ptile" data-toast="${t}"><span class="img" style="display:block;background-image:url('${THUMB(id)}')"></span><b>${t}</b></button>`).join("")}</div></div>
+    <div class="sec"><div style="display:flex;justify-content:space-between;align-items:baseline"><h3 class="t-3">All paintings</h3><span class="small">by date</span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px">${PAINTINGS.map(p => `<button data-open-p="${p.id}" style="aspect-ratio:.8;border-radius:4px;background:url('${THUMB(p.id)}') center/cover" aria-label="${esc(p.t)}"></button>`).join("")}</div></div>
+  </div>`;
+}
+function lookScreen(e) {
+  const p = P(e.id), tool = e.tool || "";
+  return `<div class="look">
+    <header class="bar" style="position:absolute;left:0;right:0">
+      <button class="pill" data-back aria-label="Done">${svg("back")}<span>Done</span></button><span class="sp"></span>
+      <span class="small" style="color:var(--ink)">${esc(p.t)}</span>
+    </header>
+    <div class="lk-img"><img src="${IMG(p.id)}" alt="" style="${tool === "Value" ? "filter:grayscale(1)" : tool === "Squint" ? "filter:blur(5px)" : ""}"></div>
+    <div class="tools">${["Value", "Squint", "Where", "Pick", "Region"].map(x => `<button class="${x === tool ? "on" : ""}" data-tool="${x}">${x === "Pick" ? svg("pipette", 16) + " " : ""}${x}</button>`).join("")}</div>
+  </div>`;
+}
+function searchScreen(e) {
+  return `<div style="padding:14px 16px 40px">
+    <div style="display:flex;gap:10px;align-items:center"><label class="sfield" style="flex:1">${svg("search", 20)}<input id="q" placeholder="Colors, paintings, painters, tools" value="${esc(e.q || "")}" autocomplete="off"></label><button class="x" data-back aria-label="Cancel">${svg("x", 20)}</button></div>
+    <div class="chips" style="margin-top:12px;flex-wrap:nowrap;overflow-x:auto">${["All", "Colors", "Paintings", "Painters", "Collections", "Tools"].map(x => `<button class="chip${(e.scope || "All") === x ? " on" : ""}" data-scope="${x}">${x}</button>`).join("")}</div>
+    <div id="results"></div>
+  </div>`;
+}
+const FEATURES = [
+  ["Slideshow", "Map · More · Map tools", "slideshow play colors one at a time idle", () => toast("Slideshow starts")],
+  ["Pick a color (eyedropper)", "Any painting · Look closer · Pick", "eyedropper pick sample pipette dropper", () => nav({ s: "look", id: "arnolfini", tool: "Pick" })],
+  ["Arrange the map", "Map · More · Arrange", "arrange view layout rings spiral families tones sort order warmth", () => openMore("map")],
+  ["Honeycomb look", "Map · More · Look & feel", "honeycomb bubbles magnify fisheye spacing size look feel", () => openSub("look")],
+  ["Haptics", "Settings", "haptics vibration buzz tap", () => openSettings()],
+  ["Back up your progress", "Settings", "backup export restore save progress", () => openSettings()],
+  ["Your own deck", "Learn · More", "practice deck custom flashcards", () => toast("Opens Practice")],
+  ["Value and squint", "Any painting · Look closer", "value squint grayscale blur notan", () => nav({ s: "look", id: "milkmaid", tool: "Value" })],
+  ["Gamut wheel", "Studio · Tools", "gamut wheel triangle palette shape", () => goPlace("studio")],
+  ["Albers", "Studio · Tools", "albers interaction context two looks", () => goPlace("studio")],
+  ["Odd one out", "Train · Games", "odd one out game", () => goPlace("train")],
+  ["Find your palette", "Studio · More", "taste find your palette color", () => toast("Find your palette, 15 taps")],
+  ["Color vision", "Settings", "color blind vision deficiency cvd", () => openSettings()],
+  ["Surprise me", "Map · More · Map tools", "surprise random", () => toast("A surprise color")],
+];
+function runSearch(q, scope) {
+  q = (q || "").trim().toLowerCase(); const res = document.getElementById("results"); if (!res) return;
+  const want = k => !scope || scope === "All" || scope === k;
+  const cs = want("Colors") ? COLORS.filter(c => q && c[0].toLowerCase().includes(q)).slice(0, 5) : [];
+  const ps = want("Paintings") ? PAINTINGS.filter(p => q && (p.t + " " + p.a).toLowerCase().includes(q)).slice(0, 4) : [];
+  const painters = want("Painters") ? [...new Set(PAINTINGS.map(p => p.a))].filter(a => q && a.toLowerCase().includes(q)).slice(0, 3) : [];
+  const cl = want("Collections") ? COLLS.filter(c => q && (c.t + " " + c.id + " " + c.n).toLowerCase().includes(q)).slice(0, 3) : [];
+  const fs = want("Tools") ? FEATURES.filter(f => q && (f[0] + " " + f[2]).toLowerCase().includes(q)).slice(0, 4) : [];
+  let html = "";
+  if (!q) html = `<p class="reshead">Try</p>${["pulp", "slideshow", "eyedropper", "haptics", "Vermeer"].map(s => `<button class="res" data-try="${s}"><span class="sw" style="background:var(--s2);display:grid;place-items:center">${svg("search", 18)}</span><b>${s}</b></button>`).join("")}`;
+  if (cl.length) html += `<p class="reshead">Collections</p>` + cl.map(c => `<button class="res" data-coll="${c.id}"><span class="sw sq" style="background:${c.bg}"></span><span><b>${esc(c.t)}</b><i>${esc(c.n)}</i></span></button>`).join("");
+  if (cs.length) html += `<p class="reshead">Colors</p>` + cs.map(c => `<button class="res" data-open-c="${esc(c[0])}"><span class="sw" style="background:${c[1]}"></span><span><b>${esc(c[0])}</b><i>${c[1]}</i></span></button>`).join("");
+  if (ps.length) html += `<p class="reshead">Paintings</p>` + ps.map(p => `<button class="res" data-open-p="${p.id}"><span class="sw sq" style="background-image:url('${THUMB(p.id)}')"></span><span><b>${esc(p.t)}</b><i>${esc(p.a)} · ${esc(p.y)}</i></span></button>`).join("");
+  if (painters.length) html += `<p class="reshead">Painters</p>` + painters.map(a => `<button class="res" data-toast="Opens ${esc(a)}"><span class="sw" style="background:var(--s3)"></span><span><b>${esc(a)}</b><i>Painter</i></span></button>`).join("");
+  if (fs.length) html += `<p class="reshead">Tools and settings</p>` + fs.map((f, i) => `<button class="res" data-feat="${FEATURES.indexOf(f)}"><span class="sw" style="background:var(--s2);display:grid;place-items:center">${svg("sliders", 18)}</span><span><b>${esc(f[0])}</b><i>${esc(f[1])}</i></span></button>`).join("");
+  if (q && !html) html = `<p class="small" style="margin-top:24px">Nothing called "${esc(q)}" yet. Try a color, a painter or a tool.</p>`;
+  res.innerHTML = html;
+}
+
+// ---------------------------------------------------------------- sheets (one pattern)
+let SHEET = null;
+function openSheet(title, body, o = {}) {
+  closeSheet(true);
+  const sc = document.createElement("div"); sc.className = "scrim";
+  const sh = document.createElement("div"); sh.className = "sheet" + (o.live ? " live" : ""); sh.setAttribute("role", "dialog");
+  if (o.live) sc.classList.add("clear");   // a sheet that changes the map leaves the map clear and live above it (HOME-VIEWS §5)
+  sh.innerHTML = `<div class="grab"></div><div class="sh-head">${o.back ? `<button class="x" data-sheet-back aria-label="Back">${svg("back", 20)}</button>` : ""}<h2 class="t-2">${title}</h2><button class="x" data-close aria-label="Close">${svg("x", 20)}</button></div><div class="sh-body">${body}</div>`;
+  ov.append(sc, sh); SHEET = { sc, sh, o };
+  sc.onclick = () => closeSheet();
+  requestAnimationFrame(() => requestAnimationFrame(() => { sc.classList.add("on"); sh.classList.add("on"); }));
+  wire(sh);
+  sh.querySelector("[data-close]").onclick = () => closeSheet();
+  const sb = sh.querySelector("[data-sheet-back]"); if (sb) sb.onclick = o.back;
+  return sh;
+}
+function closeSheet(instant) {
+  if (!SHEET) return; const { sc, sh } = SHEET; SHEET = null;
+  if (instant) { sc.remove(); sh.remove(); return; }
+  sc.classList.remove("on"); sh.classList.remove("on"); setTimeout(() => { sc.remove(); sh.remove(); }, 320);
+}
+const row = (lead, t, n, attr = "", v = "") => `<button class="row" ${attr}><span class="lead">${svg(lead, 20)}</span><span class="rt"><b>${t}</b>${n ? `<i>${n}</i>` : ""}</span>${v ? `<span class="rv">${v}</span>` : ""}<svg class="chev" viewBox="0 0 24 24">${I.chev}</svg></button>`;
+const settingsRow = () => `<div class="grp"><div class="rows">${row("gear", "Settings", "Color vision, haptics, backup", "data-settings")}</div></div>`;
+const searchTop = () => `<button class="sfield" data-search>${svg("search", 20)}<span>Search colors, paintings, tools</span></button>`;
+
+function openPlaces() {
+  const cur = placeOf();
+  const r = ST.recent && ST.recent.length > 1 ? ST.recent : null;
+  const resume = r ? `<button class="resume" data-resume><span class="stack">${r.slice(-3).map(e => `<i style="background:${e.s === "color" ? (e.h || COLORS.find(c => c[0] === e.n)[1]) : e.s === "painting" ? `url('${THUMB(e.id)}') center/cover` : "#555"}"></i>`).join("")}</span><span class="rt"><b>Pick up where you left off</b><i>${esc(titleOf(r[r.length - 1]))} · ${r.length - 1} ${r.length - 1 === 1 ? "page" : "pages"}</i></span></button>` : "";
+  const art = { map: `radial-gradient(circle at 35% 40%,#40E0D0 0 18%,transparent 19%),radial-gradient(circle at 68% 35%,#E2725B 0 15%,transparent 16%),radial-gradient(circle at 55% 72%,#A3A8EE 0 20%,transparent 21%),radial-gradient(circle at 25% 75%,#CFA41C 0 13%,transparent 14%),#201E1A`,
+    learn: "linear-gradient(90deg,#A3A8EE 0 20%,#ACCFB0 20% 40%,#CC8899 40% 60%,#CC7722 60% 80%,#40826D 80%)",
+    train: `conic-gradient(from 0deg,#4E7A8F 0 88%,#5E8CA2 88%)`, collections: `url('${THUMB("milkmaid")}') center/cover`, studio: "conic-gradient(#ff3b30,#ffcc00,#4cd964,#34c8e0,#3b5bff,#c644fc,#ff3b30)" };
+  const order = [...ST.recentC.map(C), ...COLLS.filter(c => !ST.recentC.includes(c.id) && !c.soon)];
+  openSheet("Places", `${resume}${PLACES.map(([id, t, n]) => `<button class="place${id === cur ? " cur" : ""}" data-place="${id}"><span class="art" style="background:${art[id]}"></span><span class="rt"><b>${t}</b><i>${n}</i></span>${id === cur ? `<span class="here">Here</span>` : ""}</button>`).join("")}
+    <div class="ghd" style="margin-top:22px"><h3 class="t-3">Collections</h3><span class="small">recent first</span></div>
+    <div class="ctiles three">${order.map(c => ctile(c)).join("")}</div>`);
+}
+function moreBody(ctx) {
+  if (ctx === "map" && ST.layer === "colors") return `${searchTop()}
+    <div class="grp"><div class="seg">${["Colors", "Paintings"].map(x => `<button class="${ST.layer === x.toLowerCase() ? "on" : ""}" data-layer="${x.toLowerCase()}">${x}</button>`).join("")}</div></div>
+    <div class="grp"><div class="gh"><h3 class="t-3">How many</h3><span class="small" id="hmv">${ST.howMany.toLocaleString()} names</span></div>
+      <div class="slider"><span class="tr"></span><span class="fill" id="hmf"></span><span class="th" id="hmt"></span><input id="hmr" type="range" min="0" max="9" value="2" aria-label="How many names"></div><div class="ends"><span>25 · the basics</span><span>1,760 · every name</span></div></div>
+    <div class="grp"><div class="gh"><h3 class="t-3">Family</h3><span class="small">${ST.fam === "All" ? "every family" : ST.fam}</span></div><div class="chips">${[["All", "conic-gradient(#d33,#eb3,#3a5,#36c,#a3c,#d33)", 100], ["Reds", "#B3261E", 10], ["Blues", "#2F5FB3", 18], ["Greens", "#3F8F4E", 17], ["Yellows", "#E8C21A", 5], ["Purples", "#6E3FA0", 12]].map(([f, c, n]) => `<button class="chip${ST.fam === f ? " on" : ""}" data-fam="${f}"><span class="dot" style="background:${c}"></span>${f}<span class="n">${n}</span></button>`).join("")}<button class="chip more" data-sub="families">+4 more</button></div></div>
+    <div class="grp"><div class="gh"><h3 class="t-3">Arrange</h3><span class="small">${ST.shape} · ${ST.order}</span></div>
+      <div class="shapes">${[["Grid", gridPic()], ["Rings", ringPic()], ["Spiral", spiralPic()], ["Families", famPic()], ["Tones", tonePic()]].map(([n, pic]) => `<button class="shape${ST.shape === n ? " on" : ""}" data-shape="${n}"><span class="pic">${pic}</span>${n}</button>`).join("")}</div>
+      <div class="chips" style="margin-top:12px">${["Hue", "Lightness", "Vividness", "Warmth"].map(o => `<button class="chip${ST.order === o ? " on" : ""}" data-order="${o}">${o}</button>`).join("")}<button class="chip more" data-sub="orders">+2 more</button></div></div>
+    <div class="grp"><div class="rows">
+      ${row("sliders", "More filters", "Tone · Your words · Name lists", 'data-sub="filters"')}
+      ${row("grid", "Look & feel", "Bubbles or honeycomb, magnify, spacing", 'data-sub="look"')}
+      ${row("play", "Map tools", "Learn these names, keep colors, slideshow, surprise me, name any color", 'data-sub="tools"')}
+    </div></div>${settingsRow()}`;
+  if (ctx === "map") return `${searchTop()}
+    <div class="grp"><div class="seg">${["Colors", "Paintings"].map(x => `<button class="${ST.layer === x.toLowerCase() ? "on" : ""}" data-layer="${x.toLowerCase()}">${x}</button>`).join("")}</div></div>
+    <div class="grp"><div class="gh"><h3 class="t-3">Arrange</h3><span class="small">${ST.pshape}</span></div><div class="chips">${["By color", "By time", "By painter", "Families", "Tones"].map(o => `<button class="chip${ST.pshape === o ? " on" : ""}" data-pshape="${o}">${o}</button>`).join("")}<button class="chip more" data-sub="pshapes">+2 more</button></div></div>
+    <div class="grp"><div class="gh"><h3 class="t-3">Filter</h3><span class="small">23,778 paintings</span></div><div class="rows">
+      ${[["clock", "When", "Any time"], ["brush", "Painter", "Anyone"], ["route", "Movement", "Any"], ["map", "Country", "Anywhere"], ["frame", "Museum", "All seven"]].map(([ic, t, v]) => row(ic, t, "", `data-toast="${t}: a picker with the top six and search"`, v)).join("")}
+    </div></div>
+    <div class="grp"><div class="rows">${row("sliders", "More options", "Place by average, main or standout color · Center on", 'data-toast="Place by and Center on"')}</div></div>${settingsRow()}`;
+  if (ctx === "color") return `${searchTop()}
+    <div class="grp"><div class="gh"><h3 class="t-3">This color</h3></div><div class="rows">
+      ${row("frame", "Find it in paintings", "Where it covers the most canvas", 'data-paintings')}
+      ${row("map", "See it on the map", "Lit among its neighbors", 'data-place="map"')}
+      ${row("eye", "Test yourself", "Two questions", 'data-toast="Test yourself"')}
+      ${row("tag", "Codes", "HEX, RGB, HSL, CMYK · copy any", 'data-toast="Copied #A3A8EE"')}
+      ${row("share", "Share", "A card in this color", 'data-toast="Share card ready"')}
+    </div></div>${settingsRow()}`;
+  if (ctx === "painting") return `${searchTop()}
+    <div class="grp"><div class="gh"><h3 class="t-3">Look</h3></div><div class="rows">
+      ${row("look", "Where each color sits", "Light up one color on the picture", `data-look-tool="${topE().id}|Where"`)}
+      ${row("eye", "Value and squint", "See the lights and darks", `data-look-tool="${topE().id}|Value"`)}
+      ${row("grid", "Region", "Read the colors of one part", `data-look-tool="${topE().id}|Region"`)}
+    </div></div>
+    <div class="grp"><div class="gh"><h3 class="t-3">Read the colors</h3></div><div class="chips"><button class="chip" data-toast="Diverse: the widest spread">Diverse</button><button class="chip" data-toast="Pick from it">Pick from it</button><button class="chip" data-toast="Focal: where the eye lands">Focal</button></div></div>
+    <div class="grp"><div class="gh"><h3 class="t-3">Go</h3></div><div class="rows">
+      ${row("map", "On the map", "Similar paintings around it", 'data-toast="Paintings layer, centered on this one"')}
+      ${row("brush", "The painter", "All of their work, by color", 'data-toast="Painter page"')}
+      ${row("frame", "Full size at the museum", "Opens the museum's own page", 'data-toast="Opens the museum site"')}
+      ${row("play", "Play with these colors", "Five ways to look", 'data-toast="Five ways to look"')}
+    </div></div>${settingsRow()}`;
+  if (ctx === "collection") return `${searchTop()}
+    <div class="grp"><div class="gh"><h3 class="t-3">Filter</h3></div><div class="rows">
+      ${[["clock", "When", "Any time"], ["sliders", "Color", "Any"], ["frame", "Kind", "All"]].map(([ic, t, v]) => row(ic, t, "", `data-toast="${t}: top six, then search"`, v)).join("")}
+    </div></div>
+    <div class="grp"><div class="rows">${row("route", "Sort", "Date, lightness, vividness", 'data-toast="Sort"')}</div></div>${settingsRow()}`;
+  if (ctx === "paintings") return `${searchTop()}
+    <div class="grp"><div class="gh"><h3 class="t-3">Filter</h3><span class="small">23,778 paintings</span></div><div class="rows">
+      ${[["clock", "When", "Any time"], ["brush", "Painter", "Anyone"], ["route", "Movement", "Any"], ["map", "Country", "Anywhere"], ["frame", "Museum", "All seven"], ["sliders", "Mood", "Any"]].map(([ic, t, v]) => row(ic, t, "", `data-toast="${t}: top six, then search"`, v)).join("")}
+    </div></div>
+    <div class="grp"><div class="gh"><h3 class="t-3">More ways in</h3></div><div class="rows">
+      ${row("wheel", "Pick a color on the dial", "", 'data-toast="The dial"')}
+      ${row("camera", "Colors from a photo or the camera", "", 'data-toast="Camera"')}
+      ${row("route", "River and Painters views", "", 'data-toast="Other views"')}
+    </div></div>${settingsRow()}`;
+  const per = { learn: [["cards", "Your own deck", "Pick the colors and the way to practice"], ["dice", "Surprise me", "A few names from somewhere"], ["route", "Retake the placement", "60 seconds"], ["book", "How a color becomes yours", "Named again a day later"]],
+    train: [["sliders", "Drills", "13 drills, one judgment each"], ["eye", "Your eye", "Your profile"], ["play", "Sounds", "Every color's own note"]],
+    collections: [["play", "Slideshow", "Today's colors, one at a time"], ["dice", "Shuffle a painting", "Any of 23,778"], ["route", "Art history by color", "Decades, movements, countries"], ["book", "The family tree", "Every look and movement"]],
+    studio: [["heart", "Find your color", "20 taps"], ["frame", "Find your palette", "15 taps"], ["share", "Export what you've kept", "A file you can open anywhere"]] }[ctx] || [];
+  return `${searchTop()}<div class="grp"><div class="gh"><h3 class="t-3">In ${titleOf(ST.stack[0])}</h3></div><div class="rows">${per.map(([i, t, n]) => row(i, t, n, `data-toast="${t}"`)).join("")}</div></div>${settingsRow()}`;
+}
+function openMore(ctx) {
+  const title = ctx === "map" ? "Map" : ctx === "color" ? topE().n : ctx === "painting" ? "This painting" : ctx === "paintings" ? "Paintings" : ctx === "collection" ? C(topE().id).t : titleOf(ST.stack[0]);
+  const sh = openSheet(esc(title), moreBody(ctx), { live: ctx === "map" });
+  const r = sh.querySelector("#hmr");
+  if (r) { const steps = [25, 50, 100, 150, 250, 400, 600, 800, 1000, 1760]; r.value = steps.indexOf(ST.howMany);
+    const upd = () => { const v = +r.value, pc = v / 9 * 100; ST.howMany = steps[v]; sh.querySelector("#hmv").textContent = `${steps[v].toLocaleString()} names`; sh.querySelector("#hmf").style.width = pc + "%"; sh.querySelector("#hmt").style.left = pc + "%"; };
+    r.oninput = upd; upd(); }
+}
+function openSub(which) {
+  const back = () => openMore("map");
+  const B = {
+    filters: ["More filters", `<div class="grp"><div class="gh"><h3 class="t-3">Tone</h3></div><div class="chips">${["Any", "Light", "Vivid", "Muted", "Dark"].map((x, i) => `<button class="chip${i === 0 ? " on" : ""}">${x}</button>`).join("")}</div></div>
+      <div class="grp"><div class="gh"><h3 class="t-3">Your words</h3></div><div class="chips">${["All", "Yours", "Learning", "New"].map((x, i) => `<button class="chip${i === 0 ? " on" : ""}">${x}</button>`).join("")}</div></div>
+      <div class="grp"><div class="gh"><h3 class="t-3">Name lists</h3><span class="small">9</span></div><div class="chips">${["Kept", "Earth tones", "Japanese traditional", "Werner, 1821", "Ridgway, 1912", "RAL paint"].map(x => `<button class="chip">${x}</button>`).join("")}<button class="chip more">+3 more</button></div></div>`],
+    look: ["Look & feel", `<div class="grp"><div class="seg"><button class="on">Bubbles</button><button>Honeycomb</button></div></div>
+      ${["Magnify", "Spacing", "Bubble size"].map((t, i) => `<div class="grp"><div class="gh"><h3 class="t-3">${t}</h3></div><div class="slider"><span class="tr"></span><span class="fill" style="width:${[62, 15, 50][i]}%"></span><span class="th" style="left:${[62, 15, 50][i]}%"></span><input type="range"></div><div class="ends"><span>${["Flat", "Tight", "Small"][i]}</span><span>${["Fisheye", "Airy", "Large"][i]}</span></div></div>`).join("")}
+      <div class="grp"><div class="gh"><h3 class="t-3">Edges</h3></div><div class="seg"><button class="on">One map</button><button>Endless</button></div></div>
+      <div class="grp"><div class="rows"><button class="row" data-toast="Back to the defaults"><span class="rt"><b>Reset the feel</b></span></button></div></div>`],
+    tools: ["Map tools", `<div class="grp"><div class="rows">
+      ${row("cards", "Learn these names", "The names near the middle of the map", 'data-toast="A deck from the middle of the map"')}
+      ${row("heart", "Keep colors from the map", "Tap bubbles to keep them", 'data-toast="Tap bubbles to keep them"')}
+      ${row("play", "Slideshow", "Colors, one at a time", 'data-toast="Slideshow starts"')}
+      ${row("dice", "Surprise me", "Fly to a color you haven't seen", 'data-toast="Flying somewhere new"')}
+      ${row("type", "Name any color", "Drag, type a hex, or eyedrop", 'data-toast="Name any color"')}
+      ${row("route", "Study the map", "A game: find names on the map", 'data-toast="Study the map"')}
+    </div></div>`],
+    families: ["Family", `<div class="chips">${["All", "Reds", "Pinks", "Oranges", "Yellows", "Browns", "Greens", "Blues", "Purples", "Greys"].map(f => `<button class="chip" data-fam="${f}">${f}</button>`).join("")}</div>`],
+    orders: ["Order", `<div class="chips">${["Hue", "Lightness", "Vividness", "Warmth", "Painted", "First met"].map(o => `<button class="chip${ST.order === o ? " on" : ""}" data-order="${o}">${o}</button>`).join("")}</div>`],
+    pshapes: ["Arrange", `<div class="chips">${["By color", "By time", "By painter", "Families", "Tones", "Rings", "Spiral"].map(o => `<button class="chip${ST.pshape === o ? " on" : ""}" data-pshape="${o}">${o}</button>`).join("")}</div>`],
+  }[which];
+  openSheet(B[0], B[1], { back, live: true });
+}
+function openSettings() {
+  openSheet("Settings", `<p class="small" style="margin:0 0 4px">One place for every setting. Reached from ⋯ on any screen, or by searching.</p>
+    ${[["How you see", [["Color vision and tools", "Not set", "eye"], ["Eyedropper sample size", "Point", "pipette"]]], ["Feel", [["Haptics", "sw-on", "sliders"], ["Quick mode", "sw-off", "cards"], ["Idle slideshow", "sw-on", "play"]]], ["Your progress", [["Back up your progress", "Never", "share"], ["Restore a backup", "", "route"], ["Retake the placement", "", "clock"]]], ["About", [["About the colors", "", "book"], ["Reset all progress", "", "x"]]]].map(([h, rows]) => `<div class="grp"><div class="gh"><h3 class="t-3">${h}</h3></div><div class="rows">${rows.map(([t, v, ic]) => `<button class="row" data-sw><span class="lead">${svg(ic, 20)}</span><span class="rt"><b>${t}</b></span>${v.startsWith("sw") ? `<span class="switch${v === "sw-on" ? " on" : ""}"></span>` : `${v ? `<span class="rv">${v}</span>` : ""}<svg class="chev" viewBox="0 0 24 24">${I.chev}</svg>`}</button>`).join("")}</div></div>`).join("")}`);
+}
+function openTrail() {
+  const items = ST.stack.map((e, i) => ({ e, i })).reverse();
+  openSheet("Your trail", items.map(({ e, i }) => { const sw = e.s === "color" ? `<span class="sw" style="background:${e.h || COLORS.find(c => c[0] === e.n)[1]}"></span>` : e.s === "painting" ? `<span class="sw sq" style="background-image:url('${THUMB(e.id)}')"></span>` : `<span class="sw" style="background:var(--s3);display:grid;place-items:center">${svg(isPlace(e.s) ? "places" : "frame", 18)}</span>`;
+    const kind = isPlace(e.s) ? "Where you started" : e.s === "color" ? "Color" : e.s === "painting" ? "Painting" : "Page";
+    return `<button class="res" data-jump="${i}">${sw}<span><b>${esc(titleOf(e))}</b><i>${i === ST.stack.length - 1 ? "You're here" : kind}</i></span></button>`; }).join(""));
+}
+
+// mini pictures for the shape tiles
+const dots = (pts, r = 3.4) => `<svg viewBox="0 0 60 60">${pts.map(([x, y, c]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/>`).join("")}</svg>`;
+const hueC = i => `hsl(${i * 37 % 360} 60% 60%)`;
+const gridPic = () => dots(Array.from({ length: 25 }, (_, i) => [10 + (i % 5) * 10, 10 + Math.floor(i / 5) * 10, `hsl(${(i % 5) * 60} 55% ${78 - Math.floor(i / 5) * 12}%)`]));
+const ringPic = () => dots(Array.from({ length: 19 }, (_, i) => { const k = i === 0 ? 0 : i < 7 ? 1 : 2, n = k === 1 ? 6 : 12, j = k === 1 ? i - 1 : i - 7, a = j / n * 6.283; return [30 + Math.cos(a) * k * 11, 30 + Math.sin(a) * k * 11, k === 0 ? "#eee" : `hsl(${j / n * 360} 55% ${k === 1 ? 70 : 50}%)`]; }));
+const spiralPic = () => dots(Array.from({ length: 30 }, (_, i) => { const a = i * 2.4, d = 3.6 * Math.sqrt(i + .5); return [30 + Math.cos(a) * d * 1.5, 30 + Math.sin(a) * d * 1.5, hueC(i)]; }), 2.8);
+const famPic = () => dots([[16, 16], [22, 16], [16, 22], [40, 14], [46, 14], [40, 20], [14, 42], [20, 42], [20, 48], [42, 42], [48, 42], [42, 48], [30, 30]].map(([x, y], i) => [x, y, ["#d55", "#d55", "#d55", "#36c", "#36c", "#36c", "#3a5", "#3a5", "#3a5", "#eb3", "#eb3", "#eb3", "#999"][i]]));
+const tonePic = () => dots([[16, 16, "#f3c9c0"], [22, 16, "#c9e6f3"], [16, 22, "#e6f3c9"], [42, 16, "#ff3b30"], [48, 16, "#3b5bff"], [42, 22, "#ffcc00"], [16, 42, "#a08c86"], [22, 42, "#869aa0"], [16, 48, "#9aa086"], [42, 42, "#5a1410"], [48, 42, "#10285a"], [42, 48, "#2a3a10"]]);
+
+// ---------------------------------------------------------------- render + wiring
+function render() {
+  closeSheet(true);
+  const e = topE();
+  const html = { map: mapScreen, learn: learnScreen, train: trainScreen, collections: collectionsScreen, collection: collectionScreen, studio: studioScreen, color: colorScreen, painting: paintingScreen, paintings: paintingsScreen, look: lookScreen, search: searchScreen }[e.s](e);
+  scr.innerHTML = `<div class="${isPlace(e.s) ? "" : "enter"}" style="min-height:100%;position:relative">${html}</div>`;
+  chromeEl.innerHTML = isPlace(e.s) ? cornerL() + cornerR(e.s) : "";
+  chromeEl.className = isPlace(e.s) && e.s !== "map" ? "fade" : "";
+  wire(scr); wire(chromeEl);
+  if (e.s === "search") { const q = document.getElementById("q"); q.oninput = () => { e.q = q.value; runSearch(q.value, e.scope); }; runSearch(e.q, e.scope); setTimeout(() => q.focus(), 50); }
+  if (e.s === "map") { const cap = document.getElementById("cap"); setTimeout(() => cap && (cap.style.opacity = 0), 3500); }
+  coachFor(e);
+}
+let lpT = 0, lpFired = false;
+function wire(root) {
+  const on = (sel, f) => root.querySelectorAll(sel).forEach(b => b.addEventListener("click", ev => { ev.stopPropagation(); f(b, ev); }));
+  on("[data-open-c]", b => { closeSheet(true); nav({ s: "color", n: b.dataset.openC, h: b.dataset.h || null }); if (ST.first === 1) ST.first = 2; });
+  on("[data-open-p]", b => { closeSheet(true); nav({ s: "painting", id: b.dataset.openP }); });
+  on("[data-paintings]", () => { closeSheet(true); nav({ s: "paintings" }); });
+  on("[data-coll]", b => { closeSheet(true); if (b.dataset.coll === "paintings") { if (ST.recentC[0] !== "paintings") ST.recentC = ["paintings", ...ST.recentC.filter(x => x !== "paintings")].slice(0, 3); return nav({ s: "paintings" }); } nav({ s: "collection", id: b.dataset.coll }); });
+  on("[data-home]", () => { closeSheet(true); home(); });
+  on("[data-places]", () => openPlaces());
+  on("[data-place]", b => goPlace(b.dataset.place));
+  on("[data-resume]", () => { closeSheet(true); ST.stack = ST.recent; ST.recent = null; render(); });
+  on("[data-more]", b => openMore(b.dataset.more));
+  on("[data-search]", () => { closeSheet(true); nav({ s: "search", q: "", scope: "All" }); });
+  on("[data-settings]", () => openSettings());
+  on("[data-sub]", b => openSub(b.dataset.sub));
+  on("[data-layer]", b => { ST.layer = b.dataset.layer; closeSheet(true); ST.stack = [{ s: "map" }]; render(); openMore("map"); });
+  on("[data-fam]", b => { ST.fam = b.dataset.fam; openMore("map"); });
+  on("[data-shape]", b => { ST.shape = b.dataset.shape; openMore("map"); });
+  on("[data-order]", b => { ST.order = b.dataset.order; openMore("map"); });
+  on("[data-pshape]", b => { ST.pshape = b.dataset.pshape; openMore("map"); });
+  on("[data-read]", b => { topE().read = b.dataset.read; const y = scr.scrollTop; render(); scr.scrollTop = y; });
+  on("[data-look]", b => { closeSheet(true); nav({ s: "look", id: b.dataset.look }); });
+  on("[data-look-tool]", b => { const [id, tool] = b.dataset.lookTool.split("|"); closeSheet(true); nav({ s: "look", id, tool }); });
+  on("[data-look-pick]", b => { closeSheet(true); nav({ s: "look", id: b.dataset.lookPick, tool: "Pick" }); });
+  on("[data-tool]", b => { topE().tool = topE().tool === b.dataset.tool ? "" : b.dataset.tool; render(); });
+  on("[data-keep]", b => { const n = b.dataset.keep; ST.kept.has(n) ? ST.kept.delete(n) : ST.kept.add(n); toast(ST.kept.has(n) ? "Kept · in Studio" : "Removed from Kept"); const y = scr.scrollTop; render(); scr.scrollTop = y; });
+  on("[data-keepp]", b => { const n = b.dataset.keepp; ST.keptP.has(n) ? ST.keptP.delete(n) : ST.keptP.add(n); toast(ST.keptP.has(n) ? "Kept · in Studio" : "Removed from Kept"); const y = scr.scrollTop; render(); scr.scrollTop = y; });
+  on("[data-toast]", b => toast(b.dataset.toast));
+  on("[data-scope]", b => { topE().scope = b.dataset.scope; render(); });
+  on("[data-try]", b => { const q = document.getElementById("q"); q.value = b.dataset.try; topE().q = q.value; runSearch(q.value, topE().scope); });
+  on("[data-feat]", b => FEATURES[+b.dataset.feat][3]());
+  on("[data-jump]", b => jumpTo(+b.dataset.jump));
+  on("[data-sw]", b => { const s = b.querySelector(".switch"); if (s) s.classList.toggle("on"); });
+  // ‹ : a tap goes one step back; a hold shows the whole trail (iOS does the same with its back button)
+  root.querySelectorAll("[data-back]").forEach(b => {
+    b.addEventListener("pointerdown", () => { lpFired = false; clearTimeout(lpT); lpT = setTimeout(() => { lpFired = true; openTrail(); }, 480); });
+    ["pointerup", "pointerleave", "pointercancel"].forEach(k => b.addEventListener(k, () => clearTimeout(lpT)));
+    b.addEventListener("click", ev => { ev.stopPropagation(); if (lpFired) return; back(); });
+  });
+}
+const _run = runSearch; runSearch = function (q, s) { _run(q, s); const res = document.getElementById("results"); if (res) wire(res); };
+let toastT = 0;
+function toast(t) { document.querySelectorAll(".toast").forEach(n => n.remove()); const d = document.createElement("div"); d.className = "toast"; d.textContent = t; ov.append(d); clearTimeout(toastT); toastT = setTimeout(() => d.remove(), 1800); }
+
+// ---------------------------------------------------------------- first run: three steps, one line each
+function coachFor(e) {
+  document.querySelectorAll(".coach").forEach(n => n.remove());
+  if (ST.first === 1 && e.s === "map") coach("Tap any color.", "1 of 3", "top:120px");
+  if (ST.first === 2 && e.s === "color") coach("‹ goes back a step. The name on the right takes you back to where you started.", "2 of 3", "top:76px");
+}
+function firstRun(step) {
+  if (step === 1) { ST.first = 1; ST.stack = [{ s: "map" }]; ST.recent = null; render(); }
+  if (step === 3) { ST.first = 3; render(); coach("Learn, Train, Museum and Studio are in here, and every collection.", "3 of 3", "bottom:92px"); setTimeout(() => { if (ST.first === 3) { ST.first = 0; render(); } }, 5000); }
+}
+function coach(text, n, pos) {
+  const c = document.createElement("div"); c.className = "coach"; c.style.cssText = pos; c.innerHTML = `<span>${text}</span><small>${n}</small>`;
+  c.onclick = () => { c.remove(); if (ST.first === 3) { ST.first = 0; render(); } };
+  ov.append(c);
+}
+
+// ---------------------------------------------------------------- jump links + ?s= states (for the before/after shots)
+const STATES = {
+  map: () => { ST.stack = [{ s: "map" }]; render(); },
+  places: () => { ST.recent = [{ s: "map" }, { s: "color", n: "Periwinkle" }, { s: "painting", id: "arnolfini" }, { s: "color", n: "Bistre", h: "#362A1E" }]; STATES.map(); openPlaces(); },
+  "more-map": () => { STATES.map(); openMore("map"); },
+  "more-paintings": () => { ST.layer = "paintings"; STATES.map(); openMore("map"); },
+  "map-paintings": () => { ST.layer = "paintings"; STATES.map(); },
+  learn: () => goPlace("learn"), train: () => goPlace("train"), collections: () => goPlace("collections"), "collection-pulp": () => { ST.stack = [{ s: "map" }, { s: "collection", id: "pulp" }]; render(); }, studio: () => goPlace("studio"),
+  "collections-paintings": () => { ST.stack = [{ s: "collections" }, { s: "paintings" }]; render(); },
+  color: () => { ST.stack = [{ s: "map" }, { s: "color", n: "Periwinkle" }]; render(); },
+  painting: () => { ST.stack = [{ s: "map" }, { s: "color", n: "Periwinkle" }, { s: "painting", id: "arnolfini" }]; render(); },
+  "more-painting": () => { STATES.painting(); openMore("painting"); },
+  "more-color": () => { STATES.color(); openMore("color"); },
+  look: () => { ST.stack = [{ s: "map" }, { s: "painting", id: "arnolfini" }, { s: "look", id: "arnolfini" }]; render(); },
+  search: () => { ST.stack = [{ s: "map" }, { s: "search", q: "slide", scope: "All" }]; render(); },
+  settings: () => { STATES.map(); openSettings(); },
+  trail: () => { ST.stack = [{ s: "map" }, { s: "color", n: "Periwinkle" }, { s: "painting", id: "arnolfini" }, { s: "color", n: "Bistre", h: "#362A1E" }]; render(); openTrail(); },
+  first: () => firstRun(1),
+};
+document.getElementById("jump").innerHTML = Object.keys(STATES).map(k => `<button data-state="${k}">${k}</button>`).join("");
+document.getElementById("jump").addEventListener("click", ev => { const b = ev.target.closest("[data-state]"); if (b) { ST.first = 0; ST.layer = "colors"; STATES[b.dataset.state](); } });
+const qs = new URLSearchParams(location.search);
+if (qs.has("bare")) document.body.classList.add("bare");
+(STATES[qs.get("s")] || STATES.map)();
+</script>
+</body>
+</html>
