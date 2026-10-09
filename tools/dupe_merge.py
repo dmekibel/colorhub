@@ -189,15 +189,51 @@ def main():
             drop_path.unlink()
             folded.append((keep, drop))
         else:
-            # promote: this article becomes the kept name's page
+            # promote: this article becomes the kept name's page. The article's own prose was written
+            # with `drop` as the subject (that's the name it was an article about) -- rewrite every
+            # mention of the dropped name to the kept name throughout (lede, section bodies, questions,
+            # openers), drop any now-circular self-reference to the kept slug/name, and keep the dropped
+            # name as a documented "also called" rather than erasing it.
+            drop_rx = re.compile(re.escape(drop), re.IGNORECASE)
+
+            def rename_text(s):
+                def repl(m):
+                    # preserve the matched capitalization pattern loosely: if the match started with an
+                    # uppercase letter, title-case the replacement's first letter too
+                    return keep if m.group(0)[:1].isupper() else keep[:1].lower() + keep[1:]
+                return drop_rx.sub(repl, s)
+
+            self_link_rx = re.compile(r"\[\[" + re.escape(ks) + r"(\|[^\]]*)?\]\]")
+
+            def strip_self_link(s):
+                def repl(m):
+                    label = m.group(1)[1:] if m.group(1) else keep
+                    return label
+                return self_link_rx.sub(repl, s)
+
             drop_doc["slug"] = ks
             drop_doc["name"] = keep
+            if drop_doc.get("lede"):
+                drop_doc["lede"] = strip_self_link(rename_text(drop_doc["lede"]))
+            for sec in drop_doc.get("sections", []):
+                if sec.get("body"):
+                    sec["body"] = strip_self_link(rename_text(sec["body"]))
+            for q in drop_doc.get("questions", []):
+                if q.get("q"):
+                    q["q"] = rename_text(q["q"])
+            drop_doc["openers"] = [rename_text(o) for o in drop_doc.get("openers", [])]
+            fld = drop_doc.get("field") or {}
+            nearest = ((fld.get("measured") or {}).get("nearest"))
+            if isinstance(nearest, list):
+                fld["measured"]["nearest"] = [n for n in nearest if not (isinstance(n, list) and LIB.key(n[0]) == LIB.key(keep))]
             names_list = drop_doc.setdefault("names", [])
             if keep not in names_list:
                 names_list.insert(0, keep)
             if drop not in names_list:
                 names_list.append(drop)
             aside = drop_doc.setdefault("aside", {})
+            aside["siblings"] = [s for s in (aside.get("siblings") or []) if s != ks]
+            aside["disambiguation"] = [d for d in (aside.get("disambiguation") or []) if d.get("slug") != ks]
             aka = aside.setdefault("aka", [])
             if not any(drop.lower() in a.lower() for a in aka):
                 aka.append(drop)

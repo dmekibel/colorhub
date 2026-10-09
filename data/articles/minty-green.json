@@ -1,139 +1,139 @@
 {
- "slug": "minty-green",
- "name": "Minty Green",
- "hex": "#0BF77D",
- "names": [
-  "Minty Green"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Minty Green is a bright, yellowish spring green listed in the CSS and X11 color sets, and a word for color that goes back to 1766 even though this exact hex is recent.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A web-list green",
-   "body": "Minty Green appears as a CSS/X11 keyword and on Wikipedia's color lists, and separately in the xkcd 2010 crowd survey, which is the earliest record of this exact hex, #0BF77D [1]. Maerz and Paul's 1930 dictionary traces a color word built on *mint* back to 1766, though not necessarily this bright a shade; the library's own [[mint|Mint]] entry is a softer, paler green [1]. At lightness 86 and chroma 87 in LCH it is one of the most saturated greens in the library [1].\n\nIts nearest named neighbor is [[weird-green|Weird Green]], 4.3 CIEDE2000 units away and read as duller and darker, followed by [[bright-light-green|Bright Light Green]] and [[bright-sea-green|Bright Sea Green]], both 5.6 units off [2]. The library separately logs Spearmint and Spring Green as near-duplicate crowd names, 1.1 and 1.7 units off [1]. The nearest gem comparison is common [[gem:malachite|malachite]], 7.2 units away [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has a color this bright and saturated covering even 1% of its canvas, as photographed [4]. That is unsurprising: a green this vivid and light sits far outside the range aged pigments and varnish typically produce, and it describes our museum holdings, not painting as a whole [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "mint, the plant",
-   "first_recorded": "1930 (Maerz & Paul, for a color word built on *mint*, from 1766); this hex from the 2010 xkcd survey",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Spearmint",
-   "Spring Green"
+  "slug": "minty-green",
+  "name": "Minty Green",
+  "hex": "#0BF77D",
+  "names": [
+    "Minty Green"
   ],
-  "siblings": [
-   "weird-green",
-   "bright-light-green",
-   "bright-sea-green",
-   "lightish-green"
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Minty Green is a bright, yellowish spring green listed in the CSS and X11 color sets, and a word for color that goes back to 1766 even though this exact hex is recent.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A web-list green",
+      "body": "Minty Green appears as a CSS/X11 keyword and on Wikipedia's color lists, and separately in the xkcd 2010 crowd survey, which is the earliest record of this exact hex, #0BF77D [1]. Maerz and Paul's 1930 dictionary traces a color word built on *mint* back to 1766, though not necessarily this bright a shade; the library's own [[mint|Mint]] entry is a softer, paler green [1]. At lightness 86 and chroma 87 in LCH it is one of the most saturated greens in the library [1].\n\nIts nearest named neighbor is [[android-green|Weird Green]], 4.3 CIEDE2000 units away and read as duller and darker, followed by [[bright-light-green|Bright Light Green]] and [[bright-sea-green|Bright Sea Green]], both 5.6 units off [2]. The library separately logs Spearmint and Spring Green as near-duplicate crowd names, 1.1 and 1.7 units off [1]. The nearest gem comparison is common [[gem:malachite|malachite]], 7.2 units away [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has a color this bright and saturated covering even 1% of its canvas, as photographed [4]. That is unsurprising: a green this vivid and light sits far outside the range aged pigments and varnish typically produce, and it describes our museum holdings, not painting as a whole [4]."
+    }
   ],
-  "parent": "mint",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 0,
-  "pct": 0.0,
-  "measured": {
-   "lch": [
-    86.0,
-    86.9,
-    148.9
-   ],
-   "nearest": [
-    [
-     "Weird Green",
-     4.3
+  "aside": {
+    "origin": {
+      "named_after": "mint, the plant",
+      "first_recorded": "1930 (Maerz & Paul, for a color word built on *mint*, from 1766); this hex from the 2010 xkcd survey",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Spearmint",
+      "Spring Green"
     ],
-    [
-     "Bright Light Green",
-     5.6
+    "siblings": [
+      "weird-green",
+      "bright-light-green",
+      "bright-sea-green",
+      "lightish-green"
     ],
-    [
-     "Bright Sea Green",
-     5.6
-    ],
-    [
-     "Lightish Green",
-     6.5
+    "parent": "mint",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 0,
+    "pct": 0.0,
+    "measured": {
+      "lch": [
+        86.0,
+        86.9,
+        148.9
+      ],
+      "nearest": [
+        [
+          "Weird Green",
+          4.3
+        ],
+        [
+          "Bright Light Green",
+          5.6
+        ],
+        [
+          "Bright Sea Green",
+          5.6
+        ],
+        [
+          "Lightish Green",
+          6.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-m.json, data/library.json): CSS/X11, Wikipedia, xkcd 2010, Maerz & Paul 1930",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph look-alikes (data/graph/edges-m.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph twins, gems cross-reference (data/graph/edges-m.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which two systems both list Minty Green as a keyword?",
+      "choices": [
+        "CSS and X11",
+        "Pantone and RAL",
+        "Crayola and NCS",
+        "Ridgway and ISCC-NBS"
+      ],
+      "answer": "CSS and X11",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our painting archive finds Minty Green covering at least 1% of some painting's canvas.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A color word built on mint goes back to 1766, long before this bright a green was ever bottled as a hex code."
+  ],
+  "words": 230,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; written from ColorHub library/graph data only.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-m.json, data/library.json): CSS/X11, Wikipedia, xkcd 2010, Maerz & Paul 1930",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph look-alikes (data/graph/edges-m.json), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph twins, gems cross-reference (data/graph/edges-m.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which two systems both list Minty Green as a keyword?",
-   "choices": [
-    "CSS and X11",
-    "Pantone and RAL",
-    "Crayola and NCS",
-    "Ridgway and ISCC-NBS"
-   ],
-   "answer": "CSS and X11",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our painting archive finds Minty Green covering at least 1% of some painting's canvas.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A color word built on mint goes back to 1766, long before this bright a green was ever bottled as a hex code."
- ],
- "words": 230,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; written from ColorHub library/graph data only.",
-   "lint 2026-10-09"
-  ]
- }
 }

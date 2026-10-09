@@ -1,126 +1,126 @@
 {
- "slug": "perilla-purple",
- "name": "Perilla Purple",
- "hex": "#794D58",
- "names": [
-  "Perilla Purple"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Perilla Purple is a dusty, reddish mauve named for the dark purple-red leaves of perilla, the East Asian herb better known in the kitchen as shiso.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A leaf, not a flower",
-   "body": "Ridgway's 1912 color standards place this hue on plate XXXVII, hue 65'', tone k; it is reproduced from a scan of an aged plate, so the printed color is approximate [1]. The ISCC-NBS system later filed it in block 259, \"grayish purplish red\", and Maerz and Paul's 1930 dictionary gives it a first recorded date of 1912, on plate 47 J 3 [2][3]. In Munsell it reads 8.3RP 3.7/4.0, a muted red-violet far from the flat purple most people picture when they hear \"perilla\" [1].\n\nThe perilla plant itself, a mint-family herb grown across East Asia, has a purple-leaved variety whose color runs darker and more saturated than this swatch [1]. The nearest named color in our data is [[dark-vinaceous-purple|Dark Vinaceous-Purple]], 2.6 CIEDE2000 units away, with [[dahlia-carmine|Dahlia Carmine]], [[dark-mauve|Dark Mauve]] and [[corinthian-purple|Corinthian Purple]] close behind [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Perilla Purple appears in 46 of our 23,781 paintings, about 0.19 percent, as photographed; the within-painting lens finds it in 20 of them, rarer than 61 percent of our named colors [4]. It peaks in the 1900s, in 5 of 1,674 paintings, at 2.5 times the expected rate for that century [4]. Inside a painting it most often plays a hidden color, present in 35 percent of the 20 paintings where it carries real area [4].\n\nThe earliest match is dated 1550, in a work by Michele Tosini — 362 years before Ridgway's 1912 record of the name, as photographed, a floor and not a first, since the archive's early centuries are thin [4]. In printed English, the term \"perilla purple\" peaked in the 1930s, after rising fastest in the 1910s [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "perilla, the purple-leaved herb also called shiso",
-   "first_recorded": "1912, Ridgway plate XXXVII",
-   "source": "Ridgway, Color Standards and Nomenclature (1912)"
-  },
-  "aka": [],
-  "siblings": [
-   "dark-vinaceous-purple",
-   "dahlia-carmine",
-   "dark-mauve",
-   "corinthian-purple"
+  "slug": "perilla-purple",
+  "name": "Perilla Purple",
+  "hex": "#794D58",
+  "names": [
+    "Perilla Purple"
   ],
-  "parent": null,
-  "children": null,
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 46,
-  "measured": {
-   "lch": [
-    38,
-    20,
-    4
-   ],
-   "nearest": [
-    [
-     "Dark Vinaceous-Purple",
-     2.6
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Perilla Purple is a dusty, reddish mauve named for the dark purple-red leaves of perilla, the East Asian herb better known in the kitchen as shiso.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A leaf, not a flower",
+      "body": "Ridgway's 1912 color standards place this hue on plate XXXVII, hue 65'', tone k; it is reproduced from a scan of an aged plate, so the printed color is approximate [1]. The ISCC-NBS system later filed it in block 259, \"grayish purplish red\", and Maerz and Paul's 1930 dictionary gives it a first recorded date of 1912, on plate 47 J 3 [2][3]. In Munsell it reads 8.3RP 3.7/4.0, a muted red-violet far from the flat purple most people picture when they hear \"perilla\" [1].\n\nThe perilla plant itself, a mint-family herb grown across East Asia, has a purple-leaved variety whose color runs darker and more saturated than this swatch [1]. The nearest named color in our data is [[dark-vinaceous-purple|Dark Vinaceous-Purple]], 2.6 CIEDE2000 units away, with [[dahlia-carmine|Dahlia Carmine]], [[corinthian-purple|Dark Mauve]] and [[corinthian-purple|Corinthian Purple]] close behind [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Perilla Purple appears in 46 of our 23,781 paintings, about 0.19 percent, as photographed; the within-painting lens finds it in 20 of them, rarer than 61 percent of our named colors [4]. It peaks in the 1900s, in 5 of 1,674 paintings, at 2.5 times the expected rate for that century [4]. Inside a painting it most often plays a hidden color, present in 35 percent of the 20 paintings where it carries real area [4].\n\nThe earliest match is dated 1550, in a work by Michele Tosini — 362 years before Ridgway's 1912 record of the name, as photographed, a floor and not a first, since the archive's early centuries are thin [4]. In printed English, the term \"perilla purple\" peaked in the 1930s, after rising fastest in the 1910s [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "perilla, the purple-leaved herb also called shiso",
+      "first_recorded": "1912, Ridgway plate XXXVII",
+      "source": "Ridgway, Color Standards and Nomenclature (1912)"
+    },
+    "aka": [],
+    "siblings": [
+      "dark-vinaceous-purple",
+      "dahlia-carmine",
+      "dark-mauve",
+      "corinthian-purple"
     ],
-    [
-     "Dahlia Carmine",
-     4.3
+    "parent": null,
+    "children": null,
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 46,
+    "measured": {
+      "lch": [
+        38,
+        20,
+        4
+      ],
+      "nearest": [
+        [
+          "Dark Vinaceous-Purple",
+          2.6
+        ],
+        [
+          "Dahlia Carmine",
+          4.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Nomenclature (1912), plate XXXVII, hue 65''",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955 block 259 entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 47 J 3",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What plant gives Perilla Purple its name?",
+      "choices": [
+        "Perilla, also called shiso",
+        "Lavender",
+        "Dahlia",
+        "Madder"
+      ],
+      "answer": "Perilla, also called shiso",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: this color's swatch is as saturated as a real purple-leaved perilla plant.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Perilla Purple is named for a kitchen herb's leaves, not its flowers."
+  ],
+  "words": 292,
+  "status": "draft",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Nomenclature (1912), plate XXXVII, hue 65''",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955 block 259 entry",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 47 J 3",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What plant gives Perilla Purple its name?",
-   "choices": [
-    "Perilla, also called shiso",
-    "Lavender",
-    "Dahlia",
-    "Madder"
-   ],
-   "answer": "Perilla, also called shiso",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: this color's swatch is as saturated as a real purple-leaved perilla plant.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Perilla Purple is named for a kitchen herb's leaves, not its flowers."
- ],
- "words": 292,
- "status": "draft",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

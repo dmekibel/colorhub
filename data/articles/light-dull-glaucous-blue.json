@@ -1,137 +1,137 @@
 {
- "slug": "light-dull-glaucous-blue",
- "name": "Light Dull Glaucous-Blue",
- "hex": "#93B9BB",
- "names": [
-  "Light Dull Glaucous-Blue"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Light Dull Glaucous-Blue is a muted grey-blue from Ridgway's 1912 atlas, filed again by name in the 1955 ISCC-NBS dictionary, and close enough on screen to its own sibling, Light Glaucous-Blue, to be mistaken for it.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A Ridgway tone with a near-twin",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate XLII, hue 41″″″, tone d [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Dull Glaucous-Blue\" under block 172, \"light greenish blue\" [2]. The name stacks \"light\" and \"dull\" onto [[glaucous-blue]], after the dusty, waxy bloom called glaucous [1].\n\nIn our color library its closest neighbor is its own near-twin, [[light-glaucous-blue]], about 3.3 units away, close enough that the two could pass for the same color [3]. [[lumiere-blue]] sits 3.8 units off and greener, and [[pastel-turquoise]] 4.0 units off and darker [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings matches this tone in 156 of them, about 0.66 percent, as photographed, more common than 60 percent of the named colors we track [4]. It peaks in the 1900s, present in 17 of the 1,674 paintings from that decade, 2.1 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays a hidden color, in 43 percent of its 107 clearly-ranked appearances [4]. Eugène Boudin favors it most, in 5 of his 33 works here, 5.2 times his museums' baseline rate [4]. The earliest dated match is 1475, in a painting by Antonello da Messina, 437 years before the name's first 1912 record, so this is a look-alike hue in an old photograph, not proof of the name's age [4]. The archive's early centuries are thin, so this is a floor, not a first."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the modifiers \"light\" and \"dull\" plus [[glaucous-blue]]",
-   "first_recorded": "1912 (Ridgway, plate XLII); carried into the 1955 ISCC-NBS dictionary, block 172",
-   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
-  },
-  "aka": [],
-  "siblings": [
-   "light-glaucous-blue",
-   "lumiere-blue",
-   "pastel-turquoise"
+  "slug": "light-dull-glaucous-blue",
+  "name": "Light Dull Glaucous-Blue",
+  "hex": "#93B9BB",
+  "names": [
+    "Light Dull Glaucous-Blue"
   ],
-  "parent": "glaucous-blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 156,
-  "painters": [
-   {
-    "name": "Eugène Boudin",
-    "hits": 5,
-    "n": 33,
-    "lift": 5.2
-   }
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Light Dull Glaucous-Blue is a muted grey-blue from Ridgway's 1912 atlas, filed again by name in the 1955 ISCC-NBS dictionary, and close enough on screen to its own sibling, Light Glaucous-Blue, to be mistaken for it.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A Ridgway tone with a near-twin",
+      "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate XLII, hue 41″″″, tone d [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Dull Glaucous-Blue\" under block 172, \"light greenish blue\" [2]. The name stacks \"light\" and \"dull\" onto [[grey-teal]], after the dusty, waxy bloom called glaucous [1].\n\nIn our color library its closest neighbor is its own near-twin, [[light-glaucous-blue]], about 3.3 units away, close enough that the two could pass for the same color [3]. [[lumiere-blue]] sits 3.8 units off and greener, and [[pastel-turquoise]] 4.0 units off and darker [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings matches this tone in 156 of them, about 0.66 percent, as photographed, more common than 60 percent of the named colors we track [4]. It peaks in the 1900s, present in 17 of the 1,674 paintings from that decade, 2.1 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays a hidden color, in 43 percent of its 107 clearly-ranked appearances [4]. Eugène Boudin favors it most, in 5 of his 33 works here, 5.2 times his museums' baseline rate [4]. The earliest dated match is 1475, in a painting by Antonello da Messina, 437 years before the name's first 1912 record, so this is a look-alike hue in an old photograph, not proof of the name's age [4]. The archive's early centuries are thin, so this is a floor, not a first."
+    }
   ],
-  "measured": {
-   "lch": [
-    72.6,
-    13.3,
-    203.1
-   ],
-   "nearest": [
-    [
-     "Light Glaucous-Blue",
-     3.3
+  "aside": {
+    "origin": {
+      "named_after": "the modifiers \"light\" and \"dull\" plus [[grey-teal]]",
+      "first_recorded": "1912 (Ridgway, plate XLII); carried into the 1955 ISCC-NBS dictionary, block 172",
+      "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+    },
+    "aka": [],
+    "siblings": [
+      "light-glaucous-blue",
+      "lumiere-blue",
+      "pastel-turquoise"
     ],
-    [
-     "Lumiere Blue",
-     3.8
+    "parent": "glaucous-blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 156,
+    "painters": [
+      {
+        "name": "Eugène Boudin",
+        "hits": 5,
+        "n": 33,
+        "lift": 5.2
+      }
     ],
-    [
-     "Pastel Turquoise",
-     4.0
+    "measured": {
+      "lch": [
+        72.6,
+        13.3,
+        203.1
+      ],
+      "nearest": [
+        [
+          "Light Glaucous-Blue",
+          3.3
+        ],
+        [
+          "Lumiere Blue",
+          3.8
+        ],
+        [
+          "Pastel Turquoise",
+          4.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLII, hue 41″″″, tone d",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ISCC-NBS, NBS Circular 553 (1955), block 172, \"Light Dull Glaucous-Blue\" (data/sources/iscc-nbs-names.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Light Dull Glaucous-Blue's closest look-alike in our library is which other named color?",
+      "choices": [
+        "Light Glaucous-Blue",
+        "Lumiere Blue",
+        "Pastel Turquoise",
+        "Dark Ash"
+      ],
+      "answer": "Light Glaucous-Blue",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: \"glaucous\" describes a dusty, waxy bloom, like the film on a plum's skin.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Light Dull Glaucous-Blue and Light Glaucous-Blue, its own sibling color, sit close enough to pass for each other on screen."
+  ],
+  "words": 279,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLII, hue 41″″″, tone d",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ISCC-NBS, NBS Circular 553 (1955), block 172, \"Light Dull Glaucous-Blue\" (data/sources/iscc-nbs-names.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Light Dull Glaucous-Blue's closest look-alike in our library is which other named color?",
-   "choices": [
-    "Light Glaucous-Blue",
-    "Lumiere Blue",
-    "Pastel Turquoise",
-    "Dark Ash"
-   ],
-   "answer": "Light Glaucous-Blue",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: \"glaucous\" describes a dusty, waxy bloom, like the film on a plum's skin.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Light Dull Glaucous-Blue and Light Glaucous-Blue, its own sibling color, sit close enough to pass for each other on screen."
- ],
- "words": 279,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

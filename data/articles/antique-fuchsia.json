@@ -11,7 +11,7 @@
   {
    "id": "name",
    "title": "A dulled flower color",
-   "body": "The base word, fuchsia, names a flowering shrub itself named for the sixteenth-century German botanist Leonhard Fuchs; \"antique\" here means aged and dulled in tone, not literally old [1]. Maerz and Paul's 1930 dictionary is the earliest source for this exact shade in our library, and the ISCC-NBS system filed it in 1955 under block 223, a moderate purple [1][2]. Its nearest named look-alikes are [[dull-purple]] and [[light-plum]], with [[purpleish]] and [[dusky-mauve]] close by [3].\n\nFuchs himself never saw the color named for his flower: the plant was named for him by Charles Plumier decades after Fuchs's death, and the dye and paint industries only picked up the hue much later [1]."
+   "body": "The base word, fuchsia, names a flowering shrub itself named for the sixteenth-century German botanist Leonhard Fuchs; \"antique\" here means aged and dulled in tone, not literally old [1]. Maerz and Paul's 1930 dictionary is the earliest source for this exact shade in our library, and the ISCC-NBS system filed it in 1955 under block 223, a moderate purple [1][2]. Its nearest named look-alikes are [[dull-purple]] and [[antique-fuchsia]], with [[razzmic-berry]] and [[dusky-mauve]] close by [3].\n\nFuchs himself never saw the color named for his flower: the plant was named for him by Charles Plumier decades after Fuchs's death, and the dye and paint industries only picked up the hue much later [1]."
   },
   {
    "id": "field",
@@ -123,5 +123,5 @@
   ]
  },
  "slug": "antique-fuchsia",
- "words": 200
+ "words": 201
 }

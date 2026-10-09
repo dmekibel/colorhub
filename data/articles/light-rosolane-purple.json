@@ -1,111 +1,111 @@
 {
- "slug": "light-rosolane-purple",
- "name": "Light Rosolane Purple",
- "hex": "#DD75AD",
- "names": [
-  "Light Rosolane Purple"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Light Rosolane Purple is a lighter step off [[rosolane-purple|Rosolane Purple]], a strong purplish red Ridgway plated in 1912 from an unexplained name.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on an unexplained name",
-   "body": "The name is built by grammar: \"light\" over the parent [[rosolane-purple|Rosolane Purple]], itself the deeper partner to Rosolane Pink in Ridgway's 1912 atlas, where \"rosolane\" is left unglossed [1]. Ridgway's plate XXVI, hue 69', tone b, is the source, and the ISCC-NBS system separately filed the step in 1955 as block 248 [1]. Measured, it is lighter than its parent at a close chroma (lightness 63 against 50), keeping the same hot, purplish-pink cast [1].\n\nIts nearest named neighbor is [[china-pink|China Pink]], 2.7 units away, almost the same, with [[pink-orchid|Pink Orchid]] close behind at 3.2, duller [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. A purplish pink this saturated sits outside the range of pigments most painters working from natural dyes had on hand [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a descriptive modifier: light + Rosolane Purple; \"rosolane\" itself is undocumented",
-   "first_recorded": "1912 (Ridgway, plate XXVI); also ISCC-NBS 1955, block 248",
-   "source": "Ridgway, Color Standards and Color Nomenclature"
-  },
-  "aka": [],
-  "siblings": [
-   "china-pink",
-   "pink-orchid",
-   "middle-purple"
+  "slug": "light-rosolane-purple",
+  "name": "Light Rosolane Purple",
+  "hex": "#DD75AD",
+  "names": [
+    "Light Rosolane Purple"
   ],
-  "parent": "rosolane-purple",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    63,
-    49,
-    346
-   ],
-   "nearest": [
-    [
-     "China Pink",
-     2.7
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Rosolane Purple is a lighter step off [[berry-pink|Rosolane Purple]], a strong purplish red Ridgway plated in 1912 from an unexplained name.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on an unexplained name",
+      "body": "The name is built by grammar: \"light\" over the parent [[berry-pink|Rosolane Purple]], itself the deeper partner to Rosolane Pink in Ridgway's 1912 atlas, where \"rosolane\" is left unglossed [1]. Ridgway's plate XXVI, hue 69', tone b, is the source, and the ISCC-NBS system separately filed the step in 1955 as block 248 [1]. Measured, it is lighter than its parent at a close chroma (lightness 63 against 50), keeping the same hot, purplish-pink cast [1].\n\nIts nearest named neighbor is [[china-pink|China Pink]], 2.7 units away, almost the same, with [[pink-orchid|Pink Orchid]] close behind at 3.2, duller [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. A purplish pink this saturated sits outside the range of pigments most painters working from natural dyes had on hand [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a descriptive modifier: light + Rosolane Purple; \"rosolane\" itself is undocumented",
+      "first_recorded": "1912 (Ridgway, plate XXVI); also ISCC-NBS 1955, block 248",
+      "source": "Ridgway, Color Standards and Color Nomenclature"
+    },
+    "aka": [],
+    "siblings": [
+      "china-pink",
+      "pink-orchid",
+      "middle-purple"
     ],
-    [
-     "Pink Orchid",
-     3.2
+    "parent": "rosolane-purple",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        63,
+        49,
+        346
+      ],
+      "nearest": [
+        [
+          "China Pink",
+          2.7
+        ],
+        [
+          "Pink Orchid",
+          3.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXVI, hue 69', tone b; ISCC-NBS 1955, block 248; cited via ColorHub color library",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Light Rosolane Purple is a lightened version of which parent color?",
+      "choices": [
+        "Rosolane Purple",
+        "Perilla Purple",
+        "Tyrian Blue",
+        "Lilac"
+      ],
+      "answer": "Rosolane Purple",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Ridgway's books explain where the word \"rosolane\" comes from.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "No source we hold explains where the word \"rosolane\", in this color's parent name, comes from."
+  ],
+  "words": 163,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); written from Ridgway and ISCC-NBS via the color library and archive."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXVI, hue 69', tone b; ISCC-NBS 1955, block 248; cited via ColorHub color library",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Light Rosolane Purple is a lightened version of which parent color?",
-   "choices": [
-    "Rosolane Purple",
-    "Perilla Purple",
-    "Tyrian Blue",
-    "Lilac"
-   ],
-   "answer": "Rosolane Purple",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Ridgway's books explain where the word \"rosolane\" comes from.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "No source we hold explains where the word \"rosolane\", in this color's parent name, comes from."
- ],
- "words": 163,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); written from Ridgway and ISCC-NBS via the color library and archive."
-  ]
- }
 }

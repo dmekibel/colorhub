@@ -11,7 +11,7 @@
   {
    "id": "name",
    "title": "A shell color, not a plant one",
-   "body": "Ridgway's 1912 color standards place this swatch on plate XXXII, hue 31, tone f [1]. The 1955 ISCC-NBS system, citing the same plate, classes it in block 119 [1]. The name groups it with the handful of Ridgway shell colors rather than with the many plant greens, which is why ColorHub's tagging keeps it under nature rather than a dye or pigment [1]. Its darker sibling, plain Turtle Green, sits closer to an actual shell's olive back; this pale version reads closer to a dry, sun-bleached straw [1].\n\nThe nearest named colors on file are [[seafoam-green]], [[lemon-meringue]] and [[amber-white]], at 3.4, [[khaki]] and [[cream]] sit in the same muted warm-light family [1]."
+   "body": "Ridgway's 1912 color standards place this swatch on plate XXXII, hue 31, tone f [1]. The 1955 ISCC-NBS system, citing the same plate, classes it in block 119 [1]. The name groups it with the handful of Ridgway shell colors rather than with the many plant greens, which is why ColorHub's tagging keeps it under nature rather than a dye or pigment [1]. Its darker sibling, plain Turtle Green, sits closer to an actual shell's olive back; this pale version reads closer to a dry, sun-bleached straw [1].\n\nThe nearest named colors on file are [[seafoam]], [[lemon-meringue]] and [[amber-white]], at 3.4, [[khaki]] and [[cream]] sit in the same muted warm-light family [1]."
   },
   {
    "id": "field",
@@ -116,7 +116,7 @@
  "openers": [
   "Pale Turtle Green is named for a shell, not a plant."
  ],
- "words": 211,
+ "words": 210,
  "status": "draft",
  "checked": {
   "by": "batch-writer",

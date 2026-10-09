@@ -7,12 +7,12 @@
  ],
  "tier": "descriptive",
  "depth": "short",
- "lede": "Purpley Grey is a soft, muted mauve-grey, one of two names the 2010 xkcd color survey built on top of [[purpley]].",
+ "lede": "Purpley Grey is a soft, muted mauve-grey, one of two names the 2010 xkcd color survey built on top of [[medium-slate-blue]].",
  "sections": [
   {
    "id": "name",
    "title": "A family-word compound",
-   "body": "The survey treats \"purpley\" as a small word-family of its own, pairing it here with grey the way it paired [[purpley-pink]] with pink [1]. No book or earlier dictionary in our sources records the name; it is undocumented outside that 2010 survey [1]. Its ISCC-NBS fit is a pale reddish purple, 5.7 units off [1].\n\nIts nearest named neighbor is [[vestal]], 3.1 units away and redder [2]. [[mountbatten-pink]] sits close behind, also redder, with [[dark-lavender]] nearly the same shade at 3.9 units [2]."
+   "body": "The survey treats \"purpley\" as a small word-family of its own, pairing it here with grey the way it paired [[pinky-purple]] with pink [1]. No book or earlier dictionary in our sources records the name; it is undocumented outside that 2010 survey [1]. Its ISCC-NBS fit is a pale reddish purple, 5.7 units off [1].\n\nIts nearest named neighbor is [[vestal]], 3.1 units away and redder [2]. [[mountbatten-pink]] sits close behind, also redder, with [[dark-lavender]] nearly the same shade at 3.9 units [2]."
   },
   {
    "id": "field",
@@ -127,7 +127,7 @@
   "Purpley Grey's earliest match in our archive predates its 2010 name by nearly six centuries.",
   "Claude Monet used Purpley Grey more than seven times his own museums' typical rate."
  ],
- "words": 271,
+ "words": 273,
  "status": "checked",
  "checked": {
   "by": "writer",

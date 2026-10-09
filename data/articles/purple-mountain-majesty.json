@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Not the Crayola crayon",
-   "body": "This color, #9678B6, is listed on Wikipedia as \"purple mountain majesty,\" a shade of lavender purple [1]. The name points to the lyric \"for purple mountain majesties\" in Katharine Lee Bates's 1893 hymn \"America the Beautiful,\" describing the hazy violet of mountains seen from a distance, though our sources do not confirm the color was picked to match that line [1][2].\n\nCrayola sells its own crayon under the related name \"Purple Mountains' Majesty,\" introduced in 1993 at #8071B4, a bluer, darker violet than this one [3]. The two are often confused online, but they are different swatches from different sources [1][3]. The nearest named colors on file are [[deep-lilac]], [[middle-blue-purple]], [[soft-purple]] and [[pearl-violet]], at 4.1, 4.4, 5.1 and 5.1 ΔE [2]."
+   "body": "This color, #9678B6, is listed on Wikipedia as \"purple mountain majesty,\" a shade of lavender purple [1]. The name points to the lyric \"for purple mountain majesties\" in Katharine Lee Bates's 1893 hymn \"America the Beautiful,\" describing the hazy violet of mountains seen from a distance, though our sources do not confirm the color was picked to match that line [1][2].\n\nCrayola sells its own crayon under the related name \"Purple Mountains' Majesty,\" introduced in 1993 at #8071B4, a bluer, darker violet than this one [3]. The two are often confused online, but they are different swatches from different sources [1][3]. The nearest named colors on file are [[middle-blue-purple]], [[middle-blue-purple]], [[orchid-purple]] and [[pearl-violet]], at 4.1, 4.4, 5.1 and 5.1 ΔE [2]."
   },
   {
    "id": "field",
@@ -139,5 +139,5 @@
    "lint 2026-10-09"
   ]
  },
- "words": 239
+ "words": 240
 }

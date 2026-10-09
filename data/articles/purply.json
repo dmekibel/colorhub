@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A casual coinage",
-   "body": "The nearest named colors on file are [[purple-plum]], [[iris-purple]] and [[barney]], at 4.3, 4.5 and 4.5 ΔE [1][2]. Unlike the modifier compounds elsewhere in the xkcd survey, *purply* adds the informal suffix *-y* directly to the color word, the same pattern as calling something *bluey* or *greeny* [1]. The 1955 ISCC-NBS system's nearest block, strong purple, sits 5.8 units away, closer than some of the batch's other novelty names [2]. In LCH it measures lightness 43, chroma 71, hue 320 degrees, near [[plum]] and [[amethyst]] [2]."
+   "body": "The nearest named colors on file are [[purple-plum]], [[iris-purple]] and [[purple-munsell]], at 4.3, 4.5 and 4.5 ΔE [1][2]. Unlike the modifier compounds elsewhere in the xkcd survey, *purply* adds the informal suffix *-y* directly to the color word, the same pattern as calling something *bluey* or *greeny* [1]. The 1955 ISCC-NBS system's nearest block, strong purple, sits 5.8 units away, closer than some of the batch's other novelty names [2]. In LCH it measures lightness 43, chroma 71, hue 320 degrees, near [[plum]] and [[amethyst]] [2]."
   },
   {
    "id": "field",
@@ -129,7 +129,7 @@
  "openers": [
   "Purply is the color-naming version of calling something \"bluey\" instead of blue."
  ],
- "words": 195,
+ "words": 196,
  "status": "checked",
  "checked": {
   "by": "batch writer",

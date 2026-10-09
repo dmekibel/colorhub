@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A modifier, not a new word",
-   "body": "The name follows ordinary modifier grammar: *vibrant* describes how saturated the blue looks, attached to the existing color word [[blue]] [1]. It was recorded in the xkcd color survey of 2010, a crowdsourced naming experiment that asked thousands of volunteers to type a name for swatches on their screens [1]. Our library also finds the same name and hex value, #0339F8, cited to Wikipedia [2].\n\nThe nearest catalogued system, the Inter-Society Color Council and National Bureau of Standards list of 1955, assigns neighboring hues to block 169, named vivid purplish blue, but the two colors measure 12.1 units apart in CIEDE2000, too far to call the same shade [2]. The color library records no Munsell notation for this exact hue [2]. The nearest named colors on file are [[light-royal-blue]], [[purpleish-blue]] and [[blue-blue]], at 3, 6 and 6 ΔE [2]."
+   "body": "The name follows ordinary modifier grammar: *vibrant* describes how saturated the blue looks, attached to the existing color word [[blue]] [1]. It was recorded in the xkcd color survey of 2010, a crowdsourced naming experiment that asked thousands of volunteers to type a name for swatches on their screens [1]. Our library also finds the same name and hex value, #0339F8, cited to Wikipedia [2].\n\nThe nearest catalogued system, the Inter-Society Color Council and National Bureau of Standards list of 1955, assigns neighboring hues to block 169, named vivid purplish blue, but the two colors measure 12.1 units apart in CIEDE2000, too far to call the same shade [2]. The color library records no Munsell notation for this exact hue [2]. The nearest named colors on file are [[vibrant-blue]], [[blurple]] and [[blue-blue]], at 3, 6 and 6 ΔE [2]."
   },
   {
    "id": "field",
@@ -127,7 +127,7 @@
  "openers": [
   "Vibrant Blue is too saturated for old paint: no painting in our archive carries it."
  ],
- "words": 264,
+ "words": 262,
  "status": "checked",
  "checked": {
   "by": "batch writer",

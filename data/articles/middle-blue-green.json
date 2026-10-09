@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "One hue, many filed names",
-   "body": "The name follows ordinary modifier grammar, \"middle\" plus the parent hue [[blue-green]], and comes to our library from Wikipedia's lists, with no further paper trail [1]. The ISCC-NBS 1955 lists filed at least seventeen separate commercial and descriptive names into the same color block as this shade, among them AprilSky, Aqua Queen, Brook Green, Electra and Robin Egg [1]. That crowding is itself the point: dozens of paint and textile brands each wanted their own name for roughly this one pale aqua [1].\n\nIts nearest named neighbor by measured color is [[nile-blue]], darker and duller, with [[pale-teal]] and [[turquoise]] close behind [1]."
+   "body": "The name follows ordinary modifier grammar, \"middle\" plus the parent hue [[blue-green]], and comes to our library from Wikipedia's lists, with no further paper trail [1]. The ISCC-NBS 1955 lists filed at least seventeen separate commercial and descriptive names into the same color block as this shade, among them AprilSky, Aqua Queen, Brook Green, Electra and Robin Egg [1]. That crowding is itself the point: dozens of paint and textile brands each wanted their own name for roughly this one pale aqua [1].\n\nIts nearest named neighbor by measured color is [[nile-blue]], darker and duller, with [[light-sulphate-green]] and [[turquoise]] close behind [1]."
   },
   {
    "id": "field",
@@ -106,7 +106,7 @@
  "openers": [
   "The ISCC-NBS 1955 lists crowded at least seventeen brand names into the same pale-aqua block as Middle Blue Green."
  ],
- "words": 195,
+ "words": 196,
  "status": "checked",
  "checked": {
   "by": "checker",

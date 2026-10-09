@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A modifier, not a fixed name",
-   "body": "The name follows one of the library's most common patterns: the modifier \"rich\" placed in front of the parent color, [[purple]] [1]. This exact label is first recorded in 2010, in the xkcd color survey, a large, informal internet survey in which hundreds of thousands of visitors typed their own name for a swatch; the library keeps names that enough people typed the same way [1][4]. The phrase \"rich purple\" itself has long been used descriptively before that survey, outside any naming system: historians use it for the deep purples of murex-dye and archil-dye textiles and for glaze effects achieved by painting a red lake over a blue ground [2][3]. The hex #720058 is a screen approximation only, not a measured dye or pigment [1].\n\nIts nearest library look-alike is [[velvet]], about 2.7 units away in LCH space, read as almost the same color [1].\n\nOther close matches in the library include [[grape-purple]], duller, and [[cellini]], more vivid and lighter [1]."
+   "body": "The name follows one of the library's most common patterns: the modifier \"rich\" placed in front of the parent color, [[purple]] [1]. This exact label is first recorded in 2010, in the xkcd color survey, a large, informal internet survey in which hundreds of thousands of visitors typed their own name for a swatch; the library keeps names that enough people typed the same way [1][4]. The phrase \"rich purple\" itself has long been used descriptively before that survey, outside any naming system: historians use it for the deep purples of murex-dye and archil-dye textiles and for glaze effects achieved by painting a red lake over a blue ground [2][3]. The hex #720058 is a screen approximation only, not a measured dye or pigment [1].\n\nIts nearest library look-alike is [[velvet]], about 2.7 units away in LCH space, read as almost the same color [1].\n\nOther close matches in the library include [[grape]], duller, and [[cellini]], more vivid and lighter [1]."
   },
   {
    "id": "field",
@@ -116,7 +116,7 @@
  "openers": [
   "Rich Purple's exact label dates to a 2010 internet survey, though the phrase itself is far older."
  ],
- "words": 216,
+ "words": 215,
  "status": "checked",
  "checked": {
   "by": "checker",

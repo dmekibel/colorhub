@@ -1,128 +1,128 @@
 {
- "slug": "neon-fuchsia",
- "name": "Neon Fuchsia",
- "hex": "#FE4164",
- "names": [
-  "Neon Fuchsia"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Neon Fuchsia applies the brightening word \"neon\" to [[fuchsia]], though the result reads as a deep pink rather than fuchsia's own purple lean.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Brighter than its own parent",
-   "body": "Our library traces this name only to a Wikipedia color list, with no first-recorded date given [1]. It modifies [[fuchsia]] with \"neon,\" but the swatch itself, a saturated deep pink, sits closer to red than to fuchsia's purple lean [1]. A near-duplicate name, Radical Red, sits only 1.4 units away in the same library, two names landing on almost the same pink [1]. The ISCC-NBS dictionary's nearest block is \"deep pink,\" 7.4 units from that block's centre [1].\n\nIts nearest named neighbor is [[fiery-rose|Fiery Rose]], 2.9 units away and duller [2]. [[red-pink|Red-Pink]] sits 3.4 units out, more vivid, and [[watermelon|Watermelon]] 3.5 units out, almost the same color [2]. Measured in LCH it reads lightness 58, chroma 76, hue 19 degrees [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds no painting matching this exact color by the full-canvas measure, though the within-painting lens finds a trace in 1 of 23,781 paintings, rarer than 88 percent of the named colors, as photographed [3]. The sample is too thin here to say more [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "fuchsia, brightened with the modifier \"neon\"",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library (a Wikipedia list)"
-  },
-  "aka": [],
-  "siblings": [
-   "fiery-rose",
-   "red-pink",
-   "watermelon"
+  "slug": "neon-fuchsia",
+  "name": "Neon Fuchsia",
+  "hex": "#FE4164",
+  "names": [
+    "Neon Fuchsia"
   ],
-  "parent": "fuchsia",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1,
-  "rank_pct": 12,
-  "measured": {
-   "lch": [
-    58,
-    76,
-    19
-   ],
-   "nearest_iscc": [
-    "deep pink",
-    7.4
-   ],
-   "nearest": [
-    [
-     "Fiery Rose",
-     2.9
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Neon Fuchsia applies the brightening word \"neon\" to [[magenta]], though the result reads as a deep pink rather than fuchsia's own purple lean.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Brighter than its own parent",
+      "body": "Our library traces this name only to a Wikipedia color list, with no first-recorded date given [1]. It modifies [[magenta]] with \"neon,\" but the swatch itself, a saturated deep pink, sits closer to red than to fuchsia's purple lean [1]. A near-duplicate name, Radical Red, sits only 1.4 units away in the same library, two names landing on almost the same pink [1]. The ISCC-NBS dictionary's nearest block is \"deep pink,\" 7.4 units from that block's centre [1].\n\nIts nearest named neighbor is [[fiery-rose|Fiery Rose]], 2.9 units away and duller [2]. [[pink-red|Red-Pink]] sits 3.4 units out, more vivid, and [[watermelon|Watermelon]] 3.5 units out, almost the same color [2]. Measured in LCH it reads lightness 58, chroma 76, hue 19 degrees [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds no painting matching this exact color by the full-canvas measure, though the within-painting lens finds a trace in 1 of 23,781 paintings, rarer than 88 percent of the named colors, as photographed [3]. The sample is too thin here to say more [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "fuchsia, brightened with the modifier \"neon\"",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library (a Wikipedia list)"
+    },
+    "aka": [],
+    "siblings": [
+      "fiery-rose",
+      "red-pink",
+      "watermelon"
     ],
-    [
-     "Red-Pink",
-     3.4
-    ],
-    [
-     "Watermelon",
-     3.5
+    "parent": "fuchsia",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1,
+    "rank_pct": 12,
+    "measured": {
+      "lch": [
+        58,
+        76,
+        19
+      ],
+      "nearest_iscc": [
+        "deep pink",
+        7.4
+      ],
+      "nearest": [
+        [
+          "Fiery Rose",
+          2.9
+        ],
+        [
+          "Red-Pink",
+          3.4
+        ],
+        [
+          "Watermelon",
+          3.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-n.json): tier, near-duplicate name, ISCC-NBS block",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges for neon-fuchsia (data/graph/edges-n.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What color does Neon Fuchsia modify with the word \"neon\"?",
+      "choices": [
+        "Fuchsia",
+        "Magenta",
+        "Cerise",
+        "Rose"
+      ],
+      "answer": "Fuchsia",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Neon Fuchsia has a near-duplicate name in our library only 1.4 units away.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Neon Fuchsia has a near-duplicate name, Radical Red, just 1.4 units away, two labels for almost the same pink."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); archive sample is thin (n=1), so field notes are limited to presence and rank.",
+      "Fixed: field section said 'rarer than 86 percent'; data/graph/fieldnotes/n.json gives rp=12, i.e. rarer than 88 percent. Corrected prose to 88 and field.rank_pct to 12 (the commonness percentile)."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-n.json): tier, near-duplicate name, ISCC-NBS block",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: look-alike edges for neon-fuchsia (data/graph/edges-n.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What color does Neon Fuchsia modify with the word \"neon\"?",
-   "choices": [
-    "Fuchsia",
-    "Magenta",
-    "Cerise",
-    "Rose"
-   ],
-   "answer": "Fuchsia",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Neon Fuchsia has a near-duplicate name in our library only 1.4 units away.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Neon Fuchsia has a near-duplicate name, Radical Red, just 1.4 units away, two labels for almost the same pink."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); archive sample is thin (n=1), so field notes are limited to presence and rank.",
-   "Fixed: field section said 'rarer than 86 percent'; data/graph/fieldnotes/n.json gives rp=12, i.e. rarer than 88 percent. Corrected prose to 88 and field.rank_pct to 12 (the commonness percentile)."
-  ]
- },
- "words": 187
+  "words": 187
 }

@@ -7,30 +7,29 @@
  ],
  "tier": "standard",
  "depth": "short",
- "lede": "Vinaceous-Brown is a greyed wine-red from Ridgway's 1912 bird-color atlas, the same measured hue our library also files under the name [[rose-brown]].",
+ "lede": "Rose brown is a greyed wine-red, the same measured hue Ridgway's 1912 bird-color atlas files as Vinaceous-Brown.",
  "sections": [
   {
    "id": "name",
    "title": "Two names, one hue",
-   "body": "Ridgway's 1912 systematic nomenclature places Vinaceous-Brown on plate XXXIX, hue 5''', tone i [1]. The ISCC-NBS revision of 1955 groups the same chip as \"grayish red,\" block 19 [1]. Our library carries a second name, [[rose-brown]], at the identical measured hex — two naming traditions landing on the same color by coincidence, not by borrowing [2]. The nearest distinct neighbor is [[monkey-skin]], a shade warmer and lighter [2]. Further out, [[cameo-brown]] and [[faded-rosewood]] sit in the same small cluster [2]."
+   "body": "Ridgway's 1912 systematic nomenclature places Vinaceous-Brown on plate XXXIX, hue 5''', tone i [1]. The ISCC-NBS revision of 1955 groups the same chip as \"grayish red,\" block 19 [1]. Our library carries a second name, Rose brown, at the identical measured hex — two naming traditions landing on the same color by coincidence, not by borrowing [2]. The nearest distinct neighbor is [[monkey-skin]], a shade warmer and lighter [2]. Further out, [[cameo-brown]] and [[faded-rosewood]] sit in the same small cluster [2]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds a match for Vinaceous-Brown in 284 of 23,781 paintings, about 1.2 percent, more common than 67 percent of the named colors we track [3]. It peaks in the 1900s, in 39 of 1,674 paintings, 3.0 times the rate expected from that century's share of the archive [3]. Inside a painting it is usually hidden rather than prominent, by lightness rank, in 48 percent of its appearances [3]. Maurice Denis used it most: 6 of his 43 paintings here carry it, 7.5 times his peers' rate [3]. The earliest archive match dates to 1000, nine centuries before Ridgway recorded the name in 1912, which shows only a look-alike hue surviving an old photograph, not the name itself [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+   "body": "Our archive finds a match for Rose brown in 284 of 23,781 paintings, about 1.2 percent, more common than 67 percent of the named colors we track [3]. It peaks in the 1900s, in 39 of 1,674 paintings, 3.0 times the rate expected from that century's share of the archive [3]. Inside a painting it is usually hidden rather than prominent, by lightness rank, in 48 percent of its appearances [3]. Maurice Denis used it most: 6 of his 43 paintings here carry it, 7.5 times his peers' rate [3]. The earliest archive match dates to 1000, nine centuries before Ridgway recorded the name in 1912, which shows only a look-alike hue surviving an old photograph, not the name itself [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
   }
  ],
  "aside": {
   "origin": {
    "named_after": "undocumented",
-   "first_recorded": "1912, Ridgway's systematic nomenclature",
+   "first_recorded": "1912, Ridgway's systematic nomenclature, as Vinaceous-Brown",
    "source": "ColorHub color library"
   },
   "aka": [
    "Vinaceous-Brown"
   ],
   "siblings": [
-   "rose-brown",
    "monkey-skin",
    "cameo-brown",
    "deep-livid-brown"
@@ -50,10 +49,6 @@
     38.0
    ],
    "nearest": [
-    [
-     "Rose brown",
-     0.0
-    ],
     [
      "Monkey Skin",
      4.0
@@ -86,7 +81,7 @@
  ],
  "questions": [
   {
-   "q": "Which 1912 work first catalogs Vinaceous-Brown?",
+   "q": "Which 1912 work first catalogs this color under its other name, Vinaceous-Brown?",
    "choices": [
     "Ridgway's systematic nomenclature",
     "Maerz and Paul's dictionary",
@@ -97,7 +92,7 @@
    "kind": "pick"
   },
   {
-   "q": "True or false: Vinaceous-Brown and Rose brown are measured as the same hex in our library.",
+   "q": "True or false: Rose brown and Vinaceous-Brown are measured as the same hex in our library.",
    "choices": [
     "True",
     "False"
@@ -106,7 +101,7 @@
    "kind": "true-false"
   },
   {
-   "q": "Inside a painting, how does Vinaceous-Brown usually behave?",
+   "q": "Inside a painting, how does Rose brown usually behave?",
    "choices": [
     "Hidden, low in the lightness order",
     "Always the brightest highlight",
@@ -118,7 +113,7 @@
   }
  ],
  "openers": [
-  "Vinaceous-Brown and Rose brown are two names for the exact same measured color."
+  "Rose brown carries a second name, Vinaceous-Brown, for the exact same measured color."
  ],
  "status": "checked",
  "checked": {
@@ -129,5 +124,5 @@
   ]
  },
  "slug": "rose-brown",
- "words": 235
+ "words": 230
 }

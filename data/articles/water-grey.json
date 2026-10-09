@@ -11,7 +11,7 @@
   {
    "id": "name",
    "title": "A grey that isn't grey",
-   "body": "Maerz and Paul's 1930 dictionary dates Water Grey to 1705, plate 14, chip B1 [1]. The ISCC-NBS revision of 1955 files the same chip as \"light olive gray,\" block 91, not as a true grey despite the name [1]. The nearest named neighbor by measured color is [[ecru-olive]], a close match, with [[dull-citrine]] just behind it [2]. Further out, [[dark-beige]] and [[buffy-citrine]] sit in the same small cluster [2]."
+   "body": "Maerz and Paul's 1930 dictionary dates Water Grey to 1705, plate 14, chip B1 [1]. The ISCC-NBS revision of 1955 files the same chip as \"light olive gray,\" block 91, not as a true grey despite the name [1]. The nearest named neighbor by measured color is [[ecru-olive]], a close match, with [[dull-citrine]] just behind it [2]. Further out, [[dust]] and [[buffy-citrine]] sit in the same small cluster [2]."
   },
   {
    "id": "field",
@@ -122,5 +122,5 @@
   ]
  },
  "slug": "water-grey",
- "words": 233
+ "words": 232
 }

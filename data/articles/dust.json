@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "What the name means",
-   "body": "Dust is a dull, greyish yellow-brown, the colour of a thin layer of dry earth on a surface. Paterson defines *dust-coloured* as having the pale brown colour of dust, and *dusty* as a colour that looks coated with dust [1]. He also keeps a rare word, *pulveratricious*, for an earthy dusty colour, taken from birds that clean themselves by rolling in dust [1].\n\nWho first used the plain noun as a colour name is undocumented in the books we read. The library traces it to Maerz and Paul's dictionary of 1930 and to ISCC-NBS in 1955, which files it as \"dark grayish yellow\" within a ΔE of 4.3, and the xkcd colour survey of 2010 also lists it [2]. Several close neighbours already sit nearby: [[dark-beige]], [[manila]] and [[camel]] are within a few units on screen [2]."
+   "body": "Dust is a dull, greyish yellow-brown, the colour of a thin layer of dry earth on a surface. Paterson defines *dust-coloured* as having the pale brown colour of dust, and *dusty* as a colour that looks coated with dust [1]. He also keeps a rare word, *pulveratricious*, for an earthy dusty colour, taken from birds that clean themselves by rolling in dust [1].\n\nWho first used the plain noun as a colour name is undocumented in the books we read. The library traces it to Maerz and Paul's dictionary of 1930 and to ISCC-NBS in 1955, which files it as \"dark grayish yellow\" within a ΔE of 4.3, and the xkcd colour survey of 2010 also lists it [2]. Several close neighbours already sit nearby: [[dust]], [[manila]] and [[camel]] are within a few units on screen [2]."
   },
   {
    "id": "khaki",
@@ -267,7 +267,7 @@
   "Dust makes a sunset warmer: the evening air holds more of it than the morning's, so mornings come out pinker.",
   "Look for this colour in old silk and paper: our archive finds it in about half of Japanese paintings."
  ],
- "words": 1073,
+ "words": 1072,
  "status": "checked",
  "checked": {
   "by": "checker",

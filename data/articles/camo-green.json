@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A web keyword with a near-twin",
-   "body": "Wikipedia's \"List of colors\" cites the X11/Web standard as its source, and our library finds the xkcd survey's version of the same cluster essentially unchanged [1]. The name describes camouflage patterning generically, not any single military fabric or dye [1]. The nearest named colors on file are [[army-green]], [[muddy-green]], [[velvet-green]] and [[mud-green]], at 3.1, 5.9, \nIts closest learnable match is [[hunter-green|Hunter green]], about 11 units off in CIEDE2000, a reminder that \"camo green\" sits at the darker, duller edge of the green family [1]. Family neighbors are [[olive]], [[hunter-green|Hunter green]], and [[khaki]] [1]."
+   "body": "Wikipedia's \"List of colors\" cites the X11/Web standard as its source, and our library finds the xkcd survey's version of the same cluster essentially unchanged [1]. The name describes camouflage patterning generically, not any single military fabric or dye [1]. The nearest named colors on file are [[army-green]], [[military-green]], [[velvet-green]] and [[mud]], at 3.1, 5.9, \nIts closest learnable match is [[hunter-green|Hunter green]], about 11 units off in CIEDE2000, a reminder that \"camo green\" sits at the darker, duller edge of the green family [1]. Family neighbors are [[olive]], [[hunter-green|Hunter green]], and [[khaki]] [1]."
   },
   {
    "id": "field",
@@ -113,7 +113,7 @@
  "openers": [
   "Camo Green's earliest match in our archive is a Crucifixion scene from 1420, long before any military camouflage existed."
  ],
- "words": 229,
+ "words": 228,
  "status": "checked",
  "checked": {
   "by": "writer",

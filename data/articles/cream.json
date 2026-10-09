@@ -1,274 +1,274 @@
 {
- "slug": "cream",
- "name": "Cream",
- "hex": "#FFFDD0",
- "names": [
-  "Cream"
- ],
- "tier": "nature",
- "depth": "medium",
- "lede": "Cream is the warm, yellowish off-white of the fat that rises on milk, a kitchen word that naturalists, quilters, paper-makers and tennis officials have all used for the white that is not quite white.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name",
-   "body": "Cream is a food word that became a color word. Paterson defines it as the color of the milk product, a yellowish white [1]. His dictionary keeps the word's other careers too: *cream wove* is writing paper with an even surface, *cream-faced* means pale from fear, and *regency cream* is a name for an off-white [1].\n\nThe phrase \"peaches and cream\" describes the classic British fair complexion, a cream-colored skin with pinkish cheeks [1]. St Clair's glossary sets the neighbors around it: cream is a pale yellow or rich off-white, *milk white* a pale greyish cream, and *lily white* a very pale cream with some warmth [2]."
-  },
-  {
-   "id": "werner",
-   "title": "Cream Yellow",
-   "body": "The naturalists' nomenclatures used the word before the paint shops did. When Patrick Syme revised Werner's list in 1821, he renamed Werner's no. 75, Isabella Yellow, as Cream Yellow [3]. Baty's examples of it are the breast of a teal drake, the petals of the yellow butterfly ginger, and the minerals porcelain jasper and fluor spar [3].\n\nThe older name lives on as [[isabelline]], whose own story is told in its article. So the same pale yellow-white has had the name Isabella and a dairy's, and the dairy won [3]."
-  },
-  {
-   "id": "cloth",
-   "title": "On wool, silk and paper",
-   "body": "Natural materials are where cream is easiest to see. Finlay describes wool in a mill's dehairing room as the color of pale cream [7]. Silk cocoons come naturally in cream white, citron yellow, yolk orange, dusky pink or chestnut, colors that come from carotenoids in the gum around the thread, and most of the thread turns out white once that gum is dissolved [7].\n\nCream often works as a ground for something else. Welsh quilts are often white-on-white or cream-on-cream, a tone-on-tone effect [7]. Javanese soga batiks set indigo and a tan from soga bark on a white or cream ground [8], and Maisin clan designs in Papua New Guinea are drawn in black and red on cream bark-cloth [9]. In the trade, Toch listed *cream ochre* in 1916 among the ochre variants of the paint shop [10]."
-  },
-  {
-   "id": "white-not-white",
-   "title": "Whites that are not white",
-   "body": "Cream is the usual answer when something called white is not. Nineteenth-century \"black and white\" photographs were really mixes of dark browns with beige, cream or off-white, depending on the paper, the fixer and the years [6]. Wimbledon still requires all white, and in 2013 it banned off-white, cream and ecru by name [5].\n\nThe belief that Le Corbusier built only in pure white is a myth, or at best a simplification [4]. Jarman records that his Les Terrasses was painted a cream white, while the Villa Savoye was pure white [4]. Heated filament lamps give a related lesson: at about 2800 K their light is a creamy orange-white, and it turns bluish only at higher temperatures [12].\n\nBirren's 1950 advice was that after white, a pale ivory or cream comes next for legibility with black print, and that warm ivory, cream or peach suit chilly or dim rooms [11]. That is old opinion rather than modern evidence."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch",
-   "body": "The swatch here, #FFFDD0, is the value Wikipedia's listing gives, citing Maerz and Paul [13]. RAL 9001, the paint standard's cream, is greyer (about #EFEBDC on screen), and the xkcd survey's cream is yellower, at #FFFFC2 [13]. The nearest ISCC-NBS name for our swatch is \"pale greenish yellow\" at a distance of 7.2 CIEDE2000 units [13].\n\nIts closest neighbors are Lemon Chiffon at 1.1 units and Light Goldenrod Yellow at 1.5 [13]. Beside [[ivory]] it is clearly yellower, and beside [[cornsilk]] and [[linen]] it is paler and cleaner [13]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a screen color within six units of this swatch covers at least five per cent of the canvas in only 19 works [14]. The strongest are Nicolaas Baur's naval scene of 1818 at 57 per cent, [[painting:aic-80071|Oguri Sotan's Landscape]] of 1413 at 50 per cent, and [[painter:georges-seurat|Seurat]]'s *Circus* study of 1891 at 38 per cent, followed by [[painting:aic-13451|Luo Mu's pavilion landscape]] of 1693 [14]. Eleven of the 19 date from the 1800s [14].\n\nThese are photographs of aged, varnished works, and several of the top matches are ink or watercolor, so the cream is plausibly the bare paper or silk rather than a painted color [14]. Our data cannot tell the two apart. Inside a painting, cream most often plays a light: that is its role in 68 per cent of the 62 paintings where the within-painting lens finds it [15].\n\nThe word is easier to chart than the color. In Google Books, *cream* rises from the 1910s and peaks around 1930, but it counts the dairy product and face cream as much as the color [15]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the fat that rises on milk (the dairy product)",
-   "first_recorded": "As a nomenclature term, Syme's Cream Yellow of 1821; in our library, RAL 1927 and Maerz & Paul 1930",
-   "source": "Baty, Nature's Palette, p. 196; ColorHub library"
-  },
-  "aka": [
-   "Cream Yellow (Syme, 1821)",
-   "regency cream (an off-white)"
+  "slug": "cream",
+  "name": "Cream",
+  "hex": "#FFFDD0",
+  "names": [
+    "Cream"
   ],
-  "siblings": [
-   "ivory",
-   "cornsilk",
-   "linen",
-   "light-yellow"
+  "tier": "nature",
+  "depth": "medium",
+  "lede": "Cream is the warm, yellowish off-white of the fat that rises on milk, a kitchen word that naturalists, quilters, paper-makers and tennis officials have all used for the white that is not quite white.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name",
+      "body": "Cream is a food word that became a color word. Paterson defines it as the color of the milk product, a yellowish white [1]. His dictionary keeps the word's other careers too: *cream wove* is writing paper with an even surface, *cream-faced* means pale from fear, and *regency cream* is a name for an off-white [1].\n\nThe phrase \"peaches and cream\" describes the classic British fair complexion, a cream-colored skin with pinkish cheeks [1]. St Clair's glossary sets the neighbors around it: cream is a pale yellow or rich off-white, *milk white* a pale greyish cream, and *lily white* a very pale cream with some warmth [2]."
+    },
+    {
+      "id": "werner",
+      "title": "Cream Yellow",
+      "body": "The naturalists' nomenclatures used the word before the paint shops did. When Patrick Syme revised Werner's list in 1821, he renamed Werner's no. 75, Isabella Yellow, as Cream Yellow [3]. Baty's examples of it are the breast of a teal drake, the petals of the yellow butterfly ginger, and the minerals porcelain jasper and fluor spar [3].\n\nThe older name lives on as [[white]], whose own story is told in its article. So the same pale yellow-white has had the name Isabella and a dairy's, and the dairy won [3]."
+    },
+    {
+      "id": "cloth",
+      "title": "On wool, silk and paper",
+      "body": "Natural materials are where cream is easiest to see. Finlay describes wool in a mill's dehairing room as the color of pale cream [7]. Silk cocoons come naturally in cream white, citron yellow, yolk orange, dusky pink or chestnut, colors that come from carotenoids in the gum around the thread, and most of the thread turns out white once that gum is dissolved [7].\n\nCream often works as a ground for something else. Welsh quilts are often white-on-white or cream-on-cream, a tone-on-tone effect [7]. Javanese soga batiks set indigo and a tan from soga bark on a white or cream ground [8], and Maisin clan designs in Papua New Guinea are drawn in black and red on cream bark-cloth [9]. In the trade, Toch listed *cream ochre* in 1916 among the ochre variants of the paint shop [10]."
+    },
+    {
+      "id": "white-not-white",
+      "title": "Whites that are not white",
+      "body": "Cream is the usual answer when something called white is not. Nineteenth-century \"black and white\" photographs were really mixes of dark browns with beige, cream or off-white, depending on the paper, the fixer and the years [6]. Wimbledon still requires all white, and in 2013 it banned off-white, cream and ecru by name [5].\n\nThe belief that Le Corbusier built only in pure white is a myth, or at best a simplification [4]. Jarman records that his Les Terrasses was painted a cream white, while the Villa Savoye was pure white [4]. Heated filament lamps give a related lesson: at about 2800 K their light is a creamy orange-white, and it turns bluish only at higher temperatures [12].\n\nBirren's 1950 advice was that after white, a pale ivory or cream comes next for legibility with black print, and that warm ivory, cream or peach suit chilly or dim rooms [11]. That is old opinion rather than modern evidence."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch",
+      "body": "The swatch here, #FFFDD0, is the value Wikipedia's listing gives, citing Maerz and Paul [13]. RAL 9001, the paint standard's cream, is greyer (about #EFEBDC on screen), and the xkcd survey's cream is yellower, at #FFFFC2 [13]. The nearest ISCC-NBS name for our swatch is \"pale greenish yellow\" at a distance of 7.2 CIEDE2000 units [13].\n\nIts closest neighbors are Lemon Chiffon at 1.1 units and Light Goldenrod Yellow at 1.5 [13]. Beside [[ivory]] it is clearly yellower, and beside [[cornsilk]] and [[linen]] it is paler and cleaner [13]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a screen color within six units of this swatch covers at least five per cent of the canvas in only 19 works [14]. The strongest are Nicolaas Baur's naval scene of 1818 at 57 per cent, [[painting:aic-80071|Oguri Sotan's Landscape]] of 1413 at 50 per cent, and [[painter:georges-seurat|Seurat]]'s *Circus* study of 1891 at 38 per cent, followed by [[painting:aic-13451|Luo Mu's pavilion landscape]] of 1693 [14]. Eleven of the 19 date from the 1800s [14].\n\nThese are photographs of aged, varnished works, and several of the top matches are ink or watercolor, so the cream is plausibly the bare paper or silk rather than a painted color [14]. Our data cannot tell the two apart. Inside a painting, cream most often plays a light: that is its role in 68 per cent of the 62 paintings where the within-painting lens finds it [15].\n\nThe word is easier to chart than the color. In Google Books, *cream* rises from the 1910s and peaks around 1930, but it counts the dairy product and face cream as much as the color [15]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "creme"
-  ],
-  "disambiguation": [
-   {
-    "slug": "creme",
-    "gloss": "the xkcd and ISCC-NBS spelling is a stronger yellow, #FFFFB6"
-   },
-   {
-    "slug": "isabelline",
-    "gloss": "the older name for Werner's no. 75, which Syme renamed Cream Yellow"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#FFFDD0",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 19,
-  "top_paintings": [
-   "rijks-20026576",
-   "aic-80071",
-   "commons-Q3976298",
-   "aic-13451"
-  ],
-  "role_within_painting": {
-   "light_pct": 68,
-   "n": 62
-  },
-  "ngram": {
-   "rise": 1910,
-   "peak": 1930,
-   "caveat": "all senses of the word"
-  },
-  "measured": {
-   "iscc": "pale greenish yellow",
-   "iscc_de": 7.2,
-   "nearest": [
-    [
-     "Lemon Chiffon",
-     1.1
+  "aside": {
+    "origin": {
+      "named_after": "the fat that rises on milk (the dairy product)",
+      "first_recorded": "As a nomenclature term, Syme's Cream Yellow of 1821; in our library, RAL 1927 and Maerz & Paul 1930",
+      "source": "Baty, Nature's Palette, p. 196; ColorHub library"
+    },
+    "aka": [
+      "Cream Yellow (Syme, 1821)",
+      "regency cream (an off-white)"
     ],
-    [
-     "Light Goldenrod Yellow",
-     1.5
+    "siblings": [
+      "ivory",
+      "cornsilk",
+      "linen",
+      "light-yellow"
     ],
-    [
-     "Pale",
-     1.9
+    "parent": null,
+    "children": [
+      "creme"
+    ],
+    "disambiguation": [
+      {
+        "slug": "creme",
+        "gloss": "the xkcd and ISCC-NBS spelling is a stronger yellow, #FFFFB6"
+      },
+      {
+        "slug": "isabelline",
+        "gloss": "the older name for Werner's no. 75, which Syme renamed Cream Yellow"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#FFFDD0",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 19,
+    "top_paintings": [
+      "rijks-20026576",
+      "aic-80071",
+      "commons-Q3976298",
+      "aic-13451"
+    ],
+    "role_within_painting": {
+      "light_pct": 68,
+      "n": 62
+    },
+    "ngram": {
+      "rise": 1910,
+      "peak": 1930,
+      "caveat": "all senses of the word"
+    },
+    "measured": {
+      "iscc": "pale greenish yellow",
+      "iscc_de": 7.2,
+      "nearest": [
+        [
+          "Lemon Chiffon",
+          1.1
+        ],
+        [
+          "Light Goldenrod Yellow",
+          1.5
+        ],
+        [
+          "Pale",
+          1.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, pp. 132, 301, 341 (\"cream\", \"peaches and cream complexion\", \"regency cream\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, glossary of color terms (\"Cream\", \"Lily white\", \"Milk white\")",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 196, 203",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 12",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pastoureau, White: The History of a Color, p. 205",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pastoureau, White: The History of a Color, pp. 164-166",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Finlay, Fabric, pp. 237, 339, 447",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, p. 161",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 63",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Eastaugh et al., Pigment Compendium, p. 293 (\"Ochre\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 28",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Eckstut and Eckstut, What Is Color?, ch. 51",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/library.json, data/graph: Wikipedia, RAL, xkcd, ISCC-NBS, Maerz & Paul), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "data",
+      "cite": "ColorHub archive of 23,781 paintings, as photographed (tools/article_field.py, ΔE 6, at least 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "data",
+      "cite": "ColorHub Color Graph field notes (within-painting lightness lens; Google Books Ngram, all senses of the word)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What did Syme's 1821 revision of Werner's list call the color Werner had named Isabella Yellow?",
+      "choices": [
+        "Cream Yellow",
+        "Straw Yellow",
+        "Wax Yellow",
+        "Honey Yellow"
+      ],
+      "answer": "Cream Yellow",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: every house Le Corbusier painted was pure white.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Why should you be careful reading our painting matches for cream?",
+      "choices": [
+        "The match may be the bare paper or silk, not a painted color",
+        "Cream cannot be photographed",
+        "Museums repaint cream areas",
+        "Cream only appears in modern paintings"
+      ],
+      "answer": "The match may be the bare paper or silk, not a painted color",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "In 2013 Wimbledon banned off-white, cream and ecru by name: its rule is all white.",
+    "Cream Yellow is Syme's 1821 renaming of Werner's Isabella Yellow, the same pale yellow with a dairy's name instead of Isabella's.",
+    "Look at a Welsh quilt: the old ones are often white on white or cream on cream."
+  ],
+  "words": 773,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Fixed note numbers: peaches-and-cream now cites Paterson [1], St Clair [2], Syme/Werner Baty [3]",
+      "Removed unsupported 'wait for the light' quilt claim (in body and opener)",
+      "'washed fleece' corrected to wool in a dehairing room (Finlay p.237)",
+      "'queen's name' softened to Isabella (isabelline origin legend is disputed)"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, pp. 132, 301, 341 (\"cream\", \"peaches and cream complexion\", \"regency cream\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, glossary of color terms (\"Cream\", \"Lily white\", \"Milk white\")",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 196, 203",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 12",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pastoureau, White: The History of a Color, p. 205",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pastoureau, White: The History of a Color, pp. 164-166",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Finlay, Fabric, pp. 237, 339, 447",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, p. 161",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 63",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Eastaugh et al., Pigment Compendium, p. 293 (\"Ochre\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 28",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Eckstut and Eckstut, What Is Color?, ch. 51",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph: Wikipedia, RAL, xkcd, ISCC-NBS, Maerz & Paul), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "data",
-   "cite": "ColorHub archive of 23,781 paintings, as photographed (tools/article_field.py, ΔE 6, at least 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "data",
-   "cite": "ColorHub Color Graph field notes (within-painting lightness lens; Google Books Ngram, all senses of the word)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What did Syme's 1821 revision of Werner's list call the color Werner had named Isabella Yellow?",
-   "choices": [
-    "Cream Yellow",
-    "Straw Yellow",
-    "Wax Yellow",
-    "Honey Yellow"
-   ],
-   "answer": "Cream Yellow",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: every house Le Corbusier painted was pure white.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Why should you be careful reading our painting matches for cream?",
-   "choices": [
-    "The match may be the bare paper or silk, not a painted color",
-    "Cream cannot be photographed",
-    "Museums repaint cream areas",
-    "Cream only appears in modern paintings"
-   ],
-   "answer": "The match may be the bare paper or silk, not a painted color",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "In 2013 Wimbledon banned off-white, cream and ecru by name: its rule is all white.",
-  "Cream Yellow is Syme's 1821 renaming of Werner's Isabella Yellow, the same pale yellow with a dairy's name instead of Isabella's.",
-  "Look at a Welsh quilt: the old ones are often white on white or cream on cream."
- ],
- "words": 773,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Fixed note numbers: peaches-and-cream now cites Paterson [1], St Clair [2], Syme/Werner Baty [3]",
-   "Removed unsupported 'wait for the light' quilt claim (in body and opener)",
-   "'washed fleece' corrected to wool in a dehairing room (Finlay p.237)",
-   "'queen's name' softened to Isabella (isabelline origin legend is disputed)"
-  ]
- }
 }

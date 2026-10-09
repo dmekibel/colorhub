@@ -1,140 +1,140 @@
 {
- "slug": "timberwolf",
- "name": "Timberwolf",
- "hex": "#DBD7D2",
- "names": [
-  "Timberwolf"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Timberwolf is a pale, faintly warm grey named for the grey coat of the timber wolf rather than any pigment or dye.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A wolf's grey coat",
-   "body": "Our library traces the name to a Wikipedia color list, which gives no date for when the name entered use [1]. The word points to the animal's fur rather than a material, place or person [1].\n\nIts nearest named neighbor is [[light-grey]], 3.0 units of CIEDE2000 away and described as almost the same [2]. [[platinum]] sits at 3.4, lighter, [[grey-white]] at 4.1, almost the same, and [[papyrus-white]] at 4.4, also almost the same [2]. Measured in LCH it reads lightness 86, chroma 3, among the palest, least saturated colors in our library [1]."
+  "slug": "timberwolf",
+  "name": "Timberwolf",
+  "hex": "#DBD7D2",
+  "names": [
+    "Timberwolf"
+  ],
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Timberwolf is a pale, faintly warm grey named for the grey coat of the timber wolf rather than any pigment or dye.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A wolf's grey coat",
+      "body": "Our library traces the name to a Wikipedia color list, which gives no date for when the name entered use [1]. The word points to the animal's fur rather than a material, place or person [1].\n\nIts nearest named neighbor is [[light-grey]], 3.0 units of CIEDE2000 away and described as almost the same [2]. [[platinum]] sits at 3.4, lighter, [[grey-white]] at 4.1, almost the same, and [[papyrus-white]] at 4.4, also almost the same [2]. Measured in LCH it reads lightness 86, chroma 3, among the palest, least saturated colors in our library [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 642 of 23,781 paintings (2.7 percent), more common than 80 percent of the named colors, as photographed [3]. It peaks in the 1900s, in 61 of 1,674 paintings from that century, 1.7 times the expected rate [3]. Carlos de Haes is its most devoted painter, using it in 5 of 29 of his works in our archive, 4.7 times the baseline of the museums those works come from [3]. Inside a painting it most often plays a light, a role measured by lightness rank within the canvas, in 77 percent of matched works [3]. It shares canvases with [[cool-grey]] and Light Mouse Grey well above chance [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the grey coat of the timber wolf",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub library (a Wikipedia list)"
+    },
+    "aka": [],
+    "siblings": [
+      "light-grey",
+      "platinum",
+      "grey-white",
+      "papyrus-white"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 642 of 23,781 paintings (2.7 percent), more common than 80 percent of the named colors, as photographed [3]. It peaks in the 1900s, in 61 of 1,674 paintings from that century, 1.7 times the expected rate [3]. Carlos de Haes is its most devoted painter, using it in 5 of 29 of his works in our archive, 4.7 times the baseline of the museums those works come from [3]. Inside a painting it most often plays a light, a role measured by lightness rank within the canvas, in 77 percent of matched works [3]. It shares canvases with [[dark-grey]] and Light Mouse Grey well above chance [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the grey coat of the timber wolf",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub library (a Wikipedia list)"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+    "n_present": 642,
+    "rank_pct": 80,
+    "peak_century": [
+      1900,
+      1.7
+    ],
+    "role_top": [
+      "light",
+      77
+    ],
+    "top_painter": [
+      "Carlos de Haes",
+      4.7
+    ],
+    "measured": {
+      "lch": [
+        86,
+        3,
+        81
+      ],
+      "nearest": [
+        [
+          "Light Grey",
+          3.0
+        ],
+        [
+          "Platinum",
+          3.4
+        ],
+        [
+          "Grey-White",
+          4.1
+        ],
+        [
+          "Papyrus White",
+          4.4
+        ]
+      ]
+    }
   },
-  "aka": [],
-  "siblings": [
-   "light-grey",
-   "platinum",
-   "grey-white",
-   "papyrus-white"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): name source and nature tier",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
-  "n_present": 642,
-  "rank_pct": 80,
-  "peak_century": [
-   1900,
-   1.7
+  "questions": [
+    {
+      "q": "What is Timberwolf named for?",
+      "choices": [
+        "The grey coat of the timber wolf",
+        "A grey mineral pigment",
+        "A paint company's crayon line",
+        "A medieval dye recipe"
+      ],
+      "answer": "The grey coat of the timber wolf",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Timberwolf is one of the rarer named colors in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
   ],
-  "role_top": [
-   "light",
-   77
+  "openers": [
+    "Timberwolf shows up in more than one painting in forty, mostly as a light rather than a shadow."
   ],
-  "top_painter": [
-   "Carlos de Haes",
-   4.7
-  ],
-  "measured": {
-   "lch": [
-    86,
-    3,
-    81
-   ],
-   "nearest": [
-    [
-     "Light Grey",
-     3.0
-    ],
-    [
-     "Platinum",
-     3.4
-    ],
-    [
-     "Grey-White",
-     4.1
-    ],
-    [
-     "Papyrus White",
-     4.4
+  "words": 246,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "rank-percentile drift: article said 82%, current data/graph/fieldnotes says 80% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): name source and nature tier",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is Timberwolf named for?",
-   "choices": [
-    "The grey coat of the timber wolf",
-    "A grey mineral pigment",
-    "A paint company's crayon line",
-    "A medieval dye recipe"
-   ],
-   "answer": "The grey coat of the timber wolf",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Timberwolf is one of the rarer named colors in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Timberwolf shows up in more than one painting in forty, mostly as a light rather than a shadow."
- ],
- "words": 246,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "rank-percentile drift: article said 82%, current data/graph/fieldnotes says 80% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
-  ]
- }
 }

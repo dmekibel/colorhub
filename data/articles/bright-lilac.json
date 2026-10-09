@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Two lists, one color",
-   "body": "Wikipedia's \"List of colors\" entry for this shade cites the Crayola crayon of the same name as its source, and the 2010 xkcd survey separately recorded its own cluster at this hue, under its own crowd-chosen label [1]. The name itself follows ordinary modifier grammar, \"bright\" in front of the base color [[lilac]] [1].\n\nThe nearest named colors on file are [[light-amparo-purple]], [[baby-purple]], [[lavender-pink]] and [[vivid-lilac]], at 3.9, 4.5, 5.3 and 5.6 ΔE [1]. Family neighbors are [[lilac]], [[lavender]], [[purple]], and [[magenta]] [1]."
+   "body": "Wikipedia's \"List of colors\" entry for this shade cites the Crayola crayon of the same name as its source, and the 2010 xkcd survey separately recorded its own cluster at this hue, under its own crowd-chosen label [1]. The name itself follows ordinary modifier grammar, \"bright\" in front of the base color [[lilac]] [1].\n\nThe nearest named colors on file are [[light-amparo-purple]], [[lavender]], [[lavender-pink]] and [[vivid-lilac]], at 3.9, 4.5, 5.3 and 5.6 ΔE [1]. Family neighbors are [[lilac]], [[lavender]], [[purple]], and [[magenta]] [1]."
   },
   {
    "id": "field",
@@ -96,7 +96,7 @@
  "openers": [
   "Bright Lilac's closest learnable neighbor turns out to be Lavender, not Lilac."
  ],
- "words": 158,
+ "words": 157,
  "status": "checked",
  "checked": {
   "by": "writer",

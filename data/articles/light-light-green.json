@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A doubled modifier",
-   "body": "Repeating a modifier, as in *light light green*, is the survey's way of pushing further along a scale than the single word *light* already does; the library files it as a direct child of [[green]] [1][2]. A near-duplicate xkcd entry, Washed Out Green, sits about 2.2 units away, close enough that the two likely describe the same impression to different volunteers [2]. The 1955 ISCC-NBS system's closest block, very light yellowish green, is 5.3 units off [2]. The nearest named colors on file are [[very-light-green]], [[light-pastel-green]] and [[light-mint]], at 2.6, 3.1 and 4.2 ΔE [2]."
+   "body": "Repeating a modifier, as in *light light green*, is the survey's way of pushing further along a scale than the single word *light* already does; the library files it as a direct child of [[green]] [1][2]. A near-duplicate xkcd entry, Washed Out Green, sits about 2.2 units away, close enough that the two likely describe the same impression to different volunteers [2]. The 1955 ISCC-NBS system's closest block, very light yellowish green, is 5.3 units off [2]. The nearest named colors on file are [[very-light-green]], [[celery]] and [[very-light-green]], at 2.6, 3.1 and 4.2 ΔE [2]."
   },
   {
    "id": "field",
@@ -126,7 +126,7 @@
  "openers": [
   "Light Light Green doubles its own modifier just to go paler still."
  ],
- "words": 214,
+ "words": 213,
  "status": "checked",
  "checked": {
   "by": "batch writer",

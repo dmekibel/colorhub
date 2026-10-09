@@ -1,116 +1,116 @@
 {
- "slug": "dirty-pink",
- "name": "Dirty Pink",
- "hex": "#CA7B80",
- "names": [
-  "Dirty Pink"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Dirty Pink is a muted, slightly brownish rose first recorded by the 2010 xkcd color survey, where volunteers typed names at swatches on screen.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A crowd name for a grayed pink",
-   "body": "Dirty Pink has no listing in Ridgway, Maerz and Paul, or the ISCC-NBS charts; the only source on file is the xkcd color survey of 2010, where thousands of web users typed names at swatches and this one stuck [1]. The name follows a plain modifier grammar, *dirty* plus [[pink]], the same pattern behind [[dirty-purple|Dirty Purple]] and [[dirty-yellow|Dirty Yellow]]: a base hue read as soiled or faded [1]. At hex #CA7B80 it measures lightness 60 and chroma 33 in LCH, and the nearest ISCC-NBS block reads as a dark pink [1].\n\nIts closest named neighbors are [[old-rose|Old Rose]], 2.9 units off and duller, and [[dusty-rose|Dusty Rose]], 3.0 units off and almost the same; [[antique-pink|Antique Pink]] sits 3.0 units away and more vivid, and [[dusky-pink|Dusky Pink]] 4.1 units away and redder [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this pink in 20 of 23,781 paintings, about 0.08 percent, as photographed, rarer than most named colors here [3]. The earliest match is a 1400 painting of a bishop saint, 610 years before the 2010 survey fixed the name, a floor and not a first, since the archive's early centuries are thin [3]. It peaks in the 1900s, in 6 of 1,674 paintings, 4.3 times the archive's overall rate, after Henri Matisse used it in nudes painted in 1908 and 1909 [3]. These are screen matches on photographs of varnished paintings, not a record of any pigment [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a modifier of pink: dirty + pink",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "pink",
-   "old-rose",
-   "dusty-rose",
-   "antique-pink"
+  "slug": "dirty-pink",
+  "name": "Dirty Pink",
+  "hex": "#CA7B80",
+  "names": [
+    "Dirty Pink"
   ],
-  "parent": "pink",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 20,
-  "pct": 0.08,
-  "measured": {
-   "lch": [
-    60.1,
-    33.0,
-    18.4
-   ],
-   "nearest": [
-    [
-     "Old Rose",
-     2.9
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Dirty Pink is a muted, slightly brownish rose first recorded by the 2010 xkcd color survey, where volunteers typed names at swatches on screen.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A crowd name for a grayed pink",
+      "body": "Dirty Pink has no listing in Ridgway, Maerz and Paul, or the ISCC-NBS charts; the only source on file is the xkcd color survey of 2010, where thousands of web users typed names at swatches and this one stuck [1]. The name follows a plain modifier grammar, *dirty* plus [[pink]], the same pattern behind [[dull-dark-purple|Dirty Purple]] and [[citronelle|Dirty Yellow]]: a base hue read as soiled or faded [1]. At hex #CA7B80 it measures lightness 60 and chroma 33 in LCH, and the nearest ISCC-NBS block reads as a dark pink [1].\n\nIts closest named neighbors are [[old-rose|Old Rose]], 2.9 units off and duller, and [[dusty-rose|Dusty Rose]], 3.0 units off and almost the same; [[antique-pink|Antique Pink]] sits 3.0 units away and more vivid, and [[dusky-pink|Dusky Pink]] 4.1 units away and redder [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this pink in 20 of 23,781 paintings, about 0.08 percent, as photographed, rarer than most named colors here [3]. The earliest match is a 1400 painting of a bishop saint, 610 years before the 2010 survey fixed the name, a floor and not a first, since the archive's early centuries are thin [3]. It peaks in the 1900s, in 6 of 1,674 paintings, 4.3 times the archive's overall rate, after Henri Matisse used it in nudes painted in 1908 and 1909 [3]. These are screen matches on photographs of varnished paintings, not a record of any pigment [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a modifier of pink: dirty + pink",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "pink",
+      "old-rose",
+      "dusty-rose",
+      "antique-pink"
+    ],
+    "parent": "pink",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 20,
+    "pct": 0.08,
+    "measured": {
+      "lch": [
+        60.1,
+        33.0,
+        18.4
+      ],
+      "nearest": [
+        [
+          "Old Rose",
+          2.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-d.json): xkcd color survey, 2010",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which source first records the name Dirty Pink in our library?",
+      "choices": [
+        "The 2010 xkcd color survey",
+        "Ridgway's 1912 atlas",
+        "The ISCC-NBS charts of 1955",
+        "Maerz and Paul's 1930 dictionary"
+      ],
+      "answer": "The 2010 xkcd color survey",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Dirty Pink is listed in Ridgway's 1912 color atlas.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Dirty Pink has no listing anywhere before the 2010 web survey that crowd-named it."
+  ],
+  "words": 256,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; written from ColorHub library/graph/archive data only."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-d.json): xkcd color survey, 2010",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which source first records the name Dirty Pink in our library?",
-   "choices": [
-    "The 2010 xkcd color survey",
-    "Ridgway's 1912 atlas",
-    "The ISCC-NBS charts of 1955",
-    "Maerz and Paul's 1930 dictionary"
-   ],
-   "answer": "The 2010 xkcd color survey",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Dirty Pink is listed in Ridgway's 1912 color atlas.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Dirty Pink has no listing anywhere before the 2010 web survey that crowd-named it."
- ],
- "words": 256,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; written from ColorHub library/graph/archive data only."
-  ]
- }
 }

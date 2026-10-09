@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A crayon name, no earlier record",
-   "body": "Eerie Black is cited via Wikipedia as a name from Crayola's crayon list [1]. Its hex value, #1B1B1B, approximates RAL 9011, a graphite black from the RAL color-matching system [1]. No earlier record of the name is documented in our data [1]. Our color library's nearest look-alikes are [[black]], [[raisin-black]], [[smoky-black]] and [[almost-black]], all within a few units of it [1]."
+   "body": "Eerie Black is cited via Wikipedia as a name from Crayola's crayon list [1]. Its hex value, #1B1B1B, approximates RAL 9011, a graphite black from the RAL color-matching system [1]. No earlier record of the name is documented in our data [1]. Our color library's nearest look-alikes are [[black]], [[raisin-black]], [[smoky-black]] and [[rich-black-fogra39]], all within a few units of it [1]."
   },
   {
    "id": "field",
@@ -103,5 +103,5 @@
   "date": "2026-10-09",
   "issues": []
  },
- "words": 246
+ "words": 247
 }

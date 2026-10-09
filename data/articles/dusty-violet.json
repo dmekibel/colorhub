@@ -1,134 +1,134 @@
 {
-  "slug": "dusty-violet",
-  "name": "Dusty violet",
-  "hex": "#8C739A",
-  "names": [
-    "Dusty violet",
-    "Saccardo's Violet"
-  ],
-  "tier": "person",
-  "depth": "brief",
-  "lede": "Saccardo's Violet is a soft, greyed violet from Robert Ridgway's 1912 color book, most likely named, like its sibling Saccardo's Slate, for the Italian mycologist Pier Andrea Saccardo.",
-  "sections": [
-    {
-      "id": "name",
-      "title": "A mycologist's color chart",
-      "body": "Ridgway drew about 4,000 of his named samples from earlier sources, among them Saccardo's *Chromotaxia*, a chart the Italian mycologist Pier Andrea Saccardo built for naming fungus colors [1]. This violet and [[dark-teal-grey|Saccardo's Slate]] most likely share that source, though no book we hold states the naming directly [1][2].\n\nRidgway catalogued it on plate XXXVII, hue 61 prime [2]."
-    },
-    {
-      "id": "field",
-      "title": "Field notes",
-      "body": "In LCH terms it measures lightness 52, chroma 25, hue 315 degrees [3]. Its nearest library neighbors are [[faded-purple|Faded Purple]] and [[pearl-violet|Pearl Violet]], with [[grey-purple|Grey Purple]] close behind [3]. Our archive of 23,781 paintings, as photographed, finds only 3 matches, all in landscapes from the 1850s to 1910s, including Eugène Boudin's 1869 harbor scene *The mole of Deauville* [4]. Saturated violets are rare matches in aged, varnished paintings, where pigments fade and darken unevenly [4]."
-    }
-  ],
-  "aside": {
-    "origin": {
-      "named_after": "most likely Pier Andrea Saccardo, Italian mycologist (1845-1920), author of Chromotaxia",
-      "first_recorded": "1912, Ridgway",
-      "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
-    },
-    "aka": [
-      "Saccardo's Violet"
-    ],
-    "siblings": [
-      "saccardo-s-slate",
-      "faded-purple",
-      "pearl-violet"
-    ],
-    "parent": null,
-    "children": [],
-    "disambiguation": [],
-    "other_languages": []
+ "slug": "dusty-violet",
+ "name": "Dusty violet",
+ "hex": "#8C739A",
+ "names": [
+  "Dusty violet",
+  "Saccardo's Violet"
+ ],
+ "tier": "person",
+ "depth": "brief",
+ "lede": "Dusty violet is a soft, greyed violet from Robert Ridgway's 1912 color book, where it appears as Saccardo's Violet, most likely named, like its sibling Saccardo's Slate, for the Italian mycologist Pier Andrea Saccardo.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A mycologist's color chart",
+   "body": "Ridgway drew about 4,000 of his named samples from earlier sources, among them Saccardo's *Chromotaxia*, a chart the Italian mycologist Pier Andrea Saccardo built for naming fungus colors [1]. This violet and [[dark-teal-grey|Saccardo's Slate]] most likely share that source, though no book we hold states the naming directly [1][2].\n\nRidgway catalogued it on plate XXXVII, hue 61 prime [2]."
   },
-  "field": {
-    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-    "n_present": 3,
-    "top_paintings": [
-      "commons-Q59844200",
-      "commons-Q17492018",
-      "commons-Q20178858"
-    ],
-    "measured": {
-      "lch": [
-        52,
-        25,
-        315
-      ],
-      "nearest": [
-        [
-          "Faded Purple",
-          2.7
-        ],
-        [
-          "Pearl Violet",
-          2.8
-        ]
-      ]
-    }
-  },
-  "notes": [
-    {
-      "n": 1,
-      "kind": "book",
-      "cite": "Baty et al. (eds.), Nature's Palette, preface on Ridgway's sources, citing Saccardo's Chromotaxia",
-      "loc_kind": "book-chapter",
-      "url": null
-    },
-    {
-      "n": 2,
-      "kind": "data",
-      "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXXVII, hue 61'",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 3,
-      "kind": "data",
-      "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 4,
-      "kind": "data",
-      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
-      "loc_kind": null,
-      "url": null
-    }
-  ],
-  "questions": [
-    {
-      "q": "Which sibling color likely shares Saccardo's Violet's namesake?",
-      "choices": [
-        "Saccardo's Slate",
-        "Mathews' Purple",
-        "Medici Blue",
-        "Rood's Brown"
-      ],
-      "answer": "Saccardo's Slate",
-      "kind": "pick"
-    },
-    {
-      "q": "True or false: Saccardo's Violet is common in our painting archive.",
-      "choices": [
-        "True",
-        "False"
-      ],
-      "answer": "False",
-      "kind": "true-false"
-    }
-  ],
-  "openers": [
-    "Saccardo's Violet turns up only three times in 23,781 archive paintings."
-  ],
-  "words": 157,
-  "status": "checked",
-  "checked": {
-    "by": "writer",
-    "date": "2026-10-08",
-    "issues": [
-      "Naming tied to Saccardo's Chromotaxia by inference, not a direct book statement.",
-      "lint 2026-10-09"
-    ]
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In LCH terms it measures lightness 52, chroma 25, hue 315 degrees [3]. Its nearest library neighbors are [[faded-purple|Faded Purple]] and [[pearl-violet|Pearl Violet]], with [[grey-purple|Grey Purple]] close behind [3]. Our archive of 23,781 paintings, as photographed, finds only 3 matches, all in landscapes from the 1850s to 1910s, including Eugène Boudin's 1869 harbor scene *The mole of Deauville* [4]. Saturated violets are rare matches in aged, varnished paintings, where pigments fade and darken unevenly [4]."
   }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "most likely Pier Andrea Saccardo, Italian mycologist (1845-1920), author of Chromotaxia",
+   "first_recorded": "1912, Ridgway",
+   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+  },
+  "aka": [
+   "Saccardo's Violet"
+  ],
+  "siblings": [
+   "dark-teal-grey",
+   "faded-purple",
+   "pearl-violet"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "top_paintings": [
+   "commons-Q59844200",
+   "commons-Q17492018",
+   "commons-Q20178858"
+  ],
+  "measured": {
+   "lch": [
+    52,
+    25,
+    315
+   ],
+   "nearest": [
+    [
+     "Faded Purple",
+     2.7
+    ],
+    [
+     "Pearl Violet",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Baty et al. (eds.), Nature's Palette, preface on Ridgway's sources, citing Saccardo's Chromotaxia",
+   "loc_kind": "book-chapter",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXXVII, hue 61'",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; within the archive's match threshold, at least 5% of the canvas)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which sibling color likely shares Dusty violet's (Saccardo's Violet's) namesake?",
+   "choices": [
+    "Saccardo's Slate",
+    "Mathews' Purple",
+    "Medici Blue",
+    "Rood's Brown"
+   ],
+   "answer": "Saccardo's Slate",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Dusty violet is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Dusty violet (Saccardo's Violet) turns up only three times in 23,781 archive paintings."
+ ],
+ "words": 163,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Naming tied to Saccardo's Chromotaxia by inference, not a direct book statement.",
+   "lint 2026-10-09"
+  ]
+ }
 }

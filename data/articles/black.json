@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A word for burning and shining",
-   "body": "English *black* comes from Old English *blæc*, which meant black or dark and also ink [1]. Behind it lies a Proto-Germanic *blakaz*, burnt, possibly from an older root meaning to burn or to shine; Dutch *blaken*, to burn, and Latin *flagrare*, to blaze, are distant relatives [1]. Pastoureau draws the same line from another side: Old English had a dull *swart* and a gleaming *blæc*, and *blæc* shares its root with *blank*, the glossy white [2].\n\nLatin, too, had two blacks. *Ater* was matte and turned negative early, which is why it survives in *atrocious*, while *niger* was glossy and prestigious and replaced it under the empire [2]. Old French kept only *noir*, from *niger*, and afterwards needed comparisons, black as pitch, as a crow, as ink, to name its shades [2].\n\nThe swatch on this page is a very dark, faintly cool grey-black, about 5 units from the screen's pure black, #000000 [26]. The color dictionaries file a swatch this dark as brownish black, and its nearest named neighbors are [[eerie-black]], [[almost-black]] and [[raisin-black]] [26]. Real blacks are rarely neutral, and the lighter darks [[jet]] and [[charcoal]] show how quickly a black becomes a grey [26]."
+   "body": "English *black* comes from Old English *blæc*, which meant black or dark and also ink [1]. Behind it lies a Proto-Germanic *blakaz*, burnt, possibly from an older root meaning to burn or to shine; Dutch *blaken*, to burn, and Latin *flagrare*, to blaze, are distant relatives [1]. Pastoureau draws the same line from another side: Old English had a dull *swart* and a gleaming *blæc*, and *blæc* shares its root with *blank*, the glossy white [2].\n\nLatin, too, had two blacks. *Ater* was matte and turned negative early, which is why it survives in *atrocious*, while *niger* was glossy and prestigious and replaced it under the empire [2]. Old French kept only *noir*, from *niger*, and afterwards needed comparisons, black as pitch, as a crow, as ink, to name its shades [2].\n\nThe swatch on this page is a very dark, faintly cool grey-black, about 5 units from the screen's pure black, #000000 [26]. The color dictionaries file a swatch this dark as brownish black, and its nearest named neighbors are [[eerie-black]], [[rich-black-fogra39]] and [[raisin-black]] [26]. Real blacks are rarely neutral, and the lighter darks [[jet]] and [[charcoal]] show how quickly a black becomes a grey [26]."
   },
   {
    "id": "material",
@@ -405,7 +405,7 @@
   "Matthäus Schwarz, whose name means black, had himself drawn in his clothes through life and wears black in 123 of 137 pictures.",
   "Look closely at an Impressionist's darkest shadow: it is usually deep blue, red and green laid together, not black paint."
  ],
- "words": 2081,
+ "words": 2082,
  "status": "checked",
  "checked": {
   "by": "checker",

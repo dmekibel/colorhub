@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A university's blue",
-   "body": "Our library traces the name to a Wikipedia list that cites Pourpre.com but gives no adoption date [1]. The library also records Bleu de France as a near-duplicate of this swatch, 1.0 units away, a French national-color name landing on almost the same blue [1].\n\nIts nearest named neighbor is [[dodger-blue]], 2.8 units of CIEDE2000 away and described as more vivid [2]. [[blue-grey]] sits at 5.0, duller, [[faded-blue]] at 5.6, also duller, and [[azure]] at 5.7, more vivid and purpler [2]. Measured in LCH it reads lightness 58, chroma 48, a bright, moderately saturated blue [1]."
+   "body": "Our library traces the name to a Wikipedia list that cites Pourpre.com but gives no adoption date [1]. The library also records Bleu de France as a near-duplicate of this swatch, 1.0 units away, a French national-color name landing on almost the same blue [1].\n\nIts nearest named neighbor is [[dodger-blue]], 2.8 units of CIEDE2000 away and described as more vivid [2]. [[blue-grey]] sits at 5.0, duller, [[clear-cadet-blue]] at 5.6, also duller, and [[azure]] at 5.7, more vivid and purpler [2]. Measured in LCH it reads lightness 58, chroma 48, a bright, moderately saturated blue [1]."
   },
   {
    "id": "field",
@@ -126,7 +126,7 @@
  "openers": [
   "Tufts Blue sits almost on top of Bleu de France, a French national-color name, just 1.0 unit away."
  ],
- "words": 228,
+ "words": 229,
  "status": "checked",
  "checked": {
   "by": "checker",

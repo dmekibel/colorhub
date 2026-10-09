@@ -1,110 +1,110 @@
 {
- "slug": "grenadine-pink",
- "name": "Grenadine Pink",
- "hex": "#FE9F86",
- "names": [
-  "Grenadine Pink"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Grenadine Pink is a strong yellowish pink that Ridgway placed in his 1912 color nomenclature, later filed by the ISCC-NBS system alongside two dozen other trade names in the same small region of color space.",
- "sections": [
-  {
-   "id": "name",
-   "title": "One block, many trade names",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places Grenadine Pink on plate II, hue 7, tone d [1]. The ISCC-NBS system of 1955 groups it in block 26 as a strong yellowish pink, alongside unrelated trade and dictionary names such as Coquette, Kyoto and Du Barry that all fall in the same narrow region of color space [1]. Why 'grenadine' was chosen for this particular pink is undocumented in the sources we checked [1]. Its closest named neighbor in our library is [[peachy-pink|Peachy Pink]]; the nearest common color word is [[salmon|Salmon]], under eight units away in CIEDE2000, and [[coral]] [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Grenadine Pink is rare in our painting archive: a color within six units of it covers at least five percent of the canvas in only 15 of 23,781 paintings, 0.06 percent, as photographed, rarer than 79 percent of the named colors we track [2]. The within-painting lens narrows that count to three, too few to single out a painter, country or movement [2]. The earliest matching painting dates to 1333, by Bernardo Daddi, 579 years before Ridgway recorded the name in 1912 — a look-alike hue in an aged photograph, not proof the color existed as a dye that early, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "1912, Ridgway",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "peachy-pink",
-   "pink",
-   "coral",
-   "salmon"
+  "slug": "grenadine-pink",
+  "name": "Grenadine Pink",
+  "hex": "#FE9F86",
+  "names": [
+    "Grenadine Pink"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 3,
-  "pct": 0.06,
-  "rank_percentile": 21,
-  "measured": {
-   "lch": [
-    74.6,
-    43.0,
-    40.5
-   ],
-   "munsell": "8.8R 7.4/8.4",
-   "app": [
-    "Salmon",
-    7.8
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
-   "loc_kind": null,
-   "url": null
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Grenadine Pink is a strong yellowish pink that Ridgway placed in his 1912 color nomenclature, later filed by the ISCC-NBS system alongside two dozen other trade names in the same small region of color space.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One block, many trade names",
+      "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places Grenadine Pink on plate II, hue 7, tone d [1]. The ISCC-NBS system of 1955 groups it in block 26 as a strong yellowish pink, alongside unrelated trade and dictionary names such as Coquette, Kyoto and Du Barry that all fall in the same narrow region of color space [1]. Why 'grenadine' was chosen for this particular pink is undocumented in the sources we checked [1]. Its closest named neighbor in our library is [[dusty-salmon|Peachy Pink]]; the nearest common color word is [[salmon|Salmon]], under eight units away in CIEDE2000, and [[coral]] [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Grenadine Pink is rare in our painting archive: a color within six units of it covers at least five percent of the canvas in only 15 of 23,781 paintings, 0.06 percent, as photographed, rarer than 79 percent of the named colors we track [2]. The within-painting lens narrows that count to three, too few to single out a painter, country or movement [2]. The earliest matching painting dates to 1333, by Bernardo Daddi, 579 years before Ridgway recorded the name in 1912 — a look-alike hue in an aged photograph, not proof the color existed as a dye that early, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "1912, Ridgway",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "peachy-pink",
+      "pink",
+      "coral",
+      "salmon"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Where does Ridgway's 1912 nomenclature place Grenadine Pink?",
-   "choices": [
-    "Plate II, hue 7",
-    "Plate XXXI, hue 29''",
-    "Plate XLVIII, hue 37''''",
-    "Plate XX, hue 43'"
-   ],
-   "answer": "Plate II, hue 7",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 3,
+    "pct": 0.06,
+    "rank_percentile": 21,
+    "measured": {
+      "lch": [
+        74.6,
+        43.0,
+        40.5
+      ],
+      "munsell": "8.8R 7.4/8.4",
+      "app": [
+        "Salmon",
+        7.8
+      ]
+    }
   },
-  {
-   "q": "True or false: our sources explain why the color was named 'grenadine'.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph data: Ridgway 1912 / ISCC-NBS 1955 / Maerz & Paul 1930 / RAL entries (data/library.json, data/graph/)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, computed color match, as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Where does Ridgway's 1912 nomenclature place Grenadine Pink?",
+      "choices": [
+        "Plate II, hue 7",
+        "Plate XXXI, hue 29''",
+        "Plate XLVIII, hue 37''''",
+        "Plate XX, hue 43'"
+      ],
+      "answer": "Plate II, hue 7",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources explain why the color was named 'grenadine'.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Grenadine Pink is one of the rarest named colors we track in the painting archive — real, but barely there."
+  ],
+  "words": 243,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; etymology of 'grenadine' marked undocumented. n is too small (3) to break down by painter, country or movement.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "openers": [
-  "Grenadine Pink is one of the rarest named colors we track in the painting archive — real, but barely there."
- ],
- "words": 243,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; etymology of 'grenadine' marked undocumented. n is too small (3) to break down by painter, country or movement.",
-   "lint 2026-10-09"
-  ]
- }
 }

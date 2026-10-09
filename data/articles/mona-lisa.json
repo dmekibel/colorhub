@@ -1,170 +1,170 @@
 {
- "slug": "mona-lisa",
- "name": "Mona Lisa",
- "hex": "#FF948E",
- "names": [
-  "Mona Lisa"
- ],
- "tier": "person",
- "depth": "medium",
- "lede": "Mona Lisa is a light, warm pink on web color lists; the name apparently borrows Leonardo's portrait, though the pink it suggests is the one the painting lost.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A pink with a famous name",
-   "body": "The swatch is a light, warm pink, #FF948E, which our library files in the pinks and places closest to [[salmon]] (5.6 units away) and, among near names, [[peachy-pink]], in the family of [[light-salmon]] and plain [[pink]] [1]. The ISCC-NBS category nearest to it is strong pink, 5.4 units away [1].\n\nWho named this pink, and when, is undocumented. Our library has the name from a single web color list and no dated printed source, and none of the 29 books gives it as a color [1]. The obvious guess is that it points to Leonardo's portrait, but no source we hold says so [1]."
-  },
-  {
-   "id": "painting",
-   "title": "The painting's lost pinks",
-   "body": "Leonardo's portrait is dated c. 1502 by Ball and 1503-6 by Livingstone, so books disagree on the year [2][3]. By Ball's account Leonardo advised painting portraits in dull weather or at dusk, favored muted greens, blues and earth colors, and used sfumato, which lets colors drain into brown-black shadow away from the point of focus [2].\n\nThe pink of the name is probably not the color the portrait shows today. Gage notes that Leonardo's experimental techniques leave us unsure how his pictures looked, and that the rosy and pearly tints a sixteenth-century informant of Vasari described in the Mona Lisa have long since fled [4]. Ball calls the few surviving Leonardos sombre [2]. A pink swatch named for the painting is therefore closer to the color the portrait had than to the one it has [4]."
-  },
-  {
-   "id": "smile",
-   "title": "The smile that hides",
-   "body": "Livingstone shows that the smile depends on where you look. Coarse image detail, which the edge of your vision favors, shows a clearer smile than fine detail does, so it seems to fade when your gaze lands on the mouth [3]. She suggests this explains the coy quality that Gombrich noticed [3]. The same low-resolution mixing is her explanation for the pearly look of Signac's gray [3].\n\nBall adds that the picture's fame now outruns its looks: crowds jostle to glimpse a dim, underlit portrait, and the painting has become a historical artefact more than a beauty [5]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of #FF948E covers at least five per cent of the canvas in only 2 [6]. They are Louis Gustave Ricard's *[[painting:commons-Q17495200|Portrait de l'artiste]]* of 1853, at 12 per cent, and Correggio's *[[painting:nga-46167|Salvator Mundi]]* of 1515, at 9.6 per cent, where the pink sits in the lightest part of the picture [6]. Both are skin and cloth rather than sky or landscape. The caveat is the usual one: these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [6]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "origin undocumented (presumably Leonardo's portrait; no source says)",
-   "first_recorded": "undocumented; web color list only",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "salmon",
-   "peachy-pink"
+  "slug": "mona-lisa",
+  "name": "Mona Lisa",
+  "hex": "#FF948E",
+  "names": [
+    "Mona Lisa"
   ],
-  "parent": "pink",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#FF948E",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 2,
-  "top_paintings": [
-   "commons-Q17495200",
-   "nga-46167"
+  "tier": "person",
+  "depth": "medium",
+  "lede": "Mona Lisa is a light, warm pink on web color lists; the name apparently borrows Leonardo's portrait, though the pink it suggests is the one the painting lost.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A pink with a famous name",
+      "body": "The swatch is a light, warm pink, #FF948E, which our library files in the pinks and places closest to [[salmon]] (5.6 units away) and, among near names, [[dusty-salmon]], in the family of [[light-salmon]] and plain [[pink]] [1]. The ISCC-NBS category nearest to it is strong pink, 5.4 units away [1].\n\nWho named this pink, and when, is undocumented. Our library has the name from a single web color list and no dated printed source, and none of the 29 books gives it as a color [1]. The obvious guess is that it points to Leonardo's portrait, but no source we hold says so [1]."
+    },
+    {
+      "id": "painting",
+      "title": "The painting's lost pinks",
+      "body": "Leonardo's portrait is dated c. 1502 by Ball and 1503-6 by Livingstone, so books disagree on the year [2][3]. By Ball's account Leonardo advised painting portraits in dull weather or at dusk, favored muted greens, blues and earth colors, and used sfumato, which lets colors drain into brown-black shadow away from the point of focus [2].\n\nThe pink of the name is probably not the color the portrait shows today. Gage notes that Leonardo's experimental techniques leave us unsure how his pictures looked, and that the rosy and pearly tints a sixteenth-century informant of Vasari described in the Mona Lisa have long since fled [4]. Ball calls the few surviving Leonardos sombre [2]. A pink swatch named for the painting is therefore closer to the color the portrait had than to the one it has [4]."
+    },
+    {
+      "id": "smile",
+      "title": "The smile that hides",
+      "body": "Livingstone shows that the smile depends on where you look. Coarse image detail, which the edge of your vision favors, shows a clearer smile than fine detail does, so it seems to fade when your gaze lands on the mouth [3]. She suggests this explains the coy quality that Gombrich noticed [3]. The same low-resolution mixing is her explanation for the pearly look of Signac's gray [3].\n\nBall adds that the picture's fame now outruns its looks: crowds jostle to glimpse a dim, underlit portrait, and the painting has become a historical artefact more than a beauty [5]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, a color within six units of #FF948E covers at least five per cent of the canvas in only 2 [6]. They are Louis Gustave Ricard's *[[painting:commons-Q17495200|Portrait de l'artiste]]* of 1853, at 12 per cent, and Correggio's *[[painting:nga-46167|Salvator Mundi]]* of 1515, at 9.6 per cent, where the pink sits in the lightest part of the picture [6]. Both are skin and cloth rather than sky or landscape. The caveat is the usual one: these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [6]."
+    }
   ],
-  "role": {
-   "highlight": 1.0
+  "aside": {
+    "origin": {
+      "named_after": "origin undocumented (presumably Leonardo's portrait; no source says)",
+      "first_recorded": "undocumented; web color list only",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "salmon",
+      "peachy-pink"
+    ],
+    "parent": "pink",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    72,
-    45,
-    28
-   ],
-   "nearest": [
-    [
-     "Salmon",
-     5.6
-    ]
-   ],
-   "iscc": [
-    "strong pink",
-    5.4
-   ]
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#FF948E",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 2,
+    "top_paintings": [
+      "commons-Q17495200",
+      "nga-46167"
+    ],
+    "role": {
+      "highlight": 1.0
+    },
+    "measured": {
+      "lch": [
+        72,
+        45,
+        28
+      ],
+      "nearest": [
+        [
+          "Salmon",
+          5.6
+        ]
+      ],
+      "iscc": [
+        "strong pink",
+        5.4
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub library and measured values: Mona Lisa #FF948E (web color list only; nearest ISCC-NBS strong pink, dE 5.4)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 16 and ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, on Leonardo",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 20",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed (DE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "According to Gage, what has happened to the rosy and pearly tints described in the Mona Lisa?",
+      "choices": [
+        "They have long since faded",
+        "They were repainted in the 1800s",
+        "They were never there",
+        "They turned bright red"
+      ],
+      "answer": "They have long since faded",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the books we hold record who named the pink 'Mona Lisa'.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Why can the smile seem to vanish when you look straight at the mouth?",
+      "choices": [
+        "Fine detail shows less smile than coarse detail",
+        "The paint is thinner there",
+        "The mouth is retouched",
+        "Light falls on the eyes"
+      ],
+      "answer": "Fine detail shows less smile than coarse detail",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "The pink called Mona Lisa is nearer the color the portrait once had than the one it has now.",
+    "The famous smile is stronger in the blurry parts of your vision than where you look."
+  ],
+  "words": 455,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub library and measured values: Mona Lisa #FF948E (web color list only; nearest ISCC-NBS strong pink, dE 5.4)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 13",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 16 and ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, on Leonardo",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 20",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (DE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "According to Gage, what has happened to the rosy and pearly tints described in the Mona Lisa?",
-   "choices": [
-    "They have long since faded",
-    "They were repainted in the 1800s",
-    "They were never there",
-    "They turned bright red"
-   ],
-   "answer": "They have long since faded",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the books we hold record who named the pink 'Mona Lisa'.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Why can the smile seem to vanish when you look straight at the mouth?",
-   "choices": [
-    "Fine detail shows less smile than coarse detail",
-    "The paint is thinner there",
-    "The mouth is retouched",
-    "Light falls on the eyes"
-   ],
-   "answer": "Fine detail shows less smile than coarse detail",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "The pink called Mona Lisa is nearer the color the portrait once had than the one it has now.",
-  "The famous smile is stronger in the blurry parts of your vision than where you look."
- ],
- "words": 455,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

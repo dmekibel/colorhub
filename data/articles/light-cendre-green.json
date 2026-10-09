@@ -1,131 +1,131 @@
 {
- "slug": "light-cendre-green",
- "name": "Light Cendre Green",
- "hex": "#A6D89C",
- "names": [
-  "Light Cendre Green"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Light Cendre Green is a pale yellowish green from Ridgway's 1912 atlas, filed again by name in the 1955 ISCC-NBS dictionary, and one of the rarest named colors in our painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A Ridgway tone, scarce in paint",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate VI, hue 35, tone d [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Cendre Green\" under block 130, \"brilliant yellowish green\" [2]. The name builds the modifier \"light\" onto [[cendre-green]], \"cendre\" being the French word for ash, describing the family's greyed quality rather than this specific tint's own story [1].\n\nIn our color library its closest neighbor is [[granny-smith-apple]], about 3.0 units away and more vivid, followed by [[light-grey-green]] at 3.1 units, close enough to pass for the same color [3]. [[hospital-green]] sits 4.6 units off and greener [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings matches this tone in only 4 of them, about 0.02 percent, as photographed, rarer than 86 percent of the named colors we track [4]. The sample is too small here to support a century, painter or country reading, so we report only presence and rank. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the modifier \"light\" plus [[cendre-green]] (French \"cendre\", ash)",
-   "first_recorded": "1912 (Ridgway, plate VI); carried into the 1955 ISCC-NBS dictionary, block 130",
-   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
-  },
-  "aka": [],
-  "siblings": [
-   "granny-smith-apple",
-   "light-grey-green",
-   "hospital-green"
+  "slug": "light-cendre-green",
+  "name": "Light Cendre Green",
+  "hex": "#A6D89C",
+  "names": [
+    "Light Cendre Green"
   ],
-  "parent": "cendre-green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 4,
-  "measured": {
-   "lch": [
-    81.6,
-    36.8,
-    138.3
-   ],
-   "nearest": [
-    [
-     "Granny Smith Apple",
-     3.0
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Light Cendre Green is a pale yellowish green from Ridgway's 1912 atlas, filed again by name in the 1955 ISCC-NBS dictionary, and one of the rarest named colors in our painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A Ridgway tone, scarce in paint",
+      "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate VI, hue 35, tone d [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Cendre Green\" under block 130, \"brilliant yellowish green\" [2]. The name builds the modifier \"light\" onto [[mint-leaf]], \"cendre\" being the French word for ash, describing the family's greyed quality rather than this specific tint's own story [1].\n\nIn our color library its closest neighbor is [[granny-smith-apple]], about 3.0 units away and more vivid, followed by [[light-grey-green]] at 3.1 units, close enough to pass for the same color [3]. [[hospital-green]] sits 4.6 units off and greener [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings matches this tone in only 4 of them, about 0.02 percent, as photographed, rarer than 86 percent of the named colors we track [4]. The sample is too small here to support a century, painter or country reading, so we report only presence and rank. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the modifier \"light\" plus [[mint-leaf]] (French \"cendre\", ash)",
+      "first_recorded": "1912 (Ridgway, plate VI); carried into the 1955 ISCC-NBS dictionary, block 130",
+      "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+    },
+    "aka": [],
+    "siblings": [
+      "granny-smith-apple",
+      "light-grey-green",
+      "hospital-green"
     ],
-    [
-     "Light Grey Green",
-     3.1
-    ],
-    [
-     "Hospital Green",
-     4.6
+    "parent": "cendre-green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 4,
+    "measured": {
+      "lch": [
+        81.6,
+        36.8,
+        138.3
+      ],
+      "nearest": [
+        [
+          "Granny Smith Apple",
+          3.0
+        ],
+        [
+          "Light Grey Green",
+          3.1
+        ],
+        [
+          "Hospital Green",
+          4.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate VI, hue 35, tone d",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ISCC-NBS, NBS Circular 553 (1955), block 130, \"Light Cendre Green\" (data/sources/iscc-nbs-names.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which 1955 ISCC-NBS dictionary block files Light Cendre Green?",
+      "choices": [
+        "Block 130",
+        "Block 45",
+        "Block 8",
+        "Block 101"
+      ],
+      "answer": "Block 130",
+      "kind": "pick"
+    },
+    {
+      "q": "What does the French word \"cendre\" in this color family's name mean?",
+      "choices": [
+        "Ash",
+        "Flower",
+        "Silk",
+        "Iron"
+      ],
+      "answer": "Ash",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Light Cendre Green is one of the rarest named colors in our painting archive, matched in only four of 23,781 paintings."
+  ],
+  "words": 209,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09: short, honest, sparse-data article per voice rule 15"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate VI, hue 35, tone d",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ISCC-NBS, NBS Circular 553 (1955), block 130, \"Light Cendre Green\" (data/sources/iscc-nbs-names.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which 1955 ISCC-NBS dictionary block files Light Cendre Green?",
-   "choices": [
-    "Block 130",
-    "Block 45",
-    "Block 8",
-    "Block 101"
-   ],
-   "answer": "Block 130",
-   "kind": "pick"
-  },
-  {
-   "q": "What does the French word \"cendre\" in this color family's name mean?",
-   "choices": [
-    "Ash",
-    "Flower",
-    "Silk",
-    "Iron"
-   ],
-   "answer": "Ash",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Light Cendre Green is one of the rarest named colors in our painting archive, matched in only four of 23,781 paintings."
- ],
- "words": 209,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09: short, honest, sparse-data article per voice rule 15"
-  ]
- }
 }

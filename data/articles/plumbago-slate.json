@@ -1,119 +1,119 @@
 {
- "slug": "plumbago-slate",
- "name": "Plumbago Slate",
- "hex": "#64616E",
- "names": [
-  "Plumbago Slate"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Plumbago Slate is a darker, bluer cousin of Plumbago Grey, named for the same shrub-or-graphite word but pushed toward true slate.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Darker than its sibling",
-   "body": "Maerz and Paul's 1930 dictionary records this name on plate 46 D 6, with a first recorded date of 1912 [1]. It shares its root word with [[plumbago-grey|Plumbago Grey]], which Ridgway recorded that same year, but reads noticeably darker and more purple; where Plumbago Grey sits at lightness 62, this one drops to 42 [1][2]. The ISCC-NBS system would call its block \"dark purplish gray\" [2].\n\nThe nearest named colors in our data are [[graphite-violet|Graphite violet]] and [[heliotrope-slate|Heliotrope-Slate]], tied at 2.6 CIEDE2000 units away, with [[deep-slate-violet|Deep Slate-Violet]] close behind [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Plumbago Slate appears in 196 of our 23,781 paintings, about 0.82 percent, as photographed; the within-painting lens finds it in 84, more common than 56 percent of our named colors [3]. It peaks in the 1900s, in 24 of 1,674 paintings, at 2.9 times the expected rate for that century, and is most over-represented in French paintings, at 2.1 times expected [3]. Inside a painting it most often plays a shadow, in 31 percent of the 84 paintings where it carries real area [3].\n\nThe earliest match is dated 1445, in a work by Nicolás Francés — 485 years before Maerz and Paul's 1930 record of the name, as photographed, a floor and not a first, since the archive's early centuries are thin [3]. The latest dated match runs all the way to 2000[3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "plumbago, a flowering shrub and the old word for graphite",
-   "first_recorded": "1912, per Maerz and Paul",
-   "source": "Maerz and Paul, A Dictionary of Color (1930), plate 46 D 6"
-  },
-  "aka": [],
-  "siblings": [
-   "graphite-violet",
-   "heliotrope-slate",
-   "deep-slate-violet",
-   "plumbago-grey"
+  "slug": "plumbago-slate",
+  "name": "Plumbago Slate",
+  "hex": "#64616E",
+  "names": [
+    "Plumbago Slate"
   ],
-  "parent": null,
-  "children": null,
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 196,
-  "measured": {
-   "lch": [
-    42,
-    8,
-    300
-   ],
-   "nearest": [
-    [
-     "Graphite violet",
-     2.6
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Plumbago Slate is a darker, bluer cousin of Plumbago Grey, named for the same shrub-or-graphite word but pushed toward true slate.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Darker than its sibling",
+      "body": "Maerz and Paul's 1930 dictionary records this name on plate 46 D 6, with a first recorded date of 1912 [1]. It shares its root word with [[plumbago-grey|Plumbago Grey]], which Ridgway recorded that same year, but reads noticeably darker and more purple; where Plumbago Grey sits at lightness 62, this one drops to 42 [1][2]. The ISCC-NBS system would call its block \"dark purplish gray\" [2].\n\nThe nearest named colors in our data are [[graphite-violet|Graphite violet]] and [[graphite-violet|Heliotrope-Slate]], tied at 2.6 CIEDE2000 units away, with [[deep-slate-violet|Deep Slate-Violet]] close behind [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Plumbago Slate appears in 196 of our 23,781 paintings, about 0.82 percent, as photographed; the within-painting lens finds it in 84, more common than 56 percent of our named colors [3]. It peaks in the 1900s, in 24 of 1,674 paintings, at 2.9 times the expected rate for that century, and is most over-represented in French paintings, at 2.1 times expected [3]. Inside a painting it most often plays a shadow, in 31 percent of the 84 paintings where it carries real area [3].\n\nThe earliest match is dated 1445, in a work by Nicolás Francés — 485 years before Maerz and Paul's 1930 record of the name, as photographed, a floor and not a first, since the archive's early centuries are thin [3]. The latest dated match runs all the way to 2000[3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "plumbago, a flowering shrub and the old word for graphite",
+      "first_recorded": "1912, per Maerz and Paul",
+      "source": "Maerz and Paul, A Dictionary of Color (1930), plate 46 D 6"
+    },
+    "aka": [],
+    "siblings": [
+      "graphite-violet",
+      "heliotrope-slate",
+      "deep-slate-violet",
+      "plumbago-grey"
     ],
-    [
-     "Heliotrope-Slate",
-     2.6
+    "parent": null,
+    "children": null,
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 196,
+    "measured": {
+      "lch": [
+        42,
+        8,
+        300
+      ],
+      "nearest": [
+        [
+          "Graphite violet",
+          2.6
+        ],
+        [
+          "Heliotrope-Slate",
+          2.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 46 D 6",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS block entry, Munsell/LCH notation and look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "How does Plumbago Slate differ from Plumbago Grey?",
+      "choices": [
+        "It is darker and more purple",
+        "It is lighter and more yellow",
+        "They are the same color",
+        "It is a vivid green"
+      ],
+      "answer": "It is darker and more purple",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: two different names, Graphite violet and Heliotrope-Slate, sit tied as the closest matches to Plumbago Slate in our data.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Plumbago Slate shares its name's root with Plumbago Grey but reads darker and more purple."
+  ],
+  "words": 242,
+  "status": "draft",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 46 D 6",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS block entry, Munsell/LCH notation and look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "How does Plumbago Slate differ from Plumbago Grey?",
-   "choices": [
-    "It is darker and more purple",
-    "It is lighter and more yellow",
-    "They are the same color",
-    "It is a vivid green"
-   ],
-   "answer": "It is darker and more purple",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: two different names, Graphite violet and Heliotrope-Slate, sit tied as the closest matches to Plumbago Slate in our data.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Plumbago Slate shares its name's root with Plumbago Grey but reads darker and more purple."
- ],
- "words": 242,
- "status": "draft",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

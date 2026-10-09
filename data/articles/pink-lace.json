@@ -1,113 +1,113 @@
 {
- "slug": "pink-lace",
- "name": "Pink Lace",
- "hex": "#FFDDF4",
- "names": [
-  "Pink Lace"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Pink Lace is a very pale, slightly purplish [[pink]], named for the look of pale lace rather than any dated plate or survey in our sources.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A textile image, undocumented coining",
-   "body": "Our color library carries this name only through a plain wiki-sourced list entry, filed under fashion and textiles, with no dated plate, dictionary or survey behind it [1]. The pairing evokes the pale, faintly tinted look of lace fabric rather than any specific maker or standard [1]. Who first used this exact name is undocumented in our sources [1].\n\nThe nearest named color by measured distance is [[mimi-pink]], redder [2]. [[mauvette]], [[rosolane-pink]], [[orchid-pink]] and [[queen-pink]] sit further out, all darker and redder or purpler; [[pale-pink]] is the most distant of this group [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings finds a match for this pale pink in only 2 of them, about 0.01 percent, rarer than 86 percent of the named colors we track, as photographed [3]. A swatch this pale and this close to white is scarce across the whole archive, so a count this small fits the pattern for its family [3]. These are photographs of aged, varnished canvases read as screen colors, not pigment identifications [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the pale, faintly tinted look of lace fabric; the exact coiner is undocumented",
-   "first_recorded": "undocumented",
-   "source": "ColorHub color library (wiki-sourced list entry, fashion and textiles)"
-  },
-  "aka": [],
-  "siblings": [
-   "mimi-pink",
-   "pale-pink",
-   "orchid-pink"
+  "slug": "pink-lace",
+  "name": "Pink Lace",
+  "hex": "#FFDDF4",
+  "names": [
+    "Pink Lace"
   ],
-  "parent": "pink",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 2,
-  "rank_pct": 86,
-  "measured": {
-   "lch": [
-    91.5,
-    17.0,
-    336.2
-   ],
-   "nearest": [
-    [
-     "Mimi Pink",
-     2.9
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): list entry, source \"wiki\", field \"fashion and textiles\"",
-   "loc_kind": null,
-   "url": null
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Pink Lace is a very pale, slightly purplish [[pink]], named for the look of pale lace rather than any dated plate or survey in our sources.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A textile image, undocumented coining",
+      "body": "Our color library carries this name only through a plain wiki-sourced list entry, filed under fashion and textiles, with no dated plate, dictionary or survey behind it [1]. The pairing evokes the pale, faintly tinted look of lace fabric rather than any specific maker or standard [1]. Who first used this exact name is undocumented in our sources [1].\n\nThe nearest named color by measured distance is [[mimi-pink]], redder [2]. [[mauvette]], [[orchid-pink]], [[orchid-pink]] and [[queen-pink]] sit further out, all darker and redder or purpler; [[pale-pink]] is the most distant of this group [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings finds a match for this pale pink in only 2 of them, about 0.01 percent, rarer than 86 percent of the named colors we track, as photographed [3]. A swatch this pale and this close to white is scarce across the whole archive, so a count this small fits the pattern for its family [3]. These are photographs of aged, varnished canvases read as screen colors, not pigment identifications [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the pale, faintly tinted look of lace fabric; the exact coiner is undocumented",
+      "first_recorded": "undocumented",
+      "source": "ColorHub color library (wiki-sourced list entry, fashion and textiles)"
+    },
+    "aka": [],
+    "siblings": [
+      "mimi-pink",
+      "pale-pink",
+      "orchid-pink"
+    ],
+    "parent": "pink",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 2,
+    "rank_pct": 86,
+    "measured": {
+      "lch": [
+        91.5,
+        17.0,
+        336.2
+      ],
+      "nearest": [
+        [
+          "Mimi Pink",
+          2.9
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): list entry, source \"wiki\", field \"fashion and textiles\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the name Pink Lace most likely evoke?",
+      "choices": [
+        "The pale, faintly tinted look of lace fabric",
+        "A 1912 Ridgway plate",
+        "A mineral pigment",
+        "A French chemist's surname"
+      ],
+      "answer": "The pale, faintly tinted look of lace fabric",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources name a specific person who coined Pink Lace.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pink Lace is so pale and close to white that it matches only 2 of 23,781 paintings in our archive."
+  ],
+  "words": 193,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "What does the name Pink Lace most likely evoke?",
-   "choices": [
-    "The pale, faintly tinted look of lace fabric",
-    "A 1912 Ridgway plate",
-    "A mineral pigment",
-    "A French chemist's surname"
-   ],
-   "answer": "The pale, faintly tinted look of lace fabric",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources name a specific person who coined Pink Lace.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pink Lace is so pale and close to white that it matches only 2 of 23,781 paintings in our archive."
- ],
- "words": 193,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

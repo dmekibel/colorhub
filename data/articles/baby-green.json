@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A name in the library",
-   "body": "This bright green appears across several standard lists: the CSS color keywords, the German RAL system (close to RAL 6029 and RAL 6021), the ISCC-NBS dictionary of 1955, and the xkcd color survey [1]. No single source dates its first use; it reads as a modern, screen-native green rather than a dye or pigment name [1]. The nearest color-graph neighbor is [[light-green]], 3.8 units away, with [[seafoam]], [[easter-green]] and [[light-pastel-green]] all close behind [2].\n\nMunsell gives 1.3G 9.1/10.5, very light and strongly saturated, a combination rare in historical pigments [1]. The hex #8CFF9E sits near the edge of what a screen can display; almost nothing painted before photography reaches this brightness [1]."
+   "body": "This bright green appears across several standard lists: the CSS color keywords, the German RAL system (close to RAL 6029 and RAL 6021), the ISCC-NBS dictionary of 1955, and the xkcd color survey [1]. No single source dates its first use; it reads as a modern, screen-native green rather than a dye or pigment name [1]. The nearest color-graph neighbor is [[light-green]], 3.8 units away, with [[seafoam]], [[lighter-green]] and [[celery]] all close behind [2].\n\nMunsell gives 1.3G 9.1/10.5, very light and strongly saturated, a combination rare in historical pigments [1]. The hex #8CFF9E sits near the edge of what a screen can display; almost nothing painted before photography reaches this brightness [1]."
   },
   {
    "id": "field",
@@ -110,7 +110,7 @@
  "openers": [
   "Our best archive match for this bright green is a Van Gogh painting that was originally pink."
  ],
- "words": 249,
+ "words": 247,
  "status": "checked",
  "checked": {
   "by": "checker",

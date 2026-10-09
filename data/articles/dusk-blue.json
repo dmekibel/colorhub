@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A crowded corner of blue",
-   "body": "The ISCC-NBS system of 1955 reads the swatch as a pale purplish blue, about 7.1 units from the block center, and it is also carried in Wikipedia's X11 list and the 2010 xkcd color survey [1]. Our library ties the name to Crayola's list through a Wikipedia citation, and to the \"dusk\" family of names generally [1].\n\nThe closest near-duplicates, each under 2.4 units away, are [[b-dazzled-blue]], Munsell's YInMn Blue and USAFA Blue [1]. The next distinct named color is [[light-navy]], about 4.8 units off, with [[cyanine-blue]] and [[lapis-lazuli]] further out [2]."
+   "body": "The ISCC-NBS system of 1955 reads the swatch as a pale purplish blue, about 7.1 units from the block center, and it is also carried in Wikipedia's X11 list and the 2010 xkcd color survey [1]. Our library ties the name to Crayola's list through a Wikipedia citation, and to the \"dusk\" family of names generally [1].\n\nThe closest near-duplicates, each under 2.4 units away, are [[dusk-blue]], Munsell's YInMn Blue and USAFA Blue [1]. The next distinct named color is [[light-navy]], about 4.8 units off, with [[cyanine-blue]] and [[lapis-lazuli]] further out [2]."
   },
   {
    "id": "field",
@@ -105,5 +105,5 @@
    "lint 2026-10-09"
   ]
  },
- "words": 225
+ "words": 224
 }

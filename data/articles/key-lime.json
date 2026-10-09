@@ -1,128 +1,128 @@
 {
- "slug": "key-lime",
- "name": "Key Lime",
- "hex": "#E8F48C",
- "names": [
-  "Key Lime"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Key Lime is a pale, creamy yellow-green named for the small, tart lime grown in the Florida Keys, though the survey that named it recorded two different greens under the same words.",
- "sections": [
-  {
-   "id": "name",
-   "title": "One name, two greens",
-   "body": "Both Wikipedia's color list and the 2010 xkcd survey carry a \"Key Lime,\" but the two disagree: the xkcd survey logged a second, brighter green, closer to pure chartreuse, as an alternate reading of the same crowd label [1]. Our record keeps the paler hex as the main entry and notes the brighter one as a variant rather than a separate color [1].\n\nThe fruit itself, *Citrus aurantiifolia*, has thin, pale-green to yellow skin that lightens as it ripens, which the pale, washed-out version of this color name reflects better than the brighter variant does [2]. ISCC-NBS 1955 would file the pale version as a light greenish yellow, and its nearest library neighbors are [[chartreuse|Chartreuse]] and [[light-khaki|Light Khaki]] [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings, as photographed, holds no painting where this exact pale yellow-green covers five percent or more of the canvas [4]. A tint this light and this saturated sits outside the range aged oil paint and varnish typically produce [4]. A match would be a computed color comparison, never a pigment identification [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the Key lime, a small citrus fruit",
-   "first_recorded": "2010, xkcd color survey",
-   "source": "ColorHub library: xkcd 2010; Wikipedia"
-  },
-  "aka": [],
-  "siblings": [
-   "chartreuse",
-   "light-khaki",
-   "lime",
-   "lime-green"
+  "slug": "key-lime",
+  "name": "Key Lime",
+  "hex": "#E8F48C",
+  "names": [
+    "Key Lime"
   ],
-  "parent": "lime",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "nearest_iscc": [
-   "light greenish yellow",
-   5.4
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Key Lime is a pale, creamy yellow-green named for the small, tart lime grown in the Florida Keys, though the survey that named it recorded two different greens under the same words.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One name, two greens",
+      "body": "Both Wikipedia's color list and the 2010 xkcd survey carry a \"Key Lime,\" but the two disagree: the xkcd survey logged a second, brighter green, closer to pure chartreuse, as an alternate reading of the same crowd label [1]. Our record keeps the paler hex as the main entry and notes the brighter one as a variant rather than a separate color [1].\n\nThe fruit itself, *Citrus aurantiifolia*, has thin, pale-green to yellow skin that lightens as it ripens, which the pale, washed-out version of this color name reflects better than the brighter variant does [2]. ISCC-NBS 1955 would file the pale version as a light greenish yellow, and its nearest library neighbors are [[chartreuse|Chartreuse]] and [[pale-lime|Light Khaki]] [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings, as photographed, holds no painting where this exact pale yellow-green covers five percent or more of the canvas [4]. A tint this light and this saturated sits outside the range aged oil paint and varnish typically produce [4]. A match would be a computed color comparison, never a pigment identification [4]."
+    }
   ],
-  "first_source": [
-   "wiki",
-   null
+  "aside": {
+    "origin": {
+      "named_after": "the Key lime, a small citrus fruit",
+      "first_recorded": "2010, xkcd color survey",
+      "source": "ColorHub library: xkcd 2010; Wikipedia"
+    },
+    "aka": [],
+    "siblings": [
+      "chartreuse",
+      "light-khaki",
+      "lime",
+      "lime-green"
+    ],
+    "parent": "lime",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "nearest_iscc": [
+      "light greenish yellow",
+      5.4
+    ],
+    "first_source": [
+      "wiki",
+      null
+    ],
+    "measured": {
+      "lch": [
+        93.3,
+        52.2,
+        111.3
+      ]
+    },
+    "alt_reading": {
+      "source": "xkcd",
+      "hex": "#AEFF6E"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 survey (two readings); Wikipedia color list",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Eastaugh and others, Pigment Compendium, citrus-fruit color note",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library: nearest standard names and ISCC-NBS 1955 distance",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "measured": {
-   "lch": [
-    93.3,
-    52.2,
-    111.3
-   ]
+  "questions": [
+    {
+      "q": "What does our data show about the xkcd survey's record of Key Lime?",
+      "kind": "pick",
+      "choices": [
+        "It logged two different greens under the same name",
+        "It recorded only one exact shade",
+        "It never used this name",
+        "It matched it to a historical pigment"
+      ],
+      "answer": "It logged two different greens under the same name"
+    },
+    {
+      "q": "True or false: Key Lime fruit skin stays a deep, saturated green as it ripens.",
+      "kind": "true-false",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False"
+    }
+  ],
+  "openers": [
+    "The xkcd survey recorded two different greens under the single name Key Lime."
+  ],
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
   },
-  "alt_reading": {
-   "source": "xkcd",
-   "hex": "#AEFF6E"
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd 2010 survey (two readings); Wikipedia color list",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Eastaugh and others, Pigment Compendium, citrus-fruit color note",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library: nearest standard names and ISCC-NBS 1955 distance",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does our data show about the xkcd survey's record of Key Lime?",
-   "kind": "pick",
-   "choices": [
-    "It logged two different greens under the same name",
-    "It recorded only one exact shade",
-    "It never used this name",
-    "It matched it to a historical pigment"
-   ],
-   "answer": "It logged two different greens under the same name"
-  },
-  {
-   "q": "True or false: Key Lime fruit skin stays a deep, saturated green as it ripens.",
-   "kind": "true-false",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False"
-  }
- ],
- "openers": [
-  "The xkcd survey recorded two different greens under the single name Key Lime."
- ],
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "status": "checked",
- "words": 201
+  "status": "checked",
+  "words": 201
 }

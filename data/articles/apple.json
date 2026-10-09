@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A color named for the wrong fruit",
-   "body": "The swatch on this page comes from a 2010 survey of color names, not from a dictionary or a paint chart [11]. It is a vivid yellowish green, closest to the ISCC-NBS block called vivid yellowish green, 5.7 units away [11]. Its nearest named neighbors are [[apple-green]], [[fresh-green]] and [[lime-green]], all within about four and a half units [11].\n\nThe name suggests a green apple, the kind sold as [[granny-smith-apple]]. Apples in the books, though, stand for other colors: red for temptation and poison, gold for the fruit of the Hesperides [1][2]. A green apple, Pastoureau stresses, was in the Middle Ages simply a sour apple, and not a poisoned one [1]. In the fairy tale the poisoned apple is red, because feudal poisons were red or black, and green poison came into fashion only in the late Middle Ages [1]. The tree of knowledge became an apple tree in the temperate West chiefly because the Latin word for apple, *malum*, sounds exactly like the word for evil [1]."
+   "body": "The swatch on this page comes from a 2010 survey of color names, not from a dictionary or a paint chart [11]. It is a vivid yellowish green, closest to the ISCC-NBS block called vivid yellowish green, 5.7 units away [11]. Its nearest named neighbors are [[apple-green]], [[apple]] and [[lime-green]], all within about four and a half units [11].\n\nThe name suggests a green apple, the kind sold as [[granny-smith-apple]]. Apples in the books, though, stand for other colors: red for temptation and poison, gold for the fruit of the Hesperides [1][2]. A green apple, Pastoureau stresses, was in the Middle Ages simply a sour apple, and not a poisoned one [1]. In the fairy tale the poisoned apple is red, because feudal poisons were red or black, and green poison came into fashion only in the late Middle Ages [1]. The tree of knowledge became an apple tree in the temperate West chiefly because the Latin word for apple, *malum*, sounds exactly like the word for evil [1]."
   },
   {
    "id": "werner",
@@ -221,7 +221,7 @@
   "Apple green began as a gray-green in a natural-history chart; the bright swatch is a 2010 survey color.",
   "A green apple in a medieval tale is merely sour; the poisoned apple is red."
  ],
- "words": 756,
+ "words": 755,
  "status": "checked",
  "checked": {
   "by": "checker",

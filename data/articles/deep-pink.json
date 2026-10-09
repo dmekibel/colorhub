@@ -1,162 +1,162 @@
 {
- "slug": "deep-pink",
- "name": "Deep Pink",
- "hex": "#FF1493",
- "names": [
-  "Deep Pink"
- ],
- "tier": "standard",
- "depth": "medium",
- "lede": "Deep pink is a pink pushed toward red and magenta; as a screen color it is one of the loudest in the web palette, while in older books the phrase is a loose description for many rosy reds.",
- "sections": [
-  {
-   "id": "swatch",
-   "title": "Two meanings of deep pink",
-   "body": "As a web color, `deeppink` is a fixed, fully saturated swatch, and the reference dictionary lists it among the named colors of the X11 set [1]. It is a vivid pink-red with high chroma, close to [[persian-rose]] and [[rose]] and not far from [[hot-pink]] [6].\n\nIn books written before screens, the words are descriptive rather than a standard. The same dictionary uses \"deep pink\" to define damask, salmon pink, rose marie, crevette (the pink of the shellfish) and peach bloom, a ceramic glaze [2]. It also calls coral a deep pink or reddish orange [2]. Read as a plain description, deep pink covers a whole region of rosy colors and not one shade."
-  },
-  {
-   "id": "in-use",
-   "title": "Where the phrase turns up",
-   "body": "Merriam-Webster's 1961 definition of begonia shows how precise the description can get: it places the color as a deep pink set against average coral, fiesta and sweet William, each compared by hue and strength [3]. The point of that definition is that a deep pink is measured against its neighbors, not named in isolation.\n\nSome materials are described this way too. Brazil wood gave the Incas a deep pink dye [4]. Potter's pink, made from tin oxide roasted with chalk and chromium oxide, is a dusky, semitransparent deep pink of limited strength, and it was one of the first stable modern synthetic colors [5]. Painters used it in watercolor as a lightfast stand-in for the fading [[madder]] lakes [5].\n\nIn 1961 Yves Klein included what Ball calls a modern deep pink, instead of vermilion, in a shrine offering that paired it with ultramarine and gold [7]. Vermilion is the red it replaced [7]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Measured in CIELAB, the swatch has a lightness of 56 and a chroma of about 85, with its hue angle at 356 degrees, just on the red side of pink-magenta [6]. Its contrast ratio against white is 3.6 to 1 [6]. The nearest named colors in our data are Persian Rose, about 7 units away, and Rose, about 10 [6].\n\nThe books say nothing about how often deep pink occurs in paintings, and we have not computed an archive count for it, so this article makes no claim there. Screen colors are approximate [6]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "descriptive (a deep shade of pink); the web color is a fixed X11 name",
-   "first_recorded": "undocumented",
-   "source": "Paterson, A Dictionary of Colour"
-  },
-  "aka": [
-   "DeepPink (CSS and X11)"
+  "slug": "deep-pink",
+  "name": "Deep Pink",
+  "hex": "#FF1493",
+  "names": [
+    "Deep Pink"
   ],
-  "siblings": [
-   "hot-pink",
-   "persian-rose"
+  "tier": "standard",
+  "depth": "medium",
+  "lede": "Deep pink is a pink pushed toward red and magenta; as a screen color it is one of the loudest in the web palette, while in older books the phrase is a loose description for many rosy reds.",
+  "sections": [
+    {
+      "id": "swatch",
+      "title": "Two meanings of deep pink",
+      "body": "As a web color, `deeppink` is a fixed, fully saturated swatch, and the reference dictionary lists it among the named colors of the X11 set [1]. It is a vivid pink-red with high chroma, close to [[persian-rose]] and [[rose]] and not far from [[hot-pink]] [6].\n\nIn books written before screens, the words are descriptive rather than a standard. The same dictionary uses \"deep pink\" to define damask, salmon pink, rose marie, crevette (the pink of the shellfish) and peach bloom, a ceramic glaze [2]. It also calls coral a deep pink or reddish orange [2]. Read as a plain description, deep pink covers a whole region of rosy colors and not one shade."
+    },
+    {
+      "id": "in-use",
+      "title": "Where the phrase turns up",
+      "body": "Merriam-Webster's 1961 definition of begonia shows how precise the description can get: it places the color as a deep pink set against average coral, fiesta and sweet William, each compared by hue and strength [3]. The point of that definition is that a deep pink is measured against its neighbors, not named in isolation.\n\nSome materials are described this way too. Brazil wood gave the Incas a deep pink dye [4]. Potter's pink, made from tin oxide roasted with chalk and chromium oxide, is a dusky, semitransparent deep pink of limited strength, and it was one of the first stable modern synthetic colors [5]. Painters used it in watercolor as a lightfast stand-in for the fading [[irresistible]] lakes [5].\n\nIn 1961 Yves Klein included what Ball calls a modern deep pink, instead of vermilion, in a shrine offering that paired it with ultramarine and gold [7]. Vermilion is the red it replaced [7]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Measured in CIELAB, the swatch has a lightness of 56 and a chroma of about 85, with its hue angle at 356 degrees, just on the red side of pink-magenta [6]. Its contrast ratio against white is 3.6 to 1 [6]. The nearest named colors in our data are Persian Rose, about 7 units away, and Rose, about 10 [6].\n\nThe books say nothing about how often deep pink occurs in paintings, and we have not computed an archive count for it, so this article makes no claim there. Screen colors are approximate [6]."
+    }
   ],
-  "parent": "pink",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "hot-pink",
-    "gloss": "another bright web pink, but lighter and softer than deep pink"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub names data, CIELAB, screen swatch",
-  "measured": {
-   "lch": [
-    56,
-    85,
-    356
-   ],
-   "contrast_white": 3.64,
-   "nearest": [
-    [
-     "Persian Rose",
-     7.2
+  "aside": {
+    "origin": {
+      "named_after": "descriptive (a deep shade of pink); the web color is a fixed X11 name",
+      "first_recorded": "undocumented",
+      "source": "Paterson, A Dictionary of Colour"
+    },
+    "aka": [
+      "DeepPink (CSS and X11)"
     ],
-    [
-     "Rose",
-     9.8
+    "siblings": [
+      "hot-pink",
+      "persian-rose"
+    ],
+    "parent": "pink",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "hot-pink",
+        "gloss": "another bright web pink, but lighter and softer than deep pink"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub names data, CIELAB, screen swatch",
+    "measured": {
+      "lch": [
+        56,
+        85,
+        356
+      ],
+      "contrast_white": 3.64,
+      "nearest": [
+        [
+          "Persian Rose",
+          7.2
+        ],
+        [
+          "Rose",
+          9.8
+        ]
+      ]
+    },
+    "archive": "not computed"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"Cyan\" through X11 entries and the web-color index",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, entries \"damask\", \"crevette\", \"rose marie\", \"salmon pink\", \"peach bloom\", \"coral\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, glossary of descriptive color definitions",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 13",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 147, \"potter's pink\"",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "data",
+      "cite": "ColorHub names data (data/graph/names.json); CIELAB values computed from the swatch hexes",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 18",
+      "loc_kind": "book-chapter",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "How does the dictionary use the phrase 'deep pink' for older color names such as damask and crevette?",
+      "choices": [
+        "As a loose description of a region of rosy colors",
+        "As the exact web color FF1493",
+        "As the name of a pigment",
+        "As the color of a single flower only"
+      ],
+      "answer": "As a loose description of a region of rosy colors",
+      "kind": "pick"
+    },
+    {
+      "q": "Potter's pink was used in watercolor as a lightfast alternative to what?",
+      "choices": [
+        "Madder lakes",
+        "Ultramarine",
+        "Vermilion",
+        "Lamp black"
+      ],
+      "answer": "Madder lakes",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Potter's pink, a dusky deep pink from tin oxide, replaced fading madder lakes in watercolor."
+  ],
+  "words": 387,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsupported 'stronger than anything in a paint box'.",
+      "Reworded begonia definition (was near-verbatim from St Clair).",
+      "Potter's pink 'one of' the first stable synthetics; Klein sentence tied to Ball."
     ]
-   ]
-  },
-  "archive": "not computed"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"Cyan\" through X11 entries and the web-color index",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, entries \"damask\", \"crevette\", \"rose marie\", \"salmon pink\", \"peach bloom\", \"coral\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, glossary of descriptive color definitions",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 13",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, p. 147, \"potter's pink\"",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "data",
-   "cite": "ColorHub names data (data/graph/names.json); CIELAB values computed from the swatch hexes",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 18",
-   "loc_kind": "book-chapter",
-   "url": null
   }
- ],
- "questions": [
-  {
-   "q": "How does the dictionary use the phrase 'deep pink' for older color names such as damask and crevette?",
-   "choices": [
-    "As a loose description of a region of rosy colors",
-    "As the exact web color FF1493",
-    "As the name of a pigment",
-    "As the color of a single flower only"
-   ],
-   "answer": "As a loose description of a region of rosy colors",
-   "kind": "pick"
-  },
-  {
-   "q": "Potter's pink was used in watercolor as a lightfast alternative to what?",
-   "choices": [
-    "Madder lakes",
-    "Ultramarine",
-    "Vermilion",
-    "Lamp black"
-   ],
-   "answer": "Madder lakes",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Potter's pink, a dusky deep pink from tin oxide, replaced fading madder lakes in watercolor."
- ],
- "words": 387,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsupported 'stronger than anything in a paint box'.",
-   "Reworded begonia definition (was near-verbatim from St Clair).",
-   "Potter's pink 'one of' the first stable synthetics; Klein sentence tied to Ball."
-  ]
- }
 }

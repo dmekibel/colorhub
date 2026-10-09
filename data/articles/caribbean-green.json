@@ -1,123 +1,123 @@
 {
- "slug": "caribbean-green",
- "name": "Caribbean Green",
- "hex": "#00CC99",
- "names": [
-  "Caribbean Green"
- ],
- "tier": "place",
- "depth": "brief",
- "lede": "Caribbean Green is a bright, saturated teal that Wikipedia lists among Crayola's colors, and a color our painting archive never once finds, a sign of just how far this hue sits from anything the old pigments could make.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A place name, a web-only source",
-   "body": "Our only sources for this color are Wikipedia, which credits it to Crayola, and the classification here tagging \"Caribbean\" as a place word [1]. Neither explains when or why the name was chosen, and no book consulted here documents it at all [1]. The ISCC-NBS system would place it as a brilliant green, a close fit at only 2.1 units from that block's center, and the Munsell notation is 6.7G 7.2/10.1 [1].\n\nThe closest named color on screen is [[greenish-teal]], 4.5 units away and read as darker than Caribbean Green; [[mountain-meadow]] follows at 4.8, duller and darker still, [[medium-aquamarine]] at 5.7, duller, and [[dark-seafoam]] at 6.9, darker [3]. In printed sources the term itself first appears around 1940, rises through the 1980s and peaks around 2000, a timeline that fits a mid-to-late-20th-century color name more than an old one [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has this color covering at least 1 percent of its canvas, within a color difference of 4, as photographed [2]. That describes this archive, which leans toward historical and varnished paintings, rather than painting as a whole; a saturated, cool, screen-bright teal like this one is simply not a color old oil and tempera pigments reproduce easily [2]. It is the kind of honest gap that shows the limits of matching screen colors against centuries of aged canvas, rather than a claim that no painter ever used anything like it [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented beyond the place word \"Caribbean\"",
-   "first_recorded": "undocumented in the books consulted",
-   "source": "Wikipedia (cites Crayola)"
-  },
-  "aka": [],
-  "siblings": [
-   "greenish-teal",
-   "mountain-meadow",
-   "medium-aquamarine",
-   "dark-seafoam"
+  "slug": "caribbean-green",
+  "name": "Caribbean Green",
+  "hex": "#00CC99",
+  "names": [
+    "Caribbean Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "n_within": 0,
-  "measured": {
-   "lch": [
-    73.2,
-    56.1,
-    165.9
-   ],
-   "nearest": [
-    [
-     "Greenish Teal",
-     4.5
+  "tier": "place",
+  "depth": "brief",
+  "lede": "Caribbean Green is a bright, saturated teal that Wikipedia lists among Crayola's colors, and a color our painting archive never once finds, a sign of just how far this hue sits from anything the old pigments could make.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A place name, a web-only source",
+      "body": "Our only sources for this color are Wikipedia, which credits it to Crayola, and the classification here tagging \"Caribbean\" as a place word [1]. Neither explains when or why the name was chosen, and no book consulted here documents it at all [1]. The ISCC-NBS system would place it as a brilliant green, a close fit at only 2.1 units from that block's center, and the Munsell notation is 6.7G 7.2/10.1 [1].\n\nThe closest named color on screen is [[imperial-green]], 4.5 units away and read as darker than Caribbean Green; [[mountain-meadow]] follows at 4.8, duller and darker still, [[medium-aquamarine]] at 5.7, duller, and [[green-crayola]] at 6.9, darker [3]. In printed sources the term itself first appears around 1940, rises through the 1980s and peaks around 2000, a timeline that fits a mid-to-late-20th-century color name more than an old one [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has this color covering at least 1 percent of its canvas, within a color difference of 4, as photographed [2]. That describes this archive, which leans toward historical and varnished paintings, rather than painting as a whole; a saturated, cool, screen-bright teal like this one is simply not a color old oil and tempera pigments reproduce easily [2]. It is the kind of honest gap that shows the limits of matching screen colors against centuries of aged canvas, rather than a claim that no painter ever used anything like it [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented beyond the place word \"Caribbean\"",
+      "first_recorded": "undocumented in the books consulted",
+      "source": "Wikipedia (cites Crayola)"
+    },
+    "aka": [],
+    "siblings": [
+      "greenish-teal",
+      "mountain-meadow",
+      "medium-aquamarine",
+      "dark-seafoam"
     ],
-    [
-     "Mountain Meadow",
-     4.8
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "n_within": 0,
+    "measured": {
+      "lch": [
+        73.2,
+        56.1,
+        165.9
+      ],
+      "nearest": [
+        [
+          "Greenish Teal",
+          4.5
+        ],
+        [
+          "Mountain Meadow",
+          4.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wikipedia, \"Caribbean Green\" (cites Crayola)",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/Shades_of_green"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Ngram word-frequency cache",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub graph: nearest named colors (look-alike data)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "How many paintings in our archive show Caribbean Green covering at least 1 percent of the canvas?",
+      "choices": [
+        "None",
+        "About 500",
+        "About 5,000",
+        "Nearly all of them"
+      ],
+      "answer": "None",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Caribbean Green's absence from our archive proves no historical painter ever used this hue.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Caribbean Green never once appears, at any real size, across 23,781 paintings in our archive.",
+    "In print, the term \"Caribbean Green\" barely existed before 1940 and only took off after 1980."
+  ],
+  "words": 281,
+  "status": "checked",
+  "checked": {
+    "by": "claude",
+    "date": "2026-10-08",
+    "issues": [
+      "Only a web source (Wikipedia/Crayola); no book in our library documents this name.",
+      "Zero archive presence reflects this archive's historical-painting bias, not painting in general.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "Wikipedia, \"Caribbean Green\" (cites Crayola)",
-   "loc_kind": null,
-   "url": "https://en.wikipedia.org/wiki/Shades_of_green"
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Ngram word-frequency cache",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub graph: nearest named colors (look-alike data)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "How many paintings in our archive show Caribbean Green covering at least 1 percent of the canvas?",
-   "choices": [
-    "None",
-    "About 500",
-    "About 5,000",
-    "Nearly all of them"
-   ],
-   "answer": "None",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Caribbean Green's absence from our archive proves no historical painter ever used this hue.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Caribbean Green never once appears, at any real size, across 23,781 paintings in our archive.",
-  "In print, the term \"Caribbean Green\" barely existed before 1940 and only took off after 1980."
- ],
- "words": 281,
- "status": "checked",
- "checked": {
-  "by": "claude",
-  "date": "2026-10-08",
-  "issues": [
-   "Only a web source (Wikipedia/Crayola); no book in our library documents this name.",
-   "Zero archive presence reflects this archive's historical-painting bias, not painting in general.",
-   "lint 2026-10-09"
-  ]
- }
 }

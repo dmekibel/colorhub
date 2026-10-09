@@ -1,114 +1,114 @@
 {
- "slug": "blast-off-bronze",
- "name": "Blast-Off Bronze",
- "hex": "#A57164",
- "names": [
-  "Blast-Off Bronze"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Blast-Off Bronze is a muted, reddish brown named for the metal bronze, with Wikipedia citing Crayola as its source.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A metal's name, by way of Crayola",
-   "body": "The nearest named colors on file are [[pinkish-brown]], [[etruscan-red]], [[monkey-skin]] and [[copper-penny]], at 3.1, 3.4, 3.5 and 3.9 ΔE [1]. The 1955 ISCC-NBS system would class a close match as light reddish brown, about 3.9 units of ΔE off [1]. A second name in our data, [[bronze-lustre]], is built on the same metal word, though it sits in a darker, more olive part of the brown family [1]. Measured in LCH terms, Blast-Off Bronze is mid-toned and mildly warm: lightness 53, chroma 24, hue 39 degrees [1]. A fifth, slightly farther neighbor is [[cacao-brown]], 4.3 ΔE away, yellower and more vivid [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings finds a close match to Blast-Off Bronze in 316, about 1.3 percent, as photographed [2]. Its earliest appearance is a Maya mural fragment from about 500, and its heaviest use, relative to each painter's own baseline, falls to Amedeo Modigliani, Gustav Klimt and Maurice Denis, all working in the early 1900s [2]. Its use across the archive peaks in a cluster of paintings from the 1420s, two independent findings rather than one continuous trend [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the metal bronze",
-   "first_recorded": "undocumented in our library beyond the Wikipedia/Crayola record",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "pinkish-brown",
-   "etruscan-red",
-   "monkey-skin",
-   "copper-penny"
+  "slug": "blast-off-bronze",
+  "name": "Blast-Off Bronze",
+  "hex": "#A57164",
+  "names": [
+    "Blast-Off Bronze"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 316,
-  "match": {
-   "hex": "#A57164",
-   "de2000": 6,
-   "min_cover": 0.05
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Blast-Off Bronze is a muted, reddish brown named for the metal bronze, with Wikipedia citing Crayola as its source.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A metal's name, by way of Crayola",
+      "body": "The nearest named colors on file are [[cacao-brown]], [[etruscan-red]], [[monkey-skin]] and [[copper-penny]], at 3.1, 3.4, 3.5 and 3.9 ΔE [1]. The 1955 ISCC-NBS system would class a close match as light reddish brown, about 3.9 units of ΔE off [1]. A second name in our data, [[bronze-lustre]], is built on the same metal word, though it sits in a darker, more olive part of the brown family [1]. Measured in LCH terms, Blast-Off Bronze is mid-toned and mildly warm: lightness 53, chroma 24, hue 39 degrees [1]. A fifth, slightly farther neighbor is [[cacao-brown]], 4.3 ΔE away, yellower and more vivid [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings finds a close match to Blast-Off Bronze in 316, about 1.3 percent, as photographed [2]. Its earliest appearance is a Maya mural fragment from about 500, and its heaviest use, relative to each painter's own baseline, falls to Amedeo Modigliani, Gustav Klimt and Maurice Denis, all working in the early 1900s [2]. Its use across the archive peaks in a cluster of paintings from the 1420s, two independent findings rather than one continuous trend [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the metal bronze",
+      "first_recorded": "undocumented in our library beyond the Wikipedia/Crayola record",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "pinkish-brown",
+      "etruscan-red",
+      "monkey-skin",
+      "copper-penny"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    53,
-    24,
-    39
-   ],
-   "nearest": [
-    [
-     "Pinkish Brown",
-     3.1
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 316,
+    "match": {
+      "hex": "#A57164",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "measured": {
+      "lch": [
+        53,
+        24,
+        39
+      ],
+      "nearest": [
+        [
+          "Pinkish Brown",
+          3.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What metal is Blast-Off Bronze named for?",
+      "choices": [
+        "Bronze",
+        "Copper",
+        "Iron",
+        "Brass"
+      ],
+      "answer": "Bronze",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Blast-Off Bronze and Bronze Lustre are both built on the same metal word.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Blast-Off Bronze's earliest match in our archive is a Maya mural fragment from about 500."
+  ],
+  "words": 207,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Field notes named Paul Gauguin as a top-3 painter by lift; the archive data ranks Maurice Denis (lift 5.25) above Gauguin (lift 4.52). Corrected to Maurice Denis.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What metal is Blast-Off Bronze named for?",
-   "choices": [
-    "Bronze",
-    "Copper",
-    "Iron",
-    "Brass"
-   ],
-   "answer": "Bronze",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Blast-Off Bronze and Bronze Lustre are both built on the same metal word.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Blast-Off Bronze's earliest match in our archive is a Maya mural fragment from about 500."
- ],
- "words": 207,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Field notes named Paul Gauguin as a top-3 painter by lift; the archive data ranks Maurice Denis (lift 5.25) above Gauguin (lift 4.52). Corrected to Maurice Denis.",
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,117 +1,117 @@
 {
- "slug": "light-russet-vinaceous",
- "name": "Light Russet-Vinaceous",
- "hex": "#C4988B",
- "names": [
-  "Light Russet-Vinaceous"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Light Russet-Vinaceous is a paler, pinker step off [[russet-vinaceous|Russet-Vinaceous]], one of Ridgway's 1912 wine-tinged \"vinaceous\" family of naturalist colors.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on a wine-tinged brown",
-   "body": "The name is built by grammar: \"light\" over the parent [[russet-vinaceous|Russet-Vinaceous]], a grayish reddish orange that shares its exact hex with another library name, Clay Pink, one of at least eighteen near-duplicates ISCC-NBS filed under a single 1955 block [1]. Ridgway's 1912 atlas plates this lighter step at plate XXXIX, hue 9''', tone b, and ISCC-NBS separately filed it in 1955 as block 42 [1]. Measured, it is lighter and less saturated than its parent (lightness 67 against 58, chroma 20 against 27) [1].\n\nIts nearest named neighbor is [[japan-rose|Japan Rose]], 3.6 units away, almost the same, with [[fawn]] and [[vinaceous-fawn|Vinaceous-Fawn]] tied close behind at 3.7, both yellower [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this pale, wine-tinged brown in 256 of 23,781 paintings (1.08 percent, as photographed), more common than 65 percent of the named colors we track [2]. It most often plays a hidden color, in 45 percent of its strongest matches, and is most over-represented in paintings from India at 2.6 times the expected rate [2]. The earliest dated match runs to 1230, by Berlinghiero, 682 years before Ridgway's 1912 record; a floor, not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a descriptive modifier: light + Russet-Vinaceous",
-   "first_recorded": "1912 (Ridgway, plate XXXIX); also ISCC-NBS 1955, block 42",
-   "source": "Ridgway, Color Standards and Color Nomenclature"
-  },
-  "aka": [],
-  "siblings": [
-   "japan-rose",
-   "fawn",
-   "vinaceous-fawn"
+  "slug": "light-russet-vinaceous",
+  "name": "Light Russet-Vinaceous",
+  "hex": "#C4988B",
+  "names": [
+    "Light Russet-Vinaceous"
   ],
-  "parent": "russet-vinaceous",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 256,
-  "measured": {
-   "lch": [
-    67,
-    20,
-    42
-   ],
-   "nearest": [
-    [
-     "Japan Rose",
-     3.6
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Russet-Vinaceous is a paler, pinker step off [[clay-pink|Russet-Vinaceous]], one of Ridgway's 1912 wine-tinged \"vinaceous\" family of naturalist colors.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on a wine-tinged brown",
+      "body": "The name is built by grammar: \"light\" over the parent [[clay-pink|Russet-Vinaceous]], a grayish reddish orange that shares its exact hex with another library name, Clay Pink, one of at least eighteen near-duplicates ISCC-NBS filed under a single 1955 block [1]. Ridgway's 1912 atlas plates this lighter step at plate XXXIX, hue 9''', tone b, and ISCC-NBS separately filed it in 1955 as block 42 [1]. Measured, it is lighter and less saturated than its parent (lightness 67 against 58, chroma 20 against 27) [1].\n\nIts nearest named neighbor is [[japan-rose|Japan Rose]], 3.6 units away, almost the same, with [[fawn]] and [[fawn|Vinaceous-Fawn]] tied close behind at 3.7, both yellower [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this pale, wine-tinged brown in 256 of 23,781 paintings (1.08 percent, as photographed), more common than 65 percent of the named colors we track [2]. It most often plays a hidden color, in 45 percent of its strongest matches, and is most over-represented in paintings from India at 2.6 times the expected rate [2]. The earliest dated match runs to 1230, by Berlinghiero, 682 years before Ridgway's 1912 record; a floor, not a first, since the archive's early centuries are thin [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a descriptive modifier: light + Russet-Vinaceous",
+      "first_recorded": "1912 (Ridgway, plate XXXIX); also ISCC-NBS 1955, block 42",
+      "source": "Ridgway, Color Standards and Color Nomenclature"
+    },
+    "aka": [],
+    "siblings": [
+      "japan-rose",
+      "fawn",
+      "vinaceous-fawn"
     ],
-    [
-     "Fawn",
-     3.7
-    ],
-    [
-     "Vinaceous-Fawn",
-     3.7
+    "parent": "russet-vinaceous",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 256,
+    "measured": {
+      "lch": [
+        67,
+        20,
+        42
+      ],
+      "nearest": [
+        [
+          "Japan Rose",
+          3.6
+        ],
+        [
+          "Fawn",
+          3.7
+        ],
+        [
+          "Vinaceous-Fawn",
+          3.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIX, hue 9''', tone b; ISCC-NBS 1955, block 42; cited via ColorHub color library",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Light Russet-Vinaceous is a lightened step off which parent color?",
+      "choices": [
+        "Russet-Vinaceous",
+        "Vinaceous-Fawn",
+        "Rose",
+        "Perilla Purple"
+      ],
+      "answer": "Russet-Vinaceous",
+      "kind": "pick"
+    },
+    {
+      "q": "In which country is this color most over-represented against the expected rate?",
+      "choices": [
+        "India",
+        "Denmark",
+        "France",
+        "Japan"
+      ],
+      "answer": "India",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "This wine-tinged brown appears in more of our archive than most named colors, a floor reaching back to 1230."
+  ],
+  "words": 211,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); written from Ridgway and ISCC-NBS via the color library and archive."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIX, hue 9''', tone b; ISCC-NBS 1955, block 42; cited via ColorHub color library",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Light Russet-Vinaceous is a lightened step off which parent color?",
-   "choices": [
-    "Russet-Vinaceous",
-    "Vinaceous-Fawn",
-    "Rose",
-    "Perilla Purple"
-   ],
-   "answer": "Russet-Vinaceous",
-   "kind": "pick"
-  },
-  {
-   "q": "In which country is this color most over-represented against the expected rate?",
-   "choices": [
-    "India",
-    "Denmark",
-    "France",
-    "Japan"
-   ],
-   "answer": "India",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "This wine-tinged brown appears in more of our archive than most named colors, a floor reaching back to 1230."
- ],
- "words": 211,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); written from Ridgway and ISCC-NBS via the color library and archive."
-  ]
- }
 }

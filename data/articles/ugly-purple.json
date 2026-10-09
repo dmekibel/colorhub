@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A judgment, not a description",
-   "body": "The 2010 xkcd survey let respondents type any name for a swatch, and a number of them reached for blunt opinions like this one instead of a hue word; who first used it beyond the survey is undocumented [1]. The ISCC-NBS block for the region reads \"strong reddish purple\" [1].\n\nOur library also records Orchid Magenta as a near-duplicate of this swatch, within rounding of the same color [1]. Its closest standing colors are [[byzantine]], 4.5 units away by CIEDE2000 and more vivid, [[purply]] at 5.1, purpler and more vivid, and [[purple-plum]] at 5.6, purpler [2]."
+   "body": "The 2010 xkcd survey let respondents type any name for a swatch, and a number of them reached for blunt opinions like this one instead of a hue word; who first used it beyond the survey is undocumented [1]. The ISCC-NBS block for the region reads \"strong reddish purple\" [1].\n\nOur library also records Orchid Magenta as a near-duplicate of this swatch, within rounding of the same color [1]. Its closest standing colors are [[byzantine]], 4.5 units away by CIEDE2000 and more vivid, [[purple-plum]] at 5.1, purpler and more vivid, and [[purple-plum]] at 5.6, purpler [2]."
   },
   {
    "id": "field",
@@ -93,7 +93,7 @@
  "openers": [
   "Ugly Purple is a judgment, not a hue word: a crowd respondent's opinion from the 2010 xkcd survey, absent from our entire painting archive."
  ],
- "words": 172,
+ "words": 173,
  "status": "checked",
  "checked": {
   "by": "checker",

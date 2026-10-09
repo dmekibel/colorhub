@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A modifier, not a material",
-   "body": "ColorHub lists Yellowish Glaucous as \"yellowish\" plus the color word [[glaucous]], the dusty blue-grey bloom on a grape or a cabbage leaf, rather than as a pigment or a named material [1]. Our sources carry no date or place for when this specific modified name entered use [1].\n\nIts nearest look-alikes are all greener: [[corydalis-green]] and [[celandine-green]], 4.3 and 4.6 units away, with [[pale-olivine]] close behind at 4.8 [2]."
+   "body": "ColorHub lists Yellowish Glaucous as \"yellowish\" plus the color word [[dusty-blue]], the dusty blue-grey bloom on a grape or a cabbage leaf, rather than as a pigment or a named material [1]. Our sources carry no date or place for when this specific modified name entered use [1].\n\nIts nearest look-alikes are all greener: [[corydalis-green]] and [[celandine-green]], 4.3 and 4.6 units away, with [[pale-olivine]] close behind at 4.8 [2]."
   },
   {
    "id": "field",
@@ -118,5 +118,5 @@
    "Both the name section and field notes cited a specific Ridgway 1912 plate/block and an elaborate archive record (1,171 matches, a named painter, a 1392 date, UK over-representation) with no backing entry in data/library.json or data/graph/fieldnotes for this slug, and no concordance hit tying Ridgway or ISCC-NBS to this exact modified name. Replaced with an honest 'origin undocumented' and n_present=0; kept the already-correct computed LCH."
   ]
  },
- "words": 161
+ "words": 162
 }

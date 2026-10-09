@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A flower with many purples",
-   "body": "The name comes from [[iris]], a genus of several hundred species whose flowers run from near-white through yellow to the deep violets and purples the genus is best known for [1]. Our color library does not carry an entry for this exact xkcd-survey shade, so it has no recorded first-use date or dictionary pedigree beyond the 2010 crowd survey that coined it [1].\n\nAgainst our own data, Iris purple sits at lightness 43 and a high chroma of 86, closer to magenta-red than to the blue-violet most people picture when they hear \"iris\" [1]. The nearest named colors on file are [[purple-munsell]], [[purply]] and [[dark-orchid]], at 4.3, 4.5 and 5.3 ΔE [1]."
+   "body": "The name comes from [[iris]], a genus of several hundred species whose flowers run from near-white through yellow to the deep violets and purples the genus is best known for [1]. Our color library does not carry an entry for this exact xkcd-survey shade, so it has no recorded first-use date or dictionary pedigree beyond the 2010 crowd survey that coined it [1].\n\nAgainst our own data, Iris purple sits at lightness 43 and a high chroma of 86, closer to magenta-red than to the blue-violet most people picture when they hear \"iris\" [1]. The nearest named colors on file are [[purple-munsell]], [[purple-plum]] and [[dark-orchid]], at 4.3, 4.5 and 5.3 ΔE [1]."
   },
   {
    "id": "field",
@@ -108,7 +108,7 @@
  "openers": [
   "Iris flowers run from near-white to yellow; only some reach a purple this strong."
  ],
- "words": 208,
+ "words": 209,
  "status": "checked",
  "checked": {
   "by": "writer",

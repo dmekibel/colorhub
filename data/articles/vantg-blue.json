@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "An undocumented, unexplained name",
-   "body": "Our library traces the name only to a Wikipedia color list, which gives no date and no gloss of the word Vantg [1]. It is not a standard English word, and the sources consulted do not say what, if anything, it shortens or where it came from [1].\n\nIts closest standing colors are [[neon-blue]], 3.6 units away by CIEDE2000 and more vivid, [[lightish-blue]] at 4.4, duller, and [[royal-blue]] at 5.5, duller and darker [2]. Measured in LCH it reads lightness 53, chroma 82, one of the most saturated blues in our library [1]."
+   "body": "Our library traces the name only to a Wikipedia color list, which gives no date and no gloss of the word Vantg [1]. It is not a standard English word, and the sources consulted do not say what, if anything, it shortens or where it came from [1].\n\nIts closest standing colors are [[neon-blue]], 3.6 units away by CIEDE2000 and more vivid, [[azure]] at 4.4, duller, and [[royal-blue]] at 5.5, duller and darker [2]. Measured in LCH it reads lightness 53, chroma 82, one of the most saturated blues in our library [1]."
   },
   {
    "id": "field",
@@ -112,7 +112,7 @@
  "openers": [
   "Even the word Vantg itself is unexplained in our sources, let alone the color's history."
  ],
- "words": 171,
+ "words": 170,
  "status": "checked",
  "checked": {
   "by": "batch-32",

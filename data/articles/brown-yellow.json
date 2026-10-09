@@ -1,118 +1,118 @@
 {
- "slug": "brown-yellow",
- "name": "Brown Yellow",
- "hex": "#B29705",
- "names": [
-  "Brown Yellow"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Brown Yellow names a yellow pulled toward brown, recorded by the xkcd 2010 crowd color survey and otherwise undocumented in the books behind this archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A crowd name with old neighbors",
-   "body": "No dictionary or paint-brand plate carries this exact compound; it is modifier grammar, first written down in the 2010 xkcd survey [1]. Its nearest named neighbors are startlingly close: [[baby-poo|Baby Poo]], 2.3 units away, and [[baby-shit-brown|Baby Shit Brown]], 2.4 units away, both read as almost the same color [2]. [[dark-mustard|Dark Mustard]] and plain [[mustard]] sit further out, both darker or lighter by comparison [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This color appears in 70 of our 23,781 paintings, about 0.29 percent, more common than 54 percent of our named colors, as photographed [3]. It peaks in paintings from the 1900s, 1.7 times the rate expected from that century's share of the archive, and it is most over-represented in Indian paintings, at 4.4 times the expected rate [3]. Luis Egidio Meléndez is its most devoted painter here, with 4 of his 39 works carrying it, 6.5 times his baseline [3].\n\nThe earliest match is a 1403 panel by Gherardo Starnina, 607 years before the xkcd survey; our archive's early centuries are thin, so this is a floor, not a first [3]. In printed English the bare phrase \"brown yellow\" peaked around 1800, across all its senses, which can include uses that have nothing to do with naming a color [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "yellow, pulled toward brown",
-   "first_recorded": "2010 (xkcd crowd survey)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "baby-poo",
-   "baby-shit-brown"
+  "slug": "brown-yellow",
+  "name": "Brown Yellow",
+  "hex": "#B29705",
+  "names": [
+    "Brown Yellow"
   ],
-  "parent": "yellow",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 70,
-  "match": {
-   "min_cover": 0.02
-  },
-  "measured": {
-   "lch": [
-    63.0,
-    66.2,
-    91.9
-   ],
-   "nearest": [
-    [
-     "Baby Poo",
-     2.3
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Brown Yellow names a yellow pulled toward brown, recorded by the xkcd 2010 crowd color survey and otherwise undocumented in the books behind this archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A crowd name with old neighbors",
+      "body": "No dictionary or paint-brand plate carries this exact compound; it is modifier grammar, first written down in the 2010 xkcd survey [1]. Its nearest named neighbors are startlingly close: [[baby-poo|Baby Poo]], 2.3 units away, and [[baby-shit-brown|Baby Shit Brown]], 2.4 units away, both read as almost the same color [2]. [[fallen-leaf|Dark Mustard]] and plain [[mustard]] sit further out, both darker or lighter by comparison [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This color appears in 70 of our 23,781 paintings, about 0.29 percent, more common than 54 percent of our named colors, as photographed [3]. It peaks in paintings from the 1900s, 1.7 times the rate expected from that century's share of the archive, and it is most over-represented in Indian paintings, at 4.4 times the expected rate [3]. Luis Egidio Meléndez is its most devoted painter here, with 4 of his 39 works carrying it, 6.5 times his baseline [3].\n\nThe earliest match is a 1403 panel by Gherardo Starnina, 607 years before the xkcd survey; our archive's early centuries are thin, so this is a floor, not a first [3]. In printed English the bare phrase \"brown yellow\" peaked around 1800, across all its senses, which can include uses that have nothing to do with naming a color [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "yellow, pulled toward brown",
+      "first_recorded": "2010 (xkcd crowd survey)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "baby-poo",
+      "baby-shit-brown"
     ],
-    [
-     "Baby Shit Brown",
-     2.4
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd 2010 entry",
-   "loc_kind": null,
-   "url": null
+    "parent": "yellow",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: look-alike edges for brown-yellow",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 70,
+    "match": {
+      "min_cover": 0.02
+    },
+    "measured": {
+      "lch": [
+        63.0,
+        66.2,
+        91.9
+      ],
+      "nearest": [
+        [
+          "Baby Poo",
+          2.3
+        ],
+        [
+          "Baby Shit Brown",
+          2.4
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings) and Google Books Ngram cache, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which named color sits closest to Brown Yellow?",
-   "choices": [
-    "Baby Poo",
-    "Mustard",
-    "Ochre",
-    "Dark Mustard"
-   ],
-   "answer": "Baby Poo",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges for brown-yellow",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings) and Google Books Ngram cache, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which named color sits closest to Brown Yellow?",
+      "choices": [
+        "Baby Poo",
+        "Mustard",
+        "Ochre",
+        "Dark Mustard"
+      ],
+      "answer": "Baby Poo",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Brown Yellow is rarer than average in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Brown Yellow's closest named neighbor, by only 2.3 units, is Baby Poo."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   },
-  {
-   "q": "True or false: Brown Yellow is rarer than average in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Brown Yellow's closest named neighbor, by only 2.3 units, is Baby Poo."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- },
- "words": 228
+  "words": 228
 }

@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A compound, not a tradition",
-   "body": "The name follows plain modifier grammar: *light greenish* plus [[blue]], first recorded in the xkcd 2010 crowd color survey and carried into our library from there [1]. Paterson's dictionary never lists \"Light Greenish Blue\" as a headword, but it uses the near-identical phrase \"light greenish-blue\" or \"light greenish blue\" to describe several other named colors: Aqua, aqua blue, horizon blue, and the older word glaucous [2]. That repetition across unrelated entries is a sign the phrase is descriptive shorthand, used whenever a writer needs a pale, green-leaning blue, rather than a single coined name with its own history [2].\n\nThe nearest ISCC-NBS 1955 block is \"very light green,\" a Delta-E of 8.6 from this hex, which is a wide gap for a name that calls itself blue [1]. The nearest colors on file by measured distance are [[greenish-cyan]] and [[light-aquamarine]], 2.9 and 3.3 units away, with [[seafoam]] close behind at 3.3 [1]."
+   "body": "The name follows plain modifier grammar: *light greenish* plus [[blue]], first recorded in the xkcd 2010 crowd color survey and carried into our library from there [1]. Paterson's dictionary never lists \"Light Greenish Blue\" as a headword, but it uses the near-identical phrase \"light greenish-blue\" or \"light greenish blue\" to describe several other named colors: Aqua, aqua blue, horizon blue, and the older word glaucous [2]. That repetition across unrelated entries is a sign the phrase is descriptive shorthand, used whenever a writer needs a pale, green-leaning blue, rather than a single coined name with its own history [2].\n\nThe nearest ISCC-NBS 1955 block is \"very light green,\" a Delta-E of 8.6 from this hex, which is a wide gap for a name that calls itself blue [1]. The nearest colors on file by measured distance are [[greenish-cyan]] and [[aquamarine]], 2.9 and 3.3 units away, with [[seafoam]] close behind at 3.3 [1]."
   },
   {
    "id": "field",
@@ -127,5 +127,5 @@
    "Verified Paterson citation: Aqua/aqua blue/glaucous/horizon blue all use 'light greenish blue' phrasing in the book."
   ]
  },
- "words": 234
+ "words": 233
 }

@@ -1,122 +1,122 @@
 {
- "slug": "light-magenta",
- "name": "Light Magenta",
- "hex": "#FA5FF7",
- "names": [
-  "Light Magenta"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Light Magenta joins the modifier *light* to [[magenta]], a crowd-survey name that, as photographed, has never appeared in our painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A lightened primary",
-   "body": "The name follows the plain grammar of modifier plus base color, recorded in the xkcd 2010 crowd color survey [1]. The parent [[magenta]] itself names one of the three subtractive printing primaries, so Light Magenta is a paled version of a working color rather than a named shade with its own history [1]. The ISCC-NBS system's nearest block is \"brilliant purple,\" an 11.5 Delta-E away, a wide gap that marks this crowd-chosen hex as brighter and pinker than the standards body's purple [1]. Nearest on file is [[ultra-pink]] at 2.9 units, with [[purply-pink]] and [[purple-pizzazz]] close behind [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has this color covering at least one per cent of its canvas, within a Delta-E of 4, as photographed [2]. That describes this archive's holdings, not the color in painting generally: a bright, crowd-named pink-purple like this rarely survives centuries of varnish and photography [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the modifier light applied to the base color magenta",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color graph"
-  },
-  "aka": [],
-  "siblings": [
-   "ultra-pink",
-   "purply-pink",
-   "purple-pizzazz",
-   "heliotrope"
+  "slug": "light-magenta",
+  "name": "Light Magenta",
+  "hex": "#FA5FF7",
+  "names": [
+    "Light Magenta"
   ],
-  "parent": "magenta",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    65.9,
-    90.1,
-    328.1
-   ],
-   "nearest_iscc": [
-    "brilliant purple",
-    11.5
-   ],
-   "nearest": [
-    [
-     "Ultra-Pink",
-     2.9
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Magenta joins the modifier *light* to [[magenta]], a crowd-survey name that, as photographed, has never appeared in our painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A lightened primary",
+      "body": "The name follows the plain grammar of modifier plus base color, recorded in the xkcd 2010 crowd color survey [1]. The parent [[magenta]] itself names one of the three subtractive printing primaries, so Light Magenta is a paled version of a working color rather than a named shade with its own history [1]. The ISCC-NBS system's nearest block is \"brilliant purple,\" an 11.5 Delta-E away, a wide gap that marks this crowd-chosen hex as brighter and pinker than the standards body's purple [1]. Nearest on file is [[ultra-pink]] at 2.9 units, with [[ultra-pink]] and [[purple-pizzazz]] close behind [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has this color covering at least one per cent of its canvas, within a Delta-E of 4, as photographed [2]. That describes this archive's holdings, not the color in painting generally: a bright, crowd-named pink-purple like this rarely survives centuries of varnish and photography [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the modifier light applied to the base color magenta",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color graph"
+    },
+    "aka": [],
+    "siblings": [
+      "ultra-pink",
+      "purply-pink",
+      "purple-pizzazz",
+      "heliotrope"
     ],
-    [
-     "Purply-Pink",
-     4.2
-    ],
-    [
-     "Purple Pizzazz",
-     4.9
-    ],
-    [
-     "Heliotrope",
-     5.1
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph: computed LCH/Munsell values, ISCC-NBS 1955 crosswalk, xkcd 2010 survey",
-   "loc_kind": null,
-   "url": null
+    "parent": "magenta",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which survey first records the name Light Magenta?",
-   "choices": [
-    "The xkcd 2010 crowd survey",
-    "Ridgway's 1912 plates",
-    "The ISCC-NBS 1955 lists",
-    "RAL, 1927"
-   ],
-   "answer": "The xkcd 2010 crowd survey",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        65.9,
+        90.1,
+        328.1
+      ],
+      "nearest_iscc": [
+        "brilliant purple",
+        11.5
+      ],
+      "nearest": [
+        [
+          "Ultra-Pink",
+          2.9
+        ],
+        [
+          "Purply-Pink",
+          4.2
+        ],
+        [
+          "Purple Pizzazz",
+          4.9
+        ],
+        [
+          "Heliotrope",
+          5.1
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: Light Magenta is one of our painting archive's most common colors.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Not a single canvas in our 23,781-painting archive carries this exact bright pink-purple."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- },
- "words": 170
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph: computed LCH/Munsell values, ISCC-NBS 1955 crosswalk, xkcd 2010 survey",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which survey first records the name Light Magenta?",
+      "choices": [
+        "The xkcd 2010 crowd survey",
+        "Ridgway's 1912 plates",
+        "The ISCC-NBS 1955 lists",
+        "RAL, 1927"
+      ],
+      "answer": "The xkcd 2010 crowd survey",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Light Magenta is one of our painting archive's most common colors.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Not a single canvas in our 23,781-painting archive carries this exact bright pink-purple."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
+  },
+  "words": 170
 }

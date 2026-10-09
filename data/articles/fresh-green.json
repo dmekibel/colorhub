@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A modifier on green, with an older phrase",
-   "body": "Fresh Green pairs \"fresh\" with [[green]], the xkcd 2010 survey's term for this bright, clean green [1]. The exact compound is the survey's; the phrase is older. Pastoureau notes that the elephant Babar has worn \"a lovely, fresh green\" suit since his first storybook appearance, so enduringly that the shade is sometimes called \"Babar green\" [2]. He adds that Belle Époque public gardens favored a \"delicate or fresh green\" for plantings, against duller, greyer greens for benches and gates [3]. Its nearest named look-alikes are [[lightish-green]], [[apple]] and [[green-apple]] [1]."
+   "body": "Fresh Green pairs \"fresh\" with [[green]], the xkcd 2010 survey's term for this bright, clean green [1]. The exact compound is the survey's; the phrase is older. Pastoureau notes that the elephant Babar has worn \"a lovely, fresh green\" suit since his first storybook appearance, so enduringly that the shade is sometimes called \"Babar green\" [2]. He adds that Belle Époque public gardens favored a \"delicate or fresh green\" for plantings, against duller, greyer greens for benches and gates [3]. Its nearest named look-alikes are [[apple]], [[apple]] and [[vibrant-green]] [1]."
   },
   {
    "id": "field",
@@ -114,5 +114,5 @@
   "date": "2026-10-09",
   "issues": []
  },
- "words": 170
+ "words": 169
 }

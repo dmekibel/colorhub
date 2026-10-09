@@ -1,132 +1,132 @@
 {
- "slug": "bulgare",
- "name": "Bulgare",
- "hex": "#96535D",
- "names": [
-  "Bulgare"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Bulgare is a muted purplish red that Maerz and Paul's 1930 dictionary dates to 1892, measured about twelve units from the everyday name Raspberry.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name shaped like a nationality, unexplained",
-   "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Bulgare on plate 5, position J7, and dates its first recorded use to 1892 [1]. *Bulgare* is the French word for Bulgarian, which suggests a tie to a textile or dye trade, but the dictionary gives no fuller account, so the connection is undocumented here [1]. The ISCC-NBS 1955 lists do not carry the name separately, and the National Bureau of Standards circular cites only Maerz and Paul's entry [1].\n\nThe nearest named colors on file are [[indian-lake]], [[light-maroon]] and [[solferino]], at 3.8, 4.1 and 4.5 ΔE [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a color match to this swatch in 58 of 23,781 paintings, 0.24 percent, as photographed; the within-painting lens finds it in 21, rarer than 60 percent of the named colors we track [3]. The sample is too thin for a reliable single-painter or country figure, so none is claimed here [3].\n\nThe color peaks in the 1900s, 2.5 times the expected rate across 1,674 paintings from that decade, and inside a painting it most often plays an accent (71 percent of its 21 within-painting matches) [3]. The earliest match dates to about 1470, by Hans Memling, more than four centuries before the name's 1892 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. These are photographs of varnished paintings, read as screen colors [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented (bulgare is the French word for Bulgarian)",
-   "first_recorded": "Maerz and Paul, 1930 (recorded use from 1892, plate 5 J7)",
-   "source": "Maerz and Paul, A Dictionary of Color (1930)"
-  },
-  "aka": [],
-  "siblings": [
-   "indian-lake",
-   "light-maroon",
-   "solferino",
-   "rose-taupe"
+  "slug": "bulgare",
+  "name": "Bulgare",
+  "hex": "#96535D",
+  "names": [
+    "Bulgare"
   ],
-  "parent": "red",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#96535D",
-   "de2000": 6,
-   "min_cover": 0.05
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Bulgare is a muted purplish red that Maerz and Paul's 1930 dictionary dates to 1892, measured about twelve units from the everyday name Raspberry.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name shaped like a nationality, unexplained",
+      "body": "Maerz and Paul's *A Dictionary of Color* (1930) places Bulgare on plate 5, position J7, and dates its first recorded use to 1892 [1]. *Bulgare* is the French word for Bulgarian, which suggests a tie to a textile or dye trade, but the dictionary gives no fuller account, so the connection is undocumented here [1]. The ISCC-NBS 1955 lists do not carry the name separately, and the National Bureau of Standards circular cites only Maerz and Paul's entry [1].\n\nThe nearest named colors on file are [[indian-lake]], [[pomegranate-purple]] and [[solferino]], at 3.8, 4.1 and 4.5 ΔE [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a color match to this swatch in 58 of 23,781 paintings, 0.24 percent, as photographed; the within-painting lens finds it in 21, rarer than 60 percent of the named colors we track [3]. The sample is too thin for a reliable single-painter or country figure, so none is claimed here [3].\n\nThe color peaks in the 1900s, 2.5 times the expected rate across 1,674 paintings from that decade, and inside a painting it most often plays an accent (71 percent of its 21 within-painting matches) [3]. The earliest match dates to about 1470, by Hans Memling, more than four centuries before the name's 1892 record, which shows only that a similar-looking hue existed in paint long before the word did, a floor and not a first, since the archive's early centuries are thin [3]. These are photographs of varnished paintings, read as screen colors [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented (bulgare is the French word for Bulgarian)",
+      "first_recorded": "Maerz and Paul, 1930 (recorded use from 1892, plate 5 J7)",
+      "source": "Maerz and Paul, A Dictionary of Color (1930)"
+    },
+    "aka": [],
+    "siblings": [
+      "indian-lake",
+      "light-maroon",
+      "solferino",
+      "rose-taupe"
+    ],
+    "parent": "red",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "n_present": 58,
-  "measured": {
-   "lch": [
-    43.4,
-    29.7,
-    12.7
-   ],
-   "nearest": [
-    [
-     "Indian Lake",
-     3.8
-    ],
-    [
-     "Light Maroon",
-     4.1
-    ],
-    [
-     "Solferino",
-     4.5
-    ],
-    [
-     "Rose Taupe",
-     4.9
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#96535D",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 58,
+    "measured": {
+      "lch": [
+        43.4,
+        29.7,
+        12.7
+      ],
+      "nearest": [
+        [
+          "Indian Lake",
+          3.8
+        ],
+        [
+          "Light Maroon",
+          4.1
+        ],
+        [
+          "Solferino",
+          4.5
+        ],
+        [
+          "Rose Taupe",
+          4.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Maerz and Paul, A Dictionary of Color, \"Bulgare\", plate 5 J7",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the French word bulgare, behind this name, mean?",
+      "choices": [
+        "Bulgarian",
+        "Purple",
+        "Wine",
+        "Autumn"
+      ],
+      "answer": "Bulgarian",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Maerz and Paul explain why this red was named after Bulgaria.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A muted red named for a nationality, with no explanation of why."
+  ],
+  "words": 269,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Maerz and Paul, A Dictionary of Color, \"Bulgare\", plate 5 J7",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the French word bulgare, behind this name, mean?",
-   "choices": [
-    "Bulgarian",
-    "Purple",
-    "Wine",
-    "Autumn"
-   ],
-   "answer": "Bulgarian",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Maerz and Paul explain why this red was named after Bulgaria.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A muted red named for a nationality, with no explanation of why."
- ],
- "words": 269,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -11,7 +11,7 @@
   {
    "id": "name",
    "title": "Straight from the pond",
-   "body": "The name is a plain nature word: algae, the green growth found on still water [1]. It entered ColorHub's library from the 2010 xkcd survey, in which thousands of people typed free-text names for colors shown on screen, rather than from any of the historical pigment or dye dictionaries [1]. No older record of the exact name turns up in the sources consulted [1]. The nearest named greens are [[emerald]] and [[cool-green]], with [[seaweed]] and [[dark-seafoam]] close by on the duller, darker side [2]."
+   "body": "The name is a plain nature word: algae, the green growth found on still water [1]. It entered ColorHub's library from the 2010 xkcd survey, in which thousands of people typed free-text names for colors shown on screen, rather than from any of the historical pigment or dye dictionaries [1]. No older record of the exact name turns up in the sources consulted [1]. The nearest named greens are [[emerald]] and [[shamrock]], with [[seaweed]] and [[green-crayola]] close by on the duller, darker side [2]."
   },
   {
    "id": "field",
@@ -117,5 +117,5 @@
   ]
  },
  "slug": "algae-green",
- "words": 174
+ "words": 173
 }

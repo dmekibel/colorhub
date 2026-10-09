@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A dark violet in the 1930 dictionary",
-   "body": "Maerz and Paul's *A Dictionary of Color* records this hue in 1926, at plate 44, position K 11 [1]. The ISCC-NBS system later filed it in its \"deep violet\" block [1]. In Munsell notation it sits at about 1.4P 1.4 over 7.5, a near-black purple [1].\n\nOur color library classes the name as a place-or-institution word, built on the adjective \"Russian\" [2]. Beyond the catalogue entry, the sources we hold say nothing about why that word was chosen for this particular violet; call the naming logic undocumented [2]. The two nearest named colors are [[adelaide]], about 5 units lighter, and [[deep-purple]], a touch more vivid and darker, each within one step of Russian Violet in LCH space [3].\n\nTwo further neighbors sit a little further off: [[midnight-purple]], darker and more vivid, and [[dark-indigo]], at 6 units, also darker [3]."
+   "body": "Maerz and Paul's *A Dictionary of Color* records this hue in 1926, at plate 44, position K 11 [1]. The ISCC-NBS system later filed it in its \"deep violet\" block [1]. In Munsell notation it sits at about 1.4P 1.4 over 7.5, a near-black purple [1].\n\nOur color library classes the name as a place-or-institution word, built on the adjective \"Russian\" [2]. Beyond the catalogue entry, the sources we hold say nothing about why that word was chosen for this particular violet; call the naming logic undocumented [2]. The two nearest named colors are [[adelaide]], about 5 units lighter, and [[midnight-purple]], a touch more vivid and darker, each within one step of Russian Violet in LCH space [3].\n\nTwo further neighbors sit a little further off: [[midnight-purple]], darker and more vivid, and [[paua]], at 6 units, also darker [3]."
   },
   {
    "id": "field",
@@ -131,5 +131,5 @@
    "lint 2026-10-09"
   ]
  },
- "words": 306
+ "words": 305
 }

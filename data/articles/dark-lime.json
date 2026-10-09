@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "The name",
-   "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark lime\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is vivid yellow green, about 6 CIEDE2000 units away, and the closest Munsell reading runs near 6.0GY in hue [1]. The nearest named colors on file are [[sickly-green]], [[bright-olive]] and [[avocado-green]], at 3.5, 4.3 and 4.5 ΔE [1]."
+   "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark lime\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is vivid yellow green, about 6 CIEDE2000 units away, and the closest Munsell reading runs near 6.0GY in hue [1]. The nearest named colors on file are [[avocado]], [[acid-green]] and [[avocado-green]], at 3.5, 4.3 and 4.5 ΔE [1]."
   },
   {
    "id": "field",
@@ -105,7 +105,7 @@
  "openers": [
   "Dark Lime's exact shade turns up in just one of our 23,781 archived paintings, a Gauguin."
  ],
- "words": 205,
+ "words": 204,
  "status": "checked",
  "checked": {
   "by": "writer-lane",

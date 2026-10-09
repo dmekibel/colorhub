@@ -1,175 +1,175 @@
 {
- "slug": "madder-brown",
- "name": "Madder Brown",
- "hex": "#854841",
- "names": [
-  "Madder Brown"
- ],
- "tier": "pigment",
- "lede": "Madder brown is a reddish brown named for the madder root: a nineteenth-century artist's pigment made by gently heating madder lake until it turned from red to brown.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A burnt madder",
-   "body": "The Pigment Compendium cites George Field's *Chromatography* of 1835: madder brown is a gently calcined madder lake, also called intense madder brown, brown madder and Field's russet [1][2]. Field called it the only available pigment of this hue, between orange and purple [3]. The trade offered several close relatives: a burnt madder charred from madder carmine, which Salter in 1869 thought too expensive for commerce, and Rembrandt's madder, compounded of rose and brown madders and burnt sienna, sold by British colormen in the late nineteenth century [4][5].\n\nA relative, alizarin brown, made from synthetic alizarin lake, was described by Mayer as a rather dull but transparent brown that could result from an occasional off-color batch of red [6]."
-  },
-  {
-   "id": "madder",
-   "title": "The red behind it",
-   "body": "Madder itself is a red dye and lake from the root of *Rubia tinctorum*, and the brown is the same chemistry pushed further with heat [2][7]. By Paterson's account, madder production virtually ceased after synthetic alizarin was discovered in 1863 [7]. For the full story of the red, see [[madder]], and for its paler cousin [[madder-lake]]. Heaton listed a brown madder as a current brown lake as late as 1928 [2].\n\nThe swatch here, #854841, is a dusty red-brown, and our library records Ridgway's 1886 plate as the earliest record of the name in our sources, followed by ISCC-NBS 1955 and Maerz and Paul 1930 [8]. Nearby named browns are [[umber]] and [[raw-sienna]] [8]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This is among the commoner colors in our archive of 23,781 paintings: it appears in 455 paintings, 1.91 per cent, as photographed, more than 75 per cent of the named colors [9]. It peaks in the 1400s, found in 37 of 945 paintings from then, 2.9 times the expected rate [9]. It is over-represented in Tibet, 4.6 times expected, 7 of 47 paintings [9]. In 68 per cent of the 268 paintings that hold it, it plays an accent [9].\n\nThe earliest match is dated 1100, 786 years before the name's first record, so the match is a look-alike hue in an aged photograph, not proof of madder [9]. In printed English the word peaks in the 1850s and rose fastest in the 1830s, the decade of Field's book [10]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "madder root (Rubia tinctorum), calcined",
-   "first_recorded": "Field, Chromatography, 1835; Ridgway 1886 as a color name",
-   "source": "Pigment Compendium, pp. 76, 78, 170, 258, 341"
-  },
-  "aka": [
-   "brown madder",
-   "intense madder brown",
-   "Field's russet",
-   "russet rubiate"
+  "slug": "madder-brown",
+  "name": "Madder Brown",
+  "hex": "#854841",
+  "names": [
+    "Madder Brown"
   ],
-  "siblings": [
-   "madder-lake",
-   "umber",
-   "raw-sienna"
+  "tier": "pigment",
+  "lede": "Madder brown is a reddish brown named for the madder root: a nineteenth-century artist's pigment made by gently heating madder lake until it turned from red to brown.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A burnt madder",
+      "body": "The Pigment Compendium cites George Field's *Chromatography* of 1835: madder brown is a gently calcined madder lake, also called intense madder brown, brown madder and Field's russet [1][2]. Field called it the only available pigment of this hue, between orange and purple [3]. The trade offered several close relatives: a burnt madder charred from madder carmine, which Salter in 1869 thought too expensive for commerce, and Rembrandt's madder, compounded of rose and brown madders and burnt sienna, sold by British colormen in the late nineteenth century [4][5].\n\nA relative, alizarin brown, made from synthetic alizarin lake, was described by Mayer as a rather dull but transparent brown that could result from an occasional off-color batch of red [6]."
+    },
+    {
+      "id": "madder",
+      "title": "The red behind it",
+      "body": "Madder itself is a red dye and lake from the root of *Rubia tinctorum*, and the brown is the same chemistry pushed further with heat [2][7]. By Paterson's account, madder production virtually ceased after synthetic alizarin was discovered in 1863 [7]. For the full story of the red, see [[irresistible]], and for its paler cousin [[madder-lake]]. Heaton listed a brown madder as a current brown lake as late as 1928 [2].\n\nThe swatch here, #854841, is a dusty red-brown, and our library records Ridgway's 1886 plate as the earliest record of the name in our sources, followed by ISCC-NBS 1955 and Maerz and Paul 1930 [8]. Nearby named browns are [[umber]] and [[raw-sienna]] [8]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This is among the commoner colors in our archive of 23,781 paintings: it appears in 455 paintings, 1.91 per cent, as photographed, more than 75 per cent of the named colors [9]. It peaks in the 1400s, found in 37 of 945 paintings from then, 2.9 times the expected rate [9]. It is over-represented in Tibet, 4.6 times expected, 7 of 47 paintings [9]. In 68 per cent of the 268 paintings that hold it, it plays an accent [9].\n\nThe earliest match is dated 1100, 786 years before the name's first record, so the match is a look-alike hue in an aged photograph, not proof of madder [9]. In printed English the word peaks in the 1850s and rose fastest in the 1830s, the decade of Field's book [10]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#854841",
-   "de2000": 4,
-   "min_cover": 0.01
+  "aside": {
+    "origin": {
+      "named_after": "madder root (Rubia tinctorum), calcined",
+      "first_recorded": "Field, Chromatography, 1835; Ridgway 1886 as a color name",
+      "source": "Pigment Compendium, pp. 76, 78, 170, 258, 341"
+    },
+    "aka": [
+      "brown madder",
+      "intense madder brown",
+      "Field's russet",
+      "russet rubiate"
+    ],
+    "siblings": [
+      "madder-lake",
+      "umber",
+      "raw-sienna"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "n_present": 455,
-  "pct": 1.91,
-  "peak": "1400s, 2.9x baseline",
-  "ngram": {
-   "peak": 1850,
-   "rise": 1830
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pigment Compendium (Eastaugh et al.), \"Madder brown\", p. 258",
-   "loc_kind": "pdf-page",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#854841",
+      "de2000": 4,
+      "min_cover": 0.01
+    },
+    "n_present": 455,
+    "pct": 1.91,
+    "peak": "1400s, 2.9x baseline",
+    "ngram": {
+      "peak": 1850,
+      "rise": 1830
+    }
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Brown madder\", p. 76",
-   "loc_kind": "pdf-page",
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pigment Compendium (Eastaugh et al.), \"Madder brown\", p. 258",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Brown madder\", p. 76",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Field's russet\", p. 170",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Burnt madder\", p. 78",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Rembrandt's madder\", p. 335",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"Alizarin brown\", p. 17",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 253",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930, Ridgway), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 within 4, at least 1% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    }
+  ],
+  "questions": [
+    {
+      "q": "How was madder brown made, per George Field?",
+      "choices": [
+        "By gently calcining madder lake",
+        "By mixing madder with soot",
+        "By soaking madder in iron",
+        "By grinding the dried root"
+      ],
+      "answer": "By gently calcining madder lake",
+      "kind": "pick"
+    },
+    {
+      "q": "What ended the madder trade after 1863?",
+      "choices": [
+        "Synthetic alizarin",
+        "A plant disease",
+        "Import taxes",
+        "The loss of the red dye recipe"
+      ],
+      "answer": "Synthetic alizarin",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Madder brown is madder lake heated until it turns from red to brown."
+  ],
+  "depth": "medium",
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "alizarin brown was wrongly framed as an accident of madder brown; it is a synthetic-alizarin relative",
+      "'collapsed' softened to Paterson's 'virtually ceased'",
+      "removed unsupported claim about old red-browns being mostly earths"
+    ]
   },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Field's russet\", p. 170",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Burnt madder\", p. 78",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Rembrandt's madder\", p. 335",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"Alizarin brown\", p. 17",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 253",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Maerz & Paul 1930, Ridgway), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 within 4, at least 1% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  }
- ],
- "questions": [
-  {
-   "q": "How was madder brown made, per George Field?",
-   "choices": [
-    "By gently calcining madder lake",
-    "By mixing madder with soot",
-    "By soaking madder in iron",
-    "By grinding the dried root"
-   ],
-   "answer": "By gently calcining madder lake",
-   "kind": "pick"
-  },
-  {
-   "q": "What ended the madder trade after 1863?",
-   "choices": [
-    "Synthetic alizarin",
-    "A plant disease",
-    "Import taxes",
-    "The loss of the red dye recipe"
-   ],
-   "answer": "Synthetic alizarin",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Madder brown is madder lake heated until it turns from red to brown."
- ],
- "depth": "medium",
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "alizarin brown was wrongly framed as an accident of madder brown; it is a synthetic-alizarin relative",
-   "'collapsed' softened to Paterson's 'virtually ceased'",
-   "removed unsupported claim about old red-browns being mostly earths"
-  ]
- },
- "words": 381
+  "words": 381
 }

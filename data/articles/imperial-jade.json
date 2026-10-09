@@ -1,128 +1,128 @@
 {
- "name": "Imperial Jade",
- "hex": "#378146",
- "names": [
-  "Imperial Jade"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Imperial Jade is a strong, slightly blue-leaning green named for the most prized grade of jade, the gem that gives its name to one whole green family in our library.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The top grade of the gem",
-   "body": "Maerz and Paul's 1930 dictionary dates this name to 1927, at plate 21, L 12 [1]. \"Imperial\" marks it as the finest grade of [[gem:jade|jade]], the vivid, slightly translucent green jadeite associated with Chinese carving and ornament, rather than the duller, more common nephrite [1]. This entry has no Ridgway plate of its own, so the 1927 date is the earliest recorded here [1]. The nearest named colors on file are [[darkish-green]], [[sea-green]] and [[emeraude]], at 3.2, 4.6 and 4.6 ΔE [1]. It reads itself than to the brighter, bluer [[emerald]], consistent with its gemstone name [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this green in only 20 of 23,781 paintings, under one tenth of one per cent [2]. It peaks hard in the 1900s, at nearly eight times the overall baseline rate, consistent with a name only recorded from 1927 [2]. The earliest match is an 1835 portrait by Francis Alexander, almost a century before the name was recorded, so that is a lookalike hue and not evidence the color was named that early, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, and a match is not a test for jadeite or any other mineral [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the finest grade of jade (jadeite)",
-   "first_recorded": "1927 (Maerz and Paul)",
-   "source": "ColorHub library (data/library.json)"
-  },
-  "aka": [],
-  "siblings": [
-   "darkish-green",
-   "sea-green",
-   "emeraude",
-   "fern-green"
+  "name": "Imperial Jade",
+  "hex": "#378146",
+  "names": [
+    "Imperial Jade"
   ],
-  "parent": "green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
-  "match": {
-   "hex": "#378146",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 20,
-  "nearest": [
-   [
-    "Forest green",
-    7.7
-   ]
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Imperial Jade is a strong, slightly blue-leaning green named for the most prized grade of jade, the gem that gives its name to one whole green family in our library.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The top grade of the gem",
+      "body": "Maerz and Paul's 1930 dictionary dates this name to 1927, at plate 21, L 12 [1]. \"Imperial\" marks it as the finest grade of [[gem:jade|jade]], the vivid, slightly translucent green jadeite associated with Chinese carving and ornament, rather than the duller, more common nephrite [1]. This entry has no Ridgway plate of its own, so the 1927 date is the earliest recorded here [1]. The nearest named colors on file are [[imperial-jade]], [[sea-green]] and [[emeraude]], at 3.2, 4.6 and 4.6 ΔE [1]. It reads itself than to the brighter, bluer [[emerald]], consistent with its gemstone name [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this green in only 20 of 23,781 paintings, under one tenth of one per cent [2]. It peaks hard in the 1900s, at nearly eight times the overall baseline rate, consistent with a name only recorded from 1927 [2]. The earliest match is an 1835 portrait by Francis Alexander, almost a century before the name was recorded, so that is a lookalike hue and not evidence the color was named that early, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, and a match is not a test for jadeite or any other mineral [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+    }
   ],
-  "peak_century": 1900,
-  "measured": {
-   "nearest": [
-    [
-     "Darkish Green",
-     3.2
+  "aside": {
+    "origin": {
+      "named_after": "the finest grade of jade (jadeite)",
+      "first_recorded": "1927 (Maerz and Paul)",
+      "source": "ColorHub library (data/library.json)"
+    },
+    "aka": [],
+    "siblings": [
+      "darkish-green",
+      "sea-green",
+      "emeraude",
+      "fern-green"
     ],
-    [
-     "Sea Green",
-     4.6
+    "parent": "green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed",
+    "match": {
+      "hex": "#378146",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 20,
+    "nearest": [
+      [
+        "Forest green",
+        7.7
+      ]
     ],
-    [
-     "Emeraude",
-     4.6
-    ],
-    [
-     "Fern Green",
-     5.1
+    "peak_century": 1900,
+    "measured": {
+      "nearest": [
+        [
+          "Darkish Green",
+          3.2
+        ],
+        [
+          "Sea Green",
+          4.6
+        ],
+        [
+          "Emeraude",
+          4.6
+        ],
+        [
+          "Fern Green",
+          5.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; Maerz & Paul 1930 pl. 21 L 12, first recorded 1927",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "\"Imperial\" in Imperial Jade marks which grade of the gem?",
+      "choices": [
+        "The finest, most vivid jadeite",
+        "Any pale nephrite",
+        "Only antique carvings",
+        "Only uncut stones"
+      ],
+      "answer": "The finest, most vivid jadeite",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Maerz and Paul recorded the name Imperial Jade before the 1900s.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Imperial Jade peaks nearly eight times over baseline in 1900s paintings, matching its 1927 dictionary date."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No book source found; article relies on library/graph data only.",
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json) and name graph (data/graph/nodes): Ridgway (1912), ISCC-NBS (1955) and Maerz & Paul (1930) entries; Maerz & Paul 1930 pl. 21 L 12, first recorded 1927",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "\"Imperial\" in Imperial Jade marks which grade of the gem?",
-   "choices": [
-    "The finest, most vivid jadeite",
-    "Any pale nephrite",
-    "Only antique carvings",
-    "Only uncut stones"
-   ],
-   "answer": "The finest, most vivid jadeite",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Maerz and Paul recorded the name Imperial Jade before the 1900s.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Imperial Jade peaks nearly eight times over baseline in 1900s paintings, matching its 1927 dictionary date."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No book source found; article relies on library/graph data only.",
-   "lint 2026-10-09"
-  ]
- },
- "slug": "imperial-jade",
- "words": 248
+  "slug": "imperial-jade",
+  "words": 248
 }

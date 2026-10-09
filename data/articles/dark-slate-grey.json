@@ -1,194 +1,194 @@
 {
- "slug": "dark-slate-grey",
- "name": "Dark Slate Grey",
- "hex": "#2F4F4F",
- "names": [
-  "Dark Slate Grey",
-  "DarkSlateGray"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Dark Slate Grey is the web's `darkslategray`, a deep green-teal grey inherited from a 1980s Unix color list, and not, despite its name, a darker version of slate grey.",
- "sections": [
-  {
-   "id": "lineage",
-   "title": "From a Unix file to every browser",
-   "body": "The name comes from `rgb.txt`, the list of named colors that shipped with the X Window System, first with X10 Release 3 in June 1986 [1]. Who wrote the original list is not recorded [2]. The big expansion came with X11 Release 4 in January 1989, when Paul Raveling added colors based on Sinclair Paints samples and John C. Thomas added colors matched to a box of 72 Crayola crayons [1][2]. The older values had been tuned for DEC VT240 terminals; Raveling retuned his on an HP monitor [8]. Dark slate grey was already in the list that shipped before 1989, at exactly today's 47, 79, 79, while plain slate grey arrived only with the 1989 expansion, so the dark one is the older of the two [8].\n\nEarly web browsers borrowed the X11 list, and the W3C later wrote it into SVG and CSS, adding a *grey* spelling beside every *gray* [1][3]. That is why `darkslategray` and `darkslategrey` both work today, and both mean #2F4F4F, red 47, green 79, blue 79 [3]. Paterson's dictionary of color lists it simply as one of the X11 colors [4]."
+  "slug": "dark-slate-grey",
+  "name": "Dark Slate Grey",
+  "hex": "#2F4F4F",
+  "names": [
+    "Dark Slate Grey",
+    "DarkSlateGray"
+  ],
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Dark Slate Grey is the web's `darkslategray`, a deep green-teal grey inherited from a 1980s Unix color list, and not, despite its name, a darker version of slate grey.",
+  "sections": [
+    {
+      "id": "lineage",
+      "title": "From a Unix file to every browser",
+      "body": "The name comes from `rgb.txt`, the list of named colors that shipped with the X Window System, first with X10 Release 3 in June 1986 [1]. Who wrote the original list is not recorded [2]. The big expansion came with X11 Release 4 in January 1989, when Paul Raveling added colors based on Sinclair Paints samples and John C. Thomas added colors matched to a box of 72 Crayola crayons [1][2]. The older values had been tuned for DEC VT240 terminals; Raveling retuned his on an HP monitor [8]. Dark slate grey was already in the list that shipped before 1989, at exactly today's 47, 79, 79, while plain slate grey arrived only with the 1989 expansion, so the dark one is the older of the two [8].\n\nEarly web browsers borrowed the X11 list, and the W3C later wrote it into SVG and CSS, adding a *grey* spelling beside every *gray* [1][3]. That is why `darkslategray` and `darkslategrey` both work today, and both mean #2F4F4F, red 47, green 79, blue 79 [3]. Paterson's dictionary of color lists it simply as one of the X11 colors [4]."
+    },
+    {
+      "id": "odd",
+      "title": "Why it looks odd",
+      "body": "Its green and blue values are equal, so it leans toward teal, not blue [5]. Its supposed parent, `slategray` (#708090), is a lighter bluish grey, and the two sit about 23 units apart, with different hues [5]. The family names are a list of labels, not a system, and the web inherited worse: X11 *gray* was a light grey, while HTML's Gray was a mid grey, so in CSS `darkgray` is lighter than `gray` [1].\n\nIts nearest relatives in older systems are Ridgway's [[greenish-slate-black]], and two older names now filed under this very color, the ISCC-NBS [[dark-slate-grey|dusky dull bluish green]] and the Japanese [[omeshicha|Omeshicha]], all within three units [5]. Paterson defines slate grey simply as the color of grey slate, a dark grey [4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The phrase is older than computers: *dark slate grey* appears in Google Books from the 1840s [6]. In our archive of 23,531 paintings, a color within six units of it covers at least five per cent of the canvas in 210, about as often in shadows as in mid-tones [7]. It is most loved by the Post-Impressionists: seven of Gauguin's fifty paintings in the archive carry it and six of Cézanne's, around fifteen times the archive's rate, and it often shares a canvas with [[petrol]] [7]. These are photographs of varnished paintings, read as screen colors [7]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "slate (the stone); X11 rgb.txt color name",
+      "first_recorded": "as a web color: X11 rgb.txt (1980s); as a phrase: 1840s",
+      "source": "Wikipedia, X11 color names; Google Books Ngram"
+    },
+    "aka": [
+      "darkslategray",
+      "darkslategrey",
+      "DarkSlateGray"
+    ],
+    "siblings": [
+      "slate-grey",
+      "light-slate-grey"
+    ],
+    "parent": "slate-grey",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "slate",
+        "gloss": "Slate (#708090) is a lighter bluish grey; Dark Slate Grey is a dark teal-grey"
+      },
+      {
+        "slug": "dark-slate-blue",
+        "gloss": "Dark Slate Blue (#483D8B) is a violet blue"
+      }
+    ],
+    "other_languages": []
   },
-  {
-   "id": "odd",
-   "title": "Why it looks odd",
-   "body": "Its green and blue values are equal, so it leans toward teal, not blue [5]. Its supposed parent, `slategray` (#708090), is a lighter bluish grey, and the two sit about 23 units apart, with different hues [5]. The family names are a list of labels, not a system, and the web inherited worse: X11 *gray* was a light grey, while HTML's Gray was a mid grey, so in CSS `darkgray` is lighter than `gray` [1].\n\nIts nearest relatives in older systems are Ridgway's [[greenish-slate-black]], and two older names now filed under this very color, the ISCC-NBS [[dusky-dull-bluish-green|dusky dull bluish green]] and the Japanese [[omeshicha|Omeshicha]], all within three units [5]. Paterson defines slate grey simply as the color of grey slate, a dark grey [4]."
+  "field": {
+    "dataset": "ColorHub archive, 23,531 paintings, as photographed",
+    "match": {
+      "hex": "#2F4F4F",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 210,
+    "painters": [
+      {
+        "name": "Paul Gauguin",
+        "hits": 7,
+        "n": 50,
+        "lift": 15.7
+      },
+      {
+        "name": "Paul Cezanne",
+        "hits": 6,
+        "n": 50,
+        "lift": 13.5
+      }
+    ],
+    "company": [
+      {
+        "word": "Petrol",
+        "lift": 35.9
+      }
+    ],
+    "measured": {
+      "rgb": [
+        47,
+        79,
+        79
+      ],
+      "lch": [
+        31.3,
+        12.3,
+        198
+      ],
+      "de_to_slategray": 22.7,
+      "contrast_white": 8.93
+    }
   },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The phrase is older than computers: *dark slate grey* appears in Google Books from the 1840s [6]. In our archive of 23,531 paintings, a color within six units of it covers at least five per cent of the canvas in 210, about as often in shadows as in mid-tones [7]. It is most loved by the Post-Impressionists: seven of Gauguin's fifty paintings in the archive carry it and six of Cézanne's, around fifteen times the archive's rate, and it often shares a canvas with [[petrol]] [7]. These are photographs of varnished paintings, read as screen colors [7]."
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wikipedia, \"X11 color names\"",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/X11_color_names"
+    },
+    {
+      "n": 2,
+      "kind": "web",
+      "cite": "Alex Sexton, www-style mailing list, March 2014, on the history of X11 color names",
+      "loc_kind": null,
+      "url": "https://lists.w3.org/Archives/Public/www-style/2014Mar/0272.html"
+    },
+    {
+      "n": 3,
+      "kind": "web",
+      "cite": "W3C, CSS Color Module Level 3, section 4.3",
+      "loc_kind": null,
+      "url": "https://www.w3.org/TR/css-color-3/"
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"DarkSlateGray\" and \"slate grey\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    },
+    {
+      "n": 7,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "web",
+      "cite": "X.Org rgb package, others/README and old-rgb.txt (the pre-1989 database)",
+      "loc_kind": null,
+      "url": "https://gitlab.freedesktop.org/xorg/app/rgb/-/tree/master/others"
+    }
+  ],
+  "questions": [
+    {
+      "q": "Where does the web color name darkslategray come from?",
+      "choices": [
+        "The X Window System's rgb.txt list",
+        "A Victorian paint catalogue",
+        "The Pantone guide",
+        "A geology textbook"
+      ],
+      "answer": "The X Window System's rgb.txt list",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Dark Slate Grey is just a darker version of Slate Grey.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "In CSS, darkgray is lighter than gray. Dark Slate Grey has its own family quirks.",
+    "Some web color names were matched to a box of 72 crayons."
+  ],
+  "words": 424,
+  "status": "pilot",
+  "checked": {
+    "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
+    "date": "2026-10-08",
+    "issues": [
+      "X11 history from Wikipedia and a W3C list post; who added darkslategray is unknown and not claimed."
+    ]
   }
- ],
- "aside": {
-  "origin": {
-   "named_after": "slate (the stone); X11 rgb.txt color name",
-   "first_recorded": "as a web color: X11 rgb.txt (1980s); as a phrase: 1840s",
-   "source": "Wikipedia, X11 color names; Google Books Ngram"
-  },
-  "aka": [
-   "darkslategray",
-   "darkslategrey",
-   "DarkSlateGray"
-  ],
-  "siblings": [
-   "slate-grey",
-   "light-slate-grey"
-  ],
-  "parent": "slate-grey",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "slate",
-    "gloss": "Slate (#708090) is a lighter bluish grey; Dark Slate Grey is a dark teal-grey"
-   },
-   {
-    "slug": "dark-slate-blue",
-    "gloss": "Dark Slate Blue (#483D8B) is a violet blue"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,531 paintings, as photographed",
-  "match": {
-   "hex": "#2F4F4F",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 210,
-  "painters": [
-   {
-    "name": "Paul Gauguin",
-    "hits": 7,
-    "n": 50,
-    "lift": 15.7
-   },
-   {
-    "name": "Paul Cezanne",
-    "hits": 6,
-    "n": 50,
-    "lift": 13.5
-   }
-  ],
-  "company": [
-   {
-    "word": "Petrol",
-    "lift": 35.9
-   }
-  ],
-  "measured": {
-   "rgb": [
-    47,
-    79,
-    79
-   ],
-   "lch": [
-    31.3,
-    12.3,
-    198
-   ],
-   "de_to_slategray": 22.7,
-   "contrast_white": 8.93
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "Wikipedia, \"X11 color names\"",
-   "loc_kind": null,
-   "url": "https://en.wikipedia.org/wiki/X11_color_names"
-  },
-  {
-   "n": 2,
-   "kind": "web",
-   "cite": "Alex Sexton, www-style mailing list, March 2014, on the history of X11 color names",
-   "loc_kind": null,
-   "url": "https://lists.w3.org/Archives/Public/www-style/2014Mar/0272.html"
-  },
-  {
-   "n": 3,
-   "kind": "web",
-   "cite": "W3C, CSS Color Module Level 3, section 4.3",
-   "loc_kind": null,
-   "url": "https://www.w3.org/TR/css-color-3/"
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"DarkSlateGray\" and \"slate grey\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  },
-  {
-   "n": 7,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,531 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "web",
-   "cite": "X.Org rgb package, others/README and old-rgb.txt (the pre-1989 database)",
-   "loc_kind": null,
-   "url": "https://gitlab.freedesktop.org/xorg/app/rgb/-/tree/master/others"
-  }
- ],
- "questions": [
-  {
-   "q": "Where does the web color name darkslategray come from?",
-   "choices": [
-    "The X Window System's rgb.txt list",
-    "A Victorian paint catalogue",
-    "The Pantone guide",
-    "A geology textbook"
-   ],
-   "answer": "The X Window System's rgb.txt list",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Dark Slate Grey is just a darker version of Slate Grey.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "In CSS, darkgray is lighter than gray. Dark Slate Grey has its own family quirks.",
-  "Some web color names were matched to a box of 72 crayons."
- ],
- "words": 424,
- "status": "pilot",
- "checked": {
-  "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",
-  "date": "2026-10-08",
-  "issues": [
-   "X11 history from Wikipedia and a W3C list post; who added darkslategray is unknown and not claimed."
-  ]
- }
 }

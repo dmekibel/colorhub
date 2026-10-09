@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "From a printing term to a swatch",
-   "body": "\"Rich black\" is a printing term for an ink mixture of solid black over one or more of the other CMYK inks, giving a darker result than black ink alone [1]. FOGRA, a German printing-research body, publishes registered characterization data sets that describe how ink behaves on specific papers under ISO offset-printing conditions; FOGRA29 (also called OFCOM 4, Altona) describes uncoated white paper at 120 grams per square meter [2]. This swatch is a flat screen approximation of that printing condition, not a measured ink sample [1][2].\n\nIts closest sibling in the library is [[rich-black-fogra39]], the equivalent standard for coated paper, and both sit near plain [[black]] on screen [1].\n\nIt also sits close to the generic near-blacks [[near-black]] and [[almost-black]], both read as almost the same color [1]."
+   "body": "\"Rich black\" is a printing term for an ink mixture of solid black over one or more of the other CMYK inks, giving a darker result than black ink alone [1]. FOGRA, a German printing-research body, publishes registered characterization data sets that describe how ink behaves on specific papers under ISO offset-printing conditions; FOGRA29 (also called OFCOM 4, Altona) describes uncoated white paper at 120 grams per square meter [2]. This swatch is a flat screen approximation of that printing condition, not a measured ink sample [1][2].\n\nIts closest sibling in the library is [[rich-black-fogra39]], the equivalent standard for coated paper, and both sit near plain [[black]] on screen [1].\n\nIt also sits close to the generic near-blacks [[near-black]] and [[rich-black-fogra39]], both read as almost the same color [1]."
   },
   {
    "id": "field",
@@ -99,7 +99,7 @@
  "openers": [
   "Rich Black (FOGRA29) is a printing standard, not a traditional pigment name."
  ],
- "words": 218,
+ "words": 219,
  "status": "checked",
  "checked": {
   "by": "batch-29",

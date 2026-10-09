@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "An 1789 name on plate 15",
-   "body": "Maerz and Paul's 1930 *A Dictionary of Color* lists Drabolve on plate 15, swatch J5, and dates its first recorded use to 1789 [1]. That is one of the older dates on its plate, and the book does not explain what the name describes [1]. The National Bureau of Standards' 1955 circular, which cross-indexes the dictionary, places it inside the block it calls moderate olive, with a measured Munsell notation of 6.5Y 4.0/5.8 [2]. The nearest named colors on file are [[greenish-brown]], [[antique-bronze]], [[mud]] and [[metallic-green]], at 2.7, 3, 3.1 and 3.5 ΔE [2]. Drabolve sits further toward brown and further from green than plain olive, and [[brown]] on the same dull-yellow axis [2]."
+   "body": "Maerz and Paul's 1930 *A Dictionary of Color* lists Drabolve on plate 15, swatch J5, and dates its first recorded use to 1789 [1]. That is one of the older dates on its plate, and the book does not explain what the name describes [1]. The National Bureau of Standards' 1955 circular, which cross-indexes the dictionary, places it inside the block it calls moderate olive, with a measured Munsell notation of 6.5Y 4.0/5.8 [2]. The nearest named colors on file are [[drabolve]], [[antique-bronze]], [[mud]] and [[metallic-green]], at 2.7, 3, 3.1 and 3.5 ΔE [2]. Drabolve sits further toward brown and further from green than plain olive, and [[brown]] on the same dull-yellow axis [2]."
   },
   {
    "id": "field",
@@ -116,7 +116,7 @@
  "openers": [
   "Drabolve peaks in 1830s paintings, where it covers at least five percent of the canvas more than twice as often as the archive average."
  ],
- "words": 246,
+ "words": 245,
  "status": "checked",
  "checked": {
   "by": "writer",

@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A modifier on a mineral's name",
-   "body": "Pale Chalcedony Yellow puts the modifier word pale in front of the base color [[chalcedony-yellow]], in the compound-modifier grammar our library uses for names like this one [1]. The base name points to chalcedony, a waxy quartz that can show pale, honeyed bands, though our data does not go further into which specific stone or supplier set the standard swatch [1]. Robert Ridgway first listed it in his 1912 *Color Standards and Color Nomenclature*, plate XVII, hue 25, tone f, and the Inter-Society Color Council later filed it in the ISCC-NBS 1955 system as block 104 (R) [1].\n\nIts nearest named neighbor is [[pale-goldenrod]], only 2.5 units off, close enough on screen to read as the same pale yellow [2]; [[lemon-meringue]] and [[seafoam-green]] both sit 3.0 units away [2]."
+   "body": "Pale Chalcedony Yellow puts the modifier word pale in front of the base color [[chalcedony-yellow]], in the compound-modifier grammar our library uses for names like this one [1]. The base name points to chalcedony, a waxy quartz that can show pale, honeyed bands, though our data does not go further into which specific stone or supplier set the standard swatch [1]. Robert Ridgway first listed it in his 1912 *Color Standards and Color Nomenclature*, plate XVII, hue 25, tone f, and the Inter-Society Color Council later filed it in the ISCC-NBS 1955 system as block 104 (R) [1].\n\nIts nearest named neighbor is [[pale-goldenrod]], only 2.5 units off, close enough on screen to read as the same pale yellow [2]; [[lemon-meringue]] and [[seafoam]] both sit 3.0 units away [2]."
   },
   {
    "id": "field",
@@ -109,7 +109,7 @@
  "openers": [
   "Pale Chalcedony Yellow turns up in a John Singer Sargent painting nearly three times more often than chance."
  ],
- "words": 303,
+ "words": 302,
  "status": "checked",
  "checked": {
   "by": "checker",

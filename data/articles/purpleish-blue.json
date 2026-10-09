@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A compound crowd name",
-   "body": "The name follows the survey's modifier grammar: purpleish plus a base color word, here blue [1]. It carries no older record; the xkcd survey of 2010 is the only source on file [1]. The ISCC-NBS system would class it a strong purplish blue, though the fit is loose, 11.8 units off [1].\n\nIts nearest named neighbor is [[bluish-purple]], just 2.4 units away and almost the same color [2]. [[burple]] sits a little further off, and the survey's own near-duplicate, [[purplish-blue]], is 4.9 units away and more vivid still [2]."
+   "body": "The name follows the survey's modifier grammar: purpleish plus a base color word, here blue [1]. It carries no older record; the xkcd survey of 2010 is the only source on file [1]. The ISCC-NBS system would class it a strong purplish blue, though the fit is loose, 11.8 units off [1].\n\nIts nearest named neighbor is [[bluish-purple]], just 2.4 units away and almost the same color [2]. [[blurple]] sits a little further off, and the survey's own near-duplicate, [[blurple]], is 4.9 units away and more vivid still [2]."
   },
   {
    "id": "field",
@@ -104,7 +104,7 @@
  "openers": [
   "Purpleish Blue is too saturated for any painting in our archive to match."
  ],
- "words": 157,
+ "words": 156,
  "status": "checked",
  "checked": {
   "by": "writer",

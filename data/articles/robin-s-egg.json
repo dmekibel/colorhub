@@ -1,121 +1,121 @@
 {
- "slug": "robin-s-egg",
- "name": "Robin's Egg",
- "hex": "#6DEDFD",
- "names": [
-  "Robin's Egg"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Robin's Egg is a bright, saturated cyan named for the bird's shell, recorded by the ISCC-NBS system in 1955 and absent from our painting archive entirely.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A bird's-egg blue, too bright for paint",
-   "body": "The ISCC-NBS system of 1955 files this hue as block 186, a grayish blue, and the crowd-sourced xkcd color survey of 2010 records a close match under its own name [1]. The name points to the pale, saturated blue of a robin's eggshell, though our sources give no earlier printed record than the 1955 entry [1]. At chroma 36, it is one of the most saturated colors, well past what most historical paint pigments could reach [2].\n\nThe nearest named color is [[robin-s-egg-blue|Robin's Egg Blue]], a paler variant 4.0 units away [2]. [[sky-blue-crayola|Sky Blue (Crayola)]] sits 5.6 units off, [[bright-light-blue|Bright Light Blue]] is 5.9 units away, and [[aqua-blue|Aqua Blue]] is 6.1 units off [2]. In LCH terms Robin's Egg measures lightness 87, chroma 36, hue 211 degrees [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive carries Robin's Egg covering at least one percent of its canvas, as photographed [3]. That describes this archive's photographs of aged, varnished paintings, not painting as a whole: a color this bright and saturated rarely survives in old pigments or in centuries of varnish darkening [3]. It is best looked for in modern design and screens, where it is named for, rather than historical paintings [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the eggshell of the American robin",
-   "first_recorded": "1955, per the ISCC-NBS system",
-   "source": "ColorHub color library, ISCC-NBS 1955 block 186 and xkcd 2010"
-  },
-  "aka": [],
-  "siblings": [
-   "robin-s-egg-blue",
-   "sky-blue-crayola",
-   "bright-light-blue",
-   "aqua-blue"
+  "slug": "robin-s-egg",
+  "name": "Robin's Egg",
+  "hex": "#6DEDFD",
+  "names": [
+    "Robin's Egg"
   ],
-  "parent": null,
-  "children": [
-   "robin-s-egg-blue"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Robin's Egg is a bright, saturated cyan named for the bird's shell, recorded by the ISCC-NBS system in 1955 and absent from our painting archive entirely.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A bird's-egg blue, too bright for paint",
+      "body": "The ISCC-NBS system of 1955 files this hue as block 186, a grayish blue, and the crowd-sourced xkcd color survey of 2010 records a close match under its own name [1]. The name points to the pale, saturated blue of a robin's eggshell, though our sources give no earlier printed record than the 1955 entry [1]. At chroma 36, it is one of the most saturated colors, well past what most historical paint pigments could reach [2].\n\nThe nearest named color is [[robin-s-egg-blue|Robin's Egg Blue]], a paler variant 4.0 units away [2]. [[sky-blue-crayola|Sky Blue (Crayola)]] sits 5.6 units off, [[aqua|Bright Light Blue]] is 5.9 units away, and [[aqua-blue|Aqua Blue]] is 6.1 units off [2]. In LCH terms Robin's Egg measures lightness 87, chroma 36, hue 211 degrees [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive carries Robin's Egg covering at least one percent of its canvas, as photographed [3]. That describes this archive's photographs of aged, varnished paintings, not painting as a whole: a color this bright and saturated rarely survives in old pigments or in centuries of varnish darkening [3]. It is best looked for in modern design and screens, where it is named for, rather than historical paintings [3]."
+    }
   ],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    87,
-    36,
-    211
-   ],
-   "nearest": [
-    [
-     "Robin's Egg Blue",
-     4.0
+  "aside": {
+    "origin": {
+      "named_after": "the eggshell of the American robin",
+      "first_recorded": "1955, per the ISCC-NBS system",
+      "source": "ColorHub color library, ISCC-NBS 1955 block 186 and xkcd 2010"
+    },
+    "aka": [],
+    "siblings": [
+      "robin-s-egg-blue",
+      "sky-blue-crayola",
+      "bright-light-blue",
+      "aqua-blue"
     ],
-    [
-     "Sky Blue (Crayola)",
-     5.6
+    "parent": null,
+    "children": [
+      "robin-s-egg-blue"
+    ],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        87,
+        36,
+        211
+      ],
+      "nearest": [
+        [
+          "Robin's Egg Blue",
+          4.0
+        ],
+        [
+          "Sky Blue (Crayola)",
+          5.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955 block 186, xkcd color survey 2010",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: computed LCH and look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What gives Robin's Egg its name?",
+      "choices": [
+        "A bird's eggshell",
+        "A gemstone",
+        "A flower",
+        "A dye plant"
+      ],
+      "answer": "A bird's eggshell",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Robin's Egg is common in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Robin's Egg is so bright and saturated that no painting in our archive carries it."
+  ],
+  "words": 222,
+  "status": "draft",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955 block 186, xkcd color survey 2010",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: computed LCH and look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What gives Robin's Egg its name?",
-   "choices": [
-    "A bird's eggshell",
-    "A gemstone",
-    "A flower",
-    "A dye plant"
-   ],
-   "answer": "A bird's eggshell",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Robin's Egg is common in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Robin's Egg is so bright and saturated that no painting in our archive carries it."
- ],
- "words": 222,
- "status": "draft",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

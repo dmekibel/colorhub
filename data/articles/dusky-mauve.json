@@ -8,7 +8,7 @@
  ],
  "tier": "standard",
  "depth": "short",
- "lede": "Livid Purple is a dusky, muted purple from Ridgway's 1912 atlas, one of the rarest colors in our painting archive, though a matching hue turns up in a Bronzino portrait painted 367 years before the name existed.",
+ "lede": "Dusky mauve is a dusky, muted purple from Ridgway's 1912 atlas, where it was named Livid Purple, one of the rarest colors in our painting archive, though a matching hue turns up in a Bronzino portrait painted 367 years before the name existed.",
  "sections": [
   {
    "id": "name",
@@ -83,7 +83,7 @@
  ],
  "questions": [
   {
-   "q": "By how many units did Ridgway's 1912 reading and the 1955 ISCC-NBS block differ for Livid Purple?",
+   "q": "By how many units did Ridgway's 1912 reading and the 1955 ISCC-NBS block differ for Dusky mauve?",
    "choices": [
     "1.6",
     "4.8",
@@ -94,7 +94,7 @@
    "kind": "pick"
   },
   {
-   "q": "True or false: a hue matching Livid Purple appears in our archive earlier than the name itself was recorded.",
+   "q": "True or false: a hue matching Dusky mauve appears in our archive earlier than the name itself was recorded.",
    "choices": [
     "True",
     "False"
@@ -104,10 +104,10 @@
   }
  ],
  "openers": [
-  "A 1545 Bronzino portrait carries a hue matching Livid Purple, 367 years before the name was ever recorded.",
-  "Livid Purple is one of the rarest colors in our archive, matched in only 15 of 23,781 paintings."
+  "A 1545 Bronzino portrait carries a hue matching Dusky mauve (Livid Purple), 367 years before the name was ever recorded.",
+  "Dusky mauve (Livid Purple) is one of the rarest colors in our archive, matched in only 15 of 23,781 paintings."
  ],
- "words": 303,
+ "words": 309,
  "status": "checked",
  "checked": {
   "by": "checker",

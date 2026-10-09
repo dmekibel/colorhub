@@ -11,7 +11,7 @@
   {
    "id": "name",
    "title": "Ridgway to RAL",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* gives this hue on plate XVIII, hue 31 minutes, tone k [1]. Maerz and Paul's 1930 dictionary lists the same color, first recorded in 1905, and the ISCC-NBS 1955 report files it as a dark yellowish green [2][3]. The name likely points to *civet*, the small carnivore whose coat runs toward this muted olive-green, though none of the sources we checked states this directly, so the link is undocumented here [2].\n\nThe modern industrial palette RAL lists a near-duplicate, RAL 6011, about 2 units away [4]. The nearest named colors on file are [[hay-s-green]], [[slate-green]], [[american-green]] and [[dark-sage]], at 2.9, 4.1, 4.2 and 4.6 ΔE [5]."
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* gives this hue on plate XVIII, hue 31 minutes, tone k [1]. Maerz and Paul's 1930 dictionary lists the same color, first recorded in 1905, and the ISCC-NBS 1955 report files it as a dark yellowish green [2][3]. The name likely points to *civet*, the small carnivore whose coat runs toward this muted olive-green, though none of the sources we checked states this directly, so the link is undocumented here [2].\n\nThe modern industrial palette RAL lists a near-duplicate, RAL 6011, about 2 units away [4]. The nearest named colors on file are [[hay-s-green]], [[slate-green]], [[american-green]] and [[hay-s-green]], at 2.9, 4.1, 4.2 and 4.6 ΔE [5]."
   },
   {
    "id": "field",
@@ -152,5 +152,5 @@
   ]
  },
  "slug": "civette-green",
- "words": 215
+ "words": 216
 }

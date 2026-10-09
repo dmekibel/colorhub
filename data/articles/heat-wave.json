@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A name with no recorded origin",
-   "body": "Our sources record the name only on Wikipedia's lists of colors, and ISCC-NBS would call the swatch vivid orange [1]. None of the books read mention it as a color, so who named it, and when, is undocumented [1]. One book does mention a heatwave, but only as a danger to cochineal insects, which die in frost or sustained heat, and that has nothing to do with this orange [2].\n\nIts plain-word relatives are [[orange]], [[safety-orange]] and [[tangerine]] [1]."
+   "body": "Our sources record the name only on Wikipedia's lists of colors, and ISCC-NBS would call the swatch vivid orange [1]. None of the books read mention it as a color, so who named it, and when, is undocumented [1]. One book does mention a heatwave, but only as a danger to cochineal insects, which die in frost or sustained heat, and that has nothing to do with this orange [2].\n\nIts plain-word relatives are [[orange]], [[pumpkin]] and [[tangerine]] [1]."
   },
   {
    "id": "field",
@@ -98,5 +98,5 @@
   "issues": []
  },
  "status": "checked",
- "words": 181
+ "words": 180
 }

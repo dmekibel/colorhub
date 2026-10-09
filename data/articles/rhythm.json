@@ -1,165 +1,165 @@
 {
- "slug": "rhythm",
- "name": "Rhythm",
- "hex": "#777696",
- "names": [
-  "Rhythm"
- ],
- "tier": "commercial",
- "depth": "short",
- "lede": "Rhythm is a muted slate purple whose name has no documented origin; the color books mention rhythm only as a quality of color, never as a color.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name the books never use",
-   "body": "*Rhythm* is a muted purple-grey, a slate with a little violet in it [9]. It comes from the Wikipedia list of color names, and its origin is undocumented in our data; the library marks it as an obscure or novelty name [9]. Our Japanese pairing for it, Benimidori, is only a nearest match, and has no connection to the English word [9].\n\nNone of the 29 color books uses it as a color name [8]. Every one of its 48 appearances in our search is the ordinary noun [8]."
-  },
-  {
-   "id": "books",
-   "title": "Rhythm in writing about color",
-   "body": "The noun does turn up in color writing, as a way of saying that colors move. Gage describes how Mondrian, in the 1920s, came to see rhythm as the unifying feature of life and art, drawing on jazz and the fox-trot [3]. Albers calls the changes of tempo or rhythm among his four-color studies a change of mood [4]. Pastoureau says Rothko plays with the rhythms of color to produce sonorous effects, so that several canvases hung together form a chromatic symphony [5].\n\nOlder writers made the music link too: in late antiquity Aristides argued that music reached body and soul through rhythms imitating bodily rhythms, which painting could not do [3]. The swatch's cool slate leaning to violet sits near [[slate]], [[purple-grey]] and [[lilac-grey]] in the library [9]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "As a painted color it is uncommon but not absent. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 48 works, about 0.2 per cent [10]. The best match is Krøyer's [[painting:smk-KMS8273|Skagen Beach in Moonlight]] of 1899, at 46 per cent of the canvas [10]. The 1900s are its peak decade, with 10 of 809 paintings, and [[painter:claude-monet|Monet]] and [[painter:edvard-munch|Munch]] each carry it in 3 of 50 works [10]. As always these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [10]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "origin undocumented",
-   "first_recorded": "undocumented (Wikipedia color list)",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "slate",
-   "purple-grey",
-   "lilac-grey",
-   "slate-grey"
+  "slug": "rhythm",
+  "name": "Rhythm",
+  "hex": "#777696",
+  "names": [
+    "Rhythm"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Benimidori (紅碧), nearest Japanese pairing"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#777696",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 48,
-  "top_paintings": [
-   "smk-KMS8273",
-   "smk-KMS4435",
-   "nga-63055"
+  "tier": "commercial",
+  "depth": "short",
+  "lede": "Rhythm is a muted slate purple whose name has no documented origin; the color books mention rhythm only as a quality of color, never as a color.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name the books never use",
+      "body": "*Rhythm* is a muted purple-grey, a slate with a little violet in it [9]. It comes from the Wikipedia list of color names, and its origin is undocumented in our data; the library marks it as an obscure or novelty name [9]. Our Japanese pairing for it, Benimidori, is only a nearest match, and has no connection to the English word [9].\n\nNone of the 29 color books uses it as a color name [8]. Every one of its 48 appearances in our search is the ordinary noun [8]."
+    },
+    {
+      "id": "books",
+      "title": "Rhythm in writing about color",
+      "body": "The noun does turn up in color writing, as a way of saying that colors move. Gage describes how Mondrian, in the 1920s, came to see rhythm as the unifying feature of life and art, drawing on jazz and the fox-trot [3]. Albers calls the changes of tempo or rhythm among his four-color studies a change of mood [4]. Pastoureau says Rothko plays with the rhythms of color to produce sonorous effects, so that several canvases hung together form a chromatic symphony [5].\n\nOlder writers made the music link too: in late antiquity Aristides argued that music reached body and soul through rhythms imitating bodily rhythms, which painting could not do [3]. The swatch's cool slate leaning to violet sits near [[slate]], [[grey-purple]] and [[lilac-grey]] in the library [9]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "As a painted color it is uncommon but not absent. In our archive of 23,781 paintings, a color within six units of this swatch covers at least five per cent of the canvas in 48 works, about 0.2 per cent [10]. The best match is Krøyer's [[painting:smk-KMS8273|Skagen Beach in Moonlight]] of 1899, at 46 per cent of the canvas [10]. The 1900s are its peak decade, with 10 of 809 paintings, and [[painter:claude-monet|Monet]] and [[painter:edvard-munch|Munch]] each carry it in 3 of 50 works [10]. As always these are photographs of aged, varnished paintings, so a match is a screen color, not a pigment test [10]."
+    }
   ],
-  "company": [
-   "Slate",
-   "Grey",
-   "Silver"
-  ],
-  "measured": {
-   "lch": [
-    51,
-    19,
-    294
-   ],
-   "nearest": [
-    [
-     "Slate",
-     11.5
+  "aside": {
+    "origin": {
+      "named_after": "origin undocumented",
+      "first_recorded": "undocumented (Wikipedia color list)",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "slate",
+      "purple-grey",
+      "lilac-grey",
+      "slate-grey"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Benimidori (紅碧), nearest Japanese pairing"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#777696",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 48,
+    "top_paintings": [
+      "smk-KMS8273",
+      "smk-KMS4435",
+      "nga-63055"
+    ],
+    "company": [
+      "Slate",
+      "Grey",
+      "Silver"
+    ],
+    "measured": {
+      "lch": [
+        51,
+        19,
+        294
+      ],
+      "nearest": [
+        [
+          "Slate",
+          11.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, pp. 231, 247",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Albers, Interaction of Color, p. 59",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 38",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "data",
+      "cite": "Concordance of the 29 books: 48 hits for 'rhythm'/'rhythms', all the common noun",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "data",
+      "cite": "ColorHub library: Rhythm #777696 (Wikipedia list; Japanese pairing Benimidori) and nearest names",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5% of the canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which of these is true of the name Rhythm in the color books?",
+      "choices": [
+        "No book uses it as a color name",
+        "Gage traces it to Mondrian",
+        "Albers defined it as slate violet",
+        "Pastoureau dates it to the 1800s"
+      ],
+      "answer": "No book uses it as a color name",
+      "kind": "pick"
+    },
+    {
+      "q": "Which painter does Pastoureau say plays with the rhythms of color?",
+      "choices": [
+        "Mark Rothko",
+        "Claude Monet",
+        "Edvard Munch",
+        "Piet Mondrian"
+      ],
+      "answer": "Mark Rothko",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Rhythm is a color name no book explains; the books use the word only for how colors move."
+  ],
+  "words": 340,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Concordance hits are all the common noun, not a color",
+      "Origin of the name undocumented",
+      "Krøyer painter link omitted (not in meta)"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, pp. 231, 247",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Albers, Interaction of Color, p. 59",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 38",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "data",
-   "cite": "Concordance of the 29 books: 48 hits for 'rhythm'/'rhythms', all the common noun",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "data",
-   "cite": "ColorHub library: Rhythm #777696 (Wikipedia list; Japanese pairing Benimidori) and nearest names",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (match within CIEDE2000 6, at least 5% of the canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which of these is true of the name Rhythm in the color books?",
-   "choices": [
-    "No book uses it as a color name",
-    "Gage traces it to Mondrian",
-    "Albers defined it as slate violet",
-    "Pastoureau dates it to the 1800s"
-   ],
-   "answer": "No book uses it as a color name",
-   "kind": "pick"
-  },
-  {
-   "q": "Which painter does Pastoureau say plays with the rhythms of color?",
-   "choices": [
-    "Mark Rothko",
-    "Claude Monet",
-    "Edvard Munch",
-    "Piet Mondrian"
-   ],
-   "answer": "Mark Rothko",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Rhythm is a color name no book explains; the books use the word only for how colors move."
- ],
- "words": 340,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Concordance hits are all the common noun, not a color",
-   "Origin of the name undocumented",
-   "Krøyer painter link omitted (not in meta)"
-  ]
- }
 }

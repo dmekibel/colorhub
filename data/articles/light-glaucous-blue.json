@@ -1,137 +1,137 @@
 {
- "slug": "light-glaucous-blue",
- "name": "Light Glaucous-Blue",
- "hex": "#A2BDBD",
- "names": [
-  "Light Glaucous-Blue"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Light Glaucous-Blue is a pale, dusty blue-grey from Ridgway's 1912 atlas; our library computes its nearest 1955 ISCC-NBS block, but the 1955 dictionary itself does not list this exact name.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A Ridgway tone, not refiled in 1955",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate XXXIV, hue 43″″, tone d [1]. Unlike its sibling [[light-dull-glaucous-blue]], the exact name \"Light Glaucous-Blue\" does not appear in the 1955 ISCC-NBS dictionary; our library's computed nearest block there is 154, \"light greenish gray\", a calculated match rather than a historical filing [2]. The name builds \"light\" onto [[glaucous-blue]], after the dusty, waxy bloom called glaucous [1].\n\nIn our color library its closest neighbor is, again, its own sibling [[light-dull-glaucous-blue]], about 3.3 units away, close enough that the two could pass for the same color [3]. [[opal]] sits 3.5 units off and greener, and [[pale-sea-grey]] and Pale Dull Glaucous-Blue both 4.4 units off and lighter [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings matches this tone in 274 of them, about 1.15 percent, as photographed, more common than 69 percent of the named colors we track [4]. It peaks in the 1800s, present in 98 of the 8,345 paintings from that century, 1.4 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays a light, in 53 percent of its 186 clearly-ranked appearances [4]. Alfred Sisley favors it most, in 4 of his 50 works here, 4.3 times his museums' baseline rate, and it shares canvases with Pale Olive Grey more than chance, a lift of 5.4 [4]. The earliest dated match is 1433, in a painting by Robert Campin, 479 years before the name's first 1912 record, so this is a look-alike hue in an old photograph, not proof of the name's age [4]. The archive's early centuries are thin, so this is a floor, not a first."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the modifier \"light\" plus [[glaucous-blue]]",
-   "first_recorded": "1912 (Ridgway, plate XXXIV); not refiled by this exact name in the 1955 ISCC-NBS dictionary",
-   "source": "Ridgway, Color Standards and Color Nomenclature"
-  },
-  "aka": [],
-  "siblings": [
-   "light-dull-glaucous-blue",
-   "opal",
-   "pale-sea-grey"
+  "slug": "light-glaucous-blue",
+  "name": "Light Glaucous-Blue",
+  "hex": "#A2BDBD",
+  "names": [
+    "Light Glaucous-Blue"
   ],
-  "parent": "glaucous-blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 274,
-  "painters": [
-   {
-    "name": "Alfred Sisley",
-    "hits": 4,
-    "n": 50,
-    "lift": 4.3
-   }
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Light Glaucous-Blue is a pale, dusty blue-grey from Ridgway's 1912 atlas; our library computes its nearest 1955 ISCC-NBS block, but the 1955 dictionary itself does not list this exact name.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A Ridgway tone, not refiled in 1955",
+      "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate XXXIV, hue 43″″, tone d [1]. Unlike its sibling [[light-dull-glaucous-blue]], the exact name \"Light Glaucous-Blue\" does not appear in the 1955 ISCC-NBS dictionary; our library's computed nearest block there is 154, \"light greenish gray\", a calculated match rather than a historical filing [2]. The name builds \"light\" onto [[grey-teal]], after the dusty, waxy bloom called glaucous [1].\n\nIn our color library its closest neighbor is, again, its own sibling [[light-dull-glaucous-blue]], about 3.3 units away, close enough that the two could pass for the same color [3]. [[opal]] sits 3.5 units off and greener, and [[pale-sea-grey]] and Pale Dull Glaucous-Blue both 4.4 units off and lighter [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings matches this tone in 274 of them, about 1.15 percent, as photographed, more common than 69 percent of the named colors we track [4]. It peaks in the 1800s, present in 98 of the 8,345 paintings from that century, 1.4 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays a light, in 53 percent of its 186 clearly-ranked appearances [4]. Alfred Sisley favors it most, in 4 of his 50 works here, 4.3 times his museums' baseline rate, and it shares canvases with Pale Olive Grey more than chance, a lift of 5.4 [4]. The earliest dated match is 1433, in a painting by Robert Campin, 479 years before the name's first 1912 record, so this is a look-alike hue in an old photograph, not proof of the name's age [4]. The archive's early centuries are thin, so this is a floor, not a first."
+    }
   ],
-  "measured": {
-   "lch": [
-    74.7,
-    9.6,
-    198.7
-   ],
-   "nearest": [
-    [
-     "Light Dull Glaucous-Blue",
-     3.3
+  "aside": {
+    "origin": {
+      "named_after": "the modifier \"light\" plus [[grey-teal]]",
+      "first_recorded": "1912 (Ridgway, plate XXXIV); not refiled by this exact name in the 1955 ISCC-NBS dictionary",
+      "source": "Ridgway, Color Standards and Color Nomenclature"
+    },
+    "aka": [],
+    "siblings": [
+      "light-dull-glaucous-blue",
+      "opal",
+      "pale-sea-grey"
     ],
-    [
-     "Opal",
-     3.5
+    "parent": "glaucous-blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 274,
+    "painters": [
+      {
+        "name": "Alfred Sisley",
+        "hits": 4,
+        "n": 50,
+        "lift": 4.3
+      }
     ],
-    [
-     "Pale Sea Grey",
-     4.4
+    "measured": {
+      "lch": [
+        74.7,
+        9.6,
+        198.7
+      ],
+      "nearest": [
+        [
+          "Light Dull Glaucous-Blue",
+          3.3
+        ],
+        [
+          "Opal",
+          3.5
+        ],
+        [
+          "Pale Sea Grey",
+          4.4
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIV, hue 43″″, tone d",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: computed nearest 1955 ISCC-NBS block (data/graph/nodes-l.json \"iscc\" field); cross-checked against data/sources/iscc-nbs-names.json, which has no entry for this exact name",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "True or false: the 1955 ISCC-NBS dictionary lists \"Light Glaucous-Blue\" under this exact name.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which painter uses Light Glaucous-Blue most, relative to his museums' baseline?",
+      "choices": [
+        "Alfred Sisley",
+        "Claude Monet",
+        "Edgar Degas",
+        "Camille Pissarro"
+      ],
+      "answer": "Alfred Sisley",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Light Glaucous-Blue and its sibling Light Dull Glaucous-Blue sit close enough on screen to pass for each other."
+  ],
+  "words": 314,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09: no genuine 1955 ISCC-NBS filing found for exact name; computed-nearest-block distinction made explicit"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XXXIV, hue 43″″, tone d",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: computed nearest 1955 ISCC-NBS block (data/graph/nodes-l.json \"iscc\" field); cross-checked against data/sources/iscc-nbs-names.json, which has no entry for this exact name",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "True or false: the 1955 ISCC-NBS dictionary lists \"Light Glaucous-Blue\" under this exact name.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which painter uses Light Glaucous-Blue most, relative to his museums' baseline?",
-   "choices": [
-    "Alfred Sisley",
-    "Claude Monet",
-    "Edgar Degas",
-    "Camille Pissarro"
-   ],
-   "answer": "Alfred Sisley",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Light Glaucous-Blue and its sibling Light Dull Glaucous-Blue sit close enough on screen to pass for each other."
- ],
- "words": 314,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09: no genuine 1955 ISCC-NBS filing found for exact name; computed-nearest-block distinction made explicit"
-  ]
- }
 }

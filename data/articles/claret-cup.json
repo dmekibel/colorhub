@@ -1,130 +1,130 @@
 {
-  "name": "Claret Cup",
-  "hex": "#81566B",
-  "names": [
-    "Claret Cup"
+ "name": "Claret Cup",
+ "hex": "#81566B",
+ "names": [
+  "Claret Cup"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Claret Cup is a greyish reddish purple from Maerz and Paul's 1930 dictionary, close in our library to plum.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1916 plate name",
+   "body": "Maerz and Paul's *A Dictionary of Color* places Claret Cup on plate 6, cell B4, first recorded in 1916 [1]. The ISCC-NBS system files the hue as a greyish reddish purple [2]. The name points toward claret wine, served in a cup, but the dictionary does not confirm that reading, so the exact origin is undocumented here [1].\n\nThe nearest named colors on file are [[corinthian-purple]], [[dusky-mauve]], [[dusky-mauve]] and [[dull-dark-purple]], at 4.3, 4.6, 4.6 and 4.9 ΔE [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "ColorHub's archive finds this color in 14 of 23,781 paintings, as photographed, a rare match [4]. The strongest hits are early-1900s work, including Paul Gauguin's 1903 *The Invocation* and a 1921 Bonnard interior [4]. India's paintings carry it more than any other country in the archive at this threshold [4]. As always, the count is a computed match on photographed, varnished canvases, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented (likely claret wine)",
+   "first_recorded": "1916, Maerz & Paul 1930",
+   "source": "Maerz & Paul, A Dictionary of Color"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-mauve",
+   "livid-purple",
+   "dusky-mauve",
+   "dirty-purple"
   ],
-  "tier": "standard",
-  "depth": "brief",
-  "lede": "Claret Cup is a greyish reddish purple from Maerz and Paul's 1930 dictionary, close in our library to plum.",
-  "sections": [
-    {
-      "id": "name",
-      "title": "A 1916 plate name",
-      "body": "Maerz and Paul's *A Dictionary of Color* places Claret Cup on plate 6, cell B4, first recorded in 1916 [1]. The ISCC-NBS system files the hue as a greyish reddish purple [2]. The name points toward claret wine, served in a cup, but the dictionary does not confirm that reading, so the exact origin is undocumented here [1].\n\nThe nearest named colors on file are [[dark-mauve]], [[dusky-mauve]], [[dusky-mauve]] and [[dirty-purple]], at 4.3, 4.6, 4.6 and 4.9 ΔE [3]."
-    },
-    {
-      "id": "field",
-      "title": "Field notes",
-      "body": "ColorHub's archive finds this color in 14 of 23,781 paintings, as photographed, a rare match [4]. The strongest hits are early-1900s work, including Paul Gauguin's 1903 *The Invocation* and a 1921 Bonnard interior [4]. India's paintings carry it more than any other country in the archive at this threshold [4]. As always, the count is a computed match on photographed, varnished canvases, not a pigment identification [4]."
-    }
-  ],
-  "aside": {
-    "origin": {
-      "named_after": "undocumented (likely claret wine)",
-      "first_recorded": "1916, Maerz & Paul 1930",
-      "source": "Maerz & Paul, A Dictionary of Color"
-    },
-    "aka": [],
-    "siblings": [
-      "dark-mauve",
-      "livid-purple",
-      "dusky-mauve",
-      "dirty-purple"
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 14,
+  "match": {
+   "nearest_library": "Plum",
+   "de2000": 10.9
+  },
+  "measured": {
+   "lch": [
+    42,
+    22,
+    347
+   ],
+   "nearest": [
+    [
+     "Dark Mauve",
+     4.3
     ],
-    "parent": null,
-    "children": [],
-    "disambiguation": [],
-    "other_languages": []
-  },
-  "field": {
-    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-    "n_present": 14,
-    "match": {
-      "nearest_library": "Plum",
-      "de2000": 10.9
-    },
-    "measured": {
-      "lch": [
-        42,
-        22,
-        347
-      ],
-      "nearest": [
-        [
-          "Dark Mauve",
-          4.3
-        ],
-        [
-          "Livid Purple",
-          4.6
-        ]
-      ]
-    }
-  },
-  "notes": [
-    {
-      "n": 1,
-      "kind": "data",
-      "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 6, cell B4",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 2,
-      "kind": "data",
-      "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 3,
-      "kind": "data",
-      "cite": "ColorHub color library: nearest named colors by CIEDE2000",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 4,
-      "kind": "data",
-      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-      "loc_kind": null,
-      "url": null
-    }
-  ],
-  "questions": [
-    {
-      "q": "Which year does Maerz and Paul first record Claret Cup?",
-      "choices": [
-        "1916",
-        "1850",
-        "1955",
-        "1927"
-      ],
-      "answer": "1916",
-      "kind": "pick"
-    },
-    {
-      "q": "True or false: the dictionary confirms Claret Cup is named for claret wine.",
-      "choices": [
-        "True",
-        "False"
-      ],
-      "answer": "False",
-      "kind": "true-false"
-    }
-  ],
-  "openers": [
-    "Claret Cup is rare in our painting archive, with only 14 matches among 23,781 canvases."
-  ],
-  "status": "checked",
-  "checked": {
-    "by": "checker",
-    "date": "2026-10-08",
-    "issues": [
-      "lint 2026-10-09"
+    [
+     "Livid Purple",
+     4.6
     ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 6, cell B4",
+   "loc_kind": null,
+   "url": null
   },
-  "slug": "claret-cup",
-  "words": 165
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which year does Maerz and Paul first record Claret Cup?",
+   "choices": [
+    "1916",
+    "1850",
+    "1955",
+    "1927"
+   ],
+   "answer": "1916",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the dictionary confirms Claret Cup is named for claret wine.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Claret Cup is rare in our painting archive, with only 14 matches among 23,781 canvases."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "claret-cup",
+ "words": 166
 }
