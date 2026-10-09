@@ -1650,6 +1650,36 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
   t.expect(sawYours >= 1, "none of the in-between colors showed a 'Your color' page");
 });
 
+// David, 2026-10-09 on an in-between color's page ("Your color · Dark olive brown... diagonal triangle in the
+// top-right corner"): the split cover used to paint the matched name's color as a diagonal wedge, clip-path'd
+// into the hero's top-right corner -- exactly where a full-bleed hero's own "✕ Close" pill also lives
+// (js/trail.js tlDecorate), so the two visibly collided. Replaced with a calm two-up band inside cp-hero-foot
+// (js/richpage.js colorDossier, css/colorpage.css .rp-split-band): two clean halves, each its own color, each
+// labeled with a name and a hex, nowhere near the top corners. Also checks the lead picture's caption on a
+// tapped page: title first, no duplicated "match", and explicitly "to your color" (not the matched name's own).
+scenario("pages", "an in-between color's split cover is a clean two-up band, not a corner wedge; its lead picture says 'to your color'", async t => {
+  await t.open("#/color/teal", { settle: 300 });
+  const sw = t.d.createElement("button"); sw.dataset.swatch = "#292C10"; sw.style.cssText = "position:fixed;left:150px;top:300px;width:60px;height:60px;z-index:9999";
+  t.d.body.appendChild(sw);
+  await t.click(sw, { wait: 400 }); sw.remove();
+  await t.waitFor(() => /Your color/.test(H.chip(t)), 10000, "a 'Your color' split page for #292C10");
+  t.expect(!t.$(".rp-split-name"), "the old corner-wedge name box is still drawn");
+  const band = await t.waitFor(() => t.$(".rp-split-band"), 5000, "the two-up comparison band");
+  const halves = t.$$(".rp-split-half", band);
+  t.expect(halves.length === 2, `${halves.length} halves in the split band, expected 2`);
+  const bandRect = band.getBoundingClientRect(), closeBtn = t.$("[data-tl-exit]") || t.$(".cp-close");
+  if (closeBtn) {
+    const closeRect = closeBtn.getBoundingClientRect();
+    const overlap = !(bandRect.right < closeRect.left || bandRect.left > closeRect.right || bandRect.bottom < closeRect.top || bandRect.top > closeRect.bottom);
+    t.expect(!overlap, "the split band overlaps the close control");
+  }
+  t.expect(Math.abs(halves[0].getBoundingClientRect().width - halves[1].getBoundingClientRect().width) < 4, "the two halves of the band are uneven widths");
+  await t.waitFor(() => t.$(".ar-lead .ar-lead-m"), 15000, "the lead picture's caption");
+  const capText = t.text(".ar-lead-tx");
+  t.expect(!/match\s+match/i.test(capText), `the lead caption has a doubled "match": "${capText}"`);
+  t.expect(/to your color/i.test(capText), `the lead caption on a tapped page doesn't say "to your color": "${capText}"`);
+});
+
 scenario("pages", "a world twin (In gems) opens its page in one tap, Back returns to the color", async t => {
   await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
   // David, 2026-10-09: "Found in the world" (gems/botany/brands/fashion twins) tucks into the Paintings section now

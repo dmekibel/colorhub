@@ -1049,6 +1049,11 @@ function articleRenderSplit(slug, headHost, bodyHost, ctx) {
     if (!art || headHost.isConnected === false) return none();
     const self = arColor(slug) || (ctx && ctx.h ? { slug, n: ctx.n || art.name, h: ctx.h } : art.hex ? { slug, n: art.name, h: art.hex } : null);
     if (!self) return none();
+    // David, 2026-10-09, on an in-between (tapped) color's page: "the lead picture should match the user's
+    // color, and say which" -- self.h here is the nearest NAMED color (the article is still its story), but a
+    // tapped page's own hero is the visitor's exact hex, so the lead picture should be scored against that, not
+    // the name it's merely close to, and its caption should say "your color" rather than borrow the name's.
+    const leadSelf = ctx && ctx.tapped ? { ...self, h: String(ctx.tapped).toUpperCase(), n: "your color", tapped: true } : self;
     headHost.hidden = false;
     if (!(ctx && ctx.door === false) && (art.facet ? art.sections.length >= 3 : (art.words || arWords(art)) >= AR_DOOR_MIN)) {
       AR_READING.set(art.slug, { art, self });
@@ -1062,7 +1067,7 @@ function articleRenderSplit(slug, headHost, bodyHost, ctx) {
       // standalone /read/ page already does (articleRender above): arfLeadPick tries a real contextual photo
       // first, then falls back to the painting that covers the most of this color.
       const door = headHost.querySelector(".ar-door");
-      if (door && typeof arfLead === "function") { try { arfLead(f => door.isConnected ? door.prepend(f) : false, art, self); } catch (e) {} }
+      if (door && typeof arfLead === "function") { try { arfLead(f => door.isConnected ? door.prepend(f) : false, art, leadSelf); } catch (e) {} }
       bodyHost.innerHTML = ""; bodyHost.hidden = true;
       return { has: true, door: true, art, self };
     }
@@ -1070,7 +1075,7 @@ function articleRenderSplit(slug, headHost, bodyHost, ctx) {
     bodyHost.innerHTML = arBodyHTML(art, self, { noFamily: true }); bodyHost.hidden = false;
     arWireClicks(headHost, art, self);
     const headEl = headHost.querySelector(".ar-head");
-    if (headEl && typeof arfLead === "function") { try { arfLead(f => headEl.isConnected ? headEl.before(f) : false, art, self); } catch (e) {} }
+    if (headEl && typeof arfLead === "function") { try { arfLead(f => headEl.isConnected ? headEl.before(f) : false, art, leadSelf); } catch (e) {} }
     arWire(bodyHost.querySelector(".ar-body") || bodyHost, art, self);
     if (typeof arfEnhance === "function") { try { arfEnhance(bodyHost, art, self); } catch (e) { try { console.warn("article figures failed:", e); } catch (_) {} } }
     return { has: true, door: false, art, self };

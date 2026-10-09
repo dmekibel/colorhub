@@ -588,7 +588,7 @@ function rpStoryFill(el, name, hex, o) {
   if (!headHost || !bodyHost) return Promise.resolve(null);
   const twin = () => { headHost.hidden = false; if (!headHost.querySelector(".rp-twin-host")) headHost.innerHTML = `<div class="rp-twin-host">${rpTwinHTML(name, hex)}</div>`; return { has: false }; };
   if (typeof articleRenderSplit !== "function") { el.__artPromise = Promise.resolve(twin()); return el.__artPromise; }
-  el.__artPromise = articleRenderSplit(routeSlug(name), headHost, bodyHost, { n: name, h: hex, facet: o.facet || null }).then(r => {
+  el.__artPromise = articleRenderSplit(routeSlug(name), headHost, bodyHost, { n: name, h: hex, facet: o.facet || null, tapped: o.tapped || null }).then(r => {
     if (!r || !r.has) return twin();
     el.__artData = { art: r.art, self: r.self }; el.__bodyHost = bodyHost;
     rpBarSync(el);
@@ -833,8 +833,8 @@ function colorDossier(entry, o = {}) {
   const el = show(`
     <div class="c-hero cp-hero cp-hero-full${tapped ? " rp-split" : ""}" style="--c:${heroHex};--c2:${hex}" data-ink="${ink(heroHex)}">
       <button class="cp-close" data-back aria-label="Back">${ICON.back}</button>
-      ${tapped ? `<div class="rp-split-name" data-ink="${ink(hex)}"><b>${esc(name)}</b><span class="mono">${hex}</span></div>` : ""}
       <div class="cp-hero-foot">
+        ${tapped ? `<div class="rp-split-band"><div class="rp-split-half rp-split-half-a" data-ink="${ink(heroHex)}"><b>Your color</b><span class="mono">${heroHex}</span></div><div class="rp-split-half rp-split-half-b" data-ink="${ink(hex)}"><b>${esc(name)}</b><span class="mono">${hex}</span></div></div>` : ""}
         ${cover.html}
         ${typeof fvPageChip === "function" ? fvPageChip(hex) : ""}
       </div>
