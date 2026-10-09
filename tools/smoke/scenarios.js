@@ -2296,6 +2296,26 @@ scenario("paintings", "the action row is compact (Keep/Share/On the map) and Fin
   await t.click(more.querySelector("summary"), { wait: 400 });
   t.expect(/Value key/.test(t.text("[data-awan]")), "opening More doesn't reveal the Analysis tiles");
 });
+// David, 2026-10-09: a Commons painting's own Special:FilePath URL can't be read with crossorigin (verified by
+// hand: its redirect chain never sends Access-Control-Allow-Origin on the intermediate hops), so
+// glCommonsResolve() asks the MediaWiki API instead, which answers with CORS directly and hands back an already
+// -resolved thumb URL. The smoke harness blocks every external host, so this stands in for that one resolved
+// fetch with a local, same-origin image at the exact seam — everything downstream (the swap, armSample, Pick
+// from it) is the real code, unmocked.
+scenario("paintings", "on a Commons painting, the resolved CORS fallback makes Pick from it return an exact pixel", async t => {
+  await t.open("#/home", { settle: 300 });
+  t.ev(`window.glCommonsResolve = () => Promise.resolve(location.origin + "/icon-512.png")`);
+  t.ev(`galleryPage(14423, true)`);   // Mona Lisa, a Commons-sourced painting
+  await t.waitFor(() => /Mona Lisa/.test(t.text(".p-title")), 15000, "the Mona Lisa painting page");
+  await t.waitFor(() => t.$(".gl-hero > span").classList.contains("gl-tap"), 10000, "the picture becomes tappable once the resolved image is armed and readable");
+  if (!t.$('[data-glo="pick"]')) await t.click("[data-glmore]", { wait: 300 });
+  await t.click('[data-glo="pick"]', { wait: 400 });
+  // the picture's own tap handler reads real clientX/clientY off the event, so dispatch one at its center
+  t.ev(`(() => { const s = document.querySelector(".gl-hero > span"), r = s.getBoundingClientRect(); s.dispatchEvent(new MouseEvent("click", { bubbles: true, clientX: r.left + r.width / 2, clientY: r.top + r.height / 2 })); })()`);
+  await t.sleep(400);
+  await t.waitFor(() => /colors you took/i.test(t.text("[data-glcap]")), 4000, "a picked color after tapping the picture");
+  t.expect(t.$(".gl-tap-dot"), "no pick dot appeared, so the tap never reached a real pixel");
+});
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
