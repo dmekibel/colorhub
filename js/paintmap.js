@@ -93,6 +93,9 @@ const PM_LAYOUTS = new Map(); // layout key -> layout (the color pass costs ~100
 // the rest of the app uses, not a new one invented here). Labeled by painter name (already in hand synchronously
 // via F.artist, no extra fetch per cell) at a far lower size threshold than any other on-map text gets.
 let PM_LANDMARKS = new Set();
+// David, 2026-10-09: landmarks default OFF now ("make it less overwhelming") -- a "More options" toggle, not a
+// forced-on overlay. The capability (and its collision-avoided, sans-font rendering, fixed earlier) stays.
+let PM_LANDMARKS_ON = false;
 
 // ---------- data ----------
 function pmThumbsLoad() {
@@ -177,21 +180,18 @@ function pmActiveChips(s, F) {
   if (s.fav) c.unshift({ dim: "fav", text: "Your favorites" });
   return c;
 }
-// a painting's own facets, as tappable "only these" chips (David, 2026-10-09: "filtering by example" -- the
-// bottom card for whatever's centered shows painter, country, decade, movement, museum and its 2-3 main colors;
-// tapping one narrows the whole map to it). Undated paintings get no "when" chip (nothing honest to filter by).
+// the card's own three facets (David, 2026-10-09, the minimalist pass -- "filtering by example" stays, pared to
+// the card's own 3-chip budget): Same painter / Same decade / Same place, only the ones that actually apply.
+// Movement, museum and color-swatch filters still exist -- in the sheet's Filter group (More options), not here.
 function pmFacetsOf(i, F) {
   const out = [];
-  if (F.artist[i]) out.push({ dim: "painter", val: F.artist[i], label: xbArtistName(F, F.artist[i]) });
-  if (F.country[i]) out.push({ dim: "co", val: F.country[i], label: F.meta.countries[F.country[i] - 1] });
+  if (F.artist[i]) out.push({ dim: "painter", val: F.artist[i], label: "Same painter" });
   const y = F.G.year[i];
   if (y !== GL_UNDATED) {
     const y0 = y < 1500 ? Math.floor(y / 100) * 100 : Math.floor(y / 10) * 10, y1 = y < 1500 ? y0 + 99 : y0 + 9;
-    out.push({ dim: "when", val: [y0, y1], label: `${y0}s` });
+    out.push({ dim: "when", val: [y0, y1], label: "Same decade" });
   }
-  if (F.mv[i]) out.push({ dim: "mv", val: F.mv[i], label: F.meta.movements[F.mv[i] - 1] });
-  out.push({ dim: "mus", val: F.G.mus[i], label: F.G.src[F.G.mus[i]].short });
-  glPal(i).slice(0, 3).forEach(c => out.push({ dim: "color", val: c.h, label: nameOf(c.h).text }));
+  if (F.country[i]) out.push({ dim: "co", val: F.country[i], label: "Same place" });
   return out;
 }
 // apply one facet to the filter spec in place (mirrors xbWithout's per-dim shape, the "set" half)
@@ -525,22 +525,19 @@ function pmOpen(spec, o = {}) {
   const from = typeof spec === "string" ? spec : JSON.stringify(spec || {}), fresh = o.fresh && !o._used;
   o._used = true;
   const el = show(`
-    <div class="pmx-stage"><canvas class="pmx-cv" aria-label="Paintings as a map: drag to browse, pinch to zoom, tap the middle one to open it"></canvas><p class="pmx-wait">Laying out the paintings…</p></div>
+    <div class="pmx-stage"><canvas class="pmx-cv" aria-label="Paintings as a map: drag to browse, pinch to zoom, tap the middle one to open it"></canvas><div class="pmx-imglayer" data-pmimglayer></div><p class="pmx-wait">Laying out the paintings…</p></div>
     <header class="pmx-top">
       <button class="icon-btn glass" data-back aria-label="Back">${ICON.back}</button>
-      <button class="pmx-title" data-pmfilter aria-haspopup="dialog"><b><span data-pmt>Paintings</span>${PM_ICON.down}</b><small data-pmsub></small></button>
-      <span class="pmx-sp"></span>
+      <p class="pmx-title"><b>Paintings</b></p>
+      <button class="corner r pmx-do" data-do-corner aria-label="Settings" aria-haspopup="dialog">${PM_ICON.arrange}</button>
     </header>
-    <p class="pmx-why" data-pmwhy></p>
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
     <div class="pmx-walk" data-pmwalk hidden></div>
     <div class="pmx-facets" data-pmfacets hidden></div>
     <div class="pmx-cap" data-pmcap hidden>
       <button class="pmx-cap-main" data-pmopen><b data-pmct></b><small data-pmcb></small></button>
-      <button class="pmx-center" data-pmcenter aria-label="Center the map on this painting">${PM_ICON.similar}</button>
       <button class="pmx-heart" data-pmheart aria-label="Add to your favorites"></button>
     </div>
-    <button class="corner r pmx-do" data-do-corner aria-label="Arrange and filter" aria-haspopup="menu" aria-expanded="false">${PM_ICON.arrange}</button>
   `, "fixed cx pmx");
   const back = el.querySelector("[data-back]");
   back.onclick = () => xBack();
@@ -562,7 +559,8 @@ function pmOpen(spec, o = {}) {
 function pmMount(el, s, F) {
   const cv = el.querySelector(".pmx-cv"), ctx = cv.getContext("2d"), wait = el.querySelector(".pmx-wait");
   const RM = reduceMotion, cap = el.querySelector("[data-pmcap]"), heart = el.querySelector("[data-pmheart]");
-  const centerBtn = el.querySelector("[data-pmcenter]"), facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]"), walkBar = el.querySelector("[data-pmwalk]");
+  const facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]"), walkBar = el.querySelector("[data-pmwalk]");
+  const imgLayer = el.querySelector("[data-pmimglayer]");
   let walk = [];   // "Walk from here" (David, 2026-10-09): the gallery indices visited this walk, in order; [] when none is active
   let scrubTimer = 0;   // the time scrubber's own Play timer (0 = not playing); lives here, not inside openSheet, so it survives a sheet close/reopen
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
@@ -594,6 +592,35 @@ function pmMount(el, s, F) {
     const D = Math.hypot(W, H) / 2 + 30, fit = lay ? Math.max(lay.GW, lay.GH) * .62 + 2 : 45, R = Math.min(45, Math.max(5, fit));
     return Math.max(.18, Math.min(1, D / (R + A) / base));
   };
+  // David, 2026-10-09: "with only 4 results the layout floats tiny in the middle" -- fit the whole filtered set
+  // to the view by default. Math.max(1, ...) is load-bearing: this ONLY ever zooms IN past the ordinary Z=1
+  // default, never further out -- a dense set's own "fit" zoom comes out far below 1 (fitting a 124x192-cell
+  // grid into one screen), and without the floor every open would start absurdly zoomed out instead of only the
+  // genuinely sparse ones this was for.
+  const fitZoomFor = l => {
+    if (!l.GW || !l.GH || !base) return 1;
+    const perUnit = Math.min(W / (l.GW + 1.4), H / (l.GH + 1.4));
+    return clamp(Math.max(1, perUnit / base), zMin(), ZMAX);
+  };
+  // the <img> overlay pool (David, 2026-10-09): a non-CORS host's picture needs no CORS header to just be SHOWN
+  // as a plain <img>, only canvas pixel-reads do -- capped so a dense layout can't flood the DOM with these.
+  const IMG_LAYER_MAX = 28;
+  const imgLayerShown = new Map();   // gallery index -> <img> currently placed for it
+  function syncImgLayer(wanted) {
+    const keep = new Set();
+    for (const w0 of wanted) {
+      keep.add(w0.i);
+      let im = imgLayerShown.get(w0.i);
+      if (!im) {
+        const th = pmThumb(w0.i); if (!th) continue;
+        im = document.createElement("img"); im.decoding = "async"; im.alt = ""; im.src = th.url;
+        imgLayer.appendChild(im); imgLayerShown.set(w0.i, im);
+      }
+      im.style.left = Math.round(w0.X) + "px"; im.style.top = Math.round(w0.Y) + "px";
+      im.style.width = Math.round(w0.w) + "px"; im.style.height = Math.round(w0.h) + "px";
+    }
+    for (const [i, im] of imgLayerShown) if (!keep.has(i)) { im.remove(); imgLayerShown.delete(i); }
+  }
   function size() {
     const r = cv.getBoundingClientRect(); W = r.width; H = r.height; dpr = Math.min(3, devicePixelRatio || 1);
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
@@ -653,7 +680,7 @@ function pmMount(el, s, F) {
     if (!walk.length) walk = [from];
     const next = pmWalkCandidate(from, new Set(walk));
     if (next < 0) { toast("No different-painter match left to walk to", { low: true }); return; }
-    buzz(8); walk.push(next); s.seed = next; s.arr = "rings"; rebuild();
+    buzz(8); walk.push(next); s.seed = next; s.arr = "spiral"; rebuild();
   }
   function paintWalk() {
     if (walk.length < 2) { walkBar.hidden = true; walkBar.innerHTML = ""; return; }
@@ -662,7 +689,7 @@ function pmMount(el, s, F) {
     walkBar.querySelector("[data-pmwalkx]").onclick = () => { buzz(4); walk = []; paintWalk(); };
     walkBar.querySelectorAll("[data-pmwalkto]").forEach(b => b.onclick = () => {
       const k = +b.dataset.pmwalkto; if (k === walk.length - 1) return;
-      buzz(5); walk = walk.slice(0, k + 1); s.seed = walk[k]; s.arr = "rings"; rebuild();
+      buzz(5); walk = walk.slice(0, k + 1); s.seed = walk[k]; s.arr = "spiral"; rebuild();
     });
   }
   // the time scrubber (David, 2026-10-09): "paintings appear decade by decade." scrubTimer lives on pmMount
@@ -690,14 +717,16 @@ function pmMount(el, s, F) {
     if (s.upToYear == null || s.upToYear >= hi) s.upToYear = lo;
     rebuild(); scrubTimer = setInterval(scrubStep, 420); scrubUpdateUI();
   }
-  // filter-by-example (David, 2026-10-09): the centered painting's own facets as tappable "only these" chips,
-  // plus "More like this" (the same whole-palette matching as the "similar" arrangement, seeded here)
+  // filter-by-example (David, 2026-10-09, the minimalist pass): up to 3 fixed "only this" chips (Same painter/
+  // decade/place), Open, and Walk from here. "More like this" is gone as a true duplicate -- tapping the
+  // painting itself already does the exact same thing (seed on it, Spiral, rebuild); it wasn't a distinct
+  // capability, just a second way to trigger the one tap-to-center interaction already has.
   function paintFacets(i) {
     const fs = pmFacetsOf(i, F);
     facets.hidden = false;
-    facets.innerHTML = `<button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here →</button><button class="pmx-fchip pmx-fchip-more" data-pmmore>More like this</button>${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${fc.dim === "color" ? `<i style="--c:${fc.val}"></i>` : ""}${esc(fc.label)}</button>`).join("")}`;
+    facets.innerHTML = `${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${esc(fc.label)}</button>`).join("")}<button class="pmx-fchip pmx-fchip-open" data-pmopen2>Open</button><button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here</button>`;
+    facets.querySelector("[data-pmopen2]").onclick = () => openK(centerK);
     facets.querySelector("[data-pmwalk-go]").onclick = () => doWalk();
-    facets.querySelector("[data-pmmore]").onclick = () => { buzz(6); s.seed = i; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild(); };
     facets.querySelectorAll("[data-pmfacet]").forEach(b => b.onclick = () => {
       const fc = fs[+b.dataset.pmfacet]; buzz(6); pmFacetApply(s.f, fc.dim, fc.val); rebuild();
     });
@@ -777,22 +806,54 @@ function pmMount(el, s, F) {
         tw = Math.min(tw, th * 1.5) - gap; th = Math.min(th, (x1 - x0) * 1.5) - gap;
         const mx = (x0 + x1) / 2, my = (y0 + y1) / 2, d = Math.max(tw, th);
         if (d < 1.2 || mx < -d || my < -d || mx > W + d || my > H + d) continue;
-        drawn.push({ k, x: mx, y: my, d, z, tw, th });
+        const i = lay.items[k];
+        const m = Math.exp(-((z / .5) ** 2));
+        let w = tw, h = th;
+        if (m > .02) {
+          const ar = GAL.ar[i], B = d * (1 + .4 * m), cw = ar > 1 ? B / ar : B, ch = ar > 1 ? B : B * ar;
+          w = tw + (cw - tw) * m; h = th + (ch - th) * m;
+        }
+        drawn.push({ k, i, x: mx, y: my, d, z, m, w, h });
+      }
+    }
+    // David, 2026-10-09: "cells overlap at every zoom/fisheye level" -- the near-center magnification above (a
+    // painting's own aspect ratio, "a little bigger than its cell") can push a box past the lattice halfway
+    // boundary into a genuinely nearby neighbor, worst with a sparse filtered set or a ragged arrangement like
+    // Rings/Spiral/Tones. A spatial hash finds each tile's own nearest OTHER drawn tile and clamps its half-
+    // diagonal (the circumscribed-circle radius, so a diagonal approach is covered too) to never exceed half
+    // that real on-screen gap -- both tiles in any pair clamp to their OWN worst-case nearest neighbor, which is
+    // always <= what's needed for that specific pair, so no two final boxes can ever intersect. The search
+    // radius is sized to the biggest cell actually on screen this frame (not a fixed guess), since a fixed
+    // one-bucket search missed the one magnified near-center cell once zoomed in enough that its own reach
+    // exceeded the bucket size.
+    {
+      const BUCKET = 80, buckets = new Map(), bkey = (gx, gy) => gx * 100000 + gy;
+      for (const b of drawn) { const gx = Math.floor(b.x / BUCKET), gy = Math.floor(b.y / BUCKET), k = bkey(gx, gy); if (!buckets.has(k)) buckets.set(k, []); buckets.get(k).push(b); }
+      let maxReach = 0; for (const b of drawn) { const r2 = Math.hypot(b.w, b.h) / 2; if (r2 > maxReach) maxReach = r2; }
+      const RAD = Math.max(1, Math.ceil((maxReach + 4) / BUCKET)), GUTTER = 2;
+      for (const b of drawn) {
+        const gx = Math.floor(b.x / BUCKET), gy = Math.floor(b.y / BUCKET);
+        let nearest = Infinity;
+        for (let dy = -RAD; dy <= RAD; dy++) for (let dx = -RAD; dx <= RAD; dx++) {
+          const arr = buckets.get(bkey(gx + dx, gy + dy)); if (!arr) continue;
+          for (const o of arr) { if (o === b) continue; const dd = Math.hypot(o.x - b.x, o.y - b.y); if (dd < nearest) nearest = dd; }
+        }
+        if (nearest < 1e8) {
+          const halfDiag = Math.hypot(b.w, b.h) / 2, maxHalfDiag = Math.max(2, (nearest - GUTTER) / 2);
+          if (halfDiag > maxHalfDiag) { const sc = maxHalfDiag / halfDiag; b.w *= sc; b.h *= sc; }
+        }
       }
     }
     drawn.sort((a, b) => a.d - b.d);
     fading = false;
+    // landmark labels and the <img> overlay are both collected here and placed/synced in a SEPARATE pass once
+    // every cell is drawn (David, 2026-10-09: drawing either inline here let a later, bigger tile painted on top
+    // blot out or clip an earlier cell's label/overlay -- drawn is sorted smallest-d-first specifically so
+    // bigger/closer cells paint OVER smaller/farther ones, backwards for something that has to survive the pass)
+    const landmarkCandidates = [], imgLayerWanted = [];
     for (const b of drawn) {
-      const i = lay.items[b.k], e = imgs.get(i);
-      let w = b.tw, h = b.th;
-      // the middle one takes its own shape, whole and uncropped, a little bigger than its cell
-      const m = Math.exp(-((b.z / .5) ** 2));
-      if (m > .02) {
-        const ar = GAL.ar[i], B = b.d * (1 + .4 * m), cw = ar > 1 ? B / ar : B, ch = ar > 1 ? B : B * ar;
-        w = b.tw + (cw - b.tw) * m; h = b.th + (ch - b.th) * m;
-      }
+      const i = b.i, e = imgs.get(i), w = b.w, h = b.h, m = b.m;
       const X = b.x - w / 2, Y = b.y - h / 2;
-      b.w = w; b.h = h;
       if (m > .3) { ctx.save(); ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = 28; ctx.shadowOffsetY = 8; ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); ctx.restore(); }
       else { ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); }
       if (b.d >= 14) wantImg.push([i, b.d > 92 || m > .3]);
@@ -814,30 +875,60 @@ function pmMount(el, s, F) {
         ctx.globalAlpha = 1;
       }
       if (b.d >= 40 && GAL.mean[i * 3] < 24) { ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.lineWidth = 1; ctx.strokeRect(X + .5, Y + .5, w - 1, h - 1); }
-      // your favorites glow (the same pink the heart icon turns "on")
+      // your favorites glow (the same pink the heart icon turns "on"), kept subtle: a thin ring, not a halo
       if (favSet && favSet.size && b.d >= 7 && favSet.has(i)) {
-        ctx.save(); const lw = Math.max(1.5, Math.min(3, b.d * .025));
-        ctx.shadowColor = "rgba(232,120,122,.85)"; ctx.shadowBlur = Math.min(18, b.d * .2);
-        ctx.strokeStyle = "rgba(232,120,122,.95)"; ctx.lineWidth = lw;
+        ctx.save(); const lw = Math.max(1.25, Math.min(2, b.d * .018));
+        ctx.strokeStyle = "rgba(232,120,122,.85)"; ctx.lineWidth = lw;
         ctx.strokeRect(X + lw / 2, Y + lw / 2, w - lw, h - lw);
         ctx.restore();
       }
-      // always-labeled landmarks (a painter name, small and opaque, regardless of how small the cell otherwise reads)
-      if (b.d >= 16 && PM_LANDMARKS.size && PM_LANDMARKS.has(i)) {
+      // always-labeled landmarks: a painter name, collected here, placed after the loop (see comment above)
+      if (PM_LANDMARKS_ON && b.d >= 24 && PM_LANDMARKS.size && PM_LANDMARKS.has(i)) {
         const nm = F.artist[i] ? xbArtistName(F, F.artist[i]) : "";
-        if (nm) {
-          const py = Y + h + 4;
-          if (py > -16 && py < H + 16) {
-            ctx.save(); ctx.font = `500 ${Math.max(10, Math.min(13, b.d * .15))}px "Geist Mono", Menlo, monospace`;
-            ctx.textAlign = "center"; ctx.textBaseline = "top";
-            const tw2 = ctx.measureText(nm).width;
-            ctx.fillStyle = "rgba(14,13,11,.82)"; ctx.fillRect(b.x - tw2 / 2 - 5, py - 2, tw2 + 10, 15);
-            ctx.fillStyle = "rgba(236,232,223,.95)"; ctx.fillText(nm, b.x, py);
-            ctx.restore();
-          }
+        if (nm) landmarkCandidates.push({ x: b.x, y: Y + h + 4, d: b.d, text: nm });
+      }
+      // the <img> overlay (David, 2026-10-09, "pictures don't load as well as before"): a non-CORS host's image
+      // can never be read back off a canvas (toDataURL/getImageData throw), but a plain <img> needs no CORS
+      // header at all to just be SHOWN -- the centered painting always gets one if it needs one, plus any other
+      // large cell. Decided straight from pmThumb()/pmSafeHost(), not from e (the imgs cache's own entry) -- e
+      // is only created inside imgs.want() at the END of this same draw() call, so on the very first frame a
+      // painting becomes eligible e is still undefined and nothing would trigger a second frame to add the
+      // overlay once it existed. Priority (biggest first), not first-come: drawn is smallest-first, so capping
+      // during this same ascending pass let small cells fill the whole pool before the centered painting (always
+      // biggest) ever got a turn.
+      if (m > .3 || b.d > 60) {
+        const th = pmThumb(i);
+        if (th) {
+          const local = th.url.startsWith("img/gallery/"), safe = local || pmSafeHost(th.url);
+          if (!safe) imgLayerWanted.push({ i, X, Y, w, h, d: b.d });
         }
       }
     }
+    // landmark labels: a real sans font (not the mono the count-labels use), truncated with an ellipsis rather
+    // than clipped, clamped inside the canvas width, and skipped (not stacked) when it would collide with an
+    // already-placed one -- fewer, cleaner labels, biggest cells (most confidently legible) win a collision.
+    if (landmarkCandidates.length) {
+      landmarkCandidates.sort((a, b) => b.d - a.d);
+      ctx.textAlign = "center"; ctx.textBaseline = "top";
+      const placed = [];
+      for (const c of landmarkCandidates) {
+        if (placed.length >= 14) break;
+        const fs = Math.max(11, Math.min(14, c.d * .14));
+        ctx.font = `500 ${fs}px "Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif`;
+        let txt = c.text, tw2 = ctx.measureText(txt).width;
+        const maxW = Math.min(140, W - 16);
+        if (tw2 > maxW) { while (txt.length > 2 && ctx.measureText(txt + "…").width > maxW) txt = txt.slice(0, -1); txt += "…"; tw2 = ctx.measureText(txt).width; }
+        const px = Math.min(W - 6 - tw2 / 2, Math.max(6 + tw2 / 2, c.x));
+        const rx0 = px - tw2 / 2 - 6, rx1 = px + tw2 / 2 + 6, ry0 = c.y - 2, ry1 = c.y + fs + 4;
+        if (ry1 < -8 || ry0 > H + 8) continue;
+        if (placed.some(p => rx0 < p.rx1 && rx1 > p.rx0 && ry0 < p.ry1 && ry1 > p.ry0)) continue;
+        placed.push({ rx0, rx1, ry0, ry1 });
+        ctx.fillStyle = "rgba(14,13,11,.8)"; ctx.fillRect(rx0, ry0, rx1 - rx0, ry1 - ry0);
+        ctx.fillStyle = "rgba(236,232,223,.96)"; ctx.fillText(txt, px, c.y);
+      }
+    }
+    imgLayerWanted.sort((a, b) => b.d - a.d);
+    syncImgLayer(imgLayerWanted.slice(0, IMG_LAYER_MAX));
     // band and painter labels, where there's room to read them
     if (lay.labels.length) {
       ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
@@ -949,7 +1040,13 @@ function pmMount(el, s, F) {
       tapTimer = setTimeout(() => { lastTapAt = 0; if (!dead) openK(b.k); }, 280);
       return;
     }
-    buzz(5); glideTo([lay.x[b.k], lay.y[b.k]], 360);
+    buzz(5);
+    // David, 2026-10-09: "tap a painting -> it glides to the center and its neighbors re-arrange around it by
+    // color" -- the core interaction (message 3), kept through the later "don't delete capabilities" correction
+    // (message 4): still auto-seeds Spiral, same as before; that correction was about tucking the OTHER
+    // shapes/filters behind More options, not about reverting this. Already-seeded-on-this-one just glides.
+    if (s.arr === "spiral" && s.seed === b.i) { glideTo([lay.x[b.k], lay.y[b.k]], 360); return; }
+    s.seed = b.i; s.arr = "spiral"; rebuild();
   }
   function openK(k) {
     const i = lay.items[k];
@@ -960,22 +1057,9 @@ function pmMount(el, s, F) {
   }
   el.querySelector("[data-pmopen]").onclick = () => { if (centerK >= 0) openK(centerK); };
   heart.onclick = () => toggleHeart(false);
-  // "Center on this painting" (David, 2026-10-09, part of the Arrange parity with the color map): the quickest
-  // way to pivot to "around one painting" is the one you're already looking at, right from its own bottom card
-  centerBtn.onclick = () => {
-    if (centerK < 0) return;
-    const i = lay.items[centerK]; buzz(6);
-    if (PM_NEEDS_SEED.has(s.arr) && s.seed === i) return;
-    s.seed = i; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild();
-  };
 
-  // ---- the chrome: the title says what's showing (tap: filter), one line says what position means, the corner arranges
+  // ---- the chrome: back, the static title, one settings button; a removable chip for every active filter
   function chrome() {
-    const n = lay ? lay.n : 0, words = pmWords(s, F);
-    el.querySelector("[data-pmt]").textContent = PM_ARR.find(a => a[0] === s.arr)[1];
-    el.querySelector("[data-pmsub]").textContent = `${n.toLocaleString()} ${n === 1 ? "painting" : "paintings"}${words.length ? " · " + words.join(" · ") : ""}`;
-    let why = PM_WHY[s.arr];
-    el.querySelector("[data-pmwhy]").textContent = why;
     paintChipbar();
   }
   // removable active-filter chips atop the map (David, 2026-10-09): the primary way to SEE and UNDO a filter,
@@ -1000,7 +1084,7 @@ function pmMount(el, s, F) {
     const lz = wait.querySelector("[data-pmloosen]"); if (lz) lz.onclick = () => { s.f = xbFresh(); s.fav = 0; rebuild(); };
     const mem = PM_PAN.get(lay.key);
     if (mem && !keepPan) { P = [mem.x, mem.y]; Z = mem.s; }
-    else if (!keepPan) { P = lay.start.slice(); Z = 1; const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
+    else if (!keepPan) { P = lay.start.slice(); Z = fitZoomFor(lay); const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     if (keepPan) { const k = nearestK(P[0], P[1]); if (k >= 0) P = [lay.x[k], lay.y[k]]; }
     Z = clamp(Z, zMin(), ZMAX);
     centerK = -1; drawn = []; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); chrome(); kick();
@@ -1016,7 +1100,6 @@ function pmMount(el, s, F) {
   // no separate confirm step). Replaces the old radial stem menu and the standalone Filter-only sheet.
   const doBtn = el.querySelector(".pmx-do"); doBtn._html = doBtn.innerHTML;
   doBtn.onclick = () => openSheet("arrange");
-  el.querySelector("[data-pmfilter]").onclick = () => openSheet("filter");
   function openSheet(startTab) {
     if (document.querySelector(".sheet")) return;
     if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
@@ -1079,7 +1162,7 @@ function pmMount(el, s, F) {
       qa$("[data-pmarr]").forEach(b => b.onclick = () => {
         const id = b.dataset.pmarr; buzz(5);
         if (PM_NEEDS_SEED.has(id)) { if (mid < 0) return; s.seed = mid; s.arr = id; }
-        else { if (s.arr === id) return; s.arr = id; }
+        else { if (s.arr === id) return; s.arr = id; s.seed = -1; } // a stale seed from a prior Rings/Spiral shouldn't linger into Color/Time/Painter
         rebuild(); renderArrange();
       });
       qa$("[data-pmplace]").forEach(b => b.onclick = () => {
@@ -1087,7 +1170,7 @@ function pmMount(el, s, F) {
       });
       qa$("[data-pmcenterk]").forEach(b => b.onclick = () => {
         const fn = PM_CENTER.find(c => c[0] === b.dataset.pmcenterk)[2], found = fn(list);
-        if (found < 0) return; buzz(6); s.seed = found; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild(); renderArrange();
+        if (found < 0) return; buzz(6); s.seed = found; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "spiral"; rebuild(); renderArrange();
       });
       q$("[data-pmscrub]").oninput = e => {
         if (scrubTimer) { clearInterval(scrubTimer); scrubTimer = 0; }
@@ -1149,13 +1232,15 @@ function pmMount(el, s, F) {
   }
   // ---- life cycle
   const ro = new ResizeObserver(() => size()); ro.observe(cv);
-  cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
+  cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); imgLayerShown.forEach(im => im.remove()); imgLayerShown.clear(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
   size(); build(false);
   window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
     // QA (tools/smoke paintmap group): a real network fetch of data/artists/portraits.json doesn't reliably
     // resolve inside the virtual-time test harness, so a forced override makes "landmarks label themselves" a
-    // deterministic check rather than a timing bet.
-    _qaLandmarks: arr => { PM_LANDMARKS = new Set(arr); kick(); } };
+    // deterministic check rather than a timing bet; same for the <img> overlay's own network image.
+    _qaLandmarks: arr => { PM_LANDMARKS = new Set(arr); PM_LANDMARKS_ON = true; kick(); },
+    _qaRects: () => drawn.map(b => ({ i: b.i, x: b.x, y: b.y, w: b.w, h: b.h })),
+    _qaHasOverlay: i => imgLayerShown.has(i) };
 }
 
 // this file can load after router.js (on first use): give pmOpen its address now
