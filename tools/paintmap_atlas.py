@@ -33,6 +33,8 @@ Usage:
   python3 tools/paintmap_atlas.py build [--workers 20] [--limit N] [--start-group G] [--quality0 Q] [--quality1 Q]
   python3 tools/paintmap_atlas.py report                   # sizes + manifest, no network
   python3 tools/paintmap_atlas.py clean                    # remove .progress.json (start over)
+  python3 tools/paintmap_atlas.py resplit                  # re-tile existing v1 sheets to the v2, WebKit-safe
+                                                             # layout (<=2048px sheets) -- no network at all
 """
 import json, os, random, sys, time, threading
 import urllib.request, urllib.error
@@ -50,7 +52,18 @@ PROGRESS = os.path.join(OUT, ".progress.json")
 
 TIER0_TILE = 20
 TIER1_TILE = 80
-GROUP_SIZE = 1500
+GROUP_SIZE = 625   # David's iPhone 16 Pro Max, Home Screen app (WKWebView), 2026-10-10: "every painting is not
+# loaded at once" -- a single 3100x3080 (~9.6MP) tier-0 sheet and 3120x3120 tier-1 sheets (at the old 1500/sheet)
+# decode fine in desktop-Safari-class memory but a Home Screen WKWebView runs under a tighter JetSam budget, and
+# createImageBitmap has no partial-failure mode: if ONE of those big decodes is refused, pmAtlasLoad's whole
+# promise rejects and (pre-fix) that failure was silently swallowed forever, leaving every cell on its flat-color
+# fallback for the rest of the session -- exactly "every painting is not loaded at once". The fix has two halves:
+# js/paintmap.js now retries that fetch+decode and falls back to an <img>+decode() path when createImageBitmap
+# itself fails, AND these sheets are now kept at or under 2048x2048 (WebKit's documented safe image-decode
+# ceiling) by splitting tier 0 across TIER0_SHEETS small sheets and shrinking tier-1's groupSize from 1500 to 625
+# (25 cols x 80px = 2000px, under the ceiling; was 39 cols = 3120px, over it). `resplit` (below) rebuilds both
+# from the EXISTING sheets with pure local image slicing -- no re-fetching the ~23,778 source paintings.
+TIER0_MAXDIM = 2040   # <= 2048; 2040 is an exact multiple of TIER0_TILE (20)
 Q0, Q1 = 78, 76
 WORKERS = 20
 PER_HOST = 6
@@ -200,6 +213,22 @@ def grid0(n):
     return cols, rows
 
 
+def tier0_layout(n):
+    """Tier 0 as several sheets instead of one, each <= TIER0_MAXDIM square (WebKit's safe decode ceiling --
+    see the GROUP_SIZE comment above). cols is the SAME for every sheet (so position arithmetic in js/paintmap.js
+    stays `sheet = i // perSheet; local = i % perSheet; x = local % cols; y = local // cols` -- no per-sheet
+    lookup table needed); only the last sheet is a partial page, same as a build script's last tier-1 group
+    already is. Returns (cols, per_sheet, [count_in_each_sheet...])."""
+    cols = max(1, TIER0_MAXDIM // TIER0_TILE)
+    per_sheet = cols * cols
+    counts, remaining = [], n
+    while remaining > 0:
+        c = min(per_sheet, remaining)
+        counts.append(c)
+        remaining -= c
+    return cols, per_sheet, counts or [0]
+
+
 def grid1(group_n):
     cols = max(1, ceil(sqrt(group_n)))
     rows = ceil(group_n / cols)
@@ -249,6 +278,10 @@ def cmd_repair(workers, retries, limit):
     every affected g<N>.webp sheet in place; never touches a cell that already has a real picture."""
     lines = load_lines()
     man = json.load(open(os.path.join(OUT, "manifest.json")))
+    if man.get("v", 1) >= 2:
+        raise SystemExit("cmd_repair hasn't been updated for the v2 (multi-sheet tier0) manifest yet -- "
+                          "it still assumes one atlas0.webp. Patch find_blank_tier0_cells/cmd_repair for "
+                          "tier0.sheets before using it on this dataset, or ask for that update.")
     n = man["n"]
     atlas0_path = os.path.join(OUT, "atlas0.webp")
     tier0 = Image.open(atlas0_path).convert("RGBA")
@@ -314,6 +347,132 @@ def pmT1GroupPy(man, i):
     return i // man["tier1"]["groupSize"]
 
 
+class _OldSheetCache:
+    """At most 2 decoded old tier-1 sheets open at once -- global index i only ever needs the old group it falls
+    in (i // old_group_size) or, right at a new-group boundary, that one and the next, and resplit() visits i in
+    increasing order, so an LRU of 2 never re-opens a sheet it already closed."""
+    def __init__(self, path_for_group):
+        self.path_for_group = path_for_group
+        self.order, self.cache = [], {}
+
+    def get(self, g):
+        im = self.cache.get(g)
+        if im is not None:
+            return im
+        im = Image.open(self.path_for_group(g)).convert("RGBA")
+        self.cache[g] = im
+        self.order.append(g)
+        while len(self.order) > 2:
+            old_g = self.order.pop(0)
+            if old_g != g:
+                self.cache.pop(old_g, None)
+        return im
+
+
+def cmd_resplit():
+    """Rebuild tier 0 + tier 1 at the new, WebKit-safe sheet sizes (TIER0_MAXDIM / GROUP_SIZE's comment) by
+    SLICING THE EXISTING SHEETS -- every painting's pixels are already decoded and packed in today's
+    atlas0.webp + g<N>.webp, so this never re-fetches a single one of the ~23,778 source images. Reads the old
+    (v1) manifest to know the old layout, writes the new (v2) one. Old files are removed once the new ones are
+    written and verified to decode (never left half-migrated)."""
+    old_man_path = os.path.join(OUT, "manifest.json")
+    old_man = json.load(open(old_man_path))
+    if old_man.get("v", 1) >= 2:
+        print("manifest is already v2 -- nothing to resplit"); return
+    n = old_man["n"]
+    old_t0_cols, old_t0_tile = old_man["tier0"]["cols"], old_man["tier0"]["tile"]
+    old_atlas0_path = os.path.join(OUT, old_man["tier0"]["sheet"])
+    old_t1_size, old_t1_tile = old_man["tier1"]["groupSize"], old_man["tier1"]["tile"]
+    old_t1_file = old_man["tier1"]["file"]
+
+    assert old_t0_tile == TIER0_TILE and old_t1_tile == TIER1_TILE, \
+        "resplit only changes sheet LAYOUT, not tile size -- TIER0_TILE/TIER1_TILE must match the old manifest"
+
+    print(f"resplit: n={n}, old tier0 one sheet {old_t0_cols}x{ceil(n/old_t0_cols)} cells, "
+          f"old tier1 {old_man['tier1']['numGroups']} sheets of {old_t1_size}")
+
+    # ---- tier 0: one old sheet -> several new ones, same per-cell pixels, just re-tiled ----
+    old_t0 = Image.open(old_atlas0_path).convert("RGBA")
+    new_cols0, per_sheet0, counts0 = tier0_layout(n)
+    new_t0_names = [f"atlas0-{s}.webp" for s in range(len(counts0))]
+    new_t0_sheets = [Image.new("RGBA", (new_cols0 * TIER0_TILE, ceil(c / new_cols0) * TIER0_TILE), (0, 0, 0, 0))
+                      for c in counts0]
+    for i in range(n):
+        ox, oy = (i % old_t0_cols) * TIER0_TILE, (i // old_t0_cols) * TIER0_TILE
+        cell = old_t0.crop((ox, oy, ox + TIER0_TILE, oy + TIER0_TILE))
+        sheet0, local0 = divmod(i, per_sheet0)
+        nx, ny = (local0 % new_cols0) * TIER0_TILE, (local0 // new_cols0) * TIER0_TILE
+        new_t0_sheets[sheet0].paste(cell, (nx, ny))
+    new_t0_paths = [os.path.join(OUT, name) for name in new_t0_names]
+    for canvas, path in zip(new_t0_sheets, new_t0_paths):
+        atomic_save_webp(canvas, path, Q0)
+    print(f"  tier0: wrote {len(new_t0_names)} sheets, {new_cols0*TIER0_TILE}px wide each")
+
+    # ---- tier 1: old GROUP_SIZE sheets -> new (smaller) GROUP_SIZE sheets, same source pixels ----
+    # New sheets reuse the SAME filename pattern as the old ones (g0.webp, g1.webp, ...) and there are now MORE
+    # of them than before (39 vs 16) -- so new_g=9's output path is literally old g9.webp's path, and old g9 is
+    # still needed as a READ source by later new groups (whichever new_g range falls inside old group 9). Writing
+    # straight to the final name would self-clobber that source mid-run. So every new sheet is written to a
+    # `.resplit-tmp` name first; nothing touches a real g<N>.webp until ALL new sheets exist and this old_cache
+    # (which only ever opens g<N>.webp, never the tmp files) has finished reading every old sheet it needs.
+    old_cache = _OldSheetCache(lambda g: os.path.join(OUT, old_t1_file.replace("{g}", str(g))))
+    new_num_groups = ceil(n / GROUP_SIZE)
+    tmp_t1_paths, final_t1_paths = [], []
+    for new_g in range(new_num_groups):
+        lo, hi = new_g * GROUP_SIZE, min(n, (new_g + 1) * GROUP_SIZE)
+        new_cols1, new_rows1 = grid1(hi - lo)
+        canvas = Image.new("RGBA", (new_cols1 * TIER1_TILE, new_rows1 * TIER1_TILE), (0, 0, 0, 0))
+        for i in range(lo, hi):
+            old_g = i // old_t1_size
+            old_lo = old_g * old_t1_size
+            old_cols1, _ = grid1(min(old_t1_size, n - old_lo))
+            old_local = i - old_lo
+            ox, oy = (old_local % old_cols1) * TIER1_TILE, (old_local // old_cols1) * TIER1_TILE
+            old_sheet = old_cache.get(old_g)
+            cell = old_sheet.crop((ox, oy, ox + TIER1_TILE, oy + TIER1_TILE))
+            local = i - lo
+            nx, ny = (local % new_cols1) * TIER1_TILE, (local // new_cols1) * TIER1_TILE
+            canvas.paste(cell, (nx, ny))
+        final_path = os.path.join(OUT, f"g{new_g}.webp")
+        tmp_path = final_path + ".resplit-tmp"
+        canvas.save(tmp_path, "WEBP", quality=Q1, method=6)
+        tmp_t1_paths.append(tmp_path)
+        final_t1_paths.append(final_path)
+        if (new_g + 1) % 10 == 0 or new_g == new_num_groups - 1:
+            print(f"  tier1: {new_g + 1}/{new_num_groups} sheets built")
+    old_cache = None   # done reading every old g<N>.webp -- safe to rename the tmp files over them now
+    for tmp_path, final_path in zip(tmp_t1_paths, final_t1_paths):
+        os.replace(tmp_path, final_path)
+    # any OLD sheet beyond the new count (old numGroups was smaller here, so none -- but keep the cleanup for
+    # the opposite case, a future dataset where GROUP_SIZE shrinks less than the painting count grows)
+    for g in range(new_num_groups, old_man["tier1"]["numGroups"]):
+        p = os.path.join(OUT, old_t1_file.replace("{g}", str(g)))
+        if os.path.exists(p):
+            os.remove(p)
+    new_t1_paths = final_t1_paths
+    print(f"  tier1: {new_num_groups}/{new_num_groups} sheets written")
+
+    # verify every new sheet actually decodes before deleting the old ones
+    for p in new_t0_paths + new_t1_paths:
+        Image.open(p).verify()
+
+    new_manifest = {
+        "v": 2, "n": n,
+        "tier0": {"tile": TIER0_TILE, "cols": new_cols0, "perSheet": per_sheet0, "sheets": new_t0_names},
+        "tier1": {"tile": TIER1_TILE, "groupSize": GROUP_SIZE, "numGroups": new_num_groups, "file": "g{g}.webp"},
+    }
+    json.dump(new_manifest, open(old_man_path, "w"))
+
+    # clean up the old, now-unreferenced sheets (old atlas0.webp + any old g<N>.webp beyond the new count,
+    # since new_num_groups > old numGroups here -- GROUP_SIZE shrank -- there's nothing to remove on that side
+    # except the old atlas0.webp itself)
+    if os.path.exists(old_atlas0_path) and os.path.basename(old_atlas0_path) not in new_t0_names:
+        os.remove(old_atlas0_path)
+    print(f"resplit done: tier0 {len(new_t0_names)} sheets, tier1 {new_num_groups} sheets (was "
+          f"{old_man['tier1']['numGroups']}). manifest.json now v2.")
+    report()
+
+
 def dt_str(s):
     return f"{s:.1f}s" if s < 90 else f"{s/60:.1f}m"
 
@@ -348,29 +507,44 @@ def main():
         cmd_repair(workers=min(workers, 8), retries=max(retries, 5), limit=limit)
         return
 
+    if cmd == "resplit":
+        cmd_resplit()
+        return
+
     lines = load_lines()
     n = len(lines)
     if limit:
         n = min(n, limit)
-    cols0, rows0 = grid0(n)
+    cols0, per_sheet0, counts0 = tier0_layout(n)
     num_groups = ceil(n / GROUP_SIZE)
-    print(f"n={n} tier0 grid={cols0}x{rows0} ({cols0*TIER0_TILE}x{rows0*TIER0_TILE}px) groups={num_groups} "
-          f"tier1 tile={TIER1_TILE}px group_size={GROUP_SIZE}")
+    print(f"n={n} tier0 cols={cols0} per_sheet={per_sheet0} sheets={len(counts0)} ({cols0*TIER0_TILE}px wide, "
+          f"<= {TIER0_MAXDIM}px per side) groups={num_groups} tier1 tile={TIER1_TILE}px group_size={GROUP_SIZE}")
 
     progress = load_progress()
     groups_done = set(progress.get("groups_done", []))
     ok_count, fail_count = progress.get("ok_count", 0), progress.get("fail_count", 0)
     failures = []
 
-    atlas0_path = os.path.join(OUT, "atlas0.webp")
-    tier0 = Image.new("RGBA", (cols0 * TIER0_TILE, rows0 * TIER0_TILE), (0, 0, 0, 0))
-    if os.path.exists(atlas0_path) and groups_done:
-        try:
-            prev = Image.open(atlas0_path).convert("RGBA")
-            if prev.size == tier0.size:
-                tier0 = prev
-        except Exception:
-            pass
+    # tier 0 is now several sheets (see TIER0_MAXDIM's comment) instead of one -- same resumability contract
+    # (re-saved after every completed group), just one canvas+path per sheet instead of one
+    tier0_names = [f"atlas0-{s}.webp" for s in range(len(counts0))]
+    tier0_paths = [os.path.join(OUT, name) for name in tier0_names]
+    tier0_sheets = []
+    for s, count in enumerate(counts0):
+        rows = ceil(count / cols0)
+        canvas = Image.new("RGBA", (cols0 * TIER0_TILE, rows * TIER0_TILE), (0, 0, 0, 0))
+        if os.path.exists(tier0_paths[s]) and groups_done:
+            try:
+                prev = Image.open(tier0_paths[s]).convert("RGBA")
+                if prev.size == canvas.size:
+                    canvas = prev
+            except Exception:
+                pass
+        tier0_sheets.append(canvas)
+
+    def save_tier0():
+        for s, canvas in enumerate(tier0_sheets):
+            atomic_save_webp(canvas, tier0_paths[s], q0)
 
     t_start = time.time()
     total_requests = 0
@@ -391,14 +565,14 @@ def main():
                         failures.append((i, err))
                     continue
                 ok_count += 1
-                cell = i  # tier0: algorithmic position, whole-dataset index
-                x0, y0 = (cell % cols0) * TIER0_TILE, (cell // cols0) * TIER0_TILE
-                tier0.paste(t0img, (x0, y0))
+                sheet0, local0 = divmod(i, per_sheet0)   # tier0: algorithmic position, whole-dataset index
+                x0, y0 = (local0 % cols0) * TIER0_TILE, (local0 // cols0) * TIER0_TILE
+                tier0_sheets[sheet0].paste(t0img, (x0, y0))
                 local = i - lo  # tier1: position within this group
                 x1, y1 = (local % cols1) * TIER1_TILE, (local // cols1) * TIER1_TILE
                 group_canvas.paste(t1img, (x1, y1))
         atomic_save_webp(group_canvas, os.path.join(OUT, f"g{g}.webp"), q1)
-        atomic_save_webp(tier0, atlas0_path, q0)
+        save_tier0()
         groups_done.add(g)
         progress = {"groups_done": sorted(groups_done), "ok_count": ok_count, "fail_count": fail_count,
                      "n": n, "num_groups": num_groups}
@@ -408,8 +582,8 @@ def main():
               f"({(hi-lo)/dt:.1f}/s) -- ok={ok_count} fail={fail_count}")
 
     manifest = {
-        "v": 1, "n": n,
-        "tier0": {"tile": TIER0_TILE, "cols": cols0, "rows": rows0, "sheet": "atlas0.webp"},
+        "v": 2, "n": n,
+        "tier0": {"tile": TIER0_TILE, "cols": cols0, "perSheet": per_sheet0, "sheets": tier0_names},
         "tier1": {"tile": TIER1_TILE, "groupSize": GROUP_SIZE, "numGroups": num_groups, "file": "g{g}.webp"},
     }
     json.dump(manifest, open(os.path.join(OUT, "manifest.json"), "w"))

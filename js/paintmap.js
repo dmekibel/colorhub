@@ -402,13 +402,17 @@ function pmLayRings(list, seed) {
 // free integer cell (this engine's grid needs one painting per cell), searching outward on the rare collision --
 // phyllotaxis is specifically the pattern that packs points with the fewest collisions in the first place, so
 // this almost always resolves within a ring or two.
-// David, 2026-10-09 ("the Spiral view looks off because of all the empty space"): the radius constant was 1.6,
-// which packs k points into a disk of area pi*(1.6*sqrt(k))^2 -- about 8x more area than the k unit-area grid
-// cells actually need (a disk of k unit cells has radius sqrt(k/pi) = 0.564*sqrt(k)), so most of that disk was
-// genuinely empty grid, not an illusion of the lens. 0.62*sqrt(k) is just above that theoretical minimum --
-// close to as dense as Rings' own zero-gap shells (Rings enumerates literally every cell in ring order, so it's
-// the tightest possible reference point) -- leaving the collision search below just enough slack that it
-// resolves in a ring or two instead of piling up near the seed.
+// David, 2026-10-09 ("the Spiral view looks off because of all the empty space") then 2026-10-10 ("still looks
+// bad... make Spiral as dense as Rings"): radius was first 1.6, then 0.62 -- both still left visible holes. The
+// AREA formula (a disk of k unit cells has radius sqrt(k/pi) = 0.564*sqrt(k)) looks right for continuous points,
+// but this engine snaps ideal continuous phyllotaxis positions to the nearest FREE INTEGER CELL, and that
+// rounding+collision-avoidance systematically pushes points slightly outward (never inward), inflating the real
+// footprint beyond the continuous radius. Measured empirically (not just derived): sweeping the constant and
+// counting interior holes (unoccupied lattice cells well inside the filled disk, across n from a few hundred to
+// the full ~23,778-painting dataset) bottoms out at essentially ZERO interior holes around 0.52-0.54 -- tighter
+// than the continuous-area formula, not looser, because of that outward rounding bias. 0.53 lands in the middle
+// of that zero-hole band with room either side, giving Spiral the same packing density Rings' own zero-gap
+// shells have (Rings enumerates literally every cell in ring order, the tightest possible reference point).
 function pmLaySpiral(list, seed) {
   const L = pmSimilarOrder(list, seed), n = L.length, GOLD = Math.PI * (3 - Math.sqrt(5));
   const occupied = new Set(), X = new Int32Array(n), Y = new Int32Array(n);
@@ -416,7 +420,7 @@ function pmLaySpiral(list, seed) {
   for (let k = 0; k < n; k++) {
     let x = 0, y = 0;
     if (k > 0) {
-      const rad = Math.sqrt(k) * .62, ang = k * GOLD;
+      const rad = Math.sqrt(k) * .53, ang = k * GOLD;
       x = Math.round(rad * Math.cos(ang)); y = Math.round(rad * Math.sin(ang));
       if (occupied.has(key(x, y))) {
         outer: for (let ring = 1; ring < 30; ring++) {
@@ -547,22 +551,56 @@ function pmImages(onReady) {
 // for the few visible" per the design, with tier 0/1 covering every zoom level below that.
 let PM_ATLAS = null, PM_ATLAS_P = null;
 const PM_T1_MIN = 24, PM_T2_MIN = 120;
-// a decoded tier-1 sheet (~3120x3120 at the build script's own GROUP_SIZE/TIER1_TILE) costs ~39MB of raw bitmap
-// memory -- PM_T1_CACHE_MAX=5 caps that around ~195MB even if every sheet in the dataset gets touched in one
-// session, comfortably inside what a phone browser affords a background canvas, without thrashing on an
-// ordinary pan (nowhere close to the ~17 sheets that exist in total, so a normal browse rarely evicts at all)
-const PM_T1_CACHE_MAX = 5;
+// a decoded tier-1 sheet (2000x2000 at the build script's own GROUP_SIZE/TIER1_TILE, since David's iPhone 16 Pro
+// Max/2026-10-10: see tools/paintmap_atlas.py's GROUP_SIZE comment) costs ~16MB of raw bitmap memory --
+// PM_T1_CACHE_MAX=6 caps that around ~96MB even if every sheet in the dataset gets touched in one session,
+// comfortably inside what a phone browser (or a Home Screen app's tighter WKWebView budget) affords a
+// background canvas, without thrashing on an ordinary pan
+const PM_T1_CACHE_MAX = 6;
+// iOS Safari (confirmed buggy pre-17, and createImageBitmap from a Blob can still fail under memory pressure on
+// ANY version, which is exactly David's 2026-10-10 Home Screen app report -- "every painting is not loaded at
+// once"): createImageBitmap has no partial-failure mode, so ONE failed decode used to leave PM_ATLAS null, and
+// every tile's flat-color fallback (js/paintmap.js's own ctx.fillRect above tier 0, drawn first every frame)
+// stayed up for the rest of the session with no retry. pmDecodeSheet() tries createImageBitmap first (cheaper,
+// doesn't block the main thread) and falls back to the <img>+decode() path pmImages() already uses for tier 2
+// -- an HTMLImageElement draws via ctx.drawImage exactly like an ImageBitmap, so nothing downstream needs to
+// know which one it got.
+function pmDecodeImgFallback(blob) {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(blob), img = new Image(); img.decoding = "async";
+    const done = ok => { URL.revokeObjectURL(url); ok ? resolve(img) : reject(new Error("img decode failed")); };
+    img.onload = () => (img.decode ? img.decode().catch(() => {}) : Promise.resolve()).then(() => done(true));
+    img.onerror = () => done(false);
+    img.src = url;
+  });
+}
+function pmDecodeSheet(url) {
+  return fetch(url).then(r => { if (!r.ok) throw new Error("sheet " + r.status + " " + url); return r.blob(); })
+    .then(blob => (typeof createImageBitmap === "function" ? createImageBitmap(blob).catch(() => pmDecodeImgFallback(blob)) : pmDecodeImgFallback(blob)));
+}
+// atlas0 is the ONE thing every cell's base picture depends on -- a transient decode failure (the exact failure
+// mode above) must retry rather than leave the whole map on flat colors forever. A handful of backed-off
+// attempts, not infinite: a real 404/missing-build-output still surfaces the "didn't load" retry button
+// (js/paintmap.js's pmOpen .catch) instead of looping silently.
+const PM_ATLAS_RETRIES = 3;
 function pmAtlasLoad() {
   if (PM_ATLAS) return Promise.resolve(PM_ATLAS);
+  if (PM_ATLAS_P) return PM_ATLAS_P;
   const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
-  return PM_ATLAS_P || (PM_ATLAS_P = fetch("data/paintmap/manifest.json" + v).then(r => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
-    .then(man => fetch("data/paintmap/" + man.tier0.sheet + v).then(r => { if (!r.ok) throw new Error("atlas0 " + r.status); return r.blob(); })
-      .then(blob => createImageBitmap(blob)).then(bm => (PM_ATLAS = { man, bm0: bm })))
-    .catch(e => { PM_ATLAS_P = null; throw e; }));
+  const attempt = n => fetch("data/paintmap/manifest.json" + v).then(r => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
+    .then(man => Promise.all(man.tier0.sheets.map(name => pmDecodeSheet("data/paintmap/" + name + v)))
+      .then(bm0s => (PM_ATLAS = { man, bm0s })))
+    .catch(e => {
+      if (n < PM_ATLAS_RETRIES) return new Promise(res => setTimeout(res, 600 * Math.pow(2, n))).then(() => attempt(n + 1));
+      PM_ATLAS_P = null; throw e;
+    });
+  return (PM_ATLAS_P = attempt(0));
 }
-// tier 0: a painting's own cell inside the one shared sheet -- pure arithmetic, no lookup
+// tier 0: a painting's own cell -- which sheet (now several, each kept <= 2048px square for iOS/WebKit's safe
+// decode ceiling -- see tools/paintmap_atlas.py) plus the cell inside it, pure arithmetic, no lookup
 function pmT0Rect(man, i) {
-  const t = man.tier0; return { x: (i % t.cols) * t.tile, y: Math.floor(i / t.cols) * t.tile, s: t.tile };
+  const t = man.tier0, sheet = Math.floor(i / t.perSheet), local = i % t.perSheet;
+  return { sheet, x: (local % t.cols) * t.tile, y: Math.floor(local / t.cols) * t.tile, s: t.tile };
 }
 const pmT1Group = (man, i) => Math.floor(i / man.tier1.groupSize);
 // tier 1: the group's own cols (the last group is usually a partial page, same ceil(sqrt) the build script used)
@@ -591,9 +629,7 @@ function pmAtlasTier1(onReady) {
       const ent = { st: 0, used: frame, bm: null };
       cache.set(g, ent);
       const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
-      fetch("data/paintmap/" + man.tier1.file.replace("{g}", g) + v)
-        .then(r => { if (!r.ok) throw new Error("tier1 " + r.status); return r.blob(); })
-        .then(blob => createImageBitmap(blob))
+      pmDecodeSheet("data/paintmap/" + man.tier1.file.replace("{g}", g) + v)
         .then(bm => { if (dead) return; ent.bm = bm; ent.st = 1; onReady(); })
         .catch(() => { ent.st = 2; });
     }
@@ -661,7 +697,8 @@ function pmMount(el, s, F) {
   let scrubTimer = 0;   // the time scrubber's own Play timer (0 = not playing); lives here, not inside openSheet, so it survives a sheet close/reopen
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
   let P = [0, 0], Z = 1, V = [0, 0], glide = null, raf = 0, dead = false, centerK = -1, lastTick = 0, drawn = [];
-  const ZMAX = 2.2;
+  const ZMAX = 2.2, ZMIN_ABS = .002;   // a floor only to keep the zMin() search finite -- see its own comment
+  const PM_TAP_ZOOM = 1.7;   // "large and centered" for a tapped painting's fly-to (David, 2026-10-10) -- never zooms OUT, only in if you're more zoomed out than this
   let pulseI = -1, pulseT0 = 0;   // the entry-point highlight ring (David, 2026-10-09): briefly rings whichever painting a seed just pinned the view to
   // David, 2026-10-09: "the name of the painting at the bottom isn't necessary -- we only need the name when we
   // tap it." The card used to track whatever's nearest the middle continuously, all through a pan -- now it only
@@ -692,12 +729,54 @@ function pmMount(el, s, F) {
   const magR = z => M1 + (M0 - M1) * Math.exp(-((z / SIG) ** 2));
   const tanR = z => z < 1e-4 ? M0 : (M1 * z + A * erf(z / SIG)) / z;
   const Finv = r => { let lo = 0, hi = 600; for (let i = 0; i < 32; i++) { const m = (lo + hi) / 2; if (Fz(m) > r) hi = m; else lo = m; } return (lo + hi) / 2; };
-  // the zoom-out floor: never more than ~45 cells from the middle to the corner (about 6,000 tiles), and never past
-  // the point where the whole set already fits
+  // a PURE version of Fz for an arbitrary candidate zoom zc (Fz/Finv above always read the live Z/A closure
+  // state) -- needed below to search for the right zoom without disturbing what's actually on screen mid-frame
+  const fzAt = (zc, gridDist) => { const m0 = M1 + (M0N - M1) * clamp((zc - .22) / .5, .3, 1), a = (m0 - M1) * SIG * .8862; return base * zc * (M1 * gridDist + a * erf(gridDist / SIG)); };
+  // the zoom-out floor: the WHOLE current layout (every painting in this arrangement/filter) fits on screen with
+  // a little margin -- like the color map's own finite-layout floor (js/honey.js zFloor()'s `lay.finite` branch:
+  // "the whole cluster fits on screen... a big [layout] still gets room to zoom out and show more of itself").
+  // David, 2026-10-10: "doesn't let me zoom out all the way to see everything" -- this used to hard-cap the fit
+  // radius at 45 cells (~6,000 tiles) regardless of how much bigger the real layout was, a leftover from when a
+  // fully zoomed-out view meant thousands of individual per-cell image requests. With the tiered sprite atlas
+  // (tools/paintmap_atlas.py: tier 0 covers every cell from one decode, see js/paintmap.js's pmAtlasLoad) that's
+  // no longer the bottleneck it was, so the cap is gone. Two more bugs came out while fixing that one: (1) it
+  // sized the fit as one isotropic radius (the screen's own corner distance vs max(GW,GH)), which assumes the
+  // content and the screen are both roughly square -- for a layout much taller than wide (pmLayColor's own
+  // grid, e.g. 124x192) on a narrower-than-tall phone screen, that let the content's WIDTH overflow while its
+  // height had room to spare, clipping part of the layout. (2) a naive per-axis `perUnit/base` (no lens term)
+  // UNDER-estimated how far out Z needs to go, because the lens bulge (A above) never fully flattens even at low
+  // zoom -- lensAt()'s own `.3` floor on its clamp keeps at least 30% of the bulge forever, which pushes every
+  // cell's screen position outward by more than plain linear scaling accounts for. Binary-searching the real
+  // (lens-correct) fzAt() per axis, like js/honey.js's own zFloor() `search()` does for the color map, fixes
+  // both: each axis checked on its own terms, through the actual curve the draw loop uses, not an approximation
+  // of it.
   const zMin = () => {
-    const D = Math.hypot(W, H) / 2 + 30, fit = lay ? Math.max(lay.GW, lay.GH) * .62 + 2 : 45, R = Math.min(45, Math.max(5, fit));
-    return Math.max(.18, Math.min(1, D / (R + A) / base));
+    if (!lay || !lay.GW || !lay.GH || !base) return .18;
+    // the farthest the bbox's own edges are from the CURRENT pan center, per axis -- not just GW/2 and GH/2,
+    // because P isn't always centered in the layout (David, 2026-10-10: "By painter" never re-centers P at
+    // all, so a layout with gy0=1..4787 while P stays at [0,0] needs almost DOUBLE the naive half-extent to
+    // reach its far edge -- halving Z from what a symmetric assumption would compute, same exact-2x gap the QA
+    // bbox check below caught). Matches _qaBBoxFits()'s own corner math.
+    const halfW = Math.max(Math.abs(lay.gx0 - P[0]), Math.abs(lay.gx0 + lay.GW - 1 - P[0])) + .7;
+    const halfH = Math.max(Math.abs(lay.gy0 - P[1]), Math.abs(lay.gy0 + lay.GH - 1 - P[1])) + .7;
+    const fits = zc => fzAt(zc, halfW) <= W / 2 && fzAt(zc, halfH) <= H / 2;
+    if (fits(1)) return 1;   // already fits at the ordinary zoom (a small/sparse set) -- never force MORE zoom-out than that
+    // fits(z) is true for SMALL z (zoomed out, content small on screen) and false for LARGE z (zoomed in,
+    // content overflows) -- the opposite monotonicity from honey.js's own search() -- so the bisection here
+    // grows `lo` (the largest z still known to fit) up toward the true/false boundary, not `hi` down to it.
+    // a wildly elongated layout (By painter: thousands of painters each a short row, GW far smaller than GH)
+    // can need a REALLY small z to fit its long axis -- no artificial floor here (only ZMIN_ABS below, which
+    // exists only to keep the math finite, not to second-guess what a layout actually needs).
+    let lo = ZMIN_ABS, hi = 1;
+    if (!fits(lo)) return lo;   // even the smallest allowed zoom can't fit this layout -- that's the best we've got
+    for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2; if (fits(m)) lo = m; else hi = m; }
+    return Math.min(1, lo);
   };
+  // a gentle rubber band BELOW the floor (David, 2026-10-10, "keep a gentle rubber band below it") -- same shape
+  // as js/honey.js's own rubber(): a power curve that lets an active pinch/wheel gesture overshoot past zMin()
+  // a little rather than hard-stopping dead, but settle() (released touch, or the wheel's own idle timeout)
+  // always glides back up to zMin() -- so it never STAYS past the floor, only visits it briefly while held.
+  const rubberLo = (z, zmin) => z >= zmin ? z : Math.max(zmin * .55, zmin * Math.pow(Math.max(z, zmin * 1e-3) / zmin, .3));
   // David, 2026-10-09: "with only 4 results the layout floats tiny in the middle" -- fit the whole filtered set
   // to the view by default. Math.max(1, ...) is load-bearing: this ONLY ever zooms IN past the ordinary Z=1
   // default, never further out -- a dense set's own "fit" zoom comes out far below 1 (fitting a 124x192-cell
@@ -741,7 +820,7 @@ function pmMount(el, s, F) {
     cap.style.setProperty("--c", pmHex(i));
     paintHeart(i, d);
     if (!d) { clearTimeout(capTimer); capTimer = setTimeout(() => glDetail(i).then(() => { if (!dead && lay && lay.items[centerK] === i) caption(); }).catch(() => {}), 90); }
-    PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z });
+    PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen });
     paintFacets(i);
     facets.hidden = !cardOpen;   // paintFacets() always unhides itself when it (re)builds the chip row -- cardOpen has the final say
   }
@@ -808,14 +887,15 @@ function pmMount(el, s, F) {
     rebuild(); scrubTimer = setInterval(scrubStep, 420); scrubUpdateUI();
   }
   // filter-by-example (David, 2026-10-09, the minimalist pass): up to 3 fixed "only this" chips (Same painter/
-  // decade/place), Open, and Walk from here. "More like this" is gone as a true duplicate -- tapping the
-  // painting itself already does the exact same thing (seed on it, Spiral, rebuild); it wasn't a distinct
-  // capability, just a second way to trigger the one tap-to-center interaction already has.
+  // decade/place), Open, Arrange around this, and Walk from here.
+  // David, 2026-10-10: a tap no longer seeds/rebuilds (it's a plain fly-to now -- see tap()'s own comment), so
+  // "arrange the neighbors around this painting" needed its own explicit chip instead of riding along for free.
   function paintFacets(i) {
     const fs = pmFacetsOf(i, F);
     facets.hidden = false;
-    facets.innerHTML = `${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${esc(fc.label)}</button>`).join("")}<button class="pmx-fchip pmx-fchip-open" data-pmopen2>Open</button><button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here</button>`;
+    facets.innerHTML = `${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${esc(fc.label)}</button>`).join("")}<button class="pmx-fchip pmx-fchip-open" data-pmopen2>Open</button><button class="pmx-fchip pmx-fchip-arrange" data-pmarrange-go>Arrange around this</button><button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here</button>`;
     facets.querySelector("[data-pmopen2]").onclick = () => openK(centerK);
+    facets.querySelector("[data-pmarrange-go]").onclick = () => arrangeAround(i);
     facets.querySelector("[data-pmwalk-go]").onclick = () => doWalk();
     facets.querySelectorAll("[data-pmfacet]").forEach(b => b.onclick = () => {
       const fc = fs[+b.dataset.pmfacet]; buzz(6); pmFacetApply(s.f, fc.dim, fc.val); rebuild();
@@ -892,10 +972,17 @@ function pmMount(el, s, F) {
         // than the far one), less an even seam, and never more oblong than 3:2
         const x0 = (l[0] + sx) / 2, x1 = (sx + r[0]) / 2, y0 = (u[1] + sy) / 2, y1 = (sy + dn[1]) / 2;
         let tw = x1 - x0, th = y1 - y0;
-        const gap = Math.min(6, 1 + Math.min(tw, th) * .05);
+        // David, 2026-10-10 (zoomed all the way out to fit a ~23,778-painting layout): the flat ~1px seam below
+        // used to eat the ENTIRE cell once cells shrank to a couple of px (a tiny cell minus a ~1px gap rounds
+        // to nothing, so it got culled by the `d < 1.2` check right below -- most of a huge layout vanished at
+        // its own fit-everything zoom instead of reading as the dense mosaic of tiny real colors tier 0 is
+        // FOR). Capping the gap at a FRACTION of the cell's own size (never more than 15% of it) leaves a
+        // visible seam at ordinary sizes exactly as before (15% only binds below ~10px, where the old flat
+        // formula was already smaller than that) while guaranteeing a sub-10px cell still has real area left.
+        const gap = Math.min(6, Math.min(tw, th) * .15, 1 + Math.min(tw, th) * .05);
         tw = Math.min(tw, th * 1.5) - gap; th = Math.min(th, (x1 - x0) * 1.5) - gap;
         const mx = (x0 + x1) / 2, my = (y0 + y1) / 2, d = Math.max(tw, th);
-        if (d < 1.2 || mx < -d || my < -d || mx > W + d || my > H + d) continue;
+        if (d < .6 || mx < -d || my < -d || mx > W + d || my > H + d) continue;
         const i = lay.items[k];
         const m = Math.exp(-((z / .5) ** 2));
         let w = tw, h = th;
@@ -949,12 +1036,10 @@ function pmMount(el, s, F) {
       // so the whole archive shows its real tiny colors/shapes from the first frame the sheet lands, not just
       // whichever few hundred cells have individually streamed in by then. The base picture layer every other
       // tier below crossfades on top of (drawImage over drawImage, alpha<1 blends with what's already there).
-      if (PM_ATLAS && PM_ATLAS.bm0) {
-        const ts0 = pmTState(tierH, i), r0 = pmT0Rect(PM_ATLAS.man, i);
+      if (PM_ATLAS && PM_ATLAS.bm0s) {
+        const ts0 = pmTState(tierH, i), r0 = pmT0Rect(PM_ATLAS.man, i), bm0 = PM_ATLAS.bm0s[r0.sheet];
         const a0 = pmFadeAlpha(ts0, "f0", t, 220, RM); if (a0 < 1) fading = true;
-        ctx.globalAlpha = a0;
-        ctx.drawImage(PM_ATLAS.bm0, r0.x, r0.y, r0.s, r0.s, X, Y, w, h);
-        ctx.globalAlpha = 1;
+        if (bm0) { ctx.globalAlpha = a0; ctx.drawImage(bm0, r0.x, r0.y, r0.s, r0.s, X, Y, w, h); ctx.globalAlpha = 1; }
       }
       // tier 1: a mid-size tile from its group's sheet (manifest.tier1.groupSize paintings share one sheet, one
       // request each, cached) once the cell reads as more than a speck -- replaces tier 0 by drawing over it.
@@ -1088,7 +1173,7 @@ function pmMount(el, s, F) {
   const toPlane = (dx, dy) => [dx / (K() * M0), dy / (K() * M0)];
   function settle() {
     const k = nearestK(P[0], P[1]); if (k < 0) return;
-    glideTo([lay.x[k], lay.y[k]], 260);
+    glideTo([lay.x[k], lay.y[k]], 260, Z < zMin() ? zMin() : undefined);   // spring back up out of the rubber band
   }
   function glideTo(b, dur = 340, z) { glide = { a: P.slice(), b, t0: clock, dur, z: z ? [Z, z] : null }; V = [0, 0]; kick(); }
   cv.addEventListener("pointerdown", e => {
@@ -1114,7 +1199,7 @@ function pmMount(el, s, F) {
     pts.set(e.pointerId, [e.clientX, e.clientY]);
     if (pinch && pts.size >= 2) {
       const [a, b] = [...pts.values()], d = Math.hypot(a[0] - b[0], a[1] - b[1]);
-      Z = clamp(pinch.z0 * d / Math.max(10, pinch.d0), zMin(), ZMAX); kick(); return;
+      Z = Math.min(ZMAX, rubberLo(pinch.z0 * d / Math.max(10, pinch.d0), zMin())); kick(); return;
     }
     if (!drag) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
@@ -1139,7 +1224,7 @@ function pmMount(el, s, F) {
     kick();
   };
   cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
-  cv.addEventListener("wheel", e => { e.preventDefault(); touched = true; Z = clamp(Z * Math.exp(-e.deltaY * .0015), zMin(), ZMAX); kick(); clearTimeout(cv._wt); cv._wt = setTimeout(settle, 180); }, { passive: false });
+  cv.addEventListener("wheel", e => { e.preventDefault(); touched = true; Z = Math.min(ZMAX, rubberLo(Z * Math.exp(-e.deltaY * .0015), zMin())); kick(); clearTimeout(cv._wt); cv._wt = setTimeout(settle, 180); }, { passive: false });
   cv.addEventListener("contextmenu", e => e.preventDefault());
   function hitAt(x, y) {
     const r = cv.getBoundingClientRect(), px = x - r.left, py = y - r.top;
@@ -1170,16 +1255,26 @@ function pmMount(el, s, F) {
       return;
     }
     buzz(5);
-    // David, 2026-10-09: "tap a painting -> it glides to the center and its neighbors re-arrange around it by
-    // color" -- the core interaction (message 3), kept through the later "don't delete capabilities" correction
-    // (message 4): still auto-seeds Spiral, same as before; that correction was about tucking the OTHER
-    // shapes/filters behind More options, not about reverting this. Already-seeded-on-this-one just glides.
-    if (s.arr === "spiral" && s.seed === b.i) { showCard(); glideTo([lay.x[b.k], lay.y[b.k]], 360); return; }
-    s.seed = b.i; s.arr = "spiral"; rebuild();
+    // David, 2026-10-10, twice: first "tapping a picture switches the map from Rings to Spiral" (fixed by
+    // re-centering WITHIN the current arrangement instead of forcing Spiral), then "why does tapping change the
+    // view so radically instead of just zooming into that area?" -- the re-center-by-reseeding itself was still
+    // too much: a tap re-lays-out every neighbor around the tapped painting, which reads as the view changing
+    // wholesale even when the arrangement name stays the same. A tap is just a fly-to now: zoom/pan to the
+    // tapped painting wherever it ALREADY sits in the current layout (nothing re-seeds, nothing rebuilds) and
+    // open its card. Actually re-arranging neighbors around a painting is its own explicit action on the card
+    // now (arrangeAround(), wired to the "Arrange around this" chip in paintFacets() below).
+    showCard(); glideTo([lay.x[b.k], lay.y[b.k]], 350, Math.max(Z, PM_TAP_ZOOM));
+  }
+  // the card's explicit "Arrange around this" (David, 2026-10-10) -- what tapping a painting USED to do by
+  // itself: seed Rings/Spiral on it (staying in whichever of the two is already active, or defaulting to
+  // Spiral from an unseeded arrangement) and rebuild every neighbor around it. A deliberate action now, not a
+  // side effect of just looking at a painting.
+  function arrangeAround(i) {
+    buzz(8); s.seed = i; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "spiral"; rebuild();
   }
   function openK(k) {
     const i = lay.items[k];
-    PM_PAN.set(lay.key, { x: lay.x[k], y: lay.y[k], s: Z });
+    PM_PAN.set(lay.key, { x: lay.x[k], y: lay.y[k], s: Z, cardOpen: true });
     // the map's color filter can hold a whole set (?c=hex1,hex2…, from a pair/set page's "as a map" link); carry
     // all of it onto the painting, not just the first one (David, 2026-10-08).
     buzz(8); galleryPage(i, true, s.f.hexes.length > 1 ? s.f.hexes : (s.f.hexes[0] || null), s.f.hexes.length ? s.f.tol : null);
@@ -1231,7 +1326,11 @@ function pmMount(el, s, F) {
     // the card itself (David, 2026-10-09): opens for a reason -- a seed just pinned the view to one painting
     // (a tap, Walk, a Center-on preset, a fresh entry point) -- and stays closed for a plain dense browse, same
     // as switching Arrange to Color/Time/Painter should clear whatever was open rather than leave it stranded.
-    if (!keepPan) cardOpen = pinned;
+    // David, 2026-10-10: "Back should restore the exact prior view... the card state" too -- an unseeded
+    // arrangement's remembered pan (mem) now also remembers whether the card was open, so leaving a painting's
+    // card open, opening a painting, then Back, lands back with that same card open (not silently closed just
+    // because this arrangement has no single seed to open it reflexively like Rings/Spiral do).
+    if (!keepPan) cardOpen = mem ? !!mem.cardOpen : pinned;
     centerK = -1; drawn = []; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); chrome(); kick();
     // a brief highlight on the painting an entry point promised, so it reads as "you're here", not just a jump cut
     if (pinned && !keepPan && centerK >= 0) { pulseI = lay.items[centerK]; pulseT0 = clock; }
@@ -1380,9 +1479,17 @@ function pmMount(el, s, F) {
   }
   // ---- life cycle
   const ro = new ResizeObserver(() => size()); ro.observe(cv);
-  cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
+  // David, 2026-10-10: "Back should take me to that exact spot instead of reloading the position" -- this used
+  // to save the SNAPPED cell position (lay.x[centerK], lay.y[centerK]) on the way out, rounding away whatever
+  // precise mid-pan spot P was actually sitting at the moment you tapped a painting open. Save the real P/Z.
+  cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); if (lay) PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z, cardOpen }); });
   size(); build(false);
   window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
+    // QA: the raw pan/zoom (David, 2026-10-10, "Back should restore the exact prior view") -- _qaSetPZ lets a
+    // test establish an arbitrary pan deterministically (a real drag gesture would be slow and imprecise);
+    // _qaPZ reads it back the same way, for the before/after comparison across a Back round trip
+    _qaPZ: () => ({ P: P.slice(), Z, cardOpen }),
+    _qaSetPZ: (x, y, z) => { P = [x, y]; Z = clamp(z, zMin(), ZMAX); centerK = -1; setCenter(lay.n ? nearestK(P[0], P[1]) : -1); PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z }); kick(); },
     // QA (tools/smoke paintmap group): a real network fetch of data/artists/portraits.json doesn't reliably
     // resolve inside the virtual-time test harness, so a forced override makes "landmarks label themselves" a
     // deterministic check rather than a timing bet.
@@ -1394,7 +1501,32 @@ function pmMount(el, s, F) {
     // QA (tier 0/1 atlas): whether the one shared tier-0 sheet has finished loading (every drawn cell gets its
     // own real tile the instant this is true -- see the draw loop's unconditional tier-0 pass), and how many of
     // the tier-1 groups the current view touched have loaded their sheet.
-    _qaAtlasReady: () => !!(PM_ATLAS && PM_ATLAS.bm0),
+    _qaAtlasReady: () => !!(PM_ATLAS && PM_ATLAS.bm0s && PM_ATLAS.bm0s.length),
+    // QA: the zoom-out floor for the CURRENT layout -- PM_CTRL.zoom(_qaZMin()) should show the whole thing
+    // (drawn === count), confirming zMin() isn't capped below what the layout actually needs (David, 2026-10-10)
+    _qaZMin: () => zMin(),
+    // forces one synchronous draw (lensAt() + draw()) without waiting on requestAnimationFrame -- the smoke
+    // harness's own timing can starve rAF well past an ordinary sleep (same gap the tier-0 atlas scenario above
+    // documents), so a direct PM_CTRL.zoom()-then-redraw check needs this rather than a real frame
+    _qaForceDraw: () => { lensAt(); draw(performance.now()); },
+    // QA: snaps an in-flight glide (tap-to-fly, Walk, Center on...) straight to its end state -- this harness's
+    // own rAF gap (see _qaForceDraw's comment) can leave a real glide frozen mid-ease rather than failing to
+    // start at all, so a test that cares about the FINAL position/zoom calls this instead of waiting on frames
+    // that may never come.
+    _qaSkipGlide: () => { if (glide) { P = glide.b.slice(); if (glide.z) Z = glide.z[1]; glide = null; } lensAt(); draw(performance.now()); },
+    // QA: does the layout's own bounding box (all four corners) land within the canvas at the CURRENT zoom --
+    // the literal "layout bbox fits inside the viewport" check (David, 2026-10-10), independent of the separate
+    // tiny-cell draw cutoff (which is about whether an individual cell is worth a drawImage call, not about
+    // whether the overall shape is on screen)
+    _qaBBoxFits: () => {
+      const cx = W / 2, cy = H / 2, corners = [[lay.gx0, lay.gy0], [lay.gx0 + lay.GW - 1, lay.gy0], [lay.gx0, lay.gy0 + lay.GH - 1], [lay.gx0 + lay.GW - 1, lay.gy0 + lay.GH - 1]];
+      let maxX = 0, maxY = 0;
+      for (const [gx, gy] of corners) {
+        const ex = gx - P[0], ey = gy - P[1], z = Math.hypot(ex, ey), f = z < 1e-6 ? K() * M0 : Fz(z) / z;
+        maxX = Math.max(maxX, Math.abs(ex * f)); maxY = Math.max(maxY, Math.abs(ey * f));
+      }
+      return { fits: maxX <= cx + 2 && maxY <= cy + 2, maxX, maxY, halfW: cx, halfH: cy };
+    },
     _qaTier1Stats: () => { let have = 0, want = 0; const man = PM_ATLAS && PM_ATLAS.man; if (man) for (const b of drawn) { const g = pmT1Group(man, b.i); want++; const e = t1.get(g); if (e && e.st === 1) have++; } return { want, have }; } };
 }
 

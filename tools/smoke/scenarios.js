@@ -5010,10 +5010,12 @@ scenario("one-today", "todayPick names a color and the painting that holds it; T
 // ---- the painting map (js/paintmap.js) and painting favorites (js/favs.js §4–5) ----
 // David, 2026-10-09: "make the painting map as minimalist as possible." The richer version this lane shipped
 // first (Rings/Spiral/Families/Tones, Place by, Center on presets, a time scrubber, always-labeled landmarks, a
-// multi-step Walk trail) is gone -- not hidden, deleted -- replaced by: tap a painting to center it (the map
-// re-arranges around it by color, Spiral); a settings sheet with exactly 3 Arrange choices (Color/Time/Painter);
-// a bottom card with up to 3 "only this" chips (Same painter/Same decade/Same place), Open, and Walk from here;
-// removable top chips for whatever's filtered. These scenarios replace every old one for the richer version.
+// multi-step Walk trail) is gone -- not hidden, deleted -- replaced by: tap a painting to center it; a settings
+// sheet with exactly 3 Arrange choices (Color/Time/Painter); a bottom card with up to 3 "only this" chips (Same
+// painter/Same decade/Same place), Open, and Walk from here; removable top chips for whatever's filtered.
+// David, 2026-10-10: "tapping a picture switches the map from Rings to Spiral" -- a tap must re-center WITHIN
+// whatever arrangement is already open, never change it. So a tap in Color (no seed at all) just glides/pans to
+// re-center the tapped cell where it already sits -- it does NOT seed or switch to Spiral any more.
 scenario("paintmap", "the map lays out, a tap glides a painting to the middle, the middle one opens, Back lands on it again", async t => {
   await t.open("#/paintings/map?arr=color", { settle: 800 });
   await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out thousands of paintings");
@@ -5021,7 +5023,7 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
   t.expect(c0 >= 0, "nothing in the middle");
   await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2 - 210, { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL.center !== c0, 6000, "a tap above the middle to glide that painting to the middle");
-  t.expect(t.w.PM_CTRL.spec.arr === "spiral", `tapping an off-center painting should switch to Spiral ("around this painting"): ${t.w.PM_CTRL.spec.arr}`);
+  t.expect(t.w.PM_CTRL.spec.arr === "color", `a tap should re-center WITHIN the current arrangement, never switch it: ${t.w.PM_CTRL.spec.arr}`);
   // centerK updates synchronously inside build(), but `drawn` (what hitAt() actually taps against) is only
   // repopulated by the next animation frame -- a beat to let that frame land before tapping again
   await t.sleep(150);
@@ -5032,6 +5034,66 @@ scenario("paintmap", "the map lays out, a tap glides a painting to the middle, t
   await t.waitFor("[data-fva]", 8000, "the heart under the painting");
   await t.click("[data-back]", { wait: 900 });
   await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv") && t.w.PM_CTRL.center === c1, 12000, "Back to the map, with the same painting in the middle");
+});
+// David, 2026-10-10: "if I open a painting from the map and go back, it should take me back to that exact spot
+// instead of reloading the position." PM_PAN already tracks pan-on-every-center-change and build() restores it,
+// but nothing had checked an ARBITRARY (non-grid-snapped) pan/zoom survives a real Back round trip, card state
+// included -- _qaSetPZ plants one precisely (a real drag would be slow and imprecise to land exactly).
+scenario("paintmap", "Back from a painting restores the exact prior pan/zoom, not a re-fit", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  const before = t.ev("PM_CTRL._qaSetPZ(13.37, -7.42, 0.83); PM_CTRL._qaPZ()");
+  const i = t.ev("PM_CTRL.lay().items[0]");   // any valid gallery index to open
+  t.ev(`galleryPage(${i}, true)`);
+  await t.waitFor(() => /#\/gallery\//.test(t.w.location.hash), 10000, "a painting to open");
+  await t.waitFor("[data-fva]", 8000, "the heart under the painting");
+  await t.click("[data-back]", { wait: 900 });
+  await t.waitFor(() => t.w.PM_CTRL && t.$(".pmx-cv"), 12000, "Back to the map");
+  const after = t.ev("PM_CTRL._qaPZ()");
+  t.expect(Math.abs(after.P[0] - before.P[0]) < .02 && Math.abs(after.P[1] - before.P[1]) < .02, `pan didn't survive Back: ${JSON.stringify(before.P)} -> ${JSON.stringify(after.P)}`);
+  t.expect(Math.abs(after.Z - before.Z) < .01, `zoom didn't survive Back: ${before.Z} -> ${after.Z}`);
+});
+// David, 2026-10-10, twice: first a tap must never switch Rings to Spiral, then (the deeper fix) a tap must not
+// re-layout AT ALL -- no re-seed, no rebuild, just fly to the tapped painting where it already sits. The old
+// layout (same shape, same neighbors, same seed) stays exactly as it was; re-arranging around a painting is now
+// the card's own explicit "Arrange around this" action, covered by a separate scenario below.
+scenario("paintmap", "in Rings, tapping a painting flies to it without re-seeding, rebuilding or switching shape", async t => {
+  await t.open("#/paintings/map?arr=rings&seed=1500", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  t.expect(t.w.PM_CTRL.spec.arr === "rings", `didn't open in Rings: ${t.w.PM_CTRL.spec.arr}`);
+  const layBefore = t.ev("PM_CTRL.lay()");
+  const cv = t.$(".pmx-cv"), r = cv.getBoundingClientRect(), c0 = t.w.PM_CTRL.center;
+  await t.tapAt(cv, r.left + r.width / 2, r.top + r.height / 2 - 210, { wait: 900 });
+  t.ev("PM_CTRL._qaSkipGlide()");
+  await t.waitFor(() => t.w.PM_CTRL.center !== c0, 6000, "a tap off-center to fly to it");
+  t.expect(t.w.PM_CTRL.spec.arr === "rings", `tapping a painting in Rings must not switch arrangement: ${t.w.PM_CTRL.spec.arr}`);
+  t.expect(t.w.PM_CTRL.spec.seed === 1500, `tapping a painting must not re-seed the arrangement: seed is now ${t.w.PM_CTRL.spec.seed}`);
+  const layAfter = t.ev("PM_CTRL.lay()");
+  t.expect(layAfter === layBefore, "tapping a painting rebuilt the layout object -- every neighbor's position should be untouched");
+  // the tapped painting itself should now be large (zoomed in) and dead center
+  const myRect = t.ev("PM_CTRL._qaRects().find(b => b.i === PM_CTRL.center)");
+  t.expect(myRect && Math.max(myRect.w, myRect.h) >= 120, `the tapped painting isn't large on screen after the fly-to: ${JSON.stringify(myRect)}`);
+  t.expect(myRect && Math.abs(myRect.x - r.width / 2) < 20 && Math.abs(myRect.y - r.height / 2) < 20, `the tapped painting isn't centered after the fly-to: ${JSON.stringify(myRect)}`);
+});
+// David, 2026-10-10: "doesn't let me zoom out all the way to see everything" -- zMin() used to hard-cap the fit
+// radius at 45 cells no matter how much bigger the real layout was. Checks the floor now tracks the layout's own
+// extent (its real bounding box relative to wherever the pan happens to sit, not assumed-centered) for every
+// arrangement, including a wildly elongated one (By painter: thousands of short rows, far taller than wide).
+// _qaForceDraw() sidesteps this harness's own rAF/virtual-clock gap (same one the tier-0 atlas scenario above
+// documents) by calling lensAt()+draw() directly instead of waiting on a real animation frame that may not fire.
+scenario("paintmap", "at the zoom floor, the whole layout fits on screen -- Grid, Rings, Spiral, By painter, Time", async t => {
+  const checkFits = async (qs, label) => {
+    await t.open(`#/paintings/map?${qs}`, { settle: 800 });
+    await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000, 20000, `${label}: the map to lay out`);
+    t.ev("PM_CTRL.zoom(PM_CTRL._qaZMin())"); t.ev("PM_CTRL._qaForceDraw()");
+    const bb = t.ev("PM_CTRL._qaBBoxFits()");
+    t.expect(bb.fits, `${label}: the layout's own bbox doesn't fit at the zoom floor -- maxX=${bb.maxX.toFixed(0)} (halfW=${bb.halfW.toFixed(0)}) maxY=${bb.maxY.toFixed(0)} (halfH=${bb.halfH.toFixed(0)})`);
+  };
+  await checkFits("arr=color", "Grid/By color");
+  await checkFits("arr=rings&seed=1500", "Rings");
+  await checkFits("arr=spiral&seed=1500", "Spiral");
+  await checkFits("arr=painter", "By painter");
+  await checkFits("arr=time", "Time");
 });
 // David's screenshot, 2026-10-09: "when I look at a painting and tap 'Show it on the map', it opens the map at a
 // different section, so I don't even see the painting that brought me there." Root cause: caption() keeps
@@ -5094,7 +5156,7 @@ scenario("paintmap", "the card's Same painter / Same decade / Same place chips n
   await t.tapAt(cv0, r00.left + r00.width / 2, r00.top + r00.height / 2 - 150, { wait: 900 });
   await t.waitFor(".pmx-facets button", 6000, "the card's facet chips");
   const labels = t.$$(".pmx-facets button").map(b => t.text(b));
-  t.expect(labels.every(l => ["Same painter", "Same decade", "Same place", "Open", "Walk from here"].includes(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
+  t.expect(labels.every(l => ["Same painter", "Same decade", "Same place", "Open", "Arrange around this", "Walk from here"].includes(l)), `unexpected chip label(s): ${JSON.stringify(labels)}`);
   t.expect(!labels.includes("undefined"), `a chip rendered the literal text "undefined": ${JSON.stringify(labels)}`);
   const facetBtn = t.$$(".pmx-facets button").find(b => ["Same painter", "Same decade", "Same place"].includes(t.text(b)));
   t.expect(facetBtn, "no Same painter/decade/place chip to test (this painting has none of the three?)");
@@ -5234,8 +5296,12 @@ scenario("paintmap", "tier 0 (the shared atlas sheet) covers the whole default v
   const src = await fetch("/js/paintmap.js").then(r => r.text());
   // the tier-0 drawImage must run for every drawn cell unconditionally (gated only on PM_ATLAS/bm0 existing, not
   // on any further per-cell async state) -- that's what makes "one request covers the whole view" true at all
-  const t0Block = (src.match(/if \(PM_ATLAS && PM_ATLAS\.bm0\) \{[\s\S]*?\n      \}/) || [""])[0];
-  t.expect(t0Block && /ctx\.drawImage\(PM_ATLAS\.bm0,/.test(t0Block), "couldn't find tier 0's unconditional per-cell drawImage -- check it hasn't grown an extra per-cell gate");
+  // 2026-10-10: tier 0 is now several <=2048px sheets (iOS/WebKit decode-size safety -- tools/paintmap_atlas.py),
+  // so the drawImage is gated on THIS CELL's own sheet bitmap (bm0) rather than one shared PM_ATLAS.bm0 -- still
+  // unconditional in the sense that matters (no further per-cell async wait once PM_ATLAS itself is ready, since
+  // every sheet in bm0s resolves together in one Promise.all before PM_ATLAS is ever set)
+  const t0Block = (src.match(/if \(PM_ATLAS && PM_ATLAS\.bm0s\) \{[\s\S]*?\n      \}/) || [""])[0];
+  t.expect(t0Block && /ctx\.drawImage\(bm0,/.test(t0Block), "couldn't find tier 0's per-cell drawImage -- check it hasn't grown an extra per-cell gate");
   const manifestExists = await fetch("/data/paintmap/manifest.json", { cache: "no-store" }).then(r => r.ok).catch(() => false);
   if (!manifestExists) { t.notes.push("data/paintmap/manifest.json not present in this checkout -- skipped the live load-time check, static check only"); return; }
   // A real atlas0.webp fetch + createImageBitmap decode resolving inside this harness's virtual-time iframe is
