@@ -1609,6 +1609,68 @@ scenario("studio", "the camera eye's exact-pixel sampler doesn't blur across a c
   t.expect(got.nearRight === "#0000FF", `~1.5px right of the boundary should still read pure blue (exact pixel, not a blur), got ${got.nearRight}`);
 });
 
+// David, 2026-10-09: "Shades of this" -- point at a dress, get the array of reds that really exist inside it,
+// not the background, skin or shadows. Tested directly against the pipeline (js/camera.js: segPrep/segGrow/
+// segKmeans/segDendrogram/segMaxDistinct/segShades), the same functions the sheet calls, with a synthetic frame
+// a red "dress" (gradient shading + a fold, still one fabric) on a contrasting background with a skin-tone
+// patch and a grey patch, both clearly outside it.
+scenario("studio", "Shades of this: the grown region stays inside the dress, and shares always sum to 100%", async t => {
+  await t.open("#shot=studio", { settle: 300 });
+  const r = t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 300; c.height = 300;
+    const x = c.getContext("2d");
+    x.fillStyle = "#2B2A4C"; x.fillRect(0, 0, 300, 300);
+    const g = x.createLinearGradient(60, 40, 240, 260);
+    g.addColorStop(0, "#A8323F"); g.addColorStop(.5, "#7E1F2B"); g.addColorStop(1, "#5C141E");
+    x.fillStyle = g; x.fillRect(60, 40, 180, 220);
+    x.fillStyle = "rgba(0,0,0,.25)"; x.fillRect(120, 90, 30, 170);
+    x.fillStyle = "#D9A47A"; x.fillRect(90, 10, 60, 30);
+    x.fillStyle = "#9A9A96"; x.fillRect(0, 260, 300, 40);
+    const prep = segPrep(c, 300, 300);
+    const grow = segGrow(prep, .5, .5, 1);
+    const km = segKmeans(prep, grow, Math.min(24, grow.count));
+    const dendro = segDendrogram(km.clusters);
+    const maxD = segMaxDistinct(dendro);
+    const lo = segShades(prep, km, dendro, 2), hi = segShades(prep, km, dendro, maxD);
+    let leaked = false;
+    for (let i = 0; i < grow.mask.length; i++) {
+      if (!grow.mask[i]) continue;
+      const xx = i % grow.sw, yy = Math.floor(i / grow.sw), fx = xx / grow.sw * 300, fy = yy / grow.sh * 300;
+      if (fy < 35 || fy > 262 || fx < 55 || fx > 245) { leaked = true; break; }
+    }
+    return { leaked, maxD, loN: lo.length, hiN: hi.length, loSum: lo.reduce((a, b) => a + b.share, 0), hiSum: hi.reduce((a, b) => a + b.share, 0), count: grow.count };
+  })()`);
+  t.expect(!r.leaked, "the region leaked outside the dress into the skin-tone or grey background");
+  t.expect(r.count > 400, `the grown region looks too small (${r.count} px)`);
+  t.expect(r.loN === 2, `asking for 2 shades returned ${r.loN}`);
+  t.expect(r.hiN === r.maxD, `asking for the max (${r.maxD}) returned ${r.hiN}`);
+  t.expect(Math.abs(r.loSum - 1) < .01, `shares at 2 shades don't sum to 100% (${r.loSum})`);
+  t.expect(Math.abs(r.hiSum - 1) < .01, `shares at the max don't sum to 100% (${r.hiSum})`);
+});
+
+scenario("studio", "Shades of this: the sheet opens on a frozen frame, the count slider is instant, and a name opens its page", async t => {
+  await t.open("#shot=eye:shades", { settle: 1400 });
+  await t.waitFor(".shd-sheet", 6000, "the Shades of this sheet");
+  const n0 = t.$$(".shd-list .shd-row").length;
+  t.expect(n0 >= 2, `only ${n0} shades listed`);
+  const slider = t.$("[data-shd-n]");
+  t.expect(slider, "no 'how many shades' slider");
+  const max = +slider.max;
+  slider._countTo(max);
+  await t.sleep(150);
+  const nMax = t.$$(".shd-list .shd-row").length;
+  t.expect(nMax === max, `asking for the max (${max}) on the slider shows ${nMax} rows`);
+  slider._countTo(2);
+  await t.sleep(150);
+  t.expect(t.$$(".shd-list .shd-row").length === 2, "the slider back at 2 doesn't show 2 shades");
+  const sw = t.$(".shd-list .shd-sw");
+  await t.click(sw, { wait: 200 });
+  t.expect(sw.classList.contains("on"), "tapping a shade's swatch didn't highlight it");
+  const name = t.$(".shd-list .shd-name");
+  await t.click(name, { force: true, wait: 500 });
+  t.expect(t.$(".cp-page") || /^#\/(page|color)\//.test(t.w.location.hash), "tapping a shade's name didn't open its page");
+});
+
 scenario("studio", "photo palette: mode chips, slider and a chip opens its page", async t => {
   await t.open("#shot=studiopv", { settle: 900 });
   await t.waitFor("[data-pvorder] button", 8000, "the photo's palette-type chips");
@@ -2374,6 +2436,29 @@ scenario("sets", "Pair with… offers Point your camera and From a photo; From a
   await t.click("[data-sx-photo-done]", { force: true, wait: 800 });
   await t.waitFor(() => /^#\/set\//.test(t.w.location.hash) && t.$(".sp-page .sp-strip"), 12000, "Done opened the set page");
   t.expect(t.$$(".sp-names .sp-name").length === 3, "the set from the photo doesn't hold three colors");
+});
+// window.cameraPick itself (js/camera.js): a fake camera stream stands in for getUserMedia, two "Add" picks and
+// Done, and the set page opens with Teal plus both camera picks -- the real door settray's "Point your camera" uses.
+scenario("sets", "Pair with… Point your camera: a fake stream, a pick and Done open the pair page", async t => {
+  SP.placed();
+  await t.open("#/color/teal", { settle: 800, keepState: true });
+  await t.click(await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button"), { wait: 600 });
+  await t.waitFor("[data-sx-cam]", 6000, "Point your camera");
+  t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 320; c.height = 320;
+    const x = c.getContext("2d");
+    x.fillStyle = "#8C2F39"; x.fillRect(0, 0, 320, 160);
+    x.fillStyle = "#3F6B52"; x.fillRect(0, 160, 320, 160);
+    const stream = typeof c.captureStream === "function" ? c.captureStream() : null;
+    if (stream) navigator.mediaDevices.getUserMedia = () => Promise.resolve(stream);
+  })()`);
+  await t.click("[data-sx-cam]", { force: true, wait: 600 });
+  await t.waitFor(".screen.eye #vid", 6000, "the camera screen");
+  await t.click("#shut", { wait: 400 });
+  await t.click(await t.waitFor("#addBtn", 4000, "the Add button (pick mode)"), { wait: 400 });
+  await t.click(await t.waitFor("#doneBtn", 4000, "the Done button in the picks strip"), { wait: 600 });
+  await t.waitFor(() => /^#\/pair\//.test(t.w.location.hash) && t.$(".sp-page .sp-pair"), 12000, "Done opened the pair page");
+  t.expect(t.$$(".sp-pair .sp-plate").length === 2, "expected Teal and the one camera pick as a pair");
 });
 scenario("sets", "a pair page: facts and paintings and Add a color makes a trio", async t => {
   SP.placed();
