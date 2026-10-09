@@ -65,6 +65,9 @@
 .oo-fb .mono{font:500 15px/1 var(--mono)}
 .oo-src{display:block;font-size:16px;color:var(--soft);margin-top:4px}
 .oo-rev{display:flex;flex-direction:column;gap:12px;width:100%}
+/* Next is the one thing to press after every round: a full-width, thumb-sized button, never a small ghost link */
+.oo-rev [data-next]{width:100%;min-height:58px;justify-content:center;font-size:19px;font-weight:600;gap:10px}
+.oo-rev [data-next].ghost{min-height:58px;padding:0 22px 0 26px;background:var(--surface-2);color:var(--ink);font:600 19px/1 var(--sans);text-decoration:none;border-radius:var(--r-pill);justify-content:center}
 
 /* ---------- the journey map ---------- */
 .oo-map .deck-top{min-height:44px}
