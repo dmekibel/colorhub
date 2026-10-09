@@ -1,0 +1,49 @@
+{
+ "id": "gorpcore",
+ "name": "Gorpcore",
+ "lineage": {
+  "influenced_by": [
+   "technical outdoor/hiking gear",
+   "a joke term (\"gorp,\" trail mix) applied to high-fashion runway adoption of hiking brands"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "term coined 2017; peaked 2018–2019"
+ ],
+ "places": [
+  "high fashion runways adopting brands like Arc'teryx and Salomon"
+ ],
+ "garments": [
+  "technical waterproof shells",
+  "trail running shoes",
+  "utility vests"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "fashion's historical disdain for purely functional outdoor gear, elevating it to high-fashion status instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "2010s",
+  "key_motifs": "Utilitarianism, layering, technical fabrics, earthy and muted color palettes, comfort, durability, logos of outdoor brands",
+  "key_colours": "Earthy tones (brown, green, grey, khaki), black, white, with occasional bright pops (orange, yellow, blue, red)",
+  "related_aesthetics": "CabincoreGranolaHealth GothLad CultureNaarmcoreNormcoreTechwearUltras",
+  "key_values": "Functionality, practicality, comfort, durability, preparedness, appreciation for nature (aestheticized)"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Gorpcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 74% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

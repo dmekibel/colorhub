@@ -1,0 +1,50 @@
+{
+ "id": "fairycore",
+ "name": "Fairycore",
+ "lineage": {
+  "influenced_by": [
+   "cottagecore",
+   "fantasy illustration and folklore"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2019–present"
+ ],
+ "places": [
+  "TikTok/Pinterest; forest and garden settings"
+ ],
+ "garments": [
+  "flowing sheer fabric",
+  "flower crowns",
+  "iridescent and gossamer textures"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "cottagecore's grounded rural practicality, tilting toward the fantastical and otherworldly instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Faecore, Faerycore, Faeriecore",
+  "decade_of_origin": "2020s",
+  "key_motifs": "Fairy wings, sparkles, glitter, mushrooms, butterflies, flowers, moss, soft animals, elf ears",
+  "key_colours": "Pastel colours, earth tones, soft greens, pinks, and yellows",
+  "related_aesthetics": "ChangelingcoreCottagecoreFairy GrungeFantasyGoblincoreMori KeiMushroomcoreNaturecoreSoft GirlStregaWitchcore",
+  "key_values": "Magic, nature, tranquility, escapism, optimism, kindness"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Fairycore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 50% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

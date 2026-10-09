@@ -1,0 +1,48 @@
+{
+ "id": "cabincore",
+ "name": "Cabincore",
+ "lineage": {
+  "influenced_by": [
+   "cottagecore",
+   "actual mountain-cabin interior design"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2020–present"
+ ],
+ "places": [
+  "TikTok/Pinterest"
+ ],
+ "garments": [
+  "flannel",
+  "wool blankets",
+  "knit sweaters"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "cottagecore's floral, sunlit pastoralism, shifting to a woodsier, cooler-toned mountain retreat instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "key_motifs": "Cabins, forests, campfires, flannels, hiking, baking, hot drinks",
+  "key_colours": "Deep Brown, auburn. Darker shades of red, maroon, burgundy, etc. All shades of Green, White, burnt Orange",
+  "related_aesthetics": "AdventurecoreAprès-skiCampcoreComfy/CozyCottagecoreDark AcademiaGorpcoreNorthernessForestpunkGoblincoreNaturecore"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Cabincore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 51% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 69% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}
