@@ -85,6 +85,12 @@ const PM_ICON = {
 let PM_THUMBS = null, PM_THUMBS_P = null;
 const PM_PAN = new Map();     // layout key -> { x, y, s }: where you were, so Back from a painting lands on it again
 const PM_LAYOUTS = new Map(); // layout key -> layout (the color pass costs ~100 ms on 24,000 paintings: once is enough)
+// David, 2026-10-09: "always-labeled landmark paintings" -- gallery indices from EVERY painter's own `famous`
+// list (data/artists/portraits.json, tools/artwiki_portraits.py's Wikidata-reach signal, already built and
+// already used for painter-page portraits/js/richcolor.js rcLoadPortraits -- the same definition of "famous"
+// the rest of the app uses, not a new one invented here). Labeled by painter name (already in hand synchronously
+// via F.artist, no extra fetch per cell) at a far lower size threshold than any other on-map text gets.
+let PM_LANDMARKS = new Set();
 
 // ---------- data ----------
 function pmThumbsLoad() {
@@ -507,6 +513,7 @@ function pmOpen(spec, o = {}) {
     </header>
     <p class="pmx-why" data-pmwhy></p>
     <div class="pmx-chipbar" data-pmchipbar hidden></div>
+    <div class="pmx-walk" data-pmwalk hidden></div>
     <div class="pmx-facets" data-pmfacets hidden></div>
     <div class="pmx-cap" data-pmcap hidden>
       <button class="pmx-cap-main" data-pmopen><b data-pmct></b><small data-pmcb></small></button>
@@ -535,11 +542,20 @@ function pmOpen(spec, o = {}) {
 function pmMount(el, s, F) {
   const cv = el.querySelector(".pmx-cv"), ctx = cv.getContext("2d"), wait = el.querySelector(".pmx-wait");
   const RM = reduceMotion, cap = el.querySelector("[data-pmcap]"), heart = el.querySelector("[data-pmheart]");
-  const centerBtn = el.querySelector("[data-pmcenter]"), facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]");
+  const centerBtn = el.querySelector("[data-pmcenter]"), facets = el.querySelector("[data-pmfacets]"), chipbar = el.querySelector("[data-pmchipbar]"), walkBar = el.querySelector("[data-pmwalk]");
+  let walk = [];   // "Walk from here" (David, 2026-10-09): the gallery indices visited this walk, in order; [] when none is active
   let lay = null, W = 0, H = 0, dpr = 1, base = 46;
   let P = [0, 0], Z = 1, V = [0, 0], glide = null, raf = 0, dead = false, centerK = -1, lastTick = 0, drawn = [];
   const ZMAX = 2.2;
   const imgs = pmImages(() => kick());
+  if (!PM_LANDMARKS.size && typeof rcLoadPortraits === "function") {
+    rcLoadPortraits().then(port => {
+      if (dead || !port) return;
+      const set = new Set();
+      for (const slug in port) (port[slug].famous || []).forEach(gi => { if (gi != null && gi >= 0) set.add(gi); });
+      PM_LANDMARKS = set; kick();
+    }).catch(() => {});
+  }
   // ---- the lens (js/honey.js's round fisheye): F(z) is how far from the middle a cell z cells away is drawn
   // far out, the lens softens (as on the color map), so the overview reads as one even mosaic
   const M0N = 4.6, M1 = 1, SIG = 1.1;
@@ -593,16 +609,53 @@ function pmMount(el, s, F) {
     PM_PAN.set(lay.key, { x: P[0], y: P[1], s: Z });
     paintFacets(i);
   }
+  // "Walk from here" (David, 2026-10-09): step to the most similar painting by a DIFFERENT painter -- the point
+  // is leaving your own painter's room each step, not drilling into one artist's own palette range -- excluding
+  // anywhere the walk has already been too, so it can't loop back on itself. A cheap mean-color+chroma distance
+  // (pmSimilarOrder's own first pass) over the current filtered list: fast enough for a one-off tap, and good
+  // enough that "most similar" reads as true at a glance.
+  function pmWalkCandidate(fromI, excludeSet) {
+    const G = GAL, m = G.mean, q = fromI * 3, painter = F.artist[fromI];
+    let best = -1, bd = Infinity;
+    for (const j of pmList(s, F)) {
+      if (j === fromI || excludeSet.has(j)) continue;
+      if (painter && F.artist[j] === painter) continue;
+      const a = m[j * 3] - m[q], b = m[j * 3 + 1] - m[q + 1], c = m[j * 3 + 2] - m[q + 2], e = G.C[j] - G.C[fromI];
+      const d = a * a + b * b + c * c + e * e;
+      if (d < bd) { bd = d; best = j; }
+    }
+    return best;
+  }
+  function doWalk() {
+    if (centerK < 0) return;
+    const from = lay.items[centerK];
+    if (!walk.length) walk = [from];
+    const next = pmWalkCandidate(from, new Set(walk));
+    if (next < 0) { toast("No different-painter match left to walk to", { low: true }); return; }
+    buzz(8); walk.push(next); s.seed = next; s.arr = "rings"; rebuild();
+  }
+  function paintWalk() {
+    if (walk.length < 2) { walkBar.hidden = true; walkBar.innerHTML = ""; return; }
+    walkBar.hidden = false;
+    walkBar.innerHTML = `<button class="pmx-walk-x" data-pmwalkx aria-label="End the walk">${ICON.x}</button>${walk.map((i, k) => `<button class="pmx-walk-dot${k === walk.length - 1 ? " cur" : ""}" data-pmwalkto="${k}" style="--c:${pmHex(i)}" aria-label="Step ${k + 1} of the walk"></button>`).join("")}`;
+    walkBar.querySelector("[data-pmwalkx]").onclick = () => { buzz(4); walk = []; paintWalk(); };
+    walkBar.querySelectorAll("[data-pmwalkto]").forEach(b => b.onclick = () => {
+      const k = +b.dataset.pmwalkto; if (k === walk.length - 1) return;
+      buzz(5); walk = walk.slice(0, k + 1); s.seed = walk[k]; s.arr = "rings"; rebuild();
+    });
+  }
   // filter-by-example (David, 2026-10-09): the centered painting's own facets as tappable "only these" chips,
   // plus "More like this" (the same whole-palette matching as the "similar" arrangement, seeded here)
   function paintFacets(i) {
     const fs = pmFacetsOf(i, F);
     facets.hidden = false;
-    facets.innerHTML = `<button class="pmx-fchip pmx-fchip-more" data-pmmore>More like this</button>${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${fc.dim === "color" ? `<i style="--c:${fc.val}"></i>` : ""}${esc(fc.label)}</button>`).join("")}`;
+    facets.innerHTML = `<button class="pmx-fchip pmx-fchip-walk" data-pmwalk-go>Walk from here →</button><button class="pmx-fchip pmx-fchip-more" data-pmmore>More like this</button>${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${fc.dim === "color" ? `<i style="--c:${fc.val}"></i>` : ""}${esc(fc.label)}</button>`).join("")}`;
+    facets.querySelector("[data-pmwalk-go]").onclick = () => doWalk();
     facets.querySelector("[data-pmmore]").onclick = () => { buzz(6); s.seed = i; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild(); };
     facets.querySelectorAll("[data-pmfacet]").forEach(b => b.onclick = () => {
       const fc = fs[+b.dataset.pmfacet]; buzz(6); pmFacetApply(s.f, fc.dim, fc.val); rebuild();
     });
+    paintWalk();
   }
   function paintHeart(i, d) {
     const on = !!(d && typeof fvArtHas === "function" && fvArtHas(d.id));
@@ -657,6 +710,9 @@ function pmMount(el, s, F) {
     const cx = W / 2, cy = H / 2, R = Finv(Math.hypot(W, H) / 2 + 40), k0 = K();
     const map = (ex, ey) => { const z = Math.hypot(ex, ey), f = z < 1e-6 ? K() * M0 : Fz(z) / z; return [cx + ex * f, cy + ey * f]; };
     const x0 = Math.floor(P[0] - R), x1 = Math.ceil(P[0] + R), y0 = Math.floor(P[1] - R), y1 = Math.ceil(P[1] + R);
+    // David, 2026-10-09: "your favorites glowing on the map" -- one Set built once a frame (fvArtList's own
+    // {i,...} records already carry the gallery index), not a per-cell favorites lookup.
+    const favSet = typeof fvArtList === "function" ? new Set(fvArtList().map(r => r.i)) : null;
     drawn = []; const wantImg = [];
     for (let y = Math.max(y0, lay.gy0); y <= Math.min(y1, lay.gy0 + lay.GH - 1); y++) {
       const row = (y - lay.gy0) * lay.GW;
@@ -712,6 +768,29 @@ function pmMount(el, s, F) {
         ctx.globalAlpha = 1;
       }
       if (b.d >= 40 && GAL.mean[i * 3] < 24) { ctx.strokeStyle = "rgba(236,232,223,.14)"; ctx.lineWidth = 1; ctx.strokeRect(X + .5, Y + .5, w - 1, h - 1); }
+      // your favorites glow (the same pink the heart icon turns "on")
+      if (favSet && favSet.size && b.d >= 7 && favSet.has(i)) {
+        ctx.save(); const lw = Math.max(1.5, Math.min(3, b.d * .025));
+        ctx.shadowColor = "rgba(232,120,122,.85)"; ctx.shadowBlur = Math.min(18, b.d * .2);
+        ctx.strokeStyle = "rgba(232,120,122,.95)"; ctx.lineWidth = lw;
+        ctx.strokeRect(X + lw / 2, Y + lw / 2, w - lw, h - lw);
+        ctx.restore();
+      }
+      // always-labeled landmarks (a painter name, small and opaque, regardless of how small the cell otherwise reads)
+      if (b.d >= 16 && PM_LANDMARKS.size && PM_LANDMARKS.has(i)) {
+        const nm = F.artist[i] ? xbArtistName(F, F.artist[i]) : "";
+        if (nm) {
+          const py = Y + h + 4;
+          if (py > -16 && py < H + 16) {
+            ctx.save(); ctx.font = `500 ${Math.max(10, Math.min(13, b.d * .15))}px "Geist Mono", Menlo, monospace`;
+            ctx.textAlign = "center"; ctx.textBaseline = "top";
+            const tw2 = ctx.measureText(nm).width;
+            ctx.fillStyle = "rgba(14,13,11,.82)"; ctx.fillRect(b.x - tw2 / 2 - 5, py - 2, tw2 + 10, 15);
+            ctx.fillStyle = "rgba(236,232,223,.95)"; ctx.fillText(nm, b.x, py);
+            ctx.restore();
+          }
+        }
+      }
     }
     // band and painter labels, where there's room to read them
     if (lay.labels.length) {
@@ -1017,7 +1096,11 @@ function pmMount(el, s, F) {
   const ro = new ResizeObserver(() => size()); ro.observe(cv);
   cleanup.push(() => { dead = true; clearTimeout(tapTimer); ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
   size(); build(false);
-  window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); } };
+  window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
+    // QA (tools/smoke paintmap group): a real network fetch of data/artists/portraits.json doesn't reliably
+    // resolve inside the virtual-time test harness, so a forced override makes "landmarks label themselves" a
+    // deterministic check rather than a timing bet.
+    _qaLandmarks: arr => { PM_LANDMARKS = new Set(arr); kick(); } };
 }
 
 // this file can load after router.js (on first use): give pmOpen its address now

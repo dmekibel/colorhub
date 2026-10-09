@@ -49,7 +49,22 @@
   white-space:nowrap;transition:transform .2s var(--spring)}
 .pmx-fchip i{flex:none;width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
 .pmx-fchip-more{font-style:italic;color:rgba(236,232,223,.98)}
+.pmx-fchip-walk{background:var(--paper);color:var(--paper-ink);font-style:normal}
 .pmx-fchip:active{transform:scale(.95)}
+
+/* "Walk from here" (David, 2026-10-09): a trail of small dots, one per step, above the facets row; the current
+   step is ringed and bigger. Stacks above .pmx-facets regardless of DOM order (both are position:absolute). */
+.pmx-walk{position:absolute;z-index:3;left:12px;right:16px;bottom:calc(var(--corner-b,calc(var(--bottom) + 12px)) + var(--corner,56px) + 52px);
+  display:flex;align-items:center;gap:7px;overflow-x:auto;scrollbar-width:none;pointer-events:none}
+.pmx-walk[hidden]{display:none}
+.pmx-walk::-webkit-scrollbar{display:none}
+.pmx-walk-x{pointer-events:auto;flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;
+  background:rgba(14,13,11,.86);color:rgba(236,232,223,.85)}
+.pmx-walk-x svg{width:12px;height:12px}
+.pmx-walk-dot{pointer-events:auto;flex:none;width:14px;height:14px;border-radius:50%;background:var(--c);
+  box-shadow:0 0 0 2px rgba(14,13,11,.7);transition:transform .2s var(--spring)}
+.pmx-walk-dot.cur{width:20px;height:20px;box-shadow:0 0 0 2px rgba(14,13,11,.7),0 0 0 4px var(--paper)}
+.pmx-walk-dot:active{transform:scale(.85)}
 
 /* bottom: the painting in the middle, named; "center on this" and the heart beside it; the corner at the right */
 .pmx-cap{position:absolute;z-index:3;left:12px;right:calc(16px + var(--corner,56px) + 10px);bottom:var(--corner-b,calc(var(--bottom) + 12px));min-height:var(--corner,56px);
