@@ -2628,3 +2628,35 @@ scenario("pages", "with an iPhone safe area, ‹ and Close sit below the status 
   }
   t.expect(!bad.length, `on the status bar: ${bad.join(", ")}`);
 });
+
+// ================================================================== THE FAMILY TREE (js/aesthetics-graph.js: #/web)
+scenario("web", "a fresh load of #/web shows the graph canvas and a tap opens the Show sheet", async t => {
+  await t.open("#/web", { settle: 600 });
+  const cv = await t.waitFor(".ag-canvas", 15000, "the family tree canvas");
+  await t.waitFor(() => cv.getBoundingClientRect().width > 100, 10000, "the canvas to size itself");
+  t.expect(t.w.location.hash === "#/web", `the address is ${t.w.location.hash}`);
+  await t.click("[data-agshow]", { wait: 300 });
+  await t.waitFor(".ag-sheet", 6000, "the Show sheet");
+  const chip = t.$(".ag-sheet [data-agtype='artist']");
+  t.expect(chip, "no Painters filter chip in the Show sheet");
+  await t.click(chip, { wait: 150 });
+  await t.click(".ag-sheet [data-agapply]", { wait: 400 });
+  t.expect(!t.$(".sheet"), "the Show sheet didn't close after Show these");
+});
+
+scenario("web", "#/web/node/<id> opens a dedicated page for a curated subculture, with tappable connections", async t => {
+  await t.open("#/web/node/subculture:punk", { settle: 500 });
+  await t.waitFor(() => /Punk/.test(t.$("#app").innerText), 15000, "the Punk node page");
+  t.expect(t.w.location.hash === "#/web/node/subculture:punk", `the address is ${t.w.location.hash}`);
+  const chip = await t.waitFor(() => t.$$(".ag-chip")[0], 8000, "a connection chip on the Punk page");
+  await t.click(chip, { wait: 500 });
+  await t.waitFor(() => t.w.location.hash !== "#/web/node/subculture:punk" && !t.$(".screen.waiting"), 10000, "tapping a connection to open it");
+});
+
+scenario("web", "a look page's \"See its family tree\" opens the graph centered on it", async t => {
+  await t.open("#/look/baroque-chiaroscuro", { settle: 500 });
+  const btn = await t.waitFor("[data-webfam]", 12000, "the See its family tree button");
+  await t.click(btn, { wait: 500 });
+  await t.waitFor(() => /^#\/web\/focus\//.test(t.w.location.hash), 10000, "the #/web/focus/ address");
+  await t.waitFor(".ag-canvas", 8000, "the family tree canvas after focusing a look");
+});
