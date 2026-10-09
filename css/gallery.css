@@ -151,6 +151,24 @@
 
 /* the palette sits right under the painting; the painting stays pinned while you change types and sizes */
 .gl-pal-wrap .gl-hero{position:sticky;top:calc(var(--top) + 64px);z-index:4;margin:0 calc(-1 * var(--g));padding:0 var(--g) 10px;background:var(--ground)}
+/* David, 2026-10-09 ("weird that you need to scroll far down just to get who and why"): title, painter, date and
+   museum sit right under the pinned image, above the palette strip, so who/when/where/why never needs a scroll.
+   Kept short on purpose -- the eyebrow/title/dek are the same elements the painting used to show lower on the
+   page (gl-roles still follows, further down); this block just moves them above the palette. */
+.gl-id{margin-top:14px}
+.gl-id .p-title{margin-top:6px}
+.gl-id .p-dek{margin-top:6px}
+.gl-id-src{margin-top:4px;font:400 13px/1.3 var(--mono);color:var(--faint)}
+.gl-id-src a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+/* "Why it matters": one or two lines from this painting's own Analysis findings (js/artwiki.js awPaintingWhy),
+   the only per-painting prose the corpus currently has. Quiet until there's something to say. */
+.gl-why{margin-top:10px}
+.gl-why[hidden]{display:none}
+.gl-why-t{font:400 15px/1.45 var(--sans);color:var(--soft);text-wrap:pretty}
+.gl-why-ex{margin:6px 0 0;padding-left:18px;font:400 15px/1.45 var(--sans);color:var(--soft)}
+.gl-why-ex[hidden]{display:none}
+.gl-why-ex li+li{margin-top:4px}
+.gl-why-more{margin-top:4px;font:500 14px/1 var(--sans);color:var(--ink);text-decoration:underline;text-underline-offset:2px}
 /* David, 2026-10-08 ("weird spacing; palettes don't fit"): the strip first, right under the picture, then three
    slim rows (type, how many, on the painting) and a one-line caption. Selection lifts a step, never turns white. */
 .gl-pal-ui{padding-top:0}
