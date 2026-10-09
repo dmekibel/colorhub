@@ -71,19 +71,20 @@ const worldHistory = () => {
 };
 const worldWhenHistory = fn => window.FASHION_HISTORY ? fn() : loadData("fashion-history").then(() => fn());
 
-// ---------------------------------------------------------------- Measured eras (1700s, 1800-1849, 1850-1899)
-// Real multi-palette stats from the garment archive (data/fashion/measured-eras.json, built by
-// tools/fashion_measure.py from the same 991-piece Met + Cleveland corpus js/fashion.js already loads for
-// Garments), paired with the written article in data/fashion-eras.js (window.FASHION_ERAS, lazy). Separate
-// from Decades (1900s-2020s, documented but not corpus-measured — see research/FASHION.md for why).
+// ---------------------------------------------------------------- Measured stats (every decade 1700s-2020s)
+// data/fashion/measured-decades.json (built by tools/fashion_measure.py) combines two sources: the CC0/
+// public-domain Met + Cleveland corpus (tools/fashion.py, shown as photos) and the V&A Collections API
+// (tools/fashion_va.py, measure-only -- colors kept, no image ever stored, since V&A photos are not CC0/PD).
+// Feeds both Decades (fashionDecadeDetail, per-decade) and the three "Deep reads" long-form articles in
+// data/fashion-eras.js (window.FASHION_ERAS, lazy), which read FX_DECADE_STATS.eras instead of .decades.
 DATA_SRC["fashion-eras"] = "data/fashion-eras.js";
-let FX_ERA_STATS = null, FX_ERA_LOADING = null;
-function fxEraStatsLoad() {
-  if (FX_ERA_STATS) return Promise.resolve(FX_ERA_STATS);
-  return FX_ERA_LOADING || (FX_ERA_LOADING = fetch("data/fashion/measured-eras.json" + (DATA_VER ? "?v=" + DATA_VER : "")).then(r => r.ok ? r.json() : null).then(d => {
-    FX_ERA_LOADING = null;
-    return (FX_ERA_STATS = d);
-  }).catch(() => { FX_ERA_LOADING = null; return null; }));
+let FX_DECADE_STATS = null, FX_DECADE_LOADING = null;
+function fxDecadeStatsLoad() {
+  if (FX_DECADE_STATS) return Promise.resolve(FX_DECADE_STATS);
+  return FX_DECADE_LOADING || (FX_DECADE_LOADING = fetch("data/fashion/measured-decades.json" + (DATA_VER ? "?v=" + DATA_VER : "")).then(r => r.ok ? r.json() : null).then(d => {
+    FX_DECADE_LOADING = null;
+    return (FX_DECADE_STATS = d);
+  }).catch(() => { FX_DECADE_LOADING = null; return null; }));
 }
 const worldWhenEras = fn => window.FASHION_ERAS ? fn() : loadData("fashion-eras").then(() => fn());
 
@@ -98,8 +99,8 @@ const wdImg = (src, fallback = "") => src ? `<img src="${esc(src)}" alt="" loadi
 function worldFashionSection(host) {
   const histImg = ((FASHION.history.find(h => h.img) || {}).img || {}).thumb;
   const tiles = [
-    ["decades", "Decades", `${FASHION.decades.length} decades, 1900s–2020s`, wdStripes(FASHION.decades.map(d => d.swatches.map(s => s[0])))],
-    ["eras", "Measured eras", "1700s–1899, measured from real garments", wdStripes([["#A89D89", "#9C9274", "#71755A"], ["#CECFC9", "#CDB598", "#DBD1AA"], ["#D5D5D6", "#16171A", "#8A4F48"]])],
+    ["decades", "Decades", "33 decades, 1700s–2020s, measured", wdStripes(FASHION.decades.map(d => d.swatches.map(s => s[0])))],
+    ["eras", "Deep reads", "Three long-form eras, 1700s–1899", wdStripes([["#A89D89", "#9C9274", "#71755A"], ["#CECFC9", "#CDB598", "#DBD1AA"], ["#D5D5D6", "#16171A", "#8A4F48"]])],
     ["coty", "Color of the year", "Pantone's picks, 2000–present", wdGrid(FASHION.coty.map(c => c.hex))],
     ["houses", "Houses", `${FASHION.houses.length} signature colors`, wdBars(FASHION.houses.map(h => h.hex))],
     ["history", "History", `${FASHION.history.length} pages`, wdImg(histImg, wdBars(["#4B1E4F", "#16171A", "#F3EFE6", "#6B7A3A", "#1C2B5A"]))],
@@ -119,7 +120,7 @@ WORLD_SECTIONS.push({ key: "fashion", title: "Fashion", render: worldFashionSect
 function worldRouteTitle(slug) {
   const i = slug.indexOf("-"), kind = i < 0 ? slug : slug.slice(0, i), id = i < 0 ? null : slug.slice(i + 1);
   if (kind === "decades") return "Decades";
-  if (kind === "decade") { const d = FASHION.decades.find(x => x.id === id); return d ? d.label : "Decade"; }
+  if (kind === "decade") { const d = fashionDecadeMerged(id); return d ? d.label : "Decade"; }
   if (kind === "coty") return "Pantone Color of the Year";
   if (kind === "houses") return "Houses and signature colors";
   if (kind === "house") { const h = FASHION.houses.find(x => x.id === id); return h ? h.house : "House"; }
@@ -127,7 +128,7 @@ function worldRouteTitle(slug) {
   if (kind === "history") { const h = worldHistory().find(x => x.id === id); return h ? h.title : "Fashion history"; }
   if (kind === "garments") return "Garments";
   if (kind === "garment") { const r = typeof FX !== "undefined" && FX && FX.byId.get(id); return r ? r.t : "Garment"; }
-  if (kind === "eras") return "Measured eras";
+  if (kind === "eras") return "Deep reads";
   if (kind === "era") { const e = (window.FASHION_ERAS || []).find(x => x.id === id); return e ? e.title : "Measured era"; }
   return "Fashion";
 }
@@ -151,15 +152,44 @@ function fashionFallback() { xToOrigin(); }   // where the trail started (js/exp
 
 // ---------------------------------------------------------------- list screens (decades / houses / history)
 const FASHION_LIST_META = {
-  decade: { title: "Decades", dek: "The defining colors of each decade's fashion, from the Edwardian 1900s to the still-unfinished 2020s." },
+  decade: { title: "Decades", dek: "Every decade 1700s–2020s, measured from a combined corpus of Met + Cleveland Museum of Art (CC0/public domain) and V&A Collections (colors measured from the catalogue, no image stored) garments — real counts, not one palette per decade." },
   house: { title: "Houses and signature colors", dek: "Fifteen colors fashion houses made their own, with the story behind each and how firm the claim really is." },
   history: { title: "Fashion history", dek: "How color in dress has carried law, rank, grief, war and fast-changing taste, from Roman purple to fast fashion." }
 };
+// Decades 1700s-2020s: 1900s-2020s have curated articles (FASHION.decades); 1700s-1890s exist only as
+// measured entries (no curated prose yet) until measured-decades.json loads.
+function fashionDecadeMerged(id) {
+  const cur = FASHION.decades.find(x => x.id === id);
+  if (cur) return cur;
+  const dec = parseInt(id, 10);
+  if (!dec || dec < 1700 || dec > 2020) return null;
+  return { id, label: id, years: dec === 2020 ? "2020–" : `${dec}–${dec + 9}`, synthetic: true };
+}
+function fashionEraIdFor(decadeId) {
+  const dec = parseInt(decadeId, 10);
+  if (dec < 1800) return "1700s";
+  if (dec < 1850) return "1800-1849";
+  return "1850-1899";
+}
+function fashionAllDecadeIds() {
+  const out = [];
+  for (let dec = 1700; dec <= 2020; dec += 10) out.push(dec + "s");
+  return out;
+}
 function fashionCardHTML(kind, it) {
+  if (kind === "decade") {
+    const st = fashionDecadeStatsFor(it.id);
+    const sw = st && st.coverage !== "bare" ? st.palette.slice(0, 6).map(c => [c.hex]) : (it.swatches || []);
+    const sub = st ? `${st.n.toLocaleString()} measured${st.coverage === "bare" ? " (too few to show a palette)" : ""}` : (it.years || "");
+    return `<button class="wd-card" data-wd-open="decade-${esc(it.id)}">
+      <span class="mini-pal">${sw.length ? sw.map(x => `<i style="--c:${x[0]}"></i>`).join("") : `<i style="background:var(--surface-2)"></i>`}</span>
+      <b>${esc(it.label)}</b><small>${esc(sub)}</small>
+    </button>`;
+  }
   const sw = kind === "house" ? [[it.hex]] : it.swatches;
-  const title = kind === "decade" ? it.label : kind === "house" ? it.house : it.title;
-  const sub = kind === "decade" ? it.years : kind === "house" ? it.label : it.dek;
-  const slug = (kind === "decade" ? "decade-" : kind === "house" ? "house-" : "history-") + it.id;
+  const title = kind === "house" ? it.house : it.title;
+  const sub = kind === "house" ? it.label : it.dek;
+  const slug = (kind === "house" ? "house-" : "history-") + it.id;
   return `<button class="wd-card" data-wd-open="${esc(slug)}">
     <span class="mini-pal">${sw.map(x => `<i style="--c:${x[0]}"></i>`).join("")}</span>
     <b>${esc(title)}</b><small>${esc(sub || "")}</small>
@@ -167,17 +197,22 @@ function fashionCardHTML(kind, it) {
 }
 function fashionList(kind, opts = {}) {
   if (kind === "history" && !window.FASHION_HISTORY) { const el = fashionListDraw(kind, opts); worldWhenHistory(() => { if (window.FASHION_HISTORY && el.isConnected) { const y = scrollY; fashionListDraw(kind, opts); scrollTo(0, y); } }); return el; }
+  if (kind === "decade") {
+    const el = fashionListDraw(kind, opts);
+    if (!FX_DECADE_STATS) fxDecadeStatsLoad().then(() => { if (FX_DECADE_STATS && el.isConnected) { const y = scrollY; fashionListDraw(kind, opts); scrollTo(0, y); } });
+    return el;
+  }
   return fashionListDraw(kind, opts);
 }
 function fashionListDraw(kind, opts = {}) {
-  const items = kind === "decade" ? FASHION.decades : kind === "house" ? FASHION.houses : worldHistory();
+  const items = kind === "decade" ? fashionAllDecadeIds().map(fashionDecadeMerged) : kind === "house" ? FASHION.houses : worldHistory();
   const meta = FASHION_LIST_META[kind];
   const el = show(`
     ${worldTop("Fashion")}
     <h1 class="p-title">${esc(meta.title)}</h1>
     <p class="p-dek">${esc(meta.dek)}</p>
     <div class="wd-list">${items.map(it => fashionCardHTML(kind, it)).join("")}</div>
-    ${kind === "decade" ? `<p class="fine">Palettes describe fashionable Paris, London and New York at their most photographed; they are not a record of what everyone wore.</p>` : ""}
+    ${kind === "decade" ? `<p class="fine">A V&A-measured color is kept as hex values only; its photograph is (c) Victoria and Albert Museum and was never stored. Thin decades (fewer pieces) are labeled honestly, not padded.</p>` : ""}
   `, "article wd");
   worldBackWire(el, opts, fashionFallback);
   el.querySelectorAll("[data-wd-open]").forEach(b => b.onclick = () => fashionPage(b.dataset.wdOpen, { back: () => fashionList(kind, opts) }));
@@ -185,25 +220,57 @@ function fashionListDraw(kind, opts = {}) {
 }
 
 // ---------------------------------------------------------------- detail: a decade
+// Merges curated prose (FASHION.decades, 1900s-2020s only) with measured stats (measured-decades.json,
+// every decade 1700s-2020s). A decade with real coverage shows the MEASURED palette as primary; a curated
+// decade with thin/bare coverage keeps its documented swatches, clearly labeled as documented, not measured.
+function fashionDecadeStatsFor(id) { return FX_DECADE_STATS && FX_DECADE_STATS.decades.find(x => x.id === id); }
+const FASHION_COVERAGE_LABEL = { thick: "well measured", thin: "thinly measured — small sample", bare: "not enough measured pieces yet" };
 function fashionDecadeDetail(id, opts = {}) {
-  const d = FASHION.decades.find(x => x.id === id);
+  const d = fashionDecadeMerged(id);
   if (!d) return fashionList("decade", opts);
   const self = () => fashionDecadeDetail(id, opts);
+  if (!FX_DECADE_STATS) {
+    const el = fashionDecadeDetailDraw(d, null, opts, self);
+    fxDecadeStatsLoad().then(() => { if (el.isConnected) { ROUTE_REPLACE = true; fashionDecadeDetail(id, opts); } });
+    return el;
+  }
+  return fashionDecadeDetailDraw(d, fashionDecadeStatsFor(id), opts, self);
+}
+function fashionDecadeDetailDraw(d, st, opts, self) {
+  const measured = st && st.coverage !== "bare";
+  const docSwatches = d.swatches || [];
   const el = show(`
     ${worldTop("Decades")}
-    <div class="palette wd-dpal">${d.swatches.map(([h]) => `<button class="pal" data-swatch="${h}" style="--c:${h};flex:1" data-ink="${ink(h)}"></button>`).join("")}</div>
+    ${measured
+      ? `<section class="wd-sec" id="dpal-sec"><h3>Measured palette <span class="fine">${esc(FASHION_COVERAGE_LABEL[st.coverage])} · n=${st.n}</span></h3>${fashionEraPaletteTabs(st, "all").html}</section>`
+      : docSwatches.length
+        ? `<div class="palette wd-dpal">${docSwatches.map(([h]) => `<button class="pal" data-swatch="${h}" style="--c:${h};flex:1" data-ink="${ink(h)}"></button>`).join("")}</div>`
+        : `<p class="fine">${st ? "Not enough measured pieces yet (n=" + st.n + ") for a palette here." : "Loading…"}</p>`}
     <p class="eyebrow p-type">Fashion · Decade</p>
     <h1 class="p-title">${esc(d.label)}</h1>
-    <p class="p-dek">${esc(d.years)}</p>
-    <div class="pal-names">${d.swatches.map(([h, label]) => `<button class="pal-name" data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(label)}</b><em class="mono">${esc(h)}</em></button>`).join("")}</div>
-    <section class="wd-sec"><h3>Why these colors</h3><p>${worldLinkText(d.why)}</p></section>
+    <p class="p-dek">${esc(d.years || "")}</p>
+    ${!measured && docSwatches.length ? `<div class="pal-names">${docSwatches.map(([h, label]) => `<button class="pal-name" data-swatch="${h}"><i style="--c:${h}"></i><b>${esc(label)}</b><em class="mono">${esc(h)}</em></button>`).join("")}</div><p class="fine">Documented, not corpus-measured — ${st ? "this decade has " + st.n + " measured pieces so far (" + FASHION_COVERAGE_LABEL[st.coverage] + ")." : "measuring…"}</p>` : ""}
+    ${st && st.findings && st.findings.length ? `<section class="wd-sec"><h3>What the measurements show</h3><ul class="wd-pieces">${st.findings.map(f => `<li>${esc(f)}</li>`).join("")}</ul></section>` : ""}
+    ${d.why ? `<section class="wd-sec"><h3>Why these colors</h3><p>${worldLinkText(d.why)}</p></section>` : ""}
     ${d.pieces && d.pieces.length ? `<section class="wd-sec"><h3>Iconic pieces</h3><ul class="wd-pieces">${d.pieces.map(p => `<li>${worldLinkText(p)}</li>`).join("")}</ul></section>` : ""}
     ${d.hedge ? `<p class="fine">${esc(d.hedge)}</p>` : ""}
     ${worldImgHTML(d.img)}
-    ${sourcesHTML(d.sources)}
+    ${st ? fashionEraGalleryHTML(st) : ""}
+    ${d.synthetic ? `<p class="fine"><a class="wl" data-fashion-to="era:${esc(fashionEraIdFor(d.id))}">Read the longer piece on this period →</a></p>` : ""}
+    ${d.sources ? sourcesHTML(d.sources) : `<p class="fine">Sources: Metropolitan Museum of Art and Cleveland Museum of Art open-access collection data (CC0/public domain); Victoria and Albert Museum Collections API (colors measured, images not stored).</p>`}
   `, "article wd");
   worldBackWire(el, opts, () => fashionList("decade", {}));
   worldWire(el, self);
+  if (measured) {
+    const palSection = el.querySelector("#dpal-sec");
+    const wireEraTabs = () => palSection.querySelectorAll("[data-era-tab]").forEach(b => b.onclick = () => {
+      const t = fashionEraPaletteTabs(st, b.dataset.eraTab);
+      palSection.innerHTML = `<h3>Measured palette <span class="fine">${esc(FASHION_COVERAGE_LABEL[st.coverage])} · n=${st.n}</span></h3>${t.html}`;
+      wireEraTabs();
+    });
+    if (palSection) wireEraTabs();
+  }
+  el.querySelectorAll("[data-era-open]").forEach(b => b.onclick = () => fashionPage("garment-" + b.dataset.eraOpen, { back: self }));
   return el;
 }
 
@@ -273,14 +340,14 @@ function fashionCoty(opts = {}) {
 
 // ---------------------------------------------------------------- Measured eras: list + detail
 // Needs two lazy sources: the written article (data/fashion-eras.js, window.FASHION_ERAS) and the stats
-// (data/fashion/measured-eras.json, fxEraStatsLoad). Draws whatever's ready, then redraws once both land —
+// (data/fashion/measured-decades.json, fxDecadeStatsLoad). Draws whatever's ready, then redraws once both land —
 // the same "quiet placeholder, redraw in place" pattern fashionList(history) already uses.
-function fashionEraReady() { return !!(window.FASHION_ERAS && FX_ERA_STATS); }
+function fashionEraReady() { return !!(window.FASHION_ERAS && FX_DECADE_STATS); }
 function fashionEraWhenReady(cb) {
   if (fashionEraReady()) return;
-  Promise.all([loadData("fashion-eras"), fxEraStatsLoad()]).then(() => { if (fashionEraReady()) cb(); });
+  Promise.all([loadData("fashion-eras"), fxDecadeStatsLoad()]).then(() => { if (fashionEraReady()) cb(); });
 }
-function fashionEraStatsFor(id) { return FX_ERA_STATS && FX_ERA_STATS.eras.find(x => x.id === id); }
+function fashionEraStatsFor(id) { return FX_DECADE_STATS && FX_DECADE_STATS.eras.find(x => x.id === id); }
 function fashionEraList(opts = {}) {
   const el = fashionEraListDraw(opts);
   if (!fashionEraReady()) fashionEraWhenReady(() => { if (el.isConnected) { const y = scrollY; fashionEraListDraw(opts); scrollTo(0, y); } });
@@ -290,8 +357,8 @@ function fashionEraListDraw(opts = {}) {
   const items = window.FASHION_ERAS || [{ id: "1700s", title: "The 1700s", dek: "" }, { id: "1800-1849", title: "1800–1849", dek: "" }, { id: "1850-1899", title: "1850–1899", dek: "" }];
   const el = show(`
     ${worldTop("Fashion")}
-    <h1 class="p-title">Measured eras</h1>
-    <p class="p-dek">Real stats and several palettes per era, measured from museum open-access garments and textiles — not one swatch standing in for a whole period.</p>
+    <h1 class="p-title">Deep reads</h1>
+    <p class="p-dek">Three long-form pieces on the centuries before mass photography made the Decades pages possible — the same measured corpus as Decades (Met + Cleveland Museum of Art, plus V&A colors), read as one continuous story instead of ten-year slices.</p>
     <div class="wd-list">${items.map(it => {
       const st = fashionEraStatsFor(it.id);
       const sw = st ? st.palette.slice(0, 6) : null;
@@ -300,7 +367,7 @@ function fashionEraListDraw(opts = {}) {
         <b>${esc(it.title)}</b><small>${st ? `${st.n.toLocaleString()} measured pieces` : esc(it.dek || "")}</small>
       </button>`;
     }).join("")}</div>
-    <p class="fine">Measured from photographs of museum pieces (the Met and Cleveland Museum of Art open-access collections); not a random sample of what everyone wore, and these percentages describe this corpus, not a census. Later decades (1900s on) are covered in Decades instead — documented from fashion history, not corpus-measured, because these collections hold very little 20th-century western dress.</p>
+    <p class="fine">Combines CC0/public-domain photographs (Met, Cleveland) with colors measured from the V&A's catalogue (no image stored); not a random sample of what everyone wore, and these percentages describe this corpus, not a census. For 1900s–2020s decade by decade, see Decades.</p>
   `, "article wd");
   worldBackWire(el, opts, fashionFallback);
   el.querySelectorAll("[data-wd-open]").forEach(b => b.onclick = () => fashionPage(b.dataset.wdOpen, { back: () => fashionEraList(opts) }));
@@ -347,7 +414,7 @@ function fashionEraDetail(id, opts = {}) {
   const uiKey = "all";
   const tabs = fashionEraPaletteTabs(st, uiKey);
   const el = show(`
-    ${worldTop("Measured eras")}
+    ${worldTop("Deep reads")}
     <p class="eyebrow p-type">Fashion · Measured era</p>
     <h1 class="p-title">${esc(era.title)}</h1>
     <p class="p-dek">${esc(era.dek || "")}</p>
@@ -403,7 +470,9 @@ function worldColorRow(el, n, famC) {
 // ---------------------------------------------------------------- screenshot hooks (index.html#shot=...)
 function worldShot(kind, arg) {
   if (kind === "world") { S.lens = "world"; return go("explore"); }
+  if (kind === "fashiondecades") return fashionList("decade");
   if (kind === "fashiondecade") return fashionDecadeDetail(arg || FASHION.decades[2].id);
+  if (kind === "fashionera") return fashionEraDetail(arg || "1850-1899");
   if (kind === "fashioncoty") return fashionCoty();
   if (kind === "fashionhouse") return fashionHouseDetail(arg || FASHION.houses[0].id);
   if (kind === "fashionhistory") return fashionHistoryDetail(arg || FASHION.history[0].id);
