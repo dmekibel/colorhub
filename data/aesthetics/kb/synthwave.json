@@ -1,0 +1,63 @@
+{
+ "id": "synthwave",
+ "name": "Synthwave",
+ "lineage": {
+  "influenced_by": [
+   "1980s film soundtracks (John Carpenter)",
+   "eighties-neon design",
+   "arcade and VHS cover art"
+  ],
+  "influences": [
+   "cyberpunk",
+   "vaporwave"
+  ]
+ },
+ "eras": [
+  "genre coalesced c. 2006–2011 online; visual style evokes 1980–89"
+ ],
+ "places": [
+  "online music distribution (Bandcamp, YouTube)"
+ ],
+ "garments": [
+  "not primarily a fashion look — a music and graphic-design aesthetic"
+ ],
+ "media": [
+  {
+   "title": "Drive (2011) soundtrack and title card",
+   "note": "a major mainstream crossover moment"
+  },
+  {
+   "title": "Kavinsky, \"Nightcall\" (2010)",
+   "note": ""
+  }
+ ],
+ "figures": [],
+ "reacts_against": "nothing contemporaneous — it's a retrofuturist revival of 1980s synthesizer music and VHS-era graphic design, built decades after the fact.",
+ "revivals": [
+  "ongoing; the core aesthetic of the genre since its 2000s-10s formation"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "Mid-2000s",
+  "key_motifs": "Neon grids, wireframe landscapes, striped sunsets, 1980s supercars (Testarossa, Countach), palm trees, VHS tracking static, chrome typography",
+  "key_colours": "Magenta, cyan, violet, neon pink, deep blue, black",
+  "related_aesthetics": "Cassette Futurism\nCyberpunk\nItalo Disco\nLaser Grid\nMemphis Design\nNeon Noir\nNew Wave\nVaporwave\nYuppie",
+  "key_values": "Nostalgia, retrofuturism, escapism, cinematic atmosphere"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Synthwave"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 66% of the measured color across 6 wiki photos is below mid-lightness",
+   "a vivid streak — roughly 58% of the color measured is highly saturated"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

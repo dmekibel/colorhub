@@ -1,0 +1,56 @@
+{
+ "id": "steampunk",
+ "name": "Steampunk",
+ "lineage": {
+  "influenced_by": [
+   "Jules Verne and H.G. Wells's Victorian-era science fiction",
+   "cyberpunk (the name is a direct riff on it)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "literary roots 19th century; the term \"steampunk\" coined 1987 (K.W. Jeter)"
+ ],
+ "places": [
+  "an imagined Victorian Britain, reimagined with steam-powered advanced technology"
+ ],
+ "garments": [
+  "brass goggles",
+  "corsets and waistcoats",
+  "top hats",
+  "visible gears as jewelry"
+ ],
+ "media": [
+  {
+   "title": "Jules Verne, Twenty Thousand Leagues Under the Sea (1870)",
+   "note": "a literary forerunner, predating the term"
+  },
+  {
+   "title": "K.W. Jeter coined \"steampunk\" in a 1987 letter to Locus magazine",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "K.W. Jeter"
+ ],
+ "reacts_against": "cyberpunk's cold, digital, near-future dystopia, imagining advanced technology built from brass, steam and clockwork in a Victorian past instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Steampunk"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 61% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 81% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}
