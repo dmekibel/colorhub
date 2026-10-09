@@ -32,7 +32,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, 87 contain this grey green on at least five per cent of the canvas, within six color-distance units [8]. These are photographs of aged, varnished paintings, and a match is not a pigment test [8].\n\nThe earliest is Francesco Botticini's Madonna and Child with Tobias and the Angel Raphael, about 1470 [8]. The 1900s hold 21 of 1,674 paintings, 3.43 times the archive rate, and the 1910s peak at 8 of 523 [8]. Austria stands out, with 8 of 121 paintings, and Impressionism has 6 of 140 [8]. The largest single match is Klimt's [[painting:commons-Q17495516|Rosebushes under the Trees]] of 1905, where it covers 44 per cent of the canvas [8]. Renoir's [[painting:nga-1211|The Dancer]] of 1874 reaches 33 per cent [8]. A second, broader archive pass (two-lens, slightly different thresholds) finds the color more often in Gustav Klimt's work specifically than any other named painter, 4 of his 50 paintings here, 6.7 times what his period and museums would predict, with Renoir and Pissarro close behind [9]. That pass also finds France itself over-represented, 2.2 times the expected rate across 3,443 French paintings [9].\n\nBy lightness, 39 per cent of the matching area sits in highlights, 51 per cent in the midtones and 10 per cent in shadows [8]. Among gems, the nearest twins are [[gem:jade|Jade]], 6.6 units off, and [[gem:turquoise|Turquoise]], 7.1 off; on screen, Malick's [[film:the-tree-of-life|The Tree of Life]] carries a grey-green 6.0 units from this one [10]."
+   "body": "In our archive of 23,778 paintings, 87 contain this grey green on at least five per cent of the canvas, within six color-distance units [8]. These are photographs of aged, varnished paintings, and a match is not a pigment test [8].\n\nThe earliest is Francesco Botticini's Madonna and Child with Tobias and the Angel Raphael, about 1470 [8]. The 1900s hold 21 of 1,674 paintings, 3.43 times the archive rate, and the 1910s peak at 8 of 523 [8]. Austria stands out, with 8 of 121 paintings, and Impressionism has 6 of 140 [8]. The largest single match is Klimt's [[painting:commons-Q17495516|Rosebushes under the Trees]] of 1905, where it covers 44 per cent of the canvas [8]. Renoir's [[painting:nga-1211|The Dancer]] of 1874 reaches 33 per cent [8]. A second, broader archive pass (two-lens, slightly different thresholds) finds the color more often in Gustav Klimt's work specifically than any other named painter, 4 of his 50 paintings here, 6.7 times what his period and museums would predict, with Renoir and Pissarro close behind [9]. That pass also finds France itself over-represented, 2.2 times the expected rate across 3,443 French paintings [9].\n\nBy lightness, 39 per cent of the matching area sits in highlights, 51 per cent in the midtones and 10 per cent in shadows [8]. Among gems, the nearest twins are [[gem:jade|Jade]], 6.6 units off, and [[gem:turquoise|Turquoise]], 7.1 off; on screen, Malick's [[film:the-tree-of-life|The Tree of Life]] carries a grey-green 6.0 units from this one [10]."
   }
  ],
  "aside": {
@@ -68,7 +68,7 @@
   "other_languages": []
  },
  "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
   "match": {
    "hex": "#789B73",
    "de2000": 6,
@@ -148,7 +148,7 @@
   {
    "n": 8,
    "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py)",
+   "cite": "ColorHub archive, 23,778 paintings, as photographed (tools/article_field.py)",
    "loc_kind": null,
    "url": null
   },
@@ -201,14 +201,15 @@
   "Celadon is the generic name for Chinese gray-green porcelain."
  ],
  "words": 689,
- "status": "draft",
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
    "Etymology attributed to St Clair only; Finlay gives the Saladin theory",
    "Removed unsupported xkcd aka",
-   "Depth wave pass: fixed a real article_lint.py 'nearest' failure (field.measured.nearest and aside.siblings were pointing at the old 101-curriculum 'app' field, Moss at dE 8.3, instead of the real look-alike edges, Green Grey at dE 3.3). Added the name's own four named variants, gem/film twins, and a second archive lens (painter/country lift). Depth stayed deliberately modest (medium, not epic): this name has no dedicated book history of its own, only incidental mentions, so depth comes from measured data, not invented history."
+   "Depth wave pass: fixed a real article_lint.py 'nearest' failure (field.measured.nearest and aside.siblings were pointing at the old 101-curriculum 'app' field, Moss at dE 8.3, instead of the real look-alike edges, Green Grey at dE 3.3). Added the name's own four named variants, gem/film twins, and a second archive lens (painter/country lift). Depth stayed deliberately modest (medium, not epic): this name has no dedicated book history of its own, only incidental mentions, so depth comes from measured data, not invented history.",
+   "Fresh-context fact-check (2026-10-09): found a stale archive count (23,781, carried over from an earlier snapshot) where every other article in this pass uses the current live count, 23,778. Corrected in the body, field.dataset and note 8."
   ]
  }
 }

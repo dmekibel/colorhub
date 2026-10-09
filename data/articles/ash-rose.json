@@ -27,7 +27,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds this color in 84 of 23,778 paintings, about 0.35 percent as photographed; a stricter within-painting lens finds it in 39 [7]. That makes it rarer than 55 percent of the named colors in the archive [7]. Inside a painting it most often plays a hidden color, 51 percent of its 39 clearest matches, the least visible rank by lightness within the canvas, by far its most common role [7]. It is sharply over-represented in paintings from India, 2.5 times the expected rate across 721 paintings, and in the Pahari school of Indian miniature painting specifically, 4.2 times expected across 118 works [7]. Named painters carrying it here include Mary Cassatt, Henri Matisse, Henri-Edmond Cross and Georges Lacombe, though none individually stands out as sharply as the India and Pahari numbers do [7].\n\nIt peaks century-wide in the 1900s, 0.4 percent of 1,674 paintings from then, 2.2 times expected, and the single-decade peak is a touch earlier, the 1890s, at the same 2.2 times lift [7]. The earliest match in the archive is from the year 1000, with 54 dated paintings carrying it through to 1922; the archive's early centuries are thin, so this is a floor, not a first [7]. In printed English, the word \"rose\" in all its senses, the flower, the name, the color, and the color name together, peaks in the 2010s and rose fastest in the 1980s, which tells us more about the word than about this specific dusty pink [7]. This is a computed color match on photographed, varnished canvases, not a pigment test."
+   "body": "Our archive finds this color in 84 of 23,778 paintings, about 0.35 percent as photographed; a stricter within-painting lens finds it in 39 [7]. That makes it rarer than 55 percent of the named colors in the archive [7]. Inside a painting it most often plays a hidden color, 51 percent of its 39 clearest matches, the least visible rank by lightness within the canvas, by far its most common role [7]. It is sharply over-represented in paintings from India, 2.5 times the expected rate across 721 paintings, and in the Pahari school of Indian miniature painting specifically, 4.2 times expected across 118 works [7]. Named painters carrying it here include Mary Cassatt, Henri Matisse, Henri-Edmond Cross and Georges Lacombe, though none individually stands out as sharply as the India and Pahari numbers do [7].\n\nIt peaks century-wide in the 1900s, 0.4 percent of 1,674 paintings from then, 2.2 times expected, and the single-decade peak is a touch earlier, the 1890s, at the same 2.2 times lift [7]. The earliest match in the archive is from the year 1000, with 54 dated paintings carrying it through to 1922; the archive's early centuries are thin, so this is a floor, not a first [7]. In printed English, the two-word phrase \"ash rose\" itself peaks in the 2010s and rose fastest in the 1980s; because the tracked term covers every use of that phrase, not a count of the color alone, this says more about the phrase's own print history than about how often anyone actually meant this exact dusty pink [7]. This is a computed color match on photographed, varnished canvases, not a pigment test."
   }
  ],
  "aside": {
@@ -159,14 +159,14 @@
    "kind": "pick"
   },
   {
-   "q": "Why should the Ngram finding that \"rose\" peaks in the 2010s be read with caution?",
+   "q": "Why should the Ngram finding that \"ash rose\" peaks in the 2010s be read with caution?",
    "choices": [
-    "The word \"rose\" covers the flower, a name and the color together, not this color alone",
+    "It counts every use of that phrase in print, not how often anyone meant this exact color",
     "Google Books does not index English",
     "The 2010s had no books published",
     "It only counts French-language books"
    ],
-   "answer": "The word \"rose\" covers the flower, a name and the color together, not this color alone",
+   "answer": "It counts every use of that phrase in print, not how often anyone meant this exact color",
    "kind": "pick"
   }
  ],
@@ -174,13 +174,14 @@
   "A Japanese traditional name for almost this same dusty pink translates as \"cherry blossom mouse grey.\"",
   "Ash Rose is one of six closely related dusty-pink names crowded into the same small patch of color space."
  ],
- "words": 658,
- "status": "draft",
+ "words": 670,
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pilot: no book concordance or 1930/1912 dictionary entry exists for this name, so depth comes entirely from measured data: the color graph's real look-alikes and traditional-name cross-reference, archive fieldnotes, and garment/gem/look twins. States plainly that the exact coinage is undocumented."
+   "Depth wave pilot: no book concordance or 1930/1912 dictionary entry exists for this name, so depth comes entirely from measured data: the color graph's real look-alikes and traditional-name cross-reference, archive fieldnotes, and garment/gem/look twins. States plainly that the exact coinage is undocumented.",
+   "Fresh-context fact-check (2026-10-09): found one mismatched Ngram claim (field section attributed the curve to the word 'rose' in all senses; the kit's tracked term is actually the two-word phrase 'ash rose'). Corrected the claim and the matching check question."
   ]
  }
 }

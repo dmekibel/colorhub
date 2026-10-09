@@ -27,7 +27,7 @@
   {
    "id": "neighbors",
    "title": "Its neighbors",
-   "body": "In the color graph, Payne's Grey sits 3.0 units from [[black-coral]], almost the same color [7]. [[delphinium]], 4.2 units off, is lighter; [[dark-orient-blue]], 4.3 off, is bluer; [[deep-slate-blue]], 4.7 off, is darker; [[blue-slate]], 5.0 off, is duller [7]. Its own named variant, [[deep-payne-s-grey]], sits 5.1 units away and is almost the same color again [7][2]. The family runs three named variants under the same root: [[dark-payne-s-grey]] is markedly darker still, [[deep-payne-s-grey]] sits close in lightness but leans a touch greener, and [[pale-payne-s-grey]] is lifted much higher in lightness, nearly a pastel version of the same hue — a sign of how useful one mixed neutral turned out to be, stretched across a whole tonal range under one family name [2]. Our own computed-nearest ISCC-NBS block for this hex and the real 1955 dictionary filing for the exact name Payne's Grey agree for once, both landing on block 186, \"grayish blue,\" only 0.4 units apart [2]. On a painter's mixing wheel, its true complement sits nearest [[olive-brown]], [[pale-brown]] and [[mole-brown]] — three warm, dusty browns opposite a cold, muted blue-grey [7]."
+   "body": "In the color graph, Payne's Grey sits 3.0 units from [[black-coral]], almost the same color [7]. [[delphinium]], 4.2 units off, is lighter; [[dark-orient-blue]], 4.3 off, is bluer; [[deep-slate-blue]], 4.7 off, is darker; [[blue-slate]], 5.0 off, is duller [7]. Its own named variant, [[deep-payne-s-grey]], sits 5.1 units away and is almost the same color again [7][2]. The family runs three named variants under the same root: [[dark-payne-s-grey]] is markedly darker still, [[deep-payne-s-grey]] is the one closest to the root color (the real look-alike edge above), and [[pale-payne-s-grey]] is lifted much higher in lightness, nearly a pastel version of the same hue — a sign of how useful one mixed neutral turned out to be, stretched across a whole tonal range under one family name [2]. Our own computed-nearest ISCC-NBS block for this hex and the real 1955 dictionary filing for the exact name Payne's Grey agree for once, both landing on block 186, \"grayish blue,\" only 0.4 units apart [2]. On a painter's mixing wheel, its true complement sits nearest [[olive-brown]], [[pale-brown]] and [[mole-brown]] — three warm, dusty browns opposite a cold, muted blue-grey [7]."
   },
   {
    "id": "seen-in",
@@ -213,13 +213,14 @@
   "Two respected sources disagree on what William Payne actually mixed into his own namesake grey.",
   "Payne's Grey is built to hide: half the time our archive finds it, it is the least visible color on the whole canvas."
  ],
- "words": 1196,
- "status": "draft",
+ "words": 1200,
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pilot: built from color-kb concordance (25 hits: Gurney, Balfour-Paul, Baty, Paterson, Pigment Compendium, St Clair) plus a web source for William Payne's biography, the color graph's real look-alikes and named variants, archive fieldnotes, and look/film/garment twins. States both disagreeing historical formulas rather than picking one."
+   "Depth wave pilot: built from color-kb concordance (25 hits: Gurney, Balfour-Paul, Baty, Paterson, Pigment Compendium, St Clair) plus a web source for William Payne's biography, the color graph's real look-alikes and named variants, archive fieldnotes, and look/film/garment twins. States both disagreeing historical formulas rather than picking one.",
+   "Fresh-context fact-check (2026-10-09): found one unsupported qualitative claim (neighbors section said Deep Payne's Grey 'leans a touch greener', contradicting the real look-alike edge's own 'almost the same' tag); removed the invented nuance."
   ]
  }
 }

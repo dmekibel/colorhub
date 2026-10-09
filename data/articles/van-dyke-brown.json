@@ -227,12 +227,13 @@
   "This exact brown is one of the most common colors in our whole painting archive, found in nearly 1 of every 5 works."
  ],
  "words": 1190,
- "status": "draft",
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pilot: no prior article existed for this slug. Built from color-kb concordance (77 hits under the 'vandyke-brown' spelling variant, missed by a naive exact-slug lookup: Ball, Paterson, Pigment Compendium, Gage, St Clair, Baty) plus the color graph's real look-alikes, archive fieldnotes (21.83% archive presence, 97th percentile), and the node's own cross-filing under the Japanese traditional name Kyara-iro, which the tier field (traditional-system) flagged but a naive pigment-only read would have missed."
+   "Depth wave pilot: no prior article existed for this slug. Built from color-kb concordance (77 hits under the 'vandyke-brown' spelling variant, missed by a naive exact-slug lookup: Ball, Paterson, Pigment Compendium, Gage, St Clair, Baty) plus the color graph's real look-alikes, archive fieldnotes (21.83% archive presence, 97th percentile), and the node's own cross-filing under the Japanese traditional name Kyara-iro, which the tier field (traditional-system) flagged but a naive pigment-only read would have missed.",
+   "Fresh-context fact-check (2026-10-09): every [n]-cited number checked against a freshly regenerated tools/depth_kit.py kit (la edges, real-vs-computed ISCC-NBS, archive fieldnotes, twins) and against CLAUDE.md's myth list. No issues found."
   ]
  }
 }

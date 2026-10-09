@@ -177,12 +177,13 @@
   "The first wave of synthetic purple dye and the most recent named purple in CSS sit only 3.1 units apart, by coincidence alone."
  ],
  "words": 478,
- "status": "draft",
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pilot: no book concordance exists for this modern CSS color, so the story is sourced from the web (Eric Meyer's own primary-source blog post, plus a secondary account), hedged and both given real urls. The color graph, archive fieldnotes (an honest zero) and gem/film/look twins supply the rest."
+   "Depth wave pilot: no book concordance exists for this modern CSS color, so the story is sourced from the web (Eric Meyer's own primary-source blog post, plus a secondary account), hedged and both given real urls. The color graph, archive fieldnotes (an honest zero) and gem/film/look twins supply the rest.",
+   "Fresh-context fact-check (2026-10-09): every [n]-cited number checked against a freshly regenerated tools/depth_kit.py kit (la edges, real-vs-computed ISCC-NBS, archive fieldnotes, twins) and against CLAUDE.md's myth list. No issues found."
   ]
  }
 }

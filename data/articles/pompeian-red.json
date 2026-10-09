@@ -232,12 +232,13 @@
   "Pompeian Red plays an accent role in four out of five of the paintings where our archive finds it, the single strongest role-concentration of any color in this pilot."
  ],
  "words": 950,
- "status": "draft",
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pilot: built from color-kb concordance (9 hits) plus 16 existing fact cards (St Clair, Paterson, Pigment Compendium/Heaton, Pastoureau), the color graph's real look-alikes and traditional/alias cross-references, archive fieldnotes, and garment/look/film/Pantone twins. States the St Clair/Heaton disagreement directly and corrects the adjacent Napoleon/Empire-green myth."
+   "Depth wave pilot: built from color-kb concordance (9 hits) plus 16 existing fact cards (St Clair, Paterson, Pigment Compendium/Heaton, Pastoureau), the color graph's real look-alikes and traditional/alias cross-references, archive fieldnotes, and garment/look/film/Pantone twins. States the St Clair/Heaton disagreement directly and corrects the adjacent Napoleon/Empire-green myth.",
+   "Fresh-context fact-check (2026-10-09): every [n]-cited number checked against a freshly regenerated tools/depth_kit.py kit (la edges, real-vs-computed ISCC-NBS, archive fieldnotes, twins) and against CLAUDE.md's myth list. No issues found."
   ]
  }
 }

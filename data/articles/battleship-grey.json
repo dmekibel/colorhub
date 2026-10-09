@@ -190,12 +190,13 @@
   "This color's print history and its practical history agree almost exactly: the word peaked in the 1910s, the same decade the US Navy adopted the paint."
  ],
  "words": 717,
- "status": "draft",
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pilot: built from color-kb concordance (7 hits: Ball, Garfield, Paterson, St Clair) plus existing fact cards, the color graph's real look-alikes and cross-system aliases, and film/look/garment twins."
+   "Depth wave pilot: built from color-kb concordance (7 hits: Ball, Garfield, Paterson, St Clair) plus existing fact cards, the color graph's real look-alikes and cross-system aliases, and film/look/garment twins.",
+   "Fresh-context fact-check (2026-10-09): every [n]-cited number checked against a freshly regenerated tools/depth_kit.py kit (la edges, real-vs-computed ISCC-NBS, archive fieldnotes, twins) and against CLAUDE.md's myth list. No issues found."
   ]
  }
 }

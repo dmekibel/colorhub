@@ -27,7 +27,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds this blue in 25 of 23,778 paintings, about 0.11 percent as photographed; a stricter within-painting lens finds it in 17 [8]. That makes it rarer than 64 percent of the named colors in the archive [8]. Inside a painting it most often sits as a mid-tone, in 35 percent of its 17 clearest matches, ranked by lightness within each canvas so an aged varnish cannot fake the result [8].\n\nThe earliest match is Michelangelo's work from 1500, with the third-earliest dated to 1617 and the latest to 1926, 20 dated paintings in all [8]. The archive's early centuries are thin, so this is a floor, not a first; a 1500 match is 430 years before the name's own 1920 record, so it is a look-alike hue in an aged photograph, not proof that anyone called it Aero, or made a matching dye, that early [8]. The 1800s carry the strongest later lift, 1.3 times the expected rate among 8,344 paintings from that century [8]. In printed English the adjective sense of the word itself peaks in the 1940s, two decades after the dictionary's 1920 record [8]. This is a computed color match on photographed, varnished canvases, not a pigment test."
+   "body": "Our archive finds this blue in 25 of 23,778 paintings, about 0.11 percent as photographed; a stricter within-painting lens finds it in 17 [8]. That makes it rarer than 64 percent of the named colors in the archive [8]. Inside a painting it most often sits as a mid-tone, in 35 percent of its 17 clearest matches, ranked by lightness within each canvas so an aged varnish cannot fake the result [8].\n\nThe earliest match is Michelangelo's work from 1500, with the third-earliest dated to 1617 and the latest to 1926, 20 dated paintings in all [8]. The archive's early centuries are thin, so this is a floor, not a first; a 1500 match is 420 years before the name's own 1920 record, so it is a look-alike hue in an aged photograph, not proof that anyone called it Aero, or made a matching dye, that early [8]. The 1800s carry the strongest later lift, 1.3 times the expected rate among 8,344 paintings from that century [8]. In printed English the adjective sense of the word itself peaks in the 1940s, two decades after the dictionary's 1920 record [8]. This is a computed color match on photographed, varnished canvases, not a pigment test."
   }
  ],
  "aside": {
@@ -179,12 +179,13 @@
   "Our own computed-nearest ISCC-NBS block for Aero's hex, and the real 1955 filing for the name Aero, land in two different neighborhoods of grayish blue."
  ],
  "words": 627,
- "status": "draft",
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pass: replaced the unconfirmed aviation guess with the dictionary's own 'textile-trade name' origin; added the real-vs-computed ISCC-NBS filing distinction, full look-alike neighborhood, aesthetics-graph twins (films, fashion, design looks), and the within-painting archive lens."
+   "Depth wave pass: replaced the unconfirmed aviation guess with the dictionary's own 'textile-trade name' origin; added the real-vs-computed ISCC-NBS filing distinction, full look-alike neighborhood, aesthetics-graph twins (films, fashion, design looks), and the within-painting archive lens.",
+   "Fresh-context fact-check (2026-10-09): found one internal-consistency slip (field section said '430 years' before the 1920 record; corrected to 420). Everything else matched the regenerated kit."
   ]
  }
 }

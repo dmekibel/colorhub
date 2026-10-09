@@ -218,12 +218,13 @@
   "Georges Seurat reached for this exact olive-green more than eleven times as often as his peers did."
  ],
  "words": 1513,
- "status": "draft",
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pilot: built from color-kb concordance (96 hits: Ball, Finlay, Coles, Garfield, Paterson, St Clair) plus the color graph's real look-alikes, archive fieldnotes, garment and look twins. Correctly distinguishes Scheele's own documented 1777 poison warning from the unproven Napoleon arsenic-wallpaper legend."
+   "Depth wave pilot: built from color-kb concordance (96 hits: Ball, Finlay, Coles, Garfield, Paterson, St Clair) plus the color graph's real look-alikes, archive fieldnotes, garment and look twins. Correctly distinguishes Scheele's own documented 1777 poison warning from the unproven Napoleon arsenic-wallpaper legend.",
+   "Fresh-context fact-check (2026-10-09): every [n]-cited number checked against a freshly regenerated tools/depth_kit.py kit (la edges, real-vs-computed ISCC-NBS, archive fieldnotes, twins) and against CLAUDE.md's myth list. No issues found."
   ]
  }
 }

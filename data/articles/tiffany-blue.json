@@ -183,12 +183,13 @@
   "Our painting archive finds not one single match for Tiffany Blue, and that absence is itself the honest answer."
  ],
  "words": 601,
- "status": "draft",
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pilot: built from color-kb concordance (7 hits: Paterson, Westland, Eckstut) plus existing fact cards, the color graph's real look-alikes and cross-system aliases, and gem/look/fashion twins. The zero-presence archive result is reported as a genuine finding, not a gap, with the reason stated plainly."
+   "Depth wave pilot: built from color-kb concordance (7 hits: Paterson, Westland, Eckstut) plus existing fact cards, the color graph's real look-alikes and cross-system aliases, and gem/look/fashion twins. The zero-presence archive result is reported as a genuine finding, not a gap, with the reason stated plainly.",
+   "Fresh-context fact-check (2026-10-09): every [n]-cited number checked against a freshly regenerated tools/depth_kit.py kit (la edges, real-vs-computed ISCC-NBS, archive fieldnotes, twins) and against CLAUDE.md's myth list. No issues found."
   ]
  }
 }

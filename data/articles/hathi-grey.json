@@ -27,7 +27,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds this grey in 699 of 23,778 paintings, about 2.9 percent as photographed; a stricter within-painting lens finds it in 430 [9]. That makes it more common than 80 percent of the named colors in the archive [9]. Inside a painting it most often plays a light tone, 47 percent of its 430 clearest matches, by lightness rank within each canvas so an aged varnish cannot fake the result [9].\n\nIts most devoted painter, by how far he exceeds his own period's baseline, is Henri Matisse, carrying it in 9 of 50 works here, 6.9 times the predicted rate; Eugène Boudin is close behind, 9 of 48 works, 6.6 times predicted [9]. Impressionism as a movement is itself over-represented, 13 of 140 Impressionist works here, 3.4 times the expected rate, and the color shares canvases with Deep Neutral Grey and French Grey far more than chance alone would explain [9]. It peaks century-wide in the 1900s, 2.8 percent of 1,674 paintings from then, and the sharper single-decade peak is actually centuries earlier, the 1660s, 3.3 percent of 820 paintings, though with a smaller lift [9]. The earliest match in the archive is from 1399, with 592 dated paintings carrying it through to 1950; the archive's early centuries are thin, so this is a floor, not a first, and a 1399 match sits 513 years before the name's own earliest record, Ridgway's 1912 system — a look-alike hue in an aged photograph, not proof that anyone named or mixed this exact grey that early [9]. This is a computed color match on photographed, varnished canvases, not a pigment test."
+   "body": "Our archive finds this grey in 699 of 23,778 paintings, about 2.9 percent as photographed; a stricter within-painting lens finds it in 430 [9]. That makes it more common than 80 percent of the named colors in the archive [9]. Inside a painting it most often plays a light tone, 47 percent of its 430 clearest matches, by lightness rank within each canvas so an aged varnish cannot fake the result [9].\n\nIts most devoted painter, by how far he exceeds his own period's baseline, is Henri Matisse, carrying it in 9 of 50 works here, 6.9 times the predicted rate; Eugène Boudin is close behind, 9 of 48 works, 6.6 times predicted [9]. Impressionism as a movement is itself over-represented, 13 of 140 Impressionist works here, 3.4 times the expected rate, and the color shares canvases with Deep Neutral Grey and French Grey far more than chance alone would explain [9]. It peaks century-wide in the 1900s, 2.8 percent of 1,674 paintings from then, and by raw rate the sharper single-decade peak is actually centuries earlier, the 1660s, 3.3 percent of 820 paintings — though against each period's own baseline, the two peaks carry the same lift, 1.7 times expected either way [9]. The earliest match in the archive is from 1399, with 592 dated paintings carrying it through to 1950; the archive's early centuries are thin, so this is a floor, not a first, and a 1399 match sits 513 years before the name's own earliest record, Ridgway's 1912 system — a look-alike hue in an aged photograph, not proof that anyone named or mixed this exact grey that early [9]. This is a computed color match on photographed, varnished canvases, not a pigment test."
   }
  ],
  "aside": {
@@ -184,13 +184,14 @@
   "Hathi Grey is named for the Hindi and Urdu word for elephant, but nobody recorded why.",
   "Henri Matisse reached for this exact muted grey nearly seven times as often as his peers did."
  ],
- "words": 762,
- "status": "draft",
+ "words": 779,
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pilot: no book concordance exists for this name, so depth comes entirely from measured data (the color graph, archive fieldnotes, aesthetics-graph twins) plus one hedged web source for the word's own etymology. States plainly that Ridgway's specific reason for the name is undocumented."
+   "Depth wave pilot: no book concordance exists for this name, so depth comes entirely from measured data (the color graph, archive fieldnotes, aesthetics-graph twins) plus one hedged web source for the word's own etymology. States plainly that Ridgway's specific reason for the name is undocumented.",
+   "Fresh-context fact-check (2026-10-09): found one wrong comparison (field section said the 1660s decade peak had 'a smaller lift' than the 1900s century peak; the kit shows both at the same 1.7x lift, only the raw rate differs). Corrected."
   ]
  }
 }

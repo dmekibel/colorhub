@@ -236,12 +236,13 @@
   "The ancient word ruber still hides inside a modern scientific name: the Scarlet Ibis, Eudocimus ruber."
  ],
  "words": 866,
- "status": "draft",
+ "status": "checked",
  "checked": {
-  "by": "writer",
+  "by": "checker",
   "date": "2026-10-09",
   "issues": [
-   "Depth wave pilot: built from color-kb concordance (16 hits: Pastoureau's Red/Blue/Yellow/White/Black, St Clair, Baty) plus existing fact cards. Explicitly separates the ancient Latin word's broad historical range from the one narrow, modern xkcd-survey swatch our library files under the same name, to avoid implying they are the same thing. The Rubicon etymology is flagged as lower-confidence rather than asserted outright."
+   "Depth wave pilot: built from color-kb concordance (16 hits: Pastoureau's Red/Blue/Yellow/White/Black, St Clair, Baty) plus existing fact cards. Explicitly separates the ancient Latin word's broad historical range from the one narrow, modern xkcd-survey swatch our library files under the same name, to avoid implying they are the same thing. The Rubicon etymology is flagged as lower-confidence rather than asserted outright.",
+   "Fresh-context fact-check (2026-10-09): every [n]-cited number checked against a freshly regenerated tools/depth_kit.py kit (la edges, real-vs-computed ISCC-NBS, archive fieldnotes, twins) and against CLAUDE.md's myth list. No issues found."
   ]
  }
 }
