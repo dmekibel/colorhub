@@ -1934,20 +1934,23 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
   // scrolling the page at that height (440x956 is checked separately with a real screenshot -- see colorhub-verify)
   t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
 });
-scenario("paintings", "a painting's On the painting control: numbered Markers that are remembered and a Highlight that dims", async t => {
+// David's polish pass, 2026-10-09: the three-way "On the painting" switch (Off/Markers/Highlight) is gone,
+// redundant once a swatch tile locates itself on tap. Tapping a strip tile should dim the rest of the painting,
+// glow where that color sits, and caption its share and a plain-English region; tapping it again clears it.
+scenario("paintings", "a painting's strip tile locates a color on the painting (the old Markers/Highlight switch is gone)", async t => {
   await t.open("#/gallery/12", { settle: 800 });
-  await t.waitFor(() => { const w = t.$("[data-glwhere]"); return w && !w.hidden && w; }, 15000, "the On the painting control (a local copy, so its pixels can be read)");
-  await t.click('[data-glw="mark"]', { force: true, wait: 400 });
-  const marks = t.$$(".gl-mks .gl-mk:not(.sm)");
-  t.expect(marks.length >= 3, `only ${marks.length} numbered markers`);
-  t.expect(t.$$("[data-glswatches] .gl-n").length === t.$$("[data-glswatches] [data-glj]").length, "the strip chips aren't numbered like the markers");
-  t.expect(t.ev("S.glWhere") === "mark", "the choice isn't remembered");
-  const hexes = new Set(t.$$("[data-glrows] [data-swatch]").map(b => b.dataset.swatch));
-  t.expect(marks.every(m => hexes.has(m.dataset.swatch)), "a marker isn't one of the palette's colors");
-  await t.click('[data-glw="lit"]', { force: true, wait: 400 });
-  t.expect(!t.$(".gl-mks .gl-mk") && t.$("[data-gllitcv]").classList.contains("on"), "Highlight didn't swap the markers for the dimmed painting");
-  await t.click('[data-glw="off"]', { force: true, wait: 300 });
-  t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "Off left the painting dimmed");
+  t.expect(!t.$("[data-glwhere]"), "the old On the painting switch is still in the DOM");
+  await t.waitFor("[data-glswatches] [data-glj]", 15000, "a palette swatch tile");
+  // the strip redraws (a fresh node) every time locate toggles, so re-query it each time rather than keep a reference
+  const tileAt0 = () => t.$('[data-glswatches] [data-glj="0"]');
+  await t.click(tileAt0(), { force: true, wait: 400 });
+  t.expect(tileAt0().classList.contains("loc"), "the tapped tile doesn't show as located");
+  await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims around the located color");
+  const cap = t.$("[data-gllocate]");
+  t.expect(cap && !cap.hidden && /% of the canvas/.test(t.text(cap)), `the locate caption is missing or wrong: "${cap && t.text(cap)}"`);
+  await t.click(tileAt0(), { force: true, wait: 400 });
+  t.expect(!tileAt0().classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping the tile again didn't clear the locate state");
+  t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "the dim canvas is still on after clearing locate");
 });
 // The Analysis section's "Learn this painting" button (js/artwiki.js awAnalysis) was guarded by
 // `typeof paintingLesson === "function"`, a function that was never defined anywhere, so the button never
@@ -1995,6 +1998,25 @@ scenario("paintings", "swiping the picture moves to the next/previous painting b
   t.expect(/^#\/gallery\/\d+/.test(TRL.hash(t)) && TRL.hash(t) !== hash0, "the swipe didn't navigate to a gallery address");
   await t.click(TRL.screenBack(t), { wait: 500 });
   t.expect(t.text(".p-title") === title0, "Back after a swipe didn't return to the first painting");
+});
+// David's polish pass, 2026-10-09: a compact action row (Keep, Share, On the map — Play only once a real game is
+// wired, never Learn or Compare, which don't belong on this page any more), and "Findings" + "Analysis" merged
+// into one section with the strongest lines first and the rest behind one "More".
+scenario("paintings", "the action row is compact (Keep/Share/On the map) and Findings/Analysis read as one section", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  const acts = await t.waitFor("[data-csacts] .cs-act", 15000, "the action row");
+  const keys = t.$$("[data-csacts] .cs-act").map(b => b.dataset.cs);
+  t.expect(keys.length <= 4, `the action row has ${keys.length} buttons, not compact`);
+  t.expect(!keys.includes("learn") && !keys.includes("compare"), `Learn or Compare still in the action row: ${keys}`);
+  t.expect(keys.slice(0, 2).join() === "keep,share", `expected Keep then Share first, got ${keys}`);
+  // the wrapper's own header reads "Findings"; nested sub-cards (painter row, "another century") keep their own
+  // headers, but nothing in here should say "Analysis" any more -- it folded into this one section
+  t.expect(/Findings/.test(t.text(".gl-finds > .sec-head")), "the Findings wrapper's own header is missing or wrong");
+  t.expect(!t.$$(".gl-finds .sec-head b").some(b => t.text(b) === "Analysis"), "a separate \"Analysis\" header is still showing");
+  const more = t.$(".gl-finds-more");
+  t.expect(more && !more.open, "the Analysis fold should start closed");
+  await t.click(more.querySelector("summary"), { wait: 400 });
+  t.expect(/Value key/.test(t.text("[data-awan]")), "opening More doesn't reveal the Analysis tiles");
 });
 scenario("paintings", "a color page's In paintings section: presets re-run the query; Fine-tune opens the sliders", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
