@@ -475,6 +475,11 @@
      own row -- above the fold to keep the name and actions anchored at the bottom. cp-hero-foot gets a scroll
      of last resort on top of that, for anything still too tall to fit even at the smallest size in the clamp. */
   .cp-hero h1.rp-name{font-size:clamp(40px,16dvh,96px)}
-  .cp-page .cp-hero.cp-hero-full .cp-hero-foot{max-height:100%;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+  /* craft critique (2026-10-09, fresh context): on all three sizes the "added to you"/relation chip -- the
+     first line in cp-hero-foot -- sat under and ran past the circular back button, both overlapped and
+     clipped at the left edge. cp-hero-foot is still bottom-anchored (.c-hero's own justify-content:flex-end)
+     and still scrolls internally as a last resort, but its own box now stops short of the back button's row
+     instead of being free to grow into it. */
+  .cp-page .cp-hero.cp-hero-full .cp-hero-foot{max-height:calc(100% - 50px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
   /* the focus view (tap the cover to go full screen, js/richpage.js) stays a true inset:0 overlay either way */
 }

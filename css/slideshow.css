@@ -89,4 +89,10 @@
   .ss-top{padding-left:calc(16px + var(--left));padding-right:calc(16px + var(--right))}
   .ss-picker{left:calc(16px + var(--left));right:calc(16px + var(--right))}
   .ss-hint{right:calc(18px + var(--right))}
+  /* craft critique (2026-10-09): the swipe-down-to-close grab handle (app.css .sheet .grab, repositioned by
+     .ss-full above) sits right above the ✕/Mode/pause row here, close enough to the top edge on a short
+     landscape screen to read as a stray clipped block rather than a handle. The ✕ already closes the sheet,
+     so the handle is redundant chrome in landscape; it stays for the swipe-down gesture itself (unchanged)
+     but no longer draws. */
+  .sheet.ss-full .grab{opacity:0}
 }
