@@ -220,6 +220,24 @@ TEXT_PAGE = re.compile(r"^(genealogical )?text\b|text page|^(persian )?calligrap
                        r"^poem in |^album cover|title page and front cover|final page and back cover", re.I)
 
 
+# Hand-reviewed non-paintings (letters, personal correspondence, etc.) that would otherwise pass every filter above
+# because their title doesn't match TEXT_PAGE and their image isn't a flat black-and-white scan (BW_C). Found by
+# audit, listed with reasons in data/corpus-nonpaintings.json (see design/CORPUS-NONPAINTINGS.md) and never
+# hand-edited into a shard. Keyed by the row's full corpus id ("<src>-<id>"), the same id tools/gallery.py uses.
+# NOTE (2026-10-09): a from-scratch `python3 tools/corpus.py build` is NOT safe to re-run casually to apply a
+# small exclusion list -- select()/dedupe()/cap_artists() re-run against whatever research/_raw/ holds right now,
+# which drifts from the exact state the committed shards were built from, and can move far more than the ids you
+# meant to touch. For a handful of exclusions, edit data/corpus/*.json directly (same mechanism, minimal diff);
+# save a real `build()` run for an intentional, full corpus rebuild. This filter still runs inside select() so a
+# future full rebuild also respects the exclusion list.
+def load_nonpaintings():
+    p = ROOT / "data" / "corpus-nonpaintings.json"
+    return {x["id"] for x in json.loads(p.read_text())} if p.exists() else set()
+
+
+NONPAINTINGS = load_nonpaintings()
+
+
 def group_key(src, x):
     if src in ADAPTERS:
         return ADAPTERS[src].group_key(THIS, x)
@@ -242,7 +260,8 @@ def leaf_group(src, acc, title, rid):
 
 
 def select(src, rows):
-    keep = [x for x in rows if not TEXT_PAGE.search(x.get("title") or "")]
+    keep = [x for x in rows if not TEXT_PAGE.search(x.get("title") or "")
+            and f"{src}-{x['id']}" not in NONPAINTINGS]
     groups = defaultdict(list)
     for x in keep:
         groups[group_key(src, x)].append(x)
