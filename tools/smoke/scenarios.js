@@ -343,13 +343,28 @@ scenario("home", "Study the map lives only on the right corner, not duplicated i
 // arrangements... close it by double-tapping the map, the ✕, or swiping the sheet down." The scrim above the
 // sheet is pointer-events:none for Arrange (css/home.css .hm-scrim-clear) so a tap or a pan on the map reaches
 // the canvas, not the scrim's old close-on-any-tap; a double-tap specifically closes it (js/home.js chooser).
-// David: "if I open Arrange and choose a new arrangement, the black bar at the bottom comes back" -- an iPhone
-// Home Screen app's reported viewport is shorter than the physical screen (js/core.js vbFix, --vb/--app-full,
-// which .screen.fixed.cx reaches through). Spoofs navigator.standalone, matchMedia('(display-mode: standalone)'),
-// an iOS UA and screen.height > innerHeight (the exact condition vbFix() looks for), then checks the screen's
-// own full-height box survives an arrangement change -- the [data-arr]/[data-ord] handlers now re-run vbFix()
-// once the change settles (js/home.js), the same self-healing the corner watchdog already does elsewhere.
-scenario("home", "the full-height screen survives an arrangement change in a standalone (Home Screen) app", async t => {
+// David, 2026-10-09: "still comes back sometimes" -- re-measuring a shortfall live (the old --vb/--app-full,
+// written by vbFix() on resize/load/orientationchange/every sheet open) is inherently fragile against an
+// intermittent bug, and this session's own panning-stuck bisect (a scratch git worktree per candidate commit, a
+// scripted canvas-pixel pan test) found a real, repeatable case where simply CALLING vbFix() mid-sheet-open
+// desynced the map's redraw loop. Retired the write side of vbFix() entirely in favor of sizing to the large
+// viewport (100lvh, which iOS never shrinks for its own chrome) -- app.css html/body and #app, and
+// css/menus2.css .screen.fixed.cx, each a second declaration layered after the original (dropped harmlessly by
+// an engine that doesn't know lvh). A real device is the only way to confirm lvh itself behaves (this harness's
+// navigator/matchMedia spoofing only fools JS reads, never the engine's own large-viewport computation), so this
+// is a static source check that the declarations exist and are ordered to win, not a runtime behavioral one.
+scenario("home", "the floor and every full-screen map root size to the large viewport (100lvh), not just dvh/%", async t => {
+  const appCss = await fetch("/app.css").then(r => r.text());
+  const menus2 = await fetch("/css/menus2.css").then(r => r.text());
+  t.expect(/html,body\{margin:0;height:100%;background:var\(--ground\)\}\s*html,body\{height:100lvh\}/.test(appCss), "app.css: html,body's 100lvh layer is missing or not ordered after the 100% one");
+  t.expect(/#app\{min-height:100dvh[^}]*\}\s*#app\{min-height:100lvh\}/.test(appCss), "app.css: #app's 100lvh layer is missing or not ordered after the 100dvh one");
+  t.expect(/\.screen\.fixed\.cx\{[^}]*height:var\(--app-full,\s*100dvh\)\}[\s\S]{0,400}?\.screen\.fixed\.cx\{height:var\(--app-full,\s*100lvh\)\}/.test(menus2), "css/menus2.css: .screen.fixed.cx's 100lvh fallback is missing or not ordered after the 100dvh one");
+});
+// vbFix() (js/core.js) is read-only now -- it still measures (a probe div's own bounding rect) for the gap log
+// below, but never writes --vb/--app-full/the ios-app class any more, the one part of the old mechanism with a
+// demonstrated way to desync the redraw loop (the panning-stuck bisect above). Confirms both halves: a spoofed
+// gap is still captured for the HUD's "Copy" to carry off the device, and nothing gets written to CSS from it.
+scenario("home", "vbFix() only logs a gap now (read-only diagnostics); it never writes --vb/--app-full any more", async t => {
   await H.homeReady(t);
   t.ev(`
     Object.defineProperty(navigator, 'standalone', { value: true, configurable: true });
@@ -359,65 +374,28 @@ scenario("home", "the full-height screen survives an arrangement change in a sta
     Object.defineProperty(screen, 'width', { value: innerWidth, configurable: true });
     const realMM = window.matchMedia.bind(window);
     window.matchMedia = q => q.includes('display-mode: standalone') ? { matches: true, media: q, addListener(){}, removeListener(){} } : realMM(q);
+    VB_LOG.length = 0;
     vbFix();
   `);
-  await t.sleep(300);
-  const fullH = t.ev("innerHeight + 62");
-  const screenH = () => Math.round(t.$(".screen.hm").getBoundingClientRect().height);
-  await t.waitFor(() => screenH() >= fullH - 2, 3000, `the screen to reach full height (${fullH}) before testing (got ${screenH()})`);
-  // the corner buttons (and so H.menu's own tap path) sit at the bottom of the now-taller-than-812 screen, off
-  // the smoke harness's fixed-size iframe -- open Arrange directly (#shot=home:look's own hook) instead
-  t.ev('window.HM_CHOOSER && window.HM_CHOOSER("look")');
-  await t.waitFor(".sheet.hm-sheet-arrange", 3000, "the Arrange sheet to open");
-  await t.sleep(400);
-  const arrB = t.$$(".hm-arr-b:not(.on)")[0];
-  t.expect(arrB, "no arrangement chip to pick");
-  await t.click(arrB, { wait: 700 });
-  t.expect(screenH() >= fullH - 2, `the screen shrank to ${screenH()} (wanted >= ${fullH - 2}) after choosing a new arrangement -- the black bar`);
-  await t.click("[data-sheet-close]", { wait: 500 });
-  t.expect(screenH() >= fullH - 2, `the screen shrank to ${screenH()} after closing Arrange`);
-});
-
-// David's screenshot of the painting map's Filter sheet, 2026-10-09: its dark surface ended ~60pt above the real
-// bottom edge, black beneath it, on a Home Screen app -- the same family of bug as the Arrange black bar above,
-// but this time from --vb going stale between vbFix()'s own trigger events (resize/load/orientationchange) and a
-// sheet actually opening. Two fixes: sheet() (js/core.js) now calls vbFix() itself on every open, and the belt-
-// and-braces box-shadow that paints a sheet's own surface on below its edge (css/menus2.css .sheet) grew from
-// 160px to 320px, well past vbFix's own 120px clamp ceiling. This spoofs standalone+iOS+a 62px screen/innerHeight
-// gap (the same recipe as the scenario above) but WITHOUT calling vbFix() first, opens a plain sheet directly
-// (sheet()'s own mechanism, not a page flow), and checks vbFix() ran as a side effect of opening it.
-scenario("home", "a sheet refreshes --vb itself on open, so a stale gap can't leave black beneath it (standalone)", async t => {
-  await H.homeReady(t);
-  t.ev(`
-    Object.defineProperty(navigator, 'standalone', { value: true, configurable: true });
-    Object.defineProperty(navigator, 'userAgent', { value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15', configurable: true });
-    Object.defineProperty(navigator, 'platform', { value: 'iPhone', configurable: true });
-    Object.defineProperty(screen, 'height', { value: innerHeight + 62, configurable: true });
-    Object.defineProperty(screen, 'width', { value: innerWidth, configurable: true });
-    const realMM = window.matchMedia.bind(window);
-    window.matchMedia = q => q.includes('display-mode: standalone') ? { matches: true, media: q, addListener(){}, removeListener(){} } : realMM(q);
-    document.documentElement.style.setProperty('--vb', '0px'); document.documentElement.style.removeProperty('--app-full');   // force it stale/absent first
-  `);
-  t.expect(t.ev("getComputedStyle(document.documentElement).getPropertyValue('--vb').trim()") === "0px", "test setup: --vb did not start stale");
-  t.ev(`window.__vbTestClose = sheet("<p>t</p>").close`);
+  const vb = t.ev("getComputedStyle(document.documentElement).getPropertyValue('--vb').trim()");
+  t.expect(!vb || vb === "0px", `--vb should never be written by vbFix() any more (got "${vb}")`);
+  const appFull = t.ev("getComputedStyle(document.documentElement).getPropertyValue('--app-full').trim()");
+  t.expect(!appFull, `--app-full should never be written by vbFix() any more (got "${appFull}")`);
+  t.expect(!t.d.documentElement.classList.contains("ios-app"), "the ios-app class should never be toggled by vbFix() any more");
+  const logLen = t.ev("VB_LOG.length");
+  t.expect(logLen >= 1, "vbFix() did not log the spoofed 62px gap as a read-only diagnostic");
+  const last = t.ev("VB_LOG[VB_LOG.length - 1]");
+  t.expect(last.raw === 62, `the logged gap is wrong: ${JSON.stringify(last)}`);
+  // the belt-and-braces box-shadow safety net (css/menus2.css .sheet) is unconditional now, a fixed 320px Y-offset
+  // regardless of any measurement -- still there, opening an ordinary sheet doesn't need the spoofed gap at all
+  t.ev('window.__vbTestClose = sheet("<p>t</p>").close');
   await t.sleep(80);
   t.ev("document.querySelectorAll('.sheet').forEach(e => e.getAnimations && e.getAnimations().forEach(a => { try { a.finish(); } catch (er) {} }))");
-  const vb = t.ev("getComputedStyle(document.documentElement).getPropertyValue('--vb').trim()");
-  t.expect(vb === "62px", `opening a sheet did not refresh the stale --vb (got "${vb}", wanted "62px")`);
-  // the design is deliberate (css/menus2.css comment): never shift the sheet's own position by --vb (that once cut
-  // off its last row with no way to scroll to it) -- bottom:0 stays bottom:0, and a solid offset box-shadow paints
-  // the strip below it instead. Confirm both halves: position untouched, and the shadow's spread safely exceeds
-  // the live gap.
   const sh = t.$(".sheet");
   t.expect(Math.round(sh.getBoundingClientRect().bottom) === t.ev("innerHeight"), "the sheet's own box shifted position instead of staying at bottom:0");
-  // the trick is a plain Y-OFFSET copy of the sheet's own box (no blur, no spread), painted straight down past
-  // bottom:0 -- WebKit's standalone surface can render a little past what innerHeight reports, which is the one
-  // place this offset, not a blur/spread radius, actually matters. Read the larger shadow's offsetY (the 2nd of
-  // its four length values).
   const shadow = t.ev("getComputedStyle(document.querySelector('.sheet')).boxShadow");
   const offY = Math.max(...Array.from(String(shadow).matchAll(/(-?[\d.]+)px (-?[\d.]+)px (-?[\d.]+)px (-?[\d.]+)px/g)).map(m => +m[2]));
-  t.expect(offY >= 120, `the belt-and-braces box-shadow's Y-offset (${offY}px) no longer clears vbFix's 120px clamp ceiling`);
-  t.expect(offY > +vb.replace("px", ""), `the box-shadow's Y-offset (${offY}px) does not exceed the live gap (${vb})`);
+  t.expect(offY >= 120, `the belt-and-braces box-shadow's Y-offset (${offY}px) is too small`);
   t.ev("window.__vbTestClose()");
 });
 

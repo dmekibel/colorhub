@@ -26,39 +26,58 @@ let INSTALL_EVT = null;
 addEventListener("beforeinstallprompt", e => { e.preventDefault(); INSTALL_EVT = e; });
 const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
 const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-// A Home Screen app on iPhone with the translucent status bar gets a layout viewport that's short by the status
-// bar's height, so everything pinned to bottom:0 stopped above a black band and the Rooms corner sat too high
-// (David's iPhone 16 Pro Max screenshot, 2026-10-08). --vb is that missing strip (0 everywhere else); the shell
-// in css/menus2.css reaches through it.
-function vbFix() {
-  let gap = 0, full = 0;
+// A Home Screen app on iPhone with the translucent status bar used to get a layout viewport that was short by the
+// status bar's height, so everything pinned to bottom:0 stopped above a black band (David's iPhone 16 Pro Max
+// screenshot, 2026-10-08). The original fix (--vb/--app-full, computed here by vbFix() and consumed throughout
+// css/menus2.css and elsewhere) re-measured that shortfall live, on resize/load/orientationchange/every sheet
+// open, and wrote it into CSS custom properties.
+//
+// David, 2026-10-09: "still comes back sometimes" (intermittent -- live re-measuring is inherently fragile, the
+// one moment it matters is never the moment anyone's watching), AND separately, this session's own panning-stuck
+// bisect (a scratch git worktree per candidate commit, a scripted canvas-pixel pan test) found a real, repeatable
+// case where simply CALLING vbFix() mid-sheet-open left the map's redraw loop not repainting a pan it was still
+// computing correctly underneath -- gating the call narrowed but didn't rule out this whole class of risk.
+//
+// The structural fix: size to the LARGE viewport (100lvh, which iOS never shrinks for its own chrome, unlike
+// 100dvh) instead of compensating for a shortfall at all (app.css html/body, css/menus2.css .screen.fixed.cx,
+// both layered as a second, standalone-safe declaration after the original -- an engine that doesn't know lvh
+// drops that whole declaration and keeps the dvh/% one it had). --vb/--app-full are RETIRED as something vbFix()
+// writes into CSS (every var() that read them already has a safe fallback -- --vb defaults to 0px in css/
+// menus2.css's :root; --app-full's consumers fall back to 100lvh now), since writing them was the one part of
+// this whole mechanism with a demonstrated way to go wrong: this session's own panning-stuck bisect (a scratch
+// git worktree per candidate commit, a scripted canvas-pixel pan test) found a real, repeatable case where simply
+// CALLING vbFix() mid-sheet-open -- not the measurement itself being right or wrong, just the de.style.setProperty
+// / classList.toggle calls landing at that moment -- left the map's redraw loop not repainting a pan it was still
+// computing correctly underneath.
+//
+// vbFix() still MEASURES (read-only: a probe div's own bounding rect, never a style write anywhere) so the gap
+// log below keeps working as a safety net -- "so if it still happens we get the exact state" -- without the one
+// part that's both fragile (an intermittent bug needs re-measuring at exactly the wrong moment to even show up)
+// and now a demonstrated risk in its own right.
+let VB_LOG = [];
+function vbLog(raw, full) {
   try {
-    if (standalone() && isIOS()) {
-      full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
-      // measure where bottom:0 really lands, not just innerHeight: on iOS 26 a Home Screen app can report innerHeight
-      // as the whole screen while fixed layers still stop a status bar short (David's Arrange-sheet screenshot,
-      // 2026-10-08: --vb came out 0 and the sheet ended 61 px above the edge). The larger of the two is the strip.
-      const pr = document.createElement("div");
-      pr.style.cssText = "position:fixed;left:0;bottom:0;width:1px;height:1px;visibility:hidden;pointer-events:none";
-      document.documentElement.appendChild(pr);
-      const pb = pr.getBoundingClientRect().bottom; pr.remove();
-      gap = Math.round(Math.max(full - innerHeight, full - pb));
-      if (gap < 1 || gap > 120) gap = 0;
-    }
+    VB_LOG.push({ t: new Date().toISOString(), hash: location.hash, raw, full, innerHeight, innerWidth, screenH: screen.height, screenW: screen.width });
+    if (VB_LOG.length > 20) VB_LOG.shift();
   } catch (e) {}
-  // (re-enabled 2026-10-08. It once "pushed Home into a black bar": .fixed screens are 100dvh with overflow:hidden, so
-  // the stage reached into the strip but was clipped there. The map screens now size to the whole screen themselves
-  // (--app-full, css/menus2.css), whichever of innerHeight or 100dvh is the short one. David's 16 Pro Max screenshot:
-  // the strip is the status bar, 62 px.)
-  const de = document.documentElement;
-  de.style.setProperty("--vb", gap + "px");
-  if (full) de.style.setProperty("--app-full", full + "px"); else de.style.removeProperty("--app-full");
-  de.classList.toggle("ios-app", !!full);
 }
-
+function vbFix() {
+  try {
+    if (!(standalone() && isIOS())) return;
+    const full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
+    const pr = document.createElement("div");
+    pr.style.cssText = "position:fixed;left:0;bottom:0;width:1px;height:1px;visibility:hidden;pointer-events:none";
+    document.documentElement.appendChild(pr);
+    const pb = pr.getBoundingClientRect().bottom; pr.remove();
+    const raw = Math.round(Math.max(full - innerHeight, full - pb));
+    if (raw > 0) vbLog(raw, full);
+  } catch (e) {}
+}
+// more trigger points than the old write path had (resize, visualViewport resize) are fine now that vbFix() is
+// read-only diagnostics only -- more chances to catch a real gap in the log, no risk of triggering anything
 vbFix(); addEventListener("resize", vbFix); addEventListener("load", vbFix); setTimeout(vbFix, 600);
 try { visualViewport && visualViewport.addEventListener("resize", vbFix); } catch (e) {}
- addEventListener("orientationchange", () => setTimeout(vbFix, 300));
+addEventListener("orientationchange", () => setTimeout(vbFix, 300));
 
 // ---------- the black-bar diagnostic HUD (David, 2026-10-09: "since it's only reproducible on a real iPhone
 // Home Screen app, add a diagnostic HUD... Then he can screenshot it when the bar appears and we fix it from
@@ -85,24 +104,36 @@ function vbHud() {
     const bottomEl = document.elementFromPoint(bx, by);
     const tag = el => el ? el.tagName.toLowerCase() + (el.className ? "." + String(el.className).trim().split(/\s+/).join(".") : "") : "none";
     const cv = document.querySelector(".hc-cv");
+    // David, 2026-10-09: the structural fix (100lvh, app.css/css/menus2.css) retired --vb/--app-full as something
+    // vbFix() WRITES -- they now only ever read back their CSS defaults (0px / none), which is correct, not a
+    // bug, so they're labeled as such rather than looking like a stale measurement. "map bottom vs layout bottom"
+    // is the live, read-only version of the same question, recomputed every frame.
+    const full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
+    const mapBottom = cv ? cv.getBoundingClientRect().bottom : null;
+    const liveGap = mapBottom != null ? Math.round(full - mapBottom) : null;
     const lines = [
       ["innerHeight", innerHeight], ["outerHeight", outerHeight], ["screen.height", screen.height],
       ["visualViewport.height", vv ? vv.height.toFixed(1) : "n/a"], ["visualViewport.offsetTop", vv ? vv.offsetTop.toFixed(1) : "n/a"],
-      ["--vb", getComputedStyle(de).getPropertyValue("--vb").trim() || "(none)"],
-      ["--app-full", getComputedStyle(de).getPropertyValue("--app-full").trim() || "(none)"],
+      ["--vb (retired, always 0 now)", getComputedStyle(de).getPropertyValue("--vb").trim() || "(none)"],
+      ["--app-full (retired, always none)", getComputedStyle(de).getPropertyValue("--app-full").trim() || "(none)"],
+      ["map bottom vs layout bottom", liveGap != null ? `${liveGap}px gap` : "(no canvas)"],
       ["safe-area-inset-bottom", safeBottom.toFixed(1) + "px"],
       ["html.clientHeight", de.clientHeight], ["body.clientHeight", document.body.clientHeight],
       ["#app.clientHeight", (typeof app !== "undefined" && app) ? app.clientHeight : "n/a"],
       ["canvas CSS height", cv ? cv.getBoundingClientRect().height.toFixed(1) : "(no canvas)"],
       ["standalone()", typeof standalone === "function" ? standalone() : "n/a"],
       ["bottom-10px element", tag(bottomEl)],
+      ["gap log entries (read-only, since load)", VB_LOG.length],
     ];
     pre.textContent = lines.map(([k, v]) => `${k.padEnd(23)}${v}`).join("\n");
     vbHudRAF = requestAnimationFrame(fields);
   };
   fields();
   el.querySelector("[data-vb-copy]").onclick = () => {
-    try { navigator.clipboard.writeText(pre.textContent).catch(() => {}); } catch (e) {}
+    // the live numbers (now) plus the gap log (every raw measurement vbFix() has taken since load, including
+    // ones from before the HUD was ever opened) -- so a gap that happened and went away still travels with this
+    const log = VB_LOG.length ? "\n\n-- gap log (every vbFix() reading > 0, most recent last) --\n" + VB_LOG.map(e => JSON.stringify(e)).join("\n") : "\n\n-- gap log: empty --";
+    try { navigator.clipboard.writeText(pre.textContent + log).catch(() => {}); } catch (e) {}
     const b = el.querySelector("[data-vb-copy]"), was = b.textContent; b.textContent = "Copied"; setTimeout(() => { b.textContent = was; }, 900);
   };
   el.querySelector("[data-vb-close]").onclick = () => { cancelAnimationFrame(vbHudRAF); probe.remove(); el.remove(); };
