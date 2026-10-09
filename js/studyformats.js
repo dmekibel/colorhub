@@ -135,10 +135,13 @@ PR_STEPS.sort = { by: null, render(box, items, ctx = {}) {
       const wrong = per.filter(p => !p.ok).length;
       rows.forEach((r, i) => r.classList.add(finalOrder[i] === correct[i] ? "good" : "bad"));
       buzz(wrong ? [10, 40, 10] : [10, 30, 20]);
-      box.querySelector(".pr-foot").innerHTML = `<p class="pr-hint">${wrong ? `${wrong} out of place` : "Perfect order"}</p>`;
+      box.querySelector(".pr-foot").innerHTML = `<p class="pr-hint">${wrong ? `${wrong} out of place. Here's the order, light to dark.` : "Perfect order"}</p>`;
       const fam = typeof prFam9 === "function" ? prFam9(items[0].h) : "";
       sfEyeLog("sort", fam, wrong / items.length);
-      later(() => resolve({ ok: wrong === 0, ms: performance.now() - t0, per, answer: null }), wrong ? 900 : 500);
+      // a miss teaches: settle into the true order before moving on, not just red outlines (CLAUDE.md: the
+      // same rule every other step here follows — a wrong answer shows the truth)
+      if (wrong) later(() => { rows.forEach(r => r.classList.remove("good", "bad")); rows = correct.map(it => list.querySelector(`[data-k="${CSS.escape(it.key)}"]`)); layout(); rows.forEach(r => r.classList.add("true")); }, 650);
+      later(() => resolve({ ok: wrong === 0, ms: performance.now() - t0, per, answer: null }), wrong ? 1500 : 500);
     };
   });
 } };

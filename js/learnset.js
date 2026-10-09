@@ -463,7 +463,7 @@ function lsStudy(items, o = {}, resume = null) {
   const status = () => {
     const met = [...lvOf.values()].filter(q => !lsUp(q) && !q.out && q.met && q.lv > 0).length;
     el.querySelector("[data-status]").innerHTML = boss ? `Final round`
-      : meeting ? `Meet · <span class="pr-code">${meeting.i}</span> of <span class="pr-code">${meeting.of}</span>`
+      : meeting ? `${meeting.t === "quick" ? "Quick look" : "Meet"} · <span class="pr-code">${meeting.i}</span> of <span class="pr-code">${meeting.of}</span>`
       : `<span class="pr-code">${climbed}</span> of <span class="pr-code">${n}</span> climbed${met ? ` · <span class="pr-code">${met}</span> getting there` : ""}${aside ? ` · <span class="pr-code">${aside}</span> for tomorrow` : ""}`;
     lvOf.forEach((q, k) => { const s = el.querySelector(`.ls-prog i[data-k="${CSS.escape(k)}"]`); if (!s) return; s.style.setProperty("--lv", Math.min(P.top, q.lv) / P.top); s.classList.toggle("done", lsUp(q)); s.classList.toggle("aside", !!q.out); });
   };
@@ -518,7 +518,7 @@ function lsStudy(items, o = {}, resume = null) {
       clearAuto();
       i = idx; live = false;
       const a = run[i], it = a.t === "pair" ? a.a.it : a.t === "quick" ? a.it : a.q.it;
-      meeting = a.t !== "pair" ? { i: a.i, of: a.of } : null; status();
+      meeting = a.t !== "pair" ? { i: a.i, of: a.of, t: a.t } : null; status();
       if (!shown.has(i)) {
         shown.add(i);
         if (a.t === "meet" && a.i === 1 && a.wave > 0) pop(a.of === 1 ? "One more to meet" : `${a.of} more to meet`, "round");
@@ -767,23 +767,16 @@ function lsShot(arg) {
     items.forEach(it => { if (it.c && it.c.id) S.cards[it.c.id] = { b: 1, due: addDays(t, 5), since: addDays(t, -3), own: false, n: it.n, h: it.h }; });
     return lsStudy(prShuffle(items), { label });
   }
+  // Sort and Gradient are periodic/adaptive (studypace.js), not guaranteed within a short run, so for a
+  // screenshot they're rendered directly onto a real Study stage rather than waiting for the pacer to offer one.
   if (w === "study" && (st === "sortfmt" || st === "gradfmt")) {
     const set = prUnique([teal, ...lsAlike(teal, 9, 4)]).slice(0, 9);
-    const el = lsStudy(prShuffle(set), { label, pace: "test" });
-    const want = st === "sortfmt" ? ".pr-s-sort" : ".pr-s-gradient";
-    const tick = setInterval(() => {
-      const stage = el.querySelector(".pr-stage"); if (!stage || !stage.isConnected) return clearInterval(tick);
-      if (stage.querySelector(want)) return clearInterval(tick);   // landed: stop so the screenshot shows it
-      const skip = stage.querySelector("[data-skip-look]"); if (skip) return void skip.click();
-      const nx = stage.querySelector("[data-next]"); if (nx) return void nx.click();
-      const nm = stage._lsIt ? prName(stage._lsIt) : "";
-      if (stage.querySelector(".pr-s-match") && stage._prMatch) { const { tiles } = stage._prMatch, b = [...stage.querySelectorAll(".pr-tile")], k = tiles.findIndex((x, i) => !x.sw && !b[i].classList.contains("gone")); if (k < 0) return; const j = tiles.findIndex(x => x.sw && x.i === tiles[k].i); b[k].click(); b[j].click(); return; }
-      if (stage.querySelector(".pr-s-sort")) { const c = stage.querySelector("[data-check]"); if (c) c.click(); return; }
-      if (stage.querySelector(".pr-s-odd")) return void stage._prChoose(stage._prOpts.findIndex(o => !o.same));
-      if (stage.querySelector(".pr-s-edge") && stage._prEdge) return void stage._prChoose(stage._prEdge.last);
-      if (stage.querySelector(".pr-s-quiz")) return void stage._prChoose([...stage.querySelectorAll(".pr-opt")].findIndex(b => b.textContent.trim() === nm));
-      if (stage.querySelector(".pr-s-qc")) return void stage._prChoose([...stage.querySelectorAll(".pr-cell .pr-tag")].findIndex(b => b.textContent.trim() === nm));
-    }, 260);
+    const el = lsStudy(prShuffle(set), { label, pace: "test", looked: true });
+    setTimeout(() => {
+      const stage = el.querySelector(".pr-stage"); if (!stage) return;
+      if (st === "sortfmt") PR_STEPS.sort.render(stage, set.slice(0, 6), {});
+      else PR_STEPS.gradient.render(stage, set[2], { other: { a: set[0], b: set[1] } });
+    }, 500);
     return;
   }
   if (w === "study") {
