@@ -1084,7 +1084,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="gl-cov" data-glcov></div>
     <div data-csacts></div>
     ${!S.pmMapHintSeen ? `<p class="gl-pmap-hint" data-glpmhint><i aria-hidden="true"></i><span>New: browse paintings by how alike their colors are</span></p>` : ""}
-    <button class="gl-pmap gl-pmap-top" data-pmap="arr=similar&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
+    <button class="gl-pmap gl-pmap-top" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings on the map</span>${ICON.chev}</button>
     </div></div>
     <div class="gl-under">${glSmall(d) && !d.hi && d.rec ? `<a class="gl-full" href="${esc(d.rec)}" target="_blank" rel="noopener">Full size at the museum ↗</a>` : ""}</div>
     <div class="gl-finds"><div class="sec-head"><b>Findings</b><span>as photographed</span></div>
@@ -1095,7 +1095,7 @@ function glPage(i, d, fromHex, tol) {
     <div class="gl-morepainter" data-glmorepainter></div>
     ${typeof twSection === "function" ? `<div data-glsim></div>` : `<div class="sec-head gl-sim-h"><b>Similar palettes</b><span>by color, not subject</span></div>
     <div class="gl-rail" data-glsim></div>`}
-    <button class="gl-pmap" data-pmap="arr=similar&seed=${i}">${GL_ICON_MAP}<span>Similar paintings, on the map</span>${ICON.chev}</button>
+    <button class="gl-pmap" data-pmap="arr=spiral&seed=${i}">${GL_ICON_MAP}<span>Similar paintings, on the map</span>${ICON.chev}</button>
     <section class="srcs"><h3>Image and data</h3><ul><li>${d.rec ? `<a href="${esc(d.rec)}" target="_blank" rel="noopener">${esc(src.name)}</a>` : esc(src.name)}${src.credit ? ` · ${esc(src.credit)}` : ""}</li><li>Palette and color names computed by ColorHub from the museum's image</li></ul></section>
     <details class="gl-quiz-fold"><summary>Test yourself</summary><div class="gl-quiz" data-glquiz></div></details>
   `, "article gl-page");
