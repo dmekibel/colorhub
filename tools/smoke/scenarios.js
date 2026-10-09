@@ -1728,6 +1728,36 @@ scenario("pages", "a tapped in-between hex opens its nearest name with 'Your col
   t.expect(sawYours >= 1, "none of the in-between colors showed a 'Your color' page");
 });
 
+// David, 2026-10-09 on an in-between color's page ("Your color · Dark olive brown... diagonal triangle in the
+// top-right corner"): the split cover used to paint the matched name's color as a diagonal wedge, clip-path'd
+// into the hero's top-right corner -- exactly where a full-bleed hero's own "✕ Close" pill also lives
+// (js/trail.js tlDecorate), so the two visibly collided. Replaced with a calm two-up band inside cp-hero-foot
+// (js/richpage.js colorDossier, css/colorpage.css .rp-split-band): two clean halves, each its own color, each
+// labeled with a name and a hex, nowhere near the top corners. Also checks the lead picture's caption on a
+// tapped page: title first, no duplicated "match", and explicitly "to your color" (not the matched name's own).
+scenario("pages", "an in-between color's split cover is a clean two-up band, not a corner wedge; its lead picture says 'to your color'", async t => {
+  await t.open("#/color/teal", { settle: 300 });
+  const sw = t.d.createElement("button"); sw.dataset.swatch = "#292C10"; sw.style.cssText = "position:fixed;left:150px;top:300px;width:60px;height:60px;z-index:9999";
+  t.d.body.appendChild(sw);
+  await t.click(sw, { wait: 400 }); sw.remove();
+  await t.waitFor(() => /Your color/.test(H.chip(t)), 10000, "a 'Your color' split page for #292C10");
+  t.expect(!t.$(".rp-split-name"), "the old corner-wedge name box is still drawn");
+  const band = await t.waitFor(() => t.$(".rp-split-band"), 5000, "the two-up comparison band");
+  const halves = t.$$(".rp-split-half", band);
+  t.expect(halves.length === 2, `${halves.length} halves in the split band, expected 2`);
+  const bandRect = band.getBoundingClientRect(), closeBtn = t.$("[data-tl-exit]") || t.$(".cp-close");
+  if (closeBtn) {
+    const closeRect = closeBtn.getBoundingClientRect();
+    const overlap = !(bandRect.right < closeRect.left || bandRect.left > closeRect.right || bandRect.bottom < closeRect.top || bandRect.top > closeRect.bottom);
+    t.expect(!overlap, "the split band overlaps the close control");
+  }
+  t.expect(Math.abs(halves[0].getBoundingClientRect().width - halves[1].getBoundingClientRect().width) < 4, "the two halves of the band are uneven widths");
+  await t.waitFor(() => t.$(".ar-lead .ar-lead-m"), 15000, "the lead picture's caption");
+  const capText = t.text(".ar-lead-tx");
+  t.expect(!/match\s+match/i.test(capText), `the lead caption has a doubled "match": "${capText}"`);
+  t.expect(/to your color/i.test(capText), `the lead caption on a tapped page doesn't say "to your color": "${capText}"`);
+});
+
 scenario("pages", "a world twin (In gems) opens its page in one tap, Back returns to the color", async t => {
   await H.openPage(t, "#/name/fiery-rose", "Fiery Rose");
   // David, 2026-10-09: "Found in the world" (gems/botany/brands/fashion twins) tucks into the Paintings section now
@@ -1816,6 +1846,24 @@ scenario("pages", "a painter row in Painters who use it opens their page, and al
   await t.click(row, { wait: 700 });
   await t.waitFor(() => t.$(".aw-page"), 10000, "the painter's own page");
   t.expect(t.$(".aw-pt-hero"), "the painter page has no portrait hero");
+});
+
+// David, 2026-10-09 on Pinkish Tan: a painter with no recorded portrait should show their famous/typical
+// painting in the same circle a real portrait uses, not an empty swatch. That fallback image is built off-DOM
+// (js/richcolor.js rcPainterFillGi) so it can swap in once loaded without a flash -- and a detached <img> with
+// loading="lazy" never fires onload for at least one real case (a gallery row whose image URL is a
+// commons.wikimedia.org/wiki/Special:FilePath/... redirect, same form the rest of the gallery hands a normal,
+// *attached* <img> all the time): the browser has no layout position to judge "near the viewport" against, so
+// the fetch never starts and the row is stuck on its swatch placeholder forever. This walks every row on a
+// color with several famous/typical-painting fallbacks and asserts each one resolves to a real image.
+scenario("pages", "every painter avatar (portrait or famous/typical-painting fallback) resolves to a real image, same size", async t => {
+  await H.openPage(t, "#/name/tawny-orange", "Tawny orange");
+  const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
+  const rows = await t.waitFor(() => { const r = t.$$(".rc-painter[data-awpainter]", paint); return r.length >= 4 ? r : null; }, 20000, "several painter rows");
+  await t.waitFor(() => t.$$(".rc-painter-port.wait", paint).length === 0, 15000, "every painter avatar to resolve off its wait placeholder");
+  const sizes = new Set(rows.map(r => { const p = t.$(".rc-painter-port", r); const cs = t.w.getComputedStyle(p); return cs.width + "x" + cs.height; }));
+  t.expect(sizes.size === 1, `painter avatars render at ${sizes.size} different sizes, expected 1: ${[...sizes].join(", ")}`);
+  t.expect(rows.every(r => t.$("img.rc-painter-port, i.rc-painter-port", r)), "a painter row lost its avatar entirely");
 });
 
 scenario("pages", "hold the cover: the flower rises, dragging lights a hex, letting go opens that color; Back returns", async t => {

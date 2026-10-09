@@ -190,12 +190,17 @@
 /* Painters / When and where / Often paired with */
 .rc-painters .kin,.rc-whenwhere,.rc-paired .kin{margin-bottom:2px}
 /* a painter row opens their page (David, 2026-10-09: Paul Signac wasn't tappable and had no photo) -- a real
-   portrait (data/artists/portraits.json via js/artwiki.js's own painter page) at the same ~72px an avatar
-   reads at elsewhere, rounded like the app's circular swatches; the signature-color swatch is the honest
-   fallback when no portrait exists, never a blank circle. */
-.rc-painters .kin.rc-painter{grid-template-columns:72px 1fr;cursor:pointer}
-.rc-painter-port{width:72px;height:72px;border-radius:50%;object-fit:cover;background:var(--c,var(--cp-surface-2));flex:none}
-.rc-painter-port-sw{display:block}
+   portrait (data/artists/portraits.json via js/artwiki.js's own painter page), or, with none recorded, the same
+   famous/typical-painting fallback the painter page's own hero now uses, never a blank circle. One shared class
+   (.rc-painter-port) sizes every state -- the real <img>, the pending placeholder and the painting it resolves
+   to -- so a portrait and a painting-fallback avatar are never two different sizes (David, 2026-10-09: "the
+   circle is ~60px for fallbacks but ~150px for real portraits"). Same grid shape as .kin.rc-harm: the avatar
+   spans both rows, the name and its stat stack in the wide column beside it instead of each other. */
+.rc-painters .kin.rc-painter{grid-template-columns:64px 1fr;grid-template-rows:auto auto;column-gap:14px;row-gap:2px;align-items:center;cursor:pointer}
+.rc-painters .kin.rc-painter .rc-painter-port{grid-row:1/3}
+.rc-painters .kin.rc-painter b{grid-column:2;grid-row:1}
+.rc-painters .kin.rc-painter span{grid-column:2;grid-row:2}
+.rc-painter-port{display:block;width:64px;height:64px;border-radius:50%;object-fit:cover;object-position:center;background:var(--c,var(--cp-surface-2));flex:none}
 .rc-painter-port-sw.wait{animation:rpPulse 1.6s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){.rc-painter-port-sw.wait{animation:none}}
 .rc-spark{display:flex;align-items:flex-end;gap:3px;height:60px;margin:10px 0}
@@ -416,14 +421,24 @@
 .cp-page .cp-close{z-index:31}
 @media (prefers-reduced-motion:reduce){.rp-bar{transition:none}}
 
-/* ---------- the tapped color's split cover (#7): your color, the name's own in its corner ---------- */
+/* ---------- the tapped color's split cover (#7): your color vs. the matched name, side by side ----------
+   David, 2026-10-09: a diagonal wedge in the top-right corner ("this thing... looks odd") sat right where a
+   full-bleed hero's mirrored Close pill also lives (js/trail.js tlDecorate, "a full-bleed hero: mirrored on
+   the right"), so the two overlapped. A calm two-up band at the bottom of the hero, inside cp-hero-foot (where
+   the Close pill never reaches), replaces it: two clean halves, each its own color, each labeled with a name
+   and a hex in that half's own contrast ink -- never a corner wedge again. */
 .rp-split{background:linear-gradient(var(--c),var(--c))}
-.rp-split::before{content:"";position:absolute;inset:0;background:var(--c2);clip-path:polygon(46% 0,100% 0,100% 52%);pointer-events:none}
-.rp-split-name{position:absolute;right:20px;top:calc(var(--top) + 76px);z-index:1;display:flex;flex-direction:column;align-items:flex-end;gap:4px;text-align:right;max-width:44%}
-.rp-split-name b{font:400 26px/1.05 var(--serif);letter-spacing:-.01em;text-wrap:balance}
-.rp-split-name span{font-size:13px;opacity:.85}
-.rp-split-name[data-ink="dark"]{color:#141311}.rp-split-name[data-ink="light"]{color:#fff}
 .cp-hero{position:relative}
+/* .cp-hero-foot is a column flexbox with align-items:flex-start (every other child sizes to its own content,
+   e.g. the name/chip/buttons), so this needs its own width:100% or it shrinks to a min-content sliver instead
+   of spanning the hero the way a comparison band should. */
+.rp-split-band{display:flex;width:100%;border-radius:var(--r-2,14px);overflow:hidden;margin-bottom:14px;box-shadow:0 0 0 1px rgba(255,255,255,.1)}
+.rp-split-half{flex:1;min-width:0;padding:10px 14px;display:flex;flex-direction:column;gap:2px}
+.rp-split-half-a{background:var(--c)}
+.rp-split-half-b{background:var(--c2)}
+.rp-split-half b{font:400 16px/1.2 var(--serif);letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rp-split-half span{font-size:12px;opacity:.85}
+.rp-split-half[data-ink="dark"]{color:#141311}.rp-split-half[data-ink="light"]{color:#fff}
 .rp-yours{margin-top:10px;font:400 20px/1.3 var(--serif);max-width:30ch;text-wrap:pretty}
 .rp-hexrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:6px}
 .rp-saveyours{min-height:40px;padding:0 16px;border-radius:999px;background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14);font:400 16px/1 var(--serif)}
