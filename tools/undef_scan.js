@@ -27,7 +27,12 @@ const BROWSER = new Set(JSON.parse(fs.readFileSync(path.join(__dirname, "smoke",
 const NODE_IDIOM = new Set(["module", "exports", "require"]);   // `typeof module !== "undefined"` guards around a node-only export
 const GENERIC = new Set(["name", "status", "length", "event", "top", "parent", "opener", "closed", "external", "origin", "frames", "self"]);
 const list = dir => fs.readdirSync(path.join(ROOT, dir)).filter(f => f.endsWith(".js")).sort().map(f => dir + "/" + f);
-const CHECKED = [...list("js"), ...(fs.existsSync(path.join(ROOT, "js/games")) ? list("js/games") : [])], DATA = list("data");
+// js/segment-worker.js runs in its own Worker global scope (self.importScripts'd ort.min.js, not a classic
+// <script> tag -- see js/segment.js's header), same as sw.js below: declarations gathered, uses not checked
+// against the shared app scope, since neither "self" nor "ort" are lost locals there, they're the real thing.
+const WORKER_FILES = new Set(["js/segment-worker.js"]);
+const CHECKED = [...list("js"), ...(fs.existsSync(path.join(ROOT, "js/games")) ? list("js/games") : [])].filter(f => !WORKER_FILES.has(f));
+const DATA = [...list("data"), ...WORKER_FILES];
 if (fs.existsSync(path.join(ROOT, "sw.js"))) DATA.push("sw.js");   // (own scope in a worker; only read for declarations)
 
 const parse = (src, file) => {

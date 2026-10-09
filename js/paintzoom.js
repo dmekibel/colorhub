@@ -8,11 +8,15 @@
 //   Pick    the eyedropper, explicit here too (David, relayed 2026-10-09: "pressing on the picture should make
 //           it full screen, instead of instantly starting the color picker" -- a plain drag pans/zooms as
 //           always; Pick arms eyedropAttach instead, same loupe + readout as the painting page's own button)
-//   Region  tap any area (the dress, the sky) to see it lit alone with its own palette -- precomputed offline
-//           (tools/regions_build.py, "Option A": SLIC + region-adjacency-graph color merging, js/gallery.js's
-//           glRegionsFor/glPaintRegionMask), labeled honestly "this area" (no guessed object names)
+//   Select  tap the thing you want (the dress, the sky, the sleeve) and get a real object mask, not a guessed
+//           color region -- MobileSAM, on-device (js/segment.js, greenlit 2026-10-09 after a measured
+//           prototype). Replaces the old precomputed SLIC "Region" tool entirely (data/regions/,
+//           tools/regions_build.py and js/gallery.js's glRegionsFor/glPaintRegionMask/glRegionAt/
+//           glRegionSheet are gone in the same change this landed in) -- this one really is the object you
+//           pointed at, with +/- taps to refine it, not a fixed color-boundary guess.
 // opts: { src, alt, title, pal: [{h,share}], pix: {w,h,L}|null (litBuild()'s coarse Lab read, or null when this
-// image's pixels can't be read here, which just leaves Where/Pick out), galleryIndex: int|null (for Region) }
+// image's pixels can't be read here, which just leaves Where/Pick out), galleryIndex: int|null (unused by
+// Select, kept for callers that still pass it) }
 function glZoomOpen(opts) {
   const scrim = document.createElement("div");
   scrim.className = "glz-scrim";
@@ -21,10 +25,25 @@ function glZoomOpen(opts) {
     <div class="glz-stage"><div class="glz-frame"><img class="glz-img" src="${esc(opts.src)}" alt="${esc(opts.alt || "")}"><canvas class="glz-cv" aria-hidden="true"></canvas></div></div>
     <div class="glz-tools">
       <div class="seg glz-seg" role="group" aria-label="Look at it">
-        <button data-glzv="value">Value</button><button data-glzv="squint">Squint</button>${opts.pix ? `<button data-glzv="where">Where</button>` : ""}${typeof eyedropAttach === "function" ? `<button data-glzv="pick">${typeof icon === "function" ? icon("pipette", 15) : ""}<span>Pick</span></button>` : ""}${opts.galleryIndex != null ? `<button data-glzv="region" hidden>Region</button>` : ""}
+        <button data-glzv="value">Value</button><button data-glzv="squint">Squint</button>${opts.pix ? `<button data-glzv="where">Where</button>` : ""}${typeof eyedropAttach === "function" ? `<button data-glzv="pick">${typeof icon === "function" ? icon("pipette", 15) : ""}<span>Pick</span></button>` : ""}${opts.src && typeof segProbe === "function" ? `<button data-glzv="select" hidden>Select</button>` : ""}
       </div>
       <div class="glz-pal" hidden role="group" aria-label="Which color"></div>
-      <p class="glz-region-hint" data-glzrhint hidden>Tap any area to see it alone, with its own palette.</p>
+      <div class="glz-sel" data-glzsel hidden>
+        <div class="glz-sel-prog" data-glzselprog hidden>
+          <p class="glz-sel-prog-label" data-glzselproglabel></p>
+          <div class="glz-sel-bar"><i data-glzselbar></i></div>
+          <p class="fine glz-sel-wifi" data-glzselwifi hidden>Downloads once, then works without a connection. Best on Wi-Fi.</p>
+        </div>
+        <p class="glz-tool-hint" data-glzselhint hidden>Getting ready&hellip;</p>
+        <div class="glz-sel-ctl" data-glzselctl hidden>
+          <div class="seg glz-sel-pm" role="group" aria-label="Tap mode">
+            <button data-glzselpm="1" aria-pressed="true" aria-label="Add to the selection">+</button>
+            <button data-glzselpm="0" aria-pressed="false" aria-label="Remove from the selection">&minus;</button>
+          </div>
+          <button class="glz-sel-btn" data-glzselundo disabled>Undo</button>
+          <button class="glz-sel-btn" data-glzselclear disabled>Clear</button>
+        </div>
+      </div>
     </div>`;
   document.body.appendChild(scrim);
   const prevOverflow = document.body.style.overflow; document.body.style.overflow = "hidden";
@@ -97,7 +116,7 @@ function glZoomOpen(opts) {
   // (pointerup, pointercancel, lostpointercapture, touchcancel -- iOS doesn't always send the first two) clears
   // it, a pointer older than STALE_MS is pruned defensively (a stuck phantom finger from a dropped event would
   // otherwise wedge pinch math forever), and every computed value is checked finite before it reaches style.
-  // Stepped aside entirely while "Pick" or "Region" is active (their own tap/drag handlers own the gesture then).
+  // Stepped aside entirely while "Pick" or "Select" is active (their own tap/drag handlers own the gesture then).
   const pts = new Map(); let drag = null, pinch = null, raf = null;
   const STALE_MS = 2500;
   const stopMomentum = () => { if (raf) { cancelAnimationFrame(raf); raf = null; } };
@@ -150,7 +169,7 @@ function glZoomOpen(opts) {
     drag = null;
   };
   stage.addEventListener("pointerdown", e => {
-    if (active === "pick" || active === "region") return;
+    if (active === "pick" || active === "select") return;
     stopMomentum(); frame.style.transition = "";
     const now = performance.now();
     for (const [id, v] of pts) if (now - v.t > STALE_MS) pts.delete(id);
@@ -187,7 +206,7 @@ function glZoomOpen(opts) {
   stage.addEventListener("lostpointercapture", endPointer);
   stage.addEventListener("touchcancel", () => endPointer(null));
   stage.addEventListener("wheel", e => {
-    if (active === "pick" || active === "region") return;
+    if (active === "pick" || active === "select") return;
     e.preventDefault(); stopMomentum(); frame.style.transition = "";
     zoomAt(e.clientX, e.clientY, Z * Math.exp(-e.deltaY * .0015), false);
   }, { passive: false });
@@ -196,16 +215,17 @@ function glZoomOpen(opts) {
   // it never fights the pan/pinch handlers above (D+E of David's palette-engine brief, 2026-10-09). The readout
   // card's "Where else" switches straight into the Where tool with the sampled hex, even when it isn't one of
   // the painting's own named palette colors.
-  // Region: fetch once, reveal the tool only once real region data comes back (never offer a tool that would
-  // just sit there doing nothing -- most paintings have regions, but a few have no cached image or too flat a
-  // palette to clear the area floor, tools/regions_build.py's MIN_REGION_SHARE)
-  let regionData = null, regionLabel = null, regionSheetClose = null;
-  if (opts.galleryIndex != null && typeof glRegionsFor === "function") {
-    glRegionsFor(opts.galleryIndex).then(rd => {
-      if (!rd || !rd.regions || !rd.regions.length) return;
-      regionData = rd;
-      const btn = scrim.querySelector('[data-glzv="region"]'); if (btn) btn.hidden = false;
-    }).catch(() => {});
+  // Select: fetch nothing upfront (unlike the old Region tool, there's no precomputed data to wait for) --
+  // instead probe once, cheaply, whether this image's host even lets the encoder read its pixels at all
+  // (js/segment.js's segProbe: a real 1x1 canvas read, cached per host for the session), and reveal the tool
+  // enabled or honestly disabled accordingly. Never a silent dead button (David's own instruction, 2026-10-09:
+  // "if neither [a CORS-clean host nor a local copy], disable Select with an honest note").
+  if (opts.src && typeof segProbe === "function") {
+    segProbe(opts.src).then(ok => {
+      const btn = scrim.querySelector('[data-glzv="select"]'); if (!btn) return;
+      btn.hidden = false;
+      if (!ok) { btn.disabled = true; btn.title = "Select isn't available for this museum's photo yet"; }
+    });
   }
   let eyd = null;
   const syncPick = () => {
@@ -225,34 +245,116 @@ function glZoomOpen(opts) {
       } });
     }
   };
-  // Value / Squint / Where / Pick / Region
+  // Select: an accumulated list of tap points in this image's own resized pixel space (js/segment.js's
+  // segEncode/segPointForTap), each +1 (add) or 0 (remove); every tap re-runs the decoder (fast -- see
+  // js/segment.js's header) with the full list so far, live-refining one mask rather than restarting it.
+  // selBusy guards against a tap landing mid-decode; the ONE encode per image is cached in js/segment.js
+  // itself (SEG_CUR), so switching tools and back to Select on the SAME painting skips straight to ready.
+  let selPoints = [], selTapMode = 1, selSheetClose = null, selBusy = false;
+  const selEls = () => ({
+    wrap: scrim.querySelector("[data-glzsel]"), prog: scrim.querySelector("[data-glzselprog]"),
+    progLabel: scrim.querySelector("[data-glzselproglabel]"), bar: scrim.querySelector("[data-glzselbar]"),
+    wifi: scrim.querySelector("[data-glzselwifi]"), hint: scrim.querySelector("[data-glzselhint]"),
+    ctl: scrim.querySelector("[data-glzselctl]"), undo: scrim.querySelector("[data-glzselundo]"), clear: scrim.querySelector("[data-glzselclear]"),
+  });
+  const selSetHint = (txt, show) => { const { hint } = selEls(); if (hint) { hint.hidden = show === false; hint.textContent = txt; } };
+  const selReset = () => {
+    selPoints = []; selBusy = false; selTapMode = 1;   // Clear/leaving Select starts over clean -- back to the default "+" tap mode too, not just an empty point list
+    scrim.querySelectorAll("[data-glzselpm]").forEach(b => { const on = b.dataset.glzselpm === "1"; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+    cv.classList.remove("on");
+    if (selSheetClose) { selSheetClose(); selSheetClose = null; }
+    const { ctl, undo, clear } = selEls();
+    if (undo) undo.disabled = true; if (clear) clear.disabled = true;
+    if (ctl && !ctl.hidden) selSetHint("Tap the thing you want.");
+  };
+  // runs (or re-runs) the decoder against the current point list; a "-" tap with no "+" tap yet has nothing
+  // to decode against (SAM needs at least one positive point to mean anything), so that's caught here rather
+  // than sent to the model
+  const selRunDecode = () => {
+    if (selBusy || typeof segDecode !== "function") return;
+    if (!selPoints.some(p => p.label === 1)) {
+      cv.classList.remove("on");
+      if (selSheetClose) { selSheetClose(); selSheetClose = null; }
+      selSetHint("Add a + tap first, then − to remove any of it.");
+      return;
+    }
+    selBusy = true; selSetHint("", false);
+    segDecode(selPoints).then(({ mask, mw, mh }) => {
+      selBusy = false;
+      if (typeof segPaintMask === "function") { segPaintMask(cv, mask, mw, mh); cv.classList.add("on"); }
+      const pool = typeof segPoolFromMask === "function" ? segPoolFromMask(mask, mw, mh) : [];
+      if (selSheetClose) selSheetClose();
+      // each sheet's own onClose only clears selSheetClose if it's STILL the current one -- sheet()'s close()
+      // animates for up to 400ms before actually removing the element (js/core.js), so the OLD sheet closed on
+      // the line above can fire its onClose well after this new one has already replaced selSheetClose; without
+      // this check that late callback nulls out the handle to the sheet that's open right now, and Clear/a tool
+      // switch silently stops being able to close it (found live, not guessed -- tools/smoke's Select scenario)
+      const mySheet = pool.length && typeof segSheet === "function" ? segSheet(pool, () => { if (selSheetClose === mySheet) selSheetClose = null; }) : null;
+      selSheetClose = mySheet;
+    }).catch(() => { selBusy = false; selSetHint("Couldn't select that -- try tapping again."); });
+  };
+  // activates on entry into Select (not before -- "lazy-load only on entering Select"): downloads+caches the
+  // model the first time ever (segEnsureReady's own progress callback drives the banner), then encodes this
+  // one image (free on every later visit to the same painting, segEncode's own src check)
+  const selActivate = () => {
+    const { wrap, prog, progLabel, bar, wifi, ctl } = selEls();
+    if (wrap) wrap.hidden = false;
+    if (ctl) ctl.hidden = true;
+    selSetHint("Getting ready…");
+    if (typeof segEnsureReady !== "function") { selSetHint("Select isn't available right now."); return; }
+    segEnsureReady((frac, mb) => {
+      if (!prog) return;
+      prog.hidden = false; selSetHint("", false);
+      if (progLabel) progLabel.textContent = `Downloading the selection tool · ${mb} MB`;
+      if (bar) bar.style.width = Math.max(2, Math.round(frac * 100)) + "%";
+      if (wifi) wifi.hidden = false;
+    }).then(() => {
+      if (prog) prog.hidden = true;
+      selSetHint("Preparing this image…");
+      return segEncode(img);
+    }).then(() => {
+      selSetHint("Tap the thing you want. + adds, − removes.");
+      if (ctl) ctl.hidden = false;
+    }).catch(() => { if (prog) prog.hidden = true; selSetHint("Select couldn't load — try again."); });
+  };
+  scrim.querySelector(".glz-sel-pm").onclick = e => {
+    const b = e.target.closest("[data-glzselpm]"); if (!b) return;
+    selTapMode = +b.dataset.glzselpm;
+    scrim.querySelectorAll("[data-glzselpm]").forEach(x => { const on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+    if (typeof buzz === "function") buzz(4);
+  };
+  scrim.querySelector("[data-glzselundo]").onclick = () => {
+    if (!selPoints.length) return;
+    selPoints.pop();
+    if (typeof buzz === "function") buzz(5);
+    const { undo, clear } = selEls(); if (undo) undo.disabled = !selPoints.length; if (clear) clear.disabled = !selPoints.length;
+    if (selPoints.length) selRunDecode(); else { cv.classList.remove("on"); if (selSheetClose) { selSheetClose(); selSheetClose = null; } selSetHint("Tap the thing you want."); }
+  };
+  scrim.querySelector("[data-glzselclear]").onclick = () => { if (typeof buzz === "function") buzz(5); selReset(); };
+  // Select: a tap (not a drag -- pan/pinch are gated off above while this tool is active) adds a point in the
+  // current +/- mode and re-decodes. Ignored until this exact image has finished encoding (segPointForTap
+  // returns null while still downloading/encoding, or if the active tool isn't Select at all).
+  const selTap = (clientX, clientY) => {
+    if (typeof eydMap !== "function" || typeof segPointForTap !== "function") return;
+    const m = eydMap(img, clientX, clientY); if (!m) return;
+    const p = segPointForTap(img.src, m.fx, m.fy); if (!p) return;   // img.src (browser-normalized), matching segEncode's own SEG_CUR.src -- opts.src may be relative and never compare equal
+    if (typeof buzz === "function") buzz(6);
+    selPoints.push({ x: p.x, y: p.y, label: selTapMode });
+    const { undo, clear } = selEls(); if (undo) undo.disabled = false; if (clear) clear.disabled = false;
+    selRunDecode();
+  };
+  img.addEventListener("click", e => { if (active === "select") selTap(e.clientX, e.clientY); });
+  // Value / Squint / Where / Pick / Select
   const setMode = m => {
     active = active === m ? null : m;
     scrim.querySelectorAll("[data-glzv]").forEach(b => { const on = b.dataset.glzv === active; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
     scrim.querySelector(".glz-img").style.filter = active === "value" ? "grayscale(1)" : active === "squint" ? "blur(min(2.5vw,16px))" : "";
     const palBox = scrim.querySelector(".glz-pal"); palBox.hidden = active !== "where";
     if (active !== "where") { cv.classList.remove("on"); palHex = null; } else drawPalRow();
-    const hint = scrim.querySelector("[data-glzrhint]"); if (hint) hint.hidden = active !== "region";
-    if (active !== "region") { regionLabel = null; if (regionSheetClose) { regionSheetClose(); regionSheetClose = null; } if (active !== "where") cv.classList.remove("on"); }
+    const { wrap } = selEls(); if (wrap) wrap.hidden = active !== "select";
+    if (active === "select") selActivate(); else { selReset(); if (active !== "where") cv.classList.remove("on"); }
     drawWhere(); syncPick();
   };
-  // Region: a tap (not a drag -- pan/pinch are gated off above while this tool is active) picks whichever
-  // region sits under the finger, lights it alone (glPaintRegionMask, the same soft-blur treatment as Where)
-  // and opens a compact sheet with that region's own palette -- By area / Diverse / Stands out, the shared
-  // slider, every chip opening its color page in one tap, same as the rest of the app.
-  const pickRegion = (clientX, clientY) => {
-    if (!regionData || typeof eydMap !== "function" || typeof glRegionAt !== "function") return;
-    const m = eydMap(img, clientX, clientY); if (!m) return;
-    const label = glRegionAt(regionData, m.fx, m.fy);
-    if (!label) return;
-    const region = regionData.regions[label - 1]; if (!region) return;
-    regionLabel = label;
-    if (typeof buzz === "function") buzz(6);
-    glPaintRegionMask(cv, regionData, label); cv.classList.add("on");
-    if (regionSheetClose) regionSheetClose();
-    regionSheetClose = typeof glRegionSheet === "function" ? glRegionSheet(region, () => { regionLabel = null; cv.classList.remove("on"); }) : null;
-  };
-  img.addEventListener("click", e => { if (active === "region") pickRegion(e.clientX, e.clientY); });
   const drawPalRow = () => {
     const box = scrim.querySelector(".glz-pal");
     box.innerHTML = (opts.pal || []).slice(0, 8).map(p => `<button data-glzc="${p.h}" style="--c:${p.h}" class="${palHex === p.h ? "on" : ""}" aria-label="${esc(typeof nameOf === "function" ? nameOf(p.h).n : p.h)}"></button>`).join("");
