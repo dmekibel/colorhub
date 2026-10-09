@@ -2857,6 +2857,51 @@ scenario("pages", "a fresh load of #/painter/<slug> opens that painter, not Home
   t.expect(t.w.location.hash === "#/painter/abraham-bloemaert", `the address changed to ${t.w.location.hash}`);
 });
 
+// The painter-page rebuild (David, 2026-10-09): portrait hero first, then "Most famous", then the life's work
+// grid with its sort chips and filter drawer (js/artwiki.js awPortraitHero/awFamousRail/awWorksSection).
+// Bazille's self-portrait is one of the few whose museum (AIC) serves its image same-origin (img/gallery/...),
+// so it loads under the smoke harness's host-resolver-rules (every other host, Wikimedia included, is
+// deliberately unreachable there -- most painter portraits are Commons-hosted and can't be asserted on here).
+scenario("pages", "painter page: the portrait hero renders (an image or the signature-color field -- never empty)", async t => {
+  await t.open("#/painter/frederic-bazille", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page");
+  const hero = await t.waitFor(".aw-pt-hero", 8000, "the portrait hero");
+  t.expect(hero.getBoundingClientRect().height > 100, "the portrait hero has no size");
+  t.expect(t.$(".aw-pt-hero figcaption") && t.text(".aw-pt-hero figcaption").length > 0, "the portrait hero has no caption");
+  // a painter with no portrait anywhere still gets the hero, as a field of his own signature colors
+  await t.open("#/painter/adam-pijnacker", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page (no portrait)");
+  const field = await t.waitFor(".aw-pt-hero.aw-pt-field", 8000, "the signature-color fallback field");
+  t.expect(t.$$(".aw-pt-bars i", field).length > 0, "the fallback field has no color bars");
+});
+scenario("pages", "painter page: a sort chip reorders the life's work grid", async t => {
+  await t.open("#/painter/john-singer-sargent", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page");
+  await t.waitFor("#aw-works", 8000, "the Life's work section");
+  const firstGi = () => { const p = t.$(".aw-wk-mount .gl-pin, .aw-wk-mount .gl-pin.wait"); return p && p.dataset.gi; };
+  await t.waitFor(() => firstGi(), 8000, "the grid's first pin");
+  const before = firstGi();
+  const vivid = t.$$('[data-wksort="C"]').find(b => /Vivid/.test(b.textContent));
+  t.expect(vivid, "no Vivid sort chip");
+  await t.click(vivid, { wait: 500 });
+  t.expect(vivid.classList.contains("on"), "the Vivid chip didn't turn on");
+  await t.waitFor(() => firstGi() && firstGi() !== before, 6000, "the grid order to change after switching sort");
+});
+scenario("pages", "painter page: a museum filter narrows the life's work grid -- honestly", async t => {
+  await t.open("#/painter/rembrandt-van-rijn", { settle: 600 });
+  await t.waitFor(".aw-page", 15000, "the painter page");
+  await t.waitFor("#aw-works", 8000, "the Life's work section");
+  const fold = await t.waitFor('[data-wkfilter] summary', 8000, "the Filter drawer");
+  await t.click(fold, { wait: 300 });
+  const mus = t.$$("[data-wkmus]")[0];
+  t.expect(mus, "no museum filter chip (expected more than one museum here)");
+  const before = t.text("[data-wkcount]");
+  await t.click(mus, { wait: 500 });
+  t.expect(mus.classList.contains("on"), "the museum chip didn't turn on");
+  await t.waitFor(() => t.text("[data-wkcount]") !== before, 6000, "the count readout to change after a museum filter");
+  t.expect(/ of /.test(t.text("[data-wkcount]")), `the count doesn't read "N of M" once filtered (got "${t.text("[data-wkcount]")}")`);
+});
+
 // ================================================================== THE TRAIL (js/trail.js: one Back for everything, the map glyph)
 const TRL = {
   // a placed learner (so the map, not the welcome, is the floor), with nothing else in the save
