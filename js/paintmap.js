@@ -23,12 +23,25 @@
 // is its painting's own dominant color, so the map reads as color from the first frame. Image addresses come from
 // data/gallery/thumbs.txt (tools/paintmap_thumbs.py), not the 11 MB of detail shards.
 
-const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter"], ["similar", "Around one painting"]];
+// David, 2026-10-09: "the paintings view is missing the arrangement options the color view has" -- Rings and
+// Spiral are both "around one painting" (they need a seed, same as the old "similar" did), split into two
+// distinct reads of the same underlying similarity order (pmSimilarOrder): Rings is clean concentric square
+// shells (nearer = a tighter ring); Spiral is a continuous golden-angle sweep (phyllotaxis, the sunflower-seed
+// pattern) with no seams between ranks, so a painting just past one "ring" and one just before the next sit
+// beside each other instead of in separate bands. Families groups by movement (pmLayGroup, the same shelf-
+// packing as By painter, just grouped by F.mv instead of F.artist); Tones buckets by mood (Vivid/Light/Muted/
+// Dark, the same honeyToneGroup split honey.js's own Tones shape uses) under whichever "Place by" color the
+// painting's own position already comes from.
+const PM_ARR = [["color", "By color"], ["time", "By time"], ["painter", "By painter"], ["families", "Families"], ["tones", "Tones"], ["rings", "Rings"], ["spiral", "Spiral"]];
+const PM_NEEDS_SEED = new Set(["rings", "spiral"]);
 const PM_WHY = {
   color: "Lighter toward the top, hues left to right",
   time: "Oldest at the top, a band for each decade",
   painter: "A block for each painter, earliest first",
-  similar: "The nearer the middle, the closer the colors",
+  families: "A block for each movement, the biggest first",
+  tones: "An island per mood: vivid, light, muted, dark",
+  rings: "Concentric rings: the nearer the middle, the closer the colors",
+  spiral: "A continuous spiral, nearest first, no seams between rings",
 };
 // David, 2026-10-09: "Place by" -- which of a painting's own colors decides WHERE it sits, for the two
 // arrangements position actually comes from a color (color, time). The default (and the only option before this)
@@ -59,7 +72,10 @@ const PM_ICON = {
   color: sv('<circle cx="8" cy="8" r="3.2"/><circle cx="16" cy="8" r="3.2"/><circle cx="12" cy="15.5" r="3.2"/>', 22, 1.7),
   time: sv('<path d="M4 6h16M4 12h16M4 18h16"/><path d="M8 4v4M14 10v4M10 16v4"/>', 22, 1.7),
   painter: sv('<rect x="3.5" y="4" width="7" height="7" rx="1.2"/><rect x="13.5" y="4" width="7" height="4" rx="1.2"/><rect x="13.5" y="11" width="7" height="9" rx="1.2"/><rect x="3.5" y="14" width="7" height="6" rx="1.2"/>', 22, 1.7),
-  similar: sv('<rect x="9" y="9" width="6" height="6" rx="1.2"/><circle cx="12" cy="12" r="8.5" stroke-dasharray="2.5 3"/>', 22, 1.7),
+  families: sv('<circle cx="7" cy="7" r="3.4"/><circle cx="16.5" cy="6.5" r="2.4"/><circle cx="7" cy="16.5" r="2.4"/><circle cx="17" cy="16" r="3"/>', 22, 1.7),
+  tones: sv('<circle cx="7" cy="7" r="3.6"/><circle cx="17" cy="7" r="2.2"/><circle cx="7" cy="17" r="2.2"/><circle cx="17" cy="17" r="3.6"/>', 22, 1.7),
+  rings: sv('<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7.5" stroke-dasharray="2.5 3"/><circle cx="12" cy="12" r="10.5" stroke-dasharray="1.5 2.5"/>', 22, 1.6),
+  spiral: sv('<path d="M12 12c0-1.2 1-2 2.2-2 1.8 0 3.3 1.6 3.3 3.5 0 2.6-2.2 4.8-4.8 4.8-3.3 0-6-2.8-6-6.1C6.7 7.7 10 4.6 14 4.6" stroke-linecap="round"/>', 22, 1.7),
   arrange: sv('<path d="M4 6h10M18 6h2M4 12h3M11 12h9M4 18h12"/><circle cx="16" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>', 22, 1.6),
   filter: sv('<path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"/>', 22, 1.6),
   down: sv('<path d="M7 10l5 5 5-5"/>', 14, 2),
@@ -106,7 +122,7 @@ function pmParse(q, F) {
   if (p.get("mus")) f.mus = F.G.src.findIndex(x => x.k === p.get("mus"));
   const sd = num("seed"); if (sd != null && sd >= 0 && sd < F.N) s.seed = sd;
   if (p.get("fav") === "1") s.fav = 1;
-  if (s.arr === "similar" && s.seed < 0) s.arr = "color";
+  if (PM_NEEDS_SEED.has(s.arr) && s.seed < 0) s.arr = "color";
   return s;
 }
 function pmQS(s, F) {
@@ -118,7 +134,7 @@ function pmQS(s, F) {
   if (f.co && F) out.push(["co", F.meta.countries[f.co - 1]]);
   if (f.mv && F) out.push(["mv", F.meta.movements[f.mv - 1]]);
   if (f.mus >= 0 && F) out.push(["mus", F.G.src[f.mus].k]);
-  if (s.arr === "similar" && s.seed >= 0) out.push(["seed", s.seed]);
+  if (PM_NEEDS_SEED.has(s.arr) && s.seed >= 0) out.push(["seed", s.seed]);
   if (s.fav) out.push(["fav", 1]);
   return out.map(([k, v]) => k + "=" + encodeURIComponent(v)).join("&");
 }
@@ -280,35 +296,72 @@ function pmLayTime(list, place) {
   });
   return pmGridOf(items, X, Y, labels, start ? [Math.round(start[0]), Math.round(start[1])] : [0, 1]);
 }
-function pmLayPainter(list, F) {
+// David, 2026-10-09: the shelf-packer behind "By painter" generalized to take ANY grouping (families groups by
+// movement instead of painter, same shelves) -- one block per group, each block's own internal order its own
+// business (chronological for painter/movement blocks).
+function pmLayGroup(list, o) {
   const n = list.length, Wc = Math.max(4, Math.min(18, Math.round(Math.sqrt(n) / 1.6)));
   const groups = new Map();
-  list.forEach(i => { const a = F.artist[i]; if (!groups.has(a)) groups.set(a, []); groups.get(a).push(i); });
-  const med = arr => { const y = arr.map(pmYr).sort((a, b) => a - b); return y[y.length >> 1]; };
-  const order = [...groups.entries()].map(([a, arr]) => ({ a, arr: arr.sort((p, q) => pmYr(p) - pmYr(q)), m: a ? med(arr) : 2e5 })).sort((p, q) => p.m - q.m || q.arr.length - p.arr.length);
+  list.forEach(i => { const g = o.groupOf(i); if (!groups.has(g)) groups.set(g, []); groups.get(g).push(i); });
+  groups.forEach(arr => arr.sort(o.sortWithin));
+  let keys = o.order ? o.order.filter(k => groups.has(k)) : [...groups.keys()];
+  if (!o.order) keys.sort((a, b) => (o.keyRank ? o.keyRank(a, groups.get(a)) - o.keyRank(b, groups.get(b)) : 0) || groups.get(b).length - groups.get(a).length);
   const items = new Int32Array(n), X = new Int32Array(n), Y = new Int32Array(n), labels = [];
   const ox = Math.floor(Wc / 2);
   let x = 0, y = 0, shelfH = 0, m = 0;
-  order.forEach(g => {
-    const c = g.arr.length, bw = Math.min(Wc, Math.max(1, Math.ceil(Math.sqrt(c * 1.3)))), bh = Math.ceil(c / bw);
+  keys.forEach(key => {
+    const arr = groups.get(key), c = arr.length, bw = Math.min(Wc, Math.max(1, Math.ceil(Math.sqrt(c * 1.3)))), bh = Math.ceil(c / bw);
     if (x > 0 && x + bw > Wc) { y += shelfH + 2; x = 0; shelfH = 0; }
-    labels.push({ x: x - ox, y, text: g.a ? xbArtistName(F, g.a) : "Artist unknown", n: c, w: bw });
-    g.arr.forEach((i, k) => { items[m] = i; X[m] = x + k % bw - ox; Y[m] = y + 1 + Math.floor(k / bw); m++; });
+    labels.push({ x: x - ox, y, text: o.label(key, c), n: c, w: bw });
+    arr.forEach((i, k) => { items[m] = i; X[m] = x + k % bw - ox; Y[m] = y + 1 + Math.floor(k / bw); m++; });
     shelfH = Math.max(shelfH, bh); x += bw + 1;
   });
   const L0 = labels[0];
   return pmGridOf(items, X, Y, labels, L0 ? [Math.round(L0.x + (L0.w - 1) / 2), L0.y + 1] : [0, 1]);
 }
-function pmLaySimilar(list, seed) {
+function pmLayPainter(list, F) {
+  return pmLayGroup(list, {
+    groupOf: i => F.artist[i], sortWithin: (p, q) => pmYr(p) - pmYr(q),
+    keyRank: (a, arr) => { if (!a) return 2e5; const y = arr.map(pmYr).sort((p, q) => p - q); return y[y.length >> 1]; },
+    label: (a, c) => a ? xbArtistName(F, a) : "Artist unknown",
+  });
+}
+// Families (David, 2026-10-09): the same shelves, grouped by movement instead of painter -- the biggest
+// movements first (keyRank left at its default, so the group-size tiebreak alone decides order).
+function pmLayFamilies(list, F) {
+  return pmLayGroup(list, {
+    groupOf: i => F.mv[i], sortWithin: (p, q) => pmYr(p) - pmYr(q),
+    label: (mv, c) => mv ? F.meta.movements[mv - 1] : "Unclassified",
+  });
+}
+// Tones (David, 2026-10-09): the same Vivid/Light/Muted/Dark split honey.js's own Tones shape uses
+// (honeyToneGroup), applied to whichever color "Place by" already uses for position (pmPlaceLab) -- an island
+// per mood, hue-ordered inside, so the painter/movement groupings aren't the only way to read the set.
+const PM_TONE_ORDER = ["Vivid", "Light", "Muted", "Dark"];
+function pmToneOf(i, place) { const [L, a, b] = pmPlaceLab(i, place), C = Math.hypot(a, b); return L < 40 ? "Dark" : L >= 78 ? "Light" : C >= 45 ? "Vivid" : "Muted"; }
+function pmLayTones(list, place) {
+  return pmLayGroup(list, {
+    groupOf: i => pmToneOf(i, place),
+    sortWithin: (p, q) => { const a = pmPlaceLab(p, place), b = pmPlaceLab(q, place); return pmHueKey(a[1], a[2]) - pmHueKey(b[1], b[2]); },
+    order: PM_TONE_ORDER, label: k => k,
+  });
+}
+// the shared ordering behind both "around one painting" shapes (Rings, Spiral): nearest-to-seed first, by the
+// matched-palette distance for the 400 closest (js/gallery.js glSimilar's own technique), mean-color distance
+// for the rest -- unchanged from the old single "similar" arrangement, just no longer tied to one fixed layout.
+function pmSimilarOrder(list, seed) {
   const G = GAL, m = G.mean, q = seed * 3, Lb = G.lab;
   let L = Array.from(list).filter(i => i !== seed);
   const d0 = new Map();
   L.forEach(j => { const a = m[j * 3] - m[q], b = m[j * 3 + 1] - m[q + 1], c = m[j * 3 + 2] - m[q + 2], e = G.C[j] - G.C[seed]; d0.set(j, a * a + b * b + c * c + e * e); });
   L.sort((a, b) => d0.get(a) - d0.get(b));
-  // the nearest 400 by the matched palette distance (each color's area times its distance to the other palette's nearest)
   const half = (a, b) => { let s = 0; for (let x = 0; x < 6; x++) { const oa = (a * 6 + x) * 3; let best = 1e9; for (let y = 0; y < 6; y++) { const ob = (b * 6 + y) * 3, d = glDE(Lb[oa], Lb[oa + 1], Lb[oa + 2], Lb[ob], Lb[ob + 1], Lb[ob + 2]); if (d < best) best = d; } s += G.sh[a * 6 + x] * best; } return s; };
   const near = L.slice(0, 400).map(j => [j, (half(seed, j) + half(j, seed)) / 2]).sort((a, b) => a[1] - b[1]).map(x => x[0]);
-  L = [seed, ...near, ...L.slice(400)];
+  return [seed, ...near, ...L.slice(400)];
+}
+// Rings: concentric square shells (the old "similar" layout, unchanged) -- a clean, bands-you-can-count read.
+function pmLayRings(list, seed) {
+  const L = pmSimilarOrder(list, seed);
   const n = L.length, r = Math.ceil(Math.sqrt(n / Math.PI)) + 2, cells = [];
   for (let y = -r; y <= r; y++) for (let x = -r; x <= r; x++) cells.push([x, y, x * x + y * y, Math.atan2(y, x)]);
   cells.sort((a, b) => a[2] - b[2] || a[3] - b[3]);
@@ -316,11 +369,44 @@ function pmLaySimilar(list, seed) {
   for (let k = 0; k < n; k++) { X[k] = cells[k][0]; Y[k] = cells[k][1]; }
   return pmGridOf(items, X, Y, [], [0, 0]);
 }
+// Spiral (David, 2026-10-09, "★ Spiral/Sunflower"): the SAME similarity order as Rings, but placed by golden-
+// angle phyllotaxis (the sunflower-seed pattern: radius grows with sqrt(rank), angle advances by the golden
+// angle every step) instead of grouping by fixed-radius shell -- a continuous weave with no seam between one
+// rank and the next, rather than Rings' clean bands. Ideal positions are real numbers; snapped to the nearest
+// free integer cell (this engine's grid needs one painting per cell), searching outward on the rare collision --
+// phyllotaxis is specifically the pattern that packs points with the fewest collisions in the first place, so
+// this almost always resolves within a ring or two.
+function pmLaySpiral(list, seed) {
+  const L = pmSimilarOrder(list, seed), n = L.length, GOLD = Math.PI * (3 - Math.sqrt(5));
+  const occupied = new Set(), X = new Int32Array(n), Y = new Int32Array(n);
+  const key = (x, y) => (x + 20000) * 50000 + (y + 20000);
+  for (let k = 0; k < n; k++) {
+    let x = 0, y = 0;
+    if (k > 0) {
+      const rad = Math.sqrt(k) * 1.6, ang = k * GOLD;
+      x = Math.round(rad * Math.cos(ang)); y = Math.round(rad * Math.sin(ang));
+      if (occupied.has(key(x, y))) {
+        outer: for (let ring = 1; ring < 30; ring++) {
+          for (let dy = -ring; dy <= ring; dy++) for (let dx = -ring; dx <= ring; dx++) {
+            if (Math.max(Math.abs(dx), Math.abs(dy)) !== ring) continue;
+            const xx = x + dx, yy = y + dy;
+            if (!occupied.has(key(xx, yy))) { x = xx; y = yy; break outer; }
+          }
+        }
+      }
+    }
+    occupied.add(key(x, y)); X[k] = x; Y[k] = y;
+  }
+  return pmGridOf(Int32Array.from(L), X, Y, [], [0, 0]);
+}
 function pmLayout(s, F) {
   const list = pmList(s, F), key = pmQS(s, F) + "|" + list.length + "|" + (s.fav ? (typeof fvArtList === "function" ? fvArtList().map(r => r.i).join(",") : "") : "");
   let lay = PM_LAYOUTS.get(key);
   if (!lay) {
-    lay = s.arr === "time" ? pmLayTime(list, s.place) : s.arr === "painter" ? pmLayPainter(list, F) : s.arr === "similar" ? pmLaySimilar(list, s.seed) : pmLayColor(list, s.place);
+    lay = s.arr === "time" ? pmLayTime(list, s.place) : s.arr === "painter" ? pmLayPainter(list, F)
+      : s.arr === "families" ? pmLayFamilies(list, F) : s.arr === "tones" ? pmLayTones(list, s.place)
+      : s.arr === "rings" ? pmLayRings(list, s.seed) : s.arr === "spiral" ? pmLaySpiral(list, s.seed)
+      : pmLayColor(list, s.place);
     lay.key = key; lay.arr = s.arr;
     PM_LAYOUTS.set(key, lay); if (PM_LAYOUTS.size > 8) PM_LAYOUTS.delete(PM_LAYOUTS.keys().next().value);
   }
@@ -513,7 +599,7 @@ function pmMount(el, s, F) {
     const fs = pmFacetsOf(i, F);
     facets.hidden = false;
     facets.innerHTML = `<button class="pmx-fchip pmx-fchip-more" data-pmmore>More like this</button>${fs.map((fc, k) => `<button class="pmx-fchip" data-pmfacet="${k}">${fc.dim === "color" ? `<i style="--c:${fc.val}"></i>` : ""}${esc(fc.label)}</button>`).join("")}`;
-    facets.querySelector("[data-pmmore]").onclick = () => { buzz(6); s.seed = i; s.arr = "similar"; rebuild(); };
+    facets.querySelector("[data-pmmore]").onclick = () => { buzz(6); s.seed = i; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild(); };
     facets.querySelectorAll("[data-pmfacet]").forEach(b => b.onclick = () => {
       const fc = fs[+b.dataset.pmfacet]; buzz(6); pmFacetApply(s.f, fc.dim, fc.val); rebuild();
     });
@@ -754,8 +840,8 @@ function pmMount(el, s, F) {
   centerBtn.onclick = () => {
     if (centerK < 0) return;
     const i = lay.items[centerK]; buzz(6);
-    if (s.arr === "similar" && s.seed === i) return;
-    s.seed = i; s.arr = "similar"; rebuild();
+    if (PM_NEEDS_SEED.has(s.arr) && s.seed === i) return;
+    s.seed = i; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild();
   };
 
   // ---- the chrome: the title says what's showing (tap: filter), one line says what position means, the corner arranges
@@ -852,9 +938,9 @@ function pmMount(el, s, F) {
         <div class="cx-sec"><b>Shape</b></div>
         <div class="hm-arr pmx-arr" role="radiogroup" aria-label="Arrange by">${PM_ARR.map(([k, t]) => `
           <button class="hm-arr-b${s.arr === k ? " on" : ""}" data-pmarr="${k}" role="radio" aria-checked="${s.arr === k}">
-            <span class="hm-arr-pic">${PM_ICON[k]}</span><b>${esc(k === "similar" ? "Around one" : t)}</b></button>`).join("")}</div>
-        <p class="hm-arr-sub">${s.arr === "similar" ? (md ? `Around ${esc(md.t)}` : "Around the middle painting") : esc(PM_WHY[s.arr])}</p>
-        ${s.arr === "color" || s.arr === "time" ? `<div class="cx-sec"><b>Place by</b></div>
+            <span class="hm-arr-pic">${PM_ICON[k]}</span><b>${esc(t)}</b></button>`).join("")}</div>
+        <p class="hm-arr-sub">${PM_NEEDS_SEED.has(s.arr) && md ? `Around ${esc(md.t)}` : esc(PM_WHY[s.arr])}</p>
+        ${s.arr === "color" || s.arr === "time" || s.arr === "tones" ? `<div class="cx-sec"><b>Place by</b></div>
           <div class="hm-seg" role="radiogroup" aria-label="Place by">${PM_PLACE.map(([k, t]) => `<button class="${(s.place || "avg") === k ? "on" : ""}" data-pmplace="${k}">${esc(t)}</button>`).join("")}</div>` : ""}
         <div class="cx-sec"><b>Center on</b></div>
         <div class="hm-seg hm-seg-n pmx-center-seg">${PM_CENTER.map(([k, t]) => {
@@ -863,7 +949,7 @@ function pmMount(el, s, F) {
         }).join("")}</div>`;
       qa$("[data-pmarr]").forEach(b => b.onclick = () => {
         const id = b.dataset.pmarr; buzz(5);
-        if (id === "similar") { if (mid < 0) return; s.seed = mid; s.arr = "similar"; }
+        if (PM_NEEDS_SEED.has(id)) { if (mid < 0) return; s.seed = mid; s.arr = id; }
         else { if (s.arr === id) return; s.arr = id; }
         rebuild(); renderArrange();
       });
@@ -872,7 +958,7 @@ function pmMount(el, s, F) {
       });
       qa$("[data-pmcenterk]").forEach(b => b.onclick = () => {
         const fn = PM_CENTER.find(c => c[0] === b.dataset.pmcenterk)[2], found = fn(list);
-        if (found < 0) return; buzz(6); s.seed = found; s.arr = "similar"; rebuild(); renderArrange();
+        if (found < 0) return; buzz(6); s.seed = found; if (!PM_NEEDS_SEED.has(s.arr)) s.arr = "rings"; rebuild(); renderArrange();
       });
     }
     // ---- Filter: every chip with its count, applied live (no separate confirm -- matches the color map's
