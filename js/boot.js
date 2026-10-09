@@ -85,6 +85,20 @@ function shot(name) {
        ["#3F7C8C", 100, 110, 100, 90], ["#8C5E58", 200, 110, 100, 90]].forEach(([h, bx, by, bw, bh]) => { x.fillStyle = h; x.fillRect(bx, by, bw, bh); });
       return studioFromImage(c, "From a photo");
     }
+    // the camera eye (js/camera.js), for design-review screenshots only: eye[:frozen] stands in a fake camera
+    // stream (a canvas, captureStream()'d) in place of getUserMedia, since headless Chrome has no real camera.
+    // "frozen" also taps the shutter so the frozen card (hex line, Keep / Add to a palette / Pick another) shows.
+    case "eye": {
+      const c = document.createElement("canvas"); c.width = 320; c.height = 568;
+      const x = c.getContext("2d");
+      x.fillStyle = "#8C2F39"; x.fillRect(0, 0, c.width, c.height * .55);
+      x.fillStyle = "#3F6B52"; x.fillRect(0, c.height * .55, c.width, c.height * .45);
+      const stream = typeof c.captureStream === "function" ? c.captureStream() : null;
+      if (stream) navigator.mediaDevices.getUserMedia = () => Promise.resolve(stream);
+      eye();
+      if (arg === "frozen") later2(() => { const b = document.getElementById("shut"); if (b) b.click(); }, 700);
+      return;
+    }
     // explore[:<all|art|ideas|world|saved>][:<n>|<ColorName>]: the pager lens, plus for design-review
     // screenshots only, either a cover index to scroll the pager to ("all:2") or a color to preselect in Art
     // ("art:Denim", js/explore.js's ART_UI) -- there's no interactive way to scroll or pick a bubble in shot mode.

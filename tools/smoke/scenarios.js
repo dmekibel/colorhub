@@ -1497,6 +1497,35 @@ scenario("studio", "camera screen fails gracefully with no camera", async t => {
   await t.waitFor('.room-sheet[data-room="studio"], .screen.studio', 6000, "Studio after Back");
 });
 
+// David, 2026-10-09: the camera eye must read the reticle's exact pixel (or at most a 2x2 average), never a
+// blurred, bigger patch -- tested directly against eyeSample() (js/camera.js) with a hard-edged two-color
+// canvas, since it's the same function the live read and the frozen tap both call. A point even ~1.5-2px from
+// the color boundary must still read the pure color on its own side; isoSample's touch-friendly patch (built
+// for the tap-to-guess games) would have blended at that distance.
+scenario("studio", "the camera eye's exact-pixel sampler doesn't blur across a color boundary", async t => {
+  await t.open("#shot=studio", { settle: 300 });
+  const res = t.ev(`
+    (function(){
+      var c = document.createElement('canvas');
+      c.width = 200; c.height = 100;
+      var ctx = c.getContext('2d');
+      ctx.fillStyle = '#FF0000'; ctx.fillRect(0, 0, 100, 100);
+      ctx.fillStyle = '#0000FF'; ctx.fillRect(100, 0, 100, 100);
+      return JSON.stringify({
+        deepLeft: eyeSample(c, 200, 100, .25, .5, 2),
+        deepRight: eyeSample(c, 200, 100, .75, .5, 2),
+        nearLeft: eyeSample(c, 200, 100, 98.5 / 200, .5, 2),
+        nearRight: eyeSample(c, 200, 100, 101.5 / 200, .5, 2),
+      });
+    })()
+  `);
+  const got = JSON.parse(res);
+  t.expect(got.deepLeft === "#FF0000", `deep in the red half should read pure red, got ${got.deepLeft}`);
+  t.expect(got.deepRight === "#0000FF", `deep in the blue half should read pure blue, got ${got.deepRight}`);
+  t.expect(got.nearLeft === "#FF0000", `~1.5px left of the boundary should still read pure red (exact pixel, not a blur), got ${got.nearLeft}`);
+  t.expect(got.nearRight === "#0000FF", `~1.5px right of the boundary should still read pure blue (exact pixel, not a blur), got ${got.nearRight}`);
+});
+
 scenario("studio", "photo palette: mode chips, slider and a chip opens its page", async t => {
   await t.open("#shot=studiopv", { settle: 900 });
   await t.waitFor("[data-pvorder] button", 8000, "the photo's palette-type chips");
