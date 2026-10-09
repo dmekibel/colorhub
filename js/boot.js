@@ -87,18 +87,40 @@ function shot(name) {
        ["#3F7C8C", 100, 110, 100, 90], ["#8C5E58", 200, 110, 100, 90]].forEach(([h, bx, by, bw, bh]) => { x.fillStyle = h; x.fillRect(bx, by, bw, bh); });
       return studioFromImage(c, "From a photo");
     }
-    // the camera eye (js/camera.js), for design-review screenshots only: eye[:frozen] stands in a fake camera
-    // stream (a canvas, captureStream()'d) in place of getUserMedia, since headless Chrome has no real camera.
-    // "frozen" also taps the shutter so the frozen card (hex line, Keep / Add to a palette / Pick another) shows.
+    // the camera eye (js/camera.js), for design-review screenshots only: eye[:frozen|:shades] stands in a fake
+    // camera stream (a canvas, captureStream()'d) in place of getUserMedia, since headless Chrome has no real
+    // camera. "frozen" also taps the shutter so the frozen card (hex line, Keep / Add to a palette / Pick
+    // another) shows; "shades" uses a richer synthetic frame (a red "dress" with gradient shading and a fold,
+    // on a contrasting background with a skin-tone patch and a grey patch) and opens "Shades of this" on it,
+    // for design review of the region-growing + clustering sheet (tools/smoke/scenarios.js tests the math directly).
+    // eye:denied / eye:notfound -- design review of the permission-error fix-it copy (js/camera.js eyeOffReason),
+    // no fake stream: getUserMedia rejects with the named DOMException, the way a real refusal or a cameraless
+    // Mac would.
     case "eye": {
+      if (arg === "denied" || arg === "notfound") {
+        navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException("denied", arg === "denied" ? "NotAllowedError" : "NotFoundError"));
+        eye();
+        return;
+      }
       const c = document.createElement("canvas"); c.width = 320; c.height = 568;
       const x = c.getContext("2d");
-      x.fillStyle = "#8C2F39"; x.fillRect(0, 0, c.width, c.height * .55);
-      x.fillStyle = "#3F6B52"; x.fillRect(0, c.height * .55, c.width, c.height * .45);
+      if (arg === "shades") {
+        x.fillStyle = "#2B2A4C"; x.fillRect(0, 0, c.width, c.height);
+        const g = x.createLinearGradient(50, 60, 270, 480);
+        g.addColorStop(0, "#A8323F"); g.addColorStop(.5, "#7E1F2B"); g.addColorStop(1, "#5C141E");
+        x.fillStyle = g; x.fillRect(50, 60, 220, 420);
+        x.fillStyle = "rgba(0,0,0,.25)"; x.fillRect(140, 140, 30, 300);   // a fold, still inside the dress
+        x.fillStyle = "#D9A47A"; x.fillRect(110, 15, 70, 35);            // skin tone, outside
+        x.fillStyle = "#9A9A96"; x.fillRect(0, 500, 320, 68);            // grey, outside
+      } else {
+        x.fillStyle = "#8C2F39"; x.fillRect(0, 0, c.width, c.height * .55);
+        x.fillStyle = "#3F6B52"; x.fillRect(0, c.height * .55, c.width, c.height * .45);
+      }
       const stream = typeof c.captureStream === "function" ? c.captureStream() : null;
       if (stream) navigator.mediaDevices.getUserMedia = () => Promise.resolve(stream);
       eye();
-      if (arg === "frozen") later2(() => { const b = document.getElementById("shut"); if (b) b.click(); }, 700);
+      if (arg === "frozen" || arg === "shades") later2(() => { const b = document.getElementById("shut"); if (b) b.click(); }, 700);
+      if (arg === "shades") later2(() => { const b = document.getElementById("shadesBtn"); if (b) b.click(); }, 1000);
       return;
     }
     // explore[:<all|art|ideas|world|saved>][:<n>|<ColorName>]: the pager lens, plus for design-review

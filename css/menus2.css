@@ -271,10 +271,12 @@ html.booth .toast{background:var(--booth-2);box-shadow:none;border-color:var(--b
 /* the map screens (Home, Study the map) are the whole screen on an iPhone Home Screen app: its layout viewport (and
    100dvh) stop a status bar short of the bottom, and a .fixed screen clips at its own height (js/core.js vbFix) */
 .screen.fixed.cx{position:fixed;top:0;left:0;right:0;height:var(--app-full,100dvh)}
-/* David, 2026-10-09: the large viewport (100lvh), which iOS never shrinks for its own chrome -- a smaller
-   shortfall for --app-full/--vb to ever have to compensate for. Progressive enhancement, same trick as above:
-   an engine that doesn't know lvh drops this whole line and keeps the dvh-based one. */
-.screen.fixed.cx{height:var(--app-full,100lvh)}
+/* David, 2026-10-09: the large viewport (100lvh), which iOS never shrinks for its own chrome -- real HUD numbers
+   off his iPhone showed the layout viewport running 62px short of the true screen even with 100lvh unverified
+   there, so --app-full (js/core.js vbFix, screen.height itself, standalone+iOS only) stays as a belt-and-
+   suspenders floor: max() picks whichever is actually larger. Progressive enhancement, same trick as above: an
+   engine that doesn't know lvh (or max()) drops this whole line and keeps the dvh-based one. */
+.screen.fixed.cx{height:max(100lvh,var(--app-full,0px))}
 
 /* ============================================================ bottom band, belt and braces (2026-10-08, David's Arrange
    sheet screenshot: a 61 px band of ground under every sheet on his iPhone Home Screen app; recurred 2026-10-09 on

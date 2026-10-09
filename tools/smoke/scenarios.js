@@ -353,18 +353,22 @@ scenario("home", "Study the map lives only on the right corner, not duplicated i
 // an engine that doesn't know lvh). A real device is the only way to confirm lvh itself behaves (this harness's
 // navigator/matchMedia spoofing only fools JS reads, never the engine's own large-viewport computation), so this
 // is a static source check that the declarations exist and are ordered to win, not a runtime behavioral one.
-scenario("home", "the floor and every full-screen map root size to the large viewport (100lvh), not just dvh/%", async t => {
+scenario("home", "the floor and every full-screen map root size to max(100lvh, --app-full), not just dvh/%", async t => {
   const appCss = await fetch("/app.css").then(r => r.text());
   const menus2 = await fetch("/css/menus2.css").then(r => r.text());
-  t.expect(/html,body\{margin:0;height:100%;background:var\(--ground\)\}\s*html,body\{height:100lvh\}/.test(appCss), "app.css: html,body's 100lvh layer is missing or not ordered after the 100% one");
-  t.expect(/#app\{min-height:100dvh[^}]*\}\s*#app\{min-height:100lvh\}/.test(appCss), "app.css: #app's 100lvh layer is missing or not ordered after the 100dvh one");
-  t.expect(/\.screen\.fixed\.cx\{[^}]*height:var\(--app-full,\s*100dvh\)\}[\s\S]{0,400}?\.screen\.fixed\.cx\{height:var\(--app-full,\s*100lvh\)\}/.test(menus2), "css/menus2.css: .screen.fixed.cx's 100lvh fallback is missing or not ordered after the 100dvh one");
+  t.expect(/html,body\{margin:0;height:100%;background:var\(--ground\)\}\s*html,body\{height:max\(100lvh,\s*var\(--app-full,\s*0px\)\)\}/.test(appCss), "app.css: html,body's max(100lvh,--app-full) layer is missing or not ordered after the 100% one");
+  t.expect(/#app\{min-height:100dvh[^}]*\}[\s\S]{0,400}?#app\{min-height:max\(100lvh,\s*var\(--app-full,\s*0px\)\)\}/.test(appCss), "app.css: #app's max(100lvh,--app-full) layer is missing or not ordered after the 100dvh one");
+  t.expect(/\.screen\.fixed\.cx\{[^}]*height:var\(--app-full,\s*100dvh\)\}[\s\S]{0,900}?\.screen\.fixed\.cx\{height:max\(100lvh,\s*var\(--app-full,\s*0px\)\)\}/.test(menus2), "css/menus2.css: .screen.fixed.cx's max(100lvh,--app-full) layer is missing or not ordered after the 100dvh one");
 });
-// vbFix() (js/core.js) is read-only now -- it still measures (a probe div's own bounding rect) for the gap log
-// below, but never writes --vb/--app-full/the ios-app class any more, the one part of the old mechanism with a
-// demonstrated way to desync the redraw loop (the panning-stuck bisect above). Confirms both halves: a spoofed
-// gap is still captured for the HUD's "Copy" to carry off the device, and nothing gets written to CSS from it.
-scenario("home", "vbFix() only logs a gap now (read-only diagnostics); it never writes --vb/--app-full any more", async t => {
+// David, 2026-10-09, real HUD numbers off his iPhone (Home Screen app): the layout viewport ran 62px short of
+// the true screen (innerHeight/visualViewport both 894 vs screen.height 956) even with 100lvh unverified there,
+// so --app-full is restored as a belt-and-suspenders floor -- screen.height itself, written once at boot/
+// orientationchange only (not resize, not every sheet open -- the triggers the OLD --vb write path used, even
+// though the panning-stuck bug those were suspected of causing turned out to be a wholly unrelated ghost pointer
+// in js/honey.js, fixed separately). --vb itself and the ios-app class stay retired (never written again); every
+// css max(100lvh,var(--app-full,0px)) consumer already treats an unset --app-full as 0px, so max() just picks
+// 100lvh outside standalone, same as before.
+scenario("home", "vbFix() restores --app-full from screen.height in standalone (--vb and ios-app stay retired)", async t => {
   await H.homeReady(t);
   t.ev(`
     Object.defineProperty(navigator, 'standalone', { value: true, configurable: true });
@@ -380,13 +384,32 @@ scenario("home", "vbFix() only logs a gap now (read-only diagnostics); it never 
   const vb = t.ev("getComputedStyle(document.documentElement).getPropertyValue('--vb').trim()");
   t.expect(!vb || vb === "0px", `--vb should never be written by vbFix() any more (got "${vb}")`);
   const appFull = t.ev("getComputedStyle(document.documentElement).getPropertyValue('--app-full').trim()");
-  t.expect(!appFull, `--app-full should never be written by vbFix() any more (got "${appFull}")`);
+  const wantFull = t.ev("innerHeight + 62");
+  t.expect(appFull === `${wantFull}px`, `--app-full should be screen.height (${wantFull}px) in standalone (got "${appFull}")`);
   t.expect(!t.d.documentElement.classList.contains("ios-app"), "the ios-app class should never be toggled by vbFix() any more");
   const logLen = t.ev("VB_LOG.length");
-  t.expect(logLen >= 1, "vbFix() did not log the spoofed 62px gap as a read-only diagnostic");
+  t.expect(logLen >= 1, "vbFix() did not log the spoofed 62px gap as a read-only diagnostic, alongside writing --app-full");
   const last = t.ev("VB_LOG[VB_LOG.length - 1]");
   t.expect(last.raw === 62, `the logged gap is wrong: ${JSON.stringify(last)}`);
-  // the belt-and-braces box-shadow safety net (css/menus2.css .sheet) is unconditional now, a fixed 320px Y-offset
+  // a .screen.fixed.cx root actually reaches the full spoofed screen height now, via max(100lvh,--app-full).
+  // David, 2026-10-09: this uncovered a real engine quirk, not a test artifact -- a .screen.fixed.cx that was
+  // already laid out BEFORE --app-full got (re)written keeps its stale height until something forces a reflow
+  // (a bare getBoundingClientRect()/getComputedStyle() read on it is NOT enough -- confirmed those still read
+  // the stale value -- but a display:none/"" toggle is), even though a freshly-created element with the exact
+  // same class/rules picks up the new value immediately. vbFix() now forces that reflow itself right after
+  // writing a CHANGED --app-full (js/core.js), so an orientationchange/late-correction while a map/sheet is
+  // already open actually takes effect instead of silently going stale. Checked twice: once for the ordinary
+  // first write (above), and here for a VALUE CHANGE landing on an already-open screen -- the exact case the
+  // reflow fix targets, as opposed to the simpler first-write case any naive fix would already pass.
+  const screenEl = t.$(".screen.fixed.cx");
+  if (screenEl) t.expect(Math.round(screenEl.getBoundingClientRect().height) >= wantFull - 2, `the screen only reached ${Math.round(screenEl.getBoundingClientRect().height)}px, wanted >= ${wantFull}`);
+  if (screenEl) {
+    const wantFull2 = t.ev("innerHeight + 90");
+    t.ev(`Object.defineProperty(screen, 'height', { value: innerHeight + 90, configurable: true }); vbFix();`);
+    const h2 = t.ev(`document.querySelector(".screen.fixed.cx").getBoundingClientRect().height`);
+    t.expect(Math.round(h2) >= wantFull2 - 2, `after screen.height changed and vbFix() ran again, the already-open screen stayed at ${Math.round(h2)}px instead of growing to ${wantFull2} -- the stale-layout reflow fix regressed`);
+  }
+  // the belt-and-braces box-shadow safety net (css/menus2.css .sheet) is unconditional too, a fixed 320px Y-offset
   // regardless of any measurement -- still there, opening an ordinary sheet doesn't need the spoofed gap at all
   t.ev('window.__vbTestClose = sheet("<p>t</p>").close');
   await t.sleep(80);
@@ -2289,6 +2312,34 @@ scenario("studio", "camera screen fails gracefully with no camera", async t => {
   await t.click("[data-back]", { wait: 500 });
   await t.waitFor('.room-sheet[data-room="studio"], .screen.studio', 6000, "Studio after Back");
 });
+// David, 2026-10-09 ("the video feature is confusing"): a refused permission gets its own fix-it line, not the
+// same flat "no camera here" a cameraless Mac gets -- and the live/frozen chrome never implies it records.
+scenario("studio", "camera: a refused permission gets its own fix-it message, and the shutter never implies recording", async t => {
+  await t.open("#shot=studio", { settle: 600 });
+  t.ev("navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('denied', 'NotAllowedError'))");
+  await t.click("[data-eye]", { wait: 500 });
+  await t.waitFor(() => t.$(".screen.eye.nocam") && t.$("#off") && !t.$("#off").hidden, 20000, "the 'no camera' state");
+  t.expect(/camera access/i.test(t.$("#offEyebrow").textContent), `a refused permission should say so, got "${t.$("#offEyebrow").textContent}"`);
+  t.expect(t.$("#offFix").textContent.length > 10, "no fix-it instructions for a refused permission");
+  await t.click("[data-back]", { wait: 500 });
+  // a real (fake-device) stream: the live view names a color, the shutter is a plain circle with a "Freeze"
+  // label (never a square -- that's the video record/stop shape), and a tap announces "Live" with a dot, not red
+  t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 320; c.height = 320;
+    const x = c.getContext("2d"); x.fillStyle = "#4C6B8C"; x.fillRect(0, 0, 320, 320);
+    const stream = typeof c.captureStream === "function" ? c.captureStream() : null;
+    if (stream) navigator.mediaDevices.getUserMedia = () => Promise.resolve(stream);
+  })()`);
+  await t.click("[data-eye]", { wait: 500 });
+  await t.waitFor("#vid", 6000, "the live camera screen");
+  t.expect(t.$("#shutLabel").textContent === "Freeze", `the shutter should say "Freeze" while live, got "${t.$("#shutLabel").textContent}"`);
+  t.expect(!t.$("#liveDot").hidden, "the live dot should show while the feed is live");
+  t.expect(/live/i.test(t.$("#hintText").textContent), `the live hint should say so plainly, got "${t.$("#hintText").textContent}"`);
+  await t.click("#shut", { wait: 400 });
+  t.expect(t.$("#shutLabel").textContent === "Live", `the shutter should say "Live" once frozen, got "${t.$("#shutLabel").textContent}"`);
+  t.expect(t.$("#liveDot").hidden, "the live dot should hide once frozen");
+  t.expect(/frozen/i.test(t.$("#hintText").textContent), `the frozen hint should say so plainly, got "${t.$("#hintText").textContent}"`);
+});
 
 // David, 2026-10-09: the camera eye must read the reticle's exact pixel (or at most a 2x2 average), never a
 // blurred, bigger patch -- tested directly against eyeSample() (js/camera.js) with a hard-edged two-color
@@ -2317,6 +2368,68 @@ scenario("studio", "the camera eye's exact-pixel sampler doesn't blur across a c
   t.expect(got.deepRight === "#0000FF", `deep in the blue half should read pure blue, got ${got.deepRight}`);
   t.expect(got.nearLeft === "#FF0000", `~1.5px left of the boundary should still read pure red (exact pixel, not a blur), got ${got.nearLeft}`);
   t.expect(got.nearRight === "#0000FF", `~1.5px right of the boundary should still read pure blue (exact pixel, not a blur), got ${got.nearRight}`);
+});
+
+// David, 2026-10-09: "Shades of this" -- point at a dress, get the array of reds that really exist inside it,
+// not the background, skin or shadows. Tested directly against the pipeline (js/camera.js: segPrep/segGrow/
+// segKmeans/segDendrogram/segMaxDistinct/segShades), the same functions the sheet calls, with a synthetic frame
+// a red "dress" (gradient shading + a fold, still one fabric) on a contrasting background with a skin-tone
+// patch and a grey patch, both clearly outside it.
+scenario("studio", "Shades of this: the grown region stays inside the dress, and shares always sum to 100%", async t => {
+  await t.open("#shot=studio", { settle: 300 });
+  const r = t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 300; c.height = 300;
+    const x = c.getContext("2d");
+    x.fillStyle = "#2B2A4C"; x.fillRect(0, 0, 300, 300);
+    const g = x.createLinearGradient(60, 40, 240, 260);
+    g.addColorStop(0, "#A8323F"); g.addColorStop(.5, "#7E1F2B"); g.addColorStop(1, "#5C141E");
+    x.fillStyle = g; x.fillRect(60, 40, 180, 220);
+    x.fillStyle = "rgba(0,0,0,.25)"; x.fillRect(120, 90, 30, 170);
+    x.fillStyle = "#D9A47A"; x.fillRect(90, 10, 60, 30);
+    x.fillStyle = "#9A9A96"; x.fillRect(0, 260, 300, 40);
+    const prep = segPrep(c, 300, 300);
+    const grow = segGrow(prep, .5, .5, 1);
+    const km = segKmeans(prep, grow, Math.min(24, grow.count));
+    const dendro = segDendrogram(km.clusters);
+    const maxD = segMaxDistinct(dendro);
+    const lo = segShades(prep, km, dendro, 2), hi = segShades(prep, km, dendro, maxD);
+    let leaked = false;
+    for (let i = 0; i < grow.mask.length; i++) {
+      if (!grow.mask[i]) continue;
+      const xx = i % grow.sw, yy = Math.floor(i / grow.sw), fx = xx / grow.sw * 300, fy = yy / grow.sh * 300;
+      if (fy < 35 || fy > 262 || fx < 55 || fx > 245) { leaked = true; break; }
+    }
+    return { leaked, maxD, loN: lo.length, hiN: hi.length, loSum: lo.reduce((a, b) => a + b.share, 0), hiSum: hi.reduce((a, b) => a + b.share, 0), count: grow.count };
+  })()`);
+  t.expect(!r.leaked, "the region leaked outside the dress into the skin-tone or grey background");
+  t.expect(r.count > 400, `the grown region looks too small (${r.count} px)`);
+  t.expect(r.loN === 2, `asking for 2 shades returned ${r.loN}`);
+  t.expect(r.hiN === r.maxD, `asking for the max (${r.maxD}) returned ${r.hiN}`);
+  t.expect(Math.abs(r.loSum - 1) < .01, `shares at 2 shades don't sum to 100% (${r.loSum})`);
+  t.expect(Math.abs(r.hiSum - 1) < .01, `shares at the max don't sum to 100% (${r.hiSum})`);
+});
+
+scenario("studio", "Shades of this: the sheet opens on a frozen frame, the count slider is instant, and a name opens its page", async t => {
+  await t.open("#shot=eye:shades", { settle: 1400 });
+  await t.waitFor(".shd-sheet", 6000, "the Shades of this sheet");
+  const n0 = t.$$(".shd-list .shd-row").length;
+  t.expect(n0 >= 2, `only ${n0} shades listed`);
+  const slider = t.$("[data-shd-n]");
+  t.expect(slider, "no 'how many shades' slider");
+  const max = +slider.max;
+  slider._countTo(max);
+  await t.sleep(150);
+  const nMax = t.$$(".shd-list .shd-row").length;
+  t.expect(nMax === max, `asking for the max (${max}) on the slider shows ${nMax} rows`);
+  slider._countTo(2);
+  await t.sleep(150);
+  t.expect(t.$$(".shd-list .shd-row").length === 2, "the slider back at 2 doesn't show 2 shades");
+  const sw = t.$(".shd-list .shd-sw");
+  await t.click(sw, { wait: 200 });
+  t.expect(sw.classList.contains("on"), "tapping a shade's swatch didn't highlight it");
+  const name = t.$(".shd-list .shd-name");
+  await t.click(name, { force: true, wait: 500 });
+  t.expect(t.$(".cp-page") || /^#\/(page|color)\//.test(t.w.location.hash), "tapping a shade's name didn't open its page");
 });
 
 scenario("studio", "photo palette: mode chips, slider and a chip opens its page", async t => {
@@ -3436,6 +3549,29 @@ scenario("sets", "Pair with… offers Point your camera and From a photo; From a
   await t.click("[data-sx-photo-done]", { force: true, wait: 800 });
   await t.waitFor(() => /^#\/set\//.test(t.w.location.hash) && t.$(".sp-page .sp-strip"), 12000, "Done opened the set page");
   t.expect(t.$$(".sp-names .sp-name").length === 3, "the set from the photo doesn't hold three colors");
+});
+// window.cameraPick itself (js/camera.js): a fake camera stream stands in for getUserMedia, two "Add" picks and
+// Done, and the set page opens with Teal plus both camera picks -- the real door settray's "Point your camera" uses.
+scenario("sets", "Pair with… Point your camera: a fake stream, a pick and Done open the pair page", async t => {
+  SP.placed();
+  await t.open("#/color/teal", { settle: 800, keepState: true });
+  await t.click(await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button"), { wait: 600 });
+  await t.waitFor("[data-sx-cam]", 6000, "Point your camera");
+  t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 320; c.height = 320;
+    const x = c.getContext("2d");
+    x.fillStyle = "#8C2F39"; x.fillRect(0, 0, 320, 160);
+    x.fillStyle = "#3F6B52"; x.fillRect(0, 160, 320, 160);
+    const stream = typeof c.captureStream === "function" ? c.captureStream() : null;
+    if (stream) navigator.mediaDevices.getUserMedia = () => Promise.resolve(stream);
+  })()`);
+  await t.click("[data-sx-cam]", { force: true, wait: 600 });
+  await t.waitFor(".screen.eye #vid", 6000, "the camera screen");
+  await t.click("#shut", { wait: 400 });
+  await t.click(await t.waitFor("#addBtn", 4000, "the Add button (pick mode)"), { wait: 400 });
+  await t.click(await t.waitFor("#doneBtn", 4000, "the Done button in the picks strip"), { wait: 600 });
+  await t.waitFor(() => /^#\/pair\//.test(t.w.location.hash) && t.$(".sp-page .sp-pair"), 12000, "Done opened the pair page");
+  t.expect(t.$$(".sp-pair .sp-plate").length === 2, "expected Teal and the one camera pick as a pair");
 });
 scenario("sets", "a pair page: facts and paintings and Add a color makes a trio", async t => {
   SP.placed();

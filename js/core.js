@@ -41,19 +41,28 @@ const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.pla
 // The structural fix: size to the LARGE viewport (100lvh, which iOS never shrinks for its own chrome, unlike
 // 100dvh) instead of compensating for a shortfall at all (app.css html/body, css/menus2.css .screen.fixed.cx,
 // both layered as a second, standalone-safe declaration after the original -- an engine that doesn't know lvh
-// drops that whole declaration and keeps the dvh/% one it had). --vb/--app-full are RETIRED as something vbFix()
-// writes into CSS (every var() that read them already has a safe fallback -- --vb defaults to 0px in css/
-// menus2.css's :root; --app-full's consumers fall back to 100lvh now), since writing them was the one part of
-// this whole mechanism with a demonstrated way to go wrong: this session's own panning-stuck bisect (a scratch
-// git worktree per candidate commit, a scripted canvas-pixel pan test) found a real, repeatable case where simply
-// CALLING vbFix() mid-sheet-open -- not the measurement itself being right or wrong, just the de.style.setProperty
-// / classList.toggle calls landing at that moment -- left the map's redraw loop not repainting a pan it was still
-// computing correctly underneath.
+// drops that whole declaration and keeps the dvh/% one it had). --vb is retired as something vbFix() writes into
+// CSS (css/menus2.css's :root still defaults it to 0px for any leftover var() reader) -- writing it on every
+// resize/sheet-open was the one part of the old mechanism with a demonstrated way to go wrong: this session's
+// own panning-stuck bisect (a scratch git worktree per candidate commit, a scripted canvas-pixel pan test) found
+// a real, repeatable case where simply CALLING vbFix() mid-sheet-open -- not the measurement itself being right
+// or wrong, just the de.style.setProperty / classList.toggle calls landing at that moment -- left the map's
+// redraw loop not repainting a pan it was still computing correctly underneath. (The true cause turned out to be
+// unrelated -- a ghost pointer in js/honey.js's dblClose handling, fixed separately -- but the narrower write
+// schedule below stays as cheap insurance against that whole class of risk.)
 //
-// vbFix() still MEASURES (read-only: a probe div's own bounding rect, never a style write anywhere) so the gap
-// log below keeps working as a safety net -- "so if it still happens we get the exact state" -- without the one
-// part that's both fragile (an intermittent bug needs re-measuring at exactly the wrong moment to even show up)
-// and now a demonstrated risk in its own right.
+// David, 2026-10-09, real HUD numbers off his iPhone 16 Pro Max (Home Screen app, pre-structural-fix build):
+// innerHeight 894, visualViewport.height 894, screen.height 956, html/body/#app clientHeight 894 -- the layout
+// viewport itself is 62px short of the real screen (the status bar height) while visualViewport already matches
+// the full screen. 100lvh *should* track the large viewport correctly everywhere a browser implements the spec,
+// but it's unverified on this exact device/iOS build, so relying on it ALONE is a bet. --app-full is restored as
+// a belt-and-suspenders source of truth: screen.height itself (not a measured gap -- the earlier --vb probe-div
+// approach is gone), written once at boot and on orientationchange only (not resize, not every sheet open -- the
+// two triggers this session's panning-stuck bisect actually exercised, even though the real cause there turned
+// out to be an unrelated ghost pointer in js/honey.js, not this write path at all). css/menus2.css and app.css's
+// 100lvh rules now read max(100lvh, var(--app-full,0px)) -- whichever is actually larger wins, so a device where
+// lvh under-resolves still gets the right height from --app-full, and a device where lvh is correct is unaffected
+// (var(--app-full) stays 0px outside standalone, so max() always just picks 100lvh there).
 let VB_LOG = [];
 function vbLog(raw, full) {
   try {
@@ -63,8 +72,22 @@ function vbLog(raw, full) {
 }
 function vbFix() {
   try {
-    if (!(standalone() && isIOS())) return;
+    if (!(standalone() && isIOS())) { document.documentElement.style.removeProperty("--app-full"); return; }
     const full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
+    const prevFull = document.documentElement.style.getPropertyValue("--app-full");
+    document.documentElement.style.setProperty("--app-full", full + "px");
+    // David, 2026-10-09: confirmed via this session's own smoke harness (not a test artifact) that an engine can
+    // leave an ALREADY-LAID-OUT box's height stuck at its old max(100lvh,var(--app-full)) reading when
+    // --app-full changes VALUE later (orientationchange; the 600ms late-correction below) -- a brand-new element
+    // picks up the new value immediately (confirmed too), but an existing one needs an explicit reflow to notice.
+    // Only worth the (cheap, synchronous, no visible flash) display toggle when the value actually moved -- most
+    // calls (load, the 600ms one right after boot) just confirm the same number vbFix() already wrote.
+    if (prevFull !== full + "px") {
+      const kick = el => { if (!el) return; const d = el.style.display; el.style.display = "none"; void el.offsetHeight; el.style.display = d; };
+      kick(document.body); kick(document.getElementById("app"));
+      document.querySelectorAll(".screen.fixed.cx").forEach(kick);
+    }
+    // still logged, read-only otherwise: a probe div's own bounding rect, the same gap --vb used to compensate for
     const pr = document.createElement("div");
     pr.style.cssText = "position:fixed;left:0;bottom:0;width:1px;height:1px;visibility:hidden;pointer-events:none";
     document.documentElement.appendChild(pr);
@@ -73,10 +96,7 @@ function vbFix() {
     if (raw > 0) vbLog(raw, full);
   } catch (e) {}
 }
-// more trigger points than the old write path had (resize, visualViewport resize) are fine now that vbFix() is
-// read-only diagnostics only -- more chances to catch a real gap in the log, no risk of triggering anything
-vbFix(); addEventListener("resize", vbFix); addEventListener("load", vbFix); setTimeout(vbFix, 600);
-try { visualViewport && visualViewport.addEventListener("resize", vbFix); } catch (e) {}
+vbFix(); addEventListener("load", vbFix); setTimeout(vbFix, 600);
 addEventListener("orientationchange", () => setTimeout(vbFix, 300));
 
 // ---------- the black-bar diagnostic HUD (David, 2026-10-09: "since it's only reproducible on a real iPhone
@@ -104,10 +124,12 @@ function vbHud() {
     const bottomEl = document.elementFromPoint(bx, by);
     const tag = el => el ? el.tagName.toLowerCase() + (el.className ? "." + String(el.className).trim().split(/\s+/).join(".") : "") : "none";
     const cv = document.querySelector(".hc-cv");
-    // David, 2026-10-09: the structural fix (100lvh, app.css/css/menus2.css) retired --vb/--app-full as something
-    // vbFix() WRITES -- they now only ever read back their CSS defaults (0px / none), which is correct, not a
-    // bug, so they're labeled as such rather than looking like a stale measurement. "map bottom vs layout bottom"
-    // is the live, read-only version of the same question, recomputed every frame.
+    // David, 2026-10-09: --vb stays retired -- vbFix() never writes it, so it only ever reads back its CSS
+    // default (0px/none), which is correct, not a bug. --app-full is NOT retired any more: real device numbers
+    // (894 inner vs 956 screen.height in standalone) showed the layout viewport itself falls short of the true
+    // screen, so vbFix() restores writing --app-full = screen.height as a belt-and-suspenders floor consumed by
+    // app.css/menus2.css's max(100lvh,var(--app-full,0px)). "map bottom vs layout bottom" is the live, read-only
+    // version of the same question, recomputed every frame, independent of whatever --app-full currently holds.
     const full = innerHeight > innerWidth ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
     const mapBottom = cv ? cv.getBoundingClientRect().bottom : null;
     const liveGap = mapBottom != null ? Math.round(full - mapBottom) : null;
@@ -115,7 +137,7 @@ function vbHud() {
       ["innerHeight", innerHeight], ["outerHeight", outerHeight], ["screen.height", screen.height],
       ["visualViewport.height", vv ? vv.height.toFixed(1) : "n/a"], ["visualViewport.offsetTop", vv ? vv.offsetTop.toFixed(1) : "n/a"],
       ["--vb (retired, always 0 now)", getComputedStyle(de).getPropertyValue("--vb").trim() || "(none)"],
-      ["--app-full (retired, always none)", getComputedStyle(de).getPropertyValue("--app-full").trim() || "(none)"],
+      ["--app-full (screen.height in standalone)", getComputedStyle(de).getPropertyValue("--app-full").trim() || "(none)"],
       ["map bottom vs layout bottom", liveGap != null ? `${liveGap}px gap` : "(no canvas)"],
       ["safe-area-inset-bottom", safeBottom.toFixed(1) + "px"],
       ["html.clientHeight", de.clientHeight], ["body.clientHeight", document.body.clientHeight],
