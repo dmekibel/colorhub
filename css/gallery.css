@@ -198,9 +198,11 @@
 /* "Where" glyph (David, relayed 2026-10-09): a tap on the chip itself opens the color's page now; this small
    corner control is the one explicit way left to locate it on the canvas. 24px hit target (padding, not size)
    so it stays tappable without crowding the chip's own percentage label. */
-.pal-where{position:absolute;top:2px;right:2px;width:22px;height:22px;padding:4px;box-sizing:content-box;display:grid;place-items:center;opacity:.72;border-radius:50%}
-.pal-where:active{opacity:1;background:rgba(0,0,0,.18)}
-.pal-where svg{width:13px;height:13px}
+/* 28px box + padding keeps the tap target close to this app's other new controls (countify's 32px
+   .cnt-b) without the circle itself dominating a narrow, low-share chip (craft critique, 2026-10-09) */
+.pal-where{position:absolute;top:0;right:0;width:28px;height:28px;padding:3px;box-sizing:content-box;display:grid;place-items:center;opacity:.78;border-radius:50%}
+.pal-where:active{opacity:1;background:rgba(0,0,0,.2)}
+.pal-where svg{width:14px;height:14px}
 .gl-strip .pal.loc .pal-where{opacity:1}
 .gl-modes-f{position:relative;margin:8px calc(-1 * var(--g)) 0}
 .gl-modes-f::before,.gl-modes-f::after{content:"";position:absolute;top:0;bottom:0;width:36px;z-index:1;pointer-events:none;opacity:0;transition:opacity .2s}

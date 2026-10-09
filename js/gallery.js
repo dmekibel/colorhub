@@ -193,7 +193,6 @@ function glPoolDiverse(pool, k) {
     .sort((a, b) => { const ha = Math.atan2(a.ok[2], a.ok[1]), hb = Math.atan2(b.ok[2], b.ok[1]); return ha !== hb ? ha - hb : b.ok[0] - a.ok[0]; })
     .map(p => ({ h: p.h, share: p.share }));
 }
-const GL_SIZES = [3, 6, 12, 20];
 // the nearest swatch in a displayed palette to an arrival color, for "≈ Aubergine · 5% of the canvas · nearest
 // swatch" (ROADMAP §13, "arrive from a color and see it") — honest when nothing is close (NEAR_DE, js/naming.js).
 function glNearestSwatch(pal, hex) {
