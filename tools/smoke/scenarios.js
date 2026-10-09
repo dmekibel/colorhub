@@ -4830,6 +4830,38 @@ scenario("paintmap", "Walk from here steps to a different painter each time, wit
   await t.click(".pmx-walk [data-pmwalkx]", { wait: 400 });
   t.expect(!t.$(".pmx-walk [data-pmwalkto]"), "ending the walk didn't clear the trail");
 });
+// David, 2026-10-09: "a time scrubber with play (paintings appear decade by decade)". Dragging the slider narrows
+// the map to only paintings dated at or before that year (undated ones excluded until the slider reaches the
+// real end of the range, where filtering turns back off); Play advances it on its own timer.
+scenario("paintmap", "the time scrubber narrows by year, and Play advances it on its own", async t => {
+  await t.open("#/paintings/map?arr=color", { settle: 800 });
+  await t.waitFor(() => t.w.PM_CTRL && t.w.PM_CTRL.count > 20000 && t.w.PM_CTRL.drawn > 30, 20000, "the map to lay out");
+  const full = t.w.PM_CTRL.count;
+  await t.click(".pmx-do", { wait: 400 });
+  await t.waitFor(".pmx-sheet [data-pmscrub]", 4000, "the time scrubber");
+  const [yLo, yHi] = t.ev("pmYearRange()");
+  t.expect(+t.$(".pmx-sheet [data-pmscrub]").value === yHi, `the scrubber didn't start at the full range's end (${yHi}), reads ${t.$(".pmx-sheet [data-pmscrub]").value}`);
+  t.expect(/showing every year/i.test(t.text("[data-pmscrublabel]")), `the label didn't say every year: "${t.text("[data-pmscrublabel]")}"`);
+  // drag it back to the middle of the real range (step-aligned to 5, the same as the slider's own step, so the
+  // browser's native range-input value clamping can't round it to something a touch off from what we asked for)
+  const mid = yLo + Math.round(((yLo + yHi) / 2 - yLo) / 5) * 5;
+  t.ev(`(() => { const i = document.querySelector(".pmx-sheet [data-pmscrub]"); i.value = ${mid}; i.dispatchEvent(new Event("input", { bubbles: true })); })()`);
+  await t.waitFor(() => t.w.PM_CTRL.count < full, 4000, "scrubbing back to narrow the map");
+  t.expect(t.w.PM_CTRL.spec.upToYear === mid, `the spec's upToYear is ${t.w.PM_CTRL.spec.upToYear}, not ${mid}`);
+  t.expect(new RegExp("uy=" + mid).test(t.w.location.hash), `the address doesn't carry the scrubbed year: ${t.w.location.hash}`);
+  t.expect(new RegExp("Up to " + mid).test(t.text("[data-pmscrublabel]")), `the label doesn't say "Up to ${mid}": "${t.text("[data-pmscrublabel]")}"`);
+  // Play: the button itself reflects state correctly (the timer's own real-time advance isn't asserted here --
+  // see the comment above the thumbnail-streaming scenario for why real timing is unworkable in this harness)
+  await t.click("[data-pmscrubplay]", { wait: 300 });
+  t.expect(t.$("[data-pmscrubplay]").classList.contains("on"), "Play didn't turn the button on");
+  t.expect(t.$("[data-pmscrubplay]").getAttribute("aria-label") === "Pause", "Play didn't relabel the button to Pause");
+  await t.click("[data-pmscrubplay]", { wait: 300 });
+  t.expect(!t.$("[data-pmscrubplay]").classList.contains("on"), "Pause didn't turn the button off");
+  // dragging all the way back to the end turns filtering off again (upToYear -> null) and undated paintings return
+  t.ev(`(() => { const i = document.querySelector(".pmx-sheet [data-pmscrub]"); i.value = ${yHi}; i.dispatchEvent(new Event("input", { bubbles: true })); })()`);
+  await t.waitFor(() => t.w.PM_CTRL.count === full, 4000, "scrubbing back to the end to restore the full count");
+  t.expect(t.w.PM_CTRL.spec.upToYear == null, `upToYear should be back to null at the end of the range, is ${t.w.PM_CTRL.spec.upToYear}`);
+});
 // David's screenshot, 2026-10-09: "zooming out doesn't load the stuff" -- only a ~160-cell central disc ever got a
 // thumbnail, however long you waited, because the per-frame candidate list handed to pmImages().want() was capped
 // at 160 BEFORE its own concurrency limit (PM_FLIGHT, 14 concurrent) ever got a say -- everything past the nearest
