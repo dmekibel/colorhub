@@ -1,111 +1,111 @@
 {
- "slug": "rich-black-fogra29",
- "name": "Rich Black (FOGRA29)",
- "hex": "#010B13",
- "names": [
-  "Rich Black (FOGRA29)"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Rich Black (FOGRA29) names a print-industry black mixed from more than one ink, calibrated to FOGRA's uncoated-paper standard.",
- "sections": [
-  {
-   "id": "name",
-   "title": "From a printing term to a swatch",
-   "body": "\"Rich black\" is a printing term for an ink mixture of solid black over one or more of the other CMYK inks, giving a darker result than black ink alone [1]. FOGRA, a German printing-research body, publishes registered characterization data sets that describe how ink behaves on specific papers under ISO offset-printing conditions; FOGRA29 (also called OFCOM 4, Altona) describes uncoated white paper at 120 grams per square meter [2]. This swatch is a flat screen approximation of that printing condition, not a measured ink sample [1][2].\n\nIts closest sibling in the library is [[rich-black-fogra39]], the equivalent standard for coated paper, and both sit near plain [[black]] on screen [1].\n\nIt also sits close to the generic near-blacks [[near-black]] and [[almost-black]], both read as almost the same color [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In the ColorHub painting archive this near-black hue appears in 1,202 of 23,781 paintings, about 5.1 percent, as photographed [3]. It is most common around the 1690s, and Pieter van der Werff and Arnoud van Halen use it far more than the archive average relative to their output [3]. These are computed color matches on varnished, photographed canvases, and a near-black match says little about the actual ink or pigment used [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "FOGRA's printing-characterization data set for uncoated paper",
-   "first_recorded": "undocumented exact year; current ISO offset-printing characterization practice",
-   "source": "Wikipedia (\"Rich black\"); International Color Consortium CMYK registry"
-  },
-  "aka": [
-   "OFCOM 4 Altona"
+  "slug": "rich-black-fogra29",
+  "name": "Rich Black (FOGRA29)",
+  "hex": "#010B13",
+  "names": [
+    "Rich Black (FOGRA29)"
   ],
-  "siblings": [
-   "rich-black-fogra39",
-   "near-black",
-   "almost-black"
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Rich Black (FOGRA29) names a print-industry black mixed from more than one ink, calibrated to FOGRA's uncoated-paper standard.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "From a printing term to a swatch",
+      "body": "\"Rich black\" is a printing term for an ink mixture of solid black over one or more of the other CMYK inks, giving a darker result than black ink alone [1]. FOGRA, a German printing-research body, publishes registered characterization data sets that describe how ink behaves on specific papers under ISO offset-printing conditions; FOGRA29 (also called OFCOM 4, Altona) describes uncoated white paper at 120 grams per square meter [2]. This swatch is a flat screen approximation of that printing condition, not a measured ink sample [1][2].\n\nIts closest sibling in the library is [[rich-black-fogra39]], the equivalent standard for coated paper, and both sit near plain [[black]] on screen [1].\n\nIt also sits close to the generic near-blacks [[near-black]] and [[rich-black-fogra39]], both read as almost the same color [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In the ColorHub painting archive this near-black hue appears in 1,202 of 23,781 paintings, about 5.1 percent, as photographed [3]. It is most common around the 1690s, and Pieter van der Werff and Arnoud van Halen use it far more than the archive average relative to their output [3]. These are computed color matches on varnished, photographed canvases, and a near-black match says little about the actual ink or pigment used [3]."
+    }
   ],
-  "parent": "black",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1202,
-  "measured": {
-   "lch": [
-    3,
-    5,
-    256
-   ]
+  "aside": {
+    "origin": {
+      "named_after": "FOGRA's printing-characterization data set for uncoated paper",
+      "first_recorded": "undocumented exact year; current ISO offset-printing characterization practice",
+      "source": "Wikipedia (\"Rich black\"); International Color Consortium CMYK registry"
+    },
+    "aka": [
+      "OFCOM 4 Altona"
+    ],
+    "siblings": [
+      "rich-black-fogra39",
+      "near-black",
+      "eerie-black"
+    ],
+    "parent": "black",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "peak_decade": 1690
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "Wikipedia, \"Rich black\"",
-   "loc_kind": null,
-   "url": "https://en.wikipedia.org/wiki/Rich_black"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1202,
+    "measured": {
+      "lch": [
+        3,
+        5,
+        256
+      ]
+    },
+    "peak_decade": 1690
   },
-  {
-   "n": 2,
-   "kind": "web",
-   "cite": "International Color Consortium, CMYK characterization-data registry (FOGRA entries)",
-   "loc_kind": null,
-   "url": "https://registry.color.org/cmyk-registry/"
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wikipedia, \"Rich black\"",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/Rich_black"
+    },
+    {
+      "n": 2,
+      "kind": "web",
+      "cite": "International Color Consortium, CMYK characterization-data registry (FOGRA entries)",
+      "loc_kind": null,
+      "url": "https://registry.color.org/cmyk-registry/"
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does \"rich black\" mean in printing?",
+      "choices": [
+        "Black ink layered with other CMYK inks for a darker result",
+        "A pigment made from burnt bone",
+        "A dye from murex snails",
+        "A 19th-century mourning color"
+      ],
+      "answer": "Black ink layered with other CMYK inks for a darker result",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: FOGRA29 describes a coated, glossy paper.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Rich Black (FOGRA29) is a printing standard, not a traditional pigment name."
+  ],
+  "words": 219,
+  "status": "checked",
+  "checked": {
+    "by": "batch-29",
+    "date": "2026-10-09",
+    "issues": [
+      "Exact year FOGRA29 was first published not confirmed in sources checked; described as current ISO offset practice instead."
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What does \"rich black\" mean in printing?",
-   "choices": [
-    "Black ink layered with other CMYK inks for a darker result",
-    "A pigment made from burnt bone",
-    "A dye from murex snails",
-    "A 19th-century mourning color"
-   ],
-   "answer": "Black ink layered with other CMYK inks for a darker result",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: FOGRA29 describes a coated, glossy paper.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Rich Black (FOGRA29) is a printing standard, not a traditional pigment name."
- ],
- "words": 218,
- "status": "checked",
- "checked": {
-  "by": "batch-29",
-  "date": "2026-10-09",
-  "issues": [
-   "Exact year FOGRA29 was first published not confirmed in sources checked; described as current ISO offset practice instead."
-  ]
- }
 }

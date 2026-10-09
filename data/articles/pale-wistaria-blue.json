@@ -1,118 +1,118 @@
 {
- "slug": "pale-wistaria-blue",
- "name": "Pale Wistaria Blue",
- "hex": "#C1BFEE",
- "names": [
-  "Pale Wistaria Blue"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Pale Wistaria Blue is a pale, dusty violet-blue named for the wisteria flower, one of Ridgway's 1912 color standards and an ISCC-NBS block in 1955.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Named for the flower, spelled the old way",
-   "body": "The name uses \"wistaria,\" an older spelling of the flowering vine wisteria that was common in nineteenth-century botanical writing [1]. The shade is plate XXIII, hue 57', tone f, of Ridgway's 1912 standards, read from a scan of an aged plate [1]. The 1955 ISCC-NBS system lists the same area as block 209, \"very light violet,\" about 2.5 units off, and the same block also carries two other names in our library, Ballerina and Pale Verbena Violet [1]. Its Munsell notation is 10.0PB 7.8/6.2 [1].\n\nThe nearest named colors on file are [[lavender-blue]], [[pallid-violet]], [[pale-periwinkle]] and [[wedgwood-blue]], at 3.4, 3.6, 3.6 and 4.9 ΔE [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, this violet-blue appears in only 9, about 0.04 percent, rarer than 75 percent of our named colors [2]. That scarcity fits a pale, narrow violet that sits between the blues and the pinks rather than belonging clearly to either.\n\nThe earliest match is a 1637 painting by [[painter:claude-lorrain|Claude Lorrain]], about 275 years before Ridgway's 1912 name, so that early hit is a look-alike hue in an aged photograph, not a trace of this named blue, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, so a match is a hue, not a pigment test [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "wisteria, the flowering vine (spelled \"wistaria\")",
-   "first_recorded": "Ridgway, 1912",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Ballerina",
-   "Pale Verbena Violet"
+  "slug": "pale-wistaria-blue",
+  "name": "Pale Wistaria Blue",
+  "hex": "#C1BFEE",
+  "names": [
+    "Pale Wistaria Blue"
   ],
-  "siblings": [
-   "lavender-blue",
-   "pallid-violet",
-   "pale-periwinkle",
-   "wedgwood-blue"
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Pale Wistaria Blue is a pale, dusty violet-blue named for the wisteria flower, one of Ridgway's 1912 color standards and an ISCC-NBS block in 1955.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Named for the flower, spelled the old way",
+      "body": "The name uses \"wistaria,\" an older spelling of the flowering vine wisteria that was common in nineteenth-century botanical writing [1]. The shade is plate XXIII, hue 57', tone f, of Ridgway's 1912 standards, read from a scan of an aged plate [1]. The 1955 ISCC-NBS system lists the same area as block 209, \"very light violet,\" about 2.5 units off, and the same block also carries two other names in our library, Ballerina and Pale Verbena Violet [1]. Its Munsell notation is 10.0PB 7.8/6.2 [1].\n\nThe nearest named colors on file are [[lavender-blue]], [[pale-periwinkle]], [[pale-periwinkle]] and [[wedgwood-blue]], at 3.4, 3.6, 3.6 and 4.9 ΔE [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, this violet-blue appears in only 9, about 0.04 percent, rarer than 75 percent of our named colors [2]. That scarcity fits a pale, narrow violet that sits between the blues and the pinks rather than belonging clearly to either.\n\nThe earliest match is a 1637 painting by [[painter:claude-lorrain|Claude Lorrain]], about 275 years before Ridgway's 1912 name, so that early hit is a look-alike hue in an aged photograph, not a trace of this named blue, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, so a match is a hue, not a pigment test [2]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 9,
-  "pct_present": 0.04,
-  "rarer_than_pct": 75,
-  "measured": {
-   "lch": [
-    78.9,
-    25.2,
-    293.9
-   ],
-   "nearest": [
-    [
-     "Lavender Blue",
-     3.4
+  "aside": {
+    "origin": {
+      "named_after": "wisteria, the flowering vine (spelled \"wistaria\")",
+      "first_recorded": "Ridgway, 1912",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Ballerina",
+      "Pale Verbena Violet"
+    ],
+    "siblings": [
+      "lavender-blue",
+      "pale-periwinkle",
+      "wedgwood-blue",
+      "pale-soft-blue-violet"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 9,
+    "pct_present": 0.04,
+    "rarer_than_pct": 75,
+    "measured": {
+      "lch": [
+        78.9,
+        25.2,
+        293.9
+      ],
+      "nearest": [
+        [
+          "Lavender Blue",
+          3.4
+        ]
+      ]
+    },
+    "iscc": {
+      "block": 209,
+      "name": "very light violet",
+      "de": 2.5
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway 1912, plate XXIII, hue 57'; ISCC-NBS 1955 block 209",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive field notes for Pale Wistaria Blue (n=9)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What flower is Pale Wistaria Blue named for?",
+      "choices": [
+        "Wisteria",
+        "Iris",
+        "Lavender",
+        "Verbena"
+      ],
+      "answer": "Wisteria",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: this color is common in our archive of 23,781 paintings.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "ISCC-NBS 1955 gave this one violet-blue step three different names, including Ballerina."
+  ],
+  "words": 252,
+  "status": "draft",
+  "checked": {
+    "by": "",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "iscc": {
-   "block": 209,
-   "name": "very light violet",
-   "de": 2.5
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway 1912, plate XXIII, hue 57'; ISCC-NBS 1955 block 209",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive field notes for Pale Wistaria Blue (n=9)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What flower is Pale Wistaria Blue named for?",
-   "choices": [
-    "Wisteria",
-    "Iris",
-    "Lavender",
-    "Verbena"
-   ],
-   "answer": "Wisteria",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: this color is common in our archive of 23,781 paintings.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "ISCC-NBS 1955 gave this one violet-blue step three different names, including Ballerina."
- ],
- "words": 252,
- "status": "draft",
- "checked": {
-  "by": "",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,122 +1,121 @@
 {
- "slug": "pale-russian-blue",
- "name": "Pale Russian Blue",
- "hex": "#B5C6CA",
- "names": [
-  "Pale Russian Blue"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Pale Russian Blue is a near-white, grey-blue, the library's lightened variant of [[russian-blue]], the shade named for the Russian Blue cat breed's coat.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on an existing name",
-   "body": "The library's index records two Ridgway matches here as well: plate XLII, hue 45 (tone f, ISCC-NBS block 184) and a second entry at plate XXXIV, hue 43 (tone f) [1]. The two hues are close enough that the 1955 ISCC-NBS system files both under very pale blue, about 4.2 units away in CIEDE2000 [1]. Measured in LCH it has lightness 79, chroma just 6 and hue 219 degrees, barely tinted, and [[ash]] than to any strong blue [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive, a match appears in 351 of 23,781 paintings, about 1.5 percent, as photographed; the within-painting lens finds it in 255 [2]. That is ahead of 74 percent of our named colors [2]. It plays a light tone in 62 percent of its appearances, almost never a shadow [2]. It peaks in the 1800s, in 154 of 8,345 paintings, 1.8 percent of the 8,345 paintings (154 of them) we have from that century, about 1.6 times the archive's typical rate [2]. Camille Pissarro is its most devoted painter, carrying it in 9 of his 50 archived works, 7.3 times the typical rate, and Alfred Sisley carries it at 6.4 times the archive rate, in 7 of his 50 paintings [2]. It shares canvases more than chance would predict with [[greyish-white]] [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: pale + russian-blue",
-   "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912, plate XLII; ISCC-NBS, 1955, block 184",
-   "source": "ColorHub color library and Color Graph"
-  },
-  "aka": [],
-  "siblings": [
-   "pastel-blue",
-   "pale-sea-grey",
-   "pale-dull-glaucous-blue",
-   "sky-grey"
+  "slug": "pale-russian-blue",
+  "name": "Pale Russian Blue",
+  "hex": "#B5C6CA",
+  "names": [
+    "Pale Russian Blue"
   ],
-  "parent": "russian-blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 351,
-  "painters": [
-   {
-    "name": "Camille Pissarro",
-    "hits": 9,
-    "n": 50,
-    "lift": 7.3
-   },
-   {
-    "name": "Alfred Sisley",
-    "hits": 7,
-    "n": 50,
-    "lift": 6.4
-   }
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Pale Russian Blue is a near-white, grey-blue, the library's lightened variant of [[russian-blue]], the shade named for the Russian Blue cat breed's coat.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on an existing name",
+      "body": "The library's index records two Ridgway matches here as well: plate XLII, hue 45 (tone f, ISCC-NBS block 184) and a second entry at plate XXXIV, hue 43 (tone f) [1]. The two hues are close enough that the 1955 ISCC-NBS system files both under very pale blue, about 4.2 units away in CIEDE2000 [1]. Measured in LCH it has lightness 79, chroma just 6 and hue 219 degrees, barely tinted, and [[ash]] than to any strong blue [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive, a match appears in 351 of 23,781 paintings, about 1.5 percent, as photographed; the within-painting lens finds it in 255 [2]. That is ahead of 74 percent of our named colors [2]. It plays a light tone in 62 percent of its appearances, almost never a shadow [2]. It peaks in the 1800s, in 154 of 8,345 paintings, 1.8 percent of the 8,345 paintings (154 of them) we have from that century, about 1.6 times the archive's typical rate [2]. Camille Pissarro is its most devoted painter, carrying it in 9 of his 50 archived works, 7.3 times the typical rate, and Alfred Sisley carries it at 6.4 times the archive rate, in 7 of his 50 paintings [2]. It shares canvases more than chance would predict with [[greyish-white]] [2]."
+    }
   ],
-  "measured": {
-   "lch": [
-    78.7,
-    6.4,
-    218.7
-   ],
-   "iscc_nbs": {
-    "name": "bluish white",
-    "de2000": 4.2,
-    "block": 184
-   }
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
-   "loc_kind": null,
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: pale + russian-blue",
+      "first_recorded": "Ridgway, Color Standards and Nomenclature, 1912, plate XLII; ISCC-NBS, 1955, block 184",
+      "source": "ColorHub color library and Color Graph"
+    },
+    "aka": [],
+    "siblings": [
+      "pastel-blue",
+      "pale-sea-grey",
+      "sky-grey"
+    ],
+    "parent": "russian-blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Pale Russian Blue is built by adding \"pale\" to which existing color name?",
-   "choices": [
-    "Russian Blue",
-    "Powder Blue",
-    "Sky Blue",
-    "Ash"
-   ],
-   "answer": "Russian Blue",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 351,
+    "painters": [
+      {
+        "name": "Camille Pissarro",
+        "hits": 9,
+        "n": 50,
+        "lift": 7.3
+      },
+      {
+        "name": "Alfred Sisley",
+        "hits": 7,
+        "n": 50,
+        "lift": 6.4
+      }
+    ],
+    "measured": {
+      "lch": [
+        78.7,
+        6.4,
+        218.7
+      ],
+      "iscc_nbs": {
+        "name": "bluish white",
+        "de2000": 4.2,
+        "block": 184
+      }
+    }
   },
-  {
-   "q": "True or false: Pale Russian Blue is almost always a shadow color in our archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Camille Pissarro and Alfred Sisley together carry Pale Russian Blue at several times our painting archive's typical rate."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Field notes named a painter (Childe Hassam, 4/13, 19x) and a 'Nepalese paintings' claim that appear nowhere in the cited fieldnotes; the real top painters are Camille Pissarro (9/50, 7.3x) and Alfred Sisley (7/50, 6.4x), and there is no country data at all for this color. The companion color (powder-blue/sky-blue) was also wrong; the real shared-canvas match is Greyish White. Corrected throughout.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 237
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Pale Russian Blue is built by adding \"pale\" to which existing color name?",
+      "choices": [
+        "Russian Blue",
+        "Powder Blue",
+        "Sky Blue",
+        "Ash"
+      ],
+      "answer": "Russian Blue",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Pale Russian Blue is almost always a shadow color in our archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Camille Pissarro and Alfred Sisley together carry Pale Russian Blue at several times our painting archive's typical rate."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Field notes named a painter (Childe Hassam, 4/13, 19x) and a 'Nepalese paintings' claim that appear nowhere in the cited fieldnotes; the real top painters are Camille Pissarro (9/50, 7.3x) and Alfred Sisley (7/50, 6.4x), and there is no country data at all for this color. The companion color (powder-blue/sky-blue) was also wrong; the real shared-canvas match is Greyish White. Corrected throughout.",
+      "lint 2026-10-09"
+    ]
+  },
+  "words": 237
 }

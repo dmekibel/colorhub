@@ -1,0 +1,59 @@
+{
+ "id": "memphis",
+ "name": "Memphis",
+ "lineage": {
+  "influenced_by": [
+   "Pop Art",
+   "Postmodern architecture's embrace of ornament and irony",
+   "1980s consumer optimism"
+  ],
+  "influences": [
+   "corporate-memphis"
+  ]
+ },
+ "eras": [
+  "1981–1988"
+ ],
+ "places": [
+  "Milan"
+ ],
+ "garments": [
+  "not a fashion look — furniture and product design, though its clashing geometric print language influenced 1980s textile and fashion print design broadly"
+ ],
+ "media": [
+  {
+   "title": "Ettore Sottsass's Carlton bookcase (1981)",
+   "note": "the group's best-known single object"
+  }
+ ],
+ "figures": [
+  "Ettore Sottsass"
+ ],
+ "reacts_against": "the restrained, serious \"good taste\" of mid-century Italian design, combining plastic laminate, clashing pattern and candy color on purpose, as a joke its own members mostly expected to be short-lived.",
+ "revivals": [
+  "heavily revived 2015–2020s in graphic design and the illustration style that took its name, Corporate Memphis"
+ ],
+ "article": "The Memphis Group named itself after a Bob Dylan song (\"Stuck Inside of Mobile with the Memphis Blues Again\") that happened to be playing on repeat the night its founders decided what to call their new Milan design collective in 1980 — a fittingly irreverent origin for a group whose whole project was refusing to take good design taste seriously. Led by the veteran designer Ettore Sottsass, Memphis built furniture and objects out of cheap plastic laminate printed in clashing geometric patterns, bright primary and pastel color combinations that \"good\" design had spent decades avoiding, and forms that were deliberately a little absurd — Sottsass's 1981 Carlton bookcase looks more like a totem or a toy than a bookshelf. The group lasted only seven years, from 1981 to 1988, and Sottsass himself expected it to burn out fast, which it did — but its visual language, having gone dormant through the serious-minded 1990s and 2000s, came back hard in the 2010s, first in fashion and interior design and then, improbably, in corporate illustration: the flat, bendy-limbed, brightly colored human figures used in countless startup websites from around 2017 on earned the nickname Corporate Memphis specifically because of how directly they borrowed Memphis's confident, cheap-looking color and geometric play, even though the connection is mostly visual rather than philosophical.",
+ "wiki_facts": {
+  "other_names": "Memphis Art, Memphis, Memphis-Milano",
+  "decade_of_origin": "1980s",
+  "key_motifs": "Geometric shapes, zig zagged lines",
+  "key_colours": "Pink, blue, yellow, black, white, red, purple, teal"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Memphis_Design"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 57% of the measured color is pale or near-white",
+   "mostly muted — about 77% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

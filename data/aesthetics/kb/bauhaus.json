@@ -1,0 +1,70 @@
+{
+ "id": "bauhaus",
+ "name": "Bauhaus",
+ "lineage": {
+  "influenced_by": [
+   "Arts and Crafts movement's craft ideals",
+   "Constructivism and De Stijl's geometric abstraction"
+  ],
+  "influences": [
+   "swiss-style",
+   "mid-century-modern"
+  ]
+ },
+ "eras": [
+  "1919–1933 (school open in Weimar, then Dessau, then Berlin, closed under Nazi pressure)"
+ ],
+ "places": [
+  "Weimar",
+  "Dessau",
+  "Berlin"
+ ],
+ "garments": [
+  "not primarily a fashion look, though its textile workshop (led largely by women, including Anni Albers) produced influential geometric weaving"
+ ],
+ "media": [
+  {
+   "title": "Marcel Breuer's tubular-steel Wassily Chair (1925)",
+   "note": ""
+  },
+  {
+   "title": "László Moholy-Nagy's photography and typography",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Walter Gropius",
+  "Anni Albers",
+  "László Moholy-Nagy",
+  "Marcel Breuer"
+ ],
+ "reacts_against": "the separation of fine art from craft and industry; the school's founding idea was that good design for mass-produced objects was as serious a pursuit as painting, expressed through primary colors, geometric form and new industrial materials (tubular steel, glass).",
+ "revivals": [
+  "directly shaped the Swiss/International Typographic Style and nearly all mid-century modern furniture design that followed"
+ ],
+ "article": "Bauhaus color theory is inseparable from the school's founding argument: that there should be no wall between fine art and the design of ordinary, mass-produced things. Founded in Weimar in 1919 by the architect Walter Gropius, the school taught painters, weavers and furniture-makers side by side and pushed its students toward a reduced, geometric visual language built on primary colors (red, yellow, blue), black, white and grey, and the basic forms of circle, square and triangle — partly inherited from Constructivism and De Stijl, partly developed in-house by teachers like Wassily Kandinsky and Josef Albers, who spent decades studying how colors interact. The school's most famous object, Marcel Breuer's tubular-steel Wassily Chair (1925), shows the whole philosophy at once: industrial material, geometric reduction, no applied ornament. Political pressure forced the Bauhaus to close in 1933, and many of its teachers emigrated to the United States, where they taught a generation of American designers directly — which is the main reason Bauhaus's red-yellow-blue, black-and-white geometric language became the default grammar of so much 20th-century graphic design, furniture and architecture rather than staying a short-lived German experiment.",
+ "wiki_facts": {
+  "other_names": "Staatliches Bauhaus",
+  "decade_of_origin": "1919 - 1933",
+  "key_motifs": "Geometric shapes (circles, squares, triangles), clean lines, sans-serif typography, abstract forms, lack of ornamentation, industrial materials (steel, glass, concrete)",
+  "key_colours": "Primary colors (red, yellow, blue), black, white, gray",
+  "related_aesthetics": "Arts and CraftsConstructivismDe StijlInternational Typographic StyleMid-Century ModernModernism",
+  "key_values": "Unification of art and industry, \"form follows function,\" social purpose of design, rationality, simplicity, mass-producibility"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Bauhaus"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 88% of the measured color is pale or near-white",
+   "mostly muted — about 96% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

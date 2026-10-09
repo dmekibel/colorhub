@@ -1,0 +1,43 @@
+{
+ "id": "sailorcore",
+ "name": "Sailorcore",
+ "lineage": {
+  "influenced_by": [
+   "nautical style's century-long fashion history",
+   "the broader 2020s wave of coastal-themed internet-aesthetic tags"
+  ],
+  "influences": [
+   "lighthousecore"
+  ]
+ },
+ "eras": [
+  "2020s"
+ ],
+ "places": [],
+ "garments": [
+  "Breton stripes",
+  "brass buttons",
+  "rope trim"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "nothing specific; sailorcore narrows nautical style's broad century-spanning reference pool down to a tighter, more moodboard-ready 2020s internet-aesthetic package.",
+ "revivals": [],
+ "article": "Sailorcore is a 2020s internet-aesthetic tag that draws directly on nautical style's much older fashion history — Breton stripes, brass buttons, rope detailing, all traceable back through a century-plus of maritime-inspired civilian fashion to Coco Chanel's 1917 adoption of the sailor's striped shirt. What sailorcore adds is a narrower, more curated framing: rather than nautical style's broad, loosely bounded reference pool, sailorcore packages a tighter set of coastal signifiers (navy and white stripes, rope, brass, sea-grey) specifically for Pinterest- and TikTok-native moodboard culture. It sits within a wider 2020s cluster of coastal-themed internet-aesthetic tags — coastal grandmother, the fisherman aesthetic, lighthousecore — each carving out a slightly different emotional register from the same general maritime material: sailorcore reads crisper and more polished than the fisherman aesthetic's weathered workwear focus, and warmer and more sociable than lighthousecore's solitary, storm-lit mood.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Sailorcore"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 62% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

@@ -1,117 +1,117 @@
 {
- "slug": "red-pink",
- "name": "Red Pink",
- "hex": "#FA2A55",
- "names": [
-  "Red Pink"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Red Pink is a hot, coral-leaning pink, built from [[red]] plus [[pink]] in the 2010 xkcd color survey.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A plain compound, an older printed phrase",
-   "body": "The survey pairs red directly with pink, its simplest modifier grammar [1]. As a color name on file, 2010 is the earliest record; the ISCC-NBS system would place it among the deep yellowish pinks, though at a loose fit, 9.4 units off [1]. In printed English, though, the phrase \"red pink\" itself goes back further: our Ngram data finds it from 1800, peaking in use around 1930, long before the survey used it as a single color name [3].\n\nIts nearest named neighbor is [[pink-red]], its own word order reversed, just 2.8 units away and almost the same shade [2]. [[lightish-red]] and [[pinkish-red]] sit close behind, both nearly identical as well [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive matches this color across even a small share of its canvas, as photographed [3]. Its high chroma makes it an unlikely survivor on an aged, varnished canvas [3]. The phrase's printed peak in the 1930s, by contrast, has nothing to do with paint; it tracks English usage of the words, not any dye or pigment [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: red + pink",
-   "first_recorded": "2010 xkcd color survey; the phrase \"red pink\" in print from 1800",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "pink-red",
-   "lightish-red",
-   "pinkish-red",
-   "watermelon"
+  "slug": "red-pink",
+  "name": "Red Pink",
+  "hex": "#FA2A55",
+  "names": [
+    "Red Pink"
   ],
-  "parent": "pink",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "nearest": [
-    [
-     "Pink Red",
-     2.8
-    ]
-   ]
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Red Pink is a hot, coral-leaning pink, built from [[red]] plus [[pink]] in the 2010 xkcd color survey.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A plain compound, an older printed phrase",
+      "body": "The survey pairs red directly with pink, its simplest modifier grammar [1]. As a color name on file, 2010 is the earliest record; the ISCC-NBS system would place it among the deep yellowish pinks, though at a loose fit, 9.4 units off [1]. In printed English, though, the phrase \"red pink\" itself goes back further: our Ngram data finds it from 1800, peaking in use around 1930, long before the survey used it as a single color name [3].\n\nIts nearest named neighbor is [[pink-red]], its own word order reversed, just 2.8 units away and almost the same shade [2]. [[neon-red]] and [[pinkish-red]] sit close behind, both nearly identical as well [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive matches this color across even a small share of its canvas, as photographed [3]. Its high chroma makes it an unlikely survivor on an aged, varnished canvas [3]. The phrase's printed peak in the 1930s, by contrast, has nothing to do with paint; it tracks English usage of the words, not any dye or pigment [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: red + pink",
+      "first_recorded": "2010 xkcd color survey; the phrase \"red pink\" in print from 1800",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "pink-red",
+      "neon-red",
+      "pinkish-red",
+      "watermelon"
+    ],
+    "parent": "pink",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "iscc_nbs": {
-   "name": "deep yellowish pink",
-   "de2000": 9.4
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "nearest": [
+        [
+          "Pink Red",
+          2.8
+        ]
+      ]
+    },
+    "iscc_nbs": {
+      "name": "deep yellowish pink",
+      "de2000": 9.4
+    },
+    "ngram": {
+      "term": "red pink",
+      "first": 1800,
+      "peak": 1930
+    }
   },
-  "ngram": {
-   "term": "red pink",
-   "first": 1800,
-   "peak": 1930
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS 1955 block",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub painting archive fieldnotes, 23,781 paintings (as photographed), and Ngram phrase frequency cache",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "When does the printed phrase \"red pink\" first appear in our Ngram data, well before it named this specific color?",
+      "choices": [
+        "1800",
+        "1910",
+        "1955",
+        "2010"
+      ],
+      "answer": "1800",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Red Pink and Pink Red, its word order reversed, are nearly the same color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The printed phrase \"red pink\" dates to 1800, over two centuries before the 2010 survey used it as a single color name."
+  ],
+  "words": 190,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS 1955 block",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub painting archive fieldnotes, 23,781 paintings (as photographed), and Ngram phrase frequency cache",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "When does the printed phrase \"red pink\" first appear in our Ngram data, well before it named this specific color?",
-   "choices": [
-    "1800",
-    "1910",
-    "1955",
-    "2010"
-   ],
-   "answer": "1800",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Red Pink and Pink Red, its word order reversed, are nearly the same color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The printed phrase \"red pink\" dates to 1800, over two centuries before the 2010 survey used it as a single color name."
- ],
- "words": 190,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": []
- }
 }

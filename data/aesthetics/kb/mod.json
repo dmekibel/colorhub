@@ -1,0 +1,55 @@
+{
+ "id": "mod",
+ "name": "Mod",
+ "lineage": {
+  "influenced_by": [
+   "Italian tailoring and scooter culture",
+   "American jazz, soul and R&B records imported into working-class London"
+  ],
+  "influences": [
+   "new-wave",
+   "synthwave"
+  ]
+ },
+ "eras": [
+  "1958–1966"
+ ],
+ "places": [],
+ "garments": [
+  "slim tailored suits",
+  "Fred Perry polos",
+  "mini dresses",
+  "Vespa scooters"
+ ],
+ "media": [
+  {
+   "title": "Quadrophenia (1979 film, based on The Who's 1973 album)",
+   "note": "the best-known later dramatization of the scene"
+  }
+ ],
+ "figures": [
+  "Twiggy"
+ ],
+ "reacts_against": "1950s Teddy Boy style's rougher, rock-and-roll-inflected look, building a sharper, more continental European-coded alternative out of Italian tailoring instead.",
+ "revivals": [
+  "a 1979 UK mod revival (coinciding with Quadrophenia)",
+  "a recurring reference in British indie and Britpop styling"
+ ],
+ "article": "Mod began among young, working-class Londoners in the late 1950s who built an identity around things that were, for their time and class, genuinely difficult to access: Italian-cut suits, imported American soul and R&B singles, and motor scooters kept scrupulously clean. The name is short for \"modernist,\" distinguishing the scene from the rougher 1950s Teddy Boy look it positioned itself against. Mod's visual signature — slim silhouettes, bold geometric color-blocking, the RAF roundel as an ironic badge — crossed into mainstream pop culture through bands like the Small Faces and, in a softened form, the Beatles, before a specifically British 1979 mod revival (tied to the film Quadrophenia) reintroduced the look to a new generation. Mod's emphasis on sharp, deliberate color combinations and clean geometry left a visible mark on later British design movements, from new wave's angular graphics to the mod-adjacent tailoring that's resurfaced periodically in Britpop and indie fashion ever since.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Mod"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 66% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

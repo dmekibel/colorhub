@@ -1,120 +1,120 @@
 {
- "slug": "purpleish",
- "name": "Purpleish",
- "hex": "#98568D",
- "names": [
-  "Purpleish"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Purpleish is a dusty, reddish purple: a crowd name from the 2010 xkcd color survey, where people typed in whatever word fit the swatch they were shown.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A survey word, not a coined one",
-   "body": "The name comes from the xkcd color survey of 2010, where respondents typed free-text names for colors on screen, and this was one of the results kept [1]. No book or earlier dictionary in our sources records it; its origin is undocumented beyond that survey [1]. It is simply [[purple]] plus the suffix \"-ish\", softening the claim rather than naming a new hue [1].\n\nThe nearest named color on file is [[razzmic-berry]], 3.3 units away and almost the same shade [2]. [[mathews-purple]] sits at 3.7, lighter and a touch bluer, and [[light-plum]] further off, redder [2]. The survey's \"Purplish\", spelled without the extra *e*, landed only 0.9 units away, closer than any of those [2]. Our library files both spellings under Razzmic Berry [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a color within six units of this one, over at least five percent of the canvas, in a single painting: Georges Dupuis's *Notre-Dame Embankment, Le Havre* of 1908, as photographed [3]. One painting is too thin a record to say anything about how the color behaves in paint; the survey measured word choice, not pigment [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: purple + -ish",
-   "first_recorded": "2010 xkcd color survey",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Purplish"
+  "slug": "purpleish",
+  "name": "Purpleish",
+  "hex": "#98568D",
+  "names": [
+    "Purpleish"
   ],
-  "siblings": [
-   "razzmic-berry",
-   "light-plum",
-   "mathews-purple",
-   "dull-purple"
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Purpleish is a dusty, reddish purple: a crowd name from the 2010 xkcd color survey, where people typed in whatever word fit the swatch they were shown.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A survey word, not a coined one",
+      "body": "The name comes from the xkcd color survey of 2010, where respondents typed free-text names for colors on screen, and this was one of the results kept [1]. No book or earlier dictionary in our sources records it; its origin is undocumented beyond that survey [1]. It is simply [[purple]] plus the suffix \"-ish\", softening the claim rather than naming a new hue [1].\n\nThe nearest named color on file is [[razzmic-berry]], 3.3 units away and almost the same shade [2]. [[mathews-purple]] sits at 3.7, lighter and a touch bluer, and [[antique-fuchsia]] further off, redder [2]. The survey's \"Purplish\", spelled without the extra *e*, landed only 0.9 units away, closer than any of those [2]. Our library files both spellings under Razzmic Berry [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a color within six units of this one, over at least five percent of the canvas, in a single painting: Georges Dupuis's *Notre-Dame Embankment, Le Havre* of 1908, as photographed [3]. One painting is too thin a record to say anything about how the color behaves in paint; the survey measured word choice, not pigment [3]."
+    }
   ],
-  "parent": "purple",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1,
-  "match": {
-   "de2000": 6.0,
-   "min_cover": 0.05
-  },
-  "measured": {
-   "nearest": [
-    [
-     "Razzmic Berry",
-     3.3
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: purple + -ish",
+      "first_recorded": "2010 xkcd color survey",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Purplish"
     ],
-    [
-     "Mathews Purple",
-     3.7
+    "siblings": [
+      "razzmic-berry",
+      "antique-fuchsia",
+      "mathews-purple",
+      "dull-purple"
+    ],
+    "parent": "purple",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1,
+    "match": {
+      "de2000": 6.0,
+      "min_cover": 0.05
+    },
+    "measured": {
+      "nearest": [
+        [
+          "Razzmic Berry",
+          3.3
+        ],
+        [
+          "Mathews Purple",
+          3.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 color survey entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Where does the name \"Purpleish\" come from?",
+      "choices": [
+        "A 2010 online survey of crowd color names",
+        "A Crayola crayon",
+        "A dye plant",
+        "A painter's palette"
+      ],
+      "answer": "A 2010 online survey of crowd color names",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the survey's \"Purplish\" landed closer to this color than any other named color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Purpleish and Purplish, two spellings typed by different people, landed less than one unit apart in the 2010 survey."
+  ],
+  "words": 207,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd 2010 color survey entry",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Where does the name \"Purpleish\" come from?",
-   "choices": [
-    "A 2010 online survey of crowd color names",
-    "A Crayola crayon",
-    "A dye plant",
-    "A painter's palette"
-   ],
-   "answer": "A 2010 online survey of crowd color names",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the survey's \"Purplish\" landed closer to this color than any other named color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Purpleish and Purplish, two spellings typed by different people, landed less than one unit apart in the 2010 survey."
- ],
- "words": 207,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
-  ]
- }
 }

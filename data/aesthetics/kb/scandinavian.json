@@ -1,0 +1,58 @@
+{
+ "id": "scandinavian",
+ "name": "Scandinavian minimalism",
+ "lineage": {
+  "influenced_by": [
+   "Bauhaus functionalism",
+   "Nordic craft traditions and long dark winters favoring light interiors"
+  ],
+  "influences": [
+   "japandi",
+   "hygge",
+   "mid-century-modern"
+  ]
+ },
+ "eras": [
+  "c. 1930s onward; international visibility from a landmark 1954–57 touring exhibition, \"Design in Scandinavia\""
+ ],
+ "places": [
+  "Denmark, Sweden, Finland, Norway"
+ ],
+ "garments": [
+  "not primarily a fashion look — furniture and interior design"
+ ],
+ "media": [
+  {
+   "title": "Alvar Aalto's furniture and architecture (1930s on)",
+   "note": ""
+  },
+  {
+   "title": "Hans Wegner's Wishbone Chair (1949)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Alvar Aalto",
+  "Hans Wegner",
+  "Arne Jacobsen"
+ ],
+ "reacts_against": "ornate historical furniture styles, favoring function, light wood, and pale, high-reflectance colors suited to long, dark Nordic winters.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Scandinavian"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 100% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

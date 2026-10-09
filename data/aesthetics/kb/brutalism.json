@@ -1,0 +1,65 @@
+{
+ "id": "brutalism",
+ "name": "Brutalism",
+ "lineage": {
+  "influenced_by": [
+   "Le Corbusier's béton brut (raw concrete) buildings",
+   "postwar Britain's need for fast, cheap public housing"
+  ],
+  "influences": [
+   "postmodern"
+  ]
+ },
+ "eras": [
+  "c. 1950s–1970s"
+ ],
+ "places": [
+  "Britain (council housing)",
+  "Eastern Bloc civic architecture"
+ ],
+ "garments": [
+  "not a fashion look — an architectural movement"
+ ],
+ "media": [
+  {
+   "title": "Alison and Peter Smithson's writing and buildings (coined \"New Brutalism,\" 1953)",
+   "note": ""
+  },
+  {
+   "title": "Erno Goldfinger's Trellick Tower (1972)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Le Corbusier",
+  "Alison and Peter Smithson"
+ ],
+ "reacts_against": "decorative postwar optimism and the expense of traditional materials, exposing raw concrete and structure honestly instead of disguising it.",
+ "revivals": [
+  "a 2010s-20s design and photography revival (\"brutalist web design,\" Instagram accounts dedicated to the buildings) largely reframing it as aesthetic rather than functional"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Brutalist ArchitectureNew Brutalism (initially)",
+  "decade_of_origin": "1950s-1970s",
+  "key_motifs": "Exposed materials, unfinished concrete, minimalist compositions, geometry",
+  "key_colours": "Grey, monochrome tones",
+  "related_aesthetics": "BrutagrafixConstructivismCyberpunkDeconstructivismDoomerFeísmoIndustrial DecayMid-Century ModernMinimalismModernismOstalgiePost-ApocalypticSlavic WinterSocialist RealismSoviet NostalgiaYugo-Nostalgia",
+  "key_values": "Functionalism, dullness"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Brutalism"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 78% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

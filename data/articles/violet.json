@@ -1,600 +1,600 @@
 {
- "slug": "violet",
- "name": "Violet",
- "hex": "#8000FF",
- "names": [
-  "Violet"
- ],
- "tier": "nature",
- "depth": "epic",
- "lede": "Violet is the last color the eye can see before light turns invisible: the short-wave end of the rainbow, named after a spring flower, and for most of history a color painters had to fake.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A flower's name",
-   "body": "Jarman calls violet the only color in the spectrum named after a flower [1]. Pastoureau counts it among the French half-colors, with pink, orange and brown, whose names come from a fruit or a flower rather than an abstract color word [2]. Medieval Latin had no single word for it and called it *subniger*, half-black, a label Pastoureau connects with its later place in half-mourning [2]. Greek supplied other roots for the color, which survive in English prefixes such as *iodo-*, *iono-* and *ianthin-* [3].\n\nThe word could even be political. During the First World War the chemist Wilhelm Ostwald replaced the French loanwords *orange* and *violet* in German with native plant names, *Kress* and *Veil* [4]. Neighboring words drift between languages too: Pastoureau notes that French *lilas* names a pale blue, while the German word means a strong violet leaning toward red [2].\n\nRobert Ridgway, compiling his 1912 color standard for naturalists, set out partly to stop people using violet and purple as synonyms, since he held them to be distinct hues [5]. In the Victorian language of flowers the sweet violet meant modesty and the blue violet faithfulness [6]."
-  },
-  {
-   "id": "science",
-   "title": "The edge of the spectrum",
-   "body": "Violet is the color of the shortest wavelengths people can see [7]. Eckstut puts the band at roughly 380 to 450 nanometers and Paterson at about 390 to 425; the books disagree because the edges are drawn by the viewer, not by the light [7][3]. Beyond it lies the ultraviolet, invisible to us but visible to bees [1][54].\n\nViolet and purple are not the same thing to a physicist. Violet is a spectral color, a single short wavelength; purple and magenta exist only when long and short wavelengths reach the eye together, so they appear nowhere in a rainbow [7][9]. Newton saw this in his own experiments: light from the two ends of the spectrum, red and violet, mixes into none of the prism's colors but a purple [10].\n\nWhy does a single short wavelength look faintly reddish? Livingstone explains that the long-wavelength cone, the one most sensitive toward the yellow end, has a small secondary peak near 400 nanometers, so very short light stirs it as well as the short-wave cone [11]. Violet is also the darkest hue of the spectrum, which is why Schopenhauer, revising Goethe's circle, gave it the largest share of area to balance yellow's brightness [3][13].\n\nThe sky shows it in small doses. The atmosphere scatters the short wavelengths, violet and blue, most strongly, which is why the sky is blue at all [55]. Gurney notes that the sky turns slightly more violet the farther you look from the sun, that the last color after sunset is often a soft violet glow, and that deep water filters out everything but violet and ultraviolet [12]."
-  },
-  {
-   "id": "rainbow",
-   "title": "Newton's seventh color",
-   "body": "No ancient writer lists the rainbow in our order. Xenophanes and Lucretius name three colors, red, yellow and violet, and Ammianus Marcellinus six, with purple and violet among them [16]. Newton himself first divided the spectrum into five colors and added orange and indigo only in 1672 [15]. Gage suggests indigo was there chiefly to make seven, the number of notes in a musical scale, and over those revisions the far end of the spectrum changed its name from purple to violet [15].\n\nThe idea that a rainbow has seven natural bands is therefore a myth; the seven are Newton's choice [15]. Ball writes that where Newton placed indigo and violet, he can see only a blue darkening into purple [14]."
-  },
-  {
-   "id": "pigments",
-   "title": "A color painters had to fake",
-   "body": "Violet is rare in paint. Cave painters at Altamira and Lascaux had one, made from a manganese mineral, but it is an exception in palettes otherwise built from earths, charcoal and chalk [17][3]. In the third century AD Alexander of Aphrodisias explained that violet could be mixed from blue and red, while ranking mixed colors below natural ones [17]. Dyes had a price ladder: Pliny put violet purple at 100 denarii a pound, against more than 1,000 for the finest Tyrian [18].\n\nMedieval painters built violet out of other things. Cennino Cennini's handbook of about 1400 has no single purple pigment: purple is fine lake and ultramarine in equal parts, and a hematite he calls *amatisto* can give a violet in fresco [19]. Dyers worked the same way, and medieval violets were usually madder with a particular mordant rather than blue over red, so they sat closer to red or black than to blue [20].\n\nLater painters layered it in: analysis of the bishop's black cloak in Titian's *Resurrection* (1519–22) found a violet lake among nine paint layers [21]. In Rembrandt's portrait of Hendrickje Stoffels the dress that reads as pale lilac contains no blue at all: its violet tint comes from lead white, charcoal black and a little red lake [22].\n\nTrue violet pigments arrived only in the nineteenth century. Cobalt violet, a cobalt arsenate or phosphate, was made in France from 1859 by Ball's account, while Paterson dates its first use to 1860; both note its drawbacks, cost for Ball and toxicity for Paterson [23][25][24]. Manganese violet followed in 1868 as the less toxic choice [23][25]. Livingstone found a tube of cobalt violet priced at $45 when most of her oil paints cost about $5 [11].\n\nEven these are not quite violet. Measuring paints with a spectrometer, Livingstone found that ultramarine violet reflects enough long-wave light to be a purple, and that cobalt violet reflects violet but also a good deal of red; she had yet to find a genuinely violet pigment [11]. The truest violets she names are structural colors, the interference shimmer of butterfly and hummingbird wings [11]."
-  },
-  {
-   "id": "dyes",
-   "title": "Lichen, coal tar and fading",
-   "body": "Dyers' guilds often split by color, and in many cities red, violet and yellow belonged to one trade while blue, black and green belonged to another [26]. In the 1750s a Scottish coppersmith, George Gordon, devised cudbear, a violet dye from lichens, after noticing that the costly orchil process resembled his grandmother's recipe; he named it after his nephew Cuthbert [27].\n\nCoal tar changed everything. Perkin's [[mauve]] of 1856, the first aniline dye, was sold in Germany as aniline violet [28]. In 1863 August Wilhelm Hofmann made a violet by treating aniline red with ethyl iodide, and his violets were soon competing with mauve [29][30]. Visiting London in 1862, the French critic Hippolyte Taine found violet silk gowns among the middle-class crowds in Hyde Park and thought the effect garish [30].\n\nSome violets found other work. Gentian violet, a coal-tar dye, became an antiseptic [31][25]. English makers used methyl violet to fake the coppery sheen of indigo cloth for West Africa, and buyers there still test [[indigo]] by rubbing it: purple on the finger means a fake [32].\n\nThe new violets did not last. An old aniline violet swatch vanished entirely in Gurney's fading test, and violets, yellows and magentas remain among the most fugitive colors [33]. Greenfield notes that violet paints used by Van Gogh and Gauguin have faded toward pale blue and lavender white [34]."
-  },
-  {
-   "id": "culture",
-   "title": "Penance, half-mourning and bishops",
-   "body": "In the Latin church violet is the color of penance, Advent and Lent, and Pastoureau notes that it became the color of bishops only late [2]. Medieval liturgists treated violet and indigo as kinds of black for penance and mourning [35]. In 1495 Pope Alexander VI's master of ceremonies stopped him wearing white in a procession against a flood, since white meant joy, and violet was used instead [35]. Goethe joked that a bishop's violet restlessly aspires to a cardinal's red [36].\n\nViolet also became the color that comes after black. In Victorian England widows moved, after two years of matte black, into half-mourning in heliotrope and other soft purples [37]. Goethe observed that older women favored violet, and Kandinsky called it a cooled red, sad and ailing, though both were giving opinions rather than findings [36][45]. Rome used the flower differently: violets, which wilt quickly, were laid at funerals for the brevity of life, and by the end of the first century Roman matrons wore violet beside blue and green [38].\n\nTastes are not fixed, and surveys disagree. Birren pooled studies from the 1920s to the 1940s that placed violet fourth of six hues in adult preference, after blue, red and green [40]. Pastoureau reports French polls in which violet is the most disliked color after brown [2]."
-  },
-  {
-   "id": "painting",
-   "title": "Violettomania",
-   "body": "Violet became a painters' quarrel in the 1870s [41]. The Impressionists held that shadows are colored, never simply black, and that the shadow cast by yellow sunlight takes its complement, violet [41]. Critics mocked the result as violettomania, and Huysmans for a time spoke of indigomania, as if the painters shared a disease [42][3]. Some reviewers suggested an afterimage from staring at sunny fields, or an ability to see ultraviolet; these were jibes, not findings [41].\n\nBooks disagree on who declared that fresh air is violet: St Clair gives the line to Édouard Manet in 1881, Ball to Claude Monet [41][42]. The observation was not new. Goethe and Delacroix had both noted violet shadows, and Delacroix's journal records that the shadows of people walking on sand look violet [42][43]. Look for it on a sunny beach or a snowfield: shadows beside warm light lean toward violet [43].\n\nIn practice the Impressionists mostly made their mauves by glazing cobalt blue or ultramarine with red lake, and used the new cobalt and manganese violets sparingly, Monet more than Renoir [42]. Gage counts cobalt violet among Monet's newest pigments [43]. American viewers balked at the violet shadows, and the dealer Paul Durand-Ruel explained that France simply had more violet in its shadows [11]. By 1937 Matisse kept two cobalt violets on a palette of seventeen colors [43].\n\nYellow and violet became the textbook pair. Goethe wrote that yellow demands red-blue, and Chevreul advised gardeners to plant yellow beside violet [36][56]. Gurney cautions that the pairing depends on the system: on the painter's wheel yellow's complement is violet, but in afterimages blue sits opposite yellow [46]."
-  },
-  {
-   "id": "gems",
-   "title": "In stones",
-   "body": "[[amethyst|Amethyst]] is violet's gem, and its Greek name means not intoxicated, from a power once ascribed to the stone [25]. A report from Tavernier's day describes the rough stone behind the French court's famous blue diamond, later the Hope, as *un beau violet*, just over 110 metric carats, part of a parcel sold to Louis XIV [47]. Finlay notes that sapphires lean toward violet where spinels lean green, and that tanzanite, a violet-blue stone found near Kilimanjaro in 1967, is said to come closest to a Kashmir sapphire [47]. Afghan miners rank the violet-tinged grade of [[lapis-lazuli|lapis]], which they call *surpar*, above the rest [48]."
-  },
-  {
-   "id": "swatch",
-   "title": "Which violet?",
-   "body": "The violet on this page, #8000FF, is a fully saturated screen color between blue and magenta, and ISCC-NBS files it as vivid purple, 11.4 units away [49]. Its nearest named neighbors are [[vivid-purple]] at 3.7 units, [[purplish-blue]] at 3.9 and [[blue-violet]] at 4.2 [49].\n\nThe CSS keyword `violet` is a different color entirely [3][49]. Inherited from the X11 color list, it is #EE82EE, a pale pinkish lilac 31 units from this swatch and closer to [[orchid]] than to anything in a rainbow [3][49]. Darker cousins in our library include [[dark-violet]] and [[indigo]] [49]. [[purple]] is the mixture Ridgway wanted kept apart [5]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our archive of 23,781 has an area color within ten CIEDE2000 units of this violet [50]. The nearest, 14.5 units away, is Monet's [[art:aic-16571|Arrival of the Normandy Train, Gare Saint-Lazare]] (1877), with Matisse's [[art:aic-27984|Woman before an Aquarium]] (1921) just behind [50]. The CSS violet fares no better: its nearest painting, 13.3 units off, is Leonardo's [[art:commons-Q563727|Virgin and Child with Saint Anne]] [50].\n\nEven the paint-tube color is scarce. A color within six units of [[manganese-violet]] covers at least five per cent of the canvas in just one painting here, Paul Signac's [[art:commons-Q17491415|Woman with a Parasol]] of 1893 [50]. Two caveats travel with these numbers: we record only six area colors per painting, so a small violet accent never registers, and these are photographs of aged, varnished paintings, where a color match is not a pigment test [50]. Faded aniline violets may now photograph as blue or lavender [34].\n\nIn Google Books the word *violet* is printed most around 1929 and falls to about 30 per cent of that level by 1980, a count that includes the flower, the name and ultraviolet [51]. *Purple* peaked a century earlier, around 1822 [51]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the violet flower",
-   "first_recorded": "the spectral sense in Newton's Opticks (1704); in our color lists, Maerz & Paul (1930)",
-   "source": "Jarman, Chroma, p. 72; Newton, Opticks; data/library.json"
-  },
-  "aka": [
-   "Spectral violet",
-   "Bluish purple",
-   "subniger (medieval Latin, 'half-black')"
+  "slug": "violet",
+  "name": "Violet",
+  "hex": "#8000FF",
+  "names": [
+    "Violet"
   ],
-  "siblings": [
-   "purple",
-   "indigo",
-   "lavender",
-   "lilac",
-   "mauve",
-   "amethyst"
+  "tier": "nature",
+  "depth": "epic",
+  "lede": "Violet is the last color the eye can see before light turns invisible: the short-wave end of the rainbow, named after a spring flower, and for most of history a color painters had to fake.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A flower's name",
+      "body": "Jarman calls violet the only color in the spectrum named after a flower [1]. Pastoureau counts it among the French half-colors, with pink, orange and brown, whose names come from a fruit or a flower rather than an abstract color word [2]. Medieval Latin had no single word for it and called it *subniger*, half-black, a label Pastoureau connects with its later place in half-mourning [2]. Greek supplied other roots for the color, which survive in English prefixes such as *iodo-*, *iono-* and *ianthin-* [3].\n\nThe word could even be political. During the First World War the chemist Wilhelm Ostwald replaced the French loanwords *orange* and *violet* in German with native plant names, *Kress* and *Veil* [4]. Neighboring words drift between languages too: Pastoureau notes that French *lilas* names a pale blue, while the German word means a strong violet leaning toward red [2].\n\nRobert Ridgway, compiling his 1912 color standard for naturalists, set out partly to stop people using violet and purple as synonyms, since he held them to be distinct hues [5]. In the Victorian language of flowers the sweet violet meant modesty and the blue violet faithfulness [6]."
+    },
+    {
+      "id": "science",
+      "title": "The edge of the spectrum",
+      "body": "Violet is the color of the shortest wavelengths people can see [7]. Eckstut puts the band at roughly 380 to 450 nanometers and Paterson at about 390 to 425; the books disagree because the edges are drawn by the viewer, not by the light [7][3]. Beyond it lies the ultraviolet, invisible to us but visible to bees [1][54].\n\nViolet and purple are not the same thing to a physicist. Violet is a spectral color, a single short wavelength; purple and magenta exist only when long and short wavelengths reach the eye together, so they appear nowhere in a rainbow [7][9]. Newton saw this in his own experiments: light from the two ends of the spectrum, red and violet, mixes into none of the prism's colors but a purple [10].\n\nWhy does a single short wavelength look faintly reddish? Livingstone explains that the long-wavelength cone, the one most sensitive toward the yellow end, has a small secondary peak near 400 nanometers, so very short light stirs it as well as the short-wave cone [11]. Violet is also the darkest hue of the spectrum, which is why Schopenhauer, revising Goethe's circle, gave it the largest share of area to balance yellow's brightness [3][13].\n\nThe sky shows it in small doses. The atmosphere scatters the short wavelengths, violet and blue, most strongly, which is why the sky is blue at all [55]. Gurney notes that the sky turns slightly more violet the farther you look from the sun, that the last color after sunset is often a soft violet glow, and that deep water filters out everything but violet and ultraviolet [12]."
+    },
+    {
+      "id": "rainbow",
+      "title": "Newton's seventh color",
+      "body": "No ancient writer lists the rainbow in our order. Xenophanes and Lucretius name three colors, red, yellow and violet, and Ammianus Marcellinus six, with purple and violet among them [16]. Newton himself first divided the spectrum into five colors and added orange and indigo only in 1672 [15]. Gage suggests indigo was there chiefly to make seven, the number of notes in a musical scale, and over those revisions the far end of the spectrum changed its name from purple to violet [15].\n\nThe idea that a rainbow has seven natural bands is therefore a myth; the seven are Newton's choice [15]. Ball writes that where Newton placed indigo and violet, he can see only a blue darkening into purple [14]."
+    },
+    {
+      "id": "pigments",
+      "title": "A color painters had to fake",
+      "body": "Violet is rare in paint. Cave painters at Altamira and Lascaux had one, made from a manganese mineral, but it is an exception in palettes otherwise built from earths, charcoal and chalk [17][3]. In the third century AD Alexander of Aphrodisias explained that violet could be mixed from blue and red, while ranking mixed colors below natural ones [17]. Dyes had a price ladder: Pliny put violet purple at 100 denarii a pound, against more than 1,000 for the finest Tyrian [18].\n\nMedieval painters built violet out of other things. Cennino Cennini's handbook of about 1400 has no single purple pigment: purple is fine lake and ultramarine in equal parts, and a hematite he calls *amatisto* can give a violet in fresco [19]. Dyers worked the same way, and medieval violets were usually madder with a particular mordant rather than blue over red, so they sat closer to red or black than to blue [20].\n\nLater painters layered it in: analysis of the bishop's black cloak in Titian's *Resurrection* (1519–22) found a violet lake among nine paint layers [21]. In Rembrandt's portrait of Hendrickje Stoffels the dress that reads as pale lilac contains no blue at all: its violet tint comes from lead white, charcoal black and a little red lake [22].\n\nTrue violet pigments arrived only in the nineteenth century. Cobalt violet, a cobalt arsenate or phosphate, was made in France from 1859 by Ball's account, while Paterson dates its first use to 1860; both note its drawbacks, cost for Ball and toxicity for Paterson [23][25][24]. Manganese violet followed in 1868 as the less toxic choice [23][25]. Livingstone found a tube of cobalt violet priced at $45 when most of her oil paints cost about $5 [11].\n\nEven these are not quite violet. Measuring paints with a spectrometer, Livingstone found that ultramarine violet reflects enough long-wave light to be a purple, and that cobalt violet reflects violet but also a good deal of red; she had yet to find a genuinely violet pigment [11]. The truest violets she names are structural colors, the interference shimmer of butterfly and hummingbird wings [11]."
+    },
+    {
+      "id": "dyes",
+      "title": "Lichen, coal tar and fading",
+      "body": "Dyers' guilds often split by color, and in many cities red, violet and yellow belonged to one trade while blue, black and green belonged to another [26]. In the 1750s a Scottish coppersmith, George Gordon, devised cudbear, a violet dye from lichens, after noticing that the costly orchil process resembled his grandmother's recipe; he named it after his nephew Cuthbert [27].\n\nCoal tar changed everything. Perkin's [[mauve]] of 1856, the first aniline dye, was sold in Germany as aniline violet [28]. In 1863 August Wilhelm Hofmann made a violet by treating aniline red with ethyl iodide, and his violets were soon competing with mauve [29][30]. Visiting London in 1862, the French critic Hippolyte Taine found violet silk gowns among the middle-class crowds in Hyde Park and thought the effect garish [30].\n\nSome violets found other work. Gentian violet, a coal-tar dye, became an antiseptic [31][25]. English makers used methyl violet to fake the coppery sheen of indigo cloth for West Africa, and buyers there still test [[indigo]] by rubbing it: purple on the finger means a fake [32].\n\nThe new violets did not last. An old aniline violet swatch vanished entirely in Gurney's fading test, and violets, yellows and magentas remain among the most fugitive colors [33]. Greenfield notes that violet paints used by Van Gogh and Gauguin have faded toward pale blue and lavender white [34]."
+    },
+    {
+      "id": "culture",
+      "title": "Penance, half-mourning and bishops",
+      "body": "In the Latin church violet is the color of penance, Advent and Lent, and Pastoureau notes that it became the color of bishops only late [2]. Medieval liturgists treated violet and indigo as kinds of black for penance and mourning [35]. In 1495 Pope Alexander VI's master of ceremonies stopped him wearing white in a procession against a flood, since white meant joy, and violet was used instead [35]. Goethe joked that a bishop's violet restlessly aspires to a cardinal's red [36].\n\nViolet also became the color that comes after black. In Victorian England widows moved, after two years of matte black, into half-mourning in heliotrope and other soft purples [37]. Goethe observed that older women favored violet, and Kandinsky called it a cooled red, sad and ailing, though both were giving opinions rather than findings [36][45]. Rome used the flower differently: violets, which wilt quickly, were laid at funerals for the brevity of life, and by the end of the first century Roman matrons wore violet beside blue and green [38].\n\nTastes are not fixed, and surveys disagree. Birren pooled studies from the 1920s to the 1940s that placed violet fourth of six hues in adult preference, after blue, red and green [40]. Pastoureau reports French polls in which violet is the most disliked color after brown [2]."
+    },
+    {
+      "id": "painting",
+      "title": "Violettomania",
+      "body": "Violet became a painters' quarrel in the 1870s [41]. The Impressionists held that shadows are colored, never simply black, and that the shadow cast by yellow sunlight takes its complement, violet [41]. Critics mocked the result as violettomania, and Huysmans for a time spoke of indigomania, as if the painters shared a disease [42][3]. Some reviewers suggested an afterimage from staring at sunny fields, or an ability to see ultraviolet; these were jibes, not findings [41].\n\nBooks disagree on who declared that fresh air is violet: St Clair gives the line to Édouard Manet in 1881, Ball to Claude Monet [41][42]. The observation was not new. Goethe and Delacroix had both noted violet shadows, and Delacroix's journal records that the shadows of people walking on sand look violet [42][43]. Look for it on a sunny beach or a snowfield: shadows beside warm light lean toward violet [43].\n\nIn practice the Impressionists mostly made their mauves by glazing cobalt blue or ultramarine with red lake, and used the new cobalt and manganese violets sparingly, Monet more than Renoir [42]. Gage counts cobalt violet among Monet's newest pigments [43]. American viewers balked at the violet shadows, and the dealer Paul Durand-Ruel explained that France simply had more violet in its shadows [11]. By 1937 Matisse kept two cobalt violets on a palette of seventeen colors [43].\n\nYellow and violet became the textbook pair. Goethe wrote that yellow demands red-blue, and Chevreul advised gardeners to plant yellow beside violet [36][56]. Gurney cautions that the pairing depends on the system: on the painter's wheel yellow's complement is violet, but in afterimages blue sits opposite yellow [46]."
+    },
+    {
+      "id": "gems",
+      "title": "In stones",
+      "body": "[[amethyst|Amethyst]] is violet's gem, and its Greek name means not intoxicated, from a power once ascribed to the stone [25]. A report from Tavernier's day describes the rough stone behind the French court's famous blue diamond, later the Hope, as *un beau violet*, just over 110 metric carats, part of a parcel sold to Louis XIV [47]. Finlay notes that sapphires lean toward violet where spinels lean green, and that tanzanite, a violet-blue stone found near Kilimanjaro in 1967, is said to come closest to a Kashmir sapphire [47]. Afghan miners rank the violet-tinged grade of [[lapis-lazuli|lapis]], which they call *surpar*, above the rest [48]."
+    },
+    {
+      "id": "swatch",
+      "title": "Which violet?",
+      "body": "The violet on this page, #8000FF, is a fully saturated screen color between blue and magenta, and ISCC-NBS files it as vivid purple, 11.4 units away [49]. Its nearest named neighbors are [[vivid-purple]] at 3.7 units, [[blurple]] at 3.9 and [[blue-violet]] at 4.2 [49].\n\nThe CSS keyword `violet` is a different color entirely [3][49]. Inherited from the X11 color list, it is #EE82EE, a pale pinkish lilac 31 units from this swatch and closer to [[orchid]] than to anything in a rainbow [3][49]. Darker cousins in our library include [[dark-violet]] and [[indigo]] [49]. [[purple]] is the mixture Ridgway wanted kept apart [5]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our archive of 23,781 has an area color within ten CIEDE2000 units of this violet [50]. The nearest, 14.5 units away, is Monet's [[art:aic-16571|Arrival of the Normandy Train, Gare Saint-Lazare]] (1877), with Matisse's [[art:aic-27984|Woman before an Aquarium]] (1921) just behind [50]. The CSS violet fares no better: its nearest painting, 13.3 units off, is Leonardo's [[art:commons-Q563727|Virgin and Child with Saint Anne]] [50].\n\nEven the paint-tube color is scarce. A color within six units of [[manganese-violet]] covers at least five per cent of the canvas in just one painting here, Paul Signac's [[art:commons-Q17491415|Woman with a Parasol]] of 1893 [50]. Two caveats travel with these numbers: we record only six area colors per painting, so a small violet accent never registers, and these are photographs of aged, varnished paintings, where a color match is not a pigment test [50]. Faded aniline violets may now photograph as blue or lavender [34].\n\nIn Google Books the word *violet* is printed most around 1929 and falls to about 30 per cent of that level by 1980, a count that includes the flower, the name and ultraviolet [51]. *Purple* peaked a century earlier, around 1822 [51]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "blue-violet",
-   "dark-violet",
-   "vivid-violet",
-   "manganese-violet",
-   "red-violet",
-   "violet-blue"
-  ],
-  "disambiguation": [
-   {
-    "slug": "purply-pink",
-    "gloss": "closest named color to the CSS keyword violet (#EE82EE), a pale pinkish lilac far from this swatch"
-   },
-   {
-    "slug": "purple",
-    "gloss": "a mixture of red and blue light, not a spectral color"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "violet"
-   },
-   {
-    "lang": "de",
-    "name": "Violett (Ostwald's wartime word: Veil)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed (six area colors per painting)",
-  "match": {
-   "hex": "#8000FF",
-   "de2000_threshold_checked": 10,
-   "n_within_10": 0,
-   "nearest_de": 14.5
-  },
-  "nearest_paintings": [
-   {
-    "id": "aic-16571",
-    "painter": "Claude Monet",
-    "year": 1877,
-    "de": 14.5
-   },
-   {
-    "id": "aic-27984",
-    "painter": "Henri Matisse",
-    "year": 1921,
-    "de": 14.6
-   }
-  ],
-  "css_violet": {
-   "hex": "#EE82EE",
-   "de_to_this": 31.0,
-   "nearest_painting": {
-    "id": "commons-Q563727",
-    "painter": "Leonardo da Vinci",
-    "de": 13.3
-   },
-   "nearest_names": [
-    [
-     "Purply Pink",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "the violet flower",
+      "first_recorded": "the spectral sense in Newton's Opticks (1704); in our color lists, Maerz & Paul (1930)",
+      "source": "Jarman, Chroma, p. 72; Newton, Opticks; data/library.json"
+    },
+    "aka": [
+      "Spectral violet",
+      "Bluish purple",
+      "subniger (medieval Latin, 'half-black')"
     ],
-    [
-     "Orchid",
-     5.6
+    "siblings": [
+      "purple",
+      "indigo",
+      "lavender",
+      "lilac",
+      "mauve",
+      "amethyst"
+    ],
+    "parent": null,
+    "children": [
+      "blue-violet",
+      "dark-violet",
+      "vivid-violet",
+      "manganese-violet",
+      "red-violet",
+      "violet-blue"
+    ],
+    "disambiguation": [
+      {
+        "slug": "ultra-pink",
+        "gloss": "closest named color to the CSS keyword violet (#EE82EE), a pale pinkish lilac far from this swatch"
+      },
+      {
+        "slug": "purple",
+        "gloss": "a mixture of red and blue light, not a spectral color"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "violet"
+      },
+      {
+        "lang": "de",
+        "name": "Violett (Ostwald's wartime word: Veil)"
+      }
     ]
-   ]
   },
-  "manganese_violet": {
-   "hex": "#895C9B",
-   "de2000": 6,
-   "min_cover": 0.05,
-   "n_present": 1,
-   "painting": "commons-Q17491415"
-  },
-  "ngram": {
-   "violet_peak": 1929,
-   "violet_rel_1980": 0.29,
-   "purple_peak": 1822
-  },
-  "measured": {
-   "lch": [
-    40.9,
-    125.0,
-    311.7
-   ],
-   "iscc_nbs": "vivid purple",
-   "iscc_de": 11.4,
-   "nearest": [
-    [
-     "Vivid Purple",
-     3.7
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed (six area colors per painting)",
+    "match": {
+      "hex": "#8000FF",
+      "de2000_threshold_checked": 10,
+      "n_within_10": 0,
+      "nearest_de": 14.5
+    },
+    "nearest_paintings": [
+      {
+        "id": "aic-16571",
+        "painter": "Claude Monet",
+        "year": 1877,
+        "de": 14.5
+      },
+      {
+        "id": "aic-27984",
+        "painter": "Henri Matisse",
+        "year": 1921,
+        "de": 14.6
+      }
     ],
-    [
-     "Purplish Blue",
-     3.9
-    ],
-    [
-     "Blue Violet",
-     4.2
+    "css_violet": {
+      "hex": "#EE82EE",
+      "de_to_this": 31.0,
+      "nearest_painting": {
+        "id": "commons-Q563727",
+        "painter": "Leonardo da Vinci",
+        "de": 13.3
+      },
+      "nearest_names": [
+        [
+          "Purply Pink",
+          2.6
+        ],
+        [
+          "Orchid",
+          5.6
+        ]
+      ]
+    },
+    "manganese_violet": {
+      "hex": "#895C9B",
+      "de2000": 6,
+      "min_cover": 0.05,
+      "n_present": 1,
+      "painting": "commons-Q17491415"
+    },
+    "ngram": {
+      "violet_peak": 1929,
+      "violet_rel_1980": 0.29,
+      "purple_peak": 1822
+    },
+    "measured": {
+      "lch": [
+        40.9,
+        125.0,
+        311.7
+      ],
+      "iscc_nbs": "vivid purple",
+      "iscc_de": 11.4,
+      "nearest": [
+        [
+          "Vivid Purple",
+          3.7
+        ],
+        [
+          "Purplish Blue",
+          3.9
+        ],
+        [
+          "Blue Violet",
+          4.2
+        ]
+      ],
+      "xkcd_violet": {
+        "hex": "#9A0EEA",
+        "de": 4.5
+      }
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 72",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Le petit livre des couleurs, ch. 11",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"violet\", \"Violet\" (X11), \"violettomania\", \"iodo-\", \"ianthin-\", \"brightness\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 247",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature (1912), Prologue (public domain)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Greenaway, Language of Flowers (1884), \"Violet\" (public domain)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Eckstut, What Is Color?, ch. 11 and ch. 32",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Westland, Universal Principles of Color, ch. 88",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Newton, Opticks (1704), bk I, pt II, prop. VI (public domain)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, pp. 176, 184, 206",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Albers, Interaction of Color, p. 43",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 10",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 232",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 7",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 11",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 10 (\"Violet\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Cennini, Il Libro dell'Arte (c. 1400), ch. 42, 73-76 (public domain)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 21,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 13",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 22,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 14",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 23,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 24,
+      "kind": "book",
+      "cite": "Eastaugh et al., Pigment Compendium, \"Cobalt violet\", \"Manganese violet\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 25,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"cobalt violet\", \"manganese violet\", \"gentian violet\", \"amethyst\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 26,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 6",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 27,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 207",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 28,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 6",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 29,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 30,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 7",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 31,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 11",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 32,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, p. 144",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 33,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 96",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 34,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 22",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 35,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, pp. 64, 88",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 36,
+      "kind": "book",
+      "cite": "Goethe, Theory of Colours (1810; Eastlake trans. 1840), paras. 786-791, 809-810, 840-843 (public domain)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 37,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Heliotrope\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 38,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 10 and ch. 14",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 40,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy (1950), ch. 23",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 41,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Violet\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 42,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 16",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 43,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, pp. 179, 192, 227",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 45,
+      "kind": "book",
+      "cite": "Kandinsky, Concerning the Spiritual in Art (1911), ch. VI (public domain)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 46,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 77",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 47,
+      "kind": "book",
+      "cite": "Finlay, Jewels, ch. 16 and ch. 18",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 48,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 8 (\"Blue\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 49,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json, data/graph/names.json; ISCC-NBS 1955, CSS/X11, xkcd), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 50,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (six area colors per painting; CIEDE2000 nearest match, and tools/article_field.py for Manganese Violet, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 51,
+      "kind": "data",
+      "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak (all senses of the word)",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    },
+    {
+      "n": 54,
+      "kind": "book",
+      "cite": "Westland, Universal Principles of Color, ch. 44",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 55,
+      "kind": "book",
+      "cite": "Pastoureau, Yellow: The History of a Color, ch. 12",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 56,
+      "kind": "book",
+      "cite": "Chevreul, The Laws of Contrast of Colour (1839; trans. 1854), paras. 551-553 (public domain)",
+      "loc_kind": "entry",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why did the Impressionists paint shadows violet?",
+      "choices": [
+        "They held that a shadow in yellow sunlight takes its complement, violet",
+        "Their new violet paints were cheaper than black",
+        "They could see into the ultraviolet",
+        "Varnish turned their black shadows violet"
+      ],
+      "answer": "They held that a shadow in yellow sunlight takes its complement, violet",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the rainbow has seven natural bands of color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "What separates violet from purple?",
+      "choices": [
+        "Violet is a single short wavelength; purple needs long and short wavelengths together",
+        "Violet is lighter than purple",
+        "Purple is a spectral color and violet is not",
+        "They are two names for the same hue"
+      ],
+      "answer": "Violet is a single short wavelength; purple needs long and short wavelengths together",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Violet is the only rainbow color named after a flower, and painters had no good violet pigment until cobalt violet in 1859.",
+    "Rembrandt's pale lilac dress for Hendrickje contains no blue at all: white, charcoal and a little red lake.",
+    "Look at shadows on sunlit sand or snow: Delacroix saw violet there, and the Impressionists painted it."
+  ],
+  "words": 2016,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Jarman flower claim attributed to Jarman",
+      "Hope diamond: Finlay credits a Philosophical Transactions paper, not Tavernier, for the violet description; Tavernier omitted the stone"
     ]
-   ],
-   "xkcd_violet": {
-    "hex": "#9A0EEA",
-    "de": 4.5
-   }
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 72",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Le petit livre des couleurs, ch. 11",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"violet\", \"Violet\" (X11), \"violettomania\", \"iodo-\", \"ianthin-\", \"brightness\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 247",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), Prologue (public domain)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Greenaway, Language of Flowers (1884), \"Violet\" (public domain)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Eckstut, What Is Color?, ch. 11 and ch. 32",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Westland, Universal Principles of Color, ch. 88",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Newton, Opticks (1704), bk I, pt II, prop. VI (public domain)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 13",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, pp. 176, 184, 206",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Albers, Interaction of Color, p. 43",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 10",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 232",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 7",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 11",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 10 (\"Violet\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Cennini, Il Libro dell'Arte (c. 1400), ch. 42, 73-76 (public domain)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "book",
-   "cite": "Pastoureau, Blue: The History of a Color, ch. 8",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 21,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 13",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 22,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 14",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 23,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 15",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 24,
-   "kind": "book",
-   "cite": "Eastaugh et al., Pigment Compendium, \"Cobalt violet\", \"Manganese violet\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 25,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"cobalt violet\", \"manganese violet\", \"gentian violet\", \"amethyst\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 26,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 6",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 27,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 207",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 28,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 6",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 29,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 30,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 7",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 31,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 11",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 32,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, p. 144",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 33,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 96",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 34,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 22",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 35,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, pp. 64, 88",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 36,
-   "kind": "book",
-   "cite": "Goethe, Theory of Colours (1810; Eastlake trans. 1840), paras. 786-791, 809-810, 840-843 (public domain)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 37,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Heliotrope\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 38,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 10 and ch. 14",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 40,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy (1950), ch. 23",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 41,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Violet\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 42,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 16",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 43,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, pp. 179, 192, 227",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 45,
-   "kind": "book",
-   "cite": "Kandinsky, Concerning the Spiritual in Art (1911), ch. VI (public domain)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 46,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 77",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 47,
-   "kind": "book",
-   "cite": "Finlay, Jewels, ch. 16 and ch. 18",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 48,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 8 (\"Blue\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 49,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json, data/graph/names.json; ISCC-NBS 1955, CSS/X11, xkcd), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 50,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (six area colors per painting; CIEDE2000 nearest match, and tools/article_field.py for Manganese Violet, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 51,
-   "kind": "data",
-   "cite": "Google Books Ngram, case-insensitive, 5-year smoothing, relative to peak (all senses of the word)",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  },
-  {
-   "n": 54,
-   "kind": "book",
-   "cite": "Westland, Universal Principles of Color, ch. 44",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 55,
-   "kind": "book",
-   "cite": "Pastoureau, Yellow: The History of a Color, ch. 12",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 56,
-   "kind": "book",
-   "cite": "Chevreul, The Laws of Contrast of Colour (1839; trans. 1854), paras. 551-553 (public domain)",
-   "loc_kind": "entry",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why did the Impressionists paint shadows violet?",
-   "choices": [
-    "They held that a shadow in yellow sunlight takes its complement, violet",
-    "Their new violet paints were cheaper than black",
-    "They could see into the ultraviolet",
-    "Varnish turned their black shadows violet"
-   ],
-   "answer": "They held that a shadow in yellow sunlight takes its complement, violet",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the rainbow has seven natural bands of color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "What separates violet from purple?",
-   "choices": [
-    "Violet is a single short wavelength; purple needs long and short wavelengths together",
-    "Violet is lighter than purple",
-    "Purple is a spectral color and violet is not",
-    "They are two names for the same hue"
-   ],
-   "answer": "Violet is a single short wavelength; purple needs long and short wavelengths together",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Violet is the only rainbow color named after a flower, and painters had no good violet pigment until cobalt violet in 1859.",
-  "Rembrandt's pale lilac dress for Hendrickje contains no blue at all: white, charcoal and a little red lake.",
-  "Look at shadows on sunlit sand or snow: Delacroix saw violet there, and the Impressionists painted it."
- ],
- "words": 2017,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Jarman flower claim attributed to Jarman",
-   "Hope diamond: Finlay credits a Philosophical Transactions paper, not Tavernier, for the violet description; Tavernier omitted the stone"
-  ]
- }
 }

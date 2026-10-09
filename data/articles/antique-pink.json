@@ -1,126 +1,126 @@
 {
- "slug": "antique-pink",
- "name": "Antique Pink",
- "hex": "#D47479",
- "names": [
-  "Antique Pink"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Antique Pink is a dusty, warm pink standardized by the German RAL system as RAL 3014, and recorded six years earlier by Maerz and Paul under a different name entirely.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name in the library",
-   "body": "The German RAL color-matching system, in use since 1927, lists this shade as RAL 3014 [1]. Maerz and Paul's 1930 dictionary separately dates the same hue to 1926, plate 3, swatch I 2, under the name \"Vassar Roset\" [1]. Two dictionaries, two different names, for what the library computes as the same color [1].\n\nThe nearest color-graph neighbors are [[candy-pink]] and [[dirty-pink]], tied at 3.0 units away, with [[light-jasper-red]] and [[dusty-rose]] close behind, and [[new-york-pink]] and [[pink-coral]] a touch further at 4.6 and 4.7 [2]. Munsell gives 2.8R 5.9/8.9, a medium-lightness, moderately saturated red-pink [1]. The hex #D47479 is a screen approximation of the RAL chip, which is itself a physical paint sample, not a dye [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this pink in 9 of 23,781 paintings, about 0.04 percent, as photographed [3]. The earliest dated match is a 1400 Italian panel, *A Bishop Saint with a Donor*, from the Cleveland Museum, a floor and not a first, since the archive's early centuries are thin [3]. Later matches cluster in early modernist portraits and florals: Henri Matisse's *Nude with a White Scarf* (1909), Ernst Ludwig Kirchner's *Two Girls under an Umbrella* (1910), and Lovis Corinth's *Iris und Päonien* (1911) [3]. Chinese and German paintings both show a notably higher rate of this pink than the archive average, though the counts are small [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "candy-pink",
-   "dirty-pink",
-   "light-jasper-red",
-   "dusty-rose"
+  "slug": "antique-pink",
+  "name": "Antique Pink",
+  "hex": "#D47479",
+  "names": [
+    "Antique Pink"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 9,
-  "measured": {
-   "lch": [
-    59.8,
-    40.5,
-    20.4
-   ],
-   "nearest": [
-    [
-     "Candy Pink",
-     3.0
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Antique Pink is a dusty, warm pink standardized by the German RAL system as RAL 3014, and recorded six years earlier by Maerz and Paul under a different name entirely.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name in the library",
+      "body": "The German RAL color-matching system, in use since 1927, lists this shade as RAL 3014 [1]. Maerz and Paul's 1930 dictionary separately dates the same hue to 1926, plate 3, swatch I 2, under the name \"Vassar Roset\" [1]. Two dictionaries, two different names, for what the library computes as the same color [1].\n\nThe nearest color-graph neighbors are [[candy-pink]] and [[old-rose]], tied at 3.0 units away, with [[light-jasper-red]] and [[dusty-rose]] close behind, and [[new-york-pink]] and [[pink-coral]] a touch further at 4.6 and 4.7 [2]. Munsell gives 2.8R 5.9/8.9, a medium-lightness, moderately saturated red-pink [1]. The hex #D47479 is a screen approximation of the RAL chip, which is itself a physical paint sample, not a dye [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this pink in 9 of 23,781 paintings, about 0.04 percent, as photographed [3]. The earliest dated match is a 1400 Italian panel, *A Bishop Saint with a Donor*, from the Cleveland Museum, a floor and not a first, since the archive's early centuries are thin [3]. Later matches cluster in early modernist portraits and florals: Henri Matisse's *Nude with a White Scarf* (1909), Ernst Ludwig Kirchner's *Two Girls under an Umbrella* (1910), and Lovis Corinth's *Iris und Päonien* (1911) [3]. Chinese and German paintings both show a notably higher rate of this pink than the archive average, though the counts are small [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "candy-pink",
+      "old-rose",
+      "light-jasper-red",
+      "dusty-rose"
     ],
-    [
-     "Dirty Pink",
-     3.0
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 9,
+    "measured": {
+      "lch": [
+        59.8,
+        40.5,
+        20.4
+      ],
+      "nearest": [
+        [
+          "Candy Pink",
+          3.0
+        ],
+        [
+          "Dirty Pink",
+          3.0
+        ]
+      ]
+    },
+    "iscc": {
+      "name": "deep pink",
+      "de": 3.5
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which standards body uses the number RAL 3014 for Antique Pink?",
+      "choices": [
+        "The German RAL system",
+        "Pantone",
+        "Crayola",
+        "ISCC-NBS"
+      ],
+      "answer": "The German RAL system",
+      "kind": "pick"
+    },
+    {
+      "q": "What name did Maerz and Paul give this same color in 1926?",
+      "choices": [
+        "Vassar Roset",
+        "Candy Pink",
+        "Antique Rose",
+        "Puce"
+      ],
+      "answer": "Vassar Roset",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "RAL and Maerz and Paul gave the same pink two completely different names, a year apart."
+  ],
+  "words": 260,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "iscc": {
-   "name": "deep pink",
-   "de": 3.5
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930, Ridgway 1912, ISCC-NBS 1955, RAL entries",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which standards body uses the number RAL 3014 for Antique Pink?",
-   "choices": [
-    "The German RAL system",
-    "Pantone",
-    "Crayola",
-    "ISCC-NBS"
-   ],
-   "answer": "The German RAL system",
-   "kind": "pick"
-  },
-  {
-   "q": "What name did Maerz and Paul give this same color in 1926?",
-   "choices": [
-    "Vassar Roset",
-    "Candy Pink",
-    "Antique Rose",
-    "Puce"
-   ],
-   "answer": "Vassar Roset",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "RAL and Maerz and Paul gave the same pink two completely different names, a year apart."
- ],
- "words": 260,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Nearest-neighbor claim (name and/or distance) in the 'name' section and field.measured.nearest did not match data/graph/edges-*.json 'la' (the cited color-graph computation); corrected to the true nearest colors and distances, and updated aside.siblings to match.",
-   "lint 2026-10-09"
-  ]
- }
 }

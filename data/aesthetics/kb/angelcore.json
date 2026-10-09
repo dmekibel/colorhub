@@ -1,0 +1,50 @@
+{
+ "id": "angelcore",
+ "name": "Angelcore",
+ "lineage": {
+  "influenced_by": [
+   "Renaissance religious painting",
+   "soft-focus celestial imagery"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2019–present"
+ ],
+ "places": [
+  "Tumblr/Pinterest"
+ ],
+ "garments": [
+  "flowing white fabric",
+  "feather and halo motifs",
+  "gold accents"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "nothing specific; a soft, devotional, pale-and-gold mood built from religious-art imagery stripped of its original context.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Cherubcore",
+  "decade_of_origin": "Late 2010s",
+  "key_motifs": "Angels, cherubs, wings, halos, doves, soft clouds, sunbeams, glitter",
+  "key_colours": "White, gold, light blue, light yellow, pastel pink",
+  "related_aesthetics": "BaroqueCoquetteCottagecoreDevilcore (opposite)EtherealFairycoreHellenicNeoclassicismRococo",
+  "key_values": "Beauty, benevolence, tranquility, unearthliness, purity, gentleness"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Angelcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 80% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

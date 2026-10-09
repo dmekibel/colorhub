@@ -7,17 +7,17 @@
  ],
  "tier": "descriptive",
  "depth": "brief",
- "lede": "Purplish Blue is a vivid violet-blue, the standard-spelling twin of [[purpleish-blue]] from the same 2010 xkcd color survey.",
+ "lede": "Purplish Blue is a vivid violet-blue, the standard-spelling twin of [[blurple]] from the same 2010 xkcd color survey.",
  "sections": [
   {
    "id": "name",
    "title": "The standard spelling of a compound",
-   "body": "The survey recorded both \"purplish\" and \"purpleish\" as separate entries over the same base colors, so this name and [[purpleish-blue]] are near-duplicates, 4.9 units apart [1]. No earlier dictionary or dye name is documented for either; 2010 is the only source on file [1]. The ISCC-NBS system would class it a vivid violet, 10.4 units off [1].\n\nIts nearest named neighbor is [[burple]], 3.1 units away and duller [2]. [[light-royal-blue]] sits almost the same shade, and [[violet]] is close as well, at 3.9 units [2]."
+   "body": "The survey recorded both \"purplish\" and \"purpleish\" as separate entries over the same base colors, so this name and [[blurple]] are near-duplicates, 4.9 units apart [1]. No earlier dictionary or dye name is documented for either; 2010 is the only source on file [1]. The ISCC-NBS system would class it a vivid violet, 10.4 units off [1].\n\nIts nearest named neighbor is [[blurple]], 3.1 units away and duller [2]. [[vibrant-blue]] sits almost the same shade, and [[violet]] is close as well, at 3.9 units [2]."
   },
   {
    "id": "field",
    "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive matches this color across even a small share of its canvas, as photographed [3]. Its chroma is high enough that a close match on an aged, varnished canvas would be unusual [3]. The absence describes this archive, not painting generally [3]."
+   "body": "No painting in our 23,781-painting archive matches this color across even a small share of its canvas, as photographed [3]. Its chroma is high enough that a close match on an aged, varnished canvas would be unusual [3]. The absence describes this archive, not painting generally, and is not evidence that painters avoided such blues [3]."
   }
  ],
  "aside": {
@@ -28,10 +28,9 @@
   },
   "aka": [],
   "siblings": [
-   "burple",
-   "light-royal-blue",
-   "violet",
-   "blue-purple"
+   "blurple",
+   "vibrant-blue",
+   "violet"
   ],
   "parent": "blue",
   "children": [],
@@ -102,7 +101,7 @@
  "openers": [
   "Purplish Blue and Purpleish Blue are near-duplicate survey names for almost the same hue."
  ],
- "words": 151,
+ "words": 157,
  "status": "checked",
  "checked": {
   "by": "writer",

@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Dusty and old",
-   "body": "St Clair defines old rose as a dusty pink with blue undertones [1]; the two names belong to one family with [[dusty-rose]] and [[antique-pink]]. The swatch is in the ISCC-NBS 1955 list as block 29 and in Ridgway's 1912 atlas, and its nearest ISCC-NBS name is \"dark pink\", 4.8 units away [2]. That makes it a close neighbor of [[dark-pink]], with grey added."
+   "body": "St Clair defines old rose as a dusty pink with blue undertones [1]; the two names belong to one family with [[dusty-rose]] and [[antique-pink]]. The swatch is in the ISCC-NBS 1955 list as block 29 and in Ridgway's 1912 atlas, and its nearest ISCC-NBS name is \"dark pink\", 4.8 units away [2]. That makes it a close neighbor of [[ruber]], with grey added."
   },
   {
    "id": "goats",
@@ -133,7 +133,7 @@
  "openers": [
   "Old rose is dusty pink with blue in it; look for the pair in faded silks."
  ],
- "words": 231,
+ "words": 230,
  "status": "checked",
  "checked": {
   "by": "checker",

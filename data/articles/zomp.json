@@ -1,125 +1,125 @@
 {
- "slug": "zomp",
- "name": "Zomp",
- "hex": "#39A78E",
- "names": [
-  "Zomp"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Zomp is a vivid blue-green whose name's origin our sources do not document, close in hue to tsavorite garnet.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Origin undocumented",
-   "body": "Our data files Zomp from Wikipedia's color lists alone, with no date, person or place behind the name [1]. In LCH terms it sits near the Persian-green end of our Greens family [1].\n\nThe nearest look-alikes are [[persian-green]], 3.1 units away, almost the same, and [[jungle-green]], 3.4 units away, more vivid; [[greeny-blue]] follows at 3.7, lighter [2]. Among gems, the closest match is tsavorite, a chromium-green variety of [[gem:garnet|garnet]], only 3.1 units off [2]. Among films, the nearest named match in our data is the deep green of Vertigo (1958), though at 9.8 units it reads only as a distant cousin, not a true match [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The color is rare in our archive, found in just 3 of 23,781 paintings as photographed, rarer than 88 percent of the names we track [3]. The sample is too small for century, painter or role data [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "undocumented in our sources",
-   "source": "ColorHub color library (Wikipedia)"
-  },
-  "aka": [],
-  "siblings": [
-   "persian-green",
-   "jungle-green",
-   "greeny-blue",
-   "keppel"
+  "slug": "zomp",
+  "name": "Zomp",
+  "hex": "#39A78E",
+  "names": [
+    "Zomp"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 3,
-  "pct": 0.01,
-  "rank_pct": 88,
-  "measured": {
-   "lch": [
-    62.0,
-    37.3,
-    174.1
-   ],
-   "nearest": [
-    [
-     "Persian Green",
-     3.1
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Zomp is a vivid blue-green whose name's origin our sources do not document, close in hue to tsavorite garnet.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Origin undocumented",
+      "body": "Our data files Zomp from Wikipedia's color lists alone, with no date, person or place behind the name [1]. In LCH terms it sits near the Persian-green end of our Greens family [1].\n\nThe nearest look-alikes are [[persian-green]], 3.1 units away, almost the same, and [[jungle-green]], 3.4 units away, more vivid; [[jungle-green]] follows at 3.7, lighter [2]. Among gems, the closest match is tsavorite, a chromium-green variety of [[gem:garnet|garnet]], only 3.1 units off [2]. Among films, the nearest named match in our data is the deep green of Vertigo (1958), though at 9.8 units it reads only as a distant cousin, not a true match [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The color is rare in our archive, found in just 3 of 23,781 paintings as photographed, rarer than 88 percent of the names we track [3]. The sample is too small for century, painter or role data [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "undocumented in our sources",
+      "source": "ColorHub color library (Wikipedia)"
+    },
+    "aka": [],
+    "siblings": [
+      "persian-green",
+      "jungle-green",
+      "keppel",
+      "sulphate-green"
     ],
-    [
-     "Jungle Green",
-     3.4
-    ],
-    [
-     "Greeny Blue",
-     3.7
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 3,
+    "pct": 0.01,
+    "rank_pct": 88,
+    "measured": {
+      "lch": [
+        62.0,
+        37.3,
+        174.1
+      ],
+      "nearest": [
+        [
+          "Persian Green",
+          3.1
+        ],
+        [
+          "Jungle Green",
+          3.4
+        ],
+        [
+          "Greeny Blue",
+          3.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (Wikipedia); tier classification \"origin of the name not documented in our data\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike and twin edges, data/graph/edges-z.json",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "True or false: our sources document where the name Zomp comes from.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which gem is Zomp's closest color match?",
+      "choices": [
+        "Tsavorite garnet",
+        "Emerald",
+        "Jade",
+        "Peridot"
+      ],
+      "answer": "Tsavorite garnet",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Zomp is only three paintings deep in our archive, but its closest gem match is tsavorite garnet."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "rank-percentile drift: article said 86%, current data/graph/fieldnotes says 88% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (Wikipedia); tier classification \"origin of the name not documented in our data\"",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub graph: look-alike and twin edges, data/graph/edges-z.json",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "True or false: our sources document where the name Zomp comes from.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which gem is Zomp's closest color match?",
-   "choices": [
-    "Tsavorite garnet",
-    "Emerald",
-    "Jade",
-    "Peridot"
-   ],
-   "answer": "Tsavorite garnet",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Zomp is only three paintings deep in our archive, but its closest gem match is tsavorite garnet."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "rank-percentile drift: article said 86%, current data/graph/fieldnotes says 88% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
-  ]
- },
- "words": 165
+  "words": 165
 }

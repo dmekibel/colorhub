@@ -1,154 +1,154 @@
 {
- "slug": "light-hazel",
- "name": "Light Hazel",
- "hex": "#AA8736",
- "names": [
-  "Light hazel"
- ],
- "tier": "traditional",
- "depth": "brief",
- "lede": "Light Hazel is ColorHub's English rendering of Aokuchiba, a traditional Japanese color whose kanji literally read \"pale\" and \"fallen leaf.\"",
- "sections": [
-  {
-   "id": "name",
-   "title": "Pale fallen leaves",
-   "body": "The Japanese name is *Aokuchiba* (青朽葉), written with kanji that mean \"pale fallen leaf\": a muted, yellow-brown tone named for autumn foliage after its green has faded [1]. It appears among the traditional colors of Japan catalogued on Wikipedia, alongside its near-duplicate crowd-survey cousin [1]. No date in our sources fixes when the name entered use; it is undocumented here, and English speakers meet it only through the xkcd 2010 survey's close relative, \"Dark Mustard,\" a Delta-E of 5.2 away [1]. The nearest colors on file are [[pinchbeck-brown]] and [[dark-tan]], both under 4.5 units from this hex [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this tone, as photographed, in 1,232 of 23,781 paintings, 5.18 percent; within a single canvas it is a distinct area in 898 of them, more common than 89 percent of our named colors [2]. Fritz Thomsen is its most devoted painter, using it in 6 of 18 works here, 6.9 times the baseline rate of the museums those paintings come from [2]. It peaks in the 1400s, at 5.2 percent of that century's 945 paintings, and inside a painting it most often plays an accent across its 898 appearances [2]. The earliest dated match is a 1240 panel by the Master of the Cross 434; the archive's early centuries are thin, so this is a floor, not a first, and a color match in an aged photograph is not proof of any dye or pigment [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the Japanese traditional color Aokuchiba (pale fallen leaf)",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library; Wikipedia, Traditional colors of Japan"
-  },
-  "aka": [
-   "Aokuchiba"
+  "slug": "light-hazel",
+  "name": "Light Hazel",
+  "hex": "#AA8736",
+  "names": [
+    "Light hazel"
   ],
-  "siblings": [
-   "pinchbeck-brown",
-   "dark-tan",
-   "honey-yellow",
-   "oil-green"
+  "tier": "traditional",
+  "depth": "brief",
+  "lede": "Light Hazel is ColorHub's English rendering of Aokuchiba, a traditional Japanese color whose kanji literally read \"pale\" and \"fallen leaf.\"",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Pale fallen leaves",
+      "body": "The Japanese name is *Aokuchiba* (青朽葉), written with kanji that mean \"pale fallen leaf\": a muted, yellow-brown tone named for autumn foliage after its green has faded [1]. It appears among the traditional colors of Japan catalogued on Wikipedia, alongside its near-duplicate crowd-survey cousin [1]. No date in our sources fixes when the name entered use; it is undocumented here, and English speakers meet it only through the xkcd 2010 survey's close relative, \"Dark Mustard,\" a Delta-E of 5.2 away [1]. The nearest colors on file are [[pinchbeck-brown]] and [[pinchbeck-brown]], both under 4.5 units from this hex [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this tone, as photographed, in 1,232 of 23,781 paintings, 5.18 percent; within a single canvas it is a distinct area in 898 of them, more common than 89 percent of our named colors [2]. Fritz Thomsen is its most devoted painter, using it in 6 of 18 works here, 6.9 times the baseline rate of the museums those paintings come from [2]. It peaks in the 1400s, at 5.2 percent of that century's 945 paintings, and inside a painting it most often plays an accent across its 898 appearances [2]. The earliest dated match is a 1240 panel by the Master of the Cross 434; the archive's early centuries are thin, so this is a floor, not a first, and a color match in an aged photograph is not proof of any dye or pigment [2]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Aokuchiba (青朽葉), \"pale fallen leaves\""
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 898,
-  "measured": {
-   "lch": [
-    58.2,
-    47.3,
-    84.6
-   ],
-   "nearest_iscc": [
-    "light yellow",
-    3.7
-   ],
-   "nearest": [
-    [
-     "Pinchbeck Brown",
-     3.9
+  "aside": {
+    "origin": {
+      "named_after": "the Japanese traditional color Aokuchiba (pale fallen leaf)",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library; Wikipedia, Traditional colors of Japan"
+    },
+    "aka": [
+      "Aokuchiba"
     ],
-    [
-     "Dark Tan",
-     4.2
+    "siblings": [
+      "pinchbeck-brown",
+      "honey-yellow",
+      "oil-green",
+      "metallic-sunburst"
     ],
-    [
-     "Honey Yellow",
-     4.3
-    ],
-    [
-     "Oil Green",
-     4.5
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Aokuchiba (青朽葉), \"pale fallen leaves\""
+      }
     ]
-   ]
   },
-  "role_top": {
-   "role": "accent",
-   "pct": 65
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 898,
+    "measured": {
+      "lch": [
+        58.2,
+        47.3,
+        84.6
+      ],
+      "nearest_iscc": [
+        "light yellow",
+        3.7
+      ],
+      "nearest": [
+        [
+          "Pinchbeck Brown",
+          3.9
+        ],
+        [
+          "Dark Tan",
+          4.2
+        ],
+        [
+          "Honey Yellow",
+          4.3
+        ],
+        [
+          "Oil Green",
+          4.5
+        ]
+      ]
+    },
+    "role_top": {
+      "role": "accent",
+      "pct": 65
+    },
+    "painter": {
+      "name": "Fritz Thomsen",
+      "n": 6,
+      "of": 18,
+      "lift": 6.9
+    },
+    "first_seen": {
+      "year": 1240,
+      "painter": "Master of the Cross 434"
+    }
   },
-  "painter": {
-   "name": "Fritz Thomsen",
-   "n": 6,
-   "of": 18,
-   "lift": 6.9
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph: Japanese traditional-color record (jp), xkcd 2010 survey",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What do the kanji in Aokuchiba, the Japanese name behind Light Hazel, literally mean?",
+      "choices": [
+        "Pale fallen leaf",
+        "Autumn river",
+        "Dried persimmon",
+        "Golden grain"
+      ],
+      "answer": "Pale fallen leaf",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources give an exact date when the name Aokuchiba first entered use.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Inside a painting, which role does Light Hazel most often play?",
+      "choices": [
+        "Accent",
+        "Shadow",
+        "Light",
+        "Hidden color"
+      ],
+      "answer": "Accent",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Its Japanese name reads, literally, \"pale fallen leaf.\""
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   },
-  "first_seen": {
-   "year": 1240,
-   "painter": "Master of the Cross 434"
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph: Japanese traditional-color record (jp), xkcd 2010 survey",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What do the kanji in Aokuchiba, the Japanese name behind Light Hazel, literally mean?",
-   "choices": [
-    "Pale fallen leaf",
-    "Autumn river",
-    "Dried persimmon",
-    "Golden grain"
-   ],
-   "answer": "Pale fallen leaf",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources give an exact date when the name Aokuchiba first entered use.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Inside a painting, which role does Light Hazel most often play?",
-   "choices": [
-    "Accent",
-    "Shadow",
-    "Light",
-    "Hidden color"
-   ],
-   "answer": "Accent",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Its Japanese name reads, literally, \"pale fallen leaf.\""
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- },
- "words": 258
+  "words": 258
 }

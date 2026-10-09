@@ -1,0 +1,64 @@
+{
+ "id": "punk",
+ "name": "Punk",
+ "lineage": {
+  "influenced_by": [
+   "garage rock and the Stooges/MC5's raw 1960s-70s sound",
+   "London's economic downturn and unemployment in the mid-1970s"
+  ],
+  "influences": [
+   "riot-grrrl",
+   "grunge",
+   "nu-goth",
+   "scene"
+  ]
+ },
+ "eras": [
+  "1976–1982 (first wave)"
+ ],
+ "places": [],
+ "garments": [
+  "safety pins",
+  "ripped leather",
+  "bleach-stained black fabric",
+  "spray paint"
+ ],
+ "media": [
+  {
+   "title": "Ramones, Ramones (1976)",
+   "note": "the debut album widely credited with codifying the sound"
+  },
+  {
+   "title": "Sex Pistols, Never Mind the Bollocks (1977)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Johnny Ramone",
+  "Malcolm McLaren",
+  "Vivienne Westwood"
+ ],
+ "reacts_against": "progressive rock's musicianly excess and glam rock's polish; punk fashion deliberately looked cheap, torn and self-assembled as a visible rejection of both.",
+ "revivals": [
+  "pop-punk (late 1990s-2000s)",
+  "post-punk revival (early 2000s)"
+ ],
+ "article": "Punk's look was assembled almost as fast as its music. In New York, bands like the Ramones and Television built a stripped-down sound around CBGB from 1974 on, dressing in plain jeans and leather as a reaction against the costume-heavy excess of glam and prog rock. In London at almost the same moment, Malcolm McLaren and Vivienne Westwood's shop SEX supplied a more deliberately confrontational wardrobe — bondage gear, safety pins, ripped and resewn fabric — for the Sex Pistols and the wider scene around them. Both versions shared a core idea: clothing should look handmade, damaged or stolen rather than bought new and pressed, a direct rebuke to a music industry built on polish. The palette followed from the materials available (black leather, bleached or dyed thrift-store fabric, spray-painted slogans) more than from any color theory, which is part of why punk's visual signature has stayed remarkably stable across five decades of later subgenres, even as the music itself splintered into dozens of different sounds.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Punk"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 54% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 89% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

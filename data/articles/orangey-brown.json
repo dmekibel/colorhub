@@ -1,113 +1,113 @@
 {
- "slug": "orangey-brown",
- "name": "Orangey Brown",
- "hex": "#B16002",
- "names": [
-  "Orangey Brown"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Orangey Brown is a deep, rust-toned brown named by plain grammar: the modifier \"orangey\" pushing the base color [[brown]] toward orange.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on an existing color",
-   "body": "*Orangey* softens [[orange]] into a qualifier rather than a color on its own, the same pattern seen in [[orangey-red|Orangey Red]]; paired with *brown*, it marks this as a brown pulled toward orange rather than a new name in its own right [1]. The exact value comes from the 2010 xkcd online color-name survey, and nothing in our sources records who first used the two-word phrase; it reads as ordinary English, not a coined name [1].\n\nThe nearest named look-alike on file is [[brown-orange|Brown Orange]], almost the same shade from the opposite word order [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A close match to this brown appears in 286 of our 23,781 archived paintings, about 1.2 per cent, with the within-painting lens finding it in 156; more common than 67 per cent of our named colors [3]. It most often plays an accent, and Adriaen van Ostade is its most devoted painter here, carrying it in 4 of his 39 archived works [3]. The earliest dated match, from 1240, sits 770 years before the 2010 survey name; that gap is a floor, not a first sighting, as photographed, not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "orangey (a softened orange) + brown",
-   "first_recorded": "2010, in the xkcd color-name survey",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "brown-orange"
+  "slug": "orangey-brown",
+  "name": "Orangey Brown",
+  "hex": "#B16002",
+  "names": [
+    "Orangey Brown"
   ],
-  "parent": "brown",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 156,
-  "n_archive_hits": 286,
-  "measured": {
-   "lch": [
-    49.2,
-    63.4,
-    64.1
-   ],
-   "nearest": [
-    [
-     "Brown Orange",
-     3.5
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Orangey Brown is a deep, rust-toned brown named by plain grammar: the modifier \"orangey\" pushing the base color [[brown]] toward orange.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on an existing color",
+      "body": "*Orangey* softens [[orange]] into a qualifier rather than a color on its own, the same pattern seen in [[scarlet|Orangey Red]]; paired with *brown*, it marks this as a brown pulled toward orange rather than a new name in its own right [1]. The exact value comes from the 2010 xkcd online color-name survey, and nothing in our sources records who first used the two-word phrase; it reads as ordinary English, not a coined name [1].\n\nThe nearest named look-alike on file is [[brown-orange|Brown Orange]], almost the same shade from the opposite word order [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A close match to this brown appears in 286 of our 23,781 archived paintings, about 1.2 per cent, with the within-painting lens finding it in 156; more common than 67 per cent of our named colors [3]. It most often plays an accent, and Adriaen van Ostade is its most devoted painter here, carrying it in 4 of his 39 archived works [3]. The earliest dated match, from 1240, sits 770 years before the 2010 survey name; that gap is a floor, not a first sighting, as photographed, not a pigment test [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "orangey (a softened orange) + brown",
+      "first_recorded": "2010, in the xkcd color-name survey",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "brown-orange"
+    ],
+    "parent": "brown",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 156,
+    "n_archive_hits": 286,
+    "measured": {
+      "lch": [
+        49.2,
+        63.4,
+        64.1
+      ],
+      "nearest": [
+        [
+          "Brown Orange",
+          3.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-o.json): xkcd 2010 crowd-sourced color-name survey",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/o.json), 23,781 paintings, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What role does the word \"orangey\" play in the name Orangey Brown?",
+      "choices": [
+        "It's a modifier pulling brown toward orange, not a name on its own",
+        "It names a specific pigment",
+        "It marks a Japanese traditional color",
+        "It is a painter's surname"
+      ],
+      "answer": "It's a modifier pulling brown toward orange, not a name on its own",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Orangey Brown was first listed in Robert Ridgway's 1912 color guide.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Orangey Brown and Brown Orange, built from the same two words in opposite order, land on almost the same shade."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits found via the batch's src list, but one Paterson dictionary hit exists in color-kb for the generic phrase \"orangey-brown\" as a descriptive adjective, not this specific swatch; not used as a source for that reason."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-o.json): xkcd 2010 crowd-sourced color-name survey",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/o.json), 23,781 paintings, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What role does the word \"orangey\" play in the name Orangey Brown?",
-   "choices": [
-    "It's a modifier pulling brown toward orange, not a name on its own",
-    "It names a specific pigment",
-    "It marks a Japanese traditional color",
-    "It is a painter's surname"
-   ],
-   "answer": "It's a modifier pulling brown toward orange, not a name on its own",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Orangey Brown was first listed in Robert Ridgway's 1912 color guide.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Orangey Brown and Brown Orange, built from the same two words in opposite order, land on almost the same shade."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits found via the batch's src list, but one Paterson dictionary hit exists in color-kb for the generic phrase \"orangey-brown\" as a descriptive adjective, not this specific swatch; not used as a source for that reason."
-  ]
- },
- "words": 204
+  "words": 204
 }

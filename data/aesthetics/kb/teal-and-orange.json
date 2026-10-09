@@ -1,0 +1,41 @@
+{
+ "id": "teal-and-orange",
+ "name": "Teal and orange",
+ "lineage": {
+  "influenced_by": [
+   "film noir's warm/cool contrast",
+   "the rise of digital color grading (DaVinci Resolve and similar tools) in the 2000s"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2000–present (peak overuse mid-2000s–2010s)"
+ ],
+ "places": [
+  "Hollywood post-production"
+ ],
+ "garments": [
+  "not a fashion look — a film color-grading convention"
+ ],
+ "media": [
+  {
+   "title": "O Brother, Where Art Thou? (2000)",
+   "note": "widely cited as the first major film to use an all-digital color-timing pass, helping popularize the technique"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "flatter, less graded film stock color, pushing skin tones (orange) and backgrounds/shadows (teal) toward opposite ends of the color wheel for more pop on a theater or TV screen — a technique later widely criticized by critics and editors as an overused default.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 50% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

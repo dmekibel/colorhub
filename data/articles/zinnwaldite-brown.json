@@ -1,123 +1,123 @@
 {
- "slug": "zinnwaldite-brown",
- "name": "Zinnwaldite Brown",
- "hex": "#2C1608",
- "names": [
-  "Zinnwaldite Brown"
- ],
- "tier": "pigment",
- "depth": "brief",
- "lede": "Zinnwaldite Brown is named for zinnwaldite, a mineral; our sources do not record where the word itself comes from or when the color name entered use.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Mineral, origin undocumented",
-   "body": "ColorHub classifies Zinnwaldite Brown under pigment-and-mineral names because \"zinnwaldite\" is itself a mineral word, but our sources carry no date, place or discovery story for the color name [1]. It is among the darkest browns we track, close to black [1].\n\nThe nearest look-alikes are [[espresso]] and [[black-kite]], both 5.7 units away and lighter with more red; [[pale-black-tone]] follows at 5.8, duller and lighter [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed [3]. A color this close to near-black is easy for a photograph of an aged, varnished canvas to lose into shadow, so the absence says more about the archive's method than about any painter's choices [3]. In LCH terms it measures lightness 10, chroma 15 and hue 51 degrees, a very dark, slightly reddish brown [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the mineral zinnwaldite",
-   "first_recorded": "undocumented in our sources",
-   "source": "ColorHub color library (Wikipedia)"
-  },
-  "aka": [],
-  "siblings": [
-   "espresso",
-   "black-kite",
-   "pale-black-tone",
-   "armada"
+  "slug": "zinnwaldite-brown",
+  "name": "Zinnwaldite Brown",
+  "hex": "#2C1608",
+  "names": [
+    "Zinnwaldite Brown"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    10.0,
-    15.3,
-    51.2
-   ],
-   "nearest": [
-    [
-     "Espresso",
-     5.7
+  "tier": "pigment",
+  "depth": "brief",
+  "lede": "Zinnwaldite Brown is named for zinnwaldite, a mineral; our sources do not record where the word itself comes from or when the color name entered use.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Mineral, origin undocumented",
+      "body": "ColorHub classifies Zinnwaldite Brown under pigment-and-mineral names because \"zinnwaldite\" is itself a mineral word, but our sources carry no date, place or discovery story for the color name [1]. It is among the darkest browns we track, close to black [1].\n\nThe nearest look-alikes are [[espresso]] and [[espresso]], both 5.7 units away and lighter with more red; [[pale-black-tone]] follows at 5.8, duller and lighter [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed [3]. A color this close to near-black is easy for a photograph of an aged, varnished canvas to lose into shadow, so the absence says more about the archive's method than about any painter's choices [3]. In LCH terms it measures lightness 10, chroma 15 and hue 51 degrees, a very dark, slightly reddish brown [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the mineral zinnwaldite",
+      "first_recorded": "undocumented in our sources",
+      "source": "ColorHub color library (Wikipedia)"
+    },
+    "aka": [],
+    "siblings": [
+      "espresso",
+      "pale-black-tone",
+      "armada",
+      "morocco"
     ],
-    [
-     "Black Kite",
-     5.7
-    ],
-    [
-     "Pale Black Tone",
-     5.8
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        10.0,
+        15.3,
+        51.2
+      ],
+      "nearest": [
+        [
+          "Espresso",
+          5.7
+        ],
+        [
+          "Black Kite",
+          5.7
+        ],
+        [
+          "Pale Black Tone",
+          5.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (Wikipedia); tier classification \"pigment, dye or mineral word: zinnwaldite\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges, data/graph/edges-z.json",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is Zinnwaldite Brown named after?",
+      "choices": [
+        "The mineral zinnwaldite",
+        "A German dye works",
+        "A tree bark",
+        "A roasted-coffee trade name"
+      ],
+      "answer": "The mineral zinnwaldite",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources document the date or place behind the name Zinnwaldite Brown.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Zinnwaldite Brown is named for a mineral, but our sources don't say when or where."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Field notes had an invented archive record (3,341 matches, a 1600s peak, a named painter, a 1230 panel) with no backing entry in data/graph/fieldnotes or data/library.json for this slug; replaced with the true n_present=0. The LCH/nearest-neighbor figures were already correct (verified by recomputing from the hex)."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (Wikipedia); tier classification \"pigment, dye or mineral word: zinnwaldite\"",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub graph: look-alike edges, data/graph/edges-z.json",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is Zinnwaldite Brown named after?",
-   "choices": [
-    "The mineral zinnwaldite",
-    "A German dye works",
-    "A tree bark",
-    "A roasted-coffee trade name"
-   ],
-   "answer": "The mineral zinnwaldite",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources document the date or place behind the name Zinnwaldite Brown.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Zinnwaldite Brown is named for a mineral, but our sources don't say when or where."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Field notes had an invented archive record (3,341 matches, a 1600s peak, a named painter, a 1230 panel) with no backing entry in data/graph/fieldnotes or data/library.json for this slug; replaced with the true n_present=0. The LCH/nearest-neighbor figures were already correct (verified by recomputing from the hex)."
-  ]
- },
- "words": 166
+  "words": 165
 }

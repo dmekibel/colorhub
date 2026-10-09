@@ -1,0 +1,56 @@
+{
+ "id": "liminal-space",
+ "name": "Liminal space",
+ "lineage": {
+  "influenced_by": [
+   "found/stock photography of empty institutional spaces",
+   "the Backrooms creepypasta (2019)"
+  ],
+  "influences": [
+   "dreamcore",
+   "weirdcore"
+  ]
+ },
+ "eras": [
+  "c. 2019–present"
+ ],
+ "places": [
+  "empty malls, motel hallways, pool rooms — generic transitional spaces"
+ ],
+ "garments": [
+  "not a fashion look — a photography/image aesthetic"
+ ],
+ "media": [
+  {
+   "title": "The Backrooms (4chan creepypasta, 2019)",
+   "note": "the specific post that popularized the \"liminal space\" feeling as internet horror"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "nothing stylistically — it's built from the uncanny feeling of ordinary transitional spaces (hallways, escalators) emptied of the people that normally justify them.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Liminality, Liminalcore, Liminal aesthetic, Anemoiacore, Liminal Horror",
+  "decade_of_origin": "2000s/Late 2010s",
+  "key_motifs": "Empty indoor/outdoor areas, white noise",
+  "key_colours": "Cream yellow, typical building colors, black and grey for shadows",
+  "related_aesthetics": "After HoursDreamcoreGlitch ArtMizuiroPoolcorePrecisionismSlavic WinterSurrealismTraumacoreUrbancoreVaporwaveWeirdcore",
+  "key_values": "Uncanniness, surreality, nostalgia, familiarity, discomfort, comfort"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Liminal_Space"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 82% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

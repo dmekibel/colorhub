@@ -1,0 +1,44 @@
+{
+ "id": "balletcore",
+ "name": "Balletcore",
+ "lineage": {
+  "influenced_by": [
+   "actual ballet rehearsal wear",
+   "coquette aesthetics"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2022–present"
+ ],
+ "places": [
+  "TikTok, amplified by Sofia Coppola-adjacent fashion coverage"
+ ],
+ "garments": [
+  "leg warmers",
+  "wrap cardigans",
+  "satin ribbon",
+  "ballet flats"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "athleisure's sporty bulk, favoring a soft, fitted, pale-pink rehearsal-wear silhouette instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Balletcore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 87% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

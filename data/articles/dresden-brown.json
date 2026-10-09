@@ -1,136 +1,136 @@
 {
- "slug": "dresden-brown",
- "name": "Dresden Brown",
- "hex": "#8C6B40",
- "names": [
-  "Dresden Brown"
- ],
- "tier": "place",
- "depth": "short",
- "lede": "Dresden Brown is a warm, yellowish brown first recorded by Robert Ridgway in 1912 and later catalogued again by Maerz and Paul, though why either source tied it to the German city of Dresden is undocumented in the sources we have.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A city name, an unexplained choice",
-   "body": "Ridgway's 1912 nomenclature places this hue on plate XV, hue 17 prime, tone k, and the ISCC-NBS system later classified it as a moderate yellowish brown, about 2.3 units from that block's reference color [1]. Maerz and Paul's 1930 dictionary lists the same color, dating its own first recording to 1912 as well, on plate 14 K 8 [1]. Neither source explains the tie to Dresden, long known for its porcelain and decorative arts, so whether the name points to a porcelain glaze, a textile dye, or simply the look of aged clay is undocumented here [1].\n\nThe nearest named colors on file are [[dirt-brown]] and [[dusty-hazel]], at The library also notes [[camel|Camel]] as a close relative in the same family of warm, muted browns [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a close match to this brown in 5,185 of 23,781 paintings, about 21.8 percent, and in 3,079 by the stricter within-painting measure, more common than 99 percent of the named colors we track [2]. Inside those paintings it most often reads as a light tone, 35 percent of the 3,079, rather than a shadow or accent [2]. It peaks in paintings from the 1300s, at 2.4 times the expected rate for that century's museum holdings [2]. Rosa Bonheur is its most devoted painter here, present in 10 of her 24 works in the archive, about 2 to 3 times the baseline for the museums those works come from [2].\n\nThe earliest match in our archive dates to the year 799, with the latest from 1959, 3,772 dated paintings in all, a floor rather than a true first appearance given how thin our earliest centuries are [2]. That is 1,113 years before the name's own earliest record in our sources, 1912: it describes a common, ordinary brown that long predates any Dresden association [1][2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented beyond the place name Dresden, Germany",
-   "first_recorded": "1912 (Ridgway)",
-   "source": "ColorHub color library, Dresden Brown entry"
-  },
-  "aka": [],
-  "siblings": [
-   "dirt-brown",
-   "dusty-hazel",
-   "dull-brown",
-   "mosul"
+  "slug": "dresden-brown",
+  "name": "Dresden Brown",
+  "hex": "#8C6B40",
+  "names": [
+    "Dresden Brown"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 5185,
-  "n_within": 3079,
-  "more_common_than_pct": 99,
-  "century_peak": "1300s, 2.4x expected",
-  "painter": "Rosa Bonheur, 10 of 24 works, 2.0-3.0x baseline",
-  "measured": {
-   "lch": [
-    47.6,
-    30.0,
-    75.2
-   ],
-   "nearest": [
-    [
-     "Dirt Brown",
-     2.8
+  "tier": "place",
+  "depth": "short",
+  "lede": "Dresden Brown is a warm, yellowish brown first recorded by Robert Ridgway in 1912 and later catalogued again by Maerz and Paul, though why either source tied it to the German city of Dresden is undocumented in the sources we have.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A city name, an unexplained choice",
+      "body": "Ridgway's 1912 nomenclature places this hue on plate XV, hue 17 prime, tone k, and the ISCC-NBS system later classified it as a moderate yellowish brown, about 2.3 units from that block's reference color [1]. Maerz and Paul's 1930 dictionary lists the same color, dating its own first recording to 1912 as well, on plate 14 K 8 [1]. Neither source explains the tie to Dresden, long known for its porcelain and decorative arts, so whether the name points to a porcelain glaze, a textile dye, or simply the look of aged clay is undocumented here [1].\n\nThe nearest named colors on file are [[dresden-brown]] and [[dusty-hazel]], at The library also notes [[camel|Camel]] as a close relative in the same family of warm, muted browns [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match to this brown in 5,185 of 23,781 paintings, about 21.8 percent, and in 3,079 by the stricter within-painting measure, more common than 99 percent of the named colors we track [2]. Inside those paintings it most often reads as a light tone, 35 percent of the 3,079, rather than a shadow or accent [2]. It peaks in paintings from the 1300s, at 2.4 times the expected rate for that century's museum holdings [2]. Rosa Bonheur is its most devoted painter here, present in 10 of her 24 works in the archive, about 2 to 3 times the baseline for the museums those works come from [2].\n\nThe earliest match in our archive dates to the year 799, with the latest from 1959, 3,772 dated paintings in all, a floor rather than a true first appearance given how thin our earliest centuries are [2]. That is 1,113 years before the name's own earliest record in our sources, 1912: it describes a common, ordinary brown that long predates any Dresden association [1][2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented beyond the place name Dresden, Germany",
+      "first_recorded": "1912 (Ridgway)",
+      "source": "ColorHub color library, Dresden Brown entry"
+    },
+    "aka": [],
+    "siblings": [
+      "dresden-brown",
+      "dusty-hazel",
+      "dull-brown",
+      "mosul"
     ],
-    [
-     "Dusty hazel",
-     2.9
-    ],
-    [
-     "Dull Brown",
-     3.2
-    ],
-    [
-     "Mosul",
-     3.3
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 5185,
+    "n_within": 3079,
+    "more_common_than_pct": 99,
+    "century_peak": "1300s, 2.4x expected",
+    "painter": "Rosa Bonheur, 10 of 24 works, 2.0-3.0x baseline",
+    "measured": {
+      "lch": [
+        47.6,
+        30.0,
+        75.2
+      ],
+      "nearest": [
+        [
+          "Dirt Brown",
+          2.8
+        ],
+        [
+          "Dusty hazel",
+          2.9
+        ],
+        [
+          "Dull Brown",
+          3.2
+        ],
+        [
+          "Mosul",
+          3.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway 1912 and Maerz and Paul 1930 entries (data/library.json, Dresden Brown)",
+      "loc_kind": null,
+      "url": null,
+      "n": 1
+    },
+    {
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null,
+      "n": 2
+    }
+  ],
+  "questions": [
+    {
+      "q": "True or false: Ridgway or Maerz and Paul explain why this color is named for Dresden.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In our archive, which painter is most associated with Dresden Brown?",
+      "choices": [
+        "Rosa Bonheur",
+        "John Singer Sargent",
+        "Giotto",
+        "Andre Derain"
+      ],
+      "answer": "Rosa Bonheur",
+      "kind": "pick"
+    },
+    {
+      "q": "Dresden Brown's earliest archive match predates its name's first record by how long?",
+      "choices": [
+        "Over a thousand years",
+        "About fifty years",
+        "Under ten years",
+        "It postdates the name"
+      ],
+      "answer": "Over a thousand years",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Dresden Brown is named for the German city, but neither of its two source dictionaries explains why.",
+    "This brown turns up in more than one in five paintings in our archive -- among the most common colors we track."
+  ],
+  "status": "draft",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway 1912 and Maerz and Paul 1930 entries (data/library.json, Dresden Brown)",
-   "loc_kind": null,
-   "url": null,
-   "n": 1
   },
-  {
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null,
-   "n": 2
-  }
- ],
- "questions": [
-  {
-   "q": "True or false: Ridgway or Maerz and Paul explain why this color is named for Dresden.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "In our archive, which painter is most associated with Dresden Brown?",
-   "choices": [
-    "Rosa Bonheur",
-    "John Singer Sargent",
-    "Giotto",
-    "Andre Derain"
-   ],
-   "answer": "Rosa Bonheur",
-   "kind": "pick"
-  },
-  {
-   "q": "Dresden Brown's earliest archive match predates its name's first record by how long?",
-   "choices": [
-    "Over a thousand years",
-    "About fifty years",
-    "Under ten years",
-    "It postdates the name"
-   ],
-   "answer": "Over a thousand years",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Dresden Brown is named for the German city, but neither of its two source dictionaries explains why.",
-  "This brown turns up in more than one in five paintings in our archive -- among the most common colors we track."
- ],
- "status": "draft",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "words": 358
+  "words": 358
 }

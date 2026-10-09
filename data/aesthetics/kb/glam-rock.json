@@ -1,0 +1,55 @@
+{
+ "id": "glam-rock",
+ "name": "Glam Rock",
+ "lineage": {
+  "influenced_by": [
+   "1950s rock and roll showmanship",
+   "British pantomime and music-hall theatrical tradition"
+  ],
+  "influences": [
+   "cybergoth",
+   "e-girl-e-boy"
+  ]
+ },
+ "eras": [
+  "1971–1976"
+ ],
+ "places": [],
+ "garments": [
+  "glitter",
+  "platform boots",
+  "satin and lamé"
+ ],
+ "media": [
+  {
+   "title": "David Bowie, The Rise and Fall of Ziggy Stardust (1972)",
+   "note": "the genre's best-documented single persona/album"
+  }
+ ],
+ "figures": [
+  "David Bowie",
+  "Marc Bolan"
+ ],
+ "reacts_against": "rock music's increasingly serious, denim-and-authenticity-coded late-1960s image, reintroducing theatrical costume, makeup and deliberate artifice as a point of pride rather than embarrassment.",
+ "revivals": [
+  "a visible influence on 1980s new romantic and glam metal styling"
+ ],
+ "article": "Glam rock emerged in Britain around 1971 as a direct rebuke to the denim-and-authenticity aesthetic that had come to dominate rock music by the end of the 1960s. David Bowie's Ziggy Stardust persona — introduced on the 1972 album The Rise and Fall of Ziggy Stardust and the Spiders from Mars — pushed the genre's theatrical, androgynous costuming furthest, blending science-fiction concept with makeup and gender presentation that was genuinely transgressive for mainstream rock at the time. Marc Bolan's T. Rex and Roxy Music built parallel, similarly costume-forward versions of the same impulse, all of them drawing loosely on Britain's older music-hall and pantomime theatrical tradition, where exaggerated makeup and costume were an established, respectable stage convention rather than a rock novelty. Glam's embrace of glitter, platform boots and deliberate artifice left a direct mark on 1980s glam metal (a largely American, harder-rock-oriented descendant) and on the UK's new romantic scene, both of which kept glam's theatricality while dropping much of its original gender-bending edge.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Glam Rock"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 68% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 80% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

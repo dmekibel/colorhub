@@ -1,135 +1,134 @@
 {
- "slug": "sandust",
- "name": "Sandust",
- "hex": "#D6BEAA",
- "names": [
-  "Sandust"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Sandust is a pale greyish tan from the Maerz and Paul dictionary of color, and one of the more frequent screen-color matches in our painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A tan from plate 3",
-   "body": "Maerz and Paul's 1930 dictionary places this hue on plate 3, swatch A9, first recorded in 1927, and the ISCC-NBS circular of 1955 cites the same entry, classing it a moderate yellowish pink [1]. Its Munsell notation is 6.7YR 7.8/2.4, a light, low-chroma hue in the yellow-red family [1]. The books read give no story for the name, and its origin is undocumented here [1].\n\nThe nearest named colors on file are [[tussore]], [[biscuit]] and [[biscuit]], at 3, 3.5 and 3.5 ΔE [1]. It sits close to [[buff]] in our library as well, another pale, low-chroma tan [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, a color within six units of Sandust covers at least one per cent of the canvas in 1,189 paintings, about 5.0 per cent overall, making it more common than 88 per cent of the named colors we track; the within-painting lens finds it in 827 [2]. It peaks in the 1900s, in 101 of 1,674 paintings, present in 6.0 per cent of the 1,674 paintings (101 of them) we hold from that century, 1.7 times the archive's overall rate [2]. It most often plays a light tone, in 42 per cent of its 827 paintings, read by lightness rank within each canvas [2].\n\nIts most devoted painter is Xugu, carrying it in 10 of his 16 archived works, 7.2 times the baseline rate of the museums those works come from [2]. It is also over-represented in Nepal, 8 of 25 paintings, 3.5 times expected, and shares canvases with [[light-brownish-drab|Light Brownish Drab]] far more than chance, a lift of 6.9 across 71 paintings [2]. The earliest dated painting to carry it is from the year 900, by Zhao Guangfu, 1,030 years before the name's own 1930 record, a reminder that the match is a look-alike hue, not proof any particular pigment was used, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "1927 (Maerz and Paul)",
-   "source": "data/library.json; data/graph/nodes-s.json"
-  },
-  "aka": [],
-  "siblings": [
-   "tussore",
-   "biscuit",
-   "vinaceous-buff",
-   "shell-pink"
+  "slug": "sandust",
+  "name": "Sandust",
+  "hex": "#D6BEAA",
+  "names": [
+    "Sandust"
   ],
-  "parent": "brown",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1189,
-  "measured": {
-   "lch": [
-    78.5,
-    14.3,
-    67.9
-   ],
-   "nearest": [
-    [
-     "Tussore",
-     3.0
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Sandust is a pale greyish tan from the Maerz and Paul dictionary of color, and one of the more frequent screen-color matches in our painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A tan from plate 3",
+      "body": "Maerz and Paul's 1930 dictionary places this hue on plate 3, swatch A9, first recorded in 1927, and the ISCC-NBS circular of 1955 cites the same entry, classing it a moderate yellowish pink [1]. Its Munsell notation is 6.7YR 7.8/2.4, a light, low-chroma hue in the yellow-red family [1]. The books read give no story for the name, and its origin is undocumented here [1].\n\nThe nearest named colors on file are [[tussore]], [[biscuit]] and [[biscuit]], at 3, 3.5 and 3.5 ΔE [1]. It sits close to [[buff]] in our library as well, another pale, low-chroma tan [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, a color within six units of Sandust covers at least one per cent of the canvas in 1,189 paintings, about 5.0 per cent overall, making it more common than 88 per cent of the named colors we track; the within-painting lens finds it in 827 [2]. It peaks in the 1900s, in 101 of 1,674 paintings, present in 6.0 per cent of the 1,674 paintings (101 of them) we hold from that century, 1.7 times the archive's overall rate [2]. It most often plays a light tone, in 42 per cent of its 827 paintings, read by lightness rank within each canvas [2].\n\nIts most devoted painter is Xugu, carrying it in 10 of his 16 archived works, 7.2 times the baseline rate of the museums those works come from [2]. It is also over-represented in Nepal, 8 of 25 paintings, 3.5 times expected, and shares canvases with [[light-brownish-drab|Light Brownish Drab]] far more than chance, a lift of 6.9 across 71 paintings [2]. The earliest dated painting to carry it is from the year 900, by Zhao Guangfu, 1,030 years before the name's own 1930 record, a reminder that the match is a look-alike hue, not proof any particular pigment was used, a floor and not a first, since the archive's early centuries are thin [2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "1927 (Maerz and Paul)",
+      "source": "data/library.json; data/graph/nodes-s.json"
+    },
+    "aka": [],
+    "siblings": [
+      "tussore",
+      "biscuit",
+      "shell-pink"
     ],
-    [
-     "Biscuit",
-     3.5
+    "parent": "brown",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1189,
+    "measured": {
+      "lch": [
+        78.5,
+        14.3,
+        67.9
+      ],
+      "nearest": [
+        [
+          "Tussore",
+          3.0
+        ],
+        [
+          "Biscuit",
+          3.5
+        ],
+        [
+          "Vinaceous-Buff",
+          3.5
+        ],
+        [
+          "Shell pink",
+          3.5
+        ]
+      ]
+    },
+    "painters": [
+      {
+        "name": "Xugu",
+        "hits": 10,
+        "n": 16,
+        "lift": 7.2
+      }
     ],
-    [
-     "Vinaceous-Buff",
-     3.5
-    ],
-    [
-     "Shell pink",
-     3.5
+    "company": [
+      {
+        "word": "Light Brownish Drab",
+        "lift": 6.9,
+        "n": 71
+      }
     ]
-   ]
   },
-  "painters": [
-   {
-    "name": "Xugu",
-    "hits": 10,
-    "n": 16,
-    "lift": 7.2
-   }
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): Maerz & Paul 1930 plate 3 A 9, cited by ISCC-NBS Circular 553 (1955); CIEDE2000 nearest-name match",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "company": [
-   {
-    "word": "Light Brownish Drab",
-    "lift": 6.9,
-    "n": 71
-   }
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-s.json, data/library.json): Maerz & Paul 1930 plate 3 A 9, cited by ISCC-NBS Circular 553 (1955); CIEDE2000 nearest-name match",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (data/graph/fieldnotes/s.json)",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "Which painter is most over-represented in paintings carrying Sandust?",
+      "choices": [
+        "Xugu",
+        "Henri Matisse",
+        "John Singer Sargent",
+        "Niels Skovgaard"
+      ],
+      "answer": "Xugu",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Sandust is one of the rarer named colors in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Sandust turns up in about one painting in twenty in our archive, more common than most named colors."
+  ],
+  "words": 366,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "Which painter is most over-represented in paintings carrying Sandust?",
-   "choices": [
-    "Xugu",
-    "Henri Matisse",
-    "John Singer Sargent",
-    "Niels Skovgaard"
-   ],
-   "answer": "Xugu",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Sandust is one of the rarer named colors in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Sandust turns up in about one painting in twenty in our archive, more common than most named colors."
- ],
- "words": 366,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,0 +1,57 @@
+{
+ "id": "postmodern",
+ "name": "Postmodern architecture",
+ "lineage": {
+  "influenced_by": [
+   "a reaction against modernist and Brutalist architecture's severity",
+   "Pop Art's embrace of commercial imagery"
+  ],
+  "influences": [
+   "memphis"
+  ]
+ },
+ "eras": [
+  "c. 1977 (Charles Jencks's writing) – late 1980s"
+ ],
+ "places": [
+  "varied; a genuinely international, media-driven movement"
+ ],
+ "garments": [
+  "not a specific fashion look, though it fed the deliberately clashing color and pattern of 1980s design broadly"
+ ],
+ "media": [
+  {
+   "title": "Charles Jencks, The Language of Post-Modern Architecture (1977)",
+   "note": "the book that named and defined the movement"
+  },
+  {
+   "title": "Michael Graves's Portland Building (1982)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Charles Jencks",
+  "Michael Graves",
+  "Robert Venturi"
+ ],
+ "reacts_against": "modernism's \"less is more\" austerity, reintroducing color, historical ornament and irony on purpose.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Postmodernism"
+  }
+ ],
+ "measured": {
+  "n_images": 2,
+  "n_candidates": 2,
+  "findings": [
+   "light — about 80% of the measured color is pale or near-white",
+   "mostly muted — about 87% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

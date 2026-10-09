@@ -1,127 +1,127 @@
 {
- "slug": "mulberry-crayola",
- "name": "Mulberry (Crayola)",
- "hex": "#C8509B",
- "names": [
-  "Mulberry (Crayola)"
- ],
- "tier": "commercial",
- "depth": "brief",
- "lede": "Mulberry (Crayola) is Crayola's own reddish-purple take on the plain color [[mulberry]], close enough to it to read as almost the same shade.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A brand's own variant",
-   "body": "Our library credits this name to Crayola's own color list, distinguishing the brand's swatch from the plain color word [[mulberry]] it variantly builds on [1]. No first-recorded date survives in the sources we checked [1]. The ISCC-NBS dictionary's nearest block is \"strong reddish purple,\" 7.6 units from that block's centre, a looser match than most named colors get [1].\n\nIts nearest named neighbor is the plain [[mulberry|Mulberry]] itself, only 3.2 units away and read as almost the same color [2]. [[red-violet-crayola|Red-Violet (Crayola)]] sits 3.7 units out, also almost the same, and [[purplish-pink|Purplish Pink]] 4.4 units out [2]. [[frostbite|Frostbite]] sits further out at 5.5 units, more vivid [2]. Measured in LCH it reads lightness 52, chroma 58, a strongly saturated magenta-purple [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive carries this exact color covering at least one percent of its canvas, as photographed [3]. That describes a gap in this particular archive, not a claim that the shade never appears in art; a saturated brand color this close to its name's own swatch is close to screen-only [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "mulberry, as a Crayola brand variant",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library (Crayola; Wikipedia)"
-  },
-  "aka": [],
-  "siblings": [
-   "mulberry",
-   "red-violet-crayola",
-   "purplish-pink",
-   "frostbite"
+  "slug": "mulberry-crayola",
+  "name": "Mulberry (Crayola)",
+  "hex": "#C8509B",
+  "names": [
+    "Mulberry (Crayola)"
   ],
-  "parent": "mulberry",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    52,
-    58,
-    343
-   ],
-   "nearest_iscc": [
-    "strong reddish purple",
-    7.6
-   ],
-   "nearest": [
-    [
-     "Mulberry",
-     3.2
+  "tier": "commercial",
+  "depth": "brief",
+  "lede": "Mulberry (Crayola) is Crayola's own reddish-purple take on the plain color [[mulberry]], close enough to it to read as almost the same shade.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A brand's own variant",
+      "body": "Our library credits this name to Crayola's own color list, distinguishing the brand's swatch from the plain color word [[mulberry]] it variantly builds on [1]. No first-recorded date survives in the sources we checked [1]. The ISCC-NBS dictionary's nearest block is \"strong reddish purple,\" 7.6 units from that block's centre, a looser match than most named colors get [1].\n\nIts nearest named neighbor is the plain [[mulberry|Mulberry]] itself, only 3.2 units away and read as almost the same color [2]. [[red-violet-crayola|Red-Violet (Crayola)]] sits 3.7 units out, also almost the same, and [[pale-magenta|Purplish Pink]] 4.4 units out [2]. [[frostbite|Frostbite]] sits further out at 5.5 units, more vivid [2]. Measured in LCH it reads lightness 52, chroma 58, a strongly saturated magenta-purple [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive carries this exact color covering at least one percent of its canvas, as photographed [3]. That describes a gap in this particular archive, not a claim that the shade never appears in art; a saturated brand color this close to its name's own swatch is close to screen-only [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "mulberry, as a Crayola brand variant",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library (Crayola; Wikipedia)"
+    },
+    "aka": [],
+    "siblings": [
+      "mulberry",
+      "red-violet-crayola",
+      "pale-magenta",
+      "frostbite"
     ],
-    [
-     "Red-Violet (Crayola)",
-     3.7
-    ],
-    [
-     "Purplish Pink",
-     4.4
+    "parent": "mulberry",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        52,
+        58,
+        343
+      ],
+      "nearest_iscc": [
+        "strong reddish purple",
+        7.6
+      ],
+      "nearest": [
+        [
+          "Mulberry",
+          3.2
+        ],
+        [
+          "Red-Violet (Crayola)",
+          3.7
+        ],
+        [
+          "Purplish Pink",
+          4.4
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-m.json): Crayola source, variant parent, ISCC-NBS block",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges for mulberry-crayola (data/graph/edges-m.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What plain color name does Mulberry (Crayola) variantly build on?",
+      "choices": [
+        "Mulberry",
+        "Magenta",
+        "Plum",
+        "Orchid"
+      ],
+      "answer": "Mulberry",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Mulberry (Crayola) appears in a measurable share of our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Mulberry (Crayola) sits only 3.2 units from the plain color Mulberry, close enough to read as almost the same shade."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); archive presence is zero, so field notes are thin by nature of the data."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-m.json): Crayola source, variant parent, ISCC-NBS block",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: look-alike edges for mulberry-crayola (data/graph/edges-m.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What plain color name does Mulberry (Crayola) variantly build on?",
-   "choices": [
-    "Mulberry",
-    "Magenta",
-    "Plum",
-    "Orchid"
-   ],
-   "answer": "Mulberry",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Mulberry (Crayola) appears in a measurable share of our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Mulberry (Crayola) sits only 3.2 units from the plain color Mulberry, close enough to read as almost the same shade."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); archive presence is zero, so field notes are thin by nature of the data."
-  ]
- },
- "words": 196
+  "words": 196
 }

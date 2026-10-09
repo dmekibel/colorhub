@@ -1,137 +1,137 @@
 {
- "slug": "adobe",
- "name": "Adobe",
- "hex": "#BD6C48",
- "names": [
-  "Adobe"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Adobe is the color of sun-dried clay brick, a muted reddish orange-brown; the name is probably borrowed from the brick itself.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A brick's name",
-   "body": "Paterson's dictionary defines adobe as a pinkish red, probably named for the sun-baked clay bricks of Latin America that share the word, and also gives the form adobe red [1]. The word \"probably\" is Paterson's own, and the books read do not trace the name any further [1].\n\nThe color is not the same as a software company's name or the Adobe RGB color space, a wide-gamut standard from 1998 that Westland describes in his entries on gamuts and RGB [2]. The two share a word, nothing else."
-  },
-  {
-   "id": "standards",
-   "title": "On the old charts",
-   "body": "The library finds the color in four systems: Ridgway's 1912 atlas (plate XIV), the 1955 ISCC-NBS blocks, the 1930 Maerz and Paul dictionary, which dates the name to 1922, and the xkcd survey [3]. Ridgway's near-twin is Cinnamon-Rufous, only 1.7 units away [3]. Its nearest everyday name is [[terracotta]], about nine units away [3].\n\nOn screens the swatch is a clay orange; Paterson calls adobe a \"pinkish red\", rosier than this swatch [1][3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The swatch color is more common in museum paintings than most named colors: 310 of 23,781 paintings contain it, about 1.3 per cent [4]. It is over-represented in Raphael, in 5 of 36 paintings, and in Modigliani, in 4 of 18, and in Indian painting, in 41 of 721, especially the Pahari school, 11 of 118 [4]. Skin and brick-red earth pigments are the likely reasons, but our data cannot say; it only shows photographed color, not pigment [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "sun-dried clay brick",
-   "first_recorded": "1922 in Maerz and Paul (as a color name)",
-   "source": "data/library.json; Paterson, A Dictionary of Colour"
-  },
-  "aka": [
-   "adobe red"
+  "slug": "adobe",
+  "name": "Adobe",
+  "hex": "#BD6C48",
+  "names": [
+    "Adobe"
   ],
-  "siblings": [
-   "cinnamon-rufous",
-   "terracotta",
-   "cinnamon"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Adobe is the color of sun-dried clay brick, a muted reddish orange-brown; the name is probably borrowed from the brick itself.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A brick's name",
+      "body": "Paterson's dictionary defines adobe as a pinkish red, probably named for the sun-baked clay bricks of Latin America that share the word, and also gives the form adobe red [1]. The word \"probably\" is Paterson's own, and the books read do not trace the name any further [1].\n\nThe color is not the same as a software company's name or the Adobe RGB color space, a wide-gamut standard from 1998 that Westland describes in his entries on gamuts and RGB [2]. The two share a word, nothing else."
+    },
+    {
+      "id": "standards",
+      "title": "On the old charts",
+      "body": "The library finds the color in four systems: Ridgway's 1912 atlas (plate XIV), the 1955 ISCC-NBS blocks, the 1930 Maerz and Paul dictionary, which dates the name to 1922, and the xkcd survey [3]. Ridgway's near-twin is Cinnamon-Rufous, only 1.7 units away [3]. Its nearest everyday name is [[terracotta]], about nine units away [3].\n\nOn screens the swatch is a clay orange; Paterson calls adobe a \"pinkish red\", rosier than this swatch [1][3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The swatch color is more common in museum paintings than most named colors: 310 of 23,781 paintings contain it, about 1.3 per cent [4]. It is over-represented in Raphael, in 5 of 36 paintings, and in Modigliani, in 4 of 18, and in Indian painting, in 41 of 721, especially the Pahari school, 11 of 118 [4]. Skin and brick-red earth pigments are the likely reasons, but our data cannot say; it only shows photographed color, not pigment [4]."
+    }
   ],
-  "parent": "brown",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-  "match": {
-   "hex": "#BD6C48",
-   "de2000": 6,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "sun-dried clay brick",
+      "first_recorded": "1922 in Maerz and Paul (as a color name)",
+      "source": "data/library.json; Paterson, A Dictionary of Colour"
+    },
+    "aka": [
+      "adobe red"
+    ],
+    "siblings": [
+      "reddish-orange",
+      "terracotta",
+      "cinnamon"
+    ],
+    "parent": "brown",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "n_present": 310,
-  "painters": [
-   [
-    "Raphael",
-    5,
-    36
-   ],
-   [
-    "Amedeo Modigliani",
-    4,
-    18
-   ]
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+    "match": {
+      "hex": "#BD6C48",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 310,
+    "painters": [
+      [
+        "Raphael",
+        5,
+        36
+      ],
+      [
+        "Amedeo Modigliani",
+        4,
+        18
+      ]
+    ],
+    "nearest": [
+      "Terracotta",
+      9.2
+    ]
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 20, \"adobe\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Westland et al., Color: Principles, 'RGB'",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub library (data/library.json): Ridgway 1912 pl. XIV, ISCC-NBS 1955 blocks 54 and 77, Maerz & Paul 1930 pl. 14 D 7, xkcd; CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); data/graph/fieldnotes/a.json",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "nearest": [
-   "Terracotta",
-   9.2
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 20, \"adobe\"",
-   "loc_kind": "entry",
-   "url": null
+  "questions": [
+    {
+      "q": "What is the color probably named after, per Paterson?",
+      "choices": [
+        "Sun-dried bricks",
+        "A Spanish dye",
+        "A software company",
+        "A desert flower"
+      ],
+      "answer": "Sun-dried bricks",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the color is named after the Adobe RGB color space.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The color named for sun-dried brick shows up in 1.3 per cent of the paintings in our archive."
+  ],
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Lede claimed the word entered English for brick first and the color later; only Paterson's hedged 'probably so called after' is supported, reworded",
+      "Removed speculation that the name covered paler brick"
+    ]
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Westland et al., Color: Principles, 'RGB'",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub library (data/library.json): Ridgway 1912 pl. XIV, ISCC-NBS 1955 blocks 54 and 77, Maerz & Paul 1930 pl. 14 D 7, xkcd; CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas); data/graph/fieldnotes/a.json",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is the color probably named after, per Paterson?",
-   "choices": [
-    "Sun-dried bricks",
-    "A Spanish dye",
-    "A software company",
-    "A desert flower"
-   ],
-   "answer": "Sun-dried bricks",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the color is named after the Adobe RGB color space.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The color named for sun-dried brick shows up in 1.3 per cent of the paintings in our archive."
- ],
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Lede claimed the word entered English for brick first and the color later; only Paterson's hedged 'probably so called after' is supported, reworded",
-   "Removed speculation that the name covered paler brick"
-  ]
- },
- "status": "checked",
- "words": 254
+  "status": "checked",
+  "words": 254
 }

@@ -12,7 +12,7 @@
     {
       "id": "name",
       "title": "A vivid build on lilac",
-      "body": "The nearest named colors on file are [[baby-purple]], [[bright-lilac]], [[floral-lavender]] and [[floral-lavender]], at 3.9, 5.6, 6.2 and 6.2 ΔE [2]. Our own library entry for this exact swatch spells the name Liliac rather than Lilac, an older or variant spelling carried over from that survey [2]. The ISCC-NBS system classes the hue as brilliant purple, about 6.7 units from that block's center [1]. Its Munsell notation is 3.2P 6.7/14.4 and its LCH values are lightness 68, chroma 63, hue 311 degrees [1]. In sRGB its components run 196 red, 142 green and 253 blue, with blue leading and red a clear second, the pattern of a purple pulled toward pink rather than blue [1]. See [[lilac]] for the paler flower color this name intensifies."
+      "body": "The nearest named colors on file are [[lavender]], [[bright-lilac]], [[floral-lavender]] and [[floral-lavender]], at 3.9, 5.6, 6.2 and 6.2 ΔE [2]. Our own library entry for this exact swatch spells the name Liliac rather than Lilac, an older or variant spelling carried over from that survey [2]. The ISCC-NBS system classes the hue as brilliant purple, about 6.7 units from that block's center [1]. Its Munsell notation is 3.2P 6.7/14.4 and its LCH values are lightness 68, chroma 63, hue 311 degrees [1]. In sRGB its components run 196 red, 142 green and 253 blue, with blue leading and red a clear second, the pattern of a purple pulled toward pink rather than blue [1]. See [[lilac]] for the paler flower color this name intensifies."
     },
     {
       "id": "field",
@@ -30,9 +30,8 @@
       "Liliac"
     ],
     "siblings": [
-      "baby-purple",
+      "lavender",
       "bright-lilac",
-      "lavender-floral",
       "floral-lavender"
     ],
     "parent": "lilac",
@@ -114,7 +113,7 @@
   "openers": [
     "Our own library spells this swatch Liliac, an older variant of the name Vivid Lilac."
   ],
-  "words": 203,
+  "words": 202,
   "status": "checked",
   "checked": {
     "by": "batch writer",

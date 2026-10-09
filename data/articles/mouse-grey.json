@@ -1,149 +1,149 @@
 {
- "slug": "mouse-grey",
- "name": "Mouse Grey",
- "hex": "#837E70",
- "names": [
-  "Mouse Grey"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Mouse Grey is a muted, warm-leaning grey first recorded by Ridgway in 1886, carried forward through his 1912 plates and the German RAL standard, and paired in our library with the Japanese traditional color Yanaginezumi, \"willow grey.\"",
- "sections": [
-  {
-   "id": "name",
-   "title": "Ridgway, RAL and a willow-grey cousin",
-   "body": "Our library's earliest record is Ridgway's 1886 Nomenclature of Colors, with the same hue carried into his 1912 color atlas at plate LI, hue 15′′′′′ [1]. Maerz and Paul's 1930 dictionary repeats the name, and the German RAL industrial standard lists a close approximation under its own code, RAL 7005 [1]. The ISCC-NBS dictionary of 1955 filed the name itself in block 64, \"brownish gray\"; our own computed nearest block for this exact swatch is also block 64, \"light olive gray,\" 3.6 units from its centre [1]. Our library also pairs the name with the Japanese traditional color Yanaginezumi (柳鼠), literally \"willow grey\"; the plant word differs from the English \"mouse,\" but both land on the same muted, warm grey [1].\n\nIts nearest named neighbors are [[pebble-grey|Pebble Grey]] and [[quaker-drab|Quaker Drab]], each only 3.1 units away and read as almost the same color [2]. [[moss-grey|Moss Grey]] sits 3.7 units out, yellower [2]. Measured in LCH it reads lightness 53, chroma 8, a desaturated warm grey [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 2,260 of 23,781 paintings, about 9.5 percent, as photographed; the within-painting lens finds it in 1,268 [3]. It is more common than 92 percent of the named colors [3]. It peaks in the 1900s, at 8.0 percent of the 1,674 paintings from that century (134 paintings), 1.5 times the expected rate [3]. Inside a painting it most often plays a light, 34 percent of its 1,268 occurrences [3]. Shen Zhou is its most devoted painter, carrying it in 8 of his 12 works here, 5.2 times the baseline rate (4.6 times as photographed) [3]. The earliest archive match dates to the year 1200, 686 years before the name's first record in 1886; that gap marks a look-alike hue in an aged photograph, not proof that the named grey is that old [3]. It shares canvases with Dark Greyish Brown and Pale Mouse Grey more than chance, at 5.4 and 4.6 times the expected rate [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the color of a mouse's coat",
-   "first_recorded": "1886 (Ridgway, Nomenclature of Colors)",
-   "source": "ColorHub color library (Ridgway; RAL; ISCC-NBS; Japanese traditional colors)"
-  },
-  "aka": [
-   "Yanaginezumi"
+  "slug": "mouse-grey",
+  "name": "Mouse Grey",
+  "hex": "#837E70",
+  "names": [
+    "Mouse Grey"
   ],
-  "siblings": [
-   "pebble-grey",
-   "quaker-drab",
-   "moss-grey",
-   "pale-mouse-grey"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Mouse Grey is a muted, warm-leaning grey first recorded by Ridgway in 1886, carried forward through his 1912 plates and the German RAL standard, and paired in our library with the Japanese traditional color Yanaginezumi, \"willow grey.\"",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Ridgway, RAL and a willow-grey cousin",
+      "body": "Our library's earliest record is Ridgway's 1886 Nomenclature of Colors, with the same hue carried into his 1912 color atlas at plate LI, hue 15′′′′′ [1]. Maerz and Paul's 1930 dictionary repeats the name, and the German RAL industrial standard lists a close approximation under its own code, RAL 7005 [1]. The ISCC-NBS dictionary of 1955 filed the name itself in block 64, \"brownish gray\"; our own computed nearest block for this exact swatch is also block 64, \"light olive gray,\" 3.6 units from its centre [1]. Our library also pairs the name with the Japanese traditional color Yanaginezumi (柳鼠), literally \"willow grey\"; the plant word differs from the English \"mouse,\" but both land on the same muted, warm grey [1].\n\nIts nearest named neighbors are [[pebble-grey|Pebble Grey]] and [[pebble-grey|Quaker Drab]], each only 3.1 units away and read as almost the same color [2]. [[moss-grey|Moss Grey]] sits 3.7 units out, yellower [2]. Measured in LCH it reads lightness 53, chroma 8, a desaturated warm grey [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 2,260 of 23,781 paintings, about 9.5 percent, as photographed; the within-painting lens finds it in 1,268 [3]. It is more common than 92 percent of the named colors [3]. It peaks in the 1900s, at 8.0 percent of the 1,674 paintings from that century (134 paintings), 1.5 times the expected rate [3]. Inside a painting it most often plays a light, 34 percent of its 1,268 occurrences [3]. Shen Zhou is its most devoted painter, carrying it in 8 of his 12 works here, 5.2 times the baseline rate (4.6 times as photographed) [3]. The earliest archive match dates to the year 1200, 686 years before the name's first record in 1886; that gap marks a look-alike hue in an aged photograph, not proof that the named grey is that old [3]. It shares canvases with Dark Greyish Brown and Pale Mouse Grey more than chance, at 5.4 and 4.6 times the expected rate [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Yanaginezumi (柳鼠)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 2260,
-  "rank_pct": 92,
-  "peak_century": [
-   1900,
-   1.5
-  ],
-  "role_top": [
-   "light",
-   34
-  ],
-  "top_painter": [
-   "Shen Zhou",
-   5.2
-  ],
-  "measured": {
-   "lch": [
-    53,
-    8,
-    95
-   ],
-   "nearest_iscc": [
-    "light olive gray",
-    3.6
-   ],
-   "nearest": [
-    [
-     "Pebble Grey",
-     3.1
+  "aside": {
+    "origin": {
+      "named_after": "the color of a mouse's coat",
+      "first_recorded": "1886 (Ridgway, Nomenclature of Colors)",
+      "source": "ColorHub color library (Ridgway; RAL; ISCC-NBS; Japanese traditional colors)"
+    },
+    "aka": [
+      "Yanaginezumi"
     ],
-    [
-     "Quaker Drab",
-     3.1
+    "siblings": [
+      "pebble-grey",
+      "moss-grey",
+      "pale-mouse-grey",
+      "concrete-grey"
     ],
-    [
-     "Moss Grey",
-     3.7
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Yanaginezumi (柳鼠)"
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-m.json): Ridgway 1886/1912, RAL, ISCC-NBS, jp field",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: look-alike edges for mouse-grey (data/graph/edges-m.json)",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 2260,
+    "rank_pct": 92,
+    "peak_century": [
+      1900,
+      1.5
+    ],
+    "role_top": [
+      "light",
+      34
+    ],
+    "top_painter": [
+      "Shen Zhou",
+      5.2
+    ],
+    "measured": {
+      "lch": [
+        53,
+        8,
+        95
+      ],
+      "nearest_iscc": [
+        "light olive gray",
+        3.6
+      ],
+      "nearest": [
+        [
+          "Pebble Grey",
+          3.1
+        ],
+        [
+          "Quaker Drab",
+          3.1
+        ],
+        [
+          "Moss Grey",
+          3.7
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Who first recorded Mouse Grey, in 1886?",
-   "choices": [
-    "Ridgway",
-    "Maerz and Paul",
-    "Munsell",
-    "Pantone"
-   ],
-   "answer": "Ridgway",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-m.json): Ridgway 1886/1912, RAL, ISCC-NBS, jp field",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges for mouse-grey (data/graph/edges-m.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Who first recorded Mouse Grey, in 1886?",
+      "choices": [
+        "Ridgway",
+        "Maerz and Paul",
+        "Munsell",
+        "Pantone"
+      ],
+      "answer": "Ridgway",
+      "kind": "pick"
+    },
+    {
+      "q": "What does Yanaginezumi, the Japanese traditional color paired with Mouse Grey, literally mean?",
+      "choices": [
+        "Willow grey",
+        "Rain grey",
+        "Ash grey",
+        "Stone grey"
+      ],
+      "answer": "Willow grey",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Mouse Grey's earliest record, 1886, predates by 686 years the archive's earliest matching painting, a sign the hue is older than the name."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); facts drawn from the graph, library and archive fieldnotes only."
+    ]
   },
-  {
-   "q": "What does Yanaginezumi, the Japanese traditional color paired with Mouse Grey, literally mean?",
-   "choices": [
-    "Willow grey",
-    "Rain grey",
-    "Ash grey",
-    "Stone grey"
-   ],
-   "answer": "Willow grey",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Mouse Grey's earliest record, 1886, predates by 686 years the archive's earliest matching painting, a sign the hue is older than the name."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); facts drawn from the graph, library and archive fieldnotes only."
-  ]
- },
- "words": 365
+  "words": 365
 }

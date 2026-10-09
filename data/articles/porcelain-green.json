@@ -1,116 +1,116 @@
 {
- "slug": "porcelain-green",
- "name": "Porcelain Green",
- "hex": "#4F8582",
- "names": [
-  "Porcelain Green"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Porcelain Green is a muted, blue-leaning teal named for the glaze colors of Chinese porcelain, one of Ridgway's 1912 color standards.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A glaze color, standardized",
-   "body": "The name points to the teal and celadon-toned glazes used on Chinese porcelain, a color family potters had refined for centuries before Ridgway fixed one step of it as a naturalist's standard [1]. This shade is plate XXXIII, hue 39'', tone i, of Ridgway's 1912 color standards, read from a scan of an aged plate [1]. The 1955 ISCC-NBS system lists the same area as block 144, \"light green,\" about 7.2 units from this exact shade, a wider gap than most of Ridgway's names show against their ISCC-NBS match [1]. Its Munsell notation is 6.2BG 5.1/3.8 [1].\n\nThe nearest named colors on file are [[mint-turquoise]], [[wintergreen-dream]], [[jasper-green]] and [[dusty-teal]], at 2.8, 3.6, 4 and 5.3 ΔE [1]. Which porcelain tradition or glaze the name was drawn from is undocumented in the books we hold [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, this teal appears in 103, about 0.43 percent, rarer than 51 percent of our named colors [2]. It peaks in the 1900s, in 11 of 1,674 paintings, at 3.1 times the expected rate, and it is most over-represented in paintings from France, at 2.3 times the expected rate [2]. Inside a painting it most often plays a hidden color, in 42 percent of its matched paintings, rather than a light or an accent [2].\n\nThe earliest match is a 1445 panel by Domenico Veneziano, over four and a half centuries before Ridgway's 1912 name, so that early hit is a look-alike hue in an aged photograph, not a trace of porcelain glaze, a floor and not a first, since the archive's early centuries are thin [2]. In printed English the word itself peaks in the 1870s, decades before Ridgway's 1912 standard, which suggests the color concept predates the formal name [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the glaze colors of Chinese porcelain",
-   "first_recorded": "Ridgway, 1912",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "mint-turquoise",
-   "wintergreen-dream",
-   "jasper-green",
-   "dusty-teal"
+  "slug": "porcelain-green",
+  "name": "Porcelain Green",
+  "hex": "#4F8582",
+  "names": [
+    "Porcelain Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 103,
-  "pct_present": 0.43,
-  "rarer_than_pct": 51,
-  "role": "hidden color, 42% of 45 matched paintings",
-  "measured": {
-   "lch": [
-    51.9,
-    19.1,
-    192.2
-   ],
-   "nearest": [
-    [
-     "Mint Turquoise",
-     2.8
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Porcelain Green is a muted, blue-leaning teal named for the glaze colors of Chinese porcelain, one of Ridgway's 1912 color standards.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A glaze color, standardized",
+      "body": "The name points to the teal and celadon-toned glazes used on Chinese porcelain, a color family potters had refined for centuries before Ridgway fixed one step of it as a naturalist's standard [1]. This shade is plate XXXIII, hue 39'', tone i, of Ridgway's 1912 color standards, read from a scan of an aged plate [1]. The 1955 ISCC-NBS system lists the same area as block 144, \"light green,\" about 7.2 units from this exact shade, a wider gap than most of Ridgway's names show against their ISCC-NBS match [1]. Its Munsell notation is 6.2BG 5.1/3.8 [1].\n\nThe nearest named colors on file are [[mint-turquoise]], [[wintergreen-dream]], [[jasper-green]] and [[mint-turquoise]], at 2.8, 3.6, 4 and 5.3 ΔE [1]. Which porcelain tradition or glaze the name was drawn from is undocumented in the books we hold [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, this teal appears in 103, about 0.43 percent, rarer than 51 percent of our named colors [2]. It peaks in the 1900s, in 11 of 1,674 paintings, at 3.1 times the expected rate, and it is most over-represented in paintings from France, at 2.3 times the expected rate [2]. Inside a painting it most often plays a hidden color, in 42 percent of its matched paintings, rather than a light or an accent [2].\n\nThe earliest match is a 1445 panel by Domenico Veneziano, over four and a half centuries before Ridgway's 1912 name, so that early hit is a look-alike hue in an aged photograph, not a trace of porcelain glaze, a floor and not a first, since the archive's early centuries are thin [2]. In printed English the word itself peaks in the 1870s, decades before Ridgway's 1912 standard, which suggests the color concept predates the formal name [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the glaze colors of Chinese porcelain",
+      "first_recorded": "Ridgway, 1912",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "mint-turquoise",
+      "wintergreen-dream",
+      "jasper-green",
+      "deep-bluish-grey-green"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 103,
+    "pct_present": 0.43,
+    "rarer_than_pct": 51,
+    "role": "hidden color, 42% of 45 matched paintings",
+    "measured": {
+      "lch": [
+        51.9,
+        19.1,
+        192.2
+      ],
+      "nearest": [
+        [
+          "Mint Turquoise",
+          2.8
+        ]
+      ]
+    },
+    "iscc": {
+      "block": 144,
+      "name": "moderate bluish green",
+      "de": 7.2
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway 1912, plate XXXIII, hue 39''; ISCC-NBS 1955 block 144",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive field notes for Porcelain Green (n=103)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What tradition does the name Porcelain Green point to?",
+      "choices": [
+        "Chinese porcelain glazes",
+        "French enamel",
+        "Dutch tile paint",
+        "Japanese lacquer"
+      ],
+      "answer": "Chinese porcelain glazes",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: inside a painting, this color most often appears as a bright highlight.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "In printed English, \"porcelain green\" peaked in the 1870s, decades before Ridgway's formal 1912 standard."
+  ],
+  "words": 321,
+  "status": "draft",
+  "checked": {
+    "by": "",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "iscc": {
-   "block": 144,
-   "name": "moderate bluish green",
-   "de": 7.2
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway 1912, plate XXXIII, hue 39''; ISCC-NBS 1955 block 144",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive field notes for Porcelain Green (n=103)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What tradition does the name Porcelain Green point to?",
-   "choices": [
-    "Chinese porcelain glazes",
-    "French enamel",
-    "Dutch tile paint",
-    "Japanese lacquer"
-   ],
-   "answer": "Chinese porcelain glazes",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: inside a painting, this color most often appears as a bright highlight.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "In printed English, \"porcelain green\" peaked in the 1870s, decades before Ridgway's formal 1912 standard."
- ],
- "words": 321,
- "status": "draft",
- "checked": {
-  "by": "",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

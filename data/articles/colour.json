@@ -1,130 +1,130 @@
 {
- "name": "Colour",
- "hex": "#B06B35",
- "names": [
-  "Colour"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Colour is a brownish orange from Maerz and Paul's 1930 dictionary, named with the generic word for hue itself rather than any specific thing.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The word for hue, as a hue",
-   "body": "Maerz and Paul's *A Dictionary of Color* places this brownish orange on plate 12, cell L10, first recorded in 1898 [1]. Unlike most entries in the dictionary, the name is not a material, place or person; it borrows the general word \"colour\" itself, in its British spelling [1]. The same plate area carries related names Wild Honey (1926) and Rose Amber (1927), both warmer variants [1]. The ISCC-NBS 1955 report files the hue as a brownish orange [2].\n\nThe nearest named colors on file are [[copper]], [[india-spice]], [[toffee]] and [[toffee]], at 3.7, 3.9, 4.2 and 4.2 ΔE [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "ColorHub's archive finds this orange-brown in 719 of 23,781 paintings, about 3 percent, as photographed [4]. The match peaks around 1420, with a lift nearly four times the archive's average rate for that decade, and the earliest dated hit is an Egyptian funerary papyrus, a floor and not a first, since the archive's early centuries are thin [4]. Painters including Filippino Lippi, Filippo Lippi, Gerard van Honthorst and Albrecht Dürer carry it often [4]. The count is a computed color match, not a pigment identification [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the generic word \"colour\" itself",
-   "first_recorded": "1898, Maerz & Paul 1930",
-   "source": "Maerz & Paul, A Dictionary of Color"
-  },
-  "aka": [],
-  "siblings": [
-   "copper",
-   "india-spice",
-   "gallstone-yellow",
-   "toffee"
+  "name": "Colour",
+  "hex": "#B06B35",
+  "names": [
+    "Colour"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 719,
-  "match": {
-   "nearest_library": "Sienna",
-   "de2000": 9.9
-  },
-  "measured": {
-   "lch": [
-    52,
-    47,
-    61
-   ],
-   "nearest": [
-    [
-     "Copper",
-     3.7
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Colour is a brownish orange from Maerz and Paul's 1930 dictionary, named with the generic word for hue itself rather than any specific thing.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The word for hue, as a hue",
+      "body": "Maerz and Paul's *A Dictionary of Color* places this brownish orange on plate 12, cell L10, first recorded in 1898 [1]. Unlike most entries in the dictionary, the name is not a material, place or person; it borrows the general word \"colour\" itself, in its British spelling [1]. The same plate area carries related names Wild Honey (1926) and Rose Amber (1927), both warmer variants [1]. The ISCC-NBS 1955 report files the hue as a brownish orange [2].\n\nThe nearest named colors on file are [[copper]], [[india-spice]], [[toffee]] and [[toffee]], at 3.7, 3.9, 4.2 and 4.2 ΔE [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "ColorHub's archive finds this orange-brown in 719 of 23,781 paintings, about 3 percent, as photographed [4]. The match peaks around 1420, with a lift nearly four times the archive's average rate for that decade, and the earliest dated hit is an Egyptian funerary papyrus, a floor and not a first, since the archive's early centuries are thin [4]. Painters including Filippino Lippi, Filippo Lippi, Gerard van Honthorst and Albrecht Dürer carry it often [4]. The count is a computed color match, not a pigment identification [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the generic word \"colour\" itself",
+      "first_recorded": "1898, Maerz & Paul 1930",
+      "source": "Maerz & Paul, A Dictionary of Color"
+    },
+    "aka": [],
+    "siblings": [
+      "copper",
+      "india-spice",
+      "toffee",
+      "earth"
     ],
-    [
-     "India Spice",
-     3.9
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 719,
+    "match": {
+      "nearest_library": "Sienna",
+      "de2000": 9.9
+    },
+    "measured": {
+      "lch": [
+        52,
+        47,
+        61
+      ],
+      "nearest": [
+        [
+          "Copper",
+          3.7
+        ],
+        [
+          "India Spice",
+          3.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 12, cell L10",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library: nearest named colors by CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is unusual about the name \"Colour\" compared to most Maerz and Paul entries?",
+      "choices": [
+        "It borrows the generic word for hue, not a material or place",
+        "It is the only CSS keyword in the dictionary",
+        "It was invented by Ridgway",
+        "It names a chemical pigment"
+      ],
+      "answer": "It borrows the generic word for hue, not a material or place",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Colour's earliest archive match is from the twentieth century.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "One 1930 dictionary color is simply named \"Colour\", borrowing the word for hue itself."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul, A Dictionary of Color (1930), plate 12, cell L10",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS (1955) block entry",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library: nearest named colors by CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is unusual about the name \"Colour\" compared to most Maerz and Paul entries?",
-   "choices": [
-    "It borrows the generic word for hue, not a material or place",
-    "It is the only CSS keyword in the dictionary",
-    "It was invented by Ridgway",
-    "It names a chemical pigment"
-   ],
-   "answer": "It borrows the generic word for hue, not a material or place",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Colour's earliest archive match is from the twentieth century.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "One 1930 dictionary color is simply named \"Colour\", borrowing the word for hue itself."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "slug": "colour",
- "words": 205
+  "slug": "colour",
+  "words": 205
 }

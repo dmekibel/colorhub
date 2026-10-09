@@ -1,0 +1,43 @@
+{
+ "id": "science-academia",
+ "name": "Science Academia",
+ "lineage": {
+  "influenced_by": [
+   "dark academia (applied to lab/STEM settings instead of humanities)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2020–present"
+ ],
+ "places": [
+  "TikTok/Tumblr"
+ ],
+ "garments": [
+  "lab coats",
+  "turtlenecks",
+  "wire-rim glasses"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "dark academia's humanities-only focus, bringing the same moody aesthetic to laboratories and scientific notebooks instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Science_Academia"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 52% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 98% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

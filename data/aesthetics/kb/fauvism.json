@@ -1,0 +1,59 @@
+{
+ "id": "fauvism",
+ "name": "Fauvism",
+ "lineage": {
+  "influenced_by": [
+   "post-impressionism (Van Gogh, Gauguin)",
+   "Neo-Impressionist color theory"
+  ],
+  "influences": [
+   "expressionism"
+  ]
+ },
+ "eras": [
+  "1905–1908 (named at the 1905 Salon d'Automne)"
+ ],
+ "places": [
+  "Paris",
+  "Collioure (southern France)"
+ ],
+ "garments": [
+  "not a fashion look — a painting movement"
+ ],
+ "media": [
+  {
+   "title": "Henri Matisse, Woman with a Hat (1905)",
+   "note": "the painting most associated with the 1905 scandal"
+  }
+ ],
+ "figures": [
+  "Henri Matisse",
+  "André Derain"
+ ],
+ "reacts_against": "naturalistic color entirely — Fauvist painters used color expressively rather than descriptively (a face could be painted green), which is what provoked the critic Louis Vauxcelles to call the room \"les fauves\" (the wild beasts).",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Les Fauves (The Wild Beasts)",
+  "decade_of_origin": "1900s",
+  "key_motifs": "Simplified forms, flattened perspective, vigorous brushwork, landscapes, portraits",
+  "key_colours": "Intense, pure, non-naturalistic colors, often applied directly from the tube; strong and dissonant color contrasts",
+  "related_aesthetics": "Art NouveauCubismExpressionismImpressionismModernismPost-Impressionism",
+  "key_values": "Emotional expression through color, separation of color from descriptive reality, painterly spontaneity"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Fauvism"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a vivid streak — roughly 27% of the color measured is highly saturated"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

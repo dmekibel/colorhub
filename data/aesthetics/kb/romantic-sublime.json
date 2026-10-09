@@ -1,0 +1,61 @@
+{
+ "id": "romantic-sublime",
+ "name": "Romantic sublime",
+ "lineage": {
+  "influenced_by": [
+   "Edmund Burke's writing on the sublime (1757)",
+   "a reaction against Enlightenment rationalism"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 1780–1850"
+ ],
+ "places": [
+  "Germany (Friedrich)",
+  "Britain (Turner)"
+ ],
+ "garments": [
+  "not a fashion look — a landscape-painting movement"
+ ],
+ "media": [
+  {
+   "title": "Caspar David Friedrich, Wanderer above the Sea of Fog (1818)",
+   "note": "the genre's defining image"
+  },
+  {
+   "title": "J.M.W. Turner, late seascapes (1830s–40s)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Caspar David Friedrich",
+  "J.M.W. Turner"
+ ],
+ "reacts_against": "Enlightenment rationalism's faith in order and measurement, favoring awe, scale and the overwhelming power of nature instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Romantic movement, the Romantic era",
+  "decade_of_origin": "Late 18th to mid 19th centuries",
+  "key_motifs": "Nature (especially untamed, wild, and sublime), ruins, the medieval past, folk traditions, nationalism, heroism, the supernatural, exoticism, dreams, intense emotion (awe, horror, terror)",
+  "related_aesthetics": "CostumbrismoDandyGothicOrientalismPre-RaphaeliteSymbolismYoung Poland",
+  "key_values": "Emotion and intuition over reason, individualism, imagination, subjectivity, transcendence, freedom"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Romanticism"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 41% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 50% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

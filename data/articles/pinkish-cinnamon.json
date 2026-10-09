@@ -1,127 +1,126 @@
 {
- "slug": "pinkish-cinnamon",
- "name": "Pinkish Cinnamon",
- "hex": "#E0A074",
- "names": [
-  "Pinkish Cinnamon"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Pinkish Cinnamon names a warm, pale orange-tan by plain modifier grammar, built on [[cinnamon]], and Robert Ridgway's 1912 plates are the earliest dated record our sources carry for it.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on an older plate",
-   "body": "The name follows the modifier pattern \"pinkish\" plus the parent hue [[cinnamon]] [1]. Robert Ridgway's 1912 *Color Standards and Color Nomenclature* lists the swatch on plate XXIX, hue 15′′, tone b [2]. Our library separately notes a near-duplicate, Tan (Crayola), about 1.9 units away by measured color, an unrelated brand name rather than a shared origin [3].\n\nThe nearest named colors by measured distance are [[apricot-buff]], more vivid, and [[light-cinnamon]] and [[vinaceous-cinnamon]], both almost the same shade [4]. [[tumbleweed]] and [[peachbeige]] sit further out, both duller [4]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings finds a match for this tan in 509 of them, about 2.14 percent, more common than 78 percent of the named colors we track, as photographed [5]. It peaks in the 1500s, at 2.0 times the expected rate (66 of 2,231 paintings from then), and inside a painting it plays an accent in 54 percent of cases, ranked by lightness rather than raw area [5]. André Derain is its most devoted painter here, using it in 5 of 22 works, 5.7 times the baseline for the museums those works come from [5]. It is most over-represented in Indian paintings, at 2.7 times the expected rate, and shares canvases with Reddish Orange well beyond chance [5]. The earliest match is dated 1150, 762 years before Ridgway's 1912 plate; the archive's early centuries are thin, so that date is a floor, not a first, and the match is a resemblance in an aged photograph, not proof any pigment existed then [5]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a modifier (\"pinkish\") applied to the parent hue Cinnamon",
-   "first_recorded": "1912, Ridgway's Color Standards and Color Nomenclature",
-   "source": "Ridgway (1912)"
-  },
-  "aka": [],
-  "siblings": [
-   "apricot-buff",
-   "light-cinnamon",
-   "vinaceous-cinnamon"
+  "slug": "pinkish-cinnamon",
+  "name": "Pinkish Cinnamon",
+  "hex": "#E0A074",
+  "names": [
+    "Pinkish Cinnamon"
   ],
-  "parent": "cinnamon",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 509,
-  "rank_pct": 78,
-  "peak_century": {
-   "key": 1500,
-   "lift": 2.0
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Pinkish Cinnamon names a warm, pale orange-tan by plain modifier grammar, built on [[cinnamon]], and Robert Ridgway's 1912 plates are the earliest dated record our sources carry for it.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on an older plate",
+      "body": "The name follows the modifier pattern \"pinkish\" plus the parent hue [[cinnamon]] [1]. Robert Ridgway's 1912 *Color Standards and Color Nomenclature* lists the swatch on plate XXIX, hue 15′′, tone b [2]. Our library separately notes a near-duplicate, Tan (Crayola), about 1.9 units away by measured color, an unrelated brand name rather than a shared origin [3].\n\nThe nearest named colors by measured distance are [[apricot-buff]], more vivid, and [[light-cinnamon]] and [[light-cinnamon]], both almost the same shade [4]. [[tumbleweed]] and [[peachbeige]] sit further out, both duller [4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings finds a match for this tan in 509 of them, about 2.14 percent, more common than 78 percent of the named colors we track, as photographed [5]. It peaks in the 1500s, at 2.0 times the expected rate (66 of 2,231 paintings from then), and inside a painting it plays an accent in 54 percent of cases, ranked by lightness rather than raw area [5]. André Derain is its most devoted painter here, using it in 5 of 22 works, 5.7 times the baseline for the museums those works come from [5]. It is most over-represented in Indian paintings, at 2.7 times the expected rate, and shares canvases with Reddish Orange well beyond chance [5]. The earliest match is dated 1150, 762 years before Ridgway's 1912 plate; the archive's early centuries are thin, so that date is a floor, not a first, and the match is a resemblance in an aged photograph, not proof any pigment existed then [5]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a modifier (\"pinkish\") applied to the parent hue Cinnamon",
+      "first_recorded": "1912, Ridgway's Color Standards and Color Nomenclature",
+      "source": "Ridgway (1912)"
+    },
+    "aka": [],
+    "siblings": [
+      "apricot-buff",
+      "light-cinnamon"
+    ],
+    "parent": "cinnamon",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "role": "accent, 54% of 337 dated matches",
-  "top_painter": "André Derain",
-  "top_country": {
-   "key": "India",
-   "lift": 2.7
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 509,
+    "rank_pct": 78,
+    "peak_century": {
+      "key": 1500,
+      "lift": 2.0
+    },
+    "role": "accent, 54% of 337 dated matches",
+    "top_painter": "André Derain",
+    "top_country": {
+      "key": "India",
+      "lift": 2.7
+    },
+    "first_dated": {
+      "year": 1150
+    }
   },
-  "first_dated": {
-   "year": 1150
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph: modifier-grammar naming (data/graph/nodes-p.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature, plate XXIX, hue 15′′, tone b",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): near-duplicate entry, Tan (Crayola), ΔE 1.9",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, century lift, role, painter and country lift, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which 1912 plate first lists Pinkish Cinnamon in our sources?",
+      "choices": [
+        "Ridgway's plate XXIX",
+        "A Crayola crayon list",
+        "The ISCC-NBS dictionary",
+        "The xkcd 2010 survey"
+      ],
+      "answer": "Ridgway's plate XXIX",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Tan (Crayola) shares the same origin as Pinkish Cinnamon.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pinkish Cinnamon's earliest archive match predates Ridgway's 1912 plate by more than seven centuries."
+  ],
+  "words": 280,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph: modifier-grammar naming (data/graph/nodes-p.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature, plate XXIX, hue 15′′, tone b",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): near-duplicate entry, Tan (Crayola), ΔE 1.9",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, century lift, role, painter and country lift, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which 1912 plate first lists Pinkish Cinnamon in our sources?",
-   "choices": [
-    "Ridgway's plate XXIX",
-    "A Crayola crayon list",
-    "The ISCC-NBS dictionary",
-    "The xkcd 2010 survey"
-   ],
-   "answer": "Ridgway's plate XXIX",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Tan (Crayola) shares the same origin as Pinkish Cinnamon.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pinkish Cinnamon's earliest archive match predates Ridgway's 1912 plate by more than seven centuries."
- ],
- "words": 280,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

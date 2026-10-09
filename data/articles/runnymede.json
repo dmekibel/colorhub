@@ -1,122 +1,122 @@
 {
- "slug": "runnymede",
- "name": "Runnymede",
- "hex": "#24624D",
- "names": [
-  "Runnymede"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Runnymede is a dark, slightly blue-leaning green that Maerz and Paul recorded in 1926; whether it was named for the meadow by the Thames where Magna Carta was sealed in 1215 is undocumented in our sources.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A place name, unconfirmed",
-   "body": "Maerz and Paul's 1930 dictionary gives plate 29 K 9 and dates the name to 1926, with no explanation of the choice [1]. Runnymede is a real place in Surrey, England, most famous as the meadow where King John sealed Magna Carta in 1215, but our library records no statement tying the color name to that history, so the connection is plausible, not confirmed [1]. The nearest ISCC-NBS block by computed distance is 137, dark yellowish green, 7.1 units from the hex #24624D, a loose match [1].\n\nIts closest library neighbor is [[billiard|Billiard]], under five units away, with [[pearl-opal-green|Pearl Opal Green]] and [[dark-green-blue|Dark Green Blue]] a little further toward blue [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color within six units of it covers at least five percent of the canvas in 65 of our 23,781 archive paintings, as photographed, rarer than 55 percent of our named colors [2]. It most often serves as a shadow, 53 percent of the 36 paintings our within-painting lens finds it in, and it peaks in the 1900s, in 11 of 1,674 paintings, at 3.4 times the expected rate [2]. The earliest dated example is a 1530 painting by Cornelis Cornelisz II Buys, 400 years before the name's own 1926 record, a floor set by thin early coverage rather than a true first sighting [2]. It is also most over-represented in paintings from France, at 2.2 times the expected rate [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented; possibly the English meadow of the 1215 Magna Carta",
-   "first_recorded": "1926 (Maerz & Paul, 1930)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "billiard",
-   "pearl-opal-green",
-   "verdure",
-   "dark-green-blue"
+  "slug": "runnymede",
+  "name": "Runnymede",
+  "hex": "#24624D",
+  "names": [
+    "Runnymede"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 36,
-  "n_present_painting_level": 65,
-  "measured": {
-   "lch": [
-    37.2,
-    26.2,
-    166.6
-   ],
-   "nearest": [
-    [
-     "Billiard",
-     4.3
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Runnymede is a dark, slightly blue-leaning green that Maerz and Paul recorded in 1926; whether it was named for the meadow by the Thames where Magna Carta was sealed in 1215 is undocumented in our sources.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A place name, unconfirmed",
+      "body": "Maerz and Paul's 1930 dictionary gives plate 29 K 9 and dates the name to 1926, with no explanation of the choice [1]. Runnymede is a real place in Surrey, England, most famous as the meadow where King John sealed Magna Carta in 1215, but our library records no statement tying the color name to that history, so the connection is plausible, not confirmed [1]. The nearest ISCC-NBS block by computed distance is 137, dark yellowish green, 7.1 units from the hex #24624D, a loose match [1].\n\nIts closest library neighbor is [[billiard|Billiard]], under five units away, with [[pearl-opal-green|Pearl Opal Green]] and [[opal-green|Dark Green Blue]] a little further toward blue [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color within six units of it covers at least five percent of the canvas in 65 of our 23,781 archive paintings, as photographed, rarer than 55 percent of our named colors [2]. It most often serves as a shadow, 53 percent of the 36 paintings our within-painting lens finds it in, and it peaks in the 1900s, in 11 of 1,674 paintings, at 3.4 times the expected rate [2]. The earliest dated example is a 1530 painting by Cornelis Cornelisz II Buys, 400 years before the name's own 1926 record, a floor set by thin early coverage rather than a true first sighting [2]. It is also most over-represented in paintings from France, at 2.2 times the expected rate [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented; possibly the English meadow of the 1215 Magna Carta",
+      "first_recorded": "1926 (Maerz & Paul, 1930)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "billiard",
+      "pearl-opal-green",
+      "verdure",
+      "opal-green"
     ],
-    [
-     "Pearl Opal Green",
-     5.0
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 36,
+    "n_present_painting_level": 65,
+    "measured": {
+      "lch": [
+        37.2,
+        26.2,
+        166.6
+      ],
+      "nearest": [
+        [
+          "Billiard",
+          4.3
+        ],
+        [
+          "Pearl Opal Green",
+          5.0
+        ]
+      ]
+    },
+    "countries": [
+      {
+        "name": "France",
+        "hits": 15,
+        "n": 3443,
+        "lift": 2.2
+      }
     ]
-   ]
   },
-  "countries": [
-   {
-    "name": "France",
-    "hits": 15,
-    "n": 3443,
-    "lift": 2.2
-   }
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz and Paul 1930, plate 29 K 9, first recorded 1926; nearest ISCC-NBS 1955 block 137",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz and Paul 1930, plate 29 K 9, first recorded 1926; nearest ISCC-NBS 1955 block 137",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does our library say about why this green is called Runnymede?",
+      "choices": [
+        "Nothing confirmed; the Magna Carta meadow is a plausible but unconfirmed guess",
+        "It is named for a 1926 painter surnamed Runnymede",
+        "It is confirmed to be named for the English meadow",
+        "It is a Ridgway 1912 coinage"
+      ],
+      "answer": "Nothing confirmed; the Magna Carta meadow is a plausible but unconfirmed guess",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Runnymede is most over-represented in paintings from England.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Runnymede shares its name with the English meadow of Magna Carta, but no source confirms the link."
+  ],
+  "words": 265,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); the Magna Carta place connection is explicitly flagged as unconfirmed, not stated as fact.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What does our library say about why this green is called Runnymede?",
-   "choices": [
-    "Nothing confirmed; the Magna Carta meadow is a plausible but unconfirmed guess",
-    "It is named for a 1926 painter surnamed Runnymede",
-    "It is confirmed to be named for the English meadow",
-    "It is a Ridgway 1912 coinage"
-   ],
-   "answer": "Nothing confirmed; the Magna Carta meadow is a plausible but unconfirmed guess",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Runnymede is most over-represented in paintings from England.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Runnymede shares its name with the English meadow of Magna Carta, but no source confirms the link."
- ],
- "words": 265,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); the Magna Carta place connection is explicitly flagged as unconfirmed, not stated as fact.",
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,107 +1,107 @@
 {
- "slug": "pale-quaker-drab",
- "name": "Pale Quaker Drab",
- "hex": "#9E9A95",
- "names": [
-  "Pale Quaker Drab"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Pale Quaker Drab is a muted taupe-grey, the pale tone Robert Ridgway charted beside the parent color Quaker Drab in his 1912 color atlas.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A pale tone of Quaker Drab",
-   "body": "Pale Quaker Drab puts Ridgway's tone word Pale in front of [[quaker-drab]], the paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. Quaker Drab itself is Ridgway's plate LI, hue 1 quintuple-prime, later filed by the ISCC-NBS dictionary of 1955 in block 265, and Maerz and Paul's 1930 *Dictionary of Color* lists it as first recorded in 1802, the oldest record of any tone in this family [1]. The name nods to the plain grey-brown dress of Quaker dress reform, though Ridgway's dictionary does not spell that out itself [1].\n\nIts nearest named neighbor is [[bluish-grey]], 2.7 units off and close enough on screen to read as the same color [1]; [[light-mouse-grey]] sits 3.1 units away [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 917 of 23,781 paintings, 3.86 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 593 [2]. That makes it more common than 85 percent of the named colors in our library [2]. It peaks in the 1900s, present in 4.8 percent of the 1,674 paintings from that century, 1.7 times the archive's overall rate [2]. Inside a painting it most often plays a light, in 49 percent of its 593 appearances by lightness rank [2].\n\nThe earliest match dates to 1164, a floor and not a first since the archive's early centuries are thin; that is 748 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]. Arnoud van Halen used it most, in 6 of his 50 paintings here, 4.6 times the rate of the museums those works come from, and it is most over-represented in paintings from Norway, 2.3 times the expected rate [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Ridgway's tone system: the pale tone of Quaker Drab",
-   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate LI",
-   "source": "Ridgway 1912; ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "quaker-drab",
-   "bluish-grey",
-   "light-mouse-grey",
-   "platinum-grey"
+  "slug": "pale-quaker-drab",
+  "name": "Pale Quaker Drab",
+  "hex": "#9E9A95",
+  "names": [
+    "Pale Quaker Drab"
   ],
-  "parent": "quaker-drab",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 917,
-  "n_within_painting": 593,
-  "pct_archive": 3.86,
-  "rank_pct": 85,
-  "measured": {
-   "nearest": [
-    [
-     "Bluish Grey",
-     2.7
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Pale Quaker Drab is a muted taupe-grey, the pale tone Robert Ridgway charted beside the parent color Quaker Drab in his 1912 color atlas.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A pale tone of Quaker Drab",
+      "body": "Pale Quaker Drab puts Ridgway's tone word Pale in front of [[pebble-grey]], the paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. Quaker Drab itself is Ridgway's plate LI, hue 1 quintuple-prime, later filed by the ISCC-NBS dictionary of 1955 in block 265, and Maerz and Paul's 1930 *Dictionary of Color* lists it as first recorded in 1802, the oldest record of any tone in this family [1]. The name nods to the plain grey-brown dress of Quaker dress reform, though Ridgway's dictionary does not spell that out itself [1].\n\nIts nearest named neighbor is [[bluish-grey]], 2.7 units off and close enough on screen to read as the same color [1]; [[light-mouse-grey]] sits 3.1 units away [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 917 of 23,781 paintings, 3.86 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 593 [2]. That makes it more common than 85 percent of the named colors in our library [2]. It peaks in the 1900s, present in 4.8 percent of the 1,674 paintings from that century, 1.7 times the archive's overall rate [2]. Inside a painting it most often plays a light, in 49 percent of its 593 appearances by lightness rank [2].\n\nThe earliest match dates to 1164, a floor and not a first since the archive's early centuries are thin; that is 748 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]. Arnoud van Halen used it most, in 6 of his 50 paintings here, 4.6 times the rate of the museums those works come from, and it is most over-represented in paintings from Norway, 2.3 times the expected rate [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Ridgway's tone system: the pale tone of Quaker Drab",
+      "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate LI",
+      "source": "Ridgway 1912; ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "pebble-grey",
+      "bluish-grey",
+      "light-mouse-grey",
+      "platinum-grey"
     ],
-    [
-     "Light Mouse Grey",
-     3.1
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930) and look-alike distances, data/graph/edges-p.json",
-   "loc_kind": null,
-   "url": null
+    "parent": "pebble-grey",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which named color sits closest to Pale Quaker Drab?",
-   "choices": [
-    "Bluish Grey",
-    "Light Mouse Grey",
-    "Platinum Grey"
-   ],
-   "answer": "Bluish Grey",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 917,
+    "n_within_painting": 593,
+    "pct_archive": 3.86,
+    "rank_pct": 85,
+    "measured": {
+      "nearest": [
+        [
+          "Bluish Grey",
+          2.7
+        ],
+        [
+          "Light Mouse Grey",
+          3.1
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: Quaker Drab is the oldest-recorded parent name in this group of pale tones.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930) and look-alike distances, data/graph/edges-p.json",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which named color sits closest to Pale Quaker Drab?",
+      "choices": [
+        "Bluish Grey",
+        "Light Mouse Grey",
+        "Platinum Grey"
+      ],
+      "answer": "Bluish Grey",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Quaker Drab is the oldest-recorded parent name in this group of pale tones.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Quaker Drab, the parent of this pale tone, traces to 1802, the earliest record of any name in its family."
+  ],
+  "words": 317,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "openers": [
-  "Quaker Drab, the parent of this pale tone, traces to 1802, the earliest record of any name in its family."
- ],
- "words": 317,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

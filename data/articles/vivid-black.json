@@ -1,153 +1,153 @@
 {
- "slug": "vivid-black",
- "name": "Vivid black",
- "hex": "#23191E",
- "names": [
-  "Vivid black"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Vivid black is a near-black, violet-tinged neutral that our data pairs with the Japanese traditional name 黒紅 (Kurobeni), literally \"dark red,\" and it is one of the more common colors in our painting archive.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name that reads darker than it translates",
-   "body": "Our source files this hue under the Japanese traditional color list as 黒紅 (Kurobeni), whose literal meaning in our data is \"dark red\" even though the swatch itself reads as a near-black neutral with a faint violet cast [1]. That gap is a translation and categorization quirk carried in our traditional-color sources, not a documented dye difference [1]. The English label \"Vivid black\" is our library's plain descriptive name for the same hex [1].\n\nIts nearest look-alikes are [[pale-black-shade]] and [[pale-black-hue]] (both 2.9 units, almost the same), [[raisin-black]] (5.0, almost the same) and [[continental-blue]] (5.5, lighter) [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 1,134 of 23,781 paintings, about 4.77 percent, as photographed, more common than 90 percent of the named colors we track [3]. It peaks in the 1500s, found in 5.7 percent of the 2,231 paintings we have from then (127 paintings), 1.2 times the expected rate for that century, and plays a shadow tone in 51 percent of the paintings that carry it [3]. George Dawe is its most devoted painter, using it in 18 of his 50 works here, 3.7 times the baseline rate for the museums those works come from [3]. It is most over-represented in paintings from the United Kingdom, at 2.3 times the expected rate, and shares canvases more than chance with Wine Brown and Marigold [3]. The earliest dated match is 1201, a floor set by thin early-century coverage rather than a true first [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a plain descriptive label in our library; the paired Japanese name translates as \"dark red\"",
-   "first_recorded": "undocumented",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "pale-black-shade",
-   "pale-black-hue",
-   "raisin-black",
-   "continental-blue"
+  "slug": "vivid-black",
+  "name": "Vivid black",
+  "hex": "#23191E",
+  "names": [
+    "Vivid black"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Kurobeni (黒紅), literally \"dark red\""
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1134,
-  "rank_pct": 90,
-  "century_peak": {
-   "century": "1500s",
-   "lift": 1.2,
-   "n": 127
-  },
-  "role": {
-   "kind": "shadow",
-   "share": 0.51,
-   "n": 1017
-  },
-  "painters": [
-   [
-    "george-dawe",
-    18,
-    50,
-    3.7
-   ]
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Vivid black is a near-black, violet-tinged neutral that our data pairs with the Japanese traditional name 黒紅 (Kurobeni), literally \"dark red,\" and it is one of the more common colors in our painting archive.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name that reads darker than it translates",
+      "body": "Our source files this hue under the Japanese traditional color list as 黒紅 (Kurobeni), whose literal meaning in our data is \"dark red\" even though the swatch itself reads as a near-black neutral with a faint violet cast [1]. That gap is a translation and categorization quirk carried in our traditional-color sources, not a documented dye difference [1]. The English label \"Vivid black\" is our library's plain descriptive name for the same hex [1].\n\nIts nearest look-alikes are [[pale-black-shade]] and [[pale-black-shade]] (both 2.9 units, almost the same), [[raisin-black]] (5.0, almost the same) and [[continental-blue]] (5.5, lighter) [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 1,134 of 23,781 paintings, about 4.77 percent, as photographed, more common than 90 percent of the named colors we track [3]. It peaks in the 1500s, found in 5.7 percent of the 2,231 paintings we have from then (127 paintings), 1.2 times the expected rate for that century, and plays a shadow tone in 51 percent of the paintings that carry it [3]. George Dawe is its most devoted painter, using it in 18 of his 50 works here, 3.7 times the baseline rate for the museums those works come from [3]. It is most over-represented in paintings from the United Kingdom, at 2.3 times the expected rate, and shares canvases more than chance with Wine Brown and Marigold [3]. The earliest dated match is 1201, a floor set by thin early-century coverage rather than a true first [3]."
+    }
   ],
-  "country": {
-   "name": "United Kingdom",
-   "lift": 2.3,
-   "n": 47
+  "aside": {
+    "origin": {
+      "named_after": "a plain descriptive label in our library; the paired Japanese name translates as \"dark red\"",
+      "first_recorded": "undocumented",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "pale-black-shade",
+      "raisin-black",
+      "continental-blue",
+      "zulu"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Kurobeni (黒紅), literally \"dark red\""
+      }
+    ]
   },
-  "company": [
-   [
-    "wine-brown",
-    4.8
-   ],
-   [
-    "marigold",
-    4.3
-   ]
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1134,
+    "rank_pct": 90,
+    "century_peak": {
+      "century": "1500s",
+      "lift": 1.2,
+      "n": 127
+    },
+    "role": {
+      "kind": "shadow",
+      "share": 0.51,
+      "n": 1017
+    },
+    "painters": [
+      [
+        "george-dawe",
+        18,
+        50,
+        3.7
+      ]
+    ],
+    "country": {
+      "name": "United Kingdom",
+      "lift": 2.3,
+      "n": 47
+    },
+    "company": [
+      [
+        "wine-brown",
+        4.8
+      ],
+      [
+        "marigold",
+        4.3
+      ]
+    ],
+    "first_seen": {
+      "year": 1201
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Japanese traditional color list entry for Kurobeni",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub look-alike graph (data/graph/edges-v.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "first_seen": {
-   "year": 1201
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Japanese traditional color list entry for Kurobeni",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "What does the Japanese name paired with Vivid black (Kurobeni) literally mean?",
+      "choices": [
+        "Dark red",
+        "Steamed chestnut",
+        "Seaweed brown",
+        "Deep indigo"
+      ],
+      "answer": "Dark red",
+      "kind": "pick"
+    },
+    {
+      "q": "Which painter is most devoted to Vivid black in our archive?",
+      "choices": [
+        "George Dawe",
+        "John Singer Sargent",
+        "Paul Cezanne",
+        "Caravaggio"
+      ],
+      "answer": "George Dawe",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Vivid black is one of the rarer colors in our archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Vivid black's paired Japanese name literally translates as \"dark red,\" not black."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub look-alike graph (data/graph/edges-v.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the Japanese name paired with Vivid black (Kurobeni) literally mean?",
-   "choices": [
-    "Dark red",
-    "Steamed chestnut",
-    "Seaweed brown",
-    "Deep indigo"
-   ],
-   "answer": "Dark red",
-   "kind": "pick"
-  },
-  {
-   "q": "Which painter is most devoted to Vivid black in our archive?",
-   "choices": [
-    "George Dawe",
-    "John Singer Sargent",
-    "Paul Cezanne",
-    "Caravaggio"
-   ],
-   "answer": "George Dawe",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Vivid black is one of the rarer colors in our archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Vivid black's paired Japanese name literally translates as \"dark red,\" not black."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- },
- "words": 284
+  "words": 284
 }

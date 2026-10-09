@@ -1,128 +1,128 @@
 {
- "slug": "rich-purple",
- "name": "Rich Purple",
- "hex": "#720058",
- "names": [
-  "Rich Purple"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Rich Purple is a modifier name, \"rich\" attached to the parent color [[purple]], a phrase color books use for the deepest, most saturated purples.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier, not a fixed name",
-   "body": "The name follows one of the library's most common patterns: the modifier \"rich\" placed in front of the parent color, [[purple]] [1]. This exact label is first recorded in 2010, in the xkcd color survey, a large, informal internet survey in which hundreds of thousands of visitors typed their own name for a swatch; the library keeps names that enough people typed the same way [1][4]. The phrase \"rich purple\" itself has long been used descriptively before that survey, outside any naming system: historians use it for the deep purples of murex-dye and archil-dye textiles and for glaze effects achieved by painting a red lake over a blue ground [2][3]. The hex #720058 is a screen approximation only, not a measured dye or pigment [1].\n\nIts nearest library look-alike is [[velvet]], about 2.7 units away in LCH space, read as almost the same color [1].\n\nOther close matches in the library include [[grape-purple]], duller, and [[cellini]], more vivid and lighter [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The automated archive tool used for this project could not compute a usable match count for this hex, so no painting-archive figures are given here [5]. The swatch should be read only as a screen approximation."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the modifier \"rich\" attached to \"purple\"; the phrase has long described deep, saturated purples",
-   "first_recorded": "2010, xkcd color survey, for this exact label",
-   "source": "ColorHub color library (xkcd 2010)"
-  },
-  "aka": [],
-  "siblings": [
-   "velvet",
-   "grape-purple",
-   "cellini"
+  "slug": "rich-purple",
+  "name": "Rich Purple",
+  "hex": "#720058",
+  "names": [
+    "Rich Purple"
   ],
-  "parent": "purple",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub color library",
-  "measured": {
-   "lch": [
-    30,
-    55,
-    340
-   ],
-   "nearest": [
-    [
-     "Velvet",
-     2.7
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Rich Purple is a modifier name, \"rich\" attached to the parent color [[purple]], a phrase color books use for the deepest, most saturated purples.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier, not a fixed name",
+      "body": "The name follows one of the library's most common patterns: the modifier \"rich\" placed in front of the parent color, [[purple]] [1]. This exact label is first recorded in 2010, in the xkcd color survey, a large, informal internet survey in which hundreds of thousands of visitors typed their own name for a swatch; the library keeps names that enough people typed the same way [1][4]. The phrase \"rich purple\" itself has long been used descriptively before that survey, outside any naming system: historians use it for the deep purples of murex-dye and archil-dye textiles and for glaze effects achieved by painting a red lake over a blue ground [2][3]. The hex #720058 is a screen approximation only, not a measured dye or pigment [1].\n\nIts nearest library look-alike is [[velvet]], about 2.7 units away in LCH space, read as almost the same color [1].\n\nOther close matches in the library include [[grape]], duller, and [[cellini]], more vivid and lighter [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The automated archive tool used for this project could not compute a usable match count for this hex, so no painting-archive figures are given here [5]. The swatch should be read only as a screen approximation."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the modifier \"rich\" attached to \"purple\"; the phrase has long described deep, saturated purples",
+      "first_recorded": "2010, xkcd color survey, for this exact label",
+      "source": "ColorHub color library (xkcd 2010)"
+    },
+    "aka": [],
+    "siblings": [
+      "velvet",
+      "grape",
+      "cellini"
+    ],
+    "parent": "purple",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub color library",
+    "measured": {
+      "lch": [
+        30,
+        55,
+        340
+      ],
+      "nearest": [
+        [
+          "Velvet",
+          2.7
+        ]
+      ]
+    },
+    "archive_note": "no computed archive match available for this hex"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 13 (on glazing a red lake over blue)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, ch. 76 (on archil dye)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "web",
+      "cite": "xkcd color survey (2010), via Randall Munroe, \"Color Survey Results\"",
+      "loc_kind": null,
+      "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub archive field tool, run against this hex",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What kind of name is \"Rich Purple\"?",
+      "choices": [
+        "A modifier attached to a parent color",
+        "A place name",
+        "A mineral name",
+        "A chemist's surname"
+      ],
+      "answer": "A modifier attached to a parent color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: color-history books use \"rich purple\" only as a fixed brand name for one exact dye.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Rich Purple's exact label dates to a 2010 internet survey, though the phrase itself is far older."
+  ],
+  "words": 215,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Fixed mis-cited chapter: the red-lake-over-blue glaze claim is in Bright Earth ch. 13, not ch. 11 (ch. 11 covers ancient Egyptian/Mesopotamian pigment chemistry, unrelated). Verified archil claim against St Clair ch. 76, which matches."
     ]
-   ]
-  },
-  "archive_note": "no computed archive match available for this hex"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 13 (on glazing a red lake over blue)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, ch. 76 (on archil dye)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "web",
-   "cite": "xkcd color survey (2010), via Randall Munroe, \"Color Survey Results\"",
-   "loc_kind": null,
-   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub archive field tool, run against this hex",
-   "loc_kind": null,
-   "url": null
   }
- ],
- "questions": [
-  {
-   "q": "What kind of name is \"Rich Purple\"?",
-   "choices": [
-    "A modifier attached to a parent color",
-    "A place name",
-    "A mineral name",
-    "A chemist's surname"
-   ],
-   "answer": "A modifier attached to a parent color",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: color-history books use \"rich purple\" only as a fixed brand name for one exact dye.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Rich Purple's exact label dates to a 2010 internet survey, though the phrase itself is far older."
- ],
- "words": 216,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Fixed mis-cited chapter: the red-lake-over-blue glaze claim is in Bright Earth ch. 13, not ch. 11 (ch. 11 covers ancient Egyptian/Mesopotamian pigment chemistry, unrelated). Verified archil claim against St Clair ch. 76, which matches."
-  ]
- }
 }

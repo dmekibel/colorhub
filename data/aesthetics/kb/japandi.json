@@ -1,0 +1,47 @@
+{
+ "id": "japandi",
+ "name": "Japandi",
+ "lineage": {
+  "influenced_by": [
+   "wabi-sabi",
+   "Scandinavian minimalism — the name is a portmanteau of the two"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "term and trend coalesced c. 2016–2020"
+ ],
+ "places": [
+  "a Western design-media invention rather than a lived place; draws on both Japanese and Scandinavian design history"
+ ],
+ "garments": [
+  "not a fashion look — an interior-design style"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "cluttered maximalism, combining Japanese restraint and Scandinavian warmth into one pared-back, natural-material palette.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "2010s",
+  "key_motifs": "Natural materials, wood, bamboo, asymmetry, imperfection",
+  "key_colours": "White, grey, green, beige, brown, muted blue",
+  "related_aesthetics": "HyggeMaillard StyleMinimalismModernismRusticScandinavian DesignTechnozenWabi-Sabi",
+  "key_values": "Hygge and Wabi-Sabi philosophy, functionality, simplicity, sustainability"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Japandi"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 87% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

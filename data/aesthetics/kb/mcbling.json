@@ -1,0 +1,58 @@
+{
+ "id": "mcbling",
+ "name": "McBling",
+ "lineage": {
+  "influenced_by": [
+   "Y2K glamour",
+   "2000s hip-hop and reality-TV luxury aesthetics"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2003–2008"
+ ],
+ "places": [
+  "MTV/early reality-TV culture"
+ ],
+ "garments": [
+  "rhinestone-encrusted everything",
+  "Juicy Couture tracksuits",
+  "oversized sunglasses",
+  "Ed Hardy prints"
+ ],
+ "media": [
+  {
+   "title": "The Simple Life (2003–2007)",
+   "note": "a key visual reference"
+  }
+ ],
+ "figures": [
+  "Paris Hilton"
+ ],
+ "reacts_against": "understated taste entirely, embracing visible logos, rhinestones and conspicuous branded luxury.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Trashy Y2K, Glam Y2K, 2000s Glam, 2000s Trashy",
+  "decade_of_origin": "2000s",
+  "key_motifs": "Rhinestones, glitter, Juicy Couture tracksuits, Von Dutch trucker hats, low-rise jeans, visible thongs, flip phones, paparazzi photos, tabloid culture",
+  "key_colours": "Hot pink, baby pink, metallics (gold and silver), black, white",
+  "related_aesthetics": "BaddieBarbiecoreBimbocoreBro HoeBubbleglamBubblegum BitchBubblegum Bling (revival)FjortisFrutiger AeroBling EraGroovivalMillennium DiscoGuidoIndie SleazePissiksetRecession PopSceneSurf CrushTrailer Park PrincessTweencoreUrBlingY2K Futurism",
+  "key_values": "Celebrity, fame, luxury, consumerism, \"New Money\" attitude, partying, \"trashy\" glamour"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/McBling"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 58% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

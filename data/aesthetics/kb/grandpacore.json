@@ -1,0 +1,42 @@
+{
+ "id": "grandpacore",
+ "name": "Grandpacore",
+ "lineage": {
+  "influenced_by": [
+   "grandmillennial decorating's inherited, old-fashioned sensibility, applied to menswear instead of interiors",
+   "a broader 2020s wave of cozy-nostalgia internet aesthetics"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2020s"
+ ],
+ "places": [],
+ "garments": [
+  "corduroy",
+  "cardigan knitwear",
+  "tweed caps"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "contemporary slim, athletic-cut menswear norms, favoring a looser, older-fashioned silhouette worn with evident affection rather than irony.",
+ "revivals": [],
+ "article": "Grandpacore is a 2020s internet-aesthetic tag for cozy, old-fashioned menswear — cardigans, corduroy trousers, newsboy caps, often collected secondhand — worn with the same affectionate, non-ironic nostalgia that grandmillennial decorating brings to interiors, just applied to a wardrobe instead of a living room. It sits within a broader cluster of cozy-nostalgia internet aesthetics that gained momentum through the early 2020s (cottagecore, grandmillennial, cabincore all share its basic emotional register: comfort, slowness, a preference for things that look inherited rather than newly bought). Unlike several menswear-adjacent trends that lean on irony or deliberate incongruity, grandpacore's framing — in the TikTok and Pinterest content that uses the tag — consistently presents the look as sincerely desirable rather than a joke, treating an older generation's unhurried dress sense as something worth genuinely wanting rather than merely referencing.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Grandpacore"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "dark — about 43% of the measured color across 5 Commons photos is below mid-lightness",
+   "mostly muted — about 84% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

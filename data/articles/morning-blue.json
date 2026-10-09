@@ -1,141 +1,141 @@
 {
- "slug": "morning-blue",
- "name": "Morning Blue",
- "hex": "#8DA399",
- "names": [
-  "Morning Blue"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Morning Blue is a pale, blue-grey green first recorded by Maerz and Paul in 1916, one of more than two dozen dictionary names the ISCC-NBS system later filed together in a single block.",
- "sections": [
-  {
-   "id": "name",
-   "title": "One name among two dozen in a block",
-   "body": "Our library credits the earliest record to Maerz and Paul's 1930 color dictionary, which dates the name itself to 1916 [1]. The ISCC-NBS system filed it in 1955 as part of block 149, \"pale green,\" alongside more than two dozen other dictionary names including Abyss, Aqua Grey, Pacific and Rabbit, all judged close enough in hue, lightness and chroma to share one block [1]. Morning Blue itself measures 1.2 units from that block's centre [1].\n\nIts nearest named neighbor is [[light-celandine-green|Light Celandine Green]], only 3.0 units away and read as almost the same color [2]. [[dark-bluish-glaucous|Dark Bluish Glaucous]], [[greenish-sage|Greenish Sage]] and [[grey-celadon|Grey Celadon]] each sit 4.3 units out, greener [2]. In print, the phrase \"morning blue\" rose fastest in the 1890s and peaked in the 2010s, by Google Books count across all senses of the words [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 389 of 23,781 paintings, about 1.6 percent, as photographed; the within-painting lens finds it in 229 [3]. It is more common than 71 percent of the named colors [3]. It peaks in the 1900s, at 1.6 percent of the 1,674 paintings from that century (26 paintings), 1.8 times the expected rate [3]. Inside a painting it most often plays a light, 38 percent of its 229 occurrences [3]. Gustav Klimt is its most devoted painter, using it in 4 of his 50 works here, 4.6 times the baseline rate (3.6 times as photographed) [3]. It shares canvases with Pale Olive Grey and Sand more than chance, at 5.0 and 2.2 times the expected rate [3]. These are photographs of varnished paintings; a color match is not a pigment identification [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a dictionary-of-color name, not a material",
-   "first_recorded": "1916 (Maerz and Paul, 1930 dictionary)",
-   "source": "ColorHub color library (Maerz and Paul; ISCC-NBS)"
-  },
-  "aka": [],
-  "siblings": [
-   "light-celandine-green",
-   "greenish-sage",
-   "grey-celadon",
-   "dark-bluish-glaucous"
+  "slug": "morning-blue",
+  "name": "Morning Blue",
+  "hex": "#8DA399",
+  "names": [
+    "Morning Blue"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 389,
-  "rank_pct": 71,
-  "peak_century": [
-   1900,
-   1.8
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Morning Blue is a pale, blue-grey green first recorded by Maerz and Paul in 1916, one of more than two dozen dictionary names the ISCC-NBS system later filed together in a single block.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One name among two dozen in a block",
+      "body": "Our library credits the earliest record to Maerz and Paul's 1930 color dictionary, which dates the name itself to 1916 [1]. The ISCC-NBS system filed it in 1955 as part of block 149, \"pale green,\" alongside more than two dozen other dictionary names including Abyss, Aqua Grey, Pacific and Rabbit, all judged close enough in hue, lightness and chroma to share one block [1]. Morning Blue itself measures 1.2 units from that block's centre [1].\n\nIts nearest named neighbor is [[light-celandine-green|Light Celandine Green]], only 3.0 units away and read as almost the same color [2]. [[dark-bluish-glaucous|Dark Bluish Glaucous]], [[grey-celadon|Greenish Sage]] and [[grey-celadon|Grey Celadon]] each sit 4.3 units out, greener [2]. In print, the phrase \"morning blue\" rose fastest in the 1890s and peaked in the 2010s, by Google Books count across all senses of the words [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 389 of 23,781 paintings, about 1.6 percent, as photographed; the within-painting lens finds it in 229 [3]. It is more common than 71 percent of the named colors [3]. It peaks in the 1900s, at 1.6 percent of the 1,674 paintings from that century (26 paintings), 1.8 times the expected rate [3]. Inside a painting it most often plays a light, 38 percent of its 229 occurrences [3]. Gustav Klimt is its most devoted painter, using it in 4 of his 50 works here, 4.6 times the baseline rate (3.6 times as photographed) [3]. It shares canvases with Pale Olive Grey and Sand more than chance, at 5.0 and 2.2 times the expected rate [3]. These are photographs of varnished paintings; a color match is not a pigment identification [3]."
+    }
   ],
-  "role_top": [
-   "light",
-   38
-  ],
-  "top_painter": [
-   "Gustav Klimt",
-   4.6
-  ],
-  "measured": {
-   "lch": [
-    65,
-    10,
-    165
-   ],
-   "nearest_iscc": [
-    "pale green",
-    1.2
-   ],
-   "nearest": [
-    [
-     "Light Celandine Green",
-     3.0
+  "aside": {
+    "origin": {
+      "named_after": "a dictionary-of-color name, not a material",
+      "first_recorded": "1916 (Maerz and Paul, 1930 dictionary)",
+      "source": "ColorHub color library (Maerz and Paul; ISCC-NBS)"
+    },
+    "aka": [],
+    "siblings": [
+      "light-celandine-green",
+      "grey-celadon",
+      "dark-bluish-glaucous",
+      "surrey-green"
     ],
-    [
-     "Dark Bluish Glaucous",
-     4.3
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 389,
+    "rank_pct": 71,
+    "peak_century": [
+      1900,
+      1.8
     ],
-    [
-     "Greenish Sage",
-     4.3
+    "role_top": [
+      "light",
+      38
+    ],
+    "top_painter": [
+      "Gustav Klimt",
+      4.6
+    ],
+    "measured": {
+      "lch": [
+        65,
+        10,
+        165
+      ],
+      "nearest_iscc": [
+        "pale green",
+        1.2
+      ],
+      "nearest": [
+        [
+          "Light Celandine Green",
+          3.0
+        ],
+        [
+          "Dark Bluish Glaucous",
+          4.3
+        ],
+        [
+          "Greenish Sage",
+          4.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Maerz & Paul 1916 date, ISCC-NBS 1955 block 149 entries, Ngram curve",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges for morning-blue (data/graph/edges-m.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which 1930 color dictionary dates Morning Blue to 1916?",
+      "choices": [
+        "Maerz and Paul",
+        "Ridgway",
+        "Munsell",
+        "Pantone"
+      ],
+      "answer": "Maerz and Paul",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Morning Blue is the only name the ISCC-NBS system filed in its block 149.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Morning Blue shares its ISCC-NBS dictionary block with more than two dozen other names, from Abyss to Rabbit."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); facts drawn from the library, graph and archive fieldnotes only.",
+      "Fixed: field section and field.rank_pct said 'more common than 73 percent'; data/graph/fieldnotes/m.json gives rp=71 (matching its own generated facts text). Corrected to 71."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Maerz & Paul 1916 date, ISCC-NBS 1955 block 149 entries, Ngram curve",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: look-alike edges for morning-blue (data/graph/edges-m.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which 1930 color dictionary dates Morning Blue to 1916?",
-   "choices": [
-    "Maerz and Paul",
-    "Ridgway",
-    "Munsell",
-    "Pantone"
-   ],
-   "answer": "Maerz and Paul",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Morning Blue is the only name the ISCC-NBS system filed in its block 149.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Morning Blue shares its ISCC-NBS dictionary block with more than two dozen other names, from Abyss to Rabbit."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); facts drawn from the library, graph and archive fieldnotes only.",
-   "Fixed: field section and field.rank_pct said 'more common than 73 percent'; data/graph/fieldnotes/m.json gives rp=71 (matching its own generated facts text). Corrected to 71."
-  ]
- },
- "words": 305
+  "words": 305
 }

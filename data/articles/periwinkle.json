@@ -1,174 +1,174 @@
 {
- "slug": "periwinkle",
- "name": "Periwinkle",
- "hex": "#A3A8EE",
- "names": [
-  "Periwinkle"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Periwinkle is a light, slightly purplish blue named for the flower, and it sits where blue becomes lilac, which is why the books call it purplish blue, lilac-blue and, for one famous suit, argue over whether it is purple at all.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The blue of a flower",
-   "body": "Paterson defines periwinkle as a purplish blue and periwinkle blue as a light purplish blue, and he gives *pervenche* blue as the French term for the flower's color [1]. St Clair's glossary agrees on the neighborhood, calling it a lilac-blue after the flower [2]. It lies between [[blue]] and [[lilac]].\n\nSt Clair also records that a dusty periwinkle shade called electric blue came into vogue in the late 19th century, around the time Swan and Edison were working on electric light [3]."
-  },
-  {
-   "id": "flower",
-   "title": "A flower in the poems",
-   "body": "The flower is old in European poetry [4][5]. Chaucer's *Romaunt of the Rose* places the violet and the fresh periwinkle among spring flowers [4]. Pastoureau quotes a similar medieval garden in which violets and fresh periwinkles stand beside white, yellow and vermilion flowers [5].\n\nGreek writers are a warning about names. Pastoureau notes that they described the iris, periwinkle and cornflower with words for red, green or black, not blue; Pastoureau notes that Greek color words often conveyed qualities of light or material more than true color [6]."
-  },
-  {
-   "id": "suit",
-   "title": "Is it purple?",
-   "body": "Garfield tells of a defense lawyer's double-breasted suit whose color a reporter's research assistant tried to match to a Crayola crayon: the closest was periwinkle, while courthouse onlookers opted for purple [7]. The lawyer insisted the suit was blue, adding that it should not be called mauve [7]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The swatch #A3A8EE falls within a color distance of 6 of only 8 paintings in our archive of 23,781, as photographed [8]. The largest cover is about 45 percent of a 1913 Frieseke flower still life, and the earliest match is a 1637 Claude Lorrain landscape [8]. A periwinkle this clear is uncommon in these photographs of aged, varnished paintings."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the periwinkle flower (French pervenche)",
-   "first_recorded": "origin undocumented in the books",
-   "source": "Paterson, A Dictionary of Colour; St Clair, The Secret Lives of Colour"
-  },
-  "aka": [
-   "periwinkle blue",
-   "pervenche blue"
+  "slug": "periwinkle",
+  "name": "Periwinkle",
+  "hex": "#A3A8EE",
+  "names": [
+    "Periwinkle"
   ],
-  "siblings": [
-   "lilac",
-   "lavender",
-   "cornflower-blue"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Periwinkle is a light, slightly purplish blue named for the flower, and it sits where blue becomes lilac, which is why the books call it purplish blue, lilac-blue and, for one famous suit, argue over whether it is purple at all.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The blue of a flower",
+      "body": "Paterson defines periwinkle as a purplish blue and periwinkle blue as a light purplish blue, and he gives *pervenche* blue as the French term for the flower's color [1]. St Clair's glossary agrees on the neighborhood, calling it a lilac-blue after the flower [2]. It lies between [[blue]] and [[lilac]].\n\nSt Clair also records that a dusty periwinkle shade called electric blue came into vogue in the late 19th century, around the time Swan and Edison were working on electric light [3]."
+    },
+    {
+      "id": "flower",
+      "title": "A flower in the poems",
+      "body": "The flower is old in European poetry [4][5]. Chaucer's *Romaunt of the Rose* places the violet and the fresh periwinkle among spring flowers [4]. Pastoureau quotes a similar medieval garden in which violets and fresh periwinkles stand beside white, yellow and vermilion flowers [5].\n\nGreek writers are a warning about names. Pastoureau notes that they described the iris, periwinkle and cornflower with words for red, green or black, not blue; Pastoureau notes that Greek color words often conveyed qualities of light or material more than true color [6]."
+    },
+    {
+      "id": "suit",
+      "title": "Is it purple?",
+      "body": "Garfield tells of a defense lawyer's double-breasted suit whose color a reporter's research assistant tried to match to a Crayola crayon: the closest was periwinkle, while courthouse onlookers opted for purple [7]. The lawyer insisted the suit was blue, adding that it should not be called mauve [7]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The swatch #A3A8EE falls within a color distance of 6 of only 8 paintings in our archive of 23,781, as photographed [8]. The largest cover is about 45 percent of a 1913 Frieseke flower still life, and the earliest match is a 1637 Claude Lorrain landscape [8]. A periwinkle this clear is uncommon in these photographs of aged, varnished paintings."
+    }
   ],
-  "parent": "blue",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "mauve",
-    "gloss": "a greyer pink-purple; a lawyer's suit argument made the two compete"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "the periwinkle flower (French pervenche)",
+      "first_recorded": "origin undocumented in the books",
+      "source": "Paterson, A Dictionary of Colour; St Clair, The Secret Lives of Colour"
+    },
+    "aka": [
+      "periwinkle blue",
+      "pervenche blue"
+    ],
+    "siblings": [
+      "lilac",
+      "lavender",
+      "cornflower"
+    ],
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "mauve",
+        "gloss": "a greyer pink-purple; a lawyer's suit argument made the two compete"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "pervenche"
+      }
+    ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#A3A8EE",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 8,
+    "top_paintings": [
+      "nga-46622",
+      "commons-Q17496182"
+    ],
+    "first": {
+      "id": "commons-Q114241452",
+      "year": 1637
+    }
+  },
+  "questions": [
+    {
+      "q": "What did Greek writers call the periwinkle flower, according to Pastoureau?",
+      "choices": [
+        "A word for red, green or black, not blue",
+        "Blue (kyanos)",
+        "Purple",
+        "They did not name it"
+      ],
+      "answer": "A word for red, green or black, not blue",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Paterson gives pervenche as the French name for the periwinkle blue.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
   ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "pervenche"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#A3A8EE",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 8,
-  "top_paintings": [
-   "nga-46622",
-   "commons-Q17496182"
+  "openers": [
+    "Greek poets described the periwinkle flower with a word for red, green or black, but not blue."
   ],
-  "first": {
-   "id": "commons-Q114241452",
-   "year": 1637
-  }
- },
- "questions": [
-  {
-   "q": "What did Greek writers call the periwinkle flower, according to Pastoureau?",
-   "choices": [
-    "A word for red, green or black, not blue",
-    "Blue (kyanos)",
-    "Purple",
-    "They did not name it"
-   ],
-   "answer": "A word for red, green or black, not blue",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, pp. 297, 477",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, glossary, \"Periwinkle\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Blue\" chapter (electric blue)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Jarman, Chroma, quoting Chaucer, The Romaunt of the Rose",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 18",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pastoureau, Blue, ch. 7",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Garfield, Mauve, ch. 18",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "data",
+      "cite": "ColorHub archive (data), match at ΔE2000 6, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsourced comparisons ('bluer than lilac, lighter than true blue') and the 'people disagree most' claim.",
+      "Greek color-word reason reworded to Pastoureau's wording; dropped the flower-for-them inference.",
+      "Cochran anecdote: research assistant, not researcher; 'probably a sky' guess removed."
+    ]
   },
-  {
-   "q": "True or false: Paterson gives pervenche as the French name for the periwinkle blue.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Greek poets described the periwinkle flower with a word for red, green or black, but not blue."
- ],
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, pp. 297, 477",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, glossary, \"Periwinkle\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Blue\" chapter (electric blue)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Jarman, Chroma, quoting Chaucer, The Romaunt of the Rose",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 18",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pastoureau, Blue, ch. 7",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Garfield, Mauve, ch. 18",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "data",
-   "cite": "ColorHub archive (data), match at ΔE2000 6, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsourced comparisons ('bluer than lilac, lighter than true blue') and the 'people disagree most' claim.",
-   "Greek color-word reason reworded to Pastoureau's wording; dropped the flower-for-them inference.",
-   "Cochran anecdote: research assistant, not researcher; 'probably a sky' guess removed."
-  ]
- },
- "words": 309
+  "words": 309
 }

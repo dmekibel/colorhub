@@ -1,0 +1,40 @@
+{
+ "id": "rainbowcore",
+ "name": "Rainbowcore",
+ "lineage": {
+  "influenced_by": [
+   "kidcore's embrace of primary-color 1990s plastic",
+   "pride and queer-community color symbolism"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2019–present"
+ ],
+ "places": [],
+ "garments": [
+  "color-blocked knitwear",
+  "rainbow sequins"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "muted, \"tasteful\" neutral dressing and decorating, treating maximal, every-color-at-once saturation as a form of unguarded joy rather than something to tone down.",
+ "revivals": [],
+ "article": "Rainbowcore is a straightforward-to-name but culturally specific internet-aesthetic tag: maximalist, every-color-at-once styling across fashion, decor and digital art, in steady circulation on Tumblr and TikTok from around 2019 on. Trend coverage and community discussion around the tag consistently link it to queer joy and pride-flag color symbolism specifically, positioning the aesthetic's refusal of restrained, \"tasteful\" neutral palettes as a deliberate, celebratory choice rather than a lack of discipline. It sits closely alongside kidcore, sharing that style's embrace of saturated 1990s-toy-adjacent primary color, and alongside clowncore's willingness to look visually \"loud\" without irony. Because rainbowcore names a palette principle (maximum saturation, maximum hue variety) rather than a specific garment or historical reference the way many other looks in this archive do, it functions less as a fixed costume and more as a color rule that can be applied to almost any silhouette.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Rainbowcore"
+  }
+ ],
+ "measured": {
+  "n_images": 5,
+  "n_candidates": 5,
+  "findings": [
+   "mostly muted — about 64% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

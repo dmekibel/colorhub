@@ -1,135 +1,135 @@
 {
- "slug": "dusty-crimson",
- "name": "Dusty crimson",
- "hex": "#B95754",
- "names": [
-  "Dusty crimson"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Dusty crimson is a muted brick red, ColorHub's English name for the Japanese traditional color Chōshun-iro, whose characters read literally as \"long spring color.\"",
- "sections": [
-  {
-   "id": "name",
-   "title": "A long-spring red",
-   "body": "The name comes from the Wikipedia list of Japan's traditional colors, where the kanji 長春色 are glossed as \"long spring (season) color\" [1]. Why a red carries a season's name is not explained in that source, so the connection is undocumented here [1].\n\nColorHub's library gives it the hex #B95754 and files it under Reds [3]. The nearest named colors on file are [[deep-chestnut]] and [[dragon-s-blood]], at A deeper, near-black red in the same family is [[carbuncle|Carbuncle]], several steps down in lightness [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a close match to this color in 128 of 23,781 paintings, about half a percent, as photographed [2]. The single earliest match is a Maya mural fragment dated to around 500, though the match covers only a quarter of that image, so it is a computed color coincidence rather than evidence the pigment was used there, a floor and not a first, since the archive's early centuries are thin [2]. The color turns up more than four times as often as the archive average in paintings from the 1890s [2]. It is also unusually common in works from India and in the 50 sampled paintings of Henri Matisse, where it appears six times, over twenty times the archive's average rate for his work [2]. These are matches to photographs of varnished paintings, never pigment identifications [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "Wikipedia, Traditional colors of Japan"
-  },
-  "aka": [
-   "Chōshun-iro"
+  "slug": "dusty-crimson",
+  "name": "Dusty crimson",
+  "hex": "#B95754",
+  "names": [
+    "Dusty crimson"
   ],
-  "siblings": [
-   "deep-chestnut",
-   "dragon-s-blood",
-   "pompeian-red",
-   "dusty-red"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Dusty crimson is a muted brick red, ColorHub's English name for the Japanese traditional color Chōshun-iro, whose characters read literally as \"long spring color.\"",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A long-spring red",
+      "body": "The name comes from the Wikipedia list of Japan's traditional colors, where the kanji 長春色 are glossed as \"long spring (season) color\" [1]. Why a red carries a season's name is not explained in that source, so the connection is undocumented here [1].\n\nColorHub's library gives it the hex #B95754 and files it under Reds [3]. The nearest named colors on file are [[deep-chestnut]] and [[dragon-s-blood]], at A deeper, near-black red in the same family is [[carbuncle|Carbuncle]], several steps down in lightness [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match to this color in 128 of 23,781 paintings, about half a percent, as photographed [2]. The single earliest match is a Maya mural fragment dated to around 500, though the match covers only a quarter of that image, so it is a computed color coincidence rather than evidence the pigment was used there, a floor and not a first, since the archive's early centuries are thin [2]. The color turns up more than four times as often as the archive average in paintings from the 1890s [2]. It is also unusually common in works from India and in the 50 sampled paintings of Henri Matisse, where it appears six times, over twenty times the archive's average rate for his work [2]. These are matches to photographs of varnished paintings, never pigment identifications [2]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Chōshun-iro (長春色)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 128,
-  "measured": {
-   "lch": [
-    49,
-    44,
-    28
-   ],
-   "nearest": [
-    [
-     "Deep Chestnut",
-     2.9
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "Wikipedia, Traditional colors of Japan"
+    },
+    "aka": [
+      "Chōshun-iro"
     ],
-    [
-     "Dragon's Blood",
-     3.0
+    "siblings": [
+      "deep-chestnut",
+      "dragon-s-blood",
+      "pompeian-red",
+      "english-red"
     ],
-    [
-     "Pompeian Red",
-     3.4
-    ],
-    [
-     "Dusty Red",
-     4.0
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Chōshun-iro (長春色)"
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "Wikipedia, \"Traditional colors of Japan\"",
-   "loc_kind": null,
-   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 128,
+    "measured": {
+      "lch": [
+        49,
+        44,
+        28
+      ],
+      "nearest": [
+        [
+          "Deep Chestnut",
+          2.9
+        ],
+        [
+          "Dragon's Blood",
+          3.0
+        ],
+        [
+          "Pompeian Red",
+          3.4
+        ],
+        [
+          "Dusty Red",
+          4.0
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the name Chōshun-iro literally mean?",
-   "choices": [
-    "Long spring color",
-    "Autumn leaf red",
-    "Morning sun",
-    "Crimson silk"
-   ],
-   "answer": "Long spring color",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wikipedia, \"Traditional colors of Japan\"",
+      "loc_kind": null,
+      "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the name Chōshun-iro literally mean?",
+      "choices": [
+        "Long spring color",
+        "Autumn leaf red",
+        "Morning sun",
+        "Crimson silk"
+      ],
+      "answer": "Long spring color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources explain why this red is named for a season.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A Japanese red named for a season, with no record of why."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "Name-season link is undocumented; stated as such rather than invented.",
+      "lint 2026-10-09"
+    ]
   },
-  {
-   "q": "True or false: our sources explain why this red is named for a season.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A Japanese red named for a season, with no record of why."
- ],
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "Name-season link is undocumented; stated as such rather than invented.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 241
+  "words": 241
 }

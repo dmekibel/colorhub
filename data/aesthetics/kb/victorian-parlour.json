@@ -1,0 +1,51 @@
+{
+ "id": "victorian-parlour",
+ "name": "Victorian parlour",
+ "lineage": {
+  "influenced_by": [
+   "Gothic Revival architecture",
+   "industrial-era textile manufacturing (patterned wallpaper and fabric became affordable)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1837–1901 (reign of Queen Victoria)"
+ ],
+ "places": [
+  "Britain and its empire; US upper-middle-class homes"
+ ],
+ "garments": [
+  "heavy drapery",
+  "horsehair and velvet upholstery",
+  "dark wood and brass"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "the sparer Georgian interiors that preceded it, filling every surface (a reaction, in turn, that 20th-century modernism would itself react against).",
+ "revivals": [
+  "a recurring maximalist-interior reference, most recently inside cluttercore moodboards"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "19th Century (1837-1901)",
+  "key_motifs": "Ornate detailing, Gothic Revival architecture, industrial machinery, gaslight, pocket watches, corsets, top hats, mourning rituals, strict social codes, intricate patterns, dark romanticism, scientific curiosity, domesticity, elaborate hairstyles, crinolines, bustles",
+  "key_colours": "Ochre, russet, beige, brown, taupe, black, white, royal blue, crimson, deep jewel tones (emerald green, ruby red, sapphire blue)",
+  "related_aesthetics": "Arts and Crafts MovementDandyDark AcademiaEdwardianGothicLolitaSteampunkVictorian GothVintage British Sportsman",
+  "key_values": "Morality, strict social codes, domesticity, industrial progress, technological innovation, scientific inquiry, formality, class hierarchy, duty, sentimentality, knowledge, romanticism"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Victorian"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 71% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

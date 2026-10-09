@@ -1,0 +1,55 @@
+{
+ "id": "coastal-grandmother",
+ "name": "Coastal grandmother",
+ "lineage": {
+  "influenced_by": [
+   "Nancy Meyers film interiors (It's Complicated, Something's Gotta Give)",
+   "New England/Hamptons summer style"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "coined and peaked 2022"
+ ],
+ "places": [
+  "TikTok"
+ ],
+ "garments": [
+  "linen button-downs",
+  "wide-brim straw hats",
+  "soft neutral knitwear"
+ ],
+ "media": [
+  {
+   "title": "Something's Gotta Give (2003)",
+   "note": "a frequently cited visual touchstone"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "youth-coded fast-fashion trend cycles, romanticizing an older, unhurried, coastal-leisure life instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "2022",
+  "key_motifs": "Linen fabrics, white wine, fresh flowers, coastal decor (wicker, pottery), farmers' markets, beach houses",
+  "key_colours": "White, cream, beige, navy, sky blue",
+  "related_aesthetics": "Après-skiCoastal CowgirlCoastal StyleEclectic GrandpaGrandmillenialGrandparentcoreNauticalPreppy",
+  "key_values": "Comfort, simple luxury, understated elegance, relaxation, mature lifestyle"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Coastal_Grandmother"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 44% of the measured color is pale or near-white",
+   "mostly muted — about 70% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

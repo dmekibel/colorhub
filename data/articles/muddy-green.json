@@ -1,117 +1,117 @@
 {
- "slug": "muddy-green",
- "name": "Muddy Green",
- "hex": "#657432",
- "names": [
-  "Muddy Green"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Muddy Green is a dull, dark olive from a 2010 crowd color survey, close enough to Military Green that most eyes would call them the same color.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A descriptive compound",
-   "body": "The library's only source for Muddy Green is the xkcd 2010 survey; its coining before that is undocumented [1]. At hex #657432 it measures lightness 46 and chroma 38 in LCH, a dark, muted yellow-green [1].\n\nIts nearest named neighbor is [[military-green|Military Green]], 3.6 CIEDE2000 units off and read as almost the same color, followed by [[moss-olive|Moss olive]] and [[dirty-green|Dirty Green]], both 4.3 units off [2]. Werner's 1821 nomenclature lists a comparably dull olive, *Upper Disk of Leaves of Woody Nightshade*, used there for Sap Green, 8.0 units away [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this olive in 244 of 23,781 paintings, about 1.03%, as photographed, more common than 63% of the named colors here [3]. The earliest match is a 1475 painting by Antonello da Messina, 535 years before the name's own 2010 record, which only shows an aged, varnished canvas can resemble this hue, not that the painter mixed it, a floor and not a first, since the archive's early centuries are thin [3]. Georges Seurat carries it in 5 of his 41 works, 7.1 times the baseline, and it peaks in the 1900s, in 27 of 1,674 paintings, at 2.7 times the archive's overall rate [3]. It shares canvases with [[duck-green|Duck Green]] far more than chance would predict, and inside a painting it most often plays an accent [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented; a descriptive compound of muddy + green",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "military-green",
-   "moss-olive",
-   "dirty-green",
-   "duck-green"
+  "slug": "muddy-green",
+  "name": "Muddy Green",
+  "hex": "#657432",
+  "names": [
+    "Muddy Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 244,
-  "pct": 1.03,
-  "measured": {
-   "lch": [
-    46.3,
-    37.8,
-    115.7
-   ],
-   "nearest": [
-    [
-     "Military Green",
-     3.6
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Muddy Green is a dull, dark olive from a 2010 crowd color survey, close enough to Military Green that most eyes would call them the same color.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A descriptive compound",
+      "body": "The library's only source for Muddy Green is the xkcd 2010 survey; its coining before that is undocumented [1]. At hex #657432 it measures lightness 46 and chroma 38 in LCH, a dark, muted yellow-green [1].\n\nIts nearest named neighbor is [[military-green|Military Green]], 3.6 CIEDE2000 units off and read as almost the same color, followed by [[moss-olive|Moss olive]] and [[khaki-green|Dirty Green]], both 4.3 units off [2]. Werner's 1821 nomenclature lists a comparably dull olive, *Upper Disk of Leaves of Woody Nightshade*, used there for Sap Green, 8.0 units away [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this olive in 244 of 23,781 paintings, about 1.03%, as photographed, more common than 63% of the named colors here [3]. The earliest match is a 1475 painting by Antonello da Messina, 535 years before the name's own 2010 record, which only shows an aged, varnished canvas can resemble this hue, not that the painter mixed it, a floor and not a first, since the archive's early centuries are thin [3]. Georges Seurat carries it in 5 of his 41 works, 7.1 times the baseline, and it peaks in the 1900s, in 27 of 1,674 paintings, at 2.7 times the archive's overall rate [3]. It shares canvases with [[duck-green|Duck Green]] far more than chance would predict, and inside a painting it most often plays an accent [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented; a descriptive compound of muddy + green",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "military-green",
+      "moss-olive",
+      "khaki-green",
+      "duck-green"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 244,
+    "pct": 1.03,
+    "measured": {
+      "lch": [
+        46.3,
+        37.8,
+        115.7
+      ],
+      "nearest": [
+        [
+          "Military Green",
+          3.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-m.json): xkcd 2010 crowd-sourced color survey",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph look-alikes and botanical twins (data/graph/edges-m.json): CIEDE2000; Werner's Nomenclature of Colours (1821)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which named color is closest to Muddy Green on screen?",
+      "choices": [
+        "Military Green",
+        "Pale Aqua",
+        "Neon Blue",
+        "Pale Magenta"
+      ],
+      "answer": "Military Green",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Werner's 1821 Nomenclature of Colours lists an olive close to this one.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Muddy Green and Military Green sit only 3.6 CIEDE2000 units apart, close enough that most eyes read them as one color."
+  ],
+  "words": 247,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; written from ColorHub library/graph/archive data only.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-m.json): xkcd 2010 crowd-sourced color survey",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph look-alikes and botanical twins (data/graph/edges-m.json): CIEDE2000; Werner's Nomenclature of Colours (1821)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which named color is closest to Muddy Green on screen?",
-   "choices": [
-    "Military Green",
-    "Pale Aqua",
-    "Neon Blue",
-    "Pale Magenta"
-   ],
-   "answer": "Military Green",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Werner's 1821 Nomenclature of Colours lists an olive close to this one.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Muddy Green and Military Green sit only 3.6 CIEDE2000 units apart, close enough that most eyes read them as one color."
- ],
- "words": 247,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; written from ColorHub library/graph/archive data only.",
-   "lint 2026-10-09"
-  ]
- }
 }

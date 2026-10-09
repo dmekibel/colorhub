@@ -1,0 +1,52 @@
+{
+ "id": "rave",
+ "name": "Rave",
+ "lineage": {
+  "influenced_by": [
+   "acid house",
+   "the UK's 1988 \"Second Summer of Love\" warehouse party scene"
+  ],
+  "influences": [
+   "seapunk",
+   "cybergoth"
+  ]
+ },
+ "eras": [
+  "1988–1995 (UK \"Second Summer of Love\")"
+ ],
+ "places": [],
+ "garments": [
+  "fluorescent plastic",
+  "glow sticks",
+  "baggy fits"
+ ],
+ "media": [
+  {
+   "title": "Energy Flash (Simon Reynolds, 1998)",
+   "note": "a widely cited history of the scene, published as a book"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "licensed club culture's closing hours and legal restrictions, building an illegal, word-of-mouth warehouse-party scene explicitly outside the mainstream nightlife industry.",
+ "revivals": [
+  "a sustained influence on commercial EDM festival culture from the 2000s on"
+ ],
+ "article": "UK rave culture detonated almost overnight in 1988, a year British music press nicknamed the \"Second Summer of Love\" for how closely its mass, euphoric, chemically assisted dancing echoed 1967's hippie summer two decades earlier. Acid house records, imported from Chicago, provided the soundtrack, and a loose network of organizers threw illegal parties in empty warehouses and fields specifically to dodge licensing laws that would have shut a legal club down at 2 a.m. — rave's all-night, often outdoor character was as much a legal workaround as an aesthetic choice. The visual language that grew up around it (fluorescent plastic, glow sticks, the smiley face borrowed from acid house) was built for darkness and strobe light rather than daylight photography, which is part of why rave's palette reads as so aggressively saturated: it had to compete with a blacklight. The UK government's 1994 Criminal Justice Act specifically targeted unlicensed raves and their \"repetitive beats,\" effectively ending the illegal warehouse scene's golden period, but rave's visual and musical DNA fed directly into the much larger, fully legal EDM festival industry that emerged in the 2000s.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Rave"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 43% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 76% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

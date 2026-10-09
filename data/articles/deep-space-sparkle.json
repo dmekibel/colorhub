@@ -1,115 +1,115 @@
 {
- "slug": "deep-space-sparkle",
- "name": "Deep Space Sparkle",
- "hex": "#4A646C",
- "names": [
-  "Deep Space Sparkle"
- ],
- "tier": "commercial",
- "depth": "brief",
- "lede": "Deep Space Sparkle is a dim, greyed teal; Wikipedia lists it among the Crayola crayon names, citing Crayola as the source.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A crayon, not a catalogue entry",
-   "body": "The name reaches our library through Wikipedia's crayon-name lists, which cite Crayola itself as the source, but the books consulted here give no date or story behind the words \"space\" and \"sparkle\" [1]. The hex value is a flat screen swatch for a crayon, not a measured pigment or a plate from a historical nomenclature [1].\n\nThe nearest unrelated record in our library is the Japanese crest color Masuhana-iro (舛花色, \"Ichikawa family crest blue\"), close in hex value, which our data flags only as a near match, not a shared origin [1]. Its closest look-alikes on file are [[blue-ochre]], about 2.9 units off, and [[dark-orient-blue]], with [[saccardo-s-slate]] and [[dark-teal-grey]] a little further [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This match appears in 1.56% of the 23,781 paintings in our archive (371 paintings, as photographed); the within-painting lens narrows that to 139 [3]. In our archive it is more common than 64% of the named colors [3]. It peaks in the 1900s, present in 1.8% of the 1,674 paintings we have from that decade (30 paintings), 2.8 times the rate its museums would predict [3]. Inside a painting it most often plays a hidden color, in 46% of its 139 appearances by lightness rank within the painting [3]. Its most devoted painter is Pierre-Auguste Renoir, present in 4 of 50 works here, 4.8x the baseline of the museums those works come from (as photographed 3.6x) [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a Crayola crayon name; the choice of \"space\" and \"sparkle\" is undocumented here",
-   "first_recorded": "undocumented in the books consulted; listed via Wikipedia's Crayola crayon-name lists",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "blue-ochre",
-   "dark-orient-blue",
-   "saccardo-s-slate",
-   "dark-teal-grey"
+  "slug": "deep-space-sparkle",
+  "name": "Deep Space Sparkle",
+  "hex": "#4A646C",
+  "names": [
+    "Deep Space Sparkle"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Masuhana-iro (舛花色), \"Ichikawa family crest blue\" — a near color match only, not the same name"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 371,
-  "pct_archive": 1.56,
-  "n_within_painting": 139,
-  "pct_within_painting": 0.58,
-  "rank_pct": 64,
-  "painters": [
-   "Pierre-Auguste Renoir"
+  "tier": "commercial",
+  "depth": "brief",
+  "lede": "Deep Space Sparkle is a dim, greyed teal; Wikipedia lists it among the Crayola crayon names, citing Crayola as the source.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A crayon, not a catalogue entry",
+      "body": "The name reaches our library through Wikipedia's crayon-name lists, which cite Crayola itself as the source, but the books consulted here give no date or story behind the words \"space\" and \"sparkle\" [1]. The hex value is a flat screen swatch for a crayon, not a measured pigment or a plate from a historical nomenclature [1].\n\nThe nearest unrelated record in our library is the Japanese crest color Masuhana-iro (舛花色, \"Ichikawa family crest blue\"), close in hex value, which our data flags only as a near match, not a shared origin [1]. Its closest look-alikes on file are [[blue-ochre]], about 2.9 units off, and [[dark-orient-blue]], with [[dark-teal-grey]] and [[dark-teal-grey]] a little further [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This match appears in 1.56% of the 23,781 paintings in our archive (371 paintings, as photographed); the within-painting lens narrows that to 139 [3]. In our archive it is more common than 64% of the named colors [3]. It peaks in the 1900s, present in 1.8% of the 1,674 paintings we have from that decade (30 paintings), 2.8 times the rate its museums would predict [3]. Inside a painting it most often plays a hidden color, in 46% of its 139 appearances by lightness rank within the painting [3]. Its most devoted painter is Pierre-Auguste Renoir, present in 4 of 50 works here, 4.8x the baseline of the museums those works come from (as photographed 3.6x) [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+    }
   ],
-  "earliest_match_year": 1100
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Wikipedia Crayola crayon-name list, cross-referenced with Japanese traditional color records",
-   "loc_kind": null,
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "a Crayola crayon name; the choice of \"space\" and \"sparkle\" is undocumented here",
+      "first_recorded": "undocumented in the books consulted; listed via Wikipedia's Crayola crayon-name lists",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "blue-ochre",
+      "dark-orient-blue",
+      "dark-teal-grey",
+      "deep-payne-s-grey"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Masuhana-iro (舛花色), \"Ichikawa family crest blue\" — a near color match only, not the same name"
+      }
+    ]
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 371,
+    "pct_archive": 1.56,
+    "n_within_painting": 139,
+    "pct_within_painting": 0.58,
+    "rank_pct": 64,
+    "painters": [
+      "Pierre-Auguste Renoir"
+    ],
+    "earliest_match_year": 1100
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,900 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Wikipedia Crayola crayon-name list, cross-referenced with Japanese traditional color records",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,900 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Where does the name Deep Space Sparkle come from?",
+      "choices": [
+        "A Crayola crayon name",
+        "A Ridgway 1912 plate",
+        "A Japanese crest",
+        "An ISCC-NBS block"
+      ],
+      "answer": "A Crayola crayon name",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Deep Space Sparkle shares its name origin with the Japanese color Masuhana-iro.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Deep Space Sparkle is a Crayola crayon color that happens to land almost on top of a Japanese crest blue."
+  ],
+  "words": 275,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "Where does the name Deep Space Sparkle come from?",
-   "choices": [
-    "A Crayola crayon name",
-    "A Ridgway 1912 plate",
-    "A Japanese crest",
-    "An ISCC-NBS block"
-   ],
-   "answer": "A Crayola crayon name",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Deep Space Sparkle shares its name origin with the Japanese color Masuhana-iro.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Deep Space Sparkle is a Crayola crayon color that happens to land almost on top of a Japanese crest blue."
- ],
- "words": 275,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
-  ]
- }
 }

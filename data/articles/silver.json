@@ -79,13 +79,12 @@
     "children": [
       "silver-grey",
       "silver-pink",
-      "silver-crayola",
-      "roman-silver",
-      "warm-silver"
+      "warm-silver",
+      "roman-silver"
     ],
     "disambiguation": [
       {
-        "slug": "silver-crayola",
+        "slug": "warm-silver",
         "gloss": "Crayola's Silver is a warmer, faintly pinkish grey"
       },
       {

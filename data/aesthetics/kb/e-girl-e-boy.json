@@ -1,0 +1,53 @@
+{
+ "id": "e-girl-e-boy",
+ "name": "E-girl / E-boy",
+ "lineage": {
+  "influenced_by": [
+   "scene and emo",
+   "visual kei",
+   "anime fan culture",
+   "TikTok's video format"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2019–present"
+ ],
+ "places": [
+  "TikTok"
+ ],
+ "garments": [
+  "striped long-sleeve shirts",
+  "heart/blush face makeup",
+  "chain accessories",
+  "split-dyed hair"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "the clean-girl/VSCO-girl mainstream of its moment, reviving emo and scene's dark-plus-accent palette for a new TikTok-native audience.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Electronic Girl",
+  "decade_of_origin": "Late 2010s",
+  "key_motifs": "Winged eyeliner, heavy blush, drawn-on hearts/tears, colorful dyed hair (often \"e-girl streaks\"), layered clothing, pleated skirts, chains, anime and gaming references",
+  "key_colours": "Often black and pink, but can include a wide range of pastels and bright colors",
+  "related_aesthetics": "Aesthetic RapAlt KidDrainE-BoyEmoEmo RapFemboyKawaii GamerJirai KeiMallgothNu-GothNyashkaPastel GothPuppygirlSadgirlSceneScenecoreSoft Grunge",
+  "key_values": "Internet culture, online identity, gaming, anime, self-expression, performative sadness"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/E-Girl"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 89% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

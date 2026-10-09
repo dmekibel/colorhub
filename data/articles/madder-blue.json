@@ -1,118 +1,118 @@
 {
- "slug": "madder-blue",
- "name": "Madder Blue",
- "hex": "#787D95",
- "names": [
-  "Madder Blue"
- ],
- "tier": "pigment",
- "depth": "brief",
- "lede": "Madder Blue is a greyish violet-blue named in Ridgway's atlas, and a puzzle: madder gives reds, and our sources do not say why a blue carries its name.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A red dye's name on a blue",
-   "body": "Madder is the red dye plant, and the printed cottons that Europe called chintz were dyed with madder red [1]. See [[madder]] for that story. Ridgway's 1912 atlas gives the name Madder Blue to a grey-violet blue at plate XLIII, and Maerz and Paul's dictionary dates the name to 1912 [2]. Why a blue was named for madder is undocumented in the sources we hold.\n\nThe reds and blues of the cloth trade were separate crafts. When European dyers copied the Indian methods, the trade divided into two camps: blue printers using [[indigo]], and chintz-makers using madder [1]. Guilds of dyers, who held that only they could apply indigo to cloth, sometimes pushed back on the blue printers [1]. Both trades grew from the same imported cottons [1]. Compare [[blue]] [1]."
+  "slug": "madder-blue",
+  "name": "Madder Blue",
+  "hex": "#787D95",
+  "names": [
+    "Madder Blue"
+  ],
+  "tier": "pigment",
+  "depth": "brief",
+  "lede": "Madder Blue is a greyish violet-blue named in Ridgway's atlas, and a puzzle: madder gives reds, and our sources do not say why a blue carries its name.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A red dye's name on a blue",
+      "body": "Madder is the red dye plant, and the printed cottons that Europe called chintz were dyed with madder red [1]. See [[irresistible]] for that story. Ridgway's 1912 atlas gives the name Madder Blue to a grey-violet blue at plate XLIII, and Maerz and Paul's dictionary dates the name to 1912 [2]. Why a blue was named for madder is undocumented in the sources we hold.\n\nThe reds and blues of the cloth trade were separate crafts. When European dyers copied the Indian methods, the trade divided into two camps: blue printers using [[indigo]], and chintz-makers using madder [1]. Guilds of dyers, who held that only they could apply indigo to cloth, sometimes pushed back on the blue printers [1]. Both trades grew from the same imported cottons [1]. Compare [[blue]] [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Its near-twin in the charts is Ramier Blue, 2.4 units away [2]. The nearest of our learnable names is [[slate]] [2]. In our archive of 23,781 paintings, 125 (0.53 per cent) hold a color within six units over at least five per cent of the canvas [3]. The 1900s hold 29 of them, 3.3 times the archive rate, and Danish works carry it 4.0 times as often as the archive average, 35 of 1,676 [3]. These are photographs of aged, varnished paintings, so a match is not a pigment test [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "madder, by an undocumented link",
+      "first_recorded": "1912 (Ridgway; Maerz & Paul 1930)",
+      "source": "ColorHub library"
+    },
+    "aka": [
+      "Ramier Blue (near-twin)"
+    ],
+    "siblings": [
+      "irresistible",
+      "indigo",
+      "slate"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "irresistible",
+        "gloss": "the red dye family; Madder Blue is a grey-violet blue"
+      }
+    ],
+    "other_languages": []
   },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Its near-twin in the charts is Ramier Blue, 2.4 units away [2]. The nearest of our learnable names is [[slate]] [2]. In our archive of 23,781 paintings, 125 (0.53 per cent) hold a color within six units over at least five per cent of the canvas [3]. The 1900s hold 29 of them, 3.3 times the archive rate, and Danish works carry it 4.0 times as often as the archive average, 35 of 1,676 [3]. These are photographs of aged, varnished paintings, so a match is not a pigment test [3]."
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#787D95",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 125,
+    "top_paintings": [
+      "smk-KMS8273",
+      "smk-KMS3767"
+    ],
+    "rate": 0.0053
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "In the chintz trade, which dye did the chintz-makers work with?",
+      "choices": [
+        "Madder",
+        "Indigo",
+        "Woad",
+        "Weld"
+      ],
+      "answer": "Madder",
+      "kind": "pick"
+    },
+    {
+      "q": "Which country's paintings carry Madder Blue about four times as often as the archive average?",
+      "choices": [
+        "Denmark",
+        "Spain",
+        "Japan",
+        "Italy"
+      ],
+      "answer": "Denmark",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Madder is the red dye, so a madder-named blue is a riddle the books leave open."
+  ],
+  "words": 245,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "aside": {
-  "origin": {
-   "named_after": "madder, by an undocumented link",
-   "first_recorded": "1912 (Ridgway; Maerz & Paul 1930)",
-   "source": "ColorHub library"
-  },
-  "aka": [
-   "Ramier Blue (near-twin)"
-  ],
-  "siblings": [
-   "madder",
-   "indigo",
-   "slate"
-  ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "madder",
-    "gloss": "the red dye family; Madder Blue is a grey-violet blue"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#787D95",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 125,
-  "top_paintings": [
-   "smk-KMS8273",
-   "smk-KMS3767"
-  ],
-  "rate": 0.0053
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "In the chintz trade, which dye did the chintz-makers work with?",
-   "choices": [
-    "Madder",
-    "Indigo",
-    "Woad",
-    "Weld"
-   ],
-   "answer": "Madder",
-   "kind": "pick"
-  },
-  {
-   "q": "Which country's paintings carry Madder Blue about four times as often as the archive average?",
-   "choices": [
-    "Denmark",
-    "Spain",
-    "Japan",
-    "Italy"
-   ],
-   "answer": "Denmark",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Madder is the red dye, so a madder-named blue is a riddle the books leave open."
- ],
- "words": 245,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

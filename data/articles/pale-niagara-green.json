@@ -1,107 +1,107 @@
 {
- "slug": "pale-niagara-green",
- "name": "Pale Niagara Green",
- "hex": "#C8D6C6",
- "names": [
-  "Pale Niagara Green"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Pale Niagara Green is a soft, greyish green, the pale tone Robert Ridgway charted beside the parent color Niagara Green in his 1912 color atlas.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A pale tone of Niagara Green",
-   "body": "Pale Niagara Green puts Ridgway's tone word Pale in front of [[niagara-green]], the paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. Niagara Green itself is Ridgway's plate XXXIII, hue 41 double-prime, tone b, later filed by the ISCC-NBS dictionary of 1955 in block 163 [1].\n\nIts nearest named neighbor is [[lichen-green]], 2.8 units off and greener than this swatch [1]; [[pale-glaucous-green]] and [[pale-sage]] each sit 3.3 units away, both reading yellower [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 231 of 23,781 paintings, 0.97 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 182 [2]. That makes it more common than 69 percent of the named colors in our library [2]. It peaks in the 1800s, present in 1.2 percent of the 8,345 paintings from that century, 1.6 times the archive's overall rate [2]. Inside a painting it most often plays a light, in 64 percent of its 182 appearances by lightness rank [2].\n\nThe earliest match dates to 1279, a floor and not a first since the archive's early centuries are thin; that is 633 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]. Paul Signac used it most, in 5 of his 18 paintings here, 8.0 times the rate of the museums those works come from, and it is most over-represented in paintings from the United Kingdom, 2.2 times the expected rate [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Ridgway's tone system: the pale tone of Niagara Green",
-   "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXXIII",
-   "source": "Ridgway 1912; ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "niagara-green",
-   "lichen-green",
-   "pale-glaucous-green",
-   "pale-sage"
+  "slug": "pale-niagara-green",
+  "name": "Pale Niagara Green",
+  "hex": "#C8D6C6",
+  "names": [
+    "Pale Niagara Green"
   ],
-  "parent": "niagara-green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 231,
-  "n_within_painting": 182,
-  "pct_archive": 0.97,
-  "rank_pct": 69,
-  "measured": {
-   "nearest": [
-    [
-     "Lichen Green",
-     2.8
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Pale Niagara Green is a soft, greyish green, the pale tone Robert Ridgway charted beside the parent color Niagara Green in his 1912 color atlas.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A pale tone of Niagara Green",
+      "body": "Pale Niagara Green puts Ridgway's tone word Pale in front of [[niagara-green]], the paired-tone method his 1912 *Color Standards and Color Nomenclature* used across the atlas [1]. Niagara Green itself is Ridgway's plate XXXIII, hue 41 double-prime, tone b, later filed by the ISCC-NBS dictionary of 1955 in block 163 [1].\n\nIts nearest named neighbor is [[lichen-green]], 2.8 units off and greener than this swatch [1]; [[pale-sage]] and [[pale-sage]] each sit 3.3 units away, both reading yellower [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 231 of 23,781 paintings, 0.97 percent, as photographed; narrowing to at least five percent coverage inside a painting leaves 182 [2]. That makes it more common than 69 percent of the named colors in our library [2]. It peaks in the 1800s, present in 1.2 percent of the 8,345 paintings from that century, 1.6 times the archive's overall rate [2]. Inside a painting it most often plays a light, in 64 percent of its 182 appearances by lightness rank [2].\n\nThe earliest match dates to 1279, a floor and not a first since the archive's early centuries are thin; that is 633 years before the name's 1912 record, so the match marks a look-alike hue in an aged photograph, not a surviving pigment [2]. Paul Signac used it most, in 5 of his 18 paintings here, 8.0 times the rate of the museums those works come from, and it is most over-represented in paintings from the United Kingdom, 2.2 times the expected rate [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Ridgway's tone system: the pale tone of Niagara Green",
+      "first_recorded": "Ridgway, Color Standards and Color Nomenclature, 1912, plate XXXIII",
+      "source": "Ridgway 1912; ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "niagara-green",
+      "lichen-green",
+      "pale-sage",
+      "pale-green-grey"
     ],
-    [
-     "Pale Glaucous Green",
-     3.3
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955) and look-alike distances, data/graph/edges-p.json",
-   "loc_kind": null,
-   "url": null
+    "parent": "niagara-green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which named color sits closest to Pale Niagara Green?",
-   "choices": [
-    "Lichen Green",
-    "Pale Glaucous Green",
-    "Pale Sage"
-   ],
-   "answer": "Lichen Green",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 231,
+    "n_within_painting": 182,
+    "pct_archive": 0.97,
+    "rank_pct": 69,
+    "measured": {
+      "nearest": [
+        [
+          "Lichen Green",
+          2.8
+        ],
+        [
+          "Pale Glaucous Green",
+          3.3
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: Niagara Green was later filed in the ISCC-NBS 1955 dictionary.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json: Ridgway 1912, ISCC-NBS 1955) and look-alike distances, data/graph/edges-p.json",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed, data/graph/fieldnotes/p.json",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which named color sits closest to Pale Niagara Green?",
+      "choices": [
+        "Lichen Green",
+        "Pale Glaucous Green",
+        "Pale Sage"
+      ],
+      "answer": "Lichen Green",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Niagara Green was later filed in the ISCC-NBS 1955 dictionary.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale Niagara Green turns up most in paintings from the United Kingdom, well beyond the expected rate."
+  ],
+  "words": 276,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "openers": [
-  "Pale Niagara Green turns up most in paintings from the United Kingdom, well beyond the expected rate."
- ],
- "words": 277,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

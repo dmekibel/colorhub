@@ -1,125 +1,124 @@
 {
- "slug": "light-sage",
- "name": "Light Sage",
- "hex": "#BCECAC",
- "names": [
-  "Light Sage"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Light Sage is a pale yellowish green recorded only in the 2010 xkcd color survey, close enough to two ISCC-NBS names to count as near-duplicates.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A light build of sage",
-   "body": "The nearest named colors on file are [[light-grey-green]], [[granny-smith-apple]], [[very-light-green]] and [[light-light-green]], at 2.5, 3.1, 4.2 and 4.5 ΔE [1]. The ISCC-NBS system classes the hue as very light yellowish green, about 2.8 units from that block's center [1]. Its Munsell notation is 9.3GY 8.8/5.1 and its LCH values are lightness 89, chroma 38, hue 136 degrees [1]. In sRGB its components run 188 red, 236 green and 172 blue, a pale mix where green leads but neither red nor blue falls far behind [1].\n\nTwo ISCC-NBS block names, Light Nile Green and Pale Nile Green, cluster close to this swatch [2]. See [[sage]] for the darker, greyer herb color this name lightens. [[olive]] sits further along the same yellow-green family, at a much lower lightness [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Within CIEDE2000 4, Light Sage appears in just 1 of our 23,781 archive paintings, rarer than 86% of our named colors, as photographed [3]. That single match is Alexander von Kotzebue's 1857 painting, where our within-painting lens also finds it as present [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the base color sage, lightened",
-   "first_recorded": "xkcd survey, 2010",
-   "source": "ColorHub Color Graph"
-  },
-  "aka": [
-   "Light Nile Green",
-   "Pale Nile Green"
+  "slug": "light-sage",
+  "name": "Light Sage",
+  "hex": "#BCECAC",
+  "names": [
+    "Light Sage"
   ],
-  "siblings": [
-   "light-grey-green",
-   "granny-smith-apple",
-   "very-light-green",
-   "light-light-green"
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Light Sage is a pale yellowish green recorded only in the 2010 xkcd color survey, close enough to two ISCC-NBS names to count as near-duplicates.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A light build of sage",
+      "body": "The nearest named colors on file are [[light-grey-green]], [[granny-smith-apple]], [[very-light-green]] and [[very-light-green]], at 2.5, 3.1, 4.2 and 4.5 ΔE [1]. The ISCC-NBS system classes the hue as very light yellowish green, about 2.8 units from that block's center [1]. Its Munsell notation is 9.3GY 8.8/5.1 and its LCH values are lightness 89, chroma 38, hue 136 degrees [1]. In sRGB its components run 188 red, 236 green and 172 blue, a pale mix where green leads but neither red nor blue falls far behind [1].\n\nTwo ISCC-NBS block names, Light Nile Green and Pale Nile Green, cluster close to this swatch [2]. See [[sage]] for the darker, greyer herb color this name lightens. [[olive]] sits further along the same yellow-green family, at a much lower lightness [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Within CIEDE2000 4, Light Sage appears in just 1 of our 23,781 archive paintings, rarer than 86% of our named colors, as photographed [3]. That single match is Alexander von Kotzebue's 1857 painting, where our within-painting lens also finds it as present [3]."
+    }
   ],
-  "parent": "sage",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1,
-  "rank_pct_rarer": 86,
-  "first": {
-   "year": 1857,
-   "painter": "Alexander von Kotzebue"
-  },
-  "match": {
-   "hex": "#BCECAC",
-   "de_max": 4
-  },
-  "measured": {
-   "nearest": [
-    [
-     "Light Grey Green",
-     2.5
+  "aside": {
+    "origin": {
+      "named_after": "the base color sage, lightened",
+      "first_recorded": "xkcd survey, 2010",
+      "source": "ColorHub Color Graph"
+    },
+    "aka": [
+      "Light Nile Green",
+      "Pale Nile Green"
     ],
-    [
-     "Granny Smith Apple",
-     3.1
+    "siblings": [
+      "light-grey-green",
+      "granny-smith-apple",
+      "very-light-green"
+    ],
+    "parent": "sage",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1,
+    "rank_pct_rarer": 86,
+    "first": {
+      "year": 1857,
+      "painter": "Alexander von Kotzebue"
+    },
+    "match": {
+      "hex": "#BCECAC",
+      "de_max": 4
+    },
+    "measured": {
+      "nearest": [
+        [
+          "Light Grey Green",
+          2.5
+        ],
+        [
+          "Granny Smith Apple",
+          3.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): nearest named match",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which painter's 1857 work is our archive's one match for Light Sage?",
+      "choices": [
+        "Alexander von Kotzebue",
+        "John Singer Sargent",
+        "Vincent van Gogh"
+      ],
+      "answer": "Alexander von Kotzebue",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Light Sage's nearest common library name is Sage itself.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Our archive holds exactly one match for Light Sage, in an 1857 painting by Alexander von Kotzebue."
+  ],
+  "words": 205,
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): nearest named match",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which painter's 1857 work is our archive's one match for Light Sage?",
-   "choices": [
-    "Alexander von Kotzebue",
-    "John Singer Sargent",
-    "Vincent van Gogh"
-   ],
-   "answer": "Alexander von Kotzebue",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Light Sage's nearest common library name is Sage itself.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Our archive holds exactly one match for Light Sage, in an 1857 painting by Alexander von Kotzebue."
- ],
- "words": 205,
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

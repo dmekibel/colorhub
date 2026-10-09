@@ -1,286 +1,286 @@
 {
- "slug": "grass-green",
- "name": "Grass Green",
- "hex": "#3F9B0B",
- "names": [
-  "Grass Green"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Grass Green is a green named for turf: a yellowish green that Werner's mineral color table fixed as number 54, and that screens now show far brighter than any historical swatch.",
- "sections": [
-  {
-   "id": "swatch",
-   "title": "Which grass green",
-   "body": "The swatch on this page, #3F9B0B, is the saturated grass green of the 2010 xkcd color-naming survey [3]. Older sources use the same name for something much quieter. Werner's table, as printed in Syme's 1821 edition, makes Grass Green its number 54, and Ridgway's color atlas of 1912 gives it a plate of its own [3]. Our library merges those into a muted olive-leaning green whose chroma is about 31, against 76 for this swatch [3].\n\nA third version comes from RAL, the German paint standard, whose number 6010 carries the name and shows on screen as a deeper, bluer green near #3E753B [3]. All of them are called grass green, and none is wrong. The name points at a thing, not at a number, and grass is not one color."
+  "slug": "grass-green",
+  "name": "Grass Green",
+  "hex": "#3F9B0B",
+  "names": [
+    "Grass Green"
+  ],
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Grass Green is a green named for turf: a yellowish green that Werner's mineral color table fixed as number 54, and that screens now show far brighter than any historical swatch.",
+  "sections": [
+    {
+      "id": "swatch",
+      "title": "Which grass green",
+      "body": "The swatch on this page, #3F9B0B, is the saturated grass green of the 2010 xkcd color-naming survey [3]. Older sources use the same name for something much quieter. Werner's table, as printed in Syme's 1821 edition, makes Grass Green its number 54, and Ridgway's color atlas of 1912 gives it a plate of its own [3]. Our library merges those into a muted olive-leaning green whose chroma is about 31, against 76 for this swatch [3].\n\nA third version comes from RAL, the German paint standard, whose number 6010 carries the name and shows on screen as a deeper, bluer green near #3E753B [3]. All of them are called grass green, and none is wrong. The name points at a thing, not at a number, and grass is not one color."
+    },
+    {
+      "id": "name",
+      "title": "A name taken from a thing",
+      "body": "The compound is old. Shakespeare's *Hamlet* has \"grass-green turf\" in Act 4, and Paterson glosses the word as a yellowish green, the color of grass [1]. Such names are borrowed from a natural object, and Baty points out the weakness: they convey a color only to a reader who has seen that object [5].\n\nThe nineteenth century leaned on this weakness and tried to repair it. The Nuremberg dermatologist Heinrich Eichhorn listed grass green among the shades he used for skin eruptions in 1827, and argued for printed color tables so that readers would not have to guess [5]. A flower-painting manual of 1797, probably by George Brookshaw, set out 59 swatches and used grass green among about 20 color names that Syme later borrowed [6].\n\nSyme's Werner defines grass green as emerald green mixed with a little lemon yellow [2]. He illustrates it with a beetle, the noble chafer; with the general look of grass fields and the sweet sugar pear; and with a uranium mineral, torbernite [2][3]. Duck green and sap green, numbers 55 and 56 beside it, were additions of Syme's own 1814 edition [2]. One early follower of Werner left it unclear whether his \"sparrow-grass green\", meaning asparagus, was the same color as grass green [4]. The book that records the doubt does not settle it [4]."
+    },
+    {
+      "id": "paintbox",
+      "title": "In the paintbox",
+      "body": "Painters have long mixed their grass. Cennini's recipe, as Finlay reports it, takes verdigris with about a third saffron and promises the most perfect grass green [7]. Finlay adds that Cennini seems not to have known that the saffron also protects parchment from the corrosive copper green [7].\n\nNot every pairing worked. Verdigris and [[orpiment]] would have made a pleasant grass green, but in a watery medium the copper reacts with the sulphur in the orpiment and forms black copper sulphide [8]. A nineteenth-century mixed green sold as Hooker's green came in grades, and a dealer named Salter described the lighter as a light grass green and the deeper as more powerful [9]. By 1928 Heaton listed [[hooker-s-green]] as obsolete or rarely used [9].\n\nA natural source exists too. The mineral glauconite, which forms in marine settings, is a grass-green earth, though ground to a powder it is hard to tell from celadonite and both read as a pale, greyish green [10]. Gurney gives a modern lesson: with no tube called grass green, you are forced to mix it, and you are more likely to match the green in front of you [15]."
+    },
+    {
+      "id": "history",
+      "title": "From Newton to the Park",
+      "body": "In his Cambridge lectures of 1669 and 1670, Newton described eleven named steps of the spectrum, among them green, grass-green and sea-green, before he reduced them to seven [11]. The seven are therefore a choice he made, not the count nature hands us [11].\n\nThe dye age put grass green on the street. The French critic Hippolyte Taine, walking in London's Hyde Park in the 1860s, was shocked by women in violet, poppy-red and grass-green dresses, and took the display for the clothing of a parvenue or worse [12]. Greenfield uses his reaction to show how far synthetic dyes had loosened the Victorian palette [12]."
+    },
+    {
+      "id": "claims",
+      "title": "Claims about the color",
+      "body": "Occult writers quoted by Birren recommend grass greens for an invigorating effect on the nerves and the blood [13]. This is a claim, not a finding: Birren himself calls the whole process hard to defend to a rational reader [13]. Healing by color has no support here.\n\nBirren's chapter on color vision offers a better lesson [14]. Some color-defective people get by because they know that grass is green, so a name learned from experience stands in for what they cannot see [14]. They fail where the colors are greyish and the distinctions fine [14]. Grass green is a color of memory as much as of sight."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive holds 23,781 painting photographs [16]. A color within ten CIEDE2000 units of the bright swatch, covering at least five per cent of the canvas, turns up in just 7 of them [16]. All are dated 1886 or later [16]. The earliest is Gauguin's *[[painting:commons-Q79790701|Mother and Child under a Tree at Pont-Aven]]*, and the list includes van Gogh's *[[painting:nga-163323|Green Wheat Fields, Auvers]]* and Matisse's *[[painting:commons-Q21723020|Nymph and Satyr]]*, where the green fills 32 per cent of the canvas [16].\n\nThe old, quieter grass green is common by contrast. Within six units and at least five per cent of the canvas, the muted Werner and Ridgway swatch appears in 262 paintings, 135 of them from the 1800s [17]. [[painter:georges-seurat|Seurat]] carries it in 10 of his 41 works here, and [[painter:camille-pissarro|Pissarro]] in 9 of 50 [17]. Painters here are far likelier to have used the dull one.\n\nThe phrase itself peaks in printed English around 1820 and has since fallen to about a quarter of that peak [18]. As always, these are photographs of aged, varnished paintings, and screen colors are approximate [16][17]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "grass (turf)",
+      "first_recorded": "Shakespeare's Hamlet, Act 4 scene 5 ('grass-green turf'); Werner no. 54, Syme 1821 edition",
+      "source": "Paterson, A Dictionary of Colour; Baty, Nature's Palette"
+    },
+    "aka": [
+      "Werner's no. 54",
+      "RAL 6010 (paint standard)"
+    ],
+    "siblings": [
+      "grass",
+      "apple-green",
+      "emerald-green"
+    ],
+    "parent": null,
+    "children": [
+      "dark-grass-green",
+      "grass"
+    ],
+    "disambiguation": [
+      {
+        "slug": "grass",
+        "gloss": "the xkcd color Grass, close in hue but lighter and a little yellower"
+      }
+    ],
+    "other_languages": []
   },
-  {
-   "id": "name",
-   "title": "A name taken from a thing",
-   "body": "The compound is old. Shakespeare's *Hamlet* has \"grass-green turf\" in Act 4, and Paterson glosses the word as a yellowish green, the color of grass [1]. Such names are borrowed from a natural object, and Baty points out the weakness: they convey a color only to a reader who has seen that object [5].\n\nThe nineteenth century leaned on this weakness and tried to repair it. The Nuremberg dermatologist Heinrich Eichhorn listed grass green among the shades he used for skin eruptions in 1827, and argued for printed color tables so that readers would not have to guess [5]. A flower-painting manual of 1797, probably by George Brookshaw, set out 59 swatches and used grass green among about 20 color names that Syme later borrowed [6].\n\nSyme's Werner defines grass green as emerald green mixed with a little lemon yellow [2]. He illustrates it with a beetle, the noble chafer; with the general look of grass fields and the sweet sugar pear; and with a uranium mineral, torbernite [2][3]. Duck green and sap green, numbers 55 and 56 beside it, were additions of Syme's own 1814 edition [2]. One early follower of Werner left it unclear whether his \"sparrow-grass green\", meaning asparagus, was the same color as grass green [4]. The book that records the doubt does not settle it [4]."
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#3F9B0B",
+      "de2000": 10,
+      "min_cover": 0.05
+    },
+    "n_present": 7,
+    "top_paintings": [
+      "commons-Q21723020",
+      "commons-Q79790701",
+      "nga-3204",
+      "nga-163323",
+      "commons-Q48977211",
+      "commons-Q123338551"
+    ],
+    "comparison": {
+      "hex": "#7D8C55",
+      "de2000": 6,
+      "min_cover": 0.05,
+      "n_present": 262,
+      "note": "Werner/Ridgway muted swatch"
+    },
+    "ngram": {
+      "term": "grass green",
+      "peak": 1820
+    },
+    "measured": {
+      "swatch_lch": [
+        56.6,
+        75.8,
+        131.3
+      ],
+      "werner_swatch_lch": [
+        56,
+        31,
+        118
+      ]
+    }
   },
-  {
-   "id": "paintbox",
-   "title": "In the paintbox",
-   "body": "Painters have long mixed their grass. Cennini's recipe, as Finlay reports it, takes verdigris with about a third saffron and promises the most perfect grass green [7]. Finlay adds that Cennini seems not to have known that the saffron also protects parchment from the corrosive copper green [7].\n\nNot every pairing worked. Verdigris and [[orpiment]] would have made a pleasant grass green, but in a watery medium the copper reacts with the sulphur in the orpiment and forms black copper sulphide [8]. A nineteenth-century mixed green sold as Hooker's green came in grades, and a dealer named Salter described the lighter as a light grass green and the deeper as more powerful [9]. By 1928 Heaton listed [[hooker-s-green]] as obsolete or rarely used [9].\n\nA natural source exists too. The mineral glauconite, which forms in marine settings, is a grass-green earth, though ground to a powder it is hard to tell from celadonite and both read as a pale, greyish green [10]. Gurney gives a modern lesson: with no tube called grass green, you are forced to mix it, and you are more likely to match the green in front of you [15]."
-  },
-  {
-   "id": "history",
-   "title": "From Newton to the Park",
-   "body": "In his Cambridge lectures of 1669 and 1670, Newton described eleven named steps of the spectrum, among them green, grass-green and sea-green, before he reduced them to seven [11]. The seven are therefore a choice he made, not the count nature hands us [11].\n\nThe dye age put grass green on the street. The French critic Hippolyte Taine, walking in London's Hyde Park in the 1860s, was shocked by women in violet, poppy-red and grass-green dresses, and took the display for the clothing of a parvenue or worse [12]. Greenfield uses his reaction to show how far synthetic dyes had loosened the Victorian palette [12]."
-  },
-  {
-   "id": "claims",
-   "title": "Claims about the color",
-   "body": "Occult writers quoted by Birren recommend grass greens for an invigorating effect on the nerves and the blood [13]. This is a claim, not a finding: Birren himself calls the whole process hard to defend to a rational reader [13]. Healing by color has no support here.\n\nBirren's chapter on color vision offers a better lesson [14]. Some color-defective people get by because they know that grass is green, so a name learned from experience stands in for what they cannot see [14]. They fail where the colors are greyish and the distinctions fine [14]. Grass green is a color of memory as much as of sight."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive holds 23,781 painting photographs [16]. A color within ten CIEDE2000 units of the bright swatch, covering at least five per cent of the canvas, turns up in just 7 of them [16]. All are dated 1886 or later [16]. The earliest is Gauguin's *[[painting:commons-Q79790701|Mother and Child under a Tree at Pont-Aven]]*, and the list includes van Gogh's *[[painting:nga-163323|Green Wheat Fields, Auvers]]* and Matisse's *[[painting:commons-Q21723020|Nymph and Satyr]]*, where the green fills 32 per cent of the canvas [16].\n\nThe old, quieter grass green is common by contrast. Within six units and at least five per cent of the canvas, the muted Werner and Ridgway swatch appears in 262 paintings, 135 of them from the 1800s [17]. [[painter:georges-seurat|Seurat]] carries it in 10 of his 41 works here, and [[painter:camille-pissarro|Pissarro]] in 9 of 50 [17]. Painters here are far likelier to have used the dull one.\n\nThe phrase itself peaks in printed English around 1820 and has since fallen to about a quarter of that peak [18]. As always, these are photographs of aged, varnished paintings, and screen colors are approximate [16][17]."
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"grass-green\", p. 193",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 152-154 (Werner no. 54 and Syme's additions)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-g.json): Werner 1821 no. 54, Ridgway 1912 plate VI, RAL 6010, xkcd 2010, ISCC-NBS 1955 block 120; chroma from CIE LCH",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 20",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 220",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 165",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 16",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 19",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Kirby et al., Pigment Compendium, \"Hooker's green\", p. 199",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"glauconite\", p. 188",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 172",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Greenfield, A Perfect Red, ch. 24",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 4 (\"The Aural Healers\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 17",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, p. 106",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 painting photographs, as photographed), swatch #3F9B0B, CIEDE2000 within 10, at least 5% of canvas; tools/article_field.py",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "data",
+      "cite": "ColorHub archive, swatch #7D8C55 (Werner/Ridgway Grass Green), CIEDE2000 within 6, at least 5% of canvas; tools/article_field.py",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "data",
+      "cite": "Google Books Ngram, phrase 'grass green', 5-year smoothed, relative to peak (data/graph/fieldnotes/g.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "In Syme's edition of Werner's table, what is grass green said to be made of?",
+      "choices": [
+        "Emerald green with a little lemon yellow",
+        "Verdigris with saffron",
+        "Sap green with indigo",
+        "Duck green with white"
+      ],
+      "answer": "Emerald green with a little lemon yellow",
+      "kind": "pick"
+    },
+    {
+      "q": "Why is the bright swatch on this page unlike the grass green of Werner's table?",
+      "choices": [
+        "It comes from a 2010 online color survey and is far more saturated",
+        "It is a faded version of the same swatch",
+        "It is the RAL paint standard",
+        "It was measured from a lawn"
+      ],
+      "answer": "It comes from a 2010 online color survey and is far more saturated",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Birren found the claim that grass greens invigorate the nerves well supported.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Werner explained grass green with a beetle, a pear, a meadow and a uranium mineral.",
+    "The bright grass green on screen fills five per cent of a canvas in only 7 of our 23,781 paintings, none earlier than 1886.",
+    "When a painter says grass green, think duller and more olive than the screen swatch."
+  ],
+  "words": 935,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Softened 'painters meant the dull one' (data shows frequency, not intent)."
+    ]
   }
- ],
- "aside": {
-  "origin": {
-   "named_after": "grass (turf)",
-   "first_recorded": "Shakespeare's Hamlet, Act 4 scene 5 ('grass-green turf'); Werner no. 54, Syme 1821 edition",
-   "source": "Paterson, A Dictionary of Colour; Baty, Nature's Palette"
-  },
-  "aka": [
-   "Werner's no. 54",
-   "RAL 6010 (paint standard)"
-  ],
-  "siblings": [
-   "grass",
-   "apple-green",
-   "emerald-green"
-  ],
-  "parent": null,
-  "children": [
-   "dark-grass-green",
-   "grassy-green"
-  ],
-  "disambiguation": [
-   {
-    "slug": "grass",
-    "gloss": "the xkcd color Grass, close in hue but lighter and a little yellower"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#3F9B0B",
-   "de2000": 10,
-   "min_cover": 0.05
-  },
-  "n_present": 7,
-  "top_paintings": [
-   "commons-Q21723020",
-   "commons-Q79790701",
-   "nga-3204",
-   "nga-163323",
-   "commons-Q48977211",
-   "commons-Q123338551"
-  ],
-  "comparison": {
-   "hex": "#7D8C55",
-   "de2000": 6,
-   "min_cover": 0.05,
-   "n_present": 262,
-   "note": "Werner/Ridgway muted swatch"
-  },
-  "ngram": {
-   "term": "grass green",
-   "peak": 1820
-  },
-  "measured": {
-   "swatch_lch": [
-    56.6,
-    75.8,
-    131.3
-   ],
-   "werner_swatch_lch": [
-    56,
-    31,
-    118
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"grass-green\", p. 193",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 152-154 (Werner no. 54 and Syme's additions)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-g.json): Werner 1821 no. 54, Ridgway 1912 plate VI, RAL 6010, xkcd 2010, ISCC-NBS 1955 block 120; chroma from CIE LCH",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 20",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 220",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 165",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 16",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 19",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Kirby et al., Pigment Compendium, \"Hooker's green\", p. 199",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"glauconite\", p. 188",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 172",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Greenfield, A Perfect Red, ch. 24",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 4 (\"The Aural Healers\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 17",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, p. 106",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 painting photographs, as photographed), swatch #3F9B0B, CIEDE2000 within 10, at least 5% of canvas; tools/article_field.py",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "data",
-   "cite": "ColorHub archive, swatch #7D8C55 (Werner/Ridgway Grass Green), CIEDE2000 within 6, at least 5% of canvas; tools/article_field.py",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "data",
-   "cite": "Google Books Ngram, phrase 'grass green', 5-year smoothed, relative to peak (data/graph/fieldnotes/g.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "In Syme's edition of Werner's table, what is grass green said to be made of?",
-   "choices": [
-    "Emerald green with a little lemon yellow",
-    "Verdigris with saffron",
-    "Sap green with indigo",
-    "Duck green with white"
-   ],
-   "answer": "Emerald green with a little lemon yellow",
-   "kind": "pick"
-  },
-  {
-   "q": "Why is the bright swatch on this page unlike the grass green of Werner's table?",
-   "choices": [
-    "It comes from a 2010 online color survey and is far more saturated",
-    "It is a faded version of the same swatch",
-    "It is the RAL paint standard",
-    "It was measured from a lawn"
-   ],
-   "answer": "It comes from a 2010 online color survey and is far more saturated",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Birren found the claim that grass greens invigorate the nerves well supported.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Werner explained grass green with a beetle, a pear, a meadow and a uranium mineral.",
-  "The bright grass green on screen fills five per cent of a canvas in only 7 of our 23,781 paintings, none earlier than 1886.",
-  "When a painter says grass green, think duller and more olive than the screen swatch."
- ],
- "words": 935,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Softened 'painters meant the dull one' (data shows frequency, not intent)."
-  ]
- }
 }

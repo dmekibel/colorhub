@@ -1,419 +1,419 @@
 {
- "slug": "black",
- "name": "Black",
- "hex": "#16171A",
- "names": [
-  "Black"
- ],
- "tier": "pigment",
- "depth": "epic",
- "lede": "Black is the darkest color, the one a surface shows when it sends back almost no light: the color of soot, ink and night, which Europe has treated in turn as fertile, devilish, humble, luxurious, and not a color at all.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A word for burning and shining",
-   "body": "English *black* comes from Old English *blæc*, which meant black or dark and also ink [1]. Behind it lies a Proto-Germanic *blakaz*, burnt, possibly from an older root meaning to burn or to shine; Dutch *blaken*, to burn, and Latin *flagrare*, to blaze, are distant relatives [1]. Pastoureau draws the same line from another side: Old English had a dull *swart* and a gleaming *blæc*, and *blæc* shares its root with *blank*, the glossy white [2].\n\nLatin, too, had two blacks. *Ater* was matte and turned negative early, which is why it survives in *atrocious*, while *niger* was glossy and prestigious and replaced it under the empire [2]. Old French kept only *noir*, from *niger*, and afterwards needed comparisons, black as pitch, as a crow, as ink, to name its shades [2].\n\nThe swatch on this page is a very dark, faintly cool grey-black, about 5 units from the screen's pure black, #000000 [26]. The color dictionaries file a swatch this dark as brownish black, and its nearest named neighbors are [[eerie-black]], [[almost-black]] and [[raisin-black]] [26]. Real blacks are rarely neutral, and the lighter darks [[jet]] and [[charcoal]] show how quickly a black becomes a grey [26]."
-  },
-  {
-   "id": "material",
-   "title": "Soot, bone, ivory and ink",
-   "body": "Black is the pigment that fire leaves behind [3]. The oldest blacks were carbon from burnt wood, bark or shells, and later from bone, ivory and antler [3]. The Panel of the Horses in the Chauvet cave, about twice as old as Lascaux, is drawn entirely in charcoal [11]. At Lascaux itself the great black bull is painted not in carbon but in manganese oxide, a mineral black [3].\n\nRoman painters prized vine black, made by charring dry vine shoots, for its depth and bluish highlights; ivory black was thought finer but cost too much [3]. Ivory black is the charcoal of heated ivory shavings and bones [23]. The story that bone black was made from human corpses is a legend: Finlay says it came from cattle and lamb bones, and the pigment that really used human remains was mummy brown [11].\n\nInk is black's other great use. Egyptian scribes around 2600 BC wrote with lampblack mixed with water and gum arabic [14]. Iron-gall ink, made from the tannin of oak galls and iron sulphate, gave a durable blue-black, and in Europe it ranges from faded yellow to strong black through rusty browns [14][11]. The ink of Gutenberg's 42-line Bible of 1455 was carbon black in linseed oil, and its recipe barely changed until the nineteenth century [7].\n\nNo surface is perfectly black. Most black paints still reflect about 4 per cent of the light that falls on them [17]. Vantablack, a carbon-nanotube coating made in Britain in 2014, traps 99.965 per cent, so dark that people cannot see depth or texture on it [12]."
-  },
-  {
-   "id": "history",
-   "title": "Fertile black, mourning black",
-   "body": "Black did not begin as a bad color. In Egypt it was the color of the fertile silt of the Nile, set against the sterile red of the desert [3]. Anubis, the jackal-headed god of embalming, was painted black as a promise of rebirth [3]. In Greece the night goddess Nyx rode a chariot drawn by black horses, and her statue at Rhamnous was carved from black marble [3].\n\nMourning dress in Europe began in Rome in the second century BC, when magistrates wore a dark toga to funerals [4]. The cloth, *pullus*, was dark undyed wool, probably closer to ash grey than to a true black [4]. Among the Germanic peoples the raven was divine: Odin's ravens Huginn and Muninn, thought and memory, carried him news, and warriors carried a black crow emblem into battle [4]. In 751 Pope Zachary told Saint Boniface that Christians should not eat crows and ravens [4]."
-  },
-  {
-   "id": "middle-ages",
-   "title": "The devil's black and the monk's black",
-   "body": "The medieval Church held two blacks at once [4]. From the late Carolingian period black became the habit of Benedictine monks, a sign of humility, although their real cloth was often brown, blue, grey or undyed [4][5]. By about the year 1000, black was also the liturgical color for Advent, Lent, Good Friday and masses for the dead [4]. After that date, Pastoureau writes, black's positive side largely faded and the devil took it over [4].\n\nIn 1124 the Cluniac abbot Peter the Venerable mocked Bernard of Clairvaux and his white monks for their pride, and Bernard replied that black was the color of the devil, death and sin [5]. Heraldry helped rescue the color. The Holy Roman emperor bore a black eagle on gold from the mid-twelfth century, and heraldic *sable* takes its name from a Slavic word for the marten, whose prized black fur came from Russia and Poland [5]. In the romances of the same age an unknown black knight was usually a hero in disguise, such as Tristan or Lancelot [5]."
-  },
-  {
-   "id": "fashion",
-   "title": "Hard to dye, then fashionable",
-   "body": "A deep, even black was one of the hardest colors to dye. Medieval dyers used the bark, roots or husks of alder, walnut, chestnut and oak with iron-rich mordants, and the only sure deep black came from costly imported oak galls [6]. Cheats topped weak blacks with lampblack or charcoal, and lawsuits over the fraud ran from the thirteenth to the seventeenth century [6].\n\nThe fashion for black began before the Black Death of 1346 to 1350 [6]. Lawyers and magistrates adopted it under Philip the Fair of France, who reigned from 1285 to 1314, as the dress of austere authority [6]. Around 1360 to 1380, Italian merchants barred by sumptuary laws from princely scarlets turned to black and pushed dyers to make it solid and brilliant [6]. A Sicilian herald of the 1430s noted that the best black cloth cost as much as scarlet [22]. The Augsburg banker Matthäus Schwarz, whose name means black, had himself drawn in his clothes through life, and wears black in 123 of 137 pictures [6].\n\nCourts made it formal. Black was already worn at courts before Philip the Good, Duke of Burgundy from 1419 to 1467, but Pastoureau credits him with launching the style for good and the Burgundian court with making it protocol; the Spanish court took it up, and it lasted to the mid-seventeenth century [6]. The Protestant reformers favored black, grey and brown and condemned bright colors [7]. Around 1700, a third of the clothing in Parisian noble inventories was black [7]. Only in the seventeenth century did black become the settled color of mourning across western Europe [7]."
-  },
-  {
-   "id": "print",
-   "title": "Ink on paper, and out of the spectrum",
-   "body": "Printing made black the color of the written word. Manuscript inks were pale and often faded to brown, while printers' ink was a dense black that sank into the paper, and Pastoureau argues that the printed page did more than any theory to set black and white apart from the colors [7]. Leonardo da Vinci, in the late fifteenth century, was the first artist to declare black not truly a color [2].\n\nNewton finished the job. His prism experiments of 1665 and 1666 showed white light to be a mixture of colors, which kept white inside his system as their sum and left black wholly outside it [8]. For more than two centuries black and white were treated as something apart from color, until a Paris exhibition at the Maeght Gallery at the end of 1946 proclaimed that black is a color [2]."
-  },
-  {
-   "id": "modern",
-   "title": "Dandies, dresses and flags",
-   "body": "From the late eighteenth century until the 1920s, black was the standard color of men's suits, from the honest citizens of the French Revolution to the dandies around Brummell [9]. Romantic melancholy made it a virtue, and Hamlet's black replaced Werther's blue coat as the young man's costume [9]. By Pastoureau's account Henry Ford long refused to sell colored cars despite his customers' wishes, a case he reads as Protestant restraint rather than technical limit [9].\n\nBlack then turned modern. Proust dressed Odette in black in 1913, and Coco Chanel's little black dress dates from 1926 [10]. Politics took the color in opposite directions: the black flag of the anarchists from the 1880s, and Mussolini's Blackshirts from 1919 [10]. In color polls since the Second World War, black sits in the middle of the six basic colors, behind blue, green and red [10].\n\nMourning kept its own black materials. After Prince Albert died in 1861, Queen Victoria's long mourning drove a boom in Whitby jet, a hard coal-like stone; the trade employed 1,400 people in the 1870s and five by 1936 [13]."
-  },
-  {
-   "id": "art",
-   "title": "Painting with black, and without it",
-   "body": "Old masters used black for more than shadows. By the 1650s Rembrandt's palette was about half a dozen pigments, charcoal and bone black among them [16]. Black could even stand in for blue: the purple of a van Dyck dress is red lake, charcoal and white, and the pale lilac of Hendrickje's dress in a Rembrandt portrait has no blue pigment at all [16]. Anders Zorn later built whole portraits from a palette of vermilion, ivory black, flake white and yellow ochre [24].\n\nThe Impressionists set black aside [11]. They held that there is no black in nature and mixed their darks from colors; National Gallery conservators found that Monet's locomotives at Gare Saint-Lazare are vermilion, French ultramarine and emerald green, with almost no black [11]. Ball finds only sparing ivory black in Monet's four 1877 views of the station, one of which, *[[art:aic-16571|Arrival of the Normandy Train]]*, is in our archive [15][25]. Gauguin urged painters to reject black and grey entirely [9]. Van Gogh took another line, treating black and white as a complementary pair, like red and green [15].\n\nThe twentieth century put black at the center. Kazimir Malevich's *Black Square*, painted in four versions between 1915 and 1930, is believed to be the first purely abstract painting [12]. From 1975 to 1980 Pierre Soulages moved to what he called *outrenoir*, beyond black: canvases covered in ivory black whose ridges and grooves catch the light [10]."
-  },
-  {
-   "id": "science",
-   "title": "Seeing black",
-   "body": "Black is a sensation, not just an absence. Birren, following Helmholtz, notes that closed eyes in the dark see a grey, not a black, and that a surface reflecting 5 per cent of the light looks blacker under stronger light, because its surroundings grow brighter [19]. Black, in other words, is made by contrast. Livingstone rejects the old rule that black is not a color: it is a color without hue, at the dark end of the lightness axis that every color shares [18].\n\nThat is why a black object can look black in sunshine while reflecting more light than a white page in a dim room [20]. It is also why painters reach for mixed darks. Mixed from deep blues, reds and greens, a dark can pass for black, which is how the Impressionists and Gauguin built theirs [9][11]."
-  },
-  {
-   "id": "myths",
-   "title": "Myths and loose ends",
-   "body": "The corpse story of bone black is the myth most tied to the pigment, and it is wrong, as told above [11]. Another common claim is that black and white are not colors. Leonardo and later Renoir both said so, but the claim is not true to seeing; Livingstone treats them as colors without hue [2][12][18].\n\nOne loose end is the black in photographs of old paintings. Our archive measures photographs, not paint, so a dark varnished brown or blue can read as black there, which is why its numbers are always given as photographed [25]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Black is everywhere in our archive. A screen color within six units of this Black covers at least five per cent of the canvas in 5,405 of 23,781 paintings, almost one in four [25]. Inside a painting it always plays the darkest role, the shadow [25]. The works where it covers the most are mostly portraits with near-black grounds and dark clothes: Claude Ferdinand Gaillard's portrait of Monsignor de Ségur of 1879, about 95 per cent, and Willem Kalf's *[[art:cma-138359|Wineglass and a Bowl of Fruit]]* of 1663, about 94 per cent [25].\n\nThe peak matches the history of black dress. Paintings from the 1500s and 1600s carry it at about 1.24 times the archive rate, and in the 1560s it appears in 62 of 159 works, nearly two in five [25]. Frans Hals has it in 17 of his 23 paintings here, as in his *[[art:rijks-200109344|Portrait of Jan van de Poll]]*, and Nicolaes Maes in 17 of 21 [25]. Spanish paintings carry it in 697 of 2,140, above the archive average [25].\n\nThe Impressionists are the exception the books predict [11]. Only 7 of their 140 paintings in the archive pass the threshold, about a fifth of the expected rate [25]. The earliest dated match is an Egyptian *[[art:aic-121738|Ostracon with a Drawing of a King]]* of about 1295 BC [25]. These are photographs of aged, varnished paintings, and a color match is not a pigment test: a dark varnished brown can read as black, and a black can be charcoal, bone, ivory or a mix [25]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Old English blæc, black, dark, ink; from a Proto-Germanic word for burnt",
-   "first_recorded": "Old English blæc",
-   "source": "Wiktionary (black)"
-  },
-  "aka": [
-   "Sable (heraldry)",
-   "Lampblack, vine black, bone black, ivory black, charcoal (pigments)",
-   "Iron-gall ink, India ink"
+  "slug": "black",
+  "name": "Black",
+  "hex": "#16171A",
+  "names": [
+    "Black"
   ],
-  "siblings": [
-   "eerie-black",
-   "almost-black",
-   "smoky-black",
-   "raisin-black"
+  "tier": "pigment",
+  "depth": "epic",
+  "lede": "Black is the darkest color, the one a surface shows when it sends back almost no light: the color of soot, ink and night, which Europe has treated in turn as fertile, devilish, humble, luxurious, and not a color at all.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A word for burning and shining",
+      "body": "English *black* comes from Old English *blæc*, which meant black or dark and also ink [1]. Behind it lies a Proto-Germanic *blakaz*, burnt, possibly from an older root meaning to burn or to shine; Dutch *blaken*, to burn, and Latin *flagrare*, to blaze, are distant relatives [1]. Pastoureau draws the same line from another side: Old English had a dull *swart* and a gleaming *blæc*, and *blæc* shares its root with *blank*, the glossy white [2].\n\nLatin, too, had two blacks. *Ater* was matte and turned negative early, which is why it survives in *atrocious*, while *niger* was glossy and prestigious and replaced it under the empire [2]. Old French kept only *noir*, from *niger*, and afterwards needed comparisons, black as pitch, as a crow, as ink, to name its shades [2].\n\nThe swatch on this page is a very dark, faintly cool grey-black, about 5 units from the screen's pure black, #000000 [26]. The color dictionaries file a swatch this dark as brownish black, and its nearest named neighbors are [[eerie-black]], [[rich-black-fogra39]] and [[raisin-black]] [26]. Real blacks are rarely neutral, and the lighter darks [[jet]] and [[charcoal]] show how quickly a black becomes a grey [26]."
+    },
+    {
+      "id": "material",
+      "title": "Soot, bone, ivory and ink",
+      "body": "Black is the pigment that fire leaves behind [3]. The oldest blacks were carbon from burnt wood, bark or shells, and later from bone, ivory and antler [3]. The Panel of the Horses in the Chauvet cave, about twice as old as Lascaux, is drawn entirely in charcoal [11]. At Lascaux itself the great black bull is painted not in carbon but in manganese oxide, a mineral black [3].\n\nRoman painters prized vine black, made by charring dry vine shoots, for its depth and bluish highlights; ivory black was thought finer but cost too much [3]. Ivory black is the charcoal of heated ivory shavings and bones [23]. The story that bone black was made from human corpses is a legend: Finlay says it came from cattle and lamb bones, and the pigment that really used human remains was mummy brown [11].\n\nInk is black's other great use. Egyptian scribes around 2600 BC wrote with lampblack mixed with water and gum arabic [14]. Iron-gall ink, made from the tannin of oak galls and iron sulphate, gave a durable blue-black, and in Europe it ranges from faded yellow to strong black through rusty browns [14][11]. The ink of Gutenberg's 42-line Bible of 1455 was carbon black in linseed oil, and its recipe barely changed until the nineteenth century [7].\n\nNo surface is perfectly black. Most black paints still reflect about 4 per cent of the light that falls on them [17]. Vantablack, a carbon-nanotube coating made in Britain in 2014, traps 99.965 per cent, so dark that people cannot see depth or texture on it [12]."
+    },
+    {
+      "id": "history",
+      "title": "Fertile black, mourning black",
+      "body": "Black did not begin as a bad color. In Egypt it was the color of the fertile silt of the Nile, set against the sterile red of the desert [3]. Anubis, the jackal-headed god of embalming, was painted black as a promise of rebirth [3]. In Greece the night goddess Nyx rode a chariot drawn by black horses, and her statue at Rhamnous was carved from black marble [3].\n\nMourning dress in Europe began in Rome in the second century BC, when magistrates wore a dark toga to funerals [4]. The cloth, *pullus*, was dark undyed wool, probably closer to ash grey than to a true black [4]. Among the Germanic peoples the raven was divine: Odin's ravens Huginn and Muninn, thought and memory, carried him news, and warriors carried a black crow emblem into battle [4]. In 751 Pope Zachary told Saint Boniface that Christians should not eat crows and ravens [4]."
+    },
+    {
+      "id": "middle-ages",
+      "title": "The devil's black and the monk's black",
+      "body": "The medieval Church held two blacks at once [4]. From the late Carolingian period black became the habit of Benedictine monks, a sign of humility, although their real cloth was often brown, blue, grey or undyed [4][5]. By about the year 1000, black was also the liturgical color for Advent, Lent, Good Friday and masses for the dead [4]. After that date, Pastoureau writes, black's positive side largely faded and the devil took it over [4].\n\nIn 1124 the Cluniac abbot Peter the Venerable mocked Bernard of Clairvaux and his white monks for their pride, and Bernard replied that black was the color of the devil, death and sin [5]. Heraldry helped rescue the color. The Holy Roman emperor bore a black eagle on gold from the mid-twelfth century, and heraldic *sable* takes its name from a Slavic word for the marten, whose prized black fur came from Russia and Poland [5]. In the romances of the same age an unknown black knight was usually a hero in disguise, such as Tristan or Lancelot [5]."
+    },
+    {
+      "id": "fashion",
+      "title": "Hard to dye, then fashionable",
+      "body": "A deep, even black was one of the hardest colors to dye. Medieval dyers used the bark, roots or husks of alder, walnut, chestnut and oak with iron-rich mordants, and the only sure deep black came from costly imported oak galls [6]. Cheats topped weak blacks with lampblack or charcoal, and lawsuits over the fraud ran from the thirteenth to the seventeenth century [6].\n\nThe fashion for black began before the Black Death of 1346 to 1350 [6]. Lawyers and magistrates adopted it under Philip the Fair of France, who reigned from 1285 to 1314, as the dress of austere authority [6]. Around 1360 to 1380, Italian merchants barred by sumptuary laws from princely scarlets turned to black and pushed dyers to make it solid and brilliant [6]. A Sicilian herald of the 1430s noted that the best black cloth cost as much as scarlet [22]. The Augsburg banker Matthäus Schwarz, whose name means black, had himself drawn in his clothes through life, and wears black in 123 of 137 pictures [6].\n\nCourts made it formal. Black was already worn at courts before Philip the Good, Duke of Burgundy from 1419 to 1467, but Pastoureau credits him with launching the style for good and the Burgundian court with making it protocol; the Spanish court took it up, and it lasted to the mid-seventeenth century [6]. The Protestant reformers favored black, grey and brown and condemned bright colors [7]. Around 1700, a third of the clothing in Parisian noble inventories was black [7]. Only in the seventeenth century did black become the settled color of mourning across western Europe [7]."
+    },
+    {
+      "id": "print",
+      "title": "Ink on paper, and out of the spectrum",
+      "body": "Printing made black the color of the written word. Manuscript inks were pale and often faded to brown, while printers' ink was a dense black that sank into the paper, and Pastoureau argues that the printed page did more than any theory to set black and white apart from the colors [7]. Leonardo da Vinci, in the late fifteenth century, was the first artist to declare black not truly a color [2].\n\nNewton finished the job. His prism experiments of 1665 and 1666 showed white light to be a mixture of colors, which kept white inside his system as their sum and left black wholly outside it [8]. For more than two centuries black and white were treated as something apart from color, until a Paris exhibition at the Maeght Gallery at the end of 1946 proclaimed that black is a color [2]."
+    },
+    {
+      "id": "modern",
+      "title": "Dandies, dresses and flags",
+      "body": "From the late eighteenth century until the 1920s, black was the standard color of men's suits, from the honest citizens of the French Revolution to the dandies around Brummell [9]. Romantic melancholy made it a virtue, and Hamlet's black replaced Werther's blue coat as the young man's costume [9]. By Pastoureau's account Henry Ford long refused to sell colored cars despite his customers' wishes, a case he reads as Protestant restraint rather than technical limit [9].\n\nBlack then turned modern. Proust dressed Odette in black in 1913, and Coco Chanel's little black dress dates from 1926 [10]. Politics took the color in opposite directions: the black flag of the anarchists from the 1880s, and Mussolini's Blackshirts from 1919 [10]. In color polls since the Second World War, black sits in the middle of the six basic colors, behind blue, green and red [10].\n\nMourning kept its own black materials. After Prince Albert died in 1861, Queen Victoria's long mourning drove a boom in Whitby jet, a hard coal-like stone; the trade employed 1,400 people in the 1870s and five by 1936 [13]."
+    },
+    {
+      "id": "art",
+      "title": "Painting with black, and without it",
+      "body": "Old masters used black for more than shadows. By the 1650s Rembrandt's palette was about half a dozen pigments, charcoal and bone black among them [16]. Black could even stand in for blue: the purple of a van Dyck dress is red lake, charcoal and white, and the pale lilac of Hendrickje's dress in a Rembrandt portrait has no blue pigment at all [16]. Anders Zorn later built whole portraits from a palette of vermilion, ivory black, flake white and yellow ochre [24].\n\nThe Impressionists set black aside [11]. They held that there is no black in nature and mixed their darks from colors; National Gallery conservators found that Monet's locomotives at Gare Saint-Lazare are vermilion, French ultramarine and emerald green, with almost no black [11]. Ball finds only sparing ivory black in Monet's four 1877 views of the station, one of which, *[[art:aic-16571|Arrival of the Normandy Train]]*, is in our archive [15][25]. Gauguin urged painters to reject black and grey entirely [9]. Van Gogh took another line, treating black and white as a complementary pair, like red and green [15].\n\nThe twentieth century put black at the center. Kazimir Malevich's *Black Square*, painted in four versions between 1915 and 1930, is believed to be the first purely abstract painting [12]. From 1975 to 1980 Pierre Soulages moved to what he called *outrenoir*, beyond black: canvases covered in ivory black whose ridges and grooves catch the light [10]."
+    },
+    {
+      "id": "science",
+      "title": "Seeing black",
+      "body": "Black is a sensation, not just an absence. Birren, following Helmholtz, notes that closed eyes in the dark see a grey, not a black, and that a surface reflecting 5 per cent of the light looks blacker under stronger light, because its surroundings grow brighter [19]. Black, in other words, is made by contrast. Livingstone rejects the old rule that black is not a color: it is a color without hue, at the dark end of the lightness axis that every color shares [18].\n\nThat is why a black object can look black in sunshine while reflecting more light than a white page in a dim room [20]. It is also why painters reach for mixed darks. Mixed from deep blues, reds and greens, a dark can pass for black, which is how the Impressionists and Gauguin built theirs [9][11]."
+    },
+    {
+      "id": "myths",
+      "title": "Myths and loose ends",
+      "body": "The corpse story of bone black is the myth most tied to the pigment, and it is wrong, as told above [11]. Another common claim is that black and white are not colors. Leonardo and later Renoir both said so, but the claim is not true to seeing; Livingstone treats them as colors without hue [2][12][18].\n\nOne loose end is the black in photographs of old paintings. Our archive measures photographs, not paint, so a dark varnished brown or blue can read as black there, which is why its numbers are always given as photographed [25]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Black is everywhere in our archive. A screen color within six units of this Black covers at least five per cent of the canvas in 5,405 of 23,781 paintings, almost one in four [25]. Inside a painting it always plays the darkest role, the shadow [25]. The works where it covers the most are mostly portraits with near-black grounds and dark clothes: Claude Ferdinand Gaillard's portrait of Monsignor de Ségur of 1879, about 95 per cent, and Willem Kalf's *[[art:cma-138359|Wineglass and a Bowl of Fruit]]* of 1663, about 94 per cent [25].\n\nThe peak matches the history of black dress. Paintings from the 1500s and 1600s carry it at about 1.24 times the archive rate, and in the 1560s it appears in 62 of 159 works, nearly two in five [25]. Frans Hals has it in 17 of his 23 paintings here, as in his *[[art:rijks-200109344|Portrait of Jan van de Poll]]*, and Nicolaes Maes in 17 of 21 [25]. Spanish paintings carry it in 697 of 2,140, above the archive average [25].\n\nThe Impressionists are the exception the books predict [11]. Only 7 of their 140 paintings in the archive pass the threshold, about a fifth of the expected rate [25]. The earliest dated match is an Egyptian *[[art:aic-121738|Ostracon with a Drawing of a King]]* of about 1295 BC [25]. These are photographs of aged, varnished paintings, and a color match is not a pigment test: a dark varnished brown can read as black, and a black can be charcoal, bone, ivory or a mix [25]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "jet",
-   "charcoal",
-   "rich-black-fogra39"
-  ],
-  "disambiguation": [
-   {
-    "slug": "rich-black-fogra39",
-    "gloss": "a printing black, the library swatch closest to pure screen black #000000"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "la",
-    "name": "ater (matte), niger (glossy)"
-   },
-   {
-    "lang": "fr",
-    "name": "noir"
-   },
-   {
-    "lang": "de",
-    "name": "schwarz"
-   },
-   {
-    "lang": "ja",
-    "name": "kuro (黒)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#16171A",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 5405,
-  "top_paintings": [
-   "commons-Q17495300",
-   "cma-138359",
-   "commons-Q27975076",
-   "commons-Q21727876",
-   "rijks-200110551",
-   "smk-KMS4009"
-  ],
-  "peak_decade": {
-   "key": 1560,
-   "hits": 62,
-   "n": 159
-  },
-  "painters": [
-   {
-    "name": "Frans Hals",
-    "hits": 17,
-    "n": 23
-   },
-   {
-    "name": "Nicolaes Maes",
-    "hits": 17,
-    "n": 21
-   }
-  ],
-  "impressionism": {
-   "hits": 7,
-   "n": 140,
-   "lift": 0.22
-  },
-  "top_country": {
-   "name": "Spain",
-   "hits": 697,
-   "n": 2140,
-   "lift": 1.43
-  },
-  "first_dated": {
-   "id": "aic-121738",
-   "painter": null,
-   "year": -1295
-  },
-  "role": {
-   "shadow": 1.0
-  },
-  "measured": {
-   "lch": [
-    7.7,
-    2.3,
-    278.5
-   ],
-   "iscc": "brownish black",
-   "contrast_white": 17.92,
-   "de2000_to_000000": 5.1,
-   "nearest": [
-    [
-     "Eerie Black",
-     2.5
+  "aside": {
+    "origin": {
+      "named_after": "Old English blæc, black, dark, ink; from a Proto-Germanic word for burnt",
+      "first_recorded": "Old English blæc",
+      "source": "Wiktionary (black)"
+    },
+    "aka": [
+      "Sable (heraldry)",
+      "Lampblack, vine black, bone black, ivory black, charcoal (pigments)",
+      "Iron-gall ink, India ink"
     ],
-    [
-     "Almost Black",
-     4.2
+    "siblings": [
+      "eerie-black",
+      "rich-black-fogra39",
+      "smoky-black",
+      "raisin-black"
     ],
-    [
-     "Raisin Black",
-     4.3
+    "parent": null,
+    "children": [
+      "jet",
+      "charcoal",
+      "rich-black-fogra39"
+    ],
+    "disambiguation": [
+      {
+        "slug": "rich-black-fogra39",
+        "gloss": "a printing black, the library swatch closest to pure screen black #000000"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "la",
+        "name": "ater (matte), niger (glossy)"
+      },
+      {
+        "lang": "fr",
+        "name": "noir"
+      },
+      {
+        "lang": "de",
+        "name": "schwarz"
+      },
+      {
+        "lang": "ja",
+        "name": "kuro (黒)"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#16171A",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 5405,
+    "top_paintings": [
+      "commons-Q17495300",
+      "cma-138359",
+      "commons-Q27975076",
+      "commons-Q21727876",
+      "rijks-200110551",
+      "smk-KMS4009"
+    ],
+    "peak_decade": {
+      "key": 1560,
+      "hits": 62,
+      "n": 159
+    },
+    "painters": [
+      {
+        "name": "Frans Hals",
+        "hits": 17,
+        "n": 23
+      },
+      {
+        "name": "Nicolaes Maes",
+        "hits": 17,
+        "n": 21
+      }
+    ],
+    "impressionism": {
+      "hits": 7,
+      "n": 140,
+      "lift": 0.22
+    },
+    "top_country": {
+      "name": "Spain",
+      "hits": 697,
+      "n": 2140,
+      "lift": 1.43
+    },
+    "first_dated": {
+      "id": "aic-121738",
+      "painter": null,
+      "year": -1295
+    },
+    "role": {
+      "shadow": 1.0
+    },
+    "measured": {
+      "lch": [
+        7.7,
+        2.3,
+        278.5
+      ],
+      "iscc": "brownish black",
+      "contrast_white": 17.92,
+      "de2000_to_000000": 5.1,
+      "nearest": [
+        [
+          "Eerie Black",
+          2.5
+        ],
+        [
+          "Almost Black",
+          4.2
+        ],
+        [
+          "Raisin Black",
+          4.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wiktionary, \"black\" (etymology)",
+      "loc_kind": null,
+      "url": "https://en.wiktionary.org/wiki/black"
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, pp. 12-13, 28-29",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, pp. 20-30",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, pp. 34-45",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, pp. 61-73",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, pp. 90-103",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, pp. 114-135",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, pp. 146-148",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, pp. 166-177",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, pp. 184-194",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 2 (\"Black and Brown\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Black\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Jet\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Ink\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 8",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 6",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "book",
+      "cite": "Westland et al., Universal Principles of Color, ch. 16",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 18,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 15",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 19,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, part 3, ch. 14",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 20,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. 14",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 22,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 88",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 23,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 75",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 24,
+      "kind": "book",
+      "cite": "Westland et al., Universal Principles of Color, ch. 76",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 25,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 26,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/names.json, data/library.json, ISCC-NBS block), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Why do Monet's dark locomotives at Gare Saint-Lazare look black from a distance even though he used almost no black paint?",
+      "choices": [
+        "Mixed deep vermilion, ultramarine and emerald green make a near-black dark",
+        "The canvas has darkened with soot",
+        "He used black ink underneath",
+        "Museum lighting hides the colors"
+      ],
+      "answer": "Mixed deep vermilion, ultramarine and emerald green make a near-black dark",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the pigment bone black was made from human corpses.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Why was a rich, even black cloth a luxury in late medieval Europe?",
+      "choices": [
+        "Deep black dye needed costly imported oak galls; cheaper bark blacks came out brown or grey",
+        "Black wool came only from rare sheep",
+        "The Church taxed black cloth",
+        "Black dye was made from gold"
+      ],
+      "answer": "Deep black dye needed costly imported oak galls; cheaper bark blacks came out brown or grey",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Even Vantablack is not perfectly black: it still sends back 0.035 per cent of the light.",
+    "Matthäus Schwarz, whose name means black, had himself drawn in his clothes through life and wears black in 123 of 137 pictures.",
+    "Look closely at an Impressionist's darkest shadow: it is usually deep blue, red and green laid together, not black paint."
+  ],
+  "words": 2082,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Philip the Good: source says black at court predated him and he definitively launched the style, not that he wore it from 1419; reworded.",
+      "Verified: Zachary/Boniface 751, Nyx and Rhamnous black marble, Maeght 1946 and Leonardo, Ford refusal (attributed to Pastoureau), Brummell c.1810, black eagle mid-12th c., dye lawsuits 13th-17th c., Schwarz 123 of 137, Hamlet vs Werther; all supported.",
+      "Myth list clean: bone-black corpse story corrected; black-and-white-not-colors corrected via Livingstone; Impressionist black hedged."
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "Wiktionary, \"black\" (etymology)",
-   "loc_kind": null,
-   "url": "https://en.wiktionary.org/wiki/black"
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, pp. 12-13, 28-29",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, pp. 20-30",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, pp. 34-45",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, pp. 61-73",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, pp. 90-103",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, pp. 114-135",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, pp. 146-148",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, pp. 166-177",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, pp. 184-194",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 2 (\"Black and Brown\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Black\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Jet\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Ink\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 8",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 6",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "book",
-   "cite": "Westland et al., Universal Principles of Color, ch. 16",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 18,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 15",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 19,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, part 3, ch. 14",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 20,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. 14",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 22,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 88",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 23,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 75",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 24,
-   "kind": "book",
-   "cite": "Westland et al., Universal Principles of Color, ch. 76",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 25,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 26,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/names.json, data/library.json, ISCC-NBS block), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Why do Monet's dark locomotives at Gare Saint-Lazare look black from a distance even though he used almost no black paint?",
-   "choices": [
-    "Mixed deep vermilion, ultramarine and emerald green make a near-black dark",
-    "The canvas has darkened with soot",
-    "He used black ink underneath",
-    "Museum lighting hides the colors"
-   ],
-   "answer": "Mixed deep vermilion, ultramarine and emerald green make a near-black dark",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the pigment bone black was made from human corpses.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Why was a rich, even black cloth a luxury in late medieval Europe?",
-   "choices": [
-    "Deep black dye needed costly imported oak galls; cheaper bark blacks came out brown or grey",
-    "Black wool came only from rare sheep",
-    "The Church taxed black cloth",
-    "Black dye was made from gold"
-   ],
-   "answer": "Deep black dye needed costly imported oak galls; cheaper bark blacks came out brown or grey",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Even Vantablack is not perfectly black: it still sends back 0.035 per cent of the light.",
-  "Matthäus Schwarz, whose name means black, had himself drawn in his clothes through life and wears black in 123 of 137 pictures.",
-  "Look closely at an Impressionist's darkest shadow: it is usually deep blue, red and green laid together, not black paint."
- ],
- "words": 2081,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Philip the Good: source says black at court predated him and he definitively launched the style, not that he wore it from 1419; reworded.",
-   "Verified: Zachary/Boniface 751, Nyx and Rhamnous black marble, Maeght 1946 and Leonardo, Ford refusal (attributed to Pastoureau), Brummell c.1810, black eagle mid-12th c., dye lawsuits 13th-17th c., Schwarz 123 of 137, Hamlet vs Werther; all supported.",
-   "Myth list clean: bone-black corpse story corrected; black-and-white-not-colors corrected via Livingstone; Impressionist black hedged."
-  ]
- }
 }

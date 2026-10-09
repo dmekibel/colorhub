@@ -1,143 +1,142 @@
 {
- "slug": "spanish-bistre",
- "name": "Spanish Bistre",
- "hex": "#807532",
- "names": [
-  "Spanish Bistre"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Spanish Bistre is a dull, olive-leaning brown named for bistre, a soot-based pigment, and it shows up in nearly three percent of our museum archive.",
- "sections": [
-  {
-   "id": "material",
-   "title": "A pigment word, borrowed",
-   "body": "Our classifier files Spanish Bistre as a pigment, mineral or dye word, built on \"bistre,\" the old brown wash artists made from chimney soot [1]. The \"Spanish\" in front is not explained in the sources we hold; it names no specific regional recipe here [1]. The nearest named colors on file are [[dusty-hazel-tone]], [[dark-citrine]], [[ugly-brown]] and [[khaki-brown]], at 3.5, 5, 5, 5, 5.2 and 5.2 ΔE [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, this color covers five percent or more of the canvas in 700 of them, about 2.9 percent[2]. Its earliest dated appearance is a 1410 altarpiece, *Coronation of the Virgin*, and it peaks in the 1710s, in 12 of 169 paintings, over twice the archive's average rate, a floor and not a first, since the archive's early centuries are thin [2].\n\nPaulus Potter carries it in nearly a third of his dated paintings, and it leans toward eighteenth and nineteenth-century landscape and still life more than earlier work [2]. It most often sits as a mid-tone or highlight rather than a shadow, and shares canvases with [[olive]], [[khaki]] and [[mustard|Mustard]] far more than chance would predict [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "bistre, a soot-based brown wash; \"Spanish\" undocumented",
-   "first_recorded": "undocumented in the sources we hold",
-   "source": "ColorHub graph classifier"
-  },
-  "aka": [],
-  "siblings": [
-   "dusty-hazel-tone",
-   "dark-citrine",
-   "ugly-brown",
-   "khaki-brown"
+  "slug": "spanish-bistre",
+  "name": "Spanish Bistre",
+  "hex": "#807532",
+  "names": [
+    "Spanish Bistre"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 700,
-  "rate": 0.0294,
-  "measured": {
-   "lch": [
-    49,
-    38,
-    97
-   ],
-   "nearest": [
-    [
-     "Dusty hazel tone",
-     3.5
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Spanish Bistre is a dull, olive-leaning brown named for bistre, a soot-based pigment, and it shows up in nearly three percent of our museum archive.",
+  "sections": [
+    {
+      "id": "material",
+      "title": "A pigment word, borrowed",
+      "body": "Our classifier files Spanish Bistre as a pigment, mineral or dye word, built on \"bistre,\" the old brown wash artists made from chimney soot [1]. The \"Spanish\" in front is not explained in the sources we hold; it names no specific regional recipe here [1]. The nearest named colors on file are [[dusty-hazel-tone]], [[dark-citrine]], [[khaki-brown]] and [[khaki-brown]], at 3.5, 5, 5, 5, 5.2 and 5.2 ΔE [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, this color covers five percent or more of the canvas in 700 of them, about 2.9 percent[2]. Its earliest dated appearance is a 1410 altarpiece, *Coronation of the Virgin*, and it peaks in the 1710s, in 12 of 169 paintings, over twice the archive's average rate, a floor and not a first, since the archive's early centuries are thin [2].\n\nPaulus Potter carries it in nearly a third of his dated paintings, and it leans toward eighteenth and nineteenth-century landscape and still life more than earlier work [2]. It most often sits as a mid-tone or highlight rather than a shadow, and shares canvases with [[olive]], [[khaki]] and [[mustard|Mustard]] far more than chance would predict [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "bistre, a soot-based brown wash; \"Spanish\" undocumented",
+      "first_recorded": "undocumented in the sources we hold",
+      "source": "ColorHub graph classifier"
+    },
+    "aka": [],
+    "siblings": [
+      "dusty-hazel-tone",
+      "dark-citrine",
+      "khaki-brown"
     ],
-    [
-     "Dark Citrine",
-     5.0
-    ],
-    [
-     "Ugly Brown",
-     5.2
-    ],
-    [
-     "Khaki brown",
-     5.2
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 700,
+    "rate": 0.0294,
+    "measured": {
+      "lch": [
+        49,
+        38,
+        97
+      ],
+      "nearest": [
+        [
+          "Dusty hazel tone",
+          3.5
+        ],
+        [
+          "Dark Citrine",
+          5.0
+        ],
+        [
+          "Ugly Brown",
+          5.2
+        ],
+        [
+          "Khaki brown",
+          5.2
+        ]
+      ]
+    },
+    "first": {
+      "id": "cma-111435",
+      "title": "Coronation of the Virgin",
+      "year": 1410
+    },
+    "role": {
+      "mid": 0.53,
+      "highlight": 0.38,
+      "shadow": 0.09
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph nodes (data/library.json, data/graph/nodes-s.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Spanish Bistre's name is built on which older pigment word?",
+      "choices": [
+        "Bistre",
+        "Madder",
+        "Ochre",
+        "Sienna"
+      ],
+      "answer": "Bistre",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources explain what the \"Spanish\" in the name refers to.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In which decade does Spanish Bistre peak in our painting archive?",
+      "choices": [
+        "The 1710s",
+        "The 1200s",
+        "The 1990s",
+        "It never peaks above average"
+      ],
+      "answer": "The 1710s",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Spanish Bistre peaks in 1710s paintings at more than twice the archive's average rate.",
+    "The pigment it's named for, bistre, was made from chimney soot."
+  ],
+  "words": 220,
+  "status": "draft",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-09",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "first": {
-   "id": "cma-111435",
-   "title": "Coronation of the Virgin",
-   "year": 1410
-  },
-  "role": {
-   "mid": 0.53,
-   "highlight": 0.38,
-   "shadow": 0.09
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph nodes (data/library.json, data/graph/nodes-s.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Spanish Bistre's name is built on which older pigment word?",
-   "choices": [
-    "Bistre",
-    "Madder",
-    "Ochre",
-    "Sienna"
-   ],
-   "answer": "Bistre",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources explain what the \"Spanish\" in the name refers to.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "In which decade does Spanish Bistre peak in our painting archive?",
-   "choices": [
-    "The 1710s",
-    "The 1200s",
-    "The 1990s",
-    "It never peaks above average"
-   ],
-   "answer": "The 1710s",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Spanish Bistre peaks in 1710s paintings at more than twice the archive's average rate.",
-  "The pigment it's named for, bistre, was made from chimney soot."
- ],
- "words": 220,
- "status": "draft",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

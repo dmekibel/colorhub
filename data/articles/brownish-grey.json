@@ -1,155 +1,155 @@
 {
- "slug": "brownish-grey",
- "name": "Brownish Grey",
- "hex": "#86775F",
- "names": [
-  "Brownish Grey"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Brownish grey is a plain descriptive name for a grey with some brown in it, and it has been used in color lists for two centuries.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name that describes",
-   "body": "Brownish grey is two ordinary words used as a color name, and the dictionary of colour keeps several older names that mean the same thing [1]. *Fuscous* is defined as brown, dingy and dark, and also as a brownish grey [1][2]. [[taupe]], French for \"mole\", is also brownish grey, and its first record as a color word is 1911 [3]. Limestone and the butter-nut tree are each described as brownish grey, and ash can mean either whitish grey or brownish grey [4][5]. In 1923 a newspaper used *castor* for a dark brownish grey or light brown, the color of beaver fur [6]."
-  },
-  {
-   "id": "werner",
-   "title": "In the old grey series",
-   "body": "The phrase appears in the grey series of a color nomenclature reproduced in a book on nature's palette, between reddish grey and greyish black [7]. In that order grey passes through bluish, greenish and yellowish variants before the reddish and brownish ones [7]. These are shades of [[grey]] that lean toward [[brown]] [7]."
-  },
-  {
-   "id": "swatch",
-   "title": "The swatch",
-   "body": "The ISCC-NBS system of 1955 calls this swatch \"grayish yellowish brown\", about 5 units of color difference away [8]. The Maerz and Paul dictionary of 1930 records the name from 1926 [8]. Compare [[greyish-brownish-olive]], a darker neighbor, and plain [[grey]] [8]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The ColorHub archive files this color with the browns; its lightness is about 51 out of 100 and its chroma is low, 15 [8]. Contrast against white is 4.36 to 1, enough for large text [8]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "origin undocumented (a descriptive phrase)",
-   "first_recorded": "in a Werner-type grey series; Maerz and Paul record 1926",
-   "source": "Baty, Nature's Palette; Maerz and Paul via ColorHub"
-  },
-  "aka": [
-   "fuscous",
-   "taupe (the French-derived name)"
+  "slug": "brownish-grey",
+  "name": "Brownish Grey",
+  "hex": "#86775F",
+  "names": [
+    "Brownish Grey"
   ],
-  "siblings": [
-   "taupe",
-   "fuscous"
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Brownish grey is a plain descriptive name for a grey with some brown in it, and it has been used in color lists for two centuries.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name that describes",
+      "body": "Brownish grey is two ordinary words used as a color name, and the dictionary of colour keeps several older names that mean the same thing [1]. *Fuscous* is defined as brown, dingy and dark, and also as a brownish grey [1][2]. [[taupe]], French for \"mole\", is also brownish grey, and its first record as a color word is 1911 [3]. Limestone and the butter-nut tree are each described as brownish grey, and ash can mean either whitish grey or brownish grey [4][5]. In 1923 a newspaper used *castor* for a dark brownish grey or light brown, the color of beaver fur [6]."
+    },
+    {
+      "id": "werner",
+      "title": "In the old grey series",
+      "body": "The phrase appears in the grey series of a color nomenclature reproduced in a book on nature's palette, between reddish grey and greyish black [7]. In that order grey passes through bluish, greenish and yellowish variants before the reddish and brownish ones [7]. These are shades of [[grey]] that lean toward [[brown]] [7]."
+    },
+    {
+      "id": "swatch",
+      "title": "The swatch",
+      "body": "The ISCC-NBS system of 1955 calls this swatch \"grayish yellowish brown\", about 5 units of color difference away [8]. The Maerz and Paul dictionary of 1930 records the name from 1926 [8]. Compare [[greyish-brownish-olive]], a darker neighbor, and plain [[grey]] [8]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The ColorHub archive files this color with the browns; its lightness is about 51 out of 100 and its chroma is low, 15 [8]. Contrast against white is 4.36 to 1, enough for large text [8]."
+    }
   ],
-  "parent": "grey",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub name archive",
-  "family": "Browns",
-  "lightness": 50.8,
-  "chroma": 15.4,
-  "contrast_white": 4.36,
-  "iscc_nearest": "grayish yellowish brown (block 63), dE 5.1"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 180 (\"fuscous\")",
-   "loc_kind": "pdf-page",
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "origin undocumented (a descriptive phrase)",
+      "first_recorded": "in a Werner-type grey series; Maerz and Paul record 1926",
+      "source": "Baty, Nature's Palette; Maerz and Paul via ColorHub"
+    },
+    "aka": [
+      "fuscous",
+      "taupe (the French-derived name)"
+    ],
+    "siblings": [
+      "taupe",
+      "greyish-brownish-olive"
+    ],
+    "parent": "grey",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 180",
-   "loc_kind": "pdf-page",
-   "url": null
+  "field": {
+    "dataset": "ColorHub name archive",
+    "family": "Browns",
+    "lightness": 50.8,
+    "chroma": 15.4,
+    "contrast_white": 4.36,
+    "iscc_nearest": "grayish yellowish brown (block 63), dE 5.1"
   },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 389 (\"taupe\")",
-   "loc_kind": "pdf-page",
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 180 (\"fuscous\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 180",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 389 (\"taupe\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, pp. 34, 245 (\"ash\", \"limestone\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 83 (\"butter-nut\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 92 (\"castor\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 32-33",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "data",
+      "cite": "ColorHub name archive, data/graph nodes (ISCC-NBS 1955 blocks 63 and 44; Maerz and Paul 1930)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the French word taupe mean?",
+      "choices": [
+        "Mole",
+        "Mouse",
+        "Smoke",
+        "Stone"
+      ],
+      "answer": "Mole",
+      "kind": "pick"
+    },
+    {
+      "q": "Which word does the dictionary of colour define as brownish grey?",
+      "choices": [
+        "Fuscous",
+        "Vermilion",
+        "Cerulean",
+        "Puce"
+      ],
+      "answer": "Fuscous",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Taupe is French for mole, and it means brownish grey."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Fuscous definition was overstated (Paterson: also a brownish grey).",
+      "Removed claim that brownish grey leads into brown in Werner's series; it is followed by greyish black."
+    ]
   },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, pp. 34, 245 (\"ash\", \"limestone\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 83 (\"butter-nut\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 92 (\"castor\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 32-33",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "data",
-   "cite": "ColorHub name archive, data/graph nodes (ISCC-NBS 1955 blocks 63 and 44; Maerz and Paul 1930)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the French word taupe mean?",
-   "choices": [
-    "Mole",
-    "Mouse",
-    "Smoke",
-    "Stone"
-   ],
-   "answer": "Mole",
-   "kind": "pick"
-  },
-  {
-   "q": "Which word does the dictionary of colour define as brownish grey?",
-   "choices": [
-    "Fuscous",
-    "Vermilion",
-    "Cerulean",
-    "Puce"
-   ],
-   "answer": "Fuscous",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Taupe is French for mole, and it means brownish grey."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Fuscous definition was overstated (Paterson: also a brownish grey).",
-   "Removed claim that brownish grey leads into brown in Werner's series; it is followed by greyish black."
-  ]
- },
- "words": 248
+  "words": 248
 }

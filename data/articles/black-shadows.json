@@ -1,109 +1,109 @@
 {
- "slug": "black-shadows",
- "name": "Black Shadows",
- "hex": "#BFAFB2",
- "names": [
-  "Black Shadows"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Black Shadows is a pale greyish pink in our data, which is a good reason to look at what painters learned about shadows: they are rarely black.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name that points to a painting lesson",
-   "body": "The swatch #BFAFB2 is a light, soft grey-pink and is nothing like black [1]. The books we have read give no history for the name itself, only for the idea inside it [1].\n\nBall describes Rembrandt's deep shadows as glazes of bone black, red lake and red ochre, so dark that the wall is hardly distinguishable from black shadow [2]. In contrast, he reports Renoir's saying that no shadow is black and that it always has a colour [3]. Impressionist shadows, Ball adds, were not dark but infused with colour [3].\n\nGurney makes a related point about night scenes: a painter shows what the eye sees, whereas a camera records a lot of black shadows [4]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, 125 match this color, 0.53%, as photographed [1]. It peaks in the 1900s at 2.4 times the expected rate, and inside a painting it most often plays a light [1]. The name is first recorded in 1912 in Ridgway [1]. John Singer Sargent paints it most often, in 4 of 287 works, but no painter stands out against the museum baseline [1]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "origin undocumented",
-   "first_recorded": "1912 (Ridgway)",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "black",
-   "umber",
-   "almost-black",
-   "dark-brown"
+  "slug": "black-shadows",
+  "name": "Black Shadows",
+  "hex": "#BFAFB2",
+  "names": [
+    "Black Shadows"
   ],
-  "parent": "black",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 125,
-  "pct_present": 0.53,
-  "peak": "1900s, 2.4x"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub library and archive field notes for Black Shadows (n=125)",
-   "loc_kind": null,
-   "url": null
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Black Shadows is a pale greyish pink in our data, which is a good reason to look at what painters learned about shadows: they are rarely black.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name that points to a painting lesson",
+      "body": "The swatch #BFAFB2 is a light, soft grey-pink and is nothing like black [1]. The books we have read give no history for the name itself, only for the idea inside it [1].\n\nBall describes Rembrandt's deep shadows as glazes of bone black, red lake and red ochre, so dark that the wall is hardly distinguishable from black shadow [2]. In contrast, he reports Renoir's saying that no shadow is black and that it always has a colour [3]. Impressionist shadows, Ball adds, were not dark but infused with colour [3].\n\nGurney makes a related point about night scenes: a painter shows what the eye sees, whereas a camera records a lot of black shadows [4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, 125 match this color, 0.53%, as photographed [1]. It peaks in the 1900s at 2.4 times the expected rate, and inside a painting it most often plays a light [1]. The name is first recorded in 1912 in Ridgway [1]. John Singer Sargent paints it most often, in 4 of 287 works, but no painter stands out against the museum baseline [1]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "origin undocumented",
+      "first_recorded": "1912 (Ridgway)",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "black",
+      "umber",
+      "rich-black-fogra39",
+      "dark-brown"
+    ],
+    "parent": "black",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 14",
-   "loc_kind": "epub-chapter",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 125,
+    "pct_present": 0.53,
+    "peak": "1900s, 2.4x"
   },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 16",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 41",
-   "loc_kind": "pdf-page",
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub library and archive field notes for Black Shadows (n=125)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 14",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 16",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 41",
+      "loc_kind": "pdf-page",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "According to Ball, what did Renoir say about shadows?",
+      "choices": [
+        "No shadow is black",
+        "Shadows are best painted with bone black",
+        "Shadows should be left blank"
+      ],
+      "answer": "No shadow is black",
+      "kind": "pick"
+    },
+    {
+      "q": "What colour is the swatch for Black Shadows?",
+      "choices": [
+        "A pale grey-pink",
+        "Pure black",
+        "A deep blue"
+      ],
+      "answer": "A pale grey-pink",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Renoir held that no shadow is black."
+  ],
+  "words": 204,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "According to Ball, what did Renoir say about shadows?",
-   "choices": [
-    "No shadow is black",
-    "Shadows are best painted with bone black",
-    "Shadows should be left blank"
-   ],
-   "answer": "No shadow is black",
-   "kind": "pick"
-  },
-  {
-   "q": "What colour is the swatch for Black Shadows?",
-   "choices": [
-    "A pale grey-pink",
-    "Pure black",
-    "A deep blue"
-   ],
-   "answer": "A pale grey-pink",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Renoir held that no shadow is black."
- ],
- "words": 204,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

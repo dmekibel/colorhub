@@ -1,0 +1,41 @@
+{
+ "id": "clowncore",
+ "name": "Clowncore",
+ "lineage": {
+  "influenced_by": [
+   "literal circus and clown costuming",
+   "a broader 2010s internet embrace of deliberately \"uncool\" or absurd aesthetics"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2019–present"
+ ],
+ "places": [],
+ "garments": [
+  "checkered print",
+  "oversized silhouettes",
+  "bright primary color"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "fashion's general avoidance of anything explicitly costume-like or silly, wearing literal clown signifiers as sincere everyday style rather than irony or Halloween costume.",
+ "revivals": [],
+ "article": "Clowncore took shape on Tumblr and later TikTok from around 2019, taking literal circus-clown visual elements — checkered pattern, oversized silhouettes, bright primary color, face paint — and wearing them as sincere, everyday fashion rather than as costume or ironic statement. The aesthetic sits within a broader cluster of internet styles (kidcore and rainbowcore share some of its DNA) that deliberately embrace childlike or \"uncool\" visual signifiers as a form of genuine self-expression, often explicitly tied by participants to queer joy and a rejection of conventionally \"tasteful\" adult dressing. Clowncore has stayed a relatively niche aesthetic compared to many others in this archive, documented mainly through its own online community rather than mainstream fashion press, which keeps its visual vocabulary close to its literal circus source material rather than drifting toward a more commercially softened version the way some larger trends eventually do.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Clowncore"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "a vivid streak — roughly 38% of the color measured is highly saturated"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

@@ -12,7 +12,7 @@
     {
       "id": "name",
       "title": "A deep orange, and a Japanese echo",
-      "body": "Ridgway's 1912 atlas plates this color at plate III, hue 13, tone i, a scan of an aged plate treated here as approximate [1]. The 1955 ISCC-NBS circular later classed it as deep orange, 5.4 units from its own block center, and the Munsell notation is 3.7YR 5.5/11.6 [1]. Our sources do not explain where the English word \"xanthine\" was coined as a color name; the books consulted leave its origin undocumented beyond its classification here as a mineral or pigment word [1].\n\nOur library cross-references two Japanese traditional names at nearly this hue: Kincha (金茶), meaning golden brown, and Kohaku-iro (琥珀色), meaning amber color [1]. The closest named color on screen is [[browny-orange]], 3.0 units away and described as almost the same; [[alloy-orange]] follows at 3.9, read as darker, [[ochre]] at 4.0, also almost the same, and [[rust-orange]] at 4.6 [3]. Our graph also finds a gem twin: a flame-orange [[gem:spinel|spinel]] sits only 2.9 units from this hue [3]."
+      "body": "Ridgway's 1912 atlas plates this color at plate III, hue 13, tone i, a scan of an aged plate treated here as approximate [1]. The 1955 ISCC-NBS circular later classed it as deep orange, 5.4 units from its own block center, and the Munsell notation is 3.7YR 5.5/11.6 [1]. Our sources do not explain where the English word \"xanthine\" was coined as a color name; the books consulted leave its origin undocumented beyond its classification here as a mineral or pigment word [1].\n\nOur library cross-references two Japanese traditional names at nearly this hue: Kincha (金茶), meaning golden brown, and Kohaku-iro (琥珀色), meaning amber color [1]. The closest named color on screen is [[xanthine-orange]], 3.0 units away and described as almost the same; [[alloy-orange]] follows at 3.9, read as darker, [[ochre]] at 4.0, also almost the same, and [[rust-orange]] at 4.6 [3]. Our graph also finds a gem twin: a flame-orange [[gem:spinel|spinel]] sits only 2.9 units from this hue [3]."
     },
     {
       "id": "field",
@@ -28,10 +28,11 @@
     },
     "aka": [],
     "siblings": [
-      "browny-orange",
+      "xanthine-orange",
       "alloy-orange",
       "ochre",
-      "orange-rufous"
+      "rust-orange",
+      "orpiment-orange"
     ],
     "parent": null,
     "children": [],

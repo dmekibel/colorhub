@@ -7,12 +7,12 @@
  ],
  "tier": "descriptive",
  "depth": "medium",
- "lede": "Greenish Glaucous is a pale, powdery sage, named by modifier grammar as greenish plus [[glaucous]], and placed on Ridgway's 1912 color plates before the ISCC-NBS dictionary filed it in 1955.",
+ "lede": "Greenish Glaucous is a pale, powdery sage, named by modifier grammar as greenish plus [[dusty-blue]], and placed on Ridgway's 1912 color plates before the ISCC-NBS dictionary filed it in 1955.",
  "sections": [
   {
    "id": "name",
    "title": "Greenish, plus a plant's bloom",
-   "body": "The parent word, [[glaucous]], describes the dusty blue-grey-green bloom on a leaf, grape or plum skin, and Greenish Glaucous simply pushes that word further toward [[green]] [1]. Robert Ridgway, an American ornithologist, gave it plate XLI, hue 33‴, tone f, in his 1912 *Color Standards and Color Nomenclature*, a scan of an aged printed page and so only approximate [1]. The ISCC-NBS dictionary of 1955 later filed the same name at block 148 [1][2].\n\nIt is close enough to [[pale-green-grey|Pale green grey]] that our data treats the two as a near-duplicate, zero color-distance units apart [3]. Beyond that exact match, the nearest look-alikes are [[corydalis-green|Corydalis Green]], a shade yellower, and [[pale-niagara-green|Pale Niagara Green]], greener [3]. A separate 1930 source, Maerz and Paul's dictionary, records almost the same color under the name Starling's Egg Green, first listed in 1902, on their plate 27 B 2 [4]."
+   "body": "The parent word, [[dusty-blue]], describes the dusty blue-grey-green bloom on a leaf, grape or plum skin, and Greenish Glaucous simply pushes that word further toward [[green]] [1]. Robert Ridgway, an American ornithologist, gave it plate XLI, hue 33‴, tone f, in his 1912 *Color Standards and Color Nomenclature*, a scan of an aged printed page and so only approximate [1]. The ISCC-NBS dictionary of 1955 later filed the same name at block 148 [1][2].\n\nIt is close enough to [[pale-green-grey|Pale green grey]] that our data treats the two as a near-duplicate, zero color-distance units apart [3]. Beyond that exact match, the nearest look-alikes are [[corydalis-green|Corydalis Green]], a shade yellower, and [[pale-niagara-green|Pale Niagara Green]], greener [3]. A separate 1930 source, Maerz and Paul's dictionary, records almost the same color under the name Starling's Egg Green, first listed in 1902, on their plate 27 B 2 [4]."
   },
   {
    "id": "field",
@@ -32,7 +32,7 @@
    "corydalis-green",
    "pale-niagara-green"
   ],
-  "parent": "glaucous",
+  "parent": "dusty-blue",
   "children": [],
   "disambiguation": [],
   "other_languages": []
@@ -151,5 +151,5 @@
    "No concordance hits (src empty); written from ColorHub graph/library data and the ISCC-NBS/Ridgway source files, no book sources."
   ]
  },
- "words": 352
+ "words": 354
 }

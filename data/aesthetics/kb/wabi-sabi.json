@@ -1,0 +1,47 @@
+{
+ "id": "wabi-sabi",
+ "name": "Wabi-sabi",
+ "lineage": {
+  "influenced_by": [
+   "Japanese Zen Buddhist aesthetics",
+   "the tea ceremony tradition"
+  ],
+  "influences": [
+   "japandi"
+  ]
+ },
+ "eras": [
+  "roots in 15th-16th century Japan (the tea master Sen no Rikyū); the term entered Western design vocabulary mainly from the 1990s on"
+ ],
+ "places": [
+  "Japan"
+ ],
+ "garments": [
+  "not a fashion look — a design and craft philosophy valuing asymmetry, natural materials and visible wear (as in kintsugi, repairing broken pottery with visible gold seams)"
+ ],
+ "media": [],
+ "figures": [
+  "Sen no Rikyū"
+ ],
+ "reacts_against": "symmetry, polish and permanence as ideals, finding beauty in imperfection, asymmetry and the marks of age instead.",
+ "revivals": [
+  "a major 2010s-20s Western interior-design and wellness-marketing trend, sometimes criticized for flattening a specific Japanese philosophical tradition into a beige decorating style"
+ ],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Wabi-Sabi"
+  }
+ ],
+ "measured": {
+  "n_images": 4,
+  "n_candidates": 4,
+  "findings": [
+   "mostly muted — about 90% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

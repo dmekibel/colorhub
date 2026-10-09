@@ -1,190 +1,190 @@
 {
- "slug": "ocher-red",
- "name": "Ocher Red",
- "hex": "#A66558",
- "names": [
-  "Ocher Red"
- ],
- "tier": "pigment",
- "depth": "medium",
- "lede": "Ocher red is the red of iron oxide earth: the oldest pigment family, dug from the ground or made by roasting yellow ochre, and used in painting for a very long time.",
- "sections": [
-  {
-   "id": "material",
-   "title": "What the pigment is",
-   "body": "The coloring matter in red ochre is hematite, an iron oxide with the formula Fe2O3, in very fine grains [1]. Ochres are secondary deposits, found as soils or as gossans, the weathered and oxidized surface of ore bodies, enriched in iron oxides or hydroxides [1]. Their colors are strong and permanent [1].\n\nYellow ochre turns red when heated, which was known in the Palaeolithic period [2]. The result is sold as burnt ochre, a process the Pigment Compendium calls the first synthetic pigment [2]. See [[ochre]] for the yellow side of the family, and [[venetian-red]] for the synthetic relative [1]."
-  },
-  {
-   "id": "names",
-   "title": "One pigment, many names",
-   "body": "Church's list of synonyms for red earth pigments runs from red haematite and red iron ore to scarlet ochre, red chalk, *sinopis*, *rubrica*, *miltos*, *terra rosa* and Arrabida red [3]. Armenian bole is a related deep red ochre first found in Cappadocia [3]. Pliny, writing in the first century, says yellow ochre was also dug in hills about 20 miles from Rome and then burnt, and that some sellers adulterated it and passed it off as dark ochre [4].\n\nThe phrase \"ochre-red\" also appears as a plain color description. Salter in 1869 calls the color of silver chromate a fine ochre-red [5]."
-  },
-  {
-   "id": "use",
-   "title": "In use",
-   "body": "The mineral pigments on Greek and Roman statuary included yellow ochre, red ochre, cinnabar and hematite, among others [6]. In Shakespeare's time painters of Stratford coloured cloth hangings with ochre reds and yellows, lime white and soot [7]. In Aboriginal Australia, Finlay realized that the natural dye colors of a bag mirror the ochres: red, white, yellow and black [8].\n\nThe cheap earth also served as a cheat. Salter lists red ochre among the adulterants of ground madder root, along with brickdust and sawdust [9]. Ground [[madder]] was worth much more than the red earth it was cut with [9]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The swatch measures a lightness of 50 and a chroma of about 31, with a hue angle of 37 degrees, a brownish red [10]. Its contrast ratio against white is 4.5 to 1 [10]. The nearest named colors are Etruscan Red at about 3 units, Hydrangea Red at about 5, and Pinkish Brown, Redwood and Copper Penny at 5 to 6 [10].\n\nWe have no archive count, and a color match in a painting is not a pigment test. Screen colors are approximate [10]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "red ochre, iron oxide earth (Greek ochros, pale yellow)",
-   "first_recorded": "prehistoric use",
-   "source": "Pigment Compendium, \"red ochre\""
-  },
-  "aka": [
-   "red ochre",
-   "burnt ochre",
-   "hematite red"
+  "slug": "ocher-red",
+  "name": "Ocher Red",
+  "hex": "#A66558",
+  "names": [
+    "Ocher Red"
   ],
-  "siblings": [
-   "etruscan-red",
-   "indian-red"
+  "tier": "pigment",
+  "depth": "medium",
+  "lede": "Ocher red is the red of iron oxide earth: the oldest pigment family, dug from the ground or made by roasting yellow ochre, and used in painting for a very long time.",
+  "sections": [
+    {
+      "id": "material",
+      "title": "What the pigment is",
+      "body": "The coloring matter in red ochre is hematite, an iron oxide with the formula Fe2O3, in very fine grains [1]. Ochres are secondary deposits, found as soils or as gossans, the weathered and oxidized surface of ore bodies, enriched in iron oxides or hydroxides [1]. Their colors are strong and permanent [1].\n\nYellow ochre turns red when heated, which was known in the Palaeolithic period [2]. The result is sold as burnt ochre, a process the Pigment Compendium calls the first synthetic pigment [2]. See [[ochre]] for the yellow side of the family, and [[venetian-red]] for the synthetic relative [1]."
+    },
+    {
+      "id": "names",
+      "title": "One pigment, many names",
+      "body": "Church's list of synonyms for red earth pigments runs from red haematite and red iron ore to scarlet ochre, red chalk, *sinopis*, *rubrica*, *miltos*, *terra rosa* and Arrabida red [3]. Armenian bole is a related deep red ochre first found in Cappadocia [3]. Pliny, writing in the first century, says yellow ochre was also dug in hills about 20 miles from Rome and then burnt, and that some sellers adulterated it and passed it off as dark ochre [4].\n\nThe phrase \"ochre-red\" also appears as a plain color description. Salter in 1869 calls the color of silver chromate a fine ochre-red [5]."
+    },
+    {
+      "id": "use",
+      "title": "In use",
+      "body": "The mineral pigments on Greek and Roman statuary included yellow ochre, red ochre, cinnabar and hematite, among others [6]. In Shakespeare's time painters of Stratford coloured cloth hangings with ochre reds and yellows, lime white and soot [7]. In Aboriginal Australia, Finlay realized that the natural dye colors of a bag mirror the ochres: red, white, yellow and black [8].\n\nThe cheap earth also served as a cheat. Salter lists red ochre among the adulterants of ground madder root, along with brickdust and sawdust [9]. Ground [[irresistible]] was worth much more than the red earth it was cut with [9]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The swatch measures a lightness of 50 and a chroma of about 31, with a hue angle of 37 degrees, a brownish red [10]. Its contrast ratio against white is 4.5 to 1 [10]. The nearest named colors are Etruscan Red at about 3 units, Hydrangea Red at about 5, and Pinkish Brown, Redwood and Copper Penny at 5 to 6 [10].\n\nWe have no archive count, and a color match in a painting is not a pigment test. Screen colors are approximate [10]."
+    }
   ],
-  "parent": "ochre",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "ochre",
-    "gloss": "the yellow earth the red is made from or found beside"
-   }
-  ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub names data, CIELAB, screen swatch",
-  "measured": {
-   "lch": [
-    49.6,
-    30.9,
-    37
-   ],
-   "contrast_white": 4.54,
-   "nearest": [
-    [
-     "Etruscan Red",
-     2.8
+  "aside": {
+    "origin": {
+      "named_after": "red ochre, iron oxide earth (Greek ochros, pale yellow)",
+      "first_recorded": "prehistoric use",
+      "source": "Pigment Compendium, \"red ochre\""
+    },
+    "aka": [
+      "red ochre",
+      "burnt ochre",
+      "hematite red"
     ],
-    [
-     "Hydrangea Red",
-     4.8
+    "siblings": [
+      "etruscan-red",
+      "indian-red"
+    ],
+    "parent": "ochre",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "ochre",
+        "gloss": "the yellow earth the red is made from or found beside"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub names data, CIELAB, screen swatch",
+    "measured": {
+      "lch": [
+        49.6,
+        30.9,
+        37
+      ],
+      "contrast_white": 4.54,
+      "nearest": [
+        [
+          "Etruscan Red",
+          2.8
+        ],
+        [
+          "Hydrangea Red",
+          4.8
+        ]
+      ]
+    },
+    "archive": "not computed"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"red ochre\" and \"ochre\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"burnt ochre\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"red ochre\" and \"red bole\" (citing Church 1901)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"red ochre\" (citing Pliny, XXXIII.lvi, and Vitruvius, VII.vii.1)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"silver chromate\" (citing Salter 1869)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Pastoureau, Red: The History of a Color, ch. 14",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 9",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Finlay, Colour, ch. 10",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"madder\" (citing Salter 1869)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "data",
+      "cite": "ColorHub names data (data/graph/names.json); CIELAB values computed from the swatch hexes",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What gives red ochre its color?",
+      "choices": [
+        "Hematite, an iron oxide",
+        "Cinnabar",
+        "Madder root",
+        "Cochineal insects"
+      ],
+      "answer": "Hematite, an iron oxide",
+      "kind": "pick"
+    },
+    {
+      "q": "What happens when yellow ochre is heated?",
+      "choices": [
+        "It turns red",
+        "It turns blue",
+        "It turns white",
+        "It dissolves"
+      ],
+      "answer": "It turns red",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Heating yellow ochre turns it red, a trick known since the Palaeolithic."
+  ],
+  "words": 401,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Pliny passage is about yellow ochre (sil), not red: fixed.",
+      "Removed unsupported 'explains why found together' and bole-for-gilding claims.",
+      "Finlay remark attributed to her own observation, not an artist's statement."
     ]
-   ]
-  },
-  "archive": "not computed"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"red ochre\" and \"ochre\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"burnt ochre\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"red ochre\" and \"red bole\" (citing Church 1901)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"red ochre\" (citing Pliny, XXXIII.lvi, and Vitruvius, VII.vii.1)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"silver chromate\" (citing Salter 1869)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Pastoureau, Red: The History of a Color, ch. 14",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 9",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Finlay, Colour, ch. 10",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"madder\" (citing Salter 1869)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "data",
-   "cite": "ColorHub names data (data/graph/names.json); CIELAB values computed from the swatch hexes",
-   "loc_kind": null,
-   "url": null
   }
- ],
- "questions": [
-  {
-   "q": "What gives red ochre its color?",
-   "choices": [
-    "Hematite, an iron oxide",
-    "Cinnabar",
-    "Madder root",
-    "Cochineal insects"
-   ],
-   "answer": "Hematite, an iron oxide",
-   "kind": "pick"
-  },
-  {
-   "q": "What happens when yellow ochre is heated?",
-   "choices": [
-    "It turns red",
-    "It turns blue",
-    "It turns white",
-    "It dissolves"
-   ],
-   "answer": "It turns red",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Heating yellow ochre turns it red, a trick known since the Palaeolithic."
- ],
- "words": 401,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Pliny passage is about yellow ochre (sil), not red: fixed.",
-   "Removed unsupported 'explains why found together' and bole-for-gilding claims.",
-   "Finlay remark attributed to her own observation, not an artist's statement."
-  ]
- }
 }

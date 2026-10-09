@@ -1,0 +1,48 @@
+{
+ "id": "acid-house",
+ "name": "Acid House",
+ "lineage": {
+  "influenced_by": [
+   "Chicago house music",
+   "the Roland TB-303 synthesizer, originally designed as a bass practice tool and repurposed for its \"squelch\" sound"
+  ],
+  "influences": [
+   "rave"
+  ]
+ },
+ "eras": [
+  "1987–1990"
+ ],
+ "places": [],
+ "garments": [
+  "bright yellow",
+  "baggy clothing",
+  "bucket hats"
+ ],
+ "media": [
+  {
+   "title": "Phuture, \"Acid Tracks\" (1987)",
+   "note": "widely credited as the record that named the genre"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "nothing stylistically specific; acid house's defining \"acid\" sound was itself an accident — producers discovered the Roland TB-303's distinctive squelch by misusing a bass synthesizer Roland had designed for a completely different purpose and discontinued as a commercial failure.",
+ "revivals": [],
+ "article": "Acid house's name and sound both trace to a single piece of failed consumer electronics. Roland's TB-303 Bass Line synthesizer, released in 1981, was designed to let guitarists practice with a simple, realistic bass accompaniment; it sold poorly and was discontinued within two years. Chicago producers who picked up cheap secondhand units later in the 1980s discovered that twisting its resonance and cutoff knobs past their intended range produced a distinctive squelching, almost liquid sound nobody had designed for — the \"acid\" sound that gave the genre its name once Phuture's 1987 track \"Acid Tracks\" circulated through Chicago clubs. That sound crossed the Atlantic fast, landing in the UK just as the country's club scene was ready for something new, and became the sonic backbone of 1988's rave explosion. Acid house's own visual signature — the yellow smiley face, repurposed from a 1963 American advertising design with no prior club-culture connection — became one of the most widely recognized symbols in dance music history almost by accident, much like the sound itself.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Acid House"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 68% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

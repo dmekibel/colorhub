@@ -1,128 +1,128 @@
 {
- "slug": "mathews-purple",
- "name": "Mathews' Purple",
- "hex": "#9F5E9C",
- "names": [
-  "Mathews' Purple"
- ],
- "tier": "person",
- "depth": "brief",
- "lede": "Mathews' Purple is a mid-toned, reddish purple from Robert Ridgway's 1912 color standards, and no book we hold records whom it honors.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name the books leave open",
-   "body": "Ridgway placed this purple on plate XXV of his 1912 *Color Standards and Color Nomenclature*, giving it the hue number 65' [1]. Ridgway assembled his roughly 4,000 named samples from many earlier sources rather than coining every name himself, so a color carrying a person's name in his book is not necessarily his own naming [2]. No book we hold explains who Mathews was [1][2].\n\nIts nearest library neighbors are [[purpleish|Purpleish]] and the lighter, bluer [[dark-lilac|Dark Lilac]], with the brighter [[viola|Viola]] close behind [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In LCH terms it measures lightness 49, chroma 36, hue 328 degrees, a stronger purple than its nearest archive cousin [[plum]] [3]. Our archive of 23,781 paintings, as photographed, holds no match for this purple at our usual threshold [4]. That is common for saturated purples: pigments fade and darken unevenly on aged, varnished canvases, so a close match can simply fall under our five-percent-of-canvas rule [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "1912, Ridgway",
-   "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
-  },
-  "aka": [],
-  "siblings": [
-   "purpleish",
-   "dark-lilac",
-   "viola",
-   "plum"
+  "slug": "mathews-purple",
+  "name": "Mathews' Purple",
+  "hex": "#9F5E9C",
+  "names": [
+    "Mathews' Purple"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    49,
-    36,
-    328
-   ],
-   "nearest": [
-    [
-     "Purpleish",
-     3.7
+  "tier": "person",
+  "depth": "brief",
+  "lede": "Mathews' Purple is a mid-toned, reddish purple from Robert Ridgway's 1912 color standards, and no book we hold records whom it honors.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name the books leave open",
+      "body": "Ridgway placed this purple on plate XXV of his 1912 *Color Standards and Color Nomenclature*, giving it the hue number 65' [1]. Ridgway assembled his roughly 4,000 named samples from many earlier sources rather than coining every name himself, so a color carrying a person's name in his book is not necessarily his own naming [2]. No book we hold explains who Mathews was [1][2].\n\nIts nearest library neighbors are [[razzmic-berry|Purpleish]] and the lighter, bluer [[viola|Dark Lilac]], with the brighter [[viola|Viola]] close behind [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In LCH terms it measures lightness 49, chroma 36, hue 328 degrees, a stronger purple than its nearest archive cousin [[plum]] [3]. Our archive of 23,781 paintings, as photographed, holds no match for this purple at our usual threshold [4]. That is common for saturated purples: pigments fade and darken unevenly on aged, varnished canvases, so a close match can simply fall under our five-percent-of-canvas rule [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "1912, Ridgway",
+      "source": "Ridgway, Color Standards and Color Nomenclature (1912)"
+    },
+    "aka": [],
+    "siblings": [
+      "razzmic-berry",
+      "viola",
+      "plum",
+      "manganese-violet"
     ],
-    [
-     "Dark Lilac",
-     4.8
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        49,
+        36,
+        328
+      ],
+      "nearest": [
+        [
+          "Purpleish",
+          3.7
+        ],
+        [
+          "Dark Lilac",
+          4.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXV, hue 65'",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Baty et al. (eds.), Nature's Palette, preface on Ridgway's sources",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; no match within the archive's threshold, at least 5% of the canvas)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "True or false: the books consulted name who Mathews' Purple was named for.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which 1912 book first catalogs Mathews' Purple?",
+      "choices": [
+        "Ridgway's Color Standards and Color Nomenclature",
+        "Maerz and Paul's Dictionary of Color",
+        "Munsell's Atlas of the Color Solid",
+        "Crayola's catalog"
+      ],
+      "answer": "Ridgway's Color Standards and Color Nomenclature",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Mathews' Purple has sat in Ridgway's 1912 plates for over a century with no record of who Mathews was."
+  ],
+  "words": 168,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "Naming origin undocumented in the books consulted.",
+      "No archive match found at the standard threshold.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Ridgway 1912, plate XXV, hue 65'",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Baty et al. (eds.), Nature's Palette, preface on Ridgway's sources",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): CIEDE2000 distances to named neighbors",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes; no match within the archive's threshold, at least 5% of the canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "True or false: the books consulted name who Mathews' Purple was named for.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which 1912 book first catalogs Mathews' Purple?",
-   "choices": [
-    "Ridgway's Color Standards and Color Nomenclature",
-    "Maerz and Paul's Dictionary of Color",
-    "Munsell's Atlas of the Color Solid",
-    "Crayola's catalog"
-   ],
-   "answer": "Ridgway's Color Standards and Color Nomenclature",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Mathews' Purple has sat in Ridgway's 1912 plates for over a century with no record of who Mathews was."
- ],
- "words": 168,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "Naming origin undocumented in the books consulted.",
-   "No archive match found at the standard threshold.",
-   "lint 2026-10-09"
-  ]
- }
 }

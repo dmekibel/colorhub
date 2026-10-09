@@ -1,127 +1,128 @@
 {
- "slug": "pale-magenta",
- "name": "Pale Magenta",
- "hex": "#D767AD",
- "names": [
-  "Pale Magenta"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Pale Magenta is a soft, purplish pink first plated by Robert Ridgway in 1912, long before the word magenta's modern pastel sense took hold.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier, plated in 1912",
-   "body": "The library's earliest source for Pale Magenta is Ridgway's 1912 color dictionary, plate XII, hue 67, tone b, a scan of an aged plate and so only an approximation; ISCC-NBS 1955 and Wikipedia carry it afterward, and the xkcd 2010 survey recorded the plain descriptive name again [1]. It is built on the modifier grammar *pale* + *magenta*, lightening [[magenta|Magenta]] itself [1]. At hex #D767AD it measures lightness 59 and chroma 55 in LCH [1].\n\nIts nearest named neighbor is [[purplish-pink|Purplish Pink]], only 3.5 CIEDE2000 units away and read as almost the same color, followed by [[light-rosolane-purple|Light Rosolane Purple]] at 4.0 and [[china-pink|China Pink]] at 4.9 [2]. The library separately logs Mallow Purple, Sky Magenta and Super Pink as near-duplicate names [1]. The nearest gem comparison is raspberry-colored rhodolite [[gem:garnet|garnet]], 7.9 units off, and a close relative turns up in [[film:barbie|Barbie]]'s fluorescent pink sets, 7.5 units away [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has a pink this saturated covering even 1% of its canvas, as photographed [4]. That describes a gap in this archive's holdings of Old Master and Impressionist work rather than a claim that no painter ever mixed a pink this bright [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a modifier of magenta: pale + magenta",
-   "first_recorded": "1912 (Ridgway, plate XII, hue 67, tone b)",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Mallow Purple",
-   "Sky Magenta",
-   "Super Pink"
+  "slug": "pale-magenta",
+  "name": "Pale Magenta",
+  "hex": "#D767AD",
+  "names": [
+    "Pale Magenta"
   ],
-  "siblings": [
-   "magenta",
-   "purplish-pink",
-   "light-rosolane-purple"
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Pale Magenta is a soft, purplish pink first plated by Robert Ridgway in 1912, long before the word magenta's modern pastel sense took hold.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier, plated in 1912",
+      "body": "The library's earliest source for Pale Magenta is Ridgway's 1912 color dictionary, plate XII, hue 67, tone b, a scan of an aged plate and so only an approximation; ISCC-NBS 1955 and Wikipedia carry it afterward, and the xkcd 2010 survey recorded the plain descriptive name again [1]. It is built on the modifier grammar *pale* + *magenta*, lightening [[magenta|Magenta]] itself [1]. At hex #D767AD it measures lightness 59 and chroma 55 in LCH [1].\n\nIts nearest named neighbor is [[pale-magenta|Purplish Pink]], only 3.5 CIEDE2000 units away and read as almost the same color, followed by [[light-rosolane-purple|Light Rosolane Purple]] at 4.0 and [[china-pink|China Pink]] at 4.9 [2]. The library separately logs Mallow Purple, Sky Magenta and Super Pink as near-duplicate names [1]. The nearest gem comparison is raspberry-colored rhodolite [[gem:garnet|garnet]], 7.9 units off, and a close relative turns up in [[film:barbie|Barbie]]'s fluorescent pink sets, 7.5 units away [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has a pink this saturated covering even 1% of its canvas, as photographed [4]. That describes a gap in this archive's holdings of Old Master and Impressionist work rather than a claim that no painter ever mixed a pink this bright [4]."
+    }
   ],
-  "parent": "magenta",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 0,
-  "pct": 0.0,
-  "measured": {
-   "lch": [
-    59.1,
-    54.8,
-    342.1
-   ],
-   "nearest": [
-    [
-     "Purplish Pink",
-     3.5
+  "aside": {
+    "origin": {
+      "named_after": "a modifier of magenta: pale + magenta",
+      "first_recorded": "1912 (Ridgway, plate XII, hue 67, tone b)",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Mallow Purple",
+      "Sky Magenta",
+      "Super Pink"
+    ],
+    "siblings": [
+      "magenta",
+      "pale-magenta",
+      "light-rosolane-purple",
+      "pearly-purple"
+    ],
+    "parent": "magenta",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 0,
+    "pct": 0.0,
+    "measured": {
+      "lch": [
+        59.1,
+        54.8,
+        342.1
+      ],
+      "nearest": [
+        [
+          "Purplish Pink",
+          3.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-p.json): Ridgway 1912, plate XII, hue 67, tone b (scan of an aged plate, approximate); ISCC-NBS 1955; Wikipedia; xkcd 2010",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph twins, gems and film cross-references (data/graph/edges-p.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which 1912 color dictionary first plates a color this close to Pale Magenta?",
+      "choices": [
+        "Ridgway's",
+        "Maerz & Paul's",
+        "ISCC-NBS's",
+        "Werner's"
+      ],
+      "answer": "Ridgway's",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Ridgway's 1912 plates are scanned from a pristine, unfaded original.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale Magenta was plated by Ridgway in 1912, decades before the xkcd survey gave it this plain descriptive name."
+  ],
+  "words": 217,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; written from ColorHub library/graph data only.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-p.json): Ridgway 1912, plate XII, hue 67, tone b (scan of an aged plate, approximate); ISCC-NBS 1955; Wikipedia; xkcd 2010",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph look-alikes (data/graph/edges-p.json), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph twins, gems and film cross-references (data/graph/edges-p.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which 1912 color dictionary first plates a color this close to Pale Magenta?",
-   "choices": [
-    "Ridgway's",
-    "Maerz & Paul's",
-    "ISCC-NBS's",
-    "Werner's"
-   ],
-   "answer": "Ridgway's",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Ridgway's 1912 plates are scanned from a pristine, unfaded original.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pale Magenta was plated by Ridgway in 1912, decades before the xkcd survey gave it this plain descriptive name."
- ],
- "words": 217,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; written from ColorHub library/graph data only.",
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,120 +1,120 @@
 {
- "slug": "pinkish",
- "name": "Pinkish",
- "hex": "#D46A7E",
- "names": [
-  "Pinkish"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Pinkish is a deep, dusty [[pink]] drawn from the 2010 xkcd crowd survey, though the plain adjective \"pinkish\" is far older in English than that survey date.",
- "sections": [
-  {
-   "id": "name",
-   "title": "An old adjective, a 2010 swatch",
-   "body": "Our library's only dated record for this exact swatch is the 2010 xkcd online color-naming survey, where respondents typed \"pinkish\" next to this particular cluster of clicks [1]. The word itself is much older: in printed English the adjective peaks in use in the 1930s and rose fastest in the 1870s, long before any survey fixed it to one hex value [2]. Who first used the bare word \"pinkish\" as a color term is undocumented in the books consulted here [1].\n\nThe nearest named colors by measured distance are [[cinnamon-satin]], almost the same shade, and [[blush]], more vivid [3]. [[dusky-pink]] reads duller; [[antique-pink]] redder, and [[red-plum]] and [[dusty-cerise]] both more vivid [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings finds a match for this dusty pink in 9 of them, about 0.04 percent, rarer than 79 percent of the named colors we track, as photographed [4]. A swatch this specific and this far from a pure, bright pink is scarce across the whole archive, so the small count fits that pattern [4]. These are photographs of aged, varnished canvases read as screen colors, not pigment identifications [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the plain English adjective \"pinkish\"; who first used it as a fixed color name is undocumented",
-   "first_recorded": "2010, xkcd color survey, for this exact swatch",
-   "source": "xkcd (2010)"
-  },
-  "aka": [],
-  "siblings": [
-   "cinnamon-satin",
-   "blush",
-   "dusky-pink"
+  "slug": "pinkish",
+  "name": "Pinkish",
+  "hex": "#D46A7E",
+  "names": [
+    "Pinkish"
   ],
-  "parent": "pink",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 9,
-  "rank_pct": 79,
-  "measured": {
-   "lch": [
-    57.9,
-    44.5,
-    11.1
-   ],
-   "nearest": [
-    [
-     "Cinnamon Satin",
-     3.8
-    ]
-   ]
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Pinkish is a deep, dusty [[pink]] drawn from the 2010 xkcd crowd survey, though the plain adjective \"pinkish\" is far older in English than that survey date.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "An old adjective, a 2010 swatch",
+      "body": "Our library's only dated record for this exact swatch is the 2010 xkcd online color-naming survey, where respondents typed \"pinkish\" next to this particular cluster of clicks [1]. The word itself is much older: in printed English the adjective peaks in use in the 1930s and rose fastest in the 1870s, long before any survey fixed it to one hex value [2]. Who first used the bare word \"pinkish\" as a color term is undocumented in the books consulted here [1].\n\nThe nearest named colors by measured distance are [[cinnamon-satin]], almost the same shade, and [[blush]], more vivid [3]. [[dusky-pink]] reads duller; [[antique-pink]] redder, and [[red-plum]] and [[red-plum]] both more vivid [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings finds a match for this dusty pink in 9 of them, about 0.04 percent, rarer than 79 percent of the named colors we track, as photographed [4]. A swatch this specific and this far from a pure, bright pink is scarce across the whole archive, so the small count fits that pattern [4]. These are photographs of aged, varnished canvases read as screen colors, not pigment identifications [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the plain English adjective \"pinkish\"; who first used it as a fixed color name is undocumented",
+      "first_recorded": "2010, xkcd color survey, for this exact swatch",
+      "source": "xkcd (2010)"
+    },
+    "aka": [],
+    "siblings": [
+      "cinnamon-satin",
+      "blush",
+      "dusky-pink"
+    ],
+    "parent": "pink",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 9,
+    "rank_pct": 79,
+    "measured": {
+      "lch": [
+        57.9,
+        44.5,
+        11.1
+      ],
+      "nearest": [
+        [
+          "Cinnamon Satin",
+          3.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 color survey entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph fieldnotes: Google Books Ngram, adjective sense, \"pinkish\" (data/graph/fieldnotes/p.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which decade did printed use of \"pinkish\" peak in, according to our Ngram data?",
+      "choices": [
+        "The 1930s",
+        "The 1820s",
+        "The 2010s",
+        "The 1600s"
+      ],
+      "answer": "The 1930s",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the 2010 xkcd survey is where the English word \"pinkish\" was first coined.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The word \"pinkish\" peaked in print in the 1930s, decades before any survey pinned it to one exact hex."
+  ],
+  "words": 211,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd 2010 color survey entry",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub graph fieldnotes: Google Books Ngram, adjective sense, \"pinkish\" (data/graph/fieldnotes/p.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which decade did printed use of \"pinkish\" peak in, according to our Ngram data?",
-   "choices": [
-    "The 1930s",
-    "The 1820s",
-    "The 2010s",
-    "The 1600s"
-   ],
-   "answer": "The 1930s",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the 2010 xkcd survey is where the English word \"pinkish\" was first coined.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The word \"pinkish\" peaked in print in the 1930s, decades before any survey pinned it to one exact hex."
- ],
- "words": 211,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

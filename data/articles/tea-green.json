@@ -1,111 +1,110 @@
 {
- "slug": "tea-green",
- "name": "Tea Green",
- "hex": "#D0F0C0",
- "names": [
-  "Tea Green"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Tea Green is a pale, fresh green named in dictionaries for the greyish green of green tea, though the swatch is much lighter than the leaf.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The color of green tea",
-   "body": "Paterson defines tea green as the greyish green of green tea [1]. The swatch here is a pale, light green with little grey in it; it sits 8.0 units from [[mint]] [2]. So the name points to a duller color than the screen shows, and people now use it for the pale tint.\n\nThe name is old for a color word of this kind. Maerz and Paul, whose 1930 dictionary our library cites, date it to 1858 [2]. It also appears on Ridgway's 1912 color atlas and in the ISCC-NBS list of 1955, block 122 [2]. Related pale greens in our data include [[celadon]] and [[light-green]]. Who first used it for this color is undocumented."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color near this swatch appears in only 8 of 23,781 paintings in our archive, 0.03 per cent, rarer than 75 per cent of named colors [3]. The earliest dated match is 1867, in a painting by Charles de Tournemine, 45 years before Ridgway's atlas [3]. With so few cases, and these being photographs of aged paintings, no pattern is safe to draw."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "green tea",
-   "first_recorded": "1858 (Maerz and Paul, per our library)",
-   "source": "Paterson; ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "mint",
-   "celadon"
+  "slug": "tea-green",
+  "name": "Tea Green",
+  "hex": "#D0F0C0",
+  "names": [
+    "Tea Green"
   ],
-  "parent": null,
-  "children": [
-   "light-green",
-   "light-green",
-   "seafoam"
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Tea Green is a pale, fresh green named in dictionaries for the greyish green of green tea, though the swatch is much lighter than the leaf.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The color of green tea",
+      "body": "Paterson defines tea green as the greyish green of green tea [1]. The swatch here is a pale, light green with little grey in it; it sits 8.0 units from [[mint]] [2]. So the name points to a duller color than the screen shows, and people now use it for the pale tint.\n\nThe name is old for a color word of this kind. Maerz and Paul, whose 1930 dictionary our library cites, date it to 1858 [2]. It also appears on Ridgway's 1912 color atlas and in the ISCC-NBS list of 1955, block 122 [2]. Related pale greens in our data include [[celadon]] and [[light-green]]. Who first used it for this color is undocumented."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color near this swatch appears in only 8 of 23,781 paintings in our archive, 0.03 per cent, rarer than 75 per cent of named colors [3]. The earliest dated match is 1867, in a painting by Charles de Tournemine, 45 years before Ridgway's atlas [3]. With so few cases, and these being photographs of aged paintings, no pattern is safe to draw."
+    }
   ],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-  "n_present": 8,
-  "pct": 0.03,
-  "measured": {
-   "nearest": [
-    [
-     "Mint",
-     8.0
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"tea green\", p. 389",
-   "loc_kind": "pdf-page",
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "green tea",
+      "first_recorded": "1858 (Maerz and Paul, per our library)",
+      "source": "Paterson; ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "mint",
+      "celadon"
+    ],
+    "parent": null,
+    "children": [
+      "light-green",
+      "seafoam"
+    ],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930 (first recorded 1858), Ridgway 1912, ISCC-NBS 1955 block 122; nearest named Mint",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+    "n_present": 8,
+    "pct": 0.03,
+    "measured": {
+      "nearest": [
+        [
+          "Mint",
+          8.0
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"tea green\", p. 389",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Maerz and Paul 1930 (first recorded 1858), Ridgway 1912, ISCC-NBS 1955 block 122; nearest named Mint",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "How does Paterson describe tea green?",
+      "choices": [
+        "The greyish green of green tea",
+        "A bright lime",
+        "A dark forest green",
+        "A pale blue-green"
+      ],
+      "answer": "The greyish green of green tea",
+      "kind": "pick"
+    },
+    {
+      "q": "The Tea Green swatch is as grey as Paterson's description suggests.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The dictionary's tea green is greyish; the swatch is a pale light green, so the name and the screen color have drifted apart."
+  ],
+  "words": 202,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "How does Paterson describe tea green?",
-   "choices": [
-    "The greyish green of green tea",
-    "A bright lime",
-    "A dark forest green",
-    "A pale blue-green"
-   ],
-   "answer": "The greyish green of green tea",
-   "kind": "pick"
-  },
-  {
-   "q": "The Tea Green swatch is as grey as Paterson's description suggests.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The dictionary's tea green is greyish; the swatch is a pale light green, so the name and the screen color have drifted apart."
- ],
- "words": 202,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

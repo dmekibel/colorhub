@@ -1,0 +1,47 @@
+{
+ "id": "bleach-bypass",
+ "name": "Bleach bypass",
+ "lineage": {
+  "influenced_by": [
+   "a film-lab technique skipping (or partially skipping) the bleach step in processing, which normally removes silver from the negative"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "technique dates to at least the 1950s-60s; notably used by cinematographer Kazuo Miyagawa for Her Brother (1960)"
+ ],
+ "places": [
+  "film labs worldwide"
+ ],
+ "garments": [
+  "not a fashion look — a film-processing technique"
+ ],
+ "media": [
+  {
+   "title": "Kazuo Miyagawa, Her Brother (1960)",
+   "note": "an early, widely cited use of the technique"
+  },
+  {
+   "title": "Saving Private Ryan (1998)",
+   "note": "a well-known later use for its desaturated, high-contrast war scenes"
+  }
+ ],
+ "figures": [
+  "Kazuo Miyagawa"
+ ],
+ "reacts_against": "nothing — it's a chemical processing choice that leaves some silver in the color negative, producing higher contrast, desaturated color and deeper blacks, used deliberately for a harsher, grittier look.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 48% of the measured color across 6 Commons photos is below mid-lightness",
+   "mostly muted — about 97% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

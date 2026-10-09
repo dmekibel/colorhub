@@ -1,121 +1,121 @@
 {
- "slug": "pale-purplish-vinaceous",
- "name": "Pale Purplish Vinaceous",
- "hex": "#D0BAB5",
- "names": [
-  "Pale Purplish Vinaceous"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Pale Purplish Vinaceous is a pale, greyed pink with a violet lean, another step in Ridgway's 1912 \"vinaceous\" family of wine-toned pinks.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Next to its sibling vinaceous",
-   "body": "This shade is plate XXXIX, hue 1''', tone f, of Ridgway's 1912 color standards, read from a scan of an aged plate [1]. The 1955 ISCC-NBS system lists the same area as block 4, \"light pink,\" about 3.8 units off [1]. The nearest named colors on file are [[light-brownish-vinaceous]], [[silver-pink]], [[hydrangea-pink]] and [[shell-pink]], at 3.6, 3.7, \nOur own library files it as an obscure, qualified name, meaning it exists mainly to subdivide the vinaceous range rather than to mark anything new [1]. The closest of our common colors is [[silver]], 9.3 units away [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, this pink appears in 186, about 0.78 percent, more common than 63 percent of our named colors [2]. It is most over-represented in paintings from India, at 3.3 times the expected rate, and inside a painting it is most often a light [2].\n\n[[painter:john-singer-sargent|John Singer Sargent]] is its most devoted painter, present in 9 of 287 works here, 3.7 times his museums' baseline [2]. The earliest match is a 1500 painting, over four centuries before Ridgway's 1912 name, so that early hit is a look-alike hue in an aged photograph, not a trace of this named pink, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented; a subdivision of Ridgway's vinaceous (wine-toned) pinks",
-   "first_recorded": "Ridgway, 1912",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "light-brownish-vinaceous",
-   "silver-pink",
-   "hydrangea-pink",
-   "shell-pink"
+  "slug": "pale-purplish-vinaceous",
+  "name": "Pale Purplish Vinaceous",
+  "hex": "#D0BAB5",
+  "names": [
+    "Pale Purplish Vinaceous"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "pale-greyish-vinaceous",
-    "gloss": "the neighboring Ridgway vinaceous step, slightly more grey and less violet"
-   }
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Pale Purplish Vinaceous is a pale, greyed pink with a violet lean, another step in Ridgway's 1912 \"vinaceous\" family of wine-toned pinks.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Next to its sibling vinaceous",
+      "body": "This shade is plate XXXIX, hue 1''', tone f, of Ridgway's 1912 color standards, read from a scan of an aged plate [1]. The 1955 ISCC-NBS system lists the same area as block 4, \"light pink,\" about 3.8 units off [1]. The nearest named colors on file are [[light-brownish-vinaceous]], [[silver-pink]], [[hydrangea-pink]] and [[shell-pink]], at 3.6, 3.7, \nOur own library files it as an obscure, qualified name, meaning it exists mainly to subdivide the vinaceous range rather than to mark anything new [1]. The closest of our common colors is [[silver]], 9.3 units away [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, this pink appears in 186, about 0.78 percent, more common than 63 percent of our named colors [2]. It is most over-represented in paintings from India, at 3.3 times the expected rate, and inside a painting it is most often a light [2].\n\n[[painter:john-singer-sargent|John Singer Sargent]] is its most devoted painter, present in 9 of 287 works here, 3.7 times his museums' baseline [2]. The earliest match is a 1500 painting, over four centuries before Ridgway's 1912 name, so that early hit is a look-alike hue in an aged photograph, not a trace of this named pink, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 186,
-  "pct_present": 0.78,
-  "rank_pct": 63,
-  "role": "light, 57% of 127 matched paintings",
-  "measured": {
-   "lch": [
-    77.2,
-    8.8,
-    37.6
-   ],
-   "nearest": [
-    [
-     "Light Brownish Vinaceous",
-     3.6
+  "aside": {
+    "origin": {
+      "named_after": "undocumented; a subdivision of Ridgway's vinaceous (wine-toned) pinks",
+      "first_recorded": "Ridgway, 1912",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "light-brownish-vinaceous",
+      "silver-pink",
+      "hydrangea-pink",
+      "shell-pink"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "shell-pink",
+        "gloss": "the neighboring Ridgway vinaceous step, slightly more grey and less violet"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 186,
+    "pct_present": 0.78,
+    "rank_pct": 63,
+    "role": "light, 57% of 127 matched paintings",
+    "measured": {
+      "lch": [
+        77.2,
+        8.8,
+        37.6
+      ],
+      "nearest": [
+        [
+          "Light Brownish Vinaceous",
+          3.6
+        ]
+      ]
+    },
+    "iscc": {
+      "block": 4,
+      "name": "grayish yellowish pink",
+      "de": 3.8
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway 1912, plate XXXIX, hue 1'''; ISCC-NBS 1955 block 4",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive field notes for Pale Purplish Vinaceous (n=186)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which Ridgway family does this pink belong to?",
+      "choices": [
+        "The vinaceous (wine-toned) family",
+        "The drab family",
+        "The isabelline family",
+        "The citrine family"
+      ],
+      "answer": "The vinaceous (wine-toned) family",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: this name marks a wholly new color rather than a fine subdivision.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Ridgway split his wine-toned pinks finely enough to need two neighboring \"vinaceous\" names."
+  ],
+  "words": 240,
+  "status": "draft",
+  "checked": {
+    "by": "",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "iscc": {
-   "block": 4,
-   "name": "grayish yellowish pink",
-   "de": 3.8
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway 1912, plate XXXIX, hue 1'''; ISCC-NBS 1955 block 4",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive field notes for Pale Purplish Vinaceous (n=186)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which Ridgway family does this pink belong to?",
-   "choices": [
-    "The vinaceous (wine-toned) family",
-    "The drab family",
-    "The isabelline family",
-    "The citrine family"
-   ],
-   "answer": "The vinaceous (wine-toned) family",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: this name marks a wholly new color rather than a fine subdivision.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Ridgway split his wine-toned pinks finely enough to need two neighboring \"vinaceous\" names."
- ],
- "words": 240,
- "status": "draft",
- "checked": {
-  "by": "",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

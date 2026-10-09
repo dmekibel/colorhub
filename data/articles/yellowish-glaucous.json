@@ -1,122 +1,122 @@
 {
- "slug": "yellowish-glaucous",
- "name": "Yellowish Glaucous",
- "hex": "#C7C8AF",
- "names": [
-  "Yellowish Glaucous"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Yellowish Glaucous is a modifier built from the plain color word glaucous, the dusty blue-grey bloom on a grape or a cabbage leaf, with a yellow cast added.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier, not a material",
-   "body": "ColorHub lists Yellowish Glaucous as \"yellowish\" plus the color word [[glaucous]], the dusty blue-grey bloom on a grape or a cabbage leaf, rather than as a pigment or a named material [1]. Our sources carry no date or place for when this specific modified name entered use [1].\n\nIts nearest look-alikes are all greener: [[corydalis-green]] and [[celandine-green]], 4.3 and 4.6 units away, with [[pale-olivine]] close behind at 4.8 [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed [3]. Our sources give no date for this specific modified name, so there is no record to compare an archive match against in any case [3]. In LCH terms it measures lightness 80, chroma 13 and hue 111 degrees, a pale, muted yellow-green [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the modifier \"yellowish\" plus the color word glaucous",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "corydalis-green",
-   "celandine-green",
-   "pale-olivine"
+  "slug": "yellowish-glaucous",
+  "name": "Yellowish Glaucous",
+  "hex": "#C7C8AF",
+  "names": [
+    "Yellowish Glaucous"
   ],
-  "parent": "glaucous",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    79.9,
-    13.2,
-    110.6
-   ],
-   "nearest": [
-    [
-     "Corydalis Green",
-     4.3
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Yellowish Glaucous is a modifier built from the plain color word glaucous, the dusty blue-grey bloom on a grape or a cabbage leaf, with a yellow cast added.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier, not a material",
+      "body": "ColorHub lists Yellowish Glaucous as \"yellowish\" plus the color word [[dusty-blue]], the dusty blue-grey bloom on a grape or a cabbage leaf, rather than as a pigment or a named material [1]. Our sources carry no date or place for when this specific modified name entered use [1].\n\nIts nearest look-alikes are all greener: [[corydalis-green]] and [[celandine-green]], 4.3 and 4.6 units away, with [[pale-olivine]] close behind at 4.8 [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed [3]. Our sources give no date for this specific modified name, so there is no record to compare an archive match against in any case [3]. In LCH terms it measures lightness 80, chroma 13 and hue 111 degrees, a pale, muted yellow-green [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the modifier \"yellowish\" plus the color word glaucous",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "corydalis-green",
+      "celandine-green",
+      "pale-olivine"
     ],
-    [
-     "Celandine Green",
-     4.6
-    ],
-    [
-     "Pale Olivine",
-     4.8
+    "parent": "dusty-blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        79.9,
+        13.2,
+        110.6
+      ],
+      "nearest": [
+        [
+          "Corydalis Green",
+          4.3
+        ],
+        [
+          "Celandine Green",
+          4.6
+        ],
+        [
+          "Pale Olivine",
+          4.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: descriptive-modifier tier entry for Yellowish Glaucous",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges, data/graph/edges-y.json",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Yellowish Glaucous is built from which plain color word?",
+      "choices": [
+        "Glaucous",
+        "Olivine",
+        "Citrine",
+        "Celadon"
+      ],
+      "answer": "Glaucous",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources document exactly when the name Yellowish Glaucous entered use.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Yellowish Glaucous takes a dusty, blue-grey plant word, glaucous, and adds a yellow cast."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Both the name section and field notes cited a specific Ridgway 1912 plate/block and an elaborate archive record (1,171 matches, a named painter, a 1392 date, UK over-representation) with no backing entry in data/library.json or data/graph/fieldnotes for this slug, and no concordance hit tying Ridgway or ISCC-NBS to this exact modified name. Replaced with an honest 'origin undocumented' and n_present=0; kept the already-correct computed LCH."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: descriptive-modifier tier entry for Yellowish Glaucous",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub graph: look-alike edges, data/graph/edges-y.json",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Yellowish Glaucous is built from which plain color word?",
-   "choices": [
-    "Glaucous",
-    "Olivine",
-    "Citrine",
-    "Celadon"
-   ],
-   "answer": "Glaucous",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources document exactly when the name Yellowish Glaucous entered use.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Yellowish Glaucous takes a dusty, blue-grey plant word, glaucous, and adds a yellow cast."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Both the name section and field notes cited a specific Ridgway 1912 plate/block and an elaborate archive record (1,171 matches, a named painter, a 1392 date, UK over-representation) with no backing entry in data/library.json or data/graph/fieldnotes for this slug, and no concordance hit tying Ridgway or ISCC-NBS to this exact modified name. Replaced with an honest 'origin undocumented' and n_present=0; kept the already-correct computed LCH."
-  ]
- },
- "words": 161
+  "words": 162
 }

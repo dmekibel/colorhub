@@ -1,129 +1,129 @@
 {
- "slug": "bright-magenta",
- "name": "Bright Magenta",
- "hex": "#FF08E8",
- "names": [
-  "Bright Magenta"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Bright Magenta is a modifier on [[magenta]], a vivid purplish pink that our sources record only in the xkcd 2010 crowd color survey.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A survey name, not a system name",
-   "body": "Unlike many bright- compounds, this one carries no other record in our sources: no CSS keyword, no ISCC-NBS block, no paint-brand plate behind it [1]. It is simply modifier grammar, bright plus magenta, collected when online volunteers typed color names for hex swatches in 2010 [1].\n\nThe word it modifies is older. Magenta began as a nickname for fuchsine, the aniline red dye of 1859, named for the Italian town where the French defeated the Austrians that June [4]. Ball describes the dye as a deep red, far from this screen pink-purple, so the swatch is not the history [4].\n\nIts closest named neighbor is magenta itself, only 3.1 units away and read as more vivid still [2]. [[hot-magenta|Hot Magenta]] sits at 3.9, duller by comparison, and [[purple-pizzazz|Purple Pizzazz]] a little further out on the same side [2]. [[pink-purple|Pink Purple]] sits further out too, duller than this swatch [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive carries a color within six units of this one over at least five percent of its canvas, as photographed [3]. A match would be a screen comparison with photographed, varnished paint, not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "magenta, intensified",
-   "first_recorded": "2010 (xkcd crowd survey)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "hot-magenta",
-   "pink-purple",
-   "purple-pizzazz"
+  "slug": "bright-magenta",
+  "name": "Bright Magenta",
+  "hex": "#FF08E8",
+  "names": [
+    "Bright Magenta"
   ],
-  "parent": "magenta",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "match": {
-   "de2000": 6.0,
-   "min_cover": 0.05
-  },
-  "measured": {
-   "lch": [
-    59.2,
-    107.0,
-    332.3
-   ],
-   "nearest": [
-    [
-     "Magenta",
-     3.1
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Bright Magenta is a modifier on [[magenta]], a vivid purplish pink that our sources record only in the xkcd 2010 crowd color survey.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A survey name, not a system name",
+      "body": "Unlike many bright- compounds, this one carries no other record in our sources: no CSS keyword, no ISCC-NBS block, no paint-brand plate behind it [1]. It is simply modifier grammar, bright plus magenta, collected when online volunteers typed color names for hex swatches in 2010 [1].\n\nThe word it modifies is older. Magenta began as a nickname for fuchsine, the aniline red dye of 1859, named for the Italian town where the French defeated the Austrians that June [4]. Ball describes the dye as a deep red, far from this screen pink-purple, so the swatch is not the history [4].\n\nIts closest named neighbor is magenta itself, only 3.1 units away and read as more vivid still [2]. [[hot-magenta|Hot Magenta]] sits at 3.9, duller by comparison, and [[purple-pizzazz|Purple Pizzazz]] a little further out on the same side [2]. [[pinky-purple|Pink Purple]] sits further out too, duller than this swatch [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive carries a color within six units of this one over at least five percent of its canvas, as photographed [3]. A match would be a screen comparison with photographed, varnished paint, not a pigment test [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "magenta, intensified",
+      "first_recorded": "2010 (xkcd crowd survey)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "hot-magenta",
+      "pinky-purple",
+      "purple-pizzazz"
     ],
-    [
-     "Hot Magenta",
-     3.9
+    "parent": "magenta",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "match": {
+      "de2000": 6.0,
+      "min_cover": 0.05
+    },
+    "measured": {
+      "lch": [
+        59.2,
+        107.0,
+        332.3
+      ],
+      "nearest": [
+        [
+          "Magenta",
+          3.1
+        ],
+        [
+          "Hot Magenta",
+          3.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 entry and magenta's recorded history",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges for bright-magenta",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which survey first recorded the name Bright Magenta?",
+      "choices": [
+        "The xkcd 2010 crowd color survey",
+        "ISCC-NBS 1955",
+        "A CSS keyword list",
+        "Maerz and Paul 1930"
+      ],
+      "answer": "The xkcd 2010 crowd color survey",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Bright Magenta has an ISCC-NBS block number.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Bright Magenta has no record before 2010 in our sources: no CSS name, no dictionary plate, only a crowd survey."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd 2010 entry and magenta's recorded history",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: look-alike edges for bright-magenta",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which survey first recorded the name Bright Magenta?",
-   "choices": [
-    "The xkcd 2010 crowd color survey",
-    "ISCC-NBS 1955",
-    "A CSS keyword list",
-    "Maerz and Paul 1930"
-   ],
-   "answer": "The xkcd 2010 crowd color survey",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Bright Magenta has an ISCC-NBS block number.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Bright Magenta has no record before 2010 in our sources: no CSS name, no dictionary plate, only a crowd survey."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
-  ]
- },
- "words": 208
+  "words": 208
 }

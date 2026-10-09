@@ -1,115 +1,115 @@
 {
- "slug": "lighter-green",
- "name": "Lighter Green",
- "hex": "#75FD63",
- "names": [
-  "Lighter Green"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Lighter Green is a bright yellow-green recorded in Wikipedia's color lists and the 2010 xkcd survey, built from the comparative lighter rather than the usual light.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A comparative build on green",
-   "body": "Our Color Graph gives Lighter Green, #75FD63, as modifier grammar: lighter plus the base name [[green]], recorded in Wikipedia's lists and the xkcd survey of 2010 [1]. It is filed directly under green rather than under a narrower base color[1]. The ISCC-NBS system classes the hue as brilliant yellowish green, about 9.4 units from that block's center, one of the wider gaps in this group [1]. Its Munsell notation is 9.8GY 8.9/13.5 and its LCH values are lightness 89, chroma 89, hue 137 degrees[1]. The nearest common library name is [[chartreuse]], 6.2 units away, and the library marks Easter Green as a near neighbor [2].\n\nOne near-duplicate, Screamin' Green, sits only 1.3 units off [2]. A fifth, slightly farther neighbor is [[easter-green]], 3.1 ΔE away, duller [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Lighter Green covering even 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole: a color this saturated is rare in aged, varnished oil paint regardless of name [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the base color green, made comparatively lighter",
-   "first_recorded": "xkcd survey, 2010 (also Wikipedia)",
-   "source": "ColorHub Color Graph"
-  },
-  "aka": [
-   "Screamin' Green",
-   "Easter Green"
+  "slug": "lighter-green",
+  "name": "Lighter Green",
+  "hex": "#75FD63",
+  "names": [
+    "Lighter Green"
   ],
-  "siblings": [
-   "green",
-   "chartreuse",
-   "lime",
-   "grass-green"
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Lighter Green is a bright yellow-green recorded in Wikipedia's color lists and the 2010 xkcd survey, built from the comparative lighter rather than the usual light.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A comparative build on green",
+      "body": "Our Color Graph gives Lighter Green, #75FD63, as modifier grammar: lighter plus the base name [[green]], recorded in Wikipedia's lists and the xkcd survey of 2010 [1]. It is filed directly under green rather than under a narrower base color[1]. The ISCC-NBS system classes the hue as brilliant yellowish green, about 9.4 units from that block's center, one of the wider gaps in this group [1]. Its Munsell notation is 9.8GY 8.9/13.5 and its LCH values are lightness 89, chroma 89, hue 137 degrees[1]. The nearest common library name is [[chartreuse]], 6.2 units away, and the library marks Easter Green as a near neighbor [2].\n\nOne near-duplicate, Screamin' Green, sits only 1.3 units off [2]. A fifth, slightly farther neighbor is [[lighter-green]], 3.1 ΔE away, duller [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Lighter Green covering even 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole: a color this saturated is rare in aged, varnished oil paint regardless of name [3]."
+    }
   ],
-  "parent": "green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "match": {
-   "hex": "#75FD63",
-   "de_max": 4,
-   "min_cover": 0.01
+  "aside": {
+    "origin": {
+      "named_after": "the base color green, made comparatively lighter",
+      "first_recorded": "xkcd survey, 2010 (also Wikipedia)",
+      "source": "ColorHub Color Graph"
+    },
+    "aka": [
+      "Screamin' Green",
+      "Easter Green"
+    ],
+    "siblings": [
+      "green",
+      "chartreuse",
+      "lime",
+      "grass-green"
+    ],
+    "parent": "green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "nearest": [
-   [
-    "Chartreuse",
-    6.2
-   ]
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "match": {
+      "hex": "#75FD63",
+      "de_max": 4,
+      "min_cover": 0.01
+    },
+    "nearest": [
+      [
+        "Chartreuse",
+        6.2
+      ]
+    ]
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): nearest named match",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): nearest named match",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which modifier word does Lighter Green use, unlike most names in this group?",
+      "choices": [
+        "The comparative lighter",
+        "The superlative lightest",
+        "The adjective pale"
+      ],
+      "answer": "The comparative lighter",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Lighter Green is the most saturated color in this batch by chroma.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Lighter Green uses the comparative lighter rather than light, and it is the most saturated color in its batch."
+  ],
+  "words": 204,
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "Which modifier word does Lighter Green use, unlike most names in this group?",
-   "choices": [
-    "The comparative lighter",
-    "The superlative lightest",
-    "The adjective pale"
-   ],
-   "answer": "The comparative lighter",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Lighter Green is the most saturated color in this batch by chroma.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Lighter Green uses the comparative lighter rather than light, and it is the most saturated color in its batch."
- ],
- "words": 204,
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

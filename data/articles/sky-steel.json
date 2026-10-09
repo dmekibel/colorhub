@@ -1,130 +1,131 @@
 {
- "slug": "sky-steel",
- "name": "Sky Steel",
- "hex": "#4D8FAC",
- "names": [
-  "Sky Steel",
-  "Sky steel",
-  "Bluish steel blue"
- ],
- "tier": "pigment",
- "depth": "brief",
- "lede": "Sky Steel is a muted blue-grey that our own library lists twice over: it is a color match, to 0 units of difference, for a second name, Bluish Steel Blue.",
- "sections": [
-  {
-   "id": "name",
-   "title": "One color, two names",
-   "body": "Our library carries Sky Steel from a Japanese traditional-color source, listed there without a Western dictionary date; it also cross-references to Sora-iro, a Japanese name meaning \"sky blue color\" [1]. The ISCC-NBS system would place it in a vivid greenish blue block, about 5.6 units off that block's center, and the Munsell notation is 8.3B 5.5/6.0 [1].\n\nIn our own graph, Sky Steel is a duplicate at zero color difference of [[sky-steel]], meaning the two names in our library point to the same screen color [1]. The nearest distinct neighbor is [[beaucaire]], 3.9 units away, described as almost the same; [[dusty-steel-blue]] follows at 4.6, a touch bluer [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this blue-grey in 0.41 percent of 23,781 paintings, 97 of them, and the within-painting lens isolates it as a dominant area in 43, as photographed [2]. That ranks it rarer than 52 percent of the named colors we track [2]. It peaks in the 1900s, in 9 of 1,674 paintings, present in 0.5 percent of the 1,674 paintings (9 of them) dated to that century, 2.8 times its museums' baseline rate [2].\n\nInside a painting it most often plays a mid-tone, 30 percent of its 43 appearances by lightness rank [2]. The earliest match in our archive is a 1467 panel by Marco Zoppo; our sources give no dated first record for the name itself, so no gap can be measured, a floor and not a first, since the archive's early centuries are thin [2]. It is also over-represented in French painting, 2.5 times the expected rate, 18 of 3,443 French works [2]. In printed English the word \"steel\" (all senses, so this tracks the metal and the color together) rose fastest in the 1870s and has since kept climbing, peaking in the 2010s in Google's book scans [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the metal word \"steel\"",
-   "first_recorded": "undocumented in the books consulted",
-   "source": "ColorHub Japanese traditional-color cross-reference"
-  },
-  "aka": [
-   "Bluish Steel Blue"
+  "slug": "sky-steel",
+  "name": "Sky Steel",
+  "hex": "#4D8FAC",
+  "names": [
+    "Sky Steel",
+    "Sky steel",
+    "Bluish steel blue"
   ],
-  "siblings": [
-   "bluish-steel-blue",
-   "beaucaire",
-   "tyrolite-green"
+  "tier": "pigment",
+  "depth": "brief",
+  "lede": "Sky Steel is a muted blue-grey that our own library lists twice over: it is a color match, to 0 units of difference, for a second name, Bluish Steel Blue.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One color, two names",
+      "body": "Our library carries Sky Steel from a Japanese traditional-color source, listed there without a Western dictionary date; it also cross-references to Sora-iro, a Japanese name meaning \"sky blue color\" [1]. The ISCC-NBS system would place it in a vivid greenish blue block, about 5.6 units off that block's center, and the Munsell notation is 8.3B 5.5/6.0 [1].\n\nIn our own graph, Sky Steel is a duplicate at zero color difference of [[sky-steel]], meaning the two names in our library point to the same screen color [1]. The nearest distinct neighbor is [[beaucaire]], 3.9 units away, described as almost the same; [[dusty-steel-blue]] follows at 4.6, a touch bluer [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this blue-grey in 0.41 percent of 23,781 paintings, 97 of them, and the within-painting lens isolates it as a dominant area in 43, as photographed [2]. That ranks it rarer than 52 percent of the named colors we track [2]. It peaks in the 1900s, in 9 of 1,674 paintings, present in 0.5 percent of the 1,674 paintings (9 of them) dated to that century, 2.8 times its museums' baseline rate [2].\n\nInside a painting it most often plays a mid-tone, 30 percent of its 43 appearances by lightness rank [2]. The earliest match in our archive is a 1467 panel by Marco Zoppo; our sources give no dated first record for the name itself, so no gap can be measured, a floor and not a first, since the archive's early centuries are thin [2]. It is also over-represented in French painting, 2.5 times the expected rate, 18 of 3,443 French works [2]. In printed English the word \"steel\" (all senses, so this tracks the metal and the color together) rose fastest in the 1870s and has since kept climbing, peaking in the 2010s in Google's book scans [2]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Sora-iro (空色)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 97,
-  "n_within": 43,
-  "measured": {
-   "lch": [
-    56.3,
-    25.1,
-    239.9
-   ],
-   "nearest": [
-    [
-     "Bluish Steel Blue",
-     0.0
+  "aside": {
+    "origin": {
+      "named_after": "the metal word \"steel\"",
+      "first_recorded": "undocumented in the books consulted",
+      "source": "ColorHub Japanese traditional-color cross-reference"
+    },
+    "aka": [
+      "Bluish Steel Blue"
     ],
-    [
-     "Beaucaire",
-     3.9
+    "siblings": [
+      "sky-steel",
+      "beaucaire",
+      "tyrolite-green",
+      "harbor-blue"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Sora-iro (空色)"
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Sky Steel entry, ISCC-NBS and Munsell cross-reference, Japanese traditional-color link (Sora-iro)",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Ngram word-frequency cache",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 97,
+    "n_within": 43,
+    "measured": {
+      "lch": [
+        56.3,
+        25.1,
+        239.9
+      ],
+      "nearest": [
+        [
+          "Bluish Steel Blue",
+          0.0
+        ],
+        [
+          "Beaucaire",
+          3.9
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub graph: nearest named colors (look-alike and duplicate data)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Sky Steel entry, ISCC-NBS and Munsell cross-reference, Japanese traditional-color link (Sora-iro)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Ngram word-frequency cache",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub graph: nearest named colors (look-alike and duplicate data)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which name in our library is a zero-difference match for Sky Steel?",
+      "choices": [
+        "Bluish Steel Blue",
+        "Beaucaire",
+        "Tyrolite Green",
+        "Harbor Blue"
+      ],
+      "answer": "Bluish Steel Blue",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources give a documented year when the name Sky Steel was first used.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Sky Steel and Bluish Steel Blue sit at zero color difference in our library — the same color under two names.",
+    "In print, the word behind this blue-grey has climbed almost every decade since the 1870s."
+  ],
+  "words": 337,
+  "status": "checked",
+  "checked": {
+    "by": "claude",
+    "date": "2026-10-08",
+    "issues": [
+      "No book source gives a first-recorded date for the name; the word-frequency note mixes all senses of \"steel\", not only the color.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "Which name in our library is a zero-difference match for Sky Steel?",
-   "choices": [
-    "Bluish Steel Blue",
-    "Beaucaire",
-    "Tyrolite Green",
-    "Harbor Blue"
-   ],
-   "answer": "Bluish Steel Blue",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources give a documented year when the name Sky Steel was first used.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Sky Steel and Bluish Steel Blue sit at zero color difference in our library — the same color under two names.",
-  "In print, the word behind this blue-grey has climbed almost every decade since the 1870s."
- ],
- "words": 337,
- "status": "checked",
- "checked": {
-  "by": "claude",
-  "date": "2026-10-08",
-  "issues": [
-   "No book source gives a first-recorded date for the name; the word-frequency note mixes all senses of \"steel\", not only the color.",
-   "lint 2026-10-09"
-  ]
- }
 }

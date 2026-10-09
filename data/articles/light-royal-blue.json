@@ -1,111 +1,111 @@
 {
- "slug": "light-royal-blue",
- "name": "Light Royal Blue",
- "hex": "#3A2EFE",
- "names": [
-  "Light Royal Blue"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Light Royal Blue is a brighter, more violet reading of [[royal-blue|Royal Blue]], a name the 2010 xkcd color survey filed rather than any dye or paint maker.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier, not a lighter royal blue",
-   "body": "Despite the word \"light\", this xkcd entry measures darker and far more saturated than its parent, not paler: lightness 38 against Royal Blue's 48, and chroma 119 against 70 [1]. It reads closer to a pure electric violet-blue than to the deep, slightly greyed [[royal-blue|Royal Blue]], whose own name began as a dyers' grade of indigo [1]. Crowd surveys like xkcd's often use \"light\" loosely, as a label for a sibling shade rather than a strict lightness step [1].\n\nIts nearest named neighbor is [[vibrant-blue|Vibrant Blue]], 3.0 units away and duller, with [[purplish-blue|Purplish Blue]] close behind at 3.5, almost the same [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. A blue this saturated and this close to pure electric violet-blue sits outside the range of mineral and dye pigments painters had before modern inks and screens [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a descriptive modifier: light + Royal Blue",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color graph"
-  },
-  "aka": [],
-  "siblings": [
-   "vibrant-blue",
-   "purplish-blue",
-   "purpleish-blue"
+  "slug": "light-royal-blue",
+  "name": "Light Royal Blue",
+  "hex": "#3A2EFE",
+  "names": [
+    "Light Royal Blue"
   ],
-  "parent": "royal-blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    38,
-    119,
-    305
-   ],
-   "nearest": [
-    [
-     "Vibrant Blue",
-     3.0
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Royal Blue is a brighter, more violet reading of [[royal-blue|Royal Blue]], a name the 2010 xkcd color survey filed rather than any dye or paint maker.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier, not a lighter royal blue",
+      "body": "Despite the word \"light\", this xkcd entry measures darker and far more saturated than its parent, not paler: lightness 38 against Royal Blue's 48, and chroma 119 against 70 [1]. It reads closer to a pure electric violet-blue than to the deep, slightly greyed [[royal-blue|Royal Blue]], whose own name began as a dyers' grade of indigo [1]. Crowd surveys like xkcd's often use \"light\" loosely, as a label for a sibling shade rather than a strict lightness step [1].\n\nIts nearest named neighbor is [[vibrant-blue|Vibrant Blue]], 3.0 units away and duller, with [[blurple|Purplish Blue]] close behind at 3.5, almost the same [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive holds this color covering at least 1 percent of its canvas, within a color distance of 4, as photographed [2]. A blue this saturated and this close to pure electric violet-blue sits outside the range of mineral and dye pigments painters had before modern inks and screens [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a descriptive modifier: light + Royal Blue",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color graph"
+    },
+    "aka": [],
+    "siblings": [
+      "vibrant-blue",
+      "blurple",
+      "blue-blue"
     ],
-    [
-     "Purplish Blue",
-     3.5
+    "parent": "royal-blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        38,
+        119,
+        305
+      ],
+      "nearest": [
+        [
+          "Vibrant Blue",
+          3.0
+        ],
+        [
+          "Purplish Blue",
+          3.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph: xkcd color survey (2010) and look-alike edges",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Light Royal Blue is a modifier on which parent color?",
+      "choices": [
+        "Royal Blue",
+        "Tyrian Blue",
+        "Teal",
+        "Rose"
+      ],
+      "answer": "Royal Blue",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Light Royal Blue measures lighter than Royal Blue.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Despite its name, Light Royal Blue is more vivid than Royal Blue, not paler."
+  ],
+  "words": 180,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); written from the color graph and archive only."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph: xkcd color survey (2010) and look-alike edges",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Light Royal Blue is a modifier on which parent color?",
-   "choices": [
-    "Royal Blue",
-    "Tyrian Blue",
-    "Teal",
-    "Rose"
-   ],
-   "answer": "Royal Blue",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Light Royal Blue measures lighter than Royal Blue.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Despite its name, Light Royal Blue is more vivid than Royal Blue, not paler."
- ],
- "words": 180,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); written from the color graph and archive only."
-  ]
- }
 }

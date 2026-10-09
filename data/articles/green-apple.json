@@ -1,119 +1,119 @@
 {
- "slug": "green-apple",
- "name": "Green Apple",
- "hex": "#5EDC1F",
- "names": [
-  "Green Apple"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Green Apple is a bright, highly saturated yellow-green named for the fruit's skin rather than its flesh, recorded by the 2010 xkcd color-name survey.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The fruit's skin, not its flesh",
-   "body": "Our library files Green Apple as a nature name, one of the plant and food words the 2010 xkcd color survey collected when it asked online visitors to type a name for colors shown on screen [1]. The name points to the skin of a tart green apple, such as a Granny Smith, rather than the paler, yellower flesh underneath [1].\n\nThe nearest named look-alikes on file are [[vibrant-green|Vibrant Green]], a touch more vivid, and [[fresh-green|Fresh Green]], a shade duller [2]. [[apple-green|Apple Green]] is a separate, older entry and itself a duller, slightly different green, and [[kiwi-green|Kiwi Green]] is duller and lighter still [2]. In printed English the two-word phrase \"green apple\" was already common by 1800, for the fruit rather than the color, and the color sense only became common online after the 2010 survey [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive carries a color close enough to this one over enough of its canvas to count, as photographed [3]. That is expected: Green Apple is more saturated than most pigments artists before the twentieth century had access to, and our collection leans older and European [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a green apple's skin",
-   "first_recorded": "2010, in the xkcd color-name survey",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "vibrant-green",
-   "fresh-green",
-   "apple-green",
-   "kiwi-green"
+  "slug": "green-apple",
+  "name": "Green Apple",
+  "hex": "#5EDC1F",
+  "names": [
+    "Green Apple"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    78.3,
-    96.6,
-    131.7
-   ],
-   "nearest": [
-    [
-     "Vibrant Green",
-     3.3
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Green Apple is a bright, highly saturated yellow-green named for the fruit's skin rather than its flesh, recorded by the 2010 xkcd color-name survey.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The fruit's skin, not its flesh",
+      "body": "Our library files Green Apple as a nature name, one of the plant and food words the 2010 xkcd color survey collected when it asked online visitors to type a name for colors shown on screen [1]. The name points to the skin of a tart green apple, such as a Granny Smith, rather than the paler, yellower flesh underneath [1].\n\nThe nearest named look-alikes on file are [[vibrant-green|Vibrant Green]], a touch more vivid, and [[apple|Fresh Green]], a shade duller [2]. [[apple-green|Apple Green]] is a separate, older entry and itself a duller, slightly different green, and [[kiwi|Kiwi Green]] is duller and lighter still [2]. In printed English the two-word phrase \"green apple\" was already common by 1800, for the fruit rather than the color, and the color sense only became common online after the 2010 survey [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive carries a color close enough to this one over enough of its canvas to count, as photographed [3]. That is expected: Green Apple is more saturated than most pigments artists before the twentieth century had access to, and our collection leans older and European [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "a green apple's skin",
+      "first_recorded": "2010, in the xkcd color-name survey",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "vibrant-green",
+      "apple",
+      "apple-green",
+      "kiwi"
     ],
-    [
-     "Fresh Green",
-     3.9
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        78.3,
+        96.6,
+        131.7
+      ],
+      "nearest": [
+        [
+          "Vibrant Green",
+          3.3
+        ],
+        [
+          "Fresh Green",
+          3.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-g.json): xkcd 2010 crowd-sourced color-name survey",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-g.json), CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Green Apple is named for which part of the fruit?",
+      "choices": [
+        "The skin, not the flesh",
+        "The seeds",
+        "The stem",
+        "The core"
+      ],
+      "answer": "The skin, not the flesh",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Green Apple and Apple Green are the same name for the same shade.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Green Apple is more saturated than almost any pigment available before the twentieth century, which is why old paintings never carry it."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-g.json): xkcd 2010 crowd-sourced color-name survey",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-g.json), CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes/g.json)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Green Apple is named for which part of the fruit?",
-   "choices": [
-    "The skin, not the flesh",
-    "The seeds",
-    "The stem",
-    "The core"
-   ],
-   "answer": "The skin, not the flesh",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Green Apple and Apple Green are the same name for the same shade.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Green Apple is more saturated than almost any pigment available before the twentieth century, which is why old paintings never carry it."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits (src empty); written from ColorHub graph/library data only, no book sources."
-  ]
- },
- "words": 206
+  "words": 206
 }

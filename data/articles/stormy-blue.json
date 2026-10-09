@@ -1,106 +1,106 @@
 {
- "slug": "stormy-blue",
- "name": "Stormy Blue",
- "hex": "#507B9C",
- "names": [
-  "Stormy Blue"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Stormy Blue is a muted, grey-leaning [[blue]] named for storm-cloud weather, close in our library to [[steel-blue|Steel Blue]].",
- "sections": [
-  {
-   "id": "name",
-   "title": "Weather, not a material",
-   "body": "Our graph files this as a landscape word, recorded by the 2010 xkcd crowd survey [1]. The ISCC-NBS block for it reads \"moderate blue\", and in Munsell terms it sits near 1.6PB 4.9/5.7 [1].\n\nIts nearest library neighbor is [[dull-blue|Dull Blue]], and [[denim|Denim]] sits close in the same grey-blue family [1]. The hex is a screen value; no pigment or dye is implied [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Stormy Blue covers at least 2% of the canvas in 173 of our 23,781 paintings, and by position in each painting's lightness order it is found in 94, more common than 58% of the named colors we track, as photographed [2]. It most often plays an accent, the role in 43% of those matched paintings [2].\n\nIt peaks in the 1920s, in 5 of 237 paintings, at 3.3 times the archive's baseline rate for that decade, and in the 1900s overall at 2.9 times [2]. The earliest match is 1445, in a work by Michele Giambono, 565 years before the name's own 2010 record, a resemblance in an aged photograph rather than evidence of the name or the mix, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "stormy weather, the landscape condition",
-   "first_recorded": "2010, xkcd color survey",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "dull-blue",
-   "denim",
-   "steel-blue"
+  "slug": "stormy-blue",
+  "name": "Stormy Blue",
+  "hex": "#507B9C",
+  "names": [
+    "Stormy Blue"
   ],
-  "parent": "blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present_by_coverage": 173,
-  "n_present_within": 94,
-  "rank_pct": 58,
-  "role": "accent, 43% of matched paintings",
-  "peak_decade": {
-   "decade": 1920,
-   "lift": 3.3
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Stormy Blue is a muted, grey-leaning [[blue]] named for storm-cloud weather, close in our library to [[steel-blue|Steel Blue]].",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Weather, not a material",
+      "body": "Our graph files this as a landscape word, recorded by the 2010 xkcd crowd survey [1]. The ISCC-NBS block for it reads \"moderate blue\", and in Munsell terms it sits near 1.6PB 4.9/5.7 [1].\n\nIts nearest library neighbor is [[flat-blue|Dull Blue]], and [[denim|Denim]] sits close in the same grey-blue family [1]. The hex is a screen value; no pigment or dye is implied [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Stormy Blue covers at least 2% of the canvas in 173 of our 23,781 paintings, and by position in each painting's lightness order it is found in 94, more common than 58% of the named colors we track, as photographed [2]. It most often plays an accent, the role in 43% of those matched paintings [2].\n\nIt peaks in the 1920s, in 5 of 237 paintings, at 3.3 times the archive's baseline rate for that decade, and in the 1900s overall at 2.9 times [2]. The earliest match is 1445, in a work by Michele Giambono, 565 years before the name's own 2010 record, a resemblance in an aged photograph rather than evidence of the name or the mix, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "stormy weather, the landscape condition",
+      "first_recorded": "2010, xkcd color survey",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "flat-blue",
+      "denim",
+      "steel-blue"
+    ],
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "first_dated": {
-   "id": "nga-221",
-   "painter": "Michele Giambono",
-   "year": 1445
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS (1955) entries",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present_by_coverage": 173,
+    "n_present_within": 94,
+    "rank_pct": 58,
+    "role": "accent, 43% of matched paintings",
+    "peak_decade": {
+      "decade": 1920,
+      "lift": 3.3
+    },
+    "first_dated": {
+      "id": "nga-221",
+      "painter": "Michele Giambono",
+      "year": 1445
+    }
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS (1955) entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What decade does Stormy Blue peak in, in our painting archive?",
+      "choices": [
+        "The 1920s",
+        "The 1700s",
+        "The 1500s",
+        "The 2010s"
+      ],
+      "answer": "The 1920s",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: when Stormy Blue appears in a painting, it is usually the brightest area.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Stormy Blue peaks in 1920s paintings, at more than three times the archive's baseline rate."
+  ],
+  "words": 214,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What decade does Stormy Blue peak in, in our painting archive?",
-   "choices": [
-    "The 1920s",
-    "The 1700s",
-    "The 1500s",
-    "The 2010s"
-   ],
-   "answer": "The 1920s",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: when Stormy Blue appears in a painting, it is usually the brightest area.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Stormy Blue peaks in 1920s paintings, at more than three times the archive's baseline rate."
- ],
- "words": 214,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

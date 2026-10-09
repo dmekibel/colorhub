@@ -1,9 +1,13 @@
 # Color photography by color: feasibility, sources and method
 
-Built 2026-10-09 for ColorHub's photography lane. David: "Treat famous photographers and famous photos the same
-way as paintings... except black-and-white photos, since this app is about color. Build an archive of color
-photographs." Same pipeline shape as the painting corpus (`tools/corpus.py`) and the design corpus
-(`tools/design_corpus.py`): keyless, resumable, public-domain-only, and every claim carries its n.
+Built 2026-10-09 for ColorHub's photography lane (Phase 1: research + data; Phase 2: the Museum room, photographer
+pages, "In photographs", process notes). David: "Treat famous photographers and famous photos the same way as
+paintings... except black-and-white photos, since this app is about color. Build an archive of color
+photographs." Phase 2: "treat photos exactly like paintings... a Photography room/door in the Museum... each
+photo opens through the existing paintingPage()... photographer pages like painter pages... a short honest note
+on each process... add NASA/USGS iconic PD images if they fit cleanly." Same pipeline shape as the painting
+corpus (`tools/corpus.py`) and the design corpus (`tools/design_corpus.py`): keyless, resumable,
+public-domain-only, and every claim carries its n.
 
 **Short answer: yes, but almost none of it comes from loc.gov directly, and almost none of it is the famous names.**
 Eggleston, Shore, Leiter, McCurry, Meyerowitz and nearly every other name associated with "fine-art color
@@ -22,7 +26,7 @@ and link only, never by image.
 | 1 | **Library of Congress, via Wikimedia Commons** -- "Photographs by Sergey Prokudin-Gorsky" tree | MediaWiki API, recursive category walk (`tools/museums/photod.py`) | Prokudin-Gorsky's 1905-1915 Russian Empire glass-plate color photographs (RGB composites), the collection's own digitization, already assembled and uploaded by LOC/Commons volunteers | Public domain (pre-1923 Russian Empire work; LOC's own PD-marked scans) | **Built.** This IS the Library of Congress collection -- see §2 on why loc.gov itself could not be queried directly. |
 | 2 | **Wikimedia Commons, "Autochromes" tree** (including "Autochromes in the musée départemental Albert-Kahn", "Autochromes by author") | Same recursive walk | Autochrome plates 1907-1930s from many countries and photographers, including a large slice of the Albert Kahn "Archives of the Planet" collection (the Kahn museum's own PD release) | Per-file: only PD-old / PD-US / PDM / CC0 kept | **Built.** The single richest tree for photographer and country variety; many subcats are per-photographer. |
 | 3 | **Library of Congress FSA/OWI color transparencies, via Wikimedia Commons** -- "Color photographs from the Farm Security Administration" | Same recursive walk | The famous 1939-1943 US government Kodachromes (Jack Delano, Russell Lee, John Vachon et al.), 1,000+ files already on Commons with LOC's own PD-USGov metadata | Public domain (US government work) | **Built.** Second half of the collection the task named by name. |
-| 4 | **NASA / USGS** (Earthrise, Blue Marble, and similar single iconic images) | Not bulk-fetched; referenced by name/link only in this phase | A handful of globally famous PD color photographs that don't belong to any bulk category | Public domain (US government work) | **Noted, not yet ingested** -- see §4. Phase 2 candidate: a small hand-picked list, same treatment as a named Color-of-the-Year entry in `design/LEGAL-COLOR-DATA.md`. |
+| 4 | **NASA / USGS** (Earthrise, Blue Marble) | `tools/museums/photod.py` `meta_nasa()`: a short hand-picked list, read through Commons the same way as everything else | Two globally famous PD color photographs | Public domain (US government work) | **Tried, excluded by the same honest test everything else goes through** -- see §5. Both are correctly public domain and genuinely in color, but the chroma test that drops black-and-white and toned scans also drops these: Earthrise is mostly black space and grey lunar surface (mean C* 1.5, under the mono threshold of 2.0); the Blue Marble's black space plus white cloud cover pulls its mean chroma to 12.1, under the 14.0 toned-scan threshold, with the remaining color concentrated in one blue hue band. A special crop just for these two would have let them in, but that would be bending the rule for two famous names rather than applying it evenly -- the more honest choice, and the one taken here, is to let the same test decide and say why. |
 | 5 | **loc.gov / loc.gov/photos** direct API (`?fo=json`) | Attempted first, as `research/DESIGN-HISTORY.md` §1 rank 11 already found for WPA posters | `fo=json` structured metadata, full resolution images | PD | **Blocked.** A script request gets a Cloudflare "Just a moment" interstitial (same block noted in DESIGN-HISTORY.md for the WPA poster collection). Getting past it would be bypassing bot detection, which this project does not do. |
 | 6 | **Famous color photographers in copyright** (Eggleston, Shore, Leiter, McCurry, Meyerowitz, Steele-Perkins, Franklin, Haas, etc.) | n/a | Nothing fetchable | All rights reserved | **Not ingested, by design.** See §4: name-and-link reference only, exactly the Pantone/RAL treatment in `design/LEGAL-COLOR-DATA.md` ("facts yes, libraries no" extended to "mentions yes, images no"). |
 
@@ -116,24 +120,27 @@ table in `design/LEGAL-COLOR-DATA.md` §8.7:
 
 ## 6. Findings
 
-Final build (2026-10-09): **4,469 PD/CC0 candidate files**, **3,408 kept as real color photographs** after the
-chroma test -- 178 dropped as plain black-and-white (mean C* < 2.0) and 883 dropped as a toned/near-monochrome
-scan (mean C* < 14.0 with all palette clusters within a ~20° hue spread -- sepia, faded dye, heavy color shift),
-so the drop rate (23.8% of candidates) is itself a finding: a meaningful share of "historic color photography"
-on Commons is a scan that has gone, or always was, nearly one hue.
+Final build (2026-10-09, after the thumbnail width was raised from 320px to 800px for Phase 2's painting-page
+hero images -- see §7): **4,471 PD/CC0 candidate files** (the three Commons collections plus the two hand-picked
+NASA images), **3,465 kept as real color photographs** after the chroma test -- 176 dropped as plain
+black-and-white (mean C* < 2.0, which is where both NASA candidates landed too, see §1 row 4) and 828 dropped as a
+toned/near-monochrome scan (mean C* < 14.0 with all palette clusters within a ~20° hue spread -- sepia, faded dye,
+heavy color shift), so the drop rate (22.7% of candidates) is itself a finding: a meaningful share of "historic
+color photography" on Commons is a scan that has gone, or always was, nearly one hue.
 
-By process: **Prokudin-Gorsky 1,383**, **Kodachrome (FSA/OWI) 1,015**, **Autochrome 1,010**. By decade: the
-1900s-1910s (2,074 combined, almost entirely Prokudin-Gorsky and early autochromes) and the 1940s (899, almost
+By process: **Prokudin-Gorsky 1,390**, **Kodachrome (FSA/OWI) 1,042**, **Autochrome 1,033**. By decade: the
+1900s-1910s (2,095 combined, almost entirely Prokudin-Gorsky and early autochromes) and the 1940s (927, almost
 entirely FSA/OWI) are the two real peaks; single-digit counts before 1890 and after 1950 are incidental (a handful
 of Commons files mis-dated or mis-categorized, not a real trend -- this archive has no 1950-1999 color-photography
 coverage at all, since no PD bulk source for that period was found).
 
 Top photographers by kept-photograph count (after merging "Last, First, 1903-1986, photographer"-style LOC
 catalog names and Cyrillic/Latin spelling variants to one form -- `_clean_photographer()` in
-`tools/museums/photod.py`): **Sergey Prokudin-Gorsky 1,226**, Jack Delano 397, Russell Lee 261, Auguste Léon 186,
-Marion Post Wolcott 176, Sarah Angelina Acland 85, Stéphane Passet 69, Arthur Rothstein 69, Jules
-Gervais-Courtellemont 40, Léon Busy 27, plus about 20 more autochromists and FSA photographers each with 5-30
-photographs (full list in `data/photography/index.json`, `top_photographers`).
+`tools/museums/photod.py`): **Sergey Prokudin-Gorsky 1,232**, Jack Delano 408, Russell Lee 270, Auguste Léon 189,
+Marion Post Wolcott 178, Sarah Angelina Acland 88, Stéphane Passet 69, Arthur Rothstein 69, Jules
+Gervais-Courtellemont 42, Léon Busy 28, plus about 20 more autochromists and FSA photographers each with 5-30
+photographs (full list in `data/photography/index.json`, `top_photographers`). 54 photographers reach the 3-photo
+minimum for a photographer page (`tools/photos_corpus.py` `PHOTOGRAPHER_MIN_N`); `data/photography/photographers.json`.
 
 Honest limits, same as every other corpus in this app: every color here is **as scanned** (glass-plate emulsions,
 Kodachrome dye stability, decades of archival storage, and a digitization scanner's own color response all sit
@@ -141,3 +148,47 @@ between the original scene and the hex value shown), and a palette is a 6-color 
 shares are area shares, not exact pixel statistics. The same "screens are approximate" caveat on every other color
 page in the app applies here too. The chroma thresholds (`mono_c`, `tint_c`, `tint_hue_spread`) are printed in
 every build's `data/photography/index.json` so a later tightening is auditable against this one.
+
+## 7. Phase 2: the Museum room, photographer pages, "In photographs", process notes
+
+- **Museum door** (`js/photography.js`, `worldPhotographySection`): a tile in Museum → World, the same
+  `WORLD_SECTIONS` extension point `js/pulp.js` already uses for pulp covers. Opens `#/photography`, a grid with
+  filter chips for process, decade, country and photographer (same facet-chip pattern as `js/pulp.js`'s
+  magazine/decade/artist chips); each tile opens the photo through `paintingPage()` (`js/explore.js`) unmodified
+  in its core, with one small additive change: a photo's byline is a tappable link to its photographer's page
+  when `n.photographerSlug` is set (every other node kind is unaffected, since that field is only ever present on
+  a photography node).
+- **Photographer pages** (`photographerPage()`, `#/photographer/<slug>`): built the way a simplified painter page
+  is, reusing `js/artwiki.js`'s own generic helpers (`awBar`, `awChipName`, the `.aw-hl`/`.aw-page` styling) so the
+  visual language matches the painter pages David already approved, rather than inventing a new one. Each page
+  shows the photographer's most typical photograph (closest to their own mean lightness/chroma) and its palette,
+  a "measured" section with percentile findings against the other 53+ photographers here ("darker than N%",
+  "more vivid than N%" -- `tools/photos_corpus.py` `cmd_photographers()`, only stated when the percentile is past
+  the middle third, same "not a middling percentile" judgment call `awExtreme()` makes for painters), every one
+  of their photographs as a palette grid, and their least-typical photograph. Statistics are precomputed in
+  Python at build time (never recomputed client-side), the same "measure, then tell" discipline as the painting
+  corpus.
+- **"In photographs"** (`data/photography/colorindex/`, `tools/color_index.py --items`, same mechanism
+  `CI_SOURCES.design` already uses for the main design corpus): a color page's existing "In paintings" section
+  (`js/paintingsof.js`) gains a "Photography" source automatically once `CI_SOURCES.photography` is registered
+  (`js/colorindex.js`) -- no new section was built; the existing source switch just grows a third tab. A
+  photograph's tile in that section is clickable (`js/paintingsof.js` `CI_SOURCES.photography.pin`,
+  `ptOpenPhoto()`), unlike a design piece's tile, which still has no page to open.
+- **Process notes** (`PH_PROCESS_NOTES` in `js/photography.js`): one short, original paragraph per process --
+  Prokudin-Gorsky's three-filter sequential exposures, an autochrome's dyed starch-grain filter layer, Kodachrome's
+  three stacked dye-coupled emulsion layers, and NASA's "it's just a camera" -- each ending in the same one-line
+  caveat (decades-old plates/dyes/scans, not a lab original), shown behind a tap ("How &lt;process&gt; shapes
+  color") rather than printed inline on every page, per the design doctrine's ban on repeated caveat paragraphs.
+- **NASA/USGS**: see §1 row 4 and §6 -- tried, correctly excluded by the same chroma test as everything else.
+- **A year-extraction bug found and fixed while building the grid's decade filter**: `photod.py`'s `_year_of()`
+  originally searched a file's EXIF `DateTimeOriginal` before its title, and without digit-boundary checks on the
+  year regex. That let LOC catalog numbers ("Gorskii 01700u"), Flickr source IDs ("4381579599") and even
+  Rijksmuseum accession numbers ("RP-F-2000-21-61", where 2000 is the year the OBJECT entered the collection, not
+  when the photograph was taken) masquerade as years, and let a Commons volunteer's 2010-2011 restoration-edit
+  timestamp outrank the archival caption's real date. Fixed by reading the title first (where a curated archival
+  caption states the real date), adding digit boundaries to the year regex, and stripping recognized
+  accession-number shapes before searching. The decade chip row (`js/photography.js` `phFacets`) also filters out
+  any decade under 1% of the kept archive, so a handful of remaining outliers (a document's own 1705, a church's
+  construction year quoted in a caption) can't clutter the filter -- the single worst case this surfaced, a
+  photographer's working-life span computed from raw min/max years, is trimmed to the middle 80% in
+  `js/photography.js` `phpDraw()` for the same reason.

@@ -1,136 +1,136 @@
 {
- "name": "Ash rose",
- "hex": "#AC8181",
- "names": [
-  "Ash rose",
-  "Dusty puce"
- ],
- "tier": "nature",
- "depth": "medium",
- "lede": "Ash Rose greys the pink of the rose flower toward the color of cold ash, a combination ColorHub's library traces only to a Japanese color list, not to an English dictionary.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Rose cooled toward ash",
-   "body": "Rose is the flower; \"ash\" here describes the cool grey cast, as if the pink had been dusted with cold ash from a fire [1]. ColorHub's library carries this exact name from a Japanese color list, with no separate English-language first record in the sources consulted; who coined the English name, or when, is undocumented here [1]. In printed English the phrase rose fastest in the 1980s and peaked in the 2010s, well after any pigment record [2]. Its closest named neighbors are [[antique-rose|Deep Vinaceous]] and [[antique-rose|Antique Rose]], a near-twin at ΔE 4.4, with [[old-rose|Old Rose]] a lighter relative nearby [3].\n\nColorHub's Japanese-sourced library entries sit alongside many English rose variants without always lining up on a coining date; the lack of an English record here does not mean the color is only Japanese, only that no earlier English source turned up in the sources consulted [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds Ash Rose in 87 of 23,781 paintings (0.37 percent, as photographed), rarer than 53 percent of named colors here [4]. It most often sits as a hidden color, found that way in 51 percent of the paintings where it dominates, and is over-represented in Indian paintings (2.5 times expected) [4]. The earliest matching canvas dates to the year 1000, among the oldest in the archive; the archive's early centuries are thin, so this is a floor, not a first, though no large age gap to the name's record shows up here regardless [4]. That hidden-color role, more than any other, is what separates it from brighter named pinks: it tends to sit in shaded folds of cloth rather than catching the light [4]. As with other dulled rose names in our library, that recurrence is only a hue match, not evidence that any painter thought of their mixture as Ash Rose [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "rose, greyed toward the color of ash",
-   "first_recorded": "undocumented in English sources; carried from a Japanese color list",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Dusty puce (jp)"
+  "name": "Ash rose",
+  "hex": "#AC8181",
+  "names": [
+    "Ash rose",
+    "Dusty puce"
   ],
-  "siblings": [
-   "antique-rose",
-   "deep-vinaceous",
-   "old-rose"
+  "tier": "nature",
+  "depth": "medium",
+  "lede": "Ash Rose greys the pink of the rose flower toward the color of cold ash, a combination ColorHub's library traces only to a Japanese color list, not to an English dictionary.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Rose cooled toward ash",
+      "body": "Rose is the flower; \"ash\" here describes the cool grey cast, as if the pink had been dusted with cold ash from a fire [1]. ColorHub's library carries this exact name from a Japanese color list, with no separate English-language first record in the sources consulted; who coined the English name, or when, is undocumented here [1]. In printed English the phrase rose fastest in the 1980s and peaked in the 2010s, well after any pigment record [2]. Its closest named neighbors are [[antique-rose|Deep Vinaceous]] and [[antique-rose|Antique Rose]], a near-twin at ΔE 4.4, with [[old-rose|Old Rose]] a lighter relative nearby [3].\n\nColorHub's Japanese-sourced library entries sit alongside many English rose variants without always lining up on a coining date; the lack of an English record here does not mean the color is only Japanese, only that no earlier English source turned up in the sources consulted [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds Ash Rose in 87 of 23,781 paintings (0.37 percent, as photographed), rarer than 53 percent of named colors here [4]. It most often sits as a hidden color, found that way in 51 percent of the paintings where it dominates, and is over-represented in Indian paintings (2.5 times expected) [4]. The earliest matching canvas dates to the year 1000, among the oldest in the archive; the archive's early centuries are thin, so this is a floor, not a first, though no large age gap to the name's record shows up here regardless [4]. That hidden-color role, more than any other, is what separates it from brighter named pinks: it tends to sit in shaded folds of cloth rather than catching the light [4]. As with other dulled rose names in our library, that recurrence is only a hue match, not evidence that any painter thought of their mixture as Ash Rose [4]."
+    }
   ],
-  "parent": "rose",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 87,
-  "rank_pct": 53,
-  "role": {
-   "hidden_pct": 51
-  },
-  "measured": {
-   "lch": [
-    58.1,
-    17.8,
-    21.3
-   ],
-   "nearest": [
-    [
-     "Antique rose",
-     4.4
+  "aside": {
+    "origin": {
+      "named_after": "rose, greyed toward the color of ash",
+      "first_recorded": "undocumented in English sources; carried from a Japanese color list",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Dusty puce (jp)"
     ],
-    [
-     "Deep Vinaceous",
-     4.4
+    "siblings": [
+      "antique-rose",
+      "old-rose",
+      "marie-antoinette"
+    ],
+    "parent": "rose",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 87,
+    "rank_pct": 53,
+    "role": {
+      "hidden_pct": 51
+    },
+    "measured": {
+      "lch": [
+        58.1,
+        17.8,
+        21.3
+      ],
+      "nearest": [
+        [
+          "Antique rose",
+          4.4
+        ],
+        [
+          "Deep Vinaceous",
+          4.4
+        ]
+      ]
+    },
+    "ngram": {
+      "peak": 2010,
+      "rise": 1980
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Japanese traditional color list",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Ngram cache, \"ash rose\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the \"ash\" in Ash Rose describe?",
+      "choices": [
+        "A cool grey cast over the pink",
+        "A specific wood species",
+        "A dye mordant",
+        "A Ridgway plate number"
+      ],
+      "answer": "A cool grey cast over the pink",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Ash Rose and Antique Rose are near-twins in color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Ash Rose most often hides in the darker corners of a painting, not its focal points."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "English-language coining undocumented; origin attributed only to the Japanese list source we hold."
     ]
-   ]
   },
-  "ngram": {
-   "peak": 2010,
-   "rise": 1980
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Japanese traditional color list",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub Ngram cache, \"ash rose\"",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the \"ash\" in Ash Rose describe?",
-   "choices": [
-    "A cool grey cast over the pink",
-    "A specific wood species",
-    "A dye mordant",
-    "A Ridgway plate number"
-   ],
-   "answer": "A cool grey cast over the pink",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Ash Rose and Antique Rose are near-twins in color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Ash Rose most often hides in the darker corners of a painting, not its focal points."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "English-language coining undocumented; origin attributed only to the Japanese list source we hold."
-  ]
- },
- "slug": "ash-rose",
- "words": 327
+  "slug": "ash-rose",
+  "words": 327
 }

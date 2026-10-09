@@ -491,18 +491,8 @@ function arHexHTML(c, o = {}) {
   const know = o.self ? "self" : arKnow(c);
   return `<button type="button" class="ar-hex${o.self ? " self" : ""}" style="--c:${c.h}" data-ink="${ink(c.h)}" data-know="${know}"${o.self ? ` aria-current="true"` : ` data-ar-open="${esc(c.slug)}"`} aria-label="${esc(c.n)}${o.self ? ", this color" : ", " + AR_KNOW_WORD[know]}"><span><b>${esc(c.n)}</b></span></button>`;
 }
-function arTreeHTML(self, aside) {
-  const P = arList(aside.parent).map(arColor).filter(Boolean).slice(0, 4);
-  const Sb = arList(aside.siblings).map(arColor).filter(c => c && c.slug !== self.slug).slice(0, 5);
-  const Ch = arList(aside.children).map(arColor).filter(Boolean).slice(0, 4);
-  if (!P.length && !Sb.length && !Ch.length) return "";
-  const mid = Math.ceil(Sb.length / 2), midRow = [...Sb.slice(0, mid), "self", ...Sb.slice(mid)];
-  const shift = (n, dir) => (n % 2) === (midRow.length % 2) ? " shift-" + dir : "";   // neighbouring honeycomb rows sit half a hex apart
-  const row = (items, cls) => items.length ? `<div class="ar-trow${cls || ""}">${items.map(c => c === "self" ? arHexHTML(self, { self: true }) : arHexHTML(c)).join("")}</div>` : "";
-  const say = [P.length && "above, where it comes from", Sb.length && "beside, the same color under other names", Ch.length && "below, its variations"].filter(Boolean);
-  return `<div class="ar-tree" role="group" aria-label="Family tree">${row(P, shift(P.length, "l"))}${row(midRow)}${row(Ch, shift(Ch.length, "r"))}</div>
-    <p class="ar-tnote">${esc(say.join("; ").replace(/^./, m => m.toUpperCase()))}. Filled means yours, outlined means you have met it, dim means not yet.</p>`;
-}
+// The family tree itself is js/family.js's famHTML/famWire (David, 2026-10-09: the old single honeycomb "usually
+// one hex above a line of siblings, no visible structure" became a segmented Tree/Spectrum/Compare/Map switch).
 
 // ---------- the pieces of a page ----------
 // "Source: ColorHub color library" is this app's own internal placeholder, never a real citation (David, 2026-10-09): a
@@ -620,10 +610,50 @@ function arYouHTML(self) {
     <button type="button" class="ar-act" data-ar-act="duel3">Settle it, 3 rounds<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     <div class="ar-slotpanel" data-ar-panel="you" hidden></div></section>`;
 }
+// Test yourself (David, 2026-10-09: "takes too much space and is too cheesy") -- a single quiet disclosure row,
+// collapsed by default, same open/close mechanics as the inline Contents (arAccordion below). No celebratory
+// copy; plain feedback. Answers still log to the Learner Model exactly as before (arAnswer).
 function arQuestionsHTML(art) {
   if (!art.questions.length) return "";
-  return `<section class="ar-qs" id="ar-s-questions"><h2>Check yourself</h2>${art.questions.map((q, i) => `<div class="ar-q" data-qi="${i}"><p class="ar-qt">${arInline(q.q, null)}</p>
-    <div class="ar-qc">${q.choices.map((c, j) => `<button type="button" class="ar-choice" data-ar-ch="${j}">${esc(typeof c === "string" ? c : c.text || c.label || "")}</button>`).join("")}</div><p class="ar-qf" aria-live="polite"></p></div>`).join("")}<p class="ar-qscore" aria-live="polite"></p></section>`;
+  const n = art.questions.length, pid = "ar-qs-p-" + art.slug.replace(/[^a-z0-9]/gi, "");
+  return `<section class="ar-disc ar-qs" id="ar-s-questions" data-ar-disc>
+    <button type="button" class="ar-disc-sum" data-ar-disc-btn aria-expanded="false" aria-controls="${pid}">
+      <span class="ar-disc-l">Test yourself</span><span class="ar-disc-c">${n} question${n === 1 ? "" : "s"}</span><i class="ar-disc-i" aria-hidden="true"></i>
+    </button>
+    <div class="ar-disc-body" id="${pid}" hidden>${art.questions.map((q, i) => `<div class="ar-q" data-qi="${i}"><p class="ar-qt">${arInline(q.q, null)}</p>
+      <div class="ar-qc">${q.choices.map((c, j) => `<button type="button" class="ar-choice" data-ar-ch="${j}">${esc(typeof c === "string" ? c : c.text || c.label || "")}</button>`).join("")}</div><p class="ar-qf" aria-live="polite"></p></div>`).join("")}<p class="ar-qscore" aria-live="polite"></p></div>
+  </section>`;
+}
+// The Learner Model's one personal line under the lede (David, 2026-10-09): only when there's history to show,
+// nothing at all for a first-time visitor. "You've met this twice; you mixed it up with Bluish Grey."
+function arPersonalLineHTML(self) {
+  if (typeof knowState !== "function") return "";
+  let state = "none"; try { state = knowState(self); } catch (e) {}
+  if (state === "none") return "";
+  let times = 0; try { const sn = typeof seenIn === "function" ? seenIn(self, 99) : []; times = Array.isArray(sn) ? sn.length : 0; } catch (e) {}
+  const seenWord = state === "yours" ? "You know this one" : times >= 2 ? `You've met this ${times} times` : times === 1 ? "You've met this once" : "You've seen this before";
+  const pr = arPairFor(self);
+  const confuseLine = pr ? ` You mixed it up with ${arLinkHTML(pr.o.slug)}${pr.n > 1 ? `, ${pr.n} times` : ""}.` : "";
+  return `<p class="ar-personal">${esc(seenWord)}.${confuseLine}</p>`;
+}
+// A generic accordion: smooth height animation, instant under reduced motion. Shared by Contents and Test yourself.
+function arAccordion(btn, panel) {
+  const willOpen = panel.hidden;
+  btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+  const host = btn.closest(".ar-bar, .ar-disc"); if (host) host.classList.toggle("open", willOpen);
+  const reduce = typeof reduceMotion !== "undefined" && reduceMotion;
+  if (reduce) { panel.hidden = !willOpen; return; }
+  panel.style.overflow = "hidden";
+  if (willOpen) {
+    panel.hidden = false; panel.style.height = "0px";
+    const h = panel.scrollHeight;
+    requestAnimationFrame(() => { panel.style.transition = "height .32s var(--ease, ease)"; panel.style.height = h + "px"; });
+    panel.addEventListener("transitionend", () => { panel.style.height = ""; panel.style.overflow = ""; panel.style.transition = ""; }, { once: true });
+  } else {
+    panel.style.height = panel.scrollHeight + "px";
+    requestAnimationFrame(() => { panel.style.transition = "height .26s var(--ease, ease)"; panel.style.height = "0px"; });
+    panel.addEventListener("transitionend", () => { panel.hidden = true; panel.style.height = ""; panel.style.overflow = ""; panel.style.transition = ""; }, { once: true });
+  }
 }
 const AR_KIND = { book: "Book", paper: "Paper", article: "Article", web: "Web page", archive: "Archive", standard: "Standard", dictionary: "Dictionary", museum: "Museum", data: "Our own data", computed: "Our own data" };
 function arNotesHTML(art) {
@@ -631,23 +661,47 @@ function arNotesHTML(art) {
   return `<section class="ar-notes" id="ar-s-notes"><h2>Notes</h2><ol>${[...art.notes.values()].sort((a, b) => a.n - b.n).map(n => `<li id="ar-note-${n.n}"><span class="ar-nn">${n.n}</span><span class="ar-nc">${esc(arPrimes(n.cite || ""))}${n.kind ? ` <em>${esc(AR_KIND[String(n.kind).toLowerCase()] || n.kind)}</em>` : ""}${/^https?:\/\//.test(n.url || "") ? ` <a href="${esc(n.url)}" target="_blank" rel="noopener">Open ↗</a>` : ""}</span></li>`).join("")}</ol></section>`;
 }
 // The whole article as one string (pure: the node test builds it too).
-function arBuildHTML(art, self) {
+// Order (David, 2026-10-09 restructure): kicker, lede (+ the one personal line), draft notice, inline Contents
+// (skipped for a short read: AR_SHORT_MIN), the chapters themselves, Family (js/family.js, Tree/Spectrum/Compare/
+// Map) with "Not to be confused with" folded in, You, Test yourself (collapsed), Notes. The facts table (named
+// after / first recorded / source) no longer renders here: it moved into the color page's ID card, where every
+// source is tappable to its own page (js/sources.js) -- arFactsHTML stays for js/article.js's own unit test only.
+const AR_SHORT_MIN = 2;   // minutes: at or under this, no Contents bar and no "Chapter N of M" labels
+// The intro: kicker, lede, the one personal line, the draft notice. Split out so the color page can put its
+// Paintings section between this and arBodyHTML (David, 2026-10-09 order); the /read/ book page below still
+// concatenates both into one piece.
+function arHeadHTML(art, self) {
   const tier = AR_TIERS[String(art.tier).toLowerCase()] != null ? AR_TIERS[String(art.tier).toLowerCase()] : arPretty(art.tier);
-  const toc = art.sections.filter(s => s.title);
-  const acc = self && self.h ? arAccent(self.h) : null, accStyle = acc && acc.deco ? ` style="--ar-acc:${acc.deco}"` : "";
-  return `<article class="ar${acc && acc.deco ? " ar-has-acc" : ""}" data-ar="${esc(art.slug)}"${accStyle}>
-    <p class="ar-kind">${[tier, arMinutes(art) + " min read"].filter(Boolean).map(esc).join(" · ")}</p>
+  const mins = arMinutes(art);
+  return `<div class="ar ar-head" data-ar="${esc(art.slug)}">
+    <p class="ar-kind">${[tier, mins + " min read"].filter(Boolean).map(esc).join(" · ")}</p>
     ${art.lede ? `<p class="ar-lede">${arInline(art.lede, art, { n: 0, self: arSelfMe(art, self) })}</p>` : ""}
-    ${arFactsHTML(art)}
+    ${arPersonalLineHTML(self)}
     ${art.status === "draft" ? `<p class="ar-draft">A draft: not yet fact-checked.</p>` : ""}
-    ${toc.length > 1 ? `<button type="button" class="ar-bar" data-ar-bar aria-label="Contents"><span class="ar-bar-l">Contents</span><span class="ar-bar-c" data-ar-cur></span><span class="ar-bar-n mono" data-ar-pos></span><i class="ar-bar-p" data-ar-prog></i></button>` : ""}
-    ${art.sections.map(s => arSectionHTML(s, art, self, s.title ? { i: toc.indexOf(s) + 1, n: toc.length } : null)).join("")}
-    ${(() => { const tree = arTreeHTML(self, art.aside), dis = arDisambHTML(self, art.aside);
-      return tree || dis ? `<section class="ar-fam" id="ar-s-family"><h2>Family</h2>${tree}${dis}</section>` : ""; })()}
+  </div>`;
+}
+// The chapters onward: inline Contents (skipped under AR_SHORT_MIN), the chapters, Family, You, Test yourself
+// (collapsed), Notes. The facts table (named after / first recorded / source) moved to the color page's ID card.
+function arBodyHTML(art, self) {
+  const toc = art.sections.filter(s => s.title), mins = arMinutes(art), short = mins <= AR_SHORT_MIN;
+  const tocId = "ar-toc-" + art.slug.replace(/[^a-z0-9]/gi, "");
+  return `<div class="ar ar-body" data-ar="${esc(art.slug)}">
+    ${!short && toc.length > 1 ? `<div class="ar-bar" data-ar-bar>
+      <button type="button" class="ar-bar-sum" data-ar-disc-btn aria-expanded="false" aria-controls="${tocId}"><span class="ar-bar-l">Contents</span><span class="ar-bar-c" data-ar-cur></span><span class="ar-bar-n mono" data-ar-pos></span><i class="ar-bar-i" aria-hidden="true"></i><i class="ar-bar-p" data-ar-prog></i></button>
+      <div class="ar-bar-list" id="${tocId}" hidden>${toc.map((s, i) => `<button type="button" class="ar-bar-row" data-ar-go="ar-s-${esc(s.id)}"><span class="mono">${i + 1}</span><b>${esc(s.title)}</b></button>`).join("")}</div>
+    </div>` : ""}
+    ${art.sections.map(s => arSectionHTML(s, art, self, !short && s.title ? { i: toc.indexOf(s) + 1, n: toc.length } : null)).join("")}
+    ${famHTML(self, art.aside, null, arDisambHTML(self, art.aside))}
     ${arYouHTML(self)}
     ${arQuestionsHTML(art)}
     ${arNotesHTML(art)}
-  </article>`;
+  </div>`;
+}
+// The whole article as one string (pure: the node test builds it too) -- used only by the /read/ book page now;
+// the color page renders arHeadHTML/arBodyHTML separately (articleRenderSplit below) with Paintings between them.
+function arBuildHTML(art, self) {
+  const acc = self && self.h ? arAccent(self.h) : null, accStyle = acc && acc.deco ? ` style="--ar-acc:${acc.deco}"` : "";
+  return `<div class="ar-wrap${acc && acc.deco ? " ar-has-acc" : ""}"${accStyle}>${arHeadHTML(art, self)}${arBodyHTML(art, self)}</div>`;
 }
 
 // ---------- the inline duel (a tiny two-swatch round; real Train games take over when they exist) ----------
@@ -688,20 +742,30 @@ function arRival(sec, art, self) {
 }
 
 // ---------- wiring ----------
+// Which source system a note's citation is about, for the "Open the source page" link (js/sources.js); same
+// patterns as arSourceFromNotes above, mapped to SOURCE_SYSTEMS ids instead of display labels.
+const AR_NOTE_SYS = [[/Ridgway/i, "ridgway"], [/Maerz\s*(?:and|&)\s*Paul/i, "maerz-paul"], [/ISCC-?NBS/i, "iscc-nbs"], [/\bRAL\b/, "ral"], [/Munsell/i, "munsell"],
+  [/Pantone/i, "pantone"], [/Crayola/i, "crayola"], [/\bWerner\b/i, "werner"], [/Wikipedia/i, "wiki"], [/\bxkcd\b/i, "xkcd"], [/\bX11\b|\bCSS\b/, "css"]];
+function arNoteSource(note) {
+  const t = note && note.cite || ""; if (!t) return null;
+  const hit = AR_NOTE_SYS.find(([re]) => re.test(t));
+  return hit && typeof SOURCE_SYSTEMS !== "undefined" && SOURCE_SYSTEMS[hit[1]] ? hit[1] : null;
+}
+// Citations as tap-popovers (David, 2026-10-09): a numbered chip [1] opens its source right where you tapped,
+// never a jump down to the notes list at the bottom (that list stays, for reading start to finish). Reuses the
+// app's one sheet primitive (near the tap on a tall screen, full-width low on a short one) rather than a new
+// anchored-popover component.
 function arNoteSheet(art, n) {
   const note = art.notes.get(n); if (!note) return;
-  const { sh } = sheet(`<div class="ar-ns"><p class="ar-ns-k"><span class="mono">${n}</span>${note.kind ? ` · ${esc(AR_KIND[String(note.kind).toLowerCase()] || note.kind)}` : ""}</p>
+  const sys = arNoteSource(note);
+  const { sh, close } = sheet(`<div class="ar-ns"><p class="ar-ns-k"><span class="mono">${n}</span>${note.kind ? ` · ${esc(AR_KIND[String(note.kind).toLowerCase()] || note.kind)}` : ""}</p>
     <p class="ar-ns-c">${note.cite ? esc(arPrimes(note.cite)) : "No citation recorded."}</p>
-    ${/^https?:\/\//.test(note.url || "") ? `<a class="ar-ns-a" href="${esc(note.url)}" target="_blank" rel="noopener">Open the source ↗</a>` : ""}</div>`);
+    ${/^https?:\/\//.test(note.url || "") ? `<a class="ar-ns-a" href="${esc(note.url)}" target="_blank" rel="noopener">Open the source ↗</a>` : ""}
+    ${sys ? `<button type="button" class="ar-ns-a ar-ns-sys" data-ns-src="${esc(sys)}">About ${esc(SOURCE_SYSTEMS[sys].short)} ↗</button>` : ""}</div>`);
   sh.classList.add("ar-nsheet");
+  const sb = sh.querySelector("[data-ns-src]"); if (sb) sb.onclick = () => { try { close(); } catch (e) {} if (typeof sourcePage === "function") sourcePage(sb.dataset.nsSrc); };
 }
-const arHeaded = root => [...root.querySelectorAll(".ar-sec[data-ar-sec], .ar-fam, .ar-qs, .ar-notes")].filter(s => s.querySelector("h2"));
-function arTocSheet(root, art) {
-  const rows = arHeaded(root).map((s, i) => [s.id, s.querySelector("h2").textContent, i + 1]);
-  const { sh, close } = sheet(`<div class="ar-toc"><p class="ar-toc-h">${esc(art.name)}</p>${rows.map(([id, t, n]) => `<button type="button" class="ar-toc-row" data-ar-go="${esc(id)}"><span class="mono">${n}</span><b>${esc(t)}</b></button>`).join("")}</div>`);
-  sh.classList.add("ar-tocsheet");
-  sh.querySelectorAll("[data-ar-go]").forEach(b => b.onclick = () => { close(); const el = document.getElementById(b.dataset.arGo); if (el) arScrollTo(el); });
-}
+const arHeaded = root => [...root.querySelectorAll(".ar-sec[data-ar-sec], .ar-fam, .ar-notes")].filter(s => s.querySelector("h2"));
 // The page scrolls on <body> (html and body are both height:100% with overflow-x:hidden), not on the window.
 function arScroller() {
   const b = document.body;
@@ -735,8 +799,29 @@ function arWire(root, art, self) {
     document.addEventListener("scroll", onScroll, { passive: true, capture: true }); addEventListener("resize", onScroll);   // capture: scroll does not bubble, and the scroller is <body>
     if (typeof cleanup !== "undefined") cleanup.push(() => { document.removeEventListener("scroll", onScroll, true); removeEventListener("resize", onScroll); });
     tick();
-    bar.onclick = () => arTocSheet(root, art);
   }
+  // Contents, inline (David, 2026-10-09: "feels separate from the article"): tapping the summary row expands the
+  // chapter list in place, pushing everything below down; tapping a row scrolls to that chapter and collapses it
+  // again. Test yourself (arQuestionsHTML) uses the exact same arAccordion mechanics on its own disclosure.
+  root.querySelectorAll("[data-ar-disc-btn]").forEach(btn => {
+    const panel = document.getElementById(btn.getAttribute("aria-controls")); if (!panel) return;
+    btn.onclick = () => arAccordion(btn, panel);
+  });
+  root.querySelectorAll("[data-ar-go]").forEach(b => b.onclick = () => {
+    const list = b.closest(".ar-bar-list"), sumBtn = list && list.previousElementSibling;
+    if (list && sumBtn && !list.hidden) arAccordion(sumBtn, list);
+    const el = document.getElementById(b.dataset.arGo); if (el) arScrollTo(el);
+  });
+  if (typeof famWire === "function") famWire(root, self, art.aside);
+  arWireClicks(root, art, self);
+}
+// The click delegation shared by every article root: citation popovers (never a jump to the notes list), a
+// reference card's door, opening a linked color, a swatch, "all the meanings", a section's duel/painting/map
+// action, a quiz choice, a source-system link. Safe to attach to more than one root for the same article (the
+// color page's split head/body, js/richpage.js articleRenderSplit): each only matches what's actually inside it.
+function arWireClicks(root, art, self) {
+  if (root.__arClicksWired) return;
+  root.__arClicksWired = true;
   root.addEventListener("click", e => {
     const t = e.target;
     const fn = t.closest("[data-fn]"); if (fn) return arNoteSheet(art, +fn.dataset.fn);
@@ -746,6 +831,7 @@ function arWire(root, art, self) {
     const wh = t.closest("[data-ar-which]"); if (wh) { e.preventDefault(); return arWhichPage(wh.dataset.arWhich); }
     const act = t.closest("[data-ar-act]"); if (act) return arAct(root, art, self, act);
     const ch = t.closest("[data-ar-ch]"); if (ch) return arAnswer(root, art, self, ch);
+    const src = t.closest("[data-src-open]"); if (src) { e.preventDefault(); e.stopPropagation(); return typeof sourcePage === "function" ? sourcePage(src.dataset.srcOpen) : undefined; }
   });
 }
 function arAct(root, art, self, btn) {
@@ -886,7 +972,7 @@ function arReadDraw(slug, chap, push) {
   // opened from its color's page: back to it; opened from a shared link: its color's page is the way on
   el.querySelector("[data-ar-home]").onclick = () => XSTACK.length > 1 ? xBack() : (XSTACK = [], openCoreName(self.h, self.n));
   onKey = e => { if (e.key === "Escape") xBack(); };
-  const root = el.querySelector(".ar");
+  const root = el.querySelector(".ar-wrap");
   arWire(root, art, self);
   if (typeof wireLinks === "function") wireLinks(el);
   if (typeof arfLead === "function") { try { root.__lead = arfLead(f => root.isConnected ? root.before(f) : false, art, self); } catch (e) {} }   // the lead picture, under the band (js/article-refs.js)
@@ -933,11 +1019,43 @@ function articleRender(slug, host, ctx) {
       return true;
     }
     host.innerHTML = (ctx && ctx.fig || "") + arBuildHTML(art, self);
-    const inl = host.querySelector(".ar");
+    const inl = host.querySelector(".ar-wrap");
     if (!(ctx && ctx.fig) && inl && typeof arfLead === "function") { try { inl.__lead = arfLead(f => inl.isConnected ? inl.before(f) : false, art, self); } catch (e) {} }   // every story opens with a picture
-    arWire(host.querySelector(".ar"), art, self);
-    if (typeof arfEnhance === "function") { try { arfEnhance(host.querySelector(".ar"), art, self); } catch (e) { try { console.warn("article figures failed:", e); } catch (_) {} } }   // js/article-refs.js: the figure cards
+    arWire(host.querySelector(".ar-wrap"), art, self);
+    if (typeof arfEnhance === "function") { try { arfEnhance(host.querySelector(".ar-wrap"), art, self); } catch (e) { try { console.warn("article figures failed:", e); } catch (_) {} } }   // js/article-refs.js: the figure cards
     return true;
+  }).catch(e => { try { console.warn("article render failed:", slug, e); } catch (_) {} return none(); });
+}
+// ---------- the color page's own entry point (David, 2026-10-09 restructure) ----------
+// Draws the intro into headHost and the chapters onward into bodyHost, so js/richpage.js can put its Paintings
+// section between them (order #3, before the chapters at #4) without duplicating the lead picture -- the color
+// page's Paintings section owns that now; articleRenderSplit never calls arfLead. For a long article it still
+// draws the teaser door into headHost (bodyHost stays hidden: the full chapters live on the separate /read/ page).
+// Resolves { has, door } so richpage.js knows whether bodyHost actually holds anything to wire/measure.
+function articleRenderSplit(slug, headHost, bodyHost, ctx) {
+  const none = () => { if (headHost) { headHost.innerHTML = ""; headHost.hidden = true; } if (bodyHost) { bodyHost.innerHTML = ""; bodyHost.hidden = true; } return { has: false, door: false }; };
+  if (!headHost || !bodyHost || !slug) return Promise.resolve(none());
+  const names = Promise.all([typeof loadCoreNames === "function" ? loadCoreNames() : null, arLoadNames(), arLoadSysRefs()]);
+  return Promise.all([arLoad(slug), names]).then(([found]) => {
+    const art = found || (ctx && ctx.facet) || null;
+    if (!art || headHost.isConnected === false) return none();
+    const self = arColor(slug) || (ctx && ctx.h ? { slug, n: ctx.n || art.name, h: ctx.h } : art.hex ? { slug, n: art.name, h: art.hex } : null);
+    if (!self) return none();
+    headHost.hidden = false;
+    if (!(ctx && ctx.door === false) && (art.facet ? art.sections.length >= 3 : (art.words || arWords(art)) >= AR_DOOR_MIN)) {
+      AR_READING.set(art.slug, { art, self });
+      headHost.innerHTML = arDoorHTML(art, self, null);
+      arDoorWire(headHost, art, self);
+      arWireClicks(headHost, art, self);
+      bodyHost.innerHTML = ""; bodyHost.hidden = true;
+      return { has: true, door: true, art, self };
+    }
+    headHost.innerHTML = arHeadHTML(art, self);
+    bodyHost.innerHTML = arBodyHTML(art, self); bodyHost.hidden = false;
+    arWireClicks(headHost, art, self);
+    arWire(bodyHost.querySelector(".ar-body") || bodyHost, art, self);
+    if (typeof arfEnhance === "function") { try { arfEnhance(bodyHost, art, self); } catch (e) { try { console.warn("article figures failed:", e); } catch (_) {} } }
+    return { has: true, door: false, art, self };
   }).catch(e => { try { console.warn("article render failed:", slug, e); } catch (_) {} return none(); });
 }
 

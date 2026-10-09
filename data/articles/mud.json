@@ -1,270 +1,270 @@
 {
- "slug": "mud",
- "name": "Mud",
- "hex": "#735C12",
- "names": [
-  "Mud"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Mud is the color of wet soil, a name that has carried a faint insult for painters and a good deal of practical use for dyers and soldiers.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Wet soil",
-   "body": "Paterson's dictionary defines mud as the color of wet soil and notes that it appears among the colors of Winifred Nicholson's 1944 chart; mud brown is simply a dark brown [1]. The adjective is harsher. *Muddy* describes colors that look murky or cloudy, literally and figuratively, and \"clear as mud\" is an idiom for something obscure [1].\n\nThe swatch here, #735C12, is an olive brown from the 2010 xkcd color survey, and its nearest ISCC-NBS name is moderate olive brown, within a color distance (ΔE) of 5.0 [14]. Maerz and Paul's 1930 dictionary records a color called mud from 1839 [14]. Real mud ranges from grey to red to ochre, so this swatch is one common reading and not a definition [1][14]."
-  },
-  {
-   "id": "paris",
-   "title": "Paris mud",
-   "body": "In the middle of the eighteenth century the French began to name new shades with vivid phrases, among them *boue de Paris*, Paris mud, alongside names that invoked a pigeon's throat or a nymph's thigh [2]. Pastoureau ties the fashion to better dyeing chemistry and a wider taste for half-tones such as beiges, browns, pinks and greys [2]. In 1792 the wardrobe Marie Antoinette was allowed in the Temple prison included a chemise with a riding collar in a color known as Paris mud [3]."
-  },
-  {
-   "id": "material",
-   "title": "Mud as a material",
-   "body": "Mud has been a working ingredient for dyers for a long time. Early European black dyes from tannin-rich bark and roots held poorly, and in some regions dyers paired them with iron-bearing mud or silt, whose salts acted as a mordant [4]. Village indigo paste in India could contain so much mud, lime and plant material that its true dye content fell as low as 2 per cent, against more than 70 per cent in the best Bengal product [7]. Alkaline river mud was also one of the sources of alkali for indigo vats [7].\n\nPliny described indigo as a mud that clings to the foam of reeds in India, black as it separates and giving a fine blue-purple when diluted [9]. Mud also works as a resist: in Mali, mud is applied around patterns on pre-mordanted cloth to leave pale designs on a dark ground, and Balfour-Paul thinks the result may owe a debt to indigo's negative-on-positive patterns [5]. In Sindh and eastern Rajasthan, the resist paste for ajrakh and printed cloths is a clay-rich mud, made sticky with gum arabic, castor oil, lime and wheat flour and kneaded by foot, and the recipes are closely kept [6].\n\nThe best-known mud uniform is [[khaki]]. The word is Urdu for dusty, and the color is usually credited to Sir Harry Lumsden, who in 1846 had white cotton from a Lahore bazaar soaked and rubbed with river mud for his Corps of Guides at Peshawar [8]. Dusty brown uniforms dyed with coffee, tea, soil and curry powder, when no muddy riverbed was handy, spread through the Indian army between 1860 and 1870 [8]. Not all mud is brown: in 1845 a French mission brought home pots of Chinese green mud, Lo Kao, the first one-pot natural green dye, which was a paste made from two species of buckthorn [10]."
-  },
-  {
-   "id": "painting",
-   "title": "Mud in painting",
-   "body": "Painters use the word for the gray-brown a palette turns into when colors are stirred together. Gurney describes two camps [11]. One says muddy mixtures are real, while the other says that only muddy relationships exist, and that drabness comes from poor value organization, not from bad mixing [11]. Delacroix is reported to have said that, given mud and the choice of its surroundings, he could make the skin of Venus [11]. Some painters scrape leftover paint into a gray paste and keep it in a tube, called mud or sauce, to lower the chroma of other mixtures [11].\n\nThe joke is old. Gage reports that Annibale Carracci laughed at an approach to color that amounted to good drawing and coloring with mud [12]. John Ruskin said he could paint a luminous picture from street mud, gravel-pit ochre, whiting and coal dust if given time to grade them [13]. The practical lesson is the painters' own: judge a mud-colored patch by what sits beside it."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, a color within ΔE 6 of this swatch covers at least 5% of the canvas in 604 paintings, 2.5% of the archive [15]. None of the 140 Impressionist paintings and none of the 38 Realist ones qualify [15]. The 1830s stand out, with 42 of 663 paintings (6.3%, 2.5 times the baseline) [15].\n\nPaulus Potter has it in 9 of 28 works, a rate 12.7 times the baseline of the museums his works come from [15]. By country, the United Kingdom has it in 35 of 593 paintings and the United States in 83 of 1,729 [15]. Inside a painting it is a mid-tone in 59% of cases and a highlight in 29% [15]. The strongest match is a long Ming scroll, [[painting:aic-71509|Going up the River at the Qingming Festival]], where it fills 76% of the image; Winslow Homer's [[painting:met-11123|Harvest Scene]] covers 44% [15]. The scroll's high figure is probably the aged ground, not painted earth, but a color match cannot tell [15].\n\nIt keeps company with [[olive]], [[mustard]], [[khaki]] and [[chocolate]] [15]. In printed English the adjective use of the word peaks in the 1910s [16]. These are photographs of aged, varnished paintings, so a match is a look-alike color and not a pigment test [15]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "wet soil",
-   "first_recorded": "Maerz & Paul list a color named mud from 1839; the French fashion shade boue de Paris dates from the mid-1700s",
-   "source": "Paterson; Pastoureau; ColorHub library"
-  },
-  "aka": [
-   "Paris mud (boue de Paris)",
-   "mud brown (a darker neighbor)"
+  "slug": "mud",
+  "name": "Mud",
+  "hex": "#735C12",
+  "names": [
+    "Mud"
   ],
-  "siblings": [
-   "olive-brown",
-   "khaki"
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Mud is the color of wet soil, a name that has carried a faint insult for painters and a good deal of practical use for dyers and soldiers.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Wet soil",
+      "body": "Paterson's dictionary defines mud as the color of wet soil and notes that it appears among the colors of Winifred Nicholson's 1944 chart; mud brown is simply a dark brown [1]. The adjective is harsher. *Muddy* describes colors that look murky or cloudy, literally and figuratively, and \"clear as mud\" is an idiom for something obscure [1].\n\nThe swatch here, #735C12, is an olive brown from the 2010 xkcd color survey, and its nearest ISCC-NBS name is moderate olive brown, within a color distance (ΔE) of 5.0 [14]. Maerz and Paul's 1930 dictionary records a color called mud from 1839 [14]. Real mud ranges from grey to red to ochre, so this swatch is one common reading and not a definition [1][14]."
+    },
+    {
+      "id": "paris",
+      "title": "Paris mud",
+      "body": "In the middle of the eighteenth century the French began to name new shades with vivid phrases, among them *boue de Paris*, Paris mud, alongside names that invoked a pigeon's throat or a nymph's thigh [2]. Pastoureau ties the fashion to better dyeing chemistry and a wider taste for half-tones such as beiges, browns, pinks and greys [2]. In 1792 the wardrobe Marie Antoinette was allowed in the Temple prison included a chemise with a riding collar in a color known as Paris mud [3]."
+    },
+    {
+      "id": "material",
+      "title": "Mud as a material",
+      "body": "Mud has been a working ingredient for dyers for a long time. Early European black dyes from tannin-rich bark and roots held poorly, and in some regions dyers paired them with iron-bearing mud or silt, whose salts acted as a mordant [4]. Village indigo paste in India could contain so much mud, lime and plant material that its true dye content fell as low as 2 per cent, against more than 70 per cent in the best Bengal product [7]. Alkaline river mud was also one of the sources of alkali for indigo vats [7].\n\nPliny described indigo as a mud that clings to the foam of reeds in India, black as it separates and giving a fine blue-purple when diluted [9]. Mud also works as a resist: in Mali, mud is applied around patterns on pre-mordanted cloth to leave pale designs on a dark ground, and Balfour-Paul thinks the result may owe a debt to indigo's negative-on-positive patterns [5]. In Sindh and eastern Rajasthan, the resist paste for ajrakh and printed cloths is a clay-rich mud, made sticky with gum arabic, castor oil, lime and wheat flour and kneaded by foot, and the recipes are closely kept [6].\n\nThe best-known mud uniform is [[khaki]]. The word is Urdu for dusty, and the color is usually credited to Sir Harry Lumsden, who in 1846 had white cotton from a Lahore bazaar soaked and rubbed with river mud for his Corps of Guides at Peshawar [8]. Dusty brown uniforms dyed with coffee, tea, soil and curry powder, when no muddy riverbed was handy, spread through the Indian army between 1860 and 1870 [8]. Not all mud is brown: in 1845 a French mission brought home pots of Chinese green mud, Lo Kao, the first one-pot natural green dye, which was a paste made from two species of buckthorn [10]."
+    },
+    {
+      "id": "painting",
+      "title": "Mud in painting",
+      "body": "Painters use the word for the gray-brown a palette turns into when colors are stirred together. Gurney describes two camps [11]. One says muddy mixtures are real, while the other says that only muddy relationships exist, and that drabness comes from poor value organization, not from bad mixing [11]. Delacroix is reported to have said that, given mud and the choice of its surroundings, he could make the skin of Venus [11]. Some painters scrape leftover paint into a gray paste and keep it in a tube, called mud or sauce, to lower the chroma of other mixtures [11].\n\nThe joke is old. Gage reports that Annibale Carracci laughed at an approach to color that amounted to good drawing and coloring with mud [12]. John Ruskin said he could paint a luminous picture from street mud, gravel-pit ochre, whiting and coal dust if given time to grade them [13]. The practical lesson is the painters' own: judge a mud-colored patch by what sits beside it."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, a color within ΔE 6 of this swatch covers at least 5% of the canvas in 604 paintings, 2.5% of the archive [15]. None of the 140 Impressionist paintings and none of the 38 Realist ones qualify [15]. The 1830s stand out, with 42 of 663 paintings (6.3%, 2.5 times the baseline) [15].\n\nPaulus Potter has it in 9 of 28 works, a rate 12.7 times the baseline of the museums his works come from [15]. By country, the United Kingdom has it in 35 of 593 paintings and the United States in 83 of 1,729 [15]. Inside a painting it is a mid-tone in 59% of cases and a highlight in 29% [15]. The strongest match is a long Ming scroll, [[painting:aic-71509|Going up the River at the Qingming Festival]], where it fills 76% of the image; Winslow Homer's [[painting:met-11123|Harvest Scene]] covers 44% [15]. The scroll's high figure is probably the aged ground, not painted earth, but a color match cannot tell [15].\n\nIt keeps company with [[olive]], [[mustard]], [[khaki]] and [[chocolate]] [15]. In printed English the adjective use of the word peaks in the 1910s [16]. These are photographs of aged, varnished paintings, so a match is a look-alike color and not a pigment test [15]."
+    }
   ],
-  "parent": "brown",
-  "children": [
-   "mud-brown"
-  ],
-  "disambiguation": [
-   {
-    "slug": "khaki",
-    "gloss": "Urdu for dusty; first dyed with river mud, but a lighter, yellower color"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "boue de Paris (a mid-1700s fashion shade)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#735C12",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 604,
-  "peak_decade": {
-   "key": 1830,
-   "hits": 42,
-   "n": 663,
-   "lift": 2.49
-  },
-  "top_painter": {
-   "name": "Paulus Potter",
-   "hits": 9,
-   "n": 28,
-   "lift": 12.66
-  },
-  "role": {
-   "mid": 0.59,
-   "shadow": 0.12,
-   "highlight": 0.29
-  },
-  "company": [
-   "Olive",
-   "Mustard",
-   "Khaki",
-   "Chocolate"
-  ],
-  "measured": {
-   "nearest": [
-    [
-     "moderate olive brown (ISCC-NBS block 95)",
-     5.0
+  "aside": {
+    "origin": {
+      "named_after": "wet soil",
+      "first_recorded": "Maerz & Paul list a color named mud from 1839; the French fashion shade boue de Paris dates from the mid-1700s",
+      "source": "Paterson; Pastoureau; ColorHub library"
+    },
+    "aka": [
+      "Paris mud (boue de Paris)",
+      "mud brown (a darker neighbor)"
+    ],
+    "siblings": [
+      "olive-brown",
+      "khaki"
+    ],
+    "parent": "brown",
+    "children": [
+      "mud"
+    ],
+    "disambiguation": [
+      {
+        "slug": "khaki",
+        "gloss": "Urdu for dusty; first dyed with river mud, but a lighter, yellower color"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "boue de Paris (a mid-1700s fashion shade)"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#735C12",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 604,
+    "peak_decade": {
+      "key": 1830,
+      "hits": 42,
+      "n": 663,
+      "lift": 2.49
+    },
+    "top_painter": {
+      "name": "Paulus Potter",
+      "hits": 9,
+      "n": 28,
+      "lift": 12.66
+    },
+    "role": {
+      "mid": 0.59,
+      "shadow": 0.12,
+      "highlight": 0.29
+    },
+    "company": [
+      "Olive",
+      "Mustard",
+      "Khaki",
+      "Chocolate"
+    ],
+    "measured": {
+      "nearest": [
+        [
+          "moderate olive brown (ISCC-NBS block 95)",
+          5.0
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"mud\", \"mud brown\", \"muddy\" and \"clear as mud\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Green: The History of a Color, ch. 37",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, ch. 57",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pastoureau, Black: The History of a Color, p. 15",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, p. 166",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, pp. 160, 167",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, pp. 118, 132",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, ch. 106",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 17",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 16",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, pp. 108-109",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 160",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Finlay, Color, ch. 11",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "data",
+      "cite": "ColorHub library: xkcd 2010 swatch; ISCC-NBS 1955 nearest name, ΔE 5.0; Maerz & Paul 1930 first record 1839",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed: match within ΔE 6, at least 5% of the canvas",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "data",
+      "cite": "Google Books Ngram, adjective use, via ColorHub graph fieldnotes",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What was the mud used for in the first khaki uniforms?",
+      "choices": [
+        "White cotton was soaked and rubbed with river mud to dye it dusty",
+        "It was mixed into the buttons",
+        "It waterproofed the cloth",
+        "It was only used for boots"
+      ],
+      "answer": "White cotton was soaked and rubbed with river mud to dye it dusty",
+      "kind": "pick"
+    },
+    {
+      "q": "Some painters argue that there is no such thing as a muddy color mixture, only muddy relationships between colors.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    },
+    {
+      "q": "Why did early dyers add iron-rich mud to tannin black dyes?",
+      "choices": [
+        "The iron salts worked as a mordant to fix the dye",
+        "To make the dye smell better",
+        "To thin the dye",
+        "To make it red"
+      ],
+      "answer": "The iron salts worked as a mordant to fix the dye",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Mud cloth from Mali is made by painting mud onto the cloth so that it leaves pale patterns on a dark ground.",
+    "Khaki is Urdu for dusty, and the first khaki cloth was soaked in river mud in 1846."
+  ],
+  "words": 896,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Changed 'city-crossing mud' to 'street mud' to match source",
+      "Reworded khaki sentence to avoid shared phrasing"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"mud\", \"mud brown\", \"muddy\" and \"clear as mud\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Green: The History of a Color, ch. 37",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, ch. 57",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pastoureau, Black: The History of a Color, p. 15",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, p. 166",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, pp. 160, 167",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, pp. 118, 132",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, ch. 106",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 17",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 16",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, pp. 108-109",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 160",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Finlay, Color, ch. 11",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "data",
-   "cite": "ColorHub library: xkcd 2010 swatch; ISCC-NBS 1955 nearest name, ΔE 5.0; Maerz & Paul 1930 first record 1839",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed: match within ΔE 6, at least 5% of the canvas",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "data",
-   "cite": "Google Books Ngram, adjective use, via ColorHub graph fieldnotes",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What was the mud used for in the first khaki uniforms?",
-   "choices": [
-    "White cotton was soaked and rubbed with river mud to dye it dusty",
-    "It was mixed into the buttons",
-    "It waterproofed the cloth",
-    "It was only used for boots"
-   ],
-   "answer": "White cotton was soaked and rubbed with river mud to dye it dusty",
-   "kind": "pick"
-  },
-  {
-   "q": "Some painters argue that there is no such thing as a muddy color mixture, only muddy relationships between colors.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  },
-  {
-   "q": "Why did early dyers add iron-rich mud to tannin black dyes?",
-   "choices": [
-    "The iron salts worked as a mordant to fix the dye",
-    "To make the dye smell better",
-    "To thin the dye",
-    "To make it red"
-   ],
-   "answer": "The iron salts worked as a mordant to fix the dye",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Mud cloth from Mali is made by painting mud onto the cloth so that it leaves pale patterns on a dark ground.",
-  "Khaki is Urdu for dusty, and the first khaki cloth was soaked in river mud in 1846."
- ],
- "words": 896,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Changed 'city-crossing mud' to 'street mud' to match source",
-   "Reworded khaki sentence to avoid shared phrasing"
-  ]
- }
 }

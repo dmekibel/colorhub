@@ -1,0 +1,54 @@
+{
+ "id": "nautical",
+ "name": "Nautical",
+ "lineage": {
+  "influenced_by": [
+   "real 19th-century French naval uniform regulation",
+   "Coco Chanel's 1917 adoption of the striped sailor shirt into womenswear"
+  ],
+  "influences": [
+   "sailorcore"
+  ]
+ },
+ "eras": [
+  "roots 19th c. naval uniform; recurring fashion revival"
+ ],
+ "places": [],
+ "garments": [
+  "Breton stripes",
+  "brass buttons",
+  "canvas"
+ ],
+ "media": [
+  {
+   "title": "Coco Chanel's 1917 Breton-stripe designs",
+   "note": "the fashion-history moment most credited with bringing naval stripes into mainstream civilian fashion"
+  }
+ ],
+ "figures": [
+  "Coco Chanel"
+ ],
+ "reacts_against": "nothing specific; nautical style has recurred so many times across a century-plus of fashion that each revival responds more to its own moment's broader trends than to any single prior style.",
+ "revivals": [
+  "Jean Paul Gaultier's recurring use of the Breton stripe as a personal signature (1980s–2010s)",
+  "this decade's sailorcore and coastal-themed internet aesthetics"
+ ],
+ "article": "Nautical style's most recognizable element, the Breton-striped shirt, has a precise origin: French naval regulations standardized it for sailors in 1858, specifying the exact number of stripes (21, reportedly for Napoleon's naval victories) to make a man overboard easier to spot against the sea. Coco Chanel adopted the stripe into womenswear in 1917, having encountered it on the Normandy coast, and that single design decision is what fashion historians most consistently credit with launching nautical style's century-long run as a recurring civilian fashion reference, entirely separate from any actual maritime use. Designer Jean Paul Gaultier later made the Breton stripe into something close to a personal signature across decades of his own collections, keeping the look in steady circulation through the late 20th century. The look's most recent revival arrives through 2020s internet-aesthetic tags like sailorcore, which narrow nautical's broad century-spanning reference pool down to a more specific, moodboard-ready coastal mood.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Nautical"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "light — about 42% of the measured color is pale or near-white",
+   "mostly muted — about 59% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

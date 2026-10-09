@@ -1,143 +1,143 @@
 {
- "slug": "manatee",
- "name": "Manatee",
- "hex": "#979AAA",
- "names": [
-  "Manatee"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Manatee is a cool, purplish grey named for the skin of the aquatic mammal, a muted color meant to evoke a creature often called a sea cow.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A sea mammal's grey",
-   "body": "Our library traces the name only to a Wikipedia color list, with no date for its coining [1]. In printed English the word \"manatee\" (as an adjective, the color sense) peaked in the 1980s and rose fastest from the 1950s, well after the animal's own long-known name [1].\n\nIts nearest named neighbor is [[dutch-blue]], 4.1 units of CIEDE2000 away and bluer [1]. [[plumbago-grey]] sits almost as close, at 4.4, described as almost the same, and [[deep-plumbago-blue]] at 4.8, lighter [1]. Measured in LCH, Manatee sits at lightness 64 with very low chroma, a true neutral with only a faint purple cast [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 283 of 23,781 paintings (1.2 percent), more common than 65 percent of the named colors, as photographed [2]. Claude Monet is its most devoted painter, using it in 7 of the 50 Monet works here, 9.7 times the baseline of the museums those works come from [2]. It peaks in the 1930s, in 5 of 69 paintings, at 4.5 times the expected rate, and most often plays a light inside a painting, 49 percent of the time [2]. Werner's 1821 nomenclature lists a related entry, Bluish Purple, exemplified by parts of the white and purple crocus, within 6.4 units of this swatch [3]. These are photographs of varnished paintings, so a color match is not a pigment test [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the manatee, an aquatic mammal",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub library (a Wikipedia list)"
-  },
-  "aka": [],
-  "siblings": [
-   "dutch-blue",
-   "plumbago-grey",
-   "deep-plumbago-blue",
-   "endive-blue"
+  "slug": "manatee",
+  "name": "Manatee",
+  "hex": "#979AAA",
+  "names": [
+    "Manatee"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
-  "n_present": 283,
-  "rank_pct": 65,
-  "peak_decade": [
-   1930,
-   4.5
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Manatee is a cool, purplish grey named for the skin of the aquatic mammal, a muted color meant to evoke a creature often called a sea cow.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A sea mammal's grey",
+      "body": "Our library traces the name only to a Wikipedia color list, with no date for its coining [1]. In printed English the word \"manatee\" (as an adjective, the color sense) peaked in the 1980s and rose fastest from the 1950s, well after the animal's own long-known name [1].\n\nIts nearest named neighbor is [[dutch-blue]], 4.1 units of CIEDE2000 away and bluer [1]. [[plumbago-grey]] sits almost as close, at 4.4, described as almost the same, and [[deep-plumbago-blue]] at 4.8, lighter [1]. Measured in LCH, Manatee sits at lightness 64 with very low chroma, a true neutral with only a faint purple cast [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 283 of 23,781 paintings (1.2 percent), more common than 65 percent of the named colors, as photographed [2]. Claude Monet is its most devoted painter, using it in 7 of the 50 Monet works here, 9.7 times the baseline of the museums those works come from [2]. It peaks in the 1930s, in 5 of 69 paintings, at 4.5 times the expected rate, and most often plays a light inside a painting, 49 percent of the time [2]. Werner's 1821 nomenclature lists a related entry, Bluish Purple, exemplified by parts of the white and purple crocus, within 6.4 units of this swatch [3]. These are photographs of varnished paintings, so a color match is not a pigment test [2]."
+    }
   ],
-  "role_top": [
-   "light",
-   49
-  ],
-  "top_painter": [
-   "Claude Monet",
-   9.7
-  ],
-  "measured": {
-   "lch": [
-    64,
-    9,
-    284
-   ],
-   "nearest": [
-    [
-     "Dutch Blue",
-     4.1
+  "aside": {
+    "origin": {
+      "named_after": "the manatee, an aquatic mammal",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub library (a Wikipedia list)"
+    },
+    "aka": [],
+    "siblings": [
+      "dutch-blue",
+      "plumbago-grey",
+      "deep-plumbago-blue",
+      "light-blue-grey"
     ],
-    [
-     "Plumbago Grey",
-     4.4
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+    "n_present": 283,
+    "rank_pct": 65,
+    "peak_decade": [
+      1930,
+      4.5
     ],
-    [
-     "Deep Plumbago Blue",
-     4.8
+    "role_top": [
+      "light",
+      49
+    ],
+    "top_painter": [
+      "Claude Monet",
+      9.7
+    ],
+    "measured": {
+      "lch": [
+        64,
+        9,
+        284
+      ],
+      "nearest": [
+        [
+          "Dutch Blue",
+          4.1
+        ],
+        [
+          "Plumbago Grey",
+          4.4
+        ],
+        [
+          "Deep Plumbago Blue",
+          4.8
+        ]
+      ]
+    },
+    "werner_1821": {
+      "entry": "Bluish Purple",
+      "de": 6.4,
+      "examples": "parts of white and purple crocus"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes and edges): name source, Ngram rise, CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub graph twin match to Werner, Nomenclature of Colours (1821), Bluish Purple entry (data/graph edges)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What animal is Manatee named after?",
+      "choices": [
+        "The manatee, an aquatic mammal",
+        "A songbird",
+        "A breed of cat",
+        "A type of fish"
+      ],
+      "answer": "The manatee, an aquatic mammal",
+      "kind": "pick"
+    },
+    {
+      "q": "Which painter uses this color far above the rate of his peers in our archive?",
+      "choices": [
+        "Claude Monet",
+        "Paul Gauguin",
+        "Rembrandt",
+        "Titian"
+      ],
+      "answer": "Claude Monet",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Manatee is a near-neutral grey with only a faint purple cast, a favorite of Claude Monet well above his peers' use of it."
+  ],
+  "words": 256,
+  "status": "checked",
+  "checked": {
+    "by": "batch-10",
+    "date": "2026-10-09",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "werner_1821": {
-   "entry": "Bluish Purple",
-   "de": 6.4,
-   "examples": "parts of white and purple crocus"
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes and edges): name source, Ngram rise, CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub graph twin match to Werner, Nomenclature of Colours (1821), Bluish Purple entry (data/graph edges)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What animal is Manatee named after?",
-   "choices": [
-    "The manatee, an aquatic mammal",
-    "A songbird",
-    "A breed of cat",
-    "A type of fish"
-   ],
-   "answer": "The manatee, an aquatic mammal",
-   "kind": "pick"
-  },
-  {
-   "q": "Which painter uses this color far above the rate of his peers in our archive?",
-   "choices": [
-    "Claude Monet",
-    "Paul Gauguin",
-    "Rembrandt",
-    "Titian"
-   ],
-   "answer": "Claude Monet",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Manatee is a near-neutral grey with only a faint purple cast, a favorite of Claude Monet well above his peers' use of it."
- ],
- "words": 256,
- "status": "checked",
- "checked": {
-  "by": "batch-10",
-  "date": "2026-10-09",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

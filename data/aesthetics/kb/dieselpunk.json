@@ -1,0 +1,53 @@
+{
+ "id": "dieselpunk",
+ "name": "Dieselpunk",
+ "lineage": {
+  "influenced_by": [
+   "Art Deco and Streamline Moderne",
+   "1920s-1950s industrial/wartime design",
+   "a term coined by analogy with steampunk (2001, game designer Lewis Pollak)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "aesthetic evokes 1920s-1950s; term coined 2001"
+ ],
+ "places": [
+  "retrofuturist game and film design"
+ ],
+ "garments": [
+  "military-industrial workwear",
+  "aviator gear",
+  "Art Deco jewelry"
+ ],
+ "media": [],
+ "figures": [
+  "Lewis Pollak (coined the term)"
+ ],
+ "reacts_against": "steampunk's Victorian steam-power setting, imagining an alternate 1920s-40s built on oil, diesel and heavy industry instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "2000s (term coinage)",
+  "key_motifs": "Diesel-powered machinery, riveted surfaces, engine turning, aviation, vacuum tubes, Art Deco, Streamline Moderne, propaganda art, pulp fiction",
+  "key_colours": "Black, grey, muted industrial tones, metallic shades",
+  "related_aesthetics": "Adventure PulpArt DecoAtompunkCyberpunkDecopunkFilm NoirHeroic RealismPost-ApocalypticRaygun GothicRetrofuturismSteampunkStreamline Moderne",
+  "key_values": "Technological advancement, societal change, war, rebellion, dystopia, utopia, human-machine interaction, noir elements"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Dieselpunk"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 48% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 79% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

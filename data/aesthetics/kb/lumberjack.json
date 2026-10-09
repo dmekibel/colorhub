@@ -1,0 +1,50 @@
+{
+ "id": "lumberjack",
+ "name": "Lumberjack",
+ "lineage": {
+  "influenced_by": [
+   "real 19th-20th century North American logging-camp workwear",
+   "1990s grunge's adoption of flannel"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "recurring since 19th c. logging culture; fashion revivals 1990s and 2010s"
+ ],
+ "places": [],
+ "garments": [
+  "flannel",
+  "denim",
+  "leather work boots"
+ ],
+ "media": [
+  {
+   "title": "Paul Bunyan folklore (American tall tales, 19th c. origin)",
+   "note": "a long-standing cultural touchstone for the logger image, predating any fashion trend"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "each time it's revived, something slightly different: 1990s grunge wore flannel for its cheapness and anti-glamour, while the 2010s \"lumbersexual\" trend wore the same garments as a performance of rugged masculinity in an increasingly urban, office-based culture.",
+ "revivals": [
+  "1990s grunge",
+  "2010s \"lumbersexual\" urban-beard trend"
+ ],
+ "article": "Lumberjack style draws on real, practical North American logging-camp workwear — red-and-black buffalo-check flannel, suspenders, heavy boots — developed for an actually dangerous, physically demanding 19th-20th century job, and amplified in popular imagination by folklore figures like Paul Bunyan well before any fashion trend took hold. The look has been adopted into mainstream fashion at least twice with notably different meanings each time: 1990s grunge picked up flannel largely because it was cheap and already owned by the Pacific Northwest musicians wearing it, an anti-glamour choice more than a lumberjack homage specifically, while the 2010s \"lumbersexual\" trend (full beard, flannel, waxed boots) was a much more self-conscious performance of rugged masculinity among urban, often white-collar men whose actual relationship to logging or outdoor labor was typically nonexistent. That gap between the garments' working-class origin and their later ironic or aspirational urban adoption is a recurring thread across several workwear-derived looks in this archive.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Lumberjack"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 45% of the measured color across 6 wiki images is below mid-lightness",
+   "mostly muted — about 49% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

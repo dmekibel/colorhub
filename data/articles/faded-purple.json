@@ -1,132 +1,131 @@
 {
- "slug": "faded-purple",
- "name": "Faded Purple",
- "hex": "#916E99",
- "names": [
-  "Faded Purple"
- ],
- "tier": "traditional",
- "depth": "brief",
- "lede": "Faded Purple is ColorHub's name for Shion-iro (紫苑色), a traditional Japanese color named for the pale purple Tatarian aster flower.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Shion-iro, the Tatarian aster",
-   "body": "Our library lists this color under the Japanese name Shion-iro, written 紫苑色, glossed as \"Tatarian aster color\" after the pale purple daisy-like flower *Aster tataricus* [1]. The Wikipedia survey \"Traditional colors of Japan\" is the only record we have for the name, and no book consulted for this project independently dates its coinage, so beyond that gloss it is undocumented here [1].\n\nIn LCH terms the library's swatch measures lightness 51, chroma 28 and hue 320 degrees, placing it in the Purples family [1]. The nearest named colors on file are [[dusty-violet]], [[dusty-violet]], [[aconite-violet]] and [[viola]], at 2.7, 2.7, 2.9 and 3.1 ΔE [1]. Two other library names nearby are [[opera-mauve]] and [[bishop-s-purple]]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "A color within range of this swatch appears in 2 of the 23,781 paintings in our archive, about 0.01 percent, as photographed [2]. Both matches sit in shadow areas of the canvas [2]. The earliest dated appearance is 1869, in Eugène Boudin's *The mole of Deauville* [2]. The archive's early centuries are thin, so this is a floor on the color's history, not a first sighting [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "紫苑 (shion), the Tatarian aster flower, + 色 (iro), color",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
-  },
-  "aka": [
-   "Shion-iro",
-   "紫苑色"
+  "slug": "faded-purple",
+  "name": "Faded Purple",
+  "hex": "#916E99",
+  "names": [
+    "Faded Purple"
   ],
-  "siblings": [
-   "dusty-violet",
-   "saccardo-s-violet",
-   "aconite-violet",
-   "viola"
+  "tier": "traditional",
+  "depth": "brief",
+  "lede": "Faded Purple is ColorHub's name for Shion-iro (紫苑色), a traditional Japanese color named for the pale purple Tatarian aster flower.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Shion-iro, the Tatarian aster",
+      "body": "Our library lists this color under the Japanese name Shion-iro, written 紫苑色, glossed as \"Tatarian aster color\" after the pale purple daisy-like flower *Aster tataricus* [1]. The Wikipedia survey \"Traditional colors of Japan\" is the only record we have for the name, and no book consulted for this project independently dates its coinage, so beyond that gloss it is undocumented here [1].\n\nIn LCH terms the library's swatch measures lightness 51, chroma 28 and hue 320 degrees, placing it in the Purples family [1]. The nearest named colors on file are [[dusty-violet]], [[dusty-violet]], [[aconite-violet]] and [[viola]], at 2.7, 2.7, 2.9 and 3.1 ΔE [1]. Two other library names nearby are [[opera-mauve]] and [[bishop-s-purple]]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "A color within range of this swatch appears in 2 of the 23,781 paintings in our archive, about 0.01 percent, as photographed [2]. Both matches sit in shadow areas of the canvas [2]. The earliest dated appearance is 1869, in Eugène Boudin's *The mole of Deauville* [2]. The archive's early centuries are thin, so this is a floor on the color's history, not a first sighting [2]."
+    }
   ],
-  "parent": "mauve",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Shion-iro (紫苑色), \"Tatarian aster color\""
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 2,
-  "first_seen": {
-   "year": 1869,
-   "painter": "Eugène Boudin"
-  },
-  "measured": {
-   "lch": [
-    51,
-    28,
-    320
-   ],
-   "nearest": [
-    [
-     "Dusty violet",
-     2.7
+  "aside": {
+    "origin": {
+      "named_after": "紫苑 (shion), the Tatarian aster flower, + 色 (iro), color",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+    },
+    "aka": [
+      "Shion-iro",
+      "紫苑色"
+    ],
+    "siblings": [
+      "dusty-violet",
+      "aconite-violet",
+      "viola"
+    ],
+    "parent": "mauve",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Shion-iro (紫苑色), \"Tatarian aster color\""
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the Japanese name Shion-iro refer to?",
-   "choices": [
-    "A flower, the Tatarian aster",
-    "A mineral pigment",
-    "A dye insect",
-    "A dynasty's banner color"
-   ],
-   "answer": "A flower, the Tatarian aster",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 2,
+    "first_seen": {
+      "year": 1869,
+      "painter": "Eugène Boudin"
+    },
+    "measured": {
+      "lch": [
+        51,
+        28,
+        320
+      ],
+      "nearest": [
+        [
+          "Dusty violet",
+          2.7
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: the hex value given here is a direct measurement of a surviving dyed textile.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which already-named library color sits closest to Faded Purple?",
-   "choices": [
-    "Mauve",
-    "Umber",
-    "Navy",
-    "Sage"
-   ],
-   "answer": "Mauve",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the Japanese name Shion-iro refer to?",
+      "choices": [
+        "A flower, the Tatarian aster",
+        "A mineral pigment",
+        "A dye insect",
+        "A dynasty's banner color"
+      ],
+      "answer": "A flower, the Tatarian aster",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the hex value given here is a direct measurement of a surviving dyed textile.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which already-named library color sits closest to Faded Purple?",
+      "choices": [
+        "Mauve",
+        "Umber",
+        "Navy",
+        "Sage"
+      ],
+      "answer": "Mauve",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Faded Purple takes its name from the Tatarian aster, a pale purple daisy once called Shion in Japan."
+  ],
+  "words": 204,
+  "status": "checked",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No book consulted independently dates the name Shion-iro beyond the library's own gloss; stated as undocumented.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "openers": [
-  "Faded Purple takes its name from the Tatarian aster, a pale purple daisy once called Shion in Japan."
- ],
- "words": 204,
- "status": "checked",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No book consulted independently dates the name Shion-iro beyond the library's own gloss; stated as undocumented.",
-   "lint 2026-10-09"
-  ]
- }
 }

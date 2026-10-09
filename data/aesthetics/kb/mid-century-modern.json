@@ -1,0 +1,66 @@
+{
+ "id": "mid-century-modern",
+ "name": "Mid-century modern",
+ "lineage": {
+  "influenced_by": [
+   "Bauhaus emigres teaching in the US",
+   "postwar suburban housing boom and new manufacturing materials (molded plywood, fiberglass)"
+  ],
+  "influences": [
+   "scandinavian",
+   "space-age"
+  ]
+ },
+ "eras": [
+  "c. 1945–1969"
+ ],
+ "places": [
+  "Palm Springs, California; Scandinavia (parallel, related development)"
+ ],
+ "garments": [
+  "not a fashion look — furniture and architecture (the term itself was coined retrospectively by design historian Cara Greenberg, 1984)"
+ ],
+ "media": [
+  {
+   "title": "Charles and Ray Eames's molded plywood and fiberglass chairs (late 1940s–50s)",
+   "note": ""
+  },
+  {
+   "title": "George Nelson's Ball Clock (1947)",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Charles and Ray Eames",
+  "George Nelson",
+  "Eero Saarinen"
+ ],
+ "reacts_against": "prewar formality and ornament, favoring clean lines, new industrial materials and an optimistic, functional domestic modernism suited to postwar suburban life.",
+ "revivals": [
+  "a sustained, never-really-left design market; Palm Springs holds an annual Modernism Week"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "MCM",
+  "decade_of_origin": "c. 1945–1969",
+  "key_motifs": "Clean lines, organic and geometric forms, functionality over ornament, open-plan spaces, large windows, integration with nature",
+  "key_colours": "Earthy tones (wood, greens, browns) mixed with pops of bold color (mustard yellow, orange, turquoise)",
+  "related_aesthetics": "Streamline ModerneGoogieSpace AgeAtompunkBauhausScandinavian Design",
+  "key_values": "Simplicity, functionality, optimism, modernity, connection to nature"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Mid-Century_Modern"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 64% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

@@ -1,115 +1,115 @@
 {
- "slug": "pauncy-green",
- "name": "Pauncy Green",
- "hex": "#56794E",
- "names": [
-  "Pauncy Green"
- ],
- "tier": "standard",
- "depth": "brief",
- "lede": "Pauncy Green is a muted, mid-toned olive green, a Maerz and Paul dictionary name from 1930 that the dictionary traces, under related names, back to the year 1600.",
- "sections": [
-  {
-   "id": "name",
-   "title": "An old green under new names",
-   "body": "The Maerz and Paul dictionary of 1930 records \"Pauncy Green\" itself undated on plate 22 D 8, but the same chart spot carries older names: Flower de Luce Green from 1600, Pancy Green from 1654 and Iris Green from about 1864 [1]. That spread of names and dates, all clustered on one plate position, shows how often fabric and paint trades renamed the same green over three centuries [1].\n\nThe nearest named colors on file are [[fern-green]], [[hay-s-green]], [[dark-sage]] and [[velvet-green]], at 3.1, 4.1, 4.5 and 4.9 ΔE [1]. Who coined \"pauncy\" itself, or what it meant, is undocumented in the books we hold [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, this olive green appears in 144, about 0.61 percent, more common than 54 percent of our named colors [2]. It peaks in the 1900s, in 22 of 1,674 paintings, at 3.9 times the expected rate, and it is most over-represented in paintings from France, at 2.8 times the expected rate [2]. Inside a painting it most often plays an accent rather than a light or a shadow [2].\n\n[[painter:camille-pissarro|Camille Pissarro]] is its most devoted painter, present in 4 of his 50 works here, 5.4 times his museums' baseline [2]. The earliest match is a 1357 painting, about two and a half centuries before the earliest name on its chart spot, so that early hit is a look-alike hue in an aged photograph, not proof of the dye, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "Maerz & Paul, 1930 (related names on the same plate date to 1600, 1654 and 1864)",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Flower de Luce Green",
-   "Pancy Green",
-   "Iris Green"
+  "slug": "pauncy-green",
+  "name": "Pauncy Green",
+  "hex": "#56794E",
+  "names": [
+    "Pauncy Green"
   ],
-  "siblings": [
-   "fern-green",
-   "hay-s-green",
-   "dark-sage",
-   "velvet-green"
+  "tier": "standard",
+  "depth": "brief",
+  "lede": "Pauncy Green is a muted, mid-toned olive green, a Maerz and Paul dictionary name from 1930 that the dictionary traces, under related names, back to the year 1600.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "An old green under new names",
+      "body": "The Maerz and Paul dictionary of 1930 records \"Pauncy Green\" itself undated on plate 22 D 8, but the same chart spot carries older names: Flower de Luce Green from 1600, Pancy Green from 1654 and Iris Green from about 1864 [1]. That spread of names and dates, all clustered on one plate position, shows how often fabric and paint trades renamed the same green over three centuries [1].\n\nThe nearest named colors on file are [[fern-green]], [[hay-s-green]], [[hay-s-green]] and [[velvet-green]], at 3.1, 4.1, 4.5 and 4.9 ΔE [1]. Who coined \"pauncy\" itself, or what it meant, is undocumented in the books we hold [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, this olive green appears in 144, about 0.61 percent, more common than 54 percent of our named colors [2]. It peaks in the 1900s, in 22 of 1,674 paintings, at 3.9 times the expected rate, and it is most over-represented in paintings from France, at 2.8 times the expected rate [2]. Inside a painting it most often plays an accent rather than a light or a shadow [2].\n\n[[painter:camille-pissarro|Camille Pissarro]] is its most devoted painter, present in 4 of his 50 works here, 5.4 times his museums' baseline [2]. The earliest match is a 1357 painting, about two and a half centuries before the earliest name on its chart spot, so that early hit is a look-alike hue in an aged photograph, not proof of the dye, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 144,
-  "pct_present": 0.61,
-  "rank_pct": 54,
-  "role": "accent, 39% of 72 matched paintings",
-  "measured": {
-   "lch": [
-    47.2,
-    29.1,
-    137.4
-   ],
-   "nearest": [
-    [
-     "Fern Green",
-     3.1
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "Maerz & Paul, 1930 (related names on the same plate date to 1600, 1654 and 1864)",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Flower de Luce Green",
+      "Pancy Green",
+      "Iris Green"
+    ],
+    "siblings": [
+      "fern-green",
+      "hay-s-green",
+      "velvet-green",
+      "civette-green"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 144,
+    "pct_present": 0.61,
+    "rank_pct": 54,
+    "role": "accent, 39% of 72 matched paintings",
+    "measured": {
+      "lch": [
+        47.2,
+        29.1,
+        137.4
+      ],
+      "nearest": [
+        [
+          "Fern Green",
+          3.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul 1930, plate 22 D 8, with related names dated 1600, 1654 and c. 1864",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive field notes for Pauncy Green (n=144)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "On the same chart plate as Pauncy Green, which related name is dated the earliest?",
+      "choices": [
+        "Flower de Luce Green, 1600",
+        "Pancy Green, 1654",
+        "Iris Green, c. 1864",
+        "Pauncy Green itself"
+      ],
+      "answer": "Flower de Luce Green, 1600",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the books we hold explain where the word \"pauncy\" comes from.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "One chart spot carries four different green names spanning over 250 years: Flower de Luce Green, Pancy Green, Iris Green and Pauncy Green."
+  ],
+  "words": 289,
+  "status": "draft",
+  "checked": {
+    "by": "",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930, plate 22 D 8, with related names dated 1600, 1654 and c. 1864",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive field notes for Pauncy Green (n=144)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "On the same chart plate as Pauncy Green, which related name is dated the earliest?",
-   "choices": [
-    "Flower de Luce Green, 1600",
-    "Pancy Green, 1654",
-    "Iris Green, c. 1864",
-    "Pauncy Green itself"
-   ],
-   "answer": "Flower de Luce Green, 1600",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the books we hold explain where the word \"pauncy\" comes from.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "One chart spot carries four different green names spanning over 250 years: Flower de Luce Green, Pancy Green, Iris Green and Pauncy Green."
- ],
- "words": 288,
- "status": "draft",
- "checked": {
-  "by": "",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,145 +1,144 @@
 {
- "slug": "pale-ecru-drab",
- "name": "Pale Ecru-Drab",
- "hex": "#C2B7AD",
- "names": [
-  "Pale Ecru-Drab"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Pale Ecru-Drab is a pinkish grey from Ridgway's 1912 plates, among the most common colors in our painting archive, where Shen Zhou returns to it in more than half his works.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A grey, close to Silver",
-   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue at plate XLVI, hue 13′′′′, tone f, scanned from an aged plate and so approximate [1]. The ISCC-NBS system later filed it in its own block [1]. Our library notes it sits close to the Crayola color Silver, within 6.5 units, and to [[warm-silver]], another separately sourced name, within 3.3 units [2].\n\nIts nearest relatives in the graph are [[warm-silver]] and [[warm-silver]], almost the same, and [[oatmeal]] and [[dark-silver-pink]], close behind [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Pale Ecru-Drab covers at least five per cent of a canvas in 1,100 works, more common than 87 per cent of our named colors [4]. The painter most devoted to it is Shen Zhou, in 7 of his 12 works here, about 5.2 times his museums' baseline [4]. It most often shares a canvas with [[warm-grey]] and [[linen]], at 10.0 and 5.2 times the expected rate [4]. The earliest dated appearance in our archive is the year 1000, nine centuries before the name's own 1912 record, a look-alike hue, not proof of pigment, a floor and not a first, since the archive's early centuries are thin [4]. These remain photographs of aged, varnished paintings, read as screen colors [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented beyond the catalogue entries",
-   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVI, hue 13′′′′, tone f",
-   "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
-  },
-  "aka": [],
-  "siblings": [
-   "silver-crayola",
-   "warm-silver",
-   "pale-vinaceous-fawn",
-   "pale-brownish-drab"
+  "slug": "pale-ecru-drab",
+  "name": "Pale Ecru-Drab",
+  "hex": "#C2B7AD",
+  "names": [
+    "Pale Ecru-Drab"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#C2B7AD",
-   "de2000": 6,
-   "min_cover": 0.05
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Pale Ecru-Drab is a pinkish grey from Ridgway's 1912 plates, among the most common colors in our painting archive, where Shen Zhou returns to it in more than half his works.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A grey, close to Silver",
+      "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* places this hue at plate XLVI, hue 13′′′′, tone f, scanned from an aged plate and so approximate [1]. The ISCC-NBS system later filed it in its own block [1]. Our library notes it sits close to the Crayola color Silver, within 6.5 units, and to [[warm-silver]], another separately sourced name, within 3.3 units [2].\n\nIts nearest relatives in the graph are [[warm-silver]] and [[warm-silver]], almost the same, and [[oatmeal]] and [[dark-silver-pink]], close behind [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, a color within six units of Pale Ecru-Drab covers at least five per cent of a canvas in 1,100 works, more common than 87 per cent of our named colors [4]. The painter most devoted to it is Shen Zhou, in 7 of his 12 works here, about 5.2 times his museums' baseline [4]. It most often shares a canvas with [[warm-grey]] and [[linen]], at 10.0 and 5.2 times the expected rate [4]. The earliest dated appearance in our archive is the year 1000, nine centuries before the name's own 1912 record, a look-alike hue, not proof of pigment, a floor and not a first, since the archive's early centuries are thin [4]. These remain photographs of aged, varnished paintings, read as screen colors [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented beyond the catalogue entries",
+      "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVI, hue 13′′′′, tone f",
+      "source": "ColorHub color library (Ridgway 1912; ISCC-NBS 1955)"
+    },
+    "aka": [],
+    "siblings": [
+      "warm-silver",
+      "oatmeal",
+      "dark-silver-pink"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "n_present": 1100,
-  "painters": [
-   {
-    "key": "Shen Zhou",
-    "n": 12,
-    "hits": 7,
-    "lift": 5.2
-   }
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#C2B7AD",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 1100,
+    "painters": [
+      {
+        "key": "Shen Zhou",
+        "n": 12,
+        "hits": 7,
+        "lift": 5.2
+      }
+    ],
+    "company": [
+      {
+        "word": "Warm Grey",
+        "lift": 10.0
+      },
+      {
+        "word": "Linen",
+        "lift": 5.2
+      }
+    ],
+    "measured": {
+      "lch": [
+        75.0,
+        6.8,
+        71.5
+      ],
+      "nearest": [
+        [
+          "Silver (Crayola)",
+          6.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/graph/nodes-p.json): Ridgway 1912, plate XLVI, hue 13′′′′, tone f; ISCC-NBS 1955 block 10 (R)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), near-color note, CIEDE2000 6.5 to Silver (Crayola) and 3.3 to Warm Silver",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges-p.json), CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "company": [
-   {
-    "word": "Warm Grey",
-    "lift": 10.0
-   },
-   {
-    "word": "Linen",
-    "lift": 5.2
-   }
+  "questions": [
+    {
+      "q": "Which painter in our archive is most devoted to Pale Ecru-Drab?",
+      "choices": [
+        "Shen Zhou",
+        "Edvard Munch",
+        "Xugu",
+        "Paul Signac"
+      ],
+      "answer": "Shen Zhou",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Pale Ecru-Drab is among the more common colors in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
   ],
-  "measured": {
-   "lch": [
-    75.0,
-    6.8,
-    71.5
-   ],
-   "nearest": [
-    [
-     "Silver (Crayola)",
-     6.5
+  "openers": [
+    "Shen Zhou returns to this pinkish grey in more than half of his works in our archive."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/graph/nodes-p.json): Ridgway 1912, plate XLVI, hue 13′′′′, tone f; ISCC-NBS 1955 block 10 (R)",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json), near-color note, CIEDE2000 6.5 to Silver (Crayola) and 3.3 to Warm Silver",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges-p.json), CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which painter in our archive is most devoted to Pale Ecru-Drab?",
-   "choices": [
-    "Shen Zhou",
-    "Edvard Munch",
-    "Xugu",
-    "Paul Signac"
-   ],
-   "answer": "Shen Zhou",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Pale Ecru-Drab is among the more common colors in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Shen Zhou returns to this pinkish grey in more than half of his works in our archive."
- ],
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "words": 250
+  "words": 250
 }

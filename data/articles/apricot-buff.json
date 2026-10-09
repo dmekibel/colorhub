@@ -1,128 +1,128 @@
 {
- "name": "Apricot Buff",
- "hex": "#E99A6C",
- "names": [
-  "Apricot Buff"
- ],
- "tier": "nature",
- "depth": "medium",
- "lede": "Apricot Buff pairs the fruit's orange with \"buff,\" the dull tan of undyed leather, for a soft peach-tan catalogued by Ridgway in 1912.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Fruit plus leather",
-   "body": "Apricot names the fruit's orange; \"buff\" is itself an old color word for the pale tan of buffalo or ox hide left undyed, here softening the apricot toward tan [1]. Robert Ridgway listed the combination in his 1912 *Color Standards and Color Nomenclature*, plate XIV, hue 11′, tone b; no earlier record turns up in the other sources consulted [1]. In printed English the phrase rose fastest in the 1920s and peaked in the 1940s [2]. Its closest named neighbor is [[yellowish-cinnamon]], with [[pinkish-cinnamon]] and [[light-orange]] close by in the same warm tan range [3].\n\nBuff itself is one of the oldest English color words still in everyday use, older than most flower and fruit names in this family, which is part of why it so often turns up as a modifier rather than a color on its own [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this tone in 170 of 23,781 paintings (0.71 percent, as photographed), more common than 61 percent of named colors here [4]. It peaks in the 1500s, at 1.6 times the expected rate (19 of 2,231 paintings from that century), most often as an accent color, and is over-represented in Indian paintings (2.8 times expected) [4]. The earliest matching canvas dates to 1230, nearly seven centuries before Ridgway's plate; the archive's early centuries are thin, so this is a floor, not a first, and a look-alike hue, not the name's real age [4]. Unlike many named colors here, it shows no single standout painter, suggesting it was a common studio tan rather than a signature choice of any one artist in the collection [4]. As with most of these dulled fruit names, the match only shows the hue recurring across centuries, not that any painter set out to mix an apricot specifically [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the apricot fruit, softened toward tan by \"buff\" (undyed hide)",
-   "first_recorded": "1912 (Ridgway)",
-   "source": "Ridgway, Color Standards and Color Nomenclature"
-  },
-  "aka": [],
-  "siblings": [
-   "yellowish-cinnamon",
-   "pinkish-cinnamon",
-   "ochraceous-salmon"
+  "name": "Apricot Buff",
+  "hex": "#E99A6C",
+  "names": [
+    "Apricot Buff"
   ],
-  "parent": "apricot",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 170,
-  "rank_pct": 61,
-  "measured": {
-   "lch": [
-    70.5,
-    43.8,
-    55.5
-   ],
-   "nearest": [
-    [
-     "Yellowish cinnamon",
-     2.7
+  "tier": "nature",
+  "depth": "medium",
+  "lede": "Apricot Buff pairs the fruit's orange with \"buff,\" the dull tan of undyed leather, for a soft peach-tan catalogued by Ridgway in 1912.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Fruit plus leather",
+      "body": "Apricot names the fruit's orange; \"buff\" is itself an old color word for the pale tan of buffalo or ox hide left undyed, here softening the apricot toward tan [1]. Robert Ridgway listed the combination in his 1912 *Color Standards and Color Nomenclature*, plate XIV, hue 11′, tone b; no earlier record turns up in the other sources consulted [1]. In printed English the phrase rose fastest in the 1920s and peaked in the 1940s [2]. Its closest named neighbor is [[yellowish-cinnamon]], with [[pinkish-cinnamon]] and [[light-orange]] close by in the same warm tan range [3].\n\nBuff itself is one of the oldest English color words still in everyday use, older than most flower and fruit names in this family, which is part of why it so often turns up as a modifier rather than a color on its own [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this tone in 170 of 23,781 paintings (0.71 percent, as photographed), more common than 61 percent of named colors here [4]. It peaks in the 1500s, at 1.6 times the expected rate (19 of 2,231 paintings from that century), most often as an accent color, and is over-represented in Indian paintings (2.8 times expected) [4]. The earliest matching canvas dates to 1230, nearly seven centuries before Ridgway's plate; the archive's early centuries are thin, so this is a floor, not a first, and a look-alike hue, not the name's real age [4]. Unlike many named colors here, it shows no single standout painter, suggesting it was a common studio tan rather than a signature choice of any one artist in the collection [4]. As with most of these dulled fruit names, the match only shows the hue recurring across centuries, not that any painter set out to mix an apricot specifically [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the apricot fruit, softened toward tan by \"buff\" (undyed hide)",
+      "first_recorded": "1912 (Ridgway)",
+      "source": "Ridgway, Color Standards and Color Nomenclature"
+    },
+    "aka": [],
+    "siblings": [
+      "yellowish-cinnamon",
+      "pinkish-cinnamon",
+      "light-orange"
     ],
-    [
-     "Pinkish Cinnamon",
-     3.3
-    ]
-   ]
+    "parent": "apricot",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "ngram": {
-   "peak": 1940,
-   "rise": 1920
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ridgway, Color Standards and Color Nomenclature, plate XIV",
-   "loc_kind": "entry",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 170,
+    "rank_pct": 61,
+    "measured": {
+      "lch": [
+        70.5,
+        43.8,
+        55.5
+      ],
+      "nearest": [
+        [
+          "Yellowish cinnamon",
+          2.7
+        ],
+        [
+          "Pinkish Cinnamon",
+          3.3
+        ]
+      ]
+    },
+    "ngram": {
+      "peak": 1940,
+      "rise": 1920
+    }
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub Ngram cache, \"apricot buff\"",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ridgway, Color Standards and Color Nomenclature, plate XIV",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Ngram cache, \"apricot buff\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does \"buff\" mean in Apricot Buff?",
+      "choices": [
+        "The pale tan of undyed hide",
+        "A polishing cloth's grey",
+        "A 1990s slang word for strong",
+        "A Ridgway plate number"
+      ],
+      "answer": "The pale tan of undyed hide",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: \"buff\" is a newer color word than most fruit-based color names.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Apricot Buff is nearly three times more common in Indian paintings than its average share would predict."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does \"buff\" mean in Apricot Buff?",
-   "choices": [
-    "The pale tan of undyed hide",
-    "A polishing cloth's grey",
-    "A 1990s slang word for strong",
-    "A Ridgway plate number"
-   ],
-   "answer": "The pale tan of undyed hide",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: \"buff\" is a newer color word than most fruit-based color names.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Apricot Buff is nearly three times more common in Indian paintings than its average share would predict."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- },
- "slug": "apricot-buff",
- "words": 316
+  "slug": "apricot-buff",
+  "words": 316
 }

@@ -1,161 +1,161 @@
 {
- "slug": "burnt-siena",
- "name": "Burnt Siena",
- "hex": "#B75203",
- "names": [
-  "Burnt Siena",
-  "Burnt Sienna"
- ],
- "tier": "place",
- "depth": "medium",
- "lede": "Burnt Siena is named for the Tuscan city of Siena, source of an iron-oxide earth pigment that turns from yellow to warm brownish-red once roasted.",
- "sections": [
-  {
-   "id": "name",
-   "title": "An earth, roasted",
-   "body": "Philip Ball explains that ochres from Siena gained special respect among Renaissance painters [1]. Raw sienna, dug from the ground, is a yellowish iron oxide; roasted over a fire, it turns into the warmer, redder burnt sienna [1]. John Jarman lists it among the earth browns that are, in his words, \"cooked to red hot\" [2], and Victoria Finlay's colleague-in-trade Coles notes that a moderate roasting heat turns yellow ochre toward orange, and a stronger heat pushes it toward red [3].\n\nOur data carries the color under two spellings, Burnt Siena and the more common Burnt Sienna, and flags the choice as contested [4]. The ISCC-NBS system filed it in 1955, block 40, among the reds [4]; Ridgway's 1886 *Nomenclature of Colors* already carried the name, and his 1912 revision placed it on plate II [4]."
-  },
-  {
-   "id": "swatch",
-   "title": "A warmer swatch than the pigment",
-   "body": "Its nearest named neighbor is [[brick-orange|Brick Orange]], only 4.1 units away and read as almost the same color [5]; [[windsor-tan|Windsor Tan]] sits close behind, a little duller [5]. The genuine pigment, ground from roasted earth, varies by source and firing time, so any single hex swatch is one sample among many possible burnt siennas [1][3]. [[burnt-orange|Burnt Orange]] and [[alloy-orange|Alloy Orange]] sit further out still, both more vivid or lighter by comparison [5]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This color appears in 106 of our 23,781 paintings, about 0.45 percent, more common than 58 percent of our named colors, as photographed [6]. It peaks twice: a broad rise across the 1400s, 1.5 times the expected rate, and a sharper spike in the 1680s, 4.1 times the expected rate [6]. Inside a painting it plays an accent in 87 percent of its appearances [6].\n\nThe earliest match is a 1423 panel by Masolino da Panicale, 463 years before Ridgway's 1886 record; our archive's early centuries are thin, so this is a floor, not a first, and a color match on an aged, varnished photograph is not proof that the painter ground real Sienna earth [6]. In printed English the word peaked in the 1930s and rose fastest in that decade, across all its senses [6]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Siena, Tuscany, source of the earth pigment",
-   "first_recorded": "1886 (Ridgway's Nomenclature of Colors)",
-   "source": "Ball, Bright Earth; Ridgway 1886/1912"
-  },
-  "aka": [
-   "Burnt Sienna"
+  "slug": "burnt-siena",
+  "name": "Burnt Siena",
+  "hex": "#B75203",
+  "names": [
+    "Burnt Siena",
+    "Burnt Sienna"
   ],
-  "siblings": [
-   "brick-orange",
-   "windsor-tan",
-   "burnt-orange",
-   "alloy-orange"
+  "tier": "place",
+  "depth": "medium",
+  "lede": "Burnt Siena is named for the Tuscan city of Siena, source of an iron-oxide earth pigment that turns from yellow to warm brownish-red once roasted.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "An earth, roasted",
+      "body": "Philip Ball explains that ochres from Siena gained special respect among Renaissance painters [1]. Raw sienna, dug from the ground, is a yellowish iron oxide; roasted over a fire, it turns into the warmer, redder burnt sienna [1]. John Jarman lists it among the earth browns that are, in his words, \"cooked to red hot\" [2], and Victoria Finlay's colleague-in-trade Coles notes that a moderate roasting heat turns yellow ochre toward orange, and a stronger heat pushes it toward red [3].\n\nOur data carries the color under two spellings, Burnt Siena and the more common Burnt Sienna, and flags the choice as contested [4]. The ISCC-NBS system filed it in 1955, block 40, among the reds [4]; Ridgway's 1886 *Nomenclature of Colors* already carried the name, and his 1912 revision placed it on plate II [4]."
+    },
+    {
+      "id": "swatch",
+      "title": "A warmer swatch than the pigment",
+      "body": "Its nearest named neighbor is [[sinopia|Brick Orange]], only 4.1 units away and read as almost the same color [5]; [[windsor-tan|Windsor Tan]] sits close behind, a little duller [5]. The genuine pigment, ground from roasted earth, varies by source and firing time, so any single hex swatch is one sample among many possible burnt siennas [1][3]. [[burnt-orange|Burnt Orange]] and [[alloy-orange|Alloy Orange]] sit further out still, both more vivid or lighter by comparison [5]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This color appears in 106 of our 23,781 paintings, about 0.45 percent, more common than 58 percent of our named colors, as photographed [6]. It peaks twice: a broad rise across the 1400s, 1.5 times the expected rate, and a sharper spike in the 1680s, 4.1 times the expected rate [6]. Inside a painting it plays an accent in 87 percent of its appearances [6].\n\nThe earliest match is a 1423 panel by Masolino da Panicale, 463 years before Ridgway's 1886 record; our archive's early centuries are thin, so this is a floor, not a first, and a color match on an aged, varnished photograph is not proof that the painter ground real Sienna earth [6]. In printed English the word peaked in the 1930s and rose fastest in that decade, across all its senses [6]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 106,
-  "match": {
-   "min_cover": 0.02
-  },
-  "measured": {
-   "lch": [
-    47.1,
-    67.4,
-    56.2
-   ],
-   "nearest": [
-    [
-     "Brick Orange",
-     4.1
+  "aside": {
+    "origin": {
+      "named_after": "Siena, Tuscany, source of the earth pigment",
+      "first_recorded": "1886 (Ridgway's Nomenclature of Colors)",
+      "source": "Ball, Bright Earth; Ridgway 1886/1912"
+    },
+    "aka": [
+      "Burnt Sienna"
     ],
-    [
-     "Windsor Tan",
-     4.4
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 14",
-   "loc_kind": "book-chapter",
-   "url": null
+    "siblings": [
+      "sinopia",
+      "windsor-tan",
+      "burnt-orange",
+      "alloy-orange"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 44",
-   "loc_kind": "pdf-page",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 106,
+    "match": {
+      "min_cover": 0.02
+    },
+    "measured": {
+      "lch": [
+        47.1,
+        67.4,
+        56.2
+      ],
+      "nearest": [
+        [
+          "Brick Orange",
+          4.1
+        ],
+        [
+          "Windsor Tan",
+          4.4
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Coles, Chromatopia, p. 37",
-   "loc_kind": "pdf-page",
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 14",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 44",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Coles, Chromatopia, p. 37",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955, Ridgway 1886/1912 entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges for burnt-siena",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings) and Google Books Ngram cache, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What happens to raw sienna when it is roasted?",
+      "choices": [
+        "It turns from yellow to warm brownish-red",
+        "It turns white",
+        "It turns blue",
+        "It turns black"
+      ],
+      "answer": "It turns from yellow to warm brownish-red",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our data treats \"Burnt Siena\" and \"Burnt Sienna\" as the same contested spelling.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    },
+    {
+      "q": "In which painting role does Burnt Siena most often appear?",
+      "choices": [
+        "Accent",
+        "Shadow",
+        "Background mid-tone",
+        "Light"
+      ],
+      "answer": "Accent",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Raw sienna is yellow; roast it and it turns into the warm red-brown we call burnt sienna.",
+    "Our archive's burnt-siena spikes hardest in paintings from the 1680s, four times the expected rate."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955, Ridgway 1886/1912 entries",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "data",
-   "cite": "ColorHub color graph: look-alike edges for burnt-siena",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings) and Google Books Ngram cache, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What happens to raw sienna when it is roasted?",
-   "choices": [
-    "It turns from yellow to warm brownish-red",
-    "It turns white",
-    "It turns blue",
-    "It turns black"
-   ],
-   "answer": "It turns from yellow to warm brownish-red",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our data treats \"Burnt Siena\" and \"Burnt Sienna\" as the same contested spelling.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  },
-  {
-   "q": "In which painting role does Burnt Siena most often appear?",
-   "choices": [
-    "Accent",
-    "Shadow",
-    "Background mid-tone",
-    "Light"
-   ],
-   "answer": "Accent",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Raw sienna is yellow; roast it and it turns into the warm red-brown we call burnt sienna.",
-  "Our archive's burnt-siena spikes hardest in paintings from the 1680s, four times the expected rate."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- },
- "words": 358
+  "words": 358
 }

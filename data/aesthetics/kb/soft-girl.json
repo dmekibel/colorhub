@@ -1,0 +1,41 @@
+{
+ "id": "soft-girl",
+ "name": "Soft Girl",
+ "lineage": {
+  "influenced_by": [
+   "Y2K fashion",
+   "Korean and Japanese pastel beauty and fashion trends"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "2018–2021"
+ ],
+ "places": [],
+ "garments": [
+  "pastel knitwear",
+  "plaid mini skirts",
+  "baby-doll tops"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "the heavily contoured, high-glam \"baddie\" Instagram look that preceded it, offering a gentler, more pastel, less obviously effortful alternative.",
+ "revivals": [],
+ "article": "Soft girl emerged on TikTok and Instagram around 2018–19 as a specifically pastel, gentler counterpart to both the e-girl look (which shared its platform and timeframe but leaned darker and more alt) and the heavily contoured \"baddie\" aesthetic that had dominated the preceding few years. It drew visibly on Y2K fashion's plaid mini skirts and baby-doll silhouettes alongside Korean and Japanese pastel beauty trends circulating widely on the same platforms, blending references that hadn't previously been combined into one coherent look. Soft girl's boundaries with the clean girl and e-girl aesthetics that bracket it on either side are genuinely fuzzy — trend writers at the time and since have disagreed about exactly where one ends and the next begins — which makes it a useful example of how closely-related, same-era internet aesthetics often get named and separated more by online community self-identification than by any hard visual line.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Soft Girl"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 43% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

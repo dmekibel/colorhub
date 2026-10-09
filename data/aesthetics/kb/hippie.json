@@ -1,0 +1,61 @@
+{
+ "id": "hippie",
+ "name": "Hippie",
+ "lineage": {
+  "influenced_by": [
+   "the Beat Generation's bohemianism",
+   "civil rights and anti-Vietnam War activism"
+  ],
+  "influences": [
+   "psychedelic",
+   "boho",
+   "cottagecore"
+  ]
+ },
+ "eras": [
+  "1965–1972"
+ ],
+ "places": [],
+ "garments": [
+  "tie-dye cotton",
+  "suede fringe",
+  "beaded jewelry",
+  "paisley"
+ ],
+ "media": [
+  {
+   "title": "Woodstock (festival, 1969; documentary film, 1970)",
+   "note": ""
+  },
+  {
+   "title": "Joan Baez and the folk-revival scene of the early-mid 1960s",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Allen Ginsberg",
+  "Joan Baez"
+ ],
+ "reacts_against": "mainstream 1950s-60s American consumer conformity and the Vietnam War draft, building an explicitly communal, anti-materialist alternative.",
+ "revivals": [
+  "boho fashion (2000s)",
+  "a recurring festival-fashion reference ever since"
+ ],
+ "article": "The counterculture that became known as the hippie movement grew directly out of the Beat Generation's 1950s bohemianism, but it took shape as a distinct, much larger scene in San Francisco's Haight-Ashbury district through the mid-1960s, fed by folk music's protest tradition and a rapidly escalating opposition to the Vietnam War draft. Its look — tie-dye, fringe, flowing fabric, flowers worn in the hair — carried real political content: tie-dye and handmade clothing were partly a rejection of mass consumer culture, and long hair on men specifically coded as anti-establishment in a way that reads as merely decorative today. The movement's widest public moment came with 1967's \"Summer of Love\" and the 1969 Woodstock festival, both of which carried the look to a national and then international audience, after which it fragmented into later, softer commercial descendants — most directly 2000s \"boho\" fashion, which kept hippie's flowing silhouette and layered jewelry while leaving behind most of its original political urgency.",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Hippie"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 66% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

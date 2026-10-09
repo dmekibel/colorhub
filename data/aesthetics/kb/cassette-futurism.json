@@ -1,0 +1,48 @@
+{
+ "id": "cassette-futurism",
+ "name": "Cassette Futurism",
+ "lineage": {
+  "influenced_by": [
+   "actual 1970s-80s consumer electronics design",
+   "Space Age and Streamline Moderne"
+  ],
+  "influences": [
+   "dieselpunk"
+  ]
+ },
+ "eras": [
+  "aesthetic evokes 1970s-80s; named/revived c. 2010s-20s"
+ ],
+ "places": [
+  "retrofuturist film and game design"
+ ],
+ "garments": [
+  "not primarily a fashion look — a product and interface design aesthetic (chunky buttons, cathode-ray screens, cassette decks)"
+ ],
+ "media": [
+  {
+   "title": "Alien (1979) production design",
+   "note": "a frequently cited touchstone for its analog-tech interiors"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "sleek, minimal modern tech design, imagining advanced computers and spacecraft built with the chunky, analog, tape-deck technology of the 1970s-80s instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Cassette_Futurism"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 81% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

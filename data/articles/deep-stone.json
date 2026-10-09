@@ -1,114 +1,114 @@
 {
- "slug": "deep-stone",
- "name": "Deep Stone",
- "hex": "#C0954A",
- "names": [
-  "Deep Stone"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Deep Stone is a darker, more golden reading of [[stone]], recorded in Maerz and Paul's 1930 dictionary, plate 13 L 7.",
- "sections": [
-  {
-   "id": "name",
-   "title": "One chip, several names",
-   "body": "The name follows the library's modifier grammar, *deep* plus [[stone]], and Maerz and Paul's *A Dictionary of Color* (1930) places the exact chip on plate 13 L 7 [1]. Their dictionary gives the same hex to three older names: Isabella, first recorded in 1601, Titiens, from 1892, and Samovar, from 1925, all on neighboring plates [1]. The books consulted here do not explain why later editors chose \"stone\" and \"deep\" over any of the three.\n\nIts closest look-alike on file is [[pinchbeck-brown]], about 2.6 units off, with [[chamoline]] and [[sand-brown]] a little further out [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This match appears in 7.74% of the 23,781 paintings in our archive (1,841 paintings, as photographed); the within-painting lens narrows that to 1,477 [3]. In our archive it is more common than 93% of the named colors [3]. It peaks in the 1300s, present in 20.7% of the 251 paintings we have from that decade (52 paintings), 3.2 times the rate its museums would predict [3]. Inside a painting it most often plays an accent, in 62% of its 1,477 appearances by lightness rank within the painting [3]. Its most devoted painter is Fritz Thomsen, present in 6 of 18 works here, 5.7x the baseline of the museums those works come from (as photographed 6.9x) [3]. The earliest match dates to 1200, 730 years before the name's 1930 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a darker, more golden reading of the base color stone",
-   "first_recorded": "Maerz and Paul, A Dictionary of Color (1930), plate 13 L 7",
-   "source": "ColorHub library"
-  },
-  "aka": [
-   "Isabella (1601)",
-   "Titiens (1892)",
-   "Samovar (1925)"
+  "slug": "deep-stone",
+  "name": "Deep Stone",
+  "hex": "#C0954A",
+  "names": [
+    "Deep Stone"
   ],
-  "siblings": [
-   "pinchbeck-brown",
-   "chamoline",
-   "sand-brown"
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Deep Stone is a darker, more golden reading of [[stone]], recorded in Maerz and Paul's 1930 dictionary, plate 13 L 7.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "One chip, several names",
+      "body": "The name follows the library's modifier grammar, *deep* plus [[stone]], and Maerz and Paul's *A Dictionary of Color* (1930) places the exact chip on plate 13 L 7 [1]. Their dictionary gives the same hex to three older names: Isabella, first recorded in 1601, Titiens, from 1892, and Samovar, from 1925, all on neighboring plates [1]. The books consulted here do not explain why later editors chose \"stone\" and \"deep\" over any of the three.\n\nIts closest look-alike on file is [[pinchbeck-brown]], about 2.6 units off, with [[chamoline]] and [[sand-yellow]] a little further out [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This match appears in 7.74% of the 23,781 paintings in our archive (1,841 paintings, as photographed); the within-painting lens narrows that to 1,477 [3]. In our archive it is more common than 93% of the named colors [3]. It peaks in the 1300s, present in 20.7% of the 251 paintings we have from that decade (52 paintings), 3.2 times the rate its museums would predict [3]. Inside a painting it most often plays an accent, in 62% of its 1,477 appearances by lightness rank within the painting [3]. Its most devoted painter is Fritz Thomsen, present in 6 of 18 works here, 5.7x the baseline of the museums those works come from (as photographed 6.9x) [3]. The earliest match dates to 1200, 730 years before the name's 1930 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+    }
   ],
-  "parent": "stone",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1841,
-  "pct_archive": 7.74,
-  "n_within_painting": 1477,
-  "pct_within_painting": 6.21,
-  "rank_pct": 93,
-  "painters": [
-   "Fritz Thomsen"
+  "aside": {
+    "origin": {
+      "named_after": "a darker, more golden reading of the base color stone",
+      "first_recorded": "Maerz and Paul, A Dictionary of Color (1930), plate 13 L 7",
+      "source": "ColorHub library"
+    },
+    "aka": [
+      "Isabella (1601)",
+      "Titiens (1892)",
+      "Samovar (1925)"
+    ],
+    "siblings": [
+      "pinchbeck-brown",
+      "chamoline",
+      "sand-yellow"
+    ],
+    "parent": "stone",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1841,
+    "pct_archive": 7.74,
+    "n_within_painting": 1477,
+    "pct_within_painting": 6.21,
+    "rank_pct": 93,
+    "painters": [
+      "Fritz Thomsen"
+    ],
+    "name_first_recorded": 1930,
+    "earliest_match_year": 1200
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 13 L 7 (Isabella, 1601, plate 13 K 7; Titiens, 1892, plate 12 K 7; Samovar, 1925, plate 12 K 7)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,786 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "name_first_recorded": 1930,
-  "earliest_match_year": 1200
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Maerz and Paul, A Dictionary of Color (1930), plate 13 L 7 (Isabella, 1601, plate 13 K 7; Titiens, 1892, plate 12 K 7; Samovar, 1925, plate 12 K 7)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,786 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "Which 1930 book first records Deep Stone's exact shade?",
+      "choices": [
+        "Maerz and Paul's A Dictionary of Color",
+        "Ridgway's Color Standards",
+        "The ISCC-NBS Circular",
+        "Werner's Nomenclature of Colours"
+      ],
+      "answer": "Maerz and Paul's A Dictionary of Color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Deep Stone's exact hex value also appears under three older names in the same dictionary.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Deep Stone shares its exact hex with three older names on record: Isabella, Titiens and Samovar."
+  ],
+  "words": 296,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "Which 1930 book first records Deep Stone's exact shade?",
-   "choices": [
-    "Maerz and Paul's A Dictionary of Color",
-    "Ridgway's Color Standards",
-    "The ISCC-NBS Circular",
-    "Werner's Nomenclature of Colours"
-   ],
-   "answer": "Maerz and Paul's A Dictionary of Color",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Deep Stone's exact hex value also appears under three older names in the same dictionary.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Deep Stone shares its exact hex with three older names on record: Isabella, Titiens and Samovar."
- ],
- "words": 296,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
-  ]
- }
 }

@@ -1,0 +1,50 @@
+{
+ "id": "chaotic-academia",
+ "name": "Chaotic Academia",
+ "lineage": {
+  "influenced_by": [
+   "dark academia (as a messier, more maximalist counterpart)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "c. 2020–present"
+ ],
+ "places": [
+  "TikTok/Tumblr"
+ ],
+ "garments": [
+  "clashing patterns",
+  "layered mismatched vintage pieces",
+  "ink-stained sleeves"
+ ],
+ "media": [],
+ "figures": [],
+ "reacts_against": "dark academia's tidy, curated moodiness, embracing visible mess and eccentric clutter instead.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Chaos Academia",
+  "decade_of_origin": "2010s",
+  "key_motifs": "illegible notes, disorganized desks, dusty records, messy handwriting, ragged fabrics, torn and stained pages",
+  "key_colours": "White, beige, gray, woody brown, tan",
+  "related_aesthetics": "Dark AcademiaLight Academia",
+  "key_values": "Disorganization,  philosophy, curiosity, learning, rejection of elitism, niche subjects"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Chaotic_Academia"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 61% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 83% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

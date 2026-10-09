@@ -1,140 +1,139 @@
 {
- "slug": "mud-brown",
- "name": "Mud Brown",
- "hex": "#60460F",
- "names": [
-  "Mud Brown"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Mud Brown is a dark, dull olive-brown first recorded as a swatch name in the xkcd 2010 crowd color survey, a darker, browner member of the plain [[mud]] family.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A darker shade of mud",
-   "body": "Our library traces this exact name only to the xkcd 2010 crowd survey, which asked thousands of volunteers to label swatches in their own words [1]. It belongs to a family of names built on the plain word [[mud]], the lighter base color from which this swatch is a darker, browner variant [1]. The ISCC-NBS dictionary's nearest block is \"moderate olive brown,\" 3.9 units from that block's centre [1].\n\nIts nearest named neighbors are [[field-drab|Field Drab]] and [[olive-mud|Olive Mud]], each 4.8 units away and lighter [2]. [[japanese-bush-warbler-brown|Japanese Bush Warbler Brown]] sits 5.3 units out, duller [2]. Measured in LCH it reads lightness 32, chroma 36, a dark warm brown [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 1,521 of 23,781 paintings, about 6.4 percent, as photographed; the within-painting lens finds it in 795 [3]. It is more common than 88 percent of the named colors [3]. It peaks in the 1600s, at 3.8 percent of the 6,394 paintings from that century (243 paintings) [3]. Inside a painting it most often plays a mid-tone across its 795 occurrences [3]. Paulus Potter is its most devoted painter, carrying it in 8 of his 28 works here, 5.2 times the baseline rate (4.0 times as photographed) [3]. The earliest archive match dates to the year 799, 1,211 years before the name's 2010 record; that gap marks a look-alike hue in an aged, varnished photograph, not evidence that the name or pigment is that old [3]. It shares canvases with Muddy Brown and Mustard Brown more than chance, at 11.7 and 5.3 times the expected rate [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "mud, a darker and browner shade of it",
-   "first_recorded": "2010 (xkcd crowd color survey)",
-   "source": "ColorHub color library (xkcd 2010)"
-  },
-  "aka": [],
-  "siblings": [
-   "field-drab",
-   "olive-mud",
-   "japanese-bush-warbler-brown",
-   "dark-brown"
+  "slug": "mud-brown",
+  "name": "Mud Brown",
+  "hex": "#60460F",
+  "names": [
+    "Mud Brown"
   ],
-  "parent": "mud",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1521,
-  "rank_pct": 88,
-  "peak_century": [
-   1600,
-   1.1
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Mud Brown is a dark, dull olive-brown first recorded as a swatch name in the xkcd 2010 crowd color survey, a darker, browner member of the plain [[mud]] family.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A darker shade of mud",
+      "body": "Our library traces this exact name only to the xkcd 2010 crowd survey, which asked thousands of volunteers to label swatches in their own words [1]. It belongs to a family of names built on the plain word [[mud]], the lighter base color from which this swatch is a darker, browner variant [1]. The ISCC-NBS dictionary's nearest block is \"moderate olive brown,\" 3.9 units from that block's centre [1].\n\nIts nearest named neighbors are [[olive-mud|Field Drab]] and [[olive-mud|Olive Mud]], each 4.8 units away and lighter [2]. [[japanese-bush-warbler-brown|Japanese Bush Warbler Brown]] sits 5.3 units out, duller [2]. Measured in LCH it reads lightness 32, chroma 36, a dark warm brown [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 1,521 of 23,781 paintings, about 6.4 percent, as photographed; the within-painting lens finds it in 795 [3]. It is more common than 88 percent of the named colors [3]. It peaks in the 1600s, at 3.8 percent of the 6,394 paintings from that century (243 paintings) [3]. Inside a painting it most often plays a mid-tone across its 795 occurrences [3]. Paulus Potter is its most devoted painter, carrying it in 8 of his 28 works here, 5.2 times the baseline rate (4.0 times as photographed) [3]. The earliest archive match dates to the year 799, 1,211 years before the name's 2010 record; that gap marks a look-alike hue in an aged, varnished photograph, not evidence that the name or pigment is that old [3]. It shares canvases with Muddy Brown and Mustard Brown more than chance, at 11.7 and 5.3 times the expected rate [3]."
+    }
   ],
-  "role_top": [
-   "mid-tone",
-   39
-  ],
-  "top_painter": [
-   "Paulus Potter",
-   5.2
-  ],
-  "measured": {
-   "lch": [
-    32,
-    36,
-    81
-   ],
-   "nearest_iscc": [
-    "moderate olive brown",
-    3.9
-   ],
-   "nearest": [
-    [
-     "Field Drab",
-     4.8
+  "aside": {
+    "origin": {
+      "named_after": "mud, a darker and browner shade of it",
+      "first_recorded": "2010 (xkcd crowd color survey)",
+      "source": "ColorHub color library (xkcd 2010)"
+    },
+    "aka": [],
+    "siblings": [
+      "olive-mud",
+      "japanese-bush-warbler-brown",
+      "dark-brown"
     ],
-    [
-     "Olive Mud",
-     4.8
+    "parent": "mud",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1521,
+    "rank_pct": 88,
+    "peak_century": [
+      1600,
+      1.1
     ],
-    [
-     "Japanese Bush Warbler Brown",
-     5.3
+    "role_top": [
+      "mid-tone",
+      39
+    ],
+    "top_painter": [
+      "Paulus Potter",
+      5.2
+    ],
+    "measured": {
+      "lch": [
+        32,
+        36,
+        81
+      ],
+      "nearest_iscc": [
+        "moderate olive brown",
+        3.9
+      ],
+      "nearest": [
+        [
+          "Field Drab",
+          4.8
+        ],
+        [
+          "Olive Mud",
+          4.8
+        ],
+        [
+          "Japanese Bush Warbler Brown",
+          5.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-m.json): xkcd 2010 source, family-word parent, ISCC-NBS block",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges for mud-brown (data/graph/edges-m.json)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which survey first recorded Mud Brown as a named swatch, in 2010?",
+      "choices": [
+        "xkcd",
+        "Pantone",
+        "RAL",
+        "ISCC-NBS"
+      ],
+      "answer": "xkcd",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the earliest painting matching Mud Brown in our archive predates the name itself by over a thousand years.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Mud Brown's earliest archive match is a painting from the year 799, 1,211 years before the name was ever recorded."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); facts drawn from the graph, library and archive fieldnotes only."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-m.json): xkcd 2010 source, family-word parent, ISCC-NBS block",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: look-alike edges for mud-brown (data/graph/edges-m.json)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which survey first recorded Mud Brown as a named swatch, in 2010?",
-   "choices": [
-    "xkcd",
-    "Pantone",
-    "RAL",
-    "ISCC-NBS"
-   ],
-   "answer": "xkcd",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the earliest painting matching Mud Brown in our archive predates the name itself by over a thousand years.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Mud Brown's earliest archive match is a painting from the year 799, 1,211 years before the name was ever recorded."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); facts drawn from the graph, library and archive fieldnotes only."
-  ]
- },
- "words": 291
+  "words": 291
 }
