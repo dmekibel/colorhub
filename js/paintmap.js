@@ -329,33 +329,55 @@ function pmLayout(s, F) {
 
 // ---------- thumbnails: load the few on screen, bake each once, recycle ----------
 const PM_BAKE = 144, PM_CACHE_MAX = 650, PM_BIG_MAX = 36, PM_FLIGHT = 14;
+// Canvas taint (map lane's audit, 2026-10-09): a thumbnail drawn onto a canvas WITHOUT a crossorigin request
+// that the host actually honors leaves that canvas "not origin-clean" forever -- every later toDataURL/
+// getImageData on it throws SecurityError, and the taint propagates to any OTHER canvas it's later drawn onto
+// (js/honey.js's own HM_CTRL.snapshot() reads the shared honeycomb canvas, which these baked tiles are drawn
+// onto). Most of the corpus (AIC, Cleveland, Commons -- tools/gallery.py's own GL_CORS_HOSTS-equivalent list,
+// js/gallery.js's GL_CORS_HOSTS) isn't on a host that answers a CORS request, so requesting crossorigin from
+// them would just fail the LOAD entirely (gallery.js's own glCORS() comment covers the same ground). The fix
+// here is the other half of that same rule: request crossorigin from the hosts that do support it (NGA, the
+// Rijksmuseum's IIIF host, the Met, SMK) so those tiles stay readable, and for every other remote host, never
+// draw the real pixels onto a canvas at all -- fill with the painting's own dominant color instead (already
+// computed, pmHex()), which keeps the honeycomb's shared canvas genuinely readable for snapshot() no matter
+// which paintings happen to be on screen, at the cost of a plain color tile for most non-local paintings. Our
+// own local copies (img/gallery/<path>, the "L" code in thumbs.txt) are same-origin and always safe either way.
+function pmSafeHost(url) {
+  try { return GL_CORS_HOSTS.has(new URL(url, location.href).hostname); } catch (e) { return false; }
+}
 function pmImages(onReady) {
   const cache = new Map(), bigs = new Map();   // i -> { st: 0 loading | 1 ready | 2 failed, bm, ar, used } ; i -> HTMLImageElement (kept for the big tiles)
   let flying = 0, frame = 0, dead = false;
-  const bake = (i, img, crop) => {
+  const bake = (i, img, crop, safe) => {
     const nw = img.naturalWidth, nh = img.naturalHeight;
     let sx = 0, sy = 0, sw = nw, sh = nh;
     if (crop && crop[2] - crop[0] > 50 && crop[3] - crop[1] > 50) { sx = crop[0] / 1000 * nw; sy = crop[1] / 1000 * nh; sw = (crop[2] - crop[0]) / 1000 * nw; sh = (crop[3] - crop[1]) / 1000 * nh; }
     const src = { sx, sy, sw, sh }, m = Math.min(sw, sh);
     const cv = document.createElement("canvas"); cv.width = cv.height = PM_BAKE;
-    cv.getContext("2d").drawImage(img, sx + (sw - m) / 2, sy + (sh - m) / 2, m, m, 0, 0, PM_BAKE, PM_BAKE);
+    const cx = cv.getContext("2d");
+    if (safe) cx.drawImage(img, sx + (sw - m) / 2, sy + (sh - m) / 2, m, m, 0, 0, PM_BAKE, PM_BAKE);
+    else { cx.fillStyle = pmHex(i); cx.fillRect(0, 0, PM_BAKE, PM_BAKE); }
     return { cv, src };
   };
   function want(list) {   // list: gallery indices, most wanted first; also tells which ones need the full picture
     frame++;
     for (const [i, big] of list) {
       const e = cache.get(i);
-      if (e) { e.used = frame; if (big && e.st === 1 && !bigs.has(i) && e.url) pmBigLoad(i, e); continue; }
+      if (e) { e.used = frame; if (big && e.safe && e.st === 1 && !bigs.has(i) && e.url) pmBigLoad(i, e); continue; }
       if (flying >= PM_FLIGHT) continue;
       const t = pmThumb(i); if (!t) { cache.set(i, { st: 2, used: frame }); continue; }
-      const ent = { st: 0, used: frame, url: t.url, crop: t.crop };
-      const img = new Image(); img.decoding = "async"; ent.img = img;
+      const local = t.url.startsWith("img/gallery/"), safe = local || pmSafeHost(t.url);
+      const ent = { st: 0, used: frame, url: t.url, crop: t.crop, safe };
+      const img = new Image(); img.decoding = "async"; if (!local && safe) img.crossOrigin = "anonymous"; ent.img = img;
       cache.set(i, ent); flying++;
       img.onload = () => {
         flying--; ent.img = null; if (dead) return;
         (img.decode ? img.decode().catch(() => {}) : Promise.resolve()).then(() => {
           if (dead) return;
-          try { const b = bake(i, img, t.crop); ent.bm = b.cv; ent.src = b.src; ent.st = 1; ent.t0 = performance.now(); if (big) { bigs.set(i, img); trimBig(); } } catch (err) { ent.st = 2; }
+          // never hand an unsafe-host image to ctx.drawImage() directly (that's what taints the shared canvas,
+          // js/trail.js's HM_CTRL.snapshot() included) -- only the baked square (itself safe: see bake()) goes
+          // up for those; "big" stays reserved for a host we know answers a real CORS request
+          try { const b = bake(i, img, t.crop, safe); ent.bm = b.cv; ent.src = b.src; ent.st = 1; ent.t0 = performance.now(); if (big && safe) { bigs.set(i, img); trimBig(); } } catch (err) { ent.st = 2; }
           onReady();
         });
       };
@@ -371,8 +393,9 @@ function pmImages(onReady) {
     }
   }
   function pmBigLoad(i, e) {
-    if (e.bigLoading) return; e.bigLoading = true;
-    const img = new Image(); img.decoding = "async";
+    if (e.bigLoading || !e.safe) return; e.bigLoading = true;   // unsafe hosts never get a raw drawImage -- the baked square (e.bm) covers them
+    const local = e.url.startsWith("img/gallery/");
+    const img = new Image(); img.decoding = "async"; if (!local) img.crossOrigin = "anonymous";
     img.onload = () => { if (dead) return; bigs.set(i, img); trimBig(); onReady(); };
     img.src = e.url;
   }

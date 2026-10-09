@@ -651,6 +651,126 @@ function glPaintMask(cv, P, hex) {
   x.putImageData(out, 0, 0);
 }
 
+// ---------- regions (Option A, David's palette-engine brief, 2026-10-09): SLIC + RAG-merge color regions,
+// precomputed offline (tools/regions_build.py) into data/regions/d/NNN.json, same shard/order as data/gallery/
+// so a painting's regions live at the same index. Each shard entry is null (no cached image, or nothing cleared
+// the area floor) or { w, h, rle, regions: [{a: share, p: base64 pool (gallery.py's pack_pool scheme)}] }.
+// Labels stay honest: "this area" -- a Background/Figure split was tested (region centroid vs the image center/
+// border) and dropped, see the big comment at the top of regions_build.py for why (a surrounding background's
+// centroid reads as "central" too, and unsupervised segmentation splits one person into several same-colored
+// pieces rather than one "figure" blob) -- not reliable enough to name.
+const GL_REGIONS_CACHE = new Map();   // shard index -> Promise<array>
+function glRegionsShard(i) {
+  const shard = Math.floor(i / GAL.shard);
+  if (!GL_REGIONS_CACHE.has(shard)) {
+    const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+    GL_REGIONS_CACHE.set(shard, fetch(`data/regions/d/${String(shard).padStart(3, "0")}.json${v}`).then(r => r.ok ? r.json() : null).catch(() => null));
+  }
+  return GL_REGIONS_CACHE.get(shard);
+}
+function glRegionsFor(i) {
+  return glRegionsShard(i).then(arr => (arr && arr[i % GAL.shard]) || null);
+}
+// base64 bytes of (label, runlen) pairs -> a flat Uint8Array of w*h labels (tools/regions_build.py's rle_encode, mirrored)
+function glRleDecode(b64, w, h) {
+  let bin; try { bin = atob(b64); } catch (e) { return null; }
+  const out = new Uint8Array(w * h);
+  let o = 0;
+  for (let i = 0; i + 1 < bin.length && o < out.length; i += 2) {
+    const v = bin.charCodeAt(i), run = bin.charCodeAt(i + 1);
+    for (let k = 0; k < run && o < out.length; k++) out[o++] = v;
+  }
+  return out;
+}
+// paints cv (sized to rd.w/rd.h, the small stored grid -- upsampled by the canvas's own CSS object-fit:contain,
+// same trick glPaintMask relies on) dim everywhere except region regionLabel (1-based; grid value 0 = no region)
+function glPaintRegionMask(cv, rd, regionLabel) {
+  const w = rd.w, h = rd.h, labels = glRleDecode(rd.rle, w, h); if (!labels) return false;
+  const n = w * h, a = new Float32Array(n);
+  for (let j = 0; j < n; j++) a[j] = labels[j] === regionLabel ? 1 : 0;
+  // a small box blur so the (already-small) grid's own cell edges don't stair-step when upsampled to screen size
+  const blur1 = (src, horiz) => {
+    const out = new Float32Array(n);
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      let s = 0, c = 0;
+      for (let d = -1; d <= 1; d++) {
+        const xx = horiz ? x + d : x, yy = horiz ? y : y + d;
+        if (xx >= 0 && yy >= 0 && xx < w && yy < h) { s += src[yy * w + xx]; c++; }
+      }
+      out[y * w + x] = s / c;
+    }
+    return out;
+  };
+  const sm = blur1(blur1(a, true), false);
+  cv.width = w; cv.height = h;
+  const x = cv.getContext("2d"), out = x.createImageData(w, h);
+  for (let j = 0; j < n; j++) {
+    const o = j * 4; out.data[o] = 14; out.data[o + 1] = 13; out.data[o + 2] = 11; out.data[o + 3] = Math.round((1 - sm[j]) * 170);
+  }
+  x.putImageData(out, 0, 0);
+  return true;
+}
+// which region (1-based label, or 0 = none) sits at a fraction (fx,fy) of the image, 0..1 each way
+function glRegionAt(rd, fx, fy) {
+  const labels = glRleDecode(rd.rle, rd.w, rd.h); if (!labels) return 0;
+  const x = Math.min(rd.w - 1, Math.max(0, Math.floor(fx * rd.w))), y = Math.min(rd.h - 1, Math.max(0, Math.floor(fy * rd.h)));
+  return labels[y * rd.w + x];
+}
+// A region's own compact palette sheet (By area / Diverse / Stands out, the shared slider, every chip opening
+// its color page in one tap) -- js/paintzoom.js's Region tool opens this once a tap lands on a region. The
+// label always reads "this area": no Background/Figure guess (see tools/regions_build.py's own comment for why
+// that was tested and dropped -- not reliable enough to name). onClose fires once, however the sheet closes
+// (my own call, a swipe, or a scrim tap), so the caller can clear its highlight either way.
+function glRegionSheet(region, onClose) {
+  const pool = glPoolDecode(region.p);
+  let curK = Math.min(6, pool.length), mode = "area", kCtl = null;
+  const flatPrior = new Array(13).fill(0);   // a region has no painter/archive hue context, same fallback as js/studio.js's PV_FLAT_PRIOR
+  const modeSet = (m, k) => {
+    if (m === "area") return { pal: glPoolByArea(pool, k) };
+    if (m === "diverse") return { pal: glPoolDiverse(pool, k) };
+    if (m === "out") return { pal: glStandOut(pool, k, flatPrior) };
+    return null;
+  };
+  const curSet = () => modeSet(mode, Math.min(curK, pool.length)) || modeSet("area", curK);
+  const { sh, close } = sheet(`
+    <div class="rgs-head"><b>This area</b><span>${Math.round(region.a * 100)}% of the canvas</span></div>
+    <div class="seg rgs-modes" role="group" aria-label="Palette type">
+      <button data-rgm="area" aria-pressed="true">By area</button>
+      <button data-rgm="diverse" aria-pressed="false">Diverse</button>
+      <button data-rgm="out" aria-pressed="false">Stands out</button>
+    </div>
+    <div class="pr-slide gl-slide rgs-slide" data-rgslide hidden><input type="range" data-rgk aria-label="How many colors"><span class="gl-kn-t" data-rgkn></span></div>
+    <div class="palette gl-strip" data-rgswatches></div>
+    <div class="pal-names" data-rgrows></div>
+    <p class="fine">This painting's photograph, read just inside this one area. Regions are found by color, not by what they show -- so "this area" is honest where a guessed object name wouldn't be.</p>
+  `, { lock: false });
+  sh.classList.add("rgs-sheet", "gl-pal-ui");   // inherits the painting page's own slider/stepper/strip styling
+  const draw = () => {
+    const set = curSet(), pal = set.pal || [];
+    sh.querySelectorAll("[data-rgm]").forEach(b => { const on = b.dataset.rgm === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+    const slide = sh.querySelector("[data-rgslide]"), inp = slide.querySelector("input"), max = Math.max(2, Math.min(pool.length, 8)), kk = Math.min(Math.max(curK, 2), max);
+    slide.hidden = pool.length <= 2;
+    if (!slide.hidden) {
+      if (!kCtl) kCtl = countify(inp, { min: 2, max, value: kk, out: sh.querySelector("[data-rgkn]"), onSet: (v, final) => { curK = v; draw(); if (final) buzz(5); } });
+      else { kCtl.range(2, max); kCtl.set(kk); }
+    }
+    sh.querySelector("[data-rgkn]").textContent = kk + " colors";
+    sh.querySelector("[data-rgswatches]").innerHTML = pal.map(p => `<button class="pal" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
+    sh.querySelector("[data-rgrows]").innerHTML = pal.map(p => {
+      const nm = glName(p.h), fam = !nm.sub && typeof familyOf === "function" && familyOf(p.h);
+      const sub = [nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", glPctTxt(p.share)].filter(Boolean).join(" · ");
+      return `<button class="pal-name" data-swatch="${p.h}"><i style="--c:${p.h}" data-ink="${ink(p.h)}"></i><b>${esc(nm.t)}</b><span>${esc(sub)}</span><em class="mono">${p.h}</em></button>`;
+    }).join("");
+  };
+  sh.querySelector(".rgs-modes").onclick = e => { const b = e.target.closest("[data-rgm]"); if (!b || b.dataset.rgm === mode) return; mode = b.dataset.rgm; buzz(5); draw(); };
+  draw();
+  if (onClose) {
+    const mo = new MutationObserver(() => { if (!sh.isConnected) { mo.disconnect(); onClose(); } });
+    mo.observe(document.body, { childList: true });
+  }
+  return close;
+}
+
 // ---------- a plain color readout, no quiz (David's palette-engine brief, 2026-10-09, D+E): "the press-and-
 // slide loupe doesn't exist on the painting page" / "selecting a color takes you directly to a guessing game;
 // it should just let me select any color". Wired from js/eyedrop.js's onPick on the painting's main image and
@@ -1276,7 +1396,7 @@ function glPage(i, d, fromHex, tol) {
   // open the plain color readout on release -- never js/isolate.js's guessing game, which stays reachable only
   // from the explicit "Test yourself" fold.
   let eyd = null, pickArmed = false;
-  const openLookCloser = () => { buzz(5); glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null }); };
+  const openLookCloser = () => { buzz(5); glZoomOpen({ src: glBig(d.img), alt: d.t, title: d.t, pal: curPal(), pix: lit.ok ? litBuild() : null, galleryIndex: i }); };
   const syncEyd = () => {
     if (eyd) { eyd.detach(); eyd = null; }
     if (pickArmed && canSample && typeof eyedropAttach === "function") {

@@ -2382,6 +2382,34 @@ scenario("studio", "camera screen fails gracefully with no camera", async t => {
   await t.click("[data-back]", { wait: 500 });
   await t.waitFor('.room-sheet[data-room="studio"], .screen.studio', 6000, "Studio after Back");
 });
+// David, 2026-10-09 ("the video feature is confusing"): a refused permission gets its own fix-it line, not the
+// same flat "no camera here" a cameraless Mac gets -- and the live/frozen chrome never implies it records.
+scenario("studio", "camera: a refused permission gets its own fix-it message, and the shutter never implies recording", async t => {
+  await t.open("#shot=studio", { settle: 600 });
+  t.ev("navigator.mediaDevices.getUserMedia = () => Promise.reject(new DOMException('denied', 'NotAllowedError'))");
+  await t.click("[data-eye]", { wait: 500 });
+  await t.waitFor(() => t.$(".screen.eye.nocam") && t.$("#off") && !t.$("#off").hidden, 20000, "the 'no camera' state");
+  t.expect(/camera access/i.test(t.$("#offEyebrow").textContent), `a refused permission should say so, got "${t.$("#offEyebrow").textContent}"`);
+  t.expect(t.$("#offFix").textContent.length > 10, "no fix-it instructions for a refused permission");
+  await t.click("[data-back]", { wait: 500 });
+  // a real (fake-device) stream: the live view names a color, the shutter is a plain circle with a "Freeze"
+  // label (never a square -- that's the video record/stop shape), and a tap announces "Live" with a dot, not red
+  t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 320; c.height = 320;
+    const x = c.getContext("2d"); x.fillStyle = "#4C6B8C"; x.fillRect(0, 0, 320, 320);
+    const stream = typeof c.captureStream === "function" ? c.captureStream() : null;
+    if (stream) navigator.mediaDevices.getUserMedia = () => Promise.resolve(stream);
+  })()`);
+  await t.click("[data-eye]", { wait: 500 });
+  await t.waitFor("#vid", 6000, "the live camera screen");
+  t.expect(t.$("#shutLabel").textContent === "Freeze", `the shutter should say "Freeze" while live, got "${t.$("#shutLabel").textContent}"`);
+  t.expect(!t.$("#liveDot").hidden, "the live dot should show while the feed is live");
+  t.expect(/live/i.test(t.$("#hintText").textContent), `the live hint should say so plainly, got "${t.$("#hintText").textContent}"`);
+  await t.click("#shut", { wait: 400 });
+  t.expect(t.$("#shutLabel").textContent === "Live", `the shutter should say "Live" once frozen, got "${t.$("#shutLabel").textContent}"`);
+  t.expect(t.$("#liveDot").hidden, "the live dot should hide once frozen");
+  t.expect(/frozen/i.test(t.$("#hintText").textContent), `the frozen hint should say so plainly, got "${t.$("#hintText").textContent}"`);
+});
 
 // David, 2026-10-09: the camera eye must read the reticle's exact pixel (or at most a 2x2 average), never a
 // blurred, bigger patch -- tested directly against eyeSample() (js/camera.js) with a hard-edged two-color
@@ -2412,15 +2440,78 @@ scenario("studio", "the camera eye's exact-pixel sampler doesn't blur across a c
   t.expect(got.nearRight === "#0000FF", `~1.5px right of the boundary should still read pure blue (exact pixel, not a blur), got ${got.nearRight}`);
 });
 
+// David, 2026-10-09: "Shades of this" -- point at a dress, get the array of reds that really exist inside it,
+// not the background, skin or shadows. Tested directly against the pipeline (js/camera.js: segPrep/segGrow/
+// segKmeans/segDendrogram/segMaxDistinct/segShades), the same functions the sheet calls, with a synthetic frame
+// a red "dress" (gradient shading + a fold, still one fabric) on a contrasting background with a skin-tone
+// patch and a grey patch, both clearly outside it.
+scenario("studio", "Shades of this: the grown region stays inside the dress, and shares always sum to 100%", async t => {
+  await t.open("#shot=studio", { settle: 300 });
+  const r = t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 300; c.height = 300;
+    const x = c.getContext("2d");
+    x.fillStyle = "#2B2A4C"; x.fillRect(0, 0, 300, 300);
+    const g = x.createLinearGradient(60, 40, 240, 260);
+    g.addColorStop(0, "#A8323F"); g.addColorStop(.5, "#7E1F2B"); g.addColorStop(1, "#5C141E");
+    x.fillStyle = g; x.fillRect(60, 40, 180, 220);
+    x.fillStyle = "rgba(0,0,0,.25)"; x.fillRect(120, 90, 30, 170);
+    x.fillStyle = "#D9A47A"; x.fillRect(90, 10, 60, 30);
+    x.fillStyle = "#9A9A96"; x.fillRect(0, 260, 300, 40);
+    const prep = segPrep(c, 300, 300);
+    const grow = segGrow(prep, .5, .5, 1);
+    const km = segKmeans(prep, grow, Math.min(24, grow.count));
+    const dendro = segDendrogram(km.clusters);
+    const maxD = segMaxDistinct(dendro);
+    const lo = segShades(prep, km, dendro, 2), hi = segShades(prep, km, dendro, maxD);
+    let leaked = false;
+    for (let i = 0; i < grow.mask.length; i++) {
+      if (!grow.mask[i]) continue;
+      const xx = i % grow.sw, yy = Math.floor(i / grow.sw), fx = xx / grow.sw * 300, fy = yy / grow.sh * 300;
+      if (fy < 35 || fy > 262 || fx < 55 || fx > 245) { leaked = true; break; }
+    }
+    return { leaked, maxD, loN: lo.length, hiN: hi.length, loSum: lo.reduce((a, b) => a + b.share, 0), hiSum: hi.reduce((a, b) => a + b.share, 0), count: grow.count };
+  })()`);
+  t.expect(!r.leaked, "the region leaked outside the dress into the skin-tone or grey background");
+  t.expect(r.count > 400, `the grown region looks too small (${r.count} px)`);
+  t.expect(r.loN === 2, `asking for 2 shades returned ${r.loN}`);
+  t.expect(r.hiN === r.maxD, `asking for the max (${r.maxD}) returned ${r.hiN}`);
+  t.expect(Math.abs(r.loSum - 1) < .01, `shares at 2 shades don't sum to 100% (${r.loSum})`);
+  t.expect(Math.abs(r.hiSum - 1) < .01, `shares at the max don't sum to 100% (${r.hiSum})`);
+});
+
+scenario("studio", "Shades of this: the sheet opens on a frozen frame, the count slider is instant, and a name opens its page", async t => {
+  await t.open("#shot=eye:shades", { settle: 1400 });
+  await t.waitFor(".shd-sheet", 6000, "the Shades of this sheet");
+  const n0 = t.$$(".shd-list .shd-row").length;
+  t.expect(n0 >= 2, `only ${n0} shades listed`);
+  const slider = t.$("[data-shd-n]");
+  t.expect(slider, "no 'how many shades' slider");
+  const max = +slider.max;
+  slider._countTo(max);
+  await t.sleep(150);
+  const nMax = t.$$(".shd-list .shd-row").length;
+  t.expect(nMax === max, `asking for the max (${max}) on the slider shows ${nMax} rows`);
+  slider._countTo(2);
+  await t.sleep(150);
+  t.expect(t.$$(".shd-list .shd-row").length === 2, "the slider back at 2 doesn't show 2 shades");
+  const sw = t.$(".shd-list .shd-sw");
+  await t.click(sw, { wait: 200 });
+  t.expect(sw.classList.contains("on"), "tapping a shade's swatch didn't highlight it");
+  const name = t.$(".shd-list .shd-name");
+  await t.click(name, { force: true, wait: 500 });
+  t.expect(t.$(".cp-page") || /^#\/(page|color)\//.test(t.w.location.hash), "tapping a shade's name didn't open its page");
+});
+
 scenario("studio", "photo palette: mode chips, slider and a chip opens its page", async t => {
   await t.open("#shot=studiopv", { settle: 900 });
   await t.waitFor("[data-pvorder] button", 8000, "the photo's palette-type chips");
   const n0 = t.$$(".gl-strip [data-swatch]").length;
   t.expect(t.$$("[data-pvorder] button").length >= 8, `only ${t.$$("[data-pvorder] button").length} palette types on a photo (the painting page has up to 14)`);
+  t.expect(t.$('[data-pvo="diverse"]'), "Diverse isn't offered on a photo (David's palette-engine brief, 2026-10-09: the photo gets the same engine)");
   const other = t.$$("[data-pvorder] button").find(b => !b.classList.contains("on"));
   if (other) await t.click(other, { force: true, wait: 400 });
   const slide = t.$("[data-pvk]");
-  if (slide && !t.$("[data-pvslide]").hidden) { slide.value = slide.max; slide.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(300); }
+  if (slide && !t.$("[data-pvslide]").hidden) { slide._countTo(slide.max ? +slide.max : 20); await t.sleep(300); }
   t.expect(t.$$(".gl-strip [data-swatch]").length >= 3, `only ${t.$$(".gl-strip [data-swatch]").length} chips after changing the controls (was ${n0})`);
   const chip = t.$$(".gl-strip [data-swatch]").find(e => e.getBoundingClientRect().width > 0);
   await t.click(chip, { force: true, wait: 400 });
@@ -2428,6 +2519,24 @@ scenario("studio", "photo palette: mode chips, slider and a chip opens its page"
   await H.back(t);
   t.expect(!t.$(".cp-page"), "Back left the color page open");
   t.expect(t.$("#app").innerText.length > 60, "Back from the color page landed on an empty screen");
+});
+// David's palette-engine brief, 2026-10-09: "Fix js/studio.js's photo palette to use the new engine + Diverse
+// mode" -- By area must be true top-k-by-share (glPoolByArea, not the old vividness-weighted glPoolPick), and
+// Diverse must actually return a palette with the slider wired through countify like every other mode.
+scenario("studio", "photo palette: By area is true top-k-by-share, and Diverse returns a real, slider-driven palette", async t => {
+  await t.open("#shot=studiopv", { settle: 900 });
+  await t.waitFor("[data-pvorder] button", 8000, "the photo's palette-type chips");
+  await t.click('[data-pvo="area"]', { force: true, wait: 400 });
+  const shares = () => t.$$(".gl-strip .pal span").map(s => parseInt(s.textContent, 10) || 0);
+  t.expect(shares()[0] >= Math.max(...shares()), "By area doesn't lead with the biggest color on a photo");
+  await t.click('[data-pvo="diverse"]', { force: true, wait: 400 });
+  const n0 = t.$$("[data-pvswatches] [data-pvj]").length;
+  t.expect(n0 >= 2, "Diverse returned fewer than 2 colors on a photo");
+  const slide = t.$("[data-pvk]");
+  t.expect(slide && !t.$("[data-pvslide]").hidden, "Diverse has no How-many slider");
+  slide._countTo(2);   // always below n0 (the slider's own min is 2, and every photo pool here has >2 colors)
+  await t.sleep(300);
+  t.expect(t.$$("[data-pvswatches] [data-pvj]").length === 2, `the slider didn't redraw Diverse live (still ${t.$$("[data-pvswatches] [data-pvj]").length} chips, was ${n0})`);
 });
 
 // A photo gets the painting page's whole palette engine (David, 2026-10-09): mode chips, the How-many slider,
@@ -3318,6 +3427,36 @@ scenario("paintings", "a color page's In paintings section: presets re-run the q
 // sitting over the real color page underneath, forever: not actually a black page, just one buried under a
 // black curtain nobody pulled back. Fixed by giving glZoomOpen's close() to cleanup.push, the same way every
 // other body-level overlay in this app already protects itself.
+// Option A region segmentation (David's palette-engine brief, 2026-10-09, shipped corpus-wide): tools/
+// regions_build.py precomputes a few coherent color regions per painting (data/regions/d/NNN.json, same shard/
+// order as data/gallery/). The Region tool needs no live pixel read at all (eydMap is pure geometry), so it
+// works even where Pick/Where can't (a non-CORS museum host) -- this test doesn't need the Commons CORS mock
+// the other Look-closer tests use.
+scenario("paintings", "Look closer's Region tool: tap lights a region and opens its own palette sheet, every mode and the slider working", async t => {
+  await t.open("#/gallery/12", { settle: 800 });
+  await t.click(await t.waitFor("[data-glcloser]", 10000, "the Look closer button"), { wait: 700 });
+  const regionBtn = await t.waitFor('[data-glzv="region"]:not([hidden])', 8000, "the Region tool (region data for this painting)");
+  await t.click(regionBtn, { force: true, wait: 400 });
+  const img = t.$(".glz-img"), r = img.getBoundingClientRect();
+  // try a few points: a region grid has real gaps near hard edges, so one honest retry keeps this from being flaky
+  let ok = false;
+  for (const [fx, fy] of [[0.3, 0.3], [0.5, 0.5], [0.7, 0.4], [0.4, 0.7]]) {
+    t.ev(`(() => { const img = document.querySelector(".glz-img"), r = img.getBoundingClientRect(); img.dispatchEvent(new MouseEvent("click", { bubbles: true, clientX: r.left + r.width * ${fx}, clientY: r.top + r.height * ${fy} })); })()`);
+    await t.sleep(500);
+    if (t.$(".rgs-sheet")) { ok = true; break; }
+  }
+  t.expect(ok, "tapping the image in Region mode never opened a region palette sheet");
+  t.expect(t.$(".glz-cv").classList.contains("on"), "the region didn't light up (soft mask) on the painting");
+  t.expect(/This area/.test(t.text(".rgs-head")), "the region sheet doesn't say \"This area\" (an honest label, no guessed object name)");
+  const n0 = t.$$("[data-rgswatches] [data-swatch]").length;
+  t.expect(n0 >= 1, "the region's palette strip has no chips");
+  await t.click('[data-rgm="diverse"]', { force: true, wait: 400 });
+  t.expect(t.$('[data-rgm="diverse"]').classList.contains("on"), "Diverse didn't become the active region palette mode");
+  const slide = t.$("[data-rgk]");
+  if (slide && !t.$("[data-rgslide]").hidden) { slide._countTo(2); await t.sleep(300); t.expect(t.$$("[data-rgswatches] [data-swatch]").length === 2, "the region slider didn't redraw its palette live"); }
+  await t.click(t.$("[data-rgswatches] [data-swatch]"), { force: true, wait: 600 });
+  await t.waitFor(".cp-page", 8000, "a color page after tapping a region-palette chip");
+});
 scenario("paintings", "Look closer on a painting then swiping back (popstate) never leaves the color page under a stuck dark scrim", async t => {
   await t.open("#/color/cobalt", { settle: 800 });
   const sec = await t.waitFor("[data-glin]", 12000, "the In paintings section");
@@ -3480,6 +3619,29 @@ scenario("sets", "Pair with… offers Point your camera and From a photo; From a
   await t.click("[data-sx-photo-done]", { force: true, wait: 800 });
   await t.waitFor(() => /^#\/set\//.test(t.w.location.hash) && t.$(".sp-page .sp-strip"), 12000, "Done opened the set page");
   t.expect(t.$$(".sp-names .sp-name").length === 3, "the set from the photo doesn't hold three colors");
+});
+// window.cameraPick itself (js/camera.js): a fake camera stream stands in for getUserMedia, two "Add" picks and
+// Done, and the set page opens with Teal plus both camera picks -- the real door settray's "Point your camera" uses.
+scenario("sets", "Pair with… Point your camera: a fake stream, a pick and Done open the pair page", async t => {
+  SP.placed();
+  await t.open("#/color/teal", { settle: 800, keepState: true });
+  await t.click(await t.waitFor("[data-sx-pair]", 12000, "the Pair with… button"), { wait: 600 });
+  await t.waitFor("[data-sx-cam]", 6000, "Point your camera");
+  t.ev(`(() => {
+    const c = document.createElement("canvas"); c.width = 320; c.height = 320;
+    const x = c.getContext("2d");
+    x.fillStyle = "#8C2F39"; x.fillRect(0, 0, 320, 160);
+    x.fillStyle = "#3F6B52"; x.fillRect(0, 160, 320, 160);
+    const stream = typeof c.captureStream === "function" ? c.captureStream() : null;
+    if (stream) navigator.mediaDevices.getUserMedia = () => Promise.resolve(stream);
+  })()`);
+  await t.click("[data-sx-cam]", { force: true, wait: 600 });
+  await t.waitFor(".screen.eye #vid", 6000, "the camera screen");
+  await t.click("#shut", { wait: 400 });
+  await t.click(await t.waitFor("#addBtn", 4000, "the Add button (pick mode)"), { wait: 400 });
+  await t.click(await t.waitFor("#doneBtn", 4000, "the Done button in the picks strip"), { wait: 600 });
+  await t.waitFor(() => /^#\/pair\//.test(t.w.location.hash) && t.$(".sp-page .sp-pair"), 12000, "Done opened the pair page");
+  t.expect(t.$$(".sp-pair .sp-plate").length === 2, "expected Teal and the one camera pick as a pair");
 });
 scenario("sets", "a pair page: facts and paintings and Add a color makes a trio", async t => {
   SP.placed();

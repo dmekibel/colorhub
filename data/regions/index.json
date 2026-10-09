@@ -1,0 +1,1 @@
+{"v": 1, "n": 23778, "shard": 100, "withRegions": 23762, "params": {"workSide": 500, "gridSide": 64, "nSegments": 220, "compactness": 12, "mergeThresh": 45, "minRegionShare": 0.01, "regionPoolK": 8}}
