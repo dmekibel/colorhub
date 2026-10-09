@@ -209,6 +209,15 @@
 .gl-strip .pal[data-ink="dark"],.pal-name i[data-ink="dark"]{color:rgba(14,13,11,.78)}
 .gl-strip .pal[data-ink="light"],.pal-name i[data-ink="light"]{color:rgba(255,255,255,.88)}
 .gl-strip .pal,.gl-pal-ui .pal-name{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+/* "Where" glyph (David, relayed 2026-10-09): a tap on the chip itself opens the color's page now; this small
+   corner control is the one explicit way left to locate it on the canvas. 24px hit target (padding, not size)
+   so it stays tappable without crowding the chip's own percentage label. */
+/* 28px box + padding keeps the tap target close to this app's other new controls (countify's 32px
+   .cnt-b) without the circle itself dominating a narrow, low-share chip (craft critique, 2026-10-09) */
+.pal-where{position:absolute;top:0;right:0;width:28px;height:28px;padding:3px;box-sizing:content-box;display:grid;place-items:center;opacity:.78;border-radius:50%}
+.pal-where:active{opacity:1;background:rgba(0,0,0,.2)}
+.pal-where svg{width:14px;height:14px}
+.gl-strip .pal.loc .pal-where{opacity:1}
 .gl-modes-f{position:relative;margin:8px calc(-1 * var(--g)) 0}
 .gl-modes-f::before,.gl-modes-f::after{content:"";position:absolute;top:0;bottom:0;width:36px;z-index:1;pointer-events:none;opacity:0;transition:opacity .2s}
 .gl-modes-f::before{left:0;background:linear-gradient(90deg,var(--ground) 20%,transparent)}
@@ -219,12 +228,19 @@
 .gl-modes button{flex:none;height:40px;padding:0 14px;border-radius:999px;font:500 14px/1 var(--sans);color:var(--soft);background:var(--s1,#171512);box-shadow:inset 0 0 0 1px var(--line,rgba(236,232,223,.10));transition:background .12s,color .12s,transform .12s}
 .gl-modes button:active{transform:scale(.96);background:var(--s3,#2B2823)}
 .gl-modes button.on{background:var(--sel-fill,#2B2823);color:var(--sel-ink,var(--ink));box-shadow:var(--sel-ring,inset 0 0 0 1.5px rgba(236,232,223,.22))}
-.gl-pal-ui .gl-slide{display:flex;align-items:center;gap:12px;margin:2px 0 0;height:44px}
+.gl-pal-ui .gl-slide{display:flex;align-items:center;gap:10px;margin:2px 0 0;height:44px}
 .gl-pal-ui .gl-slide[hidden]{display:none}
-.gl-pal-ui .gl-slide input{height:44px}
+.gl-pal-ui .gl-slide input{flex:1;height:44px}
 .gl-pal-ui .gl-slide input::-webkit-slider-thumb{width:24px;height:24px;margin-top:-10px}
 .gl-pal-ui .gl-slide input::-moz-range-thumb{width:24px;height:24px}
-.gl-kn-t{flex:none;min-width:64px;text-align:right;font:500 14px/1 var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}
+.gl-kn-t{flex:none;min-width:58px;text-align:center;font:500 14px/1 var(--sans);color:var(--soft);font-variant-numeric:tabular-nums}
+/* countify()'s own +/- stepper (js/core.js), reused here for the How-many-colors slider (2026-10-09: every
+   palette mode gets this slider now, not just By area) -- no shared base style exists yet for .cnt-step/.cnt-b
+   anywhere in the app, so this page styles its own instance of it, to match the mode chips beside it. */
+.gl-pal-ui .cnt-step{flex:none;display:flex;align-items:center;gap:4px}
+.gl-pal-ui .cnt-b{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--ink);background:var(--s1,#171512);box-shadow:inset 0 0 0 1px var(--line,rgba(236,232,223,.10));transition:background .12s,transform .12s}
+.gl-pal-ui .cnt-b:active{transform:scale(.9);background:var(--s3,#2B2823)}
+.gl-pal-ui .cnt-b:disabled{opacity:.32}
 .gl-where{display:flex;align-items:center;justify-content:space-between;gap:10px;height:44px;margin-top:2px}
 .gl-where[hidden]{display:none}
 .gl-where>span{font:400 14px/1.2 var(--sans);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
@@ -232,8 +248,12 @@
 .gl-where-seg button{height:36px;padding:0 12px;border-radius:999px;font:500 14px/1 var(--sans);color:var(--soft);transition:background .12s,color .12s}
 .gl-where-seg button.on{background:var(--sel-fill,#2B2823);color:var(--sel-ink,var(--ink));box-shadow:var(--sel-ring,inset 0 0 0 1.5px rgba(236,232,223,.22))}
 .gl-pal-ui .gl-cap{display:flex;align-items:baseline;gap:10px;min-height:0;margin:4px 0 2px;max-width:none}
-.gl-cap-t{flex:1;min-width:0;min-height:32px;padding:0;text-align:left;font:400 14px/1.4 var(--sans);color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.gl-cap.open .gl-cap-t{white-space:normal}
+/* David (screenshot, Madrazo's "La Marquise d'Hervey Saint-Denys en Diane"): the short caption ("Vivid and rare
+   for this painter") was cut by a single-line nowrap+ellipsis once the row got tight. Two lines, never cut
+   mid-word, still compact -- collapsed captions are one short sentence, so this rarely even reaches line 2. */
+.gl-cap-t{flex:1;min-width:0;min-height:32px;padding:0;text-align:left;font:400 14px/1.4 var(--sans);color:var(--soft);
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;text-overflow:ellipsis;white-space:normal}
+.gl-cap.open .gl-cap-t{-webkit-line-clamp:unset;overflow:visible}
 .gl-cap-t[disabled]{cursor:default;opacity:1}
 .gl-cap .aw-link{flex:none}
 /* a located swatch (tapped on the strip, not its name): an outline plus a quiet ring so it reads as "active"
