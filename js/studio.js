@@ -365,7 +365,7 @@ function palLoad() {
 }
 
 // ---------- the photo/upload palette: every palette type the painting page has (David, 2026-10-09) ----------
-// Reuses js/gallery.js's GL_MODES/glModeSet/glPoolPick/glStandOut/glName/glPctTxt/GL_WHERE directly (gallery.js
+// Reuses js/gallery.js's GL_MODES/glModeSet/glPoolByArea/glPoolDiverse/glStandOut/glName/glPctTxt/GL_WHERE directly (gallery.js
 // loads earlier in index.html, and all js files share one global scope: CLAUDE.md "Tech") rather than forking a
 // second copy of the palette-type engine. "Stands out" has no archive/painter context for a photo, so prior is
 // left null -> glStandOut falls back to glHueAll() (the whole painting corpus) only if GAL happens to be loaded;
@@ -383,20 +383,25 @@ const PV_CAP = {
 function palPhotoView(p) {
   const pool = p.pool;
   let curK = 6, mode = "out", where = typeof S !== "undefined" && S && GL_WHERE.some(w => w[0] === S.palWhere) ? S.palWhere : "off", capOpen = false;
+  let pvKCtl = null;   // the countify() controller for [data-pvk], built once, re-ranged per mode (js/core.js)
   let editedPal = null;   // once the visitor edits (remove/replace/nudge/reorder), this overrides the computed set
   let undoPal = null, undoLabel = "";
   const picks = [];   // "Pick from it" taps
   const lit = { img: null, pix: null, ok: true };   // a photo's own pixels are always readable
   const modeSet = (m, k) => {
-    if (m === "out") return { pal: glStandOut(pool, k, PV_FLAT_PRIOR), max: Math.min(pool.length, 24) };
-    if (m === "area") return { pal: glPoolPick(pool, k), max: Math.min(pool.length, 24) };
+    if (m === "out") return { pal: glStandOut(pool, k, PV_FLAT_PRIOR), max: Math.min(pool.length, 20) };
+    if (m === "area") return { pal: glPoolByArea(pool, k), max: Math.min(pool.length, 20) };
+    if (m === "diverse") return { pal: glPoolDiverse(pool, k), max: Math.min(pool.length, 20) };
     if (m === "pick") return { pal: picks.map(h => ({ h, share: 1 / picks.length, pick: true })), max: 12, fixed: true,
       cap: picks.length ? "Colors you took from the photo. Tap it for more, a swatch to open its page." : "Tap the photo to take a color, up to 12." };
     return glModeSet(m, pool, k, null);
   };
   const curSet = () => editedPal ? { pal: editedPal, max: 24, fixed: true, cap: "Edited by hand." } : (modeSet(mode, curK) || modeSet("out", curK));
   const curPal = () => curSet().pal;
-  const have = GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || glModeSet(m[0], pool, 6, null));
+  // "Diverse" (David's palette-engine brief, 2026-10-09: farthest-point sampling in OKLab, guarantees every
+  // distinct hue family in this photo's pool above a small floor gets a seat) is a photo-agnostic mode, same as
+  // out/area/pick -- it operates on the whole pool, not a filtered subset, so it belongs in this always-on list
+  const have = GL_MODES.filter(m => m[0] === "out" || m[0] === "area" || m[0] === "pick" || (m[0] === "diverse" && pool.length > 1) || glModeSet(m[0], pool, 6, null));
   const dom = pool.reduce((a, b) => b.share > a.share ? b : a).h;
   const titleKind = p.photoId != null ? "photo" : null;
   let curTitle = p.title || "";
@@ -410,7 +415,7 @@ function palPhotoView(p) {
     <div class="gl-pal-ui">
     <div class="palette gl-strip" data-pvswatches></div>
     <div class="gl-modes-f" data-pvfade><div class="gl-modes" data-pvorder role="group" aria-label="Palette type">${have.map(m => `<button data-pvo="${m[0]}" aria-pressed="false">${m[1]}</button>`).join("")}</div></div>
-    <div class="pr-slide gl-slide" data-pvslide hidden><input type="range" min="3" max="24" step="1" value="6" data-pvk aria-label="How many colors"><span class="gl-kn-t" data-pvkn>6 colors</span></div>
+    <div class="pr-slide gl-slide" data-pvslide hidden><input type="range" data-pvk aria-label="How many colors"><span class="gl-kn-t" data-pvkn>6 colors</span></div>
     <div class="gl-where" data-pvwhere><span>On the photo</span><div class="gl-where-seg" role="group" aria-label="Show where each color is on the photo">${GL_WHERE.map(([k, t]) => `<button data-pvw="${k}" aria-pressed="false">${t}</button>`).join("")}</div></div>
     <p class="gl-cap" data-pvcap></p>
     <div class="row2 pv-save-row"><button class="btn solid" data-pvsave>Save palette</button><button class="btn ghost" data-pvedit aria-pressed="false">Edit</button></div>
@@ -453,9 +458,13 @@ function palPhotoView(p) {
   const drawPalette = () => {
     const set = curSet(), pal = set.pal;
     el.querySelector("[data-pvorder]").querySelectorAll("button").forEach(b => { const on = b.dataset.pvo === mode; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
-    const slide = el.querySelector("[data-pvslide]"), inp = slide.querySelector("input"), kk = Math.min(curK, set.max);
-    slide.hidden = !!set.fixed || set.max <= 3 || editing;
-    inp.max = set.max; inp.min = 3; inp.value = kk;
+    const slide = el.querySelector("[data-pvslide]"), inp = slide.querySelector("input"), kk = Math.min(Math.max(curK, 2), set.max);
+    slide.hidden = !!set.fixed || set.max <= 2 || editing;
+    if (!slide.hidden) {
+      if (!pvKCtl) pvKCtl = countify(inp, { min: 2, max: Math.max(2, set.max), value: kk, out: el.querySelector("[data-pvkn]"),
+        onSet: (v, final) => { curK = v; drawPalette(); if (final) buzz(5); } });
+      else { pvKCtl.range(2, Math.max(2, set.max)); pvKCtl.set(kk); }
+    }
     el.querySelector("[data-pvkn]").textContent = kk + " colors";
     const def = GL_MODES.find(m => m[0] === mode) || GL_MODES[0], pvc = PV_CAP[mode];
     const full = set.cap || (pvc ? pvc[1] : def[2]), short = mode === "pick" ? full : (pvc ? pvc[0] : def[3]) || full;
@@ -514,8 +523,7 @@ function palPhotoView(p) {
     if (p.photoId != null) learnerLog({ type: "seen", set: pvSet(), src: "photo" });
     el.querySelector("[data-csacts]").appendChild(csActions(pvSet, { only: ["map", "learn", "play", "compare"], back: () => (p.photoId != null ? photoPage(p.photoId, false) : go("studio")) }));
   }
-  el.querySelector("[data-pvk]").oninput = e => { curK = +e.target.value; drawPalette(); };
-  el.querySelector("[data-pvk]").onchange = () => buzz(5);
+  // the How-many slider is wired by countify() itself (built lazily inside drawPalette, see pvKCtl)
   el.querySelector("[data-pvorder]").onclick = e => { const b = e.target.closest("[data-pvo]"); if (b) setMode(b.dataset.pvo); };
   el.querySelector("[data-pvorder]").onscroll = () => glFadeEdges(el.querySelector("[data-pvfade]"), el.querySelector("[data-pvorder]"));
   el.querySelector("[data-pvwhere]").onclick = e => { const b = e.target.closest("[data-pvw]"); if (b) { buzz(5); setWhere(b.dataset.pvw); } };

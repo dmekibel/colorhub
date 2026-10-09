@@ -2324,10 +2324,11 @@ scenario("studio", "photo palette: mode chips, slider and a chip opens its page"
   await t.waitFor("[data-pvorder] button", 8000, "the photo's palette-type chips");
   const n0 = t.$$(".gl-strip [data-swatch]").length;
   t.expect(t.$$("[data-pvorder] button").length >= 8, `only ${t.$$("[data-pvorder] button").length} palette types on a photo (the painting page has up to 14)`);
+  t.expect(t.$('[data-pvo="diverse"]'), "Diverse isn't offered on a photo (David's palette-engine brief, 2026-10-09: the photo gets the same engine)");
   const other = t.$$("[data-pvorder] button").find(b => !b.classList.contains("on"));
   if (other) await t.click(other, { force: true, wait: 400 });
   const slide = t.$("[data-pvk]");
-  if (slide && !t.$("[data-pvslide]").hidden) { slide.value = slide.max; slide.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(300); }
+  if (slide && !t.$("[data-pvslide]").hidden) { slide._countTo(slide.max ? +slide.max : 20); await t.sleep(300); }
   t.expect(t.$$(".gl-strip [data-swatch]").length >= 3, `only ${t.$$(".gl-strip [data-swatch]").length} chips after changing the controls (was ${n0})`);
   const chip = t.$$(".gl-strip [data-swatch]").find(e => e.getBoundingClientRect().width > 0);
   await t.click(chip, { force: true, wait: 400 });
@@ -2335,6 +2336,24 @@ scenario("studio", "photo palette: mode chips, slider and a chip opens its page"
   await H.back(t);
   t.expect(!t.$(".cp-page"), "Back left the color page open");
   t.expect(t.$("#app").innerText.length > 60, "Back from the color page landed on an empty screen");
+});
+// David's palette-engine brief, 2026-10-09: "Fix js/studio.js's photo palette to use the new engine + Diverse
+// mode" -- By area must be true top-k-by-share (glPoolByArea, not the old vividness-weighted glPoolPick), and
+// Diverse must actually return a palette with the slider wired through countify like every other mode.
+scenario("studio", "photo palette: By area is true top-k-by-share, and Diverse returns a real, slider-driven palette", async t => {
+  await t.open("#shot=studiopv", { settle: 900 });
+  await t.waitFor("[data-pvorder] button", 8000, "the photo's palette-type chips");
+  await t.click('[data-pvo="area"]', { force: true, wait: 400 });
+  const shares = () => t.$$(".gl-strip .pal span").map(s => parseInt(s.textContent, 10) || 0);
+  t.expect(shares()[0] >= Math.max(...shares()), "By area doesn't lead with the biggest color on a photo");
+  await t.click('[data-pvo="diverse"]', { force: true, wait: 400 });
+  const n0 = t.$$("[data-pvswatches] [data-pvj]").length;
+  t.expect(n0 >= 2, "Diverse returned fewer than 2 colors on a photo");
+  const slide = t.$("[data-pvk]");
+  t.expect(slide && !t.$("[data-pvslide]").hidden, "Diverse has no How-many slider");
+  slide._countTo(2);   // always below n0 (the slider's own min is 2, and every photo pool here has >2 colors)
+  await t.sleep(300);
+  t.expect(t.$$("[data-pvswatches] [data-pvj]").length === 2, `the slider didn't redraw Diverse live (still ${t.$$("[data-pvswatches] [data-pvj]").length} chips, was ${n0})`);
 });
 
 // A photo gets the painting page's whole palette engine (David, 2026-10-09): mode chips, the How-many slider,
