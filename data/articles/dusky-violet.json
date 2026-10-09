@@ -17,7 +17,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds a color within six units of this swatch in 74 of 23,781 paintings, 0.31 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 42 [2]. That makes it rarer than 52 percent of the named colors in our library [2]. It peaks in the 1900s, present in 0.5 percent of our 1,674 paintings from that decade, 2.2 times the museums' baseline rate [2]. Inside a painting it most often sits as a hidden color, in 60 percent of its 42 appearances by lightness rank [2].\n\nThe earliest match, Bartolomeo Vivarini's work, dates to 1490, more than four centuries before the name's 1912 record, so it marks a look-alike hue in an aged photograph, not a surviving pigment [2]."
+   "body": "Our archive finds a color within six units of this swatch in 74 of 23,781 paintings, 0.31 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 42 [2]. That makes it rarer than 52 percent of the named colors in our library [2]. It peaks in the 1900s, present in 0.5 percent of our 1,674 paintings from that decade, 2.2 times the museums' baseline rate [2]. Inside a painting it most often sits as a hidden color, in 60 percent of its 42 appearances by lightness rank [2].\n\nThe earliest match, Bartolomeo Vivarini's work, dates to 1490, more than four centuries before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment [2]."
   }
  ],
  "aside": {
@@ -102,11 +102,11 @@
  "openers": [
   "Most often hiding in shadow, not standing out, when it turns up in a painting."
  ],
- "words": 238,
+ "words": 250,
  "status": "checked",
  "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": []
  }
 }

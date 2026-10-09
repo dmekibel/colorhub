@@ -1,0 +1,114 @@
+{
+ "slug": "reddish-salmon",
+ "name": "Reddish salmon",
+ "hex": "#F47983",
+ "names": [
+  "Reddish salmon"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Reddish salmon glosses Momo-iro, a Japanese traditional name that literally means peach-colored.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A gloss for Momo-iro",
+   "body": "The library files this hex under *Momo-iro* (桃色), whose kanji name the color of a peach, not a fish [1]. \"Reddish salmon\" is the English gloss chosen for the library so the color reads without the Japanese word, though the gloss describes the hue rather than translating the name [1]. The hex #F47983 is a screen approximation; no exact date or recipe for this shade is recorded in the sources consulted here [1].\n\nIts nearest library neighbor is [[blush-pink]] [1]. The parent hue, [[salmon]], names the wider family this shade sits inside [1].\n\nOther close matches in the library include [[light-coral]] and [[carnation]], both read as almost the same color [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The automated archive tool used for this project could not compute a usable match count for this hex, so no painting-archive figures are given here [2]. The swatch should be read as a screen approximation only, not as evidence of how often the color appears in the archive [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Momo-iro, a Japanese name meaning peach-colored",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Japanese traditional-color data)"
+  },
+  "aka": [
+   "Momo-iro"
+  ],
+  "siblings": [
+   "blush-pink",
+   "light-coral",
+   "carnation"
+  ],
+  "parent": "salmon",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Momo-iro (桃色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub color library, Japanese traditional-color entries",
+  "measured": {
+   "lch": [
+    65,
+    51,
+    19
+   ],
+   "nearest": [
+    [
+     "Blush Pink",
+     7.5
+    ]
+   ]
+  },
+  "archive_note": "no computed archive match available for this hex"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional-color entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field tool, run against this hex, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Momo-iro, the Japanese name behind Reddish salmon, literally mean?",
+   "choices": [
+    "Peach-colored",
+    "Morning mist",
+    "Deep cherry",
+    "Autumn maple"
+   ],
+   "answer": "Peach-colored",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: \"reddish salmon\" is a word-for-word translation of Momo-iro.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reddish salmon's Japanese name, Momo-iro, actually means peach-colored."
+ ],
+ "words": 166,
+ "status": "checked",
+ "checked": {
+  "by": "batch-29",
+  "date": "2026-10-09",
+  "issues": [
+   "Archive field tool returned no usable match data for this hex; field notes say so rather than inventing a count."
+  ]
+ }
+}

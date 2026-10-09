@@ -115,8 +115,8 @@
  ],
  "status": "checked",
  "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": [
    "Exact coining date undocumented; stated as such rather than guessed."
   ]

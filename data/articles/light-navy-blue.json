@@ -1,0 +1,141 @@
+{
+ "slug": "light-navy-blue",
+ "name": "Light Navy Blue",
+ "hex": "#2E5A88",
+ "names": [
+  "Light Navy Blue"
+ ],
+ "tier": "place",
+ "depth": "brief",
+ "lede": "Light Navy Blue is a mid-dark blue, a sibling of [[light-navy]] that carries the institution word *navy* into a 2010 crowd-survey name rather than a dyer's record.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Navy, named for the fleet",
+   "body": "Navy blue is the dark blue of naval uniforms, which spread to police, postmen and most other uniformed trades between about 1910 and 1950 [3]. This compound simply adds *light* to that root, and our library's only record for the exact name is the xkcd 2010 crowd survey [1]. The library files it as an alternate name of [[newport|Newport]], 2.5 units away, a blue Maerz and Paul record from 1922 [1]. Its other near neighbors are [[dusk-blue]] at 2.8 units and [[denim]] at 3.3, close enough to read as the same blue at a glance [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this one, covering at least five percent of the canvas, in 74 of 23,781 paintings, 0.31 percent, as photographed [2]. It is most at home in the 1900s, 26 of the 1,674 paintings we hold from that century, about five times the archive's rate, and inside a painting it most often sits in the mid-tones [2]. The earliest dated match is Giovanni di Paolo's *Adoration of the Magi* of about 1450, centuries before the name; the archive's early centuries are thin, so this is a floor, not a first [2]. These are photographs of aged, varnished paintings, and a color match is not a pigment test [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the institution word navy, with the modifiers light and blue",
+   "first_recorded": "2010 (xkcd color survey)",
+   "source": "ColorHub color library (xkcd 2010; filed under Newport)"
+  },
+  "aka": [],
+  "siblings": [
+   "newport",
+   "dusk-blue",
+   "denim",
+   "sapphire-crayola"
+  ],
+  "parent": "light-navy",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 74,
+  "match": {
+   "de2000": 6.0,
+   "min_cover": 0.05
+  },
+  "measured": {
+   "lch": [
+    37.2,
+    30.1,
+    270.6
+   ],
+   "nearest": [
+    [
+     "Newport",
+     2.5
+    ],
+    [
+     "Dusk Blue",
+     2.8
+    ],
+    [
+     "Denim",
+     3.3
+    ],
+    [
+     "Sapphire (Crayola)",
+     3.3
+    ]
+   ]
+  },
+  "role_top": {
+   "role": "mid",
+   "pct": 50
+  },
+  "first_seen": {
+   "year": 1450,
+   "painter": "Giovanni di Paolo"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: xkcd 2010 survey, ISCC-NBS 1955 crosswalk",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Pastoureau, Blue: The History of a Color",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of word is \"navy\" in a color name like Light Navy Blue?",
+   "choices": [
+    "An institution word, from naval uniform blue",
+    "A plant name",
+    "A mineral name",
+    "A person's name"
+   ],
+   "answer": "An institution word, from naval uniform blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Which older named blue does our library file Light Navy Blue under?",
+   "choices": [
+    "Newport",
+    "Prussian Blue",
+    "Cobalt Blue",
+    "Tiffany Blue"
+   ],
+   "answer": "Newport",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Light Navy Blue is a lighter take on the uniform blue that replaced black for sailors, police and postmen in the early 1900s."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
+  ]
+ },
+ "words": 239
+}

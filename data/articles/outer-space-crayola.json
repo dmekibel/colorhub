@@ -1,0 +1,135 @@
+{
+ "slug": "outer-space-crayola",
+ "name": "Outer Space (Crayola)",
+ "hex": "#2D383A",
+ "names": [
+  "Outer Space (Crayola)"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Outer Space is a Crayola crayon, a near-black blue-grey named for the dark of space rather than for any pigment.",
+ "sections": [
+  {
+   "id": "origin",
+   "title": "Where the name comes from",
+   "body": "Outer Space is listed among Crayola's named crayons, with no coiner or year attached in the sources checked here, so the exact date it entered the box is undocumented [1]. The name reads plainly: it names the color of space itself, the way Crayola also names crayons after fruit or weather [1]. Its nearest named neighbor is [[gunmetal]], only 2.5 units off on screen, with [[black-grey]] and [[pale-gunmetal]] close behind [2]."
+  },
+  {
+   "id": "japan",
+   "title": "A Japanese neighbor, unrelated",
+   "body": "Our library also files this swatch under *Tetsuonando*, \"iron storage,\" a traditional Japanese color name with its own separate record [1]. The two names share only the hex value; nothing ties the Crayola crayon to the Japanese dye tradition [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within range of this swatch in 702 of 23,781 paintings, 2.95 percent, as photographed; narrowing to at least five percent of the canvas leaves 416 [3]. That makes it more common than 81 percent of the named colors in our library [3]. It most often plays a mid-tone, in 49 percent of those 416 paintings by lightness rank, so varnish cannot fake the result [3].\n\nFra Angelico is its most devoted painter, present in 4 of his 16 works here, 5.1 times the rate expected from the museums those paintings come from [3]. The earliest match dates to 1099, centuries before any crayon existed, a floor and not a first, since the archive's early centuries are thin [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of space",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Tetsuonando (iron storage)"
+  ],
+  "siblings": [
+   "gunmetal",
+   "black-grey",
+   "pale-gunmetal",
+   "cannon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Tetsuonando (鉄御納戸, iron storage)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 702,
+  "n_within_painting": 416,
+  "pct_archive": 2.95,
+  "rank_pct": 81,
+  "measured": {
+   "lch": [
+    23,
+    5,
+    215
+   ],
+   "nearest": [
+    [
+     "Gunmetal",
+     2.5
+    ],
+    [
+     "Black-grey",
+     3.9
+    ],
+    [
+     "Pale Gunmetal",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json), Crayola and Wikipedia entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-o.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color sits closest to Outer Space (Crayola)?",
+   "choices": [
+    "Gunmetal",
+    "Black-grey",
+    "Pale Gunmetal"
+   ],
+   "answer": "Gunmetal",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the Japanese name Tetsuonando and the Crayola name Outer Space share a documented history.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Outer Space shares its hex with a Japanese name for iron storage, but nothing else."
+ ],
+ "words": 250,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

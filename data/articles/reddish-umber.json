@@ -1,0 +1,119 @@
+{
+ "slug": "reddish-umber",
+ "name": "Reddish umber",
+ "hex": "#755D5B",
+ "names": [
+  "Reddish umber"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Reddish umber glosses Hatobanezumi, a Japanese traditional name that literally means dove feather grey, not umber.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A gloss that drifts from its name",
+   "body": "The library files this hex under *Hatobanezumi* (鳩羽鼠), whose kanji name a grey the color of a dove's feathers [1]. The English gloss \"Reddish umber\" describes the hue's warm, muted brown-grey rather than translating the Japanese name, so the two point at the same swatch by different routes [1]. [[umber]] is the English pigment word the gloss borrows, not a look-alike match; the hex #755D5B is a screen approximation, with no recipe or date recorded here [1].\n\nIts nearest library look-alike is [[haematite-red]], about 4.6 units away in LCH space and read as darker and redder than this swatch [1].\n\nFurther along the same family are [[deep-livid-brown]] and [[faded-rosewood]], both read as more vivid than this swatch [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "In the ColorHub painting archive this hue appears in 316 of 23,781 paintings, about 1.3 percent, as photographed [2]. It is markedly more common after 1900, with Gustave Caillebotte, Mary Cassatt and Claude Monet among the painters it turns up most often in, relative to their total output [2]. These are computed color matches on varnished, photographed canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Hatobanezumi, a Japanese name meaning dove feather grey",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Japanese traditional-color data)"
+  },
+  "aka": [
+   "Hatobanezumi"
+  ],
+  "siblings": [
+   "haematite-red",
+   "deep-livid-brown",
+   "faded-rosewood"
+  ],
+  "parent": "umber",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Hatobanezumi (鳩羽鼠)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 316,
+  "measured": {
+   "lch": [
+    42,
+    11,
+    27
+   ],
+   "nearest": [
+    [
+     "Haematite Red",
+     4.6
+    ]
+   ]
+  },
+  "top_painters": [
+   "Gustave Caillebotte",
+   "Mary Cassatt",
+   "Claude Monet"
+  ]
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional-color entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Hatobanezumi, the Japanese name behind Reddish umber, literally mean?",
+   "choices": [
+    "Dove feather grey",
+    "Burnt orange",
+    "Deep indigo",
+    "Rose petal"
+   ],
+   "answer": "Dove feather grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the English gloss \"Reddish umber\" is a direct translation of the Japanese name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Reddish umber's Japanese name actually means dove feather grey."
+ ],
+ "words": 195,
+ "status": "checked",
+ "checked": {
+  "by": "batch-29",
+  "date": "2026-10-09",
+  "issues": [
+   "No recipe or date found for Hatobanezumi in the sources consulted."
+  ]
+ }
+}

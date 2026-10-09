@@ -1,0 +1,136 @@
+{
+ "slug": "illuminating-emerald",
+ "name": "Illuminating Emerald",
+ "hex": "#319177",
+ "names": [
+  "Illuminating Emerald"
+ ],
+ "tier": "pigment",
+ "depth": "short",
+ "lede": "Illuminating Emerald is a deep, metallic bluish-green named as a variant of [[emerald]], sold by Crayola as one of its Metallic FX crayons.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A metallic variant of emerald",
+   "body": "The parent word is emerald, the green gem whose name traces through Old French *esmeralde* to the Greek *smaragdos*, meaning simply \"green gemstone\" [1]. \"Illuminating\" is the modifier: Crayola released this shade in 2001 as part of its Metallic FX line, sixteen crayons with a metallic finish whose names were chosen through a contest open to residents of the United States and Canada [2]. It reads darker and more blue-shifted than Crayola's plain Emerald crayon [2].\n\nThe nearest named neighbor by measured color is [[dark-sulphate-green]], with [[paolo-veronese-green]] close by, more vivid [3]. [[scarab]], [[ocean-green]] and [[viridian]] sit further out in the same general family [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for this green in 10 of 23,781 paintings, about 0.04 percent, rarer than 79 percent of the named colors we track, as photographed [4]. The earliest match is dated 1827, in a work by T. Davies; the third-earliest is 1893 and the latest 1940, across 8 dated paintings [4]. The archive's early centuries are thin, so that is a floor, not a first, and as a named crayon the color itself did not exist before 2001 [2][4]. These are photographs of aged, varnished paintings, read as screen colors matched to the swatch, not identifications of any actual metallic pigment [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "emerald (the gemstone), with the modifier \"Illuminating\" from Crayola's Metallic FX naming contest",
+   "first_recorded": "2001, Crayola Metallic FX crayons",
+   "source": "Wikipedia, \"List of Crayola crayon colors\""
+  },
+  "aka": [],
+  "siblings": [
+   "dark-sulphate-green",
+   "paolo-veronese-green",
+   "scarab"
+  ],
+  "parent": "emerald",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 10,
+  "measured": {
+   "lch": [
+    54.3,
+    34.9,
+    170.6
+   ],
+   "nearest": [
+    [
+     "Dark Sulphate Green",
+     3.6
+    ],
+    [
+     "Paolo Veronese Green",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "gemstone.org, \"Emerald\"; general reference on the word's Greek/Old French etymology",
+   "loc_kind": null,
+   "url": "https://www.gemstone.org/emerald"
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "Wikipedia, \"List of Crayola crayon colors\", Metallic FX Crayons section",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/List_of_Crayola_crayon_colors"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the parent word \"emerald\" ultimately come from?",
+   "choices": [
+    "Greek smaragdos, meaning green gemstone",
+    "A Crayola employee's surname",
+    "French esmer, meaning shine",
+    "Latin viridis"
+   ],
+   "answer": "Greek smaragdos, meaning green gemstone",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a painting in our archive could have used the exact pigment \"Illuminating Emerald\" before 2001.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "How did Crayola choose names for its 2001 Metallic FX line?",
+   "choices": [
+    "A contest open to U.S. and Canada residents",
+    "A vote among museum curators",
+    "Dictionary names only",
+    "Random generation"
+   ],
+   "answer": "A contest open to U.S. and Canada residents",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Illuminating Emerald is a 2001 Crayola metallic crayon, so no painting before that year could use it by that name."
+ ],
+ "words": 231,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "Crayola naming-contest attribution is for the Metallic FX set, not confirmed for this specific name"
+  ]
+ }
+}

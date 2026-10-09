@@ -1,0 +1,141 @@
+{
+ "slug": "opera-mauve",
+ "name": "Opera Mauve",
+ "hex": "#B784A7",
+ "names": [
+  "Opera Mauve"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Opera Mauve is a dusty pink-purple whose own name is uncertain: the 1930 plate it comes from scanned so poorly that two dictionaries read it two different ways.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name two dictionaries disagree on",
+   "body": "*Mauve* is the French word for the mallow flower, lent to color language in 1856 for mauveine, William Perkin's first aniline dye [1]. Maerz and Paul's 1930 dictionary lists a mauve at plate 42, row H5, which our library dates to a first use of 1927; the plate's scanned print is damaged enough that its optical character recognition read the name as \"Jpera Mauve\" [2]. The ISCC-NBS committee matched that garbled reading to \"era Mauve\" in its own 1955 dictionary, while our library's working name for the same plate cell is \"Opera Mauve\"; books disagree on which reading is right, and neither is certain [2][3].\n\nThe plate's near neighbor at F4, \"Morning Glory\" from 1920, suggests the whole block was a cluster of flower-toned mauves [2]. The nearest look-alikes on file are [[dusty-lavender]] and [[cosmos]], both close by, and [[heather|Heather]], a touch purpler [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A close match to this mauve appears in only 7 of our 23,781 archived paintings, about 0.03 per cent, with the within-painting lens finding it in just 1; that makes it rarer than 88 per cent of our named colors [5]. The sample is too small here to support any claim about when or where it is most common, and the count is as photographed, a screen-color match rather than a pigment test [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "mauve (French for mallow) + a disputed reading of its 1930 dictionary plate cell, \"Opera\" or \"era\"",
+   "first_recorded": "1927 (Maerz & Paul, 1930, plate 42 H5)",
+   "source": "Maerz & Paul, A Dictionary of Color (1930)"
+  },
+  "aka": [
+   "Era Mauve"
+  ],
+  "siblings": [
+   "dusty-lavender",
+   "cosmos",
+   "heather"
+  ],
+  "parent": "mauve",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "bright-mauve",
+    "gloss": "a different, more saturated mauve on our library, not the same plate cell"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "n_archive_hits": 7,
+  "measured": {
+   "lch": [
+    61.1,
+    27.4,
+    336.9
+   ],
+   "nearest": [
+    [
+     "Dusty Lavender",
+     3.1
+    ],
+    [
+     "Cosmos",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (mp-etymology.json): mauve, French cognate of mallow, named for Perkin's 1856 dye",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Maerz & Paul, A Dictionary of Color, plate 42 H 5 (via ColorHub library; OCR read \"Jpera Mauve\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub ISCC-NBS 1955 name index (data/sources/iscc-nbs-names.json), block 240, \"era Mauve\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-o.json), CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive fieldnotes (data/graph/fieldnotes/o.json), 23,781 paintings, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Why is there disagreement over whether this color is called \"Opera Mauve\" or \"era Mauve\"?",
+   "choices": [
+    "The scanned 1930 dictionary plate is damaged, and its text reads ambiguously",
+    "Two different flowers inspired two different names",
+    "Crayola and ISCC-NBS each trademarked a different name",
+    "The color changed between two printings of the same book"
+   ],
+   "answer": "The scanned 1930 dictionary plate is damaged, and its text reads ambiguously",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the word \"mauve\" itself comes from the French name for the mallow flower.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Opera Mauve's own name is a guess: a damaged 1930 scan, read one way by us and another way by the 1955 dictionary."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from ColorHub library/sources data (Maerz & Paul 1930, ISCC-NBS 1955).",
+   "Fixed: field section said 'rarer than 86 per cent'; data/graph/fieldnotes/o.json gives rp=12, i.e. rarer than 88 per cent. Corrected to 88."
+  ]
+ },
+ "words": 242
+}

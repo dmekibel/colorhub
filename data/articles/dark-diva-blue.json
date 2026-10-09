@@ -17,7 +17,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds a color near this swatch in 48 of 23,781 paintings, about 0.2 per cent, as photographed [2]. It is rare before the twentieth century but rises sharply in the 1910s, nearly six times the decade's average rate, led by Edvard Munch [2]. It is also disproportionately present in work from Iran and Norway, well above their average rates in our sample [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
+   "body": "Our archive finds a color within six units of this swatch, covering at least five percent of the canvas, in 48 of 23,781 paintings, about 0.2 per cent, as photographed [2]. It is rare before the twentieth century, then rises in the 1910s: 6 of the 520 paintings we hold from that decade, nearly six times the archive's rate [2]. The counts are small, and three of the 48 are by Edvard Munch [2]. These are computed color matches to photographed, varnished paintings, not pigment identifications [2]."
   }
  ],
  "aside": {
@@ -89,13 +89,15 @@
   }
  ],
  "openers": [
-  "Rare before 1900, then suddenly common in paintings from the 1910s, especially Edvard Munch's."
+  "Rare in older paintings in our archive, then more common in the 1910s, when Edvard Munch used blues like it."
  ],
  "status": "checked",
  "checked": {
   "by": "writer",
   "date": "2026-10-09",
-  "issues": []
+  "issues": [
+   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
+  ]
  },
- "words": 200
+ "words": 209
 }

@@ -1,0 +1,121 @@
+{
+ "name": "Pale Sea Grey",
+ "hex": "#B6CCCA",
+ "names": [
+  "Pale Sea Grey"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pale Sea Grey is a cool, slightly green grey that Ridgway's 1912 standards called Pale Dull Glaucous-Blue, a mouthful ColorHub's library flags itself as obscure.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A plainer name for a Ridgway mouthful",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* records this exact swatch as Pale Dull Glaucous-Blue, on plate XLII, hue 41, tone f [1]. ColorHub's library tags that Ridgway name itself as an \"obscure, qualified or novelty name,\" and files the color here under the plainer, more learnable Pale Sea Grey [1]. The 1955 ISCC-NBS system, citing the same plate, classes it in block 184 [1]. *Glaucous* describes a dull, pale blue-green film, the kind that coats a plum's skin or a young eucalyptus leaf, which is closer to how the swatch actually reads than \"sea\" alone [1].\n\nThe nearest everyday name on file is [[ash]], about 5.5 units of ΔE away [1]. [[slate]], [[grey]] and [[powder-blue|Powder Blue]] sit in the same cool-neutral family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to Pale Sea Grey in 254 of 23,781 paintings (1.07 percent), as photographed, almost entirely as a highlight [2]. It is markedly an Impressionist color here, over seven times the archive average, led by Alfred Sisley, Camille Pissarro and Eugène Boudin, all painters of coastal and river light [2]. It keeps company with Powder Blue and Sky Blue far more than chance, 61 and 22 times the base rate [2]. These are screen approximations of aged, varnished canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a sea-fog grey; Ridgway's own name was Pale Dull Glaucous-Blue",
+   "first_recorded": "Ridgway, 1912, plate XLII",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Pale Dull Glaucous-Blue"
+  ],
+  "siblings": [
+   "ash",
+   "slate",
+   "grey",
+   "powder-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 254,
+  "role": {
+   "highlight": 0.93,
+   "mid": 0.07
+  },
+  "company": [
+   "Powder Blue",
+   "Sky Blue",
+   "Ash"
+  ],
+  "measured": {
+   "lch": [
+    80,
+    8,
+    191
+   ],
+   "nearest": [
+    [
+     "Ash",
+     5.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What did Ridgway's 1912 standards originally call the swatch ColorHub lists as Pale Sea Grey?",
+   "choices": [
+    "Pale Dull Glaucous-Blue",
+    "Dove Grey",
+    "Sea Fog",
+    "Cool Platinum"
+   ],
+   "answer": "Pale Dull Glaucous-Blue",
+   "kind": "pick"
+  },
+  {
+   "q": "Which movement most over-uses Pale Sea Grey in our archive?",
+   "choices": [
+    "Impressionism",
+    "Mughal painting",
+    "Renaissance",
+    "Kalighat"
+   ],
+   "answer": "Impressionism",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Pale Sea Grey renames a Ridgway swatch so clumsy our own library calls it obscure."
+ ],
+ "words": 230,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "pale-sea-grey"
+}

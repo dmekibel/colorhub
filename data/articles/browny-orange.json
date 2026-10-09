@@ -1,0 +1,126 @@
+{
+ "slug": "browny-orange",
+ "name": "Browny Orange",
+ "hex": "#CA6B02",
+ "names": [
+  "Browny Orange"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Browny Orange modifies [[orange]] toward brown, and Paterson's dictionary already reaches for the exact phrase to define a bird's color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A phrase borrowed for a bird",
+   "body": "As its own swatch, Browny Orange is recorded only by the xkcd 2010 crowd survey [1]. But Paterson's *A Dictionary of Colour* defines \"oriole\" as \"a browny orange colour,\" using the exact words for the bird's plumage rather than entering Browny Orange on its own [2].\n\nIts nearest named neighbor is [[xanthine-orange|Xanthine Orange]], only 3.0 units away and read as almost the same color [3]; [[ochre|Ochre]] sits close behind, duller by comparison [3]. [[dirty-orange|Dirty Orange]] is close too, almost the same color [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This color appears in 116 of our 23,781 paintings, about 0.49 percent, more common than 60 percent of our named colors, as photographed [4]. It peaks in paintings from the 1900s, 1.7 times the rate expected from that century's share of the archive, and it is most over-represented in Indian paintings, at 3.6 times the expected rate [4]. Inside a painting it plays an accent in 81 percent of its appearances [4].\n\nThe earliest match dates to a 1240 panel by Master of the Cross 434, 770 years before the xkcd survey; our archive's early centuries are thin, so this is a floor, not a first [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "orange, pulled toward brown",
+   "first_recorded": "2010 as a swatch name (xkcd); the phrase appears earlier in Paterson's dictionary describing a bird",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "xanthine-orange",
+   "ochre",
+   "dirty-orange"
+  ],
+  "parent": "orange",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 116,
+  "match": {
+   "min_cover": 0.02
+  },
+  "measured": {
+   "lch": [
+    55.2,
+    70.5,
+    62.7
+   ],
+   "nearest": [
+    [
+     "Xanthine Orange",
+     3.0
+    ],
+    [
+     "Ochre",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"oriole\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for browny-orange",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which bird does Paterson's dictionary describe with the phrase \"a browny orange colour\"?",
+   "choices": [
+    "Oriole",
+    "Robin",
+    "Warbler",
+    "Kingfisher"
+   ],
+   "answer": "Oriole",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Browny Orange is rarer than average in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Paterson's dictionary used \"browny orange\" to describe an oriole, decades before it became a swatch name."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 206
+}

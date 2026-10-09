@@ -1,0 +1,121 @@
+{
+ "slug": "japanese-violet",
+ "name": "Japanese Violet",
+ "hex": "#5B3256",
+ "names": [
+  "Japanese Violet"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Japanese Violet is a dark reddish-purple named for the sumire, the wild violet flower that gives it its Japanese name.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "In Japan: Sumire-iro",
+   "body": "The name is written 菫色, romanized Sumire-iro, which our color library glosses as \"violet color\" [1]. *Sumire* is the Japanese word for violet, the small spring-flowering plant of the genus *Viola*, and the color is named for it the same way the English word violet is [1]. Our sources do not give a date for when the name was first fixed to this exact shade [1].\n\nThe nearest named neighbor by measured color is [[auricula-purple]], duller than this shade; [[dark-byzantium]] sits close by, also duller [2]. [[light-aubergine]] and [[grape]] sit a little further out [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Japanese Violet in 9 of 23,781 paintings, about 0.04 percent, rarer than 77 percent of the named colors we track, as photographed [3]. The earliest archive match is dated 1853, in a work attributed to Eduardo Cano; the latest is 1915, across 4 dated paintings [3]. The archive's early centuries are thin, so that first date is a floor, not a first [3]. Deep reddish-purples like this one are uncommon across our whole archive, so a handful of paintings is not unusual for this family of colors [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the sumire, the Japanese wild violet flower",
+   "first_recorded": "undocumented in the sources we have",
+   "source": "ColorHub color library: traditional colors of Japan"
+  },
+  "aka": [],
+  "siblings": [
+   "auricula-purple",
+   "dark-byzantium",
+   "light-aubergine"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "菫色 (Sumire-iro)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 9,
+  "measured": {
+   "lch": [
+    27.2,
+    28.2,
+    330.4
+   ],
+   "nearest": [
+    [
+     "Auricula Purple",
+     3.1
+    ],
+    [
+     "Dark Byzantium",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What flower gives Japanese Violet its Japanese name, sumire?",
+   "choices": [
+    "The wild violet",
+    "The iris",
+    "The wisteria",
+    "The chrysanthemum"
+   ],
+   "answer": "The wild violet",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources give an exact date for when this name was first used.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Japanese Violet is named for the same flower as the English word violet, just in Japanese."
+ ],
+ "words": 219,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "slug": "ugly-purple",
+ "name": "Ugly Purple",
+ "hex": "#A442A0",
+ "names": [
+  "Ugly Purple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Ugly Purple is a strong, reddish [[purple]] from the xkcd 2010 crowd-name survey, one of several judgmental names ordinary respondents volunteered rather than a modifier of another word.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A judgment, not a description",
+   "body": "The 2010 xkcd survey let respondents type any name for a swatch, and a number of them reached for blunt opinions like this one instead of a hue word; who first used it beyond the survey is undocumented [1]. The ISCC-NBS block for the region reads \"strong reddish purple\" [1].\n\nOur library also records Orchid Magenta as a near-duplicate of this swatch, within rounding of the same color [1]. Its closest standing colors are [[byzantine]], 4.5 units away by CIEDE2000 and more vivid, [[purply]] at 5.1, purpler and more vivid, and [[purple-plum]] at 5.6, purpler [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering at least 1% of its canvas, within CIEDE2000 4 of it, as photographed [3]. That describes what our particular archive happened to collect, not painting as a whole, and it is not a judgment of the color itself [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a judgmental crowd name, undocumented beyond the 2010 survey",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Orchid Magenta"
+  ],
+  "siblings": [
+   "byzantine",
+   "purply",
+   "purple-plum"
+  ],
+  "parent": "purple",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "min_cover": 0.01,
+  "de2000_threshold": 4
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where does the name Ugly Purple come from?",
+   "choices": [
+    "A respondent's blunt opinion in the 2010 xkcd crowd survey",
+    "A 1912 Ridgway plate",
+    "A paint brand's marketing copy",
+    "Werner's 1821 nomenclature"
+   ],
+   "answer": "A respondent's blunt opinion in the 2010 xkcd crowd survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our 23,781-painting archive has at least one match for Ugly Purple.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Ugly Purple is a judgment, not a hue word: a crowd respondent's opinion from the 2010 xkcd survey, absent from our entire painting archive."
+ ],
+ "words": 172,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Already honest: n_present=0 reported with no backing fieldnotes entry needed since the count is zero. No change."
+  ]
+ }
+}

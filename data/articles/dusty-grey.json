@@ -17,7 +17,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "Our archive finds a color within six units of this swatch in 524 of 23,781 paintings, 2.2 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 268 [2]. That makes it more common than 75 percent of the named colors in our library [2]. It peaks in the 1900s, present in 2.0 percent of our 1,674 paintings from that decade, 1.5 times the museums' baseline rate [2]. Inside a painting it most often sits as a mid-tone, in 39 percent of its 268 appearances by lightness rank [2].\n\nPhilips Wouwerman is its most devoted painter on file, present in 6 of his 36 works here, more than seven times the baseline rate for the museums that hold them [2]. The earliest match dates to 1278, more than six centuries before the name's 1912 record, so it marks a look-alike hue in an aged photograph, not a surviving pigment [2]. It shares canvases with [[blackish-slate|Blackish Grey]] and Dark Grey more often than chance [2]."
+   "body": "Our archive finds a color within six units of this swatch in 524 of 23,781 paintings, 2.2 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 268 [2]. That makes it more common than 75 percent of the named colors in our library [2]. It peaks in the 1900s, present in 2.0 percent of our 1,674 paintings from that decade, 1.5 times the museums' baseline rate [2]. Inside a painting it most often sits as a mid-tone, in 39 percent of its 268 appearances by lightness rank [2].\n\nPhilips Wouwerman is its most devoted painter on file, present in 6 of his 36 works here, more than seven times the baseline rate for the museums that hold them [2]. The earliest match dates to 1278, more than six centuries before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin; it marks a look-alike hue in an aged photograph, not a surviving pigment [2]. It shares canvases with [[blackish-slate|Blackish Grey]] and Dark Grey more often than chance [2]."
   }
  ],
  "aside": {
@@ -102,11 +102,11 @@
  "openers": [
   "One painter, Philips Wouwerman, uses this grey far more than most."
  ],
- "words": 294,
+ "words": 306,
  "status": "checked",
  "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
+  "by": "checker",
+  "date": "2026-10-08",
   "issues": []
  }
 }

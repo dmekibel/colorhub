@@ -1,0 +1,145 @@
+{
+ "slug": "carolina-blue",
+ "name": "Carolina Blue",
+ "hex": "#56A0D3",
+ "names": [
+  "Carolina Blue"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Carolina Blue is a pale, greyed sky blue known today as the color of the University of North Carolina at Chapel Hill, though a swatch close to it already sat in a color atlas the same year the name is first recorded in our sources.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A university blue, or an older swatch",
+   "body": "Wikipedia credits the University of North Carolina at Chapel Hill as this color's namesake, tying it to the school's light blue athletic color; that attribution is the only record we have of the naming itself [1]. Robert Ridgway's 1912 nomenclature for naturalists already carries a very close hue on plate VIII, and the ISCC-NBS system later classified this chip as a brilliant blue, about 3.3 units from that block's reference color [2]. Whether Ridgway's swatch and the university's blue share any real history, or are simply the same pale blue arrived at twice, is not something our sources settle [1][2].\n\nThe nearest named colors on file are [[iceberg]] and [[blue-grey]], at [[columbia-blue|Columbia Blue]] sits in the same family of pale institutional blues, lighter and slightly greyer than this one, and [[powder-blue|Powder Blue]] and [[sky-blue|Sky Blue]] sit further out among its more saturated relatives [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to this blue in 25 of 23,781 paintings, about 0.11 percent, and in 13 by the stricter within-painting measure, which makes it rarer than 65 percent of the named colors we track [3]. Inside those paintings it most often sits as an accent, 46 percent of the 13, rather than a dominant field of color [3]. It is most over-represented in paintings from France, at 2.8 times the expected rate, and peaks in paintings from the 1800s, at 1.1 times expected [3].\n\nThe earliest match in our archive is a 1485 painting attributed to Martin Bernat, with the latest dated match from 1907, 20 paintings in all, a floor and not a first, since the archive's early centuries are thin [3]. That earliest match is 427 years before the name's own earliest record in our sources, 1912: it is a look-alike hue in an aged photograph, not evidence that the named color existed that early [2][3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "University of North Carolina at Chapel Hill (per Wikipedia); a close hue appears separately in Ridgway's 1912 nomenclature",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library, Carolina Blue entry"
+  },
+  "aka": [],
+  "siblings": [
+   "iceberg",
+   "blue-grey",
+   "united-nations-blue",
+   "blue-jeans"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 25,
+  "n_within": 13,
+  "rarer_than_pct": 65,
+  "century_peak": "1800s, 1.1x expected",
+  "country": "France, 2.8x expected",
+  "role": "accent 46%",
+  "measured": {
+   "lch": [
+    63.2,
+    33.9,
+    256.3
+   ],
+   "nearest": [
+    [
+     "Iceberg",
+     3.7
+    ],
+    [
+     "Blue-Grey",
+     4.2
+    ],
+    [
+     "United Nations Blue",
+     4.4
+    ],
+    [
+     "Blue Jeans",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "kind": "web",
+   "cite": "Wikipedia, \"Carolina blue\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Carolina_blue",
+   "n": 1
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 and ISCC-NBS 1955 entries (data/library.json, Carolina Blue)",
+   "loc_kind": null,
+   "url": null,
+   "n": 2
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null,
+   "n": 3
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which university does Wikipedia credit as Carolina Blue's namesake?",
+   "choices": [
+    "University of North Carolina at Chapel Hill",
+    "Columbia University",
+    "Duke University",
+    "University of Michigan"
+   ],
+   "answer": "University of North Carolina at Chapel Hill",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm that the university's blue and Ridgway's 1912 swatch share a documented history.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our painting archive, this blue's earliest match is centuries before the name's first record. What does that gap most likely mean?",
+   "choices": [
+    "An aged photograph happens to match the hue, not proof the color existed by that name",
+    "The university invented the color earlier than 1912",
+    "Ridgway copied the color from a medieval painting",
+    "The archive's dates are wrong"
+   ],
+   "answer": "An aged photograph happens to match the hue, not proof the color existed by that name",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Carolina Blue is named for a university, but a near-identical hue already sat in a 1912 color atlas.",
+  "In our archive, this blue shows up in a painting from 1485 -- centuries before the name existed, by coincidence of hue."
+ ],
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Relation between Ridgway's 1912 swatch and the university naming is not documented in our sources; both left hedged.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 362
+}

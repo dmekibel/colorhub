@@ -1,0 +1,109 @@
+{
+ "slug": "pewter-blue",
+ "name": "Pewter Blue",
+ "hex": "#8BA8B7",
+ "names": [
+  "Pewter Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Pewter Blue is a cool grey-blue named for pewter, the dull metal alloy, but who first paired the two words as a color name is undocumented in the sources consulted here.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A metal's name, undocumented coining",
+   "body": "Our color library carries this name only through a plain wiki-sourced list entry, with no dated plate, dictionary or survey behind it [1]. Pewter is a dull-grey tin alloy long used for tableware, and the pairing with \"blue\" describes the cool, muted cast of this particular grey-blue [1]. Who first used the combined name for this exact swatch is undocumented in our sources [1].\n\nThe nearest named colors by measured distance are [[ethereal-blue]] and [[grey-blue]], both almost the same shade [2]. [[watteau]], [[russian-blue]], [[cadet-grey]] and [[greyish-blue]] sit a little further out, all bluer [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a match for this grey-blue in 334 of them, about 1.4 percent, more common than 71 percent of the named colors we track, as photographed [3]. It peaks in the 1900s, at 2.1 times the expected rate for that century (31 of 1,674 paintings from then), and inside a painting it most often plays a light passage, in 41 percent of its matches, ranked by lightness rather than raw area [3]. Alfred Sisley is its most devoted painter here, using it in 7 of 50 works, 7.4 times the baseline for the museums those works come from [3]. The earliest match is dated 1467; our archive's early centuries are thin, so that date is a floor, not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "pewter, the dull-grey tin alloy; who first combined it with \"blue\" is undocumented",
+   "first_recorded": "undocumented",
+   "source": "ColorHub color library (wiki-sourced list entry)"
+  },
+  "aka": [],
+  "siblings": [
+   "ethereal-blue",
+   "grey-blue",
+   "cadet-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 334,
+  "rank_pct": 71,
+  "peak_century": {
+   "key": 1900,
+   "lift": 2.1
+  },
+  "role": "light, 41% of 209 dated matches",
+  "top_painter": "Alfred Sisley",
+  "first_dated": {
+   "year": 1467
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): list entry, source \"wiki\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, century lift, role and painter lift, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Pewter Blue named after?",
+   "choices": [
+    "Pewter, the dull-grey tin alloy",
+    "A gemstone",
+    "A place in England",
+    "A 1912 Ridgway plate"
+   ],
+   "answer": "Pewter, the dull-grey tin alloy",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Alfred Sisley is the painter most associated with Pewter Blue in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Alfred Sisley used Pewter Blue at 7.4 times the baseline rate for his museum collections."
+ ],
+ "words": 252,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

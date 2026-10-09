@@ -1,0 +1,113 @@
+{
+ "slug": "light-vinaceous-fawn",
+ "name": "Light Vinaceous-Fawn",
+ "hex": "#D0B2A4",
+ "names": [
+  "Light Vinaceous-Fawn"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Vinaceous-Fawn is a paler step off [[vinaceous-fawn|Vinaceous-Fawn]], a muted pink-brown Ridgway named in his 1912 \"vinaceous\" family of wine-tinged naturalist colors.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on a wine-tinged brown",
+   "body": "The name is built by grammar: \"light\" over the parent [[vinaceous-fawn|Vinaceous-Fawn]], itself named from *vinaceus*, wine-colored, combined with fawn, a young deer's coat color [1]. Ridgway's 1912 atlas plates this lighter step at plate XL, hue 13''', tone d, and ISCC-NBS separately filed it in 1955 as block 33 [1]. Measured, it is lighter and notably less saturated than its parent (lightness 75 against 65, chroma 14 against 22) [1].\n\nIts nearest named neighbor is [[sweet-pea|Sweet Pea]], 3.3 units away, almost the same, with [[light-brownish-vinaceous|Light Brownish-Vinaceous]] close behind at 4.2, redder [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale pink-brown in 381 of 23,781 paintings (1.6 percent, as photographed), more common than 74 percent of the named colors we track [2]. It most often plays a hidden color, in 47 percent of its strongest matches; John Singer Sargent carries it in 6 of his 287 works here, and it is most over-represented in paintings from India, at 2.5 times the expected rate [2]. The earliest dated match runs to 900, by Zhao Guangfu, 1,012 years before Ridgway's 1912 record; a floor, not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive modifier: light + Vinaceous-Fawn (from Latin vinaceus, \"wine-colored\", plus fawn)",
+   "first_recorded": "1912 (Ridgway, plate XL); also ISCC-NBS 1955, block 33",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "sweet-pea",
+   "light-brownish-vinaceous",
+   "rose-dawn"
+  ],
+  "parent": "vinaceous-fawn",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 381,
+  "measured": {
+   "lch": [
+    75,
+    14,
+    52
+   ],
+   "nearest": [
+    [
+     "Sweet Pea",
+     3.3
+    ],
+    [
+     "Light Brownish-Vinaceous",
+     4.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XL, hue 13''', tone d; ISCC-NBS 1955, block 33; cited via ColorHub color library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Vinaceous-Fawn is a lightened step off which parent color?",
+   "choices": [
+    "Vinaceous-Fawn",
+    "Russet-Vinaceous",
+    "Rose",
+    "Fawn"
+   ],
+   "answer": "Vinaceous-Fawn",
+   "kind": "pick"
+  },
+  {
+   "q": "In which country is this color most over-represented against the expected rate?",
+   "choices": [
+    "India",
+    "Denmark",
+    "Japan",
+    "France"
+   ],
+   "answer": "India",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Our archive's earliest match for this pale pink-brown runs to 900, over a thousand years before Ridgway named it in 1912."
+ ],
+ "words": 211,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from Ridgway and ISCC-NBS via the color library and archive."
+  ]
+ }
+}

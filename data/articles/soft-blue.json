@@ -1,0 +1,144 @@
+{
+ "slug": "soft-blue",
+ "name": "Soft Blue",
+ "hex": "#6488EA",
+ "names": [
+  "Soft Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Soft Blue is a mid, slightly violet-leaning blue built from modifier grammar — 'soft' plus Blue — first turning up as a name in the 2010 xkcd survey, though the words themselves were already common in print decades before any crowd poll.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, and an older phrase",
+   "body": "Our graph files this name as a modifier compound, 'soft' plus the family word [[blue]], surveyed by xkcd in 2010 rather than drawn from any book or pigment [1]. The phrase 'soft blue' itself is much older in print: Google Books' English-language corpus shows it peaking in the 1850s and rising fastest in the 1820s, though that count covers every sense of the words, not just this color name [2]. By our own nearest-match calculation the swatch sits closest to the ISCC-NBS category 'brilliant purplish blue' — our computed match, not a 1955 dictionary filing [1].\n\nIts real nearest look-alike is [[clear-cadet-blue]], duller than this blue, with [[cornflower]] also duller and a little further off, and [[dusty-blue]] duller and bluer still, a little past that [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this blue in 5 of 23,781 paintings, as photographed, with the stricter within-painting lens counting 4 — rarer than 77 percent of the named colors we track [4]. Two of those matches are by Henri Matisse, both from the 1910s and 1920s, too small a sample for any pattern beyond one painter reaching for it twice [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: 'soft' + the family word Blue",
+   "first_recorded": "2010 (xkcd survey name); the phrase itself is older in print",
+   "source": "ColorHub color library, Soft Blue entry"
+  },
+  "aka": [],
+  "siblings": [
+   "blue",
+   "clear-cadet-blue",
+   "cornflower"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5,
+  "n_within": 4,
+  "rarer_than_pct": 77,
+  "ngram": {
+   "peak": 1850,
+   "rise": 1820,
+   "first": 1800
+  },
+  "measured": {
+   "lch": [
+    58.3,
+    55.8,
+    286.8
+   ],
+   "nearest": [
+    [
+     "Clear Cadet Blue",
+     3.2
+    ],
+    [
+     "Cornflower",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph node: xkcd 2010 color survey (data/graph/nodes-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Ngram cache, English-language corpus, all senses of the words (research/_raw/ngrams)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: look-alike edges (data/graph/edges-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What kind of name is Soft Blue, by our graph's own classification?",
+   "choices": [
+    "A modifier compound: 'soft' + the family word Blue",
+    "A pigment name",
+    "A place name",
+    "A Japanese term"
+   ],
+   "answer": "A modifier compound: 'soft' + the family word Blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the phrase 'soft blue' only appears in English print after the 2010 xkcd survey.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Our archive's two matches for Soft Blue are both by which painter?",
+   "choices": [
+    "Henri Matisse",
+    "Claude Monet",
+    "Johannes Vermeer",
+    "Gustav Klimt"
+   ],
+   "answer": "Henri Matisse",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "The phrase 'soft blue' was already rising in English print a century before any crowd survey named it.",
+  "Henri Matisse is the only painter in our archive to use this exact blue twice."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified as internally consistent with cited ColorHub library/graph/archive data; no book or web source cited for this article's factual claims, no myth-list phrase found, and the claims are already conservatively hedged (undocumented origin, floor-not-first framing, thin-sample caveats)."
+  ]
+ },
+ "words": 222
+}

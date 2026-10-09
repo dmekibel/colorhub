@@ -1,0 +1,130 @@
+{
+ "slug": "yellowish-cinnamon",
+ "name": "Yellowish cinnamon",
+ "hex": "#EC956C",
+ "names": [
+  "Yellowish cinnamon"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Yellowish cinnamon is ColorHub's English name for Akashirotsurubami, a Japanese traditional color meaning \"sawtooth oak,\" a near relative of [[yellowish-camel]]'s \"white oak.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Sawtooth oak",
+   "body": "赤白橡 (Akashirotsurubami) means sawtooth oak, pairing the modifier \"reddish\" with the same shirotsurubami root as Yellowish camel, and landing a shade warmer and pinker [1]. Our sources give no precise date for the name's origin, as is typical of Japanese traditional colors here [1].\n\nIts nearest look-alike is [[apricot-buff]], 2.7 units away, almost the same; [[atomic-tangerine]] at 3.7 reads more vivid, and [[dark-salmon]] at 3.9 duller [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color appears in 0.35 percent of 23,781 paintings, 84 of them as photographed, more common than 50 percent of the names we track [3]. It peaks in the 1500s, found in 0.6 percent of the 2,231 paintings we have from then, 13 of them, 2.3 times the expected rate [3]. Inside a painting it plays an accent 77 percent of the time [3]. The earliest dated match is a panel from 1150, though the archive's early centuries are thin enough that this is a floor, not a first [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the warm, reddish color of sawtooth-oak bark",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [],
+  "siblings": [
+   "apricot-buff",
+   "atomic-tangerine",
+   "dark-salmon",
+   "yellowish-camel"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "赤白橡 (Akashirotsurubami), \"sawtooth oak\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 84,
+  "pct": 0.35,
+  "rank_pct": 50,
+  "measured": {
+   "lch": [
+    69.8,
+    45.4,
+    50.9
+   ],
+   "nearest": [
+    [
+     "Apricot Buff",
+     2.7
+    ],
+    [
+     "Atomic Tangerine",
+     3.7
+    ],
+    [
+     "Dark Salmon",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges, data/graph/edges-y.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Akashirotsurubami, the Japanese name behind Yellowish cinnamon, mean?",
+   "choices": [
+    "Sawtooth oak",
+    "Red maple leaf",
+    "Cinnamon bark",
+    "Autumn persimmon"
+   ],
+   "answer": "Sawtooth oak",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Yellowish cinnamon and Yellowish camel share the same tsurubami (oak) root in Japanese.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Yellowish cinnamon shares its Japanese root word with Yellowish camel: tsurubami, oak."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 52%, current data/graph/fieldnotes says 50% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 184
+}

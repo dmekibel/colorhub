@@ -1,0 +1,129 @@
+{
+ "slug": "mystic-maroon",
+ "name": "Mystic Maroon",
+ "hex": "#AD4379",
+ "names": [
+  "Mystic Maroon"
+ ],
+ "tier": "nature",
+ "depth": "brief",
+ "lede": "Mystic Maroon pairs the vague modifier \"mystic\" with [[maroon]], though the result is a strong purplish red that sits well outside maroon's own brownish territory.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier that overshoots its parent",
+   "body": "Our library traces this name only to a Wikipedia color list, with no first-recorded date given [1]. It modifies [[maroon]] with \"mystic,\" but the resulting swatch, a strong purplish red, sits closer to magenta than to maroon's own brownish red [1]. The ISCC-NBS dictionary's nearest block is \"strong purplish red,\" 4.1 units from that block's centre [1].\n\nIts nearest named neighbor is [[magenta-haze|Magenta Haze]], 2.8 units away and duller [2]. [[maximum-red-purple|Maximum Red Purple]] sits 3.1 units out, read as almost the same color, and [[irresistible|Irresistible]] 4.6 units out, redder [2]. Measured in LCH it reads lightness 45, chroma 50, hue 350 degrees [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this exact color in only 3 of 23,781 paintings (1 by the within-painting lens), rarer than 88 percent of the named colors, as photographed [3]. The sample is too thin here to say more about painters or centuries [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "maroon, intensified with the modifier \"mystic\"",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (a Wikipedia list)"
+  },
+  "aka": [],
+  "siblings": [
+   "magenta-haze",
+   "maximum-red-purple",
+   "irresistible"
+  ],
+  "parent": "maroon",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "maximum-red-purple",
+    "gloss": "a near-identical library name, 3.1 units away"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "rank_pct": 12,
+  "measured": {
+   "lch": [
+    45,
+    50,
+    350
+   ],
+   "nearest_iscc": [
+    "strong purplish red",
+    4.1
+   ],
+   "nearest": [
+    [
+     "Magenta Haze",
+     2.8
+    ],
+    [
+     "Maximum Red Purple",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-m.json): tier, ISCC-NBS block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for mystic-maroon (data/graph/edges-m.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What color does Mystic Maroon modify with the word \"mystic\"?",
+   "choices": [
+    "Maroon",
+    "Magenta",
+    "Burgundy",
+    "Wine"
+   ],
+   "answer": "Maroon",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Mystic Maroon reads as a brownish red, close to plain maroon.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Mystic Maroon's name points to maroon, but the swatch itself is a strong purplish red, far from maroon's own brown."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); archive sample is thin (n=3), so field notes are limited to presence and rank.",
+   "Fixed: field section said 'rarer than 86 percent'; data/graph/fieldnotes/m.json gives rp=12, i.e. rarer than 88 percent. Corrected prose to 88 and field.rank_pct to 12 (the commonness percentile)."
+  ]
+ },
+ "words": 167
+}

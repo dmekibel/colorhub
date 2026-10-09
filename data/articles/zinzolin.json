@@ -1,0 +1,122 @@
+{
+ "slug": "zinzolin",
+ "name": "Zinzolin",
+ "hex": "#6C0277",
+ "names": [
+  "Zinzolin"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Zinzolin is a deep reddish purple whose name's origin our sources do not document.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Origin undocumented",
+   "body": "Our data files Zinzolin from Wikipedia's color lists alone, with no discovery date, person or place attached to the word [1]. It sits deep in the purple family, close to magenta [1].\n\nThe nearest look-alikes are [[seance]], 5.0 units away and purpler, and [[dark-magenta]], 6.1 units away, lighter and more vivid; [[eminence]] follows at 6.4, duller and lighter [2]. Rather than guess at a history we cannot check, we report what the data actually shows: a hex value, a family, and its nearest named neighbors, and leave the word's deeper past undocumented [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive holds enough of this exact color to count as present, as photographed, so we have no century, painter or role data for it [3]. That reflects the limits of our archive's palette, not a claim about the color itself [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library (Wikipedia)"
+  },
+  "aka": [],
+  "siblings": [
+   "seance",
+   "dark-magenta",
+   "eminence",
+   "cellini"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "pct": 0.0,
+  "measured": {
+   "lch": [
+    25.5,
+    65.7,
+    324.7
+   ],
+   "nearest": [
+    [
+     "Seance",
+     5.0
+    ],
+    [
+     "Dark Magenta",
+     6.1
+    ],
+    [
+     "Eminence",
+     6.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (Wikipedia); tier classification \"origin of the name not documented in our data\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges, data/graph/edges-z.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: our sources document who coined the name Zinzolin or when.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which named color sits nearest to Zinzolin in our look-alike data?",
+   "choices": [
+    "Seance",
+    "Dark Magenta",
+    "Eminence",
+    "Cellini"
+   ],
+   "answer": "Seance",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Zinzolin's own origin is undocumented in our sources, honestly left that way."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 152
+}

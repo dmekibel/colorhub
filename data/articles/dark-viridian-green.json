@@ -1,0 +1,155 @@
+{
+ "slug": "dark-viridian-green",
+ "name": "Dark Viridian Green",
+ "hex": "#107F6D",
+ "names": [
+  "Dark Viridian Green"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Dark Viridian Green is a deep, saturated blue-green, Robert Ridgway's darker step down from his own Viridian Green, built on the pigment name viridian.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A pigment's name, one shade darker",
+   "body": "Ridgway placed Dark Viridian Green on plate VII in 1912, hue 37, tone k, directly below [[viridian-green|Viridian Green]] on the same card, itself built on the pigment name [[viridian]] [1]. The ISCC-NBS dictionary filed this darker name again in 1955, block 145, as a moderate green [2]. Maerz and Paul's 1930 dictionary also lists a near-duplicate under a separate name, Spearmint Too, first recorded in 1917 [3]. Its nearest named neighbors on file are [[generic-viridian]] and [[arsenate]], both almost the same at 2.5 to 2.7 CIEDE2000 units [4]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this green, as photographed, in only 8 of 23,781 paintings, 0.03 percent, rarer than 77 percent of the named colors we track [5]. The earliest dated match is an 1885 painting by Auguste Renoir; the archive's early centuries are thin, so this is a floor and not a first [5]. With so few matches, no century or painter stands out against the archive's own baseline [5]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the base color Viridian Green, darkened; ultimately the pigment name viridian",
+   "first_recorded": "Ridgway, Color Standards and Color Nomenclature (1912), plate VII; filed again by ISCC-NBS in 1955, block 145",
+   "source": "Ridgway 1912; ISCC-NBS 1955"
+  },
+  "aka": [],
+  "siblings": [
+   "generic-viridian",
+   "arsenate",
+   "pine-green",
+   "tropical-rainforest"
+  ],
+  "parent": "viridian-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 4,
+  "measured": {
+   "lch": [
+    47.5,
+    33.3,
+    177.2
+   ],
+   "nearest_iscc": [
+    "moderate green",
+    4.0
+   ],
+   "nearest": [
+    [
+     "Generic Viridian",
+     2.5
+    ],
+    [
+     "Arsenate",
+     2.7
+    ],
+    [
+     "Pine Green",
+     3.7
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1885,
+   "years_before_record": null
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature, 1912, plate VII, hue 37, tone k",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "ISCC-NBS, National Bureau of Standards Circular 553, 1955, block 145 (\"moderate green\")",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "book",
+   "cite": "Maerz & Paul, A Dictionary of Color, 1930, \"Spearmint Too\", plate 25 L 12, first recorded 1917",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges-d.json): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What pigment does the name Dark Viridian Green ultimately come from?",
+   "choices": [
+    "Viridian",
+    "Verdigris",
+    "Malachite",
+    "Emerald green"
+   ],
+   "answer": "Viridian",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Maerz and Paul's 1930 dictionary lists a near-duplicate of this color under a different name.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "About how rare is Dark Viridian Green in our painting archive?",
+   "choices": [
+    "Rarer than 77% of named colors",
+    "More common than 90% of named colors",
+    "Exactly average",
+    "The single most common color"
+   ],
+   "answer": "Rarer than 77% of named colors",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Maerz and Paul's 1930 dictionary files a near-duplicate of this color under the name Spearmint Too.",
+  "It is one of the rarest colors we track, found in only 8 paintings of 23,781."
+ ],
+ "words": 179,
+ "status": "checked",
+ "checked": {
+  "by": "batch writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

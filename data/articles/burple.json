@@ -1,0 +1,127 @@
+{
+ "slug": "burple",
+ "name": "Burple",
+ "hex": "#6832E3",
+ "names": [
+  "Burple"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Burple blends blue and purple into one word, a portmanteau the xkcd 2010 crowd color survey recorded with no earlier source behind it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A portmanteau, not a system name",
+   "body": "The name is simply blue plus purple fused together, and our data finds no record of it before the 2010 survey, so its origin there is undocumented rather than traceable to any dictionary or paint chart [1]. Its nearest named neighbor is [[bluish-purple|Bluish Purple]], only 2.3 units away and read as almost the same color [2].\n\nA second, separately coined portmanteau of the same two hues, [[blurple|Blurple]], sits 4.0 units off, a little duller [2]; [[bluey-purple|Bluey Purple]] and [[blue-purple|Blue Purple]] crowd the same small patch of the wheel [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries this color covering at least one percent of its canvas, as photographed [3]. The nearest fashion match on record is still 6.6 units away, a Mondrian-block blue Yves Saint Laurent used in the 1960s, not a close fit [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "blue and purple, fused into one word",
+   "first_recorded": "2010 (xkcd crowd survey); origin otherwise undocumented",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "bluish-purple",
+   "blurple",
+   "bluey-purple",
+   "blue-purple"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "min_cover": 0.01
+  },
+  "measured": {
+   "lch": [
+    39.2,
+    102.2,
+    308.1
+   ],
+   "nearest": [
+    [
+     "Bluish Purple",
+     2.3
+    ],
+    [
+     "Purplish Blue",
+     3.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for burple",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub color graph: fashion twin edges for burple",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What two words does \"Burple\" blend together?",
+   "choices": [
+    "Blue and purple",
+    "Burgundy and purple",
+    "Brown and purple",
+    "Burnt and purple"
+   ],
+   "answer": "Blue and purple",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Burple and Blurple are the same color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Burple and Blurple are two separate crowd-coined blue-purple portmanteaus, only 4 units apart."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 156
+}

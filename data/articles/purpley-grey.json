@@ -1,0 +1,137 @@
+{
+ "slug": "purpley-grey",
+ "name": "Purpley Grey",
+ "hex": "#947E94",
+ "names": [
+  "Purpley Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Purpley Grey is a soft, muted mauve-grey, one of two names the 2010 xkcd color survey built on top of [[purpley]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A family-word compound",
+   "body": "The survey treats \"purpley\" as a small word-family of its own, pairing it here with grey the way it paired [[purpley-pink]] with pink [1]. No book or earlier dictionary in our sources records the name; it is undocumented outside that 2010 survey [1]. Its ISCC-NBS fit is a pale reddish purple, 5.7 units off [1].\n\nIts nearest named neighbor is [[vestal]], 3.1 units away and redder [2]. [[mountbatten-pink]] sits close behind, also redder, with [[dark-lavender]] nearly the same shade at 3.9 units [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 35 of 23,781 paintings, about 0.15 percent, as photographed; a narrower, within-painting search finds it in 17 [3]. That puts it ahead of 63 percent of our named colors [3]. It peaks in the 1900s, present in 8 of 1,674 paintings from that century, about 4.2 times the archive's typical rate [3]. Inside a painting it most often plays a hidden color, in 35 percent of its appearances, found by lightness rank rather than by eye [3].\n\nIts most devoted painter is Claude Monet, who used it in 4 of the 50 of his works in the archive, 7.2 times his museums' baseline rate [3]. The earliest dated match is a work attributed to Sandro Botticelli from 1425, 585 years before the name's earliest record in 2010, a floor and not a first, since the archive's early centuries are thin [3]. That gap marks a look-alike hue in an aged photograph, not proof the color or its name existed that early [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: purpley + grey",
+   "first_recorded": "2010 xkcd color survey",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "vestal",
+   "mountbatten-pink",
+   "dark-lavender",
+   "purple-grey"
+  ],
+  "parent": "purpley",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 35,
+  "n_within_painting": 17,
+  "rank_percentile": 63,
+  "century_peak": "1900s",
+  "century_lift": 4.2,
+  "role_hidden_pct": 35,
+  "top_painter": [
+   "Claude Monet",
+   4,
+   50,
+   7.2
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "Vestal",
+     3.1
+    ]
+   ]
+  },
+  "iscc_nbs": {
+   "name": "pale reddish purple",
+   "de2000": 5.7
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry, ISCC-NBS 1955 block",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, fieldnotes (as photographed)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter uses Purpley Grey most, relative to his museums' baseline?",
+   "choices": [
+    "Claude Monet",
+    "John Singer Sargent",
+    "Sandro Botticelli",
+    "Rembrandt"
+   ],
+   "answer": "Claude Monet",
+   "kind": "pick"
+  },
+  {
+   "q": "Why can a 1425 painting match Purpley Grey, 585 years before the name existed?",
+   "choices": [
+    "The color match is on the painting's hue, not on who named it first",
+    "The painting was repainted in 2010",
+    "The archive only includes paintings after 2010",
+    "Botticelli invented the name"
+   ],
+   "answer": "The color match is on the painting's hue, not on who named it first",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, Purpley Grey most often plays which role?",
+   "choices": [
+    "A hidden color, found by lightness rank",
+    "A bright highlight",
+    "The dominant base wash",
+    "A border outline"
+   ],
+   "answer": "A hidden color, found by lightness rank",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Purpley Grey's earliest match in our archive predates its 2010 name by nearly six centuries.",
+  "Claude Monet used Purpley Grey more than seven times his own museums' typical rate."
+ ],
+ "words": 271,
+ "status": "checked",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

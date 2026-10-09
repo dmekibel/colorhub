@@ -1,0 +1,132 @@
+{
+ "slug": "greyish-navy",
+ "name": "Greyish navy",
+ "hex": "#192236",
+ "names": [
+  "Greyish navy"
+ ],
+ "tier": "traditional",
+ "depth": "brief",
+ "lede": "Kon, dark blue",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Greyish navy is a very dark, slightly warm blue carried into our library from the Japanese traditional color Kon, meaning simply \"dark blue,\" and it sits 8.7 units from the plain [[navy]].",
+   "body": "Our library lists this color under the Japanese name Kon, written 紺, glossed plainly as \"dark blue\" [1]. *Kon* is one of the oldest and most common dye names in Japan, historically tied to deep indigo dyeing, though our library's gloss does not itself specify indigo as the dyestuff, so that link is not asserted here [1].\n\nThe swatch measures lightness 13, chroma 15 and hue 281 degrees, in the Blues family, and it is nearly black at this lightness, used chiefly in fashion and textile contexts [1]. The nearest named colors on file are [[mascot]], [[dark]], [[black-blue]] and [[trooper]], at 4.1, 4.1, 4.6 and 4.9 ΔE [1]. A darker green cousin in the same descriptive family is [[greyish-hunter-green]] [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "A color within range of this swatch appears in 193 of the 23,781 paintings in our archive, about 0.81 percent, as photographed, almost entirely in shadow areas [2]. The earliest dated match is Pietro Lorenzetti's 1340 *Madonna and Child Enthroned with Eight Angels*, a floor and not a first, since the archive's early centuries are thin [2]. The archive's photographs are of aged, varnished canvases, so a dark shadow match here is a screen color, not a dye or pigment identification [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "紺 (kon), \"dark blue\"; historically associated with indigo dyeing, though not confirmed for this entry",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [
+   "Kon",
+   "紺"
+  ],
+  "siblings": [
+   "mascot",
+   "dark",
+   "black-blue",
+   "trooper"
+  ],
+  "parent": "navy",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kon (紺), \"dark blue\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 193,
+  "first_seen": {
+   "year": 1340,
+   "painter": "Pietro Lorenzetti"
+  },
+  "measured": {
+   "lch": [
+    13,
+    15,
+    281
+   ],
+   "nearest": [
+    [
+     "Mascot",
+     4.1
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub painting archive, 23,781 paintings, as photographed (data/graph/fieldnotes, tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese name Kon mean?",
+   "choices": [
+    "Dark blue",
+    "Sprouting onion",
+    "Thousand-year green",
+    "Celadon"
+   ],
+   "answer": "Dark blue",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: nearly all archive matches for this color sit in shadow areas of a painting.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which already-named library color sits closest to Greyish navy?",
+   "choices": [
+    "Navy",
+    "Sage",
+    "Umber",
+    "Tan"
+   ],
+   "answer": "Navy",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Greyish navy carries one of Japan's oldest and plainest color names: Kon, simply \"dark blue.\""
+ ],
+ "words": 206,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Kon's historical tie to indigo dyeing is common knowledge about the word but not confirmed specifically for this library entry; left unstated as fact.",
+   "lint 2026-10-09"
+  ]
+ }
+}

@@ -1,0 +1,130 @@
+{
+ "slug": "yellowish-camel",
+ "name": "Yellowish camel",
+ "hex": "#CE9F6F",
+ "names": [
+  "Yellowish camel"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Yellowish camel is ColorHub's English name for Shirotsurubami, a traditional Japanese color meaning \"white oak,\" and one of the most common tans in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "White oak",
+   "body": "白橡 (Shirotsurubami) literally means white oak, part of a Japanese family of oak-based browns that also includes the darker [[yellowish-hazel]] [1]. ColorHub renders it as Yellowish camel for English readers; the name is a fair guide, since the library's nearest standard name is Camel itself [1][2].\n\nIn the look-alike data, [[cinnamon-buff]] sits closest at 2.8 units, almost the same; [[camel]] follows at 3.1, and [[peachbeige]] at 3.8 [2]. [[cinnamon]], 4.2 units off, reads more vivid [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "It is one of the more common names we track, found in 8.13 percent of 23,781 paintings, 1,934 of them as photographed, more common than 92 percent of the colors in our archive [3]. The Master of Alkmaar used it most intensely, in 5 of 13 works here, 4.7 times that collection's baseline [3]. It peaks in the 1500s, found in 7.8 percent of the 2,231 paintings we have from then, 173 of them, 1.5 times the expected rate, and plays an accent in 46 percent of its paintings [3]. It is most over-represented in paintings from India, 2.8 times expected, and tends to share canvases with Deep Champagne and Cork more than chance would predict [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the pale color of white oak wood",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [],
+  "siblings": [
+   "cinnamon-buff",
+   "camel",
+   "peachbeige",
+   "cinnamon"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "白橡 (Shirotsurubami), \"white oak\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1934,
+  "pct": 8.13,
+  "rank_pct": 92,
+  "measured": {
+   "lch": [
+    68.8,
+    33.7,
+    70.2
+   ],
+   "nearest": [
+    [
+     "Cinnamon Buff",
+     2.8
+    ],
+    [
+     "Camel",
+     3.1
+    ],
+    [
+     "Peachbeige",
+     3.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges, data/graph/edges-y.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Shirotsurubami, the Japanese name behind Yellowish camel, literally mean?",
+   "choices": [
+    "White oak",
+    "Camel's hair",
+    "Desert sand",
+    "Autumn wheat"
+   ],
+   "answer": "White oak",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter used Yellowish camel most intensely relative to his own museum baseline?",
+   "choices": [
+    "The Master of Alkmaar",
+    "John Singer Sargent",
+    "Georges Seurat",
+    "Edvard Munch"
+   ],
+   "answer": "The Master of Alkmaar",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Yellowish camel shows up in more than one painting in twelve in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 225
+}

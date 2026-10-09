@@ -1,0 +1,132 @@
+{
+ "slug": "japanese-bush-warbler-brown",
+ "name": "Japanese bush warbler-brown",
+ "hex": "#5C4827",
+ "names": [
+  "Japanese bush warbler-brown"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Japanese bush warbler-brown is a darker, browner variant of [[japanese-bush-warbler]], and the single most common named color in our painting archive after indigo tea.",
+ "sections": [
+  {
+   "id": "japan",
+   "title": "In Japan: Uguisucha",
+   "body": "The name is written 鶯茶, romanized Uguisucha, built from the same bush-warbler word (*uguisu*) as [[japanese-bush-warbler]], with the tea/brown-family kanji 茶 (*cha*) swapped in for *iro*, darkening and browning the parent shade [1]. Our library lists it explicitly as a family variant of the warbler color, not a separate bird or a separate name [1].\n\nThe nearest named neighbor by measured color is [[autumn]], almost the same shade; [[ivory-brown]] sits close by, darker [2]. [[japanese-bush-warbler]] itself is the next nearest, lighter and yellower [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Japanese bush warbler-brown in 6,556 of 23,781 paintings, about 27.6 percent, more common than 99 percent of the named colors we track, as photographed [3]. It peaks in the 1600s, in 1,454 of 6,394 paintings from that century, 1.4 times the rate its share of the archive would predict [3]. Inside a painting it most often plays a mid-tone, in 40 percent of its appearances [3].\n\nThe painter most devoted to it is Paul de Vos, in 10 of his 17 paintings here, 2.0 times his peers' rate, as photographed [3]. The earliest archive match is dated 799; the archive's early centuries are thin, so that is a floor, not a first [3]. It shares canvases more than chance with the colors we call Dusty Hazel and Buffy Citrine [3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darker, browner variant of Japanese bush warbler (uguisu)",
+   "first_recorded": "undocumented in the sources we have",
+   "source": "ColorHub color library: traditional colors of Japan"
+  },
+  "aka": [],
+  "siblings": [
+   "autumn",
+   "ivory-brown",
+   "musk"
+  ],
+  "parent": "japanese-bush-warbler",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "鶯茶 (Uguisucha)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6556,
+  "measured": {
+   "lch": [
+    31.9,
+    23.2,
+    80.2
+   ],
+   "nearest": [
+    [
+     "Autumn",
+     3.1
+    ],
+    [
+     "Ivory Brown",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: traditional colors of Japan (Wikipedia)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How does this name relate to Japanese bush warbler?",
+   "choices": [
+    "It is a darker, browner family variant of it",
+    "It names an entirely different bird",
+    "It is the same exact hex value",
+    "It is an unrelated xkcd crowd name"
+   ],
+   "answer": "It is a darker, browner family variant of it",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this is one of the rarest named colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which painter used this color most, relative to his own output, in our archive?",
+   "choices": [
+    "Paul de Vos",
+    "David Teniers the Younger",
+    "Hubert Robert",
+    "Juan de Valdés Leal"
+   ],
+   "answer": "Paul de Vos",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Japanese bush warbler-brown is the family's darker cousin, and the more common of the two in our archive."
+ ],
+ "words": 263,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}

@@ -1,0 +1,106 @@
+{
+ "slug": "kobi",
+ "name": "Kobi",
+ "hex": "#E79FC4",
+ "names": [
+  "Kobi"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Kobi is a moderate purplish pink carried in our library from a single web source, and who coined the name, or where it comes from, is undocumented.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name without a story",
+   "body": "Our library records only Wikipedia as a source for the name Kobi and its hex value, #E79FC4; no older dictionary, plate or survey in our holdings carries it, and the word's origin is undocumented here [1]. Computed by ISCC-NBS block, it lands as a moderate purplish pink, 3.1 units from that block's center [1].\n\nIn the color graph, the nearest named neighbor is [[mallow-pink|Mallow Pink]], 3.0 units away, with [[amaranth-pink|Amaranth Pink]] close behind at 3.5, [[carnation-pink|Carnation Pink]] further out at 4.5, and [[orchid-crayola|Orchid (Crayola)]] at 4.7 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pink in just 3 of 23,781 paintings, about 0.01 percent, as photographed, with the stricter within-painting lens finding it in 2, rarer than 82 percent of our named colors [2]. The one dated match on file is a 1910 work by Ernst Ludwig Kirchner [2]. These are matches on photographed, varnished canvases, not pigment identifications [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "mallow-pink",
+   "amaranth-pink"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "rarer_than_pct": 82,
+  "measured": {
+   "nearest": [
+    [
+     "Mallow Pink",
+     3.0
+    ],
+    [
+     "Amaranth Pink",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph and library: web-sourced name and look-alike edges",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which named color is closest to Kobi in our color graph?",
+   "choices": [
+    "Mallow Pink",
+    "Khaki",
+    "Aubergine",
+    "Kiwi"
+   ],
+   "answer": "Mallow Pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a documented history explains where the name Kobi comes from.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Nothing in our sources says where the name Kobi comes from."
+ ],
+ "words": 175,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Origin undocumented in all sources consulted; kept brief rather than padded."
+  ]
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "slug": "yellowish-hazel",
+ "name": "Yellowish hazel",
+ "hex": "#A17917",
+ "names": [
+  "Yellowish hazel"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Yellowish hazel is ColorHub's name for Nataneyu-iro, a Japanese color meaning \"rapeseed-oil colored,\" and one of more than twenty ISCC-NBS names that fall in the same mustard-brown region.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Rapeseed oil",
+   "body": "菜種油色 (Nataneyu-iro) names the warm gold-brown of pressed rapeseed oil [1]. The same region of color is also filed by the ISCC-NBS system under names including Aurum, first recorded by Maerz and Paul in 1500, and Mastic, recorded in 1890, among more than twenty alternate names crowded into that one block [2].\n\nThe nearest look-alike is [[mustard-brown]], 3.1 units away and more vivid; [[bistre-brown]] follows at 3.5, almost the same [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The color appears in 2.12 percent of 23,781 paintings, 504 of them as photographed, more common than 78 percent of the names we track [4]. Fritz Thomsen used it most, in 4 of 18 works here, 6.2 times his museums' baseline [4]. The earliest dated match is a 1240 panel attributed to the Master of the Cross 434, though the archive's early centuries are thin enough that this is a floor, not a first [4]. It shares canvases with Poop Brown and Mustard far more than chance, at 15.2 and 13.2 times the expected rate [4]. As photographed, that lift is computed against the same museums' own baseline, not against painting in general [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the color of pressed rapeseed oil",
+   "first_recorded": "undocumented in our sources",
+   "source": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")"
+  },
+  "aka": [],
+  "siblings": [
+   "mustard-brown",
+   "bistre-brown",
+   "orange-citrine",
+   "puke-brown"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "菜種油色 (Nataneyu-iro), \"rapeseed-oil colored\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 504,
+  "pct": 2.12,
+  "rank_pct": 78,
+  "measured": {
+   "lch": [
+    53.3,
+    54.6,
+    82.8
+   ],
+   "nearest": [
+    [
+     "Mustard Brown",
+     3.1
+    ],
+    [
+     "Bistre Brown",
+     3.5
+    ],
+    [
+     "Orange Citrine",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional color names (Wikipedia, \"Traditional colors of Japan\")",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS (1955) block 94, citing Maerz & Paul (1930) plates",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges, data/graph/edges-y.json",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Nataneyu-iro, the Japanese name behind Yellowish hazel, mean?",
+   "choices": [
+    "Rapeseed-oil colored",
+    "Toasted sesame",
+    "Dried persimmon",
+    "Autumn bamboo"
+   ],
+   "answer": "Rapeseed-oil colored",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Yellowish hazel is the only name the ISCC-NBS system attaches to its color region.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "More than twenty ISCC-NBS names crowd into the same mustard-brown region as Yellowish hazel."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 79%, current data/graph/fieldnotes says 78% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 214
+}

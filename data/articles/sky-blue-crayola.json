@@ -1,0 +1,137 @@
+{
+ "slug": "sky-blue-crayola",
+ "name": "Sky Blue (Crayola)",
+ "hex": "#76D7EA",
+ "names": [
+  "Sky Blue (Crayola)"
+ ],
+ "tier": "commercial",
+ "depth": "short",
+ "lede": "Sky Blue (Crayola) is a bright, slightly green-leaning cyan that Crayola names as a variant of the plainer Sky Blue, rare enough in our painting archive that only a handful of matches turn up.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Crayola variant",
+   "body": "Our library files this cyan as a Crayola crayon name, drawn from the core color [[sky-blue]] as a qualified variant rather than a separate word [1]. The books we checked carry no entry for it, and no ISCC-NBS or Ridgway filing exists in our library for this exact name, so its naming is undocumented beyond the Crayola box itself [1]. By our own nearest-match calculation it sits close to the ISCC-NBS category 'very light greenish blue,' though that is our computed match, not a 1955 dictionary filing [1].\n\nThe real look-alike nearest is [[calamine-blue]], duller than this cyan, with [[sky-blue]] itself bluer and a little further off, and [[robin-s-egg]] lighter and more vivid still; [[aqua-blue]] sits a little further out again, more vivid and bluer [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this cyan in 6 of 23,781 paintings, as photographed, rarer than 82 percent of the named colors we track [3]. Inside those few paintings it plays a mid tone every time [3]. The earliest match is Juan de Barroeta's 1854 painting, with the latest from 1912, four dated paintings in all — too thin a sample, and a floor, not a first, given how little of the archive's early centuries survive [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the Crayola crayon box, as a variant of Sky Blue",
+   "first_recorded": "undocumented beyond the Crayola box itself",
+   "source": "ColorHub color library, Sky Blue (Crayola) entry"
+  },
+  "aka": [],
+  "siblings": [
+   "sky-blue",
+   "calamine-blue",
+   "robin-s-egg"
+  ],
+  "parent": "sky-blue",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "sky-blue",
+    "gloss": "the plainer core color this variant is drawn from"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "rarer_than_pct": 82,
+  "role": "mid 100%",
+  "measured": {
+   "lch": [
+    81.0,
+    29.8,
+    217.6
+   ],
+   "nearest": [
+    [
+     "Calamine Blue",
+     3.3
+    ],
+    [
+     "Robin's Egg",
+     5.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia-sourced Crayola entry (data/library.json, Sky Blue (Crayola)); our own nearest ISCC-NBS match (data/graph node)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub Color Graph: look-alike edges (data/graph/edges-s.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which crayon line names this cyan as a variant of Sky Blue?",
+   "choices": [
+    "Crayola",
+    "Pantone",
+    "RAL",
+    "Munsell"
+   ],
+   "answer": "Crayola",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: an ISCC-NBS 1955 filing exists in our library specifically for Sky Blue (Crayola).",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our painting archive, how rare is this cyan compared with other named colors?",
+   "choices": [
+    "Rarer than 82 percent of them",
+    "More common than 82 percent of them",
+    "Exactly average",
+    "Unmeasured"
+   ],
+   "answer": "Rarer than 82 percent of them",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Sky Blue (Crayola) turns up in just six of our 23,781 painting matches.",
+  "No 1955 dictionary filing exists for this exact Crayola name in our library."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Claims verified as internally consistent with cited ColorHub library/graph/archive data; no book or web source cited for this article's factual claims, no myth-list phrase found, and the claims are already conservatively hedged (undocumented origin, floor-not-first framing, thin-sample caveats)."
+  ]
+ },
+ "words": 234
+}

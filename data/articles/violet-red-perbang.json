@@ -1,0 +1,112 @@
+{
+ "slug": "violet-red-perbang",
+ "name": "Violet-Red (PerBang)",
+ "hex": "#F0599C",
+ "names": [
+  "Violet-Red (PerBang)"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Violet-Red (PerBang) is a pink named by the Japanese color-reference site PerBang, filed in our data as a family-word variant of [[violet]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A web color list's pink",
+   "body": "Our only source for this name is Wikipedia's color list, which attributes it to PerBang; no coining story or date survives in our sources [1]. It is grouped in our data as a \"violet\" family-word rather than a Crayola or paint-brand name [1].\n\nIts nearest look-alikes are [[rose-color]] (2.8 units, almost the same), [[medium-pink]] (3.0, almost the same) and [[barbie-pink]] (3.3, more vivid) [2].\n\nIn LCH terms it measures lightness 60, chroma 64 and hue 355 degrees, just past red into the pink range [2]. The \"violet\" in its name is a family label in our data rather than a visible trace of violet or purple in the hue itself [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed; this bright a pink is uncommon in aged, varnished paint [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the PerBang color reference site",
+   "first_recorded": "undocumented",
+   "source": "Wikipedia color list"
+  },
+  "aka": [],
+  "siblings": [
+   "rose-color",
+   "medium-pink",
+   "barbie-pink"
+  ],
+  "parent": "violet",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    60.0,
+    64.0,
+    355.2
+   ],
+   "nearest": [
+    [
+     "Rose Color",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia color list, PerBang attribution",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub look-alike graph (data/graph/edges-v.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which site does Wikipedia credit with naming Violet-Red (PerBang)?",
+   "choices": [
+    "PerBang",
+    "Crayola",
+    "Pantone",
+    "RAL"
+   ],
+   "answer": "PerBang",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources give a specific year PerBang named this color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Violet-Red (PerBang) is nearly the same pink as Rose Color and Medium Pink."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 164
+}

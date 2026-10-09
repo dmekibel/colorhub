@@ -1,0 +1,126 @@
+{
+ "slug": "dusty-amber",
+ "name": "Dusty amber",
+ "hex": "#E2B13C",
+ "names": [
+  "Dusty amber"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty amber is a warm, muted gold, ColorHub's English name for the Japanese traditional color Kariyasu, named for a grass rather than the fossil resin its English name suggests.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of a dye grass",
+   "body": "Kariyasu (苅安) is named in the Wikipedia list of Japan's traditional colors for Japanese triandra grass (*Themeda japonica*), not for the fossil resin amber that gives the English name here [1]. Beyond that identification, the page gives no further history for the name, and it is undocumented in the sources consulted here [1].\n\nIts nearest named neighbors on file are [[primuline-yellow]], 2.6 units off, and [[goldenrod]], 3.4 off [2], close enough on screen that a grass and a mineral resin can land on the same gold."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in 329 of 23,781 paintings, 1.38 percent, as photographed, with the within-painting lens finding it in the same 329 [3]. That makes it more common than 78 percent of the named colors in our library [3]. It peaks in the 1300s, present in 3.2 percent of our 251 paintings from that century, 1.7 times the museums' baseline rate [3]. Inside a painting it most often plays an accent, in 72 percent of its 329 appearances by lightness rank [3].\n\nGeorge Dawe is its most devoted painter on file, present in 11 of his 50 works here, more than seven times the baseline rate for the museums that hold them [3]. The earliest match, by Bonaventura Berlinghieri, dates to 1250, a floor and not a first, since the archive's early centuries are thin [3]. It is most over-represented in paintings from India, and shares canvases with [[dark-goldenrod|Dark Goldenrod]] and [[bistre-brown|Bistre Brown]] far more often than chance [3]. These are computed color matches to photographed, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Kariyasu, Japanese triandra grass (Themeda japonica)",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Kariyasu"
+  ],
+  "siblings": [
+   "primuline-yellow",
+   "goldenrod",
+   "zedoary-wash",
+   "metallic-gold"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kariyasu (苅安)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 329,
+  "pct_archive": 1.38,
+  "rank_pct": 78,
+  "measured": {
+   "lch": [
+    75,
+    64,
+    84
+   ],
+   "nearest": [
+    [
+     "Primuline Yellow",
+     2.6
+    ],
+    [
+     "Goldenrod",
+     3.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, ISCC-NBS 1955, Maerz & Paul 1930 entries, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Kariyasu named after?",
+   "choices": [
+    "A dye grass, Japanese triandra grass",
+    "Fossil amber resin",
+    "A river in Japan"
+   ],
+   "answer": "A dye grass, Japanese triandra grass",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter's sampled works show the highest rate of this color?",
+   "choices": [
+    "George Dawe",
+    "John Singer Sargent",
+    "Paul Gauguin"
+   ],
+   "answer": "George Dawe",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Named for a dye grass, not the fossil resin its English name suggests."
+ ],
+ "words": 291,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

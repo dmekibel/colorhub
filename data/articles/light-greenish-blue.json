@@ -1,0 +1,131 @@
+{
+ "slug": "light-greenish-blue",
+ "name": "Light Greenish Blue",
+ "hex": "#63F7B4",
+ "names": [
+  "Light Greenish Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Greenish Blue joins the modifiers *light* and *greenish* to the base color [[blue]], and in our archive of 23,781 paintings not one canvas carries it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A compound, not a tradition",
+   "body": "The name follows plain modifier grammar: *light greenish* plus [[blue]], first recorded in the xkcd 2010 crowd color survey and carried into our library from there [1]. Paterson's dictionary never lists \"Light Greenish Blue\" as a headword, but it uses the near-identical phrase \"light greenish-blue\" or \"light greenish blue\" to describe several other named colors: Aqua, aqua blue, horizon blue, and the older word glaucous [2]. That repetition across unrelated entries is a sign the phrase is descriptive shorthand, used whenever a writer needs a pale, green-leaning blue, rather than a single coined name with its own history [2].\n\nThe nearest ISCC-NBS 1955 block is \"very light green,\" a Delta-E of 8.6 from this hex, which is a wide gap for a name that calls itself blue [1]. The nearest colors on file by measured distance are [[greenish-cyan]] and [[light-aquamarine]], 2.9 and 3.3 units away, with [[seafoam]] close behind at 3.3 [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering at least one per cent of its canvas, within a Delta-E of 4, as photographed [3]. That describes the gap in this particular archive, not the color in painting generally: a crowd-survey name this bright and this pale rarely survives varnish and photography intact [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifiers light and greenish applied to the base color blue",
+   "first_recorded": "2010 (xkcd color survey)",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "greenish-cyan",
+   "light-aquamarine",
+   "seafoam",
+   "bright-sea-green"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    88.2,
+    58.5,
+    159.3
+   ],
+   "nearest_iscc": [
+    "very light green",
+    8.6
+   ],
+   "nearest": [
+    [
+     "Greenish Cyan",
+     2.9
+    ],
+    [
+     "Light Aquamarine",
+     3.3
+    ],
+    [
+     "Seafoam",
+     3.3
+    ],
+    [
+     "Bright Sea Green",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values, ISCC-NBS 1955 crosswalk, and xkcd 2010 survey record",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "Paterson, A Dictionary of Colour, \"Aqua\", \"aqua blue\", \"glaucous\"",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which survey first recorded the name Light Greenish Blue?",
+   "choices": [
+    "The xkcd 2010 crowd survey",
+    "Ridgway's 1912 plates",
+    "The ISCC-NBS 1955 lists",
+    "Maerz and Paul, 1930"
+   ],
+   "answer": "The xkcd 2010 crowd survey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Paterson's dictionary lists \"Light Greenish Blue\" as its own named color.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Not one painting in our archive carries this exact pale green-blue."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified Paterson citation: Aqua/aqua blue/glaucous/horizon blue all use 'light greenish blue' phrasing in the book."
+  ]
+ },
+ "words": 234
+}

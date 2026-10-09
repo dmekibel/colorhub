@@ -1,0 +1,143 @@
+{
+ "slug": "columbia-blue",
+ "name": "Columbia Blue",
+ "hex": "#B9D9EB",
+ "names": [
+  "Columbia Blue"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Columbia Blue is a pale blue Wikipedia credits to Columbia University, with a close hue already on Robert Ridgway's 1912 color plates.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A paler cousin of Carolina Blue",
+   "body": "Wikipedia credits Columbia University as the source of this name, and that is the only record of the naming itself in our sources [1]. Robert Ridgway's 1912 nomenclature carries a close hue on plate XXXIV, and the ISCC-NBS system later classified this chip as a very pale blue, about 2.2 units from that block's reference color [2]. In Munsell terms it reads 0.3PB 8.5/3.5: high lightness, low chroma, the palest of the institutional blues in our library [2].\n\nThe nearest named colors on file are [[uranian-blue]], [[pale-aqua]], [[light-blue]] and [[pastel-blue]], at 3.1, 3.6, [[sky-blue|Sky Blue]] and [[cornflower|Cornflower]] are deeper, more saturated relatives in the same blue family [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to this blue in 64 of 23,781 paintings, about 0.27 percent, and in 39 by the stricter within-painting measure, which makes it rarer than 53 percent of the named colors we track [3]. Inside those paintings it most often reads as a light, 46 percent of the 39, the pale patch rather than an accent or a shadow [3]. It peaks in paintings from the 1900s, at 1.9 times the expected rate, and also shows a smaller peak in the 1860s, in 5 of 926 paintings, at 2.2 times expected [3].\n\nThe earliest match in our archive dates to 1480, with the latest dated match from 1947, 48 paintings in all, a floor and not a first, since the archive's early centuries are thin [3]. That earliest match is 432 years before the name's own earliest record in our sources, 1912: a look-alike hue in an aged photograph, not a use of this named color [2][3]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Columbia University (per Wikipedia)",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library, Columbia Blue entry"
+  },
+  "aka": [],
+  "siblings": [
+   "uranian-blue",
+   "pale-aqua",
+   "light-blue",
+   "pastel-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 64,
+  "n_within": 39,
+  "rarer_than_pct": 53,
+  "century_peak": "1900s, 1.9x expected",
+  "role": "light 46%",
+  "measured": {
+   "lch": [
+    85.0,
+    14.0,
+    241.4
+   ],
+   "nearest": [
+    [
+     "Uranian Blue",
+     3.1
+    ],
+    [
+     "Pale Aqua",
+     3.6
+    ],
+    [
+     "Light Blue",
+     4.1
+    ],
+    [
+     "Pastel Blue",
+     5.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "kind": "web",
+   "cite": "Wikipedia, \"Columbia blue\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Columbia_blue",
+   "n": 1
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 and ISCC-NBS 1955 entries (data/library.json, Columbia Blue)",
+   "loc_kind": null,
+   "url": null,
+   "n": 2
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null,
+   "n": 3
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which institution does Wikipedia credit as Columbia Blue's namesake?",
+   "choices": [
+    "Columbia University",
+    "University of North Carolina",
+    "Yale University",
+    "Harvard University"
+   ],
+   "answer": "Columbia University",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Columbia Blue is lighter and paler than Carolina Blue in our library's measurements.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, how does Columbia Blue most often function, by our archive's measure?",
+   "choices": [
+    "As a light area",
+    "As a deep shadow",
+    "As the dominant field color",
+    "As a border or frame"
+   ],
+   "answer": "As a light area",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Columbia Blue is the paler, greyer cousin of Carolina Blue, named for a different university.",
+  "Our library lists another named chip within 1.6 units of Columbia Blue -- close enough to be the same paint on screen."
+ ],
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 312
+}

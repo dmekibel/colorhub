@@ -1,0 +1,138 @@
+{
+ "slug": "mulberry-purple",
+ "name": "Mulberry Purple",
+ "hex": "#65416F",
+ "names": [
+  "Mulberry Purple"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Mulberry Purple is a dark, muted purple first recorded by Ridgway in 1912, and our library pairs it with Kikyō-iro, the Japanese traditional color named for the bellflower.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Ridgway's plate and a bellflower's name",
+   "body": "Our library's earliest record is Ridgway's 1912 color atlas, plate XI, hue 61 [1]. Maerz and Paul's 1930 dictionary repeats the name at plate 45, K10 [1]. The ISCC-NBS dictionary of 1955 filed it in block 224, \"dark purple,\" 5.4 units from that block's centre [1]. Our library also pairs the English name with Kikyō-iro (桔梗色), the Japanese traditional color named for the bellflower, *Platycodon grandiflorus*; the flower reference does not match the English name's \"mulberry,\" so the two naming traditions landed on this purple from different directions [1].\n\nIts nearest named neighbor is [[cotinga-purple|Cotinga Purple]], 2.9 units away and read as almost the same color [2]. [[madder-violet|Madder Violet]] sits 3.8 units out, duller, and [[anthracene-violet|Anthracene Violet]] 4.3 units out, purpler [2]. Measured in LCH it reads lightness 33, chroma 32, a dark, muted purple [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this exact color in only 6 of 23,781 paintings (3 by the within-painting lens), rarer than 81 percent of the named colors, as photographed [3]. The sample is too thin here to say which painters or centuries favor it [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "mulberry; our library separately pairs it with the Japanese Kikyō-iro (bellflower color)",
+   "first_recorded": "1912 (Ridgway, color atlas)",
+   "source": "ColorHub color library (Ridgway; Maerz and Paul; ISCC-NBS; Japanese traditional colors)"
+  },
+  "aka": [
+   "Kikyō-iro"
+  ],
+  "siblings": [
+   "cotinga-purple",
+   "madder-violet",
+   "anthracene-violet",
+   "mulberry"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Kikyō-iro (桔梗色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 6,
+  "rank_pct": 19,
+  "measured": {
+   "lch": [
+    33,
+    32,
+    320
+   ],
+   "nearest_iscc": [
+    "dark purple",
+    5.4
+   ],
+   "nearest": [
+    [
+     "Cotinga Purple",
+     2.9
+    ],
+    [
+     "Madder Violet",
+     3.8
+    ],
+    [
+     "Anthracene Violet",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph (data/library.json, data/graph/nodes-m.json): Ridgway 1912, Maerz & Paul 1930, ISCC-NBS, jp field",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for mulberry-purple (data/graph/edges-m.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py, data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 source first records Mulberry Purple?",
+   "choices": [
+    "Ridgway's color atlas",
+    "Maerz and Paul",
+    "xkcd",
+    "Pantone"
+   ],
+   "answer": "Ridgway's color atlas",
+   "kind": "pick"
+  },
+  {
+   "q": "What flower gives Kikyō-iro, the Japanese name paired with Mulberry Purple, its meaning?",
+   "choices": [
+    "The bellflower",
+    "The mulberry",
+    "The iris",
+    "The wisteria"
+   ],
+   "answer": "The bellflower",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Mulberry Purple's English name and its paired Japanese name, Kikyō-iro, point to two entirely different plants."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); archive sample is thin (n=6), so field notes are limited to presence and rank.",
+   "Fixed: field section said 'rarer than 79 percent'; data/graph/fieldnotes/m.json gives rp=19, i.e. rarer than 81 percent. Corrected prose to 81 and field.rank_pct to 19 (the commonness percentile)."
+  ]
+ },
+ "words": 203
+}

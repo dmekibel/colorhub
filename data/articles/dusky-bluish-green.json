@@ -1,0 +1,117 @@
+{
+ "slug": "dusky-bluish-green",
+ "name": "Dusky Bluish Green",
+ "hex": "#3D5A57",
+ "names": [
+  "Dusky Bluish Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dusky Bluish Green is a dark, grayed teal first plated by Robert Ridgway in 1912, a near-twin of Dusky Blue-Green that favored Cezanne and Gauguin alike.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 plate, with a near-twin",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* of 1912 plates this swatch at plate XXXIII, hue 41 double-prime, two hue-steps from its near-twin on the same plate, on an aged, scanned original that is itself approximate [1]. The ISCC-NBS charts of 1955 file it separately at block 156, naming it a dark greenish gray, 7.2 units from this swatch [1]. The name pairs *dusky bluish* with [[green]] [1].\n\nAt hex #3D5A57 it measures lightness 36 and chroma 12 in LCH, close to gray [1]. Its closest named neighbor is [[dusky-blue-green|Dusky Blue-Green]], 2.7 units away and greener; [[invisible-green|Invisible Green]] sits 3.6 units off and almost the same color, and [[dusky-dull-green|Dusky Dull Green]] 4.0 units off and darker [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 1.37% of the 23,781 paintings in our archive (326 paintings, as photographed); the within-painting lens narrows that to 126 [3]. In our archive it is more common than 63% of the named colors [3]. It peaks in the 1300s, present in 2.0% of the 251 paintings we have from that decade (5 paintings), 3.2 times the rate its museums would predict [3]. Inside a painting it most often plays a hidden color, in 44% of its 126 appearances by lightness rank within the painting [3]. Its most devoted painter is Paul Gauguin, present in 6 of 50 works here, 6.8x the baseline of the museums those works come from (as photographed 5.0x) [3]. It is most over-represented in France, 2.2x expected (49 of 3,443 paintings) [3]. The earliest match dates to 1000, 912 years before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier of green: dusky bluish + green",
+   "first_recorded": "1912 (Ridgway, plate XXXIII)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "green",
+   "dusky-blue-green",
+   "invisible-green",
+   "dusky-dull-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 326,
+  "pct_archive": 1.37,
+  "n_within_painting": 126,
+  "pct_within_painting": 0.53,
+  "rank_pct": 63,
+  "painters": [
+   "Paul Gauguin",
+   "Paul Cezanne"
+  ],
+  "countries": [
+   "France"
+  ],
+  "name_first_recorded": 1912,
+  "earliest_match_year": 1000
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912, plate XXXIII, hue 41''; ISCC-NBS 1955, block 156 (R)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plate first fixes the name Dusky Bluish Green in our sources?",
+   "choices": [
+    "Ridgway, 1912, plate XXXIII",
+    "The 2010 xkcd color survey",
+    "The ISCC-NBS charts alone",
+    "Maerz and Paul, 1930"
+   ],
+   "answer": "Ridgway, 1912, plate XXXIII",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter carries Dusky Bluish Green at the highest rate above the archive baseline?",
+   "choices": [
+    "Paul Cezanne",
+    "Paul Gauguin",
+    "Emile Bernard",
+    "Edvard Weie"
+   ],
+   "answer": "Paul Cezanne",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dusky Bluish Green shows up in Cezanne's work 23 times more often than our archive's average."
+ ],
+ "words": 333,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section's presence/rank/decade/painter/country numbers no longer matched data/graph/fieldnotes (stale archive snapshot); replaced with the current fieldnotes facts"
+  ]
+ }
+}

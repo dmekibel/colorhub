@@ -1,0 +1,149 @@
+{
+ "slug": "light-celandine-green",
+ "name": "Light Celandine Green",
+ "hex": "#97AAA3",
+ "names": [
+  "Light Celandine Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Celandine Green is a pale grey-green from Ridgway's 1912 atlas, filed as a named color in the 1955 ISCC-NBS dictionary, and close enough on screen to Morning Blue to pass for the same color.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Ridgway tone, named again in 1955",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate XLVII, hue 33″″″″, tone d [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Celandine Green\" under block 154, \"brilliant yellowish green\" [2]. The name itself builds the modifier \"light\" onto [[celandine-green]], the plant-named color rather than a word chosen for its own associations [1].\n\nIn our color library its closest neighbor is [[morning-blue]], about 3.0 units away, close enough that most viewers would call the two the same color [3]. [[gnaphalium-green]] sits 4.1 units off and greener, and [[bluish-green]] 4.7 units off, greener and lighter still [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings matches this tone in 438 of them, about 1.84 percent, as photographed, more common than 75 percent of the named colors we track [4]. It peaks in the 1900s, present in 29 of the 1,674 paintings from that decade, 1.7 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays a light, in 45 percent of its 259 clearly-ranked appearances [4]. Camille Pissarro favors it most, in 5 of his 50 works in the archive, 4.1 times his museums' baseline rate, and the tone is most over-represented in France, 2.1 times the expected rate [4]. It shares canvases with Pale Olive Grey far more than chance, a lift of 6.5 [4]. The earliest dated match is 1301, 611 years before the name's first 1912 record, so this is a look-alike hue in an old photograph, not proof of the name's age [4]. The archive's early centuries are thin, so this is a floor, not a first."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"light\" plus [[celandine-green]]",
+   "first_recorded": "1912 (Ridgway, plate XLVII); carried into the 1955 ISCC-NBS dictionary, block 154",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "morning-blue",
+   "gnaphalium-green",
+   "bluish-green"
+  ],
+  "parent": "celandine-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 438,
+  "painters": [
+   {
+    "name": "Camille Pissarro",
+    "hits": 5,
+    "n": 50,
+    "lift": 4.1
+   }
+  ],
+  "measured": {
+   "lch": [
+    68.0,
+    8.1,
+    170.4
+   ],
+   "nearest": [
+    [
+     "Morning Blue",
+     3.0
+    ],
+    [
+     "Gnaphalium Green",
+     4.1
+    ],
+    [
+     "Bluish Green",
+     4.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVII, hue 33″″″″, tone d",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ISCC-NBS, NBS Circular 553 (1955), block 154, \"Light Celandine Green\" (data/sources/iscc-nbs-names.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1955 ISCC-NBS dictionary block files Light Celandine Green?",
+   "choices": [
+    "Block 154",
+    "Block 45",
+    "Block 8",
+    "Block 101"
+   ],
+   "answer": "Block 154",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Light Celandine Green sits closer to Morning Blue than to Bluish Green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, Light Celandine Green most often plays which role?",
+   "choices": [
+    "A light",
+    "A shadow",
+    "An accent",
+    "A hidden color"
+   ],
+   "answer": "A light",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "On screen, Light Celandine Green and Morning Blue sit close enough to pass for the same color.",
+  "Camille Pissarro used Light Celandine Green four times his museums' baseline rate."
+ ],
+ "words": 307,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

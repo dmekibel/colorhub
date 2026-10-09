@@ -1,0 +1,138 @@
+{
+ "slug": "japanese-blue",
+ "name": "Japanese Blue",
+ "hex": "#507069",
+ "names": [
+  "Japanese Blue"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Japanese Blue is a muted, greyish green despite its name, first recorded by Maerz and Paul in 1892, with no documented link to any specific Japanese dye or pigment in the sources we have.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A name that misleads the eye",
+   "body": "Maerz and Paul's 1930 dictionary dates this color's first recording to 1892, on plate 30 J 2, but neither that source nor any other in our library explains the connection to Japan [1]. The ISCC-NBS system classifies this hex value as a grayish green, not a blue at all, a mismatch between name and swatch worth noting before trusting the label on sight [1]. In Munsell terms it reads 2.0BG 4.4/2.5, dark and low in chroma [1].\n\nThe nearest named colors on file are [[dark-porcelain-green]] and [[saul]], at 2.9 and 3.1 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to this color in 269 of 23,781 paintings, about 1.13 percent, and in 119 by the stricter within-painting measure, more common than 62 percent of the named colors we track [2]. Inside those paintings it most often sits as a hidden color, 45 percent of the 119 [2]. It peaks in paintings from the 1900s, at 2.5 times the expected rate, and shows up at 4.5 to 5.5 times the expected rate in Impressionist and Post-Impressionist paintings specifically [2].\n\nThe earliest match in our archive dates to 1300, in a painting attributed to Giotto, with the latest from 1941, 203 dated paintings in all, 630 years before the name's own earliest record, 1930 [1], a floor and not a first, since the archive's early centuries are thin [1][2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented in the sources consulted",
+   "first_recorded": "1892, per Maerz and Paul",
+   "source": "ColorHub color library, Japanese Blue entry"
+  },
+  "aka": [],
+  "siblings": [
+   "dark-porcelain-green",
+   "saul",
+   "dark-russian-green",
+   "deep-greyish-blue-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 269,
+  "n_within": 119,
+  "more_common_than_pct": 62,
+  "century_peak": "1900s, 2.5x expected",
+  "movement": "Impressionism/Post-Impressionism, 4.5-5.5x expected",
+  "role": "hidden color 45%",
+  "measured": {
+   "lch": [
+    44.7,
+    13.2,
+    179.3
+   ],
+   "nearest": [
+    [
+     "Dark Porcelain Green",
+     2.9
+    ],
+    [
+     "Saul",
+     3.1
+    ],
+    [
+     "Dark Russian Green",
+     4.2
+    ],
+    [
+     "Deep Greyish Blue-Green",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930 and ISCC-NBS 1955 entries (data/library.json, Japanese Blue)",
+   "loc_kind": null,
+   "url": null,
+   "n": 1
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null,
+   "n": 2
+  }
+ ],
+ "questions": [
+  {
+   "q": "According to the ISCC-NBS classification, what family does Japanese Blue actually belong to, despite its name?",
+   "choices": [
+    "Grayish green",
+    "True blue",
+    "Deep purple",
+    "Bright yellow"
+   ],
+   "answer": "Grayish green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources document a specific Japanese dye or pigment behind the name Japanese Blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, Japanese Blue is most strongly over-represented in which art movement?",
+   "choices": [
+    "Impressionism and Post-Impressionism",
+    "the Renaissance",
+    "Cubism",
+    "Baroque"
+   ],
+   "answer": "Impressionism and Post-Impressionism",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Despite its name, Japanese Blue is classified as a grayish green, not a blue, in the ISCC-NBS system.",
+  "This color shows up at more than four times its expected rate in Impressionist and Post-Impressionist paintings in our archive."
+ ],
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Name-to-swatch mismatch (named blue, classified green) flagged directly per voice rule on swatch vs. name.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 279
+}

@@ -1,0 +1,152 @@
+{
+ "slug": "light-blue-silk",
+ "name": "Light blue silk",
+ "hex": "#044F67",
+ "names": [
+  "Light blue silk"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Light Blue Silk is ColorHub's English rendering of Hanada, a dark greenish-blue from the Japanese traditional color system, named for a dyed silk rather than a pigment.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A translated Japanese name",
+   "body": "The Japanese traditional color system lists this dark greenish-blue as Hanada (綽); ColorHub's library translates its meaning directly and uses \"Light Blue Silk\" as the display name, keeping \"Hanada\" as an alias [1]. The word points to a dyed silk rather than to a mineral or plant, though which dye and period produced it is not detailed in the sources checked here [2].\n\nDespite \"light\" in the English name, the color itself reads as dark and muted: a lightness of 31 on a 0–100 scale, with a blue-green hue angle of 241 degrees [3]. Its nearest look-alike in our library is [[patent-blue]], about 3.7 units away and a touch lighter, followed by Connor's Lakefront and Dusky Orient Blue, both bluer and lighter still [3]. [[dark-grey-blue]] sits 6.4 units off, bluer and duller [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this tone in 101 of 23,781 paintings, about 0.42 percent, as photographed, making it more common than half the named colors we track [4]. It peaks in the 1900s, present in 11 of the 1,674 paintings from that decade, 2.9 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays a hidden color, in 50 percent of its 48 clearly-ranked appearances, a rank computed within each canvas so varnish cannot fake it [4]. The earliest dated match in our archive is 1340, in a painting by Paolo Veneziano, centuries before any dated use of the Japanese name we have found, so the match is a look-alike hue in an old photograph, not evidence of the dye itself [4]. The archive's early centuries are thin, so this is a floor, not a first. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment or dye test [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a dyed silk in the Japanese traditional color system (Hanada); the exact period is undocumented here",
+   "first_recorded": "undocumented by exact date; translated into ColorHub's library in 2026-10-08",
+   "source": "ColorHub color library; Wikipedia, \"Traditional colors of Japan\""
+  },
+  "aka": [
+   "Hanada"
+  ],
+  "siblings": [
+   "patent-blue",
+   "connor-s-lakefront",
+   "dusky-orient-blue",
+   "dark-grey-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Hanada (綽)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 101,
+  "measured": {
+   "lch": [
+    30.9,
+    22.6,
+    240.7
+   ],
+   "nearest": [
+    [
+     "Patent Blue",
+     3.7
+    ],
+    [
+     "Connor's Lakefront",
+     4.6
+    ],
+    [
+     "Dusky Orient Blue",
+     5.4
+    ],
+    [
+     "Dark Grey Blue",
+     6.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional-color entries (jp field), 2026-10-08 retitle; data/articles/link-map.json \"hanada\"",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does \"Hanada\", the Japanese name behind Light Blue Silk, mean?",
+   "choices": [
+    "Light blue silk",
+    "Deep purple dye",
+    "Autumn maple",
+    "Winter frost"
+   ],
+   "answer": "Light blue silk",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: despite its name, Light Blue Silk measures as a dark color, not a pale one.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  },
+  {
+   "q": "Inside a painting, Light Blue Silk most often plays which role?",
+   "choices": [
+    "A hidden color",
+    "A focal color",
+    "A light",
+    "An accent"
+   ],
+   "answer": "A hidden color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Light Blue Silk is the English translation of the Japanese traditional color Hanada — despite the name, it measures dark on screen, not pale."
+ ],
+ "words": 324,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

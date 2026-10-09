@@ -1,0 +1,138 @@
+{
+ "slug": "uranian-blue",
+ "name": "Uranian Blue",
+ "hex": "#AFDBF5",
+ "names": [
+  "Uranian Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Uranian Blue is a very light, airy [[blue]] whose own origin is undocumented in our sources, though it carries the same adjective used for the planet Uranus.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An undocumented name",
+   "body": "Our library traces the name only to a Wikipedia color list, which gives no date and no explanation of who coined it [1]. The word Uranian ordinarily describes something of or relating to the planet Uranus, but our sources do not confirm that reading for this particular shade, so who named it and why stays open [1].\n\nOur library also records Columbia Blue as a near-duplicate of this swatch, within rounding of the same color [1]. Its closest standing colors are [[light-blue]], 4.6 units away by CIEDE2000 and bluer, [[light-cornflower-blue]] at 4.7, darker, and [[non-photo-blue]] at 5.6, bluer [2]. Measured in LCH it reads lightness 85, chroma 19, among the palest blues in our library [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 25 of 23,781 paintings (0.11 percent), rarer than 66 percent of the named colors, as photographed [3]. It peaks in the 1800s, in 6 of 8,345 paintings from that century, though at 0.9 times the expected rate, slightly below the baseline [3]. Inside a painting it most often plays a light, a role measured by lightness rank within the canvas, in 47 percent of matched works [3]. The earliest dated match is 1425, by Sandro Botticelli, though the archive's early centuries are thin, so this is a floor and not a first [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented; shares the adjective used for the planet Uranus",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub library (a Wikipedia list)"
+  },
+  "aka": [
+   "Columbia Blue"
+  ],
+  "siblings": [
+   "light-blue",
+   "light-cornflower-blue",
+   "non-photo-blue"
+  ],
+  "parent": "blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+  "n_present": 25,
+  "rank_pct_rarer": 66,
+  "peak_century": [
+   1800,
+   0.9
+  ],
+  "role_top": [
+   "light",
+   47
+  ],
+  "first_dated": {
+   "year": 1425,
+   "painter": "Sandro Botticelli",
+   "before_record": false
+  },
+  "measured": {
+   "lch": [
+    85,
+    19,
+    244
+   ],
+   "nearest": [
+    [
+     "Light Blue",
+     4.6
+    ],
+    [
+     "Light Cornflower Blue",
+     4.7
+    ],
+    [
+     "Non-Photo Blue",
+     5.6
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/library.json): name source, near-duplicate entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What do our sources say about where the name Uranian Blue comes from?",
+   "choices": [
+    "It is undocumented",
+    "It was coined by Robert Ridgway in 1912",
+    "It comes from a Crayola crayon",
+    "It is credited to a named chemist"
+   ],
+   "answer": "It is undocumented",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our library lists Columbia Blue as a near-duplicate of Uranian Blue.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Uranian Blue sits almost on top of Columbia Blue, within rounding of the same pale sky color."
+ ],
+ "words": 260,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 64%, current data/graph/fieldnotes says 66% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ }
+}

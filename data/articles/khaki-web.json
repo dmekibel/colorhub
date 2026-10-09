@@ -1,0 +1,132 @@
+{
+ "slug": "khaki-web",
+ "name": "Khaki (Web)",
+ "hex": "#C3B091",
+ "names": [
+  "Khaki (Web)"
+ ],
+ "tier": "standard",
+ "depth": "short",
+ "lede": "Khaki (Web) is the paler, greyer version of [[khaki]] that the CSS and X11 color lists adopted for screens, and it turns up in one museum painting in six.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The web's own khaki",
+   "body": "Our color graph marks this swatch plainly as a web variant: the CSS and X11 keyword `khaki`, built from the same dust-colored word that named the fabric and the army uniform, but tuned for computer screens rather than cloth or paint [1]. The real dye khaki Lumsden's Guides wore at Peshawar in the 1840s, and the drab the First World War made famous, ran browner and more olive than this swatch; [[khaki|the fabric khaki]] in our library is a darker, more yellow-green shade than the pale, dusty tan the web keyword gives [1][2]. Nearby web and library names are [[putty]], at 2.6 units, and [[tan]] and [[long-beach|Long Beach]], both 4.0 to 4.3 units away [1].\n\nWikipedia is the only source in our library for the exact hex value, #C3B091, which our graph computes as a grayish yellow by ISCC-NBS block [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this tan in 3,868 of 23,781 paintings, about 16.3 percent, as photographed, with the stricter within-painting lens finding it in 2,659 [3]. It is more common than 97 percent of our named colors [3]. Inside a painting it most often plays a light tone, in 39 percent of its matches, rather than a shadow or an accent [3]. Willem van de Velde the Elder shows the heaviest use, in 7 of 14 of his works on file, nearly four times the rate expected from the museums that hold them [3]. The earliest matches run back to the 700s; that floor marks the limit of a thin early archive, not proof the color existed that early, since the match is a look-alike hue in an old varnished photograph, not a dye identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the fabric and dye color khaki, tuned for the web color lists",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color graph"
+  },
+  "aka": [
+   "khaki"
+  ],
+  "siblings": [
+   "putty",
+   "tan"
+  ],
+  "parent": "khaki",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "khaki",
+    "gloss": "the darker, more olive fabric and dye color this web keyword is tuned down from"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3868,
+  "n_within": 2659,
+  "pct": 16.27,
+  "role": {
+   "light": 39
+  },
+  "painters": [
+   [
+    "Willem van de Velde (I)",
+    7,
+    14,
+    3.9
+   ]
+  ],
+  "measured": {
+   "nearest": [
+    [
+     "Putty",
+     2.6
+    ],
+    [
+     "Tan",
+     4.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: CSS/X11 khaki variant node and look-alike edges",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "book",
+   "cite": "St Clair, The Secret Lives of Colour, \"Khaki\"",
+   "loc_kind": "epub-chapter",
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Khaki (Web) is a screen-tuned version of which fabric and dye color?",
+   "choices": [
+    "Khaki",
+    "Alice Blue",
+    "Aubergine",
+    "Lemon Yellow"
+   ],
+   "answer": "Khaki",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Khaki (Web) is darker and more olive than the historical fabric khaki.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Khaki (Web) turns up in roughly one museum painting in six."
+ ],
+ "words": 303,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "Verified St Clair citation: Lumsden's Guides, Peshawar, 1846 matches book text."
+  ]
+ }
+}

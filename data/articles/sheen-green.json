@@ -1,0 +1,116 @@
+{
+ "slug": "sheen-green",
+ "name": "Sheen Green",
+ "hex": "#8FD400",
+ "names": [
+  "Sheen Green"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Sheen Green is a vivid yellow-green from the extended web color lists, its name describing a glossy finish on the base word \"green\" rather than naming a dye, place or coiner.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A finish word, not a pedigree",
+   "body": "Our library lists Sheen Green only as a Wikipedia-sourced crowd-list entry, with no dictionary, dye house or company credited and no first-recorded date [1]. \"Sheen\" names a surface quality, a soft gloss, the same way \"satin\" or \"matte\" would, so this is filed as a descriptive compound rather than a nature, place or person name [1]. Nothing in the sources checked here explains why this specific hex, rather than any other bright yellow-green, was picked to carry the word [1].\n\nBy our look-alike data the nearest color is [[slime-green|Slime Green]], 2.8 units away and read as almost the same, with [[apple-green|Apple Green]] further off at 4.4, also almost the same [2]. [[yellowish-green|Yellowish Green]] sits a little beyond that, 4.9 units off and read as lighter [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "At our matching threshold, this exact yellow-green does not turn up in any of the 23,781 paintings in the archive, as photographed [3]. That gap is typical of very saturated, high-chroma colors like this one, hue 121 degrees and chroma 90 out of roughly 100: period pigments rarely reached this vivid a green, and the absence is a gap in the match, not a claim about painting history generally [3]. Measured, it sits closer to a synthetic highlighter green than to any historical pigment green [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a glossy \"sheen\" finish applied to a green base word; origin otherwise undocumented",
+   "first_recorded": "undocumented in the sources checked here",
+   "source": "ColorHub color library; Wikipedia"
+  },
+  "aka": [],
+  "siblings": [
+   "slime-green",
+   "apple-green",
+   "yellowish-green",
+   "kiwi-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    77.8,
+    89.7,
+    121.2
+   ],
+   "nearest": [
+    [
+     "Slime Green",
+     2.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia-sourced crowd list entry, Sheen Green",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph, look-alike edges (data/graph/edges-s.json, edges-a.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which color is the nearest look-alike to Sheen Green in our data?",
+   "choices": [
+    "Slime Green",
+    "Apple Green",
+    "Chartreuse",
+    "Kiwi Green"
+   ],
+   "answer": "Slime Green",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: a dictionary or company is credited with coining the name Sheen Green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Sheen Green is too saturated for any pigment our painting archive turns up; it reads closer to a highlighter than to paint."
+ ],
+ "words": 239,
+ "status": "checked",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-09",
+  "issues": [
+   "Origin of the exact hex choice is undocumented; only the descriptive-word pattern is sourced.",
+   "Zero archive matches at this threshold; framed as expected for a very high-chroma modern color, not a historical claim."
+  ]
+ }
+}

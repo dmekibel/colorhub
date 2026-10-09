@@ -1,0 +1,109 @@
+{
+ "slug": "resolution-blue",
+ "name": "Resolution Blue",
+ "hex": "#002387",
+ "names": [
+  "Resolution Blue"
+ ],
+ "tier": "commercial",
+ "depth": "brief",
+ "lede": "Resolution Blue is a deep, saturated blue from a web color list, with no coiner or date confirmed in the sources checked here.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An unconfirmed web name",
+   "body": "The ColorHub library records Resolution Blue from Wikipedia's running list of named colors, flagged there as an obscure or qualified name rather than one in wide, independent use [1]. No book consulted here, and no reliable institutional page found online, confirms who coined the name, what it refers to, or when it entered use; several low-quality color-aggregator sites offer conflicting, unsourced stories, so the origin is left undocumented rather than repeated [1]. The hex #002387 is a screen approximation only [1].\n\nIts nearest library neighbor is [[midnight-blue]] [1].\n\nOther close matches in the library include [[st-patrick-s-blue]], [[royal]] and [[cosmic-cobalt]], all duller than this swatch [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "The automated archive tool used for this project could not compute a usable match count for this hex, so no painting-archive figures are given here [2]. The swatch should be read only as a screen approximation, not as evidence of how the color appears in paintings."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library (Wikipedia)"
+  },
+  "aka": [],
+  "siblings": [
+   "midnight-blue",
+   "st-patrick-s-blue",
+   "royal",
+   "cosmic-cobalt"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub color library",
+  "measured": {
+   "lch": [
+    20,
+    66,
+    299
+   ],
+   "nearest": [
+    [
+     "Midnight blue",
+     4.5
+    ]
+   ]
+  },
+  "archive_note": "no computed archive match available for this hex"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Wikipedia list of colors",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field tool, run against this hex",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: a confirmed coiner or date for the name Resolution Blue is recorded in the sources checked here.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "Which library color sits nearest to Resolution Blue?",
+   "choices": [
+    "Midnight blue",
+    "Sage",
+    "Burlywood",
+    "Mulberry"
+   ],
+   "answer": "Midnight blue",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Resolution Blue's own name history is undocumented, despite several websites claiming otherwise."
+ ],
+ "words": 173,
+ "status": "checked",
+ "checked": {
+  "by": "batch-29",
+  "date": "2026-10-09",
+  "issues": [
+   "Web search turned up only unsourced, mutually contradictory color-aggregator claims; none treated as fact.",
+   "Archive field tool returned no usable match data for this hex."
+  ]
+ }
+}

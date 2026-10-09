@@ -1,0 +1,125 @@
+{
+ "slug": "purple-grey",
+ "name": "Purple Grey",
+ "hex": "#866F85",
+ "names": [
+  "Purple Grey"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Purple Grey is [[grey|Grey]] with a visible wash of purple in it, a muted, dusty lilac-grey named by combining two basic color words.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "Two basic color words combined",
+   "body": "The name pairs the parent word [[grey|Grey]] with \"purple\" as a modifier, describing a grey pulled toward violet rather than naming a dye, a mineral or a place; it was recorded in Randall Munroe's 2010 xkcd color-naming survey [1]. No earlier dictionary or plate in the books consulted here carries this exact compound, though both words it combines are far older [1].\n\nIn printed English, the phrase \"purple grey\" (across all its uses, color and otherwise) rose fastest in the 1840s and peaked in the 1870s, a pattern about the words' broader use rather than this swatch specifically [2]. Its closest look-alikes on file are [[grey-purple|Grey Purple]], the same two words in the other order and purpler, and [[purplish-grey|Purplish Grey]], almost the same color, with [[old-lavender|Old Lavender]] and [[mountbatten-pink|Mountbatten Pink]] a little further out [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings, as photographed, finds a match for this lilac-grey in 27 of them, about 0.11 percent, rarer than 63 percent of our named colors [4]. It peaks in the 1900s, at 3.7 times the expected rate for that century (7 of 1,674 paintings from then), and inside a painting it most often plays a hidden color, in 38 percent of cases, ranked by lightness rather than raw area [4].\n\nThe earliest match in our archive is a 1375 painting by Agnolo Gaddi, six hundred and thirty-five years before the name itself appears in 2010; our archive's early centuries are thin, so that date is a floor, not a first, and the match is only a look-alike hue in an aged, varnished photograph, not proof a matching pigment existed then [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the parent word Grey plus the modifier purple, describing grey pulled toward violet",
+   "first_recorded": "2010, xkcd color survey",
+   "source": "xkcd (Munroe 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "grey-purple",
+   "old-lavender",
+   "mountbatten-pink"
+  ],
+  "parent": "grey",
+  "children": [],
+  "disambiguation": [
+   {
+    "slug": "grey-purple",
+    "gloss": "the same two words in reverse order, nearly the same color but slightly purpler"
+   }
+  ],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 27,
+  "pct_archive": 0.11,
+  "measured": {
+   "nearest": [
+    [
+     "Grey Purple",
+     3.4
+    ]
+   ]
+  },
+  "first_seen": {
+   "year": 1375,
+   "painting_id": "commons-Q131690552",
+   "painter": "Agnolo Gaddi"
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: xkcd 2010 color survey entry",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph fieldnotes: Google Books Ngram curve for \"purple grey\" (data/graph/fieldnotes/p.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-p.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, century lift and first-seen date, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What is Purple Grey's parent color in ColorHub's naming family?",
+   "choices": [
+    "Grey",
+    "Purple",
+    "Old Lavender",
+    "Mauve"
+   ],
+   "answer": "Grey",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Grey Purple and Purple Grey name exactly the same shade.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Purple Grey peaks in our archive's 1900s paintings, at nearly four times the expected rate for that century."
+ ],
+ "words": 289,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

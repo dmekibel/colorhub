@@ -1,0 +1,137 @@
+{
+ "slug": "helvetia-blue",
+ "name": "Helvetia Blue",
+ "hex": "#3851A1",
+ "names": [
+  "Helvetia Blue"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Helvetia Blue is a strong, purplish blue recorded by Robert Ridgway in 1912, its name possibly recalling Helvetia, the female figure long used on Swiss coins and seals to personify Switzerland, though our sources never say so directly.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A likely Swiss echo, left unconfirmed",
+   "body": "Ridgway's 1912 nomenclature places this hue on plate IX, hue 51, tone k, and the ISCC-NBS system later classified it as a strong purplish blue, about 5.0 units from that block's reference color [1]. Neither source explains the name, and no entry in our library glosses \"Helvetia,\" so the Swiss association stays a plausible guess rather than a documented fact here [1]. In Munsell terms the chip reads 6.9PB 3.6/11.1, a fairly saturated, mid-dark blue [1].\n\nThe nearest named colors on file are [[cerulean-blue]] and [[cyanine-blue]], at 4 and 4.2 ΔE [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a close match to this blue in 30 of 23,781 paintings, about 0.13 percent, and in 19 by the stricter within-painting measure, which makes it rarer than 62 percent of the named colors we track [2]. Inside those paintings it most often sits as an accent, 68 percent of the 19 [2]. It peaks in paintings from the 1900s, at 3.4 times the expected rate[2].\n\nThe earliest match in our archive dates to 1543, in a painting attributed to Bronzino, with the latest from 1952, 18 dated paintings in all, a floor and not a first, since the archive's early centuries are thin [2]. That earliest match is 369 years before the name's earliest record in our sources, 1912 [1][2]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications[2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented in the sources consulted; plausibly Helvetia, the personification of Switzerland",
+   "first_recorded": "1912 (Ridgway)",
+   "source": "ColorHub color library, Helvetia Blue entry"
+  },
+  "aka": [],
+  "siblings": [
+   "cerulean-blue",
+   "cyanine-blue",
+   "cobalt",
+   "dusk-blue"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 30,
+  "n_within": 19,
+  "rarer_than_pct": 62,
+  "century_peak": "1900s, 3.4x expected",
+  "role": "accent 68%",
+  "measured": {
+   "lch": [
+    36.6,
+    49.4,
+    290.4
+   ],
+   "nearest": [
+    [
+     "Cerulean Blue",
+     4.0
+    ],
+    [
+     "Cyanine Blue",
+     4.2
+    ],
+    [
+     "Cobalt",
+     4.6
+    ],
+    [
+     "Dusk Blue",
+     4.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "kind": "data",
+   "cite": "ColorHub color library: Ridgway 1912 and ISCC-NBS 1955 entries (data/library.json, Helvetia Blue)",
+   "loc_kind": null,
+   "url": null,
+   "n": 1
+  },
+  {
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings, as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null,
+   "n": 2
+  }
+ ],
+ "questions": [
+  {
+   "q": "True or false: Ridgway's 1912 book confirms that Helvetia Blue is named for Switzerland.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  },
+  {
+   "q": "In our archive, Helvetia Blue's century of strongest over-representation is the:",
+   "choices": [
+    "1900s",
+    "1500s",
+    "1700s",
+    "2000s"
+   ],
+   "answer": "1900s",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color is closest to Helvetia Blue in our library's color match?",
+   "choices": [
+    "Cobalt",
+    "Sepia",
+    "Mauve",
+    "Byzantium"
+   ],
+   "answer": "Cobalt",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Helvetia Blue's name likely nods to Switzerland's personification, but no source in our library confirms it.",
+  "In our archive, Helvetia Blue is 3.4 times more common in 1900s paintings than its overall rate would predict -- the strongest century lift in this group of colors."
+ ],
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "Swiss-personification reading is a plausible but unconfirmed inference, stated as a guess, not a fact.",
+   "lint 2026-10-09"
+  ]
+ },
+ "words": 270
+}

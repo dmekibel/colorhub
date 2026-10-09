@@ -1,0 +1,113 @@
+{
+ "slug": "light-pinkish-lilac",
+ "name": "Light Pinkish Lilac",
+ "hex": "#E1C8CC",
+ "names": [
+  "Light Pinkish Lilac"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Pinkish Lilac is a pale, pink-leaning step off [[lilac]], the purple named for the lilac blossom, filed twice over by Ridgway's 1912 atlas and the ISCC-NBS lists of 1955.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on the lilac blossom",
+   "body": "The name is built by grammar: \"light pinkish\" over the parent [[lilac]], a word with a dark-blue ancestor that became the common-speech name for the first mass-market purple dye [1]. Ridgway's atlas plates it twice, at plate XXXVII and again at plate XLIV, both hue 65''-69''', tone f, and the ISCC-NBS system separately filed it in 1955 as block 249 [1]. Measured, it reads much lighter and far less saturated than lilac itself (lightness 83 against 71, chroma 10 against 25), near-white with only a faint pink-purple cast [1].\n\nIts nearest named neighbor is [[pale-laelia-pink|Pale Laelia-Pink]], 3.2 units away and almost the same, with [[queen-pink|Queen Pink]] close behind, also 3.2 and purpler [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this pale lilac-pink in 37 of 23,781 paintings (0.16 percent, as photographed), rarer than 58 percent of the named colors we track [2]. It most often plays a light, in 73 percent of its strongest matches, and peaks in paintings from the 1900s at 1.9 times the expected rate [2]. The earliest dated match runs to 1452, by Bartolomeo Caporali, 460 years before Ridgway's 1912 record; a floor, not a first, since the archive's early centuries are thin [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive modifier: light pinkish + Lilac",
+   "first_recorded": "1912 (Ridgway, plate XXXVII); also ISCC-NBS 1955, block 249",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-laelia-pink",
+   "queen-pink",
+   "pale-lilac"
+  ],
+  "parent": "lilac",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 37,
+  "measured": {
+   "lch": [
+    83,
+    10,
+    7
+   ],
+   "nearest": [
+    [
+     "Pale Laelia-Pink",
+     3.2
+    ],
+    [
+     "Queen Pink",
+     3.2
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plates XXXVII and XLIV, hue 65''-69''', tone f; ISCC-NBS 1955, block 249; cited via ColorHub color library",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Light Pinkish Lilac is a lightened, pink-leaning step off which parent color?",
+   "choices": [
+    "Lilac",
+    "Rose",
+    "Perilla Purple",
+    "Teal"
+   ],
+   "answer": "Lilac",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, this color most often plays which role?",
+   "choices": [
+    "A light",
+    "A hidden color",
+    "An accent",
+    "A mid-tone"
+   ],
+   "answer": "A light",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "This near-white lilac is far paler than the lilac blossom its parent color is named for."
+ ],
+ "words": 223,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "No concordance hits (src empty); written from Ridgway and ISCC-NBS via the color library and archive."
+  ]
+ }
+}

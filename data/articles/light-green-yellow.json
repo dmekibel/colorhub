@@ -1,0 +1,131 @@
+{
+ "slug": "light-green-yellow",
+ "name": "Light Green-Yellow",
+ "hex": "#F0ED91",
+ "names": [
+  "Light Green-Yellow"
+ ],
+ "tier": "descriptive",
+ "depth": "short",
+ "lede": "Light Green-Yellow is a pale, bright yellow-green from Ridgway's 1912 atlas, filed again by name in the 1955 ISCC-NBS dictionary, close enough on screen to its sibling Light Chalcedony Yellow to be mistaken for it.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Ridgway tone with a near-twin",
+   "body": "Ridgway's 1912 *Color Standards and Color Nomenclature* carries this swatch on plate V, hue 27, tone d [1]. The 1955 ISCC-NBS dictionary files the exact name \"Light Green-Yellow\" under block 101, \"light greenish yellow\" [2]. The name builds \"light\" onto [[green-yellow]], a straightforward hue-pair compound rather than a word drawn from nature or trade [1].\n\nIn our color library its closest neighbors are [[pale-butter]] and [[dark-cream]], both about 2.9 units away, nearly the same color on screen [3]. [[light-chalcedony-yellow]] sits 3.3 units off and duller, despite sharing the same block in the 1955 dictionary [2][3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings matches this tone in 38 of them, about 0.16 percent, as photographed, rarer than 58 percent of the named colors we track [4]. It peaks in the 1500s, present in 5 of the 2,231 paintings from that century, 1.5 times the rate its museums' own baseline would predict [4].\n\nInside a painting it most often plays an accent, in 64 percent of its 28 clearly-ranked appearances [4]. The earliest dated match is 1490, in a painting by Lorenzo Costa, 422 years before the name's first 1912 record, so this is a look-alike hue in an old photograph, not proof of the name's age [4]. The archive's early centuries are thin, so this is a floor, not a first. These are photographs of aged, varnished paintings, and the match is a computed color reading, not a pigment identification [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier \"light\" plus [[green-yellow]]",
+   "first_recorded": "1912 (Ridgway, plate V); carried into the 1955 ISCC-NBS dictionary, block 101",
+   "source": "Ridgway, Color Standards and Color Nomenclature; ISCC-NBS, NBS Circular 553"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-butter",
+   "dark-cream",
+   "light-chalcedony-yellow"
+  ],
+  "parent": "green-yellow",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 38,
+  "measured": {
+   "lch": [
+    92.2,
+    46.5,
+    104.9
+   ],
+   "nearest": [
+    [
+     "Pale Butter",
+     2.9
+    ],
+    [
+     "Dark Cream",
+     2.9
+    ],
+    [
+     "Light Chalcedony Yellow",
+     3.3
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate V, hue 27, tone d",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ISCC-NBS, NBS Circular 553 (1955), block 101, \"Light Green-Yellow\" (data/sources/iscc-nbs-names.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH and nearest-neighbor distances (edges-l.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1955 ISCC-NBS dictionary block files both Light Green-Yellow and Light Chalcedony Yellow?",
+   "choices": [
+    "Block 101",
+    "Block 45",
+    "Block 154",
+    "Block 210"
+   ],
+   "answer": "Block 101",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, Light Green-Yellow most often plays which role?",
+   "choices": [
+    "An accent",
+    "A light",
+    "A hidden color",
+    "A focal color"
+   ],
+   "answer": "An accent",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Light Green-Yellow and Light Chalcedony Yellow share the same 1955 ISCC-NBS dictionary block, despite being distinct named colors."
+ ],
+ "words": 274,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

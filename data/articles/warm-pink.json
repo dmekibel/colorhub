@@ -1,0 +1,109 @@
+{
+ "slug": "warm-pink",
+ "name": "Warm Pink",
+ "hex": "#FB5581",
+ "names": [
+  "Warm Pink"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Warm Pink is a vivid, slightly red-leaning pink from the xkcd color survey of 2010, built by stacking the modifier \"warm\" onto the base color [[pink]].",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a story",
+   "body": "The name follows the same grammar as other crowd-survey names in our data: \"warm\" plus the base word [[pink]], rather than a plant, place or person [1]. The ISCC-NBS 1955 system's nearest block is deep pink, about six units from that block's center, so the official chip category reads it as deeper than the plain word \"pink\" alone would suggest [1]. Its closest measured look-alike is [[rosy-pink|Rosy Pink]], read as duller, with [[fiery-rose|Fiery Rose]] a little further out, read as redder, and [[medium-pink|Medium Pink]] further still, read as purpler and duller [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive has this color covering at least one percent of its canvas, as photographed [2]. That describes this archive, not painting as a whole: a 2010 crowd-survey name has no particular reason to match an older painter's palette, and screen pinks this saturated are rare even among modern colors in centuries-old paintings [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "modifier grammar: warm + pink",
+   "first_recorded": "2010 (xkcd color survey)",
+   "source": "ColorHub color graph (xkcd 2010)"
+  },
+  "aka": [],
+  "siblings": [
+   "rosy-pink",
+   "fiery-rose",
+   "blush"
+  ],
+  "parent": "pink",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "measured": {
+   "lch": [
+    60.4,
+    66.9,
+    9.7
+   ],
+   "nearest": [
+    [
+     "Rosy Pink",
+     3.4
+    ],
+    [
+     "Fiery Rose",
+     4.8
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph and library: xkcd 2010 crowd survey; ISCC-NBS 1955 block 3",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive field notes (23,781 paintings), as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How is the name Warm Pink built, according to our data?",
+   "choices": [
+    "A modifier (\"warm\") stacked on the base color pink",
+    "Named after a flower",
+    "Named after a dye chemist",
+    "Named after a Crayola contest winner"
+   ],
+   "answer": "A modifier (\"warm\") stacked on the base color pink",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Warm Pink covers real ground in several paintings in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "No painting in our archive gives Warm Pink real canvas space, as photographed."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 172
+}

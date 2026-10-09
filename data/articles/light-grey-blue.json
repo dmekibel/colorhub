@@ -1,0 +1,142 @@
+{
+ "slug": "light-grey-blue",
+ "name": "Light Grey Blue",
+ "hex": "#9DBCD4",
+ "names": [
+  "Light Grey Blue"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Grey Blue is a pale, muted shade of [[grey-blue]], filed by the ISCC-NBS in 1955 and again by the xkcd crowd survey in 2010.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier on grey-blue",
+   "body": "The name is the modifier *light* applied to the base color [[grey-blue]], raising its value without changing its hue [1]. Our library's earliest record is the ISCC-NBS 1955 Circular 553, block 185, which calls the matching range \"very pale blue,\" a Delta-E of 7.5 from this hex [1]. The xkcd 2010 survey records the same compound name independently, from crowd labeling rather than a standards body [1]. The nearest colors on file are [[pale-cerulean]] and [[cloudy-blue]], each about 3 units away, with [[light-king-s-blue]] close behind [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 160 of 23,781 paintings, 0.67 percent; within a single canvas it reads as a distinct area in 109 of them, more common than 60 percent of our named colors [2]. It peaks in the 1900s, present in 0.8 percent of that century's 1,674 paintings, 1.4 times the expected rate [2]. Inside a painting it most often plays a hidden color, by lightness rank, in half of its 109 appearances [2]. The earliest dated match is a 1474 work attributed to Piero della Francesca, 481 years before the name's first documented record in 1955 [2]. The archive's early centuries are thin, so this is a floor, not a first; a look-alike hue in an aged photograph is not proof of a dye [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifier light applied to the base color grey-blue",
+   "first_recorded": "1955 (ISCC-NBS, National Bureau of Standards Circular 553, block 185)",
+   "source": "ColorHub color graph"
+  },
+  "aka": [],
+  "siblings": [
+   "pale-cerulean",
+   "cloudy-blue",
+   "light-king-s-blue",
+   "ethereal-blue"
+  ],
+  "parent": "grey-blue",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 109,
+  "measured": {
+   "lch": [
+    74.8,
+    16.3,
+    251.9
+   ],
+   "nearest_iscc": [
+    "very pale blue",
+    7.5
+   ],
+   "nearest": [
+    [
+     "Pale Cerulean",
+     3.0
+    ],
+    [
+     "Cloudy Blue",
+     3.4
+    ],
+    [
+     "Light King's Blue",
+     3.4
+    ],
+    [
+     "Ethereal Blue",
+     4.4
+    ]
+   ]
+  },
+  "role_top": {
+   "role": "hidden",
+   "pct": 50
+  },
+  "first_seen": {
+   "year": 1474,
+   "painter": "Piero della Francesca",
+   "years_before_record": 481
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color graph: computed LCH/Munsell values, ISCC-NBS 1955 block 185, xkcd 2010 survey",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1955 standard first files Light Grey Blue, as \"very pale blue\"?",
+   "choices": [
+    "ISCC-NBS Circular 553",
+    "Ridgway's Color Standards",
+    "Maerz and Paul's dictionary",
+    "The RAL color system"
+   ],
+   "answer": "ISCC-NBS Circular 553",
+   "kind": "pick"
+  },
+  {
+   "q": "Inside a painting, which role does Light Grey Blue most often play?",
+   "choices": [
+    "Hidden color",
+    "Light",
+    "Shadow",
+    "Accent"
+   ],
+   "answer": "Hidden color",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: the 1474 painting proves the paint Light Grey Blue existed that early.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Our earliest match for this pale blue-grey predates its 1955 name by nearly five centuries."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 245
+}

@@ -1,0 +1,114 @@
+{
+ "slug": "deep-slate-olive",
+ "name": "Deep Slate-Olive",
+ "hex": "#515F52",
+ "names": [
+  "Deep Slate-Olive"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Deep Slate-Olive is a greyed-down olive, the \"deep\" modifier of [[slate-olive]], listed on Ridgway's 1912 plate and in the 1955 ISCC-NBS system.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A modifier, not a new color",
+   "body": "The name follows the library's modifier grammar, *deep* plus [[slate-olive]], the base color [1]. Ridgway's 1912 plate XLVII, hue 29′′′′, tone k, placed the original hue, and the ISCC-NBS system of 1955 later filed this chip into block 156, named dark greenish gray in that system's own list [1]. No further origin for the base name \"slate-olive\" is recorded here.\n\nIts nearest look-alikes on file are [[ebony]] and [[bronze-green]], both within about 3.5 units, with [[dusky-green]] close behind [2]. The hue sits in the Neutrals family: olive pulled toward grey rather than toward brown or blue [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 2.88% of the 23,781 paintings in our archive (686 paintings, as photographed); the within-painting lens narrows that to 361 [3]. In our archive it is more common than 79% of the named colors [3]. It peaks in the 1900s, present in 3.9% of the 1,674 paintings we have from that decade (66 paintings), 2.5 times the rate its museums would predict [3]. Inside a painting it most often plays a hidden color, in 34% of its 361 appearances by lightness rank within the painting [3]. Its most devoted painter is Paul Cezanne, present in 8 of 50 works here, 5.7x the baseline of the museums those works come from (as photographed 5.0x) [3]. It is most over-represented in Norway, 3.2x expected (8 of 120 paintings) [3]. The earliest match dates to 1301, 611 years before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a darker, duller reading of the base color slate-olive; no further origin recorded",
+   "first_recorded": "Ridgway 1912, plate XLVII",
+   "source": "ColorHub library"
+  },
+  "aka": [],
+  "siblings": [
+   "ebony",
+   "bronze-green",
+   "dusky-green"
+  ],
+  "parent": "slate-olive",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 686,
+  "pct_archive": 2.88,
+  "n_within_painting": 361,
+  "pct_within_painting": 1.52,
+  "rank_pct": 79,
+  "painters": [
+   "Paul Cezanne",
+   "Émile Bernard"
+  ],
+  "countries": [
+   "Norway"
+  ],
+  "name_first_recorded": 1912,
+  "earliest_match_year": 1301
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Color Nomenclature (1912), plate XLVII; ISCC-NBS Circular 553 (1955), block 156",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub graph: look-alike edges (data/graph/edges-d.json), CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,665 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the \"Deep\" in Deep Slate-Olive mean?",
+   "choices": [
+    "A darker, less vivid version of Slate-Olive",
+    "A brand name",
+    "A pigment discovered in 1912",
+    "A Japanese traditional color"
+   ],
+   "answer": "A darker, less vivid version of Slate-Olive",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Deep Slate-Olive's nearest look-alike on file is a vivid green.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Deep Slate-Olive turns up more in Cézanne than in most other painters on file."
+ ],
+ "words": 312,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section used the within-painting-lens count/percent but labeled it 'as photographed' and used a stale archive total; replaced with the correct as-photographed count/percent (23,781-painting archive) and refreshed the decade, role, painter, country and first-seen facts from data/graph/fieldnotes"
+  ]
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "slug": "bright-light-green",
+ "name": "Bright Light Green",
+ "hex": "#2DFE54",
+ "names": [
+  "Bright Light Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Bright Light Green stacks two modifiers onto [[green]]: bright for the saturation, light for the lightness.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A double modifier",
+   "body": "The name follows ColorHub's modifier grammar: bright plus light plus green, not a word anyone coined on its own [1]. The ISCC-NBS system filed a block of similarly brilliant yellowish greens in 1955 [1], and a 1930 Maerz and Paul plate already carried a close match, first recorded in 1922 [1]. The xkcd 2010 crowd color survey later gave the public name its final spelling [1].\n\nIts nearest named neighbor is [[lighter-green]], a duller green only 3.4 units away [2]; [[bright-green]] is close too, and more vivid [2]. All three sit on the same yellow-green slice of the wheel, a family that also holds [[chartreuse]] [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "No painting in our 23,781-painting archive carries this exact green covering at least one percent of its canvas, as photographed [3]. A color this saturated and this light is rare on an aged, varnished surface, whatever paintings may have once looked like unvarnished [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "its own saturation and lightness, stacked onto green",
+   "first_recorded": "1955 (ISCC-NBS), with a close 1930 Maerz and Paul plate citing 1922",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "lighter-green",
+   "bright-green"
+  ],
+  "parent": "green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 0,
+  "match": {
+   "min_cover": 0.01
+  },
+  "measured": {
+   "lch": [
+    88.0,
+    102.8,
+    140.7
+   ],
+   "nearest": [
+    [
+     "Lighter Green",
+     3.4
+    ],
+    [
+     "Bright Green",
+     3.9
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: ISCC-NBS 1955, Maerz and Paul 1930, xkcd 2010 entries",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph: look-alike edges for bright-light-green",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the 'bright' and 'light' in Bright Light Green each describe?",
+   "choices": [
+    "Saturation and lightness",
+    "Hue and saturation",
+    "Two separate hues",
+    "The painter who named it"
+   ],
+   "answer": "Saturation and lightness",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this exact green appears covering at least 1% of the canvas in some painting in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Bright Light Green stacks two modifiers onto one hue: bright for saturation, light for lightness."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 161
+}

@@ -1,0 +1,130 @@
+{
+ "slug": "dusty-coral",
+ "name": "Dusty coral",
+ "hex": "#F07F5E",
+ "names": [
+  "Dusty coral"
+ ],
+ "tier": "traditional",
+ "depth": "short",
+ "lede": "Dusty coral is a warm, muted orange-pink, ColorHub's English name for the Japanese traditional color Akako-iro, \"red incense colored,\" named for scented wood rather than the reef animal its English name suggests.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The color of red incense wood",
+   "body": "Akako-iro (赤香色) is named in the Wikipedia list of Japan's traditional colors for \"red incense-colored,\" not for coral, the reef animal whose skeleton gives the English name here [1]. The page gives no further history for the name beyond that literal meaning, and it is undocumented in the sources consulted here [1].\n\nIts nearest named neighbor on file is [[dark-peach]], 3.3 units off [2]; [[pinkish-orange]] sits 3.8 off and the everyday name [[coral]] itself is 4.0 off, close enough to blur together on screen despite the different sources."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a color within six units of this swatch in only 33 of 23,781 paintings, 0.14 percent, as photographed; looking inside each painting for at least five percent coverage narrows that to 29 [3]. That makes it rarer than 57 percent of the named colors in our library [3]. It peaks in the 1500s, present in 0.4 percent of our 2,231 paintings from that century, 2.4 times the museums' baseline rate [3]. Inside a painting it most often plays an accent, in 86 percent of its 29 appearances by lightness rank [3].\n\nThe earliest match, Bernardo Daddi's work, dates to 1333, a floor and not a first, since the archive's early centuries are thin [3]. These are computed color matches to photographed, varnished paintings, not pigment identifications [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Akako-iro, \"red incense colored\", after dyed incense wood",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "Wikipedia, Traditional colors of Japan"
+  },
+  "aka": [
+   "Akako-iro"
+  ],
+  "siblings": [
+   "dark-peach",
+   "pinkish-orange",
+   "coral",
+   "mandarin"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Akako-iro (赤香色)"
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 33,
+  "n_within_painting": 29,
+  "pct_archive": 0.14,
+  "rank_pct": 57,
+  "measured": {
+   "lch": [
+    65,
+    55,
+    43
+   ],
+   "nearest": [
+    [
+     "Dark Peach",
+     3.3
+    ],
+    [
+     "Pinkish-Orange",
+     3.8
+    ],
+    [
+     "Coral",
+     4.0
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Traditional colors of Japan\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Traditional_colors_of_Japan"
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: Japanese traditional list, CIEDE2000 distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does Akako-iro name this color after?",
+   "choices": [
+    "Dyed incense wood",
+    "Reef coral",
+    "A ripe persimmon"
+   ],
+   "answer": "Dyed incense wood",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: this color is common in our painting archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Named for incense wood, not the reef animal its English name suggests."
+ ],
+ "words": 251,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ }
+}

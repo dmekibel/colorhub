@@ -1,0 +1,117 @@
+{
+ "slug": "dusky-blue-green",
+ "name": "Dusky Blue-Green",
+ "hex": "#455E57",
+ "names": [
+  "Dusky Blue-Green"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Dusky Blue-Green is a dark, grayed teal first plated by Robert Ridgway in 1912, almost indistinguishable on screen from Dusky Bluish Green, its own near-twin.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 1912 plate, with a near-twin",
+   "body": "Ridgway's *Color Standards and Color Nomenclature* of 1912 plates this swatch at plate XXXIII, hue 39 double-prime, on an aged, scanned original that is itself approximate [1]. The ISCC-NBS charts of 1955 file block 151 as a dark grayish green, 6.7 units from this swatch [1]. The name pairs *dusky* with [[blue-green]] [1].\n\nAt hex #455E57 it measures lightness 38 and chroma 11 in LCH, close to gray [1]. Its closest named neighbors are [[dusky-bluish-green|Dusky Bluish Green]], just 2.7 units away and bluer, and [[dusky-green|Dusky Green]], also 2.7 units off and greener; the two Ridgway plates sit near enough to read as the same color on most screens [2]. [[invisible-green|Invisible Green]] sits 3.9 units off, bluer still [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "This match appears in 1.59% of the 23,781 paintings in our archive (378 paintings, as photographed); the within-painting lens narrows that to 167 [3]. In our archive it is more common than 68% of the named colors [3]. It peaks in the 1900s, present in 1.9% of the 1,674 paintings we have from that decade (32 paintings), 2.5 times the rate its museums would predict [3]. Inside a painting it most often plays a hidden color, in 37% of its 167 appearances by lightness rank within the painting [3]. Its most devoted painter is Émile Bernard, present in 4 of 22 works here, 6.4x the baseline of the museums those works come from (as photographed 5.0x) [3]. It is most over-represented in France, 2.2x expected (58 of 3,443 paintings) [3]. The earliest match dates to 1301, 611 years before the name's 1912 record, a floor and not a first, since the archive's early centuries are thin and a look-alike hue in an aged photograph is not proof of a pigment or dye [3]. These are photographs of aged, varnished paintings, so the match is a screen comparison, not a pigment identification [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a modifier of blue-green: dusky + blue-green",
+   "first_recorded": "1912 (Ridgway, plate XXXIII)",
+   "source": "Ridgway, Color Standards and Color Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "blue-green",
+   "dusky-bluish-green",
+   "dusky-green",
+   "invisible-green"
+  ],
+  "parent": "blue-green",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 378,
+  "pct_archive": 1.59,
+  "n_within_painting": 167,
+  "pct_within_painting": 0.7,
+  "rank_pct": 68,
+  "painters": [
+   "Émile Bernard",
+   "Paul Cezanne"
+  ],
+  "countries": [
+   "France"
+  ],
+  "name_first_recorded": 1912,
+  "earliest_match_year": 1301
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library (data/graph/nodes-d.json): Ridgway 1912, plate XXXIII, hue 39''; ISCC-NBS 1955, block 151 (R/RC)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color graph look-alikes (data/graph/edges-d.json), CIEDE2000",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which plate first fixes the name Dusky Blue-Green in our sources?",
+   "choices": [
+    "Ridgway, 1912, plate XXXIII",
+    "The 2010 xkcd color survey",
+    "The ISCC-NBS charts alone",
+    "Maerz and Paul, 1930"
+   ],
+   "answer": "Ridgway, 1912, plate XXXIII",
+   "kind": "pick"
+  },
+  {
+   "q": "Which named color sits closest to Dusky Blue-Green, at only 2.7 units away?",
+   "choices": [
+    "Dusky Bluish Green",
+    "Dark Slate Grey",
+    "Deep Slate Olive",
+    "Dark Russian Green"
+   ],
+   "answer": "Dusky Bluish Green",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "Dusky Blue-Green and Dusky Bluish Green sit only 2.7 units apart, close enough to look identical on most screens."
+ ],
+ "words": 335,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "field section's presence/rank/decade/painter/country numbers no longer matched data/graph/fieldnotes (stale archive snapshot); replaced with the current fieldnotes facts"
+  ]
+ }
+}

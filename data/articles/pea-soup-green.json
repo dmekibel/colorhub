@@ -1,0 +1,125 @@
+{
+ "name": "Pea Soup Green",
+ "hex": "#94A617",
+ "names": [
+  "Pea Soup Green"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Pea Soup Green is a dull olive-yellow named for the color of split-pea soup, dated by Maerz and Paul to as early as 1430 but almost never photographed in museum paintings.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "An old food word",
+   "body": "Maerz and Paul's 1930 dictionary dates this name to 1430, on plate 10, swatch J2, making it one of the older food-based color names in ColorHub's library [1]. The 1955 ISCC-NBS system, citing the same dictionary, classes it in block 105 [1]. A Wikipedia entry, citing the color-reference site Xona.com, lists the same hex under the same name; our library hedges that single web citation against the two older, dated dictionary sources [1]. The nearest named colors on file are [[barf-green]], [[vomit-green]] and [[puke-green]], at 2.1, \n[[olive]] and [[mustard]] sit nearby in the same dull yellow-green family [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds a close match to Pea Soup Green in only 5, as photographed, essentially absent [2]. That describes this archive, not painting as a whole: a saturated, fairly dark yellow-green like this is harder to mix as a stable paint than its food-color name suggests, and it is a modern color-naming word rather than a historical pigment [2]. The handful of matches are all from the 1800s and 1900s, led by Niels Larsen Stevns and Gustav Klimt [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "split-pea soup",
+   "first_recorded": "Maerz and Paul, 1930, first recorded 1430",
+   "source": "ColorHub color library"
+  },
+  "aka": [],
+  "siblings": [
+   "barf-green",
+   "vomit-green",
+   "puke-green",
+   "avocado-green"
+  ],
+  "parent": null,
+  "children": [
+   "citron-green"
+  ],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 5,
+  "role": {
+   "highlight": 1.0
+  },
+  "measured": {
+   "lch": [
+    65,
+    67,
+    110
+   ],
+   "nearest": [
+    [
+     "Barf Green",
+     2.1
+    ],
+    [
+     "Vomit Green",
+     2.2
+    ],
+    [
+     "Puke Green",
+     2.5
+    ],
+    [
+     "Avocado Green",
+     3.7
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "To what year does Maerz and Paul's dictionary date the name Pea Soup Green?",
+   "choices": [
+    "1430",
+    "1850",
+    "1930",
+    "1995"
+   ],
+   "answer": "1430",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our painting archive finds Pea Soup Green in a large share of its 23,781 paintings.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Pea Soup Green is dated to 1430, but our 23,781-painting archive finds it in only five."
+ ],
+ "words": 211,
+ "status": "draft",
+ "checked": {
+  "by": "batch-writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ },
+ "slug": "pea-soup-green"
+}

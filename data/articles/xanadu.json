@@ -1,0 +1,117 @@
+{
+ "slug": "xanadu",
+ "name": "Xanadu",
+ "hex": "#738678",
+ "names": [
+  "Xanadu"
+ ],
+ "tier": "place",
+ "depth": "short",
+ "lede": "Xanadu is a muted, greyish green named for the place word Xanadu, the legendary capital evoked by Coleridge's poem and later by the film and mansion of the same name, though the exact link to this swatch is undocumented in our sources.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A place word, loosely attached",
+   "body": "Our data classifies Xanadu as a place or institution word, but does not document which particular use of the name (Coleridge's poem, the 1980 film, or any other) the paint color is meant to evoke [1]. The name is also recorded as \"Serpent\" in at least one of our sources, an alternate label for the same swatch [1].\n\nIts closest measured look-alikes are [[hydro|Hydro]] and [[serpent|Serpent]], both read as greener, and [[titmouse-blue|Titmouse Blue]], also read as greener [1]. The ISCC-NBS 1955 system's nearest block is greenish gray, about six units from that block's center [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive of 23,781 paintings finds this color in 483 of them, 2.03 percent, as photographed, more common than 72 percent of our named colors [2]. It peaks in paintings from the 1900s, at 2.0 percent of that century's works, 1.9 times the expected rate, and inside a painting it most often sits as a hidden color, in 38 percent of its appearances [2].\n\nIts most devoted painter is Paul Cezanne, present in 8 of the 50 Cezanne works in our archive, 6.4 times the baseline for the museums those works come from [2]. The color is also over-represented in Post-Impressionist paintings generally, at 5.0 times the expected rate [2]. The earliest match is a 1375 panel; our archive's early centuries are thin, so this is a floor, not a first [2]. In printed English the word peaked in the 2000s, across all its senses, which can include non-color uses of the name [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "Xanadu (place word); the exact link to this swatch is undocumented",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library and graph"
+  },
+  "aka": [
+   "Serpent"
+  ],
+  "siblings": [
+   "hydro",
+   "serpent",
+   "titmouse-blue",
+   "cement-grey"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 483,
+  "match": {
+   "min_cover": 0.02
+  },
+  "measured": {
+   "lch": [
+    54.1,
+    11.1,
+    151.9
+   ],
+   "nearest": [
+    [
+     "Hydro",
+     2.8
+    ],
+    [
+     "Serpent",
+     4.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library and graph: look-alike edges and alternate names for xanadu; ISCC-NBS 1955 block 155",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings) and Google Books Ngram cache, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which painter is most over-represented for the color Xanadu in our archive?",
+   "choices": [
+    "Paul Cezanne",
+    "John Singer Sargent",
+    "Claude Monet (apart from the general Post-Impressionist link)",
+    "Vilhelm Hammershøi"
+   ],
+   "answer": "Paul Cezanne",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm the color Xanadu is named for Coleridge's poem specifically.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Xanadu shows up 6.4 times more often than expected in Paul Cezanne's paintings in our archive."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": [
+   "rank-percentile drift: article said 73%, current data/graph/fieldnotes says 72% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
+  ]
+ },
+ "words": 287
+}

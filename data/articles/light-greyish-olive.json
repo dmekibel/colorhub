@@ -1,0 +1,152 @@
+{
+ "slug": "light-greyish-olive",
+ "name": "Light Greyish Olive",
+ "hex": "#9B9682",
+ "names": [
+  "Light Greyish Olive"
+ ],
+ "tier": "descriptive",
+ "depth": "brief",
+ "lede": "Light Greyish Olive is a muted, pale shade of [[olive]], traced to a 1912 Ridgway plate and found, as photographed, in one painting of our archive in nine.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A Ridgway modifier",
+   "body": "The name combines the modifiers *light* and *greyish* with the base color [[olive]] [1]. It is first recorded in Robert Ridgway's 1912 *Color Standards and Nomenclature*, plate XLVI, hue 21'''', tone b, a scan of an aged plate and so only an approximation of Ridgway's original ink [1]. The ISCC-NBS lists of 1955 fold the same range into block 109, naming it \"light olive gray,\" a Delta-E of 5.4 from this hex [1]. Nearest on file are [[olive-grey]] and [[yellow-grey]], 3.4 and 3.8 units away [1]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this shade, as photographed, in 2,673 of 23,781 paintings, 11.24 percent; within a single canvas it is a distinct area in 1,687 of them, more common than 94 percent of our named colors [2]. Meindert Hobbema is its most devoted painter by a wide margin, using it in 11 of 16 works here, 6.4 times the baseline rate of the museums those paintings come from [2]. It peaks in the 1900s at 8.7 percent of that century's 1,674 paintings, and inside a painting it most often plays a light, in 36 percent of its 1,687 appearances [2]. The earliest match dates to 1100, 812 years before the name's 1912 record; the archive's early centuries are thin, so this is a floor, not a first [2]. It shares canvases with [[beige-grey]] more often than chance, a lift of 4.1 [2]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the modifiers light and greyish applied to the base color olive",
+   "first_recorded": "1912 (Ridgway, Color Standards and Nomenclature, plate XLVI)",
+   "source": "Ridgway, Color Standards and Nomenclature"
+  },
+  "aka": [],
+  "siblings": [
+   "olive-grey",
+   "yellow-grey",
+   "cement",
+   "flint-grey"
+  ],
+  "parent": "olive",
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1687,
+  "measured": {
+   "lch": [
+    62.0,
+    11.3,
+    98.6
+   ],
+   "nearest_iscc": [
+    "light olive gray",
+    5.4
+   ],
+   "nearest": [
+    [
+     "Olive-Grey",
+     3.4
+    ],
+    [
+     "Yellow-Grey",
+     3.8
+    ],
+    [
+     "Cement",
+     4.2
+    ],
+    [
+     "Flint-Grey",
+     4.6
+    ]
+   ]
+  },
+  "role_top": {
+   "role": "light",
+   "pct": 36
+  },
+  "painter": {
+   "name": "Meindert Hobbema",
+   "n": 11,
+   "of": 16,
+   "lift": 6.4
+  },
+  "first_seen": {
+   "year": 1100,
+   "years_before_record": 812
+  },
+  "company": {
+   "with": "Beige Grey",
+   "lift": 4.1,
+   "n": 395
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "book",
+   "cite": "Ridgway, Color Standards and Nomenclature, 1912, plate XLVI, hue 21''''",
+   "loc_kind": "entry",
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Which 1912 work first records Light Greyish Olive?",
+   "choices": [
+    "Ridgway's Color Standards and Nomenclature",
+    "Maerz and Paul's dictionary",
+    "The xkcd crowd survey",
+    "The ISCC-NBS circular"
+   ],
+   "answer": "Ridgway's Color Standards and Nomenclature",
+   "kind": "pick"
+  },
+  {
+   "q": "Which painter in our archive reaches for Light Greyish Olive far more than his peers?",
+   "choices": [
+    "Meindert Hobbema",
+    "Claude Monet",
+    "Shen Zhou",
+    "Paul de Vos"
+   ],
+   "answer": "Meindert Hobbema",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Light Greyish Olive is one of the rarer named colors in our archive.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Meindert Hobbema painted this muted olive-grey in two out of every three works we have of his."
+ ],
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-08",
+  "issues": []
+ },
+ "words": 262
+}

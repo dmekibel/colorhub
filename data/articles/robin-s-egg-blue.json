@@ -1,0 +1,119 @@
+{
+ "slug": "robin-s-egg-blue",
+ "name": "Robin's Egg Blue",
+ "hex": "#98EFF9",
+ "names": [
+  "Robin's Egg Blue"
+ ],
+ "tier": "nature",
+ "depth": "short",
+ "lede": "Robin's Egg Blue is a paler, lighter variant of Robin's Egg, recorded by Maerz and Paul in 1930 and found exactly once in our painting archive.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "The paler half of a pair",
+   "body": "Maerz and Paul's 1930 dictionary is cited by the NBS Circular of 1955 as the source for this hue, which the ISCC-NBS system itself files as block 149, a pale green [1]. The crowd-sourced xkcd color survey of 2010 also records a close match [1]. It is the paler, lighter sibling of [[robin-s-egg|Robin's Egg]], 4.0 units away by our measure, the two sharing the same bird-egg word but sitting at different lightness and chroma [2].\n\nPast that sibling, the nearest neighbor is [[pale-turquoise|Pale Turquoise]], 4.4 units away; [[celeste|Celeste]] and [[pale-sky-blue|Pale Sky Blue]] are both about 5.1 units off [2]. In LCH terms Robin's Egg Blue measures lightness 90, chroma 27, hue 209 degrees, paler and less saturated than its namesake [2]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds Robin's Egg Blue in exactly 1 of 23,781 paintings, as photographed, rarer than 86 percent of the archive's named colors [3]. That single match is a 1904 work by Maurice Denis, where the color plays a hidden role rather than carrying the light [3]. A single match is too thin to support any claim about century, country or painter beyond this one painting, and the hex itself remains a screen approximation [3]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "the eggshell of the American robin, a step paler than Robin's Egg",
+   "first_recorded": "1930, per Maerz and Paul",
+   "source": "ColorHub color library, Maerz and Paul 1930, cited by NBS Circular 553 (1955)"
+  },
+  "aka": [],
+  "siblings": [
+   "robin-s-egg",
+   "pale-turquoise",
+   "celeste",
+   "pale-sky-blue"
+  ],
+  "parent": "robin-s-egg",
+  "children": null,
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 1,
+  "measured": {
+   "lch": [
+    90,
+    27,
+    209
+   ],
+   "nearest": [
+    [
+     "Robin's Egg",
+     4.0
+    ],
+    [
+     "Pale Turquoise",
+     4.4
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: Maerz and Paul 1930, cited by NBS Circular 553 (1955); ISCC-NBS 1955 block 149; xkcd color survey 2010",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub color library: computed LCH and look-alike distances",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "How many paintings in our archive carry Robin's Egg Blue?",
+   "choices": [
+    "1",
+    "0",
+    "about 50",
+    "more than 500"
+   ],
+   "answer": "1",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: Robin's Egg Blue is paler and less saturated than Robin's Egg.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "True",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Robin's Egg Blue turns up exactly once in our 23,781-painting archive."
+ ],
+ "words": 218,
+ "status": "draft",
+ "checked": {
+  "by": "writer",
+  "date": "2026-10-08",
+  "issues": [
+   "lint 2026-10-09"
+  ]
+ }
+}

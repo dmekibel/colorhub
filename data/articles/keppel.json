@@ -1,0 +1,123 @@
+{
+ "slug": "keppel",
+ "name": "Keppel",
+ "hex": "#3AB09E",
+ "names": [
+  "Keppel"
+ ],
+ "tier": "standard",
+ "depth": "brief",
+ "lede": "Keppel is a cool teal-green that has been in use as a color name only since 2001, with no tie back to the older surname it shares.",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A 2001 web color, an older surname",
+   "body": "Our color library dates the name Keppel to 2001, when it was listed on the Xona.com Color List, one of several unofficial web color dictionaries from that era [1]. Keppel is also an old British and Dutch surname, traced further back to a Latin word for a hooded cape, *cappa*, and originally an occupational name for someone who made them [2]. Nothing in our sources ties the 2001 color name to that older family name; we treat any connection as undocumented rather than assume one [1][2].\n\nThe nearest named neighbor by measured color is [[tyrolite-green]], duller than this shade; [[tealish]] sits close by, more vivid [3]. [[persian-green]] and [[zomp]] are a little further out [3]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds a match for Keppel in 3 of 23,781 paintings, about 0.01 percent, rarer than 82 percent of the named colors we track, as photographed [4]. Clean teals this cool and this saturated are uncommon across the whole archive, so a count this small is not unusual for the family [4]. These are photographs of aged, varnished paintings, read as screen colors, not pigment identifications [4]."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "undocumented as a color name beyond the 2001 Xona.com Color List; unrelated to the older Keppel surname",
+   "first_recorded": "2001, Xona.com Color List",
+   "source": "Wikipedia, \"Shades of cyan\""
+  },
+  "aka": [],
+  "siblings": [
+   "tyrolite-green",
+   "tealish",
+   "persian-green"
+  ],
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": []
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+  "n_present": 3,
+  "measured": {
+   "lch": [
+    65.3,
+    36.8,
+    180.5
+   ],
+   "nearest": [
+    [
+     "Tyrolite Green",
+     3.0
+    ],
+    [
+     "Tealish",
+     3.5
+    ]
+   ]
+  }
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "web",
+   "cite": "Wikipedia, \"Shades of cyan\", entry \"Keppel\"",
+   "loc_kind": null,
+   "url": "https://en.wikipedia.org/wiki/Shades_of_cyan"
+  },
+  {
+   "n": 2,
+   "kind": "web",
+   "cite": "Surname reference on \"Keppel\" (Latin cappa, cape-maker)",
+   "loc_kind": null,
+   "url": "https://surnamedb.com/Surname/Keppel"
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color library, look-alike computation (data/graph/edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "Where was the name Keppel first listed as a color, according to our sources?",
+   "choices": [
+    "The Xona.com Color List, 2001",
+    "A 1912 Ridgway plate",
+    "The ISCC-NBS 1955 dictionary",
+    "A Crayola naming contest"
+   ],
+   "answer": "The Xona.com Color List, 2001",
+   "kind": "pick"
+  },
+  {
+   "q": "True or false: our sources confirm this color name comes from the old Keppel family surname.",
+   "choices": [
+    "True",
+    "False"
+   ],
+   "answer": "False",
+   "kind": "true-false"
+  }
+ ],
+ "openers": [
+  "Keppel the color is barely 25 years old, despite sharing a name with a centuries-old family."
+ ],
+ "words": 207,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": []
+ }
+}
