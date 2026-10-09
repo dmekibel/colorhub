@@ -116,10 +116,28 @@ table in `design/LEGAL-COLOR-DATA.md` §8.7:
 
 ## 6. Findings
 
-See the end of this file for the final build's counts (filled in after `python3 tools/photos_corpus.py all` has
-run to completion) -- source/decade/process breakdown, the black-and-white/toned-monochrome drop rate, and the
-photographer list. Honest limits, same as every other corpus in this app: every color here is **as scanned**
-(glass-plate emulsions, Kodachrome dye stability, decades of archival storage, and a digitization scanner's own
-color response all sit between the original scene and the hex value shown), and a palette is a 6-color k-means of
-a ~200px image, so shares are area shares, not exact pixel statistics. The same "screens are approximate" caveat
-on every other color page in the app applies here too.
+Final build (2026-10-09): **4,469 PD/CC0 candidate files**, **3,408 kept as real color photographs** after the
+chroma test -- 178 dropped as plain black-and-white (mean C* < 2.0) and 883 dropped as a toned/near-monochrome
+scan (mean C* < 14.0 with all palette clusters within a ~20° hue spread -- sepia, faded dye, heavy color shift),
+so the drop rate (23.8% of candidates) is itself a finding: a meaningful share of "historic color photography"
+on Commons is a scan that has gone, or always was, nearly one hue.
+
+By process: **Prokudin-Gorsky 1,383**, **Kodachrome (FSA/OWI) 1,015**, **Autochrome 1,010**. By decade: the
+1900s-1910s (2,074 combined, almost entirely Prokudin-Gorsky and early autochromes) and the 1940s (899, almost
+entirely FSA/OWI) are the two real peaks; single-digit counts before 1890 and after 1950 are incidental (a handful
+of Commons files mis-dated or mis-categorized, not a real trend -- this archive has no 1950-1999 color-photography
+coverage at all, since no PD bulk source for that period was found).
+
+Top photographers by kept-photograph count (after merging "Last, First, 1903-1986, photographer"-style LOC
+catalog names and Cyrillic/Latin spelling variants to one form -- `_clean_photographer()` in
+`tools/museums/photod.py`): **Sergey Prokudin-Gorsky 1,226**, Jack Delano 397, Russell Lee 261, Auguste Léon 186,
+Marion Post Wolcott 176, Sarah Angelina Acland 85, Stéphane Passet 69, Arthur Rothstein 69, Jules
+Gervais-Courtellemont 40, Léon Busy 27, plus about 20 more autochromists and FSA photographers each with 5-30
+photographs (full list in `data/photography/index.json`, `top_photographers`).
+
+Honest limits, same as every other corpus in this app: every color here is **as scanned** (glass-plate emulsions,
+Kodachrome dye stability, decades of archival storage, and a digitization scanner's own color response all sit
+between the original scene and the hex value shown), and a palette is a 6-color k-means of a ~200px image, so
+shares are area shares, not exact pixel statistics. The same "screens are approximate" caveat on every other color
+page in the app applies here too. The chroma thresholds (`mono_c`, `tint_c`, `tint_hue_spread`) are printed in
+every build's `data/photography/index.json` so a later tightening is auditable against this one.
