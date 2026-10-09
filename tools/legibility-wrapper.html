@@ -1,0 +1,20 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>ColorHub legibility wrapper</title>
+<style>html,body{margin:0;background:#222}iframe{display:block;border:0}pre{color:#ddd;font:10px monospace;white-space:pre-wrap}</style>
+<pre id="out">pending</pre>
+<script src="/tools/smoke/harness.js"></script>
+<script src="/tools/legibility-routes.js"></script>
+<script src="/tools/legibility-audit.js"></script>
+<script src="/tools/legibility-scenarios.js"></script>
+<script>
+// harness.js's T.open() builds a 375x812 iframe by default (its own CSS); this audit needs to run at the
+// viewport size given in the URL (?w=&h=), so size the iframe to match before SMOKE drives it.
+(function () {
+  const q = new URLSearchParams(location.search), w = +q.get("w") || 375, h = +q.get("h") || 812;
+  const st = document.createElement("style");
+  st.textContent = `iframe{width:${w}px!important;height:${h}px!important}`;
+  document.head.appendChild(st);
+})();
+SMOKE.runFromQuery();
+</script>

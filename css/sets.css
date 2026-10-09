@@ -156,7 +156,7 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sp-lk{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 12px 0 8px;border-radius:999px;background:var(--s2,rgba(0,0,0,.18));color:var(--soft);font:400 15px/1 var(--sans);box-shadow:inset 0 0 0 1px rgba(236,232,223,.14)}
 .sp-lk i{width:22px;height:22px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(236,232,223,.2)}
 .sp-lk.on{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
-.sp-selnote{font:italic 400 14px/1.3 var(--serif);color:var(--soft);margin:6px 0 0}
+.sp-selnote{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin:6px 0 0}
 .sp-imp.blocked>p{margin-bottom:0}
 .sp-imp-t{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .sp-imp-t b{font:400 21px/1.2 var(--serif)}
@@ -209,7 +209,7 @@ html.sheet-open .sx-tray,html.booth .sx-tray{display:none}
 .sx-try-seg.empty{background:transparent;box-shadow:inset 0 0 0 2px dashed rgba(236,232,223,.3);align-items:center;justify-content:center;color:var(--faint)}
 .sx-try-seg.empty span{font:400 32px/1 var(--sans)}
 @keyframes sxTryIn{from{transform:scale(.97);opacity:.4}}
-.sx-try-rel{font:italic 400 15px/1.3 var(--serif);color:var(--soft);margin:10px 0 0;transition:margin .2s var(--ease),opacity .2s var(--ease)}
+.sx-try-rel{font:italic 400 17px/1.3 var(--serif);color:var(--soft);margin:10px 0 0;transition:margin .2s var(--ease),opacity .2s var(--ease)}
 .sx-try-acts{display:flex;gap:10px;margin-top:10px}
 .sx-try-acts .btn{flex:1;height:48px}
 /* collapsed: past a little scroll, the preview stays but takes less of the screen */

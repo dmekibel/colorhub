@@ -652,11 +652,23 @@ function rpBarWire(el) {
   // David, 2026-10-09: "header feels too big -- harder to read the article" -> while actively reading down, the
   // bar slims further (name + back only, the jump tabs fade out); scrolling up a little brings the tabs straight
   // back. A small threshold and a short settle avoid flicker on tiny scroll jitter; reduced motion skips the fade.
+  // David, 2026-10-09 on Aero: "the collapsed sticky header overlaps the iOS status bar" / "sometimes disappears
+  // while scrolling". Root cause, confirmed with a fast scripted scroll (many scroll events with no real time
+  // between them, same shape as a real fast flick): bar.getAnimations() can report its own transform transition
+  // stuck at playState "running" long after its declared duration has elapsed, which keeps the element pinned to
+  // whatever Y it was mid-interpolation through -- the full hidden preset (reads as "disappeared"), or a small
+  // residual offset (the bar IS on screen, just a few px too high, reading as "overlaps the status bar") -- the
+  // bar's own padding-top (calc(var(--top) + 4px)) was never the bug (verified separately, see tools/smoke/
+  // scenarios.js's "pinned header's padding clears a simulated status-bar inset" scenario). A stuck CSSTransition
+  // never resolves on its own; finish() snaps it straight to its own declared end value -- exactly .on's resting
+  // transform -- the moment the bar is meant to be on screen, so nothing is ever left part-way there.
+  const settleOn = () => { if (bar.getAnimations) bar.getAnimations().forEach(a => { try { a.finish(); } catch (e) {} }); };
   let lastY = scrollY, dirAccum = 0;
   const check = () => {
     if (!bar.isConnected) return;
     const on = hero.getBoundingClientRect().bottom < 64;
     if (on !== bar.classList.contains("on")) { bar.classList.toggle("on", on); bar.setAttribute("aria-hidden", on ? "false" : "true"); if (on) rpBarSync(el); }
+    if (on) settleOn();
     const y = scrollY, dy = y - lastY; lastY = y;
     if (!on || Math.abs(dy) < 1) { dirAccum = 0; }
     else {

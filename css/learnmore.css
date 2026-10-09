@@ -19,7 +19,7 @@
 .lr-tc-act:active{opacity:.6}
 .lr-tc-act:last-child{border-bottom:0}
 .lr-tc-act b{font:400 20px/1.1 var(--serif);font-weight:400}
-.lr-tc-act .lr-tc-st{margin-left:auto;font:italic 400 16px/1.2 var(--serif);color:var(--soft);text-align:right}
+.lr-tc-act .lr-tc-st{margin-left:auto;font:italic 400 17px/1.2 var(--serif);color:var(--soft);text-align:right}
 .lr-tc-act svg:last-child{width:16px;height:16px;flex:none;color:var(--faint)}
 .lr-tc-sw{width:18px;height:18px;flex:none;border-radius:var(--r-1);background:var(--surface-2);box-shadow:inset 0 0 0 1px rgba(236,232,223,.14);opacity:0;transition:opacity .3s}
 .lr-tc-sw.on{opacity:1}

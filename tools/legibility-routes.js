@@ -1,0 +1,55 @@
+"use strict";
+// The screens the legibility audit crawls. `key:true` screens are the fast subset tools/check_legibility.js
+// runs by default (wired into tools/smoke.sh's optional "legibility" group); the full list is what produced
+// design/LEGIBILITY-AUDIT.md (node tools/check_legibility.js --full), covering every screen named in that
+// brief: map + sheets, color page (data sections, method notes), painting page, painter page, set page,
+// Learn/Study cards, Train's games, Studio, You, slideshow, subject view, source pages, aesthetics pages.
+// `hash` is appended to index.html (e.g. "#shot=home" or "#/source/ridgway"); `settle` overrides the default
+// post-load wait (ms) for screens that fetch the lazy wiki or draw a canvas before their text is final.
+const LEGIBILITY_ROUTES = [
+  { name: "home-map", hash: "#shot=home", key: true },
+  { name: "home-colors-sheet", hash: "#shot=home:views", settle: 700 },
+  { name: "home-arrange-sheet", hash: "#shot=home:arrange", settle: 700 },
+  { name: "home-search-sheet", hash: "#shot=home:search", settle: 700 },
+  { name: "color-page-data", hash: "#shot=cpage:Teal", key: true, settle: 1200 },
+  { name: "name-page", hash: "#shot=name:ecru", settle: 1000 },
+  { name: "painting-page", hash: "#shot=gallery:color=Cobalt", key: true, settle: 1200 },
+  { name: "painter-page", hash: "#/painter/john-singer-sargent", settle: 1200 },
+  { name: "set-page", hash: "#/set/teal-coral-mustard", settle: 900 },
+  { name: "pair-page", hash: "#/pair/teal+coral", settle: 900 },
+  { name: "meet-the-unit", hash: "#shot=meet", key: true },
+  { name: "swipe-deck", hash: "#shot=deck", key: true },
+  { name: "learnit-meet", hash: "#shot=learnit:meet" },
+  { name: "learnit-recall", hash: "#shot=learnit:recall" },
+  { name: "learnit-tell", hash: "#shot=learnit:tell" },
+  { name: "learnit-done", hash: "#shot=learnit:done" },
+  { name: "train-drill-hue", hash: "#shot=drill:hue", key: true },
+  { name: "train-gym", hash: "#shot=gx:hue" },
+  { name: "odd-one-out", hash: "#/odd", settle: 900 },
+  { name: "odd-whose-palette", hash: "#/odd/whose", settle: 900 },
+  { name: "hue-gradients", hash: "#/hue", settle: 900 },
+  { name: "across-the-line", hash: "#/line", settle: 900 },
+  { name: "studio", hash: "#shot=studio", key: true },
+  { name: "studio-photo-palette", hash: "#shot=studiopv", settle: 900 },
+  { name: "you", hash: "#shot=you", key: true },
+  { name: "you-card", hash: "#shot=you:card" },
+  { name: "slideshow", hash: "#shot=slideshow", key: true, settle: 900 },
+  { name: "slideshow-family", hash: "#shot=slideshow:family", settle: 900 },
+  { name: "subject-view", hash: "#shot=home:subject:family:Blues:Blues", settle: 900 },
+  { name: "source-page", hash: "#/source/ridgway", key: true, settle: 700 },
+  { name: "aesthetics-graph", hash: "#/web", key: true, settle: 1200 },
+  { name: "museum-art", hash: "#/museum/art", settle: 900 },
+  { name: "museum-ideas", hash: "#/museum/ideas", settle: 900 },
+  { name: "museum-world", hash: "#/museum/world", settle: 900 },
+  { name: "daily", hash: "#shot=daily", settle: 700 },
+  { name: "challenge-paint", hash: "#shot=dl:paint", settle: 900 },
+  { name: "taste-color", hash: "#shot=taste:color", settle: 900 },
+  { name: "lab-harmony", hash: "#shot=lab:harmony", key: true },
+  { name: "lab-contrast", hash: "#/lab/contrast", settle: 700 },
+  { name: "practice", hash: "#/practice", settle: 700 },
+  { name: "favorites", hash: "#shot=favs:shelf", settle: 700 },
+  { name: "match", hash: "#shot=match:list", settle: 700 },
+  { name: "mapstudy", hash: "#/mapstudy", settle: 900 },
+  { name: "brand-colors", hash: "#/design/brands", settle: 900 },
+];
+if (typeof module !== "undefined") module.exports = LEGIBILITY_ROUTES;

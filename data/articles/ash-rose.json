@@ -1,136 +1,187 @@
 {
-  "name": "Ash rose",
-  "hex": "#AC8181",
-  "names": [
-    "Ash rose",
-    "Dusty puce"
-  ],
-  "tier": "nature",
-  "depth": "medium",
-  "lede": "Ash Rose greys the pink of the rose flower toward the color of cold ash, a combination ColorHub's library traces only to a Japanese color list, not to an English dictionary.",
-  "sections": [
-    {
-      "id": "name",
-      "title": "Rose cooled toward ash",
-      "body": "Rose is the flower; \"ash\" here describes the cool grey cast, as if the pink had been dusted with cold ash from a fire [1]. ColorHub's library carries this exact name from a Japanese color list, with no separate English-language first record in the sources consulted; who coined the English name, or when, is undocumented here [1]. In printed English the phrase rose fastest in the 1980s and peaked in the 2010s, well after any pigment record [2]. Its closest named neighbors are [[antique-rose|Deep Vinaceous]] and [[antique-rose|Antique Rose]], a near-twin at ΔE 4.4, with [[old-rose|Old Rose]] a lighter relative nearby [3].\n\nColorHub's Japanese-sourced library entries sit alongside many English rose variants without always lining up on a coining date; the lack of an English record here does not mean the color is only Japanese, only that no earlier English source turned up in the sources consulted [1]."
-    },
-    {
-      "id": "field",
-      "title": "Field notes",
-      "body": "Our archive finds Ash Rose in 87 of 23,781 paintings (0.37 percent, as photographed), rarer than 53 percent of named colors here [4]. It most often sits as a hidden color, found that way in 51 percent of the paintings where it dominates, and is over-represented in Indian paintings (2.5 times expected) [4]. The earliest matching canvas dates to the year 1000, among the oldest in the archive; the archive's early centuries are thin, so this is a floor, not a first, though no large age gap to the name's record shows up here regardless [4]. That hidden-color role, more than any other, is what separates it from brighter named pinks: it tends to sit in shaded folds of cloth rather than catching the light [4]. As with other dulled rose names in our library, that recurrence is only a hue match, not evidence that any painter thought of their mixture as Ash Rose [4]."
-    }
-  ],
-  "aside": {
-    "origin": {
-      "named_after": "rose, greyed toward the color of ash",
-      "first_recorded": "undocumented in English sources; carried from a Japanese color list",
-      "source": "ColorHub color library"
-    },
-    "aka": [
-      "Dusty puce (jp)"
-    ],
-    "siblings": [
-      "antique-rose",
-      "old-rose",
-      "marie-antoinette"
-    ],
-    "parent": "rose",
-    "children": [],
-    "disambiguation": [],
-    "other_languages": []
+ "slug": "ash-rose",
+ "name": "Ash rose",
+ "hex": "#AC8181",
+ "names": [
+  "Ash rose"
+ ],
+ "tier": "nature",
+ "depth": "long",
+ "lede": "Ash rose is a dusty, greyed pink-brown that sits in the same small family as Old Rose and Dusty Puce, and that our own library files alongside a Japanese traditional name that translates, almost too fittingly, as \"cherry blossom mouse grey.\"",
+ "sections": [
+  {
+   "id": "name",
+   "title": "A rose with the color taken out of it",
+   "body": "The name follows a pattern common to the whole dusty-rose family: take a flower name, rose, and grey it down with a second word that signals the muting, here \"ash\" [1]. The real 1955 ISCC-NBS filing for the exact name Ash Rose lands on block 19, \"grayish red\" [2]; our own graph's computed-nearest block for this hex lands one neighborhood over, block 18, \"light grayish red,\" only 3.1 units off [1]. Our library also files an identical or near-identical color under Dusty Puce, a separate cross-system name for roughly the same dusty pink-brown [1]. Most strikingly, it sits beside Sakuranezumi (桜鼠), a traditional Japanese name that translates as \"cherry blossom mouse grey\" — two unrelated naming traditions, a Western flower-plus-modifier name and a Japanese animal-plus-flower name, landing on nearly the same muted pink [1]. Neither explains the other; it is coincidence in color space, not shared history."
   },
-  "field": {
-    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-    "n_present": 87,
-    "rank_pct": 53,
-    "role": {
-      "hidden_pct": 51
-    },
-    "measured": {
-      "lch": [
-        58.1,
-        17.8,
-        21.3
-      ],
-      "nearest": [
-        [
-          "Antique rose",
-          4.4
-        ],
-        [
-          "Deep Vinaceous",
-          4.4
-        ]
-      ]
-    },
-    "ngram": {
-      "peak": 2010,
-      "rise": 1980
-    }
+  {
+   "id": "neighbors",
+   "title": "A crowded family of dusty pinks",
+   "body": "In the color graph, Ash Rose sits 4.4 units from [[antique-rose]], more vivid, and 4.5 from [[marie-antoinette]], almost the same color [3]. [[rosy-brown]], 4.8 off, is lighter; [[old-rose]], 5.2 off, is more vivid again; [[mauve-rose]], 5.8 off, is redder; [[brownish-vinaceous]], 5.9 off, is lighter and redder [3]. That is six separate named colors within six units of each other, all variations on the same basic idea of a greyed, dusty pink-brown — the dusty-rose family is one of the most crowded small neighborhoods in the whole graph."
   },
-  "notes": [
-    {
-      "n": 1,
-      "kind": "data",
-      "cite": "ColorHub color library: Japanese traditional color list",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 2,
-      "kind": "data",
-      "cite": "ColorHub Ngram cache, \"ash rose\"",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 3,
-      "kind": "data",
-      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-      "loc_kind": null,
-      "url": null
-    },
-    {
-      "n": 4,
-      "kind": "data",
-      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-      "loc_kind": null,
-      "url": null
-    }
+  {
+   "id": "seen-in",
+   "title": "Seen in",
+   "body": "Among design aesthetics, the closest full-palette match is Angelcore, 3.4 units off on this exact swatch, with Millennial pink a step further at 4.8 units on its neighbor Old Rose, and Decora at 5.5 on Rosy Brown [4]. Three garments in our own archive land close by, and they span three continents and a very wide span of time: a Paracas turban band from Peru's South Coast, 1.4 units off; an early-twentieth-century cover from Sri Lanka, 1.9 off; and a length of copperplate-printed cotton from France, 2.3 off [5]. Its nearest gem twin is the broad diamond and colored-diamond family, 9.3 units off, more a loose family resemblance than a close match [6]."
+  },
+  {
+   "id": "field",
+   "title": "Field notes",
+   "body": "Our archive finds this color in 84 of 23,778 paintings, about 0.35 percent as photographed; a stricter within-painting lens finds it in 39 [7]. That makes it rarer than 55 percent of the named colors in the archive [7]. Inside a painting it most often plays a hidden color, 51 percent of its 39 clearest matches, the least visible rank by lightness within the canvas, by far its most common role [7]. It is sharply over-represented in paintings from India, 2.5 times the expected rate across 721 paintings, and in the Pahari school of Indian miniature painting specifically, 4.2 times expected across 118 works [7]. Named painters carrying it here include Mary Cassatt, Henri Matisse, Henri-Edmond Cross and Georges Lacombe, though none individually stands out as sharply as the India and Pahari numbers do [7].\n\nIt peaks century-wide in the 1900s, 0.4 percent of 1,674 paintings from then, 2.2 times expected, and the single-decade peak is a touch earlier, the 1890s, at the same 2.2 times lift [7]. The earliest match in the archive is from the year 1000, with 54 dated paintings carrying it through to 1922; the archive's early centuries are thin, so this is a floor, not a first [7]. In printed English, the two-word phrase \"ash rose\" itself peaks in the 2010s and rose fastest in the 1980s; because the tracked term covers every use of that phrase, not a count of the color alone, this says more about the phrase's own print history than about how often anyone actually meant this exact dusty pink [7]. This is a computed color match on photographed, varnished canvases, not a pigment test."
+  }
+ ],
+ "aside": {
+  "origin": {
+   "named_after": "a descriptive compound: \"rose\" muted by \"ash\"; the exact coinage is undocumented in the sources consulted",
+   "first_recorded": "undocumented in the sources consulted",
+   "source": "ColorHub color library"
+  },
+  "aka": [
+   "Dusty Puce"
   ],
-  "questions": [
-    {
-      "q": "What does the \"ash\" in Ash Rose describe?",
-      "choices": [
-        "A cool grey cast over the pink",
-        "A specific wood species",
-        "A dye mordant",
-        "A Ridgway plate number"
-      ],
-      "answer": "A cool grey cast over the pink",
-      "kind": "pick"
-    },
-    {
-      "q": "True or false: Ash Rose and Antique Rose are near-twins in color.",
-      "choices": [
-        "True",
-        "False"
-      ],
-      "answer": "True",
-      "kind": "true-false"
-    }
+  "siblings": [
+   "antique-rose",
+   "marie-antoinette",
+   "rosy-brown",
+   "old-rose",
+   "mauve-rose",
+   "brownish-vinaceous"
   ],
-  "openers": [
-    "Ash Rose most often hides in the darker corners of a painting, not its focal points."
-  ],
-  "status": "checked",
-  "checked": {
-    "by": "checker",
-    "date": "2026-10-08",
-    "issues": [
-      "English-language coining undocumented; origin attributed only to the Japanese list source we hold."
+  "parent": null,
+  "children": [],
+  "disambiguation": [],
+  "other_languages": [
+   {
+    "lang": "ja",
+    "name": "Sakuranezumi (桜鼠), \"cherry blossom mouse grey\""
+   }
+  ]
+ },
+ "field": {
+  "dataset": "ColorHub archive, 23,778 paintings, as photographed",
+  "n_present": 84,
+  "n_present_within_painting_lens": 39,
+  "measured": {
+   "lch": [
+    58.1,
+    17.8,
+    21.3
+   ],
+   "nearest": [
+    [
+     "Antique rose",
+     4.4
     ]
+   ]
   },
-  "slug": "ash-rose",
-  "words": 327
+  "iscc_real_1955_filing": {
+   "name": "grayish red",
+   "block": 19
+  },
+  "iscc_computed_nearest": {
+   "name": "light grayish red",
+   "de": 3.1
+  },
+  "most_common_role": "hidden"
+ },
+ "notes": [
+  {
+   "n": 1,
+   "kind": "data",
+   "cite": "ColorHub color library: node src/family, ISCC-NBS 1955 filing, traditional-name cross-reference",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 2,
+   "kind": "data",
+   "cite": "ColorHub sources: ISCC-NBS 1955 dictionary filing (data/sources/iscc-nbs-names.json, iscc-nbs-centroids.json)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 3,
+   "kind": "data",
+   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE ΔE2000, the real look-alike edges)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 4,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: design-look palette twins (ΔE2000 ≤ 8)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 5,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: garment palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 6,
+   "kind": "data",
+   "cite": "ColorHub aesthetics graph: gem palette twins (ΔE2000 ≤ 10)",
+   "loc_kind": null,
+   "url": null
+  },
+  {
+   "n": 7,
+   "kind": "data",
+   "cite": "ColorHub archive (23,778 paintings), two-lens computed match, as photographed",
+   "loc_kind": null,
+   "url": null
+  }
+ ],
+ "questions": [
+  {
+   "q": "What does the Japanese traditional name our library files beside Ash Rose, Sakuranezumi, translate to?",
+   "choices": [
+    "Cherry blossom mouse grey",
+    "Autumn maple red",
+    "Morning fog blue",
+    "Winter plum white"
+   ],
+   "answer": "Cherry blossom mouse grey",
+   "kind": "pick"
+  },
+  {
+   "q": "What role does Ash Rose most often play inside a painting, by our own archive's measurement?",
+   "choices": [
+    "A hidden color, the least visible by lightness in the canvas",
+    "The brightest highlight",
+    "The main subject's primary color",
+    "An even split across all roles"
+   ],
+   "answer": "A hidden color, the least visible by lightness in the canvas",
+   "kind": "pick"
+  },
+  {
+   "q": "Why should the Ngram finding that \"ash rose\" peaks in the 2010s be read with caution?",
+   "choices": [
+    "It counts every use of that phrase in print, not how often anyone meant this exact color",
+    "Google Books does not index English",
+    "The 2010s had no books published",
+    "It only counts French-language books"
+   ],
+   "answer": "It counts every use of that phrase in print, not how often anyone meant this exact color",
+   "kind": "pick"
+  }
+ ],
+ "openers": [
+  "A Japanese traditional name for almost this same dusty pink translates as \"cherry blossom mouse grey.\"",
+  "Ash Rose is one of six closely related dusty-pink names crowded into the same small patch of color space."
+ ],
+ "words": 670,
+ "status": "checked",
+ "checked": {
+  "by": "checker",
+  "date": "2026-10-09",
+  "issues": [
+   "Depth wave pilot: no book concordance or 1930/1912 dictionary entry exists for this name, so depth comes entirely from measured data: the color graph's real look-alikes and traditional-name cross-reference, archive fieldnotes, and garment/gem/look twins. States plainly that the exact coinage is undocumented.",
+   "Fresh-context fact-check (2026-10-09): found one mismatched Ngram claim (field section attributed the curve to the word 'rose' in all senses; the kit's tracked term is actually the two-word phrase 'ash rose'). Corrected the claim and the matching check question."
+  ]
+ }
 }

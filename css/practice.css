@@ -20,7 +20,7 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-t1{font:400 44px/.95 var(--serif);letter-spacing:-.03em;text-wrap:balance;margin:0}
 .pr-t2{font:400 30px/1.02 var(--serif);letter-spacing:-.02em}
 .pr-t1 em,.pr-t2 em{font-style:italic}
-.pr-note,.pr-notep{font:italic 400 16px/1.3 var(--serif);color:var(--soft)}
+.pr-note,.pr-notep{font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
 .pr-notep{margin:10px 0 0;text-wrap:pretty;max-width:40ch}
 .pr-note em,.pr-notep em{font-style:normal}
 .pr-lead{font:400 20px/1.32 var(--serif);color:var(--ink);margin:14px 0 0;text-wrap:pretty;max-width:34ch}
@@ -69,15 +69,15 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-mult{font:italic 400 18px/1 var(--serif);color:var(--good);min-width:24px;text-align:right}
 .pr-lives{display:flex;align-items:baseline;gap:5px;white-space:nowrap}
 .pr-lives .pr-code{min-width:0}
-.pr-lives em{font:italic 400 16px/1 var(--serif);color:var(--soft)}
+.pr-lives em{font:italic 400 17px/1 var(--serif);color:var(--soft)}
 
 /* ---------- the stage and one step ---------- */
 .pr-stage{flex:1;min-height:0;display:flex;flex-direction:column;position:relative}
 .pr-step{flex:1;min-height:0;display:flex;flex-direction:column}
-.pr-stepnote{font:italic 400 15px/1.3 var(--serif);color:var(--soft);text-align:center;margin:2px 0 6px}
+.pr-stepnote{font:italic 400 17px/1.3 var(--serif);color:var(--soft);text-align:center;margin:2px 0 6px}
 .pr-foot{flex:none;min-height:70px;display:flex;align-items:center;justify-content:center;gap:56px;padding-top:12px}
 .pr-foot-card{height:112px}
-.pr-hint{font:italic 400 16px/1.3 var(--serif);color:var(--soft);text-align:center;margin:0}
+.pr-hint{font:italic 400 17px/1.3 var(--serif);color:var(--soft);text-align:center;margin:0}
 .pr-hint.pr-good,.pr-status.pr-good{color:var(--good)}
 
 /* ---------- card: the deck card (§10). Front: the color. Revealed: a paper label slides up. ---------- */
@@ -151,7 +151,7 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-in::placeholder{color:var(--faint);opacity:1}
 .pr-go{width:44px;height:52px;flex:none;display:grid;place-items:center;color:#fff}
 .pr-sub{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px}
-.pr-hintline{flex:1;text-align:center;font:italic 400 16px/1.2 var(--serif);color:var(--soft)}
+.pr-hintline{flex:1;text-align:center;font:italic 400 17px/1.2 var(--serif);color:var(--soft)}
 .pr-hintline em{font-style:normal;color:#fff;letter-spacing:.02em}
 .pr-typef.done,.pr-sub.done{opacity:.45;pointer-events:none}
 .pr-foot-type{min-height:0;padding-top:6px}
@@ -169,14 +169,14 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-saycard.paused{animation:none}
 .pr-paused{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:none;flex-direction:column;align-items:center;gap:4px;padding:14px 22px 16px;border-radius:var(--r-2,14px);background:var(--paper,#EFEBE3);color:var(--paper-ink,#141311);white-space:nowrap;box-shadow:0 10px 30px -10px rgba(0,0,0,.5)}
 .pr-paused b{font:400 30px/1 var(--serif);letter-spacing:-.02em}
-.pr-paused span{font:italic 400 16px/1.2 var(--serif);color:var(--paper-soft,#5E5A51)}
+.pr-paused span{font:italic 400 17px/1.2 var(--serif);color:var(--paper-soft,#5E5A51)}
 .pr-saycard.paused .pr-paused{display:flex}
 .pr-saycard .pr-label .pr-note.pr-v.ok{color:#2D7448}
 .pr-saycard .pr-label .pr-note.pr-v.bad{color:#A8442F}
 .pr-saystat{flex:none;min-height:92px;padding-top:16px;text-align:center}
 .pr-status{margin:0;font:400 24px/1.15 var(--serif);color:#fff;letter-spacing:-.01em}
 .pr-status em{font-style:italic}
-.pr-cmds{margin:6px 0 0;font:italic 400 15px/1.3 var(--serif);color:var(--soft)}
+.pr-cmds{margin:6px 0 0;font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
 .pr-foot-say{min-height:0;padding:0}
 .pr-foot-say:not(:empty){min-height:82px}
 
@@ -254,7 +254,7 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-cmdrows{margin-top:20px}
 .pr-cmdrows .pr-row{min-height:52px;padding:6px 0;flex-wrap:wrap;gap:2px 10px}
 .pr-cmdrows b{font:400 20px/1.1 var(--serif);font-weight:400}
-.pr-cmdrows span{font:italic 400 15px/1.3 var(--serif);color:var(--soft)}
+.pr-cmdrows span{font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
 .pr-switch{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;border-bottom:1px solid var(--rule);font:400 22px/1.1 var(--serif);cursor:pointer}
 .pr-switch input{position:absolute;opacity:0;pointer-events:none}
 .pr-switch i{position:relative;flex:none;width:51px;height:31px;border-radius:999px;background:var(--booth-2,#555555);transition:background .2s}
@@ -294,7 +294,7 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-tile-m{display:flex;flex-direction:column;align-items:stretch;text-align:left;border-radius:var(--r-2,14px);background:var(--surface-2,#1F1D18);overflow:hidden;padding-bottom:14px;min-height:150px;transition:transform var(--dur-0,.12s)}
 .pr-tile-m:active{transform:scale(.97)}
 .pr-tile-m>b{font:400 22px/1.12 var(--serif);letter-spacing:-.01em;font-weight:400;margin:12px 14px 0}
-.pr-tile-m>span:not(.pr-art){font:italic 400 15px/1.28 var(--serif);color:var(--soft);margin:4px 14px 0;text-wrap:pretty}
+.pr-tile-m>span:not(.pr-art){font:italic 400 17px/1.28 var(--serif);color:var(--soft);margin:4px 14px 0;text-wrap:pretty}
 .pr-tile-m.last{box-shadow:inset 0 0 0 1px rgba(236,232,223,.42)}
 .pr-more{margin-top:6px}
 .pr-dock{position:sticky;bottom:0;z-index:5;margin:auto calc(-1 * var(--pr-g)) 0;padding:22px var(--pr-g) calc(var(--bottom,0px) + 12px);background:linear-gradient(to bottom,rgba(14,13,11,0),var(--ground) 30px)}
@@ -342,7 +342,7 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-entry-art i{flex:1;background:var(--c)}
 .pr-entry-t{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
 .pr-entry-t b{font:400 22px/1.12 var(--serif);font-weight:400;letter-spacing:-.01em}
-.pr-entry-t span{font:italic 400 16px/1.3 var(--serif);color:var(--soft)}
+.pr-entry-t span{font:italic 400 17px/1.3 var(--serif);color:var(--soft)}
 .pr-entry svg{flex:none;color:var(--faint)}
 
 /* Reduce Motion and screenshot mode: no movement */
@@ -363,7 +363,7 @@ html:has(#app > .screen.pr-booth) body::after{display:none}
 .pr-learn-these svg{width:14px;height:14px;color:var(--faint)}
 
 /* ---------- craft pass: first-time line, teaching lines, results meaning and delight ---------- */
-.pr-coach{flex:none;margin:0 0 4px;font:italic 400 16px/1.3 var(--serif);color:var(--soft);text-align:center;animation:prFadeIn .35s var(--ease) both}
+.pr-coach{flex:none;margin:0 0 4px;font:italic 400 17px/1.3 var(--serif);color:var(--soft);text-align:center;animation:prFadeIn .35s var(--ease) both}
 .pr-coach[hidden]{display:none}
 @keyframes prFadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 .pr-matchnote{flex:none;min-height:46px;display:flex;align-items:center;gap:10px;margin:8px 0 0;font:400 14px/1.35 var(--sans);color:var(--ink)}

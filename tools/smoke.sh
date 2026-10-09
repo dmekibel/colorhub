@@ -6,14 +6,18 @@
 #      group, in parallel, and assert each screen's behavior with real DOM events (tools/smoke/scenarios.js)
 # Exits non-zero on any failure. It is a smoke test: it catches "this button throws" and "this screen is blank",
 # not visual or design problems (those stay with tools/shots.sh and a human look).
+# --group legibility is the one optional group that isn't in scenarios.js: it runs tools/check_legibility.js
+# against this same server instead (a real-background-contrast crawl, David 2026-10-09's "text has to be super
+# legible" pass) -- not part of a plain `tools/smoke.sh` run, same as the other groups are normally all run together.
 set -u
 cd "$(dirname "$0")/.."
 ROOT="$(pwd)"
 FILTER=()
 STATIC_ONLY=0
+LEGIBILITY=0
 while [ $# -gt 0 ]; do
   case "$1" in
-    --group) FILTER+=(--group "$2"); shift 2;;
+    --group) [ "$2" = "legibility" ] && LEGIBILITY=1 || FILTER+=(--group "$2"); shift 2;;
     --only) FILTER+=(--only "$2"); shift 2;;
     --static-only) STATIC_ONLY=1; shift;;
     *) echo "unknown option $1"; exit 2;;
@@ -48,9 +52,14 @@ SERVER=$!; disown
 trap 'kill $SERVER 2>/dev/null; rm -rf "$OVERLAY"' EXIT
 for i in $(seq 1 50); do curl -s -o /dev/null "http://127.0.0.1:$PORT/index.html" && break; sleep 0.1; done
 
-# ---- 3. the browser scenarios ----
-echo "== browser scenarios (port $PORT)"
-node tools/smoke/run.js "$PORT" ${FILTER[@]+"${FILTER[@]}"} || FAIL=1
+# ---- 3. the browser scenarios (or, for --group legibility, the contrast crawl instead) ----
+if [ "$LEGIBILITY" = 1 ]; then
+  echo "== legibility crawl (port $PORT)"
+  node tools/check_legibility.js --port "$PORT" || FAIL=1
+else
+  echo "== browser scenarios (port $PORT)"
+  node tools/smoke/run.js "$PORT" ${FILTER[@]+"${FILTER[@]}"} || FAIL=1
+fi
 
 echo "total: $(( $(date +%s) - START ))s -- $([ $FAIL = 0 ] && echo SMOKE OK || echo SMOKE FAILED)"
 exit $FAIL

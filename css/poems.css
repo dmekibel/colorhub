@@ -3,7 +3,13 @@
 
 /* ---------- color words ---------- */
 .pw{display:inline;font:inherit;color:inherit;padding:0;border-radius:var(--r-1);cursor:pointer;letter-spacing:inherit;line-height:inherit;text-align:inherit;vertical-align:baseline}
-.pw.lit{color:var(--c);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--c) 45%,transparent);text-decoration-thickness:1px;text-underline-offset:.22em}
+/* legibility pass (2026-10-09): a lit word used to be colored flat var(--c) on the dark ground -- many named
+   hues (mid blues/greens especially) land under 4:1 that way (e.g. "blue" #2563C9 was 3.43:1, "cerulean"
+   #007BA7 was 4.06:1). Blending 80% toward --ink lifts the common case to >=4.5:1 while the word still reads
+   as its own color. This can't guarantee every one of the ~1,000 names clears 4.5:1 -- a near-black named
+   color (navy, a deep maroon) still needs a real per-color pick, same idea as inkHex() in js/core.js but for
+   a text color instead of a swatch ink; that's a js/poems.js (or wherever --c gets set per word) fix, not CSS. */
+.pw.lit{color:color-mix(in srgb,var(--c) 80%,var(--ink) 20%);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--c) 45%,transparent);text-decoration-thickness:1px;text-underline-offset:.22em}
 .pw.dim{text-decoration:underline;text-decoration-color:rgba(236,232,223,.28);text-decoration-thickness:1px;text-underline-offset:.22em}
 .pw.dim i{display:inline-block;width:.5em;height:.5em;background:var(--c);margin-right:.18em;vertical-align:.08em;box-shadow:0 0 0 1px rgba(236,232,223,.42);border-radius:var(--r-1)}
 .pw.note{text-decoration:underline dotted rgba(236,232,223,.55);text-underline-offset:.22em}
@@ -17,13 +23,13 @@
 /* ---------- the lens ---------- */
 .pm-potd{display:flex;flex-direction:column;align-items:flex-start;width:100%;text-align:left;padding:16px 0 18px;border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule);margin-top:6px}
 .pm-potd b{font:400 26px/1.05 var(--serif);letter-spacing:-.015em;margin-top:12px;text-wrap:balance}
-.pm-potd small{font:italic 400 14px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);margin-top:7px}
+.pm-potd small{font:italic 400 17px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);margin-top:7px}
 .pm-potd-line{display:block;font:400 italic 21px/1.35 var(--serif);color:#DAD5C9;margin-top:12px;text-wrap:pretty}
 .pm-potd-line:empty{display:none}
 .pm-potd.big .pm-potd-line{font-size:24px}
 .pm-potd:not(.on):not(.big){min-height:118px}
 .pm-fams{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px}
-.pm-fams button,.pm-chips button{font:italic 400 14px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);padding:8px 0;border-bottom:1px solid transparent;transition:color .2s}
+.pm-fams button,.pm-chips button{font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);padding:8px 0;border-bottom:1px solid transparent;transition:color .2s}
 .pm-fams button.on,.pm-chips button.on{color:var(--ink);border-bottom-color:var(--ink)}
 .pm-chips em{font-style:normal;color:var(--faint);letter-spacing:.04em}
 .pm-chips{display:flex;gap:16px;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;margin:10px calc(-1 * var(--g)) 0;padding:0 var(--g);scrollbar-width:none}
@@ -38,7 +44,7 @@
 .pm-search{margin-top:22px}
 .pm-row{display:block;width:100%;text-align:left;padding:13px 0 12px;border-bottom:1px solid var(--rule)}
 .pm-row-t b{display:block;font:400 21px/1.08 var(--serif);letter-spacing:-.01em;text-wrap:balance}
-.pm-row-t small{display:block;margin-top:5px;font:italic 400 14px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft)}
+.pm-row-t small{display:block;margin-top:5px;font:italic 400 17px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft)}
 .pm-row-t em{font-style:normal;color:var(--ink)}
 .pm-row:active{opacity:.6}
 .pm-more{margin-top:6px}
@@ -46,16 +52,16 @@
 /* ---------- a poem ---------- */
 .poem .art-top{gap:12px}
 .pm-view{display:flex;gap:2px;padding:3px;border:1px solid var(--rule);border-radius:var(--r-1);background:rgba(14,13,11,.62);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
-.pm-view button{font:italic 400 13px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);padding:8px 9px;border-radius:var(--r-1)}
+.pm-view button{font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint);padding:8px 9px;border-radius:var(--r-1)}
 .pm-view button.on{color:var(--paper-ink);background:var(--paper)}
 .pm-palette{display:flex;height:64px;gap:2px;margin-top:6px}
 .pm-palette button{position:relative;background:var(--c);min-width:14px;border-radius:var(--r-1);overflow:hidden;box-shadow:inset 0 0 0 1px rgba(236,232,223,.08)}
-.pm-palette span{position:absolute;left:6px;bottom:6px;right:4px;font:italic 400 13px/1.2 var(--serif);letter-spacing:0;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:clip;opacity:.85}
+.pm-palette span{position:absolute;left:6px;bottom:6px;right:4px;font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;white-space:nowrap;overflow:hidden;text-overflow:clip;opacity:.85}
 .pm-palette [data-ink="dark"]{color:#141311}.pm-palette [data-ink="light"]{color:#fff}
 .pm-pal-cap{margin-top:8px}
 .pm-title{font-size:clamp(38px,11vw,54px)}
 .pm-po{color:var(--faint)}
-.pm-dated{font:italic 400 14px/1.6 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint)}
+.pm-dated{font:italic 400 17px/1.6 var(--serif);letter-spacing:0;text-transform:none;color:var(--faint)}
 .pm-body{display:grid;gap:30px;margin-top:28px}
 .pm-text{font:400 21px/1.55 var(--serif);color:#E3DED3;letter-spacing:.002em}
 .pm-text .eyebrow{margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
@@ -78,9 +84,9 @@
 
 /* ---------- "In poems" on a color page ---------- */
 .pm-in{margin:40px 0 0}
-.pm-in h3{font:italic 400 14px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.pm-in h3{font:italic 400 17px/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft);padding-bottom:10px;border-bottom:1px solid var(--rule);margin-bottom:4px}
 .pm-q{display:block;width:100%;text-align:left;padding:14px 0 13px;border-bottom:1px solid var(--rule)}
 .pm-q-line{display:block;font:400 italic 21px/1.32 var(--serif);color:#E3DED3;text-wrap:pretty}
-.pm-q small{display:block;margin-top:7px;font:italic 400 14px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft)}
+.pm-q small{display:block;margin-top:7px;font:italic 400 17px/1.4 var(--serif);letter-spacing:0;text-transform:none;color:var(--soft)}
 .pm-q:active{opacity:.6}
 .pm-in .btn.ghost{margin-top:4px}
