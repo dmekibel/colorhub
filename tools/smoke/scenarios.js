@@ -353,18 +353,22 @@ scenario("home", "Study the map lives only on the right corner, not duplicated i
 // an engine that doesn't know lvh). A real device is the only way to confirm lvh itself behaves (this harness's
 // navigator/matchMedia spoofing only fools JS reads, never the engine's own large-viewport computation), so this
 // is a static source check that the declarations exist and are ordered to win, not a runtime behavioral one.
-scenario("home", "the floor and every full-screen map root size to the large viewport (100lvh), not just dvh/%", async t => {
+scenario("home", "the floor and every full-screen map root size to max(100lvh, --app-full), not just dvh/%", async t => {
   const appCss = await fetch("/app.css").then(r => r.text());
   const menus2 = await fetch("/css/menus2.css").then(r => r.text());
-  t.expect(/html,body\{margin:0;height:100%;background:var\(--ground\)\}\s*html,body\{height:100lvh\}/.test(appCss), "app.css: html,body's 100lvh layer is missing or not ordered after the 100% one");
-  t.expect(/#app\{min-height:100dvh[^}]*\}\s*#app\{min-height:100lvh\}/.test(appCss), "app.css: #app's 100lvh layer is missing or not ordered after the 100dvh one");
-  t.expect(/\.screen\.fixed\.cx\{[^}]*height:var\(--app-full,\s*100dvh\)\}[\s\S]{0,400}?\.screen\.fixed\.cx\{height:var\(--app-full,\s*100lvh\)\}/.test(menus2), "css/menus2.css: .screen.fixed.cx's 100lvh fallback is missing or not ordered after the 100dvh one");
+  t.expect(/html,body\{margin:0;height:100%;background:var\(--ground\)\}\s*html,body\{height:max\(100lvh,\s*var\(--app-full,\s*0px\)\)\}/.test(appCss), "app.css: html,body's max(100lvh,--app-full) layer is missing or not ordered after the 100% one");
+  t.expect(/#app\{min-height:100dvh[^}]*\}[\s\S]{0,400}?#app\{min-height:max\(100lvh,\s*var\(--app-full,\s*0px\)\)\}/.test(appCss), "app.css: #app's max(100lvh,--app-full) layer is missing or not ordered after the 100dvh one");
+  t.expect(/\.screen\.fixed\.cx\{[^}]*height:var\(--app-full,\s*100dvh\)\}[\s\S]{0,900}?\.screen\.fixed\.cx\{height:max\(100lvh,\s*var\(--app-full,\s*0px\)\)\}/.test(menus2), "css/menus2.css: .screen.fixed.cx's max(100lvh,--app-full) layer is missing or not ordered after the 100dvh one");
 });
-// vbFix() (js/core.js) is read-only now -- it still measures (a probe div's own bounding rect) for the gap log
-// below, but never writes --vb/--app-full/the ios-app class any more, the one part of the old mechanism with a
-// demonstrated way to desync the redraw loop (the panning-stuck bisect above). Confirms both halves: a spoofed
-// gap is still captured for the HUD's "Copy" to carry off the device, and nothing gets written to CSS from it.
-scenario("home", "vbFix() only logs a gap now (read-only diagnostics); it never writes --vb/--app-full any more", async t => {
+// David, 2026-10-09, real HUD numbers off his iPhone (Home Screen app): the layout viewport ran 62px short of
+// the true screen (innerHeight/visualViewport both 894 vs screen.height 956) even with 100lvh unverified there,
+// so --app-full is restored as a belt-and-suspenders floor -- screen.height itself, written once at boot/
+// orientationchange only (not resize, not every sheet open -- the triggers the OLD --vb write path used, even
+// though the panning-stuck bug those were suspected of causing turned out to be a wholly unrelated ghost pointer
+// in js/honey.js, fixed separately). --vb itself and the ios-app class stay retired (never written again); every
+// css max(100lvh,var(--app-full,0px)) consumer already treats an unset --app-full as 0px, so max() just picks
+// 100lvh outside standalone, same as before.
+scenario("home", "vbFix() restores --app-full from screen.height in standalone (--vb and ios-app stay retired)", async t => {
   await H.homeReady(t);
   t.ev(`
     Object.defineProperty(navigator, 'standalone', { value: true, configurable: true });
@@ -380,13 +384,32 @@ scenario("home", "vbFix() only logs a gap now (read-only diagnostics); it never 
   const vb = t.ev("getComputedStyle(document.documentElement).getPropertyValue('--vb').trim()");
   t.expect(!vb || vb === "0px", `--vb should never be written by vbFix() any more (got "${vb}")`);
   const appFull = t.ev("getComputedStyle(document.documentElement).getPropertyValue('--app-full').trim()");
-  t.expect(!appFull, `--app-full should never be written by vbFix() any more (got "${appFull}")`);
+  const wantFull = t.ev("innerHeight + 62");
+  t.expect(appFull === `${wantFull}px`, `--app-full should be screen.height (${wantFull}px) in standalone (got "${appFull}")`);
   t.expect(!t.d.documentElement.classList.contains("ios-app"), "the ios-app class should never be toggled by vbFix() any more");
   const logLen = t.ev("VB_LOG.length");
-  t.expect(logLen >= 1, "vbFix() did not log the spoofed 62px gap as a read-only diagnostic");
+  t.expect(logLen >= 1, "vbFix() did not log the spoofed 62px gap as a read-only diagnostic, alongside writing --app-full");
   const last = t.ev("VB_LOG[VB_LOG.length - 1]");
   t.expect(last.raw === 62, `the logged gap is wrong: ${JSON.stringify(last)}`);
-  // the belt-and-braces box-shadow safety net (css/menus2.css .sheet) is unconditional now, a fixed 320px Y-offset
+  // a .screen.fixed.cx root actually reaches the full spoofed screen height now, via max(100lvh,--app-full).
+  // David, 2026-10-09: this uncovered a real engine quirk, not a test artifact -- a .screen.fixed.cx that was
+  // already laid out BEFORE --app-full got (re)written keeps its stale height until something forces a reflow
+  // (a bare getBoundingClientRect()/getComputedStyle() read on it is NOT enough -- confirmed those still read
+  // the stale value -- but a display:none/"" toggle is), even though a freshly-created element with the exact
+  // same class/rules picks up the new value immediately. vbFix() now forces that reflow itself right after
+  // writing a CHANGED --app-full (js/core.js), so an orientationchange/late-correction while a map/sheet is
+  // already open actually takes effect instead of silently going stale. Checked twice: once for the ordinary
+  // first write (above), and here for a VALUE CHANGE landing on an already-open screen -- the exact case the
+  // reflow fix targets, as opposed to the simpler first-write case any naive fix would already pass.
+  const screenEl = t.$(".screen.fixed.cx");
+  if (screenEl) t.expect(Math.round(screenEl.getBoundingClientRect().height) >= wantFull - 2, `the screen only reached ${Math.round(screenEl.getBoundingClientRect().height)}px, wanted >= ${wantFull}`);
+  if (screenEl) {
+    const wantFull2 = t.ev("innerHeight + 90");
+    t.ev(`Object.defineProperty(screen, 'height', { value: innerHeight + 90, configurable: true }); vbFix();`);
+    const h2 = t.ev(`document.querySelector(".screen.fixed.cx").getBoundingClientRect().height`);
+    t.expect(Math.round(h2) >= wantFull2 - 2, `after screen.height changed and vbFix() ran again, the already-open screen stayed at ${Math.round(h2)}px instead of growing to ${wantFull2} -- the stale-layout reflow fix regressed`);
+  }
+  // the belt-and-braces box-shadow safety net (css/menus2.css .sheet) is unconditional too, a fixed 320px Y-offset
   // regardless of any measurement -- still there, opening an ordinary sheet doesn't need the spoofed gap at all
   t.ev('window.__vbTestClose = sheet("<p>t</p>").close');
   await t.sleep(80);
