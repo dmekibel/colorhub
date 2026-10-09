@@ -663,6 +663,7 @@ function pmMount(el, s, F) {
   const doBtn = el.querySelector(".pmx-do"); doBtn._html = doBtn.innerHTML;
   doBtn.onclick = () => {
     if (STEM_OPEN) { buzz(4); return closeStem(); }
+    if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
     if (document.querySelector(".sheet,.scrim")) return;
     document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());
     buzz(4); STEM_OPEN = true; document.body.classList.add("stem-open");

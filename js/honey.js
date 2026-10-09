@@ -1865,6 +1865,19 @@ function honeycomb(host, opts = {}) {
     cfg = honeyResolveCfg(styleId, liveTweak, lay ? lay.raw.length : 101);
     ZMIN = zFloor(); Z = clamp(Z, ZMIN, ZMAX); draw();
   }
+  // ---- fit mode (David, 2026-10-09: the Arrange sheet covers the middle of the map, so zoomed in "you can
+  // barely see the difference between views" when a setting changes it): while it's on, the map flies to show the
+  // whole thing (zFloor(), the same "whole book fits" zoom the arr.fit arrangements already use) centered in
+  // whatever's left above the sheet (vcy() already accounts for the inset), and update() re-flies there on every
+  // setting change so the new arrangement is visible at a glance instead of mostly hidden under the sheet. The pan
+  // and zoom you had before fitting are remembered and restored (not just reset to default) when it turns off.
+  let fitMode = false, fitSaved = null;
+  const flyToFit = (animate = true) => {
+    if (!lay || lay.globe) return;
+    const zt = zFloor();
+    if (animate) flyTo([0, 0], zt, { buzz: false });
+    else { P = [0, 0]; Plag = P.slice(); Z = clamp(zt, ABS_ZMIN, ZMAX); draw(); }
+  };
   return {
     update(o = {}) {
       if (o.layout) liveTweak = { ...(liveTweak || {}), layout: honeyIsLayout(o.layout) ? o.layout : "mapTall" };
@@ -1875,7 +1888,10 @@ function honeycomb(host, opts = {}) {
       setItems(o.items || (lay && lay.raw), o.focus || (center && center.o), o.soft ? "soft" : "");
       // regions (Families, Hue pages) read best whole: the arrival eases out until most of the book is in view
       const arr = HONEY_ARR[honeyParseKey(cfg.layout).id];
-      if (o.arrange && hlOn && HONEY_HL) l18FrameLit();
+      // fit mode (the Arrange sheet is open) wins over every other arrival: every setting change flies back to
+      // the whole-map view so the change is visible above the sheet instead of mostly hidden under it
+      if (fitMode) flyToFit(true);
+      else if (o.arrange && hlOn && HONEY_HL) l18FrameLit();
       else if (o.arrange && arr && arr.fit && !lay.globe) { P = [0, 0]; Plag = P.slice(); zoomTo(Math.max(ZMIN, Math.min(Z, ZMIN * 1.3)), W / 2, vcy()); }
       // a new order travels to the middle (for Center on, where the chosen color now sits)
       else if (o.recenter && lay.finite && !lay.globe && lay.pts.length) { const c = lay.pts.reduce((m, q) => Math.hypot(q.x, q.y) < Math.hypot(m.x, m.y) ? q : m, lay.pts[0]); P = [c.x, c.y]; Plag = P.slice(); draw(); }
@@ -1884,6 +1900,15 @@ function honeycomb(host, opts = {}) {
     // so a bottom sheet never covers the magnified middle: the lens center, the "center" bubble and the
     // vignette all recenter into whatever's still visible above it. Animated (~300ms; see loop()'s insetCur tween).
     setInset({ bottom } = {}) { insetBottom = Math.max(0, +bottom || 0); kick(); },
+    // the Arrange sheet (js/home.js chooser("look")): enterFit() remembers the pan/zoom you had and flies to the
+    // whole-map view (flyToFit, above); every update() while it's on flies back there so a setting change is
+    // visible at once. exitFit() flies back to what you had -- not just a reset -- when the sheet closes.
+    enterFit() { if (!lay || lay.globe) return; if (!fitMode) { fitSaved = [P[0], P[1], Z]; fitMode = true; } flyToFit(true); },
+    exitFit() {
+      if (!fitMode) return; fitMode = false;
+      const s = fitSaved; fitSaved = null;
+      if (s) flyTo([s[0], s[1]], s[2], { buzz: false });
+    },
     // legacy back-compat shims (the pre-preset "Lens strength" / "Lens mode" controls, if anything still calls them)
     lens: k => { if (!(liveTweak && liveTweak.m0 != null)) { const base0 = (HONEY_STYLES[styleId] || HONEY_STYLES.current).cfg, pm0 = base0.m0 != null ? base0.m0 : HONEY_CFG_BASE.m0, pm1 = base0.m1 != null ? base0.m1 : HONEY_CFG_BASE.m1; applyTweak({ m0: pm1 + (pm0 - pm1) * Math.max(.12, clamp(+k, 0, 2)) }); } },
     lensMode: m => applyTweak({ lensMode: m === "edges" ? "edges" : m === "none" ? "none" : "round" }),

@@ -184,6 +184,80 @@ scenario("home", "corners always come back after a sheet or a drag", async t => 
   t.expect(cv, "no canvas");
 });
 
+// David: "clicking it again minimizes it, and then automatically it expands again by itself." The corner's "on"
+// z-index is meant to float it above its own scrim so a second real tap lands back on the button, but the button
+// lives inside #app's own stacking context, which caps it there regardless -- a real tap at that spot always hits
+// the scrim instead. That still closes it (the scrim's own pointerdown calls closeStem), but iOS can still fire a
+// delayed synthetic click afterward that lands on the now-exposed button once the scrim is gone, reopening what
+// was just closed. js/core.js's stemJustClosed() swallows an open attempt in the instant after a close.
+scenario("home", "closing a corner's menu stays closed (no ghost-click reopen)", async t => {
+  await H.homeReady(t);
+  for (const sel of ["#hmDo", "[data-rooms-corner]"]) {
+    await t.click(sel, { wait: 200 });
+    t.expect(t.ev("STEM_OPEN"), `${sel}: the menu did not open`);
+    // what a real finger tap at the button's own spot actually hits while the menu is open (the scrim, not the
+    // button -- see the comment above): close it exactly that way, not with a programmatic .click() on the button
+    const btn = t.$(sel), r = btn.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    const hit = t.d.elementFromPoint(cx, cy);
+    const o = { bubbles: true, cancelable: true, clientX: cx, clientY: cy, pointerId: 3, pointerType: "touch", isPrimary: true, view: t.w };
+    hit.dispatchEvent(new t.w.PointerEvent("pointerdown", o));
+    await t.sleep(50);
+    t.expect(!t.ev("STEM_OPEN"), `${sel}: tapping where the menu covers it did not close it`);
+    // the removal timer (closeStem's ~320ms fade) runs after this; a ghost click landing on the real button once
+    // it's exposed again must not reopen the menu
+    await t.sleep(250);
+    btn.dispatchEvent(new t.w.MouseEvent("click", { bubbles: true, cancelable: true, clientX: cx, clientY: cy, view: t.w }));
+    await t.sleep(150);
+    t.expect(!t.ev("STEM_OPEN") && !t.$(".rooms-stem"), `${sel}: a click just after closing reopened the menu by itself`);
+    await t.sleep(2000);
+    t.expect(!t.ev("STEM_OPEN") && !t.$(".rooms-stem"), `${sel}: the menu reopened on its own 2s after closing`);
+  }
+});
+
+// David: "if I change something about the map, like the number of colors or something else, the bottom corner
+// buttons disappear, and I'm unable to get them back." Every setting in both sheets, closed every way, must leave
+// both corners visible and tappable -- not just the stage chips the older regression test covers.
+scenario("home", "every Show/Arrange setting leaves both corners tappable after closing", async t => {
+  const corners = async why => {
+    for (const sel of ["#hmDo", "[data-rooms-corner]"]) {
+      const e = t.$(sel); t.expect(e, `${sel} is missing ${why}`);
+      if (!e) continue;
+      const cs = getComputedStyle(e);
+      t.expect(+cs.opacity > .9 && cs.visibility !== "hidden" && cs.pointerEvents !== "none", `${sel} is hidden ${why} (opacity ${cs.opacity}, pointer-events ${cs.pointerEvents})`);
+      const r = t.reachable(e); t.expect(!r, `${sel} ${r} ${why}`);
+    }
+  };
+  await H.homeReady(t);
+  // Colors: family, tone, filter, a collection -- each tried from a clean slate (picking one can narrow the map to
+  // nothing for another, which the app itself resets via "Clear filters"; that's app behavior, not what's under test)
+  await H.sheet(t, "colors");
+  for (const [sel, label] of [['.hm-fam[data-famv]:not(.on)', "a family chip"], ['.hm-seg[data-key="tone"] button:not(.on)', "a tone chip"],
+    ['.hm-seg[data-key="filter"] button:not(.on)', "a filter chip"], ['.cx-chip[data-src]:not(.on)', "a collection chip"]]) {
+    const b = t.$(sel);
+    if (!b) { t.notes.push(`no "${label}" to pick`); continue; }
+    await t.click(b, { wait: 400 });
+    t.expect(b.classList.contains("on"), `${label} "${t.text(b)}" did not turn on`);
+    const clear = t.$("[data-clear]"); if (clear && !clear.hidden) await t.click(clear, { wait: 300 });
+  }
+  await t.click("[data-sheet-close]", { wait: 400 });
+  await t.waitFor(() => !t.$(".sheet"), 4000, "the Colors sheet to close");
+  await corners("after changing family/tone/filter/collection and closing Colors");
+
+  // Arrange: a shape, its order, a Look, a feel slider, Edges
+  await H.sheet(t, "arrange");
+  const arrB = t.$$(".hm-arr-b:not(.on)")[0]; if (arrB) { await t.click(arrB, { wait: 500 }); t.expect(arrB.classList.contains("on"), "the arrange-by chip did not turn on"); }
+  const ordB = t.$('[data-ord]:not(.on)'); if (ordB) await t.click(ordB, { wait: 400 });
+  const lookB = t.$(".hm-look-chip:not(.on)"); if (lookB) { await t.click(lookB, { wait: 300 }); t.expect(lookB.classList.contains("on"), "the Look chip did not turn on"); }
+  const feel = t.$("[data-feel] input");
+  if (feel) { feel.value = .85; feel.dispatchEvent(new t.w.Event("input", { bubbles: true })); await t.sleep(300); }
+  const endB = t.$("[data-endless]:not(.on)"); if (endB) { await t.click(endB, { wait: 400 }); t.expect(endB.classList.contains("on"), "the Edges toggle did not turn on"); }
+  await t.click("[data-sheet-close]", { wait: 400 });
+  await t.waitFor(() => !t.$(".sheet"), 4000, "the Arrange sheet to close");
+  await corners("after changing shape/order/Look/feel/Edges and closing Arrange");
+  await t.sleep(1500);
+  await corners("1.5s after closing Arrange");
+});
+
 scenario("home", "View sheet opens; stage chips change the count", async t => {
   await H.homeReady(t);
   await H.sheet(t, "colors");
