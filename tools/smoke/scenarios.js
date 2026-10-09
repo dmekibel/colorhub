@@ -3210,27 +3210,42 @@ scenario("paintings", "a painting's identity (title, painter, museum) sits above
   t.expect(stripTop < 812, `the palette strip sits at y=${Math.round(stripTop)}, below the 812px fold`);
 });
 // David, relayed 2026-10-09 ("usually tapping a color should open the color, not the segmentation of it"):
-// a strip tile now opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md); "Where this
-// sits on the painting" moved to the small glyph in its corner, a second, explicit gesture.
-scenario("paintings", "a painting's strip tile opens its color page in one tap; the Where glyph locates it instead", async t => {
+// a strip tile opens its color's page in one tap, the app-wide [data-swatch] rule (CLAUDE.md).
+// David, 2026-10-09 again ("the palette strip looks weird now because there's a symbol on the colors... it
+// looked better when the swatches had no symbols on top"): the corner "Where" glyph is gone from the strip
+// entirely. "Where this sits on the painting" is now a long-press on a strip chip, and an explicit row action
+// (the same [data-locate] glyph, just in the expanded list below the strip) -- never a symbol sitting on a chip.
+// NOTE: a timed (480ms setTimeout-driven) long-press is not simulated here -- tools/smoke/scenarios.js's own
+// pre-existing "sets / long-press a swatch adds it to the tray" scenario (same js/settray.js SX_HOLD mechanism
+// this chip opts out of) is independently flaky under Chrome's --virtual-time-budget for the same reason: a
+// real-time setTimeout inside the iframe racing the harness's own outer-page timing doesn't advance reliably
+// under virtual time. Manually verified instead (Browser pane, real clock, 2026-10-09): press-hold-release on
+// a strip chip locates it (dims the painting, shows the caption, the trailing click is swallowed -- still on
+// the painting page); a second long-press clears it; a plain short tap is unaffected and still opens the
+// color page. This scenario covers everything that IS reliable under virtual time: the glyph is gone from the
+// strip, a plain tap still opens the page, and the row action (an ordinary click, no timer) does the same job.
+scenario("paintings", "a painting's strip tile opens its color page in one tap, with no Where glyph on the chip; the expanded list's row action locates it", async t => {
   await t.open("#/gallery/12", { settle: 800 });
   t.expect(!t.$("[data-glwhere]"), "the old On the painting switch is still in the DOM");
   await t.waitFor("[data-glswatches] [data-glj]", 15000, "a palette swatch tile");
   const tileAt0 = () => t.$('[data-glswatches] [data-glj="0"]');
   t.expect(tileAt0().hasAttribute("data-swatch"), "the strip chip isn't a [data-swatch] (one tap should open its page)");
+  t.expect(!tileAt0().querySelector("[data-locate], .pal-where"), "the strip chip still has a Where glyph on it");
+  t.expect(t.$("[data-glswatches]").hasAttribute("data-no-hold"), "the strip doesn't opt out of settray.js's app-wide long-press (needed so its own long-press can locate instead)");
   await t.click(tileAt0(), { force: true, wait: 600 });
   await t.waitFor(".cp-page", 8000, "the color page after tapping the chip body");
   await t.click(TRL.screenBack(t), { wait: 600 });
-  await t.waitFor("[data-glswatches] [data-glj]", 10000, "the painting page again after Back");
-  const whereAt0 = () => t.$('[data-glswatches] [data-glj="0"] [data-locate]');
-  t.expect(whereAt0(), "no Where glyph on the chip");
-  await t.click(whereAt0(), { force: true, wait: 400 });
-  t.expect(tileAt0().classList.contains("loc"), "the chip doesn't show as located after tapping its Where glyph");
-  await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims around the located color");
+  // the expanded list's own row action: an ordinary click, no timing involved, so it's reliable here
+  await t.waitFor("[data-glrows] [data-glj]", 10000, "the expanded palette rows");
+  const rowWhereAt0 = () => t.$('[data-glrows] [data-glj="0"] [data-locate]');
+  t.expect(rowWhereAt0(), "no Where row-action on the expanded list");
+  await t.click(rowWhereAt0(), { force: true, wait: 400 });
+  t.expect(t.$('[data-glrows] [data-glj="0"]').classList.contains("loc"), "the row doesn't show as located after tapping its Where action");
+  await t.waitFor(() => t.$("[data-gllitcv]").classList.contains("on"), 4000, "the painting dims from the row action");
   const cap = t.$("[data-gllocate]");
   t.expect(cap && !cap.hidden && /% of the canvas/.test(t.text(cap)), `the locate caption is missing or wrong: "${cap && t.text(cap)}"`);
-  await t.click(whereAt0(), { force: true, wait: 400 });
-  t.expect(!tileAt0().classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping Where again didn't clear the locate state");
+  await t.click(rowWhereAt0(), { force: true, wait: 400 });
+  t.expect(!t.$('[data-glrows] [data-glj="0"]').classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping the row action again didn't clear the locate state");
   t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "the dim canvas is still on after clearing locate");
 });
 // The Analysis section's "Learn this painting" button (js/artwiki.js awAnalysis) was guarded by

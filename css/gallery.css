@@ -209,15 +209,19 @@
 .gl-strip .pal[data-ink="dark"],.pal-name i[data-ink="dark"]{color:rgba(14,13,11,.78)}
 .gl-strip .pal[data-ink="light"],.pal-name i[data-ink="light"]{color:rgba(255,255,255,.88)}
 .gl-strip .pal,.gl-pal-ui .pal-name{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
-/* "Where" glyph (David, relayed 2026-10-09): a tap on the chip itself opens the color's page now; this small
-   corner control is the one explicit way left to locate it on the canvas. 24px hit target (padding, not size)
-   so it stays tappable without crowding the chip's own percentage label. */
-/* 28px box + padding keeps the tap target close to this app's other new controls (countify's 32px
-   .cnt-b) without the circle itself dominating a narrow, low-share chip (craft critique, 2026-10-09) */
-.pal-where{position:absolute;top:0;right:0;width:28px;height:28px;padding:3px;box-sizing:content-box;display:grid;place-items:center;opacity:.78;border-radius:50%}
-.pal-where:active{opacity:1;background:rgba(0,0,0,.2)}
+/* "Where" glyph (David, 2026-10-09: "the palette strip looks weird now because there's a symbol on the
+   colors... it looked better when the swatches had no symbols on top"): moved off the strip entirely -- a tap
+   on a strip chip opens the color's page, a long-press locates it (js/gallery.js's wireLocate). This row
+   version is the explicit, always-visible way to do the same thing from the expanded list below the strip.
+   28px box + padding keeps the tap target close to this app's other controls (countify's 32px .cnt-b) without
+   the circle itself dominating the row. */
+.gl-pal-ui .pal-name{position:relative;padding-right:34px}
+/* sits on the plain page background now, not a colored chip, so a fixed neutral color (not the old per-swatch
+   contrast-aware ink) is the right call here */
+.pal-where{position:absolute;top:6px;right:0;width:28px;height:28px;padding:3px;box-sizing:content-box;display:grid;place-items:center;opacity:.6;border-radius:50%;color:var(--faint)}
+.pal-where:active{opacity:1;background:var(--lift);color:var(--soft)}
 .pal-where svg{width:14px;height:14px}
-.gl-strip .pal.loc .pal-where{opacity:1}
+.gl-pal-ui .pal-name.loc .pal-where{opacity:1;color:var(--ink)}
 .gl-modes-f{position:relative;margin:8px calc(-1 * var(--g)) 0}
 .gl-modes-f::before,.gl-modes-f::after{content:"";position:absolute;top:0;bottom:0;width:36px;z-index:1;pointer-events:none;opacity:0;transition:opacity .2s}
 .gl-modes-f::before{left:0;background:linear-gradient(90deg,var(--ground) 20%,transparent)}

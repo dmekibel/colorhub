@@ -1137,17 +1137,18 @@ function glPage(i, d, fromHex, tol) {
     // Each strip chip now opens its color's page in one tap, the app-wide rule (CLAUDE.md "one tap on any color
     // opens its page"; David, relayed 2026-10-09: "usually tapping a color should open the color, not the
     // segmentation of it") -- data-swatch hands that straight to the global delegate (js/swatch.js), no local
-    // code needed. "Where this sits on the painting" moves to the small glyph in the corner, a second, explicit
-    // gesture (swatch.js's own long-press is already claimed app-wide for "add to a set" -- js/settray.js -- so
-    // this can't reuse that slot): tapping it toggles the dim-and-glow locate view, same as the whole chip used to.
-    // the locate glyph carries the index on data-locate itself (NOT a second data-glj) -- a chip's own [data-glj]
-    // must stay a one-element-per-color selector; tools/smoke/scenarios.js and this file's own curPal-size
-    // checks both count by it
-    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span><i class="pal-where" data-locate="${j}" tabindex="0" role="button" aria-pressed="${locate && locate.j === j}" aria-label="Where ${esc(nameOf(p.h).n)} is on the painting">${GL_WHERE_ICON}</i></button>`).join("");
+    // code needed. "Where this sits on the painting" used to live in a corner glyph on every chip; David,
+    // 2026-10-09: "the palette strip looks weird now because there's a symbol on the colors... it looked
+    // better when the swatches had no symbols on top." Removed from the strip entirely -- it's now a long-press
+    // on a strip chip (wireLocate(), below: its own [data-no-hold] opt-out of js/settray.js's app-wide "long-
+    // press a swatch adds it to your set", since that's the same gesture slot) and an explicit row action in
+    // the expanded list (the [data-locate] glyph there, the one nested-control exemption js/swatch.js's capture
+    // delegate already recognizes, same as the old strip glyph did).
+    el.querySelector("[data-glswatches]").innerHTML = pal.map((p, j) => `<button class="pal${near && near.i === j ? " on" : ""}${p.out ? " gl-out" : ""}${locate && locate.j === j ? " loc" : ""}" data-glj="${j}" data-swatch="${p.h}" style="--c:${p.h};flex:${(Math.max(p.share, .08) * 100).toFixed(1)}" data-ink="${ink(p.h)}" aria-label="${esc(nameOf(p.h).n)}"><span>${p.pick ? "" : p.share < .005 ? "<1%" : Math.round(p.share * 100) + "%"}</span></button>`).join("");
     el.querySelector("[data-glrows]").innerHTML = pal.map((p, j) => {
       const nm = glName(p.h), fam = !nm.sub && !p.out && typeof familyOf === "function" && familyOf(p.h);
       const sub = [p.out ? "Stands out" : nm.sub ? nm.sub.charAt(0).toUpperCase() + nm.sub.slice(1) : fam ? fam.head.n + " family" : "", p.pick ? "Picked" : glPctTxt(p.share)].filter(Boolean).join(" · ");
-      return `<button class="pal-name${near && near.i === j ? " on" : ""}" data-swatch="${p.h}" data-glj="${j}"><i style="--c:${p.h}" data-ink="${ink(p.h)}"></i><b>${esc(nm.t)}</b><span>${esc(p.out && nm.sub ? sub + " · " + nm.sub : sub)}</span><em class="mono">${p.h}</em></button>`;
+      return `<button class="pal-name${near && near.i === j ? " on" : ""}${locate && locate.j === j ? " loc" : ""}" data-swatch="${p.h}" data-glj="${j}"><i style="--c:${p.h}" data-ink="${ink(p.h)}"></i><b>${esc(nm.t)}</b><span>${esc(p.out && nm.sub ? sub + " · " + nm.sub : sub)}</span><em class="mono">${p.h}</em><i class="pal-where" data-locate="${j}" tabindex="0" role="button" aria-pressed="${locate && locate.j === j}" aria-label="Where ${esc(nameOf(p.h).n)} is on the painting">${GL_WHERE_ICON}</i></button>`;
     }).join("");
     drawCov(pal);
     const arrive = el.querySelector("[data-glarrive]");
@@ -1285,16 +1286,48 @@ function glPage(i, d, fromHex, tol) {
   }
   // the How-many slider is wired by countify() itself (built lazily inside drawModes, see kCtl) -- its onSet
   // already updates curK, clears locate and redraws, same as this used to do by hand
-  el.querySelector("[data-glswatches]").onclick = e => {
-    // only the small "Where" glyph toggles locate now; a tap anywhere else on the chip is a plain [data-swatch]
-    // and js/swatch.js's own capture-phase delegate already opened its color page before this ever runs
+  // the expanded list's own "Where" glyph (unchanged pattern from the old strip glyph, just moved here)
+  el.querySelector("[data-glrows]").onclick = e => {
     const loc = e.target.closest("[data-locate]"); if (!loc) return;
     buzz(5); toggleLocate(+loc.dataset.locate);
   };
-  el.querySelector("[data-glswatches]").addEventListener("keydown", e => {
+  el.querySelector("[data-glrows]").addEventListener("keydown", e => {
     const loc = e.target.closest("[data-locate]"); if (!loc || (e.key !== "Enter" && e.key !== " ")) return;
     e.preventDefault(); buzz(5); toggleLocate(+loc.dataset.locate);
   });
+  // a long-press on a strip chip also toggles locate now that the corner glyph is gone (David, 2026-10-09: it
+  // "looked weird" with a symbol on every swatch). js/settray.js's own app-wide long-press ("add to a set")
+  // already claims this gesture on every [data-swatch] in the app, so the strip opts out of it (data-no-hold,
+  // the same exemption cp-hero and sheets already use) and runs its own shorter-lived version instead. The
+  // click a completed press would otherwise also fire needs swallowing the same way settray.js swallows ITS
+  // own: a capture-phase listener on `window` (not document -- window's capture runs before js/swatch.js's own
+  // document-level capture delegate, regardless of script load order, since window sits outside document in
+  // the capture path) that drops the next click if it followed a long-press within the strip.
+  const stripEl = el.querySelector("[data-glswatches]");
+  stripEl.dataset.noHold = "";
+  const LOC_HOLD = 480;
+  let locPress = null, locJustHeld = 0;
+  stripEl.addEventListener("pointerdown", e => {
+    const b = e.target.closest("[data-glj]"); if (!b || e.button > 0) return;
+    if (locPress) clearTimeout(locPress.t);
+    const p = { x: e.clientX, y: e.clientY, j: +b.dataset.glj };
+    p.t = setTimeout(() => {
+      if (locPress !== p) return;
+      locPress = null; locJustHeld = performance.now();
+      buzz(6); toggleLocate(p.j);
+    }, LOC_HOLD);
+    locPress = p;
+  });
+  const locCancel = () => { if (locPress) { clearTimeout(locPress.t); locPress = null; } };
+  stripEl.addEventListener("pointermove", e => { if (locPress && Math.hypot(e.clientX - locPress.x, e.clientY - locPress.y) > 10) locCancel(); });
+  ["pointerup", "pointercancel"].forEach(k => stripEl.addEventListener(k, locCancel));
+  const locSwallow = e => {
+    if (!locJustHeld || performance.now() - locJustHeld > 1200) return;
+    if (!e.target.closest || !stripEl.contains(e.target)) return;
+    locJustHeld = 0; e.preventDefault(); e.stopPropagation();
+  };
+  addEventListener("click", locSwallow, true);
+  cleanup.push(() => removeEventListener("click", locSwallow, true));
   el.querySelector("[data-glorder]").onclick = e => {
     if (e.target.closest("[data-glmore]")) { modesOpen = !modesOpen; buzz(5); drawPalette(); return; }
     const b = e.target.closest("[data-glo]"); if (!b || b.dataset.glo === mode) return;
