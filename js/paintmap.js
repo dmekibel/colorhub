@@ -402,6 +402,13 @@ function pmLayRings(list, seed) {
 // free integer cell (this engine's grid needs one painting per cell), searching outward on the rare collision --
 // phyllotaxis is specifically the pattern that packs points with the fewest collisions in the first place, so
 // this almost always resolves within a ring or two.
+// David, 2026-10-09 ("the Spiral view looks off because of all the empty space"): the radius constant was 1.6,
+// which packs k points into a disk of area pi*(1.6*sqrt(k))^2 -- about 8x more area than the k unit-area grid
+// cells actually need (a disk of k unit cells has radius sqrt(k/pi) = 0.564*sqrt(k)), so most of that disk was
+// genuinely empty grid, not an illusion of the lens. 0.62*sqrt(k) is just above that theoretical minimum --
+// close to as dense as Rings' own zero-gap shells (Rings enumerates literally every cell in ring order, so it's
+// the tightest possible reference point) -- leaving the collision search below just enough slack that it
+// resolves in a ring or two instead of piling up near the seed.
 function pmLaySpiral(list, seed) {
   const L = pmSimilarOrder(list, seed), n = L.length, GOLD = Math.PI * (3 - Math.sqrt(5));
   const occupied = new Set(), X = new Int32Array(n), Y = new Int32Array(n);
@@ -409,7 +416,7 @@ function pmLaySpiral(list, seed) {
   for (let k = 0; k < n; k++) {
     let x = 0, y = 0;
     if (k > 0) {
-      const rad = Math.sqrt(k) * 1.6, ang = k * GOLD;
+      const rad = Math.sqrt(k) * .62, ang = k * GOLD;
       x = Math.round(rad * Math.cos(ang)); y = Math.round(rad * Math.sin(ang));
       if (occupied.has(key(x, y))) {
         outer: for (let ring = 1; ring < 30; ring++) {
@@ -519,6 +526,87 @@ function pmImages(onReady) {
   return { get: i => cache.get(i), big: i => bigs.get(i), want, stats, destroy: () => { dead = true; cache.clear(); bigs.clear(); } };
 }
 
+// ---------- tier 0 / tier 1 sprite atlas ----------
+// David, 2026-10-09: "a tiny version of every picture, and when you zoom in, it loads the bigger one" -- the
+// per-painting streaming above (pmImages/want/bake) is a waterfall of thousands of requests once thousands of
+// cells are ever on screen across a session, even though only a handful are EVER big enough to be worth a real
+// fetch at once. tools/paintmap_atlas.py builds two cheap sheet tiers that cover everything else:
+//   tier 0  data/paintmap/atlas0.webp -- every painting (~23,778), a TIER0_TILE-px center-cropped square, packed
+//           into ONE shared sheet in gallery-index order. One fetch (+ the tiny manifest), loaded once at map
+//           open; every cell can drawImage its own real tiny picture the instant it's ready, never a per-cell
+//           request, so the overview reads as real color from the first frame tier 0 lands, not after it.
+//   tier 1  data/paintmap/g<N>.webp -- the same idea at TIER1_TILE px, one sheet per manifest.tier1.groupSize-
+//           painting range of gallery index (pmT1Group). Fetched on demand (pmAtlasTier1's want()), one request
+//           per sheet, cached forever (LRU-evicted only past PM_T1_CACHE_MAX) -- there are only manifest.tier1.
+//           numGroups of these total (16 at the build script's current GROUP_SIZE=1500), so even panning around
+//           enough to touch most of the dataset costs well under twenty requests, not one per cell.
+// Both tiers place a painting by PURE ARITHMETIC (pmT0Rect/pmT1Rect: sheet = i div perSheet, cell = i mod cols,
+// x/y from that) -- no id->position index file, because gallery-index order is already the order the build
+// script packed tiles in, same as data/gallery/thumbs.txt itself. Tier 2 (pmImages above) is unchanged except
+// for WHEN it runs: gated to b.d >= PM_T2_MIN now (used to start at a few px) -- "the existing thumbnails, only
+// for the few visible" per the design, with tier 0/1 covering every zoom level below that.
+let PM_ATLAS = null, PM_ATLAS_P = null;
+const PM_T1_MIN = 24, PM_T2_MIN = 120;
+// a decoded tier-1 sheet (~3120x3120 at the build script's own GROUP_SIZE/TIER1_TILE) costs ~39MB of raw bitmap
+// memory -- PM_T1_CACHE_MAX=5 caps that around ~195MB even if every sheet in the dataset gets touched in one
+// session, comfortably inside what a phone browser affords a background canvas, without thrashing on an
+// ordinary pan (nowhere close to the ~17 sheets that exist in total, so a normal browse rarely evicts at all)
+const PM_T1_CACHE_MAX = 5;
+function pmAtlasLoad() {
+  if (PM_ATLAS) return Promise.resolve(PM_ATLAS);
+  const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+  return PM_ATLAS_P || (PM_ATLAS_P = fetch("data/paintmap/manifest.json" + v).then(r => { if (!r.ok) throw new Error("manifest " + r.status); return r.json(); })
+    .then(man => fetch("data/paintmap/" + man.tier0.sheet + v).then(r => { if (!r.ok) throw new Error("atlas0 " + r.status); return r.blob(); })
+      .then(blob => createImageBitmap(blob)).then(bm => (PM_ATLAS = { man, bm0: bm })))
+    .catch(e => { PM_ATLAS_P = null; throw e; }));
+}
+// tier 0: a painting's own cell inside the one shared sheet -- pure arithmetic, no lookup
+function pmT0Rect(man, i) {
+  const t = man.tier0; return { x: (i % t.cols) * t.tile, y: Math.floor(i / t.cols) * t.tile, s: t.tile };
+}
+const pmT1Group = (man, i) => Math.floor(i / man.tier1.groupSize);
+// tier 1: the group's own cols (the last group is usually a partial page, same ceil(sqrt) the build script used)
+function pmT1Rect(man, i) {
+  const t = man.tier1, g = pmT1Group(man, i), lo = g * t.groupSize, hi = Math.min(man.n, lo + t.groupSize);
+  const cols = Math.max(1, Math.ceil(Math.sqrt(hi - lo))), local = i - lo;
+  return { x: (local % cols) * t.tile, y: Math.floor(local / cols) * t.tile, s: t.tile, g };
+}
+// a small per-painting bag for tier-selection hysteresis flags and crossfade start-times, shared by pmT1Group's
+// own gate and tier 0/1's first-appearance fade -- bounded by the dataset size (one tiny object per painting
+// ever drawn, never freed for the life of a map session), trivial next to the sheets/bitmaps themselves
+function pmTState(map, i) { let s = map.get(i); if (!s) { s = {}; map.set(i, s); } return s; }
+function pmFadeAlpha(s, key, now, dur, rm) { if (s[key] == null) s[key] = now; return rm ? 1 : Math.min(1, (now - s[key]) / dur); }
+// tier 1 sheet cache: one entry per group, fetched at most once, LRU-evicted only under real pressure
+function pmAtlasTier1(onReady) {
+  const cache = new Map();   // group -> { st: 0 loading | 1 ready | 2 failed, bm, used }
+  let frame = 0, dead = false;
+  function want(groups) {
+    frame++;
+    if (!PM_ATLAS) return;
+    const man = PM_ATLAS.man;
+    for (const g of groups) {
+      const e = cache.get(g);
+      if (e) { e.used = frame; continue; }
+      if (g < 0 || g >= man.tier1.numGroups) continue;
+      const ent = { st: 0, used: frame, bm: null };
+      cache.set(g, ent);
+      const v = typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : "";
+      fetch("data/paintmap/" + man.tier1.file.replace("{g}", g) + v)
+        .then(r => { if (!r.ok) throw new Error("tier1 " + r.status); return r.blob(); })
+        .then(blob => createImageBitmap(blob))
+        .then(bm => { if (dead) return; ent.bm = bm; ent.st = 1; onReady(); })
+        .catch(() => { ent.st = 2; });
+    }
+    if (cache.size > PM_T1_CACHE_MAX) {
+      const old = [...cache.entries()].filter(([, x]) => x.st !== 0 && x.used !== frame).sort((a, b) => a[1].used - b[1].used);
+      for (let k = 0; k < cache.size - PM_T1_CACHE_MAX && k < old.length; k++) {
+        const [g, ent] = old[k]; if (ent.bm && ent.bm.close) ent.bm.close(); cache.delete(g);
+      }
+    }
+  }
+  return { get: g => cache.get(g), want, destroy: () => { dead = true; cache.forEach(e => e.bm && e.bm.close && e.bm.close()); cache.clear(); } };
+}
+
 // ---------- the screen ----------
 let PM_NOW = null;   // { s, lay } of the open map
 const PM_STATE = new Map();   // the address a map opened with -> its spec as you left it (filters and arrangement you changed)
@@ -582,6 +670,9 @@ function pmMount(el, s, F) {
   let cardOpen = false;
   const PULSE_MS = 900;
   const imgs = pmImages(() => kick());
+  const t1 = pmAtlasTier1(() => kick());
+  const tierH = new Map();   // i -> { t1On, f0, f1 } (pmTState) -- tier 0/1 crossfade + hysteresis memory
+  pmAtlasLoad().then(() => { if (!dead) kick(); }).catch(() => {});   // tier 0: one shared sheet, loaded once per session (idempotent -- a second mount just resolves immediately)
   if (!PM_LANDMARKS.size && typeof rcLoadPortraits === "function") {
     rcLoadPortraits().then(port => {
       if (dead || !port) return;
@@ -787,7 +878,7 @@ function pmMount(el, s, F) {
     // David, 2026-10-09: "your favorites glowing on the map" -- one Set built once a frame (fvArtList's own
     // {i,...} records already carry the gallery index), not a per-cell favorites lookup.
     const favSet = typeof fvArtList === "function" ? new Set(fvArtList().map(r => r.i)) : null;
-    drawn = []; const wantImg = [];
+    drawn = []; const wantImg = [], wantT1 = new Set();
     for (let y = Math.max(y0, lay.gy0); y <= Math.min(y1, lay.gy0 + lay.GH - 1); y++) {
       const row = (y - lay.gy0) * lay.GW;
       for (let x = Math.max(x0, lay.gx0); x <= Math.min(x1, lay.gx0 + lay.GW - 1); x++) {
@@ -827,22 +918,82 @@ function pmMount(el, s, F) {
     // blot out or clip an earlier cell's label/overlay -- drawn is sorted smallest-d-first specifically so
     // bigger/closer cells paint OVER smaller/farther ones, backwards for something that has to survive the pass)
     const landmarkCandidates = [];
+    // David, 2026-10-09 ("zoom out and back in and the pictures start to jitter in place"): two causes, both
+    // fixed here rather than chasing a single repro. (1) snap every tile's drawn rect to whole DEVICE pixels --
+    // X/Y/W/H are continuous floats re-derived from P/Z every frame, and even when P/Z are themselves holding
+    // perfectly still, antialiasing a rect whose edge sits a hair either side of a pixel boundary can render
+    // a touch differently frame to frame (sub-pixel rounding "noise" that was never actually in the math, only
+    // in how the rasterizer treats it) -- rounding the rect's edges to the nearest device pixel (snapPx) makes
+    // every cell's rect bit-for-bit identical across frames when nothing is actually moving. (2) hysteresis on
+    // which image source a cell draws from: "big" (the full picture, live-cropped every frame from e.src) and
+    // the baked square (e.bm, a fixed 144x144 canvas) are NOT pixel-identical crops of the same photo, so a
+    // cell sitting right at the old single b.d>92-or-m>.02 boundary used to flip between the two sources on
+    // alternating frames as P/Z wobbled by a sub-pixel amount -- each flip is a real, visible jump in exactly
+    // which pixels are drawn, which is what actually read as "jitter". closeScore combines both the size (d)
+    // and lens-magnification (m) signals the original condition OR'd together into one normalized number (>=1
+    // means "qualifies"); hysteresis() requires dropping notably BELOW 1 (not just under it) to disqualify
+    // again, so a cell parked right on the boundary keeps showing whichever source it already committed to
+    // instead of flapping every frame.
+    const snapPx = v => Math.round(v * dpr) / dpr;
+    const hysteresis = (e, key, score, off) => { const was = !!e[key]; const on = was ? score >= off : score >= 1; e[key] = on; return on; };
     for (const b of drawn) {
-      const i = b.i, e = imgs.get(i), w = b.w, h = b.h, m = b.m;
-      const X = b.x - w / 2, Y = b.y - h / 2;
+      const i = b.i, e = imgs.get(i), w0 = b.w, h0 = b.h, m = b.m;
+      const X0 = b.x - w0 / 2, Y0 = b.y - h0 / 2;
+      // snap the rect's two edges independently, then derive w/h -- keeps neighboring cells seamless (each
+      // shared edge snaps to the same device pixel from both sides) instead of snapping a center + a width,
+      // which can leave a 1px seam or overlap between a cell and the neighbor it's supposed to touch
+      const X = snapPx(X0), Y = snapPx(Y0), w = snapPx(X0 + w0) - X, h = snapPx(Y0 + h0) - Y;
       if (m > .3) { ctx.save(); ctx.shadowColor = "rgba(0,0,0,.55)"; ctx.shadowBlur = 28; ctx.shadowOffsetY = 8; ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); ctx.restore(); }
       else { ctx.fillStyle = pmHex(i); ctx.fillRect(X, Y, w, h); }
-      if (b.d >= 14) wantImg.push([i, b.d > 92 || m > .3]);
-      if (e && e.st === 1 && b.d >= 7) {
+      // tier 0: the one shared atlas sheet, drawn for EVERY cell the instant it's loaded -- no per-cell request,
+      // so the whole archive shows its real tiny colors/shapes from the first frame the sheet lands, not just
+      // whichever few hundred cells have individually streamed in by then. The base picture layer every other
+      // tier below crossfades on top of (drawImage over drawImage, alpha<1 blends with what's already there).
+      if (PM_ATLAS && PM_ATLAS.bm0) {
+        const ts0 = pmTState(tierH, i), r0 = pmT0Rect(PM_ATLAS.man, i);
+        const a0 = pmFadeAlpha(ts0, "f0", t, 220, RM); if (a0 < 1) fading = true;
+        ctx.globalAlpha = a0;
+        ctx.drawImage(PM_ATLAS.bm0, r0.x, r0.y, r0.s, r0.s, X, Y, w, h);
+        ctx.globalAlpha = 1;
+      }
+      // tier 1: a mid-size tile from its group's sheet (manifest.tier1.groupSize paintings share one sheet, one
+      // request each, cached) once the cell reads as more than a speck -- replaces tier 0 by drawing over it.
+      // hysteresis() (defined above for tier 2's own big/baked-square switch) keeps a cell parked near the
+      // PM_T1_MIN boundary from flapping between tier 0 and tier 1 the same way it does for tier 2 below.
+      if (PM_ATLAS) {
+        const ts1 = pmTState(tierH, i), g = pmT1Group(PM_ATLAS.man, i);
+        if (hysteresis(ts1, "t1On", b.d / PM_T1_MIN, .75)) {
+          wantT1.add(g);
+          const te = t1.get(g);
+          if (te && te.st === 1) {
+            const r1 = pmT1Rect(PM_ATLAS.man, i);
+            const a1 = pmFadeAlpha(ts1, "f1", t, 220, RM); if (a1 < 1) fading = true;
+            ctx.globalAlpha = a1;
+            const q = r1.s, sw = w >= h ? q : q * w / h, sh = h >= w ? q : q * h / w;
+            ctx.drawImage(te.bm, r1.x + (q - sw) / 2, r1.y + (q - sh) / 2, sw, sh, X, Y, w, h);
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+      // tier 2: the existing per-painting thumbnail/hi-res loader (pmImages above) -- now only for the few cells
+      // actually big enough to show more than tier 1 already does (b.d >= PM_T2_MIN, used to start at a few px
+      // and stream in every cell that ever scrolled by, which was the original "waterfall of thousands of
+      // requests" this whole tiered system replaces). Drawn exactly as before, over tiers 0/1.
+      if (b.d >= PM_T2_MIN) wantImg.push([i, b.d > 92 || m > .3]);
+      if (e && e.st === 1 && b.d >= PM_T2_MIN) {
         if (e.fadeT == null) e.fadeT = t;
         const age = t - e.fadeT, a = RM ? 1 : Math.min(1, age / 260); if (a < 1) fading = true;
         ctx.globalAlpha = a;
-        const big = (b.d > 92 || m > .02) && imgs.big(i);
+        // the original condition was (b.d > 92 || m > .02); normalize each side of the OR to 1.0 at its own
+        // boundary so a single hysteresis() call can gate both at once, with a shared ~25% dead zone below 1
+        const closeScore = Math.max(b.d / 92, m / .02);
+        const qualifies = hysteresis(e, "closeOn", closeScore, .75);
+        const big = qualifies && imgs.big(i);
         if (big) {   // from the full picture: crop (frame away), then cover the tile's own shape
           const sr = e.src, ta = h / w; let sw = sr.sw, sh = sr.sh;
           if (sh / sw > ta) sh = sw * ta; else sw = sh / ta;
           ctx.drawImage(big, sr.sx + (sr.sw - sw) / 2, sr.sy + (sr.sh - sh) / 2, sw, sh, X, Y, w, h);
-        } else if (m > .02) {   // still only the baked square: show it as the square crop at the middle size
+        } else if (qualifies) {   // still only the baked square: show it as the square crop at the middle size
           const s = Math.max(w, h); ctx.save(); ctx.beginPath(); ctx.rect(X, Y, w, h); ctx.clip(); ctx.drawImage(e.bm, b.x - s / 2, b.y - s / 2, s, s); ctx.restore();
         } else {   // the baked square, cover-cropped to the tile's shape
           const q = PM_BAKE, sw = w >= h ? q : q * w / h, sh = h >= w ? q : q * h / w;
@@ -928,6 +1079,7 @@ function pmMount(el, s, F) {
     // at the 14px threshold above (zMin() also caps how far you can zoom out), so every on-screen eligible cell
     // now gets a turn in the queue, nearest the middle first, same as before.
     imgs.want(wantImg.reverse().slice(0, 2000));
+    if (PM_ATLAS) t1.want(wantT1);   // a handful of groups at most -- every cell on screen shares one of a few dozen sheets
 
     const c = nearestK(P[0], P[1]); setCenter(c);
   }
@@ -1228,7 +1380,7 @@ function pmMount(el, s, F) {
   }
   // ---- life cycle
   const ro = new ResizeObserver(() => size()); ro.observe(cv);
-  cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
+  cleanup.push(() => { dead = true; clearTimeout(tapTimer); clearInterval(scrubTimer); scrubTimer = 0; ro.disconnect(); cancelAnimationFrame(raf); imgs.destroy(); t1.destroy(); if (lay && centerK >= 0) PM_PAN.set(lay.key, { x: lay.x[centerK], y: lay.y[centerK], s: Z }); });
   size(); build(false);
   window.PM_CTRL = { get center() { return centerK >= 0 ? lay.items[centerK] : -1; }, get count() { return lay ? lay.n : 0; }, get drawn() { return drawn.length; }, images: () => imgs.stats(), get spec() { return s; }, glideTo: k => glideTo([lay.x[k], lay.y[k]], 300), lay: () => lay, zoom: z => { Z = clamp(z, zMin(), ZMAX); kick(); },
     // QA (tools/smoke paintmap group): a real network fetch of data/artists/portraits.json doesn't reliably
@@ -1238,7 +1390,12 @@ function pmMount(el, s, F) {
     _qaRects: () => drawn.map(b => ({ i: b.i, x: b.x, y: b.y, w: b.w, h: b.h })),
     // true once that painting's own real pixels are baked (bake() no longer falls back to a flat color for a
     // non-CORS host -- see the comment above pmSafeHost), false only while still loading or on a genuine failure
-    _qaImageReal: i => { const e = imgs.get(i); return !!(e && e.st === 1); } };
+    _qaImageReal: i => { const e = imgs.get(i); return !!(e && e.st === 1); },
+    // QA (tier 0/1 atlas): whether the one shared tier-0 sheet has finished loading (every drawn cell gets its
+    // own real tile the instant this is true -- see the draw loop's unconditional tier-0 pass), and how many of
+    // the tier-1 groups the current view touched have loaded their sheet.
+    _qaAtlasReady: () => !!(PM_ATLAS && PM_ATLAS.bm0),
+    _qaTier1Stats: () => { let have = 0, want = 0; const man = PM_ATLAS && PM_ATLAS.man; if (man) for (const b of drawn) { const g = pmT1Group(man, b.i); want++; const e = t1.get(g); if (e && e.st === 1) have++; } return { want, have }; } };
 }
 
 // this file can load after router.js (on first use): give pmOpen its address now
