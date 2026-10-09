@@ -1,121 +1,121 @@
 {
- "slug": "dusty-steel-blue",
- "name": "Dusty steel blue",
- "hex": "#5D8CAE",
- "names": [
-  "Dusty steel blue"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Dusty steel blue renders Gunjō-iro (群青色), the traditional Japanese name for ultramarine, the blue ground from the mineral azurite.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Named for a mineral pigment",
-   "body": "Our color library gives the source as 群青色 (Gunjō-iro), \"ultramarine color\": gunjō is the Japanese name for the blue pigment ground from azurite, long used in Japanese painting for mountains and water [1]. No first-recorded date survives in our sources, so when the name entered use is undocumented here [1]. The modern swatch here is a greyed, muted blue, considerably softer than the saturated blue the mineral pigment itself produces [1].\n\nThe nearest named color in our graph is [[brittany]], at a color distance (ΔE2000) of 2.7, almost the same shade; [[steel-blue]] itself sits 5.0 away and reads more vivid and bluer [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this blue in 116 of 23,781 paintings, about 0.5 percent, as photographed [3]. It peaks in the 1510s (7 of 243 paintings from that decade), and Claude Monet and Paul Cezanne each carry it at more than twelve times the overall rate, with Post-Impressionist painting generally running at nine times the average [3]. France holds the largest share by country, and the earliest dated match is Marco Zoppo's *Madonna and Child* (1467), a floor set by what survives and was photographed, not a first appearance [3]. These are photographs of aged, varnished paintings; the match is computed, not a pigment identification [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Gunjō-iro (群青色), \"ultramarine color\", after the azurite pigment",
-   "first_recorded": "undocumented",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Gunjō-iro (群青色)"
+  "slug": "dusty-steel-blue",
+  "name": "Dusty steel blue",
+  "hex": "#5D8CAE",
+  "names": [
+    "Dusty steel blue"
   ],
-  "siblings": [
-   "brittany",
-   "steel-blue",
-   "faded-blue",
-   "bluish-steel-blue"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Dusty steel blue renders Gunjō-iro (群青色), the traditional Japanese name for ultramarine, the blue ground from the mineral azurite.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Named for a mineral pigment",
+      "body": "Our color library gives the source as 群青色 (Gunjō-iro), \"ultramarine color\": gunjō is the Japanese name for the blue pigment ground from azurite, long used in Japanese painting for mountains and water [1]. No first-recorded date survives in our sources, so when the name entered use is undocumented here [1]. The modern swatch here is a greyed, muted blue, considerably softer than the saturated blue the mineral pigment itself produces [1].\n\nThe nearest named color in our graph is [[brittany]], at a color distance (ΔE2000) of 2.7, almost the same shade; [[steel-blue]] itself sits 5.0 away and reads more vivid and bluer [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this blue in 116 of 23,781 paintings, about 0.5 percent, as photographed [3]. It peaks in the 1510s (7 of 243 paintings from that decade), and Claude Monet and Paul Cezanne each carry it at more than twelve times the overall rate, with Post-Impressionist painting generally running at nine times the average [3]. France holds the largest share by country, and the earliest dated match is Marco Zoppo's *Madonna and Child* (1467), a floor set by what survives and was photographed, not a first appearance [3]. These are photographs of aged, varnished paintings; the match is computed, not a pigment identification [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Gunjō-iro (群青色), \"ultramarine color\""
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 116,
-  "rate": 0.0049,
-  "match": {
-   "hex": "#5D8CAE",
-   "de2000": 6.0,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "Gunjō-iro (群青色), \"ultramarine color\", after the azurite pigment",
+      "first_recorded": "undocumented",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Gunjō-iro (群青色)"
+    ],
+    "siblings": [
+      "brittany",
+      "steel-blue",
+      "clear-cadet-blue",
+      "sky-steel"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Gunjō-iro (群青色), \"ultramarine color\""
+      }
+    ]
   },
-  "painters": [
-   [
-    "Claude Monet",
-    12.3
-   ]
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 116,
+    "rate": 0.0049,
+    "match": {
+      "hex": "#5D8CAE",
+      "de2000": 6.0,
+      "min_cover": 0.05
+    },
+    "painters": [
+      [
+        "Claude Monet",
+        12.3
+      ]
+    ]
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What mineral pigment does the Japanese name behind Dusty steel blue, Gunjō-iro, name?",
+      "choices": [
+        "Azurite",
+        "Lapis lazuli",
+        "Malachite",
+        "Indigo"
+      ],
+      "answer": "Azurite",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the modern swatch for Dusty steel blue is as saturated as the mineral pigment ultramarine.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Dusty steel blue's name points to ultramarine, a mineral pigment far more saturated than this greyed swatch."
+  ],
+  "words": 224,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; swatch-vs-pigment gap stated per voice rule 7."
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What mineral pigment does the Japanese name behind Dusty steel blue, Gunjō-iro, name?",
-   "choices": [
-    "Azurite",
-    "Lapis lazuli",
-    "Malachite",
-    "Indigo"
-   ],
-   "answer": "Azurite",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the modern swatch for Dusty steel blue is as saturated as the mineral pigment ultramarine.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Dusty steel blue's name points to ultramarine, a mineral pigment far more saturated than this greyed swatch."
- ],
- "words": 224,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; swatch-vs-pigment gap stated per voice rule 7."
-  ]
- }
 }

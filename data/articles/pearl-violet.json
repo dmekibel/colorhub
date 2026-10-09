@@ -1,126 +1,126 @@
 {
- "slug": "pearl-violet",
- "name": "Pearl Violet",
- "hex": "#8773A1",
- "names": [
-  "Pearl Violet"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Pearl Violet is ColorHub's English name for Fuji-iro, a soft purple that Japanese tradition names for the wisteria flower, and that the RAL standard independently registered in Germany in 1927.",
- "sections": [
-  {
-   "id": "japan",
-   "title": "Wisteria, twice named",
-   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Fuji-iro (藤色), \"wisteria color,\" after the hanging purple clusters of the wisteria vine, long favored in Japanese dress and crests [1]. The same hue range was independently registered decades later in Germany as RAL 4011, in 1927, an unrelated coincidence of two naming traditions landing near the same purple [2]. The ISCC-NBS dictionary of 1955 places it in block 223, \"moderate purple,\" about 7.5 units from that block's centre[2]. The library's nearest other named colors are [[dusty-violet]] and [[dusty-violet]], each under 3 units away [2].\n\nMeasured in LCH it reads lightness 52, chroma 28, hue 308 degrees, a mid-toned, moderately saturated purple [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a close match in only 4 of 23,781 paintings, a vanishingly small fraction, as photographed [3]. With so few matches our data cannot support claims about painters, companion colors, or role patterns with confidence; the honest finding is that this particular purple is rare across the archive [3]. [[painter:john-singer-sargent|John Singer Sargent]]'s 1913 *Sirmione* is among the handful of matches [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the hanging purple clusters of the wisteria flower",
-   "first_recorded": "independently registered as RAL 4011, 1927",
-   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\"); RAL, 1927"
-  },
-  "aka": [
-   "Fuji-iro"
+  "slug": "pearl-violet",
+  "name": "Pearl Violet",
+  "hex": "#8773A1",
+  "names": [
+    "Pearl Violet"
   ],
-  "siblings": [
-   "saccardo-s-violet",
-   "dusty-violet",
-   "vanderpoel-s-violet",
-   "wisteria"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Pearl Violet is ColorHub's English name for Fuji-iro, a soft purple that Japanese tradition names for the wisteria flower, and that the RAL standard independently registered in Germany in 1927.",
+  "sections": [
+    {
+      "id": "japan",
+      "title": "Wisteria, twice named",
+      "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Fuji-iro (藤色), \"wisteria color,\" after the hanging purple clusters of the wisteria vine, long favored in Japanese dress and crests [1]. The same hue range was independently registered decades later in Germany as RAL 4011, in 1927, an unrelated coincidence of two naming traditions landing near the same purple [2]. The ISCC-NBS dictionary of 1955 places it in block 223, \"moderate purple,\" about 7.5 units from that block's centre[2]. The library's nearest other named colors are [[dusty-violet]] and [[dusty-violet]], each under 3 units away [2].\n\nMeasured in LCH it reads lightness 52, chroma 28, hue 308 degrees, a mid-toned, moderately saturated purple [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match in only 4 of 23,781 paintings, a vanishingly small fraction, as photographed [3]. With so few matches our data cannot support claims about painters, companion colors, or role patterns with confidence; the honest finding is that this particular purple is rare across the archive [3]. [[painter:john-singer-sargent|John Singer Sargent]]'s 1913 *Sirmione* is among the handful of matches [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Fuji-iro (藤色)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 4,
-  "pct": 0.02,
-  "measured": {
-   "lch": [
-    51.8,
-    27.8,
-    308.2
-   ],
-   "nearest_iscc": [
-    "moderate purple",
-    7.5
-   ],
-   "nearest": [
-    "Saccardo's Violet",
-    2.84
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
-   "loc_kind": null,
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "the hanging purple clusters of the wisteria flower",
+      "first_recorded": "independently registered as RAL 4011, 1927",
+      "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\"); RAL, 1927"
+    },
+    "aka": [
+      "Fuji-iro"
+    ],
+    "siblings": [
+      "dusty-violet",
+      "vanderpoel-s-violet",
+      "wisteria",
+      "faded-purple"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Fuji-iro (藤色)"
+      }
+    ]
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "RAL, Standard 4011 (1927); ColorHub color library (ISCC-NBS 1955 block 223)",
-   "loc_kind": "entry",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 4,
+    "pct": 0.02,
+    "measured": {
+      "lch": [
+        51.8,
+        27.8,
+        308.2
+      ],
+      "nearest_iscc": [
+        "moderate purple",
+        7.5
+      ],
+      "nearest": [
+        "Saccardo's Violet",
+        2.84
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "RAL, Standard 4011 (1927); ColorHub color library (ISCC-NBS 1955 block 223)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What flower does Fuji-iro, this color's Japanese name, refer to?",
+      "choices": [
+        "Wisteria",
+        "Lavender",
+        "Iris",
+        "Violet"
+      ],
+      "answer": "Wisteria",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: this color's RAL registration and its Japanese name share a common origin.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pearl Violet's wisteria name and its German paint-standard code arrived from two unrelated traditions."
+  ],
+  "words": 203,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "Only 4 archive matches; painter/company stats withheld as unreliable at that count.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What flower does Fuji-iro, this color's Japanese name, refer to?",
-   "choices": [
-    "Wisteria",
-    "Lavender",
-    "Iris",
-    "Violet"
-   ],
-   "answer": "Wisteria",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: this color's RAL registration and its Japanese name share a common origin.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pearl Violet's wisteria name and its German paint-standard code arrived from two unrelated traditions."
- ],
- "words": 203,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "Only 4 archive matches; painter/company stats withheld as unreliable at that count.",
-   "lint 2026-10-09"
-  ]
- }
 }

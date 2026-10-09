@@ -1,119 +1,119 @@
 {
- "slug": "fontainebleau",
- "name": "Fontainebleau",
- "hex": "#897A73",
- "names": [
-  "Fontainebleau"
- ],
- "tier": "place",
- "depth": "brief",
- "lede": "Fontainebleau is a light brownish grey, listed in Maerz and Paul's 1930 dictionary under the name of the French royal court town and palace.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A dictionary name",
-   "body": "Our library finds the name in Maerz and Paul's dictionary of 1930, as cited by the ISCC-NBS in 1955 [1]. Measured against the ISCC-NBS categories, the swatch is nearest to light brownish gray, 3.9 units of ΔE2000 away [1]. Why the authors chose the place is undocumented in our sources [1]."
-  },
-  {
-   "id": "court",
-   "title": "A court color, perhaps",
-   "body": "In the summer of 1775, St Clair relates, King Louis XVI likened a gown of Marie Antoinette's to the color of fleas, a shade between brown, pink and grey, and the court took it up as puce [2]. Lady Spencer wrote that puce was the uniform at Fontainebleau and the only color that could be worn [2].\n\nNothing we found ties the dictionary entry to that remark, so treat it as context, not origin. Compare [[puce]], [[taupe]] and [[taupe-grey]]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This tone appears in 336 paintings in our archive, 1.41 per cent, as photographed [3]. Impressionist paintings carry it in 9 of 140 and Claude Monet in 5 of 50 [3]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the town and palace of Fontainebleau (reason undocumented)",
-   "first_recorded": "1930 (Maerz and Paul), per our library",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "puce",
-   "taupe",
-   "taupe-grey",
-   "dusty-puce"
+  "slug": "fontainebleau",
+  "name": "Fontainebleau",
+  "hex": "#897A73",
+  "names": [
+    "Fontainebleau"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
-  "n_present": 336,
-  "pct": 1.41,
-  "top_movement": {
-   "name": "Impressionism",
-   "hits": 9,
-   "of": 140
+  "tier": "place",
+  "depth": "brief",
+  "lede": "Fontainebleau is a light brownish grey, listed in Maerz and Paul's 1930 dictionary under the name of the French royal court town and palace.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A dictionary name",
+      "body": "Our library finds the name in Maerz and Paul's dictionary of 1930, as cited by the ISCC-NBS in 1955 [1]. Measured against the ISCC-NBS categories, the swatch is nearest to light brownish gray, 3.9 units of ΔE2000 away [1]. Why the authors chose the place is undocumented in our sources [1]."
+    },
+    {
+      "id": "court",
+      "title": "A court color, perhaps",
+      "body": "In the summer of 1775, St Clair relates, King Louis XVI likened a gown of Marie Antoinette's to the color of fleas, a shade between brown, pink and grey, and the court took it up as puce [2]. Lady Spencer wrote that puce was the uniform at Fontainebleau and the only color that could be worn [2].\n\nNothing we found ties the dictionary entry to that remark, so treat it as context, not origin. Compare [[puce]], [[taupe]] and [[taupe-grey]]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This tone appears in 336 paintings in our archive, 1.41 per cent, as photographed [3]. Impressionist paintings carry it in 9 of 140 and Claude Monet in 5 of 50 [3]. These are photographs of aged, varnished paintings, so a color match is not a pigment test [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the town and palace of Fontainebleau (reason undocumented)",
+      "first_recorded": "1930 (Maerz and Paul), per our library",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "puce",
+      "taupe",
+      "taupe-grey",
+      "ash-rose"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "nearest": [
-    [
-     "light brownish gray",
-     3.9
-    ]
-   ]
+  "field": {
+    "dataset": "ColorHub archive of about 23,800 paintings, as photographed",
+    "n_present": 336,
+    "pct": 1.41,
+    "top_movement": {
+      "name": "Impressionism",
+      "hits": 9,
+      "of": 140
+    },
+    "measured": {
+      "nearest": [
+        [
+          "light brownish gray",
+          3.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub library (data/library.json): name sources and dates (Maerz and Paul 1930, cited by NBS Circular 553)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Puce\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "In 1775 what did Lady Spencer say was the uniform at Fontainebleau?",
+      "choices": [
+        "Puce",
+        "Scarlet",
+        "Navy blue",
+        "Saffron yellow"
+      ],
+      "answer": "Puce",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: a source we found says Maerz and Paul named this color after the 1775 puce fashion.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "In 1775 the court at Fontainebleau was said to wear puce and nothing else."
+  ],
+  "words": 197,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub library (data/library.json): name sources and dates (Maerz and Paul 1930, cited by NBS Circular 553)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Puce\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, color-match counts (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "In 1775 what did Lady Spencer say was the uniform at Fontainebleau?",
-   "choices": [
-    "Puce",
-    "Scarlet",
-    "Navy blue",
-    "Saffron yellow"
-   ],
-   "answer": "Puce",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: a source we found says Maerz and Paul named this color after the 1775 puce fashion.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "In 1775 the court at Fontainebleau was said to wear puce and nothing else."
- ],
- "words": 197,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

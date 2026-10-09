@@ -1,135 +1,135 @@
 {
- "slug": "deep-rose-red",
- "name": "Deep rose red",
- "hex": "#893843",
- "names": [
-  "Deep rose red"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Deep rose red is a dark, muted brick-pink built by adding \"deep\" to [[rose-red]], and it shares its exact hex, #893843, with the unrelated library name Solid Pink.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier, not a separate color",
-   "body": "Our classifier reads the name as modifier grammar: \"deep\" plus [[rose-red]], the same pattern as light or dark variants elsewhere in the library [1]. It carries no history of its own beyond that construction; no book or dated source in our data names a first use [1]. At lightness 35 and chroma 37, it sits well below rose-red's own brightness, closer to a dried petal than a fresh one [1].\n\nThe library's own nearest-match search lands on a different name entirely at the identical hex: [[deep-rose-red]], a separate wiki-sourced entry that happens to share #893843 to the pixel [1]. The two names are not siblings in origin, only in coordinates; the closest distinct color, once that duplicate is set aside, is [[peony-red|Peony Red]], under 3 units away by CIEDE2000 [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This exact shade covers five percent or more of the canvas in 82 of 23,781 paintings in our archive, as photographed, a rate of about 0.3 percent [2]. It is more than four times as common in Kalighat paintings and Mughal court painting than in the archive overall, and its earliest dated appearance is a 1368 Chinese portrait, *Madam Han Neefang*, a floor and not a first, since the archive's early centuries are thin [2]. Within its own paintings it most often sits as a mid-tone or a shadow, rarely as a highlight, and keeps company with [[mahogany|Mahogany]] and [[umber|Umber]] more than chance would predict [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the modifier \"deep\" applied to rose-red",
-   "first_recorded": "undocumented",
-   "source": "ColorHub name-grammar classifier"
-  },
-  "aka": [],
-  "siblings": [
-   "solid-pink",
-   "peony-red",
-   "vandyke-red"
+  "slug": "deep-rose-red",
+  "name": "Deep rose red",
+  "hex": "#893843",
+  "names": [
+    "Deep rose red"
   ],
-  "parent": "rose-red",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "solid-pink",
-    "gloss": "an unrelated library name at the identical hex, #893843"
-   }
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Deep rose red is a dark, muted brick-pink built by adding \"deep\" to [[rose-red]], and it shares its exact hex, #893843, with the unrelated library name Solid Pink.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier, not a separate color",
+      "body": "Our classifier reads the name as modifier grammar: \"deep\" plus [[rose-red]], the same pattern as light or dark variants elsewhere in the library [1]. It carries no history of its own beyond that construction; no book or dated source in our data names a first use [1]. At lightness 35 and chroma 37, it sits well below rose-red's own brightness, closer to a dried petal than a fresh one [1].\n\nThe library's own nearest-match search lands on a different name entirely at the identical hex: [[deep-rose-red]], a separate wiki-sourced entry that happens to share #893843 to the pixel [1]. The two names are not siblings in origin, only in coordinates; the closest distinct color, once that duplicate is set aside, is [[peony-red|Peony Red]], under 3 units away by CIEDE2000 [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This exact shade covers five percent or more of the canvas in 82 of 23,781 paintings in our archive, as photographed, a rate of about 0.3 percent [2]. It is more than four times as common in Kalighat paintings and Mughal court painting than in the archive overall, and its earliest dated appearance is a 1368 Chinese portrait, *Madam Han Neefang*, a floor and not a first, since the archive's early centuries are thin [2]. Within its own paintings it most often sits as a mid-tone or a shadow, rarely as a highlight, and keeps company with [[mahogany|Mahogany]] and [[umber|Umber]] more than chance would predict [2]."
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 82,
-  "rate": 0.0034,
-  "measured": {
-   "lch": [
-    35,
-    37,
-    17
-   ],
-   "nearest": [
-    [
-     "Peony Red",
-     2.94
+  "aside": {
+    "origin": {
+      "named_after": "the modifier \"deep\" applied to rose-red",
+      "first_recorded": "undocumented",
+      "source": "ColorHub name-grammar classifier"
+    },
+    "aka": [],
+    "siblings": [
+      "deep-rose-red",
+      "peony-red",
+      "vandyke-red"
+    ],
+    "parent": "rose-red",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "deep-rose-red",
+        "gloss": "an unrelated library name at the identical hex, #893843"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 82,
+    "rate": 0.0034,
+    "measured": {
+      "lch": [
+        35,
+        37,
+        17
+      ],
+      "nearest": [
+        [
+          "Peony Red",
+          2.94
+        ]
+      ]
+    },
+    "first": {
+      "id": "cma-94607",
+      "title": "Madam Han Neefang",
+      "year": 1368
+    },
+    "role": {
+      "mid": 0.55,
+      "shadow": 0.38,
+      "highlight": 0.07
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph nodes (data/library.json, data/graph/nodes-d.json), including the library's nearest-match search",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is Deep rose red's name built from, according to our classifier?",
+      "choices": [
+        "\"Deep\" plus Rose Red",
+        "A dye plant",
+        "A place name",
+        "A painter's surname"
+      ],
+      "answer": "\"Deep\" plus Rose Red",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Solid Pink and Deep rose red are the same exact hex by coincidence, not by shared origin.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    },
+    {
+      "q": "In our archive, where does Deep rose red most often sit in a painting's lightness order?",
+      "choices": [
+        "As a mid-tone",
+        "Always as the brightest highlight",
+        "Never present",
+        "Only in skies"
+      ],
+      "answer": "As a mid-tone",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Deep rose red shares its exact hex with an unrelated name, Solid Pink.",
+    "This color's earliest archive appearance is a 1368 Chinese portrait."
+  ],
+  "words": 262,
+  "status": "draft",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-09",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "first": {
-   "id": "cma-94607",
-   "title": "Madam Han Neefang",
-   "year": 1368
-  },
-  "role": {
-   "mid": 0.55,
-   "shadow": 0.38,
-   "highlight": 0.07
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph nodes (data/library.json, data/graph/nodes-d.json), including the library's nearest-match search",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is Deep rose red's name built from, according to our classifier?",
-   "choices": [
-    "\"Deep\" plus Rose Red",
-    "A dye plant",
-    "A place name",
-    "A painter's surname"
-   ],
-   "answer": "\"Deep\" plus Rose Red",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Solid Pink and Deep rose red are the same exact hex by coincidence, not by shared origin.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  },
-  {
-   "q": "In our archive, where does Deep rose red most often sit in a painting's lightness order?",
-   "choices": [
-    "As a mid-tone",
-    "Always as the brightest highlight",
-    "Never present",
-    "Only in skies"
-   ],
-   "answer": "As a mid-tone",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Deep rose red shares its exact hex with an unrelated name, Solid Pink.",
-  "This color's earliest archive appearance is a 1368 Chinese portrait."
- ],
- "words": 262,
- "status": "draft",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

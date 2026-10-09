@@ -1,122 +1,122 @@
 {
- "slug": "dark-mustard",
- "name": "Dark Mustard",
- "hex": "#A88905",
- "names": [
-  "Dark Mustard"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Dark Mustard is a deep, dull gold, a shade down from [[mustard]] and classed by the ISCC-NBS system as a deep yellow.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name",
-   "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark mustard\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is deep yellow, under 3 CIEDE2000 units away, close enough that the two names describe much the same swatch, and the closest Munsell reading runs near 4.6Y in hue [1]. The nearest named colors on file are [[brown-yellow]], [[mustard-brown]] and [[dark-goldenrod]], at 4.7, 5.7 and 5.8 ΔE [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a match for this swatch in 103 of 23,781 paintings, as photographed [2]. Its peak decade is the 1740s, at over six times the archive's baseline rate, and it is most common in works from India, the United Kingdom and the United States [2]. Paulus Potter's paintings carry it at 33 times the baseline, and it also turns up often in Rajput, Pahari and Mughal miniatures [2]. Where it appears, it is usually a highlight rather than a shadow, and the words \"Olive\" and \"Khaki\" share its canvases far more than chance [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "mustard, the condiment, darkened",
-   "first_recorded": "xkcd color survey, 2010",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "brown-yellow",
-   "mustard-brown",
-   "dark-goldenrod"
+  "slug": "dark-mustard",
+  "name": "Dark Mustard",
+  "hex": "#A88905",
+  "names": [
+    "Dark Mustard"
   ],
-  "parent": "mustard",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
-  "n_present": 103,
-  "rate": 0.0043,
-  "peak_decade": {
-   "key": 1740,
-   "lift": 6.26
-  },
-  "role": {
-   "highlight": 0.65,
-   "mid": 0.35
-  },
-  "top_painting": {
-   "id": "cma-314217",
-   "title": "A group of women in ecstasy before Madhava",
-   "painter": null,
-   "year": 1720,
-   "cover": 0.4
-  },
-  "measured": {
-   "nearest": [
-    [
-     "Brown Yellow",
-     4.7
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Dark Mustard is a deep, dull gold, a shade down from [[mustard]] and classed by the ISCC-NBS system as a deep yellow.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name",
+      "body": "No book in our library records a name at this position before the xkcd color survey of 2010, where the public supplied the plain descriptive phrase \"dark mustard\" [1]. Its origin before that survey is undocumented here [1].\n\nThe nearest ISCC-NBS 1955 block is deep yellow, under 3 CIEDE2000 units away, close enough that the two names describe much the same swatch, and the closest Munsell reading runs near 4.6Y in hue [1]. The nearest named colors on file are [[pyrite-yellow]], [[mustard-brown]] and [[dark-goldenrod]], at 4.7, 5.7 and 5.8 ΔE [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a match for this swatch in 103 of 23,781 paintings, as photographed [2]. Its peak decade is the 1740s, at over six times the archive's baseline rate, and it is most common in works from India, the United Kingdom and the United States [2]. Paulus Potter's paintings carry it at 33 times the baseline, and it also turns up often in Rajput, Pahari and Mughal miniatures [2]. Where it appears, it is usually a highlight rather than a shadow, and the words \"Olive\" and \"Khaki\" share its canvases far more than chance [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "mustard, the condiment, darkened",
+      "first_recorded": "xkcd color survey, 2010",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "pyrite-yellow",
+      "mustard-brown",
+      "dark-goldenrod"
     ],
-    [
-     "Mustard Brown",
-     5.7
+    "parent": "mustard",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+    "n_present": 103,
+    "rate": 0.0043,
+    "peak_decade": {
+      "key": 1740,
+      "lift": 6.26
+    },
+    "role": {
+      "highlight": 0.65,
+      "mid": 0.35
+    },
+    "top_painting": {
+      "id": "cma-314217",
+      "title": "A group of women in ecstasy before Madhava",
+      "painter": null,
+      "year": 1720,
+      "cover": 0.4
+    },
+    "measured": {
+      "nearest": [
+        [
+          "Brown Yellow",
+          4.7
+        ],
+        [
+          "Mustard Brown",
+          5.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd color survey 2010), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which decade is Dark Mustard's peak in our archive?",
+      "choices": [
+        "The 1740s",
+        "The 1990s",
+        "The 1200s"
+      ],
+      "answer": "The 1740s",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: in paintings where it appears, Dark Mustard is usually a shadow color.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Dark Mustard peaks in the 1740s, at over six times its usual rate in our archive."
+  ],
+  "words": 209,
+  "status": "checked",
+  "checked": {
+    "by": "writer-lane",
+    "date": "2026-10-08",
+    "issues": [
+      "No book source for the name; xkcd survey only",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, xkcd color survey 2010), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which decade is Dark Mustard's peak in our archive?",
-   "choices": [
-    "The 1740s",
-    "The 1990s",
-    "The 1200s"
-   ],
-   "answer": "The 1740s",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: in paintings where it appears, Dark Mustard is usually a shadow color.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Dark Mustard peaks in the 1740s, at over six times its usual rate in our archive."
- ],
- "words": 209,
- "status": "checked",
- "checked": {
-  "by": "writer-lane",
-  "date": "2026-10-08",
-  "issues": [
-   "No book source for the name; xkcd survey only",
-   "lint 2026-10-09"
-  ]
- }
 }

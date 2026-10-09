@@ -1,282 +1,282 @@
 {
- "slug": "dust",
- "name": "Dust",
- "hex": "#B2996E",
- "names": [
-  "Dust"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Dust is a dull greyish yellow-brown, the colour of dry earth on a surface, and the clearest case of the word in colour history is khaki, which means dusty.",
- "sections": [
-  {
-   "id": "name",
-   "title": "What the name means",
-   "body": "Dust is a dull, greyish yellow-brown, the colour of a thin layer of dry earth on a surface. Paterson defines *dust-coloured* as having the pale brown colour of dust, and *dusty* as a colour that looks coated with dust [1]. He also keeps a rare word, *pulveratricious*, for an earthy dusty colour, taken from birds that clean themselves by rolling in dust [1].\n\nWho first used the plain noun as a colour name is undocumented in the books we read. The library traces it to Maerz and Paul's dictionary of 1930 and to ISCC-NBS in 1955, which files it as \"dark grayish yellow\" within a ΔE of 4.3, and the xkcd colour survey of 2010 also lists it [2]. Several close neighbours already sit nearby: [[dust]], [[manila]] and [[camel]] are within a few units on screen [2]."
-  },
-  {
-   "id": "khaki",
-   "title": "The cloth that borrowed it: khaki",
-   "body": "The best-documented dust colour is khaki, whose name means dusty. St Clair says it is an Urdu word, while Paterson derives it from Hindi, so the books differ on the language [3][1]. Both agree on the sense: Paterson calls khaki a drab yellowish-brown dust colour, sometimes tinged with green [1].\n\nSt Clair tells the story [3]. In 1846 Sir Harry Lumsden, raising a Corps of Guides at Peshawar, is thought to have ordered white cotton soaked and rubbed with mud from the local river, hoping to make the men invisible in a land of dust [3]. She calls it the first official uniform in organised military history that blended into the landscape instead of announcing itself [3]. Treat the exact date and attribution as a tradition recorded by one author.\n\nThe web has not kept the sense. The X11 colour named khaki is #F0E68C, a pale yellow far lighter than the dust-coloured cloth, as Paterson's own entry shows [1]. Our library's [[khaki]] (#BDB76B) and [[khaki-web]] (#C3B091) are two other screen answers to the same word [2]."
-  },
-  {
-   "id": "dust-green",
-   "title": "Dust green, and other uses of the word",
-   "body": "In the pigment trade, *dust green* was one of the names applied to Scheele's green or emerald green, according to Mierzinski in 1881 and Fiedler and Bayard in 1997 as the Pigment Compendium cites them [4]. Both were bright arsenic greens, nothing like a dull dust colour, so the name here probably described how the powder behaved. The Compendium does not say why [4].\n\n*Tea dust* is a more exact use: Paterson describes it as a dark brown ceramic glaze with lighter brown flecks [1]. It is a ceramic term, and it names a dark brown, which is not our pale tan [1]."
-  },
-  {
-   "id": "air",
-   "title": "Dust in the air",
-   "body": "Most of the books' mentions of dust concern the air, not a pigment. Gurney explains that atmospheric perspective is strengthened by dust, moisture, haze or smog, and that the usual rule that distance turns things cool can reverse when dust or moist vapour hangs near the sun at sunrise or sunset [5].\n\nDust also helps explain why evening and morning skies differ. If the air is full of moisture and dust, Gurney writes, the setting sun is accompanied by more conspicuous red and yellow clouds, and in the first hour of morning the sequence reverses, often with pinker colours because less dust has been raised [5]. For a painter, a dusty afternoon is a warm one.\n\nBooks disagree about dust and the blue sky. Ball says blue light is scattered by the molecules and dust of the atmosphere, and St Clair says distant hills turn paler and bluer through scattering by dust, pollution and water droplets [6][13]. Finlay recalls that Tyndall blamed dust particles for the blue sky and that Einstein later showed that air molecules alone are big enough to scatter blue light [7]. The safe reading is that air molecules are enough, and that dust adds to the effect."
-  },
-  {
-   "id": "workshop",
-   "title": "Dust in the workshop",
-   "body": "For colour makers, dust was often a swindler's ingredient and a hazard. Court minutes of the East India Company warned against buyers of cheap indigo dust who shaped it into cakes and passed it off as quality indigo, Balfour-Paul reports, and manufacturers kept being tempted to add bulk with substances from rubber and brick dust to Prussian blue [8]. St Clair notes that French madder was accused of adulteration with everything from brick dust to oats [9]. Finlay adds that soot and dust were nearly the same colour as indigo, so a buyer had to be careful [7].\n\nThe dust was also dangerous. Jarman recalls Pliny's note that the dust of vermilion drove painters to wear bladder masks [10]. Finlay notes that Pliny called lead white poisonous if swallowed and said nothing of the danger of breathing its dust while grinding it, and quotes Ralph Mayer's modern warning not to breathe the dust [7].\n\nAt the other end of the process, dust is the ground of painting. Finlay observes that many paintings begin with the rubbing of earth, mud, dust, soot or rock onto cloth, paper, wood or wall, and that brighter colours come later [7]. Jarman, in a looser passage, notes that dun-coloured earth turned to mud in winter and dust in summer, and guesses at a link to brown country coats against black city ones [10]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive holds 23,781 paintings [11]. At least five per cent of the canvas lies within six units of this colour in 4,769 of them, about one in five, as photographed [11]. A stricter test, one per cent of the canvas within four units, finds it in 4,620, or 19.4 per cent, which makes it more common than 98 per cent of the named colours [12]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not proof of any pigment or dye.\n\nThe surprise is where it gathers. Dust is found in 341 of 698 Japanese paintings and in 87 of 168 Mughal ones, about two and a half times the expected rate for each [11]. [[painter:kano-tan-yu|Kano Tan'yū]] has it in 11 of his 14 works here, and [[painter:maarten-van-heemskerck|Heemskerck]] in 8 of 12 [11]. A plausible reason is that aged paper, silk and panel grounds drift toward this colour; our data does not test that, so treat it as a hypothesis.\n\nAt the extreme, one painting reads almost entirely as this colour: Adriaen van der Werff's [[painting:rijks-20026945|Madonna and Child with St John]], 1700, where it covers essentially the whole canvas [11]. In printed English, the adjective use of the word peaks in the 1910s [12]. Dust keeps company with [[hair-brown]] and [[leghorn]] more often than chance would predict [12]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "dust, fine dry earth",
-   "first_recorded": "Maerz and Paul 1930; ISCC-NBS 1955; sources say nothing earlier",
-   "source": "ColorHub library; Paterson, A Dictionary of Colour"
-  },
-  "aka": [
-   "dust-coloured"
+  "slug": "dust",
+  "name": "Dust",
+  "hex": "#B2996E",
+  "names": [
+    "Dust"
   ],
-  "siblings": [
-   "dark-beige"
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Dust is a dull greyish yellow-brown, the colour of dry earth on a surface, and the clearest case of the word in colour history is khaki, which means dusty.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "What the name means",
+      "body": "Dust is a dull, greyish yellow-brown, the colour of a thin layer of dry earth on a surface. Paterson defines *dust-coloured* as having the pale brown colour of dust, and *dusty* as a colour that looks coated with dust [1]. He also keeps a rare word, *pulveratricious*, for an earthy dusty colour, taken from birds that clean themselves by rolling in dust [1].\n\nWho first used the plain noun as a colour name is undocumented in the books we read. The library traces it to Maerz and Paul's dictionary of 1930 and to ISCC-NBS in 1955, which files it as \"dark grayish yellow\" within a ΔE of 4.3, and the xkcd colour survey of 2010 also lists it [2]. Several close neighbours already sit nearby: [[dust]], [[manila]] and [[camel]] are within a few units on screen [2]."
+    },
+    {
+      "id": "khaki",
+      "title": "The cloth that borrowed it: khaki",
+      "body": "The best-documented dust colour is khaki, whose name means dusty. St Clair says it is an Urdu word, while Paterson derives it from Hindi, so the books differ on the language [3][1]. Both agree on the sense: Paterson calls khaki a drab yellowish-brown dust colour, sometimes tinged with green [1].\n\nSt Clair tells the story [3]. In 1846 Sir Harry Lumsden, raising a Corps of Guides at Peshawar, is thought to have ordered white cotton soaked and rubbed with mud from the local river, hoping to make the men invisible in a land of dust [3]. She calls it the first official uniform in organised military history that blended into the landscape instead of announcing itself [3]. Treat the exact date and attribution as a tradition recorded by one author.\n\nThe web has not kept the sense. The X11 colour named khaki is #F0E68C, a pale yellow far lighter than the dust-coloured cloth, as Paterson's own entry shows [1]. Our library's [[khaki]] (#BDB76B) and [[khaki-web]] (#C3B091) are two other screen answers to the same word [2]."
+    },
+    {
+      "id": "dust-green",
+      "title": "Dust green, and other uses of the word",
+      "body": "In the pigment trade, *dust green* was one of the names applied to Scheele's green or emerald green, according to Mierzinski in 1881 and Fiedler and Bayard in 1997 as the Pigment Compendium cites them [4]. Both were bright arsenic greens, nothing like a dull dust colour, so the name here probably described how the powder behaved. The Compendium does not say why [4].\n\n*Tea dust* is a more exact use: Paterson describes it as a dark brown ceramic glaze with lighter brown flecks [1]. It is a ceramic term, and it names a dark brown, which is not our pale tan [1]."
+    },
+    {
+      "id": "air",
+      "title": "Dust in the air",
+      "body": "Most of the books' mentions of dust concern the air, not a pigment. Gurney explains that atmospheric perspective is strengthened by dust, moisture, haze or smog, and that the usual rule that distance turns things cool can reverse when dust or moist vapour hangs near the sun at sunrise or sunset [5].\n\nDust also helps explain why evening and morning skies differ. If the air is full of moisture and dust, Gurney writes, the setting sun is accompanied by more conspicuous red and yellow clouds, and in the first hour of morning the sequence reverses, often with pinker colours because less dust has been raised [5]. For a painter, a dusty afternoon is a warm one.\n\nBooks disagree about dust and the blue sky. Ball says blue light is scattered by the molecules and dust of the atmosphere, and St Clair says distant hills turn paler and bluer through scattering by dust, pollution and water droplets [6][13]. Finlay recalls that Tyndall blamed dust particles for the blue sky and that Einstein later showed that air molecules alone are big enough to scatter blue light [7]. The safe reading is that air molecules are enough, and that dust adds to the effect."
+    },
+    {
+      "id": "workshop",
+      "title": "Dust in the workshop",
+      "body": "For colour makers, dust was often a swindler's ingredient and a hazard. Court minutes of the East India Company warned against buyers of cheap indigo dust who shaped it into cakes and passed it off as quality indigo, Balfour-Paul reports, and manufacturers kept being tempted to add bulk with substances from rubber and brick dust to Prussian blue [8]. St Clair notes that French madder was accused of adulteration with everything from brick dust to oats [9]. Finlay adds that soot and dust were nearly the same colour as indigo, so a buyer had to be careful [7].\n\nThe dust was also dangerous. Jarman recalls Pliny's note that the dust of vermilion drove painters to wear bladder masks [10]. Finlay notes that Pliny called lead white poisonous if swallowed and said nothing of the danger of breathing its dust while grinding it, and quotes Ralph Mayer's modern warning not to breathe the dust [7].\n\nAt the other end of the process, dust is the ground of painting. Finlay observes that many paintings begin with the rubbing of earth, mud, dust, soot or rock onto cloth, paper, wood or wall, and that brighter colours come later [7]. Jarman, in a looser passage, notes that dun-coloured earth turned to mud in winter and dust in summer, and guesses at a link to brown country coats against black city ones [10]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive holds 23,781 paintings [11]. At least five per cent of the canvas lies within six units of this colour in 4,769 of them, about one in five, as photographed [11]. A stricter test, one per cent of the canvas within four units, finds it in 4,620, or 19.4 per cent, which makes it more common than 98 per cent of the named colours [12]. These are photographs of aged, varnished paintings, so a match is a look-alike hue and not proof of any pigment or dye.\n\nThe surprise is where it gathers. Dust is found in 341 of 698 Japanese paintings and in 87 of 168 Mughal ones, about two and a half times the expected rate for each [11]. [[painter:kano-tan-yu|Kano Tan'yū]] has it in 11 of his 14 works here, and [[painter:maarten-van-heemskerck|Heemskerck]] in 8 of 12 [11]. A plausible reason is that aged paper, silk and panel grounds drift toward this colour; our data does not test that, so treat it as a hypothesis.\n\nAt the extreme, one painting reads almost entirely as this colour: Adriaen van der Werff's [[painting:rijks-20026945|Madonna and Child with St John]], 1700, where it covers essentially the whole canvas [11]. In printed English, the adjective use of the word peaks in the 1910s [12]. Dust keeps company with [[hair-brown]] and [[leghorn]] more often than chance would predict [12]."
+    }
   ],
-  "parent": null,
-  "children": [
-   "dusty-green"
-  ],
-  "disambiguation": [
-   {
-    "slug": "khaki-web",
-    "gloss": "the X11 khaki, #F0E68C, is far paler than the dust-coloured cloth the word first described"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "ur/hi",
-    "name": "khaki (dusty)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#B2996E",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 4769,
-  "top_paintings": [
-   "rijks-20026945",
-   "cma-153672"
-  ],
-  "countries": {
-   "Japan": {
-    "hits": 341,
-    "n": 698
-   }
-  },
-  "movements": {
-   "Mughal": {
-    "hits": 87,
-    "n": 168
-   }
-  },
-  "painters": {
-   "kano-tan-yu": {
-    "hits": 11,
-    "n": 14
-   },
-   "maarten-van-heemskerck": {
-    "hits": 8,
-    "n": 12
-   }
-  },
-  "company": [
-   [
-    "Hair Brown",
-    2.6
-   ],
-   [
-    "Leghorn",
-    2.5
-   ]
-  ],
-  "measured": {
-   "lch": [
-    64.5,
-    26.2,
-    83.3
-   ],
-   "iscc": "dark grayish yellow",
-   "nearest": [
-    [
-     "Dark Beige",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "dust, fine dry earth",
+      "first_recorded": "Maerz and Paul 1930; ISCC-NBS 1955; sources say nothing earlier",
+      "source": "ColorHub library; Paterson, A Dictionary of Colour"
+    },
+    "aka": [
+      "dust-coloured"
     ],
-    [
-     "Manila",
-     2.8
+    "siblings": [
+      "dust"
     ],
-    [
-     "Long Beach",
-     3.8
+    "parent": null,
+    "children": [
+      "dusty-green"
+    ],
+    "disambiguation": [
+      {
+        "slug": "khaki-web",
+        "gloss": "the X11 khaki, #F0E68C, is far paler than the dust-coloured cloth the word first described"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "ur/hi",
+        "name": "khaki (dusty)"
+      }
     ]
-   ]
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#B2996E",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 4769,
+    "top_paintings": [
+      "rijks-20026945",
+      "cma-153672"
+    ],
+    "countries": {
+      "Japan": {
+        "hits": 341,
+        "n": 698
+      }
+    },
+    "movements": {
+      "Mughal": {
+        "hits": 87,
+        "n": 168
+      }
+    },
+    "painters": {
+      "kano-tan-yu": {
+        "hits": 11,
+        "n": 14
+      },
+      "maarten-van-heemskerck": {
+        "hits": 8,
+        "n": 12
+      }
+    },
+    "company": [
+      [
+        "Hair Brown",
+        2.6
+      ],
+      [
+        "Leghorn",
+        2.5
+      ]
+    ],
+    "measured": {
+      "lch": [
+        64.5,
+        26.2,
+        83.3
+      ],
+      "iscc": "dark grayish yellow",
+      "nearest": [
+        [
+          "Dark Beige",
+          2.6
+        ],
+        [
+          "Manila",
+          2.8
+        ],
+        [
+          "Long Beach",
+          3.8
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"dust-coloured\", \"dusty\", \"pulveratricious\", \"khaki\", \"tea dust\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub library: ISCC-NBS 1955 block 94; Maerz and Paul 1930; xkcd 2010",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, section on brown (khaki)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pigment Compendium, \"dust green\" (citing Mierzinski 1881; Fiedler and Bayard 1997)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Gurney, Colour and Light, \"Dust and distance\" and \"Sunsets\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, the chapter on colour and vision",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Finlay, Colour, chapters on black and brown, blue and white",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Balfour-Paul, Indigo, chapters on the trade",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, section on madder",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Jarman, Chroma, essays on grey and brown",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, ΔE2000 6, at least 5% of canvas, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, section on blue and distance",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "data",
+      "cite": "ColorHub graph fieldnotes (dust): 1% of canvas within ΔE 4; Ngram, adjective use",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the word khaki mean, according to the books?",
+      "choices": [
+        "Dusty",
+        "Sandy",
+        "Muddy",
+        "Faded"
+      ],
+      "answer": "Dusty",
+      "kind": "pick"
+    },
+    {
+      "q": "Why did the British Corps of Guides at Peshawar have their white cotton rubbed with mud in 1846, as St Clair tells it?",
+      "choices": [
+        "To blend into the landscape",
+        "To make it last longer",
+        "To hide stains",
+        "To save on dye"
+      ],
+      "answer": "To blend into the landscape",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Dust is the colour of a thin layer of dry earth, close to the beiges and not to bright arsenic greens.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Khaki means dusty: the first official blend-in uniform was white cotton rubbed with river mud in 1846.",
+    "Dust makes a sunset warmer: the evening air holds more of it than the morning's, so mornings come out pinker.",
+    "Look for this colour in old silk and paper: our archive finds it in about half of Japanese paintings."
+  ],
+  "words": 1072,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Removed unsupported 'lead ground beside a roaring fire' claim; Finlay only says Pliny did not mention grinding dust, Mayer warns against breathing dust",
+      "Indigo adulteration sentence aligned to Balfour-Paul (rubber, brick dust, Prussian blue as tempting additives)",
+      "Einstein/Tyndall sentence reworded to avoid Finlay's 'oxygen and hydrogen' error",
+      "Other claims verified"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"dust-coloured\", \"dusty\", \"pulveratricious\", \"khaki\", \"tea dust\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub library: ISCC-NBS 1955 block 94; Maerz and Paul 1930; xkcd 2010",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, section on brown (khaki)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pigment Compendium, \"dust green\" (citing Mierzinski 1881; Fiedler and Bayard 1997)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Gurney, Colour and Light, \"Dust and distance\" and \"Sunsets\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, the chapter on colour and vision",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Finlay, Colour, chapters on black and brown, blue and white",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Balfour-Paul, Indigo, chapters on the trade",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, section on madder",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Jarman, Chroma, essays on grey and brown",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, ΔE2000 6, at least 5% of canvas, as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, section on blue and distance",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "data",
-   "cite": "ColorHub graph fieldnotes (dust): 1% of canvas within ΔE 4; Ngram, adjective use",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the word khaki mean, according to the books?",
-   "choices": [
-    "Dusty",
-    "Sandy",
-    "Muddy",
-    "Faded"
-   ],
-   "answer": "Dusty",
-   "kind": "pick"
-  },
-  {
-   "q": "Why did the British Corps of Guides at Peshawar have their white cotton rubbed with mud in 1846, as St Clair tells it?",
-   "choices": [
-    "To blend into the landscape",
-    "To make it last longer",
-    "To hide stains",
-    "To save on dye"
-   ],
-   "answer": "To blend into the landscape",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Dust is the colour of a thin layer of dry earth, close to the beiges and not to bright arsenic greens.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Khaki means dusty: the first official blend-in uniform was white cotton rubbed with river mud in 1846.",
-  "Dust makes a sunset warmer: the evening air holds more of it than the morning's, so mornings come out pinker.",
-  "Look for this colour in old silk and paper: our archive finds it in about half of Japanese paintings."
- ],
- "words": 1072,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Removed unsupported 'lead ground beside a roaring fire' claim; Finlay only says Pliny did not mention grinding dust, Mayer warns against breathing dust",
-   "Indigo adulteration sentence aligned to Balfour-Paul (rubber, brick dust, Prussian blue as tempting additives)",
-   "Einstein/Tyndall sentence reworded to avoid Finlay's 'oxygen and hydrogen' error",
-   "Other claims verified"
-  ]
- }
 }

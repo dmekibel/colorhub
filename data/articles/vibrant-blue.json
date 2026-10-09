@@ -1,140 +1,140 @@
 {
- "slug": "vibrant-blue",
- "name": "Vibrant Blue",
- "hex": "#0339F8",
- "names": [
-  "Vibrant Blue"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Vibrant Blue is the xkcd color survey's name for a strong, highly saturated blue built from the modifier *vibrant* and the base word *blue*, close to but distinct from the 1955 ISCC-NBS block called vivid purplish blue.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier, not a new word",
-   "body": "The name follows ordinary modifier grammar: *vibrant* describes how saturated the blue looks, attached to the existing color word [[blue]] [1]. It was recorded in the xkcd color survey of 2010, a crowdsourced naming experiment that asked thousands of volunteers to type a name for swatches on their screens [1]. Our library also finds the same name and hex value, #0339F8, cited to Wikipedia [2].\n\nThe nearest catalogued system, the Inter-Society Color Council and National Bureau of Standards list of 1955, assigns neighboring hues to block 169, named vivid purplish blue, but the two colors measure 12.1 units apart in CIEDE2000, too far to call the same shade [2]. The color library records no Munsell notation for this exact hue [2]. The nearest named colors on file are [[vibrant-blue]], [[blurple]] and [[blue-blue]], at 3, 6 and 6 ΔE [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive carries a color within four units of Vibrant Blue covering at least one per cent of its canvas, as photographed [3]. That describes this particular archive, not painting as a whole: a hue this saturated is far easier to reach with a modern digital screen or synthetic dye than with historical pigments, which is why old paintings rarely show it [3]. In printed English the phrase *vibrant blue* was already common by 1980 and peaked around 2010, the same year the xkcd survey ran [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: vibrant + blue",
-   "first_recorded": "ISCC-NBS 1955 (as vivid purplish blue, a related but distinct block); as this exact name, the xkcd survey, 2010",
-   "source": "ColorHub color library and Color Graph"
-  },
-  "aka": [],
-  "siblings": [
-   "light-royal-blue",
-   "purpleish-blue",
-   "blue-blue",
-   "blurple"
+  "slug": "vibrant-blue",
+  "name": "Vibrant Blue",
+  "hex": "#0339F8",
+  "names": [
+    "Vibrant Blue"
   ],
-  "parent": "blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    37.3,
-    112.6,
-    301.9
-   ],
-   "iscc_nbs": {
-    "block": 169,
-    "name": "vivid purplish blue",
-    "de2000": 12.1
-   },
-   "nearest": [
-    [
-     "Light Royal Blue",
-     3.0
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Vibrant Blue is the xkcd color survey's name for a strong, highly saturated blue built from the modifier *vibrant* and the base word *blue*, close to but distinct from the 1955 ISCC-NBS block called vivid purplish blue.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier, not a new word",
+      "body": "The name follows ordinary modifier grammar: *vibrant* describes how saturated the blue looks, attached to the existing color word [[blue]] [1]. It was recorded in the xkcd color survey of 2010, a crowdsourced naming experiment that asked thousands of volunteers to type a name for swatches on their screens [1]. Our library also finds the same name and hex value, #0339F8, cited to Wikipedia [2].\n\nThe nearest catalogued system, the Inter-Society Color Council and National Bureau of Standards list of 1955, assigns neighboring hues to block 169, named vivid purplish blue, but the two colors measure 12.1 units apart in CIEDE2000, too far to call the same shade [2]. The color library records no Munsell notation for this exact hue [2]. The nearest named colors on file are [[vibrant-blue]], [[blurple]] and [[blue-blue]], at 3, 6 and 6 ΔE [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive carries a color within four units of Vibrant Blue covering at least one per cent of its canvas, as photographed [3]. That describes this particular archive, not painting as a whole: a hue this saturated is far easier to reach with a modern digital screen or synthetic dye than with historical pigments, which is why old paintings rarely show it [3]. In printed English the phrase *vibrant blue* was already common by 1980 and peaked around 2010, the same year the xkcd survey ran [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: vibrant + blue",
+      "first_recorded": "ISCC-NBS 1955 (as vivid purplish blue, a related but distinct block); as this exact name, the xkcd survey, 2010",
+      "source": "ColorHub color library and Color Graph"
+    },
+    "aka": [],
+    "siblings": [
+      "vibrant-blue",
+      "blurple",
+      "blue-blue",
+      "electric-blue"
     ],
-    [
-     "Purpleish Blue",
-     6.0
-    ],
-    [
-     "Blue Blue",
-     6.0
-    ],
-    [
-     "Blurple",
-     6.3
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        37.3,
+        112.6,
+        301.9
+      ],
+      "iscc_nbs": {
+        "block": 169,
+        "name": "vivid purplish blue",
+        "de2000": 12.1
+      },
+      "nearest": [
+        [
+          "Light Royal Blue",
+          3.0
+        ],
+        [
+          "Purpleish Blue",
+          6.0
+        ],
+        [
+          "Blue Blue",
+          6.0
+        ],
+        [
+          "Blurple",
+          6.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "xkcd color survey (2010), crowdsourced color-name list",
+      "loc_kind": null,
+      "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "web",
+      "cite": "Google Books Ngram, case-insensitive",
+      "loc_kind": null,
+      "url": "https://books.google.com/ngrams"
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which 1955 color-naming system catalogues a hue near Vibrant Blue as \"vivid purplish blue\"?",
+      "choices": [
+        "ISCC-NBS",
+        "Pantone",
+        "Munsell Book of Color",
+        "Crayola"
+      ],
+      "answer": "ISCC-NBS",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Vibrant Blue is common in our museum-painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Vibrant Blue is too saturated for old paint: no painting in our archive carries it."
+  ],
+  "words": 262,
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "xkcd survey year and ISCC-NBS block from our own library data, not independently re-checked against the printed ISCC-NBS charts.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "xkcd color survey (2010), crowdsourced color-name list",
-   "loc_kind": null,
-   "url": "https://blog.xkcd.com/2010/05/03/color-survey-results/"
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library and Color Graph (data/library.json, data/graph): ISCC-NBS block, Munsell notation, LCH values",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive fieldnotes, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "web",
-   "cite": "Google Books Ngram, case-insensitive",
-   "loc_kind": null,
-   "url": "https://books.google.com/ngrams"
-  }
- ],
- "questions": [
-  {
-   "q": "Which 1955 color-naming system catalogues a hue near Vibrant Blue as \"vivid purplish blue\"?",
-   "choices": [
-    "ISCC-NBS",
-    "Pantone",
-    "Munsell Book of Color",
-    "Crayola"
-   ],
-   "answer": "ISCC-NBS",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Vibrant Blue is common in our museum-painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Vibrant Blue is too saturated for old paint: no painting in our archive carries it."
- ],
- "words": 262,
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "xkcd survey year and ISCC-NBS block from our own library data, not independently re-checked against the printed ISCC-NBS charts.",
-   "lint 2026-10-09"
-  ]
- }
 }

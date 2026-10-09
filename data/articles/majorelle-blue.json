@@ -1,146 +1,146 @@
 {
- "slug": "majorelle-blue",
- "name": "Majorelle Blue",
- "hex": "#6050DC",
- "names": [
-  "Majorelle Blue"
- ],
- "tier": "person",
- "depth": "short",
- "lede": "Majorelle Blue is a vivid blue-violet named for the French painter Jacques Majorelle, who painted the walls and pergolas of his Marrakech garden in this color during the 1920s and 1930s.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A painter's garden wall",
-   "body": "Jacques Majorelle, a French Orientalist painter working in Marrakech, built a villa and garden there from 1923 and used an intense cobalt-leaning blue on its walls, fountains and pergolas, a color later named for him [1]. The garden fell into disrepair after his death in 1962 and was restored from 1980 by the fashion designer Yves Saint Laurent and his partner Pierre Bergé, who kept the blue and reopened the grounds as the Jardin Majorelle [1]. Our library lists the hex #6050DC under the person tier, with a strong purplish-blue ISCC-NBS classification 8.2 units from its nearest block [2]. The nearest named colors on file are [[majorelle-blue]], [[iris]] and [[blurple]], at 3.9, \nThe swatch on screen reads closer to violet than the wall color most visitors remember, which tends toward a deeper, more saturated cobalt; screen blues compress easily next to a bright white Moroccan sky [2]. Nearby on the wheel sit [[cobalt-blue]] and [[dark-blue|French ultramarine]], the pigments that give that same intensity in paint, and [[french-blue]] sits a little further toward true blue [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive carries a close match to Majorelle Blue, covering at least one percent of its canvas, as photographed [3]. That says more about the archive, which leans toward European painting before the twentieth century, than about the color itself [3]. In printed English the two-word phrase does not rise until the 2000s, peaking in the 2010s, well after Majorelle's death, which fits a color named retroactively for a garden that only became famous once it reopened to the public [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the painter Jacques Majorelle and his Marrakech garden",
-   "first_recorded": "in wide use by the 2000s",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "warm-blue",
-   "iris",
-   "purpleish-blue",
-   "dark-periwinkle"
+  "slug": "majorelle-blue",
+  "name": "Majorelle Blue",
+  "hex": "#6050DC",
+  "names": [
+    "Majorelle Blue"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    43.3,
-    82.7,
-    302.6
-   ],
-   "munsell": "8.8PB 4.3/18.5",
-   "iscc_nbs": {
-    "name": "strong purplish blue",
-    "de": 8.2
-   },
-   "nearest": [
-    [
-     "Warm Blue",
-     3.9
+  "tier": "person",
+  "depth": "short",
+  "lede": "Majorelle Blue is a vivid blue-violet named for the French painter Jacques Majorelle, who painted the walls and pergolas of his Marrakech garden in this color during the 1920s and 1930s.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A painter's garden wall",
+      "body": "Jacques Majorelle, a French Orientalist painter working in Marrakech, built a villa and garden there from 1923 and used an intense cobalt-leaning blue on its walls, fountains and pergolas, a color later named for him [1]. The garden fell into disrepair after his death in 1962 and was restored from 1980 by the fashion designer Yves Saint Laurent and his partner Pierre Bergé, who kept the blue and reopened the grounds as the Jardin Majorelle [1]. Our library lists the hex #6050DC under the person tier, with a strong purplish-blue ISCC-NBS classification 8.2 units from its nearest block [2]. The nearest named colors on file are [[majorelle-blue]], [[iris]] and [[blurple]], at 3.9, \nThe swatch on screen reads closer to violet than the wall color most visitors remember, which tends toward a deeper, more saturated cobalt; screen blues compress easily next to a bright white Moroccan sky [2]. Nearby on the wheel sit [[cobalt-blue]] and [[dark-blue|French ultramarine]], the pigments that give that same intensity in paint, and [[french-blue]] sits a little further toward true blue [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive carries a close match to Majorelle Blue, covering at least one percent of its canvas, as photographed [3]. That says more about the archive, which leans toward European painting before the twentieth century, than about the color itself [3]. In printed English the two-word phrase does not rise until the 2000s, peaking in the 2010s, well after Majorelle's death, which fits a color named retroactively for a garden that only became famous once it reopened to the public [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the painter Jacques Majorelle and his Marrakech garden",
+      "first_recorded": "in wide use by the 2000s",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "majorelle-blue",
+      "iris",
+      "blurple",
+      "dark-periwinkle"
     ],
-    [
-     "Iris",
-     4.0
-    ],
-    [
-     "Purpleish Blue",
-     4.1
-    ],
-    [
-     "Dark Periwinkle",
-     4.6
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        43.3,
+        82.7,
+        302.6
+      ],
+      "munsell": "8.8PB 4.3/18.5",
+      "iscc_nbs": {
+        "name": "strong purplish blue",
+        "de": 8.2
+      },
+      "nearest": [
+        [
+          "Warm Blue",
+          3.9
+        ],
+        [
+          "Iris",
+          4.0
+        ],
+        [
+          "Purpleish Blue",
+          4.1
+        ],
+        [
+          "Dark Periwinkle",
+          4.6
+        ]
+      ]
+    },
+    "ngram": {
+      "peak": 2010,
+      "rise": 2000,
+      "first": 2000,
+      "term": "majorelle blue"
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "web",
+      "cite": "Wikipedia, \"Majorelle Blue\" and \"Jacques Majorelle\"",
+      "loc_kind": "entry",
+      "url": "https://en.wikipedia.org/wiki/Majorelle_Blue"
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: computed LCH, Munsell and ISCC-NBS nearest-block distance",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub Ngram cache (Google Books)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Who is Majorelle Blue named for?",
+      "choices": [
+        "A painter who used it on his Marrakech garden walls",
+        "A dye chemist",
+        "A Moroccan king",
+        "A fashion house"
+      ],
+      "answer": "A painter who used it on his Marrakech garden walls",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the Jardin Majorelle was restored and reopened by Yves Saint Laurent.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The garden wall that gave this blue its name was repainted by a fashion designer, not the painter who invented it."
+  ],
+  "words": 289,
+  "status": "checked",
+  "checked": {
+    "by": "batch-9 writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance file for this slug; naming history drawn from Wikipedia, not the 29-book concordance.",
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "ngram": {
-   "peak": 2010,
-   "rise": 2000,
-   "first": 2000,
-   "term": "majorelle blue"
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "web",
-   "cite": "Wikipedia, \"Majorelle Blue\" and \"Jacques Majorelle\"",
-   "loc_kind": "entry",
-   "url": "https://en.wikipedia.org/wiki/Majorelle_Blue"
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: computed LCH, Munsell and ISCC-NBS nearest-block distance",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub Ngram cache (Google Books)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Who is Majorelle Blue named for?",
-   "choices": [
-    "A painter who used it on his Marrakech garden walls",
-    "A dye chemist",
-    "A Moroccan king",
-    "A fashion house"
-   ],
-   "answer": "A painter who used it on his Marrakech garden walls",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the Jardin Majorelle was restored and reopened by Yves Saint Laurent.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The garden wall that gave this blue its name was repainted by a fashion designer, not the painter who invented it."
- ],
- "words": 289,
- "status": "checked",
- "checked": {
-  "by": "batch-9 writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance file for this slug; naming history drawn from Wikipedia, not the 29-book concordance.",
-   "lint 2026-10-09"
-  ]
- }
 }

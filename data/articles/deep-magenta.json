@@ -1,114 +1,114 @@
 {
- "slug": "deep-magenta",
- "name": "Deep magenta",
- "hex": "#A00498",
- "names": [
-  "Deep magenta"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Deep magenta is a dark, saturated magenta, built from the modifier \"deep\" in front of the base color rather than from any separate tradition of its own.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier, not a separate name",
-   "body": "The nearest named colors on file are [[hyacinth-violet]], [[dark-magenta]], [[iris-purple]] and [[purple-munsell]], at 3.7, 4.3, 5.8 and 5.8 ΔE [1]. It comes from the 2010 xkcd color survey, where a visitor's typed label for this darker, lower-lightness cluster of the magenta family won out over other wording [1].\n\nBecause it is a modifier rather than a standalone dictionary word, Deep magenta is not in our library of CSS, Ridgway, Maerz and Paul, or ISCC-NBS names; only its parent [[magenta]] carries that older pedigree [1]. At lightness 38 and chroma 78, it sits noticeably darker than typical magenta while keeping nearly the same hue angle [1]. Nearby in the same family are [[purple]], [[magenta]], and [[plum]], all sharing the same reddish-purple corner of the wheel [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings, as photographed, has no painting where this dark magenta covers five percent or more of the canvas [2]. Dyes and pigments able to hold magenta's hue at this depth and saturation are a modern, largely synthetic achievement, so the gap is expected rather than a gap in the data [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: deep + magenta",
-   "first_recorded": "2010, xkcd color survey",
-   "source": "xkcd (Munroe 2010)"
-  },
-  "aka": [],
-  "siblings": [
-   "warm-purple",
-   "dark-magenta",
-   "iris-purple",
-   "barney"
+  "slug": "deep-magenta",
+  "name": "Deep magenta",
+  "hex": "#A00498",
+  "names": [
+    "Deep magenta"
   ],
-  "parent": "magenta",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    38,
-    78,
-    330
-   ],
-   "nearest": [
-    [
-     "Warm Purple",
-     3.7
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Deep magenta is a dark, saturated magenta, built from the modifier \"deep\" in front of the base color rather than from any separate tradition of its own.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier, not a separate name",
+      "body": "The nearest named colors on file are [[hyacinth-violet]], [[dark-magenta]], [[iris-purple]] and [[purple-munsell]], at 3.7, 4.3, 5.8 and 5.8 ΔE [1]. It comes from the 2010 xkcd color survey, where a visitor's typed label for this darker, lower-lightness cluster of the magenta family won out over other wording [1].\n\nBecause it is a modifier rather than a standalone dictionary word, Deep magenta is not in our library of CSS, Ridgway, Maerz and Paul, or ISCC-NBS names; only its parent [[magenta]] carries that older pedigree [1]. At lightness 38 and chroma 78, it sits noticeably darker than typical magenta while keeping nearly the same hue angle [1]. Nearby in the same family are [[purple]], [[magenta]], and [[plum]], all sharing the same reddish-purple corner of the wheel [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings, as photographed, has no painting where this dark magenta covers five percent or more of the canvas [2]. Dyes and pigments able to hold magenta's hue at this depth and saturation are a modern, largely synthetic achievement, so the gap is expected rather than a gap in the data [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: deep + magenta",
+      "first_recorded": "2010, xkcd color survey",
+      "source": "xkcd (Munroe 2010)"
+    },
+    "aka": [],
+    "siblings": [
+      "hyacinth-violet",
+      "dark-magenta",
+      "iris-purple",
+      "purple-munsell"
     ],
-    [
-     "Dark Magenta",
-     4.3
+    "parent": "magenta",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        38,
+        78,
+        330
+      ],
+      "nearest": [
+        [
+          "Warm Purple",
+          3.7
+        ],
+        [
+          "Dark Magenta",
+          4.3
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color graph: xkcd 2010 color survey entry, modifier grammar \"deep + magenta\"",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "How is the name Deep magenta built?",
+      "choices": [
+        "The modifier \"deep\" in front of the base color magenta",
+        "From a 19th-century dye catalog",
+        "From the Latin word for dark",
+        "From a painter's own mixing notes"
+      ],
+      "answer": "The modifier \"deep\" in front of the base color magenta",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Deep magenta has its own separate entry in Ridgway's 1912 color dictionary.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Deep magenta is built from a modifier plus a base name, not a tradition of its own."
+  ],
+  "words": 209,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No private fact-card file for this slug.",
+      "Not in data/library.json; dated only to its 2010 survey appearance.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color graph: xkcd 2010 color survey entry, modifier grammar \"deep + magenta\"",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "How is the name Deep magenta built?",
-   "choices": [
-    "The modifier \"deep\" in front of the base color magenta",
-    "From a 19th-century dye catalog",
-    "From the Latin word for dark",
-    "From a painter's own mixing notes"
-   ],
-   "answer": "The modifier \"deep\" in front of the base color magenta",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Deep magenta has its own separate entry in Ridgway's 1912 color dictionary.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Deep magenta is built from a modifier plus a base name, not a tradition of its own."
- ],
- "words": 209,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No private fact-card file for this slug.",
-   "Not in data/library.json; dated only to its 2010 survey appearance.",
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,264 +1,265 @@
 {
- "slug": "leaf",
- "name": "Leaf",
- "hex": "#71AA34",
- "names": [
-  "Leaf"
- ],
- "tier": "nature",
- "depth": "long",
- "lede": "Leaf is a fresh, strong yellow-green, the color a young leaf shows against the light; the same word in older color lists names the brown of a dead one.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Two leaves, two colors",
-   "body": "The swatch comes from a 2010 survey and sits closest to the ISCC-NBS block called strong yellow green, 5.9 units away [11]. Its nearest neighbors in our data are [[leaf]], [[grass]] and [[leaf-green]] [11]. The older name lists point the other way: the ISCC-NBS record of the name *leaf* sits in block 51, whose other names are Autumn Leaf, Dead Leaf, Feuille Morte and Leaf Brown [11]. Block 51 is an orange-brown block, nothing like this green [11]. The color word has always carried both ends of a leaf's year.\n\nPaterson's dictionary of colour shows the same split. Leaf green is the color of leaves, sometimes the yellowy green of young leaves, and one of the colors in the Ostwald circle [4]. *Feuille* alone is a light green, but *feuillemorte* is the brown of dead leaves, spelled in many ways, among them filemot and philamot [4]. Leafmold is a dark reddish-orange, and dead-leaf brown has an entry of its own [4]. The dictionary also records that *chlorosis* has two opposite meanings: a leaf turning green from some other color, or a leaf lacking chlorophyll and turning yellow or white [4]."
-  },
-  {
-   "id": "green",
-   "title": "Why a leaf is green",
-   "body": "The green of a leaf comes from chlorophyll, which Paterson describes as the substance held in the tiny bodies called chloroplasts in plant cells [4]. What we see is also a matter of how the eye compares cone signals. Livingstone observes that a leaf, an orange and a tomato look green, orange and red under both daylight and office fluorescents, even though a spectrophotometer shows big differences [7]. What defines their color is the ratio of long to middle cone signals, which rises from the leaf to the orange to the tomato [7]. Westland adds a practical point for painters and photographers: light shining through a translucent leaf heightens its chroma [8].\n\nGreen is not the color plants use best. Birren describes older experiments in which wheat grew best under red rays, with a fall-off under yellow and green and a pickup under blue [9]. Plant stems also lean toward a light source, because the shaded side grows faster [9]."
-  },
-  {
-   "id": "painting",
-   "title": "How painters get a leaf right",
-   "body": "Gurney, writing for painters, breaks the light on a leaf into four kinds [2]. Transmitted light, with the sun behind the leaf, gives a strongly chromatic yellow-green [2]. A leaf in shadow, facing down, is the darkest green, even darker if it were not picking up reflected light from a neighbor [2]. A leaf in shadow, facing up, turns blue-green because the sky is shining on it [2]. Sunlight on the top surface gives the lightest and most textured color, but with a surprisingly weak chroma, because most of the light bounces off the waxy surface of the leaf [2].\n\nThis swatch is a transmitted-light green. On a whole tree, Gurney adds, the four kinds of foliage color mix like tiny pixels, grouped by how each mass of leaves faces the light [2]. His working advice is to vary the greens from leaf to leaf and tree to tree [3]. He also suggests weaving pink or reddish gray through them, and priming the canvas pink or red so that it shows through in places, a method he credits to the painter Stapleton Kearns as smuggling reds [3].\n\nIn our archive, [[painter:paul-gauguin|Gauguin]]'s [[painting:commons-Q79790701|Mother and Child under a Tree at Pont-Aven]] has the most of this green, at 31 per cent of the canvas, and Van Gogh's [[painting:nga-163323|Green Wheat Fields, Auvers]] has about a sixth [12]."
-  },
-  {
-   "id": "autumn",
-   "title": "Autumn and the leaf study",
-   "body": "Albers thought autumn foliage nowhere more brilliant than in the United States, and he built an exercise on it [5]. Students collect leaves, press and dry them, and use them alongside color paper, since leaves offer modulations and shapes that paper does not have [5]. The rule he sets is to keep the color before the shape in mind [5]. Fall leaf studies are best done in season; out of season, preserved leaves give more subdued, less vivid colors [5].\n\nThis is a good way to learn leaf as a color word. One leaf can be green at the stem, yellow-green at the edge, and orange-brown at the tip in the same week, and each part belongs to a different name in the dictionaries above."
-  },
-  {
-   "id": "cockade",
-   "title": "The leaf as a badge",
-   "body": "On July 12, 1789, in the garden of the Palais-Royal, the lawyer Camille Desmoulins asked a crowd to choose a color for a cockade [10]. The crowd answered green, the symbol of hope, and he tore a leaf from a linden to pin to his hat [10]. Green ribbons soon replaced the leaves, but the next day the patriots learned that green was also the color of the detested Comte d'Artois, and the badge was reconsidered [10]. On July 14 those who stormed the Bastille wore a variety of colors, among them green, blue, red and combinations of them [10].\n\nPastoureau notes the same tree in an older story: in the Nibelungen legend, a fallen linden leaf left a spot on Siegfried's shoulders where the dragon's blood did not reach, so that he was not completely invulnerable [13]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, as photographed, the swatch fills five per cent of the canvas or more, within six units, in five [12]. They are Gauguin's *Pont-Aven* (31 per cent of it), Van Gogh's *Green Wheat Fields, Auvers* from 1890 (16 per cent) and Gauguin's 1888 self-portrait (13 per cent) [12]. The other two are an 1861 *Civil War Battle* (12 per cent) and Jawlensky's *Red Path, St. Prex* from 1915 (9 per cent) [12]. That is rarer than 82 per cent of named colors, and photographs of aged, varnished paintings are not pigment tests [12].\n\nThe closest gem in our data is [[gem:peridot|peridot]], a deeper olive, 9.4 units away [11]. The closest year-color is Pantone's Greenery, the Color of the Year for 2017, at 7.4 units [11]. In printed English, *leaf* as a color adjective rose fastest in the 1880s and peaked in the 1920s [14]. When you next look at a tree, find the four kinds of leaf on Gurney's list [2]. The transmitted yellow-green is the one closest to this swatch [2][11]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the leaf of a plant; the name also appears in older lists for the brown of dead leaves",
-   "first_recorded": "ISCC-NBS 1955 and Maerz and Paul 1930 name lists; this swatch from the xkcd survey, 2010",
-   "source": "ColorHub library; Paterson, A Dictionary of Colour"
-  },
-  "aka": [
-   "Leaf Green"
+  "slug": "leaf",
+  "name": "Leaf",
+  "hex": "#71AA34",
+  "names": [
+    "Leaf"
   ],
-  "siblings": [
-   "leaf-green",
-   "grass",
-   "nasty-green"
+  "tier": "nature",
+  "depth": "long",
+  "lede": "Leaf is a fresh, strong yellow-green, the color a young leaf shows against the light; the same word in older color lists names the brown of a dead one.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Two leaves, two colors",
+      "body": "The swatch comes from a 2010 survey and sits closest to the ISCC-NBS block called strong yellow green, 5.9 units away [11]. Its nearest neighbors in our data are [[leaf]], [[grass]] and [[leaf-green]] [11]. The older name lists point the other way: the ISCC-NBS record of the name *leaf* sits in block 51, whose other names are Autumn Leaf, Dead Leaf, Feuille Morte and Leaf Brown [11]. Block 51 is an orange-brown block, nothing like this green [11]. The color word has always carried both ends of a leaf's year.\n\nPaterson's dictionary of colour shows the same split. Leaf green is the color of leaves, sometimes the yellowy green of young leaves, and one of the colors in the Ostwald circle [4]. *Feuille* alone is a light green, but *feuillemorte* is the brown of dead leaves, spelled in many ways, among them filemot and philamot [4]. Leafmold is a dark reddish-orange, and dead-leaf brown has an entry of its own [4]. The dictionary also records that *chlorosis* has two opposite meanings: a leaf turning green from some other color, or a leaf lacking chlorophyll and turning yellow or white [4]."
+    },
+    {
+      "id": "green",
+      "title": "Why a leaf is green",
+      "body": "The green of a leaf comes from chlorophyll, which Paterson describes as the substance held in the tiny bodies called chloroplasts in plant cells [4]. What we see is also a matter of how the eye compares cone signals. Livingstone observes that a leaf, an orange and a tomato look green, orange and red under both daylight and office fluorescents, even though a spectrophotometer shows big differences [7]. What defines their color is the ratio of long to middle cone signals, which rises from the leaf to the orange to the tomato [7]. Westland adds a practical point for painters and photographers: light shining through a translucent leaf heightens its chroma [8].\n\nGreen is not the color plants use best. Birren describes older experiments in which wheat grew best under red rays, with a fall-off under yellow and green and a pickup under blue [9]. Plant stems also lean toward a light source, because the shaded side grows faster [9]."
+    },
+    {
+      "id": "painting",
+      "title": "How painters get a leaf right",
+      "body": "Gurney, writing for painters, breaks the light on a leaf into four kinds [2]. Transmitted light, with the sun behind the leaf, gives a strongly chromatic yellow-green [2]. A leaf in shadow, facing down, is the darkest green, even darker if it were not picking up reflected light from a neighbor [2]. A leaf in shadow, facing up, turns blue-green because the sky is shining on it [2]. Sunlight on the top surface gives the lightest and most textured color, but with a surprisingly weak chroma, because most of the light bounces off the waxy surface of the leaf [2].\n\nThis swatch is a transmitted-light green. On a whole tree, Gurney adds, the four kinds of foliage color mix like tiny pixels, grouped by how each mass of leaves faces the light [2]. His working advice is to vary the greens from leaf to leaf and tree to tree [3]. He also suggests weaving pink or reddish gray through them, and priming the canvas pink or red so that it shows through in places, a method he credits to the painter Stapleton Kearns as smuggling reds [3].\n\nIn our archive, [[painter:paul-gauguin|Gauguin]]'s [[painting:commons-Q79790701|Mother and Child under a Tree at Pont-Aven]] has the most of this green, at 31 per cent of the canvas, and Van Gogh's [[painting:nga-163323|Green Wheat Fields, Auvers]] has about a sixth [12]."
+    },
+    {
+      "id": "autumn",
+      "title": "Autumn and the leaf study",
+      "body": "Albers thought autumn foliage nowhere more brilliant than in the United States, and he built an exercise on it [5]. Students collect leaves, press and dry them, and use them alongside color paper, since leaves offer modulations and shapes that paper does not have [5]. The rule he sets is to keep the color before the shape in mind [5]. Fall leaf studies are best done in season; out of season, preserved leaves give more subdued, less vivid colors [5].\n\nThis is a good way to learn leaf as a color word. One leaf can be green at the stem, yellow-green at the edge, and orange-brown at the tip in the same week, and each part belongs to a different name in the dictionaries above."
+    },
+    {
+      "id": "cockade",
+      "title": "The leaf as a badge",
+      "body": "On July 12, 1789, in the garden of the Palais-Royal, the lawyer Camille Desmoulins asked a crowd to choose a color for a cockade [10]. The crowd answered green, the symbol of hope, and he tore a leaf from a linden to pin to his hat [10]. Green ribbons soon replaced the leaves, but the next day the patriots learned that green was also the color of the detested Comte d'Artois, and the badge was reconsidered [10]. On July 14 those who stormed the Bastille wore a variety of colors, among them green, blue, red and combinations of them [10].\n\nPastoureau notes the same tree in an older story: in the Nibelungen legend, a fallen linden leaf left a spot on Siegfried's shoulders where the dragon's blood did not reach, so that he was not completely invulnerable [13]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, as photographed, the swatch fills five per cent of the canvas or more, within six units, in five [12]. They are Gauguin's *Pont-Aven* (31 per cent of it), Van Gogh's *Green Wheat Fields, Auvers* from 1890 (16 per cent) and Gauguin's 1888 self-portrait (13 per cent) [12]. The other two are an 1861 *Civil War Battle* (12 per cent) and Jawlensky's *Red Path, St. Prex* from 1915 (9 per cent) [12]. That is rarer than 82 per cent of named colors, and photographs of aged, varnished paintings are not pigment tests [12].\n\nThe closest gem in our data is [[gem:peridot|peridot]], a deeper olive, 9.4 units away [11]. The closest year-color is Pantone's Greenery, the Color of the Year for 2017, at 7.4 units [11]. In printed English, *leaf* as a color adjective rose fastest in the 1880s and peaked in the 1920s [14]. When you next look at a tree, find the four kinds of leaf on Gurney's list [2]. The transmitted yellow-green is the one closest to this swatch [2][11]."
+    }
   ],
-  "parent": "green",
-  "children": [
-   "leaf-green"
-  ],
-  "disambiguation": [
-   {
-    "slug": "fallen-leaf",
-    "gloss": "the same word for the brown of a dead leaf"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "feuille (light green); feuille morte (dead-leaf brown)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#71AA34",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 5,
-  "top_paintings": [
-   "commons-Q79790701",
-   "nga-163323",
-   "nga-66418",
-   "nga-45961",
-   "nga-130842"
-  ],
-  "measured": {
-   "lch": [
-    63.8,
-    64.6,
-    125.7
-   ],
-   "iscc": {
-    "block": 117,
-    "name": "strong yellow green",
-    "de": 5.9
-   },
-   "nearest": [
-    [
-     "Nasty Green",
-     2.6
+  "aside": {
+    "origin": {
+      "named_after": "the leaf of a plant; the name also appears in older lists for the brown of dead leaves",
+      "first_recorded": "ISCC-NBS 1955 and Maerz and Paul 1930 name lists; this swatch from the xkcd survey, 2010",
+      "source": "ColorHub library; Paterson, A Dictionary of Colour"
+    },
+    "aka": [
+      "Leaf Green"
     ],
-    [
-     "Grass",
-     3.0
+    "siblings": [
+      "leaf-green",
+      "grass",
+      "leaf",
+      "asparagus"
     ],
-    [
-     "Leaf Green",
-     3.6
+    "parent": "green",
+    "children": [
+      "leaf-green"
+    ],
+    "disambiguation": [
+      {
+        "slug": "fallen-leaf",
+        "gloss": "the same word for the brown of a dead leaf"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "feuille (light green); feuille morte (dead-leaf brown)"
+      }
     ]
-   ]
   },
-  "twin": {
-   "gems": [
-    "Peridot",
-    9.4
-   ],
-   "fashion": [
-    "Pantone Color of the Year 2017: Greenery",
-    7.4
-   ]
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#71AA34",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 5,
+    "top_paintings": [
+      "commons-Q79790701",
+      "nga-163323",
+      "nga-66418",
+      "nga-45961",
+      "nga-130842"
+    ],
+    "measured": {
+      "lch": [
+        63.8,
+        64.6,
+        125.7
+      ],
+      "iscc": {
+        "block": 117,
+        "name": "strong yellow green",
+        "de": 5.9
+      },
+      "nearest": [
+        [
+          "Nasty Green",
+          2.6
+        ],
+        [
+          "Grass",
+          3.0
+        ],
+        [
+          "Leaf Green",
+          3.6
+        ]
+      ]
+    },
+    "twin": {
+      "gems": [
+        "Peridot",
+        9.4
+      ],
+      "fashion": [
+        "Pantone Color of the Year 2017: Greenery",
+        7.4
+      ]
+    },
+    "ngram": {
+      "term": "leaf",
+      "adj_peak": 1920,
+      "adj_rise": 1880
+    }
   },
-  "ngram": {
-   "term": "leaf",
-   "adj_peak": 1920,
-   "adj_rise": 1880
+  "notes": [
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 152 (\"Four kinds of light on leaves\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 85",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"leaf-green\", \"feuille\", \"feuillemorte\", \"leafmold\", \"chlorosis\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Albers, Interaction of Color, p. 66 (\"Fall leaf studies\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Livingstone, Vision and Art, ch. on color constancy",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Westland, Universal Principles of Color, p. 42",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 16",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Pastoureau, Blue, epub section 10 (Desmoulins and the 1789 cockade)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "data",
+      "cite": "ColorHub library and color graph: Leaf (xkcd 2010; ISCC-NBS block 51 name list)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "data",
+      "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Pastoureau, Green, epub section 24 (Siegfried and the linden leaf)",
+      "loc_kind": "epub-chapter",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "data",
+      "cite": "Google Books Ngram, \"leaf\", adjective use",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Where does a leaf look most strongly chromatic yellow-green, according to Gurney?",
+      "choices": [
+        "When light shines through it from behind",
+        "In deep shadow",
+        "In direct sunlight on its top surface",
+        "When it faces the sky in shade"
+      ],
+      "answer": "When light shines through it from behind",
+      "kind": "pick"
+    },
+    {
+      "q": "What does the older name *feuille morte* describe?",
+      "choices": [
+        "The brown of dead leaves",
+        "A light green",
+        "A pale blue-green",
+        "A reddish pink"
+      ],
+      "answer": "The brown of dead leaves",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: the sunlit top surface of a leaf is the most intensely colored part.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The word leaf names both the green of spring and, in older color lists, the brown of a dead one.",
+    "Look at a tree against the sun: the leaves lit from behind are the strongest yellow-green on it."
+  ],
+  "words": 1007,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Birren wheat experiment flagged as older work.",
+      "Checked Gurney, Paterson, Desmoulins, Siegfried, archive figures against fact card: supported."
+    ]
   }
- },
- "notes": [
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 152 (\"Four kinds of light on leaves\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 85",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"leaf-green\", \"feuille\", \"feuillemorte\", \"leafmold\", \"chlorosis\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Albers, Interaction of Color, p. 66 (\"Fall leaf studies\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Livingstone, Vision and Art, ch. on color constancy",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Westland, Universal Principles of Color, p. 42",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 16",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Pastoureau, Blue, epub section 10 (Desmoulins and the 1789 cockade)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "data",
-   "cite": "ColorHub library and color graph: Leaf (xkcd 2010; ISCC-NBS block 51 name list)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "data",
-   "cite": "ColorHub archive field notes, 23,781 paintings, as photographed",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Pastoureau, Green, epub section 24 (Siegfried and the linden leaf)",
-   "loc_kind": "epub-chapter",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "data",
-   "cite": "Google Books Ngram, \"leaf\", adjective use",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Where does a leaf look most strongly chromatic yellow-green, according to Gurney?",
-   "choices": [
-    "When light shines through it from behind",
-    "In deep shadow",
-    "In direct sunlight on its top surface",
-    "When it faces the sky in shade"
-   ],
-   "answer": "When light shines through it from behind",
-   "kind": "pick"
-  },
-  {
-   "q": "What does the older name *feuille morte* describe?",
-   "choices": [
-    "The brown of dead leaves",
-    "A light green",
-    "A pale blue-green",
-    "A reddish pink"
-   ],
-   "answer": "The brown of dead leaves",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: the sunlit top surface of a leaf is the most intensely colored part.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The word leaf names both the green of spring and, in older color lists, the brown of a dead one.",
-  "Look at a tree against the sun: the leaves lit from behind are the strongest yellow-green on it."
- ],
- "words": 1007,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Birren wheat experiment flagged as older work.",
-   "Checked Gurney, Paterson, Desmoulins, Siegfried, archive figures against fact card: supported."
-  ]
- }
 }

@@ -17,7 +17,7 @@
   {
    "id": "field",
    "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive matches this color across even a small share of its canvas, as photographed [3]. Its chroma is high enough that a close match on an aged, varnished canvas would be unusual [3]. The absence describes this archive, not painting generally [3]."
+   "body": "No painting in our 23,781-painting archive matches this color across even a small share of its canvas, as photographed [3]. Its chroma is high enough that a close match on an aged, varnished canvas would be unusual [3]. The absence describes this archive, not painting generally, and is not evidence that painters avoided such blues [3]."
   }
  ],
  "aside": {
@@ -28,10 +28,9 @@
   },
   "aka": [],
   "siblings": [
-   "burple",
-   "light-royal-blue",
-   "violet",
-   "blue-purple"
+   "blurple",
+   "vibrant-blue",
+   "violet"
   ],
   "parent": "blue",
   "children": [],
@@ -102,7 +101,7 @@
  "openers": [
   "Purplish Blue and Purpleish Blue are near-duplicate survey names for almost the same hue."
  ],
- "words": 148,
+ "words": 157,
  "status": "checked",
  "checked": {
   "by": "writer",

@@ -1,109 +1,109 @@
 {
- "slug": "purple-pizzazz",
- "name": "Purple Pizzazz",
- "hex": "#FE4EDA",
- "names": [
-  "Purple Pizzazz"
- ],
- "tier": "commercial",
- "depth": "brief",
- "lede": "Purple Pizzazz is a vivid purple whose naming history is undocumented in the sources ColorHub holds.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A playful name, undocumented",
-   "body": "Nothing in the sources we hold says who named Purple Pizzazz or when [1]. Our classifier marks it \"undocumented,\" meaning it could not be placed in a word class such as nature, place or pigment the way most of its library neighbors can [1]. The one thing Wikipedia's color list gives us is the hex value and a family label, *Purples* [1].\n\nAt lightness 63 and chroma 87, it is one of the most saturated names in that family, brighter than either [[zinzolin]] or plain [[purple]] [1]. Its nearest library neighbor is Orchid, about 6 units away by CIEDE2000, close enough that most eyes would call them the same at a glance [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 museum paintings, as photographed, holds no painting where a patch this bright and this purple-pink covers five percent or more of the canvas [2]. A color this saturated is rare in paint and more common in plastics, dye and screens, which is consistent with a name built for a modern color list rather than a historical pigment [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "undocumented in the sources we hold",
-   "source": "Wikipedia color list, via ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "hot-magenta",
-   "rose-pink",
-   "light-magenta",
-   "bright-magenta"
+  "slug": "purple-pizzazz",
+  "name": "Purple Pizzazz",
+  "hex": "#FE4EDA",
+  "names": [
+    "Purple Pizzazz"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    63,
-    87,
-    336
-   ],
-   "nearest": [
-    [
-     "Hot Magenta",
-     4.5
+  "tier": "commercial",
+  "depth": "brief",
+  "lede": "Purple Pizzazz is a vivid purple whose naming history is undocumented in the sources ColorHub holds.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A playful name, undocumented",
+      "body": "Nothing in the sources we hold says who named Purple Pizzazz or when [1]. Our classifier marks it \"undocumented,\" meaning it could not be placed in a word class such as nature, place or pigment the way most of its library neighbors can [1]. The one thing Wikipedia's color list gives us is the hex value and a family label, *Purples* [1].\n\nAt lightness 63 and chroma 87, it is one of the most saturated names in that family, brighter than either [[zinzolin]] or plain [[purple]] [1]. Its nearest library neighbor is Orchid, about 6 units away by CIEDE2000, close enough that most eyes would call them the same at a glance [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 museum paintings, as photographed, holds no painting where a patch this bright and this purple-pink covers five percent or more of the canvas [2]. A color this saturated is rare in paint and more common in plastics, dye and screens, which is consistent with a name built for a modern color list rather than a historical pigment [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "undocumented in the sources we hold",
+      "source": "Wikipedia color list, via ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "hot-magenta",
+      "rose-pink",
+      "ultra-pink",
+      "magenta"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        63,
+        87,
+        336
+      ],
+      "nearest": [
+        [
+          "Hot Magenta",
+          4.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and graph nodes (data/library.json, data/graph/nodes-p.json), sourced from Wikipedia's list of colors",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "True or false: our sources name the person or brand behind Purple Pizzazz.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "Which library color sits nearest to Purple Pizzazz?",
+      "choices": [
+        "Orchid",
+        "Xanadu",
+        "Steel Pink",
+        "Umber"
+      ],
+      "answer": "Orchid",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Purple Pizzazz is too saturated for our painting archive to have ever photographed it."
+  ],
+  "words": 185,
+  "status": "draft",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-09",
+    "issues": [
+      "Name origin undocumented; no archive presence to report beyond zero.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and graph nodes (data/library.json, data/graph/nodes-p.json), sourced from Wikipedia's list of colors",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "True or false: our sources name the person or brand behind Purple Pizzazz.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "Which library color sits nearest to Purple Pizzazz?",
-   "choices": [
-    "Orchid",
-    "Xanadu",
-    "Steel Pink",
-    "Umber"
-   ],
-   "answer": "Orchid",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Purple Pizzazz is too saturated for our painting archive to have ever photographed it."
- ],
- "words": 185,
- "status": "draft",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-09",
-  "issues": [
-   "Name origin undocumented; no archive presence to report beyond zero.",
-   "lint 2026-10-09"
-  ]
- }
 }

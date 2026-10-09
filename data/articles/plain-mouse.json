@@ -1,126 +1,126 @@
 {
- "slug": "plain-mouse",
- "name": "Plain Mouse",
- "hex": "#6E5F57",
- "names": [
-  "Plain Mouse"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Plain Mouse is ColorHub's English name for Su-nezumi, the baseline grey of a Japanese family of named \"mouse\" colors that range from near-white to near-black.",
- "sections": [
-  {
-   "id": "japan",
-   "title": "The mouse family's middle grade",
-   "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Su-nezumi (素鼠), where su means \"plain\" or \"undyed\" and nezumi (\"mouse\") marks the family of muted greys it heads [1]. Unlike [[pale-taupe|Gin-nezumi]] (\"silver mouse\") or other graded members of the same family, Su-nezumi names the baseline, unmodified grey before any lightening or darkening word is added [1]. The ISCC-NBS dictionary of 1955 places it in block 64, \"brownish gray,\" about 5.5 units from that block's centre [2]. The library's nearest other named colors, [[mole-brown]] and [[mole-brown]], are each 2.7 units away [2].\n\nMeasured in LCH it reads lightness 42, chroma 8, hue 56 degrees, a mid-toned, warm-leaning grey [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a close match in 1,796 of 23,781 paintings, about 8 percent, as photographed [3]. It plays a mid-tone role most often, 53 percent of its occurrences, with shadow and highlight splitting the rest [3]. Theodor Philipsen and the Norwegian painter Johan Christian Dahl each carry it at more than four times the archive's overall rate [3]. It shares canvases more than chance with the color word Silver, and its presence peaks around the 1270s [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the plain, unmodified grade of the traditional \"mouse\" grey family",
-   "first_recorded": "undocumented in English; traditional Japanese usage",
-   "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\")"
-  },
-  "aka": [
-   "Su-nezumi"
+  "slug": "plain-mouse",
+  "name": "Plain Mouse",
+  "hex": "#6E5F57",
+  "names": [
+    "Plain Mouse"
   ],
-  "siblings": [
-   "dark-vinaceous-drab",
-   "mole-brown",
-   "zinc-grey",
-   "pale-taupe"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Plain Mouse is ColorHub's English name for Su-nezumi, the baseline grey of a Japanese family of named \"mouse\" colors that range from near-white to near-black.",
+  "sections": [
+    {
+      "id": "japan",
+      "title": "The mouse family's middle grade",
+      "body": "Wikipedia's list of traditional Japanese colors gives this swatch as Su-nezumi (素鼠), where su means \"plain\" or \"undyed\" and nezumi (\"mouse\") marks the family of muted greys it heads [1]. Unlike [[pale-taupe|Gin-nezumi]] (\"silver mouse\") or other graded members of the same family, Su-nezumi names the baseline, unmodified grey before any lightening or darkening word is added [1]. The ISCC-NBS dictionary of 1955 places it in block 64, \"brownish gray,\" about 5.5 units from that block's centre [2]. The library's nearest other named colors, [[mole-brown]] and [[mole-brown]], are each 2.7 units away [2].\n\nMeasured in LCH it reads lightness 42, chroma 8, hue 56 degrees, a mid-toned, warm-leaning grey [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match in 1,796 of 23,781 paintings, about 8 percent, as photographed [3]. It plays a mid-tone role most often, 53 percent of its occurrences, with shadow and highlight splitting the rest [3]. Theodor Philipsen and the Norwegian painter Johan Christian Dahl each carry it at more than four times the archive's overall rate [3]. It shares canvases more than chance with the color word Silver, and its presence peaks around the 1270s [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Su-nezumi (素鼠)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1796,
-  "pct": 7.6,
-  "measured": {
-   "lch": [
-    41.5,
-    8.2,
-    55.8
-   ],
-   "nearest_iscc": [
-    "brownish gray",
-    5.5
-   ],
-   "nearest": [
-    "Dark Vinaceous-Drab",
-    2.74
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
-   "loc_kind": null,
-   "url": null
+  "aside": {
+    "origin": {
+      "named_after": "the plain, unmodified grade of the traditional \"mouse\" grey family",
+      "first_recorded": "undocumented in English; traditional Japanese usage",
+      "source": "ColorHub library (Wikipedia, \"Traditional colors of Japan\")"
+    },
+    "aka": [
+      "Su-nezumi"
+    ],
+    "siblings": [
+      "mole-brown",
+      "zinc-grey",
+      "pale-taupe",
+      "hay-s-brown"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Su-nezumi (素鼠)"
+      }
+    ]
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (ISCC-NBS 1955 block 64), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1796,
+    "pct": 7.6,
+    "measured": {
+      "lch": [
+        41.5,
+        8.2,
+        55.8
+      ],
+      "nearest_iscc": [
+        "brownish gray",
+        5.5
+      ],
+      "nearest": [
+        "Dark Vinaceous-Drab",
+        2.74
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; Wikipedia, \"Traditional colors of Japan\"; jp field)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (ISCC-NBS 1955 block 64), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23781 paintings), computed match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does su, part of this color's Japanese name, mean?",
+      "choices": [
+        "Plain or undyed",
+        "Silver",
+        "Winter",
+        "Dust"
+      ],
+      "answer": "Plain or undyed",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: this color is the baseline, unmodified grade of a larger named family.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Plain Mouse is the baseline grade of a whole Japanese family of named grey \"mice.\""
+  ],
+  "words": 209,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits (src empty); facts drawn from the library's own jp field, ISCC-NBS block data and the archive.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What does su, part of this color's Japanese name, mean?",
-   "choices": [
-    "Plain or undyed",
-    "Silver",
-    "Winter",
-    "Dust"
-   ],
-   "answer": "Plain or undyed",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: this color is the baseline, unmodified grade of a larger named family.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Plain Mouse is the baseline grade of a whole Japanese family of named grey \"mice.\""
- ],
- "words": 209,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits (src empty); facts drawn from the library's own jp field, ISCC-NBS block data and the archive.",
-   "lint 2026-10-09"
-  ]
- }
 }

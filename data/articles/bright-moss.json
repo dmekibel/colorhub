@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "Hiwamo'egi, a finch's sprout-color",
-   "body": "The Wikipedia survey \"Traditional colors of Japan\" lists this color under the romanized name Hiwamo'egi, written 鶸萌黄 [1]. The library glosses the kanji as \"siskin sprout yellow\": 鶸 names the siskin, a small yellow-green finch, and 萌黄 is the yellow-green of a new plant shoot [1]. No book consulted here independently dates or expands the name, so its earlier history is undocumented [1].\n\nThe nearest named colors on file are [[bright-moss]], [[ugly-green]], [[avocado]] and [[swedish-green]], at 3.6, 3.6, 3.6 and 4.2 ΔE [1]. The hex given here, #7A942E, is a modern screen approximation fit to that gloss, not a measured pigment or dye [1]."
+   "body": "The Wikipedia survey \"Traditional colors of Japan\" lists this color under the romanized name Hiwamo'egi, written 鶸萌黄 [1]. The library glosses the kanji as \"siskin sprout yellow\": 鶸 names the siskin, a small yellow-green finch, and 萌黄 is the yellow-green of a new plant shoot [1]. No book consulted here independently dates or expands the name, so its earlier history is undocumented [1].\n\nThe nearest named colors on file are [[bright-moss]], [[avocado]], [[avocado]] and [[swedish-green]], at 3.6, 3.6, 3.6 and 4.2 ΔE [1]. The hex given here, #7A942E, is a modern screen approximation fit to that gloss, not a measured pigment or dye [1]."
   },
   {
    "id": "field",
@@ -31,10 +31,10 @@
    "鶸萌黄"
   ],
   "siblings": [
-   "dark-yellow-green",
-   "ugly-green",
+   "bright-moss",
    "avocado",
-   "swedish-green"
+   "swedish-green",
+   "mossy-green"
   ],
   "parent": "moss",
   "children": [],
@@ -136,7 +136,7 @@
  "openers": [
   "Bright moss is named, in Japanese, for the yellow-green sprout color of a siskin finch."
  ],
- "words": 244,
+ "words": 243,
  "status": "checked",
  "checked": {
   "by": "batch-writer",

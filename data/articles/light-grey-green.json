@@ -1,111 +1,112 @@
 {
- "slug": "light-grey-green",
- "name": "Light Grey Green",
- "hex": "#B7E1A1",
- "names": [
-  "Light Grey Green"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Light Grey Green is a descriptive name for a pale, softly greyed spring green, and it has been in color charts since 1912.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name that says what it is",
-   "body": "The name is a recipe: a [[green]], lightened and greyed. Ridgway's 1912 atlas shows it at plate VII, hue 37, tone d, and Maerz and Paul's 1930 dictionary dates the name to 1912 [1]. The ISCC-NBS system covers it in block 135, and the xkcd color survey carries it too [1]. Ridgway, ISCC-NBS and Maerz and Paul also file a near-identical swatch, 1.9 units away, as Neuvider Green [1].\n\nIn the books the phrase is plain description. Birren quotes a person with colored hearing who saw the first half of the word *Tuesday* as a light gray-green and the end as yellow [2]. That is one person's synesthesia, not a standard color [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "On screen it is close to [[pistachio]] and [[light-grey-green]], a paler cousin of [[sage]] [1]. It is very rare in painting: only 2 of 23,781 paintings in our archive hold a color within six units of it over at least five per cent of the canvas, and one of them is [[painting:nga-72328|Roses]], dated 1890 [3]. Those are photographs of aged, varnished paintings, so a match is not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "descriptive: light, grey, green",
-   "first_recorded": "1912 (Maerz & Paul 1930; Ridgway 1912)",
-   "source": "ColorHub library"
-  },
-  "aka": [
-   "Neuvider Green (Ridgway's near-twin)"
+  "slug": "light-grey-green",
+  "name": "Light Grey Green",
+  "hex": "#B7E1A1",
+  "names": [
+    "Light Grey Green"
   ],
-  "siblings": [
-   "pistachio",
-   "light-sage",
-   "sage"
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Light Grey Green is a descriptive name for a pale, softly greyed spring green, and it has been in color charts since 1912.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name that says what it is",
+      "body": "The name is a recipe: a [[green]], lightened and greyed. Ridgway's 1912 atlas shows it at plate VII, hue 37, tone d, and Maerz and Paul's 1930 dictionary dates the name to 1912 [1]. The ISCC-NBS system covers it in block 135, and the xkcd color survey carries it too [1]. Ridgway, ISCC-NBS and Maerz and Paul also file a near-identical swatch, 1.9 units away, as Neuvider Green [1].\n\nIn the books the phrase is plain description. Birren quotes a person with colored hearing who saw the first half of the word *Tuesday* as a light gray-green and the end as yellow [2]. That is one person's synesthesia, not a standard color [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "On screen it is close to [[pistachio]] and [[light-grey-green]], a paler cousin of [[sage]] [1]. It is very rare in painting: only 2 of 23,781 paintings in our archive hold a color within six units of it over at least five per cent of the canvas, and one of them is [[painting:nga-72328|Roses]], dated 1890 [3]. Those are photographs of aged, varnished paintings, so a match is not a pigment test [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#B7E1A1",
-   "de2000": 6,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "descriptive: light, grey, green",
+      "first_recorded": "1912 (Maerz & Paul 1930; Ridgway 1912)",
+      "source": "ColorHub library"
+    },
+    "aka": [
+      "Neuvider Green (Ridgway's near-twin)"
+    ],
+    "siblings": [
+      "pistachio",
+      "light-grey-green",
+      "sage",
+      "granny-smith-apple"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "n_present": 2,
-  "top_paintings": [
-   "nga-72328",
-   "nga-163323"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#B7E1A1",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 2,
+    "top_paintings": [
+      "nga-72328",
+      "nga-163323"
+    ],
+    "rate": 0.0001
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Birren, Psychology of Color, ch. 15 (\"This Illusory World\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "rate": 0.0001
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): ISCC-NBS 1955, Maerz & Paul 1930 and Ridgway 1912 entries; Ridgway swatches are scans of aged plates, approximate",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Birren, Psychology of Color, ch. 15 (\"This Illusory World\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, CIEDE2000 <= 6, >= 5% of canvas)",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "Which 1912 color atlas has a swatch for Light Grey Green at plate VII?",
+      "choices": [
+        "Ridgway's atlas",
+        "Munsell's atlas",
+        "Pantone's guide",
+        "Werner's nomenclature"
+      ],
+      "answer": "Ridgway's atlas",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Light Grey Green covers a large share of many paintings in our archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A greyed pale green can be found in only two paintings in our archive, one of them Van Gogh's Roses."
+  ],
+  "words": 203,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "Which 1912 color atlas has a swatch for Light Grey Green at plate VII?",
-   "choices": [
-    "Ridgway's atlas",
-    "Munsell's atlas",
-    "Pantone's guide",
-    "Werner's nomenclature"
-   ],
-   "answer": "Ridgway's atlas",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Light Grey Green covers a large share of many paintings in our archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A greyed pale green can be found in only two paintings in our archive, one of them Van Gogh's Roses."
- ],
- "words": 203,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

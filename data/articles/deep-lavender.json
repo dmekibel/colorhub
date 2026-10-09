@@ -1,120 +1,120 @@
 {
- "slug": "deep-lavender",
- "name": "Deep Lavender",
- "hex": "#8D5EB7",
- "names": [
-  "Deep Lavender"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Deep Lavender is a strong, saturated purple built by pushing plain [[lavender]] darker and more intense, not the pale flower color the name might suggest.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Past the flower, into purple",
-   "body": "Our library finds Deep Lavender in the 2010 xkcd crowd survey, with no source earlier on file [1]. The ISCC-NBS 1955 dictionary places the same color in its block 210, among the colors it calls \"light violet\", 5.2 units away in our conversion [2]. In Munsell notation it sits near 3.1P 4.8/12.3, a fairly dark, highly saturated purple [2].\n\nThe flower lavender itself gives a pale, greyed violet; \"deep\" here does the opposite of what a real sprig of lavender looks like, pushing the color darker and far more saturated [2]. Its nearest modifier siblings in the same family are [[dusty-lavender]], a greyed, paler cousin, and [[middle-blue-purple]], a close but slightly pinker purple [2]. Who coined this exact pairing of words is not recorded in the sources we hold [1][2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This exact shade does not turn up in any of the 23,781 paintings in our archive within our matching threshold, as photographed [3]. That is itself a finding: a strongly saturated purple like this is rare in paint, next to the greyer, duller purples ground from historical pigments [3]. The comparison is a computed color match against museum photographs, not a search for a specific pigment [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented",
-   "first_recorded": "xkcd survey, 2010",
-   "source": "ColorHub library and graph nodes"
-  },
-  "aka": [],
-  "siblings": [
-   "dusty-lavender",
-   "deep-lilac",
-   "amethyst"
+  "slug": "deep-lavender",
+  "name": "Deep Lavender",
+  "hex": "#8D5EB7",
+  "names": [
+    "Deep Lavender"
   ],
-  "parent": "lavender",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "mu": "3.1P 4.8/12.3",
-   "nearest_iscc": [
-    "strong purple",
-    5.2
-   ]
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Deep Lavender is a strong, saturated purple built by pushing plain [[lavender]] darker and more intense, not the pale flower color the name might suggest.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Past the flower, into purple",
+      "body": "Our library finds Deep Lavender in the 2010 xkcd crowd survey, with no source earlier on file [1]. The ISCC-NBS 1955 dictionary places the same color in its block 210, among the colors it calls \"light violet\", 5.2 units away in our conversion [2]. In Munsell notation it sits near 3.1P 4.8/12.3, a fairly dark, highly saturated purple [2].\n\nThe flower lavender itself gives a pale, greyed violet; \"deep\" here does the opposite of what a real sprig of lavender looks like, pushing the color darker and far more saturated [2]. Its nearest modifier siblings in the same family are [[dusty-lavender]], a greyed, paler cousin, and [[middle-blue-purple]], a close but slightly pinker purple [2]. Who coined this exact pairing of words is not recorded in the sources we hold [1][2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This exact shade does not turn up in any of the 23,781 paintings in our archive within our matching threshold, as photographed [3]. That is itself a finding: a strongly saturated purple like this is rare in paint, next to the greyer, duller purples ground from historical pigments [3]. The comparison is a computed color match against museum photographs, not a search for a specific pigment [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented",
+      "first_recorded": "xkcd survey, 2010",
+      "source": "ColorHub library and graph nodes"
+    },
+    "aka": [],
+    "siblings": [
+      "dusty-lavender",
+      "middle-blue-purple",
+      "amethyst"
+    ],
+    "parent": "lavender",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "mu": "3.1P 4.8/12.3",
+      "nearest_iscc": [
+        "strong purple",
+        5.2
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (xkcd 2010 source)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 block 210",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which ISCC-NBS 1955 block name sits nearest to Deep Lavender?",
+      "choices": [
+        "Strong purple",
+        "Pale lavender",
+        "Vivid violet",
+        "Grayish purple"
+      ],
+      "answer": "Strong purple",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Deep Lavender looks like a real sprig of lavender, only darker.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "How often does Deep Lavender appear in our painting archive?",
+      "choices": [
+        "Not at all, within our matching threshold",
+        "In about half of all paintings",
+        "In one painting in ten",
+        "In every Impressionist painting"
+      ],
+      "answer": "Not at all, within our matching threshold",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Deep Lavender is so saturated that our archive of 23,781 paintings has no match for it at all."
+  ],
+  "words": 222,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits (src empty); zero archive matches reported honestly rather than padded.",
+      "lint 2026-10-09"
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (xkcd 2010 source)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub graph nodes: Munsell conversion, ISCC-NBS 1955 block 210",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which ISCC-NBS 1955 block name sits nearest to Deep Lavender?",
-   "choices": [
-    "Strong purple",
-    "Pale lavender",
-    "Vivid violet",
-    "Grayish purple"
-   ],
-   "answer": "Strong purple",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Deep Lavender looks like a real sprig of lavender, only darker.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "How often does Deep Lavender appear in our painting archive?",
-   "choices": [
-    "Not at all, within our matching threshold",
-    "In about half of all paintings",
-    "In one painting in ten",
-    "In every Impressionist painting"
-   ],
-   "answer": "Not at all, within our matching threshold",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Deep Lavender is so saturated that our archive of 23,781 paintings has no match for it at all."
- ],
- "words": 222,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits (src empty); zero archive matches reported honestly rather than padded.",
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -1,124 +1,124 @@
 {
- "slug": "ugly-green",
- "name": "Ugly Green",
- "hex": "#7A9703",
- "names": [
-  "Ugly Green"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Ugly Green is a strong, yellow-leaning [[green]] from the xkcd 2010 crowd-name survey, one of several judgmental names ordinary respondents volunteered rather than a modifier of another word.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A judgment, not a description",
-   "body": "The 2010 xkcd survey let respondents type any name for a swatch, and a number of them reached for blunt opinions like this one instead of a hue word; who first used it beyond the survey is undocumented [1]. The ISCC-NBS block for the region reads \"strong yellow green\" [1].\n\nOur library also records Avocado as a near-duplicate of this swatch, within rounding of the same color [1]. Its closest standing colors are [[dark-yellow-green]], 2.8 units away by CIEDE2000 and almost the same, [[bright-moss]] at 3.6, also almost the same, and [[avocado-green]] at 5.6, duller [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed [3]. A 2010 crowd-survey name has no particular reason to match an older painter's palette, and our archive's early centuries are thin too, so the absence is unsurprising rather than conclusive [3]. In LCH terms it measures lightness 58, chroma 67 and hue 114 degrees, a strong, yellow-leaning green [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a judgmental crowd name, undocumented beyond the 2010 survey",
-   "first_recorded": "2010, xkcd color survey",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Avocado"
+  "slug": "ugly-green",
+  "name": "Ugly Green",
+  "hex": "#7A9703",
+  "names": [
+    "Ugly Green"
   ],
-  "siblings": [
-   "dark-yellow-green",
-   "bright-moss",
-   "avocado-green"
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Ugly Green is a strong, yellow-leaning [[green]] from the xkcd 2010 crowd-name survey, one of several judgmental names ordinary respondents volunteered rather than a modifier of another word.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A judgment, not a description",
+      "body": "The 2010 xkcd survey let respondents type any name for a swatch, and a number of them reached for blunt opinions like this one instead of a hue word; who first used it beyond the survey is undocumented [1]. The ISCC-NBS block for the region reads \"strong yellow green\" [1].\n\nOur library also records Avocado as a near-duplicate of this swatch, within rounding of the same color [1]. Its closest standing colors are [[bright-moss]], 2.8 units away by CIEDE2000 and almost the same, [[bright-moss]] at 3.6, also almost the same, and [[avocado-green]] at 5.6, duller [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive holds this color across at least one percent of its canvas, as photographed [3]. A 2010 crowd-survey name has no particular reason to match an older painter's palette, and our archive's early centuries are thin too, so the absence is unsurprising rather than conclusive [3]. In LCH terms it measures lightness 58, chroma 67 and hue 114 degrees, a strong, yellow-leaning green [3]."
+    }
   ],
-  "parent": "green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    58.3,
-    66.7,
-    114.2
-   ],
-   "nearest": [
-    [
-     "Dark Yellow Green",
-     2.8
+  "aside": {
+    "origin": {
+      "named_after": "a judgmental crowd name, undocumented beyond the 2010 survey",
+      "first_recorded": "2010, xkcd color survey",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Avocado"
     ],
-    [
-     "Bright moss",
-     3.6
+    "siblings": [
+      "bright-moss",
+      "avocado-green",
+      "pea-soup-green"
     ],
-    [
-     "Avocado Green",
-     5.6
+    "parent": "green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        58.3,
+        66.7,
+        114.2
+      ],
+      "nearest": [
+        [
+          "Dark Yellow Green",
+          2.8
+        ],
+        [
+          "Bright moss",
+          3.6
+        ],
+        [
+          "Avocado Green",
+          5.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS entries",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Where does the name Ugly Green come from?",
+      "choices": [
+        "A respondent's blunt opinion in the 2010 xkcd crowd survey",
+        "A 1912 Ridgway plate",
+        "A paint brand's marketing copy",
+        "Werner's 1821 nomenclature"
+      ],
+      "answer": "A respondent's blunt opinion in the 2010 xkcd crowd survey",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our library lists Avocado as a near-duplicate of Ugly Green.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Ugly Green is a judgment, not a hue word: a crowd respondent's opinion from the 2010 xkcd survey."
+  ],
+  "words": 193,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Field notes had invented archive-presence stats (6/3 matches, an 1840 first-dated painting with an id) with no backing entry in data/graph/fieldnotes or data/library.json for this slug; replaced with the true n_present=0 and the computed LCH/nearest-neighbor figures, which are verifiable from the hex alone."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library and color graph: xkcd (2010), ISCC-NBS entries",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Where does the name Ugly Green come from?",
-   "choices": [
-    "A respondent's blunt opinion in the 2010 xkcd crowd survey",
-    "A 1912 Ridgway plate",
-    "A paint brand's marketing copy",
-    "Werner's 1821 nomenclature"
-   ],
-   "answer": "A respondent's blunt opinion in the 2010 xkcd crowd survey",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our library lists Avocado as a near-duplicate of Ugly Green.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Ugly Green is a judgment, not a hue word: a crowd respondent's opinion from the 2010 xkcd survey."
- ],
- "words": 194,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Field notes had invented archive-presence stats (6/3 matches, an 1840 first-dated painting with an id) with no backing entry in data/graph/fieldnotes or data/library.json for this slug; replaced with the true n_present=0 and the computed LCH/nearest-neighbor figures, which are verifiable from the hex alone."
-  ]
- }
 }

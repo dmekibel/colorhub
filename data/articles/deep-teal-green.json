@@ -1,112 +1,112 @@
 {
- "slug": "deep-teal-green",
- "name": "Deep teal green",
- "hex": "#297069",
- "names": [
-  "Deep teal green",
-  "Anthracene Green"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Deep teal green is a dark, blue-leaning green, a shade down from plain [[teal]].",
- "sections": [
-  {
-   "id": "name",
-   "title": "Two readings of one hex",
-   "body": "The ISCC-NBS system of 1955 classes the swatch as moderate bluish green, about 2.9 units from its block center, and Ridgway's 1912 nomenclature carries the same hex without a matching plate reading [1]. Our library lists the identical hex again under [[deep-teal-green]], a separate ISCC-NBS and Ridgway reading at zero distance, so two names here point to one screen color [1][2].\n\nThe closest distinct color is [[myrtle-green]], about 3.4 units away, with [[dark-aquamarine]] and [[opal-green]] further out [2]. The name itself simply marks a deep step on the [[deep-teal]] ladder [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This color, as photographed, appears in 40 of 23,781 paintings, rarer than 62 percent of the named colors we track [3]. It peaks in the 1900s, in 9 of 1,674 paintings, at 0.5 per cent of that century's paintings, 4.6 times the overall rate [3]. Inside a painting it most often plays a hidden color, tucked into shadow rather than carrying the light [3]. The earliest match in the archive is a 1490 painting by the Master of the Saint John Panels, well before the name's 1912 record, so the match is a look-alike hue in an aged photograph, not a pigment test, a floor and not a first, since the archive's early centuries are thin [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a dark step of teal",
-   "first_recorded": "1912, Ridgway (library record)",
-   "source": "data/library.json"
-  },
-  "aka": [
-   "Anthracene Green (ridgway+iscc-nbs)"
+  "slug": "deep-teal-green",
+  "name": "Deep teal green",
+  "hex": "#297069",
+  "names": [
+    "Deep teal green",
+    "Anthracene Green"
   ],
-  "siblings": [
-   "anthracene-green",
-   "myrtle-green",
-   "dark-aquamarine"
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Deep teal green is a dark, blue-leaning green, a shade down from plain [[teal]].",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Two readings of one hex",
+      "body": "The ISCC-NBS system of 1955 classes the swatch as moderate bluish green, about 2.9 units from its block center, and Ridgway's 1912 nomenclature carries the same hex without a matching plate reading [1]. Our library lists the identical hex again under [[deep-teal-green]], a separate ISCC-NBS and Ridgway reading at zero distance, so two names here point to one screen color [1][2].\n\nThe closest distinct color is [[myrtle-green]], about 3.4 units away, with [[dark-aquamarine]] and [[opal-green]] further out [2]. The name itself simply marks a deep step on the [[deep-teal]] ladder [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This color, as photographed, appears in 40 of 23,781 paintings, rarer than 62 percent of the named colors we track [3]. It peaks in the 1900s, in 9 of 1,674 paintings, at 0.5 per cent of that century's paintings, 4.6 times the overall rate [3]. Inside a painting it most often plays a hidden color, tucked into shadow rather than carrying the light [3]. The earliest match in the archive is a 1490 painting by the Master of the Saint John Panels, well before the name's 1912 record, so the match is a look-alike hue in an aged photograph, not a pigment test, a floor and not a first, since the archive's early centuries are thin [3]."
+    }
   ],
-  "parent": "deep-teal",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "anthracene-green",
-    "gloss": "the identical screen color under a different ISCC-NBS and Ridgway reading"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "a dark step of teal",
+      "first_recorded": "1912, Ridgway (library record)",
+      "source": "data/library.json"
+    },
+    "aka": [
+      "Anthracene Green (ridgway+iscc-nbs)"
+    ],
+    "siblings": [
+      "deep-teal-green",
+      "myrtle-green",
+      "dark-aquamarine"
+    ],
+    "parent": "deep-teal",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "deep-teal-green",
+        "gloss": "the identical screen color under a different ISCC-NBS and Ridgway reading"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 40,
+    "pct": 0.17,
+    "peak": "1900s, 0.5% of 1,674 paintings, 4.6x expected"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 40,
-  "pct": 0.17,
-  "peak": "1900s, 0.5% of 1,674 paintings, 4.6x expected"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Ridgway 1912, ISCC-NBS 1955, Maerz & Paul 1930 and other name sources; CIEDE2000",
-   "loc_kind": null,
-   "url": null
+  "questions": [
+    {
+      "q": "Which other named color shares this exact hex?",
+      "choices": [
+        "Anthracene Green",
+        "Myrtle Green",
+        "Forest Green",
+        "Teal"
+      ],
+      "answer": "Anthracene Green",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: inside a painting, Deep teal green most often carries the brightest light.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Deep teal green and Anthracene Green are, on screen, the same color."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Fixed: the field-notes paragraph and the second question both invented a painter claim (\"Jean-Jacques Henner, 3 of 18 sampled works\", 'Alsatian Girl' 1873) that has no basis in data/graph/fieldnotes — ar.pa and ar.pn are both empty for this slug, and no painter fact exists. The presence count was also wrong (30, should be 40, the 'as photographed' figure; 30 looks like a stray or rounded number with no matching field). Rewrote the field notes from the real presence, century, role and first-seen facts, and replaced the painter-trivia question with one grounded in the role fact. Removed the unsupported painter claim rather than inventing a replacement for it.",
+      "lint 2026-10-09"
+    ]
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub Color Graph look-alikes (data/graph), CIEDE2000",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, dE2000 <= 6, >= 5 per cent of canvas); data/graph/fieldnotes",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which other named color shares this exact hex?",
-   "choices": [
-    "Anthracene Green",
-    "Myrtle Green",
-    "Forest Green",
-    "Teal"
-   ],
-   "answer": "Anthracene Green",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: inside a painting, Deep teal green most often carries the brightest light.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Deep teal green and Anthracene Green are, on screen, the same color."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Fixed: the field-notes paragraph and the second question both invented a painter claim (\"Jean-Jacques Henner, 3 of 18 sampled works\", 'Alsatian Girl' 1873) that has no basis in data/graph/fieldnotes — ar.pa and ar.pn are both empty for this slug, and no painter fact exists. The presence count was also wrong (30, should be 40, the 'as photographed' figure; 30 looks like a stray or rounded number with no matching field). Rewrote the field notes from the real presence, century, role and first-seen facts, and replaced the painter-trivia question with one grounded in the role fact. Removed the unsupported painter claim rather than inventing a replacement for it.",
-   "lint 2026-10-09"
-  ]
- },
- "words": 226
+  "words": 226
 }

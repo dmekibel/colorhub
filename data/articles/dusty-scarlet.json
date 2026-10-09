@@ -1,129 +1,129 @@
 {
- "slug": "dusty-scarlet",
- "name": "Dusty scarlet",
- "hex": "#E35C38",
- "names": [
-  "Dusty scarlet"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Dusty scarlet renders Sohi (蘇比), a traditional Japanese name our library glosses as an \"overdyed, refreshed red-brown\", for a muted orange-red.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A re-dyed red",
-   "body": "Our color library gives the source as 蘇比 (Sohi), glossed as an overdyed or refreshed red-brown, from the traditional colors of Japan; no first-recorded date survives in our sources, so when the name entered use is undocumented here [1]. The library separately notes that the ISCC-NBS 1955 centroid block covering this hue groups together English dictionary names such as Nasturtium Red and Russet Orange, the earliest of which, Flammeous, Maerz and Paul date to 1656 [2].\n\nThe nearest named color in our graph is [[flame]], at a color distance (ΔE2000) of 3.9, a more vivid shade; the related [[dusty-vermilion]] sits 5.5 away and reads darker [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this orange-red, within six units over at least five percent of the canvas, in 44 of 23,781 paintings, about 0.2 percent, as photographed [4]. It is sharply concentrated in Indian painting, at more than twenty times the archive's overall rate, with Kalighat work, 8 of our 96, running at forty-five times that average and Rajput work close behind [4]. The earliest dated match is Lorenzo Monaco's *Adoration of the Magi* (1420), a floor set by what survives and was photographed, not a first appearance [4]. These are photographs of aged, varnished paintings; the match is computed, not a pigment identification [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Sohi (蘇比), glossed as an \"overdyed, refreshed red-brown\"",
-   "first_recorded": "undocumented",
-   "source": "ColorHub color library"
-  },
-  "aka": [
-   "Sohi (蘇比)"
+  "slug": "dusty-scarlet",
+  "name": "Dusty scarlet",
+  "hex": "#E35C38",
+  "names": [
+    "Dusty scarlet"
   ],
-  "siblings": [
-   "flame",
-   "dusty-vermilion",
-   "orangey-red",
-   "portland-orange"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Dusty scarlet renders Sohi (蘇比), a traditional Japanese name our library glosses as an \"overdyed, refreshed red-brown\", for a muted orange-red.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A re-dyed red",
+      "body": "Our color library gives the source as 蘇比 (Sohi), glossed as an overdyed or refreshed red-brown, from the traditional colors of Japan; no first-recorded date survives in our sources, so when the name entered use is undocumented here [1]. The library separately notes that the ISCC-NBS 1955 centroid block covering this hue groups together English dictionary names such as Nasturtium Red and Russet Orange, the earliest of which, Flammeous, Maerz and Paul date to 1656 [2].\n\nThe nearest named color in our graph is [[flame]], at a color distance (ΔE2000) of 3.9, a more vivid shade; the related [[dusty-vermilion]] sits 5.5 away and reads darker [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this orange-red, within six units over at least five percent of the canvas, in 44 of 23,781 paintings, about 0.2 percent, as photographed [4]. It is sharply concentrated in Indian painting, at more than twenty times the archive's overall rate, with Kalighat work, 8 of our 96, running at forty-five times that average and Rajput work close behind [4]. The earliest dated match is Lorenzo Monaco's *Adoration of the Magi* (1420), a floor set by what survives and was photographed, not a first appearance [4]. These are photographs of aged, varnished paintings; the match is computed, not a pigment identification [4]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Sohi (蘇比)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 44,
-  "rate": 0.0019,
-  "match": {
-   "hex": "#E35C38",
-   "de2000": 6.0,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "Sohi (蘇比), glossed as an \"overdyed, refreshed red-brown\"",
+      "first_recorded": "undocumented",
+      "source": "ColorHub color library"
+    },
+    "aka": [
+      "Sohi (蘇比)"
+    ],
+    "siblings": [
+      "flame",
+      "dusty-vermilion",
+      "scarlet",
+      "portland-orange"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Sohi (蘇比)"
+      }
+    ]
   },
-  "countries": [
-   [
-    "India",
-    21.74
-   ]
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 44,
+    "rate": 0.0019,
+    "match": {
+      "hex": "#E35C38",
+      "de2000": 6.0,
+      "min_cover": 0.05
+    },
+    "countries": [
+      [
+        "India",
+        21.74
+      ]
+    ]
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library: ISCC-NBS 1955 block entries, citing Maerz & Paul 1930",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: traditional-Japanese-color entries (kanji, romaji, meaning)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library: ISCC-NBS 1955 block entries, citing Maerz & Paul 1930",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color graph: look-alike edges (ΔE2000)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does our library say the Japanese name behind Dusty scarlet, Sohi, describes?",
+      "choices": [
+        "An overdyed, refreshed red-brown",
+        "A dyer's guild",
+        "A court rank",
+        "A season"
+      ],
+      "answer": "An overdyed, refreshed red-brown",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Dusty scarlet is especially common in Indian painting in our archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Dusty scarlet shares an ISCC-NBS color block with English dictionary names dating back to 1656."
+  ],
+  "words": 229,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits; ISCC-NBS dates belong to nearby dictionary names in the same block, not to Dusty scarlet itself, and are described that way.",
+      "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What does our library say the Japanese name behind Dusty scarlet, Sohi, describes?",
-   "choices": [
-    "An overdyed, refreshed red-brown",
-    "A dyer's guild",
-    "A court rank",
-    "A season"
-   ],
-   "answer": "An overdyed, refreshed red-brown",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Dusty scarlet is especially common in Indian painting in our archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Dusty scarlet shares an ISCC-NBS color block with English dictionary names dating back to 1656."
- ],
- "words": 229,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits; ISCC-NBS dates belong to nearby dictionary names in the same block, not to Dusty scarlet itself, and are described that way.",
-   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
-  ]
- }
 }

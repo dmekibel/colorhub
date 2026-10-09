@@ -12,7 +12,7 @@
   {
    "id": "name",
    "title": "A pale tone of Vinaceous-Fawn",
-   "body": "Pale Vinaceous-Fawn puts Ridgway's tone word Pale in front of [[vinaceous-fawn]], a compound built from *vinaceous*, Ridgway's own word for a wine-tinted hue, and fawn, a pale brown [1]. Vinaceous-Fawn itself is Ridgway's plate XL, hue 13 triple-prime, tone b; it never reached the ISCC-NBS dictionary of 1955 or Maerz and Paul's 1930 list, staying a Ridgway-only name [1].\n\nOn screen this swatch sits close enough to [[oatmeal]] to read as the same color, a zero-unit match [1]; its nearest distinct neighbor is [[sandust]], 3.6 units off [1]."
+   "body": "Pale Vinaceous-Fawn puts Ridgway's tone word Pale in front of [[fawn]], a compound built from *vinaceous*, Ridgway's own word for a wine-tinted hue, and fawn, a pale brown [1]. Vinaceous-Fawn itself is Ridgway's plate XL, hue 13 triple-prime, tone b; it never reached the ISCC-NBS dictionary of 1955 or Maerz and Paul's 1930 list, staying a Ridgway-only name [1].\n\nOn screen this swatch sits close enough to [[oatmeal]] to read as the same color, a zero-unit match [1]; its nearest distinct neighbor is [[sandust]], 3.6 units off [1]."
   },
   {
    "id": "field",
@@ -28,12 +28,12 @@
   },
   "aka": [],
   "siblings": [
-   "vinaceous-fawn",
+   "fawn",
    "oatmeal",
    "sandust",
    "iris-mauve"
   ],
-  "parent": "vinaceous-fawn",
+  "parent": "fawn",
   "children": [],
   "disambiguation": [],
   "other_languages": []
@@ -97,7 +97,7 @@
  "openers": [
   "Pale Vinaceous-Fawn and the everyday name Oatmeal land on essentially the same swatch."
  ],
- "words": 291,
+ "words": 290,
  "status": "checked",
  "checked": {
   "by": "checker",

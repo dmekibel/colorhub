@@ -1,124 +1,124 @@
 {
- "slug": "vantg-blue",
- "name": "Vantg Blue",
- "hex": "#5271FF",
- "names": [
-  "Vantg Blue"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Vantg Blue is a vivid, violet-leaning [[blue]] whose own name is undocumented in our sources, including what the short word \"Vantg\" is meant to abbreviate.",
- "sections": [
-  {
-   "id": "name",
-   "title": "An undocumented, unexplained name",
-   "body": "Our library traces the name only to a Wikipedia color list, which gives no date and no gloss of the word Vantg [1]. It is not a standard English word, and the sources consulted do not say what, if anything, it shortens or where it came from [1].\n\nIts closest standing colors are [[neon-blue]], 3.6 units away by CIEDE2000 and more vivid, [[azure]] at 4.4, duller, and [[royal-blue]] at 5.5, duller and darker [2]. Measured in LCH it reads lightness 53, chroma 82, one of the most saturated blues in our library [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has this color covering at least 1% of its canvas, within CIEDE2000 4 of it, as photographed [3]. That describes what our particular archive happened to collect, not painting as a whole; a color this bright and saturated is uncommon in older museum work generally [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "undocumented; the word Vantg itself is unexplained in the sources consulted",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub library (a Wikipedia list)"
-  },
-  "aka": [],
-  "siblings": [
-   "neon-blue",
-   "lightish-blue",
-   "royal-blue"
+  "slug": "vantg-blue",
+  "name": "Vantg Blue",
+  "hex": "#5271FF",
+  "names": [
+    "Vantg Blue"
   ],
-  "parent": "blue",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "min_cover": 0.01,
-  "de2000_threshold": 4,
-  "measured": {
-   "lch": [
-    53,
-    82,
-    295
-   ],
-   "nearest": [
-    [
-     "Neon Blue",
-     3.6
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Vantg Blue is a vivid, violet-leaning [[blue]] whose own name is undocumented in our sources, including what the short word \"Vantg\" is meant to abbreviate.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "An undocumented, unexplained name",
+      "body": "Our library traces the name only to a Wikipedia color list, which gives no date and no gloss of the word Vantg [1]. It is not a standard English word, and the sources consulted do not say what, if anything, it shortens or where it came from [1].\n\nIts closest standing colors are [[neon-blue]], 3.6 units away by CIEDE2000 and more vivid, [[azure]] at 4.4, duller, and [[royal-blue]] at 5.5, duller and darker [2]. Measured in LCH it reads lightness 53, chroma 82, one of the most saturated blues in our library [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has this color covering at least 1% of its canvas, within CIEDE2000 4 of it, as photographed [3]. That describes what our particular archive happened to collect, not painting as a whole; a color this bright and saturated is uncommon in older museum work generally [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "undocumented; the word Vantg itself is unexplained in the sources consulted",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub library (a Wikipedia list)"
+    },
+    "aka": [],
+    "siblings": [
+      "neon-blue",
+      "azure",
+      "royal-blue"
     ],
-    [
-     "Lightish Blue",
-     4.4
-    ],
-    [
-     "Royal Blue",
-     5.5
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "min_cover": 0.01,
+    "de2000_threshold": 4,
+    "measured": {
+      "lch": [
+        53,
+        82,
+        295
+      ],
+      "nearest": [
+        [
+          "Neon Blue",
+          3.6
+        ],
+        [
+          "Lightish Blue",
+          4.4
+        ],
+        [
+          "Royal Blue",
+          5.5
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): name source",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What do our sources say the word \"Vantg\" stands for or comes from?",
+      "choices": [
+        "Nothing; it is unexplained in the sources consulted",
+        "A paint manufacturer's trademark",
+        "An abbreviation for \"vantage\" confirmed by Wikipedia",
+        "A 1912 Ridgway plate code"
+      ],
+      "answer": "Nothing; it is unexplained in the sources consulted",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our 23,781-painting archive has at least one match for Vantg Blue.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Even the word Vantg itself is unexplained in our sources, let alone the color's history."
+  ],
+  "words": 170,
+  "status": "checked",
+  "checked": {
+    "by": "batch-32",
+    "date": "2026-10-09",
+    "issues": [
+      "No concordance hits (src empty); name and the word itself undocumented in the sources consulted. Archive shows zero matches at the coverage threshold, reported honestly."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): name source",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What do our sources say the word \"Vantg\" stands for or comes from?",
-   "choices": [
-    "Nothing; it is unexplained in the sources consulted",
-    "A paint manufacturer's trademark",
-    "An abbreviation for \"vantage\" confirmed by Wikipedia",
-    "A 1912 Ridgway plate code"
-   ],
-   "answer": "Nothing; it is unexplained in the sources consulted",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our 23,781-painting archive has at least one match for Vantg Blue.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Even the word Vantg itself is unexplained in our sources, let alone the color's history."
- ],
- "words": 170,
- "status": "checked",
- "checked": {
-  "by": "batch-32",
-  "date": "2026-10-09",
-  "issues": [
-   "No concordance hits (src empty); name and the word itself undocumented in the sources consulted. Archive shows zero matches at the coverage threshold, reported honestly."
-  ]
- }
 }

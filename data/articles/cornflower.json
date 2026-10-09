@@ -1,309 +1,309 @@
 {
- "slug": "cornflower",
- "name": "Cornflower",
- "hex": "#6495ED",
- "names": [
-  "Cornflower",
-  "Cornflower Blue"
- ],
- "tier": "nature",
- "depth": "medium",
- "lede": "Cornflower is the blue of the grain-field weed Centaurea cyanus, a bright blue with a little violet in it, and since the X11 color list it has been a stock screen color.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The flower and the word",
-   "body": "Cornflower names the blue of *Centaurea cyanus*, a flower of the grain fields [1][2]. The French call it *bleuet*, and English borrowed the word as a color name too: Paterson defines *bluet* as the blue of the cornflower [3]. The writer Maggie Nelson recounts learning that *les bluets* can mean cornflowers, a flower she had thought she had never seen, though she had long used the word as her book's title [4].\n\nPaterson also records the screen version: Cornflower Blue is one of the 140 colors of the X11 set, with the hex code #6495ED [5]. St Clair's glossary describes the shade as a bright blue with a little violet [6]. That matches the swatch here, which is a clear mid blue leaning toward violet [[periwinkle]] and away from the greener [[sky-blue]] [7]."
-  },
-  {
-   "id": "records",
-   "title": "Where the name is recorded",
-   "body": "In our library, Maerz and Paul's 1930 dictionary of color lists cornflower as first recorded in 1891, on plate 42 [7]. The ISCC-NBS system of 1955 puts the same hue in its block 194 [7]. In Google Books, its use as a color word peaks in the 2010s [8].\n\nThe nearest named blues on the screen are [[blue-grey]], [[clear-cadet-blue]], [[clear-cadet-blue]] and [[dodger-blue]], each within about five to six units of CIEDE2000 [7]. [[berlin-blue]] and [[lupine]] are slightly farther, at about seven [7]."
-  },
-  {
-   "id": "old-blues",
-   "title": "A flower in old blue vocabulary",
-   "body": "Pastoureau notes that Greek and Roman writers described blue flowers, the cornflower among them, with words for red, green or black [9]. The old claim that the Greeks could not see blue is a myth; the evidence is about vocabulary, which gave blue little attention, and not about eyesight [9].\n\nA medieval puzzle also touches the flower. The cloth color *pers* meant the darkest and costliest blue in northern Europe, and its origin is unresolved [10]. Gage lists proposed sources that include late Latin *pressus*, the peach blossom, Persian lilac, and the blue-violet cornflower [10]. Books disagree here, because the derivation is a proposal by some scholars and not a settled fact [10]."
-  },
-  {
-   "id": "dye",
-   "title": "Boyle's blue",
-   "body": "The seventeenth-century chemist Robert Boyle recommended a blue made from cornflower petals [11]. Eighteenth-century watercolor books took the color up under three names: cornflower blue, Boyle's blue and cyan blue [11]. Harley, cited in the Pigment Compendium, found no evidence that it was ever sold commercially, and a writer called Hoofnail attacked it in 1738 [11]. The petals owe their color to anthocyanin pigments such as cyanidin, which Schweppe lists among the extractable components [12].\n\nBaty's catalogue of Werner's nomenclature illustrates the flower itself, using a 1737 botanical plate in which the petals show Werner's verditter blue [13]. The match is to the name in Werner's system, not to a pigment in the plate [13]. Cyanin, Paterson adds, is the blue coloring matter of violets, cornflower and other flowers [14]."
-  },
-  {
-   "id": "gems",
-   "title": "In stones and in words",
-   "body": "Gem dealers borrow the flower too. Finlay records a Sri Lankan dealer who described a sapphire as blue like cornflowers with a little violet in it [15]. The trade has its own grading names, but the comparison shows how ordinary the flower is as a reference blue [15]. Compare the [[gem:sapphire|sapphire]] with the [[flower:cornflower|cornflower]] and the blue that leans violet is easy to see.\n\nIn writing, the flower is a small blue accent. The filmmaker Derek Jarman lists a self-sown cornflower among the blues of his garden, beside bugloss and sage [16]. St Clair also notes that Quimper blue is a soft cornflower shade, the color of dusk [6]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, 19 hold cornflower blue over at least five per cent of the canvas, within six units of CIEDE2000 [17]. That is about eight in ten thousand paintings [17]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [17].\n\nNone of the 19 dates from before 1600, and the earliest, a Guercino of 1617, covers a small part of its canvas [17]. In the 1900s the color appears 3.7 times as often as expected [17]. [[painter:henri-matisse|Matisse]] is the standout: three of the 50 works here are matches, a rate about 75 times the baseline [17]. In a painting it plays a mid-tone about four times in five, and a highlight otherwise [17]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the cornflower, Centaurea cyanus",
-   "first_recorded": "Maerz and Paul 1930 give 1891; X11 screen name",
-   "source": "Paterson, A Dictionary of Colour; ColorHub library"
-  },
-  "aka": [
-   "Cornflower Blue",
-   "Bluet",
-   "Boyle's blue (the petal dye)",
-   "Cyan blue (old watercolor name)"
+  "slug": "cornflower",
+  "name": "Cornflower",
+  "hex": "#6495ED",
+  "names": [
+    "Cornflower",
+    "Cornflower Blue"
   ],
-  "siblings": [
-   "blue-grey",
-   "soft-blue",
-   "berlin-blue",
-   "lupine"
+  "tier": "nature",
+  "depth": "medium",
+  "lede": "Cornflower is the blue of the grain-field weed Centaurea cyanus, a bright blue with a little violet in it, and since the X11 color list it has been a stock screen color.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The flower and the word",
+      "body": "Cornflower names the blue of *Centaurea cyanus*, a flower of the grain fields [1][2]. The French call it *bleuet*, and English borrowed the word as a color name too: Paterson defines *bluet* as the blue of the cornflower [3]. The writer Maggie Nelson recounts learning that *les bluets* can mean cornflowers, a flower she had thought she had never seen, though she had long used the word as her book's title [4].\n\nPaterson also records the screen version: Cornflower Blue is one of the 140 colors of the X11 set, with the hex code #6495ED [5]. St Clair's glossary describes the shade as a bright blue with a little violet [6]. That matches the swatch here, which is a clear mid blue leaning toward violet [[periwinkle]] and away from the greener [[sky-blue]] [7]."
+    },
+    {
+      "id": "records",
+      "title": "Where the name is recorded",
+      "body": "In our library, Maerz and Paul's 1930 dictionary of color lists cornflower as first recorded in 1891, on plate 42 [7]. The ISCC-NBS system of 1955 puts the same hue in its block 194 [7]. In Google Books, its use as a color word peaks in the 2010s [8].\n\nThe nearest named blues on the screen are [[blue-grey]], [[clear-cadet-blue]], [[clear-cadet-blue]] and [[dodger-blue]], each within about five to six units of CIEDE2000 [7]. [[berlin-blue]] and [[lupine]] are slightly farther, at about seven [7]."
+    },
+    {
+      "id": "old-blues",
+      "title": "A flower in old blue vocabulary",
+      "body": "Pastoureau notes that Greek and Roman writers described blue flowers, the cornflower among them, with words for red, green or black [9]. The old claim that the Greeks could not see blue is a myth; the evidence is about vocabulary, which gave blue little attention, and not about eyesight [9].\n\nA medieval puzzle also touches the flower. The cloth color *pers* meant the darkest and costliest blue in northern Europe, and its origin is unresolved [10]. Gage lists proposed sources that include late Latin *pressus*, the peach blossom, Persian lilac, and the blue-violet cornflower [10]. Books disagree here, because the derivation is a proposal by some scholars and not a settled fact [10]."
+    },
+    {
+      "id": "dye",
+      "title": "Boyle's blue",
+      "body": "The seventeenth-century chemist Robert Boyle recommended a blue made from cornflower petals [11]. Eighteenth-century watercolor books took the color up under three names: cornflower blue, Boyle's blue and cyan blue [11]. Harley, cited in the Pigment Compendium, found no evidence that it was ever sold commercially, and a writer called Hoofnail attacked it in 1738 [11]. The petals owe their color to anthocyanin pigments such as cyanidin, which Schweppe lists among the extractable components [12].\n\nBaty's catalogue of Werner's nomenclature illustrates the flower itself, using a 1737 botanical plate in which the petals show Werner's verditter blue [13]. The match is to the name in Werner's system, not to a pigment in the plate [13]. Cyanin, Paterson adds, is the blue coloring matter of violets, cornflower and other flowers [14]."
+    },
+    {
+      "id": "gems",
+      "title": "In stones and in words",
+      "body": "Gem dealers borrow the flower too. Finlay records a Sri Lankan dealer who described a sapphire as blue like cornflowers with a little violet in it [15]. The trade has its own grading names, but the comparison shows how ordinary the flower is as a reference blue [15]. Compare the [[gem:sapphire|sapphire]] with the [[flower:cornflower|cornflower]] and the blue that leans violet is easy to see.\n\nIn writing, the flower is a small blue accent. The filmmaker Derek Jarman lists a self-sown cornflower among the blues of his garden, beside bugloss and sage [16]. St Clair also notes that Quimper blue is a soft cornflower shade, the color of dusk [6]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, 19 hold cornflower blue over at least five per cent of the canvas, within six units of CIEDE2000 [17]. That is about eight in ten thousand paintings [17]. These are photographs of aged, varnished paintings, so a match is a look-alike hue, not a pigment test [17].\n\nNone of the 19 dates from before 1600, and the earliest, a Guercino of 1617, covers a small part of its canvas [17]. In the 1900s the color appears 3.7 times as often as expected [17]. [[painter:henri-matisse|Matisse]] is the standout: three of the 50 works here are matches, a rate about 75 times the baseline [17]. In a painting it plays a mid-tone about four times in five, and a highlight otherwise [17]."
+    }
   ],
-  "parent": "blue",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "dusty-cornflower",
-    "gloss": "a greyer blue that several older names (Berlin Blue, Lupine) resolve to"
-   },
-   {
-    "slug": "verditter-blue",
-    "gloss": "Werner's name for the cornflower petal, a greener blue"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "fr",
-    "name": "bleuet (the flower; also the color)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#6495ED",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 19,
-  "rate": 0.0008,
-  "first": {
-   "id": "commons-Q4231874",
-   "year": 1617,
-   "painter": "Guercino"
-  },
-  "century_lift_1900": 3.74,
-  "painters": [
-   {
-    "key": "Henri Matisse",
-    "n": 50,
-    "hits": 3,
-    "lift": 75.1
-   }
-  ],
-  "role": {
-   "mid": 0.79,
-   "highlight": 0.21
-  },
-  "ngram": {
-   "peak": "2010s"
-  },
-  "measured": {
-   "lch": [
-    61.9,
-    50.2,
-    280.7
-   ],
-   "nearest": [
-    [
-     "Blue-Grey",
-     4.2
+  "aside": {
+    "origin": {
+      "named_after": "the cornflower, Centaurea cyanus",
+      "first_recorded": "Maerz and Paul 1930 give 1891; X11 screen name",
+      "source": "Paterson, A Dictionary of Colour; ColorHub library"
+    },
+    "aka": [
+      "Cornflower Blue",
+      "Bluet",
+      "Boyle's blue (the petal dye)",
+      "Cyan blue (old watercolor name)"
     ],
-    [
-     "Soft Blue",
-     4.4
+    "siblings": [
+      "blue-grey",
+      "clear-cadet-blue",
+      "berlin-blue",
+      "lupine"
     ],
-    [
-     "Clear Cadet Blue",
-     5.1
+    "parent": "blue",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "dusty-cornflower",
+        "gloss": "a greyer blue that several older names (Berlin Blue, Lupine) resolve to"
+      },
+      {
+        "slug": "verditter-blue",
+        "gloss": "Werner's name for the cornflower petal, a greener blue"
+      }
     ],
-    [
-     "Dodger Blue",
-     5.5
+    "other_languages": [
+      {
+        "lang": "fr",
+        "name": "bleuet (the flower; also the color)"
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"cornflower\"; Pigment Compendium, \"cornflower blue\"",
-   "loc_kind": "entry",
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pigment Compendium, p. 145 (\"Cornflower blue\")",
-   "loc_kind": "pdf-page",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#6495ED",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 19,
+    "rate": 0.0008,
+    "first": {
+      "id": "commons-Q4231874",
+      "year": 1617,
+      "painter": "Guercino"
+    },
+    "century_lift_1900": 3.74,
+    "painters": [
+      {
+        "key": "Henri Matisse",
+        "n": 50,
+        "hits": 3,
+        "lift": 75.1
+      }
+    ],
+    "role": {
+      "mid": 0.79,
+      "highlight": 0.21
+    },
+    "ngram": {
+      "peak": "2010s"
+    },
+    "measured": {
+      "lch": [
+        61.9,
+        50.2,
+        280.7
+      ],
+      "nearest": [
+        [
+          "Blue-Grey",
+          4.2
+        ],
+        [
+          "Soft Blue",
+          4.4
+        ],
+        [
+          "Clear Cadet Blue",
+          5.1
+        ],
+        [
+          "Dodger Blue",
+          5.5
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 71 (\"bluet\")",
-   "loc_kind": "pdf-page",
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"cornflower\"; Pigment Compendium, \"cornflower blue\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pigment Compendium, p. 145 (\"Cornflower blue\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 71 (\"bluet\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Nelson, Bluets, prop. 224",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 130 (\"Cornflower Blue\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, glossary",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; Maerz & Paul 1930; ISCC-NBS 1955), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "data",
+      "cite": "Google Books Ngram via ColorHub field notes (adjective use)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Pastoureau, Blue, ch. 1 (\"An Uncommon Color: Prehistory to the Twelfth Century\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, p. 84",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "book",
+      "cite": "Pigment Compendium, p. 145 (\"Cornflower blue\"; citing Harley 1982)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 12,
+      "kind": "book",
+      "cite": "Pigment Compendium, p. 465 (table of plant dyestuffs; citing Schweppe 1992)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 13,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, pp. 100-101",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 14,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, p. 136 (\"cyanin\")",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 15,
+      "kind": "book",
+      "cite": "Finlay, The Brilliant History of Color in Art and Jewels, ch. 16 (\"Jewels\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 16,
+      "kind": "book",
+      "cite": "Jarman, Chroma, p. 39",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 17,
+      "kind": "data",
+      "cite": "ColorHub archive, field notes for #6495ED (23,781 paintings; as photographed)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What did Robert Boyle recommend making from cornflower petals?",
+      "choices": [
+        "A blue dye",
+        "A red lake",
+        "A white pigment",
+        "A varnish"
+      ],
+      "answer": "A blue dye",
+      "kind": "pick"
+    },
+    {
+      "q": "The Greeks could not see the color blue, which is why they rarely named it.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    },
+    {
+      "q": "In our archive, which painter's work holds cornflower blue far more often than the museums' baseline?",
+      "choices": [
+        "Henri Matisse",
+        "Rembrandt",
+        "Johannes Vermeer",
+        "Titian"
+      ],
+      "answer": "Henri Matisse",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Cornflower blue was a real eighteenth-century watercolor name, made from petals, and Harley found no evidence it was ever sold commercially.",
+    "Look at a cornflower and notice the little violet in the blue: that lean is what separates it from sky blue.",
+    "Henri Matisse uses this blue far more than his museums' average, in three of the 50 works we hold."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Nelson anecdote reworded to what prop. 224 says",
+      "Removed unsupported Google Books early-1800s rise claim",
+      "Removed unsupported 'fugitive stain/painters turned to mineral blues' inference",
+      "Removed unsupported rarity-percentile and French/Danish/Renoir claims (not in field data)",
+      "Opener hedged to Harley's no-evidence finding"
+    ]
   },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Nelson, Bluets, prop. 224",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 130 (\"Cornflower Blue\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, glossary",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; Maerz & Paul 1930; ISCC-NBS 1955), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "data",
-   "cite": "Google Books Ngram via ColorHub field notes (adjective use)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Pastoureau, Blue, ch. 1 (\"An Uncommon Color: Prehistory to the Twelfth Century\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, p. 84",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "book",
-   "cite": "Pigment Compendium, p. 145 (\"Cornflower blue\"; citing Harley 1982)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 12,
-   "kind": "book",
-   "cite": "Pigment Compendium, p. 465 (table of plant dyestuffs; citing Schweppe 1992)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 13,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, pp. 100-101",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 14,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, p. 136 (\"cyanin\")",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 15,
-   "kind": "book",
-   "cite": "Finlay, The Brilliant History of Color in Art and Jewels, ch. 16 (\"Jewels\")",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 16,
-   "kind": "book",
-   "cite": "Jarman, Chroma, p. 39",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 17,
-   "kind": "data",
-   "cite": "ColorHub archive, field notes for #6495ED (23,781 paintings; as photographed)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What did Robert Boyle recommend making from cornflower petals?",
-   "choices": [
-    "A blue dye",
-    "A red lake",
-    "A white pigment",
-    "A varnish"
-   ],
-   "answer": "A blue dye",
-   "kind": "pick"
-  },
-  {
-   "q": "The Greeks could not see the color blue, which is why they rarely named it.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  },
-  {
-   "q": "In our archive, which painter's work holds cornflower blue far more often than the museums' baseline?",
-   "choices": [
-    "Henri Matisse",
-    "Rembrandt",
-    "Johannes Vermeer",
-    "Titian"
-   ],
-   "answer": "Henri Matisse",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Cornflower blue was a real eighteenth-century watercolor name, made from petals, and Harley found no evidence it was ever sold commercially.",
-  "Look at a cornflower and notice the little violet in the blue: that lean is what separates it from sky blue.",
-  "Henri Matisse uses this blue far more than his museums' average, in three of the 50 works we hold."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Nelson anecdote reworded to what prop. 224 says",
-   "Removed unsupported Google Books early-1800s rise claim",
-   "Removed unsupported 'fugitive stain/painters turned to mineral blues' inference",
-   "Removed unsupported rarity-percentile and French/Danish/Renoir claims (not in field data)",
-   "Opener hedged to Harley's no-evidence finding"
-  ]
- },
- "words": 701
+  "words": 701
 }

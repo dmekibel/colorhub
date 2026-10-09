@@ -57,17 +57,17 @@
     "siblings": [
       "burgundy",
       "falu-red",
-      "reddy-brown"
+      "blood-red"
     ],
     "parent": null,
     "children": [
-      "dark-maroon",
-      "light-maroon",
-      "maroon-x11"
+      "dark-sienna",
+      "pomegranate-purple",
+      "berry-red"
     ],
     "disambiguation": [
       {
-        "slug": "maroon-x11",
+        "slug": "berry-red",
         "gloss": "a pinker maroon, #B03060, that our library files as the X11 value"
       }
     ],

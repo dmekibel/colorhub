@@ -1,139 +1,139 @@
 {
- "slug": "tufts-blue",
- "name": "Tufts Blue",
- "hex": "#3E8EDE",
- "names": [
-  "Tufts Blue"
- ],
- "tier": "place",
- "depth": "brief",
- "lede": "Tufts Blue is a bright, slightly violet blue used as Tufts University's school color, a branding name rather than a pigment or dye.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A university's blue",
-   "body": "Our library traces the name to a Wikipedia list that cites Pourpre.com but gives no adoption date [1]. The library also records Bleu de France as a near-duplicate of this swatch, 1.0 units away, a French national-color name landing on almost the same blue [1].\n\nIts nearest named neighbor is [[dodger-blue]], 2.8 units of CIEDE2000 away and described as more vivid [2]. [[blue-grey]] sits at 5.0, duller, [[clear-cadet-blue]] at 5.6, also duller, and [[azure]] at 5.7, more vivid and purpler [2]. Measured in LCH it reads lightness 58, chroma 48, a bright, moderately saturated blue [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a color within six units of this one, over at least five percent of the canvas, in just 13 of 23,781 paintings, about 0.05 percent, as photographed [3]. The earliest dated match is an anonymous *Portrait of Martin Luther* of 1529; the archive's early centuries are thin, so this is a floor and not a first [3]. The largest area of it is in a 1660 Mughal portrait of Prince Azam Shah, and Ferdinand Hodler's *Lake* of 1911 holds it across nearly a third of the canvas [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Tufts University's school color",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub library (Wikipedia, citing Pourpre.com)"
-  },
-  "aka": [
-   "Bleu de France"
+  "slug": "tufts-blue",
+  "name": "Tufts Blue",
+  "hex": "#3E8EDE",
+  "names": [
+    "Tufts Blue"
   ],
-  "siblings": [
-   "dodger-blue",
-   "blue-grey",
-   "faded-blue",
-   "azure"
+  "tier": "place",
+  "depth": "brief",
+  "lede": "Tufts Blue is a bright, slightly violet blue used as Tufts University's school color, a branding name rather than a pigment or dye.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A university's blue",
+      "body": "Our library traces the name to a Wikipedia list that cites Pourpre.com but gives no adoption date [1]. The library also records Bleu de France as a near-duplicate of this swatch, 1.0 units away, a French national-color name landing on almost the same blue [1].\n\nIts nearest named neighbor is [[dodger-blue]], 2.8 units of CIEDE2000 away and described as more vivid [2]. [[blue-grey]] sits at 5.0, duller, [[clear-cadet-blue]] at 5.6, also duller, and [[azure]] at 5.7, more vivid and purpler [2]. Measured in LCH it reads lightness 58, chroma 48, a bright, moderately saturated blue [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a color within six units of this one, over at least five percent of the canvas, in just 13 of 23,781 paintings, about 0.05 percent, as photographed [3]. The earliest dated match is an anonymous *Portrait of Martin Luther* of 1529; the archive's early centuries are thin, so this is a floor and not a first [3]. The largest area of it is in a 1660 Mughal portrait of Prince Azam Shah, and Ferdinand Hodler's *Lake* of 1911 holds it across nearly a third of the canvas [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
-  "n_present": 13,
-  "match": {
-   "de2000": 6.0,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "Tufts University's school color",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub library (Wikipedia, citing Pourpre.com)"
+    },
+    "aka": [
+      "Bleu de France"
+    ],
+    "siblings": [
+      "dodger-blue",
+      "blue-grey",
+      "clear-cadet-blue",
+      "azure"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "first_dated": {
-   "year": 1529,
-   "painter": null,
-   "before_record": false
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+    "n_present": 13,
+    "match": {
+      "de2000": 6.0,
+      "min_cover": 0.05
+    },
+    "first_dated": {
+      "year": 1529,
+      "painter": null,
+      "before_record": false
+    },
+    "measured": {
+      "lch": [
+        58,
+        48,
+        272
+      ],
+      "nearest": [
+        [
+          "Dodger Blue",
+          2.8
+        ],
+        [
+          "Blue-Grey",
+          5.0
+        ],
+        [
+          "Faded Blue",
+          5.6
+        ],
+        [
+          "Azure",
+          5.7
+        ]
+      ]
+    }
   },
-  "measured": {
-   "lch": [
-    58,
-    48,
-    272
-   ],
-   "nearest": [
-    [
-     "Dodger Blue",
-     2.8
-    ],
-    [
-     "Blue-Grey",
-     5.0
-    ],
-    [
-     "Faded Blue",
-     5.6
-    ],
-    [
-     "Azure",
-     5.7
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): Wikipedia/Pourpre.com source, near-duplicate entry",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, ΔE 6, 5% cover)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the name Tufts Blue refer to?",
+      "choices": [
+        "Tufts University's school color",
+        "A French royal dye",
+        "A mineral pigment",
+        "A paint company's trademark"
+      ],
+      "answer": "Tufts University's school color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our library lists a near-duplicate of Tufts Blue called Bleu de France.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Tufts Blue sits almost on top of Bleu de France, a French national-color name, just 1.0 unit away."
+  ],
+  "words": 229,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "rank-percentile drift: article said 77%, current data/graph/fieldnotes says 78% (the archive/library grew since this article was written); corrected the number in both the field dict and body text.",
+      "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): Wikipedia/Pourpre.com source, near-duplicate entry",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (tools/article_field.py, ΔE 6, 5% cover)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the name Tufts Blue refer to?",
-   "choices": [
-    "Tufts University's school color",
-    "A French royal dye",
-    "A mineral pigment",
-    "A paint company's trademark"
-   ],
-   "answer": "Tufts University's school color",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our library lists a near-duplicate of Tufts Blue called Bleu de France.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Tufts Blue sits almost on top of Bleu de France, a French national-color name, just 1.0 unit away."
- ],
- "words": 229,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "rank-percentile drift: article said 77%, current data/graph/fieldnotes says 78% (the archive/library grew since this article was written); corrected the number in both the field dict and body text.",
-   "Opus spot-audit 2026-10-09: claims re-verified against graph/fieldnotes/article_field.py; errors fixed."
-  ]
- }
 }

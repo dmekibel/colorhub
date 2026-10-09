@@ -32,17 +32,18 @@
     "siblings": [
       "vivid-black",
       "continental-blue",
-      "raisin-black"
+      "raisin-black",
+      "poppy-purple"
     ],
     "parent": null,
     "children": [],
     "disambiguation": [
       {
-        "slug": "pale-black",
+        "slug": "dark-walnut",
         "gloss": "a different traditional Japanese color (Binrōjizome, betel nut dyed) with a similar English rendering"
       },
       {
-        "slug": "pale-black-hue",
+        "slug": "pale-black-shade",
         "gloss": "shares this exact graph hex but a separate traditional Japanese name (Shikon)"
       }
     ],

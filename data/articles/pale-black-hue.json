@@ -1,139 +1,139 @@
 {
- "slug": "pale-black-hue",
- "name": "Pale black hue",
- "hex": "#2B2028",
- "names": [
-  "Pale black hue"
- ],
- "tier": "traditional",
- "depth": "short",
- "lede": "Pale black hue is a near-black plum, filed under a traditional Japanese name, Shikon, meaning blue-violet.",
- "sections": [
-  {
-   "id": "japan",
-   "title": "Blue-violet, very dark",
-   "body": "Our library lists this swatch as *Shikon* (紫紺), literally \"blue-violet,\" one of the traditional colors of Japan recorded on Wikipedia's list of that name [1]. The English label \"Pale black hue\" is this app's own rendering and not a separate historical term; who first used the Japanese name, and when, is not documented in the sources checked here [1]. Our library also crosses this same swatch to three ISCC-NBS 1955 block names, Admiral, Logwood and Sailor, and to Maerz and Paul's Neutral Tin, first recorded about 1804 [1].\n\nIts nearest named neighbor is [[vivid-black]], only 2.9 units off, essentially the same color on screen [2]; [[continental-blue]] sits 3.4 units away. It shares its exact hex with the related swatch [[pale-black-shade]]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a color within range of this swatch in 618 of 23,781 paintings, 2.6 percent, as photographed; the within-painting lens finds it in 518 [3]. It most often plays a shadow, in 46 percent of those 518 paintings by lightness rank, so varnish cannot fake the result [3]. George Dawe painted it most often among individual painters, in 7 of his 50 works here, though no painter stands out against the museum baseline [3]. The earliest match dates to the year 1201, long before any record of the Japanese name, a floor and not a first, since the archive's early centuries are thin [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Shikon, a traditional Japanese color name (\"blue-violet\")",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "Wikipedia, \"Traditional colors of Japan\""
-  },
-  "aka": [
-   "Shikon",
-   "Admiral",
-   "Logwood",
-   "Sailor",
-   "Neutral Tin"
+  "slug": "pale-black-hue",
+  "name": "Pale black hue",
+  "hex": "#2B2028",
+  "names": [
+    "Pale black hue"
   ],
-  "siblings": [
-   "vivid-black",
-   "continental-blue",
-   "raisin-black"
+  "tier": "traditional",
+  "depth": "short",
+  "lede": "Pale black hue is a near-black plum, filed under a traditional Japanese name, Shikon, meaning blue-violet.",
+  "sections": [
+    {
+      "id": "japan",
+      "title": "Blue-violet, very dark",
+      "body": "Our library lists this swatch as *Shikon* (紫紺), literally \"blue-violet,\" one of the traditional colors of Japan recorded on Wikipedia's list of that name [1]. The English label \"Pale black hue\" is this app's own rendering and not a separate historical term; who first used the Japanese name, and when, is not documented in the sources checked here [1]. Our library also crosses this same swatch to three ISCC-NBS 1955 block names, Admiral, Logwood and Sailor, and to Maerz and Paul's Neutral Tin, first recorded about 1804 [1].\n\nIts nearest named neighbor is [[vivid-black]], only 2.9 units off, essentially the same color on screen [2]; [[continental-blue]] sits 3.4 units away. It shares its exact hex with the related swatch [[pale-black-shade]]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a color within range of this swatch in 618 of 23,781 paintings, 2.6 percent, as photographed; the within-painting lens finds it in 518 [3]. It most often plays a shadow, in 46 percent of those 518 paintings by lightness rank, so varnish cannot fake the result [3]. George Dawe painted it most often among individual painters, in 7 of his 50 works here, though no painter stands out against the museum baseline [3]. The earliest match dates to the year 1201, long before any record of the Japanese name, a floor and not a first, since the archive's early centuries are thin [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "pale-black",
-    "gloss": "a different traditional Japanese color (Binrōjizome, betel nut dyed) with a similar English rendering"
-   },
-   {
-    "slug": "pale-black-shade",
-    "gloss": "shares this exact hex but a separate traditional Japanese name (Sensaicha)"
-   }
-  ],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Shikon (紫紺)"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 618,
-  "n_within_painting": 518,
-  "pct_archive": 2.6,
-  "rank_pct": 83,
-  "measured": {
-   "lch": [
-    14,
-    8,
-    335
-   ],
-   "nearest": [
-    [
-     "Vivid black",
-     2.9
+  "aside": {
+    "origin": {
+      "named_after": "Shikon, a traditional Japanese color name (\"blue-violet\")",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "Wikipedia, \"Traditional colors of Japan\""
+    },
+    "aka": [
+      "Shikon",
+      "Admiral",
+      "Logwood",
+      "Sailor",
+      "Neutral Tin"
     ],
-    [
-     "Continental Blue",
-     3.4
+    "siblings": [
+      "vivid-black",
+      "continental-blue",
+      "raisin-black"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "dark-walnut",
+        "gloss": "a different traditional Japanese color (Binrōjizome, betel nut dyed) with a similar English rendering"
+      },
+      {
+        "slug": "pale-black-shade",
+        "gloss": "shares this exact hex but a separate traditional Japanese name (Sensaicha)"
+      }
+    ],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Shikon (紫紺)"
+      }
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json), Wikipedia \"Traditional colors of Japan\"; ISCC-NBS 1955 block 230; Maerz and Paul 1930",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 618,
+    "n_within_painting": 518,
+    "pct_archive": 2.6,
+    "rank_pct": 83,
+    "measured": {
+      "lch": [
+        14,
+        8,
+        335
+      ],
+      "nearest": [
+        [
+          "Vivid black",
+          2.9
+        ],
+        [
+          "Continental Blue",
+          3.4
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json), Wikipedia \"Traditional colors of Japan\"; ISCC-NBS 1955 block 230; Maerz and Paul 1930",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub Color Graph look-alikes (data/graph/edges-p.json), CIEDE2000",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does Shikon, the Japanese name behind Pale black hue, mean?",
+      "choices": [
+        "Blue-violet",
+        "Betel nut dyed",
+        "Thousand year old brown",
+        "Iron storage"
+      ],
+      "answer": "Blue-violet",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Pale black hue and Pale black shade share the same hex value.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale black hue's Japanese name literally means blue-violet."
+  ],
+  "words": 242,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "What does Shikon, the Japanese name behind Pale black hue, mean?",
-   "choices": [
-    "Blue-violet",
-    "Betel nut dyed",
-    "Thousand year old brown",
-    "Iron storage"
-   ],
-   "answer": "Blue-violet",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Pale black hue and Pale black shade share the same hex value.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pale black hue's Japanese name literally means blue-violet."
- ],
- "words": 242,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

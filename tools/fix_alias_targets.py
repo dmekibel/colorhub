@@ -26,7 +26,7 @@ reason elsewhere; dropping here only removes the now-known-wrong CORE-name routi
   python3 tools/fix_alias_targets.py            # apply
   python3 tools/fix_alias_targets.py --report   # dry run, print every change, write nothing
 """
-import json, sys
+import json, re, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -38,6 +38,7 @@ import build_core_names as BCN   # noqa: E402
 LIB_PATH = ROOT / "data" / "library.json"
 CORE_PATH = ROOT / "data" / "core-names.json"
 ALIASES_PATH = ROOT / "data" / "aliases.json"
+ARTICLES_DIR = ROOT / "data" / "articles"
 LINKMAP_PATH = ROOT / "data" / "articles" / "link-map.json"
 SRC_DIR = ROOT / "data" / "sources"
 
@@ -101,11 +102,40 @@ def nearest_core(hexv, core_hexes, core_names):
     return core_names[j], float(d[j])
 
 
+def slugs_referenced_in_articles():
+    """Every slug any committed article still references, via a [[link]] or a plain aside.siblings /
+    aside.children / aside.disambiguation[].slug / aside.parent entry. Dropping an alias a reference
+    still names turns a wrong link into a dangling one -- same failure, worse, since it can't even be
+    found by searching for the word "alias" any more. tools/remap_links_to_primary.py should always run
+    before this script so the set below is small/empty in practice; this is the backstop, not the fix."""
+    link_pattern = re.compile(r"\[\[([^\]|]+)")
+    referenced = set()
+    for p in sorted(ARTICLES_DIR.glob("*.json")):
+        if p.name in ("link-map.json", "index.json"):
+            continue
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        for text in [doc.get("lede", "")] + [s.get("body", "") for s in doc.get("sections", [])]:
+            for m in link_pattern.finditer(text or ""):
+                tgt = m.group(1)
+                if ":" not in tgt:
+                    referenced.add(tgt)
+        aside = doc.get("aside") or {}
+        referenced |= set(aside.get("siblings") or [])
+        referenced |= set(aside.get("children") or [])
+        if aside.get("parent"):
+            referenced.add(aside["parent"])
+        for d in aside.get("disambiguation") or []:
+            if isinstance(d, dict) and d.get("slug"):
+                referenced.add(d["slug"])
+    return referenced
+
+
 def main():
     report = "--report" in sys.argv[1:]
     lib = json.loads(LIB_PATH.read_text(encoding="utf-8"))
     core = json.loads(CORE_PATH.read_text(encoding="utf-8"))
     aliases = json.loads(ALIASES_PATH.read_text(encoding="utf-8"))
+    referenced = slugs_referenced_in_articles()
 
     truth = load_truth_hexes(lib, core)
     core_names = [e["n"] for e in core]
@@ -119,7 +149,7 @@ def main():
     for k, v in names_map.items():
         slug_to_name.setdefault(BCN.slug(k), []).append(k)
 
-    retargeted, dropped = [], []
+    retargeted, dropped, refused = [], [], []
     # a name that is STILL its own live library.json/core-names.json entry resolves to its own page before
     # js/router.js ever consults data/aliases.json (routeNameAsync checks core names, then the library, and
     # only then the alias map) -- an also/altn note on some other entry doesn't make it an alias, so leave
@@ -157,21 +187,32 @@ def main():
         best_slug = BCN.slug(best_name)
         if best_slug == cur_target_slug:
             # the current target already IS the nearest core name there is -- if that's still > DE_OK, no
-            # retarget would help, so drop rather than leave a known-too-far alias in place
+            # retarget would help, so drop rather than leave a known-too-far alias in place -- unless an
+            # article still names this slug, in which case dropping would turn a wrong link into a
+            # dangling one, which is worse; refuse and leave the (known-imprecise) alias in place instead
             if de_best > DE_RETARGET_MAX:
-                dropped.append((alias_slug, cur_target_slug, round(de_cur, 2), truth_src))
+                if alias_slug in referenced:
+                    refused.append((alias_slug, cur_target_slug, round(de_cur, 2), truth_src))
+                else:
+                    dropped.append((alias_slug, cur_target_slug, round(de_cur, 2), truth_src))
             continue
         if de_best <= DE_RETARGET_MAX:
             retargeted.append((alias_slug, cur_target_slug, best_slug, round(de_cur, 2), round(de_best, 2), truth_src))
+        elif alias_slug in referenced:
+            refused.append((alias_slug, cur_target_slug, round(de_cur, 2), truth_src))
         else:
             dropped.append((alias_slug, cur_target_slug, round(de_cur, 2), truth_src))
 
     if report:
-        print(f"{len(retargeted)} to retarget, {len(dropped)} to drop (current target > dE {DE_OK} from true hex)")
+        print(f"{len(retargeted)} to retarget, {len(dropped)} to drop, {len(refused)} refused-to-drop "
+              f"(still referenced in an article) (current target > dE {DE_OK} from true hex)")
         for a, old, new, de_old, de_new, src in retargeted:
             print(f"  RETARGET {a:28s} {old:22s} -> {new:22s}  dE {de_old} -> {de_new}  [{src}]")
         for a, old, de_old, src in dropped:
             print(f"  DROP     {a:28s} (was {old}, dE {de_old})  [{src}]")
+        for a, old, de_old, src in refused:
+            print(f"  REFUSED  {a:28s} (was {old}, dE {de_old}) -- still referenced in an article; run "
+                  f"tools/remap_links_to_primary.py first  [{src}]")
         return
 
     for alias_slug, old_slug, new_slug, de_old, de_new, src in retargeted:
@@ -221,6 +262,11 @@ def main():
         print(f"  {a:28s} (was {old}, dE {de_old})")
     if len(dropped) > 20:
         print(f"  ... and {len(dropped) - 20} more")
+    print(f"refused to drop (still referenced in an article): {len(refused)}")
+    for a, old, de_old, src in refused[:20]:
+        print(f"  {a:28s} (was {old}, dE {de_old}) -- run tools/remap_links_to_primary.py first")
+    if len(refused) > 20:
+        print(f"  ... and {len(refused) - 20} more")
     print(f"link-map.json fixed: {len(lm_fixed)}")
     for k, old, new, de_old, de_new in lm_fixed:
         print(f"  {k:28s} {old:22s} -> {new:22s}  dE {de_old} -> {de_new}")

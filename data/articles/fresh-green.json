@@ -1,118 +1,118 @@
 {
- "slug": "fresh-green",
- "name": "Fresh Green",
- "hex": "#69D84F",
- "names": [
-  "Fresh Green"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Fresh Green is a bright, clean green from the xkcd 2010 color-naming survey, echoing a phrase writers have long used for lively plant color, including an elephant's suit.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A modifier on green, with an older phrase",
-   "body": "Fresh Green pairs \"fresh\" with [[green]], the xkcd 2010 survey's term for this bright, clean green [1]. The exact compound is the survey's; the phrase is older. Pastoureau notes that the elephant Babar has worn \"a lovely, fresh green\" suit since his first storybook appearance, so enduringly that the shade is sometimes called \"Babar green\" [2]. He adds that Belle Époque public gardens favored a \"delicate or fresh green\" for plantings, against duller, greyer greens for benches and gates [3]. Its nearest named look-alikes are [[apple]], [[apple]] and [[vibrant-green]] [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive shows this color covering at least one percent of its canvas, within CIEDE2000 4 of it, as photographed [4]. In printed English, the phrase \"fresh green\" rose fastest in the 1840s and peaked around 1870, though that tracks every sense of the words, not just this color name [4]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the modifier \"fresh\" plus green",
-   "first_recorded": "2010 (xkcd color-naming survey)",
-   "source": "ColorHub color library (xkcd 2010)"
-  },
-  "aka": [],
-  "siblings": [
-   "lightish-green",
-   "apple"
+  "slug": "fresh-green",
+  "name": "Fresh Green",
+  "hex": "#69D84F",
+  "names": [
+    "Fresh Green"
   ],
-  "parent": "green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    77.7,
-    79.9,
-    135.3
-   ],
-   "nearest": [
-    [
-     "Lightish Green",
-     2.9
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd 2010 color-naming survey; computed LCH and nearest named colors",
-   "loc_kind": null,
-   "url": null
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Fresh Green is a bright, clean green from the xkcd 2010 color-naming survey, echoing a phrase writers have long used for lively plant color, including an elephant's suit.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A modifier on green, with an older phrase",
+      "body": "Fresh Green pairs \"fresh\" with [[green]], the xkcd 2010 survey's term for this bright, clean green [1]. The exact compound is the survey's; the phrase is older. Pastoureau notes that the elephant Babar has worn \"a lovely, fresh green\" suit since his first storybook appearance, so enduringly that the shade is sometimes called \"Babar green\" [2]. He adds that Belle Époque public gardens favored a \"delicate or fresh green\" for plantings, against duller, greyer greens for benches and gates [3]. Its nearest named look-alikes are [[apple]], [[apple]] and [[vibrant-green]] [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive shows this color covering at least one percent of its canvas, within CIEDE2000 4 of it, as photographed [4]. In printed English, the phrase \"fresh green\" rose fastest in the 1840s and peaked around 1870, though that tracks every sense of the words, not just this color name [4]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the modifier \"fresh\" plus green",
+      "first_recorded": "2010 (xkcd color-naming survey)",
+      "source": "ColorHub color library (xkcd 2010)"
+    },
+    "aka": [],
+    "siblings": [
+      "apple",
+      "apple-green"
+    ],
+    "parent": "green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 44 (\"Green among the Romans\")",
-   "loc_kind": "book-chapter",
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        77.7,
+        79.9,
+        135.3
+      ],
+      "nearest": [
+        [
+          "Lightish Green",
+          2.9
+        ]
+      ]
+    }
   },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 45 (\"Nature in the heart of the cities\")",
-   "loc_kind": "book-chapter",
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd 2010 color-naming survey; computed LCH and nearest named colors",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 44 (\"Green among the Romans\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 45 (\"Nature in the heart of the cities\")",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Books Ngram, \"fresh green\"",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "According to Pastoureau, which storybook character wears a \"fresh green\" suit?",
+      "choices": [
+        "Babar the elephant",
+        "The Cat in the Hat",
+        "Peter Rabbit",
+        "The Little Prince"
+      ],
+      "answer": "Babar the elephant",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: no painting in our archive comes close to Fresh Green.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Babar the elephant's storybook suit is sometimes called \"Babar green,\" after this very shade."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-09",
+    "issues": []
   },
-  {
-   "n": 4,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed; Google Books Ngram, \"fresh green\"",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "According to Pastoureau, which storybook character wears a \"fresh green\" suit?",
-   "choices": [
-    "Babar the elephant",
-    "The Cat in the Hat",
-    "Peter Rabbit",
-    "The Little Prince"
-   ],
-   "answer": "Babar the elephant",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: no painting in our archive comes close to Fresh Green.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Babar the elephant's storybook suit is sometimes called \"Babar green,\" after this very shade."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-09",
-  "issues": []
- },
- "words": 169
+  "words": 169
 }

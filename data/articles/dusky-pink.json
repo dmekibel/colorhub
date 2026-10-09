@@ -1,115 +1,115 @@
 {
- "slug": "dusky-pink",
- "name": "Dusky Pink",
- "hex": "#CC7A8B",
- "names": [
-  "Dusky Pink"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Dusky Pink is a muted, slightly bluish rose, a long-running name for pinks that have lost their brightness.",
- "sections": [
-  {
-   "id": "name",
-   "title": "The name",
-   "body": "The ISCC-NBS system of 1955 files this swatch in a block, and the Maerz and Paul dictionary of 1930 records a plate for it with a first date of 1918 [1]. The xkcd survey of 2010 used the same words, and its near-duplicates there are Old Pink, Muted Pink and Ugly Pink [1]. Its nearest named neighbor is [[puce]], about 4 units away [1].\n\nIn a book Dusky Pink turns up in a row of silk cocoons: Finlay lists cream white, citron yellow, yolk orange, dusky pink and chestnut brown [2]. The colors come from natural pigments in the gum that coats each cocoon, and they depend on how each worm processes carotenoids and other substances in its diet [2]. It is genetic, as eye color is in people [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "This is a rare color in painting. Only 18 of 23,781 paintings, or 0.08 per cent, hold a color near this swatch, which makes it rarer than 72 per cent of the named colors [3]. The earliest in our archive dates from 1560, centuries before the name was first recorded, so the match is a look-alike hue in an aged photograph, not proof of a pigment [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "descriptive name; a dim, muted pink",
-   "first_recorded": "Maerz and Paul 1918; ISCC-NBS 1955",
-   "source": "ColorHub library"
-  },
-  "aka": [
-   "old pink",
-   "muted pink"
+  "slug": "dusky-pink",
+  "name": "Dusky Pink",
+  "hex": "#CC7A8B",
+  "names": [
+    "Dusky Pink"
   ],
-  "siblings": [
-   "pink",
-   "puce",
-   "dusky-rose",
-   "old-rose"
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Dusky Pink is a muted, slightly bluish rose, a long-running name for pinks that have lost their brightness.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "The name",
+      "body": "The ISCC-NBS system of 1955 files this swatch in a block, and the Maerz and Paul dictionary of 1930 records a plate for it with a first date of 1918 [1]. The xkcd survey of 2010 used the same words, and its near-duplicates there are Old Pink, Muted Pink and Ugly Pink [1]. Its nearest named neighbor is [[puce]], about 4 units away [1].\n\nIn a book Dusky Pink turns up in a row of silk cocoons: Finlay lists cream white, citron yellow, yolk orange, dusky pink and chestnut brown [2]. The colors come from natural pigments in the gum that coats each cocoon, and they depend on how each worm processes carotenoids and other substances in its diet [2]. It is genetic, as eye color is in people [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "This is a rare color in painting. Only 18 of 23,781 paintings, or 0.08 per cent, hold a color near this swatch, which makes it rarer than 72 per cent of the named colors [3]. The earliest in our archive dates from 1560, centuries before the name was first recorded, so the match is a look-alike hue in an aged photograph, not proof of a pigment [3]."
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 18,
-  "pct_archive": 0.08,
-  "match": {
-   "hex": "#CC7A8B",
-   "de2000": 4
+  "aside": {
+    "origin": {
+      "named_after": "descriptive name; a dim, muted pink",
+      "first_recorded": "Maerz and Paul 1918; ISCC-NBS 1955",
+      "source": "ColorHub library"
+    },
+    "aka": [
+      "old pink",
+      "muted pink"
+    ],
+    "siblings": [
+      "pink",
+      "puce",
+      "dusty-rose",
+      "old-rose"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": []
   },
-  "measured": {
-   "nearest": [
-    [
-     "Puce",
-     4.2
-    ]
-   ]
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 18,
+    "pct_archive": 0.08,
+    "match": {
+      "hex": "#CC7A8B",
+      "de2000": 4
+    },
+    "measured": {
+      "nearest": [
+        [
+          "Puce",
+          4.2
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Finlay, Fabric, p. 339",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "In Finlay's row of silk cocoons, which color follows yolk orange?",
+      "choices": [
+        "Dusky pink",
+        "Cream white",
+        "Citron yellow"
+      ],
+      "answer": "Dusky pink",
+      "kind": "pick"
+    },
+    {
+      "q": "Where do silk cocoon colors come from?",
+      "choices": [
+        "Natural pigments in the gum around the cocoon",
+        "Dyes added by farmers",
+        "Sunlight"
+      ],
+      "answer": "Natural pigments in the gum around the cocoon",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Silk cocoons come naturally in cream, yellow, orange, dusky pink and chestnut brown."
+  ],
+  "words": 209,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json; ISCC-NBS 1955, Ridgway 1912, Maerz and Paul 1930, xkcd color survey 2010), CIEDE2000 distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Finlay, Fabric, p. 339",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes, tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "In Finlay's row of silk cocoons, which color follows yolk orange?",
-   "choices": [
-    "Dusky pink",
-    "Cream white",
-    "Citron yellow"
-   ],
-   "answer": "Dusky pink",
-   "kind": "pick"
-  },
-  {
-   "q": "Where do silk cocoon colors come from?",
-   "choices": [
-    "Natural pigments in the gum around the cocoon",
-    "Dyes added by farmers",
-    "Sunlight"
-   ],
-   "answer": "Natural pigments in the gum around the cocoon",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Silk cocoons come naturally in cream, yellow, orange, dusky pink and chestnut brown."
- ],
- "words": 209,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

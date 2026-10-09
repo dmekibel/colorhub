@@ -1,129 +1,129 @@
 {
- "slug": "opal-green",
- "name": "Opal Green",
- "hex": "#005D52",
- "names": [
-  "Opal Green"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Opal Green is a dark, saturated bluish green standardized as RAL 6026, named for the gem rather than measured from one.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Named for a stone it doesn't match",
-   "body": "Our library's only source for this value is RAL Classic, catalog number 6026, a German paint standard founded in 1927, so the hex is an approximate screen reading of a printed color card rather than a photographed gem [1]. [[gem:opal|Opal]] itself rarely shows a solid, saturated green like this one; its color play comes from internal structure, not a single pigment, so the name borrows the stone's reputation more than its look [1].\n\nThe nearest named colors on file are [[pearl-opal-green]] and [[opal-green]], at Compare [[teal|Teal]], [[viridian|Viridian]] and [[dark-slate-grey|Dark Slate Grey]], other deep, cool standards [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings finds a color within six units of this one in only 7, about 0.03 percent, as photographed [2]. The earliest is T. Davies's Ship in Full Sail (1827); the rest date from after 1880, including works by Paul Gauguin and Edvard Munch [2]. With this few matches, nothing here supports a claim about when the color was common beyond the paintings listed [2]. The count is a screen-color match, not a claim of RAL 6026 paint on any canvas [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the opal gem, by reputation more than measured color",
-   "first_recorded": "1927 (RAL Classic 6026)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "pearl-opal-green",
-   "dark-green-blue",
-   "dark-blue-green",
-   "kremlin"
+  "slug": "opal-green",
+  "name": "Opal Green",
+  "hex": "#005D52",
+  "names": [
+    "Opal Green"
   ],
-  "parent": null,
-  "children": [
-   "viridian",
-   "dark-slate-grey"
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Opal Green is a dark, saturated bluish green standardized as RAL 6026, named for the gem rather than measured from one.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Named for a stone it doesn't match",
+      "body": "Our library's only source for this value is RAL Classic, catalog number 6026, a German paint standard founded in 1927, so the hex is an approximate screen reading of a printed color card rather than a photographed gem [1]. [[gem:opal|Opal]] itself rarely shows a solid, saturated green like this one; its color play comes from internal structure, not a single pigment, so the name borrows the stone's reputation more than its look [1].\n\nThe nearest named colors on file are [[pearl-opal-green]] and [[opal-green]], at Compare [[teal|Teal]], [[viridian|Viridian]] and [[dark-slate-grey|Dark Slate Grey]], other deep, cool standards [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings finds a color within six units of this one in only 7, about 0.03 percent, as photographed [2]. The earliest is T. Davies's Ship in Full Sail (1827); the rest date from after 1880, including works by Paul Gauguin and Edvard Munch [2]. With this few matches, nothing here supports a claim about when the color was common beyond the paintings listed [2]. The count is a screen-color match, not a claim of RAL 6026 paint on any canvas [2]."
+    }
   ],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 7,
-  "match": {
-   "hex": "#005D52",
-   "de2000": 6,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "the opal gem, by reputation more than measured color",
+      "first_recorded": "1927 (RAL Classic 6026)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "pearl-opal-green",
+      "opal-green",
+      "dark-blue-green",
+      "kremlin"
+    ],
+    "parent": null,
+    "children": [
+      "viridian",
+      "dark-slate-grey"
+    ],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    35,
-    27,
-    181
-   ],
-   "nearest": [
-    [
-     "Pearl Opal Green",
-     2.5
-    ],
-    [
-     "Dark Green Blue",
-     2.7
-    ],
-    [
-     "Dark Blue Green",
-     3.6
-    ],
-    [
-     "Kremlin",
-     4.9
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 7,
+    "match": {
+      "hex": "#005D52",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "measured": {
+      "lch": [
+        35,
+        27,
+        181
+      ],
+      "nearest": [
+        [
+          "Pearl Opal Green",
+          2.5
+        ],
+        [
+          "Dark Green Blue",
+          2.7
+        ],
+        [
+          "Dark Blue Green",
+          3.6
+        ],
+        [
+          "Kremlin",
+          4.9
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: RAL Classic 1927",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which paint standard is the source for Opal Green?",
+      "choices": [
+        "RAL Classic",
+        "Pantone",
+        "Crayola",
+        "Ridgway 1912"
+      ],
+      "answer": "RAL Classic",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: natural opals usually show a solid, deep green like this swatch.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Named for a gem whose color play rarely looks like this flat, deep green."
+  ],
+  "words": 200,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits in color-kb for this slug; written from library and archive data only.",
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: RAL Classic 1927",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which paint standard is the source for Opal Green?",
-   "choices": [
-    "RAL Classic",
-    "Pantone",
-    "Crayola",
-    "Ridgway 1912"
-   ],
-   "answer": "RAL Classic",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: natural opals usually show a solid, deep green like this swatch.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Named for a gem whose color play rarely looks like this flat, deep green."
- ],
- "words": 200,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits in color-kb for this slug; written from library and archive data only.",
-   "lint 2026-10-09"
-  ]
- }
 }

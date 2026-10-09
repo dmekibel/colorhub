@@ -1,181 +1,181 @@
 {
- "slug": "brownish",
- "name": "Brownish",
- "hex": "#9C6D57",
- "names": [
-  "Brownish"
- ],
- "tier": "standard",
- "depth": "short",
- "lede": "Brownish is a hedge word turned into a color: a reddish mid-brown from Ridgway's 1912 color standards, named for a thing that is nearly, but not quite, brown.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A word that means almost brown",
-   "body": "Brownish is a qualifier, not a color with a history of its own. Paterson's dictionary defines it with a single line, listing it as one of the *-ish* words, and that is all it says [1]. The suffix hedges: a thing is not quite [[brown]], or it is brown with something else in it.\n\nNaturalists and mineral collectors leaned on this hedge. Werner's Nomenclature of Colours, the 1814 Edinburgh edition by Patrick Syme, lists Brownish-red and Brownish-black among its named shades, and Baty shows earlier mineral descriptions built the same way [2]. Ridgway, the American ornithologist, gave Brownish its own plate in 1912, and our swatch is his, plate XXVIII [3]. The ISCC-NBS system later filed it under light reddish brown, about 6.4 units away from our swatch [3]."
-  },
-  {
-   "id": "books",
-   "title": "What the books mean by it",
-   "body": "In the color books the word nearly always flags a hue that was altered by something, such as age, a mixture or dirt. Pastoureau notes that before the mid-fourteenth century most black cloth was not really black but looked grayish, bluish or sometimes brownish [4]. Ball describes a Venetian painting whose radiant azurite sky had become a muddy brownish-mauve before its cleaning in 1967-8 [5]. The dark foliage and brownish landscape of Pollaiuolo's *Apollo and Daphne* are the discolored remains of green copper resinate, not the painter's intention [5]. And Gage notes that the brownish spots on the pale grass in a Seurat canvas come from the darkening of zinc yellow [6].\n\nIt can also be praise. In 1557 Dolce admired the brownish softness of flesh tints that he credited to Apelles [6]. Gurney, describing early paints, calls the dug-out iron oxides, the earths from which Siena took its name, brownish reds and oranges [7]. A fashion color once had a related name: *caca-dauphin*, a brownish yellow, was all the rage in the last weeks of 1751 after the birth of Louis XV's first grandson [4]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "In our archive of 23,781 paintings, 971 carry a color within six CIEDE2000 units of this swatch over at least five per cent of the canvas, which is 4.1 per cent [8]. These are photographs of aged, varnished paintings, so many of these are the browning the books describe, not the painter's first color [8].\n\nIt peaks in the 1100s to 1500s, with a rate 2 to 3 times the archive's, and then drops in the 1600s [8]. Indian works carry it 5.2 times as often as the archive (154 of 721), and Pontormo has it in 5 of 13 works [8]. The painting with the most of it is Thomas Eakins' *The Chaperone*, at 65 per cent of the canvas, and the oldest is a funerary papyrus [8]. In printed English the adjective peaks in the 1920s [9]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the English suffix -ish added to brown",
-   "first_recorded": "Ridgway's Color Standards, 1912 (the swatch)",
-   "source": "ColorHub library; Paterson, A Dictionary of Colour"
-  },
-  "aka": [],
-  "siblings": [
-   "brownish-red",
-   "brownish-orange",
-   "brownish-grey"
+  "slug": "brownish",
+  "name": "Brownish",
+  "hex": "#9C6D57",
+  "names": [
+    "Brownish"
   ],
-  "parent": "brown",
-  "children": [
-   "brownish-drab",
-   "brownish-olive",
-   "brownish-pink"
+  "tier": "standard",
+  "depth": "short",
+  "lede": "Brownish is a hedge word turned into a color: a reddish mid-brown from Ridgway's 1912 color standards, named for a thing that is nearly, but not quite, brown.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A word that means almost brown",
+      "body": "Brownish is a qualifier, not a color with a history of its own. Paterson's dictionary defines it with a single line, listing it as one of the *-ish* words, and that is all it says [1]. The suffix hedges: a thing is not quite [[brown]], or it is brown with something else in it.\n\nNaturalists and mineral collectors leaned on this hedge. Werner's Nomenclature of Colours, the 1814 Edinburgh edition by Patrick Syme, lists Brownish-red and Brownish-black among its named shades, and Baty shows earlier mineral descriptions built the same way [2]. Ridgway, the American ornithologist, gave Brownish its own plate in 1912, and our swatch is his, plate XXVIII [3]. The ISCC-NBS system later filed it under light reddish brown, about 6.4 units away from our swatch [3]."
+    },
+    {
+      "id": "books",
+      "title": "What the books mean by it",
+      "body": "In the color books the word nearly always flags a hue that was altered by something, such as age, a mixture or dirt. Pastoureau notes that before the mid-fourteenth century most black cloth was not really black but looked grayish, bluish or sometimes brownish [4]. Ball describes a Venetian painting whose radiant azurite sky had become a muddy brownish-mauve before its cleaning in 1967-8 [5]. The dark foliage and brownish landscape of Pollaiuolo's *Apollo and Daphne* are the discolored remains of green copper resinate, not the painter's intention [5]. And Gage notes that the brownish spots on the pale grass in a Seurat canvas come from the darkening of zinc yellow [6].\n\nIt can also be praise. In 1557 Dolce admired the brownish softness of flesh tints that he credited to Apelles [6]. Gurney, describing early paints, calls the dug-out iron oxides, the earths from which Siena took its name, brownish reds and oranges [7]. A fashion color once had a related name: *caca-dauphin*, a brownish yellow, was all the rage in the last weeks of 1751 after the birth of Louis XV's first grandson [4]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "In our archive of 23,781 paintings, 971 carry a color within six CIEDE2000 units of this swatch over at least five per cent of the canvas, which is 4.1 per cent [8]. These are photographs of aged, varnished paintings, so many of these are the browning the books describe, not the painter's first color [8].\n\nIt peaks in the 1100s to 1500s, with a rate 2 to 3 times the archive's, and then drops in the 1600s [8]. Indian works carry it 5.2 times as often as the archive (154 of 721), and Pontormo has it in 5 of 13 works [8]. The painting with the most of it is Thomas Eakins' *The Chaperone*, at 65 per cent of the canvas, and the oldest is a funerary papyrus [8]. In printed English the adjective peaks in the 1920s [9]."
+    }
   ],
-  "disambiguation": [],
-  "other_languages": [
-   {
-    "lang": "ja",
-    "name": "Kurumizome (walnut-dyed), the nearest traditional name in our library"
-   }
-  ]
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#9C6D57",
-   "de2000": 6,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "the English suffix -ish added to brown",
+      "first_recorded": "Ridgway's Color Standards, 1912 (the swatch)",
+      "source": "ColorHub library; Paterson, A Dictionary of Colour"
+    },
+    "aka": [],
+    "siblings": [
+      "brownish-red",
+      "brownish-orange",
+      "brownish-grey"
+    ],
+    "parent": "brown",
+    "children": [
+      "mushroom-brown",
+      "brownish-olive",
+      "old-rose"
+    ],
+    "disambiguation": [],
+    "other_languages": [
+      {
+        "lang": "ja",
+        "name": "Kurumizome (walnut-dyed), the nearest traditional name in our library"
+      }
+    ]
   },
-  "n_present": 971,
-  "top_paintings": [
-   "nga-72165",
-   "nga-41630",
-   "commons-Q797902"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#9C6D57",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 971,
+    "top_paintings": [
+      "nga-72165",
+      "nga-41630",
+      "commons-Q797902"
+    ],
+    "painters": [
+      "Pontormo",
+      "Amedeo Modigliani",
+      "Andrea del Sarto"
+    ],
+    "ngram": {
+      "adj_peak": 1920
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, \"brownish\"",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "Baty, Nature's Palette, p. 32 (Werner's nomenclature lists)",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub color library: Brownish (Ridgway 1912 plate XXVIII, ISCC-NBS 1955 block 42, de 6.4)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Pastoureau, Black, pp. 47 and 82",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, plates in ch. 11 (restoration and discoloration)",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Gage, Colour and Culture, pp. 38 and 224",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Gurney, Color and Light, p. 92",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, CIEDE2000 6, at least 5% of canvas)",
+      "loc_kind": "entry",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "data",
+      "cite": "Google Books Ngram, adjective use of \"brownish\", 5-year smoothed",
+      "loc_kind": "entry",
+      "url": null
+    }
   ],
-  "painters": [
-   "Pontormo",
-   "Amedeo Modigliani",
-   "Andrea del Sarto"
+  "questions": [
+    {
+      "q": "In the color books, what does the word brownish usually flag?",
+      "choices": [
+        "A hue that has been altered, by age, mixing or dirt",
+        "A color made from walnut shells",
+        "A color that was invented in 1912",
+        "A kind of ochre"
+      ],
+      "answer": "A hue that has been altered, by age, mixing or dirt",
+      "kind": "pick"
+    },
+    {
+      "q": "Why do the dark foliage and landscape in Pollaiuolo's Apollo and Daphne look brownish?",
+      "choices": [
+        "The green copper resinate discolored",
+        "The painter used only brown",
+        "The varnish was too thin",
+        "They were painted in watercolor"
+      ],
+      "answer": "The green copper resinate discolored",
+      "kind": "pick"
+    }
   ],
-  "ngram": {
-   "adj_peak": 1920
+  "openers": [
+    "A brownish sky in an old painting is often a blue that has aged, not the painter's first choice.",
+    "Brownish was a standard word in nineteenth-century color lists for describing rocks and birds."
+  ],
+  "words": 469,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Short article by design: the books treat brownish as a descriptive word; no name history beyond Ridgway 1912 and Werner/Syme.",
+      "Baty p.32 shows Werner's lists; mineralogist flint example is from the same page (Lenz).",
+      "Ball plate captions cited by chapter 11; the cleaned Venetian picture is not named in our excerpt.",
+      "Caca-dauphin: Pastoureau gives late 1751 and the birth of Louis XV's first grandson."
+    ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, \"brownish\"",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "Baty, Nature's Palette, p. 32 (Werner's nomenclature lists)",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub color library: Brownish (Ridgway 1912 plate XXVIII, ISCC-NBS 1955 block 42, de 6.4)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Pastoureau, Black, pp. 47 and 82",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, plates in ch. 11 (restoration and discoloration)",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Gage, Colour and Culture, pp. 38 and 224",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Gurney, Color and Light, p. 92",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 paintings, as photographed (tools/article_field.py, CIEDE2000 6, at least 5% of canvas)",
-   "loc_kind": "entry",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "data",
-   "cite": "Google Books Ngram, adjective use of \"brownish\", 5-year smoothed",
-   "loc_kind": "entry",
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "In the color books, what does the word brownish usually flag?",
-   "choices": [
-    "A hue that has been altered, by age, mixing or dirt",
-    "A color made from walnut shells",
-    "A color that was invented in 1912",
-    "A kind of ochre"
-   ],
-   "answer": "A hue that has been altered, by age, mixing or dirt",
-   "kind": "pick"
-  },
-  {
-   "q": "Why do the dark foliage and landscape in Pollaiuolo's Apollo and Daphne look brownish?",
-   "choices": [
-    "The green copper resinate discolored",
-    "The painter used only brown",
-    "The varnish was too thin",
-    "They were painted in watercolor"
-   ],
-   "answer": "The green copper resinate discolored",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "A brownish sky in an old painting is often a blue that has aged, not the painter's first choice.",
-  "Brownish was a standard word in nineteenth-century color lists for describing rocks and birds."
- ],
- "words": 469,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Short article by design: the books treat brownish as a descriptive word; no name history beyond Ridgway 1912 and Werner/Syme.",
-   "Baty p.32 shows Werner's lists; mineralogist flint example is from the same page (Lenz).",
-   "Ball plate captions cited by chapter 11; the cleaned Venetian picture is not named in our excerpt.",
-   "Caca-dauphin: Pastoureau gives late 1751 and the birth of Louis XV's first grandson."
-  ]
- }
 }

@@ -1,112 +1,111 @@
 {
- "slug": "japan-rose",
- "name": "Japan Rose",
- "hex": "#CF9D88",
- "names": [
-  "Japan Rose"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Japan Rose is a moderate, yellowish pink built from the word rose, over-represented in Indian paintings despite its name.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A rose, not a place",
-   "body": "The library records Japan Rose from Maerz and Paul's 1930 dictionary, plate 3 A 10, first recorded 1912 [1]. The nearest named colors on file are [[pinkish-tan]], [[fawn]], [[fawn]] and [[light-russet-vinaceous]], at 2.8, 3.5, \nIn LCH terms it measures lightness 69, chroma 24, hue 49 degrees, the ISCC-NBS \"moderate yellowish pink\" block, Munsell 1.7YR 6.8/4.5, between [[pink]] and [[orange]] [1]. 8, 3.5, 3.5 and 3.6 ΔE [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 419 of 23,781 paintings, 1.76 percent, as photographed; the within-painting lens finds it in 210 [2]. That makes it more common than 72 percent of the named colors we track [2]. It peaks in the 1900s, in 25 of 1,674 paintings, at 1.5 percent of that century's paintings, 1.6 times the expected rate, and it is over-represented in Indian paintings, 2.5 times expected, 41 of 721 [2]. Inside a painting it most often sits as a light, in 40 percent of its appearances [2].\n\nChristen Købke is its most devoted painter, carrying it in 5 of his 50 works here, 5.9 times the baseline [2]. The earliest match is dated 1230, by Berlinghiero; that is 700 years before the name's own first record, in 1930, a floor and not a first, since the archive's early centuries are thin [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "pairs the word Japan with rose; beyond the word rose, the name is undocumented here",
-   "first_recorded": "1912 (Maerz & Paul, plate 3 A 10)",
-   "source": "Maerz & Paul, A Dictionary of Color (1930)"
-  },
-  "aka": [],
-  "siblings": [
-   "pinkish-tan",
-   "fawn",
-   "vinaceous-fawn",
-   "light-russet-vinaceous"
+  "slug": "japan-rose",
+  "name": "Japan Rose",
+  "hex": "#CF9D88",
+  "names": [
+    "Japan Rose"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 419,
-  "measured": {
-   "lch": [
-    69,
-    24,
-    49
-   ],
-   "nearest": [
-    [
-     "Pinkish Tan",
-     2.8
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Japan Rose is a moderate, yellowish pink built from the word rose, over-represented in Indian paintings despite its name.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A rose, not a place",
+      "body": "The library records Japan Rose from Maerz and Paul's 1930 dictionary, plate 3 A 10, first recorded 1912 [1]. The nearest named colors on file are [[pinkish-tan]], [[fawn]], [[fawn]] and [[light-russet-vinaceous]], at 2.8, 3.5, \nIn LCH terms it measures lightness 69, chroma 24, hue 49 degrees, the ISCC-NBS \"moderate yellowish pink\" block, Munsell 1.7YR 6.8/4.5, between [[pink]] and [[orange]] [1]. 8, 3.5, 3.5 and 3.6 ΔE [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 419 of 23,781 paintings, 1.76 percent, as photographed; the within-painting lens finds it in 210 [2]. That makes it more common than 72 percent of the named colors we track [2]. It peaks in the 1900s, in 25 of 1,674 paintings, at 1.5 percent of that century's paintings, 1.6 times the expected rate, and it is over-represented in Indian paintings, 2.5 times expected, 41 of 721 [2]. Inside a painting it most often sits as a light, in 40 percent of its appearances [2].\n\nChristen Købke is its most devoted painter, carrying it in 5 of his 50 works here, 5.9 times the baseline [2]. The earliest match is dated 1230, by Berlinghiero; that is 700 years before the name's own first record, in 1930, a floor and not a first, since the archive's early centuries are thin [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "pairs the word Japan with rose; beyond the word rose, the name is undocumented here",
+      "first_recorded": "1912 (Maerz & Paul, plate 3 A 10)",
+      "source": "Maerz & Paul, A Dictionary of Color (1930)"
+    },
+    "aka": [],
+    "siblings": [
+      "pinkish-tan",
+      "fawn",
+      "light-russet-vinaceous"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 419,
+    "measured": {
+      "lch": [
+        69,
+        24,
+        49
+      ],
+      "nearest": [
+        [
+          "Pinkish Tan",
+          2.8
+        ]
+      ]
+    },
+    "role": {
+      "light": 40
+    },
+    "country": "India, 2.5x expected (41 of 721)"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Maerz & Paul 1930, plate 3 A 10, first recorded 1912; nearest library match Camel, ΔE 10.8",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which country's paintings are Japan Rose most over-represented in, in our archive?",
+      "choices": [
+        "India",
+        "Japan",
+        "France",
+        "China"
+      ],
+      "answer": "India",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our library explains what \"Japan\" refers to in the name Japan Rose.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Despite its name, Japan Rose is most over-represented in Indian paintings in our archive."
+  ],
+  "words": 241,
+  "status": "checked",
+  "checked": {
+    "by": "writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  },
-  "role": {
-   "light": 40
-  },
-  "country": "India, 2.5x expected (41 of 721)"
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Maerz & Paul 1930, plate 3 A 10, first recorded 1912; nearest library match Camel, ΔE 10.8",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
   }
- ],
- "questions": [
-  {
-   "q": "Which country's paintings are Japan Rose most over-represented in, in our archive?",
-   "choices": [
-    "India",
-    "Japan",
-    "France",
-    "China"
-   ],
-   "answer": "India",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our library explains what \"Japan\" refers to in the name Japan Rose.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Despite its name, Japan Rose is most over-represented in Indian paintings in our archive."
- ],
- "words": 241,
- "status": "checked",
- "checked": {
-  "by": "writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

@@ -14,7 +14,7 @@
   {
    "id": "two-indigos",
    "title": "Two indigos",
-   "body": "The swatch at the top of this page is the indigo of color charts and the rainbow, a strong violet-blue [16]. The dye called indigo is something else: a dark, slightly grey blue, closer to [[indigo-dye]] or the Japanese [[ai-iro]], about fifteen units away [16]. The split goes back to Isaac Newton, who first named five spectral colors, then added orange and indigo to make seven, probably to match the seven notes of the musical scale [8][9]. Indigo was then mainly a dyer's word, and what Newton called blue and indigo we would now call something like cyan and blue [10]. Many modern lists of the spectrum drop indigo altogether [11].\n\nThis page follows the dye, because that is where nearly all of indigo's history lives."
+   "body": "The swatch at the top of this page is the indigo of color charts and the rainbow, a strong violet-blue [16]. The dye called indigo is something else: a dark, slightly grey blue, closer to [[indigo-dye]] or the Japanese [[indigo]], about fifteen units away [16]. The split goes back to Isaac Newton, who first named five spectral colors, then added orange and indigo to make seven, probably to match the seven notes of the musical scale [8][9]. Indigo was then mainly a dyer's word, and what Newton called blue and indigo we would now call something like cyan and blue [10]. Many modern lists of the spectrum drop indigo altogether [11].\n\nThis page follows the dye, because that is where nearly all of indigo's history lives."
   },
   {
    "id": "name",
@@ -34,7 +34,7 @@
   {
    "id": "japan",
    "title": "In Japan: ai-iro",
-   "body": "In Japan indigo is *ai*, and the plant is not *Indigofera* but *Polygonum tinctorium*, which reached Japan from China sometime after the fifth century [20][21]. Its leaves are not fermented fresh but composted for about three months into *sukumo*, a dark mass with about five per cent indigo against woad's less than one [22]. Farmers liken the work to nursing a baby: the straw mats are its bedcovers, and rice wine is offered to the indigo god Aizen Shin each time the steaming heap is turned [22]. The Awa domain, now Tokushima on Shikoku, grew rich on it in the Edo period, and indigo still covered close to 40,000 acres there in 1903; today government support keeps about 50 acres in cultivation [22].\n\nFrom the eighteenth century indigo-dyed cotton was standard country clothing, and nearly all the country people in Hiroshige's and Hokusai's prints wear it [23]. The spoken word *ai* means both indigo and love [24]. Dyers call the froth on a healthy vat its flowers [24], and Japanese aesthetics prize indigo that has faded with age [25].\n\nJapanese dyers name their blues by depth, that is, by how many times the cloth went into the vat [19][21]. A single dip gives *mizu-iro*, water color; ten to twenty dips give the near-black *kon* and *kachi-iro* [21]. Our library holds several of these: [[aijiro]] (indigo white), [[kamenozoki]] (literally peering into the jar), [[mizu-iro]], [[hanada]], [[ai-iro]], [[kon]] and [[kachi-iro]], plus greyed mixtures such as [[ainezumi]], mouse-grey indigo [16]. The later Japanese blue, Prussian blue, is told on its own page; see [[prussian-blue]]."
+   "body": "In Japan indigo is *ai*, and the plant is not *Indigofera* but *Polygonum tinctorium*, which reached Japan from China sometime after the fifth century [20][21]. Its leaves are not fermented fresh but composted for about three months into *sukumo*, a dark mass with about five per cent indigo against woad's less than one [22]. Farmers liken the work to nursing a baby: the straw mats are its bedcovers, and rice wine is offered to the indigo god Aizen Shin each time the steaming heap is turned [22]. The Awa domain, now Tokushima on Shikoku, grew rich on it in the Edo period, and indigo still covered close to 40,000 acres there in 1903; today government support keeps about 50 acres in cultivation [22].\n\nFrom the eighteenth century indigo-dyed cotton was standard country clothing, and nearly all the country people in Hiroshige's and Hokusai's prints wear it [23]. The spoken word *ai* means both indigo and love [24]. Dyers call the froth on a healthy vat its flowers [24], and Japanese aesthetics prize indigo that has faded with age [25].\n\nJapanese dyers name their blues by depth, that is, by how many times the cloth went into the vat [19][21]. A single dip gives *mizu-iro*, water color; ten to twenty dips give the near-black *kon* and *kachi-iro* [21]. Our library holds several of these: [[aijiro]] (indigo white), [[kamenozoki]] (literally peering into the jar), [[mizu-iro]], [[hanada]], [[indigo]], [[kon]] and [[kachi-iro]], plus greyed mixtures such as [[ainezumi]], mouse-grey indigo [16]. The later Japanese blue, Prussian blue, is told on its own page; see [[prussian-blue]]."
   },
   {
    "id": "field",
@@ -55,13 +55,13 @@
   ],
   "siblings": [
    "indigo-dye",
-   "ai-iro",
+   "indigo",
    "indigo-blue"
   ],
   "parent": null,
   "children": [
-   "dark-indigo",
-   "light-indigo",
+   "paua",
+   "dark-periwinkle",
    "persian-indigo"
   ],
   "disambiguation": [
@@ -350,7 +350,7 @@
   "In Japanese, ai means both indigo and love.",
   "Look at a pair of worn jeans: the white thread showing through is indigo's whole chemistry."
  ],
- "words": 992,
+ "words": 990,
  "status": "pilot",
  "checked": {
   "by": "L7 self-check (sentence-to-card trace, myth list, hedges)",

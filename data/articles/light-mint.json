@@ -1,127 +1,126 @@
 {
- "slug": "light-mint",
- "name": "Light Mint",
- "hex": "#B6FFBB",
- "names": [
-  "Light Mint"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Light Mint is a very pale yellowish green recorded only in the 2010 xkcd color survey, close enough to two other surveyed names to call them near-duplicates.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A light build of mint",
-   "body": "The nearest named colors on file are [[seafoam]], [[celery]], [[very-light-green]] and [[very-light-green]], at 3.4, 3.7, 4.2 and 4.5 ΔE [1]. The ISCC-NBS system classes it as very light yellowish green, about 4 units from the nearest ISCC-NBS block center [1]. Its Munsell notation is 0.9G 9.4/9.0 and its LCH values are lightness 94, chroma 44, hue 144 degrees, among the lightest greens in our library [1]. In sRGB its components run 182 red, 255 green and 187 blue, so the green channel runs at its full strength while red and blue sit close together [1].\n\nTwo other xkcd names sit within about 2 units of this swatch: Light Mint Green and Light Seafoam Green [2]. That near-duplication is normal for crowd-surveyed modifier names: different respondents described the same pale green with slightly different words. See [[seafoam]] for the related sea-foam family."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Light Mint covering even 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the base color mint, lightened",
-   "first_recorded": "xkcd survey, 2010",
-   "source": "ColorHub Color Graph"
-  },
-  "aka": [
-   "Light Mint Green",
-   "Light Seafoam Green"
+  "slug": "light-mint",
+  "name": "Light Mint",
+  "hex": "#B6FFBB",
+  "names": [
+    "Light Mint"
   ],
-  "siblings": [
-   "light-seafoam",
-   "light-pastel-green",
-   "light-light-green",
-   "very-light-green"
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Light Mint is a very pale yellowish green recorded only in the 2010 xkcd color survey, close enough to two other surveyed names to call them near-duplicates.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A light build of mint",
+      "body": "The nearest named colors on file are [[seafoam]], [[celery]], [[very-light-green]] and [[very-light-green]], at 3.4, 3.7, 4.2 and 4.5 ΔE [1]. The ISCC-NBS system classes it as very light yellowish green, about 4 units from the nearest ISCC-NBS block center [1]. Its Munsell notation is 0.9G 9.4/9.0 and its LCH values are lightness 94, chroma 44, hue 144 degrees, among the lightest greens in our library [1]. In sRGB its components run 182 red, 255 green and 187 blue, so the green channel runs at its full strength while red and blue sit close together [1].\n\nTwo other xkcd names sit within about 2 units of this swatch: Light Mint Green and Light Seafoam Green [2]. That near-duplication is normal for crowd-surveyed modifier names: different respondents described the same pale green with slightly different words. See [[seafoam]] for the related sea-foam family."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive has a color within CIEDE2000 4 of Light Mint covering even 1% of its canvas, as photographed [3]. That describes this archive, not painting as a whole [3]."
+    }
   ],
-  "parent": "mint",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "match": {
-   "hex": "#B6FFBB",
-   "de_max": 4,
-   "min_cover": 0.01
-  },
-  "nearest": [
-   [
-    "Mint",
-    7.5
-   ]
-  ],
-  "measured": {
-   "nearest": [
-    [
-     "Light Seafoam",
-     3.4
+  "aside": {
+    "origin": {
+      "named_after": "the base color mint, lightened",
+      "first_recorded": "xkcd survey, 2010",
+      "source": "ColorHub Color Graph"
+    },
+    "aka": [
+      "Light Mint Green",
+      "Light Seafoam Green"
     ],
-    [
-     "Light Pastel Green",
-     3.7
+    "siblings": [
+      "seafoam",
+      "celery",
+      "very-light-green"
+    ],
+    "parent": "mint",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "match": {
+      "hex": "#B6FFBB",
+      "de_max": 4,
+      "min_cover": 0.01
+    },
+    "nearest": [
+      [
+        "Mint",
+        7.5
+      ]
+    ],
+    "measured": {
+      "nearest": [
+        [
+          "Light Seafoam",
+          3.4
+        ],
+        [
+          "Light Pastel Green",
+          3.7
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): nearest named match",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Which single survey first records the name Light Mint in our sources?",
+      "choices": [
+        "The xkcd color survey (2010)",
+        "ISCC-NBS (1955)",
+        "Maerz & Paul (1930)"
+      ],
+      "answer": "The xkcd color survey (2010)",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Light Mint has no near-duplicate names in our library.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Light Mint and Light Seafoam Green are near-duplicates in the xkcd survey, within about two units of each other."
+  ],
+  "words": 208,
+  "status": "checked",
+  "checked": {
+    "by": "batch writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub Color Graph: node record (hex, LCH, Munsell, ISCC-NBS block, recorded sources)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): nearest named match",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive field notes (data/graph/fieldnotes), 23,781 paintings, CIEDE2000 <= 4, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Which single survey first records the name Light Mint in our sources?",
-   "choices": [
-    "The xkcd color survey (2010)",
-    "ISCC-NBS (1955)",
-    "Maerz & Paul (1930)"
-   ],
-   "answer": "The xkcd color survey (2010)",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Light Mint has no near-duplicate names in our library.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Light Mint and Light Seafoam Green are near-duplicates in the xkcd survey, within about two units of each other."
- ],
- "words": 208,
- "status": "checked",
- "checked": {
-  "by": "batch writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- }
 }

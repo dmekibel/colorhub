@@ -1,132 +1,131 @@
 {
- "slug": "pale-olivine",
- "name": "Pale Olivine",
- "hex": "#D1D9BC",
- "names": [
-  "Pale Olivine"
- ],
- "tier": "pigment",
- "depth": "short",
- "lede": "Pale Olivine is a soft, pale yellow-green named for olivine, the gem-grade mineral better known in its greener, deeper form as peridot.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A lighter cut of the mineral",
-   "body": "Ridgway's 1912 color book places this value on plate XXXII, hue 35″, tone f [1]. The ISCC-NBS dictionary of 1955 groups a cluster of related names under block 121, including Chartreuse Tint, Oyster Grey and Succory, a sign the 1912 plates drew several close pale yellow-greens into one dictionary block [1]. [[gem:peridot|Peridot]], the gem cut from olivine, usually runs darker and more saturated than this pale swatch [1].\n\nThe nearest named colors on file are [[oural-green]] and [[pale-sage]], at Compare [[sage|Sage]], [[ash|Ash]] and [[moss|Moss]], the names our archive finds sharing its canvases most [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive of 23,781 paintings finds a color within six units of this one in 361, about 1.5 percent, as photographed [2]. It is unusually common in British painting, 39 of 593 United Kingdom works, over four times the archive's rate, and Joseph Mallord William Turner carries it in 3 of his 14 dated works [2]. The earliest match is Piero della Francesca's 1470 diptych of Federico da Montefeltro and Battista Sforza, a floor and not a first, since the archive's early centuries are thin [2]. The match is a screen-color comparison on aged, varnished paintings, not a mineral test [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "olivine, a gem-grade mineral",
-   "first_recorded": "1912 (Ridgway)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "oural-green",
-   "pale-sage",
-   "pale-glaucous-green",
-   "pale-green-grey"
+  "slug": "pale-olivine",
+  "name": "Pale Olivine",
+  "hex": "#D1D9BC",
+  "names": [
+    "Pale Olivine"
   ],
-  "parent": null,
-  "children": [
-   "ash",
-   "moss"
+  "tier": "pigment",
+  "depth": "short",
+  "lede": "Pale Olivine is a soft, pale yellow-green named for olivine, the gem-grade mineral better known in its greener, deeper form as peridot.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A lighter cut of the mineral",
+      "body": "Ridgway's 1912 color book places this value on plate XXXII, hue 35″, tone f [1]. The ISCC-NBS dictionary of 1955 groups a cluster of related names under block 121, including Chartreuse Tint, Oyster Grey and Succory, a sign the 1912 plates drew several close pale yellow-greens into one dictionary block [1]. [[gem:peridot|Peridot]], the gem cut from olivine, usually runs darker and more saturated than this pale swatch [1].\n\nThe nearest named colors on file are [[oural-green]] and [[pale-sage]], at Compare [[sage|Sage]], [[ash|Ash]] and [[moss|Moss]], the names our archive finds sharing its canvases most [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive of 23,781 paintings finds a color within six units of this one in 361, about 1.5 percent, as photographed [2]. It is unusually common in British painting, 39 of 593 United Kingdom works, over four times the archive's rate, and Joseph Mallord William Turner carries it in 3 of his 14 dated works [2]. The earliest match is Piero della Francesca's 1470 diptych of Federico da Montefeltro and Battista Sforza, a floor and not a first, since the archive's early centuries are thin [2]. The match is a screen-color comparison on aged, varnished paintings, not a mineral test [2]."
+    }
   ],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 361,
-  "match": {
-   "hex": "#D1D9BC",
-   "de2000": 6,
-   "min_cover": 0.05
+  "aside": {
+    "origin": {
+      "named_after": "olivine, a gem-grade mineral",
+      "first_recorded": "1912 (Ridgway)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "oural-green",
+      "pale-sage",
+      "pale-green-grey"
+    ],
+    "parent": null,
+    "children": [
+      "ash",
+      "moss"
+    ],
+    "disambiguation": [],
+    "other_languages": []
   },
-  "measured": {
-   "lch": [
-    85,
-    15,
-    120
-   ],
-   "nearest": [
-    [
-     "Oural Green",
-     3.8
-    ],
-    [
-     "Pale sage",
-     4.4
-    ],
-    [
-     "Pale Glaucous-Green",
-     4.4
-    ],
-    [
-     "Pale green grey",
-     4.4
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 361,
+    "match": {
+      "hex": "#D1D9BC",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "measured": {
+      "lch": [
+        85,
+        15,
+        120
+      ],
+      "nearest": [
+        [
+          "Oural Green",
+          3.8
+        ],
+        [
+          "Pale sage",
+          4.4
+        ],
+        [
+          "Pale Glaucous-Green",
+          4.4
+        ],
+        [
+          "Pale green grey",
+          4.4
+        ]
+      ]
+    },
+    "surprises": [
+      "United Kingdom: 39 of 593 works carry it, 4.33x the archive rate"
     ]
-   ]
   },
-  "surprises": [
-   "United Kingdom: 39 of 593 works carry it, 4.33x the archive rate"
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Ridgway 1912, ISCC-NBS 1955",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What gem is cut from olivine?",
+      "choices": [
+        "Peridot",
+        "Citrine",
+        "Amazonite",
+        "Opal"
+      ],
+      "answer": "Peridot",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Pale Olivine turns up far more often in British paintings than in the archive overall.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "A gem mineral's name, but much paler than the peridot it's cut into."
+  ],
+  "words": 213,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "No concordance hits in color-kb for this slug; written from library and archive data only.",
+      "lint 2026-10-09"
+    ]
   }
- ],
- "questions": [
-  {
-   "q": "What gem is cut from olivine?",
-   "choices": [
-    "Peridot",
-    "Citrine",
-    "Amazonite",
-    "Opal"
-   ],
-   "answer": "Peridot",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Pale Olivine turns up far more often in British paintings than in the archive overall.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "A gem mineral's name, but much paler than the peridot it's cut into."
- ],
- "words": 213,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "No concordance hits in color-kb for this slug; written from library and archive data only.",
-   "lint 2026-10-09"
-  ]
- }
 }

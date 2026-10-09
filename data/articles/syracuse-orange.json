@@ -1,136 +1,136 @@
 {
- "slug": "syracuse-orange",
- "name": "Syracuse Orange",
- "hex": "#D44500",
- "names": [
-  "Syracuse Orange"
- ],
- "tier": "place",
- "depth": "brief",
- "lede": "Syracuse Orange is the burnt, reddish orange of Syracuse University's teams, a school color rather than a pigment or dye name.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A university's orange",
-   "body": "Our library traces the name only to a Wikipedia color list, which credits Syracuse University but gives no date for when the school adopted this exact shade [1]. The name itself is a school's branding word, not a material, place of origin or person [1].\n\nIts nearest named neighbor is [[sinopia]], 2.7 units of CIEDE2000 away and described as almost the same [2]. [[sinopia]] sits a little farther out at 3.8, duller, [[burnt-orange]] at 4.7, also duller, and [[mars-orange]] at 4.9, also duller [2]. Measured in LCH it reads lightness 50, chroma 81, a saturated orange leaning toward red [1]."
+  "slug": "syracuse-orange",
+  "name": "Syracuse Orange",
+  "hex": "#D44500",
+  "names": [
+    "Syracuse Orange"
+  ],
+  "tier": "place",
+  "depth": "brief",
+  "lede": "Syracuse Orange is the burnt, reddish orange of Syracuse University's teams, a school color rather than a pigment or dye name.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A university's orange",
+      "body": "Our library traces the name only to a Wikipedia color list, which credits Syracuse University but gives no date for when the school adopted this exact shade [1]. The name itself is a school's branding word, not a material, place of origin or person [1].\n\nIts nearest named neighbor is [[sinopia]], 2.7 units of CIEDE2000 away and described as almost the same [2]. [[sinopia]] sits a little farther out at 3.8, duller, [[burnt-orange]] at 4.7, also duller, and [[mars-orange]] at 4.9, also duller [2]. Measured in LCH it reads lightness 50, chroma 81, a saturated orange leaning toward red [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds this color in 49 of 23,781 paintings (0.21 percent), more common than 51 percent of the named colors, as photographed [3]. It peaks in the 1400s, in 7 of 945 paintings from that century, 1.7 times the expected rate [3]. Inside a painting it plays an accent in all of the matched works, a role measured by lightness rank within the canvas [3]. The earliest dated match is 1400, by the Master of Rubielos de Mora, though the archive's early centuries are thin, so this is a floor and not a first [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "Syracuse University's school color",
+      "first_recorded": "undocumented in the sources consulted",
+      "source": "ColorHub library (a Wikipedia list)"
+    },
+    "aka": [],
+    "siblings": [
+      "sinopia",
+      "burnt-orange",
+      "mars-orange",
+      "tomato-red"
+    ],
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds this color in 49 of 23,781 paintings (0.21 percent), more common than 51 percent of the named colors, as photographed [3]. It peaks in the 1400s, in 7 of 945 paintings from that century, 1.7 times the expected rate [3]. Inside a painting it plays an accent in all of the matched works, a role measured by lightness rank within the canvas [3]. The earliest dated match is 1400, by the Master of Rubielos de Mora, though the archive's early centuries are thin, so this is a floor and not a first [3]. These are photographs of varnished paintings, so a color match is not a pigment test [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "Syracuse University's school color",
-   "first_recorded": "undocumented in the sources consulted",
-   "source": "ColorHub library (a Wikipedia list)"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
+    "n_present": 49,
+    "rank_pct": 51,
+    "peak_century": [
+      1400,
+      1.7
+    ],
+    "role_top": [
+      "accent",
+      100
+    ],
+    "measured": {
+      "lch": [
+        50,
+        81,
+        48
+      ],
+      "nearest": [
+        [
+          "Sinopia",
+          2.7
+        ],
+        [
+          "Brick Orange",
+          3.8
+        ],
+        [
+          "Burnt Orange",
+          4.7
+        ],
+        [
+          "Mars Orange",
+          4.9
+        ]
+      ]
+    }
   },
-  "aka": [],
-  "siblings": [
-   "sinopia",
-   "brick-orange",
-   "burnt-orange",
-   "mars-orange"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library (data/library.json): name source and place tier",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
+      "loc_kind": null,
+      "url": null
+    }
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 museum paintings, as photographed",
-  "n_present": 49,
-  "rank_pct": 51,
-  "peak_century": [
-   1400,
-   1.7
+  "questions": [
+    {
+      "q": "What does the name Syracuse Orange refer to?",
+      "choices": [
+        "A university's school color",
+        "A dye made in the Sicilian city of Syracuse",
+        "A mineral pigment",
+        "A paint manufacturer's trademark"
+      ],
+      "answer": "A university's school color",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: our sources give a precise date for when Syracuse adopted this shade.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
   ],
-  "role_top": [
-   "accent",
-   100
+  "openers": [
+    "Syracuse Orange's nearest neighbor on the color charts is Sinopia, an old earth-pigment name, though the two have no documented connection."
   ],
-  "measured": {
-   "lch": [
-    50,
-    81,
-    48
-   ],
-   "nearest": [
-    [
-     "Sinopia",
-     2.7
-    ],
-    [
-     "Brick Orange",
-     3.8
-    ],
-    [
-     "Burnt Orange",
-     4.7
-    ],
-    [
-     "Mars Orange",
-     4.9
+  "words": 232,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "rank-percentile drift: article said 53%, current data/graph/fieldnotes says 51% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
     ]
-   ]
   }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library (data/library.json): name source and place tier",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph (data/graph/edges): CIEDE2000 look-alike distances",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive, 23,781 museum paintings as photographed (data/graph/fieldnotes)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the name Syracuse Orange refer to?",
-   "choices": [
-    "A university's school color",
-    "A dye made in the Sicilian city of Syracuse",
-    "A mineral pigment",
-    "A paint manufacturer's trademark"
-   ],
-   "answer": "A university's school color",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: our sources give a precise date for when Syracuse adopted this shade.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Syracuse Orange's nearest neighbor on the color charts is Sinopia, an old earth-pigment name, though the two have no documented connection."
- ],
- "words": 232,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "rank-percentile drift: article said 53%, current data/graph/fieldnotes says 51% (the archive/library grew since this article was written); corrected the number in both the field dict and body text."
-  ]
- }
 }

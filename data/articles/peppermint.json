@@ -1,104 +1,104 @@
 {
- "slug": "peppermint",
- "name": "Peppermint",
- "hex": "#43AA5A",
- "names": [
-  "Peppermint"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Peppermint is a fresh mid green, named for the herb and the candy flavor more than for any pigment.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A name taken from the herb",
-   "body": "Peppermint is a green named from the mint plant and its sweets [3]. It is listed in the Maerz and Paul dictionary of color of 1930 [3].\n\nThe one book passage we hold mentions peppermints only as candy. St Clair tells how a Bradford sweet-maker in 1858 mixed up white arsenic and powdered sugar, and the peppermints that resulted poisoned many people [1]. It is a story about sweets and not about the color, and it says nothing about how the green got its name [1]. We stop there rather than pad [3].\n\nThe swatch on this page is #43AA5A, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Peppermint is very rare in our archive: 1 of 23,781 paintings, as photographed [2]. It is rarer than 86 percent of the named colors [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the peppermint herb and candy",
-   "first_recorded": "Maerz and Paul 1930",
-   "source": "ColorHub library"
-  },
-  "aka": [],
-  "siblings": [
-   "mint",
-   "mint-green",
-   "green",
-   "white"
+  "slug": "peppermint",
+  "name": "Peppermint",
+  "hex": "#43AA5A",
+  "names": [
+    "Peppermint"
   ],
-  "parent": "green",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 1,
-  "pct_of_paintings": 0.004,
-  "library_sources": [
-   "Maerz & Paul 1930"
-  ]
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Color, ch. on Scheele's green",
-   "loc_kind": "book-chapter",
-   "url": null
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Peppermint is a fresh mid green, named for the herb and the candy flavor more than for any pigment.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A name taken from the herb",
+      "body": "Peppermint is a green named from the mint plant and its sweets [3]. It is listed in the Maerz and Paul dictionary of color of 1930 [3].\n\nThe one book passage we hold mentions peppermints only as candy. St Clair tells how a Bradford sweet-maker in 1858 mixed up white arsenic and powdered sugar, and the peppermints that resulted poisoned many people [1]. It is a story about sweets and not about the color, and it says nothing about how the green got its name [1]. We stop there rather than pad [3].\n\nThe swatch on this page is #43AA5A, the screen value we hold for it, which is an approximation and not a measured pigment [3]. Like any pale color it sits between its hue and [[white]], and because the name is a description and not a tradition, other lists may place it a little differently [3]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Peppermint is very rare in our archive: 1 of 23,781 paintings, as photographed [2]. It is rarer than 86 percent of the named colors [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "the peppermint herb and candy",
+      "first_recorded": "Maerz and Paul 1930",
+      "source": "ColorHub library"
+    },
+    "aka": [],
+    "siblings": [
+      "mint",
+      "baby-green",
+      "green",
+      "white"
+    ],
+    "parent": "green",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
-   "loc_kind": null,
-   "url": null
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 1,
+    "pct_of_paintings": 0.004,
+    "library_sources": [
+      "Maerz & Paul 1930"
+    ]
   },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub library: Maerz & Paul 1930",
-   "loc_kind": null,
-   "url": null
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Color, ch. on Scheele's green",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive field notes (23,781 paintings, as photographed)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub library: Maerz & Paul 1930",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What did the Bradford peppermints of 1858 contain by mistake?",
+      "choices": [
+        "White arsenic",
+        "Salt",
+        "Chalk",
+        "Mint oil"
+      ],
+      "answer": "White arsenic",
+      "kind": "pick"
+    },
+    {
+      "q": "Peppermint is listed in the Maerz and Paul dictionary of 1930.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "The famous 1858 Bradford poisoning was in peppermint sweets, though the story says nothing about the color."
+  ],
+  "words": 184,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "questions": [
-  {
-   "q": "What did the Bradford peppermints of 1858 contain by mistake?",
-   "choices": [
-    "White arsenic",
-    "Salt",
-    "Chalk",
-    "Mint oil"
-   ],
-   "answer": "White arsenic",
-   "kind": "pick"
-  },
-  {
-   "q": "Peppermint is listed in the Maerz and Paul dictionary of 1930.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "The famous 1858 Bradford poisoning was in peppermint sweets, though the story says nothing about the color."
- ],
- "words": 184,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }

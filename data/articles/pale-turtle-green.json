@@ -1,129 +1,128 @@
 {
- "name": "Pale Turtle Green",
- "hex": "#D9D6AE",
- "names": [
-  "Pale Turtle Green"
- ],
- "tier": "nature",
- "depth": "short",
- "lede": "Pale Turtle Green is a dusty yellow-green named, like its darker sibling Turtle Green, for the color of a tortoise or turtle's shell rather than any plant.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A shell color, not a plant one",
-   "body": "Ridgway's 1912 color standards place this swatch on plate XXXII, hue 31, tone f [1]. The 1955 ISCC-NBS system, citing the same plate, classes it in block 119 [1]. The name groups it with the handful of Ridgway shell colors rather than with the many plant greens, which is why ColorHub's tagging keeps it under nature rather than a dye or pigment [1]. Its darker sibling, plain Turtle Green, sits closer to an actual shell's olive back; this pale version reads closer to a dry, sun-bleached straw [1].\n\nThe nearest named colors on file are [[seafoam]], [[lemon-meringue]] and [[amber-white]], at 3.4, [[khaki]] and [[cream]] sit in the same muted warm-light family [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a close match to Pale Turtle Green in 740 of 23,781 paintings (3.11 percent), as photographed, almost always as a highlight [2]. It is heavily over-represented in work by Nicolas Lancret, over ten times the archive average, and in paintings from Tibet, 3.4 times the average [2]. It keeps company with Cream and Beige far more than chance [2]. These are screen approximations of aged, varnished canvases, not pigment identifications [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "the pale shell of a tortoise or turtle",
-   "first_recorded": "Ridgway, 1912, plate XXXII",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "seafoam-green",
-   "lemon-meringue",
-   "amber-white",
-   "light-fluorite-green"
+  "name": "Pale Turtle Green",
+  "hex": "#D9D6AE",
+  "names": [
+    "Pale Turtle Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 740,
-  "role": {
-   "highlight": 0.99,
-   "mid": 0.01
-  },
-  "company": [
-   "Cream",
-   "Beige",
-   "Khaki"
+  "tier": "nature",
+  "depth": "short",
+  "lede": "Pale Turtle Green is a dusty yellow-green named, like its darker sibling Turtle Green, for the color of a tortoise or turtle's shell rather than any plant.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A shell color, not a plant one",
+      "body": "Ridgway's 1912 color standards place this swatch on plate XXXII, hue 31, tone f [1]. The 1955 ISCC-NBS system, citing the same plate, classes it in block 119 [1]. The name groups it with the handful of Ridgway shell colors rather than with the many plant greens, which is why ColorHub's tagging keeps it under nature rather than a dye or pigment [1]. Its darker sibling, plain Turtle Green, sits closer to an actual shell's olive back; this pale version reads closer to a dry, sun-bleached straw [1].\n\nThe nearest named colors on file are [[seafoam]], [[lemon-meringue]] and [[amber-white]], at 3.4, [[khaki]] and [[cream]] sit in the same muted warm-light family [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match to Pale Turtle Green in 740 of 23,781 paintings (3.11 percent), as photographed, almost always as a highlight [2]. It is heavily over-represented in work by Nicolas Lancret, over ten times the archive average, and in paintings from Tibet, 3.4 times the average [2]. It keeps company with Cream and Beige far more than chance [2]. These are screen approximations of aged, varnished canvases, not pigment identifications [2]."
+    }
   ],
-  "measured": {
-   "lch": [
-    85,
-    21,
-    105
-   ],
-   "nearest": [
-    [
-     "Seafoam Green",
-     3.4
+  "aside": {
+    "origin": {
+      "named_after": "the pale shell of a tortoise or turtle",
+      "first_recorded": "Ridgway, 1912, plate XXXII",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "lemon-meringue",
+      "amber-white",
+      "light-fluorite-green"
     ],
-    [
-     "Lemon Meringue",
-     3.4
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 740,
+    "role": {
+      "highlight": 0.99,
+      "mid": 0.01
+    },
+    "company": [
+      "Cream",
+      "Beige",
+      "Khaki"
     ],
-    [
-     "Amber White",
-     4.0
-    ],
-    [
-     "Light Fluorite Green",
-     4.6
+    "measured": {
+      "lch": [
+        85,
+        21,
+        105
+      ],
+      "nearest": [
+        [
+          "Seafoam Green",
+          3.4
+        ],
+        [
+          "Lemon Meringue",
+          3.4
+        ],
+        [
+          "Amber White",
+          4.0
+        ],
+        [
+          "Light Fluorite Green",
+          4.6
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: name records, plate and block locators, tier classification",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What is Pale Turtle Green named after?",
+      "choices": [
+        "A tortoise or turtle's shell",
+        "A green dye plant",
+        "A gemstone",
+        "A French dessert"
+      ],
+      "answer": "A tortoise or turtle's shell",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Pale Turtle Green mostly plays a shadow role in the paintings where our archive finds it.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Pale Turtle Green is named for a shell, not a plant."
+  ],
+  "words": 210,
+  "status": "draft",
+  "checked": {
+    "by": "batch-writer",
+    "date": "2026-10-08",
+    "issues": [
+      "lint 2026-10-09"
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: name records, plate and block locators, tier classification",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 museum paintings), computed color match, as photographed (tools/article_field.py)",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What is Pale Turtle Green named after?",
-   "choices": [
-    "A tortoise or turtle's shell",
-    "A green dye plant",
-    "A gemstone",
-    "A French dessert"
-   ],
-   "answer": "A tortoise or turtle's shell",
-   "kind": "pick"
-  },
-  {
-   "q": "True or false: Pale Turtle Green mostly plays a shadow role in the paintings where our archive finds it.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "Pale Turtle Green is named for a shell, not a plant."
- ],
- "words": 210,
- "status": "draft",
- "checked": {
-  "by": "batch-writer",
-  "date": "2026-10-08",
-  "issues": [
-   "lint 2026-10-09"
-  ]
- },
- "slug": "pale-turtle-green"
+  "slug": "pale-turtle-green"
 }

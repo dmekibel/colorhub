@@ -1,189 +1,189 @@
 {
- "slug": "greyish-green",
- "name": "Greyish Green",
- "hex": "#82A67D",
- "names": [
-  "Greyish Green"
- ],
- "tier": "descriptive",
- "depth": "short",
- "lede": "Greyish green is a descriptive phrase, not a named color: a green with the brightness taken out, which the books reach for whenever they need to say that something looks dull, aged, military or quiet.",
- "sections": [
-  {
-   "id": "name",
-   "title": "A description, not a name",
-   "body": "No book in the color library treats greyish green as a color with a history of its own; it turns up as a description attached to other things. Paterson's dictionary uses it as a plain gloss for several names, among them almond green, the mignonette flower, the tea green of green tea and rifle green, which he describes as the darker greyish green of 19th-century British rifle regiments [1]. It is also how he describes the old pigment terre verte, which ranges from greyish green to bluish green and olive [1]. The related [[celadon]] is the usual color of the Chinese ceramics that carry that name, though the glazes vary from blue to grey and ochre [2]."
-  },
-  {
-   "id": "dyes",
-   "title": "The dull greens of the dye vat",
-   "body": "In the 15th and 16th centuries, the old and most widespread dyeing processes still gave dull, greyish greens, while newer and less common processes sometimes gave luminous ones; French separated the pleasing *vert gai* from the dull shades [3]. Greyish green was, in other words, what the common dyeing processes of that time tended to produce.\n\nThe same dullness is a pigment problem. Dossie warned in the 18th century that the lighter, brighter varieties of [[prussian-blue]] could turn greyish green, and Ball notes that its slightly greyish-green tone suited Picasso's Blue Period better than brighter cobalt or ultramarine [4][5]. The two green earths celadonite and glauconite, ground as pigments, both appear a pale, slightly greyish green and are very hard to tell apart [6]."
-  },
-  {
-   "id": "uniforms",
-   "title": "Uniforms and quiet rooms",
-   "body": "Pastoureau reports that, decades before 1914, neighboring armies had dropped vivid colors for ones that blended into the landscape: khaki for the British, greyish green for the Germans, Italians and Russians [7]. The French army still wore madder-red trousers [7]. Pastoureau adds that until the 1950s the green used for rooms meant for rest was usually pale, timid and greyish [8], and that in 19th-century public parks the dark or greyish green went on benches, fences and signs while fresh green was left to the plants [9].\n\nBirren records an old aura-reading claim that a greyish green signifies deceit and cunning [10]. It is old opinion with no evidence behind it, and the books offer nothing to support it."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "The swatch #82A67D falls within a color distance of 6 of about 70 paintings in our archive of 23,781, as photographed, and covers at least 5 percent of each [11]. The earliest is a Dürer portrait of 1526, and the largest cover is a Mughal court portrait on which it fills about 65 percent [11]. Photographs of varnished paintings shift greens toward yellow, so treat these as color matches, not pigment tests."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "a plain description (grey + green)",
-   "first_recorded": "origin undocumented",
-   "source": "Paterson, A Dictionary of Colour"
-  },
-  "aka": [
-   "grayish green",
-   "gray-green"
+  "slug": "greyish-green",
+  "name": "Greyish Green",
+  "hex": "#82A67D",
+  "names": [
+    "Greyish Green"
   ],
-  "siblings": [
-   "celadon",
-   "almond-green",
-   "rifle-green"
+  "tier": "descriptive",
+  "depth": "short",
+  "lede": "Greyish green is a descriptive phrase, not a named color: a green with the brightness taken out, which the books reach for whenever they need to say that something looks dull, aged, military or quiet.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "A description, not a name",
+      "body": "No book in the color library treats greyish green as a color with a history of its own; it turns up as a description attached to other things. Paterson's dictionary uses it as a plain gloss for several names, among them almond green, the mignonette flower, the tea green of green tea and rifle green, which he describes as the darker greyish green of 19th-century British rifle regiments [1]. It is also how he describes the old pigment terre verte, which ranges from greyish green to bluish green and olive [1]. The related [[celadon]] is the usual color of the Chinese ceramics that carry that name, though the glazes vary from blue to grey and ochre [2]."
+    },
+    {
+      "id": "dyes",
+      "title": "The dull greens of the dye vat",
+      "body": "In the 15th and 16th centuries, the old and most widespread dyeing processes still gave dull, greyish greens, while newer and less common processes sometimes gave luminous ones; French separated the pleasing *vert gai* from the dull shades [3]. Greyish green was, in other words, what the common dyeing processes of that time tended to produce.\n\nThe same dullness is a pigment problem. Dossie warned in the 18th century that the lighter, brighter varieties of [[prussian-blue]] could turn greyish green, and Ball notes that its slightly greyish-green tone suited Picasso's Blue Period better than brighter cobalt or ultramarine [4][5]. The two green earths celadonite and glauconite, ground as pigments, both appear a pale, slightly greyish green and are very hard to tell apart [6]."
+    },
+    {
+      "id": "uniforms",
+      "title": "Uniforms and quiet rooms",
+      "body": "Pastoureau reports that, decades before 1914, neighboring armies had dropped vivid colors for ones that blended into the landscape: khaki for the British, greyish green for the Germans, Italians and Russians [7]. The French army still wore madder-red trousers [7]. Pastoureau adds that until the 1950s the green used for rooms meant for rest was usually pale, timid and greyish [8], and that in 19th-century public parks the dark or greyish green went on benches, fences and signs while fresh green was left to the plants [9].\n\nBirren records an old aura-reading claim that a greyish green signifies deceit and cunning [10]. It is old opinion with no evidence behind it, and the books offer nothing to support it."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "The swatch #82A67D falls within a color distance of 6 of about 70 paintings in our archive of 23,781, as photographed, and covers at least 5 percent of each [11]. The earliest is a Dürer portrait of 1526, and the largest cover is a Mughal court portrait on which it fills about 65 percent [11]. Photographs of varnished paintings shift greens toward yellow, so treat these as color matches, not pigment tests."
+    }
   ],
-  "parent": "green",
-  "children": [],
-  "disambiguation": [
-   {
-    "slug": "celadon",
-    "gloss": "a named color and a ceramic glaze, usually a greyish green"
-   }
+  "aside": {
+    "origin": {
+      "named_after": "a plain description (grey + green)",
+      "first_recorded": "origin undocumented",
+      "source": "Paterson, A Dictionary of Colour"
+    },
+    "aka": [
+      "grayish green",
+      "gray-green"
+    ],
+    "siblings": [
+      "celadon",
+      "nickel-green",
+      "rifle-green"
+    ],
+    "parent": "green",
+    "children": [],
+    "disambiguation": [
+      {
+        "slug": "celadon",
+        "gloss": "a named color and a ceramic glaze, usually a greyish green"
+      }
+    ],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "match": {
+      "hex": "#82A67D",
+      "de2000": 6,
+      "min_cover": 0.05
+    },
+    "n_present": 70,
+    "top_paintings": [
+      "cma-170815",
+      "commons-Q17495516"
+    ],
+    "first": {
+      "id": "commons-Q3937568",
+      "year": 1526
+    }
+  },
+  "questions": [
+    {
+      "q": "In the decades before 1914, which armies had adopted greyish green to blend into the landscape, according to Pastoureau?",
+      "choices": [
+        "German, Italian and Russian",
+        "French and British",
+        "Only the Austro-Hungarian",
+        "None of them"
+      ],
+      "answer": "German, Italian and Russian",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: in the 15th and 16th centuries the most widespread dyeing processes still gave dull, greyish greens.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "True",
+      "kind": "true-false"
+    }
   ],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "match": {
-   "hex": "#82A67D",
-   "de2000": 6,
-   "min_cover": 0.05
-  },
-  "n_present": 70,
-  "top_paintings": [
-   "cma-170815",
-   "commons-Q17495516"
+  "openers": [
+    "While the French army still wore madder-red trousers, the German, Italian and Russian armies had gone greyish green."
   ],
-  "first": {
-   "id": "commons-Q3937568",
-   "year": 1526
-  }
- },
- "questions": [
-  {
-   "q": "In the decades before 1914, which armies had adopted greyish green to blend into the landscape, according to Pastoureau?",
-   "choices": [
-    "German, Italian and Russian",
-    "French and British",
-    "Only the Austro-Hungarian",
-    "None of them"
-   ],
-   "answer": "German, Italian and Russian",
-   "kind": "pick"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "book",
+      "cite": "Paterson, A Dictionary of Colour, pp. 25-26, 264, 343, 389, 391",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "book",
+      "cite": "St Clair, The Secret Lives of Colour, \"Celadon\"",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 28",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 4,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 19",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 5,
+      "kind": "book",
+      "cite": "Ball, Bright Earth, ch. 18",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 6,
+      "kind": "book",
+      "cite": "Eastaugh et al., The Pigment Compendium, p. 188, \"green earth\"",
+      "loc_kind": "pdf-page",
+      "url": null
+    },
+    {
+      "n": 7,
+      "kind": "book",
+      "cite": "Pastoureau, Blue, ch. 10",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 8,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 44",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 9,
+      "kind": "book",
+      "cite": "Pastoureau, Green, ch. 45",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 10,
+      "kind": "book",
+      "cite": "Birren, Color Psychology and Color Therapy, ch. 13",
+      "loc_kind": "book-chapter",
+      "url": null
+    },
+    {
+      "n": 11,
+      "kind": "data",
+      "cite": "ColorHub archive (data), match at ΔE2000 6, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Armies sentence: 'decades before 1914', khaki credited to the British as in the source.",
+      "Dye-vat generalization softened to the 15th-16th century claim Pastoureau makes."
+    ]
   },
-  {
-   "q": "True or false: in the 15th and 16th centuries the most widespread dyeing processes still gave dull, greyish greens.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "True",
-   "kind": "true-false"
-  }
- ],
- "openers": [
-  "While the French army still wore madder-red trousers, the German, Italian and Russian armies had gone greyish green."
- ],
- "notes": [
-  {
-   "n": 1,
-   "kind": "book",
-   "cite": "Paterson, A Dictionary of Colour, pp. 25-26, 264, 343, 389, 391",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 2,
-   "kind": "book",
-   "cite": "St Clair, The Secret Lives of Colour, \"Celadon\"",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 28",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 4,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 19",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 5,
-   "kind": "book",
-   "cite": "Ball, Bright Earth, ch. 18",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 6,
-   "kind": "book",
-   "cite": "Eastaugh et al., The Pigment Compendium, p. 188, \"green earth\"",
-   "loc_kind": "pdf-page",
-   "url": null
-  },
-  {
-   "n": 7,
-   "kind": "book",
-   "cite": "Pastoureau, Blue, ch. 10",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 8,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 44",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 9,
-   "kind": "book",
-   "cite": "Pastoureau, Green, ch. 45",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 10,
-   "kind": "book",
-   "cite": "Birren, Color Psychology and Color Therapy, ch. 13",
-   "loc_kind": "book-chapter",
-   "url": null
-  },
-  {
-   "n": 11,
-   "kind": "data",
-   "cite": "ColorHub archive (data), match at ΔE2000 6, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Armies sentence: 'decades before 1914', khaki credited to the British as in the source.",
-   "Dye-vat generalization softened to the 15th-16th century claim Pastoureau makes."
-  ]
- },
- "words": 456
+  "words": 456
 }

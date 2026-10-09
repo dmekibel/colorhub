@@ -1,121 +1,121 @@
 {
- "name": "Algae Green",
- "hex": "#21C36F",
- "names": [
-  "Algae Green"
- ],
- "tier": "nature",
- "depth": "brief",
- "lede": "Algae Green is a vivid green named directly for pond algae, recorded in the 2010 xkcd color-naming survey.",
- "sections": [
-  {
-   "id": "name",
-   "title": "Straight from the pond",
-   "body": "The name is a plain nature word: algae, the green growth found on still water [1]. It entered ColorHub's library from the 2010 xkcd survey, in which thousands of people typed free-text names for colors shown on screen, rather than from any of the historical pigment or dye dictionaries [1]. No older record of the exact name turns up in the sources consulted [1]. The nearest named greens are [[emerald]] and [[shamrock]], with [[seaweed]] and [[green-crayola]] close by on the duller, darker side [2]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "No painting in our 23,781-painting archive holds this exact green covering at least one percent of its canvas, as photographed [3]. That describes this particular archive of historical paintings, not the color's presence in the wider world; bright, saturated greens like this are rare in aged, varnished canvases generally [3]. Bright, saturated greens like this one simply do not survive well in aged paint and varnish, which is part of why the archive shows none [3]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "algae",
-   "first_recorded": "2010 (xkcd color survey)",
-   "source": "ColorHub color library"
-  },
-  "aka": [],
-  "siblings": [
-   "emerald",
-   "cool-green",
-   "seaweed",
-   "dark-seafoam"
+  "name": "Algae Green",
+  "hex": "#21C36F",
+  "names": [
+    "Algae Green"
   ],
-  "parent": null,
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 0,
-  "measured": {
-   "lch": [
-    69.8,
-    66.2,
-    151.8
-   ],
-   "nearest": [
-    [
-     "Emerald",
-     2.9
+  "tier": "nature",
+  "depth": "brief",
+  "lede": "Algae Green is a vivid green named directly for pond algae, recorded in the 2010 xkcd color-naming survey.",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Straight from the pond",
+      "body": "The name is a plain nature word: algae, the green growth found on still water [1]. It entered ColorHub's library from the 2010 xkcd survey, in which thousands of people typed free-text names for colors shown on screen, rather than from any of the historical pigment or dye dictionaries [1]. No older record of the exact name turns up in the sources consulted [1]. The nearest named greens are [[emerald]] and [[shamrock]], with [[seaweed]] and [[green-crayola]] close by on the duller, darker side [2]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "No painting in our 23,781-painting archive holds this exact green covering at least one percent of its canvas, as photographed [3]. That describes this particular archive of historical paintings, not the color's presence in the wider world; bright, saturated greens like this are rare in aged, varnished canvases generally [3]. Bright, saturated greens like this one simply do not survive well in aged paint and varnish, which is part of why the archive shows none [3]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "algae",
+      "first_recorded": "2010 (xkcd color survey)",
+      "source": "ColorHub color library"
+    },
+    "aka": [],
+    "siblings": [
+      "emerald",
+      "shamrock",
+      "seaweed",
+      "green-crayola"
     ],
-    [
-     "Cool Green",
-     3.1
+    "parent": null,
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
+  },
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 0,
+    "measured": {
+      "lch": [
+        69.8,
+        66.2,
+        151.8
+      ],
+      "nearest": [
+        [
+          "Emerald",
+          2.9
+        ],
+        [
+          "Cool Green",
+          3.1
+        ]
+      ]
+    }
+  },
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: xkcd color survey, 2010",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 3,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "Algae Green's name comes from which kind of source?",
+      "choices": [
+        "A 2010 crowd color-naming survey",
+        "An 1850s dye patent",
+        "A Renaissance pigment recipe",
+        "A gem catalog"
+      ],
+      "answer": "A 2010 crowd color-naming survey",
+      "kind": "pick"
+    },
+    {
+      "q": "Why might a bright green like Algae Green be rare in old paintings?",
+      "choices": [
+        "Aged, varnished paint rarely keeps such saturated greens",
+        "No painter ever liked green",
+        "Algae was banned as a pigment source",
+        "Green pigments did not exist before 1900"
+      ],
+      "answer": "Aged, varnished paint rarely keeps such saturated greens",
+      "kind": "pick"
+    }
+  ],
+  "openers": [
+    "Algae Green is almost never found in historical paintings, as photographed."
+  ],
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": [
+      "Zero archive presence; kept to a brief, honest article."
     ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: xkcd color survey, 2010",
-   "loc_kind": null,
-   "url": null
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub color graph: nearest-neighbor computation over named colors (CIE Lab ΔE)",
-   "loc_kind": null,
-   "url": null
-  },
-  {
-   "n": 3,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "Algae Green's name comes from which kind of source?",
-   "choices": [
-    "A 2010 crowd color-naming survey",
-    "An 1850s dye patent",
-    "A Renaissance pigment recipe",
-    "A gem catalog"
-   ],
-   "answer": "A 2010 crowd color-naming survey",
-   "kind": "pick"
-  },
-  {
-   "q": "Why might a bright green like Algae Green be rare in old paintings?",
-   "choices": [
-    "Aged, varnished paint rarely keeps such saturated greens",
-    "No painter ever liked green",
-    "Algae was banned as a pigment source",
-    "Green pigments did not exist before 1900"
-   ],
-   "answer": "Aged, varnished paint rarely keeps such saturated greens",
-   "kind": "pick"
-  }
- ],
- "openers": [
-  "Algae Green is almost never found in historical paintings, as photographed."
- ],
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": [
-   "Zero archive presence; kept to a brief, honest article."
-  ]
- },
- "slug": "algae-green",
- "words": 173
+  "slug": "algae-green",
+  "words": 173
 }

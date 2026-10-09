@@ -1,111 +1,112 @@
 {
- "slug": "middle-blue-purple",
- "name": "Middle Blue Purple",
- "hex": "#8B72BE",
- "names": [
-  "Middle Blue Purple"
- ],
- "tier": "descriptive",
- "depth": "brief",
- "lede": "Middle Blue Purple is a soft, mid-saturation [[blurple]], the X11-list name for a shade the xkcd crowd-survey later called \"deep lilac.\"",
- "sections": [
-  {
-   "id": "name",
-   "title": "Two surveys, two names",
-   "body": "The name follows ordinary modifier grammar, \"middle\" plus the parent hue [[blurple]], and our library traces it to Wikipedia's extended color lists [1]. The later xkcd color survey, a 2010 crowd-sourced naming experiment, independently gave a near-identical shade the compound name \"deep lilac,\" a different modifier on a different base hue [1]. Both describe the same patch of violet, from different angles.\n\nIts nearest named neighbor by measured color is [[middle-blue-purple]] itself, almost the same shade, with [[purple-mountain-majesty]] and [[amethyst]] close behind [1]."
-  },
-  {
-   "id": "field",
-   "title": "Field notes",
-   "body": "Our archive finds a close match in only 2 of 23,781 paintings, 0.01 percent, as photographed; the within-painting lens finds it in 1 [2]. That makes it rarer than 86 percent of the named colors we track [2]. A patch this specific a violet is hard for any photograph of an aged, varnished canvas to hold onto; the scarcity says more about the archive than about how often the color exists in paint [2]."
-  }
- ],
- "aside": {
-  "origin": {
-   "named_after": "modifier grammar: middle + blue-purple",
-   "first_recorded": "undocumented in the sources checked here (Wikipedia list of colors)",
-   "source": "ColorHub color library: Wikipedia list of colors; xkcd color survey"
-  },
-  "aka": [],
-  "siblings": [
-   "deep-lilac",
-   "purple-mountain-majesty",
-   "amethyst"
+  "slug": "middle-blue-purple",
+  "name": "Middle Blue Purple",
+  "hex": "#8B72BE",
+  "names": [
+    "Middle Blue Purple"
   ],
-  "parent": "blue-purple",
-  "children": [],
-  "disambiguation": [],
-  "other_languages": []
- },
- "field": {
-  "dataset": "ColorHub archive, 23,781 paintings, as photographed",
-  "n_present": 2,
-  "n_within_painting": 1,
-  "rank_rarer_than_pct": 86,
-  "measured": {
-   "lch": [
-    53.2,
-    44.8,
-    305.6
-   ],
-   "nearest": [
-    [
-     "Deep Lilac",
-     3.2
+  "tier": "descriptive",
+  "depth": "brief",
+  "lede": "Middle Blue Purple is a soft, mid-saturation [[blurple]], the X11-list name for a shade the xkcd crowd-survey later called \"deep lilac.\"",
+  "sections": [
+    {
+      "id": "name",
+      "title": "Two surveys, two names",
+      "body": "The name follows ordinary modifier grammar, \"middle\" plus the parent hue [[blurple]], and our library traces it to Wikipedia's extended color lists [1]. The later xkcd color survey, a 2010 crowd-sourced naming experiment, independently gave a near-identical shade the compound name \"deep lilac,\" a different modifier on a different base hue [1]. Both describe the same patch of violet, from different angles.\n\nIts nearest named neighbor by measured color is [[middle-blue-purple]] itself, almost the same shade, with [[purple-mountain-majesty]] and [[amethyst]] close behind [1]."
+    },
+    {
+      "id": "field",
+      "title": "Field notes",
+      "body": "Our archive finds a close match in only 2 of 23,781 paintings, 0.01 percent, as photographed; the within-painting lens finds it in 1 [2]. That makes it rarer than 86 percent of the named colors we track [2]. A patch this specific a violet is hard for any photograph of an aged, varnished canvas to hold onto; the scarcity says more about the archive than about how often the color exists in paint [2]."
+    }
+  ],
+  "aside": {
+    "origin": {
+      "named_after": "modifier grammar: middle + blue-purple",
+      "first_recorded": "undocumented in the sources checked here (Wikipedia list of colors)",
+      "source": "ColorHub color library: Wikipedia list of colors; xkcd color survey"
+    },
+    "aka": [],
+    "siblings": [
+      "middle-blue-purple",
+      "purple-mountain-majesty",
+      "amethyst",
+      "soft-blue-violet"
     ],
-    [
-     "Purple Mountain Majesty",
-     4.4
-    ]
-   ]
-  }
- },
- "notes": [
-  {
-   "n": 1,
-   "kind": "data",
-   "cite": "ColorHub color library: Wikipedia list of colors; xkcd color survey (2010); ColorHub name graph (look-alike edges)",
-   "loc_kind": null,
-   "url": null
+    "parent": "blurple",
+    "children": [],
+    "disambiguation": [],
+    "other_languages": []
   },
-  {
-   "n": 2,
-   "kind": "data",
-   "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
-   "loc_kind": null,
-   "url": null
-  }
- ],
- "questions": [
-  {
-   "q": "What does the xkcd color survey call a shade nearly identical to Middle Blue Purple?",
-   "choices": [
-    "Deep lilac",
-    "Royal violet",
-    "Middle amethyst",
-    "Soft orchid"
-   ],
-   "answer": "Deep lilac",
-   "kind": "pick"
+  "field": {
+    "dataset": "ColorHub archive, 23,781 paintings, as photographed",
+    "n_present": 2,
+    "n_within_painting": 1,
+    "rank_rarer_than_pct": 86,
+    "measured": {
+      "lch": [
+        53.2,
+        44.8,
+        305.6
+      ],
+      "nearest": [
+        [
+          "Deep Lilac",
+          3.2
+        ],
+        [
+          "Purple Mountain Majesty",
+          4.4
+        ]
+      ]
+    }
   },
-  {
-   "q": "True or false: Middle Blue Purple turns up often in our painting archive.",
-   "choices": [
-    "True",
-    "False"
-   ],
-   "answer": "False",
-   "kind": "true-false"
+  "notes": [
+    {
+      "n": 1,
+      "kind": "data",
+      "cite": "ColorHub color library: Wikipedia list of colors; xkcd color survey (2010); ColorHub name graph (look-alike edges)",
+      "loc_kind": null,
+      "url": null
+    },
+    {
+      "n": 2,
+      "kind": "data",
+      "cite": "ColorHub archive (23,781 paintings), computed match, as photographed",
+      "loc_kind": null,
+      "url": null
+    }
+  ],
+  "questions": [
+    {
+      "q": "What does the xkcd color survey call a shade nearly identical to Middle Blue Purple?",
+      "choices": [
+        "Deep lilac",
+        "Royal violet",
+        "Middle amethyst",
+        "Soft orchid"
+      ],
+      "answer": "Deep lilac",
+      "kind": "pick"
+    },
+    {
+      "q": "True or false: Middle Blue Purple turns up often in our painting archive.",
+      "choices": [
+        "True",
+        "False"
+      ],
+      "answer": "False",
+      "kind": "true-false"
+    }
+  ],
+  "openers": [
+    "Two different color surveys independently named nearly the same violet: Middle Blue Purple and Deep Lilac."
+  ],
+  "words": 178,
+  "status": "checked",
+  "checked": {
+    "by": "checker",
+    "date": "2026-10-08",
+    "issues": []
   }
- ],
- "openers": [
-  "Two different color surveys independently named nearly the same violet: Middle Blue Purple and Deep Lilac."
- ],
- "words": 178,
- "status": "checked",
- "checked": {
-  "by": "checker",
-  "date": "2026-10-08",
-  "issues": []
- }
 }
