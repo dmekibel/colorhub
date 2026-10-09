@@ -2131,6 +2131,19 @@ scenario("paintings", "paintings-of: looser tolerance never finds fewer; a secon
   await t.click("[data-drop]", { force: true, wait: 600 });
   await t.waitFor(() => t.$$(".pt-chip").length === 1, 4000, "the chip to drop");
 });
+scenario("paintings", "at strict settings a rare color shows no unrelated paintings -- only an honest empty state until Loosen is tapped", async t => {
+  // ff00ff at exactly this color, covering at least 20% of the canvas: essentially no real painting clears that
+  // bar, so this proves the empty state never quietly falls back to "closest anyway" tiles (David, 2026-10-09).
+  await t.open("#/paintings-of/ff00ff?t=0&m=20", { settle: 600 });
+  await t.waitFor(() => !/Measuring/.test(t.text("[data-finding]")) && t.text("[data-finding]"), 20000, "the finding line");
+  t.expect(/nothing|not one/i.test(t.text("[data-finding]")), `strict magenta should report an honest empty state, got "${t.text("[data-finding]")}"`);
+  t.expect(t.$$(".pt-results .pin, .pt-results .gl-pin").length === 0, "a strict, essentially-unmatchable query rendered painting tiles anyway");
+  const loosen = t.$(".pt-results [data-pt-loosen]");
+  t.expect(!!loosen, "no Loosen button offered on the honest empty state");
+  await t.click("[data-pt-loosen]", { wait: 900 });
+  await t.waitFor(() => !t.$(".pt-results [data-pt-loosen]") || !/Loosening/.test(t.$(".pt-results [data-pt-loosen]").textContent), 15000, "loosening to finish");
+  t.expect(/loosened/i.test(t.text("[data-finding]")) || t.$$(".pt-results .pin, .pt-results .gl-pin").length > 0 || /nothing|not one/i.test(t.text("[data-finding]")), "Loosen should either find something and say so, or admit it's at the loosest measure");
+});
 scenario("paintings", "a pair's paintings, the masters' chords, and a painting with its color pinned", async t => {
   await t.open("#/paintings-of/c2412d+4f6b3a?t=4&m=1", { settle: 600 });
   await t.waitFor(".pt-finding", 12000, "the pair's paintings");
