@@ -680,9 +680,15 @@ function arHeadHTML(art, self) {
     ${art.status === "draft" ? `<p class="ar-draft">A draft: not yet fact-checked.</p>` : ""}
   </div>`;
 }
+// Family (the Tree/Spectrum/Compare/Map switch, js/family.js) + "Not to be confused with", together -- the
+// color page renders this in its own always-present slot (richpage.js rpFamilyFill), independent of whether the
+// article is short (inline), long (a door) or missing, so it's never silently absent on a long article's page;
+// the /read/ book screen still gets it inline, via arBodyHTML below.
+function arFamilyHTML(art, self) { return famHTML(self, art.aside, null, arDisambHTML(self, art.aside)); }
 // The chapters onward: inline Contents (skipped under AR_SHORT_MIN), the chapters, Family, You, Test yourself
 // (collapsed), Notes. The facts table (named after / first recorded / source) moved to the color page's ID card.
-function arBodyHTML(art, self) {
+// opts.noFamily: the color page renders Family in its own slot instead (see arFamilyHTML above).
+function arBodyHTML(art, self, opts = {}) {
   const toc = art.sections.filter(s => s.title), mins = arMinutes(art), short = mins <= AR_SHORT_MIN;
   const tocId = "ar-toc-" + art.slug.replace(/[^a-z0-9]/gi, "");
   return `<div class="ar ar-body" data-ar="${esc(art.slug)}">
@@ -691,7 +697,7 @@ function arBodyHTML(art, self) {
       <div class="ar-bar-list" id="${tocId}" hidden>${toc.map((s, i) => `<button type="button" class="ar-bar-row" data-ar-go="ar-s-${esc(s.id)}"><span class="mono">${i + 1}</span><b>${esc(s.title)}</b></button>`).join("")}</div>
     </div>` : ""}
     ${art.sections.map(s => arSectionHTML(s, art, self, !short && s.title ? { i: toc.indexOf(s) + 1, n: toc.length } : null)).join("")}
-    ${famHTML(self, art.aside, null, arDisambHTML(self, art.aside))}
+    ${opts.noFamily ? "" : arFamilyHTML(art, self)}
     ${arYouHTML(self)}
     ${arQuestionsHTML(art)}
     ${arNotesHTML(art)}
@@ -905,7 +911,10 @@ function arDoorHTML(art, self, fig) {
   const ch = arChapters(art), st = arReadState(art.slug), mins = arMinutes(art);
   const started = st && st.p > .03 && !st.done, cur = started ? ch.find(c => c.id === st.s) || ch[0] : null;
   const left = started ? Math.max(1, Math.round(mins * (1 - st.p))) : 0;
-  const dek = art.dek || (art.lede ? art.lede.split(/(?<=[.!?])\s/).slice(0, 1).join(" ") : "");
+  // David, 2026-10-09: on a long article the lede already shows on the cover (rpDefinition's first sentence);
+  // showing it again here as the door's dek read as a duplicate. The door now opens straight on the chapter
+  // list instead. `art.dek` would still show if an article ever sets one explicitly (none do today).
+  const dek = art.dek || "";
   const src = art.notes && art.notes.size ? art.notes.size : (art.sources || []).length;
   const meta = [`${mins} min`, `${ch.length} chapter${ch.length === 1 ? "" : "s"}`, src ? `${src} source${src === 1 ? "" : "s"}` : ""].filter(Boolean).join(" · ");
   const rows = started
@@ -1051,7 +1060,7 @@ function articleRenderSplit(slug, headHost, bodyHost, ctx) {
       return { has: true, door: true, art, self };
     }
     headHost.innerHTML = arHeadHTML(art, self);
-    bodyHost.innerHTML = arBodyHTML(art, self); bodyHost.hidden = false;
+    bodyHost.innerHTML = arBodyHTML(art, self, { noFamily: true }); bodyHost.hidden = false;
     arWireClicks(headHost, art, self);
     arWire(bodyHost.querySelector(".ar-body") || bodyHost, art, self);
     if (typeof arfEnhance === "function") { try { arfEnhance(bodyHost, art, self); } catch (e) { try { console.warn("article figures failed:", e); } catch (_) {} } }

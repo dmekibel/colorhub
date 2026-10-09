@@ -240,9 +240,9 @@ function rpCoverFill(el, name, hex, heroHex, entry) {
   });
 }
 // the cover's near-neighbor line opens Family in Compare, pinned on it (js/family.js famOpenCompare); waits for
-// the article/body to have loaded if the tap lands before it has.
+// the article/Family host to have loaded if the tap lands before it has.
 function rpOpenFamilyCompare(el, slug, hex) {
-  const go = () => { if (el.__artData && el.__bodyHost && typeof famOpenCompare === "function") famOpenCompare(el.__bodyHost, el.__artData.self, (el.__artData.art && el.__artData.art.aside) || {}, slug, hex); else toast("Loading its family…"); };
+  const go = () => { if (el.__artData && el.__famHost && typeof famOpenCompare === "function") famOpenCompare(el.__famHost, el.__artData.self, (el.__artData.art && el.__artData.art.aside) || {}, slug, hex); else toast("Loading its family…"); };
   if (el.__artPromise) el.__artPromise.then(go); else go();
 }
 
@@ -550,7 +550,28 @@ function rpStoryFill(el, name, hex, o) {
     rpBarSync(el);
     return r;
   });
+  rpFamilyFill(el);   // its own always-present slot: a long article's door never used to carry Family at all
   return el.__artPromise;
+}
+// Family (js/family.js) renders in its own slot between the chapters and the ID card, independent of whether
+// the article above it is short (inline), long (a door card) or missing -- a door never included the chapters/
+// Family/Notes that follow it (those live behind "Begin reading"), so without this Family was silently absent
+// on every long article's color page (David, 2026-10-09, caught on Olive while craft-reviewing a color with
+// children: Scarlet, Olive and ~260 of the richest articles are all door-length).
+function rpFamilyFill(el) {
+  const host = el.querySelector("[data-ar-fam-host]"); if (!host || !el.__artPromise) return;
+  el.__artPromise.then(r => {
+    if (!r || !r.has || !host.isConnected || typeof arFamilyHTML !== "function") return;
+    const html = arFamilyHTML(r.art, r.self);
+    if (!html) return;   // no parent/siblings/children/disambiguation: nothing to show, same as any other empty section
+    host.innerHTML = html; host.hidden = false; el.__famHost = host;
+    if (typeof famWire === "function") famWire(host, r.self, r.art.aside || {});
+    // Family's own slot (outside head/body) never got the [data-ar-open]/[data-ar-which] click delegation that
+    // arWire/arWireClicks normally give an article root -- a swatch in the tree/compare/spectrum views looked
+    // tappable but did nothing (caught by tools/smoke.sh: "timed out waiting for .ar-hex[data-ar-open]...").
+    if (typeof arWireClicks === "function") arWireClicks(host, r.art, r.self);
+    rpBarSync(el);
+  });
 }
 
 // ---------- the color header: stays when the cover scrolls away, with jump chips to the new sections ----------
@@ -580,9 +601,23 @@ function rpBarWire(el) {
   });
   // it lives on <body>, not in the screen: the screen's entrance animation leaves a transform that would pin a fixed bar to the page
   document.body.appendChild(bar);
-  let raf = 0;
-  const check = () => { raf = 0; if (!bar.isConnected) return; const on = hero.getBoundingClientRect().bottom < 64; if (on === bar.classList.contains("on")) return; bar.classList.toggle("on", on); bar.setAttribute("aria-hidden", on ? "false" : "true"); if (on) rpBarSync(el); };
-  const onScroll = () => check();   // one rect read a scroll; no rAF, so it also runs in a background tab
+  // David, 2026-10-09: "header feels too big -- harder to read the article" -> while actively reading down, the
+  // bar slims further (name + back only, the jump tabs fade out); scrolling up a little brings the tabs straight
+  // back. A small threshold and a short settle avoid flicker on tiny scroll jitter; reduced motion skips the fade.
+  let lastY = scrollY, dirAccum = 0;
+  const check = () => {
+    if (!bar.isConnected) return;
+    const on = hero.getBoundingClientRect().bottom < 64;
+    if (on !== bar.classList.contains("on")) { bar.classList.toggle("on", on); bar.setAttribute("aria-hidden", on ? "false" : "true"); if (on) rpBarSync(el); }
+    const y = scrollY, dy = y - lastY; lastY = y;
+    if (!on || Math.abs(dy) < 1) { dirAccum = 0; }
+    else {
+      dirAccum = Math.sign(dy) === Math.sign(dirAccum || dy) ? dirAccum + dy : dy;   // keep a running total while the direction holds
+      if (dirAccum > 16) { bar.classList.add("collapsed"); dirAccum = 16; }
+      else if (dirAccum < -10 || y < 80) { bar.classList.remove("collapsed"); dirAccum = -10; }
+    }
+  };
+  const onScroll = () => check();   // direct, not rAF: still updates in a background tab
   document.addEventListener("scroll", onScroll, { passive: true, capture: true });
   cleanup.push(() => { document.removeEventListener("scroll", onScroll, true); bar.remove(); });
   setTimeout(() => { rpBarSync(el); check(); }, 400);   // a Back that lands mid-page shows it at once
@@ -657,7 +692,9 @@ function rpSourceValueHTML(text) {
   if (!text || typeof SOURCE_SYSTEMS === "undefined") return esc(text || "");
   for (const [id, sys] of Object.entries(SOURCE_SYSTEMS)) {
     const label = sys.short.split(",")[0];
-    if (new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(text)) return esc(text).replace(new RegExp(esc(label), "i"), m => srcLinkHTML(id, m));
+    // match the escaped label inside the escaped text (both need the same "&" -> "&amp;" etc), but hand srcLinkHTML
+    // the plain label -- it escapes its own text, so escaping twice turned "&" into the literal "&amp;" on screen
+    if (new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(text)) return esc(text).replace(new RegExp(esc(label), "i"), () => srcLinkHTML(id, label));
   }
   return esc(text);
 }
@@ -740,6 +777,7 @@ function colorDossier(entry, o = {}) {
     <div class="ar-head" data-ar-head hidden></div>
     ${rpPaintSectionHTML(name, heroHex, entry, famC)}
     <div class="ar-body" data-ar-body hidden></div>
+    <div class="ar-fam-host" data-ar-fam-host hidden></div>
     ${rpIdCardHTML()}
     ${rpNextHTML()}
     <p class="fine rp-last">Screen colors are approximate. Painting figures are measured from museum photographs of aged, varnished paintings.</p>
