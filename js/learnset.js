@@ -772,10 +772,12 @@ function lsResults(sess, r) {
 }
 
 // ======================================================================
-// Screenshots: #lsshot=sheet[:close] | look:<view> | study[:wrong|match|grad|boss|quick|sortfmt|gradfmt] | results
+// Screenshots: #lsshot=sheet[:close] | look:<view> | study[:wrong|match|grad|boss|quick|sortfmt|gradfmt][:<seedHex>] | results
 // study:quick lands on the overview's Quick look (review colors, already "met"); study:sortfmt/gradfmt fast-
 // forward a real Test me session, answering whatever comes up (reusing the same per-kind logic as every other
-// shot state here), until Sort or Gradient appears, then stop so the screenshot lands on it.
+// shot state here), until Sort or Gradient appears, then stop so the screenshot lands on it. A third ":<hex>"
+// segment (6 hex digits, "#" optional) seeds the set from that color instead of Teal — e.g. "study::FDFDFE" for
+// a very light swatch, to check contrast — and its 3 nearest become the look-alikes, same as any other seed.
 // ======================================================================
 function lsShot(arg) {
   PR_SHOT_ON = true;
