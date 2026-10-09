@@ -1236,6 +1236,32 @@ scenario("pages", "the pinned header slims its tabs away on scroll down, brings 
   await t.waitFor(() => !bar.classList.contains("collapsed"), 2000, "the header to bring its tabs back on scroll up");
 });
 
+// David, 2026-10-09 on Aero: "The collapsed sticky header (‹ Aero · ✕ Close) overlaps the iOS status bar --
+// the time '3:13' is drawn on top of 'Aero' and the Close pill." Two things confirmed while chasing this:
+// (1) the bar's own padding-top formula (calc(var(--top) + 4px)) is correct -- checked directly below, no
+// scrolling needed. (2) the "✕ Close" pill is js/trail.js's own tl-exit-bar, inserted into .rp-bar by
+// tlDecorate() (js/trail.js ~line 129) -- not something richpage.js draws. A scrolled, transitioning repro
+// (scroll past the cover with a simulated --top, then read the bar's transform) sometimes measures the
+// *hidden* preset's transform well after the .on class and the .32s transition should have settled, which may
+// be a real interaction with trail.js's own DOM edits to this element (or with its gesture wiring) -- flagged
+// for the trail.js-owning lane rather than guessed at here, since I'm not to touch that file this pass.
+scenario("pages", "the pinned header's padding clears a simulated status-bar inset, and stays a single instance", async t => {
+  const INSET = 59;
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  const bar = await t.waitFor(() => t.$("body > .rp-bar"), 8000, "the pinned header");
+  { const st = t.w.document.createElement("style"); st.textContent = `:root{--top:${INSET}px !important}`; t.w.document.head.appendChild(st); }
+  const padTop = parseFloat(t.w.getComputedStyle(bar).paddingTop);
+  t.expect(padTop >= INSET, `the bar's own padding-top is ${padTop}px, short of the ${INSET}px status-bar inset`);
+  t.expect(t.$$("body > .rp-bar").length === 1, `${t.$$("body > .rp-bar").length} .rp-bar nodes on body, expected exactly 1`);
+  // a fast Back then reopen: the old bar's cleanup must finish before (or in place of) the new one appending.
+  // The bar itself is still off screen (nothing has scrolled it .on yet), so this uses the cover's own back
+  // button, the same control xBack wires everywhere else.
+  await t.click("[data-back]", { wait: 100 });
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  await t.waitFor(() => t.$("body > .rp-bar"), 8000, "the pinned header again, after a fast Back and reopen");
+  t.expect(t.$$("body > .rp-bar").length === 1, `${t.$$("body > .rp-bar").length} .rp-bar nodes on body after reopening, expected exactly 1`);
+});
+
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
   // a name with no story of its own. Every color is getting an article, so pick one still without a committed article
   // from the article index; when none is left, nearest stories can't show and the scenario only notes it.
@@ -1427,6 +1453,19 @@ scenario("pages", "every painting tile on a color page opens its painting: the I
   await t.waitFor(() => t.$(".gl-page"), 10000, "the role tile's own page");
   await t.click("[data-back]", { wait: 600 });
   await t.waitFor(() => H.title(t) === "Ochre Brown", 8000, "Back to return to Ochre Brown from the role tile");
+});
+
+// David, 2026-10-09 on Baby Pink: "It's not letting me tap Paul Signac... and Paul has no photo" -- a painter
+// row in "Painters who use it" (js/richcolor.js rcPaintersHTML) now opens that painter's page, and shows a real
+// portrait when one exists (data/artists/portraits.json) or the honest signature-color swatch when it doesn't.
+scenario("pages", "a painter row in Painters who use it opens their page, and always shows a portrait or a swatch", async t => {
+  await H.openPage(t, "#/name/baby-pink", "Baby pink");
+  const paint = await t.waitFor(() => t.$(".rp-paint"), 8000, "the Paintings section");
+  const row = await t.waitFor(() => t.$$(".rc-painter[data-awpainter]", paint)[0], 20000, "a painter row");
+  t.expect(t.$(".rc-painter-port", row), "the painter row has no portrait or swatch");
+  await t.click(row, { wait: 700 });
+  await t.waitFor(() => t.$(".aw-page"), 10000, "the painter's own page");
+  t.expect(t.$(".aw-pt-hero"), "the painter page has no portrait hero");
 });
 
 scenario("pages", "hold the cover: the flower rises, dragging lights a hex, letting go opens that color; Back returns", async t => {

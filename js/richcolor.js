@@ -35,6 +35,8 @@ function rcWireOpen(host, hex) {
     if (g) return galleryPage(+g.dataset.rcGi, true, host._rcHex || null);
     const pr = e.target.closest("[data-rc-pair]");
     if (pr) { const [a, b2] = pr.dataset.rcPair.split("+"), [na, nb2] = pr.dataset.rcNames.split("|"); return paintingsOfPage(["#" + a, "#" + b2], { tol: CI_STD.tol, minCover: CI_STD.minCover, maxCover: null, mode: "all", sort: "cover", names: [na, nb2] }); }
+    const ap = e.target.closest("[data-awpainter]");
+    if (ap) return typeof awPainter === "function" && awPainter(ap.dataset.awpainter);
     const b = e.target.closest("[data-rc-open]"); if (!b) return;
     morphFrom(b.querySelector("i") || b); openCoreName(b.dataset.h, b.dataset.n);
   });
@@ -469,21 +471,54 @@ function rcLoadArtists() {
   return RC_ARTISTS_LOADING || (RC_ARTISTS_LOADING = fetch("data/analysis/color-artists.json" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
     .then(r => r.ok ? r.json() : {}).catch(() => ({})).then(d => (RC_ARTISTS = d)));
 }
-function rcPaintersHTML(name) {
+// David, 2026-10-09 on Baby Pink: "It's not letting me tap Paul Signac... and Paul has no photo." The painter
+// page (js/artwiki.js awPainter) already resolves a real portrait per painter (data/artists/portraits.json: a
+// Wikidata/self/other-painting portrait, or "none"); this row just never linked out or showed one. Same data,
+// same slug (routeSlug(name), the same key awPainter's own pages use).
+let RC_PORTRAITS = null, RC_PORTRAITS_LOADING = null;
+function rcLoadPortraits() {
+  if (RC_PORTRAITS) return Promise.resolve(RC_PORTRAITS);
+  return RC_PORTRAITS_LOADING || (RC_PORTRAITS_LOADING = fetch("data/artists/portraits.json" + (typeof DATA_VER !== "undefined" && DATA_VER ? "?v=" + DATA_VER : ""))
+    .then(r => r.ok ? r.json() : null).catch(() => null).then(d => (RC_PORTRAITS = (d && d.a) || {})));
+}
+// a painter row's avatar: a real portrait when one resolves (a plain Wikidata image is ready now; a self/other
+// portrait that's itself a gallery painting needs its image resolved async, like the painter page's own hero --
+// rcPaintersSection wires that after the fact) -- else the swatch fallback, never a blank circle.
+function rcPainterPortHTML(slug, port) {
+  const pt = (port && port[slug] && port[slug].portrait) || { src: "none" };
+  if (pt.src === "wikidata" && pt.url) return `<img class="rc-painter-port" src="${esc(pt.url)}" alt="" loading="lazy" decoding="async" crossorigin="anonymous" onerror="this.outerHTML='<i class=&quot;rc-painter-port rc-painter-port-sw&quot; style=&quot;--c:#8a8a82&quot;></i>'">`;
+  if ((pt.src === "self" || pt.src === "other") && pt.gi != null) return `<i class="rc-painter-port rc-painter-port-sw wait" style="--c:#8a8a82" data-port-gi="${pt.gi}"></i>`;
+  return `<i class="rc-painter-port rc-painter-port-sw" style="--c:#8a8a82"></i>`;
+}
+function rcPaintersHTML(name, port) {
   const rows = (RC_ARTISTS || {})[name];
   if (!rows || !rows.length) return "";
   return `<section class="rc-sec rc-painters"><h3>Painters who use it</h3>
-    ${rows.slice(0, 5).map(r => `<div class="kin rc-plain"><i style="--c:#8a8a82"></i><b>${esc(r.a)}</b><span>${r.l.toFixed(1)}× more than his or her peers, from ${r.n} painting${r.n === 1 ? "" : "s"} here</span></div>`).join("")}
-    <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small), as photographed, from the gallery's 23,781 paintings (n per painter above). Artist pages aren't built yet, so names aren't links yet.</p>
+    ${rows.slice(0, 5).map(r => { const slug = r.s || routeSlug(r.a);
+      return `<button type="button" class="kin rc-plain rc-painter" data-awpainter="${esc(slug)}">${rcPainterPortHTML(slug, port)}<b>${esc(r.a)}</b><span>${r.l.toFixed(1)}× more than his or her peers, from ${r.n} painting${r.n === 1 ? "" : "s"} here</span></button>`; }).join("")}
+    <p class="fine">Lift vs. the same decade and country (or country, or the whole archive, when that group is too small), as photographed, from the gallery's 23,781 paintings (n per painter above).</p>
   </section>`;
 }
 function rcPaintersSection(name, hex) {
   const id = "rc-painters-" + Math.random().toString(36).slice(2, 8);
-  rcLoadArtists().then(() => {
+  Promise.all([rcLoadArtists(), rcLoadPortraits()]).then(([, port]) => {
     const box = document.getElementById(id); if (!box) return;
-    let html = rcPaintersHTML(name);
-    if (!html) { const near = rcNearestWith(hex, name, n => (RC_ARTISTS[n] || []).length); if (near) html = rcPaintersHTML(near.n).replace("<h3>Painters who use it</h3>", "<h3>Painters who use it</h3>" + rcNearNote(name, near)); }
+    let html = rcPaintersHTML(name, port);
+    if (!html) { const near = rcNearestWith(hex, name, n => (RC_ARTISTS[n] || []).length); if (near) html = rcPaintersHTML(near.n, port).replace("<h3>Painters who use it</h3>", "<h3>Painters who use it</h3>" + rcNearNote(name, near)); }
     box.innerHTML = html;
+    // self/other portraits are themselves a gallery painting: resolve their image the same way the painter
+    // page's own hero does (js/artwiki.js awFillPortrait), not before loadGallery() has the detail shard in.
+    const waiting = box.querySelectorAll("[data-port-gi]");
+    if (waiting.length && typeof loadGallery === "function") loadGallery().then(() => waiting.forEach(i => {
+      glDetail(+i.dataset.portGi).then(d => {
+        if (!i.isConnected || !d) return;
+        const img = document.createElement("img");
+        img.className = "rc-painter-port"; img.alt = ""; img.loading = "lazy"; img.decoding = "async";
+        img.src = glSmall(d) ? d.img : glBig(d.img);
+        img.onerror = () => { i.classList.remove("wait"); };
+        img.onload = () => i.replaceWith(img);
+      }).catch(() => { i.classList.remove("wait"); });
+    })).catch(() => {});
   });
   return `<div id="${id}"></div>`;
 }

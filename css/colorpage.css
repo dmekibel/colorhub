@@ -175,6 +175,15 @@
 
 /* Painters / When and where / Often paired with */
 .rc-painters .kin,.rc-whenwhere,.rc-paired .kin{margin-bottom:2px}
+/* a painter row opens their page (David, 2026-10-09: Paul Signac wasn't tappable and had no photo) -- a real
+   portrait (data/artists/portraits.json via js/artwiki.js's own painter page) at the same ~72px an avatar
+   reads at elsewhere, rounded like the app's circular swatches; the signature-color swatch is the honest
+   fallback when no portrait exists, never a blank circle. */
+.rc-painters .kin.rc-painter{grid-template-columns:72px 1fr;cursor:pointer}
+.rc-painter-port{width:72px;height:72px;border-radius:50%;object-fit:cover;background:var(--c,var(--cp-surface-2));flex:none}
+.rc-painter-port-sw{display:block}
+.rc-painter-port-sw.wait{animation:rpPulse 1.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.rc-painter-port-sw.wait{animation:none}}
 .rc-spark{display:flex;align-items:flex-end;gap:3px;height:60px;margin:10px 0}
 .rc-spark i{flex:1;background:var(--soft);opacity:.35;border-radius:2px 2px 0 0;min-height:4px;position:relative;display:flex;align-items:flex-end;justify-content:center}
 .rc-spark i.on{opacity:1;background:var(--ink)}

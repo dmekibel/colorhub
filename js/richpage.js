@@ -671,7 +671,14 @@ function rpPaintFill(el, name, hex, entry, famC) {
   const leadHost = sec.querySelector("[data-rp-lead]");
   artPromise.then(r => {
     const art = (r && r.art) || {}, self = (r && r.self) || { slug: routeSlug(name), n: name, h: hex };
-    if (leadHost && leadHost.isConnected && typeof arfLead === "function") arfLead(f => { leadHost.appendChild(f); return true; }, art, self).catch(() => {});
+    // articleRenderSplit (js/article.js) now shows the lead picture at the top of the article itself, in the
+    // same slot every other story opens with -- a real contextual photo first, the painting that covers the
+    // most of this color otherwise (David, 2026-10-09: "so all articles and pages feel equal in value"). This
+    // slot only still needs to fill in when that didn't happen: a color with no article at all, where
+    // rpStoryFill's twin fallback (rpTwinHTML) runs instead and has no picture of its own. r.has (not a DOM
+    // check) is the right signal -- articleRenderSplit always attempts its own lead as soon as it finds an
+    // article, well before that lead's own async picture-pick resolves, so a DOM check here could race it.
+    if (leadHost && leadHost.isConnected && typeof arfLead === "function" && !(r && r.has)) arfLead(f => { leadHost.appendChild(f); return true; }, art, self).catch(() => {});
   });
   const gi = sec.querySelector("[data-glin]"); if (gi) galleryColorRow(gi, { n: name, h: hex });
   if (typeof rcWireYou === "function") rcWireYou(sec, name, hex);
