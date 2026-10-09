@@ -183,3 +183,58 @@ discolored textiles are measured as they look now; museum photo lighting varies.
 ### Known gaps after the merge
 - `tools/fashion.py figs` and the page half of `check` were written for the pages as wiki nodes (`data/wiki-nodes.js` plus photographs in `data/images.js`). The pages now live in `data/fashion-history.js`. Only the four that already had a Commons photograph in `data/fashion.js` (Tudor scarlet, Edo, mourning dress, pink and blue) show one; the rest have none yet. The garment half of the tool (`ids`, `meta`, `images`, `palettes`, `build`) is unaffected.
 
+---
+
+## Measured eras -> measured decades (2026-10-09, after David: "A couple palettes from a couple garments is not true archive data")
+
+The first "Measured eras" pass (1700s/1800-1849/1850-1899, 991-piece CC0 corpus only) was too thin, and had
+nothing for 1900s-2020s at all: the Met + Cleveland corpus's western-group rows are almost entirely pre-1900
+(343 rows total; 15 of those fall 1900-1959). Rather than invent 1900s-2020s coverage the CC0/PD sources don't
+have, a second source was added under the rights rule in the brief (CC0/PD = display; anything else = measure
+only, never store the image):
+
+### `tools/fashion_va.py` — Victoria and Albert Museum, measure-only
+- API: `https://api.vam.ac.uk/v2/objects/search` — no key, no account, generously rate-limited (the Collections
+  API Guide at developers.vam.ac.uk documents `year_made_from`/`year_made_to`, free-text `q`, and
+  `_images._primary_thumbnail` directly in search results, so no per-object lookup is needed).
+- Rights: V&A photographs are **(c) Victoria and Albert Museum, London**, not CC0/public domain (confirmed via
+  `GET /v2/object/<id>`, whose `meta.images._images_meta[].copyright` field names the museum, not a CC0/PD
+  mark). Per the rights rule, this tool never stores or displays a V&A image: `measure()` fetches each small
+  thumbnail to a worker-local temp file, runs `tools/fashion.py`'s `palette_of()` (the same backdrop-removal +
+  k-means built for studio garment photography) on it, deletes the file in a `finally` block, and keeps only
+  hex values + catalogue metadata (object type, date text, place, maker, V&A record URL — no image URL).
+- Search: 1700-2020 in 10-year steps x nine garment-type terms (dress, coat, suit, waistcoat, gown, shawl,
+  uniform, blouse, trousers), capped at 260 ids per decade after dedup, one page per (decade, term) query —
+  5,798 ids found, every decade 1700s-2020s landing between 101 and 260.
+- Measure: thumbnail fetch + palette extraction, 5 worker threads (paced individually, so aggregate load on
+  the V&A's image CDN — framemark.vam.ac.uk, built to serve many concurrent thumbnails — stays moderate; the
+  search API itself is hit far less, one request per (decade, term)). UA names the bot and states "measure-
+  only, no image retained". Resumable: reruns skip ids already in `research/_raw/fashion/va/palettes.jsonl`.
+- Output: `data/fashion/va-measured.json` — hex palette + metadata only, no `img` field on any row, so the
+  Garments browser and any image-rendering code can never accidentally display one (it only reads
+  `garments.json`, the CC0/PD file, for photos).
+
+### `tools/fashion_measure.py` — rewritten for real per-decade counts
+Buckets every row from both `garments.json` (CC0/PD) and `va-measured.json` (measure-only) into its actual
+decade, 1700-2020 (`decade_of(year)`), and reports the **real combined count per decade**, labeled `bare`
+(<8), `thin` (8-59) or `thick` (60+) rather than padded to look uniform. A garment-kind split (dress /
+menswear / accessory / other, via object type for V&A rows, title regex for CC0 rows) is only computed where
+that slice has >=8 pieces. Output: `data/fashion/measured-decades.json`, with both a `decades` array (33
+entries) and an `eras` array (the same three 1700s/1800-1849/1850-1899 bands as before, now combining both
+sources) so the "Deep reads" long-form pages and the per-decade Decades pages share one source of truth.
+
+### Sources not pursued, and why
+- **Smithsonian Open Access** (`api.si.edu`, key-free `DEMO_KEY` works): National Museum of American History
+  costume records return, but `content.descriptiveNonRepeating.online_media` came back empty on every record
+  tried (including ones the search marked `online_media_type:Images`) — not enough budget in this pass to dig
+  further into why; worth another look.
+- **Rijksmuseum, Europeana, NYPL Digital Collections, Cooper Hewitt**: each needs a registered API key via a
+  web form; no key was available in this session and none could be obtained without a human completing that
+  signup, so these were skipped rather than scraped around.
+- **Art Institute of Chicago**: metadata API is open and CC0, but its IIIF image server (`www.artic.edu/iiif`)
+  still answers a plain request with a 403 (tested again 2026-10-09) — the same Cloudflare bot challenge noted
+  in the first pass. Metadata without images isn't useful for a color corpus, so still off.
+- **Fashion plates and magazine scans** (NYPL, Internet Archive, HathiTrust): not attempted. A full scanned
+  page isn't a cropped garment photo — extracting a reliable garment-only palette from a plate or a magazine
+  spread needs real crop/segmentation work this pass didn't have time for, so it's a gap, not a dead end.
+

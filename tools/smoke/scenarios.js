@@ -286,6 +286,21 @@ scenario("home", "the color-page return (mxLand) never stalls waiting on data", 
 // family…); it stays ON the real map (same corners, honey.js honeyHighlight dims the rest), auto-picks whichever
 // candidate arrangement packs the selection into the smallest footprint (js/home.js hmBestArrangeFor) and says so
 // in the chip, and clearing it (✕) restores the arrangement AND the full, undimmed map.
+// David: "is it redundant to have Study on the bottom-left button's menu and also on the bottom-right button's
+// menu?" Yes -- it's an action you take ON the map, so it lives only on the right (the map's own Do menu); the
+// Train room (reached from the left, the Rooms corner -- "where you go") no longer offers its own door to it.
+scenario("home", "Study the map lives only on the right corner, not duplicated in Train", async t => {
+  await H.homeReady(t);
+  await H.menu(t);
+  const rightLabels = t.$$(".hm-do-stem [data-do] b").map(b => t.text(b));
+  t.expect(rightLabels.includes("Study the map"), `the right corner's menu has no Study the map: ${rightLabels.join(", ")}`);
+  t.d.querySelector(".rm-scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
+  await t.sleep(400);
+  await t.open("#/train", { settle: 600 });
+  t.expect(!t.$("[data-mapstudy]"), "the Train room still has its own Study the map tile");
+  t.expect(!/study the map/i.test(t.text("#app")), `Train still mentions "Study the map" somewhere: "${t.text("#app").slice(0, 300)}"`);
+});
+
 scenario("home", "mapSelect: a preview mode that auto-arranges the selection and restores on clear", async t => {
   await H.homeReady(t);
   t.expect(t.ev("typeof mapSelect === 'function'"), "mapSelect is not defined");
@@ -1016,6 +1031,40 @@ scenario("pages", "single tap opens focus view; double tap favorites without ope
   tap(); await t.sleep(60); tap();
 });
 
+// David, 2026-10-09: a long article's lede already shows on the cover (the "Almost the same as..." / story-first-
+// sentence line); the door card used to repeat it as its own dek. The door now opens straight on the chapter list.
+scenario("pages", "a long article's lede shows once, on the cover -- not again on the door card", async t => {
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  await t.waitFor(".ar-door", 10000, "the story door (Scarlet is long enough for one)");
+  t.expect(!t.$(".ar-door-dek"), "the door card still shows its own dek under the title");
+  t.expect(t.$(".rp-def") && t.text(".rp-def").length > 10, "the cover has no definition line to show the lede once");
+  t.expect(t.$$(".ar-door-row").length >= 1, "the door opens on the chapter list with no dek in the way");
+});
+
+// David, 2026-10-09: caught while craft-reviewing Olive (a color with children) -- a door-length article's
+// chapters/Family/Notes live behind "Begin reading", so Family used to be silently absent on the color page for
+// every long article (~260 of the richest ones). It now has its own always-present slot.
+scenario("pages", "Family still shows on a door-length article's color page (Olive -- it has children)", async t => {
+  await H.openPage(t, "#/name/olive", "Olive");
+  await t.waitFor(".ar-door", 10000, "the story door (Olive is long enough for one)");
+  const fam = await t.waitFor(".ar-fam", 8000, "the Family section, even though the article is a door");
+  t.expect(t.$$(".fam-trow-l", fam).some(p => p.textContent === "Variations"), "Olive's children ('Variations') don't show in the family tree");
+  await t.click([...t.$$(".fam-seg-b", fam)].find(b => b.textContent === "Compare"), { wait: 300 });
+  t.expect(t.$(".fam-cmp-line", fam), "Compare has no split/diff line for a door-length article's color page");
+});
+
+// David, 2026-10-09: "header feels too big -- harder to read the article". Scrolling down slims the pinned bar
+// further (the jump tabs fade out, back + name stay); scrolling up a little brings the tabs straight back.
+scenario("pages", "the pinned header slims its tabs away on scroll down, brings them back on scroll up", async t => {
+  await H.openPage(t, "#/color/scarlet", "Scarlet");
+  const scroll = async y => { t.w.scrollTo(0, y); t.w.document.dispatchEvent(new t.w.Event("scroll")); await t.sleep(30); };
+  for (let y = 0; y <= 1400; y += 140) await scroll(y);
+  const bar = await t.waitFor(".rp-bar.on", 4000, "the pinned header, once scrolled past the cover");
+  await t.waitFor(() => bar.classList.contains("collapsed"), 2000, "the header to slim its tabs while scrolling down");
+  for (let y = 1400; y >= 900; y -= 140) await scroll(y);
+  await t.waitFor(() => !bar.classList.contains("collapsed"), 2000, "the header to bring its tabs back on scroll up");
+});
+
 scenario("pages", "nearest stories: a name without an article offers the nearest ones, a tap opens another page", async t => {
   // a name with no story of its own. Every color is getting an article, so pick one still without a committed article
   // from the article index; when none is left, nearest stories can't show and the scenario only notes it.
@@ -1035,6 +1084,27 @@ scenario("pages", "nearest stories: a name without an article offers the nearest
   await t.click(rows[0], { wait: 400 });
   await t.waitFor(() => t.$(".cp-page .cp-hero-foot h1") && H.title(t) !== first, 8000, "a nearest-story tap to open another page");
   t.notes.push(`${first} > ${H.title(t)}`);
+});
+
+// David: a cold #/color/<archive-name-slug> link (a fresh profile, so CORE_NAMES/LONG_NAMES haven't loaded yet)
+// fell back to #/today instead of opening -- #/color/<core-name-slug> (BASICS/ALL, loaded synchronously) worked
+// fine, which is what hid it. js/router.js's "color" route now waits for the names it needs (routeNameAsync,
+// the same resolution #/name/<slug> already used) instead of giving up the moment a synchronous routeColor()
+// lookup misses.
+scenario("pages", "a cold #/color/<slug> link for an archive (non-core) name opens it, never falls back to Today", async t => {
+  const lib = await fetch("/data/library.json").then(r => r.json());
+  const core = new Set((await fetch("/data/core-names.json").then(r => r.json())).map(e => e.n.toLowerCase()));
+  const pool = lib.filter(e => e.n && !e.crude && /^#[0-9a-f]{6}$/i.test(e.h || "") && !core.has(e.n.toLowerCase())).map(e => e.n);
+  t.expect(pool.length >= 3, `too few archive-only names in data/library.json to sample (${pool.length})`);
+  const slugify = s => s.normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");   // routeSlug, js/router.js
+  for (const n of t.sample(pool, 3, "coldcolor")) {
+    const slug = slugify(n);
+    await t.open("#/color/" + slug, { settle: 1500 });   // a genuinely fresh load: t.open() clears localStorage by default
+    await t.waitFor(() => t.$(".cp-page") || /No color by that name/.test(t.d.body.innerText), 10000, `${n}: neither a page nor a clean "not found" after a cold #/color/${slug}`);
+    t.expect(!/^#\/(today)?$/.test(t.w.location.hash) && t.w.location.hash !== "", `${n}: cold #/color/${slug} fell back to Today (hash is "${t.w.location.hash}")`);
+    t.expect(t.$(".cp-page"), `${n}: cold #/color/${slug} did not open a page (got: "${t.d.body.innerText.slice(0, 120)}")`);
+    t.expect(H.title(t).toLowerCase() === n.toLowerCase(), `${n}: cold #/color/${slug} opened "${H.title(t)}" instead`);
+  }
 });
 
 scenario("pages", "namePage x3: renders, a near name opens another, Back works", async t => {
@@ -1879,6 +1949,42 @@ scenario("map", "panning keeps the resting seams, and fast pans and pinches at e
       t.expect(st.n > 6 && st.w > 0 && st.h > 0, `${src} at zoom ${z}: ${JSON.stringify(st)}`); t.notes.push(`${src}@${z}: ${st.n} drawn, seam ${st.gap}/${st.p90}`);
     }
   }
+});
+// David: "any way to prevent these ugly holes between the colors?" (near the magnified focus, where cell sizes
+// vary most, two neighboring cells' independently-blended edges don't always meet pixel-exact). The cheap fallback
+// (honey.js finishFrame, the per-cell seam stroke): every cell at a readable size now strokes its own edge, light
+// on dark and dark on light, instead of that being dark-cells-only -- a deliberate boundary masks a stray sliver
+// instead of leaving it bare. Perf guard: the extra stroke call must not meaningfully slow the biggest set's own
+// continuous pan + pinch (David asked for frame-time numbers; see the lane's commit message for the measured
+// before/after -- this is a loose sanity bound against a real regression, not a tight budget this headless,
+// unthrottled environment can honestly claim to enforce).
+scenario("map", "the per-cell seam stroke doesn't slow a continuous pan+pinch on the largest set", async t => {
+  await H.homeReady(t);
+  await H.menu(t);
+  const everyName = t.$('.hm-do-stem [data-do="colors"]'); if (everyName) everyName.click();
+  await t.waitFor(".hm-chooser", 6000, "the Colors sheet");
+  await t.click('.hm-chooser [data-src="every-name"]', { wait: 900 });
+  await t.click("[data-sheet-close]", { wait: 400 });
+  const ctrl = t.ev("HM_CTRL"), cv = t.$("canvas"), r = cv.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  t.expect(ctrl, "no HM_CTRL");
+  const times = t.ev(`(() => {
+    const times = []; let last = performance.now();
+    const hook = () => { const now = performance.now(); times.push(now - last); last = now; window.requestAnimationFrame(hook); };
+    window.requestAnimationFrame(hook);
+    return new Promise(res => setTimeout(() => res(times), 1400));
+  })()`);
+  const mk = (id, type, x, y) => new t.w.PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerId: id, pointerType: "touch", isPrimary: id === 1, view: t.w });
+  cv.dispatchEvent(mk(1, "pointerdown", cx, cy));
+  for (let i = 1; i <= 40; i++) { cv.dispatchEvent(mk(1, "pointermove", cx + Math.sin(i * .3) * 80, cy + Math.cos(i * .2) * 60)); await t.sleep(12); }
+  cv.dispatchEvent(mk(1, "pointerup", cx, cy));
+  cv.dispatchEvent(mk(1, "pointerdown", cx - 60, cy)); cv.dispatchEvent(mk(2, "pointerdown", cx + 60, cy));
+  for (let i = 1; i <= 30; i++) { const s = 60 - i * 1.5; cv.dispatchEvent(mk(1, "pointermove", cx - s, cy)); cv.dispatchEvent(mk(2, "pointermove", cx + s, cy)); await t.sleep(12); }
+  cv.dispatchEvent(mk(1, "pointerup", cx, cy)); cv.dispatchEvent(mk(2, "pointerup", cx, cy));
+  const log = await times;
+  const sorted = log.slice().sort((a, b) => a - b), mean = log.reduce((s, v) => s + v, 0) / (log.length || 1), p95 = sorted[Math.floor(sorted.length * .95)] || 0;
+  t.expect(log.length > 10, "too few frames captured to judge");
+  t.expect(mean < 60 && p95 < 80, `frame time regressed badly: mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms over ${log.length} frames`);
+  t.notes.push(`${log.length} frames, mean ${mean.toFixed(1)}ms, p95 ${p95.toFixed(1)}ms`);
 });
 scenario("map", "the map keeps its pan and zoom when you open a color and come back", async t => {
   const cv = await H.homeReady(t), r = cv.getBoundingClientRect();
