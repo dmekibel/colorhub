@@ -444,6 +444,58 @@ scenario("home", "mapSelect: a preview mode that auto-arranges the selection and
   await t.waitFor(() => H.num(t.text(".hm-title small")) === count0, 4000, `the full map (${count0} colors) to come back, not still the selection`);
 });
 
+// ---------- subject view (js/subjectview.js): the map Search's palette view for a painter, a decade, a movement,
+// a look. David, 2026-10-09: "it only shows six... instead it should be a slider", generic across subject kinds. ----------
+scenario("home", "Subject view: Monet's slider goes well past six to 50 of his real colors", async t => {
+  await H.homeReady(t);
+  t.expect(t.ev("typeof svOpen === 'function'"), "svOpen is not defined");
+  t.ev('window.__sv = svOpen({ kind: "painter", id: "claude-monet", label: "Claude Monet" })');
+  await t.waitFor(".sv-count input", 10000, "the subject view's count slider");
+  await t.waitFor(() => t.$$(".sv-canvas [data-sv-h]").length >= 3, 6000, "the subject view's first chips");
+  t.expect(/Claude Monet/.test(t.text(".sv-title")), `the sheet's title isn't Monet's: "${t.text(".sv-title")}"`);
+  t.expect(/as photographed/.test(t.text(".sv-sub")), `the subline doesn't say "as photographed": "${t.text(".sv-sub")}"`);
+  // the default Strip view only lists ten names in its legend; Grid gives every shown color its own tappable swatch
+  await t.click(t.$('[data-sv-arr="gridhue"]'), { wait: 300 });
+  t.ev('document.querySelector(".sv-count input")._countTo(50)');
+  await t.waitFor(() => t.$$(".sv-canvas .sv-tile").length === 50, 4000, `50 tiles after moving the slider to 50 (got ${t.$$(".sv-canvas .sv-tile").length})`);
+  t.expect(t.text("[data-sv-n]") === "50", `the count readout doesn't say 50: "${t.text("[data-sv-n]")}"`);
+  t.expect(/50 most-used/.test(t.text(".sv-sub")), `the subline doesn't say 50: "${t.text(".sv-sub")}"`);
+  t.expect(t.errors.length === 0, `window errors: ${t.errors.join(" | ")}`);
+});
+
+scenario("home", "Subject view: switching arrangement is instant and keeps the same colors", async t => {
+  await H.homeReady(t);
+  t.ev('window.__sv = svOpen({ kind: "painter", id: "claude-monet", label: "Claude Monet" })');
+  await t.waitFor(".sv-count input", 10000, "the subject view's count slider");
+  await t.waitFor(() => t.$$(".sv-canvas [data-sv-h]").length >= 3, 6000, "the subject view's first chips");
+  t.expect(t.$(".sv-strip"), "Strip (the default) did not render");
+  await t.click(t.$('[data-sv-arr="ramp"]'), { wait: 250 });
+  t.expect(t.$(".sv-ramp") && !t.$(".sv-strip"), "Ramp did not replace Strip");
+  await t.click(t.$('[data-sv-arr="wheel"]'), { wait: 250 });
+  t.expect(t.$(".sv-wheel") && !t.$(".sv-ramp"), "Wheel did not replace Ramp");
+  await t.click(t.$('[data-sv-arr="gridhue"]'), { wait: 250 });
+  t.expect(t.$(".sv-grid") && !t.$(".sv-wheel"), "Grid did not replace Wheel");
+  const n0 = t.$$(".sv-canvas .sv-tile").length;
+  // Map hands off to the real honeycomb (js/colorset.js csOnMap -> hmHome()): the same existing screen-change
+  // rule that closes any open sheet closes this one too, and the real map comes up lit with that exact selection
+  await t.click(t.$('[data-sv-arr="map"]'), { wait: 400 });
+  t.expect(t.ev("typeof HONEY_HL !== 'undefined' && !!HONEY_HL"), "choosing Map did not light the honeycomb (HONEY_HL)");
+  t.expect(t.ev("HONEY_HL.hexes.length") === n0, `the map lit a different count than the grid showed (${t.ev("HONEY_HL.hexes.length")} vs ${n0})`);
+  await t.waitFor(() => !t.$(".sv-sheet"), 2000, "the subject view sheet to close when Map was chosen");
+  t.expect(t.errors.length === 0, `window errors: ${t.errors.join(" | ")}`);
+});
+
+scenario("home", "Subject view: a decade subject (1890s) works the same as a painter", async t => {
+  await H.homeReady(t);
+  t.ev('window.__sv = svOpen({ kind: "decade", id: "1890", label: "1890s" })');
+  await t.waitFor(".sv-count input", 10000, "the subject view's count slider");
+  await t.waitFor(() => t.$$(".sv-canvas [data-sv-h]").length >= 3, 6000, "the decade's first chips");
+  t.expect(/1890s/.test(t.text(".sv-title")), `the sheet's title isn't the decade's: "${t.text(".sv-title")}"`);
+  t.expect(/1,173|1173/.test(t.text(".sv-sub")), `the subline doesn't cite the real painting count: "${t.text(".sv-sub")}"`);
+  await t.click(t.$('[data-sv-measure="signature"]'), { wait: 250 }).catch(() => {});   // optional: only offered if the data supports it
+  t.expect(t.errors.length === 0, `window errors: ${t.errors.join(" | ")}`);
+});
+
 scenario("home", "the map fills the full viewport before and after a horizontal swipe", async t => {
   const cv = await H.homeReady(t);
   // the screen's own entrance animation (css/polish.css .screen "enter") can leave the Home screen a few px off
@@ -2051,12 +2103,15 @@ scenario("map", "search 2.0: a hex and a modifier fly; a decade, a painter and a
   t.expect(/Fly to/.test(h) && /≈/.test(t.text(".toast")), `hex: hint "${h}", toast "${t.text(".toast")}"`);
   h = await ask("deep celadon");
   t.expect(/≈/.test(t.text(".toast")), `deep celadon: no "≈" toast (hint "${h}")`);
+  // David, 2026-10-09: a decade or a painter is a subject now -- it opens js/subjectview.js's palette view
+  // (count slider, measures, filters, arrangements), not a fixed handful straight on the map (js/colorset.js csOnMap).
   h = await ask("1660s");
-  await t.waitFor(".cs-hl-pill", 15000, "the 1660s constellation");
-  t.expect(/1660s · [\d,]+ paintings · as photographed/.test(t.text(".cs-hl-pill")), `decade pill says "${t.text(".cs-hl-pill")}"`);
-  await H.homeReady(t);
+  await t.waitFor(".sv-sheet", 15000, "the 1660s subject view");
+  await t.waitFor(() => /1660s/.test(t.text(".sv-title")) && /as photographed/.test(t.text(".sv-sub")), 8000, `decade subject title/subline, got "${t.text(".sv-title")}" / "${t.text(".sv-sub")}"`);
+  await H.homeReady(t);   // a fresh iframe -- the previous subject view sheet goes with it
   h = await ask("sargent");
-  await t.waitFor(() => /Sargent/.test(t.text(".cs-hl-pill")), 15000, "Sargent's constellation");
+  await t.waitFor(".sv-sheet", 15000, "Sargent's subject view");
+  await t.waitFor(() => /Sargent/i.test(t.text(".sv-title")), 8000, `painter subject title, got "${t.text(".sv-title")}"`);
   await H.homeReady(t);
   h = await ask("between teal and navy");
   await t.waitFor(() => /Between Teal and Navy/i.test(t.text(".cs-hl-pill")), 15000, "the road constellation");

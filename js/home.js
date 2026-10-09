@@ -806,6 +806,10 @@ function hmHome() {
   function l18Go() {
     const r = l18Pending; if (!r || !ctrl) return;
     buzz(6); searchInput.blur(); searchBox.hidden = true; searchInput.value = ""; searchHint.hidden = true; l18Pending = null;
+    // David, 2026-10-09: a subject (a painter, a decade, a movement, a look) opens js/subjectview.js's palette
+    // view -- a count slider up to its real distinct colors, measures, filters, arrangements -- instead of lighting
+    // a fixed handful straight on the map; r.set stays as the fallback if that script hasn't loaded.
+    if (r.subject) return typeof svOpen === "function" ? svOpen(r.subject) : (r.set && csOnMap(r.set));
     if (r.set) return csOnMap(r.set);
     const fly = () => { const o = ctrl.flyToColor(r.h); if (o) toast(r.say(o)); };
     if (l18Filtered) { l18Filtered = false; ctrl.update({ items, focus: { h: r.h }, soft: true }); const o = ctrl.current(); if (o) toast(r.say(o)); }
@@ -1115,7 +1119,9 @@ async function l18Resolve(q) {
     const g = L18_GROUPS && L18_GROUPS.byDecade && L18_GROUPS.byDecade[m[1]]; if (!g) return null;
     const hs = l18Hexes((g.distinctive || []).concat(g.top || []).map(x => x.name)); if (!hs.length) return null;
     const title = `${m[1]}s · ${g.n.toLocaleString()} painting${g.n === 1 ? "" : "s"} · as photographed`;
-    return { set: colorSet({ kind: "decade", id: m[1], title, colors: hs.map(h => ({ h })) }), hint: `${l18Sw(hs)}<span>Light up the <b>${m[1]}s</b></span>` };
+    // David, 2026-10-09: a subject opens js/subjectview.js's palette view (count slider up to its real distinct
+    // colors, measures, filters, arrangements) instead of a fixed handful lit on the map; set stays as a fallback.
+    return { set: colorSet({ kind: "decade", id: m[1], title, colors: hs.map(h => ({ h })) }), subject: { kind: "decade", id: m[1], label: `${m[1]}s` }, hint: `${l18Sw(hs)}<span>Light up the <b>${m[1]}s</b></span>` };
   }
   const exact = l18Color(ql);
   if (exact) return { h: exact.h, hint: `${l18Sw([exact.h])}<span>Fly to <b>${esc(exact.n)}</b></span>`, say: o => o.n.toLowerCase() === exact.n.toLowerCase() ? exact.n : `${exact.n} · nearest here: ${o.n}` };
@@ -1129,6 +1135,22 @@ async function l18Resolve(q) {
     return { h, hint: `${l18Sw([h])}<span>Fly to <b>${esc(ql)}</b></span>`, say: o => `${ql} ≈ ${o.n}` };
   }
   if (ql.length < 3) return null;
+  // movements and looks (David, 2026-10-09: "could the same apply to a decade, a style, or anything else" -- yes):
+  // a subject match opens js/subjectview.js's palette view instead of lighting a fixed handful. A real painting
+  // movement in the archive (data/analysis/groups.json byMovement) comes before a hand-curated look (data/looks.js
+  // window.LOOKS -- an aesthetic, a design era, a film look), since the movement is measured from more paintings.
+  L18_GROUPS = L18_GROUPS || await l18Get("data/analysis/groups.json");
+  const mv = L18_GROUPS && L18_GROUPS.byMovement && Object.keys(L18_GROUPS.byMovement).find(k => k.toLowerCase() === ql || k.toLowerCase().startsWith(ql));
+  if (mv) {
+    const g = L18_GROUPS.byMovement[mv], hs = l18Hexes((g.top || []).concat(g.distinctive || []).map(x => x.name));
+    if (hs.length) return { subject: { kind: "movement", id: mv, label: mv }, hint: `${l18Sw(hs)}<span>Light up <b>${esc(mv)}</b></span>` };
+  }
+  if (!window.LOOKS) await loadData("looks");
+  const look = (window.LOOKS || []).find(x => x.name.toLowerCase() === ql)
+    || (window.LOOKS || []).find(x => x.id.replace(/-/g, " ") === ql || x.name.toLowerCase().startsWith(ql));
+  if (look && (look.pals || []).length) {
+    return { subject: { kind: "look", id: look.id, label: look.name }, hint: `${l18Sw(look.pals[0].c.map(c => c[0]))}<span>Light up <b>${esc(look.name)}</b></span>` };
+  }
   L18_PAINTERS = L18_PAINTERS || await l18Get("data/artists/meta.json").then(d => d && d.a ? Object.entries(d.a).map(([slug, a]) => ({ slug, n: a.n, k: a.k || 0, w: a.n.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").split(/[\s.-]+/) })) : []);
   const qw = ql.normalize("NFD").replace(/[̀-ͯ]/g, "").split(" ");
   const p = L18_PAINTERS.filter(a => qw.every(x => a.w.some(w => w.startsWith(x)))).sort((a, b) => b.k - a.k)[0];
@@ -1138,7 +1160,7 @@ async function l18Resolve(q) {
   const hs = l18Hexes(names); if (!hs.length) return null;
   const short = p.n.split(" ").slice(-1)[0], n = A.n || p.k;
   const title = `${short} · ${n.toLocaleString()} painting${n === 1 ? "" : "s"} · as photographed${n < 15 ? " · few paintings" : ""}`;
-  return { set: colorSet({ kind: "painter", id: p.slug, title, colors: hs.map(h => ({ h })) }), hint: `${l18Sw(hs)}<span>Light up <b>${esc(p.n)}</b>'s colors</span>` };
+  return { set: colorSet({ kind: "painter", id: p.slug, title, colors: hs.map(h => ({ h })) }), subject: { kind: "painter", id: p.slug, label: p.n }, hint: `${l18Sw(hs)}<span>Light up <b>${esc(p.n)}</b>'s colors</span>` };
 }
 
 // ---------- the Study corner: "Learn these" means what you're looking at (PLAN.md lane F; home-map-nav.md A6) ----------
@@ -1247,6 +1269,8 @@ function hmShot(arg) {
   if (arg === "bar") setTimeout(() => { const s = document.querySelector(".screen.hm"); if (s) s.classList.remove("chrome-hide"); }, 3200);
   if (arg === "floor") setTimeout(() => { hmSnapFloor(); go("gym"); }, 600);   // L18 B2: a room over the real floor
   if (/^route:/.test(arg)) setTimeout(() => openRoute("#" + arg.slice(6)), 300);   // e.g. home:route:/map/painting/starry-night
+  // home:subject:<kind>:<id>[:<label>] -- js/subjectview.js's palette view, for design review screenshots
+  if (/^subject:/.test(arg)) setTimeout(() => { const [, kind, id, label] = arg.split(":"); if (typeof svOpen === "function") svOpen({ kind, id, label: label ? decodeURIComponent(label) : id }); }, 300);
   if (/^find:/.test(arg)) setTimeout(() => window.HM_SEARCH && window.HM_SEARCH(arg.slice(5)), 300);
   if (arg === "rooms") setTimeout(() => hmTap(document.querySelector("[data-rooms-corner]")), 150);
   if (arg === "views") setTimeout(() => window.HM_CHOOSER && window.HM_CHOOSER("show"), 150);   // the Colors sheet
