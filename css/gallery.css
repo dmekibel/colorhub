@@ -205,7 +205,17 @@
 .gl-page .gl-pal-ui .palette.gl-strip{height:52px;margin-top:2px;border-radius:var(--r-tile,6px);overflow:hidden}
 /* legibility pass (2026-10-09): 12px is under the 13px reading-text floor -- these percentage labels (a photo
    palette's share-of-area, js/studio.js's palPhotoView) are real reading text, not decoration. */
-.gl-strip .pal{position:relative;padding:6px 7px;font:500 13px/1 var(--sans);letter-spacing:0;font-variant-numeric:tabular-nums}
+/* David, 2026-10-09: "the color palette slider doesn't show more than 11 colors." A flex item's default
+   min-width is auto (its content's own min size -- here, the padding plus the percentage label's text), not 0,
+   so chips stopped shrinking once each one needed ~35-40px and the rest silently overflowed this row's own
+   overflow:hidden. min-width:14px (David's own floor -- any narrower and a swatch stops reading as a color at
+   all) replaces that content-based floor with a real one: 20 chips at 14px is 280px, comfortably inside even a
+   320px phone, so every count up to the slider's own max (20) now actually fits and shows. Each chip becomes
+   its own container (container-type) so its OWN rendered width -- not the row's -- decides whether its percent
+   label still fits; squeezed down near the floor, the label quietly drops rather than wrapping into mush. */
+.gl-strip .pal{position:relative;padding:6px 7px;font:500 13px/1 var(--sans);letter-spacing:0;font-variant-numeric:tabular-nums;min-width:14px;container-type:inline-size}
+.gl-strip .pal>span{display:none;white-space:nowrap;overflow:hidden}
+@container (min-width:28px){.gl-strip .pal>span{display:block}}
 .gl-strip .pal[data-ink="dark"],.pal-name i[data-ink="dark"]{color:rgba(14,13,11,.78)}
 .gl-strip .pal[data-ink="light"],.pal-name i[data-ink="light"]{color:rgba(255,255,255,.88)}
 .gl-strip .pal,.gl-pal-ui .pal-name{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}

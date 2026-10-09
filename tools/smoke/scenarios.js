@@ -3248,6 +3248,38 @@ scenario("paintings", "a painting's strip tile opens its color page in one tap, 
   t.expect(!t.$('[data-glrows] [data-glj="0"]').classList.contains("loc") && t.$("[data-gllocate]").hidden, "tapping the row action again didn't clear the locate state");
   t.expect(!t.$("[data-gllitcv]").classList.contains("on"), "the dim canvas is still on after clearing locate");
 });
+// David, 2026-10-09: "the color palette slider doesn't show more than 11 colors." Root cause: a flex item's
+// default min-width is auto (its own content size, here padding + the percent label's text -- not 0), so the
+// strip's chips stopped shrinking once each one needed ~35-40px, and the rest silently overflowed the row's own
+// overflow:hidden. css/gallery.css now floors each chip at 14px and makes it its own container so its percent
+// label (data-glj's <span>) drops out on its own once the chip is too narrow to show it legibly, instead of the
+// chip itself vanishing. Checked on a painting with a pool bigger than 11 (gallery/777, Diverse mode, max 18
+// here) at five slider positions, at both 440px and 375px: the number of VISIBLE (non-zero-width) chips always
+// equals the slider's value, and the expanded list below always shows every one regardless.
+scenario("paintings", "the palette strip shows every chip the slider asks for, not just the first ~11", async t => {
+  for (const w of [440, 375]) {
+    await t.open("#/gallery/777", { settle: 800, size: [w, 956] });
+    const diverse = await t.waitFor(() => t.$$("[data-glo]").find(b => b.dataset.glo === "diverse"), 15000, "the Diverse mode chip");
+    await t.click(diverse, { force: true, wait: 400 });
+    const slide = await t.waitFor("[data-glk]", 8000, "the How-many slider");
+    t.expect(typeof slide._countTo === "function", "the slider isn't a countify() control");
+    const max = +slide.max;
+    t.expect(max >= 12, `this painting's Diverse pool is only ${max} colors -- too small to exercise the >11 case at ${w}px`);
+    for (const k of [2, 8, 12, 16, max]) {
+      if (k > max) continue;
+      slide._countTo(k);
+      await t.sleep(250);
+      const visible = t.$$("[data-glswatches] [data-glj]").filter(c => c.getBoundingClientRect().width > 0);
+      t.expect(visible.length === k, `at ${w}px, ${k} colors asked for but ${visible.length} chips are actually visible`);
+      const rows = t.$$("[data-glrows] [data-glj]");
+      t.expect(rows.length === k, `at ${w}px, the expanded list shows ${rows.length} rows, not all ${k}`);
+      // no chip is clipped off the right edge of the strip
+      const stripR = t.$("[data-glswatches]").getBoundingClientRect();
+      const offscreen = visible.filter(c => c.getBoundingClientRect().right > stripR.right + 1);
+      t.expect(!offscreen.length, `at ${w}px with ${k} colors, ${offscreen.length} chip(s) run past the strip's own right edge`);
+    }
+  }
+});
 // The Analysis section's "Learn this painting" button (js/artwiki.js awAnalysis) was guarded by
 // `typeof paintingLesson === "function"`, a function that was never defined anywhere, so the button never
 // rendered. It now opens the painting's palette as a quick deck (prQuick -> js/learnset.js lsOpen).
