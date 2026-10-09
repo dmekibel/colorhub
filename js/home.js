@@ -463,6 +463,13 @@ function hmHome() {
       onZoom: z => { S.hm.zoom = Math.round(z * 100) / 100; save(); } });
     window.HM_CTRL = ctrl;   // the map, for js/polish.js flyToMap()
     hmWireChrome();
+    // David: "if I change something about the map, the bottom corner buttons disappear, and I can't get them back."
+    // Every chooser setting (stage, family, tone, filter, a collection, Arrange's shape/order/Look/feel/edges) ends
+    // in a render(): cornersBack() used to run only from a sheet/menu CLOSE or a pan's finger-lift, so a stray
+    // chrome-hide (or a faded inline style from a transition in flight when the setting changed) could survive a
+    // render and never get undone until something else happened to close a sheet. A sheet still open afterward
+    // still visually covers the corners as before — this only clears a stuck fade, never the sheet's own layout.
+    cornersBack();
     if (typeof fvHomeReady === "function") fvHomeReady(el, ctrl);   // js/favs.js: open straight into pick mode when asked
   }
   function applyView(k, val) { S.hm[k] = val; save(); buzz(4); }
@@ -527,8 +534,18 @@ function hmHome() {
     // the map is what you're adjusting: the area above the sheet stays clear (a tap there still closes it)
     const scrim = sh.previousElementSibling; if (scrim && scrim.classList.contains("scrim")) scrim.classList.add("hm-scrim-clear");
     const q = s2 => sh.querySelector(s2), qa = s2 => [...sh.querySelectorAll(s2)];
-    const applyInset = () => requestAnimationFrame(() => { if (ctrl) { const r = sh.getBoundingClientRect(); ctrl.setInset({ bottom: Math.max(0, viewEl.getBoundingClientRect().bottom - r.top) }); } });   // measured to the map's own bottom (it reaches past innerHeight on an iPhone Home Screen app)
-    const mo = new MutationObserver(() => { if (!sh.isConnected) { if (ctrl) ctrl.setInset({ bottom: 0 }); mo.disconnect(); } });
+    // David, 2026-10-09: "the middle of the screen is covered by the sheet... zoomed in you can barely see the
+    // difference between views." For Arrange, once the inset has finished easing in (~300ms, honey.js's own
+    // insetCur tween), ctrl.enterFit() flies the map to show the whole thing centered above the sheet, and every
+    // setting change re-fits (js/honey.js update()) so the change reads at a glance; exitFit() below flies back
+    // to the pan/zoom you had, on any way the sheet closes.
+    const applyInset = () => requestAnimationFrame(() => {
+      if (!ctrl) return;
+      const r = sh.getBoundingClientRect();
+      ctrl.setInset({ bottom: Math.max(0, viewEl.getBoundingClientRect().bottom - r.top) });   // measured to the map's own bottom (it reaches past innerHeight on an iPhone Home Screen app)
+      if (arrange) setTimeout(() => { if (sh.isConnected) ctrl.enterFit(); }, reduceMotion ? 0 : 300);
+    });
+    const mo = new MutationObserver(() => { if (!sh.isConnected) { if (ctrl) { if (arrange) ctrl.exitFit(); ctrl.setInset({ bottom: 0 }); } mo.disconnect(); } });
     mo.observe(document.body, { childList: true });
     q("[data-sheet-close]").onclick = () => { buzz(4); close(); };
     const fmt = n => n.toLocaleString();
@@ -755,6 +772,7 @@ function hmHome() {
   paintDo();
   function doMenu() {
     if (STEM_OPEN) { buzz(4); return closeStem(); }
+    if (typeof stemJustClosed === "function" && stemJustClosed()) return;   // a ghost click right after closing must not reopen it (js/core.js)
     if (document.querySelector(".sheet,.scrim")) return;
     document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());
     hmDismissHint();

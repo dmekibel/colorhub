@@ -595,6 +595,18 @@ function roomsNote(id) {
 // it was under a solid dimming scrim; the rooms rise as opaque capsules in a low arc from the corner, under the
 // thumb. A tap anywhere outside (or the ✕, Escape, Back) sinks them back into the corner and nothing else moves.
 let STEM_KEY = null;
+// David: "clicking it again minimizes it, and then automatically it expands again by itself." The corner that opens
+// the stem has z-index:18 while "on" (menus2.css), meant to float above the stem's own scrim so the SAME tap that
+// closes it lands on the button again -- but the button lives inside #app's own stacking context (main{z-index:1}),
+// which caps it there no matter its own z-index, so the stacking fight it's meant to win it can't actually win: a
+// real tap at that spot always hits the full-screen scrim instead. That's still fine (the scrim's own pointerdown
+// closes the same way) -- except iOS Safari can still fire a *delayed* synthetic "click" there afterward (a known
+// quirk: preventDefault on pointerdown doesn't reliably cancel it), which lands squarely on the real button once
+// the scrim has been removed a moment later and reopens what the user just closed. STEM_CLOSED_AT/stemJustClosed
+// is the guard: any attempt to OPEN within a short window of a close is almost certainly that ghost click, not a
+// deliberate second tap, so it's swallowed instead of reopening the stem.
+let STEM_CLOSED_AT = 0;
+const stemJustClosed = () => Date.now() - STEM_CLOSED_AT < 380;
 // The one source of truth for the corners coming back: a pan fade (.chrome-hide on Home) never outlives a closed
 // sheet or menu. Called by closeStem and every sheet() close (David: "the bottom corner buttons disappear").
 // It is the single state function for the corners: called on every way into Home (hmHome), at the end of a bubble <->
@@ -607,7 +619,7 @@ function cornersBack() {
 }
 function closeStem(instant) {
   const s = document.querySelector(".rooms-stem"), sc = document.querySelector(".rm-scrim");
-  STEM_OPEN = false; cornersBack();
+  STEM_OPEN = false; STEM_CLOSED_AT = Date.now(); cornersBack();
   document.body.classList.remove("stem-open");
   if (STEM_KEY) { removeEventListener("keydown", STEM_KEY, true); STEM_KEY = null; }
   document.querySelectorAll("[data-rooms-corner]").forEach(b => { b.classList.remove("on"); b.innerHTML = ROOMS_GLYPH; b.setAttribute("aria-expanded", "false"); });
@@ -621,6 +633,7 @@ function closeStem(instant) {
 }
 function toggleStem(cornerEl) {
   if (STEM_OPEN) { buzz(4); return closeStem(); }
+  if (stemJustClosed()) return;   // a ghost click right after closing must not reopen it (see stemJustClosed above)
   if (document.querySelector(".sheet,.scrim")) return;   // a sheet is already up; don't stack chrome on chrome
   document.querySelectorAll(".rooms-stem,.rm-scrim").forEach(n => n.remove());   // one still sinking from a fast double tap
   buzz(4);
