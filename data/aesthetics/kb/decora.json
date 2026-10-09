@@ -1,0 +1,53 @@
+{
+ "id": "decora",
+ "name": "Decora",
+ "lineage": {
+  "influenced_by": [
+   "Harajuku street fashion",
+   "kidcore-adjacent maximalism"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "peak late 1990s-2000s (Japan)"
+ ],
+ "places": [
+  "Harajuku, Tokyo"
+ ],
+ "garments": [
+  "dozens of plastic hair clips and accessories worn at once",
+  "layered colorful clothing",
+  "stickers on skin"
+ ],
+ "media": [
+  {
+   "title": "FRUiTS magazine (1997–2017)",
+   "note": "the main print record of the look's street-fashion era"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "minimalism entirely, piling on as many colorful accessories as physically possible.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {
+  "decade_of_origin": "Late 1990s",
+  "key_motifs": "Excessive layering of accessories (particularly hair clips), face stickers (plasters), bright primary colors, plastic toys, child-like motifs, layered socks, tutus, surgical masks",
+  "key_colours": "Rainbow palette (all bright/neon primary colors)\nPink, yellow, blue, \nblack (for Dark Decora), pastel rainbow palette",
+  "related_aesthetics": "CandycoreCyberpopDopamineFairy KeiHarajuku FashionKandi RaverKidcoreOshare KeiPoppareUchuu KeiYabi"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Decora"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 63% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

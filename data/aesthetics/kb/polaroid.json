@@ -1,0 +1,39 @@
+{
+ "id": "polaroid",
+ "name": "Polaroid",
+ "lineage": {
+  "influenced_by": [
+   "Edwin Land's instant-film technology (introduced 1948, color from 1963)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "1948–present (with a 2008 near-discontinuation and 2010s relaunch under the Impossible Project/Polaroid Originals)"
+ ],
+ "places": [
+  "amateur photography worldwide"
+ ],
+ "garments": [
+  "not a fashion look — a photographic format"
+ ],
+ "media": [],
+ "figures": [
+  "Edwin Land"
+ ],
+ "reacts_against": "nothing — instant film's specific chemistry produces a soft-contrast, slightly color-shifted look (often cooler highlights, warmer shadows) that became a nostalgic aesthetic reference once digital and smartphone cameras made the format mostly obsolete for practical use.",
+ "revivals": [
+  "actively relaunched as a product (Polaroid Originals, since renamed back to Polaroid) and widely imitated by digital filters"
+ ],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "mostly muted — about 60% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

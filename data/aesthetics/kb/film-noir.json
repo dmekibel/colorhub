@@ -1,0 +1,68 @@
+{
+ "id": "film-noir",
+ "name": "Film noir",
+ "lineage": {
+  "influenced_by": [
+   "German Expressionist cinema's hard lighting",
+   "hardboiled crime fiction"
+  ],
+  "influences": [
+   "neon-noir",
+   "cyberpunk"
+  ]
+ },
+ "eras": [
+  "c. 1940–1958"
+ ],
+ "places": [
+  "Hollywood"
+ ],
+ "garments": [
+  "trench coats",
+  "fedoras",
+  "not primarily a fashion look — a cinematography style"
+ ],
+ "media": [
+  {
+   "title": "Billy Wilder, Double Indemnity (1944)",
+   "note": ""
+  },
+  {
+   "title": "critic Nino Frank coined \"film noir\" in a 1946 essay",
+   "note": ""
+  }
+ ],
+ "figures": [
+  "Billy Wilder",
+  "Nino Frank (coined the term)"
+ ],
+ "reacts_against": "classical Hollywood's bright, evenly lit studio glamour, using hard shadow and venetian-blind lighting to visualize moral ambiguity instead.",
+ "revivals": [
+  "directly cited as neon-noir and cyberpunk's shared visual ancestor"
+ ],
+ "article": "",
+ "wiki_facts": {
+  "other_names": "Melodrama (obsolete)",
+  "decade_of_origin": "1930s",
+  "key_motifs": "Violence, sex, mystery",
+  "key_colours": "Black, grey, white",
+  "related_aesthetics": "After HoursChernukhaFemme FataleFrench New WaveMafia AestheticPin-upSpy FictionHeistcoreWartime Austerity",
+  "key_values": "Pessimism, sexuality, corruption"
+ },
+ "sources": [
+  {
+   "label": "Aesthetics Wiki",
+   "url": "https://aesthetics.fandom.com/wiki/Film_Noir"
+  }
+ ],
+ "measured": {
+  "n_images": 6,
+  "n_candidates": 6,
+  "findings": [
+   "dark — about 58% of the measured color across 6 wiki photos is below mid-lightness",
+   "mostly muted — about 100% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "aw",
+  "caveat": "Colors measured from the Aesthetics Wiki images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}

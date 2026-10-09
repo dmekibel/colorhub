@@ -1,0 +1,41 @@
+{
+ "id": "technicolor",
+ "name": "Technicolor",
+ "lineage": {
+  "influenced_by": [
+   "the three-strip Technicolor process (patented 1932)"
+  ],
+  "influences": []
+ },
+ "eras": [
+  "three-strip process 1932–1955 (peak Hollywood use)"
+ ],
+ "places": [
+  "Hollywood studio system"
+ ],
+ "garments": [
+  "not a fashion look — a film color process"
+ ],
+ "media": [
+  {
+   "title": "The Wizard of Oz (1939)",
+   "note": "the process's most iconic single use (the shift from sepia Kansas to color Oz)"
+  }
+ ],
+ "figures": [],
+ "reacts_against": "nothing — it's a specific physical technology (three strips of black-and-white film, each exposed through a different color filter, recombined in printing) that happened to produce unusually saturated, stable color, later imitated digitally as a nostalgic look long after the real process stopped being used.",
+ "revivals": [],
+ "article": "",
+ "wiki_facts": {},
+ "sources": [],
+ "measured": {
+  "n_images": 4,
+  "n_candidates": 4,
+  "findings": [
+   "dark — about 57% of the measured color across 4 Commons photos is below mid-lightness",
+   "mostly muted — about 87% of the measured color is low-saturation (greys, dusty tones)"
+  ],
+  "source": "commons",
+  "caveat": "Colors measured from Wikimedia Commons images as photographed and displayed on screen; actual materials vary, and screen colors are approximate."
+ }
+}
