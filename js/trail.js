@@ -137,8 +137,112 @@ function tlDecorate(el) {
     hd.classList.add("tl-x");
   }
   back.setAttribute("aria-description", "Hold to see your trail");
-  // pull down from the top: one step back, like closing a sheet (not on full-screen tools, whose drags are their own)
-  if (!el.classList.contains("fixed") && typeof hmPullClose === "function") hmPullClose(el, () => { if (el.dataset.tl) xBack(); else tlToOrigin(); });
+  // pull down from the top, or swipe back from the left edge: one step back, like closing a sheet (not on
+  // full-screen tools, whose drags are their own) -- js/trail.js's own gesture, tlgWire below
+  if (!el.classList.contains("fixed")) tlgWire(el);
+}
+
+// ---------- gesture-following back (David, 2026-10-09): "if I swipe down I don't need to see it shrink back
+// into its original bubble, I just need to see the page swiped away downwards; if I swipe back, the zoom-out
+// animation doesn't make sense in that context." Both directions track the finger 1:1 (with light resistance),
+// show the destination already sitting underneath as you drag -- the honeycomb's own last frame for a return
+// straight to the map (js/honey.js snapshot(): the one destination worth a real preview, since the live canvas
+// can't be rebuilt mid-drag without risking a cancelled gesture having to undo it), a calm surface otherwise --
+// and either spring back (release early) or carry on off-screen at the release velocity (release past the
+// threshold), landing on the real screen only once that motion is done. TLG_SKIP stands down js/mapxfer.js's
+// bubble grow/shrink and show()'s own crossfade/entrance for that one landing, since the gesture already did
+// the motion; a deliberate tap (‹, Close, the map glyph) is untouched and keeps the bubble shrink.
+// Reduced motion: this gesture isn't wired at all -- ‹ (already instant under reduceMotion) is the way back.
+let TLG_SKIP = false;
+let TLG_ANIM = null;   // the in-flight "continue off-screen" animation, if any (tools/smoke: force it to the end, same as MX.anims)
+const TLG_PULL = 110, TLG_EDGE = 28, TLG_SLOP = 10, TLG_BORN = 350, TLG_REST = 700, TLG_FLING = .5, TLG_SPRING = 260, TLG_CAP = 320;
+// the one destination with a cheap, honest preview: the map's last drawn frame, kept alive in HM_CTRL's own
+// (possibly detached) canvas whether or not the map is on screen right now
+function tlgSnapshot() {
+  try { return typeof HM_CTRL !== "undefined" && HM_CTRL && HM_CTRL.snapshot ? HM_CTRL.snapshot(Math.round(innerWidth)) : null; } catch (e) { return null; }
+}
+// where releasing this gesture lands -- exactly what the back button already does (xBack if this page is on
+// the trail, tlToOrigin otherwise) -- and whether that's the map, the one case worth a real backdrop. A page
+// opened straight from the map still joins the trail as its own one-entry "r:" token (js/trail.js tlNote), so
+// xBack() on it pops that single entry and lands on the origin anyway -- reachesOrigin covers that case too,
+// not just the no-trail one.
+function tlgDest(el) {
+  const onTrail = !!el.dataset.tl, reachesOrigin = !onTrail || XSTACK.length <= 1, toMap = reachesOrigin && !xFallbackTab();
+  return { toMap, go: () => { if (onTrail) xBack(); else tlToOrigin(); } };
+}
+function tlgCommit(dest) {
+  TLG_SKIP = true;
+  try { dest.go(); } finally { TLG_SKIP = false; }
+}
+function tlgFloor(toMap) {
+  const d = document.createElement("div");
+  d.className = "tlg-floor";
+  const img = toMap && tlgSnapshot();
+  if (img) { d.style.backgroundImage = `url(${img})`; d.classList.add("tlg-floor-img"); }
+  document.body.appendChild(d);
+  return d;
+}
+function tlgWire(el) {
+  if (!el || reduceMotion) return;
+  const born = performance.now(), blocked = e => e.target.closest && e.target.closest("canvas,input,textarea,select,[data-nopull]");
+  let lastScroll = 0;
+  const onScroll = () => { lastScroll = performance.now(); if (!el.isConnected) removeEventListener("scroll", onScroll); };
+  addEventListener("scroll", onScroll, { passive: true, capture: true });
+  let a = null;   // the live gesture: { id, axis, x0, y0, dest, floor, anim }
+  const clean = () => {
+    if (a && a.floor) a.floor.remove();
+    if (a && a.anim) { try { a.anim.cancel(); } catch (e) {} if (TLG_ANIM === a.anim) TLG_ANIM = null; }
+    el.style.transition = ""; el.style.transform = ""; el.style.willChange = "";
+    a = null;
+  };
+  el.addEventListener("pointerdown", e => {
+    if (!e.isPrimary || a || document.querySelector(".sheet") || performance.now() - born < TLG_BORN || blocked(e)) return;
+    const vertOK = pageScrollTop() <= 0 && performance.now() - lastScroll >= TLG_REST, horizOK = e.clientX < TLG_EDGE;
+    if (!vertOK && !horizOK) return;
+    a = { id: e.pointerId, x0: e.clientX, y0: e.clientY, axis: null, vertOK, horizOK, lastX: e.clientX, lastY: e.clientY, lastT: performance.now(), vx: 0, vy: 0, floor: null, anim: null };
+  }, { passive: true });
+  el.addEventListener("pointermove", e => {
+    if (!a || e.pointerId !== a.id) return;
+    const dx = e.clientX - a.x0, dy = e.clientY - a.y0;
+    if (!a.axis) {
+      if (a.horizOK && dx > TLG_SLOP && dx > Math.abs(dy) * 1.6) a.axis = "x";
+      else if (a.vertOK && dy > TLG_SLOP && dy > Math.abs(dx) * 1.6 && pageScrollTop() <= 0) a.axis = "y";
+      else { if (Math.abs(dx) > 10 || Math.abs(dy) > 10) a = null; return; }
+      a.dest = tlgDest(el);
+      a.floor = tlgFloor(a.dest.toMap);
+      el.style.willChange = "transform";
+      try { el.setPointerCapture(a.id); } catch (er) {}
+    }
+    e.preventDefault();
+    const now = performance.now(), dt = Math.max(1, now - a.lastT);
+    const d = a.axis === "x" ? dx : dy, resisted = Math.max(0, d < 80 ? d * .55 : 44 + (d - 80) * .35);
+    el.style.transition = "none";
+    el.style.transform = a.axis === "x" ? `translateX(${resisted}px)` : `translateY(${resisted}px)`;
+    const v = ((a.axis === "x" ? e.clientX - a.lastX : e.clientY - a.lastY)) / dt;
+    if (a.axis === "x") a.vx = v; else a.vy = v;
+    a.lastX = e.clientX; a.lastY = e.clientY; a.lastT = now; a.d = d; a.resisted = resisted;
+  }, { passive: false });
+  const release = e => {
+    if (!a || e.pointerId !== a.id) return;
+    if (!a.axis) { a = null; return; }
+    const v = a.axis === "x" ? a.vx : a.vy, past = (a.d || 0) > TLG_PULL || v > TLG_FLING, dest = a.dest, floor = a.floor;
+    const final = a.axis === "x" ? `translateX(${innerWidth + 60}px)` : `translateY(${innerHeight * .7 + 60}px)`;
+    if (past) {
+      const remaining = (a.axis === "x" ? innerWidth - a.resisted : innerHeight * .7 - a.resisted);
+      const dur = Math.min(TLG_CAP, Math.max(120, remaining / Math.max(v, .35)));
+      el.style.transition = "none";
+      a.anim = TLG_ANIM = el.animate([{ transform: el.style.transform || "none" }, { transform: final }], { duration: dur, easing: "linear", fill: "forwards" });
+      a.anim.onfinish = () => { TLG_ANIM = null; floor.remove(); tlgCommit(dest); };
+    } else {
+      el.style.transition = `transform ${TLG_SPRING}ms var(--spring)`;
+      el.style.transform = "translate(0,0)";
+      setTimeout(() => { if (floor) floor.remove(); el.style.transition = ""; el.style.transform = ""; el.style.willChange = ""; }, TLG_SPRING + 20);
+    }
+    a = null;
+  };
+  el.addEventListener("pointerup", release);
+  el.addEventListener("pointercancel", () => { clean(); });
+  el.addEventListener("lostpointercapture", e => { if (a && a.id === e.pointerId && a.axis) release(e); });
 }
 
 // ---------- going back, jumping, exiting ----------

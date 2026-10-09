@@ -546,20 +546,32 @@ function hmHome() {
   // (js/core.js sheet() and its popstate). chooser("show") opens Colors; chooser("look") opens Arrange. ----------
   const HM_FEEL_SPECS = [["mag", "Magnify", "Flat", "Fisheye"], ["space", "Spacing", "Tight", "Airy"], ["size", "Bubble size", "Small", "Large"]];
   const HM_COLLECTIONS = ["yours", "earth", ...CS_SRC.map(([k]) => "src-" + k)];
+  // David, 2026-10-09: "maybe Colors and Arrange should be combined into one menu with a tab on top." One sheet,
+  // one entry on the Do menu; both panes are built and wired up front (not re-rendered on switch) and a
+  // segmented control swaps which one shows, remembering the last tab (S.hm.chooserTab). Non-modal (the scrim
+  // stays pointer-events:none) and the map staying recentered above the sheet apply in both tabs; the Arrange
+  // tab's own full fit-mode (zoom out to the whole layout) only makes sense there, so it engages and disengages
+  // with the tab itself, not just the sheet's own open/close.
   async function chooser(which) {
     if (document.querySelector(".hm-chooser")) return;
-    const arrange = which === "look" || which === "arrange";
+    let tab = which === "look" || which === "arrange" ? "arrange" : which === "show" || which === "colors" ? "colors" : (S.hm.chooserTab === "arrange" ? "arrange" : "colors");
     buzz(4);
     if (!LONG_NAMES || !CORE_NAMES || !SHADES) { await Promise.all([loadLongNames(), loadCoreNames(), loadShades()]); if (!el.isConnected || document.querySelector(".sheet")) return; }
     const v = hmView(), everyNameCount = hmEveryNameItems().length, shadeCount = (SHADES || []).length;
-    const head = (t, acts) => `<div class="hm-ch-head" data-sheet-grab>
-        <div class="hm-ch-t"><h3 class="title-2">${t}</h3><p class="hm-count" data-count></p></div>
-        <span class="hm-chooser-acts">${acts}<button class="iconq hm-ch-x" data-sheet-close aria-label="Close">${ICON.x}</button></span>
+    const tabsHTML = `<div class="hm-ch-tabs" role="tablist" aria-label="Colors or Arrange">
+        <button class="hm-ch-tab" data-tab="colors" role="tab">Colors</button>
+        <button class="hm-ch-tab" data-tab="arrange" role="tab">Arrange</button>
       </div>`;
-    let body;
-    if (arrange) {
-      body = `${head("Arrange", "")}
-      <div class="hm-ch-scroll" data-sheet-scroll>
+    const head = acts => `<div class="hm-ch-head" data-sheet-grab>
+        ${tabsHTML}
+        <span class="hm-chooser-acts" data-colors-acts>${acts}</span>
+        <span class="hm-chooser-acts" data-arrange-acts hidden></span>
+        <button class="iconq hm-ch-x" data-sheet-close aria-label="Close">${ICON.x}</button>
+      </div>
+      <p class="hm-count" data-count></p>`;
+    let body, arrangePane, colorsPane;
+    {
+      arrangePane = `<div class="hm-ch-scroll" data-pane="arrange" data-sheet-scroll>
         <div class="hm-arr" role="radiogroup" aria-label="Arrange by">${HONEY_ARR_IDS.map(id => `<button class="hm-arr-b${v.arr === id ? " on" : ""}" data-arr="${id}" role="radio" aria-checked="${v.arr === id}" aria-label="${esc(HONEY_ARR[id].title)}: ${esc(HONEY_ARR[id].sub)}"><span class="hm-arr-pic">${hmArrIcon(id)}</span><b>${esc(HM_ARR_SHORT[id] || HONEY_ARR[id].title)}</b></button>`).join("")}</div>
         <div class="hm-ladder hm-ord" data-ord-row role="radiogroup"></div>
         <p class="hm-arr-sub" data-arr-sub></p>
@@ -570,17 +582,12 @@ function hmHome() {
         <div class="cx-sec"><b>Edges</b></div>
         <div class="hm-seg hm-l18-fam" aria-label="Map edges">${[["", "One map"], ["1", "Endless"]].map(([k, l]) => `<button class="${!!S.hm.endless === !!k ? "on" : ""}" data-endless="${k}">${l}</button>`).join("")}</div>
       </div>`;
-    } else {
       const rung = (src, big, small) => `<button class="hm-rung${v.src === src ? " on" : ""}" data-src="${src}"><b>${big}</b><small>${small}</small></button>`;
       const coll = HM_COLLECTIONS.map(hmSet).filter(Boolean);
       const dotsFor = s => filterColors(csBase(s.state.base), { ...s.state, n: 5 });
       const famBtn = f => `<button class="hm-fam${v.fam === f ? " on" : ""}" data-famv="${f}"><span class="hm-fam-dots" data-dots></span><b>${f || "All"}</b><em data-n></em></button>`;
       const segN = (key, opts) => `<div class="hm-seg hm-seg-n" data-key="${key}">${opts.map(([id, label]) => `<button class="${(v[key] || "") === id ? "on" : ""}" data-val="${id}"><span>${esc(label)}</span><em data-n></em></button>`).join("")}</div>`;
-      body = `${head("Colors", `<button class="iconq" data-search aria-label="Search">${ICON.search}</button>
-          ${typeof NMR_ICON !== "undefined" ? `<button class="iconq" data-namer aria-label="Name any color">${NMR_ICON}</button>` : ""}
-          <button class="iconq" data-surprise aria-label="Surprise me">${ICON.dice}</button>
-          ${typeof ssOpen === "function" ? `<button class="iconq" data-slideshow aria-label="Slideshow">${ICON.play}</button>` : ""}`)}
-      <div class="hm-ch-scroll" data-sheet-scroll>
+      colorsPane = `<div class="hm-ch-scroll" data-pane="colors" data-sheet-scroll>
         <div class="cx-sec"><b>How many</b></div>
         <div class="hm-ladder">${HM_STAGES.map((n, i) => rung("stage:" + n, n.toLocaleString(), "Stage " + (i + 1))).join("")}${rung("every-name", everyNameCount.toLocaleString(), "Every name")}${shadeCount ? rung("every-shade", (everyNameCount + shadeCount).toLocaleString(), "Every shade") : ""}</div>
         <div class="cx-sec"><b>Family</b></div>
@@ -593,12 +600,35 @@ function hmHome() {
         <div class="cx-sec"><b>Collections</b></div>
         <div class="cx-chips">${coll.map(s => `<button class="cx-chip${v.src === s.id ? " on" : ""}" data-src="${s.id}">${cxDots(dotsFor(s))}<b>${esc(s.title)}</b></button>`).join("")}</div>
       </div>`;
+      const colorsActs = `<button class="iconq" data-search aria-label="Search">${ICON.search}</button>
+          ${typeof NMR_ICON !== "undefined" ? `<button class="iconq" data-namer aria-label="Name any color">${NMR_ICON}</button>` : ""}
+          <button class="iconq" data-surprise aria-label="Surprise me">${ICON.dice}</button>
+          ${typeof ssOpen === "function" ? `<button class="iconq" data-slideshow aria-label="Slideshow">${ICON.play}</button>` : ""}`;
+      body = `${head(colorsActs)}${colorsPane}${arrangePane}`;
     }
-    const { sh, close } = sheet(`<div class="cx-sh hm-chooser" data-which="${arrange ? "arrange" : "colors"}">${body}</div>`);
-    sh.classList.add("cx-sheet", "hm-sheet-panel", arrange ? "hm-sheet-arrange" : "hm-sheet-colors");
-    // the map is what you're adjusting: the area above the sheet stays clear (a tap there still closes it)
+    const { sh, close } = sheet(`<div class="cx-sh hm-chooser" data-which="colors-arrange" data-tab="${tab}">${body}</div>`);
+    sh.classList.add("cx-sheet", "hm-sheet-panel", "hm-sheet-colors-arrange", tab === "arrange" ? "hm-sheet-arrange" : "hm-sheet-colors");
+    // David, 2026-10-09 (both tasks together): "tapping the top half instantly closes Arrange... I need to pan
+    // and zoom the map while choosing" + "combine Colors and Arrange into one menu with a tab." Non-modal in
+    // both tabs now (the scrim is pointer-events:none throughout, not just while Arrange happens to be active),
+    // so the map above stays fully interactive whichever tab is open.
     const scrim = sh.previousElementSibling; if (scrim && scrim.classList.contains("scrim")) scrim.classList.add("hm-scrim-clear");
     const q = s2 => sh.querySelector(s2), qa = s2 => [...sh.querySelectorAll(s2)];
+    const paneC = q('[data-pane="colors"]'), paneA = q('[data-pane="arrange"]');
+    const syncTab = () => {
+      paneC.hidden = tab !== "colors"; paneA.hidden = tab !== "arrange";
+      q("[data-colors-acts]").hidden = tab !== "colors"; q("[data-arrange-acts]").hidden = tab !== "arrange";
+      qa(".hm-ch-tab").forEach(b => { const on = b.dataset.tab === tab; b.classList.toggle("on", on); b.setAttribute("aria-selected", on); });
+      sh.dataset.tab = tab;
+      sh.classList.toggle("hm-sheet-arrange", tab === "arrange"); sh.classList.toggle("hm-sheet-colors", tab === "colors");
+    };
+    syncTab();
+    qa(".hm-ch-tab").forEach(b => b.onclick = () => {
+      if (b.dataset.tab === tab) return;
+      buzz(4); tab = b.dataset.tab; S.hm.chooserTab = tab; save(); syncTab(); paintCount();
+      if (ctrl) { if (tab === "arrange") ctrl.enterFit(); else ctrl.exitFit(); }
+      applyInset();
+    });
     // David, 2026-10-09: "the middle of the screen is covered by the sheet... zoomed in you can barely see the
     // difference between views." For Arrange, once the inset has finished easing in (~300ms, honey.js's own
     // insetCur tween), ctrl.enterFit() flies the map to show the whole thing centered above the sheet, and every
@@ -611,40 +641,39 @@ function hmHome() {
       // the sheet's own slide-up entrance is still moving at this first read -- re-measure once it's actually
       // settled (same ~300ms as the fit flight below) rather than fit against a transform mid-flight, or the
       // computed inset (and so the fit) can come out based on where the sheet WAS, not where it ends up.
-      if (arrange) setTimeout(() => { if (sh.isConnected) { measureInset(); ctrl.enterFit(); } }, reduceMotion ? 0 : 300);
+      if (tab === "arrange") setTimeout(() => { if (sh.isConnected) { measureInset(); ctrl.enterFit(); } }, reduceMotion ? 0 : 300);
     });
     // David: "when I open Arrange it doesn't zoom out enough and doesn't center everything in the top half" --
     // re-measure (and for Arrange, re-fit) whenever the sheet's own height changes, not just once at open: a
     // chip wrapping to a second line, a family list growing, the keyboard, all change where its top really is.
     const ro = new ResizeObserver(applyInset); ro.observe(sh);
-    const mo = new MutationObserver(() => { if (!sh.isConnected) { ro.disconnect(); if (ctrl) { if (arrange) ctrl.exitFit(); ctrl.setInset({ bottom: 0 }); } mo.disconnect(); } });
+    const mo = new MutationObserver(() => { if (!sh.isConnected) { ro.disconnect(); if (ctrl) { if (tab === "arrange") ctrl.exitFit(); ctrl.setInset({ bottom: 0 }); } mo.disconnect(); } });
     mo.observe(document.body, { childList: true });
-    q("[data-sheet-close]").onclick = () => { buzz(4); close(); };
+    qa("[data-sheet-close]").forEach(b => b.onclick = () => { buzz(4); close(); });
     // David: "tapping the top half instantly closes Arrange... I need to pan and zoom the map while choosing
     // arrangements... close it by double-tapping the map, the ✕, or swiping the sheet down." The scrim above the
-    // sheet is now pointer-events:none (css/home.css .hm-scrim-clear) for Arrange, so every tap/pan/pinch reaches
+    // sheet is pointer-events:none (css/home.css .hm-scrim-clear) in both tabs, so every tap/pan/pinch reaches
     // the canvas normally; a double-tap specifically closes the sheet instead of the canvas's own double-tap-to-
-    // zoom (captured here, ahead of honey.js's own canvas listeners, and stopped from reaching them).
-    if (arrange) {
-      let lastTapT = 0;
-      const dblClose = e => {
-        if (e.pointerType && e.pointerType !== "touch" && e.pointerType !== "mouse") return;
-        const now = performance.now();
-        if (now - lastTapT < 350) { e.stopPropagation(); buzz(6); close(); lastTapT = 0; return; }
-        lastTapT = now;
-      };
-      viewEl.addEventListener("pointerup", dblClose, true);
-      cleanup.push(() => viewEl.removeEventListener("pointerup", dblClose, true));
-    }
+    // zoom (captured here, ahead of honey.js's own canvas listeners, and stopped from reaching them). Non-modal
+    // in both tabs now, not just Arrange, per the same combined-sheet request.
+    let lastTapT = 0;
+    const dblClose = e => {
+      if (e.pointerType && e.pointerType !== "touch" && e.pointerType !== "mouse") return;
+      const now = performance.now();
+      if (now - lastTapT < 350) { e.stopPropagation(); buzz(6); close(); lastTapT = 0; return; }
+      lastTapT = now;
+    };
+    viewEl.addEventListener("pointerup", dblClose, true);
+    cleanup.push(() => viewEl.removeEventListener("pointerup", dblClose, true));
     const fmt = n => n.toLocaleString();
     function paintCount() {
       const p = q("[data-count]"); if (!p || !p.isConnected) return;
-      p.textContent = arrange ? `${fmt(items.length)} color${items.length === 1 ? "" : "s"} · ${hmArrLabel()}`
+      p.textContent = tab === "arrange" ? `${fmt(items.length)} color${items.length === 1 ? "" : "s"} · ${hmArrLabel()}`
         : `${fmt(items.length)} color${items.length === 1 ? "" : "s"}${hlAll ? "" : " · " + hmViewLabel()}`;
     }
     paintCount();
 
-    if (arrange) {
+    {
       // ---- Arrange by: flat iconic pictures (hmArrIcon), drawn once with the sheet ----
       // ---- the order inside the shape: Center on (radial shapes) or Sort by (grids), one row of small chips ----
       const ordRow = q("[data-ord-row]");
@@ -725,7 +754,8 @@ function hmHome() {
       qa("[data-endless]").forEach(b => b.onclick = () => {
         applyView("endless", !!b.dataset.endless); qa("[data-endless]").forEach(x => x.classList.toggle("on", x === b)); render(true);
       });
-    } else {
+    }
+    {
       // ---- Colors: every change applies at once, and every chip says how many it would show ----
       const refresh = () => {
         if (!sh.isConnected) return;
@@ -874,8 +904,14 @@ function hmHome() {
   hmShowChrome(); cornersBack();   // every way into Home starts with both corners drawn and tappable
   // ---------- the right corner: ONE button (PLAN.md decision #2; David: "Study the map is a mini game that belongs with
   // learning, inside a menu, not its own button"). It shows how many names are due, and opens a labeled arc of verbs,
-  // the rooms stem's mirror: Recall · Learn these · Study the map · Favorites · Search · Colors · Arrange. The arc is
-  // the stem's own machinery (STEM_OPEN, .rm-scrim, closeStem), so a tap outside, Escape and Back all close it. ----------
+  // the rooms stem's mirror: Study the map · Favorites · Search · Colors & Arrange. The arc is the stem's own
+  // machinery (STEM_OPEN, .rm-scrim, closeStem), so a tap outside, Escape and Back all close it.
+  // David, 2026-10-09: "this menu is too long... Recall doesn't belong here, it's already in the left menu" (the
+  // Rooms corner's Learn room, which leads with the due check-in) -- dropped. "Learn these and Study the map
+  // overlap" -- folded into one: Study the map (the instant deck, what the old "Learn these" actually opened),
+  // its own subtitle now carrying the "names near the middle" default scope the separate mapstudy.js games
+  // screen used to own alone. Colors and Arrange are one combined sheet now (chooser, below) with its own tab
+  // switch, so they're one door here too. Four items, not seven. ----------
   const doBtn = $("#hmDo");
   function paintDo() {
     const due = typeof dueList === "function" ? dueList().length : 0;
@@ -892,19 +928,16 @@ function hmHome() {
     hmDismissHint();
     buzz(4);
     STEM_OPEN = true; document.body.classList.add("stem-open");
-    const due = typeof dueList === "function" ? dueList() : [], v = hmView(), lit = typeof HONEY_HL !== "undefined" && HONEY_HL;
+    const v = hmView(), lit = typeof HONEY_HL !== "undefined" && HONEY_HL;
     const ic = svg => `<span class="rm-art hm-do-ic">${svg}</span>`;
     const dots = hs => `<span class="rm-art hm-do-ic hm-do-dots">${hs.slice(0, 4).map(h => `<i style="background:${esc(h)}"></i>`).join("")}</span>`;
     const sample = items.filter((_, i) => i % Math.max(1, Math.floor(items.length / 4)) === 0).map(it => it.h);
     // top to bottom as read; the thumb's nearest (the bottom) are the map's own controls
     const rows = [
-      due.length && { id: "recall", t: "Recall", n: `${due.length} due today`, art: `<span class="rm-art rm-art-strip">${due.slice(0, 8).map(c => `<i style="background:${esc(c.h)}"></i>`).join("")}</span>` },
-      typeof prQuick === "function" && { id: "learn", t: "Learn these", n: lit ? honeyLitLabel().title : "Names near the middle", art: ic(PR_ICON.cards), attr: "data-pr-study" },
-      typeof msOpen === "function" && { id: "map", t: "Study the map", n: "Find colors by where they live", art: ic(MS_ICON), attr: 'id="hmMapStudy"' },
-      typeof fvPickStart === "function" && { id: "fav", t: "Favorites", n: "Tap the colors you love", art: ic(FV_HEART), attr: 'id="hmFav"' },
+      typeof prQuick === "function" && { id: "learn", t: "Study the map", n: lit ? honeyLitLabel().title : "Names near the middle", art: ic(PR_ICON.cards), attr: "data-pr-study" },
+      typeof fvPickStart === "function" && { id: "fav", t: "Favorites", n: "Colors you love", art: ic(FV_HEART), attr: 'id="hmFav"' },
       { id: "search", t: "Search", n: "A color, a hex, a painter, a decade", art: ic(ICON.search), attr: "data-do-search" },
-      { id: "colors", t: "Colors", n: `${hlAll ? "Every name" : hmViewLabel()} · ${items.length.toLocaleString()}`, art: dots(sample), attr: "data-do-colors" },
-      { id: "arrange", t: "Arrange", n: `${hmArrLabel()} · ${(HM_LOOKS.find(l => l[0] === v.style) || [, ""])[1]}`, art: ic(HM_SLIDERS), attr: "data-do-arrange" },
+      { id: "colors", t: "Colors & Arrange", n: `${hlAll ? "Every name" : hmViewLabel()} · ${hmArrLabel()}`, art: dots(sample), attr: "data-do-colors" },
     ].filter(Boolean);
     const n = rows.length;
     const scrim = document.createElement("div"); scrim.className = "rm-scrim rm-scrim-r";
@@ -925,15 +958,12 @@ function hmHome() {
     STEM_KEY = e => { if (e.key === "Escape") { e.stopPropagation(); closeStem(); } };
     addEventListener("keydown", STEM_KEY, true);
     const acts = {
-      // the one Study door (js/learnset.js lsOpen -> overview -> varied formats), never the old swipe deck
-      // straight away (David, 2026-10-09: "pressing the recall / study button takes you straight into flashcards")
-      recall: () => typeof lhStudy === "function" && typeof lhDue === "function" ? lhStudy(lhDue(), { label: "Recall", title: "Study <em>what's due</em>", src: "recall", exact: true }) : deck("review"),
+      // "Study the map": the instant deck seeded with whatever's lit, else the middle of the map (the old
+      // "Learn these"). Recall itself lives only in the left menu's Learn room now (its own due check-in).
       learn: () => hmStudyCorner(ctrl, items),
-      map: () => msOpen({ from: "home" }),
       fav: () => fvPickStart(el, ctrl),
       search: () => openSearch(),
-      colors: () => chooser("show"),
-      arrange: () => chooser("look"),
+      colors: () => chooser(S.hm.chooserTab === "arrange" ? "arrange" : "colors"),   // Colors & Arrange, one sheet, last tab remembered
     };
     stem.querySelectorAll("[data-do]").forEach(b => b.onclick = () => { buzz(8); closeStem(true); acts[b.dataset.do](); });
   }

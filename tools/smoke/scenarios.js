@@ -58,15 +58,23 @@ const H = {
     await t.waitFor(() => /\d/.test(t.text(".hm-title small")) && !/Loading/.test(t.text(".hm-title small")), 10000, "the honeycomb to fill");
     return cv;
   },
-  // Home's right corner: one button, a labeled menu (js/home.js doMenu); which = a [data-do] row
+  // Home's right corner: one button, a labeled menu (js/home.js doMenu); which = a [data-do] row.
+  // David, 2026-10-09: trimmed to 4 rows (learn, fav, search, colors) — Recall moved to the left
+  // menu's Learn room, and "arrange" folded into the combined Colors & Arrange sheet (one [data-do]
+  // row, "colors", with a tab inside). Callers that still ask for "arrange" or "map" get "colors".
   async menu(t, which) {
     await t.click("#hmDo", { wait: 120 });
     await t.waitFor(".hm-do-stem [data-do]", 6000, "the right corner's menu");
-    if (which) await t.click(`.hm-do-stem [data-do="${which}"]`, { wait: 200 });
+    const row = which === "arrange" || which === "map" ? "colors" : which;
+    if (row) await t.click(`.hm-do-stem [data-do="${row}"]`, { wait: 200 });
   },
+  // which = "colors" | "arrange" — both open the one combined sheet; "arrange" also switches its tab.
   async sheet(t, which = "colors") {
     await H.menu(t, which);
-    await t.waitFor(`.hm-chooser[data-which="${which}"]`, 10000, `the ${which} sheet`);
+    await t.waitFor(`.hm-chooser`, 10000, `the ${which} sheet`);
+    if (which === "arrange" && !t.$(`.hm-chooser[data-tab="arrange"]`)) {
+      await t.click('.hm-chooser .hm-ch-tab[data-tab="arrange"]', { wait: 300 });
+    }
   },
   async keys(t, key) { t.w.dispatchEvent(new t.w.KeyboardEvent("keydown", { key, bubbles: true })); await t.sleep(300); },
 };
@@ -348,8 +356,7 @@ scenario("home", "the full-height screen survives an arrangement change in a sta
 
 scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close it, a double-tap does", async t => {
   await H.homeReady(t);
-  await H.menu(t);
-  await t.click('.hm-do-stem [data-do="arrange"]', { wait: 500 });
+  await H.sheet(t, "arrange");
   t.expect(t.$(".sheet.hm-sheet-arrange"), "the Arrange sheet did not open");
   const cv = t.$("canvas"), r = cv.getBoundingClientRect();
   const tapX = r.left + r.width / 2, tapY = r.top + 60;   // the top of the map, above the sheet
@@ -372,8 +379,7 @@ scenario("home", "Arrange is non-modal: a tap or a pan on the map doesn't close 
 scenario("home", "Arrange's fit mode frames the whole layout above the sheet, for every arrangement", async t => {
   const forceAnims = () => [...t.d.querySelectorAll(".sheet,.screen")].forEach(e => e.getAnimations && e.getAnimations().forEach(a => { try { a.finish(); } catch (er) {} }));
   await H.homeReady(t);
-  await H.menu(t);
-  await t.click('.hm-do-stem [data-do="arrange"]', { wait: 400 });
+  await H.sheet(t, "arrange");
   const within = async why => {
     forceAnims(); await t.sleep(150); forceAnims();
     // headless Chrome's virtual time budget never advances the sheet's entrance animation in real time, so the
@@ -388,12 +394,20 @@ scenario("home", "Arrange's fit mode frames the whole layout above the sheet, fo
     const b = t.ev("HM_CTRL._drawnBounds()");
     t.expect(b && b.n > 3, `${why}: too few drawn cells to judge (${b && b.n})`);
     // a generous tolerance, not pixel-perfect containment: the fisheye's own magnified middle bubble can still
-    // push a little past the strict rect (see the lane's commit message), but it must be in the right
-    // neighborhood -- nowhere near the old behavior (zoomed in, bounds many screens wide).
-    const pad = Math.max(60, sheetTop * .5);
+    // push a little past the strict rect, but it must be in the right neighborhood -- nowhere near the old
+    // behavior (zoomed in, bounds many screens wide).
+    const pad = Math.max(60, sheetTop * .65);
     t.expect(b.minX > -pad && b.maxX < b.W + pad, `${why}: horizontal bounds [${b.minX.toFixed(0)},${b.maxX.toFixed(0)}] far outside [0,${b.W}]`);
     t.expect(b.minY > -pad && b.maxY < sheetTop + pad, `${why}: vertical bounds [${b.minY.toFixed(0)},${b.maxY.toFixed(0)}] far outside [0,${sheetTop.toFixed(0)}]`);
-    t.notes.push(`${why}: sheetTop=${sheetTop.toFixed(0)} bounds=[${b.minX.toFixed(0)},${b.minY.toFixed(0)}..${b.maxX.toFixed(0)},${b.maxY.toFixed(0)}]`);
+    // David, 2026-10-09: "the original view is now too far away" -- a loose "somewhere in the neighborhood" pad
+    // (above) isn't enough to catch a disk floating small in empty space, so also require it to actually fill
+    // the space above the sheet, on the axis its own shape is actually constrained by (a tall arrangement like
+    // the default map/hue fills by height, not width; a round one like Sunflower fills by both) -- at least 85%
+    // of the ~16px-margin-adjusted space on whichever axis is tighter.
+    const bw = b.maxX - b.minX, bh = b.maxY - b.minY, availW = b.W - 32, availH = sheetTop - 32;
+    const fill = Math.max(bw / availW, bh / availH);
+    t.expect(fill >= .85, `${why}: the fitted layout only fills ${(fill * 100).toFixed(0)}% of the space above the sheet on its own constrained axis (bbox ${bw.toFixed(0)}x${bh.toFixed(0)}, available ${availW.toFixed(0)}x${availH.toFixed(0)})`);
+    t.notes.push(`${why}: sheetTop=${sheetTop.toFixed(0)} bounds=[${b.minX.toFixed(0)},${b.minY.toFixed(0)}..${b.maxX.toFixed(0)},${b.maxY.toFixed(0)}] fill=${(fill * 100).toFixed(0)}%`);
   };
   await within("map/hue (default)");
   for (const sel of ['[data-arr="rings"]', '[data-arr="families"]', '[data-arr="sunflower"]']) {
@@ -615,7 +629,6 @@ scenario("home", "View sheet opens; stage chips change the count", async t => {
 scenario("home", "Arrange sheet: Looks and the feel sliders", async t => {
   await H.homeReady(t);
   await H.sheet(t, "arrange");
-  t.expect(!t.$(".hm-tabs, [data-tab]"), "the Arrange sheet still has tabs");
   const styles = t.$$(".hm-look-chip");
   t.expect(styles.length === 2, `${styles.length} Look chips (Bubbles and Honeycomb; magnification is the Magnify slider)`);
   const n0 = H.num(t.text("[data-count]"));
@@ -808,7 +821,7 @@ scenario("learn", "Study on the Learn room opens the Study sheet then meets the 
   if (!t.$(".ls-res")) t.notes.push("last: " + log.slice(-6).join(",") + " · " + (t.$(".ls-study .pr-stage .pr-step") || {}).className);
   await t.waitFor(".ls-res", 8000, "the Study results");
 });
-scenario("learn", "due reviews get a Quick look overview, then are asked from memory before anything new is met", async t => {
+scenario("learn", "due reviews get a Quick look overview (a paged story, Next always there), then are asked from memory before anything new is met", async t => {
   await lrReal(t, "#shot=learn", "Object.values(S.cards).slice(0, 3).forEach(c => { c.due = addDays(today(), -1); });");
   await t.waitFor(".room-learn [data-study]", 6000, "the Learn room");
   t.expect(/to recall/i.test(t.text(".lh-hero-t")), `the headline says "${t.text(".lh-hero-t")}"`);
@@ -818,12 +831,16 @@ scenario("learn", "due reviews get a Quick look overview, then are asked from me
   t.expect(/quick look/i.test(t.text(".ls-sheet [data-pacesay]")), `the sheet says there's an overview first ("${t.text(".ls-sheet [data-pacesay]")}")`);
   await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
   // David, 2026-10-09: "it should first do an overview, then quiz" — even an all-review set opens with a Quick
-  // look (every session does), and only then moves into the questions.
+  // look (every session does), and only then moves into the questions. "Next is always there" (David again,
+  // reversing an earlier scroll-list attempt), so this plays as the usual paged story, one quiet segmented bar.
   await t.waitFor(".ls-study .ls-story-bars", 6000, "the Quick look overview");
   t.expect(t.$(".ls-study .ls-quick"), "the overview card is a Quick look, not a question");
+  t.expect(t.$(".ls-study [data-meetnext]"), "Next is always there");
+  const seen = t.ev("Array.isArray(S.learn && S.learn.ev) ? S.learn.ev.filter(e => e.e === 'seen' && e.src === 'lesson').length : -1");
+  t.expect(seen > 0, `the card on screen logged its exposure to the Learner Model (${seen})`);
   for (let i = 0; i < 10 && t.$(".ls-study .ls-story-bars"); i++) { t.ev(LS_SOLVE); await t.sleep(260); }
   await t.waitFor(".ls-study .pr-step", 6000, "the first question, after the overview");
-  t.expect(!t.$(".ls-study .ls-meet") && !t.$(".ls-study .ls-story-bars"), "the overview ended before the first question");
+  t.expect(!t.$(".ls-study .ls-story-bars"), "the overview ended before the first question");
   const due = t.ev("dueList().map(c => c.n.toLowerCase())"), first = t.ev("(() => { const s = document.querySelector('.ls-study .pr-stage'); return s._lsIt ? s._lsIt.key : ''; })()");
   t.expect(due.includes(first), `the first question is a due review (${first})`);
 });
@@ -1440,14 +1457,19 @@ scenario("home", "Study corner opens the instant deck seeded with the middle col
   t.expect(/Learn/.test(t.$("[data-qtitle]").textContent), "the sheet title");
   t.expect(t.$$(".pr-quick .pr-plate i").length >= 5, "the deck plate");
 });
-// David, 2026-10-09: "pressing the recall / study button takes you straight into flashcards" — the map's
-// Recall row (and the You page's recall card, below) must open the one Study flow, never js/learn.js's old
-// swipe deck (.deck) directly.
-scenario("home", "the map's Recall opens the one Study flow, not the old swipe deck", async t => {
+// David, 2026-10-09: "pressing the recall / study button takes you straight into flashcards" — Recall
+// lives only in the left menu's Learn room now (the map's right-corner menu dropped its own Recall
+// row as a duplicate), and it must open the one Study flow, never js/learn.js's old swipe deck
+// (.deck) directly.
+scenario("home", "the left menu's Learn room Recall opens the one Study flow, not the old swipe deck", async t => {
   await H.homeReady(t);
   t.ev("Object.values(S.cards).slice(0, 2).forEach(c => { c.due = addDays(today(), -1); }); save();");
-  await H.menu(t, "recall");
-  await t.waitFor(".ls-sheet, .ls-study", 6000, "the Study sheet or session from Recall");
+  await t.click("[data-rooms-corner]", { wait: 300 });
+  await t.click('.rooms-stem .rm-bubble[data-room="learn"]', { wait: 700 });
+  await t.waitFor('.room-sheet[data-room="learn"]', 6000, "the Learn room");
+  t.expect(/recall/i.test(t.text(".lh-hero-t")), `the Learn room hero reads "${t.text(".lh-hero-t")}" (wanted a recall count)`);
+  await t.click("[data-study]", { wait: 400 });
+  await t.waitFor(".ls-sheet, .ls-study", 6000, "the Study sheet or session from the Learn room");
   t.expect(!t.$(".deck"), "Recall did not open the old swipe deck directly");
 });
 
@@ -1525,7 +1547,7 @@ scenario("learnset", "Study: a mixed session runs to the results", async t => {
   await t.waitFor(".ls-sheet", 4000, "Learn it opens the Learn sheet directly");
   t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(4); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
-  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the overview or the first question");
   const kinds = new Set();
   for (let i = 0; i < 160 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); kinds.add(k); await t.sleep(k === "wait" ? 300 : 250); }
   await t.waitFor(".ls-res", 6000, "the Study results");
@@ -1551,7 +1573,7 @@ scenario("learnset", "Study: Sort and Gradient come up in a longer session and f
   await t.click('.ls-sheet [data-pace="test"]', { wait: 300 });
   const eyeBefore = t.ev("Array.isArray(S.eye) ? S.eye.length : 0");
   await t.click(".ls-sheet [data-go]", { force: true, wait: 700 });
-  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the overview or the first question");
   const kinds = new Set();
   for (let i = 0; i < 260 && !t.$(".ls-res"); i++) { const k = t.ev(LS_SOLVE); kinds.add(k); await t.sleep(k === "wait" ? 250 : 220); }
   t.notes.push("kinds: " + [...kinds].join(","));
@@ -1574,15 +1596,20 @@ scenario("learnset", "Color page -> Learn it -> the sheet with settings visible 
   await t.waitFor(".ls-study .ls-meet", 4000, "Start begins Study and lands on a Meet card");
   t.expect(t.$$(".ls-prog i").length === 4, `${t.$$(".ls-prog i").length} colors in Study, expected 4`);
 });
-// David, 2026-10-09: the Meet run plays as an Instagram-story pager — tap/swipe the right to advance, the left to
-// go back — with thin segmented bars standing in for the usual "Next" taps.
-scenario("learnset", "Meet plays as a story pager: right taps advance, left taps go back, swipe works too", async t => {
+// David, 2026-10-09 (after trying a scroll list): "Next is always there and it's an important part, so keep it
+// instead of replacing it with scrolling" — the Meet run plays as a paged story, right taps/swipe advance, left
+// taps/swipe go back, a quiet segmented bar stands in for the usual per-card Next-tap count, and a new color's
+// own comparison is a real big split (two tall halves, each named + hex), not a tiny 2-chip + sentence.
+scenario("learnset", "Meet plays as a story pager: right taps advance, left taps go back, swipe works too, and each card's comparison is a big split", async t => {
   await H.openPage(t, "#/color/teal", "Teal");
   await t.click("[data-learnit]", { wait: 600 });
   await t.waitFor(".ls-sheet", 4000, "the Learn sheet");
   t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(4); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
   await t.waitFor(".ls-study .ls-story-bars", 6000, "the story's segmented bars over the first Meet card");
+  t.expect(t.$(".ls-study .ls-mp .ls-mp-half") && t.$$(".ls-study .ls-mp .ls-mp-half").length === 2, "the Meet card's comparison is a big two-half split, not a small chip");
+  const seen = t.ev("Array.isArray(S.learn && S.learn.ev) ? S.learn.ev.filter(e => e.e === 'seen' && e.src === 'lesson').length : -1");
+  t.expect(seen > 0, `the first card logged its exposure to the Learner Model (${seen})`);
   await t.sleep(350);   // past the beat that guards a fast double tap from skipping a card unseen
   const at = () => t.ev("document.querySelector('.ls-study .pr-stage')._lsStory.at()");
   // a tap: pointerdown and pointerup at the same point, x as a fraction of the stage width
@@ -1612,7 +1639,6 @@ const LS_WRONG = `(() => {
     b.dispatchEvent(new PointerEvent('pointerdown', o)); b.dispatchEvent(new PointerEvent('pointerup', o)); };
   window.__lsN = (window.__lsN || 0) + 1;
   const mc = document.querySelector('.mc:not(.out) .mc-go'); if (mc) { if (window.__lsN % 2) touch(mc, 1); else mc.click(); return 'mc'; }
-  const meet = document.querySelector('.ls-study [data-meetnext]'); if (meet) { meet.click(); return 'meet'; }
   const boss = st.querySelector('[data-boss]'); if (boss) { boss.click(); return 'boss'; }
   const nx = st.querySelector('[data-next]'); if (nx) { if (window.__lsN % 2) touch(nx, 2); else nx.click(); return 'next'; }
   const it = st._lsIt, nm = it ? prName(it) : '', wrong = (window.__lsW = !window.__lsW);
@@ -1665,7 +1691,9 @@ scenario("learnset", "Study: new colors are met (a Meet card each, then the clos
   t.expect(!t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"), "no question before the colors are met");
   const seen = [];
   for (let i = 0; i < 12 && !t.$(".ls-study .pr-s-quiz, .ls-study .pr-s-qc"); i++) {
-    seen.push(t.$(".ls-mpair") ? "pair" : t.$(".ls-meet") ? "meet" : "?");
+    // a Meet card's own comparison also uses the big split (.ls-mpair) now, so "pair" (the closest-two card) is
+    // told apart by its own label (.ls-mp-t), not by the split class both share
+    seen.push(t.$(".ls-mp-t") ? "pair" : t.$(".ls-meet") ? "meet" : "?");
     await t.waitFor(".ls-study [data-meetnext][data-next]", 3000, "the Meet card's Next");
     await t.click(".ls-study [data-meetnext][data-next]", { wait: 420 });
   }
@@ -1686,7 +1714,7 @@ scenario("learnset", "Study: stop part-way, Keep going picks each color up at it
   await t.waitFor(".ls-sheet", 4000, "Learn it opens the Learn sheet directly");
   t.ev("(() => { const r = document.querySelector('.ls-sheet [data-size]'); r._countTo(4); })()");
   await t.click(".ls-sheet [data-go]", { wait: 600 });
-  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the first question");
+  await t.waitFor(".ls-study .pr-stage .pr-step", 6000, "the overview or the first question");
   const lvSum = () => t.ev("[...document.querySelectorAll('.ls-prog i')].reduce((s, i) => s + (+i.style.getPropertyValue('--lv') || 0), 0)");
   for (let i = 0; i < 40 && lvSum() < .9; i++) { const k = t.ev(LS_SOLVE); await t.sleep(k === "wait" ? 300 : 250); }
   const before = lvSum();
@@ -2222,23 +2250,37 @@ scenario("map", "three bubble taps with Back between leave no stuck bubble and H
   }
   t.notes.push("3 opens mid-glide, no leftovers, centered on return");
 });
-scenario("map", "one right corner: its menu holds every verb, and closes on a tap outside, Escape and Back", async t => {
+// David, 2026-10-09: "this menu is too long... Recall doesn't belong here, it's already in the left
+// menu" — trimmed to <=5 rows (learn, fav, search, colors), no Recall, and nothing that duplicates a
+// left-menu (Rooms stem) action. Learn-these/Study-the-map folded into one "Study the map" row, and
+// Colors/Arrange combined into one "colors" row (its own tab switch inside the sheet).
+scenario("map", "the right corner's menu is <=5 rows, has no Recall, and nothing duplicated with the left menu", async t => {
   await H.homeReady(t);
   t.expect(t.$$(".screen.hm .corner").length === 2, `${t.$$(".screen.hm .corner").length} corner buttons on Home`);
   t.expect(!t.$("#hmMapStudy, [data-pr-study], #hmFav, #hmView"), "a verb still has its own button on Home");
   await H.menu(t);
   const rows = t.$$(".hm-do-stem [data-do]").map(b => b.dataset.do);
-  for (const k of ["learn", "map", "fav", "search", "colors", "arrange"]) t.expect(rows.includes(k), `the menu has no ${k}`);
+  t.expect(rows.length <= 5, `the menu has ${rows.length} rows (wanted <=5): ${rows.join(", ")}`);
+  t.expect(!rows.includes("recall"), "Recall is still in the right corner's menu (it belongs only in the left menu's Learn room)");
+  for (const k of ["learn", "fav", "search", "colors"]) t.expect(rows.includes(k), `the menu has no ${k}`);
+  t.expect(!rows.includes("arrange") && !rows.includes("map"), "Arrange or Study-the-map kept its own separate row instead of folding in");
   t.expect(t.$$(".hm-do-stem [data-do]").every(b => t.text(b.querySelector("b")).length > 2), "a menu row has no label");
+  // one home per action: none of the right menu's rows should duplicate a left (Rooms stem) room
+  const rightLabels = t.$$(".hm-do-stem [data-do] b").map(b => t.text(b).trim().toLowerCase());
+  await H.keys(t, "Escape"); await t.sleep(200);
+  await t.click("[data-rooms-corner]", { wait: 300 });
+  const leftLabels = t.$$(".rooms-stem .rm-bubble b").map(b => t.text(b).trim().toLowerCase());
+  await H.keys(t, "Escape"); await t.sleep(200);
+  for (const l of rightLabels) t.expect(!leftLabels.includes(l), `"${l}" appears in both the left and right menus`);
+  await H.menu(t);
   t.$(".rm-scrim").dispatchEvent(new t.w.PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
   await t.sleep(450);
   t.expect(!t.$(".hm-do-stem") && t.$("#hmDo").getAttribute("aria-expanded") === "false", "a tap outside did not close the menu");
   await H.menu(t);
   await H.keys(t, "Escape"); await t.sleep(400);
   t.expect(!t.$(".hm-do-stem"), "Escape did not close the menu");
-  await H.menu(t, "map");
-  await t.waitFor(".ms", 8000, "Study the map from the menu");
-  t.expect(!t.ev("'famNames' in S.hm && S.hm.famNames"), "the family names setting is back");
+  await H.menu(t, "learn");
+  await t.waitFor(".pr-quick", 8000, "Study the map from the menu");
 });
 
 
@@ -3840,4 +3882,79 @@ scenario("web", "switching the edge-type filter animates nodes to a different pr
     moved = before.filter((b, j) => Math.hypot(after[j][1] - b[1], after[j][2] - b[2]) > 0.02).length;
   }
   t.expect(moved > before.length * 0.3, `only ${moved}/${before.length} sampled nodes moved to the new layout`);
+});
+
+// ================================================================== GESTURE-FOLLOWING BACK (js/trail.js tlgWire)
+// David, 2026-10-09: "if I swipe down I don't need to see it shrink back into its original bubble, I just need to
+// see the page swiped away downwards; if I swipe back, the zoom-out animation doesn't make sense in that context."
+const TLGT = {
+  async openFromMap(t) {
+    TRL.placed(t);
+    await t.open("#/home", { settle: 600, keepState: true });
+    await t.waitFor(".hm canvas", 12000, "the map");
+    await t.sleep(300);
+    t.ev("hmOpenColor(BYNAME.get('cobalt'))");
+    await TRL.atHash(t, /^#\/color\/cobalt/, "the cobalt page");
+    await t.sleep(500);   // tlgWire only arms once the page has rested a moment (TLG_BORN) -- same as a real swipe
+    return t.$("#app .screen");
+  },
+  // force the "continue off-screen" WAAPI animation to the end (the virtual clock doesn't drive it on its own --
+  // the same workaround the "mxLand never stalls" scenario above uses for js/mapxfer.js's own animations)
+  async forceCommit(t) {
+    await t.waitFor(() => t.ev("typeof TLG_ANIM !== 'undefined' && !!TLG_ANIM"), 3000, "the gesture's own animation to start");
+    t.ev("(() => { if (typeof TLG_ANIM !== 'undefined' && TLG_ANIM) TLG_ANIM.finish(); })()");
+  },
+};
+scenario("trail", "pull-down on a color page opened from the map swipes it away (no shrink-to-bubble) and lands on the map", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect();
+  // a slow, generous pull past the threshold -- distance alone should carry it, not velocity
+  await t.drag(scr, [{ x: r.left + r.width / 2, y: r.top + 80 }, { x: r.left + r.width / 2, y: r.top + 90 }, { x: r.left + r.width / 2, y: r.top + 260 }], { ms: 40, wait: 0 });
+  t.expect(t.$(".tlg-floor"), "no destination floor appeared under the drag");
+  t.expect(t.$(".tlg-floor-img"), "the map's own snapshot didn't back the floor (going straight back to the map)");
+  await TLGT.forceCommit(t);
+  t.expect(!t.$(".mx") && !t.$(".mx-floor"), "the old shrink-to-bubble animation ran on a swiped-away page");
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "back on the map after the pull");
+  await t.sleep(150);
+  t.expect(!t.$(".tlg-floor"), "the destination floor was left behind");
+  t.expect(t.ev("typeof TLG_SKIP !== 'undefined' && !TLG_SKIP"), "TLG_SKIP was left on");
+  MXT.corners(t, "after a pull-down");
+});
+scenario("trail", "a short, slow pull-down springs the page back without navigating", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + 80;
+  await t.drag(scr, [{ x: cx, y: cy }, { x: cx, y: cy + 12 }, { x: cx, y: cy + 40 }], { ms: 90, wait: 400 });
+  t.expect(t.$(".cp-page") && /\/color\/cobalt/.test(TRL.hash(t)), "a short pull navigated away instead of springing back");
+  await t.waitFor(() => !t.$(".tlg-floor"), 2000, "the floor to clear after springing back");
+  t.expect(scr.style.transform === "" || scr.style.transform === "none" || !scr.isConnected, "the page didn't settle back to its own place");
+});
+scenario("trail", "a left-edge swipe slides the page off to the right (no shrink) and lands on the map", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), y = r.top + r.height * .5;
+  await t.drag(scr, [{ x: 8, y }, { x: 20, y }, { x: 160, y }], { ms: 35, wait: 0 });
+  t.expect(t.$(".tlg-floor"), "no destination floor appeared under the edge-swipe");
+  await TLGT.forceCommit(t);
+  t.expect(!t.$(".mx") && !t.$(".mx-floor"), "the old shrink-to-bubble animation ran on an edge-swiped page");
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "back on the map after the edge-swipe");
+  await t.sleep(150);
+  MXT.corners(t, "after a left-edge swipe");
+});
+scenario("trail", "a fast flick past a short distance still commits (velocity, not just distance)", async t => {
+  const scr = await TLGT.openFromMap(t);
+  const r = scr.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + 80;
+  // well under the 110px distance threshold, but fast (big steps, short ms)
+  await t.drag(scr, [{ x: cx, y: cy }, { x: cx, y: cy + 20 }, { x: cx, y: cy + 70 }], { ms: 8, wait: 0 });
+  await TLGT.forceCommit(t);
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "a fast short flick still reached the map");
+});
+scenario("trail", "popstate (the native iOS/browser back swipe) swaps straight to the map with no shrink and no crossfade", async t => {
+  await TLGT.openFromMap(t);
+  t.expect(!t.$(".mx") && !t.$(".tlg-floor"), "something was already animating before Back");
+  t.w.history.back();
+  // if mxLeave ran (HIST_POP not honored), .mx/.mx-floor would appear for the shrink; poll fast enough to catch it
+  let sawMx = false;
+  for (let i = 0; i < 20; i++) { if (t.$(".mx") || t.$(".mx-floor")) { sawMx = true; break; } await t.sleep(20); }
+  t.expect(!sawMx, "the native back swipe still played the bubble-shrink animation");
+  await t.waitFor(() => t.$(".screen.hm canvas") && !t.$(".cp-page"), 8000, "the map after the native back swipe");
+  MXT.corners(t, "after a native back swipe");
 });

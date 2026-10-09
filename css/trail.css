@@ -1,5 +1,11 @@
 /* The one trail (js/trail.js): ‹ and the map glyph, the same solid pair on every inner page, and the trail sheet. */
 
+/* gesture-following back (js/trail.js tlgWire): the destination sitting underneath a page as it's dragged away --
+   the map's own last frame when there is one, a calm surface otherwise. #app has z-index:1 (app.css), so this
+   plain fixed layer needs no z-index of its own to stay behind it. */
+.tlg-floor{position:fixed;inset:0;background:var(--ground);pointer-events:none}
+.tlg-floor-img{background-size:cover;background-position:center}
+
 /* the floating ‹ over a full-bleed color hero is solid now, like every other control (DESIGN-SYSTEM §1.2) */
 .cp-close{background:var(--surface-2);color:var(--ink);border:1px solid rgba(236,232,223,.14);border-radius:50%;width:40px;height:40px}
 .cp-close svg{width:22px;height:22px}
